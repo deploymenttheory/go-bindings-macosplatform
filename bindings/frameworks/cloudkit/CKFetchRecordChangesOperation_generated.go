@@ -6,6 +6,7 @@ package cloudkit
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -99,6 +100,14 @@ func (frco *FetchRecordChangesOperation) WithRecordChangedBlock(recordChangedBlo
 // WithRecordWithIDWasDeletedBlock sets the block to execute with the ID of a deleted record.
 func (frco *FetchRecordChangesOperation) WithRecordWithIDWasDeletedBlock(recordWithIDWasDeletedBlock func(obj.Object)) *FetchRecordChangesOperation {
 	objc.Send[objc.ID](objref.IDOf(frco), objc.RegisterName("setRecordWithIDWasDeletedBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { recordWithIDWasDeletedBlock(obj.Wrap(_b0)) }))
+	return frco
+}
+
+// WithFetchRecordChangesCompletionBlock sets the block to execute when the system finishes processing all changes.
+func (frco *FetchRecordChangesOperation) WithFetchRecordChangesCompletionBlock(fetchRecordChangesCompletionBlock func(obj.Object, obj.Object, unsafe.Pointer)) *FetchRecordChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(frco), objc.RegisterName("setFetchRecordChangesCompletionBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
+		fetchRecordChangesCompletionBlock(obj.Wrap(_b0), obj.Wrap(_b1), _b2)
+	}))
 	return frco
 }
 

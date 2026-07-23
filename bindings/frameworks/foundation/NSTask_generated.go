@@ -313,3 +313,17 @@ func (t *Task) Launch() {
 	defer runtime.KeepAlive(t)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("launch"))
 }
+
+// LaunchPath returns the launch path.
+func (t *Task) LaunchPath() unsafe.Pointer {
+	defer runtime.KeepAlive(t)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(t), objc.RegisterName("launchPath"))
+	return _r
+}
+
+// CurrentDirectoryPath returns the current directory path.
+func (t *Task) CurrentDirectoryPath() unsafe.Pointer {
+	defer runtime.KeepAlive(t)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(t), objc.RegisterName("currentDirectoryPath"))
+	return _r
+}

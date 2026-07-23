@@ -334,6 +334,20 @@ func (lm *LocationManager) ActivityType() ActivityType {
 	return _r
 }
 
+// DistanceFilter returns the distance filter.
+func (lm *LocationManager) DistanceFilter() unsafe.Pointer {
+	defer runtime.KeepAlive(lm)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(lm), objc.RegisterName("distanceFilter"))
+	return _r
+}
+
+// DesiredAccuracy returns the desired accuracy.
+func (lm *LocationManager) DesiredAccuracy() unsafe.Pointer {
+	defer runtime.KeepAlive(lm)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(lm), objc.RegisterName("desiredAccuracy"))
+	return _r
+}
+
 // PausesLocationUpdatesAutomatically wraps the corresponding Objective-C method.
 func (lm *LocationManager) PausesLocationUpdatesAutomatically() bool {
 	defer runtime.KeepAlive(lm)
@@ -348,10 +362,24 @@ func (lm *LocationManager) AllowsBackgroundLocationUpdates() bool {
 	return _r
 }
 
+// Location returns the location.
+func (lm *LocationManager) Location() unsafe.Pointer {
+	defer runtime.KeepAlive(lm)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(lm), objc.RegisterName("location"))
+	return _r
+}
+
 // HeadingAvailable wraps the corresponding Objective-C method.
 func (lm *LocationManager) HeadingAvailable() bool {
 	defer runtime.KeepAlive(lm)
 	_r := objc.Send[bool](objref.IDOf(lm), objc.RegisterName("headingAvailable"))
+	return _r
+}
+
+// HeadingFilter returns the heading filter.
+func (lm *LocationManager) HeadingFilter() unsafe.Pointer {
+	defer runtime.KeepAlive(lm)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(lm), objc.RegisterName("headingFilter"))
 	return _r
 }
 
@@ -367,6 +395,13 @@ func (lm *LocationManager) Heading() *Heading {
 	defer runtime.KeepAlive(lm)
 	_r := objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("heading"))
 	return HeadingFromID(_r)
+}
+
+// MaximumRegionMonitoringDistance returns the maximum region monitoring distance.
+func (lm *LocationManager) MaximumRegionMonitoringDistance() unsafe.Pointer {
+	defer runtime.KeepAlive(lm)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(lm), objc.RegisterName("maximumRegionMonitoringDistance"))
+	return _r
 }
 
 // MonitoredRegions returns the order of the returned elements is unspecified.

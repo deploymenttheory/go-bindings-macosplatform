@@ -103,7 +103,7 @@ func (mbcpt *MTRBaseClusterPowerTopology) SubscribeAttributeAvailableEndpointsWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcpt), objc.RegisterName("subscribeAttributeAvailableEndpointsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcpt), objc.RegisterName("subscribeAttributeAvailableEndpointsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -156,7 +156,7 @@ func (mbcpt *MTRBaseClusterPowerTopology) SubscribeAttributeActiveEndpointsWithP
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcpt), objc.RegisterName("subscribeAttributeActiveEndpointsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcpt), objc.RegisterName("subscribeAttributeActiveEndpointsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -209,7 +209,7 @@ func (mbcpt *MTRBaseClusterPowerTopology) SubscribeAttributeGeneratedCommandList
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcpt), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcpt), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -262,7 +262,7 @@ func (mbcpt *MTRBaseClusterPowerTopology) SubscribeAttributeAcceptedCommandListW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcpt), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcpt), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -315,7 +315,7 @@ func (mbcpt *MTRBaseClusterPowerTopology) SubscribeAttributeAttributeListWithPar
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcpt), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcpt), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -368,7 +368,7 @@ func (mbcpt *MTRBaseClusterPowerTopology) SubscribeAttributeFeatureMapWithParams
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcpt), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcpt), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -421,7 +421,7 @@ func (mbcpt *MTRBaseClusterPowerTopology) SubscribeAttributeClusterRevisionWithP
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcpt), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcpt), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err

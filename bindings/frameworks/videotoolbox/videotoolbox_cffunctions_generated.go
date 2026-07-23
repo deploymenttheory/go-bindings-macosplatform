@@ -215,6 +215,21 @@ func VTFrameSiloAddSampleBuffer(silo obj.Object, sampleBuffer obj.Object) error 
 	return nil
 }
 
+var _fnVTFrameSiloCallBlockForEachSampleBuffer func(objc.ID, coremedia.CMTimeRange, objc.Block) int32
+
+// VTFrameSiloCallBlockForEachSampleBuffer reports an error if the VideoToolbox framework function VTFrameSiloCallBlockForEachSampleBuffer fails.
+func VTFrameSiloCallBlockForEachSampleBuffer(silo obj.Object, timeRange coremedia.CMTimeRange, handler func(unsafe.Pointer) int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVTFrameSiloCallBlockForEachSampleBuffer == nil {
+		ebipurego.RegisterLibFunc(&_fnVTFrameSiloCallBlockForEachSampleBuffer, _lib, "VTFrameSiloCallBlockForEachSampleBuffer")
+	}
+	_rc := _fnVTFrameSiloCallBlockForEachSampleBuffer(objref.IDOf(silo), timeRange, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) int { return handler(_b0) }))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
 var _fnVTFrameSiloCallFunctionForEachSampleBuffer func(objc.ID, coremedia.CMTimeRange, unsafe.Pointer, unsafe.Pointer) int32
 
 // VTFrameSiloCallFunctionForEachSampleBuffer reports an error if the VideoToolbox framework function VTFrameSiloCallFunctionForEachSampleBuffer fails.
@@ -315,6 +330,23 @@ func VTMotionEstimationSessionCreate(allocator obj.Object, motionVectorProcessor
 		ebipurego.RegisterLibFunc(&_fnVTMotionEstimationSessionCreate, _lib, "VTMotionEstimationSessionCreate")
 	}
 	_rc := _fnVTMotionEstimationSessionCreate(objref.IDOf(allocator), objref.IDOf(motionVectorProcessorSelectionOptions), width, height, motionEstimationSessionOut)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnVTMotionEstimationSessionEstimateMotionVectors func(objc.ID, unsafe.Pointer, unsafe.Pointer, MotionEstimationFrameFlags, objc.ID, objc.Block) int32
+
+// VTMotionEstimationSessionEstimateMotionVectors reports an error if the VideoToolbox framework function VTMotionEstimationSessionEstimateMotionVectors fails.
+func VTMotionEstimationSessionEstimateMotionVectors(session obj.Object, referenceImage unsafe.Pointer, currentImage unsafe.Pointer, motionEstimationFrameFlags MotionEstimationFrameFlags, additionalFrameOptions obj.Object, outputHandler func(int, MotionEstimationInfoFlags, unsafe.Pointer, unsafe.Pointer)) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVTMotionEstimationSessionEstimateMotionVectors == nil {
+		ebipurego.RegisterLibFunc(&_fnVTMotionEstimationSessionEstimateMotionVectors, _lib, "VTMotionEstimationSessionEstimateMotionVectors")
+	}
+	_rc := _fnVTMotionEstimationSessionEstimateMotionVectors(objref.IDOf(session), referenceImage, currentImage, motionEstimationFrameFlags, objref.IDOf(additionalFrameOptions), objc.NewBlock(func(_ objc.Block, _b0 int, _b1 MotionEstimationInfoFlags, _b2 unsafe.Pointer, _b3 unsafe.Pointer) {
+		outputHandler(_b0, _b1, _b2, _b3)
+	}))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -451,6 +483,51 @@ func VTRAWProcessingSessionCreate(allocator obj.Object, formatDescription unsafe
 		ebipurego.RegisterLibFunc(&_fnVTRAWProcessingSessionCreate, _lib, "VTRAWProcessingSessionCreate")
 	}
 	_rc := _fnVTRAWProcessingSessionCreate(objref.IDOf(allocator), formatDescription, objref.IDOf(outputPixelBufferAttributes), objref.IDOf(processingSessionOptions), processingSessionOut)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnVTRAWProcessingSessionProcessFrame func(objc.ID, unsafe.Pointer, objc.ID, objc.Block) int32
+
+// VTRAWProcessingSessionProcessFrame reports an error if the VideoToolbox framework function VTRAWProcessingSessionProcessFrame fails.
+func VTRAWProcessingSessionProcessFrame(session obj.Object, inputPixelBuffer unsafe.Pointer, frameOptions obj.Object, outputHandler func(int, unsafe.Pointer)) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVTRAWProcessingSessionProcessFrame == nil {
+		ebipurego.RegisterLibFunc(&_fnVTRAWProcessingSessionProcessFrame, _lib, "VTRAWProcessingSessionProcessFrame")
+	}
+	_rc := _fnVTRAWProcessingSessionProcessFrame(objref.IDOf(session), inputPixelBuffer, objref.IDOf(frameOptions), objc.NewBlock(func(_ objc.Block, _b0 int, _b1 unsafe.Pointer) { outputHandler(_b0, _b1) }))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnVTRAWProcessingSessionSetParameterChangedHander func(objc.ID, objc.Block) int32
+
+// VTRAWProcessingSessionSetParameterChangedHander reports an error if the VideoToolbox framework function VTRAWProcessingSessionSetParameterChangedHander fails.
+func VTRAWProcessingSessionSetParameterChangedHander(session obj.Object, parameterChangeHandler func(unsafe.Pointer)) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVTRAWProcessingSessionSetParameterChangedHander == nil {
+		ebipurego.RegisterLibFunc(&_fnVTRAWProcessingSessionSetParameterChangedHander, _lib, "VTRAWProcessingSessionSetParameterChangedHander")
+	}
+	_rc := _fnVTRAWProcessingSessionSetParameterChangedHander(objref.IDOf(session), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { parameterChangeHandler(_b0) }))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnVTRAWProcessingSessionSetParameterChangedHandler func(objc.ID, objc.Block) int32
+
+// VTRAWProcessingSessionSetParameterChangedHandler reports an error if the VideoToolbox framework function VTRAWProcessingSessionSetParameterChangedHandler fails.
+func VTRAWProcessingSessionSetParameterChangedHandler(session obj.Object, parameterChangeHandler func(unsafe.Pointer)) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVTRAWProcessingSessionSetParameterChangedHandler == nil {
+		ebipurego.RegisterLibFunc(&_fnVTRAWProcessingSessionSetParameterChangedHandler, _lib, "VTRAWProcessingSessionSetParameterChangedHandler")
+	}
+	_rc := _fnVTRAWProcessingSessionSetParameterChangedHandler(objref.IDOf(session), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { parameterChangeHandler(_b0) }))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}

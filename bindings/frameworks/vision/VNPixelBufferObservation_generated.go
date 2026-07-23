@@ -6,6 +6,7 @@ package vision
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -45,6 +46,13 @@ func pixelBufferObservationAdopt(id objc.ID) *PixelBufferObservation {
 	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
+}
+
+// PixelBuffer returns the resulting image from a request like VNCoreMLRequest where the model produces an image as an output.
+func (pbo *PixelBufferObservation) PixelBuffer() unsafe.Pointer {
+	defer runtime.KeepAlive(pbo)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(pbo), objc.RegisterName("pixelBuffer"))
+	return _r
 }
 
 // FeatureName returns the name used in the model description of the CoreML model that produced this observation allowing to correlate the observation back to the output of the model. This can be nil if the observation is not the result of a VNCoreMLRequest operation.

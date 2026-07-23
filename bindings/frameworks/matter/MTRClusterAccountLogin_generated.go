@@ -7,6 +7,7 @@ package matter
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -96,6 +97,29 @@ func (mcal *MTRClusterAccountLogin) GetSetupPINWithParamsExpectedValuesExpectedV
 	}
 }
 
+// LoginWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+func (mcal *MTRClusterAccountLogin) LoginWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRAccountLoginClusterLoginParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcal)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcal), objc.RegisterName("loginWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// LogoutWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+func (mcal *MTRClusterAccountLogin) LogoutWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRAccountLoginClusterLogoutParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcal)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcal), objc.RegisterName("logoutWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// LogoutWithExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+func (mcal *MTRClusterAccountLogin) LogoutWithExpectedValuesExpectedValueIntervalCompletion(expectedValues []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcal)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcal), objc.RegisterName("logoutWithExpectedValues:expectedValueInterval:completion:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
 func (mcal *MTRClusterAccountLogin) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
 	defer runtime.KeepAlive(mcal)
@@ -162,6 +186,29 @@ func (mcal *MTRClusterAccountLogin) GetSetupPINWithParamsExpectedValuesExpectedV
 		var _zero *MTRAccountLoginClusterGetSetupPINResponseParams
 		return _zero, ctx.Err()
 	}
+}
+
+// LoginWithParamsExpectedValuesExpectedValueIntervalCompletionHandler wraps the corresponding Objective-C method.
+func (mcal *MTRClusterAccountLogin) LoginWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRAccountLoginClusterLoginParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcal)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcal), objc.RegisterName("loginWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// LogoutWithParamsExpectedValuesExpectedValueIntervalCompletionHandler wraps the corresponding Objective-C method.
+func (mcal *MTRClusterAccountLogin) LogoutWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRAccountLoginClusterLogoutParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcal)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcal), objc.RegisterName("logoutWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// LogoutWithExpectedValuesExpectedValueIntervalCompletionHandler wraps the corresponding Objective-C method.
+func (mcal *MTRClusterAccountLogin) LogoutWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcal)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcal), objc.RegisterName("logoutWithExpectedValues:expectedValueInterval:completionHandler:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
 }
 
 var _ MTRGenericClusterProvider = (*MTRClusterAccountLogin)(nil)

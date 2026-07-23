@@ -100,6 +100,38 @@ func NewSoundEventWithEngineAssetIdentifier(engine *Engine, assetIdentifier stri
 	return soundEventAdopt(_id), nil
 }
 
+// PrepareWithCompletion enables a sound event to play and runs the argument code when the sound event plays back.
+func (se *SoundEvent) PrepareWithCompletion(handler func(SoundEventPrepareHandlerReason)) {
+	defer runtime.KeepAlive(se)
+	objc.Send[objc.ID](objref.IDOf(se), objc.RegisterName("prepareWithCompletion:"), objc.NewBlock(func(_ objc.Block, _b0 SoundEventPrepareHandlerReason) { handler(_b0) }))
+}
+
+// StartWithCompletion invokes the sound event and runs the specified code on completion.
+func (se *SoundEvent) StartWithCompletion(handler func(SoundEventStartHandlerReason)) {
+	defer runtime.KeepAlive(se)
+	objc.Send[objc.ID](objref.IDOf(se), objc.RegisterName("startWithCompletion:"), objc.NewBlock(func(_ objc.Block, _b0 SoundEventStartHandlerReason) { handler(_b0) }))
+}
+
+// StartAtTimeCompletion start the sound event This function notifies the engine to start the sound event, then returns immediately. Once the sound event is playing (or has failed to start), you will receive a callback via the completion. Playback will begin at the requested time if the sound event has finished preparing in time. You may wait for preparation to finish with the [PHASESoundEvent prepare:completion] method before calling startAtTime, to ensure that the sound event will start at the desired time. However if the desired time is far enough into the future to allow for preparation to happen, you may skip calling prepare entirely and just call startAtTime.
+func (se *SoundEvent) StartAtTimeCompletion(when obj.Object, handler func(SoundEventStartHandlerReason)) {
+	defer runtime.KeepAlive(se)
+	defer runtime.KeepAlive(when)
+	objc.Send[objc.ID](objref.IDOf(se), objc.RegisterName("startAtTime:completion:"), objref.IDOf(when), objc.NewBlock(func(_ objc.Block, _b0 SoundEventStartHandlerReason) { handler(_b0) }))
+}
+
+// SeekToTimeCompletion advances the sound event’s playback position to a specific time.
+func (se *SoundEvent) SeekToTimeCompletion(time_ float64, handler func(SoundEventSeekHandlerReason)) {
+	defer runtime.KeepAlive(se)
+	objc.Send[objc.ID](objref.IDOf(se), objc.RegisterName("seekToTime:completion:"), time_, objc.NewBlock(func(_ objc.Block, _b0 SoundEventSeekHandlerReason) { handler(_b0) }))
+}
+
+// SeekToTimeResumeAtEngineTimeCompletion seeks all leaf nodes in a PHASESoundEvent to the specified time, and automatically resumes playback at the specified engine time. This is a low latency convenience method that allows for tight deadlines to be met.  However if the seek fails the node state will not be changed.  You should check the callback and handle the failure appropriately. The time parameter will seek the nodes to the equivalent sample position based on the sample rate of the asset. The engineTime parameter is the engine timestamp to resume rendering at, based off of [PHASEEngine lastRenderTime]. If any leaf nodes do not support seeking, those nodes will ignore this command. Nodes that have finished playing or have stopped will not seek. The time parameter is in seconds and will be scaled by unitsPerSecond. The time in the AVAudioTime structure is not scaled by unitsPerSecond. The engineTime parameter will use the sample time if valid, if not, then the host time if valid.
+func (se *SoundEvent) SeekToTimeResumeAtEngineTimeCompletion(time_ float64, engineTime obj.Object, handler func(SoundEventSeekHandlerReason)) {
+	defer runtime.KeepAlive(se)
+	defer runtime.KeepAlive(engineTime)
+	objc.Send[objc.ID](objref.IDOf(se), objc.RegisterName("seekToTime:resumeAtEngineTime:completion:"), time_, objref.IDOf(engineTime), objc.NewBlock(func(_ objc.Block, _b0 SoundEventSeekHandlerReason) { handler(_b0) }))
+}
+
 // Pause pauses the sound event.
 func (se *SoundEvent) Pause() {
 	defer runtime.KeepAlive(se)

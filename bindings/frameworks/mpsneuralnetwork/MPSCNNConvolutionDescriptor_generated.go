@@ -270,6 +270,13 @@ func (ccd *CNNConvolutionDescriptor) FusedNeuronDescriptor() *NNNeuronDescriptor
 	return NNNeuronDescriptorFromID(_r)
 }
 
+// Neuron returns MPSCNNNeuron filter to be applied as part of convolution. This is applied after BatchNormalization in the end. Default is nil. This is deprecated. You dont need to create MPSCNNNeuron object to fuse with convolution. Use neuron properties in this descriptor.
+func (ccd *CNNConvolutionDescriptor) Neuron() unsafe.Pointer {
+	defer runtime.KeepAlive(ccd)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(ccd), objc.RegisterName("neuron"))
+	return _r
+}
+
 // isCNNConvolutionDescriptor marks CNNConvolutionDescriptor — and, by embedding promotion, its
 // subclasses — as a member of the CNNConvolutionDescriptor hierarchy, sealing its provider
 // interface so only real members satisfy it.

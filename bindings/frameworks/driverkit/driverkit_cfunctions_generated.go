@@ -13,7 +13,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-var _fnIOCallOnce func(unsafe.Pointer, func())
+var _fnIOCallOnce func(unsafe.Pointer, objc.Block)
 
 // IOCallOnce calls the DriverKit framework function IOCallOnce.
 func IOCallOnce(block func()) (flag IOCallOnceFlag) {
@@ -22,7 +22,7 @@ func IOCallOnce(block func()) (flag IOCallOnceFlag) {
 		ebipurego.RegisterLibFunc(&_fnIOCallOnce, _lib, "IOCallOnce")
 	}
 	var _out0 IOCallOnceFlag
-	_fnIOCallOnce(unsafe.Pointer(&_out0), block)
+	_fnIOCallOnce(unsafe.Pointer(&_out0), objc.NewBlock(func(_ objc.Block) { block() }))
 	return _out0
 }
 
@@ -505,16 +505,16 @@ func OSArrayAppendValue(value obj.Object) (ok bool, object int32) {
 	return _ret, _out0
 }
 
-var _fnOSArrayApply func(unsafe.Pointer, unsafe.Pointer) bool
+var _fnOSArrayApply func(unsafe.Pointer, objc.Block) bool
 
 // OSArrayApply calls the DriverKit framework function OSArrayApply.
-func OSArrayApply(applier unsafe.Pointer) (ok bool, object int32) {
+func OSArrayApply(applier func(unsafe.Pointer) bool) (ok bool, object int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSArrayApply == nil {
 		ebipurego.RegisterLibFunc(&_fnOSArrayApply, _lib, "OSArrayApply")
 	}
 	var _out0 int32
-	_ret := _fnOSArrayApply(unsafe.Pointer(&_out0), applier)
+	_ret := _fnOSArrayApply(unsafe.Pointer(&_out0), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) bool { return applier(_b0) }))
 	return _ret, _out0
 }
 
@@ -679,15 +679,15 @@ func OSCreateObjectFromSerialization() (result obj.Object, serial int32) {
 	return obj.Wrap(_ret), _out0
 }
 
-var _fnOSCreateSerializationFromBytes func(unsafe.Pointer, int, unsafe.Pointer) unsafe.Pointer
+var _fnOSCreateSerializationFromBytes func(unsafe.Pointer, int, objc.Block) unsafe.Pointer
 
 // OSCreateSerializationFromBytes calls the DriverKit framework function OSCreateSerializationFromBytes.
-func OSCreateSerializationFromBytes(data unsafe.Pointer, length int, freeBuffer unsafe.Pointer) unsafe.Pointer {
+func OSCreateSerializationFromBytes(data unsafe.Pointer, length int, freeBuffer func(unsafe.Pointer, int)) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSCreateSerializationFromBytes == nil {
 		ebipurego.RegisterLibFunc(&_fnOSCreateSerializationFromBytes, _lib, "OSCreateSerializationFromBytes")
 	}
-	return _fnOSCreateSerializationFromBytes(data, length, freeBuffer)
+	return _fnOSCreateSerializationFromBytes(data, length, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 int) { freeBuffer(_b0, _b1) }))
 }
 
 var _fnOSCreateSerializationFromObject func(objc.ID) unsafe.Pointer
@@ -764,16 +764,16 @@ func OSDataGetLength() (result int, object int32) {
 	return _ret, _out0
 }
 
-var _fnOSDictionaryApply func(unsafe.Pointer, unsafe.Pointer) bool
+var _fnOSDictionaryApply func(unsafe.Pointer, objc.Block) bool
 
 // OSDictionaryApply calls the DriverKit framework function OSDictionaryApply.
-func OSDictionaryApply(applier unsafe.Pointer) (ok bool, object int32) {
+func OSDictionaryApply(applier func(string, unsafe.Pointer) bool) (ok bool, object int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSDictionaryApply == nil {
 		ebipurego.RegisterLibFunc(&_fnOSDictionaryApply, _lib, "OSDictionaryApply")
 	}
 	var _out0 int32
-	_ret := _fnOSDictionaryApply(unsafe.Pointer(&_out0), applier)
+	_ret := _fnOSDictionaryApply(unsafe.Pointer(&_out0), objc.NewBlock(func(_ objc.Block, _b0 string, _b1 unsafe.Pointer) bool { return applier(_b0, _b1) }))
 	return _ret, _out0
 }
 

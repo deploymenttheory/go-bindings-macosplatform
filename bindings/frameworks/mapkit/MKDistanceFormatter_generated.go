@@ -110,6 +110,13 @@ func (df *DistanceFormatter) StringFromDistance(distance unsafe.Pointer) string 
 	return purego.GoString(_r)
 }
 
+// DistanceFromString returns the distance value parsed from the specified string.
+func (df *DistanceFormatter) DistanceFromString(distance string) unsafe.Pointer {
+	defer runtime.KeepAlive(df)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(df), objc.RegisterName("distanceFromString:"), purego.NSString(distance))
+	return _r
+}
+
 // Locale returns the locale.
 func (df *DistanceFormatter) Locale() *foundation.Locale {
 	defer runtime.KeepAlive(df)

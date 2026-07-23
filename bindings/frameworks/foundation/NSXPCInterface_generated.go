@@ -97,3 +97,10 @@ func (xi *XPCInterface) WithScriptingProperties(scriptingProperties map[string]o
 	objc.Send[objc.ID](objref.IDOf(xi), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return xi
 }
+
+// Protocol returns the protocol.
+func (xi *XPCInterface) Protocol() unsafe.Pointer {
+	defer runtime.KeepAlive(xi)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(xi), objc.RegisterName("protocol"))
+	return _r
+}

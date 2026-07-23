@@ -222,7 +222,7 @@ func QLThumbnailCreate(allocator obj.Object, url obj.Object, maxThumbnailSize co
 	return obj.Wrap(_ret)
 }
 
-var _fnQLThumbnailDispatchAsync func(objc.ID, objc.ID, func())
+var _fnQLThumbnailDispatchAsync func(objc.ID, objc.ID, objc.Block)
 
 // QLThumbnailDispatchAsync calls the QuickLook framework function QLThumbnailDispatchAsync.
 func QLThumbnailDispatchAsync(thumbnail obj.Object, queue obj.Object, completion func()) {
@@ -230,7 +230,7 @@ func QLThumbnailDispatchAsync(thumbnail obj.Object, queue obj.Object, completion
 	if _fnQLThumbnailDispatchAsync == nil {
 		ebipurego.RegisterLibFunc(&_fnQLThumbnailDispatchAsync, _lib, "QLThumbnailDispatchAsync")
 	}
-	_fnQLThumbnailDispatchAsync(objref.IDOf(thumbnail), objref.IDOf(queue), completion)
+	_fnQLThumbnailDispatchAsync(objref.IDOf(thumbnail), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block) { completion() }))
 }
 
 var _fnQLThumbnailGetContentRect func(objc.ID) corefoundation.CGRect

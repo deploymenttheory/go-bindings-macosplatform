@@ -7,6 +7,7 @@ package coremotion
 import (
 	"runtime"
 	"time"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -121,4 +122,25 @@ func (pd *PedometerData) FloorsDescended() *foundation.Number {
 	defer runtime.KeepAlive(pd)
 	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("floorsDescended"))
 	return foundation.NumberFromID(_r)
+}
+
+// CurrentPace returns the current pace.
+func (pd *PedometerData) CurrentPace() unsafe.Pointer {
+	defer runtime.KeepAlive(pd)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(pd), objc.RegisterName("currentPace"))
+	return _r
+}
+
+// CurrentCadence returns the current cadence.
+func (pd *PedometerData) CurrentCadence() unsafe.Pointer {
+	defer runtime.KeepAlive(pd)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(pd), objc.RegisterName("currentCadence"))
+	return _r
+}
+
+// AverageActivePace returns the average active pace.
+func (pd *PedometerData) AverageActivePace() unsafe.Pointer {
+	defer runtime.KeepAlive(pd)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(pd), objc.RegisterName("averageActivePace"))
+	return _r
 }

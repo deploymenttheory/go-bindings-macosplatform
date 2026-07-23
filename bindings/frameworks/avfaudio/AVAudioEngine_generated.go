@@ -245,6 +245,44 @@ func (ae *AudioEngine) RenderOfflineToBuffer(numberOfFrames uint32, buffer *Audi
 	return _r, nil
 }
 
+// ConnectMIDIToFormatBlock establishes a MIDI-only connection between two nodes.
+func (ae *AudioEngine) ConnectMIDIToFormatBlock(sourceNode *AudioNode, destinationNode *AudioNode, format *AudioFormat, tapBlock func(int64, uint8, int, unsafe.Pointer) int) {
+	defer runtime.KeepAlive(ae)
+	defer runtime.KeepAlive(sourceNode)
+	defer runtime.KeepAlive(destinationNode)
+	defer runtime.KeepAlive(format)
+	objc.Send[objc.ID](objref.IDOf(ae), objc.RegisterName("connectMIDI:to:format:block:"), objref.IDOf(sourceNode), objref.IDOf(destinationNode), objref.IDOf(format), objc.NewBlock(func(_ objc.Block, _b0 int64, _b1 uint8, _b2 int, _b3 unsafe.Pointer) int {
+		return tapBlock(_b0, _b1, _b2, _b3)
+	}))
+}
+
+// ConnectMIDIToFormatEventListBlock establishes a MIDI connection between two nodes.
+func (ae *AudioEngine) ConnectMIDIToFormatEventListBlock(sourceNode *AudioNode, destinationNode *AudioNode, format *AudioFormat, tapBlock func(int64, uint8, unsafe.Pointer) int) {
+	defer runtime.KeepAlive(ae)
+	defer runtime.KeepAlive(sourceNode)
+	defer runtime.KeepAlive(destinationNode)
+	defer runtime.KeepAlive(format)
+	objc.Send[objc.ID](objref.IDOf(ae), objc.RegisterName("connectMIDI:to:format:eventListBlock:"), objref.IDOf(sourceNode), objref.IDOf(destinationNode), objref.IDOf(format), objc.NewBlock(func(_ objc.Block, _b0 int64, _b1 uint8, _b2 unsafe.Pointer) int { return tapBlock(_b0, _b1, _b2) }))
+}
+
+// ConnectMIDIToNodesFormatBlock establishes a MIDI-only connection between a source node and multiple destination nodes.
+func (ae *AudioEngine) ConnectMIDIToNodesFormatBlock(sourceNode *AudioNode, destinationNodes []*AudioNode, format *AudioFormat, tapBlock func(int64, uint8, int, unsafe.Pointer) int) {
+	defer runtime.KeepAlive(ae)
+	defer runtime.KeepAlive(sourceNode)
+	defer runtime.KeepAlive(format)
+	objc.Send[objc.ID](objref.IDOf(ae), objc.RegisterName("connectMIDI:toNodes:format:block:"), objref.IDOf(sourceNode), purego.SliceToNSArray(destinationNodes, func(_v *AudioNode) objc.ID { return objref.IDOf(_v) }), objref.IDOf(format), objc.NewBlock(func(_ objc.Block, _b0 int64, _b1 uint8, _b2 int, _b3 unsafe.Pointer) int {
+		return tapBlock(_b0, _b1, _b2, _b3)
+	}))
+}
+
+// ConnectMIDIToNodesFormatEventListBlock establishes a MIDI connection between a source node and multiple destination nodes.
+func (ae *AudioEngine) ConnectMIDIToNodesFormatEventListBlock(sourceNode *AudioNode, destinationNodes []*AudioNode, format *AudioFormat, tapBlock func(int64, uint8, unsafe.Pointer) int) {
+	defer runtime.KeepAlive(ae)
+	defer runtime.KeepAlive(sourceNode)
+	defer runtime.KeepAlive(format)
+	objc.Send[objc.ID](objref.IDOf(ae), objc.RegisterName("connectMIDI:toNodes:format:eventListBlock:"), objref.IDOf(sourceNode), purego.SliceToNSArray(destinationNodes, func(_v *AudioNode) objc.ID { return objref.IDOf(_v) }), objref.IDOf(format), objc.NewBlock(func(_ objc.Block, _b0 int64, _b1 uint8, _b2 unsafe.Pointer) int { return tapBlock(_b0, _b1, _b2) }))
+}
+
 // DisconnectMIDIFrom removes a MIDI connection between two nodes.
 func (ae *AudioEngine) DisconnectMIDIFrom(sourceNode *AudioNode, destinationNode *AudioNode) {
 	defer runtime.KeepAlive(ae)

@@ -80,7 +80,7 @@ type MTL4CommandQueue interface {
 
 // MTL4CommitFeedback is the Go form of the Objective-C protocol MTL4CommitFeedback.
 type MTL4CommitFeedback interface {
-	Error() obj.Object
+	Error() unsafe.Pointer
 	GPUStartTime() float64
 	GPUEndTime() float64
 }
@@ -242,7 +242,7 @@ type ArgumentEncoder interface {
 	SetTexturesWithRange(textures obj.Object, range_ foundation.NSRange)
 	SetSamplerStateAtIndex(sampler obj.Object, index int)
 	SetSamplerStatesWithRange(samplers obj.Object, range_ foundation.NSRange)
-	ConstantDataAtIndex(index int) obj.Object
+	ConstantDataAtIndex(index int) unsafe.Pointer
 	SetRenderPipelineStateAtIndex(pipeline obj.Object, index int)
 	SetRenderPipelineStatesWithRange(pipelines obj.Object, range_ foundation.NSRange)
 	SetComputePipelineStateAtIndex(pipeline obj.Object, index int)
@@ -496,7 +496,7 @@ type IOCommandBuffer interface {
 	Label() string
 	SetLabel(label string)
 	Status() IOStatus
-	Error() obj.Object
+	Error() unsafe.Pointer
 }
 
 // IOCommandQueue is the Go form of the Objective-C protocol MTLIOCommandQueue.
@@ -605,7 +605,7 @@ type LogContainer interface {
 
 // LogState is the Go form of the Objective-C protocol MTLLogState.
 type LogState interface {
-	AddLogHandler(block obj.Object)
+	AddLogHandler(block func(obj.Object, obj.Object, LogLevel, obj.Object))
 }
 
 // ObjectPayloadBinding is the Go form of the Objective-C protocol MTLObjectPayloadBinding.

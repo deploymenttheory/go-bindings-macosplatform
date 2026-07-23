@@ -78,3 +78,9 @@ func NewCIDiscoveryManager() *CIDiscoveryManager {
 	_id := objc.Send[objc.ID](objc.ID(_class("MIDICIDiscoveryManager")), objc.RegisterName("new"))
 	return cIDiscoveryManagerAdopt(_id)
 }
+
+// DiscoverWithHandler discovers the available MIDI-CI nodes.
+func (cdm *CIDiscoveryManager) DiscoverWithHandler(completedHandler func(obj.Object)) {
+	defer runtime.KeepAlive(cdm)
+	objc.Send[objc.ID](objref.IDOf(cdm), objc.RegisterName("discoverWithHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { completedHandler(obj.Wrap(_b0)) }))
+}

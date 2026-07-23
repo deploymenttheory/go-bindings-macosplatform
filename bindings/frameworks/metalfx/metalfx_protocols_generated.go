@@ -199,9 +199,9 @@ type TemporalDenoisedScalerBase interface {
 	OutputHeight() int
 	InputContentMinScale() float32
 	InputContentMaxScale() float32
-	WorldToViewMatrix() obj.Object
+	WorldToViewMatrix() unsafe.Pointer
 	SetWorldToViewMatrix(worldToViewMatrix unsafe.Pointer)
-	ViewToClipMatrix() obj.Object
+	ViewToClipMatrix() unsafe.Pointer
 	SetViewToClipMatrix(viewToClipMatrix unsafe.Pointer)
 	Fence() obj.Object
 	SetFence(fence obj.Object)

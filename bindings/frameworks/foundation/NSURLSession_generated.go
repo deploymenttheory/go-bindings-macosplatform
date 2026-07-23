@@ -309,3 +309,79 @@ func (us *URLSession) SessionDescription() string {
 	}
 	return purego.GoString(_r)
 }
+
+// DataTaskWithRequestCompletionHandler wraps the corresponding Objective-C method.
+func (us *URLSession) DataTaskWithRequestCompletionHandler(request *URLRequest, completionHandler func(obj.Object, obj.Object, unsafe.Pointer)) *URLSessionDataTask {
+	defer runtime.KeepAlive(us)
+	defer runtime.KeepAlive(request)
+	_r := objc.Send[objc.ID](objref.IDOf(us), objc.RegisterName("dataTaskWithRequest:completionHandler:"), objref.IDOf(request), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
+		completionHandler(obj.Wrap(_b0), obj.Wrap(_b1), _b2)
+	}))
+	return URLSessionDataTaskFromID(_r)
+}
+
+// DataTaskWithURLCompletionHandler wraps the corresponding Objective-C method.
+func (us *URLSession) DataTaskWithURLCompletionHandler(url string, completionHandler func(obj.Object, obj.Object, unsafe.Pointer)) *URLSessionDataTask {
+	defer runtime.KeepAlive(us)
+	_r := objc.Send[objc.ID](objref.IDOf(us), objc.RegisterName("dataTaskWithURL:completionHandler:"), rt.FileURL(url), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
+		completionHandler(obj.Wrap(_b0), obj.Wrap(_b1), _b2)
+	}))
+	return URLSessionDataTaskFromID(_r)
+}
+
+// UploadTaskWithRequestFromFileCompletionHandler wraps the corresponding Objective-C method.
+func (us *URLSession) UploadTaskWithRequestFromFileCompletionHandler(request *URLRequest, fileURL string, completionHandler func(obj.Object, obj.Object, unsafe.Pointer)) *URLSessionUploadTask {
+	defer runtime.KeepAlive(us)
+	defer runtime.KeepAlive(request)
+	_r := objc.Send[objc.ID](objref.IDOf(us), objc.RegisterName("uploadTaskWithRequest:fromFile:completionHandler:"), objref.IDOf(request), rt.FileURL(fileURL), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
+		completionHandler(obj.Wrap(_b0), obj.Wrap(_b1), _b2)
+	}))
+	return URLSessionUploadTaskFromID(_r)
+}
+
+// UploadTaskWithRequestFromDataCompletionHandler wraps the corresponding Objective-C method.
+func (us *URLSession) UploadTaskWithRequestFromDataCompletionHandler(request *URLRequest, bodyData []byte, completionHandler func(obj.Object, obj.Object, unsafe.Pointer)) *URLSessionUploadTask {
+	defer runtime.KeepAlive(us)
+	defer runtime.KeepAlive(request)
+	_r := objc.Send[objc.ID](objref.IDOf(us), objc.RegisterName("uploadTaskWithRequest:fromData:completionHandler:"), objref.IDOf(request), rt.BytesToNSData(bodyData), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
+		completionHandler(obj.Wrap(_b0), obj.Wrap(_b1), _b2)
+	}))
+	return URLSessionUploadTaskFromID(_r)
+}
+
+// UploadTaskWithResumeDataCompletionHandler creates a URLSessionUploadTask from a resume data blob. If resuming from an upload file, the file must still exist and be unmodified. - Parameter resumeData: Resume data blob from an incomplete upload, such as data returned by the cancelByProducingResumeData: method. - Parameter completionHandler: The completion handler to call when the load request is complete. - Returns: A new session upload task, or nil if the resumeData is invalid.
+func (us *URLSession) UploadTaskWithResumeDataCompletionHandler(resumeData []byte, completionHandler func(obj.Object, obj.Object, unsafe.Pointer)) *URLSessionUploadTask {
+	defer runtime.KeepAlive(us)
+	_r := objc.Send[objc.ID](objref.IDOf(us), objc.RegisterName("uploadTaskWithResumeData:completionHandler:"), rt.BytesToNSData(resumeData), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
+		completionHandler(obj.Wrap(_b0), obj.Wrap(_b1), _b2)
+	}))
+	return URLSessionUploadTaskFromID(_r)
+}
+
+// DownloadTaskWithRequestCompletionHandler wraps the corresponding Objective-C method.
+func (us *URLSession) DownloadTaskWithRequestCompletionHandler(request *URLRequest, completionHandler func(obj.Object, obj.Object, unsafe.Pointer)) *URLSessionDownloadTask {
+	defer runtime.KeepAlive(us)
+	defer runtime.KeepAlive(request)
+	_r := objc.Send[objc.ID](objref.IDOf(us), objc.RegisterName("downloadTaskWithRequest:completionHandler:"), objref.IDOf(request), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
+		completionHandler(obj.Wrap(_b0), obj.Wrap(_b1), _b2)
+	}))
+	return URLSessionDownloadTaskFromID(_r)
+}
+
+// DownloadTaskWithURLCompletionHandler wraps the corresponding Objective-C method.
+func (us *URLSession) DownloadTaskWithURLCompletionHandler(url string, completionHandler func(obj.Object, obj.Object, unsafe.Pointer)) *URLSessionDownloadTask {
+	defer runtime.KeepAlive(us)
+	_r := objc.Send[objc.ID](objref.IDOf(us), objc.RegisterName("downloadTaskWithURL:completionHandler:"), rt.FileURL(url), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
+		completionHandler(obj.Wrap(_b0), obj.Wrap(_b1), _b2)
+	}))
+	return URLSessionDownloadTaskFromID(_r)
+}
+
+// DownloadTaskWithResumeDataCompletionHandler wraps the corresponding Objective-C method.
+func (us *URLSession) DownloadTaskWithResumeDataCompletionHandler(resumeData []byte, completionHandler func(obj.Object, obj.Object, unsafe.Pointer)) *URLSessionDownloadTask {
+	defer runtime.KeepAlive(us)
+	_r := objc.Send[objc.ID](objref.IDOf(us), objc.RegisterName("downloadTaskWithResumeData:completionHandler:"), rt.BytesToNSData(resumeData), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
+		completionHandler(obj.Wrap(_b0), obj.Wrap(_b1), _b2)
+	}))
+	return URLSessionDownloadTaskFromID(_r)
+}

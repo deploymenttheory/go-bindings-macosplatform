@@ -82,6 +82,13 @@ func NewFrameProcessorFrameWithBufferPresentationTimeStamp(buffer unsafe.Pointer
 	return frameProcessorFrameAdopt(_id)
 }
 
+// Buffer returns pixel buffer that you provided when you initialized the object.
+func (fpf *FrameProcessorFrame) Buffer() unsafe.Pointer {
+	defer runtime.KeepAlive(fpf)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(fpf), objc.RegisterName("buffer"))
+	return _r
+}
+
 // PresentationTimeStamp returns presentation timestamp that you provided when you initialized the object.
 func (fpf *FrameProcessorFrame) PresentationTimeStamp() coremedia.CMTime {
 	defer runtime.KeepAlive(fpf)

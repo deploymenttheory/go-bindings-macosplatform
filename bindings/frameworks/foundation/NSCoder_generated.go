@@ -193,6 +193,14 @@ func (c *Coder) DecodeArrayOfObjCTypeCountAt(itemType string, count int, array u
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("decodeArrayOfObjCType:count:at:"), itemType, count, array)
 }
 
+// DecodeBytesWithReturnedLength decodes a buffer of data whose types are unspecified.
+func (c *Coder) DecodeBytesWithReturnedLength() (result unsafe.Pointer, lengthp int) {
+	defer runtime.KeepAlive(c)
+	var _out0 int
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(c), objc.RegisterName("decodeBytesWithReturnedLength:"), unsafe.Pointer(&_out0))
+	return _r, _out0
+}
+
 // EncodePropertyList encodes a property list.
 func (c *Coder) EncodePropertyList(aPropertyList obj.Object) {
 	defer runtime.KeepAlive(c)
@@ -211,6 +219,13 @@ func (c *Coder) DecodePropertyList() obj.Object {
 func (c *Coder) SetObjectZone(zone unsafe.Pointer) {
 	defer runtime.KeepAlive(c)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setObjectZone:"), zone)
+}
+
+// ObjectZone returns this method is present for historical reasons and has no effect.
+func (c *Coder) ObjectZone() unsafe.Pointer {
+	defer runtime.KeepAlive(c)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(c), objc.RegisterName("objectZone"))
+	return _r
 }
 
 // EncodeObjectForKey encodes an object and associates it with the string key.
@@ -338,6 +353,28 @@ func (c *Coder) DecodeDoubleForKey(key string) float64 {
 	return _r
 }
 
+// DecodeBytesForKeyReturnedLength decodes a buffer of data that was previously encoded with encodeBytes:length:forKey: and associated with the string key.
+func (c *Coder) DecodeBytesForKeyReturnedLength(key string) (result unsafe.Pointer, lengthp int) {
+	defer runtime.KeepAlive(c)
+	var _out0 int
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(c), objc.RegisterName("decodeBytesForKey:returnedLength:"), purego.NSString(key), unsafe.Pointer(&_out0))
+	return _r, _out0
+}
+
+// DecodeBytesWithMinimumLength decode bytes from the decoder. The length of the bytes must be greater than or equal to the length parameter. If the result exists, but is of insufficient length, then the decoder uses failWithError to fail the entire decode operation. The result of that is configurable on a per-NSCoder basis using NSDecodingFailurePolicy.
+func (c *Coder) DecodeBytesWithMinimumLength(length int) unsafe.Pointer {
+	defer runtime.KeepAlive(c)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(c), objc.RegisterName("decodeBytesWithMinimumLength:"), length)
+	return _r
+}
+
+// DecodeBytesForKeyMinimumLength decode bytes from the decoder for a given key. The length of the bytes must be greater than or equal to the length parameter. If the result exists, but is of insufficient length, then the decoder uses failWithError to fail the entire decode operation. The result of that is configurable on a per-NSCoder basis using NSDecodingFailurePolicy.
+func (c *Coder) DecodeBytesForKeyMinimumLength(key string, length int) unsafe.Pointer {
+	defer runtime.KeepAlive(c)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(c), objc.RegisterName("decodeBytesForKey:minimumLength:"), purego.NSString(key), length)
+	return _r
+}
+
 // EncodeIntegerForKey encodes an integer value and associates it with the string key.
 func (c *Coder) EncodeIntegerForKey(value int, key string) {
 	defer runtime.KeepAlive(c)
@@ -428,6 +465,13 @@ func (c *Coder) AllowedClasses() []obj.Object {
 func (c *Coder) DecodingFailurePolicy() DecodingFailurePolicy {
 	defer runtime.KeepAlive(c)
 	_r := objc.Send[DecodingFailurePolicy](objref.IDOf(c), objc.RegisterName("decodingFailurePolicy"))
+	return _r
+}
+
+// Error returns the current error (if there is one) for the current TopLevel decode. The meaning of this property changes based on the result of the decodingFailurePolicy property: For NSDecodingFailurePolicyRaiseException, this property will always be nil. For NSDecodingFailurePolicySetErrorAndReturn, this property can be non-nil, and if so, indicates that there was a failure while decoding the archive (specifically its the very first error encountered). While .error is non-nil, all attempts to decode data from this coder will return a nil/zero-equivalent value. This error is consumed by a TopLevel decode API (which resets this coder back to a being able to potentially decode data).
+func (c *Coder) Error() unsafe.Pointer {
+	defer runtime.KeepAlive(c)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(c), objc.RegisterName("error"))
 	return _r
 }
 

@@ -101,6 +101,13 @@ func (acr *AssetChangeRequest) CreationDate() time.Time {
 	return rt.NSDateToTime(_r)
 }
 
+// Location returns the location.
+func (acr *AssetChangeRequest) Location() unsafe.Pointer {
+	defer runtime.KeepAlive(acr)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(acr), objc.RegisterName("location"))
+	return _r
+}
+
 // IsFavorite reports whether the object is favorite.
 func (acr *AssetChangeRequest) IsFavorite() bool {
 	defer runtime.KeepAlive(acr)

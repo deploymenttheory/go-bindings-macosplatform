@@ -7,6 +7,7 @@ package matter
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -67,6 +68,13 @@ func NewMTRBaseClusterGroupKeyManagementWithDeviceEndpointQueue(device *MTRBaseD
 	return mTRBaseClusterGroupKeyManagementAdopt(_id)
 }
 
+// KeySetWriteWithParamsCompletion command KeySetWrite Write a new set of keys for the given key set id.
+func (mbcgkm *MTRBaseClusterGroupKeyManagement) KeySetWriteWithParamsCompletion(params *MTRGroupKeyManagementClusterKeySetWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcgkm)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcgkm), objc.RegisterName("keySetWriteWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // KeySetReadWithParamsCompletion command KeySetRead Read the keys for a given key set id.
 //
 // KeySetReadWithParamsCompletion blocks until the operation completes or ctx is cancelled.
@@ -92,6 +100,13 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) KeySetReadWithParamsCompletion(c
 		var _zero *MTRGroupKeyManagementClusterKeySetReadResponseParams
 		return _zero, ctx.Err()
 	}
+}
+
+// KeySetRemoveWithParamsCompletion command KeySetRemove Revoke a Root Key from a Group
+func (mbcgkm *MTRBaseClusterGroupKeyManagement) KeySetRemoveWithParamsCompletion(params *MTRGroupKeyManagementClusterKeySetRemoveParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcgkm)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcgkm), objc.RegisterName("keySetRemoveWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
 // KeySetReadAllIndicesWithParamsCompletion command KeySetReadAllIndices Return the list of Group Key Sets associated with the accessing fabric
@@ -174,6 +189,21 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeGroupKeyMapWithPara
 	}
 }
 
+// WriteAttributeGroupKeyMapWithValueCompletion writes attribute group key map with value completion.
+func (mbcgkm *MTRBaseClusterGroupKeyManagement) WriteAttributeGroupKeyMapWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcgkm)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcgkm), objc.RegisterName("writeAttributeGroupKeyMapWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeGroupKeyMapWithValueParamsCompletion writes attribute group key map with value params completion.
+func (mbcgkm *MTRBaseClusterGroupKeyManagement) WriteAttributeGroupKeyMapWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcgkm)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcgkm), objc.RegisterName("writeAttributeGroupKeyMapWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeGroupKeyMapWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeGroupKeyMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -191,7 +221,7 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeGroupKeyMapWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcgkm), objc.RegisterName("subscribeAttributeGroupKeyMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcgkm), objc.RegisterName("subscribeAttributeGroupKeyMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -245,7 +275,7 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeGroupTableWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcgkm), objc.RegisterName("subscribeAttributeGroupTableWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcgkm), objc.RegisterName("subscribeAttributeGroupTableWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -298,7 +328,7 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeMaxGroupsPerFa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcgkm), objc.RegisterName("subscribeAttributeMaxGroupsPerFabricWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcgkm), objc.RegisterName("subscribeAttributeMaxGroupsPerFabricWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -351,7 +381,7 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeMaxGroupKeysPe
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcgkm), objc.RegisterName("subscribeAttributeMaxGroupKeysPerFabricWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcgkm), objc.RegisterName("subscribeAttributeMaxGroupKeysPerFabricWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -404,7 +434,7 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeGeneratedComma
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcgkm), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcgkm), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -457,7 +487,7 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeAcceptedComman
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcgkm), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcgkm), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -510,7 +540,7 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeAttributeListW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcgkm), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcgkm), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -563,7 +593,7 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeFeatureMapWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcgkm), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcgkm), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -616,7 +646,7 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeClusterRevisio
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcgkm), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcgkm), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -624,6 +654,13 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeClusterRevisio
 		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
+}
+
+// KeySetWriteWithParamsCompletionHandler wraps the corresponding Objective-C method.
+func (mbcgkm *MTRBaseClusterGroupKeyManagement) KeySetWriteWithParamsCompletionHandler(params *MTRGroupKeyManagementClusterKeySetWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcgkm)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcgkm), objc.RegisterName("keySetWriteWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
 }
 
 // KeySetReadWithParams wraps the corresponding Objective-C method.
@@ -651,6 +688,13 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) KeySetReadWithParams(ctx context
 		var _zero *MTRGroupKeyManagementClusterKeySetReadResponseParams
 		return _zero, ctx.Err()
 	}
+}
+
+// KeySetRemoveWithParamsCompletionHandler wraps the corresponding Objective-C method.
+func (mbcgkm *MTRBaseClusterGroupKeyManagement) KeySetRemoveWithParamsCompletionHandler(params *MTRGroupKeyManagementClusterKeySetRemoveParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcgkm)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcgkm), objc.RegisterName("keySetRemoveWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
 }
 
 // KeySetReadAllIndicesWithParams wraps the corresponding Objective-C method.
@@ -707,6 +751,21 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeGroupKeyMapWithPara
 	}
 }
 
+// WriteAttributeGroupKeyMapWithValueCompletionHandler writes attribute group key map with value completion handler.
+func (mbcgkm *MTRBaseClusterGroupKeyManagement) WriteAttributeGroupKeyMapWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcgkm)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcgkm), objc.RegisterName("writeAttributeGroupKeyMapWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeGroupKeyMapWithValueParamsCompletionHandler writes attribute group key map with value params completion handler.
+func (mbcgkm *MTRBaseClusterGroupKeyManagement) WriteAttributeGroupKeyMapWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcgkm)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcgkm), objc.RegisterName("writeAttributeGroupKeyMapWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeGroupKeyMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeGroupKeyMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -726,7 +785,7 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeGroupKeyMapWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcgkm), objc.RegisterName("subscribeAttributeGroupKeyMapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcgkm), objc.RegisterName("subscribeAttributeGroupKeyMapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -782,7 +841,7 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeGroupTableWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcgkm), objc.RegisterName("subscribeAttributeGroupTableWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcgkm), objc.RegisterName("subscribeAttributeGroupTableWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -837,7 +896,7 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeMaxGroupsPerFa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcgkm), objc.RegisterName("subscribeAttributeMaxGroupsPerFabricWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcgkm), objc.RegisterName("subscribeAttributeMaxGroupsPerFabricWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -892,7 +951,7 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeMaxGroupKeysPe
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcgkm), objc.RegisterName("subscribeAttributeMaxGroupKeysPerFabricWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcgkm), objc.RegisterName("subscribeAttributeMaxGroupKeysPerFabricWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -947,7 +1006,7 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeGeneratedComma
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcgkm), objc.RegisterName("subscribeAttributeGeneratedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcgkm), objc.RegisterName("subscribeAttributeGeneratedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1002,7 +1061,7 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeAcceptedComman
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcgkm), objc.RegisterName("subscribeAttributeAcceptedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcgkm), objc.RegisterName("subscribeAttributeAcceptedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1057,7 +1116,7 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeAttributeListW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcgkm), objc.RegisterName("subscribeAttributeAttributeListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcgkm), objc.RegisterName("subscribeAttributeAttributeListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1112,7 +1171,7 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeFeatureMapWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcgkm), objc.RegisterName("subscribeAttributeFeatureMapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcgkm), objc.RegisterName("subscribeAttributeFeatureMapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1167,7 +1226,7 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeClusterRevisio
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcgkm), objc.RegisterName("subscribeAttributeClusterRevisionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcgkm), objc.RegisterName("subscribeAttributeClusterRevisionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err

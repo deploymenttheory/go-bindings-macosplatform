@@ -7,6 +7,7 @@ package matter
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -60,6 +61,26 @@ func NewMTRBaseClusterWaterHeaterManagementWithDeviceEndpointIDQueue(device *MTR
 	return mTRBaseClusterWaterHeaterManagementAdopt(_id)
 }
 
+// BoostWithParamsCompletion command Boost
+func (mbcwhm *MTRBaseClusterWaterHeaterManagement) BoostWithParamsCompletion(params *MTRWaterHeaterManagementClusterBoostParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcwhm)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcwhm), objc.RegisterName("boostWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// CancelBoostWithParamsCompletion command CancelBoost
+func (mbcwhm *MTRBaseClusterWaterHeaterManagement) CancelBoostWithParamsCompletion(params *MTRWaterHeaterManagementClusterCancelBoostParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcwhm)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcwhm), objc.RegisterName("cancelBoostWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// CancelBoostWithCompletion cancels boost with completion.
+func (mbcwhm *MTRBaseClusterWaterHeaterManagement) CancelBoostWithCompletion(completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcwhm)
+	objc.Send[objc.ID](objref.IDOf(mbcwhm), objc.RegisterName("cancelBoostWithCompletion:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // ReadAttributeHeaterTypesWithCompletion reads attribute heater types with completion.
 //
 // ReadAttributeHeaterTypesWithCompletion blocks until the operation completes or ctx is cancelled.
@@ -103,7 +124,7 @@ func (mbcwhm *MTRBaseClusterWaterHeaterManagement) SubscribeAttributeHeaterTypes
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwhm), objc.RegisterName("subscribeAttributeHeaterTypesWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwhm), objc.RegisterName("subscribeAttributeHeaterTypesWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -156,7 +177,7 @@ func (mbcwhm *MTRBaseClusterWaterHeaterManagement) SubscribeAttributeHeatDemandW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwhm), objc.RegisterName("subscribeAttributeHeatDemandWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwhm), objc.RegisterName("subscribeAttributeHeatDemandWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -209,7 +230,7 @@ func (mbcwhm *MTRBaseClusterWaterHeaterManagement) SubscribeAttributeTankVolumeW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwhm), objc.RegisterName("subscribeAttributeTankVolumeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwhm), objc.RegisterName("subscribeAttributeTankVolumeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -262,7 +283,7 @@ func (mbcwhm *MTRBaseClusterWaterHeaterManagement) SubscribeAttributeEstimatedHe
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwhm), objc.RegisterName("subscribeAttributeEstimatedHeatRequiredWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwhm), objc.RegisterName("subscribeAttributeEstimatedHeatRequiredWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -315,7 +336,7 @@ func (mbcwhm *MTRBaseClusterWaterHeaterManagement) SubscribeAttributeTankPercent
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwhm), objc.RegisterName("subscribeAttributeTankPercentageWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwhm), objc.RegisterName("subscribeAttributeTankPercentageWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -368,7 +389,7 @@ func (mbcwhm *MTRBaseClusterWaterHeaterManagement) SubscribeAttributeBoostStateW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwhm), objc.RegisterName("subscribeAttributeBoostStateWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwhm), objc.RegisterName("subscribeAttributeBoostStateWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -421,7 +442,7 @@ func (mbcwhm *MTRBaseClusterWaterHeaterManagement) SubscribeAttributeGeneratedCo
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwhm), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwhm), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -474,7 +495,7 @@ func (mbcwhm *MTRBaseClusterWaterHeaterManagement) SubscribeAttributeAcceptedCom
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwhm), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwhm), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -527,7 +548,7 @@ func (mbcwhm *MTRBaseClusterWaterHeaterManagement) SubscribeAttributeAttributeLi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwhm), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwhm), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -580,7 +601,7 @@ func (mbcwhm *MTRBaseClusterWaterHeaterManagement) SubscribeAttributeFeatureMapW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwhm), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwhm), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -633,7 +654,7 @@ func (mbcwhm *MTRBaseClusterWaterHeaterManagement) SubscribeAttributeClusterRevi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwhm), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwhm), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err

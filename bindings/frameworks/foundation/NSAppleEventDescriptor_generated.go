@@ -215,6 +215,13 @@ func (aed *AppleEventDescriptor) CoerceToDescriptorType(descriptorType int) *App
 	return AppleEventDescriptorFromID(_r)
 }
 
+// AeDesc returns the ae desc.
+func (aed *AppleEventDescriptor) AeDesc() unsafe.Pointer {
+	defer runtime.KeepAlive(aed)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(aed), objc.RegisterName("aeDesc"))
+	return _r
+}
+
 // DescriptorType returns the descriptor type.
 func (aed *AppleEventDescriptor) DescriptorType() int {
 	defer runtime.KeepAlive(aed)

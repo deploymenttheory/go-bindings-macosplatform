@@ -6,6 +6,7 @@ package matter
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -64,6 +65,158 @@ func NewMTRClusterColorControlWithDeviceEndpointQueue(device *MTRDevice, endpoin
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterColorControl")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
 	return mTRClusterColorControlAdopt(_id)
+}
+
+// MoveToHueWithParamsExpectedValuesExpectedValueIntervalCompletion moves to hue with params expected values expected value interval completion.
+func (mccc *MTRClusterColorControl) MoveToHueWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRColorControlClusterMoveToHueParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mccc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("moveToHueWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// MoveHueWithParamsExpectedValuesExpectedValueIntervalCompletion moves hue with params expected values expected value interval completion.
+func (mccc *MTRClusterColorControl) MoveHueWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRColorControlClusterMoveHueParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mccc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("moveHueWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// StepHueWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+func (mccc *MTRClusterColorControl) StepHueWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRColorControlClusterStepHueParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mccc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("stepHueWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// MoveToSaturationWithParamsExpectedValuesExpectedValueIntervalCompletion moves to saturation with params expected values expected value interval completion.
+func (mccc *MTRClusterColorControl) MoveToSaturationWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRColorControlClusterMoveToSaturationParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mccc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("moveToSaturationWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// MoveSaturationWithParamsExpectedValuesExpectedValueIntervalCompletion moves saturation with params expected values expected value interval completion.
+func (mccc *MTRClusterColorControl) MoveSaturationWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRColorControlClusterMoveSaturationParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mccc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("moveSaturationWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// StepSaturationWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+func (mccc *MTRClusterColorControl) StepSaturationWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRColorControlClusterStepSaturationParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mccc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("stepSaturationWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// MoveToHueAndSaturationWithParamsExpectedValuesExpectedValueIntervalCompletion moves to hue and saturation with params expected values expected value interval completion.
+func (mccc *MTRClusterColorControl) MoveToHueAndSaturationWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRColorControlClusterMoveToHueAndSaturationParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mccc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("moveToHueAndSaturationWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// MoveToColorWithParamsExpectedValuesExpectedValueIntervalCompletion moves to color with params expected values expected value interval completion.
+func (mccc *MTRClusterColorControl) MoveToColorWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRColorControlClusterMoveToColorParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mccc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("moveToColorWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// MoveColorWithParamsExpectedValuesExpectedValueIntervalCompletion moves color with params expected values expected value interval completion.
+func (mccc *MTRClusterColorControl) MoveColorWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRColorControlClusterMoveColorParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mccc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("moveColorWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// StepColorWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+func (mccc *MTRClusterColorControl) StepColorWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRColorControlClusterStepColorParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mccc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("stepColorWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// MoveToColorTemperatureWithParamsExpectedValuesExpectedValueIntervalCompletion moves to color temperature with params expected values expected value interval completion.
+func (mccc *MTRClusterColorControl) MoveToColorTemperatureWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRColorControlClusterMoveToColorTemperatureParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mccc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("moveToColorTemperatureWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// EnhancedMoveToHueWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+func (mccc *MTRClusterColorControl) EnhancedMoveToHueWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRColorControlClusterEnhancedMoveToHueParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mccc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("enhancedMoveToHueWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// EnhancedMoveHueWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+func (mccc *MTRClusterColorControl) EnhancedMoveHueWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRColorControlClusterEnhancedMoveHueParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mccc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("enhancedMoveHueWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// EnhancedStepHueWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+func (mccc *MTRClusterColorControl) EnhancedStepHueWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRColorControlClusterEnhancedStepHueParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mccc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("enhancedStepHueWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// EnhancedMoveToHueAndSaturationWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+func (mccc *MTRClusterColorControl) EnhancedMoveToHueAndSaturationWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mccc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("enhancedMoveToHueAndSaturationWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// ColorLoopSetWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+func (mccc *MTRClusterColorControl) ColorLoopSetWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRColorControlClusterColorLoopSetParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mccc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("colorLoopSetWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// StopMoveStepWithParamsExpectedValuesExpectedValueIntervalCompletion stops move step with params expected values expected value interval completion.
+func (mccc *MTRClusterColorControl) StopMoveStepWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRColorControlClusterStopMoveStepParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mccc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("stopMoveStepWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// MoveColorTemperatureWithParamsExpectedValuesExpectedValueIntervalCompletion moves color temperature with params expected values expected value interval completion.
+func (mccc *MTRClusterColorControl) MoveColorTemperatureWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRColorControlClusterMoveColorTemperatureParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mccc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("moveColorTemperatureWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// StepColorTemperatureWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+func (mccc *MTRClusterColorControl) StepColorTemperatureWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRColorControlClusterStepColorTemperatureParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mccc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("stepColorTemperatureWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
 // ReadAttributeCurrentHueWithParams reads attribute current hue with params.
@@ -550,6 +703,158 @@ func (mccc *MTRClusterColorControl) ReadAttributeClusterRevisionWithParams(param
 	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
+// MoveToHueWithParamsExpectedValuesExpectedValueIntervalCompletionHandler moves to hue with params expected values expected value interval completion handler.
+func (mccc *MTRClusterColorControl) MoveToHueWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRColorControlClusterMoveToHueParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mccc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("moveToHueWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// MoveHueWithParamsExpectedValuesExpectedValueIntervalCompletionHandler moves hue with params expected values expected value interval completion handler.
+func (mccc *MTRClusterColorControl) MoveHueWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRColorControlClusterMoveHueParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mccc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("moveHueWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// StepHueWithParamsExpectedValuesExpectedValueIntervalCompletionHandler wraps the corresponding Objective-C method.
+func (mccc *MTRClusterColorControl) StepHueWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRColorControlClusterStepHueParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mccc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("stepHueWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// MoveToSaturationWithParamsExpectedValuesExpectedValueIntervalCompletionHandler moves to saturation with params expected values expected value interval completion handler.
+func (mccc *MTRClusterColorControl) MoveToSaturationWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRColorControlClusterMoveToSaturationParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mccc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("moveToSaturationWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// MoveSaturationWithParamsExpectedValuesExpectedValueIntervalCompletionHandler moves saturation with params expected values expected value interval completion handler.
+func (mccc *MTRClusterColorControl) MoveSaturationWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRColorControlClusterMoveSaturationParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mccc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("moveSaturationWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// StepSaturationWithParamsExpectedValuesExpectedValueIntervalCompletionHandler wraps the corresponding Objective-C method.
+func (mccc *MTRClusterColorControl) StepSaturationWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRColorControlClusterStepSaturationParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mccc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("stepSaturationWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// MoveToHueAndSaturationWithParamsExpectedValuesExpectedValueIntervalCompletionHandler moves to hue and saturation with params expected values expected value interval completion handler.
+func (mccc *MTRClusterColorControl) MoveToHueAndSaturationWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRColorControlClusterMoveToHueAndSaturationParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mccc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("moveToHueAndSaturationWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// MoveToColorWithParamsExpectedValuesExpectedValueIntervalCompletionHandler moves to color with params expected values expected value interval completion handler.
+func (mccc *MTRClusterColorControl) MoveToColorWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRColorControlClusterMoveToColorParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mccc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("moveToColorWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// MoveColorWithParamsExpectedValuesExpectedValueIntervalCompletionHandler moves color with params expected values expected value interval completion handler.
+func (mccc *MTRClusterColorControl) MoveColorWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRColorControlClusterMoveColorParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mccc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("moveColorWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// StepColorWithParamsExpectedValuesExpectedValueIntervalCompletionHandler wraps the corresponding Objective-C method.
+func (mccc *MTRClusterColorControl) StepColorWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRColorControlClusterStepColorParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mccc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("stepColorWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// MoveToColorTemperatureWithParamsExpectedValuesExpectedValueIntervalCompletionHandler moves to color temperature with params expected values expected value interval completion handler.
+func (mccc *MTRClusterColorControl) MoveToColorTemperatureWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRColorControlClusterMoveToColorTemperatureParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mccc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("moveToColorTemperatureWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// EnhancedMoveToHueWithParamsExpectedValuesExpectedValueIntervalCompletionHandler wraps the corresponding Objective-C method.
+func (mccc *MTRClusterColorControl) EnhancedMoveToHueWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRColorControlClusterEnhancedMoveToHueParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mccc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("enhancedMoveToHueWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// EnhancedMoveHueWithParamsExpectedValuesExpectedValueIntervalCompletionHandler wraps the corresponding Objective-C method.
+func (mccc *MTRClusterColorControl) EnhancedMoveHueWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRColorControlClusterEnhancedMoveHueParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mccc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("enhancedMoveHueWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// EnhancedStepHueWithParamsExpectedValuesExpectedValueIntervalCompletionHandler wraps the corresponding Objective-C method.
+func (mccc *MTRClusterColorControl) EnhancedStepHueWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRColorControlClusterEnhancedStepHueParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mccc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("enhancedStepHueWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// EnhancedMoveToHueAndSaturationWithParamsExpectedValuesExpectedValueIntervalCompletionHandler wraps the corresponding Objective-C method.
+func (mccc *MTRClusterColorControl) EnhancedMoveToHueAndSaturationWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mccc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("enhancedMoveToHueAndSaturationWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// ColorLoopSetWithParamsExpectedValuesExpectedValueIntervalCompletionHandler wraps the corresponding Objective-C method.
+func (mccc *MTRClusterColorControl) ColorLoopSetWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRColorControlClusterColorLoopSetParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mccc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("colorLoopSetWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// StopMoveStepWithParamsExpectedValuesExpectedValueIntervalCompletionHandler stops move step with params expected values expected value interval completion handler.
+func (mccc *MTRClusterColorControl) StopMoveStepWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRColorControlClusterStopMoveStepParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mccc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("stopMoveStepWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// MoveColorTemperatureWithParamsExpectedValuesExpectedValueIntervalCompletionHandler moves color temperature with params expected values expected value interval completion handler.
+func (mccc *MTRClusterColorControl) MoveColorTemperatureWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRColorControlClusterMoveColorTemperatureParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mccc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("moveColorTemperatureWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// StepColorTemperatureWithParamsExpectedValuesExpectedValueIntervalCompletionHandler wraps the corresponding Objective-C method.
+func (mccc *MTRClusterColorControl) StepColorTemperatureWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRColorControlClusterStepColorTemperatureParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mccc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("stepColorTemperatureWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
 }
 
 // WriteAttributeWhitePointXWithValueExpectedValueInterval writes attribute white point x with value expected value interval.

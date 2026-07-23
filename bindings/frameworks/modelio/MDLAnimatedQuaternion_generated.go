@@ -70,6 +70,20 @@ func (aq *AnimatedQuaternion) SetDoubleQuaternionAtTime(value unsafe.Pointer, ti
 	objc.Send[objc.ID](objref.IDOf(aq), objc.RegisterName("setDoubleQuaternion:atTime:"), value, time_)
 }
 
+// FloatQuaternionAtTime wraps the corresponding Objective-C method.
+func (aq *AnimatedQuaternion) FloatQuaternionAtTime(time_ float64) unsafe.Pointer {
+	defer runtime.KeepAlive(aq)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(aq), objc.RegisterName("floatQuaternionAtTime:"), time_)
+	return _r
+}
+
+// DoubleQuaternionAtTime wraps the corresponding Objective-C method.
+func (aq *AnimatedQuaternion) DoubleQuaternionAtTime(time_ float64) unsafe.Pointer {
+	defer runtime.KeepAlive(aq)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(aq), objc.RegisterName("doubleQuaternionAtTime:"), time_)
+	return _r
+}
+
 // ResetWithFloatQuaternionArrayAtTimesCount resets with float quaternion array at times count.
 func (aq *AnimatedQuaternion) ResetWithFloatQuaternionArrayAtTimesCount(valuesArray unsafe.Pointer, count int) (timesArray float64) {
 	defer runtime.KeepAlive(aq)

@@ -137,6 +137,13 @@ func (ckr *ContentKeyRequest) Status() ContentKeyRequestStatus {
 	return _r
 }
 
+// Error returns if the receiver's status is AVContentKeyRequestStatusFailed, this describes the error that caused the failure. The value of this property is an NSError that describes what caused the content key request to fail. If the receiver's status is not AVContentKeyRequestStatusFailed, the value of this property is nil.
+func (ckr *ContentKeyRequest) Error() unsafe.Pointer {
+	defer runtime.KeepAlive(ckr)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(ckr), objc.RegisterName("error"))
+	return _r
+}
+
 // Identifier returns container- and protocol-specific identifier for the content key. In order to use a key with an HTTP Live Streaming AVURLAsset, the identifier must be an NSURL that matches a key URI in the Media Playlist.
 func (ckr *ContentKeyRequest) Identifier() obj.Object {
 	defer runtime.KeepAlive(ckr)

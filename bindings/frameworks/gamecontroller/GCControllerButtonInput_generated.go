@@ -8,6 +8,7 @@ import (
 	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -45,6 +46,26 @@ func controllerButtonInputAdopt(id objc.ID) *ControllerButtonInput {
 	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
+}
+
+// WithValueChangedHandler sets the block that the element calls when the user changes the level of pressure on the button.
+func (cbi *ControllerButtonInput) WithValueChangedHandler(valueChangedHandler func(obj.Object, float32, bool)) *ControllerButtonInput {
+	objc.Send[objc.ID](objref.IDOf(cbi), objc.RegisterName("setValueChangedHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 float32, _b2 bool) { valueChangedHandler(obj.Wrap(_b0), _b1, _b2) }))
+	return cbi
+}
+
+// WithPressedChangedHandler sets the block that the element calls when the user presses or releases the button.
+func (cbi *ControllerButtonInput) WithPressedChangedHandler(pressedChangedHandler func(obj.Object, float32, bool)) *ControllerButtonInput {
+	objc.Send[objc.ID](objref.IDOf(cbi), objc.RegisterName("setPressedChangedHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 float32, _b2 bool) { pressedChangedHandler(obj.Wrap(_b0), _b1, _b2) }))
+	return cbi
+}
+
+// WithTouchedChangedHandler sets the block that the element calls when the user touches the button.
+func (cbi *ControllerButtonInput) WithTouchedChangedHandler(touchedChangedHandler func(obj.Object, float32, bool, bool)) *ControllerButtonInput {
+	objc.Send[objc.ID](objref.IDOf(cbi), objc.RegisterName("setTouchedChangedHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 float32, _b2 bool, _b3 bool) {
+		touchedChangedHandler(obj.Wrap(_b0), _b1, _b2, _b3)
+	}))
+	return cbi
 }
 
 // WithValue sets the level of pressure the user is applying to the button.

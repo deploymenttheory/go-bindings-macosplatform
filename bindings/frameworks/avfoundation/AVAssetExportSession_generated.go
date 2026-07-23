@@ -7,6 +7,7 @@ package avfoundation
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
@@ -250,6 +251,13 @@ func (aes *AssetExportSession) Status() AssetExportSessionStatus {
 	return _r
 }
 
+// Error returns the error.
+func (aes *AssetExportSession) Error() unsafe.Pointer {
+	defer runtime.KeepAlive(aes)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(aes), objc.RegisterName("error"))
+	return _r
+}
+
 // Progress returns the progress.
 func (aes *AssetExportSession) Progress() float32 {
 	defer runtime.KeepAlive(aes)
@@ -289,6 +297,12 @@ func (aes *AssetExportSession) SupportedFileTypes() []obj.Object {
 	defer runtime.KeepAlive(aes)
 	_arr := objc.Send[objc.ID](objref.IDOf(aes), objc.RegisterName("supportedFileTypes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
+// EstimateOutputFileLengthWithCompletionHandler starts estimating the output file length of the export while considering the asset, preset, and time range configuration of the export session.
+func (aes *AssetExportSession) EstimateOutputFileLengthWithCompletionHandler(handler func(int64, unsafe.Pointer)) {
+	defer runtime.KeepAlive(aes)
+	objc.Send[objc.ID](objref.IDOf(aes), objc.RegisterName("estimateOutputFileLengthWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 int64, _b1 unsafe.Pointer) { handler(_b0, _b1) }))
 }
 
 // TimeRange returns the time range.

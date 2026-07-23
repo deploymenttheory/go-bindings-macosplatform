@@ -5,11 +5,10 @@
 package cloudkit
 
 import (
-	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
@@ -78,6 +77,12 @@ func (duio *DiscoverUserIdentitiesOperation) WithUserIdentityDiscoveredBlock(use
 	return duio
 }
 
+// WithDiscoverUserIdentitiesCompletionBlock sets the closure to execute when the operation finishes.
+func (duio *DiscoverUserIdentitiesOperation) WithDiscoverUserIdentitiesCompletionBlock(discoverUserIdentitiesCompletionBlock func(unsafe.Pointer)) *DiscoverUserIdentitiesOperation {
+	objc.Send[objc.ID](objref.IDOf(duio), objc.RegisterName("setDiscoverUserIdentitiesCompletionBlock:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { discoverUserIdentitiesCompletionBlock(_b0) }))
+	return duio
+}
+
 // WithConfiguration sets the operation’s configuration.
 func (duio *DiscoverUserIdentitiesOperation) WithConfiguration(configuration *OperationConfiguration) *DiscoverUserIdentitiesOperation {
 	defer runtime.KeepAlive(configuration)
@@ -136,26 +141,6 @@ func (duio *DiscoverUserIdentitiesOperation) UserIdentityLookupInfos() []*UserId
 	defer runtime.KeepAlive(duio)
 	_arr := objc.Send[objc.ID](objref.IDOf(duio), objc.RegisterName("userIdentityLookupInfos"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *UserIdentityLookupInfo { return UserIdentityLookupInfoFromID(_id) })
-}
-
-// SetDiscoverUserIdentitiesCompletionBlock wraps the corresponding Objective-C method.
-//
-// SetDiscoverUserIdentitiesCompletionBlock blocks until the operation completes or ctx is cancelled.
-func (duio *DiscoverUserIdentitiesOperation) SetDiscoverUserIdentitiesCompletionBlock(ctx context.Context) error {
-	defer runtime.KeepAlive(duio)
-	_ch := make(chan error, 1)
-	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
-		var _err error
-		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
-		_ch <- _err
-	})
-	objc.Send[objc.ID](objref.IDOf(duio), objc.RegisterName("setDiscoverUserIdentitiesCompletionBlock:"), _block)
-	select {
-	case err := <-_ch:
-		return err
-	case <-ctx.Done():
-		return ctx.Err()
-	}
 }
 
 var _ OperationProvider = (*DiscoverUserIdentitiesOperation)(nil)

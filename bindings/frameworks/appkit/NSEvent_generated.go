@@ -6,6 +6,7 @@ package appkit
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -122,6 +123,14 @@ func (e *Event) CoalescedTouchesForTouch(touch *Touch) []*Touch {
 	defer runtime.KeepAlive(touch)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("coalescedTouchesForTouch:"), objref.IDOf(touch))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Touch { return TouchFromID(_id) })
+}
+
+// TrackSwipeEventWithOptionsDampenAmountThresholdMinMaxUsingHandler allows tracking and user interface feedback of scroll wheel events.
+func (e *Event) TrackSwipeEventWithOptionsDampenAmountThresholdMinMaxUsingHandler(options EventSwipeTrackingOptions, minDampenThreshold float64, maxDampenThreshold float64, trackingHandler func(float64, EventPhase, bool, *bool)) {
+	defer runtime.KeepAlive(e)
+	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("trackSwipeEventWithOptions:dampenAmountThresholdMin:max:usingHandler:"), options, minDampenThreshold, maxDampenThreshold, objc.NewBlock(func(_ objc.Block, _b0 float64, _b1 EventPhase, _b2 bool, _b3 unsafe.Pointer) {
+		trackingHandler(_b0, _b1, _b2, (*bool)(_b3))
+	}))
 }
 
 // Type returns the type.
@@ -298,6 +307,13 @@ func (e *Event) TrackingNumber() int {
 	return _r
 }
 
+// UserData returns the user data.
+func (e *Event) UserData() unsafe.Pointer {
+	defer runtime.KeepAlive(e)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(e), objc.RegisterName("userData"))
+	return _r
+}
+
 // TrackingArea returns the tracking area.
 func (e *Event) TrackingArea() *TrackingArea {
 	defer runtime.KeepAlive(e)
@@ -323,6 +339,13 @@ func (e *Event) Data1() int {
 func (e *Event) Data2() int {
 	defer runtime.KeepAlive(e)
 	_r := objc.Send[int](objref.IDOf(e), objc.RegisterName("data2"))
+	return _r
+}
+
+// EventRef returns the event ref.
+func (e *Event) EventRef() unsafe.Pointer {
+	defer runtime.KeepAlive(e)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(e), objc.RegisterName("eventRef"))
 	return _r
 }
 

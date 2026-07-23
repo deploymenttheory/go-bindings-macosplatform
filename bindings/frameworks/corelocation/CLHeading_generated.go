@@ -7,6 +7,7 @@ package corelocation
 import (
 	"runtime"
 	"time"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -78,6 +79,27 @@ func (h *Heading) String() string {
 func NewHeading() *Heading {
 	_id := objc.Send[objc.ID](objc.ID(_class("CLHeading")), objc.RegisterName("new"))
 	return headingAdopt(_id)
+}
+
+// MagneticHeading returns the magnetic heading.
+func (h *Heading) MagneticHeading() unsafe.Pointer {
+	defer runtime.KeepAlive(h)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(h), objc.RegisterName("magneticHeading"))
+	return _r
+}
+
+// TrueHeading returns the true heading.
+func (h *Heading) TrueHeading() unsafe.Pointer {
+	defer runtime.KeepAlive(h)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(h), objc.RegisterName("trueHeading"))
+	return _r
+}
+
+// HeadingAccuracy returns the heading accuracy.
+func (h *Heading) HeadingAccuracy() unsafe.Pointer {
+	defer runtime.KeepAlive(h)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(h), objc.RegisterName("headingAccuracy"))
+	return _r
 }
 
 // X returns the x.

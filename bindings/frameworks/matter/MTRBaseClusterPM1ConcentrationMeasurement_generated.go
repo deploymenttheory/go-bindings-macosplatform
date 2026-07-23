@@ -101,7 +101,7 @@ func (mbcpcm *MTRBaseClusterPM1ConcentrationMeasurement) SubscribeAttributeMeasu
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcpcm), objc.RegisterName("subscribeAttributeMeasuredValueWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcpcm), objc.RegisterName("subscribeAttributeMeasuredValueWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -154,7 +154,7 @@ func (mbcpcm *MTRBaseClusterPM1ConcentrationMeasurement) SubscribeAttributeMinMe
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcpcm), objc.RegisterName("subscribeAttributeMinMeasuredValueWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcpcm), objc.RegisterName("subscribeAttributeMinMeasuredValueWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -207,7 +207,7 @@ func (mbcpcm *MTRBaseClusterPM1ConcentrationMeasurement) SubscribeAttributeMaxMe
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcpcm), objc.RegisterName("subscribeAttributeMaxMeasuredValueWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcpcm), objc.RegisterName("subscribeAttributeMaxMeasuredValueWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -260,7 +260,7 @@ func (mbcpcm *MTRBaseClusterPM1ConcentrationMeasurement) SubscribeAttributePeakM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcpcm), objc.RegisterName("subscribeAttributePeakMeasuredValueWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcpcm), objc.RegisterName("subscribeAttributePeakMeasuredValueWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -313,7 +313,7 @@ func (mbcpcm *MTRBaseClusterPM1ConcentrationMeasurement) SubscribeAttributePeakM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcpcm), objc.RegisterName("subscribeAttributePeakMeasuredValueWindowWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcpcm), objc.RegisterName("subscribeAttributePeakMeasuredValueWindowWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -366,7 +366,7 @@ func (mbcpcm *MTRBaseClusterPM1ConcentrationMeasurement) SubscribeAttributeAvera
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcpcm), objc.RegisterName("subscribeAttributeAverageMeasuredValueWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcpcm), objc.RegisterName("subscribeAttributeAverageMeasuredValueWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -419,7 +419,7 @@ func (mbcpcm *MTRBaseClusterPM1ConcentrationMeasurement) SubscribeAttributeAvera
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcpcm), objc.RegisterName("subscribeAttributeAverageMeasuredValueWindowWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcpcm), objc.RegisterName("subscribeAttributeAverageMeasuredValueWindowWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -472,7 +472,7 @@ func (mbcpcm *MTRBaseClusterPM1ConcentrationMeasurement) SubscribeAttributeUncer
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcpcm), objc.RegisterName("subscribeAttributeUncertaintyWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcpcm), objc.RegisterName("subscribeAttributeUncertaintyWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -525,7 +525,7 @@ func (mbcpcm *MTRBaseClusterPM1ConcentrationMeasurement) SubscribeAttributeMeasu
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcpcm), objc.RegisterName("subscribeAttributeMeasurementUnitWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcpcm), objc.RegisterName("subscribeAttributeMeasurementUnitWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -578,7 +578,7 @@ func (mbcpcm *MTRBaseClusterPM1ConcentrationMeasurement) SubscribeAttributeMeasu
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcpcm), objc.RegisterName("subscribeAttributeMeasurementMediumWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcpcm), objc.RegisterName("subscribeAttributeMeasurementMediumWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -631,7 +631,7 @@ func (mbcpcm *MTRBaseClusterPM1ConcentrationMeasurement) SubscribeAttributeLevel
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcpcm), objc.RegisterName("subscribeAttributeLevelValueWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcpcm), objc.RegisterName("subscribeAttributeLevelValueWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -684,7 +684,7 @@ func (mbcpcm *MTRBaseClusterPM1ConcentrationMeasurement) SubscribeAttributeGener
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcpcm), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcpcm), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -737,7 +737,7 @@ func (mbcpcm *MTRBaseClusterPM1ConcentrationMeasurement) SubscribeAttributeAccep
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcpcm), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcpcm), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -790,7 +790,7 @@ func (mbcpcm *MTRBaseClusterPM1ConcentrationMeasurement) SubscribeAttributeAttri
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcpcm), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcpcm), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -843,7 +843,7 @@ func (mbcpcm *MTRBaseClusterPM1ConcentrationMeasurement) SubscribeAttributeFeatu
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcpcm), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcpcm), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -896,7 +896,7 @@ func (mbcpcm *MTRBaseClusterPM1ConcentrationMeasurement) SubscribeAttributeClust
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcpcm), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcpcm), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err

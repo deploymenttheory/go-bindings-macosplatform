@@ -6,6 +6,7 @@ package matter
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -55,6 +56,21 @@ func NewMTRClusterSmokeCOAlarmWithDeviceEndpointIDQueue(device *MTRDevice, endpo
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterSmokeCOAlarm")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterSmokeCOAlarmAdopt(_id)
+}
+
+// SelfTestRequestWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+func (mcsca *MTRClusterSmokeCOAlarm) SelfTestRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRSmokeCOAlarmClusterSelfTestRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcsca)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcsca), objc.RegisterName("selfTestRequestWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// SelfTestRequestWithExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+func (mcsca *MTRClusterSmokeCOAlarm) SelfTestRequestWithExpectedValuesExpectedValueIntervalCompletion(expectedValues []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcsca)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcsca), objc.RegisterName("selfTestRequestWithExpectedValues:expectedValueInterval:completion:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
 // ReadAttributeExpressedStateWithParams reads attribute expressed state with params.

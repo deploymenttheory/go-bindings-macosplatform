@@ -7,6 +7,7 @@ package matter
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -60,6 +61,20 @@ func NewMTRBaseClusterMessagesWithDeviceEndpointIDQueue(device *MTRBaseDevice, e
 	return mTRBaseClusterMessagesAdopt(_id)
 }
 
+// PresentMessagesRequestWithParamsCompletion command PresentMessagesRequest
+func (mbcm *MTRBaseClusterMessages) PresentMessagesRequestWithParamsCompletion(params *MTRMessagesClusterPresentMessagesRequestParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcm)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcm), objc.RegisterName("presentMessagesRequestWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// CancelMessagesRequestWithParamsCompletion command CancelMessagesRequest
+func (mbcm *MTRBaseClusterMessages) CancelMessagesRequestWithParamsCompletion(params *MTRMessagesClusterCancelMessagesRequestParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcm)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcm), objc.RegisterName("cancelMessagesRequestWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // ReadAttributeMessagesWithCompletion reads attribute messages with completion.
 //
 // ReadAttributeMessagesWithCompletion blocks until the operation completes or ctx is cancelled.
@@ -103,7 +118,7 @@ func (mbcm *MTRBaseClusterMessages) SubscribeAttributeMessagesWithParamsSubscrip
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcm), objc.RegisterName("subscribeAttributeMessagesWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcm), objc.RegisterName("subscribeAttributeMessagesWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -156,7 +171,7 @@ func (mbcm *MTRBaseClusterMessages) SubscribeAttributeActiveMessageIDsWithParams
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcm), objc.RegisterName("subscribeAttributeActiveMessageIDsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcm), objc.RegisterName("subscribeAttributeActiveMessageIDsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -209,7 +224,7 @@ func (mbcm *MTRBaseClusterMessages) SubscribeAttributeGeneratedCommandListWithPa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcm), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcm), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -262,7 +277,7 @@ func (mbcm *MTRBaseClusterMessages) SubscribeAttributeAcceptedCommandListWithPar
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcm), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcm), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -315,7 +330,7 @@ func (mbcm *MTRBaseClusterMessages) SubscribeAttributeAttributeListWithParamsSub
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcm), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcm), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -368,7 +383,7 @@ func (mbcm *MTRBaseClusterMessages) SubscribeAttributeFeatureMapWithParamsSubscr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcm), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcm), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -421,7 +436,7 @@ func (mbcm *MTRBaseClusterMessages) SubscribeAttributeClusterRevisionWithParamsS
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcm), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcm), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err

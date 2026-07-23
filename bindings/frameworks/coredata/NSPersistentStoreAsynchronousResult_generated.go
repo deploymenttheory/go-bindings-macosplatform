@@ -6,6 +6,7 @@ package coredata
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -59,6 +60,13 @@ func (psar *PersistentStoreAsynchronousResult) ManagedObjectContext() *ManagedOb
 	defer runtime.KeepAlive(psar)
 	_r := objc.Send[objc.ID](objref.IDOf(psar), objc.RegisterName("managedObjectContext"))
 	return ManagedObjectContextFromID(_r)
+}
+
+// OperationError returns the operation error.
+func (psar *PersistentStoreAsynchronousResult) OperationError() unsafe.Pointer {
+	defer runtime.KeepAlive(psar)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(psar), objc.RegisterName("operationError"))
+	return _r
 }
 
 // Progress returns the progress.

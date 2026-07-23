@@ -212,11 +212,25 @@ func (c *Camera) LookAtFrom(focusPosition unsafe.Pointer, cameraPosition unsafe.
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("lookAt:from:"), focusPosition, cameraPosition)
 }
 
+// RayToForViewPort returns a point, in 3D world coordinates, corresponding to the specified 2D view coordinates.
+func (c *Camera) RayToForViewPort(pixel unsafe.Pointer, size unsafe.Pointer) unsafe.Pointer {
+	defer runtime.KeepAlive(c)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(c), objc.RegisterName("rayTo:forViewPort:"), pixel, size)
+	return _r
+}
+
 // BokehKernelWithSize creates and returns a texture, based on the camera’s aperture blade count, to be used in rendering out-of-focus highlights in a scene.
 func (c *Camera) BokehKernelWithSize(size unsafe.Pointer) *Texture {
 	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("bokehKernelWithSize:"), size)
 	return TextureFromID(_r)
+}
+
+// ProjectionMatrix returns the projection matrix is calculated from the near and far visibility distances, and the field of view.
+func (c *Camera) ProjectionMatrix() unsafe.Pointer {
+	defer runtime.KeepAlive(c)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(c), objc.RegisterName("projectionMatrix"))
+	return _r
 }
 
 // Projection returns the projection.
@@ -335,6 +349,41 @@ func (c *Camera) SensorVerticalAperture() float32 {
 func (c *Camera) SensorAspect() float32 {
 	defer runtime.KeepAlive(c)
 	_r := objc.Send[float32](objref.IDOf(c), objc.RegisterName("sensorAspect"))
+	return _r
+}
+
+// SensorEnlargement returns sensor zoom factor
+func (c *Camera) SensorEnlargement() unsafe.Pointer {
+	defer runtime.KeepAlive(c)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(c), objc.RegisterName("sensorEnlargement"))
+	return _r
+}
+
+// SensorShift returns sensor shift factor in mm.
+func (c *Camera) SensorShift() unsafe.Pointer {
+	defer runtime.KeepAlive(c)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(c), objc.RegisterName("sensorShift"))
+	return _r
+}
+
+// Flash returns flash amount, unit less
+func (c *Camera) Flash() unsafe.Pointer {
+	defer runtime.KeepAlive(c)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(c), objc.RegisterName("flash"))
+	return _r
+}
+
+// ExposureCompression returns exposure curve compression where values below the x value are to be passed through, above the y value, values are to be clamped at maximum display brightness, and a function such as a logarithmic ramp is to be applied in between.
+func (c *Camera) ExposureCompression() unsafe.Pointer {
+	defer runtime.KeepAlive(c)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(c), objc.RegisterName("exposureCompression"))
+	return _r
+}
+
+// Exposure returns exposure amount, unit less
+func (c *Camera) Exposure() unsafe.Pointer {
+	defer runtime.KeepAlive(c)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(c), objc.RegisterName("exposure"))
 	return _r
 }
 

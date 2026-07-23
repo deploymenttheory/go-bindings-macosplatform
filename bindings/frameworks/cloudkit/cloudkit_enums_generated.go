@@ -9,6 +9,72 @@ import (
 	"strings"
 )
 
+// Constants that indicate the availability of the user’s iCloud account.
+type AccountStatus int64
+
+const (
+	// CloudKit can’t determine the status of the user’s iCloud account.
+	AccountStatusCouldNotDetermine AccountStatus = 0
+	// The user’s iCloud account is available.
+	AccountStatusAvailable AccountStatus = 1
+	// The system denies access to the user’s iCloud account.
+	AccountStatusRestricted AccountStatus = 2
+	// The device doesn’t have an iCloud account.
+	AccountStatusNoAccount AccountStatus = 3
+	// The user’s iCloud account is temporarily unavailable.
+	AccountStatusTemporarilyUnavailable AccountStatus = 4
+)
+
+// String returns the AccountStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AccountStatus) String() string {
+	switch e {
+	case AccountStatusCouldNotDetermine:
+		return "AccountStatusCouldNotDetermine"
+	case AccountStatusAvailable:
+		return "AccountStatusAvailable"
+	case AccountStatusRestricted:
+		return "AccountStatusRestricted"
+	case AccountStatusNoAccount:
+		return "AccountStatusNoAccount"
+	case AccountStatusTemporarilyUnavailable:
+		return "AccountStatusTemporarilyUnavailable"
+	default:
+		return fmt.Sprintf("AccountStatus(%d)", int64(e))
+	}
+}
+
+// Deprecated: No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.
+type ApplicationPermissionStatus int64
+
+const (
+	// The app is yet to request the permission.
+	ApplicationPermissionStatusInitialState ApplicationPermissionStatus = 0
+	// An error that occurs while processing the permission request.
+	ApplicationPermissionStatusCouldNotComplete ApplicationPermissionStatus = 1
+	// The user denies the permission.
+	ApplicationPermissionStatusDenied ApplicationPermissionStatus = 2
+	// The user grants the permission.
+	ApplicationPermissionStatusGranted ApplicationPermissionStatus = 3
+)
+
+// String returns the ApplicationPermissionStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ApplicationPermissionStatus) String() string {
+	switch e {
+	case ApplicationPermissionStatusInitialState:
+		return "ApplicationPermissionStatusInitialState"
+	case ApplicationPermissionStatusCouldNotComplete:
+		return "ApplicationPermissionStatusCouldNotComplete"
+	case ApplicationPermissionStatusDenied:
+		return "ApplicationPermissionStatusDenied"
+	case ApplicationPermissionStatusGranted:
+		return "ApplicationPermissionStatusGranted"
+	default:
+		return fmt.Sprintf("ApplicationPermissionStatus(%d)", int64(e))
+	}
+}
+
 // Bitmask — values may be combined with |.
 type ApplicationPermissions uint64
 
@@ -850,72 +916,6 @@ func (e Type) String() string {
 		return "TypeNwfs"
 	default:
 		return fmt.Sprintf("Type(%d)", int64(e))
-	}
-}
-
-// Constants that indicate the availability of the user’s iCloud account.
-type AccountStatus int64
-
-const (
-	// CloudKit can’t determine the status of the user’s iCloud account.
-	AccountStatusCouldNotDetermine AccountStatus = 0
-	// The user’s iCloud account is available.
-	AccountStatusAvailable AccountStatus = 1
-	// The system denies access to the user’s iCloud account.
-	AccountStatusRestricted AccountStatus = 2
-	// The device doesn’t have an iCloud account.
-	AccountStatusNoAccount AccountStatus = 3
-	// The user’s iCloud account is temporarily unavailable.
-	AccountStatusTemporarilyUnavailable AccountStatus = 4
-)
-
-// String returns the AccountStatus constant's name, or its numeric form when the
-// value is not a known constant.
-func (e AccountStatus) String() string {
-	switch e {
-	case AccountStatusCouldNotDetermine:
-		return "AccountStatusCouldNotDetermine"
-	case AccountStatusAvailable:
-		return "AccountStatusAvailable"
-	case AccountStatusRestricted:
-		return "AccountStatusRestricted"
-	case AccountStatusNoAccount:
-		return "AccountStatusNoAccount"
-	case AccountStatusTemporarilyUnavailable:
-		return "AccountStatusTemporarilyUnavailable"
-	default:
-		return fmt.Sprintf("AccountStatus(%d)", int64(e))
-	}
-}
-
-// Deprecated: No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.
-type ApplicationPermissionStatus int64
-
-const (
-	// The app is yet to request the permission.
-	ApplicationPermissionStatusInitialState ApplicationPermissionStatus = 0
-	// An error that occurs while processing the permission request.
-	ApplicationPermissionStatusCouldNotComplete ApplicationPermissionStatus = 1
-	// The user denies the permission.
-	ApplicationPermissionStatusDenied ApplicationPermissionStatus = 2
-	// The user grants the permission.
-	ApplicationPermissionStatusGranted ApplicationPermissionStatus = 3
-)
-
-// String returns the ApplicationPermissionStatus constant's name, or its numeric form when the
-// value is not a known constant.
-func (e ApplicationPermissionStatus) String() string {
-	switch e {
-	case ApplicationPermissionStatusInitialState:
-		return "ApplicationPermissionStatusInitialState"
-	case ApplicationPermissionStatusCouldNotComplete:
-		return "ApplicationPermissionStatusCouldNotComplete"
-	case ApplicationPermissionStatusDenied:
-		return "ApplicationPermissionStatusDenied"
-	case ApplicationPermissionStatusGranted:
-		return "ApplicationPermissionStatusGranted"
-	default:
-		return fmt.Sprintf("ApplicationPermissionStatus(%d)", int64(e))
 	}
 }
 

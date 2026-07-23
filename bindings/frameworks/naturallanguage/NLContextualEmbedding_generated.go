@@ -112,6 +112,14 @@ func (ce *ContextualEmbedding) EmbeddingResultForStringLanguage(str string, lang
 	return ContextualEmbeddingResultFromID(_r), nil
 }
 
+// RequestEmbeddingAssetsWithCompletionHandler requests embedding model assets and downloads them if available.
+func (ce *ContextualEmbedding) RequestEmbeddingAssetsWithCompletionHandler(completionHandler func(ContextualEmbeddingAssetsResult, unsafe.Pointer)) {
+	defer runtime.KeepAlive(ce)
+	objc.Send[objc.ID](objref.IDOf(ce), objc.RegisterName("requestEmbeddingAssetsWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 ContextualEmbeddingAssetsResult, _b1 unsafe.Pointer) {
+		completionHandler(_b0, _b1)
+	}))
+}
+
 // ModelIdentifier returns a string that uniquely identifies the embedding model. Use the same model identifier that you developed and tested your app with to maintain consistent results.
 func (ce *ContextualEmbedding) ModelIdentifier() string {
 	defer runtime.KeepAlive(ce)

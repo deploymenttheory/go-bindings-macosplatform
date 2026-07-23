@@ -6,10 +6,12 @@ package vision
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -49,9 +51,10 @@ func detectTrajectoriesRequestAdopt(id objc.ID) *DetectTrajectoriesRequest {
 	return x
 }
 
-// NewDetectTrajectoriesRequest creates a new DetectTrajectoriesRequest.
-func NewDetectTrajectoriesRequest() *DetectTrajectoriesRequest {
-	_id := objc.Send[objc.ID](objc.ID(_class("VNDetectTrajectoriesRequest")), objc.RegisterName("new"))
+// NewDetectTrajectoriesRequestWithFrameAnalysisSpacingTrajectoryLengthCompletionHandler creates a new request to detect trajectories.
+func NewDetectTrajectoriesRequestWithFrameAnalysisSpacingTrajectoryLengthCompletionHandler(frameAnalysisSpacing coremedia.CMTime, trajectoryLength int, completionHandler func(obj.Object, unsafe.Pointer)) *DetectTrajectoriesRequest {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VNDetectTrajectoriesRequest")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrameAnalysisSpacing:trajectoryLength:completionHandler:"), frameAnalysisSpacing, trajectoryLength, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
 	return detectTrajectoriesRequestAdopt(_id)
 }
 

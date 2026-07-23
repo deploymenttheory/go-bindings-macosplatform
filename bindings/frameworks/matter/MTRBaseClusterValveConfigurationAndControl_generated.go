@@ -7,6 +7,7 @@ package matter
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -58,6 +59,32 @@ func NewMTRBaseClusterValveConfigurationAndControlWithDeviceEndpointIDQueue(devi
 	return mTRBaseClusterValveConfigurationAndControlAdopt(_id)
 }
 
+// OpenWithParamsCompletion command Open This command is used to set the valve to its open position.
+func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) OpenWithParamsCompletion(params *MTRValveConfigurationAndControlClusterOpenParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcvcac)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcvcac), objc.RegisterName("openWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// OpenWithCompletion opens with completion.
+func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) OpenWithCompletion(completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcvcac)
+	objc.Send[objc.ID](objref.IDOf(mbcvcac), objc.RegisterName("openWithCompletion:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// CloseWithParamsCompletion command Close This command is used to set the valve to its closed position.
+func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) CloseWithParamsCompletion(params *MTRValveConfigurationAndControlClusterCloseParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcvcac)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcvcac), objc.RegisterName("closeWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// CloseWithCompletion closes with completion.
+func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) CloseWithCompletion(completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcvcac)
+	objc.Send[objc.ID](objref.IDOf(mbcvcac), objc.RegisterName("closeWithCompletion:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // ReadAttributeOpenDurationWithCompletion reads attribute open duration with completion.
 //
 // ReadAttributeOpenDurationWithCompletion blocks until the operation completes or ctx is cancelled.
@@ -101,7 +128,7 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeOpe
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcvcac), objc.RegisterName("subscribeAttributeOpenDurationWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcvcac), objc.RegisterName("subscribeAttributeOpenDurationWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -137,6 +164,21 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) ReadAttributeDefaultO
 	}
 }
 
+// WriteAttributeDefaultOpenDurationWithValueCompletion writes attribute default open duration with value completion.
+func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) WriteAttributeDefaultOpenDurationWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcvcac)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcvcac), objc.RegisterName("writeAttributeDefaultOpenDurationWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeDefaultOpenDurationWithValueParamsCompletion writes attribute default open duration with value params completion.
+func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) WriteAttributeDefaultOpenDurationWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcvcac)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcvcac), objc.RegisterName("writeAttributeDefaultOpenDurationWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeDefaultOpenDurationWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeDefaultOpenDurationWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -154,7 +196,7 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeDef
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcvcac), objc.RegisterName("subscribeAttributeDefaultOpenDurationWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcvcac), objc.RegisterName("subscribeAttributeDefaultOpenDurationWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -207,7 +249,7 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeAut
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcvcac), objc.RegisterName("subscribeAttributeAutoCloseTimeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcvcac), objc.RegisterName("subscribeAttributeAutoCloseTimeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -260,7 +302,7 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeRem
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcvcac), objc.RegisterName("subscribeAttributeRemainingDurationWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcvcac), objc.RegisterName("subscribeAttributeRemainingDurationWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -313,7 +355,7 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeCur
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcvcac), objc.RegisterName("subscribeAttributeCurrentStateWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcvcac), objc.RegisterName("subscribeAttributeCurrentStateWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -366,7 +408,7 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeTar
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcvcac), objc.RegisterName("subscribeAttributeTargetStateWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcvcac), objc.RegisterName("subscribeAttributeTargetStateWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -419,7 +461,7 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeCur
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcvcac), objc.RegisterName("subscribeAttributeCurrentLevelWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcvcac), objc.RegisterName("subscribeAttributeCurrentLevelWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -472,7 +514,7 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeTar
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcvcac), objc.RegisterName("subscribeAttributeTargetLevelWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcvcac), objc.RegisterName("subscribeAttributeTargetLevelWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -508,6 +550,21 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) ReadAttributeDefaultO
 	}
 }
 
+// WriteAttributeDefaultOpenLevelWithValueCompletion writes attribute default open level with value completion.
+func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) WriteAttributeDefaultOpenLevelWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcvcac)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcvcac), objc.RegisterName("writeAttributeDefaultOpenLevelWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeDefaultOpenLevelWithValueParamsCompletion writes attribute default open level with value params completion.
+func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) WriteAttributeDefaultOpenLevelWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcvcac)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcvcac), objc.RegisterName("writeAttributeDefaultOpenLevelWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeDefaultOpenLevelWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeDefaultOpenLevelWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -525,7 +582,7 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeDef
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcvcac), objc.RegisterName("subscribeAttributeDefaultOpenLevelWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcvcac), objc.RegisterName("subscribeAttributeDefaultOpenLevelWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -578,7 +635,7 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeVal
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcvcac), objc.RegisterName("subscribeAttributeValveFaultWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcvcac), objc.RegisterName("subscribeAttributeValveFaultWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -631,7 +688,7 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeLev
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcvcac), objc.RegisterName("subscribeAttributeLevelStepWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcvcac), objc.RegisterName("subscribeAttributeLevelStepWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -684,7 +741,7 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeGen
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcvcac), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcvcac), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -737,7 +794,7 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeAcc
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcvcac), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcvcac), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -790,7 +847,7 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeAtt
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcvcac), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcvcac), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -843,7 +900,7 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeFea
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcvcac), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcvcac), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -896,7 +953,7 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeClu
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcvcac), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcvcac), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err

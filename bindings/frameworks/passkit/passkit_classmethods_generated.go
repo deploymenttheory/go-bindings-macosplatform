@@ -7,6 +7,7 @@ package passkit
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -99,9 +100,28 @@ func ConfigurationForPassMetadataPrimaryActionCompletion(ctx context.Context, pa
 	}
 }
 
+// DisbursementContactInvalidErrorWithContactFieldLocalizedDescription creates a recipient contact error with the supplied field.
+func DisbursementContactInvalidErrorWithContactFieldLocalizedDescription(field obj.Object, localizedDescription string) unsafe.Pointer {
+	defer runtime.KeepAlive(field)
+	_r := objc.Send[unsafe.Pointer](objc.ID(_class("PKDisbursementRequest")), objc.RegisterName("disbursementContactInvalidErrorWithContactField:localizedDescription:"), objref.IDOf(field), purego.NSString(localizedDescription))
+	return _r
+}
+
+// DisbursementCardUnsupportedError creates an error that indicates that the selected payment pass doesn’t support receiving funds through disbursements.
+func DisbursementCardUnsupportedError() unsafe.Pointer {
+	_r := objc.Send[unsafe.Pointer](objc.ID(_class("PKDisbursementRequest")), objc.RegisterName("disbursementCardUnsupportedError"))
+	return _r
+}
+
 // IsPassLibraryAvailable reports whether returns a Boolean value that indicates whether the pass library is available.
 func IsPassLibraryAvailable() bool {
 	_r := objc.Send[bool](objc.ID(_class("PKPassLibrary")), objc.RegisterName("isPassLibraryAvailable"))
+	return _r
+}
+
+// RequestAutomaticPassPresentationSuppressionWithResponseHandler prevents the device from automatically displaying the Apple Pay interface.
+func RequestAutomaticPassPresentationSuppressionWithResponseHandler(responseHandler func(AutomaticPassPresentationSuppressionResult)) int {
+	_r := objc.Send[int](objc.ID(_class("PKPassLibrary")), objc.RegisterName("requestAutomaticPassPresentationSuppressionWithResponseHandler:"), objc.NewBlock(func(_ objc.Block, _b0 AutomaticPassPresentationSuppressionResult) { responseHandler(_b0) }))
 	return _r
 }
 
@@ -206,6 +226,43 @@ func ButtonWithTypeStyle(buttonType PaymentButtonType, buttonStyle PaymentButton
 func AvailableNetworks() []obj.Object {
 	_arr := objc.Send[objc.ID](objc.ID(_class("PKPaymentRequest")), objc.RegisterName("availableNetworks"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
+// PaymentContactInvalidErrorWithContactFieldLocalizedDescription creates a contact error with the supplied field and user-facing error message.
+func PaymentContactInvalidErrorWithContactFieldLocalizedDescription(field obj.Object, localizedDescription string) unsafe.Pointer {
+	defer runtime.KeepAlive(field)
+	_r := objc.Send[unsafe.Pointer](objc.ID(_class("PKPaymentRequest")), objc.RegisterName("paymentContactInvalidErrorWithContactField:localizedDescription:"), objref.IDOf(field), purego.NSString(localizedDescription))
+	return _r
+}
+
+// PaymentShippingAddressInvalidErrorWithKeyLocalizedDescription creates a shipping address error with the supplied key and user-facing error message.
+func PaymentShippingAddressInvalidErrorWithKeyLocalizedDescription(postalAddressKey string, localizedDescription string) unsafe.Pointer {
+	_r := objc.Send[unsafe.Pointer](objc.ID(_class("PKPaymentRequest")), objc.RegisterName("paymentShippingAddressInvalidErrorWithKey:localizedDescription:"), purego.NSString(postalAddressKey), purego.NSString(localizedDescription))
+	return _r
+}
+
+// PaymentBillingAddressInvalidErrorWithKeyLocalizedDescription creates a billing address error with the supplied key and user-facing error message.
+func PaymentBillingAddressInvalidErrorWithKeyLocalizedDescription(postalAddressKey string, localizedDescription string) unsafe.Pointer {
+	_r := objc.Send[unsafe.Pointer](objc.ID(_class("PKPaymentRequest")), objc.RegisterName("paymentBillingAddressInvalidErrorWithKey:localizedDescription:"), purego.NSString(postalAddressKey), purego.NSString(localizedDescription))
+	return _r
+}
+
+// PaymentShippingAddressUnserviceableErrorWithLocalizedDescription creates an error for an unserviceable address, with the supplied user-facing error message.
+func PaymentShippingAddressUnserviceableErrorWithLocalizedDescription(localizedDescription string) unsafe.Pointer {
+	_r := objc.Send[unsafe.Pointer](objc.ID(_class("PKPaymentRequest")), objc.RegisterName("paymentShippingAddressUnserviceableErrorWithLocalizedDescription:"), purego.NSString(localizedDescription))
+	return _r
+}
+
+// PaymentCouponCodeInvalidErrorWithLocalizedDescription returns an error object that indicates an invalid coupon.
+func PaymentCouponCodeInvalidErrorWithLocalizedDescription(localizedDescription string) unsafe.Pointer {
+	_r := objc.Send[unsafe.Pointer](objc.ID(_class("PKPaymentRequest")), objc.RegisterName("paymentCouponCodeInvalidErrorWithLocalizedDescription:"), purego.NSString(localizedDescription))
+	return _r
+}
+
+// PaymentCouponCodeExpiredErrorWithLocalizedDescription returns an error object that indicates an expired coupon.
+func PaymentCouponCodeExpiredErrorWithLocalizedDescription(localizedDescription string) unsafe.Pointer {
+	_r := objc.Send[unsafe.Pointer](objc.ID(_class("PKPaymentRequest")), objc.RegisterName("paymentCouponCodeExpiredErrorWithLocalizedDescription:"), purego.NSString(localizedDescription))
+	return _r
 }
 
 // SummaryItemWithLabelAmount initializes and returns a summary item with the given label and amount.

@@ -6,6 +6,7 @@ package scenekit
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
@@ -121,4 +122,39 @@ func (htr *HitTestResult) BoneNode() *Node {
 	defer runtime.KeepAlive(htr)
 	_r := objc.Send[objc.ID](objref.IDOf(htr), objc.RegisterName("boneNode"))
 	return NodeFromID(_r)
+}
+
+// SIMDLocalCoordinates returns the SIMD local coordinates.
+func (htr *HitTestResult) SIMDLocalCoordinates() unsafe.Pointer {
+	defer runtime.KeepAlive(htr)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(htr), objc.RegisterName("simdLocalCoordinates"))
+	return _r
+}
+
+// SIMDWorldCoordinates returns the SIMD world coordinates.
+func (htr *HitTestResult) SIMDWorldCoordinates() unsafe.Pointer {
+	defer runtime.KeepAlive(htr)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(htr), objc.RegisterName("simdWorldCoordinates"))
+	return _r
+}
+
+// SIMDLocalNormal returns the SIMD local normal.
+func (htr *HitTestResult) SIMDLocalNormal() unsafe.Pointer {
+	defer runtime.KeepAlive(htr)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(htr), objc.RegisterName("simdLocalNormal"))
+	return _r
+}
+
+// SIMDWorldNormal returns the SIMD world normal.
+func (htr *HitTestResult) SIMDWorldNormal() unsafe.Pointer {
+	defer runtime.KeepAlive(htr)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(htr), objc.RegisterName("simdWorldNormal"))
+	return _r
+}
+
+// SIMDModelTransform returns the SIMD model transform.
+func (htr *HitTestResult) SIMDModelTransform() unsafe.Pointer {
+	defer runtime.KeepAlive(htr)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(htr), objc.RegisterName("simdModelTransform"))
+	return _r
 }

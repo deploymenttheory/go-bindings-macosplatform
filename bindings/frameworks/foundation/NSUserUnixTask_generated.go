@@ -89,6 +89,12 @@ func (uut *UserUnixTask) WithScriptingProperties(scriptingProperties map[string]
 	return uut
 }
 
+// ExecuteWithArgumentsCompletionHandler execute the unix script with the specified arguments.
+func (uut *UserUnixTask) ExecuteWithArgumentsCompletionHandler(arguments []string, handler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(uut)
+	objc.Send[objc.ID](objref.IDOf(uut), objc.RegisterName("executeWithArguments:completionHandler:"), purego.SliceToNSArray(arguments, func(_v string) objc.ID { return purego.NSString(_v) }), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { handler(_b0) }))
+}
+
 // StandardInput returns the standard input.
 func (uut *UserUnixTask) StandardInput() *FileHandle {
 	defer runtime.KeepAlive(uut)

@@ -6,6 +6,7 @@ package matter
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -57,6 +58,22 @@ func NewMTRClusterMessagesWithDeviceEndpointIDQueue(device *MTRDevice, endpointI
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterMessages")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterMessagesAdopt(_id)
+}
+
+// PresentMessagesRequestWithParamsExpectedValuesExpectedValueIntervalCompletion presents messages request with params expected values expected value interval completion.
+func (mcm *MTRClusterMessages) PresentMessagesRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRMessagesClusterPresentMessagesRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcm)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcm), objc.RegisterName("presentMessagesRequestWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// CancelMessagesRequestWithParamsExpectedValuesExpectedValueIntervalCompletion cancels messages request with params expected values expected value interval completion.
+func (mcm *MTRClusterMessages) CancelMessagesRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRMessagesClusterCancelMessagesRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcm)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcm), objc.RegisterName("cancelMessagesRequestWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
 // ReadAttributeMessagesWithParams reads attribute messages with params.

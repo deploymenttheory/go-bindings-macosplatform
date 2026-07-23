@@ -82,6 +82,12 @@ func NewByteSource() *ByteSource {
 	return byteSourceAdopt(_id)
 }
 
+// ReadDataOfLengthFromOffsetToDestinationCompletionHandler reads bytes from a byte source into a buffer.
+func (bs *ByteSource) ReadDataOfLengthFromOffsetToDestinationCompletionHandler(length int, offset int64, dest unsafe.Pointer, completionHandler func(int, unsafe.Pointer)) {
+	defer runtime.KeepAlive(bs)
+	objc.Send[objc.ID](objref.IDOf(bs), objc.RegisterName("readDataOfLength:fromOffset:toDestination:completionHandler:"), length, offset, dest, objc.NewBlock(func(_ objc.Block, _b0 int, _b1 unsafe.Pointer) { completionHandler(_b0, _b1) }))
+}
+
 // ReadDataOfLengthFromOffset reads bytes from a byte source into a data object.
 //
 // ReadDataOfLengthFromOffset blocks until the operation completes or ctx is cancelled.

@@ -335,6 +335,21 @@ func (mv *MapView) ConvertCoordinateToPointToView(coordinate unsafe.Pointer, vie
 
 }
 
+// ConvertPointToCoordinateFromView converts a point in the specified view’s coordinate system to a map coordinate.
+func (mv *MapView) ConvertPointToCoordinateFromView(point corefoundation.CGPoint, view obj.Object) unsafe.Pointer {
+	defer runtime.KeepAlive(mv)
+	defer runtime.KeepAlive(view)
+	var _mainthread0 unsafe.Pointer
+	purego.Main(func() {
+		_mainthread0 = func() unsafe.Pointer {
+			_r := objc.Send[unsafe.Pointer](objref.IDOf(mv), objc.RegisterName("convertPoint:toCoordinateFromView:"), point, objref.IDOf(view))
+			return _r
+		}()
+	})
+	return _mainthread0
+
+}
+
 // SetUserTrackingModeAnimated sets the mode to use for tracking the user’s location, with optional animation.
 func (mv *MapView) SetUserTrackingModeAnimated(mode UserTrackingMode, animated bool) {
 	defer runtime.KeepAlive(mv)
@@ -407,6 +422,20 @@ func (mv *MapView) PreferredConfiguration() *MapConfiguration {
 		_mainthread0 = func() *MapConfiguration {
 			_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("preferredConfiguration"))
 			return MapConfigurationFromID(_r)
+		}()
+	})
+	return _mainthread0
+
+}
+
+// CenterCoordinate returns the center coordinate.
+func (mv *MapView) CenterCoordinate() unsafe.Pointer {
+	defer runtime.KeepAlive(mv)
+	var _mainthread0 unsafe.Pointer
+	purego.Main(func() {
+		_mainthread0 = func() unsafe.Pointer {
+			_r := objc.Send[unsafe.Pointer](objref.IDOf(mv), objc.RegisterName("centerCoordinate"))
+			return _r
 		}()
 	})
 	return _mainthread0

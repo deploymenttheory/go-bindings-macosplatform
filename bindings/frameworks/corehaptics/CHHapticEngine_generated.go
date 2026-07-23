@@ -93,9 +93,15 @@ func NewHapticEngineWithAudioSession(audioSession obj.Object) (result *HapticEng
 	return hapticEngineAdopt(_id), nil
 }
 
+// WithStoppedHandler sets a closure the haptic engine calls when it stops due to external causes.
+func (he *HapticEngine) WithStoppedHandler(stoppedHandler func(HapticEngineStoppedReason)) *HapticEngine {
+	objc.Send[objc.ID](objref.IDOf(he), objc.RegisterName("setStoppedHandler:"), objc.NewBlock(func(_ objc.Block, _b0 HapticEngineStoppedReason) { stoppedHandler(_b0) }))
+	return he
+}
+
 // WithResetHandler sets a block that the haptic engine calls after recovering from a haptic server error.
 func (he *HapticEngine) WithResetHandler(resetHandler func()) *HapticEngine {
-	objc.Send[objc.ID](objref.IDOf(he), objc.RegisterName("setResetHandler:"), resetHandler)
+	objc.Send[objc.ID](objref.IDOf(he), objc.RegisterName("setResetHandler:"), objc.NewBlock(func(_ objc.Block) { resetHandler() }))
 	return he
 }
 
@@ -129,6 +135,12 @@ func (he *HapticEngine) WithAutoShutdownEnabled(autoShutdownEnabled bool) *Hapti
 	return he
 }
 
+// StartWithCompletionHandler asynchronously starts the haptic engine.
+func (he *HapticEngine) StartWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(he)
+	objc.Send[objc.ID](objref.IDOf(he), objc.RegisterName("startWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // StartAndReturnError synchronously starts the haptic engine.
 //
 // StartAndReturnError returns an error if the operation did not succeed.
@@ -140,6 +152,18 @@ func (he *HapticEngine) StartAndReturnError() error {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return nil
+}
+
+// StopWithCompletionHandler asynchronously stops the haptic engine and executes the completion handler once the engine has stopped.
+func (he *HapticEngine) StopWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(he)
+	objc.Send[objc.ID](objref.IDOf(he), objc.RegisterName("stopWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// NotifyWhenPlayersFinished notifies you when all haptic pattern players have finished playing their haptic patterns.
+func (he *HapticEngine) NotifyWhenPlayersFinished(finishedHandler func(unsafe.Pointer) int) {
+	defer runtime.KeepAlive(he)
+	objc.Send[objc.ID](objref.IDOf(he), objc.RegisterName("notifyWhenPlayersFinished:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) int { return finishedHandler(_b0) }))
 }
 
 // RegisterAudioResourceOptions registers an external audio to use as a custom waveform.

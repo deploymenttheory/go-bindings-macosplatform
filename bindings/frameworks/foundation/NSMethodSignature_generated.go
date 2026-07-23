@@ -120,6 +120,13 @@ func (ms *MethodSignature) FrameLength() int {
 	return _r
 }
 
+// MethodReturnType returns the method return type.
+func (ms *MethodSignature) MethodReturnType() unsafe.Pointer {
+	defer runtime.KeepAlive(ms)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(ms), objc.RegisterName("methodReturnType"))
+	return _r
+}
+
 // MethodReturnLength returns the method return length.
 func (ms *MethodSignature) MethodReturnLength() int {
 	defer runtime.KeepAlive(ms)

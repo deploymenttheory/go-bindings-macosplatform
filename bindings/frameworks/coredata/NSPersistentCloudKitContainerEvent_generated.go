@@ -7,6 +7,7 @@ package coredata
 import (
 	"runtime"
 	"time"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -123,5 +124,12 @@ func (pckce *PersistentCloudKitContainerEvent) EndDate() time.Time {
 func (pckce *PersistentCloudKitContainerEvent) Succeeded() bool {
 	defer runtime.KeepAlive(pckce)
 	_r := objc.Send[bool](objref.IDOf(pckce), objc.RegisterName("succeeded"))
+	return _r
+}
+
+// Error returns the error.
+func (pckce *PersistentCloudKitContainerEvent) Error() unsafe.Pointer {
+	defer runtime.KeepAlive(pckce)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(pckce), objc.RegisterName("error"))
 	return _r
 }

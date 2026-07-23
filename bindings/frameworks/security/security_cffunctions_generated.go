@@ -2526,6 +2526,36 @@ func SecTrustCreateWithCertificates(certificates obj.Object, policies obj.Object
 	return nil
 }
 
+var _fnSecTrustEvaluateAsync func(objc.ID, unsafe.Pointer, objc.Block) int32
+
+// SecTrustEvaluateAsync reports an error if the Security framework function SecTrustEvaluateAsync fails.
+func SecTrustEvaluateAsync(trust obj.Object, queue unsafe.Pointer, result func(unsafe.Pointer, SecTrustResultType)) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecTrustEvaluateAsync == nil {
+		ebipurego.RegisterLibFunc(&_fnSecTrustEvaluateAsync, _lib, "SecTrustEvaluateAsync")
+	}
+	_rc := _fnSecTrustEvaluateAsync(objref.IDOf(trust), queue, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 SecTrustResultType) { result(_b0, _b1) }))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnSecTrustEvaluateAsyncWithError func(objc.ID, unsafe.Pointer, objc.Block) int32
+
+// SecTrustEvaluateAsyncWithError reports an error if the Security framework function SecTrustEvaluateAsyncWithError fails.
+func SecTrustEvaluateAsyncWithError(trust obj.Object, queue unsafe.Pointer, result func(unsafe.Pointer, bool, unsafe.Pointer)) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecTrustEvaluateAsyncWithError == nil {
+		ebipurego.RegisterLibFunc(&_fnSecTrustEvaluateAsyncWithError, _lib, "SecTrustEvaluateAsyncWithError")
+	}
+	_rc := _fnSecTrustEvaluateAsyncWithError(objref.IDOf(trust), queue, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 bool, _b2 unsafe.Pointer) { result(_b0, _b1, _b2) }))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
 var _fnSecTrustSetAnchorCertificates func(objc.ID, objc.ID) int32
 
 // SecTrustSetAnchorCertificates reports an error if the Security framework function SecTrustSetAnchorCertificates fails.

@@ -6,7 +6,9 @@ package healthkit
 
 import (
 	"runtime"
+	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -48,9 +50,14 @@ func documentQueryAdopt(id objc.ID) *DocumentQuery {
 	return x
 }
 
-// NewDocumentQuery creates a new DocumentQuery.
-func NewDocumentQuery() *DocumentQuery {
-	_id := objc.Send[objc.ID](objc.ID(_class("HKDocumentQuery")), objc.RegisterName("new"))
+// NewDocumentQueryWithDocumentTypePredicateLimitSortDescriptorsIncludeDocumentDataResultsHandler instantiates and returns a document query.
+func NewDocumentQueryWithDocumentTypePredicateLimitSortDescriptorsIncludeDocumentDataResultsHandler(documentType *DocumentType, predicate obj.Object, limit int, sortDescriptors []*foundation.SortDescriptor, includeDocumentData bool, resultsHandler func(obj.Object, obj.Object, bool, unsafe.Pointer)) *DocumentQuery {
+	defer runtime.KeepAlive(documentType)
+	defer runtime.KeepAlive(predicate)
+	_alloc := objc.Send[objc.ID](objc.ID(_class("HKDocumentQuery")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDocumentType:predicate:limit:sortDescriptors:includeDocumentData:resultsHandler:"), objref.IDOf(documentType), objref.IDOf(predicate), limit, purego.SliceToNSArray(sortDescriptors, func(_v *foundation.SortDescriptor) objc.ID { return objref.IDOf(_v) }), includeDocumentData, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 bool, _b3 unsafe.Pointer) {
+		resultsHandler(obj.Wrap(_b0), obj.Wrap(_b1), _b2, _b3)
+	}))
 	return documentQueryAdopt(_id)
 }
 

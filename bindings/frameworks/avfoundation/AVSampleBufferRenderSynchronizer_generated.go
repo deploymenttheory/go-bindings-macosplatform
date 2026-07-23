@@ -161,3 +161,10 @@ func (sbrs *SampleBufferRenderSynchronizer) RemoveTimeObserver(observer obj.Obje
 	defer runtime.KeepAlive(observer)
 	objc.Send[objc.ID](objref.IDOf(sbrs), objc.RegisterName("removeTimeObserver:"), objref.IDOf(observer))
 }
+
+// IntendedSpatialAudioExperience returns the intended spatial audio experience.
+func (sbrs *SampleBufferRenderSynchronizer) IntendedSpatialAudioExperience() unsafe.Pointer {
+	defer runtime.KeepAlive(sbrs)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(sbrs), objc.RegisterName("intendedSpatialAudioExperience"))
+	return _r
+}

@@ -6,9 +6,11 @@ package vision
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -53,6 +55,14 @@ func NewTrackRectangleRequestWithRectangleObservation(observation *RectangleObse
 	defer runtime.KeepAlive(observation)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VNTrackRectangleRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRectangleObservation:"), objref.IDOf(observation))
+	return trackRectangleRequestAdopt(_id)
+}
+
+// NewTrackRectangleRequestWithRectangleObservationCompletionHandler creates a new rectangle tracking request with a rectangle observation.
+func NewTrackRectangleRequestWithRectangleObservationCompletionHandler(observation *RectangleObservation, completionHandler func(obj.Object, unsafe.Pointer)) *TrackRectangleRequest {
+	defer runtime.KeepAlive(observation)
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VNTrackRectangleRequest")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRectangleObservation:completionHandler:"), objref.IDOf(observation), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
 	return trackRectangleRequestAdopt(_id)
 }
 

@@ -125,6 +125,12 @@ func (apear *AuthorizationProviderExtensionAuthorizationRequest) CompleteWithErr
 	objc.Send[objc.ID](objref.IDOf(apear), objc.RegisterName("completeWithError:"), err)
 }
 
+// PresentAuthorizationViewControllerWithCompletion asks the authorization service to show the extension’s view controller to the user.
+func (apear *AuthorizationProviderExtensionAuthorizationRequest) PresentAuthorizationViewControllerWithCompletion(completion func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(apear)
+	objc.Send[objc.ID](objref.IDOf(apear), objc.RegisterName("presentAuthorizationViewControllerWithCompletion:"), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { completion(_b0, _b1) }))
+}
+
 // URL returns request URL with all components.
 func (apear *AuthorizationProviderExtensionAuthorizationRequest) URL() string {
 	defer runtime.KeepAlive(apear)

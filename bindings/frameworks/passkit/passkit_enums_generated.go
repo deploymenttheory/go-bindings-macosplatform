@@ -153,6 +153,41 @@ func (e ApplePayLaterAvailability) String() string {
 	}
 }
 
+// The result of an attempt to suppress automatic pass presentation.
+type AutomaticPassPresentationSuppressionResult uint64
+
+const (
+	// The device doesn’t support the suppression of automatic pass presentation.
+	AutomaticPassPresentationSuppressionResultNotSupported AutomaticPassPresentationSuppressionResult = 0
+	// The device is already presenting passes.
+	AutomaticPassPresentationSuppressionResultAlreadyPresenting AutomaticPassPresentationSuppressionResult = 1
+	// The user prevented the suppression, or an internal error occurred.
+	AutomaticPassPresentationSuppressionResultDenied AutomaticPassPresentationSuppressionResult = 2
+	// The system canceled the suppression before calling the response handler.
+	AutomaticPassPresentationSuppressionResultCancelled AutomaticPassPresentationSuppressionResult = 3
+	// Suppression of automatic presentation successful.
+	AutomaticPassPresentationSuppressionResultSuccess AutomaticPassPresentationSuppressionResult = 4
+)
+
+// String returns the AutomaticPassPresentationSuppressionResult constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AutomaticPassPresentationSuppressionResult) String() string {
+	switch e {
+	case AutomaticPassPresentationSuppressionResultNotSupported:
+		return "AutomaticPassPresentationSuppressionResultNotSupported"
+	case AutomaticPassPresentationSuppressionResultAlreadyPresenting:
+		return "AutomaticPassPresentationSuppressionResultAlreadyPresenting"
+	case AutomaticPassPresentationSuppressionResultDenied:
+		return "AutomaticPassPresentationSuppressionResultDenied"
+	case AutomaticPassPresentationSuppressionResultCancelled:
+		return "AutomaticPassPresentationSuppressionResultCancelled"
+	case AutomaticPassPresentationSuppressionResultSuccess:
+		return "AutomaticPassPresentationSuppressionResultSuccess"
+	default:
+		return fmt.Sprintf("AutomaticPassPresentationSuppressionResult(%d)", int64(e))
+	}
+}
+
 type BarcodeEventConfigurationDataType int64
 
 const (
@@ -216,6 +251,33 @@ func (e MerchantCapability) String() string {
 		return "0"
 	}
 	return strings.Join(parts, "|")
+}
+
+// Statuses that PassKit uses when it adds passes to the pass library.
+type PassLibraryAddPassesStatus int64
+
+const (
+	// A status that occurs when the user successfully adds one or more passes.
+	PassLibraryDidAddPasses PassLibraryAddPassesStatus = 0
+	// A status that occurs when the app prompts the user to review the passes.
+	PassLibraryShouldReviewPasses PassLibraryAddPassesStatus = 1
+	// A status that occurs when the user cancels the addition of passes.
+	PassLibraryDidCancelAddPasses PassLibraryAddPassesStatus = 2
+)
+
+// String returns the PassLibraryAddPassesStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PassLibraryAddPassesStatus) String() string {
+	switch e {
+	case PassLibraryDidAddPasses:
+		return "PassLibraryDidAddPasses"
+	case PassLibraryShouldReviewPasses:
+		return "PassLibraryShouldReviewPasses"
+	case PassLibraryDidCancelAddPasses:
+		return "PassLibraryDidCancelAddPasses"
+	default:
+		return fmt.Sprintf("PassLibraryAddPassesStatus(%d)", int64(e))
+	}
 }
 
 type PassLibraryAuthorizationStatus int64
@@ -1603,41 +1665,6 @@ func (e AddSecureElementPassErrorCode) String() string {
 	}
 }
 
-// The result of an attempt to suppress automatic pass presentation.
-type AutomaticPassPresentationSuppressionResult uint64
-
-const (
-	// The device doesn’t support the suppression of automatic pass presentation.
-	AutomaticPassPresentationSuppressionResultNotSupported AutomaticPassPresentationSuppressionResult = 0
-	// The device is already presenting passes.
-	AutomaticPassPresentationSuppressionResultAlreadyPresenting AutomaticPassPresentationSuppressionResult = 1
-	// The user prevented the suppression, or an internal error occurred.
-	AutomaticPassPresentationSuppressionResultDenied AutomaticPassPresentationSuppressionResult = 2
-	// The system canceled the suppression before calling the response handler.
-	AutomaticPassPresentationSuppressionResultCancelled AutomaticPassPresentationSuppressionResult = 3
-	// Suppression of automatic presentation successful.
-	AutomaticPassPresentationSuppressionResultSuccess AutomaticPassPresentationSuppressionResult = 4
-)
-
-// String returns the AutomaticPassPresentationSuppressionResult constant's name, or its numeric form when the
-// value is not a known constant.
-func (e AutomaticPassPresentationSuppressionResult) String() string {
-	switch e {
-	case AutomaticPassPresentationSuppressionResultNotSupported:
-		return "AutomaticPassPresentationSuppressionResultNotSupported"
-	case AutomaticPassPresentationSuppressionResultAlreadyPresenting:
-		return "AutomaticPassPresentationSuppressionResultAlreadyPresenting"
-	case AutomaticPassPresentationSuppressionResultDenied:
-		return "AutomaticPassPresentationSuppressionResultDenied"
-	case AutomaticPassPresentationSuppressionResultCancelled:
-		return "AutomaticPassPresentationSuppressionResultCancelled"
-	case AutomaticPassPresentationSuppressionResultSuccess:
-		return "AutomaticPassPresentationSuppressionResultSuccess"
-	default:
-		return fmt.Sprintf("AutomaticPassPresentationSuppressionResult(%d)", int64(e))
-	}
-}
-
 // Values that describe errors that can occur while processing the disbursement.
 type DisbursementErrorCode int64
 
@@ -1689,33 +1716,6 @@ func (e PassKitErrorCode) String() string {
 		return "NotEntitledError"
 	default:
 		return fmt.Sprintf("PassKitErrorCode(%d)", int64(e))
-	}
-}
-
-// Statuses that PassKit uses when it adds passes to the pass library.
-type PassLibraryAddPassesStatus int64
-
-const (
-	// A status that occurs when the user successfully adds one or more passes.
-	PassLibraryDidAddPasses PassLibraryAddPassesStatus = 0
-	// A status that occurs when the app prompts the user to review the passes.
-	PassLibraryShouldReviewPasses PassLibraryAddPassesStatus = 1
-	// A status that occurs when the user cancels the addition of passes.
-	PassLibraryDidCancelAddPasses PassLibraryAddPassesStatus = 2
-)
-
-// String returns the PassLibraryAddPassesStatus constant's name, or its numeric form when the
-// value is not a known constant.
-func (e PassLibraryAddPassesStatus) String() string {
-	switch e {
-	case PassLibraryDidAddPasses:
-		return "PassLibraryDidAddPasses"
-	case PassLibraryShouldReviewPasses:
-		return "PassLibraryShouldReviewPasses"
-	case PassLibraryDidCancelAddPasses:
-		return "PassLibraryDidCancelAddPasses"
-	default:
-		return fmt.Sprintf("PassLibraryAddPassesStatus(%d)", int64(e))
 	}
 }
 

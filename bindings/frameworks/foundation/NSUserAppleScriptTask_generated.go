@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -65,6 +66,13 @@ func (uast *UserAppleScriptTask) WithObservationInfo(observationInfo unsafe.Poin
 func (uast *UserAppleScriptTask) WithScriptingProperties(scriptingProperties map[string]obj.Object) *UserAppleScriptTask {
 	objc.Send[objc.ID](objref.IDOf(uast), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return uast
+}
+
+// ExecuteWithAppleEventCompletionHandler execute the AppleScript script by sending it the specified Apple event.
+func (uast *UserAppleScriptTask) ExecuteWithAppleEventCompletionHandler(event *AppleEventDescriptor, handler func(obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(uast)
+	defer runtime.KeepAlive(event)
+	objc.Send[objc.ID](objref.IDOf(uast), objc.RegisterName("executeWithAppleEvent:completionHandler:"), objref.IDOf(event), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { handler(obj.Wrap(_b0), _b1) }))
 }
 
 var _ UserScriptTaskProvider = (*UserAppleScriptTask)(nil)

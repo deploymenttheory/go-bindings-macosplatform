@@ -5,7 +5,11 @@
 package healthkit
 
 import (
+	"runtime"
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -45,9 +49,13 @@ func electrocardiogramQueryAdopt(id objc.ID) *ElectrocardiogramQuery {
 	return x
 }
 
-// NewElectrocardiogramQuery creates a new ElectrocardiogramQuery.
-func NewElectrocardiogramQuery() *ElectrocardiogramQuery {
-	_id := objc.Send[objc.ID](objc.ID(_class("HKElectrocardiogramQuery")), objc.RegisterName("new"))
+// NewElectrocardiogramQueryWithElectrocardiogramDataHandler creates a new electrocardiogram query object.
+func NewElectrocardiogramQueryWithElectrocardiogramDataHandler(electrocardiogram *Electrocardiogram, dataHandler func(obj.Object, obj.Object, bool, unsafe.Pointer)) *ElectrocardiogramQuery {
+	defer runtime.KeepAlive(electrocardiogram)
+	_alloc := objc.Send[objc.ID](objc.ID(_class("HKElectrocardiogramQuery")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithElectrocardiogram:dataHandler:"), objref.IDOf(electrocardiogram), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 bool, _b3 unsafe.Pointer) {
+		dataHandler(obj.Wrap(_b0), obj.Wrap(_b1), _b2, _b3)
+	}))
 	return electrocardiogramQueryAdopt(_id)
 }
 

@@ -113,3 +113,10 @@ func (abc *AnimationBindComponent) JointPaths() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(abc), objc.RegisterName("jointPaths"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
+
+// GeometryBindTransform returns the geometry bind transform.
+func (abc *AnimationBindComponent) GeometryBindTransform() unsafe.Pointer {
+	defer runtime.KeepAlive(abc)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(abc), objc.RegisterName("geometryBindTransform"))
+	return _r
+}

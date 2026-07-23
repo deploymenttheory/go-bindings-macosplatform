@@ -115,6 +115,13 @@ func (an *AudioNode) NameForOutputBus(bus int) string {
 	return purego.GoString(_r)
 }
 
+// InstallTapOnBusBufferSizeFormatBlock installs an audio tap on a bus you specify to record, monitor, and observe the output of the node.
+func (an *AudioNode) InstallTapOnBusBufferSizeFormatBlock(bus int, bufferSize uint32, format *AudioFormat, tapBlock func(obj.Object, obj.Object)) {
+	defer runtime.KeepAlive(an)
+	defer runtime.KeepAlive(format)
+	objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("installTapOnBus:bufferSize:format:block:"), bus, bufferSize, objref.IDOf(format), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { tapBlock(obj.Wrap(_b0), obj.Wrap(_b1)) }))
+}
+
 // RemoveTapOnBus removes an audio tap on a bus you specify.
 func (an *AudioNode) RemoveTapOnBus(bus int) {
 	defer runtime.KeepAlive(an)

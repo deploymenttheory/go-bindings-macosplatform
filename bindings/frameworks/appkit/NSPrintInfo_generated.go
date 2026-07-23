@@ -6,6 +6,7 @@ package appkit
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
@@ -201,6 +202,27 @@ func (pi *PrintInfo) Dictionary() obj.Object {
 func (pi *PrintInfo) SetUpPrintOperationDefaultValues() {
 	defer runtime.KeepAlive(pi)
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setUpPrintOperationDefaultValues"))
+}
+
+// PMPrintSession returns a Core Printing object configured with the print info’s session information.
+func (pi *PrintInfo) PMPrintSession() unsafe.Pointer {
+	defer runtime.KeepAlive(pi)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(pi), objc.RegisterName("PMPrintSession"))
+	return _r
+}
+
+// PMPageFormat returns a Core Printing object configured with the print info’s page format information.
+func (pi *PrintInfo) PMPageFormat() unsafe.Pointer {
+	defer runtime.KeepAlive(pi)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(pi), objc.RegisterName("PMPageFormat"))
+	return _r
+}
+
+// PMPrintSettings returns a Core Printing object configured with the print info’s print settings information
+func (pi *PrintInfo) PMPrintSettings() unsafe.Pointer {
+	defer runtime.KeepAlive(pi)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(pi), objc.RegisterName("PMPrintSettings"))
+	return _r
 }
 
 // UpdateFromPMPageFormat synchronizes the print info’s page format information with information from its associated page format object.

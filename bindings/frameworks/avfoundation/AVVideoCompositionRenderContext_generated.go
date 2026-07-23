@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -78,6 +79,13 @@ func (vcrc *VideoCompositionRenderContext) String() string {
 func NewVideoCompositionRenderContext() *VideoCompositionRenderContext {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVVideoCompositionRenderContext")), objc.RegisterName("new"))
 	return videoCompositionRenderContextAdopt(_id)
+}
+
+// NewPixelBuffer returns a pixel buffer to use for rendering.
+func (vcrc *VideoCompositionRenderContext) NewPixelBuffer() unsafe.Pointer {
+	defer runtime.KeepAlive(vcrc)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(vcrc), objc.RegisterName("newPixelBuffer"))
+	return _r
 }
 
 // Size indicates the width and height for rendering frames.

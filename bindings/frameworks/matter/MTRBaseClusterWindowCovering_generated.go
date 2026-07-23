@@ -7,6 +7,7 @@ package matter
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -67,6 +68,73 @@ func NewMTRBaseClusterWindowCoveringWithDeviceEndpointQueue(device *MTRBaseDevic
 	return mTRBaseClusterWindowCoveringAdopt(_id)
 }
 
+// UpOrOpenWithParamsCompletion command UpOrOpen Moves window covering to InstalledOpenLimitLift and InstalledOpenLimitTilt
+func (mbcwc *MTRBaseClusterWindowCovering) UpOrOpenWithParamsCompletion(params *MTRWindowCoveringClusterUpOrOpenParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("upOrOpenWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// UpOrOpenWithCompletion wraps the corresponding Objective-C method.
+func (mbcwc *MTRBaseClusterWindowCovering) UpOrOpenWithCompletion(completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcwc)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("upOrOpenWithCompletion:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// DownOrCloseWithParamsCompletion command DownOrClose Moves window covering to InstalledClosedLimitLift and InstalledCloseLimitTilt
+func (mbcwc *MTRBaseClusterWindowCovering) DownOrCloseWithParamsCompletion(params *MTRWindowCoveringClusterDownOrCloseParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("downOrCloseWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// DownOrCloseWithCompletion wraps the corresponding Objective-C method.
+func (mbcwc *MTRBaseClusterWindowCovering) DownOrCloseWithCompletion(completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcwc)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("downOrCloseWithCompletion:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// StopMotionWithParamsCompletion command StopMotion Stop any adjusting of window covering
+func (mbcwc *MTRBaseClusterWindowCovering) StopMotionWithParamsCompletion(params *MTRWindowCoveringClusterStopMotionParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("stopMotionWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// StopMotionWithCompletion stops motion with completion.
+func (mbcwc *MTRBaseClusterWindowCovering) StopMotionWithCompletion(completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcwc)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("stopMotionWithCompletion:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// GoToLiftValueWithParamsCompletion command GoToLiftValue Go to lift value specified
+func (mbcwc *MTRBaseClusterWindowCovering) GoToLiftValueWithParamsCompletion(params *MTRWindowCoveringClusterGoToLiftValueParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("goToLiftValueWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// GoToLiftPercentageWithParamsCompletion command GoToLiftPercentage Go to lift percentage specified
+func (mbcwc *MTRBaseClusterWindowCovering) GoToLiftPercentageWithParamsCompletion(params *MTRWindowCoveringClusterGoToLiftPercentageParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("goToLiftPercentageWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// GoToTiltValueWithParamsCompletion command GoToTiltValue Go to tilt value specified
+func (mbcwc *MTRBaseClusterWindowCovering) GoToTiltValueWithParamsCompletion(params *MTRWindowCoveringClusterGoToTiltValueParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("goToTiltValueWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// GoToTiltPercentageWithParamsCompletion command GoToTiltPercentage Go to tilt percentage specified
+func (mbcwc *MTRBaseClusterWindowCovering) GoToTiltPercentageWithParamsCompletion(params *MTRWindowCoveringClusterGoToTiltPercentageParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("goToTiltPercentageWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // ReadAttributeTypeWithCompletion reads attribute type with completion.
 //
 // ReadAttributeTypeWithCompletion blocks until the operation completes or ctx is cancelled.
@@ -110,7 +178,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeTypeWithParamsSubsc
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeTypeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeTypeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -163,7 +231,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributePhysicalClosedLimit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributePhysicalClosedLimitLiftWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributePhysicalClosedLimitLiftWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -216,7 +284,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributePhysicalClosedLimit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributePhysicalClosedLimitTiltWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributePhysicalClosedLimitTiltWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -269,7 +337,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLift
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeCurrentPositionLiftWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeCurrentPositionLiftWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -322,7 +390,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTilt
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeCurrentPositionTiltWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeCurrentPositionTiltWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -375,7 +443,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeNumberOfActuationsL
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeNumberOfActuationsLiftWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeNumberOfActuationsLiftWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -428,7 +496,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeNumberOfActuationsT
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeNumberOfActuationsTiltWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeNumberOfActuationsTiltWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -481,7 +549,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeConfigStatusWithPar
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeConfigStatusWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeConfigStatusWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -534,7 +602,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLift
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeCurrentPositionLiftPercentageWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeCurrentPositionLiftPercentageWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -587,7 +655,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTilt
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeCurrentPositionTiltPercentageWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeCurrentPositionTiltPercentageWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -640,7 +708,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeOperationalStatusWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeOperationalStatusWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeOperationalStatusWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -693,7 +761,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeTargetPositionLiftP
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeTargetPositionLiftPercent100thsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeTargetPositionLiftPercent100thsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -746,7 +814,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeTargetPositionTiltP
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeTargetPositionTiltPercent100thsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeTargetPositionTiltPercent100thsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -799,7 +867,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeEndProductTypeWithP
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeEndProductTypeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeEndProductTypeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -852,7 +920,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLift
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeCurrentPositionLiftPercent100thsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeCurrentPositionLiftPercent100thsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -905,7 +973,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTilt
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeCurrentPositionTiltPercent100thsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeCurrentPositionTiltPercent100thsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -958,7 +1026,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledOpenLimitL
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeInstalledOpenLimitLiftWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeInstalledOpenLimitLiftWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1011,7 +1079,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledClosedLimi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeInstalledClosedLimitLiftWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeInstalledClosedLimitLiftWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1064,7 +1132,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledOpenLimitT
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeInstalledOpenLimitTiltWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeInstalledOpenLimitTiltWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1117,7 +1185,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledClosedLimi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeInstalledClosedLimitTiltWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeInstalledClosedLimitTiltWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1153,6 +1221,21 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeModeWithCompletion(ctx c
 	}
 }
 
+// WriteAttributeModeWithValueCompletion writes attribute mode with value completion.
+func (mbcwc *MTRBaseClusterWindowCovering) WriteAttributeModeWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("writeAttributeModeWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeModeWithValueParamsCompletion writes attribute mode with value params completion.
+func (mbcwc *MTRBaseClusterWindowCovering) WriteAttributeModeWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("writeAttributeModeWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeModeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeModeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1170,7 +1253,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeModeWithParamsSubsc
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeModeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeModeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1223,7 +1306,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeSafetyStatusWithPar
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeSafetyStatusWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeSafetyStatusWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1276,7 +1359,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeGeneratedCommandLis
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1329,7 +1412,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeAcceptedCommandList
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1382,7 +1465,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeAttributeListWithPa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1435,7 +1518,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeFeatureMapWithParam
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1488,7 +1571,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeClusterRevisionWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1496,6 +1579,73 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeClusterRevisionWith
 		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
+}
+
+// UpOrOpenWithParamsCompletionHandler wraps the corresponding Objective-C method.
+func (mbcwc *MTRBaseClusterWindowCovering) UpOrOpenWithParamsCompletionHandler(params *MTRWindowCoveringClusterUpOrOpenParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("upOrOpenWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// UpOrOpenWithCompletionHandler wraps the corresponding Objective-C method.
+func (mbcwc *MTRBaseClusterWindowCovering) UpOrOpenWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcwc)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("upOrOpenWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// DownOrCloseWithParamsCompletionHandler wraps the corresponding Objective-C method.
+func (mbcwc *MTRBaseClusterWindowCovering) DownOrCloseWithParamsCompletionHandler(params *MTRWindowCoveringClusterDownOrCloseParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("downOrCloseWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// DownOrCloseWithCompletionHandler wraps the corresponding Objective-C method.
+func (mbcwc *MTRBaseClusterWindowCovering) DownOrCloseWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcwc)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("downOrCloseWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// StopMotionWithParamsCompletionHandler stops motion with params completion handler.
+func (mbcwc *MTRBaseClusterWindowCovering) StopMotionWithParamsCompletionHandler(params *MTRWindowCoveringClusterStopMotionParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("stopMotionWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// StopMotionWithCompletionHandler stops motion with completion handler.
+func (mbcwc *MTRBaseClusterWindowCovering) StopMotionWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcwc)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("stopMotionWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// GoToLiftValueWithParamsCompletionHandler wraps the corresponding Objective-C method.
+func (mbcwc *MTRBaseClusterWindowCovering) GoToLiftValueWithParamsCompletionHandler(params *MTRWindowCoveringClusterGoToLiftValueParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("goToLiftValueWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// GoToLiftPercentageWithParamsCompletionHandler wraps the corresponding Objective-C method.
+func (mbcwc *MTRBaseClusterWindowCovering) GoToLiftPercentageWithParamsCompletionHandler(params *MTRWindowCoveringClusterGoToLiftPercentageParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("goToLiftPercentageWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// GoToTiltValueWithParamsCompletionHandler wraps the corresponding Objective-C method.
+func (mbcwc *MTRBaseClusterWindowCovering) GoToTiltValueWithParamsCompletionHandler(params *MTRWindowCoveringClusterGoToTiltValueParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("goToTiltValueWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// GoToTiltPercentageWithParamsCompletionHandler wraps the corresponding Objective-C method.
+func (mbcwc *MTRBaseClusterWindowCovering) GoToTiltPercentageWithParamsCompletionHandler(params *MTRWindowCoveringClusterGoToTiltPercentageParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("goToTiltPercentageWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
 }
 
 // ReadAttributeType reads attribute type.
@@ -1543,7 +1693,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeTypeWithMinInterval
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeTypeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeTypeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1598,7 +1748,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributePhysicalClosedLimit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributePhysicalClosedLimitLiftWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributePhysicalClosedLimitLiftWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1653,7 +1803,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributePhysicalClosedLimit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributePhysicalClosedLimitTiltWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributePhysicalClosedLimitTiltWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1708,7 +1858,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLift
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeCurrentPositionLiftWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeCurrentPositionLiftWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1763,7 +1913,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTilt
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeCurrentPositionTiltWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeCurrentPositionTiltWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1818,7 +1968,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeNumberOfActuationsL
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeNumberOfActuationsLiftWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeNumberOfActuationsLiftWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1873,7 +2023,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeNumberOfActuationsT
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeNumberOfActuationsTiltWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeNumberOfActuationsTiltWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1928,7 +2078,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeConfigStatusWithMin
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeConfigStatusWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeConfigStatusWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1983,7 +2133,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLift
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeCurrentPositionLiftPercentageWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeCurrentPositionLiftPercentageWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2038,7 +2188,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTilt
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeCurrentPositionTiltPercentageWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeCurrentPositionTiltPercentageWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2093,7 +2243,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeOperationalStatusWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeOperationalStatusWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeOperationalStatusWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2148,7 +2298,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeTargetPositionLiftP
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeTargetPositionLiftPercent100thsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeTargetPositionLiftPercent100thsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2203,7 +2353,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeTargetPositionTiltP
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeTargetPositionTiltPercent100thsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeTargetPositionTiltPercent100thsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2258,7 +2408,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeEndProductTypeWithM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeEndProductTypeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeEndProductTypeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2313,7 +2463,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLift
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeCurrentPositionLiftPercent100thsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeCurrentPositionLiftPercent100thsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2368,7 +2518,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTilt
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeCurrentPositionTiltPercent100thsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeCurrentPositionTiltPercent100thsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2423,7 +2573,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledOpenLimitL
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeInstalledOpenLimitLiftWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeInstalledOpenLimitLiftWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2478,7 +2628,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledClosedLimi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeInstalledClosedLimitLiftWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeInstalledClosedLimitLiftWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2533,7 +2683,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledOpenLimitT
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeInstalledOpenLimitTiltWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeInstalledOpenLimitTiltWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2588,7 +2738,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledClosedLimi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeInstalledClosedLimitTiltWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeInstalledClosedLimitTiltWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2624,6 +2774,21 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeMode(ctx context.Context
 	}
 }
 
+// WriteAttributeModeWithValueCompletionHandler writes attribute mode with value completion handler.
+func (mbcwc *MTRBaseClusterWindowCovering) WriteAttributeModeWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("writeAttributeModeWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeModeWithValueParamsCompletionHandler writes attribute mode with value params completion handler.
+func (mbcwc *MTRBaseClusterWindowCovering) WriteAttributeModeWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("writeAttributeModeWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -2643,7 +2808,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeModeWithMinInterval
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeModeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeModeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2698,7 +2863,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeSafetyStatusWithMin
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeSafetyStatusWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeSafetyStatusWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2753,7 +2918,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeGeneratedCommandLis
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeGeneratedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeGeneratedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2808,7 +2973,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeAcceptedCommandList
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeAcceptedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeAcceptedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2863,7 +3028,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeAttributeListWithMi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeAttributeListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeAttributeListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2918,7 +3083,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeFeatureMapWithMinIn
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeFeatureMapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeFeatureMapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2973,7 +3138,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeClusterRevisionWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeClusterRevisionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeClusterRevisionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err

@@ -5,11 +5,10 @@
 package cloudkit
 
 import (
-	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/rt"
@@ -83,28 +82,18 @@ func NewSystemSharingUIObserverWithContainer(container *Container) *SystemSharin
 	return systemSharingUIObserverAdopt(_id)
 }
 
-// SetSystemSharingUIDidStopSharingBlock wraps the corresponding Objective-C method.
-//
-// SetSystemSharingUIDidStopSharingBlock blocks until the operation completes or ctx is cancelled.
-func (ssuo *SystemSharingUIObserver) SetSystemSharingUIDidStopSharingBlock(ctx context.Context) (result *RecordID, err error) {
-	defer runtime.KeepAlive(ssuo)
-	type _result struct {
-		val *RecordID
-		err error
-	}
-	_ch := make(chan _result, 1)
-	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
-		var _o _result
-		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
-		_o.val = RecordIDFromID(_p0)
-		_ch <- _o
-	})
-	objc.Send[objc.ID](objref.IDOf(ssuo), objc.RegisterName("setSystemSharingUIDidStopSharingBlock:"), _block)
-	select {
-	case _o := <-_ch:
-		return _o.val, _o.err
-	case <-ctx.Done():
-		var _zero *RecordID
-		return _zero, ctx.Err()
-	}
+// WithSystemSharingUIDidSaveShareBlock sets a callback block the system invokes after the success or failure of a share save by the system sharing UI.
+func (ssuo *SystemSharingUIObserver) WithSystemSharingUIDidSaveShareBlock(systemSharingUIDidSaveShareBlock func(obj.Object, obj.Object, unsafe.Pointer)) *SystemSharingUIObserver {
+	objc.Send[objc.ID](objref.IDOf(ssuo), objc.RegisterName("setSystemSharingUIDidSaveShareBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
+		systemSharingUIDidSaveShareBlock(obj.Wrap(_b0), obj.Wrap(_b1), _b2)
+	}))
+	return ssuo
+}
+
+// WithSystemSharingUIDidStopSharingBlock sets a callback block the system invokes after the success or failure of a share delete by the system sharing UI.
+func (ssuo *SystemSharingUIObserver) WithSystemSharingUIDidStopSharingBlock(systemSharingUIDidStopSharingBlock func(obj.Object, unsafe.Pointer)) *SystemSharingUIObserver {
+	objc.Send[objc.ID](objref.IDOf(ssuo), objc.RegisterName("setSystemSharingUIDidStopSharingBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) {
+		systemSharingUIDidStopSharingBlock(obj.Wrap(_b0), _b1)
+	}))
+	return ssuo
 }

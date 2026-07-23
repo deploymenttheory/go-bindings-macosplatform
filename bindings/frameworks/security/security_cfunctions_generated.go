@@ -2994,15 +2994,15 @@ func SecAccessGetTypeID() int {
 	return _fnSecAccessGetTypeID()
 }
 
-var _fnSecAddSharedWebCredential func(objc.ID, objc.ID, objc.ID, unsafe.Pointer)
+var _fnSecAddSharedWebCredential func(objc.ID, objc.ID, objc.ID, objc.Block)
 
 // SecAddSharedWebCredential calls the Security framework function SecAddSharedWebCredential.
-func SecAddSharedWebCredential(fqdn obj.Object, account obj.Object, password obj.Object, completionHandler unsafe.Pointer) {
+func SecAddSharedWebCredential(fqdn obj.Object, account obj.Object, password obj.Object, completionHandler func(unsafe.Pointer)) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecAddSharedWebCredential == nil {
 		ebipurego.RegisterLibFunc(&_fnSecAddSharedWebCredential, _lib, "SecAddSharedWebCredential")
 	}
-	_fnSecAddSharedWebCredential(objref.IDOf(fqdn), objref.IDOf(account), objref.IDOf(password), completionHandler)
+	_fnSecAddSharedWebCredential(objref.IDOf(fqdn), objref.IDOf(account), objref.IDOf(password), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
 }
 
 var _fnSecCertificateCopyData func(objc.ID) objc.ID
@@ -3405,15 +3405,15 @@ func SecKeyCopyPublicKey(key obj.Object) obj.Object {
 	return obj.Wrap(_ret)
 }
 
-var _fnSecKeyGeneratePairAsync func(objc.ID, unsafe.Pointer, unsafe.Pointer)
+var _fnSecKeyGeneratePairAsync func(objc.ID, unsafe.Pointer, objc.Block)
 
 // SecKeyGeneratePairAsync calls the Security framework function SecKeyGeneratePairAsync.
-func SecKeyGeneratePairAsync(parameters obj.Object, deliveryQueue unsafe.Pointer, result unsafe.Pointer) {
+func SecKeyGeneratePairAsync(parameters obj.Object, deliveryQueue unsafe.Pointer, result func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeyGeneratePairAsync == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeyGeneratePairAsync, _lib, "SecKeyGeneratePairAsync")
 	}
-	_fnSecKeyGeneratePairAsync(objref.IDOf(parameters), deliveryQueue, result)
+	_fnSecKeyGeneratePairAsync(objref.IDOf(parameters), deliveryQueue, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 unsafe.Pointer, _b2 unsafe.Pointer) { result(_b0, _b1, _b2) }))
 }
 
 var _fnSecKeyGetBlockSize func(objc.ID) int
@@ -3987,15 +3987,15 @@ func SecRandomCopyBytes(rnd obj.Object, count int, data unsafe.Pointer) int {
 	return int(_fnSecRandomCopyBytes(objref.IDOf(rnd), count, data))
 }
 
-var _fnSecRequestSharedWebCredential func(objc.ID, objc.ID, unsafe.Pointer)
+var _fnSecRequestSharedWebCredential func(objc.ID, objc.ID, objc.Block)
 
 // SecRequestSharedWebCredential calls the Security framework function SecRequestSharedWebCredential.
-func SecRequestSharedWebCredential(fqdn obj.Object, account obj.Object, completionHandler unsafe.Pointer) {
+func SecRequestSharedWebCredential(fqdn obj.Object, account obj.Object, completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecRequestSharedWebCredential == nil {
 		ebipurego.RegisterLibFunc(&_fnSecRequestSharedWebCredential, _lib, "SecRequestSharedWebCredential")
 	}
-	_fnSecRequestSharedWebCredential(objref.IDOf(fqdn), objref.IDOf(account), completionHandler)
+	_fnSecRequestSharedWebCredential(objref.IDOf(fqdn), objref.IDOf(account), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 unsafe.Pointer) { completionHandler(_b0, _b1) }))
 }
 
 var _fnSecRequirementGetTypeID func() int
@@ -4125,15 +4125,15 @@ func SecTransformCustomSetAttribute(ref obj.Object, attribute unsafe.Pointer, ty
 	return obj.Wrap(_ret)
 }
 
-var _fnSecTransformExecuteAsync func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnSecTransformExecuteAsync func(unsafe.Pointer, unsafe.Pointer, objc.Block)
 
 // SecTransformExecuteAsync calls the Security framework function SecTransformExecuteAsync.
-func SecTransformExecuteAsync(transformRef unsafe.Pointer, deliveryQueue unsafe.Pointer, deliveryBlock unsafe.Pointer) {
+func SecTransformExecuteAsync(transformRef unsafe.Pointer, deliveryQueue unsafe.Pointer, deliveryBlock func(unsafe.Pointer, unsafe.Pointer, uint8)) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTransformExecuteAsync == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTransformExecuteAsync, _lib, "SecTransformExecuteAsync")
 	}
-	_fnSecTransformExecuteAsync(transformRef, deliveryQueue, deliveryBlock)
+	_fnSecTransformExecuteAsync(transformRef, deliveryQueue, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 unsafe.Pointer, _b2 uint8) { deliveryBlock(_b0, _b1, _b2) }))
 }
 
 var _fnSecTransformFindByName func(unsafe.Pointer, objc.ID) unsafe.Pointer
@@ -4194,39 +4194,39 @@ func SecTransformPushbackAttribute(ref obj.Object, attribute unsafe.Pointer, val
 	return obj.Wrap(_ret)
 }
 
-var _fnSecTransformSetAttributeAction func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer) objc.ID
+var _fnSecTransformSetAttributeAction func(objc.ID, objc.ID, unsafe.Pointer, objc.Block) objc.ID
 
 // SecTransformSetAttributeAction calls the Security framework function SecTransformSetAttributeAction.
-func SecTransformSetAttributeAction(ref obj.Object, action obj.Object, attribute unsafe.Pointer, newAction unsafe.Pointer) obj.Object {
+func SecTransformSetAttributeAction(ref obj.Object, action obj.Object, attribute unsafe.Pointer, newAction func(unsafe.Pointer, unsafe.Pointer) int) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTransformSetAttributeAction == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTransformSetAttributeAction, _lib, "SecTransformSetAttributeAction")
 	}
-	_ret := _fnSecTransformSetAttributeAction(objref.IDOf(ref), objref.IDOf(action), attribute, newAction)
+	_ret := _fnSecTransformSetAttributeAction(objref.IDOf(ref), objref.IDOf(action), attribute, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 unsafe.Pointer) int { return newAction(_b0, _b1) }))
 	return obj.Wrap(_ret)
 }
 
-var _fnSecTransformSetDataAction func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
+var _fnSecTransformSetDataAction func(objc.ID, objc.ID, objc.Block) objc.ID
 
 // SecTransformSetDataAction calls the Security framework function SecTransformSetDataAction.
-func SecTransformSetDataAction(ref obj.Object, action obj.Object, newAction unsafe.Pointer) obj.Object {
+func SecTransformSetDataAction(ref obj.Object, action obj.Object, newAction func(unsafe.Pointer) int) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTransformSetDataAction == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTransformSetDataAction, _lib, "SecTransformSetDataAction")
 	}
-	_ret := _fnSecTransformSetDataAction(objref.IDOf(ref), objref.IDOf(action), newAction)
+	_ret := _fnSecTransformSetDataAction(objref.IDOf(ref), objref.IDOf(action), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) int { return newAction(_b0) }))
 	return obj.Wrap(_ret)
 }
 
-var _fnSecTransformSetTransformAction func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
+var _fnSecTransformSetTransformAction func(objc.ID, objc.ID, objc.Block) objc.ID
 
 // SecTransformSetTransformAction calls the Security framework function SecTransformSetTransformAction.
-func SecTransformSetTransformAction(ref obj.Object, action obj.Object, newAction unsafe.Pointer) obj.Object {
+func SecTransformSetTransformAction(ref obj.Object, action obj.Object, newAction func() int) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTransformSetTransformAction == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTransformSetTransformAction, _lib, "SecTransformSetTransformAction")
 	}
-	_ret := _fnSecTransformSetTransformAction(objref.IDOf(ref), objref.IDOf(action), newAction)
+	_ret := _fnSecTransformSetTransformAction(objref.IDOf(ref), objref.IDOf(action), objc.NewBlock(func(_ objc.Block) int { return newAction() }))
 	return obj.Wrap(_ret)
 }
 
@@ -4313,28 +4313,6 @@ func SecTrustEvaluate(trust obj.Object) (result int, result_ SecTrustResultType)
 	var _out0 SecTrustResultType
 	_ret := int(_fnSecTrustEvaluate(objref.IDOf(trust), unsafe.Pointer(&_out0)))
 	return _ret, _out0
-}
-
-var _fnSecTrustEvaluateAsync func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
-
-// SecTrustEvaluateAsync calls the Security framework function SecTrustEvaluateAsync.
-func SecTrustEvaluateAsync(trust obj.Object, queue unsafe.Pointer, result unsafe.Pointer) int {
-	_loadOnce.Do(_loadLibrary)
-	if _fnSecTrustEvaluateAsync == nil {
-		ebipurego.RegisterLibFunc(&_fnSecTrustEvaluateAsync, _lib, "SecTrustEvaluateAsync")
-	}
-	return int(_fnSecTrustEvaluateAsync(objref.IDOf(trust), queue, result))
-}
-
-var _fnSecTrustEvaluateAsyncWithError func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
-
-// SecTrustEvaluateAsyncWithError calls the Security framework function SecTrustEvaluateAsyncWithError.
-func SecTrustEvaluateAsyncWithError(trust obj.Object, queue unsafe.Pointer, result unsafe.Pointer) int {
-	_loadOnce.Do(_loadLibrary)
-	if _fnSecTrustEvaluateAsyncWithError == nil {
-		ebipurego.RegisterLibFunc(&_fnSecTrustEvaluateAsyncWithError, _lib, "SecTrustEvaluateAsyncWithError")
-	}
-	return int(_fnSecTrustEvaluateAsyncWithError(objref.IDOf(trust), queue, result))
 }
 
 var _fnSecTrustEvaluateWithError func(objc.ID, unsafe.Pointer) bool
@@ -4563,15 +4541,15 @@ func SecCertificateCreate(certificate obj.Object) unsafe.Pointer {
 	return _fnSecCertificateCreate(objref.IDOf(certificate))
 }
 
-var _fnSecIdentityAccessCertificates func(unsafe.Pointer, unsafe.Pointer) bool
+var _fnSecIdentityAccessCertificates func(unsafe.Pointer, objc.Block) bool
 
 // SecIdentityAccessCertificates calls the Security framework function sec_identity_access_certificates.
-func SecIdentityAccessCertificates(identity unsafe.Pointer, handler unsafe.Pointer) bool {
+func SecIdentityAccessCertificates(identity unsafe.Pointer, handler func(unsafe.Pointer)) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecIdentityAccessCertificates == nil {
 		ebipurego.RegisterLibFunc(&_fnSecIdentityAccessCertificates, _lib, "sec_identity_access_certificates")
 	}
-	return _fnSecIdentityAccessCertificates(identity, handler)
+	return _fnSecIdentityAccessCertificates(identity, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { handler(_b0) }))
 }
 
 var _fnSecIdentityCopyCertificatesRef func(unsafe.Pointer) objc.ID
@@ -4609,48 +4587,48 @@ func SecIdentityCreateWithCertificates(identity obj.Object, certificates obj.Obj
 	return _fnSecIdentityCreateWithCertificates(objref.IDOf(identity), objref.IDOf(certificates))
 }
 
-var _fnSecProtocolMetadataAccessDistinguishedNames func(unsafe.Pointer, unsafe.Pointer) bool
+var _fnSecProtocolMetadataAccessDistinguishedNames func(unsafe.Pointer, objc.Block) bool
 
 // SecProtocolMetadataAccessDistinguishedNames calls the Security framework function sec_protocol_metadata_access_distinguished_names.
-func SecProtocolMetadataAccessDistinguishedNames(metadata unsafe.Pointer, handler unsafe.Pointer) bool {
+func SecProtocolMetadataAccessDistinguishedNames(metadata unsafe.Pointer, handler func(unsafe.Pointer)) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecProtocolMetadataAccessDistinguishedNames == nil {
 		ebipurego.RegisterLibFunc(&_fnSecProtocolMetadataAccessDistinguishedNames, _lib, "sec_protocol_metadata_access_distinguished_names")
 	}
-	return _fnSecProtocolMetadataAccessDistinguishedNames(metadata, handler)
+	return _fnSecProtocolMetadataAccessDistinguishedNames(metadata, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { handler(_b0) }))
 }
 
-var _fnSecProtocolMetadataAccessOcspResponse func(unsafe.Pointer, unsafe.Pointer) bool
+var _fnSecProtocolMetadataAccessOcspResponse func(unsafe.Pointer, objc.Block) bool
 
 // SecProtocolMetadataAccessOcspResponse calls the Security framework function sec_protocol_metadata_access_ocsp_response.
-func SecProtocolMetadataAccessOcspResponse(metadata unsafe.Pointer, handler unsafe.Pointer) bool {
+func SecProtocolMetadataAccessOcspResponse(metadata unsafe.Pointer, handler func(unsafe.Pointer)) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecProtocolMetadataAccessOcspResponse == nil {
 		ebipurego.RegisterLibFunc(&_fnSecProtocolMetadataAccessOcspResponse, _lib, "sec_protocol_metadata_access_ocsp_response")
 	}
-	return _fnSecProtocolMetadataAccessOcspResponse(metadata, handler)
+	return _fnSecProtocolMetadataAccessOcspResponse(metadata, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { handler(_b0) }))
 }
 
-var _fnSecProtocolMetadataAccessPeerCertificateChain func(unsafe.Pointer, unsafe.Pointer) bool
+var _fnSecProtocolMetadataAccessPeerCertificateChain func(unsafe.Pointer, objc.Block) bool
 
 // SecProtocolMetadataAccessPeerCertificateChain calls the Security framework function sec_protocol_metadata_access_peer_certificate_chain.
-func SecProtocolMetadataAccessPeerCertificateChain(metadata unsafe.Pointer, handler unsafe.Pointer) bool {
+func SecProtocolMetadataAccessPeerCertificateChain(metadata unsafe.Pointer, handler func(unsafe.Pointer)) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecProtocolMetadataAccessPeerCertificateChain == nil {
 		ebipurego.RegisterLibFunc(&_fnSecProtocolMetadataAccessPeerCertificateChain, _lib, "sec_protocol_metadata_access_peer_certificate_chain")
 	}
-	return _fnSecProtocolMetadataAccessPeerCertificateChain(metadata, handler)
+	return _fnSecProtocolMetadataAccessPeerCertificateChain(metadata, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { handler(_b0) }))
 }
 
-var _fnSecProtocolMetadataAccessPreSharedKeys func(unsafe.Pointer, unsafe.Pointer) bool
+var _fnSecProtocolMetadataAccessPreSharedKeys func(unsafe.Pointer, objc.Block) bool
 
 // SecProtocolMetadataAccessPreSharedKeys calls the Security framework function sec_protocol_metadata_access_pre_shared_keys.
-func SecProtocolMetadataAccessPreSharedKeys(metadata unsafe.Pointer, handler unsafe.Pointer) bool {
+func SecProtocolMetadataAccessPreSharedKeys(metadata unsafe.Pointer, handler func(unsafe.Pointer, unsafe.Pointer)) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecProtocolMetadataAccessPreSharedKeys == nil {
 		ebipurego.RegisterLibFunc(&_fnSecProtocolMetadataAccessPreSharedKeys, _lib, "sec_protocol_metadata_access_pre_shared_keys")
 	}
-	return _fnSecProtocolMetadataAccessPreSharedKeys(metadata, handler)
+	return _fnSecProtocolMetadataAccessPreSharedKeys(metadata, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 unsafe.Pointer) { handler(_b0, _b1) }))
 }
 
 var _fnSecProtocolMetadataAccessSupportedSignatureAlgorithms func(unsafe.Pointer, objc.Block) bool
@@ -4950,15 +4928,15 @@ func SecProtocolOptionsSetChallengeBlock(options unsafe.Pointer, challengeBlock 
 	_fnSecProtocolOptionsSetChallengeBlock(options, challengeBlock, challengeQueue)
 }
 
-var _fnSecProtocolOptionsSetKeyUpdateBlock func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnSecProtocolOptionsSetKeyUpdateBlock func(unsafe.Pointer, objc.Block, unsafe.Pointer)
 
 // SecProtocolOptionsSetKeyUpdateBlock calls the Security framework function sec_protocol_options_set_key_update_block.
-func SecProtocolOptionsSetKeyUpdateBlock(options unsafe.Pointer, keyUpdateBlock unsafe.Pointer, keyUpdateQueue unsafe.Pointer) {
+func SecProtocolOptionsSetKeyUpdateBlock(options unsafe.Pointer, keyUpdateBlock func(unsafe.Pointer, func()), keyUpdateQueue unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecProtocolOptionsSetKeyUpdateBlock == nil {
 		ebipurego.RegisterLibFunc(&_fnSecProtocolOptionsSetKeyUpdateBlock, _lib, "sec_protocol_options_set_key_update_block")
 	}
-	_fnSecProtocolOptionsSetKeyUpdateBlock(options, keyUpdateBlock, keyUpdateQueue)
+	_fnSecProtocolOptionsSetKeyUpdateBlock(options, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 func()) { keyUpdateBlock(_b0, _b1) }), keyUpdateQueue)
 }
 
 var _fnSecProtocolOptionsSetLocalIdentity func(unsafe.Pointer, unsafe.Pointer)
@@ -5148,15 +5126,15 @@ func SecProtocolOptionsSetTlsTicketsEnabled(options unsafe.Pointer, ticketsEnabl
 	_fnSecProtocolOptionsSetTlsTicketsEnabled(options, ticketsEnabled)
 }
 
-var _fnSecProtocolOptionsSetVerifyBlock func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnSecProtocolOptionsSetVerifyBlock func(unsafe.Pointer, objc.Block, unsafe.Pointer)
 
 // SecProtocolOptionsSetVerifyBlock calls the Security framework function sec_protocol_options_set_verify_block.
-func SecProtocolOptionsSetVerifyBlock(options unsafe.Pointer, verifyBlock unsafe.Pointer, verifyBlockQueue unsafe.Pointer) {
+func SecProtocolOptionsSetVerifyBlock(options unsafe.Pointer, verifyBlock func(unsafe.Pointer, unsafe.Pointer, func(bool)), verifyBlockQueue unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecProtocolOptionsSetVerifyBlock == nil {
 		ebipurego.RegisterLibFunc(&_fnSecProtocolOptionsSetVerifyBlock, _lib, "sec_protocol_options_set_verify_block")
 	}
-	_fnSecProtocolOptionsSetVerifyBlock(options, verifyBlock, verifyBlockQueue)
+	_fnSecProtocolOptionsSetVerifyBlock(options, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 unsafe.Pointer, _b2 func(bool)) { verifyBlock(_b0, _b1, _b2) }), verifyBlockQueue)
 }
 
 var _fnSecRelease func(unsafe.Pointer)

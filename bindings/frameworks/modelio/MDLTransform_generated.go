@@ -124,6 +124,34 @@ func (t *Transform) SetIdentity() {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setIdentity"))
 }
 
+// TranslationAtTime returns the x-, y-, and z-axis offsets of the transform relative to its parent coordinate space, as of the specified time sample.
+func (t *Transform) TranslationAtTime(time_ float64) unsafe.Pointer {
+	defer runtime.KeepAlive(t)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(t), objc.RegisterName("translationAtTime:"), time_)
+	return _r
+}
+
+// RotationAtTime returns the orientation of the transform relative to its parent coordinate space, as of the specified time sample.
+func (t *Transform) RotationAtTime(time_ float64) unsafe.Pointer {
+	defer runtime.KeepAlive(t)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(t), objc.RegisterName("rotationAtTime:"), time_)
+	return _r
+}
+
+// ShearAtTime returns the x-, y-, and z-axis shear factors of the transform relative to its parent coordinate space, as of the specified time sample.
+func (t *Transform) ShearAtTime(time_ float64) unsafe.Pointer {
+	defer runtime.KeepAlive(t)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(t), objc.RegisterName("shearAtTime:"), time_)
+	return _r
+}
+
+// ScaleAtTime returns the x-, y-, and z-axis scale factors of the transform relative to its parent coordinate space, as of the specified time sample.
+func (t *Transform) ScaleAtTime(time_ float64) unsafe.Pointer {
+	defer runtime.KeepAlive(t)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(t), objc.RegisterName("scaleAtTime:"), time_)
+	return _r
+}
+
 // SetMatrixForTime wraps the corresponding Objective-C method.
 func (t *Transform) SetMatrixForTime(matrix unsafe.Pointer, time_ float64) {
 	defer runtime.KeepAlive(t)
@@ -152,4 +180,39 @@ func (t *Transform) SetShearForTime(shear unsafe.Pointer, time_ float64) {
 func (t *Transform) SetScaleForTime(scale unsafe.Pointer, time_ float64) {
 	defer runtime.KeepAlive(t)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setScale:forTime:"), scale, time_)
+}
+
+// RotationMatrixAtTime returns the orientation of the transform as a rotation matrix, as of the specified time sample.
+func (t *Transform) RotationMatrixAtTime(time_ float64) unsafe.Pointer {
+	defer runtime.KeepAlive(t)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(t), objc.RegisterName("rotationMatrixAtTime:"), time_)
+	return _r
+}
+
+// Translation returns if these properties are read and animation data exists the earliest value is returned. Otherwise, if there is no animation data, the value of the property is the same at all times and that value is returned. If written, timing information for said property is removed. To retain or add timing information, use the set:forTime selectors instead.
+func (t *Transform) Translation() unsafe.Pointer {
+	defer runtime.KeepAlive(t)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(t), objc.RegisterName("translation"))
+	return _r
+}
+
+// Rotation returns the rotation.
+func (t *Transform) Rotation() unsafe.Pointer {
+	defer runtime.KeepAlive(t)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(t), objc.RegisterName("rotation"))
+	return _r
+}
+
+// Shear returns the shear.
+func (t *Transform) Shear() unsafe.Pointer {
+	defer runtime.KeepAlive(t)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(t), objc.RegisterName("shear"))
+	return _r
+}
+
+// Scale returns the scale.
+func (t *Transform) Scale() unsafe.Pointer {
+	defer runtime.KeepAlive(t)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(t), objc.RegisterName("scale"))
+	return _r
 }

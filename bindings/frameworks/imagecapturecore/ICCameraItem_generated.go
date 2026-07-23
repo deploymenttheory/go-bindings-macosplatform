@@ -7,6 +7,7 @@ package imagecapturecore
 import (
 	"runtime"
 	"time"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -134,6 +135,13 @@ func (ci *CameraItem) UTI() string {
 	return purego.GoString(_r)
 }
 
+// FileSystemPath returns ￼The file system path of the item for items on a device with transportType of ICTransportTypeMassStorage.
+func (ci *CameraItem) FileSystemPath() unsafe.Pointer {
+	defer runtime.KeepAlive(ci)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(ci), objc.RegisterName("fileSystemPath"))
+	return _r
+}
+
 // IsLocked reports whether ￼Indicates the protection state of this item. It is locked if the storage card in the camera is locked.
 func (ci *CameraItem) IsLocked() bool {
 	defer runtime.KeepAlive(ci)
@@ -216,6 +224,13 @@ func (ci *CameraItem) LargeThumbnailIfAvailable() obj.Object {
 	defer runtime.KeepAlive(ci)
 	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("largeThumbnailIfAvailable"))
 	return obj.Wrap(_r)
+}
+
+// MetadataIfAvailable returns the metadata if available.
+func (ci *CameraItem) MetadataIfAvailable() unsafe.Pointer {
+	defer runtime.KeepAlive(ci)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(ci), objc.RegisterName("metadataIfAvailable"))
+	return _r
 }
 
 // isCameraItem marks CameraItem — and, by embedding promotion, its

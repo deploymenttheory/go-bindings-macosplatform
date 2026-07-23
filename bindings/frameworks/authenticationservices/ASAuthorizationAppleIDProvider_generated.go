@@ -6,6 +6,7 @@ package authenticationservices
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -84,4 +85,12 @@ func (aaip *AuthorizationAppleIDProvider) CreateRequest() *AuthorizationAppleIDR
 	defer runtime.KeepAlive(aaip)
 	_r := objc.Send[objc.ID](objref.IDOf(aaip), objc.RegisterName("createRequest"))
 	return AuthorizationAppleIDRequestFromID(_r)
+}
+
+// GetCredentialStateForUserIDCompletion returns the credential state for the given user in a completion handler.
+func (aaip *AuthorizationAppleIDProvider) GetCredentialStateForUserIDCompletion(userID string, completion func(AuthorizationAppleIDProviderCredentialState, unsafe.Pointer)) {
+	defer runtime.KeepAlive(aaip)
+	objc.Send[objc.ID](objref.IDOf(aaip), objc.RegisterName("getCredentialStateForUserID:completion:"), purego.NSString(userID), objc.NewBlock(func(_ objc.Block, _b0 AuthorizationAppleIDProviderCredentialState, _b1 unsafe.Pointer) {
+		completion(_b0, _b1)
+	}))
 }

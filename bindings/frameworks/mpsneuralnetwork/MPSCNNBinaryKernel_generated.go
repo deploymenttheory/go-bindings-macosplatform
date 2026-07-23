@@ -158,6 +158,13 @@ func (cbk *CNNBinaryKernel) ResultStateForPrimaryImageSecondaryImageSourceStates
 	return obj.Wrap(_r)
 }
 
+// ResultStateBatchForPrimaryImageSecondaryImageSourceStatesDestinationImage wraps the corresponding Objective-C method.
+func (cbk *CNNBinaryKernel) ResultStateBatchForPrimaryImageSecondaryImageSourceStatesDestinationImage(primaryImage unsafe.Pointer, secondaryImage unsafe.Pointer, sourceStates []obj.Object, destinationImage unsafe.Pointer) unsafe.Pointer {
+	defer runtime.KeepAlive(cbk)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(cbk), objc.RegisterName("resultStateBatchForPrimaryImage:secondaryImage:sourceStates:destinationImage:"), primaryImage, secondaryImage, purego.SliceToNSArray(sourceStates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), destinationImage)
+	return _r
+}
+
 // IsResultStateReusedAcrossBatch reports whether the same state is used for every operation in a batch If false, then each image in a MPSImageBatch will need a corresponding (and different) state to go with it. Set to true to avoid allocating redundant state in the case when the same state is used all the time. Default: false
 func (cbk *CNNBinaryKernel) IsResultStateReusedAcrossBatch() bool {
 	defer runtime.KeepAlive(cbk)

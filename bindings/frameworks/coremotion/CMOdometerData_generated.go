@@ -7,6 +7,7 @@ package coremotion
 import (
 	"runtime"
 	"time"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -95,11 +96,53 @@ func (od *OdometerData) EndDate() time.Time {
 	return rt.NSDateToTime(_r)
 }
 
+// DeltaDistance returns the delta distance.
+func (od *OdometerData) DeltaDistance() unsafe.Pointer {
+	defer runtime.KeepAlive(od)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(od), objc.RegisterName("deltaDistance"))
+	return _r
+}
+
+// DeltaDistanceAccuracy returns the delta distance accuracy.
+func (od *OdometerData) DeltaDistanceAccuracy() unsafe.Pointer {
+	defer runtime.KeepAlive(od)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(od), objc.RegisterName("deltaDistanceAccuracy"))
+	return _r
+}
+
+// Speed returns the speed.
+func (od *OdometerData) Speed() unsafe.Pointer {
+	defer runtime.KeepAlive(od)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(od), objc.RegisterName("speed"))
+	return _r
+}
+
+// SpeedAccuracy returns the speed accuracy.
+func (od *OdometerData) SpeedAccuracy() unsafe.Pointer {
+	defer runtime.KeepAlive(od)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(od), objc.RegisterName("speedAccuracy"))
+	return _r
+}
+
 // GpsDate returns the gps date.
 func (od *OdometerData) GpsDate() time.Time {
 	defer runtime.KeepAlive(od)
 	_r := objc.Send[objc.ID](objref.IDOf(od), objc.RegisterName("gpsDate"))
 	return rt.NSDateToTime(_r)
+}
+
+// DeltaAltitude returns the delta altitude.
+func (od *OdometerData) DeltaAltitude() unsafe.Pointer {
+	defer runtime.KeepAlive(od)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(od), objc.RegisterName("deltaAltitude"))
+	return _r
+}
+
+// VerticalAccuracy returns the vertical accuracy.
+func (od *OdometerData) VerticalAccuracy() unsafe.Pointer {
+	defer runtime.KeepAlive(od)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(od), objc.RegisterName("verticalAccuracy"))
+	return _r
 }
 
 // OriginDevice returns the origin device.

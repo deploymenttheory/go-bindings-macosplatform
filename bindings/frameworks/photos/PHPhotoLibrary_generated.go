@@ -81,11 +81,17 @@ func NewPhotoLibrary() *PhotoLibrary {
 	return photoLibraryAdopt(_id)
 }
 
+// PerformChangesCompletionHandler asynchronously runs a block that requests changes to the photo library.
+func (pl *PhotoLibrary) PerformChangesCompletionHandler(changeBlock func(), completionHandler func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(pl)
+	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("performChanges:completionHandler:"), objc.NewBlock(func(_ objc.Block) { changeBlock() }), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { completionHandler(_b0, _b1) }))
+}
+
 // PerformChangesAndWait synchronously runs a block that requests changes to be performed in the photo library.
 func (pl *PhotoLibrary) PerformChangesAndWait(changeBlock func()) error {
 	defer runtime.KeepAlive(pl)
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(pl), objc.RegisterName("performChangesAndWait:error:"), changeBlock, unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(pl), objc.RegisterName("performChangesAndWait:error:"), objc.NewBlock(func(_ objc.Block) { changeBlock() }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -102,6 +108,13 @@ func (pl *PhotoLibrary) FetchPersistentChangesSinceToken(token *PersistentChange
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return PersistentChangeFetchResultFromID(_r), nil
+}
+
+// UnavailabilityReason returns the unavailability reason.
+func (pl *PhotoLibrary) UnavailabilityReason() unsafe.Pointer {
+	defer runtime.KeepAlive(pl)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(pl), objc.RegisterName("unavailabilityReason"))
+	return _r
 }
 
 // CurrentChangeToken returns the current change token.

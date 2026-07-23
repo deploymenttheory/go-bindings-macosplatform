@@ -7,6 +7,7 @@ package classkit
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -212,4 +213,10 @@ func (ds *DataStore) FetchActivityForURLCompletion(ctx context.Context, url stri
 		var _zero *Activity
 		return _zero, ctx.Err()
 	}
+}
+
+// CheckIsAssignedDocumentCompletion determines whether a URL to the document was assigned to the student. This method checks if the document at the specified URL is assigned to the current student signed into the device. This is particularly useful for implementing student-specific workflows, such as: - Showing submission UI only for assigned documents - Displaying assignment-specific metadata or instructions - Enabling special features or restrictions for assigned work The completion handler's `isAssignedDocument` parameter will be `YES` when: - The document URL corresponds to an active assigned document - The current user is authenticated as a student and assigned to this specific document The completion handler's `isAssignedDocument` parameter will be `NO` when: - The document is not part of any assigned document - The current user is not a student (e.g., teacher) - The document has been unassigned or deleted - The student does not have permission to access this assignment
+func (ds *DataStore) CheckIsAssignedDocumentCompletion(documentURL string, completion func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(ds)
+	objc.Send[objc.ID](objref.IDOf(ds), objc.RegisterName("checkIsAssignedDocument:completion:"), rt.FileURL(documentURL), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { completion(_b0, _b1) }))
 }

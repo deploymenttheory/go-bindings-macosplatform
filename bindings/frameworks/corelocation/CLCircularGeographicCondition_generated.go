@@ -5,6 +5,7 @@
 package corelocation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -52,6 +53,20 @@ func NewCircularGeographicConditionWithCenterRadius(center unsafe.Pointer, radiu
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CLCircularGeographicCondition")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCenter:radius:"), center, radius)
 	return circularGeographicConditionAdopt(_id)
+}
+
+// Center returns the center.
+func (cgc *CircularGeographicCondition) Center() unsafe.Pointer {
+	defer runtime.KeepAlive(cgc)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(cgc), objc.RegisterName("center"))
+	return _r
+}
+
+// Radius returns the radius.
+func (cgc *CircularGeographicCondition) Radius() unsafe.Pointer {
+	defer runtime.KeepAlive(cgc)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(cgc), objc.RegisterName("radius"))
+	return _r
 }
 
 var _ ConditionProvider = (*CircularGeographicCondition)(nil)

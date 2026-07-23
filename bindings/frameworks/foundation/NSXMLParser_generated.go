@@ -190,6 +190,13 @@ func (xp *XMLParser) AllowedExternalEntityURLs() []string {
 	return rt.NSSetToSlice(_r, func(_id objc.ID) string { return rt.URLString(_id) })
 }
 
+// ParserError returns the parser error.
+func (xp *XMLParser) ParserError() unsafe.Pointer {
+	defer runtime.KeepAlive(xp)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(xp), objc.RegisterName("parserError"))
+	return _r
+}
+
 // ShouldResolveExternalEntities wraps the corresponding Objective-C method.
 func (xp *XMLParser) ShouldResolveExternalEntities() bool {
 	defer runtime.KeepAlive(xp)

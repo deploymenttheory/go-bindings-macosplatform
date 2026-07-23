@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -68,6 +69,13 @@ func NewTimedMetadataGroupWithSampleBuffer(sampleBuffer obj.Object) *TimedMetada
 func (tmg *TimedMetadataGroup) TimeRange() coremedia.CMTimeRange {
 	defer runtime.KeepAlive(tmg)
 	_r := objc.Send[coremedia.CMTimeRange](objref.IDOf(tmg), objc.RegisterName("timeRange"))
+	return _r
+}
+
+// CopyFormatDescription creates a format description based on the receiver’s items.
+func (tmg *TimedMetadataGroup) CopyFormatDescription() unsafe.Pointer {
+	defer runtime.KeepAlive(tmg)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(tmg), objc.RegisterName("copyFormatDescription"))
 	return _r
 }
 

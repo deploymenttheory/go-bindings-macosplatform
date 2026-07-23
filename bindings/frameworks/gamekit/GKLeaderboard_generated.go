@@ -8,6 +8,7 @@ import (
 	"context"
 	"runtime"
 	"time"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -127,6 +128,12 @@ func (l *Leaderboard) WithRange(range_ foundation.NSRange) *Leaderboard {
 	return l
 }
 
+// LoadPreviousOccurrenceWithCompletionHandler loads the previous recurring leaderboard occurrence that the player submits a score to.
+func (l *Leaderboard) LoadPreviousOccurrenceWithCompletionHandler(completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
+	defer runtime.KeepAlive(l)
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("loadPreviousOccurrenceWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 unsafe.Pointer) { completionHandler(_b0, _b1) }))
+}
+
 // SubmitScoreContextPlayer submits a score to the leaderboard.
 //
 // SubmitScoreContextPlayer blocks until the operation completes or ctx is cancelled.
@@ -146,6 +153,22 @@ func (l *Leaderboard) SubmitScoreContextPlayer(ctx context.Context, score int, c
 	case <-ctx.Done():
 		return ctx.Err()
 	}
+}
+
+// LoadEntriesForPlayerScopeTimeScopeRangeCompletionHandler returns the scores for the local player and other players for the specified type of player, time period, and ranks.
+func (l *Leaderboard) LoadEntriesForPlayerScopeTimeScopeRangeCompletionHandler(playerScope LeaderboardPlayerScope, timeScope LeaderboardTimeScope, range_ foundation.NSRange, completionHandler func(unsafe.Pointer, obj.Object, int, unsafe.Pointer)) {
+	defer runtime.KeepAlive(l)
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("loadEntriesForPlayerScope:timeScope:range:completionHandler:"), playerScope, timeScope, range_, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 objc.ID, _b2 int, _b3 unsafe.Pointer) {
+		completionHandler(_b0, obj.Wrap(_b1), _b2, _b3)
+	}))
+}
+
+// LoadEntriesForPlayersTimeScopeCompletionHandler returns the scores for the local player and other players for the specified time period.
+func (l *Leaderboard) LoadEntriesForPlayersTimeScopeCompletionHandler(players []*Player, timeScope LeaderboardTimeScope, completionHandler func(unsafe.Pointer, obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(l)
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("loadEntriesForPlayers:timeScope:completionHandler:"), purego.SliceToNSArray(players, func(_v *Player) objc.ID { return objref.IDOf(_v) }), timeScope, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 objc.ID, _b2 unsafe.Pointer) {
+		completionHandler(_b0, obj.Wrap(_b1), _b2)
+	}))
 }
 
 // Title returns localized title

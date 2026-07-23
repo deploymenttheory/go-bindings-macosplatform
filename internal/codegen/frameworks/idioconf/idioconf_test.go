@@ -41,6 +41,9 @@ func TestLoadAdjacentValidFile(t *testing.T) {
 		"delegates": {"include": ["VZVirtualMachineDelegate"], "exclude": ["NSCopying"]},
 		"error_typedefs": [
 			{"typedef": "hv_return_t", "success_value": 0, "domain": "HypervisorReturnDomain", "sentinel_enum": "hv_error"}
+		],
+		"inout_count_params": [
+			{"c_name": "vmnet_read", "param": "pktcnt"}
 		]
 	}`)
 
@@ -73,6 +76,16 @@ func TestLoadAdjacentValidFile(t *testing.T) {
 	typedef, ok := file.ErrorTypedefFor("hv_return_t")
 	if !ok || typedef.Domain != "HypervisorReturnDomain" || typedef.SentinelEnum != "hv_error" {
 		t.Errorf("ErrorTypedefFor = %+v, %v", typedef, ok)
+	}
+
+	if !file.IsInOutCountParam("vmnet_read", "pktcnt") {
+		t.Error("IsInOutCountParam(vmnet_read, pktcnt) = false; want true")
+	}
+	if file.IsInOutCountParam("vmnet_read", "packets") {
+		t.Error("IsInOutCountParam matched a different parameter")
+	}
+	if file.IsInOutCountParam("vmnet_write", "pktcnt") {
+		t.Error("IsInOutCountParam matched an unconfigured function")
 	}
 }
 

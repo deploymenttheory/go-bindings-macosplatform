@@ -368,6 +368,14 @@ func (fpm *FileProviderManager) RequestDiagnosticCollectionForItemWithIdentifier
 	}
 }
 
+// GetServiceWithNameItemIdentifierCompletionHandler retrieve the service with the specified named for the specified item.
+func (fpm *FileProviderManager) GetServiceWithNameItemIdentifierCompletionHandler(serviceName obj.Object, itemIdentifier obj.Object, completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
+	defer runtime.KeepAlive(fpm)
+	defer runtime.KeepAlive(serviceName)
+	defer runtime.KeepAlive(itemIdentifier)
+	objc.Send[objc.ID](objref.IDOf(fpm), objc.RegisterName("getServiceWithName:itemIdentifier:completionHandler:"), objref.IDOf(serviceName), objref.IDOf(itemIdentifier), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 unsafe.Pointer) { completionHandler(_b0, _b1) }))
+}
+
 // ListAvailableTestingOperations lists all the operations that are ready for scheduling.
 func (fpm *FileProviderManager) ListAvailableTestingOperations() (result []obj.Object, err error) {
 	defer runtime.KeepAlive(fpm)

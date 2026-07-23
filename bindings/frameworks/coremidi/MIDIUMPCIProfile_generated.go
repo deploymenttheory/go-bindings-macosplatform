@@ -100,6 +100,13 @@ func (up *UMPCIProfile) Name() string {
 	return purego.GoString(_r)
 }
 
+// ProfileID returns c struct representation of MIDI-CI Profile ID.
+func (up *UMPCIProfile) ProfileID() unsafe.Pointer {
+	defer runtime.KeepAlive(up)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(up), objc.RegisterName("profileID"))
+	return _r
+}
+
 // ProfileType returns the type of MIDI-CI Profile, i.e., single-channel, multichannel, Group, or Function Block.
 func (up *UMPCIProfile) ProfileType() CIProfileType {
 	defer runtime.KeepAlive(up)

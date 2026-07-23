@@ -57,6 +57,13 @@ func NewDetectHumanBodyPose3DRequest() *DetectHumanBodyPose3DRequest {
 	return detectHumanBodyPose3DRequestAdopt(_id)
 }
 
+// NewDetectHumanBodyPose3DRequestWithCompletionHandler creates a new 3D body pose request with a completion handler.
+func NewDetectHumanBodyPose3DRequestWithCompletionHandler(completionHandler func(obj.Object, unsafe.Pointer)) *DetectHumanBodyPose3DRequest {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VNDetectHumanBodyPose3DRequest")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
+	return detectHumanBodyPose3DRequestAdopt(_id)
+}
+
 // WithRegionOfInterest sets the region of the image in which Vision will perform the request.
 func (dhbpdr *DetectHumanBodyPose3DRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectHumanBodyPose3DRequest {
 	objc.Send[objc.ID](objref.IDOf(dhbpdr), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)

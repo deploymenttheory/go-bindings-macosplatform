@@ -7,6 +7,7 @@ package matter
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -67,6 +68,139 @@ func NewMTRBaseClusterColorControlWithDeviceEndpointQueue(device *MTRBaseDevice,
 	return mTRBaseClusterColorControlAdopt(_id)
 }
 
+// MoveToHueWithParamsCompletion command MoveToHue Move to specified hue.
+func (mbccc *MTRBaseClusterColorControl) MoveToHueWithParamsCompletion(params *MTRColorControlClusterMoveToHueParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("moveToHueWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// MoveHueWithParamsCompletion command MoveHue Move hue up or down at specified rate.
+func (mbccc *MTRBaseClusterColorControl) MoveHueWithParamsCompletion(params *MTRColorControlClusterMoveHueParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("moveHueWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// StepHueWithParamsCompletion command StepHue Step hue up or down by specified size at specified rate.
+func (mbccc *MTRBaseClusterColorControl) StepHueWithParamsCompletion(params *MTRColorControlClusterStepHueParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("stepHueWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// MoveToSaturationWithParamsCompletion command MoveToSaturation Move to specified saturation.
+func (mbccc *MTRBaseClusterColorControl) MoveToSaturationWithParamsCompletion(params *MTRColorControlClusterMoveToSaturationParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("moveToSaturationWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// MoveSaturationWithParamsCompletion command MoveSaturation Move saturation up or down at specified rate.
+func (mbccc *MTRBaseClusterColorControl) MoveSaturationWithParamsCompletion(params *MTRColorControlClusterMoveSaturationParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("moveSaturationWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// StepSaturationWithParamsCompletion command StepSaturation Step saturation up or down by specified size at specified rate.
+func (mbccc *MTRBaseClusterColorControl) StepSaturationWithParamsCompletion(params *MTRColorControlClusterStepSaturationParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("stepSaturationWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// MoveToHueAndSaturationWithParamsCompletion command MoveToHueAndSaturation Move to hue and saturation.
+func (mbccc *MTRBaseClusterColorControl) MoveToHueAndSaturationWithParamsCompletion(params *MTRColorControlClusterMoveToHueAndSaturationParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("moveToHueAndSaturationWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// MoveToColorWithParamsCompletion command MoveToColor Move to specified color.
+func (mbccc *MTRBaseClusterColorControl) MoveToColorWithParamsCompletion(params *MTRColorControlClusterMoveToColorParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("moveToColorWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// MoveColorWithParamsCompletion command MoveColor Moves the color.
+func (mbccc *MTRBaseClusterColorControl) MoveColorWithParamsCompletion(params *MTRColorControlClusterMoveColorParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("moveColorWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// StepColorWithParamsCompletion command StepColor Steps the lighting to a specific color.
+func (mbccc *MTRBaseClusterColorControl) StepColorWithParamsCompletion(params *MTRColorControlClusterStepColorParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("stepColorWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// MoveToColorTemperatureWithParamsCompletion command MoveToColorTemperature Move to a specific color temperature.
+func (mbccc *MTRBaseClusterColorControl) MoveToColorTemperatureWithParamsCompletion(params *MTRColorControlClusterMoveToColorTemperatureParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("moveToColorTemperatureWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// EnhancedMoveToHueWithParamsCompletion command EnhancedMoveToHue Command description for EnhancedMoveToHue
+func (mbccc *MTRBaseClusterColorControl) EnhancedMoveToHueWithParamsCompletion(params *MTRColorControlClusterEnhancedMoveToHueParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("enhancedMoveToHueWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// EnhancedMoveHueWithParamsCompletion command EnhancedMoveHue Command description for EnhancedMoveHue
+func (mbccc *MTRBaseClusterColorControl) EnhancedMoveHueWithParamsCompletion(params *MTRColorControlClusterEnhancedMoveHueParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("enhancedMoveHueWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// EnhancedStepHueWithParamsCompletion command EnhancedStepHue Command description for EnhancedStepHue
+func (mbccc *MTRBaseClusterColorControl) EnhancedStepHueWithParamsCompletion(params *MTRColorControlClusterEnhancedStepHueParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("enhancedStepHueWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// EnhancedMoveToHueAndSaturationWithParamsCompletion command EnhancedMoveToHueAndSaturation Command description for EnhancedMoveToHueAndSaturation
+func (mbccc *MTRBaseClusterColorControl) EnhancedMoveToHueAndSaturationWithParamsCompletion(params *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("enhancedMoveToHueAndSaturationWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// ColorLoopSetWithParamsCompletion command ColorLoopSet Command description for ColorLoopSet
+func (mbccc *MTRBaseClusterColorControl) ColorLoopSetWithParamsCompletion(params *MTRColorControlClusterColorLoopSetParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("colorLoopSetWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// StopMoveStepWithParamsCompletion command StopMoveStep Command description for StopMoveStep
+func (mbccc *MTRBaseClusterColorControl) StopMoveStepWithParamsCompletion(params *MTRColorControlClusterStopMoveStepParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("stopMoveStepWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// MoveColorTemperatureWithParamsCompletion command MoveColorTemperature Command description for MoveColorTemperature
+func (mbccc *MTRBaseClusterColorControl) MoveColorTemperatureWithParamsCompletion(params *MTRColorControlClusterMoveColorTemperatureParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("moveColorTemperatureWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// StepColorTemperatureWithParamsCompletion command StepColorTemperature Command description for StepColorTemperature
+func (mbccc *MTRBaseClusterColorControl) StepColorTemperatureWithParamsCompletion(params *MTRColorControlClusterStepColorTemperatureParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("stepColorTemperatureWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // ReadAttributeCurrentHueWithCompletion reads attribute current hue with completion.
 //
 // ReadAttributeCurrentHueWithCompletion blocks until the operation completes or ctx is cancelled.
@@ -110,7 +244,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCurrentHueWithParamsS
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeCurrentHueWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeCurrentHueWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -163,7 +297,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCurrentSaturationWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeCurrentSaturationWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeCurrentSaturationWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -216,7 +350,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeRemainingTimeWithPara
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeRemainingTimeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeRemainingTimeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -269,7 +403,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCurrentXWithParamsSub
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeCurrentXWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeCurrentXWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -322,7 +456,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCurrentYWithParamsSub
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeCurrentYWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeCurrentYWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -375,7 +509,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeDriftCompensationWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeDriftCompensationWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeDriftCompensationWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -428,7 +562,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCompensationTextWithP
 		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeCompensationTextWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeCompensationTextWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -481,7 +615,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorTemperatureMired
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorTemperatureMiredsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorTemperatureMiredsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -534,7 +668,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorModeWithParamsSu
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorModeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorModeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -570,6 +704,21 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeOptionsWithCompletion(ctx 
 	}
 }
 
+// WriteAttributeOptionsWithValueCompletion writes attribute options with value completion.
+func (mbccc *MTRBaseClusterColorControl) WriteAttributeOptionsWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("writeAttributeOptionsWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeOptionsWithValueParamsCompletion writes attribute options with value params completion.
+func (mbccc *MTRBaseClusterColorControl) WriteAttributeOptionsWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("writeAttributeOptionsWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeOptionsWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeOptionsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -587,7 +736,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeOptionsWithParamsSubs
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeOptionsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeOptionsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -640,7 +789,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeNumberOfPrimariesWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeNumberOfPrimariesWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeNumberOfPrimariesWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -693,7 +842,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary1XWithParamsSu
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary1XWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary1XWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -746,7 +895,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary1YWithParamsSu
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary1YWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary1YWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -799,7 +948,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary1IntensityWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary1IntensityWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary1IntensityWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -852,7 +1001,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary2XWithParamsSu
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary2XWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary2XWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -905,7 +1054,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary2YWithParamsSu
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary2YWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary2YWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -958,7 +1107,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary2IntensityWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary2IntensityWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary2IntensityWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1011,7 +1160,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary3XWithParamsSu
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary3XWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary3XWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1064,7 +1213,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary3YWithParamsSu
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary3YWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary3YWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1117,7 +1266,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary3IntensityWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary3IntensityWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary3IntensityWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1170,7 +1319,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary4XWithParamsSu
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary4XWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary4XWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1223,7 +1372,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary4YWithParamsSu
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary4YWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary4YWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1276,7 +1425,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary4IntensityWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary4IntensityWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary4IntensityWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1329,7 +1478,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary5XWithParamsSu
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary5XWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary5XWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1382,7 +1531,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary5YWithParamsSu
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary5YWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary5YWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1435,7 +1584,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary5IntensityWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary5IntensityWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary5IntensityWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1488,7 +1637,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary6XWithParamsSu
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary6XWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary6XWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1541,7 +1690,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary6YWithParamsSu
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary6YWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary6YWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1594,7 +1743,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary6IntensityWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary6IntensityWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary6IntensityWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1647,7 +1796,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeWhitePointXWithParams
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeWhitePointXWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeWhitePointXWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1700,7 +1849,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeWhitePointYWithParams
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeWhitePointYWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeWhitePointYWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1753,7 +1902,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointRXWithParam
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorPointRXWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorPointRXWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1806,7 +1955,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointRYWithParam
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorPointRYWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorPointRYWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1859,7 +2008,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointRIntensityW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorPointRIntensityWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorPointRIntensityWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1912,7 +2061,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointGXWithParam
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorPointGXWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorPointGXWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1965,7 +2114,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointGYWithParam
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorPointGYWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorPointGYWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2018,7 +2167,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointGIntensityW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorPointGIntensityWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorPointGIntensityWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2071,7 +2220,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointBXWithParam
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorPointBXWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorPointBXWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2124,7 +2273,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointBYWithParam
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorPointBYWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorPointBYWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2177,7 +2326,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointBIntensityW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorPointBIntensityWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorPointBIntensityWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2230,7 +2379,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeEnhancedCurrentHueWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeEnhancedCurrentHueWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeEnhancedCurrentHueWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2283,7 +2432,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeEnhancedColorModeWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeEnhancedColorModeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeEnhancedColorModeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2336,7 +2485,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorLoopActiveWithPa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorLoopActiveWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorLoopActiveWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2389,7 +2538,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorLoopDirectionWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorLoopDirectionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorLoopDirectionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2442,7 +2591,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorLoopTimeWithPara
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorLoopTimeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorLoopTimeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2495,7 +2644,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorLoopStartEnhance
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorLoopStartEnhancedHueWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorLoopStartEnhancedHueWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2548,7 +2697,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorLoopStoredEnhanc
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorLoopStoredEnhancedHueWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorLoopStoredEnhancedHueWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2601,7 +2750,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorCapabilitiesWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorCapabilitiesWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorCapabilitiesWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2654,7 +2803,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorTempPhysicalMinM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorTempPhysicalMinMiredsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorTempPhysicalMinMiredsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2707,7 +2856,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorTempPhysicalMaxM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorTempPhysicalMaxMiredsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorTempPhysicalMaxMiredsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2760,7 +2909,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCoupleColorTempToLeve
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeCoupleColorTempToLevelMinMiredsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeCoupleColorTempToLevelMinMiredsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2796,6 +2945,21 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeStartUpColorTemperatureMir
 	}
 }
 
+// WriteAttributeStartUpColorTemperatureMiredsWithValueCompletion writes attribute start up color temperature mireds with value completion.
+func (mbccc *MTRBaseClusterColorControl) WriteAttributeStartUpColorTemperatureMiredsWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("writeAttributeStartUpColorTemperatureMiredsWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeStartUpColorTemperatureMiredsWithValueParamsCompletion writes attribute start up color temperature mireds with value params completion.
+func (mbccc *MTRBaseClusterColorControl) WriteAttributeStartUpColorTemperatureMiredsWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("writeAttributeStartUpColorTemperatureMiredsWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeStartUpColorTemperatureMiredsWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeStartUpColorTemperatureMiredsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -2813,7 +2977,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeStartUpColorTemperatu
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeStartUpColorTemperatureMiredsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeStartUpColorTemperatureMiredsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2866,7 +3030,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeGeneratedCommandListW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2919,7 +3083,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeAcceptedCommandListWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2972,7 +3136,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeAttributeListWithPara
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3025,7 +3189,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeFeatureMapWithParamsS
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3078,7 +3242,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeClusterRevisionWithPa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3086,6 +3250,139 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeClusterRevisionWithPa
 		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
+}
+
+// MoveToHueWithParamsCompletionHandler moves to hue with params completion handler.
+func (mbccc *MTRBaseClusterColorControl) MoveToHueWithParamsCompletionHandler(params *MTRColorControlClusterMoveToHueParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("moveToHueWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// MoveHueWithParamsCompletionHandler moves hue with params completion handler.
+func (mbccc *MTRBaseClusterColorControl) MoveHueWithParamsCompletionHandler(params *MTRColorControlClusterMoveHueParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("moveHueWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// StepHueWithParamsCompletionHandler wraps the corresponding Objective-C method.
+func (mbccc *MTRBaseClusterColorControl) StepHueWithParamsCompletionHandler(params *MTRColorControlClusterStepHueParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("stepHueWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// MoveToSaturationWithParamsCompletionHandler moves to saturation with params completion handler.
+func (mbccc *MTRBaseClusterColorControl) MoveToSaturationWithParamsCompletionHandler(params *MTRColorControlClusterMoveToSaturationParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("moveToSaturationWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// MoveSaturationWithParamsCompletionHandler moves saturation with params completion handler.
+func (mbccc *MTRBaseClusterColorControl) MoveSaturationWithParamsCompletionHandler(params *MTRColorControlClusterMoveSaturationParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("moveSaturationWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// StepSaturationWithParamsCompletionHandler wraps the corresponding Objective-C method.
+func (mbccc *MTRBaseClusterColorControl) StepSaturationWithParamsCompletionHandler(params *MTRColorControlClusterStepSaturationParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("stepSaturationWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// MoveToHueAndSaturationWithParamsCompletionHandler moves to hue and saturation with params completion handler.
+func (mbccc *MTRBaseClusterColorControl) MoveToHueAndSaturationWithParamsCompletionHandler(params *MTRColorControlClusterMoveToHueAndSaturationParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("moveToHueAndSaturationWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// MoveToColorWithParamsCompletionHandler moves to color with params completion handler.
+func (mbccc *MTRBaseClusterColorControl) MoveToColorWithParamsCompletionHandler(params *MTRColorControlClusterMoveToColorParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("moveToColorWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// MoveColorWithParamsCompletionHandler moves color with params completion handler.
+func (mbccc *MTRBaseClusterColorControl) MoveColorWithParamsCompletionHandler(params *MTRColorControlClusterMoveColorParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("moveColorWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// StepColorWithParamsCompletionHandler wraps the corresponding Objective-C method.
+func (mbccc *MTRBaseClusterColorControl) StepColorWithParamsCompletionHandler(params *MTRColorControlClusterStepColorParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("stepColorWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// MoveToColorTemperatureWithParamsCompletionHandler moves to color temperature with params completion handler.
+func (mbccc *MTRBaseClusterColorControl) MoveToColorTemperatureWithParamsCompletionHandler(params *MTRColorControlClusterMoveToColorTemperatureParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("moveToColorTemperatureWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// EnhancedMoveToHueWithParamsCompletionHandler wraps the corresponding Objective-C method.
+func (mbccc *MTRBaseClusterColorControl) EnhancedMoveToHueWithParamsCompletionHandler(params *MTRColorControlClusterEnhancedMoveToHueParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("enhancedMoveToHueWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// EnhancedMoveHueWithParamsCompletionHandler wraps the corresponding Objective-C method.
+func (mbccc *MTRBaseClusterColorControl) EnhancedMoveHueWithParamsCompletionHandler(params *MTRColorControlClusterEnhancedMoveHueParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("enhancedMoveHueWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// EnhancedStepHueWithParamsCompletionHandler wraps the corresponding Objective-C method.
+func (mbccc *MTRBaseClusterColorControl) EnhancedStepHueWithParamsCompletionHandler(params *MTRColorControlClusterEnhancedStepHueParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("enhancedStepHueWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// EnhancedMoveToHueAndSaturationWithParamsCompletionHandler wraps the corresponding Objective-C method.
+func (mbccc *MTRBaseClusterColorControl) EnhancedMoveToHueAndSaturationWithParamsCompletionHandler(params *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("enhancedMoveToHueAndSaturationWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// ColorLoopSetWithParamsCompletionHandler wraps the corresponding Objective-C method.
+func (mbccc *MTRBaseClusterColorControl) ColorLoopSetWithParamsCompletionHandler(params *MTRColorControlClusterColorLoopSetParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("colorLoopSetWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// StopMoveStepWithParamsCompletionHandler stops move step with params completion handler.
+func (mbccc *MTRBaseClusterColorControl) StopMoveStepWithParamsCompletionHandler(params *MTRColorControlClusterStopMoveStepParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("stopMoveStepWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// MoveColorTemperatureWithParamsCompletionHandler moves color temperature with params completion handler.
+func (mbccc *MTRBaseClusterColorControl) MoveColorTemperatureWithParamsCompletionHandler(params *MTRColorControlClusterMoveColorTemperatureParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("moveColorTemperatureWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// StepColorTemperatureWithParamsCompletionHandler wraps the corresponding Objective-C method.
+func (mbccc *MTRBaseClusterColorControl) StepColorTemperatureWithParamsCompletionHandler(params *MTRColorControlClusterStepColorTemperatureParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("stepColorTemperatureWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
 }
 
 // ReadAttributeCurrentHue reads attribute current hue.
@@ -3133,7 +3430,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCurrentHueWithMinInte
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeCurrentHueWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeCurrentHueWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3188,7 +3485,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCurrentSaturationWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeCurrentSaturationWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeCurrentSaturationWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3243,7 +3540,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeRemainingTimeWithMinI
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeRemainingTimeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeRemainingTimeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3298,7 +3595,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCurrentXWithMinInterv
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeCurrentXWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeCurrentXWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3353,7 +3650,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCurrentYWithMinInterv
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeCurrentYWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeCurrentYWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3408,7 +3705,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeDriftCompensationWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeDriftCompensationWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeDriftCompensationWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3463,7 +3760,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCompensationTextWithM
 		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeCompensationTextWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeCompensationTextWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3518,7 +3815,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorTemperatureMired
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorTemperatureMiredsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorTemperatureMiredsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3573,7 +3870,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorModeWithMinInter
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorModeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorModeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3609,6 +3906,21 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeOptions(ctx context.Contex
 	}
 }
 
+// WriteAttributeOptionsWithValueCompletionHandler writes attribute options with value completion handler.
+func (mbccc *MTRBaseClusterColorControl) WriteAttributeOptionsWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("writeAttributeOptionsWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeOptionsWithValueParamsCompletionHandler writes attribute options with value params completion handler.
+func (mbccc *MTRBaseClusterColorControl) WriteAttributeOptionsWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("writeAttributeOptionsWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeOptionsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeOptionsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -3628,7 +3940,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeOptionsWithMinInterva
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeOptionsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeOptionsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3683,7 +3995,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeNumberOfPrimariesWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeNumberOfPrimariesWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeNumberOfPrimariesWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3738,7 +4050,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary1XWithMinInter
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary1XWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary1XWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3793,7 +4105,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary1YWithMinInter
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary1YWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary1YWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3848,7 +4160,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary1IntensityWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary1IntensityWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary1IntensityWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3903,7 +4215,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary2XWithMinInter
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary2XWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary2XWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3958,7 +4270,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary2YWithMinInter
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary2YWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary2YWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4013,7 +4325,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary2IntensityWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary2IntensityWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary2IntensityWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4068,7 +4380,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary3XWithMinInter
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary3XWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary3XWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4123,7 +4435,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary3YWithMinInter
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary3YWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary3YWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4178,7 +4490,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary3IntensityWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary3IntensityWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary3IntensityWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4233,7 +4545,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary4XWithMinInter
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary4XWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary4XWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4288,7 +4600,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary4YWithMinInter
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary4YWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary4YWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4343,7 +4655,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary4IntensityWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary4IntensityWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary4IntensityWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4398,7 +4710,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary5XWithMinInter
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary5XWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary5XWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4453,7 +4765,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary5YWithMinInter
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary5YWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary5YWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4508,7 +4820,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary5IntensityWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary5IntensityWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary5IntensityWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4563,7 +4875,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary6XWithMinInter
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary6XWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary6XWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4618,7 +4930,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary6YWithMinInter
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary6YWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary6YWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4673,7 +4985,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary6IntensityWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary6IntensityWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributePrimary6IntensityWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4728,7 +5040,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeWhitePointXWithMinInt
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeWhitePointXWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeWhitePointXWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4783,7 +5095,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeWhitePointYWithMinInt
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeWhitePointYWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeWhitePointYWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4838,7 +5150,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointRXWithMinIn
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorPointRXWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorPointRXWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4893,7 +5205,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointRYWithMinIn
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorPointRYWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorPointRYWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4948,7 +5260,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointRIntensityW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorPointRIntensityWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorPointRIntensityWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5003,7 +5315,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointGXWithMinIn
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorPointGXWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorPointGXWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5058,7 +5370,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointGYWithMinIn
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorPointGYWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorPointGYWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5113,7 +5425,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointGIntensityW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorPointGIntensityWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorPointGIntensityWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5168,7 +5480,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointBXWithMinIn
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorPointBXWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorPointBXWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5223,7 +5535,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointBYWithMinIn
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorPointBYWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorPointBYWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5278,7 +5590,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointBIntensityW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorPointBIntensityWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorPointBIntensityWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5333,7 +5645,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeEnhancedCurrentHueWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeEnhancedCurrentHueWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeEnhancedCurrentHueWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5388,7 +5700,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeEnhancedColorModeWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeEnhancedColorModeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeEnhancedColorModeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5443,7 +5755,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorLoopActiveWithMi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorLoopActiveWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorLoopActiveWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5498,7 +5810,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorLoopDirectionWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorLoopDirectionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorLoopDirectionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5553,7 +5865,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorLoopTimeWithMinI
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorLoopTimeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorLoopTimeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5608,7 +5920,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorLoopStartEnhance
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorLoopStartEnhancedHueWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorLoopStartEnhancedHueWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5663,7 +5975,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorLoopStoredEnhanc
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorLoopStoredEnhancedHueWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorLoopStoredEnhancedHueWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5718,7 +6030,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorCapabilitiesWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorCapabilitiesWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorCapabilitiesWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5773,7 +6085,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorTempPhysicalMinM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorTempPhysicalMinMiredsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorTempPhysicalMinMiredsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5828,7 +6140,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorTempPhysicalMaxM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorTempPhysicalMaxMiredsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeColorTempPhysicalMaxMiredsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5883,7 +6195,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCoupleColorTempToLeve
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeCoupleColorTempToLevelMinMiredsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeCoupleColorTempToLevelMinMiredsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5919,6 +6231,21 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeStartUpColorTemperatureMir
 	}
 }
 
+// WriteAttributeStartUpColorTemperatureMiredsWithValueCompletionHandler writes attribute start up color temperature mireds with value completion handler.
+func (mbccc *MTRBaseClusterColorControl) WriteAttributeStartUpColorTemperatureMiredsWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("writeAttributeStartUpColorTemperatureMiredsWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeStartUpColorTemperatureMiredsWithValueParamsCompletionHandler writes attribute start up color temperature mireds with value params completion handler.
+func (mbccc *MTRBaseClusterColorControl) WriteAttributeStartUpColorTemperatureMiredsWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("writeAttributeStartUpColorTemperatureMiredsWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeStartUpColorTemperatureMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeStartUpColorTemperatureMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -5938,7 +6265,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeStartUpColorTemperatu
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeStartUpColorTemperatureMiredsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeStartUpColorTemperatureMiredsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5993,7 +6320,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeGeneratedCommandListW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeGeneratedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeGeneratedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6048,7 +6375,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeAcceptedCommandListWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeAcceptedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeAcceptedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6103,7 +6430,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeAttributeListWithMinI
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeAttributeListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeAttributeListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6158,7 +6485,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeFeatureMapWithMinInte
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeFeatureMapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeFeatureMapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6213,7 +6540,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeClusterRevisionWithMi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeClusterRevisionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("subscribeAttributeClusterRevisionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6221,6 +6548,336 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeClusterRevisionWithMi
 		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
+}
+
+// WriteAttributeWhitePointXWithValueCompletion writes attribute white point x with value completion.
+func (mbccc *MTRBaseClusterColorControl) WriteAttributeWhitePointXWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("writeAttributeWhitePointXWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeWhitePointXWithValueParamsCompletion writes attribute white point x with value params completion.
+func (mbccc *MTRBaseClusterColorControl) WriteAttributeWhitePointXWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("writeAttributeWhitePointXWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeWhitePointYWithValueCompletion writes attribute white point y with value completion.
+func (mbccc *MTRBaseClusterColorControl) WriteAttributeWhitePointYWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("writeAttributeWhitePointYWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeWhitePointYWithValueParamsCompletion writes attribute white point y with value params completion.
+func (mbccc *MTRBaseClusterColorControl) WriteAttributeWhitePointYWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("writeAttributeWhitePointYWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeColorPointRXWithValueCompletion writes attribute color point rx with value completion.
+func (mbccc *MTRBaseClusterColorControl) WriteAttributeColorPointRXWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("writeAttributeColorPointRXWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeColorPointRXWithValueParamsCompletion writes attribute color point rx with value params completion.
+func (mbccc *MTRBaseClusterColorControl) WriteAttributeColorPointRXWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("writeAttributeColorPointRXWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeColorPointRYWithValueCompletion writes attribute color point ry with value completion.
+func (mbccc *MTRBaseClusterColorControl) WriteAttributeColorPointRYWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("writeAttributeColorPointRYWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeColorPointRYWithValueParamsCompletion writes attribute color point ry with value params completion.
+func (mbccc *MTRBaseClusterColorControl) WriteAttributeColorPointRYWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("writeAttributeColorPointRYWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeColorPointRIntensityWithValueCompletion writes attribute color point r intensity with value completion.
+func (mbccc *MTRBaseClusterColorControl) WriteAttributeColorPointRIntensityWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("writeAttributeColorPointRIntensityWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeColorPointRIntensityWithValueParamsCompletion writes attribute color point r intensity with value params completion.
+func (mbccc *MTRBaseClusterColorControl) WriteAttributeColorPointRIntensityWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("writeAttributeColorPointRIntensityWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeColorPointGXWithValueCompletion writes attribute color point gx with value completion.
+func (mbccc *MTRBaseClusterColorControl) WriteAttributeColorPointGXWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("writeAttributeColorPointGXWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeColorPointGXWithValueParamsCompletion writes attribute color point gx with value params completion.
+func (mbccc *MTRBaseClusterColorControl) WriteAttributeColorPointGXWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("writeAttributeColorPointGXWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeColorPointGYWithValueCompletion writes attribute color point gy with value completion.
+func (mbccc *MTRBaseClusterColorControl) WriteAttributeColorPointGYWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("writeAttributeColorPointGYWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeColorPointGYWithValueParamsCompletion writes attribute color point gy with value params completion.
+func (mbccc *MTRBaseClusterColorControl) WriteAttributeColorPointGYWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("writeAttributeColorPointGYWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeColorPointGIntensityWithValueCompletion writes attribute color point g intensity with value completion.
+func (mbccc *MTRBaseClusterColorControl) WriteAttributeColorPointGIntensityWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("writeAttributeColorPointGIntensityWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeColorPointGIntensityWithValueParamsCompletion writes attribute color point g intensity with value params completion.
+func (mbccc *MTRBaseClusterColorControl) WriteAttributeColorPointGIntensityWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("writeAttributeColorPointGIntensityWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeColorPointBXWithValueCompletion writes attribute color point bx with value completion.
+func (mbccc *MTRBaseClusterColorControl) WriteAttributeColorPointBXWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("writeAttributeColorPointBXWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeColorPointBXWithValueParamsCompletion writes attribute color point bx with value params completion.
+func (mbccc *MTRBaseClusterColorControl) WriteAttributeColorPointBXWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("writeAttributeColorPointBXWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeColorPointBYWithValueCompletion writes attribute color point by with value completion.
+func (mbccc *MTRBaseClusterColorControl) WriteAttributeColorPointBYWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("writeAttributeColorPointBYWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeColorPointBYWithValueParamsCompletion writes attribute color point by with value params completion.
+func (mbccc *MTRBaseClusterColorControl) WriteAttributeColorPointBYWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("writeAttributeColorPointBYWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeColorPointBIntensityWithValueCompletion writes attribute color point b intensity with value completion.
+func (mbccc *MTRBaseClusterColorControl) WriteAttributeColorPointBIntensityWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("writeAttributeColorPointBIntensityWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeColorPointBIntensityWithValueParamsCompletion writes attribute color point b intensity with value params completion.
+func (mbccc *MTRBaseClusterColorControl) WriteAttributeColorPointBIntensityWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("writeAttributeColorPointBIntensityWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeWhitePointXWithValueCompletionHandler writes attribute white point x with value completion handler.
+func (mbccc *MTRBaseClusterColorControl) WriteAttributeWhitePointXWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("writeAttributeWhitePointXWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeWhitePointXWithValueParamsCompletionHandler writes attribute white point x with value params completion handler.
+func (mbccc *MTRBaseClusterColorControl) WriteAttributeWhitePointXWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("writeAttributeWhitePointXWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeWhitePointYWithValueCompletionHandler writes attribute white point y with value completion handler.
+func (mbccc *MTRBaseClusterColorControl) WriteAttributeWhitePointYWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("writeAttributeWhitePointYWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeWhitePointYWithValueParamsCompletionHandler writes attribute white point y with value params completion handler.
+func (mbccc *MTRBaseClusterColorControl) WriteAttributeWhitePointYWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("writeAttributeWhitePointYWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeColorPointRXWithValueCompletionHandler writes attribute color point rx with value completion handler.
+func (mbccc *MTRBaseClusterColorControl) WriteAttributeColorPointRXWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("writeAttributeColorPointRXWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeColorPointRXWithValueParamsCompletionHandler writes attribute color point rx with value params completion handler.
+func (mbccc *MTRBaseClusterColorControl) WriteAttributeColorPointRXWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("writeAttributeColorPointRXWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeColorPointRYWithValueCompletionHandler writes attribute color point ry with value completion handler.
+func (mbccc *MTRBaseClusterColorControl) WriteAttributeColorPointRYWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("writeAttributeColorPointRYWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeColorPointRYWithValueParamsCompletionHandler writes attribute color point ry with value params completion handler.
+func (mbccc *MTRBaseClusterColorControl) WriteAttributeColorPointRYWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("writeAttributeColorPointRYWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeColorPointRIntensityWithValueCompletionHandler writes attribute color point r intensity with value completion handler.
+func (mbccc *MTRBaseClusterColorControl) WriteAttributeColorPointRIntensityWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("writeAttributeColorPointRIntensityWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeColorPointRIntensityWithValueParamsCompletionHandler writes attribute color point r intensity with value params completion handler.
+func (mbccc *MTRBaseClusterColorControl) WriteAttributeColorPointRIntensityWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("writeAttributeColorPointRIntensityWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeColorPointGXWithValueCompletionHandler writes attribute color point gx with value completion handler.
+func (mbccc *MTRBaseClusterColorControl) WriteAttributeColorPointGXWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("writeAttributeColorPointGXWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeColorPointGXWithValueParamsCompletionHandler writes attribute color point gx with value params completion handler.
+func (mbccc *MTRBaseClusterColorControl) WriteAttributeColorPointGXWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("writeAttributeColorPointGXWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeColorPointGYWithValueCompletionHandler writes attribute color point gy with value completion handler.
+func (mbccc *MTRBaseClusterColorControl) WriteAttributeColorPointGYWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("writeAttributeColorPointGYWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeColorPointGYWithValueParamsCompletionHandler writes attribute color point gy with value params completion handler.
+func (mbccc *MTRBaseClusterColorControl) WriteAttributeColorPointGYWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("writeAttributeColorPointGYWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeColorPointGIntensityWithValueCompletionHandler writes attribute color point g intensity with value completion handler.
+func (mbccc *MTRBaseClusterColorControl) WriteAttributeColorPointGIntensityWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("writeAttributeColorPointGIntensityWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeColorPointGIntensityWithValueParamsCompletionHandler writes attribute color point g intensity with value params completion handler.
+func (mbccc *MTRBaseClusterColorControl) WriteAttributeColorPointGIntensityWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("writeAttributeColorPointGIntensityWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeColorPointBXWithValueCompletionHandler writes attribute color point bx with value completion handler.
+func (mbccc *MTRBaseClusterColorControl) WriteAttributeColorPointBXWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("writeAttributeColorPointBXWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeColorPointBXWithValueParamsCompletionHandler writes attribute color point bx with value params completion handler.
+func (mbccc *MTRBaseClusterColorControl) WriteAttributeColorPointBXWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("writeAttributeColorPointBXWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeColorPointBYWithValueCompletionHandler writes attribute color point by with value completion handler.
+func (mbccc *MTRBaseClusterColorControl) WriteAttributeColorPointBYWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("writeAttributeColorPointBYWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeColorPointBYWithValueParamsCompletionHandler writes attribute color point by with value params completion handler.
+func (mbccc *MTRBaseClusterColorControl) WriteAttributeColorPointBYWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("writeAttributeColorPointBYWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeColorPointBIntensityWithValueCompletionHandler writes attribute color point b intensity with value completion handler.
+func (mbccc *MTRBaseClusterColorControl) WriteAttributeColorPointBIntensityWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("writeAttributeColorPointBIntensityWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeColorPointBIntensityWithValueParamsCompletionHandler writes attribute color point b intensity with value params completion handler.
+func (mbccc *MTRBaseClusterColorControl) WriteAttributeColorPointBIntensityWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("writeAttributeColorPointBIntensityWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
 }
 
 var _ MTRGenericBaseClusterProvider = (*MTRBaseClusterColorControl)(nil)

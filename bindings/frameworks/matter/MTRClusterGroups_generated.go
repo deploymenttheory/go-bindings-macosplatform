@@ -7,6 +7,7 @@ package matter
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -180,6 +181,29 @@ func (mcg *MTRClusterGroups) RemoveGroupWithParamsExpectedValuesExpectedValueInt
 	}
 }
 
+// RemoveAllGroupsWithParamsExpectedValuesExpectedValueIntervalCompletion removes all groups with params expected values expected value interval completion.
+func (mcg *MTRClusterGroups) RemoveAllGroupsWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRGroupsClusterRemoveAllGroupsParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcg)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcg), objc.RegisterName("removeAllGroupsWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// RemoveAllGroupsWithExpectedValuesExpectedValueIntervalCompletion removes all groups with expected values expected value interval completion.
+func (mcg *MTRClusterGroups) RemoveAllGroupsWithExpectedValuesExpectedValueIntervalCompletion(expectedValues []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcg)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcg), objc.RegisterName("removeAllGroupsWithExpectedValues:expectedValueInterval:completion:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// AddGroupIfIdentifyingWithParamsExpectedValuesExpectedValueIntervalCompletion adds group if identifying with params expected values expected value interval completion.
+func (mcg *MTRClusterGroups) AddGroupIfIdentifyingWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRGroupsClusterAddGroupIfIdentifyingParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcg)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcg), objc.RegisterName("addGroupIfIdentifyingWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // ReadAttributeNameSupportWithParams reads attribute name support with params.
 func (mcg *MTRClusterGroups) ReadAttributeNameSupportWithParams(params *MTRReadParams) map[string]obj.Object {
 	defer runtime.KeepAlive(mcg)
@@ -338,6 +362,29 @@ func (mcg *MTRClusterGroups) RemoveGroupWithParamsExpectedValuesExpectedValueInt
 		var _zero *MTRGroupsClusterRemoveGroupResponseParams
 		return _zero, ctx.Err()
 	}
+}
+
+// RemoveAllGroupsWithParamsExpectedValuesExpectedValueIntervalCompletionHandler removes all groups with params expected values expected value interval completion handler.
+func (mcg *MTRClusterGroups) RemoveAllGroupsWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRGroupsClusterRemoveAllGroupsParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcg)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcg), objc.RegisterName("removeAllGroupsWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// RemoveAllGroupsWithExpectedValuesExpectedValueIntervalCompletionHandler removes all groups with expected values expected value interval completion handler.
+func (mcg *MTRClusterGroups) RemoveAllGroupsWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcg)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcg), objc.RegisterName("removeAllGroupsWithExpectedValues:expectedValueInterval:completionHandler:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// AddGroupIfIdentifyingWithParamsExpectedValuesExpectedValueIntervalCompletionHandler adds group if identifying with params expected values expected value interval completion handler.
+func (mcg *MTRClusterGroups) AddGroupIfIdentifyingWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRGroupsClusterAddGroupIfIdentifyingParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcg)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcg), objc.RegisterName("addGroupIfIdentifyingWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
 }
 
 var _ MTRGenericClusterProvider = (*MTRClusterGroups)(nil)

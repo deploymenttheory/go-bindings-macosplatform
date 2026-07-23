@@ -113,3 +113,10 @@ func (ssm *SemanticSegmentationMatte) PixelFormatType() int {
 	_r := objc.Send[int](objref.IDOf(ssm), objc.RegisterName("pixelFormatType"))
 	return _r
 }
+
+// MattingImage provides access to the semantic segmentation matte's internal image. The pixel format can be queried using the pixelFormatType property.
+func (ssm *SemanticSegmentationMatte) MattingImage() unsafe.Pointer {
+	defer runtime.KeepAlive(ssm)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(ssm), objc.RegisterName("mattingImage"))
+	return _r
+}

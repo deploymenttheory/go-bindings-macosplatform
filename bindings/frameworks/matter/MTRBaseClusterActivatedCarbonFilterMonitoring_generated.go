@@ -7,6 +7,7 @@ package matter
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -58,6 +59,19 @@ func NewMTRBaseClusterActivatedCarbonFilterMonitoringWithDeviceEndpointIDQueue(d
 	return mTRBaseClusterActivatedCarbonFilterMonitoringAdopt(_id)
 }
 
+// ResetConditionWithParamsCompletion command ResetCondition Upon receipt, the device SHALL reset the Condition and ChangeIndicator attributes, indicating full resource availability and readiness for use, as initially configured.
+func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) ResetConditionWithParamsCompletion(params *MTRActivatedCarbonFilterMonitoringClusterResetConditionParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcacfm)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcacfm), objc.RegisterName("resetConditionWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// ResetConditionWithCompletion resets condition with completion.
+func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) ResetConditionWithCompletion(completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcacfm)
+	objc.Send[objc.ID](objref.IDOf(mbcacfm), objc.RegisterName("resetConditionWithCompletion:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // ReadAttributeConditionWithCompletion reads attribute condition with completion.
 //
 // ReadAttributeConditionWithCompletion blocks until the operation completes or ctx is cancelled.
@@ -101,7 +115,7 @@ func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttribute
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcacfm), objc.RegisterName("subscribeAttributeConditionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcacfm), objc.RegisterName("subscribeAttributeConditionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -154,7 +168,7 @@ func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttribute
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcacfm), objc.RegisterName("subscribeAttributeDegradationDirectionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcacfm), objc.RegisterName("subscribeAttributeDegradationDirectionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -207,7 +221,7 @@ func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttribute
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcacfm), objc.RegisterName("subscribeAttributeChangeIndicationWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcacfm), objc.RegisterName("subscribeAttributeChangeIndicationWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -260,7 +274,7 @@ func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttribute
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcacfm), objc.RegisterName("subscribeAttributeInPlaceIndicatorWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcacfm), objc.RegisterName("subscribeAttributeInPlaceIndicatorWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -296,6 +310,21 @@ func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeLastC
 	}
 }
 
+// WriteAttributeLastChangedTimeWithValueCompletion writes attribute last changed time with value completion.
+func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) WriteAttributeLastChangedTimeWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcacfm)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcacfm), objc.RegisterName("writeAttributeLastChangedTimeWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeLastChangedTimeWithValueParamsCompletion writes attribute last changed time with value params completion.
+func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) WriteAttributeLastChangedTimeWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcacfm)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcacfm), objc.RegisterName("writeAttributeLastChangedTimeWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeLastChangedTimeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeLastChangedTimeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -313,7 +342,7 @@ func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttribute
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcacfm), objc.RegisterName("subscribeAttributeLastChangedTimeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcacfm), objc.RegisterName("subscribeAttributeLastChangedTimeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -366,7 +395,7 @@ func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttribute
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcacfm), objc.RegisterName("subscribeAttributeReplacementProductListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcacfm), objc.RegisterName("subscribeAttributeReplacementProductListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -419,7 +448,7 @@ func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttribute
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcacfm), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcacfm), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -472,7 +501,7 @@ func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttribute
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcacfm), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcacfm), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -525,7 +554,7 @@ func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttribute
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcacfm), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcacfm), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -578,7 +607,7 @@ func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttribute
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcacfm), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcacfm), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -631,7 +660,7 @@ func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttribute
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcacfm), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcacfm), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err

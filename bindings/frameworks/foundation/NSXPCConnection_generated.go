@@ -142,6 +142,20 @@ func (xc *XPCConnection) WithScriptingProperties(scriptingProperties map[string]
 	return xc
 }
 
+// RemoteObjectProxyWithErrorHandler returns a proxy for the remote object (that is, the object exported from the other side of this connection) with the specified error handler.
+func (xc *XPCConnection) RemoteObjectProxyWithErrorHandler(handler func(unsafe.Pointer)) obj.Object {
+	defer runtime.KeepAlive(xc)
+	_r := objc.Send[objc.ID](objref.IDOf(xc), objc.RegisterName("remoteObjectProxyWithErrorHandler:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { handler(_b0) }))
+	return obj.Wrap(_r)
+}
+
+// SynchronousRemoteObjectProxyWithErrorHandler returns a proxy that makes a synchronous IPC call instead of the default async behavior.
+func (xc *XPCConnection) SynchronousRemoteObjectProxyWithErrorHandler(handler func(unsafe.Pointer)) obj.Object {
+	defer runtime.KeepAlive(xc)
+	_r := objc.Send[objc.ID](objref.IDOf(xc), objc.RegisterName("synchronousRemoteObjectProxyWithErrorHandler:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { handler(_b0) }))
+	return obj.Wrap(_r)
+}
+
 // Resume starts or resumes handling of messages on a connection.
 func (xc *XPCConnection) Resume() {
 	defer runtime.KeepAlive(xc)

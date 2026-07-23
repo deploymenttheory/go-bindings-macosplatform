@@ -84,6 +84,34 @@ func (epm *EffectPropertyMaterial) WithShininess(shininess float32) *EffectPrope
 	return epm
 }
 
+// AmbientColor returns the ambient color.
+func (epm *EffectPropertyMaterial) AmbientColor() unsafe.Pointer {
+	defer runtime.KeepAlive(epm)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(epm), objc.RegisterName("ambientColor"))
+	return _r
+}
+
+// DiffuseColor returns the diffuse color.
+func (epm *EffectPropertyMaterial) DiffuseColor() unsafe.Pointer {
+	defer runtime.KeepAlive(epm)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(epm), objc.RegisterName("diffuseColor"))
+	return _r
+}
+
+// SpecularColor returns the specular color.
+func (epm *EffectPropertyMaterial) SpecularColor() unsafe.Pointer {
+	defer runtime.KeepAlive(epm)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(epm), objc.RegisterName("specularColor"))
+	return _r
+}
+
+// EmissiveColor returns the emissive color.
+func (epm *EffectPropertyMaterial) EmissiveColor() unsafe.Pointer {
+	defer runtime.KeepAlive(epm)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(epm), objc.RegisterName("emissiveColor"))
+	return _r
+}
+
 // Shininess returns the shininess.
 func (epm *EffectPropertyMaterial) Shininess() float32 {
 	defer runtime.KeepAlive(epm)

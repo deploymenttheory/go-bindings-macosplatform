@@ -5,11 +5,10 @@
 package cloudkit
 
 import (
-	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
@@ -62,6 +61,12 @@ func (dauio *DiscoverAllUserIdentitiesOperation) WithUserIdentityDiscoveredBlock
 	return dauio
 }
 
+// WithDiscoverAllUserIdentitiesCompletionBlock sets the closure to execute when the operation finishes.
+func (dauio *DiscoverAllUserIdentitiesOperation) WithDiscoverAllUserIdentitiesCompletionBlock(discoverAllUserIdentitiesCompletionBlock func(unsafe.Pointer)) *DiscoverAllUserIdentitiesOperation {
+	objc.Send[objc.ID](objref.IDOf(dauio), objc.RegisterName("setDiscoverAllUserIdentitiesCompletionBlock:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { discoverAllUserIdentitiesCompletionBlock(_b0) }))
+	return dauio
+}
+
 // WithConfiguration sets the operation’s configuration.
 func (dauio *DiscoverAllUserIdentitiesOperation) WithConfiguration(configuration *OperationConfiguration) *DiscoverAllUserIdentitiesOperation {
 	defer runtime.KeepAlive(configuration)
@@ -111,26 +116,6 @@ func (dauio *DiscoverAllUserIdentitiesOperation) WithTimeoutIntervalForRequest(t
 func (dauio *DiscoverAllUserIdentitiesOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *DiscoverAllUserIdentitiesOperation {
 	objc.Send[objc.ID](objref.IDOf(dauio), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
 	return dauio
-}
-
-// SetDiscoverAllUserIdentitiesCompletionBlock wraps the corresponding Objective-C method.
-//
-// SetDiscoverAllUserIdentitiesCompletionBlock blocks until the operation completes or ctx is cancelled.
-func (dauio *DiscoverAllUserIdentitiesOperation) SetDiscoverAllUserIdentitiesCompletionBlock(ctx context.Context) error {
-	defer runtime.KeepAlive(dauio)
-	_ch := make(chan error, 1)
-	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
-		var _err error
-		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
-		_ch <- _err
-	})
-	objc.Send[objc.ID](objref.IDOf(dauio), objc.RegisterName("setDiscoverAllUserIdentitiesCompletionBlock:"), _block)
-	select {
-	case err := <-_ch:
-		return err
-	case <-ctx.Done():
-		return ctx.Err()
-	}
 }
 
 var _ OperationProvider = (*DiscoverAllUserIdentitiesOperation)(nil)

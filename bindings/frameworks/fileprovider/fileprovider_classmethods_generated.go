@@ -30,6 +30,13 @@ func ManagerForDomain(domain *FileProviderDomain) *FileProviderManager {
 	return FileProviderManagerFromID(_r)
 }
 
+// GetIdentifierForUserVisibleFileAtURLCompletionHandler returns the identifier and domain for a user-visible URL.
+func GetIdentifierForUserVisibleFileAtURLCompletionHandler(url string, completionHandler func(obj.Object, obj.Object, unsafe.Pointer)) {
+	objc.Send[objc.ID](objc.ID(_class("NSFileProviderManager")), objc.RegisterName("getIdentifierForUserVisibleFileAtURL:completionHandler:"), rt.FileURL(url), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
+		completionHandler(obj.Wrap(_b0), obj.Wrap(_b1), _b2)
+	}))
+}
+
 // AddDomain adds a domain to the File Provider extension.
 //
 // AddDomain blocks until the operation completes or ctx is cancelled.
@@ -68,6 +75,12 @@ func RemoveDomain(ctx context.Context, domain *FileProviderDomain) error {
 	case <-ctx.Done():
 		return ctx.Err()
 	}
+}
+
+// RemoveDomainModeCompletionHandler removes a domain from the File Provider extension using the specified options.
+func RemoveDomainModeCompletionHandler(domain *FileProviderDomain, mode FileProviderDomainRemovalMode, completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
+	defer runtime.KeepAlive(domain)
+	objc.Send[objc.ID](objc.ID(_class("NSFileProviderManager")), objc.RegisterName("removeDomain:mode:completionHandler:"), objref.IDOf(domain), mode, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 unsafe.Pointer) { completionHandler(_b0, _b1) }))
 }
 
 // GetDomains returns all of the File Provider extension’s domains.

@@ -78,6 +78,13 @@ func (amd *AmbientMixerDefinition) WithGainMetaParameterDefinition(gainMetaParam
 	return amd
 }
 
+// Orientation returns a readonly value of the ambient source's orientation relative to the scene root.
+func (amd *AmbientMixerDefinition) Orientation() unsafe.Pointer {
+	defer runtime.KeepAlive(amd)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(amd), objc.RegisterName("orientation"))
+	return _r
+}
+
 // InputChannelLayout returns a readonly value of the input channel layout this mixer was initialized with.
 func (amd *AmbientMixerDefinition) InputChannelLayout() obj.Object {
 	defer runtime.KeepAlive(amd)

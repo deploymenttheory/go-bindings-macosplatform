@@ -6,12 +6,28 @@ package storekit
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/rt"
 	"github.com/ebitengine/purego/objc"
 )
+
+// RegisterArcadeAppWithRandomFromLibRandomFromLibLengthResultHandler registers arcade app with random from lib random from lib length result handler.
+func RegisterArcadeAppWithRandomFromLibRandomFromLibLengthResultHandler(randomFromLib []byte, randomFromLibLength uint32, resultHandler func(obj.Object, uint32, obj.Object, uint32, unsafe.Pointer)) {
+	objc.Send[objc.ID](objc.ID(_class("SKArcadeService")), objc.RegisterName("registerArcadeAppWithRandomFromLib:randomFromLibLength:resultHandler:"), rt.BytesToNSData(randomFromLib), randomFromLibLength, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 uint32, _b2 objc.ID, _b3 uint32, _b4 unsafe.Pointer) {
+		resultHandler(obj.Wrap(_b0), _b1, obj.Wrap(_b2), _b3, _b4)
+	}))
+}
+
+// ArcadeSubscriptionStatusWithNonceResultHandler wraps the corresponding Objective-C method.
+func ArcadeSubscriptionStatusWithNonceResultHandler(nonce uint64, resultHandler func(obj.Object, uint32, obj.Object, uint32, unsafe.Pointer)) {
+	objc.Send[objc.ID](objc.ID(_class("SKArcadeService")), objc.RegisterName("arcadeSubscriptionStatusWithNonce:resultHandler:"), nonce, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 uint32, _b2 objc.ID, _b3 uint32, _b4 unsafe.Pointer) {
+		resultHandler(obj.Wrap(_b0), _b1, obj.Wrap(_b2), _b3, _b4)
+	}))
+}
 
 // RepairArcadeApp wraps the corresponding Objective-C method.
 func RepairArcadeApp() {
@@ -22,6 +38,11 @@ func RepairArcadeApp() {
 func AuthorizationStatus() CloudServiceAuthorizationStatus {
 	_r := objc.Send[CloudServiceAuthorizationStatus](objc.ID(_class("SKCloudServiceController")), objc.RegisterName("authorizationStatus"))
 	return _r
+}
+
+// RequestAuthorization asks the customer for permission to access the Music library on the device.
+func RequestAuthorization(completionHandler func(CloudServiceAuthorizationStatus)) {
+	objc.Send[objc.ID](objc.ID(_class("SKCloudServiceController")), objc.RegisterName("requestAuthorization:"), objc.NewBlock(func(_ objc.Block, _b0 CloudServiceAuthorizationStatus) { completionHandler(_b0) }))
 }
 
 // ContentURLForProductID returns the local location for the previously downloaded flie.

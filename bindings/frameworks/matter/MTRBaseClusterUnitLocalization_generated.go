@@ -7,6 +7,7 @@ package matter
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -93,6 +94,21 @@ func (mbcul *MTRBaseClusterUnitLocalization) ReadAttributeTemperatureUnitWithCom
 	}
 }
 
+// WriteAttributeTemperatureUnitWithValueCompletion writes attribute temperature unit with value completion.
+func (mbcul *MTRBaseClusterUnitLocalization) WriteAttributeTemperatureUnitWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcul)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcul), objc.RegisterName("writeAttributeTemperatureUnitWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeTemperatureUnitWithValueParamsCompletion writes attribute temperature unit with value params completion.
+func (mbcul *MTRBaseClusterUnitLocalization) WriteAttributeTemperatureUnitWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcul)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcul), objc.RegisterName("writeAttributeTemperatureUnitWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeTemperatureUnitWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeTemperatureUnitWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -110,7 +126,7 @@ func (mbcul *MTRBaseClusterUnitLocalization) SubscribeAttributeTemperatureUnitWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcul), objc.RegisterName("subscribeAttributeTemperatureUnitWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcul), objc.RegisterName("subscribeAttributeTemperatureUnitWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -163,7 +179,7 @@ func (mbcul *MTRBaseClusterUnitLocalization) SubscribeAttributeGeneratedCommandL
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcul), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcul), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -216,7 +232,7 @@ func (mbcul *MTRBaseClusterUnitLocalization) SubscribeAttributeAcceptedCommandLi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcul), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcul), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -269,7 +285,7 @@ func (mbcul *MTRBaseClusterUnitLocalization) SubscribeAttributeAttributeListWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcul), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcul), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -322,7 +338,7 @@ func (mbcul *MTRBaseClusterUnitLocalization) SubscribeAttributeFeatureMapWithPar
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcul), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcul), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -375,7 +391,7 @@ func (mbcul *MTRBaseClusterUnitLocalization) SubscribeAttributeClusterRevisionWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcul), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcul), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -411,6 +427,21 @@ func (mbcul *MTRBaseClusterUnitLocalization) ReadAttributeTemperatureUnit(ctx co
 	}
 }
 
+// WriteAttributeTemperatureUnitWithValueCompletionHandler writes attribute temperature unit with value completion handler.
+func (mbcul *MTRBaseClusterUnitLocalization) WriteAttributeTemperatureUnitWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcul)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcul), objc.RegisterName("writeAttributeTemperatureUnitWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeTemperatureUnitWithValueParamsCompletionHandler writes attribute temperature unit with value params completion handler.
+func (mbcul *MTRBaseClusterUnitLocalization) WriteAttributeTemperatureUnitWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcul)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcul), objc.RegisterName("writeAttributeTemperatureUnitWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeTemperatureUnitWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeTemperatureUnitWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -430,7 +461,7 @@ func (mbcul *MTRBaseClusterUnitLocalization) SubscribeAttributeTemperatureUnitWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcul), objc.RegisterName("subscribeAttributeTemperatureUnitWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcul), objc.RegisterName("subscribeAttributeTemperatureUnitWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -485,7 +516,7 @@ func (mbcul *MTRBaseClusterUnitLocalization) SubscribeAttributeGeneratedCommandL
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcul), objc.RegisterName("subscribeAttributeGeneratedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcul), objc.RegisterName("subscribeAttributeGeneratedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -540,7 +571,7 @@ func (mbcul *MTRBaseClusterUnitLocalization) SubscribeAttributeAcceptedCommandLi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcul), objc.RegisterName("subscribeAttributeAcceptedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcul), objc.RegisterName("subscribeAttributeAcceptedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -595,7 +626,7 @@ func (mbcul *MTRBaseClusterUnitLocalization) SubscribeAttributeAttributeListWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcul), objc.RegisterName("subscribeAttributeAttributeListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcul), objc.RegisterName("subscribeAttributeAttributeListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -650,7 +681,7 @@ func (mbcul *MTRBaseClusterUnitLocalization) SubscribeAttributeFeatureMapWithMin
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcul), objc.RegisterName("subscribeAttributeFeatureMapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcul), objc.RegisterName("subscribeAttributeFeatureMapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -705,7 +736,7 @@ func (mbcul *MTRBaseClusterUnitLocalization) SubscribeAttributeClusterRevisionWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcul), objc.RegisterName("subscribeAttributeClusterRevisionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcul), objc.RegisterName("subscribeAttributeClusterRevisionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err

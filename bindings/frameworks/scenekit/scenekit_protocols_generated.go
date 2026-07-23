@@ -142,7 +142,7 @@ type SceneRenderer interface {
 	SetOverlaySKScene(overlaySKScene obj.Object)
 	RenderingAPI() RenderingAPI
 	WorkingColorSpace() obj.Object
-	Context() obj.Object
+	Context() unsafe.Pointer
 	CurrentRenderCommandEncoder() obj.Object
 	CurrentRenderPassDescriptor() obj.Object
 	Device() obj.Object

@@ -6,6 +6,7 @@ package avfaudio
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -77,6 +78,12 @@ func (ara *AudioRoutingArbiter) String() string {
 func NewAudioRoutingArbiter() *AudioRoutingArbiter {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVAudioRoutingArbiter")), objc.RegisterName("new"))
 	return audioRoutingArbiterAdopt(_id)
+}
+
+// BeginArbitrationWithCategoryCompletionHandler begins routing arbitration to take ownership of a nearby Bluetooth audio route.
+func (ara *AudioRoutingArbiter) BeginArbitrationWithCategoryCompletionHandler(category AudioRoutingArbitrationCategory, handler func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(ara)
+	objc.Send[objc.ID](objref.IDOf(ara), objc.RegisterName("beginArbitrationWithCategory:completionHandler:"), category, objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { handler(_b0, _b1) }))
 }
 
 // LeaveArbitration stops an app’s participation in audio routing arbitration.

@@ -167,6 +167,20 @@ func (va *VoxelArray) DifferenceWithVoxels(voxels *VoxelArray) {
 	objc.Send[objc.ID](objref.IDOf(va), objc.RegisterName("differenceWithVoxels:"), objref.IDOf(voxels))
 }
 
+// IndexOfSpatialLocation returns voxel information corresponding to the specified point in the world coordinate space of the asset from which the voxel array was created.
+func (va *VoxelArray) IndexOfSpatialLocation(location unsafe.Pointer) unsafe.Pointer {
+	defer runtime.KeepAlive(va)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(va), objc.RegisterName("indexOfSpatialLocation:"), location)
+	return _r
+}
+
+// SpatialLocationOfIndex returns the location of the specified voxel in world coordinate space.
+func (va *VoxelArray) SpatialLocationOfIndex(index unsafe.Pointer) unsafe.Pointer {
+	defer runtime.KeepAlive(va)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(va), objc.RegisterName("spatialLocationOfIndex:"), index)
+	return _r
+}
+
 // ConvertToSignedShellField converts volume grid into a signed shell field by surrounding the surface voxels, which have shell level values of zero, by an inner layer of voxels with shell level values of negative one and an outer layer of voxels with shell level values of positive one. The volume model must be closed in order to generate a signed shell field.
 func (va *VoxelArray) ConvertToSignedShellField() {
 	defer runtime.KeepAlive(va)

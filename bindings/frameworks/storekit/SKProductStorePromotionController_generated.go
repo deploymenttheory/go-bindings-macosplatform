@@ -7,6 +7,7 @@ package storekit
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -79,6 +80,15 @@ func (pspc *ProductStorePromotionController) String() string {
 func NewProductStorePromotionController() *ProductStorePromotionController {
 	_id := objc.Send[objc.ID](objc.ID(_class("SKProductStorePromotionController")), objc.RegisterName("new"))
 	return productStorePromotionControllerAdopt(_id)
+}
+
+// FetchStorePromotionVisibilityForProductCompletionHandler reads the visibility setting of a promoted product in the App Store for this device.
+func (pspc *ProductStorePromotionController) FetchStorePromotionVisibilityForProductCompletionHandler(product *Product, completionHandler func(ProductStorePromotionVisibility, unsafe.Pointer)) {
+	defer runtime.KeepAlive(pspc)
+	defer runtime.KeepAlive(product)
+	objc.Send[objc.ID](objref.IDOf(pspc), objc.RegisterName("fetchStorePromotionVisibilityForProduct:completionHandler:"), objref.IDOf(product), objc.NewBlock(func(_ objc.Block, _b0 ProductStorePromotionVisibility, _b1 unsafe.Pointer) {
+		completionHandler(_b0, _b1)
+	}))
 }
 
 // UpdateStorePromotionVisibilityForProduct updates the visibility of the product on the App Store, per device.

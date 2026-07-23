@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -57,6 +58,13 @@ func NewMetricErrorEvent() *MetricErrorEvent {
 func (mee *MetricErrorEvent) DidRecover() bool {
 	defer runtime.KeepAlive(mee)
 	_r := objc.Send[bool](objref.IDOf(mee), objc.RegisterName("didRecover"))
+	return _r
+}
+
+// Error returns the error encountered.
+func (mee *MetricErrorEvent) Error() unsafe.Pointer {
+	defer runtime.KeepAlive(mee)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(mee), objc.RegisterName("error"))
 	return _r
 }
 

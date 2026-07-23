@@ -6,6 +6,7 @@ package metalperformanceshadersgraph
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -51,6 +52,18 @@ func graphExecutionDescriptorAdopt(id objc.ID) *GraphExecutionDescriptor {
 func NewGraphExecutionDescriptor() *GraphExecutionDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MPSGraphExecutionDescriptor")), objc.RegisterName("new"))
 	return graphExecutionDescriptorAdopt(_id)
+}
+
+// WithScheduledHandler sets the handler that graph calls when it schedules the execution.
+func (ged *GraphExecutionDescriptor) WithScheduledHandler(scheduledHandler func(unsafe.Pointer, unsafe.Pointer)) *GraphExecutionDescriptor {
+	objc.Send[objc.ID](objref.IDOf(ged), objc.RegisterName("setScheduledHandler:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 unsafe.Pointer) { scheduledHandler(_b0, _b1) }))
+	return ged
+}
+
+// WithCompletionHandler sets the handler that graph calls at the completion of the execution.
+func (ged *GraphExecutionDescriptor) WithCompletionHandler(completionHandler func(unsafe.Pointer, unsafe.Pointer)) *GraphExecutionDescriptor {
+	objc.Send[objc.ID](objref.IDOf(ged), objc.RegisterName("setCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 unsafe.Pointer) { completionHandler(_b0, _b1) }))
+	return ged
 }
 
 // WithWaitUntilCompleted sets the flag that blocks the execution call until the entire execution is complete.

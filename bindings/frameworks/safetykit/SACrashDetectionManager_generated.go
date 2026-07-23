@@ -6,6 +6,7 @@ package safetykit
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/shim"
@@ -88,6 +89,12 @@ func (cdm *CrashDetectionManager) WithDelegate(delegate CrashDetectionDelegate) 
 	objc.Send[objc.ID](objref.IDOf(cdm), _sel, _shim)
 	_shim.Send(objc.RegisterName("release"))
 	return cdm
+}
+
+// RequestAuthorizationWithCompletionHandler requests permission to access Crash Detection information.
+func (cdm *CrashDetectionManager) RequestAuthorizationWithCompletionHandler(handler func(AuthorizationStatus, unsafe.Pointer)) {
+	defer runtime.KeepAlive(cdm)
+	objc.Send[objc.ID](objref.IDOf(cdm), objc.RegisterName("requestAuthorizationWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 AuthorizationStatus, _b1 unsafe.Pointer) { handler(_b0, _b1) }))
 }
 
 // AuthorizationStatus returns authorizationStatus Returns a value indicating whether the user has authorized the app to receive Crash Detection updates

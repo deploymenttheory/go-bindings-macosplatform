@@ -90,4 +90,11 @@ func (hd *HostDevice) Reset() error {
 	return nil
 }
 
+// ConfigurationDescriptor returns the currently selected configuration descriptor This method uses descriptorWithType to return the configuration descriptor currently selected after a successful setConfiguration call
+func (hd *HostDevice) ConfigurationDescriptor() unsafe.Pointer {
+	defer runtime.KeepAlive(hd)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(hd), objc.RegisterName("configurationDescriptor"))
+	return _r
+}
+
 var _ HostObjectProvider = (*HostDevice)(nil)

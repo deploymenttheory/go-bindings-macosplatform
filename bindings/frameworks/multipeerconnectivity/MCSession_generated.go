@@ -122,6 +122,14 @@ func (s *Session) Disconnect() {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("disconnect"))
 }
 
+// SendResourceAtURLWithNameToPeerWithCompletionHandler sends the contents of a URL to a peer.
+func (s *Session) SendResourceAtURLWithNameToPeerWithCompletionHandler(resourceURL string, resourceName string, peerID *PeerID, completionHandler func(unsafe.Pointer)) *foundation.Progress {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(peerID)
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("sendResourceAtURL:withName:toPeer:withCompletionHandler:"), rt.FileURL(resourceURL), purego.NSString(resourceName), objref.IDOf(peerID), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+	return foundation.ProgressFromID(_r)
+}
+
 // StartStreamWithNameToPeer opens a byte stream to a nearby peer.
 func (s *Session) StartStreamWithNameToPeer(streamName string, peerID *PeerID) (result *foundation.OutputStream, err error) {
 	defer runtime.KeepAlive(s)

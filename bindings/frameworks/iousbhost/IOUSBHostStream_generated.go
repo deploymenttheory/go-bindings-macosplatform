@@ -94,10 +94,10 @@ func (hs *HostStream) SendIORequestWithDataBytesTransferred(data obj.Object) (by
 }
 
 // EnqueueIORequestWithDataErrorCompletionHandler enqueues an input/output request on the stream.
-func (hs *HostStream) EnqueueIORequestWithDataErrorCompletionHandler(data obj.Object, err unsafe.Pointer, completionHandler func(int, uint)) bool {
+func (hs *HostStream) EnqueueIORequestWithDataErrorCompletionHandler(data obj.Object, err unsafe.Pointer, completionHandler func(int, int)) bool {
 	defer runtime.KeepAlive(hs)
 	defer runtime.KeepAlive(data)
-	_r := objc.Send[bool](objref.IDOf(hs), objc.RegisterName("enqueueIORequestWithData:error:completionHandler:"), objref.IDOf(data), err, completionHandler)
+	_r := objc.Send[bool](objref.IDOf(hs), objc.RegisterName("enqueueIORequestWithData:error:completionHandler:"), objref.IDOf(data), err, objc.NewBlock(func(_ objc.Block, _b0 int, _b1 int) { completionHandler(_b0, _b1) }))
 	return _r
 }
 

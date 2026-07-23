@@ -6,6 +6,7 @@ package mpsneuralnetwork
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -87,6 +88,13 @@ func (ng *NNGraph) WithOutputStateIsTemporary(outputStateIsTemporary bool) *NNGr
 func (ng *NNGraph) ReloadFromDataSources() {
 	defer runtime.KeepAlive(ng)
 	objc.Send[objc.ID](objref.IDOf(ng), objc.RegisterName("reloadFromDataSources"))
+}
+
+// ExecuteAsyncWithSourceImagesCompletionHandler convenience method to execute a graph without having to manage many Metal details This function will synchronously encode the graph on a private command buffer, commit it to a MPS internal command queue and return. The GPU will start working. When the GPU is done, the completion handler will be called.  You should use the intervening time to encode other work for execution on the GPU, so that the GPU stays busy and doesn't clock down. The work will be performed on the MTLDevice that hosts the source images. This is a convenience API.  There are a few situations it does not handle optimally. These may be better handled using [encodeToCommandBuffer:sourceImages:]. Specifically:
+func (ng *NNGraph) ExecuteAsyncWithSourceImagesCompletionHandler(sourceImages []obj.Object, handler func(obj.Object, unsafe.Pointer)) obj.Object {
+	defer runtime.KeepAlive(ng)
+	_r := objc.Send[objc.ID](objref.IDOf(ng), objc.RegisterName("executeAsyncWithSourceImages:completionHandler:"), purego.SliceToNSArray(sourceImages, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { handler(obj.Wrap(_b0), _b1) }))
+	return obj.Wrap(_r)
 }
 
 // ReadCountForSourceImageAtIndex find the number of times a image will be read by the graph * From the set of images (or image batches) passed in to the graph, find the number of times the graph will read an image.  This may be needed by your application to correctly set the MPSImage.readCount property.

@@ -93,6 +93,13 @@ func (es *EnvelopeSegment) WithCurveType(curveType CurveType) *EnvelopeSegment {
 	return es
 }
 
+// EndPoint returns the end point of the envelope segment. The default value is [0.0, 0.0].
+func (es *EnvelopeSegment) EndPoint() unsafe.Pointer {
+	defer runtime.KeepAlive(es)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(es), objc.RegisterName("endPoint"))
+	return _r
+}
+
 // CurveType returns the curve type of the envelope segment. The default value is PHASECurveTypeLinear.
 func (es *EnvelopeSegment) CurveType() CurveType {
 	defer runtime.KeepAlive(es)

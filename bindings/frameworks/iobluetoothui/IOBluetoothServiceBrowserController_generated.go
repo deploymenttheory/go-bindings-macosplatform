@@ -6,6 +6,7 @@ package iobluetoothui
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -83,6 +84,20 @@ func NewBluetoothServiceBrowserController() *BluetoothServiceBrowserController {
 		}()
 	})
 	return _mainthread0
+}
+
+// ServiceBrowserControllerRef returns an IOBluetoothServiceBrowserControllerRef representation of the target IOBluetoothServiceBrowserController object.
+func (bsbc *BluetoothServiceBrowserController) ServiceBrowserControllerRef() unsafe.Pointer {
+	defer runtime.KeepAlive(bsbc)
+	var _mainthread0 unsafe.Pointer
+	purego.Main(func() {
+		_mainthread0 = func() unsafe.Pointer {
+			_r := objc.Send[unsafe.Pointer](objref.IDOf(bsbc), objc.RegisterName("getServiceBrowserControllerRef"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Discover invoke an already created window controller to display, and run the modal dialog.

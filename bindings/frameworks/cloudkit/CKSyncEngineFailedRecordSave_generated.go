@@ -6,6 +6,7 @@ package cloudkit
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -84,4 +85,11 @@ func (sefrs *SyncEngineFailedRecordSave) Record() *Record {
 	defer runtime.KeepAlive(sefrs)
 	_r := objc.Send[objc.ID](objref.IDOf(sefrs), objc.RegisterName("record"))
 	return RecordFromID(_r)
+}
+
+// Error returns a error that describes the reason for the unsuccessful attempt to modify the associated record.
+func (sefrs *SyncEngineFailedRecordSave) Error() unsafe.Pointer {
+	defer runtime.KeepAlive(sefrs)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(sefrs), objc.RegisterName("error"))
+	return _r
 }

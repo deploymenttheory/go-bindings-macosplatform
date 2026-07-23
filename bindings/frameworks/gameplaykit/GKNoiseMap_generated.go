@@ -116,6 +116,27 @@ func (nm *NoiseMap) SetValueAtPosition(value float32, position unsafe.Pointer) {
 	objc.Send[objc.ID](objref.IDOf(nm), objc.RegisterName("setValue:atPosition:"), value, position)
 }
 
+// Size returns the size of the 2D plane to extract from the 3D noise space, in noise space coordinates.  Used together with origin to determine the bounds of the extracted plane.  A smaller size captures a more "zoomed in" view of the noise, and vice versa.
+func (nm *NoiseMap) Size() unsafe.Pointer {
+	defer runtime.KeepAlive(nm)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(nm), objc.RegisterName("size"))
+	return _r
+}
+
+// Origin returns the origin of the 2D plane to extract from the 3D noise space, in noise space coordinates.  Used together with size to determine the bounds of the extracted plane.
+func (nm *NoiseMap) Origin() unsafe.Pointer {
+	defer runtime.KeepAlive(nm)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(nm), objc.RegisterName("origin"))
+	return _r
+}
+
+// SampleCount returns the number of equally-spaced samples to make across the 2D plane.  A higher number of samples produces finer resolution at the expense of increased memory.
+func (nm *NoiseMap) SampleCount() unsafe.Pointer {
+	defer runtime.KeepAlive(nm)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(nm), objc.RegisterName("sampleCount"))
+	return _r
+}
+
 // IsSeamless reports whether the values at the edges of the 2D plane are modified to allow seamless tiling of the extracted noise map.
 func (nm *NoiseMap) IsSeamless() bool {
 	defer runtime.KeepAlive(nm)

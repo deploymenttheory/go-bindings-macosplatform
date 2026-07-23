@@ -941,6 +941,20 @@ func (d *Document) PresentError(err unsafe.Pointer) bool {
 
 }
 
+// WillPresentError called when the receiver is about to present an error.
+func (d *Document) WillPresentError(err unsafe.Pointer) unsafe.Pointer {
+	defer runtime.KeepAlive(d)
+	var _mainthread0 unsafe.Pointer
+	purego.Main(func() {
+		_mainthread0 = func() unsafe.Pointer {
+			_r := objc.Send[unsafe.Pointer](objref.IDOf(d), objc.RegisterName("willPresentError:"), err)
+			return _r
+		}()
+	})
+	return _mainthread0
+
+}
+
 // WillNotPresentError confirms that the error object is not to be presented to the user and the error cannot be recovered from, so cleanup can be done.
 func (d *Document) WillNotPresentError(err unsafe.Pointer) {
 	defer runtime.KeepAlive(d)

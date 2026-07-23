@@ -135,6 +135,13 @@ func (mer *MTREventReport) Value() obj.Object {
 	return obj.Wrap(_r)
 }
 
+// Error returns if this specific path resulted in an error, the error (in the MTRInteractionErrorDomain or MTRErrorDomain) that corresponds to this path.
+func (mer *MTREventReport) Error() unsafe.Pointer {
+	defer runtime.KeepAlive(mer)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(mer), objc.RegisterName("error"))
+	return _r
+}
+
 // Timestamp returns the timestamp.
 func (mer *MTREventReport) Timestamp() *foundation.Number {
 	defer runtime.KeepAlive(mer)

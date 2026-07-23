@@ -6,6 +6,7 @@ package fskit
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -77,6 +78,13 @@ func (mfdb *MutableFileDataBuffer) String() string {
 func NewMutableFileDataBuffer() *MutableFileDataBuffer {
 	_id := objc.Send[objc.ID](objc.ID(_class("FSMutableFileDataBuffer")), objc.RegisterName("new"))
 	return mutableFileDataBufferAdopt(_id)
+}
+
+// MutableBytes returns the byte data.
+func (mfdb *MutableFileDataBuffer) MutableBytes() unsafe.Pointer {
+	defer runtime.KeepAlive(mfdb)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(mfdb), objc.RegisterName("mutableBytes"))
+	return _r
 }
 
 // Length returns the data length of the buffer.

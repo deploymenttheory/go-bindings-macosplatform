@@ -88,6 +88,20 @@ func (lpoir *LocalPointsOfInterestRequest) WithPointOfInterestFilter(pointOfInte
 	return lpoir
 }
 
+// Coordinate returns the coordinate.
+func (lpoir *LocalPointsOfInterestRequest) Coordinate() unsafe.Pointer {
+	defer runtime.KeepAlive(lpoir)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(lpoir), objc.RegisterName("coordinate"))
+	return _r
+}
+
+// Radius returns the radius.
+func (lpoir *LocalPointsOfInterestRequest) Radius() unsafe.Pointer {
+	defer runtime.KeepAlive(lpoir)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(lpoir), objc.RegisterName("radius"))
+	return _r
+}
+
 // PointOfInterestFilter returns the point of interest filter.
 func (lpoir *LocalPointsOfInterestRequest) PointOfInterestFilter() *PointOfInterestFilter {
 	defer runtime.KeepAlive(lpoir)

@@ -114,6 +114,20 @@ func (ad *Agent2D) WithMaxSpeed(maxSpeed float32) *Agent2D {
 	return ad
 }
 
+// Position returns position of the agent on the logical XY plane
+func (ad *Agent2D) Position() unsafe.Pointer {
+	defer runtime.KeepAlive(ad)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(ad), objc.RegisterName("position"))
+	return _r
+}
+
+// Velocity returns current logical velocity of the agent. The forward vector can be derived by normalizing this.
+func (ad *Agent2D) Velocity() unsafe.Pointer {
+	defer runtime.KeepAlive(ad)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(ad), objc.RegisterName("velocity"))
+	return _r
+}
+
 // Rotation returns z rotation of the agent on the logical XY plane
 func (ad *Agent2D) Rotation() float32 {
 	defer runtime.KeepAlive(ad)

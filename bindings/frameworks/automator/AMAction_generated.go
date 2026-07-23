@@ -221,6 +221,13 @@ func (a *Action) LogMessageWithLevelFormat(level LogLevel, format string) {
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("logMessageWithLevel:format:"), level, purego.NSString(format))
 }
 
+// Name returns the name.
+func (a *Action) Name() unsafe.Pointer {
+	defer runtime.KeepAlive(a)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(a), objc.RegisterName("name"))
+	return _r
+}
+
 // IgnoresInput wraps the corresponding Objective-C method.
 func (a *Action) IgnoresInput() bool {
 	defer runtime.KeepAlive(a)
@@ -228,10 +235,31 @@ func (a *Action) IgnoresInput() bool {
 	return _r
 }
 
+// SelectedInputType returns the selected input type.
+func (a *Action) SelectedInputType() unsafe.Pointer {
+	defer runtime.KeepAlive(a)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(a), objc.RegisterName("selectedInputType"))
+	return _r
+}
+
+// SelectedOutputType returns the selected output type.
+func (a *Action) SelectedOutputType() unsafe.Pointer {
+	defer runtime.KeepAlive(a)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(a), objc.RegisterName("selectedOutputType"))
+	return _r
+}
+
 // ProgressValue returns the progress value.
 func (a *Action) ProgressValue() float64 {
 	defer runtime.KeepAlive(a)
 	_r := objc.Send[float64](objref.IDOf(a), objc.RegisterName("progressValue"))
+	return _r
+}
+
+// Output returns the output.
+func (a *Action) Output() unsafe.Pointer {
+	defer runtime.KeepAlive(a)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(a), objc.RegisterName("output"))
 	return _r
 }
 

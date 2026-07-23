@@ -118,7 +118,7 @@ func (mp *MIDIPlayer) PrepareToPlay() {
 // Play plays the MIDI sequence.
 func (mp *MIDIPlayer) Play(completionHandler func()) {
 	defer runtime.KeepAlive(mp)
-	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("play:"), completionHandler)
+	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("play:"), objc.NewBlock(func(_ objc.Block) { completionHandler() }))
 }
 
 // Stop stops playing the sequence.

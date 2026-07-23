@@ -149,6 +149,13 @@ func (al *AreaLight) AreaRadius() float32 {
 	return _r
 }
 
+// SuperEllipticPower returns the super elliptic power.
+func (al *AreaLight) SuperEllipticPower() unsafe.Pointer {
+	defer runtime.KeepAlive(al)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(al), objc.RegisterName("superEllipticPower"))
+	return _r
+}
+
 // Aspect returns the aspect.
 func (al *AreaLight) Aspect() float32 {
 	defer runtime.KeepAlive(al)

@@ -7,6 +7,7 @@ package matter
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -67,6 +68,19 @@ func NewMTRBaseClusterThreadNetworkDiagnosticsWithDeviceEndpointQueue(device *MT
 	return mTRBaseClusterThreadNetworkDiagnosticsAdopt(_id)
 }
 
+// ResetCountsWithParamsCompletion command ResetCounts Reception of this command SHALL reset the following attributes to 0:
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ResetCountsWithParamsCompletion(params *MTRThreadNetworkDiagnosticsClusterResetCountsParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("resetCountsWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// ResetCountsWithCompletion resets counts with completion.
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ResetCountsWithCompletion(completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbctnd)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("resetCountsWithCompletion:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // ReadAttributeChannelWithCompletion reads attribute channel with completion.
 //
 // ReadAttributeChannelWithCompletion blocks until the operation completes or ctx is cancelled.
@@ -110,7 +124,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChannelW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeChannelWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeChannelWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -163,7 +177,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRoutingR
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRoutingRoleWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRoutingRoleWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -216,7 +230,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeNetworkN
 		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeNetworkNameWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeNetworkNameWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -269,7 +283,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePanIDWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributePanIdWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributePanIdWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -322,7 +336,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeExtended
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeExtendedPanIdWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeExtendedPanIdWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -375,7 +389,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeMeshLoca
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeMeshLocalPrefixWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeMeshLocalPrefixWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -428,7 +442,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeOverrunC
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeOverrunCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeOverrunCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -481,7 +495,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeNeighbor
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeNeighborTableWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeNeighborTableWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -534,7 +548,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRouteTab
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRouteTableWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRouteTableWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -587,7 +601,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePartitio
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributePartitionIdWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributePartitionIdWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -640,7 +654,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeWeightin
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeWeightingWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeWeightingWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -693,7 +707,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDataVers
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeDataVersionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeDataVersionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -746,7 +760,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeStableDa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeStableDataVersionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeStableDataVersionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -799,7 +813,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeLeaderRo
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeLeaderRouterIdWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeLeaderRouterIdWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -852,7 +866,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDetached
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeDetachedRoleCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeDetachedRoleCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -905,7 +919,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChildRol
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeChildRoleCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeChildRoleCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -958,7 +972,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRouterRo
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRouterRoleCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRouterRoleCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1011,7 +1025,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeLeaderRo
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeLeaderRoleCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeLeaderRoleCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1064,7 +1078,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAttachAt
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeAttachAttemptCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeAttachAttemptCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1117,7 +1131,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePartitio
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributePartitionIdChangeCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributePartitionIdChangeCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1170,7 +1184,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeBetterPa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeBetterPartitionAttachAttemptCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeBetterPartitionAttachAttemptCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1223,7 +1237,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeParentCh
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeParentChangeCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeParentChangeCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1276,7 +1290,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxTotalC
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxTotalCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxTotalCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1329,7 +1343,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxUnicas
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxUnicastCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxUnicastCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1382,7 +1396,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBroadc
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxBroadcastCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxBroadcastCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1435,7 +1449,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxAckReq
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxAckRequestedCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxAckRequestedCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1488,7 +1502,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxAckedC
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxAckedCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxAckedCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1541,7 +1555,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxNoAckR
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxNoAckRequestedCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxNoAckRequestedCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1594,7 +1608,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDataCo
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxDataCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxDataCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1647,7 +1661,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDataPo
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxDataPollCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxDataPollCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1700,7 +1714,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBeacon
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxBeaconCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxBeaconCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1753,7 +1767,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBeacon
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxBeaconRequestCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxBeaconRequestCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1806,7 +1820,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxOtherC
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxOtherCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxOtherCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1859,7 +1873,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxRetryC
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxRetryCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxRetryCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1912,7 +1926,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDirect
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxDirectMaxRetryExpiryCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxDirectMaxRetryExpiryCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1965,7 +1979,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxIndire
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxIndirectMaxRetryExpiryCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxIndirectMaxRetryExpiryCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2018,7 +2032,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrCca
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxErrCcaCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxErrCcaCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2071,7 +2085,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrAbo
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxErrAbortCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxErrAbortCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2124,7 +2138,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrBus
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxErrBusyChannelCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxErrBusyChannelCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2177,7 +2191,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxTotalC
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxTotalCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxTotalCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2230,7 +2244,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxUnicas
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxUnicastCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxUnicastCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2283,7 +2297,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBroadc
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxBroadcastCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxBroadcastCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2336,7 +2350,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDataCo
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxDataCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxDataCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2389,7 +2403,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDataPo
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxDataPollCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxDataPollCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2442,7 +2456,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBeacon
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxBeaconCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxBeaconCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2495,7 +2509,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBeacon
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxBeaconRequestCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxBeaconRequestCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2548,7 +2562,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxOtherC
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxOtherCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxOtherCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2601,7 +2615,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxAddres
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxAddressFilteredCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxAddressFilteredCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2654,7 +2668,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDestAd
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxDestAddrFilteredCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxDestAddrFilteredCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2707,7 +2721,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDuplic
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxDuplicatedCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxDuplicatedCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2760,7 +2774,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrNoF
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxErrNoFrameCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxErrNoFrameCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2813,7 +2827,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrUnk
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxErrUnknownNeighborCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxErrUnknownNeighborCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2866,7 +2880,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrInv
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxErrInvalidSrcAddrCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxErrInvalidSrcAddrCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2919,7 +2933,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrSec
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxErrSecCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxErrSecCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2972,7 +2986,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrFcs
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxErrFcsCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxErrFcsCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3025,7 +3039,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrOth
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxErrOtherCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxErrOtherCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3078,7 +3092,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeActiveTi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeActiveTimestampWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeActiveTimestampWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3131,7 +3145,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePendingT
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributePendingTimestampWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributePendingTimestampWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3184,7 +3198,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDelayWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeDelayWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeDelayWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3237,7 +3251,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeSecurity
 		_o.val = MTRThreadNetworkDiagnosticsClusterSecurityPolicyFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeSecurityPolicyWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeSecurityPolicyWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3290,7 +3304,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChannelP
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeChannelPage0MaskWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeChannelPage0MaskWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3343,7 +3357,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeOperatio
 		_o.val = MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeOperationalDatasetComponentsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeOperationalDatasetComponentsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3396,7 +3410,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeActiveNe
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeActiveNetworkFaultsListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeActiveNetworkFaultsListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3449,7 +3463,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeGenerate
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3502,7 +3516,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAccepted
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3555,7 +3569,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAttribut
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3608,7 +3622,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeFeatureM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3661,7 +3675,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeClusterR
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3669,6 +3683,19 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeClusterR
 		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
+}
+
+// ResetCountsWithParamsCompletionHandler resets counts with params completion handler.
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ResetCountsWithParamsCompletionHandler(params *MTRThreadNetworkDiagnosticsClusterResetCountsParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("resetCountsWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// ResetCountsWithCompletionHandler resets counts with completion handler.
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ResetCountsWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbctnd)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("resetCountsWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
 }
 
 // ReadAttributeChannel reads attribute channel.
@@ -3716,7 +3743,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChannelW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeChannelWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeChannelWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3771,7 +3798,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRoutingR
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRoutingRoleWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRoutingRoleWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3826,7 +3853,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeNetworkN
 		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeNetworkNameWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeNetworkNameWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3881,7 +3908,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePanIDWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributePanIdWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributePanIdWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3936,7 +3963,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeExtended
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeExtendedPanIdWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeExtendedPanIdWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3991,7 +4018,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeMeshLoca
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeMeshLocalPrefixWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeMeshLocalPrefixWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4046,7 +4073,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeOverrunC
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeOverrunCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeOverrunCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4101,7 +4128,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeNeighbor
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeNeighborTableListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeNeighborTableListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4156,7 +4183,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRouteTab
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRouteTableListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRouteTableListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4211,7 +4238,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePartitio
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributePartitionIdWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributePartitionIdWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4266,7 +4293,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeWeightin
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeWeightingWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeWeightingWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4321,7 +4348,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDataVers
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeDataVersionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeDataVersionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4376,7 +4403,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeStableDa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeStableDataVersionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeStableDataVersionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4431,7 +4458,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeLeaderRo
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeLeaderRouterIdWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeLeaderRouterIdWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4486,7 +4513,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDetached
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeDetachedRoleCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeDetachedRoleCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4541,7 +4568,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChildRol
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeChildRoleCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeChildRoleCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4596,7 +4623,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRouterRo
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRouterRoleCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRouterRoleCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4651,7 +4678,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeLeaderRo
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeLeaderRoleCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeLeaderRoleCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4706,7 +4733,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAttachAt
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeAttachAttemptCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeAttachAttemptCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4761,7 +4788,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePartitio
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributePartitionIdChangeCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributePartitionIdChangeCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4816,7 +4843,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeBetterPa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeBetterPartitionAttachAttemptCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeBetterPartitionAttachAttemptCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4871,7 +4898,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeParentCh
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeParentChangeCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeParentChangeCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4926,7 +4953,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxTotalC
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxTotalCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxTotalCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4981,7 +5008,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxUnicas
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxUnicastCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxUnicastCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5036,7 +5063,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBroadc
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxBroadcastCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxBroadcastCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5091,7 +5118,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxAckReq
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxAckRequestedCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxAckRequestedCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5146,7 +5173,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxAckedC
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxAckedCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxAckedCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5201,7 +5228,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxNoAckR
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxNoAckRequestedCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxNoAckRequestedCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5256,7 +5283,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDataCo
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxDataCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxDataCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5311,7 +5338,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDataPo
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxDataPollCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxDataPollCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5366,7 +5393,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBeacon
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxBeaconCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxBeaconCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5421,7 +5448,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBeacon
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxBeaconRequestCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxBeaconRequestCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5476,7 +5503,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxOtherC
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxOtherCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxOtherCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5531,7 +5558,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxRetryC
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxRetryCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxRetryCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5586,7 +5613,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDirect
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxDirectMaxRetryExpiryCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxDirectMaxRetryExpiryCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5641,7 +5668,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxIndire
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxIndirectMaxRetryExpiryCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxIndirectMaxRetryExpiryCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5696,7 +5723,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrCca
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxErrCcaCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxErrCcaCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5751,7 +5778,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrAbo
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxErrAbortCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxErrAbortCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5806,7 +5833,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrBus
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxErrBusyChannelCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxErrBusyChannelCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5861,7 +5888,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxTotalC
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxTotalCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxTotalCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5916,7 +5943,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxUnicas
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxUnicastCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxUnicastCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5971,7 +5998,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBroadc
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxBroadcastCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxBroadcastCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6026,7 +6053,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDataCo
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxDataCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxDataCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6081,7 +6108,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDataPo
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxDataPollCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxDataPollCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6136,7 +6163,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBeacon
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxBeaconCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxBeaconCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6191,7 +6218,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBeacon
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxBeaconRequestCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxBeaconRequestCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6246,7 +6273,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxOtherC
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxOtherCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxOtherCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6301,7 +6328,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxAddres
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxAddressFilteredCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxAddressFilteredCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6356,7 +6383,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDestAd
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxDestAddrFilteredCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxDestAddrFilteredCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6411,7 +6438,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDuplic
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxDuplicatedCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxDuplicatedCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6466,7 +6493,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrNoF
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxErrNoFrameCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxErrNoFrameCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6521,7 +6548,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrUnk
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxErrUnknownNeighborCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxErrUnknownNeighborCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6576,7 +6603,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrInv
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxErrInvalidSrcAddrCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxErrInvalidSrcAddrCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6631,7 +6658,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrSec
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxErrSecCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxErrSecCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6686,7 +6713,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrFcs
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxErrFcsCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxErrFcsCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6741,7 +6768,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrOth
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxErrOtherCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxErrOtherCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6796,7 +6823,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeActiveTi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeActiveTimestampWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeActiveTimestampWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6851,7 +6878,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePendingT
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributePendingTimestampWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributePendingTimestampWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6906,7 +6933,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDelayWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeDelayWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeDelayWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6961,7 +6988,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeSecurity
 		_o.val = MTRThreadNetworkDiagnosticsClusterSecurityPolicyFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeSecurityPolicyWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeSecurityPolicyWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -7016,7 +7043,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChannelP
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeChannelPage0MaskWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeChannelPage0MaskWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -7071,7 +7098,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeOperatio
 		_o.val = MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeOperationalDatasetComponentsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeOperationalDatasetComponentsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -7126,7 +7153,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeActiveNe
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeActiveNetworkFaultsListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeActiveNetworkFaultsListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -7181,7 +7208,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeGenerate
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeGeneratedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeGeneratedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -7236,7 +7263,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAccepted
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeAcceptedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeAcceptedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -7291,7 +7318,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAttribut
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeAttributeListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeAttributeListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -7346,7 +7373,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeFeatureM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeFeatureMapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeFeatureMapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -7401,7 +7428,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeClusterR
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeClusterRevisionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeClusterRevisionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err

@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -87,6 +88,13 @@ func (cp *CapturePhoto) Timestamp() coremedia.CMTime {
 	return _r
 }
 
+// PixelBuffer returns for uncompressed or RAW captures, this property offers access to the pixel data. Uncompressed captures, such as '420f' or 'BGRA', Bayer RAW captures, such as 'bgg4', or Apple ProRAW captures, such as 'l64r', present pixel data as a CVPixelBuffer. See AVCapturePhotoOutput's -appleProRAWEnabled for a discussion on the differences between Bayer RAW and Apple ProRAW. This property is analogous to CMSampleBufferGetImageBuffer(). The pixel buffer contains only the minimal attachments required for correct display. Compressed captures, such as 'jpeg', return nil.
+func (cp *CapturePhoto) PixelBuffer() unsafe.Pointer {
+	defer runtime.KeepAlive(cp)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(cp), objc.RegisterName("pixelBuffer"))
+	return _r
+}
+
 // ResolvedSettings returns the AVCaptureResolvedPhotoSettings associated with all photo results for a given -[AVCapturePhotoOutput capturePhotoWithSettings:delegate:] request. Even in the event of an error, the resolved settings are always non nil.
 func (cp *CapturePhoto) ResolvedSettings() *CaptureResolvedPhotoSettings {
 	defer runtime.KeepAlive(cp)
@@ -98,6 +106,13 @@ func (cp *CapturePhoto) ResolvedSettings() *CaptureResolvedPhotoSettings {
 func (cp *CapturePhoto) PhotoCount() int {
 	defer runtime.KeepAlive(cp)
 	_r := objc.Send[int](objref.IDOf(cp), objc.RegisterName("photoCount"))
+	return _r
+}
+
+// ConstantColorConfidenceMap returns a pixel buffer with the same aspect ratio as the constant color photo, where each pixel value (unsigned 8-bit integer) indicates how fully the constant color effect has been achieved in the corresponding region of the constant color photo -- 255 means full confidence, 0 means zero confidence. NULL is returned for any non constant color photos.
+func (cp *CapturePhoto) ConstantColorConfidenceMap() unsafe.Pointer {
+	defer runtime.KeepAlive(cp)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(cp), objc.RegisterName("constantColorConfidenceMap"))
 	return _r
 }
 

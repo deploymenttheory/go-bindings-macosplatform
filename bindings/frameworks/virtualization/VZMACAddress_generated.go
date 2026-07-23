@@ -81,6 +81,13 @@ func NewMACAddressWithString(str string) *MACAddress {
 	return mACAddressAdopt(_id)
 }
 
+// EthernetAddress returns the address represented as an ether_addr_t.
+func (ma *MACAddress) EthernetAddress() unsafe.Pointer {
+	defer runtime.KeepAlive(ma)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(ma), objc.RegisterName("ethernetAddress"))
+	return _r
+}
+
 // String returns the address represented as a string. The 6 bytes are represented in hexadecimal form, separated by a colon character. Alphabetical characters are lowercase. The address is compatible with the parameter of -[VZMACAddress initWithString:].
 func (ma *MACAddress) String() string {
 	defer runtime.KeepAlive(ma)

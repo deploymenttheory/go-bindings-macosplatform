@@ -51,15 +51,15 @@ func AXNameFromColor(color obj.Object) string {
 	return purego.GoString(_ret)
 }
 
-var _fnAXOpenSettingsFeature func(SettingsFeature, unsafe.Pointer)
+var _fnAXOpenSettingsFeature func(SettingsFeature, objc.Block)
 
 // AXOpenSettingsFeature calls the Accessibility framework function AXOpenSettingsFeature.
-func AXOpenSettingsFeature(feature SettingsFeature, completionHandler unsafe.Pointer) {
+func AXOpenSettingsFeature(feature SettingsFeature, completionHandler func(unsafe.Pointer)) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAXOpenSettingsFeature == nil {
 		ebipurego.RegisterLibFunc(&_fnAXOpenSettingsFeature, _lib, "AXOpenSettingsFeature")
 	}
-	_fnAXOpenSettingsFeature(feature, completionHandler)
+	_fnAXOpenSettingsFeature(feature, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
 }
 
 var _fnAXOpenSettingsFeatureIsSupported func(SettingsFeature) uint8

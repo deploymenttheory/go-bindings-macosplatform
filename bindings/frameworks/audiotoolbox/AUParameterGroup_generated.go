@@ -8,6 +8,7 @@ import (
 	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -45,6 +46,26 @@ func parameterGroupAdopt(id objc.ID) *ParameterGroup {
 	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
+}
+
+// WithImplementorValueObserver sets the callback for parameter value changes.
+func (pg *ParameterGroup) WithImplementorValueObserver(implementorValueObserver func(obj.Object, float32)) *ParameterGroup {
+	objc.Send[objc.ID](objref.IDOf(pg), objc.RegisterName("setImplementorValueObserver:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 float32) { implementorValueObserver(obj.Wrap(_b0), _b1) }))
+	return pg
+}
+
+// WithImplementorValueProvider sets the callback for refreshing known stale values in a parameter tree.
+func (pg *ParameterGroup) WithImplementorValueProvider(implementorValueProvider func(obj.Object) int) *ParameterGroup {
+	objc.Send[objc.ID](objref.IDOf(pg), objc.RegisterName("setImplementorValueProvider:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) int { return implementorValueProvider(obj.Wrap(_b0)) }))
+	return pg
+}
+
+// WithImplementorValueFromStringCallback sets the callback for converting a string to a parameter value.
+func (pg *ParameterGroup) WithImplementorValueFromStringCallback(implementorValueFromStringCallback func(obj.Object, obj.Object) int) *ParameterGroup {
+	objc.Send[objc.ID](objref.IDOf(pg), objc.RegisterName("setImplementorValueFromStringCallback:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) int {
+		return implementorValueFromStringCallback(obj.Wrap(_b0), obj.Wrap(_b1))
+	}))
+	return pg
 }
 
 // Children returns the group's child nodes (AUParameterGroupNode).

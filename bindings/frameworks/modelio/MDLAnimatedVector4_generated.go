@@ -70,6 +70,20 @@ func (av *AnimatedVector4) SetDouble4AtTime(value unsafe.Pointer, time_ float64)
 	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setDouble4:atTime:"), value, time_)
 }
 
+// Float4AtTime wraps the corresponding Objective-C method.
+func (av *AnimatedVector4) Float4AtTime(time_ float64) unsafe.Pointer {
+	defer runtime.KeepAlive(av)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(av), objc.RegisterName("float4AtTime:"), time_)
+	return _r
+}
+
+// Double4AtTime wraps the corresponding Objective-C method.
+func (av *AnimatedVector4) Double4AtTime(time_ float64) unsafe.Pointer {
+	defer runtime.KeepAlive(av)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(av), objc.RegisterName("double4AtTime:"), time_)
+	return _r
+}
+
 // ResetWithFloat4ArrayAtTimesCount resets with float4 array at times count.
 func (av *AnimatedVector4) ResetWithFloat4ArrayAtTimesCount(valuesArray unsafe.Pointer, count int) (timesArray float64) {
 	defer runtime.KeepAlive(av)

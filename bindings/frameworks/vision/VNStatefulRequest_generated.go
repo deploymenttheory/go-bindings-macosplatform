@@ -6,10 +6,12 @@ package vision
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -47,6 +49,13 @@ func statefulRequestAdopt(id objc.ID) *StatefulRequest {
 	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
+}
+
+// NewStatefulRequestWithFrameAnalysisSpacingCompletionHandler initializes a video-based request.
+func NewStatefulRequestWithFrameAnalysisSpacingCompletionHandler(frameAnalysisSpacing coremedia.CMTime, completionHandler func(obj.Object, unsafe.Pointer)) *StatefulRequest {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VNStatefulRequest")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrameAnalysisSpacing:completionHandler:"), frameAnalysisSpacing, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
+	return statefulRequestAdopt(_id)
 }
 
 // WithRegionOfInterest sets the region of the image in which Vision will perform the request.

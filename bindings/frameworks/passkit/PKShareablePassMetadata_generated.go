@@ -6,6 +6,7 @@ package passkit
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -147,6 +148,13 @@ func (spm *ShareablePassMetadata) SharingInstanceIdentifier() string {
 		return ""
 	}
 	return purego.GoString(_r)
+}
+
+// TemplateIdentifier returns the template identifier.
+func (spm *ShareablePassMetadata) TemplateIdentifier() unsafe.Pointer {
+	defer runtime.KeepAlive(spm)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(spm), objc.RegisterName("templateIdentifier"))
+	return _r
 }
 
 // CardTemplateIdentifier returns the card template identifier.

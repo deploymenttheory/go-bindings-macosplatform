@@ -88,3 +88,10 @@ func NewLocationSortDescriptorWithCoder(aDecoder obj.Object) *LocationSortDescri
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(aDecoder))
 	return locationSortDescriptorAdopt(_id)
 }
+
+// RelativeLocation returns the relative location.
+func (lsd *LocationSortDescriptor) RelativeLocation() unsafe.Pointer {
+	defer runtime.KeepAlive(lsd)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(lsd), objc.RegisterName("relativeLocation"))
+	return _r
+}

@@ -6,6 +6,7 @@ package healthkit
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -48,9 +49,15 @@ func correlationQueryAdopt(id objc.ID) *CorrelationQuery {
 	return x
 }
 
-// NewCorrelationQuery creates a new CorrelationQuery.
-func NewCorrelationQuery() *CorrelationQuery {
-	_id := objc.Send[objc.ID](objc.ID(_class("HKCorrelationQuery")), objc.RegisterName("new"))
+// NewCorrelationQueryWithTypePredicateSamplePredicatesCompletion instantiates and returns a correlation query.
+func NewCorrelationQueryWithTypePredicateSamplePredicatesCompletion(correlationType *CorrelationType, predicate obj.Object, samplePredicates obj.Object, completion func(obj.Object, obj.Object, unsafe.Pointer)) *CorrelationQuery {
+	defer runtime.KeepAlive(correlationType)
+	defer runtime.KeepAlive(predicate)
+	defer runtime.KeepAlive(samplePredicates)
+	_alloc := objc.Send[objc.ID](objc.ID(_class("HKCorrelationQuery")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:predicate:samplePredicates:completion:"), objref.IDOf(correlationType), objref.IDOf(predicate), objref.IDOf(samplePredicates), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
+		completion(obj.Wrap(_b0), obj.Wrap(_b1), _b2)
+	}))
 	return correlationQueryAdopt(_id)
 }
 

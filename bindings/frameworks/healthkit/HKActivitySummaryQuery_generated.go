@@ -5,7 +5,11 @@
 package healthkit
 
 import (
+	"runtime"
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -45,10 +49,22 @@ func activitySummaryQueryAdopt(id objc.ID) *ActivitySummaryQuery {
 	return x
 }
 
-// NewActivitySummaryQuery creates a new ActivitySummaryQuery.
-func NewActivitySummaryQuery() *ActivitySummaryQuery {
-	_id := objc.Send[objc.ID](objc.ID(_class("HKActivitySummaryQuery")), objc.RegisterName("new"))
+// NewActivitySummaryQueryWithPredicateResultsHandler initializes a new active summary query.
+func NewActivitySummaryQueryWithPredicateResultsHandler(predicate obj.Object, handler func(obj.Object, obj.Object, unsafe.Pointer)) *ActivitySummaryQuery {
+	defer runtime.KeepAlive(predicate)
+	_alloc := objc.Send[objc.ID](objc.ID(_class("HKActivitySummaryQuery")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPredicate:resultsHandler:"), objref.IDOf(predicate), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
+		handler(obj.Wrap(_b0), obj.Wrap(_b1), _b2)
+	}))
 	return activitySummaryQueryAdopt(_id)
+}
+
+// WithUpdateHandler sets the handler for monitoring updates to activity summaries saved in the HealthKit store.
+func (asq *ActivitySummaryQuery) WithUpdateHandler(updateHandler func(obj.Object, obj.Object, unsafe.Pointer)) *ActivitySummaryQuery {
+	objc.Send[objc.ID](objref.IDOf(asq), objc.RegisterName("setUpdateHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
+		updateHandler(obj.Wrap(_b0), obj.Wrap(_b1), _b2)
+	}))
+	return asq
 }
 
 var _ QueryProvider = (*ActivitySummaryQuery)(nil)

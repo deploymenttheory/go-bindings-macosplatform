@@ -7,6 +7,7 @@ package usernotifications
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/shim"
@@ -90,6 +91,12 @@ func (unc *UserNotificationCenter) WithDelegate(delegate UserNotificationCenterD
 	objc.Send[objc.ID](objref.IDOf(unc), _sel, _shim)
 	_shim.Send(objc.RegisterName("release"))
 	return unc
+}
+
+// RequestAuthorizationWithOptionsCompletionHandler requests a person’s authorization to allow local and remote notifications for your app.
+func (unc *UserNotificationCenter) RequestAuthorizationWithOptionsCompletionHandler(options AuthorizationOptions, completionHandler func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(unc)
+	objc.Send[objc.ID](objref.IDOf(unc), objc.RegisterName("requestAuthorizationWithOptions:completionHandler:"), options, objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { completionHandler(_b0, _b1) }))
 }
 
 // SetNotificationCategories registers the notification categories that your app supports.

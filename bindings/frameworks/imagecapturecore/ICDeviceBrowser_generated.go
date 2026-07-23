@@ -6,6 +6,7 @@ package imagecapturecore
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/shim"
@@ -129,4 +130,11 @@ func (db *DeviceBrowser) Devices() []*Device {
 	defer runtime.KeepAlive(db)
 	_arr := objc.Send[objc.ID](objref.IDOf(db), objc.RegisterName("devices"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Device { return DeviceFromID(_id) })
+}
+
+// PreferredDevice returns this property returns a device object that should be selected by the client application when it is launched. If the client application that calls this method is the auto-launch application associated with a device and that device is the last device attached (through USB, FireWire or network), then that device will be the preferred device. The best place to call this method is in the implmentation of the ICDeviceBrowser delegate method "deviceBrowser:didAddDevice:moreComing:", if the "moreComing" parameter passed to the delegate is "NO"; or in the delegate method "deviceBrowserDidEnumerateLocalDevices:".
+func (db *DeviceBrowser) PreferredDevice() unsafe.Pointer {
+	defer runtime.KeepAlive(db)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(db), objc.RegisterName("preferredDevice"))
+	return _r
 }

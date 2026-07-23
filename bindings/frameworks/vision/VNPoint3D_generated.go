@@ -83,6 +83,13 @@ func NewPoint3DWithPosition(position unsafe.Pointer) *Point3D {
 	return point3DAdopt(_id)
 }
 
+// Position returns the position.
+func (pd *Point3D) Position() unsafe.Pointer {
+	defer runtime.KeepAlive(pd)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(pd), objc.RegisterName("position"))
+	return _r
+}
+
 // isPoint3D marks Point3D — and, by embedding promotion, its
 // subclasses — as a member of the Point3D hierarchy, sealing its provider
 // interface so only real members satisfy it.

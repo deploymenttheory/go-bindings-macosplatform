@@ -86,10 +86,25 @@ func (s *Storyboard) InstantiateInitialController() obj.Object {
 	return obj.Wrap(_r)
 }
 
+// InstantiateInitialControllerWithCreator wraps the corresponding Objective-C method.
+func (s *Storyboard) InstantiateInitialControllerWithCreator(block func(obj.Object) int) obj.Object {
+	defer runtime.KeepAlive(s)
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("instantiateInitialControllerWithCreator:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) int { return block(obj.Wrap(_b0)) }))
+	return obj.Wrap(_r)
+}
+
 // InstantiateControllerWithIdentifier instantiates a specified view controller or window controller from a storyboard.
 func (s *Storyboard) InstantiateControllerWithIdentifier(identifier obj.Object) obj.Object {
 	defer runtime.KeepAlive(s)
 	defer runtime.KeepAlive(identifier)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("instantiateControllerWithIdentifier:"), objref.IDOf(identifier))
+	return obj.Wrap(_r)
+}
+
+// InstantiateControllerWithIdentifierCreator wraps the corresponding Objective-C method.
+func (s *Storyboard) InstantiateControllerWithIdentifierCreator(identifier obj.Object, block func(obj.Object) int) obj.Object {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(identifier)
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("instantiateControllerWithIdentifier:creator:"), objref.IDOf(identifier), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) int { return block(obj.Wrap(_b0)) }))
 	return obj.Wrap(_r)
 }

@@ -124,6 +124,13 @@ func (pw *PhysicsWorld) RemoveAllJoints() {
 	objc.Send[objc.ID](objref.IDOf(pw), objc.RegisterName("removeAllJoints"))
 }
 
+// SampleFieldsAt samples all of the field nodes in the scene and returns the summation of their forces at that point.
+func (pw *PhysicsWorld) SampleFieldsAt(position unsafe.Pointer) unsafe.Pointer {
+	defer runtime.KeepAlive(pw)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(pw), objc.RegisterName("sampleFieldsAt:"), position)
+	return _r
+}
+
 // BodyAtPoint searches for the first physics body that contains a point.
 func (pw *PhysicsWorld) BodyAtPoint(point corefoundation.CGPoint) *PhysicsBody {
 	defer runtime.KeepAlive(pw)

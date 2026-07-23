@@ -244,4 +244,11 @@ func (sct *SkyCubeTexture) Saturation() float32 {
 	return _r
 }
 
+// HighDynamicRangeCompression returns the high dynamic range compression.
+func (sct *SkyCubeTexture) HighDynamicRangeCompression() unsafe.Pointer {
+	defer runtime.KeepAlive(sct)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(sct), objc.RegisterName("highDynamicRangeCompression"))
+	return _r
+}
+
 var _ TextureProvider = (*SkyCubeTexture)(nil)

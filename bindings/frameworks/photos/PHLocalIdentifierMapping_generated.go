@@ -6,6 +6,7 @@ package photos
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -87,4 +88,11 @@ func (lim *LocalIdentifierMapping) LocalIdentifier() string {
 		return ""
 	}
 	return purego.GoString(_r)
+}
+
+// Error returns an error indicating why the \c localIdentifier is nil. \c PHPhotosErrorIdentifierNotFound if no resource could be found for the provided cloud identifier. \c PHPhotosErrorMultipleLocalIdentifiersFound if the cloud identifier matched more than one photo library resource, so there were multiple local identifiers found. The array of matching local identifiers can be retrieved from the error's user info via the \c PHLocalIdentifiersErrorKey
+func (lim *LocalIdentifierMapping) Error() unsafe.Pointer {
+	defer runtime.KeepAlive(lim)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(lim), objc.RegisterName("error"))
+	return _r
 }

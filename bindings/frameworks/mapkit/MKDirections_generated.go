@@ -6,6 +6,7 @@ package mapkit
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -79,6 +80,18 @@ func NewDirectionsWithRequest(request *DirectionsRequest) *Directions {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKDirections")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRequest:"), objref.IDOf(request))
 	return directionsAdopt(_id)
+}
+
+// CalculateDirectionsWithCompletionHandler begins calculating the requested route information asynchronously.
+func (d *Directions) CalculateDirectionsWithCompletionHandler(completionHandler func(obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(d)
+	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("calculateDirectionsWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
+}
+
+// CalculateETAWithCompletionHandler begins calculating the requested travel-time information asynchronously.
+func (d *Directions) CalculateETAWithCompletionHandler(completionHandler func(obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(d)
+	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("calculateETAWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
 }
 
 // Cancel cancels a pending request.

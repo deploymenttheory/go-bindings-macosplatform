@@ -42,6 +42,48 @@ func (e CloudServiceAuthorizationStatus) String() string {
 	}
 }
 
+// Constants that specify the current capabilities of the customer’s Music library on the device.
+//
+// Deprecated: Use MusicSubscription from MusicKit.
+// Bitmask — values may be combined with |.
+type CloudServiceCapability uint64
+
+const (
+	// The device does not allow playback of Apple Music content or the addition of tracks to the music library.
+	//
+	// Deprecated: Use MusicAuthorization.Status from MusicKit.
+	CloudServiceCapabilityNone CloudServiceCapability = 0
+	// The device allows playback of Apple Music catalog tracks.
+	CloudServiceCapabilityMusicCatalogPlayback CloudServiceCapability = 1
+	// The device allows subscription to the Apple Music catalog.
+	//
+	// Deprecated: Use the canBecomeSubscriber property of MusicSubscription from MusicKit.
+	CloudServiceCapabilityMusicCatalogSubscriptionEligible CloudServiceCapability = 2
+	// The device allows tracks to be added to the user’s music library.
+	//
+	// Deprecated: Use the canBecomeSubscriber property of MusicSubscription from MusicKit.
+	CloudServiceCapabilityAddToCloudMusicLibrary CloudServiceCapability = 256
+)
+
+// String returns the CloudServiceCapability constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CloudServiceCapability) String() string {
+	var parts []string
+	if e&CloudServiceCapabilityMusicCatalogPlayback != 0 {
+		parts = append(parts, "CloudServiceCapabilityMusicCatalogPlayback")
+	}
+	if e&CloudServiceCapabilityMusicCatalogSubscriptionEligible != 0 {
+		parts = append(parts, "CloudServiceCapabilityMusicCatalogSubscriptionEligible")
+	}
+	if e&CloudServiceCapabilityAddToCloudMusicLibrary != 0 {
+		parts = append(parts, "CloudServiceCapabilityAddToCloudMusicLibrary")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // The states that a download operation can be in.
 //
 // Deprecated: Hosted content is no longer supported.
@@ -1130,48 +1172,6 @@ func (e QosClass) String() string {
 	default:
 		return fmt.Sprintf("QosClass(%d)", int64(e))
 	}
-}
-
-// Constants that specify the current capabilities of the customer’s Music library on the device.
-//
-// Deprecated: Use MusicSubscription from MusicKit.
-// Bitmask — values may be combined with |.
-type CloudServiceCapability uint64
-
-const (
-	// The device does not allow playback of Apple Music content or the addition of tracks to the music library.
-	//
-	// Deprecated: Use MusicAuthorization.Status from MusicKit.
-	CloudServiceCapabilityNone CloudServiceCapability = 0
-	// The device allows playback of Apple Music catalog tracks.
-	CloudServiceCapabilityMusicCatalogPlayback CloudServiceCapability = 1
-	// The device allows subscription to the Apple Music catalog.
-	//
-	// Deprecated: Use the canBecomeSubscriber property of MusicSubscription from MusicKit.
-	CloudServiceCapabilityMusicCatalogSubscriptionEligible CloudServiceCapability = 2
-	// The device allows tracks to be added to the user’s music library.
-	//
-	// Deprecated: Use the canBecomeSubscriber property of MusicSubscription from MusicKit.
-	CloudServiceCapabilityAddToCloudMusicLibrary CloudServiceCapability = 256
-)
-
-// String returns the CloudServiceCapability constant's name, or its numeric form when the
-// value is not a known constant.
-func (e CloudServiceCapability) String() string {
-	var parts []string
-	if e&CloudServiceCapabilityMusicCatalogPlayback != 0 {
-		parts = append(parts, "CloudServiceCapabilityMusicCatalogPlayback")
-	}
-	if e&CloudServiceCapabilityMusicCatalogSubscriptionEligible != 0 {
-		parts = append(parts, "CloudServiceCapabilityMusicCatalogSubscriptionEligible")
-	}
-	if e&CloudServiceCapabilityAddToCloudMusicLibrary != 0 {
-		parts = append(parts, "CloudServiceCapabilityAddToCloudMusicLibrary")
-	}
-	if len(parts) == 0 {
-		return "0"
-	}
-	return strings.Join(parts, "|")
 }
 
 // Error codes for StoreKit errors.

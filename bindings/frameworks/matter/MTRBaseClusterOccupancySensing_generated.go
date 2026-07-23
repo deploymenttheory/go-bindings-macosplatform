@@ -7,6 +7,7 @@ package matter
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -110,7 +111,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeOccupancyWithPara
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeOccupancyWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeOccupancyWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -163,7 +164,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeOccupancySensorTy
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeOccupancySensorTypeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeOccupancySensorTypeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -216,7 +217,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeOccupancySensorTy
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeOccupancySensorTypeBitmapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeOccupancySensorTypeBitmapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -252,6 +253,21 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeHoldTimeWithCompletion
 	}
 }
 
+// WriteAttributeHoldTimeWithValueCompletion writes attribute hold time with value completion.
+func (mbcos *MTRBaseClusterOccupancySensing) WriteAttributeHoldTimeWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("writeAttributeHoldTimeWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeHoldTimeWithValueParamsCompletion writes attribute hold time with value params completion.
+func (mbcos *MTRBaseClusterOccupancySensing) WriteAttributeHoldTimeWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("writeAttributeHoldTimeWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeHoldTimeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeHoldTimeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -269,7 +285,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeHoldTimeWithParam
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeHoldTimeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeHoldTimeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -322,7 +338,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeHoldTimeLimitsWit
 		_o.val = MTROccupancySensingClusterHoldTimeLimitsStructFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeHoldTimeLimitsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeHoldTimeLimitsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -358,6 +374,21 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributePIROccupiedToUnoccupie
 	}
 }
 
+// WriteAttributePIROccupiedToUnoccupiedDelayWithValueCompletion writes attribute pir occupied to unoccupied delay with value completion.
+func (mbcos *MTRBaseClusterOccupancySensing) WriteAttributePIROccupiedToUnoccupiedDelayWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("writeAttributePIROccupiedToUnoccupiedDelayWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributePIROccupiedToUnoccupiedDelayWithValueParamsCompletion writes attribute pir occupied to unoccupied delay with value params completion.
+func (mbcos *MTRBaseClusterOccupancySensing) WriteAttributePIROccupiedToUnoccupiedDelayWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("writeAttributePIROccupiedToUnoccupiedDelayWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributePIROccupiedToUnoccupiedDelayWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePIROccupiedToUnoccupiedDelayWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -375,7 +406,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributePIROccupiedToUnoc
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributePIROccupiedToUnoccupiedDelayWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributePIROccupiedToUnoccupiedDelayWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -411,6 +442,21 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributePIRUnoccupiedToOccupie
 	}
 }
 
+// WriteAttributePIRUnoccupiedToOccupiedDelayWithValueCompletion writes attribute pir unoccupied to occupied delay with value completion.
+func (mbcos *MTRBaseClusterOccupancySensing) WriteAttributePIRUnoccupiedToOccupiedDelayWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("writeAttributePIRUnoccupiedToOccupiedDelayWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributePIRUnoccupiedToOccupiedDelayWithValueParamsCompletion writes attribute pir unoccupied to occupied delay with value params completion.
+func (mbcos *MTRBaseClusterOccupancySensing) WriteAttributePIRUnoccupiedToOccupiedDelayWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("writeAttributePIRUnoccupiedToOccupiedDelayWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributePIRUnoccupiedToOccupiedDelayWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePIRUnoccupiedToOccupiedDelayWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -428,7 +474,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributePIRUnoccupiedToOc
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributePIRUnoccupiedToOccupiedDelayWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributePIRUnoccupiedToOccupiedDelayWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -464,6 +510,21 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributePIRUnoccupiedToOccupie
 	}
 }
 
+// WriteAttributePIRUnoccupiedToOccupiedThresholdWithValueCompletion writes attribute pir unoccupied to occupied threshold with value completion.
+func (mbcos *MTRBaseClusterOccupancySensing) WriteAttributePIRUnoccupiedToOccupiedThresholdWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("writeAttributePIRUnoccupiedToOccupiedThresholdWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributePIRUnoccupiedToOccupiedThresholdWithValueParamsCompletion writes attribute pir unoccupied to occupied threshold with value params completion.
+func (mbcos *MTRBaseClusterOccupancySensing) WriteAttributePIRUnoccupiedToOccupiedThresholdWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("writeAttributePIRUnoccupiedToOccupiedThresholdWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributePIRUnoccupiedToOccupiedThresholdWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePIRUnoccupiedToOccupiedThresholdWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -481,7 +542,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributePIRUnoccupiedToOc
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributePIRUnoccupiedToOccupiedThresholdWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributePIRUnoccupiedToOccupiedThresholdWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -517,6 +578,21 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeUltrasonicOccupiedToUn
 	}
 }
 
+// WriteAttributeUltrasonicOccupiedToUnoccupiedDelayWithValueCompletion writes attribute ultrasonic occupied to unoccupied delay with value completion.
+func (mbcos *MTRBaseClusterOccupancySensing) WriteAttributeUltrasonicOccupiedToUnoccupiedDelayWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("writeAttributeUltrasonicOccupiedToUnoccupiedDelayWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeUltrasonicOccupiedToUnoccupiedDelayWithValueParamsCompletion writes attribute ultrasonic occupied to unoccupied delay with value params completion.
+func (mbcos *MTRBaseClusterOccupancySensing) WriteAttributeUltrasonicOccupiedToUnoccupiedDelayWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("writeAttributeUltrasonicOccupiedToUnoccupiedDelayWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeUltrasonicOccupiedToUnoccupiedDelayWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeUltrasonicOccupiedToUnoccupiedDelayWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -534,7 +610,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeUltrasonicOccupie
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeUltrasonicOccupiedToUnoccupiedDelayWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeUltrasonicOccupiedToUnoccupiedDelayWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -570,6 +646,21 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeUltrasonicUnoccupiedTo
 	}
 }
 
+// WriteAttributeUltrasonicUnoccupiedToOccupiedDelayWithValueCompletion writes attribute ultrasonic unoccupied to occupied delay with value completion.
+func (mbcos *MTRBaseClusterOccupancySensing) WriteAttributeUltrasonicUnoccupiedToOccupiedDelayWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("writeAttributeUltrasonicUnoccupiedToOccupiedDelayWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeUltrasonicUnoccupiedToOccupiedDelayWithValueParamsCompletion writes attribute ultrasonic unoccupied to occupied delay with value params completion.
+func (mbcos *MTRBaseClusterOccupancySensing) WriteAttributeUltrasonicUnoccupiedToOccupiedDelayWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("writeAttributeUltrasonicUnoccupiedToOccupiedDelayWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeUltrasonicUnoccupiedToOccupiedDelayWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeUltrasonicUnoccupiedToOccupiedDelayWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -587,7 +678,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeUltrasonicUnoccup
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeUltrasonicUnoccupiedToOccupiedDelayWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeUltrasonicUnoccupiedToOccupiedDelayWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -623,6 +714,21 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeUltrasonicUnoccupiedTo
 	}
 }
 
+// WriteAttributeUltrasonicUnoccupiedToOccupiedThresholdWithValueCompletion writes attribute ultrasonic unoccupied to occupied threshold with value completion.
+func (mbcos *MTRBaseClusterOccupancySensing) WriteAttributeUltrasonicUnoccupiedToOccupiedThresholdWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("writeAttributeUltrasonicUnoccupiedToOccupiedThresholdWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeUltrasonicUnoccupiedToOccupiedThresholdWithValueParamsCompletion writes attribute ultrasonic unoccupied to occupied threshold with value params completion.
+func (mbcos *MTRBaseClusterOccupancySensing) WriteAttributeUltrasonicUnoccupiedToOccupiedThresholdWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("writeAttributeUltrasonicUnoccupiedToOccupiedThresholdWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeUltrasonicUnoccupiedToOccupiedThresholdWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeUltrasonicUnoccupiedToOccupiedThresholdWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -640,7 +746,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeUltrasonicUnoccup
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeUltrasonicUnoccupiedToOccupiedThresholdWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeUltrasonicUnoccupiedToOccupiedThresholdWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -676,6 +782,21 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributePhysicalContactOccupie
 	}
 }
 
+// WriteAttributePhysicalContactOccupiedToUnoccupiedDelayWithValueCompletion writes attribute physical contact occupied to unoccupied delay with value completion.
+func (mbcos *MTRBaseClusterOccupancySensing) WriteAttributePhysicalContactOccupiedToUnoccupiedDelayWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("writeAttributePhysicalContactOccupiedToUnoccupiedDelayWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributePhysicalContactOccupiedToUnoccupiedDelayWithValueParamsCompletion writes attribute physical contact occupied to unoccupied delay with value params completion.
+func (mbcos *MTRBaseClusterOccupancySensing) WriteAttributePhysicalContactOccupiedToUnoccupiedDelayWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("writeAttributePhysicalContactOccupiedToUnoccupiedDelayWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributePhysicalContactOccupiedToUnoccupiedDelayWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePhysicalContactOccupiedToUnoccupiedDelayWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -693,7 +814,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributePhysicalContactOc
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributePhysicalContactOccupiedToUnoccupiedDelayWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributePhysicalContactOccupiedToUnoccupiedDelayWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -729,6 +850,21 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributePhysicalContactUnoccup
 	}
 }
 
+// WriteAttributePhysicalContactUnoccupiedToOccupiedDelayWithValueCompletion writes attribute physical contact unoccupied to occupied delay with value completion.
+func (mbcos *MTRBaseClusterOccupancySensing) WriteAttributePhysicalContactUnoccupiedToOccupiedDelayWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("writeAttributePhysicalContactUnoccupiedToOccupiedDelayWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributePhysicalContactUnoccupiedToOccupiedDelayWithValueParamsCompletion writes attribute physical contact unoccupied to occupied delay with value params completion.
+func (mbcos *MTRBaseClusterOccupancySensing) WriteAttributePhysicalContactUnoccupiedToOccupiedDelayWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("writeAttributePhysicalContactUnoccupiedToOccupiedDelayWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributePhysicalContactUnoccupiedToOccupiedDelayWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePhysicalContactUnoccupiedToOccupiedDelayWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -746,7 +882,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributePhysicalContactUn
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributePhysicalContactUnoccupiedToOccupiedDelayWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributePhysicalContactUnoccupiedToOccupiedDelayWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -782,6 +918,21 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributePhysicalContactUnoccup
 	}
 }
 
+// WriteAttributePhysicalContactUnoccupiedToOccupiedThresholdWithValueCompletion writes attribute physical contact unoccupied to occupied threshold with value completion.
+func (mbcos *MTRBaseClusterOccupancySensing) WriteAttributePhysicalContactUnoccupiedToOccupiedThresholdWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("writeAttributePhysicalContactUnoccupiedToOccupiedThresholdWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributePhysicalContactUnoccupiedToOccupiedThresholdWithValueParamsCompletion writes attribute physical contact unoccupied to occupied threshold with value params completion.
+func (mbcos *MTRBaseClusterOccupancySensing) WriteAttributePhysicalContactUnoccupiedToOccupiedThresholdWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("writeAttributePhysicalContactUnoccupiedToOccupiedThresholdWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributePhysicalContactUnoccupiedToOccupiedThresholdWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePhysicalContactUnoccupiedToOccupiedThresholdWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -799,7 +950,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributePhysicalContactUn
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributePhysicalContactUnoccupiedToOccupiedThresholdWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributePhysicalContactUnoccupiedToOccupiedThresholdWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -852,7 +1003,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeGeneratedCommandL
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -905,7 +1056,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeAcceptedCommandLi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -958,7 +1109,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeAttributeListWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1011,7 +1162,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeFeatureMapWithPar
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1064,7 +1215,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeClusterRevisionWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1119,7 +1270,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeOccupancyWithMinI
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeOccupancyWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeOccupancyWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1174,7 +1325,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeOccupancySensorTy
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeOccupancySensorTypeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeOccupancySensorTypeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1229,7 +1380,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeOccupancySensorTy
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeOccupancySensorTypeBitmapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeOccupancySensorTypeBitmapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1265,6 +1416,21 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributePirOccupiedToUnoccupie
 	}
 }
 
+// WriteAttributePirOccupiedToUnoccupiedDelayWithValueCompletionHandler writes attribute pir occupied to unoccupied delay with value completion handler.
+func (mbcos *MTRBaseClusterOccupancySensing) WriteAttributePirOccupiedToUnoccupiedDelayWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("writeAttributePirOccupiedToUnoccupiedDelayWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributePirOccupiedToUnoccupiedDelayWithValueParamsCompletionHandler writes attribute pir occupied to unoccupied delay with value params completion handler.
+func (mbcos *MTRBaseClusterOccupancySensing) WriteAttributePirOccupiedToUnoccupiedDelayWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("writeAttributePirOccupiedToUnoccupiedDelayWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributePirOccupiedToUnoccupiedDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePirOccupiedToUnoccupiedDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1284,7 +1450,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributePirOccupiedToUnoc
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributePirOccupiedToUnoccupiedDelayWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributePirOccupiedToUnoccupiedDelayWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1320,6 +1486,21 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributePirUnoccupiedToOccupie
 	}
 }
 
+// WriteAttributePirUnoccupiedToOccupiedDelayWithValueCompletionHandler writes attribute pir unoccupied to occupied delay with value completion handler.
+func (mbcos *MTRBaseClusterOccupancySensing) WriteAttributePirUnoccupiedToOccupiedDelayWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("writeAttributePirUnoccupiedToOccupiedDelayWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributePirUnoccupiedToOccupiedDelayWithValueParamsCompletionHandler writes attribute pir unoccupied to occupied delay with value params completion handler.
+func (mbcos *MTRBaseClusterOccupancySensing) WriteAttributePirUnoccupiedToOccupiedDelayWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("writeAttributePirUnoccupiedToOccupiedDelayWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributePirUnoccupiedToOccupiedDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePirUnoccupiedToOccupiedDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1339,7 +1520,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributePirUnoccupiedToOc
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributePirUnoccupiedToOccupiedDelayWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributePirUnoccupiedToOccupiedDelayWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1375,6 +1556,21 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributePirUnoccupiedToOccupie
 	}
 }
 
+// WriteAttributePirUnoccupiedToOccupiedThresholdWithValueCompletionHandler writes attribute pir unoccupied to occupied threshold with value completion handler.
+func (mbcos *MTRBaseClusterOccupancySensing) WriteAttributePirUnoccupiedToOccupiedThresholdWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("writeAttributePirUnoccupiedToOccupiedThresholdWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributePirUnoccupiedToOccupiedThresholdWithValueParamsCompletionHandler writes attribute pir unoccupied to occupied threshold with value params completion handler.
+func (mbcos *MTRBaseClusterOccupancySensing) WriteAttributePirUnoccupiedToOccupiedThresholdWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("writeAttributePirUnoccupiedToOccupiedThresholdWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributePirUnoccupiedToOccupiedThresholdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePirUnoccupiedToOccupiedThresholdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1394,7 +1590,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributePirUnoccupiedToOc
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributePirUnoccupiedToOccupiedThresholdWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributePirUnoccupiedToOccupiedThresholdWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1430,6 +1626,21 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeUltrasonicOccupiedToUn
 	}
 }
 
+// WriteAttributeUltrasonicOccupiedToUnoccupiedDelayWithValueCompletionHandler writes attribute ultrasonic occupied to unoccupied delay with value completion handler.
+func (mbcos *MTRBaseClusterOccupancySensing) WriteAttributeUltrasonicOccupiedToUnoccupiedDelayWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("writeAttributeUltrasonicOccupiedToUnoccupiedDelayWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeUltrasonicOccupiedToUnoccupiedDelayWithValueParamsCompletionHandler writes attribute ultrasonic occupied to unoccupied delay with value params completion handler.
+func (mbcos *MTRBaseClusterOccupancySensing) WriteAttributeUltrasonicOccupiedToUnoccupiedDelayWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("writeAttributeUltrasonicOccupiedToUnoccupiedDelayWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeUltrasonicOccupiedToUnoccupiedDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeUltrasonicOccupiedToUnoccupiedDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1449,7 +1660,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeUltrasonicOccupie
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeUltrasonicOccupiedToUnoccupiedDelayWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeUltrasonicOccupiedToUnoccupiedDelayWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1485,6 +1696,21 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeUltrasonicUnoccupiedTo
 	}
 }
 
+// WriteAttributeUltrasonicUnoccupiedToOccupiedDelayWithValueCompletionHandler writes attribute ultrasonic unoccupied to occupied delay with value completion handler.
+func (mbcos *MTRBaseClusterOccupancySensing) WriteAttributeUltrasonicUnoccupiedToOccupiedDelayWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("writeAttributeUltrasonicUnoccupiedToOccupiedDelayWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeUltrasonicUnoccupiedToOccupiedDelayWithValueParamsCompletionHandler writes attribute ultrasonic unoccupied to occupied delay with value params completion handler.
+func (mbcos *MTRBaseClusterOccupancySensing) WriteAttributeUltrasonicUnoccupiedToOccupiedDelayWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("writeAttributeUltrasonicUnoccupiedToOccupiedDelayWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeUltrasonicUnoccupiedToOccupiedDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeUltrasonicUnoccupiedToOccupiedDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1504,7 +1730,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeUltrasonicUnoccup
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeUltrasonicUnoccupiedToOccupiedDelayWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeUltrasonicUnoccupiedToOccupiedDelayWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1540,6 +1766,21 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeUltrasonicUnoccupiedTo
 	}
 }
 
+// WriteAttributeUltrasonicUnoccupiedToOccupiedThresholdWithValueCompletionHandler writes attribute ultrasonic unoccupied to occupied threshold with value completion handler.
+func (mbcos *MTRBaseClusterOccupancySensing) WriteAttributeUltrasonicUnoccupiedToOccupiedThresholdWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("writeAttributeUltrasonicUnoccupiedToOccupiedThresholdWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeUltrasonicUnoccupiedToOccupiedThresholdWithValueParamsCompletionHandler writes attribute ultrasonic unoccupied to occupied threshold with value params completion handler.
+func (mbcos *MTRBaseClusterOccupancySensing) WriteAttributeUltrasonicUnoccupiedToOccupiedThresholdWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("writeAttributeUltrasonicUnoccupiedToOccupiedThresholdWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeUltrasonicUnoccupiedToOccupiedThresholdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeUltrasonicUnoccupiedToOccupiedThresholdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1559,7 +1800,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeUltrasonicUnoccup
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeUltrasonicUnoccupiedToOccupiedThresholdWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeUltrasonicUnoccupiedToOccupiedThresholdWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1595,6 +1836,21 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributePhysicalContactOccupie
 	}
 }
 
+// WriteAttributePhysicalContactOccupiedToUnoccupiedDelayWithValueCompletionHandler writes attribute physical contact occupied to unoccupied delay with value completion handler.
+func (mbcos *MTRBaseClusterOccupancySensing) WriteAttributePhysicalContactOccupiedToUnoccupiedDelayWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("writeAttributePhysicalContactOccupiedToUnoccupiedDelayWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributePhysicalContactOccupiedToUnoccupiedDelayWithValueParamsCompletionHandler writes attribute physical contact occupied to unoccupied delay with value params completion handler.
+func (mbcos *MTRBaseClusterOccupancySensing) WriteAttributePhysicalContactOccupiedToUnoccupiedDelayWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("writeAttributePhysicalContactOccupiedToUnoccupiedDelayWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributePhysicalContactOccupiedToUnoccupiedDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePhysicalContactOccupiedToUnoccupiedDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1614,7 +1870,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributePhysicalContactOc
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributePhysicalContactOccupiedToUnoccupiedDelayWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributePhysicalContactOccupiedToUnoccupiedDelayWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1650,6 +1906,21 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributePhysicalContactUnoccup
 	}
 }
 
+// WriteAttributePhysicalContactUnoccupiedToOccupiedDelayWithValueCompletionHandler writes attribute physical contact unoccupied to occupied delay with value completion handler.
+func (mbcos *MTRBaseClusterOccupancySensing) WriteAttributePhysicalContactUnoccupiedToOccupiedDelayWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("writeAttributePhysicalContactUnoccupiedToOccupiedDelayWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributePhysicalContactUnoccupiedToOccupiedDelayWithValueParamsCompletionHandler writes attribute physical contact unoccupied to occupied delay with value params completion handler.
+func (mbcos *MTRBaseClusterOccupancySensing) WriteAttributePhysicalContactUnoccupiedToOccupiedDelayWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("writeAttributePhysicalContactUnoccupiedToOccupiedDelayWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributePhysicalContactUnoccupiedToOccupiedDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePhysicalContactUnoccupiedToOccupiedDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1669,7 +1940,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributePhysicalContactUn
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributePhysicalContactUnoccupiedToOccupiedDelayWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributePhysicalContactUnoccupiedToOccupiedDelayWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1705,6 +1976,21 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributePhysicalContactUnoccup
 	}
 }
 
+// WriteAttributePhysicalContactUnoccupiedToOccupiedThresholdWithValueCompletionHandler writes attribute physical contact unoccupied to occupied threshold with value completion handler.
+func (mbcos *MTRBaseClusterOccupancySensing) WriteAttributePhysicalContactUnoccupiedToOccupiedThresholdWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("writeAttributePhysicalContactUnoccupiedToOccupiedThresholdWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributePhysicalContactUnoccupiedToOccupiedThresholdWithValueParamsCompletionHandler writes attribute physical contact unoccupied to occupied threshold with value params completion handler.
+func (mbcos *MTRBaseClusterOccupancySensing) WriteAttributePhysicalContactUnoccupiedToOccupiedThresholdWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("writeAttributePhysicalContactUnoccupiedToOccupiedThresholdWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributePhysicalContactUnoccupiedToOccupiedThresholdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePhysicalContactUnoccupiedToOccupiedThresholdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1724,7 +2010,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributePhysicalContactUn
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributePhysicalContactUnoccupiedToOccupiedThresholdWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributePhysicalContactUnoccupiedToOccupiedThresholdWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1779,7 +2065,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeGeneratedCommandL
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeGeneratedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeGeneratedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1834,7 +2120,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeAcceptedCommandLi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeAcceptedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeAcceptedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1889,7 +2175,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeAttributeListWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeAttributeListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeAttributeListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1944,7 +2230,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeFeatureMapWithMin
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeFeatureMapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeFeatureMapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1999,7 +2285,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeClusterRevisionWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeClusterRevisionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeClusterRevisionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err

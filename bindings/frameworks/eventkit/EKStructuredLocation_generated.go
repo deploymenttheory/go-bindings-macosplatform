@@ -82,6 +82,13 @@ func (sl *StructuredLocation) Title() string {
 	return purego.GoString(_r)
 }
 
+// GeoLocation returns the geo location.
+func (sl *StructuredLocation) GeoLocation() unsafe.Pointer {
+	defer runtime.KeepAlive(sl)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(sl), objc.RegisterName("geoLocation"))
+	return _r
+}
+
 // Radius returns the radius.
 func (sl *StructuredLocation) Radius() float64 {
 	defer runtime.KeepAlive(sl)

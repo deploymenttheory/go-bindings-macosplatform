@@ -7,6 +7,7 @@ package matter
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -113,6 +114,14 @@ func (mcosup *MTRClusterOTASoftwareUpdateProvider) ApplyUpdateRequestWithParamsE
 		var _zero *MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams
 		return _zero, ctx.Err()
 	}
+}
+
+// NotifyUpdateAppliedWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+func (mcosup *MTRClusterOTASoftwareUpdateProvider) NotifyUpdateAppliedWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTROTASoftwareUpdateProviderClusterNotifyUpdateAppliedParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcosup)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcosup), objc.RegisterName("notifyUpdateAppliedWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
 // ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.

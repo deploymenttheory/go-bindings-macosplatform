@@ -7,6 +7,7 @@ package matter
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -58,6 +59,46 @@ func NewMTRBaseClusterEnergyEVSEWithDeviceEndpointIDQueue(device *MTRBaseDevice,
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterEnergyEVSE")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterEnergyEVSEAdopt(_id)
+}
+
+// DisableWithParamsCompletion command Disable
+func (mbcee *MTRBaseClusterEnergyEVSE) DisableWithParamsCompletion(params *MTREnergyEVSEClusterDisableParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcee)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("disableWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// DisableWithCompletion disables with completion.
+func (mbcee *MTRBaseClusterEnergyEVSE) DisableWithCompletion(completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcee)
+	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("disableWithCompletion:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// EnableChargingWithParamsCompletion command EnableCharging
+func (mbcee *MTRBaseClusterEnergyEVSE) EnableChargingWithParamsCompletion(params *MTREnergyEVSEClusterEnableChargingParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcee)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("enableChargingWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// StartDiagnosticsWithParamsCompletion command StartDiagnostics
+func (mbcee *MTRBaseClusterEnergyEVSE) StartDiagnosticsWithParamsCompletion(params *MTREnergyEVSEClusterStartDiagnosticsParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcee)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("startDiagnosticsWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// StartDiagnosticsWithCompletion starts diagnostics with completion.
+func (mbcee *MTRBaseClusterEnergyEVSE) StartDiagnosticsWithCompletion(completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcee)
+	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("startDiagnosticsWithCompletion:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// SetTargetsWithParamsCompletion command SetTargets
+func (mbcee *MTRBaseClusterEnergyEVSE) SetTargetsWithParamsCompletion(params *MTREnergyEVSEClusterSetTargetsParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcee)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("setTargetsWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
 // GetTargetsWithParamsCompletion command GetTargets
@@ -113,6 +154,19 @@ func (mbcee *MTRBaseClusterEnergyEVSE) GetTargetsWithCompletion(ctx context.Cont
 	}
 }
 
+// ClearTargetsWithParamsCompletion command ClearTargets
+func (mbcee *MTRBaseClusterEnergyEVSE) ClearTargetsWithParamsCompletion(params *MTREnergyEVSEClusterClearTargetsParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcee)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("clearTargetsWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// ClearTargetsWithCompletion clears targets with completion.
+func (mbcee *MTRBaseClusterEnergyEVSE) ClearTargetsWithCompletion(completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcee)
+	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("clearTargetsWithCompletion:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // ReadAttributeStateWithCompletion reads attribute state with completion.
 //
 // ReadAttributeStateWithCompletion blocks until the operation completes or ctx is cancelled.
@@ -156,7 +210,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeStateWithParamsSubscrip
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("subscribeAttributeStateWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("subscribeAttributeStateWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -209,7 +263,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeSupplyStateWithParamsSu
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("subscribeAttributeSupplyStateWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("subscribeAttributeSupplyStateWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -262,7 +316,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeFaultStateWithParamsSub
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("subscribeAttributeFaultStateWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("subscribeAttributeFaultStateWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -315,7 +369,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeChargingEnabledUntilWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("subscribeAttributeChargingEnabledUntilWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("subscribeAttributeChargingEnabledUntilWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -368,7 +422,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeCircuitCapacityWithPara
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("subscribeAttributeCircuitCapacityWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("subscribeAttributeCircuitCapacityWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -421,7 +475,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeMinimumChargeCurrentWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("subscribeAttributeMinimumChargeCurrentWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("subscribeAttributeMinimumChargeCurrentWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -474,7 +528,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeMaximumChargeCurrentWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("subscribeAttributeMaximumChargeCurrentWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("subscribeAttributeMaximumChargeCurrentWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -510,6 +564,21 @@ func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeUserMaximumChargeCurrentWith
 	}
 }
 
+// WriteAttributeUserMaximumChargeCurrentWithValueCompletion writes attribute user maximum charge current with value completion.
+func (mbcee *MTRBaseClusterEnergyEVSE) WriteAttributeUserMaximumChargeCurrentWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcee)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("writeAttributeUserMaximumChargeCurrentWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeUserMaximumChargeCurrentWithValueParamsCompletion writes attribute user maximum charge current with value params completion.
+func (mbcee *MTRBaseClusterEnergyEVSE) WriteAttributeUserMaximumChargeCurrentWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcee)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("writeAttributeUserMaximumChargeCurrentWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeUserMaximumChargeCurrentWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeUserMaximumChargeCurrentWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -527,7 +596,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeUserMaximumChargeCurren
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("subscribeAttributeUserMaximumChargeCurrentWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("subscribeAttributeUserMaximumChargeCurrentWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -563,6 +632,21 @@ func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeRandomizationDelayWindowWith
 	}
 }
 
+// WriteAttributeRandomizationDelayWindowWithValueCompletion writes attribute randomization delay window with value completion.
+func (mbcee *MTRBaseClusterEnergyEVSE) WriteAttributeRandomizationDelayWindowWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcee)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("writeAttributeRandomizationDelayWindowWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeRandomizationDelayWindowWithValueParamsCompletion writes attribute randomization delay window with value params completion.
+func (mbcee *MTRBaseClusterEnergyEVSE) WriteAttributeRandomizationDelayWindowWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcee)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("writeAttributeRandomizationDelayWindowWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeRandomizationDelayWindowWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRandomizationDelayWindowWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -580,7 +664,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeRandomizationDelayWindo
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("subscribeAttributeRandomizationDelayWindowWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("subscribeAttributeRandomizationDelayWindowWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -633,7 +717,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeNextChargeStartTimeWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("subscribeAttributeNextChargeStartTimeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("subscribeAttributeNextChargeStartTimeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -686,7 +770,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeNextChargeTargetTimeWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("subscribeAttributeNextChargeTargetTimeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("subscribeAttributeNextChargeTargetTimeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -739,7 +823,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeNextChargeRequiredEnerg
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("subscribeAttributeNextChargeRequiredEnergyWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("subscribeAttributeNextChargeRequiredEnergyWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -792,7 +876,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeNextChargeTargetSoCWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("subscribeAttributeNextChargeTargetSoCWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("subscribeAttributeNextChargeTargetSoCWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -828,6 +912,21 @@ func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeApproximateEVEfficiencyWithC
 	}
 }
 
+// WriteAttributeApproximateEVEfficiencyWithValueCompletion writes attribute approximate ev efficiency with value completion.
+func (mbcee *MTRBaseClusterEnergyEVSE) WriteAttributeApproximateEVEfficiencyWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcee)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("writeAttributeApproximateEVEfficiencyWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeApproximateEVEfficiencyWithValueParamsCompletion writes attribute approximate ev efficiency with value params completion.
+func (mbcee *MTRBaseClusterEnergyEVSE) WriteAttributeApproximateEVEfficiencyWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcee)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("writeAttributeApproximateEVEfficiencyWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeApproximateEVEfficiencyWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeApproximateEVEfficiencyWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -845,7 +944,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeApproximateEVEfficiency
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("subscribeAttributeApproximateEVEfficiencyWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("subscribeAttributeApproximateEVEfficiencyWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -898,7 +997,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeSessionIDWithParamsSubs
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("subscribeAttributeSessionIDWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("subscribeAttributeSessionIDWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -951,7 +1050,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeSessionDurationWithPara
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("subscribeAttributeSessionDurationWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("subscribeAttributeSessionDurationWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1004,7 +1103,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeSessionEnergyChargedWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("subscribeAttributeSessionEnergyChargedWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("subscribeAttributeSessionEnergyChargedWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1057,7 +1156,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeGeneratedCommandListWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1110,7 +1209,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeAcceptedCommandListWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1163,7 +1262,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeAttributeListWithParams
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1216,7 +1315,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeFeatureMapWithParamsSub
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1269,7 +1368,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeClusterRevisionWithPara
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcee), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err

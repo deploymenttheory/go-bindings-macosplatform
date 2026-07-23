@@ -86,6 +86,14 @@ func (sspau *SpeechSynthesisProviderAudioUnit) WithSpeechVoices(items ...*Speech
 	return sspau
 }
 
+// WithSpeechSynthesisOutputMetadataBlock sets a block that subclasses use to send marker information to the host.
+func (sspau *SpeechSynthesisProviderAudioUnit) WithSpeechSynthesisOutputMetadataBlock(speechSynthesisOutputMetadataBlock func(obj.Object, obj.Object)) *SpeechSynthesisProviderAudioUnit {
+	objc.Send[objc.ID](objref.IDOf(sspau), objc.RegisterName("setSpeechSynthesisOutputMetadataBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) {
+		speechSynthesisOutputMetadataBlock(obj.Wrap(_b0), obj.Wrap(_b1))
+	}))
+	return sspau
+}
+
 // SynthesizeSpeechRequest sets the text to synthesize and the voice to use.
 func (sspau *SpeechSynthesisProviderAudioUnit) SynthesizeSpeechRequest(speechRequest *SpeechSynthesisProviderRequest) {
 	defer runtime.KeepAlive(sspau)

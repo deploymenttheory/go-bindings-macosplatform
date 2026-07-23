@@ -70,6 +70,20 @@ func (am *AnimatedMatrix4x4) SetDouble4x4AtTime(value unsafe.Pointer, time_ floa
 	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setDouble4x4:atTime:"), value, time_)
 }
 
+// Float4x4AtTime wraps the corresponding Objective-C method.
+func (am *AnimatedMatrix4x4) Float4x4AtTime(time_ float64) unsafe.Pointer {
+	defer runtime.KeepAlive(am)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(am), objc.RegisterName("float4x4AtTime:"), time_)
+	return _r
+}
+
+// Double4x4AtTime wraps the corresponding Objective-C method.
+func (am *AnimatedMatrix4x4) Double4x4AtTime(time_ float64) unsafe.Pointer {
+	defer runtime.KeepAlive(am)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(am), objc.RegisterName("double4x4AtTime:"), time_)
+	return _r
+}
+
 // ResetWithFloat4x4ArrayAtTimesCount resets with float4x4 array at times count.
 func (am *AnimatedMatrix4x4) ResetWithFloat4x4ArrayAtTimesCount(valuesArray unsafe.Pointer, count int) (timesArray float64) {
 	defer runtime.KeepAlive(am)

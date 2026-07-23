@@ -249,6 +249,13 @@ func (d *Device) UUIDString() string {
 	return purego.GoString(_r)
 }
 
+// LocationDescription returns ￼A non-localized location description string for the device. The value returned in one of the location description strings defined above, or location obtained from the Bonjour TXT record of a network device.
+func (d *Device) LocationDescription() unsafe.Pointer {
+	defer runtime.KeepAlive(d)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(d), objc.RegisterName("locationDescription"))
+	return _r
+}
+
 // HasOpenSession reports whether ￼Indicates whether the device has an open session.
 func (d *Device) HasOpenSession() bool {
 	defer runtime.KeepAlive(d)
@@ -261,6 +268,27 @@ func (d *Device) UserData() obj.Object {
 	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("userData"))
 	return obj.Wrap(_r)
+}
+
+// ModulePath returns ￼Filesystem path of the device module that is associated with this device. Camera-specific capabilities are defined in ICCameraDevice.h and scanner-specific capabilities are defined in ICScannerDevice.h.
+func (d *Device) ModulePath() unsafe.Pointer {
+	defer runtime.KeepAlive(d)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(d), objc.RegisterName("modulePath"))
+	return _r
+}
+
+// ModuleVersion returns ￼The bundle version of the device module associated with this device.
+func (d *Device) ModuleVersion() unsafe.Pointer {
+	defer runtime.KeepAlive(d)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(d), objc.RegisterName("moduleVersion"))
+	return _r
+}
+
+// SerialNumberString returns ￼The serial number of the device. This will be NULL if the device does not provide a serial number.
+func (d *Device) SerialNumberString() unsafe.Pointer {
+	defer runtime.KeepAlive(d)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(d), objc.RegisterName("serialNumberString"))
+	return _r
 }
 
 // USBLocationID returns ￼The USB location of which the device is occupying.
@@ -284,10 +312,24 @@ func (d *Device) USBVendorID() int {
 	return _r
 }
 
+// AutolaunchApplicationPath returns ￼Filesystem path of an application that is to be automatically launched when this device is added. This property is unavailable for devices of ICTransportTypeProximity.
+func (d *Device) AutolaunchApplicationPath() unsafe.Pointer {
+	defer runtime.KeepAlive(d)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(d), objc.RegisterName("autolaunchApplicationPath"))
+	return _r
+}
+
 // IsRemote reports whether ￼Indicates whether the device is a remote device published by Image Capture device sharing facility. ￼Name of the device as reported by the device module or by the device transport when a device module is not in control of this device.
 func (d *Device) IsRemote() bool {
 	defer runtime.KeepAlive(d)
 	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("isRemote"))
+	return _r
+}
+
+// PersistentIDString returns ￼A string representation of the persistent ID of the device.
+func (d *Device) PersistentIDString() unsafe.Pointer {
+	defer runtime.KeepAlive(d)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(d), objc.RegisterName("persistentIDString"))
 	return _r
 }
 

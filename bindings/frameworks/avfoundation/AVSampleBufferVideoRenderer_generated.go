@@ -7,6 +7,7 @@ package avfoundation
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -106,10 +107,24 @@ func (sbvr *SampleBufferVideoRenderer) Status() QueuedSampleBufferRenderingStatu
 	return _r
 }
 
+// Error returns if the video renderer's status is AVQueuedSampleBufferRenderingStatusFailed, this describes the error that caused the failure. The value of this property is an NSError that describes what caused the video renderer to no longer be able to enqueue sample buffers. If the status is not AVQueuedSampleBufferRenderingStatusFailed, the value of this property is nil.
+func (sbvr *SampleBufferVideoRenderer) Error() unsafe.Pointer {
+	defer runtime.KeepAlive(sbvr)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(sbvr), objc.RegisterName("error"))
+	return _r
+}
+
 // RequiresFlushToResumeDecoding reports whether indicates that the receiver is in a state where it requires a call to -flush to continue decoding frames. When the application enters a state where use of video decoder resources is not permissible, the value of this property changes to true along with the video renderer's status changing to AVQueuedSampleBufferRenderingStatusFailed. To resume rendering sample buffers using the video renderer after this property's value is true, clients must first reset the video renderer by calling flush or flushWithRemovalOfDisplayedImage:completionHandler:. Clients can track changes to this property via AVSampleBufferVideoRendererRequiresFlushToResumeDecodingDidChangeNotification. This property is not key value observable.
 func (sbvr *SampleBufferVideoRenderer) RequiresFlushToResumeDecoding() bool {
 	defer runtime.KeepAlive(sbvr)
 	_r := objc.Send[bool](objref.IDOf(sbvr), objc.RegisterName("requiresFlushToResumeDecoding"))
+	return _r
+}
+
+// CopyDisplayedPixelBuffer returns a retained reference to the pixel buffer currently displayed in the AVSampleBufferVideoRenderer's target. This will return NULL if the displayed pixel buffer is protected, no image is currently being displayed, or if the image is unavailable. This will return NULL if the rate is non-zero.  Clients must release the pixel buffer after use. Do not write to the returned CVPixelBuffer's attachments or pixel data.
+func (sbvr *SampleBufferVideoRenderer) CopyDisplayedPixelBuffer() unsafe.Pointer {
+	defer runtime.KeepAlive(sbvr)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(sbvr), objc.RegisterName("copyDisplayedPixelBuffer"))
 	return _r
 }
 
@@ -136,4 +151,10 @@ func (sbvr *SampleBufferVideoRenderer) RecommendedPixelBufferAttributes() map[st
 	defer runtime.KeepAlive(sbvr)
 	_r := objc.Send[objc.ID](objref.IDOf(sbvr), objc.RegisterName("recommendedPixelBufferAttributes"))
 	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
+// LoadVideoPerformanceMetricsWithCompletionHandler gathers a snapshot of the video performance metrics and calls the completion handler with the results. If there are no performance metrics available, the completion handler will be called with nil videoPerformanceMetrics.
+func (sbvr *SampleBufferVideoRenderer) LoadVideoPerformanceMetricsWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(sbvr)
+	objc.Send[objc.ID](objref.IDOf(sbvr), objc.RegisterName("loadVideoPerformanceMetricsWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
 }

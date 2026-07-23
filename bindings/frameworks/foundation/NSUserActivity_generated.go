@@ -225,6 +225,14 @@ func (ua *UserActivity) Invalidate() {
 	objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("invalidate"))
 }
 
+// GetContinuationStreamsWithCompletionHandler requests streams back to the originating app.
+func (ua *UserActivity) GetContinuationStreamsWithCompletionHandler(completionHandler func(obj.Object, obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(ua)
+	objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("getContinuationStreamsWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
+		completionHandler(obj.Wrap(_b0), obj.Wrap(_b1), _b2)
+	}))
+}
+
 // ActivityType returns the activity type.
 func (ua *UserActivity) ActivityType() string {
 	defer runtime.KeepAlive(ua)

@@ -6,8 +6,10 @@ package mlcompute
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/rt"
 	"github.com/ebitengine/purego/objc"
@@ -152,6 +154,69 @@ func (tg *TrainingGraph) AllocateUserGradientForTensor(tensor *Tensor) *Tensor {
 	defer runtime.KeepAlive(tensor)
 	_r := objc.Send[objc.ID](objref.IDOf(tg), objc.RegisterName("allocateUserGradientForTensor:"), objref.IDOf(tensor))
 	return TensorFromID(_r)
+}
+
+// ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataBatchSizeOptionsCompletionHandler executes the training graph with the input data, batch size, execution options, and completion handler you specify.
+func (tg *TrainingGraph) ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataBatchSizeOptionsCompletionHandler(inputsData map[string]*TensorData, lossLabelsData map[string]*TensorData, lossLabelWeightsData map[string]*TensorData, batchSize int, options ExecutionOptions, completionHandler func(obj.Object, unsafe.Pointer, float64)) bool {
+	defer runtime.KeepAlive(tg)
+	_r := objc.Send[bool](objref.IDOf(tg), objc.RegisterName("executeWithInputsData:lossLabelsData:lossLabelWeightsData:batchSize:options:completionHandler:"), rt.MapToDict(inputsData, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *TensorData) objc.ID { return objref.IDOf(_v) }), rt.MapToDict(lossLabelsData, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *TensorData) objc.ID { return objref.IDOf(_v) }), rt.MapToDict(lossLabelWeightsData, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *TensorData) objc.ID { return objref.IDOf(_v) }), batchSize, options, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer, _b2 float64) {
+		completionHandler(obj.Wrap(_b0), _b1, _b2)
+	}))
+	return _r
+}
+
+// ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataOutputsDataBatchSizeOptionsCompletionHandler executes the training graph with the input data, output data, batch size, execution options, and completion handler that you specify.
+func (tg *TrainingGraph) ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataOutputsDataBatchSizeOptionsCompletionHandler(inputsData map[string]*TensorData, lossLabelsData map[string]*TensorData, lossLabelWeightsData map[string]*TensorData, outputsData map[string]*TensorData, batchSize int, options ExecutionOptions, completionHandler func(obj.Object, unsafe.Pointer, float64)) bool {
+	defer runtime.KeepAlive(tg)
+	_r := objc.Send[bool](objref.IDOf(tg), objc.RegisterName("executeWithInputsData:lossLabelsData:lossLabelWeightsData:outputsData:batchSize:options:completionHandler:"), rt.MapToDict(inputsData, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *TensorData) objc.ID { return objref.IDOf(_v) }), rt.MapToDict(lossLabelsData, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *TensorData) objc.ID { return objref.IDOf(_v) }), rt.MapToDict(lossLabelWeightsData, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *TensorData) objc.ID { return objref.IDOf(_v) }), rt.MapToDict(outputsData, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *TensorData) objc.ID { return objref.IDOf(_v) }), batchSize, options, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer, _b2 float64) {
+		completionHandler(obj.Wrap(_b0), _b1, _b2)
+	}))
+	return _r
+}
+
+// ExecuteForwardWithBatchSizeOptionsCompletionHandler executes the forward pass of the training graph with the batch size, execution options, and completion handler you specify.
+func (tg *TrainingGraph) ExecuteForwardWithBatchSizeOptionsCompletionHandler(batchSize int, options ExecutionOptions, completionHandler func(obj.Object, unsafe.Pointer, float64)) bool {
+	defer runtime.KeepAlive(tg)
+	_r := objc.Send[bool](objref.IDOf(tg), objc.RegisterName("executeForwardWithBatchSize:options:completionHandler:"), batchSize, options, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer, _b2 float64) {
+		completionHandler(obj.Wrap(_b0), _b1, _b2)
+	}))
+	return _r
+}
+
+// ExecuteForwardWithBatchSizeOptionsOutputsDataCompletionHandler executes the forward pass of the training graph with the batch size, execution options, output data, and completion handler you specify.
+func (tg *TrainingGraph) ExecuteForwardWithBatchSizeOptionsOutputsDataCompletionHandler(batchSize int, options ExecutionOptions, outputsData map[string]*TensorData, completionHandler func(obj.Object, unsafe.Pointer, float64)) bool {
+	defer runtime.KeepAlive(tg)
+	_r := objc.Send[bool](objref.IDOf(tg), objc.RegisterName("executeForwardWithBatchSize:options:outputsData:completionHandler:"), batchSize, options, rt.MapToDict(outputsData, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *TensorData) objc.ID { return objref.IDOf(_v) }), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer, _b2 float64) {
+		completionHandler(obj.Wrap(_b0), _b1, _b2)
+	}))
+	return _r
+}
+
+// ExecuteGradientWithBatchSizeOptionsCompletionHandler executes the gradient pass of the training graph with the batch size, execution options, and completion handler you specify.
+func (tg *TrainingGraph) ExecuteGradientWithBatchSizeOptionsCompletionHandler(batchSize int, options ExecutionOptions, completionHandler func(obj.Object, unsafe.Pointer, float64)) bool {
+	defer runtime.KeepAlive(tg)
+	_r := objc.Send[bool](objref.IDOf(tg), objc.RegisterName("executeGradientWithBatchSize:options:completionHandler:"), batchSize, options, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer, _b2 float64) {
+		completionHandler(obj.Wrap(_b0), _b1, _b2)
+	}))
+	return _r
+}
+
+// ExecuteGradientWithBatchSizeOptionsOutputsDataCompletionHandler executes the gradient pass of the training graph with the batch size, execution options, output data, and completion handler you specify.
+func (tg *TrainingGraph) ExecuteGradientWithBatchSizeOptionsOutputsDataCompletionHandler(batchSize int, options ExecutionOptions, outputsData map[string]*TensorData, completionHandler func(obj.Object, unsafe.Pointer, float64)) bool {
+	defer runtime.KeepAlive(tg)
+	_r := objc.Send[bool](objref.IDOf(tg), objc.RegisterName("executeGradientWithBatchSize:options:outputsData:completionHandler:"), batchSize, options, rt.MapToDict(outputsData, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *TensorData) objc.ID { return objref.IDOf(_v) }), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer, _b2 float64) {
+		completionHandler(obj.Wrap(_b0), _b1, _b2)
+	}))
+	return _r
+}
+
+// ExecuteOptimizerUpdateWithOptionsCompletionHandler executes the optimizer update pass of the training graph with the execution options and completion handler you specify.
+func (tg *TrainingGraph) ExecuteOptimizerUpdateWithOptionsCompletionHandler(options ExecutionOptions, completionHandler func(obj.Object, unsafe.Pointer, float64)) bool {
+	defer runtime.KeepAlive(tg)
+	_r := objc.Send[bool](objref.IDOf(tg), objc.RegisterName("executeOptimizerUpdateWithOptions:completionHandler:"), options, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer, _b2 float64) {
+		completionHandler(obj.Wrap(_b0), _b1, _b2)
+	}))
+	return _r
 }
 
 // SynchronizeUpdates synchronizes updates from device memory.

@@ -98,6 +98,13 @@ func NewDataWithBytesNoCopyLengthFreeWhenDone(data unsafe.Pointer, length int, b
 	return dataAdopt(_id)
 }
 
+// NewDataWithBytesNoCopyLengthDeallocator initializes a data object filled with a given number of bytes of data from a given buffer, with a custom deallocator block.
+func NewDataWithBytesNoCopyLengthDeallocator(data unsafe.Pointer, length int, deallocator func(unsafe.Pointer, int)) *Data {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSData")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBytesNoCopy:length:deallocator:"), data, length, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 int) { deallocator(_b0, _b1) }))
+	return dataAdopt(_id)
+}
+
 // NewDataFromFile initializes a data object with the content of the file at a given path.
 func NewDataFromFile(path string, readOptionsMask DataReadingOptions) (result *Data, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSData")), objc.RegisterName("alloc"))
@@ -185,6 +192,13 @@ func (d *Data) WithScriptingProperties(scriptingProperties map[string]obj.Object
 func (d *Data) Length() int {
 	defer runtime.KeepAlive(d)
 	_r := objc.Send[int](objref.IDOf(d), objc.RegisterName("length"))
+	return _r
+}
+
+// Bytes returns the bytes.
+func (d *Data) Bytes() unsafe.Pointer {
+	defer runtime.KeepAlive(d)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(d), objc.RegisterName("bytes"))
 	return _r
 }
 

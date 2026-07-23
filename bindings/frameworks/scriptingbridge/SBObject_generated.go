@@ -6,6 +6,7 @@ package scriptingbridge
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -104,6 +105,13 @@ func (o *Object) Get() obj.Object {
 	defer runtime.KeepAlive(o)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("get"))
 	return obj.Wrap(_r)
+}
+
+// LastError returns the error from the last event this object sent, or nil if it succeeded.
+func (o *Object) LastError() unsafe.Pointer {
+	defer runtime.KeepAlive(o)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(o), objc.RegisterName("lastError"))
+	return _r
 }
 
 // PropertyWithCode returns an object representing the specified property of the receiver.

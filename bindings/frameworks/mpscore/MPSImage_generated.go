@@ -89,6 +89,20 @@ func (i *Image) WithLabel(label string) *Image {
 	return i
 }
 
+// BatchRepresentationWithSubRange make a representation of a MPSImage (batch) as a MPSImageBatch Before the MPSImageBatch was introduced, several images could be concatenated into a MPSImage as multiple image slices in a MTLTexture2DArray to make a image batch. If the image contained more than 4 feature channels, then each image would have round_up( feature channels / 4) slices and the total number of slices in the MPSImage would be slices * number of images. Because many devices can operate on texture arrays of no more than 2048 slices, storage in this format is limited. For example in InceptionV3, 2048 feature channels at its widest point, the largest batch size that can be processed in this way is 4, well under commonly accepted practice for training. Consequently, the older batching style is deprecated and the MPSImageBatch is introduced. It is also easier to manage sub-batches and to concatenate sub-batches for memory management with the MPSImageBatch, so this format is favored going forward. To facilitate forward migration, this method will prepare an array of MPSImages that each point to the appropriate set of slices in storage for the original image. Since they share storage, writes to the parent will alter the content of the children, and vice versa. If the original is a temporary image, the result will be a temporary image. It will hold 1 readCount on the original. When the readCount drops to 0, it will decrement the appropriate counter on the parent. This is a much cheaper form of the slice operator, and should be used instead when the slice operator does not need to operate out of place.
+func (i *Image) BatchRepresentationWithSubRange(subRange foundation.NSRange) unsafe.Pointer {
+	defer runtime.KeepAlive(i)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(i), objc.RegisterName("batchRepresentationWithSubRange:"), subRange)
+	return _r
+}
+
+// BatchRepresentation returns make a MPSImageBatch that points to the individual images in the MPSImage If the original is a temporary image, the result will be a temporary image. It will hold 1 readCount on the original. When the readCount drops to 0, it will decrement the appropriate counter on the parent.
+func (i *Image) BatchRepresentation() unsafe.Pointer {
+	defer runtime.KeepAlive(i)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(i), objc.RegisterName("batchRepresentation"))
+	return _r
+}
+
 // SubImageWithFeatureChannelRange wraps the corresponding Objective-C method.
 func (i *Image) SubImageWithFeatureChannelRange(range_ foundation.NSRange) *Image {
 	defer runtime.KeepAlive(i)

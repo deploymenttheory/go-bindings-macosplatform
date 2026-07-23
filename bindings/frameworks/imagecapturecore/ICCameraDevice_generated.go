@@ -8,9 +8,11 @@ import (
 	"runtime"
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -92,6 +94,13 @@ func (cd *CameraDevice) RequestDeleteFiles(files []*CameraItem) {
 	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("requestDeleteFiles:"), purego.SliceToNSArray(files, func(_v *CameraItem) objc.ID { return objref.IDOf(_v) }))
 }
 
+// RequestDeleteFilesDeleteFailedCompletion deletes files from the camera, with the ability to catch failures and execute a completion block.
+func (cd *CameraDevice) RequestDeleteFilesDeleteFailedCompletion(files []*CameraItem, deleteFailed func(obj.Object), completion func(obj.Object, unsafe.Pointer)) *foundation.Progress {
+	defer runtime.KeepAlive(cd)
+	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("requestDeleteFiles:deleteFailed:completion:"), purego.SliceToNSArray(files, func(_v *CameraItem) objc.ID { return objref.IDOf(_v) }), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { deleteFailed(obj.Wrap(_b0)) }), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completion(obj.Wrap(_b0), _b1) }))
+	return foundation.ProgressFromID(_r)
+}
+
 // CancelDelete cancels the current delete operation.
 func (cd *CameraDevice) CancelDelete() {
 	defer runtime.KeepAlive(cd)
@@ -120,6 +129,14 @@ func (cd *CameraDevice) RequestEnableTethering() {
 func (cd *CameraDevice) RequestDisableTethering() {
 	defer runtime.KeepAlive(cd)
 	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("requestDisableTethering"))
+}
+
+// RequestSendPTPCommandOutDataCompletion sends a Picture Transfer Protocol (PTP) command to a camera asynchronously.
+func (cd *CameraDevice) RequestSendPTPCommandOutDataCompletion(ptpCommand []byte, ptpData []byte, completion func(obj.Object, obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(cd)
+	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("requestSendPTPCommand:outData:completion:"), rt.BytesToNSData(ptpCommand), rt.BytesToNSData(ptpData), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
+		completion(obj.Wrap(_b0), obj.Wrap(_b1), _b2)
+	}))
 }
 
 // ContentCatalogPercentCompleted returns ￼Indicates the percentage of content cataloging completed on the device. Its value ranges from 0 to 100.
@@ -172,6 +189,13 @@ func (cd *CameraDevice) IsAccessRestrictedAppleDevice() bool {
 func (cd *CameraDevice) ICloudPhotosEnabled() bool {
 	defer runtime.KeepAlive(cd)
 	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("iCloudPhotosEnabled"))
+	return _r
+}
+
+// MountPoint returns filesystem mount point for a device with transportType of ICTransportTypeMassStorage. This will be NULL for all other devices.
+func (cd *CameraDevice) MountPoint() unsafe.Pointer {
+	defer runtime.KeepAlive(cd)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(cd), objc.RegisterName("mountPoint"))
 	return _r
 }
 

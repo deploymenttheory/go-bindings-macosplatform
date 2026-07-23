@@ -10,6 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -65,6 +66,15 @@ func (aai *AVB17221AECPInterface) RemoveResponseHandlerForControllerEntityID(con
 	objc.Send[objc.ID](objref.IDOf(aai), objc.RegisterName("removeResponseHandlerForControllerEntityID:"), controllerEntityID)
 }
 
+// SendCommandToMACAddressCompletionHandler send an AECP command message. This method synchronizes access to the kernel service providing transport for the message. This method is safe to call from any thread.
+func (aai *AVB17221AECPInterface) SendCommandToMACAddressCompletionHandler(message *AVB17221AECPMessage, destMAC *MACAddress, completionHandler func(unsafe.Pointer, obj.Object)) bool {
+	defer runtime.KeepAlive(aai)
+	defer runtime.KeepAlive(message)
+	defer runtime.KeepAlive(destMAC)
+	_r := objc.Send[bool](objref.IDOf(aai), objc.RegisterName("sendCommand:toMACAddress:completionHandler:"), objref.IDOf(message), objref.IDOf(destMAC), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 objc.ID) { completionHandler(_b0, obj.Wrap(_b1)) }))
+	return _r
+}
+
 // SendResponseToMACAddress send an AECP response. This method synchronizes access to the kernel service providing transport for the message. This method is safe to call from any thread.
 func (aai *AVB17221AECPInterface) SendResponseToMACAddress(message *AVB17221AECPMessage, destMAC *MACAddress) error {
 	defer runtime.KeepAlive(aai)
@@ -76,6 +86,15 @@ func (aai *AVB17221AECPInterface) SendResponseToMACAddress(message *AVB17221AECP
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return nil
+}
+
+// SendVendorUniqueCommandToMACAddressExpectResponseWithinTimeoutCompletionHandler send an AECP vendor unique command message expected to receive a matching response. This method synchronizes access to the kernel service providing transport for the message. This method is safe to call from any thread.
+func (aai *AVB17221AECPInterface) SendVendorUniqueCommandToMACAddressExpectResponseWithinTimeoutCompletionHandler(message *AVB17221AECPVendorMessage, destMAC *MACAddress, timeout int64, completionHandler func(unsafe.Pointer, obj.Object)) bool {
+	defer runtime.KeepAlive(aai)
+	defer runtime.KeepAlive(message)
+	defer runtime.KeepAlive(destMAC)
+	_r := objc.Send[bool](objref.IDOf(aai), objc.RegisterName("sendVendorUniqueCommand:toMACAddress:expectResponseWithinTimeout:completionHandler:"), objref.IDOf(message), objref.IDOf(destMAC), timeout, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 objc.ID) { completionHandler(_b0, obj.Wrap(_b1)) }))
+	return _r
 }
 
 var _ AVB1722ControlInterfaceProvider = (*AVB17221AECPInterface)(nil)

@@ -6,6 +6,7 @@ package photosui
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -54,10 +55,31 @@ func NewProjectMapElement() *ProjectMapElement {
 	return projectMapElementAdopt(_id)
 }
 
+// CenterCoordinate returns the center coordinate.
+func (pme *ProjectMapElement) CenterCoordinate() unsafe.Pointer {
+	defer runtime.KeepAlive(pme)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(pme), objc.RegisterName("centerCoordinate"))
+	return _r
+}
+
+// Heading returns the heading.
+func (pme *ProjectMapElement) Heading() unsafe.Pointer {
+	defer runtime.KeepAlive(pme)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(pme), objc.RegisterName("heading"))
+	return _r
+}
+
 // Pitch returns the pitch.
 func (pme *ProjectMapElement) Pitch() float64 {
 	defer runtime.KeepAlive(pme)
 	_r := objc.Send[float64](objref.IDOf(pme), objc.RegisterName("pitch"))
+	return _r
+}
+
+// Altitude returns the altitude.
+func (pme *ProjectMapElement) Altitude() unsafe.Pointer {
+	defer runtime.KeepAlive(pme)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(pme), objc.RegisterName("altitude"))
 	return _r
 }
 

@@ -70,6 +70,20 @@ func (av *AnimatedVector2) SetDouble2AtTime(value unsafe.Pointer, time_ float64)
 	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setDouble2:atTime:"), value, time_)
 }
 
+// Float2AtTime wraps the corresponding Objective-C method.
+func (av *AnimatedVector2) Float2AtTime(time_ float64) unsafe.Pointer {
+	defer runtime.KeepAlive(av)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(av), objc.RegisterName("float2AtTime:"), time_)
+	return _r
+}
+
+// Double2AtTime wraps the corresponding Objective-C method.
+func (av *AnimatedVector2) Double2AtTime(time_ float64) unsafe.Pointer {
+	defer runtime.KeepAlive(av)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(av), objc.RegisterName("double2AtTime:"), time_)
+	return _r
+}
+
 // ResetWithFloat2ArrayAtTimesCount resets with float2 array at times count.
 func (av *AnimatedVector2) ResetWithFloat2ArrayAtTimesCount(valuesArray unsafe.Pointer, count int) (timesArray float64) {
 	defer runtime.KeepAlive(av)

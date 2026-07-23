@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -78,6 +79,13 @@ func (rci *RenderedCaptionImage) String() string {
 func NewRenderedCaptionImage() *RenderedCaptionImage {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVRenderedCaptionImage")), objc.RegisterName("new"))
 	return renderedCaptionImageAdopt(_id)
+}
+
+// PixelBuffer returns a CVPixelBufferRef that contains pixel data for the rendered caption. If the client reads a pixelBuffer and wants to use it longer than AVRenderedCaptionImage, it must retain the pixelBuffer. The pixel buffer can be converted to MTLTexture using CVMetalTextureCache. The pixel format is fixed to kCVPixelFormatType_32BGRA defined in <CoreVideo/CVPixelBuffer.h>.
+func (rci *RenderedCaptionImage) PixelBuffer() unsafe.Pointer {
+	defer runtime.KeepAlive(rci)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(rci), objc.RegisterName("pixelBuffer"))
+	return _r
 }
 
 // Position returns a CGPoint that defines the position (in pixels) of the rendered caption image relative to the video frame To place the caption image correcly, the size of pixel buffer can be extracted from CVPixelBufferGetWidth and CVPixelBufferGetHeight. Origin is assumed at upper-left. So, a caption image is rendered to the right and bottom of the origin point.

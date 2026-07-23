@@ -74,4 +74,11 @@ func (co *CircleObstacle) Radius() float32 {
 	return _r
 }
 
+// Position returns position of the center of the circle in 2D space.
+func (co *CircleObstacle) Position() unsafe.Pointer {
+	defer runtime.KeepAlive(co)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(co), objc.RegisterName("position"))
+	return _r
+}
+
 var _ ObstacleProvider = (*CircleObstacle)(nil)

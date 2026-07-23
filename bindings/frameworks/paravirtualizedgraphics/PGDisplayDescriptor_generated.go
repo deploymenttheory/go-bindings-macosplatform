@@ -102,19 +102,19 @@ func (pdd *PGDisplayDescriptor) WithQueue(queue obj.Object) *PGDisplayDescriptor
 
 // WithNewFrameEventHandler sets a handler that the framework calls when the guest environment has a new frame to display.
 func (pdd *PGDisplayDescriptor) WithNewFrameEventHandler(newFrameEventHandler func()) *PGDisplayDescriptor {
-	objc.Send[objc.ID](objref.IDOf(pdd), objc.RegisterName("setNewFrameEventHandler:"), newFrameEventHandler)
+	objc.Send[objc.ID](objref.IDOf(pdd), objc.RegisterName("setNewFrameEventHandler:"), objc.NewBlock(func(_ objc.Block) { newFrameEventHandler() }))
 	return pdd
 }
 
 // WithCursorShowHandler sets a handler that the framework calls to change the cursor’s visibility.
 func (pdd *PGDisplayDescriptor) WithCursorShowHandler(cursorShowHandler func(bool)) *PGDisplayDescriptor {
-	objc.Send[objc.ID](objref.IDOf(pdd), objc.RegisterName("setCursorShowHandler:"), cursorShowHandler)
+	objc.Send[objc.ID](objref.IDOf(pdd), objc.RegisterName("setCursorShowHandler:"), objc.NewBlock(func(_ objc.Block, _b0 bool) { cursorShowHandler(_b0) }))
 	return pdd
 }
 
 // WithCursorMoveHandler sets the block to invoke to handle cursor movement. Handler invocation indicative of movement.  Handler should resampling via PGDisplay::cursorPosition.
 func (pdd *PGDisplayDescriptor) WithCursorMoveHandler(cursorMoveHandler func()) *PGDisplayDescriptor {
-	objc.Send[objc.ID](objref.IDOf(pdd), objc.RegisterName("setCursorMoveHandler:"), cursorMoveHandler)
+	objc.Send[objc.ID](objref.IDOf(pdd), objc.RegisterName("setCursorMoveHandler:"), objc.NewBlock(func(_ objc.Block) { cursorMoveHandler() }))
 	return pdd
 }
 

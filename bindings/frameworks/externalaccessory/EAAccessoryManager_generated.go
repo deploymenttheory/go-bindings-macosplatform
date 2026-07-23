@@ -6,6 +6,7 @@ package externalaccessory
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -77,4 +78,11 @@ func (am *AccessoryManager) String() string {
 func NewAccessoryManager() *AccessoryManager {
 	_id := objc.Send[objc.ID](objc.ID(_class("EAAccessoryManager")), objc.RegisterName("new"))
 	return accessoryManagerAdopt(_id)
+}
+
+// ConnectedAccessories returns the connected accessories.
+func (am *AccessoryManager) ConnectedAccessories() unsafe.Pointer {
+	defer runtime.KeepAlive(am)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(am), objc.RegisterName("connectedAccessories"))
+	return _r
 }

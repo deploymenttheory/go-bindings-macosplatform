@@ -6,6 +6,7 @@ package coreml
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -137,6 +138,13 @@ func (fv *FeatureValue) DictionaryValue() obj.Object {
 	defer runtime.KeepAlive(fv)
 	_r := objc.Send[objc.ID](objref.IDOf(fv), objc.RegisterName("dictionaryValue"))
 	return obj.Wrap(_r)
+}
+
+// ImageBufferValue returns populated value if the type is MLFeatureTypeImage
+func (fv *FeatureValue) ImageBufferValue() unsafe.Pointer {
+	defer runtime.KeepAlive(fv)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(fv), objc.RegisterName("imageBufferValue"))
+	return _r
 }
 
 // SequenceValue returns populated value if the type is MLFeatureTypeSequence

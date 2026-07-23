@@ -7,6 +7,7 @@ package matter
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -67,6 +68,20 @@ func NewMTRBaseClusterIdentifyWithDeviceEndpointQueue(device *MTRBaseDevice, end
 	return mTRBaseClusterIdentifyAdopt(_id)
 }
 
+// IdentifyWithParamsCompletion command Identify This command starts or stops the receiving device identifying itself.
+func (mbci *MTRBaseClusterIdentify) IdentifyWithParamsCompletion(params *MTRIdentifyClusterIdentifyParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbci)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbci), objc.RegisterName("identifyWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// TriggerEffectWithParamsCompletion command TriggerEffect This command allows the support of feedback to the user, such as a certain light effect.
+func (mbci *MTRBaseClusterIdentify) TriggerEffectWithParamsCompletion(params *MTRIdentifyClusterTriggerEffectParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbci)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbci), objc.RegisterName("triggerEffectWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // ReadAttributeIdentifyTimeWithCompletion reads attribute identify time with completion.
 //
 // ReadAttributeIdentifyTimeWithCompletion blocks until the operation completes or ctx is cancelled.
@@ -93,6 +108,21 @@ func (mbci *MTRBaseClusterIdentify) ReadAttributeIdentifyTimeWithCompletion(ctx 
 	}
 }
 
+// WriteAttributeIdentifyTimeWithValueCompletion writes attribute identify time with value completion.
+func (mbci *MTRBaseClusterIdentify) WriteAttributeIdentifyTimeWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbci)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbci), objc.RegisterName("writeAttributeIdentifyTimeWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeIdentifyTimeWithValueParamsCompletion writes attribute identify time with value params completion.
+func (mbci *MTRBaseClusterIdentify) WriteAttributeIdentifyTimeWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbci)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbci), objc.RegisterName("writeAttributeIdentifyTimeWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeIdentifyTimeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeIdentifyTimeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -110,7 +140,7 @@ func (mbci *MTRBaseClusterIdentify) SubscribeAttributeIdentifyTimeWithParamsSubs
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbci), objc.RegisterName("subscribeAttributeIdentifyTimeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbci), objc.RegisterName("subscribeAttributeIdentifyTimeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -163,7 +193,7 @@ func (mbci *MTRBaseClusterIdentify) SubscribeAttributeIdentifyTypeWithParamsSubs
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbci), objc.RegisterName("subscribeAttributeIdentifyTypeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbci), objc.RegisterName("subscribeAttributeIdentifyTypeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -216,7 +246,7 @@ func (mbci *MTRBaseClusterIdentify) SubscribeAttributeGeneratedCommandListWithPa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbci), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbci), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -269,7 +299,7 @@ func (mbci *MTRBaseClusterIdentify) SubscribeAttributeAcceptedCommandListWithPar
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbci), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbci), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -322,7 +352,7 @@ func (mbci *MTRBaseClusterIdentify) SubscribeAttributeAttributeListWithParamsSub
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbci), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbci), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -375,7 +405,7 @@ func (mbci *MTRBaseClusterIdentify) SubscribeAttributeFeatureMapWithParamsSubscr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbci), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbci), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -428,7 +458,7 @@ func (mbci *MTRBaseClusterIdentify) SubscribeAttributeClusterRevisionWithParamsS
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbci), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbci), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -436,6 +466,20 @@ func (mbci *MTRBaseClusterIdentify) SubscribeAttributeClusterRevisionWithParamsS
 		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
+}
+
+// IdentifyWithParamsCompletionHandler wraps the corresponding Objective-C method.
+func (mbci *MTRBaseClusterIdentify) IdentifyWithParamsCompletionHandler(params *MTRIdentifyClusterIdentifyParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbci)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbci), objc.RegisterName("identifyWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// TriggerEffectWithParamsCompletionHandler wraps the corresponding Objective-C method.
+func (mbci *MTRBaseClusterIdentify) TriggerEffectWithParamsCompletionHandler(params *MTRIdentifyClusterTriggerEffectParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbci)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbci), objc.RegisterName("triggerEffectWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
 }
 
 // ReadAttributeIdentifyTime reads attribute identify time.
@@ -464,6 +508,21 @@ func (mbci *MTRBaseClusterIdentify) ReadAttributeIdentifyTime(ctx context.Contex
 	}
 }
 
+// WriteAttributeIdentifyTimeWithValueCompletionHandler writes attribute identify time with value completion handler.
+func (mbci *MTRBaseClusterIdentify) WriteAttributeIdentifyTimeWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbci)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbci), objc.RegisterName("writeAttributeIdentifyTimeWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeIdentifyTimeWithValueParamsCompletionHandler writes attribute identify time with value params completion handler.
+func (mbci *MTRBaseClusterIdentify) WriteAttributeIdentifyTimeWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbci)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbci), objc.RegisterName("writeAttributeIdentifyTimeWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeIdentifyTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeIdentifyTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -483,7 +542,7 @@ func (mbci *MTRBaseClusterIdentify) SubscribeAttributeIdentifyTimeWithMinInterva
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbci), objc.RegisterName("subscribeAttributeIdentifyTimeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbci), objc.RegisterName("subscribeAttributeIdentifyTimeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -538,7 +597,7 @@ func (mbci *MTRBaseClusterIdentify) SubscribeAttributeIdentifyTypeWithMinInterva
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbci), objc.RegisterName("subscribeAttributeIdentifyTypeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbci), objc.RegisterName("subscribeAttributeIdentifyTypeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -593,7 +652,7 @@ func (mbci *MTRBaseClusterIdentify) SubscribeAttributeGeneratedCommandListWithMi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbci), objc.RegisterName("subscribeAttributeGeneratedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbci), objc.RegisterName("subscribeAttributeGeneratedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -648,7 +707,7 @@ func (mbci *MTRBaseClusterIdentify) SubscribeAttributeAcceptedCommandListWithMin
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbci), objc.RegisterName("subscribeAttributeAcceptedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbci), objc.RegisterName("subscribeAttributeAcceptedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -703,7 +762,7 @@ func (mbci *MTRBaseClusterIdentify) SubscribeAttributeAttributeListWithMinInterv
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbci), objc.RegisterName("subscribeAttributeAttributeListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbci), objc.RegisterName("subscribeAttributeAttributeListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -758,7 +817,7 @@ func (mbci *MTRBaseClusterIdentify) SubscribeAttributeFeatureMapWithMinIntervalM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbci), objc.RegisterName("subscribeAttributeFeatureMapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbci), objc.RegisterName("subscribeAttributeFeatureMapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -813,7 +872,7 @@ func (mbci *MTRBaseClusterIdentify) SubscribeAttributeClusterRevisionWithMinInte
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbci), objc.RegisterName("subscribeAttributeClusterRevisionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbci), objc.RegisterName("subscribeAttributeClusterRevisionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err

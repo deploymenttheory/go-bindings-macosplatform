@@ -5,6 +5,8 @@
 package phase
 
 import (
+	"unsafe"
+
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -12,4 +14,22 @@ import (
 func New() *ContainerNodeDefinition {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHASEContainerNodeDefinition")), objc.RegisterName("new"))
 	return ContainerNodeDefinitionFromID(_r)
+}
+
+// Right returns the direction PHASE treats as "right" in local space for all objects.
+func Right() unsafe.Pointer {
+	_r := objc.Send[unsafe.Pointer](objc.ID(_class("PHASEObject")), objc.RegisterName("right"))
+	return _r
+}
+
+// Up returns the direction PHASE treats as "up" in local space for all objects.
+func Up() unsafe.Pointer {
+	_r := objc.Send[unsafe.Pointer](objc.ID(_class("PHASEObject")), objc.RegisterName("up"))
+	return _r
+}
+
+// Forward returns the direction PHASE treats as "forward" in local space for all objects.
+func Forward() unsafe.Pointer {
+	_r := objc.Send[unsafe.Pointer](objc.ID(_class("PHASEObject")), objc.RegisterName("forward"))
+	return _r
 }

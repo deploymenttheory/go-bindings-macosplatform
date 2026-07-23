@@ -48,6 +48,12 @@ func gamepadAdopt(id objc.ID) *Gamepad {
 	return x
 }
 
+// WithValueChangedHandler sets a block called when any element in the profile changes.
+func (g *Gamepad) WithValueChangedHandler(valueChangedHandler func(obj.Object, obj.Object)) *Gamepad {
+	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("setValueChangedHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { valueChangedHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
+	return g
+}
+
 // WithValueDidChangeHandler sets the block that the profile calls when an element’s value changes.
 func (g *Gamepad) WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *Gamepad {
 	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("setValueDidChangeHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { valueDidChangeHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))

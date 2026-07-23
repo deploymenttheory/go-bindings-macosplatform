@@ -7,6 +7,7 @@ package storekit
 import (
 	"runtime"
 	"time"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -78,6 +79,13 @@ func (pt *PaymentTransaction) String() string {
 func NewPaymentTransaction() *PaymentTransaction {
 	_id := objc.Send[objc.ID](objc.ID(_class("SKPaymentTransaction")), objc.RegisterName("new"))
 	return paymentTransactionAdopt(_id)
+}
+
+// Error returns the error.
+func (pt *PaymentTransaction) Error() unsafe.Pointer {
+	defer runtime.KeepAlive(pt)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(pt), objc.RegisterName("error"))
+	return _r
 }
 
 // OriginalTransaction returns the original transaction.

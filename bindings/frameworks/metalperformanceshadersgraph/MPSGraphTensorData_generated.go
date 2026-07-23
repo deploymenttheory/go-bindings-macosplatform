@@ -103,6 +103,13 @@ func (gtd *GraphTensorData) Mpsndarray() obj.Object {
 	return obj.Wrap(_r)
 }
 
+// Shape returns the shape of the tensor data.
+func (gtd *GraphTensorData) Shape() unsafe.Pointer {
+	defer runtime.KeepAlive(gtd)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(gtd), objc.RegisterName("shape"))
+	return _r
+}
+
 // Device returns the device of the tensor data.
 func (gtd *GraphTensorData) Device() *GraphDevice {
 	defer runtime.KeepAlive(gtd)

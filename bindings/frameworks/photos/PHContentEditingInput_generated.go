@@ -7,6 +7,7 @@ package photos
 import (
 	"runtime"
 	"time"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -99,6 +100,13 @@ func (cei *ContentEditingInput) CreationDate() time.Time {
 	defer runtime.KeepAlive(cei)
 	_r := objc.Send[objc.ID](objref.IDOf(cei), objc.RegisterName("creationDate"))
 	return rt.NSDateToTime(_r)
+}
+
+// Location returns the location.
+func (cei *ContentEditingInput) Location() unsafe.Pointer {
+	defer runtime.KeepAlive(cei)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(cei), objc.RegisterName("location"))
+	return _r
 }
 
 // ContentType returns the type of data provided as the asset's content editing input image or video.

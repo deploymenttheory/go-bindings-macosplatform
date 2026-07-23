@@ -59,12 +59,29 @@ func NewTargetedImageRequestWithTargetedCVPixelBufferOptions(pixelBuffer unsafe.
 	return targetedImageRequestAdopt(_id)
 }
 
+// NewTargetedImageRequestWithTargetedCVPixelBufferOptionsCompletionHandler creates a new request targeting an image in a pixel buffer.
+func NewTargetedImageRequestWithTargetedCVPixelBufferOptionsCompletionHandler(pixelBuffer unsafe.Pointer, options obj.Object, completionHandler func(obj.Object, unsafe.Pointer)) *TargetedImageRequest {
+	defer runtime.KeepAlive(options)
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VNTargetedImageRequest")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedCVPixelBuffer:options:completionHandler:"), pixelBuffer, objref.IDOf(options), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
+	return targetedImageRequestAdopt(_id)
+}
+
 // NewTargetedImageRequestWithTargetedCGImageOptions creates a new request targeting a Core Graphics image.
 func NewTargetedImageRequestWithTargetedCGImageOptions(cgImage obj.Object, options obj.Object) *TargetedImageRequest {
 	defer runtime.KeepAlive(cgImage)
 	defer runtime.KeepAlive(options)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VNTargetedImageRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedCGImage:options:"), objref.IDOf(cgImage), objref.IDOf(options))
+	return targetedImageRequestAdopt(_id)
+}
+
+// NewTargetedImageRequestWithTargetedCGImageOptionsCompletionHandler creates a new request targeting a Core Graphics image, executing the completion handler when done.
+func NewTargetedImageRequestWithTargetedCGImageOptionsCompletionHandler(cgImage obj.Object, options obj.Object, completionHandler func(obj.Object, unsafe.Pointer)) *TargetedImageRequest {
+	defer runtime.KeepAlive(cgImage)
+	defer runtime.KeepAlive(options)
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VNTargetedImageRequest")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedCGImage:options:completionHandler:"), objref.IDOf(cgImage), objref.IDOf(options), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
 	return targetedImageRequestAdopt(_id)
 }
 
@@ -77,11 +94,28 @@ func NewTargetedImageRequestWithTargetedCIImageOptions(ciImage obj.Object, optio
 	return targetedImageRequestAdopt(_id)
 }
 
+// NewTargetedImageRequestWithTargetedCIImageOptionsCompletionHandler creates a new request targeting a Core Image image.
+func NewTargetedImageRequestWithTargetedCIImageOptionsCompletionHandler(ciImage obj.Object, options obj.Object, completionHandler func(obj.Object, unsafe.Pointer)) *TargetedImageRequest {
+	defer runtime.KeepAlive(ciImage)
+	defer runtime.KeepAlive(options)
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VNTargetedImageRequest")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedCIImage:options:completionHandler:"), objref.IDOf(ciImage), objref.IDOf(options), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
+	return targetedImageRequestAdopt(_id)
+}
+
 // NewTargetedImageRequestWithTargetedImageURLOptions creates a new request targeting an image at the specified URL.
 func NewTargetedImageRequestWithTargetedImageURLOptions(imageURL string, options obj.Object) *TargetedImageRequest {
 	defer runtime.KeepAlive(options)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VNTargetedImageRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedImageURL:options:"), rt.FileURL(imageURL), objref.IDOf(options))
+	return targetedImageRequestAdopt(_id)
+}
+
+// NewTargetedImageRequestWithTargetedImageURLOptionsCompletionHandler creates a new request targeting an image at the specified URL, executing the completion handler when done.
+func NewTargetedImageRequestWithTargetedImageURLOptionsCompletionHandler(imageURL string, options obj.Object, completionHandler func(obj.Object, unsafe.Pointer)) *TargetedImageRequest {
+	defer runtime.KeepAlive(options)
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VNTargetedImageRequest")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedImageURL:options:completionHandler:"), rt.FileURL(imageURL), objref.IDOf(options), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
 	return targetedImageRequestAdopt(_id)
 }
 
@@ -93,12 +127,29 @@ func NewTargetedImageRequestWithTargetedImageDataOptions(imageData []byte, optio
 	return targetedImageRequestAdopt(_id)
 }
 
+// NewTargetedImageRequestWithTargetedImageDataOptionsCompletionHandler creates a new request targeting an image as raw data, executing the completion handler when done.
+func NewTargetedImageRequestWithTargetedImageDataOptionsCompletionHandler(imageData []byte, options obj.Object, completionHandler func(obj.Object, unsafe.Pointer)) *TargetedImageRequest {
+	defer runtime.KeepAlive(options)
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VNTargetedImageRequest")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedImageData:options:completionHandler:"), rt.BytesToNSData(imageData), objref.IDOf(options), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
+	return targetedImageRequestAdopt(_id)
+}
+
 // NewTargetedImageRequestWithTargetedCMSampleBufferOptions creates a new request that targets an image in a sample buffer.
 func NewTargetedImageRequestWithTargetedCMSampleBufferOptions(sampleBuffer obj.Object, options obj.Object) *TargetedImageRequest {
 	defer runtime.KeepAlive(sampleBuffer)
 	defer runtime.KeepAlive(options)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VNTargetedImageRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedCMSampleBuffer:options:"), objref.IDOf(sampleBuffer), objref.IDOf(options))
+	return targetedImageRequestAdopt(_id)
+}
+
+// NewTargetedImageRequestWithTargetedCMSampleBufferOptionsCompletionHandler creates a new request with a completion handler that targets an image in a sample buffer.
+func NewTargetedImageRequestWithTargetedCMSampleBufferOptionsCompletionHandler(sampleBuffer obj.Object, options obj.Object, completionHandler func(obj.Object, unsafe.Pointer)) *TargetedImageRequest {
+	defer runtime.KeepAlive(sampleBuffer)
+	defer runtime.KeepAlive(options)
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VNTargetedImageRequest")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedCMSampleBuffer:options:completionHandler:"), objref.IDOf(sampleBuffer), objref.IDOf(options), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
 	return targetedImageRequestAdopt(_id)
 }
 

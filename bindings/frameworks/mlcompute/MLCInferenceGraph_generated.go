@@ -6,8 +6,10 @@ package mlcompute
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/rt"
 	"github.com/ebitengine/purego/objc"
@@ -95,6 +97,42 @@ func (ig *InferenceGraph) CompileWithOptionsDeviceInputTensorsInputTensorsData(o
 func (ig *InferenceGraph) LinkWithGraphs(graphs []*InferenceGraph) bool {
 	defer runtime.KeepAlive(ig)
 	_r := objc.Send[bool](objref.IDOf(ig), objc.RegisterName("linkWithGraphs:"), purego.SliceToNSArray(graphs, func(_v *InferenceGraph) objc.ID { return objref.IDOf(_v) }))
+	return _r
+}
+
+// ExecuteWithInputsDataBatchSizeOptionsCompletionHandler executes the inference graph with the inputs data, batch size, execution options, and completion handler you specify.
+func (ig *InferenceGraph) ExecuteWithInputsDataBatchSizeOptionsCompletionHandler(inputsData map[string]*TensorData, batchSize int, options ExecutionOptions, completionHandler func(obj.Object, unsafe.Pointer, float64)) bool {
+	defer runtime.KeepAlive(ig)
+	_r := objc.Send[bool](objref.IDOf(ig), objc.RegisterName("executeWithInputsData:batchSize:options:completionHandler:"), rt.MapToDict(inputsData, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *TensorData) objc.ID { return objref.IDOf(_v) }), batchSize, options, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer, _b2 float64) {
+		completionHandler(obj.Wrap(_b0), _b1, _b2)
+	}))
+	return _r
+}
+
+// ExecuteWithInputsDataOutputsDataBatchSizeOptionsCompletionHandler executes the inference graph with the inputs and outputs data, batch size, execution options, and completion handler that you specify.
+func (ig *InferenceGraph) ExecuteWithInputsDataOutputsDataBatchSizeOptionsCompletionHandler(inputsData map[string]*TensorData, outputsData map[string]*TensorData, batchSize int, options ExecutionOptions, completionHandler func(obj.Object, unsafe.Pointer, float64)) bool {
+	defer runtime.KeepAlive(ig)
+	_r := objc.Send[bool](objref.IDOf(ig), objc.RegisterName("executeWithInputsData:outputsData:batchSize:options:completionHandler:"), rt.MapToDict(inputsData, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *TensorData) objc.ID { return objref.IDOf(_v) }), rt.MapToDict(outputsData, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *TensorData) objc.ID { return objref.IDOf(_v) }), batchSize, options, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer, _b2 float64) {
+		completionHandler(obj.Wrap(_b0), _b1, _b2)
+	}))
+	return _r
+}
+
+// ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataBatchSizeOptionsCompletionHandler executes the inference graph with the input data, batch size, execution options and completion handler you specify.
+func (ig *InferenceGraph) ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataBatchSizeOptionsCompletionHandler(inputsData map[string]*TensorData, lossLabelsData map[string]*TensorData, lossLabelWeightsData map[string]*TensorData, batchSize int, options ExecutionOptions, completionHandler func(obj.Object, unsafe.Pointer, float64)) bool {
+	defer runtime.KeepAlive(ig)
+	_r := objc.Send[bool](objref.IDOf(ig), objc.RegisterName("executeWithInputsData:lossLabelsData:lossLabelWeightsData:batchSize:options:completionHandler:"), rt.MapToDict(inputsData, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *TensorData) objc.ID { return objref.IDOf(_v) }), rt.MapToDict(lossLabelsData, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *TensorData) objc.ID { return objref.IDOf(_v) }), rt.MapToDict(lossLabelWeightsData, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *TensorData) objc.ID { return objref.IDOf(_v) }), batchSize, options, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer, _b2 float64) {
+		completionHandler(obj.Wrap(_b0), _b1, _b2)
+	}))
+	return _r
+}
+
+// ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataOutputsDataBatchSizeOptionsCompletionHandler executes the inference graph with the input and output data, batch size, execution options, and completion handler that you specify.
+func (ig *InferenceGraph) ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataOutputsDataBatchSizeOptionsCompletionHandler(inputsData map[string]*TensorData, lossLabelsData map[string]*TensorData, lossLabelWeightsData map[string]*TensorData, outputsData map[string]*TensorData, batchSize int, options ExecutionOptions, completionHandler func(obj.Object, unsafe.Pointer, float64)) bool {
+	defer runtime.KeepAlive(ig)
+	_r := objc.Send[bool](objref.IDOf(ig), objc.RegisterName("executeWithInputsData:lossLabelsData:lossLabelWeightsData:outputsData:batchSize:options:completionHandler:"), rt.MapToDict(inputsData, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *TensorData) objc.ID { return objref.IDOf(_v) }), rt.MapToDict(lossLabelsData, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *TensorData) objc.ID { return objref.IDOf(_v) }), rt.MapToDict(lossLabelWeightsData, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *TensorData) objc.ID { return objref.IDOf(_v) }), rt.MapToDict(outputsData, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *TensorData) objc.ID { return objref.IDOf(_v) }), batchSize, options, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer, _b2 float64) {
+		completionHandler(obj.Wrap(_b0), _b1, _b2)
+	}))
 	return _r
 }
 

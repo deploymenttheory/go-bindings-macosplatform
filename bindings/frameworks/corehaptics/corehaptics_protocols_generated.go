@@ -5,6 +5,8 @@
 package corehaptics
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
@@ -22,7 +24,7 @@ type HapticAdvancedPatternPlayer interface {
 	IsMuted() bool
 	SetIsMuted(isMuted bool)
 	CompletionHandler() obj.Object
-	SetCompletionHandler(completionHandler obj.Object)
+	SetCompletionHandler(completionHandler func(unsafe.Pointer))
 }
 
 // HapticDeviceCapability is the Go form of the Objective-C protocol CHHapticDeviceCapability.

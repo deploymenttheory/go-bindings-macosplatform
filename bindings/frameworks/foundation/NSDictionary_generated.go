@@ -270,6 +270,20 @@ func (d *Dictionary) EnumerateKeysAndObjectsWithOptionsUsing(opts EnumerationOpt
 	}))
 }
 
+// KeysSortedByValueUsingComparator returns an array of the dictionary’s keys, in the order they would be in if the dictionary were sorted by its values using a given comparator block.
+func (d *Dictionary) KeysSortedByValueUsingComparator(cmptr func(obj.Object, obj.Object) int) []obj.Object {
+	defer runtime.KeepAlive(d)
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("keysSortedByValueUsingComparator:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) int { return cmptr(obj.Wrap(_b0), obj.Wrap(_b1)) }))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
+// KeysSortedByValueWithOptionsUsingComparator returns an array of the dictionary’s keys, in the order they would be in if the dictionary were sorted by its values using a given comparator block and a specified set of options.
+func (d *Dictionary) KeysSortedByValueWithOptionsUsingComparator(opts SortOptions, cmptr func(obj.Object, obj.Object) int) []obj.Object {
+	defer runtime.KeepAlive(d)
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("keysSortedByValueWithOptions:usingComparator:"), opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) int { return cmptr(obj.Wrap(_b0), obj.Wrap(_b1)) }))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
 // KeysOfEntriesPassingTest returns the set of keys whose corresponding value satisfies a constraint described by a block object.
 // The order of the returned elements is unspecified.
 func (d *Dictionary) KeysOfEntriesPassingTest(predicate func(obj.Object, obj.Object, *bool) bool) []obj.Object {

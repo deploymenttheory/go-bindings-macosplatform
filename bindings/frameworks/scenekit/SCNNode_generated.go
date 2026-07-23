@@ -539,6 +539,54 @@ func (n *Node) CategoryBitMask() int {
 	return _r
 }
 
+// SIMDConvertPositionToNode converts a position from the node’s local coordinate space to that of another node.
+func (n *Node) SIMDConvertPositionToNode(position unsafe.Pointer, node *Node) unsafe.Pointer {
+	defer runtime.KeepAlive(n)
+	defer runtime.KeepAlive(node)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(n), objc.RegisterName("simdConvertPosition:toNode:"), position, objref.IDOf(node))
+	return _r
+}
+
+// SIMDConvertPositionFromNode converts a position to the node’s local coordinate space from that of another node.
+func (n *Node) SIMDConvertPositionFromNode(position unsafe.Pointer, node *Node) unsafe.Pointer {
+	defer runtime.KeepAlive(n)
+	defer runtime.KeepAlive(node)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(n), objc.RegisterName("simdConvertPosition:fromNode:"), position, objref.IDOf(node))
+	return _r
+}
+
+// SIMDConvertVectorToNode converts a direction vector from the node’s local coordinate space to that of another node.
+func (n *Node) SIMDConvertVectorToNode(vector unsafe.Pointer, node *Node) unsafe.Pointer {
+	defer runtime.KeepAlive(n)
+	defer runtime.KeepAlive(node)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(n), objc.RegisterName("simdConvertVector:toNode:"), vector, objref.IDOf(node))
+	return _r
+}
+
+// SIMDConvertVectorFromNode converts a direction vector to the node’s local coordinate space from that of another node.
+func (n *Node) SIMDConvertVectorFromNode(vector unsafe.Pointer, node *Node) unsafe.Pointer {
+	defer runtime.KeepAlive(n)
+	defer runtime.KeepAlive(node)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(n), objc.RegisterName("simdConvertVector:fromNode:"), vector, objref.IDOf(node))
+	return _r
+}
+
+// SIMDConvertTransformToNode converts a transform from the node’s local coordinate space to that of another node.
+func (n *Node) SIMDConvertTransformToNode(transform unsafe.Pointer, node *Node) unsafe.Pointer {
+	defer runtime.KeepAlive(n)
+	defer runtime.KeepAlive(node)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(n), objc.RegisterName("simdConvertTransform:toNode:"), transform, objref.IDOf(node))
+	return _r
+}
+
+// SIMDConvertTransformFromNode converts a transform to the node’s local coordinate space from that of another node.
+func (n *Node) SIMDConvertTransformFromNode(transform unsafe.Pointer, node *Node) unsafe.Pointer {
+	defer runtime.KeepAlive(n)
+	defer runtime.KeepAlive(node)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(n), objc.RegisterName("simdConvertTransform:fromNode:"), transform, objref.IDOf(node))
+	return _r
+}
+
 // SIMDLookAt changes the node’s orientation so that its local forward vector points toward the specified location.
 func (n *Node) SIMDLookAt(worldTarget unsafe.Pointer) {
 	defer runtime.KeepAlive(n)
@@ -567,6 +615,97 @@ func (n *Node) SIMDLocalRotateBy(rotation unsafe.Pointer) {
 func (n *Node) SIMDRotateByAroundTarget(worldRotation unsafe.Pointer, worldTarget unsafe.Pointer) {
 	defer runtime.KeepAlive(n)
 	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("simdRotateBy:aroundTarget:"), worldRotation, worldTarget)
+}
+
+// SIMDTransform determines the receiver's transform. Animatable. The transform is the combination of the position, rotation and scale defined below. So when the transform is set, the receiver's position, rotation and scale are changed to match the new transform.
+func (n *Node) SIMDTransform() unsafe.Pointer {
+	defer runtime.KeepAlive(n)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(n), objc.RegisterName("simdTransform"))
+	return _r
+}
+
+// SIMDPosition determines the receiver's position. Animatable.
+func (n *Node) SIMDPosition() unsafe.Pointer {
+	defer runtime.KeepAlive(n)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(n), objc.RegisterName("simdPosition"))
+	return _r
+}
+
+// SIMDRotation determines the receiver's rotation. Animatable. The rotation is axis angle rotation. The three first components are the axis, the fourth one is the rotation (in radian).
+func (n *Node) SIMDRotation() unsafe.Pointer {
+	defer runtime.KeepAlive(n)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(n), objc.RegisterName("simdRotation"))
+	return _r
+}
+
+// SIMDOrientation determines the receiver's orientation as a unit quaternion. Animatable.
+func (n *Node) SIMDOrientation() unsafe.Pointer {
+	defer runtime.KeepAlive(n)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(n), objc.RegisterName("simdOrientation"))
+	return _r
+}
+
+// SIMDEulerAngles determines the receiver's euler angles. Animatable.
+func (n *Node) SIMDEulerAngles() unsafe.Pointer {
+	defer runtime.KeepAlive(n)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(n), objc.RegisterName("simdEulerAngles"))
+	return _r
+}
+
+// SIMDScale determines the receiver's scale. Animatable.
+func (n *Node) SIMDScale() unsafe.Pointer {
+	defer runtime.KeepAlive(n)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(n), objc.RegisterName("simdScale"))
+	return _r
+}
+
+// SIMDPivot determines the receiver's pivot. Animatable.
+func (n *Node) SIMDPivot() unsafe.Pointer {
+	defer runtime.KeepAlive(n)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(n), objc.RegisterName("simdPivot"))
+	return _r
+}
+
+// SIMDWorldPosition determines the receiver's position in world space (relative to the scene's root node).
+func (n *Node) SIMDWorldPosition() unsafe.Pointer {
+	defer runtime.KeepAlive(n)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(n), objc.RegisterName("simdWorldPosition"))
+	return _r
+}
+
+// SIMDWorldOrientation determines the receiver's orientation in world space (relative to the scene's root node). Animatable.
+func (n *Node) SIMDWorldOrientation() unsafe.Pointer {
+	defer runtime.KeepAlive(n)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(n), objc.RegisterName("simdWorldOrientation"))
+	return _r
+}
+
+// SIMDWorldTransform determines the receiver's transform in world space (relative to the scene's root node). Animatable.
+func (n *Node) SIMDWorldTransform() unsafe.Pointer {
+	defer runtime.KeepAlive(n)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(n), objc.RegisterName("simdWorldTransform"))
+	return _r
+}
+
+// SIMDWorldUp returns the SIMD world up.
+func (n *Node) SIMDWorldUp() unsafe.Pointer {
+	defer runtime.KeepAlive(n)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(n), objc.RegisterName("simdWorldUp"))
+	return _r
+}
+
+// SIMDWorldRight returns the SIMD world right.
+func (n *Node) SIMDWorldRight() unsafe.Pointer {
+	defer runtime.KeepAlive(n)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(n), objc.RegisterName("simdWorldRight"))
+	return _r
+}
+
+// SIMDWorldFront returns the SIMD world front.
+func (n *Node) SIMDWorldFront() unsafe.Pointer {
+	defer runtime.KeepAlive(n)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(n), objc.RegisterName("simdWorldFront"))
+	return _r
 }
 
 // FocusBehavior returns the focus behavior.

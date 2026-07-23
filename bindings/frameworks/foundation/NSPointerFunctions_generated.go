@@ -141,6 +141,48 @@ func (pf *PointerFunctions) WithScriptingProperties(scriptingProperties map[stri
 	return pf
 }
 
+// HashFunction returns the hash function.
+func (pf *PointerFunctions) HashFunction() unsafe.Pointer {
+	defer runtime.KeepAlive(pf)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(pf), objc.RegisterName("hashFunction"))
+	return _r
+}
+
+// IsEqualFunction returns the is equal function.
+func (pf *PointerFunctions) IsEqualFunction() unsafe.Pointer {
+	defer runtime.KeepAlive(pf)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(pf), objc.RegisterName("isEqualFunction"))
+	return _r
+}
+
+// SizeFunction returns the size function.
+func (pf *PointerFunctions) SizeFunction() unsafe.Pointer {
+	defer runtime.KeepAlive(pf)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(pf), objc.RegisterName("sizeFunction"))
+	return _r
+}
+
+// DescriptionFunction returns the description function.
+func (pf *PointerFunctions) DescriptionFunction() unsafe.Pointer {
+	defer runtime.KeepAlive(pf)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(pf), objc.RegisterName("descriptionFunction"))
+	return _r
+}
+
+// RelinquishFunction returns the relinquish function.
+func (pf *PointerFunctions) RelinquishFunction() unsafe.Pointer {
+	defer runtime.KeepAlive(pf)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(pf), objc.RegisterName("relinquishFunction"))
+	return _r
+}
+
+// AcquireFunction returns the acquire function.
+func (pf *PointerFunctions) AcquireFunction() unsafe.Pointer {
+	defer runtime.KeepAlive(pf)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(pf), objc.RegisterName("acquireFunction"))
+	return _r
+}
+
 // UsesStrongWriteBarrier wraps the corresponding Objective-C method.
 func (pf *PointerFunctions) UsesStrongWriteBarrier() bool {
 	defer runtime.KeepAlive(pf)

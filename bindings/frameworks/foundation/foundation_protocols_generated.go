@@ -13,7 +13,7 @@ import (
 // Coding is the Go form of the Objective-C protocol NSCoding.
 type Coding interface {
 	EncodeWithCoder(coder *Coder)
-	InitWithCoder(coder *Coder) obj.Object
+	InitWithCoder(coder *Coder) unsafe.Pointer
 }
 
 // Copying is the Go form of the Objective-C protocol NSCopying.
@@ -54,13 +54,13 @@ type FilePresenter interface {
 
 // ItemProviderReading is the Go form of the Objective-C protocol NSItemProviderReading.
 type ItemProviderReading interface {
-	ObjectWithItemProviderDataTypeIdentifierError(data []byte, typeIdentifier string) obj.Object
+	ObjectWithItemProviderDataTypeIdentifierError(data []byte, typeIdentifier string) unsafe.Pointer
 	ReadableTypeIdentifiersForItemProvider() []string
 }
 
 // ItemProviderWriting is the Go form of the Objective-C protocol NSItemProviderWriting.
 type ItemProviderWriting interface {
-	LoadDataWithTypeIdentifierForItemProviderCompletionHandler(typeIdentifier string, completionHandler obj.Object) *Progress
+	LoadDataWithTypeIdentifierForItemProviderCompletionHandler(typeIdentifier string, completionHandler func(obj.Object, unsafe.Pointer)) *Progress
 	WritableTypeIdentifiersForItemProvider() []string
 }
 
@@ -87,7 +87,7 @@ type MutableCopying interface {
 type ObjectProtocol interface {
 	IsEqual(object obj.Object) bool
 	Class() obj.Object
-	Self() obj.Object
+	Self() unsafe.Pointer
 	PerformSelector(aSelector obj.Object) obj.Object
 	PerformSelectorWithObject(aSelector obj.Object, object obj.Object) obj.Object
 	PerformSelectorWithObjectWithObject(aSelector obj.Object, object1 obj.Object, object2 obj.Object) obj.Object
@@ -96,11 +96,11 @@ type ObjectProtocol interface {
 	IsMemberOfClass(aClass obj.Object) bool
 	ConformsToProtocol(aProtocol unsafe.Pointer) bool
 	RespondsToSelector(aSelector obj.Object) bool
-	Retain() obj.Object
+	Retain() unsafe.Pointer
 	Release()
-	Autorelease() obj.Object
+	Autorelease() unsafe.Pointer
 	RetainCount() int
-	Zone() obj.Object
+	Zone() unsafe.Pointer
 	Hash() int
 	Superclass() obj.Object
 	Description() string
@@ -151,5 +151,5 @@ type URLProtocolClient interface {
 // XPCProxyCreating is the Go form of the Objective-C protocol NSXPCProxyCreating.
 type XPCProxyCreating interface {
 	RemoteObjectProxy() obj.Object
-	RemoteObjectProxyWithErrorHandler(handler obj.Object) obj.Object
+	RemoteObjectProxyWithErrorHandler(handler func(unsafe.Pointer)) obj.Object
 }

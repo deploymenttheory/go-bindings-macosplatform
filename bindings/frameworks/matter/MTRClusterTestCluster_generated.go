@@ -7,6 +7,7 @@ package matter
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -55,6 +56,36 @@ func NewMTRClusterTestClusterWithDeviceEndpointQueue(device *MTRDevice, endpoint
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterTestCluster")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
 	return mTRClusterTestClusterAdopt(_id)
+}
+
+// TestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler wraps the corresponding Objective-C method.
+func (mctc *MTRClusterTestCluster) TestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRTestClusterClusterTestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mctc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mctc), objc.RegisterName("testWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// TestWithExpectedValuesExpectedValueIntervalCompletionHandler wraps the corresponding Objective-C method.
+func (mctc *MTRClusterTestCluster) TestWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mctc)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mctc), objc.RegisterName("testWithExpectedValues:expectedValueInterval:completionHandler:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// TestNotHandledWithParamsExpectedValuesExpectedValueIntervalCompletionHandler wraps the corresponding Objective-C method.
+func (mctc *MTRClusterTestCluster) TestNotHandledWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRTestClusterClusterTestNotHandledParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mctc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mctc), objc.RegisterName("testNotHandledWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// TestNotHandledWithExpectedValuesExpectedValueIntervalCompletionHandler wraps the corresponding Objective-C method.
+func (mctc *MTRClusterTestCluster) TestNotHandledWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mctc)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mctc), objc.RegisterName("testNotHandledWithExpectedValues:expectedValueInterval:completionHandler:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
 }
 
 // TestSpecificWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
@@ -110,6 +141,21 @@ func (mctc *MTRClusterTestCluster) TestSpecificWithExpectedValuesExpectedValueIn
 		var _zero *MTRTestClusterClusterTestSpecificResponseParams
 		return _zero, ctx.Err()
 	}
+}
+
+// TestUnknownCommandWithParamsExpectedValuesExpectedValueIntervalCompletionHandler wraps the corresponding Objective-C method.
+func (mctc *MTRClusterTestCluster) TestUnknownCommandWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRTestClusterClusterTestUnknownCommandParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mctc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mctc), objc.RegisterName("testUnknownCommandWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// TestUnknownCommandWithExpectedValuesExpectedValueIntervalCompletionHandler wraps the corresponding Objective-C method.
+func (mctc *MTRClusterTestCluster) TestUnknownCommandWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mctc)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mctc), objc.RegisterName("testUnknownCommandWithExpectedValues:expectedValueInterval:completionHandler:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
 }
 
 // TestAddArgumentsWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
@@ -529,6 +575,36 @@ func (mctc *MTRClusterTestCluster) SimpleStructEchoRequestWithParamsExpectedValu
 		var _zero *MTRTestClusterClusterSimpleStructResponseParams
 		return _zero, ctx.Err()
 	}
+}
+
+// TimedInvokeRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler wraps the corresponding Objective-C method.
+func (mctc *MTRClusterTestCluster) TimedInvokeRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRTestClusterClusterTimedInvokeRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mctc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mctc), objc.RegisterName("timedInvokeRequestWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// TimedInvokeRequestWithExpectedValuesExpectedValueIntervalCompletionHandler wraps the corresponding Objective-C method.
+func (mctc *MTRClusterTestCluster) TimedInvokeRequestWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mctc)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mctc), objc.RegisterName("timedInvokeRequestWithExpectedValues:expectedValueInterval:completionHandler:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// TestSimpleOptionalArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler wraps the corresponding Objective-C method.
+func (mctc *MTRClusterTestCluster) TestSimpleOptionalArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRTestClusterClusterTestSimpleOptionalArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mctc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mctc), objc.RegisterName("testSimpleOptionalArgumentRequestWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// TestSimpleOptionalArgumentRequestWithExpectedValuesExpectedValueIntervalCompletionHandler wraps the corresponding Objective-C method.
+func (mctc *MTRClusterTestCluster) TestSimpleOptionalArgumentRequestWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mctc)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mctc), objc.RegisterName("testSimpleOptionalArgumentRequestWithExpectedValues:expectedValueInterval:completionHandler:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
 }
 
 // TestEmitTestEventRequestWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.

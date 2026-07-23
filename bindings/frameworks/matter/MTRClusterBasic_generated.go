@@ -6,6 +6,7 @@ package matter
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -53,6 +54,21 @@ func NewMTRClusterBasicWithDeviceEndpointQueue(device *MTRDevice, endpoint uint1
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterBasic")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
 	return mTRClusterBasicAdopt(_id)
+}
+
+// MfgSpecificPingWithParamsExpectedValuesExpectedValueIntervalCompletionHandler wraps the corresponding Objective-C method.
+func (mcb *MTRClusterBasic) MfgSpecificPingWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRBasicClusterMfgSpecificPingParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcb)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcb), objc.RegisterName("mfgSpecificPingWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// MfgSpecificPingWithExpectedValuesExpectedValueIntervalCompletionHandler wraps the corresponding Objective-C method.
+func (mcb *MTRClusterBasic) MfgSpecificPingWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcb)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcb), objc.RegisterName("mfgSpecificPingWithExpectedValues:expectedValueInterval:completionHandler:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
 }
 
 var _ MTRClusterBasicInformationProvider = (*MTRClusterBasic)(nil)

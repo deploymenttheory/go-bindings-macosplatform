@@ -567,6 +567,13 @@ func (fm *FileManager) DirectoryEnumerator(path string) obj.Object {
 	return obj.Wrap(_r)
 }
 
+// EnumeratorAtURLIncludingPropertiesForKeysOptionsErrorHandler returns a directory enumerator object that can be used to perform a deep enumeration of the directory at the specified URL.
+func (fm *FileManager) EnumeratorAtURLIncludingPropertiesForKeysOptionsErrorHandler(url string, keys []*String, mask DirectoryEnumerationOptions, handler func(obj.Object, unsafe.Pointer) bool) obj.Object {
+	defer runtime.KeepAlive(fm)
+	_r := objc.Send[objc.ID](objref.IDOf(fm), objc.RegisterName("enumeratorAtURL:includingPropertiesForKeys:options:errorHandler:"), rt.FileURL(url), purego.SliceToNSArray(keys, func(_v *String) objc.ID { return objref.IDOf(_v) }), mask, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) bool { return handler(obj.Wrap(_b0), _b1) }))
+	return obj.Wrap(_r)
+}
+
 // SubpathsAtPath wraps the corresponding Objective-C method.
 func (fm *FileManager) SubpathsAtPath(path string) []string {
 	defer runtime.KeepAlive(fm)
@@ -766,6 +773,12 @@ func (fm *FileManager) UploadLocalVersionOfUbiquitousItemAtURLWithConflictResolu
 		var _zero *FileVersion
 		return _zero, ctx.Err()
 	}
+}
+
+// GetFileProviderServicesForItemAtURLCompletionHandler wraps the corresponding Objective-C method.
+func (fm *FileManager) GetFileProviderServicesForItemAtURLCompletionHandler(url string, completionHandler func(obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(fm)
+	objc.Send[objc.ID](objref.IDOf(fm), objc.RegisterName("getFileProviderServicesForItemAtURL:completionHandler:"), rt.FileURL(url), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
 }
 
 // ContainerURLForSecurityApplicationGroupIdentifier wraps the corresponding Objective-C method.

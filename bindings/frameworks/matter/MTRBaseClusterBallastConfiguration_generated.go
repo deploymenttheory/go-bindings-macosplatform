@@ -7,6 +7,7 @@ package matter
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -110,7 +111,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributePhysicalMinLe
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributePhysicalMinLevelWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributePhysicalMinLevelWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -163,7 +164,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributePhysicalMaxLe
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributePhysicalMaxLevelWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributePhysicalMaxLevelWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -216,7 +217,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeBallastStatus
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeBallastStatusWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeBallastStatusWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -252,6 +253,21 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributeMinLevelWithComple
 	}
 }
 
+// WriteAttributeMinLevelWithValueCompletion writes attribute min level with value completion.
+func (mbcbc *MTRBaseClusterBallastConfiguration) WriteAttributeMinLevelWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeMinLevelWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeMinLevelWithValueParamsCompletion writes attribute min level with value params completion.
+func (mbcbc *MTRBaseClusterBallastConfiguration) WriteAttributeMinLevelWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeMinLevelWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeMinLevelWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeMinLevelWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -269,7 +285,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeMinLevelWithP
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeMinLevelWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeMinLevelWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -305,6 +321,21 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributeMaxLevelWithComple
 	}
 }
 
+// WriteAttributeMaxLevelWithValueCompletion writes attribute max level with value completion.
+func (mbcbc *MTRBaseClusterBallastConfiguration) WriteAttributeMaxLevelWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeMaxLevelWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeMaxLevelWithValueParamsCompletion writes attribute max level with value params completion.
+func (mbcbc *MTRBaseClusterBallastConfiguration) WriteAttributeMaxLevelWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeMaxLevelWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeMaxLevelWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeMaxLevelWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -322,7 +353,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeMaxLevelWithP
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeMaxLevelWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeMaxLevelWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -358,6 +389,21 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributeIntrinsicBallastFa
 	}
 }
 
+// WriteAttributeIntrinsicBallastFactorWithValueCompletion writes attribute intrinsic ballast factor with value completion.
+func (mbcbc *MTRBaseClusterBallastConfiguration) WriteAttributeIntrinsicBallastFactorWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeIntrinsicBallastFactorWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeIntrinsicBallastFactorWithValueParamsCompletion writes attribute intrinsic ballast factor with value params completion.
+func (mbcbc *MTRBaseClusterBallastConfiguration) WriteAttributeIntrinsicBallastFactorWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeIntrinsicBallastFactorWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeIntrinsicBallastFactorWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeIntrinsicBallastFactorWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -375,7 +421,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeIntrinsicBall
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeIntrinsicBallastFactorWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeIntrinsicBallastFactorWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -411,6 +457,21 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributeBallastFactorAdjus
 	}
 }
 
+// WriteAttributeBallastFactorAdjustmentWithValueCompletion writes attribute ballast factor adjustment with value completion.
+func (mbcbc *MTRBaseClusterBallastConfiguration) WriteAttributeBallastFactorAdjustmentWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeBallastFactorAdjustmentWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeBallastFactorAdjustmentWithValueParamsCompletion writes attribute ballast factor adjustment with value params completion.
+func (mbcbc *MTRBaseClusterBallastConfiguration) WriteAttributeBallastFactorAdjustmentWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeBallastFactorAdjustmentWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeBallastFactorAdjustmentWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeBallastFactorAdjustmentWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -428,7 +489,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeBallastFactor
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeBallastFactorAdjustmentWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeBallastFactorAdjustmentWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -481,7 +542,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampQuantityW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeLampQuantityWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeLampQuantityWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -517,6 +578,19 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributeLampTypeWithComple
 	}
 }
 
+// WriteAttributeLampTypeWithValueCompletion writes attribute lamp type with value completion.
+func (mbcbc *MTRBaseClusterBallastConfiguration) WriteAttributeLampTypeWithValueCompletion(value string, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeLampTypeWithValue:completion:"), purego.NSString(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeLampTypeWithValueParamsCompletion writes attribute lamp type with value params completion.
+func (mbcbc *MTRBaseClusterBallastConfiguration) WriteAttributeLampTypeWithValueParamsCompletion(value string, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeLampTypeWithValue:params:completion:"), purego.NSString(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeLampTypeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeLampTypeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -534,7 +608,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampTypeWithP
 		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeLampTypeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeLampTypeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -570,6 +644,19 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributeLampManufacturerWi
 	}
 }
 
+// WriteAttributeLampManufacturerWithValueCompletion writes attribute lamp manufacturer with value completion.
+func (mbcbc *MTRBaseClusterBallastConfiguration) WriteAttributeLampManufacturerWithValueCompletion(value string, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeLampManufacturerWithValue:completion:"), purego.NSString(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeLampManufacturerWithValueParamsCompletion writes attribute lamp manufacturer with value params completion.
+func (mbcbc *MTRBaseClusterBallastConfiguration) WriteAttributeLampManufacturerWithValueParamsCompletion(value string, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeLampManufacturerWithValue:params:completion:"), purego.NSString(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeLampManufacturerWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeLampManufacturerWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -587,7 +674,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampManufactu
 		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeLampManufacturerWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeLampManufacturerWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -623,6 +710,21 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributeLampRatedHoursWith
 	}
 }
 
+// WriteAttributeLampRatedHoursWithValueCompletion writes attribute lamp rated hours with value completion.
+func (mbcbc *MTRBaseClusterBallastConfiguration) WriteAttributeLampRatedHoursWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeLampRatedHoursWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeLampRatedHoursWithValueParamsCompletion writes attribute lamp rated hours with value params completion.
+func (mbcbc *MTRBaseClusterBallastConfiguration) WriteAttributeLampRatedHoursWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeLampRatedHoursWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeLampRatedHoursWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeLampRatedHoursWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -640,7 +742,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampRatedHour
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeLampRatedHoursWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeLampRatedHoursWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -676,6 +778,21 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributeLampBurnHoursWithC
 	}
 }
 
+// WriteAttributeLampBurnHoursWithValueCompletion writes attribute lamp burn hours with value completion.
+func (mbcbc *MTRBaseClusterBallastConfiguration) WriteAttributeLampBurnHoursWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeLampBurnHoursWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeLampBurnHoursWithValueParamsCompletion writes attribute lamp burn hours with value params completion.
+func (mbcbc *MTRBaseClusterBallastConfiguration) WriteAttributeLampBurnHoursWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeLampBurnHoursWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeLampBurnHoursWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeLampBurnHoursWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -693,7 +810,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampBurnHours
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeLampBurnHoursWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeLampBurnHoursWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -729,6 +846,21 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributeLampAlarmModeWithC
 	}
 }
 
+// WriteAttributeLampAlarmModeWithValueCompletion writes attribute lamp alarm mode with value completion.
+func (mbcbc *MTRBaseClusterBallastConfiguration) WriteAttributeLampAlarmModeWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeLampAlarmModeWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeLampAlarmModeWithValueParamsCompletion writes attribute lamp alarm mode with value params completion.
+func (mbcbc *MTRBaseClusterBallastConfiguration) WriteAttributeLampAlarmModeWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeLampAlarmModeWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeLampAlarmModeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeLampAlarmModeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -746,7 +878,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampAlarmMode
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeLampAlarmModeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeLampAlarmModeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -782,6 +914,21 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributeLampBurnHoursTripP
 	}
 }
 
+// WriteAttributeLampBurnHoursTripPointWithValueCompletion writes attribute lamp burn hours trip point with value completion.
+func (mbcbc *MTRBaseClusterBallastConfiguration) WriteAttributeLampBurnHoursTripPointWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeLampBurnHoursTripPointWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeLampBurnHoursTripPointWithValueParamsCompletion writes attribute lamp burn hours trip point with value params completion.
+func (mbcbc *MTRBaseClusterBallastConfiguration) WriteAttributeLampBurnHoursTripPointWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeLampBurnHoursTripPointWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeLampBurnHoursTripPointWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeLampBurnHoursTripPointWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -799,7 +946,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampBurnHours
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeLampBurnHoursTripPointWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeLampBurnHoursTripPointWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -852,7 +999,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeGeneratedComm
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -905,7 +1052,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeAcceptedComma
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -958,7 +1105,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeAttributeList
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1011,7 +1158,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeFeatureMapWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1064,7 +1211,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeClusterRevisi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1119,7 +1266,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributePhysicalMinLe
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributePhysicalMinLevelWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributePhysicalMinLevelWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1174,7 +1321,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributePhysicalMaxLe
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributePhysicalMaxLevelWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributePhysicalMaxLevelWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1229,7 +1376,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeBallastStatus
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeBallastStatusWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeBallastStatusWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1265,6 +1412,21 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributeMinLevel(ctx conte
 	}
 }
 
+// WriteAttributeMinLevelWithValueCompletionHandler writes attribute min level with value completion handler.
+func (mbcbc *MTRBaseClusterBallastConfiguration) WriteAttributeMinLevelWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeMinLevelWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeMinLevelWithValueParamsCompletionHandler writes attribute min level with value params completion handler.
+func (mbcbc *MTRBaseClusterBallastConfiguration) WriteAttributeMinLevelWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeMinLevelWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeMinLevelWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeMinLevelWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1284,7 +1446,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeMinLevelWithM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeMinLevelWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeMinLevelWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1320,6 +1482,21 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributeMaxLevel(ctx conte
 	}
 }
 
+// WriteAttributeMaxLevelWithValueCompletionHandler writes attribute max level with value completion handler.
+func (mbcbc *MTRBaseClusterBallastConfiguration) WriteAttributeMaxLevelWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeMaxLevelWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeMaxLevelWithValueParamsCompletionHandler writes attribute max level with value params completion handler.
+func (mbcbc *MTRBaseClusterBallastConfiguration) WriteAttributeMaxLevelWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeMaxLevelWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeMaxLevelWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeMaxLevelWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1339,7 +1516,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeMaxLevelWithM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeMaxLevelWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeMaxLevelWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1375,6 +1552,21 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributeIntrinsicBalanceFa
 	}
 }
 
+// WriteAttributeIntrinsicBalanceFactorWithValueCompletionHandler writes attribute intrinsic balance factor with value completion handler.
+func (mbcbc *MTRBaseClusterBallastConfiguration) WriteAttributeIntrinsicBalanceFactorWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeIntrinsicBalanceFactorWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeIntrinsicBalanceFactorWithValueParamsCompletionHandler writes attribute intrinsic balance factor with value params completion handler.
+func (mbcbc *MTRBaseClusterBallastConfiguration) WriteAttributeIntrinsicBalanceFactorWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeIntrinsicBalanceFactorWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeIntrinsicBalanceFactorWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeIntrinsicBalanceFactorWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1394,7 +1586,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeIntrinsicBala
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeIntrinsicBalanceFactorWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeIntrinsicBalanceFactorWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1430,6 +1622,21 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributeBallastFactorAdjus
 	}
 }
 
+// WriteAttributeBallastFactorAdjustmentWithValueCompletionHandler writes attribute ballast factor adjustment with value completion handler.
+func (mbcbc *MTRBaseClusterBallastConfiguration) WriteAttributeBallastFactorAdjustmentWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeBallastFactorAdjustmentWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeBallastFactorAdjustmentWithValueParamsCompletionHandler writes attribute ballast factor adjustment with value params completion handler.
+func (mbcbc *MTRBaseClusterBallastConfiguration) WriteAttributeBallastFactorAdjustmentWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeBallastFactorAdjustmentWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeBallastFactorAdjustmentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeBallastFactorAdjustmentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1449,7 +1656,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeBallastFactor
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeBallastFactorAdjustmentWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeBallastFactorAdjustmentWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1504,7 +1711,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampQuantityW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeLampQuantityWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeLampQuantityWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1540,6 +1747,19 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributeLampType(ctx conte
 	}
 }
 
+// WriteAttributeLampTypeWithValueCompletionHandler writes attribute lamp type with value completion handler.
+func (mbcbc *MTRBaseClusterBallastConfiguration) WriteAttributeLampTypeWithValueCompletionHandler(value string, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeLampTypeWithValue:completionHandler:"), purego.NSString(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeLampTypeWithValueParamsCompletionHandler writes attribute lamp type with value params completion handler.
+func (mbcbc *MTRBaseClusterBallastConfiguration) WriteAttributeLampTypeWithValueParamsCompletionHandler(value string, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeLampTypeWithValue:params:completionHandler:"), purego.NSString(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeLampTypeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeLampTypeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1559,7 +1779,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampTypeWithM
 		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeLampTypeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeLampTypeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1595,6 +1815,19 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributeLampManufacturer(c
 	}
 }
 
+// WriteAttributeLampManufacturerWithValueCompletionHandler writes attribute lamp manufacturer with value completion handler.
+func (mbcbc *MTRBaseClusterBallastConfiguration) WriteAttributeLampManufacturerWithValueCompletionHandler(value string, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeLampManufacturerWithValue:completionHandler:"), purego.NSString(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeLampManufacturerWithValueParamsCompletionHandler writes attribute lamp manufacturer with value params completion handler.
+func (mbcbc *MTRBaseClusterBallastConfiguration) WriteAttributeLampManufacturerWithValueParamsCompletionHandler(value string, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeLampManufacturerWithValue:params:completionHandler:"), purego.NSString(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeLampManufacturerWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeLampManufacturerWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1614,7 +1847,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampManufactu
 		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeLampManufacturerWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeLampManufacturerWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1650,6 +1883,21 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributeLampRatedHours(ctx
 	}
 }
 
+// WriteAttributeLampRatedHoursWithValueCompletionHandler writes attribute lamp rated hours with value completion handler.
+func (mbcbc *MTRBaseClusterBallastConfiguration) WriteAttributeLampRatedHoursWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeLampRatedHoursWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeLampRatedHoursWithValueParamsCompletionHandler writes attribute lamp rated hours with value params completion handler.
+func (mbcbc *MTRBaseClusterBallastConfiguration) WriteAttributeLampRatedHoursWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeLampRatedHoursWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeLampRatedHoursWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeLampRatedHoursWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1669,7 +1917,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampRatedHour
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeLampRatedHoursWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeLampRatedHoursWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1705,6 +1953,21 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributeLampBurnHours(ctx 
 	}
 }
 
+// WriteAttributeLampBurnHoursWithValueCompletionHandler writes attribute lamp burn hours with value completion handler.
+func (mbcbc *MTRBaseClusterBallastConfiguration) WriteAttributeLampBurnHoursWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeLampBurnHoursWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeLampBurnHoursWithValueParamsCompletionHandler writes attribute lamp burn hours with value params completion handler.
+func (mbcbc *MTRBaseClusterBallastConfiguration) WriteAttributeLampBurnHoursWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeLampBurnHoursWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeLampBurnHoursWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeLampBurnHoursWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1724,7 +1987,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampBurnHours
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeLampBurnHoursWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeLampBurnHoursWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1760,6 +2023,21 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributeLampAlarmMode(ctx 
 	}
 }
 
+// WriteAttributeLampAlarmModeWithValueCompletionHandler writes attribute lamp alarm mode with value completion handler.
+func (mbcbc *MTRBaseClusterBallastConfiguration) WriteAttributeLampAlarmModeWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeLampAlarmModeWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeLampAlarmModeWithValueParamsCompletionHandler writes attribute lamp alarm mode with value params completion handler.
+func (mbcbc *MTRBaseClusterBallastConfiguration) WriteAttributeLampAlarmModeWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeLampAlarmModeWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeLampAlarmModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeLampAlarmModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1779,7 +2057,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampAlarmMode
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeLampAlarmModeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeLampAlarmModeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1815,6 +2093,21 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributeLampBurnHoursTripP
 	}
 }
 
+// WriteAttributeLampBurnHoursTripPointWithValueCompletionHandler writes attribute lamp burn hours trip point with value completion handler.
+func (mbcbc *MTRBaseClusterBallastConfiguration) WriteAttributeLampBurnHoursTripPointWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeLampBurnHoursTripPointWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeLampBurnHoursTripPointWithValueParamsCompletionHandler writes attribute lamp burn hours trip point with value params completion handler.
+func (mbcbc *MTRBaseClusterBallastConfiguration) WriteAttributeLampBurnHoursTripPointWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeLampBurnHoursTripPointWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeLampBurnHoursTripPointWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeLampBurnHoursTripPointWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1834,7 +2127,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampBurnHours
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeLampBurnHoursTripPointWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeLampBurnHoursTripPointWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1889,7 +2182,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeGeneratedComm
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeGeneratedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeGeneratedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1944,7 +2237,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeAcceptedComma
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeAcceptedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeAcceptedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1999,7 +2292,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeAttributeList
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeAttributeListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeAttributeListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2054,7 +2347,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeFeatureMapWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeFeatureMapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeFeatureMapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2109,7 +2402,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeClusterRevisi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeClusterRevisionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeClusterRevisionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err

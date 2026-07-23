@@ -71,15 +71,15 @@ func ArAuthorizationResultGetStatus(authorizationResult obj.Object) Authorizatio
 	return _fnArAuthorizationResultGetStatus(objref.IDOf(authorizationResult))
 }
 
-var _fnArAuthorizationResultsEnumerateResults func(objc.ID, unsafe.Pointer)
+var _fnArAuthorizationResultsEnumerateResults func(objc.ID, objc.Block)
 
 // ArAuthorizationResultsEnumerateResults calls the ARKit framework function ar_authorization_results_enumerate_results.
-func ArAuthorizationResultsEnumerateResults(authorizationResults obj.Object, authorizationResultsEnumerator unsafe.Pointer) {
+func ArAuthorizationResultsEnumerateResults(authorizationResults obj.Object, authorizationResultsEnumerator func(obj.Object) bool) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnArAuthorizationResultsEnumerateResults == nil {
 		ebipurego.RegisterLibFunc(&_fnArAuthorizationResultsEnumerateResults, _lib, "ar_authorization_results_enumerate_results")
 	}
-	_fnArAuthorizationResultsEnumerateResults(objref.IDOf(authorizationResults), authorizationResultsEnumerator)
+	_fnArAuthorizationResultsEnumerateResults(objref.IDOf(authorizationResults), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) bool { return authorizationResultsEnumerator(obj.Wrap(_b0)) }))
 }
 
 var _fnArAuthorizationResultsEnumerateResultsF func(objc.ID, unsafe.Pointer, unsafe.Pointer)
@@ -159,15 +159,15 @@ func ArDataProvidersCreate() unsafe.Pointer {
 	return _fnArDataProvidersCreate()
 }
 
-var _fnArDataProvidersEnumerateDataProviders func(objc.ID, unsafe.Pointer)
+var _fnArDataProvidersEnumerateDataProviders func(objc.ID, objc.Block)
 
 // ArDataProvidersEnumerateDataProviders calls the ARKit framework function ar_data_providers_enumerate_data_providers.
-func ArDataProvidersEnumerateDataProviders(dataProviders obj.Object, dataProvidersEnumerator unsafe.Pointer) {
+func ArDataProvidersEnumerateDataProviders(dataProviders obj.Object, dataProvidersEnumerator func(obj.Object) bool) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnArDataProvidersEnumerateDataProviders == nil {
 		ebipurego.RegisterLibFunc(&_fnArDataProvidersEnumerateDataProviders, _lib, "ar_data_providers_enumerate_data_providers")
 	}
-	_fnArDataProvidersEnumerateDataProviders(objref.IDOf(dataProviders), dataProvidersEnumerator)
+	_fnArDataProvidersEnumerateDataProviders(objref.IDOf(dataProviders), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) bool { return dataProvidersEnumerator(obj.Wrap(_b0)) }))
 }
 
 var _fnArDataProvidersEnumerateDataProvidersF func(objc.ID, unsafe.Pointer, unsafe.Pointer)
@@ -361,15 +361,17 @@ func ArSessionRun(session obj.Object, dataProviders obj.Object) {
 	_fnArSessionRun(objref.IDOf(session), objref.IDOf(dataProviders))
 }
 
-var _fnArSessionSetDataProviderStateChangeHandler func(objc.ID, objc.ID, unsafe.Pointer)
+var _fnArSessionSetDataProviderStateChangeHandler func(objc.ID, objc.ID, objc.Block)
 
 // ArSessionSetDataProviderStateChangeHandler calls the ARKit framework function ar_session_set_data_provider_state_change_handler.
-func ArSessionSetDataProviderStateChangeHandler(session obj.Object, queue obj.Object, dataProviderStateChangeHandler unsafe.Pointer) {
+func ArSessionSetDataProviderStateChangeHandler(session obj.Object, queue obj.Object, dataProviderStateChangeHandler func(obj.Object, DataProviderState, obj.Object, obj.Object)) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnArSessionSetDataProviderStateChangeHandler == nil {
 		ebipurego.RegisterLibFunc(&_fnArSessionSetDataProviderStateChangeHandler, _lib, "ar_session_set_data_provider_state_change_handler")
 	}
-	_fnArSessionSetDataProviderStateChangeHandler(objref.IDOf(session), objref.IDOf(queue), dataProviderStateChangeHandler)
+	_fnArSessionSetDataProviderStateChangeHandler(objref.IDOf(session), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 DataProviderState, _b2 objc.ID, _b3 objc.ID) {
+		dataProviderStateChangeHandler(obj.Wrap(_b0), _b1, obj.Wrap(_b2), obj.Wrap(_b3))
+	}))
 }
 
 var _fnArSessionSetDataProviderStateChangeHandlerF func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer)

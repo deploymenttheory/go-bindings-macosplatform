@@ -76,10 +76,28 @@ func (cs *CISession) String() string {
 	return rt.Description(objref.IDOf(cs))
 }
 
-// NewCISession creates a new CISession.
-func NewCISession() *CISession {
-	_id := objc.Send[objc.ID](objc.ID(_class("MIDICISession")), objc.RegisterName("new"))
+// NewCISessionWithDiscoveredNodeDataReadyHandlerDisconnectHandler creates a MIDI-CI session.
+func NewCISessionWithDiscoveredNodeDataReadyHandlerDisconnectHandler(discoveredNode *CIDiscoveredNode, handler func(), disconnectHandler func(obj.Object, unsafe.Pointer)) *CISession {
+	defer runtime.KeepAlive(discoveredNode)
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MIDICISession")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDiscoveredNode:dataReadyHandler:disconnectHandler:"), objref.IDOf(discoveredNode), objc.NewBlock(func(_ objc.Block) { handler() }), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { disconnectHandler(obj.Wrap(_b0), _b1) }))
 	return cISessionAdopt(_id)
+}
+
+// WithProfileChangedCallback sets an optional block the system calls after it enables or disables a profile.
+func (cs *CISession) WithProfileChangedCallback(profileChangedCallback func(obj.Object, uint8, obj.Object, bool)) *CISession {
+	objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("setProfileChangedCallback:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 uint8, _b2 objc.ID, _b3 bool) {
+		profileChangedCallback(obj.Wrap(_b0), _b1, obj.Wrap(_b2), _b3)
+	}))
+	return cs
+}
+
+// WithProfileSpecificDataHandler sets an optional block the system calls when a device sends profile-specific data to the session.
+func (cs *CISession) WithProfileSpecificDataHandler(profileSpecificDataHandler func(obj.Object, uint8, obj.Object, obj.Object)) *CISession {
+	objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("setProfileSpecificDataHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 uint8, _b2 objc.ID, _b3 objc.ID) {
+		profileSpecificDataHandler(obj.Wrap(_b0), _b1, obj.Wrap(_b2), obj.Wrap(_b3))
+	}))
+	return cs
 }
 
 // ProfileStateForChannel returns the profile state for the specified MIDI channel number.

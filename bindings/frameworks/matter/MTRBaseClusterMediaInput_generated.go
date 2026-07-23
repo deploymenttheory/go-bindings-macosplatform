@@ -7,6 +7,7 @@ package matter
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -67,6 +68,46 @@ func NewMTRBaseClusterMediaInputWithDeviceEndpointQueue(device *MTRBaseDevice, e
 	return mTRBaseClusterMediaInputAdopt(_id)
 }
 
+// SelectInputWithParamsCompletion command SelectInput Upon receipt, this command SHALL change the media input on the device to the input at a specific index in the Input List.
+func (mbcmi *MTRBaseClusterMediaInput) SelectInputWithParamsCompletion(params *MTRMediaInputClusterSelectInputParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcmi)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcmi), objc.RegisterName("selectInputWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// ShowInputStatusWithParamsCompletion command ShowInputStatus Upon receipt, this command SHALL display the active status of the input list on screen.
+func (mbcmi *MTRBaseClusterMediaInput) ShowInputStatusWithParamsCompletion(params *MTRMediaInputClusterShowInputStatusParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcmi)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcmi), objc.RegisterName("showInputStatusWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// ShowInputStatusWithCompletion shows input status with completion.
+func (mbcmi *MTRBaseClusterMediaInput) ShowInputStatusWithCompletion(completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcmi)
+	objc.Send[objc.ID](objref.IDOf(mbcmi), objc.RegisterName("showInputStatusWithCompletion:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// HideInputStatusWithParamsCompletion command HideInputStatus Upon receipt, this command SHALL hide the input list from the screen.
+func (mbcmi *MTRBaseClusterMediaInput) HideInputStatusWithParamsCompletion(params *MTRMediaInputClusterHideInputStatusParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcmi)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcmi), objc.RegisterName("hideInputStatusWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// HideInputStatusWithCompletion hides input status with completion.
+func (mbcmi *MTRBaseClusterMediaInput) HideInputStatusWithCompletion(completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcmi)
+	objc.Send[objc.ID](objref.IDOf(mbcmi), objc.RegisterName("hideInputStatusWithCompletion:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// RenameInputWithParamsCompletion command RenameInput Upon receipt, this command SHALL rename the input at a specific index in the Input List.
+func (mbcmi *MTRBaseClusterMediaInput) RenameInputWithParamsCompletion(params *MTRMediaInputClusterRenameInputParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcmi)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcmi), objc.RegisterName("renameInputWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // ReadAttributeInputListWithCompletion reads attribute input list with completion.
 //
 // ReadAttributeInputListWithCompletion blocks until the operation completes or ctx is cancelled.
@@ -110,7 +151,7 @@ func (mbcmi *MTRBaseClusterMediaInput) SubscribeAttributeInputListWithParamsSubs
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcmi), objc.RegisterName("subscribeAttributeInputListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcmi), objc.RegisterName("subscribeAttributeInputListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -163,7 +204,7 @@ func (mbcmi *MTRBaseClusterMediaInput) SubscribeAttributeCurrentInputWithParamsS
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcmi), objc.RegisterName("subscribeAttributeCurrentInputWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcmi), objc.RegisterName("subscribeAttributeCurrentInputWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -216,7 +257,7 @@ func (mbcmi *MTRBaseClusterMediaInput) SubscribeAttributeGeneratedCommandListWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcmi), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcmi), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -269,7 +310,7 @@ func (mbcmi *MTRBaseClusterMediaInput) SubscribeAttributeAcceptedCommandListWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcmi), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcmi), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -322,7 +363,7 @@ func (mbcmi *MTRBaseClusterMediaInput) SubscribeAttributeAttributeListWithParams
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcmi), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcmi), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -375,7 +416,7 @@ func (mbcmi *MTRBaseClusterMediaInput) SubscribeAttributeFeatureMapWithParamsSub
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcmi), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcmi), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -428,7 +469,7 @@ func (mbcmi *MTRBaseClusterMediaInput) SubscribeAttributeClusterRevisionWithPara
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcmi), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcmi), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -436,6 +477,46 @@ func (mbcmi *MTRBaseClusterMediaInput) SubscribeAttributeClusterRevisionWithPara
 		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
+}
+
+// SelectInputWithParamsCompletionHandler selects input with params completion handler.
+func (mbcmi *MTRBaseClusterMediaInput) SelectInputWithParamsCompletionHandler(params *MTRMediaInputClusterSelectInputParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcmi)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcmi), objc.RegisterName("selectInputWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// ShowInputStatusWithParamsCompletionHandler shows input status with params completion handler.
+func (mbcmi *MTRBaseClusterMediaInput) ShowInputStatusWithParamsCompletionHandler(params *MTRMediaInputClusterShowInputStatusParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcmi)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcmi), objc.RegisterName("showInputStatusWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// ShowInputStatusWithCompletionHandler shows input status with completion handler.
+func (mbcmi *MTRBaseClusterMediaInput) ShowInputStatusWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcmi)
+	objc.Send[objc.ID](objref.IDOf(mbcmi), objc.RegisterName("showInputStatusWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// HideInputStatusWithParamsCompletionHandler hides input status with params completion handler.
+func (mbcmi *MTRBaseClusterMediaInput) HideInputStatusWithParamsCompletionHandler(params *MTRMediaInputClusterHideInputStatusParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcmi)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcmi), objc.RegisterName("hideInputStatusWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// HideInputStatusWithCompletionHandler hides input status with completion handler.
+func (mbcmi *MTRBaseClusterMediaInput) HideInputStatusWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcmi)
+	objc.Send[objc.ID](objref.IDOf(mbcmi), objc.RegisterName("hideInputStatusWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// RenameInputWithParamsCompletionHandler wraps the corresponding Objective-C method.
+func (mbcmi *MTRBaseClusterMediaInput) RenameInputWithParamsCompletionHandler(params *MTRMediaInputClusterRenameInputParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcmi)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcmi), objc.RegisterName("renameInputWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
 }
 
 // ReadAttributeInputList reads attribute input list.
@@ -483,7 +564,7 @@ func (mbcmi *MTRBaseClusterMediaInput) SubscribeAttributeInputListWithMinInterva
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcmi), objc.RegisterName("subscribeAttributeInputListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcmi), objc.RegisterName("subscribeAttributeInputListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -538,7 +619,7 @@ func (mbcmi *MTRBaseClusterMediaInput) SubscribeAttributeCurrentInputWithMinInte
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcmi), objc.RegisterName("subscribeAttributeCurrentInputWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcmi), objc.RegisterName("subscribeAttributeCurrentInputWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -593,7 +674,7 @@ func (mbcmi *MTRBaseClusterMediaInput) SubscribeAttributeGeneratedCommandListWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcmi), objc.RegisterName("subscribeAttributeGeneratedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcmi), objc.RegisterName("subscribeAttributeGeneratedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -648,7 +729,7 @@ func (mbcmi *MTRBaseClusterMediaInput) SubscribeAttributeAcceptedCommandListWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcmi), objc.RegisterName("subscribeAttributeAcceptedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcmi), objc.RegisterName("subscribeAttributeAcceptedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -703,7 +784,7 @@ func (mbcmi *MTRBaseClusterMediaInput) SubscribeAttributeAttributeListWithMinInt
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcmi), objc.RegisterName("subscribeAttributeAttributeListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcmi), objc.RegisterName("subscribeAttributeAttributeListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -758,7 +839,7 @@ func (mbcmi *MTRBaseClusterMediaInput) SubscribeAttributeFeatureMapWithMinInterv
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcmi), objc.RegisterName("subscribeAttributeFeatureMapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcmi), objc.RegisterName("subscribeAttributeFeatureMapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -813,7 +894,7 @@ func (mbcmi *MTRBaseClusterMediaInput) SubscribeAttributeClusterRevisionWithMinI
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcmi), objc.RegisterName("subscribeAttributeClusterRevisionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcmi), objc.RegisterName("subscribeAttributeClusterRevisionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err

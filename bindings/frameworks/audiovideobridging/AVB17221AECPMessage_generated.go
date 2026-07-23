@@ -6,6 +6,7 @@ package audiovideobridging
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -108,6 +109,13 @@ func (aam *AVB17221AECPMessage) WithSourceMAC(sourceMAC *MACAddress) *AVB17221AE
 	defer runtime.KeepAlive(sourceMAC)
 	objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("setSourceMAC:"), objref.IDOf(sourceMAC))
 	return aam
+}
+
+// ErrorForStatusCode returns this method returns an NSError filled out with an appropriate description for the message's status code.
+func (aam *AVB17221AECPMessage) ErrorForStatusCode() unsafe.Pointer {
+	defer runtime.KeepAlive(aam)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(aam), objc.RegisterName("errorForStatusCode"))
+	return _r
 }
 
 // MessageType returns the message_type field of the AECP message.

@@ -7,6 +7,7 @@ package healthkit
 import (
 	"runtime"
 	"time"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -65,6 +66,22 @@ func NewStatisticsCollectionQueryWithQuantityTypeQuantitySamplePredicateOptionsA
 	_alloc := objc.Send[objc.ID](objc.ID(_class("HKStatisticsCollectionQuery")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithQuantityType:quantitySamplePredicate:options:anchorDate:intervalComponents:"), objref.IDOf(quantityType), objref.IDOf(quantitySamplePredicate), options, rt.TimeToNSDate(anchorDate), objref.IDOf(intervalComponents))
 	return statisticsCollectionQueryAdopt(_id)
+}
+
+// WithInitialResultsHandler sets the results handler for the query’s initial results.
+func (scq *StatisticsCollectionQuery) WithInitialResultsHandler(initialResultsHandler func(obj.Object, obj.Object, unsafe.Pointer)) *StatisticsCollectionQuery {
+	objc.Send[objc.ID](objref.IDOf(scq), objc.RegisterName("setInitialResultsHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
+		initialResultsHandler(obj.Wrap(_b0), obj.Wrap(_b1), _b2)
+	}))
+	return scq
+}
+
+// WithStatisticsUpdateHandler sets the results handler for monitoring updates to the HealthKit store.
+func (scq *StatisticsCollectionQuery) WithStatisticsUpdateHandler(statisticsUpdateHandler func(obj.Object, obj.Object, obj.Object, unsafe.Pointer)) *StatisticsCollectionQuery {
+	objc.Send[objc.ID](objref.IDOf(scq), objc.RegisterName("setStatisticsUpdateHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 objc.ID, _b3 unsafe.Pointer) {
+		statisticsUpdateHandler(obj.Wrap(_b0), obj.Wrap(_b1), obj.Wrap(_b2), _b3)
+	}))
+	return scq
 }
 
 // AnchorDate returns the anchor date.

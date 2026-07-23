@@ -6,9 +6,11 @@ package vision
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -51,6 +53,13 @@ func trackOpticalFlowRequestAdopt(id objc.ID) *TrackOpticalFlowRequest {
 // NewTrackOpticalFlowRequest creates a new TrackOpticalFlowRequest.
 func NewTrackOpticalFlowRequest() *TrackOpticalFlowRequest {
 	_id := objc.Send[objc.ID](objc.ID(_class("VNTrackOpticalFlowRequest")), objc.RegisterName("new"))
+	return trackOpticalFlowRequestAdopt(_id)
+}
+
+// NewTrackOpticalFlowRequestWithCompletionHandler creates a new request that tracks the optical from one image to another, with a system callback on completion.
+func NewTrackOpticalFlowRequestWithCompletionHandler(completionHandler func(obj.Object, unsafe.Pointer)) *TrackOpticalFlowRequest {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VNTrackOpticalFlowRequest")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
 	return trackOpticalFlowRequestAdopt(_id)
 }
 

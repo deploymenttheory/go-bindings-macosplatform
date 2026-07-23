@@ -97,6 +97,30 @@ func NewEventStoreWithSources(sources []*Source) *EventStore {
 	return eventStoreAdopt(_id)
 }
 
+// RequestFullAccessToEventsWithCompletion prompts people to grant or deny read and write access to event data.
+func (es *EventStore) RequestFullAccessToEventsWithCompletion(completion func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(es)
+	objc.Send[objc.ID](objref.IDOf(es), objc.RegisterName("requestFullAccessToEventsWithCompletion:"), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { completion(_b0, _b1) }))
+}
+
+// RequestWriteOnlyAccessToEventsWithCompletion prompts the person using your app to grant or deny write access to event data.
+func (es *EventStore) RequestWriteOnlyAccessToEventsWithCompletion(completion func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(es)
+	objc.Send[objc.ID](objref.IDOf(es), objc.RegisterName("requestWriteOnlyAccessToEventsWithCompletion:"), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { completion(_b0, _b1) }))
+}
+
+// RequestFullAccessToRemindersWithCompletion prompts people to grant or deny read and write access to reminders.
+func (es *EventStore) RequestFullAccessToRemindersWithCompletion(completion func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(es)
+	objc.Send[objc.ID](objref.IDOf(es), objc.RegisterName("requestFullAccessToRemindersWithCompletion:"), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { completion(_b0, _b1) }))
+}
+
+// RequestAccessToEntityTypeCompletion prompts the person using your app to grant or deny access to event or reminder data.
+func (es *EventStore) RequestAccessToEntityTypeCompletion(entityType EntityType, completion func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(es)
+	objc.Send[objc.ID](objref.IDOf(es), objc.RegisterName("requestAccessToEntityType:completion:"), entityType, objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { completion(_b0, _b1) }))
+}
+
 // SourceWithIdentifier locates an event source with the specified identifier.
 func (es *EventStore) SourceWithIdentifier(identifier string) *Source {
 	defer runtime.KeepAlive(es)
@@ -224,6 +248,13 @@ func (es *EventStore) EventsMatchingPredicate(predicate obj.Object) []*Event {
 	defer runtime.KeepAlive(predicate)
 	_r := objc.Send[objc.ID](objref.IDOf(es), objc.RegisterName("eventsMatchingPredicate:"), objref.IDOf(predicate))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Event { return EventFromID(_id) })
+}
+
+// EnumerateEventsMatchingPredicateUsing finds all events that match a given predicate and calls a given callback for each event found.
+func (es *EventStore) EnumerateEventsMatchingPredicateUsing(predicate obj.Object, block func(obj.Object, *bool)) {
+	defer runtime.KeepAlive(es)
+	defer runtime.KeepAlive(predicate)
+	objc.Send[objc.ID](objref.IDOf(es), objc.RegisterName("enumerateEventsMatchingPredicate:usingBlock:"), objref.IDOf(predicate), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), (*bool)(_b1)) }))
 }
 
 // PredicateForEventsWithStartDateEndDateCalendars creates a predicate to identify events that occur within a given date range.

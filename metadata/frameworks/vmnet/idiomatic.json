@@ -1,5 +1,9 @@
 {
   "error_typedefs": [
     {"typedef": "vmnet_return_t", "success_value": 1000, "domain": "VmnetReturnDomain", "sentinel_enum": "vmnet_return_t"}
+  ],
+  "inout_count_params": [
+    {"c_name": "vmnet_read", "param": "pktcnt"},
+    {"c_name": "vmnet_write", "param": "pktcnt"}
   ]
 }

@@ -6,6 +6,7 @@ package ituneslibrary
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -104,6 +105,13 @@ func (la *LibAlbum) SortTitle() string {
 func (la *LibAlbum) IsCompilation() bool {
 	defer runtime.KeepAlive(la)
 	_r := objc.Send[bool](objref.IDOf(la), objc.RegisterName("isCompilation"))
+	return _r
+}
+
+// Artist returns deprecated. Will be removed in future versions.
+func (la *LibAlbum) Artist() unsafe.Pointer {
+	defer runtime.KeepAlive(la)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(la), objc.RegisterName("artist"))
 	return _r
 }
 

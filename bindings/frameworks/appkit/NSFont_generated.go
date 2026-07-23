@@ -6,6 +6,7 @@ package appkit
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
@@ -129,6 +130,13 @@ func (f *Font) FontName() string {
 func (f *Font) PointSize() float64 {
 	defer runtime.KeepAlive(f)
 	_r := objc.Send[float64](objref.IDOf(f), objc.RegisterName("pointSize"))
+	return _r
+}
+
+// Matrix returns the matrix.
+func (f *Font) Matrix() unsafe.Pointer {
+	defer runtime.KeepAlive(f)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(f), objc.RegisterName("matrix"))
 	return _r
 }
 

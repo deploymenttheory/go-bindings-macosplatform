@@ -7,6 +7,7 @@ package matter
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -166,6 +167,20 @@ func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) GetPendingDatasetRequ
 	}
 }
 
+// SetActiveDatasetRequestWithParamsCompletion command SetActiveDatasetRequest
+func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) SetActiveDatasetRequestWithParamsCompletion(params *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbctbrm)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbctbrm), objc.RegisterName("setActiveDatasetRequestWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// SetPendingDatasetRequestWithParamsCompletion command SetPendingDatasetRequest
+func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) SetPendingDatasetRequestWithParamsCompletion(params *MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbctbrm)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbctbrm), objc.RegisterName("setPendingDatasetRequestWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // ReadAttributeBorderRouterNameWithCompletion reads attribute border router name with completion.
 //
 // ReadAttributeBorderRouterNameWithCompletion blocks until the operation completes or ctx is cancelled.
@@ -209,7 +224,7 @@ func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeBor
 		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctbrm), objc.RegisterName("subscribeAttributeBorderRouterNameWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctbrm), objc.RegisterName("subscribeAttributeBorderRouterNameWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -262,7 +277,7 @@ func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeBor
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctbrm), objc.RegisterName("subscribeAttributeBorderAgentIDWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctbrm), objc.RegisterName("subscribeAttributeBorderAgentIDWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -315,7 +330,7 @@ func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeThr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctbrm), objc.RegisterName("subscribeAttributeThreadVersionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctbrm), objc.RegisterName("subscribeAttributeThreadVersionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -368,7 +383,7 @@ func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeInt
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctbrm), objc.RegisterName("subscribeAttributeInterfaceEnabledWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctbrm), objc.RegisterName("subscribeAttributeInterfaceEnabledWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -421,7 +436,7 @@ func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeAct
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctbrm), objc.RegisterName("subscribeAttributeActiveDatasetTimestampWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctbrm), objc.RegisterName("subscribeAttributeActiveDatasetTimestampWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -474,7 +489,7 @@ func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributePen
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctbrm), objc.RegisterName("subscribeAttributePendingDatasetTimestampWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctbrm), objc.RegisterName("subscribeAttributePendingDatasetTimestampWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -527,7 +542,7 @@ func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeGen
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctbrm), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctbrm), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -580,7 +595,7 @@ func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeAcc
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctbrm), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctbrm), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -633,7 +648,7 @@ func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeAtt
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctbrm), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctbrm), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -686,7 +701,7 @@ func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeFea
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctbrm), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctbrm), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -739,7 +754,7 @@ func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeClu
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctbrm), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctbrm), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err

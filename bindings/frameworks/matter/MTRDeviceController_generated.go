@@ -195,7 +195,7 @@ func (mdc *MTRDeviceController) RemoveServerEndpointQueueCompletion(endpoint *MT
 	defer runtime.KeepAlive(mdc)
 	defer runtime.KeepAlive(endpoint)
 	defer runtime.KeepAlive(queue)
-	objc.Send[objc.ID](objref.IDOf(mdc), objc.RegisterName("removeServerEndpoint:queue:completion:"), objref.IDOf(endpoint), objref.IDOf(queue), completion)
+	objc.Send[objc.ID](objref.IDOf(mdc), objc.RegisterName("removeServerEndpoint:queue:completion:"), objref.IDOf(endpoint), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block) { completion() }))
 }
 
 // RemoveServerEndpoint remove the given server endpoint without being notified when the removal completes.
@@ -281,6 +281,14 @@ func (mdc *MTRDeviceController) FetchAttestationChallengeForDeviceID(deviceId ui
 	defer runtime.KeepAlive(mdc)
 	_r := objc.Send[objc.ID](objref.IDOf(mdc), objc.RegisterName("fetchAttestationChallengeForDeviceId:"), deviceId)
 	return rt.NSDataToBytes(_r)
+}
+
+// GetBaseDeviceQueueCompletionHandler wraps the corresponding Objective-C method.
+func (mdc *MTRDeviceController) GetBaseDeviceQueueCompletionHandler(deviceID uint64, queue obj.Object, completionHandler func(obj.Object, unsafe.Pointer)) bool {
+	defer runtime.KeepAlive(mdc)
+	defer runtime.KeepAlive(queue)
+	_r := objc.Send[bool](objref.IDOf(mdc), objc.RegisterName("getBaseDevice:queue:completionHandler:"), deviceID, objref.IDOf(queue), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
+	return _r
 }
 
 // PairDeviceDiscriminatorSetupPINCode wraps the corresponding Objective-C method.

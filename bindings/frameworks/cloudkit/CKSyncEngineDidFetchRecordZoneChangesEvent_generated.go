@@ -6,6 +6,7 @@ package cloudkit
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -58,6 +59,13 @@ func (sedfrzce *SyncEngineDidFetchRecordZoneChangesEvent) ZoneID() *RecordZoneID
 	defer runtime.KeepAlive(sedfrzce)
 	_r := objc.Send[objc.ID](objref.IDOf(sedfrzce), objc.RegisterName("zoneID"))
 	return RecordZoneIDFromID(_r)
+}
+
+// Error returns an error that describes the cause of a failed fetch operation. A `nil` value indicates a successful fetch.
+func (sedfrzce *SyncEngineDidFetchRecordZoneChangesEvent) Error() unsafe.Pointer {
+	defer runtime.KeepAlive(sedfrzce)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(sedfrzce), objc.RegisterName("error"))
+	return _r
 }
 
 var _ SyncEngineEventProvider = (*SyncEngineDidFetchRecordZoneChangesEvent)(nil)

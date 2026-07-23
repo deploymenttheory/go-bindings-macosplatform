@@ -79,6 +79,12 @@ func NewMotion() *Motion {
 	return motionAdopt(_id)
 }
 
+// WithValueChangedHandler sets the block that the profile calls when an element’s value changes.
+func (m *Motion) WithValueChangedHandler(valueChangedHandler func(obj.Object)) *Motion {
+	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setValueChangedHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { valueChangedHandler(obj.Wrap(_b0)) }))
+	return m
+}
+
 // WithSensorsActive sets a Boolean value that indicates whether the sensors that compute the motion data are active.
 func (m *Motion) WithSensorsActive(sensorsActive bool) *Motion {
 	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setSensorsActive:"), sensorsActive)

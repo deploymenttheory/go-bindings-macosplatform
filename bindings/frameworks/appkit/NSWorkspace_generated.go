@@ -235,6 +235,18 @@ func (w *Workspace) SetIconForFile(image *Image, fullPath string, options Worksp
 	return _r
 }
 
+// RecycleURLsCompletionHandler moves the specified URLs to the trash in the same manner as the Finder.
+func (w *Workspace) RecycleURLsCompletionHandler(urls []string, handler func(obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(w)
+	objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("recycleURLs:completionHandler:"), purego.SliceToNSArray(urls, func(_v string) objc.ID { return rt.FileURL(_v) }), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { handler(obj.Wrap(_b0), _b1) }))
+}
+
+// DuplicateURLsCompletionHandler duplicates the specified URLS asynchronously in the same manner as the Finder.
+func (w *Workspace) DuplicateURLsCompletionHandler(urls []string, handler func(obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(w)
+	objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("duplicateURLs:completionHandler:"), purego.SliceToNSArray(urls, func(_v string) objc.ID { return rt.FileURL(_v) }), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { handler(obj.Wrap(_b0), _b1) }))
+}
+
 // GetFileSystemInfoForPathIsRemovableIsWritableIsUnmountableDescriptionType returns information about the file system at the specified path.
 func (w *Workspace) GetFileSystemInfoForPathIsRemovableIsWritableIsUnmountableDescriptionType(fullPath string, description string, fileSystemType string) (ok bool, removableFlag bool, writableFlag bool, unmountableFlag bool) {
 	defer runtime.KeepAlive(w)

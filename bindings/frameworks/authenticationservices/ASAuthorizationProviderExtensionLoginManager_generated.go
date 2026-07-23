@@ -319,6 +319,13 @@ func (apelm *AuthorizationProviderExtensionLoginManager) ExtensionData() obj.Obj
 	return obj.Wrap(_r)
 }
 
+// LoginUserName returns the user name to use when authenticating with the identity provider.
+func (apelm *AuthorizationProviderExtensionLoginManager) LoginUserName() unsafe.Pointer {
+	defer runtime.KeepAlive(apelm)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(apelm), objc.RegisterName("loginUserName"))
+	return _r
+}
+
 // UserLoginConfiguration returns retrieves the current user login configuration for the extension.
 func (apelm *AuthorizationProviderExtensionLoginManager) UserLoginConfiguration() *AuthorizationProviderExtensionUserLoginConfiguration {
 	defer runtime.KeepAlive(apelm)

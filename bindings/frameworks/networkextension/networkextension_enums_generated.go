@@ -386,6 +386,29 @@ func (e NETunnelProviderRoutingMethod) String() string {
 	}
 }
 
+type NEURLFilterVerdict int64
+
+const (
+	NEURLFilterVerdictUnknown NEURLFilterVerdict = 1
+	NEURLFilterVerdictAllow   NEURLFilterVerdict = 2
+	NEURLFilterVerdictDeny    NEURLFilterVerdict = 3
+)
+
+// String returns the NEURLFilterVerdict constant's name, or its numeric form when the
+// value is not a known constant.
+func (e NEURLFilterVerdict) String() string {
+	switch e {
+	case NEURLFilterVerdictUnknown:
+		return "NEURLFilterVerdictUnknown"
+	case NEURLFilterVerdictAllow:
+		return "NEURLFilterVerdictAllow"
+	case NEURLFilterVerdictDeny:
+		return "NEURLFilterVerdictDeny"
+	default:
+		return fmt.Sprintf("NEURLFilterVerdict(%d)", int64(e))
+	}
+}
+
 // Internet Key Exchange (IKE) authentication methods used to authenticate with the IPSec server.
 type NEVPNIKEAuthenticationMethod int64
 
@@ -1849,29 +1872,6 @@ func (e NETunnelProviderError) String() string {
 		return "NETunnelProviderErrorNetworkSettingsFailed"
 	default:
 		return fmt.Sprintf("NETunnelProviderError(%d)", int64(e))
-	}
-}
-
-type NEURLFilterVerdict int64
-
-const (
-	NEURLFilterVerdictUnknown NEURLFilterVerdict = 1
-	NEURLFilterVerdictAllow   NEURLFilterVerdict = 2
-	NEURLFilterVerdictDeny    NEURLFilterVerdict = 3
-)
-
-// String returns the NEURLFilterVerdict constant's name, or its numeric form when the
-// value is not a known constant.
-func (e NEURLFilterVerdict) String() string {
-	switch e {
-	case NEURLFilterVerdictUnknown:
-		return "NEURLFilterVerdictUnknown"
-	case NEURLFilterVerdictAllow:
-		return "NEURLFilterVerdictAllow"
-	case NEURLFilterVerdictDeny:
-		return "NEURLFilterVerdictDeny"
-	default:
-		return fmt.Sprintf("NEURLFilterVerdict(%d)", int64(e))
 	}
 }
 

@@ -89,6 +89,15 @@ func NewLookAroundSceneRequestWithMapItem(mapItem *MapItem) *LookAroundSceneRequ
 	return lookAroundSceneRequestAdopt(_id)
 }
 
+// GetSceneWithCompletionHandler requests a LookAround scene and calls the specified completion handler.
+func (lasr *LookAroundSceneRequest) GetSceneWithCompletionHandler(completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
+	defer runtime.KeepAlive(lasr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lasr), objc.RegisterName("getSceneWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 unsafe.Pointer) { completionHandler(_b0, _b1) }))
+	})
+
+}
+
 // Cancel cancels the pending scene request.
 func (lasr *LookAroundSceneRequest) Cancel() {
 	defer runtime.KeepAlive(lasr)
@@ -96,6 +105,13 @@ func (lasr *LookAroundSceneRequest) Cancel() {
 		objc.Send[objc.ID](objref.IDOf(lasr), objc.RegisterName("cancel"))
 	})
 
+}
+
+// Coordinate returns the coordinate.
+func (lasr *LookAroundSceneRequest) Coordinate() unsafe.Pointer {
+	defer runtime.KeepAlive(lasr)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(lasr), objc.RegisterName("coordinate"))
+	return _r
 }
 
 // MapItem returns the map item.

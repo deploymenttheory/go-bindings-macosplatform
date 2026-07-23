@@ -187,6 +187,13 @@ func (be *BaseEffect) LightingType() LightingType {
 	return _r
 }
 
+// LightModelAmbientColor returns the light model ambient color.
+func (be *BaseEffect) LightModelAmbientColor() unsafe.Pointer {
+	defer runtime.KeepAlive(be)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(be), objc.RegisterName("lightModelAmbientColor"))
+	return _r
+}
+
 // Material returns the material.
 func (be *BaseEffect) Material() *EffectPropertyMaterial {
 	defer runtime.KeepAlive(be)
@@ -215,6 +222,13 @@ func (be *BaseEffect) TextureOrder() []*EffectPropertyTexture {
 	defer runtime.KeepAlive(be)
 	_arr := objc.Send[objc.ID](objref.IDOf(be), objc.RegisterName("textureOrder"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EffectPropertyTexture { return EffectPropertyTextureFromID(_id) })
+}
+
+// ConstantColor returns the constant color.
+func (be *BaseEffect) ConstantColor() unsafe.Pointer {
+	defer runtime.KeepAlive(be)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(be), objc.RegisterName("constantColor"))
+	return _r
 }
 
 // Fog returns the fog.

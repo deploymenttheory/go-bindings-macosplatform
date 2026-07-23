@@ -6,6 +6,7 @@ package vision
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -52,6 +53,13 @@ func humanBodyRecognizedPoint3DAdopt(id objc.ID) *HumanBodyRecognizedPoint3D {
 func NewHumanBodyRecognizedPoint3D() *HumanBodyRecognizedPoint3D {
 	_id := objc.Send[objc.ID](objc.ID(_class("VNHumanBodyRecognizedPoint3D")), objc.RegisterName("new"))
 	return humanBodyRecognizedPoint3DAdopt(_id)
+}
+
+// LocalPosition returns the local position.
+func (hbrpd *HumanBodyRecognizedPoint3D) LocalPosition() unsafe.Pointer {
+	defer runtime.KeepAlive(hbrpd)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(hbrpd), objc.RegisterName("localPosition"))
+	return _r
 }
 
 // ParentJoint returns the parent joint.

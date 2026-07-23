@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
@@ -76,6 +77,13 @@ func (vc *VideoComposition) IsKind(className string) bool {
 func (vc *VideoComposition) String() string {
 	defer runtime.KeepAlive(vc)
 	return rt.Description(objref.IDOf(vc))
+}
+
+// CustomVideoCompositorClass indicates a custom compositor class to use. The class must implement the AVVideoCompositing protocol. If nil, the default, internal video compositor is used
+func (vc *VideoComposition) CustomVideoCompositorClass() unsafe.Pointer {
+	defer runtime.KeepAlive(vc)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(vc), objc.RegisterName("customVideoCompositorClass"))
+	return _r
 }
 
 // FrameDuration indicates the interval which the video composition, when enabled, should render composed video frames

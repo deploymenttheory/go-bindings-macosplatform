@@ -7,6 +7,7 @@ package matter
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -58,6 +59,19 @@ func NewMTRBaseClusterSmokeCOAlarmWithDeviceEndpointIDQueue(device *MTRBaseDevic
 	return mTRBaseClusterSmokeCOAlarmAdopt(_id)
 }
 
+// SelfTestRequestWithParamsCompletion command SelfTestRequest This command SHALL initiate a device self-test.
+func (mbcsca *MTRBaseClusterSmokeCOAlarm) SelfTestRequestWithParamsCompletion(params *MTRSmokeCOAlarmClusterSelfTestRequestParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcsca)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcsca), objc.RegisterName("selfTestRequestWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// SelfTestRequestWithCompletion wraps the corresponding Objective-C method.
+func (mbcsca *MTRBaseClusterSmokeCOAlarm) SelfTestRequestWithCompletion(completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcsca)
+	objc.Send[objc.ID](objref.IDOf(mbcsca), objc.RegisterName("selfTestRequestWithCompletion:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // ReadAttributeExpressedStateWithCompletion reads attribute expressed state with completion.
 //
 // ReadAttributeExpressedStateWithCompletion blocks until the operation completes or ctx is cancelled.
@@ -101,7 +115,7 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeExpressedStateWithPa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcsca), objc.RegisterName("subscribeAttributeExpressedStateWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcsca), objc.RegisterName("subscribeAttributeExpressedStateWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -154,7 +168,7 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeSmokeStateWithParams
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcsca), objc.RegisterName("subscribeAttributeSmokeStateWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcsca), objc.RegisterName("subscribeAttributeSmokeStateWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -207,7 +221,7 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeCOStateWithParamsSub
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcsca), objc.RegisterName("subscribeAttributeCOStateWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcsca), objc.RegisterName("subscribeAttributeCOStateWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -260,7 +274,7 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeBatteryAlertWithPara
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcsca), objc.RegisterName("subscribeAttributeBatteryAlertWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcsca), objc.RegisterName("subscribeAttributeBatteryAlertWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -313,7 +327,7 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeDeviceMutedWithParam
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcsca), objc.RegisterName("subscribeAttributeDeviceMutedWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcsca), objc.RegisterName("subscribeAttributeDeviceMutedWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -366,7 +380,7 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeTestInProgressWithPa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcsca), objc.RegisterName("subscribeAttributeTestInProgressWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcsca), objc.RegisterName("subscribeAttributeTestInProgressWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -419,7 +433,7 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeHardwareFaultAlertWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcsca), objc.RegisterName("subscribeAttributeHardwareFaultAlertWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcsca), objc.RegisterName("subscribeAttributeHardwareFaultAlertWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -472,7 +486,7 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeEndOfServiceAlertWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcsca), objc.RegisterName("subscribeAttributeEndOfServiceAlertWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcsca), objc.RegisterName("subscribeAttributeEndOfServiceAlertWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -525,7 +539,7 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeInterconnectSmokeAla
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcsca), objc.RegisterName("subscribeAttributeInterconnectSmokeAlarmWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcsca), objc.RegisterName("subscribeAttributeInterconnectSmokeAlarmWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -578,7 +592,7 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeInterconnectCOAlarmW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcsca), objc.RegisterName("subscribeAttributeInterconnectCOAlarmWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcsca), objc.RegisterName("subscribeAttributeInterconnectCOAlarmWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -631,7 +645,7 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeContaminationStateWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcsca), objc.RegisterName("subscribeAttributeContaminationStateWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcsca), objc.RegisterName("subscribeAttributeContaminationStateWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -667,6 +681,21 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeSmokeSensitivityLevelWith
 	}
 }
 
+// WriteAttributeSmokeSensitivityLevelWithValueCompletion writes attribute smoke sensitivity level with value completion.
+func (mbcsca *MTRBaseClusterSmokeCOAlarm) WriteAttributeSmokeSensitivityLevelWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcsca)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcsca), objc.RegisterName("writeAttributeSmokeSensitivityLevelWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeSmokeSensitivityLevelWithValueParamsCompletion writes attribute smoke sensitivity level with value params completion.
+func (mbcsca *MTRBaseClusterSmokeCOAlarm) WriteAttributeSmokeSensitivityLevelWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcsca)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcsca), objc.RegisterName("writeAttributeSmokeSensitivityLevelWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeSmokeSensitivityLevelWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeSmokeSensitivityLevelWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -684,7 +713,7 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeSmokeSensitivityLeve
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcsca), objc.RegisterName("subscribeAttributeSmokeSensitivityLevelWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcsca), objc.RegisterName("subscribeAttributeSmokeSensitivityLevelWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -737,7 +766,7 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeExpiryDateWithParams
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcsca), objc.RegisterName("subscribeAttributeExpiryDateWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcsca), objc.RegisterName("subscribeAttributeExpiryDateWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -790,7 +819,7 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeGeneratedCommandList
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcsca), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcsca), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -843,7 +872,7 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeAcceptedCommandListW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcsca), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcsca), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -896,7 +925,7 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeAttributeListWithPar
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcsca), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcsca), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -949,7 +978,7 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeFeatureMapWithParams
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcsca), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcsca), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1002,7 +1031,7 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeClusterRevisionWithP
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcsca), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcsca), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err

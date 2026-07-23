@@ -5,7 +5,11 @@
 package healthkit
 
 import (
+	"runtime"
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -43,9 +47,13 @@ func userAnnotatedMedicationQueryAdopt(id objc.ID) *UserAnnotatedMedicationQuery
 	return x
 }
 
-// NewUserAnnotatedMedicationQuery creates a new UserAnnotatedMedicationQuery.
-func NewUserAnnotatedMedicationQuery() *UserAnnotatedMedicationQuery {
-	_id := objc.Send[objc.ID](objc.ID(_class("HKUserAnnotatedMedicationQuery")), objc.RegisterName("new"))
+// NewUserAnnotatedMedicationQueryWithPredicateLimitResultsHandler returns a query that will retrieve HKUserAnnotatedMedications matching the given predicate and limit.
+func NewUserAnnotatedMedicationQueryWithPredicateLimitResultsHandler(predicate obj.Object, limit int, resultsHandler func(obj.Object, obj.Object, bool, unsafe.Pointer)) *UserAnnotatedMedicationQuery {
+	defer runtime.KeepAlive(predicate)
+	_alloc := objc.Send[objc.ID](objc.ID(_class("HKUserAnnotatedMedicationQuery")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPredicate:limit:resultsHandler:"), objref.IDOf(predicate), limit, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 bool, _b3 unsafe.Pointer) {
+		resultsHandler(obj.Wrap(_b0), obj.Wrap(_b1), _b2, _b3)
+	}))
 	return userAnnotatedMedicationQueryAdopt(_id)
 }
 

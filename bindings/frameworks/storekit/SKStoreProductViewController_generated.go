@@ -6,6 +6,7 @@ package storekit
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/shim"
@@ -96,4 +97,13 @@ func (spvc *StoreProductViewController) WithDelegate(delegate StoreProductViewCo
 	})
 	_shim.Send(objc.RegisterName("release"))
 	return spvc
+}
+
+// LoadProductWithParametersCompletionBlock loads a new product screen to display.
+func (spvc *StoreProductViewController) LoadProductWithParametersCompletionBlock(parameters map[string]obj.Object, block func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(spvc)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(spvc), objc.RegisterName("loadProductWithParameters:completionBlock:"), rt.MapToDict(parameters, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { block(_b0, _b1) }))
+	})
+
 }

@@ -6,6 +6,7 @@ package corespotlight
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -65,6 +66,12 @@ func (uq *UserQuery) WithFoundSuggestionsHandler(foundSuggestionsHandler func(ob
 // WithFoundItemsHandler sets the block to execute when the query delivers a new batch of matching items.
 func (uq *UserQuery) WithFoundItemsHandler(foundItemsHandler func(obj.Object)) *UserQuery {
 	objc.Send[objc.ID](objref.IDOf(uq), objc.RegisterName("setFoundItemsHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { foundItemsHandler(obj.Wrap(_b0)) }))
+	return uq
+}
+
+// WithCompletionHandler sets the block to execute when the query finishes delivering all results.
+func (uq *UserQuery) WithCompletionHandler(completionHandler func(unsafe.Pointer)) *UserQuery {
+	objc.Send[objc.ID](objref.IDOf(uq), objc.RegisterName("setCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
 	return uq
 }
 

@@ -5,6 +5,8 @@
 package coreml
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
@@ -20,7 +22,7 @@ type ComputeDeviceProtocol interface {
 
 // CustomLayer is the Go form of the Objective-C protocol MLCustomLayer.
 type CustomLayer interface {
-	InitWithParameterDictionaryError(parameters map[string]obj.Object) obj.Object
+	InitWithParameterDictionaryError(parameters map[string]obj.Object) unsafe.Pointer
 	SetWeightDataError(weights [][]byte) bool
 	OutputShapesForInputShapesError(inputShapes []obj.Object) []obj.Object
 	EvaluateOnCPUWithInputsOutputsError(inputs []*MultiArray, outputs []*MultiArray) bool
@@ -28,7 +30,7 @@ type CustomLayer interface {
 
 // CustomModel is the Go form of the Objective-C protocol MLCustomModel.
 type CustomModel interface {
-	InitWithModelDescriptionParameterDictionaryError(modelDescription *ModelDescription, parameters map[string]obj.Object) obj.Object
+	InitWithModelDescriptionParameterDictionaryError(modelDescription *ModelDescription, parameters map[string]obj.Object) unsafe.Pointer
 	PredictionFromFeaturesOptionsError(input obj.Object, options *PredictionOptions) obj.Object
 }
 

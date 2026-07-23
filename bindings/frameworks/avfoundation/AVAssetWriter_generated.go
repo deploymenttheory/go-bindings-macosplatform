@@ -273,6 +273,13 @@ func (aw *AssetWriter) Status() AssetWriterStatus {
 	return _r
 }
 
+// Error returns if the receiver's status is AVAssetWriterStatusFailed, this describes the error that caused the failure. The value of this property is an NSError that describes what caused the receiver to no longer be able to write to its output file. If the receiver's status is not AVAssetWriterStatusFailed, the value of this property is nil. This property is thread safe.
+func (aw *AssetWriter) Error() unsafe.Pointer {
+	defer runtime.KeepAlive(aw)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(aw), objc.RegisterName("error"))
+	return _r
+}
+
 // Metadata returns a collection of metadata to be written to the receiver's output file. The value of this property is an array of AVMetadataItem objects representing the collection of top-level metadata to be written in the output file. This property cannot be set after writing has started.
 //
 // Metadata returns the collection as a Go slice.

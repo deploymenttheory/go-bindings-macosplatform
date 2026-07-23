@@ -6,6 +6,7 @@ package matter
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -55,6 +56,14 @@ func NewMTRClusterBridgedDeviceBasicInformationWithDeviceEndpointIDQueue(device 
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterBridgedDeviceBasicInformation")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterBridgedDeviceBasicInformationAdopt(_id)
+}
+
+// KeepActiveWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) KeepActiveWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRBridgedDeviceBasicInformationClusterKeepActiveParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcbdbi)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcbdbi), objc.RegisterName("keepActiveWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
 // ReadAttributeVendorNameWithParams reads attribute vendor name with params.

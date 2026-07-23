@@ -6,6 +6,7 @@ package coremotion
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/shim"
@@ -94,6 +95,13 @@ func (hmm *HeadphoneMotionManager) WithDelegate(delegate HeadphoneMotionManagerD
 func (hmm *HeadphoneMotionManager) StartDeviceMotionUpdates() {
 	defer runtime.KeepAlive(hmm)
 	objc.Send[objc.ID](objref.IDOf(hmm), objc.RegisterName("startDeviceMotionUpdates"))
+}
+
+// StartDeviceMotionUpdatesToQueueWithHandler starts device-motion updates with a handler.
+func (hmm *HeadphoneMotionManager) StartDeviceMotionUpdatesToQueueWithHandler(queue obj.Object, handler func(obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(hmm)
+	defer runtime.KeepAlive(queue)
+	objc.Send[objc.ID](objref.IDOf(hmm), objc.RegisterName("startDeviceMotionUpdatesToQueue:withHandler:"), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { handler(obj.Wrap(_b0), _b1) }))
 }
 
 // StopDeviceMotionUpdates stops device-motion updates.

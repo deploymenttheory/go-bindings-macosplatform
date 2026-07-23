@@ -304,6 +304,20 @@ func (v_ *View) DrawableResizesAsynchronously() bool {
 
 }
 
+// OpenGLContext specifies the OpenGL context associated with the receiver. This property returns nil and has no effect if the current API is Metal.
+func (v_ *View) OpenGLContext() unsafe.Pointer {
+	defer runtime.KeepAlive(v_)
+	var _mainthread0 unsafe.Pointer
+	purego.Main(func() {
+		_mainthread0 = func() unsafe.Pointer {
+			_r := objc.Send[unsafe.Pointer](objref.IDOf(v_), objc.RegisterName("openGLContext"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
+}
+
 // AntialiasingMode returns defaults to SCNAntialiasingModeMultisampling4X on macOS and SCNAntialiasingModeNone on iOS.
 func (v_ *View) AntialiasingMode() AntialiasingMode {
 	defer runtime.KeepAlive(v_)
@@ -311,6 +325,20 @@ func (v_ *View) AntialiasingMode() AntialiasingMode {
 	purego.Main(func() {
 		_mainthread0 = func() AntialiasingMode {
 			_r := objc.Send[AntialiasingMode](objref.IDOf(v_), objc.RegisterName("antialiasingMode"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
+}
+
+// PixelFormat specifies the pixel format of the receiver. This property returns nil and has no effect if the current API is Metal.
+func (v_ *View) PixelFormat() unsafe.Pointer {
+	defer runtime.KeepAlive(v_)
+	var _mainthread0 unsafe.Pointer
+	purego.Main(func() {
+		_mainthread0 = func() unsafe.Pointer {
+			_r := objc.Send[unsafe.Pointer](objref.IDOf(v_), objc.RegisterName("pixelFormat"))
 			return _r
 		}()
 	})

@@ -7,6 +7,7 @@ package matter
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -68,6 +69,14 @@ func NewMTRClusterGroupKeyManagementWithDeviceEndpointQueue(device *MTRDevice, e
 	return mTRClusterGroupKeyManagementAdopt(_id)
 }
 
+// KeySetWriteWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+func (mcgkm *MTRClusterGroupKeyManagement) KeySetWriteWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRGroupKeyManagementClusterKeySetWriteParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcgkm)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcgkm), objc.RegisterName("keySetWriteWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // KeySetReadWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // KeySetReadWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
@@ -94,6 +103,14 @@ func (mcgkm *MTRClusterGroupKeyManagement) KeySetReadWithParamsExpectedValuesExp
 		var _zero *MTRGroupKeyManagementClusterKeySetReadResponseParams
 		return _zero, ctx.Err()
 	}
+}
+
+// KeySetRemoveWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+func (mcgkm *MTRClusterGroupKeyManagement) KeySetRemoveWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRGroupKeyManagementClusterKeySetRemoveParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcgkm)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcgkm), objc.RegisterName("keySetRemoveWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
 // KeySetReadAllIndicesWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
@@ -238,6 +255,14 @@ func (mcgkm *MTRClusterGroupKeyManagement) ReadAttributeClusterRevisionWithParam
 	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// KeySetWriteWithParamsExpectedValuesExpectedValueIntervalCompletionHandler wraps the corresponding Objective-C method.
+func (mcgkm *MTRClusterGroupKeyManagement) KeySetWriteWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRGroupKeyManagementClusterKeySetWriteParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcgkm)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcgkm), objc.RegisterName("keySetWriteWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // KeySetReadWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // KeySetReadWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
@@ -264,6 +289,14 @@ func (mcgkm *MTRClusterGroupKeyManagement) KeySetReadWithParamsExpectedValuesExp
 		var _zero *MTRGroupKeyManagementClusterKeySetReadResponseParams
 		return _zero, ctx.Err()
 	}
+}
+
+// KeySetRemoveWithParamsExpectedValuesExpectedValueIntervalCompletionHandler wraps the corresponding Objective-C method.
+func (mcgkm *MTRClusterGroupKeyManagement) KeySetRemoveWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRGroupKeyManagementClusterKeySetRemoveParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcgkm)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcgkm), objc.RegisterName("keySetRemoveWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
 }
 
 // KeySetReadAllIndicesWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.

@@ -6,6 +6,7 @@ package matter
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -66,6 +67,21 @@ func NewMTRClusterLowPowerWithDeviceEndpointQueue(device *MTRDevice, endpoint ui
 	return mTRClusterLowPowerAdopt(_id)
 }
 
+// SleepWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+func (mclp *MTRClusterLowPower) SleepWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRLowPowerClusterSleepParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mclp)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mclp), objc.RegisterName("sleepWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// SleepWithExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+func (mclp *MTRClusterLowPower) SleepWithExpectedValuesExpectedValueIntervalCompletion(expectedValues []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mclp)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mclp), objc.RegisterName("sleepWithExpectedValues:expectedValueInterval:completion:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
 func (mclp *MTRClusterLowPower) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
 	defer runtime.KeepAlive(mclp)
@@ -104,6 +120,21 @@ func (mclp *MTRClusterLowPower) ReadAttributeClusterRevisionWithParams(params *M
 	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mclp), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
+// SleepWithParamsExpectedValuesExpectedValueIntervalCompletionHandler wraps the corresponding Objective-C method.
+func (mclp *MTRClusterLowPower) SleepWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRLowPowerClusterSleepParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mclp)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mclp), objc.RegisterName("sleepWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// SleepWithExpectedValuesExpectedValueIntervalCompletionHandler wraps the corresponding Objective-C method.
+func (mclp *MTRClusterLowPower) SleepWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mclp)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mclp), objc.RegisterName("sleepWithExpectedValues:expectedValueInterval:completionHandler:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
 }
 
 var _ MTRGenericClusterProvider = (*MTRClusterLowPower)(nil)

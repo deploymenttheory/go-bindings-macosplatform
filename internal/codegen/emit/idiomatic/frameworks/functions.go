@@ -218,6 +218,29 @@ func emitGenericFunctionWrappers(
 				fnImports["unsafe"] = "unsafe"
 				continue
 			}
+			// A parameter curated as an in/out count pointer (vmnet_read's pktcnt) is
+			// threaded through as a caller-supplied *N rather than lifted to a zero-
+			// initialised return: the caller sets it to the buffer capacity on input
+			// and reads back how many elements the framework processed. Lifting it
+			// (the default for a lone scalar pointer) would hard-code a count of zero
+			// and make the call a no-op. Curated because "(T *buf, int *count)" is
+			// ambiguous — most such counts are pure outputs, correctly lifted.
+			if fc.idio.IsInOutCountParam(fn.Name, param.Name) {
+				if base, ok := outParamGoType(
+					param.ObjCType,
+					ctx,
+					mapper,
+					fc,
+					rawPkgAlias,
+					false,
+				); ok {
+					sigParts = append(sigParts, pName+" *"+base)
+					abiParts = append(abiParts, "unsafe.Pointer")
+					callArgs = append(callArgs, "unsafe.Pointer("+pName+")")
+					fnImports["unsafe"] = "unsafe"
+					continue
+				}
+			}
 			// A pointer out-parameter is lifted into an extra return value: declare a
 			// local (named _outN so it never clashes with the readable return name),
 			// pass its address to the call, and return it after the result.

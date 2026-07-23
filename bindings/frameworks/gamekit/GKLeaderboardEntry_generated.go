@@ -124,3 +124,21 @@ func (le *LeaderboardEntry) Date() time.Time {
 	_r := objc.Send[objc.ID](objref.IDOf(le), objc.RegisterName("date"))
 	return rt.NSDateToTime(_r)
 }
+
+// ChallengeComposeControllerWithMessagePlayersCompletionHandler wraps the corresponding Objective-C method.
+func (le *LeaderboardEntry) ChallengeComposeControllerWithMessagePlayersCompletionHandler(message string, players []*Player, completionHandler func(obj.Object, bool, obj.Object)) obj.Object {
+	defer runtime.KeepAlive(le)
+	_r := objc.Send[objc.ID](objref.IDOf(le), objc.RegisterName("challengeComposeControllerWithMessage:players:completionHandler:"), purego.NSString(message), purego.SliceToNSArray(players, func(_v *Player) objc.ID { return objref.IDOf(_v) }), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 bool, _b2 objc.ID) {
+		completionHandler(obj.Wrap(_b0), _b1, obj.Wrap(_b2))
+	}))
+	return obj.Wrap(_r)
+}
+
+// ChallengeComposeControllerWithMessagePlayersCompletion wraps the corresponding Objective-C method.
+func (le *LeaderboardEntry) ChallengeComposeControllerWithMessagePlayersCompletion(message string, players []*Player, completionHandler func(obj.Object, bool, obj.Object)) obj.Object {
+	defer runtime.KeepAlive(le)
+	_r := objc.Send[objc.ID](objref.IDOf(le), objc.RegisterName("challengeComposeControllerWithMessage:players:completion:"), purego.NSString(message), purego.SliceToNSArray(players, func(_v *Player) objc.ID { return objref.IDOf(_v) }), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 bool, _b2 objc.ID) {
+		completionHandler(obj.Wrap(_b0), _b1, obj.Wrap(_b2))
+	}))
+	return obj.Wrap(_r)
+}

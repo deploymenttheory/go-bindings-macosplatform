@@ -140,6 +140,13 @@ func (rgr *ReverseGeocodingRequest) IsLoading() bool {
 	return _r
 }
 
+// Location returns the location.
+func (rgr *ReverseGeocodingRequest) Location() unsafe.Pointer {
+	defer runtime.KeepAlive(rgr)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(rgr), objc.RegisterName("location"))
+	return _r
+}
+
 // PreferredLocale returns the preferred locale.
 func (rgr *ReverseGeocodingRequest) PreferredLocale() *foundation.Locale {
 	defer runtime.KeepAlive(rgr)

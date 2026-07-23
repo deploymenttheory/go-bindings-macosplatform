@@ -7,6 +7,7 @@ package replaykit
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/shim"
@@ -186,6 +187,28 @@ func (sr *ScreenRecorder) DiscardRecordingWithHandler(ctx context.Context) error
 		_ch <- nil
 	})
 	objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("discardRecordingWithHandler:"), _block)
+	select {
+	case err := <-_ch:
+		return err
+	case <-ctx.Done():
+		return ctx.Err()
+	}
+}
+
+// StartCaptureWithHandler starts screen and audio capture.
+//
+// StartCaptureWithHandler blocks until the operation completes or ctx is cancelled.
+func (sr *ScreenRecorder) StartCaptureWithHandler(ctx context.Context, captureHandler func(unsafe.Pointer, SampleBufferType, unsafe.Pointer)) error {
+	defer runtime.KeepAlive(sr)
+	_ch := make(chan error, 1)
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
+		var _err error
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
+		_ch <- _err
+	})
+	objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("startCaptureWithHandler:completionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 SampleBufferType, _b2 unsafe.Pointer) {
+		captureHandler(_b0, _b1, _b2)
+	}), _block)
 	select {
 	case err := <-_ch:
 		return err

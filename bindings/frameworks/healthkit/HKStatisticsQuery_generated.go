@@ -5,7 +5,11 @@
 package healthkit
 
 import (
+	"runtime"
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -45,9 +49,14 @@ func statisticsQueryAdopt(id objc.ID) *StatisticsQuery {
 	return x
 }
 
-// NewStatisticsQuery creates a new StatisticsQuery.
-func NewStatisticsQuery() *StatisticsQuery {
-	_id := objc.Send[objc.ID](objc.ID(_class("HKStatisticsQuery")), objc.RegisterName("new"))
+// NewStatisticsQueryWithQuantityTypeQuantitySamplePredicateOptionsCompletionHandler initializes a statistics query instance that performs the specified calculations over the matching samples in the HeathKit store.
+func NewStatisticsQueryWithQuantityTypeQuantitySamplePredicateOptionsCompletionHandler(quantityType *QuantityType, quantitySamplePredicate obj.Object, options StatisticsOptions, handler func(obj.Object, obj.Object, unsafe.Pointer)) *StatisticsQuery {
+	defer runtime.KeepAlive(quantityType)
+	defer runtime.KeepAlive(quantitySamplePredicate)
+	_alloc := objc.Send[objc.ID](objc.ID(_class("HKStatisticsQuery")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithQuantityType:quantitySamplePredicate:options:completionHandler:"), objref.IDOf(quantityType), objref.IDOf(quantitySamplePredicate), options, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
+		handler(obj.Wrap(_b0), obj.Wrap(_b1), _b2)
+	}))
 	return statisticsQueryAdopt(_id)
 }
 

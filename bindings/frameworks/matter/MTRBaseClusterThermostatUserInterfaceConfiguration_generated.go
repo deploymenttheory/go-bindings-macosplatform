@@ -7,6 +7,7 @@ package matter
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -93,6 +94,21 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) ReadAttribute
 	}
 }
 
+// WriteAttributeTemperatureDisplayModeWithValueCompletion writes attribute temperature display mode with value completion.
+func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) WriteAttributeTemperatureDisplayModeWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbctuic)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbctuic), objc.RegisterName("writeAttributeTemperatureDisplayModeWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeTemperatureDisplayModeWithValueParamsCompletion writes attribute temperature display mode with value params completion.
+func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) WriteAttributeTemperatureDisplayModeWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbctuic)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbctuic), objc.RegisterName("writeAttributeTemperatureDisplayModeWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeTemperatureDisplayModeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeTemperatureDisplayModeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -110,7 +126,7 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctuic), objc.RegisterName("subscribeAttributeTemperatureDisplayModeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctuic), objc.RegisterName("subscribeAttributeTemperatureDisplayModeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -146,6 +162,21 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) ReadAttribute
 	}
 }
 
+// WriteAttributeKeypadLockoutWithValueCompletion writes attribute keypad lockout with value completion.
+func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) WriteAttributeKeypadLockoutWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbctuic)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbctuic), objc.RegisterName("writeAttributeKeypadLockoutWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeKeypadLockoutWithValueParamsCompletion writes attribute keypad lockout with value params completion.
+func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) WriteAttributeKeypadLockoutWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbctuic)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbctuic), objc.RegisterName("writeAttributeKeypadLockoutWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeKeypadLockoutWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeKeypadLockoutWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -163,7 +194,7 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctuic), objc.RegisterName("subscribeAttributeKeypadLockoutWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctuic), objc.RegisterName("subscribeAttributeKeypadLockoutWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -199,6 +230,21 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) ReadAttribute
 	}
 }
 
+// WriteAttributeScheduleProgrammingVisibilityWithValueCompletion writes attribute schedule programming visibility with value completion.
+func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) WriteAttributeScheduleProgrammingVisibilityWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbctuic)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbctuic), objc.RegisterName("writeAttributeScheduleProgrammingVisibilityWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeScheduleProgrammingVisibilityWithValueParamsCompletion writes attribute schedule programming visibility with value params completion.
+func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) WriteAttributeScheduleProgrammingVisibilityWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbctuic)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbctuic), objc.RegisterName("writeAttributeScheduleProgrammingVisibilityWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeScheduleProgrammingVisibilityWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeScheduleProgrammingVisibilityWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -216,7 +262,7 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctuic), objc.RegisterName("subscribeAttributeScheduleProgrammingVisibilityWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctuic), objc.RegisterName("subscribeAttributeScheduleProgrammingVisibilityWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -269,7 +315,7 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctuic), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctuic), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -322,7 +368,7 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctuic), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctuic), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -375,7 +421,7 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctuic), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctuic), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -428,7 +474,7 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctuic), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctuic), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -481,7 +527,7 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctuic), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctuic), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -517,6 +563,21 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) ReadAttribute
 	}
 }
 
+// WriteAttributeTemperatureDisplayModeWithValueCompletionHandler writes attribute temperature display mode with value completion handler.
+func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) WriteAttributeTemperatureDisplayModeWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbctuic)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbctuic), objc.RegisterName("writeAttributeTemperatureDisplayModeWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeTemperatureDisplayModeWithValueParamsCompletionHandler writes attribute temperature display mode with value params completion handler.
+func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) WriteAttributeTemperatureDisplayModeWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbctuic)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbctuic), objc.RegisterName("writeAttributeTemperatureDisplayModeWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeTemperatureDisplayModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeTemperatureDisplayModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -536,7 +597,7 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctuic), objc.RegisterName("subscribeAttributeTemperatureDisplayModeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctuic), objc.RegisterName("subscribeAttributeTemperatureDisplayModeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -572,6 +633,21 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) ReadAttribute
 	}
 }
 
+// WriteAttributeKeypadLockoutWithValueCompletionHandler writes attribute keypad lockout with value completion handler.
+func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) WriteAttributeKeypadLockoutWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbctuic)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbctuic), objc.RegisterName("writeAttributeKeypadLockoutWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeKeypadLockoutWithValueParamsCompletionHandler writes attribute keypad lockout with value params completion handler.
+func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) WriteAttributeKeypadLockoutWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbctuic)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbctuic), objc.RegisterName("writeAttributeKeypadLockoutWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeKeypadLockoutWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeKeypadLockoutWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -591,7 +667,7 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctuic), objc.RegisterName("subscribeAttributeKeypadLockoutWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctuic), objc.RegisterName("subscribeAttributeKeypadLockoutWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -627,6 +703,21 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) ReadAttribute
 	}
 }
 
+// WriteAttributeScheduleProgrammingVisibilityWithValueCompletionHandler writes attribute schedule programming visibility with value completion handler.
+func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) WriteAttributeScheduleProgrammingVisibilityWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbctuic)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbctuic), objc.RegisterName("writeAttributeScheduleProgrammingVisibilityWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeScheduleProgrammingVisibilityWithValueParamsCompletionHandler writes attribute schedule programming visibility with value params completion handler.
+func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) WriteAttributeScheduleProgrammingVisibilityWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbctuic)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbctuic), objc.RegisterName("writeAttributeScheduleProgrammingVisibilityWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeScheduleProgrammingVisibilityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeScheduleProgrammingVisibilityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -646,7 +737,7 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctuic), objc.RegisterName("subscribeAttributeScheduleProgrammingVisibilityWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctuic), objc.RegisterName("subscribeAttributeScheduleProgrammingVisibilityWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -701,7 +792,7 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctuic), objc.RegisterName("subscribeAttributeGeneratedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctuic), objc.RegisterName("subscribeAttributeGeneratedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -756,7 +847,7 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctuic), objc.RegisterName("subscribeAttributeAcceptedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctuic), objc.RegisterName("subscribeAttributeAcceptedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -811,7 +902,7 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctuic), objc.RegisterName("subscribeAttributeAttributeListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctuic), objc.RegisterName("subscribeAttributeAttributeListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -866,7 +957,7 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctuic), objc.RegisterName("subscribeAttributeFeatureMapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctuic), objc.RegisterName("subscribeAttributeFeatureMapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -921,7 +1012,7 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctuic), objc.RegisterName("subscribeAttributeClusterRevisionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctuic), objc.RegisterName("subscribeAttributeClusterRevisionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err

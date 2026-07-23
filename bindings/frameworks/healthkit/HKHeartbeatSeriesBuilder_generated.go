@@ -8,9 +8,11 @@ import (
 	"context"
 	"runtime"
 	"time"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/rt"
 	"github.com/ebitengine/purego/objc"
@@ -58,6 +60,18 @@ func NewHeartbeatSeriesBuilderWithHealthStoreDeviceStartDate(healthStore *Health
 	_alloc := objc.Send[objc.ID](objc.ID(_class("HKHeartbeatSeriesBuilder")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHealthStore:device:startDate:"), objref.IDOf(healthStore), objref.IDOf(device), rt.TimeToNSDate(startDate))
 	return heartbeatSeriesBuilderAdopt(_id)
+}
+
+// AddHeartbeatWithTimeIntervalSinceSeriesStartDatePrecededByGapCompletion adds a heartbeat to the series.
+func (hsb *HeartbeatSeriesBuilder) AddHeartbeatWithTimeIntervalSinceSeriesStartDatePrecededByGapCompletion(timeIntervalSinceStart float64, precededByGap bool, completion func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(hsb)
+	objc.Send[objc.ID](objref.IDOf(hsb), objc.RegisterName("addHeartbeatWithTimeIntervalSinceSeriesStartDate:precededByGap:completion:"), timeIntervalSinceStart, precededByGap, objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { completion(_b0, _b1) }))
+}
+
+// AddMetadataCompletion adds metadata to the sample.
+func (hsb *HeartbeatSeriesBuilder) AddMetadataCompletion(metadata map[string]obj.Object, completion func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(hsb)
+	objc.Send[objc.ID](objref.IDOf(hsb), objc.RegisterName("addMetadata:completion:"), rt.MapToDict(metadata, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { completion(_b0, _b1) }))
 }
 
 // FinishSeriesWithCompletion finalizes the series and returns the resulting heartbeat series sample.

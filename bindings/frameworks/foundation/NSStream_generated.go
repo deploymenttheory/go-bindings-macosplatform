@@ -151,6 +151,13 @@ func (s *Stream) StreamStatus() StreamStatus {
 	return _r
 }
 
+// StreamError returns the stream error.
+func (s *Stream) StreamError() unsafe.Pointer {
+	defer runtime.KeepAlive(s)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(s), objc.RegisterName("streamError"))
+	return _r
+}
+
 // isStream marks Stream — and, by embedding promotion, its
 // subclasses — as a member of the Stream hierarchy, sealing its provider
 // interface so only real members satisfy it.

@@ -7,6 +7,7 @@ package storekit
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -79,6 +80,12 @@ func (csc *CloudServiceController) String() string {
 func NewCloudServiceController() *CloudServiceController {
 	_id := objc.Send[objc.ID](objc.ID(_class("SKCloudServiceController")), objc.RegisterName("new"))
 	return cloudServiceControllerAdopt(_id)
+}
+
+// RequestCapabilitiesWithCompletionHandler gets the current capabilities associated with the Music library on the device.
+func (csc *CloudServiceController) RequestCapabilitiesWithCompletionHandler(completionHandler func(CloudServiceCapability, unsafe.Pointer)) {
+	defer runtime.KeepAlive(csc)
+	objc.Send[objc.ID](objref.IDOf(csc), objc.RegisterName("requestCapabilitiesWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 CloudServiceCapability, _b1 unsafe.Pointer) { completionHandler(_b0, _b1) }))
 }
 
 // RequestStorefrontCountryCode gets the country code for the storefront associated with a customer’s iTunes account.

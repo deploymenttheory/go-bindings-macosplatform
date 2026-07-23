@@ -456,6 +456,20 @@ func (fn *FieldNode) CategoryBitMask() uint32 {
 
 }
 
+// Direction returns directed fields' directions can be accessed here. If the field is non-directional, a zero vector will be returned
+func (fn *FieldNode) Direction() unsafe.Pointer {
+	defer runtime.KeepAlive(fn)
+	var _mainthread0 unsafe.Pointer
+	purego.Main(func() {
+		_mainthread0 = func() unsafe.Pointer {
+			_r := objc.Send[unsafe.Pointer](objref.IDOf(fn), objc.RegisterName("direction"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
+}
+
 // Smoothness returns fields without a smoothness component will return 0
 func (fn *FieldNode) Smoothness() float32 {
 	defer runtime.KeepAlive(fn)

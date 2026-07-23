@@ -6,6 +6,7 @@ package appkit
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -77,6 +78,12 @@ func NewFontAssetRequestWithFontDescriptorsOptions(fontDescriptors []*FontDescri
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSFontAssetRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFontDescriptors:options:"), purego.SliceToNSArray(fontDescriptors, func(_v *FontDescriptor) objc.ID { return objref.IDOf(_v) }), options)
 	return fontAssetRequestAdopt(_id)
+}
+
+// DownloadFontAssetsWithCompletionHandler wraps the corresponding Objective-C method.
+func (far *FontAssetRequest) DownloadFontAssetsWithCompletionHandler(completionHandler func(unsafe.Pointer) bool) {
+	defer runtime.KeepAlive(far)
+	objc.Send[objc.ID](objref.IDOf(far), objc.RegisterName("downloadFontAssetsWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) bool { return completionHandler(_b0) }))
 }
 
 // DownloadedFontDescriptors returns the downloaded font descriptors.

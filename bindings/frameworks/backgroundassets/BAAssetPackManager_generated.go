@@ -145,6 +145,19 @@ func (apm *AssetPackManager) GetAssetPackWithIdentifier(ctx context.Context, ass
 	}
 }
 
+// GetStatusRelativeToAssetPackCompletionHandler gets the current status relative to a particular asset pack.
+func (apm *AssetPackManager) GetStatusRelativeToAssetPackCompletionHandler(assetPack *AssetPack, completionHandler func(AssetPackStatus, unsafe.Pointer)) {
+	defer runtime.KeepAlive(apm)
+	defer runtime.KeepAlive(assetPack)
+	objc.Send[objc.ID](objref.IDOf(apm), objc.RegisterName("getStatusRelativeToAssetPack:completionHandler:"), objref.IDOf(assetPack), objc.NewBlock(func(_ objc.Block, _b0 AssetPackStatus, _b1 unsafe.Pointer) { completionHandler(_b0, _b1) }))
+}
+
+// GetLocalStatusOfAssetPackWithIdentifierCompletionHandler gets an asset pack’s local status.
+func (apm *AssetPackManager) GetLocalStatusOfAssetPackWithIdentifierCompletionHandler(assetPackIdentifier string, completionHandler func(AssetPackStatus)) {
+	defer runtime.KeepAlive(apm)
+	objc.Send[objc.ID](objref.IDOf(apm), objc.RegisterName("getLocalStatusOfAssetPackWithIdentifier:completionHandler:"), purego.NSString(assetPackIdentifier), objc.NewBlock(func(_ objc.Block, _b0 AssetPackStatus) { completionHandler(_b0) }))
+}
+
 // AssetPackIsAvailableLocallyWithIdentifier checks whether the asset pack with the specified identifier is available locally.
 func (apm *AssetPackManager) AssetPackIsAvailableLocallyWithIdentifier(assetPackIdentifier string) bool {
 	defer runtime.KeepAlive(apm)
@@ -194,6 +207,14 @@ func (apm *AssetPackManager) EnsureLocalAvailabilityOfAssetPackRequireLatestVers
 	}
 }
 
+// CheckForUpdatesWithCompletionHandler gets the latest asset-pack information from the server, updates outdated asset packs, and removes obsolete asset packs.
+func (apm *AssetPackManager) CheckForUpdatesWithCompletionHandler(completionHandler func(obj.Object, obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(apm)
+	objc.Send[objc.ID](objref.IDOf(apm), objc.RegisterName("checkForUpdatesWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
+		completionHandler(obj.Wrap(_b0), obj.Wrap(_b1), _b2)
+	}))
+}
+
 // FileDescriptorForPathSearchingInAssetPackWithIdentifier opens and returns a file descriptor for the asset file at the specified relative path.
 func (apm *AssetPackManager) FileDescriptorForPathSearchingInAssetPackWithIdentifier(path string, assetPackIdentifier string) (result int, err error) {
 	defer runtime.KeepAlive(apm)
@@ -234,4 +255,10 @@ func (apm *AssetPackManager) RemoveAssetPackWithIdentifier(ctx context.Context, 
 	case <-ctx.Done():
 		return ctx.Err()
 	}
+}
+
+// GetStatusOfAssetPackWithIdentifierCompletionHandler gets an asset pack’s status.
+func (apm *AssetPackManager) GetStatusOfAssetPackWithIdentifierCompletionHandler(assetPackIdentifier string, completionHandler func(AssetPackStatus, unsafe.Pointer)) {
+	defer runtime.KeepAlive(apm)
+	objc.Send[objc.ID](objref.IDOf(apm), objc.RegisterName("getStatusOfAssetPackWithIdentifier:completionHandler:"), purego.NSString(assetPackIdentifier), objc.NewBlock(func(_ objc.Block, _b0 AssetPackStatus, _b1 unsafe.Pointer) { completionHandler(_b0, _b1) }))
 }

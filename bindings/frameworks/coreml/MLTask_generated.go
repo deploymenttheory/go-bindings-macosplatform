@@ -6,6 +6,7 @@ package coreml
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -101,6 +102,13 @@ func (t *Task) TaskIdentifier() string {
 func (t *Task) State() TaskState {
 	defer runtime.KeepAlive(t)
 	_r := objc.Send[TaskState](objref.IDOf(t), objc.RegisterName("state"))
+	return _r
+}
+
+// Error returns the error.
+func (t *Task) Error() unsafe.Pointer {
+	defer runtime.KeepAlive(t)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(t), objc.RegisterName("error"))
 	return _r
 }
 

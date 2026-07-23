@@ -8,6 +8,7 @@ import (
 	"context"
 	"runtime"
 	"time"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
@@ -313,6 +314,13 @@ func (pi *PlayerItem) WithAutomaticallyHandlesInterstitialEvents(automaticallyHa
 func (pi *PlayerItem) Status() PlayerItemStatus {
 	defer runtime.KeepAlive(pi)
 	_r := objc.Send[PlayerItemStatus](objref.IDOf(pi), objc.RegisterName("status"))
+	return _r
+}
+
+// Error returns if the receiver's status is AVPlayerItemStatusFailed, this describes the error that caused the failure. The value of this property is an NSError that describes what caused the receiver to no longer be able to be played. If the receiver's status is not AVPlayerItemStatusFailed, the value of this property is nil.
+func (pi *PlayerItem) Error() unsafe.Pointer {
+	defer runtime.KeepAlive(pi)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(pi), objc.RegisterName("error"))
 	return _r
 }
 

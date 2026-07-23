@@ -189,6 +189,90 @@ func (ni *NotificationInfo) WithCollapseIDKey(collapseIDKey string) *Notificatio
 	return ni
 }
 
+// AlertBody returns the text for the notification's alert. Set this property's value to have the system display the specified string when it receives the corresponding push notification. If you localize your app's content, use the “CKSubscription/NotificationInfo/alertLocalizationKey“ property instead.
+func (ni *NotificationInfo) AlertBody() unsafe.Pointer {
+	defer runtime.KeepAlive(ni)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(ni), objc.RegisterName("alertBody"))
+	return _r
+}
+
+// AlertLocalizationKey returns the key that identifies the localized string for the notification's alert. Set this property's value to have the system display a localized string when it receives the corresponding push notification. The system uses the key to find the matching string in your app's `Localizable.string` file. If you specify a value for this property, CloudKit ignores the “CKSubscription/NotificationInfo/alertBody“ property's value. For information about localizing string resources, see [Internationalization and Localization Guide](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPInternational/Introduction/Introduction.html#//apple_ref/doc/uid/10000171i).
+func (ni *NotificationInfo) AlertLocalizationKey() unsafe.Pointer {
+	defer runtime.KeepAlive(ni)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(ni), objc.RegisterName("alertLocalizationKey"))
+	return _r
+}
+
+// AlertLocalizationArgs returns the fields for building a notification's alert. This property is an array of field names that CloudKit uses to extract the corresponding values from the record that triggers the push notification. The values must be strings, numbers, or dates. Don't specify keys that use other value types. CloudKit may truncate strings with a length greater than 100 characters when it adds them to a notification's payload. If you use `%
+func (ni *NotificationInfo) AlertLocalizationArgs() unsafe.Pointer {
+	defer runtime.KeepAlive(ni)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(ni), objc.RegisterName("alertLocalizationArgs"))
+	return _r
+}
+
+// Title returns the notification's title. CloudKit uses this value to set the `title` push notification property. See <doc://com.apple.documentation/documentation/usernotifications/generating-a-remote-notification> for more detail about push notification properties.
+func (ni *NotificationInfo) Title() unsafe.Pointer {
+	defer runtime.KeepAlive(ni)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(ni), objc.RegisterName("title"))
+	return _r
+}
+
+// TitleLocalizationKey returns the key that identifies the localized string for the notification's title. CloudKit uses this value to set the `title-loc-key` push notification property. See <doc://com.apple.documentation/documentation/usernotifications/generating-a-remote-notification> for more details about push notification properties.
+func (ni *NotificationInfo) TitleLocalizationKey() unsafe.Pointer {
+	defer runtime.KeepAlive(ni)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(ni), objc.RegisterName("titleLocalizationKey"))
+	return _r
+}
+
+// TitleLocalizationArgs returns the fields for building a notification's title. This property is an array of field names that CloudKit uses to extract the corresponding values from the record that triggers the push notification. The values must be strings, numbers, or dates. Don't specify keys that use other value types. CloudKit may truncate strings with a length greater than 100 characters when it adds them to a notification's payload. If you use `%
+func (ni *NotificationInfo) TitleLocalizationArgs() unsafe.Pointer {
+	defer runtime.KeepAlive(ni)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(ni), objc.RegisterName("titleLocalizationArgs"))
+	return _r
+}
+
+// Subtitle returns the notification's subtitle. CloudKit uses this value to set the `subtitle` push notification property. If you set “CKSubscription/NotificationInfo/subtitleLocalizationKey“, CloudKit ignores this value. See <doc://com.apple.documentation/documentation/usernotifications/generating-a-remote-notification> for more details about push notification properties.
+func (ni *NotificationInfo) Subtitle() unsafe.Pointer {
+	defer runtime.KeepAlive(ni)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(ni), objc.RegisterName("subtitle"))
+	return _r
+}
+
+// SubtitleLocalizationKey returns the key that identifies the localized string for the notification's subtitle. CloudKit uses this value to set the `subtitle-loc-key` push notification property. Setting this property overrides any value in “CKSubscription/NotificationInfo/subtitle“. See <doc://com.apple.documentation/documentation/usernotifications/generating-a-remote-notification> for more details about push notification properties.
+func (ni *NotificationInfo) SubtitleLocalizationKey() unsafe.Pointer {
+	defer runtime.KeepAlive(ni)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(ni), objc.RegisterName("subtitleLocalizationKey"))
+	return _r
+}
+
+// SubtitleLocalizationArgs returns the fields for building a notification's subtitle. This property is an array of field names that CloudKit uses to extract the corresponding values from the record that triggers the push notification. The values must be strings, numbers, or dates. Don't specify keys that use other value types. CloudKit may truncate strings with a length greater than 100 characters when it adds them to a notification's payload. If you use `%
+func (ni *NotificationInfo) SubtitleLocalizationArgs() unsafe.Pointer {
+	defer runtime.KeepAlive(ni)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(ni), objc.RegisterName("subtitleLocalizationArgs"))
+	return _r
+}
+
+// AlertActionLocalizationKey returns the key that identifies the localized string for the notification's action. Set this property's value to have the system use a localized string for the text of the notification's button that opens your app. The system uses the key to find the matching string in your app's `Localizable.string` file. If this property's value is `nil`, the system displays a single button to dismiss the alert. For information about localizing string resources, see [Internationalization and Localization Guide](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPInternational/Introduction/Introduction.html#//apple_ref/doc/uid/10000171i).
+func (ni *NotificationInfo) AlertActionLocalizationKey() unsafe.Pointer {
+	defer runtime.KeepAlive(ni)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(ni), objc.RegisterName("alertActionLocalizationKey"))
+	return _r
+}
+
+// AlertLaunchImage returns the filename of an image to use as a launch image. If you specify a value, the system uses it to locate an image in the app's bundle, and displays it as a launch image when the user launches the app after receiving a push notification.
+func (ni *NotificationInfo) AlertLaunchImage() unsafe.Pointer {
+	defer runtime.KeepAlive(ni)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(ni), objc.RegisterName("alertLaunchImage"))
+	return _r
+}
+
+// SoundName returns the filename of the sound file to play when a notification arrives. If you specify a value, the system uses it to locate a sound file in the app's bundle. The sound plays when the system receives a push notification. If the system can't find the specified file, or if you use the string `default`, the system plays the default sound.
+func (ni *NotificationInfo) SoundName() unsafe.Pointer {
+	defer runtime.KeepAlive(ni)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(ni), objc.RegisterName("soundName"))
+	return _r
+}
+
 // DesiredKeys returns the names of fields to include in the push notification's payload. This property contains an array of strings, each of which corresponds to the name of a field in the record that triggers the notification. When the system receives a notification, it includes the keys, and their corresponding values. You can request a maximum of three keys. For the keys you specify, the allowable types are <doc://com.apple.documentation/documentation/foundation/nsstring>, <doc://com.apple.documentation/documentation/foundation/nsnumber>, <doc://com.apple.documentation/documentation/corelocation/cllocation>, <doc://com.apple.documentation/documentation/foundation/nsdate>, and “CKRecord/Reference“. You can't specify keys with values that contain other data types. CloudKit may truncate strings that are more than 100 characters when it adds them to the notification's payload.
 //
 // DesiredKeys returns the collection as a Go slice.
@@ -216,6 +300,13 @@ func (ni *NotificationInfo) ShouldSendContentAvailable() bool {
 func (ni *NotificationInfo) ShouldSendMutableContent() bool {
 	defer runtime.KeepAlive(ni)
 	_r := objc.Send[bool](objref.IDOf(ni), objc.RegisterName("shouldSendMutableContent"))
+	return _r
+}
+
+// Category returns the name of the action group that corresponds to this notification. Categories allow you to present custom actions to the user on your push notifications. For more information, see <doc://com.apple.documentation/documentation/uikit/uimutableusernotificationcategory>.
+func (ni *NotificationInfo) Category() unsafe.Pointer {
+	defer runtime.KeepAlive(ni)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(ni), objc.RegisterName("category"))
 	return _r
 }
 

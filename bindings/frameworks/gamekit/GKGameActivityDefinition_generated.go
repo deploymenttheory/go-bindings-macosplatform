@@ -7,6 +7,7 @@ package gamekit
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -132,6 +133,12 @@ func (gad *GameActivityDefinition) LoadLeaderboards(ctx context.Context) (result
 		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
+}
+
+// LoadImageWithCompletionHandler asynchronously load the image. Error will be nil on success.
+func (gad *GameActivityDefinition) LoadImageWithCompletionHandler(completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
+	defer runtime.KeepAlive(gad)
+	objc.Send[objc.ID](objref.IDOf(gad), objc.RegisterName("loadImageWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 unsafe.Pointer) { completionHandler(_b0, _b1) }))
 }
 
 // Identifier returns the developer defined identifier for a given game activity.

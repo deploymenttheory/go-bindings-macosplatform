@@ -7,6 +7,7 @@ package matter
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -67,6 +68,26 @@ func NewMTRBaseClusterElectricalMeasurementWithDeviceEndpointQueue(device *MTRBa
 	return mTRBaseClusterElectricalMeasurementAdopt(_id)
 }
 
+// GetProfileInfoCommandWithParamsCompletion command GetProfileInfoCommand A function which retrieves the power profiling information from the electrical measurement server.
+func (mbcem *MTRBaseClusterElectricalMeasurement) GetProfileInfoCommandWithParamsCompletion(params *MTRElectricalMeasurementClusterGetProfileInfoCommandParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcem)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("getProfileInfoCommandWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// GetProfileInfoCommandWithCompletion wraps the corresponding Objective-C method.
+func (mbcem *MTRBaseClusterElectricalMeasurement) GetProfileInfoCommandWithCompletion(completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcem)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("getProfileInfoCommandWithCompletion:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// GetMeasurementProfileCommandWithParamsCompletion command GetMeasurementProfileCommand A function which retrieves an electricity measurement profile from the electricity measurement server for a specific attribute Id requested.
+func (mbcem *MTRBaseClusterElectricalMeasurement) GetMeasurementProfileCommandWithParamsCompletion(params *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcem)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("getMeasurementProfileCommandWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // ReadAttributeMeasurementTypeWithCompletion reads attribute measurement type with completion.
 //
 // ReadAttributeMeasurementTypeWithCompletion blocks until the operation completes or ctx is cancelled.
@@ -110,7 +131,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasurementT
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeMeasurementTypeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeMeasurementTypeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -163,7 +184,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcVoltageWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcVoltageWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcVoltageWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -216,7 +237,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcVoltageMin
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcVoltageMinWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcVoltageMinWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -269,7 +290,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcVoltageMax
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcVoltageMaxWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcVoltageMaxWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -322,7 +343,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcCurrentWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcCurrentWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcCurrentWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -375,7 +396,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcCurrentMin
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcCurrentMinWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcCurrentMinWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -428,7 +449,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcCurrentMax
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcCurrentMaxWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcCurrentMaxWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -481,7 +502,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcPowerWithP
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcPowerWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcPowerWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -534,7 +555,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcPowerMinWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcPowerMinWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcPowerMinWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -587,7 +608,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcPowerMaxWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcPowerMaxWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcPowerMaxWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -640,7 +661,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcVoltageMul
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcVoltageMultiplierWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcVoltageMultiplierWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -693,7 +714,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcVoltageDiv
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcVoltageDivisorWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcVoltageDivisorWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -746,7 +767,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcCurrentMul
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcCurrentMultiplierWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcCurrentMultiplierWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -799,7 +820,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcCurrentDiv
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcCurrentDivisorWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcCurrentDivisorWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -852,7 +873,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcPowerMulti
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcPowerMultiplierWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcPowerMultiplierWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -905,7 +926,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcPowerDivis
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcPowerDivisorWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcPowerDivisorWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -958,7 +979,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcFrequencyW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcFrequencyWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcFrequencyWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1011,7 +1032,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcFrequencyM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcFrequencyMinWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcFrequencyMinWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1064,7 +1085,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcFrequencyM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcFrequencyMaxWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcFrequencyMaxWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1117,7 +1138,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeNeutralCurre
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeNeutralCurrentWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeNeutralCurrentWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1170,7 +1191,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeTotalActiveP
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeTotalActivePowerWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeTotalActivePowerWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1223,7 +1244,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeTotalReactiv
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeTotalReactivePowerWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeTotalReactivePowerWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1276,7 +1297,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeTotalApparen
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeTotalApparentPowerWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeTotalApparentPowerWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1329,7 +1350,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured1stH
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeMeasured1stHarmonicCurrentWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeMeasured1stHarmonicCurrentWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1382,7 +1403,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured3rdH
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeMeasured3rdHarmonicCurrentWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeMeasured3rdHarmonicCurrentWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1435,7 +1456,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured5thH
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeMeasured5thHarmonicCurrentWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeMeasured5thHarmonicCurrentWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1488,7 +1509,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured7thH
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeMeasured7thHarmonicCurrentWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeMeasured7thHarmonicCurrentWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1541,7 +1562,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured9thH
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeMeasured9thHarmonicCurrentWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeMeasured9thHarmonicCurrentWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1594,7 +1615,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured11th
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeMeasured11thHarmonicCurrentWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeMeasured11thHarmonicCurrentWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1647,7 +1668,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhas
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeMeasuredPhase1stHarmonicCurrentWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeMeasuredPhase1stHarmonicCurrentWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1700,7 +1721,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhas
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeMeasuredPhase3rdHarmonicCurrentWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeMeasuredPhase3rdHarmonicCurrentWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1753,7 +1774,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhas
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeMeasuredPhase5thHarmonicCurrentWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeMeasuredPhase5thHarmonicCurrentWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1806,7 +1827,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhas
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeMeasuredPhase7thHarmonicCurrentWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeMeasuredPhase7thHarmonicCurrentWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1859,7 +1880,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhas
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeMeasuredPhase9thHarmonicCurrentWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeMeasuredPhase9thHarmonicCurrentWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1912,7 +1933,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhas
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeMeasuredPhase11thHarmonicCurrentWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeMeasuredPhase11thHarmonicCurrentWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1965,7 +1986,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcFrequencyM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcFrequencyMultiplierWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcFrequencyMultiplierWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2018,7 +2039,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcFrequencyD
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcFrequencyDivisorWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcFrequencyDivisorWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2071,7 +2092,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributePowerMultipl
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributePowerMultiplierWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributePowerMultiplierWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2124,7 +2145,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributePowerDivisor
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributePowerDivisorWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributePowerDivisorWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2177,7 +2198,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeHarmonicCurr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeHarmonicCurrentMultiplierWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeHarmonicCurrentMultiplierWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2230,7 +2251,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributePhaseHarmoni
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributePhaseHarmonicCurrentMultiplierWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributePhaseHarmonicCurrentMultiplierWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2283,7 +2304,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeInstantaneou
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeInstantaneousVoltageWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeInstantaneousVoltageWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2336,7 +2357,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeInstantaneou
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeInstantaneousLineCurrentWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeInstantaneousLineCurrentWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2389,7 +2410,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeInstantaneou
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeInstantaneousActiveCurrentWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeInstantaneousActiveCurrentWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2442,7 +2463,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeInstantaneou
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeInstantaneousReactiveCurrentWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeInstantaneousReactiveCurrentWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2495,7 +2516,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeInstantaneou
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeInstantaneousPowerWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeInstantaneousPowerWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2548,7 +2569,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2601,7 +2622,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageMinWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageMinWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2654,7 +2675,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageMaxWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageMaxWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2707,7 +2728,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsCurrentWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsCurrentWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2760,7 +2781,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsCurrentMinWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsCurrentMinWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2813,7 +2834,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsCurrentMaxWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsCurrentMaxWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2866,7 +2887,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeActivePowerWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeActivePowerWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2919,7 +2940,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeActivePowerMinWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeActivePowerMinWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2972,7 +2993,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeActivePowerMaxWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeActivePowerMaxWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3025,7 +3046,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeReactivePowe
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeReactivePowerWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeReactivePowerWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3078,7 +3099,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeApparentPowe
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeApparentPowerWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeApparentPowerWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3131,7 +3152,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributePowerFactorW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributePowerFactorWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributePowerFactorWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3167,6 +3188,21 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsVoltage
 	}
 }
 
+// WriteAttributeAverageRmsVoltageMeasurementPeriodWithValueCompletion writes attribute average rms voltage measurement period with value completion.
+func (mbcem *MTRBaseClusterElectricalMeasurement) WriteAttributeAverageRmsVoltageMeasurementPeriodWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcem)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("writeAttributeAverageRmsVoltageMeasurementPeriodWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeAverageRmsVoltageMeasurementPeriodWithValueParamsCompletion writes attribute average rms voltage measurement period with value params completion.
+func (mbcem *MTRBaseClusterElectricalMeasurement) WriteAttributeAverageRmsVoltageMeasurementPeriodWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcem)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("writeAttributeAverageRmsVoltageMeasurementPeriodWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeAverageRmsVoltageMeasurementPeriodWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeAverageRmsVoltageMeasurementPeriodWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -3184,7 +3220,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsVo
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAverageRmsVoltageMeasurementPeriodWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAverageRmsVoltageMeasurementPeriodWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3220,6 +3256,21 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsUnderVo
 	}
 }
 
+// WriteAttributeAverageRmsUnderVoltageCounterWithValueCompletion writes attribute average rms under voltage counter with value completion.
+func (mbcem *MTRBaseClusterElectricalMeasurement) WriteAttributeAverageRmsUnderVoltageCounterWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcem)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("writeAttributeAverageRmsUnderVoltageCounterWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeAverageRmsUnderVoltageCounterWithValueParamsCompletion writes attribute average rms under voltage counter with value params completion.
+func (mbcem *MTRBaseClusterElectricalMeasurement) WriteAttributeAverageRmsUnderVoltageCounterWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcem)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("writeAttributeAverageRmsUnderVoltageCounterWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeAverageRmsUnderVoltageCounterWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeAverageRmsUnderVoltageCounterWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -3237,7 +3288,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsUn
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAverageRmsUnderVoltageCounterWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAverageRmsUnderVoltageCounterWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3273,6 +3324,21 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeOverVol
 	}
 }
 
+// WriteAttributeRmsExtremeOverVoltagePeriodWithValueCompletion writes attribute rms extreme over voltage period with value completion.
+func (mbcem *MTRBaseClusterElectricalMeasurement) WriteAttributeRmsExtremeOverVoltagePeriodWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcem)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("writeAttributeRmsExtremeOverVoltagePeriodWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeRmsExtremeOverVoltagePeriodWithValueParamsCompletion writes attribute rms extreme over voltage period with value params completion.
+func (mbcem *MTRBaseClusterElectricalMeasurement) WriteAttributeRmsExtremeOverVoltagePeriodWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcem)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("writeAttributeRmsExtremeOverVoltagePeriodWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeRmsExtremeOverVoltagePeriodWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRmsExtremeOverVoltagePeriodWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -3290,7 +3356,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeOv
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsExtremeOverVoltagePeriodWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsExtremeOverVoltagePeriodWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3326,6 +3392,21 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeUnderVo
 	}
 }
 
+// WriteAttributeRmsExtremeUnderVoltagePeriodWithValueCompletion writes attribute rms extreme under voltage period with value completion.
+func (mbcem *MTRBaseClusterElectricalMeasurement) WriteAttributeRmsExtremeUnderVoltagePeriodWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcem)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("writeAttributeRmsExtremeUnderVoltagePeriodWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeRmsExtremeUnderVoltagePeriodWithValueParamsCompletion writes attribute rms extreme under voltage period with value params completion.
+func (mbcem *MTRBaseClusterElectricalMeasurement) WriteAttributeRmsExtremeUnderVoltagePeriodWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcem)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("writeAttributeRmsExtremeUnderVoltagePeriodWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeRmsExtremeUnderVoltagePeriodWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRmsExtremeUnderVoltagePeriodWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -3343,7 +3424,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeUn
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsExtremeUnderVoltagePeriodWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsExtremeUnderVoltagePeriodWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3379,6 +3460,21 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSagPeri
 	}
 }
 
+// WriteAttributeRmsVoltageSagPeriodWithValueCompletion writes attribute rms voltage sag period with value completion.
+func (mbcem *MTRBaseClusterElectricalMeasurement) WriteAttributeRmsVoltageSagPeriodWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcem)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("writeAttributeRmsVoltageSagPeriodWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeRmsVoltageSagPeriodWithValueParamsCompletion writes attribute rms voltage sag period with value params completion.
+func (mbcem *MTRBaseClusterElectricalMeasurement) WriteAttributeRmsVoltageSagPeriodWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcem)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("writeAttributeRmsVoltageSagPeriodWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeRmsVoltageSagPeriodWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRmsVoltageSagPeriodWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -3396,7 +3492,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageSagPeriodWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageSagPeriodWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3432,6 +3528,21 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSwellPe
 	}
 }
 
+// WriteAttributeRmsVoltageSwellPeriodWithValueCompletion writes attribute rms voltage swell period with value completion.
+func (mbcem *MTRBaseClusterElectricalMeasurement) WriteAttributeRmsVoltageSwellPeriodWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcem)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("writeAttributeRmsVoltageSwellPeriodWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeRmsVoltageSwellPeriodWithValueParamsCompletion writes attribute rms voltage swell period with value params completion.
+func (mbcem *MTRBaseClusterElectricalMeasurement) WriteAttributeRmsVoltageSwellPeriodWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcem)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("writeAttributeRmsVoltageSwellPeriodWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeRmsVoltageSwellPeriodWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRmsVoltageSwellPeriodWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -3449,7 +3560,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSw
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageSwellPeriodWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageSwellPeriodWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3502,7 +3613,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcVoltageMul
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcVoltageMultiplierWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcVoltageMultiplierWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3555,7 +3666,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcVoltageDiv
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcVoltageDivisorWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcVoltageDivisorWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3608,7 +3719,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcCurrentMul
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcCurrentMultiplierWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcCurrentMultiplierWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3661,7 +3772,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcCurrentDiv
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcCurrentDivisorWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcCurrentDivisorWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3714,7 +3825,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcPowerMulti
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcPowerMultiplierWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcPowerMultiplierWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3767,7 +3878,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcPowerDivis
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcPowerDivisorWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcPowerDivisorWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3803,6 +3914,21 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeOverloadAlarmsMas
 	}
 }
 
+// WriteAttributeOverloadAlarmsMaskWithValueCompletion writes attribute overload alarms mask with value completion.
+func (mbcem *MTRBaseClusterElectricalMeasurement) WriteAttributeOverloadAlarmsMaskWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcem)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("writeAttributeOverloadAlarmsMaskWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeOverloadAlarmsMaskWithValueParamsCompletion writes attribute overload alarms mask with value params completion.
+func (mbcem *MTRBaseClusterElectricalMeasurement) WriteAttributeOverloadAlarmsMaskWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcem)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("writeAttributeOverloadAlarmsMaskWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeOverloadAlarmsMaskWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeOverloadAlarmsMaskWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -3820,7 +3946,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeOverloadAlar
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeOverloadAlarmsMaskWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeOverloadAlarmsMaskWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3873,7 +3999,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeVoltageOverl
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeVoltageOverloadWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeVoltageOverloadWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3926,7 +4052,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeCurrentOverl
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeCurrentOverloadWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeCurrentOverloadWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3962,6 +4088,21 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAcOverloadAlarmsM
 	}
 }
 
+// WriteAttributeAcOverloadAlarmsMaskWithValueCompletion writes attribute ac overload alarms mask with value completion.
+func (mbcem *MTRBaseClusterElectricalMeasurement) WriteAttributeAcOverloadAlarmsMaskWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcem)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("writeAttributeAcOverloadAlarmsMaskWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeAcOverloadAlarmsMaskWithValueParamsCompletion writes attribute ac overload alarms mask with value params completion.
+func (mbcem *MTRBaseClusterElectricalMeasurement) WriteAttributeAcOverloadAlarmsMaskWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcem)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("writeAttributeAcOverloadAlarmsMaskWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeAcOverloadAlarmsMaskWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeAcOverloadAlarmsMaskWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -3979,7 +4120,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcOverloadAl
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcOverloadAlarmsMaskWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcOverloadAlarmsMaskWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4032,7 +4173,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcVoltageOve
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcVoltageOverloadWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcVoltageOverloadWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4085,7 +4226,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcCurrentOve
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcCurrentOverloadWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcCurrentOverloadWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4138,7 +4279,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcActivePowe
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcActivePowerOverloadWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcActivePowerOverloadWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4191,7 +4332,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcReactivePo
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcReactivePowerOverloadWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcReactivePowerOverloadWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4244,7 +4385,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsOv
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAverageRmsOverVoltageWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAverageRmsOverVoltageWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4297,7 +4438,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsUn
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAverageRmsUnderVoltageWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAverageRmsUnderVoltageWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4350,7 +4491,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeOv
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsExtremeOverVoltageWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsExtremeOverVoltageWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4403,7 +4544,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeUn
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsExtremeUnderVoltageWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsExtremeUnderVoltageWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4456,7 +4597,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageSagWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageSagWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4509,7 +4650,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSw
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageSwellWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageSwellWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4562,7 +4703,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeLineCurrentP
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeLineCurrentPhaseBWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeLineCurrentPhaseBWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4615,7 +4756,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActiveCurren
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeActiveCurrentPhaseBWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeActiveCurrentPhaseBWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4668,7 +4809,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeReactiveCurr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeReactiveCurrentPhaseBWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeReactiveCurrentPhaseBWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4721,7 +4862,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltagePh
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltagePhaseBWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltagePhaseBWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4774,7 +4915,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageMinPhaseBWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageMinPhaseBWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4827,7 +4968,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageMaxPhaseBWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageMaxPhaseBWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4880,7 +5021,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentPh
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsCurrentPhaseBWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsCurrentPhaseBWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4933,7 +5074,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsCurrentMinPhaseBWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsCurrentMinPhaseBWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4986,7 +5127,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsCurrentMaxPhaseBWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsCurrentMaxPhaseBWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5039,7 +5180,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerP
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeActivePowerPhaseBWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeActivePowerPhaseBWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5092,7 +5233,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeActivePowerMinPhaseBWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeActivePowerMinPhaseBWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5145,7 +5286,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeActivePowerMaxPhaseBWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeActivePowerMaxPhaseBWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5198,7 +5339,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeReactivePowe
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeReactivePowerPhaseBWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeReactivePowerPhaseBWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5251,7 +5392,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeApparentPowe
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeApparentPowerPhaseBWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeApparentPowerPhaseBWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5304,7 +5445,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributePowerFactorP
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributePowerFactorPhaseBWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributePowerFactorPhaseBWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5357,7 +5498,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsVo
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAverageRmsVoltageMeasurementPeriodPhaseBWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAverageRmsVoltageMeasurementPeriodPhaseBWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5410,7 +5551,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsOv
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAverageRmsOverVoltageCounterPhaseBWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAverageRmsOverVoltageCounterPhaseBWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5463,7 +5604,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsUn
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAverageRmsUnderVoltageCounterPhaseBWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAverageRmsUnderVoltageCounterPhaseBWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5516,7 +5657,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeOv
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsExtremeOverVoltagePeriodPhaseBWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsExtremeOverVoltagePeriodPhaseBWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5569,7 +5710,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeUn
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsExtremeUnderVoltagePeriodPhaseBWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsExtremeUnderVoltagePeriodPhaseBWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5622,7 +5763,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageSagPeriodPhaseBWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageSagPeriodPhaseBWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5675,7 +5816,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSw
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageSwellPeriodPhaseBWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageSwellPeriodPhaseBWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5728,7 +5869,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeLineCurrentP
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeLineCurrentPhaseCWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeLineCurrentPhaseCWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5781,7 +5922,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActiveCurren
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeActiveCurrentPhaseCWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeActiveCurrentPhaseCWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5834,7 +5975,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeReactiveCurr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeReactiveCurrentPhaseCWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeReactiveCurrentPhaseCWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5887,7 +6028,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltagePh
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltagePhaseCWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltagePhaseCWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5940,7 +6081,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageMinPhaseCWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageMinPhaseCWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5993,7 +6134,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageMaxPhaseCWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageMaxPhaseCWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6046,7 +6187,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentPh
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsCurrentPhaseCWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsCurrentPhaseCWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6099,7 +6240,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsCurrentMinPhaseCWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsCurrentMinPhaseCWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6152,7 +6293,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsCurrentMaxPhaseCWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsCurrentMaxPhaseCWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6205,7 +6346,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerP
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeActivePowerPhaseCWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeActivePowerPhaseCWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6258,7 +6399,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeActivePowerMinPhaseCWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeActivePowerMinPhaseCWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6311,7 +6452,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeActivePowerMaxPhaseCWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeActivePowerMaxPhaseCWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6364,7 +6505,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeReactivePowe
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeReactivePowerPhaseCWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeReactivePowerPhaseCWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6417,7 +6558,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeApparentPowe
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeApparentPowerPhaseCWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeApparentPowerPhaseCWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6470,7 +6611,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributePowerFactorP
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributePowerFactorPhaseCWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributePowerFactorPhaseCWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6523,7 +6664,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsVo
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAverageRmsVoltageMeasurementPeriodPhaseCWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAverageRmsVoltageMeasurementPeriodPhaseCWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6576,7 +6717,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsOv
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAverageRmsOverVoltageCounterPhaseCWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAverageRmsOverVoltageCounterPhaseCWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6629,7 +6770,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsUn
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAverageRmsUnderVoltageCounterPhaseCWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAverageRmsUnderVoltageCounterPhaseCWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6682,7 +6823,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeOv
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsExtremeOverVoltagePeriodPhaseCWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsExtremeOverVoltagePeriodPhaseCWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6735,7 +6876,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeUn
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsExtremeUnderVoltagePeriodPhaseCWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsExtremeUnderVoltagePeriodPhaseCWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6788,7 +6929,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageSagPeriodPhaseCWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageSagPeriodPhaseCWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6841,7 +6982,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSw
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageSwellPeriodPhaseCWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageSwellPeriodPhaseCWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6894,7 +7035,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeGeneratedCom
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6947,7 +7088,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcceptedComm
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -7000,7 +7141,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAttributeLis
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -7053,7 +7194,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeFeatureMapWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -7106,7 +7247,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeClusterRevis
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -7114,6 +7255,26 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeClusterRevis
 		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
+}
+
+// GetProfileInfoCommandWithParamsCompletionHandler wraps the corresponding Objective-C method.
+func (mbcem *MTRBaseClusterElectricalMeasurement) GetProfileInfoCommandWithParamsCompletionHandler(params *MTRElectricalMeasurementClusterGetProfileInfoCommandParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcem)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("getProfileInfoCommandWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// GetProfileInfoCommandWithCompletionHandler wraps the corresponding Objective-C method.
+func (mbcem *MTRBaseClusterElectricalMeasurement) GetProfileInfoCommandWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcem)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("getProfileInfoCommandWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// GetMeasurementProfileCommandWithParamsCompletionHandler wraps the corresponding Objective-C method.
+func (mbcem *MTRBaseClusterElectricalMeasurement) GetMeasurementProfileCommandWithParamsCompletionHandler(params *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcem)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("getMeasurementProfileCommandWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
 }
 
 // ReadAttributeMeasurementType reads attribute measurement type.
@@ -7161,7 +7322,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasurementT
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeMeasurementTypeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeMeasurementTypeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -7216,7 +7377,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcVoltageWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcVoltageWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcVoltageWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -7271,7 +7432,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcVoltageMin
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcVoltageMinWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcVoltageMinWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -7326,7 +7487,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcVoltageMax
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcVoltageMaxWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcVoltageMaxWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -7381,7 +7542,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcCurrentWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcCurrentWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcCurrentWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -7436,7 +7597,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcCurrentMin
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcCurrentMinWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcCurrentMinWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -7491,7 +7652,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcCurrentMax
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcCurrentMaxWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcCurrentMaxWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -7546,7 +7707,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcPowerWithM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcPowerWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcPowerWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -7601,7 +7762,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcPowerMinWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcPowerMinWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcPowerMinWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -7656,7 +7817,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcPowerMaxWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcPowerMaxWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcPowerMaxWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -7711,7 +7872,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcVoltageMul
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcVoltageMultiplierWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcVoltageMultiplierWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -7766,7 +7927,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcVoltageDiv
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcVoltageDivisorWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcVoltageDivisorWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -7821,7 +7982,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcCurrentMul
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcCurrentMultiplierWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcCurrentMultiplierWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -7876,7 +8037,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcCurrentDiv
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcCurrentDivisorWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcCurrentDivisorWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -7931,7 +8092,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcPowerMulti
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcPowerMultiplierWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcPowerMultiplierWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -7986,7 +8147,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcPowerDivis
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcPowerDivisorWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeDcPowerDivisorWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -8041,7 +8202,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcFrequencyW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcFrequencyWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcFrequencyWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -8096,7 +8257,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcFrequencyM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcFrequencyMinWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcFrequencyMinWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -8151,7 +8312,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcFrequencyM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcFrequencyMaxWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcFrequencyMaxWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -8206,7 +8367,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeNeutralCurre
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeNeutralCurrentWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeNeutralCurrentWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -8261,7 +8422,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeTotalActiveP
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeTotalActivePowerWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeTotalActivePowerWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -8316,7 +8477,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeTotalReactiv
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeTotalReactivePowerWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeTotalReactivePowerWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -8371,7 +8532,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeTotalApparen
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeTotalApparentPowerWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeTotalApparentPowerWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -8426,7 +8587,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured1stH
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeMeasured1stHarmonicCurrentWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeMeasured1stHarmonicCurrentWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -8481,7 +8642,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured3rdH
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeMeasured3rdHarmonicCurrentWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeMeasured3rdHarmonicCurrentWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -8536,7 +8697,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured5thH
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeMeasured5thHarmonicCurrentWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeMeasured5thHarmonicCurrentWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -8591,7 +8752,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured7thH
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeMeasured7thHarmonicCurrentWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeMeasured7thHarmonicCurrentWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -8646,7 +8807,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured9thH
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeMeasured9thHarmonicCurrentWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeMeasured9thHarmonicCurrentWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -8701,7 +8862,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured11th
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeMeasured11thHarmonicCurrentWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeMeasured11thHarmonicCurrentWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -8756,7 +8917,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhas
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeMeasuredPhase1stHarmonicCurrentWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeMeasuredPhase1stHarmonicCurrentWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -8811,7 +8972,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhas
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeMeasuredPhase3rdHarmonicCurrentWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeMeasuredPhase3rdHarmonicCurrentWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -8866,7 +9027,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhas
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeMeasuredPhase5thHarmonicCurrentWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeMeasuredPhase5thHarmonicCurrentWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -8921,7 +9082,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhas
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeMeasuredPhase7thHarmonicCurrentWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeMeasuredPhase7thHarmonicCurrentWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -8976,7 +9137,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhas
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeMeasuredPhase9thHarmonicCurrentWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeMeasuredPhase9thHarmonicCurrentWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -9031,7 +9192,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhas
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeMeasuredPhase11thHarmonicCurrentWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeMeasuredPhase11thHarmonicCurrentWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -9086,7 +9247,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcFrequencyM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcFrequencyMultiplierWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcFrequencyMultiplierWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -9141,7 +9302,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcFrequencyD
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcFrequencyDivisorWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcFrequencyDivisorWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -9196,7 +9357,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributePowerMultipl
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributePowerMultiplierWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributePowerMultiplierWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -9251,7 +9412,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributePowerDivisor
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributePowerDivisorWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributePowerDivisorWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -9306,7 +9467,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeHarmonicCurr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeHarmonicCurrentMultiplierWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeHarmonicCurrentMultiplierWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -9361,7 +9522,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributePhaseHarmoni
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributePhaseHarmonicCurrentMultiplierWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributePhaseHarmonicCurrentMultiplierWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -9416,7 +9577,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeInstantaneou
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeInstantaneousVoltageWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeInstantaneousVoltageWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -9471,7 +9632,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeInstantaneou
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeInstantaneousLineCurrentWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeInstantaneousLineCurrentWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -9526,7 +9687,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeInstantaneou
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeInstantaneousActiveCurrentWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeInstantaneousActiveCurrentWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -9581,7 +9742,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeInstantaneou
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeInstantaneousReactiveCurrentWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeInstantaneousReactiveCurrentWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -9636,7 +9797,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeInstantaneou
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeInstantaneousPowerWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeInstantaneousPowerWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -9691,7 +9852,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -9746,7 +9907,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageMinWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageMinWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -9801,7 +9962,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageMaxWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageMaxWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -9856,7 +10017,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsCurrentWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsCurrentWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -9911,7 +10072,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsCurrentMinWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsCurrentMinWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -9966,7 +10127,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsCurrentMaxWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsCurrentMaxWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -10021,7 +10182,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeActivePowerWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeActivePowerWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -10076,7 +10237,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeActivePowerMinWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeActivePowerMinWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -10131,7 +10292,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeActivePowerMaxWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeActivePowerMaxWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -10186,7 +10347,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeReactivePowe
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeReactivePowerWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeReactivePowerWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -10241,7 +10402,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeApparentPowe
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeApparentPowerWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeApparentPowerWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -10296,7 +10457,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributePowerFactorW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributePowerFactorWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributePowerFactorWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -10332,6 +10493,21 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsVoltage
 	}
 }
 
+// WriteAttributeAverageRmsVoltageMeasurementPeriodWithValueCompletionHandler writes attribute average rms voltage measurement period with value completion handler.
+func (mbcem *MTRBaseClusterElectricalMeasurement) WriteAttributeAverageRmsVoltageMeasurementPeriodWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcem)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("writeAttributeAverageRmsVoltageMeasurementPeriodWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeAverageRmsVoltageMeasurementPeriodWithValueParamsCompletionHandler writes attribute average rms voltage measurement period with value params completion handler.
+func (mbcem *MTRBaseClusterElectricalMeasurement) WriteAttributeAverageRmsVoltageMeasurementPeriodWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcem)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("writeAttributeAverageRmsVoltageMeasurementPeriodWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeAverageRmsVoltageMeasurementPeriodWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeAverageRmsVoltageMeasurementPeriodWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -10351,7 +10527,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsVo
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAverageRmsVoltageMeasurementPeriodWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAverageRmsVoltageMeasurementPeriodWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -10387,6 +10563,21 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsUnderVo
 	}
 }
 
+// WriteAttributeAverageRmsUnderVoltageCounterWithValueCompletionHandler writes attribute average rms under voltage counter with value completion handler.
+func (mbcem *MTRBaseClusterElectricalMeasurement) WriteAttributeAverageRmsUnderVoltageCounterWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcem)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("writeAttributeAverageRmsUnderVoltageCounterWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeAverageRmsUnderVoltageCounterWithValueParamsCompletionHandler writes attribute average rms under voltage counter with value params completion handler.
+func (mbcem *MTRBaseClusterElectricalMeasurement) WriteAttributeAverageRmsUnderVoltageCounterWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcem)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("writeAttributeAverageRmsUnderVoltageCounterWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeAverageRmsUnderVoltageCounterWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeAverageRmsUnderVoltageCounterWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -10406,7 +10597,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsUn
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAverageRmsUnderVoltageCounterWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAverageRmsUnderVoltageCounterWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -10442,6 +10633,21 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeOverVol
 	}
 }
 
+// WriteAttributeRmsExtremeOverVoltagePeriodWithValueCompletionHandler writes attribute rms extreme over voltage period with value completion handler.
+func (mbcem *MTRBaseClusterElectricalMeasurement) WriteAttributeRmsExtremeOverVoltagePeriodWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcem)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("writeAttributeRmsExtremeOverVoltagePeriodWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeRmsExtremeOverVoltagePeriodWithValueParamsCompletionHandler writes attribute rms extreme over voltage period with value params completion handler.
+func (mbcem *MTRBaseClusterElectricalMeasurement) WriteAttributeRmsExtremeOverVoltagePeriodWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcem)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("writeAttributeRmsExtremeOverVoltagePeriodWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeRmsExtremeOverVoltagePeriodWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRmsExtremeOverVoltagePeriodWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -10461,7 +10667,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeOv
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsExtremeOverVoltagePeriodWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsExtremeOverVoltagePeriodWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -10497,6 +10703,21 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeUnderVo
 	}
 }
 
+// WriteAttributeRmsExtremeUnderVoltagePeriodWithValueCompletionHandler writes attribute rms extreme under voltage period with value completion handler.
+func (mbcem *MTRBaseClusterElectricalMeasurement) WriteAttributeRmsExtremeUnderVoltagePeriodWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcem)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("writeAttributeRmsExtremeUnderVoltagePeriodWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeRmsExtremeUnderVoltagePeriodWithValueParamsCompletionHandler writes attribute rms extreme under voltage period with value params completion handler.
+func (mbcem *MTRBaseClusterElectricalMeasurement) WriteAttributeRmsExtremeUnderVoltagePeriodWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcem)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("writeAttributeRmsExtremeUnderVoltagePeriodWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeRmsExtremeUnderVoltagePeriodWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRmsExtremeUnderVoltagePeriodWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -10516,7 +10737,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeUn
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsExtremeUnderVoltagePeriodWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsExtremeUnderVoltagePeriodWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -10552,6 +10773,21 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSagPeri
 	}
 }
 
+// WriteAttributeRmsVoltageSagPeriodWithValueCompletionHandler writes attribute rms voltage sag period with value completion handler.
+func (mbcem *MTRBaseClusterElectricalMeasurement) WriteAttributeRmsVoltageSagPeriodWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcem)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("writeAttributeRmsVoltageSagPeriodWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeRmsVoltageSagPeriodWithValueParamsCompletionHandler writes attribute rms voltage sag period with value params completion handler.
+func (mbcem *MTRBaseClusterElectricalMeasurement) WriteAttributeRmsVoltageSagPeriodWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcem)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("writeAttributeRmsVoltageSagPeriodWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeRmsVoltageSagPeriodWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRmsVoltageSagPeriodWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -10571,7 +10807,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageSagPeriodWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageSagPeriodWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -10607,6 +10843,21 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSwellPe
 	}
 }
 
+// WriteAttributeRmsVoltageSwellPeriodWithValueCompletionHandler writes attribute rms voltage swell period with value completion handler.
+func (mbcem *MTRBaseClusterElectricalMeasurement) WriteAttributeRmsVoltageSwellPeriodWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcem)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("writeAttributeRmsVoltageSwellPeriodWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeRmsVoltageSwellPeriodWithValueParamsCompletionHandler writes attribute rms voltage swell period with value params completion handler.
+func (mbcem *MTRBaseClusterElectricalMeasurement) WriteAttributeRmsVoltageSwellPeriodWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcem)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("writeAttributeRmsVoltageSwellPeriodWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeRmsVoltageSwellPeriodWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRmsVoltageSwellPeriodWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -10626,7 +10877,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSw
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageSwellPeriodWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageSwellPeriodWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -10681,7 +10932,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcVoltageMul
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcVoltageMultiplierWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcVoltageMultiplierWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -10736,7 +10987,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcVoltageDiv
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcVoltageDivisorWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcVoltageDivisorWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -10791,7 +11042,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcCurrentMul
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcCurrentMultiplierWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcCurrentMultiplierWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -10846,7 +11097,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcCurrentDiv
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcCurrentDivisorWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcCurrentDivisorWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -10901,7 +11152,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcPowerMulti
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcPowerMultiplierWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcPowerMultiplierWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -10956,7 +11207,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcPowerDivis
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcPowerDivisorWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcPowerDivisorWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -10992,6 +11243,21 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeOverloadAlarmsMas
 	}
 }
 
+// WriteAttributeOverloadAlarmsMaskWithValueCompletionHandler writes attribute overload alarms mask with value completion handler.
+func (mbcem *MTRBaseClusterElectricalMeasurement) WriteAttributeOverloadAlarmsMaskWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcem)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("writeAttributeOverloadAlarmsMaskWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeOverloadAlarmsMaskWithValueParamsCompletionHandler writes attribute overload alarms mask with value params completion handler.
+func (mbcem *MTRBaseClusterElectricalMeasurement) WriteAttributeOverloadAlarmsMaskWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcem)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("writeAttributeOverloadAlarmsMaskWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeOverloadAlarmsMaskWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeOverloadAlarmsMaskWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -11011,7 +11277,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeOverloadAlar
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeOverloadAlarmsMaskWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeOverloadAlarmsMaskWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -11066,7 +11332,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeVoltageOverl
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeVoltageOverloadWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeVoltageOverloadWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -11121,7 +11387,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeCurrentOverl
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeCurrentOverloadWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeCurrentOverloadWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -11157,6 +11423,21 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAcOverloadAlarmsM
 	}
 }
 
+// WriteAttributeAcOverloadAlarmsMaskWithValueCompletionHandler writes attribute ac overload alarms mask with value completion handler.
+func (mbcem *MTRBaseClusterElectricalMeasurement) WriteAttributeAcOverloadAlarmsMaskWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcem)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("writeAttributeAcOverloadAlarmsMaskWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeAcOverloadAlarmsMaskWithValueParamsCompletionHandler writes attribute ac overload alarms mask with value params completion handler.
+func (mbcem *MTRBaseClusterElectricalMeasurement) WriteAttributeAcOverloadAlarmsMaskWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcem)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("writeAttributeAcOverloadAlarmsMaskWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeAcOverloadAlarmsMaskWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeAcOverloadAlarmsMaskWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -11176,7 +11457,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcOverloadAl
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcOverloadAlarmsMaskWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcOverloadAlarmsMaskWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -11231,7 +11512,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcVoltageOve
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcVoltageOverloadWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcVoltageOverloadWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -11286,7 +11567,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcCurrentOve
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcCurrentOverloadWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcCurrentOverloadWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -11341,7 +11622,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcActivePowe
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcActivePowerOverloadWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcActivePowerOverloadWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -11396,7 +11677,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcReactivePo
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcReactivePowerOverloadWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcReactivePowerOverloadWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -11451,7 +11732,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsOv
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAverageRmsOverVoltageWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAverageRmsOverVoltageWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -11506,7 +11787,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsUn
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAverageRmsUnderVoltageWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAverageRmsUnderVoltageWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -11561,7 +11842,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeOv
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsExtremeOverVoltageWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsExtremeOverVoltageWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -11616,7 +11897,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeUn
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsExtremeUnderVoltageWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsExtremeUnderVoltageWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -11671,7 +11952,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageSagWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageSagWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -11726,7 +12007,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSw
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageSwellWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageSwellWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -11781,7 +12062,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeLineCurrentP
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeLineCurrentPhaseBWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeLineCurrentPhaseBWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -11836,7 +12117,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActiveCurren
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeActiveCurrentPhaseBWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeActiveCurrentPhaseBWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -11891,7 +12172,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeReactiveCurr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeReactiveCurrentPhaseBWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeReactiveCurrentPhaseBWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -11946,7 +12227,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltagePh
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltagePhaseBWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltagePhaseBWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -12001,7 +12282,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageMinPhaseBWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageMinPhaseBWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -12056,7 +12337,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageMaxPhaseBWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageMaxPhaseBWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -12111,7 +12392,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentPh
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsCurrentPhaseBWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsCurrentPhaseBWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -12166,7 +12447,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsCurrentMinPhaseBWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsCurrentMinPhaseBWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -12221,7 +12502,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsCurrentMaxPhaseBWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsCurrentMaxPhaseBWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -12276,7 +12557,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerP
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeActivePowerPhaseBWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeActivePowerPhaseBWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -12331,7 +12612,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeActivePowerMinPhaseBWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeActivePowerMinPhaseBWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -12386,7 +12667,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeActivePowerMaxPhaseBWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeActivePowerMaxPhaseBWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -12441,7 +12722,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeReactivePowe
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeReactivePowerPhaseBWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeReactivePowerPhaseBWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -12496,7 +12777,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeApparentPowe
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeApparentPowerPhaseBWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeApparentPowerPhaseBWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -12551,7 +12832,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributePowerFactorP
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributePowerFactorPhaseBWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributePowerFactorPhaseBWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -12606,7 +12887,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsVo
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAverageRmsVoltageMeasurementPeriodPhaseBWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAverageRmsVoltageMeasurementPeriodPhaseBWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -12661,7 +12942,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsOv
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAverageRmsOverVoltageCounterPhaseBWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAverageRmsOverVoltageCounterPhaseBWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -12716,7 +12997,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsUn
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAverageRmsUnderVoltageCounterPhaseBWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAverageRmsUnderVoltageCounterPhaseBWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -12771,7 +13052,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeOv
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsExtremeOverVoltagePeriodPhaseBWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsExtremeOverVoltagePeriodPhaseBWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -12826,7 +13107,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeUn
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsExtremeUnderVoltagePeriodPhaseBWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsExtremeUnderVoltagePeriodPhaseBWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -12881,7 +13162,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageSagPeriodPhaseBWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageSagPeriodPhaseBWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -12936,7 +13217,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSw
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageSwellPeriodPhaseBWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageSwellPeriodPhaseBWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -12991,7 +13272,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeLineCurrentP
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeLineCurrentPhaseCWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeLineCurrentPhaseCWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -13046,7 +13327,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActiveCurren
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeActiveCurrentPhaseCWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeActiveCurrentPhaseCWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -13101,7 +13382,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeReactiveCurr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeReactiveCurrentPhaseCWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeReactiveCurrentPhaseCWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -13156,7 +13437,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltagePh
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltagePhaseCWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltagePhaseCWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -13211,7 +13492,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageMinPhaseCWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageMinPhaseCWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -13266,7 +13547,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageMaxPhaseCWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageMaxPhaseCWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -13321,7 +13602,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentPh
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsCurrentPhaseCWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsCurrentPhaseCWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -13376,7 +13657,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsCurrentMinPhaseCWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsCurrentMinPhaseCWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -13431,7 +13712,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsCurrentMaxPhaseCWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsCurrentMaxPhaseCWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -13486,7 +13767,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerP
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeActivePowerPhaseCWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeActivePowerPhaseCWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -13541,7 +13822,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeActivePowerMinPhaseCWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeActivePowerMinPhaseCWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -13596,7 +13877,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeActivePowerMaxPhaseCWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeActivePowerMaxPhaseCWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -13651,7 +13932,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeReactivePowe
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeReactivePowerPhaseCWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeReactivePowerPhaseCWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -13706,7 +13987,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeApparentPowe
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeApparentPowerPhaseCWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeApparentPowerPhaseCWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -13761,7 +14042,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributePowerFactorP
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributePowerFactorPhaseCWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributePowerFactorPhaseCWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -13816,7 +14097,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsVo
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAverageRmsVoltageMeasurementPeriodPhaseCWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAverageRmsVoltageMeasurementPeriodPhaseCWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -13871,7 +14152,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsOv
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAverageRmsOverVoltageCounterPhaseCWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAverageRmsOverVoltageCounterPhaseCWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -13926,7 +14207,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsUn
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAverageRmsUnderVoltageCounterPhaseCWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAverageRmsUnderVoltageCounterPhaseCWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -13981,7 +14262,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeOv
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsExtremeOverVoltagePeriodPhaseCWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsExtremeOverVoltagePeriodPhaseCWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -14036,7 +14317,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeUn
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsExtremeUnderVoltagePeriodPhaseCWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsExtremeUnderVoltagePeriodPhaseCWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -14091,7 +14372,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageSagPeriodPhaseCWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageSagPeriodPhaseCWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -14146,7 +14427,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSw
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageSwellPeriodPhaseCWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeRmsVoltageSwellPeriodPhaseCWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -14201,7 +14482,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeGeneratedCom
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeGeneratedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeGeneratedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -14256,7 +14537,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcceptedComm
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcceptedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAcceptedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -14311,7 +14592,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAttributeLis
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAttributeListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeAttributeListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -14366,7 +14647,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeFeatureMapWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeFeatureMapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeFeatureMapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -14421,7 +14702,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeClusterRevis
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeClusterRevisionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcem), objc.RegisterName("subscribeAttributeClusterRevisionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err

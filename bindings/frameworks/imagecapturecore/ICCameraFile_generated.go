@@ -8,7 +8,9 @@ import (
 	"context"
 	"runtime"
 	"time"
+	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -89,6 +91,21 @@ func (cf *CameraFile) RequestThumbnailDataWithOptionsCompletion(ctx context.Cont
 		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
+}
+
+// RequestMetadataDictionaryWithOptionsCompletion requests metadata and executes the completion block in place of the delegate.
+func (cf *CameraFile) RequestMetadataDictionaryWithOptionsCompletion(options obj.Object, completion func(obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(cf)
+	defer runtime.KeepAlive(options)
+	objc.Send[objc.ID](objref.IDOf(cf), objc.RegisterName("requestMetadataDictionaryWithOptions:completion:"), objref.IDOf(options), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completion(obj.Wrap(_b0), _b1) }))
+}
+
+// RequestDownloadWithOptionsCompletion requests a download and executes the completion block in place of the delegate.
+func (cf *CameraFile) RequestDownloadWithOptionsCompletion(options obj.Object, completion func(obj.Object, unsafe.Pointer)) *foundation.Progress {
+	defer runtime.KeepAlive(cf)
+	defer runtime.KeepAlive(options)
+	_r := objc.Send[objc.ID](objref.IDOf(cf), objc.RegisterName("requestDownloadWithOptions:completion:"), objref.IDOf(options), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completion(obj.Wrap(_b0), _b1) }))
+	return foundation.ProgressFromID(_r)
 }
 
 // RequestReadDataAtOffsetLengthCompletion requests to asynchronously read data of a specified length from a specified offset, then executes the completion block.

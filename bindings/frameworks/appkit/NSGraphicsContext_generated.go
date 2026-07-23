@@ -6,6 +6,7 @@ package appkit
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -210,4 +211,11 @@ func (gc *GraphicsContext) SetFocusStack(stack obj.Object) {
 	defer runtime.KeepAlive(gc)
 	defer runtime.KeepAlive(stack)
 	objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("setFocusStack:"), objref.IDOf(stack))
+}
+
+// GraphicsPort returns the graphics port.
+func (gc *GraphicsContext) GraphicsPort() unsafe.Pointer {
+	defer runtime.KeepAlive(gc)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(gc), objc.RegisterName("graphicsPort"))
+	return _r
 }

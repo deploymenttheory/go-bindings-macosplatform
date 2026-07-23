@@ -5,7 +5,11 @@
 package healthkit
 
 import (
+	"runtime"
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -45,9 +49,24 @@ func workoutRouteQueryAdopt(id objc.ID) *WorkoutRouteQuery {
 	return x
 }
 
-// NewWorkoutRouteQuery creates a new WorkoutRouteQuery.
-func NewWorkoutRouteQuery() *WorkoutRouteQuery {
-	_id := objc.Send[objc.ID](objc.ID(_class("HKWorkoutRouteQuery")), objc.RegisterName("new"))
+// NewWorkoutRouteQueryWithRouteDataHandler creates a new query to access the location data associated with a workout route.
+func NewWorkoutRouteQueryWithRouteDataHandler(workoutRoute *WorkoutRoute, dataHandler func(obj.Object, obj.Object, bool, unsafe.Pointer)) *WorkoutRouteQuery {
+	defer runtime.KeepAlive(workoutRoute)
+	_alloc := objc.Send[objc.ID](objc.ID(_class("HKWorkoutRouteQuery")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRoute:dataHandler:"), objref.IDOf(workoutRoute), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 bool, _b3 unsafe.Pointer) {
+		dataHandler(obj.Wrap(_b0), obj.Wrap(_b1), _b2, _b3)
+	}))
+	return workoutRouteQueryAdopt(_id)
+}
+
+// NewWorkoutRouteQueryWithRouteDateIntervalDataHandler creates a new query to access the location data associated with a workout route during the specified date interval.
+func NewWorkoutRouteQueryWithRouteDateIntervalDataHandler(workoutRoute *WorkoutRoute, dateInterval obj.Object, dataHandler func(obj.Object, obj.Object, bool, unsafe.Pointer)) *WorkoutRouteQuery {
+	defer runtime.KeepAlive(workoutRoute)
+	defer runtime.KeepAlive(dateInterval)
+	_alloc := objc.Send[objc.ID](objc.ID(_class("HKWorkoutRouteQuery")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRoute:dateInterval:dataHandler:"), objref.IDOf(workoutRoute), objref.IDOf(dateInterval), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 bool, _b3 unsafe.Pointer) {
+		dataHandler(obj.Wrap(_b0), obj.Wrap(_b1), _b2, _b3)
+	}))
 	return workoutRouteQueryAdopt(_id)
 }
 

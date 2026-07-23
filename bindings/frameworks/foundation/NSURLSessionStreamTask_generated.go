@@ -119,6 +119,12 @@ func (usst *URLSessionStreamTask) WithScriptingProperties(scriptingProperties ma
 	return usst
 }
 
+// ReadDataOfMinLengthMaxLengthTimeoutCompletionHandler reads data of min length max length timeout completion handler.
+func (usst *URLSessionStreamTask) ReadDataOfMinLengthMaxLengthTimeoutCompletionHandler(minBytes int, maxBytes int, timeout float64, completionHandler func(unsafe.Pointer, bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(usst)
+	objc.Send[objc.ID](objref.IDOf(usst), objc.RegisterName("readDataOfMinLength:maxLength:timeout:completionHandler:"), minBytes, maxBytes, timeout, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 bool, _b2 unsafe.Pointer) { completionHandler(_b0, _b1, _b2) }))
+}
+
 // WriteDataTimeout writes data timeout.
 //
 // WriteDataTimeout blocks until the operation completes or ctx is cancelled.

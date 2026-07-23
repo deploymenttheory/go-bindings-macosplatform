@@ -201,15 +201,15 @@ func NwBrowseResultCopyTxtRecordObject(result obj.Object) unsafe.Pointer {
 	return _fnNwBrowseResultCopyTxtRecordObject(objref.IDOf(result))
 }
 
-var _fnNwBrowseResultEnumerateInterfaces func(objc.ID, unsafe.Pointer)
+var _fnNwBrowseResultEnumerateInterfaces func(objc.ID, objc.Block)
 
 // NwBrowseResultEnumerateInterfaces calls the Network framework function nw_browse_result_enumerate_interfaces.
-func NwBrowseResultEnumerateInterfaces(result obj.Object, enumerator unsafe.Pointer) {
+func NwBrowseResultEnumerateInterfaces(result obj.Object, enumerator func(obj.Object) bool) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNwBrowseResultEnumerateInterfaces == nil {
 		ebipurego.RegisterLibFunc(&_fnNwBrowseResultEnumerateInterfaces, _lib, "nw_browse_result_enumerate_interfaces")
 	}
-	_fnNwBrowseResultEnumerateInterfaces(objref.IDOf(result), enumerator)
+	_fnNwBrowseResultEnumerateInterfaces(objref.IDOf(result), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) bool { return enumerator(obj.Wrap(_b0)) }))
 }
 
 var _fnNwBrowseResultGetChanges func(objc.ID, objc.ID) uint64
@@ -278,15 +278,15 @@ func NwBrowserCreate(descriptor obj.Object, parameters obj.Object) unsafe.Pointe
 	return _fnNwBrowserCreate(objref.IDOf(descriptor), objref.IDOf(parameters))
 }
 
-var _fnNwBrowserSetBrowseResultsChangedHandler func(objc.ID, unsafe.Pointer)
+var _fnNwBrowserSetBrowseResultsChangedHandler func(objc.ID, objc.Block)
 
 // NwBrowserSetBrowseResultsChangedHandler calls the Network framework function nw_browser_set_browse_results_changed_handler.
-func NwBrowserSetBrowseResultsChangedHandler(browser obj.Object, handler unsafe.Pointer) {
+func NwBrowserSetBrowseResultsChangedHandler(browser obj.Object, handler func(obj.Object, obj.Object, bool)) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNwBrowserSetBrowseResultsChangedHandler == nil {
 		ebipurego.RegisterLibFunc(&_fnNwBrowserSetBrowseResultsChangedHandler, _lib, "nw_browser_set_browse_results_changed_handler")
 	}
-	_fnNwBrowserSetBrowseResultsChangedHandler(objref.IDOf(browser), handler)
+	_fnNwBrowserSetBrowseResultsChangedHandler(objref.IDOf(browser), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 bool) { handler(obj.Wrap(_b0), obj.Wrap(_b1), _b2) }))
 }
 
 var _fnNwBrowserSetQueue func(objc.ID, objc.ID)
@@ -322,18 +322,18 @@ func NwBrowserStart(browser obj.Object) {
 	_fnNwBrowserStart(objref.IDOf(browser))
 }
 
-var _fnNwConnectionAccessEstablishmentReport func(objc.ID, objc.ID, unsafe.Pointer)
+var _fnNwConnectionAccessEstablishmentReport func(objc.ID, objc.ID, objc.Block)
 
 // NwConnectionAccessEstablishmentReport calls the Network framework function nw_connection_access_establishment_report.
-func NwConnectionAccessEstablishmentReport(connection obj.Object, queue obj.Object, accessBlock unsafe.Pointer) {
+func NwConnectionAccessEstablishmentReport(connection obj.Object, queue obj.Object, accessBlock func(obj.Object)) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNwConnectionAccessEstablishmentReport == nil {
 		ebipurego.RegisterLibFunc(&_fnNwConnectionAccessEstablishmentReport, _lib, "nw_connection_access_establishment_report")
 	}
-	_fnNwConnectionAccessEstablishmentReport(objref.IDOf(connection), objref.IDOf(queue), accessBlock)
+	_fnNwConnectionAccessEstablishmentReport(objref.IDOf(connection), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { accessBlock(obj.Wrap(_b0)) }))
 }
 
-var _fnNwConnectionBatch func(objc.ID, func())
+var _fnNwConnectionBatch func(objc.ID, objc.Block)
 
 // NwConnectionBatch calls the Network framework function nw_connection_batch.
 func NwConnectionBatch(connection obj.Object, batchBlock func()) {
@@ -341,7 +341,7 @@ func NwConnectionBatch(connection obj.Object, batchBlock func()) {
 	if _fnNwConnectionBatch == nil {
 		ebipurego.RegisterLibFunc(&_fnNwConnectionBatch, _lib, "nw_connection_batch")
 	}
-	_fnNwConnectionBatch(objref.IDOf(connection), batchBlock)
+	_fnNwConnectionBatch(objref.IDOf(connection), objc.NewBlock(func(_ objc.Block) { batchBlock() }))
 }
 
 var _fnNwConnectionCancel func(objc.ID)
@@ -610,26 +610,26 @@ func NwConnectionGroupReply(group obj.Object, inboundMessage obj.Object, outboun
 	_fnNwConnectionGroupReply(objref.IDOf(group), objref.IDOf(inboundMessage), objref.IDOf(outboundMessage), objref.IDOf(content))
 }
 
-var _fnNwConnectionGroupSendMessage func(objc.ID, objc.ID, objc.ID, objc.ID, unsafe.Pointer)
+var _fnNwConnectionGroupSendMessage func(objc.ID, objc.ID, objc.ID, objc.ID, objc.Block)
 
 // NwConnectionGroupSendMessage calls the Network framework function nw_connection_group_send_message.
-func NwConnectionGroupSendMessage(group obj.Object, content obj.Object, endpoint obj.Object, context_ obj.Object, completion unsafe.Pointer) {
+func NwConnectionGroupSendMessage(group obj.Object, content obj.Object, endpoint obj.Object, context_ obj.Object, completion func(obj.Object)) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNwConnectionGroupSendMessage == nil {
 		ebipurego.RegisterLibFunc(&_fnNwConnectionGroupSendMessage, _lib, "nw_connection_group_send_message")
 	}
-	_fnNwConnectionGroupSendMessage(objref.IDOf(group), objref.IDOf(content), objref.IDOf(endpoint), objref.IDOf(context_), completion)
+	_fnNwConnectionGroupSendMessage(objref.IDOf(group), objref.IDOf(content), objref.IDOf(endpoint), objref.IDOf(context_), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { completion(obj.Wrap(_b0)) }))
 }
 
-var _fnNwConnectionGroupSetNewConnectionHandler func(objc.ID, unsafe.Pointer)
+var _fnNwConnectionGroupSetNewConnectionHandler func(objc.ID, objc.Block)
 
 // NwConnectionGroupSetNewConnectionHandler calls the Network framework function nw_connection_group_set_new_connection_handler.
-func NwConnectionGroupSetNewConnectionHandler(group obj.Object, newConnectionHandler unsafe.Pointer) {
+func NwConnectionGroupSetNewConnectionHandler(group obj.Object, newConnectionHandler func(obj.Object)) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNwConnectionGroupSetNewConnectionHandler == nil {
 		ebipurego.RegisterLibFunc(&_fnNwConnectionGroupSetNewConnectionHandler, _lib, "nw_connection_group_set_new_connection_handler")
 	}
-	_fnNwConnectionGroupSetNewConnectionHandler(objref.IDOf(group), newConnectionHandler)
+	_fnNwConnectionGroupSetNewConnectionHandler(objref.IDOf(group), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { newConnectionHandler(obj.Wrap(_b0)) }))
 }
 
 var _fnNwConnectionGroupSetQueue func(objc.ID, objc.ID)
@@ -643,15 +643,17 @@ func NwConnectionGroupSetQueue(group obj.Object, queue obj.Object) {
 	_fnNwConnectionGroupSetQueue(objref.IDOf(group), objref.IDOf(queue))
 }
 
-var _fnNwConnectionGroupSetReceiveHandler func(objc.ID, uint32, bool, unsafe.Pointer)
+var _fnNwConnectionGroupSetReceiveHandler func(objc.ID, uint32, bool, objc.Block)
 
 // NwConnectionGroupSetReceiveHandler calls the Network framework function nw_connection_group_set_receive_handler.
-func NwConnectionGroupSetReceiveHandler(group obj.Object, maximumMessageSize uint32, rejectOversizedMessages bool, receiveHandler unsafe.Pointer) {
+func NwConnectionGroupSetReceiveHandler(group obj.Object, maximumMessageSize uint32, rejectOversizedMessages bool, receiveHandler func(obj.Object, obj.Object, bool)) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNwConnectionGroupSetReceiveHandler == nil {
 		ebipurego.RegisterLibFunc(&_fnNwConnectionGroupSetReceiveHandler, _lib, "nw_connection_group_set_receive_handler")
 	}
-	_fnNwConnectionGroupSetReceiveHandler(objref.IDOf(group), maximumMessageSize, rejectOversizedMessages, receiveHandler)
+	_fnNwConnectionGroupSetReceiveHandler(objref.IDOf(group), maximumMessageSize, rejectOversizedMessages, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 bool) {
+		receiveHandler(obj.Wrap(_b0), obj.Wrap(_b1), _b2)
+	}))
 }
 
 var _fnNwConnectionGroupSetStateChangedHandler func(objc.ID, unsafe.Pointer)
@@ -676,26 +678,30 @@ func NwConnectionGroupStart(group obj.Object) {
 	_fnNwConnectionGroupStart(objref.IDOf(group))
 }
 
-var _fnNwConnectionReceive func(objc.ID, uint32, uint32, unsafe.Pointer)
+var _fnNwConnectionReceive func(objc.ID, uint32, uint32, objc.Block)
 
 // NwConnectionReceive calls the Network framework function nw_connection_receive.
-func NwConnectionReceive(connection obj.Object, minimumIncompleteLength uint32, maximumLength uint32, completion unsafe.Pointer) {
+func NwConnectionReceive(connection obj.Object, minimumIncompleteLength uint32, maximumLength uint32, completion func(obj.Object, obj.Object, bool, obj.Object)) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNwConnectionReceive == nil {
 		ebipurego.RegisterLibFunc(&_fnNwConnectionReceive, _lib, "nw_connection_receive")
 	}
-	_fnNwConnectionReceive(objref.IDOf(connection), minimumIncompleteLength, maximumLength, completion)
+	_fnNwConnectionReceive(objref.IDOf(connection), minimumIncompleteLength, maximumLength, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 bool, _b3 objc.ID) {
+		completion(obj.Wrap(_b0), obj.Wrap(_b1), _b2, obj.Wrap(_b3))
+	}))
 }
 
-var _fnNwConnectionReceiveMessage func(objc.ID, unsafe.Pointer)
+var _fnNwConnectionReceiveMessage func(objc.ID, objc.Block)
 
 // NwConnectionReceiveMessage calls the Network framework function nw_connection_receive_message.
-func NwConnectionReceiveMessage(connection obj.Object, completion unsafe.Pointer) {
+func NwConnectionReceiveMessage(connection obj.Object, completion func(obj.Object, obj.Object, bool, obj.Object)) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNwConnectionReceiveMessage == nil {
 		ebipurego.RegisterLibFunc(&_fnNwConnectionReceiveMessage, _lib, "nw_connection_receive_message")
 	}
-	_fnNwConnectionReceiveMessage(objref.IDOf(connection), completion)
+	_fnNwConnectionReceiveMessage(objref.IDOf(connection), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 bool, _b3 objc.ID) {
+		completion(obj.Wrap(_b0), obj.Wrap(_b1), _b2, obj.Wrap(_b3))
+	}))
 }
 
 var _fnNwConnectionRestart func(objc.ID)
@@ -709,18 +715,18 @@ func NwConnectionRestart(connection obj.Object) {
 	_fnNwConnectionRestart(objref.IDOf(connection))
 }
 
-var _fnNwConnectionSend func(objc.ID, objc.ID, objc.ID, bool, unsafe.Pointer)
+var _fnNwConnectionSend func(objc.ID, objc.ID, objc.ID, bool, objc.Block)
 
 // NwConnectionSend calls the Network framework function nw_connection_send.
-func NwConnectionSend(connection obj.Object, content obj.Object, context_ obj.Object, isComplete bool, completion unsafe.Pointer) {
+func NwConnectionSend(connection obj.Object, content obj.Object, context_ obj.Object, isComplete bool, completion func(obj.Object)) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNwConnectionSend == nil {
 		ebipurego.RegisterLibFunc(&_fnNwConnectionSend, _lib, "nw_connection_send")
 	}
-	_fnNwConnectionSend(objref.IDOf(connection), objref.IDOf(content), objref.IDOf(context_), isComplete, completion)
+	_fnNwConnectionSend(objref.IDOf(connection), objref.IDOf(content), objref.IDOf(context_), isComplete, objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { completion(obj.Wrap(_b0)) }))
 }
 
-var _fnNwConnectionSetBetterPathAvailableHandler func(objc.ID, func(bool))
+var _fnNwConnectionSetBetterPathAvailableHandler func(objc.ID, objc.Block)
 
 // NwConnectionSetBetterPathAvailableHandler calls the Network framework function nw_connection_set_better_path_available_handler.
 func NwConnectionSetBetterPathAvailableHandler(connection obj.Object, handler func(bool)) {
@@ -728,18 +734,18 @@ func NwConnectionSetBetterPathAvailableHandler(connection obj.Object, handler fu
 	if _fnNwConnectionSetBetterPathAvailableHandler == nil {
 		ebipurego.RegisterLibFunc(&_fnNwConnectionSetBetterPathAvailableHandler, _lib, "nw_connection_set_better_path_available_handler")
 	}
-	_fnNwConnectionSetBetterPathAvailableHandler(objref.IDOf(connection), handler)
+	_fnNwConnectionSetBetterPathAvailableHandler(objref.IDOf(connection), objc.NewBlock(func(_ objc.Block, _b0 bool) { handler(_b0) }))
 }
 
-var _fnNwConnectionSetPathChangedHandler func(objc.ID, unsafe.Pointer)
+var _fnNwConnectionSetPathChangedHandler func(objc.ID, objc.Block)
 
 // NwConnectionSetPathChangedHandler calls the Network framework function nw_connection_set_path_changed_handler.
-func NwConnectionSetPathChangedHandler(connection obj.Object, handler unsafe.Pointer) {
+func NwConnectionSetPathChangedHandler(connection obj.Object, handler func(obj.Object)) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNwConnectionSetPathChangedHandler == nil {
 		ebipurego.RegisterLibFunc(&_fnNwConnectionSetPathChangedHandler, _lib, "nw_connection_set_path_changed_handler")
 	}
-	_fnNwConnectionSetPathChangedHandler(objref.IDOf(connection), handler)
+	_fnNwConnectionSetPathChangedHandler(objref.IDOf(connection), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { handler(obj.Wrap(_b0)) }))
 }
 
 var _fnNwConnectionSetQueue func(objc.ID, objc.ID)
@@ -764,7 +770,7 @@ func NwConnectionSetStateChangedHandler(connection obj.Object, handler unsafe.Po
 	_fnNwConnectionSetStateChangedHandler(objref.IDOf(connection), handler)
 }
 
-var _fnNwConnectionSetViabilityChangedHandler func(objc.ID, func(bool))
+var _fnNwConnectionSetViabilityChangedHandler func(objc.ID, objc.Block)
 
 // NwConnectionSetViabilityChangedHandler calls the Network framework function nw_connection_set_viability_changed_handler.
 func NwConnectionSetViabilityChangedHandler(connection obj.Object, handler func(bool)) {
@@ -772,7 +778,7 @@ func NwConnectionSetViabilityChangedHandler(connection obj.Object, handler func(
 	if _fnNwConnectionSetViabilityChangedHandler == nil {
 		ebipurego.RegisterLibFunc(&_fnNwConnectionSetViabilityChangedHandler, _lib, "nw_connection_set_viability_changed_handler")
 	}
-	_fnNwConnectionSetViabilityChangedHandler(objref.IDOf(connection), handler)
+	_fnNwConnectionSetViabilityChangedHandler(objref.IDOf(connection), objc.NewBlock(func(_ objc.Block, _b0 bool) { handler(_b0) }))
 }
 
 var _fnNwConnectionStart func(objc.ID)
@@ -929,15 +935,15 @@ func NwContentContextSetRelativePriority(context_ obj.Object, relativePriority f
 	_fnNwContentContextSetRelativePriority(objref.IDOf(context_), relativePriority)
 }
 
-var _fnNwDataTransferReportCollect func(objc.ID, objc.ID, unsafe.Pointer)
+var _fnNwDataTransferReportCollect func(objc.ID, objc.ID, objc.Block)
 
 // NwDataTransferReportCollect calls the Network framework function nw_data_transfer_report_collect.
-func NwDataTransferReportCollect(report obj.Object, queue obj.Object, collectBlock unsafe.Pointer) {
+func NwDataTransferReportCollect(report obj.Object, queue obj.Object, collectBlock func(obj.Object)) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNwDataTransferReportCollect == nil {
 		ebipurego.RegisterLibFunc(&_fnNwDataTransferReportCollect, _lib, "nw_data_transfer_report_collect")
 	}
-	_fnNwDataTransferReportCollect(objref.IDOf(report), objref.IDOf(queue), collectBlock)
+	_fnNwDataTransferReportCollect(objref.IDOf(report), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { collectBlock(obj.Wrap(_b0)) }))
 }
 
 var _fnNwDataTransferReportCopyPathInterface func(objc.ID, uint32) unsafe.Pointer
@@ -1350,26 +1356,28 @@ func NwEstablishmentReportCopyProxyEndpoint(report obj.Object) unsafe.Pointer {
 	return _fnNwEstablishmentReportCopyProxyEndpoint(objref.IDOf(report))
 }
 
-var _fnNwEstablishmentReportEnumerateProtocols func(objc.ID, unsafe.Pointer)
+var _fnNwEstablishmentReportEnumerateProtocols func(objc.ID, objc.Block)
 
 // NwEstablishmentReportEnumerateProtocols calls the Network framework function nw_establishment_report_enumerate_protocols.
-func NwEstablishmentReportEnumerateProtocols(report obj.Object, enumerateBlock unsafe.Pointer) {
+func NwEstablishmentReportEnumerateProtocols(report obj.Object, enumerateBlock func(obj.Object, uint64, uint64) bool) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNwEstablishmentReportEnumerateProtocols == nil {
 		ebipurego.RegisterLibFunc(&_fnNwEstablishmentReportEnumerateProtocols, _lib, "nw_establishment_report_enumerate_protocols")
 	}
-	_fnNwEstablishmentReportEnumerateProtocols(objref.IDOf(report), enumerateBlock)
+	_fnNwEstablishmentReportEnumerateProtocols(objref.IDOf(report), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 uint64, _b2 uint64) bool {
+		return enumerateBlock(obj.Wrap(_b0), _b1, _b2)
+	}))
 }
 
-var _fnNwEstablishmentReportEnumerateResolutionReports func(objc.ID, unsafe.Pointer)
+var _fnNwEstablishmentReportEnumerateResolutionReports func(objc.ID, objc.Block)
 
 // NwEstablishmentReportEnumerateResolutionReports calls the Network framework function nw_establishment_report_enumerate_resolution_reports.
-func NwEstablishmentReportEnumerateResolutionReports(report obj.Object, enumerateBlock unsafe.Pointer) {
+func NwEstablishmentReportEnumerateResolutionReports(report obj.Object, enumerateBlock func(obj.Object) bool) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNwEstablishmentReportEnumerateResolutionReports == nil {
 		ebipurego.RegisterLibFunc(&_fnNwEstablishmentReportEnumerateResolutionReports, _lib, "nw_establishment_report_enumerate_resolution_reports")
 	}
-	_fnNwEstablishmentReportEnumerateResolutionReports(objref.IDOf(report), enumerateBlock)
+	_fnNwEstablishmentReportEnumerateResolutionReports(objref.IDOf(report), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) bool { return enumerateBlock(obj.Wrap(_b0)) }))
 }
 
 var _fnNwEstablishmentReportEnumerateResolutions func(objc.ID, unsafe.Pointer)
@@ -1482,16 +1490,16 @@ func NwEthernetChannelGetMaximumPayloadSize(ethernetChannel obj.Object) uint32 {
 	return _fnNwEthernetChannelGetMaximumPayloadSize(objref.IDOf(ethernetChannel))
 }
 
-var _fnNwEthernetChannelSend func(objc.ID, objc.ID, uint16, unsafe.Pointer, unsafe.Pointer)
+var _fnNwEthernetChannelSend func(objc.ID, objc.ID, uint16, unsafe.Pointer, objc.Block)
 
 // NwEthernetChannelSend calls the Network framework function nw_ethernet_channel_send.
-func NwEthernetChannelSend(ethernetChannel obj.Object, content obj.Object, vlanTag uint16, completion unsafe.Pointer) (remoteAddress uint8) {
+func NwEthernetChannelSend(ethernetChannel obj.Object, content obj.Object, vlanTag uint16, completion func(obj.Object)) (remoteAddress uint8) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNwEthernetChannelSend == nil {
 		ebipurego.RegisterLibFunc(&_fnNwEthernetChannelSend, _lib, "nw_ethernet_channel_send")
 	}
 	var _out0 uint8
-	_fnNwEthernetChannelSend(objref.IDOf(ethernetChannel), objref.IDOf(content), vlanTag, unsafe.Pointer(&_out0), completion)
+	_fnNwEthernetChannelSend(objref.IDOf(ethernetChannel), objref.IDOf(content), vlanTag, unsafe.Pointer(&_out0), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { completion(obj.Wrap(_b0)) }))
 	return _out0
 }
 
@@ -1539,7 +1547,7 @@ func NwEthernetChannelStart(ethernetChannel obj.Object) {
 	_fnNwEthernetChannelStart(objref.IDOf(ethernetChannel))
 }
 
-var _fnNwFramerAsync func(objc.ID, func())
+var _fnNwFramerAsync func(objc.ID, objc.Block)
 
 // NwFramerAsync calls the Network framework function nw_framer_async.
 func NwFramerAsync(framer obj.Object, asyncBlock func()) {
@@ -1547,7 +1555,7 @@ func NwFramerAsync(framer obj.Object, asyncBlock func()) {
 	if _fnNwFramerAsync == nil {
 		ebipurego.RegisterLibFunc(&_fnNwFramerAsync, _lib, "nw_framer_async")
 	}
-	_fnNwFramerAsync(objref.IDOf(framer), asyncBlock)
+	_fnNwFramerAsync(objref.IDOf(framer), objc.NewBlock(func(_ objc.Block) { asyncBlock() }))
 }
 
 var _fnNwFramerCopyLocalEndpoint func(objc.ID) unsafe.Pointer
@@ -1594,15 +1602,15 @@ func NwFramerCopyRemoteEndpoint(framer obj.Object) unsafe.Pointer {
 	return _fnNwFramerCopyRemoteEndpoint(objref.IDOf(framer))
 }
 
-var _fnNwFramerCreateDefinition func(string, uint32, unsafe.Pointer) unsafe.Pointer
+var _fnNwFramerCreateDefinition func(string, uint32, objc.Block) unsafe.Pointer
 
 // NwFramerCreateDefinition calls the Network framework function nw_framer_create_definition.
-func NwFramerCreateDefinition(identifier string, flags uint32, startHandler unsafe.Pointer) unsafe.Pointer {
+func NwFramerCreateDefinition(identifier string, flags uint32, startHandler func(obj.Object) int) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNwFramerCreateDefinition == nil {
 		ebipurego.RegisterLibFunc(&_fnNwFramerCreateDefinition, _lib, "nw_framer_create_definition")
 	}
-	return _fnNwFramerCreateDefinition(identifier, flags, startHandler)
+	return _fnNwFramerCreateDefinition(identifier, flags, objc.NewBlock(func(_ objc.Block, _b0 objc.ID) int { return startHandler(obj.Wrap(_b0)) }))
 }
 
 var _fnNwFramerCreateOptions func(objc.ID) unsafe.Pointer
@@ -1660,15 +1668,15 @@ func NwFramerMarkReady(framer obj.Object) {
 	_fnNwFramerMarkReady(objref.IDOf(framer))
 }
 
-var _fnNwFramerMessageAccessValue func(objc.ID, string, unsafe.Pointer) bool
+var _fnNwFramerMessageAccessValue func(objc.ID, string, objc.Block) bool
 
 // NwFramerMessageAccessValue calls the Network framework function nw_framer_message_access_value.
-func NwFramerMessageAccessValue(message obj.Object, key string, accessValue unsafe.Pointer) bool {
+func NwFramerMessageAccessValue(message obj.Object, key string, accessValue func(unsafe.Pointer) bool) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNwFramerMessageAccessValue == nil {
 		ebipurego.RegisterLibFunc(&_fnNwFramerMessageAccessValue, _lib, "nw_framer_message_access_value")
 	}
-	return _fnNwFramerMessageAccessValue(objref.IDOf(message), key, accessValue)
+	return _fnNwFramerMessageAccessValue(objref.IDOf(message), key, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) bool { return accessValue(_b0) }))
 }
 
 var _fnNwFramerMessageCopyObjectValue func(objc.ID, string) unsafe.Pointer
@@ -1704,15 +1712,15 @@ func NwFramerMessageSetObjectValue(message obj.Object, key string, value obj.Obj
 	_fnNwFramerMessageSetObjectValue(objref.IDOf(message), key, objref.IDOf(value))
 }
 
-var _fnNwFramerMessageSetValue func(objc.ID, string, unsafe.Pointer, unsafe.Pointer)
+var _fnNwFramerMessageSetValue func(objc.ID, string, unsafe.Pointer, objc.Block)
 
 // NwFramerMessageSetValue calls the Network framework function nw_framer_message_set_value.
-func NwFramerMessageSetValue(message obj.Object, key string, value unsafe.Pointer, disposeValue unsafe.Pointer) {
+func NwFramerMessageSetValue(message obj.Object, key string, value unsafe.Pointer, disposeValue func(unsafe.Pointer)) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNwFramerMessageSetValue == nil {
 		ebipurego.RegisterLibFunc(&_fnNwFramerMessageSetValue, _lib, "nw_framer_message_set_value")
 	}
-	_fnNwFramerMessageSetValue(objref.IDOf(message), key, value, disposeValue)
+	_fnNwFramerMessageSetValue(objref.IDOf(message), key, value, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { disposeValue(_b0) }))
 }
 
 var _fnNwFramerOptionsCopyObjectValue func(objc.ID, string) unsafe.Pointer
@@ -1818,59 +1826,61 @@ func NwFramerScheduleWakeup(framer obj.Object, milliseconds uint64) {
 	_fnNwFramerScheduleWakeup(objref.IDOf(framer), milliseconds)
 }
 
-var _fnNwFramerSetCleanupHandler func(objc.ID, unsafe.Pointer)
+var _fnNwFramerSetCleanupHandler func(objc.ID, objc.Block)
 
 // NwFramerSetCleanupHandler calls the Network framework function nw_framer_set_cleanup_handler.
-func NwFramerSetCleanupHandler(framer obj.Object, cleanupHandler unsafe.Pointer) {
+func NwFramerSetCleanupHandler(framer obj.Object, cleanupHandler func(obj.Object)) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNwFramerSetCleanupHandler == nil {
 		ebipurego.RegisterLibFunc(&_fnNwFramerSetCleanupHandler, _lib, "nw_framer_set_cleanup_handler")
 	}
-	_fnNwFramerSetCleanupHandler(objref.IDOf(framer), cleanupHandler)
+	_fnNwFramerSetCleanupHandler(objref.IDOf(framer), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { cleanupHandler(obj.Wrap(_b0)) }))
 }
 
-var _fnNwFramerSetInputHandler func(objc.ID, unsafe.Pointer)
+var _fnNwFramerSetInputHandler func(objc.ID, objc.Block)
 
 // NwFramerSetInputHandler calls the Network framework function nw_framer_set_input_handler.
-func NwFramerSetInputHandler(framer obj.Object, inputHandler unsafe.Pointer) {
+func NwFramerSetInputHandler(framer obj.Object, inputHandler func(obj.Object) int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNwFramerSetInputHandler == nil {
 		ebipurego.RegisterLibFunc(&_fnNwFramerSetInputHandler, _lib, "nw_framer_set_input_handler")
 	}
-	_fnNwFramerSetInputHandler(objref.IDOf(framer), inputHandler)
+	_fnNwFramerSetInputHandler(objref.IDOf(framer), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) int { return inputHandler(obj.Wrap(_b0)) }))
 }
 
-var _fnNwFramerSetOutputHandler func(objc.ID, unsafe.Pointer)
+var _fnNwFramerSetOutputHandler func(objc.ID, objc.Block)
 
 // NwFramerSetOutputHandler calls the Network framework function nw_framer_set_output_handler.
-func NwFramerSetOutputHandler(framer obj.Object, outputHandler unsafe.Pointer) {
+func NwFramerSetOutputHandler(framer obj.Object, outputHandler func(obj.Object, obj.Object, int, bool)) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNwFramerSetOutputHandler == nil {
 		ebipurego.RegisterLibFunc(&_fnNwFramerSetOutputHandler, _lib, "nw_framer_set_output_handler")
 	}
-	_fnNwFramerSetOutputHandler(objref.IDOf(framer), outputHandler)
+	_fnNwFramerSetOutputHandler(objref.IDOf(framer), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 int, _b3 bool) {
+		outputHandler(obj.Wrap(_b0), obj.Wrap(_b1), _b2, _b3)
+	}))
 }
 
-var _fnNwFramerSetStopHandler func(objc.ID, unsafe.Pointer)
+var _fnNwFramerSetStopHandler func(objc.ID, objc.Block)
 
 // NwFramerSetStopHandler calls the Network framework function nw_framer_set_stop_handler.
-func NwFramerSetStopHandler(framer obj.Object, stopHandler unsafe.Pointer) {
+func NwFramerSetStopHandler(framer obj.Object, stopHandler func(obj.Object) bool) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNwFramerSetStopHandler == nil {
 		ebipurego.RegisterLibFunc(&_fnNwFramerSetStopHandler, _lib, "nw_framer_set_stop_handler")
 	}
-	_fnNwFramerSetStopHandler(objref.IDOf(framer), stopHandler)
+	_fnNwFramerSetStopHandler(objref.IDOf(framer), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) bool { return stopHandler(obj.Wrap(_b0)) }))
 }
 
-var _fnNwFramerSetWakeupHandler func(objc.ID, unsafe.Pointer)
+var _fnNwFramerSetWakeupHandler func(objc.ID, objc.Block)
 
 // NwFramerSetWakeupHandler calls the Network framework function nw_framer_set_wakeup_handler.
-func NwFramerSetWakeupHandler(framer obj.Object, wakeupHandler unsafe.Pointer) {
+func NwFramerSetWakeupHandler(framer obj.Object, wakeupHandler func(obj.Object)) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNwFramerSetWakeupHandler == nil {
 		ebipurego.RegisterLibFunc(&_fnNwFramerSetWakeupHandler, _lib, "nw_framer_set_wakeup_handler")
 	}
-	_fnNwFramerSetWakeupHandler(objref.IDOf(framer), wakeupHandler)
+	_fnNwFramerSetWakeupHandler(objref.IDOf(framer), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { wakeupHandler(obj.Wrap(_b0)) }))
 }
 
 var _fnNwFramerWriteOutput func(objc.ID, unsafe.Pointer, int)
@@ -1939,15 +1949,15 @@ func NwGroupDescriptorCreateMultiplex(remoteEndpoint obj.Object) unsafe.Pointer 
 	return _fnNwGroupDescriptorCreateMultiplex(objref.IDOf(remoteEndpoint))
 }
 
-var _fnNwGroupDescriptorEnumerateEndpoints func(objc.ID, unsafe.Pointer)
+var _fnNwGroupDescriptorEnumerateEndpoints func(objc.ID, objc.Block)
 
 // NwGroupDescriptorEnumerateEndpoints calls the Network framework function nw_group_descriptor_enumerate_endpoints.
-func NwGroupDescriptorEnumerateEndpoints(descriptor obj.Object, enumerateBlock unsafe.Pointer) {
+func NwGroupDescriptorEnumerateEndpoints(descriptor obj.Object, enumerateBlock func(obj.Object) bool) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNwGroupDescriptorEnumerateEndpoints == nil {
 		ebipurego.RegisterLibFunc(&_fnNwGroupDescriptorEnumerateEndpoints, _lib, "nw_group_descriptor_enumerate_endpoints")
 	}
-	_fnNwGroupDescriptorEnumerateEndpoints(objref.IDOf(descriptor), enumerateBlock)
+	_fnNwGroupDescriptorEnumerateEndpoints(objref.IDOf(descriptor), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) bool { return enumerateBlock(obj.Wrap(_b0)) }))
 }
 
 var _fnNwInterfaceGetIndex func(objc.ID) uint32
@@ -2214,37 +2224,37 @@ func NwListenerSetAdvertiseDescriptor(listener obj.Object, advertiseDescriptor o
 	_fnNwListenerSetAdvertiseDescriptor(objref.IDOf(listener), objref.IDOf(advertiseDescriptor))
 }
 
-var _fnNwListenerSetAdvertisedEndpointChangedHandler func(objc.ID, unsafe.Pointer)
+var _fnNwListenerSetAdvertisedEndpointChangedHandler func(objc.ID, objc.Block)
 
 // NwListenerSetAdvertisedEndpointChangedHandler calls the Network framework function nw_listener_set_advertised_endpoint_changed_handler.
-func NwListenerSetAdvertisedEndpointChangedHandler(listener obj.Object, handler unsafe.Pointer) {
+func NwListenerSetAdvertisedEndpointChangedHandler(listener obj.Object, handler func(obj.Object, bool)) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNwListenerSetAdvertisedEndpointChangedHandler == nil {
 		ebipurego.RegisterLibFunc(&_fnNwListenerSetAdvertisedEndpointChangedHandler, _lib, "nw_listener_set_advertised_endpoint_changed_handler")
 	}
-	_fnNwListenerSetAdvertisedEndpointChangedHandler(objref.IDOf(listener), handler)
+	_fnNwListenerSetAdvertisedEndpointChangedHandler(objref.IDOf(listener), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 bool) { handler(obj.Wrap(_b0), _b1) }))
 }
 
-var _fnNwListenerSetNewConnectionGroupHandler func(objc.ID, unsafe.Pointer)
+var _fnNwListenerSetNewConnectionGroupHandler func(objc.ID, objc.Block)
 
 // NwListenerSetNewConnectionGroupHandler calls the Network framework function nw_listener_set_new_connection_group_handler.
-func NwListenerSetNewConnectionGroupHandler(listener obj.Object, handler unsafe.Pointer) {
+func NwListenerSetNewConnectionGroupHandler(listener obj.Object, handler func(obj.Object)) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNwListenerSetNewConnectionGroupHandler == nil {
 		ebipurego.RegisterLibFunc(&_fnNwListenerSetNewConnectionGroupHandler, _lib, "nw_listener_set_new_connection_group_handler")
 	}
-	_fnNwListenerSetNewConnectionGroupHandler(objref.IDOf(listener), handler)
+	_fnNwListenerSetNewConnectionGroupHandler(objref.IDOf(listener), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { handler(obj.Wrap(_b0)) }))
 }
 
-var _fnNwListenerSetNewConnectionHandler func(objc.ID, unsafe.Pointer)
+var _fnNwListenerSetNewConnectionHandler func(objc.ID, objc.Block)
 
 // NwListenerSetNewConnectionHandler calls the Network framework function nw_listener_set_new_connection_handler.
-func NwListenerSetNewConnectionHandler(listener obj.Object, handler unsafe.Pointer) {
+func NwListenerSetNewConnectionHandler(listener obj.Object, handler func(obj.Object)) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNwListenerSetNewConnectionHandler == nil {
 		ebipurego.RegisterLibFunc(&_fnNwListenerSetNewConnectionHandler, _lib, "nw_listener_set_new_connection_handler")
 	}
-	_fnNwListenerSetNewConnectionHandler(objref.IDOf(listener), handler)
+	_fnNwListenerSetNewConnectionHandler(objref.IDOf(listener), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { handler(obj.Wrap(_b0)) }))
 }
 
 var _fnNwListenerSetNewConnectionLimit func(objc.ID, uint32)
@@ -2412,48 +2422,48 @@ func NwParametersCreateApplicationService() unsafe.Pointer {
 	return _fnNwParametersCreateApplicationService()
 }
 
-var _fnNwParametersCreateCustomIp func(uint8, unsafe.Pointer) unsafe.Pointer
+var _fnNwParametersCreateCustomIp func(uint8, objc.Block) unsafe.Pointer
 
 // NwParametersCreateCustomIp calls the Network framework function nw_parameters_create_custom_ip.
-func NwParametersCreateCustomIp(customIpProtocolNumber uint8, configureIp unsafe.Pointer) unsafe.Pointer {
+func NwParametersCreateCustomIp(customIpProtocolNumber uint8, configureIp func(obj.Object)) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNwParametersCreateCustomIp == nil {
 		ebipurego.RegisterLibFunc(&_fnNwParametersCreateCustomIp, _lib, "nw_parameters_create_custom_ip")
 	}
-	return _fnNwParametersCreateCustomIp(customIpProtocolNumber, configureIp)
+	return _fnNwParametersCreateCustomIp(customIpProtocolNumber, objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { configureIp(obj.Wrap(_b0)) }))
 }
 
-var _fnNwParametersCreateQuic func(unsafe.Pointer) unsafe.Pointer
+var _fnNwParametersCreateQuic func(objc.Block) unsafe.Pointer
 
 // NwParametersCreateQuic calls the Network framework function nw_parameters_create_quic.
-func NwParametersCreateQuic(configureQuic unsafe.Pointer) unsafe.Pointer {
+func NwParametersCreateQuic(configureQuic func(obj.Object)) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNwParametersCreateQuic == nil {
 		ebipurego.RegisterLibFunc(&_fnNwParametersCreateQuic, _lib, "nw_parameters_create_quic")
 	}
-	return _fnNwParametersCreateQuic(configureQuic)
+	return _fnNwParametersCreateQuic(objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { configureQuic(obj.Wrap(_b0)) }))
 }
 
-var _fnNwParametersCreateSecureTcp func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+var _fnNwParametersCreateSecureTcp func(objc.Block, objc.Block) unsafe.Pointer
 
 // NwParametersCreateSecureTcp calls the Network framework function nw_parameters_create_secure_tcp.
-func NwParametersCreateSecureTcp(configureTls unsafe.Pointer, configureTcp unsafe.Pointer) unsafe.Pointer {
+func NwParametersCreateSecureTcp(configureTls func(obj.Object), configureTcp func(obj.Object)) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNwParametersCreateSecureTcp == nil {
 		ebipurego.RegisterLibFunc(&_fnNwParametersCreateSecureTcp, _lib, "nw_parameters_create_secure_tcp")
 	}
-	return _fnNwParametersCreateSecureTcp(configureTls, configureTcp)
+	return _fnNwParametersCreateSecureTcp(objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { configureTls(obj.Wrap(_b0)) }), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { configureTcp(obj.Wrap(_b0)) }))
 }
 
-var _fnNwParametersCreateSecureUdp func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+var _fnNwParametersCreateSecureUdp func(objc.Block, objc.Block) unsafe.Pointer
 
 // NwParametersCreateSecureUdp calls the Network framework function nw_parameters_create_secure_udp.
-func NwParametersCreateSecureUdp(configureDtls unsafe.Pointer, configureUdp unsafe.Pointer) unsafe.Pointer {
+func NwParametersCreateSecureUdp(configureDtls func(obj.Object), configureUdp func(obj.Object)) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNwParametersCreateSecureUdp == nil {
 		ebipurego.RegisterLibFunc(&_fnNwParametersCreateSecureUdp, _lib, "nw_parameters_create_secure_udp")
 	}
-	return _fnNwParametersCreateSecureUdp(configureDtls, configureUdp)
+	return _fnNwParametersCreateSecureUdp(objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { configureDtls(obj.Wrap(_b0)) }), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { configureUdp(obj.Wrap(_b0)) }))
 }
 
 var _fnNwParametersGetAllowUltraConstrained func(objc.ID) bool
@@ -2610,15 +2620,15 @@ func NwParametersIterateProhibitedInterfaceTypes(parameters obj.Object, iterateB
 	_fnNwParametersIterateProhibitedInterfaceTypes(objref.IDOf(parameters), iterateBlock)
 }
 
-var _fnNwParametersIterateProhibitedInterfaces func(objc.ID, unsafe.Pointer)
+var _fnNwParametersIterateProhibitedInterfaces func(objc.ID, objc.Block)
 
 // NwParametersIterateProhibitedInterfaces calls the Network framework function nw_parameters_iterate_prohibited_interfaces.
-func NwParametersIterateProhibitedInterfaces(parameters obj.Object, iterateBlock unsafe.Pointer) {
+func NwParametersIterateProhibitedInterfaces(parameters obj.Object, iterateBlock func(obj.Object) bool) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNwParametersIterateProhibitedInterfaces == nil {
 		ebipurego.RegisterLibFunc(&_fnNwParametersIterateProhibitedInterfaces, _lib, "nw_parameters_iterate_prohibited_interfaces")
 	}
-	_fnNwParametersIterateProhibitedInterfaces(objref.IDOf(parameters), iterateBlock)
+	_fnNwParametersIterateProhibitedInterfaces(objref.IDOf(parameters), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) bool { return iterateBlock(obj.Wrap(_b0)) }))
 }
 
 var _fnNwParametersProhibitInterface func(objc.ID, objc.ID)
@@ -2863,26 +2873,26 @@ func NwPathCopyEffectiveRemoteEndpoint(path obj.Object) unsafe.Pointer {
 	return _fnNwPathCopyEffectiveRemoteEndpoint(objref.IDOf(path))
 }
 
-var _fnNwPathEnumerateGateways func(objc.ID, unsafe.Pointer)
+var _fnNwPathEnumerateGateways func(objc.ID, objc.Block)
 
 // NwPathEnumerateGateways calls the Network framework function nw_path_enumerate_gateways.
-func NwPathEnumerateGateways(path obj.Object, enumerateBlock unsafe.Pointer) {
+func NwPathEnumerateGateways(path obj.Object, enumerateBlock func(obj.Object) bool) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNwPathEnumerateGateways == nil {
 		ebipurego.RegisterLibFunc(&_fnNwPathEnumerateGateways, _lib, "nw_path_enumerate_gateways")
 	}
-	_fnNwPathEnumerateGateways(objref.IDOf(path), enumerateBlock)
+	_fnNwPathEnumerateGateways(objref.IDOf(path), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) bool { return enumerateBlock(obj.Wrap(_b0)) }))
 }
 
-var _fnNwPathEnumerateInterfaces func(objc.ID, unsafe.Pointer)
+var _fnNwPathEnumerateInterfaces func(objc.ID, objc.Block)
 
 // NwPathEnumerateInterfaces calls the Network framework function nw_path_enumerate_interfaces.
-func NwPathEnumerateInterfaces(path obj.Object, enumerateBlock unsafe.Pointer) {
+func NwPathEnumerateInterfaces(path obj.Object, enumerateBlock func(obj.Object) bool) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNwPathEnumerateInterfaces == nil {
 		ebipurego.RegisterLibFunc(&_fnNwPathEnumerateInterfaces, _lib, "nw_path_enumerate_interfaces")
 	}
-	_fnNwPathEnumerateInterfaces(objref.IDOf(path), enumerateBlock)
+	_fnNwPathEnumerateInterfaces(objref.IDOf(path), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) bool { return enumerateBlock(obj.Wrap(_b0)) }))
 }
 
 var _fnNwPathGetLinkQuality func(objc.ID) unsafe.Pointer
@@ -3050,7 +3060,7 @@ func NwPathMonitorProhibitInterfaceType(monitor obj.Object, interfaceType unsafe
 	_fnNwPathMonitorProhibitInterfaceType(objref.IDOf(monitor), interfaceType)
 }
 
-var _fnNwPathMonitorSetCancelHandler func(objc.ID, func())
+var _fnNwPathMonitorSetCancelHandler func(objc.ID, objc.Block)
 
 // NwPathMonitorSetCancelHandler calls the Network framework function nw_path_monitor_set_cancel_handler.
 func NwPathMonitorSetCancelHandler(monitor obj.Object, cancelHandler func()) {
@@ -3058,7 +3068,7 @@ func NwPathMonitorSetCancelHandler(monitor obj.Object, cancelHandler func()) {
 	if _fnNwPathMonitorSetCancelHandler == nil {
 		ebipurego.RegisterLibFunc(&_fnNwPathMonitorSetCancelHandler, _lib, "nw_path_monitor_set_cancel_handler")
 	}
-	_fnNwPathMonitorSetCancelHandler(objref.IDOf(monitor), cancelHandler)
+	_fnNwPathMonitorSetCancelHandler(objref.IDOf(monitor), objc.NewBlock(func(_ objc.Block) { cancelHandler() }))
 }
 
 var _fnNwPathMonitorSetQueue func(objc.ID, objc.ID)
@@ -3072,15 +3082,15 @@ func NwPathMonitorSetQueue(monitor obj.Object, queue obj.Object) {
 	_fnNwPathMonitorSetQueue(objref.IDOf(monitor), objref.IDOf(queue))
 }
 
-var _fnNwPathMonitorSetUpdateHandler func(objc.ID, unsafe.Pointer)
+var _fnNwPathMonitorSetUpdateHandler func(objc.ID, objc.Block)
 
 // NwPathMonitorSetUpdateHandler calls the Network framework function nw_path_monitor_set_update_handler.
-func NwPathMonitorSetUpdateHandler(monitor obj.Object, updateHandler unsafe.Pointer) {
+func NwPathMonitorSetUpdateHandler(monitor obj.Object, updateHandler func(obj.Object)) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNwPathMonitorSetUpdateHandler == nil {
 		ebipurego.RegisterLibFunc(&_fnNwPathMonitorSetUpdateHandler, _lib, "nw_path_monitor_set_update_handler")
 	}
-	_fnNwPathMonitorSetUpdateHandler(objref.IDOf(monitor), updateHandler)
+	_fnNwPathMonitorSetUpdateHandler(objref.IDOf(monitor), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { updateHandler(obj.Wrap(_b0)) }))
 }
 
 var _fnNwPathMonitorStart func(objc.ID)
@@ -3391,15 +3401,15 @@ func NwProtocolStackCopyTransportProtocol(stack obj.Object) unsafe.Pointer {
 	return _fnNwProtocolStackCopyTransportProtocol(objref.IDOf(stack))
 }
 
-var _fnNwProtocolStackIterateApplicationProtocols func(objc.ID, unsafe.Pointer)
+var _fnNwProtocolStackIterateApplicationProtocols func(objc.ID, objc.Block)
 
 // NwProtocolStackIterateApplicationProtocols calls the Network framework function nw_protocol_stack_iterate_application_protocols.
-func NwProtocolStackIterateApplicationProtocols(stack obj.Object, iterateBlock unsafe.Pointer) {
+func NwProtocolStackIterateApplicationProtocols(stack obj.Object, iterateBlock func(obj.Object)) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNwProtocolStackIterateApplicationProtocols == nil {
 		ebipurego.RegisterLibFunc(&_fnNwProtocolStackIterateApplicationProtocols, _lib, "nw_protocol_stack_iterate_application_protocols")
 	}
-	_fnNwProtocolStackIterateApplicationProtocols(objref.IDOf(stack), iterateBlock)
+	_fnNwProtocolStackIterateApplicationProtocols(objref.IDOf(stack), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { iterateBlock(obj.Wrap(_b0)) }))
 }
 
 var _fnNwProtocolStackPrependApplicationProtocol func(objc.ID, objc.ID)
@@ -3512,7 +3522,7 @@ func NwProxyConfigCreateSocksv5(proxyEndpoint obj.Object) unsafe.Pointer {
 	return _fnNwProxyConfigCreateSocksv5(objref.IDOf(proxyEndpoint))
 }
 
-var _fnNwProxyConfigEnumerateExcludedDomains func(objc.ID, func(string))
+var _fnNwProxyConfigEnumerateExcludedDomains func(objc.ID, objc.Block)
 
 // NwProxyConfigEnumerateExcludedDomains calls the Network framework function nw_proxy_config_enumerate_excluded_domains.
 func NwProxyConfigEnumerateExcludedDomains(config obj.Object, enumerator func(string)) {
@@ -3520,10 +3530,10 @@ func NwProxyConfigEnumerateExcludedDomains(config obj.Object, enumerator func(st
 	if _fnNwProxyConfigEnumerateExcludedDomains == nil {
 		ebipurego.RegisterLibFunc(&_fnNwProxyConfigEnumerateExcludedDomains, _lib, "nw_proxy_config_enumerate_excluded_domains")
 	}
-	_fnNwProxyConfigEnumerateExcludedDomains(objref.IDOf(config), enumerator)
+	_fnNwProxyConfigEnumerateExcludedDomains(objref.IDOf(config), objc.NewBlock(func(_ objc.Block, _b0 string) { enumerator(_b0) }))
 }
 
-var _fnNwProxyConfigEnumerateMatchDomains func(objc.ID, func(string))
+var _fnNwProxyConfigEnumerateMatchDomains func(objc.ID, objc.Block)
 
 // NwProxyConfigEnumerateMatchDomains calls the Network framework function nw_proxy_config_enumerate_match_domains.
 func NwProxyConfigEnumerateMatchDomains(config obj.Object, enumerator func(string)) {
@@ -3531,7 +3541,7 @@ func NwProxyConfigEnumerateMatchDomains(config obj.Object, enumerator func(strin
 	if _fnNwProxyConfigEnumerateMatchDomains == nil {
 		ebipurego.RegisterLibFunc(&_fnNwProxyConfigEnumerateMatchDomains, _lib, "nw_proxy_config_enumerate_match_domains")
 	}
-	_fnNwProxyConfigEnumerateMatchDomains(objref.IDOf(config), enumerator)
+	_fnNwProxyConfigEnumerateMatchDomains(objref.IDOf(config), objc.NewBlock(func(_ objc.Block, _b0 string) { enumerator(_b0) }))
 }
 
 var _fnNwProxyConfigGetFailoverAllowed func(objc.ID) bool
@@ -4656,15 +4666,15 @@ func NwWsMetadataSetCloseCode(metadata obj.Object, closeCode unsafe.Pointer) {
 	_fnNwWsMetadataSetCloseCode(objref.IDOf(metadata), closeCode)
 }
 
-var _fnNwWsMetadataSetPongHandler func(objc.ID, objc.ID, unsafe.Pointer)
+var _fnNwWsMetadataSetPongHandler func(objc.ID, objc.ID, objc.Block)
 
 // NwWsMetadataSetPongHandler calls the Network framework function nw_ws_metadata_set_pong_handler.
-func NwWsMetadataSetPongHandler(metadata obj.Object, clientQueue obj.Object, pongHandler unsafe.Pointer) {
+func NwWsMetadataSetPongHandler(metadata obj.Object, clientQueue obj.Object, pongHandler func(obj.Object)) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNwWsMetadataSetPongHandler == nil {
 		ebipurego.RegisterLibFunc(&_fnNwWsMetadataSetPongHandler, _lib, "nw_ws_metadata_set_pong_handler")
 	}
-	_fnNwWsMetadataSetPongHandler(objref.IDOf(metadata), objref.IDOf(clientQueue), pongHandler)
+	_fnNwWsMetadataSetPongHandler(objref.IDOf(metadata), objref.IDOf(clientQueue), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { pongHandler(obj.Wrap(_b0)) }))
 }
 
 var _fnNwWsOptionsAddAdditionalHeader func(objc.ID, string, string)
@@ -4700,15 +4710,15 @@ func NwWsOptionsSetAutoReplyPing(options obj.Object, autoReplyPing bool) {
 	_fnNwWsOptionsSetAutoReplyPing(objref.IDOf(options), autoReplyPing)
 }
 
-var _fnNwWsOptionsSetClientRequestHandler func(objc.ID, objc.ID, unsafe.Pointer)
+var _fnNwWsOptionsSetClientRequestHandler func(objc.ID, objc.ID, objc.Block)
 
 // NwWsOptionsSetClientRequestHandler calls the Network framework function nw_ws_options_set_client_request_handler.
-func NwWsOptionsSetClientRequestHandler(options obj.Object, clientQueue obj.Object, handler unsafe.Pointer) {
+func NwWsOptionsSetClientRequestHandler(options obj.Object, clientQueue obj.Object, handler func(obj.Object) int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNwWsOptionsSetClientRequestHandler == nil {
 		ebipurego.RegisterLibFunc(&_fnNwWsOptionsSetClientRequestHandler, _lib, "nw_ws_options_set_client_request_handler")
 	}
-	_fnNwWsOptionsSetClientRequestHandler(objref.IDOf(options), objref.IDOf(clientQueue), handler)
+	_fnNwWsOptionsSetClientRequestHandler(objref.IDOf(options), objref.IDOf(clientQueue), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) int { return handler(obj.Wrap(_b0)) }))
 }
 
 var _fnNwWsOptionsSetMaximumMessageSize func(objc.ID, int)
@@ -4733,7 +4743,7 @@ func NwWsOptionsSetSkipHandshake(options obj.Object, skipHandshake bool) {
 	_fnNwWsOptionsSetSkipHandshake(objref.IDOf(options), skipHandshake)
 }
 
-var _fnNwWsRequestEnumerateAdditionalHeaders func(objc.ID, func(string, string) bool) bool
+var _fnNwWsRequestEnumerateAdditionalHeaders func(objc.ID, objc.Block) bool
 
 // NwWsRequestEnumerateAdditionalHeaders calls the Network framework function nw_ws_request_enumerate_additional_headers.
 func NwWsRequestEnumerateAdditionalHeaders(request obj.Object, enumerator func(string, string) bool) bool {
@@ -4741,10 +4751,10 @@ func NwWsRequestEnumerateAdditionalHeaders(request obj.Object, enumerator func(s
 	if _fnNwWsRequestEnumerateAdditionalHeaders == nil {
 		ebipurego.RegisterLibFunc(&_fnNwWsRequestEnumerateAdditionalHeaders, _lib, "nw_ws_request_enumerate_additional_headers")
 	}
-	return _fnNwWsRequestEnumerateAdditionalHeaders(objref.IDOf(request), enumerator)
+	return _fnNwWsRequestEnumerateAdditionalHeaders(objref.IDOf(request), objc.NewBlock(func(_ objc.Block, _b0 string, _b1 string) bool { return enumerator(_b0, _b1) }))
 }
 
-var _fnNwWsRequestEnumerateSubprotocols func(objc.ID, func(string) bool) bool
+var _fnNwWsRequestEnumerateSubprotocols func(objc.ID, objc.Block) bool
 
 // NwWsRequestEnumerateSubprotocols calls the Network framework function nw_ws_request_enumerate_subprotocols.
 func NwWsRequestEnumerateSubprotocols(request obj.Object, enumerator func(string) bool) bool {
@@ -4752,7 +4762,7 @@ func NwWsRequestEnumerateSubprotocols(request obj.Object, enumerator func(string
 	if _fnNwWsRequestEnumerateSubprotocols == nil {
 		ebipurego.RegisterLibFunc(&_fnNwWsRequestEnumerateSubprotocols, _lib, "nw_ws_request_enumerate_subprotocols")
 	}
-	return _fnNwWsRequestEnumerateSubprotocols(objref.IDOf(request), enumerator)
+	return _fnNwWsRequestEnumerateSubprotocols(objref.IDOf(request), objc.NewBlock(func(_ objc.Block, _b0 string) bool { return enumerator(_b0) }))
 }
 
 var _fnNwWsResponseAddAdditionalHeader func(objc.ID, string, string)
@@ -4777,7 +4787,7 @@ func NwWsResponseCreate(status unsafe.Pointer, selectedSubprotocol string) unsaf
 	return _fnNwWsResponseCreate(status, selectedSubprotocol)
 }
 
-var _fnNwWsResponseEnumerateAdditionalHeaders func(objc.ID, func(string, string) bool) bool
+var _fnNwWsResponseEnumerateAdditionalHeaders func(objc.ID, objc.Block) bool
 
 // NwWsResponseEnumerateAdditionalHeaders calls the Network framework function nw_ws_response_enumerate_additional_headers.
 func NwWsResponseEnumerateAdditionalHeaders(response obj.Object, enumerator func(string, string) bool) bool {
@@ -4785,7 +4795,7 @@ func NwWsResponseEnumerateAdditionalHeaders(response obj.Object, enumerator func
 	if _fnNwWsResponseEnumerateAdditionalHeaders == nil {
 		ebipurego.RegisterLibFunc(&_fnNwWsResponseEnumerateAdditionalHeaders, _lib, "nw_ws_response_enumerate_additional_headers")
 	}
-	return _fnNwWsResponseEnumerateAdditionalHeaders(objref.IDOf(response), enumerator)
+	return _fnNwWsResponseEnumerateAdditionalHeaders(objref.IDOf(response), objc.NewBlock(func(_ objc.Block, _b0 string, _b1 string) bool { return enumerator(_b0, _b1) }))
 }
 
 var _fnNwWsResponseGetSelectedSubprotocol func(objc.ID) string

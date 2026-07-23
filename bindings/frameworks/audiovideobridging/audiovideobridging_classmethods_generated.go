@@ -6,6 +6,7 @@ package audiovideobridging
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -23,6 +24,12 @@ func ACMPInterfaceWithInterface(anInterface *Interface) *AVB17221ACMPInterface {
 func ACMPInterfaceWithInterfaceNamed(anInterfaceName string) *AVB17221ACMPInterface {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVB17221ACMPInterface")), objc.RegisterName("ACMPInterfaceWithInterfaceNamed:"), purego.NSString(anInterfaceName))
 	return AVB17221ACMPInterfaceFromID(_r)
+}
+
+// ErrorForStatusCode this method returns an NSError filled out with an appropriate description for the passed in status code.
+func ErrorForStatusCode(statusCode AVB17221ACMPStatusCode) unsafe.Pointer {
+	_r := objc.Send[unsafe.Pointer](objc.ID(_class("AVB17221ACMPMessage")), objc.RegisterName("errorForStatusCode:"), statusCode)
+	return _r
 }
 
 // CommandMessage returns this method returns an AVB17221AECPAEMMessage instance setup as an AEM command.
@@ -67,6 +74,12 @@ func AECPInterfaceWithInterface(anInterface *Interface) *AVB17221AECPInterface {
 func AECPInterfaceWithInterfaceNamed(anInterfaceName string) *AVB17221AECPInterface {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVB17221AECPInterface")), objc.RegisterName("AECPInterfaceWithInterfaceNamed:"), purego.NSString(anInterfaceName))
 	return AVB17221AECPInterfaceFromID(_r)
+}
+
+// AVB17221AECPMessageErrorForStatusCode this method returns an NSError filled out with an appropriate description for the passed in status code.
+func AVB17221AECPMessageErrorForStatusCode(statusCode AVB17221AECPStatusCode) unsafe.Pointer {
+	_r := objc.Send[unsafe.Pointer](objc.ID(_class("AVB17221AECPMessage")), objc.RegisterName("errorForStatusCode:"), statusCode)
+	return _r
 }
 
 // NextAvailableDynamicEntityID returns this method is used to allocate a dynamic Entity ID . The entity ID allocated by this call can be used for both publishing an Entity with the AVB17221EntityDiscovery class or as a controllerID for the AVB17221ACMPMessage and AVB17221AECPMessage.

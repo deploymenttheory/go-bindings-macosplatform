@@ -6,6 +6,7 @@ package gamesave
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -100,4 +101,11 @@ func (sds *SyncedDirectoryState) ConflictedVersions() []*SyncedDirectoryVersion 
 	defer runtime.KeepAlive(sds)
 	_arr := objc.Send[objc.ID](objref.IDOf(sds), objc.RegisterName("conflictedVersions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SyncedDirectoryVersion { return SyncedDirectoryVersionFromID(_id) })
+}
+
+// Error returns the error preventing you from using the directory. This property's value is `nil` unless the state is `GSSyncStateError`.
+func (sds *SyncedDirectoryState) Error() unsafe.Pointer {
+	defer runtime.KeepAlive(sds)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(sds), objc.RegisterName("error"))
+	return _r
 }

@@ -6,6 +6,7 @@ package mapkit
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -104,6 +105,13 @@ func (rs *RouteStep) Polyline() *Polyline {
 	defer runtime.KeepAlive(rs)
 	_r := objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("polyline"))
 	return PolylineFromID(_r)
+}
+
+// Distance returns the distance.
+func (rs *RouteStep) Distance() unsafe.Pointer {
+	defer runtime.KeepAlive(rs)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(rs), objc.RegisterName("distance"))
+	return _r
 }
 
 // TransportType returns the transport type.

@@ -5,6 +5,9 @@
 package metalperformanceshadersgraph
 
 import (
+	"runtime"
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
@@ -49,6 +52,13 @@ func graphVariableOpAdopt(id objc.ID) *GraphVariableOp {
 func NewGraphVariableOp() *GraphVariableOp {
 	_id := objc.Send[objc.ID](objc.ID(_class("MPSGraphVariableOp")), objc.RegisterName("new"))
 	return graphVariableOpAdopt(_id)
+}
+
+// Shape returns the shape of the variable.
+func (gvo *GraphVariableOp) Shape() unsafe.Pointer {
+	defer runtime.KeepAlive(gvo)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(gvo), objc.RegisterName("shape"))
+	return _r
 }
 
 var _ GraphOperationProvider = (*GraphVariableOp)(nil)

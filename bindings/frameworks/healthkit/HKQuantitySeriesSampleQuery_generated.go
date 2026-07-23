@@ -6,8 +6,10 @@ package healthkit
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -47,9 +49,24 @@ func quantitySeriesSampleQueryAdopt(id objc.ID) *QuantitySeriesSampleQuery {
 	return x
 }
 
-// NewQuantitySeriesSampleQuery creates a new QuantitySeriesSampleQuery.
-func NewQuantitySeriesSampleQuery() *QuantitySeriesSampleQuery {
-	_id := objc.Send[objc.ID](objc.ID(_class("HKQuantitySeriesSampleQuery")), objc.RegisterName("new"))
+// NewQuantitySeriesSampleQueryWithQuantityTypePredicateQuantityHandler creates a new query for a series of the specified quantity type.
+func NewQuantitySeriesSampleQueryWithQuantityTypePredicateQuantityHandler(quantityType *QuantityType, predicate obj.Object, quantityHandler func(obj.Object, obj.Object, obj.Object, obj.Object, bool, unsafe.Pointer)) *QuantitySeriesSampleQuery {
+	defer runtime.KeepAlive(quantityType)
+	defer runtime.KeepAlive(predicate)
+	_alloc := objc.Send[objc.ID](objc.ID(_class("HKQuantitySeriesSampleQuery")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithQuantityType:predicate:quantityHandler:"), objref.IDOf(quantityType), objref.IDOf(predicate), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 objc.ID, _b3 objc.ID, _b4 bool, _b5 unsafe.Pointer) {
+		quantityHandler(obj.Wrap(_b0), obj.Wrap(_b1), obj.Wrap(_b2), obj.Wrap(_b3), _b4, _b5)
+	}))
+	return quantitySeriesSampleQueryAdopt(_id)
+}
+
+// NewQuantitySeriesSampleQueryWithSampleQuantityHandler creates a new series query.
+func NewQuantitySeriesSampleQueryWithSampleQuantityHandler(quantitySample *QuantitySample, quantityHandler func(obj.Object, obj.Object, obj.Object, bool, unsafe.Pointer)) *QuantitySeriesSampleQuery {
+	defer runtime.KeepAlive(quantitySample)
+	_alloc := objc.Send[objc.ID](objc.ID(_class("HKQuantitySeriesSampleQuery")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSample:quantityHandler:"), objref.IDOf(quantitySample), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 objc.ID, _b3 bool, _b4 unsafe.Pointer) {
+		quantityHandler(obj.Wrap(_b0), obj.Wrap(_b1), obj.Wrap(_b2), _b3, _b4)
+	}))
 	return quantitySeriesSampleQueryAdopt(_id)
 }
 

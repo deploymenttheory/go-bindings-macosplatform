@@ -268,6 +268,13 @@ func (p *Player) Status() PlayerStatus {
 	return _r
 }
 
+// Error returns if the receiver's status is AVPlayerStatusFailed, this describes the error that caused the failure. The value of this property is an NSError that describes what caused the receiver to no longer be able to play items. If the receiver's status is not AVPlayerStatusFailed, the value of this property is nil.
+func (p *Player) Error() unsafe.Pointer {
+	defer runtime.KeepAlive(p)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(p), objc.RegisterName("error"))
+	return _r
+}
+
 // Play begins playback of the current item.
 func (p *Player) Play() {
 	defer runtime.KeepAlive(p)
@@ -549,6 +556,20 @@ func (p *Player) NetworkResourcePriority() PlayerNetworkResourcePriority {
 	purego.Main(func() {
 		_mainthread0 = func() PlayerNetworkResourcePriority {
 			_r := objc.Send[PlayerNetworkResourcePriority](objref.IDOf(p), objc.RegisterName("networkResourcePriority"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
+}
+
+// IntendedSpatialAudioExperience returns the intended spatial audio experience.
+func (p *Player) IntendedSpatialAudioExperience() unsafe.Pointer {
+	defer runtime.KeepAlive(p)
+	var _mainthread0 unsafe.Pointer
+	purego.Main(func() {
+		_mainthread0 = func() unsafe.Pointer {
+			_r := objc.Send[unsafe.Pointer](objref.IDOf(p), objc.RegisterName("intendedSpatialAudioExperience"))
 			return _r
 		}()
 	})

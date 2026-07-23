@@ -25,15 +25,15 @@ func NetFSCopyURLForRemountingVolume(localPathURL obj.Object) obj.Object {
 	return obj.Wrap(_ret)
 }
 
-var _fnNetFSMountURLAsync func(objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, unsafe.Pointer, objc.ID, unsafe.Pointer) int32
+var _fnNetFSMountURLAsync func(objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, unsafe.Pointer, objc.ID, objc.Block) int32
 
 // NetFSMountURLAsync calls the NetFS framework function NetFSMountURLAsync.
-func NetFSMountURLAsync(url obj.Object, mountpath obj.Object, user obj.Object, passwd obj.Object, openOptions obj.Object, mountOptions obj.Object, requestID unsafe.Pointer, dispatchq obj.Object, mountReport unsafe.Pointer) int {
+func NetFSMountURLAsync(url obj.Object, mountpath obj.Object, user obj.Object, passwd obj.Object, openOptions obj.Object, mountOptions obj.Object, requestID unsafe.Pointer, dispatchq obj.Object, mountReport func(int, unsafe.Pointer, unsafe.Pointer)) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNetFSMountURLAsync == nil {
 		ebipurego.RegisterLibFunc(&_fnNetFSMountURLAsync, _lib, "NetFSMountURLAsync")
 	}
-	return int(_fnNetFSMountURLAsync(objref.IDOf(url), objref.IDOf(mountpath), objref.IDOf(user), objref.IDOf(passwd), objref.IDOf(openOptions), objref.IDOf(mountOptions), requestID, objref.IDOf(dispatchq), mountReport))
+	return int(_fnNetFSMountURLAsync(objref.IDOf(url), objref.IDOf(mountpath), objref.IDOf(user), objref.IDOf(passwd), objref.IDOf(openOptions), objref.IDOf(mountOptions), requestID, objref.IDOf(dispatchq), objc.NewBlock(func(_ objc.Block, _b0 int, _b1 unsafe.Pointer, _b2 unsafe.Pointer) { mountReport(_b0, _b1, _b2) })))
 }
 
 var _fnNetFSMountURLCancel func(unsafe.Pointer) int32

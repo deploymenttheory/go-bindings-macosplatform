@@ -55,6 +55,12 @@ func NewBlockDeviceResource() *BlockDeviceResource {
 	return blockDeviceResourceAdopt(_id)
 }
 
+// ReadIntoStartingAtLengthCompletionHandler reads data from the resource into a buffer and executes a block afterwards.
+func (bdr *BlockDeviceResource) ReadIntoStartingAtLengthCompletionHandler(buffer unsafe.Pointer, offset int64, length int, completionHandler func(int, unsafe.Pointer)) {
+	defer runtime.KeepAlive(bdr)
+	objc.Send[objc.ID](objref.IDOf(bdr), objc.RegisterName("readInto:startingAt:length:completionHandler:"), buffer, offset, length, objc.NewBlock(func(_ objc.Block, _b0 int, _b1 unsafe.Pointer) { completionHandler(_b0, _b1) }))
+}
+
 // ReadIntoStartingAtLength synchronously reads data from the resource into a buffer.
 func (bdr *BlockDeviceResource) ReadIntoStartingAtLength(buffer unsafe.Pointer, offset int64, length int) (result int, err error) {
 	defer runtime.KeepAlive(bdr)
@@ -64,6 +70,12 @@ func (bdr *BlockDeviceResource) ReadIntoStartingAtLength(buffer unsafe.Pointer, 
 		return 0, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return _r, nil
+}
+
+// WriteFromStartingAtLengthCompletionHandler writes data from from a buffer to the resource and executes a block afterwards.
+func (bdr *BlockDeviceResource) WriteFromStartingAtLengthCompletionHandler(buffer unsafe.Pointer, offset int64, length int, completionHandler func(int, unsafe.Pointer)) {
+	defer runtime.KeepAlive(bdr)
+	objc.Send[objc.ID](objref.IDOf(bdr), objc.RegisterName("writeFrom:startingAt:length:completionHandler:"), buffer, offset, length, objc.NewBlock(func(_ objc.Block, _b0 int, _b1 unsafe.Pointer) { completionHandler(_b0, _b1) }))
 }
 
 // WriteFromStartingAtLength synchronously writes data from from a buffer to the resource and executes a block afterwards.

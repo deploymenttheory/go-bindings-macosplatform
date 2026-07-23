@@ -6,6 +6,7 @@ package appkit
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
@@ -135,6 +136,13 @@ func (s *Screen) ColorSpace() *ColorSpace {
 	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("colorSpace"))
 	return ColorSpaceFromID(_r)
+}
+
+// SupportedWindowDepths returns the supported window depths.
+func (s *Screen) SupportedWindowDepths() unsafe.Pointer {
+	defer runtime.KeepAlive(s)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(s), objc.RegisterName("supportedWindowDepths"))
+	return _r
 }
 
 // BackingScaleFactor returns the backing scale factor.

@@ -7,6 +7,7 @@ package avfoundation
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
@@ -246,6 +247,12 @@ func (at *AssetTrack) SegmentForTrackTime(trackTime coremedia.CMTime) *AssetTrac
 	defer runtime.KeepAlive(at)
 	_r := objc.Send[objc.ID](objref.IDOf(at), objc.RegisterName("segmentForTrackTime:"), trackTime)
 	return AssetTrackSegmentFromID(_r)
+}
+
+// LoadSegmentForTrackTimeCompletionHandler loads a segment with a target time range that contains, or is closest to, the specified track time.
+func (at *AssetTrack) LoadSegmentForTrackTimeCompletionHandler(trackTime coremedia.CMTime, completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
+	defer runtime.KeepAlive(at)
+	objc.Send[objc.ID](objref.IDOf(at), objc.RegisterName("loadSegmentForTrackTime:completionHandler:"), trackTime, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 unsafe.Pointer) { completionHandler(_b0, _b1) }))
 }
 
 // SamplePresentationTimeForTrackTime maps the specified track time through the appropriate time mapping and returns the resulting sample presentation time.

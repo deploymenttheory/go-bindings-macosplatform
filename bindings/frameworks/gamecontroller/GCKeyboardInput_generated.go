@@ -54,6 +54,14 @@ func NewKeyboardInput() *KeyboardInput {
 	return keyboardInputAdopt(_id)
 }
 
+// WithKeyChangedHandler sets the block that the profile calls when the user presses a key.
+func (ki *KeyboardInput) WithKeyChangedHandler(keyChangedHandler func(obj.Object, obj.Object, int, bool)) *KeyboardInput {
+	objc.Send[objc.ID](objref.IDOf(ki), objc.RegisterName("setKeyChangedHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 int, _b3 bool) {
+		keyChangedHandler(obj.Wrap(_b0), obj.Wrap(_b1), _b2, _b3)
+	}))
+	return ki
+}
+
 // WithValueDidChangeHandler sets the block that the profile calls when an element’s value changes.
 func (ki *KeyboardInput) WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *KeyboardInput {
 	objc.Send[objc.ID](objref.IDOf(ki), objc.RegisterName("setValueDidChangeHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { valueDidChangeHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))

@@ -110,6 +110,13 @@ func (v_ *Value) GetValueSize(value unsafe.Pointer, size int) {
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("getValue:size:"), value, size)
 }
 
+// ObjCType returns the obj c type.
+func (v_ *Value) ObjCType() unsafe.Pointer {
+	defer runtime.KeepAlive(v_)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(v_), objc.RegisterName("objCType"))
+	return _r
+}
+
 // IsEqualToValue returns a Boolean value that indicates whether the value object and another value object are equal.
 func (v_ *Value) IsEqualToValue(value *Value) bool {
 	defer runtime.KeepAlive(v_)
@@ -123,6 +130,13 @@ func (v_ *Value) NonretainedObjectValue() obj.Object {
 	defer runtime.KeepAlive(v_)
 	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("nonretainedObjectValue"))
 	return obj.Wrap(_r)
+}
+
+// PointerValue returns the pointer value.
+func (v_ *Value) PointerValue() unsafe.Pointer {
+	defer runtime.KeepAlive(v_)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(v_), objc.RegisterName("pointerValue"))
+	return _r
 }
 
 // GetValue copies the value into the specified buffer.

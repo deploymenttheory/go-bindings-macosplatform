@@ -119,6 +119,12 @@ func (sc *SmartCard) WithUseCommandChaining(useCommandChaining bool) *SmartCard 
 	return sc
 }
 
+// BeginSessionWithReply begins a session with the Smart Card.
+func (sc *SmartCard) BeginSessionWithReply(reply func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(sc)
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("beginSessionWithReply:"), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { reply(_b0, _b1) }))
+}
+
 // TransmitRequestReply transmits data in Application Protocol Data Unit (APDU) format to the Smart Card.
 //
 // TransmitRequestReply blocks until the operation completes or ctx is cancelled.
@@ -207,6 +213,20 @@ func (sc *SmartCard) Context() obj.Object {
 	defer runtime.KeepAlive(sc)
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("context"))
 	return obj.Wrap(_r)
+}
+
+// SendInsP1P2DataLeReply asynchronously transmits an APDU command to the card, returning the response in a completion handler.
+func (sc *SmartCard) SendInsP1P2DataLeReply(ins uint8, p1 uint8, p2 uint8, requestData []byte, le obj.Object, reply func(obj.Object, uint16, unsafe.Pointer)) {
+	defer runtime.KeepAlive(sc)
+	defer runtime.KeepAlive(le)
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("sendIns:p1:p2:data:le:reply:"), ins, p1, p2, rt.BytesToNSData(requestData), objref.IDOf(le), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 uint16, _b2 unsafe.Pointer) { reply(obj.Wrap(_b0), _b1, _b2) }))
+}
+
+// InSessionWithErrorExecuteBlock synchronously begins a session, executes the given block, and ends the session.
+func (sc *SmartCard) InSessionWithErrorExecuteBlock(err unsafe.Pointer, block func(unsafe.Pointer) bool) bool {
+	defer runtime.KeepAlive(sc)
+	_r := objc.Send[bool](objref.IDOf(sc), objc.RegisterName("inSessionWithError:executeBlock:"), err, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) bool { return block(_b0) }))
+	return _r
 }
 
 // SendInsP1P2DataLeSw synchronously transmits an APDU command to the card and returns the response.

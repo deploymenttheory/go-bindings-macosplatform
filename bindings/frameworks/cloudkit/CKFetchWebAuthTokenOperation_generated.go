@@ -5,11 +5,11 @@
 package cloudkit
 
 import (
-	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -65,6 +65,14 @@ func NewFetchWebAuthTokenOperationWithAPIToken(apiToken string) *FetchWebAuthTok
 // WithAPIToken sets the API token that allows access to an app’s container.
 func (fwato *FetchWebAuthTokenOperation) WithAPIToken(apiToken string) *FetchWebAuthTokenOperation {
 	objc.Send[objc.ID](objref.IDOf(fwato), objc.RegisterName("setAPIToken:"), purego.NSString(apiToken))
+	return fwato
+}
+
+// WithFetchWebAuthTokenCompletionBlock sets the block to execute when the operation finishes.
+func (fwato *FetchWebAuthTokenOperation) WithFetchWebAuthTokenCompletionBlock(fetchWebAuthTokenCompletionBlock func(obj.Object, unsafe.Pointer)) *FetchWebAuthTokenOperation {
+	objc.Send[objc.ID](objref.IDOf(fwato), objc.RegisterName("setFetchWebAuthTokenCompletionBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) {
+		fetchWebAuthTokenCompletionBlock(obj.Wrap(_b0), _b1)
+	}))
 	return fwato
 }
 
@@ -134,32 +142,6 @@ func (fwato *FetchWebAuthTokenOperation) APIToken() string {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetFetchWebAuthTokenCompletionBlock wraps the corresponding Objective-C method.
-//
-// SetFetchWebAuthTokenCompletionBlock blocks until the operation completes or ctx is cancelled.
-func (fwato *FetchWebAuthTokenOperation) SetFetchWebAuthTokenCompletionBlock(ctx context.Context) (result string, err error) {
-	defer runtime.KeepAlive(fwato)
-	type _result struct {
-		val string
-		err error
-	}
-	_ch := make(chan _result, 1)
-	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
-		var _o _result
-		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
-		_o.val = purego.GoString(_p0)
-		_ch <- _o
-	})
-	objc.Send[objc.ID](objref.IDOf(fwato), objc.RegisterName("setFetchWebAuthTokenCompletionBlock:"), _block)
-	select {
-	case _o := <-_ch:
-		return _o.val, _o.err
-	case <-ctx.Done():
-		var _zero string
-		return _zero, ctx.Err()
-	}
 }
 
 var _ DatabaseOperationProvider = (*FetchWebAuthTokenOperation)(nil)

@@ -5,11 +5,10 @@
 package cloudkit
 
 import (
-	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
@@ -112,6 +111,20 @@ func (qo *QueryOperation) WithRecordFetchedBlock(recordFetchedBlock func(obj.Obj
 	return qo
 }
 
+// WithRecordMatchedBlock sets the closure to execute when a record match is available.
+func (qo *QueryOperation) WithRecordMatchedBlock(recordMatchedBlock func(obj.Object, obj.Object, unsafe.Pointer)) *QueryOperation {
+	objc.Send[objc.ID](objref.IDOf(qo), objc.RegisterName("setRecordMatchedBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
+		recordMatchedBlock(obj.Wrap(_b0), obj.Wrap(_b1), _b2)
+	}))
+	return qo
+}
+
+// WithQueryCompletionBlock sets the closure to execute after CloudKit retrieves all of the records.
+func (qo *QueryOperation) WithQueryCompletionBlock(queryCompletionBlock func(obj.Object, unsafe.Pointer)) *QueryOperation {
+	objc.Send[objc.ID](objref.IDOf(qo), objc.RegisterName("setQueryCompletionBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { queryCompletionBlock(obj.Wrap(_b0), _b1) }))
+	return qo
+}
+
 // WithDatabase sets the database that the operation uses.
 func (qo *QueryOperation) WithDatabase(database *Database) *QueryOperation {
 	defer runtime.KeepAlive(database)
@@ -205,32 +218,6 @@ func (qo *QueryOperation) DesiredKeys() []obj.Object {
 	defer runtime.KeepAlive(qo)
 	_arr := objc.Send[objc.ID](objref.IDOf(qo), objc.RegisterName("desiredKeys"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
-}
-
-// SetQueryCompletionBlock wraps the corresponding Objective-C method.
-//
-// SetQueryCompletionBlock blocks until the operation completes or ctx is cancelled.
-func (qo *QueryOperation) SetQueryCompletionBlock(ctx context.Context) (result *QueryCursor, err error) {
-	defer runtime.KeepAlive(qo)
-	type _result struct {
-		val *QueryCursor
-		err error
-	}
-	_ch := make(chan _result, 1)
-	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
-		var _o _result
-		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
-		_o.val = QueryCursorFromID(_p0)
-		_ch <- _o
-	})
-	objc.Send[objc.ID](objref.IDOf(qo), objc.RegisterName("setQueryCompletionBlock:"), _block)
-	select {
-	case _o := <-_ch:
-		return _o.val, _o.err
-	case <-ctx.Done():
-		var _zero *QueryCursor
-		return _zero, ctx.Err()
-	}
 }
 
 var _ DatabaseOperationProvider = (*QueryOperation)(nil)

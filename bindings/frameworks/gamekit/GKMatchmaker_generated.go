@@ -7,6 +7,7 @@ package gamekit
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -235,6 +236,24 @@ func (m *Matchmaker) FinishMatchmakingForMatch(match *Match) {
 	defer runtime.KeepAlive(m)
 	defer runtime.KeepAlive(match)
 	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("finishMatchmakingForMatch:"), objref.IDOf(match))
+}
+
+// QueryPlayerGroupActivityWithCompletionHandler finds the number of players in a player group who recently requested a match.
+func (m *Matchmaker) QueryPlayerGroupActivityWithCompletionHandler(playerGroup int, completionHandler func(int, unsafe.Pointer)) {
+	defer runtime.KeepAlive(m)
+	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("queryPlayerGroupActivity:withCompletionHandler:"), playerGroup, objc.NewBlock(func(_ objc.Block, _b0 int, _b1 unsafe.Pointer) { completionHandler(_b0, _b1) }))
+}
+
+// QueryActivityWithCompletionHandler finds the number of players, across player groups, who recently requested a match.
+func (m *Matchmaker) QueryActivityWithCompletionHandler(completionHandler func(int, unsafe.Pointer)) {
+	defer runtime.KeepAlive(m)
+	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("queryActivityWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 int, _b1 unsafe.Pointer) { completionHandler(_b0, _b1) }))
+}
+
+// QueryQueueActivityWithCompletionHandler finds the number of players in a specific queue who recently requested a match.
+func (m *Matchmaker) QueryQueueActivityWithCompletionHandler(queueName string, completionHandler func(int, unsafe.Pointer)) {
+	defer runtime.KeepAlive(m)
+	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("queryQueueActivity:withCompletionHandler:"), purego.NSString(queueName), objc.NewBlock(func(_ objc.Block, _b0 int, _b1 unsafe.Pointer) { completionHandler(_b0, _b1) }))
 }
 
 // StartBrowsingForNearbyPlayersWithHandler finds nearby players through Bluetooth or WiFi on the same subnet.

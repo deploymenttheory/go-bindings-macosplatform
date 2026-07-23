@@ -255,3 +255,21 @@ func (a *Achievement) SelectChallengeablePlayerIDs(ctx context.Context, playerID
 		return _zero, ctx.Err()
 	}
 }
+
+// ChallengeComposeControllerWithMessagePlayersCompletionHandler provides a view controller that you present to the player to issue an achievement challenge.
+func (a *Achievement) ChallengeComposeControllerWithMessagePlayersCompletionHandler(message string, players []*Player, completionHandler func(obj.Object, bool, obj.Object)) obj.Object {
+	defer runtime.KeepAlive(a)
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("challengeComposeControllerWithMessage:players:completionHandler:"), purego.NSString(message), purego.SliceToNSArray(players, func(_v *Player) objc.ID { return objref.IDOf(_v) }), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 bool, _b2 objc.ID) {
+		completionHandler(obj.Wrap(_b0), _b1, obj.Wrap(_b2))
+	}))
+	return obj.Wrap(_r)
+}
+
+// ChallengeComposeControllerWithMessagePlayersCompletion provides a view controller that you present to the player to issue an achievement challenge.
+func (a *Achievement) ChallengeComposeControllerWithMessagePlayersCompletion(message string, players []*Player, completionHandler func(obj.Object, bool, obj.Object)) obj.Object {
+	defer runtime.KeepAlive(a)
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("challengeComposeControllerWithMessage:players:completion:"), purego.NSString(message), purego.SliceToNSArray(players, func(_v *Player) objc.ID { return objref.IDOf(_v) }), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 bool, _b2 objc.ID) {
+		completionHandler(obj.Wrap(_b0), _b1, obj.Wrap(_b2))
+	}))
+	return obj.Wrap(_r)
+}

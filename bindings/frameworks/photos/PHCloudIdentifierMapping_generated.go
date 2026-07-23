@@ -6,6 +6,7 @@ package photos
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -84,4 +85,11 @@ func (cim *CloudIdentifierMapping) CloudIdentifier() *CloudIdentifier {
 	defer runtime.KeepAlive(cim)
 	_r := objc.Send[objc.ID](objref.IDOf(cim), objc.RegisterName("cloudIdentifier"))
 	return CloudIdentifierFromID(_r)
+}
+
+// Error returns error An error indicating why the \c cloudIdentifier is nil. \c PHPhotosErrorIdentifierNotFound if no resource could be found for the provided local identifier.
+func (cim *CloudIdentifierMapping) Error() unsafe.Pointer {
+	defer runtime.KeepAlive(cim)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(cim), objc.RegisterName("error"))
+	return _r
 }

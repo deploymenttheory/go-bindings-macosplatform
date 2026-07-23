@@ -6,6 +6,7 @@ package imagecapturecore
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -128,6 +129,13 @@ func (sbd *ScannerBandData) PixelDataType() ScannerPixelDataType {
 	return _r
 }
 
+// ColorSyncProfilePath returns the path to the color profile matching the banded data.
+func (sbd *ScannerBandData) ColorSyncProfilePath() unsafe.Pointer {
+	defer runtime.KeepAlive(sbd)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(sbd), objc.RegisterName("colorSyncProfilePath"))
+	return _r
+}
+
 // BytesPerRow returns descries how many bytes are in each image band row.
 func (sbd *ScannerBandData) BytesPerRow() int {
 	defer runtime.KeepAlive(sbd)
@@ -153,5 +161,12 @@ func (sbd *ScannerBandData) DataNumRows() int {
 func (sbd *ScannerBandData) DataSize() int {
 	defer runtime.KeepAlive(sbd)
 	_r := objc.Send[int](objref.IDOf(sbd), objc.RegisterName("dataSize"))
+	return _r
+}
+
+// DataBuffer returns the pointer to the data buffer object.
+func (sbd *ScannerBandData) DataBuffer() unsafe.Pointer {
+	defer runtime.KeepAlive(sbd)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(sbd), objc.RegisterName("dataBuffer"))
 	return _r
 }

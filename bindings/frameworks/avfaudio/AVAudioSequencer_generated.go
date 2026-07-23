@@ -186,6 +186,14 @@ func (as *AudioSequencer) RemoveTrack(track *MusicTrack) bool {
 	return _r
 }
 
+// SetUserCallback adds a callback that the sequencer calls each time it encounters a user event during playback.
+func (as *AudioSequencer) SetUserCallback(userCallback func(obj.Object, obj.Object, float64)) {
+	defer runtime.KeepAlive(as)
+	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("setUserCallback:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 float64) {
+		userCallback(obj.Wrap(_b0), obj.Wrap(_b1), _b2)
+	}))
+}
+
 // Tracks returns an NSArray containing all the AVMusicTracks in the sequence This list will not include the tempo track.
 //
 // Tracks returns the collection as a Go slice.

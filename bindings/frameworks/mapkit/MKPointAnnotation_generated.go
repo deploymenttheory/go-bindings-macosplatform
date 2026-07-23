@@ -5,6 +5,7 @@
 package mapkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -83,6 +84,13 @@ func (pa *PointAnnotation) WithTitle(title string) *PointAnnotation {
 func (pa *PointAnnotation) WithSubtitle(subtitle string) *PointAnnotation {
 	objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
 	return pa
+}
+
+// Coordinate returns the coordinate.
+func (pa *PointAnnotation) Coordinate() unsafe.Pointer {
+	defer runtime.KeepAlive(pa)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(pa), objc.RegisterName("coordinate"))
+	return _r
 }
 
 var _ ShapeProvider = (*PointAnnotation)(nil)

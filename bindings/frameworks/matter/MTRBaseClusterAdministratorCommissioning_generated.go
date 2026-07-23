@@ -7,6 +7,7 @@ package matter
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -67,6 +68,33 @@ func NewMTRBaseClusterAdministratorCommissioningWithDeviceEndpointQueue(device *
 	return mTRBaseClusterAdministratorCommissioningAdopt(_id)
 }
 
+// OpenCommissioningWindowWithParamsCompletion command OpenCommissioningWindow This command is used by a current Administrator to instruct a Node to go into commissioning mode.
+func (mbcac *MTRBaseClusterAdministratorCommissioning) OpenCommissioningWindowWithParamsCompletion(params *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcac)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcac), objc.RegisterName("openCommissioningWindowWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// OpenBasicCommissioningWindowWithParamsCompletion command OpenBasicCommissioningWindow This command MAY be used by a current Administrator to instruct a Node to go into commissioning mode, if the node supports the Basic Commissioning Method.
+func (mbcac *MTRBaseClusterAdministratorCommissioning) OpenBasicCommissioningWindowWithParamsCompletion(params *MTRAdministratorCommissioningClusterOpenBasicCommissioningWindowParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcac)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcac), objc.RegisterName("openBasicCommissioningWindowWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// RevokeCommissioningWithParamsCompletion command RevokeCommissioning This command is used by a current Administrator to instruct a Node to revoke any active OpenCommissioningWindow or OpenBasicCommissioningWindow command.
+func (mbcac *MTRBaseClusterAdministratorCommissioning) RevokeCommissioningWithParamsCompletion(params *MTRAdministratorCommissioningClusterRevokeCommissioningParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcac)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcac), objc.RegisterName("revokeCommissioningWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// RevokeCommissioningWithCompletion wraps the corresponding Objective-C method.
+func (mbcac *MTRBaseClusterAdministratorCommissioning) RevokeCommissioningWithCompletion(completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcac)
+	objc.Send[objc.ID](objref.IDOf(mbcac), objc.RegisterName("revokeCommissioningWithCompletion:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // ReadAttributeWindowStatusWithCompletion reads attribute window status with completion.
 //
 // ReadAttributeWindowStatusWithCompletion blocks until the operation completes or ctx is cancelled.
@@ -110,7 +138,7 @@ func (mbcac *MTRBaseClusterAdministratorCommissioning) SubscribeAttributeWindowS
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcac), objc.RegisterName("subscribeAttributeWindowStatusWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcac), objc.RegisterName("subscribeAttributeWindowStatusWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -163,7 +191,7 @@ func (mbcac *MTRBaseClusterAdministratorCommissioning) SubscribeAttributeAdminFa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcac), objc.RegisterName("subscribeAttributeAdminFabricIndexWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcac), objc.RegisterName("subscribeAttributeAdminFabricIndexWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -216,7 +244,7 @@ func (mbcac *MTRBaseClusterAdministratorCommissioning) SubscribeAttributeAdminVe
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcac), objc.RegisterName("subscribeAttributeAdminVendorIdWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcac), objc.RegisterName("subscribeAttributeAdminVendorIdWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -269,7 +297,7 @@ func (mbcac *MTRBaseClusterAdministratorCommissioning) SubscribeAttributeGenerat
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcac), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcac), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -322,7 +350,7 @@ func (mbcac *MTRBaseClusterAdministratorCommissioning) SubscribeAttributeAccepte
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcac), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcac), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -375,7 +403,7 @@ func (mbcac *MTRBaseClusterAdministratorCommissioning) SubscribeAttributeAttribu
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcac), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcac), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -428,7 +456,7 @@ func (mbcac *MTRBaseClusterAdministratorCommissioning) SubscribeAttributeFeature
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcac), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcac), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -481,7 +509,7 @@ func (mbcac *MTRBaseClusterAdministratorCommissioning) SubscribeAttributeCluster
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcac), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcac), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -489,6 +517,33 @@ func (mbcac *MTRBaseClusterAdministratorCommissioning) SubscribeAttributeCluster
 		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
+}
+
+// OpenCommissioningWindowWithParamsCompletionHandler opens commissioning window with params completion handler.
+func (mbcac *MTRBaseClusterAdministratorCommissioning) OpenCommissioningWindowWithParamsCompletionHandler(params *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcac)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcac), objc.RegisterName("openCommissioningWindowWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// OpenBasicCommissioningWindowWithParamsCompletionHandler opens basic commissioning window with params completion handler.
+func (mbcac *MTRBaseClusterAdministratorCommissioning) OpenBasicCommissioningWindowWithParamsCompletionHandler(params *MTRAdministratorCommissioningClusterOpenBasicCommissioningWindowParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcac)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcac), objc.RegisterName("openBasicCommissioningWindowWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// RevokeCommissioningWithParamsCompletionHandler wraps the corresponding Objective-C method.
+func (mbcac *MTRBaseClusterAdministratorCommissioning) RevokeCommissioningWithParamsCompletionHandler(params *MTRAdministratorCommissioningClusterRevokeCommissioningParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcac)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcac), objc.RegisterName("revokeCommissioningWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// RevokeCommissioningWithCompletionHandler wraps the corresponding Objective-C method.
+func (mbcac *MTRBaseClusterAdministratorCommissioning) RevokeCommissioningWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcac)
+	objc.Send[objc.ID](objref.IDOf(mbcac), objc.RegisterName("revokeCommissioningWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
 }
 
 // ReadAttributeWindowStatus reads attribute window status.
@@ -536,7 +591,7 @@ func (mbcac *MTRBaseClusterAdministratorCommissioning) SubscribeAttributeWindowS
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcac), objc.RegisterName("subscribeAttributeWindowStatusWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcac), objc.RegisterName("subscribeAttributeWindowStatusWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -591,7 +646,7 @@ func (mbcac *MTRBaseClusterAdministratorCommissioning) SubscribeAttributeAdminFa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcac), objc.RegisterName("subscribeAttributeAdminFabricIndexWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcac), objc.RegisterName("subscribeAttributeAdminFabricIndexWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -646,7 +701,7 @@ func (mbcac *MTRBaseClusterAdministratorCommissioning) SubscribeAttributeAdminVe
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcac), objc.RegisterName("subscribeAttributeAdminVendorIdWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcac), objc.RegisterName("subscribeAttributeAdminVendorIdWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -701,7 +756,7 @@ func (mbcac *MTRBaseClusterAdministratorCommissioning) SubscribeAttributeGenerat
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcac), objc.RegisterName("subscribeAttributeGeneratedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcac), objc.RegisterName("subscribeAttributeGeneratedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -756,7 +811,7 @@ func (mbcac *MTRBaseClusterAdministratorCommissioning) SubscribeAttributeAccepte
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcac), objc.RegisterName("subscribeAttributeAcceptedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcac), objc.RegisterName("subscribeAttributeAcceptedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -811,7 +866,7 @@ func (mbcac *MTRBaseClusterAdministratorCommissioning) SubscribeAttributeAttribu
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcac), objc.RegisterName("subscribeAttributeAttributeListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcac), objc.RegisterName("subscribeAttributeAttributeListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -866,7 +921,7 @@ func (mbcac *MTRBaseClusterAdministratorCommissioning) SubscribeAttributeFeature
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcac), objc.RegisterName("subscribeAttributeFeatureMapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcac), objc.RegisterName("subscribeAttributeFeatureMapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -921,7 +976,7 @@ func (mbcac *MTRBaseClusterAdministratorCommissioning) SubscribeAttributeCluster
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcac), objc.RegisterName("subscribeAttributeClusterRevisionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcac), objc.RegisterName("subscribeAttributeClusterRevisionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err

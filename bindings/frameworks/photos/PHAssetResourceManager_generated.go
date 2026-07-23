@@ -7,6 +7,7 @@ package photos
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -79,6 +80,15 @@ func (arm *AssetResourceManager) String() string {
 func NewAssetResourceManager() *AssetResourceManager {
 	_id := objc.Send[objc.ID](objc.ID(_class("PHAssetResourceManager")), objc.RegisterName("new"))
 	return assetResourceManagerAdopt(_id)
+}
+
+// RequestDataForAssetResourceOptionsDataReceivedHandlerCompletionHandler requests the underlying data for the specified asset resource, to be delivered asynchronously.
+func (arm *AssetResourceManager) RequestDataForAssetResourceOptionsDataReceivedHandlerCompletionHandler(resource *AssetResource, options *AssetResourceRequestOptions, handler func(obj.Object), completionHandler func(unsafe.Pointer)) int32 {
+	defer runtime.KeepAlive(arm)
+	defer runtime.KeepAlive(resource)
+	defer runtime.KeepAlive(options)
+	_r := objc.Send[int32](objref.IDOf(arm), objc.RegisterName("requestDataForAssetResource:options:dataReceivedHandler:completionHandler:"), objref.IDOf(resource), objref.IDOf(options), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { handler(obj.Wrap(_b0)) }), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+	return _r
 }
 
 // WriteDataForAssetResourceToFileOptions requests the underlying data for the specified asset resource, to be asynchronously written to a local file.

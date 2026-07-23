@@ -6,6 +6,7 @@ package mapkit
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -79,6 +80,25 @@ func NewMapSnapshotterWithOptions(options *MapSnapshotOptions) *MapSnapshotter {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKMapSnapshotter")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOptions:"), objref.IDOf(options))
 	return mapSnapshotterAdopt(_id)
+}
+
+// StartWithCompletionHandler submits the request to create a snapshot and delivers the results to the specified block.
+func (ms *MapSnapshotter) StartWithCompletionHandler(completionHandler func(obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(ms)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("startWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
+	})
+
+}
+
+// StartWithQueueCompletionHandler submits the request to create a snapshot and executes the resulting block on the specified queue.
+func (ms *MapSnapshotter) StartWithQueueCompletionHandler(queue obj.Object, completionHandler func(obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(ms)
+	defer runtime.KeepAlive(queue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("startWithQueue:completionHandler:"), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
+	})
+
 }
 
 // Cancel cancels the request to create a snapshot.

@@ -655,6 +655,29 @@ func (e AudioVoiceProcessingOtherAudioDuckingLevel) String() string {
 	}
 }
 
+// Types of speech activity events.
+type AudioVoiceProcessingSpeechActivityEvent int64
+
+const (
+	// Indicates the start of speech activity.
+	AudioVoiceProcessingSpeechActivityStarted AudioVoiceProcessingSpeechActivityEvent = 0
+	// Indicates the end of speech activity.
+	AudioVoiceProcessingSpeechActivityEnded AudioVoiceProcessingSpeechActivityEvent = 1
+)
+
+// String returns the AudioVoiceProcessingSpeechActivityEvent constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AudioVoiceProcessingSpeechActivityEvent) String() string {
+	switch e {
+	case AudioVoiceProcessingSpeechActivityStarted:
+		return "AudioVoiceProcessingSpeechActivityStarted"
+	case AudioVoiceProcessingSpeechActivityEnded:
+		return "AudioVoiceProcessingSpeechActivityEnded"
+	default:
+		return fmt.Sprintf("AudioVoiceProcessingSpeechActivityEvent(%d)", int64(e))
+	}
+}
+
 // Constants that represents control change event types.
 type MIDIControlChangeMessageType int64
 
@@ -1666,29 +1689,6 @@ func (e AudioStereoOrientation) String() string {
 		return "AudioStereoOrientationLandscapeLeft"
 	default:
 		return fmt.Sprintf("AudioStereoOrientation(%d)", int64(e))
-	}
-}
-
-// Types of speech activity events.
-type AudioVoiceProcessingSpeechActivityEvent int64
-
-const (
-	// Indicates the start of speech activity.
-	AudioVoiceProcessingSpeechActivityStarted AudioVoiceProcessingSpeechActivityEvent = 0
-	// Indicates the end of speech activity.
-	AudioVoiceProcessingSpeechActivityEnded AudioVoiceProcessingSpeechActivityEvent = 1
-)
-
-// String returns the AudioVoiceProcessingSpeechActivityEvent constant's name, or its numeric form when the
-// value is not a known constant.
-func (e AudioVoiceProcessingSpeechActivityEvent) String() string {
-	switch e {
-	case AudioVoiceProcessingSpeechActivityStarted:
-		return "AudioVoiceProcessingSpeechActivityStarted"
-	case AudioVoiceProcessingSpeechActivityEnded:
-		return "AudioVoiceProcessingSpeechActivityEnded"
-	default:
-		return fmt.Sprintf("AudioVoiceProcessingSpeechActivityEvent(%d)", int64(e))
 	}
 }
 

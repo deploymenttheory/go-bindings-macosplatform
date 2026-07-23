@@ -6,6 +6,7 @@ package matter
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -57,6 +58,21 @@ func NewMTRClusterTemperatureControlWithDeviceEndpointIDQueue(device *MTRDevice,
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterTemperatureControl")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterTemperatureControlAdopt(_id)
+}
+
+// SetTemperatureWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+func (mctc *MTRClusterTemperatureControl) SetTemperatureWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRTemperatureControlClusterSetTemperatureParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mctc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mctc), objc.RegisterName("setTemperatureWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// SetTemperatureWithExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+func (mctc *MTRClusterTemperatureControl) SetTemperatureWithExpectedValuesExpectedValueIntervalCompletion(expectedValues []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mctc)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mctc), objc.RegisterName("setTemperatureWithExpectedValues:expectedValueInterval:completion:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
 // ReadAttributeTemperatureSetpointWithParams reads attribute temperature setpoint with params.

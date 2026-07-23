@@ -6,6 +6,7 @@ package matter
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -64,6 +65,22 @@ func NewMTRClusterIdentifyWithDeviceEndpointQueue(device *MTRDevice, endpoint ui
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterIdentify")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
 	return mTRClusterIdentifyAdopt(_id)
+}
+
+// IdentifyWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+func (mci *MTRClusterIdentify) IdentifyWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRIdentifyClusterIdentifyParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mci)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mci), objc.RegisterName("identifyWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// TriggerEffectWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+func (mci *MTRClusterIdentify) TriggerEffectWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRIdentifyClusterTriggerEffectParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mci)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mci), objc.RegisterName("triggerEffectWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
 // ReadAttributeIdentifyTimeWithParams reads attribute identify time with params.
@@ -135,6 +152,22 @@ func (mci *MTRClusterIdentify) ReadAttributeClusterRevisionWithParams(params *MT
 	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mci), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
+// IdentifyWithParamsExpectedValuesExpectedValueIntervalCompletionHandler wraps the corresponding Objective-C method.
+func (mci *MTRClusterIdentify) IdentifyWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRIdentifyClusterIdentifyParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mci)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mci), objc.RegisterName("identifyWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// TriggerEffectWithParamsExpectedValuesExpectedValueIntervalCompletionHandler wraps the corresponding Objective-C method.
+func (mci *MTRClusterIdentify) TriggerEffectWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRIdentifyClusterTriggerEffectParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mci)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mci), objc.RegisterName("triggerEffectWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
 }
 
 var _ MTRGenericClusterProvider = (*MTRClusterIdentify)(nil)

@@ -6,6 +6,7 @@ package metalperformanceshaders
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
@@ -111,6 +112,13 @@ func (cct *CNNConvolutionTranspose) ResultStateForSourceImageSourceStatesDestina
 	defer runtime.KeepAlive(destinationImage)
 	_r := objc.Send[objc.ID](objref.IDOf(cct), objc.RegisterName("resultStateForSourceImage:sourceStates:destinationImage:"), objref.IDOf(sourceImage), purego.SliceToNSArray(sourceStates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(destinationImage))
 	return obj.Wrap(_r)
+}
+
+// ResultStateBatchForSourceImageSourceStatesDestinationImage wraps the corresponding Objective-C method.
+func (cct *CNNConvolutionTranspose) ResultStateBatchForSourceImageSourceStatesDestinationImage(sourceImage unsafe.Pointer, sourceStates []obj.Object, destinationImage unsafe.Pointer) unsafe.Pointer {
+	defer runtime.KeepAlive(cct)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(cct), objc.RegisterName("resultStateBatchForSourceImage:sourceStates:destinationImage:"), sourceImage, purego.SliceToNSArray(sourceStates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), destinationImage)
+	return _r
 }
 
 // ReloadWeightsAndBiasesFromDataSource CPU side reload. Reload the updated weights and biases from data provider into internal weights and bias buffers. Weights and biases gradients needed for update are obtained from MPSCNNConvolutionTransposeGradientState object. Data provider passed in init call is used for this purpose.

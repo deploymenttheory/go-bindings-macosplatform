@@ -86,6 +86,22 @@ func NewWKWebExtensionMessagePort() *WKWebExtensionMessagePort {
 	return _mainthread0
 }
 
+// WithMessageHandler sets the block to be executed when a message is received from the web extension. An optional block to be invoked when a message is received, taking two parameters: the message and an optional error.
+func (wwemp *WKWebExtensionMessagePort) WithMessageHandler(messageHandler func(obj.Object, unsafe.Pointer)) *WKWebExtensionMessagePort {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwemp), objc.RegisterName("setMessageHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { messageHandler(obj.Wrap(_b0), _b1) }))
+	})
+	return wwemp
+}
+
+// WithDisconnectHandler sets the block to be executed when the port disconnects. An optional block to be invoked when the port disconnects, taking an optional error that indicates if the disconnection was caused by an error.
+func (wwemp *WKWebExtensionMessagePort) WithDisconnectHandler(disconnectHandler func(unsafe.Pointer)) *WKWebExtensionMessagePort {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwemp), objc.RegisterName("setDisconnectHandler:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { disconnectHandler(_b0) }))
+	})
+	return wwemp
+}
+
 // SendMessage sends a message to the connected web extension.
 //
 // SendMessage blocks until the operation completes or ctx is cancelled.
@@ -140,26 +156,6 @@ func (wwemp *WKWebExtensionMessagePort) ApplicationIdentifier() string {
 	})
 	return _mainthread0
 
-}
-
-// SetDisconnectHandler wraps the corresponding Objective-C method.
-//
-// SetDisconnectHandler blocks until the operation completes or ctx is cancelled.
-func (wwemp *WKWebExtensionMessagePort) SetDisconnectHandler(ctx context.Context) error {
-	defer runtime.KeepAlive(wwemp)
-	_ch := make(chan error, 1)
-	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
-		var _err error
-		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
-		_ch <- _err
-	})
-	objc.Send[objc.ID](objref.IDOf(wwemp), objc.RegisterName("setDisconnectHandler:"), _block)
-	select {
-	case err := <-_ch:
-		return err
-	case <-ctx.Done():
-		return ctx.Err()
-	}
 }
 
 // IsDisconnected reports whether the message port is disconnected.

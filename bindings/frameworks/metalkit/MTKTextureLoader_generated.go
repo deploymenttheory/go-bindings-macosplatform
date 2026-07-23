@@ -81,6 +81,21 @@ func NewTextureLoader() *TextureLoader {
 	return textureLoaderAdopt(_id)
 }
 
+// NewTexturesWithContentsOfURLsOptionsCompletionHandler asynchronously loads image data and creates new Metal textures from the specified list of URLs.
+func (tl *TextureLoader) NewTexturesWithContentsOfURLsOptionsCompletionHandler(urls []string, options obj.Object, completionHandler func(obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(tl)
+	defer runtime.KeepAlive(options)
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("newTexturesWithContentsOfURLs:options:completionHandler:"), purego.SliceToNSArray(urls, func(_v string) objc.ID { return rt.FileURL(_v) }), objref.IDOf(options), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
+}
+
+// NewTexturesWithNamesScaleFactorBundleOptionsCompletionHandler asynchronously loads image data and creates Metal textures from the specified list of named texture assets in an asset catalog.
+func (tl *TextureLoader) NewTexturesWithNamesScaleFactorBundleOptionsCompletionHandler(names []string, scaleFactor float64, bundle obj.Object, options obj.Object, completionHandler func(obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(tl)
+	defer runtime.KeepAlive(bundle)
+	defer runtime.KeepAlive(options)
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("newTexturesWithNames:scaleFactor:bundle:options:completionHandler:"), purego.SliceToNSArray(names, func(_v string) objc.ID { return purego.NSString(_v) }), scaleFactor, objref.IDOf(bundle), objref.IDOf(options), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
+}
+
 // NewTexturesWithContentsOfURLsOptions synchronously loads image data and creates new Metal textures from the specified list of URLs.
 func (tl *TextureLoader) NewTexturesWithContentsOfURLsOptions(urls []string, options obj.Object) (result []obj.Object, err error) {
 	defer runtime.KeepAlive(tl)

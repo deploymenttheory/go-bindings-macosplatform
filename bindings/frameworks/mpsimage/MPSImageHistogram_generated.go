@@ -110,3 +110,10 @@ func (ih *ImageHistogram) ZeroHistogram() bool {
 	_r := objc.Send[bool](objref.IDOf(ih), objc.RegisterName("zeroHistogram"))
 	return _r
 }
+
+// MinPixelThresholdValue returns the minimum pixel threshold value The histogram entries will be incremented only if pixel value is >= minPixelThresholdValue. The minPixelThresholdValue is a floating-point value.  For unsigned normalized textures, the minPixelThresholdValue should be a value between 0.0f and 1.0f (for eg. MTLPixelFormatRGBA8Unorm). For signed normalized textures, the minPixelThresholdValue should be a value between -1.0f and 1.0f (for eg. MTLPixelFormatRGBA8Snorm).  Default: vector_float4(0.0f).
+func (ih *ImageHistogram) MinPixelThresholdValue() unsafe.Pointer {
+	defer runtime.KeepAlive(ih)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(ih), objc.RegisterName("minPixelThresholdValue"))
+	return _r
+}

@@ -6,6 +6,7 @@ package matter
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -57,6 +58,29 @@ func NewMTRClusterMicrowaveOvenControlWithDeviceEndpointIDQueue(device *MTRDevic
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterMicrowaveOvenControl")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterMicrowaveOvenControlAdopt(_id)
+}
+
+// SetCookingParametersWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+func (mcmoc *MTRClusterMicrowaveOvenControl) SetCookingParametersWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRMicrowaveOvenControlClusterSetCookingParametersParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcmoc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcmoc), objc.RegisterName("setCookingParametersWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// SetCookingParametersWithExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+func (mcmoc *MTRClusterMicrowaveOvenControl) SetCookingParametersWithExpectedValuesExpectedValueIntervalCompletion(expectedValues []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcmoc)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcmoc), objc.RegisterName("setCookingParametersWithExpectedValues:expectedValueInterval:completion:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// AddMoreTimeWithParamsExpectedValuesExpectedValueIntervalCompletion adds more time with params expected values expected value interval completion.
+func (mcmoc *MTRClusterMicrowaveOvenControl) AddMoreTimeWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRMicrowaveOvenControlClusterAddMoreTimeParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcmoc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcmoc), objc.RegisterName("addMoreTimeWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
 // ReadAttributeCookTimeWithParams reads attribute cook time with params.

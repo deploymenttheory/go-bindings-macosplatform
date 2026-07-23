@@ -5,11 +5,10 @@
 package cloudkit
 
 import (
-	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/rt"
@@ -66,6 +65,20 @@ func NewShareRequestAccessOperationWithShareURLs(shareURLs []string) *ShareReque
 func (srao *ShareRequestAccessOperation) WithShareURLs(items ...obj.Object) *ShareRequestAccessOperation {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(srao), objc.RegisterName("setShareURLs:"), _arr)
+	return srao
+}
+
+// WithPerShareAccessRequestCompletionBlock sets the closure to execute when CloudKit processes a share access request.
+func (srao *ShareRequestAccessOperation) WithPerShareAccessRequestCompletionBlock(perShareAccessRequestCompletionBlock func(obj.Object, unsafe.Pointer)) *ShareRequestAccessOperation {
+	objc.Send[objc.ID](objref.IDOf(srao), objc.RegisterName("setPerShareAccessRequestCompletionBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) {
+		perShareAccessRequestCompletionBlock(obj.Wrap(_b0), _b1)
+	}))
+	return srao
+}
+
+// WithShareRequestAccessCompletionBlock sets the closure to execute after CloudKit processes all share access requests.
+func (srao *ShareRequestAccessOperation) WithShareRequestAccessCompletionBlock(shareRequestAccessCompletionBlock func(unsafe.Pointer)) *ShareRequestAccessOperation {
+	objc.Send[objc.ID](objref.IDOf(srao), objc.RegisterName("setShareRequestAccessCompletionBlock:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { shareRequestAccessCompletionBlock(_b0) }))
 	return srao
 }
 
@@ -127,52 +140,6 @@ func (srao *ShareRequestAccessOperation) ShareURLs() []string {
 	defer runtime.KeepAlive(srao)
 	_arr := objc.Send[objc.ID](objref.IDOf(srao), objc.RegisterName("shareURLs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return rt.URLString(_id) })
-}
-
-// SetPerShareAccessRequestCompletionBlock wraps the corresponding Objective-C method.
-//
-// SetPerShareAccessRequestCompletionBlock blocks until the operation completes or ctx is cancelled.
-func (srao *ShareRequestAccessOperation) SetPerShareAccessRequestCompletionBlock(ctx context.Context) (result obj.Object, err error) {
-	defer runtime.KeepAlive(srao)
-	type _result struct {
-		val obj.Object
-		err error
-	}
-	_ch := make(chan _result, 1)
-	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
-		var _o _result
-		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
-		_o.val = obj.Wrap(_p0)
-		_ch <- _o
-	})
-	objc.Send[objc.ID](objref.IDOf(srao), objc.RegisterName("setPerShareAccessRequestCompletionBlock:"), _block)
-	select {
-	case _o := <-_ch:
-		return _o.val, _o.err
-	case <-ctx.Done():
-		var _zero obj.Object
-		return _zero, ctx.Err()
-	}
-}
-
-// SetShareRequestAccessCompletionBlock wraps the corresponding Objective-C method.
-//
-// SetShareRequestAccessCompletionBlock blocks until the operation completes or ctx is cancelled.
-func (srao *ShareRequestAccessOperation) SetShareRequestAccessCompletionBlock(ctx context.Context) error {
-	defer runtime.KeepAlive(srao)
-	_ch := make(chan error, 1)
-	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
-		var _err error
-		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
-		_ch <- _err
-	})
-	objc.Send[objc.ID](objref.IDOf(srao), objc.RegisterName("setShareRequestAccessCompletionBlock:"), _block)
-	select {
-	case err := <-_ch:
-		return err
-	case <-ctx.Done():
-		return ctx.Err()
-	}
 }
 
 var _ OperationProvider = (*ShareRequestAccessOperation)(nil)

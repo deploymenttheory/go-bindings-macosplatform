@@ -6,7 +6,9 @@ package healthkit
 
 import (
 	"runtime"
+	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -48,9 +50,23 @@ func verifiableClinicalRecordQueryAdopt(id objc.ID) *VerifiableClinicalRecordQue
 	return x
 }
 
-// NewVerifiableClinicalRecordQuery creates a new VerifiableClinicalRecordQuery.
-func NewVerifiableClinicalRecordQuery() *VerifiableClinicalRecordQuery {
-	_id := objc.Send[objc.ID](objc.ID(_class("HKVerifiableClinicalRecordQuery")), objc.RegisterName("new"))
+// NewVerifiableClinicalRecordQueryWithRecordTypesPredicateResultsHandler creates a query for one-time access to a SMART Health Card.
+func NewVerifiableClinicalRecordQueryWithRecordTypesPredicateResultsHandler(recordTypes []string, predicate obj.Object, resultsHandler func(obj.Object, obj.Object, unsafe.Pointer)) *VerifiableClinicalRecordQuery {
+	defer runtime.KeepAlive(predicate)
+	_alloc := objc.Send[objc.ID](objc.ID(_class("HKVerifiableClinicalRecordQuery")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecordTypes:predicate:resultsHandler:"), purego.SliceToNSArray(recordTypes, func(_v string) objc.ID { return purego.NSString(_v) }), objref.IDOf(predicate), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
+		resultsHandler(obj.Wrap(_b0), obj.Wrap(_b1), _b2)
+	}))
+	return verifiableClinicalRecordQueryAdopt(_id)
+}
+
+// NewVerifiableClinicalRecordQueryWithRecordTypesSourceTypesPredicateResultsHandler creates a query for one-time access to a verifiable clinical record.
+func NewVerifiableClinicalRecordQueryWithRecordTypesSourceTypesPredicateResultsHandler(recordTypes []string, sourceTypes []*foundation.String, predicate obj.Object, resultsHandler func(obj.Object, obj.Object, unsafe.Pointer)) *VerifiableClinicalRecordQuery {
+	defer runtime.KeepAlive(predicate)
+	_alloc := objc.Send[objc.ID](objc.ID(_class("HKVerifiableClinicalRecordQuery")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecordTypes:sourceTypes:predicate:resultsHandler:"), purego.SliceToNSArray(recordTypes, func(_v string) objc.ID { return purego.NSString(_v) }), purego.SliceToNSArray(sourceTypes, func(_v *foundation.String) objc.ID { return objref.IDOf(_v) }), objref.IDOf(predicate), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
+		resultsHandler(obj.Wrap(_b0), obj.Wrap(_b1), _b2)
+	}))
 	return verifiableClinicalRecordQueryAdopt(_id)
 }
 

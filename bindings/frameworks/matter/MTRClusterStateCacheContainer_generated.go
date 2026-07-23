@@ -6,6 +6,7 @@ package matter
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -75,4 +76,14 @@ func (mcscc *MTRClusterStateCacheContainer) String() string {
 func NewMTRClusterStateCacheContainer() *MTRClusterStateCacheContainer {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRClusterStateCacheContainer")), objc.RegisterName("new"))
 	return mTRClusterStateCacheContainerAdopt(_id)
+}
+
+// ReadAttributesWithEndpointIDClusterIDAttributeIDQueueCompletion reads the given attributes from the cluster state cache inside this cache container.
+func (mcscc *MTRClusterStateCacheContainer) ReadAttributesWithEndpointIDClusterIDAttributeIDQueueCompletion(endpointID obj.Object, clusterID obj.Object, attributeID obj.Object, queue obj.Object, completion func(obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcscc)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(clusterID)
+	defer runtime.KeepAlive(attributeID)
+	defer runtime.KeepAlive(queue)
+	objc.Send[objc.ID](objref.IDOf(mcscc), objc.RegisterName("readAttributesWithEndpointID:clusterID:attributeID:queue:completion:"), objref.IDOf(endpointID), objref.IDOf(clusterID), objref.IDOf(attributeID), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completion(obj.Wrap(_b0), _b1) }))
 }

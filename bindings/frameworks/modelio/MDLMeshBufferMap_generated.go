@@ -80,3 +80,10 @@ func NewMeshBufferMapWithBytesDeallocator(data unsafe.Pointer, deallocator func(
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBytes:deallocator:"), data, objc.NewBlock(func(_ objc.Block) { deallocator() }))
 	return meshBufferMapAdopt(_id)
 }
+
+// Bytes returns the bytes.
+func (mbm *MeshBufferMap) Bytes() unsafe.Pointer {
+	defer runtime.KeepAlive(mbm)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(mbm), objc.RegisterName("bytes"))
+	return _r
+}

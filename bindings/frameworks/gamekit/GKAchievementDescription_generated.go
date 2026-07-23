@@ -7,6 +7,7 @@ package gamekit
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -208,4 +209,11 @@ func (ad *AchievementDescription) LoadImage(ctx context.Context) (result obj.Obj
 		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
+}
+
+// Image returns the image.
+func (ad *AchievementDescription) Image() unsafe.Pointer {
+	defer runtime.KeepAlive(ad)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(ad), objc.RegisterName("image"))
+	return _r
 }

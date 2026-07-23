@@ -7,6 +7,7 @@ package corelocation
 import (
 	"runtime"
 	"time"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -120,6 +121,13 @@ func (b *Beacon) Minor() *foundation.Number {
 func (b *Beacon) Proximity() Proximity {
 	defer runtime.KeepAlive(b)
 	_r := objc.Send[Proximity](objref.IDOf(b), objc.RegisterName("proximity"))
+	return _r
+}
+
+// Accuracy returns the accuracy.
+func (b *Beacon) Accuracy() unsafe.Pointer {
+	defer runtime.KeepAlive(b)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(b), objc.RegisterName("accuracy"))
 	return _r
 }
 

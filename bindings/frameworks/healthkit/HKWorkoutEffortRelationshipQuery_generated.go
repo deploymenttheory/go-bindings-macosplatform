@@ -5,7 +5,11 @@
 package healthkit
 
 import (
+	"runtime"
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -43,9 +47,14 @@ func workoutEffortRelationshipQueryAdopt(id objc.ID) *WorkoutEffortRelationshipQ
 	return x
 }
 
-// NewWorkoutEffortRelationshipQuery creates a new WorkoutEffortRelationshipQuery.
-func NewWorkoutEffortRelationshipQuery() *WorkoutEffortRelationshipQuery {
-	_id := objc.Send[objc.ID](objc.ID(_class("HKWorkoutEffortRelationshipQuery")), objc.RegisterName("new"))
+// NewWorkoutEffortRelationshipQueryWithPredicateAnchorOptionsResultsHandler returns a query that will retrieve HKWorkoutEffortRelationship matching the given predicate that are newer than the given anchor. This is a long running query and it is the responsibility of the caller to stop the query after they have received the results they desire. The first call to resultsHandler will contain the inital results which may be empty and future callbacks will contain new relationships as well as any changes to previous relationships along with a new anchor
+func NewWorkoutEffortRelationshipQueryWithPredicateAnchorOptionsResultsHandler(predicate obj.Object, anchor *QueryAnchor, options WorkoutEffortRelationshipQueryOptions, resultsHandler func(obj.Object, obj.Object, obj.Object, unsafe.Pointer)) *WorkoutEffortRelationshipQuery {
+	defer runtime.KeepAlive(predicate)
+	defer runtime.KeepAlive(anchor)
+	_alloc := objc.Send[objc.ID](objc.ID(_class("HKWorkoutEffortRelationshipQuery")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPredicate:anchor:options:resultsHandler:"), objref.IDOf(predicate), objref.IDOf(anchor), options, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 objc.ID, _b3 unsafe.Pointer) {
+		resultsHandler(obj.Wrap(_b0), obj.Wrap(_b1), obj.Wrap(_b2), _b3)
+	}))
 	return workoutEffortRelationshipQueryAdopt(_id)
 }
 

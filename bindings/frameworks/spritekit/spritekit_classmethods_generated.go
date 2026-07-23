@@ -386,14 +386,14 @@ func RemoveFromParent() *Action {
 
 // RunBlock creates an action that executes a block
 func RunBlock(block func()) *Action {
-	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("runBlock:"), block)
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("runBlock:"), objc.NewBlock(func(_ objc.Block) { block() }))
 	return ActionFromID(_r)
 }
 
 // RunBlockQueue creates an action that executes a block
 func RunBlockQueue(block func(), queue obj.Object) *Action {
 	defer runtime.KeepAlive(queue)
-	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("runBlock:queue:"), block, objref.IDOf(queue))
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("runBlock:queue:"), objc.NewBlock(func(_ objc.Block) { block() }), objref.IDOf(queue))
 	return ActionFromID(_r)
 }
 
@@ -772,6 +772,14 @@ func ElectricField() *FieldNode {
 // MagneticField creates a field node that applies a magnetic force based on the velocity and electrical charge of the physics bodies.
 func MagneticField() *FieldNode {
 	_r := objc.Send[objc.ID](objc.ID(_class("SKFieldNode")), objc.RegisterName("magneticField"))
+	return FieldNodeFromID(_r)
+}
+
+// CustomFieldWithEvaluationBlock creates a field node that calculates and applies a custom force to the physics body.
+func CustomFieldWithEvaluationBlock(block func(unsafe.Pointer, unsafe.Pointer, float32, float32, float64) int) *FieldNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKFieldNode")), objc.RegisterName("customFieldWithEvaluationBlock:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 unsafe.Pointer, _b2 float32, _b3 float32, _b4 float64) int {
+		return block(_b0, _b1, _b2, _b3, _b4)
+	}))
 	return FieldNodeFromID(_r)
 }
 

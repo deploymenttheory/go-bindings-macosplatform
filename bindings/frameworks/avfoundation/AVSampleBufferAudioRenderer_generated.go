@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
@@ -116,6 +117,13 @@ func (sbar *SampleBufferAudioRenderer) WithMuted(muted bool) *SampleBufferAudioR
 func (sbar *SampleBufferAudioRenderer) Status() QueuedSampleBufferRenderingStatus {
 	defer runtime.KeepAlive(sbar)
 	_r := objc.Send[QueuedSampleBufferRenderingStatus](objref.IDOf(sbar), objc.RegisterName("status"))
+	return _r
+}
+
+// Error returns the error.
+func (sbar *SampleBufferAudioRenderer) Error() unsafe.Pointer {
+	defer runtime.KeepAlive(sbar)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(sbar), objc.RegisterName("error"))
 	return _r
 }
 

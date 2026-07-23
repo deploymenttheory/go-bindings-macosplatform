@@ -116,6 +116,33 @@ func (e AudiogramSensitivityTestSide) String() string {
 	}
 }
 
+// Values that indicate whether your app needs to request authorization from the user.
+type AuthorizationRequestStatus int64
+
+const (
+	// The authorization request status could not be determined because an error occurred.
+	AuthorizationRequestStatusUnknown AuthorizationRequestStatus = 0
+	// The application has not yet requested authorization for all the specified data types.
+	AuthorizationRequestStatusShouldRequest AuthorizationRequestStatus = 1
+	// The application has already requested authorization for all the specified data types.
+	AuthorizationRequestStatusUnnecessary AuthorizationRequestStatus = 2
+)
+
+// String returns the AuthorizationRequestStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AuthorizationRequestStatus) String() string {
+	switch e {
+	case AuthorizationRequestStatusUnknown:
+		return "AuthorizationRequestStatusUnknown"
+	case AuthorizationRequestStatusShouldRequest:
+		return "AuthorizationRequestStatusShouldRequest"
+	case AuthorizationRequestStatusUnnecessary:
+		return "AuthorizationRequestStatusUnnecessary"
+	default:
+		return fmt.Sprintf("AuthorizationRequestStatus(%d)", int64(e))
+	}
+}
+
 // Constants indicating the authorization status for a particular data type.
 type AuthorizationStatus int64
 
@@ -1915,33 +1942,6 @@ func (e AppleECGAlgorithmVersion) String() string {
 		return "AppleECGAlgorithmVersion2"
 	default:
 		return fmt.Sprintf("AppleECGAlgorithmVersion(%d)", int64(e))
-	}
-}
-
-// Values that indicate whether your app needs to request authorization from the user.
-type AuthorizationRequestStatus int64
-
-const (
-	// The authorization request status could not be determined because an error occurred.
-	AuthorizationRequestStatusUnknown AuthorizationRequestStatus = 0
-	// The application has not yet requested authorization for all the specified data types.
-	AuthorizationRequestStatusShouldRequest AuthorizationRequestStatus = 1
-	// The application has already requested authorization for all the specified data types.
-	AuthorizationRequestStatusUnnecessary AuthorizationRequestStatus = 2
-)
-
-// String returns the AuthorizationRequestStatus constant's name, or its numeric form when the
-// value is not a known constant.
-func (e AuthorizationRequestStatus) String() string {
-	switch e {
-	case AuthorizationRequestStatusUnknown:
-		return "AuthorizationRequestStatusUnknown"
-	case AuthorizationRequestStatusShouldRequest:
-		return "AuthorizationRequestStatusShouldRequest"
-	case AuthorizationRequestStatusUnnecessary:
-		return "AuthorizationRequestStatusUnnecessary"
-	default:
-		return fmt.Sprintf("AuthorizationRequestStatus(%d)", int64(e))
 	}
 }
 

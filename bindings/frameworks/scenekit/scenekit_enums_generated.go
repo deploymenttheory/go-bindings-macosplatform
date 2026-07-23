@@ -882,6 +882,41 @@ func (e ReferenceLoadingPolicy) String() string {
 	}
 }
 
+// Constants identifying phases of SceneKit’s scene loading process, used in a SCNSceneSourceStatusHandler block.
+type SceneSourceStatus int64
+
+const (
+	// An error occurred when SceneKit attempted to load the scene.
+	SceneSourceStatusError SceneSourceStatus = -1
+	// SceneKit has begun deserializing the source file.
+	SceneSourceStatusParsing SceneSourceStatus = 4
+	// SceneKit has begun validating the scene file’s format.
+	SceneSourceStatusValidating SceneSourceStatus = 8
+	// SceneKit has begun generating scene graph objects from the scene file’s contents.
+	SceneSourceStatusProcessing SceneSourceStatus = 12
+	// SceneKit has successfully finished loading the scene file’s contents.
+	SceneSourceStatusComplete SceneSourceStatus = 16
+)
+
+// String returns the SceneSourceStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SceneSourceStatus) String() string {
+	switch e {
+	case SceneSourceStatusError:
+		return "SceneSourceStatusError"
+	case SceneSourceStatusParsing:
+		return "SceneSourceStatusParsing"
+	case SceneSourceStatusValidating:
+		return "SceneSourceStatusValidating"
+	case SceneSourceStatusProcessing:
+		return "SceneSourceStatusProcessing"
+	case SceneSourceStatusComplete:
+		return "SceneSourceStatusComplete"
+	default:
+		return fmt.Sprintf("SceneSourceStatus(%d)", int64(e))
+	}
+}
+
 // Options for SceneKit’s rendering of shadows cast by a light, used by the shadowMode property.
 type ShadowMode int64
 
@@ -2094,41 +2129,6 @@ func (e RenderingAPI) String() string {
 		return "RenderingAPIOpenGLCore41"
 	default:
 		return fmt.Sprintf("RenderingAPI(%d)", int64(e))
-	}
-}
-
-// Constants identifying phases of SceneKit’s scene loading process, used in a SCNSceneSourceStatusHandler block.
-type SceneSourceStatus int64
-
-const (
-	// An error occurred when SceneKit attempted to load the scene.
-	SceneSourceStatusError SceneSourceStatus = -1
-	// SceneKit has begun deserializing the source file.
-	SceneSourceStatusParsing SceneSourceStatus = 4
-	// SceneKit has begun validating the scene file’s format.
-	SceneSourceStatusValidating SceneSourceStatus = 8
-	// SceneKit has begun generating scene graph objects from the scene file’s contents.
-	SceneSourceStatusProcessing SceneSourceStatus = 12
-	// SceneKit has successfully finished loading the scene file’s contents.
-	SceneSourceStatusComplete SceneSourceStatus = 16
-)
-
-// String returns the SceneSourceStatus constant's name, or its numeric form when the
-// value is not a known constant.
-func (e SceneSourceStatus) String() string {
-	switch e {
-	case SceneSourceStatusError:
-		return "SceneSourceStatusError"
-	case SceneSourceStatusParsing:
-		return "SceneSourceStatusParsing"
-	case SceneSourceStatusValidating:
-		return "SceneSourceStatusValidating"
-	case SceneSourceStatusProcessing:
-		return "SceneSourceStatusProcessing"
-	case SceneSourceStatusComplete:
-		return "SceneSourceStatusComplete"
-	default:
-		return fmt.Sprintf("SceneSourceStatus(%d)", int64(e))
 	}
 }
 

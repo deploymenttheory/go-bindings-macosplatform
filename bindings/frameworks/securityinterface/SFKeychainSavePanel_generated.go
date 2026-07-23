@@ -6,6 +6,7 @@ package securityinterface
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -102,6 +103,20 @@ func (ksp *KeychainSavePanel) Keychain() obj.Object {
 		_mainthread0 = func() obj.Object {
 			_r := objc.Send[objc.ID](objref.IDOf(ksp), objc.RegisterName("keychain"))
 			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
+}
+
+// Error returns the last error encountered by the keychain save panel.
+func (ksp *KeychainSavePanel) Error() unsafe.Pointer {
+	defer runtime.KeepAlive(ksp)
+	var _mainthread0 unsafe.Pointer
+	purego.Main(func() {
+		_mainthread0 = func() unsafe.Pointer {
+			_r := objc.Send[unsafe.Pointer](objref.IDOf(ksp), objc.RegisterName("error"))
+			return _r
 		}()
 	})
 	return _mainthread0

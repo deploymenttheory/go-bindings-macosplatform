@@ -5,7 +5,11 @@
 package healthkit
 
 import (
+	"runtime"
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -45,9 +49,13 @@ func heartbeatSeriesQueryAdopt(id objc.ID) *HeartbeatSeriesQuery {
 	return x
 }
 
-// NewHeartbeatSeriesQuery creates a new HeartbeatSeriesQuery.
-func NewHeartbeatSeriesQuery() *HeartbeatSeriesQuery {
-	_id := objc.Send[objc.ID](objc.ID(_class("HKHeartbeatSeriesQuery")), objc.RegisterName("new"))
+// NewHeartbeatSeriesQueryWithHeartbeatSeriesDataHandler creates a new heartbeat series query.
+func NewHeartbeatSeriesQueryWithHeartbeatSeriesDataHandler(heartbeatSeries *HeartbeatSeriesSample, dataHandler func(obj.Object, float64, bool, bool, unsafe.Pointer)) *HeartbeatSeriesQuery {
+	defer runtime.KeepAlive(heartbeatSeries)
+	_alloc := objc.Send[objc.ID](objc.ID(_class("HKHeartbeatSeriesQuery")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHeartbeatSeries:dataHandler:"), objref.IDOf(heartbeatSeries), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 float64, _b2 bool, _b3 bool, _b4 unsafe.Pointer) {
+		dataHandler(obj.Wrap(_b0), _b1, _b2, _b3, _b4)
+	}))
 	return heartbeatSeriesQueryAdopt(_id)
 }
 

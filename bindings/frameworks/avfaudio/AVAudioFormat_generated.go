@@ -179,3 +179,10 @@ func (af *AudioFormat) Settings() map[string]obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(af), objc.RegisterName("settings"))
 	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
+
+// FormatDescription returns converts to a CMAudioFormatDescriptionRef, for use with Core Media API's.
+func (af *AudioFormat) FormatDescription() unsafe.Pointer {
+	defer runtime.KeepAlive(af)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(af), objc.RegisterName("formatDescription"))
+	return _r
+}

@@ -278,6 +278,27 @@ func (e MotionEstimationFrameFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Directives that provide information back to you with the results of motion-estimation.
+// Bitmask — values may be combined with |.
+type MotionEstimationInfoFlags int64
+
+const (
+	KVTMotionEstimationInfoFlags_Reserved0 MotionEstimationInfoFlags = 1
+)
+
+// String returns the MotionEstimationInfoFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MotionEstimationInfoFlags) String() string {
+	var parts []string
+	if e&KVTMotionEstimationInfoFlags_Reserved0 != 0 {
+		parts = append(parts, "KVTMotionEstimationInfoFlags_Reserved0")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type OpticalFlowConfigurationQualityPrioritization int64
 
 const (
@@ -1419,27 +1440,6 @@ func (e FrameProcessorError) String() string {
 	default:
 		return fmt.Sprintf("FrameProcessorError(%d)", int64(e))
 	}
-}
-
-// Directives that provide information back to you with the results of motion-estimation.
-// Bitmask — values may be combined with |.
-type MotionEstimationInfoFlags int64
-
-const (
-	KVTMotionEstimationInfoFlags_Reserved0 MotionEstimationInfoFlags = 1
-)
-
-// String returns the MotionEstimationInfoFlags constant's name, or its numeric form when the
-// value is not a known constant.
-func (e MotionEstimationInfoFlags) String() string {
-	var parts []string
-	if e&KVTMotionEstimationInfoFlags_Reserved0 != 0 {
-		parts = append(parts, "KVTMotionEstimationInfoFlags_Reserved0")
-	}
-	if len(parts) == 0 {
-		return "0"
-	}
-	return strings.Join(parts, "|")
 }
 
 type VirtualMemoryGuardExceptionCode int64

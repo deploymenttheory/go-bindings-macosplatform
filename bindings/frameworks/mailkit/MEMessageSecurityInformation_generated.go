@@ -104,6 +104,20 @@ func (msi *MessageSecurityInformation) IsEncrypted() bool {
 	return _r
 }
 
+// SigningError returns any signing error that occured when decoding the message.
+func (msi *MessageSecurityInformation) SigningError() unsafe.Pointer {
+	defer runtime.KeepAlive(msi)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(msi), objc.RegisterName("signingError"))
+	return _r
+}
+
+// EncryptionError returns any encryption error that occured when decoding the message.
+func (msi *MessageSecurityInformation) EncryptionError() unsafe.Pointer {
+	defer runtime.KeepAlive(msi)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(msi), objc.RegisterName("encryptionError"))
+	return _r
+}
+
 // ShouldBlockRemoteContent reports whether mail should block loading remote content for the message by default. The user will have the option to load remote content manually.
 func (msi *MessageSecurityInformation) ShouldBlockRemoteContent() bool {
 	defer runtime.KeepAlive(msi)

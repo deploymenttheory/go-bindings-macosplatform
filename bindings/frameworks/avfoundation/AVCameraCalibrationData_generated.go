@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -80,10 +81,24 @@ func NewCameraCalibrationData() *CameraCalibrationData {
 	return cameraCalibrationDataAdopt(_id)
 }
 
+// IntrinsicMatrix returns a camera's intrinsic (K) matrix describes its geometric properties. The intrinsic matrix allows one to transform 3D coordinates to 2D coordinates on an image plane using the pinhole camera model. All values are expressed in pixels. The elements in the matrix are: /           \ | fx 0   ox | | 0  fy  oy | | 0  0   1  | \           / where fx and fy describe the focal length. For square pixels, their values are identical. ox and oy are the offset of the principal point. The origin is the upper left of the frame.
+func (ccd *CameraCalibrationData) IntrinsicMatrix() unsafe.Pointer {
+	defer runtime.KeepAlive(ccd)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(ccd), objc.RegisterName("intrinsicMatrix"))
+	return _r
+}
+
 // IntrinsicMatrixReferenceDimensions returns the reference frame dimensions used in calculating a camera's principal point. A camera's intrinsic matrix expresses values in pixels with respect to a frame of this width and height.
 func (ccd *CameraCalibrationData) IntrinsicMatrixReferenceDimensions() corefoundation.CGSize {
 	defer runtime.KeepAlive(ccd)
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(ccd), objc.RegisterName("intrinsicMatrixReferenceDimensions"))
+	return _r
+}
+
+// ExtrinsicMatrix returns a camera's extrinsic matrix describes its pose (position and direction) in world coordinates. The extrinsic matrix consists of a unitless 3x3 rotation matrix (R) on the left and a translation (t) 3x1 column vector on the right. The translation vector's units are millimeters. The camera's pose is expressed with respect to a reference camera (camera-to-world view). If the rotation matrix is an identity matrix, then this camera is the reference camera. Note that a matrix_float4x3 matrix is column major with 3 rows and 4 columns. /                       \ /   \   | r1,1  r1,2  r1,3 | t1 | |R|t| = | r2,1  r2,2  r2,3 | t2 | \   /   | r3,1  r3,2  r3,3 | t3 | \                       /
+func (ccd *CameraCalibrationData) ExtrinsicMatrix() unsafe.Pointer {
+	defer runtime.KeepAlive(ccd)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(ccd), objc.RegisterName("extrinsicMatrix"))
 	return _r
 }
 

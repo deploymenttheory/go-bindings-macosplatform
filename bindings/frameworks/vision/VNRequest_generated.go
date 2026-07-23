@@ -77,6 +77,13 @@ func (r *Request) String() string {
 	return rt.Description(objref.IDOf(r))
 }
 
+// NewRequestWithCompletionHandler creates a new Vision request with an optional completion handler.
+func NewRequestWithCompletionHandler(completionHandler func(obj.Object, unsafe.Pointer)) *Request {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VNRequest")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
+	return requestAdopt(_id)
+}
+
 // WithPreferBackgroundProcessing sets a hint to minimize the resource burden of the request.
 func (r *Request) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *Request {
 	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)

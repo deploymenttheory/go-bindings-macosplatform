@@ -134,6 +134,41 @@ func (epl *EffectPropertyLight) Enabled() uint8 {
 	return _r
 }
 
+// Position returns the position.
+func (epl *EffectPropertyLight) Position() unsafe.Pointer {
+	defer runtime.KeepAlive(epl)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(epl), objc.RegisterName("position"))
+	return _r
+}
+
+// AmbientColor returns the ambient color.
+func (epl *EffectPropertyLight) AmbientColor() unsafe.Pointer {
+	defer runtime.KeepAlive(epl)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(epl), objc.RegisterName("ambientColor"))
+	return _r
+}
+
+// DiffuseColor returns the diffuse color.
+func (epl *EffectPropertyLight) DiffuseColor() unsafe.Pointer {
+	defer runtime.KeepAlive(epl)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(epl), objc.RegisterName("diffuseColor"))
+	return _r
+}
+
+// SpecularColor returns the specular color.
+func (epl *EffectPropertyLight) SpecularColor() unsafe.Pointer {
+	defer runtime.KeepAlive(epl)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(epl), objc.RegisterName("specularColor"))
+	return _r
+}
+
+// SpotDirection returns the spot direction.
+func (epl *EffectPropertyLight) SpotDirection() unsafe.Pointer {
+	defer runtime.KeepAlive(epl)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(epl), objc.RegisterName("spotDirection"))
+	return _r
+}
+
 // SpotExponent returns the spot exponent.
 func (epl *EffectPropertyLight) SpotExponent() float32 {
 	defer runtime.KeepAlive(epl)

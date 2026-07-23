@@ -256,15 +256,15 @@ func CGImageMetadataCreateXMPData(metadata obj.Object, options obj.Object) obj.O
 	return obj.Wrap(_ret)
 }
 
-var _fnCGImageMetadataEnumerateTagsUsingBlock func(objc.ID, objc.ID, objc.ID, unsafe.Pointer)
+var _fnCGImageMetadataEnumerateTagsUsingBlock func(objc.ID, objc.ID, objc.ID, objc.Block)
 
 // CGImageMetadataEnumerateTagsUsingBlock calls the ImageIO framework function CGImageMetadataEnumerateTagsUsingBlock.
-func CGImageMetadataEnumerateTagsUsingBlock(metadata obj.Object, rootPath obj.Object, options obj.Object, block unsafe.Pointer) {
+func CGImageMetadataEnumerateTagsUsingBlock(metadata obj.Object, rootPath obj.Object, options obj.Object, block func(unsafe.Pointer, unsafe.Pointer) bool) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageMetadataEnumerateTagsUsingBlock == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataEnumerateTagsUsingBlock, _lib, "CGImageMetadataEnumerateTagsUsingBlock")
 	}
-	_fnCGImageMetadataEnumerateTagsUsingBlock(objref.IDOf(metadata), objref.IDOf(rootPath), objref.IDOf(options), block)
+	_fnCGImageMetadataEnumerateTagsUsingBlock(objref.IDOf(metadata), objref.IDOf(rootPath), objref.IDOf(options), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 unsafe.Pointer) bool { return block(_b0, _b1) }))
 }
 
 var _fnCGImageMetadataGetTypeID func() int

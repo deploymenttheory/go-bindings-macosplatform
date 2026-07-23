@@ -5,11 +5,10 @@
 package cloudkit
 
 import (
-	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
@@ -98,6 +97,14 @@ func (frzco *FetchRecordZoneChangesOperation) WithRecordChangedBlock(recordChang
 	return frzco
 }
 
+// WithRecordWasChangedBlock sets the closure to execute with the results of retrieving a record change.
+func (frzco *FetchRecordZoneChangesOperation) WithRecordWasChangedBlock(recordWasChangedBlock func(obj.Object, obj.Object, unsafe.Pointer)) *FetchRecordZoneChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(frzco), objc.RegisterName("setRecordWasChangedBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
+		recordWasChangedBlock(obj.Wrap(_b0), obj.Wrap(_b1), _b2)
+	}))
+	return frzco
+}
+
 // WithRecordWithIDWasDeletedBlock sets the closure to execute when a record no longer exists.
 func (frzco *FetchRecordZoneChangesOperation) WithRecordWithIDWasDeletedBlock(recordWithIDWasDeletedBlock func(obj.Object, obj.Object)) *FetchRecordZoneChangesOperation {
 	objc.Send[objc.ID](objref.IDOf(frzco), objc.RegisterName("setRecordWithIDWasDeletedBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) {
@@ -111,6 +118,20 @@ func (frzco *FetchRecordZoneChangesOperation) WithRecordZoneChangeTokensUpdatedB
 	objc.Send[objc.ID](objref.IDOf(frzco), objc.RegisterName("setRecordZoneChangeTokensUpdatedBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 objc.ID) {
 		recordZoneChangeTokensUpdatedBlock(obj.Wrap(_b0), obj.Wrap(_b1), obj.Wrap(_b2))
 	}))
+	return frzco
+}
+
+// WithRecordZoneFetchCompletionBlock sets the closure to execute when a record zone’s fetch finishes.
+func (frzco *FetchRecordZoneChangesOperation) WithRecordZoneFetchCompletionBlock(recordZoneFetchCompletionBlock func(obj.Object, obj.Object, obj.Object, bool, unsafe.Pointer)) *FetchRecordZoneChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(frzco), objc.RegisterName("setRecordZoneFetchCompletionBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 objc.ID, _b3 bool, _b4 unsafe.Pointer) {
+		recordZoneFetchCompletionBlock(obj.Wrap(_b0), obj.Wrap(_b1), obj.Wrap(_b2), _b3, _b4)
+	}))
+	return frzco
+}
+
+// WithFetchRecordZoneChangesCompletionBlock sets the closure to execute when the operation finishes.
+func (frzco *FetchRecordZoneChangesOperation) WithFetchRecordZoneChangesCompletionBlock(fetchRecordZoneChangesCompletionBlock func(unsafe.Pointer)) *FetchRecordZoneChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(frzco), objc.RegisterName("setFetchRecordZoneChangesCompletionBlock:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { fetchRecordZoneChangesCompletionBlock(_b0) }))
 	return frzco
 }
 
@@ -200,26 +221,6 @@ func (frzco *FetchRecordZoneChangesOperation) FetchAllChanges() bool {
 	defer runtime.KeepAlive(frzco)
 	_r := objc.Send[bool](objref.IDOf(frzco), objc.RegisterName("fetchAllChanges"))
 	return _r
-}
-
-// SetFetchRecordZoneChangesCompletionBlock wraps the corresponding Objective-C method.
-//
-// SetFetchRecordZoneChangesCompletionBlock blocks until the operation completes or ctx is cancelled.
-func (frzco *FetchRecordZoneChangesOperation) SetFetchRecordZoneChangesCompletionBlock(ctx context.Context) error {
-	defer runtime.KeepAlive(frzco)
-	_ch := make(chan error, 1)
-	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
-		var _err error
-		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
-		_ch <- _err
-	})
-	objc.Send[objc.ID](objref.IDOf(frzco), objc.RegisterName("setFetchRecordZoneChangesCompletionBlock:"), _block)
-	select {
-	case err := <-_ch:
-		return err
-	case <-ctx.Done():
-		return ctx.Err()
-	}
 }
 
 // OptionsByRecordZoneID returns configuration options for each record zone that the operation retrieves.

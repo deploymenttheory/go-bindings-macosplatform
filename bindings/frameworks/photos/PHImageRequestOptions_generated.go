@@ -6,6 +6,7 @@ package photos
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -107,6 +108,14 @@ func (iro *ImageRequestOptions) WithNetworkAccessAllowed(networkAccessAllowed bo
 // WithSynchronous sets a Boolean value that determines whether Photos processes the image request synchronously.
 func (iro *ImageRequestOptions) WithSynchronous(synchronous bool) *ImageRequestOptions {
 	objc.Send[objc.ID](objref.IDOf(iro), objc.RegisterName("setSynchronous:"), synchronous)
+	return iro
+}
+
+// WithProgressHandler sets a block that Photos calls periodically while downloading the image.
+func (iro *ImageRequestOptions) WithProgressHandler(progressHandler func(float64, unsafe.Pointer, *bool, obj.Object)) *ImageRequestOptions {
+	objc.Send[objc.ID](objref.IDOf(iro), objc.RegisterName("setProgressHandler:"), objc.NewBlock(func(_ objc.Block, _b0 float64, _b1 unsafe.Pointer, _b2 unsafe.Pointer, _b3 objc.ID) {
+		progressHandler(_b0, _b1, (*bool)(_b2), obj.Wrap(_b3))
+	}))
 	return iro
 }
 

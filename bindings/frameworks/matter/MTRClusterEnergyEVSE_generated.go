@@ -7,6 +7,7 @@ package matter
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -59,6 +60,52 @@ func NewMTRClusterEnergyEVSEWithDeviceEndpointIDQueue(device *MTRDevice, endpoin
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterEnergyEVSE")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterEnergyEVSEAdopt(_id)
+}
+
+// DisableWithParamsExpectedValuesExpectedValueIntervalCompletion disables with params expected values expected value interval completion.
+func (mcee *MTRClusterEnergyEVSE) DisableWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTREnergyEVSEClusterDisableParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcee)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("disableWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// DisableWithExpectedValuesExpectedValueIntervalCompletion disables with expected values expected value interval completion.
+func (mcee *MTRClusterEnergyEVSE) DisableWithExpectedValuesExpectedValueIntervalCompletion(expectedValues []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcee)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("disableWithExpectedValues:expectedValueInterval:completion:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// EnableChargingWithParamsExpectedValuesExpectedValueIntervalCompletion enables charging with params expected values expected value interval completion.
+func (mcee *MTRClusterEnergyEVSE) EnableChargingWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTREnergyEVSEClusterEnableChargingParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcee)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("enableChargingWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// StartDiagnosticsWithParamsExpectedValuesExpectedValueIntervalCompletion starts diagnostics with params expected values expected value interval completion.
+func (mcee *MTRClusterEnergyEVSE) StartDiagnosticsWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTREnergyEVSEClusterStartDiagnosticsParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcee)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("startDiagnosticsWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// StartDiagnosticsWithExpectedValuesExpectedValueIntervalCompletion starts diagnostics with expected values expected value interval completion.
+func (mcee *MTRClusterEnergyEVSE) StartDiagnosticsWithExpectedValuesExpectedValueIntervalCompletion(expectedValues []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcee)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("startDiagnosticsWithExpectedValues:expectedValueInterval:completion:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// SetTargetsWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+func (mcee *MTRClusterEnergyEVSE) SetTargetsWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTREnergyEVSEClusterSetTargetsParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcee)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("setTargetsWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
 // GetTargetsWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
@@ -114,6 +161,21 @@ func (mcee *MTRClusterEnergyEVSE) GetTargetsWithExpectedValuesExpectedValueInter
 		var _zero *MTREnergyEVSEClusterGetTargetsResponseParams
 		return _zero, ctx.Err()
 	}
+}
+
+// ClearTargetsWithParamsExpectedValuesExpectedValueIntervalCompletion clears targets with params expected values expected value interval completion.
+func (mcee *MTRClusterEnergyEVSE) ClearTargetsWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTREnergyEVSEClusterClearTargetsParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcee)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("clearTargetsWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// ClearTargetsWithExpectedValuesExpectedValueIntervalCompletion clears targets with expected values expected value interval completion.
+func (mcee *MTRClusterEnergyEVSE) ClearTargetsWithExpectedValuesExpectedValueIntervalCompletion(expectedValues []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcee)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("clearTargetsWithExpectedValues:expectedValueInterval:completion:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
 // ReadAttributeStateWithParams reads attribute state with params.

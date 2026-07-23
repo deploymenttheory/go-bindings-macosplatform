@@ -6,6 +6,7 @@ package matter
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -55,6 +56,14 @@ func NewMTRClusterOTASoftwareUpdateRequestorWithDeviceEndpointIDQueue(device *MT
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterOTASoftwareUpdateRequestor")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterOTASoftwareUpdateRequestorAdopt(_id)
+}
+
+// AnnounceOTAProviderWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+func (mcosur *MTRClusterOTASoftwareUpdateRequestor) AnnounceOTAProviderWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcosur)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcosur), objc.RegisterName("announceOTAProviderWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
 // ReadAttributeDefaultOTAProvidersWithParams reads attribute default ota providers with params.

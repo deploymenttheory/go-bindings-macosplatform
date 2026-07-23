@@ -79,9 +79,15 @@ func NewMTRAsyncCallbackQueueWorkItemWithQueue(queue obj.Object) *MTRAsyncCallba
 	return mTRAsyncCallbackQueueWorkItemAdopt(_id)
 }
 
+// WithReadyHandler sets the ready handler.
+func (macqwi *MTRAsyncCallbackQueueWorkItem) WithReadyHandler(readyHandler func(obj.Object, int)) *MTRAsyncCallbackQueueWorkItem {
+	objc.Send[objc.ID](objref.IDOf(macqwi), objc.RegisterName("setReadyHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int) { readyHandler(obj.Wrap(_b0), _b1) }))
+	return macqwi
+}
+
 // WithCancelHandler sets the cancel handler.
 func (macqwi *MTRAsyncCallbackQueueWorkItem) WithCancelHandler(cancelHandler func()) *MTRAsyncCallbackQueueWorkItem {
-	objc.Send[objc.ID](objref.IDOf(macqwi), objc.RegisterName("setCancelHandler:"), cancelHandler)
+	objc.Send[objc.ID](objref.IDOf(macqwi), objc.RegisterName("setCancelHandler:"), objc.NewBlock(func(_ objc.Block) { cancelHandler() }))
 	return macqwi
 }
 

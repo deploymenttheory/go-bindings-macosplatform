@@ -359,7 +359,7 @@ func (awi *AssetWriterInput) AddTrackAssociationWithTrackOfInputType(input *Asse
 func (awi *AssetWriterInput) RespondToEachPassDescriptionOnQueueUsing(queue obj.Object, block func()) {
 	defer runtime.KeepAlive(awi)
 	defer runtime.KeepAlive(queue)
-	objc.Send[objc.ID](objref.IDOf(awi), objc.RegisterName("respondToEachPassDescriptionOnQueue:usingBlock:"), objref.IDOf(queue), block)
+	objc.Send[objc.ID](objref.IDOf(awi), objc.RegisterName("respondToEachPassDescriptionOnQueue:usingBlock:"), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block) { block() }))
 }
 
 // MarkCurrentPassAsFinished tells the input to analyze the appended media to determine whether it can improve the results by reencoding certain segments.

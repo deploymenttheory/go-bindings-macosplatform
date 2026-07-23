@@ -7,11 +7,13 @@ package matter
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -58,6 +60,20 @@ func NewMTRBaseClusterThreadNetworkDirectoryWithDeviceEndpointIDQueue(device *MT
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterThreadNetworkDirectory")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterThreadNetworkDirectoryAdopt(_id)
+}
+
+// AddNetworkWithParamsCompletion command AddNetwork
+func (mbctnd *MTRBaseClusterThreadNetworkDirectory) AddNetworkWithParamsCompletion(params *MTRThreadNetworkDirectoryClusterAddNetworkParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("addNetworkWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// RemoveNetworkWithParamsCompletion command RemoveNetwork
+func (mbctnd *MTRBaseClusterThreadNetworkDirectory) RemoveNetworkWithParamsCompletion(params *MTRThreadNetworkDirectoryClusterRemoveNetworkParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("removeNetworkWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
 // GetOperationalDatasetWithParamsCompletion command GetOperationalDataset
@@ -113,6 +129,19 @@ func (mbctnd *MTRBaseClusterThreadNetworkDirectory) ReadAttributePreferredExtend
 	}
 }
 
+// WriteAttributePreferredExtendedPanIDWithValueCompletion writes attribute preferred extended pan ID with value completion.
+func (mbctnd *MTRBaseClusterThreadNetworkDirectory) WriteAttributePreferredExtendedPanIDWithValueCompletion(value []byte, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbctnd)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("writeAttributePreferredExtendedPanIDWithValue:completion:"), rt.BytesToNSData(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributePreferredExtendedPanIDWithValueParamsCompletion writes attribute preferred extended pan ID with value params completion.
+func (mbctnd *MTRBaseClusterThreadNetworkDirectory) WriteAttributePreferredExtendedPanIDWithValueParamsCompletion(value []byte, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("writeAttributePreferredExtendedPanIDWithValue:params:completion:"), rt.BytesToNSData(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributePreferredExtendedPanIDWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePreferredExtendedPanIDWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -130,7 +159,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDirectory) SubscribeAttributePreferredE
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributePreferredExtendedPanIDWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributePreferredExtendedPanIDWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -183,7 +212,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDirectory) SubscribeAttributeThreadNetw
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeThreadNetworksWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeThreadNetworksWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -236,7 +265,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDirectory) SubscribeAttributeThreadNetw
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeThreadNetworkTableSizeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeThreadNetworkTableSizeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -289,7 +318,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDirectory) SubscribeAttributeGeneratedC
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -342,7 +371,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDirectory) SubscribeAttributeAcceptedCo
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -395,7 +424,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDirectory) SubscribeAttributeAttributeL
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -448,7 +477,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDirectory) SubscribeAttributeFeatureMap
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -501,7 +530,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDirectory) SubscribeAttributeClusterRev
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err

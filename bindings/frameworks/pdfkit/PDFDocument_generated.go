@@ -369,6 +369,13 @@ func (d *Document) String() string {
 	return purego.GoString(_r)
 }
 
+// OutlineRoot returns the outline root.
+func (d *Document) OutlineRoot() unsafe.Pointer {
+	defer runtime.KeepAlive(d)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(d), objc.RegisterName("outlineRoot"))
+	return _r
+}
+
 // PageCount returns the page count.
 func (d *Document) PageCount() int {
 	defer runtime.KeepAlive(d)

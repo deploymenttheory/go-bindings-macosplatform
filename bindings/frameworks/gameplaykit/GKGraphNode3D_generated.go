@@ -5,6 +5,7 @@
 package gameplaykit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -58,6 +59,13 @@ func NewGraphNode3DWithPoint(point unsafe.Pointer) *GraphNode3D {
 func (gnd *GraphNode3D) WithPosition(position unsafe.Pointer) *GraphNode3D {
 	objc.Send[objc.ID](objref.IDOf(gnd), objc.RegisterName("setPosition:"), position)
 	return gnd
+}
+
+// Position returns the position.
+func (gnd *GraphNode3D) Position() unsafe.Pointer {
+	defer runtime.KeepAlive(gnd)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(gnd), objc.RegisterName("position"))
+	return _r
 }
 
 var _ GraphNodeProvider = (*GraphNode3D)(nil)

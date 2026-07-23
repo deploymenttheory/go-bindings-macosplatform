@@ -57,6 +57,13 @@ func NewGeneratePersonSegmentationRequest() *GeneratePersonSegmentationRequest {
 	return generatePersonSegmentationRequestAdopt(_id)
 }
 
+// NewGeneratePersonSegmentationRequestWithCompletionHandler creates a generate person segmentation request with a completion handler.
+func NewGeneratePersonSegmentationRequestWithCompletionHandler(completionHandler func(obj.Object, unsafe.Pointer)) *GeneratePersonSegmentationRequest {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VNGeneratePersonSegmentationRequest")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
+	return generatePersonSegmentationRequestAdopt(_id)
+}
+
 // WithQualityLevel sets a value that indicates how the request balances accuracy and performance.
 func (gpsr *GeneratePersonSegmentationRequest) WithQualityLevel(qualityLevel GeneratePersonSegmentationRequestQualityLevel) *GeneratePersonSegmentationRequest {
 	objc.Send[objc.ID](objref.IDOf(gpsr), objc.RegisterName("setQualityLevel:"), qualityLevel)

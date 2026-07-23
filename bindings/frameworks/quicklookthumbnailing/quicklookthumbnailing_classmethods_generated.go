@@ -5,6 +5,8 @@
 package quicklookthumbnailing
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/rt"
 	"github.com/ebitengine/purego/objc"
@@ -14,6 +16,12 @@ import (
 func SharedGenerator() *ThumbnailGenerator {
 	_r := objc.Send[objc.ID](objc.ID(_class("QLThumbnailGenerator")), objc.RegisterName("sharedGenerator"))
 	return ThumbnailGeneratorFromID(_r)
+}
+
+// ReplyWithContextSizeDrawingBlock creates a new thumbnail for a custom file type in the given context.
+func ReplyWithContextSizeDrawingBlock(contextSize corefoundation.CGSize, drawingBlock func(unsafe.Pointer) bool) *ThumbnailReply {
+	_r := objc.Send[objc.ID](objc.ID(_class("QLThumbnailReply")), objc.RegisterName("replyWithContextSize:drawingBlock:"), contextSize, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) bool { return drawingBlock(_b0) }))
+	return ThumbnailReplyFromID(_r)
 }
 
 // ReplyWithContextSizeCurrentContextDrawingBlock creates a new thumbnail for a custom file type in the current context.

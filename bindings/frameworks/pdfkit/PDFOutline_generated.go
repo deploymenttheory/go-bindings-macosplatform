@@ -132,6 +132,13 @@ func (o *Outline) Document() *Document {
 	return DocumentFromID(_r)
 }
 
+// Parent returns the parent.
+func (o *Outline) Parent() unsafe.Pointer {
+	defer runtime.KeepAlive(o)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(o), objc.RegisterName("parent"))
+	return _r
+}
+
 // NumberOfChildren returns the number of children.
 func (o *Outline) NumberOfChildren() int {
 	defer runtime.KeepAlive(o)
@@ -168,4 +175,11 @@ func (o *Outline) Destination() *Destination {
 	defer runtime.KeepAlive(o)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("destination"))
 	return DestinationFromID(_r)
+}
+
+// Action returns the action.
+func (o *Outline) Action() unsafe.Pointer {
+	defer runtime.KeepAlive(o)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(o), objc.RegisterName("action"))
+	return _r
 }

@@ -177,6 +177,13 @@ func (a *Asset) EndTime() float64 {
 	return _r
 }
 
+// UpAxis returns scene up axis Some imported formats specify a scene up axis. By default Y-axis (0, 1, 0) is used but other values are supported.
+func (a *Asset) UpAxis() unsafe.Pointer {
+	defer runtime.KeepAlive(a)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(a), objc.RegisterName("upAxis"))
+	return _r
+}
+
 // URL returns URL used to create the asset If the asset was not created with a URL, nil will be returned.
 func (a *Asset) URL() string {
 	defer runtime.KeepAlive(a)

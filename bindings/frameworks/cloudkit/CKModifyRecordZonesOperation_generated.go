@@ -5,11 +5,11 @@
 package cloudkit
 
 import (
-	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -73,6 +73,28 @@ func (mrzo *ModifyRecordZonesOperation) WithRecordZonesToSave(items ...*RecordZo
 func (mrzo *ModifyRecordZonesOperation) WithRecordZoneIDsToDelete(items ...*RecordZoneID) *ModifyRecordZonesOperation {
 	_arr := purego.SliceToNSArray(items, func(_v *RecordZoneID) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(mrzo), objc.RegisterName("setRecordZoneIDsToDelete:"), _arr)
+	return mrzo
+}
+
+// WithPerRecordZoneSaveBlock sets the closure to execute when CloudKit saves a record zone.
+func (mrzo *ModifyRecordZonesOperation) WithPerRecordZoneSaveBlock(perRecordZoneSaveBlock func(obj.Object, obj.Object, unsafe.Pointer)) *ModifyRecordZonesOperation {
+	objc.Send[objc.ID](objref.IDOf(mrzo), objc.RegisterName("setPerRecordZoneSaveBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
+		perRecordZoneSaveBlock(obj.Wrap(_b0), obj.Wrap(_b1), _b2)
+	}))
+	return mrzo
+}
+
+// WithPerRecordZoneDeleteBlock sets the closure to execute when CloudKit deletes a record zone.
+func (mrzo *ModifyRecordZonesOperation) WithPerRecordZoneDeleteBlock(perRecordZoneDeleteBlock func(obj.Object, unsafe.Pointer)) *ModifyRecordZonesOperation {
+	objc.Send[objc.ID](objref.IDOf(mrzo), objc.RegisterName("setPerRecordZoneDeleteBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { perRecordZoneDeleteBlock(obj.Wrap(_b0), _b1) }))
+	return mrzo
+}
+
+// WithModifyRecordZonesCompletionBlock sets the closure to execute after CloudKit modifies all of the record zones.
+func (mrzo *ModifyRecordZonesOperation) WithModifyRecordZonesCompletionBlock(modifyRecordZonesCompletionBlock func(obj.Object, obj.Object, unsafe.Pointer)) *ModifyRecordZonesOperation {
+	objc.Send[objc.ID](objref.IDOf(mrzo), objc.RegisterName("setModifyRecordZonesCompletionBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
+		modifyRecordZonesCompletionBlock(obj.Wrap(_b0), obj.Wrap(_b1), _b2)
+	}))
 	return mrzo
 }
 
@@ -150,32 +172,6 @@ func (mrzo *ModifyRecordZonesOperation) RecordZoneIDsToDelete() []*RecordZoneID 
 	defer runtime.KeepAlive(mrzo)
 	_arr := objc.Send[objc.ID](objref.IDOf(mrzo), objc.RegisterName("recordZoneIDsToDelete"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RecordZoneID { return RecordZoneIDFromID(_id) })
-}
-
-// SetPerRecordZoneDeleteBlock wraps the corresponding Objective-C method.
-//
-// SetPerRecordZoneDeleteBlock blocks until the operation completes or ctx is cancelled.
-func (mrzo *ModifyRecordZonesOperation) SetPerRecordZoneDeleteBlock(ctx context.Context) (result *RecordZoneID, err error) {
-	defer runtime.KeepAlive(mrzo)
-	type _result struct {
-		val *RecordZoneID
-		err error
-	}
-	_ch := make(chan _result, 1)
-	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
-		var _o _result
-		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
-		_o.val = RecordZoneIDFromID(_p0)
-		_ch <- _o
-	})
-	objc.Send[objc.ID](objref.IDOf(mrzo), objc.RegisterName("setPerRecordZoneDeleteBlock:"), _block)
-	select {
-	case _o := <-_ch:
-		return _o.val, _o.err
-	case <-ctx.Done():
-		var _zero *RecordZoneID
-		return _zero, ctx.Err()
-	}
 }
 
 var _ DatabaseOperationProvider = (*ModifyRecordZonesOperation)(nil)

@@ -120,10 +120,31 @@ func (ad *Agent3D) WithMaxSpeed(maxSpeed float32) *Agent3D {
 	return ad
 }
 
+// Position returns position of the agent on the logical XYZ plane
+func (ad *Agent3D) Position() unsafe.Pointer {
+	defer runtime.KeepAlive(ad)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(ad), objc.RegisterName("position"))
+	return _r
+}
+
+// Velocity returns current logical velocity of the agent. The forward vector can be derived by normalizing this.
+func (ad *Agent3D) Velocity() unsafe.Pointer {
+	defer runtime.KeepAlive(ad)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(ad), objc.RegisterName("velocity"))
+	return _r
+}
+
 // RightHanded reports whether should this vehicle operate in a right-handed coordinate system? false means it will be left-handed
 func (ad *Agent3D) RightHanded() bool {
 	defer runtime.KeepAlive(ad)
 	_r := objc.Send[bool](objref.IDOf(ad), objc.RegisterName("rightHanded"))
+	return _r
+}
+
+// Rotation returns the 3x3 rotation matrix that defines the orientation of this agent in 3D space columns[0] is forward, columns[1] is up, columns[2] is side
+func (ad *Agent3D) Rotation() unsafe.Pointer {
+	defer runtime.KeepAlive(ad)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(ad), objc.RegisterName("rotation"))
 	return _r
 }
 

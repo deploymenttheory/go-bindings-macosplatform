@@ -80,6 +80,14 @@ func NewAuthorizationWebBrowserPublicKeyCredentialManager() *AuthorizationWebBro
 	return authorizationWebBrowserPublicKeyCredentialManagerAdopt(_id)
 }
 
+// RequestAuthorizationForPublicKeyCredentials requests a person’s permission to use their passkeys.
+func (awbpkcm *AuthorizationWebBrowserPublicKeyCredentialManager) RequestAuthorizationForPublicKeyCredentials(completionHandler func(AuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState)) {
+	defer runtime.KeepAlive(awbpkcm)
+	objc.Send[objc.ID](objref.IDOf(awbpkcm), objc.RegisterName("requestAuthorizationForPublicKeyCredentials:"), objc.NewBlock(func(_ objc.Block, _b0 AuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState) {
+		completionHandler(_b0)
+	}))
+}
+
 // PlatformCredentialsForRelyingParty gets a list of passkeys available for authenticating with the given relying party.
 //
 // PlatformCredentialsForRelyingParty blocks until the operation completes or ctx is cancelled.

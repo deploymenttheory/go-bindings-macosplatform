@@ -7,6 +7,7 @@ package matter
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -79,11 +80,123 @@ func NewMTRBaseDevice() *MTRBaseDevice {
 	return mTRBaseDeviceAdopt(_id)
 }
 
+// SubscribeWithQueueParamsClusterStateCacheContainerAttributeReportHandlerEventReportHandlerErrorHandlerSubscriptionEstablishedResubscriptionScheduled subscribe to receive attribute reports for everything (all endpoints, all clusters, all attributes, all events) on the device. A non-nil attribute cache container will cache attribute values, retrievable through the designated attribute cache container. attributeReportHandler will be called any time a data update is available (with a non-nil "value") The array passed to attributeReportHandler will contain MTRAttributeReport instances.  Errors for specific paths, not the whole subscription, will be reported via those objects. eventReportHandler will be called any time an event is reported (with a non-nil "value") The array passed to eventReportHandler will contain MTREventReport instances.  Errors for specific paths, not the whole subscription, will be reported via those objects. errorHandler will be called any time there is an error for the entire subscription (with a non-nil "error"), and terminate the subscription.  This will generally not be invoked if auto-resubscription is enabled, unless there is a fatal error during a resubscription attempt. Both report handlers are not supported over XPC at the moment. The subscriptionEstablished block, if not nil, will be called once the subscription is established.  This will be _after_ the first (priming) call to both report handlers.  Note that if the MTRSubscribeParams are set to automatically resubscribe this can end up being called more than once. The resubscriptionScheduled block, if not nil, will be called if auto-resubscription is enabled, subscription loss is detected, and a resubscription is scheduled.  This can be called multiple times in a row without an intervening subscriptionEstablished call if the resubscription attempts fail.
+func (mbd *MTRBaseDevice) SubscribeWithQueueParamsClusterStateCacheContainerAttributeReportHandlerEventReportHandlerErrorHandlerSubscriptionEstablishedResubscriptionScheduled(queue obj.Object, params *MTRSubscribeParams, clusterStateCacheContainer *MTRClusterStateCacheContainer, attributeReportHandler func(obj.Object), eventReportHandler func(obj.Object), errorHandler func(unsafe.Pointer), subscriptionEstablished func(), resubscriptionScheduled func(unsafe.Pointer, obj.Object)) {
+	defer runtime.KeepAlive(mbd)
+	defer runtime.KeepAlive(queue)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(clusterStateCacheContainer)
+	objc.Send[objc.ID](objref.IDOf(mbd), objc.RegisterName("subscribeWithQueue:params:clusterStateCacheContainer:attributeReportHandler:eventReportHandler:errorHandler:subscriptionEstablished:resubscriptionScheduled:"), objref.IDOf(queue), objref.IDOf(params), objref.IDOf(clusterStateCacheContainer), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { attributeReportHandler(obj.Wrap(_b0)) }), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { eventReportHandler(obj.Wrap(_b0)) }), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { errorHandler(_b0) }), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 objc.ID) { resubscriptionScheduled(_b0, obj.Wrap(_b1)) }))
+}
+
+// ReadAttributesWithEndpointIDClusterIDAttributeIDParamsQueueCompletion reads attributes from the device. Nil values for endpointID, clusterID, attributeID indicate wildcards (e.g. nil attributeID means "read all the attributes from the endpoint(s) and cluster(s) that match endpointID/clusterID"). If all of endpointID, clusterID, attributeID are non-nil, a single attribute will be read. If all of endpointID, clusterID, attributeID are nil, all attributes on the device will be read. A non-nil attributeID along with a nil clusterID will only succeed if the attribute ID is for a global attribute that applies to all clusters. The completion will be called with an error if the entire read interaction fails. Otherwise it will be called with values, which may be empty (e.g. if no paths matched the wildcard) or may include per-path errors if particular paths failed.
+func (mbd *MTRBaseDevice) ReadAttributesWithEndpointIDClusterIDAttributeIDParamsQueueCompletion(endpointID obj.Object, clusterID obj.Object, attributeID obj.Object, params *MTRReadParams, queue obj.Object, completion func(obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbd)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(clusterID)
+	defer runtime.KeepAlive(attributeID)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(queue)
+	objc.Send[objc.ID](objref.IDOf(mbd), objc.RegisterName("readAttributesWithEndpointID:clusterID:attributeID:params:queue:completion:"), objref.IDOf(endpointID), objref.IDOf(clusterID), objref.IDOf(attributeID), objref.IDOf(params), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completion(obj.Wrap(_b0), _b1) }))
+}
+
+// ReadAttributePathsEventPathsParamsQueueCompletion reads multiple attribute or event paths from the device. Nil is treated as an empty array for attributePaths and eventPaths. Lists of attribute and event paths to read can be provided via attributePaths and eventPaths. The completion will be called with an error if the entire read interaction fails. Otherwise it will be called with an array of values. This array may be empty (e.g. if no paths matched the wildcard paths passed in, or if empty lists of paths were passed in) or may include per-path errors if particular paths failed. If the sum of the lengths of attributePaths and eventPaths exceeds 9, the read may fail due to the device not supporting that many read paths.
+func (mbd *MTRBaseDevice) ReadAttributePathsEventPathsParamsQueueCompletion(attributePaths []*MTRAttributeRequestPath, eventPaths []*MTREventRequestPath, params *MTRReadParams, queue obj.Object, completion func(obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbd)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(queue)
+	objc.Send[objc.ID](objref.IDOf(mbd), objc.RegisterName("readAttributePaths:eventPaths:params:queue:completion:"), purego.SliceToNSArray(attributePaths, func(_v *MTRAttributeRequestPath) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(eventPaths, func(_v *MTREventRequestPath) objc.ID { return objref.IDOf(_v) }), objref.IDOf(params), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completion(obj.Wrap(_b0), _b1) }))
+}
+
+// WriteAttributeWithEndpointIDClusterIDAttributeIDValueTimedWriteTimeoutQueueCompletion write to attribute in a designated attribute path
+func (mbd *MTRBaseDevice) WriteAttributeWithEndpointIDClusterIDAttributeIDValueTimedWriteTimeoutQueueCompletion(endpointID obj.Object, clusterID obj.Object, attributeID obj.Object, value obj.Object, timeoutMs obj.Object, queue obj.Object, completion func(obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbd)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(clusterID)
+	defer runtime.KeepAlive(attributeID)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(timeoutMs)
+	defer runtime.KeepAlive(queue)
+	objc.Send[objc.ID](objref.IDOf(mbd), objc.RegisterName("writeAttributeWithEndpointID:clusterID:attributeID:value:timedWriteTimeout:queue:completion:"), objref.IDOf(endpointID), objref.IDOf(clusterID), objref.IDOf(attributeID), objref.IDOf(value), objref.IDOf(timeoutMs), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completion(obj.Wrap(_b0), _b1) }))
+}
+
+// InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsTimedInvokeTimeoutQueueCompletion invoke a command with a designated command path
+func (mbd *MTRBaseDevice) InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsTimedInvokeTimeoutQueueCompletion(endpointID obj.Object, clusterID obj.Object, commandID obj.Object, commandFields obj.Object, timeoutMs obj.Object, queue obj.Object, completion func(obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbd)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(clusterID)
+	defer runtime.KeepAlive(commandID)
+	defer runtime.KeepAlive(commandFields)
+	defer runtime.KeepAlive(timeoutMs)
+	defer runtime.KeepAlive(queue)
+	objc.Send[objc.ID](objref.IDOf(mbd), objc.RegisterName("invokeCommandWithEndpointID:clusterID:commandID:commandFields:timedInvokeTimeout:queue:completion:"), objref.IDOf(endpointID), objref.IDOf(clusterID), objref.IDOf(commandID), objref.IDOf(commandFields), objref.IDOf(timeoutMs), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completion(obj.Wrap(_b0), _b1) }))
+}
+
+// SubscribeToAttributesWithEndpointIDClusterIDAttributeIDParamsQueueReportHandlerSubscriptionEstablished subscribes to the specified attributes on the device. Nil values for endpointID, clusterID, attributeID indicate wildcards (e.g. nil attributeID means "subscribe to all the attributes from the endpoint(s) and cluster(s) that match endpointID/clusterID"). If all of endpointID, clusterID, attributeID are non-nil, a single attribute will be subscribed to. If all of endpointID, clusterID, attributeID are nil, all attributes on the device will be subscribed to. A non-nil attributeID along with a nil clusterID will only succeed if the attribute ID is for a global attribute that applies to all clusters. The reportHandler will be called with an error if the subscription fails entirely. The reportHandler will be called with arrays of response-value dictionaries (which may be data or errors) as path-specific data is received. subscriptionEstablished will be called when the subscription is first successfully established (after the initial set of data reports has been delivered to reportHandler).  If params allow automatic resubscription, it will be called any time resubscription succeeds.
+func (mbd *MTRBaseDevice) SubscribeToAttributesWithEndpointIDClusterIDAttributeIDParamsQueueReportHandlerSubscriptionEstablished(endpointID obj.Object, clusterID obj.Object, attributeID obj.Object, params *MTRSubscribeParams, queue obj.Object, reportHandler func(obj.Object, unsafe.Pointer), subscriptionEstablished func()) {
+	defer runtime.KeepAlive(mbd)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(clusterID)
+	defer runtime.KeepAlive(attributeID)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(queue)
+	objc.Send[objc.ID](objref.IDOf(mbd), objc.RegisterName("subscribeToAttributesWithEndpointID:clusterID:attributeID:params:queue:reportHandler:subscriptionEstablished:"), objref.IDOf(endpointID), objref.IDOf(clusterID), objref.IDOf(attributeID), objref.IDOf(params), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { reportHandler(obj.Wrap(_b0), _b1) }), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }))
+}
+
+// SubscribeToAttributePathsEventPathsParamsQueueReportHandlerSubscriptionEstablishedResubscriptionScheduled subscribes to multiple attribute or event paths. Nil is treated as an empty array for attributePaths and eventPaths. Lists of attribute and event paths to subscribe to can be provided via attributePaths and eventPaths. The reportHandler will be called with an error if the subscription fails entirely (including when both attributePaths and eventPaths are empty). The reportHandler will be called with arrays of response-value dictionaries (which may be data or errors) as path-specific data is received. subscriptionEstablished will be called when the subscription is first successfully established (after the initial set of data reports has been delivered to reportHandler).  If params allow automatic resubscription, it will be called any time resubscription succeeds. resubscriptionScheduled will be called if subscription drop is detected and params allow automatic resubscription. If the sum of the lengths of attributePaths and eventPaths exceeds 3, the subscribe may fail due to the device not supporting that many paths for a subscription.
+func (mbd *MTRBaseDevice) SubscribeToAttributePathsEventPathsParamsQueueReportHandlerSubscriptionEstablishedResubscriptionScheduled(attributePaths []*MTRAttributeRequestPath, eventPaths []*MTREventRequestPath, params *MTRSubscribeParams, queue obj.Object, reportHandler func(obj.Object, unsafe.Pointer), subscriptionEstablished func(), resubscriptionScheduled func(unsafe.Pointer, obj.Object)) {
+	defer runtime.KeepAlive(mbd)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(queue)
+	objc.Send[objc.ID](objref.IDOf(mbd), objc.RegisterName("subscribeToAttributePaths:eventPaths:params:queue:reportHandler:subscriptionEstablished:resubscriptionScheduled:"), purego.SliceToNSArray(attributePaths, func(_v *MTRAttributeRequestPath) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(eventPaths, func(_v *MTREventRequestPath) objc.ID { return objref.IDOf(_v) }), objref.IDOf(params), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { reportHandler(obj.Wrap(_b0), _b1) }), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 objc.ID) { resubscriptionScheduled(_b0, obj.Wrap(_b1)) }))
+}
+
 // DeregisterReportHandlersWithQueueCompletion deregister all local report handlers for a remote device This method is applicable only for a remote device. For a local device, the stack has to be shutdown to stop report handlers. There could be multiple clients accessing a node through a remote controller object and hence it is not appropriate for one of those clients to shut down the entire stack to stop receiving reports.
 func (mbd *MTRBaseDevice) DeregisterReportHandlersWithQueueCompletion(queue obj.Object, completion func()) {
 	defer runtime.KeepAlive(mbd)
 	defer runtime.KeepAlive(queue)
-	objc.Send[objc.ID](objref.IDOf(mbd), objc.RegisterName("deregisterReportHandlersWithQueue:completion:"), objref.IDOf(queue), completion)
+	objc.Send[objc.ID](objref.IDOf(mbd), objc.RegisterName("deregisterReportHandlersWithQueue:completion:"), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block) { completion() }))
+}
+
+// OpenCommissioningWindowWithSetupPasscodeDiscriminatorDurationQueueCompletion open a commissioning window on the device. On success, completion will be called on queue with the MTRSetupPayload that can be used to commission the device.
+func (mbd *MTRBaseDevice) OpenCommissioningWindowWithSetupPasscodeDiscriminatorDurationQueueCompletion(setupPasscode obj.Object, discriminator obj.Object, duration obj.Object, queue obj.Object, completion func(obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbd)
+	defer runtime.KeepAlive(setupPasscode)
+	defer runtime.KeepAlive(discriminator)
+	defer runtime.KeepAlive(duration)
+	defer runtime.KeepAlive(queue)
+	objc.Send[objc.ID](objref.IDOf(mbd), objc.RegisterName("openCommissioningWindowWithSetupPasscode:discriminator:duration:queue:completion:"), objref.IDOf(setupPasscode), objref.IDOf(discriminator), objref.IDOf(duration), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completion(obj.Wrap(_b0), _b1) }))
+}
+
+// OpenCommissioningWindowWithDiscriminatorDurationQueueCompletion open a commissioning window on the device, using a random setup passcode. On success, completion will be called on queue with the MTRSetupPayload that can be used to commission the device.
+func (mbd *MTRBaseDevice) OpenCommissioningWindowWithDiscriminatorDurationQueueCompletion(discriminator obj.Object, duration obj.Object, queue obj.Object, completion func(obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbd)
+	defer runtime.KeepAlive(discriminator)
+	defer runtime.KeepAlive(duration)
+	defer runtime.KeepAlive(queue)
+	objc.Send[objc.ID](objref.IDOf(mbd), objc.RegisterName("openCommissioningWindowWithDiscriminator:duration:queue:completion:"), objref.IDOf(discriminator), objref.IDOf(duration), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completion(obj.Wrap(_b0), _b1) }))
+}
+
+// ReadEventsWithEndpointIDClusterIDEventIDParamsQueueCompletion reads events with endpoint ID cluster ID event ID params queue completion.
+func (mbd *MTRBaseDevice) ReadEventsWithEndpointIDClusterIDEventIDParamsQueueCompletion(endpointID obj.Object, clusterID obj.Object, eventID obj.Object, params *MTRReadParams, queue obj.Object, completion func(obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbd)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(clusterID)
+	defer runtime.KeepAlive(eventID)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(queue)
+	objc.Send[objc.ID](objref.IDOf(mbd), objc.RegisterName("readEventsWithEndpointID:clusterID:eventID:params:queue:completion:"), objref.IDOf(endpointID), objref.IDOf(clusterID), objref.IDOf(eventID), objref.IDOf(params), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completion(obj.Wrap(_b0), _b1) }))
+}
+
+// SubscribeToEventsWithEndpointIDClusterIDEventIDParamsQueueReportHandlerSubscriptionEstablished subscribes to the specified events on the device. Nil values for endpointID, clusterID, eventID indicate wildcards (e.g. nil eventID means "subscribe to all the events from the endpoint(s) and cluster(s) that match endpointID/clusterID"). If all of endpointID, clusterID, eventID are non-nil, a single event will be subscribed to. If all of endpointID, clusterID, eventID are nil, all events on the device will be subscribed to. The reportHandler will be called with an error if the subscription fails entirely. The reportHandler will be called with arrays of response-value dictionaries (which may be data or errors) as path-specific data is received. subscriptionEstablished will be called when the subscription is first successfully established (after the initial set of data reports has been delivered to reportHandler).  If params allow automatic resubscription, it will be called any time resubscription succeeds.
+func (mbd *MTRBaseDevice) SubscribeToEventsWithEndpointIDClusterIDEventIDParamsQueueReportHandlerSubscriptionEstablished(endpointID obj.Object, clusterID obj.Object, eventID obj.Object, params *MTRSubscribeParams, queue obj.Object, reportHandler func(obj.Object, unsafe.Pointer), subscriptionEstablished func()) {
+	defer runtime.KeepAlive(mbd)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(clusterID)
+	defer runtime.KeepAlive(eventID)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(queue)
+	objc.Send[objc.ID](objref.IDOf(mbd), objc.RegisterName("subscribeToEventsWithEndpointID:clusterID:eventID:params:queue:reportHandler:subscriptionEstablished:"), objref.IDOf(endpointID), objref.IDOf(clusterID), objref.IDOf(eventID), objref.IDOf(params), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { reportHandler(obj.Wrap(_b0), _b1) }), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }))
 }
 
 // DownloadLogOfTypeTimeoutQueueCompletion download log of the desired type from the device. Note: The consumer of this API should move the file that the url points to or open it for reading before the completion handler returns. Otherwise, the file will be deleted, and the data will be lost.
@@ -120,9 +233,68 @@ func (mbd *MTRBaseDevice) SessionTransportType() MTRTransportType {
 	return _r
 }
 
+// SubscribeWithQueueMinIntervalMaxIntervalParamsCacheContainerAttributeReportHandlerEventReportHandlerErrorHandlerSubscriptionEstablishedResubscriptionScheduled deprecated MTRBaseDevice APIs.
+func (mbd *MTRBaseDevice) SubscribeWithQueueMinIntervalMaxIntervalParamsCacheContainerAttributeReportHandlerEventReportHandlerErrorHandlerSubscriptionEstablishedResubscriptionScheduled(queue obj.Object, minInterval uint16, maxInterval uint16, params *MTRSubscribeParams, attributeCacheContainer *MTRAttributeCacheContainer, attributeReportHandler func(obj.Object), eventReportHandler func(obj.Object), errorHandler func(unsafe.Pointer), subscriptionEstablishedHandler func(), resubscriptionScheduledHandler func(unsafe.Pointer, obj.Object)) {
+	defer runtime.KeepAlive(mbd)
+	defer runtime.KeepAlive(queue)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(attributeCacheContainer)
+	objc.Send[objc.ID](objref.IDOf(mbd), objc.RegisterName("subscribeWithQueue:minInterval:maxInterval:params:cacheContainer:attributeReportHandler:eventReportHandler:errorHandler:subscriptionEstablished:resubscriptionScheduled:"), objref.IDOf(queue), minInterval, maxInterval, objref.IDOf(params), objref.IDOf(attributeCacheContainer), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { attributeReportHandler(obj.Wrap(_b0)) }), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { eventReportHandler(obj.Wrap(_b0)) }), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { errorHandler(_b0) }), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 objc.ID) {
+		resubscriptionScheduledHandler(_b0, obj.Wrap(_b1))
+	}))
+}
+
+// ReadAttributeWithEndpointIDClusterIDAttributeIDParamsClientQueueCompletion reads attribute with endpoint ID cluster ID attribute ID params client queue completion.
+func (mbd *MTRBaseDevice) ReadAttributeWithEndpointIDClusterIDAttributeIDParamsClientQueueCompletion(endpointId obj.Object, clusterId obj.Object, attributeId obj.Object, params *MTRReadParams, clientQueue obj.Object, completion func(obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbd)
+	defer runtime.KeepAlive(endpointId)
+	defer runtime.KeepAlive(clusterId)
+	defer runtime.KeepAlive(attributeId)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(clientQueue)
+	objc.Send[objc.ID](objref.IDOf(mbd), objc.RegisterName("readAttributeWithEndpointId:clusterId:attributeId:params:clientQueue:completion:"), objref.IDOf(endpointId), objref.IDOf(clusterId), objref.IDOf(attributeId), objref.IDOf(params), objref.IDOf(clientQueue), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completion(obj.Wrap(_b0), _b1) }))
+}
+
+// WriteAttributeWithEndpointIDClusterIDAttributeIDValueTimedWriteTimeoutClientQueueCompletion writes attribute with endpoint ID cluster ID attribute ID value timed write timeout client queue completion.
+func (mbd *MTRBaseDevice) WriteAttributeWithEndpointIDClusterIDAttributeIDValueTimedWriteTimeoutClientQueueCompletion(endpointId obj.Object, clusterId obj.Object, attributeId obj.Object, value obj.Object, timeoutMs obj.Object, clientQueue obj.Object, completion func(obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbd)
+	defer runtime.KeepAlive(endpointId)
+	defer runtime.KeepAlive(clusterId)
+	defer runtime.KeepAlive(attributeId)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(timeoutMs)
+	defer runtime.KeepAlive(clientQueue)
+	objc.Send[objc.ID](objref.IDOf(mbd), objc.RegisterName("writeAttributeWithEndpointId:clusterId:attributeId:value:timedWriteTimeout:clientQueue:completion:"), objref.IDOf(endpointId), objref.IDOf(clusterId), objref.IDOf(attributeId), objref.IDOf(value), objref.IDOf(timeoutMs), objref.IDOf(clientQueue), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completion(obj.Wrap(_b0), _b1) }))
+}
+
+// InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsTimedInvokeTimeoutClientQueueCompletion wraps the corresponding Objective-C method.
+func (mbd *MTRBaseDevice) InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsTimedInvokeTimeoutClientQueueCompletion(endpointId obj.Object, clusterId obj.Object, commandId obj.Object, commandFields obj.Object, timeoutMs obj.Object, clientQueue obj.Object, completion func(obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbd)
+	defer runtime.KeepAlive(endpointId)
+	defer runtime.KeepAlive(clusterId)
+	defer runtime.KeepAlive(commandId)
+	defer runtime.KeepAlive(commandFields)
+	defer runtime.KeepAlive(timeoutMs)
+	defer runtime.KeepAlive(clientQueue)
+	objc.Send[objc.ID](objref.IDOf(mbd), objc.RegisterName("invokeCommandWithEndpointId:clusterId:commandId:commandFields:timedInvokeTimeout:clientQueue:completion:"), objref.IDOf(endpointId), objref.IDOf(clusterId), objref.IDOf(commandId), objref.IDOf(commandFields), objref.IDOf(timeoutMs), objref.IDOf(clientQueue), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completion(obj.Wrap(_b0), _b1) }))
+}
+
+// SubscribeAttributeWithEndpointIDClusterIDAttributeIDMinIntervalMaxIntervalParamsClientQueueReportHandlerSubscriptionEstablished wraps the corresponding Objective-C method.
+func (mbd *MTRBaseDevice) SubscribeAttributeWithEndpointIDClusterIDAttributeIDMinIntervalMaxIntervalParamsClientQueueReportHandlerSubscriptionEstablished(endpointId obj.Object, clusterId obj.Object, attributeId obj.Object, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, clientQueue obj.Object, reportHandler func(obj.Object, unsafe.Pointer), subscriptionEstablishedHandler func()) {
+	defer runtime.KeepAlive(mbd)
+	defer runtime.KeepAlive(endpointId)
+	defer runtime.KeepAlive(clusterId)
+	defer runtime.KeepAlive(attributeId)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(clientQueue)
+	objc.Send[objc.ID](objref.IDOf(mbd), objc.RegisterName("subscribeAttributeWithEndpointId:clusterId:attributeId:minInterval:maxInterval:params:clientQueue:reportHandler:subscriptionEstablished:"), objref.IDOf(endpointId), objref.IDOf(clusterId), objref.IDOf(attributeId), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objref.IDOf(clientQueue), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { reportHandler(obj.Wrap(_b0), _b1) }), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }))
+}
+
 // DeregisterReportHandlersWithClientQueueCompletion wraps the corresponding Objective-C method.
 func (mbd *MTRBaseDevice) DeregisterReportHandlersWithClientQueueCompletion(queue obj.Object, completion func()) {
 	defer runtime.KeepAlive(mbd)
 	defer runtime.KeepAlive(queue)
-	objc.Send[objc.ID](objref.IDOf(mbd), objc.RegisterName("deregisterReportHandlersWithClientQueue:completion:"), objref.IDOf(queue), completion)
+	objc.Send[objc.ID](objref.IDOf(mbd), objc.RegisterName("deregisterReportHandlersWithClientQueue:completion:"), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block) { completion() }))
 }

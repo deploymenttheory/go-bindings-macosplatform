@@ -7,6 +7,7 @@ package matter
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -262,6 +263,14 @@ func (mcoc *MTRClusterOperationalCredentials) RemoveFabricWithParamsExpectedValu
 		var _zero *MTROperationalCredentialsClusterNOCResponseParams
 		return _zero, ctx.Err()
 	}
+}
+
+// AddTrustedRootCertificateWithParamsExpectedValuesExpectedValueIntervalCompletion adds trusted root certificate with params expected values expected value interval completion.
+func (mcoc *MTRClusterOperationalCredentials) AddTrustedRootCertificateWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTROperationalCredentialsClusterAddTrustedRootCertificateParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcoc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcoc), objc.RegisterName("addTrustedRootCertificateWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
 // ReadAttributeNOCsWithParams reads attribute no cs with params.
@@ -546,6 +555,14 @@ func (mcoc *MTRClusterOperationalCredentials) RemoveFabricWithParamsExpectedValu
 		var _zero *MTROperationalCredentialsClusterNOCResponseParams
 		return _zero, ctx.Err()
 	}
+}
+
+// AddTrustedRootCertificateWithParamsExpectedValuesExpectedValueIntervalCompletionHandler adds trusted root certificate with params expected values expected value interval completion handler.
+func (mcoc *MTRClusterOperationalCredentials) AddTrustedRootCertificateWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTROperationalCredentialsClusterAddTrustedRootCertificateParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcoc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcoc), objc.RegisterName("addTrustedRootCertificateWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
 }
 
 var _ MTRGenericClusterProvider = (*MTRClusterOperationalCredentials)(nil)

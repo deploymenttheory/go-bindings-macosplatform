@@ -6,6 +6,7 @@ package storekit
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -145,6 +146,13 @@ func (p *Product) IsFamilyShareable() bool {
 	return _r
 }
 
+// ContentLengths returns the content lengths.
+func (p *Product) ContentLengths() unsafe.Pointer {
+	defer runtime.KeepAlive(p)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(p), objc.RegisterName("contentLengths"))
+	return _r
+}
+
 // DownloadContentLengths returns the download content lengths.
 //
 // DownloadContentLengths returns the collection as a Go slice.
@@ -152,6 +160,13 @@ func (p *Product) DownloadContentLengths() []obj.Object {
 	defer runtime.KeepAlive(p)
 	_arr := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("downloadContentLengths"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
+// ContentVersion returns the content version.
+func (p *Product) ContentVersion() unsafe.Pointer {
+	defer runtime.KeepAlive(p)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(p), objc.RegisterName("contentVersion"))
+	return _r
 }
 
 // DownloadContentVersion returns the download content version.

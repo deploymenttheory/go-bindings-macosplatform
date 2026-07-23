@@ -100,6 +100,48 @@ func (a *Accessory) ConnectionID() int {
 	return _r
 }
 
+// Manufacturer returns the manufacturer.
+func (a *Accessory) Manufacturer() unsafe.Pointer {
+	defer runtime.KeepAlive(a)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(a), objc.RegisterName("manufacturer"))
+	return _r
+}
+
+// Name returns the name.
+func (a *Accessory) Name() unsafe.Pointer {
+	defer runtime.KeepAlive(a)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(a), objc.RegisterName("name"))
+	return _r
+}
+
+// ModelNumber returns the model number.
+func (a *Accessory) ModelNumber() unsafe.Pointer {
+	defer runtime.KeepAlive(a)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(a), objc.RegisterName("modelNumber"))
+	return _r
+}
+
+// SerialNumber returns the serial number.
+func (a *Accessory) SerialNumber() unsafe.Pointer {
+	defer runtime.KeepAlive(a)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(a), objc.RegisterName("serialNumber"))
+	return _r
+}
+
+// FirmwareRevision returns the firmware revision.
+func (a *Accessory) FirmwareRevision() unsafe.Pointer {
+	defer runtime.KeepAlive(a)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(a), objc.RegisterName("firmwareRevision"))
+	return _r
+}
+
+// HardwareRevision returns the hardware revision.
+func (a *Accessory) HardwareRevision() unsafe.Pointer {
+	defer runtime.KeepAlive(a)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(a), objc.RegisterName("hardwareRevision"))
+	return _r
+}
+
 // DockType returns the dock type.
 func (a *Accessory) DockType() string {
 	defer runtime.KeepAlive(a)
@@ -108,4 +150,18 @@ func (a *Accessory) DockType() string {
 		return ""
 	}
 	return purego.GoString(_r)
+}
+
+// ProtocolStrings returns the protocol strings.
+func (a *Accessory) ProtocolStrings() unsafe.Pointer {
+	defer runtime.KeepAlive(a)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(a), objc.RegisterName("protocolStrings"))
+	return _r
+}
+
+// Delegate returns the delegate.
+func (a *Accessory) Delegate() unsafe.Pointer {
+	defer runtime.KeepAlive(a)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(a), objc.RegisterName("delegate"))
+	return _r
 }

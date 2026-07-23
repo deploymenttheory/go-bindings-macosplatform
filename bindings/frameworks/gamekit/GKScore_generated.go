@@ -242,3 +242,21 @@ func (s *Score) IssueChallengeToPlayersMessage(playerIDs []string, message strin
 	defer runtime.KeepAlive(s)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("issueChallengeToPlayers:message:"), purego.SliceToNSArray(playerIDs, func(_v string) objc.ID { return purego.NSString(_v) }), purego.NSString(message))
 }
+
+// ChallengeComposeControllerWithMessagePlayersCompletionHandler provides a challenge compose view controller with pre-selected player identifiers and a preformatted, player-editable message.
+func (s *Score) ChallengeComposeControllerWithMessagePlayersCompletionHandler(message string, players []*Player, completionHandler func(obj.Object, bool, obj.Object)) obj.Object {
+	defer runtime.KeepAlive(s)
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("challengeComposeControllerWithMessage:players:completionHandler:"), purego.NSString(message), purego.SliceToNSArray(players, func(_v *Player) objc.ID { return objref.IDOf(_v) }), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 bool, _b2 objc.ID) {
+		completionHandler(obj.Wrap(_b0), _b1, obj.Wrap(_b2))
+	}))
+	return obj.Wrap(_r)
+}
+
+// ChallengeComposeControllerWithMessagePlayersCompletion provides a challenge compose view controller with preselected player identifiers and a preformatted, player-editable message.
+func (s *Score) ChallengeComposeControllerWithMessagePlayersCompletion(message string, players []*Player, completionHandler func(obj.Object, bool, obj.Object)) obj.Object {
+	defer runtime.KeepAlive(s)
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("challengeComposeControllerWithMessage:players:completion:"), purego.NSString(message), purego.SliceToNSArray(players, func(_v *Player) objc.ID { return objref.IDOf(_v) }), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 bool, _b2 objc.ID) {
+		completionHandler(obj.Wrap(_b0), _b1, obj.Wrap(_b2))
+	}))
+	return obj.Wrap(_r)
+}

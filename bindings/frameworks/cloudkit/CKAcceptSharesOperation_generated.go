@@ -5,11 +5,11 @@
 package cloudkit
 
 import (
-	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -66,6 +66,20 @@ func NewAcceptSharesOperationWithShareMetadatas(shareMetadatas []*ShareMetadata)
 func (aso *AcceptSharesOperation) WithShareMetadatas(items ...*ShareMetadata) *AcceptSharesOperation {
 	_arr := purego.SliceToNSArray(items, func(_v *ShareMetadata) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(aso), objc.RegisterName("setShareMetadatas:"), _arr)
+	return aso
+}
+
+// WithPerShareCompletionBlock sets the block to execute as CloudKit processes individual shares.
+func (aso *AcceptSharesOperation) WithPerShareCompletionBlock(perShareCompletionBlock func(obj.Object, obj.Object, unsafe.Pointer)) *AcceptSharesOperation {
+	objc.Send[objc.ID](objref.IDOf(aso), objc.RegisterName("setPerShareCompletionBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
+		perShareCompletionBlock(obj.Wrap(_b0), obj.Wrap(_b1), _b2)
+	}))
+	return aso
+}
+
+// WithAcceptSharesCompletionBlock sets the closure to execute when the operation finishes.
+func (aso *AcceptSharesOperation) WithAcceptSharesCompletionBlock(acceptSharesCompletionBlock func(unsafe.Pointer)) *AcceptSharesOperation {
+	objc.Send[objc.ID](objref.IDOf(aso), objc.RegisterName("setAcceptSharesCompletionBlock:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { acceptSharesCompletionBlock(_b0) }))
 	return aso
 }
 
@@ -127,26 +141,6 @@ func (aso *AcceptSharesOperation) ShareMetadatas() []*ShareMetadata {
 	defer runtime.KeepAlive(aso)
 	_arr := objc.Send[objc.ID](objref.IDOf(aso), objc.RegisterName("shareMetadatas"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ShareMetadata { return ShareMetadataFromID(_id) })
-}
-
-// SetAcceptSharesCompletionBlock wraps the corresponding Objective-C method.
-//
-// SetAcceptSharesCompletionBlock blocks until the operation completes or ctx is cancelled.
-func (aso *AcceptSharesOperation) SetAcceptSharesCompletionBlock(ctx context.Context) error {
-	defer runtime.KeepAlive(aso)
-	_ch := make(chan error, 1)
-	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
-		var _err error
-		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
-		_ch <- _err
-	})
-	objc.Send[objc.ID](objref.IDOf(aso), objc.RegisterName("setAcceptSharesCompletionBlock:"), _block)
-	select {
-	case err := <-_ch:
-		return err
-	case <-ctx.Done():
-		return ctx.Err()
-	}
 }
 
 var _ OperationProvider = (*AcceptSharesOperation)(nil)

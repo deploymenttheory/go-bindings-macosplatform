@@ -55,6 +55,13 @@ func NewPolygonObstacleWithPointsCount(points unsafe.Pointer, numPoints int) *Po
 	return polygonObstacleAdopt(_id)
 }
 
+// VertexAtIndex returns the point coordinates of the specified vertex.
+func (po *PolygonObstacle) VertexAtIndex(index int) unsafe.Pointer {
+	defer runtime.KeepAlive(po)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(po), objc.RegisterName("vertexAtIndex:"), index)
+	return _r
+}
+
 // VertexCount returns number of vertices on this polygon
 func (po *PolygonObstacle) VertexCount() int {
 	defer runtime.KeepAlive(po)

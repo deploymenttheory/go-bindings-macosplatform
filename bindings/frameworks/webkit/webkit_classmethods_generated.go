@@ -7,6 +7,7 @@ package webkit
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -190,9 +191,15 @@ func DataStoreForIdentifier(identifier obj.Object) *WKWebsiteDataStore {
 	return WKWebsiteDataStoreFromID(_r)
 }
 
+// RemoveDataStoreForIdentifierCompletionHandler removes the data store that matches the identifier you provide.
+func RemoveDataStoreForIdentifierCompletionHandler(identifier obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(identifier)
+	objc.Send[objc.ID](objc.ID(_class("WKWebsiteDataStore")), objc.RegisterName("removeDataStoreForIdentifier:completionHandler:"), objref.IDOf(identifier), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // FetchAllDataStoreIdentifiers fetches an array of identifiers from existing data stores that have identifiers.
-func FetchAllDataStoreIdentifiers(completionHandler func(obj.Object) int) {
-	objc.Send[objc.ID](objc.ID(_class("WKWebsiteDataStore")), objc.RegisterName("fetchAllDataStoreIdentifiers:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) int { return completionHandler(obj.Wrap(_b0)) }))
+func FetchAllDataStoreIdentifiers(completionHandler func(obj.Object)) {
+	objc.Send[objc.ID](objc.ID(_class("WKWebsiteDataStore")), objc.RegisterName("fetchAllDataStoreIdentifiers:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { completionHandler(obj.Wrap(_b0)) }))
 }
 
 // OptionalSharedHistory returns a shared web history object, if one exists.

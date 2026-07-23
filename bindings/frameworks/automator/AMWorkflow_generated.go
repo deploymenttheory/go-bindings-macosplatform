@@ -174,3 +174,10 @@ func (w *Workflow) Input() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("input"))
 	return obj.Wrap(_r)
 }
+
+// Output returns the output.
+func (w *Workflow) Output() unsafe.Pointer {
+	defer runtime.KeepAlive(w)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(w), objc.RegisterName("output"))
+	return _r
+}

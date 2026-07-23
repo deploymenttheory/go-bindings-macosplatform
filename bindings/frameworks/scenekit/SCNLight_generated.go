@@ -539,10 +539,38 @@ func (l *Light) ProbeUpdateType() LightProbeUpdateType {
 	return _r
 }
 
+// ProbeExtents returns the probe extents.
+func (l *Light) ProbeExtents() unsafe.Pointer {
+	defer runtime.KeepAlive(l)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(l), objc.RegisterName("probeExtents"))
+	return _r
+}
+
+// ProbeOffset returns the probe offset.
+func (l *Light) ProbeOffset() unsafe.Pointer {
+	defer runtime.KeepAlive(l)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(l), objc.RegisterName("probeOffset"))
+	return _r
+}
+
 // ParallaxCorrectionEnabled wraps the corresponding Objective-C method.
 func (l *Light) ParallaxCorrectionEnabled() bool {
 	defer runtime.KeepAlive(l)
 	_r := objc.Send[bool](objref.IDOf(l), objc.RegisterName("parallaxCorrectionEnabled"))
+	return _r
+}
+
+// ParallaxExtentsFactor returns the parallax extents factor.
+func (l *Light) ParallaxExtentsFactor() unsafe.Pointer {
+	defer runtime.KeepAlive(l)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(l), objc.RegisterName("parallaxExtentsFactor"))
+	return _r
+}
+
+// ParallaxCenterOffset returns the parallax center offset.
+func (l *Light) ParallaxCenterOffset() unsafe.Pointer {
+	defer runtime.KeepAlive(l)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(l), objc.RegisterName("parallaxCenterOffset"))
 	return _r
 }
 
@@ -557,6 +585,13 @@ func (l *Light) ProbeEnvironment() *MaterialProperty {
 func (l *Light) AreaType() LightAreaType {
 	defer runtime.KeepAlive(l)
 	_r := objc.Send[LightAreaType](objref.IDOf(l), objc.RegisterName("areaType"))
+	return _r
+}
+
+// AreaExtents determines the extents of a light of type SCNLightTypeArea. Defaults to (1.0, 1.0, 1.0). The extents are interpreted differently for each type of area light SCNLightAreaTypeLine      : areaExtents.x   = (width) SCNLightAreaTypeRectangle : areaExtents.xy  = (width, height) SCNLightAreaTypePolygon   : ignored (see `areaPolygonVertices`)
+func (l *Light) AreaExtents() unsafe.Pointer {
+	defer runtime.KeepAlive(l)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(l), objc.RegisterName("areaExtents"))
 	return _r
 }
 

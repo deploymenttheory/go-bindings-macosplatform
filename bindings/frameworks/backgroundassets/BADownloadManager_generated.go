@@ -6,6 +6,7 @@ package backgroundassets
 
 import (
 	"runtime"
+	"time"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -115,6 +116,18 @@ func (dm *DownloadManager) ScheduleDownload(download *Download) error {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return nil
+}
+
+// PerformWithExclusiveControl attempts to acquire immediate, exclusive access to the download manager.
+func (dm *DownloadManager) PerformWithExclusiveControl(performHandler func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(dm)
+	objc.Send[objc.ID](objref.IDOf(dm), objc.RegisterName("performWithExclusiveControl:"), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { performHandler(_b0, _b1) }))
+}
+
+// PerformWithExclusiveControlBeforeDatePerformHandler acquires exclusive access to the BADownloadManager across the app and application extension. Acquires exclusive access to the BADownloadManager across the app and application extension. This ensures that your extension and app do not perform operations at the same time. Both the extension and app must use this API to ensure exclusive access.
+func (dm *DownloadManager) PerformWithExclusiveControlBeforeDatePerformHandler(date time.Time, performHandler func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(dm)
+	objc.Send[objc.ID](objref.IDOf(dm), objc.RegisterName("performWithExclusiveControlBeforeDate:performHandler:"), rt.TimeToNSDate(date), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { performHandler(_b0, _b1) }))
 }
 
 // StartForegroundDownload schedules an asset download that executes immediately in the foreground.

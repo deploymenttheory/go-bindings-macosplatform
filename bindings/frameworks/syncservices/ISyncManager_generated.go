@@ -6,6 +6,7 @@ package syncservices
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -81,6 +82,13 @@ func NewISyncManager() *ISyncManager {
 func (ism *ISyncManager) IsEnabled() bool {
 	defer runtime.KeepAlive(ism)
 	_r := objc.Send[bool](objref.IDOf(ism), objc.RegisterName("isEnabled"))
+	return _r
+}
+
+// SyncDisabledReason returns the sync disabled reason.
+func (ism *ISyncManager) SyncDisabledReason() unsafe.Pointer {
+	defer runtime.KeepAlive(ism)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(ism), objc.RegisterName("syncDisabledReason"))
 	return _r
 }
 

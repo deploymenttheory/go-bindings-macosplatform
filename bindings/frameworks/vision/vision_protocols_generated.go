@@ -5,6 +5,8 @@
 package vision
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
@@ -17,7 +19,7 @@ type FaceObservationAccepting interface {
 // RequestProgressProviding is the Go form of the Objective-C protocol VNRequestProgressProviding.
 type RequestProgressProviding interface {
 	ProgressHandler() obj.Object
-	SetProgressHandler(progressHandler obj.Object)
+	SetProgressHandler(progressHandler func(obj.Object, float64, unsafe.Pointer))
 	Indeterminate() bool
 }
 
