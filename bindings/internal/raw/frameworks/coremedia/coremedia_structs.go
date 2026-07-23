@@ -76,12 +76,6 @@ type CMTimeRange struct {
 	Duration CMTime
 }
 
-// A structure that represents video dimensions.
-type CMVideoDimensions struct {
-	Width  int32
-	Height int32
-}
-
 // @typedef CMBlockBufferRef @discussion A reference to a CMBlockBuffer, a CF object that adheres to retain/release semantics. When CFRelease() is performed on the last reference to the CMBlockBuffer, any referenced BlockBuffers are released and eligible memory blocks are deallocated. These operations are recursive, so one release could result in many follow on releses.
 // OpaqueCMBlockBuffer is an opaque type.
 type OpaqueCMBlockBuffer struct{}

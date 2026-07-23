@@ -15,7 +15,6 @@ type (
 	MachVmRangeFlavorT               = raw.MachVmRangeFlavorT
 	MachVmRangeTagT                  = raw.MachVmRangeTagT
 	MpoFlagsT                        = raw.MpoFlagsT
-	NDR_record_t                     = raw.NDR_record_t
 	ReplyMachMakeMemoryEntry64T      = raw.ReplyMachMakeMemoryEntry64T
 	ReplyMachMakeMemoryEntryT        = raw.ReplyMachMakeMemoryEntryT
 	ReplyMachVmRegionInfo64T         = raw.ReplyMachVmRegionInfo64T

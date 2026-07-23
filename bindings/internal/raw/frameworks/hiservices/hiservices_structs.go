@@ -132,12 +132,6 @@ type ProcessInfoRec struct {
 	ProcessAppRef     *carboncore.FSRef
 }
 
-type RGBColor struct {
-	Red   uint16
-	Green uint16
-	Blue  uint16
-}
-
 type SizeResourceRec struct {
 	Flags             uint16
 	PreferredHeapSize uint

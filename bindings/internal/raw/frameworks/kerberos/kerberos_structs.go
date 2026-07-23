@@ -539,33 +539,6 @@ type ErrorTable struct {
 	Count    int32
 }
 
-// C struct: gss_OID_desc_struct
-type GssOIDDescStruct struct {
-	Length   uint32
-	Elements unsafe.Pointer
-}
-
-// C struct: gss_OID_set_desc_struct
-type GssOIDSetDescStruct struct {
-	Count    uint
-	Elements *gss.GssOIDDescStruct
-}
-
-// C struct: gss_buffer_desc_struct
-type GssBufferDescStruct struct {
-	Length uint
-	Value  unsafe.Pointer
-}
-
-// C struct: gss_channel_bindings_struct
-type GssChannelBindingsStruct struct {
-	Initiator_addrtype uint32
-	Initiator_address  gss.GssBufferDescStruct
-	Acceptor_addrtype  uint32
-	Acceptor_address   gss.GssBufferDescStruct
-	Application_data   gss.GssBufferDescStruct
-}
-
 // C struct: gss_cred_id_struct
 // GssCredIdStruct is an opaque type.
 type GssCredIdStruct struct{}
@@ -573,44 +546,6 @@ type GssCredIdStruct struct{}
 // C struct: gss_ctx_id_struct
 // GssCtxIdStruct is an opaque type.
 type GssCtxIdStruct struct{}
-
-// C struct: gss_krb5_cfx_keydata
-type GssKrb5CfxKeydata struct {
-	Have_acceptor_subkey uint32
-	Ctx_key              gss.GssKrb5LucidKey
-	Acceptor_subkey      gss.GssKrb5LucidKey
-}
-
-// C struct: gss_krb5_lucid_context_v1
-type GssKrb5LucidContextV1 struct {
-	Version    uint32
-	Initiate   uint32
-	Endtime    uint32
-	Send_seq   uint64
-	Recv_seq   uint64
-	Protocol   uint32
-	Rfc1964_kd gss.GssKrb5Rfc1964Keydata
-	Cfx_kd     gss.GssKrb5CfxKeydata
-}
-
-// C struct: gss_krb5_lucid_context_version
-type GssKrb5LucidContextVersion struct {
-	Version uint32
-}
-
-// C struct: gss_krb5_lucid_key
-type GssKrb5LucidKey struct {
-	Type   uint32
-	Length uint32
-	Data   unsafe.Pointer
-}
-
-// C struct: gss_krb5_rfc1964_keydata
-type GssKrb5Rfc1964Keydata struct {
-	Sign_alg uint32
-	Seal_alg uint32
-	Ctx_key  gss.GssKrb5LucidKey
-}
 
 // C struct: gss_name_struct
 // GssNameStruct is an opaque type.

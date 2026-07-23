@@ -90,7 +90,6 @@ type (
 	AuditFstat                       = raw.AuditFstat
 	AuditSessionFlags                = raw.AuditSessionFlags
 	AuditStat                        = raw.AuditStat
-	AuditTokenT                      = raw.AuditTokenT
 	Auditinfo                        = raw.Auditinfo
 	AuditinfoAddrT                   = raw.AuditinfoAddrT
 	AuditinfoT                       = raw.AuditinfoT

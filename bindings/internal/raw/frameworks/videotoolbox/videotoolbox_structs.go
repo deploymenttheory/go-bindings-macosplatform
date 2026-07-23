@@ -7,12 +7,6 @@ import (
 	"unsafe"
 )
 
-// @typedef CMVideoDimensions Type used for video dimensions, units are pixels
-type CMVideoDimensions struct {
-	Width  int32
-	Height int32
-}
-
 // OpaqueVTCompressionSession is an opaque type.
 type OpaqueVTCompressionSession struct{}
 

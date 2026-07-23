@@ -9,18 +9,6 @@ import (
 	"unsafe"
 )
 
-// [ndr.h:40]
-type NDR_record_t struct {
-	Mig_vers     uint8
-	If_vers      uint8
-	Reserved1    uint8
-	Mig_encoding uint8
-	Int_rep      uint8
-	Char_rep     uint8
-	Float_rep    uint8
-	Reserved2    uint8
-}
-
 // [vm_map.h:1402]
 type ReplyMachMakeMemoryEntry64T struct {
 	Head          unsafe.Pointer

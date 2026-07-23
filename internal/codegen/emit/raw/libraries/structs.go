@@ -25,6 +25,13 @@ func EmitStructs(w io.Writer, framework *macosplatformmetadata.FrameworkMeta, m 
 		if cfOpaqueStructs[name] {
 			continue
 		}
+		// A struct several frameworks' headers define (e.g. audit_token_t, pulled in
+		// by bsm, endpointsecurity, and libproc) is emitted only by its StructIndex
+		// owner; the others reference the owner's type via the mapper. This prevents
+		// duplicate, mutually-incompatible declarations across packages.
+		if owner := m.StructIndex[name]; owner != "" && !strings.EqualFold(owner, framework.Framework) {
+			continue
+		}
 		model := buildStructModel(name, framework.Structs[name], framework.Framework, m, knownClasses, usedImports)
 		if err := render.Execute(w, "struct", model); err != nil {
 			return nil, err

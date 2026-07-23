@@ -744,12 +744,6 @@ type CATempoMapEntry struct {
 	TempoBPM float64
 }
 
-// ComponentDescription is an opaque type.
-type ComponentDescription struct{}
-
-// ComponentInstanceRecord is an opaque type.
-type ComponentInstanceRecord struct{}
-
 // A specifier for the kAudioFormatProperty_FormatList property, including the codec to use.
 type ExtendedAudioFormatInfo struct {
 	MASBD             coreaudiotypes.AudioStreamBasicDescription
@@ -777,9 +771,6 @@ type ExtendedTempoEvent struct {
 	Bpm float64
 }
 
-// FSRef is an opaque type.
-type FSRef struct{}
-
 // The time- and transport-related callback functions for an audio unit.
 type HostCallbackInfo struct {
 	HostUserData            unsafe.Pointer
@@ -796,10 +787,6 @@ type MIDIChannelMessage struct {
 	Data2    uint8
 	Reserved uint8
 }
-
-// A variable-length list of MIDI event packets.
-// MIDIEventList is an opaque type.
-type MIDIEventList struct{}
 
 // Describes a MIDI metaevent such as lyric text, time signature, and so on.
 type MIDIMetaEvent struct {
@@ -819,10 +806,6 @@ type MIDINoteMessage struct {
 	ReleaseVelocity uint8
 	Duration        float32
 }
-
-// A list of MIDI events the system sends to or receives from an endpoint.
-// MIDIPacketList is an opaque type.
-type MIDIPacketList struct{}
 
 // Describes a MIDI system-exclusive (SysEx) message.
 type MIDIRawData struct {

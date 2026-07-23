@@ -63,6 +63,12 @@ func EmitStructs(
 		if s.Availability.IsUnavailable {
 			continue
 		}
+		// A C struct several frameworks' headers define (e.g. audit_token_t) is
+		// emitted only by its StructIndex owner; the others reference the owner's
+		// type or, across the purego/cgo boundary, degrade to unsafe.Pointer.
+		if owner := mapper.StructIndex[name]; owner != "" && !strings.EqualFold(owner, framework.Framework) {
+			continue
+		}
 		goName := naming.ExportedTypeName(name)
 		if goName == "" || seenGoNames[goName] || reservedTypeNames[goName] {
 			continue
