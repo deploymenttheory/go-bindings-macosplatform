@@ -2,3 +2,18 @@
 //go:build darwin
 
 package metalperformanceshaders
+
+type MPSMatrixCopyOffsets struct {
+	SourceRowOffset         uint32
+	SourceColumnOffset      uint32
+	DestinationRowOffset    uint32
+	DestinationColumnOffset uint32
+}
+
+// @struct         MPSScaleTransform @abstract       Transform matrix for explict control over resampling in MPSImageScale. @discussion     The MPSScaleTransform is equivalent to: @code (CGAffineTransform) { .a = scaleX,        .b = 0, .c = 0,             .d = scaleY, .tx = translateX,   .ty = translateY } @endcode @memberof       MPSImageScale
+type MPSScaleTransform struct {
+	ScaleX     float64
+	ScaleY     float64
+	TranslateX float64
+	TranslateY float64
+}

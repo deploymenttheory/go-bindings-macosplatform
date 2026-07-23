@@ -389,6 +389,9 @@ type CGVector struct {
 	Dy float64
 }
 
+// FSRef is an opaque type.
+type FSRef struct{}
+
 // C struct: __CFAllocator
 // CFAllocator is an opaque type.
 type CFAllocator struct{}

@@ -2,3 +2,9 @@
 //go:build darwin
 
 package mediaextension
+
+// @struct		AVSampleCursorStorageRange @abstract   A struct for indicating the offset and length of storage occupied by a media sample or its chunk. @field      offset The offset of the first byte of storage occupied by a media sample or its chunk. @field      length The count of bytes of storage occupied by a media sample or its chunk. @discussion Like NSRange, but rangier.
+type AVSampleCursorStorageRange struct {
+	Offset int64
+	Length int64
+}

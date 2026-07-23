@@ -64,6 +64,12 @@ type PickerMenuItemInfo struct {
 	UndoItem   int16
 }
 
+// ****************************************************************************** Quickdraw Types Point               2D Quickdraw coordinate, range: -32K to +32K Rect                Rectangular Quickdraw area Style               Quickdraw font rendering styles StyleParameter      Style when used as a parameter (historical 68K convention) StyleField          Style when used as a field (historical 68K convention) CharParameter       Char when used as a parameter (historical 68K convention) Note:   The original Macintosh toolbox in 68K Pascal defined Style as a SET. Both Style and CHAR occupy 8-bits in packed records or 16-bits when used as fields in non-packed records or as parameters. *******************************************************************************
+type Point struct {
+	V int16
+	H int16
+}
+
 type RGBColor struct {
 	Red   uint16
 	Green uint16

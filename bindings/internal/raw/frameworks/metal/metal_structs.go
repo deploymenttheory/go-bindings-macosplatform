@@ -305,6 +305,16 @@ type MTLVertexAmplificationViewMapping struct {
 	RenderTargetArrayIndexOffset uint32
 }
 
+// A 3D rectangular region for the viewport clipping.
+type MTLViewport struct {
+	OriginX float64
+	OriginY float64
+	Width   float64
+	Height  float64
+	Znear   float64
+	Zfar    float64
+}
+
 // @brief An axis aligned bounding box with a min and max point
 // C struct: _MTLAxisAlignedBoundingBox
 type MTLAxisAlignedBoundingBox struct {

@@ -12,8 +12,18 @@ type IOAsyncCompletionContent struct {
 	Args   []unsafe.Pointer
 }
 
+type IONamedValue struct {
+	Value int32
+	Name  string
+}
+
 // IONotificationPort is an opaque type.
 type IONotificationPort struct{}
+
+type IOPhysicalRange struct {
+	Address uint64
+	Length  uint64
+}
 
 type IOServiceInterestContent struct {
 	MessageType     uint
@@ -23,6 +33,11 @@ type IOServiceInterestContent struct {
 type IOServiceInterestContent64 struct {
 	MessageType     uint
 	MessageArgument [1]uint64
+}
+
+type IOVirtualRange struct {
+	Address uint64
+	Length  uint64
 }
 
 type OSNotificationHeader struct {
