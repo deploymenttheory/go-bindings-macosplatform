@@ -25,7 +25,7 @@ type AlertStdAlertParamRec struct {
 }
 
 type AlertStdCFStringAlertParamRec struct {
-	Version       uint
+	Version       uint32
 	Movable       uint8
 	HelpButton    uint8
 	DefaultText   unsafe.Pointer
@@ -34,7 +34,7 @@ type AlertStdCFStringAlertParamRec struct {
 	DefaultButton int16
 	CancelButton  int16
 	Position      uint16
-	Flags         uint
+	Flags         uint32
 	Icon          unsafe.Pointer
 }
 
@@ -45,13 +45,13 @@ type AlertTemplate struct {
 }
 
 type BasicWindowDescription struct {
-	DescriptionSize         uint
+	DescriptionSize         uint32
 	WindowContentRect       carboncore.Rect
 	WindowZoomRect          carboncore.Rect
 	WindowRefCon            unsafe.Pointer
-	WindowStateFlags        uint
-	WindowPositionMethod    uint
-	WindowDefinitionVersion uint
+	WindowStateFlags        uint32
+	WindowPositionMethod    uint32
+	WindowDefinitionVersion uint32
 	WindowDefinition        unsafe.Pointer
 }
 
@@ -81,8 +81,8 @@ type ControlFontStyleRec struct {
 }
 
 type ControlID struct {
-	Signature uint
-	Id        int
+	Signature uint32
+	Id        int32
 }
 
 type ControlImageContentInfo struct {
@@ -91,8 +91,8 @@ type ControlImageContentInfo struct {
 }
 
 type ControlKind struct {
-	Signature uint
-	Kind      uint
+	Signature uint32
+	Kind      uint32
 }
 
 type ControlTabEntry struct {
@@ -121,19 +121,19 @@ type ControlTemplate struct {
 	ControlMaximum   int16
 	ControlMinimum   int16
 	ControlDefProcID int16
-	ControlReference int
+	ControlReference int32
 	ControlTitle     [256]uint8
 }
 
 type CtlCTab struct {
-	CcSeed  int
+	CcSeed  int32
 	CcRider int16
 	CtSize  int16
 	CtTable [4]qd.ColorSpec
 }
 
 type DataBrowserAccessibilityItemInfo struct {
-	Version uint
+	Version uint32
 	U       unsafe.Pointer
 }
 
@@ -141,25 +141,25 @@ type DataBrowserAccessibilityItemInfoV0 struct {
 	Container      uint
 	Item           uint
 	ColumnProperty uint
-	PropertyPart   uint
+	PropertyPart   uint32
 }
 
 type DataBrowserAccessibilityItemInfoV1 struct {
 	Container      uint
 	Item           uint
 	ColumnProperty uint
-	PropertyPart   uint
+	PropertyPart   uint32
 	RowIndex       uint
 	ColumnIndex    uint
 }
 
 type DataBrowserCallbacks struct {
-	Version uint
+	Version uint32
 	U       unsafe.Pointer
 }
 
 type DataBrowserCustomCallbacks struct {
-	Version uint
+	Version uint32
 	U       unsafe.Pointer
 }
 
@@ -169,7 +169,7 @@ type DataBrowserListViewColumnDesc struct {
 }
 
 type DataBrowserListViewHeaderDesc struct {
-	Version        uint
+	Version        uint32
 	MinimumWidth   uint16
 	MaximumWidth   uint16
 	TitleOffset    int16
@@ -181,8 +181,8 @@ type DataBrowserListViewHeaderDesc struct {
 
 type DataBrowserPropertyDesc struct {
 	PropertyID    uint
-	PropertyType  uint
-	PropertyFlags uint
+	PropertyType  uint32
+	PropertyFlags uint32
 }
 
 type DialogTemplate struct {
@@ -192,7 +192,7 @@ type DialogTemplate struct {
 	Filler1    uint8
 	GoAwayFlag uint8
 	Filler2    uint8
-	RefCon     int
+	RefCon     int32
 	ItemsID    int16
 	Title      [256]uint8
 }
@@ -202,27 +202,27 @@ type EvQEl struct {
 	QType         int16
 	EvtQWhat      uint16
 	EvtQMessage   uint
-	EvtQWhen      uint
+	EvtQWhen      uint32
 	EvtQWhere     carboncore.Point
 	EvtQModifiers uint16
 }
 
 type EventHotKeyID struct {
-	Signature uint
-	Id        uint
+	Signature uint32
+	Id        uint32
 }
 
 type EventRecord struct {
 	What      uint16
 	Message   uint
-	When      uint
+	When      uint32
 	Where     carboncore.Point
 	Modifiers uint16
 }
 
 type EventTypeSpec struct {
-	EventClass uint
-	EventKind  uint
+	EventClass uint32
+	EventKind  uint32
 }
 
 type FileTranslationList struct {
@@ -231,7 +231,7 @@ type FileTranslationList struct {
 }
 
 type FileTranslationSpec struct {
-	ComponentSignature    uint
+	ComponentSignature    uint32
 	TranslationSystemInfo unsafe.Pointer
 	Src                   FileTypeSpec
 	Dst                   FileTypeSpec
@@ -239,11 +239,11 @@ type FileTranslationSpec struct {
 
 // ***************************************************************************************
 type FileTypeSpec struct {
-	Format         uint
+	Format         uint32
 	Hint           int
-	Flags          uint
-	CatInfoType    uint
-	CatInfoCreator uint
+	Flags          uint32
+	CatInfoType    uint32
+	CatInfoCreator uint32
 }
 
 type GetGrowImageRegionRec struct {
@@ -257,8 +257,8 @@ type GetWindowRegionRec struct {
 }
 
 type HFSFlavor struct {
-	FileType    uint
-	FileCreator uint
+	FileType    uint32
+	FileCreator uint32
 	FdFlags     uint16
 	FileSpec    carboncore.FSSpec
 }
@@ -283,14 +283,14 @@ type HIBinding struct {
 }
 
 type HICommand struct {
-	Attributes uint
-	CommandID  uint
+	Attributes uint32
+	CommandID  uint32
 	Menu       unsafe.Pointer
 }
 
 type HICommandExtended struct {
-	Attributes uint
-	CommandID  uint
+	Attributes uint32
+	CommandID  uint32
 	Source     unsafe.Pointer
 }
 
@@ -302,7 +302,7 @@ type HIContentBorderMetrics struct {
 }
 
 type HILayoutInfo struct {
-	Version  uint
+	Version  uint32
 	Binding  HIBinding
 	Scale    HIScaling
 	Position HIPositioning
@@ -319,7 +319,7 @@ type HIScaling struct {
 }
 
 type HIScrollBarTrackInfo struct {
-	Version     uint
+	Version     uint32
 	EnableState uint8
 	PressState  uint8
 	Viewsize    float64
@@ -332,7 +332,7 @@ type HISideBinding struct {
 }
 
 type HIThemeAnimationFrameInfo struct {
-	Index uint
+	Index uint32
 }
 
 type HIThemeAnimationTimeInfo struct {
@@ -341,14 +341,14 @@ type HIThemeAnimationTimeInfo struct {
 }
 
 type HIThemeBackgroundDrawInfo struct {
-	Version uint
-	State   uint
-	Kind    uint
+	Version uint32
+	State   uint32
+	Kind    uint32
 }
 
 type HIThemeButtonDrawInfo struct {
-	Version   uint
-	State     uint
+	Version   uint32
+	State     uint32
 	Kind      uint16
 	Value     uint16
 	Adornment uint16
@@ -356,178 +356,178 @@ type HIThemeButtonDrawInfo struct {
 }
 
 type HIThemeChasingArrowsDrawInfo struct {
-	Version uint
-	State   uint
-	Index   uint
+	Version uint32
+	State   uint32
+	Index   uint32
 }
 
 type HIThemeFrameDrawInfo struct {
-	Version   uint
-	Kind      uint
-	State     uint
+	Version   uint32
+	Kind      uint32
+	State     uint32
 	IsFocused uint8
 }
 
 type HIThemeGrabberDrawInfo struct {
-	Version uint
-	State   uint
+	Version uint32
+	State   uint32
 }
 
 type HIThemeGroupBoxDrawInfo struct {
-	Version uint
-	State   uint
-	Kind    uint
+	Version uint32
+	State   uint32
+	Kind    uint32
 }
 
 type HIThemeGrowBoxDrawInfo struct {
-	Version   uint
-	State     uint
-	Kind      uint
+	Version   uint32
+	State     uint32
+	Kind      uint32
 	Direction uint16
-	Size      uint
+	Size      uint32
 }
 
 type HIThemeHeaderDrawInfo struct {
-	Version uint
-	State   uint
-	Kind    uint
+	Version uint32
+	State   uint32
+	Kind    uint32
 }
 
 type HIThemeMenuBarDrawInfo struct {
-	Version    uint
+	Version    uint32
 	State      uint16
-	Attributes uint
+	Attributes uint32
 }
 
 type HIThemeMenuDrawInfo struct {
-	Version       uint
+	Version       uint32
 	MenuType      uint16
 	Reserved1     uint
 	Reserved2     float64
-	MenuDirection uint
+	MenuDirection uint32
 	Reserved3     float64
 	Reserved4     float64
 }
 
 type HIThemeMenuDrawInfoVersionZero struct {
-	Version  uint
+	Version  uint32
 	MenuType uint16
 }
 
 type HIThemeMenuItemDrawInfo struct {
-	Version  uint
+	Version  uint32
 	ItemType uint16
 	State    uint16
 }
 
 type HIThemeMenuTitleDrawInfo struct {
-	Version             uint
+	Version             uint32
 	State               uint16
-	Attributes          uint
+	Attributes          uint32
 	CondensedTitleExtra float64
 }
 
 type HIThemePlacardDrawInfo struct {
-	Version uint
-	State   uint
+	Version uint32
+	State   uint32
 }
 
 type HIThemePopupArrowDrawInfo struct {
-	Version     uint
-	State       uint
+	Version     uint32
+	State       uint32
 	Orientation uint16
 	Size        uint16
 }
 
 type HIThemeScrollBarDelimitersDrawInfo struct {
-	Version    uint
-	State      uint
+	Version    uint32
+	State      uint32
 	WindowType uint16
-	Attributes uint
+	Attributes uint32
 }
 
 type HIThemeSegmentDrawInfo struct {
-	Version   uint
-	State     uint
+	Version   uint32
+	State     uint32
 	Value     uint16
-	Size      uint
-	Kind      uint
-	Position  uint
-	Adornment uint
+	Size      uint32
+	Kind      uint32
+	Position  uint32
+	Adornment uint32
 }
 
 type HIThemeSeparatorDrawInfo struct {
-	Version uint
-	State   uint
+	Version uint32
+	State   uint32
 }
 
 type HIThemeSplitterDrawInfo struct {
-	Version   uint
-	State     uint
-	Adornment uint
+	Version   uint32
+	State     uint32
+	Adornment uint32
 }
 
 type HIThemeTabDrawInfo struct {
-	Version   uint
+	Version   uint32
 	Style     uint16
 	Direction uint16
-	Size      uint
-	Adornment uint
-	Kind      uint
-	Position  uint
+	Size      uint32
+	Adornment uint32
+	Kind      uint32
+	Position  uint32
 }
 
 type HIThemeTabDrawInfoVersionZero struct {
-	Version   uint
+	Version   uint32
 	Style     uint16
 	Direction uint16
-	Size      uint
-	Adornment uint
+	Size      uint32
+	Adornment uint32
 }
 
 type HIThemeTabPaneDrawInfo struct {
-	Version   uint
-	State     uint
+	Version   uint32
+	State     uint32
 	Direction uint16
-	Size      uint
-	Kind      uint
-	Adornment uint
+	Size      uint32
+	Kind      uint32
+	Adornment uint32
 }
 
 type HIThemeTabPaneDrawInfoVersionZero struct {
-	Version   uint
-	State     uint
+	Version   uint32
+	State     uint32
 	Direction uint16
-	Size      uint
+	Size      uint32
 }
 
 type HIThemeTextInfo struct {
-	Version             uint
-	State               uint
+	Version             uint32
+	State               uint32
 	FontID              uint16
-	HorizontalFlushness uint
-	VerticalFlushness   uint
-	Options             uint
-	TruncationPosition  uint
-	TruncationMaxLines  uint
+	HorizontalFlushness uint32
+	VerticalFlushness   uint32
+	Options             uint32
+	TruncationPosition  uint32
+	TruncationMaxLines  uint32
 	TruncationHappened  uint8
 	Filler1             uint8
 	Font                unsafe.Pointer
 }
 
 type HIThemeTickMarkDrawInfo struct {
-	Version uint
-	State   uint
+	Version uint32
+	State   uint32
 }
 
 type HIThemeTrackDrawInfo struct {
-	Version     uint
+	Version     uint32
 	Kind        uint16
 	Bounds      corefoundation.CGRect
-	Min         int
-	Max         int
-	Value       int
-	Reserved    uint
+	Min         int32
+	Max         int32
+	Value       int32
+	Reserved    uint32
 	Attributes  uint16
 	EnableState uint8
 	Filler1     uint8
@@ -535,28 +535,28 @@ type HIThemeTrackDrawInfo struct {
 }
 
 type HIThemeWindowDrawInfo struct {
-	Version     uint
-	State       uint
+	Version     uint32
+	State       uint32
 	WindowType  uint16
-	Attributes  uint
+	Attributes  uint32
 	TitleHeight float64
 	TitleWidth  float64
 }
 
 type HIThemeWindowWidgetDrawInfo struct {
-	Version     uint
-	WidgetState uint
+	Version     uint32
+	WidgetState uint32
 	WidgetType  uint16
-	WindowState uint
+	WindowState uint32
 	WindowType  uint16
-	Attributes  uint
+	Attributes  uint32
 	TitleHeight float64
 	TitleWidth  float64
 }
 
 type HITypeAndCreator struct {
-	Type    uint
-	Creator uint
+	Type    uint32
+	Creator uint32
 }
 
 type HIViewContentInfo struct {
@@ -572,17 +572,17 @@ type HIViewFrameMetrics struct {
 }
 
 type HIViewKind struct {
-	Signature uint
-	Kind      uint
+	Signature uint32
+	Kind      uint32
 }
 
 type HMHelpContent struct {
-	ContentType uint
+	ContentType uint32
 	U           unsafe.Pointer
 }
 
 type HMHelpContentRec struct {
-	Version    int
+	Version    int32
 	AbsHotRect carboncore.Rect
 	TagSide    int16
 	Content    [2]HMHelpContent
@@ -615,7 +615,7 @@ type LHElement struct {
 }
 
 type ListDefSpec struct {
-	DefType uint
+	DefType uint32
 	U       unsafe.Pointer
 }
 
@@ -702,7 +702,7 @@ type MenuCRsrc struct {
 }
 
 type MenuDefSpec struct {
-	DefType uint
+	DefType uint32
 	U       unsafe.Pointer
 }
 
@@ -711,25 +711,25 @@ type MenuItemDataRec struct {
 	Text            *uint8
 	Mark            uint16
 	CmdKey          uint16
-	CmdKeyGlyph     uint
-	CmdKeyModifiers uint
+	CmdKeyGlyph     uint32
+	CmdKeyModifiers uint32
 	Style           uint8
 	Enabled         uint8
 	IconEnabled     uint8
 	Filler1         uint8
-	IconID          int
-	IconType        uint
+	IconID          int32
+	IconType        uint32
 	IconHandle      *string
-	CmdID           uint
-	Encoding        uint
+	CmdID           uint32
+	Encoding        uint32
 	SubmenuID       int16
 	SubmenuHandle   unsafe.Pointer
-	FontID          int
+	FontID          int32
 	Refcon          unsafe.Pointer
-	Attr            uint
+	Attr            uint32
 	CfText          unsafe.Pointer
 	Properties      unsafe.Pointer
-	Indent          uint
+	Indent          uint32
 	CmdVirtualKey   uint16
 	AttributedText  unsafe.Pointer
 	Font            unsafe.Pointer
@@ -740,8 +740,8 @@ type MenuTrackingData struct {
 	ItemSelected      uint16
 	ItemUnderMouse    uint16
 	ItemRect          carboncore.Rect
-	VirtualMenuTop    int
-	VirtualMenuBottom int
+	VirtualMenuTop    int32
+	VirtualMenuBottom int32
 }
 
 type NMRec struct {
@@ -840,10 +840,10 @@ type ProgressTrackInfo struct {
 }
 
 type PromiseHFSFlavor struct {
-	FileType       uint
-	FileCreator    uint
+	FileType       uint32
+	FileCreator    uint32
 	FdFlags        uint16
-	PromisedFlavor uint
+	PromisedFlavor uint32
 }
 
 type RGBColor struct {
@@ -870,8 +870,8 @@ type STElement struct {
 }
 
 type ScrapFlavorInfo struct {
-	FlavorType  uint
-	FlavorFlags uint
+	FlavorType  uint32
+	FlavorFlags uint32
 }
 
 type ScrapTranslationList struct {
@@ -881,7 +881,7 @@ type ScrapTranslationList struct {
 
 // ***************************************************************************************
 type ScrapTypeSpec struct {
-	Format uint
+	Format uint32
 	Hint   int
 }
 
@@ -896,12 +896,12 @@ type ScriptLanguageSupport struct {
 }
 
 type ScrollBarTrackInfo struct {
-	Viewsize   int
+	Viewsize   int32
 	PressState uint8
 }
 
 type ScrpSTElement struct {
-	ScrpStartChar int
+	ScrpStartChar int32
 	ScrpHeight    int16
 	ScrpAscent    int16
 	ScrpFont      int16
@@ -984,7 +984,7 @@ type TEStyleRec struct {
 
 type TSMGlyphInfo struct {
 	Range      corefoundation.CFRange
-	FontRef    uint
+	FontRef    uint32
 	Collection uint16
 	GlyphID    uint16
 }
@@ -1015,7 +1015,7 @@ type TXNATSUIVariations struct {
 }
 
 type TXNBackground struct {
-	BgType uint
+	BgType uint32
 	Bg     TXNBackgroundData
 }
 
@@ -1031,10 +1031,10 @@ type TXNCarbonEventInfo struct {
 }
 
 type TXNLongRect struct {
-	Top    int
-	Left   int
-	Bottom int
-	Right  int
+	Top    int32
+	Left   int32
+	Bottom int32
+	Right  int32
 }
 
 type TXNMargins struct {
@@ -1047,7 +1047,7 @@ type TXNMargins struct {
 type TXNMatchTextRecord struct {
 	ITextPtr           unsafe.Pointer
 	ITextToMatchLength int
-	ITextEncoding      uint
+	ITextEncoding      uint32
 }
 
 type TXNTab struct {
@@ -1057,15 +1057,15 @@ type TXNTab struct {
 }
 
 type TXNTypeAttributes struct {
-	Tag  uint
+	Tag  uint32
 	Size uint
 	Data unsafe.Pointer
 }
 
 type TabletPointRec struct {
-	AbsX               int
-	AbsY               int
-	AbsZ               int
+	AbsX               int32
+	AbsY               int32
+	AbsZ               int32
 	Buttons            uint16
 	Pressure           uint16
 	TiltX              int16
@@ -1085,9 +1085,9 @@ type TabletProximityRec struct {
 	DeviceID            uint16
 	SystemTabletID      uint16
 	VendorPointerType   uint16
-	PointerSerialNumber uint
+	PointerSerialNumber uint32
 	UniqueID            uint64
-	CapabilityMask      uint
+	CapabilityMask      uint32
 	PointerType         uint8
 	EnterProximity      uint8
 }
@@ -1110,7 +1110,7 @@ type TextStyle struct {
 }
 
 type ThemeButtonDrawInfo struct {
-	State     uint
+	State     uint32
 	Value     uint16
 	Adornment uint16
 }
@@ -1118,10 +1118,10 @@ type ThemeButtonDrawInfo struct {
 type ThemeTrackDrawInfo struct {
 	Kind        uint16
 	Bounds      carboncore.Rect
-	Min         int
-	Max         int
-	Value       int
-	Reserved    uint
+	Min         int32
+	Max         int32
+	Value       int32
+	Reserved    uint32
 	Attributes  uint16
 	EnableState uint8
 	Filler1     uint8
@@ -1138,14 +1138,14 @@ type ThemeWindowMetrics struct {
 }
 
 type TransitionWindowOptions struct {
-	Version  uint
+	Version  uint32
 	Duration float64
 	Window   unsafe.Pointer
 	UserData unsafe.Pointer
 }
 
 type TypeSelectRecord struct {
-	TsrLastKeyTime uint
+	TsrLastKeyTime uint32
 	TsrScript      int16
 	TsrKeyStrokes  [64]uint8
 }
@@ -1163,7 +1163,7 @@ type WinCTab struct {
 }
 
 type WindowDefSpec struct {
-	DefType uint
+	DefType uint32
 	U       unsafe.Pointer
 }
 

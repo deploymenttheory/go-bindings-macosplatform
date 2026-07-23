@@ -121,8 +121,8 @@ type CGEventTapInformation struct {
 	TapPoint           CGEventTapLocation
 	Options            CGEventTapOptions
 	EventsOfInterest   uint64
-	TappingProcess     int
-	ProcessBeingTapped int
+	TappingProcess     int32
+	ProcessBeingTapped int32
 	Enabled            bool
 	MinUsecLatency     float32
 	AvgUsecLatency     float32

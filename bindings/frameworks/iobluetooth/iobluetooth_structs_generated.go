@@ -421,7 +421,7 @@ type BluetoothHCIInquiryResult struct {
 
 type BluetoothHCIInquiryResults struct {
 	Results [50]BluetoothHCIInquiryResult
-	Count   uint
+	Count   uint32
 }
 
 type BluetoothHCIInquiryWithRSSIResult struct {
@@ -435,7 +435,7 @@ type BluetoothHCIInquiryWithRSSIResult struct {
 
 type BluetoothHCIInquiryWithRSSIResults struct {
 	Results [50]BluetoothHCIInquiryWithRSSIResult
-	Count   uint
+	Count   uint32
 }
 
 type BluetoothHCILEBufferSize struct {
@@ -636,9 +636,9 @@ type BluetoothUserPasskeyNotification struct {
 
 // Structure used to search for particular devices.
 type IOBluetoothDeviceSearchAttributes struct {
-	Options              uint
-	MaxResults           uint
-	DeviceAttributeCount uint
+	Options              uint32
+	MaxResults           uint32
+	DeviceAttributeCount uint32
 	AttributeList        unsafe.Pointer
 }
 
@@ -659,7 +659,7 @@ type IOBluetoothL2CAPChannelDataBlock struct {
 type IOBluetoothL2CAPChannelEvent struct {
 	EventType IOBluetoothL2CAPChannelEventType
 	U         unsafe.Pointer
-	Status    int
+	Status    int32
 }
 
 // Part of the OBEXSessionEvent structure.

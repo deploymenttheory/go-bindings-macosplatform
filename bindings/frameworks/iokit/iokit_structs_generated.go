@@ -9,7 +9,7 @@ import (
 )
 
 type IOAsyncCompletionContent struct {
-	Result int
+	Result int32
 	Args   unsafe.Pointer
 }
 
@@ -26,12 +26,12 @@ type IOPhysicalRange struct {
 }
 
 type IOServiceInterestContent struct {
-	MessageType     uint
+	MessageType     uint32
 	MessageArgument unsafe.Pointer
 }
 
 type IOServiceInterestContent64 struct {
-	MessageType     uint
+	MessageType     uint32
 	MessageArgument [1]uint64
 }
 
@@ -41,15 +41,15 @@ type IOVirtualRange struct {
 }
 
 type OSNotificationHeader struct {
-	Size      uint
-	Type      uint
+	Size      uint32
+	Type      uint32
 	Reference [8]uint
 	Content   unsafe.Pointer
 }
 
 type OSNotificationHeader64 struct {
-	Size      uint
-	Type      uint
+	Size      uint32
+	Type      uint32
 	Reference [8]uint64
 	Content   unsafe.Pointer
 }

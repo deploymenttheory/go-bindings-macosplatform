@@ -42,9 +42,9 @@ type CVPlanarPixelBufferInfo_YCbCrPlanar struct {
 type CVSMPTETime struct {
 	Subframes       int16
 	SubframeDivisor int16
-	Counter         uint
-	Type            uint
-	Flags           uint
+	Counter         uint32
+	Type            uint32
+	Flags           uint32
 	Hours           int16
 	Minutes         int16
 	Seconds         int16

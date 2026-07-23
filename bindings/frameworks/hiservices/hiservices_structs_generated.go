@@ -26,15 +26,15 @@ type AXValue struct{}
 
 type AppParameters struct {
 	TheMsgEvent   unsafe.Pointer
-	EventRefCon   uint
-	MessageLength uint
+	EventRefCon   uint32
+	MessageLength uint32
 }
 
 type HIShape struct{}
 
 // ********************************************************************************************** types and constants for use with kICHelper, et. al. **********************************************************************************************
 type ICAppSpec struct {
-	FCreator uint
+	FCreator uint32
 	Name     [64]uint8
 }
 
@@ -52,7 +52,7 @@ type ICCharTable struct {
 // ********************************************************************************************** types and constants for use with kICDownloadFolder, et. al. **********************************************************************************************
 type ICFileSpec struct {
 	VolName         [32]uint8
-	VolCreationDate int
+	VolCreationDate int32
 	Fss             carboncore.FSSpec
 	Alias           carboncore.AliasRecord
 }
@@ -69,10 +69,10 @@ type ICMapEntry struct {
 	TotalLength    int16
 	FixedLength    int16
 	Version        int16
-	FileType       uint
-	FileCreator    uint
-	PostCreator    uint
-	Flags          int
+	FileType       uint32
+	FileCreator    uint32
+	PostCreator    uint32
+	Flags          int32
 	Extension      [256]uint8
 	CreatorAppName [256]uint8
 	PostAppName    [256]uint8
@@ -92,17 +92,17 @@ type ICServices struct {
 }
 
 type LaunchParamBlockRec struct {
-	Reserved1           uint
+	Reserved1           uint32
 	Reserved2           uint16
 	LaunchBlockID       uint16
-	LaunchEPBLength     uint
+	LaunchEPBLength     uint32
 	LaunchFileFlags     uint16
 	LaunchControlFlags  uint16
 	LaunchAppRef        unsafe.Pointer
 	LaunchProcessSN     unsafe.Pointer
-	LaunchPreferredSize uint
-	LaunchMinimumSize   uint
-	LaunchAvailableSize uint
+	LaunchPreferredSize uint32
+	LaunchMinimumSize   uint32
+	LaunchAvailableSize uint32
 	LaunchAppParameters unsafe.Pointer
 }
 
@@ -113,36 +113,36 @@ type OpaquePasteboardRef struct{}
 type OpaqueTranslationRef struct{}
 
 type ProcessInfoExtendedRec struct {
-	ProcessInfoLength            uint
+	ProcessInfoLength            uint32
 	ProcessName                  unsafe.Pointer
 	ProcessNumber                unsafe.Pointer
-	ProcessType                  uint
-	ProcessSignature             uint
-	ProcessMode                  uint
+	ProcessType                  uint32
+	ProcessSignature             uint32
+	ProcessMode                  uint32
 	ProcessLocation              unsafe.Pointer
-	ProcessSize                  uint
-	ProcessFreeMem               uint
+	ProcessSize                  uint32
+	ProcessFreeMem               uint32
 	ProcessLauncher              unsafe.Pointer
-	ProcessLaunchDate            uint
-	ProcessActiveTime            uint
+	ProcessLaunchDate            uint32
+	ProcessActiveTime            uint32
 	ProcessAppRef                unsafe.Pointer
-	ProcessTempMemTotal          uint
-	ProcessPurgeableTempMemTotal uint
+	ProcessTempMemTotal          uint32
+	ProcessPurgeableTempMemTotal uint32
 }
 
 type ProcessInfoRec struct {
-	ProcessInfoLength uint
+	ProcessInfoLength uint32
 	ProcessName       unsafe.Pointer
 	ProcessNumber     unsafe.Pointer
-	ProcessType       uint
-	ProcessSignature  uint
-	ProcessMode       uint
+	ProcessType       uint32
+	ProcessSignature  uint32
+	ProcessMode       uint32
 	ProcessLocation   unsafe.Pointer
-	ProcessSize       uint
-	ProcessFreeMem    uint
+	ProcessSize       uint32
+	ProcessFreeMem    uint32
 	ProcessLauncher   unsafe.Pointer
-	ProcessLaunchDate uint
-	ProcessActiveTime uint
+	ProcessLaunchDate uint32
+	ProcessActiveTime uint32
 	ProcessAppRef     unsafe.Pointer
 }
 
@@ -154,6 +154,6 @@ type RGBColor struct {
 
 type SizeResourceRec struct {
 	Flags             uint16
-	PreferredHeapSize uint
-	MinimumHeapSize   uint
+	PreferredHeapSize uint32
+	MinimumHeapSize   uint32
 }

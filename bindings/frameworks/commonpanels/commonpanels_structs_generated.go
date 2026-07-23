@@ -12,16 +12,16 @@ import (
 )
 
 type CalibratorInfo struct {
-	DataSize            uint
-	DisplayID           uint
-	ProfileLocationSize uint
+	DataSize            uint32
+	DisplayID           uint32
+	ProfileLocationSize uint32
 	ProfileLocationPtr  unsafe.Pointer
 	EventProc           unsafe.Pointer
 	IsGood              uint8
 }
 
 type FontSelectionQDStyle struct {
-	Version  uint
+	Version  uint32
 	Instance ats.FMFontFamilyInstance
 	Size     int16
 	HasColor uint8
@@ -32,10 +32,10 @@ type FontSelectionQDStyle struct {
 type NColorPickerInfo struct {
 	TheColor       NPMColor
 	DstProfile     unsafe.Pointer
-	Flags          uint
+	Flags          uint32
 	PlaceWhere     int16
 	DialogOrigin   carboncore.Point
-	PickerType     uint
+	PickerType     uint32
 	ColorProc      unsafe.Pointer
 	ColorProcData  unsafe.Pointer
 	Prompt         [256]uint8

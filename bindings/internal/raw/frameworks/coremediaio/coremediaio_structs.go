@@ -10,19 +10,19 @@ import (
 // @struct         CMIODeviceAVCCommand @abstract       This structure allows an AVC command to be sent to a device. This is not intended to be a general purpose command interfaces, rather only for those devices which can support the "AV/C Digital Interface Command Set General Specification Version 4.1" (1394 Trade Association Document 2001012). Devices indicate whether or not they can process AVC commands via the kCMIODevicePropertyCanProcessAVCCommand property. @field          mCommand The buffer containing the AVC command bytes. @field          mCommandLength The size (in bytes) of the mCommand buffer. @field          mResponse The buffer for returning the response bytes. @field          mResponseLength The size (in bytes) of the mResponse buffer. @field          mResponseUsed The size (in bytes) of the actual number response bytes returned.
 type CMIODeviceAVCCommand struct {
 	MCommand        *uint8
-	MCommandLength  uint
+	MCommandLength  uint32
 	MResponse       *uint8
-	MResponseLength uint
-	MResponseUsed   uint
+	MResponseLength uint32
+	MResponseUsed   uint32
 }
 
 // @struct         CMIODeviceRS422Command @abstract       This structure allows an RS422 command to be sent to a device. This is not intended to be a general purpose command interface, rather only for those devices which can support the RS422 protocol. Devices indicate whether or not they can process RS422 commands via the kCMIODevicePropertyCanProcessRS422Command property. @field          mCommand The buffer containing the RS422 command bytes. @field          mCommandLength The size (in bytes) of the mCommand buffer. @field          mResponse The buffer for returning the response bytes. @field          mResponseLength The size (in bytes) of the mResponse buffer. @field          mResponseUsed The size (in bytes) of the actual number response bytes returned.
 type CMIODeviceRS422Command struct {
 	MCommand        *uint8
-	MCommandLength  uint
+	MCommandLength  uint32
 	MResponse       *uint8
-	MResponseLength uint
-	MResponseUsed   uint
+	MResponseLength uint32
+	MResponseUsed   uint32
 }
 
 // @struct         CMIODeviceSMPTETimeCallback @abstract       This structure allows a client to specify a CMIODeviceGetSMPTETimeProc and its associated private data via the kCMIODevicePropertySMPTETimeCallback property. @field          mGetSMPTETimeProc The CMIODeviceGetSMPTETimeProc to invoke when SMPTE timecode information is needed. @field          mRefCon Client supplied private provided when the kCMIODevicePropertySMPTETimeCallback property was set.
@@ -33,22 +33,22 @@ type CMIODeviceSMPTETimeCallback struct {
 
 // @struct         CMIODeviceStreamConfiguration @abstract       This structure describes the list of streams and the number of channels in each stream. @field          mNumberStreams The number of streams being described. @field          mNumberChannels An array of UInt32's whose length is specified by mNumberStreams. Each element of the array corresponds to a stream and indicates the number of channels it has.
 type CMIODeviceStreamConfiguration struct {
-	MNumberStreams  uint
-	MNumberChannels []uint
+	MNumberStreams  uint32
+	MNumberChannels []uint32
 }
 
 // @struct         CMIOObjectPropertyAddress @abstract       A CMIOObjectPropertyAddress collects the three parts that identify a specific property together in a struct for easy transmission. @field          mSelector The CMIOObjectPropertySelector for the property. @field          mScope The CMIOObjectPropertyScope for the property. @field          mElement The CMIOObjectPropertyElement for the property.
 type CMIOObjectPropertyAddress struct {
-	MSelector uint
-	MScope    uint
-	MElement  uint
+	MSelector uint32
+	MScope    uint32
+	MElement  uint32
 }
 
 // @struct         CMIOStreamDeck @abstract       This structure is returned in response to the kCMIOStreamPropertyDeck property queries. @field          mStatus The CMIO Deck Status constant that changed. @field          mState If kCMIODeckStatusOpcode == mStatus, this can be used to determine more specific status. The values are CMIO Deck State constants. @field          mState2 if kCMIODeckStatusOpcode == mStatus, this can be used to determine more specific status. The values are device specific.
 type CMIOStreamDeck struct {
-	MStatus uint
-	MState  uint
-	MState2 uint
+	MStatus uint32
+	MState  uint32
+	MState2 uint32
 }
 
 // @struct     CMIOStreamScheduledOutputNotificationProcAndRefCon @discussion The payload for kCMIOStreamPropertyScheduledOutputNotificationProc. @field      scheduledOutputNotificationProc The procedure to call when a buffer was output @field      scheduledOutputNotificationRefCon A pointer to client data that will be passed to the scheduledOutputNotificationProc

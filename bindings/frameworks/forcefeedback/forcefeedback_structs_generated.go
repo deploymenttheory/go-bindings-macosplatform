@@ -11,13 +11,13 @@ import (
 // Used by the FFDeviceGetForceFeedbackCapabilities method to retrieve device force-feedback capabilities.
 type FFCAPABILITIES struct {
 	FfSpecVer        unsafe.Pointer
-	SupportedEffects uint
-	EmulatedEffects  uint
-	SubType          uint
-	NumFfAxes        uint
+	SupportedEffects uint32
+	EmulatedEffects  uint32
+	SubType          uint32
+	NumFfAxes        uint32
 	FfAxes           [32]uint8
-	StorageCapacity  uint
-	PlaybackCapacity uint
+	StorageCapacity  uint32
+	PlaybackCapacity uint32
 	FirmwareVer      unsafe.Pointer
 	HardwareVer      unsafe.Pointer
 	DriverVer        unsafe.Pointer
@@ -25,24 +25,24 @@ type FFCAPABILITIES struct {
 
 // A structure containing type-specific information for certain effects.
 type FFCONDITION struct {
-	LOffset              int
-	LPositiveCoefficient int
-	LNegativeCoefficient int
-	DwPositiveSaturation uint
-	DwNegativeSaturation uint
-	LDeadBand            int
+	LOffset              int32
+	LPositiveCoefficient int32
+	LNegativeCoefficient int32
+	DwPositiveSaturation uint32
+	DwNegativeSaturation uint32
+	LDeadBand            int32
 }
 
 // Contains type-specific information for the CONSTANTFORCE effect.
 type FFCONSTANTFORCE struct {
-	LMagnitude int
+	LMagnitude int32
 }
 
 // Contains type-specific information for the CUSTOMFORCE effect.
 type FFCUSTOMFORCE struct {
-	CChannels      uint
-	DwSamplePeriod uint
-	CSamples       uint
+	CChannels      uint32
+	DwSamplePeriod uint32
+	CSamples       uint32
 	RglForceData   unsafe.Pointer
 }
 
@@ -50,53 +50,53 @@ type FFDHIDDEN struct{}
 
 // UsUsed by the FFDeviceCreateEffect method to initialize a new effect object. It is also used by the FFEffectSetParameters and FFEffectGetParameters functions.
 type FFEFFECT struct {
-	DwSize                  uint
-	DwFlags                 uint
-	DwDuration              uint
-	DwSamplePeriod          uint
-	DwGain                  uint
-	DwTriggerButton         uint
-	DwTriggerRepeatInterval uint
-	CAxes                   uint
+	DwSize                  uint32
+	DwFlags                 uint32
+	DwDuration              uint32
+	DwSamplePeriod          uint32
+	DwGain                  uint32
+	DwTriggerButton         uint32
+	DwTriggerRepeatInterval uint32
+	CAxes                   uint32
 	RgdwAxes                unsafe.Pointer
 	RglDirection            unsafe.Pointer
 	LpEnvelope              unsafe.Pointer
-	CbTypeSpecificParams    uint
+	CbTypeSpecificParams    uint32
 	LpvTypeSpecificParams   unsafe.Pointer
-	DwStartDelay            uint
+	DwStartDelay            uint32
 }
 
 // The FFEFFESCAPE structure passes hardware-specific data directly to the Force Feedback plugIn.
 type FFEFFESCAPE struct {
-	DwSize       uint
-	DwCommand    uint
+	DwSize       uint32
+	DwCommand    uint32
 	LpvInBuffer  unsafe.Pointer
-	CbInBuffer   uint
+	CbInBuffer   uint32
 	LpvOutBuffer unsafe.Pointer
-	CbOutBuffer  uint
+	CbOutBuffer  uint32
 }
 
 type FFEHIDDEN struct{}
 
 // Used by the FFEFFECT structure to specify the optional envelope parameters for an effect.
 type FFENVELOPE struct {
-	DwSize        uint
-	DwAttackLevel uint
-	DwAttackTime  uint
-	DwFadeLevel   uint
-	DwFadeTime    uint
+	DwSize        uint32
+	DwAttackLevel uint32
+	DwAttackTime  uint32
+	DwFadeLevel   uint32
+	DwFadeTime    uint32
 }
 
 // A structure containing type-specific information for certain effects.
 type FFPERIODIC struct {
-	DwMagnitude uint
-	LOffset     int
-	DwPhase     uint
-	DwPeriod    uint
+	DwMagnitude uint32
+	LOffset     int32
+	DwPhase     uint32
+	DwPeriod    uint32
 }
 
 // Contains type-specific information for the RAMPFORCE effect.
 type FFRAMPFORCE struct {
-	LStart int
-	LEnd   int
+	LStart int32
+	LEnd   int32
 }

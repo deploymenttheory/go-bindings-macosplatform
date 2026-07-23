@@ -10,12 +10,12 @@ import (
 
 type ICACloseSessionPB struct {
 	Header    ICAHeader
-	SessionID uint
+	SessionID uint32
 }
 
 type ICACopyObjectDataPB struct {
 	Header        ICAHeader
-	Object        uint
+	Object        uint32
 	StartByte     uint
 	RequestedSize uint
 	Data          unsafe.Pointer
@@ -23,31 +23,31 @@ type ICACopyObjectDataPB struct {
 
 type ICACopyObjectPropertyDictionaryPB struct {
 	Header  ICAHeader
-	Object  uint
+	Object  uint32
 	TheDict unsafe.Pointer
 }
 
 type ICACopyObjectThumbnailPB struct {
 	Header          ICAHeader
-	Object          uint
-	ThumbnailFormat uint
+	Object          uint32
+	ThumbnailFormat uint32
 	ThumbnailData   unsafe.Pointer
 }
 
 type ICADownloadFilePB struct {
 	Header        ICAHeader
-	Object        uint
+	Object        uint32
 	DirFSRef      unsafe.Pointer
-	Flags         uint
-	FileType      uint
-	FileCreator   uint
-	RotationAngle int
+	Flags         uint32
+	FileType      uint32
+	FileCreator   uint32
+	RotationAngle int32
 	FileFSRef     unsafe.Pointer
 }
 
 type ICAGetDeviceListPB struct {
 	Header ICAHeader
-	Object uint
+	Object uint32
 }
 
 // This is the first field in all parameter blocks used by APIs defined in ICAApplication.h. Type of parameter passed to a callback function used by APIs defined in ICAApplication.h. The parameter for the completion proc should to be casted to an appropriate type such as ICAGetChildCountPB* for it to be useful.
@@ -58,8 +58,8 @@ type ICAHeader struct {
 
 type ICAImportImagePB struct {
 	Header             ICAHeader
-	DeviceObject       uint
-	Flags              uint
+	DeviceObject       uint32
+	Flags              uint32
 	SupportedFileTypes unsafe.Pointer
 	FilterProc         unsafe.Pointer
 	ImportedImages     unsafe.Pointer
@@ -71,70 +71,70 @@ type ICALoadDeviceModulePB struct {
 }
 
 type ICAMessage struct {
-	MessageType uint
-	StartByte   uint
+	MessageType uint32
+	StartByte   uint32
 	DataPtr     unsafe.Pointer
-	DataSize    uint
-	DataType    uint
+	DataSize    uint32
+	DataType    uint32
 }
 
 type ICAObjectInfo struct {
-	ObjectType    uint
-	ObjectSubtype uint
+	ObjectType    uint32
+	ObjectSubtype uint32
 }
 
 type ICAObjectSendMessagePB struct {
 	Header  ICAHeader
-	Object  uint
+	Object  uint32
 	Message ICAMessage
-	Result  uint
+	Result  uint32
 }
 
 type ICAOpenSessionPB struct {
 	Header       ICAHeader
-	DeviceObject uint
-	SessionID    uint
+	DeviceObject uint32
+	SessionID    uint32
 }
 
 type ICAPTPEventDataset struct {
-	DataLength    uint
+	DataLength    uint32
 	ContainerType uint16
 	EventCode     uint16
-	TransactionID uint
-	Params        [3]uint
+	TransactionID uint32
+	Params        [3]uint32
 }
 
 type ICAPTPPassThroughPB struct {
-	CommandCode       uint
-	ResultCode        uint
-	NumOfInputParams  uint
-	NumOfOutputParams uint
-	Params            [4]uint
-	DataUsageMode     uint
-	Flags             uint
-	DataSize          uint
+	CommandCode       uint32
+	ResultCode        uint32
+	NumOfInputParams  uint32
+	NumOfOutputParams uint32
+	Params            [4]uint32
+	DataUsageMode     uint32
+	Flags             uint32
+	DataSize          uint32
 	Data              [1]uint8
 }
 
 type ICARawFileHeader struct {
-	ImageDataOffset    uint
-	Version            uint
-	ImageWidth         uint
-	ImageHeight        uint
-	BytesPerRow        uint
-	NumberOfComponents uint
-	BitsPerComponent   uint
-	BitsPerPixel       uint
-	CgColorSpaceModel  uint
-	BitmapInfo         uint
-	Orientation        uint
-	Dpi                uint
+	ImageDataOffset    uint32
+	Version            uint32
+	ImageWidth         uint32
+	ImageHeight        uint32
+	BytesPerRow        uint32
+	NumberOfComponents uint32
+	BitsPerComponent   uint32
+	BitsPerPixel       uint32
+	CgColorSpaceModel  uint32
+	BitmapInfo         uint32
+	Orientation        uint32
+	Dpi                uint32
 	ColorSyncModeStr   [64]int8
 }
 
 type ICARegisterForEventNotificationPB struct {
 	Header           ICAHeader
-	ObjectOfInterest uint
+	ObjectOfInterest uint32
 	EventsOfInterest unsafe.Pointer
 	NotificationProc unsafe.Pointer
 	Options          unsafe.Pointer
@@ -142,59 +142,59 @@ type ICARegisterForEventNotificationPB struct {
 
 type ICAScannerCloseSessionPB struct {
 	Header    ICAHeader
-	SessionID uint
+	SessionID uint32
 }
 
 type ICAScannerGetParametersPB struct {
 	Header    ICAHeader
-	SessionID uint
+	SessionID uint32
 	TheDict   unsafe.Pointer
 }
 
 type ICAScannerInitializePB struct {
 	Header    ICAHeader
-	SessionID uint
+	SessionID uint32
 }
 
 type ICAScannerOpenSessionPB struct {
 	Header    ICAHeader
-	Object    uint
-	SessionID uint
+	Object    uint32
+	SessionID uint32
 }
 
 type ICAScannerSetParametersPB struct {
 	Header    ICAHeader
-	SessionID uint
+	SessionID uint32
 	TheDict   unsafe.Pointer
 }
 
 type ICAScannerStartPB struct {
 	Header    ICAHeader
-	SessionID uint
+	SessionID uint32
 }
 
 type ICAScannerStatusPB struct {
 	Header    ICAHeader
-	SessionID uint
-	Status    uint
+	SessionID uint32
+	Status    uint32
 }
 
 type ICASendNotificationPB struct {
 	Header                 ICAHeader
 	NotificationDictionary unsafe.Pointer
-	ReplyCode              uint
+	ReplyCode              uint32
 }
 
 type ICAUnloadDeviceModulePB struct {
 	Header       ICAHeader
-	DeviceObject uint
+	DeviceObject uint32
 }
 
 type ICAUploadFilePB struct {
 	Header       ICAHeader
-	ParentObject uint
+	ParentObject uint32
 	FileFSRef    unsafe.Pointer
-	Flags        uint
+	Flags        uint32
 }
 
 // This is the first field in all parameter blocks used by APIs defined in ICADevices.h. Type of parameter passed to a callback function used by APIs defined in ICADevices.h. The parameter for the completion proc should to be casted to an appropriate type such as ICD_NewObjectPB* for it to be useful.
@@ -206,94 +206,94 @@ type ICDHeader struct {
 // Parameter block passed to function <code>ICDDisposeObject</code>.
 type ICD_DisposeObjectPB struct {
 	Header ICDHeader
-	Object uint
+	Object uint32
 }
 
 // Parameter block passed to function <code>ICDNewObject</code>.
 type ICD_NewObjectPB struct {
 	Header       ICDHeader
-	ParentObject uint
+	ParentObject uint32
 	ObjectInfo   ICAObjectInfo
-	Object       uint
+	Object       uint32
 }
 
 type ICD_ObjectSendMessagePB struct {
 	Header        ICDHeader
-	Object        uint
+	Object        uint32
 	ObjectInfo    ICAObjectInfo
-	ConnectionID  uint
+	ConnectionID  uint32
 	Message       ICAMessage
-	TotalDataSize uint
-	Result        uint
+	TotalDataSize uint32
+	Result        uint32
 }
 
 type ICD_ScannerCloseSessionPB struct {
 	Header       ICDHeader
-	Object       uint
+	Object       uint32
 	ObjectInfo   ICAObjectInfo
-	ConnectionID uint
-	SessionID    uint
+	ConnectionID uint32
+	SessionID    uint32
 }
 
 type ICD_ScannerGetParametersPB struct {
 	Header       ICDHeader
-	Object       uint
+	Object       uint32
 	ObjectInfo   ICAObjectInfo
-	ConnectionID uint
-	SessionID    uint
+	ConnectionID uint32
+	SessionID    uint32
 	TheDict      unsafe.Pointer
 }
 
 type ICD_ScannerInitializePB struct {
 	Header       ICDHeader
-	Object       uint
+	Object       uint32
 	ObjectInfo   ICAObjectInfo
-	ConnectionID uint
-	SessionID    uint
+	ConnectionID uint32
+	SessionID    uint32
 }
 
 type ICD_ScannerObjectSendMessagePB struct {
 	Header        ICDHeader
-	Object        uint
+	Object        uint32
 	ObjectInfo    ICAObjectInfo
-	ConnectionID  uint
+	ConnectionID  uint32
 	Message       ICAMessage
-	TotalDataSize uint
-	Result        uint
+	TotalDataSize uint32
+	Result        uint32
 }
 
 type ICD_ScannerOpenSessionPB struct {
 	Header       ICDHeader
-	Object       uint
+	Object       uint32
 	ObjectInfo   ICAObjectInfo
-	ConnectionID uint
-	SessionID    uint
+	ConnectionID uint32
+	SessionID    uint32
 }
 
 type ICD_ScannerSetParametersPB struct {
 	Header       ICDHeader
-	Object       uint
+	Object       uint32
 	ObjectInfo   ICAObjectInfo
-	ConnectionID uint
-	SessionID    uint
+	ConnectionID uint32
+	SessionID    uint32
 	TheDict      unsafe.Pointer
 }
 
 type ICD_ScannerStartPB struct {
 	Header       ICDHeader
-	Object       uint
+	Object       uint32
 	ObjectInfo   ICAObjectInfo
-	ConnectionID uint
-	SessionID    uint
+	ConnectionID uint32
+	SessionID    uint32
 }
 
 type ICD_ScannerStatusPB struct {
 	Header       ICDHeader
-	Object       uint
+	Object       uint32
 	ObjectInfo   ICAObjectInfo
-	ConnectionID uint
-	SessionID    uint
-	Status       uint
+	ConnectionID uint32
+	SessionID    uint32
+	Status       uint32
 }
 
 type ICD_Scannerscanner_callback_functions struct {
@@ -351,38 +351,38 @@ type ICD_callback_functions struct {
 }
 
 type ObjectInfo struct {
-	IcaObject        uint
+	IcaObject        uint32
 	Reserved         uint
 	IcaObjectInfo    ICAObjectInfo
-	UniqueID         uint
-	ThumbnailSize    uint
-	DataSize         uint
-	DataWidth        uint
-	DataHeight       uint
+	UniqueID         uint32
+	ThumbnailSize    uint32
+	DataSize         uint32
+	DataWidth        uint32
+	DataHeight       uint32
 	Name             [32]uint8
 	CreationDate     [20]uint8
-	Flags            uint
+	Flags            uint32
 	PrivateData      unsafe.Pointer
 	UniqueIDFireWire uint64
-	Tag              uint
+	Tag              uint32
 	DataSize64       uint64
 }
 
 type ScannerObjectInfo struct {
-	IcaObject        uint
+	IcaObject        uint32
 	Reserved         uint
 	IcaObjectInfo    ICAObjectInfo
-	UniqueID         uint
+	UniqueID         uint32
 	UniqueIDFireWire uint64
-	ThumbnailSize    uint
-	DataSize         uint
-	DataWidth        uint
-	DataHeight       uint
+	ThumbnailSize    uint32
+	DataSize         uint32
+	DataWidth        uint32
+	DataHeight       uint32
 	Name             [32]uint8
 	CreationDate     [20]uint8
-	Flags            uint
+	Flags            uint32
 	PrivateData      unsafe.Pointer
-	Tag              uint
+	Tag              uint32
 }
 
 // ICD_scanner_callback_functions is an alias for the ICD_Scannerscanner_callback_functions value type.

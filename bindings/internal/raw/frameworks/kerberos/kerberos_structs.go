@@ -11,31 +11,31 @@ import (
 
 // C struct: _krb5_address
 type Krb5Address struct {
-	Magic    int
-	Addrtype int
+	Magic    int32
+	Addrtype int32
 	Length   uint32
 	Contents *uint8
 }
 
 // C struct: _krb5_ap_rep
 type Krb5ApRep struct {
-	Magic    int
+	Magic    int32
 	Enc_part Krb5EncData
 }
 
 // C struct: _krb5_ap_rep_enc_part
 type Krb5ApRepEncPart struct {
-	Magic      int
-	Ctime      int
-	Cusec      int
+	Magic      int32
+	Ctime      int32
+	Cusec      int32
 	Subkey     *Krb5Keyblock
-	Seq_number uint
+	Seq_number uint32
 }
 
 // C struct: _krb5_ap_req
 type Krb5ApReq struct {
-	Magic         int
-	Ap_options    int
+	Magic         int32
+	Ap_options    int32
 	Ticket        *Krb5Ticket
 	Authenticator Krb5EncData
 }
@@ -46,21 +46,21 @@ type Krb5AuthContext struct{}
 
 // C struct: _krb5_authdata
 type Krb5Authdata struct {
-	Magic    int
-	Ad_type  int
+	Magic    int32
+	Ad_type  int32
 	Length   uint32
 	Contents *uint8
 }
 
 // C struct: _krb5_authenticator
 type Krb5Authenticator struct {
-	Magic              int
+	Magic              int32
 	Client             *Krb5PrincipalData
 	Checksum           *Krb5Checksum
-	Cusec              int
-	Ctime              int
+	Cusec              int32
+	Ctime              int32
 	Subkey             *Krb5Keyblock
-	Seq_number         uint
+	Seq_number         uint32
 	Authorization_data *Krb5Authdata
 }
 
@@ -78,8 +78,8 @@ type Krb5CccolCursor struct{}
 
 // C struct: _krb5_checksum
 type Krb5Checksum struct {
-	Magic         int
-	Checksum_type int
+	Magic         int32
+	Checksum_type int32
 	Length        uint32
 	Contents      *uint8
 }
@@ -90,7 +90,7 @@ type Krb5Context struct{}
 
 // C struct: _krb5_cred
 type Krb5Cred struct {
-	Magic     int
+	Magic     int32
 	Tickets   *Krb5Ticket
 	Enc_part  Krb5EncData
 	Enc_part2 *Krb5CredEncPart
@@ -98,10 +98,10 @@ type Krb5Cred struct {
 
 // C struct: _krb5_cred_enc_part
 type Krb5CredEncPart struct {
-	Magic       int
-	Nonce       int
-	Timestamp   int
-	Usec        int
+	Magic       int32
+	Nonce       int32
+	Timestamp   int32
+	Usec        int32
 	S_address   *Krb5Address
 	R_address   *Krb5Address
 	Ticket_info *Krb5CredInfo
@@ -109,24 +109,24 @@ type Krb5CredEncPart struct {
 
 // C struct: _krb5_cred_info
 type Krb5CredInfo struct {
-	Magic   int
+	Magic   int32
 	Session *Krb5Keyblock
 	Client  *Krb5PrincipalData
 	Server  *Krb5PrincipalData
-	Flags   int
+	Flags   int32
 	Times   Krb5TicketTimes
 	Caddrs  *Krb5Address
 }
 
 // C struct: _krb5_creds
 type Krb5Creds struct {
-	Magic         int
+	Magic         int32
 	Client        *Krb5PrincipalData
 	Server        *Krb5PrincipalData
 	Keyblock      Krb5Keyblock
 	Times         Krb5TicketTimes
-	Is_skey       uint
-	Ticket_flags  int
+	Is_skey       uint32
+	Ticket_flags  int32
 	Addresses     *Krb5Address
 	Ticket        Krb5Data
 	Second_ticket Krb5Data
@@ -139,28 +139,28 @@ type Krb5CryptosystemEntry struct{}
 
 // C struct: _krb5_data
 type Krb5Data struct {
-	Magic  int
+	Magic  int32
 	Length uint32
 	Data   string
 }
 
 // C struct: _krb5_enc_data
 type Krb5EncData struct {
-	Magic      int
-	Enctype    int
-	Kvno       uint
+	Magic      int32
+	Enctype    int32
+	Kvno       uint32
 	Ciphertext Krb5Data
 }
 
 // C struct: _krb5_enc_kdc_rep_part
 type Krb5EncKdcRepPart struct {
-	Magic    int
-	Msg_type uint
+	Magic    int32
+	Msg_type uint32
 	Session  *Krb5Keyblock
 	Last_req *Krb5LastReqEntry
-	Nonce    int
-	Key_exp  int
-	Flags    int
+	Nonce    int32
+	Key_exp  int32
+	Flags    int32
 	Times    Krb5TicketTimes
 	Server   *Krb5PrincipalData
 	Caddrs   *Krb5Address
@@ -168,8 +168,8 @@ type Krb5EncKdcRepPart struct {
 
 // C struct: _krb5_enc_tkt_part
 type Krb5EncTktPart struct {
-	Magic              int
-	Flags              int
+	Magic              int32
+	Flags              int32
 	Session            *Krb5Keyblock
 	Client             *Krb5PrincipalData
 	Transited          Krb5Transited
@@ -180,19 +180,19 @@ type Krb5EncTktPart struct {
 
 // C struct: _krb5_encrypt_block
 type Krb5EncryptBlock struct {
-	Magic        int
-	Crypto_entry int
+	Magic        int32
+	Crypto_entry int32
 	Key          *Krb5Keyblock
 }
 
 // C struct: _krb5_error
 type Krb5Error struct {
-	Magic  int
-	Ctime  int
-	Cusec  int
-	Susec  int
-	Stime  int
-	Error  uint
+	Magic  int32
+	Ctime  int32
+	Cusec  int32
+	Susec  int32
+	Stime  int32
+	Error  uint32
 	Client *Krb5PrincipalData
 	Server *Krb5PrincipalData
 	Text   Krb5Data
@@ -202,9 +202,9 @@ type Krb5Error struct {
 // Deprecated: Use GSS.framework
 // C struct: _krb5_get_init_creds_opt
 type Krb5GetInitCredsOpt struct {
-	Flags               int
-	Tkt_life            int
-	Renew_life          int
+	Flags               int32
+	Tkt_life            int32
+	Renew_life          int32
 	Forwardable         int32
 	Proxiable           int32
 	Etype_list          *int
@@ -224,8 +224,8 @@ type Krb5GicOptPaData struct {
 
 // C struct: _krb5_kdc_rep
 type Krb5KdcRep struct {
-	Magic     int
-	Msg_type  uint
+	Magic     int32
+	Msg_type  uint32
 	Padata    *Krb5PaData
 	Client    *Krb5PrincipalData
 	Ticket    *Krb5Ticket
@@ -235,16 +235,16 @@ type Krb5KdcRep struct {
 
 // C struct: _krb5_kdc_req
 type Krb5KdcReq struct {
-	Magic              int
-	Msg_type           uint
+	Magic              int32
+	Msg_type           uint32
 	Padata             *Krb5PaData
-	Kdc_options        int
+	Kdc_options        int32
 	Client             *Krb5PrincipalData
 	Server             *Krb5PrincipalData
-	From               int
-	Till               int
-	Rtime              int
-	Nonce              int
+	From               int32
+	Till               int32
+	Rtime              int32
+	Nonce              int32
 	Nktypes            int32
 	Ktype              *int
 	Addresses          *Krb5Address
@@ -255,8 +255,8 @@ type Krb5KdcReq struct {
 
 // C struct: _krb5_keyblock
 type Krb5Keyblock struct {
-	Magic    int
-	Enctype  int
+	Magic    int32
+	Enctype  int32
 	Length   uint32
 	Contents *uint8
 }
@@ -267,22 +267,22 @@ type Krb5Kt struct{}
 
 // C struct: _krb5_last_req_entry
 type Krb5LastReqEntry struct {
-	Magic   int
-	Lr_type int
-	Value   int
+	Magic   int32
+	Lr_type int32
+	Value   int32
 }
 
 // C struct: _krb5_octet_data
 type Krb5OctetData struct {
-	Magic  int
+	Magic  int32
 	Length uint32
 	Data   *uint8
 }
 
 // C struct: _krb5_pa_data
 type Krb5PaData struct {
-	Magic    int
-	Pa_type  int
+	Magic    int32
+	Pa_type  int32
 	Length   uint32
 	Contents *uint8
 }
@@ -296,23 +296,23 @@ type Krb5Prompt struct {
 
 // C struct: _krb5_pwd_data
 type Krb5PwdData struct {
-	Magic          int
+	Magic          int32
 	Sequence_count int32
 	Element        *PasswdPhraseElement
 }
 
 // C struct: _krb5_response
 type Krb5Response struct {
-	Magic          int
+	Magic          int32
 	Message_type   uint8
 	Response       Krb5Data
-	Expected_nonce int
-	Request_time   int
+	Expected_nonce int32
+	Request_time   int32
 }
 
 // C struct: _krb5_ticket
 type Krb5Ticket struct {
-	Magic     int
+	Magic     int32
 	Server    *Krb5PrincipalData
 	Enc_part  Krb5EncData
 	Enc_part2 *Krb5EncTktPart
@@ -320,23 +320,23 @@ type Krb5Ticket struct {
 
 // C struct: _krb5_ticket_times
 type Krb5TicketTimes struct {
-	Authtime   int
-	Starttime  int
-	Endtime    int
-	Renew_till int
+	Authtime   int32
+	Starttime  int32
+	Endtime    int32
+	Renew_till int32
 }
 
 // C struct: _krb5_tkt_authent
 type Krb5TktAuthent struct {
-	Magic         int
+	Magic         int32
 	Ticket        *Krb5Ticket
 	Authenticator *Krb5Authenticator
-	Ap_options    int
+	Ap_options    int32
 }
 
 // C struct: _krb5_transited
 type Krb5Transited struct {
-	Magic       int
+	Magic       int32
 	Tr_type     uint8
 	Tr_contents Krb5Data
 }
@@ -344,13 +344,13 @@ type Krb5Transited struct {
 // Deprecated: Use GSS.framework
 // C struct: _krb5_verify_init_creds_opt
 type Krb5VerifyInitCredsOpt struct {
-	Flags         int
+	Flags         int32
 	Ap_req_nofail int32
 }
 
 // C struct: _passwd_phrase_element
 type PasswdPhraseElement struct {
-	Magic  int
+	Magic  int32
 	Passwd *Krb5Data
 	Phrase *Krb5Data
 }
@@ -626,20 +626,20 @@ type KimOptionsOpaque struct{}
 
 // C struct: krb5_keytab_entry_st
 type Krb5KeytabEntrySt struct {
-	Magic     int
+	Magic     int32
 	Principal *Krb5PrincipalData
-	Timestamp int
-	Vno       uint
+	Timestamp int32
+	Vno       uint32
 	Key       Krb5Keyblock
 }
 
 // C struct: krb5_principal_data
 type Krb5PrincipalData struct {
-	Magic  int
+	Magic  int32
 	Realm  Krb5Data
 	Data   *Krb5Data
-	Length int
-	Type   int
+	Length int32
+	Type   int32
 }
 
 // C struct: krb5_rc_st
@@ -648,9 +648,9 @@ type Krb5RcSt struct{}
 
 // C struct: krb5_replay_data
 type Krb5ReplayData struct {
-	Timestamp int
-	Usec      int
-	Seq       uint
+	Timestamp int32
+	Usec      int32
+	Seq       uint32
 }
 
 // AppleGssKrb5AuthdataIfRelevant is an alias for apple_gss_krb5_authdata_if_relevant_key (C typedef apple_gss_krb5_authdata_if_relevant).

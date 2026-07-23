@@ -10,7 +10,7 @@ import (
 // A structure that contains properties and callbacks that define a type of object.
 type JSClassDefinition struct {
 	Version           int32
-	Attributes        uint
+	Attributes        uint32
 	ClassName         string
 	ParentClass       unsafe.Pointer
 	StaticValues      *JSStaticValue
@@ -32,7 +32,7 @@ type JSClassDefinition struct {
 type JSStaticFunction struct {
 	Name           string
 	CallAsFunction unsafe.Pointer
-	Attributes     uint
+	Attributes     uint32
 }
 
 // A statically declared value property.
@@ -40,7 +40,7 @@ type JSStaticValue struct {
 	Name        string
 	GetProperty unsafe.Pointer
 	SetProperty unsafe.Pointer
-	Attributes  uint
+	Attributes  uint32
 }
 
 // @typedef JSClassRef A JavaScript class. Used with JSObjectMake to construct objects with custom behavior.

@@ -9,7 +9,7 @@ import (
 
 // @struct		DRBurnSessionProgressCallbacks @abstract	Callback functions passed to the progress dialog. @field		version				Identifies the version of this structure. @field		progressWillBegin	Pointer to a DRBurnSessionProgressBeginNotificationProcPtr. The value of this field may be <i>NULL</i>. @field		progressDidFinish	Pointer to a DRBurnSessionProgressFinishNotificationProcPtr. The value of this field may be <i>NULL</i>. @field		burnDidFinish	Pointer to a DRBurnSessionBurnCompleteProcPtr. The value of this field may be <i>NULL</i>.
 type DRBurnSessionProgressCallbacks struct {
-	Version           uint
+	Version           uint32
 	ProgressWillBegin unsafe.Pointer
 	ProgressDidFinish unsafe.Pointer
 	BurnDidFinish     unsafe.Pointer
@@ -17,14 +17,14 @@ type DRBurnSessionProgressCallbacks struct {
 
 // @struct 	DRBurnSessionProgressDialogOptions @abstract	Options passed into the progress dialog to configure it. @field		version				Identifies the version of this structure. @field		dialogOptionFlags	One of several constants defined by the @link DRBurnSessionProgressDialogOptionFlags DRBurnSessionProgressDialogOptionFlags @/link data type as described in @link //apple_ref/c/tag/Burn%32Progress%32Dialog%32Option%32Flags Burn Progress Dialog Option Flags @/link. @field		description			A CFStringRef that defines a custom description to be used for the dialog. If you do not provide this string (passing <i>NULL</i>), the normal description is used.
 type DRBurnSessionProgressDialogOptions struct {
-	Version           uint
-	DialogOptionFlags uint
+	Version           uint32
+	DialogOptionFlags uint32
 	Description       unsafe.Pointer
 }
 
 // @struct		DRBurnSessionSetupCallbacks @abstract	Callback functions passed to the setup dialog. @field		version					Identifies the version of this structure. @field		deviceShouldBeTarget	Pointer to a DRBurnSessionDeviceCheckProcPtr. The value of this field may be <i>NULL</i>. @field		containsSuitableMedia	Pointer to a DRBurnSessionMediaCheckProcPtr. The value of this field may be <i>NULL</i>. @field		deviceSelectionChanged	Pointer to a DRBurnSessionDeviceSelectionNotificationProcPtr. The value of this field may be <i>NULL</i>.
 type DRBurnSessionSetupCallbacks struct {
-	Version                uint
+	Version                uint32
 	DeviceShouldBeTarget   unsafe.Pointer
 	ContainsSuitableMedia  unsafe.Pointer
 	DeviceSelectionChanged unsafe.Pointer
@@ -32,14 +32,14 @@ type DRBurnSessionSetupCallbacks struct {
 
 // @struct 	DRBurnSessionSetupDialogOptions @abstract	Options passed into the setup dialog to configure it. @field		version				Identifies the version of this structure. @field		dialogOptionFlags	One of several constants defined by the @link DRBurnSessionSetupDialogOptionFlags DRBurnSessionSetupDialogOptionFlags @/link data type as described in @link //apple_ref/c/tag/Burn%32Setup%32Dialog%32Option%32Flags Burn Setup Dialog Option Flags @/link. @field		defaultButtonTitle	A CFStringRef that defines a custom title to be used for the dialog's default button. If you do not provide this string (passing <i>NULL</i>), the normal button title is used.
 type DRBurnSessionSetupDialogOptions struct {
-	Version            uint
-	DialogOptionFlags  uint
+	Version            uint32
+	DialogOptionFlags  uint32
 	DefaultButtonTitle unsafe.Pointer
 }
 
 // @struct		DREraseSessionProgressCallbacks @abstract	Callback functions passed to the progress dialog. @field		version					Identifies the version of this structure. @field		progressWillBegin		Pointer to a DREraseSessionProgressBeginNotificationProcPtr. The value of this field may be <i>NULL</i>. @field		progressDidFinish		Pointer to a DREraseSessionProgressFinishNotificationProcPtr. The value of this field may be <i>NULL</i>. @field		eraseDidFinish			Pointer to a DREraseSessionEraseCompleteProcPtr. The value of this field may be <i>NULL</i>.
 type DREraseSessionProgressCallbacks struct {
-	Version           uint
+	Version           uint32
 	ProgressWillBegin unsafe.Pointer
 	ProgressDidFinish unsafe.Pointer
 	EraseDidFinish    unsafe.Pointer
@@ -47,14 +47,14 @@ type DREraseSessionProgressCallbacks struct {
 
 // @struct 	DREraseSessionProgressDialogOptions @abstract	Options passed into the progress dialog to configure it. @field		version				Identifies the version of this structure. @field		dialogOptionFlags	One of several constants defined by the @link DREraseSessionProgressDialogOptionFlags DREraseSessionProgressDialogOptionFlags @/link data type as described in @link //apple_ref/c/tag/Erase%32Progress%32Dialog%32Option%32Flags Erase Progress Dialog Option Flags @/link. @field		description			A CFStringRef that defines a custom description to be used for the dialog. If you do not provide this string (passing <i>NULL</i>), the normal description is used.
 type DREraseSessionProgressDialogOptions struct {
-	Version           uint
-	DialogOptionFlags uint
+	Version           uint32
+	DialogOptionFlags uint32
 	Description       unsafe.Pointer
 }
 
 // @struct		DREraseSessionSetupCallbacks @abstract	Callback functions passed to the setup dialog. @field		version					Identifies the version of this structure. @field		deviceShouldBeTarget	Pointer to a DREraseSessionDeviceCheckProcPtr. The value of this field may be <i>NULL</i>. @field		containsSuitableMedia	Pointer to a DREraseSessionMediaCheckProcPtr. The value of this field may be <i>NULL</i>. @field		deviceSelectionChanged	Pointer to a DREraseSessionDeviceSelectionNotificationProcPtr. The value of this field may be <i>NULL</i>.
 type DREraseSessionSetupCallbacks struct {
-	Version                uint
+	Version                uint32
 	DeviceShouldBeTarget   unsafe.Pointer
 	ContainsSuitableMedia  unsafe.Pointer
 	DeviceSelectionChanged unsafe.Pointer
@@ -62,8 +62,8 @@ type DREraseSessionSetupCallbacks struct {
 
 // @struct 	DREraseSessionSetupDialogOptions @abstract	Options passed into the setup dialog to configure it. @field		version				Identifies the version of this structure. @field		dialogOptionFlags	One of several constants defined by the @link DREraseSessionSetupDialogOptionFlags DREraseSessionSetupDialogOptionFlags @/link data type as described in @link //apple_ref/c/tag/Erase%32Setup%32Dialog%32Option%32Flags Erase Setup Dialog Option Flags @/link.
 type DREraseSessionSetupDialogOptions struct {
-	Version           uint
-	DialogOptionFlags uint
+	Version           uint32
+	DialogOptionFlags uint32
 }
 
 // @typedef DRBurnSessionRef This is the type of a reference to DRBurnSession instances.

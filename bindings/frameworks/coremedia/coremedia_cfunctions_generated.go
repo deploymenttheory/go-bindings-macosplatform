@@ -29,17 +29,6 @@ func CMAudioDeviceClockGetAudioDevice(clock obj.Object, deviceUIDOut unsafe.Poin
 	return _ret, _out0, _out1
 }
 
-var _fnCMAudioFormatDescriptionCreate func(objc.ID, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, objc.ID, unsafe.Pointer) int32
-
-// CMAudioFormatDescriptionCreate calls the CoreMedia framework function CMAudioFormatDescriptionCreate.
-func CMAudioFormatDescriptionCreate(allocator obj.Object, asbd unsafe.Pointer, layoutSize int, layout unsafe.Pointer, magicCookieSize int, magicCookie unsafe.Pointer, extensions obj.Object, formatDescriptionOut unsafe.Pointer) int {
-	_loadOnce.Do(_loadLibrary)
-	if _fnCMAudioFormatDescriptionCreate == nil {
-		ebipurego.RegisterLibFunc(&_fnCMAudioFormatDescriptionCreate, _lib, "CMAudioFormatDescriptionCreate")
-	}
-	return int(_fnCMAudioFormatDescriptionCreate(objref.IDOf(allocator), asbd, layoutSize, layout, magicCookieSize, magicCookie, objref.IDOf(extensions), formatDescriptionOut))
-}
-
 var _fnCMAudioFormatDescriptionCreateFromBigEndianSoundDescriptionData func(objc.ID, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // CMAudioFormatDescriptionCreateFromBigEndianSoundDescriptionData calls the CoreMedia framework function CMAudioFormatDescriptionCreateFromBigEndianSoundDescriptionData.
@@ -64,10 +53,10 @@ func CMAudioFormatDescriptionEqual(formatDescription unsafe.Pointer, otherFormat
 	return _ret, _out0
 }
 
-var _fnCMAudioFormatDescriptionGetChannelLayout func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+var _fnCMAudioFormatDescriptionGetChannelLayout func(unsafe.Pointer, unsafe.Pointer) *coreaudiotypes.AudioChannelLayout
 
 // CMAudioFormatDescriptionGetChannelLayout calls the CoreMedia framework function CMAudioFormatDescriptionGetChannelLayout.
-func CMAudioFormatDescriptionGetChannelLayout(desc unsafe.Pointer) (result unsafe.Pointer, sizeOut int) {
+func CMAudioFormatDescriptionGetChannelLayout(desc unsafe.Pointer) (result *coreaudiotypes.AudioChannelLayout, sizeOut int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMAudioFormatDescriptionGetChannelLayout == nil {
 		ebipurego.RegisterLibFunc(&_fnCMAudioFormatDescriptionGetChannelLayout, _lib, "CMAudioFormatDescriptionGetChannelLayout")
@@ -77,10 +66,10 @@ func CMAudioFormatDescriptionGetChannelLayout(desc unsafe.Pointer) (result unsaf
 	return _ret, _out0
 }
 
-var _fnCMAudioFormatDescriptionGetFormatList func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+var _fnCMAudioFormatDescriptionGetFormatList func(unsafe.Pointer, unsafe.Pointer) *coreaudiotypes.AudioFormatListItem
 
 // CMAudioFormatDescriptionGetFormatList calls the CoreMedia framework function CMAudioFormatDescriptionGetFormatList.
-func CMAudioFormatDescriptionGetFormatList(desc unsafe.Pointer) (result unsafe.Pointer, sizeOut int) {
+func CMAudioFormatDescriptionGetFormatList(desc unsafe.Pointer) (result *coreaudiotypes.AudioFormatListItem, sizeOut int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMAudioFormatDescriptionGetFormatList == nil {
 		ebipurego.RegisterLibFunc(&_fnCMAudioFormatDescriptionGetFormatList, _lib, "CMAudioFormatDescriptionGetFormatList")
@@ -103,10 +92,10 @@ func CMAudioFormatDescriptionGetMagicCookie(desc unsafe.Pointer) (result unsafe.
 	return _ret, _out0
 }
 
-var _fnCMAudioFormatDescriptionGetMostCompatibleFormat func(unsafe.Pointer) unsafe.Pointer
+var _fnCMAudioFormatDescriptionGetMostCompatibleFormat func(unsafe.Pointer) *coreaudiotypes.AudioFormatListItem
 
 // CMAudioFormatDescriptionGetMostCompatibleFormat calls the CoreMedia framework function CMAudioFormatDescriptionGetMostCompatibleFormat.
-func CMAudioFormatDescriptionGetMostCompatibleFormat(desc unsafe.Pointer) unsafe.Pointer {
+func CMAudioFormatDescriptionGetMostCompatibleFormat(desc unsafe.Pointer) *coreaudiotypes.AudioFormatListItem {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMAudioFormatDescriptionGetMostCompatibleFormat == nil {
 		ebipurego.RegisterLibFunc(&_fnCMAudioFormatDescriptionGetMostCompatibleFormat, _lib, "CMAudioFormatDescriptionGetMostCompatibleFormat")
@@ -114,10 +103,10 @@ func CMAudioFormatDescriptionGetMostCompatibleFormat(desc unsafe.Pointer) unsafe
 	return _fnCMAudioFormatDescriptionGetMostCompatibleFormat(desc)
 }
 
-var _fnCMAudioFormatDescriptionGetRichestDecodableFormat func(unsafe.Pointer) unsafe.Pointer
+var _fnCMAudioFormatDescriptionGetRichestDecodableFormat func(unsafe.Pointer) *coreaudiotypes.AudioFormatListItem
 
 // CMAudioFormatDescriptionGetRichestDecodableFormat calls the CoreMedia framework function CMAudioFormatDescriptionGetRichestDecodableFormat.
-func CMAudioFormatDescriptionGetRichestDecodableFormat(desc unsafe.Pointer) unsafe.Pointer {
+func CMAudioFormatDescriptionGetRichestDecodableFormat(desc unsafe.Pointer) *coreaudiotypes.AudioFormatListItem {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMAudioFormatDescriptionGetRichestDecodableFormat == nil {
 		ebipurego.RegisterLibFunc(&_fnCMAudioFormatDescriptionGetRichestDecodableFormat, _lib, "CMAudioFormatDescriptionGetRichestDecodableFormat")
@@ -125,10 +114,10 @@ func CMAudioFormatDescriptionGetRichestDecodableFormat(desc unsafe.Pointer) unsa
 	return _fnCMAudioFormatDescriptionGetRichestDecodableFormat(desc)
 }
 
-var _fnCMAudioFormatDescriptionGetStreamBasicDescription func(unsafe.Pointer) unsafe.Pointer
+var _fnCMAudioFormatDescriptionGetStreamBasicDescription func(unsafe.Pointer) *coreaudiotypes.AudioStreamBasicDescription
 
 // CMAudioFormatDescriptionGetStreamBasicDescription calls the CoreMedia framework function CMAudioFormatDescriptionGetStreamBasicDescription.
-func CMAudioFormatDescriptionGetStreamBasicDescription(desc unsafe.Pointer) unsafe.Pointer {
+func CMAudioFormatDescriptionGetStreamBasicDescription(desc unsafe.Pointer) *coreaudiotypes.AudioStreamBasicDescription {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMAudioFormatDescriptionGetStreamBasicDescription == nil {
 		ebipurego.RegisterLibFunc(&_fnCMAudioFormatDescriptionGetStreamBasicDescription, _lib, "CMAudioFormatDescriptionGetStreamBasicDescription")

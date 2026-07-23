@@ -173,6 +173,24 @@ func (m *Mapper) GoReturnType(qt string, ctx Context, imports ImportSet) string 
 // (int32/uint32) or it reads junk in the value's upper 32 bits. For every other
 // type the ABI type equals the ergonomic type. The wrapper converts between them.
 func (m *Mapper) GoABIType(qt, goType string) string {
+	// Fixed-size array: width-correct the element type (e.g. UInt32[4] → [4]uint32,
+	// AudioChannelLabel[8] → [8]uint32). Strip the trailing "[N]" from the C type
+	// and the leading "[N]" from the Go type, recurse on the element.
+	if strings.HasPrefix(goType, "[") {
+		closeIdx := strings.IndexByte(goType, ']')
+		if closeIdx <= 0 {
+			return goType
+		}
+		elemGo := goType[closeIdx+1:]
+		elemQt := qt
+		if i := strings.LastIndexByte(qt, '['); i >= 0 {
+			elemQt = strings.TrimSpace(qt[:i])
+		}
+		if corrected := m.GoABIType(elemQt, elemGo); corrected != elemGo {
+			return goType[:closeIdx+1] + corrected
+		}
+		return goType
+	}
 	if goType != "int" && goType != "uint" {
 		return goType
 	}

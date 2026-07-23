@@ -22,8 +22,8 @@ type DRFile struct{}
 
 // Structure used when requesting fork sizes.
 type DRFileForkSizeInfo struct {
-	Fork  uint
-	Query uint
+	Fork  uint32
+	Query uint32
 	Size  uint64
 }
 
@@ -31,10 +31,10 @@ type DRFileForkSizeInfo struct {
 type DRFileProductionInfo struct {
 	RequestedAddress uint64
 	Buffer           unsafe.Pointer
-	ReqCount         uint
-	ActCount         uint
-	BlockSize        uint
-	Fork             uint
+	ReqCount         uint32
+	ActCount         uint32
+	BlockSize        uint32
+	Fork             uint32
 }
 
 // The type of a reference to a DRFolder object.
@@ -55,9 +55,9 @@ type DRTrack struct{}
 // Parmeter block used for data production.
 type DRTrackProductionInfo struct {
 	Buffer           unsafe.Pointer
-	ReqCount         uint
-	ActCount         uint
-	Flags            uint
-	BlockSize        uint
+	ReqCount         uint32
+	ActCount         uint32
+	Flags            uint32
+	BlockSize        uint32
 	RequestedAddress uint64
 }

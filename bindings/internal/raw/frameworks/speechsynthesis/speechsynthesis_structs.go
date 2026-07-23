@@ -47,22 +47,22 @@ type SpeechStatusInfo struct {
 }
 
 type SpeechVersionInfo struct {
-	SynthType         uint
-	SynthSubType      uint
-	SynthManufacturer uint
-	SynthFlags        int
+	SynthType         uint32
+	SynthSubType      uint32
+	SynthManufacturer uint32
+	SynthFlags        int32
 	SynthVersion      unsafe.Pointer
 }
 
 type SpeechXtndData struct {
-	SynthCreator uint
+	SynthCreator uint32
 	SynthData    [2]uint8
 }
 
 type VoiceDescription struct {
-	Length   int
+	Length   int32
 	Voice    VoiceSpec
-	Version  int
+	Version  int32
 	Name     [64]uint8
 	Comment  [256]uint8
 	Gender   int16
@@ -70,7 +70,7 @@ type VoiceDescription struct {
 	Script   int16
 	Language int16
 	Region   int16
-	Reserved [4]int
+	Reserved [4]int32
 }
 
 type VoiceFileInfo struct {
@@ -79,6 +79,6 @@ type VoiceFileInfo struct {
 }
 
 type VoiceSpec struct {
-	Creator uint
-	Id      uint
+	Creator uint32
+	Id      uint32
 }

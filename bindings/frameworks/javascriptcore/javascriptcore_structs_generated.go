@@ -11,7 +11,7 @@ import (
 // A structure that contains properties and callbacks that define a type of object.
 type JSClassDefinition struct {
 	Version           int32
-	Attributes        uint
+	Attributes        uint32
 	ClassName         unsafe.Pointer
 	ParentClass       unsafe.Pointer
 	StaticValues      unsafe.Pointer
@@ -33,7 +33,7 @@ type JSClassDefinition struct {
 type JSStaticFunction struct {
 	Name           unsafe.Pointer
 	CallAsFunction unsafe.Pointer
-	Attributes     uint
+	Attributes     uint32
 }
 
 // A statically declared value property.
@@ -41,7 +41,7 @@ type JSStaticValue struct {
 	Name        unsafe.Pointer
 	GetProperty unsafe.Pointer
 	SetProperty unsafe.Pointer
-	Attributes  uint
+	Attributes  uint32
 }
 
 type OpaqueJSClass struct{}

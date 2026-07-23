@@ -9,13 +9,13 @@ import (
 
 type TW_ARRAY struct {
 	ItemType uint16
-	NumItems uint
+	NumItems uint32
 	ItemList [1]uint8
 }
 
 type TW_AUDIOINFO struct {
 	Name     [256]uint8
-	Reserved uint
+	Reserved uint32
 }
 
 type TW_CALLBACK struct {
@@ -39,7 +39,7 @@ type TW_CIECOLOR struct {
 	ColorSpace      uint16
 	LowEndian       int16
 	DeviceDependent int16
-	VersionNumber   int
+	VersionNumber   int32
 	StageABC        TW_TRANSFORMSTAGE
 	StageLMN        TW_TRANSFORMSTAGE
 	WhitePoint      TW_CIEPOINT
@@ -56,7 +56,7 @@ type TW_CIEPOINT struct {
 }
 
 type TW_CUSTOMDSDATA struct {
-	InfoLength uint
+	InfoLength uint32
 	HData      string
 }
 
@@ -72,17 +72,17 @@ type TW_DECODEFUNCTION struct {
 }
 
 type TW_DEVICEEVENT struct {
-	Event                  uint
+	Event                  uint32
 	DeviceName             [256]uint8
-	BatteryMinutes         uint
+	BatteryMinutes         uint32
 	BatteryPercentage      int16
-	PowerSupply            int
+	PowerSupply            int32
 	XResolution            TW_FIX32
 	YResolution            TW_FIX32
-	FlashUsed2             uint
-	AutomaticCapture       uint
-	TimeBeforeFirstCapture uint
-	TimeBetweenCaptures    uint
+	FlashUsed2             uint32
+	AutomaticCapture       uint32
+	TimeBeforeFirstCapture uint32
+	TimeBetweenCaptures    uint32
 }
 
 type TW_ELEMENT8 struct {
@@ -94,9 +94,9 @@ type TW_ELEMENT8 struct {
 
 type TW_ENUMERATION struct {
 	ItemType     uint16
-	NumItems     uint
-	CurrentIndex uint
-	DefaultIndex uint
+	NumItems     uint32
+	CurrentIndex uint32
+	DefaultIndex uint32
 	ItemList     [1]uint8
 }
 
@@ -106,7 +106,7 @@ type TW_EVENT struct {
 }
 
 type TW_EXTIMAGEINFO struct {
-	NumInfos uint
+	NumInfos uint32
 	Info     [1]TW_INFO
 }
 
@@ -115,15 +115,15 @@ type TW_FILESYSTEM struct {
 	OutputName       [256]uint8
 	Context          string
 	Recursive        int32
-	FileType         int
-	Size             uint
+	FileType         int32
+	Size             uint32
 	CreateTimeDate   [34]uint8
 	ModifiedTimeDate [34]uint8
-	FreeSpace        uint
-	NewImageSize     int
-	NumberOfFiles    uint
-	NumberOfSnippets uint
-	DeviceGroupMask  uint
+	FreeSpace        uint32
+	NewImageSize     int32
+	NumberOfFiles    uint32
+	NumberOfSnippets uint32
+	DeviceGroupMask  uint32
 	Reserved         [508]int8
 }
 
@@ -148,7 +148,7 @@ type TW_IDENTITY struct {
 	Version         TW_VERSION
 	ProtocolMajor   uint16
 	ProtocolMinor   uint16
-	SupportedGroups uint
+	SupportedGroups uint32
 	Manufacturer    [34]uint8
 	ProductFamily   [34]uint8
 	ProductName     [34]uint8
@@ -157,8 +157,8 @@ type TW_IDENTITY struct {
 type TW_IMAGEINFO struct {
 	XResolution     TW_FIX32
 	YResolution     TW_FIX32
-	ImageWidth      int
-	ImageLength     int
+	ImageWidth      int32
+	ImageLength     int32
 	SamplesPerPixel int16
 	BitsPerSample   [8]int16
 	BitsPerPixel    int16
@@ -169,19 +169,19 @@ type TW_IMAGEINFO struct {
 
 type TW_IMAGELAYOUT struct {
 	Frame          TW_FRAME
-	DocumentNumber uint
-	PageNumber     uint
-	FrameNumber    uint
+	DocumentNumber uint32
+	PageNumber     uint32
+	FrameNumber    uint32
 }
 
 type TW_IMAGEMEMXFER struct {
 	Compression  uint16
-	BytesPerRow  uint
-	Columns      uint
-	Rows         uint
-	XOffset      uint
-	YOffset      uint
-	BytesWritten uint
+	BytesPerRow  uint32
+	Columns      uint32
+	Rows         uint32
+	XOffset      uint32
+	YOffset      uint32
+	BytesWritten uint32
 	Memory       TW_MEMORY
 }
 
@@ -190,12 +190,12 @@ type TW_INFO struct {
 	ItemType uint16
 	NumItems uint16
 	CondCode uint16
-	Item     uint
+	Item     uint32
 }
 
 type TW_JPEGCOMPRESSION struct {
 	ColorSpace       uint16
-	SubSampling      uint
+	SubSampling      uint32
 	NumComponents    uint16
 	RestartFrequency uint16
 	QuantMap         [4]uint16
@@ -206,14 +206,14 @@ type TW_JPEGCOMPRESSION struct {
 }
 
 type TW_MEMORY struct {
-	Flags  uint
-	Length uint
+	Flags  uint32
+	Length uint32
 	TheMem string
 }
 
 type TW_ONEVALUE struct {
 	ItemType uint16
-	Item     uint
+	Item     uint32
 }
 
 type TW_PALETTE8 struct {
@@ -224,11 +224,11 @@ type TW_PALETTE8 struct {
 
 type TW_PASSTHRU struct {
 	PCommand        string
-	CommandBytes    uint
-	Direction       int
+	CommandBytes    uint32
+	Direction       int32
 	PData           string
-	DataBytes       uint
-	DataBytesXfered uint
+	DataBytes       uint32
+	DataBytesXfered uint32
 }
 
 type TW_PENDINGXFERS struct {
@@ -238,11 +238,11 @@ type TW_PENDINGXFERS struct {
 
 type TW_RANGE struct {
 	ItemType     uint16
-	MinValue     uint
-	MaxValue     uint
-	StepSize     uint
-	DefaultValue uint
-	CurrentValue uint
+	MinValue     uint32
+	MaxValue     uint32
+	StepSize     uint32
+	DefaultValue uint32
+	CurrentValue uint32
 }
 
 type TW_RGBRESPONSE struct {
@@ -266,13 +266,13 @@ type TW_SETUPFILEXFER2 struct {
 	FileNameType uint16
 	Format       uint16
 	VRefNum      int16
-	ParID        uint
+	ParID        uint32
 }
 
 type TW_SETUPMEMXFER struct {
-	MinBufSize uint
-	MaxBufSize uint
-	Preferred  uint
+	MinBufSize uint32
+	MaxBufSize uint32
+	Preferred  uint32
 }
 
 type TW_STATUS struct {
@@ -288,16 +288,16 @@ type TW_TRANSFORMSTAGE struct {
 type TW_TWUNKDSENTRYPARAMS struct {
 	DestFlag    int8
 	Dest        TW_IDENTITY
-	DataGroup   int
+	DataGroup   int32
 	DataArgType int16
 	Message     int16
-	PDataSize   int
+	PDataSize   int32
 }
 
 type TW_TWUNKDSENTRYRETURN struct {
 	ReturnCode    uint16
 	ConditionCode uint16
-	PDataSize     int
+	PDataSize     int32
 }
 
 type TW_TWUNKIDENTITY struct {

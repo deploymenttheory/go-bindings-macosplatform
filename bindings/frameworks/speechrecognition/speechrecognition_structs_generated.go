@@ -16,7 +16,7 @@ type SRCallBackParam struct {
 }
 
 type SRCallBackStruct struct {
-	What     uint
+	What     uint32
 	Message  int
 	Instance unsafe.Pointer
 	Status   int16

@@ -136,6 +136,18 @@ func (hp *HostPipe) EnqueueIORequestWithDataCompletionTimeoutErrorCompletionHand
 	return _r
 }
 
+// SendIORequestWithDataFrameListFrameListCountFirstFrameNumber sends a request on an isochronous endpoint.
+func (hp *HostPipe) SendIORequestWithDataFrameListFrameListCountFirstFrameNumber(data obj.Object, frameList *IOUSBHostIsochronousFrame, frameListCount int, firstFrameNumber uint64) error {
+	defer runtime.KeepAlive(hp)
+	defer runtime.KeepAlive(data)
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(hp), objc.RegisterName("sendIORequestWithData:frameList:frameListCount:firstFrameNumber:error:"), objref.IDOf(data), unsafe.Pointer(frameList), frameListCount, firstFrameNumber, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
 // EnableStreams enables streams for the pipe.
 //
 // EnableStreams returns an error if the operation did not succeed.

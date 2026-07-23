@@ -6,6 +6,6 @@ package fileprovider
 
 // A structure that contains the file type and file creator codes for an item.
 type NSFileProviderTypeAndCreator struct {
-	Type    uint
-	Creator uint
+	Type    uint32
+	Creator uint32
 }

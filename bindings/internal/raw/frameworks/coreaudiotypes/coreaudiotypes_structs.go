@@ -9,71 +9,71 @@ import (
 
 // A structure that holds a buffer of audio data.
 type AudioBuffer struct {
-	MNumberChannels uint
-	MDataByteSize   uint
+	MNumberChannels uint32
+	MDataByteSize   uint32
 	MData           unsafe.Pointer
 }
 
 // A structure that stores a variable-length array of audio buffers.
 type AudioBufferList struct {
-	MNumberBuffers uint
+	MNumberBuffers uint32
 	MBuffers       [1]AudioBuffer
 }
 
 // A structure that describes a channel of audio data.
 type AudioChannelDescription struct {
-	MChannelLabel uint
+	MChannelLabel uint32
 	MChannelFlags AudioChannelFlags
 	MCoordinates  [3]float32
 }
 
 // A structure that specifies a channel layout in a file or in hardware.
 type AudioChannelLayout struct {
-	MChannelLayoutTag          uint
+	MChannelLayoutTag          uint32
 	MChannelBitmap             AudioChannelBitmap
-	MNumberChannelDescriptions uint
+	MNumberChannelDescriptions uint32
 	MChannelDescriptions       [1]AudioChannelDescription
 }
 
 // A structure that describes an audio codec.
 type AudioClassDescription struct {
-	MType         uint
-	MSubType      uint
-	MManufacturer uint
+	MType         uint32
+	MSubType      uint32
+	MManufacturer uint32
 }
 
 // @struct     AudioFormatListItem @abstract   this struct is used as output from the kAudioFormatProperty_FormatList property @var        mASBD an AudioStreamBasicDescription @var        mChannelLayoutTag an AudioChannelLayoutTag
 type AudioFormatListItem struct {
 	MASBD             AudioStreamBasicDescription
-	MChannelLayoutTag uint
+	MChannelLayoutTag uint32
 }
 
 // A format specification for an audio stream.
 type AudioStreamBasicDescription struct {
 	MSampleRate       float64
-	MFormatID         uint
-	MFormatFlags      uint
-	MBytesPerPacket   uint
-	MFramesPerPacket  uint
-	MBytesPerFrame    uint
-	MChannelsPerFrame uint
-	MBitsPerChannel   uint
-	MReserved         uint
+	MFormatID         uint32
+	MFormatFlags      uint32
+	MBytesPerPacket   uint32
+	MFramesPerPacket  uint32
+	MBytesPerFrame    uint32
+	MChannelsPerFrame uint32
+	MBitsPerChannel   uint32
+	MReserved         uint32
 }
 
 // @struct         AudioStreamPacketDependencyDescription @abstract       A structure to provide a description of the dependencies of one audio packet on other audio packets. @var            mIsIndependentlyDecodable 1 if the packet is independently decodable, 0 otherwise. @var            mPreRollCount The count of packets that must be decoded after this packet in order to refresh the decoder, if the packet is independently decodable.  This value should be ignored if “mIsIndependentlyDecodable“ is 0. @var            mFlags Currently unused. @var            mReserved Reserved for future use. @discussion For independently decodable packets, the “mPreRollCount“ indicates how many additional packets need to be decoded after this packet in order for the decoder to start returning optimal output, if this is the first packet decoded since the decoder was initialized. For example, if this packet is packet #123 of some given packet stream, and “mIsIndependentlyDecodable“ is 0, or “mIsIndependentlyDecodable“ is 1 and “mPreRollCount“ is non-zero, and the client desires optimal output starting with the output corresponding with packet #123 (because for example the client is an audio player whose user seeks to a starting playback position corresponding with packet #123), the client would scan back, starting at packet #122, searching for an independently decodable packet with a preroll not intersecting packet #123.  If for packet #122 “mIsIndependentlyDecodable“ is 0, or “mIsIndependentlyDecodable“ is 1 but “mPreRollCount“ is 2 or more, the client would still not get optimal output for packet #123 if starting here, so the client continues to scan back. If for packet #121 “mIsIndependentlyDecodable“ is 1 and “mPreRollCount“ is 2 or less, the client would start decoding from this point, but discard the output equivalent of the two extra input packets (desired first output packet - actual first decoded packet, or 122 - 120 == 2).
 type AudioStreamPacketDependencyDescription struct {
-	MIsIndependentlyDecodable uint
-	MPreRollCount             uint
-	MFlags                    uint
-	MReserved                 uint
+	MIsIndependentlyDecodable uint32
+	MPreRollCount             uint32
+	MFlags                    uint32
+	MReserved                 uint32
 }
 
 // A value that describes a packet in a buffer of audio data.
 type AudioStreamPacketDescription struct {
 	MStartOffset            int64
-	MVariableFramesInPacket uint
-	MDataByteSize           uint
+	MVariableFramesInPacket uint32
+	MDataByteSize           uint32
 }
 
 // A structure that represents a timestamp value.
@@ -84,7 +84,7 @@ type AudioTimeStamp struct {
 	MWordClockTime uint64
 	MSMPTETime     SMPTETime
 	MFlags         AudioTimeStampFlags
-	MReserved      uint
+	MReserved      uint32
 }
 
 // A structure that represents a continuous range of values.
@@ -96,16 +96,16 @@ type AudioValueRange struct {
 // A structure that stores buffers to use in translation operations.
 type AudioValueTranslation struct {
 	MInputData      unsafe.Pointer
-	MInputDataSize  uint
+	MInputDataSize  uint32
 	MOutputData     unsafe.Pointer
-	MOutputDataSize uint
+	MOutputDataSize uint32
 }
 
 // A structure that defines an SMPTE time value.
 type SMPTETime struct {
 	MSubframes       int16
 	MSubframeDivisor int16
-	MCounter         uint
+	MCounter         uint32
 	MType            SMPTETimeType
 	MFlags           SMPTETimeFlags
 	MHours           int16

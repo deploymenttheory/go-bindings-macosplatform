@@ -30,6 +30,36 @@ func CSBackupSetItemExcluded(item obj.Object, exclude uint8, excludeByPath uint8
 	return nil
 }
 
+var _fnChangeTextToUnicodeInfo func(objc.ID, unsafe.Pointer) int32
+
+// ChangeTextToUnicodeInfo reports an error if the CarbonCore framework function ChangeTextToUnicodeInfo fails.
+func ChangeTextToUnicodeInfo(ioTextToUnicodeInfo obj.Object, iUnicodeMapping *UnicodeMapping) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnChangeTextToUnicodeInfo == nil {
+		ebipurego.RegisterLibFunc(&_fnChangeTextToUnicodeInfo, _lib, "ChangeTextToUnicodeInfo")
+	}
+	_rc := _fnChangeTextToUnicodeInfo(objref.IDOf(ioTextToUnicodeInfo), unsafe.Pointer(iUnicodeMapping))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnChangeUnicodeToTextInfo func(objc.ID, unsafe.Pointer) int32
+
+// ChangeUnicodeToTextInfo reports an error if the CarbonCore framework function ChangeUnicodeToTextInfo fails.
+func ChangeUnicodeToTextInfo(ioUnicodeToTextInfo obj.Object, iUnicodeMapping *UnicodeMapping) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnChangeUnicodeToTextInfo == nil {
+		ebipurego.RegisterLibFunc(&_fnChangeUnicodeToTextInfo, _lib, "ChangeUnicodeToTextInfo")
+	}
+	_rc := _fnChangeUnicodeToTextInfo(objref.IDOf(ioUnicodeToTextInfo), unsafe.Pointer(iUnicodeMapping))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
 var _fnCoreEndianFlipData func(int, int, int16, unsafe.Pointer, int, uint8) int32
 
 // CoreEndianFlipData reports an error if the CarbonCore framework function CoreEndianFlipData fails.
@@ -75,6 +105,21 @@ func CoreEndianInstallFlipper(dataDomain int, dataType int, proc unsafe.Pointer,
 	return nil
 }
 
+var _fnCreateTextToUnicodeInfo func(unsafe.Pointer, unsafe.Pointer) int32
+
+// CreateTextToUnicodeInfo reports an error if the CarbonCore framework function CreateTextToUnicodeInfo fails.
+func CreateTextToUnicodeInfo(iUnicodeMapping *UnicodeMapping, oTextToUnicodeInfo unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCreateTextToUnicodeInfo == nil {
+		ebipurego.RegisterLibFunc(&_fnCreateTextToUnicodeInfo, _lib, "CreateTextToUnicodeInfo")
+	}
+	_rc := _fnCreateTextToUnicodeInfo(unsafe.Pointer(iUnicodeMapping), oTextToUnicodeInfo)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
 var _fnCreateTextToUnicodeInfoByEncoding func(int, unsafe.Pointer) int32
 
 // CreateTextToUnicodeInfoByEncoding reports an error if the CarbonCore framework function CreateTextToUnicodeInfoByEncoding fails.
@@ -90,6 +135,21 @@ func CreateTextToUnicodeInfoByEncoding(iEncoding int, oTextToUnicodeInfo unsafe.
 	return nil
 }
 
+var _fnCreateUnicodeToTextInfo func(unsafe.Pointer, unsafe.Pointer) int32
+
+// CreateUnicodeToTextInfo reports an error if the CarbonCore framework function CreateUnicodeToTextInfo fails.
+func CreateUnicodeToTextInfo(iUnicodeMapping *UnicodeMapping, oUnicodeToTextInfo unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCreateUnicodeToTextInfo == nil {
+		ebipurego.RegisterLibFunc(&_fnCreateUnicodeToTextInfo, _lib, "CreateUnicodeToTextInfo")
+	}
+	_rc := _fnCreateUnicodeToTextInfo(unsafe.Pointer(iUnicodeMapping), oUnicodeToTextInfo)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
 var _fnCreateUnicodeToTextInfoByEncoding func(int, unsafe.Pointer) int32
 
 // CreateUnicodeToTextInfoByEncoding reports an error if the CarbonCore framework function CreateUnicodeToTextInfoByEncoding fails.
@@ -99,6 +159,21 @@ func CreateUnicodeToTextInfoByEncoding(iEncoding int, oUnicodeToTextInfo unsafe.
 		ebipurego.RegisterLibFunc(&_fnCreateUnicodeToTextInfoByEncoding, _lib, "CreateUnicodeToTextInfoByEncoding")
 	}
 	_rc := _fnCreateUnicodeToTextInfoByEncoding(iEncoding, oUnicodeToTextInfo)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnCreateUnicodeToTextRunInfo func(int, unsafe.Pointer, unsafe.Pointer) int32
+
+// CreateUnicodeToTextRunInfo reports an error if the CarbonCore framework function CreateUnicodeToTextRunInfo fails.
+func CreateUnicodeToTextRunInfo(iNumberOfMappings int, iUnicodeMappings *UnicodeMapping, oUnicodeToTextInfo unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCreateUnicodeToTextRunInfo == nil {
+		ebipurego.RegisterLibFunc(&_fnCreateUnicodeToTextRunInfo, _lib, "CreateUnicodeToTextRunInfo")
+	}
+	_rc := _fnCreateUnicodeToTextRunInfo(iNumberOfMappings, unsafe.Pointer(iUnicodeMappings), oUnicodeToTextInfo)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
