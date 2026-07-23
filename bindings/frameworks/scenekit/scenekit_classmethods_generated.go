@@ -12,6 +12,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -148,9 +149,8 @@ func RunBlock(block func(obj.Object)) *Action {
 }
 
 // RunBlockQueue creates an action that executes a block on a specific dispatch queue.
-func RunBlockQueue(block func(obj.Object), queue obj.Object) *Action {
-	defer runtime.KeepAlive(queue)
-	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("runBlock:queue:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { block(obj.Wrap(_b0)) }), objref.IDOf(queue))
+func RunBlockQueue(block func(obj.Object), queue dispatch.Queue) *Action {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("runBlock:queue:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { block(obj.Wrap(_b0)) }), objc.ID(uintptr(queue.Ptr())))
 	return ActionFromID(_r)
 }
 

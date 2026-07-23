@@ -8,7 +8,7 @@ import (
 	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -81,10 +81,9 @@ func (cip *CaptureIndexPicker) WithEnabled(enabled bool) *CaptureIndexPicker {
 }
 
 // SetActionQueueAction sets the action to perform on the specified dispatch queue when the control’s value changes.
-func (cip *CaptureIndexPicker) SetActionQueueAction(actionQueue obj.Object, action func(int)) {
+func (cip *CaptureIndexPicker) SetActionQueueAction(actionQueue dispatch.Queue, action func(int)) {
 	defer runtime.KeepAlive(cip)
-	defer runtime.KeepAlive(actionQueue)
-	objc.Send[objc.ID](objref.IDOf(cip), objc.RegisterName("setActionQueue:action:"), objref.IDOf(actionQueue), objc.NewBlock(func(_ objc.Block, _b0 int) { action(_b0) }))
+	objc.Send[objc.ID](objref.IDOf(cip), objc.RegisterName("setActionQueue:action:"), objc.ID(uintptr(actionQueue.Ptr())), objc.NewBlock(func(_ objc.Block, _b0 int) { action(_b0) }))
 }
 
 // SelectedIndex returns the currently selected index. Because the camera system may be independent from the main thread or `

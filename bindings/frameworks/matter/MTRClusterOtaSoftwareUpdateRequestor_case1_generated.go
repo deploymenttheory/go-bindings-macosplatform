@@ -9,6 +9,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/rt"
@@ -49,11 +50,10 @@ func mTRClusterOtaSoftwareUpdateRequestorAdopt(id objc.ID) *MTRClusterOtaSoftwar
 }
 
 // NewMTRClusterOtaSoftwareUpdateRequestorWithDeviceEndpointQueue creates a new MTRClusterOtaSoftwareUpdateRequestor.
-func NewMTRClusterOtaSoftwareUpdateRequestorWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterOtaSoftwareUpdateRequestor {
+func NewMTRClusterOtaSoftwareUpdateRequestorWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue dispatch.Queue) *MTRClusterOtaSoftwareUpdateRequestor {
 	defer runtime.KeepAlive(device)
-	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterOtaSoftwareUpdateRequestor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objc.ID(uintptr(queue.Ptr())))
 	return mTRClusterOtaSoftwareUpdateRequestorAdopt(_id)
 }
 

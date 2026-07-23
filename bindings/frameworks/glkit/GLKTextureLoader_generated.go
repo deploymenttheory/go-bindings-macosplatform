@@ -10,6 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/rt"
@@ -84,59 +85,51 @@ func NewTextureLoaderWithShareContext(context_ obj.Object) *TextureLoader {
 }
 
 // TextureWithContentsOfFileOptionsQueueCompletionHandler asynchronously loads a 2D texture image from a file and creates a new texture from the data.
-func (tl *TextureLoader) TextureWithContentsOfFileOptionsQueueCompletionHandler(path string, options map[string]*foundation.Number, queue obj.Object, block func(obj.Object, unsafe.Pointer)) {
+func (tl *TextureLoader) TextureWithContentsOfFileOptionsQueueCompletionHandler(path string, options map[string]*foundation.Number, queue dispatch.Queue, block func(obj.Object, unsafe.Pointer)) {
 	defer runtime.KeepAlive(tl)
-	defer runtime.KeepAlive(queue)
-	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("textureWithContentsOfFile:options:queue:completionHandler:"), purego.NSString(path), rt.MapToDict(options, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), _b1) }))
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("textureWithContentsOfFile:options:queue:completionHandler:"), purego.NSString(path), rt.MapToDict(options, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), objc.ID(uintptr(queue.Ptr())), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), _b1) }))
 }
 
 // TextureWithContentsOfURLOptionsQueueCompletionHandler asynchronously loads a 2D texture image from a URL and creates a new texture from the data.
-func (tl *TextureLoader) TextureWithContentsOfURLOptionsQueueCompletionHandler(url string, options map[string]*foundation.Number, queue obj.Object, block func(obj.Object, unsafe.Pointer)) {
+func (tl *TextureLoader) TextureWithContentsOfURLOptionsQueueCompletionHandler(url string, options map[string]*foundation.Number, queue dispatch.Queue, block func(obj.Object, unsafe.Pointer)) {
 	defer runtime.KeepAlive(tl)
-	defer runtime.KeepAlive(queue)
-	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("textureWithContentsOfURL:options:queue:completionHandler:"), rt.FileURL(url), rt.MapToDict(options, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), _b1) }))
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("textureWithContentsOfURL:options:queue:completionHandler:"), rt.FileURL(url), rt.MapToDict(options, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), objc.ID(uintptr(queue.Ptr())), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), _b1) }))
 }
 
 // TextureWithNameScaleFactorBundleOptionsQueueCompletionHandler wraps the corresponding Objective-C method.
-func (tl *TextureLoader) TextureWithNameScaleFactorBundleOptionsQueueCompletionHandler(name string, scaleFactor float64, bundle obj.Object, options map[string]*foundation.Number, queue obj.Object, block func(obj.Object, unsafe.Pointer)) {
+func (tl *TextureLoader) TextureWithNameScaleFactorBundleOptionsQueueCompletionHandler(name string, scaleFactor float64, bundle obj.Object, options map[string]*foundation.Number, queue dispatch.Queue, block func(obj.Object, unsafe.Pointer)) {
 	defer runtime.KeepAlive(tl)
 	defer runtime.KeepAlive(bundle)
-	defer runtime.KeepAlive(queue)
-	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("textureWithName:scaleFactor:bundle:options:queue:completionHandler:"), purego.NSString(name), scaleFactor, objref.IDOf(bundle), rt.MapToDict(options, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), _b1) }))
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("textureWithName:scaleFactor:bundle:options:queue:completionHandler:"), purego.NSString(name), scaleFactor, objref.IDOf(bundle), rt.MapToDict(options, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), objc.ID(uintptr(queue.Ptr())), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), _b1) }))
 }
 
 // TextureWithContentsOfDataOptionsQueueCompletionHandler asynchronously loads a 2D texture image from a memory range and creates a new texture from the data.
-func (tl *TextureLoader) TextureWithContentsOfDataOptionsQueueCompletionHandler(data []byte, options map[string]*foundation.Number, queue obj.Object, block func(obj.Object, unsafe.Pointer)) {
+func (tl *TextureLoader) TextureWithContentsOfDataOptionsQueueCompletionHandler(data []byte, options map[string]*foundation.Number, queue dispatch.Queue, block func(obj.Object, unsafe.Pointer)) {
 	defer runtime.KeepAlive(tl)
-	defer runtime.KeepAlive(queue)
-	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("textureWithContentsOfData:options:queue:completionHandler:"), rt.BytesToNSData(data), rt.MapToDict(options, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), _b1) }))
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("textureWithContentsOfData:options:queue:completionHandler:"), rt.BytesToNSData(data), rt.MapToDict(options, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), objc.ID(uintptr(queue.Ptr())), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), _b1) }))
 }
 
 // TextureWithCGImageOptionsQueueCompletionHandler asynchronously loads a 2D texture image from a Quartz image and creates a new texture from the data.
-func (tl *TextureLoader) TextureWithCGImageOptionsQueueCompletionHandler(cgImage obj.Object, options map[string]*foundation.Number, queue obj.Object, block func(obj.Object, unsafe.Pointer)) {
+func (tl *TextureLoader) TextureWithCGImageOptionsQueueCompletionHandler(cgImage obj.Object, options map[string]*foundation.Number, queue dispatch.Queue, block func(obj.Object, unsafe.Pointer)) {
 	defer runtime.KeepAlive(tl)
 	defer runtime.KeepAlive(cgImage)
-	defer runtime.KeepAlive(queue)
-	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("textureWithCGImage:options:queue:completionHandler:"), objref.IDOf(cgImage), rt.MapToDict(options, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), _b1) }))
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("textureWithCGImage:options:queue:completionHandler:"), objref.IDOf(cgImage), rt.MapToDict(options, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), objc.ID(uintptr(queue.Ptr())), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), _b1) }))
 }
 
 // CubeMapWithContentsOfFilesOptionsQueueCompletionHandler asynchronously loads a cube map texture image from a series of files and creates a new texture from the data.
-func (tl *TextureLoader) CubeMapWithContentsOfFilesOptionsQueueCompletionHandler(paths []obj.Object, options map[string]*foundation.Number, queue obj.Object, block func(obj.Object, unsafe.Pointer)) {
+func (tl *TextureLoader) CubeMapWithContentsOfFilesOptionsQueueCompletionHandler(paths []obj.Object, options map[string]*foundation.Number, queue dispatch.Queue, block func(obj.Object, unsafe.Pointer)) {
 	defer runtime.KeepAlive(tl)
-	defer runtime.KeepAlive(queue)
-	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("cubeMapWithContentsOfFiles:options:queue:completionHandler:"), purego.SliceToNSArray(paths, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), rt.MapToDict(options, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), _b1) }))
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("cubeMapWithContentsOfFiles:options:queue:completionHandler:"), purego.SliceToNSArray(paths, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), rt.MapToDict(options, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), objc.ID(uintptr(queue.Ptr())), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), _b1) }))
 }
 
 // CubeMapWithContentsOfFileOptionsQueueCompletionHandler asynchronously loads a cube map texture image from a single file and creates a new texture from the data.
-func (tl *TextureLoader) CubeMapWithContentsOfFileOptionsQueueCompletionHandler(path string, options map[string]*foundation.Number, queue obj.Object, block func(obj.Object, unsafe.Pointer)) {
+func (tl *TextureLoader) CubeMapWithContentsOfFileOptionsQueueCompletionHandler(path string, options map[string]*foundation.Number, queue dispatch.Queue, block func(obj.Object, unsafe.Pointer)) {
 	defer runtime.KeepAlive(tl)
-	defer runtime.KeepAlive(queue)
-	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("cubeMapWithContentsOfFile:options:queue:completionHandler:"), purego.NSString(path), rt.MapToDict(options, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), _b1) }))
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("cubeMapWithContentsOfFile:options:queue:completionHandler:"), purego.NSString(path), rt.MapToDict(options, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), objc.ID(uintptr(queue.Ptr())), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), _b1) }))
 }
 
 // CubeMapWithContentsOfURLOptionsQueueCompletionHandler asynchronously loads a cube map texture image from a single URL and creates a new texture from the data.
-func (tl *TextureLoader) CubeMapWithContentsOfURLOptionsQueueCompletionHandler(url string, options map[string]*foundation.Number, queue obj.Object, block func(obj.Object, unsafe.Pointer)) {
+func (tl *TextureLoader) CubeMapWithContentsOfURLOptionsQueueCompletionHandler(url string, options map[string]*foundation.Number, queue dispatch.Queue, block func(obj.Object, unsafe.Pointer)) {
 	defer runtime.KeepAlive(tl)
-	defer runtime.KeepAlive(queue)
-	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("cubeMapWithContentsOfURL:options:queue:completionHandler:"), rt.FileURL(url), rt.MapToDict(options, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), _b1) }))
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("cubeMapWithContentsOfURL:options:queue:completionHandler:"), rt.FileURL(url), rt.MapToDict(options, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), objc.ID(uintptr(queue.Ptr())), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), _b1) }))
 }

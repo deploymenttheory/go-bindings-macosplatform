@@ -9,6 +9,7 @@ import (
 	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,12 +50,11 @@ func mTRBaseClusterAirQualityAdopt(id objc.ID) *MTRBaseClusterAirQuality {
 }
 
 // NewMTRBaseClusterAirQualityWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
-func NewMTRBaseClusterAirQualityWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterAirQuality {
+func NewMTRBaseClusterAirQualityWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue dispatch.Queue) *MTRBaseClusterAirQuality {
 	defer runtime.KeepAlive(device)
 	defer runtime.KeepAlive(endpointID)
-	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterAirQuality")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objc.ID(uintptr(queue.Ptr())))
 	return mTRBaseClusterAirQualityAdopt(_id)
 }
 

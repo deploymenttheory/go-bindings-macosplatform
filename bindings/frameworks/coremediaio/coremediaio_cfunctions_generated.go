@@ -9,6 +9,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
@@ -52,13 +53,13 @@ func CMIOObjectAddPropertyListener(objectID int, listener unsafe.Pointer, client
 var _fnCMIOObjectAddPropertyListenerBlock func(int, unsafe.Pointer, objc.ID, unsafe.Pointer) int32
 
 // CMIOObjectAddPropertyListenerBlock calls the CoreMediaIO framework function CMIOObjectAddPropertyListenerBlock.
-func CMIOObjectAddPropertyListenerBlock(objectID int, dispatchQueue obj.Object, listener unsafe.Pointer) (result int, address CMIOObjectPropertyAddress) {
+func CMIOObjectAddPropertyListenerBlock(objectID int, dispatchQueue dispatch.Queue, listener unsafe.Pointer) (result int, address CMIOObjectPropertyAddress) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMIOObjectAddPropertyListenerBlock == nil {
 		ebipurego.RegisterLibFunc(&_fnCMIOObjectAddPropertyListenerBlock, _lib, "CMIOObjectAddPropertyListenerBlock")
 	}
 	var _out0 CMIOObjectPropertyAddress
-	_ret := int(_fnCMIOObjectAddPropertyListenerBlock(objectID, unsafe.Pointer(&_out0), objref.IDOf(dispatchQueue), listener))
+	_ret := int(_fnCMIOObjectAddPropertyListenerBlock(objectID, unsafe.Pointer(&_out0), objc.ID(uintptr(dispatchQueue.Ptr())), listener))
 	return _ret, _out0
 }
 
@@ -133,13 +134,13 @@ func CMIOObjectRemovePropertyListener(objectID int, listener unsafe.Pointer, cli
 var _fnCMIOObjectRemovePropertyListenerBlock func(int, unsafe.Pointer, objc.ID, unsafe.Pointer) int32
 
 // CMIOObjectRemovePropertyListenerBlock calls the CoreMediaIO framework function CMIOObjectRemovePropertyListenerBlock.
-func CMIOObjectRemovePropertyListenerBlock(objectID int, dispatchQueue obj.Object, listener unsafe.Pointer) (result int, address CMIOObjectPropertyAddress) {
+func CMIOObjectRemovePropertyListenerBlock(objectID int, dispatchQueue dispatch.Queue, listener unsafe.Pointer) (result int, address CMIOObjectPropertyAddress) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMIOObjectRemovePropertyListenerBlock == nil {
 		ebipurego.RegisterLibFunc(&_fnCMIOObjectRemovePropertyListenerBlock, _lib, "CMIOObjectRemovePropertyListenerBlock")
 	}
 	var _out0 CMIOObjectPropertyAddress
-	_ret := int(_fnCMIOObjectRemovePropertyListenerBlock(objectID, unsafe.Pointer(&_out0), objref.IDOf(dispatchQueue), listener))
+	_ret := int(_fnCMIOObjectRemovePropertyListenerBlock(objectID, unsafe.Pointer(&_out0), objc.ID(uintptr(dispatchQueue.Ptr())), listener))
 	return _ret, _out0
 }
 

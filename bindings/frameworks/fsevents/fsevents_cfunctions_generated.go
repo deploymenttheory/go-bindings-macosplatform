@@ -8,6 +8,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
@@ -152,12 +153,12 @@ func FSEventStreamScheduleWithRunLoop(streamRef obj.Object, runLoop obj.Object, 
 var _fnFSEventStreamSetDispatchQueue func(objc.ID, objc.ID)
 
 // FSEventStreamSetDispatchQueue calls the FSEvents framework function FSEventStreamSetDispatchQueue.
-func FSEventStreamSetDispatchQueue(streamRef obj.Object, q obj.Object) {
+func FSEventStreamSetDispatchQueue(streamRef obj.Object, q dispatch.Queue) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnFSEventStreamSetDispatchQueue == nil {
 		ebipurego.RegisterLibFunc(&_fnFSEventStreamSetDispatchQueue, _lib, "FSEventStreamSetDispatchQueue")
 	}
-	_fnFSEventStreamSetDispatchQueue(objref.IDOf(streamRef), objref.IDOf(q))
+	_fnFSEventStreamSetDispatchQueue(objref.IDOf(streamRef), objc.ID(uintptr(q.Ptr())))
 }
 
 var _fnFSEventStreamSetExclusionPaths func(objc.ID, objc.ID) uint8

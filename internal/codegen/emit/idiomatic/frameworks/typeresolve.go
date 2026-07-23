@@ -112,6 +112,47 @@ func idiomaticBlockParam(
 	return sig, adapter, imports, true
 }
 
+// osObjectRegistry maps an os_object handle typedef to the concrete idiomatic
+// library type the libraries emitter produces for it. These are the dispatch/xpc
+// handles a framework function or method takes as a parameter; surfacing them as
+// their real library type (rather than a generic obj.Object) lets a caller pass
+// the dispatch.Queue / xpc.Object a library constructor returned without a manual
+// obj.Adopt bridge. Only handles with an unambiguous library counterpart are
+// listed; anything else keeps the obj.Object shape.
+var osObjectRegistry = map[string]struct{ pkg, typ string }{
+	"dispatch_queue_t":     {"dispatch", "Queue"},
+	"dispatch_data_t":      {"dispatch", "Data"},
+	"dispatch_group_t":     {"dispatch", "Group"},
+	"dispatch_semaphore_t": {"dispatch", "Semaphore"},
+	"dispatch_io_t":        {"dispatch", "Io"},
+	"dispatch_object_t":    {"dispatch", "Object"},
+	"os_workgroup_t":       {"dispatch", "OsWorkgroup"},
+	"xpc_object_t":         {"xpc", "Object"},
+	"xpc_connection_t":     {"xpc", "Connection"},
+	"xpc_endpoint_t":       {"xpc", "Endpoint"},
+	"xpc_activity_t":       {"xpc", "Activity"},
+}
+
+// osObjectLibraryType reports whether objcType is an os_object handle typedef with
+// a concrete idiomatic library type, returning that Go type ("dispatch.Queue"),
+// its package name, and the package import path. The lookup is on the bare typedef
+// name, stripped of const/pointer/nullability qualifiers.
+func osObjectLibraryType(objcType string) (goType, pkg, importPath string, ok bool) {
+	bare := objcType
+	for _, q := range []string{"const", "volatile", "_Nonnull", "_Nullable", "_Null_unspecified", "*"} {
+		bare = strings.ReplaceAll(bare, q, " ")
+	}
+	fields := strings.Fields(bare)
+	if len(fields) != 1 {
+		return "", "", "", false
+	}
+	entry, found := osObjectRegistry[fields[0]]
+	if !found {
+		return "", "", "", false
+	}
+	return entry.pkg + "." + entry.typ, entry.pkg, idiomaticLibraryPrefix + entry.pkg, true
+}
+
 // idiomaticArg decides how one Objective-C method parameter appears in the
 // generated Go signature (sig) and how its Go value is passed to the Objective-C
 // call (arg). It also reports any extra imports the conversion needs. ok is
@@ -224,6 +265,16 @@ func idiomaticArg(
 			conv := "func(_v " + elemGo + ") objc.ID { return " + fmt.Sprintf(toID, "_v") + " }"
 			return "[]" + elemGo, "rt.SliceToNSSet(" + pName + ", " + conv + ")", imports, true
 		}
+	}
+	// An os_object handle typedef (dispatch_queue_t, xpc_object_t) is surfaced as
+	// the concrete idiomatic library type (dispatch.Queue, xpc.Object) so callers
+	// pass the value the library constructor already handed them, instead of an
+	// opaque obj.Object they would have to hand-bridge. The C ABI wants the
+	// underlying pointer as an objc.ID.
+	if goT, pkg, importPath, ok := osObjectLibraryType(objcType); ok {
+		imports[pkg] = importPath
+		imports["objc"] = objcImportPath
+		return goT, "objc.ID(uintptr(" + pName + ".Ptr()))", imports, true
 	}
 	impSet := make(typemap.ImportSet)
 	goType := qualifyRaw(

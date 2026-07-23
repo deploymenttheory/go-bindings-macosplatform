@@ -9,6 +9,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/rt"
@@ -87,9 +88,8 @@ func (mcqd *MTL4CommandQueueDescriptor) WithLabel(label string) *MTL4CommandQueu
 }
 
 // WithFeedbackQueue sets assigns a dispatch queue to which Metal submits feedback notification blocks.
-func (mcqd *MTL4CommandQueueDescriptor) WithFeedbackQueue(feedbackQueue obj.Object) *MTL4CommandQueueDescriptor {
-	defer runtime.KeepAlive(feedbackQueue)
-	objc.Send[objc.ID](objref.IDOf(mcqd), objc.RegisterName("setFeedbackQueue:"), objref.IDOf(feedbackQueue))
+func (mcqd *MTL4CommandQueueDescriptor) WithFeedbackQueue(feedbackQueue dispatch.Queue) *MTL4CommandQueueDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mcqd), objc.RegisterName("setFeedbackQueue:"), objc.ID(uintptr(feedbackQueue.Ptr())))
 	return mcqd
 }
 

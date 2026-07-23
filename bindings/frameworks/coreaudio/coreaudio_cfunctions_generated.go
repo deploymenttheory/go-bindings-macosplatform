@@ -8,6 +8,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
@@ -38,12 +39,12 @@ func AudioConvertNanosToHostTime(inNanos uint64) uint64 {
 var _fnAudioDeviceCreateIOProcIDWithBlock func(unsafe.Pointer, int, objc.ID, unsafe.Pointer) int32
 
 // AudioDeviceCreateIOProcIDWithBlock calls the CoreAudio framework function AudioDeviceCreateIOProcIDWithBlock.
-func AudioDeviceCreateIOProcIDWithBlock(outIOProcID unsafe.Pointer, inDevice int, inDispatchQueue obj.Object, inIOBlock unsafe.Pointer) int {
+func AudioDeviceCreateIOProcIDWithBlock(outIOProcID unsafe.Pointer, inDevice int, inDispatchQueue dispatch.Queue, inIOBlock unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAudioDeviceCreateIOProcIDWithBlock == nil {
 		ebipurego.RegisterLibFunc(&_fnAudioDeviceCreateIOProcIDWithBlock, _lib, "AudioDeviceCreateIOProcIDWithBlock")
 	}
-	return int(_fnAudioDeviceCreateIOProcIDWithBlock(outIOProcID, inDevice, objref.IDOf(inDispatchQueue), inIOBlock))
+	return int(_fnAudioDeviceCreateIOProcIDWithBlock(outIOProcID, inDevice, objc.ID(uintptr(inDispatchQueue.Ptr())), inIOBlock))
 }
 
 var _fnAudioDeviceGetCurrentTime func(int, unsafe.Pointer) int32
@@ -228,13 +229,13 @@ func AudioObjectAddPropertyListener(inObjectID int, inListener unsafe.Pointer, i
 var _fnAudioObjectAddPropertyListenerBlock func(int, unsafe.Pointer, objc.ID, unsafe.Pointer) int32
 
 // AudioObjectAddPropertyListenerBlock calls the CoreAudio framework function AudioObjectAddPropertyListenerBlock.
-func AudioObjectAddPropertyListenerBlock(inObjectID int, inDispatchQueue obj.Object, inListener unsafe.Pointer) (result int, inAddress AudioObjectPropertyAddress) {
+func AudioObjectAddPropertyListenerBlock(inObjectID int, inDispatchQueue dispatch.Queue, inListener unsafe.Pointer) (result int, inAddress AudioObjectPropertyAddress) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAudioObjectAddPropertyListenerBlock == nil {
 		ebipurego.RegisterLibFunc(&_fnAudioObjectAddPropertyListenerBlock, _lib, "AudioObjectAddPropertyListenerBlock")
 	}
 	var _out0 AudioObjectPropertyAddress
-	_ret := int(_fnAudioObjectAddPropertyListenerBlock(inObjectID, unsafe.Pointer(&_out0), objref.IDOf(inDispatchQueue), inListener))
+	_ret := int(_fnAudioObjectAddPropertyListenerBlock(inObjectID, unsafe.Pointer(&_out0), objc.ID(uintptr(inDispatchQueue.Ptr())), inListener))
 	return _ret, _out0
 }
 
@@ -309,13 +310,13 @@ func AudioObjectRemovePropertyListener(inObjectID int, inListener unsafe.Pointer
 var _fnAudioObjectRemovePropertyListenerBlock func(int, unsafe.Pointer, objc.ID, unsafe.Pointer) int32
 
 // AudioObjectRemovePropertyListenerBlock calls the CoreAudio framework function AudioObjectRemovePropertyListenerBlock.
-func AudioObjectRemovePropertyListenerBlock(inObjectID int, inDispatchQueue obj.Object, inListener unsafe.Pointer) (result int, inAddress AudioObjectPropertyAddress) {
+func AudioObjectRemovePropertyListenerBlock(inObjectID int, inDispatchQueue dispatch.Queue, inListener unsafe.Pointer) (result int, inAddress AudioObjectPropertyAddress) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAudioObjectRemovePropertyListenerBlock == nil {
 		ebipurego.RegisterLibFunc(&_fnAudioObjectRemovePropertyListenerBlock, _lib, "AudioObjectRemovePropertyListenerBlock")
 	}
 	var _out0 AudioObjectPropertyAddress
-	_ret := int(_fnAudioObjectRemovePropertyListenerBlock(inObjectID, unsafe.Pointer(&_out0), objref.IDOf(inDispatchQueue), inListener))
+	_ret := int(_fnAudioObjectRemovePropertyListenerBlock(inObjectID, unsafe.Pointer(&_out0), objc.ID(uintptr(inDispatchQueue.Ptr())), inListener))
 	return _ret, _out0
 }
 

@@ -9,6 +9,7 @@ import (
 	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,12 +50,11 @@ func mTRBaseClusterWakeOnLANAdopt(id objc.ID) *MTRBaseClusterWakeOnLAN {
 }
 
 // NewMTRBaseClusterWakeOnLANWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
-func NewMTRBaseClusterWakeOnLANWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterWakeOnLAN {
+func NewMTRBaseClusterWakeOnLANWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue dispatch.Queue) *MTRBaseClusterWakeOnLAN {
 	defer runtime.KeepAlive(device)
 	defer runtime.KeepAlive(endpointID)
-	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterWakeOnLAN")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objc.ID(uintptr(queue.Ptr())))
 	return mTRBaseClusterWakeOnLANAdopt(_id)
 }
 

@@ -9,6 +9,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
@@ -225,12 +226,12 @@ func QLThumbnailCreate(allocator obj.Object, url obj.Object, maxThumbnailSize co
 var _fnQLThumbnailDispatchAsync func(objc.ID, objc.ID, objc.Block)
 
 // QLThumbnailDispatchAsync calls the QuickLook framework function QLThumbnailDispatchAsync.
-func QLThumbnailDispatchAsync(thumbnail obj.Object, queue obj.Object, completion func()) {
+func QLThumbnailDispatchAsync(thumbnail obj.Object, queue dispatch.Queue, completion func()) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnQLThumbnailDispatchAsync == nil {
 		ebipurego.RegisterLibFunc(&_fnQLThumbnailDispatchAsync, _lib, "QLThumbnailDispatchAsync")
 	}
-	_fnQLThumbnailDispatchAsync(objref.IDOf(thumbnail), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block) { completion() }))
+	_fnQLThumbnailDispatchAsync(objref.IDOf(thumbnail), objc.ID(uintptr(queue.Ptr())), objc.NewBlock(func(_ objc.Block) { completion() }))
 }
 
 var _fnQLThumbnailGetContentRect func(objc.ID) corefoundation.CGRect

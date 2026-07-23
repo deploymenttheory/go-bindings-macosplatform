@@ -8,6 +8,7 @@ import (
 	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/rt"
@@ -74,10 +75,9 @@ func (stco *ScreenTimeConfigurationObserver) String() string {
 }
 
 // NewScreenTimeConfigurationObserverWithUpdateQueue creates a configuration observer that reports updates on the queue you specify.
-func NewScreenTimeConfigurationObserverWithUpdateQueue(updateQueue obj.Object) *ScreenTimeConfigurationObserver {
-	defer runtime.KeepAlive(updateQueue)
+func NewScreenTimeConfigurationObserverWithUpdateQueue(updateQueue dispatch.Queue) *ScreenTimeConfigurationObserver {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("STScreenTimeConfigurationObserver")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUpdateQueue:"), objref.IDOf(updateQueue))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUpdateQueue:"), objc.ID(uintptr(updateQueue.Ptr())))
 	return screenTimeConfigurationObserverAdopt(_id)
 }
 

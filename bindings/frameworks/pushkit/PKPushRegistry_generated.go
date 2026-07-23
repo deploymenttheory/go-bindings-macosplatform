@@ -10,6 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/shim"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/rt"
@@ -76,10 +77,9 @@ func (pr *PushRegistry) String() string {
 }
 
 // NewPushRegistryWithQueue creates a push registry with the specified dispatch queue.
-func NewPushRegistryWithQueue(queue obj.Object) *PushRegistry {
-	defer runtime.KeepAlive(queue)
+func NewPushRegistryWithQueue(queue dispatch.Queue) *PushRegistry {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKPushRegistry")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithQueue:"), objref.IDOf(queue))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithQueue:"), objc.ID(uintptr(queue.Ptr())))
 	return pushRegistryAdopt(_id)
 }
 

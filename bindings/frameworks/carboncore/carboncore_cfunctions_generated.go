@@ -8,6 +8,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
@@ -447,12 +448,12 @@ func CSDiskSpaceGetRecoveryEstimate(volumeURL obj.Object) uint64 {
 var _fnCSDiskSpaceStartRecovery func(objc.ID, uint64, int, unsafe.Pointer, objc.ID, objc.Block)
 
 // CSDiskSpaceStartRecovery calls the CarbonCore framework function CSDiskSpaceStartRecovery.
-func CSDiskSpaceStartRecovery(volumeURL obj.Object, bytesNeeded uint64, options int, outOperationUUID unsafe.Pointer, callbackQueue obj.Object, callback func(uint8, uint64, unsafe.Pointer)) {
+func CSDiskSpaceStartRecovery(volumeURL obj.Object, bytesNeeded uint64, options int, outOperationUUID unsafe.Pointer, callbackQueue dispatch.Queue, callback func(uint8, uint64, unsafe.Pointer)) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSDiskSpaceStartRecovery == nil {
 		ebipurego.RegisterLibFunc(&_fnCSDiskSpaceStartRecovery, _lib, "CSDiskSpaceStartRecovery")
 	}
-	_fnCSDiskSpaceStartRecovery(objref.IDOf(volumeURL), bytesNeeded, options, outOperationUUID, objref.IDOf(callbackQueue), objc.NewBlock(func(_ objc.Block, _b0 uint8, _b1 uint64, _b2 unsafe.Pointer) { callback(_b0, _b1, _b2) }))
+	_fnCSDiskSpaceStartRecovery(objref.IDOf(volumeURL), bytesNeeded, options, outOperationUUID, objc.ID(uintptr(callbackQueue.Ptr())), objc.NewBlock(func(_ objc.Block, _b0 uint8, _b1 uint64, _b2 unsafe.Pointer) { callback(_b0, _b1, _b2) }))
 }
 
 var _fnCSGetComponentsThreadMode func() uint32

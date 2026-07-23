@@ -8,6 +8,7 @@ import (
 	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/rt"
@@ -72,10 +73,9 @@ func (macqwi *MTRAsyncCallbackQueueWorkItem) String() string {
 }
 
 // NewMTRAsyncCallbackQueueWorkItemWithQueue creates a new MTRAsyncCallbackQueueWorkItem.
-func NewMTRAsyncCallbackQueueWorkItemWithQueue(queue obj.Object) *MTRAsyncCallbackQueueWorkItem {
-	defer runtime.KeepAlive(queue)
+func NewMTRAsyncCallbackQueueWorkItemWithQueue(queue dispatch.Queue) *MTRAsyncCallbackQueueWorkItem {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRAsyncCallbackQueueWorkItem")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithQueue:"), objref.IDOf(queue))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithQueue:"), objc.ID(uintptr(queue.Ptr())))
 	return mTRAsyncCallbackQueueWorkItemAdopt(_id)
 }
 

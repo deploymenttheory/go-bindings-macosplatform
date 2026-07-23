@@ -8,6 +8,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
@@ -1543,12 +1544,12 @@ func GclGetContext() obj.Object {
 var _fnGclGetDeviceIdWithDispatchQueue func(objc.ID) objc.ID
 
 // GclGetDeviceIdWithDispatchQueue calls the OpenCL framework function gcl_get_device_id_with_dispatch_queue.
-func GclGetDeviceIdWithDispatchQueue(queue obj.Object) obj.Object {
+func GclGetDeviceIdWithDispatchQueue(queue dispatch.Queue) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnGclGetDeviceIdWithDispatchQueue == nil {
 		ebipurego.RegisterLibFunc(&_fnGclGetDeviceIdWithDispatchQueue, _lib, "gcl_get_device_id_with_dispatch_queue")
 	}
-	_ret := _fnGclGetDeviceIdWithDispatchQueue(objref.IDOf(queue))
+	_ret := _fnGclGetDeviceIdWithDispatchQueue(objc.ID(uintptr(queue.Ptr())))
 	return obj.Wrap(_ret)
 }
 

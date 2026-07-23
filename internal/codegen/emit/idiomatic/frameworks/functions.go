@@ -68,7 +68,7 @@ func cfuncABIType(sig, argExpr string) string {
 	for _, prefix := range []string{
 		"purego.NSString(", "objref.IDOf(", "purego.SliceToNSArray(",
 		"rt.FileURL(", "rt.TimeToNSDate(", "rt.BytesToNSData(",
-		"rt.MapToDict(", "rt.SliceToNSSet(",
+		"rt.MapToDict(", "rt.SliceToNSSet(", "objc.ID(uintptr(",
 	} {
 		if strings.HasPrefix(argExpr, prefix) {
 			return "objc.ID"

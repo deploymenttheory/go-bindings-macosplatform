@@ -8,6 +8,7 @@ import (
 	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/rt"
@@ -48,12 +49,11 @@ func mTRClusterBasicInformationAdopt(id objc.ID) *MTRClusterBasicInformation {
 }
 
 // NewMTRClusterBasicInformationWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
-func NewMTRClusterBasicInformationWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterBasicInformation {
+func NewMTRClusterBasicInformationWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue dispatch.Queue) *MTRClusterBasicInformation {
 	defer runtime.KeepAlive(device)
 	defer runtime.KeepAlive(endpointID)
-	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterBasicInformation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objc.ID(uintptr(queue.Ptr())))
 	return mTRClusterBasicInformationAdopt(_id)
 }
 

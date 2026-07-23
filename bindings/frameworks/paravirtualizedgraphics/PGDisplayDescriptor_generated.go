@@ -10,6 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/rt"
@@ -94,9 +95,8 @@ func (pdd *PGDisplayDescriptor) WithSizeInMillimeters(sizeInMillimeters corefoun
 }
 
 // WithQueue sets the queue that the framework uses when dispatching messages to any of the display’s registered handlers.
-func (pdd *PGDisplayDescriptor) WithQueue(queue obj.Object) *PGDisplayDescriptor {
-	defer runtime.KeepAlive(queue)
-	objc.Send[objc.ID](objref.IDOf(pdd), objc.RegisterName("setQueue:"), objref.IDOf(queue))
+func (pdd *PGDisplayDescriptor) WithQueue(queue dispatch.Queue) *PGDisplayDescriptor {
+	objc.Send[objc.ID](objref.IDOf(pdd), objc.RegisterName("setQueue:"), objc.ID(uintptr(queue.Ptr())))
 	return pdd
 }
 

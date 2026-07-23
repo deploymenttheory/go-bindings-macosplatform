@@ -8,6 +8,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
@@ -522,12 +523,12 @@ func MDQuerySetCreateValueFunction(query obj.Object, func_ unsafe.Pointer, conte
 var _fnMDQuerySetDispatchQueue func(objc.ID, objc.ID)
 
 // MDQuerySetDispatchQueue calls the Metadata framework function MDQuerySetDispatchQueue.
-func MDQuerySetDispatchQueue(query obj.Object, queue obj.Object) {
+func MDQuerySetDispatchQueue(query obj.Object, queue dispatch.Queue) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDQuerySetDispatchQueue == nil {
 		ebipurego.RegisterLibFunc(&_fnMDQuerySetDispatchQueue, _lib, "MDQuerySetDispatchQueue")
 	}
-	_fnMDQuerySetDispatchQueue(objref.IDOf(query), objref.IDOf(queue))
+	_fnMDQuerySetDispatchQueue(objref.IDOf(query), objc.ID(uintptr(queue.Ptr())))
 }
 
 var _fnMDQuerySetMaxCount func(objc.ID, int)

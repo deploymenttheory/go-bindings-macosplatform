@@ -8,6 +8,8 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/xpc"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	ebipurego "github.com/ebitengine/purego"
@@ -1478,15 +1480,15 @@ func SecCodeCopyStaticCode(code obj.Object, flags SecCSFlags, staticCode unsafe.
 	return nil
 }
 
-var _fnSecCodeCreateWithXPCMessage func(unsafe.Pointer, SecCSFlags, unsafe.Pointer) int32
+var _fnSecCodeCreateWithXPCMessage func(objc.ID, SecCSFlags, unsafe.Pointer) int32
 
 // SecCodeCreateWithXPCMessage reports an error if the Security framework function SecCodeCreateWithXPCMessage fails.
-func SecCodeCreateWithXPCMessage(message unsafe.Pointer, flags SecCSFlags, target unsafe.Pointer) error {
+func SecCodeCreateWithXPCMessage(message xpc.Object, flags SecCSFlags, target unsafe.Pointer) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCodeCreateWithXPCMessage == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCodeCreateWithXPCMessage, _lib, "SecCodeCreateWithXPCMessage")
 	}
-	_rc := _fnSecCodeCreateWithXPCMessage(message, flags, target)
+	_rc := _fnSecCodeCreateWithXPCMessage(objc.ID(uintptr(message.Ptr())), flags, target)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -2526,30 +2528,30 @@ func SecTrustCreateWithCertificates(certificates obj.Object, policies obj.Object
 	return nil
 }
 
-var _fnSecTrustEvaluateAsync func(objc.ID, unsafe.Pointer, objc.Block) int32
+var _fnSecTrustEvaluateAsync func(objc.ID, objc.ID, objc.Block) int32
 
 // SecTrustEvaluateAsync reports an error if the Security framework function SecTrustEvaluateAsync fails.
-func SecTrustEvaluateAsync(trust obj.Object, queue unsafe.Pointer, result func(unsafe.Pointer, SecTrustResultType)) error {
+func SecTrustEvaluateAsync(trust obj.Object, queue dispatch.Queue, result func(unsafe.Pointer, SecTrustResultType)) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustEvaluateAsync == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustEvaluateAsync, _lib, "SecTrustEvaluateAsync")
 	}
-	_rc := _fnSecTrustEvaluateAsync(objref.IDOf(trust), queue, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 SecTrustResultType) { result(_b0, _b1) }))
+	_rc := _fnSecTrustEvaluateAsync(objref.IDOf(trust), objc.ID(uintptr(queue.Ptr())), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 SecTrustResultType) { result(_b0, _b1) }))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-var _fnSecTrustEvaluateAsyncWithError func(objc.ID, unsafe.Pointer, objc.Block) int32
+var _fnSecTrustEvaluateAsyncWithError func(objc.ID, objc.ID, objc.Block) int32
 
 // SecTrustEvaluateAsyncWithError reports an error if the Security framework function SecTrustEvaluateAsyncWithError fails.
-func SecTrustEvaluateAsyncWithError(trust obj.Object, queue unsafe.Pointer, result func(unsafe.Pointer, bool, unsafe.Pointer)) error {
+func SecTrustEvaluateAsyncWithError(trust obj.Object, queue dispatch.Queue, result func(unsafe.Pointer, bool, unsafe.Pointer)) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustEvaluateAsyncWithError == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustEvaluateAsyncWithError, _lib, "SecTrustEvaluateAsyncWithError")
 	}
-	_rc := _fnSecTrustEvaluateAsyncWithError(objref.IDOf(trust), queue, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 bool, _b2 unsafe.Pointer) { result(_b0, _b1, _b2) }))
+	_rc := _fnSecTrustEvaluateAsyncWithError(objref.IDOf(trust), objc.ID(uintptr(queue.Ptr())), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 bool, _b2 unsafe.Pointer) { result(_b0, _b1, _b2) }))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}

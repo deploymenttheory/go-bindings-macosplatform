@@ -9,6 +9,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/rt"
@@ -113,9 +114,8 @@ func (mdcsp *MTRDeviceControllerStartupParams) WithIntermediateCertificate(inter
 }
 
 // WithOperationalCertificateIssuerQueue sets the operational certificate issuer queue.
-func (mdcsp *MTRDeviceControllerStartupParams) WithOperationalCertificateIssuerQueue(operationalCertificateIssuerQueue obj.Object) *MTRDeviceControllerStartupParams {
-	defer runtime.KeepAlive(operationalCertificateIssuerQueue)
-	objc.Send[objc.ID](objref.IDOf(mdcsp), objc.RegisterName("setOperationalCertificateIssuerQueue:"), objref.IDOf(operationalCertificateIssuerQueue))
+func (mdcsp *MTRDeviceControllerStartupParams) WithOperationalCertificateIssuerQueue(operationalCertificateIssuerQueue dispatch.Queue) *MTRDeviceControllerStartupParams {
+	objc.Send[objc.ID](objref.IDOf(mdcsp), objc.RegisterName("setOperationalCertificateIssuerQueue:"), objc.ID(uintptr(operationalCertificateIssuerQueue.Ptr())))
 	return mdcsp
 }
 

@@ -8,6 +8,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
@@ -83,12 +84,12 @@ func ODQuerySetCallback(query obj.Object, callback unsafe.Pointer, userInfo unsa
 var _fnODQuerySetDispatchQueue func(objc.ID, objc.ID)
 
 // ODQuerySetDispatchQueue calls the CFOpenDirectory framework function ODQuerySetDispatchQueue.
-func ODQuerySetDispatchQueue(query obj.Object, queue obj.Object) {
+func ODQuerySetDispatchQueue(query obj.Object, queue dispatch.Queue) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODQuerySetDispatchQueue == nil {
 		ebipurego.RegisterLibFunc(&_fnODQuerySetDispatchQueue, _lib, "ODQuerySetDispatchQueue")
 	}
-	_fnODQuerySetDispatchQueue(objref.IDOf(query), objref.IDOf(queue))
+	_fnODQuerySetDispatchQueue(objref.IDOf(query), objc.ID(uintptr(queue.Ptr())))
 }
 
 var _fnODQuerySynchronize func(objc.ID)

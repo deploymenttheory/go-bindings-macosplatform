@@ -8,6 +8,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
@@ -3405,15 +3406,15 @@ func SecKeyCopyPublicKey(key obj.Object) obj.Object {
 	return obj.Wrap(_ret)
 }
 
-var _fnSecKeyGeneratePairAsync func(objc.ID, unsafe.Pointer, objc.Block)
+var _fnSecKeyGeneratePairAsync func(objc.ID, objc.ID, objc.Block)
 
 // SecKeyGeneratePairAsync calls the Security framework function SecKeyGeneratePairAsync.
-func SecKeyGeneratePairAsync(parameters obj.Object, deliveryQueue unsafe.Pointer, result func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)) {
+func SecKeyGeneratePairAsync(parameters obj.Object, deliveryQueue dispatch.Queue, result func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeyGeneratePairAsync == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeyGeneratePairAsync, _lib, "SecKeyGeneratePairAsync")
 	}
-	_fnSecKeyGeneratePairAsync(objref.IDOf(parameters), deliveryQueue, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 unsafe.Pointer, _b2 unsafe.Pointer) { result(_b0, _b1, _b2) }))
+	_fnSecKeyGeneratePairAsync(objref.IDOf(parameters), objc.ID(uintptr(deliveryQueue.Ptr())), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 unsafe.Pointer, _b2 unsafe.Pointer) { result(_b0, _b1, _b2) }))
 }
 
 var _fnSecKeyGetBlockSize func(objc.ID) int
@@ -4125,15 +4126,15 @@ func SecTransformCustomSetAttribute(ref obj.Object, attribute unsafe.Pointer, ty
 	return obj.Wrap(_ret)
 }
 
-var _fnSecTransformExecuteAsync func(unsafe.Pointer, unsafe.Pointer, objc.Block)
+var _fnSecTransformExecuteAsync func(unsafe.Pointer, objc.ID, objc.Block)
 
 // SecTransformExecuteAsync calls the Security framework function SecTransformExecuteAsync.
-func SecTransformExecuteAsync(transformRef unsafe.Pointer, deliveryQueue unsafe.Pointer, deliveryBlock func(unsafe.Pointer, unsafe.Pointer, uint8)) {
+func SecTransformExecuteAsync(transformRef unsafe.Pointer, deliveryQueue dispatch.Queue, deliveryBlock func(unsafe.Pointer, unsafe.Pointer, uint8)) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTransformExecuteAsync == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTransformExecuteAsync, _lib, "SecTransformExecuteAsync")
 	}
-	_fnSecTransformExecuteAsync(transformRef, deliveryQueue, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 unsafe.Pointer, _b2 uint8) { deliveryBlock(_b0, _b1, _b2) }))
+	_fnSecTransformExecuteAsync(transformRef, objc.ID(uintptr(deliveryQueue.Ptr())), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 unsafe.Pointer, _b2 uint8) { deliveryBlock(_b0, _b1, _b2) }))
 }
 
 var _fnSecTransformFindByName func(unsafe.Pointer, objc.ID) unsafe.Pointer
@@ -4796,15 +4797,15 @@ func SecProtocolMetadataPeersAreEqual(metadataA unsafe.Pointer, metadataB unsafe
 	return _fnSecProtocolMetadataPeersAreEqual(metadataA, metadataB)
 }
 
-var _fnSecProtocolOptionsAddPreSharedKey func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnSecProtocolOptionsAddPreSharedKey func(unsafe.Pointer, objc.ID, objc.ID)
 
 // SecProtocolOptionsAddPreSharedKey calls the Security framework function sec_protocol_options_add_pre_shared_key.
-func SecProtocolOptionsAddPreSharedKey(options unsafe.Pointer, psk unsafe.Pointer, pskIdentity unsafe.Pointer) {
+func SecProtocolOptionsAddPreSharedKey(options unsafe.Pointer, psk dispatch.Data, pskIdentity dispatch.Data) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecProtocolOptionsAddPreSharedKey == nil {
 		ebipurego.RegisterLibFunc(&_fnSecProtocolOptionsAddPreSharedKey, _lib, "sec_protocol_options_add_pre_shared_key")
 	}
-	_fnSecProtocolOptionsAddPreSharedKey(options, psk, pskIdentity)
+	_fnSecProtocolOptionsAddPreSharedKey(options, objc.ID(uintptr(psk.Ptr())), objc.ID(uintptr(pskIdentity.Ptr())))
 }
 
 var _fnSecProtocolOptionsAddTlsApplicationProtocol func(unsafe.Pointer, string)
@@ -4917,26 +4918,26 @@ func SecProtocolOptionsGetDefaultMinTlsProtocolVersion() TLSProtocolVersion {
 	return _fnSecProtocolOptionsGetDefaultMinTlsProtocolVersion()
 }
 
-var _fnSecProtocolOptionsSetChallengeBlock func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnSecProtocolOptionsSetChallengeBlock func(unsafe.Pointer, unsafe.Pointer, objc.ID)
 
 // SecProtocolOptionsSetChallengeBlock calls the Security framework function sec_protocol_options_set_challenge_block.
-func SecProtocolOptionsSetChallengeBlock(options unsafe.Pointer, challengeBlock unsafe.Pointer, challengeQueue unsafe.Pointer) {
+func SecProtocolOptionsSetChallengeBlock(options unsafe.Pointer, challengeBlock unsafe.Pointer, challengeQueue dispatch.Queue) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecProtocolOptionsSetChallengeBlock == nil {
 		ebipurego.RegisterLibFunc(&_fnSecProtocolOptionsSetChallengeBlock, _lib, "sec_protocol_options_set_challenge_block")
 	}
-	_fnSecProtocolOptionsSetChallengeBlock(options, challengeBlock, challengeQueue)
+	_fnSecProtocolOptionsSetChallengeBlock(options, challengeBlock, objc.ID(uintptr(challengeQueue.Ptr())))
 }
 
-var _fnSecProtocolOptionsSetKeyUpdateBlock func(unsafe.Pointer, objc.Block, unsafe.Pointer)
+var _fnSecProtocolOptionsSetKeyUpdateBlock func(unsafe.Pointer, objc.Block, objc.ID)
 
 // SecProtocolOptionsSetKeyUpdateBlock calls the Security framework function sec_protocol_options_set_key_update_block.
-func SecProtocolOptionsSetKeyUpdateBlock(options unsafe.Pointer, keyUpdateBlock func(unsafe.Pointer, func()), keyUpdateQueue unsafe.Pointer) {
+func SecProtocolOptionsSetKeyUpdateBlock(options unsafe.Pointer, keyUpdateBlock func(unsafe.Pointer, func()), keyUpdateQueue dispatch.Queue) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecProtocolOptionsSetKeyUpdateBlock == nil {
 		ebipurego.RegisterLibFunc(&_fnSecProtocolOptionsSetKeyUpdateBlock, _lib, "sec_protocol_options_set_key_update_block")
 	}
-	_fnSecProtocolOptionsSetKeyUpdateBlock(options, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 func()) { keyUpdateBlock(_b0, _b1) }), keyUpdateQueue)
+	_fnSecProtocolOptionsSetKeyUpdateBlock(options, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 func()) { keyUpdateBlock(_b0, _b1) }), objc.ID(uintptr(keyUpdateQueue.Ptr())))
 }
 
 var _fnSecProtocolOptionsSetLocalIdentity func(unsafe.Pointer, unsafe.Pointer)
@@ -4983,26 +4984,26 @@ func SecProtocolOptionsSetPeerAuthenticationRequired(options unsafe.Pointer, pee
 	_fnSecProtocolOptionsSetPeerAuthenticationRequired(options, peerAuthenticationRequired)
 }
 
-var _fnSecProtocolOptionsSetPreSharedKeySelectionBlock func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnSecProtocolOptionsSetPreSharedKeySelectionBlock func(unsafe.Pointer, unsafe.Pointer, objc.ID)
 
 // SecProtocolOptionsSetPreSharedKeySelectionBlock calls the Security framework function sec_protocol_options_set_pre_shared_key_selection_block.
-func SecProtocolOptionsSetPreSharedKeySelectionBlock(options unsafe.Pointer, pskSelectionBlock unsafe.Pointer, pskSelectionQueue unsafe.Pointer) {
+func SecProtocolOptionsSetPreSharedKeySelectionBlock(options unsafe.Pointer, pskSelectionBlock unsafe.Pointer, pskSelectionQueue dispatch.Queue) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecProtocolOptionsSetPreSharedKeySelectionBlock == nil {
 		ebipurego.RegisterLibFunc(&_fnSecProtocolOptionsSetPreSharedKeySelectionBlock, _lib, "sec_protocol_options_set_pre_shared_key_selection_block")
 	}
-	_fnSecProtocolOptionsSetPreSharedKeySelectionBlock(options, pskSelectionBlock, pskSelectionQueue)
+	_fnSecProtocolOptionsSetPreSharedKeySelectionBlock(options, pskSelectionBlock, objc.ID(uintptr(pskSelectionQueue.Ptr())))
 }
 
-var _fnSecProtocolOptionsSetTlsDiffieHellmanParameters func(unsafe.Pointer, unsafe.Pointer)
+var _fnSecProtocolOptionsSetTlsDiffieHellmanParameters func(unsafe.Pointer, objc.ID)
 
 // SecProtocolOptionsSetTlsDiffieHellmanParameters calls the Security framework function sec_protocol_options_set_tls_diffie_hellman_parameters.
-func SecProtocolOptionsSetTlsDiffieHellmanParameters(options unsafe.Pointer, params unsafe.Pointer) {
+func SecProtocolOptionsSetTlsDiffieHellmanParameters(options unsafe.Pointer, params dispatch.Data) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecProtocolOptionsSetTlsDiffieHellmanParameters == nil {
 		ebipurego.RegisterLibFunc(&_fnSecProtocolOptionsSetTlsDiffieHellmanParameters, _lib, "sec_protocol_options_set_tls_diffie_hellman_parameters")
 	}
-	_fnSecProtocolOptionsSetTlsDiffieHellmanParameters(options, params)
+	_fnSecProtocolOptionsSetTlsDiffieHellmanParameters(options, objc.ID(uintptr(params.Ptr())))
 }
 
 var _fnSecProtocolOptionsSetTlsFalseStartEnabled func(unsafe.Pointer, bool)
@@ -5060,15 +5061,15 @@ func SecProtocolOptionsSetTlsOcspEnabled(options unsafe.Pointer, ocspEnabled boo
 	_fnSecProtocolOptionsSetTlsOcspEnabled(options, ocspEnabled)
 }
 
-var _fnSecProtocolOptionsSetTlsPreSharedKeyIdentityHint func(unsafe.Pointer, unsafe.Pointer)
+var _fnSecProtocolOptionsSetTlsPreSharedKeyIdentityHint func(unsafe.Pointer, objc.ID)
 
 // SecProtocolOptionsSetTlsPreSharedKeyIdentityHint calls the Security framework function sec_protocol_options_set_tls_pre_shared_key_identity_hint.
-func SecProtocolOptionsSetTlsPreSharedKeyIdentityHint(options unsafe.Pointer, pskIdentityHint unsafe.Pointer) {
+func SecProtocolOptionsSetTlsPreSharedKeyIdentityHint(options unsafe.Pointer, pskIdentityHint dispatch.Data) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecProtocolOptionsSetTlsPreSharedKeyIdentityHint == nil {
 		ebipurego.RegisterLibFunc(&_fnSecProtocolOptionsSetTlsPreSharedKeyIdentityHint, _lib, "sec_protocol_options_set_tls_pre_shared_key_identity_hint")
 	}
-	_fnSecProtocolOptionsSetTlsPreSharedKeyIdentityHint(options, pskIdentityHint)
+	_fnSecProtocolOptionsSetTlsPreSharedKeyIdentityHint(options, objc.ID(uintptr(pskIdentityHint.Ptr())))
 }
 
 var _fnSecProtocolOptionsSetTlsRenegotiationEnabled func(unsafe.Pointer, bool)
@@ -5126,15 +5127,15 @@ func SecProtocolOptionsSetTlsTicketsEnabled(options unsafe.Pointer, ticketsEnabl
 	_fnSecProtocolOptionsSetTlsTicketsEnabled(options, ticketsEnabled)
 }
 
-var _fnSecProtocolOptionsSetVerifyBlock func(unsafe.Pointer, objc.Block, unsafe.Pointer)
+var _fnSecProtocolOptionsSetVerifyBlock func(unsafe.Pointer, objc.Block, objc.ID)
 
 // SecProtocolOptionsSetVerifyBlock calls the Security framework function sec_protocol_options_set_verify_block.
-func SecProtocolOptionsSetVerifyBlock(options unsafe.Pointer, verifyBlock func(unsafe.Pointer, unsafe.Pointer, func(bool)), verifyBlockQueue unsafe.Pointer) {
+func SecProtocolOptionsSetVerifyBlock(options unsafe.Pointer, verifyBlock func(unsafe.Pointer, unsafe.Pointer, func(bool)), verifyBlockQueue dispatch.Queue) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecProtocolOptionsSetVerifyBlock == nil {
 		ebipurego.RegisterLibFunc(&_fnSecProtocolOptionsSetVerifyBlock, _lib, "sec_protocol_options_set_verify_block")
 	}
-	_fnSecProtocolOptionsSetVerifyBlock(options, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 unsafe.Pointer, _b2 func(bool)) { verifyBlock(_b0, _b1, _b2) }), verifyBlockQueue)
+	_fnSecProtocolOptionsSetVerifyBlock(options, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 unsafe.Pointer, _b2 func(bool)) { verifyBlock(_b0, _b1, _b2) }), objc.ID(uintptr(verifyBlockQueue.Ptr())))
 }
 
 var _fnSecRelease func(unsafe.Pointer)

@@ -8,6 +8,7 @@ import (
 	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/rt"
@@ -48,21 +49,19 @@ func mTRClusterRelativeHumidityMeasurementAdopt(id objc.ID) *MTRClusterRelativeH
 }
 
 // NewMTRClusterRelativeHumidityMeasurementWithDeviceEndpointIDQueue the queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
-func NewMTRClusterRelativeHumidityMeasurementWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterRelativeHumidityMeasurement {
+func NewMTRClusterRelativeHumidityMeasurementWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue dispatch.Queue) *MTRClusterRelativeHumidityMeasurement {
 	defer runtime.KeepAlive(device)
 	defer runtime.KeepAlive(endpointID)
-	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterRelativeHumidityMeasurement")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objc.ID(uintptr(queue.Ptr())))
 	return mTRClusterRelativeHumidityMeasurementAdopt(_id)
 }
 
 // NewMTRClusterRelativeHumidityMeasurementWithDeviceEndpointQueue creates a new MTRClusterRelativeHumidityMeasurement.
-func NewMTRClusterRelativeHumidityMeasurementWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterRelativeHumidityMeasurement {
+func NewMTRClusterRelativeHumidityMeasurementWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue dispatch.Queue) *MTRClusterRelativeHumidityMeasurement {
 	defer runtime.KeepAlive(device)
-	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterRelativeHumidityMeasurement")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objc.ID(uintptr(queue.Ptr())))
 	return mTRClusterRelativeHumidityMeasurementAdopt(_id)
 }
 

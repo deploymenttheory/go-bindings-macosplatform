@@ -9,6 +9,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
@@ -102,10 +103,9 @@ func (cs *CaptureSlider) WithEnabled(enabled bool) *CaptureSlider {
 }
 
 // SetActionQueueAction sets the action to perform on the specified dispatch queue when the slider’s value changes.
-func (cs *CaptureSlider) SetActionQueueAction(actionQueue obj.Object, action func(float32)) {
+func (cs *CaptureSlider) SetActionQueueAction(actionQueue dispatch.Queue, action func(float32)) {
 	defer runtime.KeepAlive(cs)
-	defer runtime.KeepAlive(actionQueue)
-	objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("setActionQueue:action:"), objref.IDOf(actionQueue), objc.NewBlock(func(_ objc.Block, _b0 float32) { action(_b0) }))
+	objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("setActionQueue:action:"), objc.ID(uintptr(actionQueue.Ptr())), objc.NewBlock(func(_ objc.Block, _b0 float32) { action(_b0) }))
 }
 
 // Value returns the current value of the slider. Because the camera system may be independent from the main thread or `

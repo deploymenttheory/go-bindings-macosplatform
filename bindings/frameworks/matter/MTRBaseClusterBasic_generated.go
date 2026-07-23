@@ -10,6 +10,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,11 +51,10 @@ func mTRBaseClusterBasicAdopt(id objc.ID) *MTRBaseClusterBasic {
 }
 
 // NewMTRBaseClusterBasicWithDeviceEndpointQueue creates a new MTRBaseClusterBasic.
-func NewMTRBaseClusterBasicWithDeviceEndpointQueue(device *MTRBaseDevice, endpoint uint16, queue obj.Object) *MTRBaseClusterBasic {
+func NewMTRBaseClusterBasicWithDeviceEndpointQueue(device *MTRBaseDevice, endpoint uint16, queue dispatch.Queue) *MTRBaseClusterBasic {
 	defer runtime.KeepAlive(device)
-	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterBasic")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objc.ID(uintptr(queue.Ptr())))
 	return mTRBaseClusterBasicAdopt(_id)
 }
 

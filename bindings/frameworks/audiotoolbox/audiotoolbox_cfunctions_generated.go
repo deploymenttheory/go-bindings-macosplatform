@@ -8,6 +8,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
@@ -27,12 +28,12 @@ func AUEventListenerAddEventType(inListener unsafe.Pointer, inObject unsafe.Poin
 var _fnAUEventListenerCreateWithDispatchQueue func(unsafe.Pointer, float32, float32, objc.ID, unsafe.Pointer) int32
 
 // AUEventListenerCreateWithDispatchQueue calls the AudioToolbox framework function AUEventListenerCreateWithDispatchQueue.
-func AUEventListenerCreateWithDispatchQueue(outListener unsafe.Pointer, inNotificationInterval float32, inValueChangeGranularity float32, inDispatchQueue obj.Object, inBlock unsafe.Pointer) int {
+func AUEventListenerCreateWithDispatchQueue(outListener unsafe.Pointer, inNotificationInterval float32, inValueChangeGranularity float32, inDispatchQueue dispatch.Queue, inBlock unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAUEventListenerCreateWithDispatchQueue == nil {
 		ebipurego.RegisterLibFunc(&_fnAUEventListenerCreateWithDispatchQueue, _lib, "AUEventListenerCreateWithDispatchQueue")
 	}
-	return int(_fnAUEventListenerCreateWithDispatchQueue(outListener, inNotificationInterval, inValueChangeGranularity, objref.IDOf(inDispatchQueue), inBlock))
+	return int(_fnAUEventListenerCreateWithDispatchQueue(outListener, inNotificationInterval, inValueChangeGranularity, objc.ID(uintptr(inDispatchQueue.Ptr())), inBlock))
 }
 
 var _fnAUEventListenerNotify func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
@@ -371,12 +372,12 @@ func AUListenerAddParameter(inListener obj.Object, inObject unsafe.Pointer, inPa
 var _fnAUListenerCreateWithDispatchQueue func(unsafe.Pointer, float32, objc.ID, unsafe.Pointer) int32
 
 // AUListenerCreateWithDispatchQueue calls the AudioToolbox framework function AUListenerCreateWithDispatchQueue.
-func AUListenerCreateWithDispatchQueue(outListener unsafe.Pointer, inNotificationInterval float32, inDispatchQueue obj.Object, inBlock unsafe.Pointer) int {
+func AUListenerCreateWithDispatchQueue(outListener unsafe.Pointer, inNotificationInterval float32, inDispatchQueue dispatch.Queue, inBlock unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAUListenerCreateWithDispatchQueue == nil {
 		ebipurego.RegisterLibFunc(&_fnAUListenerCreateWithDispatchQueue, _lib, "AUListenerCreateWithDispatchQueue")
 	}
-	return int(_fnAUListenerCreateWithDispatchQueue(outListener, inNotificationInterval, objref.IDOf(inDispatchQueue), inBlock))
+	return int(_fnAUListenerCreateWithDispatchQueue(outListener, inNotificationInterval, objc.ID(uintptr(inDispatchQueue.Ptr())), inBlock))
 }
 
 var _fnAUListenerRemoveParameter func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
@@ -1827,12 +1828,12 @@ func AudioQueueNewInput(inFormat unsafe.Pointer, inCallbackProc unsafe.Pointer, 
 var _fnAudioQueueNewInputWithDispatchQueue func(unsafe.Pointer, unsafe.Pointer, int, objc.ID, unsafe.Pointer) int32
 
 // AudioQueueNewInputWithDispatchQueue calls the AudioToolbox framework function AudioQueueNewInputWithDispatchQueue.
-func AudioQueueNewInputWithDispatchQueue(outAQ unsafe.Pointer, inFormat unsafe.Pointer, inFlags int, inCallbackDispatchQueue obj.Object, inCallbackBlock unsafe.Pointer) int {
+func AudioQueueNewInputWithDispatchQueue(outAQ unsafe.Pointer, inFormat unsafe.Pointer, inFlags int, inCallbackDispatchQueue dispatch.Queue, inCallbackBlock unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAudioQueueNewInputWithDispatchQueue == nil {
 		ebipurego.RegisterLibFunc(&_fnAudioQueueNewInputWithDispatchQueue, _lib, "AudioQueueNewInputWithDispatchQueue")
 	}
-	return int(_fnAudioQueueNewInputWithDispatchQueue(outAQ, inFormat, inFlags, objref.IDOf(inCallbackDispatchQueue), inCallbackBlock))
+	return int(_fnAudioQueueNewInputWithDispatchQueue(outAQ, inFormat, inFlags, objc.ID(uintptr(inCallbackDispatchQueue.Ptr())), inCallbackBlock))
 }
 
 var _fnAudioQueueNewOutput func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, objc.ID, objc.ID, int, unsafe.Pointer) int32
@@ -1849,12 +1850,12 @@ func AudioQueueNewOutput(inFormat unsafe.Pointer, inCallbackProc unsafe.Pointer,
 var _fnAudioQueueNewOutputWithDispatchQueue func(unsafe.Pointer, unsafe.Pointer, int, objc.ID, unsafe.Pointer) int32
 
 // AudioQueueNewOutputWithDispatchQueue calls the AudioToolbox framework function AudioQueueNewOutputWithDispatchQueue.
-func AudioQueueNewOutputWithDispatchQueue(outAQ unsafe.Pointer, inFormat unsafe.Pointer, inFlags int, inCallbackDispatchQueue obj.Object, inCallbackBlock unsafe.Pointer) int {
+func AudioQueueNewOutputWithDispatchQueue(outAQ unsafe.Pointer, inFormat unsafe.Pointer, inFlags int, inCallbackDispatchQueue dispatch.Queue, inCallbackBlock unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAudioQueueNewOutputWithDispatchQueue == nil {
 		ebipurego.RegisterLibFunc(&_fnAudioQueueNewOutputWithDispatchQueue, _lib, "AudioQueueNewOutputWithDispatchQueue")
 	}
-	return int(_fnAudioQueueNewOutputWithDispatchQueue(outAQ, inFormat, inFlags, objref.IDOf(inCallbackDispatchQueue), inCallbackBlock))
+	return int(_fnAudioQueueNewOutputWithDispatchQueue(outAQ, inFormat, inFlags, objc.ID(uintptr(inCallbackDispatchQueue.Ptr())), inCallbackBlock))
 }
 
 var _fnAudioQueueOfflineRender func(objc.ID, unsafe.Pointer, unsafe.Pointer, int) int32
