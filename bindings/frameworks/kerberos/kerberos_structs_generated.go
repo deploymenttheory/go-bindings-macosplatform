@@ -236,28 +236,28 @@ type KimIdentityOpaque struct{}
 type KimOptionsOpaque struct{}
 
 type Krb5Address struct {
-	Magic    int
-	Addrtype int
+	Magic    int32
+	Addrtype int32
 	Length   uint32
 	Contents unsafe.Pointer
 }
 
 type Krb5ApRep struct {
-	Magic   int
+	Magic   int32
 	EncPart Krb5EncData
 }
 
 type Krb5ApRepEncPart struct {
-	Magic     int
-	Ctime     int
-	Cusec     int
+	Magic     int32
+	Ctime     int32
+	Cusec     int32
 	Subkey    unsafe.Pointer
-	SeqNumber uint
+	SeqNumber uint32
 }
 
 type Krb5ApReq struct {
-	Magic         int
-	ApOptions     int
+	Magic         int32
+	ApOptions     int32
 	Ticket        unsafe.Pointer
 	Authenticator Krb5EncData
 }
@@ -265,20 +265,20 @@ type Krb5ApReq struct {
 type Krb5AuthContext struct{}
 
 type Krb5Authdata struct {
-	Magic    int
-	AdType   int
+	Magic    int32
+	AdType   int32
 	Length   uint32
 	Contents unsafe.Pointer
 }
 
 type Krb5Authenticator struct {
-	Magic             int
+	Magic             int32
 	Client            unsafe.Pointer
 	Checksum          unsafe.Pointer
-	Cusec             int
-	Ctime             int
+	Cusec             int32
+	Ctime             int32
 	Subkey            unsafe.Pointer
-	SeqNumber         uint
+	SeqNumber         uint32
 	AuthorizationData unsafe.Pointer
 }
 
@@ -289,8 +289,8 @@ type Krb5Ccache struct{}
 type Krb5CccolCursor struct{}
 
 type Krb5Checksum struct {
-	Magic        int
-	ChecksumType int
+	Magic        int32
+	ChecksumType int32
 	Length       uint32
 	Contents     unsafe.Pointer
 }
@@ -298,40 +298,40 @@ type Krb5Checksum struct {
 type Krb5Context struct{}
 
 type Krb5Cred struct {
-	Magic    int
+	Magic    int32
 	Tickets  unsafe.Pointer
 	EncPart  Krb5EncData
 	EncPart2 unsafe.Pointer
 }
 
 type Krb5CredEncPart struct {
-	Magic      int
-	Nonce      int
-	Timestamp  int
-	Usec       int
+	Magic      int32
+	Nonce      int32
+	Timestamp  int32
+	Usec       int32
 	SAddress   unsafe.Pointer
 	RAddress   unsafe.Pointer
 	TicketInfo unsafe.Pointer
 }
 
 type Krb5CredInfo struct {
-	Magic   int
+	Magic   int32
 	Session unsafe.Pointer
 	Client  unsafe.Pointer
 	Server  unsafe.Pointer
-	Flags   int
+	Flags   int32
 	Times   Krb5TicketTimes
 	Caddrs  unsafe.Pointer
 }
 
 type Krb5Creds struct {
-	Magic        int
+	Magic        int32
 	Client       unsafe.Pointer
 	Server       unsafe.Pointer
 	Keyblock     Krb5Keyblock
 	Times        Krb5TicketTimes
-	IsSkey       uint
-	TicketFlags  int
+	IsSkey       uint32
+	TicketFlags  int32
 	Addresses    unsafe.Pointer
 	Ticket       Krb5Data
 	SecondTicket Krb5Data
@@ -341,34 +341,34 @@ type Krb5Creds struct {
 type Krb5CryptosystemEntry struct{}
 
 type Krb5Data struct {
-	Magic  int
+	Magic  int32
 	Length uint32
 	Data   unsafe.Pointer
 }
 
 type Krb5EncData struct {
-	Magic      int
-	Enctype    int
-	Kvno       uint
+	Magic      int32
+	Enctype    int32
+	Kvno       uint32
 	Ciphertext Krb5Data
 }
 
 type Krb5EncKdcRepPart struct {
-	Magic   int
-	MsgType uint
+	Magic   int32
+	MsgType uint32
 	Session unsafe.Pointer
 	LastReq unsafe.Pointer
-	Nonce   int
-	KeyExp  int
-	Flags   int
+	Nonce   int32
+	KeyExp  int32
+	Flags   int32
 	Times   Krb5TicketTimes
 	Server  unsafe.Pointer
 	Caddrs  unsafe.Pointer
 }
 
 type Krb5EncTktPart struct {
-	Magic             int
-	Flags             int
+	Magic             int32
+	Flags             int32
 	Session           unsafe.Pointer
 	Client            unsafe.Pointer
 	Transited         Krb5Transited
@@ -378,18 +378,18 @@ type Krb5EncTktPart struct {
 }
 
 type Krb5EncryptBlock struct {
-	Magic       int
-	CryptoEntry int
+	Magic       int32
+	CryptoEntry int32
 	Key         unsafe.Pointer
 }
 
 type Krb5Error struct {
-	Magic  int
-	Ctime  int
-	Cusec  int
-	Susec  int
-	Stime  int
-	Error  uint
+	Magic  int32
+	Ctime  int32
+	Cusec  int32
+	Susec  int32
+	Stime  int32
+	Error  uint32
 	Client unsafe.Pointer
 	Server unsafe.Pointer
 	Text   Krb5Data
@@ -397,9 +397,9 @@ type Krb5Error struct {
 }
 
 type Krb5GetInitCredsOpt struct {
-	Flags             int
-	TktLife           int
-	RenewLife         int
+	Flags             int32
+	TktLife           int32
+	RenewLife         int32
 	Forwardable       int32
 	Proxiable         int32
 	EtypeList         unsafe.Pointer
@@ -416,8 +416,8 @@ type Krb5GicOptPaData struct {
 }
 
 type Krb5KdcRep struct {
-	Magic    int
-	MsgType  uint
+	Magic    int32
+	MsgType  uint32
 	Padata   unsafe.Pointer
 	Client   unsafe.Pointer
 	Ticket   unsafe.Pointer
@@ -426,16 +426,16 @@ type Krb5KdcRep struct {
 }
 
 type Krb5KdcReq struct {
-	Magic             int
-	MsgType           uint
+	Magic             int32
+	MsgType           uint32
 	Padata            unsafe.Pointer
-	KdcOptions        int
+	KdcOptions        int32
 	Client            unsafe.Pointer
 	Server            unsafe.Pointer
-	From              int
-	Till              int
-	Rtime             int
-	Nonce             int
+	From              int32
+	Till              int32
+	Rtime             int32
+	Nonce             int32
 	Nktypes           int32
 	Ktype             unsafe.Pointer
 	Addresses         unsafe.Pointer
@@ -445,47 +445,47 @@ type Krb5KdcReq struct {
 }
 
 type Krb5Keyblock struct {
-	Magic    int
-	Enctype  int
+	Magic    int32
+	Enctype  int32
 	Length   uint32
 	Contents unsafe.Pointer
 }
 
 type Krb5KeytabEntrySt struct {
-	Magic     int
+	Magic     int32
 	Principal unsafe.Pointer
-	Timestamp int
-	Vno       uint
+	Timestamp int32
+	Vno       uint32
 	Key       Krb5Keyblock
 }
 
 type Krb5Kt struct{}
 
 type Krb5LastReqEntry struct {
-	Magic  int
-	LrType int
-	Value  int
+	Magic  int32
+	LrType int32
+	Value  int32
 }
 
 type Krb5OctetData struct {
-	Magic  int
+	Magic  int32
 	Length uint32
 	Data   unsafe.Pointer
 }
 
 type Krb5PaData struct {
-	Magic    int
-	PaType   int
+	Magic    int32
+	PaType   int32
 	Length   uint32
 	Contents unsafe.Pointer
 }
 
 type Krb5PrincipalData struct {
-	Magic  int
+	Magic  int32
 	Realm  Krb5Data
 	Data   unsafe.Pointer
-	Length int
-	Type   int
+	Length int32
+	Type   int32
 }
 
 type Krb5Prompt struct {
@@ -495,7 +495,7 @@ type Krb5Prompt struct {
 }
 
 type Krb5PwdData struct {
-	Magic         int
+	Magic         int32
 	SequenceCount int32
 	Element       unsafe.Pointer
 }
@@ -503,53 +503,53 @@ type Krb5PwdData struct {
 type Krb5RcSt struct{}
 
 type Krb5ReplayData struct {
-	Timestamp int
-	Usec      int
-	Seq       uint
+	Timestamp int32
+	Usec      int32
+	Seq       uint32
 }
 
 type Krb5Response struct {
-	Magic         int
+	Magic         int32
 	MessageType   uint8
 	Response      Krb5Data
-	ExpectedNonce int
-	RequestTime   int
+	ExpectedNonce int32
+	RequestTime   int32
 }
 
 type Krb5Ticket struct {
-	Magic    int
+	Magic    int32
 	Server   unsafe.Pointer
 	EncPart  Krb5EncData
 	EncPart2 unsafe.Pointer
 }
 
 type Krb5TicketTimes struct {
-	Authtime  int
-	Starttime int
-	Endtime   int
-	RenewTill int
+	Authtime  int32
+	Starttime int32
+	Endtime   int32
+	RenewTill int32
 }
 
 type Krb5TktAuthent struct {
-	Magic         int
+	Magic         int32
 	Ticket        unsafe.Pointer
 	Authenticator unsafe.Pointer
-	ApOptions     int
+	ApOptions     int32
 }
 
 type Krb5Transited struct {
-	Magic      int
+	Magic      int32
 	TrType     uint8
 	TrContents Krb5Data
 }
 
 type Krb5VerifyInitCredsOpt struct {
-	Flags       int
+	Flags       int32
 	ApReqNofail int32
 }
 
 type PasswdPhraseElement struct {
-	Magic  int
+	Magic  int32
 	Passwd unsafe.Pointer
 	Phrase unsafe.Pointer
 }

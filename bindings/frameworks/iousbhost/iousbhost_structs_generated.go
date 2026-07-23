@@ -112,7 +112,7 @@ type IOUSBHostIOSourceDescriptors struct {
 
 // A structure that represents a single frame in an isochronous transfer.
 type IOUSBHostIsochronousFrame struct {
-	Status        int
+	Status        int32
 	RequestCount  uint32
 	CompleteCount uint32
 	Reserved      uint32
@@ -121,7 +121,7 @@ type IOUSBHostIsochronousFrame struct {
 
 // Structure representing a single frame or microframe in an isochronous transfer.
 type IOUSBHostIsochronousTransaction struct {
-	Status        int
+	Status        int32
 	RequestCount  uint32
 	Offset        uint32
 	CompleteCount uint32

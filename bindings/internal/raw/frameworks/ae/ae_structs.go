@@ -8,17 +8,17 @@ import (
 )
 
 type AEBuildError struct {
-	FError    uint
-	FErrorPos uint
+	FError    uint32
+	FErrorPos uint32
 }
 
 type AEDesc struct {
-	DescriptorType uint
+	DescriptorType uint32
 	DataHandle     unsafe.Pointer
 }
 
 type AEKeyDesc struct {
-	DescKey     uint
+	DescKey     uint32
 	DescContent AEDesc
 }
 
@@ -41,7 +41,7 @@ type IntlText struct {
 
 type OffsetArray struct {
 	FNumOfOffsets int16
-	FOffset       [1]int
+	FOffset       [1]int32
 }
 
 // OpaqueAEDataStorageType is an opaque type.
@@ -52,17 +52,17 @@ type OpaqueAEStreamRef struct{}
 
 type TScriptingSizeResource struct {
 	ScriptingSizeFlags int16
-	MinStackSize       uint
-	PreferredStackSize uint
-	MaxStackSize       uint
-	MinHeapSize        uint
-	PreferredHeapSize  uint
-	MaxHeapSize        uint
+	MinStackSize       uint32
+	PreferredStackSize uint32
+	MaxStackSize       uint32
+	MinHeapSize        uint32
+	PreferredHeapSize  uint32
+	MaxHeapSize        uint32
 }
 
 type TextRange struct {
-	FStart       int
-	FEnd         int
+	FStart       int32
+	FEnd         int32
 	FHiliteStyle int16
 }
 
@@ -78,6 +78,6 @@ type WritingCode struct {
 
 // C struct: ccntTokenRecord
 type CcntTokenRecord struct {
-	TokenClass uint
+	TokenClass uint32
 	Token      AEDesc
 }

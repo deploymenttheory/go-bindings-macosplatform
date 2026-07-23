@@ -22,8 +22,8 @@ type LSApplicationParameters struct {
 
 type LSItemInfoRecord struct {
 	Flags     LSItemInfoFlags
-	Filetype  uint
-	Creator   uint
+	Filetype  uint32
+	Creator   uint32
 	Extension unsafe.Pointer
 }
 

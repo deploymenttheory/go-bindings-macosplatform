@@ -45,6 +45,51 @@ func CMIODeviceStopStream(deviceID int, streamID int) error {
 	return nil
 }
 
+var _fnCMIOObjectAddPropertyListener func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CMIOObjectAddPropertyListener reports an error if the CoreMediaIO framework function CMIOObjectAddPropertyListener fails.
+func CMIOObjectAddPropertyListener(objectID int, address *CMIOObjectPropertyAddress, listener unsafe.Pointer, clientData unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMIOObjectAddPropertyListener == nil {
+		ebipurego.RegisterLibFunc(&_fnCMIOObjectAddPropertyListener, _lib, "CMIOObjectAddPropertyListener")
+	}
+	_rc := _fnCMIOObjectAddPropertyListener(objectID, unsafe.Pointer(address), listener, clientData)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnCMIOObjectRemovePropertyListener func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CMIOObjectRemovePropertyListener reports an error if the CoreMediaIO framework function CMIOObjectRemovePropertyListener fails.
+func CMIOObjectRemovePropertyListener(objectID int, address *CMIOObjectPropertyAddress, listener unsafe.Pointer, clientData unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMIOObjectRemovePropertyListener == nil {
+		ebipurego.RegisterLibFunc(&_fnCMIOObjectRemovePropertyListener, _lib, "CMIOObjectRemovePropertyListener")
+	}
+	_rc := _fnCMIOObjectRemovePropertyListener(objectID, unsafe.Pointer(address), listener, clientData)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnCMIOObjectSetPropertyData func(int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer) int32
+
+// CMIOObjectSetPropertyData reports an error if the CoreMediaIO framework function CMIOObjectSetPropertyData fails.
+func CMIOObjectSetPropertyData(objectID int, address *CMIOObjectPropertyAddress, qualifierDataSize int, qualifierData unsafe.Pointer, dataSize int, data unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMIOObjectSetPropertyData == nil {
+		ebipurego.RegisterLibFunc(&_fnCMIOObjectSetPropertyData, _lib, "CMIOObjectSetPropertyData")
+	}
+	_rc := _fnCMIOObjectSetPropertyData(objectID, unsafe.Pointer(address), qualifierDataSize, qualifierData, dataSize, data)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
 var _fnCMIOStreamClockCreate func(objc.ID, objc.ID, unsafe.Pointer, coremedia.CMTime, int, int, unsafe.Pointer) int32
 
 // CMIOStreamClockCreate reports an error if the CoreMediaIO framework function CMIOStreamClockCreate fails.

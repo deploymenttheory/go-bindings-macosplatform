@@ -9,41 +9,41 @@ import (
 )
 
 type TAccessControlEntry struct {
-	FGuestAccessFlags   uint
-	FDirMemberFlags     uint
-	FDirNodeMemberFlags uint
-	FOwnerFlags         uint
-	FAdministratorFlags uint
+	FGuestAccessFlags   uint32
+	FDirMemberFlags     uint32
+	FDirNodeMemberFlags uint32
+	FOwnerFlags         uint32
+	FAdministratorFlags uint32
 }
 
 type TAttributeEntry struct {
-	FReserved1             uint
+	FReserved1             uint32
 	FReserved2             TAccessControlEntry
-	FAttributeValueCount   uint
-	FAttributeDataSize     uint
-	FAttributeValueMaxSize uint
+	FAttributeValueCount   uint32
+	FAttributeDataSize     uint32
+	FAttributeValueMaxSize uint32
 	FAttributeSignature    TDataBuffer
 }
 
 type TAttributeValueEntry struct {
-	FAttributeValueID   uint
+	FAttributeValueID   uint32
 	FAttributeValueData TDataBuffer
 }
 
 type TDataBuffer struct {
-	FBufferSize   uint
-	FBufferLength uint
+	FBufferSize   uint32
+	FBufferLength uint32
 	FBufferData   [1]int8
 }
 
 type TDataList struct {
-	FDataNodeCount uint
+	FDataNodeCount uint32
 	FDataListHead  unsafe.Pointer
 }
 
 type TRecordEntry struct {
-	FReserved1            uint
+	FReserved1            uint32
 	FReserved2            TAccessControlEntry
-	FRecordAttributeCount uint
+	FRecordAttributeCount uint32
 	FRecordNameAndType    TDataBuffer
 }

@@ -1208,23 +1208,25 @@ func MIDIThruConnectionCreate(inPersistentOwnerID obj.Object, inConnectionParams
 var _fnMIDIThruConnectionParamsInitialize func(unsafe.Pointer)
 
 // MIDIThruConnectionParamsInitialize calls the CoreMIDI framework function MIDIThruConnectionParamsInitialize.
-func MIDIThruConnectionParamsInitialize(inConnectionParams unsafe.Pointer) {
+func MIDIThruConnectionParamsInitialize() (inConnectionParams MIDIThruConnectionParams) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDIThruConnectionParamsInitialize == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDIThruConnectionParamsInitialize, _lib, "MIDIThruConnectionParamsInitialize")
 	}
-	_fnMIDIThruConnectionParamsInitialize(inConnectionParams)
+	var _out0 MIDIThruConnectionParams
+	_fnMIDIThruConnectionParamsInitialize(unsafe.Pointer(&_out0))
+	return _out0
 }
 
 var _fnMIDIThruConnectionParamsSize func(unsafe.Pointer) int
 
 // MIDIThruConnectionParamsSize calls the CoreMIDI framework function MIDIThruConnectionParamsSize.
-func MIDIThruConnectionParamsSize(ptr unsafe.Pointer) int {
+func MIDIThruConnectionParamsSize(ptr *MIDIThruConnectionParams) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDIThruConnectionParamsSize == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDIThruConnectionParamsSize, _lib, "MIDIThruConnectionParamsSize")
 	}
-	return _fnMIDIThruConnectionParamsSize(ptr)
+	return _fnMIDIThruConnectionParamsSize(unsafe.Pointer(ptr))
 }
 
 var _fnMIDITicksSinceLastEventMessage func(int) uint32

@@ -13,7 +13,7 @@ import (
 type ATSFontFamilyIterator_ struct{}
 
 type ATSFontFilter struct {
-	Version        uint
+	Version        uint32
 	FilterSelector ATSFontFilterSelector
 	Filter         unsafe.Pointer
 }
@@ -22,7 +22,7 @@ type ATSFontFilter struct {
 type ATSFontIterator_ struct{}
 
 type ATSFontMetrics struct {
-	Version             uint
+	Version             uint32
 	Ascent              float64
 	Descent             float64
 	Leading             float64
@@ -46,7 +46,7 @@ type ATSFontNotificationInfoRef_ struct{}
 type ATSFontNotificationRef_ struct{}
 
 type ATSFontQuerySourceContext struct {
-	Version uint
+	Version uint32
 	RefCon  unsafe.Pointer
 	Retain  unsafe.Pointer
 	Release unsafe.Pointer
@@ -61,26 +61,26 @@ type ATSGlyphIdealMetrics struct {
 type ATSGlyphScreenMetrics struct {
 	DeviceAdvance    corefoundation.CGPoint
 	TopLeft          corefoundation.CGPoint
-	Height           uint
-	Width            uint
+	Height           uint32
+	Width            uint32
 	SideBearing      corefoundation.CGPoint
 	OtherSideBearing corefoundation.CGPoint
 }
 
 type ATSJustWidthDeltaEntryOverride struct {
-	BeforeGrowLimit   int
-	BeforeShrinkLimit int
-	AfterGrowLimit    int
-	AfterShrinkLimit  int
+	BeforeGrowLimit   int32
+	BeforeShrinkLimit int32
+	AfterGrowLimit    int32
+	AfterShrinkLimit  int32
 	GrowFlags         uint16
 	ShrinkFlags       uint16
 }
 
 type ATSLayoutRecord struct {
 	GlyphID        uint16
-	Flags          uint
+	Flags          uint32
 	OriginalOffset uint
-	RealPos        int
+	RealPos        int32
 }
 
 type ATSTrapezoid struct {
@@ -91,13 +91,13 @@ type ATSTrapezoid struct {
 }
 
 type ATSUCurvePath struct {
-	Vectors     uint
-	ControlBits [1]uint
+	Vectors     uint32
+	ControlBits [1]uint32
 	Vector      [1]corefoundation.CGPoint
 }
 
 type ATSUCurvePaths struct {
-	Contours uint
+	Contours uint32
 	Contour  [1]ATSUCurvePath
 }
 
@@ -107,13 +107,13 @@ type FMFontFamilyInstance struct {
 }
 
 type FMFontFamilyInstanceIterator struct {
-	Reserved [16]uint
+	Reserved [16]uint32
 }
 
 type FMFontFamilyIterator struct {
-	Reserved [16]uint
+	Reserved [16]uint32
 }
 
 type FMFontIterator struct {
-	Reserved [16]uint
+	Reserved [16]uint32
 }

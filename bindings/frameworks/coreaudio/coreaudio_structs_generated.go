@@ -13,19 +13,19 @@ import (
 // This structure describes which streams a given AudioDeviceIOProc will use. It is used in conjunction with kAudioDevicePropertyIOProcStreamUsage.
 type AudioHardwareIOProcStreamUsage struct {
 	MIOProc        unsafe.Pointer
-	MNumberStreams uint
-	MStreamIsOn    [1]uint
+	MNumberStreams uint32
+	MStreamIsOn    [1]uint32
 }
 
 // An AudioObjectPropertyAddress collects the three parts that identify a specific property together in a struct for easy transmission.
 type AudioObjectPropertyAddress struct {
-	MSelector uint
-	MScope    uint
-	MElement  uint
+	MSelector uint32
+	MScope    uint32
+	MElement  uint32
 }
 
 // This structure allows a specific sample rate range to be associated with an AudioStreamBasicDescription that specifies its sample rate as kAudioStreamAnyRate.
 type AudioStreamRangedDescription struct {
-	MFormat          unsafe.Pointer
+	MFormat          coreaudiotypes.AudioStreamBasicDescription
 	MSampleRateRange coreaudiotypes.AudioValueRange
 }

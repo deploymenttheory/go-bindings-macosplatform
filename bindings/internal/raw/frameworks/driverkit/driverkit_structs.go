@@ -150,7 +150,7 @@ type IORPCMessageErrorReturn struct {
 
 type IORPCMessageErrorReturnContent struct {
 	Hdr    IORPCMessage
-	Result int
+	Result int32
 	Pad    uint32
 }
 

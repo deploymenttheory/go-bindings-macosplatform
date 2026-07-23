@@ -12,7 +12,7 @@ type DRBurnSession struct{}
 
 // Callback functions passed to the progress dialog.
 type DRBurnSessionProgressCallbacks struct {
-	Version           uint
+	Version           uint32
 	ProgressWillBegin unsafe.Pointer
 	ProgressDidFinish unsafe.Pointer
 	BurnDidFinish     unsafe.Pointer
@@ -20,14 +20,14 @@ type DRBurnSessionProgressCallbacks struct {
 
 // Options passed into the progress dialog to configure it.
 type DRBurnSessionProgressDialogOptions struct {
-	Version           uint
-	DialogOptionFlags uint
+	Version           uint32
+	DialogOptionFlags uint32
 	Description       unsafe.Pointer
 }
 
 // Callback functions passed to the setup dialog.
 type DRBurnSessionSetupCallbacks struct {
-	Version                uint
+	Version                uint32
 	DeviceShouldBeTarget   unsafe.Pointer
 	ContainsSuitableMedia  unsafe.Pointer
 	DeviceSelectionChanged unsafe.Pointer
@@ -35,8 +35,8 @@ type DRBurnSessionSetupCallbacks struct {
 
 // Options passed into the setup dialog to configure it.
 type DRBurnSessionSetupDialogOptions struct {
-	Version            uint
-	DialogOptionFlags  uint
+	Version            uint32
+	DialogOptionFlags  uint32
 	DefaultButtonTitle unsafe.Pointer
 }
 
@@ -44,7 +44,7 @@ type DREraseSession struct{}
 
 // Callback functions passed to the progress dialog.
 type DREraseSessionProgressCallbacks struct {
-	Version           uint
+	Version           uint32
 	ProgressWillBegin unsafe.Pointer
 	ProgressDidFinish unsafe.Pointer
 	EraseDidFinish    unsafe.Pointer
@@ -52,14 +52,14 @@ type DREraseSessionProgressCallbacks struct {
 
 // Options passed into the progress dialog to configure it.
 type DREraseSessionProgressDialogOptions struct {
-	Version           uint
-	DialogOptionFlags uint
+	Version           uint32
+	DialogOptionFlags uint32
 	Description       unsafe.Pointer
 }
 
 // Callback functions passed to the setup dialog.
 type DREraseSessionSetupCallbacks struct {
-	Version                uint
+	Version                uint32
 	DeviceShouldBeTarget   unsafe.Pointer
 	ContainsSuitableMedia  unsafe.Pointer
 	DeviceSelectionChanged unsafe.Pointer
@@ -67,6 +67,6 @@ type DREraseSessionSetupCallbacks struct {
 
 // Options passed into the setup dialog to configure it.
 type DREraseSessionSetupDialogOptions struct {
-	Version           uint
-	DialogOptionFlags uint
+	Version           uint32
+	DialogOptionFlags uint32
 }

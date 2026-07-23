@@ -22,12 +22,12 @@ type AuthorizationItem struct {
 	Name        unsafe.Pointer
 	ValueLength uint
 	Value       unsafe.Pointer
-	Flags       uint
+	Flags       uint32
 }
 
 // A structure containing a set of authorization items.
 type AuthorizationItemSet struct {
-	Count uint
+	Count uint32
 	Items unsafe.Pointer
 }
 
@@ -1332,30 +1332,30 @@ type SecKeychain struct{}
 
 // A structure that holds a single keychain attribute.
 type SecKeychainAttribute struct {
-	Tag    uint
-	Length uint
+	Tag    uint32
+	Length uint32
 	Data   unsafe.Pointer
 }
 
 // A structure that represents an attribute.
 type SecKeychainAttributeInfo struct {
-	Count  uint
+	Count  uint32
 	Tag    unsafe.Pointer
 	Format unsafe.Pointer
 }
 
 // A list of keychain attributes.
 type SecKeychainAttributeList struct {
-	Count uint
+	Count uint32
 	Attr  unsafe.Pointer
 }
 
 // Information about a keychain event that keychain services deliver to your app via a callback function.
 type SecKeychainCallbackInfo struct {
-	Version  uint
+	Version  uint32
 	Item     unsafe.Pointer
 	Keychain unsafe.Pointer
-	Pid      int
+	Pid      int32
 }
 
 // Contains information about a keychain item.
@@ -1366,10 +1366,10 @@ type SecKeychainSearch struct{}
 
 // A structure that contains information about keychain settings.
 type SecKeychainSettings struct {
-	Version         uint
+	Version         uint32
 	LockOnSleep     uint8
 	UseLockInterval uint8
-	LockInterval    uint
+	LockInterval    uint32
 }
 
 // Contains information about a password.

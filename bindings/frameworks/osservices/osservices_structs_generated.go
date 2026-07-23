@@ -33,22 +33,22 @@ type CSIdentityQueryClientContext struct {
 }
 
 type IconFamilyElement struct {
-	ElementType uint
-	ElementSize int
+	ElementType uint32
+	ElementSize int32
 	ElementData [1]uint8
 }
 
 type IconFamilyResource struct {
-	ResourceType uint
-	ResourceSize int
+	ResourceType uint32
+	ResourceSize int32
 	Elements     [1]IconFamilyElement
 }
 
 type KCCallbackInfo struct {
-	Version   uint
+	Version   uint32
 	Item      unsafe.Pointer
-	ProcessID [2]int
-	Event     [4]int
+	ProcessID [2]int32
+	Event     [4]int32
 	Keychain  unsafe.Pointer
 }
 

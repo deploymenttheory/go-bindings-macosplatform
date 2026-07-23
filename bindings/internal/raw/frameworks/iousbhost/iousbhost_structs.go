@@ -111,7 +111,7 @@ type IOUSBHostIOSourceDescriptors struct {
 
 // A structure that represents a single frame in an isochronous transfer.
 type IOUSBHostIsochronousFrame struct {
-	Status        int
+	Status        int32
 	RequestCount  uint32
 	CompleteCount uint32
 	Reserved      uint32
@@ -120,7 +120,7 @@ type IOUSBHostIsochronousFrame struct {
 
 // @struct      IOUSBHostIsochronousTransaction @discussion  Structure representing a single frame or microframe in an isochronous transfer. @field       status Completion status for this individual transaction. IOUSBHostFamily will initialize this to kIOReturnInvalid and will update the field with a valid status code upon completion of the transaction. @field       requestCount The number of bytes requested to transfer for this transaction. This field must be initialized by the caller before the structure is submitted. @field       offset The number of bytes between the start of the memory descriptor in which this transaction resides and the start of the transaction.  The offset cannot exceed 4GB. @field       completeCount The number of bytes actually transferred for this transaction. IOUSBHostFamily will update this field upon completion of the transaction. @field       timeStamp The observed IOUSBHostTime for this transaction's completion.  Note that interrupt latency and system load may result in more than one transaction completing with the same timestamp. @field       options Flags that specify additional transaction behavior.  See @link IOUSBHostIsochronousTransactionOptions @/link for more details.
 type IOUSBHostIsochronousTransaction struct {
-	Status        int
+	Status        int32
 	RequestCount  uint32
 	Offset        uint32
 	CompleteCount uint32

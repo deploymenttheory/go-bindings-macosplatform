@@ -11,19 +11,19 @@ import (
 // This structure allows an AVC command to be sent to a device. This is not intended to be a general purpose command interfaces, rather only for those devices which can support the "AV/C Digital Interface Command Set General Specification Version 4.1" (1394 Trade Association Document 2001012). Devices indicate whether or not they can process AVC commands via the kCMIODevicePropertyCanProcessAVCCommand property.
 type CMIODeviceAVCCommand struct {
 	MCommand        unsafe.Pointer
-	MCommandLength  uint
+	MCommandLength  uint32
 	MResponse       unsafe.Pointer
-	MResponseLength uint
-	MResponseUsed   uint
+	MResponseLength uint32
+	MResponseUsed   uint32
 }
 
 // This structure allows an RS422 command to be sent to a device. This is not intended to be a general purpose command interface, rather only for those devices which can support the RS422 protocol. Devices indicate whether or not they can process RS422 commands via the kCMIODevicePropertyCanProcessRS422Command property.
 type CMIODeviceRS422Command struct {
 	MCommand        unsafe.Pointer
-	MCommandLength  uint
+	MCommandLength  uint32
 	MResponse       unsafe.Pointer
-	MResponseLength uint
-	MResponseUsed   uint
+	MResponseLength uint32
+	MResponseUsed   uint32
 }
 
 // This structure allows a client to specify a CMIODeviceGetSMPTETimeProc and its associated private data via the kCMIODevicePropertySMPTETimeCallback property.
@@ -34,22 +34,22 @@ type CMIODeviceSMPTETimeCallback struct {
 
 // This structure describes the list of streams and the number of channels in each stream.
 type CMIODeviceStreamConfiguration struct {
-	MNumberStreams  uint
+	MNumberStreams  uint32
 	MNumberChannels unsafe.Pointer
 }
 
 // A CMIOObjectPropertyAddress collects the three parts that identify a specific property together in a struct for easy transmission.
 type CMIOObjectPropertyAddress struct {
-	MSelector uint
-	MScope    uint
-	MElement  uint
+	MSelector uint32
+	MScope    uint32
+	MElement  uint32
 }
 
 // This structure is returned in response to the kCMIOStreamPropertyDeck property queries.
 type CMIOStreamDeck struct {
-	MStatus uint
-	MState  uint
-	MState2 uint
+	MStatus uint32
+	MState  uint32
+	MState2 uint32
 }
 
 // The payload for kCMIOStreamPropertyScheduledOutputNotificationProc.

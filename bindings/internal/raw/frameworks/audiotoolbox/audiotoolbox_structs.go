@@ -20,13 +20,13 @@ type AUChannelInfo struct {
 
 // An audio unit parameter whose value can change in response to a change in its parent metaparameter.
 type AUDependentParameter struct {
-	MScope       uint
-	MParameterID uint
+	MScope       uint32
+	MParameterID uint32
 }
 
 // Deprecated: no longer supported
 type AUDistanceAttenuationData struct {
-	InNumberOfPairs uint
+	InNumberOfPairs uint32
 	Pairs           [1]unsafe.Pointer
 }
 
@@ -39,7 +39,7 @@ type AUHostIdentifier struct {
 // The name and version of an audio unit’s host application.
 type AUHostVersionIdentifier struct {
 	HostName    unsafe.Pointer
-	HostVersion uint
+	HostVersion uint32
 }
 
 // The callback function and custom data for providing input-to-output sample mapping for an audio unit.
@@ -81,14 +81,14 @@ type AUMIDIOutputCallbackStruct struct {
 
 // Describes the interaction between two node objects.
 type AUNodeInteraction struct {
-	NodeInteractionType uint
+	NodeInteractionType uint32
 	NodeInteraction     unsafe.Pointer
 }
 
 // A callback used to provide input to an audio unit.
 type AUNodeRenderCallback struct {
-	DestNode        int
-	DestInputNumber uint
+	DestNode        int32
+	DestInputNumber uint32
 	Cback           AURenderCallbackStruct
 }
 
@@ -121,9 +121,9 @@ type AUParameterEvent struct {
 
 // @struct			AUParameterMIDIMapping @abstract		Represents a mapping between a MIDI message and an audio unit's parameter. @discussion		The reserved fields in this structure are for future use. In the current implementation, they help align the structure to 64 bit size. Do not use the names of these fields in a host application. They are subject to change.
 type AUParameterMIDIMapping struct {
-	MScope       uint
-	MElement     uint
-	MParameterID uint
+	MScope       uint32
+	MElement     uint32
+	MParameterID uint32
 	MFlags       AUParameterMIDIMappingFlags
 	MSubRangeMin float32
 	MSubRangeMax float32
@@ -131,19 +131,19 @@ type AUParameterMIDIMapping struct {
 	MData1       uint8
 	Reserved1    uint8
 	Reserved2    uint8
-	Reserved3    uint
+	Reserved3    uint32
 }
 
 // Used to set factory presets for an audio unit.
 type AUPreset struct {
-	PresetNumber int
+	PresetNumber int32
 	PresetName   unsafe.Pointer
 }
 
 // Describes an audio unit preset.
 type AUPresetEvent struct {
-	Scope   uint
-	Element uint
+	Scope   uint32
+	Element uint32
 	Preset  unsafe.Pointer
 }
 
@@ -202,29 +202,29 @@ type AudioBalanceFade struct {
 type AudioBytePacketTranslation struct {
 	MByte               int64
 	MPacket             int64
-	MByteOffsetInPacket uint
+	MByteOffsetInPacket uint32
 	MFlags              AudioBytePacketTranslationFlags
 }
 
 // A structure holding magic cookie information needed by some codecs.
 type AudioCodecMagicCookieInfo struct {
-	MMagicCookieSize uint
+	MMagicCookieSize uint32
 	MMagicCookie     unsafe.Pointer
 }
 
 // A structure specifying the number of leading and trailing empty frames to be inserted.
 type AudioCodecPrimeInfo struct {
-	LeadingFrames  uint
-	TrailingFrames uint
+	LeadingFrames  uint32
+	TrailingFrames uint32
 }
 
 // Identifying information for an audio component.
 type AudioComponentDescription struct {
-	ComponentType         uint
-	ComponentSubType      uint
-	ComponentManufacturer uint
-	ComponentFlags        uint
-	ComponentFlagsMask    uint
+	ComponentType         uint32
+	ComponentSubType      uint32
+	ComponentManufacturer uint32
+	ComponentFlags        uint32
+	ComponentFlagsMask    uint32
 }
 
 // @struct         AudioComponentPlugInInterface @discussion     A structure used to represent an audio plugin's routines @var            Open the function used to open (or create) an audio plugin instance @var            Close the function used to close (or dispose) an audio plugin instance @var            Lookup this is used to return a function pointer for a given selector, or NULL if that selector is not implemented @var            reserved must be NULL
@@ -237,8 +237,8 @@ type AudioComponentPlugInInterface struct {
 
 // Specifies priming information for an audio converter.
 type AudioConverterPrimeInfo struct {
-	LeadingFrames  uint
-	TrailingFrames uint
+	LeadingFrames  uint32
+	TrailingFrames uint32
 }
 
 type AudioFileFDFTable struct {
@@ -277,47 +277,47 @@ type AudioFileFDFTableExtended struct {
 type AudioFileMarker struct {
 	MFramePosition float64
 	MName          unsafe.Pointer
-	MMarkerID      int
+	MMarkerID      int32
 	MSMPTETime     AudioFile_SMPTE_Time
-	MType          uint
+	MType          uint32
 	MReserved      uint16
 	MChannel       uint16
 }
 
 // A list of markers associated with an audio file, including their SMPTE time type, the number of markers, and the markers themselves.
 type AudioFileMarkerList struct {
-	MSMPTE_TimeType uint
-	MNumberMarkers  uint
+	MSMPTE_TimeType uint32
+	MNumberMarkers  uint32
 	MMarkers        [1]AudioFileMarker
 }
 
 // Contains information about the number of valid frames in a file and where they begin and end.
 type AudioFilePacketTableInfo struct {
 	MNumberValidFrames int64
-	MPrimingFrames     int
-	MRemainderFrames   int
+	MPrimingFrames     int32
+	MRemainderFrames   int32
 }
 
 // An audio file region specifies a segment of audio data.
 type AudioFileRegion struct {
-	MRegionID      uint
+	MRegionID      uint32
 	MName          unsafe.Pointer
 	MFlags         AudioFileRegionFlags
-	MNumberMarkers uint
+	MNumberMarkers uint32
 	MMarkers       [1]AudioFileMarker
 }
 
 // A list of the audio file regions in a file.
 type AudioFileRegionList struct {
-	MSMPTE_TimeType uint
-	MNumberRegions  uint
+	MSMPTE_TimeType uint32
+	MNumberRegions  uint32
 	MRegions        [1]AudioFileRegion
 }
 
 // A specifier for the constantkAudioFileGlobalInfo_AvailableStreamDescriptionsForFormat.
 type AudioFileTypeAndFormatID struct {
-	MFileType uint
-	MFormatID uint
+	MFileType uint32
+	MFormatID uint32
 }
 
 // A data structure for describing SMPTE (Society of Motion Picture and Television Engineers) time.
@@ -326,21 +326,21 @@ type AudioFile_SMPTE_Time struct {
 	MMinutes              uint8
 	MSeconds              uint8
 	MFrames               uint8
-	MSubFrameSampleOffset uint
+	MSubFrameSampleOffset uint32
 }
 
 // A structure that specifies an audio format.
 type AudioFormatInfo struct {
 	MASBD            coreaudiotypes.AudioStreamBasicDescription
 	MMagicCookie     unsafe.Pointer
-	MMagicCookieSize uint
+	MMagicCookieSize uint32
 }
 
 // A structure that specifies frame and packet translations.
 type AudioFramePacketTranslation struct {
 	MFrame               int64
 	MPacket              int64
-	MFrameOffsetInPacket uint
+	MFrameOffsetInPacket uint32
 }
 
 // @struct		AudioIndependentPacketTranslation @abstract   used for property kAudioFilePropertyPreviousIndependentPacket and kAudioFilePropertyNextIndependentPacket @discussion See descriptions of kAudioFilePropertyPreviousIndependentPacket and kAudioFilePropertyNextIndependentPacket @var        mPacket                         a packet number @var        mIndependentlyDecodablePacket   a packet number not equal to mPacket of an independent packet
@@ -359,14 +359,14 @@ type AudioOutputUnitMIDICallbacks struct {
 // A timestamp for scheduled starting of an I/O audio unit.
 type AudioOutputUnitStartAtTimeParams struct {
 	MTimestamp coreaudiotypes.AudioTimeStamp
-	MFlags     uint
+	MFlags     uint32
 }
 
 // @struct		AudioPacketDependencyInfoTranslation @abstract   used for property kAudioFilePropertyPacketToDependencyInfo @discussion See descriptions of kAudioFilePropertyPacketToDependencyInfo and kAudioFilePropertyRestrictsRandomAccess @var        mPacket                     a packet number @var        mIsIndependentlyDecodable   1 means that the specified packet is independently decodable; 0 means it's not @var        mNumberPrerollPackets       if the packet is independently decodable, the count of packets that must be decoded after the packet with the specified number in order to refresh the decoder
 type AudioPacketDependencyInfoTranslation struct {
 	MPacket                   int64
-	MIsIndependentlyDecodable uint
-	MNumberPrerollPackets     uint
+	MIsIndependentlyDecodable uint32
+	MNumberPrerollPackets     uint32
 }
 
 // @struct	AudioPacketRangeByteCountTranslation @abstract   used for property kAudioFilePropertyPacketRangeByteCountUpperBound @discussion See description of kAudioFilePropertyPacketRangeByteCountUpperBound @var        mPacket					a packet number. @var        mPacketCount			a packet count. @var        mByteCountUpperBound	an upper bound for the total size of the specified packets.
@@ -385,7 +385,7 @@ type AudioPacketRollDistanceTranslation struct {
 // Audio panning information.
 type AudioPanningInfo struct {
 	MPanningMode      AudioPanningMode
-	MCoordinateFlags  uint
+	MCoordinateFlags  uint32
 	MCoordinates      [3]float32
 	MGainScale        float32
 	MOutputChannelMap *coreaudiotypes.AudioChannelLayout
@@ -395,17 +395,17 @@ type AudioPanningInfo struct {
 type AudioQueueBuffer struct {
 	MAudioDataBytesCapacity    uint
 	MAudioData                 unsafe.Pointer
-	MAudioDataByteSize         uint
+	MAudioDataByteSize         uint32
 	MUserData                  unsafe.Pointer
 	MPacketDescriptionCapacity uint
 	MPacketDescriptions        *coreaudiotypes.AudioStreamPacketDescription
-	MPacketDescriptionCount    uint
+	MPacketDescriptionCount    uint32
 }
 
 // @struct     AudioQueueChannelAssignment @abstract   Specifies an audio device channel to which the queue will play or from which it will record. @var        mDeviceUID On iOS, this is a port UID obtained from AVAudioSession. On macOS, this is the UID obtained from an AudioDeviceID. @var        mChannelNumber The 1-based index of the channel.
 type AudioQueueChannelAssignment struct {
 	MDeviceUID     unsafe.Pointer
-	MChannelNumber uint
+	MChannelNumber uint32
 }
 
 // Specifies the current level metering information for one channel of an audio queue.
@@ -416,7 +416,7 @@ type AudioQueueLevelMeterState struct {
 
 // Specifies an audio queue parameter and associated value.
 type AudioQueueParameterEvent struct {
-	MID    uint
+	MID    uint32
 	MValue float32
 }
 
@@ -429,8 +429,8 @@ type AudioUnitCocoaViewInfo struct {
 // An audio unit source-to-destination connection specification.
 type AudioUnitConnection struct {
 	SourceAudioUnit    *carboncore.ComponentInstanceRecord
-	SourceOutputNumber uint
-	DestInputNumber    uint
+	SourceOutputNumber uint32
+	DestInputNumber    uint32
 }
 
 // @struct     AudioUnitEvent @abstract   Describes a change to an Audio Unit's state. @var        mEventType The type of event. @var        mArgument Specifies the parameter or property which has changed.
@@ -442,7 +442,7 @@ type AudioUnitEvent struct {
 // Allows an audio unit host application to tell an audio unit to use a specified buffer for its input callback.
 type AudioUnitExternalBuffer struct {
 	Buffer *uint8
-	Size   uint
+	Size   uint32
 }
 
 // An audio unit’s audio level at a particular frequency.
@@ -455,8 +455,8 @@ type AudioUnitMIDIControlMapping struct {
 	MidiNRPN    uint16
 	MidiControl uint8
 	Scope       uint8
-	Element     uint
-	Parameter   uint
+	Element     uint32
+	Parameter   uint32
 }
 
 // Audio clipping that has occurred in a mixer unit.
@@ -468,31 +468,31 @@ type AudioUnitMeterClipping struct {
 
 // A connection between two node objects in an audio processing graph.
 type AudioUnitNodeConnection struct {
-	SourceNode         int
-	SourceOutputNumber uint
-	DestNode           int
-	DestInputNumber    uint
+	SourceNode         int32
+	SourceOutputNumber uint32
+	DestNode           int32
+	DestInputNumber    uint32
 }
 
 // @struct			AudioUnitOtherPluginDesc @var			format One of the OtherPluginFormat values @var			plugin struct AudioClassDescription { OSType mType; OSType mSubType; OSType mManufacturer; }; is defined in <CoreAudioTypes/CoreAudioTypes.h> mType specifies a generic, plug-in format defined descriptor mSubType is usually left to the manufacturer to use at their discretion mManufacturer is a registered code to identify all plugins from the same manufacturer
 type AudioUnitOtherPluginDesc struct {
-	Format uint
+	Format uint32
 	Plugin coreaudiotypes.AudioClassDescription
 }
 
 // An adjustable audio unit attribute such as volume, pitch, or filter cutoff frequency.
 type AudioUnitParameter struct {
 	MAudioUnit   *carboncore.ComponentInstanceRecord
-	MParameterID uint
-	MScope       uint
-	MElement     uint
+	MParameterID uint32
+	MScope       uint32
+	MElement     uint32
 }
 
 // A scheduled change to an audio unit parameter’s value.
 type AudioUnitParameterEvent struct {
-	Scope       uint
-	Element     uint
-	Parameter   uint
+	Scope       uint32
+	Element     uint32
+	Parameter   uint32
 	EventType   AUParameterEventType
 	EventValues unsafe.Pointer
 }
@@ -507,7 +507,7 @@ type AudioUnitParameterHistoryInfo struct {
 type AudioUnitParameterInfo struct {
 	Name         [52]int8
 	UnitName     unsafe.Pointer
-	ClumpID      uint
+	ClumpID      uint32
 	CfNameString unsafe.Pointer
 	Unit         AudioUnitParameterUnit
 	MinValue     float32
@@ -518,27 +518,27 @@ type AudioUnitParameterInfo struct {
 
 // A short version of the name for an audio unit parameter.
 type AudioUnitParameterNameInfo struct {
-	InID            uint
-	InDesiredLength int
+	InID            uint32
+	InDesiredLength int32
 	OutName         unsafe.Pointer
 }
 
 // A string representation of a parameter’s value.
 type AudioUnitParameterStringFromValue struct {
-	InParamID uint
+	InParamID uint32
 	InValue   *float32
 	OutString unsafe.Pointer
 }
 
 // A parameter’s value based on a string representation of the value.
 type AudioUnitParameterValueFromString struct {
-	InParamID uint
+	InParamID uint32
 	InString  unsafe.Pointer
 	OutValue  float32
 }
 
 type AudioUnitParameterValueName struct {
-	InParamID uint
+	InParamID uint32
 	InValue   *float32
 	OutName   unsafe.Pointer
 }
@@ -546,36 +546,36 @@ type AudioUnitParameterValueName struct {
 // @struct			AudioUnitParameterValueTranslation @abstract		Used to translate another plug-in's parameter values to  audio unit parameter values
 type AudioUnitParameterValueTranslation struct {
 	OtherDesc    AudioUnitOtherPluginDesc
-	OtherParamID uint
+	OtherParamID uint32
 	OtherValue   float32
-	AuParamID    uint
+	AuParamID    uint32
 	AuValue      float32
 }
 
 // @struct			AudioUnitPresetMAS_SettingData @discussion		AU-MAS specific structs for the data contained in the "masdata" key of an audio unit preset dictionary
 type AudioUnitPresetMAS_SettingData struct {
-	IsStockSetting uint
-	SettingID      uint
-	DataLen        uint
+	IsStockSetting uint32
+	SettingID      uint32
+	DataLen        uint32
 	Data           [1]uint8
 }
 
 // @struct			AudioUnitPresetMAS_Settings @discussion		See MAS documentation
 type AudioUnitPresetMAS_Settings struct {
-	ManufacturerID   uint
-	EffectID         uint
-	VariantID        uint
-	SettingsVersion  uint
-	NumberOfSettings uint
+	ManufacturerID   uint32
+	EffectID         uint32
+	VariantID        uint32
+	SettingsVersion  uint32
+	NumberOfSettings uint32
 	Settings         [1]AudioUnitPresetMAS_SettingData
 }
 
 // A key-value pair that declares an attribute or behavior for an audio unit.
 type AudioUnitProperty struct {
 	MAudioUnit  *carboncore.ComponentInstanceRecord
-	MPropertyID uint
-	MScope      uint
-	MElement    uint
+	MPropertyID uint32
+	MScope      uint32
+	MElement    uint32
 }
 
 // A structure that contains thread context information for a real-time rendering operation.
@@ -586,7 +586,7 @@ type AudioUnitRenderContext struct {
 
 // @struct		CABarBeatTime @abstract	A display representation of a musical time in beats. A clock's internal representation of musical time is in beats based on the beginning of the timeline. Normally, such times should be displayed to the user in terms of bars, beats, and subbeats (sometimes called "units" or "parts per quarter" [PPQ]). This data structure is such a display representation. By convention, bar 1 is the beginning of the sequence. Beat 1 is the first beat of the measure. In 4/4 time, beat will have a value from 1 to 4. Music applications often use beat divisions such as 480 and 960. @var  	bar A measure number. @var  	beat A beat number (1..n). @var  	subbeat The numerator of the fractional number of beats. @var  	subbeatDivisor The denominator of the fractional number of beats. @var  	reserved Must be 0.
 type CABarBeatTime struct {
-	Bar            int
+	Bar            int32
 	Beat           uint16
 	Subbeat        uint16
 	SubbeatDivisor uint16
@@ -596,43 +596,43 @@ type CABarBeatTime struct {
 // @struct 	CAClockTime @abstract	Represents a time value using one of several possible units. @var  	format Specifies the time's format and units. @var  	reserved Must be 0. @var  	time The time value. Use the member of the union appropriate to the format (see the description of CAClockTimeFormat).
 type CAClockTime struct {
 	Format   CAClockTimeFormat
-	Reserved uint
+	Reserved uint32
 	Time     unsafe.Pointer
 }
 
 type CAFAudioDescription struct {
 	MSampleRate       float64
-	MFormatID         uint
+	MFormatID         uint32
 	MFormatFlags      CAFFormatFlags
-	MBytesPerPacket   uint
-	MFramesPerPacket  uint
-	MChannelsPerFrame uint
-	MBitsPerChannel   uint
+	MBytesPerPacket   uint32
+	MFramesPerPacket  uint32
+	MChannelsPerFrame uint32
+	MBitsPerChannel   uint32
 }
 
 type CAFAudioFormatListItem struct {
 	MFormat           CAFAudioDescription
-	MChannelLayoutTag uint
+	MChannelLayoutTag uint32
 }
 
 type CAFChunkHeader struct {
-	MChunkType uint
+	MChunkType uint32
 	MChunkSize int64
 }
 
 type CAFDataChunk struct {
-	MEditCount uint
+	MEditCount uint32
 	MData      [1]uint8
 }
 
 type CAFFileHeader struct {
-	MFileType    uint
+	MFileType    uint32
 	MFileVersion uint16
 	MFileFlags   uint16
 }
 
 type CAFInfoStrings struct {
-	MNumEntries uint
+	MNumEntries uint32
 }
 
 type CAFInstrumentChunk struct {
@@ -642,29 +642,29 @@ type CAFInstrumentChunk struct {
 	MMIDILowVelocity  uint8
 	MMIDIHighVelocity uint8
 	MdBGain           float32
-	MStartRegionID    uint
-	MSustainRegionID  uint
-	MReleaseRegionID  uint
-	MInstrumentID     uint
+	MStartRegionID    uint32
+	MSustainRegionID  uint32
+	MReleaseRegionID  uint32
+	MInstrumentID     uint32
 }
 
 type CAFMarker struct {
-	MType          uint
+	MType          uint32
 	MFramePosition float64
-	MMarkerID      uint
+	MMarkerID      uint32
 	MSMPTETime     CAF_SMPTE_Time
-	MChannel       uint
+	MChannel       uint32
 }
 
 type CAFMarkerChunk struct {
-	MSMPTE_TimeType uint
-	MNumberMarkers  uint
+	MSMPTE_TimeType uint32
+	MNumberMarkers  uint32
 	MMarkers        [1]CAFMarker
 }
 
 type CAFOverviewChunk struct {
-	MEditCount             uint
-	MNumFramesPerOVWSample uint
+	MEditCount             uint32
+	MNumFramesPerOVWSample uint32
 	MData                  [1]CAFOverviewSample
 }
 
@@ -676,13 +676,13 @@ type CAFOverviewSample struct {
 type CAFPacketTableHeader struct {
 	MNumberPackets      int64
 	MNumberValidFrames  int64
-	MPrimingFrames      int
-	MRemainderFrames    int
+	MPrimingFrames      int32
+	MRemainderFrames    int32
 	MPacketDescriptions [1]uint8
 }
 
 type CAFPeakChunk struct {
-	MEditCount uint
+	MEditCount uint32
 	MPeaks     [1]CAFPositionPeak
 }
 
@@ -692,25 +692,25 @@ type CAFPositionPeak struct {
 }
 
 type CAFRegion struct {
-	MRegionID      uint
+	MRegionID      uint32
 	MFlags         CAFRegionFlags
-	MNumberMarkers uint
+	MNumberMarkers uint32
 	MMarkers       [1]CAFMarker
 }
 
 type CAFRegionChunk struct {
-	MSMPTE_TimeType uint
-	MNumberRegions  uint
+	MSMPTE_TimeType uint32
+	MNumberRegions  uint32
 	MRegions        [1]CAFRegion
 }
 
 type CAFStringID struct {
-	MStringID              uint
+	MStringID              uint32
 	MStringStartByteOffset int64
 }
 
 type CAFStrings struct {
-	MNumEntries uint
+	MNumEntries uint32
 	MStringsIDs [1]CAFStringID
 }
 
@@ -723,7 +723,7 @@ type CAF_SMPTE_Time struct {
 	MMinutes              int8
 	MSeconds              int8
 	MFrames               int8
-	MSubFrameSampleOffset uint
+	MSubFrameSampleOffset uint32
 }
 
 type CAF_UUID_ChunkHeader struct {
@@ -754,20 +754,20 @@ type ComponentInstanceRecord struct{}
 type ExtendedAudioFormatInfo struct {
 	MASBD             coreaudiotypes.AudioStreamBasicDescription
 	MMagicCookie      unsafe.Pointer
-	MMagicCookieSize  uint
+	MMagicCookieSize  uint32
 	MClassDescription coreaudiotypes.AudioClassDescription
 }
 
 type ExtendedControlEvent struct {
-	GroupID   uint
-	ControlID uint
+	GroupID   uint32
+	ControlID uint32
 	Value     float32
 }
 
 // Describes a note-on event with extended parameters.
 type ExtendedNoteOnEvent struct {
-	InstrumentID   uint
-	GroupID        uint
+	InstrumentID   uint32
+	GroupID        uint32
 	Duration       float32
 	ExtendedParams MusicDeviceNoteParams
 }
@@ -807,7 +807,7 @@ type MIDIMetaEvent struct {
 	Unused1       uint8
 	Unused2       uint8
 	Unused3       uint8
-	DataLength    uint
+	DataLength    uint32
 	Data          [1]uint8
 }
 
@@ -826,7 +826,7 @@ type MIDIPacketList struct{}
 
 // Describes a MIDI system-exclusive (SysEx) message.
 type MIDIRawData struct {
-	Length uint
+	Length uint32
 	Data   [1]uint8
 }
 
@@ -839,7 +839,7 @@ type MixerDistanceParams struct {
 
 // @struct MusicDeviceNoteParams @abstract Used to hold the value of the inParams parameter for the MusicDeviceStartNote function. @discussion The generic version of this structure describes an arg count (which is the number of mControls values + 1 for mPitch and 1 for mVelocity). So, argCount should at least be two. See MusicDeviceStdNoteParams for the common use case, as many audio unit instruments will not respond to control values provided in the start note function @var  			argCount The number of controls + 2 (for mPitch and mVelocity) @var  			mPitch The pitch of the new note, typically specified using a MIDI note number (and a fractional pitch) within the range of 0 < 128. So 60 is middle C, 60.5 is middle C + 50 cents. @var  			mVelocity The velocity of the new note - this can be a fractional value - specified as MIDI (within the range of 0 < 128) @var  			mControls A variable length array with the number of elements: argCount - 2.
 type MusicDeviceNoteParams struct {
-	ArgCount  uint
+	ArgCount  uint32
 	MPitch    float32
 	MVelocity float32
 	MControls [1]NoteParamsControlValue
@@ -847,26 +847,26 @@ type MusicDeviceNoteParams struct {
 
 // @struct MusicDeviceStdNoteParams @abstract convenience struct for specifying a note and velocity @discussion This struct is the common usage for MusicDeviceStartNote, as most synths that implement this functionality will only allow for the specification of a note number and velocity when starting a new note. @var  			argCount Should be set to 2 @var  			mPitch The pitch of the new note, typically specified using a MIDI note number (and a fractional pitch) within the range of 0 < 128. So 60 is middle C, 60.5 is middle C + 50 cents. @var  			mVelocity The velocity of the new note - this can be a fractional value - specified as MIDI (within the range of 0 < 128)
 type MusicDeviceStdNoteParams struct {
-	ArgCount  uint
+	ArgCount  uint32
 	MPitch    float32
 	MVelocity float32
 }
 
 // Describes a user-defined event.
 type MusicEventUserData struct {
-	Length uint
+	Length uint32
 	Data   [1]uint8
 }
 
 // Supports control of the looping behavior of a music track.
 type MusicTrackLoopInfo struct {
 	LoopDuration  float64
-	NumberOfLoops int
+	NumberOfLoops int32
 }
 
 // @struct NoteParamsControlValue @abstract used to describe a control and value @discussion This struct is used to describe a parameterID (a control in MIDI terminology, though it is not limited to MIDI CC specifications) and the value of this parameter. @var  			mID The parameter ID @var  			mValue The value of that parameter
 type NoteParamsControlValue struct {
-	MID    uint
+	MID    uint32
 	MValue float32
 }
 
@@ -919,9 +919,9 @@ type OpaqueMusicTrack struct{}
 
 // Describes an audio unit parameter automation event.
 type ParameterEvent struct {
-	ParameterID uint
-	Scope       uint
-	Element     uint
+	ParameterID uint32
+	Scope       uint32
+	Element     uint32
 	Value       float32
 }
 
@@ -931,9 +931,9 @@ type ScheduledAudioFileRegion struct {
 	MCompletionProc         unsafe.Pointer
 	MCompletionProcUserData unsafe.Pointer
 	MAudioFile              unsafe.Pointer
-	MLoopCount              uint
+	MLoopCount              uint32
 	MStartFrame             int64
-	MFramesToPlay           uint
+	MFramesToPlay           uint32
 }
 
 type ScheduledAudioSlice struct {
@@ -941,9 +941,9 @@ type ScheduledAudioSlice struct {
 	MCompletionProc         unsafe.Pointer
 	MCompletionProcUserData unsafe.Pointer
 	MFlags                  AUScheduledAudioSliceFlags
-	MReserved               uint
+	MReserved               uint32
 	MReserved2              unsafe.Pointer
-	MNumberFrames           uint
+	MNumberFrames           uint32
 	MBufferList             *coreaudiotypes.AudioBufferList
 }
 

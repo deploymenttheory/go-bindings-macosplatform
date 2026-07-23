@@ -72,67 +72,67 @@ type MIDIDriverInterface struct {
 // A variable-length list of MIDI event packets.
 type MIDIEventList struct {
 	Protocol   ProtocolID
-	NumPackets uint
+	NumPackets uint32
 	Packet     [1]MIDIEventPacket
 }
 
 // A series of simultaneous MIDI events in Universal MIDI Packets (UMP) format.
 type MIDIEventPacket struct {
 	TimeStamp uint64
-	WordCount uint
-	Words     [64]uint
+	WordCount uint32
+	Words     [64]uint32
 }
 
 // A general I/O error notification.
 type MIDIIOErrorNotification struct {
 	MessageID    NotificationMessageID
-	MessageSize  uint
-	DriverDevice uint
-	ErrorCode    int
+	MessageSize  uint32
+	DriverDevice uint32
+	ErrorCode    int32
 }
 
 // A 128-bit MIDI message.
 type MIDIMessage_128 struct {
-	Word0 uint
-	Word1 uint
-	Word2 uint
-	Word3 uint
+	Word0 uint32
+	Word1 uint32
+	Word2 uint32
+	Word3 uint32
 }
 
 // A 64-bit MIDI message.
 type MIDIMessage_64 struct {
-	Word0 uint
-	Word1 uint
+	Word0 uint32
+	Word1 uint32
 }
 
 // A 96-bit MIDI message.
 type MIDIMessage_96 struct {
-	Word0 uint
-	Word1 uint
-	Word2 uint
+	Word0 uint32
+	Word1 uint32
+	Word2 uint32
 }
 
 // A message that describes a system state change.
 type MIDINotification struct {
 	MessageID   NotificationMessageID
-	MessageSize uint
+	MessageSize uint32
 }
 
 // A message that describes the addition or removal of an object.
 type MIDIObjectAddRemoveNotification struct {
 	MessageID   NotificationMessageID
-	MessageSize uint
-	Parent      uint
+	MessageSize uint32
+	Parent      uint32
 	ParentType  ObjectType
-	Child       uint
+	Child       uint32
 	ChildType   ObjectType
 }
 
 // A message that describes the change to an object property.
 type MIDIObjectPropertyChangeNotification struct {
 	MessageID    NotificationMessageID
-	MessageSize  uint
-	Object       uint
+	MessageSize  uint32
+	Object       uint32
 	ObjectType   ObjectType
 	PropertyName unsafe.Pointer
 }
@@ -146,15 +146,15 @@ type MIDIPacket struct {
 
 // A list of MIDI events the system sends to or receives from an endpoint.
 type MIDIPacketList struct {
-	NumPackets uint
+	NumPackets uint32
 	Packet     [1]MIDIPacket
 }
 
 // A request to asynchronously send a single system-exclusive (SysEx) event to a destination.
 type MIDISysexSendRequest struct {
-	Destination      uint
+	Destination      uint32
 	Data             unsafe.Pointer
-	BytesToSend      uint
+	BytesToSend      uint32
 	Complete         uint8
 	Reserved         [3]uint8
 	CompletionProc   unsafe.Pointer
@@ -163,9 +163,9 @@ type MIDISysexSendRequest struct {
 
 // A request to asynchronously send a single universal MIDI packet (UMP) system-exclusive (SysEx) event to a destination.
 type MIDISysexSendRequestUMP struct {
-	Destination      uint
+	Destination      uint32
 	Words            unsafe.Pointer
-	WordsToSend      uint
+	WordsToSend      uint32
 	Complete         uint8
 	CompletionProc   unsafe.Pointer
 	CompletionRefCon unsafe.Pointer
@@ -173,16 +173,16 @@ type MIDISysexSendRequestUMP struct {
 
 // A source or destination in a MIDI thru connection.
 type MIDIThruConnectionEndpoint struct {
-	EndpointRef uint
-	UniqueID    int
+	EndpointRef uint32
+	UniqueID    int32
 }
 
 // A set of MIDI routings and transformations.
 type MIDIThruConnectionParams struct {
-	Version              uint
-	NumSources           uint
+	Version              uint32
+	NumSources           uint32
 	Sources              [8]MIDIThruConnectionEndpoint
-	NumDestinations      uint
+	NumDestinations      uint32
 	Destinations         [8]MIDIThruConnectionEndpoint
 	ChannelMap           [16]uint8
 	LowVelocity          uint8

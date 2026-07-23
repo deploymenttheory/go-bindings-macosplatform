@@ -17,7 +17,7 @@ type ALMXGlyphEntry struct {
 }
 
 type ALMXHeader struct {
-	Version    int
+	Version    int32
 	Flags      uint16
 	NMasters   uint16
 	FirstGlyph uint16
@@ -31,15 +31,15 @@ type AnchorPoint struct {
 }
 
 type AnchorPointTable struct {
-	NPoints uint
+	NPoints uint32
 	Points  [1]AnchorPoint
 }
 
 type AnkrTable struct {
 	Version                uint16
 	Flags                  uint16
-	LookupTableOffset      uint
-	AnchorPointTableOffset uint
+	LookupTableOffset      uint32
+	AnchorPointTableOffset uint32
 }
 
 type BslnFormat0Part struct {
@@ -63,7 +63,7 @@ type BslnFormat3Part struct {
 }
 
 type BslnTable struct {
-	Version         int
+	Version         int32
 	Format          uint16
 	DefaultBaseline uint16
 	Parts           unsafe.Pointer
@@ -86,8 +86,8 @@ type CTRunDelegateCallbacks struct {
 }
 
 type FontVariation struct {
-	Name  uint
-	Value int
+	Name  uint32
+	Value int32
 }
 
 type JustDirectionTable struct {
@@ -98,36 +98,36 @@ type JustDirectionTable struct {
 }
 
 type JustPCAction struct {
-	ActionCount uint
+	ActionCount uint32
 	Actions     [1]JustPCActionSubrecord
 }
 
 type JustPCActionSubrecord struct {
 	TheClass uint16
 	TheType  uint16
-	Length   uint
-	Data     uint
+	Length   uint32
+	Data     uint32
 }
 
 type JustPCConditionalAddAction struct {
-	SubstThreshold int
+	SubstThreshold int32
 	AddGlyph       uint16
 	SubstGlyph     uint16
 }
 
 type JustPCDecompositionAction struct {
-	LowerLimit int
-	UpperLimit int
+	LowerLimit int32
+	UpperLimit int32
 	Order      uint16
 	Count      uint16
 	Glyphs     [1]uint16
 }
 
 type JustPCDuctilityAction struct {
-	DuctilityAxis  uint
-	MinimumLimit   int
-	NoStretchValue int
-	MaximumLimit   int
+	DuctilityAxis  uint32
+	MinimumLimit   int32
+	NoStretchValue int32
+	MaximumLimit   int32
 }
 
 type JustPCGlyphRepeatAddAction struct {
@@ -140,24 +140,24 @@ type JustPostcompTable struct {
 }
 
 type JustTable struct {
-	Version           int
+	Version           int32
 	Format            uint16
 	HorizHeaderOffset uint16
 	VertHeaderOffset  uint16
 }
 
 type JustWidthDeltaEntry struct {
-	JustClass         uint
-	BeforeGrowLimit   int
-	BeforeShrinkLimit int
-	AfterGrowLimit    int
-	AfterShrinkLimit  int
+	JustClass         uint32
+	BeforeGrowLimit   int32
+	BeforeShrinkLimit int32
+	AfterGrowLimit    int32
+	AfterShrinkLimit  int32
 	GrowFlags         uint16
 	ShrinkFlags       uint16
 }
 
 type JustWidthDeltaGroup struct {
-	Count   uint
+	Count   uint32
 	Entries [1]JustWidthDeltaEntry
 }
 
@@ -217,15 +217,15 @@ type KernStateHeader struct {
 }
 
 type KernSubtableHeader struct {
-	Length     int
+	Length     int32
 	StInfo     uint16
 	TupleIndex int16
 	FsHeader   unsafe.Pointer
 }
 
 type KernTableHeader struct {
-	Version       int
-	NTables       int
+	Version       int32
+	NTables       int32
 	FirstSubtable [1]uint16
 }
 
@@ -260,7 +260,7 @@ type KerxControlPointEntry struct {
 
 type KerxControlPointHeader struct {
 	Header     STXHeader
-	Flags      uint
+	Flags      uint32
 	FirstTable [1]uint8
 }
 
@@ -272,13 +272,13 @@ type KerxCoordinateAction struct {
 }
 
 type KerxIndexArrayHeader struct {
-	Flags                  uint
+	Flags                  uint32
 	RowCount               uint16
 	ColumnCount            uint16
-	RowIndexTableOffset    uint
-	ColumnIndexTableOffset uint
-	KerningArrayOffset     uint
-	KerningVectorOffset    uint
+	RowIndexTableOffset    uint32
+	ColumnIndexTableOffset uint32
+	KerningArrayOffset     uint32
+	KerningVectorOffset    uint32
 }
 
 type KerxKerningPair struct {
@@ -292,19 +292,19 @@ type KerxOrderedListEntry struct {
 }
 
 type KerxOrderedListHeader struct {
-	NPairs        uint
-	SearchRange   uint
-	EntrySelector uint
-	RangeShift    uint
-	Table         [1]uint
+	NPairs        uint32
+	SearchRange   uint32
+	EntrySelector uint32
+	RangeShift    uint32
+	Table         [1]uint32
 }
 
 type KerxSimpleArrayHeader struct {
-	RowWidth         uint
-	LeftOffsetTable  uint
-	RightOffsetTable uint
-	TheArray         uint
-	FirstTable       [1]uint
+	RowWidth         uint32
+	LeftOffsetTable  uint32
+	RightOffsetTable uint32
+	TheArray         uint32
+	FirstTable       [1]uint32
 }
 
 type KerxStateEntry struct {
@@ -315,21 +315,21 @@ type KerxStateEntry struct {
 
 type KerxStateHeader struct {
 	Header     STXHeader
-	ValueTable uint
+	ValueTable uint32
 	FirstTable [1]uint8
 }
 
 type KerxSubtableHeader struct {
-	Length     uint
-	StInfo     uint
-	TupleCount uint
+	Length     uint32
+	StInfo     uint32
+	TupleCount uint32
 	FsHeader   unsafe.Pointer
 }
 
 type KerxTableHeader struct {
-	Version       int
-	NTables       uint
-	FirstSubtable [1]uint
+	Version       int32
+	NTables       uint32
+	FirstSubtable [1]uint32
 }
 
 type LcarCaretClassEntry struct {
@@ -338,7 +338,7 @@ type LcarCaretClassEntry struct {
 }
 
 type LcarCaretTable struct {
-	Version int
+	Version int32
 	Format  uint16
 	Lookup  SFNTLookupTable
 }
@@ -349,15 +349,15 @@ type LtagStringRange struct {
 }
 
 type LtagTable struct {
-	Version  uint
-	Flags    uint
-	NumTags  uint
+	Version  uint32
+	Flags    uint32
+	NumTags  uint32
 	TagRange [1]LtagStringRange
 }
 
 type MortChain struct {
-	DefaultFlags   uint
-	Length         uint
+	DefaultFlags   uint32
+	Length         uint32
 	NFeatures      uint16
 	NSubtables     uint16
 	FeatureEntries [1]MortFeatureEntry
@@ -371,8 +371,8 @@ type MortContextualSubtable struct {
 type MortFeatureEntry struct {
 	FeatureType     uint16
 	FeatureSelector uint16
-	EnableFlags     uint
-	DisableFlags    uint
+	EnableFlags     uint32
+	DisableFlags    uint32
 }
 
 type MortInsertionSubtable struct {
@@ -393,7 +393,7 @@ type MortRearrangementSubtable struct {
 type MortSubtable struct {
 	Length   uint16
 	Coverage uint16
-	Flags    uint
+	Flags    uint32
 	U        unsafe.Pointer
 }
 
@@ -402,34 +402,34 @@ type MortSwashSubtable struct {
 }
 
 type MortTable struct {
-	Version int
-	NChains uint
+	Version int32
+	NChains uint32
 	Chains  [1]MortChain
 }
 
 type MorxChain struct {
-	DefaultFlags   uint
-	Length         uint
-	NFeatures      uint
-	NSubtables     uint
+	DefaultFlags   uint32
+	Length         uint32
+	NFeatures      uint32
+	NSubtables     uint32
 	FeatureEntries [1]MortFeatureEntry
 }
 
 type MorxContextualSubtable struct {
 	Header                  STXHeader
-	SubstitutionTableOffset uint
+	SubstitutionTableOffset uint32
 }
 
 type MorxInsertionSubtable struct {
 	Header                    STXHeader
-	InsertionGlyphTableOffset uint
+	InsertionGlyphTableOffset uint32
 }
 
 type MorxLigatureSubtable struct {
 	Header                    STXHeader
-	LigatureActionTableOffset uint
-	ComponentTableOffset      uint
-	LigatureTableOffset       uint
+	LigatureActionTableOffset uint32
+	ComponentTableOffset      uint32
+	LigatureTableOffset       uint32
 }
 
 type MorxRearrangementSubtable struct {
@@ -437,15 +437,15 @@ type MorxRearrangementSubtable struct {
 }
 
 type MorxSubtable struct {
-	Length   uint
-	Coverage uint
-	Flags    uint
+	Length   uint32
+	Coverage uint32
+	Flags    uint32
 	U        unsafe.Pointer
 }
 
 type MorxTable struct {
-	Version int
-	NChains uint
+	Version int32
+	NChains uint32
 	Chains  [1]MorxChain
 }
 
@@ -457,7 +457,7 @@ type OpbdSideValues struct {
 }
 
 type OpbdTable struct {
-	Version     int
+	Version     int32
 	Format      uint16
 	LookupTable SFNTLookupTable
 }
@@ -474,7 +474,7 @@ type PropLookupSingle struct {
 }
 
 type PropTable struct {
-	Version      int
+	Version      int32
 	Format       uint16
 	DefaultProps uint16
 	Lookup       SFNTLookupTable
@@ -489,7 +489,7 @@ type ROTAGlyphEntry struct {
 
 // Deprecated: Superseded by OpenType
 type ROTAHeader struct {
-	Version    int
+	Version    int32
 	Flags      uint16
 	NMasters   uint16
 	FirstGlyph uint16
@@ -599,14 +599,14 @@ type STXEntryZero struct {
 }
 
 type STXHeader struct {
-	NClasses         uint
-	ClassTableOffset uint
-	StateArrayOffset uint
-	EntryTableOffset uint
+	NClasses         uint32
+	ClassTableOffset uint32
+	StateArrayOffset uint32
+	EntryTableOffset uint32
 }
 
 type TrakTable struct {
-	Version     int
+	Version     int32
 	Format      uint16
 	HorizOffset uint16
 	VertOffset  uint16
@@ -615,12 +615,12 @@ type TrakTable struct {
 type TrakTableData struct {
 	NTracks         uint16
 	NSizes          uint16
-	SizeTableOffset uint
+	SizeTableOffset uint32
 	TrakTable       [1]TrakTableEntry
 }
 
 type TrakTableEntry struct {
-	Track          int
+	Track          int32
 	NameTableIndex uint16
 	SizesOffset    uint16
 }
@@ -681,15 +681,15 @@ type CTTypesetter struct{}
 type SfntCMapEncoding struct {
 	PlatformID uint16
 	ScriptID   uint16
-	Offset     uint
+	Offset     uint32
 }
 
 // C struct: sfntCMapExtendedSubHeader
 type SfntCMapExtendedSubHeader struct {
 	Format   uint16
 	Reserved uint16
-	Length   uint
-	Language uint
+	Length   uint32
+	Language uint32
 }
 
 // C struct: sfntCMapHeader
@@ -708,14 +708,14 @@ type SfntCMapSubHeader struct {
 
 // C struct: sfntDescriptorHeader
 type SfntDescriptorHeader struct {
-	Version         int
-	DescriptorCount int
+	Version         int32
+	DescriptorCount int32
 	Descriptor      [1]SfntFontDescriptor
 }
 
 // C struct: sfntDirectory
 type SfntDirectory struct {
-	Format        uint
+	Format        uint32
 	NumOffsets    uint16
 	SearchRange   uint16
 	EntrySelector uint16
@@ -725,18 +725,18 @@ type SfntDirectory struct {
 
 // C struct: sfntDirectoryEntry
 type SfntDirectoryEntry struct {
-	TableTag uint
-	CheckSum uint
-	Offset   uint
-	Length   uint
+	TableTag uint32
+	CheckSum uint32
+	Offset   uint32
+	Length   uint32
 }
 
 // C struct: sfntFeatureHeader
 type SfntFeatureHeader struct {
-	Version          int
+	Version          int32
 	FeatureNameCount uint16
 	FeatureSetCount  uint16
-	Reserved         int
+	Reserved         int32
 	Names            [1]SfntFeatureName
 	Settings         [1]SfntFontFeatureSetting
 	Runs             [1]SfntFontRunFeature
@@ -746,15 +746,15 @@ type SfntFeatureHeader struct {
 type SfntFeatureName struct {
 	FeatureType      uint16
 	SettingCount     uint16
-	OffsetToSettings int
+	OffsetToSettings int32
 	FeatureFlags     uint16
 	NameID           int16
 }
 
 // C struct: sfntFontDescriptor
 type SfntFontDescriptor struct {
-	Name  uint
-	Value int
+	Name  uint32
+	Value int32
 }
 
 // C struct: sfntFontFeatureSetting
@@ -773,7 +773,7 @@ type SfntFontRunFeature struct {
 type SfntInstance struct {
 	NameID int16
 	Flags  int16
-	Coord  [1]int
+	Coord  [1]int32
 }
 
 // C struct: sfntNameHeader
@@ -796,17 +796,17 @@ type SfntNameRecord struct {
 
 // C struct: sfntVariationAxis
 type SfntVariationAxis struct {
-	AxisTag      uint
-	MinValue     int
-	DefaultValue int
-	MaxValue     int
+	AxisTag      uint32
+	MinValue     int32
+	DefaultValue int32
+	MaxValue     int32
 	Flags        int16
 	NameID       int16
 }
 
 // C struct: sfntVariationHeader
 type SfntVariationHeader struct {
-	Version        int
+	Version        int32
 	OffsetToData   uint16
 	CountSizePairs uint16
 	AxisCount      uint16

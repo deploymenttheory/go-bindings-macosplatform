@@ -8,6 +8,7 @@ import (
 	"runtime"
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreaudiotypes"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -72,6 +73,21 @@ func (af *AudioFormat) IsKind(className string) bool {
 func (af *AudioFormat) String() string {
 	defer runtime.KeepAlive(af)
 	return rt.Description(objref.IDOf(af))
+}
+
+// NewAudioFormatWithStreamDescription creates an audio format instance from a stream description.
+func NewAudioFormatWithStreamDescription(asbd *coreaudiotypes.AudioStreamBasicDescription) *AudioFormat {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioFormat")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStreamDescription:"), unsafe.Pointer(asbd))
+	return audioFormatAdopt(_id)
+}
+
+// NewAudioFormatWithStreamDescriptionChannelLayout creates an audio format instance from a stream description and channel layout.
+func NewAudioFormatWithStreamDescriptionChannelLayout(asbd *coreaudiotypes.AudioStreamBasicDescription, layout *AudioChannelLayout) *AudioFormat {
+	defer runtime.KeepAlive(layout)
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioFormat")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStreamDescription:channelLayout:"), unsafe.Pointer(asbd), objref.IDOf(layout))
+	return audioFormatAdopt(_id)
 }
 
 // NewAudioFormatStandardFormatWithSampleRateChannels creates an audio format instance with the specified sample rate and channel count.
@@ -156,6 +172,13 @@ func (af *AudioFormat) SampleRate() float64 {
 func (af *AudioFormat) IsInterleaved() bool {
 	defer runtime.KeepAlive(af)
 	_r := objc.Send[bool](objref.IDOf(af), objc.RegisterName("isInterleaved"))
+	return _r
+}
+
+// StreamDescription returns the AudioStreamBasicDescription, for use with lower-level audio API's.
+func (af *AudioFormat) StreamDescription() *coreaudiotypes.AudioStreamBasicDescription {
+	defer runtime.KeepAlive(af)
+	_r := objc.Send[*coreaudiotypes.AudioStreamBasicDescription](objref.IDOf(af), objc.RegisterName("streamDescription"))
 	return _r
 }
 

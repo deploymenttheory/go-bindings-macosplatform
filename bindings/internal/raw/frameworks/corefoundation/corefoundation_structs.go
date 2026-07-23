@@ -87,7 +87,7 @@ type CFFileDescriptorContext struct {
 
 // Structure used to represent a point in time using the Gregorian calendar.
 type CFGregorianDate struct {
-	Year   int
+	Year   int32
 	Month  int8
 	Day    int8
 	Hour   int8
@@ -98,11 +98,11 @@ type CFGregorianDate struct {
 // Structure used to represent a time interval in Gregorian units.
 // Deprecated: Use CFCalendar or NSCalendar API instead
 type CFGregorianUnits struct {
-	Years   int
-	Months  int
-	Days    int
-	Hours   int
-	Minutes int
+	Years   int32
+	Months  int32
+	Days    int32
+	Hours   int32
+	Minutes int32
 	Seconds float64
 }
 
@@ -196,9 +196,9 @@ type CFSocketContext struct {
 
 // A structure that fully specifies the communication protocol and connection address of a CFSocket object.
 type CFSocketSignature struct {
-	ProtocolFamily int
-	SocketType     int
-	Protocol       int
+	ProtocolFamily int32
+	SocketType     int32
+	Protocol       int32
 	Address        unsafe.Pointer
 }
 
@@ -214,7 +214,7 @@ type CFStreamClientContext struct {
 // The structure returned by CFReadStreamGetError and CFWriteStreamGetError.
 type CFStreamError struct {
 	Domain int
-	Error  int
+	Error  int32
 }
 
 // Defines the buffer and related fields used for in-line buffer access of characters in CFString objects.
@@ -283,7 +283,7 @@ type CFXMLAttributeListDeclarationInfo struct {
 // Contains the source URL and text encoding information for the XML document.
 type CFXMLDocumentInfo struct {
 	SourceURL unsafe.Pointer
-	Encoding  uint
+	Encoding  uint32
 }
 
 // Contains the external ID of the DTD.

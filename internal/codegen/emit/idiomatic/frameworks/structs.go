@@ -45,7 +45,12 @@ func resolveStructFields(
 			return nil, nil, false
 		}
 		names = append(names, f.Name)
-		goTypes = append(goTypes, structlayout.StructFieldGoType(f.ObjCType, gt))
+		// Width-correct: StructFieldGoType handles the literal C spellings
+		// (int/unsigned int + arrays); GoABIType walks the typedef chain so a field
+		// spelled with an integer typedef (UInt32, AudioChannelLabel → unsigned int)
+		// is also narrowed from Go int/uint (8 bytes) to int32/uint32.
+		gt = mapper.GoABIType(f.ObjCType, structlayout.StructFieldGoType(f.ObjCType, gt))
+		goTypes = append(goTypes, gt)
 	}
 	return names, goTypes, len(names) > 0
 }
@@ -362,7 +367,7 @@ func emitStructs(
 			if fieldName == "" {
 				fieldName = fmt.Sprintf("Field%d", i)
 			}
-			gt := structlayout.StructFieldGoType(f.ObjCType, hermeticFieldType(f, ctx, mapper, fc, rawPkgAlias, willEmit, imports))
+			gt := mapper.GoABIType(f.ObjCType, structlayout.StructFieldGoType(f.ObjCType, hermeticFieldType(f, ctx, mapper, fc, rawPkgAlias, willEmit, imports)))
 			fields = append(fields, view.Field{GoName: structFieldGoName(fieldName), GoType: gt})
 		}
 		structs = append(structs, view.Struct{GoName: goName, Doc: cleanDoc(s.Doc), Fields: fields})

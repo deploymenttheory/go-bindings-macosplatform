@@ -187,9 +187,11 @@ func buildStructView(
 		// Width-correct the field to the exact C ABI width. The mapper widens a
 		// native C int/unsigned to Go int/uint (8 bytes) for ergonomic function
 		// APIs, but a raw value struct passed by value through purego must match
-		// C's 4-byte int, or every field after the first int is mislaid. No-op for
-		// any non-int field (short/long/stdint/pointers already match).
-		goType = structlayout.StructFieldGoType(field.ObjCType, goType)
+		// C's 4-byte int, or every field after the first int is mislaid.
+		// StructFieldGoType handles the literal spellings + arrays; GoABIType walks
+		// the typedef chain so integer-typedef fields (UInt32, AudioChannelLabel →
+		// unsigned int) are narrowed too. No-op for genuinely 64-bit fields.
+		goType = mapper.GoABIType(field.ObjCType, structlayout.StructFieldGoType(field.ObjCType, goType))
 
 		// If the resolved type references a cross-package unexported identifier
 		// (starts with lowercase after the dot), fall back to unsafe.Pointer.

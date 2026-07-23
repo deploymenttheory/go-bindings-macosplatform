@@ -257,6 +257,21 @@ func AUListenerDispose(inListener obj.Object) error {
 	return nil
 }
 
+var _fnAudioCodecInitialize func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int) int32
+
+// AudioCodecInitialize reports an error if the AudioToolbox framework function AudioCodecInitialize fails.
+func AudioCodecInitialize(inCodec *carboncore.ComponentInstanceRecord, inInputFormat *coreaudiotypes.AudioStreamBasicDescription, inOutputFormat *coreaudiotypes.AudioStreamBasicDescription, inMagicCookie unsafe.Pointer, inMagicCookieByteSize int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioCodecInitialize == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioCodecInitialize, _lib, "AudioCodecInitialize")
+	}
+	_rc := _fnAudioCodecInitialize(unsafe.Pointer(inCodec), unsafe.Pointer(inInputFormat), unsafe.Pointer(inOutputFormat), inMagicCookie, inMagicCookieByteSize)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
 var _fnAudioCodecReset func(unsafe.Pointer) int32
 
 // AudioCodecReset reports an error if the AudioToolbox framework function AudioCodecReset fails.
@@ -394,6 +409,51 @@ func AudioConverterDispose(inAudioConverter obj.Object) error {
 	return nil
 }
 
+var _fnAudioConverterNew func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// AudioConverterNew reports an error if the AudioToolbox framework function AudioConverterNew fails.
+func AudioConverterNew(inSourceFormat *coreaudiotypes.AudioStreamBasicDescription, inDestinationFormat *coreaudiotypes.AudioStreamBasicDescription, outAudioConverter unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioConverterNew == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioConverterNew, _lib, "AudioConverterNew")
+	}
+	_rc := _fnAudioConverterNew(unsafe.Pointer(inSourceFormat), unsafe.Pointer(inDestinationFormat), outAudioConverter)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnAudioConverterNewSpecific func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int32
+
+// AudioConverterNewSpecific reports an error if the AudioToolbox framework function AudioConverterNewSpecific fails.
+func AudioConverterNewSpecific(inSourceFormat *coreaudiotypes.AudioStreamBasicDescription, inDestinationFormat *coreaudiotypes.AudioStreamBasicDescription, inNumberClassDescriptions int, inClassDescriptions *coreaudiotypes.AudioClassDescription, outAudioConverter unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioConverterNewSpecific == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioConverterNewSpecific, _lib, "AudioConverterNewSpecific")
+	}
+	_rc := _fnAudioConverterNewSpecific(unsafe.Pointer(inSourceFormat), unsafe.Pointer(inDestinationFormat), inNumberClassDescriptions, unsafe.Pointer(inClassDescriptions), outAudioConverter)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnAudioConverterNewWithOptions func(unsafe.Pointer, unsafe.Pointer, AudioConverterOptions, unsafe.Pointer) int32
+
+// AudioConverterNewWithOptions reports an error if the AudioToolbox framework function AudioConverterNewWithOptions fails.
+func AudioConverterNewWithOptions(inSourceFormat *coreaudiotypes.AudioStreamBasicDescription, inDestinationFormat *coreaudiotypes.AudioStreamBasicDescription, inOptions AudioConverterOptions, outAudioConverter unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioConverterNewWithOptions == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioConverterNewWithOptions, _lib, "AudioConverterNewWithOptions")
+	}
+	_rc := _fnAudioConverterNewWithOptions(unsafe.Pointer(inSourceFormat), unsafe.Pointer(inDestinationFormat), inOptions, outAudioConverter)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
 var _fnAudioConverterReset func(objc.ID) int32
 
 // AudioConverterReset reports an error if the AudioToolbox framework function AudioConverterReset fails.
@@ -448,6 +508,66 @@ func AudioFileComponentCloseFile(inComponent *carboncore.ComponentInstanceRecord
 		ebipurego.RegisterLibFunc(&_fnAudioFileComponentCloseFile, _lib, "AudioFileComponentCloseFile")
 	}
 	_rc := _fnAudioFileComponentCloseFile(unsafe.Pointer(inComponent))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnAudioFileComponentCreate func(unsafe.Pointer, unsafe.Pointer, objc.ID, unsafe.Pointer, int, unsafe.Pointer) int32
+
+// AudioFileComponentCreate reports an error if the AudioToolbox framework function AudioFileComponentCreate fails.
+func AudioFileComponentCreate(inComponent *carboncore.ComponentInstanceRecord, inParentRef *carboncore.FSRef, inFileName obj.Object, inFormat *coreaudiotypes.AudioStreamBasicDescription, inFlags int, outNewFileRef *carboncore.FSRef) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioFileComponentCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioFileComponentCreate, _lib, "AudioFileComponentCreate")
+	}
+	_rc := _fnAudioFileComponentCreate(unsafe.Pointer(inComponent), unsafe.Pointer(inParentRef), objref.IDOf(inFileName), unsafe.Pointer(inFormat), inFlags, unsafe.Pointer(outNewFileRef))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnAudioFileComponentCreateURL func(unsafe.Pointer, objc.ID, unsafe.Pointer, int) int32
+
+// AudioFileComponentCreateURL reports an error if the AudioToolbox framework function AudioFileComponentCreateURL fails.
+func AudioFileComponentCreateURL(inComponent *carboncore.ComponentInstanceRecord, inFileRef obj.Object, inFormat *coreaudiotypes.AudioStreamBasicDescription, inFlags int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioFileComponentCreateURL == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioFileComponentCreateURL, _lib, "AudioFileComponentCreateURL")
+	}
+	_rc := _fnAudioFileComponentCreateURL(unsafe.Pointer(inComponent), objref.IDOf(inFileRef), unsafe.Pointer(inFormat), inFlags)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnAudioFileComponentInitialize func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int) int32
+
+// AudioFileComponentInitialize reports an error if the AudioToolbox framework function AudioFileComponentInitialize fails.
+func AudioFileComponentInitialize(inComponent *carboncore.ComponentInstanceRecord, inFileRef *carboncore.FSRef, inFormat *coreaudiotypes.AudioStreamBasicDescription, inFlags int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioFileComponentInitialize == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioFileComponentInitialize, _lib, "AudioFileComponentInitialize")
+	}
+	_rc := _fnAudioFileComponentInitialize(unsafe.Pointer(inComponent), unsafe.Pointer(inFileRef), unsafe.Pointer(inFormat), inFlags)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnAudioFileComponentInitializeWithCallbacks func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int) int32
+
+// AudioFileComponentInitializeWithCallbacks reports an error if the AudioToolbox framework function AudioFileComponentInitializeWithCallbacks fails.
+func AudioFileComponentInitializeWithCallbacks(inComponent *carboncore.ComponentInstanceRecord, inClientData unsafe.Pointer, inReadFunc unsafe.Pointer, inWriteFunc unsafe.Pointer, inGetSizeFunc unsafe.Pointer, inSetSizeFunc unsafe.Pointer, inFileType int, inFormat *coreaudiotypes.AudioStreamBasicDescription, inFlags int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioFileComponentInitializeWithCallbacks == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioFileComponentInitializeWithCallbacks, _lib, "AudioFileComponentInitializeWithCallbacks")
+	}
+	_rc := _fnAudioFileComponentInitializeWithCallbacks(unsafe.Pointer(inComponent), inClientData, inReadFunc, inWriteFunc, inGetSizeFunc, inSetSizeFunc, inFileType, unsafe.Pointer(inFormat), inFlags)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -553,6 +673,66 @@ func AudioFileComponentSetUserData(inComponent *carboncore.ComponentInstanceReco
 		ebipurego.RegisterLibFunc(&_fnAudioFileComponentSetUserData, _lib, "AudioFileComponentSetUserData")
 	}
 	_rc := _fnAudioFileComponentSetUserData(unsafe.Pointer(inComponent), inUserDataID, inIndex, inUserDataSize, inUserData)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnAudioFileCreate func(unsafe.Pointer, objc.ID, int, unsafe.Pointer, AudioFileFlags, unsafe.Pointer, unsafe.Pointer) int32
+
+// AudioFileCreate reports an error if the AudioToolbox framework function AudioFileCreate fails.
+func AudioFileCreate(inParentRef *carboncore.FSRef, inFileName obj.Object, inFileType int, inFormat *coreaudiotypes.AudioStreamBasicDescription, inFlags AudioFileFlags, outNewFileRef *carboncore.FSRef, outAudioFile unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioFileCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioFileCreate, _lib, "AudioFileCreate")
+	}
+	_rc := _fnAudioFileCreate(unsafe.Pointer(inParentRef), objref.IDOf(inFileName), inFileType, unsafe.Pointer(inFormat), inFlags, unsafe.Pointer(outNewFileRef), outAudioFile)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnAudioFileCreateWithURL func(objc.ID, int, unsafe.Pointer, AudioFileFlags, unsafe.Pointer) int32
+
+// AudioFileCreateWithURL reports an error if the AudioToolbox framework function AudioFileCreateWithURL fails.
+func AudioFileCreateWithURL(inFileRef obj.Object, inFileType int, inFormat *coreaudiotypes.AudioStreamBasicDescription, inFlags AudioFileFlags, outAudioFile unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioFileCreateWithURL == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioFileCreateWithURL, _lib, "AudioFileCreateWithURL")
+	}
+	_rc := _fnAudioFileCreateWithURL(objref.IDOf(inFileRef), inFileType, unsafe.Pointer(inFormat), inFlags, outAudioFile)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnAudioFileInitialize func(unsafe.Pointer, int, unsafe.Pointer, AudioFileFlags, unsafe.Pointer) int32
+
+// AudioFileInitialize reports an error if the AudioToolbox framework function AudioFileInitialize fails.
+func AudioFileInitialize(inFileRef *carboncore.FSRef, inFileType int, inFormat *coreaudiotypes.AudioStreamBasicDescription, inFlags AudioFileFlags, outAudioFile unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioFileInitialize == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioFileInitialize, _lib, "AudioFileInitialize")
+	}
+	_rc := _fnAudioFileInitialize(unsafe.Pointer(inFileRef), inFileType, unsafe.Pointer(inFormat), inFlags, outAudioFile)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnAudioFileInitializeWithCallbacks func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, AudioFileFlags, unsafe.Pointer) int32
+
+// AudioFileInitializeWithCallbacks reports an error if the AudioToolbox framework function AudioFileInitializeWithCallbacks fails.
+func AudioFileInitializeWithCallbacks(inClientData unsafe.Pointer, inReadFunc unsafe.Pointer, inWriteFunc unsafe.Pointer, inGetSizeFunc unsafe.Pointer, inSetSizeFunc unsafe.Pointer, inFileType int, inFormat *coreaudiotypes.AudioStreamBasicDescription, inFlags AudioFileFlags, outAudioFile unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioFileInitializeWithCallbacks == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioFileInitializeWithCallbacks, _lib, "AudioFileInitializeWithCallbacks")
+	}
+	_rc := _fnAudioFileInitializeWithCallbacks(inClientData, inReadFunc, inWriteFunc, inGetSizeFunc, inSetSizeFunc, inFileType, unsafe.Pointer(inFormat), inFlags, outAudioFile)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -919,6 +1099,36 @@ func AudioQueueFlush(inAQ obj.Object) error {
 	return nil
 }
 
+var _fnAudioQueueNewInput func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, objc.ID, objc.ID, int, unsafe.Pointer) int32
+
+// AudioQueueNewInput reports an error if the AudioToolbox framework function AudioQueueNewInput fails.
+func AudioQueueNewInput(inFormat *coreaudiotypes.AudioStreamBasicDescription, inCallbackProc unsafe.Pointer, inUserData unsafe.Pointer, inCallbackRunLoop obj.Object, inCallbackRunLoopMode obj.Object, inFlags int, outAQ unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioQueueNewInput == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioQueueNewInput, _lib, "AudioQueueNewInput")
+	}
+	_rc := _fnAudioQueueNewInput(unsafe.Pointer(inFormat), inCallbackProc, inUserData, objref.IDOf(inCallbackRunLoop), objref.IDOf(inCallbackRunLoopMode), inFlags, outAQ)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnAudioQueueNewOutput func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, objc.ID, objc.ID, int, unsafe.Pointer) int32
+
+// AudioQueueNewOutput reports an error if the AudioToolbox framework function AudioQueueNewOutput fails.
+func AudioQueueNewOutput(inFormat *coreaudiotypes.AudioStreamBasicDescription, inCallbackProc unsafe.Pointer, inUserData unsafe.Pointer, inCallbackRunLoop obj.Object, inCallbackRunLoopMode obj.Object, inFlags int, outAQ unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioQueueNewOutput == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioQueueNewOutput, _lib, "AudioQueueNewOutput")
+	}
+	_rc := _fnAudioQueueNewOutput(unsafe.Pointer(inFormat), inCallbackProc, inUserData, objref.IDOf(inCallbackRunLoop), objref.IDOf(inCallbackRunLoopMode), inFlags, outAQ)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
 var _fnAudioQueuePause func(objc.ID) int32
 
 // AudioQueuePause reports an error if the AudioToolbox framework function AudioQueuePause fails.
@@ -973,6 +1183,21 @@ func AudioQueueReset(inAQ obj.Object) error {
 		ebipurego.RegisterLibFunc(&_fnAudioQueueReset, _lib, "AudioQueueReset")
 	}
 	_rc := _fnAudioQueueReset(objref.IDOf(inAQ))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnAudioQueueSetOfflineRenderFormat func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
+
+// AudioQueueSetOfflineRenderFormat reports an error if the AudioToolbox framework function AudioQueueSetOfflineRenderFormat fails.
+func AudioQueueSetOfflineRenderFormat(inAQ obj.Object, inFormat *coreaudiotypes.AudioStreamBasicDescription, inLayout *coreaudiotypes.AudioChannelLayout) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioQueueSetOfflineRenderFormat == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioQueueSetOfflineRenderFormat, _lib, "AudioQueueSetOfflineRenderFormat")
+	}
+	_rc := _fnAudioQueueSetOfflineRenderFormat(objref.IDOf(inAQ), unsafe.Pointer(inFormat), unsafe.Pointer(inLayout))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -1515,6 +1740,36 @@ func DisposeMusicSequence(inSequence obj.Object) error {
 		ebipurego.RegisterLibFunc(&_fnDisposeMusicSequence, _lib, "DisposeMusicSequence")
 	}
 	_rc := _fnDisposeMusicSequence(objref.IDOf(inSequence))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnExtAudioFileCreateNew func(unsafe.Pointer, objc.ID, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// ExtAudioFileCreateNew reports an error if the AudioToolbox framework function ExtAudioFileCreateNew fails.
+func ExtAudioFileCreateNew(inParentDir *carboncore.FSRef, inFileName obj.Object, inFileType int, inStreamDesc *coreaudiotypes.AudioStreamBasicDescription, inChannelLayout *coreaudiotypes.AudioChannelLayout, outExtAudioFile unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnExtAudioFileCreateNew == nil {
+		ebipurego.RegisterLibFunc(&_fnExtAudioFileCreateNew, _lib, "ExtAudioFileCreateNew")
+	}
+	_rc := _fnExtAudioFileCreateNew(unsafe.Pointer(inParentDir), objref.IDOf(inFileName), inFileType, unsafe.Pointer(inStreamDesc), unsafe.Pointer(inChannelLayout), outExtAudioFile)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnExtAudioFileCreateWithURL func(objc.ID, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer) int32
+
+// ExtAudioFileCreateWithURL reports an error if the AudioToolbox framework function ExtAudioFileCreateWithURL fails.
+func ExtAudioFileCreateWithURL(inURL obj.Object, inFileType int, inStreamDesc *coreaudiotypes.AudioStreamBasicDescription, inChannelLayout *coreaudiotypes.AudioChannelLayout, inFlags int, outExtAudioFile unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnExtAudioFileCreateWithURL == nil {
+		ebipurego.RegisterLibFunc(&_fnExtAudioFileCreateWithURL, _lib, "ExtAudioFileCreateWithURL")
+	}
+	_rc := _fnExtAudioFileCreateWithURL(objref.IDOf(inURL), inFileType, unsafe.Pointer(inStreamDesc), unsafe.Pointer(inChannelLayout), inFlags, outExtAudioFile)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -2283,6 +2538,21 @@ func MusicTrackNewExtendedControlEvent(inTrack obj.Object, inTimeStamp float64, 
 		ebipurego.RegisterLibFunc(&_fnMusicTrackNewExtendedControlEvent, _lib, "MusicTrackNewExtendedControlEvent")
 	}
 	_rc := _fnMusicTrackNewExtendedControlEvent(objref.IDOf(inTrack), inTimeStamp, unsafe.Pointer(inInfo))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnMusicTrackNewExtendedNoteEvent func(objc.ID, float64, unsafe.Pointer) int32
+
+// MusicTrackNewExtendedNoteEvent reports an error if the AudioToolbox framework function MusicTrackNewExtendedNoteEvent fails.
+func MusicTrackNewExtendedNoteEvent(inTrack obj.Object, inTimeStamp float64, inInfo *ExtendedNoteOnEvent) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMusicTrackNewExtendedNoteEvent == nil {
+		ebipurego.RegisterLibFunc(&_fnMusicTrackNewExtendedNoteEvent, _lib, "MusicTrackNewExtendedNoteEvent")
+	}
+	_rc := _fnMusicTrackNewExtendedNoteEvent(objref.IDOf(inTrack), inTimeStamp, unsafe.Pointer(inInfo))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
