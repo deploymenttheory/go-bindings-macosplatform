@@ -8,7 +8,6 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	ebipurego "github.com/ebitengine/purego"
@@ -1295,10 +1294,10 @@ func CpViewTextureMapGetTextureIndex(viewTextureMap obj.Object) int {
 	return _fnCpViewTextureMapGetTextureIndex(objref.IDOf(viewTextureMap))
 }
 
-var _fnCpViewTextureMapGetViewport func(objc.ID) metal.MTLViewport
+var _fnCpViewTextureMapGetViewport func(objc.ID) unsafe.Pointer
 
 // CpViewTextureMapGetViewport calls the CompositorServices framework function cp_view_texture_map_get_viewport.
-func CpViewTextureMapGetViewport(viewTextureMap obj.Object) metal.MTLViewport {
+func CpViewTextureMapGetViewport(viewTextureMap obj.Object) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpViewTextureMapGetViewport == nil {
 		ebipurego.RegisterLibFunc(&_fnCpViewTextureMapGetViewport, _lib, "cp_view_texture_map_get_viewport")

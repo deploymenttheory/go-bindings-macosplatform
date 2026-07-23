@@ -7,7 +7,6 @@ package avfoundation
 import (
 	"runtime"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -99,12 +98,6 @@ func (cps *CapturePhotoSettings) WithHighResolutionPhotoEnabled(highResolutionPh
 	return cps
 }
 
-// WithMaxPhotoDimensions sets the maximum resolution of the photo to capture.
-func (cps *CapturePhotoSettings) WithMaxPhotoDimensions(maxPhotoDimensions coremedia.CMVideoDimensions) *CapturePhotoSettings {
-	objc.Send[objc.ID](objref.IDOf(cps), objc.RegisterName("setMaxPhotoDimensions:"), maxPhotoDimensions)
-	return cps
-}
-
 // WithConstantColorEnabled sets a Boolean value that indicates whether to capture the photo with constant color.
 func (cps *CapturePhotoSettings) WithConstantColorEnabled(constantColorEnabled bool) *CapturePhotoSettings {
 	objc.Send[objc.ID](objref.IDOf(cps), objc.RegisterName("setConstantColorEnabled:"), constantColorEnabled)
@@ -162,13 +155,6 @@ func (cps *CapturePhotoSettings) PhotoQualityPrioritization() CapturePhotoQualit
 func (cps *CapturePhotoSettings) IsHighResolutionPhotoEnabled() bool {
 	defer runtime.KeepAlive(cps)
 	_r := objc.Send[bool](objref.IDOf(cps), objc.RegisterName("isHighResolutionPhotoEnabled"))
-	return _r
-}
-
-// MaxPhotoDimensions indicates the maximum resolution photo that will be captured. By setting this property you are requesting an image that may be up to as large as the specified dimensions, but no larger. The dimensions set must match one of the dimensions returned by AVCaptureDeviceFormat.supportedMaxPhotoDimensions for the currently configured format and be equal to or smaller than the value of AVCapturePhotoOutput.maxPhotoDimensions. This property defaults to the smallest dimensions returned by AVCaptureDeviceFormat.supportedMaxPhotoDimensions.
-func (cps *CapturePhotoSettings) MaxPhotoDimensions() coremedia.CMVideoDimensions {
-	defer runtime.KeepAlive(cps)
-	_r := objc.Send[coremedia.CMVideoDimensions](objref.IDOf(cps), objc.RegisterName("maxPhotoDimensions"))
 	return _r
 }
 

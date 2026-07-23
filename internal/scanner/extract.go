@@ -268,6 +268,13 @@ func Extract(root *ASTNode, sdkPath, frameworkName, sdkVersion, arch string) *ma
 		}
 	}
 
+	// Capture C structs the accepted API references by name but that are declared
+	// in an external header (e.g. IOUSBHost's deviceDescriptor returns a
+	// const IOUSBDeviceDescriptor *, defined in IOKit's usb/AppleUSBDefinitions.h).
+	// The frameworkFilter rejects them during the main walk, so without this pass
+	// they never reach metadata and the emitter falls back to unsafe.Pointer.
+	captureReferencedStructs(root, framework, f)
+
 	// Set LinkLib and the umbrella header include path for known Apple C
 	// libraries that use -l rather than -framework. Shim-header libraries
 	// (no SDK header) record the shim path instead of an umbrella include.
@@ -890,6 +897,7 @@ func scanStruct(node *ASTNode, framework *macosplatformmetadata.FrameworkMeta, f
 	}
 	absFile, line := nodeFileLine(node, f.currentFile)
 	s := macosplatformmetadata.Struct{
+		Packed:       hasPackedAttr(node),
 		Availability: scanAvailability(node, absFile, line),
 		SDKFile:      sdkRelativePath(f.sdkPath, absFile),
 		SDKLine:      line,
@@ -922,6 +930,227 @@ func scanStruct(node *ASTNode, framework *macosplatformmetadata.FrameworkMeta, f
 		return
 	}
 	framework.Structs[node.Name] = s
+}
+
+// cScalarSizeAlign returns the size and alignment (bytes, LP64) of a fixed-width
+// scalar C field type, and ok=false for anything else (a pointer, array, nested
+// struct/union, enum, bitfield, or unrecognised typedef). Only types whose Go
+// representation is an unambiguous fixed-width primitive are admitted, so a struct
+// built from them lays out identically in Go and C.
+func cScalarSizeAlign(cType string) (size, align int, ok bool) {
+	t := cType
+	for _, q := range []string{"const", "volatile", "_Nonnull", "_Nullable", "_Null_unspecified"} {
+		t = strings.ReplaceAll(t, q, " ")
+	}
+	t = strings.Join(strings.Fields(t), " ")
+	// Only fixed-width types whose Go mapping is unambiguous and identical in size
+	// are admitted, so the scanner's packed-contiguity check agrees with the
+	// emitter's (which computes from the resolved Go type). Native ints of
+	// platform-dependent or codegen-dependent width (int, unsigned, short) are
+	// deliberately excluded — a struct using them stays an opaque unsafe.Pointer
+	// rather than risk a scanner/emitter layout disagreement.
+	switch t {
+	case "uint8_t", "int8_t", "char", "signed char", "unsigned char", "bool", "_Bool", "Boolean":
+		return 1, 1, true
+	case "uint16_t", "int16_t", "short", "unsigned short", "short int", "unsigned short int":
+		// The mapper resolves short/unsigned short to int16/uint16 (2 bytes), so
+		// these are safe. Plain int/unsigned are deliberately excluded: the mapper
+		// resolves them to Go int/uint (8 bytes), which does not match C's 4-byte
+		// int, so a struct using them stays an opaque unsafe.Pointer.
+		return 2, 2, true
+	case "uint32_t", "int32_t", "float":
+		return 4, 4, true
+	case "uint64_t", "int64_t", "double":
+		return 8, 8, true
+	}
+	return 0, 0, false
+}
+
+// structCleanlyTypeable reports whether a RecordDecl can be surfaced as a plain
+// Go value struct that reproduces the C field offsets: it must have at least one
+// field, every field must be a fixed-width scalar, and — if packed — every field
+// must already be naturally aligned at its packed offset (so Go inserts no
+// inter-field padding). Structs that fail (arrays, nested structs, pointers,
+// bitfields, enum fields, or a misaligned packed layout) are left uncaptured so
+// their pointer stays an opaque unsafe.Pointer rather than a wrong-layout type.
+func structCleanlyTypeable(node *ASTNode) bool {
+	packed := hasPackedAttr(node)
+	offset, nFields := 0, 0
+	for i := range node.Inner {
+		child := &node.Inner[i]
+		if child.Kind != "FieldDecl" {
+			continue
+		}
+		nFields++
+		if child.Type == nil {
+			return false
+		}
+		sz, al, ok := cScalarSizeAlign(child.Type.QualType)
+		if !ok {
+			return false
+		}
+		if packed && offset%al != 0 {
+			return false
+		}
+		offset += sz
+	}
+	return nFields > 0
+}
+
+// hasPackedAttr reports whether a RecordDecl carries __attribute__((packed)).
+// Clang emits a PackedAttr child node on the record for it.
+func hasPackedAttr(node *ASTNode) bool {
+	for i := range node.Inner {
+		if node.Inner[i].Kind == "PackedAttr" {
+			return true
+		}
+	}
+	return false
+}
+
+// captureReferencedStructs admits C structs that the framework's accepted API
+// references by name but whose definition lives in an external header the
+// frameworkFilter rejects (e.g. IOUSBHost methods return const
+// IOUSBDeviceDescriptor *, defined in IOKit's usb/AppleUSBDefinitions.h). Without
+// this the struct never reaches metadata and the emitter can only surface the
+// pointer as unsafe.Pointer.
+//
+// Only structs actually referenced by an accepted return/parameter/property or a
+// captured struct's own field are admitted — never every external struct — so no
+// spurious import-graph edges are introduced. The walk repeats to a fixpoint so a
+// referenced struct whose fields reference further structs pulls those in too.
+func captureReferencedStructs(root *ASTNode, framework *macosplatformmetadata.FrameworkMeta, f *frameworkFilter) {
+	for {
+		want := referencedStructNames(framework)
+		if len(want) == 0 {
+			return
+		}
+		captured := 0
+		var lastAnon *ASTNode
+		for i := range root.Inner {
+			node := &root.Inner[i]
+			if node.IsImplicit {
+				continue
+			}
+			// Re-track the rolling file location so scanStruct records the true
+			// (external) header path for each admitted struct.
+			f.UpdateFile(node.Loc)
+			switch node.Kind {
+			case "RecordDecl":
+				if node.Name != "" && node.CompleteDefinition && node.TagUsed == "struct" &&
+					want[node.Name] && structCleanlyTypeable(node) {
+					if _, ok := framework.Structs[node.Name]; !ok {
+						scanStruct(node, framework, f)
+						captured++
+					}
+				}
+				if node.Name == "" && node.CompleteDefinition && node.TagUsed == "struct" {
+					lastAnon = node
+				} else {
+					lastAnon = nil
+				}
+			case "TypedefDecl":
+				// typedef struct { ... } Name — promote the preceding anonymous record
+				// under the typedef name when that name is wanted.
+				if lastAnon != nil && node.Type != nil && want[node.Name] &&
+					structCleanlyTypeable(lastAnon) {
+					structTag := strings.TrimPrefix(node.Type.QualType, "struct ")
+					if structTag != node.Type.QualType && structTag == node.Name {
+						if _, ok := framework.Structs[node.Name]; !ok {
+							named := *lastAnon
+							named.Name = node.Name
+							if named.Loc == nil {
+								named.Loc = node.Loc
+							}
+							scanStruct(&named, framework, f)
+							captured++
+						}
+					}
+				}
+				lastAnon = nil
+			default:
+				lastAnon = nil
+			}
+		}
+		if captured == 0 {
+			return
+		}
+	}
+}
+
+// referencedStructNames returns the set of bare C struct-name tokens the
+// framework's accepted API references (method returns/params/properties, plain
+// functions, externs, and the fields of already-captured structs) that are not
+// yet present in framework.Structs. Names that turn out not to be structs simply
+// never match a RecordDecl and are harmless.
+func referencedStructNames(framework *macosplatformmetadata.FrameworkMeta) map[string]bool {
+	want := map[string]bool{}
+	add := func(objcType string) {
+		if name := bareStructIdent(objcType); name != "" {
+			if _, ok := framework.Structs[name]; !ok {
+				want[name] = true
+			}
+		}
+	}
+	for _, class := range framework.Classes {
+		for _, m := range class.Methods {
+			add(m.Return.ObjCType)
+			for _, p := range m.Params {
+				add(p.ObjCType)
+			}
+		}
+		for _, p := range class.Properties {
+			add(p.ObjCType)
+		}
+	}
+	for _, fn := range framework.Functions {
+		add(fn.Return.ObjCType)
+		for _, p := range fn.Params {
+			add(p.ObjCType)
+		}
+	}
+	for _, ex := range framework.Externs {
+		add(ex.ObjCType)
+	}
+	for _, s := range framework.Structs {
+		for _, fld := range s.Fields {
+			add(fld.ObjCType)
+		}
+	}
+	return want
+}
+
+// bareStructIdent extracts the bare struct identifier from an ObjC type string,
+// stripping const/struct keywords, a single pointer, and nullability. It returns
+// "" when the type is not a single-pointer-or-value plain identifier (it must not
+// match blocks, function pointers, arrays, or double pointers). e.g.
+// "const IOUSBDeviceDescriptor * _Nullable" -> "IOUSBDeviceDescriptor".
+func bareStructIdent(objcType string) string {
+	t := objcType
+	for _, q := range []string{"_Nullable", "_Nonnull", "_Null_unspecified", "const", "volatile", "struct"} {
+		t = strings.ReplaceAll(t, q, " ")
+	}
+	if strings.ContainsAny(t, "(^[<") {
+		return "" // block, function pointer, array, or generic — not a plain struct
+	}
+	stars := strings.Count(t, "*")
+	if stars > 1 {
+		return "" // double pointer — not a value struct reference
+	}
+	t = strings.ReplaceAll(t, "*", " ")
+	fields := strings.Fields(t)
+	if len(fields) != 1 {
+		return ""
+	}
+	ident := fields[0]
+	// A plain C identifier only.
+	for i := 0; i < len(ident); i++ {
+		c := ident[i]
+		if !(c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'z' || c >= '0' && c <= '9' || c == '_') {
+			return ""
+		}
+	}
+	return ident
 }
 
 // --- Functions ---

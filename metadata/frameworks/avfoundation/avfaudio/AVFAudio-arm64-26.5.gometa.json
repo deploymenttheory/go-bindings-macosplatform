@@ -15145,7 +15145,46 @@
       "is_extensible": true
     }
   },
-  "structs": {},
+  "structs": {
+    "AVAudio3DAngularOrientation": {
+      "fields": [
+        {
+          "name": "yaw",
+          "objc_type": "float"
+        },
+        {
+          "name": "pitch",
+          "objc_type": "float"
+        },
+        {
+          "name": "roll",
+          "objc_type": "float"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "AVFAudio/AVAudioTypes.h",
+      "sdk_line": 155
+    },
+    "AVAudio3DPoint": {
+      "fields": [
+        {
+          "name": "x",
+          "objc_type": "float"
+        },
+        {
+          "name": "y",
+          "objc_type": "float"
+        },
+        {
+          "name": "z",
+          "objc_type": "float"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "AVFAudio/AVAudioTypes.h",
+      "sdk_line": 73
+    }
+  },
   "functions": null,
   "externs": null,
   "block_types": {},

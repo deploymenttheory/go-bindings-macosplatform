@@ -2048,6 +2048,7 @@
           "objc_type": "int64_t"
         }
       ],
+      "packed": true,
       "availability": {},
       "sdk_file": "DriverKit/IOReportTypes.h",
       "sdk_line": 108
@@ -2081,6 +2082,7 @@
           "objc_type": "uint32_t"
         }
       ],
+      "packed": true,
       "availability": {},
       "sdk_file": "DriverKit/IOKernelReportStructs.h",
       "sdk_line": 71
@@ -2169,6 +2171,7 @@
           "objc_type": "uint64_t"
         }
       ],
+      "packed": true,
       "availability": {},
       "sdk_file": "DriverKit/IOKernelReportStructs.h",
       "sdk_line": 79
@@ -2355,6 +2358,7 @@
           "objc_type": "int16_t"
         }
       ],
+      "packed": true,
       "availability": {},
       "sdk_file": "DriverKit/IOReportTypes.h",
       "sdk_line": 138
@@ -2382,6 +2386,7 @@
           "objc_type": "IOReportElementValues"
         }
       ],
+      "packed": true,
       "availability": {},
       "sdk_file": "DriverKit/IOReportTypes.h",
       "sdk_line": 195
@@ -2393,6 +2398,7 @@
           "objc_type": "uint64_t[4]"
         }
       ],
+      "packed": true,
       "availability": {},
       "sdk_file": "DriverKit/IOReportTypes.h",
       "sdk_line": 191
@@ -2484,6 +2490,7 @@
           "objc_type": "int64_t[4]"
         }
       ],
+      "packed": true,
       "availability": {},
       "sdk_file": "DriverKit/IOReportTypes.h",
       "sdk_line": 95
@@ -2507,6 +2514,7 @@
           "objc_type": "uint64_t"
         }
       ],
+      "packed": true,
       "availability": {},
       "sdk_file": "DriverKit/IOReportTypes.h",
       "sdk_line": 87
@@ -2540,6 +2548,7 @@
           "objc_type": "uint64_t"
         }
       ],
+      "packed": true,
       "availability": {},
       "sdk_file": "DriverKit/IOReportTypes.h",
       "sdk_line": 100

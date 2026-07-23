@@ -8,6 +8,7 @@ import (
 	"runtime"
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreaudiotypes"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -156,6 +157,13 @@ func (af *AudioFormat) SampleRate() float64 {
 func (af *AudioFormat) IsInterleaved() bool {
 	defer runtime.KeepAlive(af)
 	_r := objc.Send[bool](objref.IDOf(af), objc.RegisterName("isInterleaved"))
+	return _r
+}
+
+// StreamDescription returns the AudioStreamBasicDescription, for use with lower-level audio API's.
+func (af *AudioFormat) StreamDescription() *coreaudiotypes.AudioStreamBasicDescription {
+	defer runtime.KeepAlive(af)
+	_r := objc.Send[*coreaudiotypes.AudioStreamBasicDescription](objref.IDOf(af), objc.RegisterName("streamDescription"))
 	return _r
 }
 

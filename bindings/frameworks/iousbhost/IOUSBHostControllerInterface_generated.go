@@ -103,6 +103,13 @@ func (hci *HostControllerInterface) GetPortStateMachineForPort(port int) (result
 	return HostCIPortStateMachineFromID(_r), nil
 }
 
+// CapabilitiesForPort retrieve a port capabilities structure passed in during initialization
+func (hci *HostControllerInterface) CapabilitiesForPort(port int) *IOUSBHostCIMessage {
+	defer runtime.KeepAlive(hci)
+	_r := objc.Send[*IOUSBHostCIMessage](objref.IDOf(hci), objc.RegisterName("capabilitiesForPort:"), port)
+	return _r
+}
+
 // Queue returns the dispatch queue for asynchronous operations.
 func (hci *HostControllerInterface) Queue() *foundation.Object {
 	defer runtime.KeepAlive(hci)
@@ -122,6 +129,13 @@ func (hci *HostControllerInterface) ControllerStateMachine() *HostCIControllerSt
 	defer runtime.KeepAlive(hci)
 	_r := objc.Send[objc.ID](objref.IDOf(hci), objc.RegisterName("controllerStateMachine"))
 	return HostCIControllerStateMachineFromID(_r)
+}
+
+// Capabilities returns the capabilities structure passed in during initialization The capabilities passed into the initializer can be retrieved for reference.
+func (hci *HostControllerInterface) Capabilities() *IOUSBHostCIMessage {
+	defer runtime.KeepAlive(hci)
+	_r := objc.Send[*IOUSBHostCIMessage](objref.IDOf(hci), objc.RegisterName("capabilities"))
+	return _r
 }
 
 // UUID returns a UUID used to identify the host controller interface in this process and the kernel

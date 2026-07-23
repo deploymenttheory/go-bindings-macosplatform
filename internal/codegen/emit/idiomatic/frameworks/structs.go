@@ -59,6 +59,69 @@ func resolveStructFields(
 	return names, goTypes, len(names) > 0
 }
 
+// scalarGoSizeAlign returns the size and alignment (in bytes, arm64/amd64 LP64)
+// of a hermetic scalar Go type, and ok=false for anything else (a nested struct,
+// pointer, slice, or unresolved type). Only fixed-width types are admitted;
+// notably Go int/uint/uintptr are 8 bytes here, so a field the mapper resolved to
+// a platform-width int is treated as 8 — matching the LP64 C `long`/pointer it
+// came from.
+func scalarGoSizeAlign(goType string) (size, align int, ok bool) {
+	switch goType {
+	case "bool", "int8", "uint8", "byte":
+		return 1, 1, true
+	case "int16", "uint16":
+		return 2, 2, true
+	case "int32", "uint32", "float32", "rune":
+		return 4, 4, true
+	case "int64", "uint64", "float64", "int", "uint", "uintptr":
+		return 8, 8, true
+	}
+	return 0, 0, false
+}
+
+// layoutSafeFromGoTypes reports whether a plain Go struct reproduces the C ABI
+// field offsets of a struct — the condition under which reading fields through a
+// pointer to the C data is correct. An unpacked struct always qualifies (Go and C
+// use the same natural alignment for these scalar fields). A packed struct
+// qualifies when every field is already naturally aligned at its packed offset,
+// so Go inserts no inter-field padding. Trailing padding is deliberately NOT
+// required: a packed struct ending on an odd size (e.g. IOUSBConfiguration
+// Descriptor's 9 bytes) makes the Go value one byte larger, which is immaterial
+// for pointer field access (the only way these are surfaced) though it means the
+// value should not be bulk-copied out of a tightly-sized C allocation. A field
+// whose Go type is not a fixed-width scalar makes the result false (conservative:
+// the opaque path handles it).
+func layoutSafeFromGoTypes(packed bool, goTypes []string) bool {
+	if !packed {
+		return true
+	}
+	offset := 0
+	for _, gt := range goTypes {
+		sz, al, ok := scalarGoSizeAlign(gt)
+		if !ok {
+			return false
+		}
+		if offset%al != 0 {
+			return false // Go would insert padding before this field
+		}
+		offset += sz
+	}
+	return true
+}
+
+// structLayoutSafe is layoutSafeFromGoTypes over a metadata struct's resolved
+// field Go types.
+func structLayoutSafe(s meta.Struct) bool {
+	if !s.Packed {
+		return true
+	}
+	goTypes := make([]string, len(s.Fields))
+	for i, f := range s.Fields {
+		goTypes[i] = f.GoType
+	}
+	return layoutSafeFromGoTypes(true, goTypes)
+}
+
 // ComputeEmittableStructs returns the set of value-struct Go names (across every
 // framework) the idiomatic layer can emit a definition for: a struct is
 // emittable when every field is a Go primitive or another emittable struct.
@@ -92,6 +155,14 @@ func ComputeEmittableStructs(
 				continue
 			}
 			if _, goTypes, ok := resolveStructFields(s, ctx, mapper); ok {
+				// A packed C struct is only safe to surface as a plain Go value when
+				// its natural Go layout reproduces the C ABI byte-for-byte (no padding
+				// inserted); otherwise field reads would be misaligned. Drop unsafe
+				// packed structs from the emittable set so pointer/value uses fall back
+				// to the opaque unsafe.Pointer path rather than a wrong-layout struct.
+				if !layoutSafeFromGoTypes(s.Packed, goTypes) {
+					continue
+				}
 				resolved[goName] = goTypes
 				structFw[goName] = framework.Framework
 			}

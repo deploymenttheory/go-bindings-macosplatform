@@ -506,6 +506,45 @@
     }
   },
   "structs": {
+    "NDR_record_t": {
+      "fields": [
+        {
+          "name": "mig_vers",
+          "objc_type": "unsigned char"
+        },
+        {
+          "name": "if_vers",
+          "objc_type": "unsigned char"
+        },
+        {
+          "name": "reserved1",
+          "objc_type": "unsigned char"
+        },
+        {
+          "name": "mig_encoding",
+          "objc_type": "unsigned char"
+        },
+        {
+          "name": "int_rep",
+          "objc_type": "unsigned char"
+        },
+        {
+          "name": "char_rep",
+          "objc_type": "unsigned char"
+        },
+        {
+          "name": "float_rep",
+          "objc_type": "unsigned char"
+        },
+        {
+          "name": "reserved2",
+          "objc_type": "unsigned char"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "ndr.h",
+      "sdk_line": 40
+    },
     "__Reply__mach_make_memory_entry_64_t": {
       "fields": [
         {

@@ -757,10 +757,10 @@ func VImageCVImageFormatGetChannelCount(format obj.Object) uint32 {
 	return _fnVImageCVImageFormatGetChannelCount(objref.IDOf(format))
 }
 
-var _fnVImageCVImageFormatGetChannelDescription func(objc.ID, uint32) unsafe.Pointer
+var _fnVImageCVImageFormatGetChannelDescription func(objc.ID, uint32) *VImageChannelDescription
 
 // VImageCVImageFormatGetChannelDescription calls the vImage framework function vImageCVImageFormat_GetChannelDescription.
-func VImageCVImageFormatGetChannelDescription(format obj.Object, type_ uint32) unsafe.Pointer {
+func VImageCVImageFormatGetChannelDescription(format obj.Object, type_ uint32) *VImageChannelDescription {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageCVImageFormatGetChannelDescription == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageCVImageFormatGetChannelDescription, _lib, "vImageCVImageFormat_GetChannelDescription")

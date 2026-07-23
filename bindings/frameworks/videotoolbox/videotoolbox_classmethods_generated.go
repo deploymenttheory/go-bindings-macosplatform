@@ -5,7 +5,7 @@
 package videotoolbox
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,14 +49,14 @@ func SupportedScaleFactorsForFrameWidthFrameHeight(frameWidth int, frameHeight i
 }
 
 // MaximumDimensions returns maximum dimensions for a source frame for the processor.
-func MaximumDimensions() coremedia.CMVideoDimensions {
-	_r := objc.Send[coremedia.CMVideoDimensions](objc.ID(_class("VTLowLatencySuperResolutionScalerConfiguration")), objc.RegisterName("maximumDimensions"))
+func MaximumDimensions() avfoundation.CMVideoDimensions {
+	_r := objc.Send[avfoundation.CMVideoDimensions](objc.ID(_class("VTLowLatencySuperResolutionScalerConfiguration")), objc.RegisterName("maximumDimensions"))
 	return _r
 }
 
 // MinimumDimensions returns minimum dimensions for a source frame for the processor.
-func MinimumDimensions() coremedia.CMVideoDimensions {
-	_r := objc.Send[coremedia.CMVideoDimensions](objc.ID(_class("VTLowLatencySuperResolutionScalerConfiguration")), objc.RegisterName("minimumDimensions"))
+func MinimumDimensions() avfoundation.CMVideoDimensions {
+	_r := objc.Send[avfoundation.CMVideoDimensions](objc.ID(_class("VTLowLatencySuperResolutionScalerConfiguration")), objc.RegisterName("minimumDimensions"))
 	return _r
 }
 
@@ -149,14 +149,14 @@ func SupportedSourcePixelFormats() []obj.Object {
 }
 
 // VTTemporalNoiseFilterConfigurationMaximumDimensions returns the maximum dimensions of a source frame that the processor supports.
-func VTTemporalNoiseFilterConfigurationMaximumDimensions() coremedia.CMVideoDimensions {
-	_r := objc.Send[coremedia.CMVideoDimensions](objc.ID(_class("VTTemporalNoiseFilterConfiguration")), objc.RegisterName("maximumDimensions"))
+func VTTemporalNoiseFilterConfigurationMaximumDimensions() avfoundation.CMVideoDimensions {
+	_r := objc.Send[avfoundation.CMVideoDimensions](objc.ID(_class("VTTemporalNoiseFilterConfiguration")), objc.RegisterName("maximumDimensions"))
 	return _r
 }
 
 // VTTemporalNoiseFilterConfigurationMinimumDimensions returns the minimum dimensions of a source frame that the processor supports.
-func VTTemporalNoiseFilterConfigurationMinimumDimensions() coremedia.CMVideoDimensions {
-	_r := objc.Send[coremedia.CMVideoDimensions](objc.ID(_class("VTTemporalNoiseFilterConfiguration")), objc.RegisterName("minimumDimensions"))
+func VTTemporalNoiseFilterConfigurationMinimumDimensions() avfoundation.CMVideoDimensions {
+	_r := objc.Send[avfoundation.CMVideoDimensions](objc.ID(_class("VTTemporalNoiseFilterConfiguration")), objc.RegisterName("minimumDimensions"))
 	return _r
 }
 

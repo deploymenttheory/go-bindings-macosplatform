@@ -20878,6 +20878,7 @@
           "objc_type": "uint8_t"
         }
       ],
+      "packed": true,
       "availability": {},
       "sdk_file": "IOBluetooth/Bluetooth.h",
       "sdk_line": 2400
@@ -20901,6 +20902,7 @@
           "objc_type": "uint16_t"
         }
       ],
+      "packed": true,
       "availability": {},
       "sdk_file": "IOBluetooth/Bluetooth.h",
       "sdk_line": 2428
@@ -20948,6 +20950,7 @@
           "objc_type": "uint8_t"
         }
       ],
+      "packed": true,
       "availability": {},
       "sdk_file": "IOBluetooth/Bluetooth.h",
       "sdk_line": 2413
@@ -20997,6 +21000,7 @@
           "objc_type": "BluetoothHCISupportedFeatures"
         }
       ],
+      "packed": true,
       "availability": {},
       "sdk_file": "IOBluetooth/Bluetooth.h",
       "sdk_line": 2437

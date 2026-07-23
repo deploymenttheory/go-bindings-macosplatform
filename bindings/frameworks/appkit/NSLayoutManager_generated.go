@@ -839,6 +839,24 @@ func (lm *LayoutManager) GlyphAtIndex(glyphIndex int) int {
 	return _r
 }
 
+// RectArrayForCharacterRangeWithinSelectedCharacterRangeInTextContainerRectCount wraps the corresponding Objective-C method.
+func (lm *LayoutManager) RectArrayForCharacterRangeWithinSelectedCharacterRangeInTextContainerRectCount(charRange foundation.NSRange, selCharRange foundation.NSRange, container *TextContainer) (result *corefoundation.CGRect, rectCount int) {
+	defer runtime.KeepAlive(lm)
+	defer runtime.KeepAlive(container)
+	var _out0 int
+	_r := objc.Send[*corefoundation.CGRect](objref.IDOf(lm), objc.RegisterName("rectArrayForCharacterRange:withinSelectedCharacterRange:inTextContainer:rectCount:"), charRange, selCharRange, objref.IDOf(container), unsafe.Pointer(&_out0))
+	return _r, _out0
+}
+
+// RectArrayForGlyphRangeWithinSelectedGlyphRangeInTextContainerRectCount wraps the corresponding Objective-C method.
+func (lm *LayoutManager) RectArrayForGlyphRangeWithinSelectedGlyphRangeInTextContainerRectCount(glyphRange foundation.NSRange, selGlyphRange foundation.NSRange, container *TextContainer) (result *corefoundation.CGRect, rectCount int) {
+	defer runtime.KeepAlive(lm)
+	defer runtime.KeepAlive(container)
+	var _out0 int
+	_r := objc.Send[*corefoundation.CGRect](objref.IDOf(lm), objc.RegisterName("rectArrayForGlyphRange:withinSelectedGlyphRange:inTextContainer:rectCount:"), glyphRange, selGlyphRange, objref.IDOf(container), unsafe.Pointer(&_out0))
+	return _r, _out0
+}
+
 // SubstituteFontForFont wraps the corresponding Objective-C method.
 func (lm *LayoutManager) SubstituteFontForFont(originalFont *Font) *Font {
 	defer runtime.KeepAlive(lm)

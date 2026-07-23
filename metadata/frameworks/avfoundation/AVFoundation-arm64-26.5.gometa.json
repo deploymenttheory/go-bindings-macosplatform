@@ -68496,6 +68496,22 @@
       "sdk_file": "AVFoundation/AVSampleCursor.h",
       "sdk_line": 157,
       "doc": "@struct\t\tAVSampleCursorSyncInfo @abstract   A struct for describing attributes of a media sample for consideration when resynchronizing a decoder. @field      sampleIsFullSync Indicates whether the sample is a full sync sample, also known as an Instantaneous Decoder Refresh sample, and is sufficient in itself to completely resynchronize a decoder. @field      sampleIsPartialSync Indicates whether the sample is a partial sync sample. @field      sampleIsDroppable Indicates whether the sample is droppable."
+    },
+    "CMVideoDimensions": {
+      "fields": [
+        {
+          "name": "width",
+          "objc_type": "int32_t"
+        },
+        {
+          "name": "height",
+          "objc_type": "int32_t"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "CoreMedia/CMFormatDescription.h",
+      "sdk_line": 687,
+      "doc": "@typedef CMVideoDimensions Type used for video dimensions, units are pixels"
     }
   },
   "functions": [

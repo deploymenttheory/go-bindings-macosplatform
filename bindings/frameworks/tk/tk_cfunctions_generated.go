@@ -10,10 +10,10 @@ import (
 	ebipurego "github.com/ebitengine/purego"
 )
 
-var _fnTk_3DBorderColor func(unsafe.Pointer) unsafe.Pointer
+var _fnTk_3DBorderColor func(unsafe.Pointer) *XColor
 
 // Tk_3DBorderColor calls the Tk framework function Tk_3DBorderColor.
-func Tk_3DBorderColor(border unsafe.Pointer) unsafe.Pointer {
+func Tk_3DBorderColor(border unsafe.Pointer) *XColor {
 	_loadOnce.Do(_loadLibrary)
 	if _fnTk_3DBorderColor == nil {
 		ebipurego.RegisterLibFunc(&_fnTk_3DBorderColor, _lib, "Tk_3DBorderColor")
@@ -87,10 +87,10 @@ func Tk_AllocBitmapFromObj(interp unsafe.Pointer, tkwin unsafe.Pointer, objPtr u
 	return int(_fnTk_AllocBitmapFromObj(interp, tkwin, objPtr))
 }
 
-var _fnTk_AllocColorFromObj func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+var _fnTk_AllocColorFromObj func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) *XColor
 
 // Tk_AllocColorFromObj calls the Tk framework function Tk_AllocColorFromObj.
-func Tk_AllocColorFromObj(interp unsafe.Pointer, tkwin unsafe.Pointer, objPtr unsafe.Pointer) unsafe.Pointer {
+func Tk_AllocColorFromObj(interp unsafe.Pointer, tkwin unsafe.Pointer, objPtr unsafe.Pointer) *XColor {
 	_loadOnce.Do(_loadLibrary)
 	if _fnTk_AllocColorFromObj == nil {
 		ebipurego.RegisterLibFunc(&_fnTk_AllocColorFromObj, _lib, "Tk_AllocColorFromObj")
@@ -1435,10 +1435,10 @@ func Tk_GetCapStyle(interp unsafe.Pointer, str string) (result int, capPtr int32
 	return _ret, _out0
 }
 
-var _fnTk_GetColor func(unsafe.Pointer, unsafe.Pointer, string) unsafe.Pointer
+var _fnTk_GetColor func(unsafe.Pointer, unsafe.Pointer, string) *XColor
 
 // Tk_GetColor calls the Tk framework function Tk_GetColor.
-func Tk_GetColor(interp unsafe.Pointer, tkwin unsafe.Pointer, name string) unsafe.Pointer {
+func Tk_GetColor(interp unsafe.Pointer, tkwin unsafe.Pointer, name string) *XColor {
 	_loadOnce.Do(_loadLibrary)
 	if _fnTk_GetColor == nil {
 		ebipurego.RegisterLibFunc(&_fnTk_GetColor, _lib, "Tk_GetColor")
@@ -1446,10 +1446,10 @@ func Tk_GetColor(interp unsafe.Pointer, tkwin unsafe.Pointer, name string) unsaf
 	return _fnTk_GetColor(interp, tkwin, name)
 }
 
-var _fnTk_GetColorByValue func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+var _fnTk_GetColorByValue func(unsafe.Pointer, unsafe.Pointer) *XColor
 
 // Tk_GetColorByValue calls the Tk framework function Tk_GetColorByValue.
-func Tk_GetColorByValue(tkwin unsafe.Pointer) (result unsafe.Pointer, colorPtr XColor) {
+func Tk_GetColorByValue(tkwin unsafe.Pointer) (result *XColor, colorPtr XColor) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnTk_GetColorByValue == nil {
 		ebipurego.RegisterLibFunc(&_fnTk_GetColorByValue, _lib, "Tk_GetColorByValue")
@@ -1459,10 +1459,10 @@ func Tk_GetColorByValue(tkwin unsafe.Pointer) (result unsafe.Pointer, colorPtr X
 	return _ret, _out0
 }
 
-var _fnTk_GetColorFromObj func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+var _fnTk_GetColorFromObj func(unsafe.Pointer, unsafe.Pointer) *XColor
 
 // Tk_GetColorFromObj calls the Tk framework function Tk_GetColorFromObj.
-func Tk_GetColorFromObj(tkwin unsafe.Pointer, objPtr unsafe.Pointer) unsafe.Pointer {
+func Tk_GetColorFromObj(tkwin unsafe.Pointer, objPtr unsafe.Pointer) *XColor {
 	_loadOnce.Do(_loadLibrary)
 	if _fnTk_GetColorFromObj == nil {
 		ebipurego.RegisterLibFunc(&_fnTk_GetColorFromObj, _lib, "Tk_GetColorFromObj")

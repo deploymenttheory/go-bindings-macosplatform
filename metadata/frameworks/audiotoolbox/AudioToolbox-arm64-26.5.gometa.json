@@ -16605,6 +16605,7 @@
           "objc_type": "UInt32"
         }
       ],
+      "packed": true,
       "availability": {},
       "sdk_file": "AudioToolbox/CAFFile.h",
       "sdk_line": 91
@@ -16620,6 +16621,7 @@
           "objc_type": "UInt32"
         }
       ],
+      "packed": true,
       "availability": {},
       "sdk_file": "AudioToolbox/CAFFile.h",
       "sdk_line": 109
@@ -16635,6 +16637,7 @@
           "objc_type": "SInt64"
         }
       ],
+      "packed": true,
       "availability": {},
       "sdk_file": "AudioToolbox/CAFFile.h",
       "sdk_line": 63
@@ -16650,6 +16653,7 @@
           "objc_type": "UInt8[1]"
         }
       ],
+      "packed": true,
       "availability": {},
       "sdk_file": "AudioToolbox/CAFFile.h",
       "sdk_line": 167
@@ -16669,6 +16673,7 @@
           "objc_type": "UInt16"
         }
       ],
+      "packed": true,
       "availability": {},
       "sdk_file": "AudioToolbox/CAFFile.h",
       "sdk_line": 54
@@ -16680,6 +16685,7 @@
           "objc_type": "UInt32"
         }
       ],
+      "packed": true,
       "availability": {},
       "sdk_file": "AudioToolbox/CAFFile.h",
       "sdk_line": 311
@@ -16727,6 +16733,7 @@
           "objc_type": "UInt32"
         }
       ],
+      "packed": true,
       "availability": {},
       "sdk_file": "AudioToolbox/CAFFile.h",
       "sdk_line": 278
@@ -16754,6 +16761,7 @@
           "objc_type": "UInt32"
         }
       ],
+      "packed": true,
       "availability": {},
       "sdk_file": "AudioToolbox/CAFFile.h",
       "sdk_line": 228
@@ -16773,6 +16781,7 @@
           "objc_type": "CAFMarker[1]"
         }
       ],
+      "packed": true,
       "availability": {},
       "sdk_file": "AudioToolbox/CAFFile.h",
       "sdk_line": 238
@@ -16792,6 +16801,7 @@
           "objc_type": "CAFOverviewSample[1]"
         }
       ],
+      "packed": true,
       "availability": {},
       "sdk_file": "AudioToolbox/CAFFile.h",
       "sdk_line": 346
@@ -16807,6 +16817,7 @@
           "objc_type": "SInt16"
         }
       ],
+      "packed": true,
       "availability": {},
       "sdk_file": "AudioToolbox/CAFFile.h",
       "sdk_line": 339
@@ -16834,6 +16845,7 @@
           "objc_type": "UInt8[1]"
         }
       ],
+      "packed": true,
       "availability": {},
       "sdk_file": "AudioToolbox/CAFFile.h",
       "sdk_line": 156
@@ -16849,6 +16861,7 @@
           "objc_type": "CAFPositionPeak[1]"
         }
       ],
+      "packed": true,
       "availability": {},
       "sdk_file": "AudioToolbox/CAFFile.h",
       "sdk_line": 331
@@ -16864,6 +16877,7 @@
           "objc_type": "UInt64"
         }
       ],
+      "packed": true,
       "availability": {},
       "sdk_file": "AudioToolbox/CAFFile.h",
       "sdk_line": 324
@@ -16887,6 +16901,7 @@
           "objc_type": "CAFMarker[1]"
         }
       ],
+      "packed": true,
       "availability": {},
       "sdk_file": "AudioToolbox/CAFFile.h",
       "sdk_line": 254
@@ -16906,6 +16921,7 @@
           "objc_type": "CAFRegion[1]"
         }
       ],
+      "packed": true,
       "availability": {},
       "sdk_file": "AudioToolbox/CAFFile.h",
       "sdk_line": 268
@@ -16921,6 +16937,7 @@
           "objc_type": "SInt64"
         }
       ],
+      "packed": true,
       "availability": {},
       "sdk_file": "AudioToolbox/CAFFile.h",
       "sdk_line": 295
@@ -16936,6 +16953,7 @@
           "objc_type": "CAFStringID[1]"
         }
       ],
+      "packed": true,
       "availability": {},
       "sdk_file": "AudioToolbox/CAFFile.h",
       "sdk_line": 301
@@ -16947,6 +16965,7 @@
           "objc_type": "UInt8[64]"
         }
       ],
+      "packed": true,
       "availability": {},
       "sdk_file": "AudioToolbox/CAFFile.h",
       "sdk_line": 354
@@ -16974,6 +16993,7 @@
           "objc_type": "UInt32"
         }
       ],
+      "packed": true,
       "availability": {},
       "sdk_file": "AudioToolbox/CAFFile.h",
       "sdk_line": 218
@@ -16989,6 +17009,7 @@
           "objc_type": "UInt8[16]"
         }
       ],
+      "packed": true,
       "availability": {},
       "sdk_file": "AudioToolbox/CAFFile.h",
       "sdk_line": 73

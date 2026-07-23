@@ -91,9 +91,9 @@ func (hd *HostDevice) Reset() error {
 }
 
 // ConfigurationDescriptor returns the currently selected configuration descriptor This method uses descriptorWithType to return the configuration descriptor currently selected after a successful setConfiguration call
-func (hd *HostDevice) ConfigurationDescriptor() unsafe.Pointer {
+func (hd *HostDevice) ConfigurationDescriptor() *IOUSBConfigurationDescriptor {
 	defer runtime.KeepAlive(hd)
-	_r := objc.Send[unsafe.Pointer](objref.IDOf(hd), objc.RegisterName("configurationDescriptor"))
+	_r := objc.Send[*IOUSBConfigurationDescriptor](objref.IDOf(hd), objc.RegisterName("configurationDescriptor"))
 	return _r
 }
 

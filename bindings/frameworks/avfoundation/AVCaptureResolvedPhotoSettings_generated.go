@@ -7,7 +7,6 @@ package avfoundation
 import (
 	"runtime"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -84,13 +83,6 @@ func NewCaptureResolvedPhotoSettings() *CaptureResolvedPhotoSettings {
 func (crps *CaptureResolvedPhotoSettings) UniqueID() int64 {
 	defer runtime.KeepAlive(crps)
 	_r := objc.Send[int64](objref.IDOf(crps), objc.RegisterName("uniqueID"))
-	return _r
-}
-
-// PhotoDimensions returns the resolved dimensions of the photo buffer that will be delivered to the -captureOutput:didFinishProcessingPhotoSampleBuffer:previewPhotoSampleBuffer:resolvedSettings:bracketSettings:error: callback. If you request a RAW capture with no processed companion image, photoDimensions resolve to { 0, 0 }.
-func (crps *CaptureResolvedPhotoSettings) PhotoDimensions() coremedia.CMVideoDimensions {
-	defer runtime.KeepAlive(crps)
-	_r := objc.Send[coremedia.CMVideoDimensions](objref.IDOf(crps), objc.RegisterName("photoDimensions"))
 	return _r
 }
 

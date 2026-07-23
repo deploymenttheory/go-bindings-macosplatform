@@ -55479,7 +55479,55 @@
       "is_extensible": true
     }
   },
-  "structs": {},
+  "structs": {
+    "MPSMatrixCopyOffsets": {
+      "fields": [
+        {
+          "name": "sourceRowOffset",
+          "objc_type": "uint32_t"
+        },
+        {
+          "name": "sourceColumnOffset",
+          "objc_type": "uint32_t"
+        },
+        {
+          "name": "destinationRowOffset",
+          "objc_type": "uint32_t"
+        },
+        {
+          "name": "destinationColumnOffset",
+          "objc_type": "uint32_t"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "MetalPerformanceShaders.framework/Frameworks/MPSMatrix/MPSMatrixCombination.h",
+      "sdk_line": 23
+    },
+    "MPSScaleTransform": {
+      "fields": [
+        {
+          "name": "scaleX",
+          "objc_type": "double"
+        },
+        {
+          "name": "scaleY",
+          "objc_type": "double"
+        },
+        {
+          "name": "translateX",
+          "objc_type": "double"
+        },
+        {
+          "name": "translateY",
+          "objc_type": "double"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "MetalPerformanceShaders.framework/Frameworks/MPSCore/MPSCoreTypes.h",
+      "sdk_line": 413,
+      "doc": "@struct         MPSScaleTransform @abstract       Transform matrix for explict control over resampling in MPSImageScale. @discussion     The MPSScaleTransform is equivalent to: @code (CGAffineTransform) { .a = scaleX,        .b = 0, .c = 0,             .d = scaleY, .tx = translateX,   .ty = translateY } @endcode @memberof       MPSImageScale"
+    }
+  },
   "functions": [
     {
       "name": "MPSSupportsMTLDevice",

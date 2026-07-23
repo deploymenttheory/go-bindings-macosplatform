@@ -153,11 +153,16 @@ type EnumMember struct {
 
 // Struct is a C struct exposed by the framework.
 type Struct struct {
-	Fields       []StructField `json:"fields,omitempty"`
-	Availability Availability  `json:"availability,omitempty"`
-	SDKFile      string        `json:"sdk_file,omitempty"`
-	SDKLine      int           `json:"sdk_line,omitempty"`
-	Doc          string        `json:"doc,omitempty"`
+	Fields []StructField `json:"fields,omitempty"`
+	// Packed is true when the C struct carries __attribute__((packed)). The
+	// idiomatic emitter uses it to decide whether a plain Go struct reproduces
+	// the C ABI layout: a packed struct is only safe to surface as a typed Go
+	// value when its natural layout already needs no padding.
+	Packed       bool         `json:"packed,omitempty"`
+	Availability Availability `json:"availability,omitempty"`
+	SDKFile      string       `json:"sdk_file,omitempty"`
+	SDKLine      int          `json:"sdk_line,omitempty"`
+	Doc          string       `json:"doc,omitempty"`
 }
 
 // StructField is one field within a struct.
