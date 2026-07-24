@@ -5421,6 +5421,7 @@
         }
       ],
       "size": 5,
+      "align": 1,
       "availability": {},
       "sdk_file": "CoreMIDI/MIDIUMPCI.h",
       "sdk_line": 184,
@@ -5454,6 +5455,7 @@
         }
       ],
       "size": 8,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreMIDI/MIDIThruConnection.h",
       "sdk_line": 159,
@@ -5467,57 +5469,72 @@
         },
         {
           "name": "QueryInterface",
-          "objc_type": "HRESULT (* _Nonnull)(void * _Nonnull, REFIID, LPVOID *)"
+          "objc_type": "HRESULT (* _Nonnull)(void * _Nonnull, REFIID, LPVOID *)",
+          "offset": 8
         },
         {
           "name": "AddRef",
-          "objc_type": "ULONG (* _Nonnull)(void * _Nonnull)"
+          "objc_type": "ULONG (* _Nonnull)(void * _Nonnull)",
+          "offset": 16
         },
         {
           "name": "Release",
-          "objc_type": "ULONG (* _Nonnull)(void * _Nonnull)"
+          "objc_type": "ULONG (* _Nonnull)(void * _Nonnull)",
+          "offset": 24
         },
         {
           "name": "FindDevices",
-          "objc_type": "OSStatus (* _Nonnull)(MIDIDriverRef _Nonnull, MIDIDeviceListRef)"
+          "objc_type": "OSStatus (* _Nonnull)(MIDIDriverRef _Nonnull, MIDIDeviceListRef)",
+          "offset": 32
         },
         {
           "name": "Start",
-          "objc_type": "OSStatus (* _Nonnull)(MIDIDriverRef _Nonnull, MIDIDeviceListRef)"
+          "objc_type": "OSStatus (* _Nonnull)(MIDIDriverRef _Nonnull, MIDIDeviceListRef)",
+          "offset": 40
         },
         {
           "name": "Stop",
-          "objc_type": "OSStatus (* _Nonnull)(MIDIDriverRef _Nonnull)"
+          "objc_type": "OSStatus (* _Nonnull)(MIDIDriverRef _Nonnull)",
+          "offset": 48
         },
         {
           "name": "Configure",
-          "objc_type": "OSStatus (* _Nonnull)(MIDIDriverRef _Nonnull, MIDIDeviceRef)"
+          "objc_type": "OSStatus (* _Nonnull)(MIDIDriverRef _Nonnull, MIDIDeviceRef)",
+          "offset": 56
         },
         {
           "name": "Send",
-          "objc_type": "OSStatus (* _Nonnull)(MIDIDriverRef _Nonnull, const MIDIPacketList * _Nonnull, void * _Nonnull, void * _Nonnull) __attribute__((nonblocking))"
+          "objc_type": "OSStatus (* _Nonnull)(MIDIDriverRef _Nonnull, const MIDIPacketList * _Nonnull, void * _Nonnull, void * _Nonnull) __attribute__((nonblocking))",
+          "offset": 64
         },
         {
           "name": "EnableSource",
-          "objc_type": "OSStatus (* _Nonnull)(MIDIDriverRef _Nonnull, MIDIEndpointRef, Boolean)"
+          "objc_type": "OSStatus (* _Nonnull)(MIDIDriverRef _Nonnull, MIDIEndpointRef, Boolean)",
+          "offset": 72
         },
         {
           "name": "Flush",
-          "objc_type": "OSStatus (* _Nonnull)(MIDIDriverRef _Nonnull, MIDIEndpointRef, void * _Nullable, void * _Nullable)"
+          "objc_type": "OSStatus (* _Nonnull)(MIDIDriverRef _Nonnull, MIDIEndpointRef, void * _Nullable, void * _Nullable)",
+          "offset": 80
         },
         {
           "name": "Monitor",
-          "objc_type": "OSStatus (* _Nonnull)(MIDIDriverRef _Nonnull, MIDIEndpointRef, const MIDIPacketList * _Nonnull) __attribute__((nonblocking))"
+          "objc_type": "OSStatus (* _Nonnull)(MIDIDriverRef _Nonnull, MIDIEndpointRef, const MIDIPacketList * _Nonnull) __attribute__((nonblocking))",
+          "offset": 88
         },
         {
           "name": "SendPackets",
-          "objc_type": "OSStatus (* _Nonnull)(MIDIDriverRef _Nonnull, const MIDIEventList * _Nonnull, void * _Nonnull, void * _Nonnull) __attribute__((nonblocking))"
+          "objc_type": "OSStatus (* _Nonnull)(MIDIDriverRef _Nonnull, const MIDIEventList * _Nonnull, void * _Nonnull, void * _Nonnull) __attribute__((nonblocking))",
+          "offset": 96
         },
         {
           "name": "MonitorEvents",
-          "objc_type": "OSStatus (* _Nonnull)(MIDIDriverRef _Nonnull, MIDIEndpointRef, const MIDIEventList * _Nonnull) __attribute__((nonblocking))"
+          "objc_type": "OSStatus (* _Nonnull)(MIDIDriverRef _Nonnull, MIDIEndpointRef, const MIDIEventList * _Nonnull) __attribute__((nonblocking))",
+          "offset": 104
         }
       ],
+      "size": 112,
+      "align": 8,
       "availability": {},
       "sdk_file": "CoreMIDI/MIDIDriver.h",
       "sdk_line": 117,
@@ -5561,6 +5578,7 @@
         }
       ],
       "size": 268,
+      "align": 4,
       "availability": {},
       "sdk_file": "CoreMIDI/MIDIServices.h",
       "sdk_line": 481,
@@ -5625,6 +5643,7 @@
         }
       ],
       "size": 8,
+      "align": 4,
       "availability": {},
       "sdk_file": "CoreMIDI/MIDIMessages.h",
       "sdk_line": 235
@@ -5742,6 +5761,7 @@
         }
       ],
       "size": 268,
+      "align": 4,
       "availability": {},
       "sdk_file": "CoreMIDI/MIDIServices.h",
       "sdk_line": 564,
@@ -5844,6 +5864,7 @@
         }
       ],
       "size": 8,
+      "align": 4,
       "availability": {},
       "sdk_file": "CoreMIDI/MIDIThruConnection.h",
       "sdk_line": 181,
@@ -5977,6 +5998,7 @@
         }
       ],
       "size": 204,
+      "align": 4,
       "availability": {},
       "sdk_file": "CoreMIDI/MIDIThruConnection.h",
       "sdk_line": 226,
@@ -5995,6 +6017,7 @@
         }
       ],
       "size": 4,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreMIDI/MIDIThruConnection.h",
       "sdk_line": 126,
@@ -6032,6 +6055,7 @@
         }
       ],
       "size": 128,
+      "align": 1,
       "availability": {},
       "sdk_file": "CoreMIDI/MIDIThruConnection.h",
       "sdk_line": 51,

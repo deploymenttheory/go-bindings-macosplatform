@@ -19502,6 +19502,7 @@
         }
       ],
       "size": 12,
+      "align": 4,
       "availability": {},
       "sdk_file": "AVFAudio/AVAudioTypes.h",
       "sdk_line": 155
@@ -19524,6 +19525,7 @@
         }
       ],
       "size": 12,
+      "align": 4,
       "availability": {},
       "sdk_file": "AVFAudio/AVAudioTypes.h",
       "sdk_line": 73
@@ -19541,6 +19543,7 @@
         }
       ],
       "size": 24,
+      "align": 4,
       "availability": {},
       "sdk_file": "AVFAudio/AVAudioTypes.h",
       "sdk_line": 117
@@ -19590,6 +19593,7 @@
         }
       ],
       "size": 16,
+      "align": 8,
       "availability": {},
       "sdk_file": "AVFAudio/AVAudioSequencer.h",
       "sdk_line": 48

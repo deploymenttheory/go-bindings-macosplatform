@@ -11,6 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/commonpanels"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 type AlertStdAlertParamRec struct {
@@ -54,15 +55,6 @@ type BasicWindowDescription struct {
 	WindowPositionMethod    uint32
 	WindowDefinitionVersion uint32
 	WindowDefinition        unsafe.Pointer
-}
-
-type ContextualMenuInterfaceStruct struct {
-	QueryInterface  unsafe.Pointer
-	AddRef          unsafe.Pointer
-	Release         unsafe.Pointer
-	ExamineContext  unsafe.Pointer
-	HandleSelection unsafe.Pointer
-	PostMenuCleanup unsafe.Pointer
 }
 
 type ControlEditTextSelectionRec struct {
@@ -136,13 +128,6 @@ type CtlCTab struct {
 type DataBrowserAccessibilityItemInfo struct {
 	Version uint32
 	U       unsafe.Pointer
-}
-
-type DataBrowserAccessibilityItemInfoV0 struct {
-	Container      uint
-	Item           uint
-	ColumnProperty uint
-	PropertyPart   uint32
 }
 
 type DataBrowserAccessibilityItemInfoV1 struct {
@@ -266,18 +251,6 @@ type HFSFlavor struct {
 	FileSpec    carboncore.FSSpec
 }
 
-type HIAxisPosition struct {
-	ToView unsafe.Pointer
-	Kind   uint16
-	Offset float64
-}
-
-type HIAxisScale struct {
-	ToView unsafe.Pointer
-	Kind   uint16
-	Ratio  float64
-}
-
 type HIBinding struct {
 	Top    HISideBinding
 	Left   HISideBinding
@@ -326,12 +299,6 @@ type HIScrollBarTrackInfo struct {
 	EnableState uint8
 	PressState  uint8
 	Viewsize    float64
-}
-
-type HISideBinding struct {
-	ToView unsafe.Pointer
-	Kind   uint16
-	Offset float64
 }
 
 type HIThemeAnimationFrameInfo struct {
@@ -579,11 +546,6 @@ type HIViewKind struct {
 	Kind      uint32
 }
 
-type HMHelpContent struct {
-	ContentType uint32
-	U           unsafe.Pointer
-}
-
 type HMHelpContentRec struct {
 	Version    int32
 	AbsHotRect carboncore.Rect
@@ -646,16 +608,6 @@ type ListRec struct {
 	Cells       unsafe.Pointer
 	MaxIndex    int16
 	CellArray   [1]int16
-}
-
-type MCEntry struct {
-	MctID       int16
-	MctItem     int16
-	MctRGB1     commonpanels.RGBColor
-	MctRGB2     commonpanels.RGBColor
-	MctRGB3     commonpanels.RGBColor
-	MctRGB4     commonpanels.RGBColor
-	MctReserved int16
 }
 
 type MDEFDrawData struct {
@@ -736,15 +688,6 @@ type MenuItemDataRec struct {
 	CmdVirtualKey   uint16
 	AttributedText  unsafe.Pointer
 	Font            unsafe.Pointer
-}
-
-type MenuTrackingData struct {
-	Menu              unsafe.Pointer
-	ItemSelected      uint16
-	ItemUnderMouse    uint16
-	ItemRect          carboncore.Rect
-	VirtualMenuTop    int32
-	VirtualMenuBottom int32
 }
 
 type NMRec struct {
@@ -840,16 +783,6 @@ type Rect struct {
 	Right  int16
 }
 
-type STElement struct {
-	StCount  int16
-	StHeight int16
-	StAscent int16
-	StFont   int16
-	StFace   uint8
-	StSize   int16
-	StColor  commonpanels.RGBColor
-}
-
 type ScrapFlavorInfo struct {
 	FlavorType  uint32
 	FlavorFlags uint32
@@ -874,21 +807,6 @@ type ScriptLanguageRecord struct {
 type ScriptLanguageSupport struct {
 	FScriptLanguageCount int16
 	FScriptLanguageArray [1]ScriptLanguageRecord
-}
-
-type ScrollBarTrackInfo struct {
-	Viewsize   int32
-	PressState uint8
-}
-
-type ScrpSTElement struct {
-	ScrpStartChar int32
-	ScrpHeight    int16
-	ScrpAscent    int16
-	ScrpFont      int16
-	ScrpFace      uint8
-	ScrpSize      int16
-	ScrpColor     commonpanels.RGBColor
 }
 
 type SetupWindowProxyDragImageRec struct {
@@ -965,13 +883,6 @@ type TEStyleRec struct {
 
 type TISInputSource struct{}
 
-type TSMGlyphInfo struct {
-	Range      corefoundation.CFRange
-	FontRef    uint32
-	Collection uint16
-	GlyphID    uint16
-}
-
 type TSMGlyphInfoArray struct {
 	NumGlyphInfo uint
 	GlyphInfo    [1]TSMGlyphInfo
@@ -997,6 +908,14 @@ type TXNATSUIVariations struct {
 	VariationValues unsafe.Pointer
 }
 
+type TXNAttributeData struct {
+	DataPtr        unsafe.Pointer
+	DataValue      uint32
+	AtsuFeatures   unsafe.Pointer
+	AtsuVariations unsafe.Pointer
+	URLReference   unsafe.Pointer
+}
+
 type TXNBackground struct {
 	BgType uint32
 	Bg     TXNBackgroundData
@@ -1011,6 +930,13 @@ type TXNCarbonEventInfo struct {
 	Filler          uint8
 	Flags           uint16
 	FDictionary     unsafe.Pointer
+}
+
+type TXNControlData struct {
+	UValue     uint
+	SValue     int
+	TabValue   TXNTab
+	MarginsPtr unsafe.Pointer
 }
 
 type TXNLongRect struct {
@@ -1042,7 +968,7 @@ type TXNTab struct {
 type TXNTypeAttributes struct {
 	Tag  uint32
 	Size uint
-	Data unsafe.Pointer
+	Data TXNAttributeData
 }
 
 type TabletPointRec struct {
@@ -1073,11 +999,6 @@ type TabletProximityRec struct {
 	CapabilityMask      uint32
 	PointerType         uint8
 	EnterProximity      uint8
-}
-
-type TextServiceInfo struct {
-	FComponent unsafe.Pointer
-	FItemName  [256]uint8
 }
 
 type TextServiceList struct {
@@ -1317,3 +1238,352 @@ type WindowGroupRef struct{ obj.Object }
 // IsNil reports whether WindowGroupRef is a NULL handle (it wraps no object). Call
 // it before using a returned handle; a nil handle's methods panic.
 func (h WindowGroupRef) IsNil() bool { return h.Object == nil }
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type ContextualMenuInterfaceStruct struct {
+	_    [0]uint64
+	data [56]byte
+}
+
+// AsQueryInterface returns the QueryInterface field, read from the backing bytes at offset 8.
+func (u *ContextualMenuInterfaceStruct) AsQueryInterface() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsAddRef binds the AddRef C function pointer (offset 16) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *ContextualMenuInterfaceStruct) AsAddRef() func(unsafe.Pointer) uint32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[16]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer) uint32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsRelease binds the Release C function pointer (offset 24) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *ContextualMenuInterfaceStruct) AsRelease() func(unsafe.Pointer) uint32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[24]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer) uint32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsExamineContext binds the ExamineContext C function pointer (offset 32) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *ContextualMenuInterfaceStruct) AsExamineContext() func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[32]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsHandleSelection binds the HandleSelection C function pointer (offset 40) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *ContextualMenuInterfaceStruct) AsHandleSelection() func(unsafe.Pointer, unsafe.Pointer, int32) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[40]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer, int32) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsPostMenuCleanup binds the PostMenuCleanup C function pointer (offset 48) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *ContextualMenuInterfaceStruct) AsPostMenuCleanup() func(unsafe.Pointer) {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[48]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer)
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type DataBrowserAccessibilityItemInfoV0 struct {
+	_    [0]uint16
+	data [28]byte
+}
+
+// AsContainer returns the container field, read from the backing bytes at offset 0.
+func (u *DataBrowserAccessibilityItemInfoV0) AsContainer() uint {
+	return *(*uint)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsItem returns the item field, read from the backing bytes at offset 8.
+func (u *DataBrowserAccessibilityItemInfoV0) AsItem() uint {
+	return *(*uint)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsColumnProperty returns the columnProperty field, read from the backing bytes at offset 16.
+func (u *DataBrowserAccessibilityItemInfoV0) AsColumnProperty() uint {
+	return *(*uint)(unsafe.Pointer(&u.data[16]))
+}
+
+// AsPropertyPart returns the propertyPart field, read from the backing bytes at offset 24.
+func (u *DataBrowserAccessibilityItemInfoV0) AsPropertyPart() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[24]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type HIAxisPosition struct {
+	_    [0]uint16
+	data [18]byte
+}
+
+// AsKind returns the kind field, read from the backing bytes at offset 8.
+func (u *HIAxisPosition) AsKind() uint16 {
+	return *(*uint16)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsOffset returns the offset field, read from the backing bytes at offset 10.
+func (u *HIAxisPosition) AsOffset() float64 {
+	return *(*float64)(unsafe.Pointer(&u.data[10]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type HIAxisScale struct {
+	_    [0]uint16
+	data [18]byte
+}
+
+// AsKind returns the kind field, read from the backing bytes at offset 8.
+func (u *HIAxisScale) AsKind() uint16 {
+	return *(*uint16)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsRatio returns the ratio field, read from the backing bytes at offset 10.
+func (u *HIAxisScale) AsRatio() float64 {
+	return *(*float64)(unsafe.Pointer(&u.data[10]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type HISideBinding struct {
+	_    [0]uint16
+	data [18]byte
+}
+
+// AsKind returns the kind field, read from the backing bytes at offset 8.
+func (u *HISideBinding) AsKind() uint16 {
+	return *(*uint16)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsOffset returns the offset field, read from the backing bytes at offset 10.
+func (u *HISideBinding) AsOffset() float64 {
+	return *(*float64)(unsafe.Pointer(&u.data[10]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type HMHelpContent struct {
+	_    [0]uint16
+	data [260]byte
+}
+
+// AsContentType returns the contentType field, read from the backing bytes at offset 0.
+func (u *HMHelpContent) AsContentType() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[0]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type MCEntry struct {
+	_    [0]uint16
+	data [30]byte
+}
+
+// AsMctID returns the mctID field, read from the backing bytes at offset 0.
+func (u *MCEntry) AsMctID() int16 {
+	return *(*int16)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsMctItem returns the mctItem field, read from the backing bytes at offset 2.
+func (u *MCEntry) AsMctItem() int16 {
+	return *(*int16)(unsafe.Pointer(&u.data[2]))
+}
+
+// AsMctReserved returns the mctReserved field, read from the backing bytes at offset 28.
+func (u *MCEntry) AsMctReserved() int16 {
+	return *(*int16)(unsafe.Pointer(&u.data[28]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type MenuTrackingData struct {
+	_    [0]uint16
+	data [28]byte
+}
+
+// AsItemSelected returns the itemSelected field, read from the backing bytes at offset 8.
+func (u *MenuTrackingData) AsItemSelected() uint16 {
+	return *(*uint16)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsItemUnderMouse returns the itemUnderMouse field, read from the backing bytes at offset 10.
+func (u *MenuTrackingData) AsItemUnderMouse() uint16 {
+	return *(*uint16)(unsafe.Pointer(&u.data[10]))
+}
+
+// AsVirtualMenuTop returns the virtualMenuTop field, read from the backing bytes at offset 20.
+func (u *MenuTrackingData) AsVirtualMenuTop() int32 {
+	return *(*int32)(unsafe.Pointer(&u.data[20]))
+}
+
+// AsVirtualMenuBottom returns the virtualMenuBottom field, read from the backing bytes at offset 24.
+func (u *MenuTrackingData) AsVirtualMenuBottom() int32 {
+	return *(*int32)(unsafe.Pointer(&u.data[24]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type STElement struct {
+	_    [0]uint16
+	data [18]byte
+}
+
+// AsStCount returns the stCount field, read from the backing bytes at offset 0.
+func (u *STElement) AsStCount() int16 {
+	return *(*int16)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsStHeight returns the stHeight field, read from the backing bytes at offset 2.
+func (u *STElement) AsStHeight() int16 {
+	return *(*int16)(unsafe.Pointer(&u.data[2]))
+}
+
+// AsStAscent returns the stAscent field, read from the backing bytes at offset 4.
+func (u *STElement) AsStAscent() int16 {
+	return *(*int16)(unsafe.Pointer(&u.data[4]))
+}
+
+// AsStFont returns the stFont field, read from the backing bytes at offset 6.
+func (u *STElement) AsStFont() int16 {
+	return *(*int16)(unsafe.Pointer(&u.data[6]))
+}
+
+// AsStFace returns the stFace field, read from the backing bytes at offset 8.
+func (u *STElement) AsStFace() uint8 {
+	return *(*uint8)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsStSize returns the stSize field, read from the backing bytes at offset 10.
+func (u *STElement) AsStSize() int16 {
+	return *(*int16)(unsafe.Pointer(&u.data[10]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type ScrollBarTrackInfo struct {
+	_    [0]uint16
+	data [6]byte
+}
+
+// AsViewsize returns the viewsize field, read from the backing bytes at offset 0.
+func (u *ScrollBarTrackInfo) AsViewsize() int32 {
+	return *(*int32)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsPressState returns the pressState field, read from the backing bytes at offset 4.
+func (u *ScrollBarTrackInfo) AsPressState() uint8 {
+	return *(*uint8)(unsafe.Pointer(&u.data[4]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type ScrpSTElement struct {
+	_    [0]uint16
+	data [20]byte
+}
+
+// AsScrpStartChar returns the scrpStartChar field, read from the backing bytes at offset 0.
+func (u *ScrpSTElement) AsScrpStartChar() int32 {
+	return *(*int32)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsScrpHeight returns the scrpHeight field, read from the backing bytes at offset 4.
+func (u *ScrpSTElement) AsScrpHeight() int16 {
+	return *(*int16)(unsafe.Pointer(&u.data[4]))
+}
+
+// AsScrpAscent returns the scrpAscent field, read from the backing bytes at offset 6.
+func (u *ScrpSTElement) AsScrpAscent() int16 {
+	return *(*int16)(unsafe.Pointer(&u.data[6]))
+}
+
+// AsScrpFont returns the scrpFont field, read from the backing bytes at offset 8.
+func (u *ScrpSTElement) AsScrpFont() int16 {
+	return *(*int16)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsScrpFace returns the scrpFace field, read from the backing bytes at offset 10.
+func (u *ScrpSTElement) AsScrpFace() uint8 {
+	return *(*uint8)(unsafe.Pointer(&u.data[10]))
+}
+
+// AsScrpSize returns the scrpSize field, read from the backing bytes at offset 12.
+func (u *ScrpSTElement) AsScrpSize() int16 {
+	return *(*int16)(unsafe.Pointer(&u.data[12]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type TSMGlyphInfo struct {
+	_    [0]uint16
+	data [24]byte
+}
+
+// AsFontRef returns the fontRef field, read from the backing bytes at offset 16.
+func (u *TSMGlyphInfo) AsFontRef() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[16]))
+}
+
+// AsCollection returns the collection field, read from the backing bytes at offset 20.
+func (u *TSMGlyphInfo) AsCollection() uint16 {
+	return *(*uint16)(unsafe.Pointer(&u.data[20]))
+}
+
+// AsGlyphID returns the glyphID field, read from the backing bytes at offset 22.
+func (u *TSMGlyphInfo) AsGlyphID() uint16 {
+	return *(*uint16)(unsafe.Pointer(&u.data[22]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type TextServiceInfo struct {
+	_    [0]uint16
+	data [264]byte
+}
+
+// AsFItemName returns the fItemName field, read from the backing bytes at offset 8.
+func (u *TextServiceInfo) AsFItemName() [256]uint8 {
+	return *(*[256]uint8)(unsafe.Pointer(&u.data[8]))
+}

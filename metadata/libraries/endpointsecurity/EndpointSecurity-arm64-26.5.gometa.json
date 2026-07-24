@@ -4246,6 +4246,7 @@
         }
       ],
       "size": 32,
+      "align": 4,
       "availability": {},
       "sdk_file": "message.h",
       "sdk_line": 506
@@ -4325,6 +4326,7 @@
         }
       ],
       "size": 80,
+      "align": 8,
       "availability": {},
       "sdk_file": "ESMessage.h",
       "sdk_line": 1015,
@@ -4566,21 +4568,27 @@
         },
         {
           "name": "app",
-          "objc_type": "es_process_t * _Nullable"
+          "objc_type": "es_process_t * _Nullable",
+          "offset": 8
         },
         {
           "name": "item",
-          "objc_type": "es_btm_launch_item_t * _Nonnull"
+          "objc_type": "es_btm_launch_item_t * _Nonnull",
+          "offset": 16
         },
         {
           "name": "instigator_token",
-          "objc_type": "audit_token_t * _Nullable"
+          "objc_type": "audit_token_t * _Nullable",
+          "offset": 24
         },
         {
           "name": "app_token",
-          "objc_type": "audit_token_t * _Nullable"
+          "objc_type": "audit_token_t * _Nullable",
+          "offset": 32
         }
       ],
+      "size": 40,
+      "align": 8,
       "availability": {},
       "sdk_file": "ESMessage.h",
       "sdk_line": 1825,
@@ -5078,6 +5086,7 @@
         }
       ],
       "size": 32,
+      "align": 1,
       "availability": {},
       "sdk_file": "ESTypes.h",
       "sdk_line": 11
@@ -7286,6 +7295,7 @@
         }
       ],
       "size": 16,
+      "align": 8,
       "availability": {},
       "sdk_file": "ESTypes.h",
       "sdk_line": 404,

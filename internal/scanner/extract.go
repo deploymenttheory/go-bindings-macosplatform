@@ -896,9 +896,13 @@ func scanEnumValue(node *ASTNode) string {
 // --- Structs ---
 
 func scanStruct(node *ASTNode, framework *macosplatformmetadata.FrameworkMeta, f *frameworkFilter) {
-	if node.Name == "" || node.TagUsed == "union" {
+	// Drop only ANONYMOUS records. A named union is captured (its members all
+	// overlap at offset 0) so the byte-array + accessor tier can surface it; an
+	// anonymous one has no name to emit under.
+	if node.Name == "" {
 		return
 	}
+	isUnion := node.TagUsed == "union"
 	// Skip forward declarations entirely. Clang emits two RecordDecls for the
 	// same struct when there is a `struct Foo;` somewhere ahead of the full
 	// definition: one with completeDefinition=true and full FieldDecl children,
@@ -914,6 +918,7 @@ func scanStruct(node *ASTNode, framework *macosplatformmetadata.FrameworkMeta, f
 	absFile, line := nodeFileLine(node, f.currentFile)
 	s := macosplatformmetadata.Struct{
 		Packed:       hasPackedAttr(node),
+		IsUnion:      isUnion,
 		Availability: scanAvailability(node, absFile, line),
 		SDKFile:      sdkRelativePath(f.sdkPath, absFile),
 		SDKLine:      line,
@@ -951,11 +956,63 @@ func scanStruct(node *ASTNode, framework *macosplatformmetadata.FrameworkMeta, f
 	// the emitter falls back to its computed layout).
 	if layout, ok := f.layouts[node.Name]; ok && len(layout.FieldOffsets) == len(s.Fields) {
 		s.Size = layout.Size
+		s.Align = layout.Align
 		for i := range s.Fields {
 			s.Fields[i].Offset = layout.FieldOffsets[i]
 		}
+	} else if size, offsets, ok := pointerOnlyLayout(s.Fields); ok {
+		// Pointer-only records (e.g. the Kerberos cc_*_f dispatch tables) are never
+		// laid out by clang because nothing uses them by value, so f.layouts has no
+		// entry. Every field is an 8-byte pointer (function pointer, object pointer,
+		// or data pointer), so the layout is deterministic: tightly packed 8-byte
+		// slots, 8-byte aligned. Synthesising it lets the byte-array tier surface the
+		// dispatch table with typed function accessors.
+		s.Size = size
+		s.Align = 8
+		for i := range s.Fields {
+			s.Fields[i].Offset = offsets[i]
+		}
 	}
 	framework.Structs[node.Name] = s
+}
+
+// pointerOnlyLayout returns the synthesised size and per-field offsets for a
+// record every one of whose fields is a single machine pointer (8 bytes on LP64):
+// a function pointer `T (*)(…)`, a block `T (^)(…)`, or any `… *` data/object
+// pointer. Such a record has a trivially deterministic layout (8-byte slots, no
+// padding) that clang omits when the record is only referenced by pointer. It
+// returns ok=false for an empty field list or any non-pointer field.
+func pointerOnlyLayout(fields []macosplatformmetadata.StructField) (size int, offsets []int, ok bool) {
+	if len(fields) == 0 {
+		return 0, nil, false
+	}
+	offsets = make([]int, len(fields))
+	for i, fld := range fields {
+		if !isPointerWidthCType(fld.ObjCType) {
+			return 0, nil, false
+		}
+		offsets[i] = i * 8
+	}
+	return len(fields) * 8, offsets, true
+}
+
+// isPointerWidthCType reports whether a C field type is a single 8-byte pointer:
+// a function pointer or block (contains "(*" / "(^"), or a type whose last
+// non-space token is "*" (a data or object pointer). Arrays, scalars, and
+// by-value aggregates are not.
+func isPointerWidthCType(objcType string) bool {
+	t := strings.TrimSpace(objcType)
+	if t == "" {
+		return false
+	}
+	if strings.Contains(t, "(*") || strings.Contains(t, "(^") {
+		return true
+	}
+	// Strip trailing nullability/qualifier tokens, then require a trailing '*'.
+	for _, q := range []string{"_Nullable", "_Nonnull", "_Null_unspecified", "const", "volatile"} {
+		t = strings.TrimSpace(strings.TrimSuffix(t, q))
+	}
+	return strings.HasSuffix(strings.TrimSpace(t), "*")
 }
 
 // cScalarSizeAlign returns the size and alignment (bytes, LP64) of a fixed-width

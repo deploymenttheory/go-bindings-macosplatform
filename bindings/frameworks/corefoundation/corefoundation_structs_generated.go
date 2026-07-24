@@ -400,12 +400,6 @@ type CFXMLEntityReferenceInfo struct {
 	EntityType CFXMLEntityTypeCode
 }
 
-// Contains the system and public IDs for an external entity reference.
-type CFXMLExternalID struct {
-	SystemID unsafe.Pointer
-	PublicID unsafe.Pointer
-}
-
 type CFXMLNode struct{}
 
 // Contains the external ID of the notation.
@@ -966,3 +960,12 @@ type ObjcZoneT struct{ obj.Object }
 // IsNil reports whether ObjcZoneT is a NULL handle (it wraps no object). Call
 // it before using a returned handle; a nil handle's methods panic.
 func (h ObjcZoneT) IsNil() bool { return h.Object == nil }
+
+// Contains the system and public IDs for an external entity reference.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CFXMLExternalID struct {
+	_    [0]uint64
+	data [16]byte
+}

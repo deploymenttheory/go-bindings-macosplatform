@@ -5,6 +5,8 @@
 package glkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
@@ -32,3 +34,99 @@ type GLKMatrixStackRef struct{ obj.Object }
 // IsNil reports whether GLKMatrixStackRef is a NULL handle (it wraps no object). Call
 // it before using a returned handle; a nil handle's methods panic.
 func (h GLKMatrixStackRef) IsNil() bool { return h.Object == nil }
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type GLKMatrix2 struct {
+	_    [0]uint32
+	data [16]byte
+}
+
+// AsM2 returns the m2 field, read from the backing bytes at offset 0.
+func (u *GLKMatrix2) AsM2() [2][2]float32 {
+	return *(*[2][2]float32)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsM returns the m field, read from the backing bytes at offset 0.
+func (u *GLKMatrix2) AsM() [4]float32 {
+	return *(*[4]float32)(unsafe.Pointer(&u.data[0]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type GLKMatrix3 struct {
+	_    [0]uint32
+	data [36]byte
+}
+
+// AsM returns the m field, read from the backing bytes at offset 0.
+func (u *GLKMatrix3) AsM() [9]float32 {
+	return *(*[9]float32)(unsafe.Pointer(&u.data[0]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type GLKMatrix4 struct {
+	_    [0]uint64
+	data [64]byte
+}
+
+// AsM returns the m field, read from the backing bytes at offset 0.
+func (u *GLKMatrix4) AsM() [16]float32 {
+	return *(*[16]float32)(unsafe.Pointer(&u.data[0]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type GLKQuaternion struct {
+	_    [0]uint64
+	data [16]byte
+}
+
+// AsQ returns the q field, read from the backing bytes at offset 0.
+func (u *GLKQuaternion) AsQ() [4]float32 {
+	return *(*[4]float32)(unsafe.Pointer(&u.data[0]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type GLKVector2 struct {
+	_    [0]uint64
+	data [8]byte
+}
+
+// AsV returns the v field, read from the backing bytes at offset 0.
+func (u *GLKVector2) AsV() [2]float32 {
+	return *(*[2]float32)(unsafe.Pointer(&u.data[0]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type GLKVector3 struct {
+	_    [0]uint32
+	data [12]byte
+}
+
+// AsV returns the v field, read from the backing bytes at offset 0.
+func (u *GLKVector3) AsV() [3]float32 {
+	return *(*[3]float32)(unsafe.Pointer(&u.data[0]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type GLKVector4 struct {
+	_    [0]uint64
+	data [16]byte
+}
+
+// AsV returns the v field, read from the backing bytes at offset 0.
+func (u *GLKVector4) AsV() [4]float32 {
+	return *(*[4]float32)(unsafe.Pointer(&u.data[0]))
+}

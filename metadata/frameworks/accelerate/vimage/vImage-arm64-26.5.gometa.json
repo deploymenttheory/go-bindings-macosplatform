@@ -2528,6 +2528,7 @@
         }
       ],
       "size": 32,
+      "align": 8,
       "availability": {},
       "sdk_file": "Accelerate.framework/Frameworks/vImage/vImage_Types.h",
       "sdk_line": 155

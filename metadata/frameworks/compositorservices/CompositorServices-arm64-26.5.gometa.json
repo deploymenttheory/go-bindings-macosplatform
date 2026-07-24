@@ -2981,6 +2981,7 @@
         }
       ],
       "size": 48,
+      "align": 8,
       "availability": {},
       "sdk_file": "Metal/MTLRenderCommandEncoder.h",
       "sdk_line": 48

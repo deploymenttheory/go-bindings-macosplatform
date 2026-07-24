@@ -35256,6 +35256,7 @@
         }
       ],
       "size": 10,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/CarbonCore/AIFF.h",
       "sdk_line": 185
@@ -35357,6 +35358,7 @@
         }
       ],
       "size": 20,
+      "align": 2,
       "availability": {
         "macos_introduced": "10.0",
         "macos_deprecated": "10.8",
@@ -35452,6 +35454,7 @@
         }
       ],
       "size": 12,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/CarbonCore/Components.h",
       "sdk_line": 133
@@ -35510,6 +35513,7 @@
         }
       ],
       "size": 44,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/CarbonCore/Components.h",
       "sdk_line": 123
@@ -35721,6 +35725,20 @@
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/CarbonCore/OSUtils.h",
       "sdk_line": 561
+    },
+    "ExceptionInfo": {
+      "fields": [
+        {
+          "name": "memoryInfo",
+          "objc_type": "MemoryExceptionInformation *"
+        }
+      ],
+      "size": 8,
+      "align": 8,
+      "is_union": true,
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/CarbonCore/MachineExceptions.h",
+      "sdk_line": 187
     },
     "ExceptionInformation": {
       "fields": [
@@ -35954,6 +35972,8 @@
           "objc_type": "const void *"
         }
       ],
+      "size": 8,
+      "align": 8,
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/CarbonCore/MachineExceptions.h",
       "sdk_line": 351
@@ -36914,6 +36934,7 @@
         }
       ],
       "size": 4,
+      "align": 2,
       "availability": {
         "macos_introduced": "10.0",
         "macos_deprecated": "10.8",
@@ -37361,6 +37382,7 @@
         }
       ],
       "size": 332,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/CarbonCore/IntlResources.h",
       "sdk_line": 146
@@ -37651,6 +37673,7 @@
         }
       ],
       "size": 20,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/CarbonCore/IntlResources.h",
       "sdk_line": 331
@@ -37742,9 +37765,46 @@
         }
       ],
       "size": 12,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/CarbonCore/MacLocales.h",
       "sdk_line": 62
+    },
+    "LongDateCvt": {
+      "fields": [
+        {
+          "name": "c",
+          "objc_type": "SInt64"
+        },
+        {
+          "name": "hl",
+          "objc_type": "struct (unnamed struct at /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreServices.framework/Frameworks/CarbonCore.framework/Headers/DateTimeUtils.h:191:3)"
+        }
+      ],
+      "is_union": true,
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/CarbonCore/DateTimeUtils.h",
+      "sdk_line": 189
+    },
+    "LongDateRec": {
+      "fields": [
+        {
+          "name": "ld",
+          "objc_type": "struct (unnamed struct at /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreServices.framework/Frameworks/CarbonCore.framework/Headers/DateTimeUtils.h:200:3)"
+        },
+        {
+          "name": "list",
+          "objc_type": "short[14]"
+        },
+        {
+          "name": "od",
+          "objc_type": "struct (unnamed struct at /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreServices.framework/Frameworks/CarbonCore.framework/Headers/DateTimeUtils.h:217:3)"
+        }
+      ],
+      "is_union": true,
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/CarbonCore/DateTimeUtils.h",
+      "sdk_line": 199
     },
     "MIDIDataChunk": {
       "fields": [
@@ -38148,6 +38208,8 @@
           "objc_type": "const void *"
         }
       ],
+      "size": 8,
+      "align": 8,
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/CarbonCore/MachineExceptions.h",
       "sdk_line": 345
@@ -38240,6 +38302,7 @@
         }
       ],
       "size": 262,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/CarbonCore/AIFF.h",
       "sdk_line": 128
@@ -38487,6 +38550,7 @@
         }
       ],
       "size": 4,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/CarbonCore/IntlResources.h",
       "sdk_line": 110
@@ -38693,6 +38757,7 @@
         }
       ],
       "size": 40,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/CarbonCore/PEFBinaryFormat.h",
       "sdk_line": 96
@@ -38934,9 +38999,16 @@
         }
       ],
       "size": 4,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/CarbonCore/PEFBinaryFormat.h",
       "sdk_line": 491
+    },
+    "ParamBlockRec": {
+      "is_union": true,
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/CarbonCore/Files.h",
+      "sdk_line": 370
     },
     "Point": {
       "fields": [
@@ -38951,6 +39023,7 @@
         }
       ],
       "size": 4,
+      "align": 2,
       "availability": {},
       "sdk_file": "MacTypes.h",
       "sdk_line": 544,
@@ -39021,6 +39094,7 @@
         }
       ],
       "size": 8,
+      "align": 2,
       "availability": {},
       "sdk_file": "MacTypes.h",
       "sdk_line": 550
@@ -39032,6 +39106,8 @@
           "objc_type": "const void *"
         }
       ],
+      "size": 8,
+      "align": 8,
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/CarbonCore/MachineExceptions.h",
       "sdk_line": 348
@@ -39206,6 +39282,7 @@
         }
       ],
       "size": 6,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/CarbonCore/Components.h",
       "sdk_line": 118
@@ -39291,6 +39368,7 @@
         }
       ],
       "size": 28,
+      "align": 2,
       "availability": {
         "macos_introduced": "10.0",
         "macos_deprecated": "10.8",
@@ -39393,6 +39471,7 @@
         }
       ],
       "size": 10,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/CarbonCore/TextCommon.h",
       "sdk_line": 604
@@ -39482,6 +39561,7 @@
         }
       ],
       "size": 12,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/CarbonCore/TextEncodingConverter.h",
       "sdk_line": 59
@@ -39558,6 +39638,7 @@
         }
       ],
       "size": 24,
+      "align": 4,
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/CarbonCore/TextEncodingPlugin.h",
       "sdk_line": 114
@@ -40003,6 +40084,7 @@
         }
       ],
       "size": 16,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/CarbonCore/IntlResources.h",
       "sdk_line": 293
@@ -40044,6 +40126,7 @@
         }
       ],
       "size": 12,
+      "align": 4,
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/CarbonCore/TextEncodingPlugin.h",
       "sdk_line": 84
@@ -40061,6 +40144,7 @@
         }
       ],
       "size": 12,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/CarbonCore/TextCommon.h",
       "sdk_line": 597
@@ -40462,6 +40546,7 @@
         }
       ],
       "size": 28,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/CarbonCore/UnicodeUtilities.h",
       "sdk_line": 156
@@ -40484,6 +40569,7 @@
         }
       ],
       "size": 8,
+      "align": 2,
       "availability": {
         "macos_introduced": "10.0",
         "macos_deprecated": "10.4",
@@ -40510,6 +40596,7 @@
         }
       ],
       "size": 12,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/CarbonCore/UnicodeConverter.h",
       "sdk_line": 57
@@ -40533,6 +40620,28 @@
       "sdk_file": "CoreServices.framework/Frameworks/CarbonCore/IntlResources.h",
       "sdk_line": 183
     },
+    "Vector128": {
+      "fields": [
+        {
+          "name": "l",
+          "objc_type": "unsigned long[4]"
+        },
+        {
+          "name": "s",
+          "objc_type": "unsigned short[8]"
+        },
+        {
+          "name": "c",
+          "objc_type": "unsigned char[16]"
+        }
+      ],
+      "size": 32,
+      "align": 8,
+      "is_union": true,
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/CarbonCore/MachineExceptions.h",
+      "sdk_line": 107
+    },
     "VectorInformation": {
       "fields": [
         {
@@ -40540,6 +40649,8 @@
           "objc_type": "const void *"
         }
       ],
+      "size": 8,
+      "align": 8,
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/CarbonCore/MachineExceptions.h",
       "sdk_line": 354
@@ -40596,6 +40707,24 @@
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/CarbonCore/Files.h",
       "sdk_line": 1621
+    },
+    "WideChar": {
+      "fields": [
+        {
+          "name": "a",
+          "objc_type": "struct (unnamed struct at /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreServices.framework/Frameworks/CarbonCore.framework/Headers/IntlResources.h:208:3)"
+        },
+        {
+          "name": "b",
+          "objc_type": "short"
+        }
+      ],
+      "size": 2,
+      "align": 2,
+      "is_union": true,
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/CarbonCore/IntlResources.h",
+      "sdk_line": 207
     },
     "WideCharArr": {
       "fields": [

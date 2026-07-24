@@ -17633,9 +17633,12 @@
         },
         {
           "name": "oid",
-          "objc_type": "const SecAsn1Oid *"
+          "objc_type": "const SecAsn1Oid *",
+          "offset": 8
         }
       ],
+      "size": 16,
+      "align": 8,
       "availability": {},
       "sdk_file": "Security/cssmapple.h",
       "sdk_line": 898
@@ -17791,6 +17794,7 @@
         }
       ],
       "size": 32,
+      "align": 8,
       "availability": {},
       "sdk_file": "Security/SecAsn1Types.h",
       "sdk_line": 58
@@ -17808,6 +17812,7 @@
         }
       ],
       "size": 48,
+      "align": 8,
       "availability": {},
       "sdk_file": "Security/SecAsn1Types.h",
       "sdk_line": 63
@@ -18090,6 +18095,7 @@
         }
       ],
       "size": 64,
+      "align": 8,
       "availability": {},
       "sdk_file": "Security/certextensions.h",
       "sdk_line": 164
@@ -18338,9 +18344,12 @@
         },
         {
           "name": "excluded",
-          "objc_type": "CE_GeneralSubtrees *"
+          "objc_type": "CE_GeneralSubtrees *",
+          "offset": 8
         }
       ],
+      "size": 16,
+      "align": 8,
       "availability": {},
       "sdk_file": "Security/certextensions.h",
       "sdk_line": 696
@@ -18489,9 +18498,12 @@
         },
         {
           "name": "nameRegistrationAuthorities",
-          "objc_type": "CE_NameRegistrationAuthorities *"
+          "objc_type": "CE_NameRegistrationAuthorities *",
+          "offset": 8
         }
       ],
+      "size": 16,
+      "align": 8,
       "availability": {},
       "sdk_file": "Security/certextensions.h",
       "sdk_line": 596
@@ -18606,6 +18618,7 @@
         }
       ],
       "size": 32,
+      "align": 4,
       "availability": {},
       "sdk_file": "message.h",
       "sdk_line": 506
@@ -18718,6 +18731,7 @@
         }
       ],
       "size": 152,
+      "align": 8,
       "availability": {},
       "sdk_file": "Security/cssmtype.h",
       "sdk_line": 645
@@ -18788,6 +18802,7 @@
         }
       ],
       "size": 32,
+      "align": 8,
       "availability": {},
       "sdk_file": "Security/cssmtype.h",
       "sdk_line": 640
@@ -18799,6 +18814,8 @@
           "objc_type": "CSSM_ACCESS_CREDENTIALS *"
         }
       ],
+      "size": 8,
+      "align": 8,
       "availability": {},
       "sdk_file": "Security/cssmapple.h",
       "sdk_line": 765
@@ -18869,6 +18886,7 @@
         }
       ],
       "size": 16,
+      "align": 8,
       "availability": {},
       "sdk_file": "Security/cssmtype.h",
       "sdk_line": 635
@@ -18920,6 +18938,7 @@
         }
       ],
       "size": 8,
+      "align": 4,
       "availability": {},
       "sdk_file": "Security/cssmtype.h",
       "sdk_line": 1816
@@ -19153,6 +19172,7 @@
         }
       ],
       "size": 16,
+      "align": 8,
       "availability": {
         "macos_introduced": "10.0",
         "macos_deprecated": "12.0",
@@ -19179,6 +19199,7 @@
         }
       ],
       "size": 8,
+      "align": 1,
       "availability": {},
       "sdk_file": "Security/cssmtype.h",
       "sdk_line": 710
@@ -19220,6 +19241,7 @@
         }
       ],
       "size": 32,
+      "align": 8,
       "availability": {},
       "sdk_file": "Security/cssmtype.h",
       "sdk_line": 1852
@@ -19242,6 +19264,7 @@
         }
       ],
       "size": 40,
+      "align": 8,
       "availability": {},
       "sdk_file": "Security/cssmtype.h",
       "sdk_line": 1936
@@ -19477,6 +19500,7 @@
         }
       ],
       "size": 24,
+      "align": 8,
       "availability": {},
       "sdk_file": "Security/cssmtype.h",
       "sdk_line": 511
@@ -19499,6 +19523,7 @@
         }
       ],
       "size": 24,
+      "align": 8,
       "availability": {},
       "sdk_file": "Security/cssmtype.h",
       "sdk_line": 1373
@@ -19586,6 +19611,7 @@
         }
       ],
       "size": 16,
+      "align": 4,
       "availability": {},
       "sdk_file": "Security/cssmtype.h",
       "sdk_line": 97
@@ -19708,6 +19734,7 @@
         }
       ],
       "size": 76,
+      "align": 4,
       "availability": {},
       "sdk_file": "Security/cssmtype.h",
       "sdk_line": 990
@@ -19730,6 +19757,7 @@
         }
       ],
       "size": 16,
+      "align": 8,
       "availability": {},
       "sdk_file": "Security/cssmkrapi.h",
       "sdk_line": 40
@@ -19915,6 +19943,7 @@
         }
       ],
       "size": 24,
+      "align": 8,
       "availability": {},
       "sdk_file": "Security/cssmtype.h",
       "sdk_line": 383
@@ -19977,25 +20006,32 @@
         },
         {
           "name": "Terminate",
-          "objc_type": "CSSM_RETURN (*)(void)"
+          "objc_type": "CSSM_RETURN (*)(void)",
+          "offset": 8
         },
         {
           "name": "RegisterDispatchTable",
-          "objc_type": "CSSM_RETURN (*)(CSSM_STATE_FUNCS_PTR)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_STATE_FUNCS_PTR)",
+          "offset": 16
         },
         {
           "name": "DeregisterDispatchTable",
-          "objc_type": "CSSM_RETURN (*)(void)"
+          "objc_type": "CSSM_RETURN (*)(void)",
+          "offset": 24
         },
         {
           "name": "EventNotifyManager",
-          "objc_type": "CSSM_RETURN (*)(const CSSM_MANAGER_EVENT_NOTIFICATION *)"
+          "objc_type": "CSSM_RETURN (*)(const CSSM_MANAGER_EVENT_NOTIFICATION *)",
+          "offset": 32
         },
         {
           "name": "RefreshFunctionTable",
-          "objc_type": "CSSM_RETURN (*)(CSSM_FUNC_NAME_ADDR_PTR, uint32)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_FUNC_NAME_ADDR_PTR, uint32)",
+          "offset": 40
         }
       ],
+      "size": 48,
+      "align": 8,
       "availability": {},
       "sdk_file": "Security/emmspi.h",
       "sdk_line": 66
@@ -20319,9 +20355,12 @@
         },
         {
           "name": "PassThrough",
-          "objc_type": "CSSM_RETURN (*)(CSSM_AC_HANDLE, CSSM_TP_HANDLE, CSSM_CL_HANDLE, CSSM_CC_HANDLE, const CSSM_DL_DB_LIST *, uint32, const void *, void **)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_AC_HANDLE, CSSM_TP_HANDLE, CSSM_CL_HANDLE, CSSM_CC_HANDLE, const CSSM_DL_DB_LIST *, uint32, const void *, void **)",
+          "offset": 8
         }
       ],
+      "size": 16,
+      "align": 8,
       "availability": {},
       "sdk_file": "Security/cssmaci.h",
       "sdk_line": 38
@@ -20334,157 +20373,197 @@
         },
         {
           "name": "CertGetAllTemplateFields",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, const SecAsn1Item *, uint32 *, CSSM_FIELD_PTR *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, const SecAsn1Item *, uint32 *, CSSM_FIELD_PTR *)",
+          "offset": 8
         },
         {
           "name": "CertSign",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, CSSM_CC_HANDLE, const SecAsn1Item *, const CSSM_FIELD *, uint32, CSSM_DATA_PTR)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, CSSM_CC_HANDLE, const SecAsn1Item *, const CSSM_FIELD *, uint32, CSSM_DATA_PTR)",
+          "offset": 16
         },
         {
           "name": "CertVerify",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, CSSM_CC_HANDLE, const SecAsn1Item *, const SecAsn1Item *, const CSSM_FIELD *, uint32)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, CSSM_CC_HANDLE, const SecAsn1Item *, const SecAsn1Item *, const CSSM_FIELD *, uint32)",
+          "offset": 24
         },
         {
           "name": "CertVerifyWithKey",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, CSSM_CC_HANDLE, const SecAsn1Item *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, CSSM_CC_HANDLE, const SecAsn1Item *)",
+          "offset": 32
         },
         {
           "name": "CertGetFirstFieldValue",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, const SecAsn1Item *, const SecAsn1Oid *, CSSM_HANDLE_PTR, uint32 *, CSSM_DATA_PTR *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, const SecAsn1Item *, const SecAsn1Oid *, CSSM_HANDLE_PTR, uint32 *, CSSM_DATA_PTR *)",
+          "offset": 40
         },
         {
           "name": "CertGetNextFieldValue",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, CSSM_HANDLE, CSSM_DATA_PTR *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, CSSM_HANDLE, CSSM_DATA_PTR *)",
+          "offset": 48
         },
         {
           "name": "CertAbortQuery",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, CSSM_HANDLE)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, CSSM_HANDLE)",
+          "offset": 56
         },
         {
           "name": "CertGetKeyInfo",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, const SecAsn1Item *, CSSM_KEY_PTR *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, const SecAsn1Item *, CSSM_KEY_PTR *)",
+          "offset": 64
         },
         {
           "name": "CertGetAllFields",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, const SecAsn1Item *, uint32 *, CSSM_FIELD_PTR *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, const SecAsn1Item *, uint32 *, CSSM_FIELD_PTR *)",
+          "offset": 72
         },
         {
           "name": "FreeFields",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, uint32, CSSM_FIELD_PTR *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, uint32, CSSM_FIELD_PTR *)",
+          "offset": 80
         },
         {
           "name": "FreeFieldValue",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, const SecAsn1Oid *, CSSM_DATA_PTR)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, const SecAsn1Oid *, CSSM_DATA_PTR)",
+          "offset": 88
         },
         {
           "name": "CertCache",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, const SecAsn1Item *, CSSM_HANDLE_PTR)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, const SecAsn1Item *, CSSM_HANDLE_PTR)",
+          "offset": 96
         },
         {
           "name": "CertGetFirstCachedFieldValue",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, CSSM_HANDLE, const SecAsn1Oid *, CSSM_HANDLE_PTR, uint32 *, CSSM_DATA_PTR *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, CSSM_HANDLE, const SecAsn1Oid *, CSSM_HANDLE_PTR, uint32 *, CSSM_DATA_PTR *)",
+          "offset": 104
         },
         {
           "name": "CertGetNextCachedFieldValue",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, CSSM_HANDLE, CSSM_DATA_PTR *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, CSSM_HANDLE, CSSM_DATA_PTR *)",
+          "offset": 112
         },
         {
           "name": "CertAbortCache",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, CSSM_HANDLE)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, CSSM_HANDLE)",
+          "offset": 120
         },
         {
           "name": "CertGroupToSignedBundle",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, CSSM_CC_HANDLE, const CSSM_CERTGROUP *, const CSSM_CERT_BUNDLE_HEADER *, CSSM_DATA_PTR)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, CSSM_CC_HANDLE, const CSSM_CERTGROUP *, const CSSM_CERT_BUNDLE_HEADER *, CSSM_DATA_PTR)",
+          "offset": 128
         },
         {
           "name": "CertGroupFromVerifiedBundle",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, CSSM_CC_HANDLE, const CSSM_CERT_BUNDLE *, const SecAsn1Item *, CSSM_CERTGROUP_PTR *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, CSSM_CC_HANDLE, const CSSM_CERT_BUNDLE *, const SecAsn1Item *, CSSM_CERTGROUP_PTR *)",
+          "offset": 136
         },
         {
           "name": "CertDescribeFormat",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, uint32 *, CSSM_OID_PTR *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, uint32 *, CSSM_OID_PTR *)",
+          "offset": 144
         },
         {
           "name": "CrlCreateTemplate",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, uint32, const CSSM_FIELD *, CSSM_DATA_PTR)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, uint32, const CSSM_FIELD *, CSSM_DATA_PTR)",
+          "offset": 152
         },
         {
           "name": "CrlSetFields",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, uint32, const CSSM_FIELD *, const SecAsn1Item *, CSSM_DATA_PTR)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, uint32, const CSSM_FIELD *, const SecAsn1Item *, CSSM_DATA_PTR)",
+          "offset": 160
         },
         {
           "name": "CrlAddCert",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, CSSM_CC_HANDLE, const SecAsn1Item *, uint32, const CSSM_FIELD *, const SecAsn1Item *, CSSM_DATA_PTR)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, CSSM_CC_HANDLE, const SecAsn1Item *, uint32, const CSSM_FIELD *, const SecAsn1Item *, CSSM_DATA_PTR)",
+          "offset": 168
         },
         {
           "name": "CrlRemoveCert",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, const SecAsn1Item *, const SecAsn1Item *, CSSM_DATA_PTR)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, const SecAsn1Item *, const SecAsn1Item *, CSSM_DATA_PTR)",
+          "offset": 176
         },
         {
           "name": "CrlSign",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, CSSM_CC_HANDLE, const SecAsn1Item *, const CSSM_FIELD *, uint32, CSSM_DATA_PTR)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, CSSM_CC_HANDLE, const SecAsn1Item *, const CSSM_FIELD *, uint32, CSSM_DATA_PTR)",
+          "offset": 184
         },
         {
           "name": "CrlVerify",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, CSSM_CC_HANDLE, const SecAsn1Item *, const SecAsn1Item *, const CSSM_FIELD *, uint32)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, CSSM_CC_HANDLE, const SecAsn1Item *, const SecAsn1Item *, const CSSM_FIELD *, uint32)",
+          "offset": 192
         },
         {
           "name": "CrlVerifyWithKey",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, CSSM_CC_HANDLE, const SecAsn1Item *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, CSSM_CC_HANDLE, const SecAsn1Item *)",
+          "offset": 200
         },
         {
           "name": "IsCertInCrl",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, const SecAsn1Item *, const SecAsn1Item *, CSSM_BOOL *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, const SecAsn1Item *, const SecAsn1Item *, CSSM_BOOL *)",
+          "offset": 208
         },
         {
           "name": "CrlGetFirstFieldValue",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, const SecAsn1Item *, const SecAsn1Oid *, CSSM_HANDLE_PTR, uint32 *, CSSM_DATA_PTR *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, const SecAsn1Item *, const SecAsn1Oid *, CSSM_HANDLE_PTR, uint32 *, CSSM_DATA_PTR *)",
+          "offset": 216
         },
         {
           "name": "CrlGetNextFieldValue",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, CSSM_HANDLE, CSSM_DATA_PTR *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, CSSM_HANDLE, CSSM_DATA_PTR *)",
+          "offset": 224
         },
         {
           "name": "CrlAbortQuery",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, CSSM_HANDLE)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, CSSM_HANDLE)",
+          "offset": 232
         },
         {
           "name": "CrlGetAllFields",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, const SecAsn1Item *, uint32 *, CSSM_FIELD_PTR *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, const SecAsn1Item *, uint32 *, CSSM_FIELD_PTR *)",
+          "offset": 240
         },
         {
           "name": "CrlCache",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, const SecAsn1Item *, CSSM_HANDLE_PTR)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, const SecAsn1Item *, CSSM_HANDLE_PTR)",
+          "offset": 248
         },
         {
           "name": "IsCertInCachedCrl",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, const SecAsn1Item *, CSSM_HANDLE, CSSM_BOOL *, CSSM_DATA_PTR)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, const SecAsn1Item *, CSSM_HANDLE, CSSM_BOOL *, CSSM_DATA_PTR)",
+          "offset": 256
         },
         {
           "name": "CrlGetFirstCachedFieldValue",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, CSSM_HANDLE, const SecAsn1Item *, const SecAsn1Oid *, CSSM_HANDLE_PTR, uint32 *, CSSM_DATA_PTR *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, CSSM_HANDLE, const SecAsn1Item *, const SecAsn1Oid *, CSSM_HANDLE_PTR, uint32 *, CSSM_DATA_PTR *)",
+          "offset": 264
         },
         {
           "name": "CrlGetNextCachedFieldValue",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, CSSM_HANDLE, CSSM_DATA_PTR *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, CSSM_HANDLE, CSSM_DATA_PTR *)",
+          "offset": 272
         },
         {
           "name": "CrlGetAllCachedRecordFields",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, CSSM_HANDLE, const SecAsn1Item *, uint32 *, CSSM_FIELD_PTR *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, CSSM_HANDLE, const SecAsn1Item *, uint32 *, CSSM_FIELD_PTR *)",
+          "offset": 280
         },
         {
           "name": "CrlAbortCache",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, CSSM_HANDLE)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, CSSM_HANDLE)",
+          "offset": 288
         },
         {
           "name": "CrlDescribeFormat",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, uint32 *, CSSM_OID_PTR *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, uint32 *, CSSM_OID_PTR *)",
+          "offset": 296
         },
         {
           "name": "PassThrough",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, CSSM_CC_HANDLE, uint32, const void *, void **)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CL_HANDLE, CSSM_CC_HANDLE, uint32, const void *, void **)",
+          "offset": 304
         }
       ],
+      "size": 312,
+      "align": 8,
       "availability": {},
       "sdk_file": "Security/cssmcli.h",
       "sdk_line": 38
@@ -20497,229 +20576,287 @@
         },
         {
           "name": "QuerySize",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *, CSSM_BOOL, uint32, CSSM_QUERY_SIZE_DATA_PTR)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *, CSSM_BOOL, uint32, CSSM_QUERY_SIZE_DATA_PTR)",
+          "offset": 8
         },
         {
           "name": "SignData",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *, const SecAsn1Item *, uint32, CSSM_ALGORITHMS, CSSM_DATA_PTR)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *, const SecAsn1Item *, uint32, CSSM_ALGORITHMS, CSSM_DATA_PTR)",
+          "offset": 16
         },
         {
           "name": "SignDataInit",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *)",
+          "offset": 24
         },
         {
           "name": "SignDataUpdate",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const SecAsn1Item *, uint32)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const SecAsn1Item *, uint32)",
+          "offset": 32
         },
         {
           "name": "SignDataFinal",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, CSSM_DATA_PTR)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, CSSM_DATA_PTR)",
+          "offset": 40
         },
         {
           "name": "VerifyData",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *, const SecAsn1Item *, uint32, CSSM_ALGORITHMS, const SecAsn1Item *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *, const SecAsn1Item *, uint32, CSSM_ALGORITHMS, const SecAsn1Item *)",
+          "offset": 48
         },
         {
           "name": "VerifyDataInit",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *)",
+          "offset": 56
         },
         {
           "name": "VerifyDataUpdate",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const SecAsn1Item *, uint32)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const SecAsn1Item *, uint32)",
+          "offset": 64
         },
         {
           "name": "VerifyDataFinal",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const SecAsn1Item *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const SecAsn1Item *)",
+          "offset": 72
         },
         {
           "name": "DigestData",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *, const SecAsn1Item *, uint32, CSSM_DATA_PTR)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *, const SecAsn1Item *, uint32, CSSM_DATA_PTR)",
+          "offset": 80
         },
         {
           "name": "DigestDataInit",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *)",
+          "offset": 88
         },
         {
           "name": "DigestDataUpdate",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const SecAsn1Item *, uint32)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const SecAsn1Item *, uint32)",
+          "offset": 96
         },
         {
           "name": "DigestDataClone",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, CSSM_CC_HANDLE)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, CSSM_CC_HANDLE)",
+          "offset": 104
         },
         {
           "name": "DigestDataFinal",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, CSSM_DATA_PTR)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, CSSM_DATA_PTR)",
+          "offset": 112
         },
         {
           "name": "GenerateMac",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *, const SecAsn1Item *, uint32, CSSM_DATA_PTR)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *, const SecAsn1Item *, uint32, CSSM_DATA_PTR)",
+          "offset": 120
         },
         {
           "name": "GenerateMacInit",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *)",
+          "offset": 128
         },
         {
           "name": "GenerateMacUpdate",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const SecAsn1Item *, uint32)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const SecAsn1Item *, uint32)",
+          "offset": 136
         },
         {
           "name": "GenerateMacFinal",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, CSSM_DATA_PTR)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, CSSM_DATA_PTR)",
+          "offset": 144
         },
         {
           "name": "VerifyMac",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *, const SecAsn1Item *, uint32, const SecAsn1Item *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *, const SecAsn1Item *, uint32, const SecAsn1Item *)",
+          "offset": 152
         },
         {
           "name": "VerifyMacInit",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *)",
+          "offset": 160
         },
         {
           "name": "VerifyMacUpdate",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const SecAsn1Item *, uint32)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const SecAsn1Item *, uint32)",
+          "offset": 168
         },
         {
           "name": "VerifyMacFinal",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const SecAsn1Item *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const SecAsn1Item *)",
+          "offset": 176
         },
         {
           "name": "EncryptData",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *, const SecAsn1Item *, uint32, CSSM_DATA_PTR, uint32, CSSM_SIZE *, CSSM_DATA_PTR, CSSM_PRIVILEGE)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *, const SecAsn1Item *, uint32, CSSM_DATA_PTR, uint32, CSSM_SIZE *, CSSM_DATA_PTR, CSSM_PRIVILEGE)",
+          "offset": 184
         },
         {
           "name": "EncryptDataInit",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *, CSSM_PRIVILEGE)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *, CSSM_PRIVILEGE)",
+          "offset": 192
         },
         {
           "name": "EncryptDataUpdate",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const SecAsn1Item *, uint32, CSSM_DATA_PTR, uint32, CSSM_SIZE *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const SecAsn1Item *, uint32, CSSM_DATA_PTR, uint32, CSSM_SIZE *)",
+          "offset": 200
         },
         {
           "name": "EncryptDataFinal",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, CSSM_DATA_PTR)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, CSSM_DATA_PTR)",
+          "offset": 208
         },
         {
           "name": "DecryptData",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *, const SecAsn1Item *, uint32, CSSM_DATA_PTR, uint32, CSSM_SIZE *, CSSM_DATA_PTR, CSSM_PRIVILEGE)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *, const SecAsn1Item *, uint32, CSSM_DATA_PTR, uint32, CSSM_SIZE *, CSSM_DATA_PTR, CSSM_PRIVILEGE)",
+          "offset": 216
         },
         {
           "name": "DecryptDataInit",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *, CSSM_PRIVILEGE)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *, CSSM_PRIVILEGE)",
+          "offset": 224
         },
         {
           "name": "DecryptDataUpdate",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const SecAsn1Item *, uint32, CSSM_DATA_PTR, uint32, CSSM_SIZE *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const SecAsn1Item *, uint32, CSSM_DATA_PTR, uint32, CSSM_SIZE *)",
+          "offset": 232
         },
         {
           "name": "DecryptDataFinal",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, CSSM_DATA_PTR)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, CSSM_DATA_PTR)",
+          "offset": 240
         },
         {
           "name": "QueryKeySizeInBits",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *, const CSSM_KEY *, CSSM_KEY_SIZE_PTR)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *, const CSSM_KEY *, CSSM_KEY_SIZE_PTR)",
+          "offset": 248
         },
         {
           "name": "GenerateKey",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *, uint32, uint32, const SecAsn1Item *, const CSSM_RESOURCE_CONTROL_CONTEXT *, CSSM_KEY_PTR, CSSM_PRIVILEGE)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *, uint32, uint32, const SecAsn1Item *, const CSSM_RESOURCE_CONTROL_CONTEXT *, CSSM_KEY_PTR, CSSM_PRIVILEGE)",
+          "offset": 256
         },
         {
           "name": "GenerateKeyPair",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *, uint32, uint32, const SecAsn1Item *, CSSM_KEY_PTR, uint32, uint32, const SecAsn1Item *, const CSSM_RESOURCE_CONTROL_CONTEXT *, CSSM_KEY_PTR, CSSM_PRIVILEGE)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *, uint32, uint32, const SecAsn1Item *, CSSM_KEY_PTR, uint32, uint32, const SecAsn1Item *, const CSSM_RESOURCE_CONTROL_CONTEXT *, CSSM_KEY_PTR, CSSM_PRIVILEGE)",
+          "offset": 264
         },
         {
           "name": "GenerateRandom",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *, CSSM_DATA_PTR)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *, CSSM_DATA_PTR)",
+          "offset": 272
         },
         {
           "name": "GenerateAlgorithmParams",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *, uint32, CSSM_DATA_PTR, uint32 *, CSSM_CONTEXT_ATTRIBUTE_PTR *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *, uint32, CSSM_DATA_PTR, uint32 *, CSSM_CONTEXT_ATTRIBUTE_PTR *)",
+          "offset": 280
         },
         {
           "name": "WrapKey",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *, const CSSM_ACCESS_CREDENTIALS *, const CSSM_KEY *, const SecAsn1Item *, CSSM_WRAP_KEY_PTR, CSSM_PRIVILEGE)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *, const CSSM_ACCESS_CREDENTIALS *, const CSSM_KEY *, const SecAsn1Item *, CSSM_WRAP_KEY_PTR, CSSM_PRIVILEGE)",
+          "offset": 288
         },
         {
           "name": "UnwrapKey",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *, const CSSM_KEY *, const CSSM_WRAP_KEY *, uint32, uint32, const SecAsn1Item *, const CSSM_RESOURCE_CONTROL_CONTEXT *, CSSM_KEY_PTR, CSSM_DATA_PTR, CSSM_PRIVILEGE)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *, const CSSM_KEY *, const CSSM_WRAP_KEY *, uint32, uint32, const SecAsn1Item *, const CSSM_RESOURCE_CONTROL_CONTEXT *, CSSM_KEY_PTR, CSSM_DATA_PTR, CSSM_PRIVILEGE)",
+          "offset": 296
         },
         {
           "name": "DeriveKey",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *, CSSM_DATA_PTR, uint32, uint32, const SecAsn1Item *, const CSSM_RESOURCE_CONTROL_CONTEXT *, CSSM_KEY_PTR)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *, CSSM_DATA_PTR, uint32, uint32, const SecAsn1Item *, const CSSM_RESOURCE_CONTROL_CONTEXT *, CSSM_KEY_PTR)",
+          "offset": 304
         },
         {
           "name": "FreeKey",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, const CSSM_ACCESS_CREDENTIALS *, CSSM_KEY_PTR, CSSM_BOOL)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, const CSSM_ACCESS_CREDENTIALS *, CSSM_KEY_PTR, CSSM_BOOL)",
+          "offset": 312
         },
         {
           "name": "PassThrough",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *, uint32, const void *, void **)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *, uint32, const void *, void **)",
+          "offset": 320
         },
         {
           "name": "Login",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, const CSSM_ACCESS_CREDENTIALS *, const SecAsn1Item *, const void *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, const CSSM_ACCESS_CREDENTIALS *, const SecAsn1Item *, const void *)",
+          "offset": 328
         },
         {
           "name": "Logout",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE)",
+          "offset": 336
         },
         {
           "name": "ChangeLoginAcl",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, const CSSM_ACCESS_CREDENTIALS *, const CSSM_ACL_EDIT *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, const CSSM_ACCESS_CREDENTIALS *, const CSSM_ACL_EDIT *)",
+          "offset": 344
         },
         {
           "name": "ObtainPrivateKeyFromPublicKey",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, const CSSM_KEY *, CSSM_KEY_PTR)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, const CSSM_KEY *, CSSM_KEY_PTR)",
+          "offset": 352
         },
         {
           "name": "RetrieveUniqueId",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_DATA_PTR)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_DATA_PTR)",
+          "offset": 360
         },
         {
           "name": "RetrieveCounter",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_DATA_PTR)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_DATA_PTR)",
+          "offset": 368
         },
         {
           "name": "VerifyDevice",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, const SecAsn1Item *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, const SecAsn1Item *)",
+          "offset": 376
         },
         {
           "name": "GetTimeValue",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_ALGORITHMS, SecAsn1Item *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_ALGORITHMS, SecAsn1Item *)",
+          "offset": 384
         },
         {
           "name": "GetOperationalStatistics",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CSP_OPERATIONAL_STATISTICS *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_CSP_OPERATIONAL_STATISTICS *)",
+          "offset": 392
         },
         {
           "name": "GetLoginAcl",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, const CSSM_STRING *, uint32 *, CSSM_ACL_ENTRY_INFO_PTR *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, const CSSM_STRING *, uint32 *, CSSM_ACL_ENTRY_INFO_PTR *)",
+          "offset": 400
         },
         {
           "name": "GetKeyAcl",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, const CSSM_KEY *, const CSSM_STRING *, uint32 *, CSSM_ACL_ENTRY_INFO_PTR *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, const CSSM_KEY *, const CSSM_STRING *, uint32 *, CSSM_ACL_ENTRY_INFO_PTR *)",
+          "offset": 408
         },
         {
           "name": "ChangeKeyAcl",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, const CSSM_ACCESS_CREDENTIALS *, const CSSM_ACL_EDIT *, const CSSM_KEY *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, const CSSM_ACCESS_CREDENTIALS *, const CSSM_ACL_EDIT *, const CSSM_KEY *)",
+          "offset": 416
         },
         {
           "name": "GetKeyOwner",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, const CSSM_KEY *, CSSM_ACL_OWNER_PROTOTYPE_PTR)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, const CSSM_KEY *, CSSM_ACL_OWNER_PROTOTYPE_PTR)",
+          "offset": 424
         },
         {
           "name": "ChangeKeyOwner",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, const CSSM_ACCESS_CREDENTIALS *, const CSSM_KEY *, const CSSM_ACL_OWNER_PROTOTYPE *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, const CSSM_ACCESS_CREDENTIALS *, const CSSM_KEY *, const CSSM_ACL_OWNER_PROTOTYPE *)",
+          "offset": 432
         },
         {
           "name": "GetLoginOwner",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_ACL_OWNER_PROTOTYPE_PTR)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, CSSM_ACL_OWNER_PROTOTYPE_PTR)",
+          "offset": 440
         },
         {
           "name": "ChangeLoginOwner",
-          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, const CSSM_ACCESS_CREDENTIALS *, const CSSM_ACL_OWNER_PROTOTYPE *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_CSP_HANDLE, const CSSM_ACCESS_CREDENTIALS *, const CSSM_ACL_OWNER_PROTOTYPE *)",
+          "offset": 448
         }
       ],
+      "size": 456,
+      "align": 8,
       "availability": {},
       "sdk_file": "Security/cssmcspi.h",
       "sdk_line": 39
@@ -20732,93 +20869,117 @@
         },
         {
           "name": "DbClose",
-          "objc_type": "CSSM_RETURN (*)(CSSM_DL_DB_HANDLE)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_DL_DB_HANDLE)",
+          "offset": 8
         },
         {
           "name": "DbCreate",
-          "objc_type": "CSSM_RETURN (*)(CSSM_DL_HANDLE, const char *, const CSSM_NET_ADDRESS *, const CSSM_DBINFO *, CSSM_DB_ACCESS_TYPE, const CSSM_RESOURCE_CONTROL_CONTEXT *, const void *, CSSM_DB_HANDLE *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_DL_HANDLE, const char *, const CSSM_NET_ADDRESS *, const CSSM_DBINFO *, CSSM_DB_ACCESS_TYPE, const CSSM_RESOURCE_CONTROL_CONTEXT *, const void *, CSSM_DB_HANDLE *)",
+          "offset": 16
         },
         {
           "name": "DbDelete",
-          "objc_type": "CSSM_RETURN (*)(CSSM_DL_HANDLE, const char *, const CSSM_NET_ADDRESS *, const CSSM_ACCESS_CREDENTIALS *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_DL_HANDLE, const char *, const CSSM_NET_ADDRESS *, const CSSM_ACCESS_CREDENTIALS *)",
+          "offset": 24
         },
         {
           "name": "CreateRelation",
-          "objc_type": "CSSM_RETURN (*)(CSSM_DL_DB_HANDLE, CSSM_DB_RECORDTYPE, const char *, uint32, const CSSM_DB_SCHEMA_ATTRIBUTE_INFO *, uint32, const CSSM_DB_SCHEMA_INDEX_INFO *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_DL_DB_HANDLE, CSSM_DB_RECORDTYPE, const char *, uint32, const CSSM_DB_SCHEMA_ATTRIBUTE_INFO *, uint32, const CSSM_DB_SCHEMA_INDEX_INFO *)",
+          "offset": 32
         },
         {
           "name": "DestroyRelation",
-          "objc_type": "CSSM_RETURN (*)(CSSM_DL_DB_HANDLE, CSSM_DB_RECORDTYPE)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_DL_DB_HANDLE, CSSM_DB_RECORDTYPE)",
+          "offset": 40
         },
         {
           "name": "Authenticate",
-          "objc_type": "CSSM_RETURN (*)(CSSM_DL_DB_HANDLE, CSSM_DB_ACCESS_TYPE, const CSSM_ACCESS_CREDENTIALS *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_DL_DB_HANDLE, CSSM_DB_ACCESS_TYPE, const CSSM_ACCESS_CREDENTIALS *)",
+          "offset": 48
         },
         {
           "name": "GetDbAcl",
-          "objc_type": "CSSM_RETURN (*)(CSSM_DL_DB_HANDLE, const CSSM_STRING *, uint32 *, CSSM_ACL_ENTRY_INFO_PTR *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_DL_DB_HANDLE, const CSSM_STRING *, uint32 *, CSSM_ACL_ENTRY_INFO_PTR *)",
+          "offset": 56
         },
         {
           "name": "ChangeDbAcl",
-          "objc_type": "CSSM_RETURN (*)(CSSM_DL_DB_HANDLE, const CSSM_ACCESS_CREDENTIALS *, const CSSM_ACL_EDIT *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_DL_DB_HANDLE, const CSSM_ACCESS_CREDENTIALS *, const CSSM_ACL_EDIT *)",
+          "offset": 64
         },
         {
           "name": "GetDbOwner",
-          "objc_type": "CSSM_RETURN (*)(CSSM_DL_DB_HANDLE, CSSM_ACL_OWNER_PROTOTYPE_PTR)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_DL_DB_HANDLE, CSSM_ACL_OWNER_PROTOTYPE_PTR)",
+          "offset": 72
         },
         {
           "name": "ChangeDbOwner",
-          "objc_type": "CSSM_RETURN (*)(CSSM_DL_DB_HANDLE, const CSSM_ACCESS_CREDENTIALS *, const CSSM_ACL_OWNER_PROTOTYPE *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_DL_DB_HANDLE, const CSSM_ACCESS_CREDENTIALS *, const CSSM_ACL_OWNER_PROTOTYPE *)",
+          "offset": 80
         },
         {
           "name": "GetDbNames",
-          "objc_type": "CSSM_RETURN (*)(CSSM_DL_HANDLE, CSSM_NAME_LIST_PTR *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_DL_HANDLE, CSSM_NAME_LIST_PTR *)",
+          "offset": 88
         },
         {
           "name": "GetDbNameFromHandle",
-          "objc_type": "CSSM_RETURN (*)(CSSM_DL_DB_HANDLE, char **)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_DL_DB_HANDLE, char **)",
+          "offset": 96
         },
         {
           "name": "FreeNameList",
-          "objc_type": "CSSM_RETURN (*)(CSSM_DL_HANDLE, CSSM_NAME_LIST_PTR)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_DL_HANDLE, CSSM_NAME_LIST_PTR)",
+          "offset": 104
         },
         {
           "name": "DataInsert",
-          "objc_type": "CSSM_RETURN (*)(CSSM_DL_DB_HANDLE, CSSM_DB_RECORDTYPE, const CSSM_DB_RECORD_ATTRIBUTE_DATA *, const SecAsn1Item *, CSSM_DB_UNIQUE_RECORD_PTR *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_DL_DB_HANDLE, CSSM_DB_RECORDTYPE, const CSSM_DB_RECORD_ATTRIBUTE_DATA *, const SecAsn1Item *, CSSM_DB_UNIQUE_RECORD_PTR *)",
+          "offset": 112
         },
         {
           "name": "DataDelete",
-          "objc_type": "CSSM_RETURN (*)(CSSM_DL_DB_HANDLE, const CSSM_DB_UNIQUE_RECORD *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_DL_DB_HANDLE, const CSSM_DB_UNIQUE_RECORD *)",
+          "offset": 120
         },
         {
           "name": "DataModify",
-          "objc_type": "CSSM_RETURN (*)(CSSM_DL_DB_HANDLE, CSSM_DB_RECORDTYPE, CSSM_DB_UNIQUE_RECORD_PTR, const CSSM_DB_RECORD_ATTRIBUTE_DATA *, const SecAsn1Item *, CSSM_DB_MODIFY_MODE)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_DL_DB_HANDLE, CSSM_DB_RECORDTYPE, CSSM_DB_UNIQUE_RECORD_PTR, const CSSM_DB_RECORD_ATTRIBUTE_DATA *, const SecAsn1Item *, CSSM_DB_MODIFY_MODE)",
+          "offset": 128
         },
         {
           "name": "DataGetFirst",
-          "objc_type": "CSSM_RETURN (*)(CSSM_DL_DB_HANDLE, const CSSM_QUERY *, CSSM_HANDLE_PTR, CSSM_DB_RECORD_ATTRIBUTE_DATA_PTR, CSSM_DATA_PTR, CSSM_DB_UNIQUE_RECORD_PTR *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_DL_DB_HANDLE, const CSSM_QUERY *, CSSM_HANDLE_PTR, CSSM_DB_RECORD_ATTRIBUTE_DATA_PTR, CSSM_DATA_PTR, CSSM_DB_UNIQUE_RECORD_PTR *)",
+          "offset": 136
         },
         {
           "name": "DataGetNext",
-          "objc_type": "CSSM_RETURN (*)(CSSM_DL_DB_HANDLE, CSSM_HANDLE, CSSM_DB_RECORD_ATTRIBUTE_DATA_PTR, CSSM_DATA_PTR, CSSM_DB_UNIQUE_RECORD_PTR *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_DL_DB_HANDLE, CSSM_HANDLE, CSSM_DB_RECORD_ATTRIBUTE_DATA_PTR, CSSM_DATA_PTR, CSSM_DB_UNIQUE_RECORD_PTR *)",
+          "offset": 144
         },
         {
           "name": "DataAbortQuery",
-          "objc_type": "CSSM_RETURN (*)(CSSM_DL_DB_HANDLE, CSSM_HANDLE)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_DL_DB_HANDLE, CSSM_HANDLE)",
+          "offset": 152
         },
         {
           "name": "DataGetFromUniqueRecordId",
-          "objc_type": "CSSM_RETURN (*)(CSSM_DL_DB_HANDLE, const CSSM_DB_UNIQUE_RECORD *, CSSM_DB_RECORD_ATTRIBUTE_DATA_PTR, CSSM_DATA_PTR)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_DL_DB_HANDLE, const CSSM_DB_UNIQUE_RECORD *, CSSM_DB_RECORD_ATTRIBUTE_DATA_PTR, CSSM_DATA_PTR)",
+          "offset": 160
         },
         {
           "name": "FreeUniqueRecord",
-          "objc_type": "CSSM_RETURN (*)(CSSM_DL_DB_HANDLE, CSSM_DB_UNIQUE_RECORD_PTR)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_DL_DB_HANDLE, CSSM_DB_UNIQUE_RECORD_PTR)",
+          "offset": 168
         },
         {
           "name": "PassThrough",
-          "objc_type": "CSSM_RETURN (*)(CSSM_DL_DB_HANDLE, uint32, const void *, void **)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_DL_DB_HANDLE, uint32, const void *, void **)",
+          "offset": 176
         }
       ],
+      "size": 184,
+      "align": 8,
       "availability": {},
       "sdk_file": "Security/cssmdli.h",
       "sdk_line": 38
@@ -20831,37 +20992,47 @@
         },
         {
           "name": "RegistrationRetrieve",
-          "objc_type": "CSSM_RETURN (*)(CSSM_KRSP_HANDLE, CSSM_HANDLE, sint32 *, CSSM_KR_PROFILE_PTR)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_KRSP_HANDLE, CSSM_HANDLE, sint32 *, CSSM_KR_PROFILE_PTR)",
+          "offset": 8
         },
         {
           "name": "GenerateRecoveryFields",
-          "objc_type": "CSSM_RETURN (*)(CSSM_KRSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *, CSSM_CC_HANDLE, const CSSM_CONTEXT *, const SecAsn1Item *, CSSM_KR_POLICY_FLAGS, CSSM_DATA_PTR)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_KRSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *, CSSM_CC_HANDLE, const CSSM_CONTEXT *, const SecAsn1Item *, CSSM_KR_POLICY_FLAGS, CSSM_DATA_PTR)",
+          "offset": 16
         },
         {
           "name": "ProcessRecoveryFields",
-          "objc_type": "CSSM_RETURN (*)(CSSM_KRSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *, CSSM_CC_HANDLE, const CSSM_CONTEXT *, const SecAsn1Item *, CSSM_KR_POLICY_FLAGS, const SecAsn1Item *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_KRSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *, CSSM_CC_HANDLE, const CSSM_CONTEXT *, const SecAsn1Item *, CSSM_KR_POLICY_FLAGS, const SecAsn1Item *)",
+          "offset": 24
         },
         {
           "name": "RecoveryRequest",
-          "objc_type": "CSSM_RETURN (*)(CSSM_KRSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *, const SecAsn1Item *, const CSSM_ACCESS_CREDENTIALS *, sint32 *, CSSM_HANDLE_PTR)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_KRSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *, const SecAsn1Item *, const CSSM_ACCESS_CREDENTIALS *, sint32 *, CSSM_HANDLE_PTR)",
+          "offset": 32
         },
         {
           "name": "RecoveryRetrieve",
-          "objc_type": "CSSM_RETURN (*)(CSSM_KRSP_HANDLE, CSSM_HANDLE, sint32 *, CSSM_HANDLE_PTR, uint32 *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_KRSP_HANDLE, CSSM_HANDLE, sint32 *, CSSM_HANDLE_PTR, uint32 *)",
+          "offset": 40
         },
         {
           "name": "GetRecoveredObject",
-          "objc_type": "CSSM_RETURN (*)(CSSM_KRSP_HANDLE, CSSM_HANDLE, uint32, CSSM_CSP_HANDLE, const CSSM_RESOURCE_CONTROL_CONTEXT *, uint32, CSSM_KEY_PTR, CSSM_DATA_PTR)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_KRSP_HANDLE, CSSM_HANDLE, uint32, CSSM_CSP_HANDLE, const CSSM_RESOURCE_CONTROL_CONTEXT *, uint32, CSSM_KEY_PTR, CSSM_DATA_PTR)",
+          "offset": 48
         },
         {
           "name": "RecoveryRequestAbort",
-          "objc_type": "CSSM_RETURN (*)(CSSM_KRSP_HANDLE, CSSM_HANDLE)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_KRSP_HANDLE, CSSM_HANDLE)",
+          "offset": 56
         },
         {
           "name": "PassThrough",
-          "objc_type": "CSSM_RETURN (*)(CSSM_KRSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *, CSSM_CC_HANDLE, const CSSM_CONTEXT *, uint32, const void *, void **)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_KRSP_HANDLE, CSSM_CC_HANDLE, const CSSM_CONTEXT *, CSSM_CC_HANDLE, const CSSM_CONTEXT *, uint32, const void *, void **)",
+          "offset": 64
         }
       ],
+      "size": 72,
+      "align": 8,
       "availability": {},
       "sdk_file": "Security/cssmkrspi.h",
       "sdk_line": 41
@@ -20874,93 +21045,117 @@
         },
         {
           "name": "RetrieveCredResult",
-          "objc_type": "CSSM_RETURN (*)(CSSM_TP_HANDLE, const SecAsn1Item *, const CSSM_TP_CALLERAUTH_CONTEXT *, sint32 *, CSSM_BOOL *, CSSM_TP_RESULT_SET_PTR *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_TP_HANDLE, const SecAsn1Item *, const CSSM_TP_CALLERAUTH_CONTEXT *, sint32 *, CSSM_BOOL *, CSSM_TP_RESULT_SET_PTR *)",
+          "offset": 8
         },
         {
           "name": "ConfirmCredResult",
-          "objc_type": "CSSM_RETURN (*)(CSSM_TP_HANDLE, const SecAsn1Item *, const CSSM_TP_CALLERAUTH_CONTEXT *, const CSSM_TP_CONFIRM_RESPONSE *, const CSSM_TP_AUTHORITY_ID *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_TP_HANDLE, const SecAsn1Item *, const CSSM_TP_CALLERAUTH_CONTEXT *, const CSSM_TP_CONFIRM_RESPONSE *, const CSSM_TP_AUTHORITY_ID *)",
+          "offset": 16
         },
         {
           "name": "ReceiveConfirmation",
-          "objc_type": "CSSM_RETURN (*)(CSSM_TP_HANDLE, const SecAsn1Item *, CSSM_TP_CONFIRM_RESPONSE_PTR *, sint32 *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_TP_HANDLE, const SecAsn1Item *, CSSM_TP_CONFIRM_RESPONSE_PTR *, sint32 *)",
+          "offset": 24
         },
         {
           "name": "CertReclaimKey",
-          "objc_type": "CSSM_RETURN (*)(CSSM_TP_HANDLE, const CSSM_CERTGROUP *, uint32, CSSM_LONG_HANDLE, CSSM_CSP_HANDLE, const CSSM_RESOURCE_CONTROL_CONTEXT *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_TP_HANDLE, const CSSM_CERTGROUP *, uint32, CSSM_LONG_HANDLE, CSSM_CSP_HANDLE, const CSSM_RESOURCE_CONTROL_CONTEXT *)",
+          "offset": 32
         },
         {
           "name": "CertReclaimAbort",
-          "objc_type": "CSSM_RETURN (*)(CSSM_TP_HANDLE, CSSM_LONG_HANDLE)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_TP_HANDLE, CSSM_LONG_HANDLE)",
+          "offset": 40
         },
         {
           "name": "FormRequest",
-          "objc_type": "CSSM_RETURN (*)(CSSM_TP_HANDLE, const CSSM_TP_AUTHORITY_ID *, CSSM_TP_FORM_TYPE, CSSM_DATA_PTR)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_TP_HANDLE, const CSSM_TP_AUTHORITY_ID *, CSSM_TP_FORM_TYPE, CSSM_DATA_PTR)",
+          "offset": 48
         },
         {
           "name": "FormSubmit",
-          "objc_type": "CSSM_RETURN (*)(CSSM_TP_HANDLE, CSSM_TP_FORM_TYPE, const SecAsn1Item *, const CSSM_TP_AUTHORITY_ID *, const CSSM_TP_AUTHORITY_ID *, CSSM_ACCESS_CREDENTIALS_PTR)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_TP_HANDLE, CSSM_TP_FORM_TYPE, const SecAsn1Item *, const CSSM_TP_AUTHORITY_ID *, const CSSM_TP_AUTHORITY_ID *, CSSM_ACCESS_CREDENTIALS_PTR)",
+          "offset": 56
         },
         {
           "name": "CertGroupVerify",
-          "objc_type": "CSSM_RETURN (*)(CSSM_TP_HANDLE, CSSM_CL_HANDLE, CSSM_CSP_HANDLE, const CSSM_CERTGROUP *, const CSSM_TP_VERIFY_CONTEXT *, CSSM_TP_VERIFY_CONTEXT_RESULT_PTR)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_TP_HANDLE, CSSM_CL_HANDLE, CSSM_CSP_HANDLE, const CSSM_CERTGROUP *, const CSSM_TP_VERIFY_CONTEXT *, CSSM_TP_VERIFY_CONTEXT_RESULT_PTR)",
+          "offset": 64
         },
         {
           "name": "CertCreateTemplate",
-          "objc_type": "CSSM_RETURN (*)(CSSM_TP_HANDLE, CSSM_CL_HANDLE, uint32, const CSSM_FIELD *, CSSM_DATA_PTR)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_TP_HANDLE, CSSM_CL_HANDLE, uint32, const CSSM_FIELD *, CSSM_DATA_PTR)",
+          "offset": 72
         },
         {
           "name": "CertGetAllTemplateFields",
-          "objc_type": "CSSM_RETURN (*)(CSSM_TP_HANDLE, CSSM_CL_HANDLE, const SecAsn1Item *, uint32 *, CSSM_FIELD_PTR *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_TP_HANDLE, CSSM_CL_HANDLE, const SecAsn1Item *, uint32 *, CSSM_FIELD_PTR *)",
+          "offset": 80
         },
         {
           "name": "CertSign",
-          "objc_type": "CSSM_RETURN (*)(CSSM_TP_HANDLE, CSSM_CL_HANDLE, CSSM_CC_HANDLE, const SecAsn1Item *, const CSSM_CERTGROUP *, const CSSM_TP_VERIFY_CONTEXT *, CSSM_TP_VERIFY_CONTEXT_RESULT_PTR, CSSM_DATA_PTR)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_TP_HANDLE, CSSM_CL_HANDLE, CSSM_CC_HANDLE, const SecAsn1Item *, const CSSM_CERTGROUP *, const CSSM_TP_VERIFY_CONTEXT *, CSSM_TP_VERIFY_CONTEXT_RESULT_PTR, CSSM_DATA_PTR)",
+          "offset": 88
         },
         {
           "name": "CrlVerify",
-          "objc_type": "CSSM_RETURN (*)(CSSM_TP_HANDLE, CSSM_CL_HANDLE, CSSM_CSP_HANDLE, const CSSM_ENCODED_CRL *, const CSSM_CERTGROUP *, const CSSM_TP_VERIFY_CONTEXT *, CSSM_TP_VERIFY_CONTEXT_RESULT_PTR)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_TP_HANDLE, CSSM_CL_HANDLE, CSSM_CSP_HANDLE, const CSSM_ENCODED_CRL *, const CSSM_CERTGROUP *, const CSSM_TP_VERIFY_CONTEXT *, CSSM_TP_VERIFY_CONTEXT_RESULT_PTR)",
+          "offset": 96
         },
         {
           "name": "CrlCreateTemplate",
-          "objc_type": "CSSM_RETURN (*)(CSSM_TP_HANDLE, CSSM_CL_HANDLE, uint32, const CSSM_FIELD *, CSSM_DATA_PTR)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_TP_HANDLE, CSSM_CL_HANDLE, uint32, const CSSM_FIELD *, CSSM_DATA_PTR)",
+          "offset": 104
         },
         {
           "name": "CertRevoke",
-          "objc_type": "CSSM_RETURN (*)(CSSM_TP_HANDLE, CSSM_CL_HANDLE, CSSM_CSP_HANDLE, const SecAsn1Item *, const CSSM_CERTGROUP *, const CSSM_CERTGROUP *, const CSSM_TP_VERIFY_CONTEXT *, CSSM_TP_VERIFY_CONTEXT_RESULT_PTR, CSSM_TP_CERTCHANGE_REASON, CSSM_DATA_PTR)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_TP_HANDLE, CSSM_CL_HANDLE, CSSM_CSP_HANDLE, const SecAsn1Item *, const CSSM_CERTGROUP *, const CSSM_CERTGROUP *, const CSSM_TP_VERIFY_CONTEXT *, CSSM_TP_VERIFY_CONTEXT_RESULT_PTR, CSSM_TP_CERTCHANGE_REASON, CSSM_DATA_PTR)",
+          "offset": 112
         },
         {
           "name": "CertRemoveFromCrlTemplate",
-          "objc_type": "CSSM_RETURN (*)(CSSM_TP_HANDLE, CSSM_CL_HANDLE, CSSM_CSP_HANDLE, const SecAsn1Item *, const CSSM_CERTGROUP *, const CSSM_CERTGROUP *, const CSSM_TP_VERIFY_CONTEXT *, CSSM_TP_VERIFY_CONTEXT_RESULT_PTR, CSSM_DATA_PTR)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_TP_HANDLE, CSSM_CL_HANDLE, CSSM_CSP_HANDLE, const SecAsn1Item *, const CSSM_CERTGROUP *, const CSSM_CERTGROUP *, const CSSM_TP_VERIFY_CONTEXT *, CSSM_TP_VERIFY_CONTEXT_RESULT_PTR, CSSM_DATA_PTR)",
+          "offset": 120
         },
         {
           "name": "CrlSign",
-          "objc_type": "CSSM_RETURN (*)(CSSM_TP_HANDLE, CSSM_CL_HANDLE, CSSM_CC_HANDLE, const CSSM_ENCODED_CRL *, const CSSM_CERTGROUP *, const CSSM_TP_VERIFY_CONTEXT *, CSSM_TP_VERIFY_CONTEXT_RESULT_PTR, CSSM_DATA_PTR)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_TP_HANDLE, CSSM_CL_HANDLE, CSSM_CC_HANDLE, const CSSM_ENCODED_CRL *, const CSSM_CERTGROUP *, const CSSM_TP_VERIFY_CONTEXT *, CSSM_TP_VERIFY_CONTEXT_RESULT_PTR, CSSM_DATA_PTR)",
+          "offset": 128
         },
         {
           "name": "ApplyCrlToDb",
-          "objc_type": "CSSM_RETURN (*)(CSSM_TP_HANDLE, CSSM_CL_HANDLE, CSSM_CSP_HANDLE, const CSSM_ENCODED_CRL *, const CSSM_CERTGROUP *, const CSSM_TP_VERIFY_CONTEXT *, CSSM_TP_VERIFY_CONTEXT_RESULT_PTR)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_TP_HANDLE, CSSM_CL_HANDLE, CSSM_CSP_HANDLE, const CSSM_ENCODED_CRL *, const CSSM_CERTGROUP *, const CSSM_TP_VERIFY_CONTEXT *, CSSM_TP_VERIFY_CONTEXT_RESULT_PTR)",
+          "offset": 136
         },
         {
           "name": "CertGroupConstruct",
-          "objc_type": "CSSM_RETURN (*)(CSSM_TP_HANDLE, CSSM_CL_HANDLE, CSSM_CSP_HANDLE, const CSSM_DL_DB_LIST *, const void *, const CSSM_CERTGROUP *, CSSM_CERTGROUP_PTR *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_TP_HANDLE, CSSM_CL_HANDLE, CSSM_CSP_HANDLE, const CSSM_DL_DB_LIST *, const void *, const CSSM_CERTGROUP *, CSSM_CERTGROUP_PTR *)",
+          "offset": 144
         },
         {
           "name": "CertGroupPrune",
-          "objc_type": "CSSM_RETURN (*)(CSSM_TP_HANDLE, CSSM_CL_HANDLE, const CSSM_DL_DB_LIST *, const CSSM_CERTGROUP *, CSSM_CERTGROUP_PTR *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_TP_HANDLE, CSSM_CL_HANDLE, const CSSM_DL_DB_LIST *, const CSSM_CERTGROUP *, CSSM_CERTGROUP_PTR *)",
+          "offset": 152
         },
         {
           "name": "CertGroupToTupleGroup",
-          "objc_type": "CSSM_RETURN (*)(CSSM_TP_HANDLE, CSSM_CL_HANDLE, const CSSM_CERTGROUP *, CSSM_TUPLEGROUP_PTR *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_TP_HANDLE, CSSM_CL_HANDLE, const CSSM_CERTGROUP *, CSSM_TUPLEGROUP_PTR *)",
+          "offset": 160
         },
         {
           "name": "TupleGroupToCertGroup",
-          "objc_type": "CSSM_RETURN (*)(CSSM_TP_HANDLE, CSSM_CL_HANDLE, const CSSM_TUPLEGROUP *, CSSM_CERTGROUP_PTR *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_TP_HANDLE, CSSM_CL_HANDLE, const CSSM_TUPLEGROUP *, CSSM_CERTGROUP_PTR *)",
+          "offset": 168
         },
         {
           "name": "PassThrough",
-          "objc_type": "CSSM_RETURN (*)(CSSM_TP_HANDLE, CSSM_CL_HANDLE, CSSM_CC_HANDLE, const CSSM_DL_DB_LIST *, uint32, const void *, void **)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_TP_HANDLE, CSSM_CL_HANDLE, CSSM_CC_HANDLE, const CSSM_DL_DB_LIST *, uint32, const void *, void **)",
+          "offset": 176
         }
       ],
+      "size": 184,
+      "align": 8,
       "availability": {},
       "sdk_file": "Security/cssmtpi.h",
       "sdk_line": 38
@@ -20973,25 +21168,32 @@
         },
         {
           "name": "cssm_ReleaseAttachFunctions",
-          "objc_type": "CSSM_RETURN (*)(CSSM_MODULE_HANDLE)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_MODULE_HANDLE)",
+          "offset": 8
         },
         {
           "name": "cssm_GetAppMemoryFunctions",
-          "objc_type": "CSSM_RETURN (*)(CSSM_MODULE_HANDLE, CSSM_UPCALLS_PTR)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_MODULE_HANDLE, CSSM_UPCALLS_PTR)",
+          "offset": 16
         },
         {
           "name": "cssm_IsFuncCallValid",
-          "objc_type": "CSSM_RETURN (*)(CSSM_MODULE_HANDLE, CSSM_PROC_ADDR, CSSM_PROC_ADDR, CSSM_PRIVILEGE, CSSM_PRIVILEGE *, CSSM_BITMASK, CSSM_BOOL *)"
+          "objc_type": "CSSM_RETURN (*)(CSSM_MODULE_HANDLE, CSSM_PROC_ADDR, CSSM_PROC_ADDR, CSSM_PRIVILEGE, CSSM_PRIVILEGE *, CSSM_BITMASK, CSSM_BOOL *)",
+          "offset": 24
         },
         {
           "name": "cssm_DeregisterManagerServices",
-          "objc_type": "CSSM_RETURN (*)(const CSSM_GUID *)"
+          "objc_type": "CSSM_RETURN (*)(const CSSM_GUID *)",
+          "offset": 32
         },
         {
           "name": "cssm_DeliverModuleManagerEvent",
-          "objc_type": "CSSM_RETURN (*)(const CSSM_MANAGER_EVENT_NOTIFICATION *)"
+          "objc_type": "CSSM_RETURN (*)(const CSSM_MANAGER_EVENT_NOTIFICATION *)",
+          "offset": 40
         }
       ],
+      "size": 48,
+      "align": 8,
       "availability": {},
       "sdk_file": "Security/emmspi.h",
       "sdk_line": 40
@@ -21019,6 +21221,7 @@
         }
       ],
       "size": 32,
+      "align": 4,
       "availability": {},
       "sdk_file": "Security/cssmtype.h",
       "sdk_line": 144
@@ -21406,6 +21609,7 @@
         }
       ],
       "size": 24,
+      "align": 8,
       "availability": {},
       "sdk_file": "Security/cssmtype.h",
       "sdk_line": 1287
@@ -21537,6 +21741,7 @@
         }
       ],
       "size": 8,
+      "align": 4,
       "availability": {},
       "sdk_file": "Security/cssmtype.h",
       "sdk_line": 126
@@ -21581,6 +21786,7 @@
         }
       ],
       "size": 24,
+      "align": 8,
       "availability": {},
       "sdk_file": "Security/x509defs.h",
       "sdk_line": 124
@@ -21598,6 +21804,7 @@
         }
       ],
       "size": 16,
+      "align": 8,
       "availability": {},
       "sdk_file": "Security/x509defs.h",
       "sdk_line": 147
@@ -21615,6 +21822,7 @@
         }
       ],
       "size": 16,
+      "align": 8,
       "availability": {},
       "sdk_file": "Security/x509defs.h",
       "sdk_line": 88
@@ -21766,6 +21974,7 @@
         }
       ],
       "size": 240,
+      "align": 8,
       "availability": {},
       "sdk_file": "Security/x509defs.h",
       "sdk_line": 153
@@ -21808,6 +22017,7 @@
         }
       ],
       "size": 136,
+      "align": 8,
       "availability": {},
       "sdk_file": "Security/x509defs.h",
       "sdk_line": 209
@@ -21825,6 +22035,7 @@
         }
       ],
       "size": 24,
+      "align": 8,
       "availability": {},
       "sdk_file": "Security/x509defs.h",
       "sdk_line": 97
@@ -21935,61 +22146,77 @@
         },
         {
           "name": "DbClose",
-          "objc_type": "CSSM_RETURN (*)(MDS_DB_HANDLE)"
+          "objc_type": "CSSM_RETURN (*)(MDS_DB_HANDLE)",
+          "offset": 8
         },
         {
           "name": "GetDbNames",
-          "objc_type": "CSSM_RETURN (*)(MDS_HANDLE, CSSM_NAME_LIST_PTR *)"
+          "objc_type": "CSSM_RETURN (*)(MDS_HANDLE, CSSM_NAME_LIST_PTR *)",
+          "offset": 16
         },
         {
           "name": "GetDbNameFromHandle",
-          "objc_type": "CSSM_RETURN (*)(MDS_DB_HANDLE, char **)"
+          "objc_type": "CSSM_RETURN (*)(MDS_DB_HANDLE, char **)",
+          "offset": 24
         },
         {
           "name": "FreeNameList",
-          "objc_type": "CSSM_RETURN (*)(MDS_HANDLE, CSSM_NAME_LIST_PTR)"
+          "objc_type": "CSSM_RETURN (*)(MDS_HANDLE, CSSM_NAME_LIST_PTR)",
+          "offset": 32
         },
         {
           "name": "DataInsert",
-          "objc_type": "CSSM_RETURN (*)(MDS_DB_HANDLE, CSSM_DB_RECORDTYPE, const CSSM_DB_RECORD_ATTRIBUTE_DATA *, const SecAsn1Item *, CSSM_DB_UNIQUE_RECORD_PTR *)"
+          "objc_type": "CSSM_RETURN (*)(MDS_DB_HANDLE, CSSM_DB_RECORDTYPE, const CSSM_DB_RECORD_ATTRIBUTE_DATA *, const SecAsn1Item *, CSSM_DB_UNIQUE_RECORD_PTR *)",
+          "offset": 40
         },
         {
           "name": "DataDelete",
-          "objc_type": "CSSM_RETURN (*)(MDS_DB_HANDLE, const CSSM_DB_UNIQUE_RECORD *)"
+          "objc_type": "CSSM_RETURN (*)(MDS_DB_HANDLE, const CSSM_DB_UNIQUE_RECORD *)",
+          "offset": 48
         },
         {
           "name": "DataModify",
-          "objc_type": "CSSM_RETURN (*)(MDS_DB_HANDLE, CSSM_DB_RECORDTYPE, CSSM_DB_UNIQUE_RECORD_PTR, const CSSM_DB_RECORD_ATTRIBUTE_DATA *, const SecAsn1Item *, CSSM_DB_MODIFY_MODE)"
+          "objc_type": "CSSM_RETURN (*)(MDS_DB_HANDLE, CSSM_DB_RECORDTYPE, CSSM_DB_UNIQUE_RECORD_PTR, const CSSM_DB_RECORD_ATTRIBUTE_DATA *, const SecAsn1Item *, CSSM_DB_MODIFY_MODE)",
+          "offset": 56
         },
         {
           "name": "DataGetFirst",
-          "objc_type": "CSSM_RETURN (*)(MDS_DB_HANDLE, const CSSM_QUERY *, CSSM_HANDLE_PTR, CSSM_DB_RECORD_ATTRIBUTE_DATA_PTR, CSSM_DATA_PTR, CSSM_DB_UNIQUE_RECORD_PTR *)"
+          "objc_type": "CSSM_RETURN (*)(MDS_DB_HANDLE, const CSSM_QUERY *, CSSM_HANDLE_PTR, CSSM_DB_RECORD_ATTRIBUTE_DATA_PTR, CSSM_DATA_PTR, CSSM_DB_UNIQUE_RECORD_PTR *)",
+          "offset": 64
         },
         {
           "name": "DataGetNext",
-          "objc_type": "CSSM_RETURN (*)(MDS_DB_HANDLE, CSSM_HANDLE, CSSM_DB_RECORD_ATTRIBUTE_DATA_PTR, CSSM_DATA_PTR, CSSM_DB_UNIQUE_RECORD_PTR *)"
+          "objc_type": "CSSM_RETURN (*)(MDS_DB_HANDLE, CSSM_HANDLE, CSSM_DB_RECORD_ATTRIBUTE_DATA_PTR, CSSM_DATA_PTR, CSSM_DB_UNIQUE_RECORD_PTR *)",
+          "offset": 72
         },
         {
           "name": "DataAbortQuery",
-          "objc_type": "CSSM_RETURN (*)(MDS_DB_HANDLE, CSSM_HANDLE)"
+          "objc_type": "CSSM_RETURN (*)(MDS_DB_HANDLE, CSSM_HANDLE)",
+          "offset": 80
         },
         {
           "name": "DataGetFromUniqueRecordId",
-          "objc_type": "CSSM_RETURN (*)(MDS_DB_HANDLE, const CSSM_DB_UNIQUE_RECORD *, CSSM_DB_RECORD_ATTRIBUTE_DATA_PTR, CSSM_DATA_PTR)"
+          "objc_type": "CSSM_RETURN (*)(MDS_DB_HANDLE, const CSSM_DB_UNIQUE_RECORD *, CSSM_DB_RECORD_ATTRIBUTE_DATA_PTR, CSSM_DATA_PTR)",
+          "offset": 88
         },
         {
           "name": "FreeUniqueRecord",
-          "objc_type": "CSSM_RETURN (*)(MDS_DB_HANDLE, CSSM_DB_UNIQUE_RECORD_PTR)"
+          "objc_type": "CSSM_RETURN (*)(MDS_DB_HANDLE, CSSM_DB_UNIQUE_RECORD_PTR)",
+          "offset": 96
         },
         {
           "name": "CreateRelation",
-          "objc_type": "CSSM_RETURN (*)(MDS_DB_HANDLE, CSSM_DB_RECORDTYPE, const char *, uint32, const CSSM_DB_SCHEMA_ATTRIBUTE_INFO *, uint32, const CSSM_DB_SCHEMA_INDEX_INFO *)"
+          "objc_type": "CSSM_RETURN (*)(MDS_DB_HANDLE, CSSM_DB_RECORDTYPE, const char *, uint32, const CSSM_DB_SCHEMA_ATTRIBUTE_INFO *, uint32, const CSSM_DB_SCHEMA_INDEX_INFO *)",
+          "offset": 104
         },
         {
           "name": "DestroyRelation",
-          "objc_type": "CSSM_RETURN (*)(MDS_DB_HANDLE, CSSM_DB_RECORDTYPE)"
+          "objc_type": "CSSM_RETURN (*)(MDS_DB_HANDLE, CSSM_DB_RECORDTYPE)",
+          "offset": 112
         }
       ],
+      "size": 120,
+      "align": 8,
       "availability": {},
       "sdk_file": "Security/mds.h",
       "sdk_line": 43
@@ -22007,6 +22234,7 @@
         }
       ],
       "size": 48,
+      "align": 8,
       "availability": {},
       "sdk_file": "Security/x509defs.h",
       "sdk_line": 103

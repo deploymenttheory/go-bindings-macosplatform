@@ -3977,6 +3977,7 @@
         }
       ],
       "size": 128,
+      "align": 2,
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/QD/ColorSyncDeprecated.h",
       "sdk_line": 468
@@ -4098,6 +4099,22 @@
       "sdk_file": "ApplicationServices.framework/Frameworks/QD/ColorSyncDeprecated.h",
       "sdk_line": 527
     },
+    "CMAppleProfileHeader": {
+      "fields": [
+        {
+          "name": "cm2",
+          "objc_type": "CM2Header"
+        },
+        {
+          "name": "cm4",
+          "objc_type": "CM4Header"
+        }
+      ],
+      "is_union": true,
+      "availability": {},
+      "sdk_file": "ApplicationServices.framework/Frameworks/QD/ColorSyncDeprecated.h",
+      "sdk_line": 1183
+    },
     "CMBitmap": {
       "fields": [
         {
@@ -4150,6 +4167,7 @@
         }
       ],
       "size": 16,
+      "align": 8,
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/QD/ColorSyncDeprecated.h",
       "sdk_line": 1580
@@ -4195,6 +4213,74 @@
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/QD/ColorSyncDeprecated.h",
       "sdk_line": 1234
+    },
+    "CMColor": {
+      "fields": [
+        {
+          "name": "rgb",
+          "objc_type": "CMRGBColor"
+        },
+        {
+          "name": "hsv",
+          "objc_type": "CMHSVColor"
+        },
+        {
+          "name": "hls",
+          "objc_type": "CMHLSColor"
+        },
+        {
+          "name": "XYZ",
+          "objc_type": "CMXYZColor"
+        },
+        {
+          "name": "Lab",
+          "objc_type": "CMLabColor"
+        },
+        {
+          "name": "Luv",
+          "objc_type": "CMLuvColor"
+        },
+        {
+          "name": "Yxy",
+          "objc_type": "CMYxyColor"
+        },
+        {
+          "name": "cmyk",
+          "objc_type": "CMCMYKColor"
+        },
+        {
+          "name": "cmy",
+          "objc_type": "CMCMYColor"
+        },
+        {
+          "name": "gray",
+          "objc_type": "CMGrayColor"
+        },
+        {
+          "name": "mc5",
+          "objc_type": "CMMultichannel5Color"
+        },
+        {
+          "name": "mc6",
+          "objc_type": "CMMultichannel6Color"
+        },
+        {
+          "name": "mc7",
+          "objc_type": "CMMultichannel7Color"
+        },
+        {
+          "name": "mc8",
+          "objc_type": "CMMultichannel8Color"
+        },
+        {
+          "name": "namedColor",
+          "objc_type": "CMNamedColor"
+        }
+      ],
+      "is_union": true,
+      "availability": {},
+      "sdk_file": "ApplicationServices.framework/Frameworks/QD/ColorSyncDeprecated.h",
+      "sdk_line": 1301
     },
     "CMConcatProfileSet": {
       "fields": [
@@ -4294,6 +4380,7 @@
         }
       ],
       "size": 12,
+      "align": 2,
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/QD/ColorSyncDeprecated.h",
       "sdk_line": 417
@@ -4403,6 +4490,7 @@
         }
       ],
       "size": 1056,
+      "align": 8,
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/QD/ColorSyncDeprecated.h",
       "sdk_line": 2008
@@ -4455,6 +4543,7 @@
         }
       ],
       "size": 12,
+      "align": 2,
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/QD/ColorSyncDeprecated.h",
       "sdk_line": 431
@@ -4556,6 +4645,7 @@
         }
       ],
       "size": 8,
+      "align": 8,
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/QD/ColorSyncDeprecated.h",
       "sdk_line": 1555
@@ -4573,6 +4663,7 @@
         }
       ],
       "size": 8,
+      "align": 2,
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/QD/ColorSyncDeprecated.h",
       "sdk_line": 820
@@ -5233,9 +5324,32 @@
         }
       ],
       "size": 1024,
+      "align": 1,
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/QD/ColorSyncDeprecated.h",
       "sdk_line": 1572
+    },
+    "CMProfLoc": {
+      "fields": [
+        {
+          "name": "handleLoc",
+          "objc_type": "CMHandleLocation"
+        },
+        {
+          "name": "pathLoc",
+          "objc_type": "CMPathLocation"
+        },
+        {
+          "name": "bufferLoc",
+          "objc_type": "CMBufferLocation"
+        }
+      ],
+      "size": 1024,
+      "align": 8,
+      "is_union": true,
+      "availability": {},
+      "sdk_file": "ApplicationServices.framework/Frameworks/QD/ColorSyncDeprecated.h",
+      "sdk_line": 1585
     },
     "CMProfileIterateData": {
       "fields": [
@@ -5297,6 +5411,7 @@
         }
       ],
       "size": 1032,
+      "align": 8,
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/QD/ColorSyncDeprecated.h",
       "sdk_line": 1598
@@ -5342,6 +5457,7 @@
         }
       ],
       "size": 6,
+      "align": 2,
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/QD/ColorSyncDeprecated.h",
       "sdk_line": 1228
@@ -5383,6 +5499,7 @@
         }
       ],
       "size": 12,
+      "align": 2,
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/QD/ColorSyncDeprecated.h",
       "sdk_line": 723
@@ -5466,6 +5583,7 @@
         }
       ],
       "size": 12,
+      "align": 2,
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/QD/ColorSyncDeprecated.h",
       "sdk_line": 509
@@ -5730,6 +5848,7 @@
         }
       ],
       "size": 8,
+      "align": 2,
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/QD/ColorSyncDeprecated.h",
       "sdk_line": 838
@@ -5937,6 +6056,7 @@
         }
       ],
       "size": 8,
+      "align": 2,
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/QD/Quickdraw.h",
       "sdk_line": 71
@@ -6354,6 +6474,7 @@
         }
       ],
       "size": 16,
+      "align": 8,
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/QD/ColorSyncDeprecated.h",
       "sdk_line": 1200
@@ -6606,6 +6727,7 @@
         }
       ],
       "size": 4,
+      "align": 2,
       "availability": {},
       "sdk_file": "MacTypes.h",
       "sdk_line": 544,
@@ -6629,6 +6751,7 @@
         }
       ],
       "size": 6,
+      "align": 2,
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/QD/Quickdraw.h",
       "sdk_line": 65
@@ -6656,6 +6779,7 @@
         }
       ],
       "size": 8,
+      "align": 2,
       "availability": {},
       "sdk_file": "MacTypes.h",
       "sdk_line": 550

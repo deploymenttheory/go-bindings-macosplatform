@@ -15045,6 +15045,7 @@
         }
       ],
       "size": 32,
+      "align": 8,
       "availability": {},
       "sdk_file": "MapKit/MKGeometry.h",
       "sdk_line": 19
@@ -15062,6 +15063,7 @@
         }
       ],
       "size": 16,
+      "align": 8,
       "availability": {},
       "sdk_file": "MapKit/MKGeometry.h",
       "sdk_line": 14
@@ -15079,6 +15081,7 @@
         }
       ],
       "size": 16,
+      "align": 8,
       "availability": {},
       "sdk_file": "MapKit/MKGeometry.h",
       "sdk_line": 49
@@ -15096,6 +15099,7 @@
         }
       ],
       "size": 32,
+      "align": 8,
       "availability": {},
       "sdk_file": "MapKit/MKGeometry.h",
       "sdk_line": 59
@@ -15113,6 +15117,7 @@
         }
       ],
       "size": 16,
+      "align": 8,
       "availability": {},
       "sdk_file": "MapKit/MKGeometry.h",
       "sdk_line": 54

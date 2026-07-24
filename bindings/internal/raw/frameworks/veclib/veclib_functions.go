@@ -3547,10 +3547,10 @@ var (
 	_stzrqf_ func(*int, *int, *float32, *int, *float32, *int) int
 	// Deprecated: The CLAPACK interface is deprecated.  Please compile with -DACCELERATE_NEW_LAPACK to access the new lapack headers.
 	_stzrzf_                func(*int, *int, *float32, *int, *float32, *float32, *int, *int) int
-	_vA1024Shift            func(unsafe.Pointer, uint32, unsafe.Pointer)
+	_vA1024Shift            func(*VS1024, uint32, *VS1024)
 	_vA128Shift             func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_vA256Shift             func(unsafe.Pointer, uint32, unsafe.Pointer)
-	_vA512Shift             func(unsafe.Pointer, uint32, unsafe.Pointer)
+	_vA256Shift             func(*VS256, uint32, *VS256)
+	_vA512Shift             func(*VS512, uint32, *VS512)
 	_vA64Shift              func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	_vA64Shift2             func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	_vDSP_DCT_CreateSetup   func(unsafe.Pointer, uint, VDSP_DCT_Type) unsafe.Pointer
@@ -4040,70 +4040,70 @@ var (
 	_vIsmax func(int32, unsafe.Pointer) int32
 	// Deprecated: Use vDSP_minvi instead
 	_vIsmin             func(int32, unsafe.Pointer) int32
-	_vL1024Rotate       func(unsafe.Pointer, uint32, unsafe.Pointer)
+	_vL1024Rotate       func(*VU1024, uint32, *VU1024)
 	_vL128Rotate        func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_vL256Rotate        func(unsafe.Pointer, uint32, unsafe.Pointer)
-	_vL512Rotate        func(unsafe.Pointer, uint32, unsafe.Pointer)
+	_vL256Rotate        func(*VU256, uint32, *VU256)
+	_vL512Rotate        func(*VU512, uint32, *VU512)
 	_vL64Rotate         func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	_vL64Rotate2        func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_vLL1024Shift       func(unsafe.Pointer, uint32, unsafe.Pointer)
+	_vLL1024Shift       func(*VU1024, uint32, *VU1024)
 	_vLL128Shift        func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_vLL256Shift        func(unsafe.Pointer, uint32, unsafe.Pointer)
-	_vLL512Shift        func(unsafe.Pointer, uint32, unsafe.Pointer)
+	_vLL256Shift        func(*VU256, uint32, *VU256)
+	_vLL512Shift        func(*VU512, uint32, *VU512)
 	_vLL64Shift         func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	_vLL64Shift2        func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_vLR1024Shift       func(unsafe.Pointer, uint32, unsafe.Pointer)
+	_vLR1024Shift       func(*VU1024, uint32, *VU1024)
 	_vLR128Shift        func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_vLR256Shift        func(unsafe.Pointer, uint32, unsafe.Pointer)
-	_vLR512Shift        func(unsafe.Pointer, uint32, unsafe.Pointer)
+	_vLR256Shift        func(*VU256, uint32, *VU256)
+	_vLR512Shift        func(*VU512, uint32, *VU512)
 	_vLR64Shift         func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	_vLR64Shift2        func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_vR1024Rotate       func(unsafe.Pointer, uint32, unsafe.Pointer)
+	_vR1024Rotate       func(*VU1024, uint32, *VU1024)
 	_vR128Rotate        func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_vR256Rotate        func(unsafe.Pointer, uint32, unsafe.Pointer)
-	_vR512Rotate        func(unsafe.Pointer, uint32, unsafe.Pointer)
+	_vR256Rotate        func(*VU256, uint32, *VU256)
+	_vR512Rotate        func(*VU512, uint32, *VU512)
 	_vR64Rotate         func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	_vR64Rotate2        func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_vS1024Add          func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_vS1024AddS         func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_vS1024Divide       func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_vS1024HalfMultiply func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_vS1024Mod          func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_vS1024Neg          func(unsafe.Pointer, unsafe.Pointer)
-	_vS1024Sub          func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_vS1024SubS         func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_vS1024Add          func(*VS1024, *VS1024, *VS1024)
+	_vS1024AddS         func(*VS1024, *VS1024, *VS1024)
+	_vS1024Divide       func(*VS1024, *VS1024, *VS1024, *VS1024)
+	_vS1024HalfMultiply func(*VS1024, *VS1024, *VS1024)
+	_vS1024Mod          func(*VS1024, *VS1024, *VS1024)
+	_vS1024Neg          func(*VS1024, *VS1024)
+	_vS1024Sub          func(*VS1024, *VS1024, *VS1024)
+	_vS1024SubS         func(*VS1024, *VS1024, *VS1024)
 	_vS128Add           func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	_vS128AddS          func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	_vS128Divide        func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_vS128FullMultiply  func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_vS128FullMultiply  func(*VS128, *VS128, *VS256)
 	_vS128HalfMultiply  func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	_vS128Neg           func(unsafe.Pointer) unsafe.Pointer
 	_vS128Sub           func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	_vS128SubS          func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	_vS16Divide         func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	_vS16HalfMultiply   func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_vS256Add           func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_vS256AddS          func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_vS256Divide        func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_vS256FullMultiply  func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_vS256HalfMultiply  func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_vS256Mod           func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_vS256Neg           func(unsafe.Pointer, unsafe.Pointer)
-	_vS256Sub           func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_vS256SubS          func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_vS256Add           func(*VS256, *VS256, *VS256)
+	_vS256AddS          func(*VS256, *VS256, *VS256)
+	_vS256Divide        func(*VS256, *VS256, *VS256, *VS256)
+	_vS256FullMultiply  func(*VS256, *VS256, *VS512)
+	_vS256HalfMultiply  func(*VS256, *VS256, *VS256)
+	_vS256Mod           func(*VS256, *VS256, *VS256)
+	_vS256Neg           func(*VS256, *VS256)
+	_vS256Sub           func(*VS256, *VS256, *VS256)
+	_vS256SubS          func(*VS256, *VS256, *VS256)
 	_vS32Divide         func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	_vS32FullMulEven    func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	_vS32FullMulOdd     func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	_vS32HalfMultiply   func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_vS512Add           func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_vS512AddS          func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_vS512Divide        func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_vS512FullMultiply  func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_vS512HalfMultiply  func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_vS512Mod           func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_vS512Neg           func(unsafe.Pointer, unsafe.Pointer)
-	_vS512Sub           func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_vS512SubS          func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_vS512Add           func(*VS512, *VS512, *VS512)
+	_vS512AddS          func(*VS512, *VS512, *VS512)
+	_vS512Divide        func(*VS512, *VS512, *VS512, *VS512)
+	_vS512FullMultiply  func(*VS512, *VS512, *VS1024)
+	_vS512HalfMultiply  func(*VS512, *VS512, *VS512)
+	_vS512Mod           func(*VS512, *VS512, *VS512)
+	_vS512Neg           func(*VS512, *VS512)
+	_vS512Sub           func(*VS512, *VS512, *VS512)
+	_vS512SubS          func(*VS512, *VS512, *VS512)
 	_vS64Add            func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	_vS64AddS           func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	_vS64Divide         func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
@@ -4163,46 +4163,46 @@ var (
 	_vSyax func(int32, float32, unsafe.Pointer, unsafe.Pointer)
 	// Deprecated: Use vDSP_vsma instead
 	_vSzaxpy            func(int32, float32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_vU1024Add          func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_vU1024AddS         func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_vU1024Divide       func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_vU1024HalfMultiply func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_vU1024Mod          func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_vU1024Neg          func(unsafe.Pointer, unsafe.Pointer)
-	_vU1024Sub          func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_vU1024SubS         func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_vU1024Add          func(*VU1024, *VU1024, *VU1024)
+	_vU1024AddS         func(*VU1024, *VU1024, *VU1024)
+	_vU1024Divide       func(*VU1024, *VU1024, *VU1024, *VU1024)
+	_vU1024HalfMultiply func(*VU1024, *VU1024, *VU1024)
+	_vU1024Mod          func(*VU1024, *VU1024, *VU1024)
+	_vU1024Neg          func(*VU1024, *VU1024)
+	_vU1024Sub          func(*VU1024, *VU1024, *VU1024)
+	_vU1024SubS         func(*VU1024, *VU1024, *VU1024)
 	_vU128Add           func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	_vU128AddS          func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	_vU128Divide        func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_vU128FullMultiply  func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_vU128FullMultiply  func(*VU128, *VU128, *VU256)
 	_vU128HalfMultiply  func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	_vU128Neg           func(unsafe.Pointer) unsafe.Pointer
 	_vU128Sub           func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	_vU128SubS          func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	_vU16Divide         func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	_vU16HalfMultiply   func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_vU256Add           func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_vU256AddS          func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_vU256Divide        func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_vU256FullMultiply  func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_vU256HalfMultiply  func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_vU256Mod           func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_vU256Neg           func(unsafe.Pointer, unsafe.Pointer)
-	_vU256Sub           func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_vU256SubS          func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_vU256Add           func(*VU256, *VU256, *VU256)
+	_vU256AddS          func(*VU256, *VU256, *VU256)
+	_vU256Divide        func(*VU256, *VU256, *VU256, *VU256)
+	_vU256FullMultiply  func(*VU256, *VU256, *VU512)
+	_vU256HalfMultiply  func(*VU256, *VU256, *VU256)
+	_vU256Mod           func(*VU256, *VU256, *VU256)
+	_vU256Neg           func(*VU256, *VU256)
+	_vU256Sub           func(*VU256, *VU256, *VU256)
+	_vU256SubS          func(*VU256, *VU256, *VU256)
 	_vU32Divide         func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	_vU32FullMulEven    func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	_vU32FullMulOdd     func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	_vU32HalfMultiply   func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_vU512Add           func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_vU512AddS          func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_vU512Divide        func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_vU512FullMultiply  func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_vU512HalfMultiply  func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_vU512Mod           func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_vU512Neg           func(unsafe.Pointer, unsafe.Pointer)
-	_vU512Sub           func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_vU512SubS          func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_vU512Add           func(*VU512, *VU512, *VU512)
+	_vU512AddS          func(*VU512, *VU512, *VU512)
+	_vU512Divide        func(*VU512, *VU512, *VU512, *VU512)
+	_vU512FullMultiply  func(*VU512, *VU512, *VU1024)
+	_vU512HalfMultiply  func(*VU512, *VU512, *VU512)
+	_vU512Mod           func(*VU512, *VU512, *VU512)
+	_vU512Neg           func(*VU512, *VU512)
+	_vU512Sub           func(*VU512, *VU512, *VU512)
+	_vU512SubS          func(*VU512, *VU512, *VU512)
 	_vU64Add            func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	_vU64AddS           func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	_vU64Divide         func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
@@ -16113,7 +16113,7 @@ func Stzrzf(m *int, n *int, a *float32, lda *int, tau *float32, work *float32, l
 }
 
 // C function: vA1024Shift
-func VA1024Shift(a unsafe.Pointer, shiftAmount uint32, result unsafe.Pointer) {
+func VA1024Shift(a *VS1024, shiftAmount uint32, result *VS1024) {
 	_vA1024Shift(a, shiftAmount, result)
 }
 
@@ -16123,12 +16123,12 @@ func VA128Shift(vA unsafe.Pointer, vShiftFactor unsafe.Pointer) unsafe.Pointer {
 }
 
 // C function: vA256Shift
-func VA256Shift(a unsafe.Pointer, shiftAmount uint32, result unsafe.Pointer) {
+func VA256Shift(a *VS256, shiftAmount uint32, result *VS256) {
 	_vA256Shift(a, shiftAmount, result)
 }
 
 // C function: vA512Shift
-func VA512Shift(a unsafe.Pointer, shiftAmount uint32, result unsafe.Pointer) {
+func VA512Shift(a *VS512, shiftAmount uint32, result *VS512) {
 	_vA512Shift(a, shiftAmount, result)
 }
 
@@ -18522,7 +18522,7 @@ func VIsmin(count int32, x unsafe.Pointer) int32 {
 }
 
 // C function: vL1024Rotate
-func VL1024Rotate(a unsafe.Pointer, rotateAmount uint32, result unsafe.Pointer) {
+func VL1024Rotate(a *VU1024, rotateAmount uint32, result *VU1024) {
 	_vL1024Rotate(a, rotateAmount, result)
 }
 
@@ -18532,12 +18532,12 @@ func VL128Rotate(vA unsafe.Pointer, vRotateFactor unsafe.Pointer) unsafe.Pointer
 }
 
 // C function: vL256Rotate
-func VL256Rotate(a unsafe.Pointer, rotateAmount uint32, result unsafe.Pointer) {
+func VL256Rotate(a *VU256, rotateAmount uint32, result *VU256) {
 	_vL256Rotate(a, rotateAmount, result)
 }
 
 // C function: vL512Rotate
-func VL512Rotate(a unsafe.Pointer, rotateAmount uint32, result unsafe.Pointer) {
+func VL512Rotate(a *VU512, rotateAmount uint32, result *VU512) {
 	_vL512Rotate(a, rotateAmount, result)
 }
 
@@ -18552,7 +18552,7 @@ func VL64Rotate2(vA unsafe.Pointer, vRotateFactor unsafe.Pointer) unsafe.Pointer
 }
 
 // C function: vLL1024Shift
-func VLL1024Shift(a unsafe.Pointer, shiftAmount uint32, result unsafe.Pointer) {
+func VLL1024Shift(a *VU1024, shiftAmount uint32, result *VU1024) {
 	_vLL1024Shift(a, shiftAmount, result)
 }
 
@@ -18562,12 +18562,12 @@ func VLL128Shift(vA unsafe.Pointer, vShiftFactor unsafe.Pointer) unsafe.Pointer 
 }
 
 // C function: vLL256Shift
-func VLL256Shift(a unsafe.Pointer, shiftAmount uint32, result unsafe.Pointer) {
+func VLL256Shift(a *VU256, shiftAmount uint32, result *VU256) {
 	_vLL256Shift(a, shiftAmount, result)
 }
 
 // C function: vLL512Shift
-func VLL512Shift(a unsafe.Pointer, shiftAmount uint32, result unsafe.Pointer) {
+func VLL512Shift(a *VU512, shiftAmount uint32, result *VU512) {
 	_vLL512Shift(a, shiftAmount, result)
 }
 
@@ -18582,7 +18582,7 @@ func VLL64Shift2(vA unsafe.Pointer, vShiftFactor unsafe.Pointer) unsafe.Pointer 
 }
 
 // C function: vLR1024Shift
-func VLR1024Shift(a unsafe.Pointer, shiftAmount uint32, result unsafe.Pointer) {
+func VLR1024Shift(a *VU1024, shiftAmount uint32, result *VU1024) {
 	_vLR1024Shift(a, shiftAmount, result)
 }
 
@@ -18592,12 +18592,12 @@ func VLR128Shift(vA unsafe.Pointer, vShiftFactor unsafe.Pointer) unsafe.Pointer 
 }
 
 // C function: vLR256Shift
-func VLR256Shift(a unsafe.Pointer, shiftAmount uint32, result unsafe.Pointer) {
+func VLR256Shift(a *VU256, shiftAmount uint32, result *VU256) {
 	_vLR256Shift(a, shiftAmount, result)
 }
 
 // C function: vLR512Shift
-func VLR512Shift(a unsafe.Pointer, shiftAmount uint32, result unsafe.Pointer) {
+func VLR512Shift(a *VU512, shiftAmount uint32, result *VU512) {
 	_vLR512Shift(a, shiftAmount, result)
 }
 
@@ -18612,7 +18612,7 @@ func VLR64Shift2(vA unsafe.Pointer, vShiftFactor unsafe.Pointer) unsafe.Pointer 
 }
 
 // C function: vR1024Rotate
-func VR1024Rotate(a unsafe.Pointer, rotateAmount uint32, result unsafe.Pointer) {
+func VR1024Rotate(a *VU1024, rotateAmount uint32, result *VU1024) {
 	_vR1024Rotate(a, rotateAmount, result)
 }
 
@@ -18622,12 +18622,12 @@ func VR128Rotate(vA unsafe.Pointer, vRotateFactor unsafe.Pointer) unsafe.Pointer
 }
 
 // C function: vR256Rotate
-func VR256Rotate(a unsafe.Pointer, rotateAmount uint32, result unsafe.Pointer) {
+func VR256Rotate(a *VU256, rotateAmount uint32, result *VU256) {
 	_vR256Rotate(a, rotateAmount, result)
 }
 
 // C function: vR512Rotate
-func VR512Rotate(a unsafe.Pointer, rotateAmount uint32, result unsafe.Pointer) {
+func VR512Rotate(a *VU512, rotateAmount uint32, result *VU512) {
 	_vR512Rotate(a, rotateAmount, result)
 }
 
@@ -18642,42 +18642,42 @@ func VR64Rotate2(vA unsafe.Pointer, vRotateFactor unsafe.Pointer) unsafe.Pointer
 }
 
 // C function: vS1024Add
-func VS1024Add(a unsafe.Pointer, b unsafe.Pointer, result unsafe.Pointer) {
+func VS1024Add(a *VS1024, b *VS1024, result *VS1024) {
 	_vS1024Add(a, b, result)
 }
 
 // C function: vS1024AddS
-func VS1024AddS(a unsafe.Pointer, b unsafe.Pointer, result unsafe.Pointer) {
+func VS1024AddS(a *VS1024, b *VS1024, result *VS1024) {
 	_vS1024AddS(a, b, result)
 }
 
 // C function: vS1024Divide
-func VS1024Divide(numerator unsafe.Pointer, divisor unsafe.Pointer, result unsafe.Pointer, remainder unsafe.Pointer) {
+func VS1024Divide(numerator *VS1024, divisor *VS1024, result *VS1024, remainder *VS1024) {
 	_vS1024Divide(numerator, divisor, result, remainder)
 }
 
 // C function: vS1024HalfMultiply
-func VS1024HalfMultiply(a unsafe.Pointer, b unsafe.Pointer, result unsafe.Pointer) {
+func VS1024HalfMultiply(a *VS1024, b *VS1024, result *VS1024) {
 	_vS1024HalfMultiply(a, b, result)
 }
 
 // C function: vS1024Mod
-func VS1024Mod(numerator unsafe.Pointer, divisor unsafe.Pointer, remainder unsafe.Pointer) {
+func VS1024Mod(numerator *VS1024, divisor *VS1024, remainder *VS1024) {
 	_vS1024Mod(numerator, divisor, remainder)
 }
 
 // C function: vS1024Neg
-func VS1024Neg(a unsafe.Pointer, result unsafe.Pointer) {
+func VS1024Neg(a *VS1024, result *VS1024) {
 	_vS1024Neg(a, result)
 }
 
 // C function: vS1024Sub
-func VS1024Sub(a unsafe.Pointer, b unsafe.Pointer, result unsafe.Pointer) {
+func VS1024Sub(a *VS1024, b *VS1024, result *VS1024) {
 	_vS1024Sub(a, b, result)
 }
 
 // C function: vS1024SubS
-func VS1024SubS(a unsafe.Pointer, b unsafe.Pointer, result unsafe.Pointer) {
+func VS1024SubS(a *VS1024, b *VS1024, result *VS1024) {
 	_vS1024SubS(a, b, result)
 }
 
@@ -18697,7 +18697,7 @@ func VS128Divide(vN unsafe.Pointer, vD unsafe.Pointer, vRemainder unsafe.Pointer
 }
 
 // C function: vS128FullMultiply
-func VS128FullMultiply(a unsafe.Pointer, b unsafe.Pointer, result unsafe.Pointer) {
+func VS128FullMultiply(a *VS128, b *VS128, result *VS256) {
 	_vS128FullMultiply(a, b, result)
 }
 
@@ -18732,47 +18732,47 @@ func VS16HalfMultiply(vbasicopsVA unsafe.Pointer, vbasicopsVB unsafe.Pointer) un
 }
 
 // C function: vS256Add
-func VS256Add(a unsafe.Pointer, b unsafe.Pointer, result unsafe.Pointer) {
+func VS256Add(a *VS256, b *VS256, result *VS256) {
 	_vS256Add(a, b, result)
 }
 
 // C function: vS256AddS
-func VS256AddS(a unsafe.Pointer, b unsafe.Pointer, result unsafe.Pointer) {
+func VS256AddS(a *VS256, b *VS256, result *VS256) {
 	_vS256AddS(a, b, result)
 }
 
 // C function: vS256Divide
-func VS256Divide(numerator unsafe.Pointer, divisor unsafe.Pointer, result unsafe.Pointer, remainder unsafe.Pointer) {
+func VS256Divide(numerator *VS256, divisor *VS256, result *VS256, remainder *VS256) {
 	_vS256Divide(numerator, divisor, result, remainder)
 }
 
 // C function: vS256FullMultiply
-func VS256FullMultiply(a unsafe.Pointer, b unsafe.Pointer, result unsafe.Pointer) {
+func VS256FullMultiply(a *VS256, b *VS256, result *VS512) {
 	_vS256FullMultiply(a, b, result)
 }
 
 // C function: vS256HalfMultiply
-func VS256HalfMultiply(a unsafe.Pointer, b unsafe.Pointer, result unsafe.Pointer) {
+func VS256HalfMultiply(a *VS256, b *VS256, result *VS256) {
 	_vS256HalfMultiply(a, b, result)
 }
 
 // C function: vS256Mod
-func VS256Mod(numerator unsafe.Pointer, divisor unsafe.Pointer, remainder unsafe.Pointer) {
+func VS256Mod(numerator *VS256, divisor *VS256, remainder *VS256) {
 	_vS256Mod(numerator, divisor, remainder)
 }
 
 // C function: vS256Neg
-func VS256Neg(a unsafe.Pointer, result unsafe.Pointer) {
+func VS256Neg(a *VS256, result *VS256) {
 	_vS256Neg(a, result)
 }
 
 // C function: vS256Sub
-func VS256Sub(a unsafe.Pointer, b unsafe.Pointer, result unsafe.Pointer) {
+func VS256Sub(a *VS256, b *VS256, result *VS256) {
 	_vS256Sub(a, b, result)
 }
 
 // C function: vS256SubS
-func VS256SubS(a unsafe.Pointer, b unsafe.Pointer, result unsafe.Pointer) {
+func VS256SubS(a *VS256, b *VS256, result *VS256) {
 	_vS256SubS(a, b, result)
 }
 
@@ -18797,47 +18797,47 @@ func VS32HalfMultiply(vA unsafe.Pointer, vB unsafe.Pointer) unsafe.Pointer {
 }
 
 // C function: vS512Add
-func VS512Add(a unsafe.Pointer, b unsafe.Pointer, result unsafe.Pointer) {
+func VS512Add(a *VS512, b *VS512, result *VS512) {
 	_vS512Add(a, b, result)
 }
 
 // C function: vS512AddS
-func VS512AddS(a unsafe.Pointer, b unsafe.Pointer, result unsafe.Pointer) {
+func VS512AddS(a *VS512, b *VS512, result *VS512) {
 	_vS512AddS(a, b, result)
 }
 
 // C function: vS512Divide
-func VS512Divide(numerator unsafe.Pointer, divisor unsafe.Pointer, result unsafe.Pointer, remainder unsafe.Pointer) {
+func VS512Divide(numerator *VS512, divisor *VS512, result *VS512, remainder *VS512) {
 	_vS512Divide(numerator, divisor, result, remainder)
 }
 
 // C function: vS512FullMultiply
-func VS512FullMultiply(a unsafe.Pointer, b unsafe.Pointer, result unsafe.Pointer) {
+func VS512FullMultiply(a *VS512, b *VS512, result *VS1024) {
 	_vS512FullMultiply(a, b, result)
 }
 
 // C function: vS512HalfMultiply
-func VS512HalfMultiply(a unsafe.Pointer, b unsafe.Pointer, result unsafe.Pointer) {
+func VS512HalfMultiply(a *VS512, b *VS512, result *VS512) {
 	_vS512HalfMultiply(a, b, result)
 }
 
 // C function: vS512Mod
-func VS512Mod(numerator unsafe.Pointer, divisor unsafe.Pointer, remainder unsafe.Pointer) {
+func VS512Mod(numerator *VS512, divisor *VS512, remainder *VS512) {
 	_vS512Mod(numerator, divisor, remainder)
 }
 
 // C function: vS512Neg
-func VS512Neg(a unsafe.Pointer, result unsafe.Pointer) {
+func VS512Neg(a *VS512, result *VS512) {
 	_vS512Neg(a, result)
 }
 
 // C function: vS512Sub
-func VS512Sub(a unsafe.Pointer, b unsafe.Pointer, result unsafe.Pointer) {
+func VS512Sub(a *VS512, b *VS512, result *VS512) {
 	_vS512Sub(a, b, result)
 }
 
 // C function: vS512SubS
-func VS512SubS(a unsafe.Pointer, b unsafe.Pointer, result unsafe.Pointer) {
+func VS512SubS(a *VS512, b *VS512, result *VS512) {
 	_vS512SubS(a, b, result)
 }
 
@@ -19041,42 +19041,42 @@ func VSzaxpy(n int32, alpha float32, x unsafe.Pointer, y unsafe.Pointer, z unsaf
 }
 
 // C function: vU1024Add
-func VU1024Add(a unsafe.Pointer, b unsafe.Pointer, result unsafe.Pointer) {
+func VU1024Add(a *VU1024, b *VU1024, result *VU1024) {
 	_vU1024Add(a, b, result)
 }
 
 // C function: vU1024AddS
-func VU1024AddS(a unsafe.Pointer, b unsafe.Pointer, result unsafe.Pointer) {
+func VU1024AddS(a *VU1024, b *VU1024, result *VU1024) {
 	_vU1024AddS(a, b, result)
 }
 
 // C function: vU1024Divide
-func VU1024Divide(numerator unsafe.Pointer, divisor unsafe.Pointer, result unsafe.Pointer, remainder unsafe.Pointer) {
+func VU1024Divide(numerator *VU1024, divisor *VU1024, result *VU1024, remainder *VU1024) {
 	_vU1024Divide(numerator, divisor, result, remainder)
 }
 
 // C function: vU1024HalfMultiply
-func VU1024HalfMultiply(a unsafe.Pointer, b unsafe.Pointer, result unsafe.Pointer) {
+func VU1024HalfMultiply(a *VU1024, b *VU1024, result *VU1024) {
 	_vU1024HalfMultiply(a, b, result)
 }
 
 // C function: vU1024Mod
-func VU1024Mod(numerator unsafe.Pointer, divisor unsafe.Pointer, remainder unsafe.Pointer) {
+func VU1024Mod(numerator *VU1024, divisor *VU1024, remainder *VU1024) {
 	_vU1024Mod(numerator, divisor, remainder)
 }
 
 // C function: vU1024Neg
-func VU1024Neg(a unsafe.Pointer, result unsafe.Pointer) {
+func VU1024Neg(a *VU1024, result *VU1024) {
 	_vU1024Neg(a, result)
 }
 
 // C function: vU1024Sub
-func VU1024Sub(a unsafe.Pointer, b unsafe.Pointer, result unsafe.Pointer) {
+func VU1024Sub(a *VU1024, b *VU1024, result *VU1024) {
 	_vU1024Sub(a, b, result)
 }
 
 // C function: vU1024SubS
-func VU1024SubS(a unsafe.Pointer, b unsafe.Pointer, result unsafe.Pointer) {
+func VU1024SubS(a *VU1024, b *VU1024, result *VU1024) {
 	_vU1024SubS(a, b, result)
 }
 
@@ -19096,7 +19096,7 @@ func VU128Divide(vN unsafe.Pointer, vD unsafe.Pointer, vRemainder unsafe.Pointer
 }
 
 // C function: vU128FullMultiply
-func VU128FullMultiply(a unsafe.Pointer, b unsafe.Pointer, result unsafe.Pointer) {
+func VU128FullMultiply(a *VU128, b *VU128, result *VU256) {
 	_vU128FullMultiply(a, b, result)
 }
 
@@ -19131,47 +19131,47 @@ func VU16HalfMultiply(vbasicopsVA unsafe.Pointer, vbasicopsVB unsafe.Pointer) un
 }
 
 // C function: vU256Add
-func VU256Add(a unsafe.Pointer, b unsafe.Pointer, result unsafe.Pointer) {
+func VU256Add(a *VU256, b *VU256, result *VU256) {
 	_vU256Add(a, b, result)
 }
 
 // C function: vU256AddS
-func VU256AddS(a unsafe.Pointer, b unsafe.Pointer, result unsafe.Pointer) {
+func VU256AddS(a *VU256, b *VU256, result *VU256) {
 	_vU256AddS(a, b, result)
 }
 
 // C function: vU256Divide
-func VU256Divide(numerator unsafe.Pointer, divisor unsafe.Pointer, result unsafe.Pointer, remainder unsafe.Pointer) {
+func VU256Divide(numerator *VU256, divisor *VU256, result *VU256, remainder *VU256) {
 	_vU256Divide(numerator, divisor, result, remainder)
 }
 
 // C function: vU256FullMultiply
-func VU256FullMultiply(a unsafe.Pointer, b unsafe.Pointer, result unsafe.Pointer) {
+func VU256FullMultiply(a *VU256, b *VU256, result *VU512) {
 	_vU256FullMultiply(a, b, result)
 }
 
 // C function: vU256HalfMultiply
-func VU256HalfMultiply(a unsafe.Pointer, b unsafe.Pointer, result unsafe.Pointer) {
+func VU256HalfMultiply(a *VU256, b *VU256, result *VU256) {
 	_vU256HalfMultiply(a, b, result)
 }
 
 // C function: vU256Mod
-func VU256Mod(numerator unsafe.Pointer, divisor unsafe.Pointer, remainder unsafe.Pointer) {
+func VU256Mod(numerator *VU256, divisor *VU256, remainder *VU256) {
 	_vU256Mod(numerator, divisor, remainder)
 }
 
 // C function: vU256Neg
-func VU256Neg(a unsafe.Pointer, result unsafe.Pointer) {
+func VU256Neg(a *VU256, result *VU256) {
 	_vU256Neg(a, result)
 }
 
 // C function: vU256Sub
-func VU256Sub(a unsafe.Pointer, b unsafe.Pointer, result unsafe.Pointer) {
+func VU256Sub(a *VU256, b *VU256, result *VU256) {
 	_vU256Sub(a, b, result)
 }
 
 // C function: vU256SubS
-func VU256SubS(a unsafe.Pointer, b unsafe.Pointer, result unsafe.Pointer) {
+func VU256SubS(a *VU256, b *VU256, result *VU256) {
 	_vU256SubS(a, b, result)
 }
 
@@ -19196,47 +19196,47 @@ func VU32HalfMultiply(vA unsafe.Pointer, vB unsafe.Pointer) unsafe.Pointer {
 }
 
 // C function: vU512Add
-func VU512Add(a unsafe.Pointer, b unsafe.Pointer, result unsafe.Pointer) {
+func VU512Add(a *VU512, b *VU512, result *VU512) {
 	_vU512Add(a, b, result)
 }
 
 // C function: vU512AddS
-func VU512AddS(a unsafe.Pointer, b unsafe.Pointer, result unsafe.Pointer) {
+func VU512AddS(a *VU512, b *VU512, result *VU512) {
 	_vU512AddS(a, b, result)
 }
 
 // C function: vU512Divide
-func VU512Divide(numerator unsafe.Pointer, divisor unsafe.Pointer, result unsafe.Pointer, remainder unsafe.Pointer) {
+func VU512Divide(numerator *VU512, divisor *VU512, result *VU512, remainder *VU512) {
 	_vU512Divide(numerator, divisor, result, remainder)
 }
 
 // C function: vU512FullMultiply
-func VU512FullMultiply(a unsafe.Pointer, b unsafe.Pointer, result unsafe.Pointer) {
+func VU512FullMultiply(a *VU512, b *VU512, result *VU1024) {
 	_vU512FullMultiply(a, b, result)
 }
 
 // C function: vU512HalfMultiply
-func VU512HalfMultiply(a unsafe.Pointer, b unsafe.Pointer, result unsafe.Pointer) {
+func VU512HalfMultiply(a *VU512, b *VU512, result *VU512) {
 	_vU512HalfMultiply(a, b, result)
 }
 
 // C function: vU512Mod
-func VU512Mod(numerator unsafe.Pointer, divisor unsafe.Pointer, remainder unsafe.Pointer) {
+func VU512Mod(numerator *VU512, divisor *VU512, remainder *VU512) {
 	_vU512Mod(numerator, divisor, remainder)
 }
 
 // C function: vU512Neg
-func VU512Neg(a unsafe.Pointer, result unsafe.Pointer) {
+func VU512Neg(a *VU512, result *VU512) {
 	_vU512Neg(a, result)
 }
 
 // C function: vU512Sub
-func VU512Sub(a unsafe.Pointer, b unsafe.Pointer, result unsafe.Pointer) {
+func VU512Sub(a *VU512, b *VU512, result *VU512) {
 	_vU512Sub(a, b, result)
 }
 
 // C function: vU512SubS
-func VU512SubS(a unsafe.Pointer, b unsafe.Pointer, result unsafe.Pointer) {
+func VU512SubS(a *VU512, b *VU512, result *VU512) {
 	_vU512SubS(a, b, result)
 }
 

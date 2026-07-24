@@ -549,9 +549,130 @@
         }
       ],
       "size": 8,
+      "align": 1,
       "availability": {},
       "sdk_file": "ndr.h",
       "sdk_line": 40
+    },
+    "__ReplyUnion__mach_host_subsystem": {
+      "fields": [
+        {
+          "name": "Reply_host_info",
+          "objc_type": "__Reply__host_info_t"
+        },
+        {
+          "name": "Reply_host_kernel_version",
+          "objc_type": "__Reply__host_kernel_version_t"
+        },
+        {
+          "name": "Reply__host_page_size",
+          "objc_type": "__Reply___host_page_size_t"
+        },
+        {
+          "name": "Reply_mach_memory_object_memory_entry",
+          "objc_type": "__Reply__mach_memory_object_memory_entry_t"
+        },
+        {
+          "name": "Reply_host_processor_info",
+          "objc_type": "__Reply__host_processor_info_t"
+        },
+        {
+          "name": "Reply_host_get_io_main",
+          "objc_type": "__Reply__host_get_io_main_t"
+        },
+        {
+          "name": "Reply_host_get_clock_service",
+          "objc_type": "__Reply__host_get_clock_service_t"
+        },
+        {
+          "name": "Reply_kmod_get_info",
+          "objc_type": "__Reply__kmod_get_info_t"
+        },
+        {
+          "name": "Reply_host_virtual_physical_table_info",
+          "objc_type": "__Reply__host_virtual_physical_table_info_t"
+        },
+        {
+          "name": "Reply_processor_set_default",
+          "objc_type": "__Reply__processor_set_default_t"
+        },
+        {
+          "name": "Reply_processor_set_create",
+          "objc_type": "__Reply__processor_set_create_t"
+        },
+        {
+          "name": "Reply_mach_memory_object_memory_entry_64",
+          "objc_type": "__Reply__mach_memory_object_memory_entry_64_t"
+        },
+        {
+          "name": "Reply_host_statistics",
+          "objc_type": "__Reply__host_statistics_t"
+        },
+        {
+          "name": "Reply_host_request_notification",
+          "objc_type": "__Reply__host_request_notification_t"
+        },
+        {
+          "name": "Reply_host_lockgroup_info",
+          "objc_type": "__Reply__host_lockgroup_info_t"
+        },
+        {
+          "name": "Reply_host_statistics64",
+          "objc_type": "__Reply__host_statistics64_t"
+        },
+        {
+          "name": "Reply_mach_zone_info",
+          "objc_type": "__Reply__mach_zone_info_t"
+        },
+        {
+          "name": "Reply_host_create_mach_voucher",
+          "objc_type": "__Reply__host_create_mach_voucher_t"
+        },
+        {
+          "name": "Reply_host_register_mach_voucher_attr_manager",
+          "objc_type": "__Reply__host_register_mach_voucher_attr_manager_t"
+        },
+        {
+          "name": "Reply_host_register_well_known_mach_voucher_attr_manager",
+          "objc_type": "__Reply__host_register_well_known_mach_voucher_attr_manager_t"
+        },
+        {
+          "name": "Reply_host_set_atm_diagnostic_flag",
+          "objc_type": "__Reply__host_set_atm_diagnostic_flag_t"
+        },
+        {
+          "name": "Reply_host_get_atm_diagnostic_flag",
+          "objc_type": "__Reply__host_get_atm_diagnostic_flag_t"
+        },
+        {
+          "name": "Reply_mach_memory_info",
+          "objc_type": "__Reply__mach_memory_info_t"
+        },
+        {
+          "name": "Reply_host_set_multiuser_config_flags",
+          "objc_type": "__Reply__host_set_multiuser_config_flags_t"
+        },
+        {
+          "name": "Reply_host_get_multiuser_config_flags",
+          "objc_type": "__Reply__host_get_multiuser_config_flags_t"
+        },
+        {
+          "name": "Reply_host_check_multiuser_mode",
+          "objc_type": "__Reply__host_check_multiuser_mode_t"
+        },
+        {
+          "name": "Reply_mach_zone_info_for_zone",
+          "objc_type": "__Reply__mach_zone_info_for_zone_t"
+        },
+        {
+          "name": "Reply_mach_memory_info_redacted",
+          "objc_type": "__Reply__mach_memory_info_redacted_t"
+        }
+      ],
+      "is_union": true,
+      "availability": {},
+      "sdk_file": "mach_host.h",
+      "sdk_line": 1274
     },
     "__Reply___host_page_size_t": {
       "fields": [
@@ -730,6 +851,7 @@
         }
       ],
       "size": 312,
+      "align": 4,
       "availability": {},
       "sdk_file": "mach_host.h",
       "sdk_line": 862
@@ -1258,6 +1380,126 @@
       "sdk_file": "mach_host.h",
       "sdk_line": 995
     },
+    "__RequestUnion__mach_host_subsystem": {
+      "fields": [
+        {
+          "name": "Request_host_info",
+          "objc_type": "__Request__host_info_t"
+        },
+        {
+          "name": "Request_host_kernel_version",
+          "objc_type": "__Request__host_kernel_version_t"
+        },
+        {
+          "name": "Request__host_page_size",
+          "objc_type": "__Request___host_page_size_t"
+        },
+        {
+          "name": "Request_mach_memory_object_memory_entry",
+          "objc_type": "__Request__mach_memory_object_memory_entry_t"
+        },
+        {
+          "name": "Request_host_processor_info",
+          "objc_type": "__Request__host_processor_info_t"
+        },
+        {
+          "name": "Request_host_get_io_main",
+          "objc_type": "__Request__host_get_io_main_t"
+        },
+        {
+          "name": "Request_host_get_clock_service",
+          "objc_type": "__Request__host_get_clock_service_t"
+        },
+        {
+          "name": "Request_kmod_get_info",
+          "objc_type": "__Request__kmod_get_info_t"
+        },
+        {
+          "name": "Request_host_virtual_physical_table_info",
+          "objc_type": "__Request__host_virtual_physical_table_info_t"
+        },
+        {
+          "name": "Request_processor_set_default",
+          "objc_type": "__Request__processor_set_default_t"
+        },
+        {
+          "name": "Request_processor_set_create",
+          "objc_type": "__Request__processor_set_create_t"
+        },
+        {
+          "name": "Request_mach_memory_object_memory_entry_64",
+          "objc_type": "__Request__mach_memory_object_memory_entry_64_t"
+        },
+        {
+          "name": "Request_host_statistics",
+          "objc_type": "__Request__host_statistics_t"
+        },
+        {
+          "name": "Request_host_request_notification",
+          "objc_type": "__Request__host_request_notification_t"
+        },
+        {
+          "name": "Request_host_lockgroup_info",
+          "objc_type": "__Request__host_lockgroup_info_t"
+        },
+        {
+          "name": "Request_host_statistics64",
+          "objc_type": "__Request__host_statistics64_t"
+        },
+        {
+          "name": "Request_mach_zone_info",
+          "objc_type": "__Request__mach_zone_info_t"
+        },
+        {
+          "name": "Request_host_create_mach_voucher",
+          "objc_type": "__Request__host_create_mach_voucher_t"
+        },
+        {
+          "name": "Request_host_register_mach_voucher_attr_manager",
+          "objc_type": "__Request__host_register_mach_voucher_attr_manager_t"
+        },
+        {
+          "name": "Request_host_register_well_known_mach_voucher_attr_manager",
+          "objc_type": "__Request__host_register_well_known_mach_voucher_attr_manager_t"
+        },
+        {
+          "name": "Request_host_set_atm_diagnostic_flag",
+          "objc_type": "__Request__host_set_atm_diagnostic_flag_t"
+        },
+        {
+          "name": "Request_host_get_atm_diagnostic_flag",
+          "objc_type": "__Request__host_get_atm_diagnostic_flag_t"
+        },
+        {
+          "name": "Request_mach_memory_info",
+          "objc_type": "__Request__mach_memory_info_t"
+        },
+        {
+          "name": "Request_host_set_multiuser_config_flags",
+          "objc_type": "__Request__host_set_multiuser_config_flags_t"
+        },
+        {
+          "name": "Request_host_get_multiuser_config_flags",
+          "objc_type": "__Request__host_get_multiuser_config_flags_t"
+        },
+        {
+          "name": "Request_host_check_multiuser_mode",
+          "objc_type": "__Request__host_check_multiuser_mode_t"
+        },
+        {
+          "name": "Request_mach_zone_info_for_zone",
+          "objc_type": "__Request__mach_zone_info_for_zone_t"
+        },
+        {
+          "name": "Request_mach_memory_info_redacted",
+          "objc_type": "__Request__mach_memory_info_redacted_t"
+        }
+      ],
+      "is_union": true,
+      "availability": {},
+      "sdk_file": "mach_host.h",
+      "sdk_line": 823
+    },
     "__Request___host_page_size_t": {
       "fields": [
         {
@@ -1378,6 +1620,7 @@
         }
       ],
       "size": 40,
+      "align": 4,
       "availability": {},
       "sdk_file": "mach_host.h",
       "sdk_line": 484

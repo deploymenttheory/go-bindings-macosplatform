@@ -2309,6 +2309,7 @@
         }
       ],
       "size": 20,
+      "align": 2,
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/ATS/ATSLayoutTypes.h",
       "sdk_line": 512
@@ -2377,6 +2378,7 @@
         }
       ],
       "size": 24,
+      "align": 2,
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/ATS/ATSTypes.h",
       "sdk_line": 345

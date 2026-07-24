@@ -30332,6 +30332,7 @@
         }
       ],
       "size": 24,
+      "align": 8,
       "availability": {
         "macos_introduced": "10.13"
       },
@@ -30361,6 +30362,7 @@
         }
       ],
       "size": 32,
+      "align": 8,
       "availability": {},
       "sdk_file": "SceneKit/SceneKitTypes.h",
       "sdk_line": 70

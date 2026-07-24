@@ -262,12 +262,16 @@ type DeferredTask struct {
 	DtReserved int
 }
 
+type ExceptionInfo struct {
+	MemoryInfo *MemoryExceptionInformation
+}
+
 type ExceptionInformation struct {
 	TheKind       uint
 	MachineState  *MachineInformation
 	RegisterImage *RegisterInformation
 	FPUImage      *FPUInformation
-	Info          unsafe.Pointer
+	Info          ExceptionInfo
 	VectorImage   *VectorInformation
 }
 
@@ -276,7 +280,7 @@ type ExceptionInformationPowerPC struct {
 	MachineState  *MachineInformationPowerPC
 	RegisterImage *RegisterInformationPowerPC
 	FPUImage      *FPUInformationPowerPC
-	Info          unsafe.Pointer
+	Info          ExceptionInfo
 	VectorImage   *VectorInformationPowerPC
 }
 
@@ -815,6 +819,17 @@ type LocaleAndVariant struct {
 	OpVariant uint32
 }
 
+type LongDateCvt struct {
+	C  int64
+	Hl unsafe.Pointer
+}
+
+type LongDateRec struct {
+	Ld   unsafe.Pointer
+	List [14]int16
+	Od   unsafe.Pointer
+}
+
 type MIDIDataChunk struct {
 	CkID     uint32
 	CkSize   int32
@@ -1011,7 +1026,7 @@ type NumFormatString struct {
 
 type NumberParts struct {
 	Version     int16
-	Data        [31]unsafe.Pointer
+	Data        [31]WideChar
 	PePlus      WideCharArr
 	PeMinus     WideCharArr
 	PeMinusPlus WideCharArr
@@ -1193,6 +1208,9 @@ type PEFSplitHashWord struct {
 	NameLength uint16
 	HashValue  uint16
 }
+
+// ParamBlockRec is an opaque type.
+type ParamBlockRec struct{}
 
 // ****************************************************************************** Quickdraw Types Point               2D Quickdraw coordinate, range: -32K to +32K Rect                Rectangular Quickdraw area Style               Quickdraw font rendering styles StyleParameter      Style when used as a parameter (historical 68K convention) StyleField          Style when used as a field (historical 68K convention) CharParameter       Char when used as a parameter (historical 68K convention) Note:   The original Macintosh toolbox in 68K Pascal defined Style as a SET. Both Style and CHAR occupy 8-bits in packed records or 16-bits when used as fields in non-packed records or as parameters. *******************************************************************************
 type Point struct {
@@ -1650,12 +1668,18 @@ type UntokenTable struct {
 	Index     [256]int16
 }
 
+type Vector128 struct {
+	L [4]uint
+	S [8]uint16
+	C [16]uint8
+}
+
 type VectorInformation struct {
 }
 
 type VectorInformationPowerPC struct {
-	Registers [32]unsafe.Pointer
-	VSCR      unsafe.Pointer
+	Registers [32]Vector128
+	VSCR      Vector128
 	VRsave    uint32
 }
 
@@ -1670,9 +1694,14 @@ type VolumeMountInfoHeader struct {
 	Flags  int16
 }
 
+type WideChar struct {
+	A unsafe.Pointer
+	B int16
+}
+
 type WideCharArr struct {
 	Size int16
-	Data [10]unsafe.Pointer
+	Data [10]WideChar
 }
 
 type XLibContainerHeader struct {

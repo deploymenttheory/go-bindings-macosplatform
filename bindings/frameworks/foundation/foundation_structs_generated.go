@@ -8,6 +8,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // A structure that defines the three-by-three matrix that performs an affine transform between two coordinate systems.
@@ -46,34 +47,8 @@ type NSFastEnumerationState struct {
 type NSHashEnumerator struct {
 }
 
-// Defines a structure that contains the function pointers used to configure behavior of NSHashTable with respect to elements within a hash table.
-type NSHashTableCallBacks struct {
-	Hash     unsafe.Pointer
-	IsEqual  unsafe.Pointer
-	Retain   unsafe.Pointer
-	Release  unsafe.Pointer
-	Describe unsafe.Pointer
-}
-
 // Allows successive elements of a map table to be returned each time this structure is passed to NSNextMapEnumeratorPair.
 type NSMapEnumerator struct {
-}
-
-// The function pointers used to configure behavior of NSMapTable with respect to key elements within a map table.
-type NSMapTableKeyCallBacks struct {
-	Hash          unsafe.Pointer
-	IsEqual       unsafe.Pointer
-	Retain        unsafe.Pointer
-	Release       unsafe.Pointer
-	Describe      unsafe.Pointer
-	NotAKeyMarker unsafe.Pointer
-}
-
-// The function pointers used to configure behavior of NSMapTable with respect to value elements within a map table.
-type NSMapTableValueCallBacks struct {
-	Retain   unsafe.Pointer
-	Release  unsafe.Pointer
-	Describe unsafe.Pointer
 }
 
 // A structure that contains version information about the currently executing operating system, including major, minor, and patch version numbers.
@@ -139,3 +114,191 @@ type SEL struct{ obj.Object }
 // IsNil reports whether SEL is a NULL handle (it wraps no object). Call
 // it before using a returned handle; a nil handle's methods panic.
 func (h SEL) IsNil() bool { return h.Object == nil }
+
+// Defines a structure that contains the function pointers used to configure behavior of NSHashTable with respect to elements within a hash table.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type NSHashTableCallBacks struct {
+	_    [0]uint64
+	data [40]byte
+}
+
+// AsHash binds the hash C function pointer (offset 0) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *NSHashTableCallBacks) AsHash() func(unsafe.Pointer, unsafe.Pointer) uint {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[0]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer) uint
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsIsEqual binds the isEqual C function pointer (offset 8) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *NSHashTableCallBacks) AsIsEqual() func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[8]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsRetain binds the retain C function pointer (offset 16) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *NSHashTableCallBacks) AsRetain() func(unsafe.Pointer, unsafe.Pointer) {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[16]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer)
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsRelease binds the release C function pointer (offset 24) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *NSHashTableCallBacks) AsRelease() func(unsafe.Pointer, unsafe.Pointer) {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[24]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer)
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsDescribe binds the describe C function pointer (offset 32) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *NSHashTableCallBacks) AsDescribe() func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[32]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// The function pointers used to configure behavior of NSMapTable with respect to key elements within a map table.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type NSMapTableKeyCallBacks struct {
+	_    [0]uint64
+	data [48]byte
+}
+
+// AsHash binds the hash C function pointer (offset 0) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *NSMapTableKeyCallBacks) AsHash() func(unsafe.Pointer, unsafe.Pointer) uint {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[0]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer) uint
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsIsEqual binds the isEqual C function pointer (offset 8) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *NSMapTableKeyCallBacks) AsIsEqual() func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[8]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsRetain binds the retain C function pointer (offset 16) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *NSMapTableKeyCallBacks) AsRetain() func(unsafe.Pointer, unsafe.Pointer) {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[16]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer)
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsRelease binds the release C function pointer (offset 24) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *NSMapTableKeyCallBacks) AsRelease() func(unsafe.Pointer, unsafe.Pointer) {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[24]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer)
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsDescribe binds the describe C function pointer (offset 32) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *NSMapTableKeyCallBacks) AsDescribe() func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[32]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsNotAKeyMarker returns the notAKeyMarker field, read from the backing bytes at offset 40.
+func (u *NSMapTableKeyCallBacks) AsNotAKeyMarker() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[40]))
+}
+
+// The function pointers used to configure behavior of NSMapTable with respect to value elements within a map table.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type NSMapTableValueCallBacks struct {
+	_    [0]uint64
+	data [24]byte
+}
+
+// AsRetain binds the retain C function pointer (offset 0) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *NSMapTableValueCallBacks) AsRetain() func(unsafe.Pointer, unsafe.Pointer) {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[0]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer)
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsRelease binds the release C function pointer (offset 8) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *NSMapTableValueCallBacks) AsRelease() func(unsafe.Pointer, unsafe.Pointer) {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[8]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer)
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsDescribe binds the describe C function pointer (offset 16) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *NSMapTableValueCallBacks) AsDescribe() func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[16]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	purego.RegisterFunc(&fn, p)
+	return fn
+}

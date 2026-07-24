@@ -15164,6 +15164,7 @@
         }
       ],
       "size": 12,
+      "align": 4,
       "availability": {},
       "sdk_file": "AVFAudio/AVAudioTypes.h",
       "sdk_line": 155
@@ -15186,6 +15187,7 @@
         }
       ],
       "size": 12,
+      "align": 4,
       "availability": {},
       "sdk_file": "AVFAudio/AVAudioTypes.h",
       "sdk_line": 73

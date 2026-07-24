@@ -2237,6 +2237,7 @@
         }
       ],
       "size": 24,
+      "align": 4,
       "availability": {},
       "sdk_file": "DriverKit/IORPC.h",
       "sdk_line": 78
@@ -2293,6 +2294,7 @@
         }
       ],
       "size": 28,
+      "align": 4,
       "availability": {},
       "sdk_file": "DriverKit/IORPC.h",
       "sdk_line": 70
@@ -2325,6 +2327,7 @@
         }
       ],
       "size": 16,
+      "align": 8,
       "availability": {},
       "sdk_file": "DriverKit/IOReportTypes.h",
       "sdk_line": 171
@@ -2373,6 +2376,7 @@
       ],
       "packed": true,
       "size": 8,
+      "align": 1,
       "availability": {},
       "sdk_file": "DriverKit/IOReportTypes.h",
       "sdk_line": 138
@@ -2430,6 +2434,7 @@
         }
       ],
       "size": 24,
+      "align": 8,
       "availability": {},
       "sdk_file": "DriverKit/IOReportTypes.h",
       "sdk_line": 181
@@ -3047,9 +3052,12 @@
         },
         {
           "name": "osString",
-          "objc_type": "int *"
+          "objc_type": "int *",
+          "offset": 8
         }
       ],
+      "size": 16,
+      "align": 8,
       "availability": {},
       "sdk_file": "DriverKit/OSCollections.h",
       "sdk_line": 102
@@ -3067,6 +3075,7 @@
         }
       ],
       "size": 16,
+      "align": 8,
       "availability": {},
       "sdk_file": "DriverKit/queue_implementation.h",
       "sdk_line": 201

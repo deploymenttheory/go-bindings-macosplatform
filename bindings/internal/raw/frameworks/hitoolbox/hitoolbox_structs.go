@@ -1014,6 +1014,14 @@ type TXNATSUIVariations struct {
 	VariationValues unsafe.Pointer
 }
 
+type TXNAttributeData struct {
+	DataPtr        unsafe.Pointer
+	DataValue      uint32
+	AtsuFeatures   *TXNATSUIFeatures
+	AtsuVariations *TXNATSUIVariations
+	UrlReference   unsafe.Pointer
+}
+
 type TXNBackground struct {
 	BgType uint32
 	Bg     TXNBackgroundData
@@ -1028,6 +1036,13 @@ type TXNCarbonEventInfo struct {
 	Filler          uint8
 	Flags           uint16
 	FDictionary     unsafe.Pointer
+}
+
+type TXNControlData struct {
+	UValue     uint
+	SValue     int
+	TabValue   TXNTab
+	MarginsPtr *TXNMargins
 }
 
 type TXNLongRect struct {
@@ -1059,7 +1074,7 @@ type TXNTab struct {
 type TXNTypeAttributes struct {
 	Tag  uint32
 	Size uint
-	Data unsafe.Pointer
+	Data TXNAttributeData
 }
 
 type TabletPointRec struct {

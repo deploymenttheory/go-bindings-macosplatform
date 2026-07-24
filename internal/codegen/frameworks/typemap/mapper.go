@@ -62,6 +62,15 @@ type Mapper struct {
 	// only needs the target type to EXIST, not to have all-clean fields, so it
 	// consults this set rather than EmittableStructs.
 	AllEmittedStructs map[string]bool
+	// ByteArrayStructs is the set of value-struct Go names the idiomatic layer
+	// emits as an aligned [N]byte backing array plus typed As<Field> accessor
+	// methods, rather than a clean typed struct — the second admission tier for
+	// layouts the clean path rejects (packed-misaligned, later unions) but whose
+	// exact size and field offsets are known. These are DELIBERATELY excluded from
+	// EmittableStructs: a [N]byte cannot be passed by value (float register
+	// classification is unrecoverable from bytes), so they stay pointer/accessor
+	// only. They ARE in AllEmittedStructs (pointer targets resolve normally).
+	ByteArrayStructs map[string]bool
 	// IdiomaticClassIndex maps an ObjC class name to the idiomatic package and
 	// wrapper type name that own it ("NSProgress" → {foundation, Progress}),
 	// computed once during idiomatic generation. It lets one idiomatic package
@@ -555,21 +564,33 @@ type BlockSignature struct {
 // "ReturnType (^ _Nonnull)(ParamType1, ParamType2)" into its return type and
 // parameter ObjC type strings (param names stripped, qualifiers normalised).
 func parseBlockComponents(n string) (BlockSignature, bool) {
-	caretIdx := strings.Index(n, "(^")
-	if caretIdx < 0 {
+	return parseCallableComponents(n, "(^")
+}
+
+// parseFuncPtrComponents is parseBlockComponents' counterpart for a C function
+// pointer "ReturnType (*)(ParamType1, ParamType2)".
+func parseFuncPtrComponents(n string) (BlockSignature, bool) {
+	return parseCallableComponents(n, "(*")
+}
+
+// parseCallableComponents splits a callable literal — a block "(^" or a function
+// pointer "(*" per marker — into its return and parameter ObjC type strings.
+func parseCallableComponents(n, marker string) (BlockSignature, bool) {
+	idx := strings.Index(n, marker)
+	if idx < 0 {
 		return BlockSignature{}, false
 	}
-	signature := BlockSignature{ReturnObjCType: strings.TrimSpace(n[:caretIdx])}
+	signature := BlockSignature{ReturnObjCType: strings.TrimSpace(n[:idx])}
 
-	// Skip the "(^ ...)" caret expression, then expect "(params)".
-	rest := n[caretIdx:]
+	// Skip the "(^ …)" / "(* …)" expression, then expect "(params)".
+	rest := n[idx:]
 	closeParen := strings.Index(rest, ")")
 	if closeParen < 0 {
 		return BlockSignature{}, false
 	}
 	rest = strings.TrimSpace(rest[closeParen+1:])
 	if !strings.HasPrefix(rest, "(") {
-		// No param list — block takes no params.
+		// No param list.
 		return signature, true
 	}
 	if !strings.HasSuffix(rest, ")") {
@@ -590,6 +611,38 @@ func parseBlockComponents(n string) (BlockSignature, bool) {
 		)
 	}
 	return signature, true
+}
+
+// ResolveFuncPtrSignature reports whether objcType denotes a C function pointer
+// ("ReturnType (*)(…)", or a typedef chain ending in one) and returns its
+// component ObjC types, mirroring ResolveBlockSignature.
+func (m *Mapper) ResolveFuncPtrSignature(objcType string) (BlockSignature, bool) {
+	n := normalise(objcType)
+	if strings.Contains(n, "(*") {
+		return parseFuncPtrComponents(n)
+	}
+	bare := strings.TrimSpace(strings.TrimPrefix(n, "const "))
+	if m.TypedefIndex == nil || strings.ContainsAny(bare, " *<>^()") {
+		return BlockSignature{}, false
+	}
+	visited := map[string]bool{}
+	cur := bare
+	for i := 0; i < 8 && !visited[cur]; i++ {
+		visited[cur] = true
+		target, ok := m.TypedefIndex[cur]
+		if !ok {
+			return BlockSignature{}, false
+		}
+		next := normalise(target)
+		if strings.Contains(next, "(*") {
+			return parseFuncPtrComponents(next)
+		}
+		if strings.ContainsAny(next, " *<>^()") {
+			return BlockSignature{}, false
+		}
+		cur = next
+	}
+	return BlockSignature{}, false
 }
 
 // ResolveBlockSignature reports whether objcType denotes an ObjC block —

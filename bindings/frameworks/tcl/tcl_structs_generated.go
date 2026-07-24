@@ -19,12 +19,6 @@ type TclPlatStubs struct {
 	TclMACOSXOpenVersionedBundleResources unsafe.Pointer
 }
 
-type TclStubHooks struct {
-	TclPlatStubs    unsafe.Pointer
-	TclIntStubs     unsafe.Pointer
-	TclIntPlatStubs unsafe.Pointer
-}
-
 type TclStubs struct {
 	Magic                             int32
 	Hooks                             unsafe.Pointer
@@ -668,11 +662,6 @@ type Tcl_Command_ struct{}
 
 type Tcl_Condition_ struct{}
 
-type Tcl_Config struct {
-	Key   unsafe.Pointer
-	Value unsafe.Pointer
-}
-
 type Tcl_DString struct {
 	String      unsafe.Pointer
 	Length      int32
@@ -700,11 +689,6 @@ type Tcl_EncodingType struct {
 }
 
 type Tcl_Encoding_ struct{}
-
-type Tcl_Event struct {
-	Proc    unsafe.Pointer
-	NextPtr unsafe.Pointer
-}
 
 type Tcl_FSVersion_ struct{}
 
@@ -806,31 +790,12 @@ type Tcl_Namespace struct {
 	ParentPtr  unsafe.Pointer
 }
 
-type Tcl_NotifierProcs struct {
-	SetTimerProc          unsafe.Pointer
-	WaitForEventProc      unsafe.Pointer
-	CreateFileHandlerProc unsafe.Pointer
-	DeleteFileHandlerProc unsafe.Pointer
-	InitNotifierProc      unsafe.Pointer
-	FinalizeNotifierProc  unsafe.Pointer
-	AlertNotifierProc     unsafe.Pointer
-	ServiceModeHookProc   unsafe.Pointer
-}
-
 type Tcl_Obj struct {
 	RefCount    int32
 	Bytes       unsafe.Pointer
 	Length      int32
 	TypePtr     unsafe.Pointer
 	InternalRep unsafe.Pointer
-}
-
-type Tcl_ObjType struct {
-	Name             unsafe.Pointer
-	FreeIntRepProc   unsafe.Pointer
-	DupIntRepProc    unsafe.Pointer
-	UpdateStringProc unsafe.Pointer
-	SetFromAnyProc   unsafe.Pointer
 }
 
 type Tcl_Parse struct {
@@ -887,13 +852,6 @@ type Tcl_Time struct {
 }
 
 type Tcl_TimerToken_ struct{}
-
-type Tcl_Token struct {
-	Type          int32
-	Start         unsafe.Pointer
-	Size          int32
-	NumComponents int32
-}
 
 type Tcl_Trace_ struct{}
 
@@ -1061,3 +1019,171 @@ type Tcl_Var struct{ obj.Object }
 // IsNil reports whether Tcl_Var is a NULL handle (it wraps no object). Call
 // it before using a returned handle; a nil handle's methods panic.
 func (h Tcl_Var) IsNil() bool { return h.Object == nil }
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type TclStubHooks struct {
+	_    [0]uint64
+	data [24]byte
+}
+
+// AsTclPlatStubs returns the tclPlatStubs field, read from the backing bytes at offset 0.
+func (u *TclStubHooks) AsTclPlatStubs() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsTclIntStubs returns the tclIntStubs field, read from the backing bytes at offset 8.
+func (u *TclStubHooks) AsTclIntStubs() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsTclIntPlatStubs returns the tclIntPlatStubs field, read from the backing bytes at offset 16.
+func (u *TclStubHooks) AsTclIntPlatStubs() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[16]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type Tcl_Config struct {
+	_    [0]uint64
+	data [16]byte
+}
+
+// AsKey returns the key field, read from the backing bytes at offset 0.
+func (u *Tcl_Config) AsKey() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsValue returns the value field, read from the backing bytes at offset 8.
+func (u *Tcl_Config) AsValue() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type Tcl_Event struct {
+	_    [0]uint64
+	data [16]byte
+}
+
+// AsProc returns the proc field, read from the backing bytes at offset 0.
+func (u *Tcl_Event) AsProc() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsNextPtr returns the nextPtr field, read from the backing bytes at offset 8.
+func (u *Tcl_Event) AsNextPtr() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type Tcl_NotifierProcs struct {
+	_    [0]uint64
+	data [64]byte
+}
+
+// AsSetTimerProc returns the setTimerProc field, read from the backing bytes at offset 0.
+func (u *Tcl_NotifierProcs) AsSetTimerProc() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsWaitForEventProc returns the waitForEventProc field, read from the backing bytes at offset 8.
+func (u *Tcl_NotifierProcs) AsWaitForEventProc() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsCreateFileHandlerProc returns the createFileHandlerProc field, read from the backing bytes at offset 16.
+func (u *Tcl_NotifierProcs) AsCreateFileHandlerProc() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[16]))
+}
+
+// AsDeleteFileHandlerProc returns the deleteFileHandlerProc field, read from the backing bytes at offset 24.
+func (u *Tcl_NotifierProcs) AsDeleteFileHandlerProc() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[24]))
+}
+
+// AsInitNotifierProc returns the initNotifierProc field, read from the backing bytes at offset 32.
+func (u *Tcl_NotifierProcs) AsInitNotifierProc() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[32]))
+}
+
+// AsFinalizeNotifierProc returns the finalizeNotifierProc field, read from the backing bytes at offset 40.
+func (u *Tcl_NotifierProcs) AsFinalizeNotifierProc() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[40]))
+}
+
+// AsAlertNotifierProc returns the alertNotifierProc field, read from the backing bytes at offset 48.
+func (u *Tcl_NotifierProcs) AsAlertNotifierProc() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[48]))
+}
+
+// AsServiceModeHookProc returns the serviceModeHookProc field, read from the backing bytes at offset 56.
+func (u *Tcl_NotifierProcs) AsServiceModeHookProc() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[56]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type Tcl_ObjType struct {
+	_    [0]uint64
+	data [40]byte
+}
+
+// AsName returns the name field, read from the backing bytes at offset 0.
+func (u *Tcl_ObjType) AsName() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsFreeIntRepProc returns the freeIntRepProc field, read from the backing bytes at offset 8.
+func (u *Tcl_ObjType) AsFreeIntRepProc() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsDupIntRepProc returns the dupIntRepProc field, read from the backing bytes at offset 16.
+func (u *Tcl_ObjType) AsDupIntRepProc() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[16]))
+}
+
+// AsUpdateStringProc returns the updateStringProc field, read from the backing bytes at offset 24.
+func (u *Tcl_ObjType) AsUpdateStringProc() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[24]))
+}
+
+// AsSetFromAnyProc returns the setFromAnyProc field, read from the backing bytes at offset 32.
+func (u *Tcl_ObjType) AsSetFromAnyProc() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[32]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type Tcl_Token struct {
+	_    [0]uint64
+	data [24]byte
+}
+
+// AsType returns the type field, read from the backing bytes at offset 0.
+func (u *Tcl_Token) AsType() int32 {
+	return *(*int32)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsStart returns the start field, read from the backing bytes at offset 8.
+func (u *Tcl_Token) AsStart() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsSize returns the size field, read from the backing bytes at offset 16.
+func (u *Tcl_Token) AsSize() int32 {
+	return *(*int32)(unsafe.Pointer(&u.data[16]))
+}
+
+// AsNumComponents returns the numComponents field, read from the backing bytes at offset 20.
+func (u *Tcl_Token) AsNumComponents() int32 {
+	return *(*int32)(unsafe.Pointer(&u.data[20]))
+}

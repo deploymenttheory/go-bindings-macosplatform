@@ -5779,6 +5779,7 @@
         }
       ],
       "size": 24,
+      "align": 8,
       "availability": {},
       "sdk_file": "CoreMotion/CMMagnetometer.h",
       "sdk_line": 30

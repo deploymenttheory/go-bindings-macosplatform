@@ -7988,6 +7988,7 @@
         }
       ],
       "size": 528,
+      "align": 8,
       "availability": {},
       "sdk_file": "vecLib/BNNS/bnns_structures.h",
       "sdk_line": 312,
@@ -8046,6 +8047,7 @@
         }
       ],
       "size": 176,
+      "align": 8,
       "availability": {},
       "sdk_file": "vecLib/BNNS/bnns_structures.h",
       "sdk_line": 125,
@@ -8555,9 +8557,12 @@
         },
         {
           "name": "imagp",
-          "objc_type": "double * _Nonnull"
+          "objc_type": "double * _Nonnull",
+          "offset": 8
         }
       ],
+      "size": 16,
+      "align": 8,
       "availability": {},
       "sdk_file": "vecLib/vDSP.h",
       "sdk_line": 305
@@ -8570,9 +8575,12 @@
         },
         {
           "name": "imagp",
-          "objc_type": "float * _Nonnull"
+          "objc_type": "float * _Nonnull",
+          "offset": 8
         }
       ],
+      "size": 16,
+      "align": 8,
       "availability": {},
       "sdk_file": "vecLib/vDSP.h",
       "sdk_line": 301
@@ -8605,6 +8613,7 @@
         }
       ],
       "size": 24,
+      "align": 8,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 1123,
@@ -8638,6 +8647,7 @@
         }
       ],
       "size": 24,
+      "align": 8,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 1139,
@@ -8671,6 +8681,7 @@
         }
       ],
       "size": 24,
+      "align": 8,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 1091,
@@ -8704,6 +8715,7 @@
         }
       ],
       "size": 24,
+      "align": 8,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 1107,
@@ -8722,6 +8734,7 @@
         }
       ],
       "size": 16,
+      "align": 8,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 1069,
@@ -8740,6 +8753,7 @@
         }
       ],
       "size": 16,
+      "align": 8,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 1078,
@@ -8758,6 +8772,7 @@
         }
       ],
       "size": 16,
+      "align": 8,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 1051,
@@ -8776,6 +8791,7 @@
         }
       ],
       "size": 16,
+      "align": 8,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 1060,
@@ -8879,6 +8895,7 @@
         }
       ],
       "size": 40,
+      "align": 8,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 6060,
@@ -8922,6 +8939,7 @@
         }
       ],
       "size": 48,
+      "align": 8,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 6152,
@@ -8940,6 +8958,7 @@
         }
       ],
       "size": 264,
+      "align": 8,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 6307,
@@ -8998,6 +9017,7 @@
         }
       ],
       "size": 72,
+      "align": 8,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 6285,
@@ -9036,6 +9056,7 @@
         }
       ],
       "size": 32,
+      "align": 8,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 479,
@@ -9074,6 +9095,7 @@
         }
       ],
       "size": 32,
+      "align": 8,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 522,
@@ -9092,6 +9114,7 @@
         }
       ],
       "size": 40,
+      "align": 8,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 574,
@@ -9110,6 +9133,7 @@
         }
       ],
       "size": 40,
+      "align": 8,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 590,
@@ -9128,6 +9152,7 @@
         }
       ],
       "size": 40,
+      "align": 8,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 542,
@@ -9146,6 +9171,7 @@
         }
       ],
       "size": 40,
+      "align": 8,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 558,
@@ -9179,6 +9205,7 @@
         }
       ],
       "size": 32,
+      "align": 8,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 1424,
@@ -9222,6 +9249,7 @@
         }
       ],
       "size": 104,
+      "align": 8,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 1669,
@@ -9265,6 +9293,7 @@
         }
       ],
       "size": 104,
+      "align": 8,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 1728,
@@ -9308,6 +9337,7 @@
         }
       ],
       "size": 104,
+      "align": 8,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 1551,
@@ -9351,6 +9381,7 @@
         }
       ],
       "size": 104,
+      "align": 8,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 1610,
@@ -9374,6 +9405,7 @@
         }
       ],
       "size": 24,
+      "align": 8,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 5876,
@@ -9397,6 +9429,7 @@
         }
       ],
       "size": 24,
+      "align": 8,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 5896,
@@ -9420,6 +9453,7 @@
         }
       ],
       "size": 24,
+      "align": 8,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 5836,
@@ -9443,6 +9477,7 @@
         }
       ],
       "size": 24,
+      "align": 8,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 5856,
@@ -9476,6 +9511,7 @@
         }
       ],
       "size": 128,
+      "align": 8,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 1864,
@@ -9509,6 +9545,7 @@
         }
       ],
       "size": 128,
+      "align": 8,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 1893,
@@ -9542,6 +9579,7 @@
         }
       ],
       "size": 128,
+      "align": 8,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 1806,
@@ -9575,6 +9613,7 @@
         }
       ],
       "size": 128,
+      "align": 8,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 1835,
@@ -9638,6 +9677,7 @@
         }
       ],
       "size": 64,
+      "align": 8,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 1488,
@@ -9681,6 +9721,7 @@
         }
       ],
       "size": 48,
+      "align": 8,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 1380,
@@ -9694,6 +9735,7 @@
         }
       ],
       "size": 8,
+      "align": 8,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 6014,
@@ -9954,6 +9996,182 @@
       "availability": {},
       "sdk_file": "vecLib/vDSP.h",
       "sdk_line": 334
+    },
+    "vS1024": {
+      "fields": [
+        {
+          "name": "v",
+          "objc_type": "vUInt32[8]"
+        },
+        {
+          "name": "vs",
+          "objc_type": "struct (unnamed struct at /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/vecLib.framework/Headers/vBigNum.h:305:3)"
+        },
+        {
+          "name": "s",
+          "objc_type": "struct (unnamed struct at /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/vecLib.framework/Headers/vBigNum.h:315:3)"
+        }
+      ],
+      "is_union": true,
+      "availability": {
+        "macos_introduced": "10.0"
+      },
+      "sdk_file": "vecLib/vBigNum.h",
+      "sdk_line": 303
+    },
+    "vS128": {
+      "fields": [
+        {
+          "name": "v",
+          "objc_type": "vUInt32"
+        },
+        {
+          "name": "vs",
+          "objc_type": "struct (unnamed struct at /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/vecLib.framework/Headers/vBigNum.h:152:3)"
+        },
+        {
+          "name": "s",
+          "objc_type": "struct (unnamed struct at /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/vecLib.framework/Headers/vBigNum.h:155:3)"
+        }
+      ],
+      "is_union": true,
+      "availability": {
+        "macos_introduced": "10.0"
+      },
+      "sdk_file": "vecLib/vBigNum.h",
+      "sdk_line": 150
+    },
+    "vS256": {
+      "fields": [
+        {
+          "name": "v",
+          "objc_type": "vUInt32[2]"
+        },
+        {
+          "name": "vs",
+          "objc_type": "struct (unnamed struct at /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/vecLib.framework/Headers/vBigNum.h:183:3)"
+        },
+        {
+          "name": "s",
+          "objc_type": "struct (unnamed struct at /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/vecLib.framework/Headers/vBigNum.h:187:3)"
+        }
+      ],
+      "is_union": true,
+      "availability": {
+        "macos_introduced": "10.0"
+      },
+      "sdk_file": "vecLib/vBigNum.h",
+      "sdk_line": 181
+    },
+    "vS512": {
+      "fields": [
+        {
+          "name": "v",
+          "objc_type": "vUInt32[4]"
+        },
+        {
+          "name": "vs",
+          "objc_type": "struct (unnamed struct at /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/vecLib.framework/Headers/vBigNum.h:229:3)"
+        },
+        {
+          "name": "s",
+          "objc_type": "struct (unnamed struct at /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/vecLib.framework/Headers/vBigNum.h:235:3)"
+        }
+      ],
+      "is_union": true,
+      "availability": {
+        "macos_introduced": "10.0"
+      },
+      "sdk_file": "vecLib/vBigNum.h",
+      "sdk_line": 227
+    },
+    "vU1024": {
+      "fields": [
+        {
+          "name": "v",
+          "objc_type": "vUInt32[8]"
+        },
+        {
+          "name": "vs",
+          "objc_type": "struct (unnamed struct at /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/vecLib.framework/Headers/vBigNum.h:257:3)"
+        },
+        {
+          "name": "s",
+          "objc_type": "struct (unnamed struct at /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/vecLib.framework/Headers/vBigNum.h:267:3)"
+        }
+      ],
+      "is_union": true,
+      "availability": {
+        "macos_introduced": "10.0"
+      },
+      "sdk_file": "vecLib/vBigNum.h",
+      "sdk_line": 255
+    },
+    "vU128": {
+      "fields": [
+        {
+          "name": "v",
+          "objc_type": "vUInt32"
+        },
+        {
+          "name": "vs",
+          "objc_type": "struct (unnamed struct at /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/vecLib.framework/Headers/vBigNum.h:139:3)"
+        },
+        {
+          "name": "s",
+          "objc_type": "struct (unnamed struct at /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/vecLib.framework/Headers/vBigNum.h:142:3)"
+        }
+      ],
+      "is_union": true,
+      "availability": {
+        "macos_introduced": "10.0"
+      },
+      "sdk_file": "vecLib/vBigNum.h",
+      "sdk_line": 137
+    },
+    "vU256": {
+      "fields": [
+        {
+          "name": "v",
+          "objc_type": "vUInt32[2]"
+        },
+        {
+          "name": "vs",
+          "objc_type": "struct (unnamed struct at /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/vecLib.framework/Headers/vBigNum.h:165:3)"
+        },
+        {
+          "name": "s",
+          "objc_type": "struct (unnamed struct at /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/vecLib.framework/Headers/vBigNum.h:169:3)"
+        }
+      ],
+      "is_union": true,
+      "availability": {
+        "macos_introduced": "10.0"
+      },
+      "sdk_file": "vecLib/vBigNum.h",
+      "sdk_line": 163
+    },
+    "vU512": {
+      "fields": [
+        {
+          "name": "v",
+          "objc_type": "vUInt32[4]"
+        },
+        {
+          "name": "vs",
+          "objc_type": "struct (unnamed struct at /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/vecLib.framework/Headers/vBigNum.h:201:3)"
+        },
+        {
+          "name": "s",
+          "objc_type": "struct (unnamed struct at /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/vecLib.framework/Headers/vBigNum.h:207:3)"
+        }
+      ],
+      "is_union": true,
+      "availability": {
+        "macos_introduced": "10.0"
+      },
+      "sdk_file": "vecLib/vBigNum.h",
+      "sdk_line": 199
     }
   },
   "functions": [

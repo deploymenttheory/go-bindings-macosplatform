@@ -20,6 +20,7 @@ type (
 	ReplyMachVmRegionInfo64T         = raw.ReplyMachVmRegionInfo64T
 	ReplyMachVmRegionInfoT           = raw.ReplyMachVmRegionInfoT
 	ReplyTaskWireT                   = raw.ReplyTaskWireT
+	ReplyUnionVmMapSubsystem         = raw.ReplyUnionVmMapSubsystem
 	ReplyVmAllocateT                 = raw.ReplyVmAllocateT
 	ReplyVmBehaviorSetT              = raw.ReplyVmBehaviorSetT
 	ReplyVmCopyT                     = raw.ReplyVmCopyT
@@ -50,6 +51,7 @@ type (
 	RequestMachVmRegionInfo64T       = raw.RequestMachVmRegionInfo64T
 	RequestMachVmRegionInfoT         = raw.RequestMachVmRegionInfoT
 	RequestTaskWireT                 = raw.RequestTaskWireT
+	RequestUnionVmMapSubsystem       = raw.RequestUnionVmMapSubsystem
 	RequestVmAllocateT               = raw.RequestVmAllocateT
 	RequestVmBehaviorSetT            = raw.RequestVmBehaviorSetT
 	RequestVmCopyT                   = raw.RequestVmCopyT

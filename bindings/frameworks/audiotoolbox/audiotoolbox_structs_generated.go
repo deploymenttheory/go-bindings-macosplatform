@@ -10,6 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreaudiotypes"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // The audio input and output channel capabilities for an audio unit.
@@ -158,12 +159,12 @@ type AURenderCallbackStruct struct {
 	InputProcRefCon unsafe.Pointer
 }
 
-// The common header for a render event.
-type AURenderEventHeader struct {
-	Next            unsafe.Pointer
-	EventSampleTime int64
-	EventType       RenderEventType
-	Reserved        uint8
+// A union of the various specific render event types. Determine which variant to use via head.eventType. AURenderEventParameter and AURenderEventParameterRamp use the parameter variant. AURenderEventMIDI and AURenderEventMIDISysEx use the MIDI variant.
+type AURenderEvent struct {
+	Head           AURenderEventHeader
+	Parameter      AUParameterEvent
+	MIDI           AUMIDIEvent
+	MIDIEventsList AUMIDIEventList
 }
 
 type AUSamplerBankPresetData struct {
@@ -225,14 +226,6 @@ type AudioComponentDescription struct {
 	ComponentFlagsMask    uint32
 }
 
-// A structure used to represent an audio plugin's routines
-type AudioComponentPlugInInterface struct {
-	Open     unsafe.Pointer
-	Close    unsafe.Pointer
-	Lookup   unsafe.Pointer
-	Reserved unsafe.Pointer
-}
-
 // Specifies priming information for an audio converter.
 type AudioConverterPrimeInfo struct {
 	LeadingFrames  uint32
@@ -270,38 +263,11 @@ type AudioFileFDFTableExtended struct {
 	MReadPacketDataFDF  unsafe.Pointer
 }
 
-// Annotates a position in an audio file.
-type AudioFileMarker struct {
-	MFramePosition float64
-	MName          unsafe.Pointer
-	MMarkerID      int32
-	MSMPTETime     AudioFile_SMPTE_Time
-	MType          uint32
-	MReserved      uint16
-	MChannel       uint16
-}
-
-// A list of markers associated with an audio file, including their SMPTE time type, the number of markers, and the markers themselves.
-type AudioFileMarkerList struct {
-	MSMPTETimeType uint32
-	MNumberMarkers uint32
-	MMarkers       [1]AudioFileMarker
-}
-
 // Contains information about the number of valid frames in a file and where they begin and end.
 type AudioFilePacketTableInfo struct {
 	MNumberValidFrames int64
 	MPrimingFrames     int32
 	MRemainderFrames   int32
-}
-
-// An audio file region specifies a segment of audio data.
-type AudioFileRegion struct {
-	MRegionID      uint32
-	MName          unsafe.Pointer
-	MFlags         AudioFileRegionFlags
-	MNumberMarkers uint32
-	MMarkers       [1]AudioFileMarker
 }
 
 // A list of the audio file regions in a file.
@@ -344,13 +310,6 @@ type AudioFramePacketTranslation struct {
 type AudioIndependentPacketTranslation struct {
 	MPacket                       int64
 	MIndependentlyDecodablePacket int64
-}
-
-// For inter-app audio, callbacks for receiving MIDI messages. The supplied callback functions are called from the realtime rendering thread, before each render cycle, to provide any incoming MIDI messages.
-type AudioOutputUnitMIDICallbacks struct {
-	UserData      unsafe.Pointer
-	MIDIEventProc unsafe.Pointer
-	MIDISysExProc unsafe.Pointer
 }
 
 // A timestamp for scheduled starting of an I/O audio unit.
@@ -471,19 +430,6 @@ type AudioUnitNodeConnection struct {
 	DestInputNumber    uint32
 }
 
-type AudioUnitOtherPluginDesc struct {
-	Format uint32
-	Plugin coreaudiotypes.AudioClassDescription
-}
-
-// An adjustable audio unit attribute such as volume, pitch, or filter cutoff frequency.
-type AudioUnitParameter struct {
-	MAudioUnit   unsafe.Pointer
-	MParameterID uint32
-	MScope       uint32
-	MElement     uint32
-}
-
 // A scheduled change to an audio unit parameter’s value.
 type AudioUnitParameterEvent struct {
 	Scope       uint32
@@ -595,24 +541,9 @@ type CAClockTime struct {
 	Time     unsafe.Pointer
 }
 
-type CAFAudioDescription struct {
-	MSampleRate       float64
-	MFormatID         uint32
-	MFormatFlags      CAFFormatFlags
-	MBytesPerPacket   uint32
-	MFramesPerPacket  uint32
-	MChannelsPerFrame uint32
-	MBitsPerChannel   uint32
-}
-
 type CAFAudioFormatListItem struct {
 	MFormat           CAFAudioDescription
 	MChannelLayoutTag uint32
-}
-
-type CAFChunkHeader struct {
-	MChunkType uint32
-	MChunkSize int64
 }
 
 type CAFDataChunk struct {
@@ -641,14 +572,6 @@ type CAFInstrumentChunk struct {
 	MSustainRegionID  uint32
 	MReleaseRegionID  uint32
 	MInstrumentID     uint32
-}
-
-type CAFMarker struct {
-	MType          uint32
-	MFramePosition float64
-	MMarkerID      uint32
-	MSMPTETime     CAF_SMPTE_Time
-	MChannel       uint32
 }
 
 type CAFMarkerChunk struct {
@@ -681,27 +604,10 @@ type CAFPeakChunk struct {
 	MPeaks     [1]CAFPositionPeak
 }
 
-type CAFPositionPeak struct {
-	MValue       float32
-	MFrameNumber uint64
-}
-
-type CAFRegion struct {
-	MRegionID      uint32
-	MFlags         CAFRegionFlags
-	MNumberMarkers uint32
-	MMarkers       [1]CAFMarker
-}
-
 type CAFRegionChunk struct {
 	MSMPTETimeType uint32
 	MNumberRegions uint32
 	MRegions       [1]CAFRegion
-}
-
-type CAFStringID struct {
-	MStringID              uint32
-	MStringStartByteOffset int64
 }
 
 type CAFStrings struct {
@@ -1035,3 +941,356 @@ type MusicTrack struct{ obj.Object }
 // IsNil reports whether MusicTrack is a NULL handle (it wraps no object). Call
 // it before using a returned handle; a nil handle's methods panic.
 func (h MusicTrack) IsNil() bool { return h.Object == nil }
+
+// The common header for a render event.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type AURenderEventHeader struct {
+	_    [0]uint32
+	data [20]byte
+}
+
+// AsNext returns the next field, read from the backing bytes at offset 0.
+func (u *AURenderEventHeader) AsNext() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsEventSampleTime returns the eventSampleTime field, read from the backing bytes at offset 8.
+func (u *AURenderEventHeader) AsEventSampleTime() int64 {
+	return *(*int64)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsReserved returns the reserved field, read from the backing bytes at offset 17.
+func (u *AURenderEventHeader) AsReserved() uint8 {
+	return *(*uint8)(unsafe.Pointer(&u.data[17]))
+}
+
+// A structure used to represent an audio plugin's routines
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type AudioComponentPlugInInterface struct {
+	_    [0]uint64
+	data [32]byte
+}
+
+// AsOpen binds the Open C function pointer (offset 0) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *AudioComponentPlugInInterface) AsOpen() func(unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[0]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsClose binds the Close C function pointer (offset 8) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *AudioComponentPlugInInterface) AsClose() func(unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[8]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsLookup binds the Lookup C function pointer (offset 16) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *AudioComponentPlugInInterface) AsLookup() func(int16) unsafe.Pointer {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[16]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int16) unsafe.Pointer
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsReserved returns the reserved field, read from the backing bytes at offset 24.
+func (u *AudioComponentPlugInInterface) AsReserved() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[24]))
+}
+
+// Annotates a position in an audio file.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type AudioFileMarker struct {
+	_    [0]uint64
+	data [40]byte
+}
+
+// AsMFramePosition returns the mFramePosition field, read from the backing bytes at offset 0.
+func (u *AudioFileMarker) AsMFramePosition() float64 {
+	return *(*float64)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsMMarkerID returns the mMarkerID field, read from the backing bytes at offset 16.
+func (u *AudioFileMarker) AsMMarkerID() int32 {
+	return *(*int32)(unsafe.Pointer(&u.data[16]))
+}
+
+// AsMType returns the mType field, read from the backing bytes at offset 28.
+func (u *AudioFileMarker) AsMType() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[28]))
+}
+
+// AsMReserved returns the mReserved field, read from the backing bytes at offset 32.
+func (u *AudioFileMarker) AsMReserved() uint16 {
+	return *(*uint16)(unsafe.Pointer(&u.data[32]))
+}
+
+// AsMChannel returns the mChannel field, read from the backing bytes at offset 34.
+func (u *AudioFileMarker) AsMChannel() uint16 {
+	return *(*uint16)(unsafe.Pointer(&u.data[34]))
+}
+
+// A list of markers associated with an audio file, including their SMPTE time type, the number of markers, and the markers themselves.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type AudioFileMarkerList struct {
+	_    [0]uint64
+	data [48]byte
+}
+
+// AsMSMPTETimeType returns the mSMPTE_TimeType field, read from the backing bytes at offset 0.
+func (u *AudioFileMarkerList) AsMSMPTETimeType() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsMNumberMarkers returns the mNumberMarkers field, read from the backing bytes at offset 4.
+func (u *AudioFileMarkerList) AsMNumberMarkers() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[4]))
+}
+
+// An audio file region specifies a segment of audio data.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type AudioFileRegion struct {
+	_    [0]uint64
+	data [64]byte
+}
+
+// AsMRegionID returns the mRegionID field, read from the backing bytes at offset 0.
+func (u *AudioFileRegion) AsMRegionID() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsMNumberMarkers returns the mNumberMarkers field, read from the backing bytes at offset 20.
+func (u *AudioFileRegion) AsMNumberMarkers() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[20]))
+}
+
+// For inter-app audio, callbacks for receiving MIDI messages. The supplied callback functions are called from the realtime rendering thread, before each render cycle, to provide any incoming MIDI messages.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type AudioOutputUnitMIDICallbacks struct {
+	_    [0]uint64
+	data [24]byte
+}
+
+// AsUserData returns the userData field, read from the backing bytes at offset 0.
+func (u *AudioOutputUnitMIDICallbacks) AsUserData() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsMIDIEventProc binds the MIDIEventProc C function pointer (offset 8) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *AudioOutputUnitMIDICallbacks) AsMIDIEventProc() func(unsafe.Pointer, uint32, uint32, uint32, uint32) {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[8]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, uint32, uint32, uint32, uint32)
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsMIDISysExProc binds the MIDISysExProc C function pointer (offset 16) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *AudioOutputUnitMIDICallbacks) AsMIDISysExProc() func(unsafe.Pointer, unsafe.Pointer, uint32) {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[16]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer, uint32)
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type AudioUnitOtherPluginDesc struct {
+	_    [0]uint32
+	data [16]byte
+}
+
+// AsFormat returns the format field, read from the backing bytes at offset 0.
+func (u *AudioUnitOtherPluginDesc) AsFormat() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[0]))
+}
+
+// An adjustable audio unit attribute such as volume, pitch, or filter cutoff frequency.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type AudioUnitParameter struct {
+	_    [0]uint64
+	data [24]byte
+}
+
+// AsMParameterID returns the mParameterID field, read from the backing bytes at offset 8.
+func (u *AudioUnitParameter) AsMParameterID() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsMScope returns the mScope field, read from the backing bytes at offset 12.
+func (u *AudioUnitParameter) AsMScope() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[12]))
+}
+
+// AsMElement returns the mElement field, read from the backing bytes at offset 16.
+func (u *AudioUnitParameter) AsMElement() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[16]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CAFAudioDescription struct {
+	data [32]byte
+}
+
+// AsMSampleRate returns the mSampleRate field, read from the backing bytes at offset 0.
+func (u *CAFAudioDescription) AsMSampleRate() float64 {
+	return *(*float64)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsMFormatID returns the mFormatID field, read from the backing bytes at offset 8.
+func (u *CAFAudioDescription) AsMFormatID() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsMBytesPerPacket returns the mBytesPerPacket field, read from the backing bytes at offset 16.
+func (u *CAFAudioDescription) AsMBytesPerPacket() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[16]))
+}
+
+// AsMFramesPerPacket returns the mFramesPerPacket field, read from the backing bytes at offset 20.
+func (u *CAFAudioDescription) AsMFramesPerPacket() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[20]))
+}
+
+// AsMChannelsPerFrame returns the mChannelsPerFrame field, read from the backing bytes at offset 24.
+func (u *CAFAudioDescription) AsMChannelsPerFrame() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[24]))
+}
+
+// AsMBitsPerChannel returns the mBitsPerChannel field, read from the backing bytes at offset 28.
+func (u *CAFAudioDescription) AsMBitsPerChannel() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[28]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CAFChunkHeader struct {
+	data [12]byte
+}
+
+// AsMChunkType returns the mChunkType field, read from the backing bytes at offset 0.
+func (u *CAFChunkHeader) AsMChunkType() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsMChunkSize returns the mChunkSize field, read from the backing bytes at offset 4.
+func (u *CAFChunkHeader) AsMChunkSize() int64 {
+	return *(*int64)(unsafe.Pointer(&u.data[4]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CAFMarker struct {
+	data [28]byte
+}
+
+// AsMType returns the mType field, read from the backing bytes at offset 0.
+func (u *CAFMarker) AsMType() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsMFramePosition returns the mFramePosition field, read from the backing bytes at offset 4.
+func (u *CAFMarker) AsMFramePosition() float64 {
+	return *(*float64)(unsafe.Pointer(&u.data[4]))
+}
+
+// AsMMarkerID returns the mMarkerID field, read from the backing bytes at offset 12.
+func (u *CAFMarker) AsMMarkerID() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[12]))
+}
+
+// AsMChannel returns the mChannel field, read from the backing bytes at offset 24.
+func (u *CAFMarker) AsMChannel() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[24]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CAFPositionPeak struct {
+	data [12]byte
+}
+
+// AsMValue returns the mValue field, read from the backing bytes at offset 0.
+func (u *CAFPositionPeak) AsMValue() float32 {
+	return *(*float32)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsMFrameNumber returns the mFrameNumber field, read from the backing bytes at offset 4.
+func (u *CAFPositionPeak) AsMFrameNumber() uint64 {
+	return *(*uint64)(unsafe.Pointer(&u.data[4]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CAFRegion struct {
+	data [40]byte
+}
+
+// AsMRegionID returns the mRegionID field, read from the backing bytes at offset 0.
+func (u *CAFRegion) AsMRegionID() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsMNumberMarkers returns the mNumberMarkers field, read from the backing bytes at offset 8.
+func (u *CAFRegion) AsMNumberMarkers() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[8]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CAFStringID struct {
+	data [12]byte
+}
+
+// AsMStringID returns the mStringID field, read from the backing bytes at offset 0.
+func (u *CAFStringID) AsMStringID() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsMStringStartByteOffset returns the mStringStartByteOffset field, read from the backing bytes at offset 4.
+func (u *CAFStringID) AsMStringStartByteOffset() int64 {
+	return *(*int64)(unsafe.Pointer(&u.data[4]))
+}

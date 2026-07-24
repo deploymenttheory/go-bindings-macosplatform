@@ -679,17 +679,22 @@
         },
         {
           "name": "tkIntStubs",
-          "objc_type": "struct TkIntStubs *"
+          "objc_type": "struct TkIntStubs *",
+          "offset": 8
         },
         {
           "name": "tkIntPlatStubs",
-          "objc_type": "struct TkIntPlatStubs *"
+          "objc_type": "struct TkIntPlatStubs *",
+          "offset": 16
         },
         {
           "name": "tkIntXlibStubs",
-          "objc_type": "struct TkIntXlibStubs *"
+          "objc_type": "struct TkIntXlibStubs *",
+          "offset": 24
         }
       ],
+      "size": 32,
+      "align": 8,
       "availability": {},
       "sdk_file": "Tk/tkDecls.h",
       "sdk_line": 1688
@@ -2128,6 +2133,7 @@
         }
       ],
       "size": 4,
+      "align": 2,
       "availability": {},
       "sdk_file": "Tk/X11/Xlib.h",
       "sdk_line": 381
@@ -2155,6 +2161,7 @@
         }
       ],
       "size": 8,
+      "align": 2,
       "availability": {},
       "sdk_file": "Tk/X11/Xlib.h",
       "sdk_line": 385
@@ -2494,6 +2501,146 @@
       "availability": {},
       "sdk_file": "Tk/X11/Xlib.h",
       "sdk_line": 441
+    },
+    "_XEvent": {
+      "fields": [
+        {
+          "name": "type",
+          "objc_type": "int"
+        },
+        {
+          "name": "xany",
+          "objc_type": "XAnyEvent"
+        },
+        {
+          "name": "xkey",
+          "objc_type": "XKeyEvent"
+        },
+        {
+          "name": "xbutton",
+          "objc_type": "XButtonEvent"
+        },
+        {
+          "name": "xmotion",
+          "objc_type": "XMotionEvent"
+        },
+        {
+          "name": "xcrossing",
+          "objc_type": "XCrossingEvent"
+        },
+        {
+          "name": "xfocus",
+          "objc_type": "XFocusChangeEvent"
+        },
+        {
+          "name": "xexpose",
+          "objc_type": "XExposeEvent"
+        },
+        {
+          "name": "xgraphicsexpose",
+          "objc_type": "XGraphicsExposeEvent"
+        },
+        {
+          "name": "xnoexpose",
+          "objc_type": "XNoExposeEvent"
+        },
+        {
+          "name": "xvisibility",
+          "objc_type": "XVisibilityEvent"
+        },
+        {
+          "name": "xcreatewindow",
+          "objc_type": "XCreateWindowEvent"
+        },
+        {
+          "name": "xdestroywindow",
+          "objc_type": "XDestroyWindowEvent"
+        },
+        {
+          "name": "xunmap",
+          "objc_type": "XUnmapEvent"
+        },
+        {
+          "name": "xmap",
+          "objc_type": "XMapEvent"
+        },
+        {
+          "name": "xmaprequest",
+          "objc_type": "XMapRequestEvent"
+        },
+        {
+          "name": "xreparent",
+          "objc_type": "XReparentEvent"
+        },
+        {
+          "name": "xconfigure",
+          "objc_type": "XConfigureEvent"
+        },
+        {
+          "name": "xgravity",
+          "objc_type": "XGravityEvent"
+        },
+        {
+          "name": "xresizerequest",
+          "objc_type": "XResizeRequestEvent"
+        },
+        {
+          "name": "xconfigurerequest",
+          "objc_type": "XConfigureRequestEvent"
+        },
+        {
+          "name": "xcirculate",
+          "objc_type": "XCirculateEvent"
+        },
+        {
+          "name": "xcirculaterequest",
+          "objc_type": "XCirculateRequestEvent"
+        },
+        {
+          "name": "xproperty",
+          "objc_type": "XPropertyEvent"
+        },
+        {
+          "name": "xselectionclear",
+          "objc_type": "XSelectionClearEvent"
+        },
+        {
+          "name": "xselectionrequest",
+          "objc_type": "XSelectionRequestEvent"
+        },
+        {
+          "name": "xselection",
+          "objc_type": "XSelectionEvent"
+        },
+        {
+          "name": "xcolormap",
+          "objc_type": "XColormapEvent"
+        },
+        {
+          "name": "xclient",
+          "objc_type": "XClientMessageEvent"
+        },
+        {
+          "name": "xmapping",
+          "objc_type": "XMappingEvent"
+        },
+        {
+          "name": "xerror",
+          "objc_type": "XErrorEvent"
+        },
+        {
+          "name": "xkeymap",
+          "objc_type": "XKeymapEvent"
+        },
+        {
+          "name": "pad",
+          "objc_type": "long[24]"
+        }
+      ],
+      "is_union": true,
+      "availability": {},
+      "sdk_file": "Tk/X11/Xlib.h",
+      "sdk_line": 926
     },
     "_XExtData": {
       "fields": [

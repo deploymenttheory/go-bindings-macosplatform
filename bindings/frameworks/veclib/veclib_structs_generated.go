@@ -8,6 +8,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Common activation function parameters
@@ -388,27 +389,6 @@ type BNNSLayerParametersTensorContraction struct {
 	ODesc     BNNSNDArrayDescriptor
 }
 
-// Multihead Attention Projection Parameters
-type BNNSMHAProjectionParameters struct {
-	TargetDesc BNNSNDArrayDescriptor
-	Weights    BNNSNDArrayDescriptor
-	Bias       BNNSNDArrayDescriptor
-}
-
-// Generic N-dimensional array This type  is used to represent an N-dimensional array of values (N=1,2,3,4). The nature and dimension of the data is determined by the layout field. Introduced in macOS 10.15, iOS 13, tvOS 13, watchOS 6.
-type BNNSNDArrayDescriptor struct {
-	Flags         unsafe.Pointer
-	Layout        unsafe.Pointer
-	Size          [8]uint
-	Stride        [8]uint
-	Data          unsafe.Pointer
-	DataType      unsafe.Pointer
-	TableData     unsafe.Pointer
-	TableDataType unsafe.Pointer
-	DataScale     float32
-	DataBias      float32
-}
-
 // Adam and AdamW Fields BNNSOptimizerAdamFields structure should be pointed to by OptimizerAlgFields when using an Optimizer filter with one of the optimization functions BNNSOptimizerFunctionAdam, BNNSOptimizerFunctionAdamAMSGrad, BNNSOptimizerFunctionAdamW, or BNNSOptimizerFunctionAdamWAMSGrad. The structure will not be cached internally and must be valid when calling the optimizer apply, therefore, values such as learning_rate can be modified between optimizer filter apply calls. The error function E = L + R(W) where L is the loss function and R(W) is the regularization term. The gradient g is dE/dW = dL/dW + dR(W)/dW dL/dW could be clipped using clip_gradients and scaled using gradient_scale For BNNSOptimizerFunctionAdam and BNNSOptimizerFunctionAdamAMSGrad dR(W)/dW could be scaled using regularization_scale (L_1/L_2 regularization). For BNNSOptimizerFunctionAdamW and BNNSOptimizerFunctionAdamWAMSGrad, regularization_scale is instead used for the decoupled weight decay parameter Adam Implementation according to ADAM: A METHOD FOR STOCHASTIC OPTIMIZATION by Diederik P. Kingma, Jimmy Lei Ba (https://arxiv.org/pdf/1412.6980.pdf) AdamW Implementation is based on DECOUPLED WEIGHT DECAY REGULARIZATION by I. Loshchilov and F. Hutter (https://arxiv.org/pdf/1711.05101.pdf) The AMSGrad variants use the alternative versions of the update step described in ON THE CONVERGENCE OF ADAM AND BEYOND by S. Reddi, S. Kale and S. Kumar (https://arxiv.org/pdf/1904.09237)
 type BNNSOptimizerAdamFields struct {
 	LearningRate        float32
@@ -600,76 +580,6 @@ type DSPDoubleComplex struct {
 	Imag float64
 }
 
-type DSPDoubleSplitComplex struct {
-	Realp unsafe.Pointer
-	Imagp unsafe.Pointer
-}
-
-type DSPSplitComplex struct {
-	Realp unsafe.Pointer
-	Imagp unsafe.Pointer
-}
-
-// Contains a dense `rowCount` x `columnCount` matrix of complex double values stored in column-major order. - term `rowCount`:     Number of rows in the matrix. - term `columnCount`:  Number of columns in the matrix. - term `columnStride`: The column stride of the matrix. - term `attributes`:   The attributes of the matrix, for example whether the matrix is symmetrical (Hermitian) or triangular. - term `data`: The array of float values in column-major order.
-type DenseMatrix_Complex_Double struct {
-	RowCount     int32
-	ColumnCount  int32
-	ColumnStride int32
-	Attributes   SparseAttributesComplex_t
-	Data         unsafe.Pointer
-}
-
-// Contains a dense `rowCount` x `columnCount` matrix of complex float values stored in column-major order. - term `rowCount`:     Number of rows in the matrix. - term `columnCount`:  Number of columns in the matrix. - term `columnStride`:  The column stride of the matrix. - term `attributes`: The attributes of the matrix, for example whether the  matrix is symmetrical (Hermitian) or triangular. - term `data`: The array of float values in column-major order.
-type DenseMatrix_Complex_Float struct {
-	RowCount     int32
-	ColumnCount  int32
-	ColumnStride int32
-	Attributes   SparseAttributesComplex_t
-	Data         unsafe.Pointer
-}
-
-// Contains a dense `rowCount` x `columnCount` matrix of double values stored in column-major order. - term `rowCount`:   Number of rows in the matrix. - term `columnCount`:  Number of columns in the matrix. - term `columnStride`: The column stride of the matrix. - term `attributes`:  The attributes of the matrix, for example whether the matrix is symmetrical (Hermitian) or triangular. - term `data` :        The array of double values in column-major order.
-type DenseMatrix_Double struct {
-	RowCount     int32
-	ColumnCount  int32
-	ColumnStride int32
-	Attributes   SparseAttributes_t
-	Data         unsafe.Pointer
-}
-
-// Contains a dense `rowCount` x `columnCount` matrix of float values stored in column-major order. - term `rowCount`:   Number of rows in the matrix. - term `columnCount`:  Number of columns in the matrix. - term `columnStride`:  The column stride of the matrix. - term `attributes`:   The attributes of the matrix, for example whether the matrix is symmetrical (Hermitian) or triangular. - term `data`: The array of float values in column-major order.
-type DenseMatrix_Float struct {
-	RowCount     int32
-	ColumnCount  int32
-	ColumnStride int32
-	Attributes   SparseAttributes_t
-	Data         unsafe.Pointer
-}
-
-// Contains a dense vector of double complex values. - term `count`  :  Number of entries in the vector. - term  `data`  : The array of complex double values.
-type DenseVector_Complex_Double struct {
-	Count int32
-	Data  unsafe.Pointer
-}
-
-// Contains a dense vector of float complex values. - term `count`  :  Number of entries in the vector. - term  `data`  : The array of complex float values.
-type DenseVector_Complex_Float struct {
-	Count int32
-	Data  unsafe.Pointer
-}
-
-// Contains a dense vector of double values. - term `count`  :  Number of entries in the vector. - term  `data`  : The array of double values.
-type DenseVector_Double struct {
-	Count int32
-	Data  unsafe.Pointer
-}
-
-// Contains a dense vector of float values. - term `count`  :  Number of entries in the vector. - term  `data`  : The array of float values.
-type DenseVector_Float struct {
-	Count int32
-	Data  unsafe.Pointer
-}
-
 type OpaqueFFTSetup struct{}
 
 type OpaqueFFTSetupD struct{}
@@ -704,50 +614,6 @@ type SparseAttributes_t struct {
 	Kind      unsafe.Pointer
 }
 
-// Conjugate Gradient Options. Use CG to solve Ax=b when A is symmetric (Hermitian) positive-definite (the method may break down or fail to converge if A is not positive-definite). For square, full rank unsymmetric or indefinite equations, use GMRES instead. For rectangular or singular systems, use LSMR instead. - term `reportError`  : Function to use to report parameter errors. If `NULL`, errors are logged via `<os/log.h>` and execution is halted via `__builtin_trap()`.  If non-`NULL`, the provided function is called with a human-readable string describing the error condition. If the callback returns, control will be returned to the caller with any outputs in a safe but undefined state (i.e. they may hold partial results or garbage, but all sizes and pointers are valid). - term `maxIterations` : Maximum number of iterations to perform. If 0, the default value of 100 is used. - term `atol` : Absolute convergence tolerance. Iterate is considered to have converged if ``` || b-Ax ||_2 < rtol * || b-Ax_0 ||_2 + atol ``` - term `rtol` : Relative convergence tolerance. Iterate is considered to have converged if ``` || b-Ax ||_2 < rtol * || b-Ax_0 ||_2 + atol ``` If `rtol = 0.0`, default value of `sqrt(epsilon)` is used. If negative, `rtol` is treated as `0.0` (default is not used). - term  `reportStatus` : Function to use to report status (iteration count and residual of first right-hand side) every few iterations. If `NULL`, status is not reported.
-type SparseCGOptions struct {
-	ReportError   unsafe.Pointer
-	MaxIterations int32
-	Atol          float64
-	Rtol          float64
-	ReportStatus  unsafe.Pointer
-}
-
-// Right-preconditioned (F/DQ)GMRES Parameters Options. Use (F/DQ)GMRES to solve `Ax=b` when `A` is symmetric (Hermitian) indefinite or unsymmetric. For symmetric (Hermitian) positive-definite systems, use CG instead. For rectangular or singular systems, use LSMR instead. - term `reportError`  : Function to use to report parameter errors. If `NULL`, errors are logged via `<os/log.h>` and execution is halted via `__builtin_trap()`.  If non-`NULL`, the provided function is called with a human-readable string describing the error condition. If the callback returns, control will be returned to the caller with any outputs in a safe but undefined state (i.e. they may hold partial results or garbage, but all sizes and pointers are valid). - term `variant`: Variant of GMRES to use. See definition of `SparseGMRESVariant_t` for further information on the available variants. - term `nvec`: Number of orthagonal vectors maintained. For GMRES and FGMRES variants, this is the number of iterations between restarts. For DQGMRES it is the number of historical vectors maintained in memory. If `nvec<=0`, the default value of 16 is used. - term `maxIterations` : Maximum number of iterations to perform. If 0, the default value of 100 is used. - term `atol`: Absolute convergence tolerance. Iterate is considered to have converged if ``` || b-Ax ||_2 < rtol * || b-Ax_0 ||_2 + atol ``` - term `rtol`: Relative convergence tolerance. Iterate is considered to have converged if ``` || b-Ax ||_2 < rtol * || b-Ax_0 ||_2 + atol ``` If r`tol = 0.0`, default value of `sqrt(epsilon)` is used. If negative, `rtol` is treated as `0.0 `(default is not used). - term `reportStatus` : Function to use to report status (iteration count and residual of first right-hand side) every few iterations. If NULL, status is not reported.
-type SparseGMRESOptions struct {
-	ReportError   unsafe.Pointer
-	Variant       unsafe.Pointer
-	Nvec          int32
-	MaxIterations int32
-	Atol          float64
-	Rtol          float64
-	ReportStatus  unsafe.Pointer
-}
-
-// General description object for all iterative methods. This object is intended to be constructed through a call to an iterative method factory function, such as `SparseConjugateGradient()` or `SparseLSMR()`. - term `method` : The type of method the object represents. - term `options` : The options to be used for the method.
-type SparseIterativeMethod struct {
-	Method  int32
-	Options unsafe.Pointer
-}
-
-type SparseIterativeMethodBaseOptions struct {
-	ReportError unsafe.Pointer
-}
-
-// LSMR is MINRES specialised for solving least squares. Use LSMR to solve equations of the form Ax=b where an exact solution does not exist. The returned solution minimises || b-Ax ||_2. Whilst LSMR is equivalent to MINRES applied to the normal equations `A^TAx = A^Tb` in exact arithmetic, it has superior numerical behaviour and should be used in preference. We note that due to the implicit squaring of the condition of A in the normal equations, LSMR may struggle to converge in single precision, and double precision arithmetic is recommended. For symmetric (Hermitian) positive-definite systems, use CG instead. For square, full rank unsymmetric or indefinite equations, use GMRES instead. - term `reportError`  : Function to use to report parameter errors. If `NULL`, errors are logged via `<os/log.h>` and execution is halted via `__builtin_trap()`.  If non-`NULL`, the provided function is called with a human-readable string describing the error condition. If the callback returns, control will be returned to the caller with any outputs in a safe but undefined state (i.e. they may hold partial results or garbage, but all sizes and pointers are valid). - term `lambda`: Damping parameter, if non-zero the actual problem solved is ``` min_x || Ax-b ||_2 + lambda || x ||_2. ``` Using damping can often allow the iteration to converge on ill-conditioned systems. - term  `variant`: Variant of GMRES to use. See definition of `SparseGMRESVariant_t` for further information on the available variants. - term  `nvec`: Number of vectors used for local orthogonalization. If n`vec<=0`, no orthogonalization is performed. - term `convergenceTest`: Which convergence test to use. See definition of `SparseLSMRConvergenceTest_t` for further information. - term  `maxIterations`: Maximum number of iterations to perform. If 0, the default value of 4n is used. However, if a good preconditioner is available and/or the matrix is well conditioned such that singular values are clustered, a value of n/2 may be more appropriate. - term `atol`: Either absolute tolerance (default test) or A tolerance (Fong-Saunders test). In the Fong and Saunders case, it should hold an estimate of the relative error in the data defining the matrix A. For example, if A is accurate to about 6 digits, set atol = 1.0e-6. In the Fong and Saunders case, if atol is 0.0, it is treated as machine epsilon. If using the default test, a value of 0.0 is treated as 0.0. - term `rtol`: Relative convergence tolerance (default test only). If `rtol = 0.0`, default value of `sqrt(epsilon)` is used. If negative, `rtol` is treated as 0.0 (default is not used). - term `btol`: b tolerance (Fong-Saunders test only). It should hold an estimate of the relative error in the data defining the rhs b. For example, if b is accurate to about 6 digits, set btol = 1.0e-6. If btol is zero, it is treated as machine epsilon. - term  `conditionLimit`: Condition number limit (Fong-Saunders test). Iterations will be terminated if a computed estimate of cond(Abar) exceeds this value. This is intended to prevent certain small or zero singular values of A or Abar from coming into effect and causing unwanted growth in the computed solution. conditionLimit and lambda may be used separately or together to regularize ill-conditioned systems. Normally, conlim should be in the range 1000 to 1/eps. Suggested value: * `conditionLimit = 1/(100*eps)`  for compatible systems, * `conditionLimit = 1/(10*sqrt(eps))` for least squares. If `conditionLimit` is `0.0,` it is treated as `1/eps`. - term `reportStatus` : Function to use to report status (iteration count and residual of first right-hand side) every few iterations. If NULL, status is not reported.
-type SparseLSMROptions struct {
-	ReportError     unsafe.Pointer
-	Lambda          float64
-	Nvec            int32
-	ConvergenceTest unsafe.Pointer
-	Atol            float64
-	Rtol            float64
-	Btol            float64
-	ConditionLimit  float64
-	MaxIterations   int32
-	ReportStatus    unsafe.Pointer
-}
-
 // Sparse matrix type for double.  Opaque structure
 type SparseMDouble struct{}
 
@@ -757,193 +623,6 @@ type SparseMDoubleComplex struct{}
 type SparseMFloat struct{}
 
 type SparseMFloatComplex struct{}
-
-// A type representing the sparsity structure of a sparse matrix. The sparsity structure is represented in *block compressed sparse column* (block CSC) format. The matrix is divided into a regular grid of `rowCount x columnCount` blocks each of size `blockSize x blockSize`, and only blocks containing a non-zero entry are stored. CSC format is used to store the locations of these blocks. For each block column, a list of block row indices for non-zero blocks are stored, and the lists for each column are stored contiguously one after the other. Hence the row indices for column j are given by rowIndices`[columnStarts[j]:columnStarts[j+1]]`, where `columnStarts[]` is storing the location of the first index in each column. If the blockSize is `1`, then this format is exactly equivalent to standard CSC format. CSR format data can be simulated by using a blockSize of `1` and setting the transpose attribute (strictly this is still a transposed CSC matrix, so `rowCount` and `columnCount` will be transposed compared to true CSR). - term `rowCount` : Number of (block) rows in matrix. - term `columnCount` : Number of (block) columns in matrix. - term `columnStarts` : Specifies where each (block) column starts in rowIndices array. - term `rowIndices` : Specifies the (block) row indices of the matrix. - term `attributes` : The attribute meta-data for the matrix, for example whether the matrix is symmetric (Hermitian) and only half the entries are stored. - term `blockSize` :  The block size of the matrix.
-type SparseMatrixStructure struct {
-	RowCount     int32
-	ColumnCount  int32
-	ColumnStarts unsafe.Pointer
-	RowIndices   unsafe.Pointer
-	Attributes   SparseAttributes_t
-	BlockSize    uint8
-}
-
-// A type representing the sparsity structure of a sparse complex matrix. The sparsity structure is represented in *block compressed sparse column* (block CSC) format. The matrix is divided into a regular grid of `rowCount x columnCount` blocks each of size `blockSize x blockSize`, and only blocks containing a non-zero entry are stored. CSC format is used to store the locations of these blocks. For each block column, a list of block row indices for non-zero blocks are stored, and the lists for each column are stored contiguously one after the other. Hence the row indices for column j are given by rowIndices`[columnStarts[j]:columnStarts[j+1]]`, where `columnStarts[]` is storing the location of the first index in each column. If the blockSize is `1`, then this format is exactly equivalent to standard CSC format. CSR format data can be simulated by using a blockSize of `1` and setting the transpose attribute (strictly this is still a transposed CSC matrix, so `rowCount` and `columnCount` will be transposed compared to true CSR). - term `rowCount` : Number of (block) rows in matrix. - term `columnCount` : Number of (block) columns in matrix. - term `columnStarts` : Specifies where each (block) column starts in rowIndices array. - term `rowIndices` : Specifies the (block) row indices of the matrix. - term `attributes` : The attribute meta-data for the matrix, for example whether the matrix is symmetric (Hermitian) and only half the entries are stored. - term `blockSize` :  The block size of the matrix.
-type SparseMatrixStructureComplex struct {
-	RowCount     int32
-	ColumnCount  int32
-	ColumnStarts unsafe.Pointer
-	RowIndices   unsafe.Pointer
-	Attributes   SparseAttributesComplex_t
-	BlockSize    uint8
-}
-
-// A type representing a sparse complex matrix. `data` is the array of values in the non-zero blocks of the matrix stored contiguously, each block in column-major order. If there are `N` structural non-zero blocks in the matrix, `data` holds `blockSize * blockSize * N` doubles. - term  `structure` The symbolic structure of the matrix. - term  `data` The numerical values of the matrix. If `structure.blockSize > 1`, blocks are stored contiguously in column-major format.
-type SparseMatrix_Complex_Double struct {
-	Structure SparseMatrixStructureComplex
-	Data      unsafe.Pointer
-}
-
-// A type representing a sparse complex matrix. `data` is the array of values in the non-zero blocks of the matrix stored contiguously, each block in column-major order. If there are `N` structural non-zero blocks in the matrix, `data` holds `blockSize * blockSize * N` doubles. - term  `structure` The symbolic structure of the matrix. - term  `data` The numerical values of the matrix. If `structure.blockSize > 1`, blocks are stored contiguously in column-major format.
-type SparseMatrix_Complex_Float struct {
-	Structure SparseMatrixStructureComplex
-	Data      unsafe.Pointer
-}
-
-// A type representing a sparse matrix. `data` is the array of values in the non-zero blocks of the matrix stored contiguously, each block in column-major order. If there are `N` structural non-zero blocks in the matrix, `data` holds `blockSize * blockSize * N` doubles. - term  `structure` The symbolic structure of the matrix. - term  `data` The numerical values of the matrix. If `structure.blockSize > 1`, blocks are stored contiguously in column-major format.
-type SparseMatrix_Double struct {
-	Structure SparseMatrixStructure
-	Data      unsafe.Pointer
-}
-
-// A type representing a sparse matrix. `data` is the array of values in the non-zero blocks of the matrix stored contiguously, each block in column-major order. If there are `N` structural non-zero blocks in the matrix, `data` holds `blockSize * blockSize * N` doubles. - term  `structure` The symbolic structure of the matrix. - term  `data` The numerical values of the matrix. If `structure.blockSize > 1`, blocks are stored contiguously in column-major format.
-type SparseMatrix_Float struct {
-	Structure SparseMatrixStructure
-	Data      unsafe.Pointer
-}
-
-// Options that affect the numerical stage of a sparse factorization. - term `control`: Flags controlling the computation. - term `scalingMethod`: Scaling method to use. - term `scaling`:      User-supplied array for scaling. Either NULL or a pointer to an array of real values as follows: - For symmetric (Hermitian) factorizations, a length n array that is applied as a row scaling `SAx = Sb`. - For QR factorization, this argument is currently ignored. - For LU factorizations, a length `m+n` array. The first m entries contain a row scaling, whilst the subsequent `n` entries contain a column scaling. The type of the array values is the element type of the matrix. * If `scalingMethod` is `SparseScalingUser`, and this pointer is `NULL`, no scaling is applied. * If `scalingMethod` is `SparseScalingUser`, and this pointer is non-`NULL`, the user-provided array is used to scale the matrix before factorization. * If `scalingMethod` is not `SparseScalingUser`, the factor function will compute its own scaling. * If this pointer is non-NULL, the computed scaling will be returned in the array. - term `pivotTolerance`: Pivot tolerance used by threshold partial pivoting. Clamped to range `[0,0.5]`. - term `zeroTolerance`: Zero tolerance used by some pivoting modes. Values less than zeroTolerance in absolute value will be treated as zero.
-type SparseNumericFactorOptions struct {
-	Control        unsafe.Pointer
-	ScalingMethod  unsafe.Pointer
-	Scaling        unsafe.Pointer
-	PivotTolerance float64
-	ZeroTolerance  float64
-}
-
-// A semi-opaque type representing a matrix factorization in complex double. Use the `SparseCleanup` function to free resources held by these objects. The object can be in one of the following states: 1) Something went wrong with symbolic factorization, nothing is valid. - indicated by `.symbolicFactorization.status < 0` 2) Symbolic factorization was good, but failed in numeric factorization initialization. - indicated by `.symbolicFactorization.status >= 0 && .status < 0 && .numericFactorization == NULL` - symbolic factorization may be used for future calls. 3) Symbolic factorization was good, factor allocated/initialized correctly, but numeric factorization failed e.g. a Cholesky factorization of an indefinite matrix was attempted. - indicated by `.symbolicFactorization.status >= 0 && .status < 0 && .numericFactorization not NULL` - user may pass this object to `SparseRefactor_Double` with a modified matrix 4) Symbolic and numeric factorizations are both good - indicated by `.status >= 0` - term `status` : Indicates status of factorization object. - term `attributes` : Flags associated with this factorization object. In particular, transpose field indicates whether object is considered to be factorization of A or A^T. - term `symbolicFactorization` : Symbolic Factorization upon which this Numeric Factorization depends. - term `userFactorStorage` : Flag that indicates if user provided storage backing this object. If true, then factor storage must be freed by the user once all references are finished with (though any additional storage allocated due to pivoting will still be freed by `SparseCleanup`). - term `numericFactorization` : Pointer to private internal representation of numeric factor. - term `solveWorkspaceRequiredStatic` : The required size of workspace, in bytes, for a call to `SparseSolve` is `solveWorkspaceRequiredStatic + nrhs * solveWorkspaceRequiredPerRHS` where `nrhs` is the number of right-hand side vectors. - term `solveWorkspaceRequiredPerRHS` : The required size of workspace, in bytes, for a call to `SparseSolve` is `solveWorkspaceRequiredStatic + nrhs * solveWorkspaceRequiredPerRHS` where `nrhs` is the number of right-hand side vectors.
-type SparseOpaqueFactorization_Complex_Double struct {
-	Status                       unsafe.Pointer
-	Attributes                   SparseAttributesComplex_t
-	SymbolicFactorization        SparseOpaqueSymbolicFactorization
-	UserFactorStorage            bool
-	NumericFactorization         unsafe.Pointer
-	SolveWorkspaceRequiredStatic uint
-	SolveWorkspaceRequiredPerRHS uint
-}
-
-// A semi-opaque type representing a matrix factorization in complex float. Use the `SparseCleanup` function to free resources held by these objects. The object can be in one of the following states: 1) Something went wrong with symbolic factorization, nothing is valid. - indicated by `.symbolicFactorization.status < 0` 2) Symbolic factorization was good, but failed in numeric factorization initialization. - indicated by `.symbolicFactorization.status >= 0 && .status < 0 && .numericFactorization == NULL` - symbolic factorization may be used for future calls. 3) Symbolic factorization was good, factor allocated/initialized correctly, but numeric factorization failed e.g. a Cholesky factorization of an indefinite matrix was attempted. - indicated by `.symbolicFactorization.status >= 0 && .status < 0 && .numericFactorization not NULL` - user may pass this object to `SparseRefactor_Double` with a modified matrix 4) Symbolic and numeric factorizations are both good - indicated by `.status >= 0` - term `status` : Indicates status of factorization object. - term `attributes` : Flags associated with this factorization object. In particular, transpose field indicates whether object is considered to be factorization of A or A^T. - term `symbolicFactorization` : Symbolic Factorization upon which this Numeric Factorization depends. - term `userFactorStorage` : Flag that indicates if user provided storage backing this object. If true, then factor storage must be freed by the user once all references are finished with (though any additional storage allocated due to pivoting will still be freed by `SparseCleanup`). - term `numericFactorization` : Pointer to private internal representation of numeric factor. - term `solveWorkspaceRequiredStatic` : The required size of workspace, in bytes, for a call to `SparseSolve` is `solveWorkspaceRequiredStatic + nrhs * solveWorkspaceRequiredPerRHS` where `nrhs` is the number of right-hand side vectors. - term `solveWorkspaceRequiredPerRHS` : The required size of workspace, in bytes, for a call to `SparseSolve` is `solveWorkspaceRequiredStatic + nrhs * solveWorkspaceRequiredPerRHS` where `nrhs` is the number of right-hand side vectors.
-type SparseOpaqueFactorization_Complex_Float struct {
-	Status                       unsafe.Pointer
-	Attributes                   SparseAttributesComplex_t
-	SymbolicFactorization        SparseOpaqueSymbolicFactorization
-	UserFactorStorage            bool
-	NumericFactorization         unsafe.Pointer
-	SolveWorkspaceRequiredStatic uint
-	SolveWorkspaceRequiredPerRHS uint
-}
-
-// A semi-opaque type representing a matrix factorization in double. Use the `SparseCleanup` function to free resources held by these objects. The object can be in one of the following states: 1) Something went wrong with symbolic factorization, nothing is valid. - indicated by `.symbolicFactorization.status < 0` 2) Symbolic factorization was good, but failed in numeric factorization initialization. - indicated by `.symbolicFactorization.status >= 0 && .status < 0 && .numericFactorization == NULL` - symbolic factorization may be used for future calls. 3) Symbolic factorization was good, factor allocated/initialized correctly, but numeric factorization failed e.g. a Cholesky factorization of an indefinite matrix was attempted. - indicated by `.symbolicFactorization.status >= 0 && .status < 0 && .numericFactorization not NULL` - user may pass this object to `SparseRefactor_Double` with a modified matrix 4) Symbolic and numeric factorizations are both good - indicated by `.status >= 0` - term `status` : Indicates status of factorization object. - term `attributes` : Flags associated with this factorization object. In particular, transpose field indicates whether object is considered to be factorization of A or A^T. - term `symbolicFactorization` : Symbolic Factorization upon which this Numeric Factorization depends. - term `userFactorStorage` : Flag that indicates if user provided storage backing this object. If true, then factor storage must be freed by the user once all references are finished with (though any additional storage allocated due to pivoting will still be freed by `SparseCleanup`). - term `numericFactorization` : Pointer to private internal representation of numeric factor. - term `solveWorkspaceRequiredStatic` : The required size of workspace, in bytes, for a call to `SparseSolve` is `solveWorkspaceRequiredStatic + nrhs * solveWorkspaceRequiredPerRHS` where `nrhs` is the number of right-hand side vectors. - term `solveWorkspaceRequiredPerRHS` : The required size of workspace, in bytes, for a call to `SparseSolve` is `solveWorkspaceRequiredStatic + nrhs * solveWorkspaceRequiredPerRHS` where `nrhs` is the number of right-hand side vectors.
-type SparseOpaqueFactorization_Double struct {
-	Status                       unsafe.Pointer
-	Attributes                   SparseAttributes_t
-	SymbolicFactorization        SparseOpaqueSymbolicFactorization
-	UserFactorStorage            bool
-	NumericFactorization         unsafe.Pointer
-	SolveWorkspaceRequiredStatic uint
-	SolveWorkspaceRequiredPerRHS uint
-}
-
-// A semi-opaque type representing a matrix factorization in float. Use the `SparseCleanup` function to free resources held by these objects. The object can be in one of the following states: 1) Something went wrong with symbolic factorization, nothing is valid. - indicated by `.symbolicFactorization.status < 0` 2) Symbolic factorization was good, but failed in numeric factorization initialization. - indicated by `.symbolicFactorization.status >= 0 && .status < 0 && .numericFactorization == NULL` - symbolic factorization may be used for future calls. 3) Symbolic factorization was good, factor allocated/initialized correctly, but numeric factorization failed e.g. a Cholesky factorization of an indefinite matrix was attempted. - indicated by `.symbolicFactorization.status >= 0 && .status < 0 && .numericFactorization not NULL` - user may pass this object to `SparseRefactor_Double` with a modified matrix 4) Symbolic and numeric factorizations are both good - indicated by `.status >= 0` - term `status` : Indicates status of factorization object. - term `attributes` : Flags associated with this factorization object. In particular, transpose field indicates whether object is considered to be factorization of A or A^T. - term `symbolicFactorization` : Symbolic Factorization upon which this Numeric Factorization depends. - term `userFactorStorage` : Flag that indicates if user provided storage backing this object. If true, then factor storage must be freed by the user once all references are finished with (though any additional storage allocated due to pivoting will still be freed by `SparseCleanup`). - term `numericFactorization` : Pointer to private internal representation of numeric factor. - term `solveWorkspaceRequiredStatic` : The required size of workspace, in bytes, for a call to `SparseSolve` is `solveWorkspaceRequiredStatic + nrhs * solveWorkspaceRequiredPerRHS` where `nrhs` is the number of right-hand side vectors. - term `solveWorkspaceRequiredPerRHS` : The required size of workspace, in bytes, for a call to `SparseSolve` is `solveWorkspaceRequiredStatic + nrhs * solveWorkspaceRequiredPerRHS` where `nrhs` is the number of right-hand side vectors.
-type SparseOpaqueFactorization_Float struct {
-	Status                       unsafe.Pointer
-	Attributes                   SparseAttributes_t
-	SymbolicFactorization        SparseOpaqueSymbolicFactorization
-	UserFactorStorage            bool
-	NumericFactorization         unsafe.Pointer
-	SolveWorkspaceRequiredStatic uint
-	SolveWorkspaceRequiredPerRHS uint
-}
-
-// Represents a preconditioner for matrices of complex double values . - term `type` :  The type of preconditioner represented. - term `mem` : Block of memory that will be passed unaltered as the first argument of the `apply()` callback. - term `apply(mem, trans, X, Y)` : Function to call to apply the preconditioner as `Y = PX` (`trans=false`) or `Y = P^TX` (`trans`=`true`). * `mem` : The unaltered pointer mem from this struct. * `trans` : Flags whether to apply the preconditioner or its transpose. * `X`: The right-hand side vectors X. * `Y`: The result vectors Y.
-type SparseOpaquePreconditioner_Complex_Double struct {
-	Type  unsafe.Pointer
-	Mem   unsafe.Pointer
-	Apply unsafe.Pointer
-}
-
-// Represents a preconditioner for matrices of complex float values . - term `type` :  The type of preconditioner represented. - term `mem` : Block of memory that will be passed unaltered as the first argument of the `apply()` callback. - term `apply(mem, trans, X, Y)` : Function to call to apply the preconditioner as `Y = PX` (`trans=false`) or `Y = P^TX` (`trans`=`true`). * `mem` : The unaltered pointer mem from this struct. * `trans` : Flags whether to apply the preconditioner or its transpose. * `X`: The right-hand side vectors X. * `Y`: The result vectors Y.
-type SparseOpaquePreconditioner_Complex_Float struct {
-	Type  unsafe.Pointer
-	Mem   unsafe.Pointer
-	Apply unsafe.Pointer
-}
-
-// Represents a preconditioner for matrices of double values . - term `type` :  The type of preconditioner represented. - term `mem` : Block of memory that will be passed unaltered as the first argument of the `apply()` callback. - term `apply(mem, trans, X, Y)` : Function to call to apply the preconditioner as `Y = PX` (`trans=false`) or `Y = P^TX` (`trans`=`true`). * `mem` : The unaltered pointer mem from this struct. * `trans` : Flags whether to apply the preconditioner or its transpose. * `X`: The right-hand side vectors X. * `Y`: The result vectors Y.
-type SparseOpaquePreconditioner_Double struct {
-	Type  unsafe.Pointer
-	Mem   unsafe.Pointer
-	Apply unsafe.Pointer
-}
-
-// Represents a preconditioner for matrices of float values . - term `type` :  The type of preconditioner represented. - term `mem` : Block of memory that will be passed unaltered as the first argument of the `apply()` callback. - term `apply(mem, trans, X, Y)` : Function to call to apply the preconditioner as `Y = PX` (`trans=false`) or `Y = P^TX` (`trans`=`true`). * `mem` : The unaltered pointer mem from this struct. * `trans` : Flags whether to apply the preconditioner or its transpose. * `X`: The right-hand side vectors X. * `Y`: The result vectors Y.
-type SparseOpaquePreconditioner_Float struct {
-	Type  unsafe.Pointer
-	Mem   unsafe.Pointer
-	Apply unsafe.Pointer
-}
-
-// Represents a sub-factor of the factorization (for example,  `L` from `LDL^T`). - term `attributes` : Attributes of subfactor. Notably transpose indicates whether it should be considered as the transpose of its underlying contents (e.g. should it count as L or L^T if `.contents=SparseSubfactorL`). - term `contents` : Subfactor this represents, e.g. L or Q. - term `factor` : Underlying factorization this subfactor is part of. - term `workspaceRequiredStatic` : The size of the workspace, in bytes, required to perform `SparseMultiply` or `SparseSolve` with this subfactor is given by the expression: `workspaceRequiredStatic + nrhs*workspaceRequiredPerRhs` where `nrhs` is the number of right-hand side vectors. - term `workspaceRequiredPerRHS` : The size of the workspace, in bytes, required to perform SparseMultiply() or SparseSolve() with this subfactor is given by the expression: workspaceRequiredStatic + nrhs*workspaceRequiredPerRhs where nrhs is the number of right-hand side vectors.
-type SparseOpaqueSubfactor_Complex_Double struct {
-	Attributes              SparseAttributesComplex_t
-	Contents                unsafe.Pointer
-	Factor                  SparseOpaqueFactorization_Complex_Double
-	WorkspaceRequiredStatic uint
-	WorkspaceRequiredPerRHS uint
-}
-
-// Represents a sub-factor of the factorization (for example,  `L` from `LDL^T`). - term `attributes` : Attributes of subfactor. Notably transpose indicates whether it should be considered as the transpose of its underlying contents (e.g. should it count as L or L^T if `.contents=SparseSubfactorL`). - term `contents` : Subfactor this represents, e.g. L or Q. - term `factor` : Underlying factorization this subfactor is part of. - term `workspaceRequiredStatic` : The size of the workspace, in bytes, required to perform `SparseMultiply` or `SparseSolve` with this subfactor is given by the expression: `workspaceRequiredStatic + nrhs*workspaceRequiredPerRhs` where `nrhs` is the number of right-hand side vectors. - term `workspaceRequiredPerRHS` : The size of the workspace, in bytes, required to perform SparseMultiply() or SparseSolve() with this subfactor is given by the expression: workspaceRequiredStatic + nrhs*workspaceRequiredPerRhs where nrhs is the number of right-hand side vectors.
-type SparseOpaqueSubfactor_Complex_Float struct {
-	Attributes              SparseAttributesComplex_t
-	Contents                unsafe.Pointer
-	Factor                  SparseOpaqueFactorization_Complex_Float
-	WorkspaceRequiredStatic uint
-	WorkspaceRequiredPerRHS uint
-}
-
-// Represents a sub-factor of the factorization (for example,  `L` from `LDL^T`). - term `attributes` : Attributes of subfactor. Notably transpose indicates whether it should be considered as the transpose of its underlying contents (e.g. should it count as L or L^T if `.contents=SparseSubfactorL`). - term `contents` : Subfactor this represents, e.g. L or Q. - term `factor` : Underlying factorization this subfactor is part of. - term `workspaceRequiredStatic` : The size of the workspace, in bytes, required to perform `SparseMultiply` or `SparseSolve` with this subfactor is given by the expression: `workspaceRequiredStatic + nrhs*workspaceRequiredPerRhs` where `nrhs` is the number of right-hand side vectors. - term `workspaceRequiredPerRHS` : The size of the workspace, in bytes, required to perform SparseMultiply() or SparseSolve() with this subfactor is given by the expression: workspaceRequiredStatic + nrhs*workspaceRequiredPerRhs where nrhs is the number of right-hand side vectors.
-type SparseOpaqueSubfactor_Double struct {
-	Attributes              SparseAttributes_t
-	Contents                unsafe.Pointer
-	Factor                  SparseOpaqueFactorization_Double
-	WorkspaceRequiredStatic uint
-	WorkspaceRequiredPerRHS uint
-}
-
-// Represents a sub-factor of the factorization (for example,  `L` from `LDL^T`). - term `attributes` : Attributes of subfactor. Notably transpose indicates whether it should be considered as the transpose of its underlying contents (e.g. should it count as L or L^T if `.contents=SparseSubfactorL`). - term `contents` : Subfactor this represents, e.g. L or Q. - term `factor` : Underlying factorization this subfactor is part of. - term `workspaceRequiredStatic` : The size of the workspace, in bytes, required to perform `SparseMultiply` or `SparseSolve` with this subfactor is given by the expression: `workspaceRequiredStatic + nrhs*workspaceRequiredPerRhs` where `nrhs` is the number of right-hand side vectors. - term `workspaceRequiredPerRHS` : The size of the workspace, in bytes, required to perform SparseMultiply() or SparseSolve() with this subfactor is given by the expression: workspaceRequiredStatic + nrhs*workspaceRequiredPerRhs where nrhs is the number of right-hand side vectors.
-type SparseOpaqueSubfactor_Float struct {
-	Attributes              SparseAttributes_t
-	Contents                unsafe.Pointer
-	Factor                  SparseOpaqueFactorization_Float
-	WorkspaceRequiredStatic uint
-	WorkspaceRequiredPerRHS uint
-}
-
-// A semi-opaque type representing symbolic matrix factorization. Represents a symbolic matrix factorization (i.e. the pattern of the factors without the values). A single symbolic factorization may be the basis for multiple numerical factorizations of matrices with the same pattern but different values non-zero values. Use the `SparseCleanup` function to free resources held by these objects. The internal factorization pointer is refence counted, so it is safe to destroy this object even if numeric factorizations exist that still depend on it. - term `status` : Indicates status of factorization object. - term `type` : Type fo factorization this represents. - term `rowCount` : Copy of field from `SparseMatrixStructure` passed to `SparseFactor` call used to construct this symbolic factorization. - term `columnCount` : Copy of field from `SparseMatrixStructure` passed to `SparseFactor` call used to construct this symbolic factorization. - term `attributes` : Copy of field from `SparseMatrixStructure` passed to `SparseFactor` call used to construct this symbolic factorization. - term `blockSize` : Copy of field from `SparseMatrixStructure` passed to `SparseFactor` call used to construct this symbolic factorization. - term `factorization` : Pointer to private internal representation of symbolic factor. - term `workspaceSize_Float` : Size, in bytes, of workspace required to perform numerical factorization in float. Double the size when used in complex float. - term `workspaceSize_Double` : Size, in bytes, of workspace required to perform numerical factorization in double. Double the size when used in complex double. - term `factorSize_Float` : Minimum size, in bytes, required to store numerical factors in float. If numerical pivoting requires a pivot to be delayed, the actual size required may be larger. Double the size when used in complex float. - term `factorSize_Double` : Minimum size, in bytes, required to store numerical factors in double. If numerical pivoting requires a pivot to be delayed, the actual size required may be larger. Double the size when used in complex double.
-type SparseOpaqueSymbolicFactorization struct {
-	Status              unsafe.Pointer
-	RowCount            int32
-	ColumnCount         int32
-	Attributes          SparseAttributes_t
-	BlockSize           uint8
-	Type                unsafe.Pointer
-	Factorization       unsafe.Pointer
-	WorkspaceSizeFloat  uint
-	WorkspaceSizeDouble uint
-	FactorSizeFloat     uint
-	FactorSizeDouble    uint
-}
-
-// SparseSymbolicFactorOptions Options that affect the symbolic stage of a sparse factorization. - term `control` : Flags controlling the computation. - term `orderMethod` : Ordering algorithm to use. - term `order` : User-supplied array for ordering. Either NULL or a pointer to a permutation that reduces fill in the matrix being factored. In the symmetric (Hermitian)  and QR cases order provides a symmetric (Hermitian) row and column permutation. In the LU case case, the first rowCount entries provide a row permutation, and the subsequent columnCount entries provide a column permutation. * If `orderMethod` is `SparseOrderUser`, and this pointer is NULL, the original matrix ordering is used. * If `orderMethod` is `SparseOrderUser`, and this pointer is non-NULL, the user-provided permutation is used to order the matrix before factorization. * If `orderMethod` is not `SparseOrderUser`, the factor function will compute its own fill reducing ordering. * If this pointer is non-NULL, the computed permutation will be returned in the array. - term `ignoreRowsAndColumns` : Ignore rows and columns listed in this array. In some cases it is useful to ignore specified rows and columns, if this array is not NULL, it provides a list of rows and columns to ignore, terminated by a negative index. Note that this the row and column indices are for the actual matrix, not of its block structure, so 0 indicates the first row, not the first blockSize rows. In the symmetric (Hermitian) case (Cholesky, LDL^T) each entry indicates that the matching row AND column should be ignored. In the unsymmetric case (QR, Cholesky A^TA, LU) an index `i<m` indicates that row m should be ignored and an index i>=m indicates that column `(i-m)` should be ignored (where `m` is the number of rows in `A`, i.e. `m=A.structure.rowCount*A.blockSize` if `A` is not transposed, or `m=A.structure.columnCount*A.blockSize` if `A` is transposed). Note that for LU factorization, the use of `ignoreRowsAndColumns` with `blockSize > 1 `is not supported. - term `malloc` : Function to use for allocation of internal memory. Memory will be freed through the `free()` callback. If this function pointer is `NULL`, the system `malloc()` will be used. The  `size` parameter specifies the amount of space to allocate in bytes. The callback returns a pointer to newly allocated memory, or `NULL` if allocation failed. The returned pointer must be 16-byte aligned (this requirement is satisfied by the system `malloc()`). - term `free`  : Function to use to free memory allocated by malloc() callback. If this function pointer is `NULL`, the system `free()` will be used. The `pointer` parameter specifies the to memory to be freed. - term `reportError`  : Function to use to report parameter errors. If `NULL`, errors are logged via `<os/log.h>` and execution is halted via `__builtin_trap()`.  If non-`NULL`, the provided function is called with a human-readable string describing the error condition. If the callback returns, control will be returned to the caller with any outputs in a safe but undefined state (i.e. they may hold partial results or garbage, but all sizes and pointers are valid).
-type SparseSymbolicFactorOptions struct {
-	Control              unsafe.Pointer
-	OrderMethod          unsafe.Pointer
-	Order                unsafe.Pointer
-	IgnoreRowsAndColumns unsafe.Pointer
-	Malloc               unsafe.Pointer
-	Free                 unsafe.Pointer
-	ReportError          unsafe.Pointer
-}
 
 type VDSPBiquadSetupStruct struct{}
 
@@ -967,6 +646,54 @@ type VDSPInt24 struct {
 
 type VDSPUint24 struct {
 	Bytes [3]uint8
+}
+
+type VS1024 struct {
+	V  unsafe.Pointer
+	Vs unsafe.Pointer
+	S  unsafe.Pointer
+}
+
+type VS128 struct {
+	V  unsafe.Pointer
+	Vs unsafe.Pointer
+	S  unsafe.Pointer
+}
+
+type VS256 struct {
+	V  unsafe.Pointer
+	Vs unsafe.Pointer
+	S  unsafe.Pointer
+}
+
+type VS512 struct {
+	V  unsafe.Pointer
+	Vs unsafe.Pointer
+	S  unsafe.Pointer
+}
+
+type VU1024 struct {
+	V  unsafe.Pointer
+	Vs unsafe.Pointer
+	S  unsafe.Pointer
+}
+
+type VU128 struct {
+	V  unsafe.Pointer
+	Vs unsafe.Pointer
+	S  unsafe.Pointer
+}
+
+type VU256 struct {
+	V  unsafe.Pointer
+	Vs unsafe.Pointer
+	S  unsafe.Pointer
+}
+
+type VU512 struct {
+	V  unsafe.Pointer
+	Vs unsafe.Pointer
+	S  unsafe.Pointer
 }
 
 // FFTSetup is a handle for the opaque FFTSetup type.
@@ -1066,3 +793,1002 @@ type VDSPBiquadmSetupD struct{ obj.Object }
 // IsNil reports whether VDSPBiquadmSetupD is a NULL handle (it wraps no object). Call
 // it before using a returned handle; a nil handle's methods panic.
 func (h VDSPBiquadmSetupD) IsNil() bool { return h.Object == nil }
+
+// Multihead Attention Projection Parameters
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type BNNSMHAProjectionParameters struct {
+	_    [0]uint64
+	data [528]byte
+}
+
+// Generic N-dimensional array This type  is used to represent an N-dimensional array of values (N=1,2,3,4). The nature and dimension of the data is determined by the layout field. Introduced in macOS 10.15, iOS 13, tvOS 13, watchOS 6.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type BNNSNDArrayDescriptor struct {
+	_    [0]uint64
+	data [176]byte
+}
+
+// AsSize returns the size field, read from the backing bytes at offset 8.
+func (u *BNNSNDArrayDescriptor) AsSize() [8]uint {
+	return *(*[8]uint)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsStride returns the stride field, read from the backing bytes at offset 72.
+func (u *BNNSNDArrayDescriptor) AsStride() [8]uint {
+	return *(*[8]uint)(unsafe.Pointer(&u.data[72]))
+}
+
+// AsData returns the data field, read from the backing bytes at offset 136.
+func (u *BNNSNDArrayDescriptor) AsData() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[136]))
+}
+
+// AsTableData returns the table_data field, read from the backing bytes at offset 152.
+func (u *BNNSNDArrayDescriptor) AsTableData() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[152]))
+}
+
+// AsDataScale returns the data_scale field, read from the backing bytes at offset 164.
+func (u *BNNSNDArrayDescriptor) AsDataScale() float32 {
+	return *(*float32)(unsafe.Pointer(&u.data[164]))
+}
+
+// AsDataBias returns the data_bias field, read from the backing bytes at offset 168.
+func (u *BNNSNDArrayDescriptor) AsDataBias() float32 {
+	return *(*float32)(unsafe.Pointer(&u.data[168]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type DSPDoubleSplitComplex struct {
+	_    [0]uint64
+	data [16]byte
+}
+
+// AsRealp returns the realp field, read from the backing bytes at offset 0.
+func (u *DSPDoubleSplitComplex) AsRealp() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsImagp returns the imagp field, read from the backing bytes at offset 8.
+func (u *DSPDoubleSplitComplex) AsImagp() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type DSPSplitComplex struct {
+	_    [0]uint64
+	data [16]byte
+}
+
+// AsRealp returns the realp field, read from the backing bytes at offset 0.
+func (u *DSPSplitComplex) AsRealp() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsImagp returns the imagp field, read from the backing bytes at offset 8.
+func (u *DSPSplitComplex) AsImagp() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// Contains a dense `rowCount` x `columnCount` matrix of complex double values stored in column-major order. - term `rowCount`:     Number of rows in the matrix. - term `columnCount`:  Number of columns in the matrix. - term `columnStride`: The column stride of the matrix. - term `attributes`:   The attributes of the matrix, for example whether the matrix is symmetrical (Hermitian) or triangular. - term `data`: The array of float values in column-major order.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type DenseMatrix_Complex_Double struct {
+	_    [0]uint64
+	data [24]byte
+}
+
+// AsRowCount returns the rowCount field, read from the backing bytes at offset 0.
+func (u *DenseMatrix_Complex_Double) AsRowCount() int32 {
+	return *(*int32)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsColumnCount returns the columnCount field, read from the backing bytes at offset 4.
+func (u *DenseMatrix_Complex_Double) AsColumnCount() int32 {
+	return *(*int32)(unsafe.Pointer(&u.data[4]))
+}
+
+// AsColumnStride returns the columnStride field, read from the backing bytes at offset 8.
+func (u *DenseMatrix_Complex_Double) AsColumnStride() int32 {
+	return *(*int32)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsData returns the data field, read from the backing bytes at offset 16.
+func (u *DenseMatrix_Complex_Double) AsData() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[16]))
+}
+
+// Contains a dense `rowCount` x `columnCount` matrix of complex float values stored in column-major order. - term `rowCount`:     Number of rows in the matrix. - term `columnCount`:  Number of columns in the matrix. - term `columnStride`:  The column stride of the matrix. - term `attributes`: The attributes of the matrix, for example whether the  matrix is symmetrical (Hermitian) or triangular. - term `data`: The array of float values in column-major order.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type DenseMatrix_Complex_Float struct {
+	_    [0]uint64
+	data [24]byte
+}
+
+// AsRowCount returns the rowCount field, read from the backing bytes at offset 0.
+func (u *DenseMatrix_Complex_Float) AsRowCount() int32 {
+	return *(*int32)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsColumnCount returns the columnCount field, read from the backing bytes at offset 4.
+func (u *DenseMatrix_Complex_Float) AsColumnCount() int32 {
+	return *(*int32)(unsafe.Pointer(&u.data[4]))
+}
+
+// AsColumnStride returns the columnStride field, read from the backing bytes at offset 8.
+func (u *DenseMatrix_Complex_Float) AsColumnStride() int32 {
+	return *(*int32)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsData returns the data field, read from the backing bytes at offset 16.
+func (u *DenseMatrix_Complex_Float) AsData() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[16]))
+}
+
+// Contains a dense `rowCount` x `columnCount` matrix of double values stored in column-major order. - term `rowCount`:   Number of rows in the matrix. - term `columnCount`:  Number of columns in the matrix. - term `columnStride`: The column stride of the matrix. - term `attributes`:  The attributes of the matrix, for example whether the matrix is symmetrical (Hermitian) or triangular. - term `data` :        The array of double values in column-major order.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type DenseMatrix_Double struct {
+	_    [0]uint64
+	data [24]byte
+}
+
+// AsRowCount returns the rowCount field, read from the backing bytes at offset 0.
+func (u *DenseMatrix_Double) AsRowCount() int32 {
+	return *(*int32)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsColumnCount returns the columnCount field, read from the backing bytes at offset 4.
+func (u *DenseMatrix_Double) AsColumnCount() int32 {
+	return *(*int32)(unsafe.Pointer(&u.data[4]))
+}
+
+// AsColumnStride returns the columnStride field, read from the backing bytes at offset 8.
+func (u *DenseMatrix_Double) AsColumnStride() int32 {
+	return *(*int32)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsData returns the data field, read from the backing bytes at offset 16.
+func (u *DenseMatrix_Double) AsData() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[16]))
+}
+
+// Contains a dense `rowCount` x `columnCount` matrix of float values stored in column-major order. - term `rowCount`:   Number of rows in the matrix. - term `columnCount`:  Number of columns in the matrix. - term `columnStride`:  The column stride of the matrix. - term `attributes`:   The attributes of the matrix, for example whether the matrix is symmetrical (Hermitian) or triangular. - term `data`: The array of float values in column-major order.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type DenseMatrix_Float struct {
+	_    [0]uint64
+	data [24]byte
+}
+
+// AsRowCount returns the rowCount field, read from the backing bytes at offset 0.
+func (u *DenseMatrix_Float) AsRowCount() int32 {
+	return *(*int32)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsColumnCount returns the columnCount field, read from the backing bytes at offset 4.
+func (u *DenseMatrix_Float) AsColumnCount() int32 {
+	return *(*int32)(unsafe.Pointer(&u.data[4]))
+}
+
+// AsColumnStride returns the columnStride field, read from the backing bytes at offset 8.
+func (u *DenseMatrix_Float) AsColumnStride() int32 {
+	return *(*int32)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsData returns the data field, read from the backing bytes at offset 16.
+func (u *DenseMatrix_Float) AsData() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[16]))
+}
+
+// Contains a dense vector of double complex values. - term `count`  :  Number of entries in the vector. - term  `data`  : The array of complex double values.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type DenseVector_Complex_Double struct {
+	_    [0]uint64
+	data [16]byte
+}
+
+// AsCount returns the count field, read from the backing bytes at offset 0.
+func (u *DenseVector_Complex_Double) AsCount() int32 {
+	return *(*int32)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsData returns the data field, read from the backing bytes at offset 8.
+func (u *DenseVector_Complex_Double) AsData() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// Contains a dense vector of float complex values. - term `count`  :  Number of entries in the vector. - term  `data`  : The array of complex float values.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type DenseVector_Complex_Float struct {
+	_    [0]uint64
+	data [16]byte
+}
+
+// AsCount returns the count field, read from the backing bytes at offset 0.
+func (u *DenseVector_Complex_Float) AsCount() int32 {
+	return *(*int32)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsData returns the data field, read from the backing bytes at offset 8.
+func (u *DenseVector_Complex_Float) AsData() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// Contains a dense vector of double values. - term `count`  :  Number of entries in the vector. - term  `data`  : The array of double values.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type DenseVector_Double struct {
+	_    [0]uint64
+	data [16]byte
+}
+
+// AsCount returns the count field, read from the backing bytes at offset 0.
+func (u *DenseVector_Double) AsCount() int32 {
+	return *(*int32)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsData returns the data field, read from the backing bytes at offset 8.
+func (u *DenseVector_Double) AsData() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// Contains a dense vector of float values. - term `count`  :  Number of entries in the vector. - term  `data`  : The array of float values.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type DenseVector_Float struct {
+	_    [0]uint64
+	data [16]byte
+}
+
+// AsCount returns the count field, read from the backing bytes at offset 0.
+func (u *DenseVector_Float) AsCount() int32 {
+	return *(*int32)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsData returns the data field, read from the backing bytes at offset 8.
+func (u *DenseVector_Float) AsData() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// Conjugate Gradient Options. Use CG to solve Ax=b when A is symmetric (Hermitian) positive-definite (the method may break down or fail to converge if A is not positive-definite). For square, full rank unsymmetric or indefinite equations, use GMRES instead. For rectangular or singular systems, use LSMR instead. - term `reportError`  : Function to use to report parameter errors. If `NULL`, errors are logged via `<os/log.h>` and execution is halted via `__builtin_trap()`.  If non-`NULL`, the provided function is called with a human-readable string describing the error condition. If the callback returns, control will be returned to the caller with any outputs in a safe but undefined state (i.e. they may hold partial results or garbage, but all sizes and pointers are valid). - term `maxIterations` : Maximum number of iterations to perform. If 0, the default value of 100 is used. - term `atol` : Absolute convergence tolerance. Iterate is considered to have converged if ``` || b-Ax ||_2 < rtol * || b-Ax_0 ||_2 + atol ``` - term `rtol` : Relative convergence tolerance. Iterate is considered to have converged if ``` || b-Ax ||_2 < rtol * || b-Ax_0 ||_2 + atol ``` If `rtol = 0.0`, default value of `sqrt(epsilon)` is used. If negative, `rtol` is treated as `0.0` (default is not used). - term  `reportStatus` : Function to use to report status (iteration count and residual of first right-hand side) every few iterations. If `NULL`, status is not reported.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type SparseCGOptions struct {
+	_    [0]uint64
+	data [40]byte
+}
+
+// AsReportError binds the reportError C function pointer (offset 0) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *SparseCGOptions) AsReportError() func(unsafe.Pointer) {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[0]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer)
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsMaxIterations returns the maxIterations field, read from the backing bytes at offset 8.
+func (u *SparseCGOptions) AsMaxIterations() int32 {
+	return *(*int32)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsAtol returns the atol field, read from the backing bytes at offset 16.
+func (u *SparseCGOptions) AsAtol() float64 {
+	return *(*float64)(unsafe.Pointer(&u.data[16]))
+}
+
+// AsRtol returns the rtol field, read from the backing bytes at offset 24.
+func (u *SparseCGOptions) AsRtol() float64 {
+	return *(*float64)(unsafe.Pointer(&u.data[24]))
+}
+
+// AsReportStatus binds the reportStatus C function pointer (offset 32) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *SparseCGOptions) AsReportStatus() func(unsafe.Pointer) {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[32]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer)
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// Right-preconditioned (F/DQ)GMRES Parameters Options. Use (F/DQ)GMRES to solve `Ax=b` when `A` is symmetric (Hermitian) indefinite or unsymmetric. For symmetric (Hermitian) positive-definite systems, use CG instead. For rectangular or singular systems, use LSMR instead. - term `reportError`  : Function to use to report parameter errors. If `NULL`, errors are logged via `<os/log.h>` and execution is halted via `__builtin_trap()`.  If non-`NULL`, the provided function is called with a human-readable string describing the error condition. If the callback returns, control will be returned to the caller with any outputs in a safe but undefined state (i.e. they may hold partial results or garbage, but all sizes and pointers are valid). - term `variant`: Variant of GMRES to use. See definition of `SparseGMRESVariant_t` for further information on the available variants. - term `nvec`: Number of orthagonal vectors maintained. For GMRES and FGMRES variants, this is the number of iterations between restarts. For DQGMRES it is the number of historical vectors maintained in memory. If `nvec<=0`, the default value of 16 is used. - term `maxIterations` : Maximum number of iterations to perform. If 0, the default value of 100 is used. - term `atol`: Absolute convergence tolerance. Iterate is considered to have converged if ``` || b-Ax ||_2 < rtol * || b-Ax_0 ||_2 + atol ``` - term `rtol`: Relative convergence tolerance. Iterate is considered to have converged if ``` || b-Ax ||_2 < rtol * || b-Ax_0 ||_2 + atol ``` If r`tol = 0.0`, default value of `sqrt(epsilon)` is used. If negative, `rtol` is treated as `0.0 `(default is not used). - term `reportStatus` : Function to use to report status (iteration count and residual of first right-hand side) every few iterations. If NULL, status is not reported.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type SparseGMRESOptions struct {
+	_    [0]uint64
+	data [48]byte
+}
+
+// AsReportError binds the reportError C function pointer (offset 0) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *SparseGMRESOptions) AsReportError() func(unsafe.Pointer) {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[0]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer)
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsNvec returns the nvec field, read from the backing bytes at offset 12.
+func (u *SparseGMRESOptions) AsNvec() int32 {
+	return *(*int32)(unsafe.Pointer(&u.data[12]))
+}
+
+// AsMaxIterations returns the maxIterations field, read from the backing bytes at offset 16.
+func (u *SparseGMRESOptions) AsMaxIterations() int32 {
+	return *(*int32)(unsafe.Pointer(&u.data[16]))
+}
+
+// AsAtol returns the atol field, read from the backing bytes at offset 24.
+func (u *SparseGMRESOptions) AsAtol() float64 {
+	return *(*float64)(unsafe.Pointer(&u.data[24]))
+}
+
+// AsRtol returns the rtol field, read from the backing bytes at offset 32.
+func (u *SparseGMRESOptions) AsRtol() float64 {
+	return *(*float64)(unsafe.Pointer(&u.data[32]))
+}
+
+// AsReportStatus binds the reportStatus C function pointer (offset 40) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *SparseGMRESOptions) AsReportStatus() func(unsafe.Pointer) {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[40]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer)
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// General description object for all iterative methods. This object is intended to be constructed through a call to an iterative method factory function, such as `SparseConjugateGradient()` or `SparseLSMR()`. - term `method` : The type of method the object represents. - term `options` : The options to be used for the method.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type SparseIterativeMethod struct {
+	_    [0]uint64
+	data [264]byte
+}
+
+// AsMethod returns the method field, read from the backing bytes at offset 0.
+func (u *SparseIterativeMethod) AsMethod() int32 {
+	return *(*int32)(unsafe.Pointer(&u.data[0]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type SparseIterativeMethodBaseOptions struct {
+	_    [0]uint64
+	data [8]byte
+}
+
+// AsReportError binds the reportError C function pointer (offset 0) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *SparseIterativeMethodBaseOptions) AsReportError() func(unsafe.Pointer) {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[0]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer)
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// LSMR is MINRES specialised for solving least squares. Use LSMR to solve equations of the form Ax=b where an exact solution does not exist. The returned solution minimises || b-Ax ||_2. Whilst LSMR is equivalent to MINRES applied to the normal equations `A^TAx = A^Tb` in exact arithmetic, it has superior numerical behaviour and should be used in preference. We note that due to the implicit squaring of the condition of A in the normal equations, LSMR may struggle to converge in single precision, and double precision arithmetic is recommended. For symmetric (Hermitian) positive-definite systems, use CG instead. For square, full rank unsymmetric or indefinite equations, use GMRES instead. - term `reportError`  : Function to use to report parameter errors. If `NULL`, errors are logged via `<os/log.h>` and execution is halted via `__builtin_trap()`.  If non-`NULL`, the provided function is called with a human-readable string describing the error condition. If the callback returns, control will be returned to the caller with any outputs in a safe but undefined state (i.e. they may hold partial results or garbage, but all sizes and pointers are valid). - term `lambda`: Damping parameter, if non-zero the actual problem solved is ``` min_x || Ax-b ||_2 + lambda || x ||_2. ``` Using damping can often allow the iteration to converge on ill-conditioned systems. - term  `variant`: Variant of GMRES to use. See definition of `SparseGMRESVariant_t` for further information on the available variants. - term  `nvec`: Number of vectors used for local orthogonalization. If n`vec<=0`, no orthogonalization is performed. - term `convergenceTest`: Which convergence test to use. See definition of `SparseLSMRConvergenceTest_t` for further information. - term  `maxIterations`: Maximum number of iterations to perform. If 0, the default value of 4n is used. However, if a good preconditioner is available and/or the matrix is well conditioned such that singular values are clustered, a value of n/2 may be more appropriate. - term `atol`: Either absolute tolerance (default test) or A tolerance (Fong-Saunders test). In the Fong and Saunders case, it should hold an estimate of the relative error in the data defining the matrix A. For example, if A is accurate to about 6 digits, set atol = 1.0e-6. In the Fong and Saunders case, if atol is 0.0, it is treated as machine epsilon. If using the default test, a value of 0.0 is treated as 0.0. - term `rtol`: Relative convergence tolerance (default test only). If `rtol = 0.0`, default value of `sqrt(epsilon)` is used. If negative, `rtol` is treated as 0.0 (default is not used). - term `btol`: b tolerance (Fong-Saunders test only). It should hold an estimate of the relative error in the data defining the rhs b. For example, if b is accurate to about 6 digits, set btol = 1.0e-6. If btol is zero, it is treated as machine epsilon. - term  `conditionLimit`: Condition number limit (Fong-Saunders test). Iterations will be terminated if a computed estimate of cond(Abar) exceeds this value. This is intended to prevent certain small or zero singular values of A or Abar from coming into effect and causing unwanted growth in the computed solution. conditionLimit and lambda may be used separately or together to regularize ill-conditioned systems. Normally, conlim should be in the range 1000 to 1/eps. Suggested value: * `conditionLimit = 1/(100*eps)`  for compatible systems, * `conditionLimit = 1/(10*sqrt(eps))` for least squares. If `conditionLimit` is `0.0,` it is treated as `1/eps`. - term `reportStatus` : Function to use to report status (iteration count and residual of first right-hand side) every few iterations. If NULL, status is not reported.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type SparseLSMROptions struct {
+	_    [0]uint64
+	data [72]byte
+}
+
+// AsReportError binds the reportError C function pointer (offset 0) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *SparseLSMROptions) AsReportError() func(unsafe.Pointer) {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[0]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer)
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsLambda returns the lambda field, read from the backing bytes at offset 8.
+func (u *SparseLSMROptions) AsLambda() float64 {
+	return *(*float64)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsNvec returns the nvec field, read from the backing bytes at offset 16.
+func (u *SparseLSMROptions) AsNvec() int32 {
+	return *(*int32)(unsafe.Pointer(&u.data[16]))
+}
+
+// AsAtol returns the atol field, read from the backing bytes at offset 24.
+func (u *SparseLSMROptions) AsAtol() float64 {
+	return *(*float64)(unsafe.Pointer(&u.data[24]))
+}
+
+// AsRtol returns the rtol field, read from the backing bytes at offset 32.
+func (u *SparseLSMROptions) AsRtol() float64 {
+	return *(*float64)(unsafe.Pointer(&u.data[32]))
+}
+
+// AsBtol returns the btol field, read from the backing bytes at offset 40.
+func (u *SparseLSMROptions) AsBtol() float64 {
+	return *(*float64)(unsafe.Pointer(&u.data[40]))
+}
+
+// AsConditionLimit returns the conditionLimit field, read from the backing bytes at offset 48.
+func (u *SparseLSMROptions) AsConditionLimit() float64 {
+	return *(*float64)(unsafe.Pointer(&u.data[48]))
+}
+
+// AsMaxIterations returns the maxIterations field, read from the backing bytes at offset 56.
+func (u *SparseLSMROptions) AsMaxIterations() int32 {
+	return *(*int32)(unsafe.Pointer(&u.data[56]))
+}
+
+// AsReportStatus binds the reportStatus C function pointer (offset 64) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *SparseLSMROptions) AsReportStatus() func(unsafe.Pointer) {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[64]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer)
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// A type representing the sparsity structure of a sparse matrix. The sparsity structure is represented in *block compressed sparse column* (block CSC) format. The matrix is divided into a regular grid of `rowCount x columnCount` blocks each of size `blockSize x blockSize`, and only blocks containing a non-zero entry are stored. CSC format is used to store the locations of these blocks. For each block column, a list of block row indices for non-zero blocks are stored, and the lists for each column are stored contiguously one after the other. Hence the row indices for column j are given by rowIndices`[columnStarts[j]:columnStarts[j+1]]`, where `columnStarts[]` is storing the location of the first index in each column. If the blockSize is `1`, then this format is exactly equivalent to standard CSC format. CSR format data can be simulated by using a blockSize of `1` and setting the transpose attribute (strictly this is still a transposed CSC matrix, so `rowCount` and `columnCount` will be transposed compared to true CSR). - term `rowCount` : Number of (block) rows in matrix. - term `columnCount` : Number of (block) columns in matrix. - term `columnStarts` : Specifies where each (block) column starts in rowIndices array. - term `rowIndices` : Specifies the (block) row indices of the matrix. - term `attributes` : The attribute meta-data for the matrix, for example whether the matrix is symmetric (Hermitian) and only half the entries are stored. - term `blockSize` :  The block size of the matrix.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type SparseMatrixStructure struct {
+	_    [0]uint64
+	data [32]byte
+}
+
+// AsRowCount returns the rowCount field, read from the backing bytes at offset 0.
+func (u *SparseMatrixStructure) AsRowCount() int32 {
+	return *(*int32)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsColumnCount returns the columnCount field, read from the backing bytes at offset 4.
+func (u *SparseMatrixStructure) AsColumnCount() int32 {
+	return *(*int32)(unsafe.Pointer(&u.data[4]))
+}
+
+// AsColumnStarts returns the columnStarts field, read from the backing bytes at offset 8.
+func (u *SparseMatrixStructure) AsColumnStarts() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsRowIndices returns the rowIndices field, read from the backing bytes at offset 16.
+func (u *SparseMatrixStructure) AsRowIndices() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[16]))
+}
+
+// AsBlockSize returns the blockSize field, read from the backing bytes at offset 28.
+func (u *SparseMatrixStructure) AsBlockSize() uint8 {
+	return *(*uint8)(unsafe.Pointer(&u.data[28]))
+}
+
+// A type representing the sparsity structure of a sparse complex matrix. The sparsity structure is represented in *block compressed sparse column* (block CSC) format. The matrix is divided into a regular grid of `rowCount x columnCount` blocks each of size `blockSize x blockSize`, and only blocks containing a non-zero entry are stored. CSC format is used to store the locations of these blocks. For each block column, a list of block row indices for non-zero blocks are stored, and the lists for each column are stored contiguously one after the other. Hence the row indices for column j are given by rowIndices`[columnStarts[j]:columnStarts[j+1]]`, where `columnStarts[]` is storing the location of the first index in each column. If the blockSize is `1`, then this format is exactly equivalent to standard CSC format. CSR format data can be simulated by using a blockSize of `1` and setting the transpose attribute (strictly this is still a transposed CSC matrix, so `rowCount` and `columnCount` will be transposed compared to true CSR). - term `rowCount` : Number of (block) rows in matrix. - term `columnCount` : Number of (block) columns in matrix. - term `columnStarts` : Specifies where each (block) column starts in rowIndices array. - term `rowIndices` : Specifies the (block) row indices of the matrix. - term `attributes` : The attribute meta-data for the matrix, for example whether the matrix is symmetric (Hermitian) and only half the entries are stored. - term `blockSize` :  The block size of the matrix.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type SparseMatrixStructureComplex struct {
+	_    [0]uint64
+	data [32]byte
+}
+
+// AsRowCount returns the rowCount field, read from the backing bytes at offset 0.
+func (u *SparseMatrixStructureComplex) AsRowCount() int32 {
+	return *(*int32)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsColumnCount returns the columnCount field, read from the backing bytes at offset 4.
+func (u *SparseMatrixStructureComplex) AsColumnCount() int32 {
+	return *(*int32)(unsafe.Pointer(&u.data[4]))
+}
+
+// AsColumnStarts returns the columnStarts field, read from the backing bytes at offset 8.
+func (u *SparseMatrixStructureComplex) AsColumnStarts() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsRowIndices returns the rowIndices field, read from the backing bytes at offset 16.
+func (u *SparseMatrixStructureComplex) AsRowIndices() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[16]))
+}
+
+// AsBlockSize returns the blockSize field, read from the backing bytes at offset 28.
+func (u *SparseMatrixStructureComplex) AsBlockSize() uint8 {
+	return *(*uint8)(unsafe.Pointer(&u.data[28]))
+}
+
+// A type representing a sparse complex matrix. `data` is the array of values in the non-zero blocks of the matrix stored contiguously, each block in column-major order. If there are `N` structural non-zero blocks in the matrix, `data` holds `blockSize * blockSize * N` doubles. - term  `structure` The symbolic structure of the matrix. - term  `data` The numerical values of the matrix. If `structure.blockSize > 1`, blocks are stored contiguously in column-major format.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type SparseMatrix_Complex_Double struct {
+	_    [0]uint64
+	data [40]byte
+}
+
+// AsData returns the data field, read from the backing bytes at offset 32.
+func (u *SparseMatrix_Complex_Double) AsData() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[32]))
+}
+
+// A type representing a sparse complex matrix. `data` is the array of values in the non-zero blocks of the matrix stored contiguously, each block in column-major order. If there are `N` structural non-zero blocks in the matrix, `data` holds `blockSize * blockSize * N` doubles. - term  `structure` The symbolic structure of the matrix. - term  `data` The numerical values of the matrix. If `structure.blockSize > 1`, blocks are stored contiguously in column-major format.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type SparseMatrix_Complex_Float struct {
+	_    [0]uint64
+	data [40]byte
+}
+
+// AsData returns the data field, read from the backing bytes at offset 32.
+func (u *SparseMatrix_Complex_Float) AsData() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[32]))
+}
+
+// A type representing a sparse matrix. `data` is the array of values in the non-zero blocks of the matrix stored contiguously, each block in column-major order. If there are `N` structural non-zero blocks in the matrix, `data` holds `blockSize * blockSize * N` doubles. - term  `structure` The symbolic structure of the matrix. - term  `data` The numerical values of the matrix. If `structure.blockSize > 1`, blocks are stored contiguously in column-major format.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type SparseMatrix_Double struct {
+	_    [0]uint64
+	data [40]byte
+}
+
+// AsData returns the data field, read from the backing bytes at offset 32.
+func (u *SparseMatrix_Double) AsData() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[32]))
+}
+
+// A type representing a sparse matrix. `data` is the array of values in the non-zero blocks of the matrix stored contiguously, each block in column-major order. If there are `N` structural non-zero blocks in the matrix, `data` holds `blockSize * blockSize * N` doubles. - term  `structure` The symbolic structure of the matrix. - term  `data` The numerical values of the matrix. If `structure.blockSize > 1`, blocks are stored contiguously in column-major format.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type SparseMatrix_Float struct {
+	_    [0]uint64
+	data [40]byte
+}
+
+// AsData returns the data field, read from the backing bytes at offset 32.
+func (u *SparseMatrix_Float) AsData() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[32]))
+}
+
+// Options that affect the numerical stage of a sparse factorization. - term `control`: Flags controlling the computation. - term `scalingMethod`: Scaling method to use. - term `scaling`:      User-supplied array for scaling. Either NULL or a pointer to an array of real values as follows: - For symmetric (Hermitian) factorizations, a length n array that is applied as a row scaling `SAx = Sb`. - For QR factorization, this argument is currently ignored. - For LU factorizations, a length `m+n` array. The first m entries contain a row scaling, whilst the subsequent `n` entries contain a column scaling. The type of the array values is the element type of the matrix. * If `scalingMethod` is `SparseScalingUser`, and this pointer is `NULL`, no scaling is applied. * If `scalingMethod` is `SparseScalingUser`, and this pointer is non-`NULL`, the user-provided array is used to scale the matrix before factorization. * If `scalingMethod` is not `SparseScalingUser`, the factor function will compute its own scaling. * If this pointer is non-NULL, the computed scaling will be returned in the array. - term `pivotTolerance`: Pivot tolerance used by threshold partial pivoting. Clamped to range `[0,0.5]`. - term `zeroTolerance`: Zero tolerance used by some pivoting modes. Values less than zeroTolerance in absolute value will be treated as zero.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type SparseNumericFactorOptions struct {
+	_    [0]uint64
+	data [32]byte
+}
+
+// AsScaling returns the scaling field, read from the backing bytes at offset 8.
+func (u *SparseNumericFactorOptions) AsScaling() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsPivotTolerance returns the pivotTolerance field, read from the backing bytes at offset 16.
+func (u *SparseNumericFactorOptions) AsPivotTolerance() float64 {
+	return *(*float64)(unsafe.Pointer(&u.data[16]))
+}
+
+// AsZeroTolerance returns the zeroTolerance field, read from the backing bytes at offset 24.
+func (u *SparseNumericFactorOptions) AsZeroTolerance() float64 {
+	return *(*float64)(unsafe.Pointer(&u.data[24]))
+}
+
+// A semi-opaque type representing a matrix factorization in complex double. Use the `SparseCleanup` function to free resources held by these objects. The object can be in one of the following states: 1) Something went wrong with symbolic factorization, nothing is valid. - indicated by `.symbolicFactorization.status < 0` 2) Symbolic factorization was good, but failed in numeric factorization initialization. - indicated by `.symbolicFactorization.status >= 0 && .status < 0 && .numericFactorization == NULL` - symbolic factorization may be used for future calls. 3) Symbolic factorization was good, factor allocated/initialized correctly, but numeric factorization failed e.g. a Cholesky factorization of an indefinite matrix was attempted. - indicated by `.symbolicFactorization.status >= 0 && .status < 0 && .numericFactorization not NULL` - user may pass this object to `SparseRefactor_Double` with a modified matrix 4) Symbolic and numeric factorizations are both good - indicated by `.status >= 0` - term `status` : Indicates status of factorization object. - term `attributes` : Flags associated with this factorization object. In particular, transpose field indicates whether object is considered to be factorization of A or A^T. - term `symbolicFactorization` : Symbolic Factorization upon which this Numeric Factorization depends. - term `userFactorStorage` : Flag that indicates if user provided storage backing this object. If true, then factor storage must be freed by the user once all references are finished with (though any additional storage allocated due to pivoting will still be freed by `SparseCleanup`). - term `numericFactorization` : Pointer to private internal representation of numeric factor. - term `solveWorkspaceRequiredStatic` : The required size of workspace, in bytes, for a call to `SparseSolve` is `solveWorkspaceRequiredStatic + nrhs * solveWorkspaceRequiredPerRHS` where `nrhs` is the number of right-hand side vectors. - term `solveWorkspaceRequiredPerRHS` : The required size of workspace, in bytes, for a call to `SparseSolve` is `solveWorkspaceRequiredStatic + nrhs * solveWorkspaceRequiredPerRHS` where `nrhs` is the number of right-hand side vectors.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type SparseOpaqueFactorization_Complex_Double struct {
+	_    [0]uint64
+	data [104]byte
+}
+
+// AsUserFactorStorage returns the userFactorStorage field, read from the backing bytes at offset 72.
+func (u *SparseOpaqueFactorization_Complex_Double) AsUserFactorStorage() bool {
+	return *(*bool)(unsafe.Pointer(&u.data[72]))
+}
+
+// AsNumericFactorization returns the numericFactorization field, read from the backing bytes at offset 80.
+func (u *SparseOpaqueFactorization_Complex_Double) AsNumericFactorization() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[80]))
+}
+
+// AsSolveWorkspaceRequiredStatic returns the solveWorkspaceRequiredStatic field, read from the backing bytes at offset 88.
+func (u *SparseOpaqueFactorization_Complex_Double) AsSolveWorkspaceRequiredStatic() uint {
+	return *(*uint)(unsafe.Pointer(&u.data[88]))
+}
+
+// AsSolveWorkspaceRequiredPerRHS returns the solveWorkspaceRequiredPerRHS field, read from the backing bytes at offset 96.
+func (u *SparseOpaqueFactorization_Complex_Double) AsSolveWorkspaceRequiredPerRHS() uint {
+	return *(*uint)(unsafe.Pointer(&u.data[96]))
+}
+
+// A semi-opaque type representing a matrix factorization in complex float. Use the `SparseCleanup` function to free resources held by these objects. The object can be in one of the following states: 1) Something went wrong with symbolic factorization, nothing is valid. - indicated by `.symbolicFactorization.status < 0` 2) Symbolic factorization was good, but failed in numeric factorization initialization. - indicated by `.symbolicFactorization.status >= 0 && .status < 0 && .numericFactorization == NULL` - symbolic factorization may be used for future calls. 3) Symbolic factorization was good, factor allocated/initialized correctly, but numeric factorization failed e.g. a Cholesky factorization of an indefinite matrix was attempted. - indicated by `.symbolicFactorization.status >= 0 && .status < 0 && .numericFactorization not NULL` - user may pass this object to `SparseRefactor_Double` with a modified matrix 4) Symbolic and numeric factorizations are both good - indicated by `.status >= 0` - term `status` : Indicates status of factorization object. - term `attributes` : Flags associated with this factorization object. In particular, transpose field indicates whether object is considered to be factorization of A or A^T. - term `symbolicFactorization` : Symbolic Factorization upon which this Numeric Factorization depends. - term `userFactorStorage` : Flag that indicates if user provided storage backing this object. If true, then factor storage must be freed by the user once all references are finished with (though any additional storage allocated due to pivoting will still be freed by `SparseCleanup`). - term `numericFactorization` : Pointer to private internal representation of numeric factor. - term `solveWorkspaceRequiredStatic` : The required size of workspace, in bytes, for a call to `SparseSolve` is `solveWorkspaceRequiredStatic + nrhs * solveWorkspaceRequiredPerRHS` where `nrhs` is the number of right-hand side vectors. - term `solveWorkspaceRequiredPerRHS` : The required size of workspace, in bytes, for a call to `SparseSolve` is `solveWorkspaceRequiredStatic + nrhs * solveWorkspaceRequiredPerRHS` where `nrhs` is the number of right-hand side vectors.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type SparseOpaqueFactorization_Complex_Float struct {
+	_    [0]uint64
+	data [104]byte
+}
+
+// AsUserFactorStorage returns the userFactorStorage field, read from the backing bytes at offset 72.
+func (u *SparseOpaqueFactorization_Complex_Float) AsUserFactorStorage() bool {
+	return *(*bool)(unsafe.Pointer(&u.data[72]))
+}
+
+// AsNumericFactorization returns the numericFactorization field, read from the backing bytes at offset 80.
+func (u *SparseOpaqueFactorization_Complex_Float) AsNumericFactorization() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[80]))
+}
+
+// AsSolveWorkspaceRequiredStatic returns the solveWorkspaceRequiredStatic field, read from the backing bytes at offset 88.
+func (u *SparseOpaqueFactorization_Complex_Float) AsSolveWorkspaceRequiredStatic() uint {
+	return *(*uint)(unsafe.Pointer(&u.data[88]))
+}
+
+// AsSolveWorkspaceRequiredPerRHS returns the solveWorkspaceRequiredPerRHS field, read from the backing bytes at offset 96.
+func (u *SparseOpaqueFactorization_Complex_Float) AsSolveWorkspaceRequiredPerRHS() uint {
+	return *(*uint)(unsafe.Pointer(&u.data[96]))
+}
+
+// A semi-opaque type representing a matrix factorization in double. Use the `SparseCleanup` function to free resources held by these objects. The object can be in one of the following states: 1) Something went wrong with symbolic factorization, nothing is valid. - indicated by `.symbolicFactorization.status < 0` 2) Symbolic factorization was good, but failed in numeric factorization initialization. - indicated by `.symbolicFactorization.status >= 0 && .status < 0 && .numericFactorization == NULL` - symbolic factorization may be used for future calls. 3) Symbolic factorization was good, factor allocated/initialized correctly, but numeric factorization failed e.g. a Cholesky factorization of an indefinite matrix was attempted. - indicated by `.symbolicFactorization.status >= 0 && .status < 0 && .numericFactorization not NULL` - user may pass this object to `SparseRefactor_Double` with a modified matrix 4) Symbolic and numeric factorizations are both good - indicated by `.status >= 0` - term `status` : Indicates status of factorization object. - term `attributes` : Flags associated with this factorization object. In particular, transpose field indicates whether object is considered to be factorization of A or A^T. - term `symbolicFactorization` : Symbolic Factorization upon which this Numeric Factorization depends. - term `userFactorStorage` : Flag that indicates if user provided storage backing this object. If true, then factor storage must be freed by the user once all references are finished with (though any additional storage allocated due to pivoting will still be freed by `SparseCleanup`). - term `numericFactorization` : Pointer to private internal representation of numeric factor. - term `solveWorkspaceRequiredStatic` : The required size of workspace, in bytes, for a call to `SparseSolve` is `solveWorkspaceRequiredStatic + nrhs * solveWorkspaceRequiredPerRHS` where `nrhs` is the number of right-hand side vectors. - term `solveWorkspaceRequiredPerRHS` : The required size of workspace, in bytes, for a call to `SparseSolve` is `solveWorkspaceRequiredStatic + nrhs * solveWorkspaceRequiredPerRHS` where `nrhs` is the number of right-hand side vectors.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type SparseOpaqueFactorization_Double struct {
+	_    [0]uint64
+	data [104]byte
+}
+
+// AsUserFactorStorage returns the userFactorStorage field, read from the backing bytes at offset 72.
+func (u *SparseOpaqueFactorization_Double) AsUserFactorStorage() bool {
+	return *(*bool)(unsafe.Pointer(&u.data[72]))
+}
+
+// AsNumericFactorization returns the numericFactorization field, read from the backing bytes at offset 80.
+func (u *SparseOpaqueFactorization_Double) AsNumericFactorization() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[80]))
+}
+
+// AsSolveWorkspaceRequiredStatic returns the solveWorkspaceRequiredStatic field, read from the backing bytes at offset 88.
+func (u *SparseOpaqueFactorization_Double) AsSolveWorkspaceRequiredStatic() uint {
+	return *(*uint)(unsafe.Pointer(&u.data[88]))
+}
+
+// AsSolveWorkspaceRequiredPerRHS returns the solveWorkspaceRequiredPerRHS field, read from the backing bytes at offset 96.
+func (u *SparseOpaqueFactorization_Double) AsSolveWorkspaceRequiredPerRHS() uint {
+	return *(*uint)(unsafe.Pointer(&u.data[96]))
+}
+
+// A semi-opaque type representing a matrix factorization in float. Use the `SparseCleanup` function to free resources held by these objects. The object can be in one of the following states: 1) Something went wrong with symbolic factorization, nothing is valid. - indicated by `.symbolicFactorization.status < 0` 2) Symbolic factorization was good, but failed in numeric factorization initialization. - indicated by `.symbolicFactorization.status >= 0 && .status < 0 && .numericFactorization == NULL` - symbolic factorization may be used for future calls. 3) Symbolic factorization was good, factor allocated/initialized correctly, but numeric factorization failed e.g. a Cholesky factorization of an indefinite matrix was attempted. - indicated by `.symbolicFactorization.status >= 0 && .status < 0 && .numericFactorization not NULL` - user may pass this object to `SparseRefactor_Double` with a modified matrix 4) Symbolic and numeric factorizations are both good - indicated by `.status >= 0` - term `status` : Indicates status of factorization object. - term `attributes` : Flags associated with this factorization object. In particular, transpose field indicates whether object is considered to be factorization of A or A^T. - term `symbolicFactorization` : Symbolic Factorization upon which this Numeric Factorization depends. - term `userFactorStorage` : Flag that indicates if user provided storage backing this object. If true, then factor storage must be freed by the user once all references are finished with (though any additional storage allocated due to pivoting will still be freed by `SparseCleanup`). - term `numericFactorization` : Pointer to private internal representation of numeric factor. - term `solveWorkspaceRequiredStatic` : The required size of workspace, in bytes, for a call to `SparseSolve` is `solveWorkspaceRequiredStatic + nrhs * solveWorkspaceRequiredPerRHS` where `nrhs` is the number of right-hand side vectors. - term `solveWorkspaceRequiredPerRHS` : The required size of workspace, in bytes, for a call to `SparseSolve` is `solveWorkspaceRequiredStatic + nrhs * solveWorkspaceRequiredPerRHS` where `nrhs` is the number of right-hand side vectors.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type SparseOpaqueFactorization_Float struct {
+	_    [0]uint64
+	data [104]byte
+}
+
+// AsUserFactorStorage returns the userFactorStorage field, read from the backing bytes at offset 72.
+func (u *SparseOpaqueFactorization_Float) AsUserFactorStorage() bool {
+	return *(*bool)(unsafe.Pointer(&u.data[72]))
+}
+
+// AsNumericFactorization returns the numericFactorization field, read from the backing bytes at offset 80.
+func (u *SparseOpaqueFactorization_Float) AsNumericFactorization() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[80]))
+}
+
+// AsSolveWorkspaceRequiredStatic returns the solveWorkspaceRequiredStatic field, read from the backing bytes at offset 88.
+func (u *SparseOpaqueFactorization_Float) AsSolveWorkspaceRequiredStatic() uint {
+	return *(*uint)(unsafe.Pointer(&u.data[88]))
+}
+
+// AsSolveWorkspaceRequiredPerRHS returns the solveWorkspaceRequiredPerRHS field, read from the backing bytes at offset 96.
+func (u *SparseOpaqueFactorization_Float) AsSolveWorkspaceRequiredPerRHS() uint {
+	return *(*uint)(unsafe.Pointer(&u.data[96]))
+}
+
+// Represents a preconditioner for matrices of complex double values . - term `type` :  The type of preconditioner represented. - term `mem` : Block of memory that will be passed unaltered as the first argument of the `apply()` callback. - term `apply(mem, trans, X, Y)` : Function to call to apply the preconditioner as `Y = PX` (`trans=false`) or `Y = P^TX` (`trans`=`true`). * `mem` : The unaltered pointer mem from this struct. * `trans` : Flags whether to apply the preconditioner or its transpose. * `X`: The right-hand side vectors X. * `Y`: The result vectors Y.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type SparseOpaquePreconditioner_Complex_Double struct {
+	_    [0]uint64
+	data [24]byte
+}
+
+// AsMem returns the mem field, read from the backing bytes at offset 8.
+func (u *SparseOpaquePreconditioner_Complex_Double) AsMem() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsApply returns the apply field, read from the backing bytes at offset 16.
+func (u *SparseOpaquePreconditioner_Complex_Double) AsApply() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[16]))
+}
+
+// Represents a preconditioner for matrices of complex float values . - term `type` :  The type of preconditioner represented. - term `mem` : Block of memory that will be passed unaltered as the first argument of the `apply()` callback. - term `apply(mem, trans, X, Y)` : Function to call to apply the preconditioner as `Y = PX` (`trans=false`) or `Y = P^TX` (`trans`=`true`). * `mem` : The unaltered pointer mem from this struct. * `trans` : Flags whether to apply the preconditioner or its transpose. * `X`: The right-hand side vectors X. * `Y`: The result vectors Y.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type SparseOpaquePreconditioner_Complex_Float struct {
+	_    [0]uint64
+	data [24]byte
+}
+
+// AsMem returns the mem field, read from the backing bytes at offset 8.
+func (u *SparseOpaquePreconditioner_Complex_Float) AsMem() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsApply returns the apply field, read from the backing bytes at offset 16.
+func (u *SparseOpaquePreconditioner_Complex_Float) AsApply() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[16]))
+}
+
+// Represents a preconditioner for matrices of double values . - term `type` :  The type of preconditioner represented. - term `mem` : Block of memory that will be passed unaltered as the first argument of the `apply()` callback. - term `apply(mem, trans, X, Y)` : Function to call to apply the preconditioner as `Y = PX` (`trans=false`) or `Y = P^TX` (`trans`=`true`). * `mem` : The unaltered pointer mem from this struct. * `trans` : Flags whether to apply the preconditioner or its transpose. * `X`: The right-hand side vectors X. * `Y`: The result vectors Y.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type SparseOpaquePreconditioner_Double struct {
+	_    [0]uint64
+	data [24]byte
+}
+
+// AsMem returns the mem field, read from the backing bytes at offset 8.
+func (u *SparseOpaquePreconditioner_Double) AsMem() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsApply returns the apply field, read from the backing bytes at offset 16.
+func (u *SparseOpaquePreconditioner_Double) AsApply() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[16]))
+}
+
+// Represents a preconditioner for matrices of float values . - term `type` :  The type of preconditioner represented. - term `mem` : Block of memory that will be passed unaltered as the first argument of the `apply()` callback. - term `apply(mem, trans, X, Y)` : Function to call to apply the preconditioner as `Y = PX` (`trans=false`) or `Y = P^TX` (`trans`=`true`). * `mem` : The unaltered pointer mem from this struct. * `trans` : Flags whether to apply the preconditioner or its transpose. * `X`: The right-hand side vectors X. * `Y`: The result vectors Y.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type SparseOpaquePreconditioner_Float struct {
+	_    [0]uint64
+	data [24]byte
+}
+
+// AsMem returns the mem field, read from the backing bytes at offset 8.
+func (u *SparseOpaquePreconditioner_Float) AsMem() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsApply returns the apply field, read from the backing bytes at offset 16.
+func (u *SparseOpaquePreconditioner_Float) AsApply() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[16]))
+}
+
+// Represents a sub-factor of the factorization (for example,  `L` from `LDL^T`). - term `attributes` : Attributes of subfactor. Notably transpose indicates whether it should be considered as the transpose of its underlying contents (e.g. should it count as L or L^T if `.contents=SparseSubfactorL`). - term `contents` : Subfactor this represents, e.g. L or Q. - term `factor` : Underlying factorization this subfactor is part of. - term `workspaceRequiredStatic` : The size of the workspace, in bytes, required to perform `SparseMultiply` or `SparseSolve` with this subfactor is given by the expression: `workspaceRequiredStatic + nrhs*workspaceRequiredPerRhs` where `nrhs` is the number of right-hand side vectors. - term `workspaceRequiredPerRHS` : The size of the workspace, in bytes, required to perform SparseMultiply() or SparseSolve() with this subfactor is given by the expression: workspaceRequiredStatic + nrhs*workspaceRequiredPerRhs where nrhs is the number of right-hand side vectors.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type SparseOpaqueSubfactor_Complex_Double struct {
+	_    [0]uint64
+	data [128]byte
+}
+
+// AsWorkspaceRequiredStatic returns the workspaceRequiredStatic field, read from the backing bytes at offset 112.
+func (u *SparseOpaqueSubfactor_Complex_Double) AsWorkspaceRequiredStatic() uint {
+	return *(*uint)(unsafe.Pointer(&u.data[112]))
+}
+
+// AsWorkspaceRequiredPerRHS returns the workspaceRequiredPerRHS field, read from the backing bytes at offset 120.
+func (u *SparseOpaqueSubfactor_Complex_Double) AsWorkspaceRequiredPerRHS() uint {
+	return *(*uint)(unsafe.Pointer(&u.data[120]))
+}
+
+// Represents a sub-factor of the factorization (for example,  `L` from `LDL^T`). - term `attributes` : Attributes of subfactor. Notably transpose indicates whether it should be considered as the transpose of its underlying contents (e.g. should it count as L or L^T if `.contents=SparseSubfactorL`). - term `contents` : Subfactor this represents, e.g. L or Q. - term `factor` : Underlying factorization this subfactor is part of. - term `workspaceRequiredStatic` : The size of the workspace, in bytes, required to perform `SparseMultiply` or `SparseSolve` with this subfactor is given by the expression: `workspaceRequiredStatic + nrhs*workspaceRequiredPerRhs` where `nrhs` is the number of right-hand side vectors. - term `workspaceRequiredPerRHS` : The size of the workspace, in bytes, required to perform SparseMultiply() or SparseSolve() with this subfactor is given by the expression: workspaceRequiredStatic + nrhs*workspaceRequiredPerRhs where nrhs is the number of right-hand side vectors.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type SparseOpaqueSubfactor_Complex_Float struct {
+	_    [0]uint64
+	data [128]byte
+}
+
+// AsWorkspaceRequiredStatic returns the workspaceRequiredStatic field, read from the backing bytes at offset 112.
+func (u *SparseOpaqueSubfactor_Complex_Float) AsWorkspaceRequiredStatic() uint {
+	return *(*uint)(unsafe.Pointer(&u.data[112]))
+}
+
+// AsWorkspaceRequiredPerRHS returns the workspaceRequiredPerRHS field, read from the backing bytes at offset 120.
+func (u *SparseOpaqueSubfactor_Complex_Float) AsWorkspaceRequiredPerRHS() uint {
+	return *(*uint)(unsafe.Pointer(&u.data[120]))
+}
+
+// Represents a sub-factor of the factorization (for example,  `L` from `LDL^T`). - term `attributes` : Attributes of subfactor. Notably transpose indicates whether it should be considered as the transpose of its underlying contents (e.g. should it count as L or L^T if `.contents=SparseSubfactorL`). - term `contents` : Subfactor this represents, e.g. L or Q. - term `factor` : Underlying factorization this subfactor is part of. - term `workspaceRequiredStatic` : The size of the workspace, in bytes, required to perform `SparseMultiply` or `SparseSolve` with this subfactor is given by the expression: `workspaceRequiredStatic + nrhs*workspaceRequiredPerRhs` where `nrhs` is the number of right-hand side vectors. - term `workspaceRequiredPerRHS` : The size of the workspace, in bytes, required to perform SparseMultiply() or SparseSolve() with this subfactor is given by the expression: workspaceRequiredStatic + nrhs*workspaceRequiredPerRhs where nrhs is the number of right-hand side vectors.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type SparseOpaqueSubfactor_Double struct {
+	_    [0]uint64
+	data [128]byte
+}
+
+// AsWorkspaceRequiredStatic returns the workspaceRequiredStatic field, read from the backing bytes at offset 112.
+func (u *SparseOpaqueSubfactor_Double) AsWorkspaceRequiredStatic() uint {
+	return *(*uint)(unsafe.Pointer(&u.data[112]))
+}
+
+// AsWorkspaceRequiredPerRHS returns the workspaceRequiredPerRHS field, read from the backing bytes at offset 120.
+func (u *SparseOpaqueSubfactor_Double) AsWorkspaceRequiredPerRHS() uint {
+	return *(*uint)(unsafe.Pointer(&u.data[120]))
+}
+
+// Represents a sub-factor of the factorization (for example,  `L` from `LDL^T`). - term `attributes` : Attributes of subfactor. Notably transpose indicates whether it should be considered as the transpose of its underlying contents (e.g. should it count as L or L^T if `.contents=SparseSubfactorL`). - term `contents` : Subfactor this represents, e.g. L or Q. - term `factor` : Underlying factorization this subfactor is part of. - term `workspaceRequiredStatic` : The size of the workspace, in bytes, required to perform `SparseMultiply` or `SparseSolve` with this subfactor is given by the expression: `workspaceRequiredStatic + nrhs*workspaceRequiredPerRhs` where `nrhs` is the number of right-hand side vectors. - term `workspaceRequiredPerRHS` : The size of the workspace, in bytes, required to perform SparseMultiply() or SparseSolve() with this subfactor is given by the expression: workspaceRequiredStatic + nrhs*workspaceRequiredPerRhs where nrhs is the number of right-hand side vectors.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type SparseOpaqueSubfactor_Float struct {
+	_    [0]uint64
+	data [128]byte
+}
+
+// AsWorkspaceRequiredStatic returns the workspaceRequiredStatic field, read from the backing bytes at offset 112.
+func (u *SparseOpaqueSubfactor_Float) AsWorkspaceRequiredStatic() uint {
+	return *(*uint)(unsafe.Pointer(&u.data[112]))
+}
+
+// AsWorkspaceRequiredPerRHS returns the workspaceRequiredPerRHS field, read from the backing bytes at offset 120.
+func (u *SparseOpaqueSubfactor_Float) AsWorkspaceRequiredPerRHS() uint {
+	return *(*uint)(unsafe.Pointer(&u.data[120]))
+}
+
+// A semi-opaque type representing symbolic matrix factorization. Represents a symbolic matrix factorization (i.e. the pattern of the factors without the values). A single symbolic factorization may be the basis for multiple numerical factorizations of matrices with the same pattern but different values non-zero values. Use the `SparseCleanup` function to free resources held by these objects. The internal factorization pointer is refence counted, so it is safe to destroy this object even if numeric factorizations exist that still depend on it. - term `status` : Indicates status of factorization object. - term `type` : Type fo factorization this represents. - term `rowCount` : Copy of field from `SparseMatrixStructure` passed to `SparseFactor` call used to construct this symbolic factorization. - term `columnCount` : Copy of field from `SparseMatrixStructure` passed to `SparseFactor` call used to construct this symbolic factorization. - term `attributes` : Copy of field from `SparseMatrixStructure` passed to `SparseFactor` call used to construct this symbolic factorization. - term `blockSize` : Copy of field from `SparseMatrixStructure` passed to `SparseFactor` call used to construct this symbolic factorization. - term `factorization` : Pointer to private internal representation of symbolic factor. - term `workspaceSize_Float` : Size, in bytes, of workspace required to perform numerical factorization in float. Double the size when used in complex float. - term `workspaceSize_Double` : Size, in bytes, of workspace required to perform numerical factorization in double. Double the size when used in complex double. - term `factorSize_Float` : Minimum size, in bytes, required to store numerical factors in float. If numerical pivoting requires a pivot to be delayed, the actual size required may be larger. Double the size when used in complex float. - term `factorSize_Double` : Minimum size, in bytes, required to store numerical factors in double. If numerical pivoting requires a pivot to be delayed, the actual size required may be larger. Double the size when used in complex double.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type SparseOpaqueSymbolicFactorization struct {
+	_    [0]uint64
+	data [64]byte
+}
+
+// AsRowCount returns the rowCount field, read from the backing bytes at offset 4.
+func (u *SparseOpaqueSymbolicFactorization) AsRowCount() int32 {
+	return *(*int32)(unsafe.Pointer(&u.data[4]))
+}
+
+// AsColumnCount returns the columnCount field, read from the backing bytes at offset 8.
+func (u *SparseOpaqueSymbolicFactorization) AsColumnCount() int32 {
+	return *(*int32)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsBlockSize returns the blockSize field, read from the backing bytes at offset 16.
+func (u *SparseOpaqueSymbolicFactorization) AsBlockSize() uint8 {
+	return *(*uint8)(unsafe.Pointer(&u.data[16]))
+}
+
+// AsFactorization returns the factorization field, read from the backing bytes at offset 24.
+func (u *SparseOpaqueSymbolicFactorization) AsFactorization() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[24]))
+}
+
+// AsWorkspaceSizeFloat returns the workspaceSize_Float field, read from the backing bytes at offset 32.
+func (u *SparseOpaqueSymbolicFactorization) AsWorkspaceSizeFloat() uint {
+	return *(*uint)(unsafe.Pointer(&u.data[32]))
+}
+
+// AsWorkspaceSizeDouble returns the workspaceSize_Double field, read from the backing bytes at offset 40.
+func (u *SparseOpaqueSymbolicFactorization) AsWorkspaceSizeDouble() uint {
+	return *(*uint)(unsafe.Pointer(&u.data[40]))
+}
+
+// AsFactorSizeFloat returns the factorSize_Float field, read from the backing bytes at offset 48.
+func (u *SparseOpaqueSymbolicFactorization) AsFactorSizeFloat() uint {
+	return *(*uint)(unsafe.Pointer(&u.data[48]))
+}
+
+// AsFactorSizeDouble returns the factorSize_Double field, read from the backing bytes at offset 56.
+func (u *SparseOpaqueSymbolicFactorization) AsFactorSizeDouble() uint {
+	return *(*uint)(unsafe.Pointer(&u.data[56]))
+}
+
+// SparseSymbolicFactorOptions Options that affect the symbolic stage of a sparse factorization. - term `control` : Flags controlling the computation. - term `orderMethod` : Ordering algorithm to use. - term `order` : User-supplied array for ordering. Either NULL or a pointer to a permutation that reduces fill in the matrix being factored. In the symmetric (Hermitian)  and QR cases order provides a symmetric (Hermitian) row and column permutation. In the LU case case, the first rowCount entries provide a row permutation, and the subsequent columnCount entries provide a column permutation. * If `orderMethod` is `SparseOrderUser`, and this pointer is NULL, the original matrix ordering is used. * If `orderMethod` is `SparseOrderUser`, and this pointer is non-NULL, the user-provided permutation is used to order the matrix before factorization. * If `orderMethod` is not `SparseOrderUser`, the factor function will compute its own fill reducing ordering. * If this pointer is non-NULL, the computed permutation will be returned in the array. - term `ignoreRowsAndColumns` : Ignore rows and columns listed in this array. In some cases it is useful to ignore specified rows and columns, if this array is not NULL, it provides a list of rows and columns to ignore, terminated by a negative index. Note that this the row and column indices are for the actual matrix, not of its block structure, so 0 indicates the first row, not the first blockSize rows. In the symmetric (Hermitian) case (Cholesky, LDL^T) each entry indicates that the matching row AND column should be ignored. In the unsymmetric case (QR, Cholesky A^TA, LU) an index `i<m` indicates that row m should be ignored and an index i>=m indicates that column `(i-m)` should be ignored (where `m` is the number of rows in `A`, i.e. `m=A.structure.rowCount*A.blockSize` if `A` is not transposed, or `m=A.structure.columnCount*A.blockSize` if `A` is transposed). Note that for LU factorization, the use of `ignoreRowsAndColumns` with `blockSize > 1 `is not supported. - term `malloc` : Function to use for allocation of internal memory. Memory will be freed through the `free()` callback. If this function pointer is `NULL`, the system `malloc()` will be used. The  `size` parameter specifies the amount of space to allocate in bytes. The callback returns a pointer to newly allocated memory, or `NULL` if allocation failed. The returned pointer must be 16-byte aligned (this requirement is satisfied by the system `malloc()`). - term `free`  : Function to use to free memory allocated by malloc() callback. If this function pointer is `NULL`, the system `free()` will be used. The `pointer` parameter specifies the to memory to be freed. - term `reportError`  : Function to use to report parameter errors. If `NULL`, errors are logged via `<os/log.h>` and execution is halted via `__builtin_trap()`.  If non-`NULL`, the provided function is called with a human-readable string describing the error condition. If the callback returns, control will be returned to the caller with any outputs in a safe but undefined state (i.e. they may hold partial results or garbage, but all sizes and pointers are valid).
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type SparseSymbolicFactorOptions struct {
+	_    [0]uint64
+	data [48]byte
+}
+
+// AsOrder returns the order field, read from the backing bytes at offset 8.
+func (u *SparseSymbolicFactorOptions) AsOrder() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsIgnoreRowsAndColumns returns the ignoreRowsAndColumns field, read from the backing bytes at offset 16.
+func (u *SparseSymbolicFactorOptions) AsIgnoreRowsAndColumns() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[16]))
+}
+
+// AsMalloc binds the malloc C function pointer (offset 24) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *SparseSymbolicFactorOptions) AsMalloc() func(uint) unsafe.Pointer {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[24]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(uint) unsafe.Pointer
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsFree binds the free C function pointer (offset 32) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *SparseSymbolicFactorOptions) AsFree() func(unsafe.Pointer) {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[32]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer)
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsReportError binds the reportError C function pointer (offset 40) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *SparseSymbolicFactorOptions) AsReportError() func(unsafe.Pointer) {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[40]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer)
+	purego.RegisterFunc(&fn, p)
+	return fn
+}

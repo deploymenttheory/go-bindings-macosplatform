@@ -88,12 +88,6 @@ type ATSTrapezoid struct {
 	LowerLeft  unsafe.Pointer
 }
 
-type ATSUCurvePath struct {
-	Vectors     uint32
-	ControlBits [1]uint32
-	Vector      unsafe.Pointer
-}
-
 type ATSUCurvePaths struct {
 	Contours uint32
 	Contour  [1]ATSUCurvePath
@@ -143,3 +137,21 @@ type ATSFontNotificationRef struct{ obj.Object }
 // IsNil reports whether ATSFontNotificationRef is a NULL handle (it wraps no object). Call
 // it before using a returned handle; a nil handle's methods panic.
 func (h ATSFontNotificationRef) IsNil() bool { return h.Object == nil }
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type ATSUCurvePath struct {
+	_    [0]uint16
+	data [24]byte
+}
+
+// AsVectors returns the vectors field, read from the backing bytes at offset 0.
+func (u *ATSUCurvePath) AsVectors() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsControlBits returns the controlBits field, read from the backing bytes at offset 4.
+func (u *ATSUCurvePath) AsControlBits() [1]uint32 {
+	return *(*[1]uint32)(unsafe.Pointer(&u.data[4]))
+}

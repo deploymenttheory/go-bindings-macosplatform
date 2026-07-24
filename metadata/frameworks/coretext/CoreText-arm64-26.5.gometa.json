@@ -7332,6 +7332,7 @@
         }
       ],
       "size": 4,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 1785
@@ -7382,6 +7383,7 @@
         }
       ],
       "size": 64,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 1685
@@ -7434,6 +7436,30 @@
       "availability": {},
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 1711
+    },
+    "BslnFormatUnion": {
+      "fields": [
+        {
+          "name": "fmt0Part",
+          "objc_type": "BslnFormat0Part"
+        },
+        {
+          "name": "fmt1Part",
+          "objc_type": "BslnFormat1Part"
+        },
+        {
+          "name": "fmt2Part",
+          "objc_type": "BslnFormat2Part"
+        },
+        {
+          "name": "fmt3Part",
+          "objc_type": "BslnFormat3Part"
+        }
+      ],
+      "is_union": true,
+      "availability": {},
+      "sdk_file": "CoreText/SFNTLayoutTypes.h",
+      "sdk_line": 1718
     },
     "BslnTable": {
       "fields": [
@@ -7581,6 +7607,7 @@
         }
       ],
       "size": 12,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 927
@@ -7741,6 +7768,7 @@
         }
       ],
       "size": 24,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 944
@@ -7759,6 +7787,30 @@
       "availability": {},
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 954
+    },
+    "KernFormatSpecificHeader": {
+      "fields": [
+        {
+          "name": "orderedList",
+          "objc_type": "KernOrderedListHeader"
+        },
+        {
+          "name": "stateTable",
+          "objc_type": "KernStateHeader"
+        },
+        {
+          "name": "simpleArray",
+          "objc_type": "KernSimpleArrayHeader"
+        },
+        {
+          "name": "indexArray",
+          "objc_type": "KernIndexArrayHeader"
+        }
+      ],
+      "is_union": true,
+      "availability": {},
+      "sdk_file": "CoreText/SFNTLayoutTypes.h",
+      "sdk_line": 1442
     },
     "KernIndexArrayHeader": {
       "fields": [
@@ -7816,6 +7868,7 @@
         }
       ],
       "size": 4,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 1355
@@ -7882,6 +7935,7 @@
         }
       ],
       "size": 10,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 1368
@@ -8122,6 +8176,34 @@
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 1594
     },
+    "KerxFormatSpecificHeader": {
+      "fields": [
+        {
+          "name": "orderedList",
+          "objc_type": "KerxOrderedListHeader"
+        },
+        {
+          "name": "stateTable",
+          "objc_type": "KerxStateHeader"
+        },
+        {
+          "name": "simpleArray",
+          "objc_type": "KerxSimpleArrayHeader"
+        },
+        {
+          "name": "indexArray",
+          "objc_type": "KerxIndexArrayHeader"
+        },
+        {
+          "name": "controlPoint",
+          "objc_type": "KerxControlPointHeader"
+        }
+      ],
+      "is_union": true,
+      "availability": {},
+      "sdk_file": "CoreText/SFNTLayoutTypes.h",
+      "sdk_line": 1634
+    },
     "KerxIndexArrayHeader": {
       "fields": [
         {
@@ -8170,6 +8252,7 @@
         }
       ],
       "size": 4,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 1537
@@ -8217,6 +8300,7 @@
         }
       ],
       "size": 20,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 1550
@@ -8375,6 +8459,7 @@
         }
       ],
       "size": 4,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 1812
@@ -8430,6 +8515,7 @@
         }
       ],
       "size": 24,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 1114
@@ -8472,6 +8558,7 @@
         }
       ],
       "size": 12,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 1107
@@ -8518,9 +8605,38 @@
         }
       ],
       "size": 8,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 1068
+    },
+    "MortSpecificSubtable": {
+      "fields": [
+        {
+          "name": "rearrangement",
+          "objc_type": "MortRearrangementSubtable"
+        },
+        {
+          "name": "contextual",
+          "objc_type": "MortContextualSubtable"
+        },
+        {
+          "name": "ligature",
+          "objc_type": "MortLigatureSubtable"
+        },
+        {
+          "name": "swash",
+          "objc_type": "MortSwashSubtable"
+        },
+        {
+          "name": "insertion",
+          "objc_type": "MortInsertionSubtable"
+        }
+      ],
+      "is_union": true,
+      "availability": {},
+      "sdk_file": "CoreText/SFNTLayoutTypes.h",
+      "sdk_line": 1092
     },
     "MortSubtable": {
       "fields": [
@@ -8603,6 +8719,7 @@
         }
       ],
       "size": 28,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 1180
@@ -8668,9 +8785,38 @@
         }
       ],
       "size": 16,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 1144
+    },
+    "MorxSpecificSubtable": {
+      "fields": [
+        {
+          "name": "rearrangement",
+          "objc_type": "MorxRearrangementSubtable"
+        },
+        {
+          "name": "contextual",
+          "objc_type": "MorxContextualSubtable"
+        },
+        {
+          "name": "ligature",
+          "objc_type": "MorxLigatureSubtable"
+        },
+        {
+          "name": "swash",
+          "objc_type": "MortSwashSubtable"
+        },
+        {
+          "name": "insertion",
+          "objc_type": "MorxInsertionSubtable"
+        }
+      ],
+      "is_union": true,
+      "availability": {},
+      "sdk_file": "CoreText/SFNTLayoutTypes.h",
+      "sdk_line": 1165
     },
     "MorxSubtable": {
       "fields": [
@@ -8879,6 +9025,7 @@
         }
       ],
       "size": 2,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 671
@@ -8911,9 +9058,40 @@
         }
       ],
       "size": 10,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 662
+    },
+    "SFNTLookupFormatSpecificHeader": {
+      "fields": [
+        {
+          "name": "theArray",
+          "objc_type": "SFNTLookupArrayHeader"
+        },
+        {
+          "name": "segment",
+          "objc_type": "SFNTLookupSegmentHeader"
+        },
+        {
+          "name": "single",
+          "objc_type": "SFNTLookupSingleHeader"
+        },
+        {
+          "name": "trimmedArray",
+          "objc_type": "SFNTLookupTrimmedArrayHeader"
+        },
+        {
+          "name": "vector",
+          "objc_type": "SFNTLookupVectorHeader"
+        }
+      ],
+      "size": 16,
+      "align": 2,
+      "is_union": true,
+      "availability": {},
+      "sdk_file": "CoreText/SFNTLayoutTypes.h",
+      "sdk_line": 719
     },
     "SFNTLookupSegment": {
       "fields": [
@@ -8933,6 +9111,7 @@
         }
       ],
       "size": 6,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 696
@@ -8950,6 +9129,7 @@
         }
       ],
       "size": 16,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 702
@@ -8967,6 +9147,7 @@
         }
       ],
       "size": 4,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 708
@@ -8984,6 +9165,7 @@
         }
       ],
       "size": 14,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 713
@@ -9001,6 +9183,7 @@
         }
       ],
       "size": 18,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 728
@@ -9023,6 +9206,7 @@
         }
       ],
       "size": 6,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 676
@@ -9050,6 +9234,7 @@
         }
       ],
       "size": 8,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 683
@@ -9158,6 +9343,7 @@
         }
       ],
       "size": 8,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 751
@@ -9242,6 +9428,7 @@
         }
       ],
       "size": 16,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 793
@@ -9310,6 +9497,7 @@
         }
       ],
       "size": 8,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 1271
@@ -9397,6 +9585,7 @@
         }
       ],
       "size": 8,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreText/SFNTTypes.h",
       "sdk_line": 269
@@ -9535,6 +9724,7 @@
         }
       ],
       "size": 16,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreText/SFNTTypes.h",
       "sdk_line": 26
@@ -9602,6 +9792,7 @@
         }
       ],
       "size": 12,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreText/SFNTTypes.h",
       "sdk_line": 421
@@ -9619,6 +9810,7 @@
         }
       ],
       "size": 8,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreText/SFNTTypes.h",
       "sdk_line": 401
@@ -9636,6 +9828,7 @@
         }
       ],
       "size": 4,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreText/SFNTTypes.h",
       "sdk_line": 429
@@ -9653,6 +9846,7 @@
         }
       ],
       "size": 4,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreText/SFNTTypes.h",
       "sdk_line": 434
@@ -9675,6 +9869,7 @@
         }
       ],
       "size": 8,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreText/SFNTTypes.h",
       "sdk_line": 368
@@ -9735,6 +9930,7 @@
         }
       ],
       "size": 12,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreText/SFNTTypes.h",
       "sdk_line": 324
@@ -9772,6 +9968,7 @@
         }
       ],
       "size": 20,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreText/SFNTTypes.h",
       "sdk_line": 354

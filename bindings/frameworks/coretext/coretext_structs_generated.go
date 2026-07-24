@@ -64,11 +64,18 @@ type BslnFormat3Part struct {
 	MappingData SFNTLookupTable
 }
 
+type BslnFormatUnion struct {
+	Fmt0Part BslnFormat0Part
+	Fmt1Part BslnFormat1Part
+	Fmt2Part BslnFormat2Part
+	Fmt3Part BslnFormat3Part
+}
+
 type BslnTable struct {
 	Version         int32
 	Format          uint16
 	DefaultBaseline uint16
-	Parts           unsafe.Pointer
+	Parts           BslnFormatUnion
 }
 
 type CTFont struct{}
@@ -189,6 +196,13 @@ type JustWidthDeltaGroup struct {
 	Entries [1]JustWidthDeltaEntry
 }
 
+type KernFormatSpecificHeader struct {
+	OrderedList KernOrderedListHeader
+	StateTable  KernStateHeader
+	SimpleArray KernSimpleArrayHeader
+	IndexArray  KernIndexArrayHeader
+}
+
 type KernIndexArrayHeader struct {
 	GlyphCount      uint16
 	KernValueCount  uint8
@@ -248,7 +262,7 @@ type KernSubtableHeader struct {
 	Length     int32
 	StInfo     uint16
 	TupleIndex int16
-	FsHeader   unsafe.Pointer
+	FsHeader   KernFormatSpecificHeader
 }
 
 type KernTableHeader struct {
@@ -267,7 +281,7 @@ type KernVersion0SubtableHeader struct {
 	Version  uint16
 	Length   uint16
 	StInfo   uint16
-	FsHeader unsafe.Pointer
+	FsHeader KernFormatSpecificHeader
 }
 
 type KerxAnchorPointAction struct {
@@ -297,6 +311,14 @@ type KerxCoordinateAction struct {
 	MarkY uint16
 	CurrX uint16
 	CurrY uint16
+}
+
+type KerxFormatSpecificHeader struct {
+	OrderedList  KerxOrderedListHeader
+	StateTable   KerxStateHeader
+	SimpleArray  KerxSimpleArrayHeader
+	IndexArray   KerxIndexArrayHeader
+	ControlPoint KerxControlPointHeader
 }
 
 type KerxIndexArrayHeader struct {
@@ -351,7 +373,7 @@ type KerxSubtableHeader struct {
 	Length     uint32
 	StInfo     uint32
 	TupleCount uint32
-	FsHeader   unsafe.Pointer
+	FsHeader   KerxFormatSpecificHeader
 }
 
 type KerxTableHeader struct {
@@ -418,11 +440,19 @@ type MortRearrangementSubtable struct {
 	Header STHeader
 }
 
+type MortSpecificSubtable struct {
+	Rearrangement MortRearrangementSubtable
+	Contextual    MortContextualSubtable
+	Ligature      MortLigatureSubtable
+	Swash         MortSwashSubtable
+	Insertion     MortInsertionSubtable
+}
+
 type MortSubtable struct {
 	Length   uint16
 	Coverage uint16
 	Flags    uint32
-	U        unsafe.Pointer
+	U        MortSpecificSubtable
 }
 
 type MortSwashSubtable struct {
@@ -464,11 +494,19 @@ type MorxRearrangementSubtable struct {
 	Header STXHeader
 }
 
+type MorxSpecificSubtable struct {
+	Rearrangement MorxRearrangementSubtable
+	Contextual    MorxContextualSubtable
+	Ligature      MorxLigatureSubtable
+	Swash         MortSwashSubtable
+	Insertion     MorxInsertionSubtable
+}
+
 type MorxSubtable struct {
 	Length   uint32
 	Coverage uint32
 	Flags    uint32
-	U        unsafe.Pointer
+	U        MorxSpecificSubtable
 }
 
 type MorxTable struct {
@@ -554,11 +592,6 @@ type SFNTLookupSingle struct {
 type SFNTLookupSingleHeader struct {
 	BinSearch SFNTLookupBinarySearchHeader
 	Entries   [1]SFNTLookupSingle
-}
-
-type SFNTLookupTable struct {
-	Format   uint16
-	FsHeader unsafe.Pointer
 }
 
 type SFNTLookupTrimmedArrayHeader struct {
@@ -871,3 +904,24 @@ type CTTypesetterRef struct{ obj.Object }
 // IsNil reports whether CTTypesetterRef is a NULL handle (it wraps no object). Call
 // it before using a returned handle; a nil handle's methods panic.
 func (h CTTypesetterRef) IsNil() bool { return h.Object == nil }
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type SFNTLookupFormatSpecificHeader struct {
+	_    [0]uint16
+	data [16]byte
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type SFNTLookupTable struct {
+	_    [0]uint16
+	data [18]byte
+}
+
+// AsFormat returns the format field, read from the backing bytes at offset 0.
+func (u *SFNTLookupTable) AsFormat() uint16 {
+	return *(*uint16)(unsafe.Pointer(&u.data[0]))
+}

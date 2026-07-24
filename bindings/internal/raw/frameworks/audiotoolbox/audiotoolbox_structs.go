@@ -160,6 +160,14 @@ type AURenderCallbackStruct struct {
 	InputProcRefCon unsafe.Pointer
 }
 
+// @brief	A union of the various specific render event types. @discussion Determine which variant to use via head.eventType. AURenderEventParameter and AURenderEventParameterRamp use the parameter variant. AURenderEventMIDI and AURenderEventMIDISysEx use the MIDI variant.
+type AURenderEvent struct {
+	Head           AURenderEventHeader
+	Parameter      AUParameterEvent
+	MIDI           AUMIDIEvent
+	MIDIEventsList AUMIDIEventList
+}
+
 // The common header for a render event.
 type AURenderEventHeader struct {
 	Next            unsafe.Pointer

@@ -8,6 +8,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 type AuditTokenT struct {
@@ -43,15 +44,6 @@ type CEAccessDescription struct {
 type CEAuthorityInfoAccess struct {
 	NumAccessDescriptions uint32
 	AccessDescriptions    unsafe.Pointer
-}
-
-type CEAuthorityKeyID struct {
-	KeyIdentifierPresent int32
-	KeyIdentifier        CssmData
-	GeneralNamesPresent  int32
-	GeneralNames         unsafe.Pointer
-	SerialNumberPresent  int32
-	SerialNumber         CssmData
 }
 
 type CEBasicConstraints struct {
@@ -128,11 +120,6 @@ type CEIssuingDistributionPoint struct {
 	IndirectCrl            int32
 }
 
-type CENameConstraints struct {
-	Permitted unsafe.Pointer
-	Excluded  unsafe.Pointer
-}
-
 type CEOtherName struct {
 	TypeID CssmData
 	Value  CssmData
@@ -175,11 +162,6 @@ type CEQCStatement struct {
 type CEQCStatements struct {
 	NumQCStatements uint32
 	QcStatements    unsafe.Pointer
-}
-
-type CESemanticsInformation struct {
-	SemanticsIdentifier         unsafe.Pointer
-	NameRegistrationAuthorities unsafe.Pointer
 }
 
 type CMSDecoder struct{}
@@ -225,11 +207,6 @@ type CSSM_APPLE_TP_CRL_OPTIONS struct {
 	Version  uint32
 	CrlFlags uint32
 	CrlStore unsafe.Pointer
-}
-
-type CSSM_APPLE_TP_NAME_OID struct {
-	String unsafe.Pointer
-	Oid    unsafe.Pointer
 }
 
 type CSSM_APPLE_TP_SMIME_OPTIONS struct {
@@ -292,14 +269,6 @@ type CssmAclEntryInput struct {
 	CallerContext unsafe.Pointer
 }
 
-type CssmAclEntryPrototype struct {
-	TypedSubject  CssmList
-	Delegate      int32
-	Authorization CssmAuthorizationgroup
-	TimeRange     CssmAclValidityPeriod
-	EntryTag      [68]int8
-}
-
 type CssmAclKeychainPromptSelector struct {
 	Version uint16
 	Flags   uint16
@@ -317,15 +286,6 @@ type CssmAclProcessSubjectSelector struct {
 	Gid     uint32
 }
 
-type CssmAclValidityPeriod struct {
-	StartDate CssmData
-	EndDate   CssmData
-}
-
-type CssmApplecspdlDbChangePasswordParameters struct {
-	AccessCredentials unsafe.Pointer
-}
-
 type CssmApplecspdlDbIsLockedParameters struct {
 	IsLocked uint8
 }
@@ -341,11 +301,6 @@ type CssmAppledlOpenParameters struct {
 	AutoCommit int32
 	Mask       uint32
 	Mode       uint16
-}
-
-type CssmAuthorizationgroup struct {
-	NumberOfAuthTags uint32
-	AuthTags         unsafe.Pointer
 }
 
 type CssmBaseCerts struct {
@@ -428,11 +383,6 @@ type CssmCspOperationalStatistics struct {
 	TokenFreePrivateMem       uint32
 }
 
-type CssmData struct {
-	Length uint
-	Data   unsafe.Pointer
-}
-
 type CssmDate struct {
 	Year  [4]uint8
 	Month [2]uint8
@@ -443,18 +393,6 @@ type CssmDbAttributeData struct {
 	Info           CssmDbAttributeInfo
 	NumberOfValues uint32
 	Value          unsafe.Pointer
-}
-
-type CssmDbAttributeInfo struct {
-	AttributeNameFormat uint32
-	Label               unsafe.Pointer
-	AttributeFormat     uint32
-}
-
-type CssmDbIndexInfo struct {
-	IndexType           uint32
-	IndexedDataLocation uint32
-	Info                CssmDbAttributeInfo
 }
 
 type CssmDbParsingModuleInfo struct {
@@ -524,18 +462,6 @@ type CssmDlPkcs11Attributes struct {
 	DeviceAccessFlags uint32
 }
 
-type CssmEncodedCert struct {
-	CertType     uint32
-	CertEncoding uint32
-	CertBlob     CssmData
-}
-
-type CssmEncodedCrl struct {
-	CrlType     uint32
-	CrlEncoding uint32
-	CrlBlob     CssmData
-}
-
 type CssmEvidence struct {
 	EvidenceForm uint32
 	Evidence     unsafe.Pointer
@@ -595,12 +521,6 @@ type CssmKeyheader struct {
 	Reserved             uint32
 }
 
-type CssmKrName struct {
-	Type   uint8
-	Length uint8
-	Name   unsafe.Pointer
-}
-
 type CssmKrPolicyInfo struct {
 	KrbNotAllowed   int32
 	NumberOfEntries uint32
@@ -648,12 +568,6 @@ type CssmKrsubservice struct {
 	WrappedProduct CssmKrWrappedproductinfo
 }
 
-type CssmList struct {
-	ListType uint32
-	Head     unsafe.Pointer
-	Tail     unsafe.Pointer
-}
-
 type CssmListElement struct {
 	NextElement unsafe.Pointer
 	WordID      int32
@@ -667,15 +581,6 @@ type CssmManagerEventNotification struct {
 	Event                        uint32
 	EventID                      uint32
 	EventData                    CssmData
-}
-
-type CssmManagerRegistrationInfo struct {
-	Initialize              unsafe.Pointer
-	Terminate               unsafe.Pointer
-	RegisterDispatchTable   unsafe.Pointer
-	DeregisterDispatchTable unsafe.Pointer
-	EventNotifyManager      unsafe.Pointer
-	RefreshFunctionTable    unsafe.Pointer
 }
 
 type CssmMemoryFuncs struct {
@@ -775,186 +680,6 @@ type CssmSamplegroup struct {
 type CssmSelectionPredicate struct {
 	DbOperator uint32
 	Attribute  CssmDbAttributeData
-}
-
-type CssmSpiAcFuncs struct {
-	AuthCompute unsafe.Pointer
-	PassThrough unsafe.Pointer
-}
-
-type CssmSpiClFuncs struct {
-	CertCreateTemplate           unsafe.Pointer
-	CertGetAllTemplateFields     unsafe.Pointer
-	CertSign                     unsafe.Pointer
-	CertVerify                   unsafe.Pointer
-	CertVerifyWithKey            unsafe.Pointer
-	CertGetFirstFieldValue       unsafe.Pointer
-	CertGetNextFieldValue        unsafe.Pointer
-	CertAbortQuery               unsafe.Pointer
-	CertGetKeyInfo               unsafe.Pointer
-	CertGetAllFields             unsafe.Pointer
-	FreeFields                   unsafe.Pointer
-	FreeFieldValue               unsafe.Pointer
-	CertCache                    unsafe.Pointer
-	CertGetFirstCachedFieldValue unsafe.Pointer
-	CertGetNextCachedFieldValue  unsafe.Pointer
-	CertAbortCache               unsafe.Pointer
-	CertGroupToSignedBundle      unsafe.Pointer
-	CertGroupFromVerifiedBundle  unsafe.Pointer
-	CertDescribeFormat           unsafe.Pointer
-	CrlCreateTemplate            unsafe.Pointer
-	CrlSetFields                 unsafe.Pointer
-	CrlAddCert                   unsafe.Pointer
-	CrlRemoveCert                unsafe.Pointer
-	CrlSign                      unsafe.Pointer
-	CrlVerify                    unsafe.Pointer
-	CrlVerifyWithKey             unsafe.Pointer
-	IsCertInCrl                  unsafe.Pointer
-	CrlGetFirstFieldValue        unsafe.Pointer
-	CrlGetNextFieldValue         unsafe.Pointer
-	CrlAbortQuery                unsafe.Pointer
-	CrlGetAllFields              unsafe.Pointer
-	CrlCache                     unsafe.Pointer
-	IsCertInCachedCrl            unsafe.Pointer
-	CrlGetFirstCachedFieldValue  unsafe.Pointer
-	CrlGetNextCachedFieldValue   unsafe.Pointer
-	CrlGetAllCachedRecordFields  unsafe.Pointer
-	CrlAbortCache                unsafe.Pointer
-	CrlDescribeFormat            unsafe.Pointer
-	PassThrough                  unsafe.Pointer
-}
-
-type CssmSpiCspFuncs struct {
-	EventNotify                   unsafe.Pointer
-	QuerySize                     unsafe.Pointer
-	SignData                      unsafe.Pointer
-	SignDataInit                  unsafe.Pointer
-	SignDataUpdate                unsafe.Pointer
-	SignDataFinal                 unsafe.Pointer
-	VerifyData                    unsafe.Pointer
-	VerifyDataInit                unsafe.Pointer
-	VerifyDataUpdate              unsafe.Pointer
-	VerifyDataFinal               unsafe.Pointer
-	DigestData                    unsafe.Pointer
-	DigestDataInit                unsafe.Pointer
-	DigestDataUpdate              unsafe.Pointer
-	DigestDataClone               unsafe.Pointer
-	DigestDataFinal               unsafe.Pointer
-	GenerateMAC                   unsafe.Pointer
-	GenerateMACInit               unsafe.Pointer
-	GenerateMACUpdate             unsafe.Pointer
-	GenerateMACFinal              unsafe.Pointer
-	VerifyMAC                     unsafe.Pointer
-	VerifyMACInit                 unsafe.Pointer
-	VerifyMACUpdate               unsafe.Pointer
-	VerifyMACFinal                unsafe.Pointer
-	EncryptData                   unsafe.Pointer
-	EncryptDataInit               unsafe.Pointer
-	EncryptDataUpdate             unsafe.Pointer
-	EncryptDataFinal              unsafe.Pointer
-	DecryptData                   unsafe.Pointer
-	DecryptDataInit               unsafe.Pointer
-	DecryptDataUpdate             unsafe.Pointer
-	DecryptDataFinal              unsafe.Pointer
-	QueryKeySizeInBits            unsafe.Pointer
-	GenerateKey                   unsafe.Pointer
-	GenerateKeyPair               unsafe.Pointer
-	GenerateRandom                unsafe.Pointer
-	GenerateAlgorithmParams       unsafe.Pointer
-	WrapKey                       unsafe.Pointer
-	UnwrapKey                     unsafe.Pointer
-	DeriveKey                     unsafe.Pointer
-	FreeKey                       unsafe.Pointer
-	PassThrough                   unsafe.Pointer
-	Login                         unsafe.Pointer
-	Logout                        unsafe.Pointer
-	ChangeLoginACL                unsafe.Pointer
-	ObtainPrivateKeyFromPublicKey unsafe.Pointer
-	RetrieveUniqueID              unsafe.Pointer
-	RetrieveCounter               unsafe.Pointer
-	VerifyDevice                  unsafe.Pointer
-	GetTimeValue                  unsafe.Pointer
-	GetOperationalStatistics      unsafe.Pointer
-	GetLoginACL                   unsafe.Pointer
-	GetKeyACL                     unsafe.Pointer
-	ChangeKeyACL                  unsafe.Pointer
-	GetKeyOwner                   unsafe.Pointer
-	ChangeKeyOwner                unsafe.Pointer
-	GetLoginOwner                 unsafe.Pointer
-	ChangeLoginOwner              unsafe.Pointer
-}
-
-type CssmSpiDlFuncs struct {
-	DbOpen                    unsafe.Pointer
-	DbClose                   unsafe.Pointer
-	DbCreate                  unsafe.Pointer
-	DbDelete                  unsafe.Pointer
-	CreateRelation            unsafe.Pointer
-	DestroyRelation           unsafe.Pointer
-	Authenticate              unsafe.Pointer
-	GetDbACL                  unsafe.Pointer
-	ChangeDbACL               unsafe.Pointer
-	GetDbOwner                unsafe.Pointer
-	ChangeDbOwner             unsafe.Pointer
-	GetDbNames                unsafe.Pointer
-	GetDbNameFromHandle       unsafe.Pointer
-	FreeNameList              unsafe.Pointer
-	DataInsert                unsafe.Pointer
-	DataDelete                unsafe.Pointer
-	DataModify                unsafe.Pointer
-	DataGetFirst              unsafe.Pointer
-	DataGetNext               unsafe.Pointer
-	DataAbortQuery            unsafe.Pointer
-	DataGetFromUniqueRecordID unsafe.Pointer
-	FreeUniqueRecord          unsafe.Pointer
-	PassThrough               unsafe.Pointer
-}
-
-type CssmSpiKrFuncs struct {
-	RegistrationRequest    unsafe.Pointer
-	RegistrationRetrieve   unsafe.Pointer
-	GenerateRecoveryFields unsafe.Pointer
-	ProcessRecoveryFields  unsafe.Pointer
-	RecoveryRequest        unsafe.Pointer
-	RecoveryRetrieve       unsafe.Pointer
-	GetRecoveredObject     unsafe.Pointer
-	RecoveryRequestAbort   unsafe.Pointer
-	PassThrough            unsafe.Pointer
-}
-
-type CssmSpiTpFuncs struct {
-	SubmitCredRequest         unsafe.Pointer
-	RetrieveCredResult        unsafe.Pointer
-	ConfirmCredResult         unsafe.Pointer
-	ReceiveConfirmation       unsafe.Pointer
-	CertReclaimKey            unsafe.Pointer
-	CertReclaimAbort          unsafe.Pointer
-	FormRequest               unsafe.Pointer
-	FormSubmit                unsafe.Pointer
-	CertGroupVerify           unsafe.Pointer
-	CertCreateTemplate        unsafe.Pointer
-	CertGetAllTemplateFields  unsafe.Pointer
-	CertSign                  unsafe.Pointer
-	CrlVerify                 unsafe.Pointer
-	CrlCreateTemplate         unsafe.Pointer
-	CertRevoke                unsafe.Pointer
-	CertRemoveFromCrlTemplate unsafe.Pointer
-	CrlSign                   unsafe.Pointer
-	ApplyCrlToDb              unsafe.Pointer
-	CertGroupConstruct        unsafe.Pointer
-	CertGroupPrune            unsafe.Pointer
-	CertGroupToTupleGroup     unsafe.Pointer
-	TupleGroupToCertGroup     unsafe.Pointer
-	PassThrough               unsafe.Pointer
-}
-
-type CssmStateFuncs struct {
-	CssmGetAttachFunctions        unsafe.Pointer
-	CssmReleaseAttachFunctions    unsafe.Pointer
-	CssmGetAppMemoryFunctions     unsafe.Pointer
-	CssmIsFuncCallValid           unsafe.Pointer
-	CssmDeregisterManagerServices unsafe.Pointer
-	CssmDeliverModuleManagerEvent unsafe.Pointer
 }
 
 type CssmSubserviceUid struct {
@@ -1074,12 +799,6 @@ type CssmTpCrlissueOutput struct {
 	CrlNextTime unsafe.Pointer
 }
 
-type CssmTpPolicyinfo struct {
-	NumberOfPolicyIds uint32
-	PolicyIds         unsafe.Pointer
-	PolicyControl     unsafe.Pointer
-}
-
 type CssmTpRequestSet struct {
 	NumberOfRequests uint32
 	Requests         unsafe.Pointer
@@ -1129,21 +848,6 @@ type CssmX509Extension struct {
 	BERvalue CssmData
 }
 
-type CssmX509ExtensionTagAndValue struct {
-	Type  uint8
-	Value CssmData
-}
-
-type CssmX509Extensions struct {
-	NumberOfExtensions uint32
-	Extensions         unsafe.Pointer
-}
-
-type CssmX509Name struct {
-	NumberOfRDNs              uint32
-	RelativeDistinguishedName unsafe.Pointer
-}
-
 type CssmX509Rdn struct {
 	NumberOfPairs         uint32
 	AttributeTypeAndValue unsafe.Pointer
@@ -1173,34 +877,6 @@ type CssmX509SignedCertificate struct {
 type CssmX509SignedCrl struct {
 	TbsCertList CssmX509TbsCertlist
 	Signature   CssmX509Signature
-}
-
-type CssmX509TbsCertificate struct {
-	Version                 CssmData
-	SerialNumber            CssmData
-	Signature               SecAsn1AlgId
-	Issuer                  CssmX509Name
-	Validity                X509Validity
-	Subject                 CssmX509Name
-	SubjectPublicKeyInfo    SecAsn1PubKeyInfo
-	IssuerUniqueIdentifier  CssmData
-	SubjectUniqueIdentifier CssmData
-	Extensions              CssmX509Extensions
-}
-
-type CssmX509TbsCertlist struct {
-	Version             CssmData
-	Signature           SecAsn1AlgId
-	Issuer              CssmX509Name
-	ThisUpdate          CssmX509Time
-	NextUpdate          CssmX509Time
-	RevokedCertificates unsafe.Pointer
-	Extensions          CssmX509Extensions
-}
-
-type CssmX509Time struct {
-	TimeType uint8
-	Time     CssmData
 }
 
 type CssmX509TypeValuePair struct {
@@ -1235,24 +911,6 @@ type CssmX509extPolicyQualifiers struct {
 	PolicyQualifier          unsafe.Pointer
 }
 
-type MdsFuncs struct {
-	DbOpen                    unsafe.Pointer
-	DbClose                   unsafe.Pointer
-	GetDbNames                unsafe.Pointer
-	GetDbNameFromHandle       unsafe.Pointer
-	FreeNameList              unsafe.Pointer
-	DataInsert                unsafe.Pointer
-	DataDelete                unsafe.Pointer
-	DataModify                unsafe.Pointer
-	DataGetFirst              unsafe.Pointer
-	DataGetNext               unsafe.Pointer
-	DataAbortQuery            unsafe.Pointer
-	DataGetFromUniqueRecordID unsafe.Pointer
-	FreeUniqueRecord          unsafe.Pointer
-	CreateRelation            unsafe.Pointer
-	DestroyRelation           unsafe.Pointer
-}
-
 // A reference to an opaque policy search structure.
 type OpaquePolicySearchRef struct{}
 
@@ -1273,18 +931,6 @@ type SecAccess struct{}
 
 // CFType representing access control for an item. SecAccessControl.h for details.
 type SecAccessControl struct{}
-
-// A structure identifying an ASN.1 algorithm by its OID, and its corresponding parameters.
-type SecAsn1AlgId struct {
-	Algorithm  CssmData
-	Parameters CssmData
-}
-
-// A structure containing a public key and its associated algorithm.
-type SecAsn1PubKeyInfo struct {
-	Algorithm        SecAsn1AlgId
-	SubjectPublicKey CssmData
-}
 
 // A structure that defines one element of a BER or DER encoding.
 type SecAsn1Template_struct struct {
@@ -1393,11 +1039,6 @@ type SecTrust struct{}
 
 // Contains information about a trusted application.
 type SecTrustedApplication struct{}
-
-type X509Validity struct {
-	NotBefore CssmX509Time
-	NotAfter  CssmX509Time
-}
 
 // CE_AccessDescription is an alias for the __CE_AccessDescription value type.
 type CE_AccessDescription = CEAccessDescription
@@ -2459,3 +2100,2402 @@ type SecTrustedApplicationRef struct{ obj.Object }
 // IsNil reports whether SecTrustedApplicationRef is a NULL handle (it wraps no object). Call
 // it before using a returned handle; a nil handle's methods panic.
 func (h SecTrustedApplicationRef) IsNil() bool { return h.Object == nil }
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CEAuthorityKeyID struct {
+	_    [0]uint64
+	data [64]byte
+}
+
+// AsKeyIdentifierPresent returns the keyIdentifierPresent field, read from the backing bytes at offset 0.
+func (u *CEAuthorityKeyID) AsKeyIdentifierPresent() int32 {
+	return *(*int32)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsGeneralNamesPresent returns the generalNamesPresent field, read from the backing bytes at offset 24.
+func (u *CEAuthorityKeyID) AsGeneralNamesPresent() int32 {
+	return *(*int32)(unsafe.Pointer(&u.data[24]))
+}
+
+// AsGeneralNames returns the generalNames field, read from the backing bytes at offset 32.
+func (u *CEAuthorityKeyID) AsGeneralNames() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[32]))
+}
+
+// AsSerialNumberPresent returns the serialNumberPresent field, read from the backing bytes at offset 40.
+func (u *CEAuthorityKeyID) AsSerialNumberPresent() int32 {
+	return *(*int32)(unsafe.Pointer(&u.data[40]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CENameConstraints struct {
+	_    [0]uint64
+	data [16]byte
+}
+
+// AsPermitted returns the permitted field, read from the backing bytes at offset 0.
+func (u *CENameConstraints) AsPermitted() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsExcluded returns the excluded field, read from the backing bytes at offset 8.
+func (u *CENameConstraints) AsExcluded() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CESemanticsInformation struct {
+	_    [0]uint64
+	data [16]byte
+}
+
+// AsSemanticsIdentifier returns the semanticsIdentifier field, read from the backing bytes at offset 0.
+func (u *CESemanticsInformation) AsSemanticsIdentifier() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsNameRegistrationAuthorities returns the nameRegistrationAuthorities field, read from the backing bytes at offset 8.
+func (u *CESemanticsInformation) AsNameRegistrationAuthorities() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CSSM_APPLE_TP_NAME_OID struct {
+	_    [0]uint64
+	data [16]byte
+}
+
+// AsString returns the string field, read from the backing bytes at offset 0.
+func (u *CSSM_APPLE_TP_NAME_OID) AsString() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsOid returns the oid field, read from the backing bytes at offset 8.
+func (u *CSSM_APPLE_TP_NAME_OID) AsOid() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CssmAclEntryPrototype struct {
+	_    [0]uint64
+	data [152]byte
+}
+
+// AsDelegate returns the Delegate field, read from the backing bytes at offset 24.
+func (u *CssmAclEntryPrototype) AsDelegate() int32 {
+	return *(*int32)(unsafe.Pointer(&u.data[24]))
+}
+
+// AsEntryTag returns the EntryTag field, read from the backing bytes at offset 80.
+func (u *CssmAclEntryPrototype) AsEntryTag() [68]int8 {
+	return *(*[68]int8)(unsafe.Pointer(&u.data[80]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CssmAclValidityPeriod struct {
+	_    [0]uint64
+	data [32]byte
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CssmApplecspdlDbChangePasswordParameters struct {
+	_    [0]uint64
+	data [8]byte
+}
+
+// AsAccessCredentials returns the accessCredentials field, read from the backing bytes at offset 0.
+func (u *CssmApplecspdlDbChangePasswordParameters) AsAccessCredentials() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CssmAuthorizationgroup struct {
+	_    [0]uint64
+	data [16]byte
+}
+
+// AsNumberOfAuthTags returns the NumberOfAuthTags field, read from the backing bytes at offset 0.
+func (u *CssmAuthorizationgroup) AsNumberOfAuthTags() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsAuthTags returns the AuthTags field, read from the backing bytes at offset 8.
+func (u *CssmAuthorizationgroup) AsAuthTags() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CssmData struct {
+	_    [0]uint64
+	data [16]byte
+}
+
+// AsLength returns the Length field, read from the backing bytes at offset 0.
+func (u *CssmData) AsLength() uint {
+	return *(*uint)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsData returns the Data field, read from the backing bytes at offset 8.
+func (u *CssmData) AsData() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CssmDbAttributeInfo struct {
+	_    [0]uint64
+	data [32]byte
+}
+
+// AsAttributeNameFormat returns the AttributeNameFormat field, read from the backing bytes at offset 0.
+func (u *CssmDbAttributeInfo) AsAttributeNameFormat() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsAttributeFormat returns the AttributeFormat field, read from the backing bytes at offset 24.
+func (u *CssmDbAttributeInfo) AsAttributeFormat() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[24]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CssmDbIndexInfo struct {
+	_    [0]uint64
+	data [40]byte
+}
+
+// AsIndexType returns the IndexType field, read from the backing bytes at offset 0.
+func (u *CssmDbIndexInfo) AsIndexType() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsIndexedDataLocation returns the IndexedDataLocation field, read from the backing bytes at offset 4.
+func (u *CssmDbIndexInfo) AsIndexedDataLocation() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[4]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CssmEncodedCert struct {
+	_    [0]uint64
+	data [24]byte
+}
+
+// AsCertType returns the CertType field, read from the backing bytes at offset 0.
+func (u *CssmEncodedCert) AsCertType() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsCertEncoding returns the CertEncoding field, read from the backing bytes at offset 4.
+func (u *CssmEncodedCert) AsCertEncoding() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[4]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CssmEncodedCrl struct {
+	_    [0]uint64
+	data [24]byte
+}
+
+// AsCrlType returns the CrlType field, read from the backing bytes at offset 0.
+func (u *CssmEncodedCrl) AsCrlType() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsCrlEncoding returns the CrlEncoding field, read from the backing bytes at offset 4.
+func (u *CssmEncodedCrl) AsCrlEncoding() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[4]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CssmKrName struct {
+	_    [0]uint64
+	data [16]byte
+}
+
+// AsType returns the Type field, read from the backing bytes at offset 0.
+func (u *CssmKrName) AsType() uint8 {
+	return *(*uint8)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsLength returns the Length field, read from the backing bytes at offset 1.
+func (u *CssmKrName) AsLength() uint8 {
+	return *(*uint8)(unsafe.Pointer(&u.data[1]))
+}
+
+// AsName returns the Name field, read from the backing bytes at offset 8.
+func (u *CssmKrName) AsName() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CssmList struct {
+	_    [0]uint64
+	data [24]byte
+}
+
+// AsListType returns the ListType field, read from the backing bytes at offset 0.
+func (u *CssmList) AsListType() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[0]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CssmManagerRegistrationInfo struct {
+	_    [0]uint64
+	data [48]byte
+}
+
+// AsInitialize binds the Initialize C function pointer (offset 0) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmManagerRegistrationInfo) AsInitialize() func(uint32, uint32) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[0]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(uint32, uint32) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsTerminate binds the Terminate C function pointer (offset 8) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmManagerRegistrationInfo) AsTerminate() func() int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[8]))
+	if p == 0 {
+		return nil
+	}
+	var fn func() int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsRegisterDispatchTable binds the RegisterDispatchTable C function pointer (offset 16) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmManagerRegistrationInfo) AsRegisterDispatchTable() func(unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[16]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsDeregisterDispatchTable binds the DeregisterDispatchTable C function pointer (offset 24) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmManagerRegistrationInfo) AsDeregisterDispatchTable() func() int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[24]))
+	if p == 0 {
+		return nil
+	}
+	var fn func() int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsEventNotifyManager binds the EventNotifyManager C function pointer (offset 32) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmManagerRegistrationInfo) AsEventNotifyManager() func(unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[32]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsRefreshFunctionTable binds the RefreshFunctionTable C function pointer (offset 40) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmManagerRegistrationInfo) AsRefreshFunctionTable() func(unsafe.Pointer, uint32) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[40]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, uint32) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CssmSpiAcFuncs struct {
+	_    [0]uint64
+	data [16]byte
+}
+
+// AsAuthCompute binds the AuthCompute C function pointer (offset 0) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiAcFuncs) AsAuthCompute() func(int, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[0]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsPassThrough binds the PassThrough C function pointer (offset 8) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiAcFuncs) AsPassThrough() func(int, int, int, uint64, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[8]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, int, int, uint64, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CssmSpiClFuncs struct {
+	_    [0]uint64
+	data [312]byte
+}
+
+// AsCertCreateTemplate binds the CertCreateTemplate C function pointer (offset 0) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiClFuncs) AsCertCreateTemplate() func(int, uint32, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[0]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint32, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsCertGetAllTemplateFields binds the CertGetAllTemplateFields C function pointer (offset 8) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiClFuncs) AsCertGetAllTemplateFields() func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[8]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsCertSign binds the CertSign C function pointer (offset 16) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiClFuncs) AsCertSign() func(int, uint64, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[16]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint64, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsCertVerify binds the CertVerify C function pointer (offset 24) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiClFuncs) AsCertVerify() func(int, uint64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[24]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsCertVerifyWithKey binds the CertVerifyWithKey C function pointer (offset 32) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiClFuncs) AsCertVerifyWithKey() func(int, uint64, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[32]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint64, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsCertGetFirstFieldValue binds the CertGetFirstFieldValue C function pointer (offset 40) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiClFuncs) AsCertGetFirstFieldValue() func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[40]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsCertGetNextFieldValue binds the CertGetNextFieldValue C function pointer (offset 48) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiClFuncs) AsCertGetNextFieldValue() func(int, int, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[48]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, int, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsCertAbortQuery binds the CertAbortQuery C function pointer (offset 56) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiClFuncs) AsCertAbortQuery() func(int, int) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[56]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, int) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsCertGetKeyInfo binds the CertGetKeyInfo C function pointer (offset 64) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiClFuncs) AsCertGetKeyInfo() func(int, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[64]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsCertGetAllFields binds the CertGetAllFields C function pointer (offset 72) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiClFuncs) AsCertGetAllFields() func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[72]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsFreeFields binds the FreeFields C function pointer (offset 80) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiClFuncs) AsFreeFields() func(int, uint32, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[80]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint32, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsFreeFieldValue binds the FreeFieldValue C function pointer (offset 88) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiClFuncs) AsFreeFieldValue() func(int, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[88]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsCertCache binds the CertCache C function pointer (offset 96) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiClFuncs) AsCertCache() func(int, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[96]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsCertGetFirstCachedFieldValue binds the CertGetFirstCachedFieldValue C function pointer (offset 104) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiClFuncs) AsCertGetFirstCachedFieldValue() func(int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[104]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsCertGetNextCachedFieldValue binds the CertGetNextCachedFieldValue C function pointer (offset 112) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiClFuncs) AsCertGetNextCachedFieldValue() func(int, int, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[112]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, int, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsCertAbortCache binds the CertAbortCache C function pointer (offset 120) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiClFuncs) AsCertAbortCache() func(int, int) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[120]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, int) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsCertGroupToSignedBundle binds the CertGroupToSignedBundle C function pointer (offset 128) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiClFuncs) AsCertGroupToSignedBundle() func(int, uint64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[128]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsCertGroupFromVerifiedBundle binds the CertGroupFromVerifiedBundle C function pointer (offset 136) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiClFuncs) AsCertGroupFromVerifiedBundle() func(int, uint64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[136]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsCertDescribeFormat binds the CertDescribeFormat C function pointer (offset 144) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiClFuncs) AsCertDescribeFormat() func(int, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[144]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsCrlCreateTemplate binds the CrlCreateTemplate C function pointer (offset 152) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiClFuncs) AsCrlCreateTemplate() func(int, uint32, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[152]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint32, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsCrlSetFields binds the CrlSetFields C function pointer (offset 160) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiClFuncs) AsCrlSetFields() func(int, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[160]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsCrlAddCert binds the CrlAddCert C function pointer (offset 168) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiClFuncs) AsCrlAddCert() func(int, uint64, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[168]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint64, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsCrlRemoveCert binds the CrlRemoveCert C function pointer (offset 176) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiClFuncs) AsCrlRemoveCert() func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[176]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsCrlSign binds the CrlSign C function pointer (offset 184) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiClFuncs) AsCrlSign() func(int, uint64, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[184]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint64, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsCrlVerify binds the CrlVerify C function pointer (offset 192) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiClFuncs) AsCrlVerify() func(int, uint64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[192]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsCrlVerifyWithKey binds the CrlVerifyWithKey C function pointer (offset 200) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiClFuncs) AsCrlVerifyWithKey() func(int, uint64, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[200]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint64, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsIsCertInCrl binds the IsCertInCrl C function pointer (offset 208) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiClFuncs) AsIsCertInCrl() func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[208]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsCrlGetFirstFieldValue binds the CrlGetFirstFieldValue C function pointer (offset 216) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiClFuncs) AsCrlGetFirstFieldValue() func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[216]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsCrlGetNextFieldValue binds the CrlGetNextFieldValue C function pointer (offset 224) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiClFuncs) AsCrlGetNextFieldValue() func(int, int, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[224]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, int, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsCrlAbortQuery binds the CrlAbortQuery C function pointer (offset 232) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiClFuncs) AsCrlAbortQuery() func(int, int) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[232]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, int) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsCrlGetAllFields binds the CrlGetAllFields C function pointer (offset 240) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiClFuncs) AsCrlGetAllFields() func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[240]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsCrlCache binds the CrlCache C function pointer (offset 248) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiClFuncs) AsCrlCache() func(int, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[248]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsIsCertInCachedCrl binds the IsCertInCachedCrl C function pointer (offset 256) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiClFuncs) AsIsCertInCachedCrl() func(int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[256]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsCrlGetFirstCachedFieldValue binds the CrlGetFirstCachedFieldValue C function pointer (offset 264) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiClFuncs) AsCrlGetFirstCachedFieldValue() func(int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[264]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsCrlGetNextCachedFieldValue binds the CrlGetNextCachedFieldValue C function pointer (offset 272) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiClFuncs) AsCrlGetNextCachedFieldValue() func(int, int, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[272]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, int, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsCrlGetAllCachedRecordFields binds the CrlGetAllCachedRecordFields C function pointer (offset 280) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiClFuncs) AsCrlGetAllCachedRecordFields() func(int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[280]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsCrlAbortCache binds the CrlAbortCache C function pointer (offset 288) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiClFuncs) AsCrlAbortCache() func(int, int) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[288]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, int) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsCrlDescribeFormat binds the CrlDescribeFormat C function pointer (offset 296) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiClFuncs) AsCrlDescribeFormat() func(int, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[296]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsPassThrough binds the PassThrough C function pointer (offset 304) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiClFuncs) AsPassThrough() func(int, uint64, uint32, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[304]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint64, uint32, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CssmSpiCspFuncs struct {
+	_    [0]uint64
+	data [456]byte
+}
+
+// AsEventNotify binds the EventNotify C function pointer (offset 0) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsEventNotify() func(int, uint32, uint64, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[0]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint32, uint64, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsQuerySize binds the QuerySize C function pointer (offset 8) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsQuerySize() func(int, uint64, unsafe.Pointer, int32, uint32, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[8]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint64, unsafe.Pointer, int32, uint32, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsSignData binds the SignData C function pointer (offset 16) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsSignData() func(int, uint64, unsafe.Pointer, unsafe.Pointer, uint32, uint32, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[16]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint64, unsafe.Pointer, unsafe.Pointer, uint32, uint32, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsSignDataInit binds the SignDataInit C function pointer (offset 24) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsSignDataInit() func(int, uint64, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[24]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint64, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsSignDataUpdate binds the SignDataUpdate C function pointer (offset 32) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsSignDataUpdate() func(int, uint64, unsafe.Pointer, uint32) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[32]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint64, unsafe.Pointer, uint32) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsSignDataFinal binds the SignDataFinal C function pointer (offset 40) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsSignDataFinal() func(int, uint64, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[40]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint64, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsVerifyData binds the VerifyData C function pointer (offset 48) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsVerifyData() func(int, uint64, unsafe.Pointer, unsafe.Pointer, uint32, uint32, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[48]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint64, unsafe.Pointer, unsafe.Pointer, uint32, uint32, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsVerifyDataInit binds the VerifyDataInit C function pointer (offset 56) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsVerifyDataInit() func(int, uint64, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[56]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint64, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsVerifyDataUpdate binds the VerifyDataUpdate C function pointer (offset 64) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsVerifyDataUpdate() func(int, uint64, unsafe.Pointer, uint32) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[64]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint64, unsafe.Pointer, uint32) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsVerifyDataFinal binds the VerifyDataFinal C function pointer (offset 72) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsVerifyDataFinal() func(int, uint64, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[72]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint64, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsDigestData binds the DigestData C function pointer (offset 80) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsDigestData() func(int, uint64, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[80]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint64, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsDigestDataInit binds the DigestDataInit C function pointer (offset 88) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsDigestDataInit() func(int, uint64, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[88]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint64, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsDigestDataUpdate binds the DigestDataUpdate C function pointer (offset 96) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsDigestDataUpdate() func(int, uint64, unsafe.Pointer, uint32) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[96]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint64, unsafe.Pointer, uint32) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsDigestDataClone binds the DigestDataClone C function pointer (offset 104) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsDigestDataClone() func(int, uint64, uint64) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[104]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint64, uint64) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsDigestDataFinal binds the DigestDataFinal C function pointer (offset 112) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsDigestDataFinal() func(int, uint64, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[112]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint64, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsGenerateMAC binds the GenerateMac C function pointer (offset 120) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsGenerateMAC() func(int, uint64, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[120]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint64, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsGenerateMACInit binds the GenerateMacInit C function pointer (offset 128) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsGenerateMACInit() func(int, uint64, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[128]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint64, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsGenerateMACUpdate binds the GenerateMacUpdate C function pointer (offset 136) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsGenerateMACUpdate() func(int, uint64, unsafe.Pointer, uint32) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[136]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint64, unsafe.Pointer, uint32) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsGenerateMACFinal binds the GenerateMacFinal C function pointer (offset 144) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsGenerateMACFinal() func(int, uint64, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[144]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint64, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsVerifyMAC binds the VerifyMac C function pointer (offset 152) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsVerifyMAC() func(int, uint64, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[152]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint64, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsVerifyMACInit binds the VerifyMacInit C function pointer (offset 160) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsVerifyMACInit() func(int, uint64, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[160]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint64, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsVerifyMACUpdate binds the VerifyMacUpdate C function pointer (offset 168) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsVerifyMACUpdate() func(int, uint64, unsafe.Pointer, uint32) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[168]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint64, unsafe.Pointer, uint32) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsVerifyMACFinal binds the VerifyMacFinal C function pointer (offset 176) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsVerifyMACFinal() func(int, uint64, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[176]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint64, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsEncryptData binds the EncryptData C function pointer (offset 184) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsEncryptData() func(int, uint64, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer, uint64) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[184]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint64, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer, uint64) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsEncryptDataInit binds the EncryptDataInit C function pointer (offset 192) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsEncryptDataInit() func(int, uint64, unsafe.Pointer, uint64) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[192]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint64, unsafe.Pointer, uint64) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsEncryptDataUpdate binds the EncryptDataUpdate C function pointer (offset 200) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsEncryptDataUpdate() func(int, uint64, unsafe.Pointer, uint32, unsafe.Pointer, uint32, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[200]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint64, unsafe.Pointer, uint32, unsafe.Pointer, uint32, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsEncryptDataFinal binds the EncryptDataFinal C function pointer (offset 208) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsEncryptDataFinal() func(int, uint64, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[208]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint64, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsDecryptData binds the DecryptData C function pointer (offset 216) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsDecryptData() func(int, uint64, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer, uint64) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[216]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint64, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer, uint64) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsDecryptDataInit binds the DecryptDataInit C function pointer (offset 224) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsDecryptDataInit() func(int, uint64, unsafe.Pointer, uint64) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[224]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint64, unsafe.Pointer, uint64) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsDecryptDataUpdate binds the DecryptDataUpdate C function pointer (offset 232) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsDecryptDataUpdate() func(int, uint64, unsafe.Pointer, uint32, unsafe.Pointer, uint32, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[232]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint64, unsafe.Pointer, uint32, unsafe.Pointer, uint32, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsDecryptDataFinal binds the DecryptDataFinal C function pointer (offset 240) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsDecryptDataFinal() func(int, uint64, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[240]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint64, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsQueryKeySizeInBits binds the QueryKeySizeInBits C function pointer (offset 248) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsQueryKeySizeInBits() func(int, uint64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[248]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsGenerateKey binds the GenerateKey C function pointer (offset 256) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsGenerateKey() func(int, uint64, unsafe.Pointer, uint32, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint64) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[256]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint64, unsafe.Pointer, uint32, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint64) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsGenerateKeyPair binds the GenerateKeyPair C function pointer (offset 264) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsGenerateKeyPair() func(int, uint64, unsafe.Pointer, uint32, uint32, unsafe.Pointer, unsafe.Pointer, uint32, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint64) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[264]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint64, unsafe.Pointer, uint32, uint32, unsafe.Pointer, unsafe.Pointer, uint32, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint64) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsGenerateRandom binds the GenerateRandom C function pointer (offset 272) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsGenerateRandom() func(int, uint64, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[272]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint64, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsGenerateAlgorithmParams binds the GenerateAlgorithmParams C function pointer (offset 280) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsGenerateAlgorithmParams() func(int, uint64, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[280]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint64, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsWrapKey binds the WrapKey C function pointer (offset 288) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsWrapKey() func(int, uint64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint64) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[288]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint64) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsUnwrapKey binds the UnwrapKey C function pointer (offset 296) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsUnwrapKey() func(int, uint64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint64) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[296]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint64) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsDeriveKey binds the DeriveKey C function pointer (offset 304) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsDeriveKey() func(int, uint64, unsafe.Pointer, unsafe.Pointer, uint32, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[304]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint64, unsafe.Pointer, unsafe.Pointer, uint32, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsFreeKey binds the FreeKey C function pointer (offset 312) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsFreeKey() func(int, unsafe.Pointer, unsafe.Pointer, int32) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[312]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, unsafe.Pointer, unsafe.Pointer, int32) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsPassThrough binds the PassThrough C function pointer (offset 320) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsPassThrough() func(int, uint64, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[320]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint64, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsLogin binds the Login C function pointer (offset 328) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsLogin() func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[328]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsLogout binds the Logout C function pointer (offset 336) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsLogout() func(int) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[336]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsChangeLoginACL binds the ChangeLoginAcl C function pointer (offset 344) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsChangeLoginACL() func(int, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[344]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsObtainPrivateKeyFromPublicKey binds the ObtainPrivateKeyFromPublicKey C function pointer (offset 352) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsObtainPrivateKeyFromPublicKey() func(int, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[352]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsRetrieveUniqueID binds the RetrieveUniqueId C function pointer (offset 360) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsRetrieveUniqueID() func(int, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[360]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsRetrieveCounter binds the RetrieveCounter C function pointer (offset 368) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsRetrieveCounter() func(int, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[368]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsVerifyDevice binds the VerifyDevice C function pointer (offset 376) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsVerifyDevice() func(int, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[376]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsGetTimeValue binds the GetTimeValue C function pointer (offset 384) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsGetTimeValue() func(int, uint32, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[384]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint32, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsGetOperationalStatistics binds the GetOperationalStatistics C function pointer (offset 392) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsGetOperationalStatistics() func(int, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[392]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsGetLoginACL binds the GetLoginAcl C function pointer (offset 400) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsGetLoginACL() func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[400]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsGetKeyACL binds the GetKeyAcl C function pointer (offset 408) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsGetKeyACL() func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[408]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsChangeKeyACL binds the ChangeKeyAcl C function pointer (offset 416) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsChangeKeyACL() func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[416]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsGetKeyOwner binds the GetKeyOwner C function pointer (offset 424) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsGetKeyOwner() func(int, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[424]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsChangeKeyOwner binds the ChangeKeyOwner C function pointer (offset 432) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsChangeKeyOwner() func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[432]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsGetLoginOwner binds the GetLoginOwner C function pointer (offset 440) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsGetLoginOwner() func(int, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[440]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsChangeLoginOwner binds the ChangeLoginOwner C function pointer (offset 448) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiCspFuncs) AsChangeLoginOwner() func(int, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[448]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CssmSpiDlFuncs struct {
+	_    [0]uint64
+	data [184]byte
+}
+
+// AsDbOpen binds the DbOpen C function pointer (offset 0) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiDlFuncs) AsDbOpen() func(int, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[0]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsDbClose returns the DbClose field, read from the backing bytes at offset 8.
+func (u *CssmSpiDlFuncs) AsDbClose() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsDbCreate binds the DbCreate C function pointer (offset 16) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiDlFuncs) AsDbCreate() func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[16]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsDbDelete binds the DbDelete C function pointer (offset 24) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiDlFuncs) AsDbDelete() func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[24]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsCreateRelation returns the CreateRelation field, read from the backing bytes at offset 32.
+func (u *CssmSpiDlFuncs) AsCreateRelation() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[32]))
+}
+
+// AsDestroyRelation returns the DestroyRelation field, read from the backing bytes at offset 40.
+func (u *CssmSpiDlFuncs) AsDestroyRelation() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[40]))
+}
+
+// AsAuthenticate returns the Authenticate field, read from the backing bytes at offset 48.
+func (u *CssmSpiDlFuncs) AsAuthenticate() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[48]))
+}
+
+// AsGetDbACL returns the GetDbAcl field, read from the backing bytes at offset 56.
+func (u *CssmSpiDlFuncs) AsGetDbACL() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[56]))
+}
+
+// AsChangeDbACL returns the ChangeDbAcl field, read from the backing bytes at offset 64.
+func (u *CssmSpiDlFuncs) AsChangeDbACL() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[64]))
+}
+
+// AsGetDbOwner returns the GetDbOwner field, read from the backing bytes at offset 72.
+func (u *CssmSpiDlFuncs) AsGetDbOwner() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[72]))
+}
+
+// AsChangeDbOwner returns the ChangeDbOwner field, read from the backing bytes at offset 80.
+func (u *CssmSpiDlFuncs) AsChangeDbOwner() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[80]))
+}
+
+// AsGetDbNames binds the GetDbNames C function pointer (offset 88) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiDlFuncs) AsGetDbNames() func(int, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[88]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsGetDbNameFromHandle returns the GetDbNameFromHandle field, read from the backing bytes at offset 96.
+func (u *CssmSpiDlFuncs) AsGetDbNameFromHandle() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[96]))
+}
+
+// AsFreeNameList binds the FreeNameList C function pointer (offset 104) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiDlFuncs) AsFreeNameList() func(int, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[104]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsDataInsert returns the DataInsert field, read from the backing bytes at offset 112.
+func (u *CssmSpiDlFuncs) AsDataInsert() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[112]))
+}
+
+// AsDataDelete returns the DataDelete field, read from the backing bytes at offset 120.
+func (u *CssmSpiDlFuncs) AsDataDelete() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[120]))
+}
+
+// AsDataModify returns the DataModify field, read from the backing bytes at offset 128.
+func (u *CssmSpiDlFuncs) AsDataModify() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[128]))
+}
+
+// AsDataGetFirst returns the DataGetFirst field, read from the backing bytes at offset 136.
+func (u *CssmSpiDlFuncs) AsDataGetFirst() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[136]))
+}
+
+// AsDataGetNext returns the DataGetNext field, read from the backing bytes at offset 144.
+func (u *CssmSpiDlFuncs) AsDataGetNext() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[144]))
+}
+
+// AsDataAbortQuery returns the DataAbortQuery field, read from the backing bytes at offset 152.
+func (u *CssmSpiDlFuncs) AsDataAbortQuery() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[152]))
+}
+
+// AsDataGetFromUniqueRecordID returns the DataGetFromUniqueRecordId field, read from the backing bytes at offset 160.
+func (u *CssmSpiDlFuncs) AsDataGetFromUniqueRecordID() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[160]))
+}
+
+// AsFreeUniqueRecord returns the FreeUniqueRecord field, read from the backing bytes at offset 168.
+func (u *CssmSpiDlFuncs) AsFreeUniqueRecord() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[168]))
+}
+
+// AsPassThrough returns the PassThrough field, read from the backing bytes at offset 176.
+func (u *CssmSpiDlFuncs) AsPassThrough() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[176]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CssmSpiKrFuncs struct {
+	_    [0]uint64
+	data [72]byte
+}
+
+// AsRegistrationRequest binds the RegistrationRequest C function pointer (offset 0) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiKrFuncs) AsRegistrationRequest() func(uint32, uint64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[0]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(uint32, uint64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsRegistrationRetrieve binds the RegistrationRetrieve C function pointer (offset 8) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiKrFuncs) AsRegistrationRetrieve() func(uint32, int, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[8]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(uint32, int, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsGenerateRecoveryFields binds the GenerateRecoveryFields C function pointer (offset 16) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiKrFuncs) AsGenerateRecoveryFields() func(uint32, uint64, unsafe.Pointer, uint64, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[16]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(uint32, uint64, unsafe.Pointer, uint64, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsProcessRecoveryFields binds the ProcessRecoveryFields C function pointer (offset 24) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiKrFuncs) AsProcessRecoveryFields() func(uint32, uint64, unsafe.Pointer, uint64, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[24]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(uint32, uint64, unsafe.Pointer, uint64, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsRecoveryRequest binds the RecoveryRequest C function pointer (offset 32) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiKrFuncs) AsRecoveryRequest() func(uint32, uint64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[32]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(uint32, uint64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsRecoveryRetrieve binds the RecoveryRetrieve C function pointer (offset 40) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiKrFuncs) AsRecoveryRetrieve() func(uint32, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[40]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(uint32, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsGetRecoveredObject binds the GetRecoveredObject C function pointer (offset 48) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiKrFuncs) AsGetRecoveredObject() func(uint32, int, uint32, int, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[48]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(uint32, int, uint32, int, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsRecoveryRequestAbort binds the RecoveryRequestAbort C function pointer (offset 56) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiKrFuncs) AsRecoveryRequestAbort() func(uint32, int) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[56]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(uint32, int) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsPassThrough binds the PassThrough C function pointer (offset 64) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiKrFuncs) AsPassThrough() func(uint32, uint64, unsafe.Pointer, uint64, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[64]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(uint32, uint64, unsafe.Pointer, uint64, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CssmSpiTpFuncs struct {
+	_    [0]uint64
+	data [184]byte
+}
+
+// AsSubmitCredRequest binds the SubmitCredRequest C function pointer (offset 0) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiTpFuncs) AsSubmitCredRequest() func(int, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[0]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsRetrieveCredResult binds the RetrieveCredResult C function pointer (offset 8) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiTpFuncs) AsRetrieveCredResult() func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[8]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsConfirmCredResult binds the ConfirmCredResult C function pointer (offset 16) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiTpFuncs) AsConfirmCredResult() func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[16]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsReceiveConfirmation binds the ReceiveConfirmation C function pointer (offset 24) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiTpFuncs) AsReceiveConfirmation() func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[24]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsCertReclaimKey binds the CertReclaimKey C function pointer (offset 32) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiTpFuncs) AsCertReclaimKey() func(int, unsafe.Pointer, uint32, uint64, int, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[32]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, unsafe.Pointer, uint32, uint64, int, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsCertReclaimAbort binds the CertReclaimAbort C function pointer (offset 40) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiTpFuncs) AsCertReclaimAbort() func(int, uint64) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[40]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint64) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsFormRequest binds the FormRequest C function pointer (offset 48) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiTpFuncs) AsFormRequest() func(int, unsafe.Pointer, uint32, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[48]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, unsafe.Pointer, uint32, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsFormSubmit binds the FormSubmit C function pointer (offset 56) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiTpFuncs) AsFormSubmit() func(int, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[56]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsCertGroupVerify binds the CertGroupVerify C function pointer (offset 64) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiTpFuncs) AsCertGroupVerify() func(int, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[64]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsCertCreateTemplate binds the CertCreateTemplate C function pointer (offset 72) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiTpFuncs) AsCertCreateTemplate() func(int, int, uint32, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[72]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, int, uint32, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsCertGetAllTemplateFields binds the CertGetAllTemplateFields C function pointer (offset 80) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiTpFuncs) AsCertGetAllTemplateFields() func(int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[80]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsCertSign binds the CertSign C function pointer (offset 88) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiTpFuncs) AsCertSign() func(int, int, uint64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[88]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, int, uint64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsCrlVerify binds the CrlVerify C function pointer (offset 96) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiTpFuncs) AsCrlVerify() func(int, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[96]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsCrlCreateTemplate binds the CrlCreateTemplate C function pointer (offset 104) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiTpFuncs) AsCrlCreateTemplate() func(int, int, uint32, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[104]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, int, uint32, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsCertRevoke binds the CertRevoke C function pointer (offset 112) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiTpFuncs) AsCertRevoke() func(int, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[112]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsCertRemoveFromCrlTemplate binds the CertRemoveFromCrlTemplate C function pointer (offset 120) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiTpFuncs) AsCertRemoveFromCrlTemplate() func(int, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[120]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsCrlSign binds the CrlSign C function pointer (offset 128) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiTpFuncs) AsCrlSign() func(int, int, uint64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[128]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, int, uint64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsApplyCrlToDb binds the ApplyCrlToDb C function pointer (offset 136) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiTpFuncs) AsApplyCrlToDb() func(int, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[136]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsCertGroupConstruct binds the CertGroupConstruct C function pointer (offset 144) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiTpFuncs) AsCertGroupConstruct() func(int, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[144]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsCertGroupPrune binds the CertGroupPrune C function pointer (offset 152) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiTpFuncs) AsCertGroupPrune() func(int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[152]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsCertGroupToTupleGroup binds the CertGroupToTupleGroup C function pointer (offset 160) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiTpFuncs) AsCertGroupToTupleGroup() func(int, int, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[160]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, int, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsTupleGroupToCertGroup binds the TupleGroupToCertGroup C function pointer (offset 168) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiTpFuncs) AsTupleGroupToCertGroup() func(int, int, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[168]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, int, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsPassThrough binds the PassThrough C function pointer (offset 176) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmSpiTpFuncs) AsPassThrough() func(int, int, uint64, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[176]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, int, uint64, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CssmStateFuncs struct {
+	_    [0]uint64
+	data [48]byte
+}
+
+// AsCssmGetAttachFunctions binds the cssm_GetAttachFunctions C function pointer (offset 0) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmStateFuncs) AsCssmGetAttachFunctions() func(int, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[0]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsCssmReleaseAttachFunctions binds the cssm_ReleaseAttachFunctions C function pointer (offset 8) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmStateFuncs) AsCssmReleaseAttachFunctions() func(int) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[8]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsCssmGetAppMemoryFunctions binds the cssm_GetAppMemoryFunctions C function pointer (offset 16) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmStateFuncs) AsCssmGetAppMemoryFunctions() func(int, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[16]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsCssmIsFuncCallValid binds the cssm_IsFuncCallValid C function pointer (offset 24) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmStateFuncs) AsCssmIsFuncCallValid() func(int, unsafe.Pointer, unsafe.Pointer, uint64, unsafe.Pointer, uint32, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[24]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, unsafe.Pointer, unsafe.Pointer, uint64, unsafe.Pointer, uint32, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsCssmDeregisterManagerServices binds the cssm_DeregisterManagerServices C function pointer (offset 32) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmStateFuncs) AsCssmDeregisterManagerServices() func(unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[32]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsCssmDeliverModuleManagerEvent binds the cssm_DeliverModuleManagerEvent C function pointer (offset 40) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CssmStateFuncs) AsCssmDeliverModuleManagerEvent() func(unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[40]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CssmTpPolicyinfo struct {
+	_    [0]uint64
+	data [24]byte
+}
+
+// AsNumberOfPolicyIds returns the NumberOfPolicyIds field, read from the backing bytes at offset 0.
+func (u *CssmTpPolicyinfo) AsNumberOfPolicyIds() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsPolicyControl returns the PolicyControl field, read from the backing bytes at offset 16.
+func (u *CssmTpPolicyinfo) AsPolicyControl() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[16]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CssmX509ExtensionTagAndValue struct {
+	_    [0]uint64
+	data [24]byte
+}
+
+// AsType returns the type field, read from the backing bytes at offset 0.
+func (u *CssmX509ExtensionTagAndValue) AsType() uint8 {
+	return *(*uint8)(unsafe.Pointer(&u.data[0]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CssmX509Extensions struct {
+	_    [0]uint64
+	data [16]byte
+}
+
+// AsNumberOfExtensions returns the numberOfExtensions field, read from the backing bytes at offset 0.
+func (u *CssmX509Extensions) AsNumberOfExtensions() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[0]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CssmX509Name struct {
+	_    [0]uint64
+	data [16]byte
+}
+
+// AsNumberOfRDNs returns the numberOfRDNs field, read from the backing bytes at offset 0.
+func (u *CssmX509Name) AsNumberOfRDNs() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[0]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CssmX509TbsCertificate struct {
+	_    [0]uint64
+	data [240]byte
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CssmX509TbsCertlist struct {
+	_    [0]uint64
+	data [136]byte
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CssmX509Time struct {
+	_    [0]uint64
+	data [24]byte
+}
+
+// AsTimeType returns the timeType field, read from the backing bytes at offset 0.
+func (u *CssmX509Time) AsTimeType() uint8 {
+	return *(*uint8)(unsafe.Pointer(&u.data[0]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type MdsFuncs struct {
+	_    [0]uint64
+	data [120]byte
+}
+
+// AsDbOpen binds the DbOpen C function pointer (offset 0) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *MdsFuncs) AsDbOpen() func(int, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[0]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsDbClose returns the DbClose field, read from the backing bytes at offset 8.
+func (u *MdsFuncs) AsDbClose() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsGetDbNames binds the GetDbNames C function pointer (offset 16) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *MdsFuncs) AsGetDbNames() func(int, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[16]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsGetDbNameFromHandle returns the GetDbNameFromHandle field, read from the backing bytes at offset 24.
+func (u *MdsFuncs) AsGetDbNameFromHandle() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[24]))
+}
+
+// AsFreeNameList binds the FreeNameList C function pointer (offset 32) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *MdsFuncs) AsFreeNameList() func(int, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[32]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsDataInsert returns the DataInsert field, read from the backing bytes at offset 40.
+func (u *MdsFuncs) AsDataInsert() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[40]))
+}
+
+// AsDataDelete returns the DataDelete field, read from the backing bytes at offset 48.
+func (u *MdsFuncs) AsDataDelete() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[48]))
+}
+
+// AsDataModify returns the DataModify field, read from the backing bytes at offset 56.
+func (u *MdsFuncs) AsDataModify() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[56]))
+}
+
+// AsDataGetFirst returns the DataGetFirst field, read from the backing bytes at offset 64.
+func (u *MdsFuncs) AsDataGetFirst() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[64]))
+}
+
+// AsDataGetNext returns the DataGetNext field, read from the backing bytes at offset 72.
+func (u *MdsFuncs) AsDataGetNext() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[72]))
+}
+
+// AsDataAbortQuery returns the DataAbortQuery field, read from the backing bytes at offset 80.
+func (u *MdsFuncs) AsDataAbortQuery() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[80]))
+}
+
+// AsDataGetFromUniqueRecordID returns the DataGetFromUniqueRecordId field, read from the backing bytes at offset 88.
+func (u *MdsFuncs) AsDataGetFromUniqueRecordID() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[88]))
+}
+
+// AsFreeUniqueRecord returns the FreeUniqueRecord field, read from the backing bytes at offset 96.
+func (u *MdsFuncs) AsFreeUniqueRecord() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[96]))
+}
+
+// AsCreateRelation returns the CreateRelation field, read from the backing bytes at offset 104.
+func (u *MdsFuncs) AsCreateRelation() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[104]))
+}
+
+// AsDestroyRelation returns the DestroyRelation field, read from the backing bytes at offset 112.
+func (u *MdsFuncs) AsDestroyRelation() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[112]))
+}
+
+// A structure identifying an ASN.1 algorithm by its OID, and its corresponding parameters.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type SecAsn1AlgId struct {
+	_    [0]uint64
+	data [32]byte
+}
+
+// A structure containing a public key and its associated algorithm.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type SecAsn1PubKeyInfo struct {
+	_    [0]uint64
+	data [48]byte
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type X509Validity struct {
+	_    [0]uint64
+	data [48]byte
+}

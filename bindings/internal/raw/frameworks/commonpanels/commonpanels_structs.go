@@ -46,7 +46,7 @@ type NColorPickerInfo struct {
 
 type NPMColor struct {
 	Profile unsafe.Pointer
-	Color   unsafe.Pointer
+	Color   qd.CMColor
 }
 
 // OpaqueFCFontDescriptorRef is an opaque type.

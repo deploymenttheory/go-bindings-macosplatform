@@ -44,13 +44,6 @@ type VImageAffineTransformDouble struct {
 	Ty float64
 }
 
-type VImageBuffer struct {
-	Data     unsafe.Pointer
-	Height   uint
-	Width    uint
-	RowBytes uint
-}
-
 // A pixel format A vImage_CGImageFormat describes the ordering of the color channels, how many there are, the size and type of the data in the color channels and whether the data is premultiplied by alpha or not. This format mirrors the image format descriptors used by CoreGraphics to create things like CGImageRef and CGBitmapContextRef. This vImage_CGImageFormat: <pre>
 type VImageCGImageFormat struct {
 	BitsPerComponent uint32
@@ -166,3 +159,31 @@ type VImageMultidimensionalTable struct{ obj.Object }
 // IsNil reports whether VImageMultidimensionalTable is a NULL handle (it wraps no object). Call
 // it before using a returned handle; a nil handle's methods panic.
 func (h VImageMultidimensionalTable) IsNil() bool { return h.Object == nil }
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type VImageBuffer struct {
+	_    [0]uint64
+	data [32]byte
+}
+
+// AsData returns the data field, read from the backing bytes at offset 0.
+func (u *VImageBuffer) AsData() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsHeight returns the height field, read from the backing bytes at offset 8.
+func (u *VImageBuffer) AsHeight() uint {
+	return *(*uint)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsWidth returns the width field, read from the backing bytes at offset 16.
+func (u *VImageBuffer) AsWidth() uint {
+	return *(*uint)(unsafe.Pointer(&u.data[16]))
+}
+
+// AsRowBytes returns the rowBytes field, read from the backing bytes at offset 24.
+func (u *VImageBuffer) AsRowBytes() uint {
+	return *(*uint)(unsafe.Pointer(&u.data[24]))
+}

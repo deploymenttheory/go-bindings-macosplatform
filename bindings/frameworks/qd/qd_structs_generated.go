@@ -8,7 +8,6 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/commonpanels"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
@@ -77,6 +76,11 @@ type CMAdaptationMatrixType struct {
 	AdaptationMatrix [9]int32
 }
 
+type CMAppleProfileHeader struct {
+	Cm2 CM2Header
+	Cm4 CM4Header
+}
+
 type CMBitmap struct {
 	Image     unsafe.Pointer
 	Width     uint
@@ -86,11 +90,6 @@ type CMBitmap struct {
 	Space     uint32
 	User1     uint32
 	User2     uint32
-}
-
-type CMBufferLocation struct {
-	Buffer unsafe.Pointer
-	Size   uint32
 }
 
 type CMCMYColor struct {
@@ -104,6 +103,24 @@ type CMCMYKColor struct {
 	Magenta uint16
 	Yellow  uint16
 	Black   uint16
+}
+
+type CMColor struct {
+	Rgb        CMRGBColor
+	Hsv        CMHSVColor
+	Hls        CMHLSColor
+	XYZ        CMXYZColor
+	Lab        CMLabColor
+	Luv        CMLuvColor
+	Yxy        CMYxyColor
+	Cmyk       CMCMYKColor
+	Cmy        CMCMYColor
+	Gray       CMGrayColor
+	Mc5        CMMultichannel5Color
+	Mc6        CMMultichannel6Color
+	Mc7        CMMultichannel7Color
+	Mc8        CMMultichannel8Color
+	NamedColor CMNamedColor
 }
 
 type CMConcatProfileSet struct {
@@ -158,14 +175,6 @@ type CMDeviceProfileArray struct {
 	Profiles     [1]CMDeviceProfileInfo
 }
 
-type CMDeviceProfileInfo struct {
-	DataVersion uint32
-	ProfileID   uint32
-	ProfileLoc  CMProfileLocation
-	ProfileName unsafe.Pointer
-	Reserved    uint32
-}
-
 type CMDeviceScope struct {
 	DeviceUser unsafe.Pointer
 	DeviceHost unsafe.Pointer
@@ -208,10 +217,6 @@ type CMHSVColor struct {
 	Hue        uint16
 	Saturation uint16
 	Value      uint16
-}
-
-type CMHandleLocation struct {
-	H unsafe.Pointer
 }
 
 type CMIntentCRDVMSize struct {
@@ -428,11 +433,6 @@ type CMProfileIterateData struct {
 	Digest           unsafe.Pointer
 }
 
-type CMProfileLocation struct {
-	LocType int16
-	U       unsafe.Pointer
-}
-
 type CMProfileSequenceDescType struct {
 	TypeDescriptor uint32
 	Reserved       uint32
@@ -618,11 +618,6 @@ type CQDProcs struct {
 	NewProc6          unsafe.Pointer
 }
 
-type ColorSpec struct {
-	Value int16
-	Rgb   commonpanels.RGBColor
-}
-
 type ColorTable struct {
 	CtSeed  int32
 	CtFlags int16
@@ -736,12 +731,6 @@ type NCMConcatProfileSet struct {
 	FlagsMask    uint32
 	ProfileCount uint32
 	ProfileSpecs [1]NCMConcatProfileSpec
-}
-
-type NCMConcatProfileSpec struct {
-	RenderingIntent uint32
-	TransformTag    uint32
-	Profile         unsafe.Pointer
 }
 
 type NCMDeviceProfileInfo struct {
@@ -905,3 +894,104 @@ type WindowPtr struct{ obj.Object }
 // IsNil reports whether WindowPtr is a NULL handle (it wraps no object). Call
 // it before using a returned handle; a nil handle's methods panic.
 func (h WindowPtr) IsNil() bool { return h.Object == nil }
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CMBufferLocation struct {
+	_    [0]uint64
+	data [16]byte
+}
+
+// AsBuffer returns the buffer field, read from the backing bytes at offset 0.
+func (u *CMBufferLocation) AsBuffer() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsSize returns the size field, read from the backing bytes at offset 8.
+func (u *CMBufferLocation) AsSize() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[8]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CMDeviceProfileInfo struct {
+	_    [0]uint64
+	data [1056]byte
+}
+
+// AsDataVersion returns the dataVersion field, read from the backing bytes at offset 0.
+func (u *CMDeviceProfileInfo) AsDataVersion() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsProfileID returns the profileID field, read from the backing bytes at offset 4.
+func (u *CMDeviceProfileInfo) AsProfileID() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[4]))
+}
+
+// AsReserved returns the reserved field, read from the backing bytes at offset 1048.
+func (u *CMDeviceProfileInfo) AsReserved() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[1048]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CMHandleLocation struct {
+	_    [0]uint64
+	data [8]byte
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CMProfLoc struct {
+	_    [0]uint64
+	data [1024]byte
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CMProfileLocation struct {
+	_    [0]uint64
+	data [1032]byte
+}
+
+// AsLocType returns the locType field, read from the backing bytes at offset 0.
+func (u *CMProfileLocation) AsLocType() int16 {
+	return *(*int16)(unsafe.Pointer(&u.data[0]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type ColorSpec struct {
+	_    [0]uint16
+	data [8]byte
+}
+
+// AsValue returns the value field, read from the backing bytes at offset 0.
+func (u *ColorSpec) AsValue() int16 {
+	return *(*int16)(unsafe.Pointer(&u.data[0]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type NCMConcatProfileSpec struct {
+	_    [0]uint64
+	data [16]byte
+}
+
+// AsRenderingIntent returns the renderingIntent field, read from the backing bytes at offset 0.
+func (u *NCMConcatProfileSpec) AsRenderingIntent() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsTransformTag returns the transformTag field, read from the backing bytes at offset 4.
+func (u *NCMConcatProfileSpec) AsTransformTag() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[4]))
+}

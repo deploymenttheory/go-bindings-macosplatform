@@ -164,13 +164,17 @@
         },
         {
           "name": "tclIntStubs",
-          "objc_type": "struct TclIntStubs *"
+          "objc_type": "struct TclIntStubs *",
+          "offset": 8
         },
         {
           "name": "tclIntPlatStubs",
-          "objc_type": "struct TclIntPlatStubs *"
+          "objc_type": "struct TclIntPlatStubs *",
+          "offset": 16
         }
       ],
+      "size": 24,
+      "align": 8,
       "availability": {},
       "sdk_file": "Tcl/tclDecls.h",
       "sdk_line": 3384
@@ -2720,9 +2724,12 @@
         },
         {
           "name": "value",
-          "objc_type": "const char *"
+          "objc_type": "const char *",
+          "offset": 8
         }
       ],
+      "size": 16,
+      "align": 8,
       "availability": {},
       "sdk_file": "Tcl/Tcl.h",
       "sdk_line": 2096
@@ -2823,9 +2830,12 @@
         },
         {
           "name": "nextPtr",
-          "objc_type": "struct Tcl_Event *"
+          "objc_type": "struct Tcl_Event *",
+          "offset": 8
         }
       ],
+      "size": 16,
+      "align": 8,
       "availability": {},
       "sdk_file": "Tcl/Tcl.h",
       "sdk_line": 1240
@@ -3186,33 +3196,42 @@
         },
         {
           "name": "waitForEventProc",
-          "objc_type": "Tcl_WaitForEventProc *"
+          "objc_type": "Tcl_WaitForEventProc *",
+          "offset": 8
         },
         {
           "name": "createFileHandlerProc",
-          "objc_type": "Tcl_CreateFileHandlerProc *"
+          "objc_type": "Tcl_CreateFileHandlerProc *",
+          "offset": 16
         },
         {
           "name": "deleteFileHandlerProc",
-          "objc_type": "Tcl_DeleteFileHandlerProc *"
+          "objc_type": "Tcl_DeleteFileHandlerProc *",
+          "offset": 24
         },
         {
           "name": "initNotifierProc",
-          "objc_type": "Tcl_InitNotifierProc *"
+          "objc_type": "Tcl_InitNotifierProc *",
+          "offset": 32
         },
         {
           "name": "finalizeNotifierProc",
-          "objc_type": "Tcl_FinalizeNotifierProc *"
+          "objc_type": "Tcl_FinalizeNotifierProc *",
+          "offset": 40
         },
         {
           "name": "alertNotifierProc",
-          "objc_type": "Tcl_AlertNotifierProc *"
+          "objc_type": "Tcl_AlertNotifierProc *",
+          "offset": 48
         },
         {
           "name": "serviceModeHookProc",
-          "objc_type": "Tcl_ServiceModeHookProc *"
+          "objc_type": "Tcl_ServiceModeHookProc *",
+          "offset": 56
         }
       ],
+      "size": 64,
+      "align": 8,
       "availability": {},
       "sdk_file": "Tcl/Tcl.h",
       "sdk_line": 1771
@@ -3252,21 +3271,27 @@
         },
         {
           "name": "freeIntRepProc",
-          "objc_type": "Tcl_FreeInternalRepProc *"
+          "objc_type": "Tcl_FreeInternalRepProc *",
+          "offset": 8
         },
         {
           "name": "dupIntRepProc",
-          "objc_type": "Tcl_DupInternalRepProc *"
+          "objc_type": "Tcl_DupInternalRepProc *",
+          "offset": 16
         },
         {
           "name": "updateStringProc",
-          "objc_type": "Tcl_UpdateStringProc *"
+          "objc_type": "Tcl_UpdateStringProc *",
+          "offset": 24
         },
         {
           "name": "setFromAnyProc",
-          "objc_type": "Tcl_SetFromAnyProc *"
+          "objc_type": "Tcl_SetFromAnyProc *",
+          "offset": 32
         }
       ],
+      "size": 40,
+      "align": 8,
       "availability": {},
       "sdk_file": "Tcl/Tcl.h",
       "sdk_line": 657
@@ -3474,6 +3499,7 @@
         }
       ],
       "size": 24,
+      "align": 8,
       "availability": {},
       "sdk_file": "Tcl/Tcl.h",
       "sdk_line": 1853

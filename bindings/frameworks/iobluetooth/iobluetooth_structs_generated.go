@@ -653,11 +653,6 @@ type IOBluetoothDeviceSearchDeviceAttributes struct {
 	DeviceClassMinor  uint32
 }
 
-type IOBluetoothL2CAPChannelDataBlock struct {
-	DataPtr  unsafe.Pointer
-	DataSize uint
-}
-
 type IOBluetoothL2CAPChannelEvent struct {
 	EventType IOBluetoothL2CAPChannelEventType
 	U         unsafe.Pointer
@@ -684,16 +679,6 @@ type OBEXConnectCommandData struct {
 	MaxPacketSize    uint16
 	Version          uint8
 	Flags            uint8
-}
-
-// Part of the OBEXSessionEvent structure.
-type OBEXConnectCommandResponseData struct {
-	ServerResponseOpCode uint8
-	HeaderDataPtr        unsafe.Pointer
-	HeaderDataLength     uint
-	MaxPacketSize        uint16
-	Version              uint8
-	Flags                uint8
 }
 
 // Part of the OBEXSessionEvent structure.
@@ -858,3 +843,60 @@ type PrivOBEXSessionDataRef struct{ obj.Object }
 // IsNil reports whether PrivOBEXSessionDataRef is a NULL handle (it wraps no object). Call
 // it before using a returned handle; a nil handle's methods panic.
 func (h PrivOBEXSessionDataRef) IsNil() bool { return h.Object == nil }
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type IOBluetoothL2CAPChannelDataBlock struct {
+	_    [0]uint64
+	data [16]byte
+}
+
+// AsDataPtr returns the dataPtr field, read from the backing bytes at offset 0.
+func (u *IOBluetoothL2CAPChannelDataBlock) AsDataPtr() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsDataSize returns the dataSize field, read from the backing bytes at offset 8.
+func (u *IOBluetoothL2CAPChannelDataBlock) AsDataSize() uint {
+	return *(*uint)(unsafe.Pointer(&u.data[8]))
+}
+
+// Part of the OBEXSessionEvent structure.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type OBEXConnectCommandResponseData struct {
+	_    [0]uint64
+	data [32]byte
+}
+
+// AsServerResponseOpCode returns the serverResponseOpCode field, read from the backing bytes at offset 0.
+func (u *OBEXConnectCommandResponseData) AsServerResponseOpCode() uint8 {
+	return *(*uint8)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsHeaderDataPtr returns the headerDataPtr field, read from the backing bytes at offset 8.
+func (u *OBEXConnectCommandResponseData) AsHeaderDataPtr() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsHeaderDataLength returns the headerDataLength field, read from the backing bytes at offset 16.
+func (u *OBEXConnectCommandResponseData) AsHeaderDataLength() uint {
+	return *(*uint)(unsafe.Pointer(&u.data[16]))
+}
+
+// AsMaxPacketSize returns the maxPacketSize field, read from the backing bytes at offset 24.
+func (u *OBEXConnectCommandResponseData) AsMaxPacketSize() uint16 {
+	return *(*uint16)(unsafe.Pointer(&u.data[24]))
+}
+
+// AsVersion returns the version field, read from the backing bytes at offset 26.
+func (u *OBEXConnectCommandResponseData) AsVersion() uint8 {
+	return *(*uint8)(unsafe.Pointer(&u.data[26]))
+}
+
+// AsFlags returns the flags field, read from the backing bytes at offset 27.
+func (u *OBEXConnectCommandResponseData) AsFlags() uint8 {
+	return *(*uint8)(unsafe.Pointer(&u.data[27]))
+}

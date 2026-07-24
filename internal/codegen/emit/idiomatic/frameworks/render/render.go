@@ -88,6 +88,16 @@ func TypedefAliases(aliases []view.TypedefAlias) ([]byte, error) {
 	return buf.Bytes(), nil
 }
 
+// ByteArrayStructs renders byte-array backing structs (`type X struct{ data
+// [N]byte }`) plus their typed accessor methods for a package.
+func ByteArrayStructs(structs []view.ByteArrayStruct) ([]byte, error) {
+	var buf bytes.Buffer
+	if err := templates.ExecuteTemplate(&buf, "bytearray_structs", structs); err != nil {
+		return nil, fmt.Errorf("render byte-array structs: %w", err)
+	}
+	return buf.Bytes(), nil
+}
+
 // HandleTypes renders distinct named handle types (`type CFArrayRef struct{
 // obj.Object }` plus an IsNil method) for a package as a Go source fragment.
 func HandleTypes(handles []view.HandleType) ([]byte, error) {

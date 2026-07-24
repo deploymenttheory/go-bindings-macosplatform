@@ -144,17 +144,6 @@ type TW_GRAYRESPONSE struct {
 	Response [1]TW_ELEMENT8
 }
 
-type TW_IDENTITY struct {
-	ID              unsafe.Pointer
-	Version         TW_VERSION
-	ProtocolMajor   uint16
-	ProtocolMinor   uint16
-	SupportedGroups uint32
-	Manufacturer    [34]uint8
-	ProductFamily   [34]uint8
-	ProductName     [34]uint8
-}
-
 type TW_IMAGEINFO struct {
 	XResolution     TW_FIX32
 	YResolution     TW_FIX32
@@ -204,12 +193,6 @@ type TW_JPEGCOMPRESSION struct {
 	HuffmanMap       [4]uint16
 	HuffmanDC        [2]TW_MEMORY
 	HuffmanAC        [2]TW_MEMORY
-}
-
-type TW_MEMORY struct {
-	Flags  uint32
-	Length uint32
-	TheMem unsafe.Pointer
 }
 
 type TW_ONEVALUE struct {
@@ -445,3 +428,59 @@ type PTWUSERINTERFACE = *TW_USERINTERFACE
 
 // PTWVERSION is an alias for the TW_VERSION value type.
 type PTWVERSION = *TW_VERSION
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type TW_IDENTITY struct {
+	_    [0]uint64
+	data [168]byte
+}
+
+// AsProtocolMajor returns the ProtocolMajor field, read from the backing bytes at offset 50.
+func (u *TW_IDENTITY) AsProtocolMajor() uint16 {
+	return *(*uint16)(unsafe.Pointer(&u.data[50]))
+}
+
+// AsProtocolMinor returns the ProtocolMinor field, read from the backing bytes at offset 52.
+func (u *TW_IDENTITY) AsProtocolMinor() uint16 {
+	return *(*uint16)(unsafe.Pointer(&u.data[52]))
+}
+
+// AsSupportedGroups returns the SupportedGroups field, read from the backing bytes at offset 56.
+func (u *TW_IDENTITY) AsSupportedGroups() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[56]))
+}
+
+// AsManufacturer returns the Manufacturer field, read from the backing bytes at offset 60.
+func (u *TW_IDENTITY) AsManufacturer() [34]uint8 {
+	return *(*[34]uint8)(unsafe.Pointer(&u.data[60]))
+}
+
+// AsProductFamily returns the ProductFamily field, read from the backing bytes at offset 94.
+func (u *TW_IDENTITY) AsProductFamily() [34]uint8 {
+	return *(*[34]uint8)(unsafe.Pointer(&u.data[94]))
+}
+
+// AsProductName returns the ProductName field, read from the backing bytes at offset 128.
+func (u *TW_IDENTITY) AsProductName() [34]uint8 {
+	return *(*[34]uint8)(unsafe.Pointer(&u.data[128]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type TW_MEMORY struct {
+	_    [0]uint64
+	data [16]byte
+}
+
+// AsFlags returns the Flags field, read from the backing bytes at offset 0.
+func (u *TW_MEMORY) AsFlags() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsLength returns the Length field, read from the backing bytes at offset 4.
+func (u *TW_MEMORY) AsLength() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[4]))
+}

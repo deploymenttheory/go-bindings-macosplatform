@@ -3424,6 +3424,7 @@
         }
       ],
       "size": 32,
+      "align": 8,
       "availability": {},
       "sdk_file": "Metal/MTLRenderPass.h",
       "sdk_line": 12

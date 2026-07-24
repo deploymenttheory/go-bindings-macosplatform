@@ -18,6 +18,38 @@ type NDR_record_t struct {
 	Reserved2    uint8
 }
 
+// [mach_host.h:1274]
+type ReplyUnionMachHostSubsystem struct {
+	Reply_host_info                                          ReplyHostInfoT
+	Reply_host_kernel_version                                ReplyHostKernelVersionT
+	Reply__host_page_size                                    ReplyHostPageSizeT
+	Reply_mach_memory_object_memory_entry                    ReplyMachMemoryObjectMemoryEntryT
+	Reply_host_processor_info                                ReplyHostProcessorInfoT
+	Reply_host_get_io_main                                   ReplyHostGetIoMainT
+	Reply_host_get_clock_service                             ReplyHostGetClockServiceT
+	Reply_kmod_get_info                                      ReplyKmodGetInfoT
+	Reply_host_virtual_physical_table_info                   ReplyHostVirtualPhysicalTableInfoT
+	Reply_processor_set_default                              ReplyProcessorSetDefaultT
+	Reply_processor_set_create                               ReplyProcessorSetCreateT
+	Reply_mach_memory_object_memory_entry_64                 ReplyMachMemoryObjectMemoryEntry64T
+	Reply_host_statistics                                    ReplyHostStatisticsT
+	Reply_host_request_notification                          ReplyHostRequestNotificationT
+	Reply_host_lockgroup_info                                ReplyHostLockgroupInfoT
+	Reply_host_statistics64                                  ReplyHostStatistics64T
+	Reply_mach_zone_info                                     ReplyMachZoneInfoT
+	Reply_host_create_mach_voucher                           ReplyHostCreateMachVoucherT
+	Reply_host_register_mach_voucher_attr_manager            ReplyHostRegisterMachVoucherAttrManagerT
+	Reply_host_register_well_known_mach_voucher_attr_manager ReplyHostRegisterWellKnownMachVoucherAttrManagerT
+	Reply_host_set_atm_diagnostic_flag                       ReplyHostSetAtmDiagnosticFlagT
+	Reply_host_get_atm_diagnostic_flag                       ReplyHostGetAtmDiagnosticFlagT
+	Reply_mach_memory_info                                   ReplyMachMemoryInfoT
+	Reply_host_set_multiuser_config_flags                    ReplyHostSetMultiuserConfigFlagsT
+	Reply_host_get_multiuser_config_flags                    ReplyHostGetMultiuserConfigFlagsT
+	Reply_host_check_multiuser_mode                          ReplyHostCheckMultiuserModeT
+	Reply_mach_zone_info_for_zone                            ReplyMachZoneInfoForZoneT
+	Reply_mach_memory_info_redacted                          ReplyMachMemoryInfoRedactedT
+}
+
 // [mach_host.h:891]
 type ReplyHostPageSizeT struct {
 	Head          unsafe.Pointer
@@ -254,6 +286,38 @@ type ReplyProcessorSetDefaultT struct {
 	Head        unsafe.Pointer
 	Msgh_body   unsafe.Pointer
 	Default_set unsafe.Pointer
+}
+
+// [mach_host.h:823]
+type RequestUnionMachHostSubsystem struct {
+	Request_host_info                                          RequestHostInfoT
+	Request_host_kernel_version                                RequestHostKernelVersionT
+	Request__host_page_size                                    RequestHostPageSizeT
+	Request_mach_memory_object_memory_entry                    RequestMachMemoryObjectMemoryEntryT
+	Request_host_processor_info                                RequestHostProcessorInfoT
+	Request_host_get_io_main                                   RequestHostGetIoMainT
+	Request_host_get_clock_service                             RequestHostGetClockServiceT
+	Request_kmod_get_info                                      RequestKmodGetInfoT
+	Request_host_virtual_physical_table_info                   RequestHostVirtualPhysicalTableInfoT
+	Request_processor_set_default                              RequestProcessorSetDefaultT
+	Request_processor_set_create                               RequestProcessorSetCreateT
+	Request_mach_memory_object_memory_entry_64                 RequestMachMemoryObjectMemoryEntry64T
+	Request_host_statistics                                    RequestHostStatisticsT
+	Request_host_request_notification                          RequestHostRequestNotificationT
+	Request_host_lockgroup_info                                RequestHostLockgroupInfoT
+	Request_host_statistics64                                  RequestHostStatistics64T
+	Request_mach_zone_info                                     RequestMachZoneInfoT
+	Request_host_create_mach_voucher                           RequestHostCreateMachVoucherT
+	Request_host_register_mach_voucher_attr_manager            RequestHostRegisterMachVoucherAttrManagerT
+	Request_host_register_well_known_mach_voucher_attr_manager RequestHostRegisterWellKnownMachVoucherAttrManagerT
+	Request_host_set_atm_diagnostic_flag                       RequestHostSetAtmDiagnosticFlagT
+	Request_host_get_atm_diagnostic_flag                       RequestHostGetAtmDiagnosticFlagT
+	Request_mach_memory_info                                   RequestMachMemoryInfoT
+	Request_host_set_multiuser_config_flags                    RequestHostSetMultiuserConfigFlagsT
+	Request_host_get_multiuser_config_flags                    RequestHostGetMultiuserConfigFlagsT
+	Request_host_check_multiuser_mode                          RequestHostCheckMultiuserModeT
+	Request_mach_zone_info_for_zone                            RequestMachZoneInfoForZoneT
+	Request_mach_memory_info_redacted                          RequestMachMemoryInfoRedactedT
 }
 
 // [mach_host.h:507]

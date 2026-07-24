@@ -7,6 +7,14 @@ import (
 	"unsafe"
 )
 
+type AEArrayData struct {
+	KAEDataArray    [1]int16
+	KAEPackedArray  [1]int8
+	KAEHandleArray  [1]*string
+	KAEDescArray    [1]AEDesc
+	KAEKeyDescArray [1]AEKeyDesc
+}
+
 type AEBuildError struct {
 	FError    uint32
 	FErrorPos uint32

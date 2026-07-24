@@ -13,6 +13,38 @@ import (
 	"strings"
 )
 
+// Accessor is one typed view into a byte-array struct's backing bytes: reading a
+// value of GoType at byte Offset. Emitters render it as an `As<Name>() GoType`
+// method that reinterprets the backing array via unsafe. It exists for layouts
+// the clean value-struct path rejects (packed-misaligned, unions) but whose exact
+// size and field offsets are known.
+type Accessor struct {
+	// Name is the source field name (before Go-identifier normalisation).
+	Name string
+	// Offset is the field's byte offset within the backing array.
+	Offset int
+	// GoType is the Go type read at Offset.
+	GoType string
+}
+
+// AccessorPlan pairs each named field with its byte offset and Go type, skipping
+// anonymous and underscore-prefixed members (padding, bitfields, reserved) that
+// carry no public accessor. fieldNames, offsets, and goTypes are parallel; a
+// short slice yields no plan (defensive — the caller passes equal-length inputs).
+func AccessorPlan(fieldNames []string, offsets []int, goTypes []string) []Accessor {
+	if len(fieldNames) != len(offsets) || len(fieldNames) != len(goTypes) {
+		return nil
+	}
+	out := make([]Accessor, 0, len(fieldNames))
+	for i, name := range fieldNames {
+		if name == "" || strings.HasPrefix(name, "_") {
+			continue
+		}
+		out = append(out, Accessor{Name: name, Offset: offsets[i], GoType: goTypes[i]})
+	}
+	return out
+}
+
 // Primitives is the set of Go primitive types a value-struct field may use
 // directly. A field of any other bare type must be another emittable struct in
 // the same package (checked via the emittable fixpoint in the caller).

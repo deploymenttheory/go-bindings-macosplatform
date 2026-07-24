@@ -7168,6 +7168,7 @@
         }
       ],
       "size": 24,
+      "align": 8,
       "availability": {},
       "sdk_file": "MetalPerformanceShaders.framework/Frameworks/MPSCore/MPSKernelTypes.h",
       "sdk_line": 812
@@ -7296,6 +7297,7 @@
         }
       ],
       "size": 24,
+      "align": 8,
       "availability": {},
       "sdk_file": "MetalPerformanceShaders.framework/Frameworks/MPSCore/MPSCoreTypes.h",
       "sdk_line": 426,
@@ -7356,6 +7358,7 @@
         }
       ],
       "size": 8,
+      "align": 2,
       "availability": {},
       "sdk_file": "MetalPerformanceShaders.framework/Frameworks/MPSCore/MPSKernelTypes.h",
       "sdk_line": 92
@@ -7414,6 +7417,7 @@
         }
       ],
       "size": 24,
+      "align": 8,
       "availability": {},
       "sdk_file": "MetalPerformanceShaders.framework/Frameworks/MPSCore/MPSCoreTypes.h",
       "sdk_line": 359,

@@ -6,6 +6,8 @@ package coremidi
 
 import (
 	"unsafe"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 type MIDI2DeviceManufacturer struct {
@@ -52,35 +54,11 @@ type MIDIControlTransform struct {
 	Param               int16
 }
 
-// The interface to a MIDI driver.
-type MIDIDriverInterface struct {
-	QueryInterface unsafe.Pointer
-	AddRef         unsafe.Pointer
-	Release        unsafe.Pointer
-	FindDevices    unsafe.Pointer
-	Start          unsafe.Pointer
-	Stop           unsafe.Pointer
-	Configure      unsafe.Pointer
-	Send           unsafe.Pointer
-	EnableSource   unsafe.Pointer
-	Flush          unsafe.Pointer
-	Monitor        unsafe.Pointer
-	SendPackets    unsafe.Pointer
-	MonitorEvents  unsafe.Pointer
-}
-
 // A variable-length list of MIDI event packets.
 type MIDIEventList struct {
 	Protocol   ProtocolID
 	NumPackets uint32
 	Packet     [1]MIDIEventPacket
-}
-
-// A series of simultaneous MIDI events in Universal MIDI Packets (UMP) format.
-type MIDIEventPacket struct {
-	TimeStamp uint64
-	WordCount uint32
-	Words     [64]uint32
 }
 
 // A general I/O error notification.
@@ -135,13 +113,6 @@ type MIDIObjectPropertyChangeNotification struct {
 	Object       uint32
 	ObjectType   ObjectType
 	PropertyName unsafe.Pointer
-}
-
-// A collection of simultaneous MIDI events.
-type MIDIPacket struct {
-	TimeStamp uint64
-	Length    uint16
-	Data      [256]uint8
 }
 
 // A list of MIDI events the system sends to or receives from an endpoint.
@@ -223,4 +194,217 @@ type MIDIUniversalMessage struct {
 // A custom lookup table to transform MIDI 7-bit values, as contained in note numbers, velocities, control values, and so on.
 type MIDIValueMap struct {
 	Value [128]uint8
+}
+
+// The interface to a MIDI driver.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type MIDIDriverInterface struct {
+	_    [0]uint64
+	data [112]byte
+}
+
+// AsQueryInterface binds the QueryInterface C function pointer (offset 8) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *MIDIDriverInterface) AsQueryInterface() func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[8]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsAddRef binds the AddRef C function pointer (offset 16) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *MIDIDriverInterface) AsAddRef() func(unsafe.Pointer) uint32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[16]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer) uint32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsRelease binds the Release C function pointer (offset 24) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *MIDIDriverInterface) AsRelease() func(unsafe.Pointer) uint32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[24]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer) uint32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsFindDevices binds the FindDevices C function pointer (offset 32) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *MIDIDriverInterface) AsFindDevices() func(unsafe.Pointer, uint32) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[32]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, uint32) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsStart binds the Start C function pointer (offset 40) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *MIDIDriverInterface) AsStart() func(unsafe.Pointer, uint32) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[40]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, uint32) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsStop binds the Stop C function pointer (offset 48) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *MIDIDriverInterface) AsStop() func(unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[48]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsConfigure binds the Configure C function pointer (offset 56) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *MIDIDriverInterface) AsConfigure() func(unsafe.Pointer, uint32) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[56]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, uint32) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsSend binds the Send C function pointer (offset 64) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *MIDIDriverInterface) AsSend() func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[64]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsEnableSource binds the EnableSource C function pointer (offset 72) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *MIDIDriverInterface) AsEnableSource() func(unsafe.Pointer, uint32, uint8) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[72]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, uint32, uint8) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsFlush binds the Flush C function pointer (offset 80) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *MIDIDriverInterface) AsFlush() func(unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[80]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsMonitor binds the Monitor C function pointer (offset 88) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *MIDIDriverInterface) AsMonitor() func(unsafe.Pointer, uint32, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[88]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, uint32, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsSendPackets binds the SendPackets C function pointer (offset 96) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *MIDIDriverInterface) AsSendPackets() func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[96]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// AsMonitorEvents binds the MonitorEvents C function pointer (offset 104) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *MIDIDriverInterface) AsMonitorEvents() func(unsafe.Pointer, uint32, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[104]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, uint32, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+
+// A series of simultaneous MIDI events in Universal MIDI Packets (UMP) format.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type MIDIEventPacket struct {
+	_    [0]uint32
+	data [268]byte
+}
+
+// AsTimeStamp returns the timeStamp field, read from the backing bytes at offset 0.
+func (u *MIDIEventPacket) AsTimeStamp() uint64 {
+	return *(*uint64)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsWordCount returns the wordCount field, read from the backing bytes at offset 8.
+func (u *MIDIEventPacket) AsWordCount() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsWords returns the words field, read from the backing bytes at offset 12.
+func (u *MIDIEventPacket) AsWords() [64]uint32 {
+	return *(*[64]uint32)(unsafe.Pointer(&u.data[12]))
+}
+
+// A collection of simultaneous MIDI events.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type MIDIPacket struct {
+	_    [0]uint32
+	data [268]byte
+}
+
+// AsTimeStamp returns the timeStamp field, read from the backing bytes at offset 0.
+func (u *MIDIPacket) AsTimeStamp() uint64 {
+	return *(*uint64)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsLength returns the length field, read from the backing bytes at offset 8.
+func (u *MIDIPacket) AsLength() uint16 {
+	return *(*uint16)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsData returns the data field, read from the backing bytes at offset 10.
+func (u *MIDIPacket) AsData() [256]uint8 {
+	return *(*[256]uint8)(unsafe.Pointer(&u.data[10]))
 }

@@ -44,6 +44,7 @@ type (
 	ReplyMachZoneInfoT                                  = raw.ReplyMachZoneInfoT
 	ReplyProcessorSetCreateT                            = raw.ReplyProcessorSetCreateT
 	ReplyProcessorSetDefaultT                           = raw.ReplyProcessorSetDefaultT
+	ReplyUnionMachHostSubsystem                         = raw.ReplyUnionMachHostSubsystem
 	RequestHostCheckMultiuserModeT                      = raw.RequestHostCheckMultiuserModeT
 	RequestHostCreateMachVoucherT                       = raw.RequestHostCreateMachVoucherT
 	RequestHostGetAtmDiagnosticFlagT                    = raw.RequestHostGetAtmDiagnosticFlagT
@@ -72,6 +73,7 @@ type (
 	RequestMachZoneInfoT                                = raw.RequestMachZoneInfoT
 	RequestProcessorSetCreateT                          = raw.RequestProcessorSetCreateT
 	RequestProcessorSetDefaultT                         = raw.RequestProcessorSetDefaultT
+	RequestUnionMachHostSubsystem                       = raw.RequestUnionMachHostSubsystem
 	VirtualMemoryGuardExceptionCodeT                    = raw.VirtualMemoryGuardExceptionCodeT
 )
 

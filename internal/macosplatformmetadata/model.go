@@ -231,7 +231,16 @@ type Struct struct {
 	// Size is the total struct size in bytes from clang's authoritative record
 	// layout (0 when unknown). Used with each field's Offset to cross-check that
 	// the emitted Go struct reproduces the C ABI.
-	Size         int          `json:"size,omitempty"`
+	Size int `json:"size,omitempty"`
+	// Align is the struct's alignment in bytes from clang's authoritative record
+	// layout (0 when unknown). The byte-array admission tier forces a Go backing
+	// struct to this alignment so an embedded or by-pointer aggregate matches the
+	// C ABI even though a plain [N]byte would be 1-aligned.
+	Align int `json:"align,omitempty"`
+	// IsUnion is true when the record is a C union (all members overlap at offset
+	// 0). A union can never be a clean Go value struct, so it is emitted through the
+	// byte-array + accessor tier, each member read at offset 0.
+	IsUnion      bool         `json:"is_union,omitempty"`
 	Availability Availability `json:"availability,omitempty"`
 	SDKFile      string       `json:"sdk_file,omitempty"`
 	SDKLine      int          `json:"sdk_line,omitempty"`

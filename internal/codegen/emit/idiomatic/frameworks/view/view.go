@@ -70,6 +70,45 @@ type TypedefAlias struct {
 	RHS string
 }
 
+// ByteArrayStruct is a value struct emitted as an aligned [Size]byte backing
+// array plus typed accessor methods, for a C layout the clean typed-struct path
+// cannot reproduce (packed-misaligned, unions) but whose exact size and field
+// offsets are known. It is pointer/accessor-only — never passed by value.
+type ByteArrayStruct struct {
+	// Doc is the one-line comment describing the struct; empty when none.
+	Doc string
+	// GoName is the exported struct type name.
+	GoName string
+	// Size is the total backing-array size in bytes (the authoritative C size).
+	Size int
+	// AlignElem, when non-empty, is the Go type of a leading zero-size field
+	// (`_ [0]<AlignElem>`) that forces the backing struct's alignment to match C.
+	// Empty for a packed struct (C alignment 1 = Go [N]byte alignment 1).
+	AlignElem string
+	// Accessors are the typed field views over the backing bytes.
+	Accessors []Accessor
+}
+
+// Accessor is one generated `As<GoName>()` method over a byte offset of a
+// ByteArrayStruct's backing array. When FuncType is empty it reinterprets the
+// bytes as GoType (`return *(*GoType)(…)`); when FuncType is set the field is a C
+// function pointer and the method binds the stored code pointer to that Go func
+// type via purego.RegisterFunc.
+type Accessor struct {
+	// GoName is the method name (e.g. "AsChunkSize").
+	GoName string
+	// Offset is the byte offset within the backing array.
+	Offset int
+	// GoType is the type a plain reinterpret accessor returns (empty for a
+	// function-pointer accessor).
+	GoType string
+	// FuncType, when non-empty, is the Go func type ("func(unsafe.Pointer) int32")
+	// a function-pointer accessor returns, bound via purego.RegisterFunc.
+	FuncType string
+	// Field is the original C field name, for the method's doc comment.
+	Field string
+}
+
 // HandleType is a distinct named handle type the idiomatic layer emits for an
 // opaque CoreFoundation / handle typedef: `type CFArrayRef struct{ obj.Object }`.
 // It embeds obj.Object (so it still satisfies Object and carries the lifecycle

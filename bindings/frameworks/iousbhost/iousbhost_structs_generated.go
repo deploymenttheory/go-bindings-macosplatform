@@ -4,6 +4,10 @@
 
 package iousbhost
 
+import (
+	"unsafe"
+)
+
 // USB BOS descriptor. See the USB Specification at <a href="http://www.usb.org" target="_blank">http://www.usb.org</a>. USB 3.0 9.6.2: Binary Device Object Store (BOS)
 type IOUSBBOSDescriptor struct {
 	BLength         uint8
@@ -119,16 +123,6 @@ type IOUSBHostIsochronousFrame struct {
 	TimeStamp     uint64
 }
 
-// Structure representing a single frame or microframe in an isochronous transfer.
-type IOUSBHostIsochronousTransaction struct {
-	Status        int32
-	RequestCount  uint32
-	Offset        uint32
-	CompleteCount uint32
-	TimeStamp     uint64
-	Options       HostIsochronousTransactionOptions
-}
-
 // USB Inerface Association Descriptor.  ECN to the USB 2.0 Spec. See the USB Specification at <a href="http://www.usb.org" target="_blank">http://www.usb.org</a>. USB 3.0 9.6.4: Interface Association
 type IOUSBInterfaceAssociationDescriptor struct {
 	BLength           uint8
@@ -169,4 +163,37 @@ type IOUSBSuperSpeedPlusIsochronousEndpointCompanionDescriptor struct {
 	BDescriptorType    uint8
 	WReserved          uint16
 	DwBytesPerInterval uint32
+}
+
+// Structure representing a single frame or microframe in an isochronous transfer.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type IOUSBHostIsochronousTransaction struct {
+	data [28]byte
+}
+
+// AsStatus returns the status field, read from the backing bytes at offset 0.
+func (u *IOUSBHostIsochronousTransaction) AsStatus() int32 {
+	return *(*int32)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsRequestCount returns the requestCount field, read from the backing bytes at offset 4.
+func (u *IOUSBHostIsochronousTransaction) AsRequestCount() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[4]))
+}
+
+// AsOffset returns the offset field, read from the backing bytes at offset 8.
+func (u *IOUSBHostIsochronousTransaction) AsOffset() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsCompleteCount returns the completeCount field, read from the backing bytes at offset 12.
+func (u *IOUSBHostIsochronousTransaction) AsCompleteCount() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[12]))
+}
+
+// AsTimeStamp returns the timeStamp field, read from the backing bytes at offset 16.
+func (u *IOUSBHostIsochronousTransaction) AsTimeStamp() uint64 {
+	return *(*uint64)(unsafe.Pointer(&u.data[16]))
 }

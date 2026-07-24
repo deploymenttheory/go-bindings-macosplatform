@@ -4039,6 +4039,7 @@
         }
       ],
       "size": 16,
+      "align": 8,
       "availability": {},
       "sdk_file": "CoreFoundation/CFBase.h",
       "sdk_line": 596
@@ -4354,6 +4355,7 @@
         }
       ],
       "size": 4,
+      "align": 4,
       "availability": {},
       "sdk_file": "CoreFoundation/CFByteOrder.h",
       "sdk_line": 203
@@ -4366,6 +4368,7 @@
         }
       ],
       "size": 8,
+      "align": 8,
       "availability": {},
       "sdk_file": "CoreFoundation/CFByteOrder.h",
       "sdk_line": 204
@@ -4610,6 +4613,7 @@
         }
       ],
       "size": 16,
+      "align": 8,
       "availability": {},
       "sdk_file": "CoreFoundation/CFXMLNode.h",
       "sdk_line": 92
@@ -4761,6 +4765,7 @@
         }
       ],
       "size": 16,
+      "align": 8,
       "availability": {},
       "sdk_file": "CoreFoundation/CFCGTypes.h",
       "sdk_line": 51
@@ -4793,6 +4798,7 @@
         }
       ],
       "size": 16,
+      "align": 8,
       "availability": {},
       "sdk_file": "CoreFoundation/CFCGTypes.h",
       "sdk_line": 59

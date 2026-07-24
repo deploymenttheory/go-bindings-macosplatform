@@ -132,7 +132,9 @@ func ComputeEmittableStructs(
 		ownEnumsByFw[framework.Framework] = buildOwnEnumNames(framework)
 		ctx := typemap.Context{Framework: framework.Framework}
 		for name, s := range framework.Structs {
-			if s.Availability.IsUnavailable || len(s.Fields) == 0 {
+			// A union can never be a clean value struct (members overlap at offset 0);
+			// the byte-array tier owns it. Excluding it here keeps the two sets disjoint.
+			if s.Availability.IsUnavailable || len(s.Fields) == 0 || s.IsUnion {
 				continue
 			}
 			goName := naming.ExportedTypeName(name)
@@ -198,6 +200,49 @@ func ComputeEmittableStructs(
 		}
 	}
 	return emittable
+}
+
+// ComputeByteArrayStructs returns the value-struct Go names the idiomatic layer
+// emits as a byte-array backing struct + typed accessors (the second admission
+// tier). A struct qualifies when the CLEAN layout path rejects it (it would
+// otherwise degrade every field to unsafe.Pointer) but its exact size and field
+// offsets are known and every field resolves to a concrete primitive/array Go
+// type an accessor can name. Today this captures packed-misaligned structs (Go
+// padding cannot reproduce their layout, but reads at exact offsets can). The set
+// is disjoint from ComputeEmittableStructs (clean layout) by construction, and is
+// kept OUT of the by-value EmittableStructs gate — a [N]byte cannot be passed by
+// value correctly (float register classification).
+// mapper.EmittableStructs must already be populated (the generator computes it
+// before this).
+func ComputeByteArrayStructs(
+	frameworks []*meta.FrameworkMeta,
+	mapper *typemap.Mapper,
+) map[string]bool {
+	out := make(map[string]bool)
+	for _, framework := range frameworks {
+		for name, s := range framework.Structs {
+			// Require an authoritative size (clang's field count matched, or
+			// pointerOnlyLayout synthesised it, so every Offset is trustworthy).
+			if s.Availability.IsUnavailable || len(s.Fields) == 0 || s.Size == 0 {
+				continue
+			}
+			goName := naming.ExportedTypeName(name)
+			if !isExportedGoIdent(goName) || out[goName] {
+				continue
+			}
+			// A clean by-value struct stays a typed value struct. A union is never
+			// clean (members overlap at offset 0). Everything else with an
+			// authoritative size that the clean tier rejected — a degraded field
+			// (unsafe.Pointer that mislays or mis-sizes the struct), a packed-unsafe
+			// or misaligned layout — is a byte-array candidate. Keying off the already
+			// computed EmittableStructs set guarantees the two tiers stay disjoint.
+			if !s.IsUnion && mapper.EmittableStructs[goName] {
+				continue
+			}
+			out[goName] = true
+		}
+	}
+	return out
 }
 
 // ComputeAllEmittedStructNames returns every value-struct Go name the idiomatic
@@ -337,6 +382,7 @@ func emitStructs(
 	imports := map[string]string{}
 	var structs []view.Struct
 	var handleTypes []view.HandleType
+	var byteArrayStructs []view.ByteArrayStruct
 	emittedHandle := make(map[string]bool)
 	for _, goName := range goNames {
 		takenNames[goName] = true
@@ -355,6 +401,22 @@ func emitStructs(
 				GoPkg:    pkgName,
 				GoSymbol: goName,
 			})
+		}
+		// Second admission tier: a layout the clean path rejects (packed-misaligned,
+		// union, degraded) but whose exact size is known is emitted as [N]byte + typed
+		// accessors instead of degrading its fields to unsafe.Pointer. The Size>0 guard
+		// covers a rare duplicate-goName case where this instance (a forward decl) has
+		// no layout while the byte-array set was keyed off the complete one.
+		if mapper.ByteArrayStructs[goName] && s.Size > 0 {
+			v := buildByteArrayStructView(goName, s, ctx, mapper)
+			for _, a := range v.Accessors {
+				imports["unsafe"] = "unsafe" // accessor bodies use unsafe
+				if a.FuncType != "" {
+					imports["purego"] = pureobjcImportPath // RegisterFunc binding
+				}
+			}
+			byteArrayStructs = append(byteArrayStructs, v)
+			continue
 		}
 		// A fieldless opaque struct that is itself a CF handle typedef becomes the
 		// struct-wrapper handle type (still recorded KindStruct above, still emitted
@@ -416,7 +478,7 @@ func emitStructs(
 	handleTypes = append(handleTypes,
 		buildCFHandleTypeViews(framework, mapper, takenNames, emittedHandle, imports)...)
 
-	if len(structs) == 0 && len(aliases) == 0 && len(handleTypes) == 0 {
+	if len(structs) == 0 && len(aliases) == 0 && len(handleTypes) == 0 && len(byteArrayStructs) == 0 {
 		return nil
 	}
 
@@ -438,9 +500,174 @@ func emitStructs(
 		}
 		body = append(body, handleBody...)
 	}
+	if len(byteArrayStructs) > 0 {
+		baBody, err := render.ByteArrayStructs(byteArrayStructs)
+		if err != nil {
+			return err
+		}
+		body = append(body, baBody...)
+	}
 	fname := pkgName + "_structs_generated.go"
 	file := assembleFile(pkgName, imports, body)
 	return rawfw.WriteGoFile(filepath.Join(outDir, fname), file)
+}
+
+// buildByteArrayStructView builds the byte-array + accessor view for a struct the
+// clean layout path rejects. The backing array is the struct's authoritative C
+// size; each non-anonymous field becomes an As<Field>() accessor reading its Go
+// type at the field's authoritative offset. A packed struct has C alignment 1
+// (matching a Go [N]byte), so no alignment-forcing element is emitted; the union
+// tier (which needs natural alignment) sets AlignElem later.
+func buildByteArrayStructView(
+	goName string,
+	s meta.Struct,
+	ctx typemap.Context,
+	mapper *typemap.Mapper,
+) view.ByteArrayStruct {
+	accessors := make([]view.Accessor, 0, len(s.Fields))
+	for _, f := range s.Fields {
+		if f.Name == "" || strings.HasPrefix(f.Name, "_") {
+			continue // padding / anonymous — no public accessor
+		}
+		// A union member overlaps at offset 0; a struct member sits at its offset.
+		offset := f.Offset
+		if s.IsUnion {
+			offset = 0
+		}
+		// A C function-pointer field becomes a callable Go func accessor when its
+		// whole signature is purego.RegisterFunc-safe (primitive / pointer args and
+		// result); otherwise it falls through to the raw-pointer accessor below.
+		if funcType, ok := funcPtrAccessorType(f.ObjCType, ctx, mapper); ok {
+			accessors = append(accessors, view.Accessor{
+				GoName:   "As" + structFieldGoName(f.Name),
+				Offset:   offset,
+				FuncType: funcType,
+				Field:    f.Name,
+			})
+			continue
+		}
+		// Resolve this field alone: a sibling field may be unresolvable (an anonymous
+		// union) without denying an accessor to the fields that do resolve.
+		gt := mapper.GoABIType(f.ObjCType, structlayout.StructFieldGoType(f.ObjCType, mapper.GoType(f.ObjCType, ctx, make(typemap.ImportSet))))
+		accType, ok := byteArrayAccessorType(f.ObjCType, gt)
+		if !ok {
+			continue // a by-value aggregate (union, struct) we cannot safely reinterpret
+		}
+		accessors = append(accessors, view.Accessor{
+			GoName: "As" + structFieldGoName(f.Name),
+			Offset: offset,
+			GoType: accType,
+			Field:  f.Name,
+		})
+	}
+	return view.ByteArrayStruct{
+		Doc:       cleanDoc(s.Doc),
+		GoName:    goName,
+		Size:      s.Size,
+		AlignElem: byteArrayAlignElem(s),
+		Accessors: accessors,
+	}
+}
+
+// byteArrayAccessorType decides the Go type an As<Field> accessor returns for one
+// field of a byte-array struct, or ok=false when the field is a by-value aggregate
+// that cannot be reinterpreted to a single Go type (the backing [N]byte still
+// yields the correct total size). A primitive or array-of-primitive field is read
+// as its exact-width Go type; any machine pointer (function pointer, block,
+// object, or data pointer) is exposed as the raw unsafe.Pointer.
+func byteArrayAccessorType(objcType, goType string) (string, bool) {
+	if structlayout.Primitives[goType] ||
+		structlayout.IsPrimitiveOrArrayOf(goType, func(e string) bool { return structlayout.Primitives[e] }) {
+		return goType, true
+	}
+	if isCPointerWidth(objcType) {
+		return "unsafe.Pointer", true
+	}
+	return "", false
+}
+
+// funcPtrAccessorType builds the Go func type a callable accessor returns for a C
+// function-pointer field (e.g. "func(unsafe.Pointer) int32"), or ok=false when
+// the field is not a function pointer or its signature is not
+// purego.RegisterFunc-safe (a struct-by-value arg/result, a string/slice, a
+// block). Pointer args/results are rendered as unsafe.Pointer so the accessor
+// stays free of framework type imports.
+func funcPtrAccessorType(objcType string, ctx typemap.Context, mapper *typemap.Mapper) (string, bool) {
+	sig, ok := mapper.ResolveFuncPtrSignature(objcType)
+	if !ok {
+		return "", false
+	}
+	params := make([]string, 0, len(sig.ParamObjCTypes))
+	for _, p := range sig.ParamObjCTypes {
+		gt, ok := registerFuncArgType(p, ctx, mapper)
+		if !ok {
+			return "", false
+		}
+		params = append(params, gt)
+	}
+	ret := ""
+	if r := strings.TrimSpace(sig.ReturnObjCType); r != "" && r != "void" {
+		gt, ok := registerFuncArgType(r, ctx, mapper)
+		if !ok {
+			return "", false
+		}
+		ret = " " + gt
+	}
+	return "func(" + strings.Join(params, ", ") + ")" + ret, true
+}
+
+// registerFuncArgType maps one C argument/return type of a function pointer to a
+// purego.RegisterFunc-safe Go type: a primitive stays itself; any machine pointer
+// (data, object, function pointer) becomes unsafe.Pointer. Arrays, strings,
+// slices, blocks, and by-value aggregates are rejected (ok=false).
+func registerFuncArgType(objcType string, ctx typemap.Context, mapper *typemap.Mapper) (string, bool) {
+	gt := mapper.GoABIType(objcType, structlayout.StructFieldGoType(objcType, mapper.GoType(objcType, ctx, make(typemap.ImportSet))))
+	if structlayout.Primitives[gt] {
+		return gt, true
+	}
+	if gt == "unsafe.Pointer" || strings.HasPrefix(gt, "*") || gt == "obj.Object" || isCPointerWidth(objcType) {
+		return "unsafe.Pointer", true
+	}
+	return "", false
+}
+
+// isCPointerWidth reports whether a C field type is a single 8-byte machine
+// pointer: a function pointer or block ("(*"/"(^"), or a type whose last token is
+// "*". Mirrors the scanner's pointerOnlyLayout classification.
+func isCPointerWidth(objcType string) bool {
+	t := strings.TrimSpace(objcType)
+	if t == "" {
+		return false
+	}
+	if strings.Contains(t, "(*") || strings.Contains(t, "(^") {
+		return true
+	}
+	for _, q := range []string{"_Nullable", "_Nonnull", "_Null_unspecified", "const", "volatile"} {
+		t = strings.TrimSpace(strings.TrimSuffix(t, q))
+	}
+	return strings.HasSuffix(strings.TrimSpace(t), "*")
+}
+
+// byteArrayAlignElem returns the Go type of a leading `_ [0]<elem>` field that
+// forces the backing struct's alignment to the C alignment, or "" when none is
+// needed. A packed struct is C-aligned to 1 (matching a plain [N]byte). Go has no
+// scalar wider than 8-byte alignment, so a 16-byte-aligned C type (rare SIMD) is
+// aligned to 8 — the authoritative Size is always a multiple of the C alignment,
+// so a Go struct rounded up to <=8 never changes the size.
+func byteArrayAlignElem(s meta.Struct) string {
+	if s.Packed {
+		return ""
+	}
+	switch {
+	case s.Align >= 8:
+		return "uint64"
+	case s.Align == 4:
+		return "uint32"
+	case s.Align == 2:
+		return "uint16"
+	default:
+		return ""
+	}
 }
 
 // buildTypedefAliasViews resolves the framework's C struct typedefs into idiomatic
