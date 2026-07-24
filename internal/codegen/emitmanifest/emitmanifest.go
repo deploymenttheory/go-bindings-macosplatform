@@ -18,6 +18,9 @@
 // type-degradation DiagnosticsSink: nil-safe, so a nil Recorder records nothing and
 // generation is unaffected. Record one entry at the point each emitter has already
 // decided to emit a construct.
+//
+// SCOPE — shared: the parity manifest is recorded by both generator styles (raw
+// and idiomatic) across both pipelines; it is emitter-agnostic.
 package emitmanifest
 
 import (

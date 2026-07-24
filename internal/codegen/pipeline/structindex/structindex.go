@@ -2,6 +2,9 @@
 // by the frameworks (purego) and libraries (cgo) pipeline loaders. Both derived
 // the same map with the same conflict-resolution and typedef-backfill rules; this
 // is the single implementation.
+//
+// SCOPE — shared: the single struct-ownership index for both the frameworks
+// (purego) and libraries (cgo) pipeline loaders.
 package structindex
 
 import (
