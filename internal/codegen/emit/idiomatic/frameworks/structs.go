@@ -325,22 +325,45 @@ func emittableStructNames(
 ) (goNames []string, keyOf map[string]string, structOf map[string]meta.Struct) {
 	keyOf = make(map[string]string)
 	structOf = make(map[string]meta.Struct)
-	seen := make(map[string]bool)
 	for name, s := range framework.Structs {
 		if s.Availability.IsUnavailable {
 			continue
 		}
 		goName := naming.ExportedTypeName(name)
-		if !isExportedGoIdent(goName) || seen[goName] || taken[goName] {
+		if !isExportedGoIdent(goName) || taken[goName] {
 			continue
 		}
-		seen[goName] = true
+		// When two C struct names collide on one Go name (a forward decl vs the
+		// complete definition), pick a deterministic winner instead of the map's
+		// random first-seen — otherwise this pass and the byte-array membership pass
+		// can choose different instances (the [0]byte bug). preferStruct mirrors the
+		// scanner's "keep whichever carries fields", so the emitted instance always
+		// agrees with the Size>0 instance the byte-array pass admits.
+		if cur, ok := structOf[goName]; ok && !preferStruct(s, name, cur, keyOf[goName]) {
+			continue
+		}
 		keyOf[goName] = name
 		structOf[goName] = s
+	}
+	for goName := range structOf {
 		goNames = append(goNames, goName)
 	}
 	sort.Strings(goNames)
 	return goNames, keyOf, structOf
+}
+
+// preferStruct reports whether struct instance (cand, candKey) should win a Go-name
+// collision over the current (cur, curKey): more fields first (a complete
+// definition beats a forward decl), then a non-zero authoritative size, then the
+// lexically smaller C name for full determinism.
+func preferStruct(cand meta.Struct, candKey string, cur meta.Struct, curKey string) bool {
+	if len(cand.Fields) != len(cur.Fields) {
+		return len(cand.Fields) > len(cur.Fields)
+	}
+	if (cand.Size != 0) != (cur.Size != 0) {
+		return cand.Size != 0
+	}
+	return candKey < curKey
 }
 
 // emitStructs writes <pkgname>_structs_generated.go: a Go definition for every
