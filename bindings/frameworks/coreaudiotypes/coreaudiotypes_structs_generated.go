@@ -8,13 +8,6 @@ import (
 	"unsafe"
 )
 
-// A structure that holds a buffer of audio data.
-type AudioBuffer struct {
-	MNumberChannels uint32
-	MDataByteSize   uint32
-	MData           unsafe.Pointer
-}
-
 // A structure that stores a variable-length array of audio buffers.
 type AudioBufferList struct {
 	MNumberBuffers uint32
@@ -113,4 +106,28 @@ type SMPTETime struct {
 	MMinutes         int16
 	MSeconds         int16
 	MFrames          int16
+}
+
+// A structure that holds a buffer of audio data.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type AudioBuffer struct {
+	_    [0]uint64
+	data [16]byte
+}
+
+// AsMNumberChannels returns the mNumberChannels field, read from the backing bytes at offset 0.
+func (u *AudioBuffer) AsMNumberChannels() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsMDataByteSize returns the mDataByteSize field, read from the backing bytes at offset 4.
+func (u *AudioBuffer) AsMDataByteSize() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[4]))
+}
+
+// AsMData returns the mData field, read from the backing bytes at offset 8.
+func (u *AudioBuffer) AsMData() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
 }

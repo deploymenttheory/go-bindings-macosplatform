@@ -503,6 +503,43 @@ type XDisplay struct {
 	Savedsynchandler      unsafe.Pointer
 }
 
+// C struct: _XEvent
+type XEvent struct {
+	Type              int32
+	Xany              unsafe.Pointer
+	Xkey              unsafe.Pointer
+	Xbutton           unsafe.Pointer
+	Xmotion           unsafe.Pointer
+	Xcrossing         unsafe.Pointer
+	Xfocus            unsafe.Pointer
+	Xexpose           unsafe.Pointer
+	Xgraphicsexpose   unsafe.Pointer
+	Xnoexpose         unsafe.Pointer
+	Xvisibility       unsafe.Pointer
+	Xcreatewindow     unsafe.Pointer
+	Xdestroywindow    unsafe.Pointer
+	Xunmap            unsafe.Pointer
+	Xmap              unsafe.Pointer
+	Xmaprequest       unsafe.Pointer
+	Xreparent         unsafe.Pointer
+	Xconfigure        unsafe.Pointer
+	Xgravity          unsafe.Pointer
+	Xresizerequest    unsafe.Pointer
+	Xconfigurerequest unsafe.Pointer
+	Xcirculate        unsafe.Pointer
+	Xcirculaterequest unsafe.Pointer
+	Xproperty         unsafe.Pointer
+	Xselectionclear   unsafe.Pointer
+	Xselectionrequest unsafe.Pointer
+	Xselection        unsafe.Pointer
+	Xcolormap         unsafe.Pointer
+	Xclient           unsafe.Pointer
+	Xmapping          unsafe.Pointer
+	Xerror            unsafe.Pointer
+	Xkeymap           unsafe.Pointer
+	Pad               [24]int
+}
+
 // C struct: _XExtData
 type XExtData struct {
 	Number       int32

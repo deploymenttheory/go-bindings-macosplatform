@@ -3,12 +3,65 @@
 
 package glkit
 
+import (
+	"unsafe"
+)
+
 // GLKEffectPropertyPrv is an opaque type.
 type GLKEffectPropertyPrv struct{}
+
+// C struct: _GLKMatrix2
+type GLKMatrix2 struct {
+	Field0 unsafe.Pointer
+	M2     [2][2]float32
+	M      [4]float32
+}
+
+// C struct: _GLKMatrix3
+type GLKMatrix3 struct {
+	Field0 unsafe.Pointer
+	M      [9]float32
+}
+
+// C struct: _GLKMatrix4
+type GLKMatrix4 struct {
+	Field0 unsafe.Pointer
+	M      [16]float32
+}
 
 // C struct: _GLKMatrixStack
 // GLKMatrixStack is an opaque type.
 type GLKMatrixStack struct{}
+
+// C struct: _GLKQuaternion
+type GLKQuaternion struct {
+	Field0 unsafe.Pointer
+	Field1 unsafe.Pointer
+	Q      [4]float32
+}
+
+// C struct: _GLKVector2
+type GLKVector2 struct {
+	Field0 unsafe.Pointer
+	Field1 unsafe.Pointer
+	V      [2]float32
+}
+
+// C struct: _GLKVector3
+type GLKVector3 struct {
+	Field0 unsafe.Pointer
+	Field1 unsafe.Pointer
+	Field2 unsafe.Pointer
+	V      [3]float32
+}
+
+// C struct: _GLKVector4
+type GLKVector4 struct {
+	Field0 unsafe.Pointer
+	Field1 unsafe.Pointer
+	Field2 unsafe.Pointer
+	V      [4]float32
+}
 
 // @struct GLKVertexAttributeParameters @abstract Structure for parameters to use in glVertexAttribPointer given a MDLVertexForamt
 // C struct: _GLKVertexAttributeParameters

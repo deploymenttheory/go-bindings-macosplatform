@@ -52,23 +52,6 @@ type MIDIControlTransform struct {
 	Param               int16
 }
 
-// The interface to a MIDI driver.
-type MIDIDriverInterface struct {
-	QueryInterface unsafe.Pointer
-	AddRef         unsafe.Pointer
-	Release        unsafe.Pointer
-	FindDevices    unsafe.Pointer
-	Start          unsafe.Pointer
-	Stop           unsafe.Pointer
-	Configure      unsafe.Pointer
-	Send           unsafe.Pointer
-	EnableSource   unsafe.Pointer
-	Flush          unsafe.Pointer
-	Monitor        unsafe.Pointer
-	SendPackets    unsafe.Pointer
-	MonitorEvents  unsafe.Pointer
-}
-
 // A variable-length list of MIDI event packets.
 type MIDIEventList struct {
 	Protocol   ProtocolID
@@ -211,11 +194,86 @@ type MIDIValueMap struct {
 	Value [128]uint8
 }
 
+// The interface to a MIDI driver.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type MIDIDriverInterface struct {
+	_    [0]uint64
+	data [112]byte
+}
+
+// AsQueryInterface returns the QueryInterface field, read from the backing bytes at offset 8.
+func (u *MIDIDriverInterface) AsQueryInterface() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsAddRef returns the AddRef field, read from the backing bytes at offset 16.
+func (u *MIDIDriverInterface) AsAddRef() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[16]))
+}
+
+// AsRelease returns the Release field, read from the backing bytes at offset 24.
+func (u *MIDIDriverInterface) AsRelease() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[24]))
+}
+
+// AsFindDevices returns the FindDevices field, read from the backing bytes at offset 32.
+func (u *MIDIDriverInterface) AsFindDevices() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[32]))
+}
+
+// AsStart returns the Start field, read from the backing bytes at offset 40.
+func (u *MIDIDriverInterface) AsStart() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[40]))
+}
+
+// AsStop returns the Stop field, read from the backing bytes at offset 48.
+func (u *MIDIDriverInterface) AsStop() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[48]))
+}
+
+// AsConfigure returns the Configure field, read from the backing bytes at offset 56.
+func (u *MIDIDriverInterface) AsConfigure() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[56]))
+}
+
+// AsSend returns the Send field, read from the backing bytes at offset 64.
+func (u *MIDIDriverInterface) AsSend() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[64]))
+}
+
+// AsEnableSource returns the EnableSource field, read from the backing bytes at offset 72.
+func (u *MIDIDriverInterface) AsEnableSource() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[72]))
+}
+
+// AsFlush returns the Flush field, read from the backing bytes at offset 80.
+func (u *MIDIDriverInterface) AsFlush() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[80]))
+}
+
+// AsMonitor returns the Monitor field, read from the backing bytes at offset 88.
+func (u *MIDIDriverInterface) AsMonitor() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[88]))
+}
+
+// AsSendPackets returns the SendPackets field, read from the backing bytes at offset 96.
+func (u *MIDIDriverInterface) AsSendPackets() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[96]))
+}
+
+// AsMonitorEvents returns the MonitorEvents field, read from the backing bytes at offset 104.
+func (u *MIDIDriverInterface) AsMonitorEvents() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[104]))
+}
+
 // A series of simultaneous MIDI events in Universal MIDI Packets (UMP) format.
 // The C layout cannot be reproduced as a plain Go value struct, so it is held as
 // its exact-size bytes and read through the typed As* accessors below. It is
 // pointer-only: never pass it by value.
 type MIDIEventPacket struct {
+	_    [0]uint32
 	data [268]byte
 }
 
@@ -239,6 +297,7 @@ func (u *MIDIEventPacket) AsWords() [64]uint32 {
 // its exact-size bytes and read through the typed As* accessors below. It is
 // pointer-only: never pass it by value.
 type MIDIPacket struct {
+	_    [0]uint32
 	data [268]byte
 }
 

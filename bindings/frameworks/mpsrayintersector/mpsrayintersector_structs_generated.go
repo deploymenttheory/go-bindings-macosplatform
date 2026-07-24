@@ -79,10 +79,6 @@ type MPSIntersectionDistancePrimitiveIndexInstanceIndexCoordinates struct {
 	Coordinates    unsafe.Pointer
 }
 
-type MPSPackedFloat3 struct {
-	Field0 unsafe.Pointer
-}
-
 // Represents a 3D ray with an origin and a direction This type is available from the Metal Shading Language by including the MetalPerformanceShaders/MetalPerformanceShaders.h header.
 type MPSRayOriginDirection struct {
 	Origin    unsafe.Pointer
@@ -109,4 +105,12 @@ type MPSRayOriginMinDistanceDirectionMaxDistance struct {
 type MPSRayPackedOriginDirection struct {
 	Origin    MPSPackedFloat3
 	Direction MPSPackedFloat3
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type MPSPackedFloat3 struct {
+	_    [0]uint32
+	data [12]byte
 }

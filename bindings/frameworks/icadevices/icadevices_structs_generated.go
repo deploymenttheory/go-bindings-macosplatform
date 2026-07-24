@@ -381,6 +381,7 @@ type ICD_scanner_callback_functions = ICD_Scannerscanner_callback_functions
 // its exact-size bytes and read through the typed As* accessors below. It is
 // pointer-only: never pass it by value.
 type ICAHeader struct {
+	_    [0]uint16
 	data [10]byte
 }
 
@@ -399,6 +400,7 @@ func (u *ICAHeader) AsRefcon() uint {
 // its exact-size bytes and read through the typed As* accessors below. It is
 // pointer-only: never pass it by value.
 type ICDHeader struct {
+	_    [0]uint16
 	data [10]byte
 }
 

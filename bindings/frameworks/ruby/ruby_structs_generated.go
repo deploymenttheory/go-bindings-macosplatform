@@ -67,25 +67,12 @@ type RbArithmeticSequenceComponentsT struct {
 	ExcludeEnd int32
 }
 
-type RbDataTypeStruct struct {
-	WrapStructName unsafe.Pointer
-	Function       unsafe.Pointer
-	Parent         unsafe.Pointer
-	Data           unsafe.Pointer
-	Flags          uint
-}
-
 type RbFdsetT struct {
 	Maxfd int32
 	Fdset unsafe.Pointer
 }
 
 type RbGlobalVariable struct{}
-
-type StHashType struct {
-	Compare unsafe.Pointer
-	Hash    unsafe.Pointer
-}
 
 type StTable struct {
 	EntryPower   uint8
@@ -111,3 +98,49 @@ type StTableEntry struct{ obj.Object }
 // IsNil reports whether StTableEntry is a NULL handle (it wraps no object). Call
 // it before using a returned handle; a nil handle's methods panic.
 func (h StTableEntry) IsNil() bool { return h.Object == nil }
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type RbDataTypeStruct struct {
+	_    [0]uint64
+	data [72]byte
+}
+
+// AsWrapStructName returns the wrap_struct_name field, read from the backing bytes at offset 0.
+func (u *RbDataTypeStruct) AsWrapStructName() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsParent returns the parent field, read from the backing bytes at offset 48.
+func (u *RbDataTypeStruct) AsParent() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[48]))
+}
+
+// AsData returns the data field, read from the backing bytes at offset 56.
+func (u *RbDataTypeStruct) AsData() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[56]))
+}
+
+// AsFlags returns the flags field, read from the backing bytes at offset 64.
+func (u *RbDataTypeStruct) AsFlags() uint {
+	return *(*uint)(unsafe.Pointer(&u.data[64]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type StHashType struct {
+	_    [0]uint64
+	data [16]byte
+}
+
+// AsCompare returns the compare field, read from the backing bytes at offset 0.
+func (u *StHashType) AsCompare() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsHash returns the hash field, read from the backing bytes at offset 8.
+func (u *StHashType) AsHash() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}

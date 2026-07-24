@@ -62,11 +62,18 @@ type BslnFormat3Part struct {
 	MappingData SFNTLookupTable
 }
 
+type BslnFormatUnion struct {
+	Fmt0Part BslnFormat0Part
+	Fmt1Part BslnFormat1Part
+	Fmt2Part BslnFormat2Part
+	Fmt3Part BslnFormat3Part
+}
+
 type BslnTable struct {
 	Version         int32
 	Format          uint16
 	DefaultBaseline uint16
-	Parts           unsafe.Pointer
+	Parts           BslnFormatUnion
 }
 
 // This structure is used to alter the paragraph style.
@@ -161,6 +168,13 @@ type JustWidthDeltaGroup struct {
 	Entries [1]JustWidthDeltaEntry
 }
 
+type KernFormatSpecificHeader struct {
+	OrderedList KernOrderedListHeader
+	StateTable  KernStateHeader
+	SimpleArray KernSimpleArrayHeader
+	IndexArray  KernIndexArrayHeader
+}
+
 type KernIndexArrayHeader struct {
 	GlyphCount      uint16
 	KernValueCount  uint8
@@ -220,7 +234,7 @@ type KernSubtableHeader struct {
 	Length     int32
 	StInfo     uint16
 	TupleIndex int16
-	FsHeader   unsafe.Pointer
+	FsHeader   KernFormatSpecificHeader
 }
 
 type KernTableHeader struct {
@@ -239,7 +253,7 @@ type KernVersion0SubtableHeader struct {
 	Version  uint16
 	Length   uint16
 	StInfo   uint16
-	FsHeader unsafe.Pointer
+	FsHeader KernFormatSpecificHeader
 }
 
 type KerxAnchorPointAction struct {
@@ -269,6 +283,14 @@ type KerxCoordinateAction struct {
 	MarkY uint16
 	CurrX uint16
 	CurrY uint16
+}
+
+type KerxFormatSpecificHeader struct {
+	OrderedList  KerxOrderedListHeader
+	StateTable   KerxStateHeader
+	SimpleArray  KerxSimpleArrayHeader
+	IndexArray   KerxIndexArrayHeader
+	ControlPoint KerxControlPointHeader
 }
 
 type KerxIndexArrayHeader struct {
@@ -323,7 +345,7 @@ type KerxSubtableHeader struct {
 	Length     uint32
 	StInfo     uint32
 	TupleCount uint32
-	FsHeader   unsafe.Pointer
+	FsHeader   KerxFormatSpecificHeader
 }
 
 type KerxTableHeader struct {
@@ -390,11 +412,19 @@ type MortRearrangementSubtable struct {
 	Header STHeader
 }
 
+type MortSpecificSubtable struct {
+	Rearrangement MortRearrangementSubtable
+	Contextual    MortContextualSubtable
+	Ligature      MortLigatureSubtable
+	Swash         MortSwashSubtable
+	Insertion     MortInsertionSubtable
+}
+
 type MortSubtable struct {
 	Length   uint16
 	Coverage uint16
 	Flags    uint32
-	U        unsafe.Pointer
+	U        MortSpecificSubtable
 }
 
 type MortSwashSubtable struct {
@@ -436,11 +466,19 @@ type MorxRearrangementSubtable struct {
 	Header STXHeader
 }
 
+type MorxSpecificSubtable struct {
+	Rearrangement MorxRearrangementSubtable
+	Contextual    MorxContextualSubtable
+	Ligature      MorxLigatureSubtable
+	Swash         MortSwashSubtable
+	Insertion     MorxInsertionSubtable
+}
+
 type MorxSubtable struct {
 	Length   uint32
 	Coverage uint32
 	Flags    uint32
-	U        unsafe.Pointer
+	U        MorxSpecificSubtable
 }
 
 type MorxTable struct {
@@ -509,6 +547,14 @@ type SFNTLookupBinarySearchHeader struct {
 	RangeShift    uint16
 }
 
+type SFNTLookupFormatSpecificHeader struct {
+	TheArray     SFNTLookupArrayHeader
+	Segment      SFNTLookupSegmentHeader
+	Single       SFNTLookupSingleHeader
+	TrimmedArray SFNTLookupTrimmedArrayHeader
+	Vector       SFNTLookupVectorHeader
+}
+
 type SFNTLookupSegment struct {
 	LastGlyph  uint16
 	FirstGlyph uint16
@@ -532,7 +578,7 @@ type SFNTLookupSingleHeader struct {
 
 type SFNTLookupTable struct {
 	Format   uint16
-	FsHeader unsafe.Pointer
+	FsHeader SFNTLookupFormatSpecificHeader
 }
 
 type SFNTLookupTrimmedArrayHeader struct {

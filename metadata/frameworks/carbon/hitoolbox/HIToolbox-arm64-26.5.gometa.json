@@ -28244,29 +28244,37 @@
         },
         {
           "name": "QueryInterface",
-          "objc_type": "SInt32 (*)(void *, CFUUIDBytes, void **)"
+          "objc_type": "SInt32 (*)(void *, CFUUIDBytes, void **)",
+          "offset": 8
         },
         {
           "name": "AddRef",
-          "objc_type": "UInt32 (*)(void *)"
+          "objc_type": "UInt32 (*)(void *)",
+          "offset": 16
         },
         {
           "name": "Release",
-          "objc_type": "UInt32 (*)(void *)"
+          "objc_type": "UInt32 (*)(void *)",
+          "offset": 24
         },
         {
           "name": "ExamineContext",
-          "objc_type": "OSStatus (*)(void *, const AEDesc *, AEDescList *)"
+          "objc_type": "OSStatus (*)(void *, const AEDesc *, AEDescList *)",
+          "offset": 32
         },
         {
           "name": "HandleSelection",
-          "objc_type": "OSStatus (*)(void *, AEDesc *, SInt32)"
+          "objc_type": "OSStatus (*)(void *, AEDesc *, SInt32)",
+          "offset": 40
         },
         {
           "name": "PostMenuCleanup",
-          "objc_type": "void (*)(void *)"
+          "objc_type": "void (*)(void *)",
+          "offset": 48
         }
       ],
+      "size": 56,
+      "align": 8,
       "availability": {},
       "sdk_file": "Carbon.framework/Frameworks/HIToolbox/Menus.h",
       "sdk_line": 5902
@@ -28531,6 +28539,7 @@
         }
       ],
       "size": 28,
+      "align": 2,
       "availability": {},
       "sdk_file": "Carbon.framework/Frameworks/HIToolbox/HIDataBrowser.h",
       "sdk_line": 4072
@@ -28668,6 +28677,7 @@
         }
       ],
       "size": 16,
+      "align": 2,
       "availability": {},
       "sdk_file": "Carbon.framework/Frameworks/HIToolbox/HIDataBrowser.h",
       "sdk_line": 386
@@ -28944,6 +28954,7 @@
         }
       ],
       "size": 18,
+      "align": 2,
       "availability": {},
       "sdk_file": "Carbon.framework/Frameworks/HIToolbox/HIView.h",
       "sdk_line": 4212
@@ -28966,6 +28977,7 @@
         }
       ],
       "size": 18,
+      "align": 2,
       "availability": {},
       "sdk_file": "Carbon.framework/Frameworks/HIToolbox/HIView.h",
       "sdk_line": 4114
@@ -29148,6 +29160,7 @@
         }
       ],
       "size": 18,
+      "align": 2,
       "availability": {},
       "sdk_file": "Carbon.framework/Frameworks/HIToolbox/HIView.h",
       "sdk_line": 4043
@@ -29176,6 +29189,7 @@
         }
       ],
       "size": 16,
+      "align": 2,
       "availability": {},
       "sdk_file": "Carbon.framework/Frameworks/HIToolbox/HITheme.h",
       "sdk_line": 346
@@ -29977,6 +29991,7 @@
         }
       ],
       "size": 260,
+      "align": 2,
       "availability": {},
       "sdk_file": "Carbon.framework/Frameworks/HIToolbox/MacHelp.h",
       "sdk_line": 346
@@ -30017,6 +30032,7 @@
         }
       ],
       "size": 4,
+      "align": 2,
       "availability": {},
       "sdk_file": "Carbon.framework/Frameworks/HIToolbox/MacHelp.h",
       "sdk_line": 341
@@ -30083,6 +30099,7 @@
         }
       ],
       "size": 4,
+      "align": 2,
       "availability": {},
       "sdk_file": "Carbon.framework/Frameworks/HIToolbox/TextEdit.h",
       "sdk_line": 371
@@ -30239,6 +30256,7 @@
         }
       ],
       "size": 30,
+      "align": 2,
       "availability": {},
       "sdk_file": "Carbon.framework/Frameworks/HIToolbox/Menus.h",
       "sdk_line": 6441
@@ -30546,6 +30564,7 @@
         }
       ],
       "size": 28,
+      "align": 2,
       "availability": {},
       "sdk_file": "Carbon.framework/Frameworks/HIToolbox/Menus.h",
       "sdk_line": 601
@@ -30739,6 +30758,7 @@
         }
       ],
       "size": 4,
+      "align": 2,
       "availability": {},
       "sdk_file": "MacTypes.h",
       "sdk_line": 544,
@@ -30796,6 +30816,7 @@
         }
       ],
       "size": 6,
+      "align": 2,
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/QD/Quickdraw.h",
       "sdk_line": 65
@@ -30823,6 +30844,7 @@
         }
       ],
       "size": 8,
+      "align": 2,
       "availability": {},
       "sdk_file": "MacTypes.h",
       "sdk_line": 550
@@ -30865,6 +30887,7 @@
         }
       ],
       "size": 18,
+      "align": 2,
       "availability": {},
       "sdk_file": "Carbon.framework/Frameworks/HIToolbox/TextEdit.h",
       "sdk_line": 358
@@ -30928,6 +30951,7 @@
         }
       ],
       "size": 4,
+      "align": 2,
       "availability": {},
       "sdk_file": "Carbon.framework/Frameworks/HIToolbox/TextServices.h",
       "sdk_line": 577
@@ -30960,6 +30984,7 @@
         }
       ],
       "size": 6,
+      "align": 2,
       "availability": {},
       "sdk_file": "Carbon.framework/Frameworks/HIToolbox/Appearance.h",
       "sdk_line": 1296
@@ -31002,6 +31027,7 @@
         }
       ],
       "size": 20,
+      "align": 2,
       "availability": {},
       "sdk_file": "Carbon.framework/Frameworks/HIToolbox/TextEdit.h",
       "sdk_line": 379
@@ -31095,6 +31121,7 @@
         }
       ],
       "size": 4,
+      "align": 2,
       "availability": {},
       "sdk_file": "Carbon.framework/Frameworks/HIToolbox/TextEdit.h",
       "sdk_line": 353
@@ -31284,6 +31311,7 @@
         }
       ],
       "size": 24,
+      "align": 2,
       "availability": {},
       "sdk_file": "Carbon.framework/Frameworks/HIToolbox/TextServices.h",
       "sdk_line": 589
@@ -31368,6 +31396,34 @@
       "sdk_file": "Carbon.framework/Frameworks/HIToolbox/MacTextEditor.h",
       "sdk_line": 1055
     },
+    "TXNAttributeData": {
+      "fields": [
+        {
+          "name": "dataPtr",
+          "objc_type": "void *"
+        },
+        {
+          "name": "dataValue",
+          "objc_type": "UInt32"
+        },
+        {
+          "name": "atsuFeatures",
+          "objc_type": "TXNATSUIFeatures *"
+        },
+        {
+          "name": "atsuVariations",
+          "objc_type": "TXNATSUIVariations *"
+        },
+        {
+          "name": "urlReference",
+          "objc_type": "CFURLRef"
+        }
+      ],
+      "is_union": true,
+      "availability": {},
+      "sdk_file": "Carbon.framework/Frameworks/HIToolbox/MacTextEditor.h",
+      "sdk_line": 1062
+    },
     "TXNBackground": {
       "fields": [
         {
@@ -31416,6 +31472,30 @@
       "availability": {},
       "sdk_file": "Carbon.framework/Frameworks/HIToolbox/MacTextEditor.h",
       "sdk_line": 1355
+    },
+    "TXNControlData": {
+      "fields": [
+        {
+          "name": "uValue",
+          "objc_type": "unsigned long"
+        },
+        {
+          "name": "sValue",
+          "objc_type": "long"
+        },
+        {
+          "name": "tabValue",
+          "objc_type": "TXNTab"
+        },
+        {
+          "name": "marginsPtr",
+          "objc_type": "TXNMargins *"
+        }
+      ],
+      "is_union": true,
+      "availability": {},
+      "sdk_file": "Carbon.framework/Frameworks/HIToolbox/MacTextEditor.h",
+      "sdk_line": 928
     },
     "TXNLongRect": {
       "fields": [
@@ -31643,6 +31723,7 @@
         }
       ],
       "size": 264,
+      "align": 2,
       "availability": {},
       "sdk_file": "Carbon.framework/Frameworks/HIToolbox/TextServices.h",
       "sdk_line": 564

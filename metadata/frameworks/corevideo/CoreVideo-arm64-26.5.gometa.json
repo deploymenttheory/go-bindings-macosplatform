@@ -2236,6 +2236,7 @@
         }
       ],
       "size": 8,
+      "align": 4,
       "availability": {},
       "sdk_file": "CoreVideo/CVPixelBuffer.h",
       "sdk_line": 210

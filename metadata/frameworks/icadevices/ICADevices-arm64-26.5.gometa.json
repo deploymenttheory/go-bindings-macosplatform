@@ -3368,6 +3368,7 @@
         }
       ],
       "size": 10,
+      "align": 2,
       "availability": {},
       "sdk_file": "ICADevices/ICAApplication.h",
       "sdk_line": 516,
@@ -3866,6 +3867,7 @@
         }
       ],
       "size": 10,
+      "align": 2,
       "availability": {},
       "sdk_file": "ICADevices/ICADevice.h",
       "sdk_line": 56,

@@ -710,6 +710,7 @@
         }
       ],
       "size": 24,
+      "align": 8,
       "availability": {},
       "sdk_file": "libbsm.h",
       "sdk_line": 193
@@ -2159,6 +2160,7 @@
         }
       ],
       "size": 32,
+      "align": 4,
       "availability": {},
       "sdk_file": "message.h",
       "sdk_line": 506

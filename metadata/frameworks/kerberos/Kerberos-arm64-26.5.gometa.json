@@ -1342,9 +1342,12 @@
         },
         {
           "name": "value",
-          "objc_type": "char *"
+          "objc_type": "char *",
+          "offset": 8
         }
       ],
+      "size": 16,
+      "align": 8,
       "availability": {
         "macos_introduced": "10.0",
         "macos_deprecated": "10.8",
@@ -1567,6 +1570,7 @@
         }
       ],
       "size": 24,
+      "align": 8,
       "availability": {},
       "sdk_file": "Kerberos/krb5.h",
       "sdk_line": 2153
@@ -1776,9 +1780,12 @@
         },
         {
           "name": "vector_functions",
-          "objc_type": "const cc_ccache_f *"
+          "objc_type": "const cc_ccache_f *",
+          "offset": 8
         }
       ],
+      "size": 16,
+      "align": 8,
       "availability": {},
       "sdk_file": "Kerberos/CredentialsCache.h",
       "sdk_line": 459
@@ -1791,81 +1798,102 @@
         },
         {
           "name": "destroy",
-          "objc_type": "cc_int32 (*)(cc_ccache_t)"
+          "objc_type": "cc_int32 (*)(cc_ccache_t)",
+          "offset": 8
         },
         {
           "name": "set_default",
-          "objc_type": "cc_int32 (*)(cc_ccache_t)"
+          "objc_type": "cc_int32 (*)(cc_ccache_t)",
+          "offset": 16
         },
         {
           "name": "get_credentials_version",
-          "objc_type": "cc_int32 (*)(cc_ccache_t, cc_uint32 *)"
+          "objc_type": "cc_int32 (*)(cc_ccache_t, cc_uint32 *)",
+          "offset": 24
         },
         {
           "name": "get_name",
-          "objc_type": "cc_int32 (*)(cc_ccache_t, cc_string_t *)"
+          "objc_type": "cc_int32 (*)(cc_ccache_t, cc_string_t *)",
+          "offset": 32
         },
         {
           "name": "get_principal",
-          "objc_type": "cc_int32 (*)(cc_ccache_t, cc_uint32, cc_string_t *)"
+          "objc_type": "cc_int32 (*)(cc_ccache_t, cc_uint32, cc_string_t *)",
+          "offset": 40
         },
         {
           "name": "set_principal",
-          "objc_type": "cc_int32 (*)(cc_ccache_t, cc_uint32, const char *)"
+          "objc_type": "cc_int32 (*)(cc_ccache_t, cc_uint32, const char *)",
+          "offset": 48
         },
         {
           "name": "store_credentials",
-          "objc_type": "cc_int32 (*)(cc_ccache_t, const cc_credentials_union *)"
+          "objc_type": "cc_int32 (*)(cc_ccache_t, const cc_credentials_union *)",
+          "offset": 56
         },
         {
           "name": "remove_credentials",
-          "objc_type": "cc_int32 (*)(cc_ccache_t, cc_credentials_t)"
+          "objc_type": "cc_int32 (*)(cc_ccache_t, cc_credentials_t)",
+          "offset": 64
         },
         {
           "name": "new_credentials_iterator",
-          "objc_type": "cc_int32 (*)(cc_ccache_t, cc_credentials_iterator_t *)"
+          "objc_type": "cc_int32 (*)(cc_ccache_t, cc_credentials_iterator_t *)",
+          "offset": 72
         },
         {
           "name": "move",
-          "objc_type": "cc_int32 (*)(cc_ccache_t, cc_ccache_t)"
+          "objc_type": "cc_int32 (*)(cc_ccache_t, cc_ccache_t)",
+          "offset": 80
         },
         {
           "name": "lock",
-          "objc_type": "cc_int32 (*)(cc_ccache_t, cc_uint32, cc_uint32)"
+          "objc_type": "cc_int32 (*)(cc_ccache_t, cc_uint32, cc_uint32)",
+          "offset": 88
         },
         {
           "name": "unlock",
-          "objc_type": "cc_int32 (*)(cc_ccache_t)"
+          "objc_type": "cc_int32 (*)(cc_ccache_t)",
+          "offset": 96
         },
         {
           "name": "get_last_default_time",
-          "objc_type": "cc_int32 (*)(cc_ccache_t, cc_time_t *)"
+          "objc_type": "cc_int32 (*)(cc_ccache_t, cc_time_t *)",
+          "offset": 104
         },
         {
           "name": "get_change_time",
-          "objc_type": "cc_int32 (*)(cc_ccache_t, cc_time_t *)"
+          "objc_type": "cc_int32 (*)(cc_ccache_t, cc_time_t *)",
+          "offset": 112
         },
         {
           "name": "compare",
-          "objc_type": "cc_int32 (*)(cc_ccache_t, cc_ccache_t, cc_uint32 *)"
+          "objc_type": "cc_int32 (*)(cc_ccache_t, cc_ccache_t, cc_uint32 *)",
+          "offset": 120
         },
         {
           "name": "get_kdc_time_offset",
-          "objc_type": "cc_int32 (*)(cc_ccache_t, cc_uint32, cc_time_t *)"
+          "objc_type": "cc_int32 (*)(cc_ccache_t, cc_uint32, cc_time_t *)",
+          "offset": 128
         },
         {
           "name": "set_kdc_time_offset",
-          "objc_type": "cc_int32 (*)(cc_ccache_t, cc_uint32, cc_time_t)"
+          "objc_type": "cc_int32 (*)(cc_ccache_t, cc_uint32, cc_time_t)",
+          "offset": 136
         },
         {
           "name": "clear_kdc_time_offset",
-          "objc_type": "cc_int32 (*)(cc_ccache_t, cc_uint32)"
+          "objc_type": "cc_int32 (*)(cc_ccache_t, cc_uint32)",
+          "offset": 144
         },
         {
           "name": "wait_for_change",
-          "objc_type": "cc_int32 (*)(cc_ccache_t)"
+          "objc_type": "cc_int32 (*)(cc_ccache_t)",
+          "offset": 152
         }
       ],
+      "size": 160,
+      "align": 8,
       "availability": {},
       "sdk_file": "Kerberos/CredentialsCache.h",
       "sdk_line": 996,
@@ -1879,9 +1907,12 @@
         },
         {
           "name": "vector_functions",
-          "objc_type": "const cc_ccache_iterator_f *"
+          "objc_type": "const cc_ccache_iterator_f *",
+          "offset": 8
         }
       ],
+      "size": 16,
+      "align": 8,
       "availability": {},
       "sdk_file": "Kerberos/CredentialsCache.h",
       "sdk_line": 484
@@ -1894,13 +1925,17 @@
         },
         {
           "name": "next",
-          "objc_type": "cc_int32 (*)(cc_ccache_iterator_t, cc_ccache_t *)"
+          "objc_type": "cc_int32 (*)(cc_ccache_iterator_t, cc_ccache_t *)",
+          "offset": 8
         },
         {
           "name": "clone",
-          "objc_type": "cc_int32 (*)(cc_ccache_iterator_t, cc_ccache_iterator_t *)"
+          "objc_type": "cc_int32 (*)(cc_ccache_iterator_t, cc_ccache_iterator_t *)",
+          "offset": 16
         }
       ],
+      "size": 24,
+      "align": 8,
       "availability": {},
       "sdk_file": "Kerberos/CredentialsCache.h",
       "sdk_line": 1392,
@@ -1914,9 +1949,12 @@
         },
         {
           "name": "vector_functions",
-          "objc_type": "const cc_context_f *"
+          "objc_type": "const cc_context_f *",
+          "offset": 8
         }
       ],
+      "size": 16,
+      "align": 8,
       "availability": {},
       "sdk_file": "Kerberos/CredentialsCache.h",
       "sdk_line": 433
@@ -1929,53 +1967,67 @@
         },
         {
           "name": "get_change_time",
-          "objc_type": "cc_int32 (*)(cc_context_t, cc_time_t *)"
+          "objc_type": "cc_int32 (*)(cc_context_t, cc_time_t *)",
+          "offset": 8
         },
         {
           "name": "get_default_ccache_name",
-          "objc_type": "cc_int32 (*)(cc_context_t, cc_string_t *)"
+          "objc_type": "cc_int32 (*)(cc_context_t, cc_string_t *)",
+          "offset": 16
         },
         {
           "name": "open_ccache",
-          "objc_type": "cc_int32 (*)(cc_context_t, const char *, cc_ccache_t *)"
+          "objc_type": "cc_int32 (*)(cc_context_t, const char *, cc_ccache_t *)",
+          "offset": 24
         },
         {
           "name": "open_default_ccache",
-          "objc_type": "cc_int32 (*)(cc_context_t, cc_ccache_t *)"
+          "objc_type": "cc_int32 (*)(cc_context_t, cc_ccache_t *)",
+          "offset": 32
         },
         {
           "name": "create_ccache",
-          "objc_type": "cc_int32 (*)(cc_context_t, const char *, cc_uint32, const char *, cc_ccache_t *)"
+          "objc_type": "cc_int32 (*)(cc_context_t, const char *, cc_uint32, const char *, cc_ccache_t *)",
+          "offset": 40
         },
         {
           "name": "create_default_ccache",
-          "objc_type": "cc_int32 (*)(cc_context_t, cc_uint32, const char *, cc_ccache_t *)"
+          "objc_type": "cc_int32 (*)(cc_context_t, cc_uint32, const char *, cc_ccache_t *)",
+          "offset": 48
         },
         {
           "name": "create_new_ccache",
-          "objc_type": "cc_int32 (*)(cc_context_t, cc_uint32, const char *, cc_ccache_t *)"
+          "objc_type": "cc_int32 (*)(cc_context_t, cc_uint32, const char *, cc_ccache_t *)",
+          "offset": 56
         },
         {
           "name": "new_ccache_iterator",
-          "objc_type": "cc_int32 (*)(cc_context_t, cc_ccache_iterator_t *)"
+          "objc_type": "cc_int32 (*)(cc_context_t, cc_ccache_iterator_t *)",
+          "offset": 64
         },
         {
           "name": "lock",
-          "objc_type": "cc_int32 (*)(cc_context_t, cc_uint32, cc_uint32)"
+          "objc_type": "cc_int32 (*)(cc_context_t, cc_uint32, cc_uint32)",
+          "offset": 72
         },
         {
           "name": "unlock",
-          "objc_type": "cc_int32 (*)(cc_context_t)"
+          "objc_type": "cc_int32 (*)(cc_context_t)",
+          "offset": 80
         },
         {
           "name": "compare",
-          "objc_type": "cc_int32 (*)(cc_context_t, cc_context_t, cc_uint32 *)"
+          "objc_type": "cc_int32 (*)(cc_context_t, cc_context_t, cc_uint32 *)",
+          "offset": 88
         },
         {
           "name": "wait_for_change",
-          "objc_type": "cc_int32 (*)(cc_context_t)"
+          "objc_type": "cc_int32 (*)(cc_context_t)",
+          "offset": 96
         }
       ],
+      "size": 104,
+      "align": 8,
       "availability": {},
       "sdk_file": "Kerberos/CredentialsCache.h",
       "sdk_line": 691,
@@ -1989,13 +2041,17 @@
         },
         {
           "name": "functions",
-          "objc_type": "const cc_credentials_f *"
+          "objc_type": "const cc_credentials_f *",
+          "offset": 8
         },
         {
           "name": "otherFunctions",
-          "objc_type": "const cc_credentials_f *"
+          "objc_type": "const cc_credentials_f *",
+          "offset": 16
         }
       ],
+      "size": 24,
+      "align": 8,
       "availability": {},
       "sdk_file": "Kerberos/CredentialsCache.h",
       "sdk_line": 629
@@ -2008,9 +2064,12 @@
         },
         {
           "name": "compare",
-          "objc_type": "cc_int32 (*)(cc_credentials_t, cc_credentials_t, cc_uint32 *)"
+          "objc_type": "cc_int32 (*)(cc_credentials_t, cc_credentials_t, cc_uint32 *)",
+          "offset": 8
         }
       ],
+      "size": 16,
+      "align": 8,
       "availability": {},
       "sdk_file": "Kerberos/CredentialsCache.h",
       "sdk_line": 1367,
@@ -2024,9 +2083,12 @@
         },
         {
           "name": "vector_functions",
-          "objc_type": "const cc_credentials_iterator_f *"
+          "objc_type": "const cc_credentials_iterator_f *",
+          "offset": 8
         }
       ],
+      "size": 16,
+      "align": 8,
       "availability": {},
       "sdk_file": "Kerberos/CredentialsCache.h",
       "sdk_line": 652
@@ -2039,13 +2101,17 @@
         },
         {
           "name": "next",
-          "objc_type": "cc_int32 (*)(cc_credentials_iterator_t, cc_credentials_t *)"
+          "objc_type": "cc_int32 (*)(cc_credentials_iterator_t, cc_credentials_t *)",
+          "offset": 8
         },
         {
           "name": "clone",
-          "objc_type": "cc_int32 (*)(cc_credentials_iterator_t, cc_credentials_iterator_t *)"
+          "objc_type": "cc_int32 (*)(cc_credentials_iterator_t, cc_credentials_iterator_t *)",
+          "offset": 16
         }
       ],
+      "size": 24,
+      "align": 8,
       "availability": {},
       "sdk_file": "Kerberos/CredentialsCache.h",
       "sdk_line": 1425,
@@ -2218,13 +2284,17 @@
         },
         {
           "name": "functions",
-          "objc_type": "const cc_string_f *"
+          "objc_type": "const cc_string_f *",
+          "offset": 8
         },
         {
           "name": "vector_functions",
-          "objc_type": "const cc_string_f *"
+          "objc_type": "const cc_string_f *",
+          "offset": 16
         }
       ],
+      "size": 24,
+      "align": 8,
       "availability": {},
       "sdk_file": "Kerberos/CredentialsCache.h",
       "sdk_line": 676
@@ -2236,6 +2306,8 @@
           "objc_type": "cc_int32 (*)(cc_string_t)"
         }
       ],
+      "size": 8,
+      "align": 8,
       "availability": {},
       "sdk_file": "Kerberos/CredentialsCache.h",
       "sdk_line": 1354,
@@ -2283,6 +2355,7 @@
         }
       ],
       "size": 16,
+      "align": 8,
       "availability": {},
       "sdk_file": "Kerberos/gssapi.h",
       "sdk_line": 131

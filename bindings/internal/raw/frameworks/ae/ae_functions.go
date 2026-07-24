@@ -31,7 +31,7 @@ var (
 	_fnAEDisposeToken                             func(*AEDesc) int16
 	_fnAEDuplicateDesc                            func(*AEDesc, *AEDesc) int16
 	_fnAEFlattenDesc                              func(*AEDesc, string, int, *int) int
-	_fnAEGetArray                                 func(*AEDesc, int8, unsafe.Pointer, int, *uint, *int, *int64) int16
+	_fnAEGetArray                                 func(*AEDesc, int8, *AEArrayData, int, *uint, *int, *int64) int16
 	_fnAEGetAttributeDesc                         func(*AEDesc, uint, uint, *AEDesc) int16
 	_fnAEGetAttributePtr                          func(*AEDesc, uint, uint, *uint, unsafe.Pointer, int, *int) int16
 	_fnAEGetCoercionHandler                       func(uint, uint, unsafe.Pointer, unsafe.Pointer, *uint8, uint8) int16
@@ -55,7 +55,7 @@ var (
 	_fnAEObjectInit                               func() int16
 	_fnAEPrintDescToHandle                        func(*AEDesc, **string) int
 	_fnAEProcessMessage                           func(unsafe.Pointer) int
-	_fnAEPutArray                                 func(*AEDesc, int8, unsafe.Pointer, uint, int, int) int16
+	_fnAEPutArray                                 func(*AEDesc, int8, *AEArrayData, uint, int, int) int16
 	_fnAEPutAttributeDesc                         func(*AEDesc, uint, *AEDesc) int16
 	_fnAEPutAttributePtr                          func(*AEDesc, uint, uint, unsafe.Pointer, int) int16
 	_fnAEPutDesc                                  func(*AEDesc, int, *AEDesc) int16
@@ -225,7 +225,7 @@ func AEFlattenDesc(theAEDesc *AEDesc, buffer string, bufferSize int, actualSize 
 	return _fnAEFlattenDesc(theAEDesc, buffer, bufferSize, actualSize)
 }
 
-func AEGetArray(theAEDescList *AEDesc, arrayType int8, arrayPtr unsafe.Pointer, maximumSize int, itemType *uint, itemSize *int, itemCount *int64) int16 {
+func AEGetArray(theAEDescList *AEDesc, arrayType int8, arrayPtr *AEArrayData, maximumSize int, itemType *uint, itemSize *int, itemCount *int64) int16 {
 	return _fnAEGetArray(theAEDescList, arrayType, arrayPtr, maximumSize, itemType, itemSize, itemCount)
 }
 
@@ -321,7 +321,7 @@ func AEProcessMessage(header unsafe.Pointer) int {
 	return _fnAEProcessMessage(header)
 }
 
-func AEPutArray(theAEDescList *AEDesc, arrayType int8, arrayPtr unsafe.Pointer, itemType uint, itemSize int, itemCount int) int16 {
+func AEPutArray(theAEDescList *AEDesc, arrayType int8, arrayPtr *AEArrayData, itemType uint, itemSize int, itemCount int) int16 {
 	return _fnAEPutArray(theAEDescList, arrayType, arrayPtr, itemType, itemSize, itemCount)
 }
 

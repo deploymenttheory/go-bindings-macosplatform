@@ -46,34 +46,8 @@ type NSFastEnumerationState struct {
 type NSHashEnumerator struct {
 }
 
-// Defines a structure that contains the function pointers used to configure behavior of NSHashTable with respect to elements within a hash table.
-type NSHashTableCallBacks struct {
-	Hash     unsafe.Pointer
-	IsEqual  unsafe.Pointer
-	Retain   unsafe.Pointer
-	Release  unsafe.Pointer
-	Describe unsafe.Pointer
-}
-
 // Allows successive elements of a map table to be returned each time this structure is passed to NSNextMapEnumeratorPair.
 type NSMapEnumerator struct {
-}
-
-// The function pointers used to configure behavior of NSMapTable with respect to key elements within a map table.
-type NSMapTableKeyCallBacks struct {
-	Hash          unsafe.Pointer
-	IsEqual       unsafe.Pointer
-	Retain        unsafe.Pointer
-	Release       unsafe.Pointer
-	Describe      unsafe.Pointer
-	NotAKeyMarker unsafe.Pointer
-}
-
-// The function pointers used to configure behavior of NSMapTable with respect to value elements within a map table.
-type NSMapTableValueCallBacks struct {
-	Retain   unsafe.Pointer
-	Release  unsafe.Pointer
-	Describe unsafe.Pointer
 }
 
 // A structure that contains version information about the currently executing operating system, including major, minor, and patch version numbers.
@@ -139,3 +113,100 @@ type SEL struct{ obj.Object }
 // IsNil reports whether SEL is a NULL handle (it wraps no object). Call
 // it before using a returned handle; a nil handle's methods panic.
 func (h SEL) IsNil() bool { return h.Object == nil }
+
+// Defines a structure that contains the function pointers used to configure behavior of NSHashTable with respect to elements within a hash table.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type NSHashTableCallBacks struct {
+	_    [0]uint64
+	data [40]byte
+}
+
+// AsHash returns the hash field, read from the backing bytes at offset 0.
+func (u *NSHashTableCallBacks) AsHash() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsIsEqual returns the isEqual field, read from the backing bytes at offset 8.
+func (u *NSHashTableCallBacks) AsIsEqual() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsRetain returns the retain field, read from the backing bytes at offset 16.
+func (u *NSHashTableCallBacks) AsRetain() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[16]))
+}
+
+// AsRelease returns the release field, read from the backing bytes at offset 24.
+func (u *NSHashTableCallBacks) AsRelease() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[24]))
+}
+
+// AsDescribe returns the describe field, read from the backing bytes at offset 32.
+func (u *NSHashTableCallBacks) AsDescribe() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[32]))
+}
+
+// The function pointers used to configure behavior of NSMapTable with respect to key elements within a map table.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type NSMapTableKeyCallBacks struct {
+	_    [0]uint64
+	data [48]byte
+}
+
+// AsHash returns the hash field, read from the backing bytes at offset 0.
+func (u *NSMapTableKeyCallBacks) AsHash() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsIsEqual returns the isEqual field, read from the backing bytes at offset 8.
+func (u *NSMapTableKeyCallBacks) AsIsEqual() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsRetain returns the retain field, read from the backing bytes at offset 16.
+func (u *NSMapTableKeyCallBacks) AsRetain() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[16]))
+}
+
+// AsRelease returns the release field, read from the backing bytes at offset 24.
+func (u *NSMapTableKeyCallBacks) AsRelease() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[24]))
+}
+
+// AsDescribe returns the describe field, read from the backing bytes at offset 32.
+func (u *NSMapTableKeyCallBacks) AsDescribe() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[32]))
+}
+
+// AsNotAKeyMarker returns the notAKeyMarker field, read from the backing bytes at offset 40.
+func (u *NSMapTableKeyCallBacks) AsNotAKeyMarker() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[40]))
+}
+
+// The function pointers used to configure behavior of NSMapTable with respect to value elements within a map table.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type NSMapTableValueCallBacks struct {
+	_    [0]uint64
+	data [24]byte
+}
+
+// AsRetain returns the retain field, read from the backing bytes at offset 0.
+func (u *NSMapTableValueCallBacks) AsRetain() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsRelease returns the release field, read from the backing bytes at offset 8.
+func (u *NSMapTableValueCallBacks) AsRelease() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsDescribe returns the describe field, read from the backing bytes at offset 16.
+func (u *NSMapTableValueCallBacks) AsDescribe() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[16]))
+}

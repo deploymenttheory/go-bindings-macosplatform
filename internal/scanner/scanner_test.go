@@ -1082,7 +1082,8 @@ func TestExtractExternSkipsNonExtern(t *testing.T) {
 	}
 }
 
-// TestExtractStruct exercises struct extraction (named, non-union structs only).
+// TestExtractStruct exercises struct extraction (named structs and named unions;
+// anonymous records are skipped).
 func TestExtractStructNode(t *testing.T) {
 	sdkRoot := t.TempDir()
 	hdrDir := filepath.Join(sdkRoot, "System", "Library", "Frameworks", "TestFW.framework", "Headers")
@@ -1109,10 +1110,15 @@ func TestExtractStructNode(t *testing.T) {
 				},
 			},
 			{
-				Kind:    "RecordDecl",
-				Name:    "MyUnion",
-				TagUsed: "union", // should be skipped
-				Loc:     &Location{FilePath: fakeHdr},
+				Kind:               "RecordDecl",
+				Name:               "MyUnion", // a NAMED union — now captured (IsUnion)
+				TagUsed:            "union",
+				CompleteDefinition: true,
+				Loc:                &Location{FilePath: fakeHdr},
+				Inner: []ASTNode{
+					{Kind: "FieldDecl", Name: "i", Type: &ASTType{QualType: "int32_t"}},
+					{Kind: "FieldDecl", Name: "f", Type: &ASTType{QualType: "float"}},
+				},
 			},
 			{
 				Kind:    "RecordDecl",
@@ -1130,11 +1136,16 @@ func TestExtractStructNode(t *testing.T) {
 	if got := len(framework.Structs["NSRange"].Fields); got != 2 {
 		t.Errorf("NSRange field count = %d, want 2", got)
 	}
-	if _, ok := framework.Structs["MyUnion"]; ok {
-		t.Error("MyUnion (union) should not be in Structs")
+	mu, ok := framework.Structs["MyUnion"]
+	if !ok {
+		t.Error("MyUnion (named union) should be captured")
+	} else if !mu.IsUnion {
+		t.Error("MyUnion should have IsUnion=true")
+	} else if len(mu.Fields) != 2 {
+		t.Errorf("MyUnion field count = %d, want 2", len(mu.Fields))
 	}
-	if len(framework.Structs) != 1 {
-		t.Errorf("expected 1 struct, got %d: %v", len(framework.Structs), framework.Structs)
+	if len(framework.Structs) != 2 { // NSRange + MyUnion; anonymous struct skipped
+		t.Errorf("expected 2 structs, got %d: %v", len(framework.Structs), framework.Structs)
 	}
 }
 

@@ -5535,6 +5535,7 @@
         }
       ],
       "size": 12,
+      "align": 4,
       "availability": {},
       "sdk_file": "MetalPerformanceShaders.framework/Frameworks/MPSRayIntersector/MPSRayIntersectorTypes.h",
       "sdk_line": 26

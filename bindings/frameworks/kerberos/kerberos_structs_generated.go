@@ -17,93 +17,6 @@ type AppleGssKrb5AuthdataIfRelevantKey struct {
 	Data   unsafe.Pointer
 }
 
-type CcCcacheD struct {
-	Functions       unsafe.Pointer
-	VectorFunctions unsafe.Pointer
-}
-
-// Function pointer table for cc_ccache_t.  For more information see \ref cc_ccache_reference.
-type CcCcacheF struct {
-	Release                unsafe.Pointer
-	Destroy                unsafe.Pointer
-	SetDefault             unsafe.Pointer
-	GetCredentialsVersion  unsafe.Pointer
-	GetName                unsafe.Pointer
-	GetPrincipal           unsafe.Pointer
-	SetPrincipal           unsafe.Pointer
-	StoreCredentials       unsafe.Pointer
-	RemoveCredentials      unsafe.Pointer
-	NewCredentialsIterator unsafe.Pointer
-	Move                   unsafe.Pointer
-	Lock                   unsafe.Pointer
-	Unlock                 unsafe.Pointer
-	GetLastDefaultTime     unsafe.Pointer
-	GetChangeTime          unsafe.Pointer
-	Compare                unsafe.Pointer
-	GetKdcTimeOffset       unsafe.Pointer
-	SetKdcTimeOffset       unsafe.Pointer
-	ClearKdcTimeOffset     unsafe.Pointer
-	WaitForChange          unsafe.Pointer
-}
-
-type CcCcacheIteratorD struct {
-	Functions       unsafe.Pointer
-	VectorFunctions unsafe.Pointer
-}
-
-// Function pointer table for cc_ccache_iterator_t.  For more information see \ref cc_ccache_iterator_reference.
-type CcCcacheIteratorF struct {
-	Release unsafe.Pointer
-	Next    unsafe.Pointer
-	Clone   unsafe.Pointer
-}
-
-type CcContextD struct {
-	Functions       unsafe.Pointer
-	VectorFunctions unsafe.Pointer
-}
-
-// Function pointer table for cc_context_t.  For more information see \ref cc_context_reference.
-type CcContextF struct {
-	Release              unsafe.Pointer
-	GetChangeTime        unsafe.Pointer
-	GetDefaultCcacheName unsafe.Pointer
-	OpenCcache           unsafe.Pointer
-	OpenDefaultCcache    unsafe.Pointer
-	CreateCcache         unsafe.Pointer
-	CreateDefaultCcache  unsafe.Pointer
-	CreateNewCcache      unsafe.Pointer
-	NewCcacheIterator    unsafe.Pointer
-	Lock                 unsafe.Pointer
-	Unlock               unsafe.Pointer
-	Compare              unsafe.Pointer
-	WaitForChange        unsafe.Pointer
-}
-
-type CcCredentialsD struct {
-	Data           unsafe.Pointer
-	Functions      unsafe.Pointer
-	OtherFunctions unsafe.Pointer
-}
-
-// Function pointer table for cc_credentials_t.  For more information see \ref cc_credentials_reference.
-type CcCredentialsF struct {
-	Release unsafe.Pointer
-	Compare unsafe.Pointer
-}
-
-type CcCredentialsIteratorD struct {
-	Functions       unsafe.Pointer
-	VectorFunctions unsafe.Pointer
-}
-
-// Function pointer table for cc_credentials_iterator_t.  For more information see \ref cc_credentials_iterator_reference.
-type CcCredentialsIteratorF struct {
-	Release unsafe.Pointer
-	Next    unsafe.Pointer
-	Clone   unsafe.Pointer
-}
-
 type CcCredentialsUnion struct {
 	Version     uint32
 	Credentials unsafe.Pointer
@@ -149,17 +62,6 @@ type CcData struct {
 	Type   uint32
 	Length uint32
 	Data   unsafe.Pointer
-}
-
-type CcStringD struct {
-	Data            unsafe.Pointer
-	Functions       unsafe.Pointer
-	VectorFunctions unsafe.Pointer
-}
-
-// Function pointer table for cc_string_t.  For more information see \ref cc_string_reference.
-type CcStringF struct {
-	Release unsafe.Pointer
 }
 
 type Credentials struct{}
@@ -221,11 +123,6 @@ type GssKrb5Rfc1964Keydata struct {
 }
 
 type GssNameStruct struct{}
-
-type GssOIDDescStruct struct {
-	Length   uint32
-	Elements unsafe.Pointer
-}
 
 type GssOIDSetDescStruct struct {
 	Count    uint
@@ -401,11 +298,6 @@ type Krb5GetInitCredsOpt struct {
 	Salt              unsafe.Pointer
 }
 
-type Krb5GicOptPaData struct {
-	Attr  unsafe.Pointer
-	Value unsafe.Pointer
-}
-
 type Krb5KdcRep struct {
 	Magic    int32
 	MsgType  uint32
@@ -477,12 +369,6 @@ type Krb5PrincipalData struct {
 	Data   unsafe.Pointer
 	Length int32
 	Type   int32
-}
-
-type Krb5Prompt struct {
-	Prompt unsafe.Pointer
-	Hidden int32
-	Reply  unsafe.Pointer
 }
 
 type Krb5PwdData struct {
@@ -656,3 +542,444 @@ type Krb5Rcache struct{ obj.Object }
 // IsNil reports whether Krb5Rcache is a NULL handle (it wraps no object). Call
 // it before using a returned handle; a nil handle's methods panic.
 func (h Krb5Rcache) IsNil() bool { return h.Object == nil }
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CcCcacheD struct {
+	_    [0]uint64
+	data [16]byte
+}
+
+// AsFunctions returns the functions field, read from the backing bytes at offset 0.
+func (u *CcCcacheD) AsFunctions() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsVectorFunctions returns the vector_functions field, read from the backing bytes at offset 8.
+func (u *CcCcacheD) AsVectorFunctions() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// Function pointer table for cc_ccache_t.  For more information see \ref cc_ccache_reference.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CcCcacheF struct {
+	_    [0]uint64
+	data [160]byte
+}
+
+// AsRelease returns the release field, read from the backing bytes at offset 0.
+func (u *CcCcacheF) AsRelease() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsDestroy returns the destroy field, read from the backing bytes at offset 8.
+func (u *CcCcacheF) AsDestroy() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsSetDefault returns the set_default field, read from the backing bytes at offset 16.
+func (u *CcCcacheF) AsSetDefault() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[16]))
+}
+
+// AsGetCredentialsVersion returns the get_credentials_version field, read from the backing bytes at offset 24.
+func (u *CcCcacheF) AsGetCredentialsVersion() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[24]))
+}
+
+// AsGetName returns the get_name field, read from the backing bytes at offset 32.
+func (u *CcCcacheF) AsGetName() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[32]))
+}
+
+// AsGetPrincipal returns the get_principal field, read from the backing bytes at offset 40.
+func (u *CcCcacheF) AsGetPrincipal() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[40]))
+}
+
+// AsSetPrincipal returns the set_principal field, read from the backing bytes at offset 48.
+func (u *CcCcacheF) AsSetPrincipal() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[48]))
+}
+
+// AsStoreCredentials returns the store_credentials field, read from the backing bytes at offset 56.
+func (u *CcCcacheF) AsStoreCredentials() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[56]))
+}
+
+// AsRemoveCredentials returns the remove_credentials field, read from the backing bytes at offset 64.
+func (u *CcCcacheF) AsRemoveCredentials() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[64]))
+}
+
+// AsNewCredentialsIterator returns the new_credentials_iterator field, read from the backing bytes at offset 72.
+func (u *CcCcacheF) AsNewCredentialsIterator() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[72]))
+}
+
+// AsMove returns the move field, read from the backing bytes at offset 80.
+func (u *CcCcacheF) AsMove() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[80]))
+}
+
+// AsLock returns the lock field, read from the backing bytes at offset 88.
+func (u *CcCcacheF) AsLock() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[88]))
+}
+
+// AsUnlock returns the unlock field, read from the backing bytes at offset 96.
+func (u *CcCcacheF) AsUnlock() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[96]))
+}
+
+// AsGetLastDefaultTime returns the get_last_default_time field, read from the backing bytes at offset 104.
+func (u *CcCcacheF) AsGetLastDefaultTime() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[104]))
+}
+
+// AsGetChangeTime returns the get_change_time field, read from the backing bytes at offset 112.
+func (u *CcCcacheF) AsGetChangeTime() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[112]))
+}
+
+// AsCompare returns the compare field, read from the backing bytes at offset 120.
+func (u *CcCcacheF) AsCompare() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[120]))
+}
+
+// AsGetKdcTimeOffset returns the get_kdc_time_offset field, read from the backing bytes at offset 128.
+func (u *CcCcacheF) AsGetKdcTimeOffset() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[128]))
+}
+
+// AsSetKdcTimeOffset returns the set_kdc_time_offset field, read from the backing bytes at offset 136.
+func (u *CcCcacheF) AsSetKdcTimeOffset() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[136]))
+}
+
+// AsClearKdcTimeOffset returns the clear_kdc_time_offset field, read from the backing bytes at offset 144.
+func (u *CcCcacheF) AsClearKdcTimeOffset() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[144]))
+}
+
+// AsWaitForChange returns the wait_for_change field, read from the backing bytes at offset 152.
+func (u *CcCcacheF) AsWaitForChange() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[152]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CcCcacheIteratorD struct {
+	_    [0]uint64
+	data [16]byte
+}
+
+// AsFunctions returns the functions field, read from the backing bytes at offset 0.
+func (u *CcCcacheIteratorD) AsFunctions() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsVectorFunctions returns the vector_functions field, read from the backing bytes at offset 8.
+func (u *CcCcacheIteratorD) AsVectorFunctions() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// Function pointer table for cc_ccache_iterator_t.  For more information see \ref cc_ccache_iterator_reference.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CcCcacheIteratorF struct {
+	_    [0]uint64
+	data [24]byte
+}
+
+// AsRelease returns the release field, read from the backing bytes at offset 0.
+func (u *CcCcacheIteratorF) AsRelease() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsNext returns the next field, read from the backing bytes at offset 8.
+func (u *CcCcacheIteratorF) AsNext() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsClone returns the clone field, read from the backing bytes at offset 16.
+func (u *CcCcacheIteratorF) AsClone() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[16]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CcContextD struct {
+	_    [0]uint64
+	data [16]byte
+}
+
+// AsFunctions returns the functions field, read from the backing bytes at offset 0.
+func (u *CcContextD) AsFunctions() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsVectorFunctions returns the vector_functions field, read from the backing bytes at offset 8.
+func (u *CcContextD) AsVectorFunctions() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// Function pointer table for cc_context_t.  For more information see \ref cc_context_reference.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CcContextF struct {
+	_    [0]uint64
+	data [104]byte
+}
+
+// AsRelease returns the release field, read from the backing bytes at offset 0.
+func (u *CcContextF) AsRelease() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsGetChangeTime returns the get_change_time field, read from the backing bytes at offset 8.
+func (u *CcContextF) AsGetChangeTime() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsGetDefaultCcacheName returns the get_default_ccache_name field, read from the backing bytes at offset 16.
+func (u *CcContextF) AsGetDefaultCcacheName() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[16]))
+}
+
+// AsOpenCcache returns the open_ccache field, read from the backing bytes at offset 24.
+func (u *CcContextF) AsOpenCcache() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[24]))
+}
+
+// AsOpenDefaultCcache returns the open_default_ccache field, read from the backing bytes at offset 32.
+func (u *CcContextF) AsOpenDefaultCcache() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[32]))
+}
+
+// AsCreateCcache returns the create_ccache field, read from the backing bytes at offset 40.
+func (u *CcContextF) AsCreateCcache() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[40]))
+}
+
+// AsCreateDefaultCcache returns the create_default_ccache field, read from the backing bytes at offset 48.
+func (u *CcContextF) AsCreateDefaultCcache() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[48]))
+}
+
+// AsCreateNewCcache returns the create_new_ccache field, read from the backing bytes at offset 56.
+func (u *CcContextF) AsCreateNewCcache() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[56]))
+}
+
+// AsNewCcacheIterator returns the new_ccache_iterator field, read from the backing bytes at offset 64.
+func (u *CcContextF) AsNewCcacheIterator() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[64]))
+}
+
+// AsLock returns the lock field, read from the backing bytes at offset 72.
+func (u *CcContextF) AsLock() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[72]))
+}
+
+// AsUnlock returns the unlock field, read from the backing bytes at offset 80.
+func (u *CcContextF) AsUnlock() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[80]))
+}
+
+// AsCompare returns the compare field, read from the backing bytes at offset 88.
+func (u *CcContextF) AsCompare() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[88]))
+}
+
+// AsWaitForChange returns the wait_for_change field, read from the backing bytes at offset 96.
+func (u *CcContextF) AsWaitForChange() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[96]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CcCredentialsD struct {
+	_    [0]uint64
+	data [24]byte
+}
+
+// AsData returns the data field, read from the backing bytes at offset 0.
+func (u *CcCredentialsD) AsData() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsFunctions returns the functions field, read from the backing bytes at offset 8.
+func (u *CcCredentialsD) AsFunctions() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsOtherFunctions returns the otherFunctions field, read from the backing bytes at offset 16.
+func (u *CcCredentialsD) AsOtherFunctions() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[16]))
+}
+
+// Function pointer table for cc_credentials_t.  For more information see \ref cc_credentials_reference.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CcCredentialsF struct {
+	_    [0]uint64
+	data [16]byte
+}
+
+// AsRelease returns the release field, read from the backing bytes at offset 0.
+func (u *CcCredentialsF) AsRelease() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsCompare returns the compare field, read from the backing bytes at offset 8.
+func (u *CcCredentialsF) AsCompare() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CcCredentialsIteratorD struct {
+	_    [0]uint64
+	data [16]byte
+}
+
+// AsFunctions returns the functions field, read from the backing bytes at offset 0.
+func (u *CcCredentialsIteratorD) AsFunctions() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsVectorFunctions returns the vector_functions field, read from the backing bytes at offset 8.
+func (u *CcCredentialsIteratorD) AsVectorFunctions() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// Function pointer table for cc_credentials_iterator_t.  For more information see \ref cc_credentials_iterator_reference.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CcCredentialsIteratorF struct {
+	_    [0]uint64
+	data [24]byte
+}
+
+// AsRelease returns the release field, read from the backing bytes at offset 0.
+func (u *CcCredentialsIteratorF) AsRelease() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsNext returns the next field, read from the backing bytes at offset 8.
+func (u *CcCredentialsIteratorF) AsNext() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsClone returns the clone field, read from the backing bytes at offset 16.
+func (u *CcCredentialsIteratorF) AsClone() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[16]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CcStringD struct {
+	_    [0]uint64
+	data [24]byte
+}
+
+// AsData returns the data field, read from the backing bytes at offset 0.
+func (u *CcStringD) AsData() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsFunctions returns the functions field, read from the backing bytes at offset 8.
+func (u *CcStringD) AsFunctions() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsVectorFunctions returns the vector_functions field, read from the backing bytes at offset 16.
+func (u *CcStringD) AsVectorFunctions() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[16]))
+}
+
+// Function pointer table for cc_string_t.  For more information see \ref cc_string_reference.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CcStringF struct {
+	_    [0]uint64
+	data [8]byte
+}
+
+// AsRelease returns the release field, read from the backing bytes at offset 0.
+func (u *CcStringF) AsRelease() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type GssOIDDescStruct struct {
+	_    [0]uint64
+	data [16]byte
+}
+
+// AsLength returns the length field, read from the backing bytes at offset 0.
+func (u *GssOIDDescStruct) AsLength() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsElements returns the elements field, read from the backing bytes at offset 8.
+func (u *GssOIDDescStruct) AsElements() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type Krb5GicOptPaData struct {
+	_    [0]uint64
+	data [16]byte
+}
+
+// AsAttr returns the attr field, read from the backing bytes at offset 0.
+func (u *Krb5GicOptPaData) AsAttr() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsValue returns the value field, read from the backing bytes at offset 8.
+func (u *Krb5GicOptPaData) AsValue() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type Krb5Prompt struct {
+	_    [0]uint64
+	data [24]byte
+}
+
+// AsPrompt returns the prompt field, read from the backing bytes at offset 0.
+func (u *Krb5Prompt) AsPrompt() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsHidden returns the hidden field, read from the backing bytes at offset 8.
+func (u *Krb5Prompt) AsHidden() int32 {
+	return *(*int32)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsReply returns the reply field, read from the backing bytes at offset 16.
+func (u *Krb5Prompt) AsReply() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[16]))
+}

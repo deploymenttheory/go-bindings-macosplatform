@@ -4,22 +4,6 @@
 
 package mapkit
 
-import (
-	"unsafe"
-)
-
-// A rectangular geographic region that centers around a specific latitude and longitude.
-type MKCoordinateRegion struct {
-	Center unsafe.Pointer
-	Span   MKCoordinateSpan
-}
-
-// The width and height of a map region.
-type MKCoordinateSpan struct {
-	LatitudeDelta  unsafe.Pointer
-	LongitudeDelta unsafe.Pointer
-}
-
 // A point on a two-dimensional map projection.
 type MKMapPoint struct {
 	X float64
@@ -44,4 +28,22 @@ type MKTileOverlayPath struct {
 	Y                  int
 	Z                  int
 	ContentScaleFactor float64
+}
+
+// A rectangular geographic region that centers around a specific latitude and longitude.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type MKCoordinateRegion struct {
+	_    [0]uint64
+	data [32]byte
+}
+
+// The width and height of a map region.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type MKCoordinateSpan struct {
+	_    [0]uint64
+	data [16]byte
 }

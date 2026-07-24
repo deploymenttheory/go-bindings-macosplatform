@@ -2764,6 +2764,7 @@
         }
       ],
       "size": 10,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/OSServices/IconStorage.h",
       "sdk_line": 110

@@ -4332,10 +4332,164 @@
       "sdk_file": "GLKit/GLKEffectProperty.h",
       "sdk_line": 31
     },
+    "_GLKMatrix2": {
+      "fields": [
+        {
+          "name": "",
+          "objc_type": "struct _GLKMatrix2::(anonymous at /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/GLKit.framework/Headers/GLKMathTypes.h:36:5)"
+        },
+        {
+          "name": "m2",
+          "objc_type": "float[2][2]"
+        },
+        {
+          "name": "m",
+          "objc_type": "float[4]"
+        }
+      ],
+      "size": 16,
+      "align": 4,
+      "is_union": true,
+      "availability": {},
+      "sdk_file": "GLKit/GLKMathTypes.h",
+      "sdk_line": 34
+    },
+    "_GLKMatrix3": {
+      "fields": [
+        {
+          "name": "",
+          "objc_type": "struct _GLKMatrix3::(anonymous at /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/GLKit.framework/Headers/GLKMathTypes.h:56:5)"
+        },
+        {
+          "name": "m",
+          "objc_type": "float[9]"
+        }
+      ],
+      "size": 36,
+      "align": 4,
+      "is_union": true,
+      "availability": {},
+      "sdk_file": "GLKit/GLKMathTypes.h",
+      "sdk_line": 54
+    },
+    "_GLKMatrix4": {
+      "fields": [
+        {
+          "name": "",
+          "objc_type": "struct _GLKMatrix4::(anonymous at /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/GLKit.framework/Headers/GLKMathTypes.h:80:5)"
+        },
+        {
+          "name": "m",
+          "objc_type": "float[16]"
+        }
+      ],
+      "size": 64,
+      "align": 16,
+      "is_union": true,
+      "availability": {},
+      "sdk_file": "GLKit/GLKMathTypes.h",
+      "sdk_line": 78
+    },
     "_GLKMatrixStack": {
       "availability": {},
       "sdk_file": "GLKit/GLKMatrixStack.h",
       "sdk_line": 25
+    },
+    "_GLKQuaternion": {
+      "fields": [
+        {
+          "name": "",
+          "objc_type": "struct _GLKQuaternion::(anonymous at /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/GLKit.framework/Headers/GLKMathTypes.h:156:5)"
+        },
+        {
+          "name": "",
+          "objc_type": "struct _GLKQuaternion::(anonymous at /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/GLKit.framework/Headers/GLKMathTypes.h:157:5)"
+        },
+        {
+          "name": "q",
+          "objc_type": "float[4]"
+        }
+      ],
+      "size": 16,
+      "align": 16,
+      "is_union": true,
+      "availability": {},
+      "sdk_file": "GLKit/GLKMathTypes.h",
+      "sdk_line": 154
+    },
+    "_GLKVector2": {
+      "fields": [
+        {
+          "name": "",
+          "objc_type": "struct _GLKVector2::(anonymous at /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/GLKit.framework/Headers/GLKMathTypes.h:101:5)"
+        },
+        {
+          "name": "",
+          "objc_type": "struct _GLKVector2::(anonymous at /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/GLKit.framework/Headers/GLKMathTypes.h:102:5)"
+        },
+        {
+          "name": "v",
+          "objc_type": "float[2]"
+        }
+      ],
+      "size": 8,
+      "align": 8,
+      "is_union": true,
+      "availability": {},
+      "sdk_file": "GLKit/GLKMathTypes.h",
+      "sdk_line": 99
+    },
+    "_GLKVector3": {
+      "fields": [
+        {
+          "name": "",
+          "objc_type": "struct _GLKVector3::(anonymous at /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/GLKit.framework/Headers/GLKMathTypes.h:117:5)"
+        },
+        {
+          "name": "",
+          "objc_type": "struct _GLKVector3::(anonymous at /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/GLKit.framework/Headers/GLKMathTypes.h:118:5)"
+        },
+        {
+          "name": "",
+          "objc_type": "struct _GLKVector3::(anonymous at /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/GLKit.framework/Headers/GLKMathTypes.h:119:5)"
+        },
+        {
+          "name": "v",
+          "objc_type": "float[3]"
+        }
+      ],
+      "size": 12,
+      "align": 4,
+      "is_union": true,
+      "availability": {},
+      "sdk_file": "GLKit/GLKMathTypes.h",
+      "sdk_line": 115
+    },
+    "_GLKVector4": {
+      "fields": [
+        {
+          "name": "",
+          "objc_type": "struct _GLKVector4::(anonymous at /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/GLKit.framework/Headers/GLKMathTypes.h:134:5)"
+        },
+        {
+          "name": "",
+          "objc_type": "struct _GLKVector4::(anonymous at /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/GLKit.framework/Headers/GLKMathTypes.h:135:5)"
+        },
+        {
+          "name": "",
+          "objc_type": "struct _GLKVector4::(anonymous at /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/GLKit.framework/Headers/GLKMathTypes.h:136:5)"
+        },
+        {
+          "name": "v",
+          "objc_type": "float[4]"
+        }
+      ],
+      "size": 16,
+      "align": 16,
+      "is_union": true,
+      "availability": {},
+      "sdk_file": "GLKit/GLKMathTypes.h",
+      "sdk_line": 132
     },
     "_GLKVertexAttributeParameters": {
       "fields": [

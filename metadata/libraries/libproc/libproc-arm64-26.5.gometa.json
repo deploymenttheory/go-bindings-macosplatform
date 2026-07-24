@@ -207,6 +207,7 @@
         }
       ],
       "size": 32,
+      "align": 4,
       "availability": {},
       "sdk_file": "message.h",
       "sdk_line": 506

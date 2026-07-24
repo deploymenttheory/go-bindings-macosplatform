@@ -102967,6 +102967,7 @@
         }
       ],
       "size": 32,
+      "align": 8,
       "availability": {},
       "sdk_file": "Foundation/NSGeometry.h",
       "sdk_line": 93
@@ -103021,21 +103022,27 @@
         },
         {
           "name": "isEqual",
-          "objc_type": "BOOL (* _Nullable)(NSHashTable * _Nonnull, const void * _Nonnull, const void * _Nonnull)"
+          "objc_type": "BOOL (* _Nullable)(NSHashTable * _Nonnull, const void * _Nonnull, const void * _Nonnull)",
+          "offset": 8
         },
         {
           "name": "retain",
-          "objc_type": "void (* _Nullable)(NSHashTable * _Nonnull, const void * _Nonnull)"
+          "objc_type": "void (* _Nullable)(NSHashTable * _Nonnull, const void * _Nonnull)",
+          "offset": 16
         },
         {
           "name": "release",
-          "objc_type": "void (* _Nullable)(NSHashTable * _Nonnull, void * _Nonnull)"
+          "objc_type": "void (* _Nullable)(NSHashTable * _Nonnull, void * _Nonnull)",
+          "offset": 24
         },
         {
           "name": "describe",
-          "objc_type": "NSString * _Nullable (* _Nullable)(NSHashTable * _Nonnull, const void * _Nonnull)"
+          "objc_type": "NSString * _Nullable (* _Nullable)(NSHashTable * _Nonnull, const void * _Nonnull)",
+          "offset": 32
         }
       ],
+      "size": 40,
+      "align": 8,
       "availability": {},
       "sdk_file": "Foundation/NSHashTable.h",
       "sdk_line": 95
@@ -103067,25 +103074,32 @@
         },
         {
           "name": "isEqual",
-          "objc_type": "BOOL (* _Nullable)(NSMapTable * _Nonnull, const void * _Nonnull, const void * _Nonnull)"
+          "objc_type": "BOOL (* _Nullable)(NSMapTable * _Nonnull, const void * _Nonnull, const void * _Nonnull)",
+          "offset": 8
         },
         {
           "name": "retain",
-          "objc_type": "void (* _Nullable)(NSMapTable * _Nonnull, const void * _Nonnull)"
+          "objc_type": "void (* _Nullable)(NSMapTable * _Nonnull, const void * _Nonnull)",
+          "offset": 16
         },
         {
           "name": "release",
-          "objc_type": "void (* _Nullable)(NSMapTable * _Nonnull, void * _Nonnull)"
+          "objc_type": "void (* _Nullable)(NSMapTable * _Nonnull, void * _Nonnull)",
+          "offset": 24
         },
         {
           "name": "describe",
-          "objc_type": "NSString * _Nullable (* _Nullable)(NSMapTable * _Nonnull, const void * _Nonnull)"
+          "objc_type": "NSString * _Nullable (* _Nullable)(NSMapTable * _Nonnull, const void * _Nonnull)",
+          "offset": 32
         },
         {
           "name": "notAKeyMarker",
-          "objc_type": "const void * _Nullable"
+          "objc_type": "const void * _Nullable",
+          "offset": 40
         }
       ],
+      "size": 48,
+      "align": 8,
       "availability": {},
       "sdk_file": "Foundation/NSMapTable.h",
       "sdk_line": 96
@@ -103098,13 +103112,17 @@
         },
         {
           "name": "release",
-          "objc_type": "void (* _Nullable)(NSMapTable * _Nonnull, void * _Nonnull)"
+          "objc_type": "void (* _Nullable)(NSMapTable * _Nonnull, void * _Nonnull)",
+          "offset": 8
         },
         {
           "name": "describe",
-          "objc_type": "NSString * _Nullable (* _Nullable)(NSMapTable * _Nonnull, const void * _Nonnull)"
+          "objc_type": "NSString * _Nullable (* _Nullable)(NSMapTable * _Nonnull, const void * _Nonnull)",
+          "offset": 16
         }
       ],
+      "size": 24,
+      "align": 8,
       "availability": {},
       "sdk_file": "Foundation/NSMapTable.h",
       "sdk_line": 109
@@ -103140,6 +103158,7 @@
         }
       ],
       "size": 8,
+      "align": 8,
       "availability": {},
       "sdk_file": "Foundation/NSByteOrder.h",
       "sdk_line": 122
@@ -103152,6 +103171,7 @@
         }
       ],
       "size": 4,
+      "align": 4,
       "availability": {},
       "sdk_file": "Foundation/NSByteOrder.h",
       "sdk_line": 121
@@ -103169,6 +103189,7 @@
         }
       ],
       "size": 16,
+      "align": 8,
       "availability": {},
       "sdk_file": "Foundation/NSRange.h",
       "sdk_line": 12

@@ -3416,6 +3416,7 @@
         }
       ],
       "size": 16,
+      "align": 8,
       "availability": {
         "macos_introduced": "14.0"
       },
@@ -3446,6 +3447,7 @@
         }
       ],
       "size": 24,
+      "align": 4,
       "availability": {},
       "sdk_file": "CoreMedia/CMTime.h",
       "sdk_line": 89,
@@ -3480,6 +3482,7 @@
         }
       ],
       "size": 48,
+      "align": 4,
       "availability": {},
       "sdk_file": "CoreMedia/CMTimeRange.h",
       "sdk_line": 51,

@@ -441,6 +441,7 @@ func DumpAST(sdkPath, framework, arch string) (*ASTNode, error) {
 // size and each field's offset, in BYTES.
 type RecordLayout struct {
 	Size         int
+	Align        int
 	FieldOffsets []int
 }
 
@@ -515,6 +516,9 @@ func parseRecordLayouts(dump string) map[string]RecordLayout {
 			continue
 		}
 		layout := RecordLayout{Size: sizeBits / 8}
+		if alignBits, ok := layoutIntField(block, "Alignment:"); ok && alignBits%8 == 0 {
+			layout.Align = alignBits / 8
+		}
 		byteAligned := true
 		for _, ob := range offsetsBits {
 			if ob%8 != 0 { // a bitfield boundary — Go cannot represent it

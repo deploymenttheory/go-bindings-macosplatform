@@ -8521,6 +8521,7 @@
         }
       ],
       "size": 8,
+      "align": 4,
       "availability": {
         "macos_introduced": "14.3"
       },

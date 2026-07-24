@@ -20222,6 +20222,7 @@
         }
       ],
       "size": 6,
+      "align": 1,
       "availability": {},
       "sdk_file": "IOBluetooth/Bluetooth.h",
       "sdk_line": 225
@@ -21504,6 +21505,7 @@
         }
       ],
       "size": 3,
+      "align": 1,
       "availability": {},
       "sdk_file": "IOBluetooth/Bluetooth.h",
       "sdk_line": 1645
@@ -21541,6 +21543,7 @@
         }
       ],
       "size": 20,
+      "align": 4,
       "availability": {},
       "sdk_file": "IOBluetooth/Bluetooth.h",
       "sdk_line": 1777
@@ -21593,6 +21596,7 @@
         }
       ],
       "size": 16,
+      "align": 4,
       "availability": {},
       "sdk_file": "IOBluetooth/Bluetooth.h",
       "sdk_line": 1799
@@ -21863,6 +21867,7 @@
         }
       ],
       "size": 16,
+      "align": 1,
       "availability": {},
       "sdk_file": "IOBluetooth/Bluetooth.h",
       "sdk_line": 1896
@@ -21988,6 +21993,7 @@
         }
       ],
       "size": 16,
+      "align": 1,
       "availability": {},
       "sdk_file": "IOBluetooth/Bluetooth.h",
       "sdk_line": 231
@@ -22296,6 +22302,7 @@
         }
       ],
       "size": 16,
+      "align": 8,
       "availability": {},
       "sdk_file": "IOBluetooth/objc/IOBluetoothL2CAPChannel.h",
       "sdk_line": 35
@@ -22413,6 +22420,7 @@
         }
       ],
       "size": 32,
+      "align": 8,
       "availability": {},
       "sdk_file": "IOBluetooth/OBEX.h",
       "sdk_line": 545

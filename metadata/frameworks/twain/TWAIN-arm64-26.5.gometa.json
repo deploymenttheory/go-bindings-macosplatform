@@ -224,6 +224,7 @@
         }
       ],
       "size": 32,
+      "align": 2,
       "availability": {},
       "sdk_file": "TWAIN/TWAIN.h",
       "sdk_line": 191
@@ -302,6 +303,7 @@
         }
       ],
       "size": 4,
+      "align": 1,
       "availability": {},
       "sdk_file": "TWAIN/TWAIN.h",
       "sdk_line": 203
@@ -439,6 +441,7 @@
         }
       ],
       "size": 4,
+      "align": 2,
       "availability": {},
       "sdk_file": "TWAIN/TWAIN.h",
       "sdk_line": 174
@@ -466,6 +469,7 @@
         }
       ],
       "size": 16,
+      "align": 2,
       "availability": {},
       "sdk_file": "TWAIN/TWAIN.h",
       "sdk_line": 211
@@ -524,6 +528,7 @@
         }
       ],
       "size": 168,
+      "align": 8,
       "availability": {},
       "sdk_file": "TWAIN/TWAIN.h",
       "sdk_line": 306
@@ -665,6 +670,7 @@
         }
       ],
       "size": 12,
+      "align": 4,
       "availability": {},
       "sdk_file": "TWAIN/TWAIN.h",
       "sdk_line": 486
@@ -730,6 +736,7 @@
         }
       ],
       "size": 16,
+      "align": 8,
       "availability": {},
       "sdk_file": "TWAIN/TWAIN.h",
       "sdk_line": 219
@@ -1082,6 +1089,7 @@
         }
       ],
       "size": 42,
+      "align": 2,
       "availability": {},
       "sdk_file": "TWAIN/TWAIN.h",
       "sdk_line": 232

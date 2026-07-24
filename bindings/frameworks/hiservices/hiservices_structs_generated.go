@@ -7,7 +7,6 @@ package hiservices
 import (
 	"unsafe"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
@@ -50,14 +49,6 @@ type ICCharTable struct {
 	MACToNet [256]uint8
 }
 
-// ********************************************************************************************** types and constants for use with kICDownloadFolder, et. al. **********************************************************************************************
-type ICFileSpec struct {
-	VolName         [32]uint8
-	VolCreationDate int32
-	Fss             carboncore.FSSpec
-	Alias           carboncore.AliasRecord
-}
-
 // ********************************************************************************************** types and constants for use with kICDocumentFont, et. al. **********************************************************************************************
 type ICFontRecord struct {
 	Size int16
@@ -90,21 +81,6 @@ type ICServiceEntry struct {
 type ICServices struct {
 	Count    int16
 	Services [1]ICServiceEntry
-}
-
-type LaunchParamBlockRec struct {
-	Reserved1           uint32
-	Reserved2           uint16
-	LaunchBlockID       uint16
-	LaunchEPBLength     uint32
-	LaunchFileFlags     uint16
-	LaunchControlFlags  uint16
-	LaunchAppRef        unsafe.Pointer
-	LaunchProcessSN     unsafe.Pointer
-	LaunchPreferredSize uint32
-	LaunchMinimumSize   uint32
-	LaunchAvailableSize uint32
-	LaunchAppParameters unsafe.Pointer
 }
 
 type OpaqueICInstance struct{}
@@ -228,3 +204,75 @@ type TranslationRef struct{ obj.Object }
 // IsNil reports whether TranslationRef is a NULL handle (it wraps no object). Call
 // it before using a returned handle; a nil handle's methods panic.
 func (h TranslationRef) IsNil() bool { return h.Object == nil }
+
+// ********************************************************************************************** types and constants for use with kICDownloadFolder, et. al. **********************************************************************************************
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type ICFileSpec struct {
+	_    [0]uint16
+	data [112]byte
+}
+
+// AsVolName returns the volName field, read from the backing bytes at offset 0.
+func (u *ICFileSpec) AsVolName() [32]uint8 {
+	return *(*[32]uint8)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsVolCreationDate returns the volCreationDate field, read from the backing bytes at offset 32.
+func (u *ICFileSpec) AsVolCreationDate() int32 {
+	return *(*int32)(unsafe.Pointer(&u.data[32]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type LaunchParamBlockRec struct {
+	_    [0]uint16
+	data [52]byte
+}
+
+// AsReserved1 returns the reserved1 field, read from the backing bytes at offset 0.
+func (u *LaunchParamBlockRec) AsReserved1() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsReserved2 returns the reserved2 field, read from the backing bytes at offset 4.
+func (u *LaunchParamBlockRec) AsReserved2() uint16 {
+	return *(*uint16)(unsafe.Pointer(&u.data[4]))
+}
+
+// AsLaunchBlockID returns the launchBlockID field, read from the backing bytes at offset 6.
+func (u *LaunchParamBlockRec) AsLaunchBlockID() uint16 {
+	return *(*uint16)(unsafe.Pointer(&u.data[6]))
+}
+
+// AsLaunchEPBLength returns the launchEPBLength field, read from the backing bytes at offset 8.
+func (u *LaunchParamBlockRec) AsLaunchEPBLength() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsLaunchFileFlags returns the launchFileFlags field, read from the backing bytes at offset 12.
+func (u *LaunchParamBlockRec) AsLaunchFileFlags() uint16 {
+	return *(*uint16)(unsafe.Pointer(&u.data[12]))
+}
+
+// AsLaunchControlFlags returns the launchControlFlags field, read from the backing bytes at offset 14.
+func (u *LaunchParamBlockRec) AsLaunchControlFlags() uint16 {
+	return *(*uint16)(unsafe.Pointer(&u.data[14]))
+}
+
+// AsLaunchPreferredSize returns the launchPreferredSize field, read from the backing bytes at offset 32.
+func (u *LaunchParamBlockRec) AsLaunchPreferredSize() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[32]))
+}
+
+// AsLaunchMinimumSize returns the launchMinimumSize field, read from the backing bytes at offset 36.
+func (u *LaunchParamBlockRec) AsLaunchMinimumSize() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[36]))
+}
+
+// AsLaunchAvailableSize returns the launchAvailableSize field, read from the backing bytes at offset 40.
+func (u *LaunchParamBlockRec) AsLaunchAvailableSize() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[40]))
+}

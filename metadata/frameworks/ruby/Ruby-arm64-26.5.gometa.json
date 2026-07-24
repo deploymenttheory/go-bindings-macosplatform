@@ -608,6 +608,7 @@
         }
       ],
       "size": 16,
+      "align": 8,
       "availability": {},
       "sdk_file": "Ruby/ruby/ruby.h",
       "sdk_line": 884
@@ -788,6 +789,7 @@
         }
       ],
       "size": 72,
+      "align": 8,
       "availability": {},
       "sdk_file": "Ruby/ruby/ruby.h",
       "sdk_line": 1136
@@ -820,9 +822,12 @@
         },
         {
           "name": "hash",
-          "objc_type": "st_index_t (*)()"
+          "objc_type": "st_index_t (*)()",
+          "offset": 8
         }
       ],
+      "size": 16,
+      "align": 8,
       "availability": {},
       "sdk_file": "Ruby/ruby/ruby/ruby/st.h",
       "sdk_line": 61

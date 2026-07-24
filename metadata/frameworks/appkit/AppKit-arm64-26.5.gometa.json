@@ -184179,6 +184179,7 @@
         }
       ],
       "size": 32,
+      "align": 8,
       "availability": {
         "macos_introduced": "10.15"
       },

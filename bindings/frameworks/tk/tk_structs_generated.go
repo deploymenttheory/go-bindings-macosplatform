@@ -23,13 +23,6 @@ type ScreenFormat struct {
 	ScanlinePad  int32
 }
 
-type TkStubHooks struct {
-	TkPlatStubs    unsafe.Pointer
-	TkIntStubs     unsafe.Pointer
-	TkIntPlatStubs unsafe.Pointer
-	TkIntXlibStubs unsafe.Pointer
-}
-
 type TkStubs struct {
 	Magic                            int32
 	Hooks                            unsafe.Pointer
@@ -417,6 +410,42 @@ type XDisplay struct {
 	Savedsynchandler   unsafe.Pointer
 }
 
+type XEvent struct {
+	Type              int32
+	Xany              unsafe.Pointer
+	Xkey              unsafe.Pointer
+	Xbutton           unsafe.Pointer
+	Xmotion           unsafe.Pointer
+	Xcrossing         unsafe.Pointer
+	Xfocus            unsafe.Pointer
+	Xexpose           unsafe.Pointer
+	Xgraphicsexpose   unsafe.Pointer
+	Xnoexpose         unsafe.Pointer
+	Xvisibility       unsafe.Pointer
+	Xcreatewindow     unsafe.Pointer
+	Xdestroywindow    unsafe.Pointer
+	Xunmap            unsafe.Pointer
+	Xmap              unsafe.Pointer
+	Xmaprequest       unsafe.Pointer
+	Xreparent         unsafe.Pointer
+	Xconfigure        unsafe.Pointer
+	Xgravity          unsafe.Pointer
+	Xresizerequest    unsafe.Pointer
+	Xconfigurerequest unsafe.Pointer
+	Xcirculate        unsafe.Pointer
+	Xcirculaterequest unsafe.Pointer
+	Xproperty         unsafe.Pointer
+	Xselectionclear   unsafe.Pointer
+	Xselectionrequest unsafe.Pointer
+	Xselection        unsafe.Pointer
+	Xcolormap         unsafe.Pointer
+	Xclient           unsafe.Pointer
+	Xmapping          unsafe.Pointer
+	Xerror            unsafe.Pointer
+	Xkeymap           unsafe.Pointer
+	Pad               [24]int
+}
+
 type XExtCodes struct {
 	Extension   int32
 	MajorOpcode int32
@@ -580,3 +609,31 @@ type XIM struct{ obj.Object }
 // IsNil reports whether XIM is a NULL handle (it wraps no object). Call
 // it before using a returned handle; a nil handle's methods panic.
 func (h XIM) IsNil() bool { return h.Object == nil }
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type TkStubHooks struct {
+	_    [0]uint64
+	data [32]byte
+}
+
+// AsTkPlatStubs returns the tkPlatStubs field, read from the backing bytes at offset 0.
+func (u *TkStubHooks) AsTkPlatStubs() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsTkIntStubs returns the tkIntStubs field, read from the backing bytes at offset 8.
+func (u *TkStubHooks) AsTkIntStubs() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsTkIntPlatStubs returns the tkIntPlatStubs field, read from the backing bytes at offset 16.
+func (u *TkStubHooks) AsTkIntPlatStubs() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[16]))
+}
+
+// AsTkIntXlibStubs returns the tkIntXlibStubs field, read from the backing bytes at offset 24.
+func (u *TkStubHooks) AsTkIntXlibStubs() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[24]))
+}

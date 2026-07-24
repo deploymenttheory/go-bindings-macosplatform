@@ -549,9 +549,138 @@
         }
       ],
       "size": 8,
+      "align": 1,
       "availability": {},
       "sdk_file": "ndr.h",
       "sdk_line": 40
+    },
+    "__ReplyUnion__vm_map_subsystem": {
+      "fields": [
+        {
+          "name": "Reply_vm_region",
+          "objc_type": "__Reply__vm_region_t"
+        },
+        {
+          "name": "Reply_vm_allocate",
+          "objc_type": "__Reply__vm_allocate_t"
+        },
+        {
+          "name": "Reply_vm_deallocate",
+          "objc_type": "__Reply__vm_deallocate_t"
+        },
+        {
+          "name": "Reply_vm_protect",
+          "objc_type": "__Reply__vm_protect_t"
+        },
+        {
+          "name": "Reply_vm_inherit",
+          "objc_type": "__Reply__vm_inherit_t"
+        },
+        {
+          "name": "Reply_vm_read",
+          "objc_type": "__Reply__vm_read_t"
+        },
+        {
+          "name": "Reply_vm_read_list",
+          "objc_type": "__Reply__vm_read_list_t"
+        },
+        {
+          "name": "Reply_vm_write",
+          "objc_type": "__Reply__vm_write_t"
+        },
+        {
+          "name": "Reply_vm_copy",
+          "objc_type": "__Reply__vm_copy_t"
+        },
+        {
+          "name": "Reply_vm_read_overwrite",
+          "objc_type": "__Reply__vm_read_overwrite_t"
+        },
+        {
+          "name": "Reply_vm_msync",
+          "objc_type": "__Reply__vm_msync_t"
+        },
+        {
+          "name": "Reply_vm_behavior_set",
+          "objc_type": "__Reply__vm_behavior_set_t"
+        },
+        {
+          "name": "Reply_vm_map",
+          "objc_type": "__Reply__vm_map_t"
+        },
+        {
+          "name": "Reply_vm_machine_attribute",
+          "objc_type": "__Reply__vm_machine_attribute_t"
+        },
+        {
+          "name": "Reply_vm_remap",
+          "objc_type": "__Reply__vm_remap_t"
+        },
+        {
+          "name": "Reply_task_wire",
+          "objc_type": "__Reply__task_wire_t"
+        },
+        {
+          "name": "Reply_mach_make_memory_entry",
+          "objc_type": "__Reply__mach_make_memory_entry_t"
+        },
+        {
+          "name": "Reply_vm_map_page_query",
+          "objc_type": "__Reply__vm_map_page_query_t"
+        },
+        {
+          "name": "Reply_mach_vm_region_info",
+          "objc_type": "__Reply__mach_vm_region_info_t"
+        },
+        {
+          "name": "Reply_vm_mapped_pages_info",
+          "objc_type": "__Reply__vm_mapped_pages_info_t"
+        },
+        {
+          "name": "Reply_vm_region_recurse",
+          "objc_type": "__Reply__vm_region_recurse_t"
+        },
+        {
+          "name": "Reply_vm_region_recurse_64",
+          "objc_type": "__Reply__vm_region_recurse_64_t"
+        },
+        {
+          "name": "Reply_mach_vm_region_info_64",
+          "objc_type": "__Reply__mach_vm_region_info_64_t"
+        },
+        {
+          "name": "Reply_vm_region_64",
+          "objc_type": "__Reply__vm_region_64_t"
+        },
+        {
+          "name": "Reply_mach_make_memory_entry_64",
+          "objc_type": "__Reply__mach_make_memory_entry_64_t"
+        },
+        {
+          "name": "Reply_vm_map_64",
+          "objc_type": "__Reply__vm_map_64_t"
+        },
+        {
+          "name": "Reply_vm_purgable_control",
+          "objc_type": "__Reply__vm_purgable_control_t"
+        },
+        {
+          "name": "Reply_vm_map_exec_lockdown",
+          "objc_type": "__Reply__vm_map_exec_lockdown_t"
+        },
+        {
+          "name": "Reply_vm_remap_new",
+          "objc_type": "__Reply__vm_remap_new_t"
+        },
+        {
+          "name": "Reply_vm_reallocate",
+          "objc_type": "__Reply__vm_reallocate_t"
+        }
+      ],
+      "is_union": true,
+      "availability": {},
+      "sdk_file": "vm_map.h",
+      "sdk_line": 1486
     },
     "__Reply__mach_make_memory_entry_64_t": {
       "fields": [
@@ -1246,6 +1375,7 @@
         }
       ],
       "size": 108,
+      "align": 4,
       "availability": {},
       "sdk_file": "vm_map.h",
       "sdk_line": 1058
@@ -1330,6 +1460,134 @@
       "availability": {},
       "sdk_file": "vm_map.h",
       "sdk_line": 1155
+    },
+    "__RequestUnion__vm_map_subsystem": {
+      "fields": [
+        {
+          "name": "Request_vm_region",
+          "objc_type": "__Request__vm_region_t"
+        },
+        {
+          "name": "Request_vm_allocate",
+          "objc_type": "__Request__vm_allocate_t"
+        },
+        {
+          "name": "Request_vm_deallocate",
+          "objc_type": "__Request__vm_deallocate_t"
+        },
+        {
+          "name": "Request_vm_protect",
+          "objc_type": "__Request__vm_protect_t"
+        },
+        {
+          "name": "Request_vm_inherit",
+          "objc_type": "__Request__vm_inherit_t"
+        },
+        {
+          "name": "Request_vm_read",
+          "objc_type": "__Request__vm_read_t"
+        },
+        {
+          "name": "Request_vm_read_list",
+          "objc_type": "__Request__vm_read_list_t"
+        },
+        {
+          "name": "Request_vm_write",
+          "objc_type": "__Request__vm_write_t"
+        },
+        {
+          "name": "Request_vm_copy",
+          "objc_type": "__Request__vm_copy_t"
+        },
+        {
+          "name": "Request_vm_read_overwrite",
+          "objc_type": "__Request__vm_read_overwrite_t"
+        },
+        {
+          "name": "Request_vm_msync",
+          "objc_type": "__Request__vm_msync_t"
+        },
+        {
+          "name": "Request_vm_behavior_set",
+          "objc_type": "__Request__vm_behavior_set_t"
+        },
+        {
+          "name": "Request_vm_map",
+          "objc_type": "__Request__vm_map_t"
+        },
+        {
+          "name": "Request_vm_machine_attribute",
+          "objc_type": "__Request__vm_machine_attribute_t"
+        },
+        {
+          "name": "Request_vm_remap",
+          "objc_type": "__Request__vm_remap_t"
+        },
+        {
+          "name": "Request_task_wire",
+          "objc_type": "__Request__task_wire_t"
+        },
+        {
+          "name": "Request_mach_make_memory_entry",
+          "objc_type": "__Request__mach_make_memory_entry_t"
+        },
+        {
+          "name": "Request_vm_map_page_query",
+          "objc_type": "__Request__vm_map_page_query_t"
+        },
+        {
+          "name": "Request_mach_vm_region_info",
+          "objc_type": "__Request__mach_vm_region_info_t"
+        },
+        {
+          "name": "Request_vm_mapped_pages_info",
+          "objc_type": "__Request__vm_mapped_pages_info_t"
+        },
+        {
+          "name": "Request_vm_region_recurse",
+          "objc_type": "__Request__vm_region_recurse_t"
+        },
+        {
+          "name": "Request_vm_region_recurse_64",
+          "objc_type": "__Request__vm_region_recurse_64_t"
+        },
+        {
+          "name": "Request_mach_vm_region_info_64",
+          "objc_type": "__Request__mach_vm_region_info_64_t"
+        },
+        {
+          "name": "Request_vm_region_64",
+          "objc_type": "__Request__vm_region_64_t"
+        },
+        {
+          "name": "Request_mach_make_memory_entry_64",
+          "objc_type": "__Request__mach_make_memory_entry_64_t"
+        },
+        {
+          "name": "Request_vm_map_64",
+          "objc_type": "__Request__vm_map_64_t"
+        },
+        {
+          "name": "Request_vm_purgable_control",
+          "objc_type": "__Request__vm_purgable_control_t"
+        },
+        {
+          "name": "Request_vm_map_exec_lockdown",
+          "objc_type": "__Request__vm_map_exec_lockdown_t"
+        },
+        {
+          "name": "Request_vm_remap_new",
+          "objc_type": "__Request__vm_remap_new_t"
+        },
+        {
+          "name": "Request_vm_reallocate",
+          "objc_type": "__Request__vm_reallocate_t"
+        }
+      ],
+      "is_union": true,
+      "availability": {},
+      "sdk_file": "vm_map.h",
+      "sdk_line": 1017
     },
     "__Request__mach_make_memory_entry_64_t": {
       "fields": [
@@ -2089,6 +2347,7 @@
         }
       ],
       "size": 48,
+      "align": 4,
       "availability": {},
       "sdk_file": "vm_map.h",
       "sdk_line": 559

@@ -132,7 +132,9 @@ func ComputeEmittableStructs(
 		ownEnumsByFw[framework.Framework] = buildOwnEnumNames(framework)
 		ctx := typemap.Context{Framework: framework.Framework}
 		for name, s := range framework.Structs {
-			if s.Availability.IsUnavailable || len(s.Fields) == 0 {
+			// A union can never be a clean value struct (members overlap at offset 0);
+			// the byte-array tier owns it. Excluding it here keeps the two sets disjoint.
+			if s.Availability.IsUnavailable || len(s.Fields) == 0 || s.IsUnion {
 				continue
 			}
 			goName := naming.ExportedTypeName(name)
@@ -210,32 +212,17 @@ func ComputeEmittableStructs(
 // is disjoint from ComputeEmittableStructs (clean layout) by construction, and is
 // kept OUT of the by-value EmittableStructs gate — a [N]byte cannot be passed by
 // value correctly (float register classification).
+// mapper.EmittableStructs must already be populated (the generator computes it
+// before this).
 func ComputeByteArrayStructs(
 	frameworks []*meta.FrameworkMeta,
 	mapper *typemap.Mapper,
 ) map[string]bool {
-	enumWidths := buildEnumFieldWidths(frameworks)
-	enumSizer := func(goType string) (size, align int, ok bool) {
-		if w, found := enumWidths[goType]; found {
-			return w[0], w[1], true
-		}
-		return 0, 0, false
-	}
-	primitiveOrArray := func(gt string) bool {
-		if structlayout.Primitives[gt] {
-			return true
-		}
-		return structlayout.IsPrimitiveOrArrayOf(gt, func(e string) bool {
-			return structlayout.Primitives[e]
-		})
-	}
-
 	out := make(map[string]bool)
 	for _, framework := range frameworks {
-		ctx := typemap.Context{Framework: framework.Framework}
 		for name, s := range framework.Structs {
-			// Require an authoritative size (implies clang's field count matched, so
-			// every Offset is trustworthy — extract.go stamps Size only then).
+			// Require an authoritative size (clang's field count matched, or
+			// pointerOnlyLayout synthesised it, so every Offset is trustworthy).
 			if s.Availability.IsUnavailable || len(s.Fields) == 0 || s.Size == 0 {
 				continue
 			}
@@ -243,32 +230,13 @@ func ComputeByteArrayStructs(
 			if !isExportedGoIdent(goName) || out[goName] {
 				continue
 			}
-			_, goTypes, ok := resolveStructFields(s, ctx, mapper)
-			if !ok {
-				continue
-			}
-			fieldOffsets := make([]int, len(s.Fields))
-			for i, f := range s.Fields {
-				fieldOffsets[i] = f.Offset
-			}
-			// Only structs the clean tier rejects. A clean-layout struct is handled by
-			// ComputeEmittableStructs and must not be double-emitted here.
-			cleanLayout := structlayout.LayoutSafeFromGoTypes(s.Packed, goTypes) &&
-				structlayout.LayoutMatchesAuthoritative(s.Size, s.Packed, fieldOffsets, goTypes, enumSizer)
-			if cleanLayout {
-				continue
-			}
-			// Every field must be a concrete primitive/array type so its accessor names
-			// a real Go type; a field that would itself degrade keeps the whole struct
-			// opaque (as today) rather than emitting a mis-typed accessor.
-			allAccessible := true
-			for _, gt := range goTypes {
-				if !primitiveOrArray(gt) {
-					allAccessible = false
-					break
-				}
-			}
-			if !allAccessible {
+			// A clean by-value struct stays a typed value struct. A union is never
+			// clean (members overlap at offset 0). Everything else with an
+			// authoritative size that the clean tier rejected — a degraded field
+			// (unsafe.Pointer that mislays or mis-sizes the struct), a packed-unsafe
+			// or misaligned layout — is a byte-array candidate. Keying off the already
+			// computed EmittableStructs set guarantees the two tiers stay disjoint.
+			if !s.IsUnion && mapper.EmittableStructs[goName] {
 				continue
 			}
 			out[goName] = true
@@ -434,12 +402,17 @@ func emitStructs(
 				GoSymbol: goName,
 			})
 		}
-		// Second admission tier: a layout the clean path rejects (packed-misaligned)
-		// but whose exact size + offsets are known is emitted as [N]byte + typed
-		// accessors instead of degrading its fields to unsafe.Pointer.
-		if mapper.ByteArrayStructs[goName] {
-			imports["unsafe"] = "unsafe"
-			byteArrayStructs = append(byteArrayStructs, buildByteArrayStructView(goName, s, ctx, mapper))
+		// Second admission tier: a layout the clean path rejects (packed-misaligned,
+		// union, degraded) but whose exact size is known is emitted as [N]byte + typed
+		// accessors instead of degrading its fields to unsafe.Pointer. The Size>0 guard
+		// covers a rare duplicate-goName case where this instance (a forward decl) has
+		// no layout while the byte-array set was keyed off the complete one.
+		if mapper.ByteArrayStructs[goName] && s.Size > 0 {
+			v := buildByteArrayStructView(goName, s, ctx, mapper)
+			if len(v.Accessors) > 0 {
+				imports["unsafe"] = "unsafe" // only the accessor bodies use unsafe
+			}
+			byteArrayStructs = append(byteArrayStructs, v)
 			continue
 		}
 		// A fieldless opaque struct that is itself a CF handle typedef becomes the
@@ -548,26 +521,92 @@ func buildByteArrayStructView(
 	ctx typemap.Context,
 	mapper *typemap.Mapper,
 ) view.ByteArrayStruct {
-	names, goTypes, _ := resolveStructFields(s, ctx, mapper)
-	offsets := make([]int, len(s.Fields))
-	for i, f := range s.Fields {
-		offsets[i] = f.Offset
-	}
-	plan := structlayout.AccessorPlan(names, offsets, goTypes)
-	accessors := make([]view.Accessor, 0, len(plan))
-	for _, a := range plan {
+	accessors := make([]view.Accessor, 0, len(s.Fields))
+	for _, f := range s.Fields {
+		if f.Name == "" || strings.HasPrefix(f.Name, "_") {
+			continue // padding / anonymous — no public accessor
+		}
+		// Resolve this field alone: a sibling field may be unresolvable (an anonymous
+		// union) without denying an accessor to the fields that do resolve.
+		gt := mapper.GoABIType(f.ObjCType, structlayout.StructFieldGoType(f.ObjCType, mapper.GoType(f.ObjCType, ctx, make(typemap.ImportSet))))
+		accType, ok := byteArrayAccessorType(f.ObjCType, gt)
+		if !ok {
+			continue // a by-value aggregate (union, struct) we cannot safely reinterpret
+		}
+		// A union member overlaps at offset 0; a struct member sits at its offset.
+		offset := f.Offset
+		if s.IsUnion {
+			offset = 0
+		}
 		accessors = append(accessors, view.Accessor{
-			GoName: "As" + structFieldGoName(a.Name),
-			Offset: a.Offset,
-			GoType: a.GoType,
-			Field:  a.Name,
+			GoName: "As" + structFieldGoName(f.Name),
+			Offset: offset,
+			GoType: accType,
+			Field:  f.Name,
 		})
 	}
 	return view.ByteArrayStruct{
 		Doc:       cleanDoc(s.Doc),
 		GoName:    goName,
 		Size:      s.Size,
+		AlignElem: byteArrayAlignElem(s),
 		Accessors: accessors,
+	}
+}
+
+// byteArrayAccessorType decides the Go type an As<Field> accessor returns for one
+// field of a byte-array struct, or ok=false when the field is a by-value aggregate
+// that cannot be reinterpreted to a single Go type (the backing [N]byte still
+// yields the correct total size). A primitive or array-of-primitive field is read
+// as its exact-width Go type; any machine pointer (function pointer, block,
+// object, or data pointer) is exposed as the raw unsafe.Pointer.
+func byteArrayAccessorType(objcType, goType string) (string, bool) {
+	if structlayout.Primitives[goType] ||
+		structlayout.IsPrimitiveOrArrayOf(goType, func(e string) bool { return structlayout.Primitives[e] }) {
+		return goType, true
+	}
+	if isCPointerWidth(objcType) {
+		return "unsafe.Pointer", true
+	}
+	return "", false
+}
+
+// isCPointerWidth reports whether a C field type is a single 8-byte machine
+// pointer: a function pointer or block ("(*"/"(^"), or a type whose last token is
+// "*". Mirrors the scanner's pointerOnlyLayout classification.
+func isCPointerWidth(objcType string) bool {
+	t := strings.TrimSpace(objcType)
+	if t == "" {
+		return false
+	}
+	if strings.Contains(t, "(*") || strings.Contains(t, "(^") {
+		return true
+	}
+	for _, q := range []string{"_Nullable", "_Nonnull", "_Null_unspecified", "const", "volatile"} {
+		t = strings.TrimSpace(strings.TrimSuffix(t, q))
+	}
+	return strings.HasSuffix(strings.TrimSpace(t), "*")
+}
+
+// byteArrayAlignElem returns the Go type of a leading `_ [0]<elem>` field that
+// forces the backing struct's alignment to the C alignment, or "" when none is
+// needed. A packed struct is C-aligned to 1 (matching a plain [N]byte). Go has no
+// scalar wider than 8-byte alignment, so a 16-byte-aligned C type (rare SIMD) is
+// aligned to 8 — the authoritative Size is always a multiple of the C alignment,
+// so a Go struct rounded up to <=8 never changes the size.
+func byteArrayAlignElem(s meta.Struct) string {
+	if s.Packed {
+		return ""
+	}
+	switch {
+	case s.Align >= 8:
+		return "uint64"
+	case s.Align == 4:
+		return "uint32"
+	case s.Align == 2:
+		return "uint16"
+	default:
+		return ""
 	}
 }
 

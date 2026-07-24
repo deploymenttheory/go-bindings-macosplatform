@@ -6,20 +6,12 @@ package metal
 
 import (
 	"unsafe"
-
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
 // A struct representing a range of a Metal buffer. The offset into the buffer is included in the address. The length is generally optional, which a value of (uint64_t)-1 representing the range from the given address to the end of the buffer. However, providing the length can enable more accurate API validation, especially when sub-allocating ranges of a buffer.
 type MTL4BufferRange struct {
 	BufferAddress uint64
 	Length        uint64
-}
-
-// Groups together arguments for an operation to copy a sparse buffer mapping.
-type MTL4CopySparseBufferMappingOperation struct {
-	SourceRange       foundation.NSRange
-	DestinationOffset uint
 }
 
 // Groups together arguments for an operation to copy a sparse texture mapping.
@@ -35,13 +27,6 @@ type MTL4CopySparseTextureMappingOperation struct {
 // Represents a timestamp data entry in a counter heap of type MTL4CounterHeapTypeTimestamp.
 type MTL4TimestampHeapEntry struct {
 	Timestamp uint64
-}
-
-// Groups together arguments for an operation to update a sparse buffer mapping.
-type MTL4UpdateSparseBufferMappingOperation struct {
-	Mode        SparseTextureMappingMode
-	BufferRange foundation.NSRange
-	HeapOffset  uint
 }
 
 // Groups together arguments for an operation to update a sparse texture mapping.
@@ -236,14 +221,6 @@ type MTLOrigin struct {
 	Z uint
 }
 
-type MTLPackedFloat3 struct {
-	Field0 unsafe.Pointer
-}
-
-type MTLPackedFloat4x3 struct {
-	Columns [4]MTLPackedFloat3
-}
-
 type MTLPackedFloatQuaternion struct {
 	X float32
 	Y float32
@@ -328,4 +305,48 @@ type MTLViewport struct {
 	Height  float64
 	Znear   float64
 	Zfar    float64
+}
+
+// Groups together arguments for an operation to copy a sparse buffer mapping.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type MTL4CopySparseBufferMappingOperation struct {
+	_    [0]uint64
+	data [24]byte
+}
+
+// AsDestinationOffset returns the destinationOffset field, read from the backing bytes at offset 16.
+func (u *MTL4CopySparseBufferMappingOperation) AsDestinationOffset() uint {
+	return *(*uint)(unsafe.Pointer(&u.data[16]))
+}
+
+// Groups together arguments for an operation to update a sparse buffer mapping.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type MTL4UpdateSparseBufferMappingOperation struct {
+	_    [0]uint64
+	data [32]byte
+}
+
+// AsHeapOffset returns the heapOffset field, read from the backing bytes at offset 24.
+func (u *MTL4UpdateSparseBufferMappingOperation) AsHeapOffset() uint {
+	return *(*uint)(unsafe.Pointer(&u.data[24]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type MTLPackedFloat3 struct {
+	_    [0]uint32
+	data [12]byte
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type MTLPackedFloat4x3 struct {
+	_    [0]uint32
+	data [48]byte
 }

@@ -45,15 +45,6 @@ type CEAuthorityInfoAccess struct {
 	AccessDescriptions    unsafe.Pointer
 }
 
-type CEAuthorityKeyID struct {
-	KeyIdentifierPresent int32
-	KeyIdentifier        CssmData
-	GeneralNamesPresent  int32
-	GeneralNames         unsafe.Pointer
-	SerialNumberPresent  int32
-	SerialNumber         CssmData
-}
-
 type CEBasicConstraints struct {
 	CA                       int32
 	PathLenConstraintPresent int32
@@ -128,11 +119,6 @@ type CEIssuingDistributionPoint struct {
 	IndirectCrl            int32
 }
 
-type CENameConstraints struct {
-	Permitted unsafe.Pointer
-	Excluded  unsafe.Pointer
-}
-
 type CEOtherName struct {
 	TypeID CssmData
 	Value  CssmData
@@ -175,11 +161,6 @@ type CEQCStatement struct {
 type CEQCStatements struct {
 	NumQCStatements uint32
 	QcStatements    unsafe.Pointer
-}
-
-type CESemanticsInformation struct {
-	SemanticsIdentifier         unsafe.Pointer
-	NameRegistrationAuthorities unsafe.Pointer
 }
 
 type CMSDecoder struct{}
@@ -225,11 +206,6 @@ type CSSM_APPLE_TP_CRL_OPTIONS struct {
 	Version  uint32
 	CrlFlags uint32
 	CrlStore unsafe.Pointer
-}
-
-type CSSM_APPLE_TP_NAME_OID struct {
-	String unsafe.Pointer
-	Oid    unsafe.Pointer
 }
 
 type CSSM_APPLE_TP_SMIME_OPTIONS struct {
@@ -292,14 +268,6 @@ type CssmAclEntryInput struct {
 	CallerContext unsafe.Pointer
 }
 
-type CssmAclEntryPrototype struct {
-	TypedSubject  CssmList
-	Delegate      int32
-	Authorization CssmAuthorizationgroup
-	TimeRange     CssmAclValidityPeriod
-	EntryTag      [68]int8
-}
-
 type CssmAclKeychainPromptSelector struct {
 	Version uint16
 	Flags   uint16
@@ -317,15 +285,6 @@ type CssmAclProcessSubjectSelector struct {
 	Gid     uint32
 }
 
-type CssmAclValidityPeriod struct {
-	StartDate CssmData
-	EndDate   CssmData
-}
-
-type CssmApplecspdlDbChangePasswordParameters struct {
-	AccessCredentials unsafe.Pointer
-}
-
 type CssmApplecspdlDbIsLockedParameters struct {
 	IsLocked uint8
 }
@@ -341,11 +300,6 @@ type CssmAppledlOpenParameters struct {
 	AutoCommit int32
 	Mask       uint32
 	Mode       uint16
-}
-
-type CssmAuthorizationgroup struct {
-	NumberOfAuthTags uint32
-	AuthTags         unsafe.Pointer
 }
 
 type CssmBaseCerts struct {
@@ -428,11 +382,6 @@ type CssmCspOperationalStatistics struct {
 	TokenFreePrivateMem       uint32
 }
 
-type CssmData struct {
-	Length uint
-	Data   unsafe.Pointer
-}
-
 type CssmDate struct {
 	Year  [4]uint8
 	Month [2]uint8
@@ -443,18 +392,6 @@ type CssmDbAttributeData struct {
 	Info           CssmDbAttributeInfo
 	NumberOfValues uint32
 	Value          unsafe.Pointer
-}
-
-type CssmDbAttributeInfo struct {
-	AttributeNameFormat uint32
-	Label               unsafe.Pointer
-	AttributeFormat     uint32
-}
-
-type CssmDbIndexInfo struct {
-	IndexType           uint32
-	IndexedDataLocation uint32
-	Info                CssmDbAttributeInfo
 }
 
 type CssmDbParsingModuleInfo struct {
@@ -524,18 +461,6 @@ type CssmDlPkcs11Attributes struct {
 	DeviceAccessFlags uint32
 }
 
-type CssmEncodedCert struct {
-	CertType     uint32
-	CertEncoding uint32
-	CertBlob     CssmData
-}
-
-type CssmEncodedCrl struct {
-	CrlType     uint32
-	CrlEncoding uint32
-	CrlBlob     CssmData
-}
-
 type CssmEvidence struct {
 	EvidenceForm uint32
 	Evidence     unsafe.Pointer
@@ -595,12 +520,6 @@ type CssmKeyheader struct {
 	Reserved             uint32
 }
 
-type CssmKrName struct {
-	Type   uint8
-	Length uint8
-	Name   unsafe.Pointer
-}
-
 type CssmKrPolicyInfo struct {
 	KrbNotAllowed   int32
 	NumberOfEntries uint32
@@ -648,12 +567,6 @@ type CssmKrsubservice struct {
 	WrappedProduct CssmKrWrappedproductinfo
 }
 
-type CssmList struct {
-	ListType uint32
-	Head     unsafe.Pointer
-	Tail     unsafe.Pointer
-}
-
 type CssmListElement struct {
 	NextElement unsafe.Pointer
 	WordID      int32
@@ -667,15 +580,6 @@ type CssmManagerEventNotification struct {
 	Event                        uint32
 	EventID                      uint32
 	EventData                    CssmData
-}
-
-type CssmManagerRegistrationInfo struct {
-	Initialize              unsafe.Pointer
-	Terminate               unsafe.Pointer
-	RegisterDispatchTable   unsafe.Pointer
-	DeregisterDispatchTable unsafe.Pointer
-	EventNotifyManager      unsafe.Pointer
-	RefreshFunctionTable    unsafe.Pointer
 }
 
 type CssmMemoryFuncs struct {
@@ -775,186 +679,6 @@ type CssmSamplegroup struct {
 type CssmSelectionPredicate struct {
 	DbOperator uint32
 	Attribute  CssmDbAttributeData
-}
-
-type CssmSpiAcFuncs struct {
-	AuthCompute unsafe.Pointer
-	PassThrough unsafe.Pointer
-}
-
-type CssmSpiClFuncs struct {
-	CertCreateTemplate           unsafe.Pointer
-	CertGetAllTemplateFields     unsafe.Pointer
-	CertSign                     unsafe.Pointer
-	CertVerify                   unsafe.Pointer
-	CertVerifyWithKey            unsafe.Pointer
-	CertGetFirstFieldValue       unsafe.Pointer
-	CertGetNextFieldValue        unsafe.Pointer
-	CertAbortQuery               unsafe.Pointer
-	CertGetKeyInfo               unsafe.Pointer
-	CertGetAllFields             unsafe.Pointer
-	FreeFields                   unsafe.Pointer
-	FreeFieldValue               unsafe.Pointer
-	CertCache                    unsafe.Pointer
-	CertGetFirstCachedFieldValue unsafe.Pointer
-	CertGetNextCachedFieldValue  unsafe.Pointer
-	CertAbortCache               unsafe.Pointer
-	CertGroupToSignedBundle      unsafe.Pointer
-	CertGroupFromVerifiedBundle  unsafe.Pointer
-	CertDescribeFormat           unsafe.Pointer
-	CrlCreateTemplate            unsafe.Pointer
-	CrlSetFields                 unsafe.Pointer
-	CrlAddCert                   unsafe.Pointer
-	CrlRemoveCert                unsafe.Pointer
-	CrlSign                      unsafe.Pointer
-	CrlVerify                    unsafe.Pointer
-	CrlVerifyWithKey             unsafe.Pointer
-	IsCertInCrl                  unsafe.Pointer
-	CrlGetFirstFieldValue        unsafe.Pointer
-	CrlGetNextFieldValue         unsafe.Pointer
-	CrlAbortQuery                unsafe.Pointer
-	CrlGetAllFields              unsafe.Pointer
-	CrlCache                     unsafe.Pointer
-	IsCertInCachedCrl            unsafe.Pointer
-	CrlGetFirstCachedFieldValue  unsafe.Pointer
-	CrlGetNextCachedFieldValue   unsafe.Pointer
-	CrlGetAllCachedRecordFields  unsafe.Pointer
-	CrlAbortCache                unsafe.Pointer
-	CrlDescribeFormat            unsafe.Pointer
-	PassThrough                  unsafe.Pointer
-}
-
-type CssmSpiCspFuncs struct {
-	EventNotify                   unsafe.Pointer
-	QuerySize                     unsafe.Pointer
-	SignData                      unsafe.Pointer
-	SignDataInit                  unsafe.Pointer
-	SignDataUpdate                unsafe.Pointer
-	SignDataFinal                 unsafe.Pointer
-	VerifyData                    unsafe.Pointer
-	VerifyDataInit                unsafe.Pointer
-	VerifyDataUpdate              unsafe.Pointer
-	VerifyDataFinal               unsafe.Pointer
-	DigestData                    unsafe.Pointer
-	DigestDataInit                unsafe.Pointer
-	DigestDataUpdate              unsafe.Pointer
-	DigestDataClone               unsafe.Pointer
-	DigestDataFinal               unsafe.Pointer
-	GenerateMAC                   unsafe.Pointer
-	GenerateMACInit               unsafe.Pointer
-	GenerateMACUpdate             unsafe.Pointer
-	GenerateMACFinal              unsafe.Pointer
-	VerifyMAC                     unsafe.Pointer
-	VerifyMACInit                 unsafe.Pointer
-	VerifyMACUpdate               unsafe.Pointer
-	VerifyMACFinal                unsafe.Pointer
-	EncryptData                   unsafe.Pointer
-	EncryptDataInit               unsafe.Pointer
-	EncryptDataUpdate             unsafe.Pointer
-	EncryptDataFinal              unsafe.Pointer
-	DecryptData                   unsafe.Pointer
-	DecryptDataInit               unsafe.Pointer
-	DecryptDataUpdate             unsafe.Pointer
-	DecryptDataFinal              unsafe.Pointer
-	QueryKeySizeInBits            unsafe.Pointer
-	GenerateKey                   unsafe.Pointer
-	GenerateKeyPair               unsafe.Pointer
-	GenerateRandom                unsafe.Pointer
-	GenerateAlgorithmParams       unsafe.Pointer
-	WrapKey                       unsafe.Pointer
-	UnwrapKey                     unsafe.Pointer
-	DeriveKey                     unsafe.Pointer
-	FreeKey                       unsafe.Pointer
-	PassThrough                   unsafe.Pointer
-	Login                         unsafe.Pointer
-	Logout                        unsafe.Pointer
-	ChangeLoginACL                unsafe.Pointer
-	ObtainPrivateKeyFromPublicKey unsafe.Pointer
-	RetrieveUniqueID              unsafe.Pointer
-	RetrieveCounter               unsafe.Pointer
-	VerifyDevice                  unsafe.Pointer
-	GetTimeValue                  unsafe.Pointer
-	GetOperationalStatistics      unsafe.Pointer
-	GetLoginACL                   unsafe.Pointer
-	GetKeyACL                     unsafe.Pointer
-	ChangeKeyACL                  unsafe.Pointer
-	GetKeyOwner                   unsafe.Pointer
-	ChangeKeyOwner                unsafe.Pointer
-	GetLoginOwner                 unsafe.Pointer
-	ChangeLoginOwner              unsafe.Pointer
-}
-
-type CssmSpiDlFuncs struct {
-	DbOpen                    unsafe.Pointer
-	DbClose                   unsafe.Pointer
-	DbCreate                  unsafe.Pointer
-	DbDelete                  unsafe.Pointer
-	CreateRelation            unsafe.Pointer
-	DestroyRelation           unsafe.Pointer
-	Authenticate              unsafe.Pointer
-	GetDbACL                  unsafe.Pointer
-	ChangeDbACL               unsafe.Pointer
-	GetDbOwner                unsafe.Pointer
-	ChangeDbOwner             unsafe.Pointer
-	GetDbNames                unsafe.Pointer
-	GetDbNameFromHandle       unsafe.Pointer
-	FreeNameList              unsafe.Pointer
-	DataInsert                unsafe.Pointer
-	DataDelete                unsafe.Pointer
-	DataModify                unsafe.Pointer
-	DataGetFirst              unsafe.Pointer
-	DataGetNext               unsafe.Pointer
-	DataAbortQuery            unsafe.Pointer
-	DataGetFromUniqueRecordID unsafe.Pointer
-	FreeUniqueRecord          unsafe.Pointer
-	PassThrough               unsafe.Pointer
-}
-
-type CssmSpiKrFuncs struct {
-	RegistrationRequest    unsafe.Pointer
-	RegistrationRetrieve   unsafe.Pointer
-	GenerateRecoveryFields unsafe.Pointer
-	ProcessRecoveryFields  unsafe.Pointer
-	RecoveryRequest        unsafe.Pointer
-	RecoveryRetrieve       unsafe.Pointer
-	GetRecoveredObject     unsafe.Pointer
-	RecoveryRequestAbort   unsafe.Pointer
-	PassThrough            unsafe.Pointer
-}
-
-type CssmSpiTpFuncs struct {
-	SubmitCredRequest         unsafe.Pointer
-	RetrieveCredResult        unsafe.Pointer
-	ConfirmCredResult         unsafe.Pointer
-	ReceiveConfirmation       unsafe.Pointer
-	CertReclaimKey            unsafe.Pointer
-	CertReclaimAbort          unsafe.Pointer
-	FormRequest               unsafe.Pointer
-	FormSubmit                unsafe.Pointer
-	CertGroupVerify           unsafe.Pointer
-	CertCreateTemplate        unsafe.Pointer
-	CertGetAllTemplateFields  unsafe.Pointer
-	CertSign                  unsafe.Pointer
-	CrlVerify                 unsafe.Pointer
-	CrlCreateTemplate         unsafe.Pointer
-	CertRevoke                unsafe.Pointer
-	CertRemoveFromCrlTemplate unsafe.Pointer
-	CrlSign                   unsafe.Pointer
-	ApplyCrlToDb              unsafe.Pointer
-	CertGroupConstruct        unsafe.Pointer
-	CertGroupPrune            unsafe.Pointer
-	CertGroupToTupleGroup     unsafe.Pointer
-	TupleGroupToCertGroup     unsafe.Pointer
-	PassThrough               unsafe.Pointer
-}
-
-type CssmStateFuncs struct {
-	CssmGetAttachFunctions        unsafe.Pointer
-	CssmReleaseAttachFunctions    unsafe.Pointer
-	CssmGetAppMemoryFunctions     unsafe.Pointer
-	CssmIsFuncCallValid           unsafe.Pointer
-	CssmDeregisterManagerServices unsafe.Pointer
-	CssmDeliverModuleManagerEvent unsafe.Pointer
 }
 
 type CssmSubserviceUid struct {
@@ -1074,12 +798,6 @@ type CssmTpCrlissueOutput struct {
 	CrlNextTime unsafe.Pointer
 }
 
-type CssmTpPolicyinfo struct {
-	NumberOfPolicyIds uint32
-	PolicyIds         unsafe.Pointer
-	PolicyControl     unsafe.Pointer
-}
-
 type CssmTpRequestSet struct {
 	NumberOfRequests uint32
 	Requests         unsafe.Pointer
@@ -1129,21 +847,6 @@ type CssmX509Extension struct {
 	BERvalue CssmData
 }
 
-type CssmX509ExtensionTagAndValue struct {
-	Type  uint8
-	Value CssmData
-}
-
-type CssmX509Extensions struct {
-	NumberOfExtensions uint32
-	Extensions         unsafe.Pointer
-}
-
-type CssmX509Name struct {
-	NumberOfRDNs              uint32
-	RelativeDistinguishedName unsafe.Pointer
-}
-
 type CssmX509Rdn struct {
 	NumberOfPairs         uint32
 	AttributeTypeAndValue unsafe.Pointer
@@ -1173,34 +876,6 @@ type CssmX509SignedCertificate struct {
 type CssmX509SignedCrl struct {
 	TbsCertList CssmX509TbsCertlist
 	Signature   CssmX509Signature
-}
-
-type CssmX509TbsCertificate struct {
-	Version                 CssmData
-	SerialNumber            CssmData
-	Signature               SecAsn1AlgId
-	Issuer                  CssmX509Name
-	Validity                X509Validity
-	Subject                 CssmX509Name
-	SubjectPublicKeyInfo    SecAsn1PubKeyInfo
-	IssuerUniqueIdentifier  CssmData
-	SubjectUniqueIdentifier CssmData
-	Extensions              CssmX509Extensions
-}
-
-type CssmX509TbsCertlist struct {
-	Version             CssmData
-	Signature           SecAsn1AlgId
-	Issuer              CssmX509Name
-	ThisUpdate          CssmX509Time
-	NextUpdate          CssmX509Time
-	RevokedCertificates unsafe.Pointer
-	Extensions          CssmX509Extensions
-}
-
-type CssmX509Time struct {
-	TimeType uint8
-	Time     CssmData
 }
 
 type CssmX509TypeValuePair struct {
@@ -1235,24 +910,6 @@ type CssmX509extPolicyQualifiers struct {
 	PolicyQualifier          unsafe.Pointer
 }
 
-type MdsFuncs struct {
-	DbOpen                    unsafe.Pointer
-	DbClose                   unsafe.Pointer
-	GetDbNames                unsafe.Pointer
-	GetDbNameFromHandle       unsafe.Pointer
-	FreeNameList              unsafe.Pointer
-	DataInsert                unsafe.Pointer
-	DataDelete                unsafe.Pointer
-	DataModify                unsafe.Pointer
-	DataGetFirst              unsafe.Pointer
-	DataGetNext               unsafe.Pointer
-	DataAbortQuery            unsafe.Pointer
-	DataGetFromUniqueRecordID unsafe.Pointer
-	FreeUniqueRecord          unsafe.Pointer
-	CreateRelation            unsafe.Pointer
-	DestroyRelation           unsafe.Pointer
-}
-
 // A reference to an opaque policy search structure.
 type OpaquePolicySearchRef struct{}
 
@@ -1273,18 +930,6 @@ type SecAccess struct{}
 
 // CFType representing access control for an item. SecAccessControl.h for details.
 type SecAccessControl struct{}
-
-// A structure identifying an ASN.1 algorithm by its OID, and its corresponding parameters.
-type SecAsn1AlgId struct {
-	Algorithm  CssmData
-	Parameters CssmData
-}
-
-// A structure containing a public key and its associated algorithm.
-type SecAsn1PubKeyInfo struct {
-	Algorithm        SecAsn1AlgId
-	SubjectPublicKey CssmData
-}
 
 // A structure that defines one element of a BER or DER encoding.
 type SecAsn1Template_struct struct {
@@ -1393,11 +1038,6 @@ type SecTrust struct{}
 
 // Contains information about a trusted application.
 type SecTrustedApplication struct{}
-
-type X509Validity struct {
-	NotBefore CssmX509Time
-	NotAfter  CssmX509Time
-}
 
 // CE_AccessDescription is an alias for the __CE_AccessDescription value type.
 type CE_AccessDescription = CEAccessDescription
@@ -2459,3 +2099,1352 @@ type SecTrustedApplicationRef struct{ obj.Object }
 // IsNil reports whether SecTrustedApplicationRef is a NULL handle (it wraps no object). Call
 // it before using a returned handle; a nil handle's methods panic.
 func (h SecTrustedApplicationRef) IsNil() bool { return h.Object == nil }
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CEAuthorityKeyID struct {
+	_    [0]uint64
+	data [64]byte
+}
+
+// AsKeyIdentifierPresent returns the keyIdentifierPresent field, read from the backing bytes at offset 0.
+func (u *CEAuthorityKeyID) AsKeyIdentifierPresent() int32 {
+	return *(*int32)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsGeneralNamesPresent returns the generalNamesPresent field, read from the backing bytes at offset 24.
+func (u *CEAuthorityKeyID) AsGeneralNamesPresent() int32 {
+	return *(*int32)(unsafe.Pointer(&u.data[24]))
+}
+
+// AsGeneralNames returns the generalNames field, read from the backing bytes at offset 32.
+func (u *CEAuthorityKeyID) AsGeneralNames() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[32]))
+}
+
+// AsSerialNumberPresent returns the serialNumberPresent field, read from the backing bytes at offset 40.
+func (u *CEAuthorityKeyID) AsSerialNumberPresent() int32 {
+	return *(*int32)(unsafe.Pointer(&u.data[40]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CENameConstraints struct {
+	_    [0]uint64
+	data [16]byte
+}
+
+// AsPermitted returns the permitted field, read from the backing bytes at offset 0.
+func (u *CENameConstraints) AsPermitted() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsExcluded returns the excluded field, read from the backing bytes at offset 8.
+func (u *CENameConstraints) AsExcluded() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CESemanticsInformation struct {
+	_    [0]uint64
+	data [16]byte
+}
+
+// AsSemanticsIdentifier returns the semanticsIdentifier field, read from the backing bytes at offset 0.
+func (u *CESemanticsInformation) AsSemanticsIdentifier() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsNameRegistrationAuthorities returns the nameRegistrationAuthorities field, read from the backing bytes at offset 8.
+func (u *CESemanticsInformation) AsNameRegistrationAuthorities() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CSSM_APPLE_TP_NAME_OID struct {
+	_    [0]uint64
+	data [16]byte
+}
+
+// AsString returns the string field, read from the backing bytes at offset 0.
+func (u *CSSM_APPLE_TP_NAME_OID) AsString() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsOid returns the oid field, read from the backing bytes at offset 8.
+func (u *CSSM_APPLE_TP_NAME_OID) AsOid() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CssmAclEntryPrototype struct {
+	_    [0]uint64
+	data [152]byte
+}
+
+// AsDelegate returns the Delegate field, read from the backing bytes at offset 24.
+func (u *CssmAclEntryPrototype) AsDelegate() int32 {
+	return *(*int32)(unsafe.Pointer(&u.data[24]))
+}
+
+// AsEntryTag returns the EntryTag field, read from the backing bytes at offset 80.
+func (u *CssmAclEntryPrototype) AsEntryTag() [68]int8 {
+	return *(*[68]int8)(unsafe.Pointer(&u.data[80]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CssmAclValidityPeriod struct {
+	_    [0]uint64
+	data [32]byte
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CssmApplecspdlDbChangePasswordParameters struct {
+	_    [0]uint64
+	data [8]byte
+}
+
+// AsAccessCredentials returns the accessCredentials field, read from the backing bytes at offset 0.
+func (u *CssmApplecspdlDbChangePasswordParameters) AsAccessCredentials() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CssmAuthorizationgroup struct {
+	_    [0]uint64
+	data [16]byte
+}
+
+// AsNumberOfAuthTags returns the NumberOfAuthTags field, read from the backing bytes at offset 0.
+func (u *CssmAuthorizationgroup) AsNumberOfAuthTags() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsAuthTags returns the AuthTags field, read from the backing bytes at offset 8.
+func (u *CssmAuthorizationgroup) AsAuthTags() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CssmData struct {
+	_    [0]uint64
+	data [16]byte
+}
+
+// AsLength returns the Length field, read from the backing bytes at offset 0.
+func (u *CssmData) AsLength() uint {
+	return *(*uint)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsData returns the Data field, read from the backing bytes at offset 8.
+func (u *CssmData) AsData() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CssmDbAttributeInfo struct {
+	_    [0]uint64
+	data [32]byte
+}
+
+// AsAttributeNameFormat returns the AttributeNameFormat field, read from the backing bytes at offset 0.
+func (u *CssmDbAttributeInfo) AsAttributeNameFormat() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsAttributeFormat returns the AttributeFormat field, read from the backing bytes at offset 24.
+func (u *CssmDbAttributeInfo) AsAttributeFormat() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[24]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CssmDbIndexInfo struct {
+	_    [0]uint64
+	data [40]byte
+}
+
+// AsIndexType returns the IndexType field, read from the backing bytes at offset 0.
+func (u *CssmDbIndexInfo) AsIndexType() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsIndexedDataLocation returns the IndexedDataLocation field, read from the backing bytes at offset 4.
+func (u *CssmDbIndexInfo) AsIndexedDataLocation() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[4]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CssmEncodedCert struct {
+	_    [0]uint64
+	data [24]byte
+}
+
+// AsCertType returns the CertType field, read from the backing bytes at offset 0.
+func (u *CssmEncodedCert) AsCertType() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsCertEncoding returns the CertEncoding field, read from the backing bytes at offset 4.
+func (u *CssmEncodedCert) AsCertEncoding() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[4]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CssmEncodedCrl struct {
+	_    [0]uint64
+	data [24]byte
+}
+
+// AsCrlType returns the CrlType field, read from the backing bytes at offset 0.
+func (u *CssmEncodedCrl) AsCrlType() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsCrlEncoding returns the CrlEncoding field, read from the backing bytes at offset 4.
+func (u *CssmEncodedCrl) AsCrlEncoding() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[4]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CssmKrName struct {
+	_    [0]uint64
+	data [16]byte
+}
+
+// AsType returns the Type field, read from the backing bytes at offset 0.
+func (u *CssmKrName) AsType() uint8 {
+	return *(*uint8)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsLength returns the Length field, read from the backing bytes at offset 1.
+func (u *CssmKrName) AsLength() uint8 {
+	return *(*uint8)(unsafe.Pointer(&u.data[1]))
+}
+
+// AsName returns the Name field, read from the backing bytes at offset 8.
+func (u *CssmKrName) AsName() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CssmList struct {
+	_    [0]uint64
+	data [24]byte
+}
+
+// AsListType returns the ListType field, read from the backing bytes at offset 0.
+func (u *CssmList) AsListType() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[0]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CssmManagerRegistrationInfo struct {
+	_    [0]uint64
+	data [48]byte
+}
+
+// AsInitialize returns the Initialize field, read from the backing bytes at offset 0.
+func (u *CssmManagerRegistrationInfo) AsInitialize() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsTerminate returns the Terminate field, read from the backing bytes at offset 8.
+func (u *CssmManagerRegistrationInfo) AsTerminate() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsRegisterDispatchTable returns the RegisterDispatchTable field, read from the backing bytes at offset 16.
+func (u *CssmManagerRegistrationInfo) AsRegisterDispatchTable() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[16]))
+}
+
+// AsDeregisterDispatchTable returns the DeregisterDispatchTable field, read from the backing bytes at offset 24.
+func (u *CssmManagerRegistrationInfo) AsDeregisterDispatchTable() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[24]))
+}
+
+// AsEventNotifyManager returns the EventNotifyManager field, read from the backing bytes at offset 32.
+func (u *CssmManagerRegistrationInfo) AsEventNotifyManager() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[32]))
+}
+
+// AsRefreshFunctionTable returns the RefreshFunctionTable field, read from the backing bytes at offset 40.
+func (u *CssmManagerRegistrationInfo) AsRefreshFunctionTable() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[40]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CssmSpiAcFuncs struct {
+	_    [0]uint64
+	data [16]byte
+}
+
+// AsAuthCompute returns the AuthCompute field, read from the backing bytes at offset 0.
+func (u *CssmSpiAcFuncs) AsAuthCompute() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsPassThrough returns the PassThrough field, read from the backing bytes at offset 8.
+func (u *CssmSpiAcFuncs) AsPassThrough() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CssmSpiClFuncs struct {
+	_    [0]uint64
+	data [312]byte
+}
+
+// AsCertCreateTemplate returns the CertCreateTemplate field, read from the backing bytes at offset 0.
+func (u *CssmSpiClFuncs) AsCertCreateTemplate() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsCertGetAllTemplateFields returns the CertGetAllTemplateFields field, read from the backing bytes at offset 8.
+func (u *CssmSpiClFuncs) AsCertGetAllTemplateFields() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsCertSign returns the CertSign field, read from the backing bytes at offset 16.
+func (u *CssmSpiClFuncs) AsCertSign() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[16]))
+}
+
+// AsCertVerify returns the CertVerify field, read from the backing bytes at offset 24.
+func (u *CssmSpiClFuncs) AsCertVerify() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[24]))
+}
+
+// AsCertVerifyWithKey returns the CertVerifyWithKey field, read from the backing bytes at offset 32.
+func (u *CssmSpiClFuncs) AsCertVerifyWithKey() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[32]))
+}
+
+// AsCertGetFirstFieldValue returns the CertGetFirstFieldValue field, read from the backing bytes at offset 40.
+func (u *CssmSpiClFuncs) AsCertGetFirstFieldValue() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[40]))
+}
+
+// AsCertGetNextFieldValue returns the CertGetNextFieldValue field, read from the backing bytes at offset 48.
+func (u *CssmSpiClFuncs) AsCertGetNextFieldValue() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[48]))
+}
+
+// AsCertAbortQuery returns the CertAbortQuery field, read from the backing bytes at offset 56.
+func (u *CssmSpiClFuncs) AsCertAbortQuery() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[56]))
+}
+
+// AsCertGetKeyInfo returns the CertGetKeyInfo field, read from the backing bytes at offset 64.
+func (u *CssmSpiClFuncs) AsCertGetKeyInfo() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[64]))
+}
+
+// AsCertGetAllFields returns the CertGetAllFields field, read from the backing bytes at offset 72.
+func (u *CssmSpiClFuncs) AsCertGetAllFields() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[72]))
+}
+
+// AsFreeFields returns the FreeFields field, read from the backing bytes at offset 80.
+func (u *CssmSpiClFuncs) AsFreeFields() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[80]))
+}
+
+// AsFreeFieldValue returns the FreeFieldValue field, read from the backing bytes at offset 88.
+func (u *CssmSpiClFuncs) AsFreeFieldValue() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[88]))
+}
+
+// AsCertCache returns the CertCache field, read from the backing bytes at offset 96.
+func (u *CssmSpiClFuncs) AsCertCache() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[96]))
+}
+
+// AsCertGetFirstCachedFieldValue returns the CertGetFirstCachedFieldValue field, read from the backing bytes at offset 104.
+func (u *CssmSpiClFuncs) AsCertGetFirstCachedFieldValue() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[104]))
+}
+
+// AsCertGetNextCachedFieldValue returns the CertGetNextCachedFieldValue field, read from the backing bytes at offset 112.
+func (u *CssmSpiClFuncs) AsCertGetNextCachedFieldValue() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[112]))
+}
+
+// AsCertAbortCache returns the CertAbortCache field, read from the backing bytes at offset 120.
+func (u *CssmSpiClFuncs) AsCertAbortCache() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[120]))
+}
+
+// AsCertGroupToSignedBundle returns the CertGroupToSignedBundle field, read from the backing bytes at offset 128.
+func (u *CssmSpiClFuncs) AsCertGroupToSignedBundle() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[128]))
+}
+
+// AsCertGroupFromVerifiedBundle returns the CertGroupFromVerifiedBundle field, read from the backing bytes at offset 136.
+func (u *CssmSpiClFuncs) AsCertGroupFromVerifiedBundle() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[136]))
+}
+
+// AsCertDescribeFormat returns the CertDescribeFormat field, read from the backing bytes at offset 144.
+func (u *CssmSpiClFuncs) AsCertDescribeFormat() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[144]))
+}
+
+// AsCrlCreateTemplate returns the CrlCreateTemplate field, read from the backing bytes at offset 152.
+func (u *CssmSpiClFuncs) AsCrlCreateTemplate() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[152]))
+}
+
+// AsCrlSetFields returns the CrlSetFields field, read from the backing bytes at offset 160.
+func (u *CssmSpiClFuncs) AsCrlSetFields() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[160]))
+}
+
+// AsCrlAddCert returns the CrlAddCert field, read from the backing bytes at offset 168.
+func (u *CssmSpiClFuncs) AsCrlAddCert() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[168]))
+}
+
+// AsCrlRemoveCert returns the CrlRemoveCert field, read from the backing bytes at offset 176.
+func (u *CssmSpiClFuncs) AsCrlRemoveCert() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[176]))
+}
+
+// AsCrlSign returns the CrlSign field, read from the backing bytes at offset 184.
+func (u *CssmSpiClFuncs) AsCrlSign() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[184]))
+}
+
+// AsCrlVerify returns the CrlVerify field, read from the backing bytes at offset 192.
+func (u *CssmSpiClFuncs) AsCrlVerify() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[192]))
+}
+
+// AsCrlVerifyWithKey returns the CrlVerifyWithKey field, read from the backing bytes at offset 200.
+func (u *CssmSpiClFuncs) AsCrlVerifyWithKey() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[200]))
+}
+
+// AsIsCertInCrl returns the IsCertInCrl field, read from the backing bytes at offset 208.
+func (u *CssmSpiClFuncs) AsIsCertInCrl() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[208]))
+}
+
+// AsCrlGetFirstFieldValue returns the CrlGetFirstFieldValue field, read from the backing bytes at offset 216.
+func (u *CssmSpiClFuncs) AsCrlGetFirstFieldValue() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[216]))
+}
+
+// AsCrlGetNextFieldValue returns the CrlGetNextFieldValue field, read from the backing bytes at offset 224.
+func (u *CssmSpiClFuncs) AsCrlGetNextFieldValue() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[224]))
+}
+
+// AsCrlAbortQuery returns the CrlAbortQuery field, read from the backing bytes at offset 232.
+func (u *CssmSpiClFuncs) AsCrlAbortQuery() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[232]))
+}
+
+// AsCrlGetAllFields returns the CrlGetAllFields field, read from the backing bytes at offset 240.
+func (u *CssmSpiClFuncs) AsCrlGetAllFields() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[240]))
+}
+
+// AsCrlCache returns the CrlCache field, read from the backing bytes at offset 248.
+func (u *CssmSpiClFuncs) AsCrlCache() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[248]))
+}
+
+// AsIsCertInCachedCrl returns the IsCertInCachedCrl field, read from the backing bytes at offset 256.
+func (u *CssmSpiClFuncs) AsIsCertInCachedCrl() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[256]))
+}
+
+// AsCrlGetFirstCachedFieldValue returns the CrlGetFirstCachedFieldValue field, read from the backing bytes at offset 264.
+func (u *CssmSpiClFuncs) AsCrlGetFirstCachedFieldValue() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[264]))
+}
+
+// AsCrlGetNextCachedFieldValue returns the CrlGetNextCachedFieldValue field, read from the backing bytes at offset 272.
+func (u *CssmSpiClFuncs) AsCrlGetNextCachedFieldValue() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[272]))
+}
+
+// AsCrlGetAllCachedRecordFields returns the CrlGetAllCachedRecordFields field, read from the backing bytes at offset 280.
+func (u *CssmSpiClFuncs) AsCrlGetAllCachedRecordFields() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[280]))
+}
+
+// AsCrlAbortCache returns the CrlAbortCache field, read from the backing bytes at offset 288.
+func (u *CssmSpiClFuncs) AsCrlAbortCache() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[288]))
+}
+
+// AsCrlDescribeFormat returns the CrlDescribeFormat field, read from the backing bytes at offset 296.
+func (u *CssmSpiClFuncs) AsCrlDescribeFormat() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[296]))
+}
+
+// AsPassThrough returns the PassThrough field, read from the backing bytes at offset 304.
+func (u *CssmSpiClFuncs) AsPassThrough() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[304]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CssmSpiCspFuncs struct {
+	_    [0]uint64
+	data [456]byte
+}
+
+// AsEventNotify returns the EventNotify field, read from the backing bytes at offset 0.
+func (u *CssmSpiCspFuncs) AsEventNotify() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsQuerySize returns the QuerySize field, read from the backing bytes at offset 8.
+func (u *CssmSpiCspFuncs) AsQuerySize() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsSignData returns the SignData field, read from the backing bytes at offset 16.
+func (u *CssmSpiCspFuncs) AsSignData() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[16]))
+}
+
+// AsSignDataInit returns the SignDataInit field, read from the backing bytes at offset 24.
+func (u *CssmSpiCspFuncs) AsSignDataInit() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[24]))
+}
+
+// AsSignDataUpdate returns the SignDataUpdate field, read from the backing bytes at offset 32.
+func (u *CssmSpiCspFuncs) AsSignDataUpdate() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[32]))
+}
+
+// AsSignDataFinal returns the SignDataFinal field, read from the backing bytes at offset 40.
+func (u *CssmSpiCspFuncs) AsSignDataFinal() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[40]))
+}
+
+// AsVerifyData returns the VerifyData field, read from the backing bytes at offset 48.
+func (u *CssmSpiCspFuncs) AsVerifyData() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[48]))
+}
+
+// AsVerifyDataInit returns the VerifyDataInit field, read from the backing bytes at offset 56.
+func (u *CssmSpiCspFuncs) AsVerifyDataInit() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[56]))
+}
+
+// AsVerifyDataUpdate returns the VerifyDataUpdate field, read from the backing bytes at offset 64.
+func (u *CssmSpiCspFuncs) AsVerifyDataUpdate() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[64]))
+}
+
+// AsVerifyDataFinal returns the VerifyDataFinal field, read from the backing bytes at offset 72.
+func (u *CssmSpiCspFuncs) AsVerifyDataFinal() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[72]))
+}
+
+// AsDigestData returns the DigestData field, read from the backing bytes at offset 80.
+func (u *CssmSpiCspFuncs) AsDigestData() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[80]))
+}
+
+// AsDigestDataInit returns the DigestDataInit field, read from the backing bytes at offset 88.
+func (u *CssmSpiCspFuncs) AsDigestDataInit() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[88]))
+}
+
+// AsDigestDataUpdate returns the DigestDataUpdate field, read from the backing bytes at offset 96.
+func (u *CssmSpiCspFuncs) AsDigestDataUpdate() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[96]))
+}
+
+// AsDigestDataClone returns the DigestDataClone field, read from the backing bytes at offset 104.
+func (u *CssmSpiCspFuncs) AsDigestDataClone() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[104]))
+}
+
+// AsDigestDataFinal returns the DigestDataFinal field, read from the backing bytes at offset 112.
+func (u *CssmSpiCspFuncs) AsDigestDataFinal() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[112]))
+}
+
+// AsGenerateMAC returns the GenerateMac field, read from the backing bytes at offset 120.
+func (u *CssmSpiCspFuncs) AsGenerateMAC() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[120]))
+}
+
+// AsGenerateMACInit returns the GenerateMacInit field, read from the backing bytes at offset 128.
+func (u *CssmSpiCspFuncs) AsGenerateMACInit() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[128]))
+}
+
+// AsGenerateMACUpdate returns the GenerateMacUpdate field, read from the backing bytes at offset 136.
+func (u *CssmSpiCspFuncs) AsGenerateMACUpdate() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[136]))
+}
+
+// AsGenerateMACFinal returns the GenerateMacFinal field, read from the backing bytes at offset 144.
+func (u *CssmSpiCspFuncs) AsGenerateMACFinal() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[144]))
+}
+
+// AsVerifyMAC returns the VerifyMac field, read from the backing bytes at offset 152.
+func (u *CssmSpiCspFuncs) AsVerifyMAC() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[152]))
+}
+
+// AsVerifyMACInit returns the VerifyMacInit field, read from the backing bytes at offset 160.
+func (u *CssmSpiCspFuncs) AsVerifyMACInit() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[160]))
+}
+
+// AsVerifyMACUpdate returns the VerifyMacUpdate field, read from the backing bytes at offset 168.
+func (u *CssmSpiCspFuncs) AsVerifyMACUpdate() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[168]))
+}
+
+// AsVerifyMACFinal returns the VerifyMacFinal field, read from the backing bytes at offset 176.
+func (u *CssmSpiCspFuncs) AsVerifyMACFinal() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[176]))
+}
+
+// AsEncryptData returns the EncryptData field, read from the backing bytes at offset 184.
+func (u *CssmSpiCspFuncs) AsEncryptData() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[184]))
+}
+
+// AsEncryptDataInit returns the EncryptDataInit field, read from the backing bytes at offset 192.
+func (u *CssmSpiCspFuncs) AsEncryptDataInit() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[192]))
+}
+
+// AsEncryptDataUpdate returns the EncryptDataUpdate field, read from the backing bytes at offset 200.
+func (u *CssmSpiCspFuncs) AsEncryptDataUpdate() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[200]))
+}
+
+// AsEncryptDataFinal returns the EncryptDataFinal field, read from the backing bytes at offset 208.
+func (u *CssmSpiCspFuncs) AsEncryptDataFinal() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[208]))
+}
+
+// AsDecryptData returns the DecryptData field, read from the backing bytes at offset 216.
+func (u *CssmSpiCspFuncs) AsDecryptData() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[216]))
+}
+
+// AsDecryptDataInit returns the DecryptDataInit field, read from the backing bytes at offset 224.
+func (u *CssmSpiCspFuncs) AsDecryptDataInit() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[224]))
+}
+
+// AsDecryptDataUpdate returns the DecryptDataUpdate field, read from the backing bytes at offset 232.
+func (u *CssmSpiCspFuncs) AsDecryptDataUpdate() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[232]))
+}
+
+// AsDecryptDataFinal returns the DecryptDataFinal field, read from the backing bytes at offset 240.
+func (u *CssmSpiCspFuncs) AsDecryptDataFinal() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[240]))
+}
+
+// AsQueryKeySizeInBits returns the QueryKeySizeInBits field, read from the backing bytes at offset 248.
+func (u *CssmSpiCspFuncs) AsQueryKeySizeInBits() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[248]))
+}
+
+// AsGenerateKey returns the GenerateKey field, read from the backing bytes at offset 256.
+func (u *CssmSpiCspFuncs) AsGenerateKey() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[256]))
+}
+
+// AsGenerateKeyPair returns the GenerateKeyPair field, read from the backing bytes at offset 264.
+func (u *CssmSpiCspFuncs) AsGenerateKeyPair() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[264]))
+}
+
+// AsGenerateRandom returns the GenerateRandom field, read from the backing bytes at offset 272.
+func (u *CssmSpiCspFuncs) AsGenerateRandom() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[272]))
+}
+
+// AsGenerateAlgorithmParams returns the GenerateAlgorithmParams field, read from the backing bytes at offset 280.
+func (u *CssmSpiCspFuncs) AsGenerateAlgorithmParams() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[280]))
+}
+
+// AsWrapKey returns the WrapKey field, read from the backing bytes at offset 288.
+func (u *CssmSpiCspFuncs) AsWrapKey() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[288]))
+}
+
+// AsUnwrapKey returns the UnwrapKey field, read from the backing bytes at offset 296.
+func (u *CssmSpiCspFuncs) AsUnwrapKey() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[296]))
+}
+
+// AsDeriveKey returns the DeriveKey field, read from the backing bytes at offset 304.
+func (u *CssmSpiCspFuncs) AsDeriveKey() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[304]))
+}
+
+// AsFreeKey returns the FreeKey field, read from the backing bytes at offset 312.
+func (u *CssmSpiCspFuncs) AsFreeKey() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[312]))
+}
+
+// AsPassThrough returns the PassThrough field, read from the backing bytes at offset 320.
+func (u *CssmSpiCspFuncs) AsPassThrough() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[320]))
+}
+
+// AsLogin returns the Login field, read from the backing bytes at offset 328.
+func (u *CssmSpiCspFuncs) AsLogin() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[328]))
+}
+
+// AsLogout returns the Logout field, read from the backing bytes at offset 336.
+func (u *CssmSpiCspFuncs) AsLogout() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[336]))
+}
+
+// AsChangeLoginACL returns the ChangeLoginAcl field, read from the backing bytes at offset 344.
+func (u *CssmSpiCspFuncs) AsChangeLoginACL() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[344]))
+}
+
+// AsObtainPrivateKeyFromPublicKey returns the ObtainPrivateKeyFromPublicKey field, read from the backing bytes at offset 352.
+func (u *CssmSpiCspFuncs) AsObtainPrivateKeyFromPublicKey() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[352]))
+}
+
+// AsRetrieveUniqueID returns the RetrieveUniqueId field, read from the backing bytes at offset 360.
+func (u *CssmSpiCspFuncs) AsRetrieveUniqueID() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[360]))
+}
+
+// AsRetrieveCounter returns the RetrieveCounter field, read from the backing bytes at offset 368.
+func (u *CssmSpiCspFuncs) AsRetrieveCounter() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[368]))
+}
+
+// AsVerifyDevice returns the VerifyDevice field, read from the backing bytes at offset 376.
+func (u *CssmSpiCspFuncs) AsVerifyDevice() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[376]))
+}
+
+// AsGetTimeValue returns the GetTimeValue field, read from the backing bytes at offset 384.
+func (u *CssmSpiCspFuncs) AsGetTimeValue() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[384]))
+}
+
+// AsGetOperationalStatistics returns the GetOperationalStatistics field, read from the backing bytes at offset 392.
+func (u *CssmSpiCspFuncs) AsGetOperationalStatistics() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[392]))
+}
+
+// AsGetLoginACL returns the GetLoginAcl field, read from the backing bytes at offset 400.
+func (u *CssmSpiCspFuncs) AsGetLoginACL() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[400]))
+}
+
+// AsGetKeyACL returns the GetKeyAcl field, read from the backing bytes at offset 408.
+func (u *CssmSpiCspFuncs) AsGetKeyACL() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[408]))
+}
+
+// AsChangeKeyACL returns the ChangeKeyAcl field, read from the backing bytes at offset 416.
+func (u *CssmSpiCspFuncs) AsChangeKeyACL() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[416]))
+}
+
+// AsGetKeyOwner returns the GetKeyOwner field, read from the backing bytes at offset 424.
+func (u *CssmSpiCspFuncs) AsGetKeyOwner() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[424]))
+}
+
+// AsChangeKeyOwner returns the ChangeKeyOwner field, read from the backing bytes at offset 432.
+func (u *CssmSpiCspFuncs) AsChangeKeyOwner() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[432]))
+}
+
+// AsGetLoginOwner returns the GetLoginOwner field, read from the backing bytes at offset 440.
+func (u *CssmSpiCspFuncs) AsGetLoginOwner() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[440]))
+}
+
+// AsChangeLoginOwner returns the ChangeLoginOwner field, read from the backing bytes at offset 448.
+func (u *CssmSpiCspFuncs) AsChangeLoginOwner() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[448]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CssmSpiDlFuncs struct {
+	_    [0]uint64
+	data [184]byte
+}
+
+// AsDbOpen returns the DbOpen field, read from the backing bytes at offset 0.
+func (u *CssmSpiDlFuncs) AsDbOpen() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsDbClose returns the DbClose field, read from the backing bytes at offset 8.
+func (u *CssmSpiDlFuncs) AsDbClose() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsDbCreate returns the DbCreate field, read from the backing bytes at offset 16.
+func (u *CssmSpiDlFuncs) AsDbCreate() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[16]))
+}
+
+// AsDbDelete returns the DbDelete field, read from the backing bytes at offset 24.
+func (u *CssmSpiDlFuncs) AsDbDelete() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[24]))
+}
+
+// AsCreateRelation returns the CreateRelation field, read from the backing bytes at offset 32.
+func (u *CssmSpiDlFuncs) AsCreateRelation() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[32]))
+}
+
+// AsDestroyRelation returns the DestroyRelation field, read from the backing bytes at offset 40.
+func (u *CssmSpiDlFuncs) AsDestroyRelation() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[40]))
+}
+
+// AsAuthenticate returns the Authenticate field, read from the backing bytes at offset 48.
+func (u *CssmSpiDlFuncs) AsAuthenticate() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[48]))
+}
+
+// AsGetDbACL returns the GetDbAcl field, read from the backing bytes at offset 56.
+func (u *CssmSpiDlFuncs) AsGetDbACL() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[56]))
+}
+
+// AsChangeDbACL returns the ChangeDbAcl field, read from the backing bytes at offset 64.
+func (u *CssmSpiDlFuncs) AsChangeDbACL() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[64]))
+}
+
+// AsGetDbOwner returns the GetDbOwner field, read from the backing bytes at offset 72.
+func (u *CssmSpiDlFuncs) AsGetDbOwner() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[72]))
+}
+
+// AsChangeDbOwner returns the ChangeDbOwner field, read from the backing bytes at offset 80.
+func (u *CssmSpiDlFuncs) AsChangeDbOwner() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[80]))
+}
+
+// AsGetDbNames returns the GetDbNames field, read from the backing bytes at offset 88.
+func (u *CssmSpiDlFuncs) AsGetDbNames() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[88]))
+}
+
+// AsGetDbNameFromHandle returns the GetDbNameFromHandle field, read from the backing bytes at offset 96.
+func (u *CssmSpiDlFuncs) AsGetDbNameFromHandle() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[96]))
+}
+
+// AsFreeNameList returns the FreeNameList field, read from the backing bytes at offset 104.
+func (u *CssmSpiDlFuncs) AsFreeNameList() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[104]))
+}
+
+// AsDataInsert returns the DataInsert field, read from the backing bytes at offset 112.
+func (u *CssmSpiDlFuncs) AsDataInsert() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[112]))
+}
+
+// AsDataDelete returns the DataDelete field, read from the backing bytes at offset 120.
+func (u *CssmSpiDlFuncs) AsDataDelete() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[120]))
+}
+
+// AsDataModify returns the DataModify field, read from the backing bytes at offset 128.
+func (u *CssmSpiDlFuncs) AsDataModify() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[128]))
+}
+
+// AsDataGetFirst returns the DataGetFirst field, read from the backing bytes at offset 136.
+func (u *CssmSpiDlFuncs) AsDataGetFirst() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[136]))
+}
+
+// AsDataGetNext returns the DataGetNext field, read from the backing bytes at offset 144.
+func (u *CssmSpiDlFuncs) AsDataGetNext() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[144]))
+}
+
+// AsDataAbortQuery returns the DataAbortQuery field, read from the backing bytes at offset 152.
+func (u *CssmSpiDlFuncs) AsDataAbortQuery() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[152]))
+}
+
+// AsDataGetFromUniqueRecordID returns the DataGetFromUniqueRecordId field, read from the backing bytes at offset 160.
+func (u *CssmSpiDlFuncs) AsDataGetFromUniqueRecordID() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[160]))
+}
+
+// AsFreeUniqueRecord returns the FreeUniqueRecord field, read from the backing bytes at offset 168.
+func (u *CssmSpiDlFuncs) AsFreeUniqueRecord() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[168]))
+}
+
+// AsPassThrough returns the PassThrough field, read from the backing bytes at offset 176.
+func (u *CssmSpiDlFuncs) AsPassThrough() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[176]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CssmSpiKrFuncs struct {
+	_    [0]uint64
+	data [72]byte
+}
+
+// AsRegistrationRequest returns the RegistrationRequest field, read from the backing bytes at offset 0.
+func (u *CssmSpiKrFuncs) AsRegistrationRequest() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsRegistrationRetrieve returns the RegistrationRetrieve field, read from the backing bytes at offset 8.
+func (u *CssmSpiKrFuncs) AsRegistrationRetrieve() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsGenerateRecoveryFields returns the GenerateRecoveryFields field, read from the backing bytes at offset 16.
+func (u *CssmSpiKrFuncs) AsGenerateRecoveryFields() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[16]))
+}
+
+// AsProcessRecoveryFields returns the ProcessRecoveryFields field, read from the backing bytes at offset 24.
+func (u *CssmSpiKrFuncs) AsProcessRecoveryFields() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[24]))
+}
+
+// AsRecoveryRequest returns the RecoveryRequest field, read from the backing bytes at offset 32.
+func (u *CssmSpiKrFuncs) AsRecoveryRequest() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[32]))
+}
+
+// AsRecoveryRetrieve returns the RecoveryRetrieve field, read from the backing bytes at offset 40.
+func (u *CssmSpiKrFuncs) AsRecoveryRetrieve() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[40]))
+}
+
+// AsGetRecoveredObject returns the GetRecoveredObject field, read from the backing bytes at offset 48.
+func (u *CssmSpiKrFuncs) AsGetRecoveredObject() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[48]))
+}
+
+// AsRecoveryRequestAbort returns the RecoveryRequestAbort field, read from the backing bytes at offset 56.
+func (u *CssmSpiKrFuncs) AsRecoveryRequestAbort() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[56]))
+}
+
+// AsPassThrough returns the PassThrough field, read from the backing bytes at offset 64.
+func (u *CssmSpiKrFuncs) AsPassThrough() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[64]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CssmSpiTpFuncs struct {
+	_    [0]uint64
+	data [184]byte
+}
+
+// AsSubmitCredRequest returns the SubmitCredRequest field, read from the backing bytes at offset 0.
+func (u *CssmSpiTpFuncs) AsSubmitCredRequest() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsRetrieveCredResult returns the RetrieveCredResult field, read from the backing bytes at offset 8.
+func (u *CssmSpiTpFuncs) AsRetrieveCredResult() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsConfirmCredResult returns the ConfirmCredResult field, read from the backing bytes at offset 16.
+func (u *CssmSpiTpFuncs) AsConfirmCredResult() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[16]))
+}
+
+// AsReceiveConfirmation returns the ReceiveConfirmation field, read from the backing bytes at offset 24.
+func (u *CssmSpiTpFuncs) AsReceiveConfirmation() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[24]))
+}
+
+// AsCertReclaimKey returns the CertReclaimKey field, read from the backing bytes at offset 32.
+func (u *CssmSpiTpFuncs) AsCertReclaimKey() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[32]))
+}
+
+// AsCertReclaimAbort returns the CertReclaimAbort field, read from the backing bytes at offset 40.
+func (u *CssmSpiTpFuncs) AsCertReclaimAbort() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[40]))
+}
+
+// AsFormRequest returns the FormRequest field, read from the backing bytes at offset 48.
+func (u *CssmSpiTpFuncs) AsFormRequest() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[48]))
+}
+
+// AsFormSubmit returns the FormSubmit field, read from the backing bytes at offset 56.
+func (u *CssmSpiTpFuncs) AsFormSubmit() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[56]))
+}
+
+// AsCertGroupVerify returns the CertGroupVerify field, read from the backing bytes at offset 64.
+func (u *CssmSpiTpFuncs) AsCertGroupVerify() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[64]))
+}
+
+// AsCertCreateTemplate returns the CertCreateTemplate field, read from the backing bytes at offset 72.
+func (u *CssmSpiTpFuncs) AsCertCreateTemplate() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[72]))
+}
+
+// AsCertGetAllTemplateFields returns the CertGetAllTemplateFields field, read from the backing bytes at offset 80.
+func (u *CssmSpiTpFuncs) AsCertGetAllTemplateFields() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[80]))
+}
+
+// AsCertSign returns the CertSign field, read from the backing bytes at offset 88.
+func (u *CssmSpiTpFuncs) AsCertSign() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[88]))
+}
+
+// AsCrlVerify returns the CrlVerify field, read from the backing bytes at offset 96.
+func (u *CssmSpiTpFuncs) AsCrlVerify() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[96]))
+}
+
+// AsCrlCreateTemplate returns the CrlCreateTemplate field, read from the backing bytes at offset 104.
+func (u *CssmSpiTpFuncs) AsCrlCreateTemplate() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[104]))
+}
+
+// AsCertRevoke returns the CertRevoke field, read from the backing bytes at offset 112.
+func (u *CssmSpiTpFuncs) AsCertRevoke() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[112]))
+}
+
+// AsCertRemoveFromCrlTemplate returns the CertRemoveFromCrlTemplate field, read from the backing bytes at offset 120.
+func (u *CssmSpiTpFuncs) AsCertRemoveFromCrlTemplate() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[120]))
+}
+
+// AsCrlSign returns the CrlSign field, read from the backing bytes at offset 128.
+func (u *CssmSpiTpFuncs) AsCrlSign() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[128]))
+}
+
+// AsApplyCrlToDb returns the ApplyCrlToDb field, read from the backing bytes at offset 136.
+func (u *CssmSpiTpFuncs) AsApplyCrlToDb() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[136]))
+}
+
+// AsCertGroupConstruct returns the CertGroupConstruct field, read from the backing bytes at offset 144.
+func (u *CssmSpiTpFuncs) AsCertGroupConstruct() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[144]))
+}
+
+// AsCertGroupPrune returns the CertGroupPrune field, read from the backing bytes at offset 152.
+func (u *CssmSpiTpFuncs) AsCertGroupPrune() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[152]))
+}
+
+// AsCertGroupToTupleGroup returns the CertGroupToTupleGroup field, read from the backing bytes at offset 160.
+func (u *CssmSpiTpFuncs) AsCertGroupToTupleGroup() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[160]))
+}
+
+// AsTupleGroupToCertGroup returns the TupleGroupToCertGroup field, read from the backing bytes at offset 168.
+func (u *CssmSpiTpFuncs) AsTupleGroupToCertGroup() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[168]))
+}
+
+// AsPassThrough returns the PassThrough field, read from the backing bytes at offset 176.
+func (u *CssmSpiTpFuncs) AsPassThrough() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[176]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CssmStateFuncs struct {
+	_    [0]uint64
+	data [48]byte
+}
+
+// AsCssmGetAttachFunctions returns the cssm_GetAttachFunctions field, read from the backing bytes at offset 0.
+func (u *CssmStateFuncs) AsCssmGetAttachFunctions() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsCssmReleaseAttachFunctions returns the cssm_ReleaseAttachFunctions field, read from the backing bytes at offset 8.
+func (u *CssmStateFuncs) AsCssmReleaseAttachFunctions() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsCssmGetAppMemoryFunctions returns the cssm_GetAppMemoryFunctions field, read from the backing bytes at offset 16.
+func (u *CssmStateFuncs) AsCssmGetAppMemoryFunctions() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[16]))
+}
+
+// AsCssmIsFuncCallValid returns the cssm_IsFuncCallValid field, read from the backing bytes at offset 24.
+func (u *CssmStateFuncs) AsCssmIsFuncCallValid() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[24]))
+}
+
+// AsCssmDeregisterManagerServices returns the cssm_DeregisterManagerServices field, read from the backing bytes at offset 32.
+func (u *CssmStateFuncs) AsCssmDeregisterManagerServices() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[32]))
+}
+
+// AsCssmDeliverModuleManagerEvent returns the cssm_DeliverModuleManagerEvent field, read from the backing bytes at offset 40.
+func (u *CssmStateFuncs) AsCssmDeliverModuleManagerEvent() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[40]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CssmTpPolicyinfo struct {
+	_    [0]uint64
+	data [24]byte
+}
+
+// AsNumberOfPolicyIds returns the NumberOfPolicyIds field, read from the backing bytes at offset 0.
+func (u *CssmTpPolicyinfo) AsNumberOfPolicyIds() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsPolicyControl returns the PolicyControl field, read from the backing bytes at offset 16.
+func (u *CssmTpPolicyinfo) AsPolicyControl() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[16]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CssmX509ExtensionTagAndValue struct {
+	_    [0]uint64
+	data [24]byte
+}
+
+// AsType returns the type field, read from the backing bytes at offset 0.
+func (u *CssmX509ExtensionTagAndValue) AsType() uint8 {
+	return *(*uint8)(unsafe.Pointer(&u.data[0]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CssmX509Extensions struct {
+	_    [0]uint64
+	data [16]byte
+}
+
+// AsNumberOfExtensions returns the numberOfExtensions field, read from the backing bytes at offset 0.
+func (u *CssmX509Extensions) AsNumberOfExtensions() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[0]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CssmX509Name struct {
+	_    [0]uint64
+	data [16]byte
+}
+
+// AsNumberOfRDNs returns the numberOfRDNs field, read from the backing bytes at offset 0.
+func (u *CssmX509Name) AsNumberOfRDNs() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[0]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CssmX509TbsCertificate struct {
+	_    [0]uint64
+	data [240]byte
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CssmX509TbsCertlist struct {
+	_    [0]uint64
+	data [136]byte
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CssmX509Time struct {
+	_    [0]uint64
+	data [24]byte
+}
+
+// AsTimeType returns the timeType field, read from the backing bytes at offset 0.
+func (u *CssmX509Time) AsTimeType() uint8 {
+	return *(*uint8)(unsafe.Pointer(&u.data[0]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type MdsFuncs struct {
+	_    [0]uint64
+	data [120]byte
+}
+
+// AsDbOpen returns the DbOpen field, read from the backing bytes at offset 0.
+func (u *MdsFuncs) AsDbOpen() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsDbClose returns the DbClose field, read from the backing bytes at offset 8.
+func (u *MdsFuncs) AsDbClose() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsGetDbNames returns the GetDbNames field, read from the backing bytes at offset 16.
+func (u *MdsFuncs) AsGetDbNames() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[16]))
+}
+
+// AsGetDbNameFromHandle returns the GetDbNameFromHandle field, read from the backing bytes at offset 24.
+func (u *MdsFuncs) AsGetDbNameFromHandle() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[24]))
+}
+
+// AsFreeNameList returns the FreeNameList field, read from the backing bytes at offset 32.
+func (u *MdsFuncs) AsFreeNameList() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[32]))
+}
+
+// AsDataInsert returns the DataInsert field, read from the backing bytes at offset 40.
+func (u *MdsFuncs) AsDataInsert() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[40]))
+}
+
+// AsDataDelete returns the DataDelete field, read from the backing bytes at offset 48.
+func (u *MdsFuncs) AsDataDelete() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[48]))
+}
+
+// AsDataModify returns the DataModify field, read from the backing bytes at offset 56.
+func (u *MdsFuncs) AsDataModify() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[56]))
+}
+
+// AsDataGetFirst returns the DataGetFirst field, read from the backing bytes at offset 64.
+func (u *MdsFuncs) AsDataGetFirst() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[64]))
+}
+
+// AsDataGetNext returns the DataGetNext field, read from the backing bytes at offset 72.
+func (u *MdsFuncs) AsDataGetNext() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[72]))
+}
+
+// AsDataAbortQuery returns the DataAbortQuery field, read from the backing bytes at offset 80.
+func (u *MdsFuncs) AsDataAbortQuery() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[80]))
+}
+
+// AsDataGetFromUniqueRecordID returns the DataGetFromUniqueRecordId field, read from the backing bytes at offset 88.
+func (u *MdsFuncs) AsDataGetFromUniqueRecordID() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[88]))
+}
+
+// AsFreeUniqueRecord returns the FreeUniqueRecord field, read from the backing bytes at offset 96.
+func (u *MdsFuncs) AsFreeUniqueRecord() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[96]))
+}
+
+// AsCreateRelation returns the CreateRelation field, read from the backing bytes at offset 104.
+func (u *MdsFuncs) AsCreateRelation() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[104]))
+}
+
+// AsDestroyRelation returns the DestroyRelation field, read from the backing bytes at offset 112.
+func (u *MdsFuncs) AsDestroyRelation() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[112]))
+}
+
+// A structure identifying an ASN.1 algorithm by its OID, and its corresponding parameters.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type SecAsn1AlgId struct {
+	_    [0]uint64
+	data [32]byte
+}
+
+// A structure containing a public key and its associated algorithm.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type SecAsn1PubKeyInfo struct {
+	_    [0]uint64
+	data [48]byte
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type X509Validity struct {
+	_    [0]uint64
+	data [48]byte
+}

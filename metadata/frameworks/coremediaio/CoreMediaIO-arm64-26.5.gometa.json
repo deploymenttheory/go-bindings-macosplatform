@@ -6103,6 +6103,7 @@
         }
       ],
       "size": 12,
+      "align": 4,
       "availability": {
         "macos_introduced": "10.7"
       },

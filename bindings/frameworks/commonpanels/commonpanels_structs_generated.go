@@ -45,11 +45,6 @@ type NColorPickerInfo struct {
 	Reserved       uint8
 }
 
-type NPMColor struct {
-	Profile unsafe.Pointer
-	Color   unsafe.Pointer
-}
-
 type OpaqueFCFontDescriptorRef struct{}
 
 type OpaquePicker struct{}
@@ -88,3 +83,11 @@ type Picker struct{ obj.Object }
 // IsNil reports whether Picker is a NULL handle (it wraps no object). Call
 // it before using a returned handle; a nil handle's methods panic.
 func (h Picker) IsNil() bool { return h.Object == nil }
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type NPMColor struct {
+	_    [0]uint16
+	data [16]byte
+}

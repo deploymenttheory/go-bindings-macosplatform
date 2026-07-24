@@ -146,12 +146,6 @@ type IORPCMessageErrorReturnContent struct {
 	Pad    uint32
 }
 
-type IORPCMessageMach struct {
-	Msgh     unsafe.Pointer
-	MsghBody unsafe.Pointer
-	Objects  unsafe.Pointer
-}
-
 type IORWLock struct{}
 
 type IORecursiveConditionLock struct{}
@@ -380,19 +374,9 @@ type OSSet_IVars struct{}
 
 type OSSet_LocalIVars struct{}
 
-type OSStringStatic struct {
-	CString  unsafe.Pointer
-	OSString unsafe.Pointer
-}
-
 type OSString_IVars struct{}
 
 type OSString_LocalIVars struct{}
-
-type QueueEntry struct {
-	Next unsafe.Pointer
-	Prev unsafe.Pointer
-}
 
 // QueueChainT is an alias for the queue_entry value type.
 type QueueChainT = QueueEntry
@@ -419,3 +403,47 @@ type OSObjectPtr struct{ obj.Object }
 // IsNil reports whether OSObjectPtr is a NULL handle (it wraps no object). Call
 // it before using a returned handle; a nil handle's methods panic.
 func (h OSObjectPtr) IsNil() bool { return h.Object == nil }
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type IORPCMessageMach struct {
+	_    [0]uint32
+	data [28]byte
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type OSStringStatic struct {
+	_    [0]uint64
+	data [16]byte
+}
+
+// AsCString returns the cString field, read from the backing bytes at offset 0.
+func (u *OSStringStatic) AsCString() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsOSString returns the osString field, read from the backing bytes at offset 8.
+func (u *OSStringStatic) AsOSString() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type QueueEntry struct {
+	_    [0]uint64
+	data [16]byte
+}
+
+// AsNext returns the next field, read from the backing bytes at offset 0.
+func (u *QueueEntry) AsNext() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsPrev returns the prev field, read from the backing bytes at offset 8.
+func (u *QueueEntry) AsPrev() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+}

@@ -68228,6 +68228,7 @@
         }
       ],
       "size": 16,
+      "align": 8,
       "availability": {},
       "sdk_file": "AVFoundation/AVCaption.h",
       "sdk_line": 47,

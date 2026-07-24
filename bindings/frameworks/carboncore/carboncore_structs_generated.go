@@ -172,12 +172,6 @@ type ComponentParameters struct {
 	Params    [1]int
 }
 
-type ComponentPlatformInfo struct {
-	ComponentFlags int32
-	Component      ResourceSpec
-	PlatformType   int16
-}
-
 type ComponentPlatformInfoArray struct {
 	Count         int32
 	PlatformArray [1]ComponentPlatformInfo
@@ -185,14 +179,6 @@ type ComponentPlatformInfoArray struct {
 
 type ComponentRecord struct {
 	Data [1]int
-}
-
-type ComponentResource struct {
-	Cd            ComponentDescription
-	Component     ResourceSpec
-	ComponentName ResourceSpec
-	ComponentInfo ResourceSpec
-	ComponentIcon ResourceSpec
 }
 
 type ComponentResourceExtension struct {
@@ -275,7 +261,7 @@ type ExceptionInformation struct {
 	MachineState  unsafe.Pointer
 	RegisterImage unsafe.Pointer
 	FPUImage      unsafe.Pointer
-	Info          unsafe.Pointer
+	Info          ExceptionInfo
 	VectorImage   unsafe.Pointer
 }
 
@@ -284,7 +270,7 @@ type ExceptionInformationPowerPC struct {
 	MachineState  unsafe.Pointer
 	RegisterImage unsafe.Pointer
 	FPUImage      unsafe.Pointer
-	Info          unsafe.Pointer
+	Info          ExceptionInfo
 	VectorImage   unsafe.Pointer
 }
 
@@ -333,9 +319,6 @@ type FInfo struct {
 	FdFlags    uint16
 	FdLocation Point
 	FdFldr     int16
-}
-
-type FPUInformation struct {
 }
 
 type FPUInformationPowerPC struct {
@@ -821,9 +804,15 @@ type LocalDateTime struct {
 	Fraction    uint16
 }
 
-type LocaleAndVariant struct {
-	Locale    unsafe.Pointer
-	OpVariant uint32
+type LongDateCvt struct {
+	C  int64
+	Hl unsafe.Pointer
+}
+
+type LongDateRec struct {
+	Ld   unsafe.Pointer
+	List [14]int16
+	Od   unsafe.Pointer
 }
 
 type MIDIDataChunk struct {
@@ -934,9 +923,6 @@ type MPTaskInfoVersion2 struct {
 	CPUID          unsafe.Pointer
 }
 
-type MachineInformation struct {
-}
-
 type MachineInformationPowerPC struct {
 	CTR        unsafe.Pointer
 	LR         unsafe.Pointer
@@ -1013,7 +999,7 @@ type NumFormatString struct {
 
 type NumberParts struct {
 	Version     int16
-	Data        unsafe.Pointer
+	Data        [31]WideChar
 	PePlus      WideCharArr
 	PeMinus     WideCharArr
 	PeMinusPlus WideCharArr
@@ -1167,6 +1153,8 @@ type PEFSplitHashWord struct {
 	HashValue  uint16
 }
 
+type ParamBlockRec struct{}
+
 // ****************************************************************************** Quickdraw Types Point               2D Quickdraw coordinate, range: -32K to +32K Rect                Rectangular Quickdraw area Style               Quickdraw font rendering styles StyleParameter      Style when used as a parameter (historical 68K convention) StyleField          Style when used as a field (historical 68K convention) CharParameter       Char when used as a parameter (historical 68K convention) Note:   The original Macintosh toolbox in 68K Pascal defined Style as a SET. Both Style and CHAR occupy 8-bits in packed records or 16-bits when used as fields in non-packed records or as parameters. *******************************************************************************
 type Point struct {
 	V int16
@@ -1190,9 +1178,6 @@ type Rect struct {
 	Left   int16
 	Bottom int16
 	Right  int16
-}
-
-type RegisterInformation struct {
 }
 
 type RegisterInformationPowerPC struct {
@@ -1247,16 +1232,6 @@ type RoutineDescriptor struct {
 	SelectorInfo           uint8
 	RoutineCount           uint16
 	RoutineRecords         [1]RoutineRecord
-}
-
-type RoutineRecord struct {
-	ProcInfo       uint
-	Reserved1      int8
-	ISA            int8
-	RoutineFlags   uint16
-	ProcDescriptor unsafe.Pointer
-	Reserved2      uint32
-	Selector       uint32
 }
 
 type RoutingResourceEntry struct {
@@ -1595,12 +1570,9 @@ type UntokenTable struct {
 	Index     [256]int16
 }
 
-type VectorInformation struct {
-}
-
 type VectorInformationPowerPC struct {
-	Registers unsafe.Pointer
-	VSCR      unsafe.Pointer
+	Registers [32]Vector128
+	VSCR      Vector128
 	VRsave    uint32
 }
 
@@ -1617,7 +1589,7 @@ type VolumeMountInfoHeader struct {
 
 type WideCharArr struct {
 	Size int16
-	Data unsafe.Pointer
+	Data [10]WideChar
 }
 
 type XLibContainerHeader struct {
@@ -1862,6 +1834,7 @@ func (h UnicodeToTextRunInfo) IsNil() bool { return h.Object == nil }
 // its exact-size bytes and read through the typed As* accessors below. It is
 // pointer-only: never pass it by value.
 type Comment struct {
+	_    [0]uint16
 	data [10]byte
 }
 
@@ -1888,7 +1861,76 @@ func (u *Comment) AsText() [1]int8 {
 // The C layout cannot be reproduced as a plain Go value struct, so it is held as
 // its exact-size bytes and read through the typed As* accessors below. It is
 // pointer-only: never pass it by value.
+type ComponentPlatformInfo struct {
+	_    [0]uint16
+	data [12]byte
+}
+
+// AsComponentFlags returns the componentFlags field, read from the backing bytes at offset 0.
+func (u *ComponentPlatformInfo) AsComponentFlags() int32 {
+	return *(*int32)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsPlatformType returns the platformType field, read from the backing bytes at offset 10.
+func (u *ComponentPlatformInfo) AsPlatformType() int16 {
+	return *(*int16)(unsafe.Pointer(&u.data[10]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type ComponentResource struct {
+	_    [0]uint16
+	data [44]byte
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type ExceptionInfo struct {
+	_    [0]uint64
+	data [8]byte
+}
+
+// AsMemoryInfo returns the memoryInfo field, read from the backing bytes at offset 0.
+func (u *ExceptionInfo) AsMemoryInfo() unsafe.Pointer {
+	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type FPUInformation struct {
+	_    [0]uint64
+	data [8]byte
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type LocaleAndVariant struct {
+	_    [0]uint16
+	data [12]byte
+}
+
+// AsOpVariant returns the opVariant field, read from the backing bytes at offset 8.
+func (u *LocaleAndVariant) AsOpVariant() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[8]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type MachineInformation struct {
+	_    [0]uint64
+	data [8]byte
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
 type Marker struct {
+	_    [0]uint16
 	data [262]byte
 }
 
@@ -1910,7 +1952,16 @@ func (u *Marker) AsMarkerName() [256]uint8 {
 // The C layout cannot be reproduced as a plain Go value struct, so it is held as
 // its exact-size bytes and read through the typed As* accessors below. It is
 // pointer-only: never pass it by value.
+type RegisterInformation struct {
+	_    [0]uint64
+	data [8]byte
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
 type ResourceSpec struct {
+	_    [0]uint16
 	data [6]byte
 }
 
@@ -1927,7 +1978,46 @@ func (u *ResourceSpec) AsResID() int16 {
 // The C layout cannot be reproduced as a plain Go value struct, so it is held as
 // its exact-size bytes and read through the typed As* accessors below. It is
 // pointer-only: never pass it by value.
+type RoutineRecord struct {
+	_    [0]uint16
+	data [28]byte
+}
+
+// AsProcInfo returns the procInfo field, read from the backing bytes at offset 0.
+func (u *RoutineRecord) AsProcInfo() uint {
+	return *(*uint)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsReserved1 returns the reserved1 field, read from the backing bytes at offset 8.
+func (u *RoutineRecord) AsReserved1() int8 {
+	return *(*int8)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsISA returns the ISA field, read from the backing bytes at offset 9.
+func (u *RoutineRecord) AsISA() int8 {
+	return *(*int8)(unsafe.Pointer(&u.data[9]))
+}
+
+// AsRoutineFlags returns the routineFlags field, read from the backing bytes at offset 10.
+func (u *RoutineRecord) AsRoutineFlags() uint16 {
+	return *(*uint16)(unsafe.Pointer(&u.data[10]))
+}
+
+// AsReserved2 returns the reserved2 field, read from the backing bytes at offset 20.
+func (u *RoutineRecord) AsReserved2() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[20]))
+}
+
+// AsSelector returns the selector field, read from the backing bytes at offset 24.
+func (u *RoutineRecord) AsSelector() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[24]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
 type ScriptCodeRun struct {
+	_    [0]uint16
 	data [10]byte
 }
 
@@ -1945,6 +2035,7 @@ func (u *ScriptCodeRun) AsScript() int16 {
 // its exact-size bytes and read through the typed As* accessors below. It is
 // pointer-only: never pass it by value.
 type TextEncodingRun struct {
+	_    [0]uint16
 	data [12]byte
 }
 
@@ -1962,6 +2053,7 @@ func (u *TextEncodingRun) AsTextEncoding() uint32 {
 // its exact-size bytes and read through the typed As* accessors below. It is
 // pointer-only: never pass it by value.
 type UTCDateTime struct {
+	_    [0]uint16
 	data [8]byte
 }
 
@@ -1978,4 +2070,48 @@ func (u *UTCDateTime) AsLowSeconds() uint32 {
 // AsFraction returns the fraction field, read from the backing bytes at offset 6.
 func (u *UTCDateTime) AsFraction() uint16 {
 	return *(*uint16)(unsafe.Pointer(&u.data[6]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type Vector128 struct {
+	_    [0]uint64
+	data [32]byte
+}
+
+// AsL returns the l field, read from the backing bytes at offset 0.
+func (u *Vector128) AsL() [4]uint {
+	return *(*[4]uint)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsS returns the s field, read from the backing bytes at offset 0.
+func (u *Vector128) AsS() [8]uint16 {
+	return *(*[8]uint16)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsC returns the c field, read from the backing bytes at offset 0.
+func (u *Vector128) AsC() [16]uint8 {
+	return *(*[16]uint8)(unsafe.Pointer(&u.data[0]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type VectorInformation struct {
+	_    [0]uint64
+	data [8]byte
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type WideChar struct {
+	_    [0]uint16
+	data [2]byte
+}
+
+// AsB returns the b field, read from the backing bytes at offset 0.
+func (u *WideChar) AsB() int16 {
+	return *(*int16)(unsafe.Pointer(&u.data[0]))
 }

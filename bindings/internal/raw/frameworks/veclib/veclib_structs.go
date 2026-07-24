@@ -1011,3 +1011,59 @@ type VDSPInt24 struct {
 type VDSPUint24 struct {
 	Bytes [3]uint8
 }
+
+// C struct: vS1024
+type VS1024 struct {
+	V  [8]unsafe.Pointer
+	Vs unsafe.Pointer
+	S  unsafe.Pointer
+}
+
+// C struct: vS128
+type VS128 struct {
+	V  unsafe.Pointer
+	Vs unsafe.Pointer
+	S  unsafe.Pointer
+}
+
+// C struct: vS256
+type VS256 struct {
+	V  [2]unsafe.Pointer
+	Vs unsafe.Pointer
+	S  unsafe.Pointer
+}
+
+// C struct: vS512
+type VS512 struct {
+	V  [4]unsafe.Pointer
+	Vs unsafe.Pointer
+	S  unsafe.Pointer
+}
+
+// C struct: vU1024
+type VU1024 struct {
+	V  [8]unsafe.Pointer
+	Vs unsafe.Pointer
+	S  unsafe.Pointer
+}
+
+// C struct: vU128
+type VU128 struct {
+	V  unsafe.Pointer
+	Vs unsafe.Pointer
+	S  unsafe.Pointer
+}
+
+// C struct: vU256
+type VU256 struct {
+	V  [2]unsafe.Pointer
+	Vs unsafe.Pointer
+	S  unsafe.Pointer
+}
+
+// C struct: vU512
+type VU512 struct {
+	V  [4]unsafe.Pointer
+	Vs unsafe.Pointer
+	S  unsafe.Pointer
+}

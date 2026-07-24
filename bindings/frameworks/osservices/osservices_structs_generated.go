@@ -106,6 +106,7 @@ func (h WSProtocolHandlerRef) IsNil() bool { return h.Object == nil }
 // its exact-size bytes and read through the typed As* accessors below. It is
 // pointer-only: never pass it by value.
 type IconFamilyElement struct {
+	_    [0]uint16
 	data [10]byte
 }
 

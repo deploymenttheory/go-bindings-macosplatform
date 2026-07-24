@@ -7183,6 +7183,34 @@
     }
   },
   "structs": {
+    "AEArrayData": {
+      "fields": [
+        {
+          "name": "kAEDataArray",
+          "objc_type": "SInt16[1]"
+        },
+        {
+          "name": "kAEPackedArray",
+          "objc_type": "char[1]"
+        },
+        {
+          "name": "kAEHandleArray",
+          "objc_type": "Handle[1]"
+        },
+        {
+          "name": "kAEDescArray",
+          "objc_type": "AEDesc[1]"
+        },
+        {
+          "name": "kAEKeyDescArray",
+          "objc_type": "AEKeyDesc[1]"
+        }
+      ],
+      "is_union": true,
+      "availability": {},
+      "sdk_file": "CoreServices.framework/Frameworks/AE/AEDataModel.h",
+      "sdk_line": 391
+    },
     "AEBuildError": {
       "fields": [
         {
@@ -7211,6 +7239,7 @@
         }
       ],
       "size": 12,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/AE/AEDataModel.h",
       "sdk_line": 353
@@ -7228,6 +7257,7 @@
         }
       ],
       "size": 16,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/AE/AEDataModel.h",
       "sdk_line": 359
@@ -7361,6 +7391,7 @@
         }
       ],
       "size": 10,
+      "align": 2,
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/AE/AERegistry.h",
       "sdk_line": 688

@@ -75,6 +75,11 @@ type CMAdaptationMatrixType struct {
 	AdaptationMatrix [9]int32
 }
 
+type CMAppleProfileHeader struct {
+	Cm2 CM2Header
+	Cm4 CM4Header
+}
+
 type CMBitmap struct {
 	Image     string
 	Width     uint
@@ -102,6 +107,24 @@ type CMCMYKColor struct {
 	Magenta uint16
 	Yellow  uint16
 	Black   uint16
+}
+
+type CMColor struct {
+	Rgb        CMRGBColor
+	Hsv        CMHSVColor
+	Hls        CMHLSColor
+	XYZ        CMXYZColor
+	Lab        CMLabColor
+	Luv        CMLuvColor
+	Yxy        CMYxyColor
+	Cmyk       CMCMYKColor
+	Cmy        CMCMYColor
+	Gray       CMGrayColor
+	Mc5        CMMultichannel5Color
+	Mc6        CMMultichannel6Color
+	Mc7        CMMultichannel7Color
+	Mc8        CMMultichannel8Color
+	NamedColor CMNamedColor
 }
 
 type CMConcatProfileSet struct {
@@ -413,6 +436,12 @@ type CMPathLocation struct {
 	Path [1024]int8
 }
 
+type CMProfLoc struct {
+	HandleLoc CMHandleLocation
+	PathLoc   CMPathLocation
+	BufferLoc CMBufferLocation
+}
+
 type CMProfileIterateData struct {
 	DataVersion      uint32
 	Header           CM2Header
@@ -428,7 +457,7 @@ type CMProfileIterateData struct {
 
 type CMProfileLocation struct {
 	LocType int16
-	U       unsafe.Pointer
+	U       CMProfLoc
 }
 
 type CMProfileSequenceDescType struct {

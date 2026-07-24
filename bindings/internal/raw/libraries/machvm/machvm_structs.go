@@ -9,6 +9,40 @@ import (
 	"unsafe"
 )
 
+// [vm_map.h:1486]
+type ReplyUnionVmMapSubsystem struct {
+	Reply_vm_region                 ReplyVmRegionT
+	Reply_vm_allocate               ReplyVmAllocateT
+	Reply_vm_deallocate             ReplyVmDeallocateT
+	Reply_vm_protect                ReplyVmProtectT
+	Reply_vm_inherit                ReplyVmInheritT
+	Reply_vm_read                   ReplyVmReadT
+	Reply_vm_read_list              ReplyVmReadListT
+	Reply_vm_write                  ReplyVmWriteT
+	Reply_vm_copy                   ReplyVmCopyT
+	Reply_vm_read_overwrite         ReplyVmReadOverwriteT
+	Reply_vm_msync                  ReplyVmMsyncT
+	Reply_vm_behavior_set           ReplyVmBehaviorSetT
+	Reply_vm_map                    ReplyVmMapT
+	Reply_vm_machine_attribute      ReplyVmMachineAttributeT
+	Reply_vm_remap                  ReplyVmRemapT
+	Reply_task_wire                 ReplyTaskWireT
+	Reply_mach_make_memory_entry    ReplyMachMakeMemoryEntryT
+	Reply_vm_map_page_query         ReplyVmMapPageQueryT
+	Reply_mach_vm_region_info       ReplyMachVmRegionInfoT
+	Reply_vm_mapped_pages_info      ReplyVmMappedPagesInfoT
+	Reply_vm_region_recurse         ReplyVmRegionRecurseT
+	Reply_vm_region_recurse_64      ReplyVmRegionRecurse64T
+	Reply_mach_vm_region_info_64    ReplyMachVmRegionInfo64T
+	Reply_vm_region_64              ReplyVmRegion64T
+	Reply_mach_make_memory_entry_64 ReplyMachMakeMemoryEntry64T
+	Reply_vm_map_64                 ReplyVmMap64T
+	Reply_vm_purgable_control       ReplyVmPurgableControlT
+	Reply_vm_map_exec_lockdown      ReplyVmMapExecLockdownT
+	Reply_vm_remap_new              ReplyVmRemapNewT
+	Reply_vm_reallocate             ReplyVmReallocateT
+}
+
 // [vm_map.h:1402]
 type ReplyMachMakeMemoryEntry64T struct {
 	Head          unsafe.Pointer
@@ -267,6 +301,40 @@ type ReplyVmWriteT struct {
 	Head    unsafe.Pointer
 	NDR     machhost.NDR_record_t
 	RetCode int32
+}
+
+// [vm_map.h:1017]
+type RequestUnionVmMapSubsystem struct {
+	Request_vm_region                 RequestVmRegionT
+	Request_vm_allocate               RequestVmAllocateT
+	Request_vm_deallocate             RequestVmDeallocateT
+	Request_vm_protect                RequestVmProtectT
+	Request_vm_inherit                RequestVmInheritT
+	Request_vm_read                   RequestVmReadT
+	Request_vm_read_list              RequestVmReadListT
+	Request_vm_write                  RequestVmWriteT
+	Request_vm_copy                   RequestVmCopyT
+	Request_vm_read_overwrite         RequestVmReadOverwriteT
+	Request_vm_msync                  RequestVmMsyncT
+	Request_vm_behavior_set           RequestVmBehaviorSetT
+	Request_vm_map                    RequestVmMapT
+	Request_vm_machine_attribute      RequestVmMachineAttributeT
+	Request_vm_remap                  RequestVmRemapT
+	Request_task_wire                 RequestTaskWireT
+	Request_mach_make_memory_entry    RequestMachMakeMemoryEntryT
+	Request_vm_map_page_query         RequestVmMapPageQueryT
+	Request_mach_vm_region_info       RequestMachVmRegionInfoT
+	Request_vm_mapped_pages_info      RequestVmMappedPagesInfoT
+	Request_vm_region_recurse         RequestVmRegionRecurseT
+	Request_vm_region_recurse_64      RequestVmRegionRecurse64T
+	Request_mach_vm_region_info_64    RequestMachVmRegionInfo64T
+	Request_vm_region_64              RequestVmRegion64T
+	Request_mach_make_memory_entry_64 RequestMachMakeMemoryEntry64T
+	Request_vm_map_64                 RequestVmMap64T
+	Request_vm_purgable_control       RequestVmPurgableControlT
+	Request_vm_map_exec_lockdown      RequestVmMapExecLockdownT
+	Request_vm_remap_new              RequestVmRemapNewT
+	Request_vm_reallocate             RequestVmReallocateT
 }
 
 // [vm_map.h:907]

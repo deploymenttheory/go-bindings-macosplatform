@@ -3233,6 +3233,7 @@
         }
       ],
       "size": 68,
+      "align": 2,
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/HIServices/InternetConfig.h",
       "sdk_line": 222,
@@ -3292,6 +3293,7 @@
         }
       ],
       "size": 112,
+      "align": 2,
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/HIServices/InternetConfig.h",
       "sdk_line": 240,
@@ -3394,6 +3396,7 @@
         }
       ],
       "size": 260,
+      "align": 2,
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/HIServices/InternetConfig.h",
       "sdk_line": 304
@@ -3476,6 +3479,7 @@
         }
       ],
       "size": 52,
+      "align": 2,
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/HIServices/Processes.h",
       "sdk_line": 71
@@ -3639,6 +3643,7 @@
         }
       ],
       "size": 6,
+      "align": 2,
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/QD/Quickdraw.h",
       "sdk_line": 65
