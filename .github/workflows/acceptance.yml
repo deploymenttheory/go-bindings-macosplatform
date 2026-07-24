@@ -117,6 +117,18 @@ jobs:
             -timeout 600s \
             -count=1
 
+      # Tier A — symbol-resolution gate. Regenerate from committed metadata +
+      # baseline, then dlsym/objc_getClass every bound symbol against the real
+      # system dylibs (no calls). Fails only on a symbol unresolved AND not in
+      # metadata/symbolgate-baseline.json — i.e. a NEW binding to a nonexistent
+      # symbol. Runs independently of the framework packages, so the pre-existing
+      # import cycles don't gate it.
+      - name: Run symbol-resolution gate
+        if: steps.version.outputs.macos_major == '26'
+        run: |
+          go run ./cmd/gensymbolgate/
+          go test ./bindings/symbolgate/ -v -timeout 300s -count=1
+
       - name: Upload test artifacts
         if: steps.version.outputs.macos_major == '26' && always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
