@@ -8,6 +8,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 type RArray struct {
@@ -135,12 +136,26 @@ type StHashType struct {
 	data [16]byte
 }
 
-// AsCompare returns the compare field, read from the backing bytes at offset 0.
-func (u *StHashType) AsCompare() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+// AsCompare binds the compare C function pointer (offset 0) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *StHashType) AsCompare() func() int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[0]))
+	if p == 0 {
+		return nil
+	}
+	var fn func() int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsHash returns the hash field, read from the backing bytes at offset 8.
-func (u *StHashType) AsHash() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+// AsHash binds the hash C function pointer (offset 8) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *StHashType) AsHash() func() uint {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[8]))
+	if p == 0 {
+		return nil
+	}
+	var fn func() uint
+	purego.RegisterFunc(&fn, p)
+	return fn
 }

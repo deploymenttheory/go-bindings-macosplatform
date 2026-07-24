@@ -8,6 +8,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // Common activation function parameters
@@ -1078,9 +1079,16 @@ type SparseCGOptions struct {
 	data [40]byte
 }
 
-// AsReportError returns the reportError field, read from the backing bytes at offset 0.
-func (u *SparseCGOptions) AsReportError() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+// AsReportError binds the reportError C function pointer (offset 0) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *SparseCGOptions) AsReportError() func(unsafe.Pointer) {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[0]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer)
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
 // AsMaxIterations returns the maxIterations field, read from the backing bytes at offset 8.
@@ -1098,9 +1106,16 @@ func (u *SparseCGOptions) AsRtol() float64 {
 	return *(*float64)(unsafe.Pointer(&u.data[24]))
 }
 
-// AsReportStatus returns the reportStatus field, read from the backing bytes at offset 32.
-func (u *SparseCGOptions) AsReportStatus() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[32]))
+// AsReportStatus binds the reportStatus C function pointer (offset 32) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *SparseCGOptions) AsReportStatus() func(unsafe.Pointer) {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[32]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer)
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
 // Right-preconditioned (F/DQ)GMRES Parameters Options. Use (F/DQ)GMRES to solve `Ax=b` when `A` is symmetric (Hermitian) indefinite or unsymmetric. For symmetric (Hermitian) positive-definite systems, use CG instead. For rectangular or singular systems, use LSMR instead. - term `reportError`  : Function to use to report parameter errors. If `NULL`, errors are logged via `<os/log.h>` and execution is halted via `__builtin_trap()`.  If non-`NULL`, the provided function is called with a human-readable string describing the error condition. If the callback returns, control will be returned to the caller with any outputs in a safe but undefined state (i.e. they may hold partial results or garbage, but all sizes and pointers are valid). - term `variant`: Variant of GMRES to use. See definition of `SparseGMRESVariant_t` for further information on the available variants. - term `nvec`: Number of orthagonal vectors maintained. For GMRES and FGMRES variants, this is the number of iterations between restarts. For DQGMRES it is the number of historical vectors maintained in memory. If `nvec<=0`, the default value of 16 is used. - term `maxIterations` : Maximum number of iterations to perform. If 0, the default value of 100 is used. - term `atol`: Absolute convergence tolerance. Iterate is considered to have converged if ``` || b-Ax ||_2 < rtol * || b-Ax_0 ||_2 + atol ``` - term `rtol`: Relative convergence tolerance. Iterate is considered to have converged if ``` || b-Ax ||_2 < rtol * || b-Ax_0 ||_2 + atol ``` If r`tol = 0.0`, default value of `sqrt(epsilon)` is used. If negative, `rtol` is treated as `0.0 `(default is not used). - term `reportStatus` : Function to use to report status (iteration count and residual of first right-hand side) every few iterations. If NULL, status is not reported.
@@ -1112,9 +1127,16 @@ type SparseGMRESOptions struct {
 	data [48]byte
 }
 
-// AsReportError returns the reportError field, read from the backing bytes at offset 0.
-func (u *SparseGMRESOptions) AsReportError() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+// AsReportError binds the reportError C function pointer (offset 0) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *SparseGMRESOptions) AsReportError() func(unsafe.Pointer) {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[0]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer)
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
 // AsNvec returns the nvec field, read from the backing bytes at offset 12.
@@ -1137,9 +1159,16 @@ func (u *SparseGMRESOptions) AsRtol() float64 {
 	return *(*float64)(unsafe.Pointer(&u.data[32]))
 }
 
-// AsReportStatus returns the reportStatus field, read from the backing bytes at offset 40.
-func (u *SparseGMRESOptions) AsReportStatus() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[40]))
+// AsReportStatus binds the reportStatus C function pointer (offset 40) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *SparseGMRESOptions) AsReportStatus() func(unsafe.Pointer) {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[40]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer)
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
 // General description object for all iterative methods. This object is intended to be constructed through a call to an iterative method factory function, such as `SparseConjugateGradient()` or `SparseLSMR()`. - term `method` : The type of method the object represents. - term `options` : The options to be used for the method.
@@ -1164,9 +1193,16 @@ type SparseIterativeMethodBaseOptions struct {
 	data [8]byte
 }
 
-// AsReportError returns the reportError field, read from the backing bytes at offset 0.
-func (u *SparseIterativeMethodBaseOptions) AsReportError() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+// AsReportError binds the reportError C function pointer (offset 0) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *SparseIterativeMethodBaseOptions) AsReportError() func(unsafe.Pointer) {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[0]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer)
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
 // LSMR is MINRES specialised for solving least squares. Use LSMR to solve equations of the form Ax=b where an exact solution does not exist. The returned solution minimises || b-Ax ||_2. Whilst LSMR is equivalent to MINRES applied to the normal equations `A^TAx = A^Tb` in exact arithmetic, it has superior numerical behaviour and should be used in preference. We note that due to the implicit squaring of the condition of A in the normal equations, LSMR may struggle to converge in single precision, and double precision arithmetic is recommended. For symmetric (Hermitian) positive-definite systems, use CG instead. For square, full rank unsymmetric or indefinite equations, use GMRES instead. - term `reportError`  : Function to use to report parameter errors. If `NULL`, errors are logged via `<os/log.h>` and execution is halted via `__builtin_trap()`.  If non-`NULL`, the provided function is called with a human-readable string describing the error condition. If the callback returns, control will be returned to the caller with any outputs in a safe but undefined state (i.e. they may hold partial results or garbage, but all sizes and pointers are valid). - term `lambda`: Damping parameter, if non-zero the actual problem solved is ``` min_x || Ax-b ||_2 + lambda || x ||_2. ``` Using damping can often allow the iteration to converge on ill-conditioned systems. - term  `variant`: Variant of GMRES to use. See definition of `SparseGMRESVariant_t` for further information on the available variants. - term  `nvec`: Number of vectors used for local orthogonalization. If n`vec<=0`, no orthogonalization is performed. - term `convergenceTest`: Which convergence test to use. See definition of `SparseLSMRConvergenceTest_t` for further information. - term  `maxIterations`: Maximum number of iterations to perform. If 0, the default value of 4n is used. However, if a good preconditioner is available and/or the matrix is well conditioned such that singular values are clustered, a value of n/2 may be more appropriate. - term `atol`: Either absolute tolerance (default test) or A tolerance (Fong-Saunders test). In the Fong and Saunders case, it should hold an estimate of the relative error in the data defining the matrix A. For example, if A is accurate to about 6 digits, set atol = 1.0e-6. In the Fong and Saunders case, if atol is 0.0, it is treated as machine epsilon. If using the default test, a value of 0.0 is treated as 0.0. - term `rtol`: Relative convergence tolerance (default test only). If `rtol = 0.0`, default value of `sqrt(epsilon)` is used. If negative, `rtol` is treated as 0.0 (default is not used). - term `btol`: b tolerance (Fong-Saunders test only). It should hold an estimate of the relative error in the data defining the rhs b. For example, if b is accurate to about 6 digits, set btol = 1.0e-6. If btol is zero, it is treated as machine epsilon. - term  `conditionLimit`: Condition number limit (Fong-Saunders test). Iterations will be terminated if a computed estimate of cond(Abar) exceeds this value. This is intended to prevent certain small or zero singular values of A or Abar from coming into effect and causing unwanted growth in the computed solution. conditionLimit and lambda may be used separately or together to regularize ill-conditioned systems. Normally, conlim should be in the range 1000 to 1/eps. Suggested value: * `conditionLimit = 1/(100*eps)`  for compatible systems, * `conditionLimit = 1/(10*sqrt(eps))` for least squares. If `conditionLimit` is `0.0,` it is treated as `1/eps`. - term `reportStatus` : Function to use to report status (iteration count and residual of first right-hand side) every few iterations. If NULL, status is not reported.
@@ -1178,9 +1214,16 @@ type SparseLSMROptions struct {
 	data [72]byte
 }
 
-// AsReportError returns the reportError field, read from the backing bytes at offset 0.
-func (u *SparseLSMROptions) AsReportError() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+// AsReportError binds the reportError C function pointer (offset 0) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *SparseLSMROptions) AsReportError() func(unsafe.Pointer) {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[0]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer)
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
 // AsLambda returns the lambda field, read from the backing bytes at offset 8.
@@ -1218,9 +1261,16 @@ func (u *SparseLSMROptions) AsMaxIterations() int32 {
 	return *(*int32)(unsafe.Pointer(&u.data[56]))
 }
 
-// AsReportStatus returns the reportStatus field, read from the backing bytes at offset 64.
-func (u *SparseLSMROptions) AsReportStatus() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[64]))
+// AsReportStatus binds the reportStatus C function pointer (offset 64) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *SparseLSMROptions) AsReportStatus() func(unsafe.Pointer) {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[64]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer)
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
 // A type representing the sparsity structure of a sparse matrix. The sparsity structure is represented in *block compressed sparse column* (block CSC) format. The matrix is divided into a regular grid of `rowCount x columnCount` blocks each of size `blockSize x blockSize`, and only blocks containing a non-zero entry are stored. CSC format is used to store the locations of these blocks. For each block column, a list of block row indices for non-zero blocks are stored, and the lists for each column are stored contiguously one after the other. Hence the row indices for column j are given by rowIndices`[columnStarts[j]:columnStarts[j+1]]`, where `columnStarts[]` is storing the location of the first index in each column. If the blockSize is `1`, then this format is exactly equivalent to standard CSC format. CSR format data can be simulated by using a blockSize of `1` and setting the transpose attribute (strictly this is still a transposed CSC matrix, so `rowCount` and `columnCount` will be transposed compared to true CSR). - term `rowCount` : Number of (block) rows in matrix. - term `columnCount` : Number of (block) columns in matrix. - term `columnStarts` : Specifies where each (block) column starts in rowIndices array. - term `rowIndices` : Specifies the (block) row indices of the matrix. - term `attributes` : The attribute meta-data for the matrix, for example whether the matrix is symmetric (Hermitian) and only half the entries are stored. - term `blockSize` :  The block size of the matrix.
@@ -1707,17 +1757,38 @@ func (u *SparseSymbolicFactorOptions) AsIgnoreRowsAndColumns() unsafe.Pointer {
 	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[16]))
 }
 
-// AsMalloc returns the malloc field, read from the backing bytes at offset 24.
-func (u *SparseSymbolicFactorOptions) AsMalloc() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[24]))
+// AsMalloc binds the malloc C function pointer (offset 24) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *SparseSymbolicFactorOptions) AsMalloc() func(uint) unsafe.Pointer {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[24]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(uint) unsafe.Pointer
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsFree returns the free field, read from the backing bytes at offset 32.
-func (u *SparseSymbolicFactorOptions) AsFree() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[32]))
+// AsFree binds the free C function pointer (offset 32) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *SparseSymbolicFactorOptions) AsFree() func(unsafe.Pointer) {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[32]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer)
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsReportError returns the reportError field, read from the backing bytes at offset 40.
-func (u *SparseSymbolicFactorOptions) AsReportError() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[40]))
+// AsReportError binds the reportError C function pointer (offset 40) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *SparseSymbolicFactorOptions) AsReportError() func(unsafe.Pointer) {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[40]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer)
+	purego.RegisterFunc(&fn, p)
+	return fn
 }

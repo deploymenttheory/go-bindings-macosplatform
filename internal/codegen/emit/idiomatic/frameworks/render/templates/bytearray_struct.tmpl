@@ -10,10 +10,24 @@ type {{.GoName}} struct {
 }
 {{$recv := .GoName -}}
 {{range .Accessors}}
+{{if .FuncType -}}
+// {{.GoName}} binds the {{.Field}} C function pointer (offset {{.Offset}}) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *{{$recv}}) {{.GoName}}() {{.FuncType}} {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[{{.Offset}}]))
+	if p == 0 {
+		return nil
+	}
+	var fn {{.FuncType}}
+	purego.RegisterFunc(&fn, p)
+	return fn
+}
+{{else -}}
 // {{.GoName}} returns the {{.Field}} field, read from the backing bytes at offset {{.Offset}}.
 func (u *{{$recv}}) {{.GoName}}() {{.GoType}} {
 	return *(*{{.GoType}})(unsafe.Pointer(&u.data[{{.Offset}}]))
 }
+{{end -}}
 {{end -}}
 {{end -}}
 {{end}}

@@ -89,15 +89,22 @@ type ByteArrayStruct struct {
 	Accessors []Accessor
 }
 
-// Accessor is one generated `As<GoName>() GoType` method reinterpreting a byte
-// offset of a ByteArrayStruct's backing array.
+// Accessor is one generated `As<GoName>()` method over a byte offset of a
+// ByteArrayStruct's backing array. When FuncType is empty it reinterprets the
+// bytes as GoType (`return *(*GoType)(…)`); when FuncType is set the field is a C
+// function pointer and the method binds the stored code pointer to that Go func
+// type via purego.RegisterFunc.
 type Accessor struct {
 	// GoName is the method name (e.g. "AsChunkSize").
 	GoName string
 	// Offset is the byte offset within the backing array.
 	Offset int
-	// GoType is the type the method returns.
+	// GoType is the type a plain reinterpret accessor returns (empty for a
+	// function-pointer accessor).
 	GoType string
+	// FuncType, when non-empty, is the Go func type ("func(unsafe.Pointer) int32")
+	// a function-pointer accessor returns, bound via purego.RegisterFunc.
+	FuncType string
 	// Field is the original C field name, for the method's doc comment.
 	Field string
 }

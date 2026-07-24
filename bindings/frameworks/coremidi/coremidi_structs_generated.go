@@ -6,6 +6,8 @@ package coremidi
 
 import (
 	"unsafe"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 type MIDI2DeviceManufacturer struct {
@@ -203,69 +205,160 @@ type MIDIDriverInterface struct {
 	data [112]byte
 }
 
-// AsQueryInterface returns the QueryInterface field, read from the backing bytes at offset 8.
-func (u *MIDIDriverInterface) AsQueryInterface() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+// AsQueryInterface binds the QueryInterface C function pointer (offset 8) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *MIDIDriverInterface) AsQueryInterface() func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[8]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsAddRef returns the AddRef field, read from the backing bytes at offset 16.
-func (u *MIDIDriverInterface) AsAddRef() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[16]))
+// AsAddRef binds the AddRef C function pointer (offset 16) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *MIDIDriverInterface) AsAddRef() func(unsafe.Pointer) uint32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[16]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer) uint32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsRelease returns the Release field, read from the backing bytes at offset 24.
-func (u *MIDIDriverInterface) AsRelease() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[24]))
+// AsRelease binds the Release C function pointer (offset 24) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *MIDIDriverInterface) AsRelease() func(unsafe.Pointer) uint32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[24]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer) uint32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsFindDevices returns the FindDevices field, read from the backing bytes at offset 32.
-func (u *MIDIDriverInterface) AsFindDevices() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[32]))
+// AsFindDevices binds the FindDevices C function pointer (offset 32) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *MIDIDriverInterface) AsFindDevices() func(unsafe.Pointer, uint32) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[32]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, uint32) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsStart returns the Start field, read from the backing bytes at offset 40.
-func (u *MIDIDriverInterface) AsStart() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[40]))
+// AsStart binds the Start C function pointer (offset 40) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *MIDIDriverInterface) AsStart() func(unsafe.Pointer, uint32) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[40]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, uint32) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsStop returns the Stop field, read from the backing bytes at offset 48.
-func (u *MIDIDriverInterface) AsStop() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[48]))
+// AsStop binds the Stop C function pointer (offset 48) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *MIDIDriverInterface) AsStop() func(unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[48]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsConfigure returns the Configure field, read from the backing bytes at offset 56.
-func (u *MIDIDriverInterface) AsConfigure() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[56]))
+// AsConfigure binds the Configure C function pointer (offset 56) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *MIDIDriverInterface) AsConfigure() func(unsafe.Pointer, uint32) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[56]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, uint32) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsSend returns the Send field, read from the backing bytes at offset 64.
-func (u *MIDIDriverInterface) AsSend() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[64]))
+// AsSend binds the Send C function pointer (offset 64) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *MIDIDriverInterface) AsSend() func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[64]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsEnableSource returns the EnableSource field, read from the backing bytes at offset 72.
-func (u *MIDIDriverInterface) AsEnableSource() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[72]))
+// AsEnableSource binds the EnableSource C function pointer (offset 72) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *MIDIDriverInterface) AsEnableSource() func(unsafe.Pointer, uint32, uint8) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[72]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, uint32, uint8) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsFlush returns the Flush field, read from the backing bytes at offset 80.
-func (u *MIDIDriverInterface) AsFlush() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[80]))
+// AsFlush binds the Flush C function pointer (offset 80) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *MIDIDriverInterface) AsFlush() func(unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[80]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsMonitor returns the Monitor field, read from the backing bytes at offset 88.
-func (u *MIDIDriverInterface) AsMonitor() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[88]))
+// AsMonitor binds the Monitor C function pointer (offset 88) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *MIDIDriverInterface) AsMonitor() func(unsafe.Pointer, uint32, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[88]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, uint32, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsSendPackets returns the SendPackets field, read from the backing bytes at offset 96.
-func (u *MIDIDriverInterface) AsSendPackets() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[96]))
+// AsSendPackets binds the SendPackets C function pointer (offset 96) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *MIDIDriverInterface) AsSendPackets() func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[96]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsMonitorEvents returns the MonitorEvents field, read from the backing bytes at offset 104.
-func (u *MIDIDriverInterface) AsMonitorEvents() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[104]))
+// AsMonitorEvents binds the MonitorEvents C function pointer (offset 104) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *MIDIDriverInterface) AsMonitorEvents() func(unsafe.Pointer, uint32, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[104]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, uint32, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
 // A series of simultaneous MIDI events in Universal MIDI Packets (UMP) format.

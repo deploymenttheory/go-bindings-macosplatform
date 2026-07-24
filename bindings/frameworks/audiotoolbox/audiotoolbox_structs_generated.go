@@ -10,6 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreaudiotypes"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // The audio input and output channel capabilities for an audio unit.
@@ -974,19 +975,40 @@ type AudioComponentPlugInInterface struct {
 	data [32]byte
 }
 
-// AsOpen returns the Open field, read from the backing bytes at offset 0.
-func (u *AudioComponentPlugInInterface) AsOpen() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+// AsOpen binds the Open C function pointer (offset 0) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *AudioComponentPlugInInterface) AsOpen() func(unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[0]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsClose returns the Close field, read from the backing bytes at offset 8.
-func (u *AudioComponentPlugInInterface) AsClose() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+// AsClose binds the Close C function pointer (offset 8) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *AudioComponentPlugInInterface) AsClose() func(unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[8]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsLookup returns the Lookup field, read from the backing bytes at offset 16.
-func (u *AudioComponentPlugInInterface) AsLookup() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[16]))
+// AsLookup binds the Lookup C function pointer (offset 16) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *AudioComponentPlugInInterface) AsLookup() func(int16) unsafe.Pointer {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[16]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(int16) unsafe.Pointer
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
 // AsReserved returns the reserved field, read from the backing bytes at offset 24.
@@ -1080,14 +1102,28 @@ func (u *AudioOutputUnitMIDICallbacks) AsUserData() unsafe.Pointer {
 	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
 }
 
-// AsMIDIEventProc returns the MIDIEventProc field, read from the backing bytes at offset 8.
-func (u *AudioOutputUnitMIDICallbacks) AsMIDIEventProc() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+// AsMIDIEventProc binds the MIDIEventProc C function pointer (offset 8) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *AudioOutputUnitMIDICallbacks) AsMIDIEventProc() func(unsafe.Pointer, uint32, uint32, uint32, uint32) {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[8]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, uint32, uint32, uint32, uint32)
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsMIDISysExProc returns the MIDISysExProc field, read from the backing bytes at offset 16.
-func (u *AudioOutputUnitMIDICallbacks) AsMIDISysExProc() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[16]))
+// AsMIDISysExProc binds the MIDISysExProc C function pointer (offset 16) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *AudioOutputUnitMIDICallbacks) AsMIDISysExProc() func(unsafe.Pointer, unsafe.Pointer, uint32) {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[16]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer, uint32)
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
 // The C layout cannot be reproduced as a plain Go value struct, so it is held as

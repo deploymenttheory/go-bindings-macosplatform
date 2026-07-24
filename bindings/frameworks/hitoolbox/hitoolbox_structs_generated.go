@@ -11,6 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/commonpanels"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 type AlertStdAlertParamRec struct {
@@ -1251,29 +1252,64 @@ func (u *ContextualMenuInterfaceStruct) AsQueryInterface() unsafe.Pointer {
 	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
 }
 
-// AsAddRef returns the AddRef field, read from the backing bytes at offset 16.
-func (u *ContextualMenuInterfaceStruct) AsAddRef() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[16]))
+// AsAddRef binds the AddRef C function pointer (offset 16) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *ContextualMenuInterfaceStruct) AsAddRef() func(unsafe.Pointer) uint32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[16]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer) uint32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsRelease returns the Release field, read from the backing bytes at offset 24.
-func (u *ContextualMenuInterfaceStruct) AsRelease() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[24]))
+// AsRelease binds the Release C function pointer (offset 24) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *ContextualMenuInterfaceStruct) AsRelease() func(unsafe.Pointer) uint32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[24]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer) uint32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsExamineContext returns the ExamineContext field, read from the backing bytes at offset 32.
-func (u *ContextualMenuInterfaceStruct) AsExamineContext() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[32]))
+// AsExamineContext binds the ExamineContext C function pointer (offset 32) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *ContextualMenuInterfaceStruct) AsExamineContext() func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[32]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsHandleSelection returns the HandleSelection field, read from the backing bytes at offset 40.
-func (u *ContextualMenuInterfaceStruct) AsHandleSelection() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[40]))
+// AsHandleSelection binds the HandleSelection C function pointer (offset 40) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *ContextualMenuInterfaceStruct) AsHandleSelection() func(unsafe.Pointer, unsafe.Pointer, int32) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[40]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer, int32) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsPostMenuCleanup returns the PostMenuCleanup field, read from the backing bytes at offset 48.
-func (u *ContextualMenuInterfaceStruct) AsPostMenuCleanup() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[48]))
+// AsPostMenuCleanup binds the PostMenuCleanup C function pointer (offset 48) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *ContextualMenuInterfaceStruct) AsPostMenuCleanup() func(unsafe.Pointer) {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[48]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer)
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
 // The C layout cannot be reproduced as a plain Go value struct, so it is held as

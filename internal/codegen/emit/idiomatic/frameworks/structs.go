@@ -409,8 +409,11 @@ func emitStructs(
 		// no layout while the byte-array set was keyed off the complete one.
 		if mapper.ByteArrayStructs[goName] && s.Size > 0 {
 			v := buildByteArrayStructView(goName, s, ctx, mapper)
-			if len(v.Accessors) > 0 {
-				imports["unsafe"] = "unsafe" // only the accessor bodies use unsafe
+			for _, a := range v.Accessors {
+				imports["unsafe"] = "unsafe" // accessor bodies use unsafe
+				if a.FuncType != "" {
+					imports["purego"] = pureobjcImportPath // RegisterFunc binding
+				}
 			}
 			byteArrayStructs = append(byteArrayStructs, v)
 			continue
@@ -526,17 +529,29 @@ func buildByteArrayStructView(
 		if f.Name == "" || strings.HasPrefix(f.Name, "_") {
 			continue // padding / anonymous — no public accessor
 		}
+		// A union member overlaps at offset 0; a struct member sits at its offset.
+		offset := f.Offset
+		if s.IsUnion {
+			offset = 0
+		}
+		// A C function-pointer field becomes a callable Go func accessor when its
+		// whole signature is purego.RegisterFunc-safe (primitive / pointer args and
+		// result); otherwise it falls through to the raw-pointer accessor below.
+		if funcType, ok := funcPtrAccessorType(f.ObjCType, ctx, mapper); ok {
+			accessors = append(accessors, view.Accessor{
+				GoName:   "As" + structFieldGoName(f.Name),
+				Offset:   offset,
+				FuncType: funcType,
+				Field:    f.Name,
+			})
+			continue
+		}
 		// Resolve this field alone: a sibling field may be unresolvable (an anonymous
 		// union) without denying an accessor to the fields that do resolve.
 		gt := mapper.GoABIType(f.ObjCType, structlayout.StructFieldGoType(f.ObjCType, mapper.GoType(f.ObjCType, ctx, make(typemap.ImportSet))))
 		accType, ok := byteArrayAccessorType(f.ObjCType, gt)
 		if !ok {
 			continue // a by-value aggregate (union, struct) we cannot safely reinterpret
-		}
-		// A union member overlaps at offset 0; a struct member sits at its offset.
-		offset := f.Offset
-		if s.IsUnion {
-			offset = 0
 		}
 		accessors = append(accessors, view.Accessor{
 			GoName: "As" + structFieldGoName(f.Name),
@@ -566,6 +581,51 @@ func byteArrayAccessorType(objcType, goType string) (string, bool) {
 		return goType, true
 	}
 	if isCPointerWidth(objcType) {
+		return "unsafe.Pointer", true
+	}
+	return "", false
+}
+
+// funcPtrAccessorType builds the Go func type a callable accessor returns for a C
+// function-pointer field (e.g. "func(unsafe.Pointer) int32"), or ok=false when
+// the field is not a function pointer or its signature is not
+// purego.RegisterFunc-safe (a struct-by-value arg/result, a string/slice, a
+// block). Pointer args/results are rendered as unsafe.Pointer so the accessor
+// stays free of framework type imports.
+func funcPtrAccessorType(objcType string, ctx typemap.Context, mapper *typemap.Mapper) (string, bool) {
+	sig, ok := mapper.ResolveFuncPtrSignature(objcType)
+	if !ok {
+		return "", false
+	}
+	params := make([]string, 0, len(sig.ParamObjCTypes))
+	for _, p := range sig.ParamObjCTypes {
+		gt, ok := registerFuncArgType(p, ctx, mapper)
+		if !ok {
+			return "", false
+		}
+		params = append(params, gt)
+	}
+	ret := ""
+	if r := strings.TrimSpace(sig.ReturnObjCType); r != "" && r != "void" {
+		gt, ok := registerFuncArgType(r, ctx, mapper)
+		if !ok {
+			return "", false
+		}
+		ret = " " + gt
+	}
+	return "func(" + strings.Join(params, ", ") + ")" + ret, true
+}
+
+// registerFuncArgType maps one C argument/return type of a function pointer to a
+// purego.RegisterFunc-safe Go type: a primitive stays itself; any machine pointer
+// (data, object, function pointer) becomes unsafe.Pointer. Arrays, strings,
+// slices, blocks, and by-value aggregates are rejected (ok=false).
+func registerFuncArgType(objcType string, ctx typemap.Context, mapper *typemap.Mapper) (string, bool) {
+	gt := mapper.GoABIType(objcType, structlayout.StructFieldGoType(objcType, mapper.GoType(objcType, ctx, make(typemap.ImportSet))))
+	if structlayout.Primitives[gt] {
+		return gt, true
+	}
+	if gt == "unsafe.Pointer" || strings.HasPrefix(gt, "*") || gt == "obj.Object" || isCPointerWidth(objcType) {
 		return "unsafe.Pointer", true
 	}
 	return "", false

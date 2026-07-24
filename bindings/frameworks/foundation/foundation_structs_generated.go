@@ -8,6 +8,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // A structure that defines the three-by-three matrix that performs an affine transform between two coordinate systems.
@@ -123,29 +124,64 @@ type NSHashTableCallBacks struct {
 	data [40]byte
 }
 
-// AsHash returns the hash field, read from the backing bytes at offset 0.
-func (u *NSHashTableCallBacks) AsHash() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+// AsHash binds the hash C function pointer (offset 0) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *NSHashTableCallBacks) AsHash() func(unsafe.Pointer, unsafe.Pointer) uint {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[0]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer) uint
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsIsEqual returns the isEqual field, read from the backing bytes at offset 8.
-func (u *NSHashTableCallBacks) AsIsEqual() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+// AsIsEqual binds the isEqual C function pointer (offset 8) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *NSHashTableCallBacks) AsIsEqual() func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[8]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsRetain returns the retain field, read from the backing bytes at offset 16.
-func (u *NSHashTableCallBacks) AsRetain() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[16]))
+// AsRetain binds the retain C function pointer (offset 16) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *NSHashTableCallBacks) AsRetain() func(unsafe.Pointer, unsafe.Pointer) {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[16]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer)
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsRelease returns the release field, read from the backing bytes at offset 24.
-func (u *NSHashTableCallBacks) AsRelease() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[24]))
+// AsRelease binds the release C function pointer (offset 24) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *NSHashTableCallBacks) AsRelease() func(unsafe.Pointer, unsafe.Pointer) {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[24]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer)
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsDescribe returns the describe field, read from the backing bytes at offset 32.
-func (u *NSHashTableCallBacks) AsDescribe() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[32]))
+// AsDescribe binds the describe C function pointer (offset 32) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *NSHashTableCallBacks) AsDescribe() func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[32]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
 // The function pointers used to configure behavior of NSMapTable with respect to key elements within a map table.
@@ -157,29 +193,64 @@ type NSMapTableKeyCallBacks struct {
 	data [48]byte
 }
 
-// AsHash returns the hash field, read from the backing bytes at offset 0.
-func (u *NSMapTableKeyCallBacks) AsHash() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+// AsHash binds the hash C function pointer (offset 0) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *NSMapTableKeyCallBacks) AsHash() func(unsafe.Pointer, unsafe.Pointer) uint {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[0]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer) uint
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsIsEqual returns the isEqual field, read from the backing bytes at offset 8.
-func (u *NSMapTableKeyCallBacks) AsIsEqual() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+// AsIsEqual binds the isEqual C function pointer (offset 8) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *NSMapTableKeyCallBacks) AsIsEqual() func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[8]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsRetain returns the retain field, read from the backing bytes at offset 16.
-func (u *NSMapTableKeyCallBacks) AsRetain() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[16]))
+// AsRetain binds the retain C function pointer (offset 16) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *NSMapTableKeyCallBacks) AsRetain() func(unsafe.Pointer, unsafe.Pointer) {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[16]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer)
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsRelease returns the release field, read from the backing bytes at offset 24.
-func (u *NSMapTableKeyCallBacks) AsRelease() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[24]))
+// AsRelease binds the release C function pointer (offset 24) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *NSMapTableKeyCallBacks) AsRelease() func(unsafe.Pointer, unsafe.Pointer) {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[24]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer)
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsDescribe returns the describe field, read from the backing bytes at offset 32.
-func (u *NSMapTableKeyCallBacks) AsDescribe() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[32]))
+// AsDescribe binds the describe C function pointer (offset 32) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *NSMapTableKeyCallBacks) AsDescribe() func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[32]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
 // AsNotAKeyMarker returns the notAKeyMarker field, read from the backing bytes at offset 40.
@@ -196,17 +267,38 @@ type NSMapTableValueCallBacks struct {
 	data [24]byte
 }
 
-// AsRetain returns the retain field, read from the backing bytes at offset 0.
-func (u *NSMapTableValueCallBacks) AsRetain() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+// AsRetain binds the retain C function pointer (offset 0) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *NSMapTableValueCallBacks) AsRetain() func(unsafe.Pointer, unsafe.Pointer) {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[0]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer)
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsRelease returns the release field, read from the backing bytes at offset 8.
-func (u *NSMapTableValueCallBacks) AsRelease() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+// AsRelease binds the release C function pointer (offset 8) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *NSMapTableValueCallBacks) AsRelease() func(unsafe.Pointer, unsafe.Pointer) {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[8]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer)
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsDescribe returns the describe field, read from the backing bytes at offset 16.
-func (u *NSMapTableValueCallBacks) AsDescribe() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[16]))
+// AsDescribe binds the describe C function pointer (offset 16) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *NSMapTableValueCallBacks) AsDescribe() func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[16]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	purego.RegisterFunc(&fn, p)
+	return fn
 }

@@ -9,6 +9,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gss"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 type AppleGssKrb5AuthdataIfRelevantKey struct {
@@ -570,104 +571,244 @@ type CcCcacheF struct {
 	data [160]byte
 }
 
-// AsRelease returns the release field, read from the backing bytes at offset 0.
-func (u *CcCcacheF) AsRelease() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+// AsRelease binds the release C function pointer (offset 0) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CcCcacheF) AsRelease() func(unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[0]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsDestroy returns the destroy field, read from the backing bytes at offset 8.
-func (u *CcCcacheF) AsDestroy() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+// AsDestroy binds the destroy C function pointer (offset 8) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CcCcacheF) AsDestroy() func(unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[8]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsSetDefault returns the set_default field, read from the backing bytes at offset 16.
-func (u *CcCcacheF) AsSetDefault() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[16]))
+// AsSetDefault binds the set_default C function pointer (offset 16) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CcCcacheF) AsSetDefault() func(unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[16]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsGetCredentialsVersion returns the get_credentials_version field, read from the backing bytes at offset 24.
-func (u *CcCcacheF) AsGetCredentialsVersion() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[24]))
+// AsGetCredentialsVersion binds the get_credentials_version C function pointer (offset 24) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CcCcacheF) AsGetCredentialsVersion() func(unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[24]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsGetName returns the get_name field, read from the backing bytes at offset 32.
-func (u *CcCcacheF) AsGetName() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[32]))
+// AsGetName binds the get_name C function pointer (offset 32) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CcCcacheF) AsGetName() func(unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[32]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsGetPrincipal returns the get_principal field, read from the backing bytes at offset 40.
-func (u *CcCcacheF) AsGetPrincipal() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[40]))
+// AsGetPrincipal binds the get_principal C function pointer (offset 40) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CcCcacheF) AsGetPrincipal() func(unsafe.Pointer, uint32, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[40]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, uint32, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsSetPrincipal returns the set_principal field, read from the backing bytes at offset 48.
-func (u *CcCcacheF) AsSetPrincipal() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[48]))
+// AsSetPrincipal binds the set_principal C function pointer (offset 48) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CcCcacheF) AsSetPrincipal() func(unsafe.Pointer, uint32, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[48]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, uint32, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsStoreCredentials returns the store_credentials field, read from the backing bytes at offset 56.
-func (u *CcCcacheF) AsStoreCredentials() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[56]))
+// AsStoreCredentials binds the store_credentials C function pointer (offset 56) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CcCcacheF) AsStoreCredentials() func(unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[56]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsRemoveCredentials returns the remove_credentials field, read from the backing bytes at offset 64.
-func (u *CcCcacheF) AsRemoveCredentials() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[64]))
+// AsRemoveCredentials binds the remove_credentials C function pointer (offset 64) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CcCcacheF) AsRemoveCredentials() func(unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[64]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsNewCredentialsIterator returns the new_credentials_iterator field, read from the backing bytes at offset 72.
-func (u *CcCcacheF) AsNewCredentialsIterator() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[72]))
+// AsNewCredentialsIterator binds the new_credentials_iterator C function pointer (offset 72) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CcCcacheF) AsNewCredentialsIterator() func(unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[72]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsMove returns the move field, read from the backing bytes at offset 80.
-func (u *CcCcacheF) AsMove() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[80]))
+// AsMove binds the move C function pointer (offset 80) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CcCcacheF) AsMove() func(unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[80]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsLock returns the lock field, read from the backing bytes at offset 88.
-func (u *CcCcacheF) AsLock() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[88]))
+// AsLock binds the lock C function pointer (offset 88) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CcCcacheF) AsLock() func(unsafe.Pointer, uint32, uint32) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[88]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, uint32, uint32) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsUnlock returns the unlock field, read from the backing bytes at offset 96.
-func (u *CcCcacheF) AsUnlock() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[96]))
+// AsUnlock binds the unlock C function pointer (offset 96) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CcCcacheF) AsUnlock() func(unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[96]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsGetLastDefaultTime returns the get_last_default_time field, read from the backing bytes at offset 104.
-func (u *CcCcacheF) AsGetLastDefaultTime() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[104]))
+// AsGetLastDefaultTime binds the get_last_default_time C function pointer (offset 104) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CcCcacheF) AsGetLastDefaultTime() func(unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[104]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsGetChangeTime returns the get_change_time field, read from the backing bytes at offset 112.
-func (u *CcCcacheF) AsGetChangeTime() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[112]))
+// AsGetChangeTime binds the get_change_time C function pointer (offset 112) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CcCcacheF) AsGetChangeTime() func(unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[112]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsCompare returns the compare field, read from the backing bytes at offset 120.
-func (u *CcCcacheF) AsCompare() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[120]))
+// AsCompare binds the compare C function pointer (offset 120) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CcCcacheF) AsCompare() func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[120]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsGetKdcTimeOffset returns the get_kdc_time_offset field, read from the backing bytes at offset 128.
-func (u *CcCcacheF) AsGetKdcTimeOffset() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[128]))
+// AsGetKdcTimeOffset binds the get_kdc_time_offset C function pointer (offset 128) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CcCcacheF) AsGetKdcTimeOffset() func(unsafe.Pointer, uint32, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[128]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, uint32, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsSetKdcTimeOffset returns the set_kdc_time_offset field, read from the backing bytes at offset 136.
-func (u *CcCcacheF) AsSetKdcTimeOffset() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[136]))
+// AsSetKdcTimeOffset binds the set_kdc_time_offset C function pointer (offset 136) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CcCcacheF) AsSetKdcTimeOffset() func(unsafe.Pointer, uint32, uint32) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[136]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, uint32, uint32) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsClearKdcTimeOffset returns the clear_kdc_time_offset field, read from the backing bytes at offset 144.
-func (u *CcCcacheF) AsClearKdcTimeOffset() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[144]))
+// AsClearKdcTimeOffset binds the clear_kdc_time_offset C function pointer (offset 144) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CcCcacheF) AsClearKdcTimeOffset() func(unsafe.Pointer, uint32) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[144]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, uint32) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsWaitForChange returns the wait_for_change field, read from the backing bytes at offset 152.
-func (u *CcCcacheF) AsWaitForChange() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[152]))
+// AsWaitForChange binds the wait_for_change C function pointer (offset 152) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CcCcacheF) AsWaitForChange() func(unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[152]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
 // The C layout cannot be reproduced as a plain Go value struct, so it is held as
@@ -697,19 +838,40 @@ type CcCcacheIteratorF struct {
 	data [24]byte
 }
 
-// AsRelease returns the release field, read from the backing bytes at offset 0.
-func (u *CcCcacheIteratorF) AsRelease() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+// AsRelease binds the release C function pointer (offset 0) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CcCcacheIteratorF) AsRelease() func(unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[0]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsNext returns the next field, read from the backing bytes at offset 8.
-func (u *CcCcacheIteratorF) AsNext() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+// AsNext binds the next C function pointer (offset 8) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CcCcacheIteratorF) AsNext() func(unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[8]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsClone returns the clone field, read from the backing bytes at offset 16.
-func (u *CcCcacheIteratorF) AsClone() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[16]))
+// AsClone binds the clone C function pointer (offset 16) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CcCcacheIteratorF) AsClone() func(unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[16]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
 // The C layout cannot be reproduced as a plain Go value struct, so it is held as
@@ -739,69 +901,160 @@ type CcContextF struct {
 	data [104]byte
 }
 
-// AsRelease returns the release field, read from the backing bytes at offset 0.
-func (u *CcContextF) AsRelease() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+// AsRelease binds the release C function pointer (offset 0) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CcContextF) AsRelease() func(unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[0]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsGetChangeTime returns the get_change_time field, read from the backing bytes at offset 8.
-func (u *CcContextF) AsGetChangeTime() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+// AsGetChangeTime binds the get_change_time C function pointer (offset 8) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CcContextF) AsGetChangeTime() func(unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[8]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsGetDefaultCcacheName returns the get_default_ccache_name field, read from the backing bytes at offset 16.
-func (u *CcContextF) AsGetDefaultCcacheName() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[16]))
+// AsGetDefaultCcacheName binds the get_default_ccache_name C function pointer (offset 16) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CcContextF) AsGetDefaultCcacheName() func(unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[16]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsOpenCcache returns the open_ccache field, read from the backing bytes at offset 24.
-func (u *CcContextF) AsOpenCcache() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[24]))
+// AsOpenCcache binds the open_ccache C function pointer (offset 24) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CcContextF) AsOpenCcache() func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[24]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsOpenDefaultCcache returns the open_default_ccache field, read from the backing bytes at offset 32.
-func (u *CcContextF) AsOpenDefaultCcache() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[32]))
+// AsOpenDefaultCcache binds the open_default_ccache C function pointer (offset 32) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CcContextF) AsOpenDefaultCcache() func(unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[32]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsCreateCcache returns the create_ccache field, read from the backing bytes at offset 40.
-func (u *CcContextF) AsCreateCcache() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[40]))
+// AsCreateCcache binds the create_ccache C function pointer (offset 40) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CcContextF) AsCreateCcache() func(unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[40]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsCreateDefaultCcache returns the create_default_ccache field, read from the backing bytes at offset 48.
-func (u *CcContextF) AsCreateDefaultCcache() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[48]))
+// AsCreateDefaultCcache binds the create_default_ccache C function pointer (offset 48) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CcContextF) AsCreateDefaultCcache() func(unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[48]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsCreateNewCcache returns the create_new_ccache field, read from the backing bytes at offset 56.
-func (u *CcContextF) AsCreateNewCcache() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[56]))
+// AsCreateNewCcache binds the create_new_ccache C function pointer (offset 56) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CcContextF) AsCreateNewCcache() func(unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[56]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsNewCcacheIterator returns the new_ccache_iterator field, read from the backing bytes at offset 64.
-func (u *CcContextF) AsNewCcacheIterator() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[64]))
+// AsNewCcacheIterator binds the new_ccache_iterator C function pointer (offset 64) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CcContextF) AsNewCcacheIterator() func(unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[64]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsLock returns the lock field, read from the backing bytes at offset 72.
-func (u *CcContextF) AsLock() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[72]))
+// AsLock binds the lock C function pointer (offset 72) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CcContextF) AsLock() func(unsafe.Pointer, uint32, uint32) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[72]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, uint32, uint32) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsUnlock returns the unlock field, read from the backing bytes at offset 80.
-func (u *CcContextF) AsUnlock() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[80]))
+// AsUnlock binds the unlock C function pointer (offset 80) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CcContextF) AsUnlock() func(unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[80]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsCompare returns the compare field, read from the backing bytes at offset 88.
-func (u *CcContextF) AsCompare() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[88]))
+// AsCompare binds the compare C function pointer (offset 88) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CcContextF) AsCompare() func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[88]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsWaitForChange returns the wait_for_change field, read from the backing bytes at offset 96.
-func (u *CcContextF) AsWaitForChange() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[96]))
+// AsWaitForChange binds the wait_for_change C function pointer (offset 96) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CcContextF) AsWaitForChange() func(unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[96]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
 // The C layout cannot be reproduced as a plain Go value struct, so it is held as
@@ -836,14 +1089,28 @@ type CcCredentialsF struct {
 	data [16]byte
 }
 
-// AsRelease returns the release field, read from the backing bytes at offset 0.
-func (u *CcCredentialsF) AsRelease() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+// AsRelease binds the release C function pointer (offset 0) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CcCredentialsF) AsRelease() func(unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[0]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsCompare returns the compare field, read from the backing bytes at offset 8.
-func (u *CcCredentialsF) AsCompare() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+// AsCompare binds the compare C function pointer (offset 8) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CcCredentialsF) AsCompare() func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[8]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
 // The C layout cannot be reproduced as a plain Go value struct, so it is held as
@@ -873,19 +1140,40 @@ type CcCredentialsIteratorF struct {
 	data [24]byte
 }
 
-// AsRelease returns the release field, read from the backing bytes at offset 0.
-func (u *CcCredentialsIteratorF) AsRelease() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+// AsRelease binds the release C function pointer (offset 0) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CcCredentialsIteratorF) AsRelease() func(unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[0]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsNext returns the next field, read from the backing bytes at offset 8.
-func (u *CcCredentialsIteratorF) AsNext() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[8]))
+// AsNext binds the next C function pointer (offset 8) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CcCredentialsIteratorF) AsNext() func(unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[8]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
-// AsClone returns the clone field, read from the backing bytes at offset 16.
-func (u *CcCredentialsIteratorF) AsClone() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[16]))
+// AsClone binds the clone C function pointer (offset 16) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CcCredentialsIteratorF) AsClone() func(unsafe.Pointer, unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[16]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer, unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
 // The C layout cannot be reproduced as a plain Go value struct, so it is held as
@@ -920,9 +1208,16 @@ type CcStringF struct {
 	data [8]byte
 }
 
-// AsRelease returns the release field, read from the backing bytes at offset 0.
-func (u *CcStringF) AsRelease() unsafe.Pointer {
-	return *(*unsafe.Pointer)(unsafe.Pointer(&u.data[0]))
+// AsRelease binds the release C function pointer (offset 0) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *CcStringF) AsRelease() func(unsafe.Pointer) int32 {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[0]))
+	if p == 0 {
+		return nil
+	}
+	var fn func(unsafe.Pointer) int32
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
 // The C layout cannot be reproduced as a plain Go value struct, so it is held as

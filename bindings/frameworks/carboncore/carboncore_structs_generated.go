@@ -8,6 +8,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 type AFPAlternateAddress struct {
@@ -2001,6 +2002,18 @@ func (u *RoutineRecord) AsISA() int8 {
 // AsRoutineFlags returns the routineFlags field, read from the backing bytes at offset 10.
 func (u *RoutineRecord) AsRoutineFlags() uint16 {
 	return *(*uint16)(unsafe.Pointer(&u.data[10]))
+}
+
+// AsProcDescriptor binds the procDescriptor C function pointer (offset 12) to a callable
+// Go func, or returns nil when the pointer is null.
+func (u *RoutineRecord) AsProcDescriptor() func() int {
+	p := *(*uintptr)(unsafe.Pointer(&u.data[12]))
+	if p == 0 {
+		return nil
+	}
+	var fn func() int
+	purego.RegisterFunc(&fn, p)
+	return fn
 }
 
 // AsReserved2 returns the reserved2 field, read from the backing bytes at offset 20.
