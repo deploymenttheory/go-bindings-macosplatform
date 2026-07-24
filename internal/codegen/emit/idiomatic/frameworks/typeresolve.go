@@ -888,16 +888,11 @@ func crossFrameworkWrapClass(
 // bridged to Objective-C objects, so the idiomatic layer surfaces them as
 // obj.Object.
 func isCFObjectType(objcType string, mapper *typemap.Mapper) bool {
-	t := strings.TrimPrefix(normaliseObjC(objcType), "const ")
-	t = strings.TrimSpace(t)
-	if strings.Contains(t, "*") {
-		return false // a pointer to a ref is an out-parameter, not a ref value
-	}
-	fields := strings.Fields(t)
-	if len(fields) == 0 {
+	// A pointer-to-ref is an out-parameter, not a ref value → cfHandleBareName "".
+	name := cfHandleBareName(objcType)
+	if name == "" {
 		return false
 	}
-	name := fields[len(fields)-1]
 	if typemap.IsCoreFoundationOpaqueRef(name) {
 		return true
 	}
@@ -963,16 +958,8 @@ func cfHandleNamedType(
 // AudioQueueRef). A return of one must be wrapped with obj.WrapUnmanaged, since
 // objc_retain / objc_release on such a pointer (what obj.Wrap does) crashes.
 func isNonRefcountedHandle(objcType string, mapper *typemap.Mapper) bool {
-	t := strings.TrimPrefix(normaliseObjC(objcType), "const ")
-	t = strings.TrimSpace(t)
-	if strings.Contains(t, "*") {
-		return false
-	}
-	fields := strings.Fields(t)
-	if len(fields) == 0 {
-		return false
-	}
-	return mapper.NonRefcountedHandles[fields[len(fields)-1]]
+	name := cfHandleBareName(objcType)
+	return name != "" && mapper.NonRefcountedHandles[name]
 }
 
 // isOSObjectReturn reports whether an Objective-C return type is an os_object
