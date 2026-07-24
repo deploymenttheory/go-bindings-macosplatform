@@ -5,6 +5,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.18.0](https://github.com/deploymenttheory/go-bindings-macosplatform/compare/v0.17.0...v0.18.0) (2026-07-24)
+
+
+### Features
+
+* acceptance tests ([#102](https://github.com/deploymenttheory/go-bindings-macosplatform/issues/102)) ([9d79744](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/9d797442cfe0f80486417409f364d94360df084f))
+* emittance consolidation ([#100](https://github.com/deploymenttheory/go-bindings-macosplatform/issues/100)) ([89ce179](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/89ce1792f88f03d9f920adbcf977e645b1454d35))
+* emittance standardisation ([#94](https://github.com/deploymenttheory/go-bindings-macosplatform/issues/94)) ([ac842cd](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/ac842cd036034b63939a295c581336634f51bab5))
+* finish up ([#96](https://github.com/deploymenttheory/go-bindings-macosplatform/issues/96)) ([e73fc58](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/e73fc587cb8ab643a1bb2778215d9ff0e2b9e205))
+* **idiomatic:** CFTypeRef polymorphism + mutable-&gt;immutable handle widening ([#98](https://github.com/deploymenttheory/go-bindings-macosplatform/issues/98)) ([a44eafa](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/a44eafad81cb1c17e9ba042333122f8ed1073b3e))
+* **idiomatic:** surface CF/opaque handles as distinct named types, not obj.Object ([7e6fd7c](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/7e6fd7c76048b1779a4cdcfeb3c2f15353d1c7d6))
+* **idiomatic:** surface dispatch/xpc handle params as concrete library types ([#91](https://github.com/deploymenttheory/go-bindings-macosplatform/issues/91)) ([17a8326](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/17a832630c51df470bc02ae6eccdf5403dc8eef0))
+* **idiomatic:** thread in/out counts, typed block params, pointer returns ([#88](https://github.com/deploymenttheory/go-bindings-macosplatform/issues/88)) ([3c6138c](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/3c6138cb3364b9e72b0ecf528aa27e8112857fd9))
+* **idiomatic:** type fixed-size array struct fields & struct-pointer params ([#92](https://github.com/deploymenttheory/go-bindings-macosplatform/issues/92)) ([e56e3f3](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/e56e3f3f1990e04384be4199156c4956d79c528c))
+* **idiomatic:** type pointer-to-struct returns; capture referenced C structs ([#90](https://github.com/deploymenttheory/go-bindings-macosplatform/issues/90)) ([3045aed](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/3045aed922f956e2614141b6f9575ac7567c048b))
+* **idiomatic:** width-correct struct int fields; cross-check clang layouts ([#93](https://github.com/deploymenttheory/go-bindings-macosplatform/issues/93)) ([9379aad](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/9379aad8ab474624e61f6196ec44f81d7846147c))
+* unions fnptrs ([#99](https://github.com/deploymenttheory/go-bindings-macosplatform/issues/99)) ([c4d649c](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/c4d649c1cfa39a89716bd98f193b210465ed8417))
+
+
+### Bug Fixes
+
+* **frameworks:** width-correct integer-typedef struct fields via GoABIType ([#95](https://github.com/deploymenttheory/go-bindings-macosplatform/issues/95)) ([91d354a](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/91d354a5f0740cbfb52560d3b84cb4786368a0c7))
+
 ## [0.17.0](https://github.com/deploymenttheory/go-bindings-macosplatform/compare/v0.16.0...v0.17.0) (2026-07-21)
 
 
