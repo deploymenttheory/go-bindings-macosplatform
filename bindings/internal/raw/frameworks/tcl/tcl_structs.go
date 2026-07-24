@@ -14,10 +14,11 @@ type TclPlatStubs struct {
 	Tcl_MacOSXOpenVersionedBundleResources unsafe.Pointer
 }
 
+// TclStubHooks is held as its exact 24-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type TclStubHooks struct {
-	TclPlatStubs    *TclPlatStubs
-	TclIntStubs     unsafe.Pointer
-	TclIntPlatStubs unsafe.Pointer
+	_    [0]uint64
+	data [24]byte
 }
 
 type TclStubs struct {
@@ -668,9 +669,11 @@ type Tcl_Command_ struct{}
 // Tcl_Condition_ is an opaque type.
 type Tcl_Condition_ struct{}
 
+// Tcl_Config is held as its exact 16-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type Tcl_Config struct {
-	Key   string
-	Value string
+	_    [0]uint64
+	data [16]byte
 }
 
 type Tcl_DString struct {
@@ -704,9 +707,11 @@ type Tcl_EncodingType struct {
 // Tcl_Encoding_ is an opaque type.
 type Tcl_Encoding_ struct{}
 
+// Tcl_Event is held as its exact 16-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type Tcl_Event struct {
-	Proc    unsafe.Pointer
-	NextPtr *Tcl_Event
+	_    [0]uint64
+	data [16]byte
 }
 
 // Tcl_FSVersion_ is an opaque type.
@@ -813,15 +818,11 @@ type Tcl_Namespace struct {
 	ParentPtr  *Tcl_Namespace
 }
 
+// Tcl_NotifierProcs is held as its exact 64-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type Tcl_NotifierProcs struct {
-	SetTimerProc          unsafe.Pointer
-	WaitForEventProc      unsafe.Pointer
-	CreateFileHandlerProc unsafe.Pointer
-	DeleteFileHandlerProc unsafe.Pointer
-	InitNotifierProc      unsafe.Pointer
-	FinalizeNotifierProc  unsafe.Pointer
-	AlertNotifierProc     unsafe.Pointer
-	ServiceModeHookProc   unsafe.Pointer
+	_    [0]uint64
+	data [64]byte
 }
 
 type Tcl_Obj struct {
@@ -832,12 +833,11 @@ type Tcl_Obj struct {
 	InternalRep unsafe.Pointer
 }
 
+// Tcl_ObjType is held as its exact 40-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type Tcl_ObjType struct {
-	Name             string
-	FreeIntRepProc   unsafe.Pointer
-	DupIntRepProc    unsafe.Pointer
-	UpdateStringProc unsafe.Pointer
-	SetFromAnyProc   unsafe.Pointer
+	_    [0]uint64
+	data [40]byte
 }
 
 type Tcl_Parse struct {
@@ -900,11 +900,11 @@ type Tcl_Time struct {
 // Tcl_TimerToken_ is an opaque type.
 type Tcl_TimerToken_ struct{}
 
+// Tcl_Token is held as its exact 24-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type Tcl_Token struct {
-	Type          int32
-	Start         string
-	Size          int32
-	NumComponents int32
+	_    [0]uint64
+	data [24]byte
 }
 
 // Tcl_Trace_ is an opaque type.

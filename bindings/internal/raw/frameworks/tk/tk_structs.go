@@ -20,11 +20,11 @@ type ScreenFormat struct {
 	Scanline_pad   int32
 }
 
+// TkStubHooks is held as its exact 32-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type TkStubHooks struct {
-	TkPlatStubs    unsafe.Pointer
-	TkIntStubs     unsafe.Pointer
-	TkIntPlatStubs unsafe.Pointer
-	TkIntXlibStubs *int
+	_    [0]uint64
+	data [32]byte
 }
 
 type TkStubs struct {

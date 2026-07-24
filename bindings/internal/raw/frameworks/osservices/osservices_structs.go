@@ -25,10 +25,11 @@ type CSIdentityQueryClientContext struct {
 	ReceiveEvent        unsafe.Pointer
 }
 
+// IconFamilyElement is held as its exact 10-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type IconFamilyElement struct {
-	ElementType uint32
-	ElementSize int32
-	ElementData [1]uint8
+	_    [0]uint16
+	data [10]byte
 }
 
 type IconFamilyResource struct {

@@ -90,10 +90,11 @@ type ATSTrapezoid struct {
 	LowerLeft  unsafe.Pointer
 }
 
+// ATSUCurvePath is held as its exact 24-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type ATSUCurvePath struct {
-	Vectors     uint32
-	ControlBits [1]uint32
-	Vector      [1]corefoundation.CGPoint
+	_    [0]uint16
+	data [24]byte
 }
 
 type ATSUCurvePaths struct {

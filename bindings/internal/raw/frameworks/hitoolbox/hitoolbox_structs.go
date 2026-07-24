@@ -55,13 +55,11 @@ type BasicWindowDescription struct {
 	WindowDefinition        unsafe.Pointer
 }
 
+// ContextualMenuInterfaceStruct is held as its exact 56-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type ContextualMenuInterfaceStruct struct {
-	QueryInterface  unsafe.Pointer
-	AddRef          unsafe.Pointer
-	Release         unsafe.Pointer
-	ExamineContext  unsafe.Pointer
-	HandleSelection unsafe.Pointer
-	PostMenuCleanup unsafe.Pointer
+	_    [0]uint64
+	data [56]byte
 }
 
 type ControlEditTextSelectionRec struct {
@@ -137,11 +135,11 @@ type DataBrowserAccessibilityItemInfo struct {
 	U       unsafe.Pointer
 }
 
+// DataBrowserAccessibilityItemInfoV0 is held as its exact 28-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type DataBrowserAccessibilityItemInfoV0 struct {
-	Container      uint
-	Item           uint
-	ColumnProperty uint
-	PropertyPart   uint32
+	_    [0]uint16
+	data [28]byte
 }
 
 type DataBrowserAccessibilityItemInfoV1 struct {
@@ -263,16 +261,18 @@ type HFSFlavor struct {
 	FileSpec    carboncore.FSSpec
 }
 
+// HIAxisPosition is held as its exact 18-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type HIAxisPosition struct {
-	ToView unsafe.Pointer
-	Kind   uint16
-	Offset float64
+	_    [0]uint16
+	data [18]byte
 }
 
+// HIAxisScale is held as its exact 18-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type HIAxisScale struct {
-	ToView unsafe.Pointer
-	Kind   uint16
-	Ratio  float64
+	_    [0]uint16
+	data [18]byte
 }
 
 type HIBinding struct {
@@ -325,10 +325,11 @@ type HIScrollBarTrackInfo struct {
 	Viewsize    float64
 }
 
+// HISideBinding is held as its exact 18-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type HISideBinding struct {
-	ToView unsafe.Pointer
-	Kind   uint16
-	Offset float64
+	_    [0]uint16
+	data [18]byte
 }
 
 type HIThemeAnimationFrameInfo struct {
@@ -576,9 +577,11 @@ type HIViewKind struct {
 	Kind      uint32
 }
 
+// HMHelpContent is held as its exact 260-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type HMHelpContent struct {
-	ContentType uint32
-	U           unsafe.Pointer
+	_    [0]uint16
+	data [260]byte
 }
 
 type HMHelpContentRec struct {
@@ -645,14 +648,11 @@ type ListRec struct {
 	CellArray   [1]int16
 }
 
+// MCEntry is held as its exact 30-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type MCEntry struct {
-	MctID       int16
-	MctItem     int16
-	MctRGB1     commonpanels.RGBColor
-	MctRGB2     commonpanels.RGBColor
-	MctRGB3     commonpanels.RGBColor
-	MctRGB4     commonpanels.RGBColor
-	MctReserved int16
+	_    [0]uint16
+	data [30]byte
 }
 
 type MDEFDrawData struct {
@@ -735,13 +735,11 @@ type MenuItemDataRec struct {
 	Font            unsafe.Pointer
 }
 
+// MenuTrackingData is held as its exact 28-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type MenuTrackingData struct {
-	Menu              unsafe.Pointer
-	ItemSelected      uint16
-	ItemUnderMouse    uint16
-	ItemRect          carboncore.Rect
-	VirtualMenuTop    int32
-	VirtualMenuBottom int32
+	_    [0]uint16
+	data [28]byte
 }
 
 type NMRec struct {
@@ -859,14 +857,11 @@ type Rect struct {
 	Right  int16
 }
 
+// STElement is held as its exact 18-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type STElement struct {
-	StCount  int16
-	StHeight int16
-	StAscent int16
-	StFont   int16
-	StFace   uint8
-	StSize   int16
-	StColor  commonpanels.RGBColor
+	_    [0]uint16
+	data [18]byte
 }
 
 type ScrapFlavorInfo struct {
@@ -895,19 +890,18 @@ type ScriptLanguageSupport struct {
 	FScriptLanguageArray [1]ScriptLanguageRecord
 }
 
+// ScrollBarTrackInfo is held as its exact 6-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type ScrollBarTrackInfo struct {
-	Viewsize   int32
-	PressState uint8
+	_    [0]uint16
+	data [6]byte
 }
 
+// ScrpSTElement is held as its exact 20-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type ScrpSTElement struct {
-	ScrpStartChar int32
-	ScrpHeight    int16
-	ScrpAscent    int16
-	ScrpFont      int16
-	ScrpFace      uint8
-	ScrpSize      int16
-	ScrpColor     commonpanels.RGBColor
+	_    [0]uint16
+	data [20]byte
 }
 
 type SetupWindowProxyDragImageRec struct {
@@ -982,11 +976,11 @@ type TEStyleRec struct {
 	Runs      [8001]StyleRun
 }
 
+// TSMGlyphInfo is held as its exact 24-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type TSMGlyphInfo struct {
-	Range      corefoundation.CFRange
-	FontRef    uint32
-	Collection uint16
-	GlyphID    uint16
+	_    [0]uint16
+	data [24]byte
 }
 
 type TSMGlyphInfoArray struct {
@@ -1107,9 +1101,11 @@ type TabletProximityRec struct {
 	EnterProximity      uint8
 }
 
+// TextServiceInfo is held as its exact 264-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type TextServiceInfo struct {
-	FComponent *carboncore.ComponentRecord
-	FItemName  [256]uint8
+	_    [0]uint16
+	data [264]byte
 }
 
 type TextServiceList struct {

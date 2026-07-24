@@ -42,12 +42,11 @@ type NSHashEnumerator struct {
 }
 
 // Defines a structure that contains the function pointers used to configure behavior of NSHashTable with respect to elements within a hash table.
+// NSHashTableCallBacks is held as its exact 40-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type NSHashTableCallBacks struct {
-	Hash     unsafe.Pointer
-	IsEqual  unsafe.Pointer
-	Retain   unsafe.Pointer
-	Release  unsafe.Pointer
-	Describe unsafe.Pointer
+	_    [0]uint64
+	data [40]byte
 }
 
 // Allows successive elements of a map table to be returned each time this structure is passed to NSNextMapEnumeratorPair.
@@ -55,20 +54,19 @@ type NSMapEnumerator struct {
 }
 
 // The function pointers used to configure behavior of NSMapTable with respect to key elements within a map table.
+// NSMapTableKeyCallBacks is held as its exact 48-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type NSMapTableKeyCallBacks struct {
-	Hash          unsafe.Pointer
-	IsEqual       unsafe.Pointer
-	Retain        unsafe.Pointer
-	Release       unsafe.Pointer
-	Describe      unsafe.Pointer
-	NotAKeyMarker unsafe.Pointer
+	_    [0]uint64
+	data [48]byte
 }
 
 // The function pointers used to configure behavior of NSMapTable with respect to value elements within a map table.
+// NSMapTableValueCallBacks is held as its exact 24-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type NSMapTableValueCallBacks struct {
-	Retain   unsafe.Pointer
-	Release  unsafe.Pointer
-	Describe unsafe.Pointer
+	_    [0]uint64
+	data [24]byte
 }
 
 // A structure that contains version information about the currently executing operating system, including major, minor, and patch version numbers.

@@ -8,6 +8,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks/render"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks/view"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/layouttest"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/structlayout"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emitmanifest"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
@@ -25,8 +26,9 @@ func EmitStructs(
 	framework *meta.FrameworkMeta,
 	mapper *typemap.Mapper,
 	rec *emitmanifest.Recorder,
-) (typemap.ImportSet, error) {
+) (typemap.ImportSet, []layouttest.Check, error) {
 	imports := make(typemap.ImportSet)
+	var layoutChecks []layouttest.Check
 	pkgName := naming.PackageName(framework.Framework)
 
 	// Build the set of package-level identifiers structs must not collide
@@ -74,7 +76,18 @@ func EmitStructs(
 			continue
 		}
 		seenGoNames[goName] = true
-		built := buildStructView(name, s, framework.Framework, mapper, imports)
+		var built view.Struct
+		if mapper.ByteArrayStructs[goName] && s.Size > 0 {
+			built = buildRawByteArrayView(name, goName, s)
+			layoutChecks = append(layoutChecks, layouttest.Check{GoName: goName, Size: s.Size, Align: s.Align})
+		} else {
+			built = buildStructView(name, s, framework.Framework, mapper, imports)
+			// A clean value struct with an authoritative size gets a size assertion
+			// (align 0 = skip; see the layouttest package).
+			if len(s.Fields) > 0 && s.Size != 0 {
+				layoutChecks = append(layoutChecks, layouttest.Check{GoName: goName, Size: s.Size, Align: 0})
+			}
+		}
 		structs = append(structs, built)
 		rec.Record(emitmanifest.Entry{
 			Style:     emitmanifest.StyleRaw,
@@ -91,10 +104,10 @@ func EmitStructs(
 	}
 	out, err := render.Structs(structs)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 	if _, err := w.Write(out); err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 
 	// Emit typedef aliases (e.g. NSRect = CGRect). Struct Go names and other
@@ -122,13 +135,38 @@ func EmitStructs(
 	}
 	aliasOut, err := render.TypedefAliases(aliases)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 	if _, err := w.Write(aliasOut); err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 
-	return imports, nil
+	return imports, layoutChecks, nil
+}
+
+// buildRawByteArrayView renders a struct the classification routes to the
+// byte-array tier (a union, packed-misaligned, or pointer-only layout Go cannot
+// reproduce as typed fields) as its exact-size [N]byte backing, so the raw ABI
+// type matches the C size instead of the wrong-sized degraded field list the
+// per-field resolver would produce (e.g. a 64-byte GLKit union was emitted at 72
+// bytes). Raw needs no typed accessors — it is the low-level pointer-cast layer.
+func buildRawByteArrayView(name, goName string, s meta.Struct) view.Struct {
+	var comment strings.Builder
+	if s.Doc != "" {
+		fmt.Fprintf(&comment, "// %s\n", s.Doc)
+	}
+	comment.WriteString(deprecatedComment(s.Availability))
+	if goName != name {
+		fmt.Fprintf(&comment, "// C struct: %s\n", name)
+	}
+	fmt.Fprintf(&comment, "// %s is held as its exact %d-byte C ABI layout (a union / packed /\n// variable layout not expressible as typed Go fields).\n", goName, s.Size)
+
+	var fields []view.StructField
+	if elem := structlayout.AlignElem(s.Align, s.Packed); elem != "" {
+		fields = append(fields, view.StructField{GoName: "_", GoType: "[0]" + elem})
+	}
+	fields = append(fields, view.StructField{GoName: "data", GoType: fmt.Sprintf("[%d]byte", s.Size)})
+	return view.Struct{CommentBlock: comment.String(), GoName: goName, Fields: fields}
 }
 
 // buildStructView resolves one struct into its renderable view: the comment

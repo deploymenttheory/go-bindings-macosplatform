@@ -3,20 +3,20 @@
 
 package mapkit
 
-import (
-	"unsafe"
-)
-
 // A rectangular geographic region that centers around a specific latitude and longitude.
+// MKCoordinateRegion is held as its exact 32-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type MKCoordinateRegion struct {
-	Center unsafe.Pointer
-	Span   MKCoordinateSpan
+	_    [0]uint64
+	data [32]byte
 }
 
 // The width and height of a map region.
+// MKCoordinateSpan is held as its exact 16-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type MKCoordinateSpan struct {
-	LatitudeDelta  unsafe.Pointer
-	LongitudeDelta unsafe.Pointer
+	_    [0]uint64
+	data [16]byte
 }
 
 // A point on a two-dimensional map projection.

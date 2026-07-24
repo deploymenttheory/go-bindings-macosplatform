@@ -12,6 +12,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/render"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/view"
 	rawfw "github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/layouttest"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/structlayout"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emitmanifest"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
@@ -325,22 +326,45 @@ func emittableStructNames(
 ) (goNames []string, keyOf map[string]string, structOf map[string]meta.Struct) {
 	keyOf = make(map[string]string)
 	structOf = make(map[string]meta.Struct)
-	seen := make(map[string]bool)
 	for name, s := range framework.Structs {
 		if s.Availability.IsUnavailable {
 			continue
 		}
 		goName := naming.ExportedTypeName(name)
-		if !isExportedGoIdent(goName) || seen[goName] || taken[goName] {
+		if !isExportedGoIdent(goName) || taken[goName] {
 			continue
 		}
-		seen[goName] = true
+		// When two C struct names collide on one Go name (a forward decl vs the
+		// complete definition), pick a deterministic winner instead of the map's
+		// random first-seen — otherwise this pass and the byte-array membership pass
+		// can choose different instances (the [0]byte bug). preferStruct mirrors the
+		// scanner's "keep whichever carries fields", so the emitted instance always
+		// agrees with the Size>0 instance the byte-array pass admits.
+		if cur, ok := structOf[goName]; ok && !preferStruct(s, name, cur, keyOf[goName]) {
+			continue
+		}
 		keyOf[goName] = name
 		structOf[goName] = s
+	}
+	for goName := range structOf {
 		goNames = append(goNames, goName)
 	}
 	sort.Strings(goNames)
 	return goNames, keyOf, structOf
+}
+
+// preferStruct reports whether struct instance (cand, candKey) should win a Go-name
+// collision over the current (cur, curKey): more fields first (a complete
+// definition beats a forward decl), then a non-zero authoritative size, then the
+// lexically smaller C name for full determinism.
+func preferStruct(cand meta.Struct, candKey string, cur meta.Struct, curKey string) bool {
+	if len(cand.Fields) != len(cur.Fields) {
+		return len(cand.Fields) > len(cur.Fields)
+	}
+	if (cand.Size != 0) != (cur.Size != 0) {
+		return cand.Size != 0
+	}
+	return candKey < curKey
 }
 
 // emitStructs writes <pkgname>_structs_generated.go: a Go definition for every
@@ -383,6 +407,7 @@ func emitStructs(
 	var structs []view.Struct
 	var handleTypes []view.HandleType
 	var byteArrayStructs []view.ByteArrayStruct
+	var layoutChecks []layoutCheck // structs with an authoritative C size, for the ABI test
 	emittedHandle := make(map[string]bool)
 	for _, goName := range goNames {
 		takenNames[goName] = true
@@ -416,6 +441,7 @@ func emitStructs(
 				}
 			}
 			byteArrayStructs = append(byteArrayStructs, v)
+			layoutChecks = append(layoutChecks, layoutCheck{GoName: goName, Size: s.Size, Align: s.Align})
 			continue
 		}
 		// A fieldless opaque struct that is itself a CF handle typedef becomes the
@@ -456,6 +482,14 @@ func emitStructs(
 			fields = append(fields, view.Field{GoName: structFieldGoName(fieldName), GoType: gt})
 		}
 		structs = append(structs, view.Struct{GoName: goName, Doc: cleanDoc(s.Doc), Fields: fields})
+		// A clean value struct with an authoritative clang size gets a SIZE assertion
+		// (align 0 = skip): Go cannot under-align, so a struct with an int64 field is
+		// 8-aligned even when C declared align 4 — that is a Go language limitation,
+		// not an ABI bug, because size + offsets still match (by-value passing is
+		// correct and any container embedding it is rejected by the offset check).
+		if s.Size != 0 {
+			layoutChecks = append(layoutChecks, layoutCheck{GoName: goName, Size: s.Size, Align: 0})
+		}
 	}
 	// Typedef aliases (NSRect = CGRect, opaque-pointer FooRef = *Foo) share the
 	// file, matching the raw layer's single _structs.go. willEmit lets an alias
@@ -509,8 +543,15 @@ func emitStructs(
 	}
 	fname := pkgName + "_structs_generated.go"
 	file := assembleFile(pkgName, imports, body)
-	return rawfw.WriteGoFile(filepath.Join(outDir, fname), file)
+	if err := rawfw.WriteGoFile(filepath.Join(outDir, fname), file); err != nil {
+		return err
+	}
+	return layouttest.Write(outDir, pkgName, layoutChecks)
 }
+
+// layoutCheck records an emitted struct's Go name and the authoritative C size /
+// alignment clang reported, for the generated ABI layout test.
+type layoutCheck = layouttest.Check
 
 // buildByteArrayStructView builds the byte-array + accessor view for a struct the
 // clean layout path rejects. The backing array is the struct's authoritative C
@@ -533,6 +574,11 @@ func buildByteArrayStructView(
 		offset := f.Offset
 		if s.IsUnion {
 			offset = 0
+		}
+		// A trailing flexible array member (T objects[0]) sits AT the struct's size —
+		// it is outside the fixed [Size]byte backing, so it has no in-bounds accessor.
+		if offset >= s.Size {
+			continue
 		}
 		// A C function-pointer field becomes a callable Go func accessor when its
 		// whole signature is purego.RegisterFunc-safe (primitive / pointer args and
@@ -655,19 +701,7 @@ func isCPointerWidth(objcType string) bool {
 // aligned to 8 — the authoritative Size is always a multiple of the C alignment,
 // so a Go struct rounded up to <=8 never changes the size.
 func byteArrayAlignElem(s meta.Struct) string {
-	if s.Packed {
-		return ""
-	}
-	switch {
-	case s.Align >= 8:
-		return "uint64"
-	case s.Align == 4:
-		return "uint32"
-	case s.Align == 2:
-		return "uint16"
-	default:
-		return ""
-	}
+	return structlayout.AlignElem(s.Align, s.Packed)
 }
 
 // buildTypedefAliasViews resolves the framework's C struct typedefs into idiomatic

@@ -66,12 +66,11 @@ type RbArithmeticSequenceComponentsT struct {
 }
 
 // C struct: rb_data_type_struct
+// RbDataTypeStruct is held as its exact 72-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type RbDataTypeStruct struct {
-	Wrap_struct_name string
-	Function         unsafe.Pointer
-	Parent           *RbDataTypeStruct
-	Data             unsafe.Pointer
-	Flags            uint
+	_    [0]uint64
+	data [72]byte
 }
 
 // C struct: rb_fdset_t
@@ -81,9 +80,11 @@ type RbFdsetT struct {
 }
 
 // C struct: st_hash_type
+// StHashType is held as its exact 16-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type StHashType struct {
-	Compare unsafe.Pointer
-	Hash    unsafe.Pointer
+	_    [0]uint64
+	data [16]byte
 }
 
 // C struct: st_table

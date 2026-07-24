@@ -3,30 +3,31 @@
 
 package glkit
 
-import (
-	"unsafe"
-)
-
 // GLKEffectPropertyPrv is an opaque type.
 type GLKEffectPropertyPrv struct{}
 
 // C struct: _GLKMatrix2
+// GLKMatrix2 is held as its exact 16-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type GLKMatrix2 struct {
-	Field0 unsafe.Pointer
-	M2     [2][2]float32
-	M      [4]float32
+	_    [0]uint32
+	data [16]byte
 }
 
 // C struct: _GLKMatrix3
+// GLKMatrix3 is held as its exact 36-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type GLKMatrix3 struct {
-	Field0 unsafe.Pointer
-	M      [9]float32
+	_    [0]uint32
+	data [36]byte
 }
 
 // C struct: _GLKMatrix4
+// GLKMatrix4 is held as its exact 64-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type GLKMatrix4 struct {
-	Field0 unsafe.Pointer
-	M      [16]float32
+	_    [0]uint64
+	data [64]byte
 }
 
 // C struct: _GLKMatrixStack
@@ -34,33 +35,35 @@ type GLKMatrix4 struct {
 type GLKMatrixStack struct{}
 
 // C struct: _GLKQuaternion
+// GLKQuaternion is held as its exact 16-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type GLKQuaternion struct {
-	Field0 unsafe.Pointer
-	Field1 unsafe.Pointer
-	Q      [4]float32
+	_    [0]uint64
+	data [16]byte
 }
 
 // C struct: _GLKVector2
+// GLKVector2 is held as its exact 8-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type GLKVector2 struct {
-	Field0 unsafe.Pointer
-	Field1 unsafe.Pointer
-	V      [2]float32
+	_    [0]uint64
+	data [8]byte
 }
 
 // C struct: _GLKVector3
+// GLKVector3 is held as its exact 12-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type GLKVector3 struct {
-	Field0 unsafe.Pointer
-	Field1 unsafe.Pointer
-	Field2 unsafe.Pointer
-	V      [3]float32
+	_    [0]uint32
+	data [12]byte
 }
 
 // C struct: _GLKVector4
+// GLKVector4 is held as its exact 16-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type GLKVector4 struct {
-	Field0 unsafe.Pointer
-	Field1 unsafe.Pointer
-	Field2 unsafe.Pointer
-	V      [4]float32
+	_    [0]uint64
+	data [16]byte
 }
 
 // @struct GLKVertexAttributeParameters @abstract Structure for parameters to use in glVertexAttribPointer given a MDLVertexForamt

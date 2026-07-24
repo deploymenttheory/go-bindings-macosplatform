@@ -33,11 +33,11 @@ type ICCharTable struct {
 }
 
 // ********************************************************************************************** types and constants for use with kICDownloadFolder, et. al. **********************************************************************************************
+// ICFileSpec is held as its exact 112-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type ICFileSpec struct {
-	VolName         [32]uint8
-	VolCreationDate int32
-	Fss             carboncore.FSSpec
-	Alias           carboncore.AliasRecord
+	_    [0]uint16
+	data [112]byte
 }
 
 // ********************************************************************************************** types and constants for use with kICDocumentFont, et. al. **********************************************************************************************
@@ -74,19 +74,11 @@ type ICServices struct {
 	Services [1]ICServiceEntry
 }
 
+// LaunchParamBlockRec is held as its exact 52-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type LaunchParamBlockRec struct {
-	Reserved1           uint32
-	Reserved2           uint16
-	LaunchBlockID       uint16
-	LaunchEPBLength     uint32
-	LaunchFileFlags     uint16
-	LaunchControlFlags  uint16
-	LaunchAppRef        *carboncore.FSRef
-	LaunchProcessSN     unsafe.Pointer
-	LaunchPreferredSize uint32
-	LaunchMinimumSize   uint32
-	LaunchAvailableSize uint32
-	LaunchAppParameters *AppParameters
+	_    [0]uint16
+	data [52]byte
 }
 
 // OpaqueICInstance is an opaque type.

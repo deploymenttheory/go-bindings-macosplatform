@@ -224,10 +224,10 @@ func IOParseBootArgString(argString string, argPtr string, strlen int) bool {
 	return _fnIOParseBootArgString(argString, argPtr, strlen)
 }
 
-var _fnIORPCMessageFromMach func(unsafe.Pointer, bool) *IORPCMessage
+var _fnIORPCMessageFromMach func(unsafe.Pointer, bool) unsafe.Pointer
 
 // IORPCMessageFromMach calls the DriverKit framework function IORPCMessageFromMach.
-func IORPCMessageFromMach(msg unsafe.Pointer, reply bool) *IORPCMessage {
+func IORPCMessageFromMach(msg unsafe.Pointer, reply bool) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnIORPCMessageFromMach == nil {
 		ebipurego.RegisterLibFunc(&_fnIORPCMessageFromMach, _lib, "IORPCMessageFromMach")

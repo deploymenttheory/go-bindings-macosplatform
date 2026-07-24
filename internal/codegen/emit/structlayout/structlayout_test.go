@@ -88,6 +88,12 @@ func TestGoStructLayout(t *testing.T) {
 		{"mixed align pads", false, []string{"uint8", "uint32"}, []int{0, 4}, 8, true},
 		{"packed tight", true, []string{"uint8", "uint16", "uint8"}, []int{0, 1, 3}, 4, true},
 		{"byte array field", false, []string{"uint8", "[3]uint8", "uint16"}, []int{0, 1, 4}, 6, true},
+		// A trailing zero-size field (C flexible array member) forces Go to pad by one
+		// byte then round to alignment: 3×uint64 (24) + [0]uint64 -> 32, NOT 24. This
+		// is why such structs are rejected from the clean tier (their real Go size
+		// exceeds the authoritative C size) and fall to the byte-array tier.
+		{"trailing FAM inflates", false, []string{"uint64", "uint64", "uint64", "[0]uint64"}, []int{0, 8, 16, 24}, 32, true},
+		{"trailing FAM byte elem", false, []string{"uint32", "[0]uint8"}, []int{0, 4}, 8, true},
 		{"unknown type", false, []string{"SomeStruct"}, nil, 0, false},
 	}
 	for _, c := range cases {

@@ -119,11 +119,11 @@ type ChunkHeader struct {
 	CkSize int32
 }
 
+// Comment is held as its exact 10-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type Comment struct {
-	TimeStamp uint32
-	Marker    int16
-	Count     uint16
-	Text      [1]int8
+	_    [0]uint16
+	data [10]byte
 }
 
 type CommentsChunk struct {
@@ -177,10 +177,11 @@ type ComponentParameters struct {
 	Params    [1]int
 }
 
+// ComponentPlatformInfo is held as its exact 12-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type ComponentPlatformInfo struct {
-	ComponentFlags int32
-	Component      ResourceSpec
-	PlatformType   int16
+	_    [0]uint16
+	data [12]byte
 }
 
 type ComponentPlatformInfoArray struct {
@@ -192,12 +193,11 @@ type ComponentRecord struct {
 	Data [1]int
 }
 
+// ComponentResource is held as its exact 44-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type ComponentResource struct {
-	Cd            ComponentDescription
-	Component     ResourceSpec
-	ComponentName ResourceSpec
-	ComponentInfo ResourceSpec
-	ComponentIcon ResourceSpec
+	_    [0]uint16
+	data [44]byte
 }
 
 type ComponentResourceExtension struct {
@@ -262,8 +262,11 @@ type DeferredTask struct {
 	DtReserved int
 }
 
+// ExceptionInfo is held as its exact 8-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type ExceptionInfo struct {
-	MemoryInfo *MemoryExceptionInformation
+	_    [0]uint64
+	data [8]byte
 }
 
 type ExceptionInformation struct {
@@ -331,7 +334,11 @@ type FInfo struct {
 	FdFldr     int16
 }
 
+// FPUInformation is held as its exact 8-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type FPUInformation struct {
+	_    [0]uint64
+	data [8]byte
 }
 
 type FPUInformationPowerPC struct {
@@ -814,9 +821,11 @@ type LocalDateTime struct {
 	Fraction    uint16
 }
 
+// LocaleAndVariant is held as its exact 12-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type LocaleAndVariant struct {
-	Locale    unsafe.Pointer
-	OpVariant uint32
+	_    [0]uint16
+	data [12]byte
 }
 
 type LongDateCvt struct {
@@ -940,7 +949,11 @@ type MPTaskInfoVersion2 struct {
 	CpuID          unsafe.Pointer
 }
 
+// MachineInformation is held as its exact 8-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type MachineInformation struct {
+	_    [0]uint64
+	data [8]byte
 }
 
 type MachineInformationPowerPC struct {
@@ -963,10 +976,11 @@ type MachineLocation struct {
 	U         unsafe.Pointer
 }
 
+// Marker is held as its exact 262-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type Marker struct {
-	Id         int16
-	Position   uint32
-	MarkerName [256]uint8
+	_    [0]uint16
+	data [262]byte
 }
 
 type MarkerChunk struct {
@@ -1238,7 +1252,11 @@ type Rect struct {
 	Right  int16
 }
 
+// RegisterInformation is held as its exact 8-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type RegisterInformation struct {
+	_    [0]uint64
+	data [8]byte
 }
 
 type RegisterInformationPowerPC struct {
@@ -1284,9 +1302,11 @@ type RegisteredComponentRecord struct {
 	Data [1]int
 }
 
+// ResourceSpec is held as its exact 6-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type ResourceSpec struct {
-	ResType uint32
-	ResID   int16
+	_    [0]uint16
+	data [6]byte
 }
 
 // Deprecated: Deprecated
@@ -1302,14 +1322,11 @@ type RoutineDescriptor struct {
 }
 
 // Deprecated: Deprecated
+// RoutineRecord is held as its exact 28-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type RoutineRecord struct {
-	ProcInfo       uint
-	Reserved1      int8
-	ISA            int8
-	RoutineFlags   uint16
-	ProcDescriptor unsafe.Pointer
-	Reserved2      uint32
-	Selector       uint32
+	_    [0]uint16
+	data [28]byte
 }
 
 type RoutingResourceEntry struct {
@@ -1336,9 +1353,11 @@ type SchedulerInfoRec struct {
 	InterruptedCoopThreadID uint
 }
 
+// ScriptCodeRun is held as its exact 10-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type ScriptCodeRun struct {
-	Offset uint
-	Script int16
+	_    [0]uint16
+	data [10]byte
 }
 
 type SoundDataChunk struct {
@@ -1528,9 +1547,11 @@ type TextEncodingRec struct {
 	Format  uint32
 }
 
+// TextEncodingRun is held as its exact 12-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type TextEncodingRun struct {
-	Offset       uint
-	TextEncoding uint32
+	_    [0]uint16
+	data [12]byte
 }
 
 type TogglePB struct {
@@ -1650,10 +1671,11 @@ type UCKeyboardTypeHeader struct {
 }
 
 // Deprecated: Deprecated
+// UTCDateTime is held as its exact 8-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type UTCDateTime struct {
-	HighSeconds uint16
-	LowSeconds  uint32
-	Fraction    uint16
+	_    [0]uint16
+	data [8]byte
 }
 
 type UnicodeMapping struct {
@@ -1668,13 +1690,18 @@ type UntokenTable struct {
 	Index     [256]int16
 }
 
+// Vector128 is held as its exact 32-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type Vector128 struct {
-	L [4]uint
-	S [8]uint16
-	C [16]uint8
+	_    [0]uint64
+	data [32]byte
 }
 
+// VectorInformation is held as its exact 8-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type VectorInformation struct {
+	_    [0]uint64
+	data [8]byte
 }
 
 type VectorInformationPowerPC struct {
@@ -1694,9 +1721,11 @@ type VolumeMountInfoHeader struct {
 	Flags  int16
 }
 
+// WideChar is held as its exact 2-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type WideChar struct {
-	A unsafe.Pointer
-	B int16
+	_    [0]uint16
+	data [2]byte
 }
 
 type WideCharArr struct {

@@ -547,12 +547,11 @@ type SFNTLookupBinarySearchHeader struct {
 	RangeShift    uint16
 }
 
+// SFNTLookupFormatSpecificHeader is held as its exact 16-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type SFNTLookupFormatSpecificHeader struct {
-	TheArray     SFNTLookupArrayHeader
-	Segment      SFNTLookupSegmentHeader
-	Single       SFNTLookupSingleHeader
-	TrimmedArray SFNTLookupTrimmedArrayHeader
-	Vector       SFNTLookupVectorHeader
+	_    [0]uint16
+	data [16]byte
 }
 
 type SFNTLookupSegment struct {
@@ -576,9 +575,11 @@ type SFNTLookupSingleHeader struct {
 	Entries   [1]SFNTLookupSingle
 }
 
+// SFNTLookupTable is held as its exact 18-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type SFNTLookupTable struct {
-	Format   uint16
-	FsHeader SFNTLookupFormatSpecificHeader
+	_    [0]uint16
+	data [18]byte
 }
 
 type SFNTLookupTrimmedArrayHeader struct {

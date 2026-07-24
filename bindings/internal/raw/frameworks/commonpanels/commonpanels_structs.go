@@ -44,9 +44,11 @@ type NColorPickerInfo struct {
 	Reserved       uint8
 }
 
+// NPMColor is held as its exact 16-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type NPMColor struct {
-	Profile unsafe.Pointer
-	Color   qd.CMColor
+	_    [0]uint16
+	data [16]byte
 }
 
 // OpaqueFCFontDescriptorRef is an opaque type.

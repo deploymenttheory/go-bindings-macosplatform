@@ -317,9 +317,11 @@ type CFXMLEntityReferenceInfo struct {
 }
 
 // Contains the system and public IDs for an external entity reference.
+// CFXMLExternalID is held as its exact 16-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type CFXMLExternalID struct {
-	SystemID unsafe.Pointer
-	PublicID unsafe.Pointer
+	_    [0]uint64
+	data [16]byte
 }
 
 // Contains the external ID of the notation.

@@ -58,9 +58,11 @@ type ICAGetDeviceListPB struct {
 }
 
 // @struct ICAHeader @discussion This is the first field in all parameter blocks used by APIs defined in ICAApplication.h. Type of parameter passed to a callback function used by APIs defined in ICAApplication.h. The parameter for the completion proc should to be casted to an appropriate type such as ICAGetChildCountPB* for it to be useful. @field err Error returned by an API. --> @field refcon An arbitrary refcon value passed to the callback. <--
+// ICAHeader is held as its exact 10-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type ICAHeader struct {
-	Err    int16
-	Refcon uint
+	_    [0]uint16
+	data [10]byte
 }
 
 // @struct ICAImportImagePB @field header See description for ICAHeader.  <-> @field deviceObject Object ID of a camera or scanner device. Set this to NULL to ge the default behavior: (a) if no device is connected, a panel saying that there�s no device connected is displayed, (b) if a single device is connected, an appropriate user interface to access that device will be displayed, (c) if several devices are connected, a device selector panel will be displayed. <-- @field flags One or more flags (combined with an OR operator) defined in ImportImage flags enum. <-- @field supportedFileTypes An array of file extension strings such as "jpg", "tif", etc., that are of interest to the calling application. Set to NULL to display all files. <-- @field filterProc Specify a filter proc to that will be called for each file before it is displayed in the user interface. <-- @field importedImages Returns an array of CFDataRefs for the imported images if the kICADownloadAndReturnPathArray flag is not specified. Otherwise returns an array of CFStringRefs holding the paths of the images that are downloaded. The caller should provide a pointer to a CFArrayRef object initialized to NULL. The caller is responsible for released the array returned by this function. -->
@@ -221,9 +223,11 @@ type ICAUploadFilePB struct {
 }
 
 // @struct ICDHeader @discussion This is the first field in all parameter blocks used by APIs defined in ICADevices.h. Type of parameter passed to a callback function used by APIs defined in ICADevices.h. The parameter for the completion proc should to be casted to an appropriate type such as ICD_NewObjectPB* for it to be useful. @field err Error returned by an API. --> @field refcon An arbitrary refcon value passed to the callback. <--
+// ICDHeader is held as its exact 10-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type ICDHeader struct {
-	Err    int16
-	Refcon uint
+	_    [0]uint16
+	data [10]byte
 }
 
 // @struct ICD_DisposeObjectPB @discussion Parameter block passed to function <code>ICDDisposeObject</code>. @field header The function returns error code in the <code>err</code> field of this structure. The <code>refcon</code> field of this structure is used to pass a pointer to the callback function if <code>ICDDisposeObject</code> is called asynchronously. @field object Object to be disposed.

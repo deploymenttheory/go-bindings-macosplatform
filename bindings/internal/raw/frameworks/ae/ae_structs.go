@@ -20,14 +20,18 @@ type AEBuildError struct {
 	FErrorPos uint32
 }
 
+// AEDesc is held as its exact 12-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type AEDesc struct {
-	DescriptorType uint32
-	DataHandle     unsafe.Pointer
+	_    [0]uint16
+	data [12]byte
 }
 
+// AEKeyDesc is held as its exact 16-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type AEKeyDesc struct {
-	DescKey     uint32
-	DescContent AEDesc
+	_    [0]uint16
+	data [16]byte
 }
 
 // AERemoteProcessResolver is an opaque type.
@@ -68,10 +72,11 @@ type TScriptingSizeResource struct {
 	MaxHeapSize        uint32
 }
 
+// TextRange is held as its exact 10-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type TextRange struct {
-	FStart       int32
-	FEnd         int32
-	FHiliteStyle int16
+	_    [0]uint16
+	data [10]byte
 }
 
 type TextRangeArray struct {

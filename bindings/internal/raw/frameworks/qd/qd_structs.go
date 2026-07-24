@@ -7,7 +7,6 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/carboncore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/commonpanels"
 )
 
 type AsscEntry struct {
@@ -91,9 +90,11 @@ type CMBitmap struct {
 	User2     uint32
 }
 
+// CMBufferLocation is held as its exact 16-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type CMBufferLocation struct {
-	Buffer unsafe.Pointer
-	Size   uint32
+	_    [0]uint64
+	data [16]byte
 }
 
 type CMCMYColor struct {
@@ -179,12 +180,11 @@ type CMDeviceProfileArray struct {
 	Profiles     [1]CMDeviceProfileInfo
 }
 
+// CMDeviceProfileInfo is held as its exact 1056-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type CMDeviceProfileInfo struct {
-	DataVersion uint32
-	ProfileID   uint32
-	ProfileLoc  CMProfileLocation
-	ProfileName unsafe.Pointer
-	Reserved    uint32
+	_    [0]uint64
+	data [1056]byte
 }
 
 type CMDeviceScope struct {
@@ -231,8 +231,11 @@ type CMHSVColor struct {
 	Value      uint16
 }
 
+// CMHandleLocation is held as its exact 8-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type CMHandleLocation struct {
-	H *string
+	_    [0]uint64
+	data [8]byte
 }
 
 type CMIntentCRDVMSize struct {
@@ -436,10 +439,11 @@ type CMPathLocation struct {
 	Path [1024]int8
 }
 
+// CMProfLoc is held as its exact 1024-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type CMProfLoc struct {
-	HandleLoc CMHandleLocation
-	PathLoc   CMPathLocation
-	BufferLoc CMBufferLocation
+	_    [0]uint64
+	data [1024]byte
 }
 
 type CMProfileIterateData struct {
@@ -455,9 +459,11 @@ type CMProfileIterateData struct {
 	Digest           *[16]uint8
 }
 
+// CMProfileLocation is held as its exact 1032-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type CMProfileLocation struct {
-	LocType int16
-	U       CMProfLoc
+	_    [0]uint64
+	data [1032]byte
 }
 
 type CMProfileSequenceDescType struct {
@@ -645,9 +651,11 @@ type CQDProcs struct {
 	NewProc6          unsafe.Pointer
 }
 
+// ColorSpec is held as its exact 8-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type ColorSpec struct {
-	Value int16
-	Rgb   commonpanels.RGBColor
+	_    [0]uint16
+	data [8]byte
 }
 
 type ColorTable struct {
@@ -765,10 +773,11 @@ type NCMConcatProfileSet struct {
 	ProfileSpecs [1]NCMConcatProfileSpec
 }
 
+// NCMConcatProfileSpec is held as its exact 16-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type NCMConcatProfileSpec struct {
-	RenderingIntent uint32
-	TransformTag    uint32
-	Profile         unsafe.Pointer
+	_    [0]uint64
+	data [16]byte
 }
 
 type NCMDeviceProfileInfo struct {
