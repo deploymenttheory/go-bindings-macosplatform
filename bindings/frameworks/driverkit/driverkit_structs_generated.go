@@ -128,13 +128,6 @@ type IORPC struct {
 	ReplySize uint32
 }
 
-type IORPCMessage struct {
-	Msgid      uint64
-	Flags      uint64
-	ObjectRefs uint64
-	Objects    [0]uint64
-}
-
 type IORPCMessageErrorReturn struct {
 	Mach    IORPCMessageMach
 	Content IORPCMessageErrorReturnContent
@@ -403,6 +396,29 @@ type OSObjectPtr struct{ obj.Object }
 // IsNil reports whether OSObjectPtr is a NULL handle (it wraps no object). Call
 // it before using a returned handle; a nil handle's methods panic.
 func (h OSObjectPtr) IsNil() bool { return h.Object == nil }
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type IORPCMessage struct {
+	_    [0]uint32
+	data [24]byte
+}
+
+// AsMsgid returns the msgid field, read from the backing bytes at offset 0.
+func (u *IORPCMessage) AsMsgid() uint64 {
+	return *(*uint64)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsFlags returns the flags field, read from the backing bytes at offset 8.
+func (u *IORPCMessage) AsFlags() uint64 {
+	return *(*uint64)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsObjectRefs returns the objectRefs field, read from the backing bytes at offset 16.
+func (u *IORPCMessage) AsObjectRefs() uint64 {
+	return *(*uint64)(unsafe.Pointer(&u.data[16]))
+}
 
 // The C layout cannot be reproduced as a plain Go value struct, so it is held as
 // its exact-size bytes and read through the typed As* accessors below. It is

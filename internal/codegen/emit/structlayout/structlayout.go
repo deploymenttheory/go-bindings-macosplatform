@@ -178,6 +178,7 @@ func LayoutSafeFromGoTypes(packed bool, goTypes []string) bool {
 // field's size is unknown.
 func GoStructLayout(goTypes []string, packed bool, sizer FieldSizer) (offsets []int, size int, ok bool) {
 	pos, maxAlign := 0, 1
+	lastSize := 0
 	for _, gt := range goTypes {
 		sz, al, fieldOK := sizeAlign(gt, sizer)
 		if !fieldOK {
@@ -193,6 +194,16 @@ func GoStructLayout(goTypes []string, packed bool, sizer FieldSizer) (offsets []
 		}
 		offsets = append(offsets, pos)
 		pos += sz
+		lastSize = sz
+	}
+	// Go pads a non-empty struct whose LAST field is zero-sized by one byte (then
+	// rounds up to alignment) so that a pointer to that trailing field stays inside
+	// the allocation. A C flexible array member ("T objects[0]") does NOT get this
+	// padding, so such a struct's real Go size exceeds its C size — modelling the
+	// rule here lets LayoutMatchesAuthoritative reject it from the clean tier (it
+	// then falls to the byte-array tier, which reproduces the exact C size).
+	if len(goTypes) > 0 && lastSize == 0 {
+		pos++
 	}
 	if !packed {
 		if r := pos % maxAlign; r != 0 {
