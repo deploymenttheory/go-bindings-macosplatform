@@ -65,12 +65,6 @@ type TScriptingSizeResource struct {
 	MaxHeapSize        uint32
 }
 
-type TextRange struct {
-	FStart       int32
-	FEnd         int32
-	FHiliteStyle int16
-}
-
 type TextRangeArray struct {
 	FNumOfRanges int16
 	FRange       [1]TextRange
@@ -101,3 +95,25 @@ type AEStreamRef struct{ obj.Object }
 // IsNil reports whether AEStreamRef is a NULL handle (it wraps no object). Call
 // it before using a returned handle; a nil handle's methods panic.
 func (h AEStreamRef) IsNil() bool { return h.Object == nil }
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type TextRange struct {
+	data [10]byte
+}
+
+// AsFStart returns the fStart field, read from the backing bytes at offset 0.
+func (u *TextRange) AsFStart() int32 {
+	return *(*int32)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsFEnd returns the fEnd field, read from the backing bytes at offset 4.
+func (u *TextRange) AsFEnd() int32 {
+	return *(*int32)(unsafe.Pointer(&u.data[4]))
+}
+
+// AsFHiliteStyle returns the fHiliteStyle field, read from the backing bytes at offset 8.
+func (u *TextRange) AsFHiliteStyle() int16 {
+	return *(*int16)(unsafe.Pointer(&u.data[8]))
+}

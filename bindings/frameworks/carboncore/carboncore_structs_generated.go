@@ -122,13 +122,6 @@ type ChunkHeader struct {
 	CkSize int32
 }
 
-type Comment struct {
-	TimeStamp uint32
-	Marker    int16
-	Count     uint16
-	Text      [1]int8
-}
-
 type CommentsChunk struct {
 	CkID        uint32
 	CkSize      int32
@@ -964,12 +957,6 @@ type MachineLocation struct {
 	U         unsafe.Pointer
 }
 
-type Marker struct {
-	ID         int16
-	Position   uint32
-	MarkerName [256]uint8
-}
-
 type MarkerChunk struct {
 	CkID       uint32
 	CkSize     int32
@@ -1251,11 +1238,6 @@ type RegisteredComponentRecord struct {
 	Data [1]int
 }
 
-type ResourceSpec struct {
-	ResType uint32
-	ResID   int16
-}
-
 type RoutineDescriptor struct {
 	GoMixedModeTrap        uint16
 	Version                int8
@@ -1298,11 +1280,6 @@ type SchedulerInfoRec struct {
 	CurrentThreadID         uint
 	SuggestedThreadID       uint
 	InterruptedCoopThreadID uint
-}
-
-type ScriptCodeRun struct {
-	Offset uint
-	Script int16
 }
 
 type SoundDataChunk struct {
@@ -1492,11 +1469,6 @@ type TextEncodingRec struct {
 	Format  uint32
 }
 
-type TextEncodingRun struct {
-	Offset       uint
-	TextEncoding uint32
-}
-
 type TogglePB struct {
 	TogFlags int
 	AmChars  uint32
@@ -1609,12 +1581,6 @@ type UCKeyboardTypeHeader struct {
 	KeyStateRecordsIndexOffset   uint32
 	KeyStateTerminatorsOffset    uint32
 	KeySequenceDataIndexOffset   uint32
-}
-
-type UTCDateTime struct {
-	HighSeconds uint16
-	LowSeconds  uint32
-	Fraction    uint16
 }
 
 type UnicodeMapping struct {
@@ -1891,3 +1857,125 @@ type UnicodeToTextRunInfo struct{ obj.Object }
 // IsNil reports whether UnicodeToTextRunInfo is a NULL handle (it wraps no object). Call
 // it before using a returned handle; a nil handle's methods panic.
 func (h UnicodeToTextRunInfo) IsNil() bool { return h.Object == nil }
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type Comment struct {
+	data [10]byte
+}
+
+// AsTimeStamp returns the timeStamp field, read from the backing bytes at offset 0.
+func (u *Comment) AsTimeStamp() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsMarker returns the marker field, read from the backing bytes at offset 4.
+func (u *Comment) AsMarker() int16 {
+	return *(*int16)(unsafe.Pointer(&u.data[4]))
+}
+
+// AsCount returns the count field, read from the backing bytes at offset 6.
+func (u *Comment) AsCount() uint16 {
+	return *(*uint16)(unsafe.Pointer(&u.data[6]))
+}
+
+// AsText returns the text field, read from the backing bytes at offset 8.
+func (u *Comment) AsText() [1]int8 {
+	return *(*[1]int8)(unsafe.Pointer(&u.data[8]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type Marker struct {
+	data [262]byte
+}
+
+// AsID returns the id field, read from the backing bytes at offset 0.
+func (u *Marker) AsID() int16 {
+	return *(*int16)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsPosition returns the position field, read from the backing bytes at offset 2.
+func (u *Marker) AsPosition() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[2]))
+}
+
+// AsMarkerName returns the markerName field, read from the backing bytes at offset 6.
+func (u *Marker) AsMarkerName() [256]uint8 {
+	return *(*[256]uint8)(unsafe.Pointer(&u.data[6]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type ResourceSpec struct {
+	data [6]byte
+}
+
+// AsResType returns the resType field, read from the backing bytes at offset 0.
+func (u *ResourceSpec) AsResType() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsResID returns the resID field, read from the backing bytes at offset 4.
+func (u *ResourceSpec) AsResID() int16 {
+	return *(*int16)(unsafe.Pointer(&u.data[4]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type ScriptCodeRun struct {
+	data [10]byte
+}
+
+// AsOffset returns the offset field, read from the backing bytes at offset 0.
+func (u *ScriptCodeRun) AsOffset() uint {
+	return *(*uint)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsScript returns the script field, read from the backing bytes at offset 8.
+func (u *ScriptCodeRun) AsScript() int16 {
+	return *(*int16)(unsafe.Pointer(&u.data[8]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type TextEncodingRun struct {
+	data [12]byte
+}
+
+// AsOffset returns the offset field, read from the backing bytes at offset 0.
+func (u *TextEncodingRun) AsOffset() uint {
+	return *(*uint)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsTextEncoding returns the textEncoding field, read from the backing bytes at offset 8.
+func (u *TextEncodingRun) AsTextEncoding() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[8]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type UTCDateTime struct {
+	data [8]byte
+}
+
+// AsHighSeconds returns the highSeconds field, read from the backing bytes at offset 0.
+func (u *UTCDateTime) AsHighSeconds() uint16 {
+	return *(*uint16)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsLowSeconds returns the lowSeconds field, read from the backing bytes at offset 2.
+func (u *UTCDateTime) AsLowSeconds() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[2]))
+}
+
+// AsFraction returns the fraction field, read from the backing bytes at offset 6.
+func (u *UTCDateTime) AsFraction() uint16 {
+	return *(*uint16)(unsafe.Pointer(&u.data[6]))
+}

@@ -34,12 +34,6 @@ type CSIdentityQueryClientContext struct {
 	ReceiveEvent        unsafe.Pointer
 }
 
-type IconFamilyElement struct {
-	ElementType uint32
-	ElementSize int32
-	ElementData [1]uint8
-}
-
 type IconFamilyResource struct {
 	ResourceType uint32
 	ResourceSize int32
@@ -107,3 +101,25 @@ type WSProtocolHandlerRef struct{ obj.Object }
 // IsNil reports whether WSProtocolHandlerRef is a NULL handle (it wraps no object). Call
 // it before using a returned handle; a nil handle's methods panic.
 func (h WSProtocolHandlerRef) IsNil() bool { return h.Object == nil }
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type IconFamilyElement struct {
+	data [10]byte
+}
+
+// AsElementType returns the elementType field, read from the backing bytes at offset 0.
+func (u *IconFamilyElement) AsElementType() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsElementSize returns the elementSize field, read from the backing bytes at offset 4.
+func (u *IconFamilyElement) AsElementSize() int32 {
+	return *(*int32)(unsafe.Pointer(&u.data[4]))
+}
+
+// AsElementData returns the elementData field, read from the backing bytes at offset 8.
+func (u *IconFamilyElement) AsElementData() [1]uint8 {
+	return *(*[1]uint8)(unsafe.Pointer(&u.data[8]))
+}

@@ -138,13 +138,6 @@ type DataBrowserAccessibilityItemInfo struct {
 	U       unsafe.Pointer
 }
 
-type DataBrowserAccessibilityItemInfoV0 struct {
-	Container      uint
-	Item           uint
-	ColumnProperty uint
-	PropertyPart   uint32
-}
-
 type DataBrowserAccessibilityItemInfoV1 struct {
 	Container      uint
 	Item           uint
@@ -876,11 +869,6 @@ type ScriptLanguageSupport struct {
 	FScriptLanguageArray [1]ScriptLanguageRecord
 }
 
-type ScrollBarTrackInfo struct {
-	Viewsize   int32
-	PressState uint8
-}
-
 type ScrpSTElement struct {
 	ScrpStartChar int32
 	ScrpHeight    int16
@@ -1317,3 +1305,47 @@ type WindowGroupRef struct{ obj.Object }
 // IsNil reports whether WindowGroupRef is a NULL handle (it wraps no object). Call
 // it before using a returned handle; a nil handle's methods panic.
 func (h WindowGroupRef) IsNil() bool { return h.Object == nil }
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type DataBrowserAccessibilityItemInfoV0 struct {
+	data [28]byte
+}
+
+// AsContainer returns the container field, read from the backing bytes at offset 0.
+func (u *DataBrowserAccessibilityItemInfoV0) AsContainer() uint {
+	return *(*uint)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsItem returns the item field, read from the backing bytes at offset 8.
+func (u *DataBrowserAccessibilityItemInfoV0) AsItem() uint {
+	return *(*uint)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsColumnProperty returns the columnProperty field, read from the backing bytes at offset 16.
+func (u *DataBrowserAccessibilityItemInfoV0) AsColumnProperty() uint {
+	return *(*uint)(unsafe.Pointer(&u.data[16]))
+}
+
+// AsPropertyPart returns the propertyPart field, read from the backing bytes at offset 24.
+func (u *DataBrowserAccessibilityItemInfoV0) AsPropertyPart() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[24]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type ScrollBarTrackInfo struct {
+	data [6]byte
+}
+
+// AsViewsize returns the viewsize field, read from the backing bytes at offset 0.
+func (u *ScrollBarTrackInfo) AsViewsize() int32 {
+	return *(*int32)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsPressState returns the pressState field, read from the backing bytes at offset 4.
+func (u *ScrollBarTrackInfo) AsPressState() uint8 {
+	return *(*uint8)(unsafe.Pointer(&u.data[4]))
+}

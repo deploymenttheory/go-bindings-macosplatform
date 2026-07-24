@@ -76,13 +76,6 @@ type MIDIEventList struct {
 	Packet     [1]MIDIEventPacket
 }
 
-// A series of simultaneous MIDI events in Universal MIDI Packets (UMP) format.
-type MIDIEventPacket struct {
-	TimeStamp uint64
-	WordCount uint32
-	Words     [64]uint32
-}
-
 // A general I/O error notification.
 type MIDIIOErrorNotification struct {
 	MessageID    NotificationMessageID
@@ -135,13 +128,6 @@ type MIDIObjectPropertyChangeNotification struct {
 	Object       uint32
 	ObjectType   ObjectType
 	PropertyName unsafe.Pointer
-}
-
-// A collection of simultaneous MIDI events.
-type MIDIPacket struct {
-	TimeStamp uint64
-	Length    uint16
-	Data      [256]uint8
 }
 
 // A list of MIDI events the system sends to or receives from an endpoint.
@@ -223,4 +209,50 @@ type MIDIUniversalMessage struct {
 // A custom lookup table to transform MIDI 7-bit values, as contained in note numbers, velocities, control values, and so on.
 type MIDIValueMap struct {
 	Value [128]uint8
+}
+
+// A series of simultaneous MIDI events in Universal MIDI Packets (UMP) format.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type MIDIEventPacket struct {
+	data [268]byte
+}
+
+// AsTimeStamp returns the timeStamp field, read from the backing bytes at offset 0.
+func (u *MIDIEventPacket) AsTimeStamp() uint64 {
+	return *(*uint64)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsWordCount returns the wordCount field, read from the backing bytes at offset 8.
+func (u *MIDIEventPacket) AsWordCount() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsWords returns the words field, read from the backing bytes at offset 12.
+func (u *MIDIEventPacket) AsWords() [64]uint32 {
+	return *(*[64]uint32)(unsafe.Pointer(&u.data[12]))
+}
+
+// A collection of simultaneous MIDI events.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type MIDIPacket struct {
+	data [268]byte
+}
+
+// AsTimeStamp returns the timeStamp field, read from the backing bytes at offset 0.
+func (u *MIDIPacket) AsTimeStamp() uint64 {
+	return *(*uint64)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsLength returns the length field, read from the backing bytes at offset 8.
+func (u *MIDIPacket) AsLength() uint16 {
+	return *(*uint16)(unsafe.Pointer(&u.data[8]))
+}
+
+// AsData returns the data field, read from the backing bytes at offset 10.
+func (u *MIDIPacket) AsData() [256]uint8 {
+	return *(*[256]uint8)(unsafe.Pointer(&u.data[10]))
 }

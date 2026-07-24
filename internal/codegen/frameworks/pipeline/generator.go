@@ -656,6 +656,10 @@ func GenerateIdiomatic(cfg IdiomaticConfig) error {
 	// a cross-framework typedef alias can target a struct that exists even when it
 	// is not in the all-clean-fields EmittableStructs subset.
 	mapper.AllEmittedStructs = idiofw.ComputeAllEmittedStructNames(reg.Frameworks)
+	// The second admission tier: structs the clean layout path rejects but whose
+	// exact size + offsets are known, emitted as [N]byte + accessors. Disjoint from
+	// EmittableStructs (kept out of the by-value gate on purpose).
+	mapper.ByteArrayStructs = idiofw.ComputeByteArrayStructs(reg.Frameworks, mapper)
 	// The idiomatic package names that are C libraries (they live under
 	// bindings/libraries/, not bindings/frameworks/), so a cross-framework typedef
 	// alias whose canonical owner is one of these imports it through the library

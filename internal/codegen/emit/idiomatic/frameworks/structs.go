@@ -200,6 +200,83 @@ func ComputeEmittableStructs(
 	return emittable
 }
 
+// ComputeByteArrayStructs returns the value-struct Go names the idiomatic layer
+// emits as a byte-array backing struct + typed accessors (the second admission
+// tier). A struct qualifies when the CLEAN layout path rejects it (it would
+// otherwise degrade every field to unsafe.Pointer) but its exact size and field
+// offsets are known and every field resolves to a concrete primitive/array Go
+// type an accessor can name. Today this captures packed-misaligned structs (Go
+// padding cannot reproduce their layout, but reads at exact offsets can). The set
+// is disjoint from ComputeEmittableStructs (clean layout) by construction, and is
+// kept OUT of the by-value EmittableStructs gate — a [N]byte cannot be passed by
+// value correctly (float register classification).
+func ComputeByteArrayStructs(
+	frameworks []*meta.FrameworkMeta,
+	mapper *typemap.Mapper,
+) map[string]bool {
+	enumWidths := buildEnumFieldWidths(frameworks)
+	enumSizer := func(goType string) (size, align int, ok bool) {
+		if w, found := enumWidths[goType]; found {
+			return w[0], w[1], true
+		}
+		return 0, 0, false
+	}
+	primitiveOrArray := func(gt string) bool {
+		if structlayout.Primitives[gt] {
+			return true
+		}
+		return structlayout.IsPrimitiveOrArrayOf(gt, func(e string) bool {
+			return structlayout.Primitives[e]
+		})
+	}
+
+	out := make(map[string]bool)
+	for _, framework := range frameworks {
+		ctx := typemap.Context{Framework: framework.Framework}
+		for name, s := range framework.Structs {
+			// Require an authoritative size (implies clang's field count matched, so
+			// every Offset is trustworthy — extract.go stamps Size only then).
+			if s.Availability.IsUnavailable || len(s.Fields) == 0 || s.Size == 0 {
+				continue
+			}
+			goName := naming.ExportedTypeName(name)
+			if !isExportedGoIdent(goName) || out[goName] {
+				continue
+			}
+			_, goTypes, ok := resolveStructFields(s, ctx, mapper)
+			if !ok {
+				continue
+			}
+			fieldOffsets := make([]int, len(s.Fields))
+			for i, f := range s.Fields {
+				fieldOffsets[i] = f.Offset
+			}
+			// Only structs the clean tier rejects. A clean-layout struct is handled by
+			// ComputeEmittableStructs and must not be double-emitted here.
+			cleanLayout := structlayout.LayoutSafeFromGoTypes(s.Packed, goTypes) &&
+				structlayout.LayoutMatchesAuthoritative(s.Size, s.Packed, fieldOffsets, goTypes, enumSizer)
+			if cleanLayout {
+				continue
+			}
+			// Every field must be a concrete primitive/array type so its accessor names
+			// a real Go type; a field that would itself degrade keeps the whole struct
+			// opaque (as today) rather than emitting a mis-typed accessor.
+			allAccessible := true
+			for _, gt := range goTypes {
+				if !primitiveOrArray(gt) {
+					allAccessible = false
+					break
+				}
+			}
+			if !allAccessible {
+				continue
+			}
+			out[goName] = true
+		}
+	}
+	return out
+}
+
 // ComputeAllEmittedStructNames returns every value-struct Go name the idiomatic
 // layer physically writes across all frameworks — the broad, degrade-don't-drop
 // set emitStructs actually emits (available, exported, first-seen), INCLUDING
@@ -337,6 +414,7 @@ func emitStructs(
 	imports := map[string]string{}
 	var structs []view.Struct
 	var handleTypes []view.HandleType
+	var byteArrayStructs []view.ByteArrayStruct
 	emittedHandle := make(map[string]bool)
 	for _, goName := range goNames {
 		takenNames[goName] = true
@@ -355,6 +433,14 @@ func emitStructs(
 				GoPkg:    pkgName,
 				GoSymbol: goName,
 			})
+		}
+		// Second admission tier: a layout the clean path rejects (packed-misaligned)
+		// but whose exact size + offsets are known is emitted as [N]byte + typed
+		// accessors instead of degrading its fields to unsafe.Pointer.
+		if mapper.ByteArrayStructs[goName] {
+			imports["unsafe"] = "unsafe"
+			byteArrayStructs = append(byteArrayStructs, buildByteArrayStructView(goName, s, ctx, mapper))
+			continue
 		}
 		// A fieldless opaque struct that is itself a CF handle typedef becomes the
 		// struct-wrapper handle type (still recorded KindStruct above, still emitted
@@ -416,7 +502,7 @@ func emitStructs(
 	handleTypes = append(handleTypes,
 		buildCFHandleTypeViews(framework, mapper, takenNames, emittedHandle, imports)...)
 
-	if len(structs) == 0 && len(aliases) == 0 && len(handleTypes) == 0 {
+	if len(structs) == 0 && len(aliases) == 0 && len(handleTypes) == 0 && len(byteArrayStructs) == 0 {
 		return nil
 	}
 
@@ -438,9 +524,51 @@ func emitStructs(
 		}
 		body = append(body, handleBody...)
 	}
+	if len(byteArrayStructs) > 0 {
+		baBody, err := render.ByteArrayStructs(byteArrayStructs)
+		if err != nil {
+			return err
+		}
+		body = append(body, baBody...)
+	}
 	fname := pkgName + "_structs_generated.go"
 	file := assembleFile(pkgName, imports, body)
 	return rawfw.WriteGoFile(filepath.Join(outDir, fname), file)
+}
+
+// buildByteArrayStructView builds the byte-array + accessor view for a struct the
+// clean layout path rejects. The backing array is the struct's authoritative C
+// size; each non-anonymous field becomes an As<Field>() accessor reading its Go
+// type at the field's authoritative offset. A packed struct has C alignment 1
+// (matching a Go [N]byte), so no alignment-forcing element is emitted; the union
+// tier (which needs natural alignment) sets AlignElem later.
+func buildByteArrayStructView(
+	goName string,
+	s meta.Struct,
+	ctx typemap.Context,
+	mapper *typemap.Mapper,
+) view.ByteArrayStruct {
+	names, goTypes, _ := resolveStructFields(s, ctx, mapper)
+	offsets := make([]int, len(s.Fields))
+	for i, f := range s.Fields {
+		offsets[i] = f.Offset
+	}
+	plan := structlayout.AccessorPlan(names, offsets, goTypes)
+	accessors := make([]view.Accessor, 0, len(plan))
+	for _, a := range plan {
+		accessors = append(accessors, view.Accessor{
+			GoName: "As" + structFieldGoName(a.Name),
+			Offset: a.Offset,
+			GoType: a.GoType,
+			Field:  a.Name,
+		})
+	}
+	return view.ByteArrayStruct{
+		Doc:       cleanDoc(s.Doc),
+		GoName:    goName,
+		Size:      s.Size,
+		Accessors: accessors,
+	}
 }
 
 // buildTypedefAliasViews resolves the framework's C struct typedefs into idiomatic

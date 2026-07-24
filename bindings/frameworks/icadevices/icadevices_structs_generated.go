@@ -50,12 +50,6 @@ type ICAGetDeviceListPB struct {
 	Object uint32
 }
 
-// This is the first field in all parameter blocks used by APIs defined in ICAApplication.h. Type of parameter passed to a callback function used by APIs defined in ICAApplication.h. The parameter for the completion proc should to be casted to an appropriate type such as ICAGetChildCountPB* for it to be useful.
-type ICAHeader struct {
-	Err    int16
-	Refcon uint
-}
-
 type ICAImportImagePB struct {
 	Header             ICAHeader
 	DeviceObject       uint32
@@ -195,12 +189,6 @@ type ICAUploadFilePB struct {
 	ParentObject uint32
 	FileFSRef    unsafe.Pointer
 	Flags        uint32
-}
-
-// This is the first field in all parameter blocks used by APIs defined in ICADevices.h. Type of parameter passed to a callback function used by APIs defined in ICADevices.h. The parameter for the completion proc should to be casted to an appropriate type such as ICD_NewObjectPB* for it to be useful.
-type ICDHeader struct {
-	Err    int16
-	Refcon uint
 }
 
 // Parameter block passed to function <code>ICDDisposeObject</code>.
@@ -387,3 +375,39 @@ type ScannerObjectInfo struct {
 
 // ICD_scanner_callback_functions is an alias for the ICD_Scannerscanner_callback_functions value type.
 type ICD_scanner_callback_functions = ICD_Scannerscanner_callback_functions
+
+// This is the first field in all parameter blocks used by APIs defined in ICAApplication.h. Type of parameter passed to a callback function used by APIs defined in ICAApplication.h. The parameter for the completion proc should to be casted to an appropriate type such as ICAGetChildCountPB* for it to be useful.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type ICAHeader struct {
+	data [10]byte
+}
+
+// AsErr returns the err field, read from the backing bytes at offset 0.
+func (u *ICAHeader) AsErr() int16 {
+	return *(*int16)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsRefcon returns the refcon field, read from the backing bytes at offset 2.
+func (u *ICAHeader) AsRefcon() uint {
+	return *(*uint)(unsafe.Pointer(&u.data[2]))
+}
+
+// This is the first field in all parameter blocks used by APIs defined in ICADevices.h. Type of parameter passed to a callback function used by APIs defined in ICADevices.h. The parameter for the completion proc should to be casted to an appropriate type such as ICD_NewObjectPB* for it to be useful.
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type ICDHeader struct {
+	data [10]byte
+}
+
+// AsErr returns the err field, read from the backing bytes at offset 0.
+func (u *ICDHeader) AsErr() int16 {
+	return *(*int16)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsRefcon returns the refcon field, read from the backing bytes at offset 2.
+func (u *ICDHeader) AsRefcon() uint {
+	return *(*uint)(unsafe.Pointer(&u.data[2]))
+}

@@ -610,11 +610,6 @@ type CAFAudioFormatListItem struct {
 	MChannelLayoutTag uint32
 }
 
-type CAFChunkHeader struct {
-	MChunkType uint32
-	MChunkSize int64
-}
-
 type CAFDataChunk struct {
 	MEditCount uint32
 	MData      [1]uint8
@@ -681,11 +676,6 @@ type CAFPeakChunk struct {
 	MPeaks     [1]CAFPositionPeak
 }
 
-type CAFPositionPeak struct {
-	MValue       float32
-	MFrameNumber uint64
-}
-
 type CAFRegion struct {
 	MRegionID      uint32
 	MFlags         CAFRegionFlags
@@ -697,11 +687,6 @@ type CAFRegionChunk struct {
 	MSMPTETimeType uint32
 	MNumberRegions uint32
 	MRegions       [1]CAFRegion
-}
-
-type CAFStringID struct {
-	MStringID              uint32
-	MStringStartByteOffset int64
 }
 
 type CAFStrings struct {
@@ -1035,3 +1020,54 @@ type MusicTrack struct{ obj.Object }
 // IsNil reports whether MusicTrack is a NULL handle (it wraps no object). Call
 // it before using a returned handle; a nil handle's methods panic.
 func (h MusicTrack) IsNil() bool { return h.Object == nil }
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CAFChunkHeader struct {
+	data [12]byte
+}
+
+// AsMChunkType returns the mChunkType field, read from the backing bytes at offset 0.
+func (u *CAFChunkHeader) AsMChunkType() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsMChunkSize returns the mChunkSize field, read from the backing bytes at offset 4.
+func (u *CAFChunkHeader) AsMChunkSize() int64 {
+	return *(*int64)(unsafe.Pointer(&u.data[4]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CAFPositionPeak struct {
+	data [12]byte
+}
+
+// AsMValue returns the mValue field, read from the backing bytes at offset 0.
+func (u *CAFPositionPeak) AsMValue() float32 {
+	return *(*float32)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsMFrameNumber returns the mFrameNumber field, read from the backing bytes at offset 4.
+func (u *CAFPositionPeak) AsMFrameNumber() uint64 {
+	return *(*uint64)(unsafe.Pointer(&u.data[4]))
+}
+
+// The C layout cannot be reproduced as a plain Go value struct, so it is held as
+// its exact-size bytes and read through the typed As* accessors below. It is
+// pointer-only: never pass it by value.
+type CAFStringID struct {
+	data [12]byte
+}
+
+// AsMStringID returns the mStringID field, read from the backing bytes at offset 0.
+func (u *CAFStringID) AsMStringID() uint32 {
+	return *(*uint32)(unsafe.Pointer(&u.data[0]))
+}
+
+// AsMStringStartByteOffset returns the mStringStartByteOffset field, read from the backing bytes at offset 4.
+func (u *CAFStringID) AsMStringStartByteOffset() int64 {
+	return *(*int64)(unsafe.Pointer(&u.data[4]))
+}

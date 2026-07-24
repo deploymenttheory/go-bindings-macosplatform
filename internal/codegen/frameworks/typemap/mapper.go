@@ -62,6 +62,15 @@ type Mapper struct {
 	// only needs the target type to EXIST, not to have all-clean fields, so it
 	// consults this set rather than EmittableStructs.
 	AllEmittedStructs map[string]bool
+	// ByteArrayStructs is the set of value-struct Go names the idiomatic layer
+	// emits as an aligned [N]byte backing array plus typed As<Field> accessor
+	// methods, rather than a clean typed struct — the second admission tier for
+	// layouts the clean path rejects (packed-misaligned, later unions) but whose
+	// exact size and field offsets are known. These are DELIBERATELY excluded from
+	// EmittableStructs: a [N]byte cannot be passed by value (float register
+	// classification is unrecoverable from bytes), so they stay pointer/accessor
+	// only. They ARE in AllEmittedStructs (pointer targets resolve normally).
+	ByteArrayStructs map[string]bool
 	// IdiomaticClassIndex maps an ObjC class name to the idiomatic package and
 	// wrapper type name that own it ("NSProgress" → {foundation, Progress}),
 	// computed once during idiomatic generation. It lets one idiomatic package
