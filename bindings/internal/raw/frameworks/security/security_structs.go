@@ -71,9 +71,11 @@ type CSSM_APPLE_TP_CRL_OPTIONS struct {
 	CrlStore *CssmDlDbHandle
 }
 
+// CSSM_APPLE_TP_NAME_OID is held as its exact 16-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type CSSM_APPLE_TP_NAME_OID struct {
-	String string
-	Oid    *CssmData
+	_    [0]uint64
+	data [16]byte
 }
 
 type CSSM_APPLE_TP_SMIME_OPTIONS struct {
@@ -128,15 +130,19 @@ type OpaqueSecTransformImplementation struct{}
 type SSLContext struct{}
 
 // A structure identifying an ASN.1 algorithm by its OID, and its corresponding parameters.
+// SecAsn1AlgId is held as its exact 32-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type SecAsn1AlgId struct {
-	Algorithm  CssmData
-	Parameters CssmData
+	_    [0]uint64
+	data [32]byte
 }
 
 // A structure containing a public key and its associated algorithm.
+// SecAsn1PubKeyInfo is held as its exact 48-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type SecAsn1PubKeyInfo struct {
-	Algorithm        SecAsn1AlgId
-	SubjectPublicKey CssmData
+	_    [0]uint64
+	data [48]byte
 }
 
 // A structure that defines one element of a BER or DER encoding.
@@ -228,13 +234,11 @@ type CEAuthorityInfoAccess struct {
 }
 
 // C struct: __CE_AuthorityKeyID
+// CEAuthorityKeyID is held as its exact 64-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type CEAuthorityKeyID struct {
-	KeyIdentifierPresent int32
-	KeyIdentifier        CssmData
-	GeneralNamesPresent  int32
-	GeneralNames         *CE_GeneralNames
-	SerialNumberPresent  int32
-	SerialNumber         CssmData
+	_    [0]uint64
+	data [64]byte
 }
 
 // C struct: __CE_BasicConstraints
@@ -324,9 +328,11 @@ type CEIssuingDistributionPoint struct {
 }
 
 // C struct: __CE_NameConstraints
+// CENameConstraints is held as its exact 16-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type CENameConstraints struct {
-	Permitted *CE_GeneralSubtrees
-	Excluded  *CE_GeneralSubtrees
+	_    [0]uint64
+	data [16]byte
 }
 
 // C struct: __CE_OtherName
@@ -382,9 +388,11 @@ type CEQCStatements struct {
 }
 
 // C struct: __CE_SemanticsInformation
+// CESemanticsInformation is held as its exact 16-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type CESemanticsInformation struct {
-	SemanticsIdentifier         *CssmData
-	NameRegistrationAuthorities *CE_GeneralNames
+	_    [0]uint64
+	data [16]byte
 }
 
 // @typedef SecACLRef @abstract Contains information about an access control list (ACL) entry.
@@ -507,12 +515,11 @@ type CssmAclEntryInput struct {
 }
 
 // C struct: cssm_acl_entry_prototype
+// CssmAclEntryPrototype is held as its exact 152-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type CssmAclEntryPrototype struct {
-	TypedSubject  CssmList
-	Delegate      int32
-	Authorization CssmAuthorizationgroup
-	TimeRange     CssmAclValidityPeriod
-	EntryTag      [68]int8
+	_    [0]uint64
+	data [152]byte
 }
 
 // C struct: cssm_acl_keychain_prompt_selector
@@ -536,14 +543,19 @@ type CssmAclProcessSubjectSelector struct {
 }
 
 // C struct: cssm_acl_validity_period
+// CssmAclValidityPeriod is held as its exact 32-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type CssmAclValidityPeriod struct {
-	StartDate CssmData
-	EndDate   CssmData
+	_    [0]uint64
+	data [32]byte
 }
 
 // C struct: cssm_applecspdl_db_change_password_parameters
+// CssmApplecspdlDbChangePasswordParameters is held as its exact 8-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type CssmApplecspdlDbChangePasswordParameters struct {
-	AccessCredentials *CssmAccessCredentials
+	_    [0]uint64
+	data [8]byte
 }
 
 // C struct: cssm_applecspdl_db_is_locked_parameters
@@ -567,9 +579,11 @@ type CssmAppledlOpenParameters struct {
 }
 
 // C struct: cssm_authorizationgroup
+// CssmAuthorizationgroup is held as its exact 16-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type CssmAuthorizationgroup struct {
-	NumberOfAuthTags uint32
-	AuthTags         *int32
+	_    [0]uint64
+	data [16]byte
 }
 
 // C struct: cssm_base_certs
@@ -665,9 +679,11 @@ type CssmCspOperationalStatistics struct {
 
 // Deprecated: SecAsn1 is not supported
 // C struct: cssm_data
+// CssmData is held as its exact 16-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type CssmData struct {
-	Length uint
-	Data   *uint8
+	_    [0]uint64
+	data [16]byte
 }
 
 // C struct: cssm_date
@@ -685,17 +701,19 @@ type CssmDbAttributeData struct {
 }
 
 // C struct: cssm_db_attribute_info
+// CssmDbAttributeInfo is held as its exact 32-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type CssmDbAttributeInfo struct {
-	AttributeNameFormat uint32
-	Label               unsafe.Pointer
-	AttributeFormat     uint32
+	_    [0]uint64
+	data [32]byte
 }
 
 // C struct: cssm_db_index_info
+// CssmDbIndexInfo is held as its exact 40-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type CssmDbIndexInfo struct {
-	IndexType           uint32
-	IndexedDataLocation uint32
-	Info                CssmDbAttributeInfo
+	_    [0]uint64
+	data [40]byte
 }
 
 // C struct: cssm_db_parsing_module_info
@@ -777,17 +795,19 @@ type CssmDlPkcs11Attributes struct {
 }
 
 // C struct: cssm_encoded_cert
+// CssmEncodedCert is held as its exact 24-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type CssmEncodedCert struct {
-	CertType     uint32
-	CertEncoding uint32
-	CertBlob     CssmData
+	_    [0]uint64
+	data [24]byte
 }
 
 // C struct: cssm_encoded_crl
+// CssmEncodedCrl is held as its exact 24-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type CssmEncodedCrl struct {
-	CrlType     uint32
-	CrlEncoding uint32
-	CrlBlob     CssmData
+	_    [0]uint64
+	data [24]byte
 }
 
 // C struct: cssm_evidence
@@ -859,10 +879,11 @@ type CssmKeyheader struct {
 }
 
 // C struct: cssm_kr_name
+// CssmKrName is held as its exact 16-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type CssmKrName struct {
-	Type   uint8
-	Length uint8
-	Name   string
+	_    [0]uint64
+	data [16]byte
 }
 
 // C struct: cssm_kr_policy_info
@@ -918,10 +939,11 @@ type CssmKrsubservice struct {
 }
 
 // C struct: cssm_list
+// CssmList is held as its exact 24-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type CssmList struct {
-	ListType uint32
-	Head     *CssmListElement
-	Tail     *CssmListElement
+	_    [0]uint64
+	data [24]byte
 }
 
 // C struct: cssm_list_element
@@ -942,13 +964,11 @@ type CssmManagerEventNotification struct {
 }
 
 // C struct: cssm_manager_registration_info
+// CssmManagerRegistrationInfo is held as its exact 48-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type CssmManagerRegistrationInfo struct {
-	Initialize              unsafe.Pointer
-	Terminate               unsafe.Pointer
-	RegisterDispatchTable   unsafe.Pointer
-	DeregisterDispatchTable unsafe.Pointer
-	EventNotifyManager      unsafe.Pointer
-	RefreshFunctionTable    unsafe.Pointer
+	_    [0]uint64
+	data [48]byte
 }
 
 // C struct: cssm_memory_funcs
@@ -1068,190 +1088,59 @@ type CssmSelectionPredicate struct {
 }
 
 // C struct: cssm_spi_ac_funcs
+// CssmSpiAcFuncs is held as its exact 16-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type CssmSpiAcFuncs struct {
-	AuthCompute unsafe.Pointer
-	PassThrough unsafe.Pointer
+	_    [0]uint64
+	data [16]byte
 }
 
 // C struct: cssm_spi_cl_funcs
+// CssmSpiClFuncs is held as its exact 312-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type CssmSpiClFuncs struct {
-	CertCreateTemplate           unsafe.Pointer
-	CertGetAllTemplateFields     unsafe.Pointer
-	CertSign                     unsafe.Pointer
-	CertVerify                   unsafe.Pointer
-	CertVerifyWithKey            unsafe.Pointer
-	CertGetFirstFieldValue       unsafe.Pointer
-	CertGetNextFieldValue        unsafe.Pointer
-	CertAbortQuery               unsafe.Pointer
-	CertGetKeyInfo               unsafe.Pointer
-	CertGetAllFields             unsafe.Pointer
-	FreeFields                   unsafe.Pointer
-	FreeFieldValue               unsafe.Pointer
-	CertCache                    unsafe.Pointer
-	CertGetFirstCachedFieldValue unsafe.Pointer
-	CertGetNextCachedFieldValue  unsafe.Pointer
-	CertAbortCache               unsafe.Pointer
-	CertGroupToSignedBundle      unsafe.Pointer
-	CertGroupFromVerifiedBundle  unsafe.Pointer
-	CertDescribeFormat           unsafe.Pointer
-	CrlCreateTemplate            unsafe.Pointer
-	CrlSetFields                 unsafe.Pointer
-	CrlAddCert                   unsafe.Pointer
-	CrlRemoveCert                unsafe.Pointer
-	CrlSign                      unsafe.Pointer
-	CrlVerify                    unsafe.Pointer
-	CrlVerifyWithKey             unsafe.Pointer
-	IsCertInCrl                  unsafe.Pointer
-	CrlGetFirstFieldValue        unsafe.Pointer
-	CrlGetNextFieldValue         unsafe.Pointer
-	CrlAbortQuery                unsafe.Pointer
-	CrlGetAllFields              unsafe.Pointer
-	CrlCache                     unsafe.Pointer
-	IsCertInCachedCrl            unsafe.Pointer
-	CrlGetFirstCachedFieldValue  unsafe.Pointer
-	CrlGetNextCachedFieldValue   unsafe.Pointer
-	CrlGetAllCachedRecordFields  unsafe.Pointer
-	CrlAbortCache                unsafe.Pointer
-	CrlDescribeFormat            unsafe.Pointer
-	PassThrough                  unsafe.Pointer
+	_    [0]uint64
+	data [312]byte
 }
 
 // C struct: cssm_spi_csp_funcs
+// CssmSpiCspFuncs is held as its exact 456-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type CssmSpiCspFuncs struct {
-	EventNotify                   unsafe.Pointer
-	QuerySize                     unsafe.Pointer
-	SignData                      unsafe.Pointer
-	SignDataInit                  unsafe.Pointer
-	SignDataUpdate                unsafe.Pointer
-	SignDataFinal                 unsafe.Pointer
-	VerifyData                    unsafe.Pointer
-	VerifyDataInit                unsafe.Pointer
-	VerifyDataUpdate              unsafe.Pointer
-	VerifyDataFinal               unsafe.Pointer
-	DigestData                    unsafe.Pointer
-	DigestDataInit                unsafe.Pointer
-	DigestDataUpdate              unsafe.Pointer
-	DigestDataClone               unsafe.Pointer
-	DigestDataFinal               unsafe.Pointer
-	GenerateMac                   unsafe.Pointer
-	GenerateMacInit               unsafe.Pointer
-	GenerateMacUpdate             unsafe.Pointer
-	GenerateMacFinal              unsafe.Pointer
-	VerifyMac                     unsafe.Pointer
-	VerifyMacInit                 unsafe.Pointer
-	VerifyMacUpdate               unsafe.Pointer
-	VerifyMacFinal                unsafe.Pointer
-	EncryptData                   unsafe.Pointer
-	EncryptDataInit               unsafe.Pointer
-	EncryptDataUpdate             unsafe.Pointer
-	EncryptDataFinal              unsafe.Pointer
-	DecryptData                   unsafe.Pointer
-	DecryptDataInit               unsafe.Pointer
-	DecryptDataUpdate             unsafe.Pointer
-	DecryptDataFinal              unsafe.Pointer
-	QueryKeySizeInBits            unsafe.Pointer
-	GenerateKey                   unsafe.Pointer
-	GenerateKeyPair               unsafe.Pointer
-	GenerateRandom                unsafe.Pointer
-	GenerateAlgorithmParams       unsafe.Pointer
-	WrapKey                       unsafe.Pointer
-	UnwrapKey                     unsafe.Pointer
-	DeriveKey                     unsafe.Pointer
-	FreeKey                       unsafe.Pointer
-	PassThrough                   unsafe.Pointer
-	Login                         unsafe.Pointer
-	Logout                        unsafe.Pointer
-	ChangeLoginAcl                unsafe.Pointer
-	ObtainPrivateKeyFromPublicKey unsafe.Pointer
-	RetrieveUniqueId              unsafe.Pointer
-	RetrieveCounter               unsafe.Pointer
-	VerifyDevice                  unsafe.Pointer
-	GetTimeValue                  unsafe.Pointer
-	GetOperationalStatistics      unsafe.Pointer
-	GetLoginAcl                   unsafe.Pointer
-	GetKeyAcl                     unsafe.Pointer
-	ChangeKeyAcl                  unsafe.Pointer
-	GetKeyOwner                   unsafe.Pointer
-	ChangeKeyOwner                unsafe.Pointer
-	GetLoginOwner                 unsafe.Pointer
-	ChangeLoginOwner              unsafe.Pointer
+	_    [0]uint64
+	data [456]byte
 }
 
 // C struct: cssm_spi_dl_funcs
+// CssmSpiDlFuncs is held as its exact 184-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type CssmSpiDlFuncs struct {
-	DbOpen                    unsafe.Pointer
-	DbClose                   unsafe.Pointer
-	DbCreate                  unsafe.Pointer
-	DbDelete                  unsafe.Pointer
-	CreateRelation            unsafe.Pointer
-	DestroyRelation           unsafe.Pointer
-	Authenticate              unsafe.Pointer
-	GetDbAcl                  unsafe.Pointer
-	ChangeDbAcl               unsafe.Pointer
-	GetDbOwner                unsafe.Pointer
-	ChangeDbOwner             unsafe.Pointer
-	GetDbNames                unsafe.Pointer
-	GetDbNameFromHandle       unsafe.Pointer
-	FreeNameList              unsafe.Pointer
-	DataInsert                unsafe.Pointer
-	DataDelete                unsafe.Pointer
-	DataModify                unsafe.Pointer
-	DataGetFirst              unsafe.Pointer
-	DataGetNext               unsafe.Pointer
-	DataAbortQuery            unsafe.Pointer
-	DataGetFromUniqueRecordId unsafe.Pointer
-	FreeUniqueRecord          unsafe.Pointer
-	PassThrough               unsafe.Pointer
+	_    [0]uint64
+	data [184]byte
 }
 
 // C struct: cssm_spi_kr_funcs
+// CssmSpiKrFuncs is held as its exact 72-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type CssmSpiKrFuncs struct {
-	RegistrationRequest    unsafe.Pointer
-	RegistrationRetrieve   unsafe.Pointer
-	GenerateRecoveryFields unsafe.Pointer
-	ProcessRecoveryFields  unsafe.Pointer
-	RecoveryRequest        unsafe.Pointer
-	RecoveryRetrieve       unsafe.Pointer
-	GetRecoveredObject     unsafe.Pointer
-	RecoveryRequestAbort   unsafe.Pointer
-	PassThrough            unsafe.Pointer
+	_    [0]uint64
+	data [72]byte
 }
 
 // C struct: cssm_spi_tp_funcs
+// CssmSpiTpFuncs is held as its exact 184-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type CssmSpiTpFuncs struct {
-	SubmitCredRequest         unsafe.Pointer
-	RetrieveCredResult        unsafe.Pointer
-	ConfirmCredResult         unsafe.Pointer
-	ReceiveConfirmation       unsafe.Pointer
-	CertReclaimKey            unsafe.Pointer
-	CertReclaimAbort          unsafe.Pointer
-	FormRequest               unsafe.Pointer
-	FormSubmit                unsafe.Pointer
-	CertGroupVerify           unsafe.Pointer
-	CertCreateTemplate        unsafe.Pointer
-	CertGetAllTemplateFields  unsafe.Pointer
-	CertSign                  unsafe.Pointer
-	CrlVerify                 unsafe.Pointer
-	CrlCreateTemplate         unsafe.Pointer
-	CertRevoke                unsafe.Pointer
-	CertRemoveFromCrlTemplate unsafe.Pointer
-	CrlSign                   unsafe.Pointer
-	ApplyCrlToDb              unsafe.Pointer
-	CertGroupConstruct        unsafe.Pointer
-	CertGroupPrune            unsafe.Pointer
-	CertGroupToTupleGroup     unsafe.Pointer
-	TupleGroupToCertGroup     unsafe.Pointer
-	PassThrough               unsafe.Pointer
+	_    [0]uint64
+	data [184]byte
 }
 
 // C struct: cssm_state_funcs
+// CssmStateFuncs is held as its exact 48-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type CssmStateFuncs struct {
-	Cssm_GetAttachFunctions        unsafe.Pointer
-	Cssm_ReleaseAttachFunctions    unsafe.Pointer
-	Cssm_GetAppMemoryFunctions     unsafe.Pointer
-	Cssm_IsFuncCallValid           unsafe.Pointer
-	Cssm_DeregisterManagerServices unsafe.Pointer
-	Cssm_DeliverModuleManagerEvent unsafe.Pointer
+	_    [0]uint64
+	data [48]byte
 }
 
 // C struct: cssm_subservice_uid
@@ -1388,10 +1277,11 @@ type CssmTpCrlissueOutput struct {
 }
 
 // C struct: cssm_tp_policyinfo
+// CssmTpPolicyinfo is held as its exact 24-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type CssmTpPolicyinfo struct {
-	NumberOfPolicyIds uint32
-	PolicyIds         *CssmField
-	PolicyControl     unsafe.Pointer
+	_    [0]uint64
+	data [24]byte
 }
 
 // C struct: cssm_tp_request_set
@@ -1452,21 +1342,27 @@ type CssmX509Extension struct {
 }
 
 // C struct: cssm_x509_extensionTagAndValue
+// CssmX509ExtensionTagAndValue is held as its exact 24-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type CssmX509ExtensionTagAndValue struct {
-	Type  uint8
-	Value CssmData
+	_    [0]uint64
+	data [24]byte
 }
 
 // C struct: cssm_x509_extensions
+// CssmX509Extensions is held as its exact 16-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type CssmX509Extensions struct {
-	NumberOfExtensions uint32
-	Extensions         *CssmX509Extension
+	_    [0]uint64
+	data [16]byte
 }
 
 // C struct: cssm_x509_name
+// CssmX509Name is held as its exact 16-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type CssmX509Name struct {
-	NumberOfRDNs              uint32
-	RelativeDistinguishedName *CssmX509Rdn
+	_    [0]uint64
+	data [16]byte
 }
 
 // C struct: cssm_x509_rdn
@@ -1507,34 +1403,27 @@ type CssmX509SignedCrl struct {
 }
 
 // C struct: cssm_x509_tbs_certificate
+// CssmX509TbsCertificate is held as its exact 240-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type CssmX509TbsCertificate struct {
-	Version                 CssmData
-	SerialNumber            CssmData
-	Signature               SecAsn1AlgId
-	Issuer                  CssmX509Name
-	Validity                X509Validity
-	Subject                 CssmX509Name
-	SubjectPublicKeyInfo    SecAsn1PubKeyInfo
-	IssuerUniqueIdentifier  CssmData
-	SubjectUniqueIdentifier CssmData
-	Extensions              CssmX509Extensions
+	_    [0]uint64
+	data [240]byte
 }
 
 // C struct: cssm_x509_tbs_certlist
+// CssmX509TbsCertlist is held as its exact 136-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type CssmX509TbsCertlist struct {
-	Version             CssmData
-	Signature           SecAsn1AlgId
-	Issuer              CssmX509Name
-	ThisUpdate          CssmX509Time
-	NextUpdate          CssmX509Time
-	RevokedCertificates *CssmX509RevokedCertList
-	Extensions          CssmX509Extensions
+	_    [0]uint64
+	data [136]byte
 }
 
 // C struct: cssm_x509_time
+// CssmX509Time is held as its exact 24-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type CssmX509Time struct {
-	TimeType uint8
-	Time     CssmData
+	_    [0]uint64
+	data [24]byte
 }
 
 // C struct: cssm_x509_type_value_pair
@@ -1576,28 +1465,19 @@ type CssmX509extPolicyQualifiers struct {
 }
 
 // C struct: mds_funcs
+// MdsFuncs is held as its exact 120-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type MdsFuncs struct {
-	DbOpen                    unsafe.Pointer
-	DbClose                   unsafe.Pointer
-	GetDbNames                unsafe.Pointer
-	GetDbNameFromHandle       unsafe.Pointer
-	FreeNameList              unsafe.Pointer
-	DataInsert                unsafe.Pointer
-	DataDelete                unsafe.Pointer
-	DataModify                unsafe.Pointer
-	DataGetFirst              unsafe.Pointer
-	DataGetNext               unsafe.Pointer
-	DataAbortQuery            unsafe.Pointer
-	DataGetFromUniqueRecordId unsafe.Pointer
-	FreeUniqueRecord          unsafe.Pointer
-	CreateRelation            unsafe.Pointer
-	DestroyRelation           unsafe.Pointer
+	_    [0]uint64
+	data [120]byte
 }
 
 // C struct: x509_validity
+// X509Validity is held as its exact 48-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type X509Validity struct {
-	NotBefore CssmX509Time
-	NotAfter  CssmX509Time
+	_    [0]uint64
+	data [48]byte
 }
 
 // CE_AccessDescription is an alias for __CE_AccessDescription (C typedef CE_AccessDescription).

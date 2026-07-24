@@ -52,20 +52,11 @@ type MIDIControlTransform struct {
 }
 
 // The interface to a MIDI driver.
+// MIDIDriverInterface is held as its exact 112-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type MIDIDriverInterface struct {
-	QueryInterface unsafe.Pointer
-	AddRef         unsafe.Pointer
-	Release        unsafe.Pointer
-	FindDevices    unsafe.Pointer
-	Start          unsafe.Pointer
-	Stop           unsafe.Pointer
-	Configure      unsafe.Pointer
-	Send           unsafe.Pointer
-	EnableSource   unsafe.Pointer
-	Flush          unsafe.Pointer
-	Monitor        unsafe.Pointer
-	SendPackets    unsafe.Pointer
-	MonitorEvents  unsafe.Pointer
+	_    [0]uint64
+	data [112]byte
 }
 
 // A variable-length list of MIDI event packets.
@@ -76,10 +67,11 @@ type MIDIEventList struct {
 }
 
 // A series of simultaneous MIDI events in Universal MIDI Packets (UMP) format.
+// MIDIEventPacket is held as its exact 268-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type MIDIEventPacket struct {
-	TimeStamp uint64
-	WordCount uint32
-	Words     [64]uint32
+	_    [0]uint32
+	data [268]byte
 }
 
 // A general I/O error notification.
@@ -137,10 +129,11 @@ type MIDIObjectPropertyChangeNotification struct {
 }
 
 // A collection of simultaneous MIDI events.
+// MIDIPacket is held as its exact 268-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type MIDIPacket struct {
-	TimeStamp uint64
-	Length    uint16
-	Data      [256]uint8
+	_    [0]uint32
+	data [268]byte
 }
 
 // A list of MIDI events the system sends to or receives from an endpoint.

@@ -143,15 +143,11 @@ type TW_GRAYRESPONSE struct {
 	Response [1]TW_ELEMENT8
 }
 
+// TW_IDENTITY is held as its exact 168-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type TW_IDENTITY struct {
-	Id              string
-	Version         TW_VERSION
-	ProtocolMajor   uint16
-	ProtocolMinor   uint16
-	SupportedGroups uint32
-	Manufacturer    [34]uint8
-	ProductFamily   [34]uint8
-	ProductName     [34]uint8
+	_    [0]uint64
+	data [168]byte
 }
 
 type TW_IMAGEINFO struct {
@@ -205,10 +201,11 @@ type TW_JPEGCOMPRESSION struct {
 	HuffmanAC        [2]TW_MEMORY
 }
 
+// TW_MEMORY is held as its exact 16-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type TW_MEMORY struct {
-	Flags  uint32
-	Length uint32
-	TheMem string
+	_    [0]uint64
+	data [16]byte
 }
 
 type TW_ONEVALUE struct {

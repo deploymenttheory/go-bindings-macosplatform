@@ -108,6 +108,9 @@ type MPSAxisAlignedBoundingBox struct {
 }
 
 // C struct: _MPSPackedFloat3
+// MPSPackedFloat3 is held as its exact 12-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type MPSPackedFloat3 struct {
-	Field0 unsafe.Pointer
+	_    [0]uint32
+	data [12]byte
 }

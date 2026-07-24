@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	idiofw "github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/layouttest"
 	rawfw "github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emitmanifest"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
@@ -94,6 +95,11 @@ func generateFramework(m *meta.FrameworkMeta, outBase string, cfg BindingsConfig
 	// library-owned type (unreferenceable across the purego/cgo boundary) to
 	// unsafe.Pointer exactly as the idiomatic pipeline does.
 	mapper := buildMapper(reg)
+	// Same struct classification the idiomatic pipeline uses, so the raw emitter
+	// gives a union / packed-misaligned / pointer-only struct its exact-size [N]byte
+	// backing (ABI-faithful) instead of a wrong-sized degraded field list.
+	mapper.EmittableStructs = idiofw.ComputeEmittableStructs(reg.Frameworks, mapper)
+	mapper.ByteArrayStructs = idiofw.ComputeByteArrayStructs(reg.Frameworks, mapper)
 
 	snap := &rawfw.RegistrySnapshot{
 		OwnerIndex:         reg.OwnerIndex,
@@ -265,7 +271,7 @@ func writeStructsFile(
 		return nil
 	}
 	var body bytes.Buffer
-	structImports, err := rawfw.EmitStructs(&body, m, mapper, rec)
+	structImports, layoutChecks, err := rawfw.EmitStructs(&body, m, mapper, rec)
 	if err != nil {
 		return fmt.Errorf("emit structs for %s: %w", m.Framework, err)
 	}
@@ -280,7 +286,13 @@ func writeStructsFile(
 	var buf bytes.Buffer
 	writeFileHeaderRaw(&buf, packageName, structImports)
 	buf.Write(body.Bytes())
-	return writeGoFile(outDir, packageName+"_structs.go", buf.Bytes())
+	if err := writeGoFile(outDir, packageName+"_structs.go", buf.Bytes()); err != nil {
+		return err
+	}
+	// The ABI layout gate: assert each emitted struct's real Go size matches the
+	// authoritative C size (raw must be ABI-faithful — this catches a byte-array
+	// or degraded struct emitted at the wrong size).
+	return layouttest.Write(outDir, packageName, layoutChecks)
 }
 
 // writeProtocolsFile emits <packageName>_protocols.go (ObjC frameworks only).

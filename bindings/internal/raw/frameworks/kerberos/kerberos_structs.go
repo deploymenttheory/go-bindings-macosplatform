@@ -217,9 +217,11 @@ type Krb5GetInitCredsOpt struct {
 
 // Deprecated: Use GSS.framework
 // C struct: _krb5_gic_opt_pa_data
+// Krb5GicOptPaData is held as its exact 16-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type Krb5GicOptPaData struct {
-	Attr  string
-	Value string
+	_    [0]uint64
+	data [16]byte
 }
 
 // C struct: _krb5_kdc_rep
@@ -288,10 +290,11 @@ type Krb5PaData struct {
 }
 
 // C struct: _krb5_prompt
+// Krb5Prompt is held as its exact 24-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type Krb5Prompt struct {
-	Prompt string
-	Hidden int32
-	Reply  *Krb5Data
+	_    [0]uint64
+	data [24]byte
 }
 
 // C struct: _krb5_pwd_data
@@ -367,100 +370,88 @@ type AppleGssKrb5AuthdataIfRelevantKey struct {
 }
 
 // C struct: cc_ccache_d
+// CcCcacheD is held as its exact 16-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type CcCcacheD struct {
-	Functions        *CcCcacheF
-	Vector_functions *CcCcacheF
+	_    [0]uint64
+	data [16]byte
 }
 
 // Function pointer table for cc_ccache_t.  For more information see \ref cc_ccache_reference.
 // C struct: cc_ccache_f
+// CcCcacheF is held as its exact 160-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type CcCcacheF struct {
-	Release                  unsafe.Pointer
-	Destroy                  unsafe.Pointer
-	Set_default              unsafe.Pointer
-	Get_credentials_version  unsafe.Pointer
-	Get_name                 unsafe.Pointer
-	Get_principal            unsafe.Pointer
-	Set_principal            unsafe.Pointer
-	Store_credentials        unsafe.Pointer
-	Remove_credentials       unsafe.Pointer
-	New_credentials_iterator unsafe.Pointer
-	Move                     unsafe.Pointer
-	Lock                     unsafe.Pointer
-	Unlock                   unsafe.Pointer
-	Get_last_default_time    unsafe.Pointer
-	Get_change_time          unsafe.Pointer
-	Compare                  unsafe.Pointer
-	Get_kdc_time_offset      unsafe.Pointer
-	Set_kdc_time_offset      unsafe.Pointer
-	Clear_kdc_time_offset    unsafe.Pointer
-	Wait_for_change          unsafe.Pointer
+	_    [0]uint64
+	data [160]byte
 }
 
 // C struct: cc_ccache_iterator_d
+// CcCcacheIteratorD is held as its exact 16-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type CcCcacheIteratorD struct {
-	Functions        *CcCcacheIteratorF
-	Vector_functions *CcCcacheIteratorF
+	_    [0]uint64
+	data [16]byte
 }
 
 // Function pointer table for cc_ccache_iterator_t.  For more information see \ref cc_ccache_iterator_reference.
 // C struct: cc_ccache_iterator_f
+// CcCcacheIteratorF is held as its exact 24-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type CcCcacheIteratorF struct {
-	Release unsafe.Pointer
-	Next    unsafe.Pointer
-	Clone   unsafe.Pointer
+	_    [0]uint64
+	data [24]byte
 }
 
 // C struct: cc_context_d
+// CcContextD is held as its exact 16-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type CcContextD struct {
-	Functions        *CcContextF
-	Vector_functions *CcContextF
+	_    [0]uint64
+	data [16]byte
 }
 
 // Function pointer table for cc_context_t.  For more information see \ref cc_context_reference.
 // C struct: cc_context_f
+// CcContextF is held as its exact 104-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type CcContextF struct {
-	Release                 unsafe.Pointer
-	Get_change_time         unsafe.Pointer
-	Get_default_ccache_name unsafe.Pointer
-	Open_ccache             unsafe.Pointer
-	Open_default_ccache     unsafe.Pointer
-	Create_ccache           unsafe.Pointer
-	Create_default_ccache   unsafe.Pointer
-	Create_new_ccache       unsafe.Pointer
-	New_ccache_iterator     unsafe.Pointer
-	Lock                    unsafe.Pointer
-	Unlock                  unsafe.Pointer
-	Compare                 unsafe.Pointer
-	Wait_for_change         unsafe.Pointer
+	_    [0]uint64
+	data [104]byte
 }
 
 // C struct: cc_credentials_d
+// CcCredentialsD is held as its exact 24-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type CcCredentialsD struct {
-	Data           *CcCredentialsUnion
-	Functions      *CcCredentialsF
-	OtherFunctions *CcCredentialsF
+	_    [0]uint64
+	data [24]byte
 }
 
 // Function pointer table for cc_credentials_t.  For more information see \ref cc_credentials_reference.
 // C struct: cc_credentials_f
+// CcCredentialsF is held as its exact 16-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type CcCredentialsF struct {
-	Release unsafe.Pointer
-	Compare unsafe.Pointer
+	_    [0]uint64
+	data [16]byte
 }
 
 // C struct: cc_credentials_iterator_d
+// CcCredentialsIteratorD is held as its exact 16-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type CcCredentialsIteratorD struct {
-	Functions        *CcCredentialsIteratorF
-	Vector_functions *CcCredentialsIteratorF
+	_    [0]uint64
+	data [16]byte
 }
 
 // Function pointer table for cc_credentials_iterator_t.  For more information see \ref cc_credentials_iterator_reference.
 // C struct: cc_credentials_iterator_f
+// CcCredentialsIteratorF is held as its exact 24-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type CcCredentialsIteratorF struct {
-	Release unsafe.Pointer
-	Next    unsafe.Pointer
-	Clone   unsafe.Pointer
+	_    [0]uint64
+	data [24]byte
 }
 
 // C struct: cc_credentials_union
@@ -515,16 +506,20 @@ type CcData struct {
 }
 
 // C struct: cc_string_d
+// CcStringD is held as its exact 24-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type CcStringD struct {
-	Data             string
-	Functions        *CcStringF
-	Vector_functions *CcStringF
+	_    [0]uint64
+	data [24]byte
 }
 
 // Function pointer table for cc_string_t.  For more information see \ref cc_string_reference.
 // C struct: cc_string_f
+// CcStringF is held as its exact 8-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type CcStringF struct {
-	Release unsafe.Pointer
+	_    [0]uint64
+	data [8]byte
 }
 
 // Deprecated: Use GSS.framework
@@ -540,9 +535,11 @@ type ErrorTable struct {
 }
 
 // C struct: gss_OID_desc_struct
+// GssOIDDescStruct is held as its exact 16-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type GssOIDDescStruct struct {
-	Length   uint32
-	Elements unsafe.Pointer
+	_    [0]uint64
+	data [16]byte
 }
 
 // C struct: gss_OID_set_desc_struct

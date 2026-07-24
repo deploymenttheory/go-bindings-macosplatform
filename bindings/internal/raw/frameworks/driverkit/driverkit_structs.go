@@ -136,11 +136,11 @@ type IORPC struct {
 	ReplySize uint32
 }
 
+// IORPCMessage is held as its exact 24-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type IORPCMessage struct {
-	Msgid      uint64
-	Flags      uint64
-	ObjectRefs uint64
-	Objects    [0]uint64
+	_    [0]uint32
+	data [24]byte
 }
 
 type IORPCMessageErrorReturn struct {
@@ -154,10 +154,11 @@ type IORPCMessageErrorReturnContent struct {
 	Pad    uint32
 }
 
+// IORPCMessageMach is held as its exact 28-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type IORPCMessageMach struct {
-	Msgh      unsafe.Pointer
-	Msgh_body unsafe.Pointer
-	Objects   [0]unsafe.Pointer
+	_    [0]uint32
+	data [28]byte
 }
 
 // IORWLock is an opaque type.
@@ -466,15 +467,19 @@ type IOMemoryMapPrivateState struct {
 }
 
 // C struct: __OSStringStatic
+// OSStringStatic is held as its exact 16-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type OSStringStatic struct {
-	CString  string
-	OsString *int32
+	_    [0]uint64
+	data [16]byte
 }
 
 // C struct: queue_entry
+// QueueEntry is held as its exact 16-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type QueueEntry struct {
-	Next *QueueEntry
-	Prev *QueueEntry
+	_    [0]uint64
+	data [16]byte
 }
 
 // QueueChainT is an alias for queue_entry (C typedef queue_chain_t).

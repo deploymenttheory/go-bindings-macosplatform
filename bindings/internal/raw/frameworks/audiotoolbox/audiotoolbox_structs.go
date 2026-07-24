@@ -169,11 +169,11 @@ type AURenderEvent struct {
 }
 
 // The common header for a render event.
+// AURenderEventHeader is held as its exact 20-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type AURenderEventHeader struct {
-	Next            unsafe.Pointer
-	EventSampleTime int64
-	EventType       AURenderEventType
-	Reserved        uint8
+	_    [0]uint32
+	data [20]byte
 }
 
 type AUSamplerBankPresetData struct {
@@ -236,11 +236,11 @@ type AudioComponentDescription struct {
 }
 
 // @struct         AudioComponentPlugInInterface @discussion     A structure used to represent an audio plugin's routines @var            Open the function used to open (or create) an audio plugin instance @var            Close the function used to close (or dispose) an audio plugin instance @var            Lookup this is used to return a function pointer for a given selector, or NULL if that selector is not implemented @var            reserved must be NULL
+// AudioComponentPlugInInterface is held as its exact 32-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type AudioComponentPlugInInterface struct {
-	Open     unsafe.Pointer
-	Close    unsafe.Pointer
-	Lookup   unsafe.Pointer
-	Reserved unsafe.Pointer
+	_    [0]uint64
+	data [32]byte
 }
 
 // Specifies priming information for an audio converter.
@@ -282,21 +282,19 @@ type AudioFileFDFTableExtended struct {
 }
 
 // Annotates a position in an audio file.
+// AudioFileMarker is held as its exact 40-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type AudioFileMarker struct {
-	MFramePosition float64
-	MName          unsafe.Pointer
-	MMarkerID      int32
-	MSMPTETime     AudioFile_SMPTE_Time
-	MType          uint32
-	MReserved      uint16
-	MChannel       uint16
+	_    [0]uint64
+	data [40]byte
 }
 
 // A list of markers associated with an audio file, including their SMPTE time type, the number of markers, and the markers themselves.
+// AudioFileMarkerList is held as its exact 48-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type AudioFileMarkerList struct {
-	MSMPTE_TimeType uint32
-	MNumberMarkers  uint32
-	MMarkers        [1]AudioFileMarker
+	_    [0]uint64
+	data [48]byte
 }
 
 // Contains information about the number of valid frames in a file and where they begin and end.
@@ -307,12 +305,11 @@ type AudioFilePacketTableInfo struct {
 }
 
 // An audio file region specifies a segment of audio data.
+// AudioFileRegion is held as its exact 64-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type AudioFileRegion struct {
-	MRegionID      uint32
-	MName          unsafe.Pointer
-	MFlags         AudioFileRegionFlags
-	MNumberMarkers uint32
-	MMarkers       [1]AudioFileMarker
+	_    [0]uint64
+	data [64]byte
 }
 
 // A list of the audio file regions in a file.
@@ -358,10 +355,11 @@ type AudioIndependentPacketTranslation struct {
 }
 
 // @struct AudioOutputUnitMIDICallbacks @abstract For inter-app audio, callbacks for receiving MIDI messages. @discussion The supplied callback functions are called from the realtime rendering thread, before each render cycle, to provide any incoming MIDI messages.
+// AudioOutputUnitMIDICallbacks is held as its exact 24-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type AudioOutputUnitMIDICallbacks struct {
-	UserData      unsafe.Pointer
-	MIDIEventProc unsafe.Pointer
-	MIDISysExProc unsafe.Pointer
+	_    [0]uint64
+	data [24]byte
 }
 
 // A timestamp for scheduled starting of an I/O audio unit.
@@ -483,17 +481,19 @@ type AudioUnitNodeConnection struct {
 }
 
 // @struct			AudioUnitOtherPluginDesc @var			format One of the OtherPluginFormat values @var			plugin struct AudioClassDescription { OSType mType; OSType mSubType; OSType mManufacturer; }; is defined in <CoreAudioTypes/CoreAudioTypes.h> mType specifies a generic, plug-in format defined descriptor mSubType is usually left to the manufacturer to use at their discretion mManufacturer is a registered code to identify all plugins from the same manufacturer
+// AudioUnitOtherPluginDesc is held as its exact 16-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type AudioUnitOtherPluginDesc struct {
-	Format uint32
-	Plugin coreaudiotypes.AudioClassDescription
+	_    [0]uint32
+	data [16]byte
 }
 
 // An adjustable audio unit attribute such as volume, pitch, or filter cutoff frequency.
+// AudioUnitParameter is held as its exact 24-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type AudioUnitParameter struct {
-	MAudioUnit   *carboncore.ComponentInstanceRecord
-	MParameterID uint32
-	MScope       uint32
-	MElement     uint32
+	_    [0]uint64
+	data [24]byte
 }
 
 // A scheduled change to an audio unit parameter’s value.
@@ -608,14 +608,10 @@ type CAClockTime struct {
 	Time     unsafe.Pointer
 }
 
+// CAFAudioDescription is held as its exact 32-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type CAFAudioDescription struct {
-	MSampleRate       float64
-	MFormatID         uint32
-	MFormatFlags      CAFFormatFlags
-	MBytesPerPacket   uint32
-	MFramesPerPacket  uint32
-	MChannelsPerFrame uint32
-	MBitsPerChannel   uint32
+	data [32]byte
 }
 
 type CAFAudioFormatListItem struct {
@@ -623,9 +619,10 @@ type CAFAudioFormatListItem struct {
 	MChannelLayoutTag uint32
 }
 
+// CAFChunkHeader is held as its exact 12-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type CAFChunkHeader struct {
-	MChunkType uint32
-	MChunkSize int64
+	data [12]byte
 }
 
 type CAFDataChunk struct {
@@ -656,12 +653,10 @@ type CAFInstrumentChunk struct {
 	MInstrumentID     uint32
 }
 
+// CAFMarker is held as its exact 28-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type CAFMarker struct {
-	MType          uint32
-	MFramePosition float64
-	MMarkerID      uint32
-	MSMPTETime     CAF_SMPTE_Time
-	MChannel       uint32
+	data [28]byte
 }
 
 type CAFMarkerChunk struct {
@@ -694,16 +689,16 @@ type CAFPeakChunk struct {
 	MPeaks     [1]CAFPositionPeak
 }
 
+// CAFPositionPeak is held as its exact 12-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type CAFPositionPeak struct {
-	MValue       float32
-	MFrameNumber uint64
+	data [12]byte
 }
 
+// CAFRegion is held as its exact 40-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type CAFRegion struct {
-	MRegionID      uint32
-	MFlags         CAFRegionFlags
-	MNumberMarkers uint32
-	MMarkers       [1]CAFMarker
+	data [40]byte
 }
 
 type CAFRegionChunk struct {
@@ -712,9 +707,10 @@ type CAFRegionChunk struct {
 	MRegions        [1]CAFRegion
 }
 
+// CAFStringID is held as its exact 12-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type CAFStringID struct {
-	MStringID              uint32
-	MStringStartByteOffset int64
+	data [12]byte
 }
 
 type CAFStrings struct {

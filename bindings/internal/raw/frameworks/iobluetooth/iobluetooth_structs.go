@@ -650,9 +650,11 @@ type IOBluetoothDeviceSearchDeviceAttributes struct {
 	DeviceClassMinor  uint32
 }
 
+// IOBluetoothL2CAPChannelDataBlock is held as its exact 16-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type IOBluetoothL2CAPChannelDataBlock struct {
-	DataPtr  unsafe.Pointer
-	DataSize uint
+	_    [0]uint64
+	data [16]byte
 }
 
 type IOBluetoothL2CAPChannelEvent struct {
@@ -684,13 +686,11 @@ type OBEXConnectCommandData struct {
 }
 
 // Part of the OBEXSessionEvent structure.
+// OBEXConnectCommandResponseData is held as its exact 32-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type OBEXConnectCommandResponseData struct {
-	ServerResponseOpCode uint8
-	HeaderDataPtr        unsafe.Pointer
-	HeaderDataLength     uint
-	MaxPacketSize        uint16
-	Version              uint8
-	Flags                uint8
+	_    [0]uint64
+	data [32]byte
 }
 
 // Part of the OBEXSessionEvent structure.

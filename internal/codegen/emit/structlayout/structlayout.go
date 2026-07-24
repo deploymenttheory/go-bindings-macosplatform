@@ -13,36 +13,27 @@ import (
 	"strings"
 )
 
-// Accessor is one typed view into a byte-array struct's backing bytes: reading a
-// value of GoType at byte Offset. Emitters render it as an `As<Name>() GoType`
-// method that reinterprets the backing array via unsafe. It exists for layouts
-// the clean value-struct path rejects (packed-misaligned, unions) but whose exact
-// size and field offsets are known.
-type Accessor struct {
-	// Name is the source field name (before Go-identifier normalisation).
-	Name string
-	// Offset is the field's byte offset within the backing array.
-	Offset int
-	// GoType is the Go type read at Offset.
-	GoType string
-}
-
-// AccessorPlan pairs each named field with its byte offset and Go type, skipping
-// anonymous and underscore-prefixed members (padding, bitfields, reserved) that
-// carry no public accessor. fieldNames, offsets, and goTypes are parallel; a
-// short slice yields no plan (defensive — the caller passes equal-length inputs).
-func AccessorPlan(fieldNames []string, offsets []int, goTypes []string) []Accessor {
-	if len(fieldNames) != len(offsets) || len(fieldNames) != len(goTypes) {
-		return nil
+// AlignElem returns the Go type of a leading `_ [0]<elem>` field that forces a
+// byte-array backing struct's alignment to the C alignment, or "" when none is
+// needed. A packed struct is C-aligned to 1 (a plain [N]byte already matches).
+// Go has no scalar wider than 8-byte alignment, so a 16-byte-aligned C type (rare
+// SIMD) is aligned to 8 — the authoritative size is always a multiple of the C
+// alignment, so a Go struct rounded up to <=8 never changes the size. Both the
+// frameworks idiomatic and raw emitters share this.
+func AlignElem(align int, packed bool) string {
+	if packed {
+		return ""
 	}
-	out := make([]Accessor, 0, len(fieldNames))
-	for i, name := range fieldNames {
-		if name == "" || strings.HasPrefix(name, "_") {
-			continue
-		}
-		out = append(out, Accessor{Name: name, Offset: offsets[i], GoType: goTypes[i]})
+	switch {
+	case align >= 8:
+		return "uint64"
+	case align == 4:
+		return "uint32"
+	case align == 2:
+		return "uint16"
+	default:
+		return ""
 	}
-	return out
 }
 
 // Primitives is the set of Go primitive types a value-struct field may use

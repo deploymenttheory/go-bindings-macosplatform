@@ -8,10 +8,11 @@ import (
 )
 
 // A structure that holds a buffer of audio data.
+// AudioBuffer is held as its exact 16-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type AudioBuffer struct {
-	MNumberChannels uint32
-	MDataByteSize   uint32
-	MData           unsafe.Pointer
+	_    [0]uint64
+	data [16]byte
 }
 
 // A structure that stores a variable-length array of audio buffers.

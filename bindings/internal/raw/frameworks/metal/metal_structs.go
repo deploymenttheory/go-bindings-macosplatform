@@ -3,12 +3,6 @@
 
 package metal
 
-import (
-	"unsafe"
-
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/foundation"
-)
-
 // @brief A struct representing a range of a Metal buffer. The offset into the buffer is included in the address. The length is generally optional, which a value of (uint64_t)-1 representing the range from the given address to the end of the buffer. However, providing the length can enable more accurate API validation, especially when sub-allocating ranges of a buffer.
 type MTL4BufferRange struct {
 	BufferAddress uint64
@@ -16,9 +10,11 @@ type MTL4BufferRange struct {
 }
 
 // Groups together arguments for an operation to copy a sparse buffer mapping.
+// MTL4CopySparseBufferMappingOperation is held as its exact 24-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type MTL4CopySparseBufferMappingOperation struct {
-	SourceRange       foundation.NSRange
-	DestinationOffset uint
+	_    [0]uint64
+	data [24]byte
 }
 
 // Groups together arguments for an operation to copy a sparse texture mapping.
@@ -37,10 +33,11 @@ type MTL4TimestampHeapEntry struct {
 }
 
 // Groups together arguments for an operation to update a sparse buffer mapping.
+// MTL4UpdateSparseBufferMappingOperation is held as its exact 32-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type MTL4UpdateSparseBufferMappingOperation struct {
-	Mode        MTLSparseTextureMappingMode
-	BufferRange foundation.NSRange
-	HeapOffset  uint
+	_    [0]uint64
+	data [32]byte
 }
 
 // Groups together arguments for an operation to update a sparse texture mapping.
@@ -323,11 +320,17 @@ type MTLAxisAlignedBoundingBox struct {
 }
 
 // C struct: _MTLPackedFloat3
+// MTLPackedFloat3 is held as its exact 12-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type MTLPackedFloat3 struct {
-	Field0 unsafe.Pointer
+	_    [0]uint32
+	data [12]byte
 }
 
 // C struct: _MTLPackedFloat4x3
+// MTLPackedFloat4x3 is held as its exact 48-byte C ABI layout (a union / packed /
+// variable layout not expressible as typed Go fields).
 type MTLPackedFloat4x3 struct {
-	Columns [4]MTLPackedFloat3
+	_    [0]uint32
+	data [48]byte
 }
