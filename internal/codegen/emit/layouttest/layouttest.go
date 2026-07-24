@@ -2,6 +2,10 @@
 // frameworks emitters (raw and idiomatic) write: a reflect-based check that every
 // emitted value/byte-array struct reproduces the authoritative C ABI size clang
 // reported. It is the layout gate the name-keyed parity check cannot provide.
+//
+// SCOPE — shared: used by both the frameworks raw and idiomatic emitters (and
+// available to the libraries pipeline). It is emitter-agnostic — callers supply
+// the resolved Check list.
 package layouttest
 
 import (

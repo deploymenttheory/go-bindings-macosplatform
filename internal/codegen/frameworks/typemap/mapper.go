@@ -1,6 +1,19 @@
 // Package typemap resolves ObjC qualType strings to Go type strings for the
-// purego code generator. Unlike the CGo generator there is no CType() mapping —
-// all types are expressed purely in Go using purego/objc primitives.
+// FRAMEWORKS pipeline (purego/ObjC) only. Unlike the libraries (CGo) generator
+// there is no CType() mapping — all types are expressed purely in Go using
+// purego/objc primitives.
+//
+// SCOPE — pipeline-specific by design. This package is deliberately NOT shared
+// with its libraries counterpart, internal/codegen/libraries/typemap: the
+// purego/cgo split is a non-negotiable of the architecture, and the two mappers
+// diverge in BEHAVIOUR, not merely in structure. Same-named helpers on the two
+// sides (IsCoreFoundationOpaqueRef, normalise, splitCSV, the block/fn-ptr parser,
+// the primitive tables) have different implementations and different outputs and
+// MUST NOT be unified — doing so would change generated code in at least one
+// pipeline. Logic that is genuinely identical across both pipelines lives in the
+// shared packages instead: internal/codegen/emit/structlayout (ABI/layout),
+// internal/codegen/naming/core (naming), internal/codegen/pipeline/structindex
+// (struct ownership), internal/codegen/shared/fileasm (file assembly).
 package typemap
 
 import (
@@ -942,6 +955,11 @@ func (m *Mapper) IsEnumType(goType string) bool {
 
 // IsCoreFoundationOpaqueRef reports whether a typedef name looks like a
 // CoreFoundation opaque reference (e.g. CFStringRef, CGColorRef).
+//
+// Pipeline-specific: the libraries typemap has a same-named function with a
+// DIFFERENT implementation (a fixed cfTypedefSet lookup, not this CF/CG-suffix
+// pattern) and different results. They are not interchangeable — see the package
+// doc's SCOPE note.
 func IsCoreFoundationOpaqueRef(name string) bool {
 	// CoreFoundation opaque refs end in Ref and start with CF.
 	if strings.HasPrefix(name, "CF") && strings.HasSuffix(name, "Ref") {

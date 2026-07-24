@@ -9,6 +9,9 @@
 // raw purego files, the CGo library files, and the idiomatic files use
 // different header strings and import groupings) while still flowing through one
 // template. gofmt canonicalises whitespace afterwards, so only tokens matter.
+//
+// SCOPE — shared: used by every emitter (raw and idiomatic, frameworks and
+// libraries) so file scaffolding is produced one way, in one place.
 package fileasm
 
 import (

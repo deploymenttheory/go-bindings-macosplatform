@@ -9,6 +9,9 @@
 // lowercases the first letter) and each pipeline's goReservedWords set — stay in
 // the pipeline packages. Bridge-symbol helpers (libraries) and selector/class
 // var-name helpers (frameworks) also stay pipeline-local.
+//
+// SCOPE — shared: only behavior-identical naming helpers. Pipeline-specific
+// naming stays in internal/codegen/frameworks/naming and libraries/naming.
 package core
 
 import (

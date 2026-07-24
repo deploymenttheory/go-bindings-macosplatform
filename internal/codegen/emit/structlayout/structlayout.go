@@ -6,6 +6,9 @@
 // dependency on the frameworks (purego) or libraries (cgo) metadata models or
 // type mappers — so both pipelines can share them. Struct emission itself stays
 // pipeline-specific; only the ABI/layout reasoning lives here.
+//
+// SCOPE — shared: used by both the frameworks (purego) and libraries (cgo)
+// pipelines. Keep it dependency-free of either pipeline's mapper/metadata.
 package structlayout
 
 import (
