@@ -1,0 +1,3092 @@
+[
+ {
+  "framework": "AVFAudio",
+  "kind": "function",
+  "name": "AVAudioMake3DAngularOrientation"
+ },
+ {
+  "framework": "AVFAudio",
+  "kind": "function",
+  "name": "AVAudioMake3DPoint"
+ },
+ {
+  "framework": "AVFAudio",
+  "kind": "function",
+  "name": "AVAudioMake3DVector"
+ },
+ {
+  "framework": "AVFAudio",
+  "kind": "function",
+  "name": "AVAudioMake3DVectorOrientation"
+ },
+ {
+  "framework": "AVFAudio",
+  "kind": "function",
+  "name": "AVMakeBeatRange"
+ },
+ {
+  "framework": "AppKit",
+  "kind": "function",
+  "name": "NSDirectionalEdgeInsetsMake"
+ },
+ {
+  "framework": "AppKit",
+  "kind": "function",
+  "name": "NSEventMaskFromType"
+ },
+ {
+  "framework": "AppKit",
+  "kind": "function",
+  "name": "NSTouchTypeMaskFromType"
+ },
+ {
+  "framework": "AppleArchive",
+  "kind": "function",
+  "name": "AAArchiveStreamAbort"
+ },
+ {
+  "framework": "AppleArchive",
+  "kind": "function",
+  "name": "AAByteStreamAbort"
+ },
+ {
+  "framework": "AppleArchive",
+  "kind": "function",
+  "name": "AACustomArchiveStreamSetAbortProc"
+ },
+ {
+  "framework": "AppleArchive",
+  "kind": "function",
+  "name": "AACustomByteStreamSetAbortProc"
+ },
+ {
+  "framework": "AppleArchive",
+  "kind": "function",
+  "name": "AAHeaderAppendFieldBlob"
+ },
+ {
+  "framework": "AppleArchive",
+  "kind": "function",
+  "name": "AAHeaderAppendFieldCString"
+ },
+ {
+  "framework": "AppleArchive",
+  "kind": "function",
+  "name": "AAHeaderAppendFieldFlag"
+ },
+ {
+  "framework": "AppleArchive",
+  "kind": "function",
+  "name": "AAHeaderAppendFieldHash"
+ },
+ {
+  "framework": "AppleArchive",
+  "kind": "function",
+  "name": "AAHeaderAppendFieldString"
+ },
+ {
+  "framework": "AppleArchive",
+  "kind": "function",
+  "name": "AAHeaderAppendFieldTimespec"
+ },
+ {
+  "framework": "AppleArchive",
+  "kind": "function",
+  "name": "AAHeaderAppendFieldUInt"
+ },
+ {
+  "framework": "AppleArchive",
+  "kind": "function",
+  "name": "AAHeaderGetFieldBlobWithKey"
+ },
+ {
+  "framework": "AppleArchive",
+  "kind": "function",
+  "name": "AAHeaderGetFieldHashWithKey"
+ },
+ {
+  "framework": "AppleArchive",
+  "kind": "function",
+  "name": "AAHeaderGetFieldStringWithKey"
+ },
+ {
+  "framework": "AppleArchive",
+  "kind": "function",
+  "name": "AAHeaderGetFieldTimespecWithKey"
+ },
+ {
+  "framework": "AppleArchive",
+  "kind": "function",
+  "name": "AAHeaderGetFieldUIntWithKey"
+ },
+ {
+  "framework": "AppleArchive",
+  "kind": "function",
+  "name": "AEAContextGetArchiveIdentifier"
+ },
+ {
+  "framework": "AppleArchive",
+  "kind": "function",
+  "name": "AEAContextGetAuthData"
+ },
+ {
+  "framework": "AppleArchive",
+  "kind": "function",
+  "name": "AEAContextGetChecksumMode"
+ },
+ {
+  "framework": "AppleArchive",
+  "kind": "function",
+  "name": "AEAContextGetCompressionAlgorithm"
+ },
+ {
+  "framework": "AppleArchive",
+  "kind": "function",
+  "name": "AEAContextGetCompressionBlockSize"
+ },
+ {
+  "framework": "AppleArchive",
+  "kind": "function",
+  "name": "AEAContextGetContainerSize"
+ },
+ {
+  "framework": "AppleArchive",
+  "kind": "function",
+  "name": "AEAContextGetMainKey"
+ },
+ {
+  "framework": "AppleArchive",
+  "kind": "function",
+  "name": "AEAContextGetPaddingSize"
+ },
+ {
+  "framework": "AppleArchive",
+  "kind": "function",
+  "name": "AEAContextGetProfile"
+ },
+ {
+  "framework": "AppleArchive",
+  "kind": "function",
+  "name": "AEAContextGetRawSize"
+ },
+ {
+  "framework": "AppleArchive",
+  "kind": "function",
+  "name": "AEAContextGetSignatureEncryptionKey"
+ },
+ {
+  "framework": "AppleArchive",
+  "kind": "function",
+  "name": "AEAContextSetAuthData"
+ },
+ {
+  "framework": "AppleArchive",
+  "kind": "function",
+  "name": "AEAContextSetChecksumMode"
+ },
+ {
+  "framework": "AppleArchive",
+  "kind": "function",
+  "name": "AEAContextSetCompressionAlgorithm"
+ },
+ {
+  "framework": "AppleArchive",
+  "kind": "function",
+  "name": "AEAContextSetCompressionBlockSize"
+ },
+ {
+  "framework": "AppleArchive",
+  "kind": "function",
+  "name": "AEAContextSetMainKey"
+ },
+ {
+  "framework": "AppleArchive",
+  "kind": "function",
+  "name": "AEAContextSetPaddingSize"
+ },
+ {
+  "framework": "AppleArchive",
+  "kind": "function",
+  "name": "AEAContextSetPassword"
+ },
+ {
+  "framework": "AppleArchive",
+  "kind": "function",
+  "name": "AEAContextSetRecipientPrivateKey"
+ },
+ {
+  "framework": "AppleArchive",
+  "kind": "function",
+  "name": "AEAContextSetRecipientPublicKey"
+ },
+ {
+  "framework": "AppleArchive",
+  "kind": "function",
+  "name": "AEAContextSetSignatureEncryptionKey"
+ },
+ {
+  "framework": "AppleArchive",
+  "kind": "function",
+  "name": "AEAContextSetSigningPrivateKey"
+ },
+ {
+  "framework": "AppleArchive",
+  "kind": "function",
+  "name": "AEAContextSetSigningPublicKey"
+ },
+ {
+  "framework": "AppleArchive",
+  "kind": "function",
+  "name": "AEAContextSetSymmetricKey"
+ },
+ {
+  "framework": "AppleArchive",
+  "kind": "function",
+  "name": "AEAProfileGetCiphersuite"
+ },
+ {
+  "framework": "AppleArchive",
+  "kind": "function",
+  "name": "AEAProfileGetEncryptionMode"
+ },
+ {
+  "framework": "AppleArchive",
+  "kind": "function",
+  "name": "AEAProfileGetSignatureMode"
+ },
+ {
+  "framework": "AudioToolbox",
+  "kind": "function",
+  "name": "GetAudioUnitParameterDisplayType"
+ },
+ {
+  "framework": "AudioToolbox",
+  "kind": "function",
+  "name": "MusicSequenceGetSMPTEResolution"
+ },
+ {
+  "framework": "AudioToolbox",
+  "kind": "function",
+  "name": "MusicSequenceSetSMPTEResolution"
+ },
+ {
+  "framework": "AudioToolbox",
+  "kind": "function",
+  "name": "NextAudioFileRegion"
+ },
+ {
+  "framework": "AudioToolbox",
+  "kind": "function",
+  "name": "NumAudioFileMarkersToNumBytes"
+ },
+ {
+  "framework": "AudioToolbox",
+  "kind": "function",
+  "name": "NumBytesToNumAudioFileMarkers"
+ },
+ {
+  "framework": "AudioToolbox",
+  "kind": "function",
+  "name": "SetAudioUnitParameterDisplayType"
+ },
+ {
+  "framework": "BrowserEngineCore",
+  "kind": "function",
+  "name": "be_memory_inline_jit_restrict_rwx_to_rw_with_witness"
+ },
+ {
+  "framework": "BrowserEngineCore",
+  "kind": "function",
+  "name": "be_memory_inline_jit_restrict_rwx_to_rx_with_witness"
+ },
+ {
+  "framework": "CFNetwork",
+  "kind": "function",
+  "name": "CFSocketStreamSOCKSGetError"
+ },
+ {
+  "framework": "CFNetwork",
+  "kind": "function",
+  "name": "CFSocketStreamSOCKSGetErrorSubdomain"
+ },
+ {
+  "framework": "CoreAudioTypes",
+  "kind": "dlopen",
+  "name": "/System/Library/Frameworks/CoreAudioTypes.framework/CoreAudioTypes"
+ },
+ {
+  "framework": "CoreFoundation",
+  "kind": "function",
+  "name": "CFByteOrderGetCurrent"
+ },
+ {
+  "framework": "CoreFoundation",
+  "kind": "function",
+  "name": "CFConvertDoubleHostToSwapped"
+ },
+ {
+  "framework": "CoreFoundation",
+  "kind": "function",
+  "name": "CFConvertDoubleSwappedToHost"
+ },
+ {
+  "framework": "CoreFoundation",
+  "kind": "function",
+  "name": "CFConvertFloat32HostToSwapped"
+ },
+ {
+  "framework": "CoreFoundation",
+  "kind": "function",
+  "name": "CFConvertFloat32SwappedToHost"
+ },
+ {
+  "framework": "CoreFoundation",
+  "kind": "function",
+  "name": "CFConvertFloat64HostToSwapped"
+ },
+ {
+  "framework": "CoreFoundation",
+  "kind": "function",
+  "name": "CFConvertFloat64SwappedToHost"
+ },
+ {
+  "framework": "CoreFoundation",
+  "kind": "function",
+  "name": "CFConvertFloatHostToSwapped"
+ },
+ {
+  "framework": "CoreFoundation",
+  "kind": "function",
+  "name": "CFConvertFloatSwappedToHost"
+ },
+ {
+  "framework": "CoreFoundation",
+  "kind": "function",
+  "name": "CFRangeMake"
+ },
+ {
+  "framework": "CoreFoundation",
+  "kind": "function",
+  "name": "CFStringGetCharacterFromInlineBuffer"
+ },
+ {
+  "framework": "CoreFoundation",
+  "kind": "function",
+  "name": "CFStringGetLongCharacterForSurrogatePair"
+ },
+ {
+  "framework": "CoreFoundation",
+  "kind": "function",
+  "name": "CFStringGetSurrogatePairForLongCharacter"
+ },
+ {
+  "framework": "CoreFoundation",
+  "kind": "function",
+  "name": "CFStringInitInlineBuffer"
+ },
+ {
+  "framework": "CoreFoundation",
+  "kind": "function",
+  "name": "CFStringIsSurrogateHighCharacter"
+ },
+ {
+  "framework": "CoreFoundation",
+  "kind": "function",
+  "name": "CFStringIsSurrogateLowCharacter"
+ },
+ {
+  "framework": "CoreFoundation",
+  "kind": "function",
+  "name": "CFSwapInt16"
+ },
+ {
+  "framework": "CoreFoundation",
+  "kind": "function",
+  "name": "CFSwapInt16BigToHost"
+ },
+ {
+  "framework": "CoreFoundation",
+  "kind": "function",
+  "name": "CFSwapInt16HostToBig"
+ },
+ {
+  "framework": "CoreFoundation",
+  "kind": "function",
+  "name": "CFSwapInt16HostToLittle"
+ },
+ {
+  "framework": "CoreFoundation",
+  "kind": "function",
+  "name": "CFSwapInt16LittleToHost"
+ },
+ {
+  "framework": "CoreFoundation",
+  "kind": "function",
+  "name": "CFSwapInt32"
+ },
+ {
+  "framework": "CoreFoundation",
+  "kind": "function",
+  "name": "CFSwapInt32BigToHost"
+ },
+ {
+  "framework": "CoreFoundation",
+  "kind": "function",
+  "name": "CFSwapInt32HostToBig"
+ },
+ {
+  "framework": "CoreFoundation",
+  "kind": "function",
+  "name": "CFSwapInt32HostToLittle"
+ },
+ {
+  "framework": "CoreFoundation",
+  "kind": "function",
+  "name": "CFSwapInt32LittleToHost"
+ },
+ {
+  "framework": "CoreFoundation",
+  "kind": "function",
+  "name": "CFSwapInt64"
+ },
+ {
+  "framework": "CoreFoundation",
+  "kind": "function",
+  "name": "CFSwapInt64BigToHost"
+ },
+ {
+  "framework": "CoreFoundation",
+  "kind": "function",
+  "name": "CFSwapInt64HostToBig"
+ },
+ {
+  "framework": "CoreFoundation",
+  "kind": "function",
+  "name": "CFSwapInt64HostToLittle"
+ },
+ {
+  "framework": "CoreFoundation",
+  "kind": "function",
+  "name": "CFSwapInt64LittleToHost"
+ },
+ {
+  "framework": "CoreFoundation",
+  "kind": "function",
+  "name": "CFUserNotificationCheckBoxChecked"
+ },
+ {
+  "framework": "CoreFoundation",
+  "kind": "function",
+  "name": "CFUserNotificationPopUpSelection"
+ },
+ {
+  "framework": "CoreFoundation",
+  "kind": "function",
+  "name": "CFUserNotificationSecureTextField"
+ },
+ {
+  "framework": "CoreFoundation",
+  "kind": "function",
+  "name": "__builtin_constant_p"
+ },
+ {
+  "framework": "CoreGraphics",
+  "kind": "function",
+  "name": "CGBitmapInfoMake"
+ },
+ {
+  "framework": "CoreGraphics",
+  "kind": "function",
+  "name": "CGPointMake"
+ },
+ {
+  "framework": "CoreGraphics",
+  "kind": "function",
+  "name": "CGRectMake"
+ },
+ {
+  "framework": "CoreGraphics",
+  "kind": "function",
+  "name": "CGSizeMake"
+ },
+ {
+  "framework": "CoreGraphics",
+  "kind": "function",
+  "name": "CGVectorMake"
+ },
+ {
+  "framework": "CoreGraphics",
+  "kind": "function",
+  "name": "__CGAffineTransformMake"
+ },
+ {
+  "framework": "CoreGraphics",
+  "kind": "function",
+  "name": "__CGPointApplyAffineTransform"
+ },
+ {
+  "framework": "CoreGraphics",
+  "kind": "function",
+  "name": "__CGPointEqualToPoint"
+ },
+ {
+  "framework": "CoreGraphics",
+  "kind": "function",
+  "name": "__CGSizeApplyAffineTransform"
+ },
+ {
+  "framework": "CoreGraphics",
+  "kind": "function",
+  "name": "__CGSizeEqualToSize"
+ },
+ {
+  "framework": "CoreMIDI",
+  "kind": "function",
+  "name": "MIDI1UPChannelPressure"
+ },
+ {
+  "framework": "CoreMIDI",
+  "kind": "function",
+  "name": "MIDI1UPChannelVoiceMessage"
+ },
+ {
+  "framework": "CoreMIDI",
+  "kind": "function",
+  "name": "MIDI1UPControlChange"
+ },
+ {
+  "framework": "CoreMIDI",
+  "kind": "function",
+  "name": "MIDI1UPNoteOff"
+ },
+ {
+  "framework": "CoreMIDI",
+  "kind": "function",
+  "name": "MIDI1UPNoteOn"
+ },
+ {
+  "framework": "CoreMIDI",
+  "kind": "function",
+  "name": "MIDI1UPPitchBend"
+ },
+ {
+  "framework": "CoreMIDI",
+  "kind": "function",
+  "name": "MIDI1UPPolyPressure"
+ },
+ {
+  "framework": "CoreMIDI",
+  "kind": "function",
+  "name": "MIDI1UPProgramChange"
+ },
+ {
+  "framework": "CoreMIDI",
+  "kind": "function",
+  "name": "MIDI1UPSysEx"
+ },
+ {
+  "framework": "CoreMIDI",
+  "kind": "function",
+  "name": "MIDI1UPSysExArray"
+ },
+ {
+  "framework": "CoreMIDI",
+  "kind": "function",
+  "name": "MIDI1UPSystemCommon"
+ },
+ {
+  "framework": "CoreMIDI",
+  "kind": "function",
+  "name": "MIDI2AssignableControl"
+ },
+ {
+  "framework": "CoreMIDI",
+  "kind": "function",
+  "name": "MIDI2AssignablePNC"
+ },
+ {
+  "framework": "CoreMIDI",
+  "kind": "function",
+  "name": "MIDI2ChannelPressure"
+ },
+ {
+  "framework": "CoreMIDI",
+  "kind": "function",
+  "name": "MIDI2ChannelVoiceMessage"
+ },
+ {
+  "framework": "CoreMIDI",
+  "kind": "function",
+  "name": "MIDI2ControlChange"
+ },
+ {
+  "framework": "CoreMIDI",
+  "kind": "function",
+  "name": "MIDI2EndOfClipMessage"
+ },
+ {
+  "framework": "CoreMIDI",
+  "kind": "function",
+  "name": "MIDI2EndpointDeviceIdentityNotificationMessage"
+ },
+ {
+  "framework": "CoreMIDI",
+  "kind": "function",
+  "name": "MIDI2EndpointDiscoveryMessage"
+ },
+ {
+  "framework": "CoreMIDI",
+  "kind": "function",
+  "name": "MIDI2EndpointInfoNotificationMessage"
+ },
+ {
+  "framework": "CoreMIDI",
+  "kind": "function",
+  "name": "MIDI2EndpointNameNotificationMessage"
+ },
+ {
+  "framework": "CoreMIDI",
+  "kind": "function",
+  "name": "MIDI2EndpointProductInstanceIDNotificationMessage"
+ },
+ {
+  "framework": "CoreMIDI",
+  "kind": "function",
+  "name": "MIDI2FlexDataMessage"
+ },
+ {
+  "framework": "CoreMIDI",
+  "kind": "function",
+  "name": "MIDI2FunctionBlockDiscoveryMessage"
+ },
+ {
+  "framework": "CoreMIDI",
+  "kind": "function",
+  "name": "MIDI2FunctionBlockInfoNotificationMessage"
+ },
+ {
+  "framework": "CoreMIDI",
+  "kind": "function",
+  "name": "MIDI2FunctionBlockNameNotificationMessage"
+ },
+ {
+  "framework": "CoreMIDI",
+  "kind": "function",
+  "name": "MIDI2NoteOff"
+ },
+ {
+  "framework": "CoreMIDI",
+  "kind": "function",
+  "name": "MIDI2NoteOn"
+ },
+ {
+  "framework": "CoreMIDI",
+  "kind": "function",
+  "name": "MIDI2PerNoteManagment"
+ },
+ {
+  "framework": "CoreMIDI",
+  "kind": "function",
+  "name": "MIDI2PerNotePitchBend"
+ },
+ {
+  "framework": "CoreMIDI",
+  "kind": "function",
+  "name": "MIDI2PitchBend"
+ },
+ {
+  "framework": "CoreMIDI",
+  "kind": "function",
+  "name": "MIDI2PolyPressure"
+ },
+ {
+  "framework": "CoreMIDI",
+  "kind": "function",
+  "name": "MIDI2ProgramChange"
+ },
+ {
+  "framework": "CoreMIDI",
+  "kind": "function",
+  "name": "MIDI2RegisteredControl"
+ },
+ {
+  "framework": "CoreMIDI",
+  "kind": "function",
+  "name": "MIDI2RegisteredPNC"
+ },
+ {
+  "framework": "CoreMIDI",
+  "kind": "function",
+  "name": "MIDI2RelAssignableControl"
+ },
+ {
+  "framework": "CoreMIDI",
+  "kind": "function",
+  "name": "MIDI2RelRegisteredControl"
+ },
+ {
+  "framework": "CoreMIDI",
+  "kind": "function",
+  "name": "MIDI2StartOfClipMessage"
+ },
+ {
+  "framework": "CoreMIDI",
+  "kind": "function",
+  "name": "MIDI2StreamConfigurationNotificationMessage"
+ },
+ {
+  "framework": "CoreMIDI",
+  "kind": "function",
+  "name": "MIDI2StreamConfigurationRequestMessage"
+ },
+ {
+  "framework": "CoreMIDI",
+  "kind": "function",
+  "name": "MIDI2StreamMessage"
+ },
+ {
+  "framework": "CoreMIDI",
+  "kind": "function",
+  "name": "MIDI2StreamMessageFromData"
+ },
+ {
+  "framework": "CoreMIDI",
+  "kind": "function",
+  "name": "MIDIDeltaClockstampTicksPerQuarterNoteMessage"
+ },
+ {
+  "framework": "CoreMIDI",
+  "kind": "function",
+  "name": "MIDIEventPacketNext"
+ },
+ {
+  "framework": "CoreMIDI",
+  "kind": "function",
+  "name": "MIDIJitterReductionClockMessage"
+ },
+ {
+  "framework": "CoreMIDI",
+  "kind": "function",
+  "name": "MIDIJitterReductionTimestampMessage"
+ },
+ {
+  "framework": "CoreMIDI",
+  "kind": "function",
+  "name": "MIDIMessageTypeForUPWord"
+ },
+ {
+  "framework": "CoreMIDI",
+  "kind": "function",
+  "name": "MIDINoOpMessage"
+ },
+ {
+  "framework": "CoreMIDI",
+  "kind": "function",
+  "name": "MIDIPacketNext"
+ },
+ {
+  "framework": "CoreMIDI",
+  "kind": "function",
+  "name": "MIDIThruConnectionParamsSize"
+ },
+ {
+  "framework": "CoreMIDI",
+  "kind": "function",
+  "name": "MIDITicksSinceLastEventMessage"
+ },
+ {
+  "framework": "CoreMIDI",
+  "kind": "function",
+  "name": "__builtin___memcpy_chk"
+ },
+ {
+  "framework": "CoreMIDI",
+  "kind": "function",
+  "name": "__builtin_object_size"
+ },
+ {
+  "framework": "CoreMedia",
+  "kind": "function",
+  "name": "CMTagCategoryEqualToTagCategory"
+ },
+ {
+  "framework": "CoreMedia",
+  "kind": "function",
+  "name": "CMTagCategoryValueEqualToValue"
+ },
+ {
+  "framework": "CoreMedia",
+  "kind": "function",
+  "name": "CMTagGetCategory"
+ },
+ {
+  "framework": "CoreMedia",
+  "kind": "function",
+  "name": "CMTagGetValue"
+ },
+ {
+  "framework": "CoreMedia",
+  "kind": "function",
+  "name": "CMTagHasCategory"
+ },
+ {
+  "framework": "CoreMedia",
+  "kind": "function",
+  "name": "CMTagIsValid"
+ },
+ {
+  "framework": "DirectoryService",
+  "kind": "function",
+  "name": "dsIsDirServiceLocalRunning"
+ },
+ {
+  "framework": "DirectoryService",
+  "kind": "function",
+  "name": "dsIsDirServiceRunning"
+ },
+ {
+  "framework": "DriverKit",
+  "kind": "function",
+  "name": "IOFixedDivide"
+ },
+ {
+  "framework": "DriverKit",
+  "kind": "function",
+  "name": "IOFixedMultiply"
+ },
+ {
+  "framework": "DriverKit",
+  "kind": "function",
+  "name": "OSObjectAllocate"
+ },
+ {
+  "framework": "DriverKit",
+  "kind": "function",
+  "name": "__DEQUEUE_ELT_CLEANUP"
+ },
+ {
+  "framework": "DriverKit",
+  "kind": "function",
+  "name": "__QUEUE_ELT_VALIDATE"
+ },
+ {
+  "framework": "DriverKit",
+  "kind": "function",
+  "name": "__QUEUE_ELT_VALIDATE_NEXT"
+ },
+ {
+  "framework": "DriverKit",
+  "kind": "function",
+  "name": "__QUEUE_ELT_VALIDATE_PREV"
+ },
+ {
+  "framework": "DriverKit",
+  "kind": "function",
+  "name": "__builtin_trap"
+ },
+ {
+  "framework": "DriverKit",
+  "kind": "function",
+  "name": "dequeue_head"
+ },
+ {
+  "framework": "DriverKit",
+  "kind": "function",
+  "name": "dequeue_tail"
+ },
+ {
+  "framework": "DriverKit",
+  "kind": "function",
+  "name": "enqueue_head"
+ },
+ {
+  "framework": "DriverKit",
+  "kind": "function",
+  "name": "enqueue_tail"
+ },
+ {
+  "framework": "DriverKit",
+  "kind": "function",
+  "name": "movqueue"
+ },
+ {
+  "framework": "DriverKit",
+  "kind": "function",
+  "name": "re_queue_head"
+ },
+ {
+  "framework": "DriverKit",
+  "kind": "function",
+  "name": "re_queue_tail"
+ },
+ {
+  "framework": "DriverKit",
+  "kind": "function",
+  "name": "remqueue"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "CFBridgingRelease"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "CFBridgingRetain"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSConvertHostDoubleToSwapped"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSConvertHostFloatToSwapped"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSConvertSwappedDoubleToHost"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSConvertSwappedFloatToHost"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSDecimalIsNotANumber"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSEdgeInsetsMake"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSEqualRanges"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSHeight"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSHostByteOrder"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSLocationInRange"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSMakeCollectable"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSMakePoint"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSMakeRange"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSMakeRect"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSMakeSize"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSMaxRange"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSMaxX"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSMaxY"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSMidX"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSMidY"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSMinX"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSMinY"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSPointFromCGPoint"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSPointToCGPoint"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSRectFromCGRect"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSRectToCGRect"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSSizeFromCGSize"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSSizeToCGSize"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSSwapBigDoubleToHost"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSSwapBigFloatToHost"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSSwapBigIntToHost"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSSwapBigLongLongToHost"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSSwapBigLongToHost"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSSwapBigShortToHost"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSSwapDouble"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSSwapFloat"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSSwapHostDoubleToBig"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSSwapHostDoubleToLittle"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSSwapHostFloatToBig"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSSwapHostFloatToLittle"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSSwapHostIntToBig"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSSwapHostIntToLittle"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSSwapHostLongLongToBig"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSSwapHostLongLongToLittle"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSSwapHostLongToBig"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSSwapHostLongToLittle"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSSwapHostShortToBig"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSSwapHostShortToLittle"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSSwapInt"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSSwapLittleDoubleToHost"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSSwapLittleFloatToHost"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSSwapLittleIntToHost"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSSwapLittleLongLongToHost"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSSwapLittleLongToHost"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSSwapLittleShortToHost"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSSwapLong"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSSwapLongLong"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSSwapShort"
+ },
+ {
+  "framework": "Foundation",
+  "kind": "function",
+  "name": "NSWidth"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMathDegreesToRadians"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMathRadiansToDegrees"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix3Add"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix3GetColumn"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix3GetMatrix2"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix3GetRow"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix3Make"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix3MakeAndTranspose"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix3MakeRotation"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix3MakeScale"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix3MakeWithArray"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix3MakeWithArrayAndTranspose"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix3MakeWithColumns"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix3MakeWithQuaternion"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix3MakeWithRows"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix3MakeXRotation"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix3MakeYRotation"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix3MakeZRotation"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix3Multiply"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix3MultiplyVector3"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix3MultiplyVector3Array"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix3Rotate"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix3RotateWithVector3"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix3RotateWithVector4"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix3RotateX"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix3RotateY"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix3RotateZ"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix3Scale"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix3ScaleWithVector3"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix3ScaleWithVector4"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix3SetColumn"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix3SetRow"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix3Subtract"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix3Transpose"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix4Add"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix4GetColumn"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix4GetMatrix2"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix4GetMatrix3"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix4GetRow"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix4Make"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix4MakeAndTranspose"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix4MakeFrustum"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix4MakeLookAt"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix4MakeOrtho"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix4MakePerspective"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix4MakeRotation"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix4MakeScale"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix4MakeTranslation"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix4MakeWithArray"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix4MakeWithArrayAndTranspose"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix4MakeWithColumns"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix4MakeWithQuaternion"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix4MakeWithRows"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix4MakeXRotation"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix4MakeYRotation"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix4MakeZRotation"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix4Multiply"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix4MultiplyAndProjectVector3"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix4MultiplyAndProjectVector3Array"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix4MultiplyVector3"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix4MultiplyVector3Array"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix4MultiplyVector3ArrayWithTranslation"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix4MultiplyVector3WithTranslation"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix4MultiplyVector4"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix4MultiplyVector4Array"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix4Rotate"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix4RotateWithVector3"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix4RotateWithVector4"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix4RotateX"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix4RotateY"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix4RotateZ"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix4Scale"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix4ScaleWithVector3"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix4ScaleWithVector4"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix4SetColumn"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix4SetRow"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix4Subtract"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix4Translate"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix4TranslateWithVector3"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix4TranslateWithVector4"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKMatrix4Transpose"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKQuaternionAdd"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKQuaternionConjugate"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKQuaternionInvert"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKQuaternionLength"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKQuaternionMake"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKQuaternionMakeWithAngleAndAxis"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKQuaternionMakeWithAngleAndVector3Axis"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKQuaternionMakeWithArray"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKQuaternionMakeWithVector3"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKQuaternionMultiply"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKQuaternionNormalize"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKQuaternionRotateVector3"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKQuaternionRotateVector4"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKQuaternionSubtract"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector2Add"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector2AddScalar"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector2AllEqualToScalar"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector2AllEqualToVector2"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector2AllGreaterThanOrEqualToScalar"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector2AllGreaterThanOrEqualToVector2"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector2AllGreaterThanScalar"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector2AllGreaterThanVector2"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector2Distance"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector2Divide"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector2DivideScalar"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector2DotProduct"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector2Length"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector2Lerp"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector2Make"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector2MakeWithArray"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector2Maximum"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector2Minimum"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector2Multiply"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector2MultiplyScalar"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector2Negate"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector2Normalize"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector2Project"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector2Subtract"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector2SubtractScalar"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector3Add"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector3AddScalar"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector3AllEqualToScalar"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector3AllEqualToVector3"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector3AllGreaterThanOrEqualToScalar"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector3AllGreaterThanOrEqualToVector3"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector3AllGreaterThanScalar"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector3AllGreaterThanVector3"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector3CrossProduct"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector3Distance"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector3Divide"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector3DivideScalar"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector3DotProduct"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector3Length"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector3Lerp"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector3Make"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector3MakeWithArray"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector3Maximum"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector3Minimum"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector3Multiply"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector3MultiplyScalar"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector3Negate"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector3Normalize"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector3Project"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector3Subtract"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector3SubtractScalar"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector4Add"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector4AddScalar"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector4AllEqualToScalar"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector4AllEqualToVector4"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector4AllGreaterThanOrEqualToScalar"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector4AllGreaterThanOrEqualToVector4"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector4AllGreaterThanScalar"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector4AllGreaterThanVector4"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector4CrossProduct"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector4Distance"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector4Divide"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector4DivideScalar"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector4DotProduct"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector4Length"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector4Lerp"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector4Make"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector4MakeWithArray"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector4MakeWithVector3"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector4Maximum"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector4Minimum"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector4Multiply"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector4MultiplyScalar"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector4Negate"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector4Normalize"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector4Project"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector4Subtract"
+ },
+ {
+  "framework": "GLKit",
+  "kind": "function",
+  "name": "GLKVector4SubtractScalar"
+ },
+ {
+  "framework": "GameController",
+  "kind": "function",
+  "name": "GCPoint2Equal"
+ },
+ {
+  "framework": "GameController",
+  "kind": "function",
+  "name": "GCPoint2Make"
+ },
+ {
+  "framework": "IOUSBHost",
+  "kind": "function",
+  "name": "IOUSBHostDeviceRequestType"
+ },
+ {
+  "framework": "MapKit",
+  "kind": "function",
+  "name": "MKCoordinateRegionMake"
+ },
+ {
+  "framework": "MapKit",
+  "kind": "function",
+  "name": "MKCoordinateSpanMake"
+ },
+ {
+  "framework": "MapKit",
+  "kind": "function",
+  "name": "MKMapPointEqualToPoint"
+ },
+ {
+  "framework": "MapKit",
+  "kind": "function",
+  "name": "MKMapPointMake"
+ },
+ {
+  "framework": "MapKit",
+  "kind": "function",
+  "name": "MKMapRectEqualToRect"
+ },
+ {
+  "framework": "MapKit",
+  "kind": "function",
+  "name": "MKMapRectGetHeight"
+ },
+ {
+  "framework": "MapKit",
+  "kind": "function",
+  "name": "MKMapRectGetMaxX"
+ },
+ {
+  "framework": "MapKit",
+  "kind": "function",
+  "name": "MKMapRectGetMaxY"
+ },
+ {
+  "framework": "MapKit",
+  "kind": "function",
+  "name": "MKMapRectGetMidX"
+ },
+ {
+  "framework": "MapKit",
+  "kind": "function",
+  "name": "MKMapRectGetMidY"
+ },
+ {
+  "framework": "MapKit",
+  "kind": "function",
+  "name": "MKMapRectGetMinX"
+ },
+ {
+  "framework": "MapKit",
+  "kind": "function",
+  "name": "MKMapRectGetMinY"
+ },
+ {
+  "framework": "MapKit",
+  "kind": "function",
+  "name": "MKMapRectGetWidth"
+ },
+ {
+  "framework": "MapKit",
+  "kind": "function",
+  "name": "MKMapRectIsEmpty"
+ },
+ {
+  "framework": "MapKit",
+  "kind": "function",
+  "name": "MKMapRectIsNull"
+ },
+ {
+  "framework": "MapKit",
+  "kind": "function",
+  "name": "MKMapRectMake"
+ },
+ {
+  "framework": "MapKit",
+  "kind": "function",
+  "name": "MKMapSizeEqualToSize"
+ },
+ {
+  "framework": "MapKit",
+  "kind": "function",
+  "name": "MKMapSizeMake"
+ },
+ {
+  "framework": "MapKit",
+  "kind": "function",
+  "name": "MKStringFromMapPoint"
+ },
+ {
+  "framework": "MapKit",
+  "kind": "function",
+  "name": "MKStringFromMapRect"
+ },
+ {
+  "framework": "MapKit",
+  "kind": "function",
+  "name": "MKStringFromMapSize"
+ },
+ {
+  "framework": "Metal",
+  "kind": "function",
+  "name": "MTL4BufferRangeMake"
+ },
+ {
+  "framework": "Metal",
+  "kind": "function",
+  "name": "MTLClearColorMake"
+ },
+ {
+  "framework": "Metal",
+  "kind": "function",
+  "name": "MTLCoordinate2DMake"
+ },
+ {
+  "framework": "Metal",
+  "kind": "function",
+  "name": "MTLIndirectCommandBufferExecutionRangeMake"
+ },
+ {
+  "framework": "Metal",
+  "kind": "function",
+  "name": "MTLOriginMake"
+ },
+ {
+  "framework": "Metal",
+  "kind": "function",
+  "name": "MTLPackedFloat3Make"
+ },
+ {
+  "framework": "Metal",
+  "kind": "function",
+  "name": "MTLPackedFloatQuaternionMake"
+ },
+ {
+  "framework": "Metal",
+  "kind": "function",
+  "name": "MTLRegionMake1D"
+ },
+ {
+  "framework": "Metal",
+  "kind": "function",
+  "name": "MTLRegionMake2D"
+ },
+ {
+  "framework": "Metal",
+  "kind": "function",
+  "name": "MTLRegionMake3D"
+ },
+ {
+  "framework": "Metal",
+  "kind": "function",
+  "name": "MTLSamplePositionMake"
+ },
+ {
+  "framework": "Metal",
+  "kind": "function",
+  "name": "MTLSizeMake"
+ },
+ {
+  "framework": "Metal",
+  "kind": "function",
+  "name": "MTLTextureSwizzleChannelsMake"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "extern",
+  "name": "rb_cCont"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "__builtin_expect"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_alloc_tmp_buffer2"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_array_const_ptr"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_array_const_ptr_transient"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_array_len"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_array_ptr_use_end"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_array_ptr_use_start"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_check_arity"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_class_of"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_clear_cache"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_clone_setup"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_compile_error"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_compile_error_append"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_compile_error_with_enc"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_data_object_get"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_data_object_make"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_data_typed_object_make"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_disable_super"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_dup_setup"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_enable_super"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_fix2long"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_fix2ulong"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_frame_pop"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_frozen_class_p"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_generic_ivar_table"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_hash_end"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_hash_free"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_hash_ifnone"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_hash_iter_lev"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_hash_uint"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_hash_uint32"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_isalnum"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_isalpha"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_isascii"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_isblank"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_iscntrl"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_isdigit"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_isgraph"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_islower"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_isprint"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_ispunct"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_isspace"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_isupper"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_isxdigit"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_long2int_inline"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_long2num_inline"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_mul_size_overflow"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_num2char_inline"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_num2int_inline"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_num2ll_inline"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_num2long_inline"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_num2short_inline"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_num2ulong_inline"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_obj_freeze_inline"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_obj_wb_unprotect"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_obj_write"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_obj_written"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_random_int"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_str_associate"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_str_associated"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_str_buf_new2"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_struct_ptr"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_sym_interned_p"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_tolower"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_toupper"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_trap_exec"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_type"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_ulong2num_inline"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "rb_varargs_bad_length"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "ruby_set_stack_size"
+ },
+ {
+  "framework": "Ruby",
+  "kind": "function",
+  "name": "ruby_show_copyright_to_die"
+ },
+ {
+  "framework": "SceneKit",
+  "kind": "function",
+  "name": "SCNMatrix4FromMat4"
+ },
+ {
+  "framework": "SceneKit",
+  "kind": "function",
+  "name": "SCNMatrix4MakeScale"
+ },
+ {
+  "framework": "SceneKit",
+  "kind": "function",
+  "name": "SCNMatrix4MakeTranslation"
+ },
+ {
+  "framework": "SceneKit",
+  "kind": "function",
+  "name": "SCNMatrix4ToMat4"
+ },
+ {
+  "framework": "SceneKit",
+  "kind": "function",
+  "name": "SCNMatrix4Translate"
+ },
+ {
+  "framework": "SceneKit",
+  "kind": "function",
+  "name": "SCNVector3FromFloat3"
+ },
+ {
+  "framework": "SceneKit",
+  "kind": "function",
+  "name": "SCNVector3FromGLKVector3"
+ },
+ {
+  "framework": "SceneKit",
+  "kind": "function",
+  "name": "SCNVector3Make"
+ },
+ {
+  "framework": "SceneKit",
+  "kind": "function",
+  "name": "SCNVector3ToFloat3"
+ },
+ {
+  "framework": "SceneKit",
+  "kind": "function",
+  "name": "SCNVector3ToGLKVector3"
+ },
+ {
+  "framework": "SceneKit",
+  "kind": "function",
+  "name": "SCNVector4FromFloat4"
+ },
+ {
+  "framework": "SceneKit",
+  "kind": "function",
+  "name": "SCNVector4FromGLKVector4"
+ },
+ {
+  "framework": "SceneKit",
+  "kind": "function",
+  "name": "SCNVector4Make"
+ },
+ {
+  "framework": "SceneKit",
+  "kind": "function",
+  "name": "SCNVector4ToFloat4"
+ },
+ {
+  "framework": "SceneKit",
+  "kind": "function",
+  "name": "SCNVector4ToGLKVector4"
+ },
+ {
+  "framework": "ScreenSaver",
+  "kind": "function",
+  "name": "SSCenteredRectInRect"
+ },
+ {
+  "framework": "ScreenSaver",
+  "kind": "function",
+  "name": "SSRandomFloatBetween"
+ },
+ {
+  "framework": "ScreenSaver",
+  "kind": "function",
+  "name": "SSRandomIntBetween"
+ },
+ {
+  "framework": "ScreenSaver",
+  "kind": "function",
+  "name": "SSRandomPointForSizeWithinRect"
+ },
+ {
+  "framework": "Security",
+  "kind": "function",
+  "name": "SecTransformCustomGetAttribute"
+ },
+ {
+  "framework": "TWAIN",
+  "kind": "function",
+  "name": "DS_Entry"
+ },
+ {
+  "framework": "Tcl",
+  "kind": "function",
+  "name": "Tcl_AppInit"
+ },
+ {
+  "framework": "Tcl",
+  "kind": "function",
+  "name": "Tcl_DecrRefCount"
+ },
+ {
+  "framework": "Tcl",
+  "kind": "function",
+  "name": "Tcl_IncrRefCount"
+ },
+ {
+  "framework": "Tcl",
+  "kind": "function",
+  "name": "Tcl_IsShared"
+ },
+ {
+  "framework": "dispatch",
+  "kind": "function",
+  "name": "__builtin_assume"
+ },
+ {
+  "framework": "dispatch",
+  "kind": "function",
+  "name": "__builtin_expect"
+ },
+ {
+  "framework": "dispatch",
+  "kind": "function",
+  "name": "_dispatch_object_validate"
+ },
+ {
+  "framework": "dispatch",
+  "kind": "function",
+  "name": "_dispatch_once"
+ },
+ {
+  "framework": "dispatch",
+  "kind": "function",
+  "name": "_dispatch_once_f"
+ },
+ {
+  "framework": "dispatch",
+  "kind": "function",
+  "name": "dispatch_get_main_queue"
+ },
+ {
+  "framework": "machvm",
+  "kind": "function",
+  "name": "mach_vm_region_info"
+ },
+ {
+  "framework": "machvm",
+  "kind": "function",
+  "name": "mach_vm_region_info_64"
+ },
+ {
+  "framework": "machvm",
+  "kind": "function",
+  "name": "task_wire"
+ },
+ {
+  "framework": "machvm",
+  "kind": "function",
+  "name": "vm_map_64"
+ },
+ {
+  "framework": "machvm",
+  "kind": "function",
+  "name": "vm_map_exec_lockdown"
+ },
+ {
+  "framework": "machvm",
+  "kind": "function",
+  "name": "vm_mapped_pages_info"
+ },
+ {
+  "framework": "machvm",
+  "kind": "function",
+  "name": "vm_region"
+ },
+ {
+  "framework": "machvm",
+  "kind": "function",
+  "name": "vm_region_recurse"
+ },
+ {
+  "framework": "oslog",
+  "kind": "function",
+  "name": "_os_log_sensitive_deprecated"
+ },
+ {
+  "framework": "vecLib",
+  "kind": "function",
+  "name": "BNNSGraphContextSetBatchSize"
+ },
+ {
+  "framework": "vecLib",
+  "kind": "function",
+  "name": "BNNSGraphContextSetOutputAllocationCallback"
+ },
+ {
+  "framework": "vecLib",
+  "kind": "function",
+  "name": "BNNSGraphContextSetWorkspaceAllocationCallback"
+ },
+ {
+  "framework": "vecLib",
+  "kind": "function",
+  "name": "SparseCleanup"
+ },
+ {
+  "framework": "vecLib",
+  "kind": "function",
+  "name": "SparseConjugateGradient"
+ },
+ {
+  "framework": "vecLib",
+  "kind": "function",
+  "name": "SparseConvertFromCoordinate"
+ },
+ {
+  "framework": "vecLib",
+  "kind": "function",
+  "name": "SparseConvertFromOpaque"
+ },
+ {
+  "framework": "vecLib",
+  "kind": "function",
+  "name": "SparseCreatePreconditioner"
+ },
+ {
+  "framework": "vecLib",
+  "kind": "function",
+  "name": "SparseCreateSubfactor"
+ },
+ {
+  "framework": "vecLib",
+  "kind": "function",
+  "name": "SparseFactor"
+ },
+ {
+  "framework": "vecLib",
+  "kind": "function",
+  "name": "SparseGMRES"
+ },
+ {
+  "framework": "vecLib",
+  "kind": "function",
+  "name": "SparseGetConjugateTranspose"
+ },
+ {
+  "framework": "vecLib",
+  "kind": "function",
+  "name": "SparseGetInertia"
+ },
+ {
+  "framework": "vecLib",
+  "kind": "function",
+  "name": "SparseGetStateSize_Complex_Double"
+ },
+ {
+  "framework": "vecLib",
+  "kind": "function",
+  "name": "SparseGetStateSize_Complex_Float"
+ },
+ {
+  "framework": "vecLib",
+  "kind": "function",
+  "name": "SparseGetStateSize_Double"
+ },
+ {
+  "framework": "vecLib",
+  "kind": "function",
+  "name": "SparseGetStateSize_Float"
+ },
+ {
+  "framework": "vecLib",
+  "kind": "function",
+  "name": "SparseGetTranspose"
+ },
+ {
+  "framework": "vecLib",
+  "kind": "function",
+  "name": "SparseIterate"
+ },
+ {
+  "framework": "vecLib",
+  "kind": "function",
+  "name": "SparseLSMR"
+ },
+ {
+  "framework": "vecLib",
+  "kind": "function",
+  "name": "SparseMultiply"
+ },
+ {
+  "framework": "vecLib",
+  "kind": "function",
+  "name": "SparseMultiplyAdd"
+ },
+ {
+  "framework": "vecLib",
+  "kind": "function",
+  "name": "SparseRefactor"
+ },
+ {
+  "framework": "vecLib",
+  "kind": "function",
+  "name": "SparseRetain"
+ },
+ {
+  "framework": "vecLib",
+  "kind": "function",
+  "name": "SparseSolve"
+ },
+ {
+  "framework": "vecLib",
+  "kind": "function",
+  "name": "SparseUpdateFactor"
+ },
+ {
+  "framework": "vecLib",
+  "kind": "function",
+  "name": "_DenseMatrixFromVector_Complex_Double"
+ },
+ {
+  "framework": "vecLib",
+  "kind": "function",
+  "name": "_DenseMatrixFromVector_Complex_Float"
+ },
+ {
+  "framework": "vecLib",
+  "kind": "function",
+  "name": "_DenseMatrixFromVector_Double"
+ },
+ {
+  "framework": "vecLib",
+  "kind": "function",
+  "name": "_DenseMatrixFromVector_Float"
+ },
+ {
+  "framework": "vecLib",
+  "kind": "function",
+  "name": "_SparseFailedFactor_Complex_Double"
+ },
+ {
+  "framework": "vecLib",
+  "kind": "function",
+  "name": "_SparseFailedFactor_Complex_Float"
+ },
+ {
+  "framework": "vecLib",
+  "kind": "function",
+  "name": "_SparseFailedFactor_Double"
+ },
+ {
+  "framework": "vecLib",
+  "kind": "function",
+  "name": "_SparseFailedFactor_Float"
+ },
+ {
+  "framework": "vecLib",
+  "kind": "function",
+  "name": "_SparseInvalidSubfactor_Complex_Double"
+ },
+ {
+  "framework": "vecLib",
+  "kind": "function",
+  "name": "_SparseInvalidSubfactor_Complex_Float"
+ },
+ {
+  "framework": "vecLib",
+  "kind": "function",
+  "name": "_SparseInvalidSubfactor_Double"
+ },
+ {
+  "framework": "vecLib",
+  "kind": "function",
+  "name": "_SparseInvalidSubfactor_Float"
+ },
+ {
+  "framework": "vecLib",
+  "kind": "function",
+  "name": "_SparseSubFactorGetDimn_Complex_Double"
+ },
+ {
+  "framework": "vecLib",
+  "kind": "function",
+  "name": "_SparseSubFactorGetDimn_Complex_Float"
+ },
+ {
+  "framework": "vecLib",
+  "kind": "function",
+  "name": "_SparseSubFactorGetDimn_Double"
+ },
+ {
+  "framework": "vecLib",
+  "kind": "function",
+  "name": "_SparseSubFactorGetDimn_Float"
+ },
+ {
+  "framework": "vecLib",
+  "kind": "function",
+  "name": "__builtin___snprintf_chk"
+ },
+ {
+  "framework": "vecLib",
+  "kind": "function",
+  "name": "__builtin_object_size"
+ },
+ {
+  "framework": "vecLib",
+  "kind": "function",
+  "name": "__builtin_os_log_format"
+ },
+ {
+  "framework": "vecLib",
+  "kind": "function",
+  "name": "__builtin_os_log_format_buffer_size"
+ },
+ {
+  "framework": "vecLib",
+  "kind": "function",
+  "name": "__builtin_unreachable"
+ },
+ {
+  "framework": "vecLib",
+  "kind": "function",
+  "name": "__builtin_verbose_trap"
+ },
+ {
+  "framework": "xpc",
+  "kind": "function",
+  "name": "_xpc_object_validate"
+ },
+ {
+  "framework": "xpc",
+  "kind": "function",
+  "name": "xpc_debugger_api_misuse_info"
+ }
+]
