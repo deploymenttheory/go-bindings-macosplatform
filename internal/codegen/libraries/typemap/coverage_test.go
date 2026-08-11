@@ -88,13 +88,13 @@ func TestResolveGoTypeTypedefChain(t *testing.T) {
 
 func TestResolveGoTypeTypedefToUnsafeDoesntShortCircuit(t *testing.T) {
 	m := newTestMapper()
-	m.TypedefIndex = map[string]string{"OpaqueHandle": "id"} // id → cgo.Object
-	// A typedef that resolves to id propagates the cgo.Object result upward.
+	m.TypedefIndex = map[string]string{"OpaqueHandle": "id"} // id → objptr.Object
+	// A typedef that resolves to id propagates the objptr.Object result upward.
 	ctx := newTestCtx(m, "Foundation")
 	got := m.GoType("OpaqueHandle", ctx, nil)
-	// id → cgo.Object, so the typedef resolves to cgo.Object.
-	if got != "cgo.Object" {
-		t.Errorf("GoType(typedef→id) = %q, want cgo.Object", got)
+	// id → objptr.Object, so the typedef resolves to objptr.Object.
+	if got != "objptr.Object" {
+		t.Errorf("GoType(typedef→id) = %q, want objptr.Object", got)
 	}
 }
 
@@ -152,10 +152,10 @@ func TestGoPointerTypeInClassMethod(t *testing.T) {
 	ctx.GenericParams = []string{"ObjectType"}
 	ctx.IsClassMethod = true
 	// NSArray<ObjectType> * in a class method: ObjectType in scope but InClassMethod=true
-	// → qualifiedType with "[cgo.Object]" instead of "[T]"
+	// → qualifiedType with "[objptr.Object]" instead of "[T]"
 	got := m.GoType("NSArray<ObjectType> *", ctx, nil)
-	if got != "*NSArray[cgo.Object]" {
-		t.Errorf("GoType(NSArray<ObjectType> *, InClassMethod) = %q, want *NSArray[cgo.Object]", got)
+	if got != "*NSArray[objptr.Object]" {
+		t.Errorf("GoType(NSArray<ObjectType> *, InClassMethod) = %q, want *NSArray[objptr.Object]", got)
 	}
 }
 
@@ -253,10 +253,10 @@ func TestResolveGoTypeIDProtocolReturnPosition(t *testing.T) {
 	m.ProtocolIndex = map[string]string{"NSCopying": "Foundation"}
 	ctx := newTestCtx(m, "Foundation")
 	ctx.IsReturn = true
-	// In return position with no proxy registered, id<Protocol> falls back to cgo.Object.
+	// In return position with no proxy registered, id<Protocol> falls back to objptr.Object.
 	got := m.GoType("id<NSCopying>", ctx, nil)
-	if got != "cgo.Object" {
-		t.Errorf("GoType(id<NSCopying>, IsReturn) = %q, want cgo.Object", got)
+	if got != "objptr.Object" {
+		t.Errorf("GoType(id<NSCopying>, IsReturn) = %q, want objptr.Object", got)
 	}
 }
 

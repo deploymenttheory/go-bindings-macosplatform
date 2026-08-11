@@ -22,7 +22,7 @@ type typeCacheKey struct {
 	// isReturn distinguishes parameter position from return position: block types
 	// resolve to func(...) in parameter position but unsafe.Pointer in return position.
 	isReturn bool
-	// isClassMethod: when true, generic type parameters resolve to cgo.Object
+	// isClassMethod: when true, generic type parameters resolve to objptr.Object
 	// rather than T because class methods have no receiver type variable in scope.
 	isClassMethod bool
 }

@@ -151,7 +151,7 @@ Verify Clang is available via `xcrun`:
 xcrun clang --version
 ```
 
-**External dependencies:** `github.com/ebitengine/purego` is the only runtime dependency — it provides `dlopen`, `objc_msgSend` dispatch, and block support without CGo. The CGo C-library layer has no external runtime dependency (pure CGo over `bindings/runtime/cgo`). The only other entry in `go.mod` is `gopkg.in/yaml.v3`, used by in-repo generator tooling, not the bindings.
+**External dependencies:** `github.com/ebitengine/purego` is the only runtime dependency — it provides `dlopen`, `objc_msgSend` dispatch, and block support without CGo. Both the framework packages and the C-library packages run on it. The only other entry in `go.mod` is `gopkg.in/yaml.v3`, used by in-repo generator tooling, not the bindings.
 
 ---
 
@@ -509,7 +509,7 @@ The runtime lives under `bindings/runtime/` — public packages imported both by
 
 Each generated package also carries a small `<pkg>_runtime_generated.go`: a `sync.Once`-guarded `dlopen` of the framework dylib, per-symbol function registration with failure tracking, and the public `SymbolAvailable(symbol string) bool` probe.
 
-The CGo library packages use `bindings/runtime/cgo` instead (retain/release, `RunOnMainThread`, string conversion, exception extraction, `RaiseIfException`, `NSErrorToError`). Their calls are context-free and uninstrumented — the same zero-overhead dispatch as the purego frameworks.
+The C-library packages (`bindings/libraries/`) carry the same `<pkg>_runtime_generated.go` shape, `dlopen`ing the library rather than a framework, and dispatch through `purego.SyscallN`. Their protocol interfaces are constrained by the dependency-free `bindings/runtime/objptr`, so they build under `CGO_ENABLED=0`. Their calls are context-free and uninstrumented — the same zero-overhead dispatch as the frameworks.
 
 ### Generated Package Structure
 

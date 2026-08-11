@@ -137,11 +137,11 @@ func (m *Mapper) GoBlockUserFuncType(n string, ctx Context, imports ImportSet) s
 				t = typed
 			}
 		} else if IsID(a) {
-			// bare `id` in a user-facing block arg → cgo.Object interface
-			t = "cgo.Object"
+			// bare `id` in a user-facing block arg → objptr.Object interface
+			t = "objptr.Object"
 		} else if protos := IDProtocols(a); len(protos) > 0 {
 			// id<Protocol> block arg: use return-position semantics so GoType yields
-			// *ProtoIDProtocol (constructible via NewProto(ptr)) or cgo.Object —
+			// *ProtoIDProtocol (constructible via NewProto(ptr)) or objptr.Object —
 			// both can be built from an unsafe.Pointer by blockArgCtor.
 			// Arg-position would give the bare interface, which blockArgCtor cannot construct.
 			retCtx := argCtx
@@ -149,7 +149,7 @@ func (m *Mapper) GoBlockUserFuncType(n string, ctx Context, imports ImportSet) s
 			if typed := m.GoType(a, retCtx, imports); typed != "" && typed != "unsafe.Pointer" {
 				t = typed
 			} else {
-				t = "cgo.Object"
+				t = "objptr.Object"
 			}
 		} else {
 			// Framework-specific opaque CF types (CGColorRef, CMSampleBufferRef, etc.):
@@ -159,11 +159,11 @@ func (m *Mapper) GoBlockUserFuncType(n string, ctx Context, imports ImportSet) s
 				t = m.GoType(a, argCtx, imports)
 			} else if !strings.ContainsAny(n, " *<>^()") {
 				// Bare ObjC generic type parameter (e.g. ObjectType in NSArray enumerate blocks).
-				// Return cgo.Object — blockArgCtor converts via cgo.WrapObject.
+				// Return objptr.Object — blockArgCtor wraps the raw pointer.
 				if len(argCtx.GenericParams) > 0 {
 					for _, gp := range argCtx.GenericParams {
 						if n == gp {
-							t = "cgo.Object"
+							t = "objptr.Object"
 							break
 						}
 					}
@@ -193,7 +193,7 @@ func (m *Mapper) GoBlockUserFuncType(n string, ctx Context, imports ImportSet) s
 	// rather than func(float64) unsafe.Pointer).
 	goRet := m.GoBlockArgType(retType)
 	if IsID(retType) {
-		goRet = "cgo.Object"
+		goRet = "objptr.Object"
 	} else if protos := IDProtocols(retType); len(protos) > 0 {
 		// Block return type id<P>: same return-position semantics as above.
 		retCtx := argCtx
@@ -201,7 +201,7 @@ func (m *Mapper) GoBlockUserFuncType(n string, ctx Context, imports ImportSet) s
 		if typed := m.GoType(retType, retCtx, imports); typed != "" && typed != "unsafe.Pointer" {
 			goRet = typed
 		} else {
-			goRet = "cgo.Object"
+			goRet = "objptr.Object"
 		}
 	} else if class := ClassName(retType); class != "" && argCtx.ClassNameIndex[class] {
 		if typed := m.GoType(retType, argCtx, imports); typed != "" && typed != "unsafe.Pointer" {

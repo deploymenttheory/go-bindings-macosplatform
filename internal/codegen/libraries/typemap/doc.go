@@ -1,5 +1,5 @@
 // Package typemap resolves ObjC qualType strings to their Go equivalents for the
-// LIBRARIES pipeline (cgo/C) only.
+// LIBRARIES pipeline (bindings/libraries) only.
 //
 // SCOPE — pipeline-specific by design. This package is deliberately NOT shared
 // with its frameworks counterpart, internal/codegen/frameworks/typemap: the

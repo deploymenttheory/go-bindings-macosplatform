@@ -135,7 +135,7 @@ func writeOpinionatedHeader(
 		"raw": rawImportPath,
 	}
 	if needsObjc {
-		all["cgo"] = "github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo"
+		all["objptr"] = "github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/objptr"
 	}
 	for alias, path := range extraImports {
 		all[alias] = path
@@ -273,7 +273,7 @@ func recordOpinionatedImports(goType string, m *typemap.Mapper, usedImports map[
 			continue
 		}
 		packageName := part[:dot]
-		if packageName == "raw" || packageName == "cgo" || packageName == "unsafe" {
+		if packageName == "raw" || packageName == "objptr" || packageName == "unsafe" {
 			continue
 		}
 		if packageName == "bsd" {

@@ -8,7 +8,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/tools/grandcentraldispatch/mainthread"
 )
 
 func init() {
@@ -40,10 +40,9 @@ func TestMain(m *testing.M) {
 		case <-deadline:
 			os.Exit(2)
 		default:
-			// Pump the main run loop for up to 50ms. The run loop returns early
-			// when a dispatch item arrives, so latency for RunOnMainThread is
-			// negligible in practice.
-			cgo.PumpMainRunLoop(0.05)
+			// Drain the main dispatch queue (what mainthread.Do posts to) on the
+			// OS main thread for up to 50ms per iteration.
+			mainthread.PumpMainRunLoop(0.05)
 		}
 	}
 }

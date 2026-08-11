@@ -322,8 +322,8 @@ func TestWriteOpinionatedHeaderNeedsObjc(t *testing.T) {
 		t.Fatal(err)
 	}
 	out := buf.String()
-	if !strings.Contains(out, "cgo") {
-		t.Errorf("expected objc import when needsObjc=true; got:\n%s", out)
+	if !strings.Contains(out, "runtime/objptr") {
+		t.Errorf("expected objptr import when needsObjc=true; got:\n%s", out)
 	}
 }
 

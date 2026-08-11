@@ -51,7 +51,7 @@ func TestProtocolsEmpty(t *testing.T) {
 		"//go:build darwin",
 		"package mypkg",
 		`"unsafe"`,
-		`"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo"`,
+		`"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/objptr"`,
 	} {
 		if !strings.Contains(out, want) {
 			t.Errorf("missing %q in output:\n%s", want, out)
@@ -398,7 +398,7 @@ func TestProtocolsSuppressionVars(t *testing.T) {
 
 	for _, want := range []string{
 		"var _ unsafe.Pointer",
-		"var _ cgo.Object = nil",
+		"var _ objptr.Object = nil",
 	} {
 		if !strings.Contains(out, want) {
 			t.Errorf("expected suppression variable %q:\n%s", want, out)
