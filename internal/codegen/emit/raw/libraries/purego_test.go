@@ -41,6 +41,45 @@ func TestPuregoArg(t *testing.T) {
 	}
 }
 
+// TestSplitGoFuncType covers decomposition of a Go func type into its
+// parameter types and return, including the depth-aware comma split that keeps
+// nested types intact.
+func TestSplitGoFuncType(t *testing.T) {
+	cases := []struct {
+		in         string
+		wantParams []string
+		wantRet    string
+		wantOK     bool
+	}{
+		{"func()", nil, "", true},
+		{"func(unsafe.Pointer)", []string{"unsafe.Pointer"}, "", true},
+		{"func(unsafe.Pointer, unsafe.Pointer)", []string{"unsafe.Pointer", "unsafe.Pointer"}, "", true},
+		{"func(uint64, unsafe.Pointer) bool", []string{"uint64", "unsafe.Pointer"}, "bool", true},
+		{"func(a map[string]int, b int)", []string{"a map[string]int", "b int"}, "", true},
+		{"func(f func(int, int) bool) error", []string{"f func(int, int) bool"}, "error", true},
+		{"unsafe.Pointer", nil, "", false},
+	}
+	for _, c := range cases {
+		params, ret, ok := splitGoFuncType(c.in)
+		if ok != c.wantOK || ret != c.wantRet || !equalStrs(params, c.wantParams) {
+			t.Errorf("splitGoFuncType(%q) = (%v, %q, %v); want (%v, %q, %v)",
+				c.in, params, ret, ok, c.wantParams, c.wantRet, c.wantOK)
+		}
+	}
+}
+
+func equalStrs(a, b []string) bool {
+	if len(a) != len(b) {
+		return false
+	}
+	for i := range a {
+		if a[i] != b[i] {
+			return false
+		}
+	}
+	return true
+}
+
 // TestExternPuregoInitExpr covers the translation of CGo extern init shapes to
 // Dlsym-based ones.
 func TestExternPuregoInitExpr(t *testing.T) {

@@ -7,6 +7,7 @@ import (
 
 	bsm "github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/libraries/bsm"
 	compression "github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/libraries/compression"
+	endpointsecurity "github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/libraries/endpointsecurity"
 	ioreport "github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/libraries/ioreport"
 	libproc "github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/libraries/libproc"
 	machhost "github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/libraries/machhost"
@@ -35,6 +36,7 @@ func TestSymbolsResolve(t *testing.T) {
 		{"ioreport", ioreport.SymbolAvailable, "IOReportCopyAllChannels"},
 		{"bsm", bsm.SymbolAvailable, "audit_token_to_pid"},
 		{"libproc", libproc.SymbolAvailable, "proc_pidpath"},
+		{"endpointsecurity", endpointsecurity.SymbolAvailable, "es_new_client"},
 	}
 	for _, c := range cases {
 		if !c.available(c.symbol) {

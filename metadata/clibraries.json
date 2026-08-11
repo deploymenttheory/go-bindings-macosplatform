@@ -9,6 +9,7 @@
   "link_lib": "compression"
  },
  "EndpointSecurity": {
+  "backend": "purego",
   "link_lib": "EndpointSecurity"
  },
  "Sandbox": {

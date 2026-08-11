@@ -116,13 +116,27 @@ func buildPuregoFunction(
 
 	var varParams, callArgs, preambles, keepAlives []string
 	for i, arg := range fn.Params {
-		// Block parameters need objc.NewBlock plumbing — deferred until the
-		// block-using libraries (dispatch/xpc/endpointsecurity) migrate.
+		// Block parameters: the caller passes a Go func; wrap it in an
+		// objc.NewBlock adapter (the same shape the frameworks pipeline emits
+		// for C-function block params) and pass the objc.Block to the callee.
+		blockObjCType := ""
 		if arg.IsBlock {
-			return puregoFunctionModel{}, false
+			blockObjCType = arg.ObjCType
+		} else if target, ok := m.TypedefIndex[typemap.Normalise(arg.ObjCType)]; ok && typemap.IsBlock(target) {
+			blockObjCType = target
 		}
-		if target, ok := m.TypedefIndex[typemap.Normalise(arg.ObjCType)]; ok && typemap.IsBlock(target) {
-			return puregoFunctionModel{}, false
+		if blockObjCType != "" {
+			varType, callExpr, ok := puregoBlockArg(
+				blockObjCType, resolved[i],
+				m.GoBlockUserFuncType(blockObjCType, ctx, imports),
+				ctx, m, imports, &preambles,
+			)
+			if !ok {
+				return puregoFunctionModel{}, false
+			}
+			varParams = append(varParams, varType)
+			callArgs = append(callArgs, callExpr)
+			continue
 		}
 		goType := m.GoType(arg.ObjCType, ctx, imports)
 		if goType == "" {
@@ -178,6 +192,125 @@ func buildPuregoFunction(
 	fmt.Fprintf(&body, "}\n")
 
 	return puregoFunctionModel{varName: varName, varType: varType, body: body.String()}, true
+}
+
+// puregoBlockArg builds the objc.NewBlock adapter for a block parameter. The
+// wrapper takes the caller's Go func (userType, e.g. "func(unsafe.Pointer)"),
+// wraps it in a block whose implementation forwards to it, and passes the
+// resulting objc.Block to the callee. Every C-function block param in the
+// migrated libraries is "plain": its user-func params are the block's raw
+// C-ABI Go types (unsafe.Pointer / scalars / enums), so the adapter forwards
+// arguments unchanged. ok=false when the block needs per-arg conversion
+// (error, typed class, *bool) — the reconstructed func type would not match
+// userType, so the function is skipped rather than mis-wrapped.
+func puregoBlockArg(
+	blockObjCType, argName, userType string,
+	ctx typemap.Context,
+	m *typemap.Mapper,
+	imports typemap.ImportSet,
+	preambles *[]string,
+) (varType, callExpr string, ok bool) {
+	// Parse the user-facing func type (the wrapper's own parameter) so the
+	// closure forwards with byte-identical parameter/return types — no
+	// independent re-derivation that could drift and fail to typecheck.
+	paramTypes, retGo, ok := splitGoFuncType(userType)
+	if !ok {
+		return "", "", false
+	}
+	// The block delivers each argument as its raw C-ABI value. That forwards
+	// unchanged for pointers/scalars/enums/typed struct pointers, but NOT for
+	// mapper conveniences that need construction from the raw value (error and
+	// cgo.Object from an id, *bool from a BOOL*). None occur in the migrated
+	// libraries; reject if one appears rather than emit a mis-typed forward.
+	for _, pt := range paramTypes {
+		if pt == "error" || pt == "cgo.Object" || strings.Contains(pt, "cgo.") {
+			return "", "", false
+		}
+	}
+	if retGo == "error" || retGo == "cgo.Object" {
+		return "", "", false
+	}
+
+	var closureParams, forwardArgs []string
+	for i, pt := range paramTypes {
+		name := fmt.Sprintf("_a%d", i)
+		closureParams = append(closureParams, name+" "+pt)
+		forwardArgs = append(forwardArgs, name)
+	}
+
+	blkVar := "_blk_" + argName
+	closureSig := "func(_ objc.Block"
+	if len(closureParams) > 0 {
+		closureSig += ", " + strings.Join(closureParams, ", ")
+	}
+	closureSig += ")"
+	if retGo != "" {
+		closureSig += " " + retGo
+	}
+	forward := argName + "(" + strings.Join(forwardArgs, ", ") + ")"
+	if retGo != "" {
+		forward = "return " + forward
+	}
+
+	*preambles = append(*preambles,
+		"var "+blkVar+" objc.Block",
+		"if "+argName+" != nil {",
+		"\t"+blkVar+" = objc.NewBlock("+closureSig+" { "+forward+" })",
+		"\tdefer "+blkVar+".Release()",
+		"}",
+	)
+	return "objc.Block", blkVar, true
+}
+
+// splitGoFuncType decomposes a Go func type string ("func(A, B) R", "func()")
+// into its parameter types and return type. Commas are split at bracket depth
+// zero so nested types (maps, funcs, generics) stay intact. ok=false if s is
+// not a "func(...)" form.
+func splitGoFuncType(s string) (params []string, ret string, ok bool) {
+	if !strings.HasPrefix(s, "func(") {
+		return nil, "", false
+	}
+	// Find the ')' that closes the parameter list (depth zero from "func(").
+	depth, close := 0, -1
+	for i := 4; i < len(s); i++ {
+		switch s[i] {
+		case '(', '[', '{':
+			depth++
+		case ')', ']', '}':
+			depth--
+			if depth == 0 {
+				close = i
+			}
+		}
+		if close >= 0 {
+			break
+		}
+	}
+	if close < 0 {
+		return nil, "", false
+	}
+	inner := s[5:close]
+	ret = strings.TrimSpace(s[close+1:])
+	if strings.TrimSpace(inner) == "" {
+		return nil, ret, true
+	}
+	depth = 0
+	start := 0
+	for i := 0; i < len(inner); i++ {
+		switch inner[i] {
+		case '(', '[', '{':
+			depth++
+		case ')', ']', '}':
+			depth--
+		case ',':
+			if depth == 0 {
+				params = append(params, strings.TrimSpace(inner[start:i]))
+				start = i + 1
+			}
+		}
+	}
+	params = append(params, strings.TrimSpace(inner[start:]))
+	return params, ret, true
 }
 
 // puregoArg mirrors goCGoArgExpr's classification: for each wrapper-signature
@@ -262,6 +395,9 @@ func writePuregoImports(out *bytes.Buffer, code string, imports typemap.ImportSe
 	}
 	if strings.Contains(code, "purego.") {
 		set["github.com/ebitengine/purego"] = true
+	}
+	if strings.Contains(code, "objc.") {
+		set["github.com/ebitengine/purego/objc"] = true
 	}
 	for _, path := range imports {
 		set[path] = true

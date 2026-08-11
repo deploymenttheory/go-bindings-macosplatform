@@ -4,24 +4,57 @@
 
 package endpointsecurity
 
-// #include "bridge/endpointsecurity_bridge.h"
-import "C"
-
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/blocks"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo"
+	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-var _ unsafe.Pointer // suppress unused import
+var (
+	_pg_es_message_size            func(*EsMessageT) uint64
+	_pg_es_copy_message            func(*EsMessageT) unsafe.Pointer
+	_pg_es_free_message            func(*EsMessageT)
+	_pg_es_retain_message          func(*EsMessageT)
+	_pg_es_release_message         func(*EsMessageT)
+	_pg_es_exec_arg_count          func(*EsEventExecT) uint32
+	_pg_es_exec_env_count          func(*EsEventExecT) uint32
+	_pg_es_exec_fd_count           func(*EsEventExecT) uint32
+	_pg_es_exec_arg                func(*EsEventExecT, uint32) EsStringTokenT
+	_pg_es_exec_env                func(*EsEventExecT, uint32) EsStringTokenT
+	_pg_es_exec_fd                 func(*EsEventExecT, uint32) unsafe.Pointer
+	_pg_es_subscribe               func(unsafe.Pointer, *EsEventTypeT, uint32) EsReturnT
+	_pg_es_unsubscribe             func(unsafe.Pointer, *EsEventTypeT, uint32) EsReturnT
+	_pg_es_unsubscribe_all         func(unsafe.Pointer) EsReturnT
+	_pg_es_subscriptions           func(unsafe.Pointer, *uint64, unsafe.Pointer) EsReturnT
+	_pg_es_respond_auth_result     func(unsafe.Pointer, *EsMessageT, EsAuthResultT, bool) EsRespondResultT
+	_pg_es_respond_flags_result    func(unsafe.Pointer, *EsMessageT, uint32, bool) EsRespondResultT
+	_pg_es_mute_process            func(unsafe.Pointer, *AuditTokenT) EsReturnT
+	_pg_es_mute_process_events     func(unsafe.Pointer, *AuditTokenT, *EsEventTypeT, uint64) EsReturnT
+	_pg_es_unmute_process          func(unsafe.Pointer, *AuditTokenT) EsReturnT
+	_pg_es_unmute_process_events   func(unsafe.Pointer, *AuditTokenT, *EsEventTypeT, uint64) EsReturnT
+	_pg_es_muted_processes         func(unsafe.Pointer, *uint64, unsafe.Pointer) EsReturnT
+	_pg_es_muted_processes_events  func(unsafe.Pointer, unsafe.Pointer) EsReturnT
+	_pg_es_release_muted_processes func(*EsMutedProcessesT)
+	_pg_es_mute_path               func(unsafe.Pointer, string, EsMutePathTypeT) EsReturnT
+	_pg_es_mute_path_events        func(unsafe.Pointer, string, EsMutePathTypeT, *EsEventTypeT, uint64) EsReturnT
+	_pg_es_mute_path_prefix        func(unsafe.Pointer, string) EsReturnT
+	_pg_es_mute_path_literal       func(unsafe.Pointer, string) EsReturnT
+	_pg_es_unmute_all_paths        func(unsafe.Pointer) EsReturnT
+	_pg_es_unmute_all_target_paths func(unsafe.Pointer) EsReturnT
+	_pg_es_unmute_path             func(unsafe.Pointer, string, EsMutePathTypeT) EsReturnT
+	_pg_es_unmute_path_events      func(unsafe.Pointer, string, EsMutePathTypeT, *EsEventTypeT, uint64) EsReturnT
+	_pg_es_muted_paths_events      func(unsafe.Pointer, unsafe.Pointer) EsReturnT
+	_pg_es_release_muted_paths     func(*EsMutedPathsT)
+	_pg_es_invert_muting           func(unsafe.Pointer, EsMuteInversionTypeT) EsReturnT
+	_pg_es_muting_inverted         func(unsafe.Pointer, EsMuteInversionTypeT) EsMuteInvertedReturnT
+	_pg_es_clear_cache             func(unsafe.Pointer) EsClearCacheResultT
+	_pg_es_new_client              func(unsafe.Pointer, objc.Block) EsNewClientResultT
+	_pg_es_delete_client           func(unsafe.Pointer) EsReturnT
+)
 
 // [ESMessage.h:2713]
 // ID: objc-sym EndpointSecurity.es_message_size
 func Es_message_size(msg *EsMessageT) uint64 {
-	var _exc unsafe.Pointer
-	_result := uint64(C.endpointsecurity_fn_es_message_size(unsafe.Pointer(msg), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_es_message_size(msg)
 }
 
 // [ESMessage.h:2732]
@@ -30,10 +63,7 @@ func Es_message_size(msg *EsMessageT) uint64 {
 // Deprecated: Deprecated in macOS 11.0. Use es_retain_message to retain a message. Use es_retain_message to retain a message instead.
 // ID: objc-sym EndpointSecurity.es_copy_message
 func Es_copy_message(msg *EsMessageT) unsafe.Pointer {
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.endpointsecurity_fn_es_copy_message(unsafe.Pointer(msg), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_es_copy_message(msg)
 }
 
 // [ESMessage.h:2744]
@@ -42,197 +72,133 @@ func Es_copy_message(msg *EsMessageT) unsafe.Pointer {
 // Deprecated: Deprecated in macOS 11.0. Use es_release_message to release a message. Use es_release_message to release a message instead.
 // ID: objc-sym EndpointSecurity.es_free_message
 func Es_free_message(msg *EsMessageT) {
-	var _exc unsafe.Pointer
-	C.endpointsecurity_fn_es_free_message(unsafe.Pointer(msg), &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_es_free_message(msg)
 }
 
 // [ESMessage.h:2756]
 // Introduced: macOS 11.0
 // ID: objc-sym EndpointSecurity.es_retain_message
 func Es_retain_message(msg *EsMessageT) {
-	var _exc unsafe.Pointer
-	C.endpointsecurity_fn_es_retain_message(unsafe.Pointer(msg), &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_es_retain_message(msg)
 }
 
 // [ESMessage.h:2765]
 // Introduced: macOS 11.0
 // ID: objc-sym EndpointSecurity.es_release_message
 func Es_release_message(msg *EsMessageT) {
-	var _exc unsafe.Pointer
-	C.endpointsecurity_fn_es_release_message(unsafe.Pointer(msg), &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_es_release_message(msg)
 }
 
 // [ESMessage.h:2774]
 // Introduced: macOS 10.15
 // ID: objc-sym EndpointSecurity.es_exec_arg_count
 func Es_exec_arg_count(event *EsEventExecT) uint32 {
-	var _exc unsafe.Pointer
-	_result := uint32(C.endpointsecurity_fn_es_exec_arg_count(unsafe.Pointer(event), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_es_exec_arg_count(event)
 }
 
 // [ESMessage.h:2783]
 // Introduced: macOS 10.15
 // ID: objc-sym EndpointSecurity.es_exec_env_count
 func Es_exec_env_count(event *EsEventExecT) uint32 {
-	var _exc unsafe.Pointer
-	_result := uint32(C.endpointsecurity_fn_es_exec_env_count(unsafe.Pointer(event), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_es_exec_env_count(event)
 }
 
 // [ESMessage.h:2792]
 // Introduced: macOS 11.0
 // ID: objc-sym EndpointSecurity.es_exec_fd_count
 func Es_exec_fd_count(event *EsEventExecT) uint32 {
-	var _exc unsafe.Pointer
-	_result := uint32(C.endpointsecurity_fn_es_exec_fd_count(unsafe.Pointer(event), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_es_exec_fd_count(event)
 }
 
 // [ESMessage.h:2805]
 // Introduced: macOS 10.15
 // ID: objc-sym EndpointSecurity.es_exec_arg
 func Es_exec_arg(event *EsEventExecT, index uint32) EsStringTokenT {
-	var _exc unsafe.Pointer
-	_ptr := unsafe.Pointer(C.endpointsecurity_fn_es_exec_arg(unsafe.Pointer(event), C.uint32_t(index), &_exc))
-	cgo.RaiseIfException(_exc)
-	if _ptr == nil {
-		return EsStringTokenT{}
-	}
-	_result := *(*EsStringTokenT)(unsafe.Pointer(_ptr))
-	cgo.FreePtr(_ptr)
-	return _result
+	return _pg_es_exec_arg(event, index)
 }
 
 // [ESMessage.h:2818]
 // Introduced: macOS 10.15
 // ID: objc-sym EndpointSecurity.es_exec_env
 func Es_exec_env(event *EsEventExecT, index uint32) EsStringTokenT {
-	var _exc unsafe.Pointer
-	_ptr := unsafe.Pointer(C.endpointsecurity_fn_es_exec_env(unsafe.Pointer(event), C.uint32_t(index), &_exc))
-	cgo.RaiseIfException(_exc)
-	if _ptr == nil {
-		return EsStringTokenT{}
-	}
-	_result := *(*EsStringTokenT)(unsafe.Pointer(_ptr))
-	cgo.FreePtr(_ptr)
-	return _result
+	return _pg_es_exec_env(event, index)
 }
 
 // [ESMessage.h:2831]
 // Introduced: macOS 11.0
 // ID: objc-sym EndpointSecurity.es_exec_fd
 func Es_exec_fd(event *EsEventExecT, index uint32) unsafe.Pointer {
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.endpointsecurity_fn_es_exec_fd(unsafe.Pointer(event), C.uint32_t(index), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_es_exec_fd(event, index)
 }
 
 // [ESClient.h:38]
 // Introduced: macOS 10.15
 // ID: objc-sym EndpointSecurity.es_subscribe
 func Es_subscribe(client unsafe.Pointer, events *EsEventTypeT, event_count uint32) EsReturnT {
-	var _exc unsafe.Pointer
-	_result := EsReturnT(C.endpointsecurity_fn_es_subscribe(client, unsafe.Pointer(events), C.uint32_t(event_count), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_es_subscribe(client, events, event_count)
 }
 
 // [ESClient.h:52]
 // Introduced: macOS 10.15
 // ID: objc-sym EndpointSecurity.es_unsubscribe
 func Es_unsubscribe(client unsafe.Pointer, events *EsEventTypeT, event_count uint32) EsReturnT {
-	var _exc unsafe.Pointer
-	_result := EsReturnT(C.endpointsecurity_fn_es_unsubscribe(client, unsafe.Pointer(events), C.uint32_t(event_count), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_es_unsubscribe(client, events, event_count)
 }
 
 // [ESClient.h:61]
 // Introduced: macOS 10.15
 // ID: objc-sym EndpointSecurity.es_unsubscribe_all
 func Es_unsubscribe_all(client unsafe.Pointer) EsReturnT {
-	var _exc unsafe.Pointer
-	_result := EsReturnT(C.endpointsecurity_fn_es_unsubscribe_all(client, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_es_unsubscribe_all(client)
 }
 
 // [ESClient.h:76]
 // Introduced: macOS 10.15
 // ID: objc-sym EndpointSecurity.es_subscriptions
 func Es_subscriptions(client unsafe.Pointer, count *uint64, subscriptions unsafe.Pointer) EsReturnT {
-	var _exc unsafe.Pointer
-	_result := EsReturnT(C.endpointsecurity_fn_es_subscriptions(client, unsafe.Pointer(count), subscriptions, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_es_subscriptions(client, count, subscriptions)
 }
 
 // [ESClient.h:98]
 // Introduced: macOS 10.15
 // ID: objc-sym EndpointSecurity.es_respond_auth_result
 func Es_respond_auth_result(client unsafe.Pointer, message *EsMessageT, result EsAuthResultT, cache bool) EsRespondResultT {
-	var _exc unsafe.Pointer
-	_result := EsRespondResultT(C.endpointsecurity_fn_es_respond_auth_result(client, unsafe.Pointer(message), C.int32_t(result), C.bool(cache), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_es_respond_auth_result(client, message, result, cache)
 }
 
 // [ESClient.h:129]
 // Introduced: macOS 10.15
 // ID: objc-sym EndpointSecurity.es_respond_flags_result
 func Es_respond_flags_result(client unsafe.Pointer, message *EsMessageT, authorized_flags uint32, cache bool) EsRespondResultT {
-	var _exc unsafe.Pointer
-	_result := EsRespondResultT(C.endpointsecurity_fn_es_respond_flags_result(client, unsafe.Pointer(message), C.uint32_t(authorized_flags), C.bool(cache), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_es_respond_flags_result(client, message, authorized_flags, cache)
 }
 
 // [ESClient.h:147]
 // Introduced: macOS 10.15
 // ID: objc-sym EndpointSecurity.es_mute_process
 func Es_mute_process(client unsafe.Pointer, audit_token *AuditTokenT) EsReturnT {
-	var _exc unsafe.Pointer
-	_result := EsReturnT(C.endpointsecurity_fn_es_mute_process(client, unsafe.Pointer(audit_token), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_es_mute_process(client, audit_token)
 }
 
 // [ESClient.h:165]
 // Introduced: macOS 12.0
 // ID: objc-sym EndpointSecurity.es_mute_process_events
 func Es_mute_process_events(client unsafe.Pointer, audit_token *AuditTokenT, events *EsEventTypeT, event_count uint64) EsReturnT {
-	var _exc unsafe.Pointer
-	_result := EsReturnT(C.endpointsecurity_fn_es_mute_process_events(client, unsafe.Pointer(audit_token), unsafe.Pointer(events), C.uint64_t(event_count), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_es_mute_process_events(client, audit_token, events, event_count)
 }
 
 // [ESClient.h:186]
 // Introduced: macOS 10.15
 // ID: objc-sym EndpointSecurity.es_unmute_process
 func Es_unmute_process(client unsafe.Pointer, audit_token *AuditTokenT) EsReturnT {
-	var _exc unsafe.Pointer
-	_result := EsReturnT(C.endpointsecurity_fn_es_unmute_process(client, unsafe.Pointer(audit_token), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_es_unmute_process(client, audit_token)
 }
 
 // [ESClient.h:204]
 // Introduced: macOS 12.0
 // ID: objc-sym EndpointSecurity.es_unmute_process_events
 func Es_unmute_process_events(client unsafe.Pointer, audit_token *AuditTokenT, events *EsEventTypeT, event_count uint64) EsReturnT {
-	var _exc unsafe.Pointer
-	_result := EsReturnT(C.endpointsecurity_fn_es_unmute_process_events(client, unsafe.Pointer(audit_token), unsafe.Pointer(events), C.uint64_t(event_count), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_es_unmute_process_events(client, audit_token, events, event_count)
 }
 
 // [ESClient.h:228]
@@ -241,53 +207,35 @@ func Es_unmute_process_events(client unsafe.Pointer, audit_token *AuditTokenT, e
 // Deprecated: Deprecated in macOS 12.0. Please use es_muted_processes_events. Use es_muted_processes_events instead.
 // ID: objc-sym EndpointSecurity.es_muted_processes
 func Es_muted_processes(client unsafe.Pointer, count *uint64, audit_tokens unsafe.Pointer) EsReturnT {
-	var _exc unsafe.Pointer
-	_result := EsReturnT(C.endpointsecurity_fn_es_muted_processes(client, unsafe.Pointer(count), audit_tokens, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_es_muted_processes(client, count, audit_tokens)
 }
 
 // [ESClient.h:246]
 // Introduced: macOS 12.0
 // ID: objc-sym EndpointSecurity.es_muted_processes_events
 func Es_muted_processes_events(client unsafe.Pointer, muted_processes unsafe.Pointer) EsReturnT {
-	var _exc unsafe.Pointer
-	_result := EsReturnT(C.endpointsecurity_fn_es_muted_processes_events(client, muted_processes, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_es_muted_processes_events(client, muted_processes)
 }
 
 // [ESClient.h:259]
 // Introduced: macOS 12.0
 // ID: objc-sym EndpointSecurity.es_release_muted_processes
 func Es_release_muted_processes(muted_processes *EsMutedProcessesT) {
-	var _exc unsafe.Pointer
-	C.endpointsecurity_fn_es_release_muted_processes(unsafe.Pointer(muted_processes), &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_es_release_muted_processes(muted_processes)
 }
 
 // [ESClient.h:336]
 // Introduced: macOS 12.0
 // ID: objc-sym EndpointSecurity.es_mute_path
 func Es_mute_path(client unsafe.Pointer, path string, type_ EsMutePathTypeT) EsReturnT {
-	_cstr_path := C.CString(path)
-	defer C.free(unsafe.Pointer(_cstr_path))
-	var _exc unsafe.Pointer
-	_result := EsReturnT(C.endpointsecurity_fn_es_mute_path(client, _cstr_path, C.int32_t(type_), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_es_mute_path(client, path, type_)
 }
 
 // [ESClient.h:360]
 // Introduced: macOS 12.0
 // ID: objc-sym EndpointSecurity.es_mute_path_events
 func Es_mute_path_events(client unsafe.Pointer, path string, type_ EsMutePathTypeT, events *EsEventTypeT, event_count uint64) EsReturnT {
-	_cstr_path := C.CString(path)
-	defer C.free(unsafe.Pointer(_cstr_path))
-	var _exc unsafe.Pointer
-	_result := EsReturnT(C.endpointsecurity_fn_es_mute_path_events(client, _cstr_path, C.int32_t(type_), unsafe.Pointer(events), C.uint64_t(event_count), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_es_mute_path_events(client, path, type_, events, event_count)
 }
 
 // [ESClient.h:380]
@@ -296,12 +244,7 @@ func Es_mute_path_events(client unsafe.Pointer, path string, type_ EsMutePathTyp
 // Deprecated: Deprecated in macOS 12.0. Please use es_mute_path or es_mute_path_events. Use es_mute_path or es_mute_path_events instead.
 // ID: objc-sym EndpointSecurity.es_mute_path_prefix
 func Es_mute_path_prefix(client unsafe.Pointer, path_prefix string) EsReturnT {
-	_cstr_path_prefix := C.CString(path_prefix)
-	defer C.free(unsafe.Pointer(_cstr_path_prefix))
-	var _exc unsafe.Pointer
-	_result := EsReturnT(C.endpointsecurity_fn_es_mute_path_prefix(client, _cstr_path_prefix, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_es_mute_path_prefix(client, path_prefix)
 }
 
 // [ESClient.h:397]
@@ -310,125 +253,87 @@ func Es_mute_path_prefix(client unsafe.Pointer, path_prefix string) EsReturnT {
 // Deprecated: Deprecated in macOS 12.0. Please use es_mute_path or es_mute_path_events. Use es_mute_path or es_mute_path_events instead.
 // ID: objc-sym EndpointSecurity.es_mute_path_literal
 func Es_mute_path_literal(client unsafe.Pointer, path_literal string) EsReturnT {
-	_cstr_path_literal := C.CString(path_literal)
-	defer C.free(unsafe.Pointer(_cstr_path_literal))
-	var _exc unsafe.Pointer
-	_result := EsReturnT(C.endpointsecurity_fn_es_mute_path_literal(client, _cstr_path_literal, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_es_mute_path_literal(client, path_literal)
 }
 
 // [ESClient.h:408]
 // Introduced: macOS 10.15
 // ID: objc-sym EndpointSecurity.es_unmute_all_paths
 func Es_unmute_all_paths(client unsafe.Pointer) EsReturnT {
-	var _exc unsafe.Pointer
-	_result := EsReturnT(C.endpointsecurity_fn_es_unmute_all_paths(client, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_es_unmute_all_paths(client)
 }
 
 // [ESClient.h:417]
 // Introduced: macOS 13.0
 // ID: objc-sym EndpointSecurity.es_unmute_all_target_paths
 func Es_unmute_all_target_paths(client unsafe.Pointer) EsReturnT {
-	var _exc unsafe.Pointer
-	_result := EsReturnT(C.endpointsecurity_fn_es_unmute_all_target_paths(client, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_es_unmute_all_target_paths(client)
 }
 
 // [ESClient.h:441]
 // Introduced: macOS 12.0
 // ID: objc-sym EndpointSecurity.es_unmute_path
 func Es_unmute_path(client unsafe.Pointer, path string, type_ EsMutePathTypeT) EsReturnT {
-	_cstr_path := C.CString(path)
-	defer C.free(unsafe.Pointer(_cstr_path))
-	var _exc unsafe.Pointer
-	_result := EsReturnT(C.endpointsecurity_fn_es_unmute_path(client, _cstr_path, C.int32_t(type_), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_es_unmute_path(client, path, type_)
 }
 
 // [ESClient.h:460]
 // Introduced: macOS 12.0
 // ID: objc-sym EndpointSecurity.es_unmute_path_events
 func Es_unmute_path_events(client unsafe.Pointer, path string, type_ EsMutePathTypeT, events *EsEventTypeT, event_count uint64) EsReturnT {
-	_cstr_path := C.CString(path)
-	defer C.free(unsafe.Pointer(_cstr_path))
-	var _exc unsafe.Pointer
-	_result := EsReturnT(C.endpointsecurity_fn_es_unmute_path_events(client, _cstr_path, C.int32_t(type_), unsafe.Pointer(events), C.uint64_t(event_count), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_es_unmute_path_events(client, path, type_, events, event_count)
 }
 
 // [ESClient.h:483]
 // Introduced: macOS 12.0
 // ID: objc-sym EndpointSecurity.es_muted_paths_events
 func Es_muted_paths_events(client unsafe.Pointer, muted_paths unsafe.Pointer) EsReturnT {
-	var _exc unsafe.Pointer
-	_result := EsReturnT(C.endpointsecurity_fn_es_muted_paths_events(client, muted_paths, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_es_muted_paths_events(client, muted_paths)
 }
 
 // [ESClient.h:494]
 // Introduced: macOS 12.0
 // ID: objc-sym EndpointSecurity.es_release_muted_paths
 func Es_release_muted_paths(muted_paths *EsMutedPathsT) {
-	var _exc unsafe.Pointer
-	C.endpointsecurity_fn_es_release_muted_paths(unsafe.Pointer(muted_paths), &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_es_release_muted_paths(muted_paths)
 }
 
 // [ESClient.h:591]
 // Introduced: macOS 13.0
 // ID: objc-sym EndpointSecurity.es_invert_muting
 func Es_invert_muting(client unsafe.Pointer, mute_type EsMuteInversionTypeT) EsReturnT {
-	var _exc unsafe.Pointer
-	_result := EsReturnT(C.endpointsecurity_fn_es_invert_muting(client, C.int32_t(mute_type), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_es_invert_muting(client, mute_type)
 }
 
 // [ESClient.h:605]
 // Introduced: macOS 13.0
 // ID: objc-sym EndpointSecurity.es_muting_inverted
 func Es_muting_inverted(client unsafe.Pointer, mute_type EsMuteInversionTypeT) EsMuteInvertedReturnT {
-	var _exc unsafe.Pointer
-	_result := EsMuteInvertedReturnT(C.endpointsecurity_fn_es_muting_inverted(client, C.int32_t(mute_type), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_es_muting_inverted(client, mute_type)
 }
 
 // [ESClient.h:618]
 // Introduced: macOS 10.15
 // ID: objc-sym EndpointSecurity.es_clear_cache
 func Es_clear_cache(client unsafe.Pointer) EsClearCacheResultT {
-	var _exc unsafe.Pointer
-	_result := EsClearCacheResultT(C.endpointsecurity_fn_es_clear_cache(client, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_es_clear_cache(client)
 }
 
 // [ESClient.h:672]
 // Introduced: macOS 10.15
 // ID: objc-sym EndpointSecurity.es_new_client
 func Es_new_client(client unsafe.Pointer, handler func(unsafe.Pointer, unsafe.Pointer)) EsNewClientResultT {
-	_blk_handler := blocks.MakeBlock_void_ptr_ptr(handler)
-	defer blocks.FreeBlock(_blk_handler)
-	var _exc unsafe.Pointer
-	_result := EsNewClientResultT(C.endpointsecurity_fn_es_new_client(client, _blk_handler, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	var _blk_handler objc.Block
+	if handler != nil {
+		_blk_handler = objc.NewBlock(func(_ objc.Block, _a0 unsafe.Pointer, _a1 unsafe.Pointer) { handler(_a0, _a1) })
+		defer _blk_handler.Release()
+	}
+	return _pg_es_new_client(client, _blk_handler)
 }
 
 // [ESClient.h:683]
 // Introduced: macOS 10.15
 // ID: objc-sym EndpointSecurity.es_delete_client
 func Es_delete_client(client unsafe.Pointer) EsReturnT {
-	var _exc unsafe.Pointer
-	_result := EsReturnT(C.endpointsecurity_fn_es_delete_client(client, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_es_delete_client(client)
 }
