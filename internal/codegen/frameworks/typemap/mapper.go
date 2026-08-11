@@ -899,12 +899,17 @@ func (m *Mapper) qualifyType(
 		return "objc.ID"
 	}
 	pkgName := strings.ToLower(ownerFramework)
-	// A library-owned type (e.g. a value struct such as audit_token_t owned by bsm,
-	// captured once int-admission is on) cannot be surfaced in a frameworks (purego)
-	// binding: the idiomatic frameworks layer is hermetic (must not import the raw
-	// packages), and a cgo library value struct cannot be passed by value through a
-	// purego func var anyway. Degrade to unsafe.Pointer, matching the pre-capture
-	// behaviour for these opaque cross-pipeline types.
+	// A library-owned type (e.g. a value struct such as audit_token_t owned by
+	// bsm) referenced from a framework signature is degraded to unsafe.Pointer.
+	// No such reference occurs today — this branch is a guard, not a live path
+	// (a framework only names a library value struct once the scanner's
+	// int-admission capture is enabled). Since the C libraries are now purego,
+	// the original blocker (a cgo value struct cannot cross a purego func var)
+	// is gone; a real lift would resolve the type against the library package.
+	// It is NOT done here because LibraryModulePrefix is the RAW library prefix
+	// even during idiomatic generation, so emitting a reference would make an
+	// idiomatic framework import a raw package and break hermeticity. Lifting
+	// this needs the idiomatic library prefix plumbed through first.
 	if m.LibraryPkgs[pkgName] {
 		return "unsafe.Pointer"
 	}

@@ -722,9 +722,13 @@ func crossFrameworkValueStruct(
 	if !mapper.EmittableStructs[name] {
 		return "", nil, false
 	}
-	// A library-owned value struct (e.g. audit_token_t owned by bsm) cannot be
-	// referenced from a hermetic purego frameworks binding; let the caller degrade
-	// it to unsafe.Pointer rather than emit a cross-pipeline reference.
+	// A library-owned value struct (e.g. audit_token_t owned by bsm) is not
+	// referenced by value from a framework binding; degrade rather than emit a
+	// cross-pipeline reference. This is a guard, not a live path — no framework
+	// names a library value struct with the scanner's current capture settings.
+	// (The libraries are purego now, so the old cgo blocker is gone, but a lift
+	// would need the idiomatic library import prefix; see the frameworks mapper
+	// qualifyType comment.)
 	if mapper.LibraryPkgs[pkg] {
 		return "", nil, false
 	}
