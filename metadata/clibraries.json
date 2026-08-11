@@ -66,6 +66,7 @@
   "link_lib": "System"
  },
  "oslog": {
+  "backend": "purego",
   "header": "os/log.h",
   "header_dir": "os/log.h",
   "link_lib": "System"

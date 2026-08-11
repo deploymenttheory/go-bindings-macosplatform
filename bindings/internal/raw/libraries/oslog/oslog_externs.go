@@ -4,10 +4,10 @@
 
 package oslog
 
-// #include "bridge/oslog_bridge.h"
-import "C"
-
-import "unsafe"
+import (
+	"github.com/ebitengine/purego"
+	"unsafe"
+)
 
 var (
 	// [log.h:56]
@@ -18,9 +18,14 @@ var (
 	_os_log_disabled unsafe.Pointer
 )
 
-// init populates the extern vars from the C globals via bridge address
-// getters, so package consumers read live values rather than zero stubs.
-func init() {
-	_os_log_default = C.oslog_extern__os_log_default()
-	_os_log_disabled = C.oslog_extern__os_log_disabled()
+// _initExterns populates the extern vars once the dylib is loaded. An
+// extern whose symbol does not resolve keeps its zero value, matching the
+// CGo emission's unsupported-shape behaviour.
+func _initExterns(lib uintptr) {
+	if _addr, _ := purego.Dlsym(lib, "_os_log_default"); _addr != 0 {
+		_os_log_default = unsafe.Pointer(_addr)
+	}
+	if _addr, _ := purego.Dlsym(lib, "_os_log_disabled"); _addr != 0 {
+		_os_log_disabled = unsafe.Pointer(_addr)
+	}
 }
