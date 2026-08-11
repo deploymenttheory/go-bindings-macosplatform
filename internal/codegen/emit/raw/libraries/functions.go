@@ -12,6 +12,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/libraries/naming"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/libraries/typemap"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/macosplatformmetadata"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/scanner"
 )
 
 // Functions writes a complete _functions.go file for the framework's plain C functions.
@@ -89,8 +90,41 @@ func packageTypeNames(framework *macosplatformmetadata.FrameworkMeta) map[string
 // collides with the emitted type, so the wrapper gains an "Fn" suffix
 // (Mach_timebase_infoFn) instead of being silently dropped. The idiomatic
 // layer resolves its raw call targets through this same rule.
+//
+// A library on the purego backend is emitted by the frameworks pipeline
+// instead, whose naming joins snake_case segments (mach_absolute_time →
+// MachAbsoluteTime) and applies the same "Fn" collision suffix — this function
+// mirrors rawfw.FunctionGoNameFor for that backend so the idiomatic layer
+// targets the right raw spelling either way.
 func FunctionGoName(framework *macosplatformmetadata.FrameworkMeta, fn macosplatformmetadata.Function) string {
+	if scanner.CLibraryBackend(framework.Framework) == scanner.BackendPurego {
+		return puregoFunctionGoName(framework, fn)
+	}
 	return functionGoName(packageTypeNames(framework), fn)
+}
+
+// puregoFunctionGoName mirrors the frameworks pipeline's FunctionGoNameFor
+// (naming.ExportedFunctionName plus the library "Fn" collision suffix against
+// the same reserved set: enum type/member names and struct type names).
+func puregoFunctionGoName(framework *macosplatformmetadata.FrameworkMeta, fn macosplatformmetadata.Function) string {
+	goName := naming.ExportedFunctionName(fn.Name)
+	if goName == "" || goName == fn.Name {
+		return goName
+	}
+	reserved := make(map[string]bool)
+	for enumName, enum := range framework.Enums {
+		reserved[naming.GoTypeName(enumName)] = true
+		for _, member := range enum.Members {
+			reserved[naming.GoTypeName(member.Name)] = true
+		}
+	}
+	for structName := range framework.Structs {
+		reserved[naming.ExportedTypeName(structName)] = true
+	}
+	if reserved[goName] {
+		return goName + "Fn"
+	}
+	return goName
 }
 
 func functionGoName(pkgTypeNames map[string]bool, fn macosplatformmetadata.Function) string {

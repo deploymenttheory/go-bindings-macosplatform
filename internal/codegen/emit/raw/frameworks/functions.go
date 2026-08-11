@@ -57,7 +57,7 @@ func EmitFunctions(
 				"",
 			),
 			GoPkg:    pkgName,
-			GoSymbol: naming.ExportedFunctionName(fn.Name),
+			GoSymbol: FunctionGoNameFor(framework, fn),
 		})
 	}
 
@@ -96,7 +96,7 @@ func EmitFunctions(
 	for _, fn := range fns {
 		functionFile.Wrappers = append(
 			functionFile.Wrappers,
-			buildFunctionWrapperView(fn, ctx, mapper, imports, ownerIndex),
+			buildFunctionWrapperView(framework, fn, ctx, mapper, imports, ownerIndex),
 		)
 	}
 
@@ -186,6 +186,7 @@ func buildFunctionVarView(
 // into the bound C function pointer with its result converted (returned
 // directly, returned after a retain for object returns, or discarded for void).
 func buildFunctionWrapperView(
+	framework *meta.FrameworkMeta,
 	fn meta.Function,
 	ctx typemap.Context,
 	mapper *typemap.Mapper,
@@ -262,7 +263,7 @@ func buildFunctionWrapperView(
 	if fn.Doc != "" {
 		fmt.Fprintf(&comment, "// %s\n", fn.Doc)
 	}
-	goName := naming.ExportedFunctionName(fn.Name)
+	goName := FunctionGoNameFor(framework, fn)
 	if goName != fn.Name {
 		fmt.Fprintf(&comment, "// C function: %s\n", fn.Name)
 	}
@@ -349,13 +350,16 @@ func EmittableFunctions(
 
 	// Pass 2: snake_case (and other previously-unexported) names, transformed
 	// to PascalCase. Collisions with pass-1 names or other identifiers skip
-	// the function with a diagnostic.
+	// the function with a diagnostic — except in C libraries, where a
+	// function/type name clash is idiomatic C (mach_timebase_info is both a
+	// struct and a function) and FunctionGoNameFor resolves it with an "Fn"
+	// suffix instead, matching the CGo library pipeline's convention.
 	for _, fn := range framework.Functions {
 		if !passesFilters(fn) || seen[fn.Name] {
 			continue
 		}
 		seen[fn.Name] = true
-		goName := naming.ExportedFunctionName(fn.Name)
+		goName := FunctionGoNameFor(framework, fn)
 		if goName == "" {
 			continue
 		}
@@ -376,6 +380,24 @@ func EmittableFunctions(
 
 	sort.Slice(fns, func(i, j int) bool { return fns[i].Name < fns[j].Name })
 	return fns
+}
+
+// FunctionGoNameFor returns the exported Go wrapper name EmitFunctions gives
+// fn. For frameworks it is naming.ExportedFunctionName unchanged. For C
+// libraries (LinkLib != "") a name that collides with a package-level type
+// identifier gains an "Fn" suffix instead of being skipped — C idiomatically
+// declares a struct and function with the same name (mach_timebase_info), and
+// the CGo library pipeline resolves the clash the same way, so the idiomatic
+// layer can target either backend through one rule.
+func FunctionGoNameFor(framework *meta.FrameworkMeta, fn meta.Function) string {
+	goName := naming.ExportedFunctionName(fn.Name)
+	if goName == "" || framework.LinkLib == "" || goName == fn.Name {
+		return goName
+	}
+	if seedReservedGoNames(framework)[goName] {
+		return goName + "Fn"
+	}
+	return goName
 }
 
 // seedReservedGoNames builds the set of package-level Go identifiers produced
