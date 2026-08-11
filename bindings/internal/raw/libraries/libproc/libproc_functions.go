@@ -4,301 +4,234 @@
 
 package libproc
 
-// #include "bridge/libproc_bridge.h"
-import "C"
-
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/libraries/endpointsecurity"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo"
 	"unsafe"
 )
 
-var _ unsafe.Pointer // suppress unused import
+var (
+	_pg_proc_listpidspath              func(uint32, uint32, string, uint32, unsafe.Pointer, int32) int32
+	_pg_proc_listpids                  func(uint32, uint32, unsafe.Pointer, int32) int32
+	_pg_proc_listallpids               func(unsafe.Pointer, int32) int32
+	_pg_proc_listpgrppids              func(int32, unsafe.Pointer, int32) int32
+	_pg_proc_listchildpids             func(int32, unsafe.Pointer, int32) int32
+	_pg_proc_pidinfo                   func(int32, int32, uint64, unsafe.Pointer, int32) int32
+	_pg_proc_pidfdinfo                 func(int32, int32, int32, unsafe.Pointer, int32) int32
+	_pg_proc_pidfileportinfo           func(int32, uint32, int32, unsafe.Pointer, int32) int32
+	_pg_proc_name                      func(int32, unsafe.Pointer, uint32) int32
+	_pg_proc_regionfilename            func(int32, uint64, unsafe.Pointer, uint32) int32
+	_pg_proc_kmsgbuf                   func(unsafe.Pointer, uint32) int32
+	_pg_proc_pidpath                   func(int32, unsafe.Pointer, uint32) int32
+	_pg_proc_pidpath_audittoken        func(*endpointsecurity.AuditTokenT, unsafe.Pointer, uint32) int32
+	_pg_proc_libversion                func(*int32, *int32) int32
+	_pg_proc_pid_rusage                func(int32, int32, unsafe.Pointer) int32
+	_pg_proc_setpcontrol               func(int32) int32
+	_pg_proc_track_dirty               func(int32, uint32) int32
+	_pg_proc_set_dirty                 func(int32, bool) int32
+	_pg_proc_get_dirty                 func(int32, *uint32) int32
+	_pg_proc_clear_dirty               func(int32, uint32) int32
+	_pg_proc_terminate                 func(int32, *int32) int32
+	_pg_proc_terminate_all_rsr         func(int32) int32
+	_pg_proc_signal_with_audittoken    func(*endpointsecurity.AuditTokenT, int32) int32
+	_pg_proc_terminate_with_audittoken func(*endpointsecurity.AuditTokenT, *int32) int32
+	_pg_proc_signal_delegate           func(endpointsecurity.AuditTokenT, endpointsecurity.AuditTokenT, int32) int32
+	_pg_proc_terminate_delegate        func(endpointsecurity.AuditTokenT, endpointsecurity.AuditTokenT, *int32) int32
+	_pg_proc_set_no_smt                func() int32
+	_pg_proc_setthread_no_smt          func() int32
+	_pg_proc_set_csm                   func(uint32) int32
+	_pg_proc_setthread_csm             func(uint32) int32
+	_pg_proc_udata_info                func(int32, int32, unsafe.Pointer, int32) int32
+)
 
 // @function proc_listpidspath @discussion A function which will search through the current processes looking for open file references which match a specified path or volume. @param type types of processes to be searched (see proc_listpids) @param typeinfo adjunct information for type @param path file or volume path @param pathflags flags to control which files should be considered during the process search. @param buffer a C array of int-sized values to be filled with process identifiers that hold an open file reference matching the specified path or volume.  Pass NULL to obtain the minimum buffer size needed to hold the currently active processes. @param buffersize the size (in bytes) of the provided buffer. @result the number of bytes of data returned in the provided buffer; -1 if an error was encountered;
 // [libproc.h:85]
 // ID: objc-sym libproc.proc_listpidspath
 func Proc_listpidspath(type_ uint32, typeinfo uint32, path string, pathflags uint32, buffer unsafe.Pointer, buffersize int32) int32 {
-	_cstr_path := C.CString(path)
-	defer C.free(unsafe.Pointer(_cstr_path))
-	var _exc unsafe.Pointer
-	_result := int32(C.libproc_fn_proc_listpidspath(C.uint32_t(type_), C.uint32_t(typeinfo), _cstr_path, C.uint32_t(pathflags), buffer, C.int32_t(buffersize), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_proc_listpidspath(type_, typeinfo, path, pathflags, buffer, buffersize)
 }
 
 // [libproc.h:92]
 // ID: objc-sym libproc.proc_listpids
 func Proc_listpids(type_ uint32, typeinfo uint32, buffer unsafe.Pointer, buffersize int32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.libproc_fn_proc_listpids(C.uint32_t(type_), C.uint32_t(typeinfo), buffer, C.int32_t(buffersize), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_proc_listpids(type_, typeinfo, buffer, buffersize)
 }
 
 // [libproc.h:93]
 // ID: objc-sym libproc.proc_listallpids
 func Proc_listallpids(buffer unsafe.Pointer, buffersize int32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.libproc_fn_proc_listallpids(buffer, C.int32_t(buffersize), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_proc_listallpids(buffer, buffersize)
 }
 
 // [libproc.h:94]
 // ID: objc-sym libproc.proc_listpgrppids
 func Proc_listpgrppids(pgrpid int32, buffer unsafe.Pointer, buffersize int32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.libproc_fn_proc_listpgrppids(C.int32_t(pgrpid), buffer, C.int32_t(buffersize), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_proc_listpgrppids(pgrpid, buffer, buffersize)
 }
 
 // [libproc.h:95]
 // ID: objc-sym libproc.proc_listchildpids
 func Proc_listchildpids(ppid int32, buffer unsafe.Pointer, buffersize int32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.libproc_fn_proc_listchildpids(C.int32_t(ppid), buffer, C.int32_t(buffersize), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_proc_listchildpids(ppid, buffer, buffersize)
 }
 
 // [libproc.h:96]
 // ID: objc-sym libproc.proc_pidinfo
 func Proc_pidinfo(pid int32, flavor int32, arg uint64, buffer unsafe.Pointer, buffersize int32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.libproc_fn_proc_pidinfo(C.int32_t(pid), C.int32_t(flavor), C.uint64_t(arg), buffer, C.int32_t(buffersize), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_proc_pidinfo(pid, flavor, arg, buffer, buffersize)
 }
 
 // [libproc.h:97]
 // ID: objc-sym libproc.proc_pidfdinfo
 func Proc_pidfdinfo(pid int32, fd int32, flavor int32, buffer unsafe.Pointer, buffersize int32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.libproc_fn_proc_pidfdinfo(C.int32_t(pid), C.int32_t(fd), C.int32_t(flavor), buffer, C.int32_t(buffersize), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_proc_pidfdinfo(pid, fd, flavor, buffer, buffersize)
 }
 
 // [libproc.h:98]
 // ID: objc-sym libproc.proc_pidfileportinfo
 func Proc_pidfileportinfo(pid int32, fileport uint32, flavor int32, buffer unsafe.Pointer, buffersize int32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.libproc_fn_proc_pidfileportinfo(C.int32_t(pid), C.uint32_t(fileport), C.int32_t(flavor), buffer, C.int32_t(buffersize), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_proc_pidfileportinfo(pid, fileport, flavor, buffer, buffersize)
 }
 
 // [libproc.h:99]
 // ID: objc-sym libproc.proc_name
 func Proc_name(pid int32, buffer unsafe.Pointer, buffersize uint32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.libproc_fn_proc_name(C.int32_t(pid), buffer, C.uint32_t(buffersize), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_proc_name(pid, buffer, buffersize)
 }
 
 // [libproc.h:100]
 // ID: objc-sym libproc.proc_regionfilename
 func Proc_regionfilename(pid int32, address uint64, buffer unsafe.Pointer, buffersize uint32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.libproc_fn_proc_regionfilename(C.int32_t(pid), C.uint64_t(address), buffer, C.uint32_t(buffersize), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_proc_regionfilename(pid, address, buffer, buffersize)
 }
 
 // [libproc.h:101]
 // ID: objc-sym libproc.proc_kmsgbuf
 func Proc_kmsgbuf(buffer unsafe.Pointer, buffersize uint32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.libproc_fn_proc_kmsgbuf(buffer, C.uint32_t(buffersize), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_proc_kmsgbuf(buffer, buffersize)
 }
 
 // [libproc.h:102]
 // ID: objc-sym libproc.proc_pidpath
 func Proc_pidpath(pid int32, buffer unsafe.Pointer, buffersize uint32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.libproc_fn_proc_pidpath(C.int32_t(pid), buffer, C.uint32_t(buffersize), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_proc_pidpath(pid, buffer, buffersize)
 }
 
 // [libproc.h:103]
 // Introduced: macOS 11.0
 // ID: objc-sym libproc.proc_pidpath_audittoken
 func Proc_pidpath_audittoken(audittoken *endpointsecurity.AuditTokenT, buffer unsafe.Pointer, buffersize uint32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.libproc_fn_proc_pidpath_audittoken(unsafe.Pointer(audittoken), buffer, C.uint32_t(buffersize), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_proc_pidpath_audittoken(audittoken, buffer, buffersize)
 }
 
 // [libproc.h:104]
 // Introduced: macOS 11.0
 // ID: objc-sym libproc.proc_libversion
 func Proc_libversion(major *int32, minor *int32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.libproc_fn_proc_libversion(unsafe.Pointer(major), unsafe.Pointer(minor), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_proc_libversion(major, minor)
 }
 
 // [libproc.h:111]
 // ID: objc-sym libproc.proc_pid_rusage
 func Proc_pid_rusage(pid int32, flavor int32, buffer unsafe.Pointer) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.libproc_fn_proc_pid_rusage(C.int32_t(pid), C.int32_t(flavor), buffer, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_proc_pid_rusage(pid, flavor, buffer)
 }
 
 // [libproc.h:122]
 // ID: objc-sym libproc.proc_setpcontrol
 func Proc_setpcontrol(control int32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.libproc_fn_proc_setpcontrol(C.int32_t(control), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_proc_setpcontrol(control)
 }
 
 // [libproc.h:125]
 // ID: objc-sym libproc.proc_track_dirty
 func Proc_track_dirty(pid int32, flags uint32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.libproc_fn_proc_track_dirty(C.int32_t(pid), C.uint32_t(flags), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_proc_track_dirty(pid, flags)
 }
 
 // [libproc.h:126]
 // ID: objc-sym libproc.proc_set_dirty
 func Proc_set_dirty(pid int32, dirty bool) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.libproc_fn_proc_set_dirty(C.int32_t(pid), C.bool(dirty), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_proc_set_dirty(pid, dirty)
 }
 
 // [libproc.h:127]
 // ID: objc-sym libproc.proc_get_dirty
 func Proc_get_dirty(pid int32, flags *uint32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.libproc_fn_proc_get_dirty(C.int32_t(pid), unsafe.Pointer(flags), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_proc_get_dirty(pid, flags)
 }
 
 // [libproc.h:128]
 // ID: objc-sym libproc.proc_clear_dirty
 func Proc_clear_dirty(pid int32, flags uint32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.libproc_fn_proc_clear_dirty(C.int32_t(pid), C.uint32_t(flags), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_proc_clear_dirty(pid, flags)
 }
 
 // [libproc.h:130]
 // ID: objc-sym libproc.proc_terminate
 func Proc_terminate(pid int32, sig *int32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.libproc_fn_proc_terminate(C.int32_t(pid), unsafe.Pointer(sig), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_proc_terminate(pid, sig)
 }
 
 // [libproc.h:131]
 // ID: objc-sym libproc.proc_terminate_all_rsr
 func Proc_terminate_all_rsr(sig int32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.libproc_fn_proc_terminate_all_rsr(C.int32_t(sig), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_proc_terminate_all_rsr(sig)
 }
 
 // [libproc.h:132]
 // ID: objc-sym libproc.proc_signal_with_audittoken
 func Proc_signal_with_audittoken(audittoken *endpointsecurity.AuditTokenT, sig int32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.libproc_fn_proc_signal_with_audittoken(unsafe.Pointer(audittoken), C.int32_t(sig), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_proc_signal_with_audittoken(audittoken, sig)
 }
 
 // [libproc.h:133]
 // ID: objc-sym libproc.proc_terminate_with_audittoken
 func Proc_terminate_with_audittoken(audittoken *endpointsecurity.AuditTokenT, sig *int32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.libproc_fn_proc_terminate_with_audittoken(unsafe.Pointer(audittoken), unsafe.Pointer(sig), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_proc_terminate_with_audittoken(audittoken, sig)
 }
 
 // [libproc.h:134]
 // ID: objc-sym libproc.proc_signal_delegate
 func Proc_signal_delegate(instigator endpointsecurity.AuditTokenT, target endpointsecurity.AuditTokenT, sig int32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.libproc_fn_proc_signal_delegate(unsafe.Pointer(&instigator), unsafe.Pointer(&target), C.int32_t(sig), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_proc_signal_delegate(instigator, target, sig)
 }
 
 // [libproc.h:135]
 // ID: objc-sym libproc.proc_terminate_delegate
 func Proc_terminate_delegate(instigator endpointsecurity.AuditTokenT, target endpointsecurity.AuditTokenT, sig *int32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.libproc_fn_proc_terminate_delegate(unsafe.Pointer(&instigator), unsafe.Pointer(&target), unsafe.Pointer(sig), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_proc_terminate_delegate(instigator, target, sig)
 }
 
 // [libproc.h:144]
 // Introduced: macOS 11.0
 // ID: objc-sym libproc.proc_set_no_smt
 func Proc_set_no_smt() int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.libproc_fn_proc_set_no_smt(&_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_proc_set_no_smt()
 }
 
 // [libproc.h:147]
 // Introduced: macOS 11.0
 // ID: objc-sym libproc.proc_setthread_no_smt
 func Proc_setthread_no_smt() int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.libproc_fn_proc_setthread_no_smt(&_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_proc_setthread_no_smt()
 }
 
 // [libproc.h:155]
 // Introduced: macOS 11.0
 // ID: objc-sym libproc.proc_set_csm
 func Proc_set_csm(flags uint32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.libproc_fn_proc_set_csm(C.uint32_t(flags), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_proc_set_csm(flags)
 }
 
 // [libproc.h:158]
 // Introduced: macOS 11.0
 // ID: objc-sym libproc.proc_setthread_csm
 func Proc_setthread_csm(flags uint32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.libproc_fn_proc_setthread_csm(C.uint32_t(flags), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_proc_setthread_csm(flags)
 }
 
 // [libproc.h:169]
 // ID: objc-sym libproc.proc_udata_info
 func Proc_udata_info(pid int32, flavor int32, buffer unsafe.Pointer, buffersize int32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.libproc_fn_proc_udata_info(C.int32_t(pid), C.int32_t(flavor), buffer, C.int32_t(buffersize), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_proc_udata_info(pid, flavor, buffer, buffersize)
 }
