@@ -4,270 +4,205 @@
 
 package machhost
 
-// #include "bridge/machhost_bridge.h"
-import "C"
-
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo"
 	"unsafe"
 )
 
-var _ unsafe.Pointer // suppress unused import
+var (
+	_pg_mig_strncpy_zerofill                               func(string, string, int32) int32
+	_pg_host_info                                          func(uint32, int32, *int32, *uint32) int32
+	_pg_host_kernel_version                                func(uint32, string) int32
+	_pg__host_page_size                                    func(uint32, *uint64) int32
+	_pg_mach_memory_object_memory_entry                    func(uint32, int32, uint64, int32, uint32, *uint32) int32
+	_pg_host_processor_info                                func(uint32, int32, *uint32, unsafe.Pointer, *uint32) int32
+	_pg_host_get_io_main                                   func(uint32, *uint32) int32
+	_pg_host_get_clock_service                             func(uint32, int32, *uint32) int32
+	_pg_kmod_get_info                                      func(uint32, unsafe.Pointer, *uint32) int32
+	_pg_host_virtual_physical_table_info                   func(uint32, unsafe.Pointer, *uint32) int32
+	_pg_processor_set_default                              func(uint32, *uint32) int32
+	_pg_processor_set_create                               func(uint32, *uint32, *uint32) int32
+	_pg_mach_memory_object_memory_entry_64                 func(uint32, int32, uint64, int32, uint32, *uint32) int32
+	_pg_host_statistics                                    func(uint32, int32, *int32, *uint32) int32
+	_pg_host_request_notification                          func(uint32, int32, uint32) int32
+	_pg_host_lockgroup_info                                func(uint32, unsafe.Pointer, *uint32) int32
+	_pg_host_statistics64                                  func(uint32, int32, *int32, *uint32) int32
+	_pg_host_create_mach_voucher                           func(uint32, *uint8, uint32, *uint32) int32
+	_pg_host_register_mach_voucher_attr_manager            func(uint32, uint32, uint64, *uint32, *uint32) int32
+	_pg_host_register_well_known_mach_voucher_attr_manager func(uint32, uint32, uint64, uint32, *uint32) int32
+	_pg_host_set_atm_diagnostic_flag                       func(uint32, uint32) int32
+	_pg_host_get_atm_diagnostic_flag                       func(uint32, *uint32) int32
+	_pg_mach_memory_info                                   func(uint32, unsafe.Pointer, *uint32, unsafe.Pointer, *uint32, unsafe.Pointer, *uint32) int32
+	_pg_host_set_multiuser_config_flags                    func(uint32, uint32) int32
+	_pg_host_get_multiuser_config_flags                    func(uint32, *uint32) int32
+	_pg_host_check_multiuser_mode                          func(uint32, *uint32) int32
+	_pg_mach_zone_info_for_zone                            func(uint32, unsafe.Pointer, unsafe.Pointer) int32
+	_pg_mach_memory_info_redacted                          func(uint32, unsafe.Pointer, *uint32, unsafe.Pointer, *uint32, unsafe.Pointer, *uint32) int32
+)
 
 // [mach_host.h:31]
 // ID: objc-sym machhost.mig_strncpy_zerofill
 func Mig_strncpy_zerofill(dest string, src string, len_ int32) int32 {
-	_cstr_dest := C.CString(dest)
-	defer C.free(unsafe.Pointer(_cstr_dest))
-	_cstr_src := C.CString(src)
-	defer C.free(unsafe.Pointer(_cstr_src))
-	var _exc unsafe.Pointer
-	_result := int32(C.machhost_fn_mig_strncpy_zerofill(_cstr_dest, _cstr_src, C.int32_t(len_), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_mig_strncpy_zerofill(dest, src, len_)
 }
 
 // [mach_host.h:82]
 // ID: objc-sym machhost.host_info
 func Host_info(host uint32, flavor int32, host_info_out *int32, host_info_outCnt *uint32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.machhost_fn_host_info(C.uint32_t(host), C.int32_t(flavor), unsafe.Pointer(host_info_out), unsafe.Pointer(host_info_outCnt), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_host_info(host, flavor, host_info_out, host_info_outCnt)
 }
 
 // [mach_host.h:96]
 // ID: objc-sym machhost.host_kernel_version
 func Host_kernel_version(host uint32, kernel_version string) int32 {
-	_cstr_kernel_version := C.CString(kernel_version)
-	defer C.free(unsafe.Pointer(_cstr_kernel_version))
-	var _exc unsafe.Pointer
-	_result := int32(C.machhost_fn_host_kernel_version(C.uint32_t(host), _cstr_kernel_version, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_host_kernel_version(host, kernel_version)
 }
 
 // [mach_host.h:108]
 // ID: objc-sym machhost._host_page_size
 func _host_page_size(host uint32, out_page_size *uint64) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.machhost_fn__host_page_size(C.uint32_t(host), unsafe.Pointer(out_page_size), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg__host_page_size(host, out_page_size)
 }
 
 // [mach_host.h:120]
 // ID: objc-sym machhost.mach_memory_object_memory_entry
 func Mach_memory_object_memory_entry(host uint32, internal int32, size uint64, permission int32, pager uint32, entry_handle *uint32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.machhost_fn_mach_memory_object_memory_entry(C.uint32_t(host), C.int32_t(internal), C.uint64_t(size), C.int32_t(permission), C.uint32_t(pager), unsafe.Pointer(entry_handle), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_mach_memory_object_memory_entry(host, internal, size, permission, pager, entry_handle)
 }
 
 // [mach_host.h:136]
 // ID: objc-sym machhost.host_processor_info
 func Host_processor_info(host uint32, flavor int32, out_processor_count *uint32, out_processor_info unsafe.Pointer, out_processor_infoCnt *uint32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.machhost_fn_host_processor_info(C.uint32_t(host), C.int32_t(flavor), unsafe.Pointer(out_processor_count), out_processor_info, unsafe.Pointer(out_processor_infoCnt), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_host_processor_info(host, flavor, out_processor_count, out_processor_info, out_processor_infoCnt)
 }
 
 // [mach_host.h:151]
 // ID: objc-sym machhost.host_get_io_main
 func Host_get_io_main(host uint32, io_main *uint32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.machhost_fn_host_get_io_main(C.uint32_t(host), unsafe.Pointer(io_main), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_host_get_io_main(host, io_main)
 }
 
 // [mach_host.h:163]
 // ID: objc-sym machhost.host_get_clock_service
 func Host_get_clock_service(host uint32, clock_id int32, clock_serv *uint32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.machhost_fn_host_get_clock_service(C.uint32_t(host), C.int32_t(clock_id), unsafe.Pointer(clock_serv), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_host_get_clock_service(host, clock_id, clock_serv)
 }
 
 // [mach_host.h:176]
 // ID: objc-sym machhost.kmod_get_info
 func Kmod_get_info(host uint32, modules unsafe.Pointer, modulesCnt *uint32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.machhost_fn_kmod_get_info(C.uint32_t(host), modules, unsafe.Pointer(modulesCnt), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_kmod_get_info(host, modules, modulesCnt)
 }
 
 // [mach_host.h:189]
 // ID: objc-sym machhost.host_virtual_physical_table_info
 func Host_virtual_physical_table_info(host uint32, info unsafe.Pointer, infoCnt *uint32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.machhost_fn_host_virtual_physical_table_info(C.uint32_t(host), info, unsafe.Pointer(infoCnt), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_host_virtual_physical_table_info(host, info, infoCnt)
 }
 
 // [mach_host.h:202]
 // ID: objc-sym machhost.processor_set_default
 func Processor_set_default(host uint32, default_set *uint32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.machhost_fn_processor_set_default(C.uint32_t(host), unsafe.Pointer(default_set), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_processor_set_default(host, default_set)
 }
 
 // [mach_host.h:214]
 // ID: objc-sym machhost.processor_set_create
 func Processor_set_create(host uint32, new_set *uint32, new_name *uint32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.machhost_fn_processor_set_create(C.uint32_t(host), unsafe.Pointer(new_set), unsafe.Pointer(new_name), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_processor_set_create(host, new_set, new_name)
 }
 
 // [mach_host.h:227]
 // ID: objc-sym machhost.mach_memory_object_memory_entry_64
 func Mach_memory_object_memory_entry_64(host uint32, internal int32, size uint64, permission int32, pager uint32, entry_handle *uint32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.machhost_fn_mach_memory_object_memory_entry_64(C.uint32_t(host), C.int32_t(internal), C.uint64_t(size), C.int32_t(permission), C.uint32_t(pager), unsafe.Pointer(entry_handle), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_mach_memory_object_memory_entry_64(host, internal, size, permission, pager, entry_handle)
 }
 
 // [mach_host.h:243]
 // ID: objc-sym machhost.host_statistics
 func Host_statistics(host_priv uint32, flavor int32, host_info_out *int32, host_info_outCnt *uint32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.machhost_fn_host_statistics(C.uint32_t(host_priv), C.int32_t(flavor), unsafe.Pointer(host_info_out), unsafe.Pointer(host_info_outCnt), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_host_statistics(host_priv, flavor, host_info_out, host_info_outCnt)
 }
 
 // [mach_host.h:258]
 // ID: objc-sym machhost.host_request_notification
 func Host_request_notification(host uint32, notify_type int32, notify_port uint32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.machhost_fn_host_request_notification(C.uint32_t(host), C.int32_t(notify_type), C.uint32_t(notify_port), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_host_request_notification(host, notify_type, notify_port)
 }
 
 // [mach_host.h:271]
 // ID: objc-sym machhost.host_lockgroup_info
 func Host_lockgroup_info(host uint32, lockgroup_info unsafe.Pointer, lockgroup_infoCnt *uint32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.machhost_fn_host_lockgroup_info(C.uint32_t(host), lockgroup_info, unsafe.Pointer(lockgroup_infoCnt), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_host_lockgroup_info(host, lockgroup_info, lockgroup_infoCnt)
 }
 
 // [mach_host.h:284]
 // ID: objc-sym machhost.host_statistics64
 func Host_statistics64(host_priv uint32, flavor int32, host_info64_out *int32, host_info64_outCnt *uint32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.machhost_fn_host_statistics64(C.uint32_t(host_priv), C.int32_t(flavor), unsafe.Pointer(host_info64_out), unsafe.Pointer(host_info64_outCnt), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_host_statistics64(host_priv, flavor, host_info64_out, host_info64_outCnt)
 }
 
 // [mach_host.h:314]
 // ID: objc-sym machhost.host_create_mach_voucher
 func Host_create_mach_voucher(host uint32, recipes *uint8, recipesCnt uint32, voucher *uint32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.machhost_fn_host_create_mach_voucher(C.uint32_t(host), unsafe.Pointer(recipes), C.uint32_t(recipesCnt), unsafe.Pointer(voucher), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_host_create_mach_voucher(host, recipes, recipesCnt, voucher)
 }
 
 // [mach_host.h:329]
 // ID: objc-sym machhost.host_register_mach_voucher_attr_manager
 func Host_register_mach_voucher_attr_manager(host uint32, attr_manager uint32, default_value uint64, new_key *uint32, new_attr_control *uint32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.machhost_fn_host_register_mach_voucher_attr_manager(C.uint32_t(host), C.uint32_t(attr_manager), C.uint64_t(default_value), unsafe.Pointer(new_key), unsafe.Pointer(new_attr_control), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_host_register_mach_voucher_attr_manager(host, attr_manager, default_value, new_key, new_attr_control)
 }
 
 // [mach_host.h:345]
 // ID: objc-sym machhost.host_register_well_known_mach_voucher_attr_manager
 func Host_register_well_known_mach_voucher_attr_manager(host uint32, attr_manager uint32, default_value uint64, key uint32, new_attr_control *uint32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.machhost_fn_host_register_well_known_mach_voucher_attr_manager(C.uint32_t(host), C.uint32_t(attr_manager), C.uint64_t(default_value), C.uint32_t(key), unsafe.Pointer(new_attr_control), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_host_register_well_known_mach_voucher_attr_manager(host, attr_manager, default_value, key, new_attr_control)
 }
 
 // [mach_host.h:361]
 // ID: objc-sym machhost.host_set_atm_diagnostic_flag
 func Host_set_atm_diagnostic_flag(host uint32, diagnostic_flag uint32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.machhost_fn_host_set_atm_diagnostic_flag(C.uint32_t(host), C.uint32_t(diagnostic_flag), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_host_set_atm_diagnostic_flag(host, diagnostic_flag)
 }
 
 // [mach_host.h:374]
 // ID: objc-sym machhost.host_get_atm_diagnostic_flag
 func Host_get_atm_diagnostic_flag(host uint32, diagnostic_flag *uint32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.machhost_fn_host_get_atm_diagnostic_flag(C.uint32_t(host), unsafe.Pointer(diagnostic_flag), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_host_get_atm_diagnostic_flag(host, diagnostic_flag)
 }
 
 // [mach_host.h:386]
 // ID: objc-sym machhost.mach_memory_info
 func Mach_memory_info(host uint32, names unsafe.Pointer, namesCnt *uint32, info unsafe.Pointer, infoCnt *uint32, memory_info unsafe.Pointer, memory_infoCnt *uint32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.machhost_fn_mach_memory_info(C.uint32_t(host), names, unsafe.Pointer(namesCnt), info, unsafe.Pointer(infoCnt), memory_info, unsafe.Pointer(memory_infoCnt), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_mach_memory_info(host, names, namesCnt, info, infoCnt, memory_info, memory_infoCnt)
 }
 
 // [mach_host.h:403]
 // ID: objc-sym machhost.host_set_multiuser_config_flags
 func Host_set_multiuser_config_flags(host_priv uint32, multiuser_flags uint32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.machhost_fn_host_set_multiuser_config_flags(C.uint32_t(host_priv), C.uint32_t(multiuser_flags), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_host_set_multiuser_config_flags(host_priv, multiuser_flags)
 }
 
 // [mach_host.h:415]
 // ID: objc-sym machhost.host_get_multiuser_config_flags
 func Host_get_multiuser_config_flags(host uint32, multiuser_flags *uint32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.machhost_fn_host_get_multiuser_config_flags(C.uint32_t(host), unsafe.Pointer(multiuser_flags), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_host_get_multiuser_config_flags(host, multiuser_flags)
 }
 
 // [mach_host.h:427]
 // ID: objc-sym machhost.host_check_multiuser_mode
 func Host_check_multiuser_mode(host uint32, multiuser_mode *uint32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.machhost_fn_host_check_multiuser_mode(C.uint32_t(host), unsafe.Pointer(multiuser_mode), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_host_check_multiuser_mode(host, multiuser_mode)
 }
 
 // [mach_host.h:439]
 // ID: objc-sym machhost.mach_zone_info_for_zone
 func Mach_zone_info_for_zone(host uint32, name unsafe.Pointer, info unsafe.Pointer) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.machhost_fn_mach_zone_info_for_zone(C.uint32_t(host), name, info, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_mach_zone_info_for_zone(host, name, info)
 }
 
 // [mach_host.h:452]
 // ID: objc-sym machhost.mach_memory_info_redacted
 func Mach_memory_info_redacted(host uint32, names unsafe.Pointer, namesCnt *uint32, info unsafe.Pointer, infoCnt *uint32, memory_info unsafe.Pointer, memory_infoCnt *uint32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.machhost_fn_mach_memory_info_redacted(C.uint32_t(host), names, unsafe.Pointer(namesCnt), info, unsafe.Pointer(infoCnt), memory_info, unsafe.Pointer(memory_infoCnt), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_mach_memory_info_redacted(host, names, namesCnt, info, infoCnt, memory_info, memory_infoCnt)
 }

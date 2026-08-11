@@ -18,6 +18,7 @@
   "link_lib": "sandbox"
  },
  "bsm": {
+  "backend": "purego",
   "header": "bsm/libbsm.h",
   "header_dir": "bsm/",
   "link_lib": "bsm"
@@ -33,11 +34,13 @@
   "shim_header": "metadata/shims/IOReport.h"
  },
  "libproc": {
+  "backend": "purego",
   "header": "libproc.h",
   "header_dir": "libproc.h",
   "link_lib": "proc"
  },
  "machhost": {
+  "backend": "purego",
   "header": "mach/mach_host.h",
   "header_dir": "mach/mach_host.h",
   "link_lib": "System"
