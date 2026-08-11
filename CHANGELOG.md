@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.19.0](https://github.com/deploymenttheory/go-bindings-macosplatform/compare/v0.18.1...v0.19.0) (2026-08-11)
+
+
+### Features
+
+* **codegen:** migrate AppleArchive to purego — all 15 C libraries now pure Go ([#116](https://github.com/deploymenttheory/go-bindings-macosplatform/issues/116)) ([a32f335](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/a32f335de04ecf1adfbbc66b012dd1eddd10e61e))
+* **codegen:** migrate bsm, libproc, machhost to the purego backend (struct-by-value tier) ([#111](https://github.com/deploymenttheory/go-bindings-macosplatform/issues/111)) ([ac743ec](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/ac743ecd2ef2bfc04182210c379ca886c1cc3528))
+* **codegen:** migrate dispatch to purego (manual body for header-inline symbols) ([#114](https://github.com/deploymenttheory/go-bindings-macosplatform/issues/114)) ([f0602dd](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/f0602dddca6f9a822162cb2219ee7f3c04cb5a5f))
+* **codegen:** migrate oslog to purego ([#115](https://github.com/deploymenttheory/go-bindings-macosplatform/issues/115)) ([66410d5](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/66410d501b1262ecd16a04f2e1f832aedf478dbc))
+* **codegen:** migrate xpc to purego (pure-Go Object seam + local-enum preference) ([#113](https://github.com/deploymenttheory/go-bindings-macosplatform/issues/113)) ([24d136d](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/24d136d3db71bfd4c5671b299af69e6992c2a0c9))
+* **codegen:** purego backend as body-swap in the CGo pipeline; migrate 7 libraries with live CGO_ENABLED=0 suite ([#110](https://github.com/deploymenttheory/go-bindings-macosplatform/issues/110)) ([2f062eb](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/2f062eb5267095513be71d2124ba9c31532afbf7))
+* **codegen:** purego backend for C libraries; migrate machtime (Phase 0 pilot) ([#108](https://github.com/deploymenttheory/go-bindings-macosplatform/issues/108)) ([4e1d223](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/4e1d223003fd952a662da06161584dabffc1680f))
+* **codegen:** purego block-parameter support; migrate endpointsecurity ([#112](https://github.com/deploymenttheory/go-bindings-macosplatform/issues/112)) ([794ef23](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/794ef2368653b048a4fedc47652d9d1706cd1618))
+
 ## [0.18.1](https://github.com/deploymenttheory/go-bindings-macosplatform/compare/v0.18.0...v0.18.1) (2026-08-11)
 
 
