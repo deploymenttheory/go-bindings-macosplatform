@@ -102,14 +102,14 @@ func (ct *CheckerboardTexture) Divisions() float32 {
 func (ct *CheckerboardTexture) Color1() coregraphics.CGColorRef {
 	defer runtime.KeepAlive(ct)
 	_r := objc.Send[objc.ID](objref.IDOf(ct), objc.RegisterName("color1"))
-	return coregraphics.CGColorRef{obj.Wrap(_r)}
+	return coregraphics.CGColorRef{Object: obj.Wrap(_r)}
 }
 
 // Color2 returns the color2.
 func (ct *CheckerboardTexture) Color2() coregraphics.CGColorRef {
 	defer runtime.KeepAlive(ct)
 	_r := objc.Send[objc.ID](objref.IDOf(ct), objc.RegisterName("color2"))
-	return coregraphics.CGColorRef{obj.Wrap(_r)}
+	return coregraphics.CGColorRef{Object: obj.Wrap(_r)}
 }
 
 var _ TextureProvider = (*CheckerboardTexture)(nil)

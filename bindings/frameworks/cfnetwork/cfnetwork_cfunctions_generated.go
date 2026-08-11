@@ -45,7 +45,7 @@ func CFHTTPAuthenticationCopyDomains(auth corefoundation.CFHTTPAuthenticationRef
 		ebipurego.RegisterLibFunc(&_fnCFHTTPAuthenticationCopyDomains, _lib, "CFHTTPAuthenticationCopyDomains")
 	}
 	_ret := _fnCFHTTPAuthenticationCopyDomains(objref.IDOf(auth.Object))
-	return corefoundation.CFArrayRef{obj.Wrap(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFHTTPAuthenticationCopyMethod func(objc.ID) objc.ID
@@ -57,7 +57,7 @@ func CFHTTPAuthenticationCopyMethod(auth corefoundation.CFHTTPAuthenticationRef)
 		ebipurego.RegisterLibFunc(&_fnCFHTTPAuthenticationCopyMethod, _lib, "CFHTTPAuthenticationCopyMethod")
 	}
 	_ret := _fnCFHTTPAuthenticationCopyMethod(objref.IDOf(auth.Object))
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFHTTPAuthenticationCopyRealm func(objc.ID) objc.ID
@@ -69,7 +69,7 @@ func CFHTTPAuthenticationCopyRealm(auth corefoundation.CFHTTPAuthenticationRef) 
 		ebipurego.RegisterLibFunc(&_fnCFHTTPAuthenticationCopyRealm, _lib, "CFHTTPAuthenticationCopyRealm")
 	}
 	_ret := _fnCFHTTPAuthenticationCopyRealm(objref.IDOf(auth.Object))
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFHTTPAuthenticationCreateFromResponse func(objc.ID, objc.ID) objc.ID
@@ -81,7 +81,7 @@ func CFHTTPAuthenticationCreateFromResponse(alloc corefoundation.CFAllocatorRef,
 		ebipurego.RegisterLibFunc(&_fnCFHTTPAuthenticationCreateFromResponse, _lib, "CFHTTPAuthenticationCreateFromResponse")
 	}
 	_ret := _fnCFHTTPAuthenticationCreateFromResponse(objref.IDOf(alloc.Object), objref.IDOf(response.Object))
-	return corefoundation.CFHTTPAuthenticationRef{obj.Wrap(_ret)}
+	return corefoundation.CFHTTPAuthenticationRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFHTTPAuthenticationGetTypeID func() int
@@ -192,7 +192,7 @@ func CFHTTPMessageCopyAllHeaderFields(message corefoundation.CFHTTPMessageRef) c
 		ebipurego.RegisterLibFunc(&_fnCFHTTPMessageCopyAllHeaderFields, _lib, "CFHTTPMessageCopyAllHeaderFields")
 	}
 	_ret := _fnCFHTTPMessageCopyAllHeaderFields(objref.IDOf(message.Object))
-	return corefoundation.CFDictionaryRef{obj.Wrap(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFHTTPMessageCopyBody func(objc.ID) objc.ID
@@ -204,7 +204,7 @@ func CFHTTPMessageCopyBody(message corefoundation.CFHTTPMessageRef) corefoundati
 		ebipurego.RegisterLibFunc(&_fnCFHTTPMessageCopyBody, _lib, "CFHTTPMessageCopyBody")
 	}
 	_ret := _fnCFHTTPMessageCopyBody(objref.IDOf(message.Object))
-	return corefoundation.CFDataRef{obj.Wrap(_ret)}
+	return corefoundation.CFDataRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFHTTPMessageCopyHeaderFieldValue func(objc.ID, objc.ID) objc.ID
@@ -216,7 +216,7 @@ func CFHTTPMessageCopyHeaderFieldValue(message corefoundation.CFHTTPMessageRef, 
 		ebipurego.RegisterLibFunc(&_fnCFHTTPMessageCopyHeaderFieldValue, _lib, "CFHTTPMessageCopyHeaderFieldValue")
 	}
 	_ret := _fnCFHTTPMessageCopyHeaderFieldValue(objref.IDOf(message.Object), objref.IDOf(headerField.Object))
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFHTTPMessageCopyRequestMethod func(objc.ID) objc.ID
@@ -228,7 +228,7 @@ func CFHTTPMessageCopyRequestMethod(request corefoundation.CFHTTPMessageRef) cor
 		ebipurego.RegisterLibFunc(&_fnCFHTTPMessageCopyRequestMethod, _lib, "CFHTTPMessageCopyRequestMethod")
 	}
 	_ret := _fnCFHTTPMessageCopyRequestMethod(objref.IDOf(request.Object))
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFHTTPMessageCopyRequestURL func(objc.ID) objc.ID
@@ -240,7 +240,7 @@ func CFHTTPMessageCopyRequestURL(request corefoundation.CFHTTPMessageRef) corefo
 		ebipurego.RegisterLibFunc(&_fnCFHTTPMessageCopyRequestURL, _lib, "CFHTTPMessageCopyRequestURL")
 	}
 	_ret := _fnCFHTTPMessageCopyRequestURL(objref.IDOf(request.Object))
-	return corefoundation.CFURLRef{obj.Wrap(_ret)}
+	return corefoundation.CFURLRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFHTTPMessageCopyResponseStatusLine func(objc.ID) objc.ID
@@ -252,7 +252,7 @@ func CFHTTPMessageCopyResponseStatusLine(response corefoundation.CFHTTPMessageRe
 		ebipurego.RegisterLibFunc(&_fnCFHTTPMessageCopyResponseStatusLine, _lib, "CFHTTPMessageCopyResponseStatusLine")
 	}
 	_ret := _fnCFHTTPMessageCopyResponseStatusLine(objref.IDOf(response.Object))
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFHTTPMessageCopySerializedMessage func(objc.ID) objc.ID
@@ -264,7 +264,7 @@ func CFHTTPMessageCopySerializedMessage(message corefoundation.CFHTTPMessageRef)
 		ebipurego.RegisterLibFunc(&_fnCFHTTPMessageCopySerializedMessage, _lib, "CFHTTPMessageCopySerializedMessage")
 	}
 	_ret := _fnCFHTTPMessageCopySerializedMessage(objref.IDOf(message.Object))
-	return corefoundation.CFDataRef{obj.Wrap(_ret)}
+	return corefoundation.CFDataRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFHTTPMessageCopyVersion func(objc.ID) objc.ID
@@ -276,7 +276,7 @@ func CFHTTPMessageCopyVersion(message corefoundation.CFHTTPMessageRef) corefound
 		ebipurego.RegisterLibFunc(&_fnCFHTTPMessageCopyVersion, _lib, "CFHTTPMessageCopyVersion")
 	}
 	_ret := _fnCFHTTPMessageCopyVersion(objref.IDOf(message.Object))
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFHTTPMessageCreateCopy func(objc.ID, objc.ID) objc.ID
@@ -288,7 +288,7 @@ func CFHTTPMessageCreateCopy(alloc corefoundation.CFAllocatorRef, message corefo
 		ebipurego.RegisterLibFunc(&_fnCFHTTPMessageCreateCopy, _lib, "CFHTTPMessageCreateCopy")
 	}
 	_ret := _fnCFHTTPMessageCreateCopy(objref.IDOf(alloc.Object), objref.IDOf(message.Object))
-	return corefoundation.CFHTTPMessageRef{obj.Wrap(_ret)}
+	return corefoundation.CFHTTPMessageRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFHTTPMessageCreateEmpty func(objc.ID, uint8) objc.ID
@@ -300,7 +300,7 @@ func CFHTTPMessageCreateEmpty(alloc corefoundation.CFAllocatorRef, isRequest uin
 		ebipurego.RegisterLibFunc(&_fnCFHTTPMessageCreateEmpty, _lib, "CFHTTPMessageCreateEmpty")
 	}
 	_ret := _fnCFHTTPMessageCreateEmpty(objref.IDOf(alloc.Object), isRequest)
-	return corefoundation.CFHTTPMessageRef{obj.Wrap(_ret)}
+	return corefoundation.CFHTTPMessageRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFHTTPMessageCreateRequest func(objc.ID, objc.ID, objc.ID, objc.ID) objc.ID
@@ -312,7 +312,7 @@ func CFHTTPMessageCreateRequest(alloc corefoundation.CFAllocatorRef, requestMeth
 		ebipurego.RegisterLibFunc(&_fnCFHTTPMessageCreateRequest, _lib, "CFHTTPMessageCreateRequest")
 	}
 	_ret := _fnCFHTTPMessageCreateRequest(objref.IDOf(alloc.Object), objref.IDOf(requestMethod.Object), objref.IDOf(url.Object), objref.IDOf(httpVersion.Object))
-	return corefoundation.CFHTTPMessageRef{obj.Wrap(_ret)}
+	return corefoundation.CFHTTPMessageRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFHTTPMessageCreateResponse func(objc.ID, int, objc.ID, objc.ID) objc.ID
@@ -324,7 +324,7 @@ func CFHTTPMessageCreateResponse(alloc corefoundation.CFAllocatorRef, statusCode
 		ebipurego.RegisterLibFunc(&_fnCFHTTPMessageCreateResponse, _lib, "CFHTTPMessageCreateResponse")
 	}
 	_ret := _fnCFHTTPMessageCreateResponse(objref.IDOf(alloc.Object), statusCode, objref.IDOf(statusDescription.Object), objref.IDOf(httpVersion.Object))
-	return corefoundation.CFHTTPMessageRef{obj.Wrap(_ret)}
+	return corefoundation.CFHTTPMessageRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFHTTPMessageGetResponseStatusCode func(objc.ID) int
@@ -413,7 +413,7 @@ func CFHostCreateCopy(alloc corefoundation.CFAllocatorRef, host corefoundation.C
 		ebipurego.RegisterLibFunc(&_fnCFHostCreateCopy, _lib, "CFHostCreateCopy")
 	}
 	_ret := _fnCFHostCreateCopy(objref.IDOf(alloc.Object), objref.IDOf(host.Object))
-	return corefoundation.CFHostRef{obj.Wrap(_ret)}
+	return corefoundation.CFHostRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFHostCreateWithAddress func(objc.ID, objc.ID) objc.ID
@@ -425,7 +425,7 @@ func CFHostCreateWithAddress(allocator corefoundation.CFAllocatorRef, addr coref
 		ebipurego.RegisterLibFunc(&_fnCFHostCreateWithAddress, _lib, "CFHostCreateWithAddress")
 	}
 	_ret := _fnCFHostCreateWithAddress(objref.IDOf(allocator.Object), objref.IDOf(addr.Object))
-	return corefoundation.CFHostRef{obj.Wrap(_ret)}
+	return corefoundation.CFHostRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFHostCreateWithName func(objc.ID, objc.ID) objc.ID
@@ -437,7 +437,7 @@ func CFHostCreateWithName(allocator corefoundation.CFAllocatorRef, hostname core
 		ebipurego.RegisterLibFunc(&_fnCFHostCreateWithName, _lib, "CFHostCreateWithName")
 	}
 	_ret := _fnCFHostCreateWithName(objref.IDOf(allocator.Object), objref.IDOf(hostname.Object))
-	return corefoundation.CFHostRef{obj.Wrap(_ret)}
+	return corefoundation.CFHostRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFHostGetAddressing func(objc.ID, unsafe.Pointer) objc.ID
@@ -450,7 +450,7 @@ func CFHostGetAddressing(theHost corefoundation.CFHostRef) (result corefoundatio
 	}
 	var _out0 uint8
 	_ret := _fnCFHostGetAddressing(objref.IDOf(theHost.Object), unsafe.Pointer(&_out0))
-	return corefoundation.CFArrayRef{obj.Wrap(_ret)}, _out0
+	return corefoundation.CFArrayRef{Object: obj.Wrap(_ret)}, _out0
 }
 
 var _fnCFHostGetNames func(objc.ID, unsafe.Pointer) objc.ID
@@ -463,7 +463,7 @@ func CFHostGetNames(theHost corefoundation.CFHostRef) (result corefoundation.CFA
 	}
 	var _out0 uint8
 	_ret := _fnCFHostGetNames(objref.IDOf(theHost.Object), unsafe.Pointer(&_out0))
-	return corefoundation.CFArrayRef{obj.Wrap(_ret)}, _out0
+	return corefoundation.CFArrayRef{Object: obj.Wrap(_ret)}, _out0
 }
 
 var _fnCFHostGetReachability func(objc.ID, unsafe.Pointer) objc.ID
@@ -476,7 +476,7 @@ func CFHostGetReachability(theHost corefoundation.CFHostRef) (result corefoundat
 	}
 	var _out0 uint8
 	_ret := _fnCFHostGetReachability(objref.IDOf(theHost.Object), unsafe.Pointer(&_out0))
-	return corefoundation.CFDataRef{obj.Wrap(_ret)}, _out0
+	return corefoundation.CFDataRef{Object: obj.Wrap(_ret)}, _out0
 }
 
 var _fnCFHostGetTypeID func() int
@@ -554,7 +554,7 @@ func CFNetDiagnosticCreateWithStreams(alloc corefoundation.CFAllocatorRef, readS
 		ebipurego.RegisterLibFunc(&_fnCFNetDiagnosticCreateWithStreams, _lib, "CFNetDiagnosticCreateWithStreams")
 	}
 	_ret := _fnCFNetDiagnosticCreateWithStreams(objref.IDOf(alloc.Object), objref.IDOf(readStream.Object), objref.IDOf(writeStream.Object))
-	return corefoundation.CFNetDiagnosticRef{obj.Wrap(_ret)}
+	return corefoundation.CFNetDiagnosticRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFNetDiagnosticCreateWithURL func(objc.ID, objc.ID) objc.ID
@@ -566,7 +566,7 @@ func CFNetDiagnosticCreateWithURL(alloc corefoundation.CFAllocatorRef, url coref
 		ebipurego.RegisterLibFunc(&_fnCFNetDiagnosticCreateWithURL, _lib, "CFNetDiagnosticCreateWithURL")
 	}
 	_ret := _fnCFNetDiagnosticCreateWithURL(objref.IDOf(alloc.Object), objref.IDOf(url.Object))
-	return corefoundation.CFNetDiagnosticRef{obj.Wrap(_ret)}
+	return corefoundation.CFNetDiagnosticRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFNetDiagnosticDiagnoseProblemInteractively func(objc.ID) int
@@ -600,7 +600,7 @@ func CFNetServiceBrowserCreate(alloc corefoundation.CFAllocatorRef, clientCB uns
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceBrowserCreate, _lib, "CFNetServiceBrowserCreate")
 	}
 	_ret := _fnCFNetServiceBrowserCreate(objref.IDOf(alloc.Object), clientCB, clientContext)
-	return corefoundation.CFNetServiceBrowserRef{obj.Wrap(_ret)}
+	return corefoundation.CFNetServiceBrowserRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFNetServiceBrowserGetTypeID func() int
@@ -700,7 +700,7 @@ func CFNetServiceCreate(alloc corefoundation.CFAllocatorRef, domain corefoundati
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceCreate, _lib, "CFNetServiceCreate")
 	}
 	_ret := _fnCFNetServiceCreate(objref.IDOf(alloc.Object), objref.IDOf(domain.Object), objref.IDOf(serviceType.Object), objref.IDOf(name.Object), port)
-	return corefoundation.CFNetServiceRef{obj.Wrap(_ret)}
+	return corefoundation.CFNetServiceRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFNetServiceCreateCopy func(objc.ID, objc.ID) objc.ID
@@ -712,7 +712,7 @@ func CFNetServiceCreateCopy(alloc corefoundation.CFAllocatorRef, service corefou
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceCreateCopy, _lib, "CFNetServiceCreateCopy")
 	}
 	_ret := _fnCFNetServiceCreateCopy(objref.IDOf(alloc.Object), objref.IDOf(service.Object))
-	return corefoundation.CFNetServiceRef{obj.Wrap(_ret)}
+	return corefoundation.CFNetServiceRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFNetServiceCreateDictionaryWithTXTData func(objc.ID, objc.ID) objc.ID
@@ -724,7 +724,7 @@ func CFNetServiceCreateDictionaryWithTXTData(alloc corefoundation.CFAllocatorRef
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceCreateDictionaryWithTXTData, _lib, "CFNetServiceCreateDictionaryWithTXTData")
 	}
 	_ret := _fnCFNetServiceCreateDictionaryWithTXTData(objref.IDOf(alloc.Object), objref.IDOf(txtRecord.Object))
-	return corefoundation.CFDictionaryRef{obj.Wrap(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFNetServiceCreateTXTDataWithDictionary func(objc.ID, objc.ID) objc.ID
@@ -736,7 +736,7 @@ func CFNetServiceCreateTXTDataWithDictionary(alloc corefoundation.CFAllocatorRef
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceCreateTXTDataWithDictionary, _lib, "CFNetServiceCreateTXTDataWithDictionary")
 	}
 	_ret := _fnCFNetServiceCreateTXTDataWithDictionary(objref.IDOf(alloc.Object), objref.IDOf(keyValuePairs.Object))
-	return corefoundation.CFDataRef{obj.Wrap(_ret)}
+	return corefoundation.CFDataRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFNetServiceGetAddressing func(objc.ID) objc.ID
@@ -748,7 +748,7 @@ func CFNetServiceGetAddressing(theService corefoundation.CFNetServiceRef) corefo
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceGetAddressing, _lib, "CFNetServiceGetAddressing")
 	}
 	_ret := _fnCFNetServiceGetAddressing(objref.IDOf(theService.Object))
-	return corefoundation.CFArrayRef{obj.Wrap(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFNetServiceGetDomain func(objc.ID) objc.ID
@@ -760,7 +760,7 @@ func CFNetServiceGetDomain(theService corefoundation.CFNetServiceRef) corefounda
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceGetDomain, _lib, "CFNetServiceGetDomain")
 	}
 	_ret := _fnCFNetServiceGetDomain(objref.IDOf(theService.Object))
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFNetServiceGetName func(objc.ID) objc.ID
@@ -772,7 +772,7 @@ func CFNetServiceGetName(theService corefoundation.CFNetServiceRef) corefoundati
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceGetName, _lib, "CFNetServiceGetName")
 	}
 	_ret := _fnCFNetServiceGetName(objref.IDOf(theService.Object))
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFNetServiceGetPortNumber func(objc.ID) int32
@@ -795,7 +795,7 @@ func CFNetServiceGetTXTData(theService corefoundation.CFNetServiceRef) corefound
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceGetTXTData, _lib, "CFNetServiceGetTXTData")
 	}
 	_ret := _fnCFNetServiceGetTXTData(objref.IDOf(theService.Object))
-	return corefoundation.CFDataRef{obj.Wrap(_ret)}
+	return corefoundation.CFDataRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFNetServiceGetTargetHost func(objc.ID) objc.ID
@@ -807,7 +807,7 @@ func CFNetServiceGetTargetHost(theService corefoundation.CFNetServiceRef) corefo
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceGetTargetHost, _lib, "CFNetServiceGetTargetHost")
 	}
 	_ret := _fnCFNetServiceGetTargetHost(objref.IDOf(theService.Object))
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFNetServiceGetType func(objc.ID) objc.ID
@@ -819,7 +819,7 @@ func CFNetServiceGetType(theService corefoundation.CFNetServiceRef) corefoundati
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceGetType, _lib, "CFNetServiceGetType")
 	}
 	_ret := _fnCFNetServiceGetType(objref.IDOf(theService.Object))
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFNetServiceGetTypeID func() int
@@ -842,7 +842,7 @@ func CFNetServiceMonitorCreate(alloc corefoundation.CFAllocatorRef, theService c
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceMonitorCreate, _lib, "CFNetServiceMonitorCreate")
 	}
 	_ret := _fnCFNetServiceMonitorCreate(objref.IDOf(alloc.Object), objref.IDOf(theService.Object), clientCB, clientContext)
-	return corefoundation.CFNetServiceMonitorRef{obj.Wrap(_ret)}
+	return corefoundation.CFNetServiceMonitorRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFNetServiceMonitorGetTypeID func() int
@@ -1008,7 +1008,7 @@ func CFNetworkCopyProxiesForURL(url corefoundation.CFURLRef, proxySettings coref
 		ebipurego.RegisterLibFunc(&_fnCFNetworkCopyProxiesForURL, _lib, "CFNetworkCopyProxiesForURL")
 	}
 	_ret := _fnCFNetworkCopyProxiesForURL(objref.IDOf(url.Object), objref.IDOf(proxySettings.Object))
-	return corefoundation.CFArrayRef{obj.Wrap(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFNetworkCopySystemProxySettings func() objc.ID
@@ -1020,7 +1020,7 @@ func CFNetworkCopySystemProxySettings() corefoundation.CFDictionaryRef {
 		ebipurego.RegisterLibFunc(&_fnCFNetworkCopySystemProxySettings, _lib, "CFNetworkCopySystemProxySettings")
 	}
 	_ret := _fnCFNetworkCopySystemProxySettings()
-	return corefoundation.CFDictionaryRef{obj.Wrap(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFNetworkExecuteProxyAutoConfigurationScript func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -1032,7 +1032,7 @@ func CFNetworkExecuteProxyAutoConfigurationScript(proxyAutoConfigurationScript c
 		ebipurego.RegisterLibFunc(&_fnCFNetworkExecuteProxyAutoConfigurationScript, _lib, "CFNetworkExecuteProxyAutoConfigurationScript")
 	}
 	_ret := _fnCFNetworkExecuteProxyAutoConfigurationScript(objref.IDOf(proxyAutoConfigurationScript.Object), objref.IDOf(targetURL.Object), cb, clientContext)
-	return corefoundation.CFRunLoopSourceRef{obj.Adopt(_ret)}
+	return corefoundation.CFRunLoopSourceRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFNetworkExecuteProxyAutoConfigurationURL func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -1044,7 +1044,7 @@ func CFNetworkExecuteProxyAutoConfigurationURL(proxyAutoConfigURL corefoundation
 		ebipurego.RegisterLibFunc(&_fnCFNetworkExecuteProxyAutoConfigurationURL, _lib, "CFNetworkExecuteProxyAutoConfigurationURL")
 	}
 	_ret := _fnCFNetworkExecuteProxyAutoConfigurationURL(objref.IDOf(proxyAutoConfigURL.Object), objref.IDOf(targetURL.Object), cb, clientContext)
-	return corefoundation.CFRunLoopSourceRef{obj.Adopt(_ret)}
+	return corefoundation.CFRunLoopSourceRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFReadStreamCreateForHTTPRequest func(objc.ID, objc.ID) objc.ID
@@ -1056,7 +1056,7 @@ func CFReadStreamCreateForHTTPRequest(alloc corefoundation.CFAllocatorRef, reque
 		ebipurego.RegisterLibFunc(&_fnCFReadStreamCreateForHTTPRequest, _lib, "CFReadStreamCreateForHTTPRequest")
 	}
 	_ret := _fnCFReadStreamCreateForHTTPRequest(objref.IDOf(alloc.Object), objref.IDOf(request.Object))
-	return corefoundation.CFReadStreamRef{obj.Wrap(_ret)}
+	return corefoundation.CFReadStreamRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFReadStreamCreateForStreamedHTTPRequest func(objc.ID, objc.ID, objc.ID) objc.ID
@@ -1068,7 +1068,7 @@ func CFReadStreamCreateForStreamedHTTPRequest(alloc corefoundation.CFAllocatorRe
 		ebipurego.RegisterLibFunc(&_fnCFReadStreamCreateForStreamedHTTPRequest, _lib, "CFReadStreamCreateForStreamedHTTPRequest")
 	}
 	_ret := _fnCFReadStreamCreateForStreamedHTTPRequest(objref.IDOf(alloc.Object), objref.IDOf(requestHeaders.Object), objref.IDOf(requestBody.Object))
-	return corefoundation.CFReadStreamRef{obj.Wrap(_ret)}
+	return corefoundation.CFReadStreamRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFReadStreamCreateWithFTPURL func(objc.ID, objc.ID) objc.ID
@@ -1080,7 +1080,7 @@ func CFReadStreamCreateWithFTPURL(alloc corefoundation.CFAllocatorRef, ftpURL co
 		ebipurego.RegisterLibFunc(&_fnCFReadStreamCreateWithFTPURL, _lib, "CFReadStreamCreateWithFTPURL")
 	}
 	_ret := _fnCFReadStreamCreateWithFTPURL(objref.IDOf(alloc.Object), objref.IDOf(ftpURL.Object))
-	return corefoundation.CFReadStreamRef{obj.Wrap(_ret)}
+	return corefoundation.CFReadStreamRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFSocketStreamSOCKSGetError func(unsafe.Pointer) int32
@@ -1136,5 +1136,5 @@ func CFWriteStreamCreateWithFTPURL(alloc corefoundation.CFAllocatorRef, ftpURL c
 		ebipurego.RegisterLibFunc(&_fnCFWriteStreamCreateWithFTPURL, _lib, "CFWriteStreamCreateWithFTPURL")
 	}
 	_ret := _fnCFWriteStreamCreateWithFTPURL(objref.IDOf(alloc.Object), objref.IDOf(ftpURL.Object))
-	return corefoundation.CFWriteStreamRef{obj.Wrap(_ret)}
+	return corefoundation.CFWriteStreamRef{Object: obj.Wrap(_ret)}
 }

@@ -7,7 +7,6 @@ package mediaextension
 import (
 	"runtime"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -75,7 +74,7 @@ func (esl *EstimatedSampleLocation) String() string {
 }
 
 // NewEstimatedSampleLocationWithByteSourceEstimatedSampleLocationRefinementDataLocation creates an estimated sample location object with the byte source, sample location, and data location that you specify.
-func NewEstimatedSampleLocationWithByteSourceEstimatedSampleLocationRefinementDataLocation(byteSource *ByteSource, estimatedSampleLocation avfoundation.AVSampleCursorStorageRange, refinementDataLocation avfoundation.AVSampleCursorStorageRange) *EstimatedSampleLocation {
+func NewEstimatedSampleLocationWithByteSourceEstimatedSampleLocationRefinementDataLocation(byteSource *ByteSource, estimatedSampleLocation AVSampleCursorStorageRange, refinementDataLocation AVSampleCursorStorageRange) *EstimatedSampleLocation {
 	defer runtime.KeepAlive(byteSource)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MEEstimatedSampleLocation")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithByteSource:estimatedSampleLocation:refinementDataLocation:"), objref.IDOf(byteSource), estimatedSampleLocation, refinementDataLocation)
@@ -83,16 +82,16 @@ func NewEstimatedSampleLocationWithByteSourceEstimatedSampleLocationRefinementDa
 }
 
 // EstimatedSampleLocation returns the estimated starting file offset and size in bytes of the sample.
-func (esl *EstimatedSampleLocation) EstimatedSampleLocation() avfoundation.AVSampleCursorStorageRange {
+func (esl *EstimatedSampleLocation) EstimatedSampleLocation() AVSampleCursorStorageRange {
 	defer runtime.KeepAlive(esl)
-	_r := objc.Send[avfoundation.AVSampleCursorStorageRange](objref.IDOf(esl), objc.RegisterName("estimatedSampleLocation"))
+	_r := objc.Send[AVSampleCursorStorageRange](objref.IDOf(esl), objc.RegisterName("estimatedSampleLocation"))
 	return _r
 }
 
 // RefinementDataLocation returns the starting file offset and size in bytes of the the data necessary to provide an accurate sample location. The refinement data can be provided to the MESampleCursor method refineSampleLocation to determine the exact sample location.
-func (esl *EstimatedSampleLocation) RefinementDataLocation() avfoundation.AVSampleCursorStorageRange {
+func (esl *EstimatedSampleLocation) RefinementDataLocation() AVSampleCursorStorageRange {
 	defer runtime.KeepAlive(esl)
-	_r := objc.Send[avfoundation.AVSampleCursorStorageRange](objref.IDOf(esl), objc.RegisterName("refinementDataLocation"))
+	_r := objc.Send[AVSampleCursorStorageRange](objref.IDOf(esl), objc.RegisterName("refinementDataLocation"))
 	return _r
 }
 

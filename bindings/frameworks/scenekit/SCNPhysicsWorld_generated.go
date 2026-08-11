@@ -81,6 +81,12 @@ func NewPhysicsWorld() *PhysicsWorld {
 	return physicsWorldAdopt(_id)
 }
 
+// WithGravity sets a vector that specifies the gravitational acceleration applied to physics bodies in the physics world.
+func (pw *PhysicsWorld) WithGravity(gravity SCNVector3) *PhysicsWorld {
+	objc.Send[objc.ID](objref.IDOf(pw), objc.RegisterName("setGravity:"), gravity)
+	return pw
+}
+
 // WithSpeed sets the rate at which the simulation executes.
 func (pw *PhysicsWorld) WithSpeed(speed float64) *PhysicsWorld {
 	objc.Send[objc.ID](objref.IDOf(pw), objc.RegisterName("setSpeed:"), speed)
@@ -123,6 +129,14 @@ func (pw *PhysicsWorld) RemoveAllBehaviors() {
 	objc.Send[objc.ID](objref.IDOf(pw), objc.RegisterName("removeAllBehaviors"))
 }
 
+// RayTestWithSegmentFromPointToPointOptions searches for physics bodies along a line segment between two points in the physics world.
+func (pw *PhysicsWorld) RayTestWithSegmentFromPointToPointOptions(origin SCNVector3, dest SCNVector3, options obj.Object) []*HitTestResult {
+	defer runtime.KeepAlive(pw)
+	defer runtime.KeepAlive(options)
+	_r := objc.Send[objc.ID](objref.IDOf(pw), objc.RegisterName("rayTestWithSegmentFromPoint:toPoint:options:"), origin, dest, objref.IDOf(options))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *HitTestResult { return HitTestResultFromID(_id) })
+}
+
 // ContactTestBetweenBodyAndBodyOptions checks for contacts between two physics bodies.
 func (pw *PhysicsWorld) ContactTestBetweenBodyAndBodyOptions(bodyA *PhysicsBody, bodyB *PhysicsBody, options obj.Object) []*PhysicsContact {
 	defer runtime.KeepAlive(pw)
@@ -155,6 +169,13 @@ func (pw *PhysicsWorld) ConvexSweepTestWithShapeFromTransformToTransformOptions(
 func (pw *PhysicsWorld) UpdateCollisionPairs() {
 	defer runtime.KeepAlive(pw)
 	objc.Send[objc.ID](objref.IDOf(pw), objc.RegisterName("updateCollisionPairs"))
+}
+
+// Gravity returns the gravity.
+func (pw *PhysicsWorld) Gravity() SCNVector3 {
+	defer runtime.KeepAlive(pw)
+	_r := objc.Send[SCNVector3](objref.IDOf(pw), objc.RegisterName("gravity"))
+	return _r
 }
 
 // Speed returns the speed.

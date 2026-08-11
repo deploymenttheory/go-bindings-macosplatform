@@ -85,6 +85,14 @@ func NewCollectionLayoutSection() *CollectionLayoutSection {
 	return _mainthread0
 }
 
+// WithContentInsets sets the amount of space between the content of the section and its boundaries.
+func (cls *CollectionLayoutSection) WithContentInsets(contentInsets NSDirectionalEdgeInsets) *CollectionLayoutSection {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cls), objc.RegisterName("setContentInsets:"), contentInsets)
+	})
+	return cls
+}
+
 // WithInterGroupSpacing sets the amount of space between the groups in the section.
 func (cls *CollectionLayoutSection) WithInterGroupSpacing(interGroupSpacing float64) *CollectionLayoutSection {
 	purego.Main(func() {
@@ -125,6 +133,20 @@ func (cls *CollectionLayoutSection) WithDecorationItems(items ...*CollectionLayo
 		objc.Send[objc.ID](objref.IDOf(cls), objc.RegisterName("setDecorationItems:"), _arr)
 	})
 	return cls
+}
+
+// ContentInsets returns the content insets.
+func (cls *CollectionLayoutSection) ContentInsets() NSDirectionalEdgeInsets {
+	defer runtime.KeepAlive(cls)
+	var _mainthread0 NSDirectionalEdgeInsets
+	purego.Main(func() {
+		_mainthread0 = func() NSDirectionalEdgeInsets {
+			_r := objc.Send[NSDirectionalEdgeInsets](objref.IDOf(cls), objc.RegisterName("contentInsets"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // InterGroupSpacing returns the inter group spacing.

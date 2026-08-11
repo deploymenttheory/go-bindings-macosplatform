@@ -107,14 +107,14 @@ func (c *Caption) TimeRange() coremedia.CMTimeRange {
 func (c *Caption) TextColorAtIndexRange(index int, outRange *foundation.NSRange) coregraphics.CGColorRef {
 	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("textColorAtIndex:range:"), index, unsafe.Pointer(outRange))
-	return coregraphics.CGColorRef{obj.Adopt(_r)}
+	return coregraphics.CGColorRef{Object: obj.Adopt(_r)}
 }
 
 // BackgroundColorAtIndexRange returns the background color at the index position.
 func (c *Caption) BackgroundColorAtIndexRange(index int, outRange *foundation.NSRange) coregraphics.CGColorRef {
 	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("backgroundColorAtIndex:range:"), index, unsafe.Pointer(outRange))
-	return coregraphics.CGColorRef{obj.Adopt(_r)}
+	return coregraphics.CGColorRef{Object: obj.Adopt(_r)}
 }
 
 // FontWeightAtIndexRange returns the font weight and range at the index position.

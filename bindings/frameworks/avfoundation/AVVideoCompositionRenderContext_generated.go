@@ -109,6 +109,20 @@ func (vcrc *VideoCompositionRenderContext) RenderScale() float32 {
 	return _r
 }
 
+// PixelAspectRatio indicates the pixel aspect ratio for rendered frames.
+func (vcrc *VideoCompositionRenderContext) PixelAspectRatio() AVPixelAspectRatio {
+	defer runtime.KeepAlive(vcrc)
+	_r := objc.Send[AVPixelAspectRatio](objref.IDOf(vcrc), objc.RegisterName("pixelAspectRatio"))
+	return _r
+}
+
+// EdgeWidths indicates the thickness of the edge processing region on the left, top, right and bottom edges, in pixels.
+func (vcrc *VideoCompositionRenderContext) EdgeWidths() AVEdgeWidths {
+	defer runtime.KeepAlive(vcrc)
+	_r := objc.Send[AVEdgeWidths](objref.IDOf(vcrc), objc.RegisterName("edgeWidths"))
+	return _r
+}
+
 // HighQualityRendering reports whether hints the custom compositor that it may use higher quality, potentially slower algorithms. Generally true for non real time use cases.
 func (vcrc *VideoCompositionRenderContext) HighQualityRendering() bool {
 	defer runtime.KeepAlive(vcrc)

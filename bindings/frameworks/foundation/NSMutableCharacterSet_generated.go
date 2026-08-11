@@ -68,6 +68,18 @@ func (mcs *MutableCharacterSet) WithScriptingProperties(scriptingProperties map[
 	return mcs
 }
 
+// AddCharactersInRange adds to the receiver the characters whose Unicode values are in a given range.
+func (mcs *MutableCharacterSet) AddCharactersInRange(aRange NSRange) {
+	defer runtime.KeepAlive(mcs)
+	objc.Send[objc.ID](objref.IDOf(mcs), objc.RegisterName("addCharactersInRange:"), aRange)
+}
+
+// RemoveCharactersInRange removes from the receiver the characters whose Unicode values are in a given range.
+func (mcs *MutableCharacterSet) RemoveCharactersInRange(aRange NSRange) {
+	defer runtime.KeepAlive(mcs)
+	objc.Send[objc.ID](objref.IDOf(mcs), objc.RegisterName("removeCharactersInRange:"), aRange)
+}
+
 // AddCharactersInString adds to the receiver the characters in a given string.
 func (mcs *MutableCharacterSet) AddCharactersInString(aString string) {
 	defer runtime.KeepAlive(mcs)

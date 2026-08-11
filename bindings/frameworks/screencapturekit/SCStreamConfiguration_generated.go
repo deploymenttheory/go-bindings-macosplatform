@@ -341,7 +341,7 @@ func (sc *StreamConfiguration) ShowMouseClicks() bool {
 func (sc *StreamConfiguration) BackgroundColor() coregraphics.CGColorRef {
 	defer runtime.KeepAlive(sc)
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("backgroundColor"))
-	return coregraphics.CGColorRef{obj.Wrap(_r)}
+	return coregraphics.CGColorRef{Object: obj.Wrap(_r)}
 }
 
 // SourceRect returns SCStreamProperty that specifies that the stream only samples a subset of the frame input. For display streams, if not set, then the entire display is streamed. For independent window streams, if not set, then the entire window is streamed. The rectangle is specified in points in the display’s logical coordinate system.
@@ -369,14 +369,14 @@ func (sc *StreamConfiguration) QueueDepth() int {
 func (sc *StreamConfiguration) ColorMatrix() corefoundation.CFStringRef {
 	defer runtime.KeepAlive(sc)
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("colorMatrix"))
-	return corefoundation.CFStringRef{obj.Wrap(_r)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_r)}
 }
 
 // ColorSpaceName returns SCStreamProperty that specifies the color space of the output buffer.  If not set the output buffer uses the same color space as the display. The value must be one of the strings specified in https://developer.apple.com/documentation/coregraphics/cgcolorspace/color_space_names.
 func (sc *StreamConfiguration) ColorSpaceName() corefoundation.CFStringRef {
 	defer runtime.KeepAlive(sc)
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("colorSpaceName"))
-	return corefoundation.CFStringRef{obj.Wrap(_r)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_r)}
 }
 
 // CapturesAudio reports whether SCStreamProperty that specifies whether the audio will be captured. By default audio is not captured.

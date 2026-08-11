@@ -16,10 +16,10 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-var _fnAVCaptionDimensionMake func(float64, CaptionUnitsType) unsafe.Pointer
+var _fnAVCaptionDimensionMake func(float64, CaptionUnitsType) AVCaptionDimension
 
 // AVCaptionDimensionMake calls the AVFoundation framework function AVCaptionDimensionMake.
-func AVCaptionDimensionMake(value float64, units CaptionUnitsType) unsafe.Pointer {
+func AVCaptionDimensionMake(value float64, units CaptionUnitsType) AVCaptionDimension {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAVCaptionDimensionMake == nil {
 		ebipurego.RegisterLibFunc(&_fnAVCaptionDimensionMake, _lib, "AVCaptionDimensionMake")
@@ -27,10 +27,10 @@ func AVCaptionDimensionMake(value float64, units CaptionUnitsType) unsafe.Pointe
 	return _fnAVCaptionDimensionMake(value, units)
 }
 
-var _fnAVCaptionPointMake func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+var _fnAVCaptionPointMake func(AVCaptionDimension, AVCaptionDimension) AVCaptionPoint
 
 // AVCaptionPointMake calls the AVFoundation framework function AVCaptionPointMake.
-func AVCaptionPointMake(x unsafe.Pointer, y unsafe.Pointer) unsafe.Pointer {
+func AVCaptionPointMake(x AVCaptionDimension, y AVCaptionDimension) AVCaptionPoint {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAVCaptionPointMake == nil {
 		ebipurego.RegisterLibFunc(&_fnAVCaptionPointMake, _lib, "AVCaptionPointMake")
@@ -38,10 +38,10 @@ func AVCaptionPointMake(x unsafe.Pointer, y unsafe.Pointer) unsafe.Pointer {
 	return _fnAVCaptionPointMake(x, y)
 }
 
-var _fnAVCaptionSizeMake func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+var _fnAVCaptionSizeMake func(AVCaptionDimension, AVCaptionDimension) AVCaptionSize
 
 // AVCaptionSizeMake calls the AVFoundation framework function AVCaptionSizeMake.
-func AVCaptionSizeMake(width unsafe.Pointer, height unsafe.Pointer) unsafe.Pointer {
+func AVCaptionSizeMake(width AVCaptionDimension, height AVCaptionDimension) AVCaptionSize {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAVCaptionSizeMake == nil {
 		ebipurego.RegisterLibFunc(&_fnAVCaptionSizeMake, _lib, "AVCaptionSizeMake")

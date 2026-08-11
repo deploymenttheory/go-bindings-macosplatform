@@ -58,6 +58,18 @@ func NewMutableCaptionRegionWithIdentifier(identifier string) *MutableCaptionReg
 	return mutableCaptionRegionAdopt(_id)
 }
 
+// WithOrigin sets the region’s top-left position.
+func (mcr *MutableCaptionRegion) WithOrigin(origin AVCaptionPoint) *MutableCaptionRegion {
+	objc.Send[objc.ID](objref.IDOf(mcr), objc.RegisterName("setOrigin:"), origin)
+	return mcr
+}
+
+// WithSize sets the height and width of the region.
+func (mcr *MutableCaptionRegion) WithSize(size AVCaptionSize) *MutableCaptionRegion {
+	objc.Send[objc.ID](objref.IDOf(mcr), objc.RegisterName("setSize:"), size)
+	return mcr
+}
+
 // WithScroll sets the scroll mode of the region.
 func (mcr *MutableCaptionRegion) WithScroll(scroll CaptionRegionScroll) *MutableCaptionRegion {
 	objc.Send[objc.ID](objref.IDOf(mcr), objc.RegisterName("setScroll:"), scroll)

@@ -71,8 +71,8 @@ func TestAsyncCompletion_BlockNotVoidReturn_NotTagged(t *testing.T) {
 
 func TestBoolNSError(t *testing.T) {
 	m := macosplatformmetadata.Method{
-		Selector:   "loadFromURL:error:",
-		Return:     macosplatformmetadata.ReturnType{ObjCType: "BOOL"},
+		Selector:  "loadFromURL:error:",
+		Return:    macosplatformmetadata.ReturnType{ObjCType: "BOOL"},
 		IsNSError: true,
 	}
 	tags := ClassifyMethod(m, macosplatformmetadata.Class{}, nil)
@@ -93,8 +93,8 @@ func TestBoolNSError_NoNSError_NotTagged(t *testing.T) {
 
 func TestNSErrorOut(t *testing.T) {
 	m := macosplatformmetadata.Method{
-		Selector:   "parseData:error:",
-		Return:     macosplatformmetadata.ReturnType{ObjCType: "NSData *"},
+		Selector:  "parseData:error:",
+		Return:    macosplatformmetadata.ReturnType{ObjCType: "NSData *"},
 		IsNSError: true,
 	}
 	tags := ClassifyMethod(m, macosplatformmetadata.Class{}, nil)
@@ -221,8 +221,8 @@ func TestPropertyPair_CustomGetter(t *testing.T) {
 
 func TestMainThreadRequired(t *testing.T) {
 	m := macosplatformmetadata.Method{
-		Selector:           "updateUI",
-		Return:             macosplatformmetadata.ReturnType{ObjCType: "void"},
+		Selector:             "updateUI",
+		Return:               macosplatformmetadata.ReturnType{ObjCType: "void"},
 		IsMainThreadRequired: true,
 	}
 	tags := ClassifyMethod(m, macosplatformmetadata.Class{}, nil)
@@ -231,8 +231,8 @@ func TestMainThreadRequired(t *testing.T) {
 
 func TestMainThreadRequired_False_NotTagged(t *testing.T) {
 	m := macosplatformmetadata.Method{
-		Selector:           "compute",
-		Return:             macosplatformmetadata.ReturnType{ObjCType: "NSInteger"},
+		Selector:             "compute",
+		Return:               macosplatformmetadata.ReturnType{ObjCType: "NSInteger"},
 		IsMainThreadRequired: false,
 	}
 	tags := ClassifyMethod(m, macosplatformmetadata.Class{}, nil)
@@ -411,8 +411,8 @@ func TestClassifyFramework(t *testing.T) {
 				},
 				Methods: []macosplatformmetadata.Method{
 					{
-						Selector:   "loadFromURL:error:",
-						Return:     macosplatformmetadata.ReturnType{ObjCType: "BOOL"},
+						Selector:  "loadFromURL:error:",
+						Return:    macosplatformmetadata.ReturnType{ObjCType: "BOOL"},
 						IsNSError: true,
 					},
 					{
@@ -422,7 +422,7 @@ func TestClassifyFramework(t *testing.T) {
 					{
 						Selector: "setTitle:",
 						Return:   macosplatformmetadata.ReturnType{ObjCType: "void"},
-						Params:     []macosplatformmetadata.Param{{Name: "title", ObjCType: "NSString *"}},
+						Params:   []macosplatformmetadata.Param{{Name: "title", ObjCType: "NSString *"}},
 					},
 				},
 			},
@@ -471,8 +471,8 @@ func TestMethod_CanHaveMultipleTags(t *testing.T) {
 
 func TestMethod_MainThread_WithAsync(t *testing.T) {
 	m := macosplatformmetadata.Method{
-		Selector:           "refreshUI:",
-		Return:             macosplatformmetadata.ReturnType{ObjCType: "void"},
+		Selector:             "refreshUI:",
+		Return:               macosplatformmetadata.ReturnType{ObjCType: "void"},
 		IsMainThreadRequired: true,
 		Params: []macosplatformmetadata.Param{
 			{Name: "completion", ObjCType: "void (^)(void)", IsBlock: true},

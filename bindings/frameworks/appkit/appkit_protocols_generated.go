@@ -454,8 +454,8 @@ type CloudSharingValidation interface {
 type CollectionLayoutContainer interface {
 	ContentSize() corefoundation.CGSize
 	EffectiveContentSize() corefoundation.CGSize
-	ContentInsets() obj.Object
-	EffectiveContentInsets() obj.Object
+	ContentInsets() NSDirectionalEdgeInsets
+	EffectiveContentInsets() NSDirectionalEdgeInsets
 }
 
 // CollectionLayoutEnvironment is the Go form of the Objective-C protocol NSCollectionLayoutEnvironment.

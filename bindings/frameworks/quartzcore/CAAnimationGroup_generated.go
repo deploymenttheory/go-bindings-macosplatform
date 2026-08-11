@@ -84,6 +84,12 @@ func (ag *AnimationGroup) WithRemovedOnCompletion(removedOnCompletion bool) *Ani
 	return ag
 }
 
+// WithPreferredFrameRateRange sets the preferred frame rate range.
+func (ag *AnimationGroup) WithPreferredFrameRateRange(preferredFrameRateRange CAFrameRateRange) *AnimationGroup {
+	objc.Send[objc.ID](objref.IDOf(ag), objc.RegisterName("setPreferredFrameRateRange:"), preferredFrameRateRange)
+	return ag
+}
+
 // Animations returns the animations.
 //
 // Animations returns the collection as a Go slice.

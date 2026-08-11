@@ -100,6 +100,27 @@ func (tcr *TextCheckingResult) ResultType() TextCheckingType {
 	return _r
 }
 
+// Range returns the range.
+func (tcr *TextCheckingResult) Range() NSRange {
+	defer runtime.KeepAlive(tcr)
+	_r := objc.Send[NSRange](objref.IDOf(tcr), objc.RegisterName("range"))
+	return _r
+}
+
+// RangeAtIndex returns the result type that the range represents.
+func (tcr *TextCheckingResult) RangeAtIndex(idx int) NSRange {
+	defer runtime.KeepAlive(tcr)
+	_r := objc.Send[NSRange](objref.IDOf(tcr), objc.RegisterName("rangeAtIndex:"), idx)
+	return _r
+}
+
+// RangeWithName wraps the corresponding Objective-C method.
+func (tcr *TextCheckingResult) RangeWithName(name string) NSRange {
+	defer runtime.KeepAlive(tcr)
+	_r := objc.Send[NSRange](objref.IDOf(tcr), objc.RegisterName("rangeWithName:"), purego.NSString(name))
+	return _r
+}
+
 // ResultByAdjustingRangesWithOffset returns a new text checking result after adjusting the ranges as specified by the offset.
 func (tcr *TextCheckingResult) ResultByAdjustingRangesWithOffset(offset int) *TextCheckingResult {
 	defer runtime.KeepAlive(tcr)

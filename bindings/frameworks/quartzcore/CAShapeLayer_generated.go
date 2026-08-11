@@ -168,6 +168,12 @@ func (sl *ShapeLayer) WithAnchorPointZ(anchorPointZ float64) *ShapeLayer {
 	return sl
 }
 
+// WithTransform sets the transform applied to the layer’s contents. Animatable.
+func (sl *ShapeLayer) WithTransform(transform CATransform3D) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setTransform:"), transform)
+	return sl
+}
+
 // WithFrame sets the layer’s frame rectangle.
 func (sl *ShapeLayer) WithFrame(frame corefoundation.CGRect) *ShapeLayer {
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setFrame:"), frame)
@@ -196,6 +202,12 @@ func (sl *ShapeLayer) WithGeometryFlipped(geometryFlipped bool) *ShapeLayer {
 func (sl *ShapeLayer) WithSublayers(items ...LayerProvider) *ShapeLayer {
 	_arr := purego.SliceToNSArray(items, func(_v LayerProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setSublayers:"), _arr)
+	return sl
+}
+
+// WithSublayerTransform sets specifies the transform to apply to sublayers when rendering. Animatable.
+func (sl *ShapeLayer) WithSublayerTransform(sublayerTransform CATransform3D) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setSublayerTransform:"), sublayerTransform)
 	return sl
 }
 
@@ -475,14 +487,14 @@ func (sl *ShapeLayer) WithConstraints(items ...*Constraint) *ShapeLayer {
 func (sl *ShapeLayer) Path() coregraphics.CGPathRef {
 	defer runtime.KeepAlive(sl)
 	_r := objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("path"))
-	return coregraphics.CGPathRef{obj.Wrap(_r)}
+	return coregraphics.CGPathRef{Object: obj.Wrap(_r)}
 }
 
 // FillColor returns the fill color.
 func (sl *ShapeLayer) FillColor() coregraphics.CGColorRef {
 	defer runtime.KeepAlive(sl)
 	_r := objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("fillColor"))
-	return coregraphics.CGColorRef{obj.Wrap(_r)}
+	return coregraphics.CGColorRef{Object: obj.Wrap(_r)}
 }
 
 // FillRule returns the fill rule.
@@ -496,7 +508,7 @@ func (sl *ShapeLayer) FillRule() *foundation.String {
 func (sl *ShapeLayer) StrokeColor() coregraphics.CGColorRef {
 	defer runtime.KeepAlive(sl)
 	_r := objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("strokeColor"))
-	return coregraphics.CGColorRef{obj.Wrap(_r)}
+	return coregraphics.CGColorRef{Object: obj.Wrap(_r)}
 }
 
 // StrokeStart returns the stroke start.

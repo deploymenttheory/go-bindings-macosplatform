@@ -83,7 +83,7 @@ func IOBluetoothL2CAPChannelRegisterForChannelCloseNotification(channel IOBlueto
 		ebipurego.RegisterLibFunc(&_fnIOBluetoothL2CAPChannelRegisterForChannelCloseNotification, _lib, "IOBluetoothL2CAPChannelRegisterForChannelCloseNotification")
 	}
 	_ret := _fnIOBluetoothL2CAPChannelRegisterForChannelCloseNotification(objref.IDOf(channel.Object), callback, inRefCon)
-	return IOBluetoothUserNotificationRef{obj.WrapUnmanaged(_ret)}
+	return IOBluetoothUserNotificationRef{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnIOBluetoothNSStringFromDeviceAddress func(unsafe.Pointer) objc.ID
@@ -479,7 +479,7 @@ func OBEXCreateVCard(inFirstName unsafe.Pointer, inFirstNameLength uint32, inLas
 		ebipurego.RegisterLibFunc(&_fnOBEXCreateVCard, _lib, "OBEXCreateVCard")
 	}
 	_ret := _fnOBEXCreateVCard(inFirstName, inFirstNameLength, inLastName, inLastNameLength, inFriendlyName, inFriendlyNameLength, inNameCharset, inNameCharsetLength, inHomePhone, inHomePhoneLength, inWorkPhone, inWorkPhoneLength, inCellPhone, inCellPhoneLength, inFaxPhone, inFaxPhoneLength, inEMailAddress, inEMailAddressLength, inEMailAddressCharset, inEMailAddressCharsetLength, inOrganization, inOrganizationLength, inOrganizationCharset, inOrganizationCharsetLength, inTitle, inTitleLength, inTitleCharset, inTitleCharsetLength)
-	return corefoundation.CFDataRef{obj.Wrap(_ret)}
+	return corefoundation.CFDataRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnOBEXCreateVEvent func(string, uint32, string, uint32, string, uint32, string, uint32, string, uint32, string, uint32, string, uint32, string, uint32, string, uint32) objc.ID
@@ -491,7 +491,7 @@ func OBEXCreateVEvent(inCharset string, inCharsetLength uint32, inEncoding strin
 		ebipurego.RegisterLibFunc(&_fnOBEXCreateVEvent, _lib, "OBEXCreateVEvent")
 	}
 	_ret := _fnOBEXCreateVEvent(inCharset, inCharsetLength, inEncoding, inEncodingLength, inEventStartDate, inEventStartDateLength, inEventEndDate, inEventEndDateLength, inAlarmDate, inAlarmDateLength, inCategory, inCategoryLength, inSummary, inSummaryLength, inLocation, inLocationLength, inXIRMCLUID, inXIRMCLUIDLength)
-	return corefoundation.CFDataRef{obj.Wrap(_ret)}
+	return corefoundation.CFDataRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnOBEXGetHeaders func(unsafe.Pointer, int) objc.ID
@@ -503,7 +503,7 @@ func OBEXGetHeaders(inData unsafe.Pointer, inDataSize int) corefoundation.CFDict
 		ebipurego.RegisterLibFunc(&_fnOBEXGetHeaders, _lib, "OBEXGetHeaders")
 	}
 	_ret := _fnOBEXGetHeaders(inData, inDataSize)
-	return corefoundation.CFDictionaryRef{obj.Adopt(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnOBEXHeadersToBytes func(objc.ID) objc.ID
@@ -515,7 +515,7 @@ func OBEXHeadersToBytes(dictionaryOfHeaders corefoundation.CFDictionaryRef) core
 		ebipurego.RegisterLibFunc(&_fnOBEXHeadersToBytes, _lib, "OBEXHeadersToBytes")
 	}
 	_ret := _fnOBEXHeadersToBytes(objref.IDOf(dictionaryOfHeaders.Object))
-	return corefoundation.CFMutableDataRef{obj.Wrap(_ret)}
+	return corefoundation.CFMutableDataRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnOBEXSessionAbort func(objc.ID, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int32

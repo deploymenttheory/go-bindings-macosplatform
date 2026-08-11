@@ -103,6 +103,12 @@ func (ogl *OpenGLLayer) WithAnchorPointZ(anchorPointZ float64) *OpenGLLayer {
 	return ogl
 }
 
+// WithTransform sets the transform applied to the layer’s contents. Animatable.
+func (ogl *OpenGLLayer) WithTransform(transform CATransform3D) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setTransform:"), transform)
+	return ogl
+}
+
 // WithFrame sets the layer’s frame rectangle.
 func (ogl *OpenGLLayer) WithFrame(frame corefoundation.CGRect) *OpenGLLayer {
 	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setFrame:"), frame)
@@ -131,6 +137,12 @@ func (ogl *OpenGLLayer) WithGeometryFlipped(geometryFlipped bool) *OpenGLLayer {
 func (ogl *OpenGLLayer) WithSublayers(items ...LayerProvider) *OpenGLLayer {
 	_arr := purego.SliceToNSArray(items, func(_v LayerProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setSublayers:"), _arr)
+	return ogl
+}
+
+// WithSublayerTransform sets specifies the transform to apply to sublayers when rendering. Animatable.
+func (ogl *OpenGLLayer) WithSublayerTransform(sublayerTransform CATransform3D) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setSublayerTransform:"), sublayerTransform)
 	return ogl
 }
 
@@ -463,7 +475,7 @@ func (ogl *OpenGLLayer) IsAsynchronous() bool {
 func (ogl *OpenGLLayer) Colorspace() coregraphics.CGColorSpaceRef {
 	defer runtime.KeepAlive(ogl)
 	_r := objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("colorspace"))
-	return coregraphics.CGColorSpaceRef{obj.Wrap(_r)}
+	return coregraphics.CGColorSpaceRef{Object: obj.Wrap(_r)}
 }
 
 var _ LayerProvider = (*OpenGLLayer)(nil)

@@ -112,6 +112,12 @@ func (t *Transition) WithRemovedOnCompletion(removedOnCompletion bool) *Transiti
 	return t
 }
 
+// WithPreferredFrameRateRange sets the preferred frame rate range.
+func (t *Transition) WithPreferredFrameRateRange(preferredFrameRateRange CAFrameRateRange) *Transition {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setPreferredFrameRateRange:"), preferredFrameRateRange)
+	return t
+}
+
 // Type returns the type.
 func (t *Transition) Type() *foundation.String {
 	defer runtime.KeepAlive(t)

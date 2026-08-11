@@ -102,6 +102,12 @@ func (tvd *TextureViewDescriptor) WithSliceRange(sliceRange foundation.NSRange) 
 	return tvd
 }
 
+// WithSwizzle sets a desired swizzle format of a texture view.
+func (tvd *TextureViewDescriptor) WithSwizzle(swizzle MTLTextureSwizzleChannels) *TextureViewDescriptor {
+	objc.Send[objc.ID](objref.IDOf(tvd), objc.RegisterName("setSwizzle:"), swizzle)
+	return tvd
+}
+
 // PixelFormat returns a desired pixel format of a texture view.
 func (tvd *TextureViewDescriptor) PixelFormat() PixelFormat {
 	defer runtime.KeepAlive(tvd)
@@ -127,5 +133,12 @@ func (tvd *TextureViewDescriptor) LevelRange() foundation.NSRange {
 func (tvd *TextureViewDescriptor) SliceRange() foundation.NSRange {
 	defer runtime.KeepAlive(tvd)
 	_r := objc.Send[foundation.NSRange](objref.IDOf(tvd), objc.RegisterName("sliceRange"))
+	return _r
+}
+
+// Swizzle returns a desired swizzle format of a texture view.
+func (tvd *TextureViewDescriptor) Swizzle() MTLTextureSwizzleChannels {
+	defer runtime.KeepAlive(tvd)
+	_r := objc.Send[MTLTextureSwizzleChannels](objref.IDOf(tvd), objc.RegisterName("swizzle"))
 	return _r
 }

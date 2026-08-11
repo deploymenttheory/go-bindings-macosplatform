@@ -107,7 +107,7 @@ func (co *ContoursObservation) TopLevelContours() []*Contour {
 func (co *ContoursObservation) NormalizedPath() coregraphics.CGPathRef {
 	defer runtime.KeepAlive(co)
 	_r := objc.Send[objc.ID](objref.IDOf(co), objc.RegisterName("normalizedPath"))
-	return coregraphics.CGPathRef{obj.Wrap(_r)}
+	return coregraphics.CGPathRef{Object: obj.Wrap(_r)}
 }
 
 var _ ObservationProvider = (*ContoursObservation)(nil)

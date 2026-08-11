@@ -33,6 +33,18 @@ func MoveByXYZDuration(deltaX float64, deltaY float64, deltaZ float64, duration 
 	return ActionFromID(_r)
 }
 
+// MoveByDuration creates an action that moves a node relative to its current position.
+func MoveByDuration(delta SCNVector3, duration float64) *Action {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("moveBy:duration:"), delta, duration)
+	return ActionFromID(_r)
+}
+
+// MoveToDuration creates an action that moves a node to a new position.
+func MoveToDuration(location SCNVector3, duration float64) *Action {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("moveTo:duration:"), location, duration)
+	return ActionFromID(_r)
+}
+
 // RotateByXYZDuration creates an action that rotates the node in each of the three principal axes by angles relative to its current orientation.
 func RotateByXYZDuration(xAngle float64, yAngle float64, zAngle float64, duration float64) *Action {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("rotateByX:y:z:duration:"), xAngle, yAngle, zAngle, duration)
@@ -48,6 +60,18 @@ func RotateToXYZDuration(xAngle float64, yAngle float64, zAngle float64, duratio
 // RotateToXYZDurationShortestUnitArc creates an action that rotates the node to absolute angles in each of the three principal axes.
 func RotateToXYZDurationShortestUnitArc(xAngle float64, yAngle float64, zAngle float64, duration float64, shortestUnitArc bool) *Action {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("rotateToX:y:z:duration:shortestUnitArc:"), xAngle, yAngle, zAngle, duration, shortestUnitArc)
+	return ActionFromID(_r)
+}
+
+// RotateByAngleAroundAxisDuration creates an action that rotates the node by an angle around a specified axis.
+func RotateByAngleAroundAxisDuration(angle float64, axis SCNVector3, duration float64) *Action {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("rotateByAngle:aroundAxis:duration:"), angle, axis, duration)
+	return ActionFromID(_r)
+}
+
+// RotateToAxisAngleDuration creates an action that rotates the node to an absolute angle around a specified axis.
+func RotateToAxisAngleDuration(axisAngle SCNVector4, duration float64) *Action {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("rotateToAxisAngle:duration:"), axisAngle, duration)
 	return ActionFromID(_r)
 }
 
@@ -411,6 +435,24 @@ func NodeWithGeometry(geometry *Geometry) *Node {
 	return NodeFromID(_r)
 }
 
+// LocalUp returns the local unit Y axis (0, 1, 0).
+func LocalUp() SCNVector3 {
+	_r := objc.Send[SCNVector3](objc.ID(_class("SCNNode")), objc.RegisterName("localUp"))
+	return _r
+}
+
+// LocalRight returns the local unit X axis (1, 0, 0).
+func LocalRight() SCNVector3 {
+	_r := objc.Send[SCNVector3](objc.ID(_class("SCNNode")), objc.RegisterName("localRight"))
+	return _r
+}
+
+// LocalFront returns the local unit -Z axis (0, 0, -1).
+func LocalFront() SCNVector3 {
+	_r := objc.Send[SCNVector3](objc.ID(_class("SCNNode")), objc.RegisterName("localFront"))
+	return _r
+}
+
 // SimdLocalUp returns the SIMD local up.
 func SimdLocalUp() unsafe.Pointer {
 	_r := objc.Send[unsafe.Pointer](objc.ID(_class("SCNNode")), objc.RegisterName("simdLocalUp"))
@@ -446,6 +488,21 @@ func SCNParticleSystemParticleSystem() *ParticleSystem {
 func ParticleSystemNamedInDirectory(name string, directory string) *ParticleSystem {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNParticleSystem")), objc.RegisterName("particleSystemNamed:inDirectory:"), purego.NSString(name), purego.NSString(directory))
 	return ParticleSystemFromID(_r)
+}
+
+// JointWithBodyAAnchorABodyBAnchorB creates a ball and socket joint connecting two physics bodies.
+func JointWithBodyAAnchorABodyBAnchorB(bodyA *PhysicsBody, anchorA SCNVector3, bodyB *PhysicsBody, anchorB SCNVector3) *PhysicsBallSocketJoint {
+	defer runtime.KeepAlive(bodyA)
+	defer runtime.KeepAlive(bodyB)
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsBallSocketJoint")), objc.RegisterName("jointWithBodyA:anchorA:bodyB:anchorB:"), objref.IDOf(bodyA), anchorA, objref.IDOf(bodyB), anchorB)
+	return PhysicsBallSocketJointFromID(_r)
+}
+
+// JointWithBodyAnchor creates a ball and socket joint that anchors a single physics body in space and allows it to rotate freely around an anchor point.
+func JointWithBodyAnchor(body *PhysicsBody, anchor SCNVector3) *PhysicsBallSocketJoint {
+	defer runtime.KeepAlive(body)
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsBallSocketJoint")), objc.RegisterName("jointWithBody:anchor:"), objref.IDOf(body), anchor)
+	return PhysicsBallSocketJointFromID(_r)
 }
 
 // StaticBody creates a physics body that is unaffected by forces or collisions and that cannot move.
@@ -542,6 +599,21 @@ func MagneticField() *PhysicsField {
 	return PhysicsFieldFromID(_r)
 }
 
+// JointWithBodyAAxisAAnchorABodyBAxisBAnchorB creates a hinge joint connecting two physics bodies.
+func JointWithBodyAAxisAAnchorABodyBAxisBAnchorB(bodyA *PhysicsBody, axisA SCNVector3, anchorA SCNVector3, bodyB *PhysicsBody, axisB SCNVector3, anchorB SCNVector3) *PhysicsHingeJoint {
+	defer runtime.KeepAlive(bodyA)
+	defer runtime.KeepAlive(bodyB)
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsHingeJoint")), objc.RegisterName("jointWithBodyA:axisA:anchorA:bodyB:axisB:anchorB:"), objref.IDOf(bodyA), axisA, anchorA, objref.IDOf(bodyB), axisB, anchorB)
+	return PhysicsHingeJointFromID(_r)
+}
+
+// JointWithBodyAxisAnchor creates a hinge joint that anchors a single physics body in space and lets it rotate around a specific axis.
+func JointWithBodyAxisAnchor(body *PhysicsBody, axis SCNVector3, anchor SCNVector3) *PhysicsHingeJoint {
+	defer runtime.KeepAlive(body)
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsHingeJoint")), objc.RegisterName("jointWithBody:axis:anchor:"), objref.IDOf(body), axis, anchor)
+	return PhysicsHingeJointFromID(_r)
+}
+
 // ShapeWithGeometryOptions creates a physics shape based on a geometry object.
 func ShapeWithGeometryOptions(geometry *Geometry, options obj.Object) *PhysicsShape {
 	defer runtime.KeepAlive(geometry)
@@ -562,6 +634,21 @@ func ShapeWithNodeOptions(node *Node, options obj.Object) *PhysicsShape {
 func ShapeWithShapesTransforms(shapes []*PhysicsShape, transforms []*foundation.Value) *PhysicsShape {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsShape")), objc.RegisterName("shapeWithShapes:transforms:"), purego.SliceToNSArray(shapes, func(_v *PhysicsShape) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(transforms, func(_v *foundation.Value) objc.ID { return objref.IDOf(_v) }))
 	return PhysicsShapeFromID(_r)
+}
+
+// SCNPhysicsSliderJointJointWithBodyAAxisAAnchorABodyBAxisBAnchorB creates a slider joint connecting two physics bodies.
+func SCNPhysicsSliderJointJointWithBodyAAxisAAnchorABodyBAxisBAnchorB(bodyA *PhysicsBody, axisA SCNVector3, anchorA SCNVector3, bodyB *PhysicsBody, axisB SCNVector3, anchorB SCNVector3) *PhysicsSliderJoint {
+	defer runtime.KeepAlive(bodyA)
+	defer runtime.KeepAlive(bodyB)
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsSliderJoint")), objc.RegisterName("jointWithBodyA:axisA:anchorA:bodyB:axisB:anchorB:"), objref.IDOf(bodyA), axisA, anchorA, objref.IDOf(bodyB), axisB, anchorB)
+	return PhysicsSliderJointFromID(_r)
+}
+
+// SCNPhysicsSliderJointJointWithBodyAxisAnchor creates a slider joint that anchors a single physics body in space and allows it to slide along a specific axis.
+func SCNPhysicsSliderJointJointWithBodyAxisAnchor(body *PhysicsBody, axis SCNVector3, anchor SCNVector3) *PhysicsSliderJoint {
+	defer runtime.KeepAlive(body)
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsSliderJoint")), objc.RegisterName("jointWithBody:axis:anchor:"), objref.IDOf(body), axis, anchor)
+	return PhysicsSliderJointFromID(_r)
 }
 
 // VehicleWithChassisBodyWheels creates a vehicle behavior.

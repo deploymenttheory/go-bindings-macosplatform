@@ -334,7 +334,7 @@ func idiomaticArg(
 		imports["objref"] = objrefImportPath
 		return "obj.Object", "objref.IDOf(" + pName + ")", imports, true
 	}
-	if sname, ok := localValueStructName(goType, fc, rawPkgAlias); ok {
+	if sname, ok := localValueStructName(goType, fc, mapper, rawPkgAlias); ok {
 		// A value struct is passed to Objective-C by value, unchanged.
 		return sname, pName, imports, true
 	}
@@ -589,7 +589,9 @@ func idiomaticRet(
 		// unchanged; only the static type the caller sees is narrowed.
 		if named, nimps, ok := cfHandleNamedType(objcType, mapper, fc); ok {
 			maps.Copy(imports, nimps)
-			return named, kindObject, named + "{" + wrap + "}", "objc.ID", imports, true
+			// Keyed literal: go vet's composites check rejects unkeyed fields in
+			// cross-package struct literals.
+			return named, kindObject, named + "{Object: " + wrap + "}", "objc.ID", imports, true
 		}
 		return "obj.Object", kindObject, wrap, "objc.ID", imports, true
 	}
@@ -630,7 +632,7 @@ func idiomaticRet(
 		imports["obj"] = objImportPath
 		return "obj.Object", kindObject, "obj.Wrap(%s)", "objc.ID", imports, true
 	}
-	if sname, ok := localValueStructName(goRet, fc, rawPkgAlias); ok {
+	if sname, ok := localValueStructName(goRet, fc, mapper, rawPkgAlias); ok {
 		// A value struct is returned by value, unchanged.
 		return sname, kindScalar, "", sname, imports, true
 	}
@@ -768,7 +770,12 @@ func crossFrameworkEmittedStruct(
 	return goType, map[string]string{pkg: prefix + pkg}, true
 }
 
-func localValueStructName(goType string, fc *frameworkContext, rawPkgAlias string) (string, bool) {
+func localValueStructName(
+	goType string,
+	fc *frameworkContext,
+	mapper *typemap.Mapper,
+	rawPkgAlias string,
+) (string, bool) {
 	prefix := rawPkgAlias + "."
 	if !strings.HasPrefix(goType, prefix) {
 		return "", false
@@ -777,7 +784,12 @@ func localValueStructName(goType string, fc *frameworkContext, rawPkgAlias strin
 	if strings.ContainsAny(name, ".*[]") {
 		return "", false
 	}
-	if fc.localStruct[name] {
+	// fc.localStruct relies on scanner-recorded field GoTypes that some metadata
+	// omits, so it under-reports newly captured structs (e.g. MetalKit's copy of
+	// MTLClearColor). The ownTypes ∧ EmittableStructs gate is the authoritative
+	// fallback, mirroring pointerValueStructType and outParamGoType.
+	if fc.localStruct[name] ||
+		(fc.ownTypes[name] && mapper.EmittableStructs[name]) {
 		return name, true
 	}
 	return "", false

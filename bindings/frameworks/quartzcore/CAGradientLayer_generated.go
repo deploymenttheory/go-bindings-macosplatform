@@ -115,6 +115,12 @@ func (gl *GradientLayer) WithAnchorPointZ(anchorPointZ float64) *GradientLayer {
 	return gl
 }
 
+// WithTransform sets the transform applied to the layer’s contents. Animatable.
+func (gl *GradientLayer) WithTransform(transform CATransform3D) *GradientLayer {
+	objc.Send[objc.ID](objref.IDOf(gl), objc.RegisterName("setTransform:"), transform)
+	return gl
+}
+
 // WithFrame sets the layer’s frame rectangle.
 func (gl *GradientLayer) WithFrame(frame corefoundation.CGRect) *GradientLayer {
 	objc.Send[objc.ID](objref.IDOf(gl), objc.RegisterName("setFrame:"), frame)
@@ -143,6 +149,12 @@ func (gl *GradientLayer) WithGeometryFlipped(geometryFlipped bool) *GradientLaye
 func (gl *GradientLayer) WithSublayers(items ...LayerProvider) *GradientLayer {
 	_arr := purego.SliceToNSArray(items, func(_v LayerProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(gl), objc.RegisterName("setSublayers:"), _arr)
+	return gl
+}
+
+// WithSublayerTransform sets specifies the transform to apply to sublayers when rendering. Animatable.
+func (gl *GradientLayer) WithSublayerTransform(sublayerTransform CATransform3D) *GradientLayer {
+	objc.Send[objc.ID](objref.IDOf(gl), objc.RegisterName("setSublayerTransform:"), sublayerTransform)
 	return gl
 }
 

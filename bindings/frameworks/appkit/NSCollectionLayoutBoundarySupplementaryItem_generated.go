@@ -84,6 +84,14 @@ func (clbsi *CollectionLayoutBoundarySupplementaryItem) WithZIndex(zIndex int) *
 	return clbsi
 }
 
+// WithContentInsets sets the amount of space added around the content of the item to adjust its final size after its position is computed.
+func (clbsi *CollectionLayoutBoundarySupplementaryItem) WithContentInsets(contentInsets NSDirectionalEdgeInsets) *CollectionLayoutBoundarySupplementaryItem {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(clbsi), objc.RegisterName("setContentInsets:"), contentInsets)
+	})
+	return clbsi
+}
+
 // WithEdgeSpacing sets the amount of space added around the boundaries of the item between other items and this item’s container.
 func (clbsi *CollectionLayoutBoundarySupplementaryItem) WithEdgeSpacing(edgeSpacing *CollectionLayoutEdgeSpacing) *CollectionLayoutBoundarySupplementaryItem {
 	defer runtime.KeepAlive(edgeSpacing)

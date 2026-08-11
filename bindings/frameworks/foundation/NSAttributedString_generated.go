@@ -204,6 +204,28 @@ func (as *AttributedString) AttributeAtIndexEffectiveRange(attrName *String, loc
 	return obj.Wrap(_r)
 }
 
+// AttributedSubstringFromRange returns an attributed string consisting of the characters and attributes within the specified range in the attributed string.
+func (as *AttributedString) AttributedSubstringFromRange(range_ NSRange) *AttributedString {
+	defer runtime.KeepAlive(as)
+	_r := objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("attributedSubstringFromRange:"), range_)
+	return AttributedStringFromID(_r)
+}
+
+// AttributesAtIndexLongestEffectiveRangeInRange returns the attributes for the character at the specified index and, by reference, the range where the attributes apply.
+func (as *AttributedString) AttributesAtIndexLongestEffectiveRangeInRange(location int, range_ *NSRange, rangeLimit NSRange) obj.Object {
+	defer runtime.KeepAlive(as)
+	_r := objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("attributesAtIndex:longestEffectiveRange:inRange:"), location, unsafe.Pointer(range_), rangeLimit)
+	return obj.Wrap(_r)
+}
+
+// AttributeAtIndexLongestEffectiveRangeInRange returns the value for the attribute with the specified name of the character at the specified index and, by reference, the range where the attribute applies.
+func (as *AttributedString) AttributeAtIndexLongestEffectiveRangeInRange(attrName *String, location int, range_ *NSRange, rangeLimit NSRange) obj.Object {
+	defer runtime.KeepAlive(as)
+	defer runtime.KeepAlive(attrName)
+	_r := objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("attribute:atIndex:longestEffectiveRange:inRange:"), objref.IDOf(attrName), location, unsafe.Pointer(range_), rangeLimit)
+	return obj.Wrap(_r)
+}
+
 // IsEqualToAttributedString returns a Boolean value that indicates whether the attributed string is equal to the specified string.
 func (as *AttributedString) IsEqualToAttributedString(other *AttributedString) bool {
 	defer runtime.KeepAlive(as)

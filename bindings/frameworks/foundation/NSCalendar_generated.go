@@ -121,6 +121,27 @@ func (c *Calendar) WithScriptingProperties(scriptingProperties map[string]obj.Ob
 	return c
 }
 
+// MinimumRangeOfUnit returns the minimum range limits of the values that a given unit can take on.
+func (c *Calendar) MinimumRangeOfUnit(unit CalendarUnit) NSRange {
+	defer runtime.KeepAlive(c)
+	_r := objc.Send[NSRange](objref.IDOf(c), objc.RegisterName("minimumRangeOfUnit:"), unit)
+	return _r
+}
+
+// MaximumRangeOfUnit returns the maximum range limits of the values that a given unit can take on.
+func (c *Calendar) MaximumRangeOfUnit(unit CalendarUnit) NSRange {
+	defer runtime.KeepAlive(c)
+	_r := objc.Send[NSRange](objref.IDOf(c), objc.RegisterName("maximumRangeOfUnit:"), unit)
+	return _r
+}
+
+// RangeOfUnitInUnitForDate returns the range of absolute time values that a smaller calendar unit (such as a day) can take on in a larger calendar unit (such as a month) that includes a specified absolute time.
+func (c *Calendar) RangeOfUnitInUnitForDate(smaller CalendarUnit, larger CalendarUnit, date time.Time) NSRange {
+	defer runtime.KeepAlive(c)
+	_r := objc.Send[NSRange](objref.IDOf(c), objc.RegisterName("rangeOfUnit:inUnit:forDate:"), smaller, larger, rt.TimeToNSDate(date))
+	return _r
+}
+
 // OrdinalityOfUnitInUnitForDate returns, for a given absolute time, the ordinal number of a smaller calendar unit (such as a day) within a specified larger calendar unit (such as a week).
 func (c *Calendar) OrdinalityOfUnitInUnitForDate(smaller CalendarUnit, larger CalendarUnit, date time.Time) int {
 	defer runtime.KeepAlive(c)

@@ -9,7 +9,7 @@ CANARY_DIR ?= ../go-macos-observability
 help:
 	@echo "Targets:"
 	@echo "  generate      Re-emit all bindings from committed metadata (no Clang scan)"
-	@echo "  build         Build all generated binding packages"
+	@echo "  build         Build all binding packages, opinionated tools, and examples"
 	@echo "  test          Run internal unit tests"
 	@echo "  lint          Run golangci-lint"
 	@echo "  version       Detect macOS/SDK versions and check acceptance test compatibility"
@@ -25,7 +25,7 @@ generate:
 	go run ./cmd/generate/ bindings
 
 build:
-	go build ./bindings/...
+	go build ./bindings/... ./opinionated/... ./examples/...
 
 test:
 	go test ./internal/...

@@ -324,18 +324,18 @@ func (o *MTKView) SetSampleCount(sampleCount uint) {
 }
 
 // @property clearColor @abstract The clear color value used to generate the currentRenderPassDescriptor @discussion This defaults to (0.0, 0.0, 0.0, 1.0)
-func (o *MTKView) ClearColor() metal.MTLClearColor {
-	var _mainthread0 metal.MTLClearColor
+func (o *MTKView) ClearColor() MTLClearColor {
+	var _mainthread0 MTLClearColor
 	purego.Main(func() {
-		_mainthread0 = func() metal.MTLClearColor {
-			_ret := objc.Send[metal.MTLClearColor](o.Ptr(), _mTKViewSelClearColor)
+		_mainthread0 = func() MTLClearColor {
+			_ret := objc.Send[MTLClearColor](o.Ptr(), _mTKViewSelClearColor)
 			return _ret
 		}()
 	})
 	return _mainthread0
 }
 
-func (o *MTKView) SetClearColor(clearColor metal.MTLClearColor) {
+func (o *MTKView) SetClearColor(clearColor MTLClearColor) {
 	purego.Main(func() {
 		o.Ptr().Send(_mTKViewSelSetClearColor, clearColor)
 	})

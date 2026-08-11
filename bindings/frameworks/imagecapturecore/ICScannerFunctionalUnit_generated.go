@@ -342,7 +342,7 @@ func (sfu *ScannerFunctionalUnit) OverviewScanInProgress() bool {
 func (sfu *ScannerFunctionalUnit) OverviewImage() coregraphics.CGImageRef {
 	defer runtime.KeepAlive(sfu)
 	_r := objc.Send[objc.ID](objref.IDOf(sfu), objc.RegisterName("overviewImage"))
-	return coregraphics.CGImageRef{obj.Wrap(_r)}
+	return coregraphics.CGImageRef{Object: obj.Wrap(_r)}
 }
 
 // OverviewResolution returns ￼Overview image resolution. Value assigned to this will be contrained by resolutions allowed by the device.

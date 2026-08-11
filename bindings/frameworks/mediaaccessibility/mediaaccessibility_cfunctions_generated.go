@@ -24,7 +24,7 @@ func MAAudibleMediaCopyPreferredCharacteristics() corefoundation.CFArrayRef {
 		ebipurego.RegisterLibFunc(&_fnMAAudibleMediaCopyPreferredCharacteristics, _lib, "MAAudibleMediaCopyPreferredCharacteristics")
 	}
 	_ret := _fnMAAudibleMediaCopyPreferredCharacteristics()
-	return corefoundation.CFArrayRef{obj.Wrap(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnMACaptionAppearanceAddSelectedLanguage func(CaptionAppearanceDomain, objc.ID) bool
@@ -47,7 +47,7 @@ func MACaptionAppearanceCopyActiveProfileID() corefoundation.CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnMACaptionAppearanceCopyActiveProfileID, _lib, "MACaptionAppearanceCopyActiveProfileID")
 	}
 	_ret := _fnMACaptionAppearanceCopyActiveProfileID()
-	return corefoundation.CFStringRef{obj.Adopt(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnMACaptionAppearanceCopyBackgroundColor func(CaptionAppearanceDomain, unsafe.Pointer) objc.ID
@@ -60,7 +60,7 @@ func MACaptionAppearanceCopyBackgroundColor(domain CaptionAppearanceDomain) (res
 	}
 	var _out0 CaptionAppearanceBehavior
 	_ret := _fnMACaptionAppearanceCopyBackgroundColor(domain, unsafe.Pointer(&_out0))
-	return coregraphics.CGColorRef{obj.Wrap(_ret)}, _out0
+	return coregraphics.CGColorRef{Object: obj.Wrap(_ret)}, _out0
 }
 
 var _fnMACaptionAppearanceCopyFontDescriptorForStyle func(CaptionAppearanceDomain, unsafe.Pointer, CaptionAppearanceFontStyle) objc.ID
@@ -86,7 +86,7 @@ func MACaptionAppearanceCopyForegroundColor(domain CaptionAppearanceDomain) (res
 	}
 	var _out0 CaptionAppearanceBehavior
 	_ret := _fnMACaptionAppearanceCopyForegroundColor(domain, unsafe.Pointer(&_out0))
-	return coregraphics.CGColorRef{obj.Wrap(_ret)}, _out0
+	return coregraphics.CGColorRef{Object: obj.Wrap(_ret)}, _out0
 }
 
 var _fnMACaptionAppearanceCopyPreferredCaptioningMediaCharacteristics func(CaptionAppearanceDomain) objc.ID
@@ -98,7 +98,7 @@ func MACaptionAppearanceCopyPreferredCaptioningMediaCharacteristics(domain Capti
 		ebipurego.RegisterLibFunc(&_fnMACaptionAppearanceCopyPreferredCaptioningMediaCharacteristics, _lib, "MACaptionAppearanceCopyPreferredCaptioningMediaCharacteristics")
 	}
 	_ret := _fnMACaptionAppearanceCopyPreferredCaptioningMediaCharacteristics(domain)
-	return corefoundation.CFArrayRef{obj.Wrap(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnMACaptionAppearanceCopyProfileIDs func() objc.ID
@@ -110,7 +110,7 @@ func MACaptionAppearanceCopyProfileIDs() corefoundation.CFArrayRef {
 		ebipurego.RegisterLibFunc(&_fnMACaptionAppearanceCopyProfileIDs, _lib, "MACaptionAppearanceCopyProfileIDs")
 	}
 	_ret := _fnMACaptionAppearanceCopyProfileIDs()
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnMACaptionAppearanceCopyProfileName func(objc.ID) objc.ID
@@ -122,7 +122,7 @@ func MACaptionAppearanceCopyProfileName(profileID corefoundation.CFStringRef) co
 		ebipurego.RegisterLibFunc(&_fnMACaptionAppearanceCopyProfileName, _lib, "MACaptionAppearanceCopyProfileName")
 	}
 	_ret := _fnMACaptionAppearanceCopyProfileName(objref.IDOf(profileID.Object))
-	return corefoundation.CFStringRef{obj.Adopt(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnMACaptionAppearanceCopySelectedLanguages func(CaptionAppearanceDomain) objc.ID
@@ -134,7 +134,7 @@ func MACaptionAppearanceCopySelectedLanguages(domain CaptionAppearanceDomain) co
 		ebipurego.RegisterLibFunc(&_fnMACaptionAppearanceCopySelectedLanguages, _lib, "MACaptionAppearanceCopySelectedLanguages")
 	}
 	_ret := _fnMACaptionAppearanceCopySelectedLanguages(domain)
-	return corefoundation.CFArrayRef{obj.Wrap(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnMACaptionAppearanceCopyWindowColor func(CaptionAppearanceDomain, unsafe.Pointer) objc.ID
@@ -147,7 +147,7 @@ func MACaptionAppearanceCopyWindowColor(domain CaptionAppearanceDomain) (result 
 	}
 	var _out0 CaptionAppearanceBehavior
 	_ret := _fnMACaptionAppearanceCopyWindowColor(domain, unsafe.Pointer(&_out0))
-	return coregraphics.CGColorRef{obj.Wrap(_ret)}, _out0
+	return coregraphics.CGColorRef{Object: obj.Wrap(_ret)}, _out0
 }
 
 var _fnMACaptionAppearanceDidDisplayCaptions func(objc.ID)
@@ -314,7 +314,7 @@ func MAImageCaptioningCopyCaption(url corefoundation.CFURLRef, err unsafe.Pointe
 		ebipurego.RegisterLibFunc(&_fnMAImageCaptioningCopyCaption, _lib, "MAImageCaptioningCopyCaption")
 	}
 	_ret := _fnMAImageCaptioningCopyCaption(objref.IDOf(url.Object), err)
-	return corefoundation.CFStringRef{obj.Adopt(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnMAImageCaptioningCopyMetadataTagPath func() objc.ID
@@ -326,7 +326,7 @@ func MAImageCaptioningCopyMetadataTagPath() corefoundation.CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnMAImageCaptioningCopyMetadataTagPath, _lib, "MAImageCaptioningCopyMetadataTagPath")
 	}
 	_ret := _fnMAImageCaptioningCopyMetadataTagPath()
-	return corefoundation.CFStringRef{obj.Adopt(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnMAImageCaptioningSetCaption func(objc.ID, objc.ID, unsafe.Pointer) bool

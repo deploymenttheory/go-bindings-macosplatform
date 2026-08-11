@@ -396,6 +396,62 @@ func (uc *URLComponents) EncodedHost() string {
 	return purego.GoString(_r)
 }
 
+// RangeOfScheme returns the range of scheme.
+func (uc *URLComponents) RangeOfScheme() NSRange {
+	defer runtime.KeepAlive(uc)
+	_r := objc.Send[NSRange](objref.IDOf(uc), objc.RegisterName("rangeOfScheme"))
+	return _r
+}
+
+// RangeOfUser returns the range of user.
+func (uc *URLComponents) RangeOfUser() NSRange {
+	defer runtime.KeepAlive(uc)
+	_r := objc.Send[NSRange](objref.IDOf(uc), objc.RegisterName("rangeOfUser"))
+	return _r
+}
+
+// RangeOfPassword returns the range of password.
+func (uc *URLComponents) RangeOfPassword() NSRange {
+	defer runtime.KeepAlive(uc)
+	_r := objc.Send[NSRange](objref.IDOf(uc), objc.RegisterName("rangeOfPassword"))
+	return _r
+}
+
+// RangeOfHost returns the range of host.
+func (uc *URLComponents) RangeOfHost() NSRange {
+	defer runtime.KeepAlive(uc)
+	_r := objc.Send[NSRange](objref.IDOf(uc), objc.RegisterName("rangeOfHost"))
+	return _r
+}
+
+// RangeOfPort returns the range of port.
+func (uc *URLComponents) RangeOfPort() NSRange {
+	defer runtime.KeepAlive(uc)
+	_r := objc.Send[NSRange](objref.IDOf(uc), objc.RegisterName("rangeOfPort"))
+	return _r
+}
+
+// RangeOfPath returns the range of path.
+func (uc *URLComponents) RangeOfPath() NSRange {
+	defer runtime.KeepAlive(uc)
+	_r := objc.Send[NSRange](objref.IDOf(uc), objc.RegisterName("rangeOfPath"))
+	return _r
+}
+
+// RangeOfQuery returns the range of query.
+func (uc *URLComponents) RangeOfQuery() NSRange {
+	defer runtime.KeepAlive(uc)
+	_r := objc.Send[NSRange](objref.IDOf(uc), objc.RegisterName("rangeOfQuery"))
+	return _r
+}
+
+// RangeOfFragment returns the range of fragment.
+func (uc *URLComponents) RangeOfFragment() NSRange {
+	defer runtime.KeepAlive(uc)
+	_r := objc.Send[NSRange](objref.IDOf(uc), objc.RegisterName("rangeOfFragment"))
+	return _r
+}
+
 // QueryItems returns the query items.
 //
 // QueryItems returns the collection as a Go slice.

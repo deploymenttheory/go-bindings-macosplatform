@@ -7,7 +7,6 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/carboncore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/commonpanels"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/qd"
 )
@@ -39,15 +38,15 @@ type AlertStdCFStringAlertParamRec struct {
 }
 
 type AlertTemplate struct {
-	BoundsRect carboncore.Rect
+	BoundsRect Rect
 	ItemsID    int16
 	Stages     int16
 }
 
 type BasicWindowDescription struct {
 	DescriptionSize         uint32
-	WindowContentRect       carboncore.Rect
-	WindowZoomRect          carboncore.Rect
+	WindowContentRect       Rect
+	WindowZoomRect          Rect
 	WindowRefCon            unsafe.Pointer
 	WindowStateFlags        uint32
 	WindowPositionMethod    uint32
@@ -74,8 +73,8 @@ type ControlFontStyleRec struct {
 	Style     int16
 	Mode      int16
 	Just      int16
-	ForeColor commonpanels.RGBColor
-	BackColor commonpanels.RGBColor
+	ForeColor RGBColor
+	BackColor RGBColor
 }
 
 type ControlID struct {
@@ -112,7 +111,7 @@ type ControlTabInfoRecV1 struct {
 }
 
 type ControlTemplate struct {
-	ControlRect      carboncore.Rect
+	ControlRect      Rect
 	ControlValue     int16
 	ControlVisible   uint8
 	Fill             uint8
@@ -184,7 +183,7 @@ type DataBrowserPropertyDesc struct {
 }
 
 type DialogTemplate struct {
-	BoundsRect carboncore.Rect
+	BoundsRect Rect
 	ProcID     int16
 	Visible    uint8
 	Filler1    uint8
@@ -201,7 +200,7 @@ type EvQEl struct {
 	EvtQWhat      uint16
 	EvtQMessage   uint
 	EvtQWhen      uint32
-	EvtQWhere     carboncore.Point
+	EvtQWhere     Point
 	EvtQModifiers uint16
 }
 
@@ -214,7 +213,7 @@ type EventRecord struct {
 	What      uint16
 	Message   uint
 	When      uint32
-	Where     carboncore.Point
+	Where     Point
 	Modifiers uint16
 }
 
@@ -245,7 +244,7 @@ type FileTypeSpec struct {
 }
 
 type GetGrowImageRegionRec struct {
-	GrowRect        carboncore.Rect
+	GrowRect        Rect
 	GrowImageRegion unsafe.Pointer
 }
 
@@ -586,7 +585,7 @@ type HMHelpContent struct {
 
 type HMHelpContentRec struct {
 	Version    int32
-	AbsHotRect carboncore.Rect
+	AbsHotRect Rect
 	TagSide    int16
 	Content    [2]HMHelpContent
 }
@@ -607,8 +606,8 @@ type HMenuBarMenu struct {
 }
 
 type IndicatorDragConstraint struct {
-	LimitRect carboncore.Rect
-	SlopRect  carboncore.Rect
+	LimitRect Rect
+	SlopRect  Rect
 	Axis      uint16
 }
 
@@ -623,11 +622,11 @@ type ListDefSpec struct {
 }
 
 type ListRec struct {
-	RView       carboncore.Rect
+	RView       Rect
 	Port        unsafe.Pointer
-	Indent      carboncore.Point
-	CellSize    carboncore.Point
-	Visible     carboncore.Rect
+	Indent      Point
+	CellSize    Point
+	Visible     Rect
 	VScroll     unsafe.Pointer
 	HScroll     unsafe.Pointer
 	SelFlags    int8
@@ -635,24 +634,27 @@ type ListRec struct {
 	LReserved   int8
 	ListFlags   int8
 	ClikTime    int
-	ClikLoc     carboncore.Point
-	MouseLoc    carboncore.Point
+	ClikLoc     Point
+	MouseLoc    Point
 	LClickLoop  unsafe.Pointer
-	LastClick   carboncore.Point
+	LastClick   Point
 	RefCon      int
 	ListDefProc *string
 	UserHandle  *string
-	DataBounds  carboncore.Rect
+	DataBounds  Rect
 	Cells       *string
 	MaxIndex    int16
 	CellArray   [1]int16
 }
 
-// MCEntry is held as its exact 30-byte C ABI layout (a union / packed /
-// variable layout not expressible as typed Go fields).
 type MCEntry struct {
-	_    [0]uint16
-	data [30]byte
+	MctID       int16
+	MctItem     int16
+	MctRGB1     RGBColor
+	MctRGB2     RGBColor
+	MctRGB3     RGBColor
+	MctRGB4     RGBColor
+	MctReserved int16
 }
 
 type MDEFDrawData struct {
@@ -857,11 +859,14 @@ type Rect struct {
 	Right  int16
 }
 
-// STElement is held as its exact 18-byte C ABI layout (a union / packed /
-// variable layout not expressible as typed Go fields).
 type STElement struct {
-	_    [0]uint16
-	data [18]byte
+	StCount  int16
+	StHeight int16
+	StAscent int16
+	StFont   int16
+	StFace   uint8
+	StSize   int16
+	StColor  RGBColor
 }
 
 type ScrapFlavorInfo struct {
@@ -897,11 +902,14 @@ type ScrollBarTrackInfo struct {
 	data [6]byte
 }
 
-// ScrpSTElement is held as its exact 20-byte C ABI layout (a union / packed /
-// variable layout not expressible as typed Go fields).
 type ScrpSTElement struct {
-	_    [0]uint16
-	data [20]byte
+	ScrpStartChar int32
+	ScrpHeight    int16
+	ScrpAscent    int16
+	ScrpFont      int16
+	ScrpFace      uint8
+	ScrpSize      int16
+	ScrpColor     RGBColor
 }
 
 type SetupWindowProxyDragImageRec struct {
@@ -934,12 +942,12 @@ type StyleRun struct {
 }
 
 type TERec struct {
-	DestRect     carboncore.Rect
-	ViewRect     carboncore.Rect
-	SelRect      carboncore.Rect
+	DestRect     Rect
+	ViewRect     Rect
+	SelRect      Rect
 	LineHeight   int16
 	FontAscent   int16
-	SelPoint     carboncore.Point
+	SelPoint     Point
 	SelStart     int16
 	SelEnd       int16
 	Active       int16
@@ -1022,7 +1030,7 @@ type TXNBackground struct {
 }
 
 type TXNBackgroundData struct {
-	Color commonpanels.RGBColor
+	Color RGBColor
 }
 
 type TXNCarbonEventInfo struct {
@@ -1117,7 +1125,7 @@ type TextStyle struct {
 	TsFont  int16
 	TsFace  uint8
 	TsSize  int16
-	TsColor commonpanels.RGBColor
+	TsColor RGBColor
 }
 
 type ThemeButtonDrawInfo struct {
@@ -1128,7 +1136,7 @@ type ThemeButtonDrawInfo struct {
 
 type ThemeTrackDrawInfo struct {
 	Kind        uint16
-	Bounds      carboncore.Rect
+	Bounds      Rect
 	Min         int32
 	Max         int32
 	Value       int32
@@ -1162,8 +1170,8 @@ type TypeSelectRecord struct {
 }
 
 type WStateData struct {
-	UserState carboncore.Rect
-	StdState  carboncore.Rect
+	UserState Rect
+	StdState  Rect
 }
 
 type WinCTab struct {

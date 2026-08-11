@@ -6,7 +6,6 @@ package videotoolbox
 import (
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
@@ -114,14 +113,14 @@ func VTTemporalNoiseFilterConfigurationSupportedSourcePixelFormats() *foundation
 }
 
 // The maximum dimensions of a source frame that the processor supports.
-func VTTemporalNoiseFilterConfigurationMaximumDimensions() avfoundation.CMVideoDimensions {
-	_ret := objc.Send[avfoundation.CMVideoDimensions](objc.ID(_clsVTTemporalNoiseFilterConfiguration), _vTTemporalNoiseFilterConfigurationSelMaximumDimensions)
+func VTTemporalNoiseFilterConfigurationMaximumDimensions() CMVideoDimensions {
+	_ret := objc.Send[CMVideoDimensions](objc.ID(_clsVTTemporalNoiseFilterConfiguration), _vTTemporalNoiseFilterConfigurationSelMaximumDimensions)
 	return _ret
 }
 
 // The minimum dimensions of a source frame that the processor supports.
-func VTTemporalNoiseFilterConfigurationMinimumDimensions() avfoundation.CMVideoDimensions {
-	_ret := objc.Send[avfoundation.CMVideoDimensions](objc.ID(_clsVTTemporalNoiseFilterConfiguration), _vTTemporalNoiseFilterConfigurationSelMinimumDimensions)
+func VTTemporalNoiseFilterConfigurationMinimumDimensions() CMVideoDimensions {
+	_ret := objc.Send[CMVideoDimensions](objc.ID(_clsVTTemporalNoiseFilterConfiguration), _vTTemporalNoiseFilterConfigurationSelMinimumDimensions)
 	return _ret
 }
 

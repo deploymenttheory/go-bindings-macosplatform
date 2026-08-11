@@ -124,6 +124,60 @@ func (re *RegularExpression) NumberOfCaptureGroups() int {
 	return _r
 }
 
+// EnumerateMatchesInStringOptionsRangeUsing enumerates the string allowing the Block to handle each regular expression match.
+func (re *RegularExpression) EnumerateMatchesInStringOptionsRangeUsing(str string, options MatchingOptions, range_ NSRange, block func(obj.Object, MatchingFlags, *bool)) {
+	defer runtime.KeepAlive(re)
+	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("enumerateMatchesInString:options:range:usingBlock:"), purego.NSString(str), options, range_, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 MatchingFlags, _b2 unsafe.Pointer) {
+		block(obj.Wrap(_b0), _b1, (*bool)(_b2))
+	}))
+}
+
+// MatchesInStringOptionsRange returns an array containing all the matches of the regular expression in the string.
+func (re *RegularExpression) MatchesInStringOptionsRange(str string, options MatchingOptions, range_ NSRange) []*TextCheckingResult {
+	defer runtime.KeepAlive(re)
+	_r := objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("matchesInString:options:range:"), purego.NSString(str), options, range_)
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *TextCheckingResult { return TextCheckingResultFromID(_id) })
+}
+
+// NumberOfMatchesInStringOptionsRange returns the number of matches of the regular expression within the specified range of the string.
+func (re *RegularExpression) NumberOfMatchesInStringOptionsRange(str string, options MatchingOptions, range_ NSRange) int {
+	defer runtime.KeepAlive(re)
+	_r := objc.Send[int](objref.IDOf(re), objc.RegisterName("numberOfMatchesInString:options:range:"), purego.NSString(str), options, range_)
+	return _r
+}
+
+// FirstMatchInStringOptionsRange returns the first match of the regular expression within the specified range of the string.
+func (re *RegularExpression) FirstMatchInStringOptionsRange(str string, options MatchingOptions, range_ NSRange) *TextCheckingResult {
+	defer runtime.KeepAlive(re)
+	_r := objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("firstMatchInString:options:range:"), purego.NSString(str), options, range_)
+	return TextCheckingResultFromID(_r)
+}
+
+// RangeOfFirstMatchInStringOptionsRange returns the range of the first match of the regular expression within the specified range of the string.
+func (re *RegularExpression) RangeOfFirstMatchInStringOptionsRange(str string, options MatchingOptions, range_ NSRange) NSRange {
+	defer runtime.KeepAlive(re)
+	_r := objc.Send[NSRange](objref.IDOf(re), objc.RegisterName("rangeOfFirstMatchInString:options:range:"), purego.NSString(str), options, range_)
+	return _r
+}
+
+// StringByReplacingMatchesInStringOptionsRangeWithTemplate returns a new string containing matching regular expressions replaced with the template string.
+func (re *RegularExpression) StringByReplacingMatchesInStringOptionsRangeWithTemplate(str string, options MatchingOptions, range_ NSRange, templ string) string {
+	defer runtime.KeepAlive(re)
+	_r := objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("stringByReplacingMatchesInString:options:range:withTemplate:"), purego.NSString(str), options, range_, purego.NSString(templ))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// ReplaceMatchesInStringOptionsRangeWithTemplate replaces regular expression matches within the mutable string using the template string.
+func (re *RegularExpression) ReplaceMatchesInStringOptionsRangeWithTemplate(str *MutableString, options MatchingOptions, range_ NSRange, templ string) int {
+	defer runtime.KeepAlive(re)
+	defer runtime.KeepAlive(str)
+	_r := objc.Send[int](objref.IDOf(re), objc.RegisterName("replaceMatchesInString:options:range:withTemplate:"), objref.IDOf(str), options, range_, purego.NSString(templ))
+	return _r
+}
+
 // ReplacementStringForResultInStringOffsetTemplate used to perform template substitution for a single result for clients implementing their own replace functionality.
 func (re *RegularExpression) ReplacementStringForResultInStringOffsetTemplate(result *TextCheckingResult, str string, offset int, templ string) string {
 	defer runtime.KeepAlive(re)

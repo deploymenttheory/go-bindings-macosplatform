@@ -71,6 +71,12 @@ func (ain *AudioInputNode) WithVoiceProcessingInputMuted(voiceProcessingInputMut
 	return ain
 }
 
+// WithVoiceProcessingOtherAudioDuckingConfiguration sets the ducking configuration of nonvoice audio.
+func (ain *AudioInputNode) WithVoiceProcessingOtherAudioDuckingConfiguration(voiceProcessingOtherAudioDuckingConfiguration AVAudioVoiceProcessingOtherAudioDuckingConfiguration) *AudioInputNode {
+	objc.Send[objc.ID](objref.IDOf(ain), objc.RegisterName("setVoiceProcessingOtherAudioDuckingConfiguration:"), voiceProcessingOtherAudioDuckingConfiguration)
+	return ain
+}
+
 // SetMutedSpeechActivityEventListener register a listener to be notified when speech activity event occurs while the input is muted. Continuous presence of or lack of speech activity during mute will not cause redundant notification. In order to use this API, it's expected to implement the mute via the voiceProcessingInputMuted.
 func (ain *AudioInputNode) SetMutedSpeechActivityEventListener(listenerBlock func(AudioVoiceProcessingSpeechActivityEvent)) bool {
 	defer runtime.KeepAlive(ain)
@@ -96,6 +102,13 @@ func (ain *AudioInputNode) IsVoiceProcessingAGCEnabled() bool {
 func (ain *AudioInputNode) IsVoiceProcessingInputMuted() bool {
 	defer runtime.KeepAlive(ain)
 	_r := objc.Send[bool](objref.IDOf(ain), objc.RegisterName("isVoiceProcessingInputMuted"))
+	return _r
+}
+
+// VoiceProcessingOtherAudioDuckingConfiguration returns the configuration of ducking other (i.e. non-voice) audio Configures the ducking of other (i.e. non-voice) audio, including advanced ducking enablement and ducking level. In general, when other audio is played during voice chat, applying a higher level of ducking could increase the intelligibility of the voice chat. If not set, the default ducking configuration is to disable advanced ducking, with a ducking level set to AVAudioVoiceProcessingOtherAudioDuckingLevelDefault.
+func (ain *AudioInputNode) VoiceProcessingOtherAudioDuckingConfiguration() AVAudioVoiceProcessingOtherAudioDuckingConfiguration {
+	defer runtime.KeepAlive(ain)
+	_r := objc.Send[AVAudioVoiceProcessingOtherAudioDuckingConfiguration](objref.IDOf(ain), objc.RegisterName("voiceProcessingOtherAudioDuckingConfiguration"))
 	return _r
 }
 

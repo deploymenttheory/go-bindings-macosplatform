@@ -23,7 +23,7 @@ func TestWriteAndReadRoundTrip(t *testing.T) {
 		Framework:       "Foundation",
 		SDKVersion:      "14.0",
 		Arch:            "arm64",
-		IsSwiftOnly:       false,
+		IsSwiftOnly:     false,
 		ParentFramework: "",
 		Classes: map[string]Class{
 			"NSObject": {
@@ -75,7 +75,7 @@ func TestWriteAndReadRoundTrip(t *testing.T) {
 		},
 		BlockTypes: map[string]BlockType{
 			"CompletionBlock": {
-				Params:   []Param{{Name: "error", ObjCType: "NSError *"}},
+				Params: []Param{{Name: "error", ObjCType: "NSError *"}},
 				Return: ReturnType{ObjCType: "void"},
 			},
 		},
@@ -287,7 +287,7 @@ func TestWritePreservesProtocols(t *testing.T) {
 			Methods: []Method{
 				{
 					Selector: "copyWithZone:",
-					Params:     []Param{{Name: "zone", ObjCType: "NSZone *"}},
+					Params:   []Param{{Name: "zone", ObjCType: "NSZone *"}},
 					Return:   ReturnType{ObjCType: "id", IsNullable: true},
 				},
 			},
@@ -441,7 +441,7 @@ func TestWritePreservesFunctions(t *testing.T) {
 		},
 		{
 			Name:     "NSLog",
-			Params:     []Param{{Name: "format", ObjCType: "NSString *"}},
+			Params:   []Param{{Name: "format", ObjCType: "NSString *"}},
 			Return:   ReturnType{ObjCType: "void"},
 			IsInline: false,
 		},
@@ -514,7 +514,7 @@ func TestWritePreservesBlockTypes(t *testing.T) {
 			Return: ReturnType{ObjCType: "void"},
 		},
 		"BoolBlock": {
-			Params:   []Param{},
+			Params: []Param{},
 			Return: ReturnType{ObjCType: "BOOL"},
 		},
 	}
@@ -644,10 +644,10 @@ func TestWritePreservesParentFramework(t *testing.T) {
 // round-trip; omitempty must not strip it.
 func TestWritePreservesSwiftOnly(t *testing.T) {
 	framework := &FrameworkMeta{
-		Framework:  "RealityKit",
-		Arch:       "arm64",
-		SDKVersion: "17.0",
-		IsSwiftOnly:  true,
+		Framework:   "RealityKit",
+		Arch:        "arm64",
+		SDKVersion:  "17.0",
+		IsSwiftOnly: true,
 	}
 
 	dir := t.TempDir()

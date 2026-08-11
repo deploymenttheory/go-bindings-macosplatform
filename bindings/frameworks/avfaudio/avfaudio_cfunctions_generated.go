@@ -5,15 +5,13 @@
 package avfaudio
 
 import (
-	"unsafe"
-
 	ebipurego "github.com/ebitengine/purego"
 )
 
-var _fnAVAudioMake3DAngularOrientation func(float32, float32, float32) unsafe.Pointer
+var _fnAVAudioMake3DAngularOrientation func(float32, float32, float32) AVAudio3DAngularOrientation
 
 // AVAudioMake3DAngularOrientation calls the AVFAudio framework function AVAudioMake3DAngularOrientation.
-func AVAudioMake3DAngularOrientation(yaw float32, pitch float32, roll float32) unsafe.Pointer {
+func AVAudioMake3DAngularOrientation(yaw float32, pitch float32, roll float32) AVAudio3DAngularOrientation {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAVAudioMake3DAngularOrientation == nil {
 		ebipurego.RegisterLibFunc(&_fnAVAudioMake3DAngularOrientation, _lib, "AVAudioMake3DAngularOrientation")
@@ -21,10 +19,10 @@ func AVAudioMake3DAngularOrientation(yaw float32, pitch float32, roll float32) u
 	return _fnAVAudioMake3DAngularOrientation(yaw, pitch, roll)
 }
 
-var _fnAVAudioMake3DPoint func(float32, float32, float32) unsafe.Pointer
+var _fnAVAudioMake3DPoint func(float32, float32, float32) AVAudio3DPoint
 
 // AVAudioMake3DPoint calls the AVFAudio framework function AVAudioMake3DPoint.
-func AVAudioMake3DPoint(x float32, y float32, z float32) unsafe.Pointer {
+func AVAudioMake3DPoint(x float32, y float32, z float32) AVAudio3DPoint {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAVAudioMake3DPoint == nil {
 		ebipurego.RegisterLibFunc(&_fnAVAudioMake3DPoint, _lib, "AVAudioMake3DPoint")
@@ -32,10 +30,10 @@ func AVAudioMake3DPoint(x float32, y float32, z float32) unsafe.Pointer {
 	return _fnAVAudioMake3DPoint(x, y, z)
 }
 
-var _fnAVAudioMake3DVector func(float32, float32, float32) unsafe.Pointer
+var _fnAVAudioMake3DVector func(float32, float32, float32) AVAudio3DPoint
 
 // AVAudioMake3DVector calls the AVFAudio framework function AVAudioMake3DVector.
-func AVAudioMake3DVector(x float32, y float32, z float32) unsafe.Pointer {
+func AVAudioMake3DVector(x float32, y float32, z float32) AVAudio3DPoint {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAVAudioMake3DVector == nil {
 		ebipurego.RegisterLibFunc(&_fnAVAudioMake3DVector, _lib, "AVAudioMake3DVector")
@@ -43,10 +41,10 @@ func AVAudioMake3DVector(x float32, y float32, z float32) unsafe.Pointer {
 	return _fnAVAudioMake3DVector(x, y, z)
 }
 
-var _fnAVAudioMake3DVectorOrientation func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+var _fnAVAudioMake3DVectorOrientation func(AVAudio3DPoint, AVAudio3DPoint) AVAudio3DVectorOrientation
 
 // AVAudioMake3DVectorOrientation calls the AVFAudio framework function AVAudioMake3DVectorOrientation.
-func AVAudioMake3DVectorOrientation(forward unsafe.Pointer, up unsafe.Pointer) unsafe.Pointer {
+func AVAudioMake3DVectorOrientation(forward AVAudio3DPoint, up AVAudio3DPoint) AVAudio3DVectorOrientation {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAVAudioMake3DVectorOrientation == nil {
 		ebipurego.RegisterLibFunc(&_fnAVAudioMake3DVectorOrientation, _lib, "AVAudioMake3DVectorOrientation")
@@ -54,10 +52,10 @@ func AVAudioMake3DVectorOrientation(forward unsafe.Pointer, up unsafe.Pointer) u
 	return _fnAVAudioMake3DVectorOrientation(forward, up)
 }
 
-var _fnAVMakeBeatRange func(float64, float64) unsafe.Pointer
+var _fnAVMakeBeatRange func(float64, float64) AVBeatRange
 
 // AVMakeBeatRange calls the AVFAudio framework function AVMakeBeatRange.
-func AVMakeBeatRange(startBeat float64, lengthInBeats float64) unsafe.Pointer {
+func AVMakeBeatRange(startBeat float64, lengthInBeats float64) AVBeatRange {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAVMakeBeatRange == nil {
 		ebipurego.RegisterLibFunc(&_fnAVMakeBeatRange, _lib, "AVMakeBeatRange")

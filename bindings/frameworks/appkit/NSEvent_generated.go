@@ -354,7 +354,7 @@ func (e *Event) EventRef() unsafe.Pointer {
 func (e *Event) CGEvent() coregraphics.CGEventRef {
 	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("CGEvent"))
-	return coregraphics.CGEventRef{obj.Wrap(_r)}
+	return coregraphics.CGEventRef{Object: obj.Wrap(_r)}
 }
 
 // Magnification returns the magnification.

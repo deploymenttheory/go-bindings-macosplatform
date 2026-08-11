@@ -24,7 +24,7 @@ func PMCGImageCreateWithEPSDataProvider(epsDataProvider coregraphics.CGDataProvi
 		ebipurego.RegisterLibFunc(&_fnPMCGImageCreateWithEPSDataProvider, _lib, "PMCGImageCreateWithEPSDataProvider")
 	}
 	_ret := _fnPMCGImageCreateWithEPSDataProvider(objref.IDOf(epsDataProvider.Object), objref.IDOf(epsPreview.Object))
-	return coregraphics.CGImageRef{obj.Wrap(_ret)}
+	return coregraphics.CGImageRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnPMGetCollate func(objc.ID, unsafe.Pointer) int32
@@ -191,7 +191,7 @@ func PMPrinterCreateFromPrinterID(printerID corefoundation.CFStringRef) PMPrinte
 		ebipurego.RegisterLibFunc(&_fnPMPrinterCreateFromPrinterID, _lib, "PMPrinterCreateFromPrinterID")
 	}
 	_ret := _fnPMPrinterCreateFromPrinterID(objref.IDOf(printerID.Object))
-	return PMPrinter{obj.WrapUnmanaged(_ret)}
+	return PMPrinter{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnPMPrinterGetCommInfo func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
@@ -230,7 +230,7 @@ func PMPrinterGetID(printer PMPrinter) corefoundation.CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnPMPrinterGetID, _lib, "PMPrinterGetID")
 	}
 	_ret := _fnPMPrinterGetID(objref.IDOf(printer.Object))
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnPMPrinterGetLocation func(objc.ID) objc.ID
@@ -242,7 +242,7 @@ func PMPrinterGetLocation(printer PMPrinter) corefoundation.CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnPMPrinterGetLocation, _lib, "PMPrinterGetLocation")
 	}
 	_ret := _fnPMPrinterGetLocation(objref.IDOf(printer.Object))
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnPMPrinterGetName func(objc.ID) objc.ID
@@ -254,7 +254,7 @@ func PMPrinterGetName(printer PMPrinter) corefoundation.CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnPMPrinterGetName, _lib, "PMPrinterGetName")
 	}
 	_ret := _fnPMPrinterGetName(objref.IDOf(printer.Object))
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnPMPrinterGetPrinterResolutionCount func(objc.ID, unsafe.Pointer) int32

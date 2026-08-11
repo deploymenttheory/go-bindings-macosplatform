@@ -6,7 +6,6 @@ package mediaextension
 import (
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
@@ -36,7 +35,7 @@ func MESampleLocationFromID(id objc.ID) *MESampleLocation {
 }
 
 // Creates a sample location object with the byte source and sample location that you specify.
-func (o *MESampleLocation) InitWithByteSourceSampleLocation(byteSource *MEByteSource, sampleLocation avfoundation.AVSampleCursorStorageRange) *MESampleLocation {
+func (o *MESampleLocation) InitWithByteSourceSampleLocation(byteSource *MEByteSource, sampleLocation AVSampleCursorStorageRange) *MESampleLocation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mESampleLocationSelInitWithByteSourceSampleLocation, byteSource.Ptr(), sampleLocation)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
@@ -45,8 +44,8 @@ func (o *MESampleLocation) InitWithByteSourceSampleLocation(byteSource *MEByteSo
 }
 
 // @property		sampleLocation @abstract		The starting file offset and size in bytes of the sample.
-func (o *MESampleLocation) SampleLocation() avfoundation.AVSampleCursorStorageRange {
-	_ret := objc.Send[avfoundation.AVSampleCursorStorageRange](o.Ptr(), _mESampleLocationSelSampleLocation)
+func (o *MESampleLocation) SampleLocation() AVSampleCursorStorageRange {
+	_ret := objc.Send[AVSampleCursorStorageRange](o.Ptr(), _mESampleLocationSelSampleLocation)
 	return _ret
 }
 

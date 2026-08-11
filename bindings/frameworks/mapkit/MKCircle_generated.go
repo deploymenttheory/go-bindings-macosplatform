@@ -80,4 +80,11 @@ func (c *Circle) Radius() unsafe.Pointer {
 	return _r
 }
 
+// BoundingMapRect returns the bounding map rect.
+func (c *Circle) BoundingMapRect() MKMapRect {
+	defer runtime.KeepAlive(c)
+	_r := objc.Send[MKMapRect](objref.IDOf(c), objc.RegisterName("boundingMapRect"))
+	return _r
+}
+
 var _ ShapeProvider = (*Circle)(nil)

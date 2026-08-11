@@ -502,15 +502,15 @@ func PasteboardSetPromiseKeeper(inPasteboard PasteboardRef, inPromiseKeeper unsa
 	return nil
 }
 
-var _fnPlotIconRefInContext func(objc.ID, unsafe.Pointer, int16, int16, objc.ID, int, objc.ID) int32
+var _fnPlotIconRefInContext func(objc.ID, unsafe.Pointer, int16, int16, unsafe.Pointer, int, objc.ID) int32
 
 // PlotIconRefInContext reports an error if the HIServices framework function PlotIconRefInContext fails.
-func PlotIconRefInContext(inContext coregraphics.CGContextRef, inRect *corefoundation.CGRect, inAlign int16, inTransform int16, inLabelColor obj.Object, inFlags int, inIconRef obj.Object) error {
+func PlotIconRefInContext(inContext coregraphics.CGContextRef, inRect *corefoundation.CGRect, inAlign int16, inTransform int16, inLabelColor *RGBColor, inFlags int, inIconRef obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnPlotIconRefInContext == nil {
 		ebipurego.RegisterLibFunc(&_fnPlotIconRefInContext, _lib, "PlotIconRefInContext")
 	}
-	_rc := _fnPlotIconRefInContext(objref.IDOf(inContext.Object), unsafe.Pointer(inRect), inAlign, inTransform, objref.IDOf(inLabelColor), inFlags, objref.IDOf(inIconRef))
+	_rc := _fnPlotIconRefInContext(objref.IDOf(inContext.Object), unsafe.Pointer(inRect), inAlign, inTransform, unsafe.Pointer(inLabelColor), inFlags, objref.IDOf(inIconRef))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}

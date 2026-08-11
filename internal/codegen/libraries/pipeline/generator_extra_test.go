@@ -159,9 +159,9 @@ func buildMinimalRegistry(frameworkName string, cls map[string]macosplatformmeta
 	}
 	reg := &Registry{
 		Frameworks:     []*macosplatformmetadata.FrameworkMeta{framework},
-		ClassNameIndex:   make(map[string]bool),
+		ClassNameIndex: make(map[string]bool),
 		GenericClasses: make(map[string]bool),
-		OwnerIndex: make(map[string]string),
+		OwnerIndex:     make(map[string]string),
 		ClassIndex:     make(map[string]macosplatformmetadata.Class),
 		ModulePrefix:   "github.com/example/fw",
 	}
@@ -244,14 +244,14 @@ func TestGenerateFrameworkClassFile(t *testing.T) {
 func TestGenerateFrameworkSwiftOnly(t *testing.T) {
 	dir := t.TempDir()
 	framework := &macosplatformmetadata.FrameworkMeta{
-		Framework: "SwiftUICore",
+		Framework:   "SwiftUICore",
 		IsSwiftOnly: true,
 	}
 	reg := &Registry{
 		Frameworks:     []*macosplatformmetadata.FrameworkMeta{framework},
-		ClassNameIndex:   map[string]bool{},
+		ClassNameIndex: map[string]bool{},
 		GenericClasses: map[string]bool{},
-		OwnerIndex: map[string]string{},
+		OwnerIndex:     map[string]string{},
 		ClassIndex:     map[string]macosplatformmetadata.Class{},
 		ModulePrefix:   "github.com/example/fw",
 	}
@@ -277,9 +277,9 @@ func TestGenerateFrameworkSubFrameworkLinkFlag(t *testing.T) {
 	}
 	reg := &Registry{
 		Frameworks:     []*macosplatformmetadata.FrameworkMeta{framework},
-		ClassNameIndex:   map[string]bool{},
+		ClassNameIndex: map[string]bool{},
 		GenericClasses: map[string]bool{},
-		OwnerIndex: map[string]string{},
+		OwnerIndex:     map[string]string{},
 		ClassIndex:     map[string]macosplatformmetadata.Class{},
 		ModulePrefix:   "github.com/example/fw",
 	}
@@ -305,9 +305,9 @@ func TestGenerateMultipleFrameworks(t *testing.T) {
 	}
 	reg := &Registry{
 		Frameworks:     frameworks,
-		ClassNameIndex:   map[string]bool{"NSObject": true, "NSView": true},
+		ClassNameIndex: map[string]bool{"NSObject": true, "NSView": true},
 		GenericClasses: map[string]bool{},
-		OwnerIndex: map[string]string{"NSObject": "Foundation", "NSView": "AppKit"},
+		OwnerIndex:     map[string]string{"NSObject": "Foundation", "NSView": "AppKit"},
 		ClassIndex: map[string]macosplatformmetadata.Class{
 			"NSObject": {},
 			"NSView":   {Super: "NSObject"},
@@ -339,9 +339,9 @@ func TestGenerateFrameworkWithEnums(t *testing.T) {
 	}
 	reg := &Registry{
 		Frameworks:     []*macosplatformmetadata.FrameworkMeta{framework},
-		ClassNameIndex:   map[string]bool{},
+		ClassNameIndex: map[string]bool{},
 		GenericClasses: map[string]bool{},
-		OwnerIndex: map[string]string{},
+		OwnerIndex:     map[string]string{},
 		ClassIndex:     map[string]macosplatformmetadata.Class{},
 		ModulePrefix:   "github.com/example/fw",
 	}
@@ -366,9 +366,9 @@ func TestGenerateFrameworkWithStructs(t *testing.T) {
 	}
 	reg := &Registry{
 		Frameworks:     []*macosplatformmetadata.FrameworkMeta{framework},
-		ClassNameIndex:   map[string]bool{},
+		ClassNameIndex: map[string]bool{},
 		GenericClasses: map[string]bool{},
-		OwnerIndex: map[string]string{},
+		OwnerIndex:     map[string]string{},
 		ClassIndex:     map[string]macosplatformmetadata.Class{},
 		ModulePrefix:   "github.com/example/fw",
 	}
@@ -397,9 +397,9 @@ func TestGenerateFrameworkWithProtocols(t *testing.T) {
 	}
 	reg := &Registry{
 		Frameworks:     []*macosplatformmetadata.FrameworkMeta{framework},
-		ClassNameIndex:   map[string]bool{},
+		ClassNameIndex: map[string]bool{},
 		GenericClasses: map[string]bool{},
-		OwnerIndex: map[string]string{},
+		OwnerIndex:     map[string]string{},
 		ClassIndex:     map[string]macosplatformmetadata.Class{},
 		ModulePrefix:   "github.com/example/fw",
 	}
@@ -420,16 +420,16 @@ func TestGenerateFrameworkWithBlocks(t *testing.T) {
 		Classes:   map[string]macosplatformmetadata.Class{},
 		BlockTypes: map[string]macosplatformmetadata.BlockType{
 			"NSComparator": {
-				Params:   []macosplatformmetadata.Param{{Name: "obj1", ObjCType: "id"}},
+				Params: []macosplatformmetadata.Param{{Name: "obj1", ObjCType: "id"}},
 				Return: macosplatformmetadata.ReturnType{ObjCType: "NSComparisonResult"},
 			},
 		},
 	}
 	reg := &Registry{
 		Frameworks:     []*macosplatformmetadata.FrameworkMeta{framework},
-		ClassNameIndex:   map[string]bool{},
+		ClassNameIndex: map[string]bool{},
 		GenericClasses: map[string]bool{},
-		OwnerIndex: map[string]string{},
+		OwnerIndex:     map[string]string{},
 		ClassIndex:     map[string]macosplatformmetadata.Class{},
 		ModulePrefix:   "github.com/example/fw",
 	}
@@ -454,9 +454,9 @@ func TestGenerateFrameworkWithFunctions(t *testing.T) {
 	}
 	reg := &Registry{
 		Frameworks:     []*macosplatformmetadata.FrameworkMeta{framework},
-		ClassNameIndex:   map[string]bool{},
+		ClassNameIndex: map[string]bool{},
 		GenericClasses: map[string]bool{},
-		OwnerIndex: map[string]string{},
+		OwnerIndex:     map[string]string{},
 		ClassIndex:     map[string]macosplatformmetadata.Class{},
 		ModulePrefix:   "github.com/example/fw",
 	}
@@ -481,9 +481,9 @@ func TestGenerateFrameworkWithExterns(t *testing.T) {
 	}
 	reg := &Registry{
 		Frameworks:     []*macosplatformmetadata.FrameworkMeta{framework},
-		ClassNameIndex:   map[string]bool{},
+		ClassNameIndex: map[string]bool{},
 		GenericClasses: map[string]bool{},
-		OwnerIndex: map[string]string{},
+		OwnerIndex:     map[string]string{},
 		ClassIndex:     map[string]macosplatformmetadata.Class{},
 		ModulePrefix:   "github.com/example/fw",
 	}
@@ -505,9 +505,9 @@ func TestGenerateFrameworkUmbrella(t *testing.T) {
 	}
 	reg := &Registry{
 		Frameworks:     []*macosplatformmetadata.FrameworkMeta{framework},
-		ClassNameIndex:   map[string]bool{},
+		ClassNameIndex: map[string]bool{},
 		GenericClasses: map[string]bool{},
-		OwnerIndex: map[string]string{},
+		OwnerIndex:     map[string]string{},
 		ClassIndex:     map[string]macosplatformmetadata.Class{},
 		ModulePrefix:   "github.com/example/fw",
 	}
@@ -599,9 +599,9 @@ func TestGenerateFrameworkWithForeignExtensions(t *testing.T) {
 	}
 	reg := &Registry{
 		Frameworks:     []*macosplatformmetadata.FrameworkMeta{framework},
-		ClassNameIndex:   map[string]bool{"NSObject": true},
+		ClassNameIndex: map[string]bool{"NSObject": true},
 		GenericClasses: map[string]bool{},
-		OwnerIndex: map[string]string{"NSObject": "Foundation"},
+		OwnerIndex:     map[string]string{"NSObject": "Foundation"},
 		ClassIndex:     map[string]macosplatformmetadata.Class{"NSObject": {}},
 		ModulePrefix:   "github.com/example/fw",
 	}

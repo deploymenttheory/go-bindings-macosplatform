@@ -10,7 +10,7 @@ import (
 
 // AudioUnitFactory is the Go form of the Objective-C protocol AUAudioUnitFactory.
 type AudioUnitFactory interface {
-	CreateAudioUnitWithComponentDescriptionError(desc obj.Object) *AudioUnit
+	CreateAudioUnitWithComponentDescriptionError(desc AudioComponentDescription) *AudioUnit
 }
 
 // MessageChannel is the Go form of the Objective-C protocol AUMessageChannel.

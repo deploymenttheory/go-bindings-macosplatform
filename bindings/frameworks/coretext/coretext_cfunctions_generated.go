@@ -24,7 +24,7 @@ func CTFontCollectionCopyExclusionDescriptors(collection CTFontCollectionRef) co
 		ebipurego.RegisterLibFunc(&_fnCTFontCollectionCopyExclusionDescriptors, _lib, "CTFontCollectionCopyExclusionDescriptors")
 	}
 	_ret := _fnCTFontCollectionCopyExclusionDescriptors(objref.IDOf(collection.Object))
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontCollectionCopyFontAttribute func(objc.ID, objc.ID, CTFontCollectionCopyOptions) objc.ID
@@ -36,7 +36,7 @@ func CTFontCollectionCopyFontAttribute(collection CTFontCollectionRef, attribute
 		ebipurego.RegisterLibFunc(&_fnCTFontCollectionCopyFontAttribute, _lib, "CTFontCollectionCopyFontAttribute")
 	}
 	_ret := _fnCTFontCollectionCopyFontAttribute(objref.IDOf(collection.Object), objref.IDOf(attributeName.Object), options)
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontCollectionCopyFontAttributes func(objc.ID, objc.ID, CTFontCollectionCopyOptions) objc.ID
@@ -48,7 +48,7 @@ func CTFontCollectionCopyFontAttributes(collection CTFontCollectionRef, attribut
 		ebipurego.RegisterLibFunc(&_fnCTFontCollectionCopyFontAttributes, _lib, "CTFontCollectionCopyFontAttributes")
 	}
 	_ret := _fnCTFontCollectionCopyFontAttributes(objref.IDOf(collection.Object), objref.IDOf(attributeNames.Object), options)
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontCollectionCopyQueryDescriptors func(objc.ID) objc.ID
@@ -60,7 +60,7 @@ func CTFontCollectionCopyQueryDescriptors(collection CTFontCollectionRef) corefo
 		ebipurego.RegisterLibFunc(&_fnCTFontCollectionCopyQueryDescriptors, _lib, "CTFontCollectionCopyQueryDescriptors")
 	}
 	_ret := _fnCTFontCollectionCopyQueryDescriptors(objref.IDOf(collection.Object))
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontCollectionCreateCopyWithFontDescriptors func(objc.ID, objc.ID, objc.ID) objc.ID
@@ -72,7 +72,7 @@ func CTFontCollectionCreateCopyWithFontDescriptors(original CTFontCollectionRef,
 		ebipurego.RegisterLibFunc(&_fnCTFontCollectionCreateCopyWithFontDescriptors, _lib, "CTFontCollectionCreateCopyWithFontDescriptors")
 	}
 	_ret := _fnCTFontCollectionCreateCopyWithFontDescriptors(objref.IDOf(original.Object), objref.IDOf(queryDescriptors.Object), objref.IDOf(options.Object))
-	return CTFontCollectionRef{obj.Adopt(_ret)}
+	return CTFontCollectionRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontCollectionCreateFromAvailableFonts func(objc.ID) objc.ID
@@ -84,7 +84,7 @@ func CTFontCollectionCreateFromAvailableFonts(options corefoundation.CFDictionar
 		ebipurego.RegisterLibFunc(&_fnCTFontCollectionCreateFromAvailableFonts, _lib, "CTFontCollectionCreateFromAvailableFonts")
 	}
 	_ret := _fnCTFontCollectionCreateFromAvailableFonts(objref.IDOf(options.Object))
-	return CTFontCollectionRef{obj.Adopt(_ret)}
+	return CTFontCollectionRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontCollectionCreateMatchingFontDescriptors func(objc.ID) objc.ID
@@ -96,7 +96,7 @@ func CTFontCollectionCreateMatchingFontDescriptors(collection CTFontCollectionRe
 		ebipurego.RegisterLibFunc(&_fnCTFontCollectionCreateMatchingFontDescriptors, _lib, "CTFontCollectionCreateMatchingFontDescriptors")
 	}
 	_ret := _fnCTFontCollectionCreateMatchingFontDescriptors(objref.IDOf(collection.Object))
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontCollectionCreateMatchingFontDescriptorsForFamily func(objc.ID, objc.ID, objc.ID) objc.ID
@@ -108,7 +108,7 @@ func CTFontCollectionCreateMatchingFontDescriptorsForFamily(collection CTFontCol
 		ebipurego.RegisterLibFunc(&_fnCTFontCollectionCreateMatchingFontDescriptorsForFamily, _lib, "CTFontCollectionCreateMatchingFontDescriptorsForFamily")
 	}
 	_ret := _fnCTFontCollectionCreateMatchingFontDescriptorsForFamily(objref.IDOf(collection.Object), objref.IDOf(familyName.Object), objref.IDOf(options.Object))
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontCollectionCreateMatchingFontDescriptorsSortedWithCallback func(objc.ID, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -120,7 +120,7 @@ func CTFontCollectionCreateMatchingFontDescriptorsSortedWithCallback(collection 
 		ebipurego.RegisterLibFunc(&_fnCTFontCollectionCreateMatchingFontDescriptorsSortedWithCallback, _lib, "CTFontCollectionCreateMatchingFontDescriptorsSortedWithCallback")
 	}
 	_ret := _fnCTFontCollectionCreateMatchingFontDescriptorsSortedWithCallback(objref.IDOf(collection.Object), sortCallback, refCon)
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontCollectionCreateMatchingFontDescriptorsWithOptions func(objc.ID, objc.ID) objc.ID
@@ -132,7 +132,7 @@ func CTFontCollectionCreateMatchingFontDescriptorsWithOptions(collection CTFontC
 		ebipurego.RegisterLibFunc(&_fnCTFontCollectionCreateMatchingFontDescriptorsWithOptions, _lib, "CTFontCollectionCreateMatchingFontDescriptorsWithOptions")
 	}
 	_ret := _fnCTFontCollectionCreateMatchingFontDescriptorsWithOptions(objref.IDOf(collection.Object), objref.IDOf(options.Object))
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontCollectionCreateMutableCopy func(objc.ID) objc.ID
@@ -144,7 +144,7 @@ func CTFontCollectionCreateMutableCopy(original CTFontCollectionRef) CTMutableFo
 		ebipurego.RegisterLibFunc(&_fnCTFontCollectionCreateMutableCopy, _lib, "CTFontCollectionCreateMutableCopy")
 	}
 	_ret := _fnCTFontCollectionCreateMutableCopy(objref.IDOf(original.Object))
-	return CTMutableFontCollectionRef{obj.WrapUnmanaged(_ret)}
+	return CTMutableFontCollectionRef{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnCTFontCollectionCreateWithFontDescriptors func(objc.ID, objc.ID) objc.ID
@@ -156,7 +156,7 @@ func CTFontCollectionCreateWithFontDescriptors(queryDescriptors corefoundation.C
 		ebipurego.RegisterLibFunc(&_fnCTFontCollectionCreateWithFontDescriptors, _lib, "CTFontCollectionCreateWithFontDescriptors")
 	}
 	_ret := _fnCTFontCollectionCreateWithFontDescriptors(objref.IDOf(queryDescriptors.Object), objref.IDOf(options.Object))
-	return CTFontCollectionRef{obj.Adopt(_ret)}
+	return CTFontCollectionRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontCollectionGetTypeID func() int
@@ -213,7 +213,7 @@ func CTFontCopyAvailableTables(font CTFontRef, options CTFontTableOptions) coref
 		ebipurego.RegisterLibFunc(&_fnCTFontCopyAvailableTables, _lib, "CTFontCopyAvailableTables")
 	}
 	_ret := _fnCTFontCopyAvailableTables(objref.IDOf(font.Object), options)
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontCopyCharacterSet func(objc.ID) objc.ID
@@ -225,7 +225,7 @@ func CTFontCopyCharacterSet(font CTFontRef) corefoundation.CFCharacterSetRef {
 		ebipurego.RegisterLibFunc(&_fnCTFontCopyCharacterSet, _lib, "CTFontCopyCharacterSet")
 	}
 	_ret := _fnCTFontCopyCharacterSet(objref.IDOf(font.Object))
-	return corefoundation.CFCharacterSetRef{obj.Adopt(_ret)}
+	return corefoundation.CFCharacterSetRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontCopyDefaultCascadeListForLanguages func(objc.ID, objc.ID) objc.ID
@@ -237,7 +237,7 @@ func CTFontCopyDefaultCascadeListForLanguages(font CTFontRef, languagePrefList c
 		ebipurego.RegisterLibFunc(&_fnCTFontCopyDefaultCascadeListForLanguages, _lib, "CTFontCopyDefaultCascadeListForLanguages")
 	}
 	_ret := _fnCTFontCopyDefaultCascadeListForLanguages(objref.IDOf(font.Object), objref.IDOf(languagePrefList.Object))
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontCopyDisplayName func(objc.ID) objc.ID
@@ -249,7 +249,7 @@ func CTFontCopyDisplayName(font CTFontRef) corefoundation.CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnCTFontCopyDisplayName, _lib, "CTFontCopyDisplayName")
 	}
 	_ret := _fnCTFontCopyDisplayName(objref.IDOf(font.Object))
-	return corefoundation.CFStringRef{obj.Adopt(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontCopyFamilyName func(objc.ID) objc.ID
@@ -261,7 +261,7 @@ func CTFontCopyFamilyName(font CTFontRef) corefoundation.CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnCTFontCopyFamilyName, _lib, "CTFontCopyFamilyName")
 	}
 	_ret := _fnCTFontCopyFamilyName(objref.IDOf(font.Object))
-	return corefoundation.CFStringRef{obj.Adopt(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontCopyFeatureSettings func(objc.ID) objc.ID
@@ -273,7 +273,7 @@ func CTFontCopyFeatureSettings(font CTFontRef) corefoundation.CFArrayRef {
 		ebipurego.RegisterLibFunc(&_fnCTFontCopyFeatureSettings, _lib, "CTFontCopyFeatureSettings")
 	}
 	_ret := _fnCTFontCopyFeatureSettings(objref.IDOf(font.Object))
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontCopyFeatures func(objc.ID) objc.ID
@@ -285,7 +285,7 @@ func CTFontCopyFeatures(font CTFontRef) corefoundation.CFArrayRef {
 		ebipurego.RegisterLibFunc(&_fnCTFontCopyFeatures, _lib, "CTFontCopyFeatures")
 	}
 	_ret := _fnCTFontCopyFeatures(objref.IDOf(font.Object))
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontCopyFontDescriptor func(objc.ID) objc.ID
@@ -297,7 +297,7 @@ func CTFontCopyFontDescriptor(font CTFontRef) CTFontDescriptorRef {
 		ebipurego.RegisterLibFunc(&_fnCTFontCopyFontDescriptor, _lib, "CTFontCopyFontDescriptor")
 	}
 	_ret := _fnCTFontCopyFontDescriptor(objref.IDOf(font.Object))
-	return CTFontDescriptorRef{obj.Adopt(_ret)}
+	return CTFontDescriptorRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontCopyFullName func(objc.ID) objc.ID
@@ -309,7 +309,7 @@ func CTFontCopyFullName(font CTFontRef) corefoundation.CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnCTFontCopyFullName, _lib, "CTFontCopyFullName")
 	}
 	_ret := _fnCTFontCopyFullName(objref.IDOf(font.Object))
-	return corefoundation.CFStringRef{obj.Adopt(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontCopyGraphicsFont func(objc.ID, unsafe.Pointer) objc.ID
@@ -321,7 +321,7 @@ func CTFontCopyGraphicsFont(font CTFontRef, attributes unsafe.Pointer) coregraph
 		ebipurego.RegisterLibFunc(&_fnCTFontCopyGraphicsFont, _lib, "CTFontCopyGraphicsFont")
 	}
 	_ret := _fnCTFontCopyGraphicsFont(objref.IDOf(font.Object), attributes)
-	return coregraphics.CGFontRef{obj.Adopt(_ret)}
+	return coregraphics.CGFontRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontCopyLocalizedName func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
@@ -333,7 +333,7 @@ func CTFontCopyLocalizedName(font CTFontRef, nameKey corefoundation.CFStringRef,
 		ebipurego.RegisterLibFunc(&_fnCTFontCopyLocalizedName, _lib, "CTFontCopyLocalizedName")
 	}
 	_ret := _fnCTFontCopyLocalizedName(objref.IDOf(font.Object), objref.IDOf(nameKey.Object), actualLanguage)
-	return corefoundation.CFStringRef{obj.Adopt(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontCopyName func(objc.ID, objc.ID) objc.ID
@@ -345,7 +345,7 @@ func CTFontCopyName(font CTFontRef, nameKey corefoundation.CFStringRef) corefoun
 		ebipurego.RegisterLibFunc(&_fnCTFontCopyName, _lib, "CTFontCopyName")
 	}
 	_ret := _fnCTFontCopyName(objref.IDOf(font.Object), objref.IDOf(nameKey.Object))
-	return corefoundation.CFStringRef{obj.Adopt(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontCopyNameForGlyph func(objc.ID, uint16) objc.ID
@@ -357,7 +357,7 @@ func CTFontCopyNameForGlyph(font CTFontRef, glyph uint16) corefoundation.CFStrin
 		ebipurego.RegisterLibFunc(&_fnCTFontCopyNameForGlyph, _lib, "CTFontCopyNameForGlyph")
 	}
 	_ret := _fnCTFontCopyNameForGlyph(objref.IDOf(font.Object), glyph)
-	return corefoundation.CFStringRef{obj.Adopt(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontCopyPostScriptName func(objc.ID) objc.ID
@@ -369,7 +369,7 @@ func CTFontCopyPostScriptName(font CTFontRef) corefoundation.CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnCTFontCopyPostScriptName, _lib, "CTFontCopyPostScriptName")
 	}
 	_ret := _fnCTFontCopyPostScriptName(objref.IDOf(font.Object))
-	return corefoundation.CFStringRef{obj.Adopt(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontCopySupportedLanguages func(objc.ID) objc.ID
@@ -381,7 +381,7 @@ func CTFontCopySupportedLanguages(font CTFontRef) corefoundation.CFArrayRef {
 		ebipurego.RegisterLibFunc(&_fnCTFontCopySupportedLanguages, _lib, "CTFontCopySupportedLanguages")
 	}
 	_ret := _fnCTFontCopySupportedLanguages(objref.IDOf(font.Object))
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontCopyTable func(objc.ID, int, CTFontTableOptions) objc.ID
@@ -393,7 +393,7 @@ func CTFontCopyTable(font CTFontRef, table int, options CTFontTableOptions) core
 		ebipurego.RegisterLibFunc(&_fnCTFontCopyTable, _lib, "CTFontCopyTable")
 	}
 	_ret := _fnCTFontCopyTable(objref.IDOf(font.Object), table, options)
-	return corefoundation.CFDataRef{obj.Adopt(_ret)}
+	return corefoundation.CFDataRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontCopyTraits func(objc.ID) objc.ID
@@ -405,7 +405,7 @@ func CTFontCopyTraits(font CTFontRef) corefoundation.CFDictionaryRef {
 		ebipurego.RegisterLibFunc(&_fnCTFontCopyTraits, _lib, "CTFontCopyTraits")
 	}
 	_ret := _fnCTFontCopyTraits(objref.IDOf(font.Object))
-	return corefoundation.CFDictionaryRef{obj.Adopt(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontCopyVariation func(objc.ID) objc.ID
@@ -417,7 +417,7 @@ func CTFontCopyVariation(font CTFontRef) corefoundation.CFDictionaryRef {
 		ebipurego.RegisterLibFunc(&_fnCTFontCopyVariation, _lib, "CTFontCopyVariation")
 	}
 	_ret := _fnCTFontCopyVariation(objref.IDOf(font.Object))
-	return corefoundation.CFDictionaryRef{obj.Adopt(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontCopyVariationAxes func(objc.ID) objc.ID
@@ -429,7 +429,7 @@ func CTFontCopyVariationAxes(font CTFontRef) corefoundation.CFArrayRef {
 		ebipurego.RegisterLibFunc(&_fnCTFontCopyVariationAxes, _lib, "CTFontCopyVariationAxes")
 	}
 	_ret := _fnCTFontCopyVariationAxes(objref.IDOf(font.Object))
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontCreateCopyWithAttributes func(objc.ID, float64, unsafe.Pointer, objc.ID) objc.ID
@@ -441,7 +441,7 @@ func CTFontCreateCopyWithAttributes(font CTFontRef, size float64, matrix *corefo
 		ebipurego.RegisterLibFunc(&_fnCTFontCreateCopyWithAttributes, _lib, "CTFontCreateCopyWithAttributes")
 	}
 	_ret := _fnCTFontCreateCopyWithAttributes(objref.IDOf(font.Object), size, unsafe.Pointer(matrix), objref.IDOf(attributes.Object))
-	return CTFontRef{obj.Adopt(_ret)}
+	return CTFontRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontCreateCopyWithFamily func(objc.ID, float64, unsafe.Pointer, objc.ID) objc.ID
@@ -453,7 +453,7 @@ func CTFontCreateCopyWithFamily(font CTFontRef, size float64, matrix *corefounda
 		ebipurego.RegisterLibFunc(&_fnCTFontCreateCopyWithFamily, _lib, "CTFontCreateCopyWithFamily")
 	}
 	_ret := _fnCTFontCreateCopyWithFamily(objref.IDOf(font.Object), size, unsafe.Pointer(matrix), objref.IDOf(family.Object))
-	return CTFontRef{obj.Adopt(_ret)}
+	return CTFontRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontCreateCopyWithSymbolicTraits func(objc.ID, float64, unsafe.Pointer, CTFontSymbolicTraits, CTFontSymbolicTraits) objc.ID
@@ -465,7 +465,7 @@ func CTFontCreateCopyWithSymbolicTraits(font CTFontRef, size float64, matrix *co
 		ebipurego.RegisterLibFunc(&_fnCTFontCreateCopyWithSymbolicTraits, _lib, "CTFontCreateCopyWithSymbolicTraits")
 	}
 	_ret := _fnCTFontCreateCopyWithSymbolicTraits(objref.IDOf(font.Object), size, unsafe.Pointer(matrix), symTraitValue, symTraitMask)
-	return CTFontRef{obj.Adopt(_ret)}
+	return CTFontRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontCreateForString func(objc.ID, objc.ID, corefoundation.CFRange) objc.ID
@@ -477,7 +477,7 @@ func CTFontCreateForString(currentFont CTFontRef, str corefoundation.CFStringRef
 		ebipurego.RegisterLibFunc(&_fnCTFontCreateForString, _lib, "CTFontCreateForString")
 	}
 	_ret := _fnCTFontCreateForString(objref.IDOf(currentFont.Object), objref.IDOf(str.Object), range_)
-	return CTFontRef{obj.Adopt(_ret)}
+	return CTFontRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontCreateForStringWithLanguage func(objc.ID, objc.ID, corefoundation.CFRange, objc.ID) objc.ID
@@ -489,7 +489,7 @@ func CTFontCreateForStringWithLanguage(currentFont CTFontRef, str corefoundation
 		ebipurego.RegisterLibFunc(&_fnCTFontCreateForStringWithLanguage, _lib, "CTFontCreateForStringWithLanguage")
 	}
 	_ret := _fnCTFontCreateForStringWithLanguage(objref.IDOf(currentFont.Object), objref.IDOf(str.Object), range_, objref.IDOf(language.Object))
-	return CTFontRef{obj.Adopt(_ret)}
+	return CTFontRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontCreatePathForGlyph func(objc.ID, uint16, unsafe.Pointer) objc.ID
@@ -501,7 +501,7 @@ func CTFontCreatePathForGlyph(font CTFontRef, glyph uint16, matrix *corefoundati
 		ebipurego.RegisterLibFunc(&_fnCTFontCreatePathForGlyph, _lib, "CTFontCreatePathForGlyph")
 	}
 	_ret := _fnCTFontCreatePathForGlyph(objref.IDOf(font.Object), glyph, unsafe.Pointer(matrix))
-	return coregraphics.CGPathRef{obj.Adopt(_ret)}
+	return coregraphics.CGPathRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontCreateUIFontForLanguage func(CTFontUIFontType, float64, objc.ID) objc.ID
@@ -513,7 +513,7 @@ func CTFontCreateUIFontForLanguage(uiType CTFontUIFontType, size float64, langua
 		ebipurego.RegisterLibFunc(&_fnCTFontCreateUIFontForLanguage, _lib, "CTFontCreateUIFontForLanguage")
 	}
 	_ret := _fnCTFontCreateUIFontForLanguage(uiType, size, objref.IDOf(language.Object))
-	return CTFontRef{obj.Adopt(_ret)}
+	return CTFontRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontCreateWithFontDescriptor func(objc.ID, float64, unsafe.Pointer) objc.ID
@@ -525,7 +525,7 @@ func CTFontCreateWithFontDescriptor(descriptor CTFontDescriptorRef, size float64
 		ebipurego.RegisterLibFunc(&_fnCTFontCreateWithFontDescriptor, _lib, "CTFontCreateWithFontDescriptor")
 	}
 	_ret := _fnCTFontCreateWithFontDescriptor(objref.IDOf(descriptor.Object), size, unsafe.Pointer(matrix))
-	return CTFontRef{obj.Adopt(_ret)}
+	return CTFontRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontCreateWithFontDescriptorAndOptions func(objc.ID, float64, unsafe.Pointer, CTFontOptions) objc.ID
@@ -537,7 +537,7 @@ func CTFontCreateWithFontDescriptorAndOptions(descriptor CTFontDescriptorRef, si
 		ebipurego.RegisterLibFunc(&_fnCTFontCreateWithFontDescriptorAndOptions, _lib, "CTFontCreateWithFontDescriptorAndOptions")
 	}
 	_ret := _fnCTFontCreateWithFontDescriptorAndOptions(objref.IDOf(descriptor.Object), size, unsafe.Pointer(matrix), options)
-	return CTFontRef{obj.Adopt(_ret)}
+	return CTFontRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontCreateWithGraphicsFont func(objc.ID, float64, unsafe.Pointer, objc.ID) objc.ID
@@ -549,7 +549,7 @@ func CTFontCreateWithGraphicsFont(graphicsFont coregraphics.CGFontRef, size floa
 		ebipurego.RegisterLibFunc(&_fnCTFontCreateWithGraphicsFont, _lib, "CTFontCreateWithGraphicsFont")
 	}
 	_ret := _fnCTFontCreateWithGraphicsFont(objref.IDOf(graphicsFont.Object), size, unsafe.Pointer(matrix), objref.IDOf(attributes.Object))
-	return CTFontRef{obj.Adopt(_ret)}
+	return CTFontRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontCreateWithName func(objc.ID, float64, unsafe.Pointer) objc.ID
@@ -561,7 +561,7 @@ func CTFontCreateWithName(name corefoundation.CFStringRef, size float64, matrix 
 		ebipurego.RegisterLibFunc(&_fnCTFontCreateWithName, _lib, "CTFontCreateWithName")
 	}
 	_ret := _fnCTFontCreateWithName(objref.IDOf(name.Object), size, unsafe.Pointer(matrix))
-	return CTFontRef{obj.Adopt(_ret)}
+	return CTFontRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontCreateWithNameAndOptions func(objc.ID, float64, unsafe.Pointer, CTFontOptions) objc.ID
@@ -573,7 +573,7 @@ func CTFontCreateWithNameAndOptions(name corefoundation.CFStringRef, size float6
 		ebipurego.RegisterLibFunc(&_fnCTFontCreateWithNameAndOptions, _lib, "CTFontCreateWithNameAndOptions")
 	}
 	_ret := _fnCTFontCreateWithNameAndOptions(objref.IDOf(name.Object), size, unsafe.Pointer(matrix), options)
-	return CTFontRef{obj.Adopt(_ret)}
+	return CTFontRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontCreateWithPlatformFont func(int, float64, unsafe.Pointer, objc.ID) objc.ID
@@ -585,7 +585,7 @@ func CTFontCreateWithPlatformFont(platformFont int, size float64, matrix *corefo
 		ebipurego.RegisterLibFunc(&_fnCTFontCreateWithPlatformFont, _lib, "CTFontCreateWithPlatformFont")
 	}
 	_ret := _fnCTFontCreateWithPlatformFont(platformFont, size, unsafe.Pointer(matrix), objref.IDOf(attributes.Object))
-	return CTFontRef{obj.Adopt(_ret)}
+	return CTFontRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontCreateWithQuickdrawInstance func(unsafe.Pointer, int16, uint8, float64) objc.ID
@@ -598,7 +598,7 @@ func CTFontCreateWithQuickdrawInstance(identifier int16, style uint8, size float
 	}
 	var _out0 uint8
 	_ret := _fnCTFontCreateWithQuickdrawInstance(unsafe.Pointer(&_out0), identifier, style, size)
-	return CTFontRef{obj.Adopt(_ret)}, _out0
+	return CTFontRef{Object: obj.Adopt(_ret)}, _out0
 }
 
 var _fnCTFontDescriptorCopyAttribute func(objc.ID, objc.ID) objc.ID
@@ -622,7 +622,7 @@ func CTFontDescriptorCopyAttributes(descriptor CTFontDescriptorRef) corefoundati
 		ebipurego.RegisterLibFunc(&_fnCTFontDescriptorCopyAttributes, _lib, "CTFontDescriptorCopyAttributes")
 	}
 	_ret := _fnCTFontDescriptorCopyAttributes(objref.IDOf(descriptor.Object))
-	return corefoundation.CFDictionaryRef{obj.Adopt(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontDescriptorCopyLocalizedAttribute func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
@@ -646,7 +646,7 @@ func CTFontDescriptorCreateCopyWithAttributes(original CTFontDescriptorRef, attr
 		ebipurego.RegisterLibFunc(&_fnCTFontDescriptorCreateCopyWithAttributes, _lib, "CTFontDescriptorCreateCopyWithAttributes")
 	}
 	_ret := _fnCTFontDescriptorCreateCopyWithAttributes(objref.IDOf(original.Object), objref.IDOf(attributes.Object))
-	return CTFontDescriptorRef{obj.Adopt(_ret)}
+	return CTFontDescriptorRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontDescriptorCreateCopyWithFamily func(objc.ID, objc.ID) objc.ID
@@ -658,7 +658,7 @@ func CTFontDescriptorCreateCopyWithFamily(original CTFontDescriptorRef, family c
 		ebipurego.RegisterLibFunc(&_fnCTFontDescriptorCreateCopyWithFamily, _lib, "CTFontDescriptorCreateCopyWithFamily")
 	}
 	_ret := _fnCTFontDescriptorCreateCopyWithFamily(objref.IDOf(original.Object), objref.IDOf(family.Object))
-	return CTFontDescriptorRef{obj.Adopt(_ret)}
+	return CTFontDescriptorRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontDescriptorCreateCopyWithFeature func(objc.ID, objc.ID, objc.ID) objc.ID
@@ -670,7 +670,7 @@ func CTFontDescriptorCreateCopyWithFeature(original CTFontDescriptorRef, feature
 		ebipurego.RegisterLibFunc(&_fnCTFontDescriptorCreateCopyWithFeature, _lib, "CTFontDescriptorCreateCopyWithFeature")
 	}
 	_ret := _fnCTFontDescriptorCreateCopyWithFeature(objref.IDOf(original.Object), objref.IDOf(featureTypeIdentifier.Object), objref.IDOf(featureSelectorIdentifier.Object))
-	return CTFontDescriptorRef{obj.Adopt(_ret)}
+	return CTFontDescriptorRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontDescriptorCreateCopyWithSymbolicTraits func(objc.ID, CTFontSymbolicTraits, CTFontSymbolicTraits) objc.ID
@@ -682,7 +682,7 @@ func CTFontDescriptorCreateCopyWithSymbolicTraits(original CTFontDescriptorRef, 
 		ebipurego.RegisterLibFunc(&_fnCTFontDescriptorCreateCopyWithSymbolicTraits, _lib, "CTFontDescriptorCreateCopyWithSymbolicTraits")
 	}
 	_ret := _fnCTFontDescriptorCreateCopyWithSymbolicTraits(objref.IDOf(original.Object), symTraitValue, symTraitMask)
-	return CTFontDescriptorRef{obj.Adopt(_ret)}
+	return CTFontDescriptorRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontDescriptorCreateCopyWithVariation func(objc.ID, objc.ID, float64) objc.ID
@@ -694,7 +694,7 @@ func CTFontDescriptorCreateCopyWithVariation(original CTFontDescriptorRef, varia
 		ebipurego.RegisterLibFunc(&_fnCTFontDescriptorCreateCopyWithVariation, _lib, "CTFontDescriptorCreateCopyWithVariation")
 	}
 	_ret := _fnCTFontDescriptorCreateCopyWithVariation(objref.IDOf(original.Object), objref.IDOf(variationIdentifier.Object), variationValue)
-	return CTFontDescriptorRef{obj.Adopt(_ret)}
+	return CTFontDescriptorRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontDescriptorCreateMatchingFontDescriptor func(objc.ID, objc.ID) objc.ID
@@ -706,7 +706,7 @@ func CTFontDescriptorCreateMatchingFontDescriptor(descriptor CTFontDescriptorRef
 		ebipurego.RegisterLibFunc(&_fnCTFontDescriptorCreateMatchingFontDescriptor, _lib, "CTFontDescriptorCreateMatchingFontDescriptor")
 	}
 	_ret := _fnCTFontDescriptorCreateMatchingFontDescriptor(objref.IDOf(descriptor.Object), objref.IDOf(mandatoryAttributes.Object))
-	return CTFontDescriptorRef{obj.Adopt(_ret)}
+	return CTFontDescriptorRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontDescriptorCreateMatchingFontDescriptors func(objc.ID, objc.ID) objc.ID
@@ -718,7 +718,7 @@ func CTFontDescriptorCreateMatchingFontDescriptors(descriptor CTFontDescriptorRe
 		ebipurego.RegisterLibFunc(&_fnCTFontDescriptorCreateMatchingFontDescriptors, _lib, "CTFontDescriptorCreateMatchingFontDescriptors")
 	}
 	_ret := _fnCTFontDescriptorCreateMatchingFontDescriptors(objref.IDOf(descriptor.Object), objref.IDOf(mandatoryAttributes.Object))
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontDescriptorCreateWithAttributes func(objc.ID) objc.ID
@@ -730,7 +730,7 @@ func CTFontDescriptorCreateWithAttributes(attributes corefoundation.CFDictionary
 		ebipurego.RegisterLibFunc(&_fnCTFontDescriptorCreateWithAttributes, _lib, "CTFontDescriptorCreateWithAttributes")
 	}
 	_ret := _fnCTFontDescriptorCreateWithAttributes(objref.IDOf(attributes.Object))
-	return CTFontDescriptorRef{obj.Adopt(_ret)}
+	return CTFontDescriptorRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontDescriptorCreateWithNameAndSize func(objc.ID, float64) objc.ID
@@ -742,7 +742,7 @@ func CTFontDescriptorCreateWithNameAndSize(name corefoundation.CFStringRef, size
 		ebipurego.RegisterLibFunc(&_fnCTFontDescriptorCreateWithNameAndSize, _lib, "CTFontDescriptorCreateWithNameAndSize")
 	}
 	_ret := _fnCTFontDescriptorCreateWithNameAndSize(objref.IDOf(name.Object), size)
-	return CTFontDescriptorRef{obj.Adopt(_ret)}
+	return CTFontDescriptorRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontDescriptorGetTypeID func() int
@@ -1110,7 +1110,7 @@ func CTFontManagerCopyAvailableFontFamilyNames() corefoundation.CFArrayRef {
 		ebipurego.RegisterLibFunc(&_fnCTFontManagerCopyAvailableFontFamilyNames, _lib, "CTFontManagerCopyAvailableFontFamilyNames")
 	}
 	_ret := _fnCTFontManagerCopyAvailableFontFamilyNames()
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontManagerCopyAvailableFontURLs func() objc.ID
@@ -1122,7 +1122,7 @@ func CTFontManagerCopyAvailableFontURLs() corefoundation.CFArrayRef {
 		ebipurego.RegisterLibFunc(&_fnCTFontManagerCopyAvailableFontURLs, _lib, "CTFontManagerCopyAvailableFontURLs")
 	}
 	_ret := _fnCTFontManagerCopyAvailableFontURLs()
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontManagerCopyAvailablePostScriptNames func() objc.ID
@@ -1134,7 +1134,7 @@ func CTFontManagerCopyAvailablePostScriptNames() corefoundation.CFArrayRef {
 		ebipurego.RegisterLibFunc(&_fnCTFontManagerCopyAvailablePostScriptNames, _lib, "CTFontManagerCopyAvailablePostScriptNames")
 	}
 	_ret := _fnCTFontManagerCopyAvailablePostScriptNames()
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontManagerCreateFontDescriptorFromData func(objc.ID) objc.ID
@@ -1146,7 +1146,7 @@ func CTFontManagerCreateFontDescriptorFromData(data corefoundation.CFDataRef) CT
 		ebipurego.RegisterLibFunc(&_fnCTFontManagerCreateFontDescriptorFromData, _lib, "CTFontManagerCreateFontDescriptorFromData")
 	}
 	_ret := _fnCTFontManagerCreateFontDescriptorFromData(objref.IDOf(data.Object))
-	return CTFontDescriptorRef{obj.Adopt(_ret)}
+	return CTFontDescriptorRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontManagerCreateFontDescriptorsFromData func(objc.ID) objc.ID
@@ -1158,7 +1158,7 @@ func CTFontManagerCreateFontDescriptorsFromData(data corefoundation.CFDataRef) c
 		ebipurego.RegisterLibFunc(&_fnCTFontManagerCreateFontDescriptorsFromData, _lib, "CTFontManagerCreateFontDescriptorsFromData")
 	}
 	_ret := _fnCTFontManagerCreateFontDescriptorsFromData(objref.IDOf(data.Object))
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontManagerCreateFontDescriptorsFromURL func(objc.ID) objc.ID
@@ -1170,7 +1170,7 @@ func CTFontManagerCreateFontDescriptorsFromURL(fileURL corefoundation.CFURLRef) 
 		ebipurego.RegisterLibFunc(&_fnCTFontManagerCreateFontDescriptorsFromURL, _lib, "CTFontManagerCreateFontDescriptorsFromURL")
 	}
 	_ret := _fnCTFontManagerCreateFontDescriptorsFromURL(objref.IDOf(fileURL.Object))
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontManagerCreateFontRequestRunLoopSource func(int, objc.Block) objc.ID
@@ -1182,7 +1182,7 @@ func CTFontManagerCreateFontRequestRunLoopSource(sourceOrder int, createMatchesC
 		ebipurego.RegisterLibFunc(&_fnCTFontManagerCreateFontRequestRunLoopSource, _lib, "CTFontManagerCreateFontRequestRunLoopSource")
 	}
 	_ret := _fnCTFontManagerCreateFontRequestRunLoopSource(sourceOrder, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 int) int { return createMatchesCallback(_b0, _b1) }))
-	return corefoundation.CFRunLoopSourceRef{obj.Adopt(_ret)}
+	return corefoundation.CFRunLoopSourceRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFontManagerEnableFontDescriptors func(objc.ID, bool)
@@ -1326,7 +1326,7 @@ func CTFrameGetFrameAttributes(frame CTFrameRef) corefoundation.CFDictionaryRef 
 		ebipurego.RegisterLibFunc(&_fnCTFrameGetFrameAttributes, _lib, "CTFrameGetFrameAttributes")
 	}
 	_ret := _fnCTFrameGetFrameAttributes(objref.IDOf(frame.Object))
-	return corefoundation.CFDictionaryRef{obj.Wrap(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCTFrameGetLineOrigins func(objc.ID, corefoundation.CFRange, unsafe.Pointer)
@@ -1349,7 +1349,7 @@ func CTFrameGetLines(frame CTFrameRef) corefoundation.CFArrayRef {
 		ebipurego.RegisterLibFunc(&_fnCTFrameGetLines, _lib, "CTFrameGetLines")
 	}
 	_ret := _fnCTFrameGetLines(objref.IDOf(frame.Object))
-	return corefoundation.CFArrayRef{obj.Wrap(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCTFrameGetPath func(objc.ID) objc.ID
@@ -1361,7 +1361,7 @@ func CTFrameGetPath(frame CTFrameRef) coregraphics.CGPathRef {
 		ebipurego.RegisterLibFunc(&_fnCTFrameGetPath, _lib, "CTFrameGetPath")
 	}
 	_ret := _fnCTFrameGetPath(objref.IDOf(frame.Object))
-	return coregraphics.CGPathRef{obj.Wrap(_ret)}
+	return coregraphics.CGPathRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCTFrameGetStringRange func(objc.ID) corefoundation.CFRange
@@ -1406,7 +1406,7 @@ func CTFramesetterCreateFrame(framesetter CTFramesetterRef, stringRange corefoun
 		ebipurego.RegisterLibFunc(&_fnCTFramesetterCreateFrame, _lib, "CTFramesetterCreateFrame")
 	}
 	_ret := _fnCTFramesetterCreateFrame(objref.IDOf(framesetter.Object), stringRange, objref.IDOf(path.Object), objref.IDOf(frameAttributes.Object))
-	return CTFrameRef{obj.Adopt(_ret)}
+	return CTFrameRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFramesetterCreateWithAttributedString func(objc.ID) objc.ID
@@ -1418,7 +1418,7 @@ func CTFramesetterCreateWithAttributedString(attrString corefoundation.CFAttribu
 		ebipurego.RegisterLibFunc(&_fnCTFramesetterCreateWithAttributedString, _lib, "CTFramesetterCreateWithAttributedString")
 	}
 	_ret := _fnCTFramesetterCreateWithAttributedString(objref.IDOf(attrString.Object))
-	return CTFramesetterRef{obj.Adopt(_ret)}
+	return CTFramesetterRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFramesetterCreateWithTypesetter func(objc.ID) objc.ID
@@ -1430,7 +1430,7 @@ func CTFramesetterCreateWithTypesetter(typesetter CTTypesetterRef) CTFramesetter
 		ebipurego.RegisterLibFunc(&_fnCTFramesetterCreateWithTypesetter, _lib, "CTFramesetterCreateWithTypesetter")
 	}
 	_ret := _fnCTFramesetterCreateWithTypesetter(objref.IDOf(typesetter.Object))
-	return CTFramesetterRef{obj.Adopt(_ret)}
+	return CTFramesetterRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTFramesetterGetTypeID func() int
@@ -1453,7 +1453,7 @@ func CTFramesetterGetTypesetter(framesetter CTFramesetterRef) CTTypesetterRef {
 		ebipurego.RegisterLibFunc(&_fnCTFramesetterGetTypesetter, _lib, "CTFramesetterGetTypesetter")
 	}
 	_ret := _fnCTFramesetterGetTypesetter(objref.IDOf(framesetter.Object))
-	return CTTypesetterRef{obj.Wrap(_ret)}
+	return CTTypesetterRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCTFramesetterSuggestFrameSizeWithConstraints func(objc.ID, corefoundation.CFRange, objc.ID, corefoundation.CGSize, unsafe.Pointer) corefoundation.CGSize
@@ -1487,7 +1487,7 @@ func CTGlyphInfoCreateWithCharacterIdentifier(cid uint16, collection CTCharacter
 		ebipurego.RegisterLibFunc(&_fnCTGlyphInfoCreateWithCharacterIdentifier, _lib, "CTGlyphInfoCreateWithCharacterIdentifier")
 	}
 	_ret := _fnCTGlyphInfoCreateWithCharacterIdentifier(cid, collection, objref.IDOf(baseString.Object))
-	return CTGlyphInfoRef{obj.Adopt(_ret)}
+	return CTGlyphInfoRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTGlyphInfoCreateWithGlyph func(uint16, objc.ID, objc.ID) objc.ID
@@ -1499,7 +1499,7 @@ func CTGlyphInfoCreateWithGlyph(glyph uint16, font CTFontRef, baseString corefou
 		ebipurego.RegisterLibFunc(&_fnCTGlyphInfoCreateWithGlyph, _lib, "CTGlyphInfoCreateWithGlyph")
 	}
 	_ret := _fnCTGlyphInfoCreateWithGlyph(glyph, objref.IDOf(font.Object), objref.IDOf(baseString.Object))
-	return CTGlyphInfoRef{obj.Adopt(_ret)}
+	return CTGlyphInfoRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTGlyphInfoCreateWithGlyphName func(objc.ID, objc.ID, objc.ID) objc.ID
@@ -1511,7 +1511,7 @@ func CTGlyphInfoCreateWithGlyphName(glyphName corefoundation.CFStringRef, font C
 		ebipurego.RegisterLibFunc(&_fnCTGlyphInfoCreateWithGlyphName, _lib, "CTGlyphInfoCreateWithGlyphName")
 	}
 	_ret := _fnCTGlyphInfoCreateWithGlyphName(objref.IDOf(glyphName.Object), objref.IDOf(font.Object), objref.IDOf(baseString.Object))
-	return CTGlyphInfoRef{obj.Adopt(_ret)}
+	return CTGlyphInfoRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTGlyphInfoGetCharacterCollection func(objc.ID) CTCharacterCollection
@@ -1556,7 +1556,7 @@ func CTGlyphInfoGetGlyphName(glyphInfo CTGlyphInfoRef) corefoundation.CFStringRe
 		ebipurego.RegisterLibFunc(&_fnCTGlyphInfoGetGlyphName, _lib, "CTGlyphInfoGetGlyphName")
 	}
 	_ret := _fnCTGlyphInfoGetGlyphName(objref.IDOf(glyphInfo.Object))
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCTGlyphInfoGetTypeID func() int
@@ -1579,7 +1579,7 @@ func CTLineCreateJustifiedLine(line CTLineRef, justificationFactor float64, just
 		ebipurego.RegisterLibFunc(&_fnCTLineCreateJustifiedLine, _lib, "CTLineCreateJustifiedLine")
 	}
 	_ret := _fnCTLineCreateJustifiedLine(objref.IDOf(line.Object), justificationFactor, justificationWidth)
-	return CTLineRef{obj.Adopt(_ret)}
+	return CTLineRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTLineCreateTruncatedLine func(objc.ID, float64, CTLineTruncationType, objc.ID) objc.ID
@@ -1591,7 +1591,7 @@ func CTLineCreateTruncatedLine(line CTLineRef, width float64, truncationType CTL
 		ebipurego.RegisterLibFunc(&_fnCTLineCreateTruncatedLine, _lib, "CTLineCreateTruncatedLine")
 	}
 	_ret := _fnCTLineCreateTruncatedLine(objref.IDOf(line.Object), width, truncationType, objref.IDOf(truncationToken.Object))
-	return CTLineRef{obj.Adopt(_ret)}
+	return CTLineRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTLineCreateWithAttributedString func(objc.ID) objc.ID
@@ -1603,7 +1603,7 @@ func CTLineCreateWithAttributedString(attrString corefoundation.CFAttributedStri
 		ebipurego.RegisterLibFunc(&_fnCTLineCreateWithAttributedString, _lib, "CTLineCreateWithAttributedString")
 	}
 	_ret := _fnCTLineCreateWithAttributedString(objref.IDOf(attrString.Object))
-	return CTLineRef{obj.Adopt(_ret)}
+	return CTLineRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTLineDraw func(objc.ID, objc.ID)
@@ -1659,7 +1659,7 @@ func CTLineGetGlyphRuns(line CTLineRef) corefoundation.CFArrayRef {
 		ebipurego.RegisterLibFunc(&_fnCTLineGetGlyphRuns, _lib, "CTLineGetGlyphRuns")
 	}
 	_ret := _fnCTLineGetGlyphRuns(objref.IDOf(line.Object))
-	return corefoundation.CFArrayRef{obj.Wrap(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCTLineGetImageBounds func(objc.ID, objc.ID) corefoundation.CGRect
@@ -1765,7 +1765,7 @@ func CTParagraphStyleCreate(settings unsafe.Pointer, settingCount int) CTParagra
 		ebipurego.RegisterLibFunc(&_fnCTParagraphStyleCreate, _lib, "CTParagraphStyleCreate")
 	}
 	_ret := _fnCTParagraphStyleCreate(settings, settingCount)
-	return CTParagraphStyleRef{obj.Adopt(_ret)}
+	return CTParagraphStyleRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTParagraphStyleCreateCopy func(objc.ID) objc.ID
@@ -1777,7 +1777,7 @@ func CTParagraphStyleCreateCopy(paragraphStyle CTParagraphStyleRef) CTParagraphS
 		ebipurego.RegisterLibFunc(&_fnCTParagraphStyleCreateCopy, _lib, "CTParagraphStyleCreateCopy")
 	}
 	_ret := _fnCTParagraphStyleCreateCopy(objref.IDOf(paragraphStyle.Object))
-	return CTParagraphStyleRef{obj.Adopt(_ret)}
+	return CTParagraphStyleRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTParagraphStyleGetTypeID func() int
@@ -1811,7 +1811,7 @@ func CTRubyAnnotationCreate(alignment CTRubyAlignment, overhang CTRubyOverhang, 
 		ebipurego.RegisterLibFunc(&_fnCTRubyAnnotationCreate, _lib, "CTRubyAnnotationCreate")
 	}
 	_ret := _fnCTRubyAnnotationCreate(alignment, overhang, sizeFactor, text)
-	return CTRubyAnnotationRef{obj.Adopt(_ret)}
+	return CTRubyAnnotationRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTRubyAnnotationCreateCopy func(objc.ID) objc.ID
@@ -1823,7 +1823,7 @@ func CTRubyAnnotationCreateCopy(rubyAnnotation CTRubyAnnotationRef) CTRubyAnnota
 		ebipurego.RegisterLibFunc(&_fnCTRubyAnnotationCreateCopy, _lib, "CTRubyAnnotationCreateCopy")
 	}
 	_ret := _fnCTRubyAnnotationCreateCopy(objref.IDOf(rubyAnnotation.Object))
-	return CTRubyAnnotationRef{obj.Adopt(_ret)}
+	return CTRubyAnnotationRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTRubyAnnotationCreateWithAttributes func(CTRubyAlignment, CTRubyOverhang, CTRubyPosition, objc.ID, objc.ID) objc.ID
@@ -1835,7 +1835,7 @@ func CTRubyAnnotationCreateWithAttributes(alignment CTRubyAlignment, overhang CT
 		ebipurego.RegisterLibFunc(&_fnCTRubyAnnotationCreateWithAttributes, _lib, "CTRubyAnnotationCreateWithAttributes")
 	}
 	_ret := _fnCTRubyAnnotationCreateWithAttributes(alignment, overhang, position, objref.IDOf(str.Object), objref.IDOf(attributes.Object))
-	return CTRubyAnnotationRef{obj.Adopt(_ret)}
+	return CTRubyAnnotationRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTRubyAnnotationGetAlignment func(objc.ID) CTRubyAlignment
@@ -1880,7 +1880,7 @@ func CTRubyAnnotationGetTextForPosition(rubyAnnotation CTRubyAnnotationRef, posi
 		ebipurego.RegisterLibFunc(&_fnCTRubyAnnotationGetTextForPosition, _lib, "CTRubyAnnotationGetTextForPosition")
 	}
 	_ret := _fnCTRubyAnnotationGetTextForPosition(objref.IDOf(rubyAnnotation.Object), position)
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCTRubyAnnotationGetTypeID func() int
@@ -1903,7 +1903,7 @@ func CTRunDelegateCreate(callbacks unsafe.Pointer, refCon unsafe.Pointer) CTRunD
 		ebipurego.RegisterLibFunc(&_fnCTRunDelegateCreate, _lib, "CTRunDelegateCreate")
 	}
 	_ret := _fnCTRunDelegateCreate(callbacks, refCon)
-	return CTRunDelegateRef{obj.Adopt(_ret)}
+	return CTRunDelegateRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTRunDelegateGetRefCon func(objc.ID) unsafe.Pointer
@@ -1970,7 +1970,7 @@ func CTRunGetAttributes(run CTRunRef) corefoundation.CFDictionaryRef {
 		ebipurego.RegisterLibFunc(&_fnCTRunGetAttributes, _lib, "CTRunGetAttributes")
 	}
 	_ret := _fnCTRunGetAttributes(objref.IDOf(run.Object))
-	return corefoundation.CFDictionaryRef{obj.Wrap(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCTRunGetBaseAdvancesAndOrigins func(objc.ID, corefoundation.CFRange, unsafe.Pointer, unsafe.Pointer)
@@ -2144,7 +2144,7 @@ func CTTextTabCreate(alignment CTTextAlignment, location float64, options corefo
 		ebipurego.RegisterLibFunc(&_fnCTTextTabCreate, _lib, "CTTextTabCreate")
 	}
 	_ret := _fnCTTextTabCreate(alignment, location, objref.IDOf(options.Object))
-	return CTTextTabRef{obj.Adopt(_ret)}
+	return CTTextTabRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTTextTabGetAlignment func(objc.ID) CTTextAlignment
@@ -2178,7 +2178,7 @@ func CTTextTabGetOptions(tab CTTextTabRef) corefoundation.CFDictionaryRef {
 		ebipurego.RegisterLibFunc(&_fnCTTextTabGetOptions, _lib, "CTTextTabGetOptions")
 	}
 	_ret := _fnCTTextTabGetOptions(objref.IDOf(tab.Object))
-	return corefoundation.CFDictionaryRef{obj.Wrap(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCTTextTabGetTypeID func() int
@@ -2201,7 +2201,7 @@ func CTTypesetterCreateLine(typesetter CTTypesetterRef, stringRange corefoundati
 		ebipurego.RegisterLibFunc(&_fnCTTypesetterCreateLine, _lib, "CTTypesetterCreateLine")
 	}
 	_ret := _fnCTTypesetterCreateLine(objref.IDOf(typesetter.Object), stringRange)
-	return CTLineRef{obj.Adopt(_ret)}
+	return CTLineRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTTypesetterCreateLineWithOffset func(objc.ID, corefoundation.CFRange, float64) objc.ID
@@ -2213,7 +2213,7 @@ func CTTypesetterCreateLineWithOffset(typesetter CTTypesetterRef, stringRange co
 		ebipurego.RegisterLibFunc(&_fnCTTypesetterCreateLineWithOffset, _lib, "CTTypesetterCreateLineWithOffset")
 	}
 	_ret := _fnCTTypesetterCreateLineWithOffset(objref.IDOf(typesetter.Object), stringRange, offset)
-	return CTLineRef{obj.Adopt(_ret)}
+	return CTLineRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTTypesetterCreateWithAttributedString func(objc.ID) objc.ID
@@ -2225,7 +2225,7 @@ func CTTypesetterCreateWithAttributedString(str corefoundation.CFAttributedStrin
 		ebipurego.RegisterLibFunc(&_fnCTTypesetterCreateWithAttributedString, _lib, "CTTypesetterCreateWithAttributedString")
 	}
 	_ret := _fnCTTypesetterCreateWithAttributedString(objref.IDOf(str.Object))
-	return CTTypesetterRef{obj.Adopt(_ret)}
+	return CTTypesetterRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTTypesetterCreateWithAttributedStringAndOptions func(objc.ID, objc.ID) objc.ID
@@ -2237,7 +2237,7 @@ func CTTypesetterCreateWithAttributedStringAndOptions(str corefoundation.CFAttri
 		ebipurego.RegisterLibFunc(&_fnCTTypesetterCreateWithAttributedStringAndOptions, _lib, "CTTypesetterCreateWithAttributedStringAndOptions")
 	}
 	_ret := _fnCTTypesetterCreateWithAttributedStringAndOptions(objref.IDOf(str.Object), objref.IDOf(options.Object))
-	return CTTypesetterRef{obj.Adopt(_ret)}
+	return CTTypesetterRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCTTypesetterGetTypeID func() int

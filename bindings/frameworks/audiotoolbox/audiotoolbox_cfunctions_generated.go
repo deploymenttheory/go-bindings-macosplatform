@@ -564,7 +564,7 @@ func AudioComponentFindNext(inComponent AudioComponent, inDesc *AudioComponentDe
 		ebipurego.RegisterLibFunc(&_fnAudioComponentFindNext, _lib, "AudioComponentFindNext")
 	}
 	_ret := _fnAudioComponentFindNext(objref.IDOf(inComponent.Object), unsafe.Pointer(inDesc))
-	return AudioComponent{obj.WrapUnmanaged(_ret)}
+	return AudioComponent{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnAudioComponentGetIcon func(objc.ID) objc.ID
@@ -612,7 +612,7 @@ func AudioComponentInstanceGetComponent(inInstance *carboncore.ComponentInstance
 		ebipurego.RegisterLibFunc(&_fnAudioComponentInstanceGetComponent, _lib, "AudioComponentInstanceGetComponent")
 	}
 	_ret := _fnAudioComponentInstanceGetComponent(unsafe.Pointer(inInstance))
-	return AudioComponent{obj.WrapUnmanaged(_ret)}
+	return AudioComponent{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnAudioComponentInstanceNew func(objc.ID, unsafe.Pointer) int32
@@ -646,7 +646,7 @@ func AudioComponentRegister(inDesc *AudioComponentDescription, inName corefounda
 		ebipurego.RegisterLibFunc(&_fnAudioComponentRegister, _lib, "AudioComponentRegister")
 	}
 	_ret := _fnAudioComponentRegister(unsafe.Pointer(inDesc), objref.IDOf(inName.Object), inVersion, inFactory)
-	return AudioComponent{obj.WrapUnmanaged(_ret)}
+	return AudioComponent{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnAudioComponentValidate func(objc.ID, objc.ID, unsafe.Pointer) int32
@@ -1625,7 +1625,7 @@ func AudioUnitExtensionCopyComponentList(extensionIdentifier corefoundation.CFSt
 		ebipurego.RegisterLibFunc(&_fnAudioUnitExtensionCopyComponentList, _lib, "AudioUnitExtensionCopyComponentList")
 	}
 	_ret := _fnAudioUnitExtensionCopyComponentList(objref.IDOf(extensionIdentifier.Object))
-	return corefoundation.CFArrayRef{obj.Wrap(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnAudioUnitGetParameter func(unsafe.Pointer, int, int, int, unsafe.Pointer) int32
@@ -2149,7 +2149,7 @@ func MusicSequenceGetInfoDictionary(inSequence MusicSequence) corefoundation.CFD
 		ebipurego.RegisterLibFunc(&_fnMusicSequenceGetInfoDictionary, _lib, "MusicSequenceGetInfoDictionary")
 	}
 	_ret := _fnMusicSequenceGetInfoDictionary(objref.IDOf(inSequence.Object))
-	return corefoundation.CFDictionaryRef{obj.Wrap(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnMusicSequenceGetSMPTEResolution func(int16, unsafe.Pointer, unsafe.Pointer)

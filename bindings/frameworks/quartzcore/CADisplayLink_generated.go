@@ -85,6 +85,12 @@ func (dl *DisplayLink) WithPaused(paused bool) *DisplayLink {
 	return dl
 }
 
+// WithPreferredFrameRateRange sets a range of frequencies your app allows for frame updates, affecting how often the system invokes your delegate’s callback.
+func (dl *DisplayLink) WithPreferredFrameRateRange(preferredFrameRateRange CAFrameRateRange) *DisplayLink {
+	objc.Send[objc.ID](objref.IDOf(dl), objc.RegisterName("setPreferredFrameRateRange:"), preferredFrameRateRange)
+	return dl
+}
+
 // AddToRunLoopForMode registers the display link with a run loop.
 func (dl *DisplayLink) AddToRunLoopForMode(runloop obj.Object, mode obj.Object) {
 	defer runtime.KeepAlive(dl)
@@ -132,5 +138,12 @@ func (dl *DisplayLink) TargetTimestamp() float64 {
 func (dl *DisplayLink) IsPaused() bool {
 	defer runtime.KeepAlive(dl)
 	_r := objc.Send[bool](objref.IDOf(dl), objc.RegisterName("isPaused"))
+	return _r
+}
+
+// PreferredFrameRateRange returns the preferred frame rate range.
+func (dl *DisplayLink) PreferredFrameRateRange() CAFrameRateRange {
+	defer runtime.KeepAlive(dl)
+	_r := objc.Send[CAFrameRateRange](objref.IDOf(dl), objc.RegisterName("preferredFrameRateRange"))
 	return _r
 }

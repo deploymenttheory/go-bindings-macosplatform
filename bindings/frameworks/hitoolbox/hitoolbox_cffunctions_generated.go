@@ -1024,6 +1024,21 @@ func ReceiveNextEvent(inNumTypes int, inList *EventTypeSpec, inTimeout float64, 
 	return nil
 }
 
+var _fnRegisterEventHotKey func(int, int, EventHotKeyID, objc.ID, int, unsafe.Pointer) int32
+
+// RegisterEventHotKey reports an error if the HIToolbox framework function RegisterEventHotKey fails.
+func RegisterEventHotKey(inHotKeyCode int, inHotKeyModifiers int, inHotKeyID EventHotKeyID, inTarget EventTargetRef, inOptions int, outRef unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRegisterEventHotKey == nil {
+		ebipurego.RegisterLibFunc(&_fnRegisterEventHotKey, _lib, "RegisterEventHotKey")
+	}
+	_rc := _fnRegisterEventHotKey(inHotKeyCode, inHotKeyModifiers, inHotKeyID, objref.IDOf(inTarget.Object), inOptions, outRef)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
 var _fnRemoveEventFromQueue func(objc.ID, objc.ID) int32
 
 // RemoveEventFromQueue reports an error if the HIToolbox framework function RemoveEventFromQueue fails.

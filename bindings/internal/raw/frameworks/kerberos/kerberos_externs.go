@@ -7,182 +7,180 @@ import (
 	"unsafe"
 
 	"github.com/ebitengine/purego"
-
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/gss"
 )
 
-func GSS_C_NT_ANONYMOUS() *gss.GssOIDDescStruct {
+func GSS_C_NT_ANONYMOUS() *GssOIDDescStruct {
 	ptr, _ := purego.Dlsym(_kerberosLib, "GSS_C_NT_ANONYMOUS")
 	if ptr == 0 {
 		return nil
 	}
-	return *(**gss.GssOIDDescStruct)(unsafe.Pointer(ptr))
+	return *(**GssOIDDescStruct)(unsafe.Pointer(ptr))
 }
 
-func GSS_C_NT_EXPORT_NAME() *gss.GssOIDDescStruct {
+func GSS_C_NT_EXPORT_NAME() *GssOIDDescStruct {
 	ptr, _ := purego.Dlsym(_kerberosLib, "GSS_C_NT_EXPORT_NAME")
 	if ptr == 0 {
 		return nil
 	}
-	return *(**gss.GssOIDDescStruct)(unsafe.Pointer(ptr))
+	return *(**GssOIDDescStruct)(unsafe.Pointer(ptr))
 }
 
-func GSS_C_NT_HOSTBASED_SERVICE() *gss.GssOIDDescStruct {
+func GSS_C_NT_HOSTBASED_SERVICE() *GssOIDDescStruct {
 	ptr, _ := purego.Dlsym(_kerberosLib, "GSS_C_NT_HOSTBASED_SERVICE")
 	if ptr == 0 {
 		return nil
 	}
-	return *(**gss.GssOIDDescStruct)(unsafe.Pointer(ptr))
+	return *(**GssOIDDescStruct)(unsafe.Pointer(ptr))
 }
 
-func GSS_C_NT_HOSTBASED_SERVICE_X() *gss.GssOIDDescStruct {
+func GSS_C_NT_HOSTBASED_SERVICE_X() *GssOIDDescStruct {
 	ptr, _ := purego.Dlsym(_kerberosLib, "GSS_C_NT_HOSTBASED_SERVICE_X")
 	if ptr == 0 {
 		return nil
 	}
-	return *(**gss.GssOIDDescStruct)(unsafe.Pointer(ptr))
+	return *(**GssOIDDescStruct)(unsafe.Pointer(ptr))
 }
 
-func GSS_C_NT_MACHINE_UID_NAME() *gss.GssOIDDescStruct {
+func GSS_C_NT_MACHINE_UID_NAME() *GssOIDDescStruct {
 	ptr, _ := purego.Dlsym(_kerberosLib, "GSS_C_NT_MACHINE_UID_NAME")
 	if ptr == 0 {
 		return nil
 	}
-	return *(**gss.GssOIDDescStruct)(unsafe.Pointer(ptr))
+	return *(**GssOIDDescStruct)(unsafe.Pointer(ptr))
 }
 
-func GSS_C_NT_STRING_UID_NAME() *gss.GssOIDDescStruct {
+func GSS_C_NT_STRING_UID_NAME() *GssOIDDescStruct {
 	ptr, _ := purego.Dlsym(_kerberosLib, "GSS_C_NT_STRING_UID_NAME")
 	if ptr == 0 {
 		return nil
 	}
-	return *(**gss.GssOIDDescStruct)(unsafe.Pointer(ptr))
+	return *(**GssOIDDescStruct)(unsafe.Pointer(ptr))
 }
 
-func GSS_C_NT_USER_NAME() *gss.GssOIDDescStruct {
+func GSS_C_NT_USER_NAME() *GssOIDDescStruct {
 	ptr, _ := purego.Dlsym(_kerberosLib, "GSS_C_NT_USER_NAME")
 	if ptr == 0 {
 		return nil
 	}
-	return *(**gss.GssOIDDescStruct)(unsafe.Pointer(ptr))
+	return *(**GssOIDDescStruct)(unsafe.Pointer(ptr))
 }
 
-func GSS_KRB5_NT_PRINCIPAL_NAME() *gss.GssOIDDescStruct {
+func GSS_KRB5_NT_PRINCIPAL_NAME() *GssOIDDescStruct {
 	ptr, _ := purego.Dlsym(_kerberosLib, "GSS_KRB5_NT_PRINCIPAL_NAME")
 	if ptr == 0 {
 		return nil
 	}
-	return *(**gss.GssOIDDescStruct)(unsafe.Pointer(ptr))
+	return *(**GssOIDDescStruct)(unsafe.Pointer(ptr))
 }
 
-func Gss_mech_krb5() *gss.GssOIDDescStruct {
+func Gss_mech_krb5() *GssOIDDescStruct {
 	ptr, _ := purego.Dlsym(_kerberosLib, "gss_mech_krb5")
 	if ptr == 0 {
 		return nil
 	}
-	return *(**gss.GssOIDDescStruct)(unsafe.Pointer(ptr))
+	return *(**GssOIDDescStruct)(unsafe.Pointer(ptr))
 }
 
-func Gss_mech_krb5_old() *gss.GssOIDDescStruct {
+func Gss_mech_krb5_old() *GssOIDDescStruct {
 	ptr, _ := purego.Dlsym(_kerberosLib, "gss_mech_krb5_old")
 	if ptr == 0 {
 		return nil
 	}
-	return *(**gss.GssOIDDescStruct)(unsafe.Pointer(ptr))
+	return *(**GssOIDDescStruct)(unsafe.Pointer(ptr))
 }
 
-func Gss_mech_set_krb5() *gss.GssOIDSetDescStruct {
+func Gss_mech_set_krb5() *GssOIDSetDescStruct {
 	ptr, _ := purego.Dlsym(_kerberosLib, "gss_mech_set_krb5")
 	if ptr == 0 {
 		return nil
 	}
-	return *(**gss.GssOIDSetDescStruct)(unsafe.Pointer(ptr))
+	return *(**GssOIDSetDescStruct)(unsafe.Pointer(ptr))
 }
 
-func Gss_mech_set_krb5_both() *gss.GssOIDSetDescStruct {
+func Gss_mech_set_krb5_both() *GssOIDSetDescStruct {
 	ptr, _ := purego.Dlsym(_kerberosLib, "gss_mech_set_krb5_both")
 	if ptr == 0 {
 		return nil
 	}
-	return *(**gss.GssOIDSetDescStruct)(unsafe.Pointer(ptr))
+	return *(**GssOIDSetDescStruct)(unsafe.Pointer(ptr))
 }
 
-func Gss_mech_set_krb5_old() *gss.GssOIDSetDescStruct {
+func Gss_mech_set_krb5_old() *GssOIDSetDescStruct {
 	ptr, _ := purego.Dlsym(_kerberosLib, "gss_mech_set_krb5_old")
 	if ptr == 0 {
 		return nil
 	}
-	return *(**gss.GssOIDSetDescStruct)(unsafe.Pointer(ptr))
+	return *(**GssOIDSetDescStruct)(unsafe.Pointer(ptr))
 }
 
-func Gss_nt_exported_name() *gss.GssOIDDescStruct {
+func Gss_nt_exported_name() *GssOIDDescStruct {
 	ptr, _ := purego.Dlsym(_kerberosLib, "gss_nt_exported_name")
 	if ptr == 0 {
 		return nil
 	}
-	return *(**gss.GssOIDDescStruct)(unsafe.Pointer(ptr))
+	return *(**GssOIDDescStruct)(unsafe.Pointer(ptr))
 }
 
-func Gss_nt_krb5_name() *gss.GssOIDDescStruct {
+func Gss_nt_krb5_name() *GssOIDDescStruct {
 	ptr, _ := purego.Dlsym(_kerberosLib, "gss_nt_krb5_name")
 	if ptr == 0 {
 		return nil
 	}
-	return *(**gss.GssOIDDescStruct)(unsafe.Pointer(ptr))
+	return *(**GssOIDDescStruct)(unsafe.Pointer(ptr))
 }
 
-func Gss_nt_krb5_principal() *gss.GssOIDDescStruct {
+func Gss_nt_krb5_principal() *GssOIDDescStruct {
 	ptr, _ := purego.Dlsym(_kerberosLib, "gss_nt_krb5_principal")
 	if ptr == 0 {
 		return nil
 	}
-	return *(**gss.GssOIDDescStruct)(unsafe.Pointer(ptr))
+	return *(**GssOIDDescStruct)(unsafe.Pointer(ptr))
 }
 
-func Gss_nt_machine_uid_name() *gss.GssOIDDescStruct {
+func Gss_nt_machine_uid_name() *GssOIDDescStruct {
 	ptr, _ := purego.Dlsym(_kerberosLib, "gss_nt_machine_uid_name")
 	if ptr == 0 {
 		return nil
 	}
-	return *(**gss.GssOIDDescStruct)(unsafe.Pointer(ptr))
+	return *(**GssOIDDescStruct)(unsafe.Pointer(ptr))
 }
 
-func Gss_nt_service_name() *gss.GssOIDDescStruct {
+func Gss_nt_service_name() *GssOIDDescStruct {
 	ptr, _ := purego.Dlsym(_kerberosLib, "gss_nt_service_name")
 	if ptr == 0 {
 		return nil
 	}
-	return *(**gss.GssOIDDescStruct)(unsafe.Pointer(ptr))
+	return *(**GssOIDDescStruct)(unsafe.Pointer(ptr))
 }
 
-func Gss_nt_service_name_v2() *gss.GssOIDDescStruct {
+func Gss_nt_service_name_v2() *GssOIDDescStruct {
 	ptr, _ := purego.Dlsym(_kerberosLib, "gss_nt_service_name_v2")
 	if ptr == 0 {
 		return nil
 	}
-	return *(**gss.GssOIDDescStruct)(unsafe.Pointer(ptr))
+	return *(**GssOIDDescStruct)(unsafe.Pointer(ptr))
 }
 
-func Gss_nt_string_uid_name() *gss.GssOIDDescStruct {
+func Gss_nt_string_uid_name() *GssOIDDescStruct {
 	ptr, _ := purego.Dlsym(_kerberosLib, "gss_nt_string_uid_name")
 	if ptr == 0 {
 		return nil
 	}
-	return *(**gss.GssOIDDescStruct)(unsafe.Pointer(ptr))
+	return *(**GssOIDDescStruct)(unsafe.Pointer(ptr))
 }
 
-func Gss_nt_user_name() *gss.GssOIDDescStruct {
+func Gss_nt_user_name() *GssOIDDescStruct {
 	ptr, _ := purego.Dlsym(_kerberosLib, "gss_nt_user_name")
 	if ptr == 0 {
 		return nil
 	}
-	return *(**gss.GssOIDDescStruct)(unsafe.Pointer(ptr))
+	return *(**GssOIDDescStruct)(unsafe.Pointer(ptr))
 }
 
-func Krb5_gss_oid_array() []gss.GssOIDDescStruct {
+func Krb5_gss_oid_array() []GssOIDDescStruct {
 	ptr, _ := purego.Dlsym(_kerberosLib, "krb5_gss_oid_array")
 	if ptr == 0 {
-		return []gss.GssOIDDescStruct{}
+		return []GssOIDDescStruct{}
 	}
-	return *(*[]gss.GssOIDDescStruct)(unsafe.Pointer(ptr))
+	return *(*[]GssOIDDescStruct)(unsafe.Pointer(ptr))
 }

@@ -77,6 +77,14 @@ func (clg *CollectionLayoutGroup) WithInterItemSpacing(interItemSpacing *Collect
 	return clg
 }
 
+// WithContentInsets sets the amount of space added around the content of the item to adjust its final size after its position is computed.
+func (clg *CollectionLayoutGroup) WithContentInsets(contentInsets NSDirectionalEdgeInsets) *CollectionLayoutGroup {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(clg), objc.RegisterName("setContentInsets:"), contentInsets)
+	})
+	return clg
+}
+
 // WithEdgeSpacing sets the amount of space added around the boundaries of the item between other items and this item’s container.
 func (clg *CollectionLayoutGroup) WithEdgeSpacing(edgeSpacing *CollectionLayoutEdgeSpacing) *CollectionLayoutGroup {
 	defer runtime.KeepAlive(edgeSpacing)

@@ -124,6 +124,14 @@ func NewOrderedSetWithOrderedSetCopyItems(set obj.Object, flag bool) *OrderedSet
 	return orderedSetAdopt(_id)
 }
 
+// NewOrderedSetWithOrderedSetRangeCopyItems initializes a new ordered set with the contents of an ordered set, optionally copying the items.
+func NewOrderedSetWithOrderedSetRangeCopyItems(set obj.Object, range_ NSRange, flag bool) *OrderedSet {
+	defer runtime.KeepAlive(set)
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOrderedSet")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOrderedSet:range:copyItems:"), objref.IDOf(set), range_, flag)
+	return orderedSetAdopt(_id)
+}
+
 // NewOrderedSetWithArray initializes a newly allocated set with the objects that are contained in a given array.
 func NewOrderedSetWithArray(array []obj.Object) *OrderedSet {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOrderedSet")), objc.RegisterName("alloc"))
@@ -135,6 +143,13 @@ func NewOrderedSetWithArray(array []obj.Object) *OrderedSet {
 func NewOrderedSetWithArrayCopyItems(set []obj.Object, flag bool) *OrderedSet {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOrderedSet")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithArray:copyItems:"), purego.SliceToNSArray(set, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), flag)
+	return orderedSetAdopt(_id)
+}
+
+// NewOrderedSetWithArrayRangeCopyItems initializes a newly allocated set with the objects that are contained in the specified range of an array, optionally copying the items.
+func NewOrderedSetWithArrayRangeCopyItems(set []obj.Object, range_ NSRange, flag bool) *OrderedSet {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOrderedSet")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithArray:range:copyItems:"), purego.SliceToNSArray(set, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), range_, flag)
 	return orderedSetAdopt(_id)
 }
 
@@ -185,6 +200,12 @@ func (os *OrderedSet) Count() int {
 	defer runtime.KeepAlive(os)
 	_r := objc.Send[int](objref.IDOf(os), objc.RegisterName("count"))
 	return _r
+}
+
+// GetObjectsRange copies the objects contained in the ordered set that fall within the specified range to objects.
+func (os *OrderedSet) GetObjectsRange(objects unsafe.Pointer, range_ NSRange) {
+	defer runtime.KeepAlive(os)
+	objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("getObjects:range:"), objects, range_)
 }
 
 // ObjectsAtIndexes returns the objects in the ordered set at the specified indexes.
@@ -336,6 +357,14 @@ func (os *OrderedSet) IndexesOfObjectsAtIndexesOptionsPassingTest(s *IndexSet, o
 		return predicate(obj.Wrap(_b0), _b1, (*bool)(_b2))
 	}))
 	return IndexSetFromID(_r)
+}
+
+// IndexOfObjectInSortedRangeOptionsUsingComparator returns the index, within a specified range, of an object compared with elements in the ordered set using a given NSComparator block.
+func (os *OrderedSet) IndexOfObjectInSortedRangeOptionsUsingComparator(object obj.Object, range_ NSRange, opts BinarySearchingOptions, cmp func(obj.Object, obj.Object) int) int {
+	defer runtime.KeepAlive(os)
+	defer runtime.KeepAlive(object)
+	_r := objc.Send[int](objref.IDOf(os), objc.RegisterName("indexOfObject:inSortedRange:options:usingComparator:"), objref.IDOf(object), range_, opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) int { return cmp(obj.Wrap(_b0), obj.Wrap(_b1)) }))
+	return _r
 }
 
 // SortedArrayUsingComparator returns an array that lists the receiving ordered set’s elements in ascending order, as determined by the comparison method specified by a given NSComparator block

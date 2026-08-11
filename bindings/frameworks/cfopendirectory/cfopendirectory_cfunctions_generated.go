@@ -35,7 +35,7 @@ func ODNodeGetName(node ODNodeRef) corefoundation.CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnODNodeGetName, _lib, "ODNodeGetName")
 	}
 	_ret := _fnODNodeGetName(objref.IDOf(node.Object))
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnODNodeGetTypeID func() int
@@ -124,7 +124,7 @@ func ODRecordGetRecordName(record ODRecordRef) corefoundation.CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnODRecordGetRecordName, _lib, "ODRecordGetRecordName")
 	}
 	_ret := _fnODRecordGetRecordName(objref.IDOf(record.Object))
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnODRecordGetRecordType func(objc.ID) objc.ID
@@ -136,7 +136,7 @@ func ODRecordGetRecordType(record ODRecordRef) corefoundation.CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnODRecordGetRecordType, _lib, "ODRecordGetRecordType")
 	}
 	_ret := _fnODRecordGetRecordType(objref.IDOf(record.Object))
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnODRecordGetTypeID func() int

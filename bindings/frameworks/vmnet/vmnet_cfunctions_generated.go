@@ -141,7 +141,7 @@ func InterfaceStartWithNetwork(network VmnetNetworkRef, interfaceDesc xpc.Object
 		ebipurego.RegisterLibFunc(&_fnInterfaceStartWithNetwork, _lib, "vmnet_interface_start_with_network")
 	}
 	_ret := _fnInterfaceStartWithNetwork(objref.IDOf(network.Object), objc.ID(uintptr(interfaceDesc.Ptr())), objc.ID(uintptr(queue.Ptr())), objc.NewBlock(func(_ objc.Block, _b0 VmnetReturn, _b1 objc.ID) { startBlock(_b0, obj.Wrap(_b1)) }))
-	return InterfaceRef{obj.WrapUnmanaged(_ret)}
+	return InterfaceRef{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnIpPortForwardingRuleGetDetails func(objc.ID, unsafe.Pointer, unsafe.Pointer, uint8, unsafe.Pointer, unsafe.Pointer) VmnetReturn
@@ -202,7 +202,7 @@ func NetworkConfigurationCreate(mode OperatingModes) (result VmnetNetworkConfigu
 	}
 	var _out0 VmnetReturn
 	_ret := _fnNetworkConfigurationCreate(mode, unsafe.Pointer(&_out0))
-	return VmnetNetworkConfigurationRef{obj.WrapUnmanaged(_ret)}, _out0
+	return VmnetNetworkConfigurationRef{Object: obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnNetworkConfigurationDisableDhcp func(objc.ID)
@@ -343,7 +343,7 @@ func NetworkCreate(configuration VmnetNetworkConfigurationRef) (result VmnetNetw
 	}
 	var _out0 VmnetReturn
 	_ret := _fnNetworkCreate(objref.IDOf(configuration.Object), unsafe.Pointer(&_out0))
-	return VmnetNetworkRef{obj.WrapUnmanaged(_ret)}, _out0
+	return VmnetNetworkRef{Object: obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnNetworkCreateWithSerialization func(objc.ID, unsafe.Pointer) objc.ID
@@ -356,7 +356,7 @@ func NetworkCreateWithSerialization(network xpc.Object) (result VmnetNetworkRef,
 	}
 	var _out0 VmnetReturn
 	_ret := _fnNetworkCreateWithSerialization(objc.ID(uintptr(network.Ptr())), unsafe.Pointer(&_out0))
-	return VmnetNetworkRef{obj.WrapUnmanaged(_ret)}, _out0
+	return VmnetNetworkRef{Object: obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnNetworkGetIpv4Subnet func(objc.ID, unsafe.Pointer, unsafe.Pointer)
@@ -425,7 +425,7 @@ func StartInterface(interfaceDesc xpc.Object, queue dispatch.Queue, handler func
 		ebipurego.RegisterLibFunc(&_fnStartInterface, _lib, "vmnet_start_interface")
 	}
 	_ret := _fnStartInterface(objc.ID(uintptr(interfaceDesc.Ptr())), objc.ID(uintptr(queue.Ptr())), objc.NewBlock(func(_ objc.Block, _b0 VmnetReturn, _b1 objc.ID) { handler(_b0, obj.Wrap(_b1)) }))
-	return InterfaceRef{obj.WrapUnmanaged(_ret)}
+	return InterfaceRef{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnStopInterface func(objc.ID, objc.ID, objc.Block) VmnetReturn

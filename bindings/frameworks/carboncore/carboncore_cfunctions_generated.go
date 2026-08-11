@@ -409,7 +409,7 @@ func CSCopyMachineName() corefoundation.CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnCSCopyMachineName, _lib, "CSCopyMachineName")
 	}
 	_ret := _fnCSCopyMachineName()
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCSCopyUserName func(uint8) objc.ID
@@ -421,7 +421,7 @@ func CSCopyUserName(useShortName uint8) corefoundation.CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnCSCopyUserName, _lib, "CSCopyUserName")
 	}
 	_ret := _fnCSCopyUserName(useShortName)
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCSDiskSpaceCancelRecovery func(objc.ID)
@@ -689,7 +689,7 @@ func CloneCollection(c Collection) Collection {
 		ebipurego.RegisterLibFunc(&_fnCloneCollection, _lib, "CloneCollection")
 	}
 	_ret := _fnCloneCollection(objref.IDOf(c.Object))
-	return Collection{obj.WrapUnmanaged(_ret)}
+	return Collection{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnCloseComponent func(unsafe.Pointer) int16
@@ -855,7 +855,7 @@ func CopyCollection(srcCollection Collection, dstCollection Collection) Collecti
 		ebipurego.RegisterLibFunc(&_fnCopyCollection, _lib, "CopyCollection")
 	}
 	_ret := _fnCopyCollection(objref.IDOf(srcCollection.Object), objref.IDOf(dstCollection.Object))
-	return Collection{obj.WrapUnmanaged(_ret)}
+	return Collection{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnCount1Resources func(int) int16
@@ -1796,7 +1796,7 @@ func FSCreateStringFromHFSUniStr(alloc corefoundation.CFAllocatorRef, uniStr uns
 		ebipurego.RegisterLibFunc(&_fnFSCreateStringFromHFSUniStr, _lib, "FSCreateStringFromHFSUniStr")
 	}
 	_ret := _fnFSCreateStringFromHFSUniStr(objref.IDOf(alloc.Object), uniStr)
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnFSDeleteFork func(unsafe.Pointer, int, unsafe.Pointer) int16
@@ -1882,7 +1882,7 @@ func FSFileOperationCreate(alloc corefoundation.CFAllocatorRef) FSFileOperationR
 		ebipurego.RegisterLibFunc(&_fnFSFileOperationCreate, _lib, "FSFileOperationCreate")
 	}
 	_ret := _fnFSFileOperationCreate(objref.IDOf(alloc.Object))
-	return FSFileOperationRef{obj.Wrap(_ret)}
+	return FSFileOperationRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnFSFileOperationGetTypeID func() int
@@ -1905,7 +1905,7 @@ func FSFileSecurityCreate(alloc corefoundation.CFAllocatorRef) FSFileSecurityRef
 		ebipurego.RegisterLibFunc(&_fnFSFileSecurityCreate, _lib, "FSFileSecurityCreate")
 	}
 	_ret := _fnFSFileSecurityCreate(objref.IDOf(alloc.Object))
-	return FSFileSecurityRef{obj.Wrap(_ret)}
+	return FSFileSecurityRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnFSFileSecurityCreateWithFSPermissionInfo func(objc.ID, unsafe.Pointer) objc.ID
@@ -1917,7 +1917,7 @@ func FSFileSecurityCreateWithFSPermissionInfo(alloc corefoundation.CFAllocatorRe
 		ebipurego.RegisterLibFunc(&_fnFSFileSecurityCreateWithFSPermissionInfo, _lib, "FSFileSecurityCreateWithFSPermissionInfo")
 	}
 	_ret := _fnFSFileSecurityCreateWithFSPermissionInfo(objref.IDOf(alloc.Object), permissions)
-	return FSFileSecurityRef{obj.Wrap(_ret)}
+	return FSFileSecurityRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnFSFileSecurityGetGroup func(objc.ID, unsafe.Pointer) int32
@@ -1979,7 +1979,7 @@ func FSFileSecurityRefCreateCopy(alloc corefoundation.CFAllocatorRef, fileSec FS
 		ebipurego.RegisterLibFunc(&_fnFSFileSecurityRefCreateCopy, _lib, "FSFileSecurityRefCreateCopy")
 	}
 	_ret := _fnFSFileSecurityRefCreateCopy(objref.IDOf(alloc.Object), objref.IDOf(fileSec.Object))
-	return FSFileSecurityRef{obj.Wrap(_ret)}
+	return FSFileSecurityRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnFSFindFolder func(int16, int, uint8, unsafe.Pointer) int16
@@ -3594,7 +3594,7 @@ func GetNewCollection(collectionID int16) Collection {
 		ebipurego.RegisterLibFunc(&_fnGetNewCollection, _lib, "GetNewCollection")
 	}
 	_ret := _fnGetNewCollection(collectionID)
-	return Collection{obj.WrapUnmanaged(_ret)}
+	return Collection{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnGetNextFOND func(unsafe.Pointer) unsafe.Pointer
@@ -4933,7 +4933,7 @@ func MPCurrentTaskID() MPTaskID {
 		ebipurego.RegisterLibFunc(&_fnMPCurrentTaskID, _lib, "MPCurrentTaskID")
 	}
 	_ret := _fnMPCurrentTaskID()
-	return MPTaskID{obj.WrapUnmanaged(_ret)}
+	return MPTaskID{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnMPExit func(int)
@@ -5139,7 +5139,7 @@ func NewCollection() Collection {
 		ebipurego.RegisterLibFunc(&_fnNewCollection, _lib, "NewCollection")
 	}
 	_ret := _fnNewCollection()
-	return Collection{obj.WrapUnmanaged(_ret)}
+	return Collection{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnNewCollectionExceptionUPP func(unsafe.Pointer) unsafe.Pointer

@@ -66,6 +66,24 @@ func (aen *AudioEnvironmentNode) WithOutputVolume(outputVolume float32) *AudioEn
 	return aen
 }
 
+// WithListenerPosition sets the listener’s position in the 3D environment.
+func (aen *AudioEnvironmentNode) WithListenerPosition(listenerPosition AVAudio3DPoint) *AudioEnvironmentNode {
+	objc.Send[objc.ID](objref.IDOf(aen), objc.RegisterName("setListenerPosition:"), listenerPosition)
+	return aen
+}
+
+// WithListenerVectorOrientation sets the listener’s vector orientation in the environment.
+func (aen *AudioEnvironmentNode) WithListenerVectorOrientation(listenerVectorOrientation AVAudio3DVectorOrientation) *AudioEnvironmentNode {
+	objc.Send[objc.ID](objref.IDOf(aen), objc.RegisterName("setListenerVectorOrientation:"), listenerVectorOrientation)
+	return aen
+}
+
+// WithListenerAngularOrientation sets the listener’s angular orientation in the environment.
+func (aen *AudioEnvironmentNode) WithListenerAngularOrientation(listenerAngularOrientation AVAudio3DAngularOrientation) *AudioEnvironmentNode {
+	objc.Send[objc.ID](objref.IDOf(aen), objc.RegisterName("setListenerAngularOrientation:"), listenerAngularOrientation)
+	return aen
+}
+
 // WithListenerHeadTrackingEnabled sets a Boolean value that indicates whether the listener orientation is automatically rotated based on head orientation.
 func (aen *AudioEnvironmentNode) WithListenerHeadTrackingEnabled(listenerHeadTrackingEnabled bool) *AudioEnvironmentNode {
 	objc.Send[objc.ID](objref.IDOf(aen), objc.RegisterName("setListenerHeadTrackingEnabled:"), listenerHeadTrackingEnabled)
@@ -90,6 +108,27 @@ func (aen *AudioEnvironmentNode) OutputVolume() float32 {
 func (aen *AudioEnvironmentNode) NextAvailableInputBus() int {
 	defer runtime.KeepAlive(aen)
 	_r := objc.Send[int](objref.IDOf(aen), objc.RegisterName("nextAvailableInputBus"))
+	return _r
+}
+
+// ListenerPosition sets the listener's position in the 3D environment The coordinates are specified in meters. Default: The default position of the listener is at the origin. x: 0.0 y: 0.0 z: 0.0
+func (aen *AudioEnvironmentNode) ListenerPosition() AVAudio3DPoint {
+	defer runtime.KeepAlive(aen)
+	_r := objc.Send[AVAudio3DPoint](objref.IDOf(aen), objc.RegisterName("listenerPosition"))
+	return _r
+}
+
+// ListenerVectorOrientation returns the listener's orientation in the environment Changing listenerVectorOrientation will result in a corresponding change in listenerAngularOrientation. Default: The default orientation is with the listener looking directly along the negative Z axis. forward: (0, 0, -1) up:      (0, 1, 0)
+func (aen *AudioEnvironmentNode) ListenerVectorOrientation() AVAudio3DVectorOrientation {
+	defer runtime.KeepAlive(aen)
+	_r := objc.Send[AVAudio3DVectorOrientation](objref.IDOf(aen), objc.RegisterName("listenerVectorOrientation"))
+	return _r
+}
+
+// ListenerAngularOrientation returns the listener's orientation in the environment Changing listenerAngularOrientation will result in a corresponding change in listenerVectorOrientation. All angles are specified in degrees. Default: The default orientation is with the listener looking directly along the negative Z axis. yaw: 0.0 pitch: 0.0 roll: 0.0
+func (aen *AudioEnvironmentNode) ListenerAngularOrientation() AVAudio3DAngularOrientation {
+	defer runtime.KeepAlive(aen)
+	_r := objc.Send[AVAudio3DAngularOrientation](objref.IDOf(aen), objc.RegisterName("listenerAngularOrientation"))
 	return _r
 }
 

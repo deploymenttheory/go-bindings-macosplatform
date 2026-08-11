@@ -145,6 +145,13 @@ func (v_ *Value) GetValue(value unsafe.Pointer) {
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("getValue:"), value)
 }
 
+// RangeValue returns the range value.
+func (v_ *Value) RangeValue() NSRange {
+	defer runtime.KeepAlive(v_)
+	_r := objc.Send[NSRange](objref.IDOf(v_), objc.RegisterName("rangeValue"))
+	return _r
+}
+
 // PointValue returns the point value.
 func (v_ *Value) PointValue() corefoundation.CGPoint {
 	defer runtime.KeepAlive(v_)
@@ -163,6 +170,13 @@ func (v_ *Value) SizeValue() corefoundation.CGSize {
 func (v_ *Value) RectValue() corefoundation.CGRect {
 	defer runtime.KeepAlive(v_)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(v_), objc.RegisterName("rectValue"))
+	return _r
+}
+
+// EdgeInsetsValue returns the edge insets value.
+func (v_ *Value) EdgeInsetsValue() NSEdgeInsets {
+	defer runtime.KeepAlive(v_)
+	_r := objc.Send[NSEdgeInsets](objref.IDOf(v_), objc.RegisterName("edgeInsetsValue"))
 	return _r
 }
 

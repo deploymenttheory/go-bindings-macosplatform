@@ -532,7 +532,7 @@ func (i *Image) URL() string {
 func (i *Image) ColorSpace() coregraphics.CGColorSpaceRef {
 	defer runtime.KeepAlive(i)
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("colorSpace"))
-	return coregraphics.CGColorSpaceRef{obj.Wrap(_r)}
+	return coregraphics.CGColorSpaceRef{Object: obj.Wrap(_r)}
 }
 
 // ContentHeadroom returns the content headroom of the image. If the image headroom is unknown, then the value 0.0 will be returned. If the image headroom is known, then a value greater than or equal to 1.0 will be returned. A value of 1.0 will be returned if the image is SDR. A value greater than 1.0 will be returned if the image is HDR. The image headroom may known when a CIImage is first initialized. If the a CIImage is initialized using: * `NSURL` or `NSData` : the headroom may be determined by associated metadata or deduced from pixel format or colorSpace information. * `CGImage` : headroom may be determined by `CGImageGetHeadroomInfo()` or deduced from pixel format or colorSpace information. * `IOSurface` : then the headroom will be determined by `kIOSurfaceContentHeadroom`. or deduced from pixel format or colorSpace information. * `CVPixelBuffer` : then the headroom will be determined by `kCVImageBufferContentLightLevelInfoKey`. or deduced from pixel format or colorSpace information. * `BitmapData` : headroom may be deduced from pixel format or colorSpace information. If the image is the result of applying a “CIFilter-class“ or “CIKernel“, this method will return `0.0`. There are exceptions to this.  Applying a `CIWarpKernel“ or certain “CIFilter-class“ (e.g. `CIGaussianBlur`, `CILanczosScaleTransform`, `CIAreaAverage` and some others) to an image will result in a “CIImage“ instance with the same `contentHeadroom` property value.
@@ -560,7 +560,7 @@ func (i *Image) PixelBuffer() unsafe.Pointer {
 func (i *Image) CGImage() coregraphics.CGImageRef {
 	defer runtime.KeepAlive(i)
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("CGImage"))
-	return coregraphics.CGImageRef{obj.Wrap(_r)}
+	return coregraphics.CGImageRef{Object: obj.Wrap(_r)}
 }
 
 // AutoAdjustmentFilters returns all possible automatically selected and configured filters for adjusting the image.

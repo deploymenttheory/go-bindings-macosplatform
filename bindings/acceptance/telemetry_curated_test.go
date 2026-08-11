@@ -95,7 +95,7 @@ func TestCurated_MachTime_AbsoluteTime(t *testing.T) {
 
 func TestCurated_MachTime_TimebaseInfo(t *testing.T) {
 	runIsolated(t, "curated:machtime mach_timebase_info numer/denom > 0", func(t *testing.T) {
-		var tb machtimeraw.Mach_timebase_info
+		var tb machtimeraw.MachTimebaseInfo
 		if err := machtime.TimebaseInfo(&tb); err != nil {
 			t.Fatalf("mach_timebase_info: %v", err)
 		}

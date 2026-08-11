@@ -5,6 +5,7 @@ package keychain
 import (
 	"fmt"
 
+	corefoundation "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	foundation "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	security "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/security"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -56,7 +57,10 @@ func CreateKey(k Key) error {
 
 	// SecKeyCreateWithData reports a malformed key through its CFErrorRef
 	// out-parameter, which the idiomatic wrapper surfaces as a Go error.
-	keyRef, err := security.SecKeyCreateWithData(newData(k.Data), attrs)
+	keyRef, err := security.SecKeyCreateWithData(
+		corefoundation.CFDataRef{Object: newData(k.Data)},
+		corefoundation.CFDictionaryRef{Object: attrs},
+	)
 	if err != nil {
 		return fmt.Errorf("keychain: invalid key data for the given key type: %w", err)
 	}

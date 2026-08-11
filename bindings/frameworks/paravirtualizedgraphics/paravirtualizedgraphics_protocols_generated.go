@@ -37,7 +37,7 @@ type PGDisplay interface {
 	CursorGlyphHandler() obj.Object
 	CursorShowHandler() obj.Object
 	CursorMoveHandler() obj.Object
-	CursorPosition() obj.Object
+	CursorPosition() PGDisplayCoord_t
 	SerialNum() uint32
 	Port() int
 	MinimumTextureUsage() obj.Object

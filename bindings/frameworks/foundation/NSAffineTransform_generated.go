@@ -89,6 +89,12 @@ func NewAffineTransformWithTransform(transform *AffineTransform) *AffineTransfor
 	return affineTransformAdopt(_id)
 }
 
+// WithTransformStruct sets the matrix coefficients stored as the transformation matrix.
+func (at *AffineTransform) WithTransformStruct(transformStruct NSAffineTransformStruct) *AffineTransform {
+	objc.Send[objc.ID](objref.IDOf(at), objc.RegisterName("setTransformStruct:"), transformStruct)
+	return at
+}
+
 // WithObservationInfo sets the observation info.
 func (at *AffineTransform) WithObservationInfo(observationInfo unsafe.Pointer) *AffineTransform {
 	objc.Send[objc.ID](objref.IDOf(at), objc.RegisterName("setObservationInfo:"), observationInfo)
@@ -162,5 +168,12 @@ func (at *AffineTransform) TransformPoint(aPoint corefoundation.CGPoint) corefou
 func (at *AffineTransform) TransformSize(aSize corefoundation.CGSize) corefoundation.CGSize {
 	defer runtime.KeepAlive(at)
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(at), objc.RegisterName("transformSize:"), aSize)
+	return _r
+}
+
+// TransformStruct returns the transform struct.
+func (at *AffineTransform) TransformStruct() NSAffineTransformStruct {
+	defer runtime.KeepAlive(at)
+	_r := objc.Send[NSAffineTransformStruct](objref.IDOf(at), objc.RegisterName("transformStruct"))
 	return _r
 }

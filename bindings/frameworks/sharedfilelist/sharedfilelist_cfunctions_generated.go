@@ -48,7 +48,7 @@ func LSSharedFileListCopySnapshot(inList LSSharedFileListRef) (result corefounda
 	}
 	var _out0 int
 	_ret := _fnLSSharedFileListCopySnapshot(objref.IDOf(inList.Object), unsafe.Pointer(&_out0))
-	return corefoundation.CFArrayRef{obj.Wrap(_ret)}, _out0
+	return corefoundation.CFArrayRef{Object: obj.Wrap(_ret)}, _out0
 }
 
 var _fnLSSharedFileListCreate func(objc.ID, objc.ID, objc.ID) objc.ID
@@ -60,7 +60,7 @@ func LSSharedFileListCreate(inAllocator corefoundation.CFAllocatorRef, inListTyp
 		ebipurego.RegisterLibFunc(&_fnLSSharedFileListCreate, _lib, "LSSharedFileListCreate")
 	}
 	_ret := _fnLSSharedFileListCreate(objref.IDOf(inAllocator.Object), objref.IDOf(inListType.Object), objref.IDOf(listOptions))
-	return LSSharedFileListRef{obj.Wrap(_ret)}
+	return LSSharedFileListRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnLSSharedFileListGetSeedValue func(objc.ID) uint32
@@ -94,7 +94,7 @@ func LSSharedFileListInsertItemFSRef(inList LSSharedFileListRef, insertAfterThis
 		ebipurego.RegisterLibFunc(&_fnLSSharedFileListInsertItemFSRef, _lib, "LSSharedFileListInsertItemFSRef")
 	}
 	_ret := _fnLSSharedFileListInsertItemFSRef(objref.IDOf(inList.Object), objref.IDOf(insertAfterThisItem.Object), objref.IDOf(inDisplayName.Object), objref.IDOf(inIconRef), unsafe.Pointer(inFSRef), objref.IDOf(inPropertiesToSet.Object), objref.IDOf(inPropertiesToClear.Object))
-	return LSSharedFileListItemRef{obj.Adopt(_ret)}
+	return LSSharedFileListItemRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnLSSharedFileListInsertItemURL func(objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID) objc.ID
@@ -106,7 +106,7 @@ func LSSharedFileListInsertItemURL(inList LSSharedFileListRef, insertAfterThisIt
 		ebipurego.RegisterLibFunc(&_fnLSSharedFileListInsertItemURL, _lib, "LSSharedFileListInsertItemURL")
 	}
 	_ret := _fnLSSharedFileListInsertItemURL(objref.IDOf(inList.Object), objref.IDOf(insertAfterThisItem.Object), objref.IDOf(inDisplayName.Object), objref.IDOf(inIconRef), objref.IDOf(inURL.Object), objref.IDOf(inPropertiesToSet.Object), objref.IDOf(inPropertiesToClear.Object))
-	return LSSharedFileListItemRef{obj.Adopt(_ret)}
+	return LSSharedFileListItemRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnLSSharedFileListItemCopyDisplayName func(objc.ID) objc.ID
@@ -118,7 +118,7 @@ func LSSharedFileListItemCopyDisplayName(inItem LSSharedFileListItemRef) corefou
 		ebipurego.RegisterLibFunc(&_fnLSSharedFileListItemCopyDisplayName, _lib, "LSSharedFileListItemCopyDisplayName")
 	}
 	_ret := _fnLSSharedFileListItemCopyDisplayName(objref.IDOf(inItem.Object))
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnLSSharedFileListItemCopyIconRef func(objc.ID) objc.ID

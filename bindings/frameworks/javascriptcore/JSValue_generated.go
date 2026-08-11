@@ -439,5 +439,5 @@ func (v_ *Value) SetObjectAtIndexedSubscript(object obj.Object, index int) {
 func (v_ *Value) JSValueRef() JSValueRef {
 	defer runtime.KeepAlive(v_)
 	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("JSValueRef"))
-	return JSValueRef{obj.WrapUnmanaged(_r)}
+	return JSValueRef{Object: obj.WrapUnmanaged(_r)}
 }

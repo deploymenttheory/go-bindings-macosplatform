@@ -148,9 +148,9 @@ func TestTopoSortCycleFallback(t *testing.T) {
 	}
 	reg := &Registry{
 		Frameworks:     []*macosplatformmetadata.FrameworkMeta{fmA, fmB},
-		ClassNameIndex:   map[string]bool{"ClassA": true, "ClassB": true},
+		ClassNameIndex: map[string]bool{"ClassA": true, "ClassB": true},
 		GenericClasses: map[string]bool{},
-		OwnerIndex: map[string]string{"ClassA": "FrameworkA", "ClassB": "FrameworkB"},
+		OwnerIndex:     map[string]string{"ClassA": "FrameworkA", "ClassB": "FrameworkB"},
 		ClassIndex:     map[string]macosplatformmetadata.Class{},
 		ModulePrefix:   "",
 	}
@@ -189,7 +189,7 @@ func TestComputeBlockedImportsMethodArgs(t *testing.T) {
 		Classes: map[string]macosplatformmetadata.Class{
 			"BetaObj": {Methods: []macosplatformmetadata.Method{{
 				Selector: "doWith",
-				Params:     []macosplatformmetadata.Param{{Name: "obj", ObjCType: "AlphaObj *"}},
+				Params:   []macosplatformmetadata.Param{{Name: "obj", ObjCType: "AlphaObj *"}},
 				Return:   macosplatformmetadata.ReturnType{},
 			}}},
 		},
@@ -197,15 +197,15 @@ func TestComputeBlockedImportsMethodArgs(t *testing.T) {
 		Protocols: map[string]macosplatformmetadata.Protocol{
 			"BetaProto": {Methods: []macosplatformmetadata.Method{{
 				Selector: "handle",
-				Params:     []macosplatformmetadata.Param{{Name: "obj", ObjCType: "AlphaObj *"}},
+				Params:   []macosplatformmetadata.Param{{Name: "obj", ObjCType: "AlphaObj *"}},
 				Return:   macosplatformmetadata.ReturnType{},
 			}}},
 		},
 	}
 	reg := &Registry{
 		Frameworks:     []*macosplatformmetadata.FrameworkMeta{fmAlpha, fmBeta},
-		OwnerIndex: map[string]string{"AlphaObj": "Alpha"},
-		ClassNameIndex:   map[string]bool{"AlphaObj": true},
+		OwnerIndex:     map[string]string{"AlphaObj": "Alpha"},
+		ClassNameIndex: map[string]bool{"AlphaObj": true},
 		GenericClasses: map[string]bool{},
 		ClassIndex:     map[string]macosplatformmetadata.Class{},
 		ModulePrefix:   "",
@@ -248,7 +248,7 @@ func TestComputeBlockedImportsCycleMultiEdge(t *testing.T) {
 		Framework: "Beta",
 		Classes: map[string]macosplatformmetadata.Class{
 			"BetaObj": {Methods: []macosplatformmetadata.Method{
-				{Selector: "first", Return: macosplatformmetadata.ReturnType{ObjCType: "AlphaObj *"}},  // weight[Beta][Alpha]++
+				{Selector: "first", Return: macosplatformmetadata.ReturnType{ObjCType: "AlphaObj *"}},   // weight[Beta][Alpha]++
 				{Selector: "second", Return: macosplatformmetadata.ReturnType{ObjCType: "AlphaObj2 *"}}, // weight[Beta][Alpha]++
 			}},
 		},
@@ -267,7 +267,7 @@ func TestComputeBlockedImportsCycleMultiEdge(t *testing.T) {
 			"BetaObj":   "Beta",
 			"GammaObj":  "Gamma",
 		},
-		ClassNameIndex:   map[string]bool{},
+		ClassNameIndex: map[string]bool{},
 		GenericClasses: map[string]bool{},
 		ClassIndex:     map[string]macosplatformmetadata.Class{},
 		ModulePrefix:   "",
@@ -381,10 +381,10 @@ func TestComputeBlockedImportsUppercaseTypedefChain(t *testing.T) {
 			"BType": "FrameworkB",
 			"CType": "FrameworkC",
 		},
-		ClassNameIndex:   map[string]bool{"BType": true, "CType": true},
-		GenericClasses: map[string]bool{},
-		ClassIndex:     map[string]macosplatformmetadata.Class{},
-		EnumIndex:     map[string]string{},
+		ClassNameIndex:  map[string]bool{"BType": true, "CType": true},
+		GenericClasses:  map[string]bool{},
+		ClassIndex:      map[string]macosplatformmetadata.Class{},
+		EnumIndex:       map[string]string{},
 		EnumGoTypeIndex: map[string]string{},
 		TypedefIndex: map[string]string{
 			"AliasForBType": "BType *", // uppercase typedef → pointer to foreign class
@@ -394,7 +394,7 @@ func TestComputeBlockedImportsUppercaseTypedefChain(t *testing.T) {
 		},
 		ProtocolIndex: map[string]string{},
 		StructIndex:   map[string]string{},
-		ModulePrefix:   "",
+		ModulePrefix:  "",
 	}
 
 	blocked := resolveBlockedImports(reg)

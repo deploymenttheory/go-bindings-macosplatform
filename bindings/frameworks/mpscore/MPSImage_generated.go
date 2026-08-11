@@ -9,6 +9,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -122,6 +123,36 @@ func (i *Image) SetPurgeableState(state PurgeableState) PurgeableState {
 	defer runtime.KeepAlive(i)
 	_r := objc.Send[PurgeableState](objref.IDOf(i), objc.RegisterName("setPurgeableState:"), state)
 	return _r
+}
+
+// ReadBytesDataLayoutBytesPerRowRegionFeatureChannelInfoImageIndex get the values inside MPSImage and put them in the Buffer passed in. Use the enum to set data is coming in with what order. The data type will be determined by the pixelFormat defined in the Image Descriptor.
+func (i *Image) ReadBytesDataLayoutBytesPerRowRegionFeatureChannelInfoImageIndex(dataBytes unsafe.Pointer, dataLayout DataLayout, bytesPerRow int, region metal.MTLRegion, featureChannelInfo MPSImageReadWriteParams, imageIndex int) {
+	defer runtime.KeepAlive(i)
+	objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("readBytes:dataLayout:bytesPerRow:region:featureChannelInfo:imageIndex:"), dataBytes, dataLayout, bytesPerRow, region, featureChannelInfo, imageIndex)
+}
+
+// WriteBytesDataLayoutBytesPerRowRegionFeatureChannelInfoImageIndex set the values inside MPSImage with the Buffer passed in. This method is used to copy data from the storage provided by dataBytes to the MPSImage. The ordering of data in your dataBytes buffer is given by dataLayout. Each image may be stored as either a series of planar images (a series of single WxH images, one per feature channel) or a single chunky image, WxHxfeature_channels. BytesPerRow and BytesPerImage are there to allow some padding between successive rows and successive images. No padding is allowed between successive feature channels.
+func (i *Image) WriteBytesDataLayoutBytesPerRowRegionFeatureChannelInfoImageIndex(dataBytes unsafe.Pointer, dataLayout DataLayout, bytesPerRow int, region metal.MTLRegion, featureChannelInfo MPSImageReadWriteParams, imageIndex int) {
+	defer runtime.KeepAlive(i)
+	objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("writeBytes:dataLayout:bytesPerRow:region:featureChannelInfo:imageIndex:"), dataBytes, dataLayout, bytesPerRow, region, featureChannelInfo, imageIndex)
+}
+
+// WriteBytesDataLayoutBytesPerColumnBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex set the values inside MPSImage with the Buffer passed in. This method is used to copy data from the storage provided by dataBytes to the MPSImage. The ordering of data in your dataBytes buffer is given by dataLayout. Each image may be stored as either a series of planar images (a series of single WxH images, one per feature channel) or a single chunky image, WxHxfeature_channels. BytesPerRow and BytesPerImage are there to allow some padding between successive rows and successive images. No padding is allowed between successive feature channels.
+func (i *Image) WriteBytesDataLayoutBytesPerColumnBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex(dataBytes unsafe.Pointer, dataLayout DataLayout, bytesPerColumn int, bytesPerRow int, bytesPerImage int, region metal.MTLRegion, featureChannelInfo MPSImageReadWriteParams, imageIndex int) {
+	defer runtime.KeepAlive(i)
+	objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("writeBytes:dataLayout:bytesPerColumn:bytesPerRow:bytesPerImage:region:featureChannelInfo:imageIndex:"), dataBytes, dataLayout, bytesPerColumn, bytesPerRow, bytesPerImage, region, featureChannelInfo, imageIndex)
+}
+
+// ReadBytesDataLayoutBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex get the values inside MPSImage and put them in the Buffer passed in. This method is used to copy data from the MPSImage to the storage provided by dataBytes. The ordering of data in your dataBytes buffer is given by dataLayout. Each image may be stored as either a series of planar images (a series of single WxH images, one per feature channel) or a single chunky image, WxHxfeature_channels. BytesPerRow and BytesPerImage are there to allow some padding between successive rows and successive images. No padding is allowed between successive feature channels. BUG: Prior to MacOS 10.15, iOS/tvOS 13.0, incorrect behavior may be observed if region.size.depth != 1 or if bytesPerRow allowed for unused padding between rows. BUG: To provide for full capability to extract and insert content from arbitrarily sized buffers, there should also be a featureChannelStride in addition to bytesPerRow and bytesPerImage. With the current design, when we finish the last feature channel, the next byte will contain the 0th feature channel for the next texel or slice, depending on packing order. This method can not be used to modify some but not all of the feature channels in an image.
+func (i *Image) ReadBytesDataLayoutBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex(dataBytes unsafe.Pointer, dataLayout DataLayout, bytesPerRow int, bytesPerImage int, region metal.MTLRegion, featureChannelInfo MPSImageReadWriteParams, imageIndex int) {
+	defer runtime.KeepAlive(i)
+	objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("readBytes:dataLayout:bytesPerRow:bytesPerImage:region:featureChannelInfo:imageIndex:"), dataBytes, dataLayout, bytesPerRow, bytesPerImage, region, featureChannelInfo, imageIndex)
+}
+
+// WriteBytesDataLayoutBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex set the values inside MPSImage with the Buffer passed in. Use the enum to set data is coming in with what order. The data type will be determined by the pixelFormat defined in the Image Descriptor. BUG: Prior to MacOS 10.15, iOS/tvOS 13.0, incorrect behavior may be observed if region.size.depth != 1 or if bytesPerRow allowed for unused padding between rows. BUG: To provide for full capability to extract and insert content from arbitrarily sized buffers, there should also be a featureChannelStride in addition to bytesPerRow and bytesPerImage. With the current design, when we finish the last feature channel, the next byte will contain the 0th feature channel for the next texel or slice, depending on packing order. This method can not be used to modify some but not all of the feature channels in an image.
+func (i *Image) WriteBytesDataLayoutBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex(dataBytes unsafe.Pointer, dataLayout DataLayout, bytesPerRow int, bytesPerImage int, region metal.MTLRegion, featureChannelInfo MPSImageReadWriteParams, imageIndex int) {
+	defer runtime.KeepAlive(i)
+	objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("writeBytes:dataLayout:bytesPerRow:bytesPerImage:region:featureChannelInfo:imageIndex:"), dataBytes, dataLayout, bytesPerRow, bytesPerImage, region, featureChannelInfo, imageIndex)
 }
 
 // ReadBytesDataLayoutImageIndex get the values inside MPSImage and put them in the Buffer passed in. Use the enum to set data is coming in with what order. The data type will be determined by the pixelFormat defined in the Image Descriptor. Region is full image, buffer width and height is same as MPSImage width and height.

@@ -106,3 +106,17 @@ func (a *Attitude) Yaw() float64 {
 	_r := objc.Send[float64](objref.IDOf(a), objc.RegisterName("yaw"))
 	return _r
 }
+
+// RotationMatrix returns the rotation matrix.
+func (a *Attitude) RotationMatrix() CMRotationMatrix {
+	defer runtime.KeepAlive(a)
+	_r := objc.Send[CMRotationMatrix](objref.IDOf(a), objc.RegisterName("rotationMatrix"))
+	return _r
+}
+
+// Quaternion returns the quaternion.
+func (a *Attitude) Quaternion() CMQuaternion {
+	defer runtime.KeepAlive(a)
+	_r := objc.Send[CMQuaternion](objref.IDOf(a), objc.RegisterName("quaternion"))
+	return _r
+}

@@ -5,8 +5,6 @@ package kerberos
 
 import (
 	"unsafe"
-
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/gss"
 )
 
 var (
@@ -82,53 +80,53 @@ var (
 	_com_err_va    func(string, int, string, string)
 	_error_message func(int) string
 	// Deprecated: Use GSS.framework
-	_gss_accept_sec_context func(*uint32, unsafe.Pointer, unsafe.Pointer, *gss.GssBufferDescStruct, *gss.GssChannelBindingsStruct, unsafe.Pointer, **gss.GssOIDDescStruct, *gss.GssBufferDescStruct, *uint32, *uint32, unsafe.Pointer) uint32
+	_gss_accept_sec_context func(*uint32, unsafe.Pointer, unsafe.Pointer, *GssBufferDescStruct, *GssChannelBindingsStruct, unsafe.Pointer, **GssOIDDescStruct, *GssBufferDescStruct, *uint32, *uint32, unsafe.Pointer) uint32
 	// Deprecated: Use GSS.framework
-	_gss_acquire_cred func(*uint32, unsafe.Pointer, uint32, *gss.GssOIDSetDescStruct, int, unsafe.Pointer, **gss.GssOIDSetDescStruct, *uint32) uint32
+	_gss_acquire_cred func(*uint32, unsafe.Pointer, uint32, *GssOIDSetDescStruct, int, unsafe.Pointer, **GssOIDSetDescStruct, *uint32) uint32
 	// Deprecated: Use GSS.framework
-	_gss_add_cred func(*uint32, unsafe.Pointer, unsafe.Pointer, *gss.GssOIDDescStruct, int, uint32, uint32, unsafe.Pointer, **gss.GssOIDSetDescStruct, *uint32, *uint32) uint32
+	_gss_add_cred func(*uint32, unsafe.Pointer, unsafe.Pointer, *GssOIDDescStruct, int, uint32, uint32, unsafe.Pointer, **GssOIDSetDescStruct, *uint32, *uint32) uint32
 	// Deprecated: Use GSS.framework
-	_gss_add_oid_set_member func(*uint32, *gss.GssOIDDescStruct, **gss.GssOIDSetDescStruct) uint32
+	_gss_add_oid_set_member func(*uint32, *GssOIDDescStruct, **GssOIDSetDescStruct) uint32
 	// Deprecated: Use GSS.framework
-	_gss_canonicalize_name func(*uint32, unsafe.Pointer, *gss.GssOIDDescStruct, unsafe.Pointer) uint32
+	_gss_canonicalize_name func(*uint32, unsafe.Pointer, *GssOIDDescStruct, unsafe.Pointer) uint32
 	// Deprecated: Use GSS.framework
 	_gss_compare_name func(*uint32, unsafe.Pointer, unsafe.Pointer, *int32) uint32
 	// Deprecated: Use GSS.framework
 	_gss_context_time func(*uint32, unsafe.Pointer, *uint32) uint32
 	// Deprecated: Use GSS.framework
-	_gss_create_empty_oid_set func(*uint32, **gss.GssOIDSetDescStruct) uint32
+	_gss_create_empty_oid_set func(*uint32, **GssOIDSetDescStruct) uint32
 	// Deprecated: Use GSS.framework
-	_gss_delete_sec_context func(*uint32, unsafe.Pointer, *gss.GssBufferDescStruct) uint32
+	_gss_delete_sec_context func(*uint32, unsafe.Pointer, *GssBufferDescStruct) uint32
 	// Deprecated: Use GSS.framework
-	_gss_display_name func(*uint32, unsafe.Pointer, *gss.GssBufferDescStruct, **gss.GssOIDDescStruct) uint32
+	_gss_display_name func(*uint32, unsafe.Pointer, *GssBufferDescStruct, **GssOIDDescStruct) uint32
 	// Deprecated: Use GSS.framework
-	_gss_display_status func(*uint32, uint32, int, *gss.GssOIDDescStruct, *uint32, *gss.GssBufferDescStruct) uint32
+	_gss_display_status func(*uint32, uint32, int, *GssOIDDescStruct, *uint32, *GssBufferDescStruct) uint32
 	// Deprecated: Use GSS.framework
 	_gss_duplicate_name func(*uint32, unsafe.Pointer, unsafe.Pointer) uint32
 	// Deprecated: Use GSS.framework
-	_gss_export_name func(*uint32, unsafe.Pointer, *gss.GssBufferDescStruct) uint32
+	_gss_export_name func(*uint32, unsafe.Pointer, *GssBufferDescStruct) uint32
 	// Deprecated: Use GSS.framework
-	_gss_export_sec_context func(*uint32, unsafe.Pointer, *gss.GssBufferDescStruct) uint32
+	_gss_export_sec_context func(*uint32, unsafe.Pointer, *GssBufferDescStruct) uint32
 	// Deprecated: Use GSS.framework
-	_gss_get_mic func(*uint32, unsafe.Pointer, uint32, *gss.GssBufferDescStruct, *gss.GssBufferDescStruct) uint32
+	_gss_get_mic func(*uint32, unsafe.Pointer, uint32, *GssBufferDescStruct, *GssBufferDescStruct) uint32
 	// Deprecated: Use GSS.framework
-	_gss_import_name func(*uint32, *gss.GssBufferDescStruct, *gss.GssOIDDescStruct, unsafe.Pointer) uint32
+	_gss_import_name func(*uint32, *GssBufferDescStruct, *GssOIDDescStruct, unsafe.Pointer) uint32
 	// Deprecated: Use GSS.framework
-	_gss_import_sec_context func(*uint32, *gss.GssBufferDescStruct, unsafe.Pointer) uint32
+	_gss_import_sec_context func(*uint32, *GssBufferDescStruct, unsafe.Pointer) uint32
 	// Deprecated: Use GSS.framework
-	_gss_indicate_mechs func(*uint32, **gss.GssOIDSetDescStruct) uint32
+	_gss_indicate_mechs func(*uint32, **GssOIDSetDescStruct) uint32
 	// Deprecated: Use GSS.framework
-	_gss_init_sec_context func(*uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *gss.GssOIDDescStruct, uint32, uint32, *gss.GssChannelBindingsStruct, *gss.GssBufferDescStruct, **gss.GssOIDDescStruct, *gss.GssBufferDescStruct, *uint32, *uint32) uint32
+	_gss_init_sec_context func(*uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *GssOIDDescStruct, uint32, uint32, *GssChannelBindingsStruct, *GssBufferDescStruct, **GssOIDDescStruct, *GssBufferDescStruct, *uint32, *uint32) uint32
 	// Deprecated: Use GSS.framework
-	_gss_inquire_context func(*uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *uint32, **gss.GssOIDDescStruct, *uint32, *int32, *int32) uint32
+	_gss_inquire_context func(*uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *uint32, **GssOIDDescStruct, *uint32, *int32, *int32) uint32
 	// Deprecated: Use GSS.framework
-	_gss_inquire_cred func(*uint32, unsafe.Pointer, unsafe.Pointer, *uint32, *int, **gss.GssOIDSetDescStruct) uint32
+	_gss_inquire_cred func(*uint32, unsafe.Pointer, unsafe.Pointer, *uint32, *int, **GssOIDSetDescStruct) uint32
 	// Deprecated: Use GSS.framework
-	_gss_inquire_cred_by_mech func(*uint32, unsafe.Pointer, *gss.GssOIDDescStruct, unsafe.Pointer, *uint32, *uint32, *int) uint32
+	_gss_inquire_cred_by_mech func(*uint32, unsafe.Pointer, *GssOIDDescStruct, unsafe.Pointer, *uint32, *uint32, *int) uint32
 	// Deprecated: Use GSS.framework
-	_gss_inquire_mechs_for_name func(*uint32, unsafe.Pointer, **gss.GssOIDSetDescStruct) uint32
+	_gss_inquire_mechs_for_name func(*uint32, unsafe.Pointer, **GssOIDSetDescStruct) uint32
 	// Deprecated: Use GSS.framework
-	_gss_inquire_names_for_mech func(*uint32, *gss.GssOIDDescStruct, **gss.GssOIDSetDescStruct) uint32
+	_gss_inquire_names_for_mech func(*uint32, *GssOIDDescStruct, **GssOIDSetDescStruct) uint32
 	// Deprecated: Use GSS.framework
 	_gss_krb5_ccache_name func(*uint32, string, string) uint32
 	// Deprecated: Use GSS.framework
@@ -144,37 +142,37 @@ var (
 	// Deprecated: Use GSS.framework
 	_gss_krb5_ui func(*uint32, uint32) uint32
 	// Deprecated: Use GSS.framework
-	_gss_oid_to_str func(*uint32, *gss.GssOIDDescStruct, *gss.GssBufferDescStruct) uint32
+	_gss_oid_to_str func(*uint32, *GssOIDDescStruct, *GssBufferDescStruct) uint32
 	// Deprecated: Use GSS.framework
-	_gss_process_context_token func(*uint32, unsafe.Pointer, *gss.GssBufferDescStruct) uint32
+	_gss_process_context_token func(*uint32, unsafe.Pointer, *GssBufferDescStruct) uint32
 	// Deprecated: Use GSS.framework
-	_gss_release_buffer func(*uint32, *gss.GssBufferDescStruct) uint32
+	_gss_release_buffer func(*uint32, *GssBufferDescStruct) uint32
 	// Deprecated: Use GSS.framework
 	_gss_release_cred func(*uint32, unsafe.Pointer) uint32
 	// Deprecated: Use GSS.framework
 	_gss_release_name func(*uint32, unsafe.Pointer) uint32
 	// Deprecated: Use GSS.framework
-	_gss_release_oid func(*uint32, **gss.GssOIDDescStruct) uint32
+	_gss_release_oid func(*uint32, **GssOIDDescStruct) uint32
 	// Deprecated: Use GSS.framework
-	_gss_release_oid_set func(*uint32, **gss.GssOIDSetDescStruct) uint32
+	_gss_release_oid_set func(*uint32, **GssOIDSetDescStruct) uint32
 	// Deprecated: Use GSS.framework
-	_gss_seal func(*uint32, unsafe.Pointer, int, int, *gss.GssBufferDescStruct, *int32, *gss.GssBufferDescStruct) uint32
+	_gss_seal func(*uint32, unsafe.Pointer, int, int, *GssBufferDescStruct, *int32, *GssBufferDescStruct) uint32
 	// Deprecated: Use GSS.framework
-	_gss_sign func(*uint32, unsafe.Pointer, int, *gss.GssBufferDescStruct, *gss.GssBufferDescStruct) uint32
+	_gss_sign func(*uint32, unsafe.Pointer, int, *GssBufferDescStruct, *GssBufferDescStruct) uint32
 	// Deprecated: Use GSS.framework
-	_gss_str_to_oid func(*uint32, *gss.GssBufferDescStruct, **gss.GssOIDDescStruct) uint32
+	_gss_str_to_oid func(*uint32, *GssBufferDescStruct, **GssOIDDescStruct) uint32
 	// Deprecated: Use GSS.framework
-	_gss_test_oid_set_member func(*uint32, *gss.GssOIDDescStruct, *gss.GssOIDSetDescStruct, *int32) uint32
+	_gss_test_oid_set_member func(*uint32, *GssOIDDescStruct, *GssOIDSetDescStruct, *int32) uint32
 	// Deprecated: Use GSS.framework
-	_gss_unseal func(*uint32, unsafe.Pointer, *gss.GssBufferDescStruct, *gss.GssBufferDescStruct, *int32, *int32) uint32
+	_gss_unseal func(*uint32, unsafe.Pointer, *GssBufferDescStruct, *GssBufferDescStruct, *int32, *int32) uint32
 	// Deprecated: Use GSS.framework
-	_gss_unwrap func(*uint32, unsafe.Pointer, *gss.GssBufferDescStruct, *gss.GssBufferDescStruct, *int32, *uint32) uint32
+	_gss_unwrap func(*uint32, unsafe.Pointer, *GssBufferDescStruct, *GssBufferDescStruct, *int32, *uint32) uint32
 	// Deprecated: Use GSS.framework
-	_gss_verify func(*uint32, unsafe.Pointer, *gss.GssBufferDescStruct, *gss.GssBufferDescStruct, *int32) uint32
+	_gss_verify func(*uint32, unsafe.Pointer, *GssBufferDescStruct, *GssBufferDescStruct, *int32) uint32
 	// Deprecated: Use GSS.framework
-	_gss_verify_mic func(*uint32, unsafe.Pointer, *gss.GssBufferDescStruct, *gss.GssBufferDescStruct, *uint32) uint32
+	_gss_verify_mic func(*uint32, unsafe.Pointer, *GssBufferDescStruct, *GssBufferDescStruct, *uint32) uint32
 	// Deprecated: Use GSS.framework
-	_gss_wrap func(*uint32, unsafe.Pointer, int, uint32, *gss.GssBufferDescStruct, *int32, *gss.GssBufferDescStruct) uint32
+	_gss_wrap func(*uint32, unsafe.Pointer, int, uint32, *GssBufferDescStruct, *int32, *GssBufferDescStruct) uint32
 	// Deprecated: Use GSS.framework
 	_gss_wrap_size_limit         func(*uint32, unsafe.Pointer, int, uint32, uint32, *uint32) uint32
 	_initialize_asn1_error_table func()
@@ -980,31 +978,31 @@ func ErrorMessage(code int) string {
 
 // C function: gss_accept_sec_context
 // Deprecated: Use GSS.framework
-func GssAcceptSecContext(arg *uint32, arg2 unsafe.Pointer, arg3 unsafe.Pointer, arg4 *gss.GssBufferDescStruct, arg5 *gss.GssChannelBindingsStruct, arg6 unsafe.Pointer, arg7 **gss.GssOIDDescStruct, arg8 *gss.GssBufferDescStruct, arg9 *uint32, arg10 *uint32, arg11 unsafe.Pointer) uint32 {
+func GssAcceptSecContext(arg *uint32, arg2 unsafe.Pointer, arg3 unsafe.Pointer, arg4 *GssBufferDescStruct, arg5 *GssChannelBindingsStruct, arg6 unsafe.Pointer, arg7 **GssOIDDescStruct, arg8 *GssBufferDescStruct, arg9 *uint32, arg10 *uint32, arg11 unsafe.Pointer) uint32 {
 	return _gss_accept_sec_context(arg, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11)
 }
 
 // C function: gss_acquire_cred
 // Deprecated: Use GSS.framework
-func GssAcquireCred(arg *uint32, arg2 unsafe.Pointer, arg3 uint32, arg4 *gss.GssOIDSetDescStruct, arg5 int, arg6 unsafe.Pointer, arg7 **gss.GssOIDSetDescStruct, arg8 *uint32) uint32 {
+func GssAcquireCred(arg *uint32, arg2 unsafe.Pointer, arg3 uint32, arg4 *GssOIDSetDescStruct, arg5 int, arg6 unsafe.Pointer, arg7 **GssOIDSetDescStruct, arg8 *uint32) uint32 {
 	return _gss_acquire_cred(arg, arg2, arg3, arg4, arg5, arg6, arg7, arg8)
 }
 
 // C function: gss_add_cred
 // Deprecated: Use GSS.framework
-func GssAddCred(arg *uint32, arg2 unsafe.Pointer, arg3 unsafe.Pointer, arg4 *gss.GssOIDDescStruct, arg5 int, arg6 uint32, arg7 uint32, arg8 unsafe.Pointer, arg9 **gss.GssOIDSetDescStruct, arg10 *uint32, arg11 *uint32) uint32 {
+func GssAddCred(arg *uint32, arg2 unsafe.Pointer, arg3 unsafe.Pointer, arg4 *GssOIDDescStruct, arg5 int, arg6 uint32, arg7 uint32, arg8 unsafe.Pointer, arg9 **GssOIDSetDescStruct, arg10 *uint32, arg11 *uint32) uint32 {
 	return _gss_add_cred(arg, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11)
 }
 
 // C function: gss_add_oid_set_member
 // Deprecated: Use GSS.framework
-func GssAddOidSetMember(arg *uint32, arg2 *gss.GssOIDDescStruct, arg3 **gss.GssOIDSetDescStruct) uint32 {
+func GssAddOidSetMember(arg *uint32, arg2 *GssOIDDescStruct, arg3 **GssOIDSetDescStruct) uint32 {
 	return _gss_add_oid_set_member(arg, arg2, arg3)
 }
 
 // C function: gss_canonicalize_name
 // Deprecated: Use GSS.framework
-func GssCanonicalizeName(arg *uint32, arg2 unsafe.Pointer, arg3 *gss.GssOIDDescStruct, arg4 unsafe.Pointer) uint32 {
+func GssCanonicalizeName(arg *uint32, arg2 unsafe.Pointer, arg3 *GssOIDDescStruct, arg4 unsafe.Pointer) uint32 {
 	return _gss_canonicalize_name(arg, arg2, arg3, arg4)
 }
 
@@ -1022,25 +1020,25 @@ func GssContextTime(arg *uint32, arg2 unsafe.Pointer, arg3 *uint32) uint32 {
 
 // C function: gss_create_empty_oid_set
 // Deprecated: Use GSS.framework
-func GssCreateEmptyOidSet(arg *uint32, arg2 **gss.GssOIDSetDescStruct) uint32 {
+func GssCreateEmptyOidSet(arg *uint32, arg2 **GssOIDSetDescStruct) uint32 {
 	return _gss_create_empty_oid_set(arg, arg2)
 }
 
 // C function: gss_delete_sec_context
 // Deprecated: Use GSS.framework
-func GssDeleteSecContext(arg *uint32, arg2 unsafe.Pointer, arg3 *gss.GssBufferDescStruct) uint32 {
+func GssDeleteSecContext(arg *uint32, arg2 unsafe.Pointer, arg3 *GssBufferDescStruct) uint32 {
 	return _gss_delete_sec_context(arg, arg2, arg3)
 }
 
 // C function: gss_display_name
 // Deprecated: Use GSS.framework
-func GssDisplayName(arg *uint32, arg2 unsafe.Pointer, arg3 *gss.GssBufferDescStruct, arg4 **gss.GssOIDDescStruct) uint32 {
+func GssDisplayName(arg *uint32, arg2 unsafe.Pointer, arg3 *GssBufferDescStruct, arg4 **GssOIDDescStruct) uint32 {
 	return _gss_display_name(arg, arg2, arg3, arg4)
 }
 
 // C function: gss_display_status
 // Deprecated: Use GSS.framework
-func GssDisplayStatus(arg *uint32, arg2 uint32, arg3 int, arg4 *gss.GssOIDDescStruct, arg5 *uint32, arg6 *gss.GssBufferDescStruct) uint32 {
+func GssDisplayStatus(arg *uint32, arg2 uint32, arg3 int, arg4 *GssOIDDescStruct, arg5 *uint32, arg6 *GssBufferDescStruct) uint32 {
 	return _gss_display_status(arg, arg2, arg3, arg4, arg5, arg6)
 }
 
@@ -1052,73 +1050,73 @@ func GssDuplicateName(arg *uint32, arg2 unsafe.Pointer, arg3 unsafe.Pointer) uin
 
 // C function: gss_export_name
 // Deprecated: Use GSS.framework
-func GssExportName(arg *uint32, arg2 unsafe.Pointer, arg3 *gss.GssBufferDescStruct) uint32 {
+func GssExportName(arg *uint32, arg2 unsafe.Pointer, arg3 *GssBufferDescStruct) uint32 {
 	return _gss_export_name(arg, arg2, arg3)
 }
 
 // C function: gss_export_sec_context
 // Deprecated: Use GSS.framework
-func GssExportSecContext(arg *uint32, arg2 unsafe.Pointer, arg3 *gss.GssBufferDescStruct) uint32 {
+func GssExportSecContext(arg *uint32, arg2 unsafe.Pointer, arg3 *GssBufferDescStruct) uint32 {
 	return _gss_export_sec_context(arg, arg2, arg3)
 }
 
 // C function: gss_get_mic
 // Deprecated: Use GSS.framework
-func GssGetMic(arg *uint32, arg2 unsafe.Pointer, arg3 uint32, arg4 *gss.GssBufferDescStruct, arg5 *gss.GssBufferDescStruct) uint32 {
+func GssGetMic(arg *uint32, arg2 unsafe.Pointer, arg3 uint32, arg4 *GssBufferDescStruct, arg5 *GssBufferDescStruct) uint32 {
 	return _gss_get_mic(arg, arg2, arg3, arg4, arg5)
 }
 
 // C function: gss_import_name
 // Deprecated: Use GSS.framework
-func GssImportName(arg *uint32, arg2 *gss.GssBufferDescStruct, arg3 *gss.GssOIDDescStruct, arg4 unsafe.Pointer) uint32 {
+func GssImportName(arg *uint32, arg2 *GssBufferDescStruct, arg3 *GssOIDDescStruct, arg4 unsafe.Pointer) uint32 {
 	return _gss_import_name(arg, arg2, arg3, arg4)
 }
 
 // C function: gss_import_sec_context
 // Deprecated: Use GSS.framework
-func GssImportSecContext(arg *uint32, arg2 *gss.GssBufferDescStruct, arg3 unsafe.Pointer) uint32 {
+func GssImportSecContext(arg *uint32, arg2 *GssBufferDescStruct, arg3 unsafe.Pointer) uint32 {
 	return _gss_import_sec_context(arg, arg2, arg3)
 }
 
 // C function: gss_indicate_mechs
 // Deprecated: Use GSS.framework
-func GssIndicateMechs(arg *uint32, arg2 **gss.GssOIDSetDescStruct) uint32 {
+func GssIndicateMechs(arg *uint32, arg2 **GssOIDSetDescStruct) uint32 {
 	return _gss_indicate_mechs(arg, arg2)
 }
 
 // C function: gss_init_sec_context
 // Deprecated: Use GSS.framework
-func GssInitSecContext(arg *uint32, arg2 unsafe.Pointer, arg3 unsafe.Pointer, arg4 unsafe.Pointer, arg5 *gss.GssOIDDescStruct, arg6 uint32, arg7 uint32, arg8 *gss.GssChannelBindingsStruct, arg9 *gss.GssBufferDescStruct, arg10 **gss.GssOIDDescStruct, arg11 *gss.GssBufferDescStruct, arg12 *uint32, arg13 *uint32) uint32 {
+func GssInitSecContext(arg *uint32, arg2 unsafe.Pointer, arg3 unsafe.Pointer, arg4 unsafe.Pointer, arg5 *GssOIDDescStruct, arg6 uint32, arg7 uint32, arg8 *GssChannelBindingsStruct, arg9 *GssBufferDescStruct, arg10 **GssOIDDescStruct, arg11 *GssBufferDescStruct, arg12 *uint32, arg13 *uint32) uint32 {
 	return _gss_init_sec_context(arg, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13)
 }
 
 // C function: gss_inquire_context
 // Deprecated: Use GSS.framework
-func GssInquireContext(arg *uint32, arg2 unsafe.Pointer, arg3 unsafe.Pointer, arg4 unsafe.Pointer, arg5 *uint32, arg6 **gss.GssOIDDescStruct, arg7 *uint32, arg8 *int32, arg9 *int32) uint32 {
+func GssInquireContext(arg *uint32, arg2 unsafe.Pointer, arg3 unsafe.Pointer, arg4 unsafe.Pointer, arg5 *uint32, arg6 **GssOIDDescStruct, arg7 *uint32, arg8 *int32, arg9 *int32) uint32 {
 	return _gss_inquire_context(arg, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9)
 }
 
 // C function: gss_inquire_cred
 // Deprecated: Use GSS.framework
-func GssInquireCred(arg *uint32, arg2 unsafe.Pointer, arg3 unsafe.Pointer, arg4 *uint32, arg5 *int, arg6 **gss.GssOIDSetDescStruct) uint32 {
+func GssInquireCred(arg *uint32, arg2 unsafe.Pointer, arg3 unsafe.Pointer, arg4 *uint32, arg5 *int, arg6 **GssOIDSetDescStruct) uint32 {
 	return _gss_inquire_cred(arg, arg2, arg3, arg4, arg5, arg6)
 }
 
 // C function: gss_inquire_cred_by_mech
 // Deprecated: Use GSS.framework
-func GssInquireCredByMech(arg *uint32, arg2 unsafe.Pointer, arg3 *gss.GssOIDDescStruct, arg4 unsafe.Pointer, arg5 *uint32, arg6 *uint32, arg7 *int) uint32 {
+func GssInquireCredByMech(arg *uint32, arg2 unsafe.Pointer, arg3 *GssOIDDescStruct, arg4 unsafe.Pointer, arg5 *uint32, arg6 *uint32, arg7 *int) uint32 {
 	return _gss_inquire_cred_by_mech(arg, arg2, arg3, arg4, arg5, arg6, arg7)
 }
 
 // C function: gss_inquire_mechs_for_name
 // Deprecated: Use GSS.framework
-func GssInquireMechsForName(arg *uint32, arg2 unsafe.Pointer, arg3 **gss.GssOIDSetDescStruct) uint32 {
+func GssInquireMechsForName(arg *uint32, arg2 unsafe.Pointer, arg3 **GssOIDSetDescStruct) uint32 {
 	return _gss_inquire_mechs_for_name(arg, arg2, arg3)
 }
 
 // C function: gss_inquire_names_for_mech
 // Deprecated: Use GSS.framework
-func GssInquireNamesForMech(arg *uint32, arg2 *gss.GssOIDDescStruct, arg3 **gss.GssOIDSetDescStruct) uint32 {
+func GssInquireNamesForMech(arg *uint32, arg2 *GssOIDDescStruct, arg3 **GssOIDSetDescStruct) uint32 {
 	return _gss_inquire_names_for_mech(arg, arg2, arg3)
 }
 
@@ -1166,19 +1164,19 @@ func GssKrb5Ui(arg *uint32, arg2 uint32) uint32 {
 
 // C function: gss_oid_to_str
 // Deprecated: Use GSS.framework
-func GssOidToStr(arg *uint32, arg2 *gss.GssOIDDescStruct, arg3 *gss.GssBufferDescStruct) uint32 {
+func GssOidToStr(arg *uint32, arg2 *GssOIDDescStruct, arg3 *GssBufferDescStruct) uint32 {
 	return _gss_oid_to_str(arg, arg2, arg3)
 }
 
 // C function: gss_process_context_token
 // Deprecated: Use GSS.framework
-func GssProcessContextToken(arg *uint32, arg2 unsafe.Pointer, arg3 *gss.GssBufferDescStruct) uint32 {
+func GssProcessContextToken(arg *uint32, arg2 unsafe.Pointer, arg3 *GssBufferDescStruct) uint32 {
 	return _gss_process_context_token(arg, arg2, arg3)
 }
 
 // C function: gss_release_buffer
 // Deprecated: Use GSS.framework
-func GssReleaseBuffer(arg *uint32, arg2 *gss.GssBufferDescStruct) uint32 {
+func GssReleaseBuffer(arg *uint32, arg2 *GssBufferDescStruct) uint32 {
 	return _gss_release_buffer(arg, arg2)
 }
 
@@ -1196,67 +1194,67 @@ func GssReleaseName(arg *uint32, arg2 unsafe.Pointer) uint32 {
 
 // C function: gss_release_oid
 // Deprecated: Use GSS.framework
-func GssReleaseOid(arg *uint32, arg2 **gss.GssOIDDescStruct) uint32 {
+func GssReleaseOid(arg *uint32, arg2 **GssOIDDescStruct) uint32 {
 	return _gss_release_oid(arg, arg2)
 }
 
 // C function: gss_release_oid_set
 // Deprecated: Use GSS.framework
-func GssReleaseOidSet(arg *uint32, arg2 **gss.GssOIDSetDescStruct) uint32 {
+func GssReleaseOidSet(arg *uint32, arg2 **GssOIDSetDescStruct) uint32 {
 	return _gss_release_oid_set(arg, arg2)
 }
 
 // C function: gss_seal
 // Deprecated: Use GSS.framework
-func GssSeal(arg *uint32, arg2 unsafe.Pointer, arg3 int, arg4 int, arg5 *gss.GssBufferDescStruct, arg6 *int32, arg7 *gss.GssBufferDescStruct) uint32 {
+func GssSeal(arg *uint32, arg2 unsafe.Pointer, arg3 int, arg4 int, arg5 *GssBufferDescStruct, arg6 *int32, arg7 *GssBufferDescStruct) uint32 {
 	return _gss_seal(arg, arg2, arg3, arg4, arg5, arg6, arg7)
 }
 
 // C function: gss_sign
 // Deprecated: Use GSS.framework
-func GssSign(arg *uint32, arg2 unsafe.Pointer, arg3 int, arg4 *gss.GssBufferDescStruct, arg5 *gss.GssBufferDescStruct) uint32 {
+func GssSign(arg *uint32, arg2 unsafe.Pointer, arg3 int, arg4 *GssBufferDescStruct, arg5 *GssBufferDescStruct) uint32 {
 	return _gss_sign(arg, arg2, arg3, arg4, arg5)
 }
 
 // C function: gss_str_to_oid
 // Deprecated: Use GSS.framework
-func GssStrToOid(arg *uint32, arg2 *gss.GssBufferDescStruct, arg3 **gss.GssOIDDescStruct) uint32 {
+func GssStrToOid(arg *uint32, arg2 *GssBufferDescStruct, arg3 **GssOIDDescStruct) uint32 {
 	return _gss_str_to_oid(arg, arg2, arg3)
 }
 
 // C function: gss_test_oid_set_member
 // Deprecated: Use GSS.framework
-func GssTestOidSetMember(arg *uint32, arg2 *gss.GssOIDDescStruct, arg3 *gss.GssOIDSetDescStruct, arg4 *int32) uint32 {
+func GssTestOidSetMember(arg *uint32, arg2 *GssOIDDescStruct, arg3 *GssOIDSetDescStruct, arg4 *int32) uint32 {
 	return _gss_test_oid_set_member(arg, arg2, arg3, arg4)
 }
 
 // C function: gss_unseal
 // Deprecated: Use GSS.framework
-func GssUnseal(arg *uint32, arg2 unsafe.Pointer, arg3 *gss.GssBufferDescStruct, arg4 *gss.GssBufferDescStruct, arg5 *int32, arg6 *int32) uint32 {
+func GssUnseal(arg *uint32, arg2 unsafe.Pointer, arg3 *GssBufferDescStruct, arg4 *GssBufferDescStruct, arg5 *int32, arg6 *int32) uint32 {
 	return _gss_unseal(arg, arg2, arg3, arg4, arg5, arg6)
 }
 
 // C function: gss_unwrap
 // Deprecated: Use GSS.framework
-func GssUnwrap(arg *uint32, arg2 unsafe.Pointer, arg3 *gss.GssBufferDescStruct, arg4 *gss.GssBufferDescStruct, arg5 *int32, arg6 *uint32) uint32 {
+func GssUnwrap(arg *uint32, arg2 unsafe.Pointer, arg3 *GssBufferDescStruct, arg4 *GssBufferDescStruct, arg5 *int32, arg6 *uint32) uint32 {
 	return _gss_unwrap(arg, arg2, arg3, arg4, arg5, arg6)
 }
 
 // C function: gss_verify
 // Deprecated: Use GSS.framework
-func GssVerify(arg *uint32, arg2 unsafe.Pointer, arg3 *gss.GssBufferDescStruct, arg4 *gss.GssBufferDescStruct, arg5 *int32) uint32 {
+func GssVerify(arg *uint32, arg2 unsafe.Pointer, arg3 *GssBufferDescStruct, arg4 *GssBufferDescStruct, arg5 *int32) uint32 {
 	return _gss_verify(arg, arg2, arg3, arg4, arg5)
 }
 
 // C function: gss_verify_mic
 // Deprecated: Use GSS.framework
-func GssVerifyMic(arg *uint32, arg2 unsafe.Pointer, arg3 *gss.GssBufferDescStruct, arg4 *gss.GssBufferDescStruct, arg5 *uint32) uint32 {
+func GssVerifyMic(arg *uint32, arg2 unsafe.Pointer, arg3 *GssBufferDescStruct, arg4 *GssBufferDescStruct, arg5 *uint32) uint32 {
 	return _gss_verify_mic(arg, arg2, arg3, arg4, arg5)
 }
 
 // C function: gss_wrap
 // Deprecated: Use GSS.framework
-func GssWrap(arg *uint32, arg2 unsafe.Pointer, arg3 int, arg4 uint32, arg5 *gss.GssBufferDescStruct, arg6 *int32, arg7 *gss.GssBufferDescStruct) uint32 {
+func GssWrap(arg *uint32, arg2 unsafe.Pointer, arg3 int, arg4 uint32, arg5 *GssBufferDescStruct, arg6 *int32, arg7 *GssBufferDescStruct) uint32 {
 	return _gss_wrap(arg, arg2, arg3, arg4, arg5, arg6, arg7)
 }
 

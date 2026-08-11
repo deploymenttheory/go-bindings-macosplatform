@@ -32,7 +32,7 @@ func LSMMapCreate(alloc corefoundation.CFAllocatorRef, flags int) LSMMapRef {
 		ebipurego.RegisterLibFunc(&_fnLSMMapCreate, _lib, "LSMMapCreate")
 	}
 	_ret := _fnLSMMapCreate(objref.IDOf(alloc.Object), flags)
-	return LSMMapRef{obj.Wrap(_ret)}
+	return LSMMapRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnLSMMapCreateClusters func(objc.ID, objc.ID, objc.ID, int, int) objc.ID
@@ -44,7 +44,7 @@ func LSMMapCreateClusters(alloc corefoundation.CFAllocatorRef, mapref LSMMapRef,
 		ebipurego.RegisterLibFunc(&_fnLSMMapCreateClusters, _lib, "LSMMapCreateClusters")
 	}
 	_ret := _fnLSMMapCreateClusters(objref.IDOf(alloc.Object), objref.IDOf(mapref.Object), objref.IDOf(subset.Object), numClusters, flags)
-	return corefoundation.CFArrayRef{obj.Wrap(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnLSMMapCreateFromURL func(objc.ID, objc.ID, int) objc.ID
@@ -56,7 +56,7 @@ func LSMMapCreateFromURL(alloc corefoundation.CFAllocatorRef, file corefoundatio
 		ebipurego.RegisterLibFunc(&_fnLSMMapCreateFromURL, _lib, "LSMMapCreateFromURL")
 	}
 	_ret := _fnLSMMapCreateFromURL(objref.IDOf(alloc.Object), objref.IDOf(file.Object), flags)
-	return LSMMapRef{obj.Wrap(_ret)}
+	return LSMMapRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnLSMMapGetCategoryCount func(objc.ID) int
@@ -79,7 +79,7 @@ func LSMMapGetProperties(mapref LSMMapRef) corefoundation.CFDictionaryRef {
 		ebipurego.RegisterLibFunc(&_fnLSMMapGetProperties, _lib, "LSMMapGetProperties")
 	}
 	_ret := _fnLSMMapGetProperties(objref.IDOf(mapref.Object))
-	return corefoundation.CFDictionaryRef{obj.Wrap(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnLSMMapGetTypeID func() int
@@ -113,7 +113,7 @@ func LSMResultCopyToken(result LSMResultRef, n int) corefoundation.CFDataRef {
 		ebipurego.RegisterLibFunc(&_fnLSMResultCopyToken, _lib, "LSMResultCopyToken")
 	}
 	_ret := _fnLSMResultCopyToken(objref.IDOf(result.Object), n)
-	return corefoundation.CFDataRef{obj.Wrap(_ret)}
+	return corefoundation.CFDataRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnLSMResultCopyTokenCluster func(objc.ID, int) objc.ID
@@ -125,7 +125,7 @@ func LSMResultCopyTokenCluster(result LSMResultRef, n int) corefoundation.CFArra
 		ebipurego.RegisterLibFunc(&_fnLSMResultCopyTokenCluster, _lib, "LSMResultCopyTokenCluster")
 	}
 	_ret := _fnLSMResultCopyTokenCluster(objref.IDOf(result.Object), n)
-	return corefoundation.CFArrayRef{obj.Wrap(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnLSMResultCopyWord func(objc.ID, int) objc.ID
@@ -137,7 +137,7 @@ func LSMResultCopyWord(result LSMResultRef, n int) corefoundation.CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnLSMResultCopyWord, _lib, "LSMResultCopyWord")
 	}
 	_ret := _fnLSMResultCopyWord(objref.IDOf(result.Object), n)
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnLSMResultCopyWordCluster func(objc.ID, int) objc.ID
@@ -149,7 +149,7 @@ func LSMResultCopyWordCluster(result LSMResultRef, n int) corefoundation.CFArray
 		ebipurego.RegisterLibFunc(&_fnLSMResultCopyWordCluster, _lib, "LSMResultCopyWordCluster")
 	}
 	_ret := _fnLSMResultCopyWordCluster(objref.IDOf(result.Object), n)
-	return corefoundation.CFArrayRef{obj.Wrap(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnLSMResultCreate func(objc.ID, objc.ID, objc.ID, int, int) objc.ID
@@ -161,7 +161,7 @@ func LSMResultCreate(alloc corefoundation.CFAllocatorRef, mapref LSMMapRef, text
 		ebipurego.RegisterLibFunc(&_fnLSMResultCreate, _lib, "LSMResultCreate")
 	}
 	_ret := _fnLSMResultCreate(objref.IDOf(alloc.Object), objref.IDOf(mapref.Object), objref.IDOf(textref.Object), numResults, flags)
-	return LSMResultRef{obj.Wrap(_ret)}
+	return LSMResultRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnLSMResultGetCategory func(objc.ID, int) uint32
@@ -217,7 +217,7 @@ func LSMTextCreate(alloc corefoundation.CFAllocatorRef, mapref LSMMapRef) LSMTex
 		ebipurego.RegisterLibFunc(&_fnLSMTextCreate, _lib, "LSMTextCreate")
 	}
 	_ret := _fnLSMTextCreate(objref.IDOf(alloc.Object), objref.IDOf(mapref.Object))
-	return LSMTextRef{obj.Wrap(_ret)}
+	return LSMTextRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnLSMTextGetTypeID func() int

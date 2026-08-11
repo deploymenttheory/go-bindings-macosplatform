@@ -843,6 +843,13 @@ func (cd *CaptureDevice) DynamicAspectRatio() *foundation.String {
 	return foundation.StringFromID(_r)
 }
 
+// DynamicDimensions returns a key-value observable property describing the output dimensions of the video buffer based on the device's dynamic aspect ratio. If the device's activeFormat's “AVCaptureDeviceFormat/supportedDynamicAspectRatios“ is an empty array, this property returns {0,0}.
+func (cd *CaptureDevice) DynamicDimensions() CMVideoDimensions {
+	defer runtime.KeepAlive(cd)
+	_r := objc.Send[CMVideoDimensions](objref.IDOf(cd), objc.RegisterName("dynamicDimensions"))
+	return _r
+}
+
 // SmartFramingMonitor returns the smart framing monitor.
 func (cd *CaptureDevice) SmartFramingMonitor() obj.Object {
 	defer runtime.KeepAlive(cd)

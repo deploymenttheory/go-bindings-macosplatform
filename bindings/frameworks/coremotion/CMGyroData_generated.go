@@ -5,6 +5,8 @@
 package coremotion
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
@@ -49,6 +51,13 @@ func gyroDataAdopt(id objc.ID) *GyroData {
 func NewGyroData() *GyroData {
 	_id := objc.Send[objc.ID](objc.ID(_class("CMGyroData")), objc.RegisterName("new"))
 	return gyroDataAdopt(_id)
+}
+
+// RotationRate returns the rotation rate.
+func (gd *GyroData) RotationRate() CMRotationRate {
+	defer runtime.KeepAlive(gd)
+	_r := objc.Send[CMRotationRate](objref.IDOf(gd), objc.RegisterName("rotationRate"))
+	return _r
 }
 
 var _ LogItemProvider = (*GyroData)(nil)

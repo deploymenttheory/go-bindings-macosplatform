@@ -92,6 +92,12 @@ func (mt *MusicTrack) WithDestinationMIDIEndpoint(destinationMIDIEndpoint int) *
 	return mt
 }
 
+// WithLoopRange sets the timestamp range for the loop, in beats.
+func (mt *MusicTrack) WithLoopRange(loopRange AVBeatRange) *MusicTrack {
+	objc.Send[objc.ID](objref.IDOf(mt), objc.RegisterName("setLoopRange:"), loopRange)
+	return mt
+}
+
 // WithLoopingEnabled sets a Boolean value that indicates whether the track is in a looping state.
 func (mt *MusicTrack) WithLoopingEnabled(loopingEnabled bool) *MusicTrack {
 	objc.Send[objc.ID](objref.IDOf(mt), objc.RegisterName("setLoopingEnabled:"), loopingEnabled)
@@ -151,6 +157,13 @@ func (mt *MusicTrack) DestinationAudioUnit() *AudioUnit {
 func (mt *MusicTrack) DestinationMIDIEndpoint() int {
 	defer runtime.KeepAlive(mt)
 	_r := objc.Send[int](objref.IDOf(mt), objc.RegisterName("destinationMIDIEndpoint"))
+	return _r
+}
+
+// LoopRange returns the timestamp range in beats for the loop The loop is set by specifying its beat range.
+func (mt *MusicTrack) LoopRange() AVBeatRange {
+	defer runtime.KeepAlive(mt)
+	_r := objc.Send[AVBeatRange](objref.IDOf(mt), objc.RegisterName("loopRange"))
 	return _r
 }
 
@@ -215,6 +228,38 @@ func (mt *MusicTrack) AddEventAtBeat(event *MusicEvent, beat float64) {
 	defer runtime.KeepAlive(mt)
 	defer runtime.KeepAlive(event)
 	objc.Send[objc.ID](objref.IDOf(mt), objc.RegisterName("addEvent:atBeat:"), objref.IDOf(event), beat)
+}
+
+// MoveEventsInRangeByAmount moves the beat location of all events in the given beat range by the amount you specify.
+func (mt *MusicTrack) MoveEventsInRangeByAmount(range_ AVBeatRange, beatAmount float64) {
+	defer runtime.KeepAlive(mt)
+	objc.Send[objc.ID](objref.IDOf(mt), objc.RegisterName("moveEventsInRange:byAmount:"), range_, beatAmount)
+}
+
+// ClearEventsInRange removes all events in the given beat range from the music track.
+func (mt *MusicTrack) ClearEventsInRange(range_ AVBeatRange) {
+	defer runtime.KeepAlive(mt)
+	objc.Send[objc.ID](objref.IDOf(mt), objc.RegisterName("clearEventsInRange:"), range_)
+}
+
+// CutEventsInRange splices all events in the beat range from the music track.
+func (mt *MusicTrack) CutEventsInRange(range_ AVBeatRange) {
+	defer runtime.KeepAlive(mt)
+	objc.Send[objc.ID](objref.IDOf(mt), objc.RegisterName("cutEventsInRange:"), range_)
+}
+
+// CopyEventsInRangeFromTrackInsertAtBeat copies the events from the source track and splices them into the current music track.
+func (mt *MusicTrack) CopyEventsInRangeFromTrackInsertAtBeat(range_ AVBeatRange, sourceTrack *MusicTrack, insertStartBeat float64) {
+	defer runtime.KeepAlive(mt)
+	defer runtime.KeepAlive(sourceTrack)
+	objc.Send[objc.ID](objref.IDOf(mt), objc.RegisterName("copyEventsInRange:fromTrack:insertAtBeat:"), range_, objref.IDOf(sourceTrack), insertStartBeat)
+}
+
+// CopyAndMergeEventsInRangeFromTrackMergeAtBeat copies the events from the source track and merges them into the current music track.
+func (mt *MusicTrack) CopyAndMergeEventsInRangeFromTrackMergeAtBeat(range_ AVBeatRange, sourceTrack *MusicTrack, mergeStartBeat float64) {
+	defer runtime.KeepAlive(mt)
+	defer runtime.KeepAlive(sourceTrack)
+	objc.Send[objc.ID](objref.IDOf(mt), objc.RegisterName("copyAndMergeEventsInRange:fromTrack:mergeAtBeat:"), range_, objref.IDOf(sourceTrack), mergeStartBeat)
 }
 
 // UsesAutomatedParameters reports whether the track is an automation track. If set to true, this can be used to contain, parameter automation events, exclusively. Adding any other event types will generate exceptions. If a track already contains non-parameter events, setting this to true will generate an exception.

@@ -63,6 +63,12 @@ func (sc *SliderConstraint) WithRadius(radius float64) *SliderConstraint {
 	return sc
 }
 
+// WithOffset sets defines the offset of the slider. Defaults to (0,0,0).
+func (sc *SliderConstraint) WithOffset(offset SCNVector3) *SliderConstraint {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setOffset:"), offset)
+	return sc
+}
+
 // WithEnabled sets determines whether the constraint is enabled or not. Defaults to YES.
 func (sc *SliderConstraint) WithEnabled(enabled bool) *SliderConstraint {
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setEnabled:"), enabled)
@@ -92,6 +98,13 @@ func (sc *SliderConstraint) CollisionCategoryBitMask() int {
 func (sc *SliderConstraint) Radius() float64 {
 	defer runtime.KeepAlive(sc)
 	_r := objc.Send[float64](objref.IDOf(sc), objc.RegisterName("radius"))
+	return _r
+}
+
+// Offset defines the offset of the slider. Defaults to (0,0,0).
+func (sc *SliderConstraint) Offset() SCNVector3 {
+	defer runtime.KeepAlive(sc)
+	_r := objc.Send[SCNVector3](objref.IDOf(sc), objc.RegisterName("offset"))
 	return _r
 }
 

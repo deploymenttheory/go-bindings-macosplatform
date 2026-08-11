@@ -96,6 +96,12 @@ func (sl *ScrollLayer) WithAnchorPointZ(anchorPointZ float64) *ScrollLayer {
 	return sl
 }
 
+// WithTransform sets the transform applied to the layer’s contents. Animatable.
+func (sl *ScrollLayer) WithTransform(transform CATransform3D) *ScrollLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setTransform:"), transform)
+	return sl
+}
+
 // WithFrame sets the layer’s frame rectangle.
 func (sl *ScrollLayer) WithFrame(frame corefoundation.CGRect) *ScrollLayer {
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setFrame:"), frame)
@@ -124,6 +130,12 @@ func (sl *ScrollLayer) WithGeometryFlipped(geometryFlipped bool) *ScrollLayer {
 func (sl *ScrollLayer) WithSublayers(items ...LayerProvider) *ScrollLayer {
 	_arr := purego.SliceToNSArray(items, func(_v LayerProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setSublayers:"), _arr)
+	return sl
+}
+
+// WithSublayerTransform sets specifies the transform to apply to sublayers when rendering. Animatable.
+func (sl *ScrollLayer) WithSublayerTransform(sublayerTransform CATransform3D) *ScrollLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setSublayerTransform:"), sublayerTransform)
 	return sl
 }
 

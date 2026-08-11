@@ -33,7 +33,7 @@ func DRBurnSessionCreate() DRBurnSessionRef {
 		ebipurego.RegisterLibFunc(&_fnDRBurnSessionCreate, _lib, "DRBurnSessionCreate")
 	}
 	_ret := _fnDRBurnSessionCreate()
-	return DRBurnSessionRef{obj.Wrap(_ret)}
+	return DRBurnSessionRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnDRBurnSessionGetBurn func(objc.ID) objc.ID
@@ -101,7 +101,7 @@ func DREraseSessionCreate() DREraseSessionRef {
 		ebipurego.RegisterLibFunc(&_fnDREraseSessionCreate, _lib, "DREraseSessionCreate")
 	}
 	_ret := _fnDREraseSessionCreate()
-	return DREraseSessionRef{obj.Wrap(_ret)}
+	return DREraseSessionRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnDREraseSessionGetErase func(objc.ID) objc.ID

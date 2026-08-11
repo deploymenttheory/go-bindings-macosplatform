@@ -108,10 +108,28 @@ func (md *MutableData) IncreaseLengthBy(extraLength int) {
 	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("increaseLengthBy:"), extraLength)
 }
 
+// ReplaceBytesInRangeWithBytes replaces with a given set of bytes a given range within the contents of the receiver.
+func (md *MutableData) ReplaceBytesInRangeWithBytes(range_ NSRange, data unsafe.Pointer) {
+	defer runtime.KeepAlive(md)
+	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("replaceBytesInRange:withBytes:"), range_, data)
+}
+
+// ResetBytesInRange replaces with zeroes the contents of the receiver in a given range.
+func (md *MutableData) ResetBytesInRange(range_ NSRange) {
+	defer runtime.KeepAlive(md)
+	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("resetBytesInRange:"), range_)
+}
+
 // SetData replaces the entire contents of the receiver with the contents of another data object.
 func (md *MutableData) SetData(data []byte) {
 	defer runtime.KeepAlive(md)
 	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("setData:"), rt.BytesToNSData(data))
+}
+
+// ReplaceBytesInRangeWithBytesLength replaces with a given set of bytes a given range within the contents of the receiver.
+func (md *MutableData) ReplaceBytesInRangeWithBytesLength(range_ NSRange, replacementBytes unsafe.Pointer, replacementLength int) {
+	defer runtime.KeepAlive(md)
+	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("replaceBytesInRange:withBytes:length:"), range_, replacementBytes, replacementLength)
 }
 
 // DecompressUsingAlgorithm decompresses the data object’s bytes.

@@ -24,10 +24,10 @@ func MPSDataTypeBitsCount(t DataType) int {
 	return _fnMPSDataTypeBitsCount(t)
 }
 
-var _fnMPSFindIntegerDivisionParams func(uint16) unsafe.Pointer
+var _fnMPSFindIntegerDivisionParams func(uint16) MPSIntegerDivisionParams
 
 // MPSFindIntegerDivisionParams calls the MPSCore framework function MPSFindIntegerDivisionParams.
-func MPSFindIntegerDivisionParams(divisor uint16) unsafe.Pointer {
+func MPSFindIntegerDivisionParams(divisor uint16) MPSIntegerDivisionParams {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMPSFindIntegerDivisionParams == nil {
 		ebipurego.RegisterLibFunc(&_fnMPSFindIntegerDivisionParams, _lib, "MPSFindIntegerDivisionParams")
@@ -35,10 +35,10 @@ func MPSFindIntegerDivisionParams(divisor uint16) unsafe.Pointer {
 	return _fnMPSFindIntegerDivisionParams(divisor)
 }
 
-var _fnMPSGetCustomKernelBatchedDestinationIndex func(unsafe.Pointer) int
+var _fnMPSGetCustomKernelBatchedDestinationIndex func(MPSCustomKernelArgumentCount) int
 
 // MPSGetCustomKernelBatchedDestinationIndex calls the MPSCore framework function MPSGetCustomKernelBatchedDestinationIndex.
-func MPSGetCustomKernelBatchedDestinationIndex(c unsafe.Pointer) int {
+func MPSGetCustomKernelBatchedDestinationIndex(c MPSCustomKernelArgumentCount) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMPSGetCustomKernelBatchedDestinationIndex == nil {
 		ebipurego.RegisterLibFunc(&_fnMPSGetCustomKernelBatchedDestinationIndex, _lib, "MPSGetCustomKernelBatchedDestinationIndex")
@@ -46,10 +46,10 @@ func MPSGetCustomKernelBatchedDestinationIndex(c unsafe.Pointer) int {
 	return _fnMPSGetCustomKernelBatchedDestinationIndex(c)
 }
 
-var _fnMPSGetCustomKernelBatchedSourceIndex func(unsafe.Pointer, int, int) int
+var _fnMPSGetCustomKernelBatchedSourceIndex func(MPSCustomKernelArgumentCount, int, int) int
 
 // MPSGetCustomKernelBatchedSourceIndex calls the MPSCore framework function MPSGetCustomKernelBatchedSourceIndex.
-func MPSGetCustomKernelBatchedSourceIndex(c unsafe.Pointer, sourceIndex int, mpsMaxTextures int) int {
+func MPSGetCustomKernelBatchedSourceIndex(c MPSCustomKernelArgumentCount, sourceIndex int, mpsMaxTextures int) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMPSGetCustomKernelBatchedSourceIndex == nil {
 		ebipurego.RegisterLibFunc(&_fnMPSGetCustomKernelBatchedSourceIndex, _lib, "MPSGetCustomKernelBatchedSourceIndex")
@@ -57,10 +57,10 @@ func MPSGetCustomKernelBatchedSourceIndex(c unsafe.Pointer, sourceIndex int, mps
 	return _fnMPSGetCustomKernelBatchedSourceIndex(c, sourceIndex, mpsMaxTextures)
 }
 
-var _fnMPSGetCustomKernelBroadcastSourceIndex func(unsafe.Pointer, int, int) int
+var _fnMPSGetCustomKernelBroadcastSourceIndex func(MPSCustomKernelArgumentCount, int, int) int
 
 // MPSGetCustomKernelBroadcastSourceIndex calls the MPSCore framework function MPSGetCustomKernelBroadcastSourceIndex.
-func MPSGetCustomKernelBroadcastSourceIndex(c unsafe.Pointer, sourceIndex int, mpsMaxTextures int) int {
+func MPSGetCustomKernelBroadcastSourceIndex(c MPSCustomKernelArgumentCount, sourceIndex int, mpsMaxTextures int) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMPSGetCustomKernelBroadcastSourceIndex == nil {
 		ebipurego.RegisterLibFunc(&_fnMPSGetCustomKernelBroadcastSourceIndex, _lib, "MPSGetCustomKernelBroadcastSourceIndex")
@@ -68,10 +68,10 @@ func MPSGetCustomKernelBroadcastSourceIndex(c unsafe.Pointer, sourceIndex int, m
 	return _fnMPSGetCustomKernelBroadcastSourceIndex(c, sourceIndex, mpsMaxTextures)
 }
 
-var _fnMPSGetCustomKernelMaxBatchSize func(unsafe.Pointer, int) int
+var _fnMPSGetCustomKernelMaxBatchSize func(MPSCustomKernelArgumentCount, int) int
 
 // MPSGetCustomKernelMaxBatchSize calls the MPSCore framework function MPSGetCustomKernelMaxBatchSize.
-func MPSGetCustomKernelMaxBatchSize(c unsafe.Pointer, mpsMaxTextures int) int {
+func MPSGetCustomKernelMaxBatchSize(c MPSCustomKernelArgumentCount, mpsMaxTextures int) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMPSGetCustomKernelMaxBatchSize == nil {
 		ebipurego.RegisterLibFunc(&_fnMPSGetCustomKernelMaxBatchSize, _lib, "MPSGetCustomKernelMaxBatchSize")

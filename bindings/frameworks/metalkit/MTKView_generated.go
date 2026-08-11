@@ -9,7 +9,6 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -115,7 +114,7 @@ func (v_ *View) WithSampleCount(sampleCount int) *View {
 }
 
 // WithClearColor sets the color to use to clear the color target when creating a render pass descriptor.
-func (v_ *View) WithClearColor(clearColor metal.MTLClearColor) *View {
+func (v_ *View) WithClearColor(clearColor MTLClearColor) *View {
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setClearColor:"), clearColor)
 	})
@@ -248,12 +247,12 @@ func (v_ *View) SampleCount() int {
 }
 
 // ClearColor returns the clear color value used to generate the currentRenderPassDescriptor This defaults to (0.0, 0.0, 0.0, 1.0)
-func (v_ *View) ClearColor() metal.MTLClearColor {
+func (v_ *View) ClearColor() MTLClearColor {
 	defer runtime.KeepAlive(v_)
-	var _mainthread0 metal.MTLClearColor
+	var _mainthread0 MTLClearColor
 	purego.Main(func() {
-		_mainthread0 = func() metal.MTLClearColor {
-			_r := objc.Send[metal.MTLClearColor](objref.IDOf(v_), objc.RegisterName("clearColor"))
+		_mainthread0 = func() MTLClearColor {
+			_r := objc.Send[MTLClearColor](objref.IDOf(v_), objc.RegisterName("clearColor"))
 			return _r
 		}()
 	})
@@ -408,7 +407,7 @@ func (v_ *View) Colorspace() coregraphics.CGColorSpaceRef {
 	purego.Main(func() {
 		_mainthread0 = func() coregraphics.CGColorSpaceRef {
 			_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("colorspace"))
-			return coregraphics.CGColorSpaceRef{obj.Wrap(_r)}
+			return coregraphics.CGColorSpaceRef{Object: obj.Wrap(_r)}
 		}()
 	})
 	return _mainthread0

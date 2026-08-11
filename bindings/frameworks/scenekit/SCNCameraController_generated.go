@@ -102,9 +102,21 @@ func (cc *CameraController) WithInteractionMode(interactionMode InteractionMode)
 	return cc
 }
 
+// WithTarget sets the target.
+func (cc *CameraController) WithTarget(target SCNVector3) *CameraController {
+	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setTarget:"), target)
+	return cc
+}
+
 // WithAutomaticTarget sets the automatic target.
 func (cc *CameraController) WithAutomaticTarget(automaticTarget bool) *CameraController {
 	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setAutomaticTarget:"), automaticTarget)
+	return cc
+}
+
+// WithWorldUp sets the world up.
+func (cc *CameraController) WithWorldUp(worldUp SCNVector3) *CameraController {
+	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setWorldUp:"), worldUp)
 	return cc
 }
 
@@ -230,10 +242,24 @@ func (cc *CameraController) InteractionMode() InteractionMode {
 	return _r
 }
 
+// Target returns the target.
+func (cc *CameraController) Target() SCNVector3 {
+	defer runtime.KeepAlive(cc)
+	_r := objc.Send[SCNVector3](objref.IDOf(cc), objc.RegisterName("target"))
+	return _r
+}
+
 // AutomaticTarget wraps the corresponding Objective-C method.
 func (cc *CameraController) AutomaticTarget() bool {
 	defer runtime.KeepAlive(cc)
 	_r := objc.Send[bool](objref.IDOf(cc), objc.RegisterName("automaticTarget"))
+	return _r
+}
+
+// WorldUp returns the world up.
+func (cc *CameraController) WorldUp() SCNVector3 {
+	defer runtime.KeepAlive(cc)
+	_r := objc.Send[SCNVector3](objref.IDOf(cc), objc.RegisterName("worldUp"))
 	return _r
 }
 

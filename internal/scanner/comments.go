@@ -20,11 +20,11 @@ var entitlementRe = regexp.MustCompile(`"(com\.apple\.(?:developer|security|vm)\
 
 // fileInfo holds the per-file parsed data extracted from a single header scan.
 type fileInfo struct {
-	docs         map[int]string            // 1-indexed line → doc comment text
+	docs         map[int]string                             // 1-indexed line → doc comment text
 	avails       map[int]macosplatformmetadata.Availability // 1-indexed line → availability annotation on that line
-	entitlements map[int][]string          // 1-indexed line → entitlement keys found in preceding doc block
-	optionalAt   map[int]bool              // 1-indexed line → true when inside an @optional protocol section
-	mainThreadAt map[int]bool              // 1-indexed line → true when NS_SWIFT_UI_ACTOR appears on that line
+	entitlements map[int][]string                           // 1-indexed line → entitlement keys found in preceding doc block
+	optionalAt   map[int]bool                               // 1-indexed line → true when inside an @optional protocol section
+	mainThreadAt map[int]bool                               // 1-indexed line → true when NS_SWIFT_UI_ACTOR appears on that line
 }
 
 // fileCache caches parsed file info keyed by absolute path.
@@ -132,9 +132,9 @@ func parseHeaderFile(path string) (*fileInfo, error) {
 
 	type lineKind int
 	const (
-		kindCode    lineKind = iota
-		kindComment          // /// or /*! */ or /** */  — contributes to docs
-		kindAnyComment       // plain /* */ — contributes to entitlement scan but not docs
+		kindCode       lineKind = iota
+		kindComment             // /// or /*! */ or /** */  — contributes to docs
+		kindAnyComment          // plain /* */ — contributes to entitlement scan but not docs
 		kindBlank
 	)
 

@@ -24,7 +24,7 @@ func SCBondInterfaceCopyAll(prefs SCPreferencesRef) corefoundation.CFArrayRef {
 		ebipurego.RegisterLibFunc(&_fnSCBondInterfaceCopyAll, _lib, "SCBondInterfaceCopyAll")
 	}
 	_ret := _fnSCBondInterfaceCopyAll(objref.IDOf(prefs.Object))
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSCBondInterfaceCopyAvailableMemberInterfaces func(objc.ID) objc.ID
@@ -36,7 +36,7 @@ func SCBondInterfaceCopyAvailableMemberInterfaces(prefs SCPreferencesRef) corefo
 		ebipurego.RegisterLibFunc(&_fnSCBondInterfaceCopyAvailableMemberInterfaces, _lib, "SCBondInterfaceCopyAvailableMemberInterfaces")
 	}
 	_ret := _fnSCBondInterfaceCopyAvailableMemberInterfaces(objref.IDOf(prefs.Object))
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSCBondInterfaceCopyStatus func(unsafe.Pointer) objc.ID
@@ -48,7 +48,7 @@ func SCBondInterfaceCopyStatus(bond unsafe.Pointer) SCBondStatusRef {
 		ebipurego.RegisterLibFunc(&_fnSCBondInterfaceCopyStatus, _lib, "SCBondInterfaceCopyStatus")
 	}
 	_ret := _fnSCBondInterfaceCopyStatus(bond)
-	return SCBondStatusRef{obj.Adopt(_ret)}
+	return SCBondStatusRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSCBondInterfaceCreate func(objc.ID) unsafe.Pointer
@@ -71,7 +71,7 @@ func SCBondInterfaceGetMemberInterfaces(bond unsafe.Pointer) corefoundation.CFAr
 		ebipurego.RegisterLibFunc(&_fnSCBondInterfaceGetMemberInterfaces, _lib, "SCBondInterfaceGetMemberInterfaces")
 	}
 	_ret := _fnSCBondInterfaceGetMemberInterfaces(bond)
-	return corefoundation.CFArrayRef{obj.Wrap(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSCBondInterfaceGetOptions func(unsafe.Pointer) objc.ID
@@ -83,7 +83,7 @@ func SCBondInterfaceGetOptions(bond unsafe.Pointer) corefoundation.CFDictionaryR
 		ebipurego.RegisterLibFunc(&_fnSCBondInterfaceGetOptions, _lib, "SCBondInterfaceGetOptions")
 	}
 	_ret := _fnSCBondInterfaceGetOptions(bond)
-	return corefoundation.CFDictionaryRef{obj.Wrap(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSCBondInterfaceRemove func(unsafe.Pointer) uint8
@@ -139,7 +139,7 @@ func SCBondStatusGetInterfaceStatus(bondStatus SCBondStatusRef, interface_ SCNet
 		ebipurego.RegisterLibFunc(&_fnSCBondStatusGetInterfaceStatus, _lib, "SCBondStatusGetInterfaceStatus")
 	}
 	_ret := _fnSCBondStatusGetInterfaceStatus(objref.IDOf(bondStatus.Object), objref.IDOf(interface_.Object))
-	return corefoundation.CFDictionaryRef{obj.Wrap(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSCBondStatusGetMemberInterfaces func(objc.ID) objc.ID
@@ -151,7 +151,7 @@ func SCBondStatusGetMemberInterfaces(bondStatus SCBondStatusRef) corefoundation.
 		ebipurego.RegisterLibFunc(&_fnSCBondStatusGetMemberInterfaces, _lib, "SCBondStatusGetMemberInterfaces")
 	}
 	_ret := _fnSCBondStatusGetMemberInterfaces(objref.IDOf(bondStatus.Object))
-	return corefoundation.CFArrayRef{obj.Wrap(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSCBondStatusGetTypeID func() int
@@ -174,7 +174,7 @@ func SCCopyLastError() corefoundation.CFErrorRef {
 		ebipurego.RegisterLibFunc(&_fnSCCopyLastError, _lib, "SCCopyLastError")
 	}
 	_ret := _fnSCCopyLastError()
-	return corefoundation.CFErrorRef{obj.Adopt(_ret)}
+	return corefoundation.CFErrorRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSCDynamicStoreAddTemporaryValue func(objc.ID, objc.ID, objc.ID) uint8
@@ -209,7 +209,7 @@ func SCDynamicStoreCopyComputerName(store SCDynamicStoreRef) (result corefoundat
 	}
 	var _out0 int
 	_ret := _fnSCDynamicStoreCopyComputerName(objref.IDOf(store.Object), unsafe.Pointer(&_out0))
-	return corefoundation.CFStringRef{obj.Adopt(_ret)}, _out0
+	return corefoundation.CFStringRef{Object: obj.Adopt(_ret)}, _out0
 }
 
 var _fnSCDynamicStoreCopyConsoleUser func(objc.ID, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -223,7 +223,7 @@ func SCDynamicStoreCopyConsoleUser(store SCDynamicStoreRef) (result corefoundati
 	var _out0 int
 	var _out1 int
 	_ret := _fnSCDynamicStoreCopyConsoleUser(objref.IDOf(store.Object), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
-	return corefoundation.CFStringRef{obj.Adopt(_ret)}, _out0, _out1
+	return corefoundation.CFStringRef{Object: obj.Adopt(_ret)}, _out0, _out1
 }
 
 var _fnSCDynamicStoreCopyKeyList func(objc.ID, objc.ID) objc.ID
@@ -235,7 +235,7 @@ func SCDynamicStoreCopyKeyList(store SCDynamicStoreRef, pattern corefoundation.C
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreCopyKeyList, _lib, "SCDynamicStoreCopyKeyList")
 	}
 	_ret := _fnSCDynamicStoreCopyKeyList(objref.IDOf(store.Object), objref.IDOf(pattern.Object))
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSCDynamicStoreCopyLocalHostName func(objc.ID) objc.ID
@@ -247,7 +247,7 @@ func SCDynamicStoreCopyLocalHostName(store SCDynamicStoreRef) corefoundation.CFS
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreCopyLocalHostName, _lib, "SCDynamicStoreCopyLocalHostName")
 	}
 	_ret := _fnSCDynamicStoreCopyLocalHostName(objref.IDOf(store.Object))
-	return corefoundation.CFStringRef{obj.Adopt(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSCDynamicStoreCopyLocation func(objc.ID) objc.ID
@@ -259,7 +259,7 @@ func SCDynamicStoreCopyLocation(store SCDynamicStoreRef) corefoundation.CFString
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreCopyLocation, _lib, "SCDynamicStoreCopyLocation")
 	}
 	_ret := _fnSCDynamicStoreCopyLocation(objref.IDOf(store.Object))
-	return corefoundation.CFStringRef{obj.Adopt(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSCDynamicStoreCopyMultiple func(objc.ID, objc.ID, objc.ID) objc.ID
@@ -271,7 +271,7 @@ func SCDynamicStoreCopyMultiple(store SCDynamicStoreRef, keys corefoundation.CFA
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreCopyMultiple, _lib, "SCDynamicStoreCopyMultiple")
 	}
 	_ret := _fnSCDynamicStoreCopyMultiple(objref.IDOf(store.Object), objref.IDOf(keys.Object), objref.IDOf(patterns.Object))
-	return corefoundation.CFDictionaryRef{obj.Adopt(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSCDynamicStoreCopyNotifiedKeys func(objc.ID) objc.ID
@@ -283,7 +283,7 @@ func SCDynamicStoreCopyNotifiedKeys(store SCDynamicStoreRef) corefoundation.CFAr
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreCopyNotifiedKeys, _lib, "SCDynamicStoreCopyNotifiedKeys")
 	}
 	_ret := _fnSCDynamicStoreCopyNotifiedKeys(objref.IDOf(store.Object))
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSCDynamicStoreCopyProxies func(objc.ID) objc.ID
@@ -295,7 +295,7 @@ func SCDynamicStoreCopyProxies(store SCDynamicStoreRef) corefoundation.CFDiction
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreCopyProxies, _lib, "SCDynamicStoreCopyProxies")
 	}
 	_ret := _fnSCDynamicStoreCopyProxies(objref.IDOf(store.Object))
-	return corefoundation.CFDictionaryRef{obj.Adopt(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSCDynamicStoreCopyValue func(objc.ID, objc.ID) objc.ID
@@ -307,7 +307,7 @@ func SCDynamicStoreCopyValue(store SCDynamicStoreRef, key corefoundation.CFStrin
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreCopyValue, _lib, "SCDynamicStoreCopyValue")
 	}
 	_ret := _fnSCDynamicStoreCopyValue(objref.IDOf(store.Object), objref.IDOf(key.Object))
-	return corefoundation.CFPropertyListRef{obj.Adopt(_ret)}
+	return corefoundation.CFPropertyListRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSCDynamicStoreCreate func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -319,7 +319,7 @@ func SCDynamicStoreCreate(allocator corefoundation.CFAllocatorRef, name corefoun
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreCreate, _lib, "SCDynamicStoreCreate")
 	}
 	_ret := _fnSCDynamicStoreCreate(objref.IDOf(allocator.Object), objref.IDOf(name.Object), callout, context_)
-	return SCDynamicStoreRef{obj.Adopt(_ret)}
+	return SCDynamicStoreRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSCDynamicStoreCreateRunLoopSource func(objc.ID, objc.ID, int) objc.ID
@@ -331,7 +331,7 @@ func SCDynamicStoreCreateRunLoopSource(allocator corefoundation.CFAllocatorRef, 
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreCreateRunLoopSource, _lib, "SCDynamicStoreCreateRunLoopSource")
 	}
 	_ret := _fnSCDynamicStoreCreateRunLoopSource(objref.IDOf(allocator.Object), objref.IDOf(store.Object), order)
-	return corefoundation.CFRunLoopSourceRef{obj.Adopt(_ret)}
+	return corefoundation.CFRunLoopSourceRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSCDynamicStoreCreateWithOptions func(objc.ID, objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -343,7 +343,7 @@ func SCDynamicStoreCreateWithOptions(allocator corefoundation.CFAllocatorRef, na
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreCreateWithOptions, _lib, "SCDynamicStoreCreateWithOptions")
 	}
 	_ret := _fnSCDynamicStoreCreateWithOptions(objref.IDOf(allocator.Object), objref.IDOf(name.Object), objref.IDOf(storeOptions.Object), callout, context_)
-	return SCDynamicStoreRef{obj.Adopt(_ret)}
+	return SCDynamicStoreRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSCDynamicStoreGetTypeID func() int
@@ -366,7 +366,7 @@ func SCDynamicStoreKeyCreateComputerName(allocator corefoundation.CFAllocatorRef
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreKeyCreateComputerName, _lib, "SCDynamicStoreKeyCreateComputerName")
 	}
 	_ret := _fnSCDynamicStoreKeyCreateComputerName(objref.IDOf(allocator.Object))
-	return corefoundation.CFStringRef{obj.Adopt(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSCDynamicStoreKeyCreateConsoleUser func(objc.ID) objc.ID
@@ -378,7 +378,7 @@ func SCDynamicStoreKeyCreateConsoleUser(allocator corefoundation.CFAllocatorRef)
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreKeyCreateConsoleUser, _lib, "SCDynamicStoreKeyCreateConsoleUser")
 	}
 	_ret := _fnSCDynamicStoreKeyCreateConsoleUser(objref.IDOf(allocator.Object))
-	return corefoundation.CFStringRef{obj.Adopt(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSCDynamicStoreKeyCreateHostNames func(objc.ID) objc.ID
@@ -390,7 +390,7 @@ func SCDynamicStoreKeyCreateHostNames(allocator corefoundation.CFAllocatorRef) c
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreKeyCreateHostNames, _lib, "SCDynamicStoreKeyCreateHostNames")
 	}
 	_ret := _fnSCDynamicStoreKeyCreateHostNames(objref.IDOf(allocator.Object))
-	return corefoundation.CFStringRef{obj.Adopt(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSCDynamicStoreKeyCreateLocation func(objc.ID) objc.ID
@@ -402,7 +402,7 @@ func SCDynamicStoreKeyCreateLocation(allocator corefoundation.CFAllocatorRef) co
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreKeyCreateLocation, _lib, "SCDynamicStoreKeyCreateLocation")
 	}
 	_ret := _fnSCDynamicStoreKeyCreateLocation(objref.IDOf(allocator.Object))
-	return corefoundation.CFStringRef{obj.Adopt(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSCDynamicStoreKeyCreateNetworkGlobalEntity func(objc.ID, objc.ID, objc.ID) objc.ID
@@ -414,7 +414,7 @@ func SCDynamicStoreKeyCreateNetworkGlobalEntity(allocator corefoundation.CFAlloc
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreKeyCreateNetworkGlobalEntity, _lib, "SCDynamicStoreKeyCreateNetworkGlobalEntity")
 	}
 	_ret := _fnSCDynamicStoreKeyCreateNetworkGlobalEntity(objref.IDOf(allocator.Object), objref.IDOf(domain.Object), objref.IDOf(entity.Object))
-	return corefoundation.CFStringRef{obj.Adopt(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSCDynamicStoreKeyCreateNetworkInterface func(objc.ID, objc.ID) objc.ID
@@ -426,7 +426,7 @@ func SCDynamicStoreKeyCreateNetworkInterface(allocator corefoundation.CFAllocato
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreKeyCreateNetworkInterface, _lib, "SCDynamicStoreKeyCreateNetworkInterface")
 	}
 	_ret := _fnSCDynamicStoreKeyCreateNetworkInterface(objref.IDOf(allocator.Object), objref.IDOf(domain.Object))
-	return corefoundation.CFStringRef{obj.Adopt(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSCDynamicStoreKeyCreateNetworkInterfaceEntity func(objc.ID, objc.ID, objc.ID, objc.ID) objc.ID
@@ -438,7 +438,7 @@ func SCDynamicStoreKeyCreateNetworkInterfaceEntity(allocator corefoundation.CFAl
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreKeyCreateNetworkInterfaceEntity, _lib, "SCDynamicStoreKeyCreateNetworkInterfaceEntity")
 	}
 	_ret := _fnSCDynamicStoreKeyCreateNetworkInterfaceEntity(objref.IDOf(allocator.Object), objref.IDOf(domain.Object), objref.IDOf(ifname.Object), objref.IDOf(entity.Object))
-	return corefoundation.CFStringRef{obj.Adopt(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSCDynamicStoreKeyCreateNetworkServiceEntity func(objc.ID, objc.ID, objc.ID, objc.ID) objc.ID
@@ -450,7 +450,7 @@ func SCDynamicStoreKeyCreateNetworkServiceEntity(allocator corefoundation.CFAllo
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreKeyCreateNetworkServiceEntity, _lib, "SCDynamicStoreKeyCreateNetworkServiceEntity")
 	}
 	_ret := _fnSCDynamicStoreKeyCreateNetworkServiceEntity(objref.IDOf(allocator.Object), objref.IDOf(domain.Object), objref.IDOf(serviceID.Object), objref.IDOf(entity.Object))
-	return corefoundation.CFStringRef{obj.Adopt(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSCDynamicStoreKeyCreateProxies func(objc.ID) objc.ID
@@ -462,7 +462,7 @@ func SCDynamicStoreKeyCreateProxies(allocator corefoundation.CFAllocatorRef) cor
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreKeyCreateProxies, _lib, "SCDynamicStoreKeyCreateProxies")
 	}
 	_ret := _fnSCDynamicStoreKeyCreateProxies(objref.IDOf(allocator.Object))
-	return corefoundation.CFStringRef{obj.Adopt(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSCDynamicStoreNotifyValue func(objc.ID, objc.ID) uint8
@@ -588,7 +588,7 @@ func SCNetworkConnectionCopyExtendedStatus(connection SCNetworkConnectionRef) co
 		ebipurego.RegisterLibFunc(&_fnSCNetworkConnectionCopyExtendedStatus, _lib, "SCNetworkConnectionCopyExtendedStatus")
 	}
 	_ret := _fnSCNetworkConnectionCopyExtendedStatus(objref.IDOf(connection.Object))
-	return corefoundation.CFDictionaryRef{obj.Adopt(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSCNetworkConnectionCopyServiceID func(objc.ID) objc.ID
@@ -600,7 +600,7 @@ func SCNetworkConnectionCopyServiceID(connection SCNetworkConnectionRef) corefou
 		ebipurego.RegisterLibFunc(&_fnSCNetworkConnectionCopyServiceID, _lib, "SCNetworkConnectionCopyServiceID")
 	}
 	_ret := _fnSCNetworkConnectionCopyServiceID(objref.IDOf(connection.Object))
-	return corefoundation.CFStringRef{obj.Adopt(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSCNetworkConnectionCopyStatistics func(objc.ID) objc.ID
@@ -612,7 +612,7 @@ func SCNetworkConnectionCopyStatistics(connection SCNetworkConnectionRef) corefo
 		ebipurego.RegisterLibFunc(&_fnSCNetworkConnectionCopyStatistics, _lib, "SCNetworkConnectionCopyStatistics")
 	}
 	_ret := _fnSCNetworkConnectionCopyStatistics(objref.IDOf(connection.Object))
-	return corefoundation.CFDictionaryRef{obj.Adopt(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSCNetworkConnectionCopyUserOptions func(objc.ID) objc.ID
@@ -624,7 +624,7 @@ func SCNetworkConnectionCopyUserOptions(connection SCNetworkConnectionRef) coref
 		ebipurego.RegisterLibFunc(&_fnSCNetworkConnectionCopyUserOptions, _lib, "SCNetworkConnectionCopyUserOptions")
 	}
 	_ret := _fnSCNetworkConnectionCopyUserOptions(objref.IDOf(connection.Object))
-	return corefoundation.CFDictionaryRef{obj.Adopt(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSCNetworkConnectionCopyUserPreferences func(objc.ID, unsafe.Pointer, unsafe.Pointer) uint8
@@ -647,7 +647,7 @@ func SCNetworkConnectionCreateWithServiceID(allocator corefoundation.CFAllocator
 		ebipurego.RegisterLibFunc(&_fnSCNetworkConnectionCreateWithServiceID, _lib, "SCNetworkConnectionCreateWithServiceID")
 	}
 	_ret := _fnSCNetworkConnectionCreateWithServiceID(objref.IDOf(allocator.Object), objref.IDOf(serviceID.Object), callout, context_)
-	return SCNetworkConnectionRef{obj.Adopt(_ret)}
+	return SCNetworkConnectionRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSCNetworkConnectionGetStatus func(objc.ID) SCNetworkConnectionStatus
@@ -736,7 +736,7 @@ func SCNetworkInterfaceCopyAll() corefoundation.CFArrayRef {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkInterfaceCopyAll, _lib, "SCNetworkInterfaceCopyAll")
 	}
 	_ret := _fnSCNetworkInterfaceCopyAll()
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSCNetworkInterfaceCopyMTU func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
@@ -774,7 +774,7 @@ func SCNetworkInterfaceCopyMediaSubTypeOptions(available corefoundation.CFArrayR
 		ebipurego.RegisterLibFunc(&_fnSCNetworkInterfaceCopyMediaSubTypeOptions, _lib, "SCNetworkInterfaceCopyMediaSubTypeOptions")
 	}
 	_ret := _fnSCNetworkInterfaceCopyMediaSubTypeOptions(objref.IDOf(available.Object), objref.IDOf(subType.Object))
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSCNetworkInterfaceCopyMediaSubTypes func(objc.ID) objc.ID
@@ -786,7 +786,7 @@ func SCNetworkInterfaceCopyMediaSubTypes(available corefoundation.CFArrayRef) co
 		ebipurego.RegisterLibFunc(&_fnSCNetworkInterfaceCopyMediaSubTypes, _lib, "SCNetworkInterfaceCopyMediaSubTypes")
 	}
 	_ret := _fnSCNetworkInterfaceCopyMediaSubTypes(objref.IDOf(available.Object))
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSCNetworkInterfaceCreateWithInterface func(objc.ID, objc.ID) objc.ID
@@ -798,7 +798,7 @@ func SCNetworkInterfaceCreateWithInterface(interface_ SCNetworkInterfaceRef, int
 		ebipurego.RegisterLibFunc(&_fnSCNetworkInterfaceCreateWithInterface, _lib, "SCNetworkInterfaceCreateWithInterface")
 	}
 	_ret := _fnSCNetworkInterfaceCreateWithInterface(objref.IDOf(interface_.Object), objref.IDOf(interfaceType.Object))
-	return SCNetworkInterfaceRef{obj.Adopt(_ret)}
+	return SCNetworkInterfaceRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSCNetworkInterfaceForceConfigurationRefresh func(objc.ID) uint8
@@ -821,7 +821,7 @@ func SCNetworkInterfaceGetBSDName(interface_ SCNetworkInterfaceRef) corefoundati
 		ebipurego.RegisterLibFunc(&_fnSCNetworkInterfaceGetBSDName, _lib, "SCNetworkInterfaceGetBSDName")
 	}
 	_ret := _fnSCNetworkInterfaceGetBSDName(objref.IDOf(interface_.Object))
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSCNetworkInterfaceGetConfiguration func(objc.ID) objc.ID
@@ -833,7 +833,7 @@ func SCNetworkInterfaceGetConfiguration(interface_ SCNetworkInterfaceRef) corefo
 		ebipurego.RegisterLibFunc(&_fnSCNetworkInterfaceGetConfiguration, _lib, "SCNetworkInterfaceGetConfiguration")
 	}
 	_ret := _fnSCNetworkInterfaceGetConfiguration(objref.IDOf(interface_.Object))
-	return corefoundation.CFDictionaryRef{obj.Wrap(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSCNetworkInterfaceGetExtendedConfiguration func(objc.ID, objc.ID) objc.ID
@@ -845,7 +845,7 @@ func SCNetworkInterfaceGetExtendedConfiguration(interface_ SCNetworkInterfaceRef
 		ebipurego.RegisterLibFunc(&_fnSCNetworkInterfaceGetExtendedConfiguration, _lib, "SCNetworkInterfaceGetExtendedConfiguration")
 	}
 	_ret := _fnSCNetworkInterfaceGetExtendedConfiguration(objref.IDOf(interface_.Object), objref.IDOf(extendedType.Object))
-	return corefoundation.CFDictionaryRef{obj.Wrap(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSCNetworkInterfaceGetHardwareAddressString func(objc.ID) objc.ID
@@ -857,7 +857,7 @@ func SCNetworkInterfaceGetHardwareAddressString(interface_ SCNetworkInterfaceRef
 		ebipurego.RegisterLibFunc(&_fnSCNetworkInterfaceGetHardwareAddressString, _lib, "SCNetworkInterfaceGetHardwareAddressString")
 	}
 	_ret := _fnSCNetworkInterfaceGetHardwareAddressString(objref.IDOf(interface_.Object))
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSCNetworkInterfaceGetInterface func(objc.ID) objc.ID
@@ -869,7 +869,7 @@ func SCNetworkInterfaceGetInterface(interface_ SCNetworkInterfaceRef) SCNetworkI
 		ebipurego.RegisterLibFunc(&_fnSCNetworkInterfaceGetInterface, _lib, "SCNetworkInterfaceGetInterface")
 	}
 	_ret := _fnSCNetworkInterfaceGetInterface(objref.IDOf(interface_.Object))
-	return SCNetworkInterfaceRef{obj.Wrap(_ret)}
+	return SCNetworkInterfaceRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSCNetworkInterfaceGetInterfaceType func(objc.ID) objc.ID
@@ -881,7 +881,7 @@ func SCNetworkInterfaceGetInterfaceType(interface_ SCNetworkInterfaceRef) corefo
 		ebipurego.RegisterLibFunc(&_fnSCNetworkInterfaceGetInterfaceType, _lib, "SCNetworkInterfaceGetInterfaceType")
 	}
 	_ret := _fnSCNetworkInterfaceGetInterfaceType(objref.IDOf(interface_.Object))
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSCNetworkInterfaceGetLocalizedDisplayName func(objc.ID) objc.ID
@@ -893,7 +893,7 @@ func SCNetworkInterfaceGetLocalizedDisplayName(interface_ SCNetworkInterfaceRef)
 		ebipurego.RegisterLibFunc(&_fnSCNetworkInterfaceGetLocalizedDisplayName, _lib, "SCNetworkInterfaceGetLocalizedDisplayName")
 	}
 	_ret := _fnSCNetworkInterfaceGetLocalizedDisplayName(objref.IDOf(interface_.Object))
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSCNetworkInterfaceGetSupportedInterfaceTypes func(objc.ID) objc.ID
@@ -905,7 +905,7 @@ func SCNetworkInterfaceGetSupportedInterfaceTypes(interface_ SCNetworkInterfaceR
 		ebipurego.RegisterLibFunc(&_fnSCNetworkInterfaceGetSupportedInterfaceTypes, _lib, "SCNetworkInterfaceGetSupportedInterfaceTypes")
 	}
 	_ret := _fnSCNetworkInterfaceGetSupportedInterfaceTypes(objref.IDOf(interface_.Object))
-	return corefoundation.CFArrayRef{obj.Wrap(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSCNetworkInterfaceGetSupportedProtocolTypes func(objc.ID) objc.ID
@@ -917,7 +917,7 @@ func SCNetworkInterfaceGetSupportedProtocolTypes(interface_ SCNetworkInterfaceRe
 		ebipurego.RegisterLibFunc(&_fnSCNetworkInterfaceGetSupportedProtocolTypes, _lib, "SCNetworkInterfaceGetSupportedProtocolTypes")
 	}
 	_ret := _fnSCNetworkInterfaceGetSupportedProtocolTypes(objref.IDOf(interface_.Object))
-	return corefoundation.CFArrayRef{obj.Wrap(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSCNetworkInterfaceGetTypeID func() int
@@ -995,7 +995,7 @@ func SCNetworkProtocolGetConfiguration(protocol SCNetworkProtocolRef) corefounda
 		ebipurego.RegisterLibFunc(&_fnSCNetworkProtocolGetConfiguration, _lib, "SCNetworkProtocolGetConfiguration")
 	}
 	_ret := _fnSCNetworkProtocolGetConfiguration(objref.IDOf(protocol.Object))
-	return corefoundation.CFDictionaryRef{obj.Wrap(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSCNetworkProtocolGetEnabled func(objc.ID) uint8
@@ -1018,7 +1018,7 @@ func SCNetworkProtocolGetProtocolType(protocol SCNetworkProtocolRef) corefoundat
 		ebipurego.RegisterLibFunc(&_fnSCNetworkProtocolGetProtocolType, _lib, "SCNetworkProtocolGetProtocolType")
 	}
 	_ret := _fnSCNetworkProtocolGetProtocolType(objref.IDOf(protocol.Object))
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSCNetworkProtocolGetTypeID func() int
@@ -1063,7 +1063,7 @@ func SCNetworkReachabilityCreateWithAddress(allocator corefoundation.CFAllocator
 		ebipurego.RegisterLibFunc(&_fnSCNetworkReachabilityCreateWithAddress, _lib, "SCNetworkReachabilityCreateWithAddress")
 	}
 	_ret := _fnSCNetworkReachabilityCreateWithAddress(objref.IDOf(allocator.Object), address)
-	return SCNetworkReachabilityRef{obj.Adopt(_ret)}
+	return SCNetworkReachabilityRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSCNetworkReachabilityCreateWithAddressPair func(objc.ID, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -1075,7 +1075,7 @@ func SCNetworkReachabilityCreateWithAddressPair(allocator corefoundation.CFAlloc
 		ebipurego.RegisterLibFunc(&_fnSCNetworkReachabilityCreateWithAddressPair, _lib, "SCNetworkReachabilityCreateWithAddressPair")
 	}
 	_ret := _fnSCNetworkReachabilityCreateWithAddressPair(objref.IDOf(allocator.Object), localAddress, remoteAddress)
-	return SCNetworkReachabilityRef{obj.Adopt(_ret)}
+	return SCNetworkReachabilityRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSCNetworkReachabilityCreateWithName func(objc.ID, string) objc.ID
@@ -1087,7 +1087,7 @@ func SCNetworkReachabilityCreateWithName(allocator corefoundation.CFAllocatorRef
 		ebipurego.RegisterLibFunc(&_fnSCNetworkReachabilityCreateWithName, _lib, "SCNetworkReachabilityCreateWithName")
 	}
 	_ret := _fnSCNetworkReachabilityCreateWithName(objref.IDOf(allocator.Object), nodename)
-	return SCNetworkReachabilityRef{obj.Adopt(_ret)}
+	return SCNetworkReachabilityRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSCNetworkReachabilityGetFlags func(objc.ID, unsafe.Pointer) uint8
@@ -1178,7 +1178,7 @@ func SCNetworkServiceCopy(prefs SCPreferencesRef, serviceID corefoundation.CFStr
 		ebipurego.RegisterLibFunc(&_fnSCNetworkServiceCopy, _lib, "SCNetworkServiceCopy")
 	}
 	_ret := _fnSCNetworkServiceCopy(objref.IDOf(prefs.Object), objref.IDOf(serviceID.Object))
-	return SCNetworkServiceRef{obj.Adopt(_ret)}
+	return SCNetworkServiceRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSCNetworkServiceCopyAll func(objc.ID) objc.ID
@@ -1190,7 +1190,7 @@ func SCNetworkServiceCopyAll(prefs SCPreferencesRef) corefoundation.CFArrayRef {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkServiceCopyAll, _lib, "SCNetworkServiceCopyAll")
 	}
 	_ret := _fnSCNetworkServiceCopyAll(objref.IDOf(prefs.Object))
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSCNetworkServiceCopyProtocol func(objc.ID, objc.ID) objc.ID
@@ -1202,7 +1202,7 @@ func SCNetworkServiceCopyProtocol(service SCNetworkServiceRef, protocolType core
 		ebipurego.RegisterLibFunc(&_fnSCNetworkServiceCopyProtocol, _lib, "SCNetworkServiceCopyProtocol")
 	}
 	_ret := _fnSCNetworkServiceCopyProtocol(objref.IDOf(service.Object), objref.IDOf(protocolType.Object))
-	return SCNetworkProtocolRef{obj.Adopt(_ret)}
+	return SCNetworkProtocolRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSCNetworkServiceCopyProtocols func(objc.ID) objc.ID
@@ -1214,7 +1214,7 @@ func SCNetworkServiceCopyProtocols(service SCNetworkServiceRef) corefoundation.C
 		ebipurego.RegisterLibFunc(&_fnSCNetworkServiceCopyProtocols, _lib, "SCNetworkServiceCopyProtocols")
 	}
 	_ret := _fnSCNetworkServiceCopyProtocols(objref.IDOf(service.Object))
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSCNetworkServiceCreate func(objc.ID, objc.ID) objc.ID
@@ -1226,7 +1226,7 @@ func SCNetworkServiceCreate(prefs SCPreferencesRef, interface_ SCNetworkInterfac
 		ebipurego.RegisterLibFunc(&_fnSCNetworkServiceCreate, _lib, "SCNetworkServiceCreate")
 	}
 	_ret := _fnSCNetworkServiceCreate(objref.IDOf(prefs.Object), objref.IDOf(interface_.Object))
-	return SCNetworkServiceRef{obj.Adopt(_ret)}
+	return SCNetworkServiceRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSCNetworkServiceEstablishDefaultConfiguration func(objc.ID) uint8
@@ -1260,7 +1260,7 @@ func SCNetworkServiceGetInterface(service SCNetworkServiceRef) SCNetworkInterfac
 		ebipurego.RegisterLibFunc(&_fnSCNetworkServiceGetInterface, _lib, "SCNetworkServiceGetInterface")
 	}
 	_ret := _fnSCNetworkServiceGetInterface(objref.IDOf(service.Object))
-	return SCNetworkInterfaceRef{obj.Wrap(_ret)}
+	return SCNetworkInterfaceRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSCNetworkServiceGetName func(objc.ID) objc.ID
@@ -1272,7 +1272,7 @@ func SCNetworkServiceGetName(service SCNetworkServiceRef) corefoundation.CFStrin
 		ebipurego.RegisterLibFunc(&_fnSCNetworkServiceGetName, _lib, "SCNetworkServiceGetName")
 	}
 	_ret := _fnSCNetworkServiceGetName(objref.IDOf(service.Object))
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSCNetworkServiceGetServiceID func(objc.ID) objc.ID
@@ -1284,7 +1284,7 @@ func SCNetworkServiceGetServiceID(service SCNetworkServiceRef) corefoundation.CF
 		ebipurego.RegisterLibFunc(&_fnSCNetworkServiceGetServiceID, _lib, "SCNetworkServiceGetServiceID")
 	}
 	_ret := _fnSCNetworkServiceGetServiceID(objref.IDOf(service.Object))
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSCNetworkServiceGetTypeID func() int
@@ -1373,7 +1373,7 @@ func SCNetworkSetCopy(prefs SCPreferencesRef, setID corefoundation.CFStringRef) 
 		ebipurego.RegisterLibFunc(&_fnSCNetworkSetCopy, _lib, "SCNetworkSetCopy")
 	}
 	_ret := _fnSCNetworkSetCopy(objref.IDOf(prefs.Object), objref.IDOf(setID.Object))
-	return SCNetworkSetRef{obj.Adopt(_ret)}
+	return SCNetworkSetRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSCNetworkSetCopyAll func(objc.ID) objc.ID
@@ -1385,7 +1385,7 @@ func SCNetworkSetCopyAll(prefs SCPreferencesRef) corefoundation.CFArrayRef {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkSetCopyAll, _lib, "SCNetworkSetCopyAll")
 	}
 	_ret := _fnSCNetworkSetCopyAll(objref.IDOf(prefs.Object))
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSCNetworkSetCopyCurrent func(objc.ID) objc.ID
@@ -1397,7 +1397,7 @@ func SCNetworkSetCopyCurrent(prefs SCPreferencesRef) SCNetworkSetRef {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkSetCopyCurrent, _lib, "SCNetworkSetCopyCurrent")
 	}
 	_ret := _fnSCNetworkSetCopyCurrent(objref.IDOf(prefs.Object))
-	return SCNetworkSetRef{obj.Adopt(_ret)}
+	return SCNetworkSetRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSCNetworkSetCopyServices func(objc.ID) objc.ID
@@ -1409,7 +1409,7 @@ func SCNetworkSetCopyServices(set SCNetworkSetRef) corefoundation.CFArrayRef {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkSetCopyServices, _lib, "SCNetworkSetCopyServices")
 	}
 	_ret := _fnSCNetworkSetCopyServices(objref.IDOf(set.Object))
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSCNetworkSetCreate func(objc.ID) objc.ID
@@ -1421,7 +1421,7 @@ func SCNetworkSetCreate(prefs SCPreferencesRef) SCNetworkSetRef {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkSetCreate, _lib, "SCNetworkSetCreate")
 	}
 	_ret := _fnSCNetworkSetCreate(objref.IDOf(prefs.Object))
-	return SCNetworkSetRef{obj.Adopt(_ret)}
+	return SCNetworkSetRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSCNetworkSetGetName func(objc.ID) objc.ID
@@ -1433,7 +1433,7 @@ func SCNetworkSetGetName(set SCNetworkSetRef) corefoundation.CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkSetGetName, _lib, "SCNetworkSetGetName")
 	}
 	_ret := _fnSCNetworkSetGetName(objref.IDOf(set.Object))
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSCNetworkSetGetServiceOrder func(objc.ID) objc.ID
@@ -1445,7 +1445,7 @@ func SCNetworkSetGetServiceOrder(set SCNetworkSetRef) corefoundation.CFArrayRef 
 		ebipurego.RegisterLibFunc(&_fnSCNetworkSetGetServiceOrder, _lib, "SCNetworkSetGetServiceOrder")
 	}
 	_ret := _fnSCNetworkSetGetServiceOrder(objref.IDOf(set.Object))
-	return corefoundation.CFArrayRef{obj.Wrap(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSCNetworkSetGetSetID func(objc.ID) objc.ID
@@ -1457,7 +1457,7 @@ func SCNetworkSetGetSetID(set SCNetworkSetRef) corefoundation.CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkSetGetSetID, _lib, "SCNetworkSetGetSetID")
 	}
 	_ret := _fnSCNetworkSetGetSetID(objref.IDOf(set.Object))
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSCNetworkSetGetTypeID func() int
@@ -1568,7 +1568,7 @@ func SCPreferencesCopyKeyList(prefs SCPreferencesRef) corefoundation.CFArrayRef 
 		ebipurego.RegisterLibFunc(&_fnSCPreferencesCopyKeyList, _lib, "SCPreferencesCopyKeyList")
 	}
 	_ret := _fnSCPreferencesCopyKeyList(objref.IDOf(prefs.Object))
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSCPreferencesCreate func(objc.ID, objc.ID, objc.ID) objc.ID
@@ -1580,7 +1580,7 @@ func SCPreferencesCreate(allocator corefoundation.CFAllocatorRef, name corefound
 		ebipurego.RegisterLibFunc(&_fnSCPreferencesCreate, _lib, "SCPreferencesCreate")
 	}
 	_ret := _fnSCPreferencesCreate(objref.IDOf(allocator.Object), objref.IDOf(name.Object), objref.IDOf(prefsID.Object))
-	return SCPreferencesRef{obj.Adopt(_ret)}
+	return SCPreferencesRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSCPreferencesCreateWithAuthorization func(objc.ID, objc.ID, objc.ID, objc.ID) objc.ID
@@ -1592,7 +1592,7 @@ func SCPreferencesCreateWithAuthorization(allocator corefoundation.CFAllocatorRe
 		ebipurego.RegisterLibFunc(&_fnSCPreferencesCreateWithAuthorization, _lib, "SCPreferencesCreateWithAuthorization")
 	}
 	_ret := _fnSCPreferencesCreateWithAuthorization(objref.IDOf(allocator.Object), objref.IDOf(name.Object), objref.IDOf(prefsID.Object), objref.IDOf(authorization))
-	return SCPreferencesRef{obj.Adopt(_ret)}
+	return SCPreferencesRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSCPreferencesGetSignature func(objc.ID) objc.ID
@@ -1604,7 +1604,7 @@ func SCPreferencesGetSignature(prefs SCPreferencesRef) corefoundation.CFDataRef 
 		ebipurego.RegisterLibFunc(&_fnSCPreferencesGetSignature, _lib, "SCPreferencesGetSignature")
 	}
 	_ret := _fnSCPreferencesGetSignature(objref.IDOf(prefs.Object))
-	return corefoundation.CFDataRef{obj.Wrap(_ret)}
+	return corefoundation.CFDataRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSCPreferencesGetTypeID func() int
@@ -1627,7 +1627,7 @@ func SCPreferencesGetValue(prefs SCPreferencesRef, key corefoundation.CFStringRe
 		ebipurego.RegisterLibFunc(&_fnSCPreferencesGetValue, _lib, "SCPreferencesGetValue")
 	}
 	_ret := _fnSCPreferencesGetValue(objref.IDOf(prefs.Object), objref.IDOf(key.Object))
-	return corefoundation.CFPropertyListRef{obj.Wrap(_ret)}
+	return corefoundation.CFPropertyListRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSCPreferencesLock func(objc.ID, uint8) uint8
@@ -1650,7 +1650,7 @@ func SCPreferencesPathCreateUniqueChild(prefs SCPreferencesRef, prefix corefound
 		ebipurego.RegisterLibFunc(&_fnSCPreferencesPathCreateUniqueChild, _lib, "SCPreferencesPathCreateUniqueChild")
 	}
 	_ret := _fnSCPreferencesPathCreateUniqueChild(objref.IDOf(prefs.Object), objref.IDOf(prefix.Object))
-	return corefoundation.CFStringRef{obj.Adopt(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSCPreferencesPathGetLink func(objc.ID, objc.ID) objc.ID
@@ -1662,7 +1662,7 @@ func SCPreferencesPathGetLink(prefs SCPreferencesRef, path corefoundation.CFStri
 		ebipurego.RegisterLibFunc(&_fnSCPreferencesPathGetLink, _lib, "SCPreferencesPathGetLink")
 	}
 	_ret := _fnSCPreferencesPathGetLink(objref.IDOf(prefs.Object), objref.IDOf(path.Object))
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSCPreferencesPathGetValue func(objc.ID, objc.ID) objc.ID
@@ -1674,7 +1674,7 @@ func SCPreferencesPathGetValue(prefs SCPreferencesRef, path corefoundation.CFStr
 		ebipurego.RegisterLibFunc(&_fnSCPreferencesPathGetValue, _lib, "SCPreferencesPathGetValue")
 	}
 	_ret := _fnSCPreferencesPathGetValue(objref.IDOf(prefs.Object), objref.IDOf(path.Object))
-	return corefoundation.CFDictionaryRef{obj.Wrap(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSCPreferencesPathRemoveValue func(objc.ID, objc.ID) uint8
@@ -1829,7 +1829,7 @@ func SCVLANInterfaceCopyAll(prefs SCPreferencesRef) corefoundation.CFArrayRef {
 		ebipurego.RegisterLibFunc(&_fnSCVLANInterfaceCopyAll, _lib, "SCVLANInterfaceCopyAll")
 	}
 	_ret := _fnSCVLANInterfaceCopyAll(objref.IDOf(prefs.Object))
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSCVLANInterfaceCopyAvailablePhysicalInterfaces func() objc.ID
@@ -1841,7 +1841,7 @@ func SCVLANInterfaceCopyAvailablePhysicalInterfaces() corefoundation.CFArrayRef 
 		ebipurego.RegisterLibFunc(&_fnSCVLANInterfaceCopyAvailablePhysicalInterfaces, _lib, "SCVLANInterfaceCopyAvailablePhysicalInterfaces")
 	}
 	_ret := _fnSCVLANInterfaceCopyAvailablePhysicalInterfaces()
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSCVLANInterfaceCreate func(objc.ID, objc.ID, objc.ID) unsafe.Pointer
@@ -1864,7 +1864,7 @@ func SCVLANInterfaceGetOptions(vlan unsafe.Pointer) corefoundation.CFDictionaryR
 		ebipurego.RegisterLibFunc(&_fnSCVLANInterfaceGetOptions, _lib, "SCVLANInterfaceGetOptions")
 	}
 	_ret := _fnSCVLANInterfaceGetOptions(vlan)
-	return corefoundation.CFDictionaryRef{obj.Wrap(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSCVLANInterfaceGetPhysicalInterface func(unsafe.Pointer) objc.ID
@@ -1876,7 +1876,7 @@ func SCVLANInterfaceGetPhysicalInterface(vlan unsafe.Pointer) SCNetworkInterface
 		ebipurego.RegisterLibFunc(&_fnSCVLANInterfaceGetPhysicalInterface, _lib, "SCVLANInterfaceGetPhysicalInterface")
 	}
 	_ret := _fnSCVLANInterfaceGetPhysicalInterface(vlan)
-	return SCNetworkInterfaceRef{obj.Wrap(_ret)}
+	return SCNetworkInterfaceRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSCVLANInterfaceGetTag func(unsafe.Pointer) objc.ID
@@ -1888,7 +1888,7 @@ func SCVLANInterfaceGetTag(vlan unsafe.Pointer) corefoundation.CFNumberRef {
 		ebipurego.RegisterLibFunc(&_fnSCVLANInterfaceGetTag, _lib, "SCVLANInterfaceGetTag")
 	}
 	_ret := _fnSCVLANInterfaceGetTag(vlan)
-	return corefoundation.CFNumberRef{obj.Wrap(_ret)}
+	return corefoundation.CFNumberRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSCVLANInterfaceRemove func(unsafe.Pointer) uint8

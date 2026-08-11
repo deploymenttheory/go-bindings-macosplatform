@@ -234,6 +234,31 @@ func (e AppleEventSendOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Options for enumerating attributes.
+// Bitmask — values may be combined with |.
+type AttributedStringEnumerationOptions uint64
+
+const (
+	AttributedStringEnumerationReverse                          AttributedStringEnumerationOptions = 2
+	AttributedStringEnumerationLongestEffectiveRangeNotRequired AttributedStringEnumerationOptions = 1048576
+)
+
+// String returns the AttributedStringEnumerationOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AttributedStringEnumerationOptions) String() string {
+	var parts []string
+	if e&AttributedStringEnumerationReverse != 0 {
+		parts = append(parts, "AttributedStringEnumerationReverse")
+	}
+	if e&AttributedStringEnumerationLongestEffectiveRangeNotRequired != 0 {
+		parts = append(parts, "AttributedStringEnumerationLongestEffectiveRangeNotRequired")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // Options to use when creating an attributed string from a format string and variable list of arguments.
 // Bitmask — values may be combined with |.
 type AttributedStringFormattingOptions uint64
@@ -309,6 +334,38 @@ func (e AttributedStringMarkdownParsingFailurePolicy) String() string {
 	default:
 		return fmt.Sprintf("AttributedStringMarkdownParsingFailurePolicy(%d)", int64(e))
 	}
+}
+
+// Options for searches and insertions using indexOfObject:inSortedRange:options:usingComparator:.
+// Bitmask — values may be combined with |.
+type BinarySearchingOptions uint64
+
+const (
+	// Specifies that the search should return the first object in the range that is equal to the given object.
+	BinarySearchingFirstEqual BinarySearchingOptions = 256
+	// Specifies that the search should return the last object in the range that is equal to the given object.
+	BinarySearchingLastEqual BinarySearchingOptions = 512
+	// Returns the index at which you should insert the object in order to maintain a sorted array.
+	BinarySearchingInsertionIndex BinarySearchingOptions = 1024
+)
+
+// String returns the BinarySearchingOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BinarySearchingOptions) String() string {
+	var parts []string
+	if e&BinarySearchingFirstEqual != 0 {
+		parts = append(parts, "BinarySearchingFirstEqual")
+	}
+	if e&BinarySearchingLastEqual != 0 {
+		parts = append(parts, "BinarySearchingLastEqual")
+	}
+	if e&BinarySearchingInsertionIndex != 0 {
+		parts = append(parts, "BinarySearchingInsertionIndex")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
 }
 
 // Specifies display of file or storage byte counts. The display style is platform specific.
@@ -2331,6 +2388,43 @@ func (e LengthFormatterUnit) String() string {
 	}
 }
 
+// Constants for linguistic tagger enumeration specifying which tokens to omit and whether to join names.
+// Bitmask — values may be combined with |.
+type LinguisticTaggerOptions uint64
+
+const (
+	LinguisticTaggerOmitWords       LinguisticTaggerOptions = 1
+	LinguisticTaggerOmitPunctuation LinguisticTaggerOptions = 2
+	LinguisticTaggerOmitWhitespace  LinguisticTaggerOptions = 4
+	LinguisticTaggerOmitOther       LinguisticTaggerOptions = 8
+	LinguisticTaggerJoinNames       LinguisticTaggerOptions = 16
+)
+
+// String returns the LinguisticTaggerOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LinguisticTaggerOptions) String() string {
+	var parts []string
+	if e&LinguisticTaggerOmitWords != 0 {
+		parts = append(parts, "LinguisticTaggerOmitWords")
+	}
+	if e&LinguisticTaggerOmitPunctuation != 0 {
+		parts = append(parts, "LinguisticTaggerOmitPunctuation")
+	}
+	if e&LinguisticTaggerOmitWhitespace != 0 {
+		parts = append(parts, "LinguisticTaggerOmitWhitespace")
+	}
+	if e&LinguisticTaggerOmitOther != 0 {
+		parts = append(parts, "LinguisticTaggerOmitOther")
+	}
+	if e&LinguisticTaggerJoinNames != 0 {
+		parts = append(parts, "LinguisticTaggerJoinNames")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // Constants representing linguistic units.
 type LinguisticTaggerUnit int64
 
@@ -2447,6 +2541,42 @@ func (e MassFormatterUnit) String() string {
 	default:
 		return fmt.Sprintf("MassFormatterUnit(%d)", int64(e))
 	}
+}
+
+// Bitmask — values may be combined with |.
+type MatchingFlags uint64
+
+const (
+	MatchingProgress      MatchingFlags = 1
+	MatchingCompleted     MatchingFlags = 2
+	MatchingHitEnd        MatchingFlags = 4
+	MatchingRequiredEnd   MatchingFlags = 8
+	MatchingInternalError MatchingFlags = 16
+)
+
+// String returns the MatchingFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MatchingFlags) String() string {
+	var parts []string
+	if e&MatchingProgress != 0 {
+		parts = append(parts, "MatchingProgress")
+	}
+	if e&MatchingCompleted != 0 {
+		parts = append(parts, "MatchingCompleted")
+	}
+	if e&MatchingHitEnd != 0 {
+		parts = append(parts, "MatchingHitEnd")
+	}
+	if e&MatchingRequiredEnd != 0 {
+		parts = append(parts, "MatchingRequiredEnd")
+	}
+	if e&MatchingInternalError != 0 {
+		parts = append(parts, "MatchingInternalError")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
 }
 
 // The matching options constants specify the reporting, completion and matching rules to the expression matching methods. These constants are used by all methods that search for, or replace values, using a regular expression.
@@ -3641,6 +3771,60 @@ func (e StringEncodingConversionOptions) String() string {
 	}
 	if e&StringEncodingConversionExternalRepresentation != 0 {
 		parts = append(parts, "StringEncodingConversionExternalRepresentation")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Constants to specify kinds of substrings and styles of enumeration.
+// Bitmask — values may be combined with |.
+type StringEnumerationOptions uint64
+
+const (
+	StringEnumerationByLines                      StringEnumerationOptions = 0
+	StringEnumerationByParagraphs                 StringEnumerationOptions = 1
+	StringEnumerationByComposedCharacterSequences StringEnumerationOptions = 2
+	StringEnumerationByWords                      StringEnumerationOptions = 3
+	StringEnumerationBySentences                  StringEnumerationOptions = 4
+	StringEnumerationByCaretPositions             StringEnumerationOptions = 5
+	StringEnumerationByDeletionClusters           StringEnumerationOptions = 6
+	StringEnumerationReverse                      StringEnumerationOptions = 256
+	StringEnumerationSubstringNotRequired         StringEnumerationOptions = 512
+	StringEnumerationLocalized                    StringEnumerationOptions = 1024
+)
+
+// String returns the StringEnumerationOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e StringEnumerationOptions) String() string {
+	var parts []string
+	if e&StringEnumerationByParagraphs != 0 {
+		parts = append(parts, "StringEnumerationByParagraphs")
+	}
+	if e&StringEnumerationByComposedCharacterSequences != 0 {
+		parts = append(parts, "StringEnumerationByComposedCharacterSequences")
+	}
+	if e&StringEnumerationByWords != 0 {
+		parts = append(parts, "StringEnumerationByWords")
+	}
+	if e&StringEnumerationBySentences != 0 {
+		parts = append(parts, "StringEnumerationBySentences")
+	}
+	if e&StringEnumerationByCaretPositions != 0 {
+		parts = append(parts, "StringEnumerationByCaretPositions")
+	}
+	if e&StringEnumerationByDeletionClusters != 0 {
+		parts = append(parts, "StringEnumerationByDeletionClusters")
+	}
+	if e&StringEnumerationReverse != 0 {
+		parts = append(parts, "StringEnumerationReverse")
+	}
+	if e&StringEnumerationSubstringNotRequired != 0 {
+		parts = append(parts, "StringEnumerationSubstringNotRequired")
+	}
+	if e&StringEnumerationLocalized != 0 {
+		parts = append(parts, "StringEnumerationLocalized")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -5397,31 +5581,6 @@ func (e MpoFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Options for enumerating attributes.
-// Bitmask — values may be combined with |.
-type AttributedStringEnumerationOptions uint64
-
-const (
-	AttributedStringEnumerationReverse                          AttributedStringEnumerationOptions = 2
-	AttributedStringEnumerationLongestEffectiveRangeNotRequired AttributedStringEnumerationOptions = 1048576
-)
-
-// String returns the AttributedStringEnumerationOptions constant's name, or its numeric form when the
-// value is not a known constant.
-func (e AttributedStringEnumerationOptions) String() string {
-	var parts []string
-	if e&AttributedStringEnumerationReverse != 0 {
-		parts = append(parts, "AttributedStringEnumerationReverse")
-	}
-	if e&AttributedStringEnumerationLongestEffectiveRangeNotRequired != 0 {
-		parts = append(parts, "AttributedStringEnumerationLongestEffectiveRangeNotRequired")
-	}
-	if len(parts) == 0 {
-		return "0"
-	}
-	return strings.Join(parts, "|")
-}
-
 // These constants indicate whether background activity has been completed successfully or whether additional processing should be deferred until a more optimal time.
 type BackgroundActivityResult int64
 
@@ -5441,38 +5600,6 @@ func (e BackgroundActivityResult) String() string {
 	default:
 		return fmt.Sprintf("BackgroundActivityResult(%d)", int64(e))
 	}
-}
-
-// Options for searches and insertions using indexOfObject:inSortedRange:options:usingComparator:.
-// Bitmask — values may be combined with |.
-type BinarySearchingOptions uint64
-
-const (
-	// Specifies that the search should return the first object in the range that is equal to the given object.
-	BinarySearchingFirstEqual BinarySearchingOptions = 256
-	// Specifies that the search should return the last object in the range that is equal to the given object.
-	BinarySearchingLastEqual BinarySearchingOptions = 512
-	// Returns the index at which you should insert the object in order to maintain a sorted array.
-	BinarySearchingInsertionIndex BinarySearchingOptions = 1024
-)
-
-// String returns the BinarySearchingOptions constant's name, or its numeric form when the
-// value is not a known constant.
-func (e BinarySearchingOptions) String() string {
-	var parts []string
-	if e&BinarySearchingFirstEqual != 0 {
-		parts = append(parts, "BinarySearchingFirstEqual")
-	}
-	if e&BinarySearchingLastEqual != 0 {
-		parts = append(parts, "BinarySearchingLastEqual")
-	}
-	if e&BinarySearchingInsertionIndex != 0 {
-		parts = append(parts, "BinarySearchingInsertionIndex")
-	}
-	if len(parts) == 0 {
-		return "0"
-	}
-	return strings.Join(parts, "|")
 }
 
 // An option set of the sync controls available for an item.
@@ -5578,79 +5705,6 @@ func (e ItemProviderErrorCode) String() string {
 	}
 }
 
-// Constants for linguistic tagger enumeration specifying which tokens to omit and whether to join names.
-// Bitmask — values may be combined with |.
-type LinguisticTaggerOptions uint64
-
-const (
-	LinguisticTaggerOmitWords       LinguisticTaggerOptions = 1
-	LinguisticTaggerOmitPunctuation LinguisticTaggerOptions = 2
-	LinguisticTaggerOmitWhitespace  LinguisticTaggerOptions = 4
-	LinguisticTaggerOmitOther       LinguisticTaggerOptions = 8
-	LinguisticTaggerJoinNames       LinguisticTaggerOptions = 16
-)
-
-// String returns the LinguisticTaggerOptions constant's name, or its numeric form when the
-// value is not a known constant.
-func (e LinguisticTaggerOptions) String() string {
-	var parts []string
-	if e&LinguisticTaggerOmitWords != 0 {
-		parts = append(parts, "LinguisticTaggerOmitWords")
-	}
-	if e&LinguisticTaggerOmitPunctuation != 0 {
-		parts = append(parts, "LinguisticTaggerOmitPunctuation")
-	}
-	if e&LinguisticTaggerOmitWhitespace != 0 {
-		parts = append(parts, "LinguisticTaggerOmitWhitespace")
-	}
-	if e&LinguisticTaggerOmitOther != 0 {
-		parts = append(parts, "LinguisticTaggerOmitOther")
-	}
-	if e&LinguisticTaggerJoinNames != 0 {
-		parts = append(parts, "LinguisticTaggerJoinNames")
-	}
-	if len(parts) == 0 {
-		return "0"
-	}
-	return strings.Join(parts, "|")
-}
-
-// Bitmask — values may be combined with |.
-type MatchingFlags uint64
-
-const (
-	MatchingProgress      MatchingFlags = 1
-	MatchingCompleted     MatchingFlags = 2
-	MatchingHitEnd        MatchingFlags = 4
-	MatchingRequiredEnd   MatchingFlags = 8
-	MatchingInternalError MatchingFlags = 16
-)
-
-// String returns the MatchingFlags constant's name, or its numeric form when the
-// value is not a known constant.
-func (e MatchingFlags) String() string {
-	var parts []string
-	if e&MatchingProgress != 0 {
-		parts = append(parts, "MatchingProgress")
-	}
-	if e&MatchingCompleted != 0 {
-		parts = append(parts, "MatchingCompleted")
-	}
-	if e&MatchingHitEnd != 0 {
-		parts = append(parts, "MatchingHitEnd")
-	}
-	if e&MatchingRequiredEnd != 0 {
-		parts = append(parts, "MatchingRequiredEnd")
-	}
-	if e&MatchingInternalError != 0 {
-		parts = append(parts, "MatchingInternalError")
-	}
-	if len(parts) == 0 {
-		return "0"
-	}
-	return strings.Join(parts, "|")
-}
-
 // These constants identify errors that can occur when accessing net services.
 type NetServicesError int64
 
@@ -5745,60 +5799,6 @@ func (e PresentationIntentTableColumnAlignment) String() string {
 	default:
 		return fmt.Sprintf("PresentationIntentTableColumnAlignment(%d)", int64(e))
 	}
-}
-
-// Constants to specify kinds of substrings and styles of enumeration.
-// Bitmask — values may be combined with |.
-type StringEnumerationOptions uint64
-
-const (
-	StringEnumerationByLines                      StringEnumerationOptions = 0
-	StringEnumerationByParagraphs                 StringEnumerationOptions = 1
-	StringEnumerationByComposedCharacterSequences StringEnumerationOptions = 2
-	StringEnumerationByWords                      StringEnumerationOptions = 3
-	StringEnumerationBySentences                  StringEnumerationOptions = 4
-	StringEnumerationByCaretPositions             StringEnumerationOptions = 5
-	StringEnumerationByDeletionClusters           StringEnumerationOptions = 6
-	StringEnumerationReverse                      StringEnumerationOptions = 256
-	StringEnumerationSubstringNotRequired         StringEnumerationOptions = 512
-	StringEnumerationLocalized                    StringEnumerationOptions = 1024
-)
-
-// String returns the StringEnumerationOptions constant's name, or its numeric form when the
-// value is not a known constant.
-func (e StringEnumerationOptions) String() string {
-	var parts []string
-	if e&StringEnumerationByParagraphs != 0 {
-		parts = append(parts, "StringEnumerationByParagraphs")
-	}
-	if e&StringEnumerationByComposedCharacterSequences != 0 {
-		parts = append(parts, "StringEnumerationByComposedCharacterSequences")
-	}
-	if e&StringEnumerationByWords != 0 {
-		parts = append(parts, "StringEnumerationByWords")
-	}
-	if e&StringEnumerationBySentences != 0 {
-		parts = append(parts, "StringEnumerationBySentences")
-	}
-	if e&StringEnumerationByCaretPositions != 0 {
-		parts = append(parts, "StringEnumerationByCaretPositions")
-	}
-	if e&StringEnumerationByDeletionClusters != 0 {
-		parts = append(parts, "StringEnumerationByDeletionClusters")
-	}
-	if e&StringEnumerationReverse != 0 {
-		parts = append(parts, "StringEnumerationReverse")
-	}
-	if e&StringEnumerationSubstringNotRequired != 0 {
-		parts = append(parts, "StringEnumerationSubstringNotRequired")
-	}
-	if e&StringEnumerationLocalized != 0 {
-		parts = append(parts, "StringEnumerationLocalized")
-	}
-	if len(parts) == 0 {
-		return "0"
-	}
-	return strings.Join(parts, "|")
 }
 
 // An enumeration of reasons why a task couldn’t satisfy networking constraints.

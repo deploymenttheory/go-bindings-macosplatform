@@ -6,9 +6,9 @@ import (
 	"sort"
 	"strings"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/layouttest"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks/render"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks/view"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/layouttest"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/structlayout"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emitmanifest"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"

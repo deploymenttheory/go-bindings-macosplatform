@@ -5,6 +5,8 @@
 package mpsndarray
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
@@ -41,6 +43,62 @@ func arrayBinaryKernelAdopt(id objc.ID) *ArrayBinaryKernel {
 	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
+}
+
+// PrimaryOffsets returns the coordinate of the position read from this source array which is used to calculate the result value at [0,0,0,....] If the position read is actually a contiguous region (e.g. the area covered by a convolution kernel) then this is the center of that region, rounded down, for each dimension. Default: 0,0,0...
+func (abk *ArrayBinaryKernel) PrimaryOffsets() MPSNDArrayOffsets {
+	defer runtime.KeepAlive(abk)
+	_r := objc.Send[MPSNDArrayOffsets](objref.IDOf(abk), objc.RegisterName("primaryOffsets"))
+	return _r
+}
+
+// PrimaryKernelSizes returns the diameters of the point spread function in each dimension for a source NDArray Default: 1
+func (abk *ArrayBinaryKernel) PrimaryKernelSizes() MPSNDArraySizes {
+	defer runtime.KeepAlive(abk)
+	_r := objc.Send[MPSNDArraySizes](objref.IDOf(abk), objc.RegisterName("primaryKernelSizes"))
+	return _r
+}
+
+// PrimaryStrides returns if the filter is a "backwards" filter such as a gradient filter or convolution transpose, then this is the upsampling ratio and zeros are inserted in the result. Default: 1
+func (abk *ArrayBinaryKernel) PrimaryStrides() MPSNDArrayOffsets {
+	defer runtime.KeepAlive(abk)
+	_r := objc.Send[MPSNDArrayOffsets](objref.IDOf(abk), objc.RegisterName("primaryStrides"))
+	return _r
+}
+
+// PrimaryDilationRates returns the stride in each dimension from one PSF tap to an adjacent PSF tap. Default: 1
+func (abk *ArrayBinaryKernel) PrimaryDilationRates() MPSNDArraySizes {
+	defer runtime.KeepAlive(abk)
+	_r := objc.Send[MPSNDArraySizes](objref.IDOf(abk), objc.RegisterName("primaryDilationRates"))
+	return _r
+}
+
+// SecondaryOffsets returns the coordinate of the position read from this source array which is used to calculate the result value at [0,0,0,....] If the position read is actually a contiguous region (e.g. the area covered by a convolution kernel) then this is the center of that region, rounded down, for each dimension. Default: 0,0,0...
+func (abk *ArrayBinaryKernel) SecondaryOffsets() MPSNDArrayOffsets {
+	defer runtime.KeepAlive(abk)
+	_r := objc.Send[MPSNDArrayOffsets](objref.IDOf(abk), objc.RegisterName("secondaryOffsets"))
+	return _r
+}
+
+// SecondaryKernelSizes returns the diameters of the point spread function in each dimension for a source NDArray Default: 1
+func (abk *ArrayBinaryKernel) SecondaryKernelSizes() MPSNDArraySizes {
+	defer runtime.KeepAlive(abk)
+	_r := objc.Send[MPSNDArraySizes](objref.IDOf(abk), objc.RegisterName("secondaryKernelSizes"))
+	return _r
+}
+
+// SecondaryStrides returns if the filter is a "backwards" filter such as a gradient filter or convolution transpose, then this is the upsampling ratio and zeros are inserted in the result. Default: 1
+func (abk *ArrayBinaryKernel) SecondaryStrides() MPSNDArrayOffsets {
+	defer runtime.KeepAlive(abk)
+	_r := objc.Send[MPSNDArrayOffsets](objref.IDOf(abk), objc.RegisterName("secondaryStrides"))
+	return _r
+}
+
+// SecondaryDilationRates returns the stride in each dimension from one PSF tap to an adjacent PSF tap. Default: 1
+func (abk *ArrayBinaryKernel) SecondaryDilationRates() MPSNDArraySizes {
+	defer runtime.KeepAlive(abk)
+	_r := objc.Send[MPSNDArraySizes](objref.IDOf(abk), objc.RegisterName("secondaryDilationRates"))
+	return _r
 }
 
 // isArrayBinaryKernel marks ArrayBinaryKernel — and, by embedding promotion, its

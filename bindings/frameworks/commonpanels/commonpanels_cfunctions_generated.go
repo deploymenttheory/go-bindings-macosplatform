@@ -7,8 +7,8 @@ package commonpanels
 import (
 	"unsafe"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/hitoolbox"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	ebipurego "github.com/ebitengine/purego"
@@ -79,7 +79,7 @@ func FCCopyCollectionNames() corefoundation.CFArrayRef {
 		ebipurego.RegisterLibFunc(&_fnFCCopyCollectionNames, _lib, "FCCopyCollectionNames")
 	}
 	_ret := _fnFCCopyCollectionNames()
-	return corefoundation.CFArrayRef{obj.Wrap(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnFCCopyFontDescriptorsInCollection func(objc.ID) objc.ID
@@ -91,7 +91,7 @@ func FCCopyFontDescriptorsInCollection(iCollection corefoundation.CFStringRef) c
 		ebipurego.RegisterLibFunc(&_fnFCCopyFontDescriptorsInCollection, _lib, "FCCopyFontDescriptorsInCollection")
 	}
 	_ret := _fnFCCopyFontDescriptorsInCollection(objref.IDOf(iCollection.Object))
-	return corefoundation.CFArrayRef{obj.Wrap(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnFCFontDescriptorCreateWithFontAttributes func(objc.ID) objc.ID
@@ -103,7 +103,7 @@ func FCFontDescriptorCreateWithFontAttributes(iAttributes corefoundation.CFDicti
 		ebipurego.RegisterLibFunc(&_fnFCFontDescriptorCreateWithFontAttributes, _lib, "FCFontDescriptorCreateWithFontAttributes")
 	}
 	_ret := _fnFCFontDescriptorCreateWithFontAttributes(objref.IDOf(iAttributes.Object))
-	return FCFontDescriptorRef{obj.WrapUnmanaged(_ret)}
+	return FCFontDescriptorRef{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnFCFontDescriptorCreateWithName func(objc.ID, float64) objc.ID
@@ -115,7 +115,7 @@ func FCFontDescriptorCreateWithName(iFontName corefoundation.CFStringRef, iSize 
 		ebipurego.RegisterLibFunc(&_fnFCFontDescriptorCreateWithName, _lib, "FCFontDescriptorCreateWithName")
 	}
 	_ret := _fnFCFontDescriptorCreateWithName(objref.IDOf(iFontName.Object), iSize)
-	return FCFontDescriptorRef{obj.WrapUnmanaged(_ret)}
+	return FCFontDescriptorRef{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnFPIsFontPanelVisible func() uint8
@@ -129,10 +129,10 @@ func FPIsFontPanelVisible() uint8 {
 	return _fnFPIsFontPanelVisible()
 }
 
-var _fnGetColor func(carboncore.Point, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
+var _fnGetColor func(Point, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
 
 // GetColor calls the CommonPanels framework function GetColor.
-func GetColor(where carboncore.Point, inColor *RGBColor) (result uint8, prompt uint8, outColor RGBColor) {
+func GetColor(where Point, inColor *RGBColor) (result uint8, prompt uint8, outColor RGBColor) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnGetColor == nil {
 		ebipurego.RegisterLibFunc(&_fnGetColor, _lib, "GetColor")
@@ -146,12 +146,12 @@ func GetColor(where carboncore.Point, inColor *RGBColor) (result uint8, prompt u
 var _fnInvokeCalibrateEventUPP func(unsafe.Pointer, unsafe.Pointer)
 
 // InvokeCalibrateEventUPP calls the CommonPanels framework function InvokeCalibrateEventUPP.
-func InvokeCalibrateEventUPP(event unsafe.Pointer, userUPP unsafe.Pointer) {
+func InvokeCalibrateEventUPP(event *hitoolbox.EventRecord, userUPP unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnInvokeCalibrateEventUPP == nil {
 		ebipurego.RegisterLibFunc(&_fnInvokeCalibrateEventUPP, _lib, "InvokeCalibrateEventUPP")
 	}
-	_fnInvokeCalibrateEventUPP(event, userUPP)
+	_fnInvokeCalibrateEventUPP(unsafe.Pointer(event), userUPP)
 }
 
 var _fnInvokeCalibrateUPP func(unsafe.Pointer, unsafe.Pointer) int16

@@ -5,6 +5,8 @@
 package coremotion
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
@@ -49,6 +51,13 @@ func accelerometerDataAdopt(id objc.ID) *AccelerometerData {
 func NewAccelerometerData() *AccelerometerData {
 	_id := objc.Send[objc.ID](objc.ID(_class("CMAccelerometerData")), objc.RegisterName("new"))
 	return accelerometerDataAdopt(_id)
+}
+
+// Acceleration returns the acceleration.
+func (ad *AccelerometerData) Acceleration() CMAcceleration {
+	defer runtime.KeepAlive(ad)
+	_r := objc.Send[CMAcceleration](objref.IDOf(ad), objc.RegisterName("acceleration"))
+	return _r
 }
 
 var _ LogItemProvider = (*AccelerometerData)(nil)

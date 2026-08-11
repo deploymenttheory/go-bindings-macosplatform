@@ -201,7 +201,7 @@ func CGBitmapContextCreate(data unsafe.Pointer, width int, height int, bitsPerCo
 		ebipurego.RegisterLibFunc(&_fnCGBitmapContextCreate, _lib, "CGBitmapContextCreate")
 	}
 	_ret := _fnCGBitmapContextCreate(data, width, height, bitsPerComponent, bytesPerRow, objref.IDOf(space.Object), bitmapInfo)
-	return CGContextRef{obj.Adopt(_ret)}
+	return CGContextRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGBitmapContextCreateAdaptive func(int, int, objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -213,7 +213,7 @@ func CGBitmapContextCreateAdaptive(width int, height int, auxiliaryInfo obj.Obje
 		ebipurego.RegisterLibFunc(&_fnCGBitmapContextCreateAdaptive, _lib, "CGBitmapContextCreateAdaptive")
 	}
 	_ret := _fnCGBitmapContextCreateAdaptive(width, height, objref.IDOf(auxiliaryInfo), onResolve, onAllocate, onFree, onError)
-	return CGContextRef{obj.Adopt(_ret)}
+	return CGContextRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGBitmapContextCreateImage func(objc.ID) objc.ID
@@ -225,7 +225,7 @@ func CGBitmapContextCreateImage(context_ CGContextRef) CGImageRef {
 		ebipurego.RegisterLibFunc(&_fnCGBitmapContextCreateImage, _lib, "CGBitmapContextCreateImage")
 	}
 	_ret := _fnCGBitmapContextCreateImage(objref.IDOf(context_.Object))
-	return CGImageRef{obj.Adopt(_ret)}
+	return CGImageRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGBitmapContextCreateWithData func(unsafe.Pointer, int, int, int, int, objc.ID, CGBitmapInfo, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -237,7 +237,7 @@ func CGBitmapContextCreateWithData(data unsafe.Pointer, width int, height int, b
 		ebipurego.RegisterLibFunc(&_fnCGBitmapContextCreateWithData, _lib, "CGBitmapContextCreateWithData")
 	}
 	_ret := _fnCGBitmapContextCreateWithData(data, width, height, bitsPerComponent, bytesPerRow, objref.IDOf(space.Object), bitmapInfo, releaseCallback, releaseInfo)
-	return CGContextRef{obj.Adopt(_ret)}
+	return CGContextRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGBitmapContextGetAlphaInfo func(objc.ID) CGImageAlphaInfo
@@ -304,7 +304,7 @@ func CGBitmapContextGetColorSpace(context_ CGContextRef) CGColorSpaceRef {
 		ebipurego.RegisterLibFunc(&_fnCGBitmapContextGetColorSpace, _lib, "CGBitmapContextGetColorSpace")
 	}
 	_ret := _fnCGBitmapContextGetColorSpace(objref.IDOf(context_.Object))
-	return CGColorSpaceRef{obj.Wrap(_ret)}
+	return CGColorSpaceRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCGBitmapContextGetData func(objc.ID) unsafe.Pointer
@@ -384,10 +384,10 @@ func CGCaptureAllDisplaysWithOptions(options CGCaptureOptions) CGError {
 	return _fnCGCaptureAllDisplaysWithOptions(options)
 }
 
-var _fnCGColorConversionInfoConvertData func(objc.ID, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, objc.ID) bool
+var _fnCGColorConversionInfoConvertData func(objc.ID, int, int, unsafe.Pointer, CGColorBufferFormat, unsafe.Pointer, CGColorBufferFormat, objc.ID) bool
 
 // CGColorConversionInfoConvertData calls the CoreGraphics framework function CGColorConversionInfoConvertData.
-func CGColorConversionInfoConvertData(info CGColorConversionInfoRef, width int, height int, dstData unsafe.Pointer, dstFormat unsafe.Pointer, srcData unsafe.Pointer, srcFormat unsafe.Pointer, options obj.Object) bool {
+func CGColorConversionInfoConvertData(info CGColorConversionInfoRef, width int, height int, dstData unsafe.Pointer, dstFormat CGColorBufferFormat, srcData unsafe.Pointer, srcFormat CGColorBufferFormat, options obj.Object) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorConversionInfoConvertData == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorConversionInfoConvertData, _lib, "CGColorConversionInfoConvertData")
@@ -404,7 +404,7 @@ func CGColorConversionInfoCreate(src CGColorSpaceRef, dst CGColorSpaceRef) CGCol
 		ebipurego.RegisterLibFunc(&_fnCGColorConversionInfoCreate, _lib, "CGColorConversionInfoCreate")
 	}
 	_ret := _fnCGColorConversionInfoCreate(objref.IDOf(src.Object), objref.IDOf(dst.Object))
-	return CGColorConversionInfoRef{obj.Adopt(_ret)}
+	return CGColorConversionInfoRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGColorConversionInfoCreateFromListWithArguments func(objc.ID, objc.ID, CGColorConversionInfoTransformType, CGColorRenderingIntent, string) objc.ID
@@ -416,7 +416,7 @@ func CGColorConversionInfoCreateFromListWithArguments(options obj.Object, arg CG
 		ebipurego.RegisterLibFunc(&_fnCGColorConversionInfoCreateFromListWithArguments, _lib, "CGColorConversionInfoCreateFromListWithArguments")
 	}
 	_ret := _fnCGColorConversionInfoCreateFromListWithArguments(objref.IDOf(options), objref.IDOf(arg.Object), arg2, arg3, arg4)
-	return CGColorConversionInfoRef{obj.Adopt(_ret)}
+	return CGColorConversionInfoRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGColorConversionInfoCreateWithOptions func(objc.ID, objc.ID, objc.ID) objc.ID
@@ -428,7 +428,7 @@ func CGColorConversionInfoCreateWithOptions(src CGColorSpaceRef, dst CGColorSpac
 		ebipurego.RegisterLibFunc(&_fnCGColorConversionInfoCreateWithOptions, _lib, "CGColorConversionInfoCreateWithOptions")
 	}
 	_ret := _fnCGColorConversionInfoCreateWithOptions(objref.IDOf(src.Object), objref.IDOf(dst.Object), objref.IDOf(options))
-	return CGColorConversionInfoRef{obj.Adopt(_ret)}
+	return CGColorConversionInfoRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGColorConversionInfoGetTypeID func() int
@@ -451,7 +451,7 @@ func CGColorCreate(space CGColorSpaceRef, components unsafe.Pointer) CGColorRef 
 		ebipurego.RegisterLibFunc(&_fnCGColorCreate, _lib, "CGColorCreate")
 	}
 	_ret := _fnCGColorCreate(objref.IDOf(space.Object), components)
-	return CGColorRef{obj.Adopt(_ret)}
+	return CGColorRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGColorCreateCopy func(objc.ID) objc.ID
@@ -463,7 +463,7 @@ func CGColorCreateCopy(color CGColorRef) CGColorRef {
 		ebipurego.RegisterLibFunc(&_fnCGColorCreateCopy, _lib, "CGColorCreateCopy")
 	}
 	_ret := _fnCGColorCreateCopy(objref.IDOf(color.Object))
-	return CGColorRef{obj.Adopt(_ret)}
+	return CGColorRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGColorCreateCopyByMatchingToColorSpace func(objc.ID, CGColorRenderingIntent, objc.ID, objc.ID) objc.ID
@@ -475,7 +475,7 @@ func CGColorCreateCopyByMatchingToColorSpace(arg CGColorSpaceRef, intent CGColor
 		ebipurego.RegisterLibFunc(&_fnCGColorCreateCopyByMatchingToColorSpace, _lib, "CGColorCreateCopyByMatchingToColorSpace")
 	}
 	_ret := _fnCGColorCreateCopyByMatchingToColorSpace(objref.IDOf(arg.Object), intent, objref.IDOf(color.Object), objref.IDOf(options))
-	return CGColorRef{obj.Adopt(_ret)}
+	return CGColorRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGColorCreateCopyWithAlpha func(objc.ID, float64) objc.ID
@@ -487,7 +487,7 @@ func CGColorCreateCopyWithAlpha(color CGColorRef, alpha float64) CGColorRef {
 		ebipurego.RegisterLibFunc(&_fnCGColorCreateCopyWithAlpha, _lib, "CGColorCreateCopyWithAlpha")
 	}
 	_ret := _fnCGColorCreateCopyWithAlpha(objref.IDOf(color.Object), alpha)
-	return CGColorRef{obj.Adopt(_ret)}
+	return CGColorRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGColorCreateGenericCMYK func(float64, float64, float64, float64, float64) objc.ID
@@ -499,7 +499,7 @@ func CGColorCreateGenericCMYK(cyan float64, magenta float64, yellow float64, bla
 		ebipurego.RegisterLibFunc(&_fnCGColorCreateGenericCMYK, _lib, "CGColorCreateGenericCMYK")
 	}
 	_ret := _fnCGColorCreateGenericCMYK(cyan, magenta, yellow, black, alpha)
-	return CGColorRef{obj.Adopt(_ret)}
+	return CGColorRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGColorCreateGenericGray func(float64, float64) objc.ID
@@ -511,7 +511,7 @@ func CGColorCreateGenericGray(gray float64, alpha float64) CGColorRef {
 		ebipurego.RegisterLibFunc(&_fnCGColorCreateGenericGray, _lib, "CGColorCreateGenericGray")
 	}
 	_ret := _fnCGColorCreateGenericGray(gray, alpha)
-	return CGColorRef{obj.Adopt(_ret)}
+	return CGColorRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGColorCreateGenericGrayGamma2_2 func(float64, float64) objc.ID
@@ -523,7 +523,7 @@ func CGColorCreateGenericGrayGamma2_2(gray float64, alpha float64) CGColorRef {
 		ebipurego.RegisterLibFunc(&_fnCGColorCreateGenericGrayGamma2_2, _lib, "CGColorCreateGenericGrayGamma2_2")
 	}
 	_ret := _fnCGColorCreateGenericGrayGamma2_2(gray, alpha)
-	return CGColorRef{obj.Adopt(_ret)}
+	return CGColorRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGColorCreateGenericRGB func(float64, float64, float64, float64) objc.ID
@@ -535,7 +535,7 @@ func CGColorCreateGenericRGB(red float64, green float64, blue float64, alpha flo
 		ebipurego.RegisterLibFunc(&_fnCGColorCreateGenericRGB, _lib, "CGColorCreateGenericRGB")
 	}
 	_ret := _fnCGColorCreateGenericRGB(red, green, blue, alpha)
-	return CGColorRef{obj.Adopt(_ret)}
+	return CGColorRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGColorCreateSRGB func(float64, float64, float64, float64) objc.ID
@@ -547,7 +547,7 @@ func CGColorCreateSRGB(red float64, green float64, blue float64, alpha float64) 
 		ebipurego.RegisterLibFunc(&_fnCGColorCreateSRGB, _lib, "CGColorCreateSRGB")
 	}
 	_ret := _fnCGColorCreateSRGB(red, green, blue, alpha)
-	return CGColorRef{obj.Adopt(_ret)}
+	return CGColorRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGColorCreateWithContentHeadroom func(float32, objc.ID, float64, float64, float64, float64) objc.ID
@@ -559,7 +559,7 @@ func CGColorCreateWithContentHeadroom(headroom float32, space CGColorSpaceRef, r
 		ebipurego.RegisterLibFunc(&_fnCGColorCreateWithContentHeadroom, _lib, "CGColorCreateWithContentHeadroom")
 	}
 	_ret := _fnCGColorCreateWithContentHeadroom(headroom, objref.IDOf(space.Object), red, green, blue, alpha)
-	return CGColorRef{obj.Adopt(_ret)}
+	return CGColorRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGColorCreateWithPattern func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
@@ -571,7 +571,7 @@ func CGColorCreateWithPattern(space CGColorSpaceRef, pattern CGPatternRef, compo
 		ebipurego.RegisterLibFunc(&_fnCGColorCreateWithPattern, _lib, "CGColorCreateWithPattern")
 	}
 	_ret := _fnCGColorCreateWithPattern(objref.IDOf(space.Object), objref.IDOf(pattern.Object), components)
-	return CGColorRef{obj.Adopt(_ret)}
+	return CGColorRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGColorEqualToColor func(objc.ID, objc.ID) bool
@@ -605,7 +605,7 @@ func CGColorGetColorSpace(color CGColorRef) CGColorSpaceRef {
 		ebipurego.RegisterLibFunc(&_fnCGColorGetColorSpace, _lib, "CGColorGetColorSpace")
 	}
 	_ret := _fnCGColorGetColorSpace(objref.IDOf(color.Object))
-	return CGColorSpaceRef{obj.Wrap(_ret)}
+	return CGColorSpaceRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCGColorGetComponents func(objc.ID) unsafe.Pointer
@@ -628,7 +628,7 @@ func CGColorGetConstantColor(colorName obj.Object) CGColorRef {
 		ebipurego.RegisterLibFunc(&_fnCGColorGetConstantColor, _lib, "CGColorGetConstantColor")
 	}
 	_ret := _fnCGColorGetConstantColor(objref.IDOf(colorName))
-	return CGColorRef{obj.Wrap(_ret)}
+	return CGColorRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCGColorGetContentHeadroom func(objc.ID) float32
@@ -662,7 +662,7 @@ func CGColorGetPattern(color CGColorRef) CGPatternRef {
 		ebipurego.RegisterLibFunc(&_fnCGColorGetPattern, _lib, "CGColorGetPattern")
 	}
 	_ret := _fnCGColorGetPattern(objref.IDOf(color.Object))
-	return CGPatternRef{obj.Wrap(_ret)}
+	return CGPatternRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCGColorGetTypeID func() int
@@ -696,7 +696,7 @@ func CGColorRetain(color CGColorRef) CGColorRef {
 		ebipurego.RegisterLibFunc(&_fnCGColorRetain, _lib, "CGColorRetain")
 	}
 	_ret := _fnCGColorRetain(objref.IDOf(color.Object))
-	return CGColorRef{obj.Wrap(_ret)}
+	return CGColorRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCGColorSpaceCopyBaseColorSpace func(objc.ID) objc.ID
@@ -708,7 +708,7 @@ func CGColorSpaceCopyBaseColorSpace(space CGColorSpaceRef) CGColorSpaceRef {
 		ebipurego.RegisterLibFunc(&_fnCGColorSpaceCopyBaseColorSpace, _lib, "CGColorSpaceCopyBaseColorSpace")
 	}
 	_ret := _fnCGColorSpaceCopyBaseColorSpace(objref.IDOf(space.Object))
-	return CGColorSpaceRef{obj.Adopt(_ret)}
+	return CGColorSpaceRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGColorSpaceCopyICCData func(objc.ID) objc.ID
@@ -768,7 +768,7 @@ func CGColorSpaceCreateCalibratedGray(whitePoint unsafe.Pointer, blackPoint unsa
 		ebipurego.RegisterLibFunc(&_fnCGColorSpaceCreateCalibratedGray, _lib, "CGColorSpaceCreateCalibratedGray")
 	}
 	_ret := _fnCGColorSpaceCreateCalibratedGray(whitePoint, blackPoint, gamma)
-	return CGColorSpaceRef{obj.Adopt(_ret)}
+	return CGColorSpaceRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGColorSpaceCreateCalibratedRGB func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -780,7 +780,7 @@ func CGColorSpaceCreateCalibratedRGB(whitePoint unsafe.Pointer, blackPoint unsaf
 		ebipurego.RegisterLibFunc(&_fnCGColorSpaceCreateCalibratedRGB, _lib, "CGColorSpaceCreateCalibratedRGB")
 	}
 	_ret := _fnCGColorSpaceCreateCalibratedRGB(whitePoint, blackPoint, gamma, matrix)
-	return CGColorSpaceRef{obj.Adopt(_ret)}
+	return CGColorSpaceRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGColorSpaceCreateCopyWithStandardRange func(objc.ID) objc.ID
@@ -792,7 +792,7 @@ func CGColorSpaceCreateCopyWithStandardRange(space CGColorSpaceRef) CGColorSpace
 		ebipurego.RegisterLibFunc(&_fnCGColorSpaceCreateCopyWithStandardRange, _lib, "CGColorSpaceCreateCopyWithStandardRange")
 	}
 	_ret := _fnCGColorSpaceCreateCopyWithStandardRange(objref.IDOf(space.Object))
-	return CGColorSpaceRef{obj.Adopt(_ret)}
+	return CGColorSpaceRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGColorSpaceCreateDeviceCMYK func() objc.ID
@@ -804,7 +804,7 @@ func CGColorSpaceCreateDeviceCMYK() CGColorSpaceRef {
 		ebipurego.RegisterLibFunc(&_fnCGColorSpaceCreateDeviceCMYK, _lib, "CGColorSpaceCreateDeviceCMYK")
 	}
 	_ret := _fnCGColorSpaceCreateDeviceCMYK()
-	return CGColorSpaceRef{obj.Adopt(_ret)}
+	return CGColorSpaceRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGColorSpaceCreateDeviceGray func() objc.ID
@@ -816,7 +816,7 @@ func CGColorSpaceCreateDeviceGray() CGColorSpaceRef {
 		ebipurego.RegisterLibFunc(&_fnCGColorSpaceCreateDeviceGray, _lib, "CGColorSpaceCreateDeviceGray")
 	}
 	_ret := _fnCGColorSpaceCreateDeviceGray()
-	return CGColorSpaceRef{obj.Adopt(_ret)}
+	return CGColorSpaceRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGColorSpaceCreateDeviceRGB func() objc.ID
@@ -828,7 +828,7 @@ func CGColorSpaceCreateDeviceRGB() CGColorSpaceRef {
 		ebipurego.RegisterLibFunc(&_fnCGColorSpaceCreateDeviceRGB, _lib, "CGColorSpaceCreateDeviceRGB")
 	}
 	_ret := _fnCGColorSpaceCreateDeviceRGB()
-	return CGColorSpaceRef{obj.Adopt(_ret)}
+	return CGColorSpaceRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGColorSpaceCreateExtended func(objc.ID) objc.ID
@@ -840,7 +840,7 @@ func CGColorSpaceCreateExtended(space CGColorSpaceRef) CGColorSpaceRef {
 		ebipurego.RegisterLibFunc(&_fnCGColorSpaceCreateExtended, _lib, "CGColorSpaceCreateExtended")
 	}
 	_ret := _fnCGColorSpaceCreateExtended(objref.IDOf(space.Object))
-	return CGColorSpaceRef{obj.Adopt(_ret)}
+	return CGColorSpaceRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGColorSpaceCreateExtendedLinearized func(objc.ID) objc.ID
@@ -852,7 +852,7 @@ func CGColorSpaceCreateExtendedLinearized(space CGColorSpaceRef) CGColorSpaceRef
 		ebipurego.RegisterLibFunc(&_fnCGColorSpaceCreateExtendedLinearized, _lib, "CGColorSpaceCreateExtendedLinearized")
 	}
 	_ret := _fnCGColorSpaceCreateExtendedLinearized(objref.IDOf(space.Object))
-	return CGColorSpaceRef{obj.Adopt(_ret)}
+	return CGColorSpaceRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGColorSpaceCreateICCBased func(int, unsafe.Pointer, objc.ID, objc.ID) objc.ID
@@ -864,7 +864,7 @@ func CGColorSpaceCreateICCBased(nComponents int, range_ unsafe.Pointer, profile 
 		ebipurego.RegisterLibFunc(&_fnCGColorSpaceCreateICCBased, _lib, "CGColorSpaceCreateICCBased")
 	}
 	_ret := _fnCGColorSpaceCreateICCBased(nComponents, range_, objref.IDOf(profile.Object), objref.IDOf(alternate.Object))
-	return CGColorSpaceRef{obj.Adopt(_ret)}
+	return CGColorSpaceRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGColorSpaceCreateIndexed func(objc.ID, int, unsafe.Pointer) objc.ID
@@ -876,7 +876,7 @@ func CGColorSpaceCreateIndexed(baseSpace CGColorSpaceRef, lastIndex int, colorTa
 		ebipurego.RegisterLibFunc(&_fnCGColorSpaceCreateIndexed, _lib, "CGColorSpaceCreateIndexed")
 	}
 	_ret := _fnCGColorSpaceCreateIndexed(objref.IDOf(baseSpace.Object), lastIndex, colorTable)
-	return CGColorSpaceRef{obj.Adopt(_ret)}
+	return CGColorSpaceRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGColorSpaceCreateLab func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -888,7 +888,7 @@ func CGColorSpaceCreateLab(whitePoint unsafe.Pointer, blackPoint unsafe.Pointer,
 		ebipurego.RegisterLibFunc(&_fnCGColorSpaceCreateLab, _lib, "CGColorSpaceCreateLab")
 	}
 	_ret := _fnCGColorSpaceCreateLab(whitePoint, blackPoint, range_)
-	return CGColorSpaceRef{obj.Adopt(_ret)}
+	return CGColorSpaceRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGColorSpaceCreateLinearized func(objc.ID) objc.ID
@@ -900,7 +900,7 @@ func CGColorSpaceCreateLinearized(space CGColorSpaceRef) CGColorSpaceRef {
 		ebipurego.RegisterLibFunc(&_fnCGColorSpaceCreateLinearized, _lib, "CGColorSpaceCreateLinearized")
 	}
 	_ret := _fnCGColorSpaceCreateLinearized(objref.IDOf(space.Object))
-	return CGColorSpaceRef{obj.Adopt(_ret)}
+	return CGColorSpaceRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGColorSpaceCreatePattern func(objc.ID) objc.ID
@@ -912,7 +912,7 @@ func CGColorSpaceCreatePattern(baseSpace CGColorSpaceRef) CGColorSpaceRef {
 		ebipurego.RegisterLibFunc(&_fnCGColorSpaceCreatePattern, _lib, "CGColorSpaceCreatePattern")
 	}
 	_ret := _fnCGColorSpaceCreatePattern(objref.IDOf(baseSpace.Object))
-	return CGColorSpaceRef{obj.Adopt(_ret)}
+	return CGColorSpaceRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGColorSpaceCreateWithColorSyncProfile func(objc.ID, objc.ID) objc.ID
@@ -924,7 +924,7 @@ func CGColorSpaceCreateWithColorSyncProfile(arg obj.Object, options obj.Object) 
 		ebipurego.RegisterLibFunc(&_fnCGColorSpaceCreateWithColorSyncProfile, _lib, "CGColorSpaceCreateWithColorSyncProfile")
 	}
 	_ret := _fnCGColorSpaceCreateWithColorSyncProfile(objref.IDOf(arg), objref.IDOf(options))
-	return CGColorSpaceRef{obj.Adopt(_ret)}
+	return CGColorSpaceRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGColorSpaceCreateWithICCData func(objc.ID) objc.ID
@@ -936,7 +936,7 @@ func CGColorSpaceCreateWithICCData(data obj.Object) CGColorSpaceRef {
 		ebipurego.RegisterLibFunc(&_fnCGColorSpaceCreateWithICCData, _lib, "CGColorSpaceCreateWithICCData")
 	}
 	_ret := _fnCGColorSpaceCreateWithICCData(objref.IDOf(data))
-	return CGColorSpaceRef{obj.Adopt(_ret)}
+	return CGColorSpaceRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGColorSpaceCreateWithICCProfile func(objc.ID) objc.ID
@@ -948,7 +948,7 @@ func CGColorSpaceCreateWithICCProfile(data obj.Object) CGColorSpaceRef {
 		ebipurego.RegisterLibFunc(&_fnCGColorSpaceCreateWithICCProfile, _lib, "CGColorSpaceCreateWithICCProfile")
 	}
 	_ret := _fnCGColorSpaceCreateWithICCProfile(objref.IDOf(data))
-	return CGColorSpaceRef{obj.Adopt(_ret)}
+	return CGColorSpaceRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGColorSpaceCreateWithName func(objc.ID) objc.ID
@@ -960,7 +960,7 @@ func CGColorSpaceCreateWithName(name obj.Object) CGColorSpaceRef {
 		ebipurego.RegisterLibFunc(&_fnCGColorSpaceCreateWithName, _lib, "CGColorSpaceCreateWithName")
 	}
 	_ret := _fnCGColorSpaceCreateWithName(objref.IDOf(name))
-	return CGColorSpaceRef{obj.Adopt(_ret)}
+	return CGColorSpaceRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGColorSpaceCreateWithPlatformColorSpace func(unsafe.Pointer) objc.ID
@@ -972,7 +972,7 @@ func CGColorSpaceCreateWithPlatformColorSpace(ref unsafe.Pointer) CGColorSpaceRe
 		ebipurego.RegisterLibFunc(&_fnCGColorSpaceCreateWithPlatformColorSpace, _lib, "CGColorSpaceCreateWithPlatformColorSpace")
 	}
 	_ret := _fnCGColorSpaceCreateWithPlatformColorSpace(ref)
-	return CGColorSpaceRef{obj.Adopt(_ret)}
+	return CGColorSpaceRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGColorSpaceCreateWithPropertyList func(objc.ID) objc.ID
@@ -984,7 +984,7 @@ func CGColorSpaceCreateWithPropertyList(plist obj.Object) CGColorSpaceRef {
 		ebipurego.RegisterLibFunc(&_fnCGColorSpaceCreateWithPropertyList, _lib, "CGColorSpaceCreateWithPropertyList")
 	}
 	_ret := _fnCGColorSpaceCreateWithPropertyList(objref.IDOf(plist))
-	return CGColorSpaceRef{obj.Adopt(_ret)}
+	return CGColorSpaceRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGColorSpaceGetBaseColorSpace func(objc.ID) objc.ID
@@ -996,7 +996,7 @@ func CGColorSpaceGetBaseColorSpace(space CGColorSpaceRef) CGColorSpaceRef {
 		ebipurego.RegisterLibFunc(&_fnCGColorSpaceGetBaseColorSpace, _lib, "CGColorSpaceGetBaseColorSpace")
 	}
 	_ret := _fnCGColorSpaceGetBaseColorSpace(objref.IDOf(space.Object))
-	return CGColorSpaceRef{obj.Wrap(_ret)}
+	return CGColorSpaceRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCGColorSpaceGetColorTable func(objc.ID, unsafe.Pointer)
@@ -1132,7 +1132,7 @@ func CGColorSpaceRetain(space CGColorSpaceRef) CGColorSpaceRef {
 		ebipurego.RegisterLibFunc(&_fnCGColorSpaceRetain, _lib, "CGColorSpaceRetain")
 	}
 	_ret := _fnCGColorSpaceRetain(objref.IDOf(space.Object))
-	return CGColorSpaceRef{obj.Wrap(_ret)}
+	return CGColorSpaceRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCGColorSpaceSupportsOutput func(objc.ID) bool
@@ -1551,7 +1551,7 @@ func CGContextCopyPath(c CGContextRef) CGPathRef {
 		ebipurego.RegisterLibFunc(&_fnCGContextCopyPath, _lib, "CGContextCopyPath")
 	}
 	_ret := _fnCGContextCopyPath(objref.IDOf(c.Object))
-	return CGPathRef{obj.Adopt(_ret)}
+	return CGPathRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGContextDrawConicGradient func(objc.ID, objc.ID, corefoundation.CGPoint, float64)
@@ -1992,7 +1992,7 @@ func CGContextRetain(c CGContextRef) CGContextRef {
 		ebipurego.RegisterLibFunc(&_fnCGContextRetain, _lib, "CGContextRetain")
 	}
 	_ret := _fnCGContextRetain(objref.IDOf(c.Object))
-	return CGContextRef{obj.Wrap(_ret)}
+	return CGContextRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCGContextRotateCTM func(objc.ID, float64)
@@ -2708,7 +2708,7 @@ func CGDataConsumerCreate(info unsafe.Pointer, cbks unsafe.Pointer) CGDataConsum
 		ebipurego.RegisterLibFunc(&_fnCGDataConsumerCreate, _lib, "CGDataConsumerCreate")
 	}
 	_ret := _fnCGDataConsumerCreate(info, cbks)
-	return CGDataConsumerRef{obj.Adopt(_ret)}
+	return CGDataConsumerRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGDataConsumerCreateWithCFData func(objc.ID) objc.ID
@@ -2720,7 +2720,7 @@ func CGDataConsumerCreateWithCFData(data obj.Object) CGDataConsumerRef {
 		ebipurego.RegisterLibFunc(&_fnCGDataConsumerCreateWithCFData, _lib, "CGDataConsumerCreateWithCFData")
 	}
 	_ret := _fnCGDataConsumerCreateWithCFData(objref.IDOf(data))
-	return CGDataConsumerRef{obj.Adopt(_ret)}
+	return CGDataConsumerRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGDataConsumerCreateWithURL func(objc.ID) objc.ID
@@ -2732,7 +2732,7 @@ func CGDataConsumerCreateWithURL(url obj.Object) CGDataConsumerRef {
 		ebipurego.RegisterLibFunc(&_fnCGDataConsumerCreateWithURL, _lib, "CGDataConsumerCreateWithURL")
 	}
 	_ret := _fnCGDataConsumerCreateWithURL(objref.IDOf(url))
-	return CGDataConsumerRef{obj.Adopt(_ret)}
+	return CGDataConsumerRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGDataConsumerGetTypeID func() int
@@ -2766,7 +2766,7 @@ func CGDataConsumerRetain(consumer CGDataConsumerRef) CGDataConsumerRef {
 		ebipurego.RegisterLibFunc(&_fnCGDataConsumerRetain, _lib, "CGDataConsumerRetain")
 	}
 	_ret := _fnCGDataConsumerRetain(objref.IDOf(consumer.Object))
-	return CGDataConsumerRef{obj.Wrap(_ret)}
+	return CGDataConsumerRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCGDataProviderCopyData func(objc.ID) objc.ID
@@ -2790,7 +2790,7 @@ func CGDataProviderCreateDirect(info unsafe.Pointer, size int64, callbacks unsaf
 		ebipurego.RegisterLibFunc(&_fnCGDataProviderCreateDirect, _lib, "CGDataProviderCreateDirect")
 	}
 	_ret := _fnCGDataProviderCreateDirect(info, size, callbacks)
-	return CGDataProviderRef{obj.Adopt(_ret)}
+	return CGDataProviderRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGDataProviderCreateSequential func(unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -2802,7 +2802,7 @@ func CGDataProviderCreateSequential(info unsafe.Pointer, callbacks unsafe.Pointe
 		ebipurego.RegisterLibFunc(&_fnCGDataProviderCreateSequential, _lib, "CGDataProviderCreateSequential")
 	}
 	_ret := _fnCGDataProviderCreateSequential(info, callbacks)
-	return CGDataProviderRef{obj.Adopt(_ret)}
+	return CGDataProviderRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGDataProviderCreateWithCFData func(objc.ID) objc.ID
@@ -2814,7 +2814,7 @@ func CGDataProviderCreateWithCFData(data obj.Object) CGDataProviderRef {
 		ebipurego.RegisterLibFunc(&_fnCGDataProviderCreateWithCFData, _lib, "CGDataProviderCreateWithCFData")
 	}
 	_ret := _fnCGDataProviderCreateWithCFData(objref.IDOf(data))
-	return CGDataProviderRef{obj.Adopt(_ret)}
+	return CGDataProviderRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGDataProviderCreateWithData func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer) objc.ID
@@ -2826,7 +2826,7 @@ func CGDataProviderCreateWithData(info unsafe.Pointer, data unsafe.Pointer, size
 		ebipurego.RegisterLibFunc(&_fnCGDataProviderCreateWithData, _lib, "CGDataProviderCreateWithData")
 	}
 	_ret := _fnCGDataProviderCreateWithData(info, data, size, releaseData)
-	return CGDataProviderRef{obj.Adopt(_ret)}
+	return CGDataProviderRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGDataProviderCreateWithFilename func(string) objc.ID
@@ -2838,7 +2838,7 @@ func CGDataProviderCreateWithFilename(filename string) CGDataProviderRef {
 		ebipurego.RegisterLibFunc(&_fnCGDataProviderCreateWithFilename, _lib, "CGDataProviderCreateWithFilename")
 	}
 	_ret := _fnCGDataProviderCreateWithFilename(filename)
-	return CGDataProviderRef{obj.Adopt(_ret)}
+	return CGDataProviderRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGDataProviderCreateWithURL func(objc.ID) objc.ID
@@ -2850,7 +2850,7 @@ func CGDataProviderCreateWithURL(url obj.Object) CGDataProviderRef {
 		ebipurego.RegisterLibFunc(&_fnCGDataProviderCreateWithURL, _lib, "CGDataProviderCreateWithURL")
 	}
 	_ret := _fnCGDataProviderCreateWithURL(objref.IDOf(url))
-	return CGDataProviderRef{obj.Adopt(_ret)}
+	return CGDataProviderRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGDataProviderGetInfo func(objc.ID) unsafe.Pointer
@@ -2895,7 +2895,7 @@ func CGDataProviderRetain(provider CGDataProviderRef) CGDataProviderRef {
 		ebipurego.RegisterLibFunc(&_fnCGDataProviderRetain, _lib, "CGDataProviderRetain")
 	}
 	_ret := _fnCGDataProviderRetain(objref.IDOf(provider.Object))
-	return CGDataProviderRef{obj.Wrap(_ret)}
+	return CGDataProviderRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCGDirectDisplayCopyCurrentMetalDevice func(uint32) unsafe.Pointer
@@ -3001,7 +3001,7 @@ func CGDisplayCopyColorSpace(display uint32) CGColorSpaceRef {
 		ebipurego.RegisterLibFunc(&_fnCGDisplayCopyColorSpace, _lib, "CGDisplayCopyColorSpace")
 	}
 	_ret := _fnCGDisplayCopyColorSpace(display)
-	return CGColorSpaceRef{obj.Adopt(_ret)}
+	return CGColorSpaceRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGDisplayCopyDisplayMode func(uint32) objc.ID
@@ -3013,7 +3013,7 @@ func CGDisplayCopyDisplayMode(display uint32) CGDisplayModeRef {
 		ebipurego.RegisterLibFunc(&_fnCGDisplayCopyDisplayMode, _lib, "CGDisplayCopyDisplayMode")
 	}
 	_ret := _fnCGDisplayCopyDisplayMode(display)
-	return CGDisplayModeRef{obj.Adopt(_ret)}
+	return CGDisplayModeRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGDisplayCurrentMode func(uint32) objc.ID
@@ -3070,7 +3070,7 @@ func CGDisplayGetDrawingContext(display uint32) CGContextRef {
 		ebipurego.RegisterLibFunc(&_fnCGDisplayGetDrawingContext, _lib, "CGDisplayGetDrawingContext")
 	}
 	_ret := _fnCGDisplayGetDrawingContext(display)
-	return CGContextRef{obj.Wrap(_ret)}
+	return CGContextRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCGDisplayHideCursor func(uint32) CGError
@@ -3358,7 +3358,7 @@ func CGDisplayModeRetain(mode CGDisplayModeRef) CGDisplayModeRef {
 		ebipurego.RegisterLibFunc(&_fnCGDisplayModeRetain, _lib, "CGDisplayModeRetain")
 	}
 	_ret := _fnCGDisplayModeRetain(objref.IDOf(mode.Object))
-	return CGDisplayModeRef{obj.Wrap(_ret)}
+	return CGDisplayModeRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCGDisplayModelNumber func(uint32) uint32
@@ -3613,7 +3613,7 @@ func CGEventCreate(source CGEventSourceRef) CGEventRef {
 		ebipurego.RegisterLibFunc(&_fnCGEventCreate, _lib, "CGEventCreate")
 	}
 	_ret := _fnCGEventCreate(objref.IDOf(source.Object))
-	return CGEventRef{obj.Adopt(_ret)}
+	return CGEventRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGEventCreateCopy func(objc.ID) objc.ID
@@ -3625,7 +3625,7 @@ func CGEventCreateCopy(event CGEventRef) CGEventRef {
 		ebipurego.RegisterLibFunc(&_fnCGEventCreateCopy, _lib, "CGEventCreateCopy")
 	}
 	_ret := _fnCGEventCreateCopy(objref.IDOf(event.Object))
-	return CGEventRef{obj.Adopt(_ret)}
+	return CGEventRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGEventCreateData func(objc.ID, objc.ID) objc.ID
@@ -3649,7 +3649,7 @@ func CGEventCreateFromData(allocator obj.Object, data obj.Object) CGEventRef {
 		ebipurego.RegisterLibFunc(&_fnCGEventCreateFromData, _lib, "CGEventCreateFromData")
 	}
 	_ret := _fnCGEventCreateFromData(objref.IDOf(allocator), objref.IDOf(data))
-	return CGEventRef{obj.Adopt(_ret)}
+	return CGEventRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGEventCreateKeyboardEvent func(objc.ID, uint16, bool) objc.ID
@@ -3661,7 +3661,7 @@ func CGEventCreateKeyboardEvent(source CGEventSourceRef, virtualKey uint16, keyD
 		ebipurego.RegisterLibFunc(&_fnCGEventCreateKeyboardEvent, _lib, "CGEventCreateKeyboardEvent")
 	}
 	_ret := _fnCGEventCreateKeyboardEvent(objref.IDOf(source.Object), virtualKey, keyDown)
-	return CGEventRef{obj.Adopt(_ret)}
+	return CGEventRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGEventCreateMouseEvent func(objc.ID, CGEventType, corefoundation.CGPoint, CGMouseButton) objc.ID
@@ -3673,7 +3673,7 @@ func CGEventCreateMouseEvent(source CGEventSourceRef, mouseType CGEventType, mou
 		ebipurego.RegisterLibFunc(&_fnCGEventCreateMouseEvent, _lib, "CGEventCreateMouseEvent")
 	}
 	_ret := _fnCGEventCreateMouseEvent(objref.IDOf(source.Object), mouseType, mouseCursorPosition, mouseButton)
-	return CGEventRef{obj.Adopt(_ret)}
+	return CGEventRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGEventCreateScrollWheelEvent2 func(objc.ID, CGScrollEventUnit, uint32, int32, int32, int32) objc.ID
@@ -3685,7 +3685,7 @@ func CGEventCreateScrollWheelEvent2(source CGEventSourceRef, units CGScrollEvent
 		ebipurego.RegisterLibFunc(&_fnCGEventCreateScrollWheelEvent2, _lib, "CGEventCreateScrollWheelEvent2")
 	}
 	_ret := _fnCGEventCreateScrollWheelEvent2(objref.IDOf(source.Object), units, wheelCount, wheel1, wheel2, wheel3)
-	return CGEventRef{obj.Adopt(_ret)}
+	return CGEventRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGEventCreateSourceFromEvent func(objc.ID) objc.ID
@@ -3697,7 +3697,7 @@ func CGEventCreateSourceFromEvent(event CGEventRef) CGEventSourceRef {
 		ebipurego.RegisterLibFunc(&_fnCGEventCreateSourceFromEvent, _lib, "CGEventCreateSourceFromEvent")
 	}
 	_ret := _fnCGEventCreateSourceFromEvent(objref.IDOf(event.Object))
-	return CGEventSourceRef{obj.Adopt(_ret)}
+	return CGEventSourceRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGEventGetDoubleValueField func(objc.ID, CGEventField) float64
@@ -3954,7 +3954,7 @@ func CGEventSourceCreate(stateID CGEventSourceStateID) CGEventSourceRef {
 		ebipurego.RegisterLibFunc(&_fnCGEventSourceCreate, _lib, "CGEventSourceCreate")
 	}
 	_ret := _fnCGEventSourceCreate(stateID)
-	return CGEventSourceRef{obj.Adopt(_ret)}
+	return CGEventSourceRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGEventSourceFlagsState func(CGEventSourceStateID) CGEventFlags
@@ -4295,7 +4295,7 @@ func CGFontCreateCopyWithVariations(font CGFontRef, variations obj.Object) CGFon
 		ebipurego.RegisterLibFunc(&_fnCGFontCreateCopyWithVariations, _lib, "CGFontCreateCopyWithVariations")
 	}
 	_ret := _fnCGFontCreateCopyWithVariations(objref.IDOf(font.Object), objref.IDOf(variations))
-	return CGFontRef{obj.Adopt(_ret)}
+	return CGFontRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGFontCreatePostScriptEncoding func(objc.ID, unsafe.Pointer) objc.ID
@@ -4331,7 +4331,7 @@ func CGFontCreateWithDataProvider(provider CGDataProviderRef) CGFontRef {
 		ebipurego.RegisterLibFunc(&_fnCGFontCreateWithDataProvider, _lib, "CGFontCreateWithDataProvider")
 	}
 	_ret := _fnCGFontCreateWithDataProvider(objref.IDOf(provider.Object))
-	return CGFontRef{obj.Adopt(_ret)}
+	return CGFontRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGFontCreateWithFontName func(objc.ID) objc.ID
@@ -4343,7 +4343,7 @@ func CGFontCreateWithFontName(name obj.Object) CGFontRef {
 		ebipurego.RegisterLibFunc(&_fnCGFontCreateWithFontName, _lib, "CGFontCreateWithFontName")
 	}
 	_ret := _fnCGFontCreateWithFontName(objref.IDOf(name))
-	return CGFontRef{obj.Adopt(_ret)}
+	return CGFontRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGFontCreateWithPlatformFont func(unsafe.Pointer) objc.ID
@@ -4355,7 +4355,7 @@ func CGFontCreateWithPlatformFont(platformFontReference unsafe.Pointer) CGFontRe
 		ebipurego.RegisterLibFunc(&_fnCGFontCreateWithPlatformFont, _lib, "CGFontCreateWithPlatformFont")
 	}
 	_ret := _fnCGFontCreateWithPlatformFont(platformFontReference)
-	return CGFontRef{obj.Adopt(_ret)}
+	return CGFontRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGFontGetAscent func(objc.ID) int32
@@ -4534,7 +4534,7 @@ func CGFontRetain(font CGFontRef) CGFontRef {
 		ebipurego.RegisterLibFunc(&_fnCGFontRetain, _lib, "CGFontRetain")
 	}
 	_ret := _fnCGFontRetain(objref.IDOf(font.Object))
-	return CGFontRef{obj.Wrap(_ret)}
+	return CGFontRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCGFunctionCreate func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -4546,7 +4546,7 @@ func CGFunctionCreate(info unsafe.Pointer, domainDimension int, domain unsafe.Po
 		ebipurego.RegisterLibFunc(&_fnCGFunctionCreate, _lib, "CGFunctionCreate")
 	}
 	_ret := _fnCGFunctionCreate(info, domainDimension, domain, rangeDimension, range_, callbacks)
-	return CGFunctionRef{obj.Adopt(_ret)}
+	return CGFunctionRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGFunctionGetTypeID func() int
@@ -4580,7 +4580,7 @@ func CGFunctionRetain(function CGFunctionRef) CGFunctionRef {
 		ebipurego.RegisterLibFunc(&_fnCGFunctionRetain, _lib, "CGFunctionRetain")
 	}
 	_ret := _fnCGFunctionRetain(objref.IDOf(function.Object))
-	return CGFunctionRef{obj.Wrap(_ret)}
+	return CGFunctionRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCGGetActiveDisplayList func(uint32, unsafe.Pointer, unsafe.Pointer) CGError
@@ -4720,7 +4720,7 @@ func CGGradientCreateWithColorComponents(space CGColorSpaceRef, components unsaf
 		ebipurego.RegisterLibFunc(&_fnCGGradientCreateWithColorComponents, _lib, "CGGradientCreateWithColorComponents")
 	}
 	_ret := _fnCGGradientCreateWithColorComponents(objref.IDOf(space.Object), components, locations, count)
-	return CGGradientRef{obj.Adopt(_ret)}
+	return CGGradientRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGGradientCreateWithColors func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
@@ -4732,7 +4732,7 @@ func CGGradientCreateWithColors(space CGColorSpaceRef, colors obj.Object, locati
 		ebipurego.RegisterLibFunc(&_fnCGGradientCreateWithColors, _lib, "CGGradientCreateWithColors")
 	}
 	_ret := _fnCGGradientCreateWithColors(objref.IDOf(space.Object), objref.IDOf(colors), locations)
-	return CGGradientRef{obj.Adopt(_ret)}
+	return CGGradientRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGGradientCreateWithContentHeadroom func(float32, objc.ID, unsafe.Pointer, unsafe.Pointer, int) objc.ID
@@ -4744,7 +4744,7 @@ func CGGradientCreateWithContentHeadroom(headroom float32, space CGColorSpaceRef
 		ebipurego.RegisterLibFunc(&_fnCGGradientCreateWithContentHeadroom, _lib, "CGGradientCreateWithContentHeadroom")
 	}
 	_ret := _fnCGGradientCreateWithContentHeadroom(headroom, objref.IDOf(space.Object), components, locations, count)
-	return CGGradientRef{obj.Adopt(_ret)}
+	return CGGradientRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGGradientGetContentHeadroom func(objc.ID) float32
@@ -4789,7 +4789,7 @@ func CGGradientRetain(gradient CGGradientRef) CGGradientRef {
 		ebipurego.RegisterLibFunc(&_fnCGGradientRetain, _lib, "CGGradientRetain")
 	}
 	_ret := _fnCGGradientRetain(objref.IDOf(gradient.Object))
-	return CGGradientRef{obj.Wrap(_ret)}
+	return CGGradientRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCGImageCalculateContentAverageLightLevel func(objc.ID) float32
@@ -4834,7 +4834,7 @@ func CGImageCreate(width int, height int, bitsPerComponent int, bitsPerPixel int
 		ebipurego.RegisterLibFunc(&_fnCGImageCreate, _lib, "CGImageCreate")
 	}
 	_ret := _fnCGImageCreate(width, height, bitsPerComponent, bitsPerPixel, bytesPerRow, objref.IDOf(space.Object), bitmapInfo, objref.IDOf(provider.Object), decode, shouldInterpolate, intent)
-	return CGImageRef{obj.Adopt(_ret)}
+	return CGImageRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGImageCreateCopy func(objc.ID) objc.ID
@@ -4846,7 +4846,7 @@ func CGImageCreateCopy(image CGImageRef) CGImageRef {
 		ebipurego.RegisterLibFunc(&_fnCGImageCreateCopy, _lib, "CGImageCreateCopy")
 	}
 	_ret := _fnCGImageCreateCopy(objref.IDOf(image.Object))
-	return CGImageRef{obj.Adopt(_ret)}
+	return CGImageRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGImageCreateCopyWithCalculatedHDRStats func(objc.ID) objc.ID
@@ -4858,7 +4858,7 @@ func CGImageCreateCopyWithCalculatedHDRStats(image CGImageRef) CGImageRef {
 		ebipurego.RegisterLibFunc(&_fnCGImageCreateCopyWithCalculatedHDRStats, _lib, "CGImageCreateCopyWithCalculatedHDRStats")
 	}
 	_ret := _fnCGImageCreateCopyWithCalculatedHDRStats(objref.IDOf(image.Object))
-	return CGImageRef{obj.Adopt(_ret)}
+	return CGImageRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGImageCreateCopyWithColorSpace func(objc.ID, objc.ID) objc.ID
@@ -4870,7 +4870,7 @@ func CGImageCreateCopyWithColorSpace(image CGImageRef, space CGColorSpaceRef) CG
 		ebipurego.RegisterLibFunc(&_fnCGImageCreateCopyWithColorSpace, _lib, "CGImageCreateCopyWithColorSpace")
 	}
 	_ret := _fnCGImageCreateCopyWithColorSpace(objref.IDOf(image.Object), objref.IDOf(space.Object))
-	return CGImageRef{obj.Adopt(_ret)}
+	return CGImageRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGImageCreateCopyWithContentAverageLightLevel func(objc.ID, float32) objc.ID
@@ -4882,7 +4882,7 @@ func CGImageCreateCopyWithContentAverageLightLevel(image CGImageRef, avll float3
 		ebipurego.RegisterLibFunc(&_fnCGImageCreateCopyWithContentAverageLightLevel, _lib, "CGImageCreateCopyWithContentAverageLightLevel")
 	}
 	_ret := _fnCGImageCreateCopyWithContentAverageLightLevel(objref.IDOf(image.Object), avll)
-	return CGImageRef{obj.Adopt(_ret)}
+	return CGImageRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGImageCreateCopyWithContentHeadroom func(float32, objc.ID) objc.ID
@@ -4894,7 +4894,7 @@ func CGImageCreateCopyWithContentHeadroom(headroom float32, image CGImageRef) CG
 		ebipurego.RegisterLibFunc(&_fnCGImageCreateCopyWithContentHeadroom, _lib, "CGImageCreateCopyWithContentHeadroom")
 	}
 	_ret := _fnCGImageCreateCopyWithContentHeadroom(headroom, objref.IDOf(image.Object))
-	return CGImageRef{obj.Adopt(_ret)}
+	return CGImageRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGImageCreateWithContentHeadroom func(float32, int, int, int, int, int, objc.ID, CGBitmapInfo, objc.ID, unsafe.Pointer, bool, CGColorRenderingIntent) objc.ID
@@ -4906,7 +4906,7 @@ func CGImageCreateWithContentHeadroom(headroom float32, width int, height int, b
 		ebipurego.RegisterLibFunc(&_fnCGImageCreateWithContentHeadroom, _lib, "CGImageCreateWithContentHeadroom")
 	}
 	_ret := _fnCGImageCreateWithContentHeadroom(headroom, width, height, bitsPerComponent, bitsPerPixel, bytesPerRow, objref.IDOf(space.Object), bitmapInfo, objref.IDOf(provider.Object), decode, shouldInterpolate, intent)
-	return CGImageRef{obj.Adopt(_ret)}
+	return CGImageRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGImageCreateWithImageInRect func(objc.ID, corefoundation.CGRect) objc.ID
@@ -4918,7 +4918,7 @@ func CGImageCreateWithImageInRect(image CGImageRef, rect corefoundation.CGRect) 
 		ebipurego.RegisterLibFunc(&_fnCGImageCreateWithImageInRect, _lib, "CGImageCreateWithImageInRect")
 	}
 	_ret := _fnCGImageCreateWithImageInRect(objref.IDOf(image.Object), rect)
-	return CGImageRef{obj.Adopt(_ret)}
+	return CGImageRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGImageCreateWithJPEGDataProvider func(objc.ID, unsafe.Pointer, bool, CGColorRenderingIntent) objc.ID
@@ -4930,7 +4930,7 @@ func CGImageCreateWithJPEGDataProvider(source CGDataProviderRef, decode unsafe.P
 		ebipurego.RegisterLibFunc(&_fnCGImageCreateWithJPEGDataProvider, _lib, "CGImageCreateWithJPEGDataProvider")
 	}
 	_ret := _fnCGImageCreateWithJPEGDataProvider(objref.IDOf(source.Object), decode, shouldInterpolate, intent)
-	return CGImageRef{obj.Adopt(_ret)}
+	return CGImageRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGImageCreateWithMask func(objc.ID, objc.ID) objc.ID
@@ -4942,7 +4942,7 @@ func CGImageCreateWithMask(image CGImageRef, mask CGImageRef) CGImageRef {
 		ebipurego.RegisterLibFunc(&_fnCGImageCreateWithMask, _lib, "CGImageCreateWithMask")
 	}
 	_ret := _fnCGImageCreateWithMask(objref.IDOf(image.Object), objref.IDOf(mask.Object))
-	return CGImageRef{obj.Adopt(_ret)}
+	return CGImageRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGImageCreateWithMaskingColors func(objc.ID, unsafe.Pointer) objc.ID
@@ -4954,7 +4954,7 @@ func CGImageCreateWithMaskingColors(image CGImageRef, components unsafe.Pointer)
 		ebipurego.RegisterLibFunc(&_fnCGImageCreateWithMaskingColors, _lib, "CGImageCreateWithMaskingColors")
 	}
 	_ret := _fnCGImageCreateWithMaskingColors(objref.IDOf(image.Object), components)
-	return CGImageRef{obj.Adopt(_ret)}
+	return CGImageRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGImageCreateWithPNGDataProvider func(objc.ID, unsafe.Pointer, bool, CGColorRenderingIntent) objc.ID
@@ -4966,7 +4966,7 @@ func CGImageCreateWithPNGDataProvider(source CGDataProviderRef, decode unsafe.Po
 		ebipurego.RegisterLibFunc(&_fnCGImageCreateWithPNGDataProvider, _lib, "CGImageCreateWithPNGDataProvider")
 	}
 	_ret := _fnCGImageCreateWithPNGDataProvider(objref.IDOf(source.Object), decode, shouldInterpolate, intent)
-	return CGImageRef{obj.Adopt(_ret)}
+	return CGImageRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGImageGetAlphaInfo func(objc.ID) CGImageAlphaInfo
@@ -5044,7 +5044,7 @@ func CGImageGetColorSpace(image CGImageRef) CGColorSpaceRef {
 		ebipurego.RegisterLibFunc(&_fnCGImageGetColorSpace, _lib, "CGImageGetColorSpace")
 	}
 	_ret := _fnCGImageGetColorSpace(objref.IDOf(image.Object))
-	return CGColorSpaceRef{obj.Wrap(_ret)}
+	return CGColorSpaceRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCGImageGetContentAverageLightLevel func(objc.ID) float32
@@ -5078,7 +5078,7 @@ func CGImageGetDataProvider(image CGImageRef) CGDataProviderRef {
 		ebipurego.RegisterLibFunc(&_fnCGImageGetDataProvider, _lib, "CGImageGetDataProvider")
 	}
 	_ret := _fnCGImageGetDataProvider(objref.IDOf(image.Object))
-	return CGDataProviderRef{obj.Wrap(_ret)}
+	return CGDataProviderRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCGImageGetDecode func(objc.ID) unsafe.Pointer
@@ -5190,7 +5190,7 @@ func CGImageMaskCreate(width int, height int, bitsPerComponent int, bitsPerPixel
 		ebipurego.RegisterLibFunc(&_fnCGImageMaskCreate, _lib, "CGImageMaskCreate")
 	}
 	_ret := _fnCGImageMaskCreate(width, height, bitsPerComponent, bitsPerPixel, bytesPerRow, objref.IDOf(provider.Object), decode, shouldInterpolate)
-	return CGImageRef{obj.Adopt(_ret)}
+	return CGImageRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGImageRelease func(objc.ID)
@@ -5213,7 +5213,7 @@ func CGImageRetain(image CGImageRef) CGImageRef {
 		ebipurego.RegisterLibFunc(&_fnCGImageRetain, _lib, "CGImageRetain")
 	}
 	_ret := _fnCGImageRetain(objref.IDOf(image.Object))
-	return CGImageRef{obj.Wrap(_ret)}
+	return CGImageRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCGImageShouldToneMap func(objc.ID) bool
@@ -5247,7 +5247,7 @@ func CGLayerCreateWithContext(context_ CGContextRef, size corefoundation.CGSize,
 		ebipurego.RegisterLibFunc(&_fnCGLayerCreateWithContext, _lib, "CGLayerCreateWithContext")
 	}
 	_ret := _fnCGLayerCreateWithContext(objref.IDOf(context_.Object), size, objref.IDOf(auxiliaryInfo))
-	return CGLayerRef{obj.Adopt(_ret)}
+	return CGLayerRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGLayerGetContext func(objc.ID) objc.ID
@@ -5259,7 +5259,7 @@ func CGLayerGetContext(layer CGLayerRef) CGContextRef {
 		ebipurego.RegisterLibFunc(&_fnCGLayerGetContext, _lib, "CGLayerGetContext")
 	}
 	_ret := _fnCGLayerGetContext(objref.IDOf(layer.Object))
-	return CGContextRef{obj.Wrap(_ret)}
+	return CGContextRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCGLayerGetSize func(objc.ID) corefoundation.CGSize
@@ -5304,7 +5304,7 @@ func CGLayerRetain(layer CGLayerRef) CGLayerRef {
 		ebipurego.RegisterLibFunc(&_fnCGLayerRetain, _lib, "CGLayerRetain")
 	}
 	_ret := _fnCGLayerRetain(objref.IDOf(layer.Object))
-	return CGLayerRef{obj.Wrap(_ret)}
+	return CGLayerRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCGMainDisplayID func() uint32
@@ -5476,7 +5476,7 @@ func CGPDFContentStreamCreateWithPage(page CGPDFPageRef) CGPDFContentStreamRef {
 		ebipurego.RegisterLibFunc(&_fnCGPDFContentStreamCreateWithPage, _lib, "CGPDFContentStreamCreateWithPage")
 	}
 	_ret := _fnCGPDFContentStreamCreateWithPage(objref.IDOf(page.Object))
-	return CGPDFContentStreamRef{obj.Adopt(_ret)}
+	return CGPDFContentStreamRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGPDFContentStreamCreateWithStream func(objc.ID, objc.ID, objc.ID) objc.ID
@@ -5488,7 +5488,7 @@ func CGPDFContentStreamCreateWithStream(stream CGPDFStreamRef, streamResources C
 		ebipurego.RegisterLibFunc(&_fnCGPDFContentStreamCreateWithStream, _lib, "CGPDFContentStreamCreateWithStream")
 	}
 	_ret := _fnCGPDFContentStreamCreateWithStream(objref.IDOf(stream.Object), objref.IDOf(streamResources.Object), objref.IDOf(parent.Object))
-	return CGPDFContentStreamRef{obj.Adopt(_ret)}
+	return CGPDFContentStreamRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGPDFContentStreamGetResource func(objc.ID, string, string) objc.ID
@@ -5500,7 +5500,7 @@ func CGPDFContentStreamGetResource(cs CGPDFContentStreamRef, category string, na
 		ebipurego.RegisterLibFunc(&_fnCGPDFContentStreamGetResource, _lib, "CGPDFContentStreamGetResource")
 	}
 	_ret := _fnCGPDFContentStreamGetResource(objref.IDOf(cs.Object), category, name)
-	return CGPDFObjectRef{obj.Wrap(_ret)}
+	return CGPDFObjectRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCGPDFContentStreamGetStreams func(objc.ID) objc.ID
@@ -5535,7 +5535,7 @@ func CGPDFContentStreamRetain(cs CGPDFContentStreamRef) CGPDFContentStreamRef {
 		ebipurego.RegisterLibFunc(&_fnCGPDFContentStreamRetain, _lib, "CGPDFContentStreamRetain")
 	}
 	_ret := _fnCGPDFContentStreamRetain(objref.IDOf(cs.Object))
-	return CGPDFContentStreamRef{obj.Wrap(_ret)}
+	return CGPDFContentStreamRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCGPDFContextAddDestinationAtPoint func(objc.ID, objc.ID, corefoundation.CGPoint)
@@ -5602,7 +5602,7 @@ func CGPDFContextCreate(consumer CGDataConsumerRef, mediaBox *corefoundation.CGR
 		ebipurego.RegisterLibFunc(&_fnCGPDFContextCreate, _lib, "CGPDFContextCreate")
 	}
 	_ret := _fnCGPDFContextCreate(objref.IDOf(consumer.Object), unsafe.Pointer(mediaBox), objref.IDOf(auxiliaryInfo))
-	return CGContextRef{obj.Adopt(_ret)}
+	return CGContextRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGPDFContextCreateWithURL func(objc.ID, unsafe.Pointer, objc.ID) objc.ID
@@ -5614,7 +5614,7 @@ func CGPDFContextCreateWithURL(url obj.Object, mediaBox *corefoundation.CGRect, 
 		ebipurego.RegisterLibFunc(&_fnCGPDFContextCreateWithURL, _lib, "CGPDFContextCreateWithURL")
 	}
 	_ret := _fnCGPDFContextCreateWithURL(objref.IDOf(url), unsafe.Pointer(mediaBox), objref.IDOf(auxiliaryInfo))
-	return CGContextRef{obj.Adopt(_ret)}
+	return CGContextRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGPDFContextEndPage func(objc.ID)
@@ -5876,7 +5876,7 @@ func CGPDFDocumentCreateWithProvider(provider CGDataProviderRef) CGPDFDocumentRe
 		ebipurego.RegisterLibFunc(&_fnCGPDFDocumentCreateWithProvider, _lib, "CGPDFDocumentCreateWithProvider")
 	}
 	_ret := _fnCGPDFDocumentCreateWithProvider(objref.IDOf(provider.Object))
-	return CGPDFDocumentRef{obj.Adopt(_ret)}
+	return CGPDFDocumentRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGPDFDocumentCreateWithURL func(objc.ID) objc.ID
@@ -5888,7 +5888,7 @@ func CGPDFDocumentCreateWithURL(url obj.Object) CGPDFDocumentRef {
 		ebipurego.RegisterLibFunc(&_fnCGPDFDocumentCreateWithURL, _lib, "CGPDFDocumentCreateWithURL")
 	}
 	_ret := _fnCGPDFDocumentCreateWithURL(objref.IDOf(url))
-	return CGPDFDocumentRef{obj.Adopt(_ret)}
+	return CGPDFDocumentRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGPDFDocumentGetAccessPermissions func(objc.ID) CGPDFAccessPermissions
@@ -5933,7 +5933,7 @@ func CGPDFDocumentGetCatalog(document CGPDFDocumentRef) CGPDFDictionaryRef {
 		ebipurego.RegisterLibFunc(&_fnCGPDFDocumentGetCatalog, _lib, "CGPDFDocumentGetCatalog")
 	}
 	_ret := _fnCGPDFDocumentGetCatalog(objref.IDOf(document.Object))
-	return CGPDFDictionaryRef{obj.Wrap(_ret)}
+	return CGPDFDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCGPDFDocumentGetCropBox func(objc.ID, int) corefoundation.CGRect
@@ -5956,7 +5956,7 @@ func CGPDFDocumentGetID(document CGPDFDocumentRef) CGPDFArrayRef {
 		ebipurego.RegisterLibFunc(&_fnCGPDFDocumentGetID, _lib, "CGPDFDocumentGetID")
 	}
 	_ret := _fnCGPDFDocumentGetID(objref.IDOf(document.Object))
-	return CGPDFArrayRef{obj.Wrap(_ret)}
+	return CGPDFArrayRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCGPDFDocumentGetInfo func(objc.ID) objc.ID
@@ -5968,7 +5968,7 @@ func CGPDFDocumentGetInfo(document CGPDFDocumentRef) CGPDFDictionaryRef {
 		ebipurego.RegisterLibFunc(&_fnCGPDFDocumentGetInfo, _lib, "CGPDFDocumentGetInfo")
 	}
 	_ret := _fnCGPDFDocumentGetInfo(objref.IDOf(document.Object))
-	return CGPDFDictionaryRef{obj.Wrap(_ret)}
+	return CGPDFDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCGPDFDocumentGetMediaBox func(objc.ID, int) corefoundation.CGRect
@@ -6014,7 +6014,7 @@ func CGPDFDocumentGetPage(document CGPDFDocumentRef, pageNumber int) CGPDFPageRe
 		ebipurego.RegisterLibFunc(&_fnCGPDFDocumentGetPage, _lib, "CGPDFDocumentGetPage")
 	}
 	_ret := _fnCGPDFDocumentGetPage(objref.IDOf(document.Object), pageNumber)
-	return CGPDFPageRef{obj.Wrap(_ret)}
+	return CGPDFPageRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCGPDFDocumentGetRotationAngle func(objc.ID, int) int32
@@ -6106,7 +6106,7 @@ func CGPDFDocumentRetain(document CGPDFDocumentRef) CGPDFDocumentRef {
 		ebipurego.RegisterLibFunc(&_fnCGPDFDocumentRetain, _lib, "CGPDFDocumentRetain")
 	}
 	_ret := _fnCGPDFDocumentRetain(objref.IDOf(document.Object))
-	return CGPDFDocumentRef{obj.Wrap(_ret)}
+	return CGPDFDocumentRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCGPDFDocumentUnlockWithPassword func(objc.ID, string) bool
@@ -6151,7 +6151,7 @@ func CGPDFOperatorTableCreate() CGPDFOperatorTableRef {
 		ebipurego.RegisterLibFunc(&_fnCGPDFOperatorTableCreate, _lib, "CGPDFOperatorTableCreate")
 	}
 	_ret := _fnCGPDFOperatorTableCreate()
-	return CGPDFOperatorTableRef{obj.Adopt(_ret)}
+	return CGPDFOperatorTableRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGPDFOperatorTableRelease func(objc.ID)
@@ -6174,7 +6174,7 @@ func CGPDFOperatorTableRetain(table CGPDFOperatorTableRef) CGPDFOperatorTableRef
 		ebipurego.RegisterLibFunc(&_fnCGPDFOperatorTableRetain, _lib, "CGPDFOperatorTableRetain")
 	}
 	_ret := _fnCGPDFOperatorTableRetain(objref.IDOf(table.Object))
-	return CGPDFOperatorTableRef{obj.Wrap(_ret)}
+	return CGPDFOperatorTableRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCGPDFOperatorTableSetCallback func(objc.ID, string, unsafe.Pointer)
@@ -6208,7 +6208,7 @@ func CGPDFPageGetDictionary(page CGPDFPageRef) CGPDFDictionaryRef {
 		ebipurego.RegisterLibFunc(&_fnCGPDFPageGetDictionary, _lib, "CGPDFPageGetDictionary")
 	}
 	_ret := _fnCGPDFPageGetDictionary(objref.IDOf(page.Object))
-	return CGPDFDictionaryRef{obj.Wrap(_ret)}
+	return CGPDFDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCGPDFPageGetDocument func(objc.ID) objc.ID
@@ -6220,7 +6220,7 @@ func CGPDFPageGetDocument(page CGPDFPageRef) CGPDFDocumentRef {
 		ebipurego.RegisterLibFunc(&_fnCGPDFPageGetDocument, _lib, "CGPDFPageGetDocument")
 	}
 	_ret := _fnCGPDFPageGetDocument(objref.IDOf(page.Object))
-	return CGPDFDocumentRef{obj.Wrap(_ret)}
+	return CGPDFDocumentRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCGPDFPageGetDrawingTransform func(objc.ID, CGPDFBox, corefoundation.CGRect, int, bool) corefoundation.CGAffineTransform
@@ -6287,7 +6287,7 @@ func CGPDFPageRetain(page CGPDFPageRef) CGPDFPageRef {
 		ebipurego.RegisterLibFunc(&_fnCGPDFPageRetain, _lib, "CGPDFPageRetain")
 	}
 	_ret := _fnCGPDFPageRetain(objref.IDOf(page.Object))
-	return CGPDFPageRef{obj.Wrap(_ret)}
+	return CGPDFPageRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCGPDFScannerCreate func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
@@ -6299,7 +6299,7 @@ func CGPDFScannerCreate(cs CGPDFContentStreamRef, table CGPDFOperatorTableRef, i
 		ebipurego.RegisterLibFunc(&_fnCGPDFScannerCreate, _lib, "CGPDFScannerCreate")
 	}
 	_ret := _fnCGPDFScannerCreate(objref.IDOf(cs.Object), objref.IDOf(table.Object), info)
-	return CGPDFScannerRef{obj.Adopt(_ret)}
+	return CGPDFScannerRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGPDFScannerGetContentStream func(objc.ID) objc.ID
@@ -6311,7 +6311,7 @@ func CGPDFScannerGetContentStream(scanner CGPDFScannerRef) CGPDFContentStreamRef
 		ebipurego.RegisterLibFunc(&_fnCGPDFScannerGetContentStream, _lib, "CGPDFScannerGetContentStream")
 	}
 	_ret := _fnCGPDFScannerGetContentStream(objref.IDOf(scanner.Object))
-	return CGPDFContentStreamRef{obj.Wrap(_ret)}
+	return CGPDFContentStreamRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCGPDFScannerPopArray func(objc.ID, unsafe.Pointer) bool
@@ -6439,7 +6439,7 @@ func CGPDFScannerRetain(scanner CGPDFScannerRef) CGPDFScannerRef {
 		ebipurego.RegisterLibFunc(&_fnCGPDFScannerRetain, _lib, "CGPDFScannerRetain")
 	}
 	_ret := _fnCGPDFScannerRetain(objref.IDOf(scanner.Object))
-	return CGPDFScannerRef{obj.Wrap(_ret)}
+	return CGPDFScannerRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCGPDFScannerScan func(objc.ID) bool
@@ -6486,7 +6486,7 @@ func CGPDFStreamGetDictionary(stream CGPDFStreamRef) CGPDFDictionaryRef {
 		ebipurego.RegisterLibFunc(&_fnCGPDFStreamGetDictionary, _lib, "CGPDFStreamGetDictionary")
 	}
 	_ret := _fnCGPDFStreamGetDictionary(objref.IDOf(stream.Object))
-	return CGPDFDictionaryRef{obj.Wrap(_ret)}
+	return CGPDFDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCGPDFStringCopyDate func(objc.ID) objc.ID
@@ -6577,7 +6577,7 @@ func CGPSConverterCreate(info unsafe.Pointer, callbacks unsafe.Pointer, options 
 		ebipurego.RegisterLibFunc(&_fnCGPSConverterCreate, _lib, "CGPSConverterCreate")
 	}
 	_ret := _fnCGPSConverterCreate(info, callbacks, objref.IDOf(options))
-	return CGPSConverterRef{obj.Adopt(_ret)}
+	return CGPSConverterRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGPSConverterGetTypeID func() int
@@ -6787,7 +6787,7 @@ func CGPathCreateCopy(path CGPathRef) CGPathRef {
 		ebipurego.RegisterLibFunc(&_fnCGPathCreateCopy, _lib, "CGPathCreateCopy")
 	}
 	_ret := _fnCGPathCreateCopy(objref.IDOf(path.Object))
-	return CGPathRef{obj.Adopt(_ret)}
+	return CGPathRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGPathCreateCopyByDashingPath func(objc.ID, unsafe.Pointer, float64, unsafe.Pointer, int) objc.ID
@@ -6799,7 +6799,7 @@ func CGPathCreateCopyByDashingPath(path CGPathRef, transform *corefoundation.CGA
 		ebipurego.RegisterLibFunc(&_fnCGPathCreateCopyByDashingPath, _lib, "CGPathCreateCopyByDashingPath")
 	}
 	_ret := _fnCGPathCreateCopyByDashingPath(objref.IDOf(path.Object), unsafe.Pointer(transform), phase, lengths, count)
-	return CGPathRef{obj.Adopt(_ret)}
+	return CGPathRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGPathCreateCopyByFlattening func(objc.ID, float64) objc.ID
@@ -6811,7 +6811,7 @@ func CGPathCreateCopyByFlattening(path CGPathRef, flatteningThreshold float64) C
 		ebipurego.RegisterLibFunc(&_fnCGPathCreateCopyByFlattening, _lib, "CGPathCreateCopyByFlattening")
 	}
 	_ret := _fnCGPathCreateCopyByFlattening(objref.IDOf(path.Object), flatteningThreshold)
-	return CGPathRef{obj.Adopt(_ret)}
+	return CGPathRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGPathCreateCopyByIntersectingPath func(objc.ID, objc.ID, bool) objc.ID
@@ -6823,7 +6823,7 @@ func CGPathCreateCopyByIntersectingPath(path CGPathRef, maskPath CGPathRef, even
 		ebipurego.RegisterLibFunc(&_fnCGPathCreateCopyByIntersectingPath, _lib, "CGPathCreateCopyByIntersectingPath")
 	}
 	_ret := _fnCGPathCreateCopyByIntersectingPath(objref.IDOf(path.Object), objref.IDOf(maskPath.Object), evenOddFillRule)
-	return CGPathRef{obj.Adopt(_ret)}
+	return CGPathRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGPathCreateCopyByNormalizing func(objc.ID, bool) objc.ID
@@ -6835,7 +6835,7 @@ func CGPathCreateCopyByNormalizing(path CGPathRef, evenOddFillRule bool) CGPathR
 		ebipurego.RegisterLibFunc(&_fnCGPathCreateCopyByNormalizing, _lib, "CGPathCreateCopyByNormalizing")
 	}
 	_ret := _fnCGPathCreateCopyByNormalizing(objref.IDOf(path.Object), evenOddFillRule)
-	return CGPathRef{obj.Adopt(_ret)}
+	return CGPathRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGPathCreateCopyByStrokingPath func(objc.ID, unsafe.Pointer, float64, CGLineCap, CGLineJoin, float64) objc.ID
@@ -6847,7 +6847,7 @@ func CGPathCreateCopyByStrokingPath(path CGPathRef, transform *corefoundation.CG
 		ebipurego.RegisterLibFunc(&_fnCGPathCreateCopyByStrokingPath, _lib, "CGPathCreateCopyByStrokingPath")
 	}
 	_ret := _fnCGPathCreateCopyByStrokingPath(objref.IDOf(path.Object), unsafe.Pointer(transform), lineWidth, lineCap, lineJoin, miterLimit)
-	return CGPathRef{obj.Adopt(_ret)}
+	return CGPathRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGPathCreateCopyBySubtractingPath func(objc.ID, objc.ID, bool) objc.ID
@@ -6859,7 +6859,7 @@ func CGPathCreateCopyBySubtractingPath(path CGPathRef, maskPath CGPathRef, evenO
 		ebipurego.RegisterLibFunc(&_fnCGPathCreateCopyBySubtractingPath, _lib, "CGPathCreateCopyBySubtractingPath")
 	}
 	_ret := _fnCGPathCreateCopyBySubtractingPath(objref.IDOf(path.Object), objref.IDOf(maskPath.Object), evenOddFillRule)
-	return CGPathRef{obj.Adopt(_ret)}
+	return CGPathRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGPathCreateCopyBySymmetricDifferenceOfPath func(objc.ID, objc.ID, bool) objc.ID
@@ -6871,7 +6871,7 @@ func CGPathCreateCopyBySymmetricDifferenceOfPath(path CGPathRef, maskPath CGPath
 		ebipurego.RegisterLibFunc(&_fnCGPathCreateCopyBySymmetricDifferenceOfPath, _lib, "CGPathCreateCopyBySymmetricDifferenceOfPath")
 	}
 	_ret := _fnCGPathCreateCopyBySymmetricDifferenceOfPath(objref.IDOf(path.Object), objref.IDOf(maskPath.Object), evenOddFillRule)
-	return CGPathRef{obj.Adopt(_ret)}
+	return CGPathRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGPathCreateCopyByTransformingPath func(objc.ID, unsafe.Pointer) objc.ID
@@ -6883,7 +6883,7 @@ func CGPathCreateCopyByTransformingPath(path CGPathRef, transform *corefoundatio
 		ebipurego.RegisterLibFunc(&_fnCGPathCreateCopyByTransformingPath, _lib, "CGPathCreateCopyByTransformingPath")
 	}
 	_ret := _fnCGPathCreateCopyByTransformingPath(objref.IDOf(path.Object), unsafe.Pointer(transform))
-	return CGPathRef{obj.Adopt(_ret)}
+	return CGPathRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGPathCreateCopyByUnioningPath func(objc.ID, objc.ID, bool) objc.ID
@@ -6895,7 +6895,7 @@ func CGPathCreateCopyByUnioningPath(path CGPathRef, maskPath CGPathRef, evenOddF
 		ebipurego.RegisterLibFunc(&_fnCGPathCreateCopyByUnioningPath, _lib, "CGPathCreateCopyByUnioningPath")
 	}
 	_ret := _fnCGPathCreateCopyByUnioningPath(objref.IDOf(path.Object), objref.IDOf(maskPath.Object), evenOddFillRule)
-	return CGPathRef{obj.Adopt(_ret)}
+	return CGPathRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGPathCreateCopyOfLineByIntersectingPath func(objc.ID, objc.ID, bool) objc.ID
@@ -6907,7 +6907,7 @@ func CGPathCreateCopyOfLineByIntersectingPath(path CGPathRef, maskPath CGPathRef
 		ebipurego.RegisterLibFunc(&_fnCGPathCreateCopyOfLineByIntersectingPath, _lib, "CGPathCreateCopyOfLineByIntersectingPath")
 	}
 	_ret := _fnCGPathCreateCopyOfLineByIntersectingPath(objref.IDOf(path.Object), objref.IDOf(maskPath.Object), evenOddFillRule)
-	return CGPathRef{obj.Adopt(_ret)}
+	return CGPathRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGPathCreateCopyOfLineBySubtractingPath func(objc.ID, objc.ID, bool) objc.ID
@@ -6919,7 +6919,7 @@ func CGPathCreateCopyOfLineBySubtractingPath(path CGPathRef, maskPath CGPathRef,
 		ebipurego.RegisterLibFunc(&_fnCGPathCreateCopyOfLineBySubtractingPath, _lib, "CGPathCreateCopyOfLineBySubtractingPath")
 	}
 	_ret := _fnCGPathCreateCopyOfLineBySubtractingPath(objref.IDOf(path.Object), objref.IDOf(maskPath.Object), evenOddFillRule)
-	return CGPathRef{obj.Adopt(_ret)}
+	return CGPathRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGPathCreateMutable func() objc.ID
@@ -6931,7 +6931,7 @@ func CGPathCreateMutable() CGMutablePathRef {
 		ebipurego.RegisterLibFunc(&_fnCGPathCreateMutable, _lib, "CGPathCreateMutable")
 	}
 	_ret := _fnCGPathCreateMutable()
-	return CGMutablePathRef{obj.Adopt(_ret)}
+	return CGMutablePathRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGPathCreateMutableCopy func(objc.ID) objc.ID
@@ -6943,7 +6943,7 @@ func CGPathCreateMutableCopy(path CGPathRef) CGMutablePathRef {
 		ebipurego.RegisterLibFunc(&_fnCGPathCreateMutableCopy, _lib, "CGPathCreateMutableCopy")
 	}
 	_ret := _fnCGPathCreateMutableCopy(objref.IDOf(path.Object))
-	return CGMutablePathRef{obj.Adopt(_ret)}
+	return CGMutablePathRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGPathCreateMutableCopyByTransformingPath func(objc.ID, unsafe.Pointer) objc.ID
@@ -6955,7 +6955,7 @@ func CGPathCreateMutableCopyByTransformingPath(path CGPathRef, transform *corefo
 		ebipurego.RegisterLibFunc(&_fnCGPathCreateMutableCopyByTransformingPath, _lib, "CGPathCreateMutableCopyByTransformingPath")
 	}
 	_ret := _fnCGPathCreateMutableCopyByTransformingPath(objref.IDOf(path.Object), unsafe.Pointer(transform))
-	return CGMutablePathRef{obj.Adopt(_ret)}
+	return CGMutablePathRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGPathCreateSeparateComponents func(objc.ID, bool) objc.ID
@@ -6979,7 +6979,7 @@ func CGPathCreateWithEllipseInRect(rect corefoundation.CGRect, transform *corefo
 		ebipurego.RegisterLibFunc(&_fnCGPathCreateWithEllipseInRect, _lib, "CGPathCreateWithEllipseInRect")
 	}
 	_ret := _fnCGPathCreateWithEllipseInRect(rect, unsafe.Pointer(transform))
-	return CGPathRef{obj.Adopt(_ret)}
+	return CGPathRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGPathCreateWithRect func(corefoundation.CGRect, unsafe.Pointer) objc.ID
@@ -6991,7 +6991,7 @@ func CGPathCreateWithRect(rect corefoundation.CGRect, transform *corefoundation.
 		ebipurego.RegisterLibFunc(&_fnCGPathCreateWithRect, _lib, "CGPathCreateWithRect")
 	}
 	_ret := _fnCGPathCreateWithRect(rect, unsafe.Pointer(transform))
-	return CGPathRef{obj.Adopt(_ret)}
+	return CGPathRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGPathCreateWithRoundedRect func(corefoundation.CGRect, float64, float64, unsafe.Pointer) objc.ID
@@ -7003,7 +7003,7 @@ func CGPathCreateWithRoundedRect(rect corefoundation.CGRect, cornerWidth float64
 		ebipurego.RegisterLibFunc(&_fnCGPathCreateWithRoundedRect, _lib, "CGPathCreateWithRoundedRect")
 	}
 	_ret := _fnCGPathCreateWithRoundedRect(rect, cornerWidth, cornerHeight, unsafe.Pointer(transform))
-	return CGPathRef{obj.Adopt(_ret)}
+	return CGPathRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGPathEqualToPath func(objc.ID, objc.ID) bool
@@ -7125,7 +7125,7 @@ func CGPathRetain(path CGPathRef) CGPathRef {
 		ebipurego.RegisterLibFunc(&_fnCGPathRetain, _lib, "CGPathRetain")
 	}
 	_ret := _fnCGPathRetain(objref.IDOf(path.Object))
-	return CGPathRef{obj.Wrap(_ret)}
+	return CGPathRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCGPatternCreate func(unsafe.Pointer, corefoundation.CGRect, corefoundation.CGAffineTransform, float64, float64, CGPatternTiling, bool, unsafe.Pointer) objc.ID
@@ -7137,7 +7137,7 @@ func CGPatternCreate(info unsafe.Pointer, bounds corefoundation.CGRect, matrix c
 		ebipurego.RegisterLibFunc(&_fnCGPatternCreate, _lib, "CGPatternCreate")
 	}
 	_ret := _fnCGPatternCreate(info, bounds, matrix, xStep, yStep, tiling, isColored, callbacks)
-	return CGPatternRef{obj.Adopt(_ret)}
+	return CGPatternRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGPatternGetTypeID func() int
@@ -7171,7 +7171,7 @@ func CGPatternRetain(pattern CGPatternRef) CGPatternRef {
 		ebipurego.RegisterLibFunc(&_fnCGPatternRetain, _lib, "CGPatternRetain")
 	}
 	_ret := _fnCGPatternRetain(objref.IDOf(pattern.Object))
-	return CGPatternRef{obj.Wrap(_ret)}
+	return CGPatternRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCGPointApplyAffineTransform func(corefoundation.CGPoint, corefoundation.CGAffineTransform) corefoundation.CGPoint
@@ -7625,7 +7625,7 @@ func CGRenderingBufferProviderCreate(info unsafe.Pointer, size int, lockPointer 
 		ebipurego.RegisterLibFunc(&_fnCGRenderingBufferProviderCreate, _lib, "CGRenderingBufferProviderCreate")
 	}
 	_ret := _fnCGRenderingBufferProviderCreate(info, size, lockPointer, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 unsafe.Pointer) { unlockPointer(_b0, _b1) }), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { releaseInfo(_b0) }))
-	return CGRenderingBufferProviderRef{obj.Adopt(_ret)}
+	return CGRenderingBufferProviderRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGRenderingBufferProviderCreateWithCFData func(objc.ID) objc.ID
@@ -7637,7 +7637,7 @@ func CGRenderingBufferProviderCreateWithCFData(data obj.Object) CGRenderingBuffe
 		ebipurego.RegisterLibFunc(&_fnCGRenderingBufferProviderCreateWithCFData, _lib, "CGRenderingBufferProviderCreateWithCFData")
 	}
 	_ret := _fnCGRenderingBufferProviderCreateWithCFData(objref.IDOf(data))
-	return CGRenderingBufferProviderRef{obj.Adopt(_ret)}
+	return CGRenderingBufferProviderRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGRenderingBufferProviderGetSize func(objc.ID) int
@@ -7815,7 +7815,7 @@ func CGShadingCreateAxial(space CGColorSpaceRef, start corefoundation.CGPoint, e
 		ebipurego.RegisterLibFunc(&_fnCGShadingCreateAxial, _lib, "CGShadingCreateAxial")
 	}
 	_ret := _fnCGShadingCreateAxial(objref.IDOf(space.Object), start, end, objref.IDOf(function.Object), extendStart, extendEnd)
-	return CGShadingRef{obj.Adopt(_ret)}
+	return CGShadingRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGShadingCreateAxialWithContentHeadroom func(float32, objc.ID, corefoundation.CGPoint, corefoundation.CGPoint, objc.ID, bool, bool) objc.ID
@@ -7827,7 +7827,7 @@ func CGShadingCreateAxialWithContentHeadroom(headroom float32, space CGColorSpac
 		ebipurego.RegisterLibFunc(&_fnCGShadingCreateAxialWithContentHeadroom, _lib, "CGShadingCreateAxialWithContentHeadroom")
 	}
 	_ret := _fnCGShadingCreateAxialWithContentHeadroom(headroom, objref.IDOf(space.Object), start, end, objref.IDOf(function.Object), extendStart, extendEnd)
-	return CGShadingRef{obj.Adopt(_ret)}
+	return CGShadingRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGShadingCreateRadial func(objc.ID, corefoundation.CGPoint, float64, corefoundation.CGPoint, float64, objc.ID, bool, bool) objc.ID
@@ -7839,7 +7839,7 @@ func CGShadingCreateRadial(space CGColorSpaceRef, start corefoundation.CGPoint, 
 		ebipurego.RegisterLibFunc(&_fnCGShadingCreateRadial, _lib, "CGShadingCreateRadial")
 	}
 	_ret := _fnCGShadingCreateRadial(objref.IDOf(space.Object), start, startRadius, end, endRadius, objref.IDOf(function.Object), extendStart, extendEnd)
-	return CGShadingRef{obj.Adopt(_ret)}
+	return CGShadingRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGShadingCreateRadialWithContentHeadroom func(float32, objc.ID, corefoundation.CGPoint, float64, corefoundation.CGPoint, float64, objc.ID, bool, bool) objc.ID
@@ -7851,7 +7851,7 @@ func CGShadingCreateRadialWithContentHeadroom(headroom float32, space CGColorSpa
 		ebipurego.RegisterLibFunc(&_fnCGShadingCreateRadialWithContentHeadroom, _lib, "CGShadingCreateRadialWithContentHeadroom")
 	}
 	_ret := _fnCGShadingCreateRadialWithContentHeadroom(headroom, objref.IDOf(space.Object), start, startRadius, end, endRadius, objref.IDOf(function.Object), extendStart, extendEnd)
-	return CGShadingRef{obj.Adopt(_ret)}
+	return CGShadingRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGShadingGetContentHeadroom func(objc.ID) float32
@@ -7896,7 +7896,7 @@ func CGShadingRetain(shading CGShadingRef) CGShadingRef {
 		ebipurego.RegisterLibFunc(&_fnCGShadingRetain, _lib, "CGShadingRetain")
 	}
 	_ret := _fnCGShadingRetain(objref.IDOf(shading.Object))
-	return CGShadingRef{obj.Wrap(_ret)}
+	return CGShadingRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCGShieldingWindowID func(uint32) uint32
@@ -8094,7 +8094,7 @@ func CGWindowListCreateImage(screenBounds corefoundation.CGRect, listOption CGWi
 		ebipurego.RegisterLibFunc(&_fnCGWindowListCreateImage, _lib, "CGWindowListCreateImage")
 	}
 	_ret := _fnCGWindowListCreateImage(screenBounds, listOption, windowID, imageOption)
-	return CGImageRef{obj.Adopt(_ret)}
+	return CGImageRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGWindowListCreateImageFromArray func(corefoundation.CGRect, objc.ID, CGWindowImageOption) objc.ID
@@ -8106,7 +8106,7 @@ func CGWindowListCreateImageFromArray(screenBounds corefoundation.CGRect, window
 		ebipurego.RegisterLibFunc(&_fnCGWindowListCreateImageFromArray, _lib, "CGWindowListCreateImageFromArray")
 	}
 	_ret := _fnCGWindowListCreateImageFromArray(screenBounds, objref.IDOf(windowArray), imageOption)
-	return CGImageRef{obj.Adopt(_ret)}
+	return CGImageRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGWindowServerCFMachPort func() objc.ID

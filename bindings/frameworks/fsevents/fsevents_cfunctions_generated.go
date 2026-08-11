@@ -24,7 +24,7 @@ func FSEventStreamCopyDescription(streamRef ConstFSEventStreamRef) corefoundatio
 		ebipurego.RegisterLibFunc(&_fnFSEventStreamCopyDescription, _lib, "FSEventStreamCopyDescription")
 	}
 	_ret := _fnFSEventStreamCopyDescription(objref.IDOf(streamRef.Object))
-	return corefoundation.CFStringRef{obj.Adopt(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnFSEventStreamCopyPathsBeingWatched func(objc.ID) objc.ID
@@ -36,7 +36,7 @@ func FSEventStreamCopyPathsBeingWatched(streamRef ConstFSEventStreamRef) corefou
 		ebipurego.RegisterLibFunc(&_fnFSEventStreamCopyPathsBeingWatched, _lib, "FSEventStreamCopyPathsBeingWatched")
 	}
 	_ret := _fnFSEventStreamCopyPathsBeingWatched(objref.IDOf(streamRef.Object))
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnFSEventStreamCreate func(objc.ID, unsafe.Pointer, unsafe.Pointer, objc.ID, uint64, float64, int) objc.ID
@@ -48,7 +48,7 @@ func FSEventStreamCreate(allocator corefoundation.CFAllocatorRef, callback unsaf
 		ebipurego.RegisterLibFunc(&_fnFSEventStreamCreate, _lib, "FSEventStreamCreate")
 	}
 	_ret := _fnFSEventStreamCreate(objref.IDOf(allocator.Object), callback, context_, objref.IDOf(pathsToWatch.Object), sinceWhen, latency, flags)
-	return FSEventStreamRef{obj.WrapUnmanaged(_ret)}
+	return FSEventStreamRef{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnFSEventStreamCreateRelativeToDevice func(objc.ID, unsafe.Pointer, unsafe.Pointer, int, objc.ID, uint64, float64, int) objc.ID
@@ -60,7 +60,7 @@ func FSEventStreamCreateRelativeToDevice(allocator corefoundation.CFAllocatorRef
 		ebipurego.RegisterLibFunc(&_fnFSEventStreamCreateRelativeToDevice, _lib, "FSEventStreamCreateRelativeToDevice")
 	}
 	_ret := _fnFSEventStreamCreateRelativeToDevice(objref.IDOf(allocator.Object), callback, context_, deviceToWatch, objref.IDOf(pathsToWatchRelativeToDevice.Object), sinceWhen, latency, flags)
-	return FSEventStreamRef{obj.WrapUnmanaged(_ret)}
+	return FSEventStreamRef{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnFSEventStreamFlushAsync func(objc.ID) uint64
@@ -226,7 +226,7 @@ func FSEventsCopyUUIDForDevice(dev int) corefoundation.CFUUIDRef {
 		ebipurego.RegisterLibFunc(&_fnFSEventsCopyUUIDForDevice, _lib, "FSEventsCopyUUIDForDevice")
 	}
 	_ret := _fnFSEventsCopyUUIDForDevice(dev)
-	return corefoundation.CFUUIDRef{obj.Adopt(_ret)}
+	return corefoundation.CFUUIDRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnFSEventsGetCurrentEventId func() uint64

@@ -578,7 +578,7 @@ func OSArrayGetValue(index int) (result OSObjectPtr, object int32) {
 	}
 	var _out0 int32
 	_ret := _fnOSArrayGetValue(unsafe.Pointer(&_out0), index)
-	return OSObjectPtr{obj.WrapUnmanaged(_ret)}, _out0
+	return OSObjectPtr{Object: obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnOSArrayReplaceValue func(unsafe.Pointer, int, objc.ID) bool
@@ -676,7 +676,7 @@ func OSCreateObjectFromSerialization() (result OSObjectPtr, serial int32) {
 	}
 	var _out0 int32
 	_ret := _fnOSCreateObjectFromSerialization(unsafe.Pointer(&_out0))
-	return OSObjectPtr{obj.WrapUnmanaged(_ret)}, _out0
+	return OSObjectPtr{Object: obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnOSCreateSerializationFromBytes func(unsafe.Pointer, int, objc.Block) unsafe.Pointer
@@ -837,7 +837,7 @@ func OSDictionaryGetValue(key string) (result OSObjectPtr, object int32) {
 	}
 	var _out0 int32
 	_ret := _fnOSDictionaryGetValue(unsafe.Pointer(&_out0), key)
-	return OSObjectPtr{obj.WrapUnmanaged(_ret)}, _out0
+	return OSObjectPtr{Object: obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnOSDictionarySetStringValue func(unsafe.Pointer, string, string)

@@ -49,6 +49,12 @@ func NewArrayStridedSlice() *ArrayStridedSlice {
 	return arrayStridedSliceAdopt(_id)
 }
 
+// WithStrides sets the strides to use when slicing the input array.
+func (ass *ArrayStridedSlice) WithStrides(strides MPSNDArrayOffsets) *ArrayStridedSlice {
+	objc.Send[objc.ID](objref.IDOf(ass), objc.RegisterName("setStrides:"), strides)
+	return ass
+}
+
 var _ ArrayUnaryKernelProvider = (*ArrayStridedSlice)(nil)
 
 var _ ArrayMultiaryKernelProvider = (*ArrayStridedSlice)(nil)

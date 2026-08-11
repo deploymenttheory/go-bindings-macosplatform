@@ -30084,7 +30084,7 @@ func SparseMatrixBlockCreateDouble(mb uint64, nb uint64, k uint64, l uint64) Spa
 		ebipurego.RegisterLibFunc(&_fnSparseMatrixBlockCreateDouble, _lib, "sparse_matrix_block_create_double")
 	}
 	_ret := _fnSparseMatrixBlockCreateDouble(mb, nb, k, l)
-	return SparseMatrixDouble{obj.WrapUnmanaged(_ret)}
+	return SparseMatrixDouble{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnSparseMatrixBlockCreateDoubleComplex func(uint64, uint64, uint64, uint64) objc.ID
@@ -30096,7 +30096,7 @@ func SparseMatrixBlockCreateDoubleComplex(mb uint64, nb uint64, k uint64, l uint
 		ebipurego.RegisterLibFunc(&_fnSparseMatrixBlockCreateDoubleComplex, _lib, "sparse_matrix_block_create_double_complex")
 	}
 	_ret := _fnSparseMatrixBlockCreateDoubleComplex(mb, nb, k, l)
-	return SparseMatrixDoubleComplex{obj.WrapUnmanaged(_ret)}
+	return SparseMatrixDoubleComplex{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnSparseMatrixBlockCreateFloat func(uint64, uint64, uint64, uint64) objc.ID
@@ -30108,7 +30108,7 @@ func SparseMatrixBlockCreateFloat(mb uint64, nb uint64, k uint64, l uint64) Spar
 		ebipurego.RegisterLibFunc(&_fnSparseMatrixBlockCreateFloat, _lib, "sparse_matrix_block_create_float")
 	}
 	_ret := _fnSparseMatrixBlockCreateFloat(mb, nb, k, l)
-	return SparseMatrixFloat{obj.WrapUnmanaged(_ret)}
+	return SparseMatrixFloat{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnSparseMatrixBlockCreateFloatComplex func(uint64, uint64, uint64, uint64) objc.ID
@@ -30120,7 +30120,7 @@ func SparseMatrixBlockCreateFloatComplex(mb uint64, nb uint64, k uint64, l uint6
 		ebipurego.RegisterLibFunc(&_fnSparseMatrixBlockCreateFloatComplex, _lib, "sparse_matrix_block_create_float_complex")
 	}
 	_ret := _fnSparseMatrixBlockCreateFloatComplex(mb, nb, k, l)
-	return SparseMatrixFloatComplex{obj.WrapUnmanaged(_ret)}
+	return SparseMatrixFloatComplex{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnSparseMatrixCreateDouble func(uint64, uint64) objc.ID
@@ -30132,7 +30132,7 @@ func SparseMatrixCreateDouble(m uint64, n uint64) SparseMatrixDouble {
 		ebipurego.RegisterLibFunc(&_fnSparseMatrixCreateDouble, _lib, "sparse_matrix_create_double")
 	}
 	_ret := _fnSparseMatrixCreateDouble(m, n)
-	return SparseMatrixDouble{obj.WrapUnmanaged(_ret)}
+	return SparseMatrixDouble{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnSparseMatrixCreateDoubleComplex func(uint64, uint64) objc.ID
@@ -30144,7 +30144,7 @@ func SparseMatrixCreateDoubleComplex(m uint64, n uint64) SparseMatrixDoubleCompl
 		ebipurego.RegisterLibFunc(&_fnSparseMatrixCreateDoubleComplex, _lib, "sparse_matrix_create_double_complex")
 	}
 	_ret := _fnSparseMatrixCreateDoubleComplex(m, n)
-	return SparseMatrixDoubleComplex{obj.WrapUnmanaged(_ret)}
+	return SparseMatrixDoubleComplex{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnSparseMatrixCreateFloat func(uint64, uint64) objc.ID
@@ -30156,7 +30156,7 @@ func SparseMatrixCreateFloat(m uint64, n uint64) SparseMatrixFloat {
 		ebipurego.RegisterLibFunc(&_fnSparseMatrixCreateFloat, _lib, "sparse_matrix_create_float")
 	}
 	_ret := _fnSparseMatrixCreateFloat(m, n)
-	return SparseMatrixFloat{obj.WrapUnmanaged(_ret)}
+	return SparseMatrixFloat{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnSparseMatrixCreateFloatComplex func(uint64, uint64) objc.ID
@@ -30168,7 +30168,7 @@ func SparseMatrixCreateFloatComplex(m uint64, n uint64) SparseMatrixFloatComplex
 		ebipurego.RegisterLibFunc(&_fnSparseMatrixCreateFloatComplex, _lib, "sparse_matrix_create_float_complex")
 	}
 	_ret := _fnSparseMatrixCreateFloatComplex(m, n)
-	return SparseMatrixFloatComplex{obj.WrapUnmanaged(_ret)}
+	return SparseMatrixFloatComplex{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnSparseMatrixDestroy func(unsafe.Pointer) unsafe.Pointer
@@ -30367,7 +30367,7 @@ func SparseMatrixVariableBlockCreateDouble(mb uint64, nb uint64, k unsafe.Pointe
 		ebipurego.RegisterLibFunc(&_fnSparseMatrixVariableBlockCreateDouble, _lib, "sparse_matrix_variable_block_create_double")
 	}
 	_ret := _fnSparseMatrixVariableBlockCreateDouble(mb, nb, k, l)
-	return SparseMatrixDouble{obj.WrapUnmanaged(_ret)}
+	return SparseMatrixDouble{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnSparseMatrixVariableBlockCreateDoubleComplex func(uint64, uint64, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -30379,7 +30379,7 @@ func SparseMatrixVariableBlockCreateDoubleComplex(mb uint64, nb uint64, k unsafe
 		ebipurego.RegisterLibFunc(&_fnSparseMatrixVariableBlockCreateDoubleComplex, _lib, "sparse_matrix_variable_block_create_double_complex")
 	}
 	_ret := _fnSparseMatrixVariableBlockCreateDoubleComplex(mb, nb, k, l)
-	return SparseMatrixDoubleComplex{obj.WrapUnmanaged(_ret)}
+	return SparseMatrixDoubleComplex{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnSparseMatrixVariableBlockCreateFloat func(uint64, uint64, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -30391,7 +30391,7 @@ func SparseMatrixVariableBlockCreateFloat(mb uint64, nb uint64, k unsafe.Pointer
 		ebipurego.RegisterLibFunc(&_fnSparseMatrixVariableBlockCreateFloat, _lib, "sparse_matrix_variable_block_create_float")
 	}
 	_ret := _fnSparseMatrixVariableBlockCreateFloat(mb, nb, k, l)
-	return SparseMatrixFloat{obj.WrapUnmanaged(_ret)}
+	return SparseMatrixFloat{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnSparseMatrixVariableBlockCreateFloatComplex func(uint64, uint64, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -30403,7 +30403,7 @@ func SparseMatrixVariableBlockCreateFloatComplex(mb uint64, nb uint64, k unsafe.
 		ebipurego.RegisterLibFunc(&_fnSparseMatrixVariableBlockCreateFloatComplex, _lib, "sparse_matrix_variable_block_create_float_complex")
 	}
 	_ret := _fnSparseMatrixVariableBlockCreateFloatComplex(mb, nb, k, l)
-	return SparseMatrixFloatComplex{obj.WrapUnmanaged(_ret)}
+	return SparseMatrixFloatComplex{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnSparseMatrixVectorProductDenseDouble func(CblasTranspose, float64, objc.ID, unsafe.Pointer, int64, unsafe.Pointer, int64) unsafe.Pointer
@@ -34232,7 +34232,7 @@ func VDSPDCTCreateSetup(previous VDSPDFTSetup, length int, type_ VdspDctType) VD
 		ebipurego.RegisterLibFunc(&_fnVDSPDCTCreateSetup, _lib, "vDSP_DCT_CreateSetup")
 	}
 	_ret := _fnVDSPDCTCreateSetup(objref.IDOf(previous.Object), length, type_)
-	return VDSPDFTSetup{obj.WrapUnmanaged(_ret)}
+	return VDSPDFTSetup{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnVDSPDCTExecute func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
@@ -34257,7 +34257,7 @@ func VDSPDFTCreateSetup(previous VDSPDFTSetup, length int) VDSPDFTSetup {
 		ebipurego.RegisterLibFunc(&_fnVDSPDFTCreateSetup, _lib, "vDSP_DFT_CreateSetup")
 	}
 	_ret := _fnVDSPDFTCreateSetup(objref.IDOf(previous.Object), length)
-	return VDSPDFTSetup{obj.WrapUnmanaged(_ret)}
+	return VDSPDFTSetup{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnVDSPDFTDestroySetup func(objc.ID)
@@ -34319,7 +34319,7 @@ func VDSPDFTInterleavedCreateSetup(previous VDSPDFTInterleavedSetup, length int,
 		ebipurego.RegisterLibFunc(&_fnVDSPDFTInterleavedCreateSetup, _lib, "vDSP_DFT_Interleaved_CreateSetup")
 	}
 	_ret := _fnVDSPDFTInterleavedCreateSetup(objref.IDOf(previous.Object), length, direction, realtoComplex)
-	return VDSPDFTInterleavedSetup{obj.WrapUnmanaged(_ret)}
+	return VDSPDFTInterleavedSetup{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnVDSPDFTInterleavedCreateSetupD func(objc.ID, int, VdspDftDirection, VdspDftRealtocomplex) objc.ID
@@ -34331,7 +34331,7 @@ func VDSPDFTInterleavedCreateSetupD(previous VDSPDFTInterleavedSetupD, length in
 		ebipurego.RegisterLibFunc(&_fnVDSPDFTInterleavedCreateSetupD, _lib, "vDSP_DFT_Interleaved_CreateSetupD")
 	}
 	_ret := _fnVDSPDFTInterleavedCreateSetupD(objref.IDOf(previous.Object), length, direction, realtoComplex)
-	return VDSPDFTInterleavedSetupD{obj.WrapUnmanaged(_ret)}
+	return VDSPDFTInterleavedSetupD{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnVDSPDFTInterleavedDestroySetup func(objc.ID)
@@ -34405,7 +34405,7 @@ func VDSPDFTZopCreateSetup(previous VDSPDFTSetup, length int, direction VdspDftD
 		ebipurego.RegisterLibFunc(&_fnVDSPDFTZopCreateSetup, _lib, "vDSP_DFT_zop_CreateSetup")
 	}
 	_ret := _fnVDSPDFTZopCreateSetup(objref.IDOf(previous.Object), length, direction)
-	return VDSPDFTSetup{obj.WrapUnmanaged(_ret)}
+	return VDSPDFTSetup{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnVDSPDFTZopCreateSetupD func(objc.ID, int, VdspDftDirection) objc.ID
@@ -34417,7 +34417,7 @@ func VDSPDFTZopCreateSetupD(previous VDSPDFTSetupD, length int, direction VdspDf
 		ebipurego.RegisterLibFunc(&_fnVDSPDFTZopCreateSetupD, _lib, "vDSP_DFT_zop_CreateSetupD")
 	}
 	_ret := _fnVDSPDFTZopCreateSetupD(objref.IDOf(previous.Object), length, direction)
-	return VDSPDFTSetupD{obj.WrapUnmanaged(_ret)}
+	return VDSPDFTSetupD{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnVDSPDFTZropCreateSetup func(objc.ID, int, VdspDftDirection) objc.ID
@@ -34429,7 +34429,7 @@ func VDSPDFTZropCreateSetup(previous VDSPDFTSetup, length int, direction VdspDft
 		ebipurego.RegisterLibFunc(&_fnVDSPDFTZropCreateSetup, _lib, "vDSP_DFT_zrop_CreateSetup")
 	}
 	_ret := _fnVDSPDFTZropCreateSetup(objref.IDOf(previous.Object), length, direction)
-	return VDSPDFTSetup{obj.WrapUnmanaged(_ret)}
+	return VDSPDFTSetup{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnVDSPDFTZropCreateSetupD func(objc.ID, int, VdspDftDirection) objc.ID
@@ -34441,7 +34441,7 @@ func VDSPDFTZropCreateSetupD(previous VDSPDFTSetupD, length int, direction VdspD
 		ebipurego.RegisterLibFunc(&_fnVDSPDFTZropCreateSetupD, _lib, "vDSP_DFT_zrop_CreateSetupD")
 	}
 	_ret := _fnVDSPDFTZropCreateSetupD(objref.IDOf(previous.Object), length, direction)
-	return VDSPDFTSetupD{obj.WrapUnmanaged(_ret)}
+	return VDSPDFTSetupD{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnVDSPFFT16Copv func(unsafe.Pointer, unsafe.Pointer, int)
@@ -34535,7 +34535,7 @@ func VDSPBiquadCreateSetup(coefficients unsafe.Pointer, m int) VDSPBiquadSetup {
 		ebipurego.RegisterLibFunc(&_fnVDSPBiquadCreateSetup, _lib, "vDSP_biquad_CreateSetup")
 	}
 	_ret := _fnVDSPBiquadCreateSetup(coefficients, m)
-	return VDSPBiquadSetup{obj.WrapUnmanaged(_ret)}
+	return VDSPBiquadSetup{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnVDSPBiquadCreateSetupD func(unsafe.Pointer, int) objc.ID
@@ -34547,7 +34547,7 @@ func VDSPBiquadCreateSetupD(coefficients unsafe.Pointer, m int) VDSPBiquadSetupD
 		ebipurego.RegisterLibFunc(&_fnVDSPBiquadCreateSetupD, _lib, "vDSP_biquad_CreateSetupD")
 	}
 	_ret := _fnVDSPBiquadCreateSetupD(coefficients, m)
-	return VDSPBiquadSetupD{obj.WrapUnmanaged(_ret)}
+	return VDSPBiquadSetupD{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnVDSPBiquadDestroySetup func(objc.ID)
@@ -34651,7 +34651,7 @@ func VDSPBiquadmCreateSetup(coeffs unsafe.Pointer, m int, n int) VDSPBiquadmSetu
 		ebipurego.RegisterLibFunc(&_fnVDSPBiquadmCreateSetup, _lib, "vDSP_biquadm_CreateSetup")
 	}
 	_ret := _fnVDSPBiquadmCreateSetup(coeffs, m, n)
-	return VDSPBiquadmSetup{obj.WrapUnmanaged(_ret)}
+	return VDSPBiquadmSetup{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnVDSPBiquadmCreateSetupD func(unsafe.Pointer, int, int) objc.ID
@@ -34663,7 +34663,7 @@ func VDSPBiquadmCreateSetupD(coeffs unsafe.Pointer, m int, n int) VDSPBiquadmSet
 		ebipurego.RegisterLibFunc(&_fnVDSPBiquadmCreateSetupD, _lib, "vDSP_biquadm_CreateSetupD")
 	}
 	_ret := _fnVDSPBiquadmCreateSetupD(coeffs, m, n)
-	return VDSPBiquadmSetupD{obj.WrapUnmanaged(_ret)}
+	return VDSPBiquadmSetupD{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnVDSPBiquadmDestroySetup func(objc.ID)
@@ -34881,7 +34881,7 @@ func VDSPCreateFftsetup(log2n int, radix int) FFTSetup {
 		ebipurego.RegisterLibFunc(&_fnVDSPCreateFftsetup, _lib, "vDSP_create_fftsetup")
 	}
 	_ret := _fnVDSPCreateFftsetup(log2n, radix)
-	return FFTSetup{obj.WrapUnmanaged(_ret)}
+	return FFTSetup{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnVDSPCreateFftsetupD func(int, int) objc.ID
@@ -34893,7 +34893,7 @@ func VDSPCreateFftsetupD(log2n int, radix int) FFTSetupD {
 		ebipurego.RegisterLibFunc(&_fnVDSPCreateFftsetupD, _lib, "vDSP_create_fftsetupD")
 	}
 	_ret := _fnVDSPCreateFftsetupD(log2n, radix)
-	return FFTSetupD{obj.WrapUnmanaged(_ret)}
+	return FFTSetupD{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnVDSPCtoz func(unsafe.Pointer, int, unsafe.Pointer, int, int)

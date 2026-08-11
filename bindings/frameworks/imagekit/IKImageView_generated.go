@@ -219,7 +219,7 @@ func (iv *ImageView) Image() coregraphics.CGImageRef {
 	purego.Main(func() {
 		_mainthread0 = func() coregraphics.CGImageRef {
 			_r := objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("image"))
-			return coregraphics.CGImageRef{obj.Wrap(_r)}
+			return coregraphics.CGImageRef{Object: obj.Wrap(_r)}
 		}()
 	})
 	return _mainthread0

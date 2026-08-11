@@ -126,6 +126,13 @@ func (f *Formatter) IsPartialStringValidNewEditingStringErrorDescription(partial
 	return _r
 }
 
+// IsPartialStringValidProposedSelectedRangeOriginalStringOriginalSelectedRangeErrorDescription wraps the corresponding Objective-C method.
+func (f *Formatter) IsPartialStringValidProposedSelectedRangeOriginalStringOriginalSelectedRangeErrorDescription(partialStringPtr string, proposedSelRangePtr *NSRange, origString string, origSelRange NSRange, err string) bool {
+	defer runtime.KeepAlive(f)
+	_r := objc.Send[bool](objref.IDOf(f), objc.RegisterName("isPartialStringValid:proposedSelectedRange:originalString:originalSelectedRange:errorDescription:"), purego.NSString(partialStringPtr), unsafe.Pointer(proposedSelRangePtr), purego.NSString(origString), origSelRange, purego.NSString(err))
+	return _r
+}
+
 // isFormatter marks Formatter — and, by embedding promotion, its
 // subclasses — as a member of the Formatter hierarchy, sealing its provider
 // interface so only real members satisfy it.

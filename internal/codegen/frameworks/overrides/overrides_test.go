@@ -3,8 +3,8 @@ package overrides
 import (
 	"testing"
 
-	rootoverrides "github.com/deploymenttheory/go-bindings-macosplatform/internal/overrides"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
+	rootoverrides "github.com/deploymenttheory/go-bindings-macosplatform/internal/overrides"
 )
 
 func sampleFramework() *meta.FrameworkMeta {

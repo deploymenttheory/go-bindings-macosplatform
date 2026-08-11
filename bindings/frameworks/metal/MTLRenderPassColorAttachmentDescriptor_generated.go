@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
@@ -49,6 +51,12 @@ func renderPassColorAttachmentDescriptorAdopt(id objc.ID) *RenderPassColorAttach
 func NewRenderPassColorAttachmentDescriptor() *RenderPassColorAttachmentDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLRenderPassColorAttachmentDescriptor")), objc.RegisterName("new"))
 	return renderPassColorAttachmentDescriptorAdopt(_id)
+}
+
+// WithClearColor sets the color to use when clearing the color attachment.
+func (rpcad *RenderPassColorAttachmentDescriptor) WithClearColor(clearColor MTLClearColor) *RenderPassColorAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rpcad), objc.RegisterName("setClearColor:"), clearColor)
+	return rpcad
 }
 
 // WithLevel sets the mipmap level of the texture used for rendering to the attachment.
@@ -103,6 +111,13 @@ func (rpcad *RenderPassColorAttachmentDescriptor) WithStoreAction(storeAction St
 func (rpcad *RenderPassColorAttachmentDescriptor) WithStoreActionOptions(storeActionOptions StoreActionOptions) *RenderPassColorAttachmentDescriptor {
 	objc.Send[objc.ID](objref.IDOf(rpcad), objc.RegisterName("setStoreActionOptions:"), storeActionOptions)
 	return rpcad
+}
+
+// ClearColor returns the clear color.
+func (rpcad *RenderPassColorAttachmentDescriptor) ClearColor() MTLClearColor {
+	defer runtime.KeepAlive(rpcad)
+	_r := objc.Send[MTLClearColor](objref.IDOf(rpcad), objc.RegisterName("clearColor"))
+	return _r
 }
 
 var _ RenderPassAttachmentDescriptorProvider = (*RenderPassColorAttachmentDescriptor)(nil)

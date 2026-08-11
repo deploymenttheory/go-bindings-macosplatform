@@ -259,7 +259,7 @@ func buildBridgeHeaderModel(framework *macosplatformmetadata.FrameworkMeta, m *t
 		FunctionDecls: functionDecls,
 		ForeignDecls:  foreignDecls,
 		ProtoDecls:    protoDecls,
-	
+
 		ExternGetters: buildExternGetters(strings.ToLower(framework.Framework), framework, m, knownClasses),
 	}
 }
@@ -438,8 +438,8 @@ func buildBridgeImplModel(framework *macosplatformmetadata.FrameworkMeta, m *typ
 		Functions:       functions,
 		ForeignMethods:  foreignMethods,
 		ProtoMethods:    protoMethods,
-	
-		ExternGetters:   buildExternGetters(strings.ToLower(framework.Framework), framework, m, knownClasses),
+
+		ExternGetters: buildExternGetters(strings.ToLower(framework.Framework), framework, m, knownClasses),
 	}
 }
 

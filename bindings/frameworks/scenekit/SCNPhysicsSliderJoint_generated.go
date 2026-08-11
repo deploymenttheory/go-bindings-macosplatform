@@ -53,6 +53,30 @@ func NewPhysicsSliderJoint() *PhysicsSliderJoint {
 	return physicsSliderJointAdopt(_id)
 }
 
+// WithAxisA sets the axis along which the first body can slide, relative to the node containing it.
+func (psj *PhysicsSliderJoint) WithAxisA(axisA SCNVector3) *PhysicsSliderJoint {
+	objc.Send[objc.ID](objref.IDOf(psj), objc.RegisterName("setAxisA:"), axisA)
+	return psj
+}
+
+// WithAnchorA sets the point at which the joint connects, relative to the node containing the first body.
+func (psj *PhysicsSliderJoint) WithAnchorA(anchorA SCNVector3) *PhysicsSliderJoint {
+	objc.Send[objc.ID](objref.IDOf(psj), objc.RegisterName("setAnchorA:"), anchorA)
+	return psj
+}
+
+// WithAxisB sets the axis along which the second body can slide, relative to the node containing it.
+func (psj *PhysicsSliderJoint) WithAxisB(axisB SCNVector3) *PhysicsSliderJoint {
+	objc.Send[objc.ID](objref.IDOf(psj), objc.RegisterName("setAxisB:"), axisB)
+	return psj
+}
+
+// WithAnchorB sets the point at which the joint connects, relative to the node containing the second body.
+func (psj *PhysicsSliderJoint) WithAnchorB(anchorB SCNVector3) *PhysicsSliderJoint {
+	objc.Send[objc.ID](objref.IDOf(psj), objc.RegisterName("setAnchorB:"), anchorB)
+	return psj
+}
+
 // WithMinimumLinearLimit sets the minimum distance between the anchor points of the two bodies, relative to their initial positions.
 func (psj *PhysicsSliderJoint) WithMinimumLinearLimit(minimumLinearLimit float64) *PhysicsSliderJoint {
 	objc.Send[objc.ID](objref.IDOf(psj), objc.RegisterName("setMinimumLinearLimit:"), minimumLinearLimit)
@@ -108,11 +132,39 @@ func (psj *PhysicsSliderJoint) BodyA() *PhysicsBody {
 	return PhysicsBodyFromID(_r)
 }
 
+// AxisA returns the axis a.
+func (psj *PhysicsSliderJoint) AxisA() SCNVector3 {
+	defer runtime.KeepAlive(psj)
+	_r := objc.Send[SCNVector3](objref.IDOf(psj), objc.RegisterName("axisA"))
+	return _r
+}
+
+// AnchorA returns the anchor a.
+func (psj *PhysicsSliderJoint) AnchorA() SCNVector3 {
+	defer runtime.KeepAlive(psj)
+	_r := objc.Send[SCNVector3](objref.IDOf(psj), objc.RegisterName("anchorA"))
+	return _r
+}
+
 // BodyB returns the body b.
 func (psj *PhysicsSliderJoint) BodyB() *PhysicsBody {
 	defer runtime.KeepAlive(psj)
 	_r := objc.Send[objc.ID](objref.IDOf(psj), objc.RegisterName("bodyB"))
 	return PhysicsBodyFromID(_r)
+}
+
+// AxisB returns the axis b.
+func (psj *PhysicsSliderJoint) AxisB() SCNVector3 {
+	defer runtime.KeepAlive(psj)
+	_r := objc.Send[SCNVector3](objref.IDOf(psj), objc.RegisterName("axisB"))
+	return _r
+}
+
+// AnchorB returns the anchor b.
+func (psj *PhysicsSliderJoint) AnchorB() SCNVector3 {
+	defer runtime.KeepAlive(psj)
+	_r := objc.Send[SCNVector3](objref.IDOf(psj), objc.RegisterName("anchorB"))
+	return _r
 }
 
 // MinimumLinearLimit returns the minimum linear limit.

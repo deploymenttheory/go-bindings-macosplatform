@@ -53,6 +53,12 @@ func NewMTL4IndirectInstanceAccelerationStructureDescriptor() *MTL4IndirectInsta
 	return mTL4IndirectInstanceAccelerationStructureDescriptorAdopt(_id)
 }
 
+// WithInstanceDescriptorBuffer sets assigns a reference to a buffer containing instance descriptors for acceleration structures to reference.
+func (miiasd *MTL4IndirectInstanceAccelerationStructureDescriptor) WithInstanceDescriptorBuffer(instanceDescriptorBuffer MTL4BufferRange) *MTL4IndirectInstanceAccelerationStructureDescriptor {
+	objc.Send[objc.ID](objref.IDOf(miiasd), objc.RegisterName("setInstanceDescriptorBuffer:"), instanceDescriptorBuffer)
+	return miiasd
+}
+
 // WithInstanceDescriptorStride sets sets the stride, in bytes, between instance descriptors in the instance descriptor buffer.
 func (miiasd *MTL4IndirectInstanceAccelerationStructureDescriptor) WithInstanceDescriptorStride(instanceDescriptorStride int) *MTL4IndirectInstanceAccelerationStructureDescriptor {
 	objc.Send[objc.ID](objref.IDOf(miiasd), objc.RegisterName("setInstanceDescriptorStride:"), instanceDescriptorStride)
@@ -65,15 +71,33 @@ func (miiasd *MTL4IndirectInstanceAccelerationStructureDescriptor) WithMaxInstan
 	return miiasd
 }
 
+// WithInstanceCountBuffer sets provides a reference to a buffer containing the number of instances in the instance descriptor buffer, formatted as a 32-bit unsigned integer.
+func (miiasd *MTL4IndirectInstanceAccelerationStructureDescriptor) WithInstanceCountBuffer(instanceCountBuffer MTL4BufferRange) *MTL4IndirectInstanceAccelerationStructureDescriptor {
+	objc.Send[objc.ID](objref.IDOf(miiasd), objc.RegisterName("setInstanceCountBuffer:"), instanceCountBuffer)
+	return miiasd
+}
+
 // WithInstanceDescriptorType sets controls the type of instance descriptor that the instance descriptor buffer references.
 func (miiasd *MTL4IndirectInstanceAccelerationStructureDescriptor) WithInstanceDescriptorType(instanceDescriptorType AccelerationStructureInstanceDescriptorType) *MTL4IndirectInstanceAccelerationStructureDescriptor {
 	objc.Send[objc.ID](objref.IDOf(miiasd), objc.RegisterName("setInstanceDescriptorType:"), instanceDescriptorType)
 	return miiasd
 }
 
+// WithMotionTransformBuffer sets a buffer containing transformation information for instance motion keyframes, formatted according to the motion transform type.
+func (miiasd *MTL4IndirectInstanceAccelerationStructureDescriptor) WithMotionTransformBuffer(motionTransformBuffer MTL4BufferRange) *MTL4IndirectInstanceAccelerationStructureDescriptor {
+	objc.Send[objc.ID](objref.IDOf(miiasd), objc.RegisterName("setMotionTransformBuffer:"), motionTransformBuffer)
+	return miiasd
+}
+
 // WithMaxMotionTransformCount sets controls the maximum number of motion transforms in the motion transform buffer.
 func (miiasd *MTL4IndirectInstanceAccelerationStructureDescriptor) WithMaxMotionTransformCount(maxMotionTransformCount int) *MTL4IndirectInstanceAccelerationStructureDescriptor {
 	objc.Send[objc.ID](objref.IDOf(miiasd), objc.RegisterName("setMaxMotionTransformCount:"), maxMotionTransformCount)
+	return miiasd
+}
+
+// WithMotionTransformCountBuffer sets associates a buffer reference containing the number of motion transforms in the motion transform buffer, formatted as a 32-bit unsigned integer.
+func (miiasd *MTL4IndirectInstanceAccelerationStructureDescriptor) WithMotionTransformCountBuffer(motionTransformCountBuffer MTL4BufferRange) *MTL4IndirectInstanceAccelerationStructureDescriptor {
+	objc.Send[objc.ID](objref.IDOf(miiasd), objc.RegisterName("setMotionTransformCountBuffer:"), motionTransformCountBuffer)
 	return miiasd
 }
 
@@ -101,6 +125,13 @@ func (miiasd *MTL4IndirectInstanceAccelerationStructureDescriptor) WithUsage(usa
 	return miiasd
 }
 
+// InstanceDescriptorBuffer returns assigns a reference to a buffer containing instance descriptors for acceleration structures to reference. This buffer conceptually represents an array of instance data. The specific format for the structs that comprise each entry depends on the value of the  “instanceDescriptorType“ property. You are responsible for ensuring the buffer address the range contains is not zero.
+func (miiasd *MTL4IndirectInstanceAccelerationStructureDescriptor) InstanceDescriptorBuffer() MTL4BufferRange {
+	defer runtime.KeepAlive(miiasd)
+	_r := objc.Send[MTL4BufferRange](objref.IDOf(miiasd), objc.RegisterName("instanceDescriptorBuffer"))
+	return _r
+}
+
 // InstanceDescriptorStride sets the stride, in bytes, between instance descriptors in the instance descriptor buffer. You are responsible for ensuring this stride is at least the size of the structure type corresponding to the instance descriptor type and a multiple of 4 bytes. Defaults to `0`, indicating the instance descriptors are tightly packed.
 func (miiasd *MTL4IndirectInstanceAccelerationStructureDescriptor) InstanceDescriptorStride() int {
 	defer runtime.KeepAlive(miiasd)
@@ -115,6 +146,13 @@ func (miiasd *MTL4IndirectInstanceAccelerationStructureDescriptor) MaxInstanceCo
 	return _r
 }
 
+// InstanceCountBuffer provides a reference to a buffer containing the number of instances in the instance descriptor buffer, formatted as a 32-bit unsigned integer. You are responsible for ensuring that the final number of instances at build time, which you provide indirectly via this buffer reference , is less than or equal to the value of property “maxInstanceCount“.
+func (miiasd *MTL4IndirectInstanceAccelerationStructureDescriptor) InstanceCountBuffer() MTL4BufferRange {
+	defer runtime.KeepAlive(miiasd)
+	_r := objc.Send[MTL4BufferRange](objref.IDOf(miiasd), objc.RegisterName("instanceCountBuffer"))
+	return _r
+}
+
 // InstanceDescriptorType returns controls the type of instance descriptor that the instance descriptor buffer references. This value determines the layout Metal expects for the structs the instance descriptor buffer contains. Defaults to `MTLAccelerationStructureInstanceDescriptorTypeIndirect`. Valid values for this property are `MTLAccelerationStructureInstanceDescriptorTypeIndirect` or `MTLAccelerationStructureInstanceDescriptorTypeIndirectMotion`.
 func (miiasd *MTL4IndirectInstanceAccelerationStructureDescriptor) InstanceDescriptorType() AccelerationStructureInstanceDescriptorType {
 	defer runtime.KeepAlive(miiasd)
@@ -122,10 +160,24 @@ func (miiasd *MTL4IndirectInstanceAccelerationStructureDescriptor) InstanceDescr
 	return _r
 }
 
+// MotionTransformBuffer returns a buffer containing transformation information for instance motion keyframes, formatted according to the motion transform type. Each instance can have a different number of keyframes that you configure via individual instance descriptors. You are responsible for ensuring the buffer address the range references is not zero when using motion instance descriptors.
+func (miiasd *MTL4IndirectInstanceAccelerationStructureDescriptor) MotionTransformBuffer() MTL4BufferRange {
+	defer runtime.KeepAlive(miiasd)
+	_r := objc.Send[MTL4BufferRange](objref.IDOf(miiasd), objc.RegisterName("motionTransformBuffer"))
+	return _r
+}
+
 // MaxMotionTransformCount returns controls the maximum number of motion transforms in the motion transform buffer. You are responsible for ensuring that final number of motion transforms at build time that the buffer “motionTransformCountBuffer“ references is less than or equal to this number.
 func (miiasd *MTL4IndirectInstanceAccelerationStructureDescriptor) MaxMotionTransformCount() int {
 	defer runtime.KeepAlive(miiasd)
 	_r := objc.Send[int](objref.IDOf(miiasd), objc.RegisterName("maxMotionTransformCount"))
+	return _r
+}
+
+// MotionTransformCountBuffer returns associates a buffer reference containing the number of motion transforms in the motion transform buffer, formatted as a 32-bit unsigned integer. You are responsible for ensuring that the final number of motion transforms at build time in the buffer this property references is less than or equal to the value of property “maxMotionTransformCount“.
+func (miiasd *MTL4IndirectInstanceAccelerationStructureDescriptor) MotionTransformCountBuffer() MTL4BufferRange {
+	defer runtime.KeepAlive(miiasd)
+	_r := objc.Send[MTL4BufferRange](objref.IDOf(miiasd), objc.RegisterName("motionTransformCountBuffer"))
 	return _r
 }
 

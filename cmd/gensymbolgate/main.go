@@ -214,5 +214,5 @@ func count(entries []entry, f func(entry) int) int {
 	return n
 }
 
-func fatal(err error)                 { fmt.Fprintln(os.Stderr, err); os.Exit(1) }
-func fatalf(f string, a ...any)       { fmt.Fprintf(os.Stderr, f+"\n", a...); os.Exit(1) }
+func fatal(err error)           { fmt.Fprintln(os.Stderr, err); os.Exit(1) }
+func fatalf(f string, a ...any) { fmt.Fprintf(os.Stderr, f+"\n", a...); os.Exit(1) }

@@ -75,6 +75,14 @@ func (cli *CollectionLayoutItem) String() string {
 	return rt.Description(objref.IDOf(cli))
 }
 
+// WithContentInsets sets the amount of space added around the content of the item to adjust its final size after its position is computed.
+func (cli *CollectionLayoutItem) WithContentInsets(contentInsets NSDirectionalEdgeInsets) *CollectionLayoutItem {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cli), objc.RegisterName("setContentInsets:"), contentInsets)
+	})
+	return cli
+}
+
 // WithEdgeSpacing sets the amount of space added around the boundaries of the item between other items and this item’s container.
 func (cli *CollectionLayoutItem) WithEdgeSpacing(edgeSpacing *CollectionLayoutEdgeSpacing) *CollectionLayoutItem {
 	defer runtime.KeepAlive(edgeSpacing)
@@ -82,6 +90,20 @@ func (cli *CollectionLayoutItem) WithEdgeSpacing(edgeSpacing *CollectionLayoutEd
 		objc.Send[objc.ID](objref.IDOf(cli), objc.RegisterName("setEdgeSpacing:"), objref.IDOf(edgeSpacing))
 	})
 	return cli
+}
+
+// ContentInsets returns the content insets.
+func (cli *CollectionLayoutItem) ContentInsets() NSDirectionalEdgeInsets {
+	defer runtime.KeepAlive(cli)
+	var _mainthread0 NSDirectionalEdgeInsets
+	purego.Main(func() {
+		_mainthread0 = func() NSDirectionalEdgeInsets {
+			_r := objc.Send[NSDirectionalEdgeInsets](objref.IDOf(cli), objc.RegisterName("contentInsets"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // EdgeSpacing returns the edge spacing.

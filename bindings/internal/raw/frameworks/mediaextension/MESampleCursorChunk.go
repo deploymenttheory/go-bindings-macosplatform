@@ -38,7 +38,7 @@ func MESampleCursorChunkFromID(id objc.ID) *MESampleCursorChunk {
 }
 
 // Creates a new sample cursor chunk with byte source and chunk data that you provide.
-func (o *MESampleCursorChunk) InitWithByteSourceChunkStorageRangeChunkInfoSampleIndexWithinChunk(byteSource *MEByteSource, chunkStorageRange avfoundation.AVSampleCursorStorageRange, chunkInfo avfoundation.AVSampleCursorChunkInfo, sampleIndexWithinChunk int) *MESampleCursorChunk {
+func (o *MESampleCursorChunk) InitWithByteSourceChunkStorageRangeChunkInfoSampleIndexWithinChunk(byteSource *MEByteSource, chunkStorageRange AVSampleCursorStorageRange, chunkInfo avfoundation.AVSampleCursorChunkInfo, sampleIndexWithinChunk int) *MESampleCursorChunk {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mESampleCursorChunkSelInitWithByteSourceChunkStorageRangeChunkInfoSampleIndexWithinChunk, byteSource.Ptr(), chunkStorageRange, chunkInfo, sampleIndexWithinChunk)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
@@ -56,8 +56,8 @@ func (o *MESampleCursorChunk) ByteSource() *MEByteSource {
 }
 
 // @property		chunkStorageRange @abstract		The offset location and length of the sample's chunk, in bytes, within the MEByteSource. @discussion		The length should be set to 0 if there is no chunk associated with the sample.
-func (o *MESampleCursorChunk) ChunkStorageRange() avfoundation.AVSampleCursorStorageRange {
-	_ret := objc.Send[avfoundation.AVSampleCursorStorageRange](o.Ptr(), _mESampleCursorChunkSelChunkStorageRange)
+func (o *MESampleCursorChunk) ChunkStorageRange() AVSampleCursorStorageRange {
+	_ret := objc.Send[AVSampleCursorStorageRange](o.Ptr(), _mESampleCursorChunkSelChunkStorageRange)
 	return _ret
 }
 

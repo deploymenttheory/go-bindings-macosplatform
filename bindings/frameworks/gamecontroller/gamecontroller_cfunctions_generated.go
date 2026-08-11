@@ -115,10 +115,10 @@ func GCMicroGamepadSnapshotDataFromNSData(data []byte) (ok bool, snapshotData GC
 	return _ret, _out0
 }
 
-var _fnGCPoint2Equal func(unsafe.Pointer, unsafe.Pointer) bool
+var _fnGCPoint2Equal func(GCPoint2, GCPoint2) bool
 
 // GCPoint2Equal calls the GameController framework function GCPoint2Equal.
-func GCPoint2Equal(point1 unsafe.Pointer, point2 unsafe.Pointer) bool {
+func GCPoint2Equal(point1 GCPoint2, point2 GCPoint2) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnGCPoint2Equal == nil {
 		ebipurego.RegisterLibFunc(&_fnGCPoint2Equal, _lib, "GCPoint2Equal")
@@ -126,10 +126,10 @@ func GCPoint2Equal(point1 unsafe.Pointer, point2 unsafe.Pointer) bool {
 	return _fnGCPoint2Equal(point1, point2)
 }
 
-var _fnGCPoint2Make func(float32, float32) unsafe.Pointer
+var _fnGCPoint2Make func(float32, float32) GCPoint2
 
 // GCPoint2Make calls the GameController framework function GCPoint2Make.
-func GCPoint2Make(x float32, y float32) unsafe.Pointer {
+func GCPoint2Make(x float32, y float32) GCPoint2 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnGCPoint2Make == nil {
 		ebipurego.RegisterLibFunc(&_fnGCPoint2Make, _lib, "GCPoint2Make")
@@ -202,10 +202,10 @@ func NSDataFromGCMicroGamepadSnapshotData() (result []byte, snapshotData GCMicro
 	return rt.NSDataToBytes(_ret), _out0
 }
 
-var _fnNSStringFromGCPoint2 func(unsafe.Pointer) objc.ID
+var _fnNSStringFromGCPoint2 func(GCPoint2) objc.ID
 
 // NSStringFromGCPoint2 calls the GameController framework function NSStringFromGCPoint2.
-func NSStringFromGCPoint2(point unsafe.Pointer) string {
+func NSStringFromGCPoint2(point GCPoint2) string {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSStringFromGCPoint2 == nil {
 		ebipurego.RegisterLibFunc(&_fnNSStringFromGCPoint2, _lib, "NSStringFromGCPoint2")

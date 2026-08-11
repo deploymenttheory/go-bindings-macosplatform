@@ -5,10 +5,12 @@
 package mapkit
 
 import (
+	"context"
 	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/rt"
@@ -154,4 +156,37 @@ func (to *TileOverlay) CanReplaceMapContent() bool {
 	defer runtime.KeepAlive(to)
 	_r := objc.Send[bool](objref.IDOf(to), objc.RegisterName("canReplaceMapContent"))
 	return _r
+}
+
+// URLForTilePath returns the URL to use to access the specified tile.
+func (to *TileOverlay) URLForTilePath(path MKTileOverlayPath) string {
+	defer runtime.KeepAlive(to)
+	_r := objc.Send[objc.ID](objref.IDOf(to), objc.RegisterName("URLForTilePath:"), path)
+	return rt.URLString(_r)
+}
+
+// LoadTileAtPathResult loads the specified tile asynchronously.
+//
+// LoadTileAtPathResult blocks until the operation completes or ctx is cancelled.
+func (to *TileOverlay) LoadTileAtPathResult(ctx context.Context, path MKTileOverlayPath) (result obj.Object, err error) {
+	defer runtime.KeepAlive(to)
+	type _result struct {
+		val obj.Object
+		err error
+	}
+	_ch := make(chan _result, 1)
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
+		var _o _result
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
+		_ch <- _o
+	})
+	objc.Send[objc.ID](objref.IDOf(to), objc.RegisterName("loadTileAtPath:result:"), path, _block)
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero obj.Object
+		return _zero, ctx.Err()
+	}
 }

@@ -78,6 +78,28 @@ func (au *AudioUnit) String() string {
 	return rt.Description(objref.IDOf(au))
 }
 
+// NewAudioUnitWithComponentDescriptionOptions synchronously initializes a new audio unit object.
+func NewAudioUnitWithComponentDescriptionOptions(componentDescription AudioComponentDescription, options AudioComponentInstantiationOptions) (result *AudioUnit, err error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AUAudioUnit")), objc.RegisterName("alloc"))
+	var _nsErr uintptr
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithComponentDescription:options:error:"), componentDescription, options, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return audioUnitAdopt(_id), nil
+}
+
+// NewAudioUnitWithComponentDescription synchronously initializes a new audio unit object.
+func NewAudioUnitWithComponentDescription(componentDescription AudioComponentDescription) (result *AudioUnit, err error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AUAudioUnit")), objc.RegisterName("alloc"))
+	var _nsErr uintptr
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithComponentDescription:error:"), componentDescription, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return audioUnitAdopt(_id), nil
+}
+
 // WithRenderResourcesAllocated sets determines whether the audio unit has allocated render resources.
 func (au *AudioUnit) WithRenderResourcesAllocated(renderResourcesAllocated bool) *AudioUnit {
 	objc.Send[objc.ID](objref.IDOf(au), objc.RegisterName("setRenderResourcesAllocated:"), renderResourcesAllocated)
@@ -305,11 +327,18 @@ func (au *AudioUnit) DisableProfileCableOnChannel(profile obj.Object, cable uint
 	return nil
 }
 
+// ComponentDescription returns the AudioComponentDescription with which the audio unit was created.
+func (au *AudioUnit) ComponentDescription() AudioComponentDescription {
+	defer runtime.KeepAlive(au)
+	_r := objc.Send[AudioComponentDescription](objref.IDOf(au), objc.RegisterName("componentDescription"))
+	return _r
+}
+
 // Component returns the AudioComponent which was found based on componentDescription when the audio unit was created.
 func (au *AudioUnit) Component() AudioComponent {
 	defer runtime.KeepAlive(au)
 	_r := objc.Send[objc.ID](objref.IDOf(au), objc.RegisterName("component"))
-	return AudioComponent{obj.WrapUnmanaged(_r)}
+	return AudioComponent{Object: obj.WrapUnmanaged(_r)}
 }
 
 // ComponentName returns the unit's component's name. By convention, an audio unit's component name is its manufacturer's name, plus ": ", plus the audio unit's name. The audioUnitName and manufacturerName properties are derived from the component name.

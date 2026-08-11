@@ -76,3 +76,10 @@ func NewImageFindKeypoints() *ImageFindKeypoints {
 	_id := objc.Send[objc.ID](objc.ID(_class("MPSImageFindKeypoints")), objc.RegisterName("new"))
 	return imageFindKeypointsAdopt(_id)
 }
+
+// KeypointRangeInfo returns a structure describing the keypoint range info Returns a MPSImageKeypointRangeInfo structure
+func (ifk *ImageFindKeypoints) KeypointRangeInfo() MPSImageKeypointRangeInfo {
+	defer runtime.KeepAlive(ifk)
+	_r := objc.Send[MPSImageKeypointRangeInfo](objref.IDOf(ifk), objc.RegisterName("keypointRangeInfo"))
+	return _r
+}

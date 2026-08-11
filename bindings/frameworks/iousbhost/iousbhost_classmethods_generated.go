@@ -24,7 +24,7 @@ func CreateMatchingDictionaryWithVendorIDProductIDBcdDeviceDeviceClassDeviceSubc
 	defer runtime.KeepAlive(speed)
 	defer runtime.KeepAlive(productIDArray)
 	_r := objc.Send[objc.ID](objc.ID(_class("IOUSBHostDevice")), objc.RegisterName("createMatchingDictionaryWithVendorID:productID:bcdDevice:deviceClass:deviceSubclass:deviceProtocol:speed:productIDArray:"), objref.IDOf(vendorID), objref.IDOf(productID), objref.IDOf(bcdDevice), objref.IDOf(deviceClass), objref.IDOf(deviceSubclass), objref.IDOf(deviceProtocol), objref.IDOf(speed), objref.IDOf(productIDArray))
-	return corefoundation.CFMutableDictionaryRef{obj.Wrap(_r)}
+	return corefoundation.CFMutableDictionaryRef{Object: obj.Wrap(_r)}
 }
 
 // CreateMatchingDictionaryWithVendorIDProductIDBcdDeviceInterfaceNumberConfigurationValueInterfaceClassInterfaceSubclassInterfaceProtocolSpeedProductIDArray creates a matching dictionary to find a USB interface.
@@ -40,5 +40,5 @@ func CreateMatchingDictionaryWithVendorIDProductIDBcdDeviceInterfaceNumberConfig
 	defer runtime.KeepAlive(speed)
 	defer runtime.KeepAlive(productIDArray)
 	_r := objc.Send[objc.ID](objc.ID(_class("IOUSBHostInterface")), objc.RegisterName("createMatchingDictionaryWithVendorID:productID:bcdDevice:interfaceNumber:configurationValue:interfaceClass:interfaceSubclass:interfaceProtocol:speed:productIDArray:"), objref.IDOf(vendorID), objref.IDOf(productID), objref.IDOf(bcdDevice), objref.IDOf(interfaceNumber), objref.IDOf(configurationValue), objref.IDOf(interfaceClass), objref.IDOf(interfaceSubclass), objref.IDOf(interfaceProtocol), objref.IDOf(speed), objref.IDOf(productIDArray))
-	return corefoundation.CFMutableDictionaryRef{obj.Wrap(_r)}
+	return corefoundation.CFMutableDictionaryRef{Object: obj.Wrap(_r)}
 }

@@ -7,12 +7,28 @@ package securityhi
 import (
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/hitoolbox"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
 )
+
+var _fnInvokeURLSystemEventUPP func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// InvokeURLSystemEventUPP reports an error if the SecurityHI framework function InvokeURLSystemEventUPP fails.
+func InvokeURLSystemEventUPP(userContext unsafe.Pointer, event *hitoolbox.EventRecord, userUPP unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnInvokeURLSystemEventUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnInvokeURLSystemEventUPP, _lib, "InvokeURLSystemEventUPP")
+	}
+	_rc := _fnInvokeURLSystemEventUPP(userContext, unsafe.Pointer(event), userUPP)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
 
 var _fnKCAddItem func(unsafe.Pointer) int32
 

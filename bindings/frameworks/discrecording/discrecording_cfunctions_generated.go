@@ -57,7 +57,7 @@ func DRBurnCopyStatus(burn DRBurnRef) corefoundation.CFDictionaryRef {
 		ebipurego.RegisterLibFunc(&_fnDRBurnCopyStatus, _lib, "DRBurnCopyStatus")
 	}
 	_ret := _fnDRBurnCopyStatus(objref.IDOf(burn.Object))
-	return corefoundation.CFDictionaryRef{obj.Wrap(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnDRBurnCreate func(objc.ID) objc.ID
@@ -69,7 +69,7 @@ func DRBurnCreate(device DRDeviceRef) DRBurnRef {
 		ebipurego.RegisterLibFunc(&_fnDRBurnCreate, _lib, "DRBurnCreate")
 	}
 	_ret := _fnDRBurnCreate(objref.IDOf(device.Object))
-	return DRBurnRef{obj.Wrap(_ret)}
+	return DRBurnRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnDRBurnGetDevice func(objc.ID) objc.ID
@@ -81,7 +81,7 @@ func DRBurnGetDevice(burn DRBurnRef) DRDeviceRef {
 		ebipurego.RegisterLibFunc(&_fnDRBurnGetDevice, _lib, "DRBurnGetDevice")
 	}
 	_ret := _fnDRBurnGetDevice(objref.IDOf(burn.Object))
-	return DRDeviceRef{obj.Wrap(_ret)}
+	return DRDeviceRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnDRBurnGetProperties func(objc.ID) objc.ID
@@ -93,7 +93,7 @@ func DRBurnGetProperties(burn DRBurnRef) corefoundation.CFDictionaryRef {
 		ebipurego.RegisterLibFunc(&_fnDRBurnGetProperties, _lib, "DRBurnGetProperties")
 	}
 	_ret := _fnDRBurnGetProperties(objref.IDOf(burn.Object))
-	return corefoundation.CFDictionaryRef{obj.Wrap(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnDRBurnGetTypeID func() int
@@ -127,7 +127,7 @@ func DRCDTextBlockCreate(language corefoundation.CFStringRef, encoding int) DRCD
 		ebipurego.RegisterLibFunc(&_fnDRCDTextBlockCreate, _lib, "DRCDTextBlockCreate")
 	}
 	_ret := _fnDRCDTextBlockCreate(objref.IDOf(language.Object), encoding)
-	return DRCDTextBlockRef{obj.Wrap(_ret)}
+	return DRCDTextBlockRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnDRCDTextBlockCreateArrayFromPackList func(objc.ID) objc.ID
@@ -139,7 +139,7 @@ func DRCDTextBlockCreateArrayFromPackList(packs corefoundation.CFDataRef) corefo
 		ebipurego.RegisterLibFunc(&_fnDRCDTextBlockCreateArrayFromPackList, _lib, "DRCDTextBlockCreateArrayFromPackList")
 	}
 	_ret := _fnDRCDTextBlockCreateArrayFromPackList(objref.IDOf(packs.Object))
-	return corefoundation.CFArrayRef{obj.Wrap(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnDRCDTextBlockFlatten func(objc.ID) uint32
@@ -162,7 +162,7 @@ func DRCDTextBlockGetProperties(block DRCDTextBlockRef) corefoundation.CFDiction
 		ebipurego.RegisterLibFunc(&_fnDRCDTextBlockGetProperties, _lib, "DRCDTextBlockGetProperties")
 	}
 	_ret := _fnDRCDTextBlockGetProperties(objref.IDOf(block.Object))
-	return corefoundation.CFDictionaryRef{obj.Wrap(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnDRCDTextBlockGetTrackDictionaries func(objc.ID) objc.ID
@@ -174,7 +174,7 @@ func DRCDTextBlockGetTrackDictionaries(block DRCDTextBlockRef) corefoundation.CF
 		ebipurego.RegisterLibFunc(&_fnDRCDTextBlockGetTrackDictionaries, _lib, "DRCDTextBlockGetTrackDictionaries")
 	}
 	_ret := _fnDRCDTextBlockGetTrackDictionaries(objref.IDOf(block.Object))
-	return corefoundation.CFArrayRef{obj.Wrap(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnDRCDTextBlockGetTypeID func() int
@@ -242,7 +242,7 @@ func DRCopyDeviceArray() corefoundation.CFArrayRef {
 		ebipurego.RegisterLibFunc(&_fnDRCopyDeviceArray, _lib, "DRCopyDeviceArray")
 	}
 	_ret := _fnDRCopyDeviceArray()
-	return corefoundation.CFArrayRef{obj.Wrap(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnDRCopyLocalizedStringForAdditionalSense func(uint8, uint8) objc.ID
@@ -254,7 +254,7 @@ func DRCopyLocalizedStringForAdditionalSense(asc uint8, ascq uint8) corefoundati
 		ebipurego.RegisterLibFunc(&_fnDRCopyLocalizedStringForAdditionalSense, _lib, "DRCopyLocalizedStringForAdditionalSense")
 	}
 	_ret := _fnDRCopyLocalizedStringForAdditionalSense(asc, ascq)
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnDRCopyLocalizedStringForDiscRecordingError func(int) objc.ID
@@ -266,7 +266,7 @@ func DRCopyLocalizedStringForDiscRecordingError(osError int) corefoundation.CFSt
 		ebipurego.RegisterLibFunc(&_fnDRCopyLocalizedStringForDiscRecordingError, _lib, "DRCopyLocalizedStringForDiscRecordingError")
 	}
 	_ret := _fnDRCopyLocalizedStringForDiscRecordingError(osError)
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnDRCopyLocalizedStringForSenseCode func(uint8) objc.ID
@@ -278,7 +278,7 @@ func DRCopyLocalizedStringForSenseCode(senseCode uint8) corefoundation.CFStringR
 		ebipurego.RegisterLibFunc(&_fnDRCopyLocalizedStringForSenseCode, _lib, "DRCopyLocalizedStringForSenseCode")
 	}
 	_ret := _fnDRCopyLocalizedStringForSenseCode(senseCode)
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnDRCopyLocalizedStringForValue func(objc.ID) objc.ID
@@ -290,7 +290,7 @@ func DRCopyLocalizedStringForValue(value corefoundation.CFStringRef) corefoundat
 		ebipurego.RegisterLibFunc(&_fnDRCopyLocalizedStringForValue, _lib, "DRCopyLocalizedStringForValue")
 	}
 	_ret := _fnDRCopyLocalizedStringForValue(objref.IDOf(value.Object))
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnDRDeviceAcquireMediaReservation func(objc.ID)
@@ -313,7 +313,7 @@ func DRDeviceCopyDeviceForBSDName(name corefoundation.CFStringRef) DRDeviceRef {
 		ebipurego.RegisterLibFunc(&_fnDRDeviceCopyDeviceForBSDName, _lib, "DRDeviceCopyDeviceForBSDName")
 	}
 	_ret := _fnDRDeviceCopyDeviceForBSDName(objref.IDOf(name.Object))
-	return DRDeviceRef{obj.Wrap(_ret)}
+	return DRDeviceRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnDRDeviceCopyDeviceForIORegistryEntryPath func(objc.ID) objc.ID
@@ -325,7 +325,7 @@ func DRDeviceCopyDeviceForIORegistryEntryPath(path corefoundation.CFStringRef) D
 		ebipurego.RegisterLibFunc(&_fnDRDeviceCopyDeviceForIORegistryEntryPath, _lib, "DRDeviceCopyDeviceForIORegistryEntryPath")
 	}
 	_ret := _fnDRDeviceCopyDeviceForIORegistryEntryPath(objref.IDOf(path.Object))
-	return DRDeviceRef{obj.Wrap(_ret)}
+	return DRDeviceRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnDRDeviceCopyInfo func(objc.ID) objc.ID
@@ -337,7 +337,7 @@ func DRDeviceCopyInfo(device DRDeviceRef) corefoundation.CFDictionaryRef {
 		ebipurego.RegisterLibFunc(&_fnDRDeviceCopyInfo, _lib, "DRDeviceCopyInfo")
 	}
 	_ret := _fnDRDeviceCopyInfo(objref.IDOf(device.Object))
-	return corefoundation.CFDictionaryRef{obj.Wrap(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnDRDeviceCopyStatus func(objc.ID) objc.ID
@@ -349,7 +349,7 @@ func DRDeviceCopyStatus(device DRDeviceRef) corefoundation.CFDictionaryRef {
 		ebipurego.RegisterLibFunc(&_fnDRDeviceCopyStatus, _lib, "DRDeviceCopyStatus")
 	}
 	_ret := _fnDRDeviceCopyStatus(objref.IDOf(device.Object))
-	return corefoundation.CFDictionaryRef{obj.Wrap(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnDRDeviceGetTypeID func() int
@@ -427,7 +427,7 @@ func DREraseCopyStatus(erase DREraseRef) corefoundation.CFDictionaryRef {
 		ebipurego.RegisterLibFunc(&_fnDREraseCopyStatus, _lib, "DREraseCopyStatus")
 	}
 	_ret := _fnDREraseCopyStatus(objref.IDOf(erase.Object))
-	return corefoundation.CFDictionaryRef{obj.Wrap(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnDREraseCreate func(objc.ID) objc.ID
@@ -439,7 +439,7 @@ func DREraseCreate(device DRDeviceRef) DREraseRef {
 		ebipurego.RegisterLibFunc(&_fnDREraseCreate, _lib, "DREraseCreate")
 	}
 	_ret := _fnDREraseCreate(objref.IDOf(device.Object))
-	return DREraseRef{obj.Wrap(_ret)}
+	return DREraseRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnDREraseGetDevice func(objc.ID) objc.ID
@@ -451,7 +451,7 @@ func DREraseGetDevice(erase DREraseRef) DRDeviceRef {
 		ebipurego.RegisterLibFunc(&_fnDREraseGetDevice, _lib, "DREraseGetDevice")
 	}
 	_ret := _fnDREraseGetDevice(objref.IDOf(erase.Object))
-	return DRDeviceRef{obj.Wrap(_ret)}
+	return DRDeviceRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnDREraseGetProperties func(objc.ID) objc.ID
@@ -463,7 +463,7 @@ func DREraseGetProperties(erase DREraseRef) corefoundation.CFDictionaryRef {
 		ebipurego.RegisterLibFunc(&_fnDREraseGetProperties, _lib, "DREraseGetProperties")
 	}
 	_ret := _fnDREraseGetProperties(objref.IDOf(erase.Object))
-	return corefoundation.CFDictionaryRef{obj.Wrap(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnDREraseGetTypeID func() int
@@ -497,7 +497,7 @@ func DRFSObjectCopyBaseName(object unsafe.Pointer) corefoundation.CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnDRFSObjectCopyBaseName, _lib, "DRFSObjectCopyBaseName")
 	}
 	_ret := _fnDRFSObjectCopyBaseName(object)
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnDRFSObjectCopyFilesystemProperties func(unsafe.Pointer, objc.ID, uint8) objc.ID
@@ -509,7 +509,7 @@ func DRFSObjectCopyFilesystemProperties(object unsafe.Pointer, fsKey corefoundat
 		ebipurego.RegisterLibFunc(&_fnDRFSObjectCopyFilesystemProperties, _lib, "DRFSObjectCopyFilesystemProperties")
 	}
 	_ret := _fnDRFSObjectCopyFilesystemProperties(object, objref.IDOf(fsKey.Object), coalesce)
-	return corefoundation.CFDictionaryRef{obj.Wrap(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnDRFSObjectCopyFilesystemProperty func(unsafe.Pointer, objc.ID, objc.ID, uint8) objc.ID
@@ -533,7 +533,7 @@ func DRFSObjectCopyMangledName(object unsafe.Pointer, fsKey corefoundation.CFStr
 		ebipurego.RegisterLibFunc(&_fnDRFSObjectCopyMangledName, _lib, "DRFSObjectCopyMangledName")
 	}
 	_ret := _fnDRFSObjectCopyMangledName(object, objref.IDOf(fsKey.Object))
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnDRFSObjectCopyMangledNames func(unsafe.Pointer) objc.ID
@@ -545,7 +545,7 @@ func DRFSObjectCopyMangledNames(object unsafe.Pointer) corefoundation.CFDictiona
 		ebipurego.RegisterLibFunc(&_fnDRFSObjectCopyMangledNames, _lib, "DRFSObjectCopyMangledNames")
 	}
 	_ret := _fnDRFSObjectCopyMangledNames(object)
-	return corefoundation.CFDictionaryRef{obj.Wrap(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnDRFSObjectCopyRealURL func(unsafe.Pointer) objc.ID
@@ -557,7 +557,7 @@ func DRFSObjectCopyRealURL(object unsafe.Pointer) corefoundation.CFURLRef {
 		ebipurego.RegisterLibFunc(&_fnDRFSObjectCopyRealURL, _lib, "DRFSObjectCopyRealURL")
 	}
 	_ret := _fnDRFSObjectCopyRealURL(object)
-	return corefoundation.CFURLRef{obj.Wrap(_ret)}
+	return corefoundation.CFURLRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnDRFSObjectCopySpecificName func(unsafe.Pointer, objc.ID) objc.ID
@@ -569,7 +569,7 @@ func DRFSObjectCopySpecificName(object unsafe.Pointer, fsKey corefoundation.CFSt
 		ebipurego.RegisterLibFunc(&_fnDRFSObjectCopySpecificName, _lib, "DRFSObjectCopySpecificName")
 	}
 	_ret := _fnDRFSObjectCopySpecificName(object, objref.IDOf(fsKey.Object))
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnDRFSObjectCopySpecificNames func(unsafe.Pointer) objc.ID
@@ -581,7 +581,7 @@ func DRFSObjectCopySpecificNames(object unsafe.Pointer) corefoundation.CFDiction
 		ebipurego.RegisterLibFunc(&_fnDRFSObjectCopySpecificNames, _lib, "DRFSObjectCopySpecificNames")
 	}
 	_ret := _fnDRFSObjectCopySpecificNames(object)
-	return corefoundation.CFDictionaryRef{obj.Wrap(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnDRFSObjectGetFilesystemMask func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint32
@@ -607,7 +607,7 @@ func DRFSObjectGetParent(object unsafe.Pointer) DRFolderRef {
 		ebipurego.RegisterLibFunc(&_fnDRFSObjectGetParent, _lib, "DRFSObjectGetParent")
 	}
 	_ret := _fnDRFSObjectGetParent(object)
-	return DRFolderRef{obj.Wrap(_ret)}
+	return DRFolderRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnDRFSObjectGetRealFSRef func(unsafe.Pointer, unsafe.Pointer)
@@ -707,7 +707,7 @@ func DRFileCreateReal(fsRef *carboncore.FSRef) DRFileRef {
 		ebipurego.RegisterLibFunc(&_fnDRFileCreateReal, _lib, "DRFileCreateReal")
 	}
 	_ret := _fnDRFileCreateReal(unsafe.Pointer(fsRef))
-	return DRFileRef{obj.Wrap(_ret)}
+	return DRFileRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnDRFileCreateRealWithURL func(objc.ID) objc.ID
@@ -719,7 +719,7 @@ func DRFileCreateRealWithURL(urlRef corefoundation.CFURLRef) DRFileRef {
 		ebipurego.RegisterLibFunc(&_fnDRFileCreateRealWithURL, _lib, "DRFileCreateRealWithURL")
 	}
 	_ret := _fnDRFileCreateRealWithURL(objref.IDOf(urlRef.Object))
-	return DRFileRef{obj.Wrap(_ret)}
+	return DRFileRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnDRFileCreateVirtualLink func(unsafe.Pointer, int, objc.ID) objc.ID
@@ -731,7 +731,7 @@ func DRFileCreateVirtualLink(original unsafe.Pointer, linkType int, fsKey corefo
 		ebipurego.RegisterLibFunc(&_fnDRFileCreateVirtualLink, _lib, "DRFileCreateVirtualLink")
 	}
 	_ret := _fnDRFileCreateVirtualLink(original, linkType, objref.IDOf(fsKey.Object))
-	return DRFileRef{obj.Wrap(_ret)}
+	return DRFileRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnDRFileCreateVirtualWithCallback func(objc.ID, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -743,7 +743,7 @@ func DRFileCreateVirtualWithCallback(baseName corefoundation.CFStringRef, filePr
 		ebipurego.RegisterLibFunc(&_fnDRFileCreateVirtualWithCallback, _lib, "DRFileCreateVirtualWithCallback")
 	}
 	_ret := _fnDRFileCreateVirtualWithCallback(objref.IDOf(baseName.Object), fileProc, fileProcRefCon)
-	return DRFileRef{obj.Wrap(_ret)}
+	return DRFileRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnDRFileCreateVirtualWithData func(objc.ID, unsafe.Pointer, int) objc.ID
@@ -755,7 +755,7 @@ func DRFileCreateVirtualWithData(baseName corefoundation.CFStringRef, fileData u
 		ebipurego.RegisterLibFunc(&_fnDRFileCreateVirtualWithData, _lib, "DRFileCreateVirtualWithData")
 	}
 	_ret := _fnDRFileCreateVirtualWithData(objref.IDOf(baseName.Object), fileData, fileDataLength)
-	return DRFileRef{obj.Wrap(_ret)}
+	return DRFileRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnDRFileGetTypeID func() int
@@ -822,7 +822,7 @@ func DRFolderCopyChildren(folder DRFolderRef) corefoundation.CFArrayRef {
 		ebipurego.RegisterLibFunc(&_fnDRFolderCopyChildren, _lib, "DRFolderCopyChildren")
 	}
 	_ret := _fnDRFolderCopyChildren(objref.IDOf(folder.Object))
-	return corefoundation.CFArrayRef{obj.Wrap(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnDRFolderCountChildren func(objc.ID) uint32
@@ -845,7 +845,7 @@ func DRFolderCreateReal(fsRef *carboncore.FSRef) DRFolderRef {
 		ebipurego.RegisterLibFunc(&_fnDRFolderCreateReal, _lib, "DRFolderCreateReal")
 	}
 	_ret := _fnDRFolderCreateReal(unsafe.Pointer(fsRef))
-	return DRFolderRef{obj.Wrap(_ret)}
+	return DRFolderRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnDRFolderCreateRealWithURL func(objc.ID) objc.ID
@@ -857,7 +857,7 @@ func DRFolderCreateRealWithURL(urlRef corefoundation.CFURLRef) DRFolderRef {
 		ebipurego.RegisterLibFunc(&_fnDRFolderCreateRealWithURL, _lib, "DRFolderCreateRealWithURL")
 	}
 	_ret := _fnDRFolderCreateRealWithURL(objref.IDOf(urlRef.Object))
-	return DRFolderRef{obj.Wrap(_ret)}
+	return DRFolderRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnDRFolderCreateVirtual func(objc.ID) objc.ID
@@ -869,7 +869,7 @@ func DRFolderCreateVirtual(baseName corefoundation.CFStringRef) DRFolderRef {
 		ebipurego.RegisterLibFunc(&_fnDRFolderCreateVirtual, _lib, "DRFolderCreateVirtual")
 	}
 	_ret := _fnDRFolderCreateVirtual(objref.IDOf(baseName.Object))
-	return DRFolderRef{obj.Wrap(_ret)}
+	return DRFolderRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnDRFolderGetTypeID func() int
@@ -936,7 +936,7 @@ func DRNotificationCenterCreate() DRNotificationCenterRef {
 		ebipurego.RegisterLibFunc(&_fnDRNotificationCenterCreate, _lib, "DRNotificationCenterCreate")
 	}
 	_ret := _fnDRNotificationCenterCreate()
-	return DRNotificationCenterRef{obj.Wrap(_ret)}
+	return DRNotificationCenterRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnDRNotificationCenterCreateRunLoopSource func(objc.ID) objc.ID
@@ -948,7 +948,7 @@ func DRNotificationCenterCreateRunLoopSource(center DRNotificationCenterRef) cor
 		ebipurego.RegisterLibFunc(&_fnDRNotificationCenterCreateRunLoopSource, _lib, "DRNotificationCenterCreateRunLoopSource")
 	}
 	_ret := _fnDRNotificationCenterCreateRunLoopSource(objref.IDOf(center.Object))
-	return corefoundation.CFRunLoopSourceRef{obj.Wrap(_ret)}
+	return corefoundation.CFRunLoopSourceRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnDRNotificationCenterGetTypeID func() int
@@ -993,7 +993,7 @@ func DRTrackCreate(properties corefoundation.CFDictionaryRef, callback unsafe.Po
 		ebipurego.RegisterLibFunc(&_fnDRTrackCreate, _lib, "DRTrackCreate")
 	}
 	_ret := _fnDRTrackCreate(objref.IDOf(properties.Object), callback)
-	return DRTrackRef{obj.Wrap(_ret)}
+	return DRTrackRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnDRTrackEstimateLength func(objc.ID) uint64
@@ -1016,7 +1016,7 @@ func DRTrackGetProperties(track DRTrackRef) corefoundation.CFDictionaryRef {
 		ebipurego.RegisterLibFunc(&_fnDRTrackGetProperties, _lib, "DRTrackGetProperties")
 	}
 	_ret := _fnDRTrackGetProperties(objref.IDOf(track.Object))
-	return corefoundation.CFDictionaryRef{obj.Wrap(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnDRTrackGetTypeID func() int

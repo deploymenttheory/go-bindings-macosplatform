@@ -378,7 +378,7 @@ func (sn *ShapeNode) Path() coregraphics.CGPathRef {
 	purego.Main(func() {
 		_mainthread0 = func() coregraphics.CGPathRef {
 			_r := objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("path"))
-			return coregraphics.CGPathRef{obj.Wrap(_r)}
+			return coregraphics.CGPathRef{Object: obj.Wrap(_r)}
 		}()
 	})
 	return _mainthread0

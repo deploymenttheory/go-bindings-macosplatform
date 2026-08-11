@@ -123,6 +123,13 @@ func (pi *ProcessInfo) OperatingSystemName() string {
 	return purego.GoString(_r)
 }
 
+// IsOperatingSystemAtLeastVersion wraps the corresponding Objective-C method.
+func (pi *ProcessInfo) IsOperatingSystemAtLeastVersion(version NSOperatingSystemVersion) bool {
+	defer runtime.KeepAlive(pi)
+	_r := objc.Send[bool](objref.IDOf(pi), objc.RegisterName("isOperatingSystemAtLeastVersion:"), version)
+	return _r
+}
+
 // DisableSuddenTermination disables sudden termination.
 func (pi *ProcessInfo) DisableSuddenTermination() {
 	defer runtime.KeepAlive(pi)
@@ -208,6 +215,13 @@ func (pi *ProcessInfo) OperatingSystemVersionString() string {
 		return ""
 	}
 	return purego.GoString(_r)
+}
+
+// OperatingSystemVersion returns the operating system version.
+func (pi *ProcessInfo) OperatingSystemVersion() NSOperatingSystemVersion {
+	defer runtime.KeepAlive(pi)
+	_r := objc.Send[NSOperatingSystemVersion](objref.IDOf(pi), objc.RegisterName("operatingSystemVersion"))
+	return _r
 }
 
 // ProcessorCount returns the processor count.

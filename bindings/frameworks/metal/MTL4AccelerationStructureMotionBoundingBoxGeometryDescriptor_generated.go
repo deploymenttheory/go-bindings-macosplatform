@@ -53,6 +53,12 @@ func NewMTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor() *MTL4Acce
 	return mTL4AccelerationStructureMotionBoundingBoxGeometryDescriptorAdopt(_id)
 }
 
+// WithBoundingBoxBuffers sets configures a reference to a buffer where each entry contains a reference to a buffer of bounding boxes.
+func (masmbbgd *MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor) WithBoundingBoxBuffers(boundingBoxBuffers MTL4BufferRange) *MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(masmbbgd), objc.RegisterName("setBoundingBoxBuffers:"), boundingBoxBuffers)
+	return masmbbgd
+}
+
 // WithBoundingBoxStride sets declares the stride, in bytes, between bounding boxes in the bounding box buffers each entry in boundingBoxBuffer references.
 func (masmbbgd *MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor) WithBoundingBoxStride(boundingBoxStride int) *MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor {
 	objc.Send[objc.ID](objref.IDOf(masmbbgd), objc.RegisterName("setBoundingBoxStride:"), boundingBoxStride)
@@ -89,6 +95,12 @@ func (masmbbgd *MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor) Wi
 	return masmbbgd
 }
 
+// WithPrimitiveDataBuffer sets assigns optional buffer containing data to associate with each primitive in this geometry.
+func (masmbbgd *MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor) WithPrimitiveDataBuffer(primitiveDataBuffer MTL4BufferRange) *MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(masmbbgd), objc.RegisterName("setPrimitiveDataBuffer:"), primitiveDataBuffer)
+	return masmbbgd
+}
+
 // WithPrimitiveDataStride sets defines the stride, in bytes, between each primitive’s data in the primitive data buffer primitiveDataBuffer references.
 func (masmbbgd *MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor) WithPrimitiveDataStride(primitiveDataStride int) *MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor {
 	objc.Send[objc.ID](objref.IDOf(masmbbgd), objc.RegisterName("setPrimitiveDataStride:"), primitiveDataStride)
@@ -99,6 +111,13 @@ func (masmbbgd *MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor) Wi
 func (masmbbgd *MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor) WithPrimitiveDataElementSize(primitiveDataElementSize int) *MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor {
 	objc.Send[objc.ID](objref.IDOf(masmbbgd), objc.RegisterName("setPrimitiveDataElementSize:"), primitiveDataElementSize)
 	return masmbbgd
+}
+
+// BoundingBoxBuffers returns configures a reference to a buffer where each entry contains a reference to a buffer of bounding boxes. This property references a buffer that conceptually represents an array with one entry for each keyframe in the motion animation. Each one of these entries consists of a “MTL4BufferRange“ that, in turn, references a vertex buffer containing the bounding box data for the keyframe. You are responsible for ensuring the buffer address is not zero for the top-level buffer, as well as for all the vertex buffers it references.
+func (masmbbgd *MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor) BoundingBoxBuffers() MTL4BufferRange {
+	defer runtime.KeepAlive(masmbbgd)
+	_r := objc.Send[MTL4BufferRange](objref.IDOf(masmbbgd), objc.RegisterName("boundingBoxBuffers"))
+	return _r
 }
 
 // BoundingBoxStride returns declares the stride, in bytes, between bounding boxes in the bounding box buffers each entry in `boundingBoxBuffer` references. All keyframes share the same bounding box stride. You are responsible for ensuring this stride is at least 24 bytes and a multiple of 4 bytes. This property defaults to `24` bytes.

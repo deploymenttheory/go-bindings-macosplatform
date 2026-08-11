@@ -303,7 +303,7 @@ func (bir *BitmapImageRep) TIFFRepresentation() []byte {
 func (bir *BitmapImageRep) CGImage() coregraphics.CGImageRef {
 	defer runtime.KeepAlive(bir)
 	_r := objc.Send[objc.ID](objref.IDOf(bir), objc.RegisterName("CGImage"))
-	return coregraphics.CGImageRef{obj.Wrap(_r)}
+	return coregraphics.CGImageRef{Object: obj.Wrap(_r)}
 }
 
 // ColorSpace returns the color space.

@@ -21,7 +21,7 @@ func TestResolveFuncPtrSignature(t *testing.T) {
 		{"cc_int32 (*)(cc_ccache_t, cc_uint32 *)", true, "cc_int32", []string{"cc_ccache_t", "cc_uint32 *"}},
 		{"void (*)(void)", true, "void", nil},
 		{"cc_ccache_release_f", true, "cc_int32", []string{"cc_ccache_t"}}, // via typedef
-		{"int", false, "", nil},                                           // not a function pointer
+		{"int", false, "", nil}, // not a function pointer
 		{"NSString *", false, "", nil},
 	}
 	for _, c := range cases {

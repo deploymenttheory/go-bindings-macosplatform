@@ -5,6 +5,8 @@
 package coremotion
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
@@ -49,6 +51,13 @@ func magnetometerDataAdopt(id objc.ID) *MagnetometerData {
 func NewMagnetometerData() *MagnetometerData {
 	_id := objc.Send[objc.ID](objc.ID(_class("CMMagnetometerData")), objc.RegisterName("new"))
 	return magnetometerDataAdopt(_id)
+}
+
+// MagneticField returns the magnetic field.
+func (md *MagnetometerData) MagneticField() CMMagneticField {
+	defer runtime.KeepAlive(md)
+	_r := objc.Send[CMMagneticField](objref.IDOf(md), objc.RegisterName("magneticField"))
+	return _r
 }
 
 var _ LogItemProvider = (*MagnetometerData)(nil)

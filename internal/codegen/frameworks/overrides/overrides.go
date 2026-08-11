@@ -8,8 +8,8 @@ package overrides
 import (
 	"fmt"
 
-	rootoverrides "github.com/deploymenttheory/go-bindings-macosplatform/internal/overrides"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
+	rootoverrides "github.com/deploymenttheory/go-bindings-macosplatform/internal/overrides"
 )
 
 // ApplyAdjacent looks for an override file next to metaPath and applies it to

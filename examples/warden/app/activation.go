@@ -6,7 +6,7 @@ import (
 	"errors"
 
 	sysext "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/systemextensions"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 )
 
 // ActivateExtension submits an OSSystemExtensionRequest to install/activate the
@@ -34,16 +34,14 @@ func DeactivateExtension(bundleID string) error {
 func submitRequest(activate bool, bundleID string) error {
 	// ADOPTION: SystemExtensions has typed idiomatic wrappers, so the manager and
 	// request are built with them (sysext.SharedManager / ...RequestForExtensionQueue
-	// / SubmitRequest) instead of hand-sending selectors. The one value the idiomatic
-	// API can't supply is the dispatch queue — it's not a framework class — so we get
-	// it from the runtime (mainQueue, below) and bridge it across with obj.Wrap, which
-	// lifts a raw objc.ID into the obj.Object the idiomatic factory expects. obj.Wrap
-	// and obj.ID are the public seam between the runtime and idiomatic layers.
+	// / SubmitRequest) instead of hand-sending selectors. The queue: parameter is the
+	// concrete dispatch.Queue library type; GetMainQueue returns the distinct
+	// QueueMain type, so it crosses to Queue via the Ptr/WrapQueue seam.
 	mgr := sysext.SharedManager()
 	if mgr == nil {
 		return errors.New("warden: OSSystemExtensionManager unavailable (SystemExtensions.framework not loaded)")
 	}
-	queue := obj.Wrap(mainQueue())
+	queue := dispatch.WrapQueue(dispatch.GetMainQueue().Ptr())
 	req := sysext.ActivationRequestForExtensionQueue(bundleID, queue)
 	if !activate {
 		req = sysext.DeactivationRequestForExtensionQueue(bundleID, queue)

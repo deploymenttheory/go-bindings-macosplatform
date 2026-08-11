@@ -161,6 +161,12 @@ func (sa *SpringAnimation) WithRemovedOnCompletion(removedOnCompletion bool) *Sp
 	return sa
 }
 
+// WithPreferredFrameRateRange sets the preferred frame rate range.
+func (sa *SpringAnimation) WithPreferredFrameRateRange(preferredFrameRateRange CAFrameRateRange) *SpringAnimation {
+	objc.Send[objc.ID](objref.IDOf(sa), objc.RegisterName("setPreferredFrameRateRange:"), preferredFrameRateRange)
+	return sa
+}
+
 // Mass returns the mass.
 func (sa *SpringAnimation) Mass() float64 {
 	defer runtime.KeepAlive(sa)

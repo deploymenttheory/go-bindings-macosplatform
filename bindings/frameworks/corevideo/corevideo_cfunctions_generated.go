@@ -37,7 +37,7 @@ func CVBufferCopyAttachments(buffer CVBufferRef, attachmentMode CVAttachmentMode
 		ebipurego.RegisterLibFunc(&_fnCVBufferCopyAttachments, _lib, "CVBufferCopyAttachments")
 	}
 	_ret := _fnCVBufferCopyAttachments(objref.IDOf(buffer.Object), attachmentMode)
-	return corefoundation.CFDictionaryRef{obj.Adopt(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCVBufferGetAttachment func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
@@ -62,7 +62,7 @@ func CVBufferGetAttachments(buffer CVBufferRef, attachmentMode CVAttachmentMode)
 		ebipurego.RegisterLibFunc(&_fnCVBufferGetAttachments, _lib, "CVBufferGetAttachments")
 	}
 	_ret := _fnCVBufferGetAttachments(objref.IDOf(buffer.Object), attachmentMode)
-	return corefoundation.CFDictionaryRef{obj.Wrap(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCVBufferHasAttachment func(objc.ID, objc.ID) uint8
@@ -129,7 +129,7 @@ func CVBufferRetain(buffer CVBufferRef) CVBufferRef {
 		ebipurego.RegisterLibFunc(&_fnCVBufferRetain, _lib, "CVBufferRetain")
 	}
 	_ret := _fnCVBufferRetain(objref.IDOf(buffer.Object))
-	return CVBufferRef{obj.WrapUnmanaged(_ret)}
+	return CVBufferRef{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnCVBufferSetAttachment func(objc.ID, objc.ID, objc.ID, CVAttachmentMode)
@@ -174,7 +174,7 @@ func CVColorPrimariesGetStringForIntegerCodePoint(colorPrimariesCodePoint int) c
 		ebipurego.RegisterLibFunc(&_fnCVColorPrimariesGetStringForIntegerCodePoint, _lib, "CVColorPrimariesGetStringForIntegerCodePoint")
 	}
 	_ret := _fnCVColorPrimariesGetStringForIntegerCodePoint(colorPrimariesCodePoint)
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCVDisplayLinkCreateWithActiveCGDisplays func(unsafe.Pointer) int32
@@ -256,10 +256,10 @@ func CVDisplayLinkGetCurrentTime(displayLink CVDisplayLinkRef) (result int32, ou
 	return _ret, _out0
 }
 
-var _fnCVDisplayLinkGetNominalOutputVideoRefreshPeriod func(objc.ID) unsafe.Pointer
+var _fnCVDisplayLinkGetNominalOutputVideoRefreshPeriod func(objc.ID) CVTime
 
 // CVDisplayLinkGetNominalOutputVideoRefreshPeriod calls the CoreVideo framework function CVDisplayLinkGetNominalOutputVideoRefreshPeriod.
-func CVDisplayLinkGetNominalOutputVideoRefreshPeriod(displayLink CVDisplayLinkRef) unsafe.Pointer {
+func CVDisplayLinkGetNominalOutputVideoRefreshPeriod(displayLink CVDisplayLinkRef) CVTime {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCVDisplayLinkGetNominalOutputVideoRefreshPeriod == nil {
 		ebipurego.RegisterLibFunc(&_fnCVDisplayLinkGetNominalOutputVideoRefreshPeriod, _lib, "CVDisplayLinkGetNominalOutputVideoRefreshPeriod")
@@ -267,10 +267,10 @@ func CVDisplayLinkGetNominalOutputVideoRefreshPeriod(displayLink CVDisplayLinkRe
 	return _fnCVDisplayLinkGetNominalOutputVideoRefreshPeriod(objref.IDOf(displayLink.Object))
 }
 
-var _fnCVDisplayLinkGetOutputVideoLatency func(objc.ID) unsafe.Pointer
+var _fnCVDisplayLinkGetOutputVideoLatency func(objc.ID) CVTime
 
 // CVDisplayLinkGetOutputVideoLatency calls the CoreVideo framework function CVDisplayLinkGetOutputVideoLatency.
-func CVDisplayLinkGetOutputVideoLatency(displayLink CVDisplayLinkRef) unsafe.Pointer {
+func CVDisplayLinkGetOutputVideoLatency(displayLink CVDisplayLinkRef) CVTime {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCVDisplayLinkGetOutputVideoLatency == nil {
 		ebipurego.RegisterLibFunc(&_fnCVDisplayLinkGetOutputVideoLatency, _lib, "CVDisplayLinkGetOutputVideoLatency")
@@ -320,7 +320,7 @@ func CVDisplayLinkRetain(displayLink CVDisplayLinkRef) CVDisplayLinkRef {
 		ebipurego.RegisterLibFunc(&_fnCVDisplayLinkRetain, _lib, "CVDisplayLinkRetain")
 	}
 	_ret := _fnCVDisplayLinkRetain(objref.IDOf(displayLink.Object))
-	return CVDisplayLinkRef{obj.Wrap(_ret)}
+	return CVDisplayLinkRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCVDisplayLinkSetCurrentCGDisplay func(objc.ID, uint32) int32
@@ -444,7 +444,7 @@ func CVImageBufferCreateColorSpaceFromAttachments(attachments corefoundation.CFD
 		ebipurego.RegisterLibFunc(&_fnCVImageBufferCreateColorSpaceFromAttachments, _lib, "CVImageBufferCreateColorSpaceFromAttachments")
 	}
 	_ret := _fnCVImageBufferCreateColorSpaceFromAttachments(objref.IDOf(attachments.Object))
-	return coregraphics.CGColorSpaceRef{obj.Wrap(_ret)}
+	return coregraphics.CGColorSpaceRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCVImageBufferGetCleanRect func(unsafe.Pointer) corefoundation.CGRect
@@ -467,7 +467,7 @@ func CVImageBufferGetColorSpace(imageBuffer unsafe.Pointer) coregraphics.CGColor
 		ebipurego.RegisterLibFunc(&_fnCVImageBufferGetColorSpace, _lib, "CVImageBufferGetColorSpace")
 	}
 	_ret := _fnCVImageBufferGetColorSpace(imageBuffer)
-	return coregraphics.CGColorSpaceRef{obj.Wrap(_ret)}
+	return coregraphics.CGColorSpaceRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCVImageBufferGetDisplaySize func(unsafe.Pointer) corefoundation.CGSize
@@ -704,7 +704,7 @@ func CVOpenGLBufferGetAttributes(openGLBuffer unsafe.Pointer) corefoundation.CFD
 		ebipurego.RegisterLibFunc(&_fnCVOpenGLBufferGetAttributes, _lib, "CVOpenGLBufferGetAttributes")
 	}
 	_ret := _fnCVOpenGLBufferGetAttributes(openGLBuffer)
-	return corefoundation.CFDictionaryRef{obj.Wrap(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCVOpenGLBufferGetTypeID func() int
@@ -749,7 +749,7 @@ func CVOpenGLBufferPoolGetAttributes(pool CVOpenGLBufferPoolRef) corefoundation.
 		ebipurego.RegisterLibFunc(&_fnCVOpenGLBufferPoolGetAttributes, _lib, "CVOpenGLBufferPoolGetAttributes")
 	}
 	_ret := _fnCVOpenGLBufferPoolGetAttributes(objref.IDOf(pool.Object))
-	return corefoundation.CFDictionaryRef{obj.Wrap(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCVOpenGLBufferPoolGetOpenGLBufferAttributes func(objc.ID) objc.ID
@@ -761,7 +761,7 @@ func CVOpenGLBufferPoolGetOpenGLBufferAttributes(pool CVOpenGLBufferPoolRef) cor
 		ebipurego.RegisterLibFunc(&_fnCVOpenGLBufferPoolGetOpenGLBufferAttributes, _lib, "CVOpenGLBufferPoolGetOpenGLBufferAttributes")
 	}
 	_ret := _fnCVOpenGLBufferPoolGetOpenGLBufferAttributes(objref.IDOf(pool.Object))
-	return corefoundation.CFDictionaryRef{obj.Wrap(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCVOpenGLBufferPoolGetTypeID func() int
@@ -795,7 +795,7 @@ func CVOpenGLBufferPoolRetain(openGLBufferPool CVOpenGLBufferPoolRef) CVOpenGLBu
 		ebipurego.RegisterLibFunc(&_fnCVOpenGLBufferPoolRetain, _lib, "CVOpenGLBufferPoolRetain")
 	}
 	_ret := _fnCVOpenGLBufferPoolRetain(objref.IDOf(openGLBufferPool.Object))
-	return CVOpenGLBufferPoolRef{obj.Wrap(_ret)}
+	return CVOpenGLBufferPoolRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCVOpenGLBufferRelease func(unsafe.Pointer)
@@ -884,7 +884,7 @@ func CVOpenGLTextureCacheRetain(textureCache CVOpenGLTextureCacheRef) CVOpenGLTe
 		ebipurego.RegisterLibFunc(&_fnCVOpenGLTextureCacheRetain, _lib, "CVOpenGLTextureCacheRetain")
 	}
 	_ret := _fnCVOpenGLTextureCacheRetain(objref.IDOf(textureCache.Object))
-	return CVOpenGLTextureCacheRef{obj.Wrap(_ret)}
+	return CVOpenGLTextureCacheRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCVOpenGLTextureGetCleanTexCoords func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
@@ -978,7 +978,7 @@ func CVPixelBufferCopyCreationAttributes(pixelBuffer unsafe.Pointer) corefoundat
 		ebipurego.RegisterLibFunc(&_fnCVPixelBufferCopyCreationAttributes, _lib, "CVPixelBufferCopyCreationAttributes")
 	}
 	_ret := _fnCVPixelBufferCopyCreationAttributes(pixelBuffer)
-	return corefoundation.CFDictionaryRef{obj.Adopt(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCVPixelBufferCreate func(objc.ID, int, int, int, objc.ID, unsafe.Pointer) int32
@@ -1153,7 +1153,7 @@ func CVPixelBufferGetIOSurface(pixelBuffer unsafe.Pointer) coregraphics.IOSurfac
 		ebipurego.RegisterLibFunc(&_fnCVPixelBufferGetIOSurface, _lib, "CVPixelBufferGetIOSurface")
 	}
 	_ret := _fnCVPixelBufferGetIOSurface(pixelBuffer)
-	return coregraphics.IOSurfaceRef{obj.WrapUnmanaged(_ret)}
+	return coregraphics.IOSurfaceRef{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnCVPixelBufferGetPixelFormatType func(unsafe.Pointer) uint32
@@ -1297,7 +1297,7 @@ func CVPixelBufferPoolGetAttributes(pool CVPixelBufferPoolRef) corefoundation.CF
 		ebipurego.RegisterLibFunc(&_fnCVPixelBufferPoolGetAttributes, _lib, "CVPixelBufferPoolGetAttributes")
 	}
 	_ret := _fnCVPixelBufferPoolGetAttributes(objref.IDOf(pool.Object))
-	return corefoundation.CFDictionaryRef{obj.Wrap(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCVPixelBufferPoolGetPixelBufferAttributes func(objc.ID) objc.ID
@@ -1309,7 +1309,7 @@ func CVPixelBufferPoolGetPixelBufferAttributes(pool CVPixelBufferPoolRef) corefo
 		ebipurego.RegisterLibFunc(&_fnCVPixelBufferPoolGetPixelBufferAttributes, _lib, "CVPixelBufferPoolGetPixelBufferAttributes")
 	}
 	_ret := _fnCVPixelBufferPoolGetPixelBufferAttributes(objref.IDOf(pool.Object))
-	return corefoundation.CFDictionaryRef{obj.Wrap(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCVPixelBufferPoolGetTypeID func() int
@@ -1343,7 +1343,7 @@ func CVPixelBufferPoolRetain(pixelBufferPool CVPixelBufferPoolRef) CVPixelBuffer
 		ebipurego.RegisterLibFunc(&_fnCVPixelBufferPoolRetain, _lib, "CVPixelBufferPoolRetain")
 	}
 	_ret := _fnCVPixelBufferPoolRetain(objref.IDOf(pixelBufferPool.Object))
-	return CVPixelBufferPoolRef{obj.Wrap(_ret)}
+	return CVPixelBufferPoolRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCVPixelBufferRelease func(unsafe.Pointer)
@@ -1388,7 +1388,7 @@ func CVPixelFormatDescriptionArrayCreateWithAllPixelFormatTypes(allocator corefo
 		ebipurego.RegisterLibFunc(&_fnCVPixelFormatDescriptionArrayCreateWithAllPixelFormatTypes, _lib, "CVPixelFormatDescriptionArrayCreateWithAllPixelFormatTypes")
 	}
 	_ret := _fnCVPixelFormatDescriptionArrayCreateWithAllPixelFormatTypes(objref.IDOf(allocator.Object))
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCVPixelFormatDescriptionCreateWithPixelFormatType func(objc.ID, int) objc.ID
@@ -1400,7 +1400,7 @@ func CVPixelFormatDescriptionCreateWithPixelFormatType(allocator corefoundation.
 		ebipurego.RegisterLibFunc(&_fnCVPixelFormatDescriptionCreateWithPixelFormatType, _lib, "CVPixelFormatDescriptionCreateWithPixelFormatType")
 	}
 	_ret := _fnCVPixelFormatDescriptionCreateWithPixelFormatType(objref.IDOf(allocator.Object), pixelFormat)
-	return corefoundation.CFDictionaryRef{obj.Adopt(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCVPixelFormatDescriptionRegisterDescriptionWithPixelFormatType func(objc.ID, int)
@@ -1423,7 +1423,7 @@ func CVPixelFormatTypeCopyFourCharCodeString(pixelFormat int) corefoundation.CFS
 		ebipurego.RegisterLibFunc(&_fnCVPixelFormatTypeCopyFourCharCodeString, _lib, "CVPixelFormatTypeCopyFourCharCodeString")
 	}
 	_ret := _fnCVPixelFormatTypeCopyFourCharCodeString(pixelFormat)
-	return corefoundation.CFStringRef{obj.Adopt(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCVTransferFunctionGetIntegerCodePointForString func(objc.ID) int32
@@ -1446,7 +1446,7 @@ func CVTransferFunctionGetStringForIntegerCodePoint(transferFunctionCodePoint in
 		ebipurego.RegisterLibFunc(&_fnCVTransferFunctionGetStringForIntegerCodePoint, _lib, "CVTransferFunctionGetStringForIntegerCodePoint")
 	}
 	_ret := _fnCVTransferFunctionGetStringForIntegerCodePoint(transferFunctionCodePoint)
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCVYCbCrMatrixGetIntegerCodePointForString func(objc.ID) int32
@@ -1469,5 +1469,5 @@ func CVYCbCrMatrixGetStringForIntegerCodePoint(yCbCrMatrixCodePoint int) corefou
 		ebipurego.RegisterLibFunc(&_fnCVYCbCrMatrixGetStringForIntegerCodePoint, _lib, "CVYCbCrMatrixGetStringForIntegerCodePoint")
 	}
 	_ret := _fnCVYCbCrMatrixGetStringForIntegerCodePoint(yCbCrMatrixCodePoint)
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }

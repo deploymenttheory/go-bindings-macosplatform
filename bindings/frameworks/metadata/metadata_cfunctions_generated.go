@@ -24,7 +24,7 @@ func MDCopyLabelKinds() corefoundation.CFArrayRef {
 		ebipurego.RegisterLibFunc(&_fnMDCopyLabelKinds, _lib, "MDCopyLabelKinds")
 	}
 	_ret := _fnMDCopyLabelKinds()
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnMDCopyLabelWithUUID func(objc.ID) objc.ID
@@ -36,7 +36,7 @@ func MDCopyLabelWithUUID(labelUUID corefoundation.CFUUIDRef) MDLabelRef {
 		ebipurego.RegisterLibFunc(&_fnMDCopyLabelWithUUID, _lib, "MDCopyLabelWithUUID")
 	}
 	_ret := _fnMDCopyLabelWithUUID(objref.IDOf(labelUUID.Object))
-	return MDLabelRef{obj.Adopt(_ret)}
+	return MDLabelRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnMDCopyLabelsMatchingExpression func(objc.ID) objc.ID
@@ -48,7 +48,7 @@ func MDCopyLabelsMatchingExpression(simpleQueryString corefoundation.CFStringRef
 		ebipurego.RegisterLibFunc(&_fnMDCopyLabelsMatchingExpression, _lib, "MDCopyLabelsMatchingExpression")
 	}
 	_ret := _fnMDCopyLabelsMatchingExpression(objref.IDOf(simpleQueryString.Object))
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnMDCopyLabelsWithKind func(objc.ID) objc.ID
@@ -60,7 +60,7 @@ func MDCopyLabelsWithKind(kind corefoundation.CFStringRef) corefoundation.CFArra
 		ebipurego.RegisterLibFunc(&_fnMDCopyLabelsWithKind, _lib, "MDCopyLabelsWithKind")
 	}
 	_ret := _fnMDCopyLabelsWithKind(objref.IDOf(kind.Object))
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnMDItemCopyAttribute func(objc.ID, objc.ID) objc.ID
@@ -84,7 +84,7 @@ func MDItemCopyAttributeNames(item MDItemRef) corefoundation.CFArrayRef {
 		ebipurego.RegisterLibFunc(&_fnMDItemCopyAttributeNames, _lib, "MDItemCopyAttributeNames")
 	}
 	_ret := _fnMDItemCopyAttributeNames(objref.IDOf(item.Object))
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnMDItemCopyAttributes func(objc.ID, objc.ID) objc.ID
@@ -96,7 +96,7 @@ func MDItemCopyAttributes(item MDItemRef, names corefoundation.CFArrayRef) coref
 		ebipurego.RegisterLibFunc(&_fnMDItemCopyAttributes, _lib, "MDItemCopyAttributes")
 	}
 	_ret := _fnMDItemCopyAttributes(objref.IDOf(item.Object), objref.IDOf(names.Object))
-	return corefoundation.CFDictionaryRef{obj.Adopt(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnMDItemCopyLabels func(objc.ID) objc.ID
@@ -108,7 +108,7 @@ func MDItemCopyLabels(item MDItemRef) corefoundation.CFArrayRef {
 		ebipurego.RegisterLibFunc(&_fnMDItemCopyLabels, _lib, "MDItemCopyLabels")
 	}
 	_ret := _fnMDItemCopyLabels(objref.IDOf(item.Object))
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnMDItemCreate func(objc.ID, objc.ID) objc.ID
@@ -120,7 +120,7 @@ func MDItemCreate(allocator corefoundation.CFAllocatorRef, path corefoundation.C
 		ebipurego.RegisterLibFunc(&_fnMDItemCreate, _lib, "MDItemCreate")
 	}
 	_ret := _fnMDItemCreate(objref.IDOf(allocator.Object), objref.IDOf(path.Object))
-	return MDItemRef{obj.Adopt(_ret)}
+	return MDItemRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnMDItemCreateWithURL func(objc.ID, objc.ID) objc.ID
@@ -132,7 +132,7 @@ func MDItemCreateWithURL(allocator corefoundation.CFAllocatorRef, url corefounda
 		ebipurego.RegisterLibFunc(&_fnMDItemCreateWithURL, _lib, "MDItemCreateWithURL")
 	}
 	_ret := _fnMDItemCreateWithURL(objref.IDOf(allocator.Object), objref.IDOf(url.Object))
-	return MDItemRef{obj.Adopt(_ret)}
+	return MDItemRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnMDItemGetCacheFileDescriptors func(objc.ID, objc.Block)
@@ -188,7 +188,7 @@ func MDItemsCopyAttributes(items corefoundation.CFArrayRef, names corefoundation
 		ebipurego.RegisterLibFunc(&_fnMDItemsCopyAttributes, _lib, "MDItemsCopyAttributes")
 	}
 	_ret := _fnMDItemsCopyAttributes(objref.IDOf(items.Object), objref.IDOf(names.Object))
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnMDItemsCreateWithURLs func(objc.ID, objc.ID) objc.ID
@@ -200,7 +200,7 @@ func MDItemsCreateWithURLs(allocator corefoundation.CFAllocatorRef, urls corefou
 		ebipurego.RegisterLibFunc(&_fnMDItemsCreateWithURLs, _lib, "MDItemsCreateWithURLs")
 	}
 	_ret := _fnMDItemsCreateWithURLs(objref.IDOf(allocator.Object), objref.IDOf(urls.Object))
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnMDLabelCopyAttribute func(objc.ID, objc.ID) objc.ID
@@ -224,7 +224,7 @@ func MDLabelCopyAttributeName(label MDLabelRef) corefoundation.CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnMDLabelCopyAttributeName, _lib, "MDLabelCopyAttributeName")
 	}
 	_ret := _fnMDLabelCopyAttributeName(objref.IDOf(label.Object))
-	return corefoundation.CFStringRef{obj.Adopt(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnMDLabelCreate func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) objc.ID
@@ -236,7 +236,7 @@ func MDLabelCreate(allocator corefoundation.CFAllocatorRef, displayName corefoun
 		ebipurego.RegisterLibFunc(&_fnMDLabelCreate, _lib, "MDLabelCreate")
 	}
 	_ret := _fnMDLabelCreate(objref.IDOf(allocator.Object), objref.IDOf(displayName.Object), objref.IDOf(kind.Object), domain)
-	return MDLabelRef{obj.Adopt(_ret)}
+	return MDLabelRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnMDLabelDelete func(objc.ID) uint8
@@ -281,7 +281,7 @@ func MDQueryCopyQueryString(query MDQueryRef) corefoundation.CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnMDQueryCopyQueryString, _lib, "MDQueryCopyQueryString")
 	}
 	_ret := _fnMDQueryCopyQueryString(objref.IDOf(query.Object))
-	return corefoundation.CFStringRef{obj.Adopt(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnMDQueryCopySortingAttributes func(objc.ID) objc.ID
@@ -293,7 +293,7 @@ func MDQueryCopySortingAttributes(query MDQueryRef) corefoundation.CFArrayRef {
 		ebipurego.RegisterLibFunc(&_fnMDQueryCopySortingAttributes, _lib, "MDQueryCopySortingAttributes")
 	}
 	_ret := _fnMDQueryCopySortingAttributes(objref.IDOf(query.Object))
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnMDQueryCopyValueListAttributes func(objc.ID) objc.ID
@@ -305,7 +305,7 @@ func MDQueryCopyValueListAttributes(query MDQueryRef) corefoundation.CFArrayRef 
 		ebipurego.RegisterLibFunc(&_fnMDQueryCopyValueListAttributes, _lib, "MDQueryCopyValueListAttributes")
 	}
 	_ret := _fnMDQueryCopyValueListAttributes(objref.IDOf(query.Object))
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnMDQueryCopyValuesOfAttribute func(objc.ID, objc.ID) objc.ID
@@ -317,7 +317,7 @@ func MDQueryCopyValuesOfAttribute(query MDQueryRef, name corefoundation.CFString
 		ebipurego.RegisterLibFunc(&_fnMDQueryCopyValuesOfAttribute, _lib, "MDQueryCopyValuesOfAttribute")
 	}
 	_ret := _fnMDQueryCopyValuesOfAttribute(objref.IDOf(query.Object), objref.IDOf(name.Object))
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnMDQueryCreate func(objc.ID, objc.ID, objc.ID, objc.ID) objc.ID
@@ -329,7 +329,7 @@ func MDQueryCreate(allocator corefoundation.CFAllocatorRef, queryString corefoun
 		ebipurego.RegisterLibFunc(&_fnMDQueryCreate, _lib, "MDQueryCreate")
 	}
 	_ret := _fnMDQueryCreate(objref.IDOf(allocator.Object), objref.IDOf(queryString.Object), objref.IDOf(valueListAttrs.Object), objref.IDOf(sortingAttrs.Object))
-	return MDQueryRef{obj.Adopt(_ret)}
+	return MDQueryRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnMDQueryCreateForItems func(objc.ID, objc.ID, objc.ID, objc.ID, objc.ID) objc.ID
@@ -341,7 +341,7 @@ func MDQueryCreateForItems(allocator corefoundation.CFAllocatorRef, queryString 
 		ebipurego.RegisterLibFunc(&_fnMDQueryCreateForItems, _lib, "MDQueryCreateForItems")
 	}
 	_ret := _fnMDQueryCreateForItems(objref.IDOf(allocator.Object), objref.IDOf(queryString.Object), objref.IDOf(valueListAttrs.Object), objref.IDOf(sortingAttrs.Object), objref.IDOf(items.Object))
-	return MDQueryRef{obj.Adopt(_ret)}
+	return MDQueryRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnMDQueryCreateSubset func(objc.ID, objc.ID, objc.ID, objc.ID, objc.ID) objc.ID
@@ -353,7 +353,7 @@ func MDQueryCreateSubset(allocator corefoundation.CFAllocatorRef, query MDQueryR
 		ebipurego.RegisterLibFunc(&_fnMDQueryCreateSubset, _lib, "MDQueryCreateSubset")
 	}
 	_ret := _fnMDQueryCreateSubset(objref.IDOf(allocator.Object), objref.IDOf(query.Object), objref.IDOf(queryString.Object), objref.IDOf(valueListAttrs.Object), objref.IDOf(sortingAttrs.Object))
-	return MDQueryRef{obj.Adopt(_ret)}
+	return MDQueryRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnMDQueryDisableUpdates func(objc.ID)
@@ -400,10 +400,10 @@ func MDQueryGetAttributeValueOfResultAtIndex(query MDQueryRef, name corefoundati
 	return _fnMDQueryGetAttributeValueOfResultAtIndex(objref.IDOf(query.Object), objref.IDOf(name.Object), idx)
 }
 
-var _fnMDQueryGetBatchingParameters func(objc.ID) unsafe.Pointer
+var _fnMDQueryGetBatchingParameters func(objc.ID) MDQueryBatchingParams
 
 // MDQueryGetBatchingParameters calls the Metadata framework function MDQueryGetBatchingParameters.
-func MDQueryGetBatchingParameters(query MDQueryRef) unsafe.Pointer {
+func MDQueryGetBatchingParameters(query MDQueryRef) MDQueryBatchingParams {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDQueryGetBatchingParameters == nil {
 		ebipurego.RegisterLibFunc(&_fnMDQueryGetBatchingParameters, _lib, "MDQueryGetBatchingParameters")
@@ -488,10 +488,10 @@ func MDQueryIsGatheringComplete(query MDQueryRef) uint8 {
 	return _fnMDQueryIsGatheringComplete(objref.IDOf(query.Object))
 }
 
-var _fnMDQuerySetBatchingParameters func(objc.ID, unsafe.Pointer)
+var _fnMDQuerySetBatchingParameters func(objc.ID, MDQueryBatchingParams)
 
 // MDQuerySetBatchingParameters calls the Metadata framework function MDQuerySetBatchingParameters.
-func MDQuerySetBatchingParameters(query MDQueryRef, params unsafe.Pointer) {
+func MDQuerySetBatchingParameters(query MDQueryRef, params MDQueryBatchingParams) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDQuerySetBatchingParameters == nil {
 		ebipurego.RegisterLibFunc(&_fnMDQuerySetBatchingParameters, _lib, "MDQuerySetBatchingParameters")
@@ -618,7 +618,7 @@ func MDSchemaCopyAllAttributes() corefoundation.CFArrayRef {
 		ebipurego.RegisterLibFunc(&_fnMDSchemaCopyAllAttributes, _lib, "MDSchemaCopyAllAttributes")
 	}
 	_ret := _fnMDSchemaCopyAllAttributes()
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnMDSchemaCopyAttributesForContentType func(objc.ID) objc.ID
@@ -630,7 +630,7 @@ func MDSchemaCopyAttributesForContentType(contentTypeUTI corefoundation.CFString
 		ebipurego.RegisterLibFunc(&_fnMDSchemaCopyAttributesForContentType, _lib, "MDSchemaCopyAttributesForContentType")
 	}
 	_ret := _fnMDSchemaCopyAttributesForContentType(objref.IDOf(contentTypeUTI.Object))
-	return corefoundation.CFDictionaryRef{obj.Adopt(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnMDSchemaCopyDisplayDescriptionForAttribute func(objc.ID) objc.ID
@@ -642,7 +642,7 @@ func MDSchemaCopyDisplayDescriptionForAttribute(name corefoundation.CFStringRef)
 		ebipurego.RegisterLibFunc(&_fnMDSchemaCopyDisplayDescriptionForAttribute, _lib, "MDSchemaCopyDisplayDescriptionForAttribute")
 	}
 	_ret := _fnMDSchemaCopyDisplayDescriptionForAttribute(objref.IDOf(name.Object))
-	return corefoundation.CFStringRef{obj.Adopt(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnMDSchemaCopyDisplayNameForAttribute func(objc.ID) objc.ID
@@ -654,7 +654,7 @@ func MDSchemaCopyDisplayNameForAttribute(name corefoundation.CFStringRef) corefo
 		ebipurego.RegisterLibFunc(&_fnMDSchemaCopyDisplayNameForAttribute, _lib, "MDSchemaCopyDisplayNameForAttribute")
 	}
 	_ret := _fnMDSchemaCopyDisplayNameForAttribute(objref.IDOf(name.Object))
-	return corefoundation.CFStringRef{obj.Adopt(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnMDSchemaCopyMetaAttributesForAttribute func(objc.ID) objc.ID
@@ -666,5 +666,5 @@ func MDSchemaCopyMetaAttributesForAttribute(name corefoundation.CFStringRef) cor
 		ebipurego.RegisterLibFunc(&_fnMDSchemaCopyMetaAttributesForAttribute, _lib, "MDSchemaCopyMetaAttributesForAttribute")
 	}
 	_ret := _fnMDSchemaCopyMetaAttributesForAttribute(objref.IDOf(name.Object))
-	return corefoundation.CFDictionaryRef{obj.Adopt(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Adopt(_ret)}
 }

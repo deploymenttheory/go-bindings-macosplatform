@@ -179,10 +179,10 @@ func SCNMatrix4Translate(m quartzcore.CATransform3D, tx float64, ty float64, tz 
 	return _fnSCNMatrix4Translate(m, tx, ty, tz)
 }
 
-var _fnSCNVector3EqualToVector3 func(unsafe.Pointer, unsafe.Pointer) bool
+var _fnSCNVector3EqualToVector3 func(SCNVector3, SCNVector3) bool
 
 // SCNVector3EqualToVector3 calls the SceneKit framework function SCNVector3EqualToVector3.
-func SCNVector3EqualToVector3(a unsafe.Pointer, b unsafe.Pointer) bool {
+func SCNVector3EqualToVector3(a SCNVector3, b SCNVector3) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNVector3EqualToVector3 == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNVector3EqualToVector3, _lib, "SCNVector3EqualToVector3")
@@ -190,10 +190,10 @@ func SCNVector3EqualToVector3(a unsafe.Pointer, b unsafe.Pointer) bool {
 	return _fnSCNVector3EqualToVector3(a, b)
 }
 
-var _fnSCNVector3FromFloat3 func(unsafe.Pointer) unsafe.Pointer
+var _fnSCNVector3FromFloat3 func(unsafe.Pointer) SCNVector3
 
 // SCNVector3FromFloat3 calls the SceneKit framework function SCNVector3FromFloat3.
-func SCNVector3FromFloat3(v unsafe.Pointer) unsafe.Pointer {
+func SCNVector3FromFloat3(v unsafe.Pointer) SCNVector3 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNVector3FromFloat3 == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNVector3FromFloat3, _lib, "SCNVector3FromFloat3")
@@ -201,10 +201,10 @@ func SCNVector3FromFloat3(v unsafe.Pointer) unsafe.Pointer {
 	return _fnSCNVector3FromFloat3(v)
 }
 
-var _fnSCNVector3FromGLKVector3 func(unsafe.Pointer) unsafe.Pointer
+var _fnSCNVector3FromGLKVector3 func(unsafe.Pointer) SCNVector3
 
 // SCNVector3FromGLKVector3 calls the SceneKit framework function SCNVector3FromGLKVector3.
-func SCNVector3FromGLKVector3(vector unsafe.Pointer) unsafe.Pointer {
+func SCNVector3FromGLKVector3(vector unsafe.Pointer) SCNVector3 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNVector3FromGLKVector3 == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNVector3FromGLKVector3, _lib, "SCNVector3FromGLKVector3")
@@ -212,10 +212,10 @@ func SCNVector3FromGLKVector3(vector unsafe.Pointer) unsafe.Pointer {
 	return _fnSCNVector3FromGLKVector3(vector)
 }
 
-var _fnSCNVector3Make func(float64, float64, float64) unsafe.Pointer
+var _fnSCNVector3Make func(float64, float64, float64) SCNVector3
 
 // SCNVector3Make calls the SceneKit framework function SCNVector3Make.
-func SCNVector3Make(x float64, y float64, z float64) unsafe.Pointer {
+func SCNVector3Make(x float64, y float64, z float64) SCNVector3 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNVector3Make == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNVector3Make, _lib, "SCNVector3Make")
@@ -223,10 +223,10 @@ func SCNVector3Make(x float64, y float64, z float64) unsafe.Pointer {
 	return _fnSCNVector3Make(x, y, z)
 }
 
-var _fnSCNVector3ToFloat3 func(unsafe.Pointer) unsafe.Pointer
+var _fnSCNVector3ToFloat3 func(SCNVector3) unsafe.Pointer
 
 // SCNVector3ToFloat3 calls the SceneKit framework function SCNVector3ToFloat3.
-func SCNVector3ToFloat3(v unsafe.Pointer) unsafe.Pointer {
+func SCNVector3ToFloat3(v SCNVector3) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNVector3ToFloat3 == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNVector3ToFloat3, _lib, "SCNVector3ToFloat3")
@@ -234,10 +234,10 @@ func SCNVector3ToFloat3(v unsafe.Pointer) unsafe.Pointer {
 	return _fnSCNVector3ToFloat3(v)
 }
 
-var _fnSCNVector3ToGLKVector3 func(unsafe.Pointer) unsafe.Pointer
+var _fnSCNVector3ToGLKVector3 func(SCNVector3) unsafe.Pointer
 
 // SCNVector3ToGLKVector3 calls the SceneKit framework function SCNVector3ToGLKVector3.
-func SCNVector3ToGLKVector3(vector unsafe.Pointer) unsafe.Pointer {
+func SCNVector3ToGLKVector3(vector SCNVector3) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNVector3ToGLKVector3 == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNVector3ToGLKVector3, _lib, "SCNVector3ToGLKVector3")
@@ -245,10 +245,10 @@ func SCNVector3ToGLKVector3(vector unsafe.Pointer) unsafe.Pointer {
 	return _fnSCNVector3ToGLKVector3(vector)
 }
 
-var _fnSCNVector4EqualToVector4 func(unsafe.Pointer, unsafe.Pointer) bool
+var _fnSCNVector4EqualToVector4 func(SCNVector4, SCNVector4) bool
 
 // SCNVector4EqualToVector4 calls the SceneKit framework function SCNVector4EqualToVector4.
-func SCNVector4EqualToVector4(a unsafe.Pointer, b unsafe.Pointer) bool {
+func SCNVector4EqualToVector4(a SCNVector4, b SCNVector4) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNVector4EqualToVector4 == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNVector4EqualToVector4, _lib, "SCNVector4EqualToVector4")
@@ -256,10 +256,10 @@ func SCNVector4EqualToVector4(a unsafe.Pointer, b unsafe.Pointer) bool {
 	return _fnSCNVector4EqualToVector4(a, b)
 }
 
-var _fnSCNVector4FromFloat4 func(unsafe.Pointer) unsafe.Pointer
+var _fnSCNVector4FromFloat4 func(unsafe.Pointer) SCNVector4
 
 // SCNVector4FromFloat4 calls the SceneKit framework function SCNVector4FromFloat4.
-func SCNVector4FromFloat4(v unsafe.Pointer) unsafe.Pointer {
+func SCNVector4FromFloat4(v unsafe.Pointer) SCNVector4 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNVector4FromFloat4 == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNVector4FromFloat4, _lib, "SCNVector4FromFloat4")
@@ -267,10 +267,10 @@ func SCNVector4FromFloat4(v unsafe.Pointer) unsafe.Pointer {
 	return _fnSCNVector4FromFloat4(v)
 }
 
-var _fnSCNVector4FromGLKVector4 func(unsafe.Pointer) unsafe.Pointer
+var _fnSCNVector4FromGLKVector4 func(unsafe.Pointer) SCNVector4
 
 // SCNVector4FromGLKVector4 calls the SceneKit framework function SCNVector4FromGLKVector4.
-func SCNVector4FromGLKVector4(vector unsafe.Pointer) unsafe.Pointer {
+func SCNVector4FromGLKVector4(vector unsafe.Pointer) SCNVector4 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNVector4FromGLKVector4 == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNVector4FromGLKVector4, _lib, "SCNVector4FromGLKVector4")
@@ -278,10 +278,10 @@ func SCNVector4FromGLKVector4(vector unsafe.Pointer) unsafe.Pointer {
 	return _fnSCNVector4FromGLKVector4(vector)
 }
 
-var _fnSCNVector4Make func(float64, float64, float64, float64) unsafe.Pointer
+var _fnSCNVector4Make func(float64, float64, float64, float64) SCNVector4
 
 // SCNVector4Make calls the SceneKit framework function SCNVector4Make.
-func SCNVector4Make(x float64, y float64, z float64, w float64) unsafe.Pointer {
+func SCNVector4Make(x float64, y float64, z float64, w float64) SCNVector4 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNVector4Make == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNVector4Make, _lib, "SCNVector4Make")
@@ -289,10 +289,10 @@ func SCNVector4Make(x float64, y float64, z float64, w float64) unsafe.Pointer {
 	return _fnSCNVector4Make(x, y, z, w)
 }
 
-var _fnSCNVector4ToFloat4 func(unsafe.Pointer) unsafe.Pointer
+var _fnSCNVector4ToFloat4 func(SCNVector4) unsafe.Pointer
 
 // SCNVector4ToFloat4 calls the SceneKit framework function SCNVector4ToFloat4.
-func SCNVector4ToFloat4(v unsafe.Pointer) unsafe.Pointer {
+func SCNVector4ToFloat4(v SCNVector4) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNVector4ToFloat4 == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNVector4ToFloat4, _lib, "SCNVector4ToFloat4")
@@ -300,10 +300,10 @@ func SCNVector4ToFloat4(v unsafe.Pointer) unsafe.Pointer {
 	return _fnSCNVector4ToFloat4(v)
 }
 
-var _fnSCNVector4ToGLKVector4 func(unsafe.Pointer) unsafe.Pointer
+var _fnSCNVector4ToGLKVector4 func(SCNVector4) unsafe.Pointer
 
 // SCNVector4ToGLKVector4 calls the SceneKit framework function SCNVector4ToGLKVector4.
-func SCNVector4ToGLKVector4(vector unsafe.Pointer) unsafe.Pointer {
+func SCNVector4ToGLKVector4(vector SCNVector4) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNVector4ToGLKVector4 == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNVector4ToGLKVector4, _lib, "SCNVector4ToGLKVector4")

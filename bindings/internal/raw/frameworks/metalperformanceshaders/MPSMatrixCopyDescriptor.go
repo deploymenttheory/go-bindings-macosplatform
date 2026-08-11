@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/mpsmatrix"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
@@ -39,7 +38,7 @@ func MPSMatrixCopyDescriptorFromID(id objc.ID) *MPSMatrixCopyDescriptor {
 }
 
 // @abstract   convenience allocator for single copies
-func MPSMatrixCopyDescriptorDescriptorWithSourceMatrixDestinationMatrixOffsets(sourceMatrix *mpscore.MPSMatrix, destinationMatrix *mpscore.MPSMatrix, offsets mpsmatrix.MPSMatrixCopyOffsets) *MPSMatrixCopyDescriptor {
+func MPSMatrixCopyDescriptorDescriptorWithSourceMatrixDestinationMatrixOffsets(sourceMatrix *mpscore.MPSMatrix, destinationMatrix *mpscore.MPSMatrix, offsets MPSMatrixCopyOffsets) *MPSMatrixCopyDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSMatrixCopyDescriptor), _mPSMatrixCopyDescriptorSelDescriptorWithSourceMatrixDestinationMatrixOffsets, sourceMatrix.Ptr(), destinationMatrix.Ptr(), offsets)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
@@ -57,7 +56,7 @@ func (o *MPSMatrixCopyDescriptor) InitWithDeviceCount(device metal.MTLDevice, co
 }
 
 // @abstract    Initialize a MPSMatrixCopyDescriptor using offsets generated on the CPU @discussion  This is for one at a time intialization of the copy operations @param  index               The index of the copy operation @param  sourceMatrix        The source matrix for this copy operation @param  destinationMatrix   The destination matrix for this copy operation @param  offsets             The offsets to use for the copy operation
-func (o *MPSMatrixCopyDescriptor) SetCopyOperationAtIndexSourceMatrixDestinationMatrixOffsets(index uint, sourceMatrix *mpscore.MPSMatrix, destinationMatrix *mpscore.MPSMatrix, offsets mpsmatrix.MPSMatrixCopyOffsets) {
+func (o *MPSMatrixCopyDescriptor) SetCopyOperationAtIndexSourceMatrixDestinationMatrixOffsets(index uint, sourceMatrix *mpscore.MPSMatrix, destinationMatrix *mpscore.MPSMatrix, offsets MPSMatrixCopyOffsets) {
 	o.Ptr().Send(_mPSMatrixCopyDescriptorSelSetCopyOperationAtIndexSourceMatrixDestinationMatrixOffsets, index, sourceMatrix.Ptr(), destinationMatrix.Ptr(), offsets)
 }
 

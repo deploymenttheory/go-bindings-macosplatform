@@ -53,6 +53,12 @@ func NewMTL4AccelerationStructureTriangleGeometryDescriptor() *MTL4AccelerationS
 	return mTL4AccelerationStructureTriangleGeometryDescriptorAdopt(_id)
 }
 
+// WithVertexBuffer sets associates a vertex buffer containing triangle vertices.
+func (mastgd *MTL4AccelerationStructureTriangleGeometryDescriptor) WithVertexBuffer(vertexBuffer MTL4BufferRange) *MTL4AccelerationStructureTriangleGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mastgd), objc.RegisterName("setVertexBuffer:"), vertexBuffer)
+	return mastgd
+}
+
 // WithVertexFormat sets describes the format of the vertices in the vertex buffer.
 func (mastgd *MTL4AccelerationStructureTriangleGeometryDescriptor) WithVertexFormat(vertexFormat AttributeFormat) *MTL4AccelerationStructureTriangleGeometryDescriptor {
 	objc.Send[objc.ID](objref.IDOf(mastgd), objc.RegisterName("setVertexFormat:"), vertexFormat)
@@ -65,6 +71,12 @@ func (mastgd *MTL4AccelerationStructureTriangleGeometryDescriptor) WithVertexStr
 	return mastgd
 }
 
+// WithIndexBuffer sets sets an optional index buffer containing references to vertices in the vertexBuffer.
+func (mastgd *MTL4AccelerationStructureTriangleGeometryDescriptor) WithIndexBuffer(indexBuffer MTL4BufferRange) *MTL4AccelerationStructureTriangleGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mastgd), objc.RegisterName("setIndexBuffer:"), indexBuffer)
+	return mastgd
+}
+
 // WithIndexType sets configures the size of the indices the indexBuffer contains, which is typically either 16 or 32-bits for each index.
 func (mastgd *MTL4AccelerationStructureTriangleGeometryDescriptor) WithIndexType(indexType IndexType) *MTL4AccelerationStructureTriangleGeometryDescriptor {
 	objc.Send[objc.ID](objref.IDOf(mastgd), objc.RegisterName("setIndexType:"), indexType)
@@ -74,6 +86,12 @@ func (mastgd *MTL4AccelerationStructureTriangleGeometryDescriptor) WithIndexType
 // WithTriangleCount sets declares the number of triangles in this geometry descriptor.
 func (mastgd *MTL4AccelerationStructureTriangleGeometryDescriptor) WithTriangleCount(triangleCount int) *MTL4AccelerationStructureTriangleGeometryDescriptor {
 	objc.Send[objc.ID](objref.IDOf(mastgd), objc.RegisterName("setTriangleCount:"), triangleCount)
+	return mastgd
+}
+
+// WithTransformationMatrixBuffer sets assigns an optional reference to a buffer containing a float4x3 transformation matrix.
+func (mastgd *MTL4AccelerationStructureTriangleGeometryDescriptor) WithTransformationMatrixBuffer(transformationMatrixBuffer MTL4BufferRange) *MTL4AccelerationStructureTriangleGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mastgd), objc.RegisterName("setTransformationMatrixBuffer:"), transformationMatrixBuffer)
 	return mastgd
 }
 
@@ -107,6 +125,12 @@ func (mastgd *MTL4AccelerationStructureTriangleGeometryDescriptor) WithLabel(lab
 	return mastgd
 }
 
+// WithPrimitiveDataBuffer sets assigns optional buffer containing data to associate with each primitive in this geometry.
+func (mastgd *MTL4AccelerationStructureTriangleGeometryDescriptor) WithPrimitiveDataBuffer(primitiveDataBuffer MTL4BufferRange) *MTL4AccelerationStructureTriangleGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mastgd), objc.RegisterName("setPrimitiveDataBuffer:"), primitiveDataBuffer)
+	return mastgd
+}
+
 // WithPrimitiveDataStride sets defines the stride, in bytes, between each primitive’s data in the primitive data buffer primitiveDataBuffer references.
 func (mastgd *MTL4AccelerationStructureTriangleGeometryDescriptor) WithPrimitiveDataStride(primitiveDataStride int) *MTL4AccelerationStructureTriangleGeometryDescriptor {
 	objc.Send[objc.ID](objref.IDOf(mastgd), objc.RegisterName("setPrimitiveDataStride:"), primitiveDataStride)
@@ -117,6 +141,13 @@ func (mastgd *MTL4AccelerationStructureTriangleGeometryDescriptor) WithPrimitive
 func (mastgd *MTL4AccelerationStructureTriangleGeometryDescriptor) WithPrimitiveDataElementSize(primitiveDataElementSize int) *MTL4AccelerationStructureTriangleGeometryDescriptor {
 	objc.Send[objc.ID](objref.IDOf(mastgd), objc.RegisterName("setPrimitiveDataElementSize:"), primitiveDataElementSize)
 	return mastgd
+}
+
+// VertexBuffer returns associates a vertex buffer containing triangle vertices. You are responsible for ensuring that the format of all vertex positions match the “vertexFormat“ property, and that the buffer address for the buffer range is not zero.
+func (mastgd *MTL4AccelerationStructureTriangleGeometryDescriptor) VertexBuffer() MTL4BufferRange {
+	defer runtime.KeepAlive(mastgd)
+	_r := objc.Send[MTL4BufferRange](objref.IDOf(mastgd), objc.RegisterName("vertexBuffer"))
+	return _r
 }
 
 // VertexFormat describes the format of the vertices in the vertex buffer. This property controls the format of the position attribute of the vertices the “vertexBuffer“ references. The format defaults to `MTLAttributeFormatFloat3`, corresponding to three packed floating point numbers.
@@ -133,6 +164,13 @@ func (mastgd *MTL4AccelerationStructureTriangleGeometryDescriptor) VertexStride(
 	return _r
 }
 
+// IndexBuffer sets an optional index buffer containing references to vertices in the `vertexBuffer`. You can set this property to `0`, the default, to avoid specifying an index buffer.
+func (mastgd *MTL4AccelerationStructureTriangleGeometryDescriptor) IndexBuffer() MTL4BufferRange {
+	defer runtime.KeepAlive(mastgd)
+	_r := objc.Send[MTL4BufferRange](objref.IDOf(mastgd), objc.RegisterName("indexBuffer"))
+	return _r
+}
+
 // IndexType returns configures the size of the indices the `indexBuffer` contains, which is typically either 16 or 32-bits for each index.
 func (mastgd *MTL4AccelerationStructureTriangleGeometryDescriptor) IndexType() IndexType {
 	defer runtime.KeepAlive(mastgd)
@@ -144,6 +182,13 @@ func (mastgd *MTL4AccelerationStructureTriangleGeometryDescriptor) IndexType() I
 func (mastgd *MTL4AccelerationStructureTriangleGeometryDescriptor) TriangleCount() int {
 	defer runtime.KeepAlive(mastgd)
 	_r := objc.Send[int](objref.IDOf(mastgd), objc.RegisterName("triangleCount"))
+	return _r
+}
+
+// TransformationMatrixBuffer returns assigns an optional reference to a buffer containing a `float4x3` transformation matrix. When the buffer address is non-zero, Metal applies this transform to the vertex data positions when building the acceleration structure. Building an acceleration structure with a descriptor that specifies this property doesn't modify the contents of the input `vertexBuffer`.
+func (mastgd *MTL4AccelerationStructureTriangleGeometryDescriptor) TransformationMatrixBuffer() MTL4BufferRange {
+	defer runtime.KeepAlive(mastgd)
+	_r := objc.Send[MTL4BufferRange](objref.IDOf(mastgd), objc.RegisterName("transformationMatrixBuffer"))
 	return _r
 }
 

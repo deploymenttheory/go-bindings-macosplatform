@@ -55,6 +55,12 @@ func NewIKConstraintWithChainRootNode(chainRootNode *Node) *IKConstraint {
 	return iKConstraintAdopt(_id)
 }
 
+// WithTargetPosition sets the desired position for the constrained node, in the scene’s world coordinate space. Animatable.
+func (ic *IKConstraint) WithTargetPosition(targetPosition SCNVector3) *IKConstraint {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setTargetPosition:"), targetPosition)
+	return ic
+}
+
 // WithEnabled sets determines whether the constraint is enabled or not. Defaults to YES.
 func (ic *IKConstraint) WithEnabled(enabled bool) *IKConstraint {
 	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setEnabled:"), enabled)
@@ -93,6 +99,13 @@ func (ic *IKConstraint) ChainRootNode() *Node {
 	defer runtime.KeepAlive(ic)
 	_r := objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("chainRootNode"))
 	return NodeFromID(_r)
+}
+
+// TargetPosition specifies the target position (in world space coordinates) of the end joint (i.e the node that owns the IK constraint). Defaults to (0,0,0). Animatable.
+func (ic *IKConstraint) TargetPosition() SCNVector3 {
+	defer runtime.KeepAlive(ic)
+	_r := objc.Send[SCNVector3](objref.IDOf(ic), objc.RegisterName("targetPosition"))
+	return _r
 }
 
 var _ ConstraintProvider = (*IKConstraint)(nil)

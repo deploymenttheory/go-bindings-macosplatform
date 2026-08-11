@@ -21,7 +21,7 @@ func DCSCopyTextDefinition(dictionary DCSDictionaryRef, textString corefoundatio
 		ebipurego.RegisterLibFunc(&_fnDCSCopyTextDefinition, _lib, "DCSCopyTextDefinition")
 	}
 	_ret := _fnDCSCopyTextDefinition(objref.IDOf(dictionary.Object), objref.IDOf(textString.Object), range_)
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnDCSGetTermRangeInString func(objc.ID, objc.ID, int) corefoundation.CFRange

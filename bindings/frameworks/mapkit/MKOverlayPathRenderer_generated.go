@@ -204,7 +204,7 @@ func (opr *OverlayPathRenderer) ShouldRasterize() bool {
 func (opr *OverlayPathRenderer) Path() coregraphics.CGPathRef {
 	defer runtime.KeepAlive(opr)
 	_r := objc.Send[objc.ID](objref.IDOf(opr), objc.RegisterName("path"))
-	return coregraphics.CGPathRef{obj.Wrap(_r)}
+	return coregraphics.CGPathRef{Object: obj.Wrap(_r)}
 }
 
 // isOverlayPathRenderer marks OverlayPathRenderer — and, by embedding promotion, its

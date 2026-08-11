@@ -110,6 +110,34 @@ func (htr *HitTestResult) FaceIndex() int {
 	return _r
 }
 
+// LocalCoordinates returns intersection point in the node's local coordinate system.
+func (htr *HitTestResult) LocalCoordinates() SCNVector3 {
+	defer runtime.KeepAlive(htr)
+	_r := objc.Send[SCNVector3](objref.IDOf(htr), objc.RegisterName("localCoordinates"))
+	return _r
+}
+
+// WorldCoordinates returns intersection point in the world coordinate system.
+func (htr *HitTestResult) WorldCoordinates() SCNVector3 {
+	defer runtime.KeepAlive(htr)
+	_r := objc.Send[SCNVector3](objref.IDOf(htr), objc.RegisterName("worldCoordinates"))
+	return _r
+}
+
+// LocalNormal returns intersection normal in the node's local coordinate system.
+func (htr *HitTestResult) LocalNormal() SCNVector3 {
+	defer runtime.KeepAlive(htr)
+	_r := objc.Send[SCNVector3](objref.IDOf(htr), objc.RegisterName("localNormal"))
+	return _r
+}
+
+// WorldNormal returns intersection normal in the world coordinate system.
+func (htr *HitTestResult) WorldNormal() SCNVector3 {
+	defer runtime.KeepAlive(htr)
+	_r := objc.Send[SCNVector3](objref.IDOf(htr), objc.RegisterName("worldNormal"))
+	return _r
+}
+
 // ModelTransform returns world transform of the hit node.
 func (htr *HitTestResult) ModelTransform() quartzcore.CATransform3D {
 	defer runtime.KeepAlive(htr)

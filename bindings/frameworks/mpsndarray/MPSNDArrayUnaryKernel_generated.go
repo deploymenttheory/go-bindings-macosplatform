@@ -5,6 +5,8 @@
 package mpsndarray
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
@@ -41,6 +43,34 @@ func arrayUnaryKernelAdopt(id objc.ID) *ArrayUnaryKernel {
 	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
+}
+
+// Offsets returns the coordinate of the position read from this source array which is used to calculate the result value at [0,0,0,....] If the position read is actually a contiguous region (e.g. the area covered by a convolution kernel) then this is the center of that region, rounded down, for each dimension. Default: 0,0,0...
+func (auk *ArrayUnaryKernel) Offsets() MPSNDArrayOffsets {
+	defer runtime.KeepAlive(auk)
+	_r := objc.Send[MPSNDArrayOffsets](objref.IDOf(auk), objc.RegisterName("offsets"))
+	return _r
+}
+
+// KernelSizes returns the diameters of the point spread function in each dimension for a source NDArray Default: 1
+func (auk *ArrayUnaryKernel) KernelSizes() MPSNDArraySizes {
+	defer runtime.KeepAlive(auk)
+	_r := objc.Send[MPSNDArraySizes](objref.IDOf(auk), objc.RegisterName("kernelSizes"))
+	return _r
+}
+
+// Strides returns if the filter is a "backwards" filter such as a gradient filter or convolution transpose, then this is the upsampling ratio and zeros are inserted in the result. Default: 1
+func (auk *ArrayUnaryKernel) Strides() MPSNDArrayOffsets {
+	defer runtime.KeepAlive(auk)
+	_r := objc.Send[MPSNDArrayOffsets](objref.IDOf(auk), objc.RegisterName("strides"))
+	return _r
+}
+
+// DilationRates returns the stride in each dimension from one PSF tap to an adjacent PSF tap. Default: 1
+func (auk *ArrayUnaryKernel) DilationRates() MPSNDArraySizes {
+	defer runtime.KeepAlive(auk)
+	_r := objc.Send[MPSNDArraySizes](objref.IDOf(auk), objc.RegisterName("dilationRates"))
+	return _r
 }
 
 // isArrayUnaryKernel marks ArrayUnaryKernel — and, by embedding promotion, its

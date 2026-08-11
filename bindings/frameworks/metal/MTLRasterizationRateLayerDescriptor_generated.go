@@ -73,10 +73,31 @@ func (rrld *RasterizationRateLayerDescriptor) String() string {
 	return rt.Description(objref.IDOf(rrld))
 }
 
-// NewRasterizationRateLayerDescriptor creates a new RasterizationRateLayerDescriptor.
-func NewRasterizationRateLayerDescriptor() *RasterizationRateLayerDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(_class("MTLRasterizationRateLayerDescriptor")), objc.RegisterName("new"))
+// NewRasterizationRateLayerDescriptorWithSampleCount initializes the layer map with an empty grid.
+func NewRasterizationRateLayerDescriptorWithSampleCount(sampleCount MTLSize) *RasterizationRateLayerDescriptor {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTLRasterizationRateLayerDescriptor")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSampleCount:"), sampleCount)
 	return rasterizationRateLayerDescriptorAdopt(_id)
+}
+
+// WithSampleCount sets the number of rows and columns in the layer map.
+func (rrld *RasterizationRateLayerDescriptor) WithSampleCount(sampleCount MTLSize) *RasterizationRateLayerDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rrld), objc.RegisterName("setSampleCount:"), sampleCount)
+	return rrld
+}
+
+// SampleCount returns the sample count.
+func (rrld *RasterizationRateLayerDescriptor) SampleCount() MTLSize {
+	defer runtime.KeepAlive(rrld)
+	_r := objc.Send[MTLSize](objref.IDOf(rrld), objc.RegisterName("sampleCount"))
+	return _r
+}
+
+// MaxSampleCount returns the max sample count.
+func (rrld *RasterizationRateLayerDescriptor) MaxSampleCount() MTLSize {
+	defer runtime.KeepAlive(rrld)
+	_r := objc.Send[MTLSize](objref.IDOf(rrld), objc.RegisterName("maxSampleCount"))
+	return _r
 }
 
 // Horizontal provide convenient bounds-checked access to the quality samples stored in the descriptor.

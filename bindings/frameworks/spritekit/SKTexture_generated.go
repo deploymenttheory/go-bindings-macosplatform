@@ -130,7 +130,7 @@ func (t *Texture) Size() corefoundation.CGSize {
 func (t *Texture) CGImage() coregraphics.CGImageRef {
 	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("CGImage"))
-	return coregraphics.CGImageRef{obj.Adopt(_r)}
+	return coregraphics.CGImageRef{Object: obj.Adopt(_r)}
 }
 
 // Preload load texture data into memory, calling a completion handler after the task completes.

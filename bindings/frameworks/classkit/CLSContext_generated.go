@@ -262,7 +262,7 @@ func (c *Context) Summary() string {
 func (c *Context) Thumbnail() coregraphics.CGImageRef {
 	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("thumbnail"))
-	return coregraphics.CGImageRef{obj.Wrap(_r)}
+	return coregraphics.CGImageRef{Object: obj.Wrap(_r)}
 }
 
 // IsActive reports whether self is the active context.

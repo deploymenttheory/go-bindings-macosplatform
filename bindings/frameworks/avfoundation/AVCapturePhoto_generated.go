@@ -142,5 +142,5 @@ func (cp *CapturePhoto) FileDataRepresentation() []byte {
 func (cp *CapturePhoto) CGImageRepresentation() coregraphics.CGImageRef {
 	defer runtime.KeepAlive(cp)
 	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("CGImageRepresentation"))
-	return coregraphics.CGImageRef{obj.Wrap(_r)}
+	return coregraphics.CGImageRef{Object: obj.Wrap(_r)}
 }

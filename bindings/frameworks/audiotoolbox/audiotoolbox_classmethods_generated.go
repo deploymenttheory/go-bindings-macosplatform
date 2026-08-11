@@ -5,13 +5,40 @@
 package audiotoolbox
 
 import (
+	"context"
 	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
+
+// InstantiateWithComponentDescriptionOptions asynchronously creates an audio unit instance.
+//
+// InstantiateWithComponentDescriptionOptions blocks until the operation completes or ctx is cancelled.
+func InstantiateWithComponentDescriptionOptions(ctx context.Context, componentDescription AudioComponentDescription, options AudioComponentInstantiationOptions) (result *AudioUnit, err error) {
+	type _result struct {
+		val *AudioUnit
+		err error
+	}
+	_ch := make(chan _result, 1)
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
+		var _o _result
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = AudioUnitFromID(_p0)
+		_ch <- _o
+	})
+	objc.Send[objc.ID](objc.ID(_class("AUAudioUnit")), objc.RegisterName("instantiateWithComponentDescription:options:completionHandler:"), componentDescription, options, _block)
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *AudioUnit
+		return _zero, ctx.Err()
+	}
+}
 
 // CreateParameterWithIdentifierNameAddressMinMaxUnitUnitNameFlagsValueStringsDependentParameters creates a single parameter object.
 func CreateParameterWithIdentifierNameAddressMinMaxUnitUnitNameFlagsValueStringsDependentParameters(identifier string, name string, address uint64, min float32, max float32, unit AudioUnitParameterUnit, unitName string, flags AudioUnitParameterOptions, valueStrings []string, dependentParameters []*foundation.Number) *Parameter {

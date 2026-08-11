@@ -115,6 +115,24 @@ func (pvw *PhysicsVehicleWheel) WithMaximumSuspensionForce(maximumSuspensionForc
 	return pvw
 }
 
+// WithConnectionPosition sets the position of the wheel’s connection to the vehicle’s chassis.
+func (pvw *PhysicsVehicleWheel) WithConnectionPosition(connectionPosition SCNVector3) *PhysicsVehicleWheel {
+	objc.Send[objc.ID](objref.IDOf(pvw), objc.RegisterName("setConnectionPosition:"), connectionPosition)
+	return pvw
+}
+
+// WithSteeringAxis sets the direction of the axis that the wheel pivots around to steer the vehicle.
+func (pvw *PhysicsVehicleWheel) WithSteeringAxis(steeringAxis SCNVector3) *PhysicsVehicleWheel {
+	objc.Send[objc.ID](objref.IDOf(pvw), objc.RegisterName("setSteeringAxis:"), steeringAxis)
+	return pvw
+}
+
+// WithAxle sets the direction of the axis that the wheel spins around to move the vehicle.
+func (pvw *PhysicsVehicleWheel) WithAxle(axle SCNVector3) *PhysicsVehicleWheel {
+	objc.Send[objc.ID](objref.IDOf(pvw), objc.RegisterName("setAxle:"), axle)
+	return pvw
+}
+
 // WithRadius sets the radius of the wheel.
 func (pvw *PhysicsVehicleWheel) WithRadius(radius float64) *PhysicsVehicleWheel {
 	objc.Send[objc.ID](objref.IDOf(pvw), objc.RegisterName("setRadius:"), radius)
@@ -173,6 +191,27 @@ func (pvw *PhysicsVehicleWheel) FrictionSlip() float64 {
 func (pvw *PhysicsVehicleWheel) MaximumSuspensionForce() float64 {
 	defer runtime.KeepAlive(pvw)
 	_r := objc.Send[float64](objref.IDOf(pvw), objc.RegisterName("maximumSuspensionForce"))
+	return _r
+}
+
+// ConnectionPosition returns the connection position.
+func (pvw *PhysicsVehicleWheel) ConnectionPosition() SCNVector3 {
+	defer runtime.KeepAlive(pvw)
+	_r := objc.Send[SCNVector3](objref.IDOf(pvw), objc.RegisterName("connectionPosition"))
+	return _r
+}
+
+// SteeringAxis returns the steering axis.
+func (pvw *PhysicsVehicleWheel) SteeringAxis() SCNVector3 {
+	defer runtime.KeepAlive(pvw)
+	_r := objc.Send[SCNVector3](objref.IDOf(pvw), objc.RegisterName("steeringAxis"))
+	return _r
+}
+
+// Axle returns the axle.
+func (pvw *PhysicsVehicleWheel) Axle() SCNVector3 {
+	defer runtime.KeepAlive(pvw)
+	_r := objc.Send[SCNVector3](objref.IDOf(pvw), objc.RegisterName("axle"))
 	return _r
 }
 

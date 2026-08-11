@@ -115,7 +115,7 @@ func (cs *ColorSpace) ColorSyncProfile() unsafe.Pointer {
 func (cs *ColorSpace) CGColorSpace() coregraphics.CGColorSpaceRef {
 	defer runtime.KeepAlive(cs)
 	_r := objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("CGColorSpace"))
-	return coregraphics.CGColorSpaceRef{obj.Wrap(_r)}
+	return coregraphics.CGColorSpaceRef{Object: obj.Wrap(_r)}
 }
 
 // NumberOfColorComponents returns the number of color components.

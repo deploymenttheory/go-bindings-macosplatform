@@ -169,6 +169,12 @@ func (td *TextureDescriptor) WithCompressionType(compressionType TextureCompress
 	return td
 }
 
+// WithSwizzle sets the pattern you want the GPU to apply to pixels when you read or sample pixels from the texture.
+func (td *TextureDescriptor) WithSwizzle(swizzle MTLTextureSwizzleChannels) *TextureDescriptor {
+	objc.Send[objc.ID](objref.IDOf(td), objc.RegisterName("setSwizzle:"), swizzle)
+	return td
+}
+
 // WithPlacementSparsePageSize sets determines the page size for a placement sparse texture.
 func (td *TextureDescriptor) WithPlacementSparsePageSize(placementSparsePageSize SparsePageSize) *TextureDescriptor {
 	objc.Send[objc.ID](objref.IDOf(td), objc.RegisterName("setPlacementSparsePageSize:"), placementSparsePageSize)
@@ -277,6 +283,13 @@ func (td *TextureDescriptor) AllowGPUOptimizedContents() bool {
 func (td *TextureDescriptor) CompressionType() TextureCompressionType {
 	defer runtime.KeepAlive(td)
 	_r := objc.Send[TextureCompressionType](objref.IDOf(td), objc.RegisterName("compressionType"))
+	return _r
+}
+
+// Swizzle returns channel swizzle to use when reading or sampling from the texture, the default value is MTLTextureSwizzleChannelsDefault.
+func (td *TextureDescriptor) Swizzle() MTLTextureSwizzleChannels {
+	defer runtime.KeepAlive(td)
+	_r := objc.Send[MTLTextureSwizzleChannels](objref.IDOf(td), objc.RegisterName("swizzle"))
 	return _r
 }
 

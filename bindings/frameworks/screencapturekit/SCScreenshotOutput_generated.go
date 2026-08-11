@@ -104,14 +104,14 @@ func (so *ScreenshotOutput) WithFileURL(fileURL string) *ScreenshotOutput {
 func (so *ScreenshotOutput) SdrImage() coregraphics.CGImageRef {
 	defer runtime.KeepAlive(so)
 	_r := objc.Send[objc.ID](objref.IDOf(so), objc.RegisterName("sdrImage"))
-	return coregraphics.CGImageRef{obj.Wrap(_r)}
+	return coregraphics.CGImageRef{Object: obj.Wrap(_r)}
 }
 
 // HdrImage returns SCScreenshotOutput property that denotes the HDR CGimage.  The output CGImage uses the extended sRGB color space.
 func (so *ScreenshotOutput) HdrImage() coregraphics.CGImageRef {
 	defer runtime.KeepAlive(so)
 	_r := objc.Send[objc.ID](objref.IDOf(so), objc.RegisterName("hdrImage"))
-	return coregraphics.CGImageRef{obj.Wrap(_r)}
+	return coregraphics.CGImageRef{Object: obj.Wrap(_r)}
 }
 
 // FileURL returns SCScreenshotOutput property to specify the location where the image was saved.  If a fileURL in the screenshot configuration was not specified, then the fileURL will be nil

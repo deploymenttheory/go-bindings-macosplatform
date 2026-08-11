@@ -6,8 +6,10 @@ on:
     paths:
       - 'bindings/**'
       - 'cmd/genacceptance/**'
+      - 'examples/**'
       - 'internal/**'
       - 'metadata/**'
+      - 'opinionated/**'
       - 'scripts/ci/**'
       - '.github/workflows/acceptance.yml'
   pull_request:
@@ -15,8 +17,10 @@ on:
     paths:
       - 'bindings/**'
       - 'cmd/genacceptance/**'
+      - 'examples/**'
       - 'internal/**'
       - 'metadata/**'
+      - 'opinionated/**'
       - 'scripts/ci/**'
       - '.github/workflows/acceptance.yml'
   workflow_dispatch:
@@ -91,9 +95,16 @@ jobs:
             --libraries-out /tmp/lib-strict-check \
             --diagnostics-baseline metadata/diagnostics-baseline.json
 
-      - name: Build all binding packages
+      # opinionated/ and examples/ are consumers of the public bindings surface;
+      # building and testing them here keeps them from drifting when the
+      # generated API changes (they are not covered by any other target).
+      - name: Build all binding packages, opinionated tools, and examples
         if: steps.version.outputs.macos_major == '26'
-        run: go build ./bindings/...
+        run: go build ./bindings/... ./opinionated/... ./examples/...
+
+      - name: Test opinionated tools and examples
+        if: steps.version.outputs.macos_major == '26'
+        run: go test ./opinionated/... ./examples/... -count=1
 
       # Ratchet: the idiomatic public layer must keep covering every construct the
       # raw layer emits. Fails only on a NEW gap beyond the committed baseline.

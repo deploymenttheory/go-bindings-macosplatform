@@ -374,8 +374,8 @@ type BridgeImplModel struct {
 	// LocalHeader is the file name of a shim prototype header copied into the
 	// bridge/ directory (private libraries with no SDK header). When non-empty
 	// it is included with quotes and takes precedence over UmbrellaHeader.
-	LocalHeader string
-	HeaderName  string
+	LocalHeader    string
+	HeaderName     string
 	Methods        []BridgeImplMethodModel
 	AllocImpls     []BridgeAllocImplModel
 	CodingImpls    string // pre-rendered NSCoding implementation block

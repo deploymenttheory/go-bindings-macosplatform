@@ -228,6 +228,12 @@ func (a *Array) FirstObjectCommonWithArray(otherArray []obj.Object) obj.Object {
 	return obj.Wrap(_r)
 }
 
+// GetObjectsRange copies references to objects contained in the array that fall within the specified range to aBuffer.
+func (a *Array) GetObjectsRange(objects unsafe.Pointer, range_ NSRange) {
+	defer runtime.KeepAlive(a)
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("getObjects:range:"), objects, range_)
+}
+
 // IndexOfObject returns the lowest index whose corresponding array value is equal to a given object.
 func (a *Array) IndexOfObject(anObject obj.Object) int {
 	defer runtime.KeepAlive(a)
@@ -236,11 +242,27 @@ func (a *Array) IndexOfObject(anObject obj.Object) int {
 	return _r
 }
 
+// IndexOfObjectInRange returns the lowest index within a specified range whose corresponding array value is equal to a given object .
+func (a *Array) IndexOfObjectInRange(anObject obj.Object, range_ NSRange) int {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(anObject)
+	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("indexOfObject:inRange:"), objref.IDOf(anObject), range_)
+	return _r
+}
+
 // IndexOfObjectIdenticalTo returns the lowest index whose corresponding array value is identical to a given object.
 func (a *Array) IndexOfObjectIdenticalTo(anObject obj.Object) int {
 	defer runtime.KeepAlive(a)
 	defer runtime.KeepAlive(anObject)
 	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("indexOfObjectIdenticalTo:"), objref.IDOf(anObject))
+	return _r
+}
+
+// IndexOfObjectIdenticalToInRange returns the lowest index within a specified range whose corresponding array value is equal to a given object .
+func (a *Array) IndexOfObjectIdenticalToInRange(anObject obj.Object, range_ NSRange) int {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(anObject)
+	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("indexOfObjectIdenticalTo:inRange:"), objref.IDOf(anObject), range_)
 	return _r
 }
 
@@ -276,6 +298,13 @@ func (a *Array) SortedArrayUsingFunctionContext(comparator unsafe.Pointer, conte
 func (a *Array) SortedArrayUsingFunctionContextHint(comparator unsafe.Pointer, context_ unsafe.Pointer, hint []byte) []obj.Object {
 	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("sortedArrayUsingFunction:context:hint:"), comparator, context_, rt.BytesToNSData(hint))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
+// SubarrayWithRange returns a new array containing the receiving array’s elements that fall within the limits specified by a given range.
+func (a *Array) SubarrayWithRange(range_ NSRange) []obj.Object {
+	defer runtime.KeepAlive(a)
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("subarrayWithRange:"), range_)
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
@@ -393,6 +422,14 @@ func (a *Array) SortedArrayWithOptionsUsingComparator(opts SortOptions, cmptr fu
 	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("sortedArrayWithOptions:usingComparator:"), opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) int { return cmptr(obj.Wrap(_b0), obj.Wrap(_b1)) }))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
+// IndexOfObjectInSortedRangeOptionsUsingComparator returns the index, within a specified range, of an object compared with elements in the array using a given NSComparator block.
+func (a *Array) IndexOfObjectInSortedRangeOptionsUsingComparator(object obj.Object, r NSRange, opts BinarySearchingOptions, cmp func(obj.Object, obj.Object) int) int {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(object)
+	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("indexOfObject:inSortedRange:options:usingComparator:"), objref.IDOf(object), r, opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) int { return cmp(obj.Wrap(_b0), obj.Wrap(_b1)) }))
+	return _r
 }
 
 // FirstObject returns the first object.

@@ -349,10 +349,10 @@ func NSCreateFilenamePboardType(fileType string) *foundation.String {
 	return foundation.StringFromID(_ret)
 }
 
-var _fnNSDirectionalEdgeInsetsMake func(float64, float64, float64, float64) unsafe.Pointer
+var _fnNSDirectionalEdgeInsetsMake func(float64, float64, float64, float64) NSDirectionalEdgeInsets
 
 // NSDirectionalEdgeInsetsMake calls the AppKit framework function NSDirectionalEdgeInsetsMake.
-func NSDirectionalEdgeInsetsMake(top float64, leading float64, bottom float64, trailing float64) unsafe.Pointer {
+func NSDirectionalEdgeInsetsMake(top float64, leading float64, bottom float64, trailing float64) NSDirectionalEdgeInsets {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSDirectionalEdgeInsetsMake == nil {
 		ebipurego.RegisterLibFunc(&_fnNSDirectionalEdgeInsetsMake, _lib, "NSDirectionalEdgeInsetsMake")

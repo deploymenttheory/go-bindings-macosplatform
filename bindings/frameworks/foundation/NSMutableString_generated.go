@@ -69,10 +69,22 @@ func (ms *MutableString) WithScriptingProperties(scriptingProperties map[string]
 	return ms
 }
 
+// ReplaceCharactersInRangeWithString replaces the characters from range with those in aString.
+func (ms *MutableString) ReplaceCharactersInRangeWithString(range_ NSRange, aString string) {
+	defer runtime.KeepAlive(ms)
+	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("replaceCharactersInRange:withString:"), range_, purego.NSString(aString))
+}
+
 // InsertStringAtIndex inserts into the receiver the characters of a given string at a given location.
 func (ms *MutableString) InsertStringAtIndex(aString string, loc int) {
 	defer runtime.KeepAlive(ms)
 	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("insertString:atIndex:"), purego.NSString(aString), loc)
+}
+
+// DeleteCharactersInRange removes from the receiver the characters in a given range.
+func (ms *MutableString) DeleteCharactersInRange(range_ NSRange) {
+	defer runtime.KeepAlive(ms)
+	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("deleteCharactersInRange:"), range_)
 }
 
 // AppendString adds to the end of the receiver the characters of a given string.
@@ -91,6 +103,21 @@ func (ms *MutableString) AppendFormat(format string) {
 func (ms *MutableString) SetString(aString string) {
 	defer runtime.KeepAlive(ms)
 	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("setString:"), purego.NSString(aString))
+}
+
+// ReplaceOccurrencesOfStringWithStringOptionsRange replaces all occurrences of a given string in a given range with another given string, returning the number of replacements.
+func (ms *MutableString) ReplaceOccurrencesOfStringWithStringOptionsRange(target string, replacement string, options StringCompareOptions, searchRange NSRange) int {
+	defer runtime.KeepAlive(ms)
+	_r := objc.Send[int](objref.IDOf(ms), objc.RegisterName("replaceOccurrencesOfString:withString:options:range:"), purego.NSString(target), purego.NSString(replacement), options, searchRange)
+	return _r
+}
+
+// ApplyTransformReverseRangeUpdatedRange transliterates the receiver by applying a specified ICU string transform.
+func (ms *MutableString) ApplyTransformReverseRangeUpdatedRange(transform *String, reverse bool, range_ NSRange, resultingRange *NSRange) bool {
+	defer runtime.KeepAlive(ms)
+	defer runtime.KeepAlive(transform)
+	_r := objc.Send[bool](objref.IDOf(ms), objc.RegisterName("applyTransform:reverse:range:updatedRange:"), objref.IDOf(transform), reverse, range_, unsafe.Pointer(resultingRange))
+	return _r
 }
 
 var _ StringProvider = (*MutableString)(nil)

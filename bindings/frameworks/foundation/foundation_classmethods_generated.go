@@ -404,6 +404,12 @@ func DistantPast() *CalendarDate {
 	return CalendarDateFromID(_r)
 }
 
+// CharacterSetWithRange returns a character set containing characters with Unicode values in a given range.
+func CharacterSetWithRange(aRange NSRange) *CharacterSet {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("characterSetWithRange:"), aRange)
+	return CharacterSetFromID(_r)
+}
+
 // CharacterSetWithCharactersInString returns a character set containing the characters in a given string.
 func CharacterSetWithCharactersInString(aString string) *CharacterSet {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("characterSetWithCharactersInString:"), purego.NSString(aString))
@@ -843,6 +849,12 @@ func SetDefaultFormatterBehavior(defaultFormatterBehavior DateFormatterBehavior)
 // DecimalNumberWithMantissaExponentIsNegative creates and returns a decimal number equivalent to the number specified by the arguments.
 func DecimalNumberWithMantissaExponentIsNegative(mantissa uint64, exponent int16, flag bool) *DecimalNumber {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSDecimalNumber")), objc.RegisterName("decimalNumberWithMantissa:exponent:isNegative:"), mantissa, exponent, flag)
+	return DecimalNumberFromID(_r)
+}
+
+// DecimalNumberWithDecimal creates and returns a decimal number equivalent to a given decimal structure.
+func DecimalNumberWithDecimal(dcm NSDecimal) *DecimalNumber {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSDecimalNumber")), objc.RegisterName("decimalNumberWithDecimal:"), dcm)
 	return DecimalNumberFromID(_r)
 }
 
@@ -1449,6 +1461,12 @@ func IndexSetWithIndex(value int) *IndexSet {
 	return IndexSetFromID(_r)
 }
 
+// IndexSetWithIndexesInRange creates an index set with an index range.
+func IndexSetWithIndexesInRange(range_ NSRange) *IndexSet {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSIndexSet")), objc.RegisterName("indexSetWithIndexesInRange:"), range_)
+	return IndexSetFromID(_r)
+}
+
 // AutomaticRule returns the automatic rule.
 func AutomaticRule() *InflectionRule {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSInflectionRule")), objc.RegisterName("automaticRule"))
@@ -1647,6 +1665,14 @@ func TagForStringAtIndexUnitSchemeOrthographyTokenRange(str string, charIndex in
 	defer runtime.KeepAlive(orthography)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSLinguisticTagger")), objc.RegisterName("tagForString:atIndex:unit:scheme:orthography:tokenRange:"), purego.NSString(str), charIndex, unit, objref.IDOf(scheme), objref.IDOf(orthography), unsafe.Pointer(tokenRange))
 	return StringFromID(_r)
+}
+
+// TagsForStringRangeUnitSchemeOptionsOrthographyTokenRanges returns an array of linguistic tags and token ranges for a given string and linguistic unit.
+func TagsForStringRangeUnitSchemeOptionsOrthographyTokenRanges(str string, range_ NSRange, unit LinguisticTaggerUnit, scheme *String, options LinguisticTaggerOptions, orthography *Orthography, tokenRanges []*Value) []*String {
+	defer runtime.KeepAlive(scheme)
+	defer runtime.KeepAlive(orthography)
+	_r := objc.Send[objc.ID](objc.ID(_class("NSLinguisticTagger")), objc.RegisterName("tagsForString:range:unit:scheme:options:orthography:tokenRanges:"), purego.NSString(str), range_, unit, objref.IDOf(scheme), options, objref.IDOf(orthography), purego.SliceToNSArray(tokenRanges, func(_v *Value) objc.ID { return objref.IDOf(_v) }))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *String { return StringFromID(_id) })
 }
 
 // LocalizedStringByJoiningStrings wraps the corresponding Objective-C method.
@@ -2003,6 +2029,12 @@ func NSMutableCharacterSetSymbolCharacterSet() *MutableCharacterSet {
 // NSMutableCharacterSetNewlineCharacterSet returns a character set containing the newline characters (U+000A ~ U+000D, U+0085, U+2028, and U+2029).
 func NSMutableCharacterSetNewlineCharacterSet() *MutableCharacterSet {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSMutableCharacterSet")), objc.RegisterName("newlineCharacterSet"))
+	return MutableCharacterSetFromID(_r)
+}
+
+// NSMutableCharacterSetCharacterSetWithRange returns a character set containing characters with Unicode values in a given range.
+func NSMutableCharacterSetCharacterSetWithRange(aRange NSRange) *MutableCharacterSet {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSMutableCharacterSet")), objc.RegisterName("characterSetWithRange:"), aRange)
 	return MutableCharacterSetFromID(_r)
 }
 
@@ -2404,9 +2436,22 @@ func OrderedSetWithOrderedSet(set obj.Object) obj.Object {
 	return obj.Wrap(_r)
 }
 
+// OrderedSetWithOrderedSetRangeCopyItems creates and returns a new ordered set for a specified range of objects in an ordered set.
+func OrderedSetWithOrderedSetRangeCopyItems(set obj.Object, range_ NSRange, flag bool) obj.Object {
+	defer runtime.KeepAlive(set)
+	_r := objc.Send[objc.ID](objc.ID(_class("NSOrderedSet")), objc.RegisterName("orderedSetWithOrderedSet:range:copyItems:"), objref.IDOf(set), range_, flag)
+	return obj.Wrap(_r)
+}
+
 // OrderedSetWithArray creates and returns a set containing a uniqued collection of the objects contained in a given array.
 func OrderedSetWithArray(array []obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSOrderedSet")), objc.RegisterName("orderedSetWithArray:"), purego.SliceToNSArray(array, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return obj.Wrap(_r)
+}
+
+// OrderedSetWithArrayRangeCopyItems creates and returns a new ordered set for a specified range of objects in an array.
+func OrderedSetWithArrayRangeCopyItems(array []obj.Object, range_ NSRange, flag bool) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSOrderedSet")), objc.RegisterName("orderedSetWithArray:range:copyItems:"), purego.SliceToNSArray(array, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), range_, flag)
 	return obj.Wrap(_r)
 }
 
@@ -3165,10 +3210,98 @@ func LocalizedForLanguageIdentifierWithPronouns(language string, pronouns []*Mor
 	return TermOfAddressFromID(_r)
 }
 
+// OrthographyCheckingResultWithRangeOrthography creates and returns a text checking result with the specified orthography.
+func OrthographyCheckingResultWithRangeOrthography(range_ NSRange, orthography *Orthography) *TextCheckingResult {
+	defer runtime.KeepAlive(orthography)
+	_r := objc.Send[objc.ID](objc.ID(_class("NSTextCheckingResult")), objc.RegisterName("orthographyCheckingResultWithRange:orthography:"), range_, objref.IDOf(orthography))
+	return TextCheckingResultFromID(_r)
+}
+
+// SpellCheckingResultWithRange creates and returns a text checking result with the range of a misspelled word.
+func SpellCheckingResultWithRange(range_ NSRange) *TextCheckingResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSTextCheckingResult")), objc.RegisterName("spellCheckingResultWithRange:"), range_)
+	return TextCheckingResultFromID(_r)
+}
+
+// GrammarCheckingResultWithRangeDetails creates and returns a text checking result with the specified array of grammatical errors.
+func GrammarCheckingResultWithRangeDetails(range_ NSRange, details []obj.Object) *TextCheckingResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSTextCheckingResult")), objc.RegisterName("grammarCheckingResultWithRange:details:"), range_, purego.SliceToNSArray(details, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return TextCheckingResultFromID(_r)
+}
+
+// DateCheckingResultWithRangeDate creates and returns a text checking result with the specified date.
+func DateCheckingResultWithRangeDate(range_ NSRange, date time.Time) *TextCheckingResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSTextCheckingResult")), objc.RegisterName("dateCheckingResultWithRange:date:"), range_, rt.TimeToNSDate(date))
+	return TextCheckingResultFromID(_r)
+}
+
+// DateCheckingResultWithRangeDateTimeZoneDuration creates and returns a text checking result with the specified date, time zone, and duration.
+func DateCheckingResultWithRangeDateTimeZoneDuration(range_ NSRange, date time.Time, timeZone *TimeZone, duration float64) *TextCheckingResult {
+	defer runtime.KeepAlive(timeZone)
+	_r := objc.Send[objc.ID](objc.ID(_class("NSTextCheckingResult")), objc.RegisterName("dateCheckingResultWithRange:date:timeZone:duration:"), range_, rt.TimeToNSDate(date), objref.IDOf(timeZone), duration)
+	return TextCheckingResultFromID(_r)
+}
+
+// AddressCheckingResultWithRangeComponents creates and returns a text checking result with the specified address components.
+func AddressCheckingResultWithRangeComponents(range_ NSRange, components obj.Object) *TextCheckingResult {
+	defer runtime.KeepAlive(components)
+	_r := objc.Send[objc.ID](objc.ID(_class("NSTextCheckingResult")), objc.RegisterName("addressCheckingResultWithRange:components:"), range_, objref.IDOf(components))
+	return TextCheckingResultFromID(_r)
+}
+
+// LinkCheckingResultWithRangeURL creates and returns a text checking result with the specified URL.
+func LinkCheckingResultWithRangeURL(range_ NSRange, url string) *TextCheckingResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSTextCheckingResult")), objc.RegisterName("linkCheckingResultWithRange:URL:"), range_, rt.FileURL(url))
+	return TextCheckingResultFromID(_r)
+}
+
+// QuoteCheckingResultWithRangeReplacementString creates and returns a text checking result with the specified quote-balanced replacement string.
+func QuoteCheckingResultWithRangeReplacementString(range_ NSRange, replacementString string) *TextCheckingResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSTextCheckingResult")), objc.RegisterName("quoteCheckingResultWithRange:replacementString:"), range_, purego.NSString(replacementString))
+	return TextCheckingResultFromID(_r)
+}
+
+// DashCheckingResultWithRangeReplacementString creates and returns a text checking result with the specified dash corrected replacement string.
+func DashCheckingResultWithRangeReplacementString(range_ NSRange, replacementString string) *TextCheckingResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSTextCheckingResult")), objc.RegisterName("dashCheckingResultWithRange:replacementString:"), range_, purego.NSString(replacementString))
+	return TextCheckingResultFromID(_r)
+}
+
+// ReplacementCheckingResultWithRangeReplacementString creates and returns a text checking result with the specified replacement string.
+func ReplacementCheckingResultWithRangeReplacementString(range_ NSRange, replacementString string) *TextCheckingResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSTextCheckingResult")), objc.RegisterName("replacementCheckingResultWithRange:replacementString:"), range_, purego.NSString(replacementString))
+	return TextCheckingResultFromID(_r)
+}
+
+// CorrectionCheckingResultWithRangeReplacementString creates and returns a text checking result after detecting a possible correction.
+func CorrectionCheckingResultWithRangeReplacementString(range_ NSRange, replacementString string) *TextCheckingResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSTextCheckingResult")), objc.RegisterName("correctionCheckingResultWithRange:replacementString:"), range_, purego.NSString(replacementString))
+	return TextCheckingResultFromID(_r)
+}
+
+// CorrectionCheckingResultWithRangeReplacementStringAlternativeStrings wraps the corresponding Objective-C method.
+func CorrectionCheckingResultWithRangeReplacementStringAlternativeStrings(range_ NSRange, replacementString string, alternativeStrings []string) *TextCheckingResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSTextCheckingResult")), objc.RegisterName("correctionCheckingResultWithRange:replacementString:alternativeStrings:"), range_, purego.NSString(replacementString), purego.SliceToNSArray(alternativeStrings, func(_v string) objc.ID { return purego.NSString(_v) }))
+	return TextCheckingResultFromID(_r)
+}
+
 // RegularExpressionCheckingResultWithRangesCountRegularExpression creates and returns a type checking result with the specified regular expression data.
 func RegularExpressionCheckingResultWithRangesCountRegularExpression(ranges *NSRange, count int, regularExpression *RegularExpression) *TextCheckingResult {
 	defer runtime.KeepAlive(regularExpression)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSTextCheckingResult")), objc.RegisterName("regularExpressionCheckingResultWithRanges:count:regularExpression:"), unsafe.Pointer(ranges), count, objref.IDOf(regularExpression))
+	return TextCheckingResultFromID(_r)
+}
+
+// PhoneNumberCheckingResultWithRangePhoneNumber creates and returns a text checking result with the specified phone number.
+func PhoneNumberCheckingResultWithRangePhoneNumber(range_ NSRange, phoneNumber string) *TextCheckingResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSTextCheckingResult")), objc.RegisterName("phoneNumberCheckingResultWithRange:phoneNumber:"), range_, purego.NSString(phoneNumber))
+	return TextCheckingResultFromID(_r)
+}
+
+// TransitInformationCheckingResultWithRangeComponents creates and returns a text checking result with the specified transit information.
+func TransitInformationCheckingResultWithRangeComponents(range_ NSRange, components obj.Object) *TextCheckingResult {
+	defer runtime.KeepAlive(components)
+	_r := objc.Send[objc.ID](objc.ID(_class("NSTextCheckingResult")), objc.RegisterName("transitInformationCheckingResultWithRange:components:"), range_, objref.IDOf(components))
 	return TextCheckingResultFromID(_r)
 }
 
@@ -5096,6 +5229,12 @@ func ValueWithPointer(pointer unsafe.Pointer) *Value {
 	return ValueFromID(_r)
 }
 
+// ValueWithRange creates a new value object containing the specified Foundation range structure.
+func ValueWithRange(range_ NSRange) *Value {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSValue")), objc.RegisterName("valueWithRange:"), range_)
+	return ValueFromID(_r)
+}
+
 // ValueWithPoint creates a new value object containing the specified Foundation point structure.
 func ValueWithPoint(point corefoundation.CGPoint) *Value {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSValue")), objc.RegisterName("valueWithPoint:"), point)
@@ -5111,6 +5250,12 @@ func ValueWithSize(size corefoundation.CGSize) *Value {
 // ValueWithRect creates a new value object containing the specified Foundation rectangle structure.
 func ValueWithRect(rect corefoundation.CGRect) *Value {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSValue")), objc.RegisterName("valueWithRect:"), rect)
+	return ValueFromID(_r)
+}
+
+// ValueWithEdgeInsets creates a new value object containing the specified edge insets structure.
+func ValueWithEdgeInsets(insets NSEdgeInsets) *Value {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSValue")), objc.RegisterName("valueWithEdgeInsets:"), insets)
 	return ValueFromID(_r)
 }
 

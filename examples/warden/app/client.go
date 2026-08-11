@@ -8,10 +8,10 @@ import (
 	"fmt"
 	"time"
 
-	rt "github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/deploymenttheory/go-bindings-macosplatform/examples/warden/shared"
 	fnd "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
+	rt "github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/examples/warden/shared"
 )
 
 // Client is a connection to the Warden daemon's XPC service.

@@ -78,6 +78,12 @@ func (mtrpd *MTL4TileRenderPipelineDescriptor) WithMaxTotalThreadsPerThreadgroup
 	return mtrpd
 }
 
+// WithRequiredThreadsPerThreadgroup sets sets the required number of threads per threadgroup for tile dispatches.
+func (mtrpd *MTL4TileRenderPipelineDescriptor) WithRequiredThreadsPerThreadgroup(requiredThreadsPerThreadgroup MTLSize) *MTL4TileRenderPipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mtrpd), objc.RegisterName("setRequiredThreadsPerThreadgroup:"), requiredThreadsPerThreadgroup)
+	return mtrpd
+}
+
 // WithStaticLinkingDescriptor sets configures an object that contains information about functions to link to the tile render pipeline when Metal builds it.
 func (mtrpd *MTL4TileRenderPipelineDescriptor) WithStaticLinkingDescriptor(staticLinkingDescriptor *MTL4StaticLinkingDescriptor) *MTL4TileRenderPipelineDescriptor {
 	defer runtime.KeepAlive(staticLinkingDescriptor)
@@ -142,6 +148,13 @@ func (mtrpd *MTL4TileRenderPipelineDescriptor) ThreadgroupSizeMatchesTileSize() 
 func (mtrpd *MTL4TileRenderPipelineDescriptor) MaxTotalThreadsPerThreadgroup() int {
 	defer runtime.KeepAlive(mtrpd)
 	_r := objc.Send[int](objref.IDOf(mtrpd), objc.RegisterName("maxTotalThreadsPerThreadgroup"))
+	return _r
+}
+
+// RequiredThreadsPerThreadgroup sets the required number of threads per threadgroup for tile dispatches. This value is typically optional, except in the cases where the tile function that “tileFunctionDescriptor“ references uses `CooperativeTensors`. In this case, you need to provide a non-zero value to this property. Additionally, when you set this value, the `threadsPerTile` argument of any tile dispatch needs to match it. Setting this value to a size of 0 in every dimension disables this property.
+func (mtrpd *MTL4TileRenderPipelineDescriptor) RequiredThreadsPerThreadgroup() MTLSize {
+	defer runtime.KeepAlive(mtrpd)
+	_r := objc.Send[MTLSize](objref.IDOf(mtrpd), objc.RegisterName("requiredThreadsPerThreadgroup"))
 	return _r
 }
 

@@ -93,6 +93,20 @@ func (pc *PhysicsContact) NodeB() *Node {
 	return NodeFromID(_r)
 }
 
+// ContactPoint returns the contact point.
+func (pc *PhysicsContact) ContactPoint() SCNVector3 {
+	defer runtime.KeepAlive(pc)
+	_r := objc.Send[SCNVector3](objref.IDOf(pc), objc.RegisterName("contactPoint"))
+	return _r
+}
+
+// ContactNormal returns the contact normal.
+func (pc *PhysicsContact) ContactNormal() SCNVector3 {
+	defer runtime.KeepAlive(pc)
+	_r := objc.Send[SCNVector3](objref.IDOf(pc), objc.RegisterName("contactNormal"))
+	return _r
+}
+
 // CollisionImpulse returns the collision impulse.
 func (pc *PhysicsContact) CollisionImpulse() float64 {
 	defer runtime.KeepAlive(pc)

@@ -142,6 +142,12 @@ func (tl *TextLayer) WithAnchorPointZ(anchorPointZ float64) *TextLayer {
 	return tl
 }
 
+// WithTransform sets the transform applied to the layer’s contents. Animatable.
+func (tl *TextLayer) WithTransform(transform CATransform3D) *TextLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setTransform:"), transform)
+	return tl
+}
+
 // WithFrame sets the layer’s frame rectangle.
 func (tl *TextLayer) WithFrame(frame corefoundation.CGRect) *TextLayer {
 	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setFrame:"), frame)
@@ -170,6 +176,12 @@ func (tl *TextLayer) WithGeometryFlipped(geometryFlipped bool) *TextLayer {
 func (tl *TextLayer) WithSublayers(items ...LayerProvider) *TextLayer {
 	_arr := purego.SliceToNSArray(items, func(_v LayerProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setSublayers:"), _arr)
+	return tl
+}
+
+// WithSublayerTransform sets specifies the transform to apply to sublayers when rendering. Animatable.
+func (tl *TextLayer) WithSublayerTransform(sublayerTransform CATransform3D) *TextLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setSublayerTransform:"), sublayerTransform)
 	return tl
 }
 
@@ -470,7 +482,7 @@ func (tl *TextLayer) FontSize() float64 {
 func (tl *TextLayer) ForegroundColor() coregraphics.CGColorRef {
 	defer runtime.KeepAlive(tl)
 	_r := objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("foregroundColor"))
-	return coregraphics.CGColorRef{obj.Wrap(_r)}
+	return coregraphics.CGColorRef{Object: obj.Wrap(_r)}
 }
 
 // IsWrapped reports whether the object is wrapped.

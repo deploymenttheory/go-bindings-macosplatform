@@ -379,7 +379,7 @@ func (a *Application) BeginModalSessionForWindow(window *Window) NSModalSession 
 	purego.Main(func() {
 		_mainthread0 = func() NSModalSession {
 			_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("beginModalSessionForWindow:"), objref.IDOf(window))
-			return NSModalSession{obj.WrapUnmanaged(_r)}
+			return NSModalSession{Object: obj.WrapUnmanaged(_r)}
 		}()
 	})
 	return _mainthread0
@@ -1115,7 +1115,7 @@ func (a *Application) BeginModalSessionForWindowRelativeToWindow(window *Window,
 	purego.Main(func() {
 		_mainthread0 = func() NSModalSession {
 			_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("beginModalSessionForWindow:relativeToWindow:"), objref.IDOf(window), objref.IDOf(docWindow))
-			return NSModalSession{obj.WrapUnmanaged(_r)}
+			return NSModalSession{Object: obj.WrapUnmanaged(_r)}
 		}()
 	})
 	return _mainthread0

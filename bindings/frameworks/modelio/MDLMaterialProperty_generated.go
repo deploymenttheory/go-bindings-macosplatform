@@ -286,7 +286,7 @@ func (mp *MaterialProperty) TextureSamplerValue() *TextureSampler {
 func (mp *MaterialProperty) Color() coregraphics.CGColorRef {
 	defer runtime.KeepAlive(mp)
 	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("color"))
-	return coregraphics.CGColorRef{obj.Wrap(_r)}
+	return coregraphics.CGColorRef{Object: obj.Wrap(_r)}
 }
 
 // FloatValue returns the float value.

@@ -146,7 +146,7 @@ func (c *Contour) NormalizedPoints() unsafe.Pointer {
 func (c *Contour) NormalizedPath() coregraphics.CGPathRef {
 	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("normalizedPath"))
-	return coregraphics.CGPathRef{obj.Wrap(_r)}
+	return coregraphics.CGPathRef{Object: obj.Wrap(_r)}
 }
 
 // AspectRatio returns the aspect ratio of the contour from the original image aspect ratio expressed as width/height

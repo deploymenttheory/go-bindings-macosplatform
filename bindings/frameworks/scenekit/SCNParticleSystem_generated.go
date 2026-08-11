@@ -152,6 +152,24 @@ func (ps *ParticleSystem) WithSpreadingAngle(spreadingAngle float64) *ParticleSy
 	return ps
 }
 
+// WithEmittingDirection sets the initial direction for newly spawned particles. Animatable.
+func (ps *ParticleSystem) WithEmittingDirection(emittingDirection SCNVector3) *ParticleSystem {
+	objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("setEmittingDirection:"), emittingDirection)
+	return ps
+}
+
+// WithOrientationDirection sets the orientation direction.
+func (ps *ParticleSystem) WithOrientationDirection(orientationDirection SCNVector3) *ParticleSystem {
+	objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("setOrientationDirection:"), orientationDirection)
+	return ps
+}
+
+// WithAcceleration sets the constant acceleration vector, in units per second per second, applied to all particles in the system. Animatable.
+func (ps *ParticleSystem) WithAcceleration(acceleration SCNVector3) *ParticleSystem {
+	objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("setAcceleration:"), acceleration)
+	return ps
+}
+
 // WithLocal sets a Boolean value that specifies whether the particle simulation runs in the local coordinate space of the node containing it.
 func (ps *ParticleSystem) WithLocal(local bool) *ParticleSystem {
 	objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("setLocal:"), local)
@@ -280,6 +298,12 @@ func (ps *ParticleSystem) WithImageSequenceAnimationMode(imageSequenceAnimationM
 func (ps *ParticleSystem) WithParticleColor(particleColor obj.Object) *ParticleSystem {
 	defer runtime.KeepAlive(particleColor)
 	objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("setParticleColor:"), objref.IDOf(particleColor))
+	return ps
+}
+
+// WithParticleColorVariation sets the ranges of randomized particle color components. Animatable.
+func (ps *ParticleSystem) WithParticleColorVariation(particleColorVariation SCNVector4) *ParticleSystem {
+	objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("setParticleColorVariation:"), particleColorVariation)
 	return ps
 }
 
@@ -549,6 +573,27 @@ func (ps *ParticleSystem) SpreadingAngle() float64 {
 	return _r
 }
 
+// EmittingDirection returns the emitting direction.
+func (ps *ParticleSystem) EmittingDirection() SCNVector3 {
+	defer runtime.KeepAlive(ps)
+	_r := objc.Send[SCNVector3](objref.IDOf(ps), objc.RegisterName("emittingDirection"))
+	return _r
+}
+
+// OrientationDirection returns the orientation direction.
+func (ps *ParticleSystem) OrientationDirection() SCNVector3 {
+	defer runtime.KeepAlive(ps)
+	_r := objc.Send[SCNVector3](objref.IDOf(ps), objc.RegisterName("orientationDirection"))
+	return _r
+}
+
+// Acceleration returns the acceleration.
+func (ps *ParticleSystem) Acceleration() SCNVector3 {
+	defer runtime.KeepAlive(ps)
+	_r := objc.Send[SCNVector3](objref.IDOf(ps), objc.RegisterName("acceleration"))
+	return _r
+}
+
 // IsLocal reports whether the object is local.
 func (ps *ParticleSystem) IsLocal() bool {
 	defer runtime.KeepAlive(ps)
@@ -694,6 +739,13 @@ func (ps *ParticleSystem) ParticleColor() obj.Object {
 	defer runtime.KeepAlive(ps)
 	_r := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("particleColor"))
 	return obj.Wrap(_r)
+}
+
+// ParticleColorVariation returns the particle color variation.
+func (ps *ParticleSystem) ParticleColorVariation() SCNVector4 {
+	defer runtime.KeepAlive(ps)
+	_r := objc.Send[SCNVector4](objref.IDOf(ps), objc.RegisterName("particleColorVariation"))
+	return _r
 }
 
 // ParticleSize returns the particle size.

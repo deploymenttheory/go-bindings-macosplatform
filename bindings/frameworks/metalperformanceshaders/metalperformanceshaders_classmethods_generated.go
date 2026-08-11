@@ -8,7 +8,6 @@ import (
 	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsmatrix"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -489,7 +488,7 @@ func CreateLSTMDescriptorWithInputFeatureChannelsOutputFeatureChannels(inputFeat
 }
 
 // DescriptorWithSourceMatrixDestinationMatrixOffsets convenience allocator for single copies
-func DescriptorWithSourceMatrixDestinationMatrixOffsets(sourceMatrix obj.Object, destinationMatrix obj.Object, offsets mpsmatrix.MPSMatrixCopyOffsets) *MatrixCopyDescriptor {
+func DescriptorWithSourceMatrixDestinationMatrixOffsets(sourceMatrix obj.Object, destinationMatrix obj.Object, offsets MPSMatrixCopyOffsets) *MatrixCopyDescriptor {
 	defer runtime.KeepAlive(sourceMatrix)
 	defer runtime.KeepAlive(destinationMatrix)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSMatrixCopyDescriptor")), objc.RegisterName("descriptorWithSourceMatrix:destinationMatrix:offsets:"), objref.IDOf(sourceMatrix), objref.IDOf(destinationMatrix), offsets)

@@ -110,7 +110,7 @@ func (c *Context) CreateCGLayerWithSizeInfo(size corefoundation.CGSize, info cor
 	defer runtime.KeepAlive(c)
 	defer runtime.KeepAlive(info)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("createCGLayerWithSize:info:"), size, objref.IDOf(info.Object))
-	return coregraphics.CGLayerRef{obj.Adopt(_r)}
+	return coregraphics.CGLayerRef{Object: obj.Adopt(_r)}
 }
 
 // RenderToBitmapRowBytesBoundsFormatColorSpace renders to the given bitmap.
@@ -161,7 +161,7 @@ func (c *Context) ClearCaches() {
 func (c *Context) WorkingColorSpace() coregraphics.CGColorSpaceRef {
 	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("workingColorSpace"))
-	return coregraphics.CGColorSpaceRef{obj.Wrap(_r)}
+	return coregraphics.CGColorSpaceRef{Object: obj.Wrap(_r)}
 }
 
 // WorkingFormat returns the working pixel format that the CIContext uses for intermediate buffers. The working format determines the pixel format that Core Image uses to create intermediate buffers for rendering images. You specify a working pixel format using the “kCIContextWorkingFormat“ option when creating a “CIContext“.
@@ -176,7 +176,7 @@ func (c *Context) CreateCGImageFromRect(image *Image, fromRect corefoundation.CG
 	defer runtime.KeepAlive(c)
 	defer runtime.KeepAlive(image)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("createCGImage:fromRect:"), objref.IDOf(image), fromRect)
-	return coregraphics.CGImageRef{obj.Adopt(_r)}
+	return coregraphics.CGImageRef{Object: obj.Adopt(_r)}
 }
 
 // CreateCGImageFromRectFormatColorSpace creates a Core Graphics image from a region of a Core Image image instance with an option for controlling the pixel format and color space of the CGImage.
@@ -185,7 +185,7 @@ func (c *Context) CreateCGImageFromRectFormatColorSpace(image *Image, fromRect c
 	defer runtime.KeepAlive(image)
 	defer runtime.KeepAlive(colorSpace)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("createCGImage:fromRect:format:colorSpace:"), objref.IDOf(image), fromRect, format, objref.IDOf(colorSpace.Object))
-	return coregraphics.CGImageRef{obj.Adopt(_r)}
+	return coregraphics.CGImageRef{Object: obj.Adopt(_r)}
 }
 
 // CreateCGImageFromRectFormatColorSpaceDeferred creates a Core Graphics image from a region of a Core Image image instance with an option for controlling when the image is rendered.
@@ -194,7 +194,7 @@ func (c *Context) CreateCGImageFromRectFormatColorSpaceDeferred(image *Image, fr
 	defer runtime.KeepAlive(image)
 	defer runtime.KeepAlive(colorSpace)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("createCGImage:fromRect:format:colorSpace:deferred:"), objref.IDOf(image), fromRect, format, objref.IDOf(colorSpace.Object), deferred)
-	return coregraphics.CGImageRef{obj.Adopt(_r)}
+	return coregraphics.CGImageRef{Object: obj.Adopt(_r)}
 }
 
 // CreateCGImageFromRectFormatColorSpaceDeferredCalculateHDRStats creates a Core Graphics image from a region of a Core Image image instance with an option for calculating HDR statistics.
@@ -203,7 +203,7 @@ func (c *Context) CreateCGImageFromRectFormatColorSpaceDeferredCalculateHDRStats
 	defer runtime.KeepAlive(image)
 	defer runtime.KeepAlive(colorSpace)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("createCGImage:fromRect:format:colorSpace:deferred:calculateHDRStats:"), objref.IDOf(image), fromRect, format, objref.IDOf(colorSpace.Object), deferred, calculateHDRStats)
-	return coregraphics.CGImageRef{obj.Adopt(_r)}
+	return coregraphics.CGImageRef{Object: obj.Adopt(_r)}
 }
 
 // CalculateHDRStatsForIOSurface given an IOSurface, use the receiving Core Image context to calculate its HDR statistics (content headroom and content average light level) and then update the surface’s attachments to store the values.
@@ -224,7 +224,7 @@ func (c *Context) CalculateHDRStatsForCGImage(cgimage coregraphics.CGImageRef) c
 	defer runtime.KeepAlive(c)
 	defer runtime.KeepAlive(cgimage)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("calculateHDRStatsForCGImage:"), objref.IDOf(cgimage.Object))
-	return coregraphics.CGImageRef{obj.Adopt(_r)}
+	return coregraphics.CGImageRef{Object: obj.Adopt(_r)}
 }
 
 // CalculateHDRStatsForImage given a Core Image image, use the receiving Core Image context to calculate its HDR statistics (content headroom and content average light level) and then return a new Core Image image that has the calculated values.

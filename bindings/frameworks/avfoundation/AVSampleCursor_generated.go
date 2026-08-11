@@ -155,11 +155,32 @@ func (sc *SampleCursor) CurrentSampleDuration() coremedia.CMTime {
 	return _r
 }
 
+// CurrentSampleSyncInfo provides information about the current sample for consideration when resynchronizing a decoder, as when scrubbing.
+func (sc *SampleCursor) CurrentSampleSyncInfo() AVSampleCursorSyncInfo {
+	defer runtime.KeepAlive(sc)
+	_r := objc.Send[AVSampleCursorSyncInfo](objref.IDOf(sc), objc.RegisterName("currentSampleSyncInfo"))
+	return _r
+}
+
+// CurrentSampleDependencyInfo provides information about dependencies between a media sample and other media samples in the same sample sequence, if known.
+func (sc *SampleCursor) CurrentSampleDependencyInfo() AVSampleCursorDependencyInfo {
+	defer runtime.KeepAlive(sc)
+	_r := objc.Send[AVSampleCursorDependencyInfo](objref.IDOf(sc), objc.RegisterName("currentSampleDependencyInfo"))
+	return _r
+}
+
 // CurrentSampleDependencyAttachments provides a dictionary containing dependency related sample buffer attachments, if known.  See kCMSampleAttachmentKey_... in CoreMedia/CMSampleBuffer.h.
 func (sc *SampleCursor) CurrentSampleDependencyAttachments() obj.Object {
 	defer runtime.KeepAlive(sc)
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("currentSampleDependencyAttachments"))
 	return obj.Wrap(_r)
+}
+
+// CurrentSampleAudioDependencyInfo provides information about the independent decodability of an audio sample. In order to position a sample cursor at the first sample that the audio decoder requires for a full refresh, you will need to walk it back from the current sample until you find a sample that is independently decodable, and whose audioSamplePacketRefreshCount is greater than or equal to the number of steps back you have taken.  This implies that if the current sample (before this walk) is independently decodable, with an audioSampleRefreshCount of zero, no walk is required.
+func (sc *SampleCursor) CurrentSampleAudioDependencyInfo() AVSampleCursorAudioDependencyInfo {
+	defer runtime.KeepAlive(sc)
+	_r := objc.Send[AVSampleCursorAudioDependencyInfo](objref.IDOf(sc), objc.RegisterName("currentSampleAudioDependencyInfo"))
+	return _r
 }
 
 // SamplesRequiredForDecoderRefresh returns count of samples prior to the current sample, in decode order, that the decoder requires in order to achieve fully coherent output at the current decode time, as after a seek. Zero will be returned if no samples are required for decoder refresh or if the track does not contain this information. Some sample sequences that do not indicate sample dependencies may instead indicate that in order for a specific sample to be decoded with all available accuracy, samples prior to that sample in decode order must be decoded before the specific sample is decoded. In order to position a sample cursor at the first sample that the decoder requires for a full refresh, you can use code like the following: NSInteger samplesPriorToCurrentSampleToFeedToDecoder = [mySampleCursor samplesRequiredForDecoderRefresh]; AVSampleCursor *cursorForObtainingRefreshSamples = [mySampleCursor copy]; [cursorForObtainingRefreshSamples stepInDecodeOrderByCount: -samplesPriorToCurrentSampleToFeedToDecoder ]; // cursorForObtainingRefreshSamples is now positioned at the first sample that must be provided to the decoder // in order to decode the sample at the position of mySampleCursor in full
@@ -176,9 +197,30 @@ func (sc *SampleCursor) CurrentChunkStorageURL() string {
 	return rt.URLString(_r)
 }
 
+// CurrentChunkStorageRange returns the offset and length of samples in currentChunkStorageURL that are intended to be loaded together with the current sample as a "chunk". If the current chunk isn't stored contiguously in its storage container, currentChunkStorageRange.offset will be -1. In such cases you can use AVSampleBufferGenerator to obtain the sample data.
+func (sc *SampleCursor) CurrentChunkStorageRange() AVSampleCursorStorageRange {
+	defer runtime.KeepAlive(sc)
+	_r := objc.Send[AVSampleCursorStorageRange](objref.IDOf(sc), objc.RegisterName("currentChunkStorageRange"))
+	return _r
+}
+
+// CurrentChunkInfo provides information about the "chunk" of samples to which the current sample belongs. If the media format that defines the sequence of samples does not signal "chunking" of samples in any way, each sample will be considered by the receiver as belonging to a chunk of one sample only.
+func (sc *SampleCursor) CurrentChunkInfo() AVSampleCursorChunkInfo {
+	defer runtime.KeepAlive(sc)
+	_r := objc.Send[AVSampleCursorChunkInfo](objref.IDOf(sc), objc.RegisterName("currentChunkInfo"))
+	return _r
+}
+
 // CurrentSampleIndexInChunk returns the index of the current sample within the chunk to which it belongs.
 func (sc *SampleCursor) CurrentSampleIndexInChunk() int64 {
 	defer runtime.KeepAlive(sc)
 	_r := objc.Send[int64](objref.IDOf(sc), objc.RegisterName("currentSampleIndexInChunk"))
+	return _r
+}
+
+// CurrentSampleStorageRange returns the offset and length of the current sample in currentChunkStorageURL. If the current sample isn't stored contiguously in its storage container, currentSampleStorageRange.offset will be -1. In such cases you can use AVSampleBufferGenerator to obtain the sample data.
+func (sc *SampleCursor) CurrentSampleStorageRange() AVSampleCursorStorageRange {
+	defer runtime.KeepAlive(sc)
+	_r := objc.Send[AVSampleCursorStorageRange](objref.IDOf(sc), objc.RegisterName("currentSampleStorageRange"))
 	return _r
 }

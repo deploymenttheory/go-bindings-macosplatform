@@ -23,7 +23,7 @@ func GSSCreateCredentialFromUUID(uuid corefoundation.CFUUIDRef) GssCredIdT {
 		ebipurego.RegisterLibFunc(&_fnGSSCreateCredentialFromUUID, _lib, "GSSCreateCredentialFromUUID")
 	}
 	_ret := _fnGSSCreateCredentialFromUUID(objref.IDOf(uuid.Object))
-	return GssCredIdT{obj.WrapUnmanaged(_ret)}
+	return GssCredIdT{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnGSSCreateError func(unsafe.Pointer, uint32, uint32) objc.ID
@@ -35,7 +35,7 @@ func GSSCreateError(mech unsafe.Pointer, majorStatus uint32, minorStatus uint32)
 		ebipurego.RegisterLibFunc(&_fnGSSCreateError, _lib, "GSSCreateError")
 	}
 	_ret := _fnGSSCreateError(mech, majorStatus, minorStatus)
-	return corefoundation.CFErrorRef{obj.Wrap(_ret)}
+	return corefoundation.CFErrorRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnGSSCreateName func(objc.ID, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -47,7 +47,7 @@ func GSSCreateName(name obj.Object, nameType unsafe.Pointer, err unsafe.Pointer)
 		ebipurego.RegisterLibFunc(&_fnGSSCreateName, _lib, "GSSCreateName")
 	}
 	_ret := _fnGSSCreateName(objref.IDOf(name), nameType, err)
-	return GssNameT{obj.WrapUnmanaged(_ret)}
+	return GssNameT{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnGSSCredentialCopyName func(objc.ID) objc.ID
@@ -59,7 +59,7 @@ func GSSCredentialCopyName(cred GssCredIdT) GssNameT {
 		ebipurego.RegisterLibFunc(&_fnGSSCredentialCopyName, _lib, "GSSCredentialCopyName")
 	}
 	_ret := _fnGSSCredentialCopyName(objref.IDOf(cred.Object))
-	return GssNameT{obj.WrapUnmanaged(_ret)}
+	return GssNameT{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnGSSCredentialCopyUUID func(objc.ID) objc.ID
@@ -71,7 +71,7 @@ func GSSCredentialCopyUUID(credential GssCredIdT) corefoundation.CFUUIDRef {
 		ebipurego.RegisterLibFunc(&_fnGSSCredentialCopyUUID, _lib, "GSSCredentialCopyUUID")
 	}
 	_ret := _fnGSSCredentialCopyUUID(objref.IDOf(credential.Object))
-	return corefoundation.CFUUIDRef{obj.Wrap(_ret)}
+	return corefoundation.CFUUIDRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnGSSCredentialGetLifetime func(objc.ID) uint32
@@ -94,7 +94,7 @@ func GSSNameCreateDisplayString(name GssNameT) corefoundation.CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnGSSNameCreateDisplayString, _lib, "GSSNameCreateDisplayString")
 	}
 	_ret := _fnGSSNameCreateDisplayString(objref.IDOf(name.Object))
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnAaplChangePassword func(unsafe.Pointer, unsafe.Pointer, objc.ID, unsafe.Pointer) uint32

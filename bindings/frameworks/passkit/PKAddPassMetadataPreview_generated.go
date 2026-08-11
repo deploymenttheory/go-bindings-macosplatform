@@ -88,7 +88,7 @@ func NewAddPassMetadataPreviewWithPassThumbnailLocalizedDescription(passThumbnai
 func (apmp *AddPassMetadataPreview) PassThumbnailImage() coregraphics.CGImageRef {
 	defer runtime.KeepAlive(apmp)
 	_r := objc.Send[objc.ID](objref.IDOf(apmp), objc.RegisterName("passThumbnailImage"))
-	return coregraphics.CGImageRef{obj.Wrap(_r)}
+	return coregraphics.CGImageRef{Object: obj.Wrap(_r)}
 }
 
 // LocalizedDescription returns localized description of the pass to be referenced during provisioning.

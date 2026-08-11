@@ -182,7 +182,7 @@ func (ci *CameraItem) ModificationDate() time.Time {
 func (ci *CameraItem) Thumbnail() coregraphics.CGImageRef {
 	defer runtime.KeepAlive(ci)
 	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("thumbnail"))
-	return coregraphics.CGImageRef{obj.Wrap(_r)}
+	return coregraphics.CGImageRef{Object: obj.Wrap(_r)}
 }
 
 // Metadata returns ￼Metadata for the item. The value of this property is NULL unless a 'requestMetadata' message is sent to this object.
@@ -217,14 +217,14 @@ func (ci *CameraItem) WasAddedAfterContentCatalogCompleted() bool {
 func (ci *CameraItem) ThumbnailIfAvailable() coregraphics.CGImageRef {
 	defer runtime.KeepAlive(ci)
 	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("thumbnailIfAvailable"))
-	return coregraphics.CGImageRef{obj.Wrap(_r)}
+	return coregraphics.CGImageRef{Object: obj.Wrap(_r)}
 }
 
 // LargeThumbnailIfAvailable returns the large thumbnail if available.
 func (ci *CameraItem) LargeThumbnailIfAvailable() coregraphics.CGImageRef {
 	defer runtime.KeepAlive(ci)
 	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("largeThumbnailIfAvailable"))
-	return coregraphics.CGImageRef{obj.Wrap(_r)}
+	return coregraphics.CGImageRef{Object: obj.Wrap(_r)}
 }
 
 // MetadataIfAvailable returns the metadata if available.

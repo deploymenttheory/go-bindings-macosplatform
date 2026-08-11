@@ -226,7 +226,7 @@ func (p *Page) Document() *Document {
 func (p *Page) PageRef() coregraphics.CGPDFPageRef {
 	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("pageRef"))
-	return coregraphics.CGPDFPageRef{obj.Wrap(_r)}
+	return coregraphics.CGPDFPageRef{Object: obj.Wrap(_r)}
 }
 
 // Label returns the label.

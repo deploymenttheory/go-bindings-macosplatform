@@ -148,11 +148,25 @@ func (ma *MutableArray) RemoveAllObjects() {
 	objc.Send[objc.ID](objref.IDOf(ma), objc.RegisterName("removeAllObjects"))
 }
 
+// RemoveObjectInRange removes all occurrences within a specified range in the array of a given object.
+func (ma *MutableArray) RemoveObjectInRange(anObject obj.Object, range_ NSRange) {
+	defer runtime.KeepAlive(ma)
+	defer runtime.KeepAlive(anObject)
+	objc.Send[objc.ID](objref.IDOf(ma), objc.RegisterName("removeObject:inRange:"), objref.IDOf(anObject), range_)
+}
+
 // RemoveObject removes all occurrences in the array of a given object.
 func (ma *MutableArray) RemoveObject(anObject obj.Object) {
 	defer runtime.KeepAlive(ma)
 	defer runtime.KeepAlive(anObject)
 	objc.Send[objc.ID](objref.IDOf(ma), objc.RegisterName("removeObject:"), objref.IDOf(anObject))
+}
+
+// RemoveObjectIdenticalToInRange removes all occurrences of anObject within the specified range in the array.
+func (ma *MutableArray) RemoveObjectIdenticalToInRange(anObject obj.Object, range_ NSRange) {
+	defer runtime.KeepAlive(ma)
+	defer runtime.KeepAlive(anObject)
+	objc.Send[objc.ID](objref.IDOf(ma), objc.RegisterName("removeObjectIdenticalTo:inRange:"), objref.IDOf(anObject), range_)
 }
 
 // RemoveObjectIdenticalTo removes all occurrences of a given object in the array.
@@ -174,6 +188,24 @@ func (ma *MutableArray) RemoveObjectsFromIndicesNumIndices(cnt int) (indices int
 func (ma *MutableArray) RemoveObjectsInArray(otherArray []obj.Object) {
 	defer runtime.KeepAlive(ma)
 	objc.Send[objc.ID](objref.IDOf(ma), objc.RegisterName("removeObjectsInArray:"), purego.SliceToNSArray(otherArray, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+}
+
+// RemoveObjectsInRange removes from the array each of the objects within a given range.
+func (ma *MutableArray) RemoveObjectsInRange(range_ NSRange) {
+	defer runtime.KeepAlive(ma)
+	objc.Send[objc.ID](objref.IDOf(ma), objc.RegisterName("removeObjectsInRange:"), range_)
+}
+
+// ReplaceObjectsInRangeWithObjectsFromArrayRange replaces the objects in the receiving array specified by one given range with the objects in another array specified by another range.
+func (ma *MutableArray) ReplaceObjectsInRangeWithObjectsFromArrayRange(range_ NSRange, otherArray []obj.Object, otherRange NSRange) {
+	defer runtime.KeepAlive(ma)
+	objc.Send[objc.ID](objref.IDOf(ma), objc.RegisterName("replaceObjectsInRange:withObjectsFromArray:range:"), range_, purego.SliceToNSArray(otherArray, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), otherRange)
+}
+
+// ReplaceObjectsInRangeWithObjectsFromArray replaces the objects in the receiving array specified by a given range with all of the objects from a given array.
+func (ma *MutableArray) ReplaceObjectsInRangeWithObjectsFromArray(range_ NSRange, otherArray []obj.Object) {
+	defer runtime.KeepAlive(ma)
+	objc.Send[objc.ID](objref.IDOf(ma), objc.RegisterName("replaceObjectsInRange:withObjectsFromArray:"), range_, purego.SliceToNSArray(otherArray, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // SetArray sets the receiving array’s elements to those in another given array.

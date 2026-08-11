@@ -135,6 +135,12 @@ func (cpd *ComputePipelineDescriptor) WithShaderValidation(shaderValidation Shad
 	return cpd
 }
 
+// WithRequiredThreadsPerThreadgroup sets sets the required threads-per-threadgroup during dispatches. The `threadsPerThreadgroup` argument of any dispatch must match this value if it is set. Setting this to a size of 0 in every dimension disables this property
+func (cpd *ComputePipelineDescriptor) WithRequiredThreadsPerThreadgroup(requiredThreadsPerThreadgroup MTLSize) *ComputePipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(cpd), objc.RegisterName("setRequiredThreadsPerThreadgroup:"), requiredThreadsPerThreadgroup)
+	return cpd
+}
+
 // Reset resets all compute pipeline descriptor properties to their default values.
 func (cpd *ComputePipelineDescriptor) Reset() {
 	defer runtime.KeepAlive(cpd)
@@ -250,5 +256,12 @@ func (cpd *ComputePipelineDescriptor) MaxCallStackDepth() int {
 func (cpd *ComputePipelineDescriptor) ShaderValidation() ShaderValidation {
 	defer runtime.KeepAlive(cpd)
 	_r := objc.Send[ShaderValidation](objref.IDOf(cpd), objc.RegisterName("shaderValidation"))
+	return _r
+}
+
+// RequiredThreadsPerThreadgroup sets the required threads-per-threadgroup during dispatches. The `threadsPerThreadgroup` argument of any dispatch must match this value if it is set. Setting this to a size of 0 in every dimension disables this property
+func (cpd *ComputePipelineDescriptor) RequiredThreadsPerThreadgroup() MTLSize {
+	defer runtime.KeepAlive(cpd)
+	_r := objc.Send[MTLSize](objref.IDOf(cpd), objc.RegisterName("requiredThreadsPerThreadgroup"))
 	return _r
 }

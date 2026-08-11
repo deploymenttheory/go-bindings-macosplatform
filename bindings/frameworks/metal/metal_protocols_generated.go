@@ -7,7 +7,6 @@ package metal
 import (
 	"unsafe"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/compositorservices"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
@@ -53,7 +52,7 @@ type MTL4CommandBuffer interface {
 	PushDebugGroup(str string)
 	PopDebugGroup()
 	WriteTimestampIntoHeapAtIndex(counterHeap obj.Object, index int)
-	ResolveCounterHeapWithRangeIntoBufferWaitFenceUpdateFence(counterHeap obj.Object, range_ foundation.NSRange, bufferRange obj.Object, fenceToWait obj.Object, fenceToUpdate obj.Object)
+	ResolveCounterHeapWithRangeIntoBufferWaitFenceUpdateFence(counterHeap obj.Object, range_ foundation.NSRange, bufferRange MTL4BufferRange, fenceToWait obj.Object, fenceToUpdate obj.Object)
 	Device() obj.Object
 	Label() string
 	SetLabel(label string)
@@ -103,20 +102,20 @@ type MTL4ComputeCommandEncoder interface {
 	SetComputePipelineState(state obj.Object)
 	SetThreadgroupMemoryLengthAtIndex(length int, index int)
 	SetImageblockWidthHeight(width int, height int)
-	DispatchThreadsThreadsPerThreadgroup(threadsPerGrid obj.Object, threadsPerThreadgroup obj.Object)
-	DispatchThreadgroupsThreadsPerThreadgroup(threadgroupsPerGrid obj.Object, threadsPerThreadgroup obj.Object)
-	DispatchThreadgroupsWithIndirectBufferThreadsPerThreadgroup(indirectBuffer uint64, threadsPerThreadgroup obj.Object)
+	DispatchThreadsThreadsPerThreadgroup(threadsPerGrid MTLSize, threadsPerThreadgroup MTLSize)
+	DispatchThreadgroupsThreadsPerThreadgroup(threadgroupsPerGrid MTLSize, threadsPerThreadgroup MTLSize)
+	DispatchThreadgroupsWithIndirectBufferThreadsPerThreadgroup(indirectBuffer uint64, threadsPerThreadgroup MTLSize)
 	DispatchThreadsWithIndirectBuffer(indirectBuffer uint64)
 	ExecuteCommandsInBufferWithRange(indirectCommandBuffer obj.Object, executionRange foundation.NSRange)
 	ExecuteCommandsInBufferIndirectBuffer(indirectCommandbuffer obj.Object, indirectRangeBuffer uint64)
 	CopyFromTextureToTexture(sourceTexture obj.Object, destinationTexture obj.Object)
 	CopyFromTextureSourceSliceSourceLevelToTextureDestinationSliceDestinationLevelSliceCountLevelCount(sourceTexture obj.Object, sourceSlice int, sourceLevel int, destinationTexture obj.Object, destinationSlice int, destinationLevel int, sliceCount int, levelCount int)
-	CopyFromTextureSourceSliceSourceLevelSourceOriginSourceSizeToTextureDestinationSliceDestinationLevelDestinationOrigin(sourceTexture obj.Object, sourceSlice int, sourceLevel int, sourceOrigin obj.Object, sourceSize obj.Object, destinationTexture obj.Object, destinationSlice int, destinationLevel int, destinationOrigin obj.Object)
-	CopyFromTextureSourceSliceSourceLevelSourceOriginSourceSizeToBufferDestinationOffsetDestinationBytesPerRowDestinationBytesPerImage(sourceTexture obj.Object, sourceSlice int, sourceLevel int, sourceOrigin obj.Object, sourceSize obj.Object, destinationBuffer obj.Object, destinationOffset int, destinationBytesPerRow int, destinationBytesPerImage int)
-	CopyFromTextureSourceSliceSourceLevelSourceOriginSourceSizeToBufferDestinationOffsetDestinationBytesPerRowDestinationBytesPerImageOptions(sourceTexture obj.Object, sourceSlice int, sourceLevel int, sourceOrigin obj.Object, sourceSize obj.Object, destinationBuffer obj.Object, destinationOffset int, destinationBytesPerRow int, destinationBytesPerImage int, options BlitOption)
+	CopyFromTextureSourceSliceSourceLevelSourceOriginSourceSizeToTextureDestinationSliceDestinationLevelDestinationOrigin(sourceTexture obj.Object, sourceSlice int, sourceLevel int, sourceOrigin MTLOrigin, sourceSize MTLSize, destinationTexture obj.Object, destinationSlice int, destinationLevel int, destinationOrigin MTLOrigin)
+	CopyFromTextureSourceSliceSourceLevelSourceOriginSourceSizeToBufferDestinationOffsetDestinationBytesPerRowDestinationBytesPerImage(sourceTexture obj.Object, sourceSlice int, sourceLevel int, sourceOrigin MTLOrigin, sourceSize MTLSize, destinationBuffer obj.Object, destinationOffset int, destinationBytesPerRow int, destinationBytesPerImage int)
+	CopyFromTextureSourceSliceSourceLevelSourceOriginSourceSizeToBufferDestinationOffsetDestinationBytesPerRowDestinationBytesPerImageOptions(sourceTexture obj.Object, sourceSlice int, sourceLevel int, sourceOrigin MTLOrigin, sourceSize MTLSize, destinationBuffer obj.Object, destinationOffset int, destinationBytesPerRow int, destinationBytesPerImage int, options BlitOption)
 	CopyFromBufferSourceOffsetToBufferDestinationOffsetSize(sourceBuffer obj.Object, sourceOffset int, destinationBuffer obj.Object, destinationOffset int, size int)
-	CopyFromBufferSourceOffsetSourceBytesPerRowSourceBytesPerImageSourceSizeToTextureDestinationSliceDestinationLevelDestinationOrigin(sourceBuffer obj.Object, sourceOffset int, sourceBytesPerRow int, sourceBytesPerImage int, sourceSize obj.Object, destinationTexture obj.Object, destinationSlice int, destinationLevel int, destinationOrigin obj.Object)
-	CopyFromBufferSourceOffsetSourceBytesPerRowSourceBytesPerImageSourceSizeToTextureDestinationSliceDestinationLevelDestinationOriginOptions(sourceBuffer obj.Object, sourceOffset int, sourceBytesPerRow int, sourceBytesPerImage int, sourceSize obj.Object, destinationTexture obj.Object, destinationSlice int, destinationLevel int, destinationOrigin obj.Object, options BlitOption)
+	CopyFromBufferSourceOffsetSourceBytesPerRowSourceBytesPerImageSourceSizeToTextureDestinationSliceDestinationLevelDestinationOrigin(sourceBuffer obj.Object, sourceOffset int, sourceBytesPerRow int, sourceBytesPerImage int, sourceSize MTLSize, destinationTexture obj.Object, destinationSlice int, destinationLevel int, destinationOrigin MTLOrigin)
+	CopyFromBufferSourceOffsetSourceBytesPerRowSourceBytesPerImageSourceSizeToTextureDestinationSliceDestinationLevelDestinationOriginOptions(sourceBuffer obj.Object, sourceOffset int, sourceBytesPerRow int, sourceBytesPerImage int, sourceSize MTLSize, destinationTexture obj.Object, destinationSlice int, destinationLevel int, destinationOrigin MTLOrigin, options BlitOption)
 	CopyFromTensorSourceOriginSourceDimensionsToTensorDestinationOriginDestinationDimensions(sourceTensor obj.Object, sourceOrigin *TensorExtents, sourceDimensions *TensorExtents, destinationTensor obj.Object, destinationOrigin *TensorExtents, destinationDimensions *TensorExtents)
 	GenerateMipmapsForTexture(texture obj.Object)
 	FillBufferRangeValue(buffer obj.Object, range_ foundation.NSRange, value uint8)
@@ -128,11 +127,11 @@ type MTL4ComputeCommandEncoder interface {
 	CopyIndirectCommandBufferSourceRangeDestinationDestinationIndex(source obj.Object, sourceRange foundation.NSRange, destination obj.Object, destinationIndex int)
 	OptimizeIndirectCommandBufferWithRange(indirectCommandBuffer obj.Object, range_ foundation.NSRange)
 	SetArgumentTable(argumentTable obj.Object)
-	BuildAccelerationStructureDescriptorScratchBuffer(accelerationStructure obj.Object, descriptor *MTL4AccelerationStructureDescriptor, scratchBuffer obj.Object)
-	RefitAccelerationStructureDescriptorDestinationScratchBuffer(sourceAccelerationStructure obj.Object, descriptor *MTL4AccelerationStructureDescriptor, destinationAccelerationStructure obj.Object, scratchBuffer obj.Object)
-	RefitAccelerationStructureDescriptorDestinationScratchBufferOptions(sourceAccelerationStructure obj.Object, descriptor *MTL4AccelerationStructureDescriptor, destinationAccelerationStructure obj.Object, scratchBuffer obj.Object, options AccelerationStructureRefitOptions)
+	BuildAccelerationStructureDescriptorScratchBuffer(accelerationStructure obj.Object, descriptor *MTL4AccelerationStructureDescriptor, scratchBuffer MTL4BufferRange)
+	RefitAccelerationStructureDescriptorDestinationScratchBuffer(sourceAccelerationStructure obj.Object, descriptor *MTL4AccelerationStructureDescriptor, destinationAccelerationStructure obj.Object, scratchBuffer MTL4BufferRange)
+	RefitAccelerationStructureDescriptorDestinationScratchBufferOptions(sourceAccelerationStructure obj.Object, descriptor *MTL4AccelerationStructureDescriptor, destinationAccelerationStructure obj.Object, scratchBuffer MTL4BufferRange, options AccelerationStructureRefitOptions)
 	CopyAccelerationStructureToAccelerationStructure(sourceAccelerationStructure obj.Object, destinationAccelerationStructure obj.Object)
-	WriteCompactedAccelerationStructureSizeToBuffer(accelerationStructure obj.Object, buffer obj.Object)
+	WriteCompactedAccelerationStructureSizeToBuffer(accelerationStructure obj.Object, buffer MTL4BufferRange)
 	CopyAndCompactAccelerationStructureToAccelerationStructure(sourceAccelerationStructure obj.Object, destinationAccelerationStructure obj.Object)
 	WriteTimestampWithGranularityIntoHeapAtIndex(granularity MTL4TimestampGranularity, counterHeap obj.Object, index int)
 }
@@ -166,14 +165,14 @@ type MTL4PipelineDataSetSerializer interface {
 type MTL4RenderCommandEncoder interface {
 	SetColorAttachmentMap(mapping *LogicalToPhysicalColorAttachmentMap)
 	SetRenderPipelineState(pipelineState obj.Object)
-	SetViewport(viewport compositorservices.MTLViewport)
-	SetViewportsCount(viewports *compositorservices.MTLViewport, count int)
+	SetViewport(viewport MTLViewport)
+	SetViewportsCount(viewports *MTLViewport, count int)
 	SetVertexAmplificationCountViewMappings(count int, viewMappings *MTLVertexAmplificationViewMapping)
 	SetCullMode(cullMode CullMode)
 	SetDepthClipMode(depthClipMode DepthClipMode)
 	SetDepthBiasSlopeScaleClamp(depthBias float32, slopeScale float32, clamp float32)
 	SetDepthTestMinBoundMaxBound(minBound float32, maxBound float32)
-	SetScissorRect(rect obj.Object)
+	SetScissorRect(rect MTLScissorRect)
 	SetScissorRectsCount(scissorRects *MTLScissorRect, count int)
 	SetTriangleFillMode(fillMode TriangleFillMode)
 	SetBlendColorRedGreenBlueAlpha(red float32, green float32, blue float32, alpha float32)
@@ -195,10 +194,10 @@ type MTL4RenderCommandEncoder interface {
 	ExecuteCommandsInBufferWithRange(indirectCommandBuffer obj.Object, executionRange foundation.NSRange)
 	ExecuteCommandsInBufferIndirectBuffer(indirectCommandBuffer obj.Object, indirectRangeBuffer uint64)
 	SetObjectThreadgroupMemoryLengthAtIndex(length int, index int)
-	DrawMeshThreadgroupsThreadsPerObjectThreadgroupThreadsPerMeshThreadgroup(threadgroupsPerGrid obj.Object, threadsPerObjectThreadgroup obj.Object, threadsPerMeshThreadgroup obj.Object)
-	DrawMeshThreadsThreadsPerObjectThreadgroupThreadsPerMeshThreadgroup(threadsPerGrid obj.Object, threadsPerObjectThreadgroup obj.Object, threadsPerMeshThreadgroup obj.Object)
-	DrawMeshThreadgroupsWithIndirectBufferThreadsPerObjectThreadgroupThreadsPerMeshThreadgroup(indirectBuffer uint64, threadsPerObjectThreadgroup obj.Object, threadsPerMeshThreadgroup obj.Object)
-	DispatchThreadsPerTile(threadsPerTile obj.Object)
+	DrawMeshThreadgroupsThreadsPerObjectThreadgroupThreadsPerMeshThreadgroup(threadgroupsPerGrid MTLSize, threadsPerObjectThreadgroup MTLSize, threadsPerMeshThreadgroup MTLSize)
+	DrawMeshThreadsThreadsPerObjectThreadgroupThreadsPerMeshThreadgroup(threadsPerGrid MTLSize, threadsPerObjectThreadgroup MTLSize, threadsPerMeshThreadgroup MTLSize)
+	DrawMeshThreadgroupsWithIndirectBufferThreadsPerObjectThreadgroupThreadsPerMeshThreadgroup(indirectBuffer uint64, threadsPerObjectThreadgroup MTLSize, threadsPerMeshThreadgroup MTLSize)
+	DispatchThreadsPerTile(threadsPerTile MTLSize)
 	SetThreadgroupMemoryLengthOffsetAtIndex(length int, offset int, index int)
 	SetArgumentTableAtStages(argumentTable obj.Object, stages RenderStages)
 	SetFrontFacingWinding(frontFacingWinding Winding)
@@ -366,11 +365,11 @@ type ComputeCommandEncoder interface {
 	SetSamplerStatesLodMinClampsLodMaxClampsWithRange(samplers obj.Object, lodMinClamps obj.Object, lodMaxClamps obj.Object, range_ foundation.NSRange)
 	SetThreadgroupMemoryLengthAtIndex(length int, index int)
 	SetImageblockWidthHeight(width int, height int)
-	SetStageInRegion(region obj.Object)
+	SetStageInRegion(region MTLRegion)
 	SetStageInRegionWithIndirectBufferIndirectBufferOffset(indirectBuffer obj.Object, indirectBufferOffset int)
-	DispatchThreadgroupsThreadsPerThreadgroup(threadgroupsPerGrid obj.Object, threadsPerThreadgroup obj.Object)
-	DispatchThreadgroupsWithIndirectBufferIndirectBufferOffsetThreadsPerThreadgroup(indirectBuffer obj.Object, indirectBufferOffset int, threadsPerThreadgroup obj.Object)
-	DispatchThreadsThreadsPerThreadgroup(threadsPerGrid obj.Object, threadsPerThreadgroup obj.Object)
+	DispatchThreadgroupsThreadsPerThreadgroup(threadgroupsPerGrid MTLSize, threadsPerThreadgroup MTLSize)
+	DispatchThreadgroupsWithIndirectBufferIndirectBufferOffsetThreadsPerThreadgroup(indirectBuffer obj.Object, indirectBufferOffset int, threadsPerThreadgroup MTLSize)
+	DispatchThreadsThreadsPerThreadgroup(threadsPerGrid MTLSize, threadsPerThreadgroup MTLSize)
 	UpdateFence(fence obj.Object)
 	WaitForFence(fence obj.Object)
 	UseResourceUsage(resource obj.Object, usage ResourceUsage)
@@ -447,7 +446,7 @@ type FunctionHandle interface {
 	FunctionType() FunctionType
 	Name() string
 	Device() obj.Object
-	GPUResourceID() obj.Object
+	GPUResourceID() MTLResourceID
 }
 
 // FunctionLog is the Go form of the Objective-C protocol MTLFunctionLog.
@@ -483,7 +482,7 @@ type IOCommandBuffer interface {
 	AddCompletedHandler(block obj.Object)
 	LoadBytesSizeSourceHandleSourceHandleOffset(pointer unsafe.Pointer, size int, sourceHandle obj.Object, sourceHandleOffset int)
 	LoadBufferOffsetSizeSourceHandleSourceHandleOffset(buffer obj.Object, offset int, size int, sourceHandle obj.Object, sourceHandleOffset int)
-	LoadTextureSliceLevelSizeSourceBytesPerRowSourceBytesPerImageDestinationOriginSourceHandleSourceHandleOffset(texture obj.Object, slice int, level int, size obj.Object, sourceBytesPerRow int, sourceBytesPerImage int, destinationOrigin obj.Object, sourceHandle obj.Object, sourceHandleOffset int)
+	LoadTextureSliceLevelSizeSourceBytesPerRowSourceBytesPerImageDestinationOriginSourceHandleSourceHandleOffset(texture obj.Object, slice int, level int, size MTLSize, sourceBytesPerRow int, sourceBytesPerImage int, destinationOrigin MTLOrigin, sourceHandle obj.Object, sourceHandleOffset int)
 	CopyStatusToBufferOffset(buffer obj.Object, offset int)
 	Commit()
 	WaitUntilCompleted()
@@ -529,7 +528,7 @@ type IndirectCommandBuffer interface {
 	IndirectRenderCommandAtIndex(commandIndex int) obj.Object
 	IndirectComputeCommandAtIndex(commandIndex int) obj.Object
 	Size() int
-	GPUResourceID() obj.Object
+	GPUResourceID() MTLResourceID
 }
 
 // IndirectComputeCommand is the Go form of the Objective-C protocol MTLIndirectComputeCommand.
@@ -537,14 +536,14 @@ type IndirectComputeCommand interface {
 	SetComputePipelineState(pipelineState obj.Object)
 	SetKernelBufferOffsetAtIndex(buffer obj.Object, offset int, index int)
 	SetKernelBufferOffsetAttributeStrideAtIndex(buffer obj.Object, offset int, stride int, index int)
-	ConcurrentDispatchThreadgroupsThreadsPerThreadgroup(threadgroupsPerGrid obj.Object, threadsPerThreadgroup obj.Object)
-	ConcurrentDispatchThreadsThreadsPerThreadgroup(threadsPerGrid obj.Object, threadsPerThreadgroup obj.Object)
+	ConcurrentDispatchThreadgroupsThreadsPerThreadgroup(threadgroupsPerGrid MTLSize, threadsPerThreadgroup MTLSize)
+	ConcurrentDispatchThreadsThreadsPerThreadgroup(threadsPerGrid MTLSize, threadsPerThreadgroup MTLSize)
 	SetBarrier()
 	ClearBarrier()
 	SetImageblockWidthHeight(width int, height int)
 	Reset()
 	SetThreadgroupMemoryLengthAtIndex(length int, index int)
-	SetStageInRegion(region obj.Object)
+	SetStageInRegion(region MTLRegion)
 }
 
 // IndirectComputeCommandEncoder is the Go form of the Objective-C protocol MTLIndirectComputeCommandEncoder.
@@ -564,8 +563,8 @@ type IndirectRenderCommand interface {
 	SetObjectThreadgroupMemoryLengthAtIndex(length int, index int)
 	SetObjectBufferOffsetAtIndex(buffer obj.Object, offset int, index int)
 	SetMeshBufferOffsetAtIndex(buffer obj.Object, offset int, index int)
-	DrawMeshThreadgroupsThreadsPerObjectThreadgroupThreadsPerMeshThreadgroup(threadgroupsPerGrid obj.Object, threadsPerObjectThreadgroup obj.Object, threadsPerMeshThreadgroup obj.Object)
-	DrawMeshThreadsThreadsPerObjectThreadgroupThreadsPerMeshThreadgroup(threadsPerGrid obj.Object, threadsPerObjectThreadgroup obj.Object, threadsPerMeshThreadgroup obj.Object)
+	DrawMeshThreadgroupsThreadsPerObjectThreadgroupThreadsPerMeshThreadgroup(threadgroupsPerGrid MTLSize, threadsPerObjectThreadgroup MTLSize, threadsPerMeshThreadgroup MTLSize)
+	DrawMeshThreadsThreadsPerObjectThreadgroupThreadsPerMeshThreadgroup(threadsPerGrid MTLSize, threadsPerObjectThreadgroup MTLSize, threadsPerMeshThreadgroup MTLSize)
 	SetBarrier()
 	ClearBarrier()
 	SetDepthStencilState(depthStencilState obj.Object)
@@ -593,7 +592,7 @@ type IntersectionFunctionTable interface {
 	SetOpaqueCurveIntersectionFunctionWithSignatureWithRange(signature IntersectionFunctionSignature, range_ foundation.NSRange)
 	SetVisibleFunctionTableAtBufferIndex(functionTable obj.Object, bufferIndex int)
 	SetVisibleFunctionTablesWithBufferRange(functionTables obj.Object, bufferRange foundation.NSRange)
-	GPUResourceID() obj.Object
+	GPUResourceID() MTLResourceID
 }
 
 // Library is the Go form of the Objective-C protocol MTLLibrary.
@@ -629,15 +628,15 @@ type ParallelRenderCommandEncoder interface {
 // RasterizationRateMap is the Go form of the Objective-C protocol MTLRasterizationRateMap.
 type RasterizationRateMap interface {
 	CopyParameterDataToBufferOffset(buffer obj.Object, offset int)
-	PhysicalSizeForLayer(layerIndex int) obj.Object
-	MapScreenToPhysicalCoordinatesForLayer(screenCoordinates obj.Object, layerIndex int) obj.Object
-	MapPhysicalToScreenCoordinatesForLayer(physicalCoordinates obj.Object, layerIndex int) obj.Object
+	PhysicalSizeForLayer(layerIndex int) MTLSize
+	MapScreenToPhysicalCoordinatesForLayer(screenCoordinates MTLSamplePosition, layerIndex int) MTLSamplePosition
+	MapPhysicalToScreenCoordinatesForLayer(physicalCoordinates MTLSamplePosition, layerIndex int) MTLSamplePosition
 	Device() obj.Object
 	Label() string
-	ScreenSize() obj.Object
-	PhysicalGranularity() obj.Object
+	ScreenSize() MTLSize
+	PhysicalGranularity() MTLSize
 	LayerCount() int
-	ParameterBufferSizeAndAlign() obj.Object
+	ParameterBufferSizeAndAlign() MTLSizeAndAlign
 }
 
 // RenderCommandEncoder is the Go form of the Objective-C protocol MTLRenderCommandEncoder.
@@ -676,8 +675,8 @@ type ResourceStateCommandEncoder interface {
 
 // ResourceViewPool is the Go form of the Objective-C protocol MTLResourceViewPool.
 type ResourceViewPool interface {
-	CopyResourceViewsFromPoolSourceRangeDestinationIndex(sourcePool obj.Object, sourceRange foundation.NSRange, destinationIndex int) obj.Object
-	BaseResourceID() obj.Object
+	CopyResourceViewsFromPoolSourceRangeDestinationIndex(sourcePool obj.Object, sourceRange foundation.NSRange, destinationIndex int) MTLResourceID
+	BaseResourceID() MTLResourceID
 	ResourceViewCount() int
 	Device() obj.Object
 	Label() string
@@ -700,7 +699,7 @@ type SharedEvent interface {
 type Tensor interface {
 	ReplaceSliceOriginSliceDimensionsWithBytesStrides(sliceOrigin *TensorExtents, sliceDimensions *TensorExtents, data unsafe.Pointer, strides *TensorExtents)
 	GetBytesStridesFromSliceOriginSliceDimensions(data unsafe.Pointer, strides *TensorExtents, sliceOrigin *TensorExtents, sliceDimensions *TensorExtents)
-	GPUResourceID() obj.Object
+	GPUResourceID() MTLResourceID
 	Buffer() obj.Object
 	BufferOffset() int
 	Strides() *TensorExtents
@@ -730,9 +729,9 @@ type TextureBinding interface {
 
 // TextureViewPool is the Go form of the Objective-C protocol MTLTextureViewPool.
 type TextureViewPool interface {
-	SetTextureViewAtIndex(texture obj.Object, index int) obj.Object
-	SetTextureViewDescriptorAtIndex(texture obj.Object, descriptor *TextureViewDescriptor, index int) obj.Object
-	SetTextureViewFromBufferDescriptorOffsetBytesPerRowAtIndex(buffer obj.Object, descriptor *TextureDescriptor, offset int, bytesPerRow int, index int) obj.Object
+	SetTextureViewAtIndex(texture obj.Object, index int) MTLResourceID
+	SetTextureViewDescriptorAtIndex(texture obj.Object, descriptor *TextureViewDescriptor, index int) MTLResourceID
+	SetTextureViewFromBufferDescriptorOffsetBytesPerRowAtIndex(buffer obj.Object, descriptor *TextureDescriptor, offset int, bytesPerRow int, index int) MTLResourceID
 }
 
 // ThreadgroupBinding is the Go form of the Objective-C protocol MTLThreadgroupBinding.

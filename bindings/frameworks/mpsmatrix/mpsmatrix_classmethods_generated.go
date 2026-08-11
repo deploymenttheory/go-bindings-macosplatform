@@ -5,8 +5,20 @@
 package mpsmatrix
 
 import (
+	"runtime"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/ebitengine/purego/objc"
 )
+
+// DescriptorWithSourceMatrixDestinationMatrixOffsets convenience allocator for single copies
+func DescriptorWithSourceMatrixDestinationMatrixOffsets(sourceMatrix obj.Object, destinationMatrix obj.Object, offsets MPSMatrixCopyOffsets) *MatrixCopyDescriptor {
+	defer runtime.KeepAlive(sourceMatrix)
+	defer runtime.KeepAlive(destinationMatrix)
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSMatrixCopyDescriptor")), objc.RegisterName("descriptorWithSourceMatrix:destinationMatrix:offsets:"), objref.IDOf(sourceMatrix), objref.IDOf(destinationMatrix), offsets)
+	return MatrixCopyDescriptorFromID(_r)
+}
 
 // UniformDistributionDescriptorWithMinimumMaximum make a descriptor for a uniform distribution of floating point values in the range [minimum, maximum).
 func UniformDistributionDescriptorWithMinimumMaximum(minimum float32, maximum float32) *MatrixRandomDistributionDescriptor {
