@@ -135,7 +135,7 @@ func writeOpinionatedHeader(
 		"raw": rawImportPath,
 	}
 	if needsObjc {
-		all["cgo"] = "github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo"
+		all["objptr"] = "github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/objptr"
 	}
 	for alias, path := range extraImports {
 		all[alias] = path

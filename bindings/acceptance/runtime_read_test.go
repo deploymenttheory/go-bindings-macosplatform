@@ -123,8 +123,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/metal"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/tools/grandcentraldispatch/mainthread"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -1351,7 +1351,7 @@ func TestRuntimeRead_MainScreen(t *testing.T) {
 		screenNil   bool
 	)
 
-	cgo.RunOnMainThread(func() {
+	mainthread.Do(func() {
 		screen := appkit.NSScreenMainScreen()
 		if screen == nil {
 			screenNil = true
@@ -1417,7 +1417,7 @@ func TestRuntimeRead_FrontmostApplication(t *testing.T) {
 	var appName string
 	var wsNil, appNil bool
 
-	cgo.RunOnMainThread(func() {
+	mainthread.Do(func() {
 		ws := appkit.NSWorkspaceSharedWorkspace()
 		if ws == nil {
 			wsNil = true
@@ -1455,7 +1455,7 @@ func TestRuntimeRead_SharedApplication(t *testing.T) {
 		activationPolicy int64
 	)
 
-	cgo.RunOnMainThread(func() {
+	mainthread.Do(func() {
 		app := appkit.NSApplicationSharedApplication()
 		if app == nil {
 			appNil = true
@@ -1484,7 +1484,7 @@ func TestRuntimeRead_SystemFont(t *testing.T) {
 		familyName string
 	)
 
-	cgo.RunOnMainThread(func() {
+	mainthread.Do(func() {
 		font := appkit.NSFontSystemFontOfSize(14.0)
 		if font == nil {
 			fontNil = true
@@ -1529,7 +1529,7 @@ func TestRuntimeRead_SemanticColors(t *testing.T) {
 		labelNil, blueNil, accentNil bool
 	)
 
-	cgo.RunOnMainThread(func() {
+	mainthread.Do(func() {
 		labelNil = appkit.NSColorLabelColor() == nil
 		blueNil = appkit.NSColorSystemBlueColor() == nil
 		accentNil = appkit.NSColorControlAccentColor() == nil
@@ -1560,7 +1560,7 @@ func TestRuntimeRead_AllScreens(t *testing.T) {
 		count      uint
 	)
 
-	cgo.RunOnMainThread(func() {
+	mainthread.Do(func() {
 		screens := appkit.NSScreenScreens()
 		if screens == nil {
 			screensNil = true
@@ -1588,7 +1588,7 @@ func TestRuntimeRead_RunningApplications(t *testing.T) {
 		count  uint
 	)
 
-	cgo.RunOnMainThread(func() {
+	mainthread.Do(func() {
 		ws := appkit.NSWorkspaceSharedWorkspace()
 		if ws == nil {
 			wsNil = true
@@ -1623,7 +1623,7 @@ func TestRuntimeRead_Pasteboard(t *testing.T) {
 		changeCount int
 	)
 
-	cgo.RunOnMainThread(func() {
+	mainthread.Do(func() {
 		pb := appkit.NSPasteboardGeneralPasteboard()
 		if pb == nil {
 			pbNil = true
@@ -1646,7 +1646,7 @@ func TestRuntimeRead_Pasteboard(t *testing.T) {
 func TestRuntimeRead_Cursor(t *testing.T) {
 	var arrowNil, iBeamNil bool
 
-	cgo.RunOnMainThread(func() {
+	mainthread.Do(func() {
 		_ = appkit.NSApplicationSharedApplication()
 		arrowNil = appkit.NSCursorArrowCursor() == nil
 		iBeamNil = appkit.NSCursorIBeamCursor() == nil
@@ -1673,7 +1673,7 @@ func TestRuntimeRead_ColorSpace(t *testing.T) {
 		nameS string
 	)
 
-	cgo.RunOnMainThread(func() {
+	mainthread.Do(func() {
 		cs := appkit.NSColorSpaceSRGBColorSpace()
 		if cs == nil {
 			csNil = true
@@ -1711,7 +1711,7 @@ func TestRuntimeRead_PrintInfo(t *testing.T) {
 		topMargin   float64
 	)
 
-	cgo.RunOnMainThread(func() {
+	mainthread.Do(func() {
 		pi := appkit.NSPrintInfoSharedPrintInfo()
 		if pi == nil {
 			piNil = true
@@ -1744,7 +1744,7 @@ func TestRuntimeRead_BezierPath(t *testing.T) {
 		miterLimit float64
 	)
 
-	cgo.RunOnMainThread(func() {
+	mainthread.Do(func() {
 		bp := appkit.NSBezierPathBezierPath()
 		if bp == nil {
 			pathNil = true
@@ -1777,7 +1777,7 @@ func TestRuntimeRead_StatusBar(t *testing.T) {
 		thickness float64
 	)
 
-	cgo.RunOnMainThread(func() {
+	mainthread.Do(func() {
 		sb := appkit.NSStatusBarSystemStatusBar()
 		if sb == nil {
 			sbNil = true
@@ -1803,7 +1803,7 @@ func TestRuntimeRead_FontManager(t *testing.T) {
 		familyCount uint
 	)
 
-	cgo.RunOnMainThread(func() {
+	mainthread.Do(func() {
 		fm := appkit.NSFontManagerSharedFontManager()
 		if fm == nil {
 			fmNil = true
@@ -1832,7 +1832,7 @@ func TestRuntimeRead_NSMenuItem(t *testing.T) {
 		isSeparator bool
 	)
 
-	cgo.RunOnMainThread(func() {
+	mainthread.Do(func() {
 		item := appkit.NSMenuItemSeparatorItem()
 		if item == nil {
 			itemNil = true
@@ -1855,7 +1855,7 @@ func TestRuntimeRead_NSMenuItem(t *testing.T) {
 func TestRuntimeRead_NSAppearance(t *testing.T) {
 	var appearanceNil bool
 
-	cgo.RunOnMainThread(func() {
+	mainthread.Do(func() {
 		_ = appkit.NSApplicationSharedApplication()
 		a := appkit.NSAppearanceCurrentDrawingAppearance()
 		appearanceNil = (a == nil)
@@ -1875,7 +1875,7 @@ func TestRuntimeRead_NSDocumentController(t *testing.T) {
 		docsNil bool
 	)
 
-	cgo.RunOnMainThread(func() {
+	mainthread.Do(func() {
 		dc := appkit.NSDocumentControllerSharedDocumentController()
 		if dc == nil {
 			dcNil = true
@@ -1902,7 +1902,7 @@ func TestRuntimeRead_NSColorLists(t *testing.T) {
 		count   uint
 	)
 
-	cgo.RunOnMainThread(func() {
+	mainthread.Do(func() {
 		lists := appkit.NSColorListAvailableColorLists()
 		if lists == nil {
 			listNil = true
@@ -1928,7 +1928,7 @@ func TestRuntimeRead_NSImageRepClasses(t *testing.T) {
 		count      uint
 	)
 
-	cgo.RunOnMainThread(func() {
+	mainthread.Do(func() {
 		classes := appkit.NSImageRepRegisteredImageRepClasses()
 		if classes == nil {
 			classesNil = true
@@ -1951,7 +1951,7 @@ func TestRuntimeRead_NSImageRepClasses(t *testing.T) {
 func TestRuntimeRead_KeyRepeatDelay(t *testing.T) {
 	var delay float64
 
-	cgo.RunOnMainThread(func() {
+	mainthread.Do(func() {
 		delay = appkit.NSEventKeyRepeatDelay()
 	})
 
@@ -1966,7 +1966,7 @@ func TestRuntimeRead_KeyRepeatDelay(t *testing.T) {
 func TestRuntimeRead_MonospacedFont(t *testing.T) {
 	var fontNil bool
 
-	cgo.RunOnMainThread(func() {
+	mainthread.Do(func() {
 		font := appkit.NSFontMonospacedDigitSystemFontOfSizeWeight(14.0, 0.0)
 		fontNil = (font == nil)
 	})
@@ -1985,7 +1985,7 @@ func TestRuntimeRead_LabelFont(t *testing.T) {
 		pointSize float64
 	)
 
-	cgo.RunOnMainThread(func() {
+	mainthread.Do(func() {
 		font := appkit.NSFontLabelFontOfSize(12.0)
 		if font == nil {
 			fontNil = true
@@ -2008,7 +2008,7 @@ func TestRuntimeRead_LabelFont(t *testing.T) {
 func TestRuntimeRead_SystemColors(t *testing.T) {
 	var redNil, orangeNil, greenNil bool
 
-	cgo.RunOnMainThread(func() {
+	mainthread.Do(func() {
 		redNil = appkit.NSColorSystemRedColor() == nil
 		orangeNil = appkit.NSColorSystemOrangeColor() == nil
 		greenNil = appkit.NSColorSystemGreenColor() == nil
@@ -2039,7 +2039,7 @@ func TestRuntimeRead_WorkspaceNotificationCenter(t *testing.T) {
 		ncNil bool
 	)
 
-	cgo.RunOnMainThread(func() {
+	mainthread.Do(func() {
 		ws := appkit.NSWorkspaceSharedWorkspace()
 		if ws == nil {
 			wsNil = true
@@ -2075,7 +2075,7 @@ func TestRuntimeRead_ApplicationRunning(t *testing.T) {
 		isActive  bool
 	)
 
-	cgo.RunOnMainThread(func() {
+	mainthread.Do(func() {
 		app := appkit.NSApplicationSharedApplication()
 		if app == nil {
 			appNil = true
@@ -2098,7 +2098,7 @@ func TestRuntimeRead_ApplicationRunning(t *testing.T) {
 func TestRuntimeRead_GenericRGBColorSpace(t *testing.T) {
 	var csNil bool
 
-	cgo.RunOnMainThread(func() {
+	mainthread.Do(func() {
 		cs := appkit.NSColorSpaceGenericRGBColorSpace()
 		csNil = (cs == nil)
 	})
@@ -2114,7 +2114,7 @@ func TestRuntimeRead_GenericRGBColorSpace(t *testing.T) {
 func TestRuntimeRead_DisplayP3ColorSpace(t *testing.T) {
 	var csNil bool
 
-	cgo.RunOnMainThread(func() {
+	mainthread.Do(func() {
 		cs := appkit.NSColorSpaceDisplayP3ColorSpace()
 		csNil = (cs == nil)
 	})
@@ -2133,7 +2133,7 @@ func TestRuntimeRead_AvailableFonts(t *testing.T) {
 		fontCount uint
 	)
 
-	cgo.RunOnMainThread(func() {
+	mainthread.Do(func() {
 		fm := appkit.NSFontManagerSharedFontManager()
 		if fm == nil {
 			fmNil = true
@@ -2159,7 +2159,7 @@ func TestRuntimeRead_AvailableFonts(t *testing.T) {
 func TestRuntimeRead_DoubleClickInterval(t *testing.T) {
 	var interval float64
 
-	cgo.RunOnMainThread(func() {
+	mainthread.Do(func() {
 		interval = appkit.NSEventDoubleClickInterval()
 	})
 
@@ -2174,7 +2174,7 @@ func TestRuntimeRead_DoubleClickInterval(t *testing.T) {
 func TestRuntimeRead_KeyRepeatInterval(t *testing.T) {
 	var interval float64
 
-	cgo.RunOnMainThread(func() {
+	mainthread.Do(func() {
 		interval = appkit.NSEventKeyRepeatInterval()
 	})
 
@@ -2189,7 +2189,7 @@ func TestRuntimeRead_KeyRepeatInterval(t *testing.T) {
 func TestRuntimeRead_LabelFontSize(t *testing.T) {
 	var size float64
 
-	cgo.RunOnMainThread(func() {
+	mainthread.Do(func() {
 		size = appkit.NSFontLabelFontSize()
 	})
 
@@ -2204,7 +2204,7 @@ func TestRuntimeRead_LabelFontSize(t *testing.T) {
 func TestRuntimeRead_MouseCoalescing(t *testing.T) {
 	var enabled bool
 
-	cgo.RunOnMainThread(func() {
+	mainthread.Do(func() {
 		enabled = appkit.NSEventIsMouseCoalescingEnabled()
 	})
 
@@ -2216,7 +2216,7 @@ func TestRuntimeRead_MouseCoalescing(t *testing.T) {
 func TestRuntimeRead_GenericGrayColorSpace(t *testing.T) {
 	var csNil bool
 
-	cgo.RunOnMainThread(func() {
+	mainthread.Do(func() {
 		cs := appkit.NSColorSpaceGenericGrayColorSpace()
 		csNil = (cs == nil)
 	})
@@ -2232,7 +2232,7 @@ func TestRuntimeRead_GenericGrayColorSpace(t *testing.T) {
 func TestRuntimeRead_GenericGamma22GrayColorSpace(t *testing.T) {
 	var csNil bool
 
-	cgo.RunOnMainThread(func() {
+	mainthread.Do(func() {
 		cs := appkit.NSColorSpaceGenericGamma22GrayColorSpace()
 		csNil = (cs == nil)
 	})
