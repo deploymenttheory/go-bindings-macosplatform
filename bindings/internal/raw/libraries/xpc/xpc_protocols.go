@@ -5,29 +5,29 @@
 package xpc
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/objptr"
 	"unsafe"
 )
 
-var _ unsafe.Pointer   // suppress unused import
-var _ cgo.Object = nil // suppress unused import
+var _ unsafe.Pointer      // suppress unused import
+var _ objptr.Object = nil // suppress unused import
 
 // OS_xpc_listener corresponds to the Objective-C @protocol OS_xpc_listener.
 type OS_xpc_listener interface {
-	cgo.Object
+	objptr.Object
 }
 
 // OS_xpc_object corresponds to the Objective-C @protocol OS_xpc_object.
 type OS_xpc_object interface {
-	cgo.Object
+	objptr.Object
 }
 
 // OS_xpc_peer_requirement corresponds to the Objective-C @protocol OS_xpc_peer_requirement.
 type OS_xpc_peer_requirement interface {
-	cgo.Object
+	objptr.Object
 }
 
 // OS_xpc_session corresponds to the Objective-C @protocol OS_xpc_session.
 type OS_xpc_session interface {
-	cgo.Object
+	objptr.Object
 }

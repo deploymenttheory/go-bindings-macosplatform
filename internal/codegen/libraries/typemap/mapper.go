@@ -46,6 +46,10 @@ type Mapper struct {
 	// EnumIndex maps enum type name → owning framework.
 	// Used to resolve enum return types to their Go equivalents.
 	EnumIndex map[string]string
+	// LocalEnums maps framework name → the enum type names it declares locally.
+	// A reference from a framework that declares the enum resolves to the local
+	// copy rather than the global EnumIndex owner (see Registry.LocalEnums).
+	LocalEnums map[string]map[string]bool
 	// EnumGoTypeIndex maps enum type name → underlying Go integer type (e.g. "int64").
 	// Used by CType() and bridge emitters to produce correct C casts for enum arguments.
 	EnumGoTypeIndex map[string]string

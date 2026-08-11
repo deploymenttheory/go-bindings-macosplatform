@@ -16,6 +16,7 @@ import (
 	machvm "github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/libraries/machvm"
 	sandbox "github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/libraries/sandbox"
 	xar "github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/libraries/xar"
+	xpc "github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/libraries/xpc"
 )
 
 // TestSymbolsResolve proves each purego-backed library dlopened its dylib and
@@ -37,6 +38,7 @@ func TestSymbolsResolve(t *testing.T) {
 		{"bsm", bsm.SymbolAvailable, "audit_token_to_pid"},
 		{"libproc", libproc.SymbolAvailable, "proc_pidpath"},
 		{"endpointsecurity", endpointsecurity.SymbolAvailable, "es_new_client"},
+		{"xpc", xpc.SymbolAvailable, "xpc_int64_create"},
 	}
 	for _, c := range cases {
 		if !c.available(c.symbol) {

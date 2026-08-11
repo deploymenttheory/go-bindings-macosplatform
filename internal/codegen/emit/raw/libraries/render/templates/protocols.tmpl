@@ -18,8 +18,8 @@ import (
 {{- end}}
 )
 
-var _ unsafe.Pointer   // suppress unused import
-var _ cgo.Object = nil // suppress unused import
+var _ unsafe.Pointer        // suppress unused import
+var _ {{.RootObject}} = nil // suppress unused import
 
 {{range .Protocols}}
 {{- if .AvailComment -}}
@@ -27,7 +27,7 @@ var _ cgo.Object = nil // suppress unused import
 {{end -}}
 // {{.GoName}} corresponds to the Objective-C @protocol {{.ObjCName}}.
 type {{.GoName}} interface {
-	cgo.Object
+	{{$.RootObject}}
 {{- range .EmbedComments}}
 	{{.}}
 {{- end}}
