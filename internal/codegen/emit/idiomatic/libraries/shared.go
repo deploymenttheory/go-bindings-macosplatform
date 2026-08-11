@@ -273,7 +273,7 @@ func recordOpinionatedImports(goType string, m *typemap.Mapper, usedImports map[
 			continue
 		}
 		packageName := part[:dot]
-		if packageName == "raw" || packageName == "cgo" || packageName == "unsafe" {
+		if packageName == "raw" || packageName == "objptr" || packageName == "unsafe" {
 			continue
 		}
 		if packageName == "bsd" {

@@ -80,8 +80,8 @@ func TestCacheDifferentiatesByGenericParams(t *testing.T) {
 	if inScope != "*foundation.NSArray[T]" {
 		t.Errorf("param in scope: got %q, want *foundation.NSArray[T]", inScope)
 	}
-	if outOfScope != "*foundation.NSArray[cgo.Object]" {
-		t.Errorf("param not in scope: got %q, want *foundation.NSArray[cgo.Object]", outOfScope)
+	if outOfScope != "*foundation.NSArray[objptr.Object]" {
+		t.Errorf("param not in scope: got %q, want *foundation.NSArray[objptr.Object]", outOfScope)
 	}
 }
 

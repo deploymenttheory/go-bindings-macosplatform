@@ -138,7 +138,7 @@ func ReExportableExports(rawSrcDir string) (map[string]bool, error) {
 	return out, nil
 }
 
-// PackageExports returns every exported top-level identifier a package's non-cgo
+// PackageExports returns every exported top-level identifier a package's
 // Go files declare (types, consts, vars, and funcs). It is the idiomatic side of
 // the library parity check.
 func PackageExports(dir string) (map[string]bool, error) {
@@ -152,7 +152,7 @@ func PackageExports(dir string) (map[string]bool, error) {
 		if ent.IsDir() || !strings.HasSuffix(name, ".go") || strings.HasSuffix(name, "_test.go") {
 			continue
 		}
-		if name == "cgo.go" || name == "doc.go" {
+		if name == "doc.go" {
 			continue
 		}
 		src, rerr := os.ReadFile(filepath.Join(dir, name))
@@ -170,9 +170,9 @@ func PackageExports(dir string) (map[string]bool, error) {
 	return out, nil
 }
 
-// collectRawExports parses every non-cgo Go file in the raw package directory and
+// collectRawExports parses every Go file in the raw package directory and
 // returns the exported top-level type, const, and var identifiers (sorted,
-// deduplicated). Functions and the cgo/doc scaffolding files are skipped.
+// deduplicated). Functions and doc.go are skipped.
 func collectRawExports(rawSrcDir string) (types, consts, vars []string, err error) {
 	entries, err := os.ReadDir(rawSrcDir)
 	if err != nil {
@@ -185,9 +185,8 @@ func collectRawExports(rawSrcDir string) (types, consts, vars []string, err erro
 		if ent.IsDir() || !strings.HasSuffix(name, ".go") || strings.HasSuffix(name, "_test.go") {
 			continue
 		}
-		// cgo.go carries the `import "C"` + linker directives and declares no
-		// re-exportable API; doc.go is prose only.
-		if name == "cgo.go" || name == "doc.go" {
+		// doc.go is prose only.
+		if name == "doc.go" {
 			continue
 		}
 		file, perr := parser.ParseFile(

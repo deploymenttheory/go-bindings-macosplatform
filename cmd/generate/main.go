@@ -240,11 +240,10 @@ func runBindings(args []string) {
 	// only the emitted bodies (dlopen/RegisterLibFunc instead of the bridge).
 	log.Printf("emitting C libraries → %s", *librariesOut)
 	if err := cgopipeline.GenerateBindings(cgopipeline.BindingsConfig{
-		Registry:         cgoReg,
-		FrameworksOutDir: "", // skip ObjC frameworks (handled by purego above)
-		LibrariesOutDir:  *librariesOut,
-		Verbose:          *verbose,
-		DiagnosticsSink:  &collected,
+		Registry:        cgoReg,
+		LibrariesOutDir: *librariesOut,
+		Verbose:         *verbose,
+		DiagnosticsSink: &collected,
 	}); err != nil {
 		log.Fatalf("bindings (CGo libraries): %v", err)
 	}
@@ -330,10 +329,9 @@ func runAll(args []string) {
 
 	log.Printf("emitting C libraries → %s", *librariesOut)
 	if err := cgopipeline.GenerateBindings(cgopipeline.BindingsConfig{
-		Registry:         cgoReg,
-		FrameworksOutDir: "",
-		LibrariesOutDir:  *librariesOut,
-		Verbose:          *verbose,
+		Registry:        cgoReg,
+		LibrariesOutDir: *librariesOut,
+		Verbose:         *verbose,
 	}); err != nil {
 		log.Fatalf("bindings (CGo libraries): %v", err)
 	}
