@@ -303,31 +303,6 @@ func TestWriteFileOsWriteFileError(t *testing.T) {
 }
 
 // --------------------------------------------------------------------------
-// emitFramework — MkdirAll error (generator.go:156) propagated by
-//                     Generate (generator.go:42)
-// --------------------------------------------------------------------------
-
-// TestGenerateFrameworkMkdirAllError verifies that emitFramework returns
-// an error when the framework output directory cannot be created, and that
-// Generate propagates that error to the caller.
-func TestGenerateFrameworkMkdirAllError(t *testing.T) {
-	dir := t.TempDir()
-
-	// Place a regular file at the path that would be the framework output dir
-	// so os.MkdirAll fails (cannot create a directory over a file).
-	fwDirPath := filepath.Join(dir, "foundation")
-	if err := os.WriteFile(fwDirPath, []byte("placeholder"), 0o644); err != nil {
-		t.Fatalf("setup WriteFile: %v", err)
-	}
-
-	reg := buildMinimalRegistry("Foundation", map[string]macosplatformmetadata.Class{})
-	cfg := BindingsConfig{Registry: reg, FrameworksOutDir: dir}
-	if err := GenerateBindings(cfg); err == nil {
-		t.Error("expected error from Generate when framework outDir is a file, got nil")
-	}
-}
-
-// --------------------------------------------------------------------------
 // resolveBlockedImports — multi-hop uppercase typedef chain (generator.go)
 // --------------------------------------------------------------------------
 

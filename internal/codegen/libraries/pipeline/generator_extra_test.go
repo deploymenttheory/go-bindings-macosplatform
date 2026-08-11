@@ -173,17 +173,12 @@ func buildMinimalRegistry(frameworkName string, cls map[string]macosplatformmeta
 	return reg
 }
 
-// makeBindingsCfg returns a BindingsConfig with BlocksDir and CallbacksDir
-// set to temporary subdirectories so tests never write to the real repo paths.
+// makeBindingsCfg returns a BindingsConfig writing to a temporary frameworks dir.
 func makeBindingsCfg(t *testing.T, reg *Registry, frameworksOutDir string) BindingsConfig {
 	t.Helper()
-	bd := t.TempDir()
-	cd := t.TempDir()
 	return BindingsConfig{
 		Registry:         reg,
 		FrameworksOutDir: frameworksOutDir,
-		BlocksDir:        bd,
-		CallbacksDir:     cd,
 	}
 }
 
