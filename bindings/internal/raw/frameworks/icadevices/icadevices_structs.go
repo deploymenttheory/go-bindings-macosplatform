@@ -389,7 +389,7 @@ type ObjectInfo struct {
 	Name             [32]uint8
 	CreationDate     [20]uint8
 	Flags            uint32
-	PrivateData      string
+	PrivateData      *byte
 	UniqueIDFireWire uint64
 	Tag              uint32
 	DataSize64       uint64
@@ -408,7 +408,7 @@ type ScannerObjectInfo struct {
 	Name             [32]uint8
 	CreationDate     [20]uint8
 	Flags            uint32
-	PrivateData      string
+	PrivateData      *byte
 	Tag              uint32
 }
 

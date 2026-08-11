@@ -139,7 +139,7 @@ type Krb5CryptosystemEntry struct{}
 type Krb5Data struct {
 	Magic  int32
 	Length uint32
-	Data   string
+	Data   *byte
 }
 
 // C struct: _krb5_enc_data
@@ -480,8 +480,8 @@ type CcCredentialsV4T struct {
 // If a cc_credentials_t variable is used to store Kerberos v5 c redentials, and then credentials.credentials_v5 points to a v5 credentials structure.  This structure is similar to a krb5_creds structure.
 // C struct: cc_credentials_v5_t
 type CcCredentialsV5T struct {
-	Client        string
-	Server        string
+	Client        *byte
+	Server        *byte
 	Keyblock      CcData
 	Authtime      uint32
 	Starttime     uint32
@@ -527,7 +527,7 @@ type Credentials struct{}
 
 // C struct: error_table
 type ErrorTable struct {
-	Messages string
+	Messages *byte
 	Base     int32
 	Count    int32
 }

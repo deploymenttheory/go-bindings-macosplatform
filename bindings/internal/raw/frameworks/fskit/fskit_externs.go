@@ -48,12 +48,9 @@ func FSKitVersionNumber() float64 {
 	return *(*float64)(unsafe.Pointer(ptr))
 }
 
-func FSKitVersionString() []unsafe.Pointer {
+func FSKitVersionString() uintptr {
 	ptr, _ := purego.Dlsym(_fskitLib, "FSKitVersionString")
-	if ptr == 0 {
-		return []unsafe.Pointer{}
-	}
-	return *(*[]unsafe.Pointer)(unsafe.Pointer(ptr))
+	return ptr
 }
 
 func FSOperationIDUnspecified() uint {

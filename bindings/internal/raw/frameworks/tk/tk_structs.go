@@ -361,11 +361,11 @@ type XFontSetExtents struct {
 type XHostAddress struct {
 	Family  int32
 	Length  int32
-	Address string
+	Address *byte
 }
 
 type XIMCallback struct {
-	Client_data string
+	Client_data *byte
 	Callback    unsafe.Pointer
 }
 
@@ -421,7 +421,7 @@ type XSegment struct {
 }
 
 type XmbTextItem struct {
-	Chars    string
+	Chars    *byte
 	Nchars   int32
 	Delta    int32
 	Font_set unsafe.Pointer
@@ -442,7 +442,7 @@ type XDisplay struct {
 	Conn_checker          int32
 	Proto_major_version   int32
 	Proto_minor_version   int32
-	Vendor                string
+	Vendor                *byte
 	Resource_base         int32
 	Resource_mask         int32
 	Resource_id           int32
@@ -460,14 +460,14 @@ type XDisplay struct {
 	Tail                  unsafe.Pointer
 	Qlen                  int32
 	Request               uint
-	Last_req              string
-	Buffer                string
-	Bufptr                string
-	Bufmax                string
+	Last_req              *byte
+	Buffer                *byte
+	Bufptr                *byte
+	Bufmax                *byte
 	Max_request_size      uint32
 	Db                    unsafe.Pointer
 	Synchandler           unsafe.Pointer
-	Display_name          string
+	Display_name          *byte
 	Default_screen        int32
 	Nscreens              int32
 	Screens               unsafe.Pointer
@@ -478,8 +478,8 @@ type XDisplay struct {
 	Keysyms               *int32
 	Modifiermap           unsafe.Pointer
 	Keysyms_per_keycode   int32
-	Xdefaults             string
-	Scratch_buffer        string
+	Xdefaults             *byte
+	Scratch_buffer        *byte
 	Scratch_length        uint
 	Ext_number            int32
 	Ext_procs             unsafe.Pointer
@@ -545,7 +545,7 @@ type XExtData struct {
 	Number       int32
 	Next         *XExtData
 	Free_private unsafe.Pointer
-	Private_data string
+	Private_data *byte
 }
 
 // C struct: _XFontSet
@@ -595,7 +595,7 @@ type XImage struct {
 	Height           int32
 	Xoffset          int32
 	Format           int32
-	Data             string
+	Data             *byte
 	Byte_order       int32
 	Bitmap_unit      int32
 	Bitmap_bit_order int32
@@ -606,7 +606,7 @@ type XImage struct {
 	Red_mask         uint
 	Green_mask       uint
 	Blue_mask        uint
-	Obdata           string
+	Obdata           *byte
 	F                unsafe.Pointer
 }
 

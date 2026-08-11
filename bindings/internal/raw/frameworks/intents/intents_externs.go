@@ -200,10 +200,7 @@ func IntentsVersionNumber() float64 {
 	return *(*float64)(unsafe.Pointer(ptr))
 }
 
-func IntentsVersionString() []unsafe.Pointer {
+func IntentsVersionString() uintptr {
 	ptr, _ := purego.Dlsym(_intentsLib, "IntentsVersionString")
-	if ptr == 0 {
-		return []unsafe.Pointer{}
-	}
-	return *(*[]unsafe.Pointer)(unsafe.Pointer(ptr))
+	return ptr
 }

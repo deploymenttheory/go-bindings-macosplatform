@@ -4,10 +4,7 @@
 
 package xar
 
-import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo"
-	"unsafe"
-)
+import "unsafe"
 
 // [xar.h:59]
 type XarHeader struct {
@@ -21,7 +18,7 @@ type XarHeader struct {
 
 // [xar.h:88]
 type XarStream struct {
-	Next_out  string
+	Next_out  *byte
 	Avail_out uint32
 	Total_in  uint64
 	Total_out uint64
@@ -44,7 +41,6 @@ func NewXarFileT(ptr unsafe.Pointer) *XarFileT {
 		return nil
 	}
 	o := &XarFileT{ptr: ptr}
-	cgo.Track(o, o.Ptr)
 	return o
 }
 
@@ -64,7 +60,6 @@ func NewXarIterT(ptr unsafe.Pointer) *XarIterT {
 		return nil
 	}
 	o := &XarIterT{ptr: ptr}
-	cgo.Track(o, o.Ptr)
 	return o
 }
 
@@ -84,7 +79,6 @@ func NewXarSignatureT(ptr unsafe.Pointer) *XarSignatureT {
 		return nil
 	}
 	o := &XarSignatureT{ptr: ptr}
-	cgo.Track(o, o.Ptr)
 	return o
 }
 
@@ -104,7 +98,6 @@ func NewXarSubdocT(ptr unsafe.Pointer) *XarSubdocT {
 		return nil
 	}
 	o := &XarSubdocT{ptr: ptr}
-	cgo.Track(o, o.Ptr)
 	return o
 }
 
@@ -124,7 +117,6 @@ func NewXarT(ptr unsafe.Pointer) *XarT {
 		return nil
 	}
 	o := &XarT{ptr: ptr}
-	cgo.Track(o, o.Ptr)
 	return o
 }
 

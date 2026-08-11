@@ -4,10 +4,10 @@
 
 package machinit
 
-// #include "bridge/machinit_bridge.h"
-import "C"
-
-import "unsafe"
+import (
+	"github.com/ebitengine/purego"
+	"unsafe"
+)
 
 var (
 	// [mach_init.h:92]
@@ -19,9 +19,14 @@ var (
 	Vprintf_stderr_func unsafe.Pointer
 )
 
-// init populates the extern vars from the C globals via bridge address
-// getters, so package consumers read live values rather than zero stubs.
-func init() {
-	Bootstrap_port = *(*uint32)(C.machinit_extern_bootstrap_port())
-	Mach_task_self_ = *(*uint32)(C.machinit_extern_mach_task_self_())
+// _initExterns populates the extern vars once the dylib is loaded. An
+// extern whose symbol does not resolve keeps its zero value, matching the
+// CGo emission's unsupported-shape behaviour.
+func _initExterns(lib uintptr) {
+	if _addr, _ := purego.Dlsym(lib, "bootstrap_port"); _addr != 0 {
+		Bootstrap_port = *(*uint32)(unsafe.Pointer(_addr))
+	}
+	if _addr, _ := purego.Dlsym(lib, "mach_task_self_"); _addr != 0 {
+		Mach_task_self_ = *(*uint32)(unsafe.Pointer(_addr))
+	}
 }

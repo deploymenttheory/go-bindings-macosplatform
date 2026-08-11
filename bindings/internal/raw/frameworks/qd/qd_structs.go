@@ -14,7 +14,7 @@ type AsscEntry struct {
 }
 
 type BitMap struct {
-	BaseAddr string
+	BaseAddr *byte
 	RowBytes int16
 	Bounds   Rect
 }
@@ -78,7 +78,7 @@ type CMAppleProfileHeader struct {
 }
 
 type CMBitmap struct {
-	Image     string
+	Image     *byte
 	Width     uint
 	Height    uint
 	RowBytes  uint
@@ -827,7 +827,7 @@ type Picture struct {
 }
 
 type PixMap struct {
-	BaseAddr    string
+	BaseAddr    *byte
 	RowBytes    int16
 	Bounds      Rect
 	PmVersion   int16
@@ -881,7 +881,7 @@ type StyleTable struct {
 }
 
 type VDGammaRecord struct {
-	CsGTable string
+	CsGTable *byte
 }
 
 // CM2ProfilePtr is an opaque pointer to CM2Profile (C typedef CM2ProfilePtr).

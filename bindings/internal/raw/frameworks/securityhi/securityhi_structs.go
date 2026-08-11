@@ -15,7 +15,7 @@ type OpaqueURLReference struct{}
 type URLCallbackInfo struct {
 	Version     uint32
 	UrlRef      unsafe.Pointer
-	Property    string
+	Property    *byte
 	CurrentSize uint32
 	SystemEvent *hitoolbox.EventRecord
 }

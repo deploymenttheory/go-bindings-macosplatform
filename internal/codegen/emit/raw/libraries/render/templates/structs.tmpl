@@ -34,8 +34,8 @@ func New{{.GoName}}(ptr unsafe.Pointer) *{{.GoName}} {
 		return nil
 	}
 	o := &{{.GoName}}{ptr: ptr}
-	cgo.Track(o, o.Ptr)
-	return o
+{{if not .NoTrack}}	cgo.Track(o, o.Ptr)
+{{end}}	return o
 }
 
 {{end}}

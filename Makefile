@@ -11,6 +11,7 @@ help:
 	@echo "  generate      Re-emit all bindings from committed metadata (no Clang scan)"
 	@echo "  build         Build all binding packages, opinionated tools, and examples"
 	@echo "  test          Run internal unit tests"
+	@echo "  purego-test   Live tests for purego-backed C libraries with CGO_ENABLED=0"
 	@echo "  lint          Run golangci-lint"
 	@echo "  version       Detect macOS/SDK versions and check acceptance test compatibility"
 	@echo "  acc-generate  Generate the dynamic acceptance test file (ACC_N, ACC_SEED)"
@@ -29,6 +30,11 @@ build:
 
 test:
 	go test ./internal/...
+
+# Live acceptance for the purego-backed C libraries, with cgo disabled — the
+# suite compiling at all proves the migrated libraries are pure Go.
+purego-test:
+	CGO_ENABLED=0 go test ./bindings/acceptance/puregolibs/ -count=1 -v
 
 lint:
 	golangci-lint run --timeout 30m

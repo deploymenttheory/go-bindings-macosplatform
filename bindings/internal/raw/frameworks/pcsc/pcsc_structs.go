@@ -155,7 +155,7 @@ type MSCTokenInfo struct {
 }
 
 type SCARD_READERSTATE_A struct {
-	SzReader       string
+	SzReader       *byte
 	PvUserData     unsafe.Pointer
 	DwCurrentState uint32
 	DwEventState   uint32

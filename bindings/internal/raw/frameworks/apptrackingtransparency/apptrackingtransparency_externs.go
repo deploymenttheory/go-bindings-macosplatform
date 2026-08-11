@@ -17,10 +17,7 @@ func AppTrackingTransparencyVersionNumber() float64 {
 	return *(*float64)(unsafe.Pointer(ptr))
 }
 
-func AppTrackingTransparencyVersionString() []unsafe.Pointer {
+func AppTrackingTransparencyVersionString() uintptr {
 	ptr, _ := purego.Dlsym(_apptrackingtransparencyLib, "AppTrackingTransparencyVersionString")
-	if ptr == 0 {
-		return []unsafe.Pointer{}
-	}
-	return *(*[]unsafe.Pointer)(unsafe.Pointer(ptr))
+	return ptr
 }

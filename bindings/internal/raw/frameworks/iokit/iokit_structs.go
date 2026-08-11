@@ -14,7 +14,7 @@ type IOAsyncCompletionContent struct {
 
 type IONamedValue struct {
 	Value int32
-	Name  string
+	Name  *byte
 }
 
 // IONotificationPort is an opaque type.

@@ -19,15 +19,15 @@ type TW_AUDIOINFO struct {
 }
 
 type TW_CALLBACK struct {
-	CallBackProc string
-	RefCon       string
+	CallBackProc *byte
+	RefCon       *byte
 	Message      int16
 }
 
 type TW_CAPABILITY struct {
 	Cap        uint16
 	ConType    uint16
-	HContainer string
+	HContainer *byte
 }
 
 type TW_CAPEXT struct {
@@ -57,7 +57,7 @@ type TW_CIEPOINT struct {
 
 type TW_CUSTOMDSDATA struct {
 	InfoLength uint32
-	HData      string
+	HData      *byte
 }
 
 type TW_DECODEFUNCTION struct {
@@ -101,7 +101,7 @@ type TW_ENUMERATION struct {
 }
 
 type TW_EVENT struct {
-	PEvent    string
+	PEvent    *byte
 	TWMessage uint16
 }
 
@@ -113,7 +113,7 @@ type TW_EXTIMAGEINFO struct {
 type TW_FILESYSTEM struct {
 	InputName        [256]uint8
 	OutputName       [256]uint8
-	Context          string
+	Context          *byte
 	Recursive        int32
 	FileType         int32
 	Size             uint32
@@ -220,10 +220,10 @@ type TW_PALETTE8 struct {
 }
 
 type TW_PASSTHRU struct {
-	PCommand        string
+	PCommand        *byte
 	CommandBytes    uint32
 	Direction       int32
-	PData           string
+	PData           *byte
 	DataBytes       uint32
 	DataBytesXfered uint32
 }
@@ -259,7 +259,7 @@ type TW_SETUPFILEXFER struct {
 }
 
 type TW_SETUPFILEXFER2 struct {
-	FileName     string
+	FileName     *byte
 	FileNameType uint16
 	Format       uint16
 	VRefNum      int16
@@ -305,7 +305,7 @@ type TW_TWUNKIDENTITY struct {
 type TW_USERINTERFACE struct {
 	ShowUI  uint16
 	ModalUI uint16
-	HParent string
+	HParent *byte
 }
 
 type TW_VERSION struct {

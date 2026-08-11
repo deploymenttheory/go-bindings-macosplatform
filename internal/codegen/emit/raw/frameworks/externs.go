@@ -82,7 +82,18 @@ func EmitExterns(
 		if goType == "" {
 			goType = mapper.GoType(ext.ObjCType, ctx, imports)
 		}
-		if goType == "" || goType == "unsafe.Pointer" || isUnexportedXPkg(goType) {
+		// The typed accessor dereferences the dlsym'd address AT goType, so the
+		// Go width must equal the C object's width: narrow platform-width int
+		// spellings to their fixed-width form (mach_port_t/unsigned int → uint32,
+		// not uint — an 8-byte read of a 4-byte global returns garbage high bits).
+		goType = mapper.GoABIType(ext.ObjCType, goType)
+		// A slice type is never the layout of a C global — it arises from an
+		// unsized C array extern (const char kSBXProfileNoInternet[]), where the
+		// dlsym'd symbol IS the array storage. Dereferencing it at a Go slice
+		// header would misread the bytes as pointer/len/cap; surface the raw
+		// symbol address instead.
+		if goType == "" || goType == "unsafe.Pointer" || isUnexportedXPkg(goType) ||
+			strings.HasPrefix(goType, "[]") {
 			views = append(views, buildExternRawView(ext, dylibVarName))
 			continue
 		}

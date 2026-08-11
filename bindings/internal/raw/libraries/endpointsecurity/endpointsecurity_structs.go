@@ -1148,7 +1148,7 @@ type EsSignedFileInfoT struct {
 // [ESTypes.h:404]
 type EsStringTokenT struct {
 	Length uint64
-	Data   string
+	Data   *byte
 }
 
 // @brief Provides context about failures in es_event_sudo_t. @field plugin_name      The sudo plugin that initiated the reject @field plugin_type      The sudo plugin type that initiated the reject @field failure_message  A reason represented by a string for the failure

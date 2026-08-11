@@ -281,10 +281,7 @@ func IOUSBHostVersionNumber() float64 {
 	return *(*float64)(unsafe.Pointer(ptr))
 }
 
-func IOUSBHostVersionString() []unsafe.Pointer {
+func IOUSBHostVersionString() uintptr {
 	ptr, _ := purego.Dlsym(_iousbhostLib, "IOUSBHostVersionString")
-	if ptr == 0 {
-		return []unsafe.Pointer{}
-	}
-	return *(*[]unsafe.Pointer)(unsafe.Pointer(ptr))
+	return ptr
 }

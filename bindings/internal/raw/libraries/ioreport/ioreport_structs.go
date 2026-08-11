@@ -4,10 +4,7 @@
 
 package ioreport
 
-import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo"
-	"unsafe"
-)
+import "unsafe"
 
 type IOReportSubscriptionRef struct {
 	ptr unsafe.Pointer
@@ -25,6 +22,5 @@ func NewIOReportSubscriptionRef(ptr unsafe.Pointer) *IOReportSubscriptionRef {
 		return nil
 	}
 	o := &IOReportSubscriptionRef{ptr: ptr}
-	cgo.Track(o, o.Ptr)
 	return o
 }

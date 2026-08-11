@@ -4,15 +4,91 @@
 
 package xar
 
-// #include "bridge/xar_bridge.h"
-import "C"
-
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo"
+	"runtime"
 	"unsafe"
 )
 
-var _ unsafe.Pointer // suppress unused import
+var (
+	_pg_xar_open                                func(string, int32) unsafe.Pointer
+	_pg_xar_open_digest_verify                  func(string, int32, unsafe.Pointer, uint64) unsafe.Pointer
+	_pg_xar_fdopen_digest_verify                func(int32, int32, unsafe.Pointer, uint64) unsafe.Pointer
+	_pg_xar_close                               func(unsafe.Pointer) int32
+	_pg_xar_header_get                          func(unsafe.Pointer) XarHeader
+	_pg_xar_add                                 func(unsafe.Pointer, string) unsafe.Pointer
+	_pg_xar_add_frombuffer                      func(unsafe.Pointer, unsafe.Pointer, string, string, uint64) unsafe.Pointer
+	_pg_xar_add_folder                          func(unsafe.Pointer, unsafe.Pointer, string, unsafe.Pointer) unsafe.Pointer
+	_pg_xar_add_frompath                        func(unsafe.Pointer, unsafe.Pointer, string, string) unsafe.Pointer
+	_pg_xar_add_from_archive                    func(unsafe.Pointer, unsafe.Pointer, string, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_pg_xar_extract                             func(unsafe.Pointer, unsafe.Pointer) int32
+	_pg_xar_extract_tofile                      func(unsafe.Pointer, unsafe.Pointer, string) int32
+	_pg_xar_extract_tobuffer                    func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	_pg_xar_extract_tobuffersz                  func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *uint64) int32
+	_pg_xar_extract_tostream_init               func(unsafe.Pointer, unsafe.Pointer, *XarStream) int32
+	_pg_xar_extract_tostream                    func(*XarStream) int32
+	_pg_xar_extract_tostream_end                func(*XarStream) int32
+	_pg_xar_verify                              func(unsafe.Pointer, unsafe.Pointer) int32
+	_pg_xar_get_toc_checksum                    func(unsafe.Pointer, *uint64) unsafe.Pointer
+	_pg_xar_get_toc_checksum_type               func(unsafe.Pointer) int32
+	_pg_xar_opt_get                             func(unsafe.Pointer, string) string
+	_pg_xar_opt_set                             func(unsafe.Pointer, string, string) int32
+	_pg_xar_opt_unset                           func(unsafe.Pointer, string) int32
+	_pg_xar_prop_set                            func(unsafe.Pointer, string, string) int32
+	_pg_xar_prop_create                         func(unsafe.Pointer, string, string) int32
+	_pg_xar_prop_get                            func(unsafe.Pointer, string, unsafe.Pointer) int32
+	_pg_xar_prop_get_expect_notnull             func(unsafe.Pointer, string, unsafe.Pointer) int32
+	_pg_xar_iter_new                            func() unsafe.Pointer
+	_pg_xar_iter_free                           func(unsafe.Pointer)
+	_pg_xar_prop_first                          func(unsafe.Pointer, unsafe.Pointer) string
+	_pg_xar_prop_next                           func(unsafe.Pointer) string
+	_pg_xar_prop_unset                          func(unsafe.Pointer, string)
+	_pg_xar_file_first                          func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_pg_xar_file_next                           func(unsafe.Pointer) unsafe.Pointer
+	_pg_xar_attr_get                            func(unsafe.Pointer, string, string) string
+	_pg_xar_attr_set                            func(unsafe.Pointer, string, string, string) int32
+	_pg_xar_attr_first                          func(unsafe.Pointer, string, unsafe.Pointer) string
+	_pg_xar_attr_next                           func(unsafe.Pointer) string
+	_pg_xar_subdoc_new                          func(unsafe.Pointer, string) unsafe.Pointer
+	_pg_xar_subdoc_prop_set                     func(unsafe.Pointer, string, string) int32
+	_pg_xar_subdoc_prop_get                     func(unsafe.Pointer, string, unsafe.Pointer) int32
+	_pg_xar_subdoc_attr_set                     func(unsafe.Pointer, string, string, string) int32
+	_pg_xar_subdoc_attr_get                     func(unsafe.Pointer, string, string) string
+	_pg_xar_subdoc_first                        func(unsafe.Pointer) unsafe.Pointer
+	_pg_xar_subdoc_next                         func(unsafe.Pointer) unsafe.Pointer
+	_pg_xar_subdoc_name                         func(unsafe.Pointer) string
+	_pg_xar_subdoc_copyout                      func(unsafe.Pointer, unsafe.Pointer, *uint32) int32
+	_pg_xar_subdoc_copyin                       func(unsafe.Pointer, *uint8, uint32) int32
+	_pg_xar_subdoc_remove                       func(unsafe.Pointer)
+	_pg_xar_signature_type                      func(unsafe.Pointer) string
+	_pg_xar_signature_first                     func(unsafe.Pointer) unsafe.Pointer
+	_pg_xar_signature_next                      func(unsafe.Pointer) unsafe.Pointer
+	_pg_xar_signature_add_x509certificate       func(unsafe.Pointer, *uint8, uint32) int32
+	_pg_xar_signature_get_x509certificate_count func(unsafe.Pointer) int32
+	_pg_xar_signature_get_x509certificate_data  func(unsafe.Pointer, int32, unsafe.Pointer, *uint32) int32
+	_pg_xar_signature_copy_signed_data          func(unsafe.Pointer, unsafe.Pointer, *uint32, unsafe.Pointer, *uint32, *int64) uint8
+	_pg_xar_get_size                            func(unsafe.Pointer, unsafe.Pointer) string
+	_pg_xar_get_type                            func(unsafe.Pointer, unsafe.Pointer) string
+	_pg_xar_get_mode                            func(unsafe.Pointer, unsafe.Pointer) string
+	_pg_xar_get_owner                           func(unsafe.Pointer, unsafe.Pointer) string
+	_pg_xar_get_group                           func(unsafe.Pointer, unsafe.Pointer) string
+	_pg_xar_get_mtime                           func(unsafe.Pointer, unsafe.Pointer) string
+	_pg_xar_path_issane                         func(string) int32
+	_pg_xar_err_get_archive                     func(unsafe.Pointer) unsafe.Pointer
+	_pg_xar_err_get_file                        func(unsafe.Pointer) unsafe.Pointer
+	_pg_xar_err_get_string                      func(unsafe.Pointer) string
+	_pg_xar_err_get_errno                       func(unsafe.Pointer) int32
+	_pg_xar_err_set_file                        func(unsafe.Pointer, unsafe.Pointer)
+	_pg_xar_err_set_string                      func(unsafe.Pointer, string)
+	_pg_xar_err_set_errno                       func(unsafe.Pointer, int32)
+	_pg_xar_err_new                             func(unsafe.Pointer)
+	_pg_xar_err_callback                        func(unsafe.Pointer, int32, int32) int32
+	_pg_xar_serialize                           func(unsafe.Pointer, string)
+	_pg_xar_get_path                            func(unsafe.Pointer) string
+	_pg_xar_get_safe_path                       func(unsafe.Pointer) string
+	_pg_xar_get_heap_offset                     func(unsafe.Pointer) int64
+	_pg_xar_ntoh64                              func(uint64) uint64
+	_pg_xar_get_archive_fd                      func(unsafe.Pointer) int32
+)
 
 // [xar.h:158]
 // Introduced: macOS 10.4
@@ -20,11 +96,7 @@ var _ unsafe.Pointer // suppress unused import
 // Deprecated: Deprecated in macOS 12.0. xar is a deprecated file format and should not be used.
 // ID: objc-sym xar.xar_open
 func Xar_open(file string, flags int32) *XarT {
-	_cstr_file := C.CString(file)
-	defer C.free(unsafe.Pointer(_cstr_file))
-	var _exc unsafe.Pointer
-	_ptr := unsafe.Pointer(C.xar_fn_xar_open(_cstr_file, C.int32_t(flags), &_exc))
-	cgo.RaiseIfException(_exc)
+	_ptr := _pg_xar_open(file, flags)
 	return NewXarT(_ptr)
 }
 
@@ -34,11 +106,7 @@ func Xar_open(file string, flags int32) *XarT {
 // Deprecated: Deprecated in macOS 12.0. xar is a deprecated file format and should not be used.
 // ID: objc-sym xar.xar_open_digest_verify
 func Xar_open_digest_verify(file string, flags int32, expected_toc_digest unsafe.Pointer, expected_toc_digest_len uint64) *XarT {
-	_cstr_file := C.CString(file)
-	defer C.free(unsafe.Pointer(_cstr_file))
-	var _exc unsafe.Pointer
-	_ptr := unsafe.Pointer(C.xar_fn_xar_open_digest_verify(_cstr_file, C.int32_t(flags), expected_toc_digest, C.uint64_t(expected_toc_digest_len), &_exc))
-	cgo.RaiseIfException(_exc)
+	_ptr := _pg_xar_open_digest_verify(file, flags, expected_toc_digest, expected_toc_digest_len)
 	return NewXarT(_ptr)
 }
 
@@ -48,9 +116,7 @@ func Xar_open_digest_verify(file string, flags int32, expected_toc_digest unsafe
 // Deprecated: Deprecated in macOS 15.0. xar is a deprecated file format and should not be used.
 // ID: objc-sym xar.xar_fdopen_digest_verify
 func Xar_fdopen_digest_verify(fd int32, flags int32, expected_toc_digest unsafe.Pointer, expected_toc_digest_len uint64) *XarT {
-	var _exc unsafe.Pointer
-	_ptr := unsafe.Pointer(C.xar_fn_xar_fdopen_digest_verify(C.int32_t(fd), C.int32_t(flags), expected_toc_digest, C.uint64_t(expected_toc_digest_len), &_exc))
-	cgo.RaiseIfException(_exc)
+	_ptr := _pg_xar_fdopen_digest_verify(fd, flags, expected_toc_digest, expected_toc_digest_len)
 	return NewXarT(_ptr)
 }
 
@@ -60,15 +126,12 @@ func Xar_fdopen_digest_verify(fd int32, flags int32, expected_toc_digest unsafe.
 // Deprecated: Deprecated in macOS 15.0. xar is a deprecated file format and should not be used.
 // ID: objc-sym xar.xar_close
 func Xar_close(x *XarT) int32 {
-	defer cgo.KeepAlive(x)
-	var _objcPtr_x unsafe.Pointer
+	var _ptr_x unsafe.Pointer
 	if x != nil {
-		_objcPtr_x = x.Ptr()
+		_ptr_x = x.Ptr()
 	}
-	var _exc unsafe.Pointer
-	_result := int32(C.xar_fn_xar_close(_objcPtr_x, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	defer runtime.KeepAlive(x)
+	return _pg_xar_close(_ptr_x)
 }
 
 // [xar.h:164]
@@ -77,1108 +140,845 @@ func Xar_close(x *XarT) int32 {
 // Deprecated: Deprecated in macOS 15.0. xar is a deprecated file format and should not be used.
 // ID: objc-sym xar.xar_header_get
 func Xar_header_get(x *XarT) XarHeader {
-	defer cgo.KeepAlive(x)
-	var _objcPtr_x unsafe.Pointer
+	var _ptr_x unsafe.Pointer
 	if x != nil {
-		_objcPtr_x = x.Ptr()
+		_ptr_x = x.Ptr()
 	}
-	var _exc unsafe.Pointer
-	_ptr := unsafe.Pointer(C.xar_fn_xar_header_get(_objcPtr_x, &_exc))
-	cgo.RaiseIfException(_exc)
-	if _ptr == nil {
-		return XarHeader{}
-	}
-	_result := *(*XarHeader)(unsafe.Pointer(_ptr))
-	cgo.FreePtr(_ptr)
-	return _result
+	defer runtime.KeepAlive(x)
+	return _pg_xar_header_get(_ptr_x)
 }
 
 // [xar.h:166]
 // ID: objc-sym xar.xar_add
 func Xar_add(x *XarT, path string) *XarFileT {
-	defer cgo.KeepAlive(x)
-	var _objcPtr_x unsafe.Pointer
+	var _ptr_x unsafe.Pointer
 	if x != nil {
-		_objcPtr_x = x.Ptr()
+		_ptr_x = x.Ptr()
 	}
-	_cstr_path := C.CString(path)
-	defer C.free(unsafe.Pointer(_cstr_path))
-	var _exc unsafe.Pointer
-	_ptr := unsafe.Pointer(C.xar_fn_xar_add(_objcPtr_x, _cstr_path, &_exc))
-	cgo.RaiseIfException(_exc)
+	defer runtime.KeepAlive(x)
+	_ptr := _pg_xar_add(_ptr_x, path)
 	return NewXarFileT(_ptr)
 }
 
 // [xar.h:167]
 // ID: objc-sym xar.xar_add_frombuffer
 func Xar_add_frombuffer(x *XarT, parent *XarFileT, name string, buffer string, length uint64) *XarFileT {
-	defer cgo.KeepAlive(x)
-	defer cgo.KeepAlive(parent)
-	var _objcPtr_x unsafe.Pointer
+	var _ptr_x unsafe.Pointer
 	if x != nil {
-		_objcPtr_x = x.Ptr()
+		_ptr_x = x.Ptr()
 	}
-	var _objcPtr_parent unsafe.Pointer
+	var _ptr_parent unsafe.Pointer
 	if parent != nil {
-		_objcPtr_parent = parent.Ptr()
+		_ptr_parent = parent.Ptr()
 	}
-	_cstr_name := C.CString(name)
-	defer C.free(unsafe.Pointer(_cstr_name))
-	_cstr_buffer := C.CString(buffer)
-	defer C.free(unsafe.Pointer(_cstr_buffer))
-	var _exc unsafe.Pointer
-	_ptr := unsafe.Pointer(C.xar_fn_xar_add_frombuffer(_objcPtr_x, _objcPtr_parent, _cstr_name, _cstr_buffer, C.uint64_t(length), &_exc))
-	cgo.RaiseIfException(_exc)
+	defer runtime.KeepAlive(x)
+	defer runtime.KeepAlive(parent)
+	_ptr := _pg_xar_add_frombuffer(_ptr_x, _ptr_parent, name, buffer, length)
 	return NewXarFileT(_ptr)
 }
 
 // [xar.h:168]
 // ID: objc-sym xar.xar_add_folder
 func Xar_add_folder(x *XarT, f *XarFileT, name string, info unsafe.Pointer) *XarFileT {
-	defer cgo.KeepAlive(x)
-	defer cgo.KeepAlive(f)
-	var _objcPtr_x unsafe.Pointer
+	var _ptr_x unsafe.Pointer
 	if x != nil {
-		_objcPtr_x = x.Ptr()
+		_ptr_x = x.Ptr()
 	}
-	var _objcPtr_f unsafe.Pointer
+	var _ptr_f unsafe.Pointer
 	if f != nil {
-		_objcPtr_f = f.Ptr()
+		_ptr_f = f.Ptr()
 	}
-	_cstr_name := C.CString(name)
-	defer C.free(unsafe.Pointer(_cstr_name))
-	var _exc unsafe.Pointer
-	_ptr := unsafe.Pointer(C.xar_fn_xar_add_folder(_objcPtr_x, _objcPtr_f, _cstr_name, info, &_exc))
-	cgo.RaiseIfException(_exc)
+	defer runtime.KeepAlive(x)
+	defer runtime.KeepAlive(f)
+	_ptr := _pg_xar_add_folder(_ptr_x, _ptr_f, name, info)
 	return NewXarFileT(_ptr)
 }
 
 // [xar.h:169]
 // ID: objc-sym xar.xar_add_frompath
 func Xar_add_frompath(x *XarT, parent *XarFileT, name string, realpath string) *XarFileT {
-	defer cgo.KeepAlive(x)
-	defer cgo.KeepAlive(parent)
-	var _objcPtr_x unsafe.Pointer
+	var _ptr_x unsafe.Pointer
 	if x != nil {
-		_objcPtr_x = x.Ptr()
+		_ptr_x = x.Ptr()
 	}
-	var _objcPtr_parent unsafe.Pointer
+	var _ptr_parent unsafe.Pointer
 	if parent != nil {
-		_objcPtr_parent = parent.Ptr()
+		_ptr_parent = parent.Ptr()
 	}
-	_cstr_name := C.CString(name)
-	defer C.free(unsafe.Pointer(_cstr_name))
-	_cstr_realpath := C.CString(realpath)
-	defer C.free(unsafe.Pointer(_cstr_realpath))
-	var _exc unsafe.Pointer
-	_ptr := unsafe.Pointer(C.xar_fn_xar_add_frompath(_objcPtr_x, _objcPtr_parent, _cstr_name, _cstr_realpath, &_exc))
-	cgo.RaiseIfException(_exc)
+	defer runtime.KeepAlive(x)
+	defer runtime.KeepAlive(parent)
+	_ptr := _pg_xar_add_frompath(_ptr_x, _ptr_parent, name, realpath)
 	return NewXarFileT(_ptr)
 }
 
 // [xar.h:171]
 // ID: objc-sym xar.xar_add_from_archive
 func Xar_add_from_archive(x *XarT, parent *XarFileT, name string, sourcearchive *XarT, sourcefile *XarFileT) *XarFileT {
-	defer cgo.KeepAlive(x)
-	defer cgo.KeepAlive(parent)
-	defer cgo.KeepAlive(sourcearchive)
-	defer cgo.KeepAlive(sourcefile)
-	var _objcPtr_x unsafe.Pointer
+	var _ptr_x unsafe.Pointer
 	if x != nil {
-		_objcPtr_x = x.Ptr()
+		_ptr_x = x.Ptr()
 	}
-	var _objcPtr_parent unsafe.Pointer
+	var _ptr_parent unsafe.Pointer
 	if parent != nil {
-		_objcPtr_parent = parent.Ptr()
+		_ptr_parent = parent.Ptr()
 	}
-	_cstr_name := C.CString(name)
-	defer C.free(unsafe.Pointer(_cstr_name))
-	var _objcPtr_sourcearchive unsafe.Pointer
+	var _ptr_sourcearchive unsafe.Pointer
 	if sourcearchive != nil {
-		_objcPtr_sourcearchive = sourcearchive.Ptr()
+		_ptr_sourcearchive = sourcearchive.Ptr()
 	}
-	var _objcPtr_sourcefile unsafe.Pointer
+	var _ptr_sourcefile unsafe.Pointer
 	if sourcefile != nil {
-		_objcPtr_sourcefile = sourcefile.Ptr()
+		_ptr_sourcefile = sourcefile.Ptr()
 	}
-	var _exc unsafe.Pointer
-	_ptr := unsafe.Pointer(C.xar_fn_xar_add_from_archive(_objcPtr_x, _objcPtr_parent, _cstr_name, _objcPtr_sourcearchive, _objcPtr_sourcefile, &_exc))
-	cgo.RaiseIfException(_exc)
+	defer runtime.KeepAlive(x)
+	defer runtime.KeepAlive(parent)
+	defer runtime.KeepAlive(sourcearchive)
+	defer runtime.KeepAlive(sourcefile)
+	_ptr := _pg_xar_add_from_archive(_ptr_x, _ptr_parent, name, _ptr_sourcearchive, _ptr_sourcefile)
 	return NewXarFileT(_ptr)
 }
 
 // [xar.h:173]
 // ID: objc-sym xar.xar_extract
 func Xar_extract(x *XarT, f *XarFileT) int32 {
-	defer cgo.KeepAlive(x)
-	defer cgo.KeepAlive(f)
-	var _objcPtr_x unsafe.Pointer
+	var _ptr_x unsafe.Pointer
 	if x != nil {
-		_objcPtr_x = x.Ptr()
+		_ptr_x = x.Ptr()
 	}
-	var _objcPtr_f unsafe.Pointer
+	var _ptr_f unsafe.Pointer
 	if f != nil {
-		_objcPtr_f = f.Ptr()
+		_ptr_f = f.Ptr()
 	}
-	var _exc unsafe.Pointer
-	_result := int32(C.xar_fn_xar_extract(_objcPtr_x, _objcPtr_f, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	defer runtime.KeepAlive(x)
+	defer runtime.KeepAlive(f)
+	return _pg_xar_extract(_ptr_x, _ptr_f)
 }
 
 // [xar.h:174]
 // ID: objc-sym xar.xar_extract_tofile
 func Xar_extract_tofile(x *XarT, f *XarFileT, path string) int32 {
-	defer cgo.KeepAlive(x)
-	defer cgo.KeepAlive(f)
-	var _objcPtr_x unsafe.Pointer
+	var _ptr_x unsafe.Pointer
 	if x != nil {
-		_objcPtr_x = x.Ptr()
+		_ptr_x = x.Ptr()
 	}
-	var _objcPtr_f unsafe.Pointer
+	var _ptr_f unsafe.Pointer
 	if f != nil {
-		_objcPtr_f = f.Ptr()
+		_ptr_f = f.Ptr()
 	}
-	_cstr_path := C.CString(path)
-	defer C.free(unsafe.Pointer(_cstr_path))
-	var _exc unsafe.Pointer
-	_result := int32(C.xar_fn_xar_extract_tofile(_objcPtr_x, _objcPtr_f, _cstr_path, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	defer runtime.KeepAlive(x)
+	defer runtime.KeepAlive(f)
+	return _pg_xar_extract_tofile(_ptr_x, _ptr_f, path)
 }
 
 // [xar.h:175]
 // ID: objc-sym xar.xar_extract_tobuffer
 func Xar_extract_tobuffer(x *XarT, f *XarFileT, buffer unsafe.Pointer) int32 {
-	defer cgo.KeepAlive(x)
-	defer cgo.KeepAlive(f)
-	var _objcPtr_x unsafe.Pointer
+	var _ptr_x unsafe.Pointer
 	if x != nil {
-		_objcPtr_x = x.Ptr()
+		_ptr_x = x.Ptr()
 	}
-	var _objcPtr_f unsafe.Pointer
+	var _ptr_f unsafe.Pointer
 	if f != nil {
-		_objcPtr_f = f.Ptr()
+		_ptr_f = f.Ptr()
 	}
-	var _exc unsafe.Pointer
-	_result := int32(C.xar_fn_xar_extract_tobuffer(_objcPtr_x, _objcPtr_f, buffer, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	defer runtime.KeepAlive(x)
+	defer runtime.KeepAlive(f)
+	return _pg_xar_extract_tobuffer(_ptr_x, _ptr_f, buffer)
 }
 
 // [xar.h:176]
 // ID: objc-sym xar.xar_extract_tobuffersz
 func Xar_extract_tobuffersz(x *XarT, f *XarFileT, buffer unsafe.Pointer, size *uint64) int32 {
-	defer cgo.KeepAlive(x)
-	defer cgo.KeepAlive(f)
-	var _objcPtr_x unsafe.Pointer
+	var _ptr_x unsafe.Pointer
 	if x != nil {
-		_objcPtr_x = x.Ptr()
+		_ptr_x = x.Ptr()
 	}
-	var _objcPtr_f unsafe.Pointer
+	var _ptr_f unsafe.Pointer
 	if f != nil {
-		_objcPtr_f = f.Ptr()
+		_ptr_f = f.Ptr()
 	}
-	var _exc unsafe.Pointer
-	_result := int32(C.xar_fn_xar_extract_tobuffersz(_objcPtr_x, _objcPtr_f, buffer, unsafe.Pointer(size), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	defer runtime.KeepAlive(x)
+	defer runtime.KeepAlive(f)
+	return _pg_xar_extract_tobuffersz(_ptr_x, _ptr_f, buffer, size)
 }
 
 // [xar.h:177]
 // ID: objc-sym xar.xar_extract_tostream_init
 func Xar_extract_tostream_init(x *XarT, f *XarFileT, stream *XarStream) int32 {
-	defer cgo.KeepAlive(x)
-	defer cgo.KeepAlive(f)
-	var _objcPtr_x unsafe.Pointer
+	var _ptr_x unsafe.Pointer
 	if x != nil {
-		_objcPtr_x = x.Ptr()
+		_ptr_x = x.Ptr()
 	}
-	var _objcPtr_f unsafe.Pointer
+	var _ptr_f unsafe.Pointer
 	if f != nil {
-		_objcPtr_f = f.Ptr()
+		_ptr_f = f.Ptr()
 	}
-	var _exc unsafe.Pointer
-	_result := int32(C.xar_fn_xar_extract_tostream_init(_objcPtr_x, _objcPtr_f, unsafe.Pointer(stream), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	defer runtime.KeepAlive(x)
+	defer runtime.KeepAlive(f)
+	return _pg_xar_extract_tostream_init(_ptr_x, _ptr_f, stream)
 }
 
 // [xar.h:178]
 // ID: objc-sym xar.xar_extract_tostream
 func Xar_extract_tostream(stream *XarStream) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.xar_fn_xar_extract_tostream(unsafe.Pointer(stream), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xar_extract_tostream(stream)
 }
 
 // [xar.h:179]
 // ID: objc-sym xar.xar_extract_tostream_end
 func Xar_extract_tostream_end(stream *XarStream) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.xar_fn_xar_extract_tostream_end(unsafe.Pointer(stream), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xar_extract_tostream_end(stream)
 }
 
 // [xar.h:181]
 // ID: objc-sym xar.xar_verify
 func Xar_verify(x *XarT, f *XarFileT) int32 {
-	defer cgo.KeepAlive(x)
-	defer cgo.KeepAlive(f)
-	var _objcPtr_x unsafe.Pointer
+	var _ptr_x unsafe.Pointer
 	if x != nil {
-		_objcPtr_x = x.Ptr()
+		_ptr_x = x.Ptr()
 	}
-	var _objcPtr_f unsafe.Pointer
+	var _ptr_f unsafe.Pointer
 	if f != nil {
-		_objcPtr_f = f.Ptr()
+		_ptr_f = f.Ptr()
 	}
-	var _exc unsafe.Pointer
-	_result := int32(C.xar_fn_xar_verify(_objcPtr_x, _objcPtr_f, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	defer runtime.KeepAlive(x)
+	defer runtime.KeepAlive(f)
+	return _pg_xar_verify(_ptr_x, _ptr_f)
 }
 
 // [xar.h:186]
 // ID: objc-sym xar.xar_get_toc_checksum
 func Xar_get_toc_checksum(x *XarT, buffer_size *uint64) unsafe.Pointer {
-	defer cgo.KeepAlive(x)
-	var _objcPtr_x unsafe.Pointer
+	var _ptr_x unsafe.Pointer
 	if x != nil {
-		_objcPtr_x = x.Ptr()
+		_ptr_x = x.Ptr()
 	}
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xar_fn_xar_get_toc_checksum(_objcPtr_x, unsafe.Pointer(buffer_size), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	defer runtime.KeepAlive(x)
+	return _pg_xar_get_toc_checksum(_ptr_x, buffer_size)
 }
 
 // [xar.h:189]
 // ID: objc-sym xar.xar_get_toc_checksum_type
 func Xar_get_toc_checksum_type(x *XarT) int32 {
-	defer cgo.KeepAlive(x)
-	var _objcPtr_x unsafe.Pointer
+	var _ptr_x unsafe.Pointer
 	if x != nil {
-		_objcPtr_x = x.Ptr()
+		_ptr_x = x.Ptr()
 	}
-	var _exc unsafe.Pointer
-	_result := int32(C.xar_fn_xar_get_toc_checksum_type(_objcPtr_x, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	defer runtime.KeepAlive(x)
+	return _pg_xar_get_toc_checksum_type(_ptr_x)
 }
 
 // [xar.h:191]
 // ID: objc-sym xar.xar_opt_get
 func Xar_opt_get(x *XarT, option string) string {
-	defer cgo.KeepAlive(x)
-	var _objcPtr_x unsafe.Pointer
+	var _ptr_x unsafe.Pointer
 	if x != nil {
-		_objcPtr_x = x.Ptr()
+		_ptr_x = x.Ptr()
 	}
-	_cstr_option := C.CString(option)
-	defer C.free(unsafe.Pointer(_cstr_option))
-	var _exc unsafe.Pointer
-	_result := C.GoString(C.xar_fn_xar_opt_get(_objcPtr_x, _cstr_option, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	defer runtime.KeepAlive(x)
+	return _pg_xar_opt_get(_ptr_x, option)
 }
 
 // [xar.h:192]
 // ID: objc-sym xar.xar_opt_set
 func Xar_opt_set(x *XarT, option string, value string) int32 {
-	defer cgo.KeepAlive(x)
-	var _objcPtr_x unsafe.Pointer
+	var _ptr_x unsafe.Pointer
 	if x != nil {
-		_objcPtr_x = x.Ptr()
+		_ptr_x = x.Ptr()
 	}
-	_cstr_option := C.CString(option)
-	defer C.free(unsafe.Pointer(_cstr_option))
-	_cstr_value := C.CString(value)
-	defer C.free(unsafe.Pointer(_cstr_value))
-	var _exc unsafe.Pointer
-	_result := int32(C.xar_fn_xar_opt_set(_objcPtr_x, _cstr_option, _cstr_value, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	defer runtime.KeepAlive(x)
+	return _pg_xar_opt_set(_ptr_x, option, value)
 }
 
 // [xar.h:193]
 // ID: objc-sym xar.xar_opt_unset
 func Xar_opt_unset(x *XarT, option string) int32 {
-	defer cgo.KeepAlive(x)
-	var _objcPtr_x unsafe.Pointer
+	var _ptr_x unsafe.Pointer
 	if x != nil {
-		_objcPtr_x = x.Ptr()
+		_ptr_x = x.Ptr()
 	}
-	_cstr_option := C.CString(option)
-	defer C.free(unsafe.Pointer(_cstr_option))
-	var _exc unsafe.Pointer
-	_result := int32(C.xar_fn_xar_opt_unset(_objcPtr_x, _cstr_option, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	defer runtime.KeepAlive(x)
+	return _pg_xar_opt_unset(_ptr_x, option)
 }
 
 // [xar.h:195]
 // ID: objc-sym xar.xar_prop_set
 func Xar_prop_set(f *XarFileT, key string, value string) int32 {
-	defer cgo.KeepAlive(f)
-	var _objcPtr_f unsafe.Pointer
+	var _ptr_f unsafe.Pointer
 	if f != nil {
-		_objcPtr_f = f.Ptr()
+		_ptr_f = f.Ptr()
 	}
-	_cstr_key := C.CString(key)
-	defer C.free(unsafe.Pointer(_cstr_key))
-	_cstr_value := C.CString(value)
-	defer C.free(unsafe.Pointer(_cstr_value))
-	var _exc unsafe.Pointer
-	_result := int32(C.xar_fn_xar_prop_set(_objcPtr_f, _cstr_key, _cstr_value, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	defer runtime.KeepAlive(f)
+	return _pg_xar_prop_set(_ptr_f, key, value)
 }
 
 // [xar.h:196]
 // ID: objc-sym xar.xar_prop_create
 func Xar_prop_create(f *XarFileT, key string, value string) int32 {
-	defer cgo.KeepAlive(f)
-	var _objcPtr_f unsafe.Pointer
+	var _ptr_f unsafe.Pointer
 	if f != nil {
-		_objcPtr_f = f.Ptr()
+		_ptr_f = f.Ptr()
 	}
-	_cstr_key := C.CString(key)
-	defer C.free(unsafe.Pointer(_cstr_key))
-	_cstr_value := C.CString(value)
-	defer C.free(unsafe.Pointer(_cstr_value))
-	var _exc unsafe.Pointer
-	_result := int32(C.xar_fn_xar_prop_create(_objcPtr_f, _cstr_key, _cstr_value, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	defer runtime.KeepAlive(f)
+	return _pg_xar_prop_create(_ptr_f, key, value)
 }
 
 // [xar.h:197]
 // ID: objc-sym xar.xar_prop_get
 func Xar_prop_get(f *XarFileT, key string, value unsafe.Pointer) int32 {
-	defer cgo.KeepAlive(f)
-	var _objcPtr_f unsafe.Pointer
+	var _ptr_f unsafe.Pointer
 	if f != nil {
-		_objcPtr_f = f.Ptr()
+		_ptr_f = f.Ptr()
 	}
-	_cstr_key := C.CString(key)
-	defer C.free(unsafe.Pointer(_cstr_key))
-	var _exc unsafe.Pointer
-	_result := int32(C.xar_fn_xar_prop_get(_objcPtr_f, _cstr_key, value, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	defer runtime.KeepAlive(f)
+	return _pg_xar_prop_get(_ptr_f, key, value)
 }
 
 // [xar.h:198]
 // ID: objc-sym xar.xar_prop_get_expect_notnull
 func Xar_prop_get_expect_notnull(f *XarFileT, key string, value unsafe.Pointer) int32 {
-	defer cgo.KeepAlive(f)
-	var _objcPtr_f unsafe.Pointer
+	var _ptr_f unsafe.Pointer
 	if f != nil {
-		_objcPtr_f = f.Ptr()
+		_ptr_f = f.Ptr()
 	}
-	_cstr_key := C.CString(key)
-	defer C.free(unsafe.Pointer(_cstr_key))
-	var _exc unsafe.Pointer
-	_result := int32(C.xar_fn_xar_prop_get_expect_notnull(_objcPtr_f, _cstr_key, value, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	defer runtime.KeepAlive(f)
+	return _pg_xar_prop_get_expect_notnull(_ptr_f, key, value)
 }
 
 // [xar.h:200]
 // ID: objc-sym xar.xar_iter_new
 func Xar_iter_new() *XarIterT {
-	var _exc unsafe.Pointer
-	_ptr := unsafe.Pointer(C.xar_fn_xar_iter_new(&_exc))
-	cgo.RaiseIfException(_exc)
+	_ptr := _pg_xar_iter_new()
 	return NewXarIterT(_ptr)
 }
 
 // [xar.h:201]
 // ID: objc-sym xar.xar_iter_free
 func Xar_iter_free(i *XarIterT) {
-	defer cgo.KeepAlive(i)
-	var _objcPtr_i unsafe.Pointer
+	var _ptr_i unsafe.Pointer
 	if i != nil {
-		_objcPtr_i = i.Ptr()
+		_ptr_i = i.Ptr()
 	}
-	var _exc unsafe.Pointer
-	C.xar_fn_xar_iter_free(_objcPtr_i, &_exc)
-	cgo.RaiseIfException(_exc)
+	defer runtime.KeepAlive(i)
+	_pg_xar_iter_free(_ptr_i)
 }
 
 // [xar.h:203]
 // ID: objc-sym xar.xar_prop_first
 func Xar_prop_first(f *XarFileT, i *XarIterT) string {
-	defer cgo.KeepAlive(f)
-	defer cgo.KeepAlive(i)
-	var _objcPtr_f unsafe.Pointer
+	var _ptr_f unsafe.Pointer
 	if f != nil {
-		_objcPtr_f = f.Ptr()
+		_ptr_f = f.Ptr()
 	}
-	var _objcPtr_i unsafe.Pointer
+	var _ptr_i unsafe.Pointer
 	if i != nil {
-		_objcPtr_i = i.Ptr()
+		_ptr_i = i.Ptr()
 	}
-	var _exc unsafe.Pointer
-	_result := C.GoString(C.xar_fn_xar_prop_first(_objcPtr_f, _objcPtr_i, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	defer runtime.KeepAlive(f)
+	defer runtime.KeepAlive(i)
+	return _pg_xar_prop_first(_ptr_f, _ptr_i)
 }
 
 // [xar.h:204]
 // ID: objc-sym xar.xar_prop_next
 func Xar_prop_next(i *XarIterT) string {
-	defer cgo.KeepAlive(i)
-	var _objcPtr_i unsafe.Pointer
+	var _ptr_i unsafe.Pointer
 	if i != nil {
-		_objcPtr_i = i.Ptr()
+		_ptr_i = i.Ptr()
 	}
-	var _exc unsafe.Pointer
-	_result := C.GoString(C.xar_fn_xar_prop_next(_objcPtr_i, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	defer runtime.KeepAlive(i)
+	return _pg_xar_prop_next(_ptr_i)
 }
 
 // [xar.h:206]
 // ID: objc-sym xar.xar_prop_unset
 func Xar_prop_unset(f *XarFileT, key string) {
-	defer cgo.KeepAlive(f)
-	var _objcPtr_f unsafe.Pointer
+	var _ptr_f unsafe.Pointer
 	if f != nil {
-		_objcPtr_f = f.Ptr()
+		_ptr_f = f.Ptr()
 	}
-	_cstr_key := C.CString(key)
-	defer C.free(unsafe.Pointer(_cstr_key))
-	var _exc unsafe.Pointer
-	C.xar_fn_xar_prop_unset(_objcPtr_f, _cstr_key, &_exc)
-	cgo.RaiseIfException(_exc)
+	defer runtime.KeepAlive(f)
+	_pg_xar_prop_unset(_ptr_f, key)
 }
 
 // [xar.h:207]
 // ID: objc-sym xar.xar_file_first
 func Xar_file_first(x *XarT, i *XarIterT) *XarFileT {
-	defer cgo.KeepAlive(x)
-	defer cgo.KeepAlive(i)
-	var _objcPtr_x unsafe.Pointer
+	var _ptr_x unsafe.Pointer
 	if x != nil {
-		_objcPtr_x = x.Ptr()
+		_ptr_x = x.Ptr()
 	}
-	var _objcPtr_i unsafe.Pointer
+	var _ptr_i unsafe.Pointer
 	if i != nil {
-		_objcPtr_i = i.Ptr()
+		_ptr_i = i.Ptr()
 	}
-	var _exc unsafe.Pointer
-	_ptr := unsafe.Pointer(C.xar_fn_xar_file_first(_objcPtr_x, _objcPtr_i, &_exc))
-	cgo.RaiseIfException(_exc)
+	defer runtime.KeepAlive(x)
+	defer runtime.KeepAlive(i)
+	_ptr := _pg_xar_file_first(_ptr_x, _ptr_i)
 	return NewXarFileT(_ptr)
 }
 
 // [xar.h:208]
 // ID: objc-sym xar.xar_file_next
 func Xar_file_next(i *XarIterT) *XarFileT {
-	defer cgo.KeepAlive(i)
-	var _objcPtr_i unsafe.Pointer
+	var _ptr_i unsafe.Pointer
 	if i != nil {
-		_objcPtr_i = i.Ptr()
+		_ptr_i = i.Ptr()
 	}
-	var _exc unsafe.Pointer
-	_ptr := unsafe.Pointer(C.xar_fn_xar_file_next(_objcPtr_i, &_exc))
-	cgo.RaiseIfException(_exc)
+	defer runtime.KeepAlive(i)
+	_ptr := _pg_xar_file_next(_ptr_i)
 	return NewXarFileT(_ptr)
 }
 
 // [xar.h:210]
 // ID: objc-sym xar.xar_attr_get
 func Xar_attr_get(f *XarFileT, prop string, key string) string {
-	defer cgo.KeepAlive(f)
-	var _objcPtr_f unsafe.Pointer
+	var _ptr_f unsafe.Pointer
 	if f != nil {
-		_objcPtr_f = f.Ptr()
+		_ptr_f = f.Ptr()
 	}
-	_cstr_prop := C.CString(prop)
-	defer C.free(unsafe.Pointer(_cstr_prop))
-	_cstr_key := C.CString(key)
-	defer C.free(unsafe.Pointer(_cstr_key))
-	var _exc unsafe.Pointer
-	_result := C.GoString(C.xar_fn_xar_attr_get(_objcPtr_f, _cstr_prop, _cstr_key, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	defer runtime.KeepAlive(f)
+	return _pg_xar_attr_get(_ptr_f, prop, key)
 }
 
 // [xar.h:211]
 // ID: objc-sym xar.xar_attr_set
 func Xar_attr_set(f *XarFileT, prop string, key string, value string) int32 {
-	defer cgo.KeepAlive(f)
-	var _objcPtr_f unsafe.Pointer
+	var _ptr_f unsafe.Pointer
 	if f != nil {
-		_objcPtr_f = f.Ptr()
+		_ptr_f = f.Ptr()
 	}
-	_cstr_prop := C.CString(prop)
-	defer C.free(unsafe.Pointer(_cstr_prop))
-	_cstr_key := C.CString(key)
-	defer C.free(unsafe.Pointer(_cstr_key))
-	_cstr_value := C.CString(value)
-	defer C.free(unsafe.Pointer(_cstr_value))
-	var _exc unsafe.Pointer
-	_result := int32(C.xar_fn_xar_attr_set(_objcPtr_f, _cstr_prop, _cstr_key, _cstr_value, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	defer runtime.KeepAlive(f)
+	return _pg_xar_attr_set(_ptr_f, prop, key, value)
 }
 
 // [xar.h:212]
 // ID: objc-sym xar.xar_attr_first
 func Xar_attr_first(f *XarFileT, prop string, i *XarIterT) string {
-	defer cgo.KeepAlive(f)
-	defer cgo.KeepAlive(i)
-	var _objcPtr_f unsafe.Pointer
+	var _ptr_f unsafe.Pointer
 	if f != nil {
-		_objcPtr_f = f.Ptr()
+		_ptr_f = f.Ptr()
 	}
-	_cstr_prop := C.CString(prop)
-	defer C.free(unsafe.Pointer(_cstr_prop))
-	var _objcPtr_i unsafe.Pointer
+	var _ptr_i unsafe.Pointer
 	if i != nil {
-		_objcPtr_i = i.Ptr()
+		_ptr_i = i.Ptr()
 	}
-	var _exc unsafe.Pointer
-	_result := C.GoString(C.xar_fn_xar_attr_first(_objcPtr_f, _cstr_prop, _objcPtr_i, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	defer runtime.KeepAlive(f)
+	defer runtime.KeepAlive(i)
+	return _pg_xar_attr_first(_ptr_f, prop, _ptr_i)
 }
 
 // [xar.h:213]
 // ID: objc-sym xar.xar_attr_next
 func Xar_attr_next(i *XarIterT) string {
-	defer cgo.KeepAlive(i)
-	var _objcPtr_i unsafe.Pointer
+	var _ptr_i unsafe.Pointer
 	if i != nil {
-		_objcPtr_i = i.Ptr()
+		_ptr_i = i.Ptr()
 	}
-	var _exc unsafe.Pointer
-	_result := C.GoString(C.xar_fn_xar_attr_next(_objcPtr_i, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	defer runtime.KeepAlive(i)
+	return _pg_xar_attr_next(_ptr_i)
 }
 
 // [xar.h:215]
 // ID: objc-sym xar.xar_subdoc_new
 func Xar_subdoc_new(x *XarT, name string) *XarSubdocT {
-	defer cgo.KeepAlive(x)
-	var _objcPtr_x unsafe.Pointer
+	var _ptr_x unsafe.Pointer
 	if x != nil {
-		_objcPtr_x = x.Ptr()
+		_ptr_x = x.Ptr()
 	}
-	_cstr_name := C.CString(name)
-	defer C.free(unsafe.Pointer(_cstr_name))
-	var _exc unsafe.Pointer
-	_ptr := unsafe.Pointer(C.xar_fn_xar_subdoc_new(_objcPtr_x, _cstr_name, &_exc))
-	cgo.RaiseIfException(_exc)
+	defer runtime.KeepAlive(x)
+	_ptr := _pg_xar_subdoc_new(_ptr_x, name)
 	return NewXarSubdocT(_ptr)
 }
 
 // [xar.h:216]
 // ID: objc-sym xar.xar_subdoc_prop_set
 func Xar_subdoc_prop_set(s *XarSubdocT, key string, value string) int32 {
-	defer cgo.KeepAlive(s)
-	var _objcPtr_s unsafe.Pointer
+	var _ptr_s unsafe.Pointer
 	if s != nil {
-		_objcPtr_s = s.Ptr()
+		_ptr_s = s.Ptr()
 	}
-	_cstr_key := C.CString(key)
-	defer C.free(unsafe.Pointer(_cstr_key))
-	_cstr_value := C.CString(value)
-	defer C.free(unsafe.Pointer(_cstr_value))
-	var _exc unsafe.Pointer
-	_result := int32(C.xar_fn_xar_subdoc_prop_set(_objcPtr_s, _cstr_key, _cstr_value, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	defer runtime.KeepAlive(s)
+	return _pg_xar_subdoc_prop_set(_ptr_s, key, value)
 }
 
 // [xar.h:217]
 // ID: objc-sym xar.xar_subdoc_prop_get
 func Xar_subdoc_prop_get(s *XarSubdocT, key string, value unsafe.Pointer) int32 {
-	defer cgo.KeepAlive(s)
-	var _objcPtr_s unsafe.Pointer
+	var _ptr_s unsafe.Pointer
 	if s != nil {
-		_objcPtr_s = s.Ptr()
+		_ptr_s = s.Ptr()
 	}
-	_cstr_key := C.CString(key)
-	defer C.free(unsafe.Pointer(_cstr_key))
-	var _exc unsafe.Pointer
-	_result := int32(C.xar_fn_xar_subdoc_prop_get(_objcPtr_s, _cstr_key, value, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	defer runtime.KeepAlive(s)
+	return _pg_xar_subdoc_prop_get(_ptr_s, key, value)
 }
 
 // [xar.h:218]
 // ID: objc-sym xar.xar_subdoc_attr_set
 func Xar_subdoc_attr_set(s *XarSubdocT, prop string, key string, value string) int32 {
-	defer cgo.KeepAlive(s)
-	var _objcPtr_s unsafe.Pointer
+	var _ptr_s unsafe.Pointer
 	if s != nil {
-		_objcPtr_s = s.Ptr()
+		_ptr_s = s.Ptr()
 	}
-	_cstr_prop := C.CString(prop)
-	defer C.free(unsafe.Pointer(_cstr_prop))
-	_cstr_key := C.CString(key)
-	defer C.free(unsafe.Pointer(_cstr_key))
-	_cstr_value := C.CString(value)
-	defer C.free(unsafe.Pointer(_cstr_value))
-	var _exc unsafe.Pointer
-	_result := int32(C.xar_fn_xar_subdoc_attr_set(_objcPtr_s, _cstr_prop, _cstr_key, _cstr_value, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	defer runtime.KeepAlive(s)
+	return _pg_xar_subdoc_attr_set(_ptr_s, prop, key, value)
 }
 
 // [xar.h:219]
 // ID: objc-sym xar.xar_subdoc_attr_get
 func Xar_subdoc_attr_get(s *XarSubdocT, prop string, key string) string {
-	defer cgo.KeepAlive(s)
-	var _objcPtr_s unsafe.Pointer
+	var _ptr_s unsafe.Pointer
 	if s != nil {
-		_objcPtr_s = s.Ptr()
+		_ptr_s = s.Ptr()
 	}
-	_cstr_prop := C.CString(prop)
-	defer C.free(unsafe.Pointer(_cstr_prop))
-	_cstr_key := C.CString(key)
-	defer C.free(unsafe.Pointer(_cstr_key))
-	var _exc unsafe.Pointer
-	_result := C.GoString(C.xar_fn_xar_subdoc_attr_get(_objcPtr_s, _cstr_prop, _cstr_key, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	defer runtime.KeepAlive(s)
+	return _pg_xar_subdoc_attr_get(_ptr_s, prop, key)
 }
 
 // [xar.h:220]
 // ID: objc-sym xar.xar_subdoc_first
 func Xar_subdoc_first(x *XarT) *XarSubdocT {
-	defer cgo.KeepAlive(x)
-	var _objcPtr_x unsafe.Pointer
+	var _ptr_x unsafe.Pointer
 	if x != nil {
-		_objcPtr_x = x.Ptr()
+		_ptr_x = x.Ptr()
 	}
-	var _exc unsafe.Pointer
-	_ptr := unsafe.Pointer(C.xar_fn_xar_subdoc_first(_objcPtr_x, &_exc))
-	cgo.RaiseIfException(_exc)
+	defer runtime.KeepAlive(x)
+	_ptr := _pg_xar_subdoc_first(_ptr_x)
 	return NewXarSubdocT(_ptr)
 }
 
 // [xar.h:221]
 // ID: objc-sym xar.xar_subdoc_next
 func Xar_subdoc_next(s *XarSubdocT) *XarSubdocT {
-	defer cgo.KeepAlive(s)
-	var _objcPtr_s unsafe.Pointer
+	var _ptr_s unsafe.Pointer
 	if s != nil {
-		_objcPtr_s = s.Ptr()
+		_ptr_s = s.Ptr()
 	}
-	var _exc unsafe.Pointer
-	_ptr := unsafe.Pointer(C.xar_fn_xar_subdoc_next(_objcPtr_s, &_exc))
-	cgo.RaiseIfException(_exc)
+	defer runtime.KeepAlive(s)
+	_ptr := _pg_xar_subdoc_next(_ptr_s)
 	return NewXarSubdocT(_ptr)
 }
 
 // [xar.h:222]
 // ID: objc-sym xar.xar_subdoc_name
 func Xar_subdoc_name(s *XarSubdocT) string {
-	defer cgo.KeepAlive(s)
-	var _objcPtr_s unsafe.Pointer
+	var _ptr_s unsafe.Pointer
 	if s != nil {
-		_objcPtr_s = s.Ptr()
+		_ptr_s = s.Ptr()
 	}
-	var _exc unsafe.Pointer
-	_result := C.GoString(C.xar_fn_xar_subdoc_name(_objcPtr_s, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	defer runtime.KeepAlive(s)
+	return _pg_xar_subdoc_name(_ptr_s)
 }
 
 // [xar.h:223]
 // ID: objc-sym xar.xar_subdoc_copyout
 func Xar_subdoc_copyout(s *XarSubdocT, arg1 unsafe.Pointer, arg2 *uint32) int32 {
-	defer cgo.KeepAlive(s)
-	var _objcPtr_s unsafe.Pointer
+	var _ptr_s unsafe.Pointer
 	if s != nil {
-		_objcPtr_s = s.Ptr()
+		_ptr_s = s.Ptr()
 	}
-	var _exc unsafe.Pointer
-	_result := int32(C.xar_fn_xar_subdoc_copyout(_objcPtr_s, arg1, unsafe.Pointer(arg2), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	defer runtime.KeepAlive(s)
+	return _pg_xar_subdoc_copyout(_ptr_s, arg1, arg2)
 }
 
 // [xar.h:224]
 // ID: objc-sym xar.xar_subdoc_copyin
 func Xar_subdoc_copyin(s *XarSubdocT, arg1 *uint8, arg2 uint32) int32 {
-	defer cgo.KeepAlive(s)
-	var _objcPtr_s unsafe.Pointer
+	var _ptr_s unsafe.Pointer
 	if s != nil {
-		_objcPtr_s = s.Ptr()
+		_ptr_s = s.Ptr()
 	}
-	var _exc unsafe.Pointer
-	_result := int32(C.xar_fn_xar_subdoc_copyin(_objcPtr_s, unsafe.Pointer(arg1), C.uint32_t(arg2), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	defer runtime.KeepAlive(s)
+	return _pg_xar_subdoc_copyin(_ptr_s, arg1, arg2)
 }
 
 // [xar.h:225]
 // ID: objc-sym xar.xar_subdoc_remove
 func Xar_subdoc_remove(s *XarSubdocT) {
-	defer cgo.KeepAlive(s)
-	var _objcPtr_s unsafe.Pointer
+	var _ptr_s unsafe.Pointer
 	if s != nil {
-		_objcPtr_s = s.Ptr()
+		_ptr_s = s.Ptr()
 	}
-	var _exc unsafe.Pointer
-	C.xar_fn_xar_subdoc_remove(_objcPtr_s, &_exc)
-	cgo.RaiseIfException(_exc)
+	defer runtime.KeepAlive(s)
+	_pg_xar_subdoc_remove(_ptr_s)
 }
 
 // [xar.h:232]
 // ID: objc-sym xar.xar_signature_type
 func Xar_signature_type(s *XarSignatureT) string {
-	defer cgo.KeepAlive(s)
-	var _objcPtr_s unsafe.Pointer
+	var _ptr_s unsafe.Pointer
 	if s != nil {
-		_objcPtr_s = s.Ptr()
+		_ptr_s = s.Ptr()
 	}
-	var _exc unsafe.Pointer
-	_result := C.GoString(C.xar_fn_xar_signature_type(_objcPtr_s, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	defer runtime.KeepAlive(s)
+	return _pg_xar_signature_type(_ptr_s)
 }
 
 // [xar.h:234]
 // ID: objc-sym xar.xar_signature_first
 func Xar_signature_first(x *XarT) *XarSignatureT {
-	defer cgo.KeepAlive(x)
-	var _objcPtr_x unsafe.Pointer
+	var _ptr_x unsafe.Pointer
 	if x != nil {
-		_objcPtr_x = x.Ptr()
+		_ptr_x = x.Ptr()
 	}
-	var _exc unsafe.Pointer
-	_ptr := unsafe.Pointer(C.xar_fn_xar_signature_first(_objcPtr_x, &_exc))
-	cgo.RaiseIfException(_exc)
+	defer runtime.KeepAlive(x)
+	_ptr := _pg_xar_signature_first(_ptr_x)
 	return NewXarSignatureT(_ptr)
 }
 
 // [xar.h:235]
 // ID: objc-sym xar.xar_signature_next
 func Xar_signature_next(s *XarSignatureT) *XarSignatureT {
-	defer cgo.KeepAlive(s)
-	var _objcPtr_s unsafe.Pointer
+	var _ptr_s unsafe.Pointer
 	if s != nil {
-		_objcPtr_s = s.Ptr()
+		_ptr_s = s.Ptr()
 	}
-	var _exc unsafe.Pointer
-	_ptr := unsafe.Pointer(C.xar_fn_xar_signature_next(_objcPtr_s, &_exc))
-	cgo.RaiseIfException(_exc)
+	defer runtime.KeepAlive(s)
+	_ptr := _pg_xar_signature_next(_ptr_s)
 	return NewXarSignatureT(_ptr)
 }
 
 // [xar.h:237]
 // ID: objc-sym xar.xar_signature_add_x509certificate
 func Xar_signature_add_x509certificate(sig *XarSignatureT, cert_data *uint8, cert_len uint32) int32 {
-	defer cgo.KeepAlive(sig)
-	var _objcPtr_sig unsafe.Pointer
+	var _ptr_sig unsafe.Pointer
 	if sig != nil {
-		_objcPtr_sig = sig.Ptr()
+		_ptr_sig = sig.Ptr()
 	}
-	var _exc unsafe.Pointer
-	_result := int32(C.xar_fn_xar_signature_add_x509certificate(_objcPtr_sig, unsafe.Pointer(cert_data), C.uint32_t(cert_len), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	defer runtime.KeepAlive(sig)
+	return _pg_xar_signature_add_x509certificate(_ptr_sig, cert_data, cert_len)
 }
 
 // [xar.h:239]
 // ID: objc-sym xar.xar_signature_get_x509certificate_count
 func Xar_signature_get_x509certificate_count(sig *XarSignatureT) int32 {
-	defer cgo.KeepAlive(sig)
-	var _objcPtr_sig unsafe.Pointer
+	var _ptr_sig unsafe.Pointer
 	if sig != nil {
-		_objcPtr_sig = sig.Ptr()
+		_ptr_sig = sig.Ptr()
 	}
-	var _exc unsafe.Pointer
-	_result := int32(C.xar_fn_xar_signature_get_x509certificate_count(_objcPtr_sig, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	defer runtime.KeepAlive(sig)
+	return _pg_xar_signature_get_x509certificate_count(_ptr_sig)
 }
 
 // [xar.h:240]
 // ID: objc-sym xar.xar_signature_get_x509certificate_data
 func Xar_signature_get_x509certificate_data(sig *XarSignatureT, index int32, cert_data unsafe.Pointer, cert_len *uint32) int32 {
-	defer cgo.KeepAlive(sig)
-	var _objcPtr_sig unsafe.Pointer
+	var _ptr_sig unsafe.Pointer
 	if sig != nil {
-		_objcPtr_sig = sig.Ptr()
+		_ptr_sig = sig.Ptr()
 	}
-	var _exc unsafe.Pointer
-	_result := int32(C.xar_fn_xar_signature_get_x509certificate_data(_objcPtr_sig, C.int32_t(index), cert_data, unsafe.Pointer(cert_len), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	defer runtime.KeepAlive(sig)
+	return _pg_xar_signature_get_x509certificate_data(_ptr_sig, index, cert_data, cert_len)
 }
 
 // [xar.h:242]
 // ID: objc-sym xar.xar_signature_copy_signed_data
 func Xar_signature_copy_signed_data(sig *XarSignatureT, data unsafe.Pointer, length *uint32, signed_data unsafe.Pointer, signed_length *uint32, signed_offset *int64) uint8 {
-	defer cgo.KeepAlive(sig)
-	var _objcPtr_sig unsafe.Pointer
+	var _ptr_sig unsafe.Pointer
 	if sig != nil {
-		_objcPtr_sig = sig.Ptr()
+		_ptr_sig = sig.Ptr()
 	}
-	var _exc unsafe.Pointer
-	_result := uint8(C.xar_fn_xar_signature_copy_signed_data(_objcPtr_sig, data, unsafe.Pointer(length), signed_data, unsafe.Pointer(signed_length), unsafe.Pointer(signed_offset), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	defer runtime.KeepAlive(sig)
+	return _pg_xar_signature_copy_signed_data(_ptr_sig, data, length, signed_data, signed_length, signed_offset)
 }
 
 // [xar.h:245]
 // ID: objc-sym xar.xar_get_size
 func Xar_get_size(x *XarT, f *XarFileT) string {
-	defer cgo.KeepAlive(x)
-	defer cgo.KeepAlive(f)
-	var _objcPtr_x unsafe.Pointer
+	var _ptr_x unsafe.Pointer
 	if x != nil {
-		_objcPtr_x = x.Ptr()
+		_ptr_x = x.Ptr()
 	}
-	var _objcPtr_f unsafe.Pointer
+	var _ptr_f unsafe.Pointer
 	if f != nil {
-		_objcPtr_f = f.Ptr()
+		_ptr_f = f.Ptr()
 	}
-	var _exc unsafe.Pointer
-	_result := C.GoString(C.xar_fn_xar_get_size(_objcPtr_x, _objcPtr_f, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	defer runtime.KeepAlive(x)
+	defer runtime.KeepAlive(f)
+	return _pg_xar_get_size(_ptr_x, _ptr_f)
 }
 
 // [xar.h:246]
 // ID: objc-sym xar.xar_get_type
 func Xar_get_type(x *XarT, f *XarFileT) string {
-	defer cgo.KeepAlive(x)
-	defer cgo.KeepAlive(f)
-	var _objcPtr_x unsafe.Pointer
+	var _ptr_x unsafe.Pointer
 	if x != nil {
-		_objcPtr_x = x.Ptr()
+		_ptr_x = x.Ptr()
 	}
-	var _objcPtr_f unsafe.Pointer
+	var _ptr_f unsafe.Pointer
 	if f != nil {
-		_objcPtr_f = f.Ptr()
+		_ptr_f = f.Ptr()
 	}
-	var _exc unsafe.Pointer
-	_result := C.GoString(C.xar_fn_xar_get_type(_objcPtr_x, _objcPtr_f, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	defer runtime.KeepAlive(x)
+	defer runtime.KeepAlive(f)
+	return _pg_xar_get_type(_ptr_x, _ptr_f)
 }
 
 // [xar.h:247]
 // ID: objc-sym xar.xar_get_mode
 func Xar_get_mode(x *XarT, f *XarFileT) string {
-	defer cgo.KeepAlive(x)
-	defer cgo.KeepAlive(f)
-	var _objcPtr_x unsafe.Pointer
+	var _ptr_x unsafe.Pointer
 	if x != nil {
-		_objcPtr_x = x.Ptr()
+		_ptr_x = x.Ptr()
 	}
-	var _objcPtr_f unsafe.Pointer
+	var _ptr_f unsafe.Pointer
 	if f != nil {
-		_objcPtr_f = f.Ptr()
+		_ptr_f = f.Ptr()
 	}
-	var _exc unsafe.Pointer
-	_result := C.GoString(C.xar_fn_xar_get_mode(_objcPtr_x, _objcPtr_f, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	defer runtime.KeepAlive(x)
+	defer runtime.KeepAlive(f)
+	return _pg_xar_get_mode(_ptr_x, _ptr_f)
 }
 
 // [xar.h:248]
 // ID: objc-sym xar.xar_get_owner
 func Xar_get_owner(x *XarT, f *XarFileT) string {
-	defer cgo.KeepAlive(x)
-	defer cgo.KeepAlive(f)
-	var _objcPtr_x unsafe.Pointer
+	var _ptr_x unsafe.Pointer
 	if x != nil {
-		_objcPtr_x = x.Ptr()
+		_ptr_x = x.Ptr()
 	}
-	var _objcPtr_f unsafe.Pointer
+	var _ptr_f unsafe.Pointer
 	if f != nil {
-		_objcPtr_f = f.Ptr()
+		_ptr_f = f.Ptr()
 	}
-	var _exc unsafe.Pointer
-	_result := C.GoString(C.xar_fn_xar_get_owner(_objcPtr_x, _objcPtr_f, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	defer runtime.KeepAlive(x)
+	defer runtime.KeepAlive(f)
+	return _pg_xar_get_owner(_ptr_x, _ptr_f)
 }
 
 // [xar.h:249]
 // ID: objc-sym xar.xar_get_group
 func Xar_get_group(x *XarT, f *XarFileT) string {
-	defer cgo.KeepAlive(x)
-	defer cgo.KeepAlive(f)
-	var _objcPtr_x unsafe.Pointer
+	var _ptr_x unsafe.Pointer
 	if x != nil {
-		_objcPtr_x = x.Ptr()
+		_ptr_x = x.Ptr()
 	}
-	var _objcPtr_f unsafe.Pointer
+	var _ptr_f unsafe.Pointer
 	if f != nil {
-		_objcPtr_f = f.Ptr()
+		_ptr_f = f.Ptr()
 	}
-	var _exc unsafe.Pointer
-	_result := C.GoString(C.xar_fn_xar_get_group(_objcPtr_x, _objcPtr_f, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	defer runtime.KeepAlive(x)
+	defer runtime.KeepAlive(f)
+	return _pg_xar_get_group(_ptr_x, _ptr_f)
 }
 
 // [xar.h:250]
 // ID: objc-sym xar.xar_get_mtime
 func Xar_get_mtime(x *XarT, f *XarFileT) string {
-	defer cgo.KeepAlive(x)
-	defer cgo.KeepAlive(f)
-	var _objcPtr_x unsafe.Pointer
+	var _ptr_x unsafe.Pointer
 	if x != nil {
-		_objcPtr_x = x.Ptr()
+		_ptr_x = x.Ptr()
 	}
-	var _objcPtr_f unsafe.Pointer
+	var _ptr_f unsafe.Pointer
 	if f != nil {
-		_objcPtr_f = f.Ptr()
+		_ptr_f = f.Ptr()
 	}
-	var _exc unsafe.Pointer
-	_result := C.GoString(C.xar_fn_xar_get_mtime(_objcPtr_x, _objcPtr_f, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	defer runtime.KeepAlive(x)
+	defer runtime.KeepAlive(f)
+	return _pg_xar_get_mtime(_ptr_x, _ptr_f)
 }
 
 // [xar.h:253]
 // ID: objc-sym xar.xar_path_issane
 func Xar_path_issane(path string) int32 {
-	_cstr_path := C.CString(path)
-	defer C.free(unsafe.Pointer(_cstr_path))
-	var _exc unsafe.Pointer
-	_result := int32(C.xar_fn_xar_path_issane(_cstr_path, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xar_path_issane(path)
 }
 
 // [xar.h:257]
 // ID: objc-sym xar.xar_err_get_archive
 func Xar_err_get_archive(ctx_ unsafe.Pointer) *XarT {
-	var _exc unsafe.Pointer
-	_ptr := unsafe.Pointer(C.xar_fn_xar_err_get_archive(ctx_, &_exc))
-	cgo.RaiseIfException(_exc)
+	_ptr := _pg_xar_err_get_archive(ctx_)
 	return NewXarT(_ptr)
 }
 
 // [xar.h:258]
 // ID: objc-sym xar.xar_err_get_file
 func Xar_err_get_file(ctx_ unsafe.Pointer) *XarFileT {
-	var _exc unsafe.Pointer
-	_ptr := unsafe.Pointer(C.xar_fn_xar_err_get_file(ctx_, &_exc))
-	cgo.RaiseIfException(_exc)
+	_ptr := _pg_xar_err_get_file(ctx_)
 	return NewXarFileT(_ptr)
 }
 
 // [xar.h:259]
 // ID: objc-sym xar.xar_err_get_string
 func Xar_err_get_string(ctx_ unsafe.Pointer) string {
-	var _exc unsafe.Pointer
-	_result := C.GoString(C.xar_fn_xar_err_get_string(ctx_, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xar_err_get_string(ctx_)
 }
 
 // [xar.h:260]
 // ID: objc-sym xar.xar_err_get_errno
 func Xar_err_get_errno(ctx_ unsafe.Pointer) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.xar_fn_xar_err_get_errno(ctx_, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xar_err_get_errno(ctx_)
 }
 
 // [xar.h:261]
 // ID: objc-sym xar.xar_err_set_file
 func Xar_err_set_file(x *XarT, f *XarFileT) {
-	defer cgo.KeepAlive(x)
-	defer cgo.KeepAlive(f)
-	var _objcPtr_x unsafe.Pointer
+	var _ptr_x unsafe.Pointer
 	if x != nil {
-		_objcPtr_x = x.Ptr()
+		_ptr_x = x.Ptr()
 	}
-	var _objcPtr_f unsafe.Pointer
+	var _ptr_f unsafe.Pointer
 	if f != nil {
-		_objcPtr_f = f.Ptr()
+		_ptr_f = f.Ptr()
 	}
-	var _exc unsafe.Pointer
-	C.xar_fn_xar_err_set_file(_objcPtr_x, _objcPtr_f, &_exc)
-	cgo.RaiseIfException(_exc)
+	defer runtime.KeepAlive(x)
+	defer runtime.KeepAlive(f)
+	_pg_xar_err_set_file(_ptr_x, _ptr_f)
 }
 
 // [xar.h:263]
 // ID: objc-sym xar.xar_err_set_string
 func Xar_err_set_string(x *XarT, str string) {
-	defer cgo.KeepAlive(x)
-	var _objcPtr_x unsafe.Pointer
+	var _ptr_x unsafe.Pointer
 	if x != nil {
-		_objcPtr_x = x.Ptr()
+		_ptr_x = x.Ptr()
 	}
-	_cstr_str := C.CString(str)
-	defer C.free(unsafe.Pointer(_cstr_str))
-	var _exc unsafe.Pointer
-	C.xar_fn_xar_err_set_string(_objcPtr_x, _cstr_str, &_exc)
-	cgo.RaiseIfException(_exc)
+	defer runtime.KeepAlive(x)
+	_pg_xar_err_set_string(_ptr_x, str)
 }
 
 // [xar.h:264]
 // ID: objc-sym xar.xar_err_set_errno
 func Xar_err_set_errno(x *XarT, e int32) {
-	defer cgo.KeepAlive(x)
-	var _objcPtr_x unsafe.Pointer
+	var _ptr_x unsafe.Pointer
 	if x != nil {
-		_objcPtr_x = x.Ptr()
+		_ptr_x = x.Ptr()
 	}
-	var _exc unsafe.Pointer
-	C.xar_fn_xar_err_set_errno(_objcPtr_x, C.int32_t(e), &_exc)
-	cgo.RaiseIfException(_exc)
+	defer runtime.KeepAlive(x)
+	_pg_xar_err_set_errno(_ptr_x, e)
 }
 
 // [xar.h:265]
 // ID: objc-sym xar.xar_err_new
 func Xar_err_new(x *XarT) {
-	defer cgo.KeepAlive(x)
-	var _objcPtr_x unsafe.Pointer
+	var _ptr_x unsafe.Pointer
 	if x != nil {
-		_objcPtr_x = x.Ptr()
+		_ptr_x = x.Ptr()
 	}
-	var _exc unsafe.Pointer
-	C.xar_fn_xar_err_new(_objcPtr_x, &_exc)
-	cgo.RaiseIfException(_exc)
+	defer runtime.KeepAlive(x)
+	_pg_xar_err_new(_ptr_x)
 }
 
 // [xar.h:266]
 // ID: objc-sym xar.xar_err_callback
 func Xar_err_callback(x *XarT, sev int32, err int32) int32 {
-	defer cgo.KeepAlive(x)
-	var _objcPtr_x unsafe.Pointer
+	var _ptr_x unsafe.Pointer
 	if x != nil {
-		_objcPtr_x = x.Ptr()
+		_ptr_x = x.Ptr()
 	}
-	var _exc unsafe.Pointer
-	_result := int32(C.xar_fn_xar_err_callback(_objcPtr_x, C.int32_t(sev), C.int32_t(err), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	defer runtime.KeepAlive(x)
+	return _pg_xar_err_callback(_ptr_x, sev, err)
 }
 
 // [xar.h:268]
 // ID: objc-sym xar.xar_serialize
 func Xar_serialize(x *XarT, file string) {
-	defer cgo.KeepAlive(x)
-	var _objcPtr_x unsafe.Pointer
+	var _ptr_x unsafe.Pointer
 	if x != nil {
-		_objcPtr_x = x.Ptr()
+		_ptr_x = x.Ptr()
 	}
-	_cstr_file := C.CString(file)
-	defer C.free(unsafe.Pointer(_cstr_file))
-	var _exc unsafe.Pointer
-	C.xar_fn_xar_serialize(_objcPtr_x, _cstr_file, &_exc)
-	cgo.RaiseIfException(_exc)
+	defer runtime.KeepAlive(x)
+	_pg_xar_serialize(_ptr_x, file)
 }
 
 // [xar.h:269]
@@ -1187,68 +987,53 @@ func Xar_serialize(x *XarT, file string) {
 // Deprecated: Deprecated in macOS 12.0. Use xar_get_safe_path instead Use xar_get_safe_path instead.
 // ID: objc-sym xar.xar_get_path
 func Xar_get_path(f *XarFileT) string {
-	defer cgo.KeepAlive(f)
-	var _objcPtr_f unsafe.Pointer
+	var _ptr_f unsafe.Pointer
 	if f != nil {
-		_objcPtr_f = f.Ptr()
+		_ptr_f = f.Ptr()
 	}
-	var _exc unsafe.Pointer
-	_result := C.GoString(C.xar_fn_xar_get_path(_objcPtr_f, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	defer runtime.KeepAlive(f)
+	return _pg_xar_get_path(_ptr_f)
 }
 
 // [xar.h:270]
 // Introduced: macOS 12.0
 // ID: objc-sym xar.xar_get_safe_path
 func Xar_get_safe_path(f *XarFileT) string {
-	defer cgo.KeepAlive(f)
-	var _objcPtr_f unsafe.Pointer
+	var _ptr_f unsafe.Pointer
 	if f != nil {
-		_objcPtr_f = f.Ptr()
+		_ptr_f = f.Ptr()
 	}
-	var _exc unsafe.Pointer
-	_result := C.GoString(C.xar_fn_xar_get_safe_path(_objcPtr_f, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	defer runtime.KeepAlive(f)
+	return _pg_xar_get_safe_path(_ptr_f)
 }
 
 // [xar.h:271]
 // Introduced: macOS 12.0
 // ID: objc-sym xar.xar_get_heap_offset
 func Xar_get_heap_offset(x *XarT) int64 {
-	defer cgo.KeepAlive(x)
-	var _objcPtr_x unsafe.Pointer
+	var _ptr_x unsafe.Pointer
 	if x != nil {
-		_objcPtr_x = x.Ptr()
+		_ptr_x = x.Ptr()
 	}
-	var _exc unsafe.Pointer
-	_result := int64(C.xar_fn_xar_get_heap_offset(_objcPtr_x, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	defer runtime.KeepAlive(x)
+	return _pg_xar_get_heap_offset(_ptr_x)
 }
 
 // [xar.h:272]
 // Introduced: macOS 12.0
 // ID: objc-sym xar.xar_ntoh64
 func Xar_ntoh64(num uint64) uint64 {
-	var _exc unsafe.Pointer
-	_result := uint64(C.xar_fn_xar_ntoh64(C.uint64_t(num), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xar_ntoh64(num)
 }
 
 // [xar.h:273]
 // Introduced: macOS 12.0
 // ID: objc-sym xar.xar_get_archive_fd
 func Xar_get_archive_fd(x *XarT) int32 {
-	defer cgo.KeepAlive(x)
-	var _objcPtr_x unsafe.Pointer
+	var _ptr_x unsafe.Pointer
 	if x != nil {
-		_objcPtr_x = x.Ptr()
+		_ptr_x = x.Ptr()
 	}
-	var _exc unsafe.Pointer
-	_result := int32(C.xar_fn_xar_get_archive_fd(_objcPtr_x, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	defer runtime.KeepAlive(x)
+	return _pg_xar_get_archive_fd(_ptr_x)
 }

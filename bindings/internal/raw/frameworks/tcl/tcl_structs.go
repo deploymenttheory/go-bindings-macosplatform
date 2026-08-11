@@ -627,7 +627,7 @@ type Tcl_CallFrame struct {
 }
 
 type Tcl_ChannelType struct {
-	TypeName         string
+	TypeName         *byte
 	Version          unsafe.Pointer
 	CloseProc        unsafe.Pointer
 	InputProc        unsafe.Pointer
@@ -677,7 +677,7 @@ type Tcl_Config struct {
 }
 
 type Tcl_DString struct {
-	String      string
+	String      *byte
 	Length      int32
 	SpaceAvl    int32
 	StaticSpace [200]int8
@@ -696,7 +696,7 @@ type Tcl_Dict_ struct{}
 type Tcl_EncodingState_ struct{}
 
 type Tcl_EncodingType struct {
-	EncodingName string
+	EncodingName *byte
 	ToUtfProc    unsafe.Pointer
 	FromUtfProc  unsafe.Pointer
 	FreeProc     unsafe.Pointer
@@ -718,7 +718,7 @@ type Tcl_Event struct {
 type Tcl_FSVersion_ struct{}
 
 type Tcl_Filesystem struct {
-	TypeName                 string
+	TypeName                 *byte
 	StructureLength          int32
 	Version                  unsafe.Pointer
 	PathInFilesystemProc     unsafe.Pointer
@@ -796,7 +796,7 @@ type Tcl_HashTable struct {
 }
 
 type Tcl_Interp struct {
-	Result    string
+	Result    *byte
 	FreeProc  unsafe.Pointer
 	ErrorLine int32
 }
@@ -811,8 +811,8 @@ type Tcl_LoadHandle_ struct{}
 type Tcl_Mutex_ struct{}
 
 type Tcl_Namespace struct {
-	Name       string
-	FullName   string
+	Name       *byte
+	FullName   *byte
 	ClientData unsafe.Pointer
 	DeleteProc unsafe.Pointer
 	ParentPtr  *Tcl_Namespace
@@ -827,7 +827,7 @@ type Tcl_NotifierProcs struct {
 
 type Tcl_Obj struct {
 	RefCount    int32
-	Bytes       string
+	Bytes       *byte
 	Length      int32
 	TypePtr     *Tcl_ObjType
 	InternalRep unsafe.Pointer
@@ -841,19 +841,19 @@ type Tcl_ObjType struct {
 }
 
 type Tcl_Parse struct {
-	CommentStart    string
+	CommentStart    *byte
 	CommentSize     int32
-	CommandStart    string
+	CommandStart    *byte
 	CommandSize     int32
 	NumWords        int32
 	TokenPtr        *Tcl_Token
 	NumTokens       int32
 	TokensAvailable int32
 	ErrorType       int32
-	String          string
-	End             string
+	String          *byte
+	End             *byte
 	Interp          *Tcl_Interp
-	Term            string
+	Term            *byte
 	Incomplete      int32
 	StaticTokens    [20]Tcl_Token
 }
@@ -877,10 +877,10 @@ type Tcl_RegExpInfo struct {
 type Tcl_RegExp_ struct{}
 
 type Tcl_SavedResult struct {
-	Result       string
+	Result       *byte
 	FreeProc     unsafe.Pointer
 	ObjResultPtr *Tcl_Obj
-	AppendResult string
+	AppendResult *byte
 	AppendAvl    int32
 	AppendUsed   int32
 	ResultSpace  [201]int8

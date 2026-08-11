@@ -20,12 +20,9 @@ func SharedWithYouCoreVersionNumber() float64 {
 	return *(*float64)(unsafe.Pointer(ptr))
 }
 
-func SharedWithYouCoreVersionString() []unsafe.Pointer {
+func SharedWithYouCoreVersionString() uintptr {
 	ptr, _ := purego.Dlsym(_sharedwithyoucoreLib, "SharedWithYouCoreVersionString")
-	if ptr == 0 {
-		return []unsafe.Pointer{}
-	}
-	return *(*[]unsafe.Pointer)(unsafe.Pointer(ptr))
+	return ptr
 }
 
 // @abstract String identifier used to initialize a UTType to represent the type of the array of SWCollaborationOptionsGroups when registering to and reading from the NSItemProvider

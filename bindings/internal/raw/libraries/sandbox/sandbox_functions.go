@@ -4,29 +4,22 @@
 
 package sandbox
 
-// #include "bridge/sandbox_bridge.h"
-import "C"
-
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo"
 	"unsafe"
 )
 
-var _ unsafe.Pointer // suppress unused import
+var (
+	_pg_sandbox_init       func(string, uint64, unsafe.Pointer) int32
+	_pg_sandbox_free_error func(string)
+)
 
 // [sandbox.h:48]
 // Introduced: macOS 10.5
 //
 // Deprecated: Deprecated in macOS 10.8. No longer supported
-// Return value must not be discarded.
 // ID: objc-sym Sandbox.sandbox_init
 func Sandbox_init(profile string, flags uint64, errorbuf unsafe.Pointer) int32 {
-	_cstr_profile := C.CString(profile)
-	defer C.free(unsafe.Pointer(_cstr_profile))
-	var _exc unsafe.Pointer
-	_result := int32(C.sandbox_fn_sandbox_init(_cstr_profile, C.uint64_t(flags), errorbuf, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_sandbox_init(profile, flags, errorbuf)
 }
 
 // [sandbox.h:98]
@@ -35,9 +28,5 @@ func Sandbox_init(profile string, flags uint64, errorbuf unsafe.Pointer) int32 {
 // Deprecated: Deprecated in macOS 10.8. No longer supported
 // ID: objc-sym Sandbox.sandbox_free_error
 func Sandbox_free_error(errorbuf string) {
-	_cstr_errorbuf := C.CString(errorbuf)
-	defer C.free(unsafe.Pointer(_cstr_errorbuf))
-	var _exc unsafe.Pointer
-	C.sandbox_fn_sandbox_free_error(_cstr_errorbuf, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_sandbox_free_error(errorbuf)
 }

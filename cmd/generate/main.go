@@ -223,48 +223,35 @@ func runBindings(args []string) {
 
 	var collected []string
 
-	// Phase A: CGo C libraries (all except purego-backed ones). Runs first and,
-	// with a LibraryFilter set, replaces only the packages it owns, so Phase B
-	// can emit purego-backed libraries into the same tree.
-	log.Printf("emitting CGo C libraries → %s", *librariesOut)
-	if err := cgopipeline.GenerateBindings(cgopipeline.BindingsConfig{
-		Registry:         cgoReg,
-		FrameworksOutDir: "", // skip ObjC frameworks (handled by purego below)
-		LibrariesOutDir:  *librariesOut,
-		LibraryFilter:    cgoBackendLibrary,
-		Verbose:          *verbose,
-		DiagnosticsSink:  &collected,
-	}); err != nil {
-		log.Fatalf("bindings (CGo libraries): %v", err)
-	}
-
-	// Phase B: purego ObjC frameworks + purego-backed C libraries.
+	// Phase A: purego ObjC frameworks.
 	log.Printf("emitting purego ObjC frameworks → %s", *frameworksOut)
 	if err := purepipeline.GenerateBindings(purepipeline.BindingsConfig{
 		Registry:         pureReg,
 		FrameworksOutDir: *frameworksOut,
-		LibrariesOutDir:  *librariesOut,
-		LibraryFilter:    puregoBackendLibrary,
+		LibrariesOutDir:  "", // libraries are emitted by the CGo pipeline below
 		Verbose:          *verbose,
 		DiagnosticsSink:  &collected,
 	}); err != nil {
 		log.Fatalf("bindings (purego frameworks): %v", err)
 	}
 
+	// Phase B: C libraries. The CGo pipeline is the single authority for the
+	// library Go surface; a clibraries.json "backend": "purego" entry swaps
+	// only the emitted bodies (dlopen/RegisterLibFunc instead of the bridge).
+	log.Printf("emitting C libraries → %s", *librariesOut)
+	if err := cgopipeline.GenerateBindings(cgopipeline.BindingsConfig{
+		Registry:         cgoReg,
+		FrameworksOutDir: "", // skip ObjC frameworks (handled by purego above)
+		LibrariesOutDir:  *librariesOut,
+		Verbose:          *verbose,
+		DiagnosticsSink:  &collected,
+	}); err != nil {
+		log.Fatalf("bindings (CGo libraries): %v", err)
+	}
+
 	reportDiagnostics(collected, *diagnosticsOut, *diagnosticsBaseline)
 
 	log.Printf("done: %d framework(s)", len(pureReg.Frameworks))
-}
-
-// puregoBackendLibrary and cgoBackendLibrary partition the C libraries between
-// the two emission pipelines by their clibraries.json "backend" key — the
-// cgo→purego migration ratchet. Every library is emitted by exactly one side.
-func puregoBackendLibrary(name string) bool {
-	return scanner.CLibraryBackend(name) == scanner.BackendPurego
-}
-
-func cgoBackendLibrary(name string) bool {
-	return !puregoBackendLibrary(name)
 }
 
 // reportDiagnostics writes and/or baseline-checks the collected type-degradation
@@ -331,26 +318,24 @@ func runAll(args []string) {
 	pureReg := loadPureRegistry(*metaDir, defaultFrameworksModulePrefix, defaultLibrariesModulePrefix)
 	cgoReg := loadCGORegistry(*metaDir, defaultLibrariesModulePrefix)
 
-	log.Printf("emitting CGo C libraries → %s", *librariesOut)
-	if err := cgopipeline.GenerateBindings(cgopipeline.BindingsConfig{
-		Registry:         cgoReg,
-		FrameworksOutDir: "",
-		LibrariesOutDir:  *librariesOut,
-		LibraryFilter:    cgoBackendLibrary,
-		Verbose:          *verbose,
-	}); err != nil {
-		log.Fatalf("bindings (CGo libraries): %v", err)
-	}
-
 	log.Printf("emitting purego ObjC frameworks → %s", *frameworksOut)
 	if err := purepipeline.GenerateBindings(purepipeline.BindingsConfig{
 		Registry:         pureReg,
 		FrameworksOutDir: *frameworksOut,
-		LibrariesOutDir:  *librariesOut,
-		LibraryFilter:    puregoBackendLibrary,
+		LibrariesOutDir:  "",
 		Verbose:          *verbose,
 	}); err != nil {
 		log.Fatalf("bindings (purego frameworks): %v", err)
+	}
+
+	log.Printf("emitting C libraries → %s", *librariesOut)
+	if err := cgopipeline.GenerateBindings(cgopipeline.BindingsConfig{
+		Registry:         cgoReg,
+		FrameworksOutDir: "",
+		LibrariesOutDir:  *librariesOut,
+		Verbose:          *verbose,
+	}); err != nil {
+		log.Fatalf("bindings (CGo libraries): %v", err)
 	}
 
 	log.Printf("done: %d framework(s)", len(pureReg.Frameworks))
