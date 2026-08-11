@@ -62,8 +62,8 @@ func TestGoTypePrimitives(t *testing.T) {
 		{"SEL", "string"},
 		// Class meta-object → unsafe.Pointer.
 		{"Class", "unsafe.Pointer"},
-		// id → cgo.Object (the common ObjC object interface).
-		{"id", "cgo.Object"},
+		// id → objptr.Object (the common ObjC object interface).
+		{"id", "objptr.Object"},
 	}
 
 	for _, c := range cases {
@@ -125,7 +125,7 @@ func TestGoTypeCrossFrameworkGeneric(t *testing.T) {
 	ctx := newTestCtx(m, "AppKit")
 
 	got := m.GoType("NSArray *", ctx, nil)
-	want := "*foundation.NSArray[cgo.Object]"
+	want := "*foundation.NSArray[objptr.Object]"
 	if got != want {
 		t.Errorf("GoType(NSArray *, AppKit) = %q, want %q", got, want)
 	}
@@ -537,27 +537,27 @@ func TestResolveGoTypeIDProtocolMulti(t *testing.T) {
 }
 
 // TestResolveGoTypeIDProtocolUnknownFallsBack verifies that an id<Protocol>
-// whose protocol is not in ProtocolIndex falls back to cgo.Object rather
+// whose protocol is not in ProtocolIndex falls back to objptr.Object rather
 // than emitting a dangling interface name.
 func TestResolveGoTypeIDProtocolUnknownFallsBack(t *testing.T) {
 	m := newTestMapper()
 	ctx := newTestCtx(m, "Virtualization")
 
 	got := m.GoType("id<MysteryProtocol>", ctx, nil)
-	if got != "cgo.Object" {
-		t.Errorf("GoType(id<MysteryProtocol>) = %q, want cgo.Object", got)
+	if got != "objptr.Object" {
+		t.Errorf("GoType(id<MysteryProtocol>) = %q, want objptr.Object", got)
 	}
 }
 
 // TestResolveGoTypeIDBareReturnsObjcObject guards the documented behavior
-// that bare `id` (no protocol annotation) resolves to cgo.Object.
+// that bare `id` (no protocol annotation) resolves to objptr.Object.
 func TestResolveGoTypeIDBareReturnsObjcObject(t *testing.T) {
 	m := newTestMapper()
 	ctx := newTestCtx(m, "Foundation")
 
 	got := m.GoType("id", ctx, nil)
-	if got != "cgo.Object" {
-		t.Errorf("GoType(id) = %q, want cgo.Object", got)
+	if got != "objptr.Object" {
+		t.Errorf("GoType(id) = %q, want objptr.Object", got)
 	}
 }
 
@@ -607,7 +607,7 @@ func TestGoPointerTypeGenericKnownNonGenericClass(t *testing.T) {
 	}
 	ctx := m.BaseContext("AppKit", map[string]bool{"NSArray": true})
 	// NSArray<NSString *> * — base class is known but not generic: returns qualified type
-	// without [T] or [cgo.Object]
+	// without [T] or [objptr.Object]
 	got := m.GoType("NSArray<NSString *> *", ctx, nil)
 	if got != "*foundation.NSArray" {
 		t.Errorf("GoType(NSArray<NSString *> *) with non-generic class = %q, want *foundation.NSArray", got)

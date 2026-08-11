@@ -24,7 +24,7 @@ type Context struct {
 	IsReturn bool
 	// IsClassMethod indicates the type is being resolved for a class method (+method).
 	// Class methods have no receiver [T] in scope, so generic type parameters must
-	// be replaced with cgo.Object rather than T.
+	// be replaced with objptr.Object rather than T.
 	IsClassMethod bool
 }
 
@@ -200,13 +200,13 @@ func (m *Mapper) CType(qt string, ctx Context, imports ImportSet) string {
 	}
 	// ObjC object pointer wrappers → id (the semantically correct ObjC bridge type).
 	// id<Protocol> resolutions and typedef-resolved ObjC objects (e.g. dispatch_queue_t →
-	// NSObject<OS_dispatch_queue>) both surface as "cgo.Object" from GoType.
+	// NSObject<OS_dispatch_queue>) both surface as "objptr.Object" from GoType.
 	// Named ObjC class pointer wrappers surface as "*ClassName" or "*packageName.ClassName[...]".
 	// C struct wrappers, CF opaque types, and other non-ObjC pointers stay as void *.
 	// The OwnerIndex check is the key discriminator: only classes registered as ObjC
 	// classes (scanned from the SDK) qualify; CF opaque types (e.g. MTAudioProcessingTapRef),
 	// C struct aliases, and framework-specific CF types are absent from OwnerIndex.
-	if g == "cgo.Object" {
+	if g == "objptr.Object" {
 		return "id"
 	}
 	if strings.HasPrefix(g, "*") {
@@ -304,7 +304,7 @@ func (m *Mapper) resolveGoType(n string, ctx Context, imports ImportSet) string 
 	// the returned object and wraps it in *<GoProtoName>Proxy, which embeds
 	// foundation.NSObject and exposes the protocol methods via CGo. If no proxy
 	// is registered for the protocol (or the reference is cross-framework and
-	// import-blocked), fall back to cgo.Object (the common ObjC object interface).
+	// import-blocked), fall back to objptr.Object (the common ObjC object interface).
 	if protos := IDProtocols(n); len(protos) > 0 {
 		if ctx.IsReturn {
 			if len(protos) == 1 && len(m.ProtocolProxyIndex) > 0 {
@@ -312,21 +312,21 @@ func (m *Mapper) resolveGoType(n string, ctx Context, imports ImportSet) string 
 					return resolved
 				}
 			}
-			return "cgo.Object"
+			return "objptr.Object"
 		}
 		if resolved := m.qualifiedProtocolType(protos, ctx, imports); resolved != "" {
 			return resolved
 		}
-		// Unknown protocols (none in ProtocolIndex): use cgo.Object as the
+		// Unknown protocols (none in ProtocolIndex): use objptr.Object as the
 		// minimum guarantee that the caller passes a valid ObjC object wrapper.
-		return "cgo.Object"
+		return "objptr.Object"
 	}
 
-	// id → cgo.Object. Bare `id` is an untyped ObjC object reference; cgo.Object
+	// id → objptr.Object. Bare `id` is an untyped ObjC object reference; objptr.Object
 	// (interface { Ptr() unsafe.Pointer }) is the common constraint satisfied by
 	// every generated wrapper type, so callers can pass any typed wrapper directly.
 	if IsID(n) {
-		return "cgo.Object"
+		return "objptr.Object"
 	}
 
 	// SEL → string (selectors are passed as Go strings and converted in bridge)
@@ -363,12 +363,12 @@ func (m *Mapper) resolveGoType(n string, ctx Context, imports ImportSet) string 
 	// Bare ObjC generic type parameter (e.g. "ObjectType" in NSArray.objectAtIndex: return,
 	// or "KeyType" in NSMutableDictionary.removeObjectForKey: arg). The scanner sets
 	// IsGeneric=true only for nullable returns; non-nullable and arg uses fall through here.
-	// Return cgo.Object — same as buildGoReturn does when IsGeneric=true — since T cannot
+	// Return objptr.Object — same as buildGoReturn does when IsGeneric=true — since T cannot
 	// be constructed from unsafe.Pointer without a per-type factory in Go generics.
 	if len(ctx.GenericParams) > 0 && !strings.ContainsAny(n, " *<>^()") {
 		for _, gp := range ctx.GenericParams {
 			if n == gp {
-				return "cgo.Object"
+				return "objptr.Object"
 			}
 		}
 	}
@@ -483,13 +483,13 @@ func (m *Mapper) resolvePointerType(n string, ctx Context, imports ImportSet) st
 			}
 			if anyIsTypeVar {
 				if ctx.IsClassMethod {
-					// Class methods have no [T] in scope; use cgo.Object.
-					return m.qualifiedType(baseClass, baseClass+"[cgo.Object]", ctx, imports)
+					// Class methods have no [T] in scope; use objptr.Object.
+					return m.qualifiedType(baseClass, baseClass+"[objptr.Object]", ctx, imports)
 				}
 				return m.qualifiedType(baseClass, baseClass+"[T]", ctx, imports)
 			}
 			if m.GenericClasses[baseClass] {
-				return m.qualifiedType(baseClass, baseClass+"[cgo.Object]", ctx, imports)
+				return m.qualifiedType(baseClass, baseClass+"[objptr.Object]", ctx, imports)
 			}
 			return m.qualifiedType(baseClass, baseClass, ctx, imports)
 		}
@@ -505,7 +505,7 @@ func (m *Mapper) resolvePointerType(n string, ctx Context, imports ImportSet) st
 		}
 		if ctx.ClassNameIndex[class] {
 			if m.GenericClasses[class] {
-				return m.qualifiedType(class, class+"[cgo.Object]", ctx, imports)
+				return m.qualifiedType(class, class+"[objptr.Object]", ctx, imports)
 			}
 			return m.qualifiedType(class, class, ctx, imports)
 		}
@@ -550,7 +550,7 @@ func (m *Mapper) resolvePointerType(n string, ctx Context, imports ImportSet) st
 						continue
 					}
 					// Typedef chain leads to a known ObjC class pointer
-					// (e.g. MPSShape → NSArray<NSNumber *> → *foundation.NSArray[cgo.Object]).
+					// (e.g. MPSShape → NSArray<NSNumber *> → *foundation.NSArray[objptr.Object]).
 					// Guard: skip if the target already ends with * to avoid double-pointer.
 					if m.OwnerIndex[resolvedCls] != "" && !strings.HasSuffix(strings.TrimSpace(resolved), "*") {
 						return m.resolvePointerType(strings.TrimSpace(resolved)+" *", ctx, imports)
