@@ -50,6 +50,12 @@ type BindingsConfig struct {
 	// recorded by the type mapper. The CLI uses this to enforce a committed
 	// diagnostics baseline.
 	DiagnosticsSink *[]string
+	// LibraryFilter, when non-nil, restricts library emission (LinkLib != "")
+	// to the metas it accepts. The cgo→purego migration ratchet passes a filter
+	// rejecting purego-backed libraries, which are emitted by the purego
+	// pipeline into the same output tree instead. When set, LibrariesOutDir is
+	// NOT wiped wholesale — rejected libraries' package dirs are left alone.
+	LibraryFilter func(name string) bool
 }
 
 // defaultBlocksDir and defaultCallbacksDir are the canonical paths (relative to the
@@ -102,8 +108,10 @@ func GenerateBindings(cfg BindingsConfig) error {
 		}
 	}
 	if cfg.LibrariesOutDir != "" {
-		if err := os.RemoveAll(cfg.LibrariesOutDir); err != nil {
-			return fmt.Errorf("clean libraries dir: %w", err)
+		if cfg.LibraryFilter == nil {
+			if err := os.RemoveAll(cfg.LibrariesOutDir); err != nil {
+				return fmt.Errorf("clean libraries dir: %w", err)
+			}
 		}
 		// The bsd support package backs the typemap's POSIX/BSD struct
 		// resolution (bsd.Timespec, bsd.EtherAddr, …). It is emitted to its own
@@ -390,6 +398,9 @@ func emitFramework(
 	if isLibrary && cfg.LibrariesOutDir == "" {
 		return nil
 	}
+	if isLibrary && cfg.LibraryFilter != nil && !cfg.LibraryFilter(framework.Framework) {
+		return nil
+	}
 	if !isLibrary && cfg.FrameworksOutDir == "" {
 		return nil
 	}
@@ -400,6 +411,14 @@ func emitFramework(
 	}
 	outDir := filepath.Join(rootDir, packageName)
 
+	// With a LibraryFilter the shared libraries tree was not wiped wholesale,
+	// so replace this package's dir individually (clears stale purego files if
+	// a library ever flips back to the cgo backend).
+	if isLibrary && cfg.LibraryFilter != nil {
+		if err := os.RemoveAll(outDir); err != nil {
+			return fmt.Errorf("clean package dir %s: %w", outDir, err)
+		}
+	}
 	if err := os.MkdirAll(outDir, 0o755); err != nil {
 		return fmt.Errorf("mkdir %s: %w", outDir, err)
 	}

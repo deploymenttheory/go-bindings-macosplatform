@@ -225,6 +225,21 @@ type CLibraryDef struct {
 	// only declarations made in it, and the bridge emitter ships a copy inside
 	// the generated package's bridge/ directory.
 	ShimHeader string `json:"shim_header,omitempty"`
+	// Backend selects the binding backend for this library: "cgo" (default when
+	// empty) emits the ObjC-shim bridge via the CGo pipeline; "purego" emits
+	// dlopen/RegisterLibFunc bindings via the purego frameworks pipeline. The
+	// per-library key is the migration ratchet — libraries flip one at a time.
+	Backend string `json:"backend,omitempty"`
+}
+
+// BackendPurego is the CLibraryDef.Backend value selecting the purego pipeline.
+const BackendPurego = "purego"
+
+// CLibraryBackend returns the configured binding backend for a registered C
+// library: BackendPurego, or "" for the default CGo backend (also returned for
+// unknown names).
+func CLibraryBackend(name string) string {
+	return knownCLibraries[name].Backend
 }
 
 // defaultCLibraries is the built-in registry of Apple C libraries. These live
@@ -291,6 +306,15 @@ func LoadCLibrariesFile(path string) (bool, error) {
 				path,
 				name,
 				errMissingLinkLib,
+			)
+		}
+		if def.Backend != "" && def.Backend != "cgo" && def.Backend != BackendPurego {
+			return false, fmt.Errorf(
+				"parsing C library config %s: entry %q: unknown backend %q (want \"cgo\" or %q)",
+				path,
+				name,
+				def.Backend,
+				BackendPurego,
 			)
 		}
 	}

@@ -45,6 +45,7 @@
   "link_lib": "System"
  },
  "machtime": {
+  "backend": "purego",
   "header": "mach/mach_time.h",
   "header_dir": "mach/mach_time.h",
   "link_lib": "System"
