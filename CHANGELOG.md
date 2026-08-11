@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.18.1](https://github.com/deploymenttheory/go-bindings-macosplatform/compare/v0.18.0...v0.18.1) (2026-08-11)
+
+
+### Bug Fixes
+
+* **codegen:** prefer locally-declared structs, fix consumer drift, cover opinionated+examples in CI ([#106](https://github.com/deploymenttheory/go-bindings-macosplatform/issues/106)) ([ca51c34](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/ca51c34ff34ef1930c0a007b3e7f6d457a5058a5))
+
 ## [0.18.0](https://github.com/deploymenttheory/go-bindings-macosplatform/compare/v0.17.0...v0.18.0) (2026-07-24)
 
 
