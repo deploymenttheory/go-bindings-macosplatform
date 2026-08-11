@@ -33,14 +33,6 @@ type BindingsConfig struct {
 	// SDKPath is the macOS SDK root (e.g. from xcrun --show-sdk-path).
 	// Used to locate .swiftinterface files for Swift-only frameworks.
 	SDKPath string
-	// BlocksDir overrides the output path for bindings/runtime/blocks generated files.
-	// Defaults to defaultBlocksDir when empty. Tests use this to redirect output
-	// to a temp directory without altering the canonical repo path.
-	BlocksDir string
-	// CallbacksDir overrides the output path for bindings/runtime/callbacks generated files.
-	// Defaults to defaultCallbacksDir when empty. Tests use this to redirect output
-	// to a temp directory without altering the canonical repo path.
-	CallbacksDir string
 	// Verbose enables diagnostic output for unsafe.Pointer type degradations.
 	Verbose bool
 	// Strict returns an error when any type degrades to unsafe.Pointer.
@@ -59,16 +51,10 @@ type BindingsConfig struct {
 	LibraryFilter func(name string) bool
 }
 
-// defaultBlocksDir and defaultCallbacksDir are the canonical paths (relative to the
-// repo root) for the generated block and callback trampoline packages.
-const (
-	defaultBlocksDir    = "bindings/runtime/blocks"
-	defaultCallbacksDir = "bindings/runtime/callbacks"
-	// defaultBsdDir is the PUBLIC location of the POSIX/BSD support package
-	// (see typemap.BsdModulePath) — outside bindings/internal/raw so both the
-	// internal raw libraries and the public idiomatic ones can import it.
-	defaultBsdDir = "bindings/libraries/bsd"
-)
+// defaultBsdDir is the PUBLIC location of the POSIX/BSD support package
+// (see typemap.BsdModulePath) — outside bindings/internal/raw so both the
+// internal raw libraries and the public idiomatic ones can import it.
+const defaultBsdDir = "bindings/libraries/bsd"
 
 // buildMapper constructs the shared type mapper from a loaded registry.
 func buildMapper(reg *Registry, nsStringOverloads bool) *typemap.Mapper {
@@ -131,78 +117,10 @@ func GenerateBindings(cfg BindingsConfig) error {
 		}
 	}
 
-	blocksDir := cfg.BlocksDir
-	if blocksDir == "" {
-		blocksDir = defaultBlocksDir
-	}
-	callbacksDir := cfg.CallbacksDir
-	if callbacksDir == "" {
-		callbacksDir = defaultCallbacksDir
-	}
-
-	// Block trampolines.
-	{
-		frameworks := make([]*macosplatformmetadata.FrameworkMeta, 0, len(reg.Frameworks))
-		frameworks = append(frameworks, reg.Frameworks...)
-		sigs := rawlib.CollectBlockSignaturesFromFrameworks(frameworks, m)
-
-		if err := writeFile(
-			filepath.Join(blocksDir, "blocks_generated.go"),
-			func(buf *bytes.Buffer) error {
-				return rawlib.EmitRuntimeBlocksGo(buf, sigs, "blocks")
-			},
-		); err != nil {
-			return fmt.Errorf("generate blocks_generated.go: %w", err)
-		}
-		if err := writeFile(
-			filepath.Join(blocksDir, "block_trampolines_generated.h"),
-			func(buf *bytes.Buffer) error {
-				return rawlib.EmitRuntimeBlocksTrampolineHeader(buf, sigs)
-			},
-		); err != nil {
-			return fmt.Errorf("generate block_trampolines_generated.h: %w", err)
-		}
-		if err := writeFile(
-			filepath.Join(blocksDir, "block_trampolines_generated.m"),
-			func(buf *bytes.Buffer) error {
-				return rawlib.EmitRuntimeBlocksTrampolineImpl(buf, sigs)
-			},
-		); err != nil {
-			return fmt.Errorf("generate block_trampolines_generated.m: %w", err)
-		}
-	}
-
-	// Callback trampolines.
-	{
-		frameworks := make([]*macosplatformmetadata.FrameworkMeta, 0, len(reg.Frameworks))
-		frameworks = append(frameworks, reg.Frameworks...)
-		sigs := rawlib.CollectMethodSigsFromFrameworks(frameworks, m)
-
-		if err := writeFile(
-			filepath.Join(callbacksDir, "callbacks_generated.go"),
-			func(buf *bytes.Buffer) error {
-				return rawlib.EmitRuntimeCallbacksGo(buf, sigs, "callbacks")
-			},
-		); err != nil {
-			return fmt.Errorf("generate callbacks_generated.go: %w", err)
-		}
-		if err := writeFile(
-			filepath.Join(callbacksDir, "method_trampolines_generated.h"),
-			func(buf *bytes.Buffer) error {
-				return rawlib.EmitRuntimeCallbacksTrampolineHeader(buf, sigs)
-			},
-		); err != nil {
-			return fmt.Errorf("generate method_trampolines_generated.h: %w", err)
-		}
-		if err := writeFile(
-			filepath.Join(callbacksDir, "method_trampolines_generated.m"),
-			func(buf *bytes.Buffer) error {
-				return rawlib.EmitRuntimeCallbacksTrampolineImpl(buf, sigs)
-			},
-		); err != nil {
-			return fmt.Errorf("generate method_trampolines_generated.m: %w", err)
-		}
-	}
+	// The ObjC block and method-callback trampoline packages (runtime/blocks,
+	// runtime/callbacks) are no longer generated: every C library is on the
+	// purego backend, whose block adapters use objc.NewBlock directly, so
+	// nothing imports those cgo trampoline packages.
 
 	if err := forEachFramework(
 		reg,

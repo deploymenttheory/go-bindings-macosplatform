@@ -108,8 +108,6 @@ func generateTo(t *testing.T, reg *pipeline.Registry, outDir string) {
 		Registry:         reg,
 		FrameworksOutDir: outDir,
 		LibrariesOutDir:  t.TempDir(),
-		BlocksDir:        t.TempDir(),
-		CallbacksDir:     t.TempDir(),
 	}); err != nil {
 		t.Fatalf("pipeline.GenerateBindings: %v", err)
 	}
@@ -416,8 +414,6 @@ func TestAllFrameworksGenerateWithoutError(t *testing.T) {
 		Registry:         reg,
 		FrameworksOutDir: outDir,
 		LibrariesOutDir:  t.TempDir(),
-		BlocksDir:        t.TempDir(),
-		CallbacksDir:     t.TempDir(),
 	}); err != nil {
 		t.Fatalf("Generate: %v", err)
 	}
@@ -477,8 +473,6 @@ func TestAllFrameworksBuild(t *testing.T) {
 		Registry:         reg,
 		FrameworksOutDir: outDir,
 		LibrariesOutDir:  t.TempDir(),
-		BlocksDir:        t.TempDir(),
-		CallbacksDir:     t.TempDir(),
 	}); err != nil {
 		t.Fatalf("Generate: %v", err)
 	}
