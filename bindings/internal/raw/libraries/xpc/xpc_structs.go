@@ -4,10 +4,7 @@
 
 package xpc
 
-import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo"
-	"unsafe"
-)
+import "unsafe"
 
 // [xpc.h:172]
 type XpcBoolS struct {
@@ -33,6 +30,5 @@ func NewXpcTypeT(ptr unsafe.Pointer) *XpcTypeT {
 		return nil
 	}
 	o := &XpcTypeT{ptr: ptr}
-	cgo.Track(o, o.Ptr)
 	return o
 }

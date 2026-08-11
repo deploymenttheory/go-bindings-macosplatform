@@ -77,6 +77,7 @@ func buildMapper(reg *Registry, nsStringOverloads bool) *typemap.Mapper {
 	m.GenericParamIndex = reg.GenericParamIndex
 	m.OwnerIndex = reg.OwnerIndex
 	m.EnumIndex = reg.EnumIndex
+	m.LocalEnums = reg.LocalEnums
 	m.EnumGoTypeIndex = reg.EnumGoTypeIndex
 	m.TypedefIndex = reg.TypedefIndex
 	m.StructIndex = reg.StructIndex

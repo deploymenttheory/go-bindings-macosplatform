@@ -271,9 +271,13 @@ type ProtocolModel struct {
 
 // ProtocolsFileModel is template data for a complete _protocols.go file.
 type ProtocolsFileModel struct {
-	PkgName   string
-	Imports   []string
-	Protocols []ProtocolModel
+	PkgName string
+	Imports []string
+	// RootObject is the qualified Object interface every protocol interface
+	// embeds: "cgo.Object" for the cgo backend, "objptr.Object" (pure Go) for
+	// the purego backend.
+	RootObject string
+	Protocols  []ProtocolModel
 }
 
 // ─── Functions ────────────────────────────────────────────────────────────────

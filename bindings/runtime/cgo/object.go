@@ -2,13 +2,18 @@
 
 package cgo
 
-import "unsafe"
+import (
+	"unsafe"
 
-// Object is the constraint satisfied by every generated ObjC wrapper type.
-// It guarantees the type exposes its underlying ObjC pointer.
-type Object interface {
-	Ptr() unsafe.Pointer
-}
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/objptr"
+)
+
+// Object is the constraint satisfied by every generated ObjC wrapper type. It
+// guarantees the type exposes its underlying ObjC pointer. It is an alias for
+// objptr.Object — the pure-Go home of the interface — so purego-backed library
+// packages can embed the same type without importing this cgo package; all
+// cgo-backed generated code keeps referring to it as cgo.Object.
+type Object = objptr.Object
 
 // WrapObject wraps an ObjC pointer in a minimal Object implementation.
 // Used when a method's return type is a generic type parameter and the concrete

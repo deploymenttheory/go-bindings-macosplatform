@@ -359,6 +359,22 @@ func TestQualifierEnumTypeCrossFramework(t *testing.T) {
 	}
 }
 
+// TestQualifierEnumTypeLocalDeclaration covers the local-declaration
+// preference: an enum owned (by the global index) elsewhere but ALSO declared
+// by the current framework resolves to the local copy, not a cross-package
+// import (xpc_listener_create_flags_t declared by both xpc and oslog).
+func TestQualifierEnumTypeLocalDeclaration(t *testing.T) {
+	q := newTestQualifier("xpc", "example.com/fw", nil, nil)
+	q.localEnums = map[string]bool{"xpc_listener_create_flags_t": true}
+	got := q.enumType("xpc_listener_create_flags_t", "oslog")
+	if got != "XpcListenerCreateFlagsT" {
+		t.Errorf("enumType(local-decl) = %q, want XpcListenerCreateFlagsT (no oslog. qualifier)", got)
+	}
+	if q.usedImports["oslog"] != "" {
+		t.Error("local enum must not import the global owner package")
+	}
+}
+
 func TestQualifierStructTypeSameFramework(t *testing.T) {
 	q := newTestQualifier("Foundation", "example.com/fw", nil, nil)
 	if got := q.structType("NSRect", "Foundation", false); got != "NSRect" {

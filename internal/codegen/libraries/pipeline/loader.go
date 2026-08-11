@@ -41,6 +41,15 @@ type Registry struct {
 	// EnumIndex maps enum type name → owning framework (e.g. "VZVirtualMachineState" → "Virtualization").
 	// Used to resolve enum-typed return values that would otherwise fall through to unsafe.Pointer.
 	EnumIndex map[string]string
+	// LocalEnums maps framework name → the set of enum type names it declares
+	// locally. An enum whose header is shared by several libraries (e.g.
+	// xpc_listener_create_flags_t, pulled in by both xpc and oslog) is emitted
+	// in every declaring package, so a reference from a declaring framework
+	// must resolve to the LOCAL copy — qualifying it against the global
+	// EnumIndex owner manufactures a cross-package import (xpc → oslog), which
+	// on the purego backend drags a still-cgo library's cgo dependency into an
+	// otherwise-pure-Go package.
+	LocalEnums map[string]map[string]bool
 	// EnumGoTypeIndex maps enum type name → underlying Go integer type (e.g. "int64", "uint64").
 	// Used by the bridge emitter to produce correct C integer casts for enum-typed arguments.
 	EnumGoTypeIndex map[string]string
@@ -83,6 +92,7 @@ type Registry struct {
 // When a directory contains multiple arch variants, arm64 is preferred.
 func LoadAll(paths []string, modulePrefix string) (*Registry, error) {
 	reg := &Registry{
+		LocalEnums:         make(map[string]map[string]bool),
 		ClassNameIndex:     make(map[string]bool),
 		GenericClasses:     make(map[string]bool),
 		GenericParamIndex:  make(map[string][]string),
@@ -271,6 +281,10 @@ func LoadAll(paths []string, modulePrefix string) (*Registry, error) {
 			if _, already := reg.EnumIndex[enumName]; !already {
 				reg.EnumIndex[enumName] = framework.Framework
 			}
+			if reg.LocalEnums[framework.Framework] == nil {
+				reg.LocalEnums[framework.Framework] = make(map[string]bool)
+			}
+			reg.LocalEnums[framework.Framework][enumName] = true
 			if enum.GoType != "" {
 				if _, already := reg.EnumGoTypeIndex[enumName]; !already {
 					reg.EnumGoTypeIndex[enumName] = enum.GoType

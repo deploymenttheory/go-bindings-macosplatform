@@ -74,6 +74,7 @@
   "link_lib": "xar"
  },
  "xpc": {
+  "backend": "purego",
   "header": "xpc/xpc.h",
   "header_dir": "xpc/",
   "link_lib": "System"

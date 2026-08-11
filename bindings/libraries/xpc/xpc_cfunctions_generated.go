@@ -5,7 +5,6 @@
 package xpc
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/libraries/oslog"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/libraries/xpc"
 	"unsafe"
 )
@@ -636,11 +635,11 @@ func ConnectionCreateMachService(name string, targetq DispatchQueue, flags uint6
 	return WrapConnection(raw.Xpc_connection_create_mach_service(name, targetq.ptr, flags))
 }
 
-func SessionCreateXpcService(name string, target_queue DispatchQueue, flags oslog.XpcSessionCreateFlagsT, error_out RichError) Session {
+func SessionCreateXpcService(name string, target_queue DispatchQueue, flags raw.XpcSessionCreateFlagsT, error_out RichError) Session {
 	return WrapSession(raw.Xpc_session_create_xpc_service(name, target_queue.ptr, flags, error_out.ptr))
 }
 
-func SessionCreateMachService(mach_service string, target_queue DispatchQueue, flags oslog.XpcSessionCreateFlagsT, error_out RichError) Session {
+func SessionCreateMachService(mach_service string, target_queue DispatchQueue, flags raw.XpcSessionCreateFlagsT, error_out RichError) Session {
 	return WrapSession(raw.Xpc_session_create_mach_service(mach_service, target_queue.ptr, flags, error_out.ptr))
 }
 

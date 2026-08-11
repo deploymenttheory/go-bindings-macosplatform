@@ -23,6 +23,7 @@ type qualifier struct {
 	frameworkOwner map[string]string
 	knownProtocols map[string]string
 	blockedImports map[string]map[string]bool
+	localEnums     map[string]bool   // enum names q.framework declares locally
 	usedImports    map[string]string // populated as a side effect
 	diagnostics    *[]string         // pointer to Mapper.Diagnostics
 }
@@ -37,6 +38,7 @@ func (m *Mapper) buildQualifier(ctx Context, imports ImportSet) qualifier {
 		frameworkOwner: m.OwnerIndex,
 		knownProtocols: m.ProtocolIndex,
 		blockedImports: m.BlockedImports,
+		localEnums:     m.LocalEnums[ctx.Framework],
 		usedImports:    imports,
 		diagnostics:    &m.Diagnostics,
 	}
@@ -82,7 +84,10 @@ func (q qualifier) classType(class, typeExpr string) string {
 // No leading "*" — enums are value types.
 func (q qualifier) enumType(name, owner string) string {
 	goName := naming.ExportedTypeName(name)
-	if owner == "" || strings.EqualFold(owner, q.framework) {
+	// An enum this framework also declares locally resolves to the local copy,
+	// never a cross-package reference (which the emitter would import — dragging
+	// a still-cgo library into a purego one; see Mapper.LocalEnums).
+	if owner == "" || strings.EqualFold(owner, q.framework) || q.localEnums[name] {
 		return goName
 	}
 	if q.isBlocked(owner) {

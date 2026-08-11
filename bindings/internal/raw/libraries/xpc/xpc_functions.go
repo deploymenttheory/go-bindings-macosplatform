@@ -4,1710 +4,1262 @@
 
 package xpc
 
-// #include "bridge/xpc_bridge.h"
-import "C"
-
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/libraries/oslog"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/blocks"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo"
+	"github.com/ebitengine/purego/objc"
+	"runtime"
 	"unsafe"
 )
 
-var _ unsafe.Pointer // suppress unused import
+var (
+	_pg__xpc_object_validate                                          func(unsafe.Pointer)
+	_pg_xpc_endpoint_create                                           func(unsafe.Pointer) unsafe.Pointer
+	_pg_xpc_activity_register                                         func(string, unsafe.Pointer, objc.Block)
+	_pg_xpc_activity_copy_criteria                                    func(unsafe.Pointer) unsafe.Pointer
+	_pg_xpc_activity_set_criteria                                     func(unsafe.Pointer, unsafe.Pointer)
+	_pg_xpc_activity_get_state                                        func(unsafe.Pointer) int64
+	_pg_xpc_activity_set_state                                        func(unsafe.Pointer, int64) bool
+	_pg_xpc_activity_should_defer                                     func(unsafe.Pointer) bool
+	_pg_xpc_activity_unregister                                       func(string)
+	_pg_xpc_peer_requirement_create_entitlement_exists                func(string, unsafe.Pointer) unsafe.Pointer
+	_pg_xpc_peer_requirement_create_entitlement_matches_value         func(string, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_pg_xpc_peer_requirement_create_team_identity                     func(string, unsafe.Pointer) unsafe.Pointer
+	_pg_xpc_peer_requirement_create_platform_identity                 func(string, unsafe.Pointer) unsafe.Pointer
+	_pg_xpc_peer_requirement_create_lwcr                              func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_pg_xpc_peer_requirement_match_received_message                   func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
+	_pg_xpc_connection_create                                         func(string, unsafe.Pointer) unsafe.Pointer
+	_pg_xpc_connection_create_mach_service                            func(string, unsafe.Pointer, uint64) unsafe.Pointer
+	_pg_xpc_connection_create_from_endpoint                           func(unsafe.Pointer) unsafe.Pointer
+	_pg_xpc_connection_set_target_queue                               func(unsafe.Pointer, unsafe.Pointer)
+	_pg_xpc_connection_set_event_handler                              func(unsafe.Pointer, unsafe.Pointer)
+	_pg_xpc_connection_activate                                       func(unsafe.Pointer)
+	_pg_xpc_connection_suspend                                        func(unsafe.Pointer)
+	_pg_xpc_connection_resume                                         func(unsafe.Pointer)
+	_pg_xpc_connection_send_message                                   func(unsafe.Pointer, unsafe.Pointer)
+	_pg_xpc_connection_send_barrier                                   func(unsafe.Pointer, objc.Block)
+	_pg_xpc_connection_send_message_with_reply                        func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_pg_xpc_connection_send_message_with_reply_sync                   func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_pg_xpc_connection_cancel                                         func(unsafe.Pointer)
+	_pg_xpc_connection_get_name                                       func(unsafe.Pointer) string
+	_pg_xpc_connection_get_euid                                       func(unsafe.Pointer) uint32
+	_pg_xpc_connection_get_egid                                       func(unsafe.Pointer) uint32
+	_pg_xpc_connection_get_pid                                        func(unsafe.Pointer) int32
+	_pg_xpc_connection_get_asid                                       func(unsafe.Pointer) int32
+	_pg_xpc_connection_set_context                                    func(unsafe.Pointer, unsafe.Pointer)
+	_pg_xpc_connection_get_context                                    func(unsafe.Pointer) unsafe.Pointer
+	_pg_xpc_connection_set_finalizer_f                                func(unsafe.Pointer, unsafe.Pointer)
+	_pg_xpc_connection_set_peer_code_signing_requirement              func(unsafe.Pointer, string) int32
+	_pg_xpc_connection_set_peer_entitlement_exists_requirement        func(unsafe.Pointer, string) int32
+	_pg_xpc_connection_set_peer_entitlement_matches_value_requirement func(unsafe.Pointer, string, unsafe.Pointer) int32
+	_pg_xpc_connection_set_peer_team_identity_requirement             func(unsafe.Pointer, string) int32
+	_pg_xpc_connection_set_peer_platform_identity_requirement         func(unsafe.Pointer, string) int32
+	_pg_xpc_connection_set_peer_lightweight_code_requirement          func(unsafe.Pointer, unsafe.Pointer) int32
+	_pg_xpc_connection_set_peer_requirement                           func(unsafe.Pointer, unsafe.Pointer)
+	_pg_xpc_connection_copy_invalidation_reason                       func(unsafe.Pointer) string
+	_pg_xpc_rich_error_copy_description                               func(unsafe.Pointer) string
+	_pg_xpc_rich_error_can_retry                                      func(unsafe.Pointer) bool
+	_pg_xpc_session_copy_description                                  func(unsafe.Pointer) string
+	_pg_xpc_session_create_xpc_service                                func(string, unsafe.Pointer, XpcSessionCreateFlagsT, unsafe.Pointer) unsafe.Pointer
+	_pg_xpc_session_create_mach_service                               func(string, unsafe.Pointer, XpcSessionCreateFlagsT, unsafe.Pointer) unsafe.Pointer
+	_pg_xpc_session_set_incoming_message_handler                      func(unsafe.Pointer, objc.Block)
+	_pg_xpc_session_set_cancel_handler                                func(unsafe.Pointer, objc.Block)
+	_pg_xpc_session_set_target_queue                                  func(unsafe.Pointer, unsafe.Pointer)
+	_pg_xpc_session_activate                                          func(unsafe.Pointer, unsafe.Pointer) bool
+	_pg_xpc_session_cancel                                            func(unsafe.Pointer)
+	_pg_xpc_session_send_message                                      func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_pg_xpc_session_send_message_with_reply_sync                      func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_pg_xpc_session_send_message_with_reply_async                     func(unsafe.Pointer, unsafe.Pointer, objc.Block)
+	_pg_xpc_session_set_peer_code_signing_requirement                 func(unsafe.Pointer, string) int32
+	_pg_xpc_session_set_peer_requirement                              func(unsafe.Pointer, unsafe.Pointer)
+	_pg_xpc_listener_copy_description                                 func(unsafe.Pointer) string
+	_pg_xpc_listener_create                                           func(string, unsafe.Pointer, XpcListenerCreateFlagsT, objc.Block, unsafe.Pointer) unsafe.Pointer
+	_pg_xpc_listener_activate                                         func(unsafe.Pointer, unsafe.Pointer) bool
+	_pg_xpc_listener_cancel                                           func(unsafe.Pointer)
+	_pg_xpc_listener_reject_peer                                      func(unsafe.Pointer, string)
+	_pg_xpc_listener_set_peer_code_signing_requirement                func(unsafe.Pointer, string) int32
+	_pg_xpc_listener_set_peer_requirement                             func(unsafe.Pointer, unsafe.Pointer)
+	_pg_xpc_retain                                                    func(unsafe.Pointer) unsafe.Pointer
+	_pg_xpc_release                                                   func(unsafe.Pointer)
+	_pg_xpc_get_type                                                  func(unsafe.Pointer) unsafe.Pointer
+	_pg_xpc_type_get_name                                             func(unsafe.Pointer) string
+	_pg_xpc_copy                                                      func(unsafe.Pointer) unsafe.Pointer
+	_pg_xpc_equal                                                     func(unsafe.Pointer, unsafe.Pointer) bool
+	_pg_xpc_hash                                                      func(unsafe.Pointer) uint64
+	_pg_xpc_copy_description                                          func(unsafe.Pointer) string
+	_pg_xpc_null_create                                               func() unsafe.Pointer
+	_pg_xpc_bool_create                                               func(bool) unsafe.Pointer
+	_pg_xpc_bool_get_value                                            func(unsafe.Pointer) bool
+	_pg_xpc_int64_create                                              func(int64) unsafe.Pointer
+	_pg_xpc_int64_get_value                                           func(unsafe.Pointer) int64
+	_pg_xpc_uint64_create                                             func(uint64) unsafe.Pointer
+	_pg_xpc_uint64_get_value                                          func(unsafe.Pointer) uint64
+	_pg_xpc_double_create                                             func(float64) unsafe.Pointer
+	_pg_xpc_double_get_value                                          func(unsafe.Pointer) float64
+	_pg_xpc_date_create                                               func(int64) unsafe.Pointer
+	_pg_xpc_date_create_from_current                                  func() unsafe.Pointer
+	_pg_xpc_date_get_value                                            func(unsafe.Pointer) int64
+	_pg_xpc_data_create                                               func(unsafe.Pointer, uint64) unsafe.Pointer
+	_pg_xpc_data_create_with_dispatch_data                            func(unsafe.Pointer) unsafe.Pointer
+	_pg_xpc_data_get_length                                           func(unsafe.Pointer) uint64
+	_pg_xpc_data_get_bytes_ptr                                        func(unsafe.Pointer) unsafe.Pointer
+	_pg_xpc_data_get_bytes                                            func(unsafe.Pointer, unsafe.Pointer, uint64, uint64) uint64
+	_pg_xpc_string_create                                             func(string) unsafe.Pointer
+	_pg_xpc_string_get_length                                         func(unsafe.Pointer) uint64
+	_pg_xpc_string_get_string_ptr                                     func(unsafe.Pointer) string
+	_pg_xpc_uuid_create                                               func(*uint8) unsafe.Pointer
+	_pg_xpc_uuid_get_bytes                                            func(unsafe.Pointer) unsafe.Pointer
+	_pg_xpc_fd_create                                                 func(int32) unsafe.Pointer
+	_pg_xpc_fd_dup                                                    func(unsafe.Pointer) int32
+	_pg_xpc_shmem_create                                              func(unsafe.Pointer, uint64) unsafe.Pointer
+	_pg_xpc_shmem_map                                                 func(unsafe.Pointer, unsafe.Pointer) uint64
+	_pg_xpc_array_create                                              func(unsafe.Pointer, uint64) unsafe.Pointer
+	_pg_xpc_array_create_empty                                        func() unsafe.Pointer
+	_pg_xpc_array_set_value                                           func(unsafe.Pointer, uint64, unsafe.Pointer)
+	_pg_xpc_array_append_value                                        func(unsafe.Pointer, unsafe.Pointer)
+	_pg_xpc_array_get_count                                           func(unsafe.Pointer) uint64
+	_pg_xpc_array_get_value                                           func(unsafe.Pointer, uint64) unsafe.Pointer
+	_pg_xpc_array_apply                                               func(unsafe.Pointer, objc.Block) bool
+	_pg_xpc_array_set_bool                                            func(unsafe.Pointer, uint64, bool)
+	_pg_xpc_array_set_int64                                           func(unsafe.Pointer, uint64, int64)
+	_pg_xpc_array_set_uint64                                          func(unsafe.Pointer, uint64, uint64)
+	_pg_xpc_array_set_double                                          func(unsafe.Pointer, uint64, float64)
+	_pg_xpc_array_set_date                                            func(unsafe.Pointer, uint64, int64)
+	_pg_xpc_array_set_data                                            func(unsafe.Pointer, uint64, unsafe.Pointer, uint64)
+	_pg_xpc_array_set_string                                          func(unsafe.Pointer, uint64, string)
+	_pg_xpc_array_set_uuid                                            func(unsafe.Pointer, uint64, *uint8)
+	_pg_xpc_array_set_fd                                              func(unsafe.Pointer, uint64, int32)
+	_pg_xpc_array_set_connection                                      func(unsafe.Pointer, uint64, unsafe.Pointer)
+	_pg_xpc_array_get_bool                                            func(unsafe.Pointer, uint64) bool
+	_pg_xpc_array_get_int64                                           func(unsafe.Pointer, uint64) int64
+	_pg_xpc_array_get_uint64                                          func(unsafe.Pointer, uint64) uint64
+	_pg_xpc_array_get_double                                          func(unsafe.Pointer, uint64) float64
+	_pg_xpc_array_get_date                                            func(unsafe.Pointer, uint64) int64
+	_pg_xpc_array_get_data                                            func(unsafe.Pointer, uint64, *uint64) unsafe.Pointer
+	_pg_xpc_array_get_string                                          func(unsafe.Pointer, uint64) string
+	_pg_xpc_array_get_uuid                                            func(unsafe.Pointer, uint64) unsafe.Pointer
+	_pg_xpc_array_dup_fd                                              func(unsafe.Pointer, uint64) int32
+	_pg_xpc_array_create_connection                                   func(unsafe.Pointer, uint64) unsafe.Pointer
+	_pg_xpc_array_get_dictionary                                      func(unsafe.Pointer, uint64) unsafe.Pointer
+	_pg_xpc_array_get_array                                           func(unsafe.Pointer, uint64) unsafe.Pointer
+	_pg_xpc_dictionary_create                                         func(unsafe.Pointer, unsafe.Pointer, uint64) unsafe.Pointer
+	_pg_xpc_dictionary_create_empty                                   func() unsafe.Pointer
+	_pg_xpc_dictionary_create_reply                                   func(unsafe.Pointer) unsafe.Pointer
+	_pg_xpc_dictionary_set_value                                      func(unsafe.Pointer, string, unsafe.Pointer)
+	_pg_xpc_dictionary_get_value                                      func(unsafe.Pointer, string) unsafe.Pointer
+	_pg_xpc_dictionary_get_count                                      func(unsafe.Pointer) uint64
+	_pg_xpc_dictionary_apply                                          func(unsafe.Pointer, objc.Block) bool
+	_pg_xpc_dictionary_get_remote_connection                          func(unsafe.Pointer) unsafe.Pointer
+	_pg_xpc_dictionary_set_bool                                       func(unsafe.Pointer, string, bool)
+	_pg_xpc_dictionary_set_int64                                      func(unsafe.Pointer, string, int64)
+	_pg_xpc_dictionary_set_uint64                                     func(unsafe.Pointer, string, uint64)
+	_pg_xpc_dictionary_set_double                                     func(unsafe.Pointer, string, float64)
+	_pg_xpc_dictionary_set_date                                       func(unsafe.Pointer, string, int64)
+	_pg_xpc_dictionary_set_data                                       func(unsafe.Pointer, string, unsafe.Pointer, uint64)
+	_pg_xpc_dictionary_set_string                                     func(unsafe.Pointer, string, string)
+	_pg_xpc_dictionary_set_uuid                                       func(unsafe.Pointer, string, *uint8)
+	_pg_xpc_dictionary_set_fd                                         func(unsafe.Pointer, string, int32)
+	_pg_xpc_dictionary_set_connection                                 func(unsafe.Pointer, string, unsafe.Pointer)
+	_pg_xpc_dictionary_set_mach_send                                  func(unsafe.Pointer, string, uint32)
+	_pg_xpc_dictionary_get_bool                                       func(unsafe.Pointer, string) bool
+	_pg_xpc_dictionary_get_int64                                      func(unsafe.Pointer, string) int64
+	_pg_xpc_dictionary_get_uint64                                     func(unsafe.Pointer, string) uint64
+	_pg_xpc_dictionary_get_double                                     func(unsafe.Pointer, string) float64
+	_pg_xpc_dictionary_get_date                                       func(unsafe.Pointer, string) int64
+	_pg_xpc_dictionary_get_data                                       func(unsafe.Pointer, string, *uint64) unsafe.Pointer
+	_pg_xpc_dictionary_get_string                                     func(unsafe.Pointer, string) string
+	_pg_xpc_dictionary_get_uuid                                       func(unsafe.Pointer, string) unsafe.Pointer
+	_pg_xpc_dictionary_dup_fd                                         func(unsafe.Pointer, string) int32
+	_pg_xpc_dictionary_create_connection                              func(unsafe.Pointer, string) unsafe.Pointer
+	_pg_xpc_dictionary_get_dictionary                                 func(unsafe.Pointer, string) unsafe.Pointer
+	_pg_xpc_dictionary_get_array                                      func(unsafe.Pointer, string) unsafe.Pointer
+	_pg_xpc_dictionary_copy_mach_send                                 func(unsafe.Pointer, string) uint32
+	_pg_xpc_main                                                      func(unsafe.Pointer)
+	_pg_xpc_transaction_begin                                         func()
+	_pg_xpc_transaction_end                                           func()
+	_pg_xpc_set_event_stream_handler                                  func(string, unsafe.Pointer, unsafe.Pointer)
+)
 
 // [xpc.h:78]
 // ID: objc-sym xpc._xpc_object_validate
 func _xpc_object_validate(object unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.xpc_fn__xpc_object_validate(object, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg__xpc_object_validate(object)
 }
 
 // [endpoint.h:22]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_endpoint_create
 func Xpc_endpoint_create(connection unsafe.Pointer) unsafe.Pointer {
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_endpoint_create(connection, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_endpoint_create(connection)
 }
 
 // [activity.h:308]
 // Introduced: macOS 10.9
 // ID: objc-sym xpc.xpc_activity_register
 func Xpc_activity_register(identifier string, criteria unsafe.Pointer, handler func(unsafe.Pointer)) {
-	_cstr_identifier := C.CString(identifier)
-	defer C.free(unsafe.Pointer(_cstr_identifier))
-	_blk_handler := blocks.MakeBlock_void_ptr(handler)
-	defer blocks.FreeBlock(_blk_handler)
-	var _exc unsafe.Pointer
-	C.xpc_fn_xpc_activity_register(_cstr_identifier, criteria, _blk_handler, &_exc)
-	cgo.RaiseIfException(_exc)
+	var _blk_handler objc.Block
+	if handler != nil {
+		_blk_handler = objc.NewBlock(func(_ objc.Block, _a0 unsafe.Pointer) { handler(_a0) })
+		defer _blk_handler.Release()
+	}
+	_pg_xpc_activity_register(identifier, criteria, _blk_handler)
 }
 
 // [activity.h:323]
 // Introduced: macOS 10.9
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_activity_copy_criteria
 func Xpc_activity_copy_criteria(activity unsafe.Pointer) unsafe.Pointer {
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_activity_copy_criteria(activity, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_activity_copy_criteria(activity)
 }
 
 // [activity.h:335]
 // Introduced: macOS 10.9
 // ID: objc-sym xpc.xpc_activity_set_criteria
 func Xpc_activity_set_criteria(activity unsafe.Pointer, criteria unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.xpc_fn_xpc_activity_set_criteria(activity, criteria, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_xpc_activity_set_criteria(activity, criteria)
 }
 
 // [activity.h:417]
 // Introduced: macOS 10.9
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_activity_get_state
 func Xpc_activity_get_state(activity unsafe.Pointer) int64 {
-	var _exc unsafe.Pointer
-	_result := int64(C.xpc_fn_xpc_activity_get_state(activity, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_activity_get_state(activity)
 }
 
 // [activity.h:433]
 // Introduced: macOS 10.9
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_activity_set_state
 func Xpc_activity_set_state(activity unsafe.Pointer, state int64) bool {
-	var _exc unsafe.Pointer
-	_result := bool(C.xpc_fn_xpc_activity_set_state(activity, C.int64_t(state), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_activity_set_state(activity, state)
 }
 
 // [activity.h:457]
 // Introduced: macOS 10.9
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_activity_should_defer
 func Xpc_activity_should_defer(activity unsafe.Pointer) bool {
-	var _exc unsafe.Pointer
-	_result := bool(C.xpc_fn_xpc_activity_should_defer(activity, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_activity_should_defer(activity)
 }
 
 // [activity.h:481]
 // Introduced: macOS 10.9
 // ID: objc-sym xpc.xpc_activity_unregister
 func Xpc_activity_unregister(identifier string) {
-	_cstr_identifier := C.CString(identifier)
-	defer C.free(unsafe.Pointer(_cstr_identifier))
-	var _exc unsafe.Pointer
-	C.xpc_fn_xpc_activity_unregister(_cstr_identifier, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_xpc_activity_unregister(identifier)
 }
 
 // [peer_requirement.h:60]
 // Introduced: macOS 26.0
 // ID: objc-sym xpc.xpc_peer_requirement_create_entitlement_exists
 func Xpc_peer_requirement_create_entitlement_exists(entitlement string, error_out unsafe.Pointer) unsafe.Pointer {
-	_cstr_entitlement := C.CString(entitlement)
-	defer C.free(unsafe.Pointer(_cstr_entitlement))
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_peer_requirement_create_entitlement_exists(_cstr_entitlement, error_out, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_peer_requirement_create_entitlement_exists(entitlement, error_out)
 }
 
 // [peer_requirement.h:93]
 // Introduced: macOS 26.0
 // ID: objc-sym xpc.xpc_peer_requirement_create_entitlement_matches_value
 func Xpc_peer_requirement_create_entitlement_matches_value(entitlement string, value unsafe.Pointer, error_out unsafe.Pointer) unsafe.Pointer {
-	_cstr_entitlement := C.CString(entitlement)
-	defer C.free(unsafe.Pointer(_cstr_entitlement))
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_peer_requirement_create_entitlement_matches_value(_cstr_entitlement, value, error_out, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_peer_requirement_create_entitlement_matches_value(entitlement, value, error_out)
 }
 
 // [peer_requirement.h:128]
 // Introduced: macOS 26.0
 // ID: objc-sym xpc.xpc_peer_requirement_create_team_identity
 func Xpc_peer_requirement_create_team_identity(signing_identifier string, error_out unsafe.Pointer) unsafe.Pointer {
-	_cstr_signing_identifier := C.CString(signing_identifier)
-	defer C.free(unsafe.Pointer(_cstr_signing_identifier))
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_peer_requirement_create_team_identity(_cstr_signing_identifier, error_out, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_peer_requirement_create_team_identity(signing_identifier, error_out)
 }
 
 // [peer_requirement.h:160]
 // Introduced: macOS 26.0
 // ID: objc-sym xpc.xpc_peer_requirement_create_platform_identity
 func Xpc_peer_requirement_create_platform_identity(signing_identifier string, error_out unsafe.Pointer) unsafe.Pointer {
-	_cstr_signing_identifier := C.CString(signing_identifier)
-	defer C.free(unsafe.Pointer(_cstr_signing_identifier))
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_peer_requirement_create_platform_identity(_cstr_signing_identifier, error_out, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_peer_requirement_create_platform_identity(signing_identifier, error_out)
 }
 
 // [peer_requirement.h:208]
 // Introduced: macOS 26.0
 // ID: objc-sym xpc.xpc_peer_requirement_create_lwcr
 func Xpc_peer_requirement_create_lwcr(lwcr unsafe.Pointer, error_out unsafe.Pointer) unsafe.Pointer {
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_peer_requirement_create_lwcr(lwcr, error_out, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_peer_requirement_create_lwcr(lwcr, error_out)
 }
 
 // [peer_requirement.h:235]
 // Introduced: macOS 26.0
 // ID: objc-sym xpc.xpc_peer_requirement_match_received_message
 func Xpc_peer_requirement_match_received_message(peer_requirement unsafe.Pointer, message unsafe.Pointer, error_out unsafe.Pointer) bool {
-	var _exc unsafe.Pointer
-	_result := bool(C.xpc_fn_xpc_peer_requirement_match_received_message(peer_requirement, message, error_out, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_peer_requirement_match_received_message(peer_requirement, message, error_out)
 }
 
 // [connection.h:165]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_connection_create
 func Xpc_connection_create(name string, targetq unsafe.Pointer) unsafe.Pointer {
-	_cstr_name := C.CString(name)
-	defer C.free(unsafe.Pointer(_cstr_name))
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_connection_create(_cstr_name, targetq, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_connection_create(name, targetq)
 }
 
 // [connection.h:205]
 // Introduced: macOS 10.7
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_connection_create_mach_service
 func Xpc_connection_create_mach_service(name string, targetq unsafe.Pointer, flags uint64) unsafe.Pointer {
-	_cstr_name := C.CString(name)
-	defer C.free(unsafe.Pointer(_cstr_name))
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_connection_create_mach_service(_cstr_name, targetq, C.uint64_t(flags), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_connection_create_mach_service(name, targetq, flags)
 }
 
 // [connection.h:228]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_connection_create_from_endpoint
 func Xpc_connection_create_from_endpoint(endpoint unsafe.Pointer) unsafe.Pointer {
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_connection_create_from_endpoint(endpoint, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_connection_create_from_endpoint(endpoint)
 }
 
 // [connection.h:267]
 // ID: objc-sym xpc.xpc_connection_set_target_queue
 func Xpc_connection_set_target_queue(connection unsafe.Pointer, targetq unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.xpc_fn_xpc_connection_set_target_queue(connection, targetq, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_xpc_connection_set_target_queue(connection, targetq)
 }
 
 // [connection.h:340]
 // ID: objc-sym xpc.xpc_connection_set_event_handler
 func Xpc_connection_set_event_handler(connection unsafe.Pointer, handler unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.xpc_fn_xpc_connection_set_event_handler(connection, handler, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_xpc_connection_set_event_handler(connection, handler)
 }
 
 // [connection.h:366]
 // ID: objc-sym xpc.xpc_connection_activate
 func Xpc_connection_activate(connection unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.xpc_fn_xpc_connection_activate(connection, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_xpc_connection_activate(connection)
 }
 
 // [connection.h:393]
 // ID: objc-sym xpc.xpc_connection_suspend
 func Xpc_connection_suspend(connection unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.xpc_fn_xpc_connection_suspend(connection, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_xpc_connection_suspend(connection)
 }
 
 // [connection.h:418]
 // ID: objc-sym xpc.xpc_connection_resume
 func Xpc_connection_resume(connection unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.xpc_fn_xpc_connection_resume(connection, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_xpc_connection_resume(connection)
 }
 
 // [connection.h:454]
 // ID: objc-sym xpc.xpc_connection_send_message
 func Xpc_connection_send_message(connection unsafe.Pointer, message unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.xpc_fn_xpc_connection_send_message(connection, message, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_xpc_connection_send_message(connection, message)
 }
 
 // [connection.h:505]
 // ID: objc-sym xpc.xpc_connection_send_barrier
 func Xpc_connection_send_barrier(connection unsafe.Pointer, barrier func()) {
-	_blk_barrier := blocks.MakeBlock_void(barrier)
-	defer blocks.FreeBlock(_blk_barrier)
-	var _exc unsafe.Pointer
-	C.xpc_fn_xpc_connection_send_barrier(connection, _blk_barrier, &_exc)
-	cgo.RaiseIfException(_exc)
+	var _blk_barrier objc.Block
+	if barrier != nil {
+		_blk_barrier = objc.NewBlock(func(_ objc.Block) { barrier() })
+		defer _blk_barrier.Release()
+	}
+	_pg_xpc_connection_send_barrier(connection, _blk_barrier)
 }
 
 // [connection.h:543]
 // ID: objc-sym xpc.xpc_connection_send_message_with_reply
 func Xpc_connection_send_message_with_reply(connection unsafe.Pointer, message unsafe.Pointer, replyq unsafe.Pointer, handler unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.xpc_fn_xpc_connection_send_message_with_reply(connection, message, replyq, handler, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_xpc_connection_send_message_with_reply(connection, message, replyq, handler)
 }
 
 // [connection.h:582]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_connection_send_message_with_reply_sync
 func Xpc_connection_send_message_with_reply_sync(connection unsafe.Pointer, message unsafe.Pointer) unsafe.Pointer {
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_connection_send_message_with_reply_sync(connection, message, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_connection_send_message_with_reply_sync(connection, message)
 }
 
 // [connection.h:612]
 // ID: objc-sym xpc.xpc_connection_cancel
 func Xpc_connection_cancel(connection unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.xpc_fn_xpc_connection_cancel(connection, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_xpc_connection_cancel(connection)
 }
 
 // [connection.h:628]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_connection_get_name
 func Xpc_connection_get_name(connection unsafe.Pointer) string {
-	var _exc unsafe.Pointer
-	_result := C.GoString(C.xpc_fn_xpc_connection_get_name(connection, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_connection_get_name(connection)
 }
 
 // [connection.h:643]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_connection_get_euid
 func Xpc_connection_get_euid(connection unsafe.Pointer) uint32 {
-	var _exc unsafe.Pointer
-	_result := uint32(C.xpc_fn_xpc_connection_get_euid(connection, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_connection_get_euid(connection)
 }
 
 // [connection.h:658]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_connection_get_egid
 func Xpc_connection_get_egid(connection unsafe.Pointer) uint32 {
-	var _exc unsafe.Pointer
-	_result := uint32(C.xpc_fn_xpc_connection_get_egid(connection, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_connection_get_egid(connection)
 }
 
 // [connection.h:685]
 // Introduced: macOS 10.7
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_connection_get_pid
 func Xpc_connection_get_pid(connection unsafe.Pointer) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.xpc_fn_xpc_connection_get_pid(connection, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_connection_get_pid(connection)
 }
 
 // [connection.h:701]
 // Introduced: macOS 10.7
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_connection_get_asid
 func Xpc_connection_get_asid(connection unsafe.Pointer) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.xpc_fn_xpc_connection_get_asid(connection, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_connection_get_asid(connection)
 }
 
 // [connection.h:726]
 // ID: objc-sym xpc.xpc_connection_set_context
 func Xpc_connection_set_context(connection unsafe.Pointer, context_ unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.xpc_fn_xpc_connection_set_context(connection, context_, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_xpc_connection_set_context(connection, context_)
 }
 
 // [connection.h:743]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_connection_get_context
 func Xpc_connection_get_context(connection unsafe.Pointer) unsafe.Pointer {
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_connection_get_context(connection, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_connection_get_context(connection)
 }
 
 // [connection.h:768]
 // ID: objc-sym xpc.xpc_connection_set_finalizer_f
 func Xpc_connection_set_finalizer_f(connection unsafe.Pointer, finalizer unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.xpc_fn_xpc_connection_set_finalizer_f(connection, finalizer, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_xpc_connection_set_finalizer_f(connection, finalizer)
 }
 
 // [connection.h:803]
 // Introduced: macOS 12.0
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_connection_set_peer_code_signing_requirement
 func Xpc_connection_set_peer_code_signing_requirement(connection unsafe.Pointer, requirement string) int32 {
-	_cstr_requirement := C.CString(requirement)
-	defer C.free(unsafe.Pointer(_cstr_requirement))
-	var _exc unsafe.Pointer
-	_result := int32(C.xpc_fn_xpc_connection_set_peer_code_signing_requirement(connection, _cstr_requirement, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_connection_set_peer_code_signing_requirement(connection, requirement)
 }
 
 // [connection.h:835]
 // Introduced: macOS 14.4
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_connection_set_peer_entitlement_exists_requirement
 func Xpc_connection_set_peer_entitlement_exists_requirement(connection unsafe.Pointer, entitlement string) int32 {
-	_cstr_entitlement := C.CString(entitlement)
-	defer C.free(unsafe.Pointer(_cstr_entitlement))
-	var _exc unsafe.Pointer
-	_result := int32(C.xpc_fn_xpc_connection_set_peer_entitlement_exists_requirement(connection, _cstr_entitlement, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_connection_set_peer_entitlement_exists_requirement(connection, entitlement)
 }
 
 // [connection.h:873]
 // Introduced: macOS 14.4
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_connection_set_peer_entitlement_matches_value_requirement
 func Xpc_connection_set_peer_entitlement_matches_value_requirement(connection unsafe.Pointer, entitlement string, value unsafe.Pointer) int32 {
-	_cstr_entitlement := C.CString(entitlement)
-	defer C.free(unsafe.Pointer(_cstr_entitlement))
-	var _exc unsafe.Pointer
-	_result := int32(C.xpc_fn_xpc_connection_set_peer_entitlement_matches_value_requirement(connection, _cstr_entitlement, value, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_connection_set_peer_entitlement_matches_value_requirement(connection, entitlement, value)
 }
 
 // [connection.h:910]
 // Introduced: macOS 14.4
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_connection_set_peer_team_identity_requirement
 func Xpc_connection_set_peer_team_identity_requirement(connection unsafe.Pointer, signing_identifier string) int32 {
-	_cstr_signing_identifier := C.CString(signing_identifier)
-	defer C.free(unsafe.Pointer(_cstr_signing_identifier))
-	var _exc unsafe.Pointer
-	_result := int32(C.xpc_fn_xpc_connection_set_peer_team_identity_requirement(connection, _cstr_signing_identifier, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_connection_set_peer_team_identity_requirement(connection, signing_identifier)
 }
 
 // [connection.h:945]
 // Introduced: macOS 14.4
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_connection_set_peer_platform_identity_requirement
 func Xpc_connection_set_peer_platform_identity_requirement(connection unsafe.Pointer, signing_identifier string) int32 {
-	_cstr_signing_identifier := C.CString(signing_identifier)
-	defer C.free(unsafe.Pointer(_cstr_signing_identifier))
-	var _exc unsafe.Pointer
-	_result := int32(C.xpc_fn_xpc_connection_set_peer_platform_identity_requirement(connection, _cstr_signing_identifier, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_connection_set_peer_platform_identity_requirement(connection, signing_identifier)
 }
 
 // [connection.h:993]
 // Introduced: macOS 14.4
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_connection_set_peer_lightweight_code_requirement
 func Xpc_connection_set_peer_lightweight_code_requirement(connection unsafe.Pointer, lwcr unsafe.Pointer) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.xpc_fn_xpc_connection_set_peer_lightweight_code_requirement(connection, lwcr, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_connection_set_peer_lightweight_code_requirement(connection, lwcr)
 }
 
 // [connection.h:1019]
 // Introduced: macOS 26.0
 // ID: objc-sym xpc.xpc_connection_set_peer_requirement
 func Xpc_connection_set_peer_requirement(connection unsafe.Pointer, peer_requirement unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.xpc_fn_xpc_connection_set_peer_requirement(connection, peer_requirement, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_xpc_connection_set_peer_requirement(connection, peer_requirement)
 }
 
 // [connection.h:1035]
 // Introduced: macOS 12.0
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_connection_copy_invalidation_reason
 func Xpc_connection_copy_invalidation_reason(connection unsafe.Pointer) string {
-	var _exc unsafe.Pointer
-	_result := C.GoString(C.xpc_fn_xpc_connection_copy_invalidation_reason(connection, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_connection_copy_invalidation_reason(connection)
 }
 
 // [rich_error.h:33]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_rich_error_copy_description
 func Xpc_rich_error_copy_description(error_ unsafe.Pointer) string {
-	var _exc unsafe.Pointer
-	_result := C.GoString(C.xpc_fn_xpc_rich_error_copy_description(error_, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_rich_error_copy_description(error_)
 }
 
 // [rich_error.h:47]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_rich_error_can_retry
 func Xpc_rich_error_can_retry(error_ unsafe.Pointer) bool {
-	var _exc unsafe.Pointer
-	_result := bool(C.xpc_fn_xpc_rich_error_can_retry(error_, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_rich_error_can_retry(error_)
 }
 
 // [session.h:80]
 // Introduced: macOS 13.0
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_session_copy_description
 func Xpc_session_copy_description(session unsafe.Pointer) string {
-	var _exc unsafe.Pointer
-	_result := C.GoString(C.xpc_fn_xpc_session_copy_description(session, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_session_copy_description(session)
 }
 
 // [session.h:118]
 // Introduced: macOS 13.0
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_session_create_xpc_service
-func Xpc_session_create_xpc_service(name string, target_queue unsafe.Pointer, flags oslog.XpcSessionCreateFlagsT, error_out unsafe.Pointer) unsafe.Pointer {
-	_cstr_name := C.CString(name)
-	defer C.free(unsafe.Pointer(_cstr_name))
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_session_create_xpc_service(_cstr_name, target_queue, C.uint64_t(flags), error_out, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+func Xpc_session_create_xpc_service(name string, target_queue unsafe.Pointer, flags XpcSessionCreateFlagsT, error_out unsafe.Pointer) unsafe.Pointer {
+	return _pg_xpc_session_create_xpc_service(name, target_queue, flags, error_out)
 }
 
 // [session.h:161]
 // Introduced: macOS 13.0
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_session_create_mach_service
-func Xpc_session_create_mach_service(mach_service string, target_queue unsafe.Pointer, flags oslog.XpcSessionCreateFlagsT, error_out unsafe.Pointer) unsafe.Pointer {
-	_cstr_mach_service := C.CString(mach_service)
-	defer C.free(unsafe.Pointer(_cstr_mach_service))
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_session_create_mach_service(_cstr_mach_service, target_queue, C.uint64_t(flags), error_out, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+func Xpc_session_create_mach_service(mach_service string, target_queue unsafe.Pointer, flags XpcSessionCreateFlagsT, error_out unsafe.Pointer) unsafe.Pointer {
+	return _pg_xpc_session_create_mach_service(mach_service, target_queue, flags, error_out)
 }
 
 // [session.h:185]
 // Introduced: macOS 13.0
 // ID: objc-sym xpc.xpc_session_set_incoming_message_handler
 func Xpc_session_set_incoming_message_handler(session unsafe.Pointer, handler func(unsafe.Pointer)) {
-	_blk_handler := blocks.MakeBlock_void_ptr(handler)
-	defer blocks.FreeBlock(_blk_handler)
-	var _exc unsafe.Pointer
-	C.xpc_fn_xpc_session_set_incoming_message_handler(session, _blk_handler, &_exc)
-	cgo.RaiseIfException(_exc)
+	var _blk_handler objc.Block
+	if handler != nil {
+		_blk_handler = objc.NewBlock(func(_ objc.Block, _a0 unsafe.Pointer) { handler(_a0) })
+		defer _blk_handler.Release()
+	}
+	_pg_xpc_session_set_incoming_message_handler(session, _blk_handler)
 }
 
 // [session.h:206]
 // Introduced: macOS 13.0
 // ID: objc-sym xpc.xpc_session_set_cancel_handler
 func Xpc_session_set_cancel_handler(session unsafe.Pointer, cancel_handler func(unsafe.Pointer)) {
-	_blk_cancel_handler := blocks.MakeBlock_void_ptr(cancel_handler)
-	defer blocks.FreeBlock(_blk_cancel_handler)
-	var _exc unsafe.Pointer
-	C.xpc_fn_xpc_session_set_cancel_handler(session, _blk_cancel_handler, &_exc)
-	cgo.RaiseIfException(_exc)
+	var _blk_cancel_handler objc.Block
+	if cancel_handler != nil {
+		_blk_cancel_handler = objc.NewBlock(func(_ objc.Block, _a0 unsafe.Pointer) { cancel_handler(_a0) })
+		defer _blk_cancel_handler.Release()
+	}
+	_pg_xpc_session_set_cancel_handler(session, _blk_cancel_handler)
 }
 
 // [session.h:230]
 // Introduced: macOS 14.0
 // ID: objc-sym xpc.xpc_session_set_target_queue
 func Xpc_session_set_target_queue(session unsafe.Pointer, target_queue unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.xpc_fn_xpc_session_set_target_queue(session, target_queue, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_xpc_session_set_target_queue(session, target_queue)
 }
 
 // [session.h:258]
 // Introduced: macOS 13.0
 // ID: objc-sym xpc.xpc_session_activate
 func Xpc_session_activate(session unsafe.Pointer, error_out unsafe.Pointer) bool {
-	var _exc unsafe.Pointer
-	_result := bool(C.xpc_fn_xpc_session_activate(session, error_out, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_session_activate(session, error_out)
 }
 
 // [session.h:279]
 // Introduced: macOS 13.0
 // ID: objc-sym xpc.xpc_session_cancel
 func Xpc_session_cancel(session unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.xpc_fn_xpc_session_cancel(session, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_xpc_session_cancel(session)
 }
 
 // [session.h:311]
 // Introduced: macOS 13.0
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_session_send_message
 func Xpc_session_send_message(session unsafe.Pointer, message unsafe.Pointer) unsafe.Pointer {
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_session_send_message(session, message, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_session_send_message(session, message)
 }
 
 // [session.h:352]
 // Introduced: macOS 13.0
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_session_send_message_with_reply_sync
 func Xpc_session_send_message_with_reply_sync(session unsafe.Pointer, message unsafe.Pointer, error_out unsafe.Pointer) unsafe.Pointer {
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_session_send_message_with_reply_sync(session, message, error_out, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_session_send_message_with_reply_sync(session, message, error_out)
 }
 
 // [session.h:384]
 // Introduced: macOS 13.0
 // ID: objc-sym xpc.xpc_session_send_message_with_reply_async
 func Xpc_session_send_message_with_reply_async(session unsafe.Pointer, message unsafe.Pointer, reply_handler func(unsafe.Pointer, unsafe.Pointer)) {
-	_blk_reply_handler := blocks.MakeBlock_void_ptr_ptr(reply_handler)
-	defer blocks.FreeBlock(_blk_reply_handler)
-	var _exc unsafe.Pointer
-	C.xpc_fn_xpc_session_send_message_with_reply_async(session, message, _blk_reply_handler, &_exc)
-	cgo.RaiseIfException(_exc)
+	var _blk_reply_handler objc.Block
+	if reply_handler != nil {
+		_blk_reply_handler = objc.NewBlock(func(_ objc.Block, _a0 unsafe.Pointer, _a1 unsafe.Pointer) { reply_handler(_a0, _a1) })
+		defer _blk_reply_handler.Release()
+	}
+	_pg_xpc_session_send_message_with_reply_async(session, message, _blk_reply_handler)
 }
 
 // [session.h:422]
 // Introduced: macOS 14.4
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_session_set_peer_code_signing_requirement
 func Xpc_session_set_peer_code_signing_requirement(session unsafe.Pointer, requirement string) int32 {
-	_cstr_requirement := C.CString(requirement)
-	defer C.free(unsafe.Pointer(_cstr_requirement))
-	var _exc unsafe.Pointer
-	_result := int32(C.xpc_fn_xpc_session_set_peer_code_signing_requirement(session, _cstr_requirement, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_session_set_peer_code_signing_requirement(session, requirement)
 }
 
 // [session.h:450]
 // Introduced: macOS 26.0
 // ID: objc-sym xpc.xpc_session_set_peer_requirement
 func Xpc_session_set_peer_requirement(session unsafe.Pointer, requirement unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.xpc_fn_xpc_session_set_peer_requirement(session, requirement, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_xpc_session_set_peer_requirement(session, requirement)
 }
 
 // [listener.h:74]
 // Introduced: macOS 14.0
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_listener_copy_description
 func Xpc_listener_copy_description(listener unsafe.Pointer) string {
-	var _exc unsafe.Pointer
-	_result := C.GoString(C.xpc_fn_xpc_listener_copy_description(listener, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_listener_copy_description(listener)
 }
 
 // [listener.h:128]
 // Introduced: macOS 14.0
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_listener_create
-func Xpc_listener_create(service string, target_queue unsafe.Pointer, flags oslog.XpcListenerCreateFlagsT, incoming_session_handler func(unsafe.Pointer), error_out unsafe.Pointer) unsafe.Pointer {
-	_cstr_service := C.CString(service)
-	defer C.free(unsafe.Pointer(_cstr_service))
-	_blk_incoming_session_handler := blocks.MakeBlock_void_ptr(incoming_session_handler)
-	defer blocks.FreeBlock(_blk_incoming_session_handler)
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_listener_create(_cstr_service, target_queue, C.uint64_t(flags), _blk_incoming_session_handler, error_out, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+func Xpc_listener_create(service string, target_queue unsafe.Pointer, flags XpcListenerCreateFlagsT, incoming_session_handler func(unsafe.Pointer), error_out unsafe.Pointer) unsafe.Pointer {
+	var _blk_incoming_session_handler objc.Block
+	if incoming_session_handler != nil {
+		_blk_incoming_session_handler = objc.NewBlock(func(_ objc.Block, _a0 unsafe.Pointer) { incoming_session_handler(_a0) })
+		defer _blk_incoming_session_handler.Release()
+	}
+	return _pg_xpc_listener_create(service, target_queue, flags, _blk_incoming_session_handler, error_out)
 }
 
 // [listener.h:158]
 // Introduced: macOS 14.0
 // ID: objc-sym xpc.xpc_listener_activate
 func Xpc_listener_activate(listener unsafe.Pointer, error_out unsafe.Pointer) bool {
-	var _exc unsafe.Pointer
-	_result := bool(C.xpc_fn_xpc_listener_activate(listener, error_out, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_listener_activate(listener, error_out)
 }
 
 // [listener.h:180]
 // Introduced: macOS 14.0
 // ID: objc-sym xpc.xpc_listener_cancel
 func Xpc_listener_cancel(listener unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.xpc_fn_xpc_listener_cancel(listener, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_xpc_listener_cancel(listener)
 }
 
 // [listener.h:203]
 // Introduced: macOS 14.0
 // ID: objc-sym xpc.xpc_listener_reject_peer
 func Xpc_listener_reject_peer(peer unsafe.Pointer, reason string) {
-	_cstr_reason := C.CString(reason)
-	defer C.free(unsafe.Pointer(_cstr_reason))
-	var _exc unsafe.Pointer
-	C.xpc_fn_xpc_listener_reject_peer(peer, _cstr_reason, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_xpc_listener_reject_peer(peer, reason)
 }
 
 // [listener.h:236]
 // Introduced: macOS 14.4
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_listener_set_peer_code_signing_requirement
 func Xpc_listener_set_peer_code_signing_requirement(listener unsafe.Pointer, requirement string) int32 {
-	_cstr_requirement := C.CString(requirement)
-	defer C.free(unsafe.Pointer(_cstr_requirement))
-	var _exc unsafe.Pointer
-	_result := int32(C.xpc_fn_xpc_listener_set_peer_code_signing_requirement(listener, _cstr_requirement, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_listener_set_peer_code_signing_requirement(listener, requirement)
 }
 
 // [listener.h:262]
 // Introduced: macOS 26.0
 // ID: objc-sym xpc.xpc_listener_set_peer_requirement
 func Xpc_listener_set_peer_requirement(listener unsafe.Pointer, requirement unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.xpc_fn_xpc_listener_set_peer_requirement(listener, requirement, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_xpc_listener_set_peer_requirement(listener, requirement)
 }
 
 // [xpc.h:381]
 // ID: objc-sym xpc.xpc_retain
 func Xpc_retain(object unsafe.Pointer) unsafe.Pointer {
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_retain(object, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_retain(object)
 }
 
 // [xpc.h:406]
 // ID: objc-sym xpc.xpc_release
 func Xpc_release(object unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.xpc_fn_xpc_release(object, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_xpc_release(object)
 }
 
 // [xpc.h:429]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_get_type
 func Xpc_get_type(object unsafe.Pointer) *XpcTypeT {
-	var _exc unsafe.Pointer
-	_ptr := unsafe.Pointer(C.xpc_fn_xpc_get_type(object, &_exc))
-	cgo.RaiseIfException(_exc)
+	_ptr := _pg_xpc_get_type(object)
 	return NewXpcTypeT(_ptr)
 }
 
 // [xpc.h:447]
 // ID: objc-sym xpc.xpc_type_get_name
 func Xpc_type_get_name(type_ *XpcTypeT) string {
-	defer cgo.KeepAlive(type_)
-	var _objcPtr_type_ unsafe.Pointer
+	var _ptr_type_ unsafe.Pointer
 	if type_ != nil {
-		_objcPtr_type_ = type_.Ptr()
+		_ptr_type_ = type_.Ptr()
 	}
-	var _exc unsafe.Pointer
-	_result := C.GoString(C.xpc_fn_xpc_type_get_name(_objcPtr_type_, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	defer runtime.KeepAlive(type_)
+	return _pg_xpc_type_get_name(_ptr_type_)
 }
 
 // [xpc.h:472]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_copy
 func Xpc_copy(object unsafe.Pointer) unsafe.Pointer {
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_copy(object, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_copy(object)
 }
 
 // [xpc.h:500]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_equal
 func Xpc_equal(object1 unsafe.Pointer, object2 unsafe.Pointer) bool {
-	var _exc unsafe.Pointer
-	_result := bool(C.xpc_fn_xpc_equal(object1, object2, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_equal(object1, object2)
 }
 
 // [xpc.h:523]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_hash
 func Xpc_hash(object unsafe.Pointer) uint64 {
-	var _exc unsafe.Pointer
-	_result := uint64(C.xpc_fn_xpc_hash(object, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_hash(object)
 }
 
 // [xpc.h:541]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_copy_description
 func Xpc_copy_description(object unsafe.Pointer) string {
-	var _exc unsafe.Pointer
-	_result := C.GoString(C.xpc_fn_xpc_copy_description(object, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_copy_description(object)
 }
 
 // [xpc.h:557]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_null_create
 func Xpc_null_create() unsafe.Pointer {
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_null_create(&_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_null_create()
 }
 
 // [xpc.h:575]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_bool_create
 func Xpc_bool_create(value bool) unsafe.Pointer {
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_bool_create(C.bool(value), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_bool_create(value)
 }
 
 // [xpc.h:593]
 // ID: objc-sym xpc.xpc_bool_get_value
 func Xpc_bool_get_value(xbool unsafe.Pointer) bool {
-	var _exc unsafe.Pointer
-	_result := bool(C.xpc_fn_xpc_bool_get_value(xbool, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_bool_get_value(xbool)
 }
 
 // [xpc.h:611]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_int64_create
 func Xpc_int64_create(value int64) unsafe.Pointer {
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_int64_create(C.int64_t(value), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_int64_create(value)
 }
 
 // [xpc.h:629]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_int64_get_value
 func Xpc_int64_get_value(xint unsafe.Pointer) int64 {
-	var _exc unsafe.Pointer
-	_result := int64(C.xpc_fn_xpc_int64_get_value(xint, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_int64_get_value(xint)
 }
 
 // [xpc.h:647]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_uint64_create
 func Xpc_uint64_create(value uint64) unsafe.Pointer {
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_uint64_create(C.uint64_t(value), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_uint64_create(value)
 }
 
 // [xpc.h:665]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_uint64_get_value
 func Xpc_uint64_get_value(xuint unsafe.Pointer) uint64 {
-	var _exc unsafe.Pointer
-	_result := uint64(C.xpc_fn_xpc_uint64_get_value(xuint, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_uint64_get_value(xuint)
 }
 
 // [xpc.h:683]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_double_create
 func Xpc_double_create(value float64) unsafe.Pointer {
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_double_create(C.double(value), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_double_create(value)
 }
 
 // [xpc.h:701]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_double_get_value
 func Xpc_double_get_value(xdouble unsafe.Pointer) float64 {
-	var _exc unsafe.Pointer
-	_result := float64(C.xpc_fn_xpc_double_get_value(xdouble, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_double_get_value(xdouble)
 }
 
 // [xpc.h:722]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_date_create
 func Xpc_date_create(interval int64) unsafe.Pointer {
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_date_create(C.int64_t(interval), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_date_create(interval)
 }
 
 // [xpc.h:736]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_date_create_from_current
 func Xpc_date_create_from_current() unsafe.Pointer {
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_date_create_from_current(&_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_date_create_from_current()
 }
 
 // [xpc.h:755]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_date_get_value
 func Xpc_date_get_value(xdate unsafe.Pointer) int64 {
-	var _exc unsafe.Pointer
-	_result := int64(C.xpc_fn_xpc_date_get_value(xdate, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_date_get_value(xdate)
 }
 
 // [xpc.h:782]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_data_create
 func Xpc_data_create(bytes unsafe.Pointer, length uint64) unsafe.Pointer {
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_data_create(bytes, C.uint64_t(length), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_data_create(bytes, length)
 }
 
 // [xpc.h:806]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_data_create_with_dispatch_data
 func Xpc_data_create_with_dispatch_data(ddata unsafe.Pointer) unsafe.Pointer {
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_data_create_with_dispatch_data(ddata, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_data_create_with_dispatch_data(ddata)
 }
 
 // [xpc.h:824]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_data_get_length
 func Xpc_data_get_length(xdata unsafe.Pointer) uint64 {
-	var _exc unsafe.Pointer
-	_result := uint64(C.xpc_fn_xpc_data_get_length(xdata, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_data_get_length(xdata)
 }
 
 // [xpc.h:842]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_data_get_bytes_ptr
 func Xpc_data_get_bytes_ptr(xdata unsafe.Pointer) unsafe.Pointer {
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_data_get_bytes_ptr(xdata, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_data_get_bytes_ptr(xdata)
 }
 
 // [xpc.h:871]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_data_get_bytes
 func Xpc_data_get_bytes(xdata unsafe.Pointer, buffer unsafe.Pointer, off uint64, length uint64) uint64 {
-	var _exc unsafe.Pointer
-	_result := uint64(C.xpc_fn_xpc_data_get_bytes(xdata, buffer, C.uint64_t(off), C.uint64_t(length), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_data_get_bytes(xdata, buffer, off, length)
 }
 
 // [xpc.h:890]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_string_create
 func Xpc_string_create(string_ string) unsafe.Pointer {
-	_cstr_string_ := C.CString(string_)
-	defer C.free(unsafe.Pointer(_cstr_string_))
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_string_create(_cstr_string_, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_string_create(string_)
 }
 
 // [xpc.h:955]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_string_get_length
 func Xpc_string_get_length(xstring unsafe.Pointer) uint64 {
-	var _exc unsafe.Pointer
-	_result := uint64(C.xpc_fn_xpc_string_get_length(xstring, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_string_get_length(xstring)
 }
 
 // [xpc.h:973]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_string_get_string_ptr
 func Xpc_string_get_string_ptr(xstring unsafe.Pointer) string {
-	var _exc unsafe.Pointer
-	_result := C.GoString(C.xpc_fn_xpc_string_get_string_ptr(xstring, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_string_get_string_ptr(xstring)
 }
 
 // [xpc.h:992]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_uuid_create
 func Xpc_uuid_create(uuid *uint8) unsafe.Pointer {
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_uuid_create(unsafe.Pointer(uuid), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_uuid_create(uuid)
 }
 
 // [xpc.h:1011]
 // ID: objc-sym xpc.xpc_uuid_get_bytes
 func Xpc_uuid_get_bytes(xuuid unsafe.Pointer) unsafe.Pointer {
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_uuid_get_bytes(xuuid, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_uuid_get_bytes(xuuid)
 }
 
 // [xpc.h:1045]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_fd_create
 func Xpc_fd_create(fd int32) unsafe.Pointer {
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_fd_create(C.int32_t(fd), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_fd_create(fd)
 }
 
 // [xpc.h:1072]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_fd_dup
 func Xpc_fd_dup(xfd unsafe.Pointer) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.xpc_fn_xpc_fd_dup(xfd, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_fd_dup(xfd)
 }
 
 // [xpc.h:1112]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_shmem_create
 func Xpc_shmem_create(region unsafe.Pointer, length uint64) unsafe.Pointer {
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_shmem_create(region, C.uint64_t(length), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_shmem_create(region, length)
 }
 
 // [xpc.h:1143]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_shmem_map
 func Xpc_shmem_map(xshmem unsafe.Pointer, region unsafe.Pointer) uint64 {
-	var _exc unsafe.Pointer
-	_result := uint64(C.xpc_fn_xpc_shmem_map(xshmem, region, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_shmem_map(xshmem, region)
 }
 
 // [xpc.h:1191]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_array_create
 func Xpc_array_create(objects unsafe.Pointer, count uint64) unsafe.Pointer {
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_array_create(objects, C.uint64_t(count), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_array_create(objects, count)
 }
 
 // [xpc.h:1210]
 // Introduced: macOS 11.0
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_array_create_empty
 func Xpc_array_create_empty() unsafe.Pointer {
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_array_create_empty(&_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_array_create_empty()
 }
 
 // [xpc.h:1234]
 // ID: objc-sym xpc.xpc_array_set_value
 func Xpc_array_set_value(xarray unsafe.Pointer, index uint64, value unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.xpc_fn_xpc_array_set_value(xarray, C.uint64_t(index), value, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_xpc_array_set_value(xarray, index, value)
 }
 
 // [xpc.h:1251]
 // ID: objc-sym xpc.xpc_array_append_value
 func Xpc_array_append_value(xarray unsafe.Pointer, value unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.xpc_fn_xpc_array_append_value(xarray, value, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_xpc_array_append_value(xarray, value)
 }
 
 // [xpc.h:1269]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_array_get_count
 func Xpc_array_get_count(xarray unsafe.Pointer) uint64 {
-	var _exc unsafe.Pointer
-	_result := uint64(C.xpc_fn_xpc_array_get_count(xarray, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_array_get_count(xarray)
 }
 
 // [xpc.h:1295]
 // ID: objc-sym xpc.xpc_array_get_value
 func Xpc_array_get_value(xarray unsafe.Pointer, index uint64) unsafe.Pointer {
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_array_get_value(xarray, C.uint64_t(index), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_array_get_value(xarray, index)
 }
 
 // [xpc.h:1321]
 // ID: objc-sym xpc.xpc_array_apply
 func Xpc_array_apply(xarray unsafe.Pointer, applier func(uint64, unsafe.Pointer) bool) bool {
-	_blk_applier := blocks.MakeBlock_bool_uint64_ptr(applier)
-	defer blocks.FreeBlock(_blk_applier)
-	var _exc unsafe.Pointer
-	_result := bool(C.xpc_fn_xpc_array_apply(xarray, _blk_applier, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	var _blk_applier objc.Block
+	if applier != nil {
+		_blk_applier = objc.NewBlock(func(_ objc.Block, _a0 uint64, _a1 unsafe.Pointer) bool { return applier(_a0, _a1) })
+		defer _blk_applier.Release()
+	}
+	return _pg_xpc_array_apply(xarray, _blk_applier)
 }
 
 // [xpc.h:1356]
 // ID: objc-sym xpc.xpc_array_set_bool
 func Xpc_array_set_bool(xarray unsafe.Pointer, index uint64, value bool) {
-	var _exc unsafe.Pointer
-	C.xpc_fn_xpc_array_set_bool(xarray, C.uint64_t(index), C.bool(value), &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_xpc_array_set_bool(xarray, index, value)
 }
 
 // [xpc.h:1381]
 // ID: objc-sym xpc.xpc_array_set_int64
 func Xpc_array_set_int64(xarray unsafe.Pointer, index uint64, value int64) {
-	var _exc unsafe.Pointer
-	C.xpc_fn_xpc_array_set_int64(xarray, C.uint64_t(index), C.int64_t(value), &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_xpc_array_set_int64(xarray, index, value)
 }
 
 // [xpc.h:1406]
 // ID: objc-sym xpc.xpc_array_set_uint64
 func Xpc_array_set_uint64(xarray unsafe.Pointer, index uint64, value uint64) {
-	var _exc unsafe.Pointer
-	C.xpc_fn_xpc_array_set_uint64(xarray, C.uint64_t(index), C.uint64_t(value), &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_xpc_array_set_uint64(xarray, index, value)
 }
 
 // [xpc.h:1431]
 // ID: objc-sym xpc.xpc_array_set_double
 func Xpc_array_set_double(xarray unsafe.Pointer, index uint64, value float64) {
-	var _exc unsafe.Pointer
-	C.xpc_fn_xpc_array_set_double(xarray, C.uint64_t(index), C.double(value), &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_xpc_array_set_double(xarray, index, value)
 }
 
 // [xpc.h:1458]
 // ID: objc-sym xpc.xpc_array_set_date
 func Xpc_array_set_date(xarray unsafe.Pointer, index uint64, value int64) {
-	var _exc unsafe.Pointer
-	C.xpc_fn_xpc_array_set_date(xarray, C.uint64_t(index), C.int64_t(value), &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_xpc_array_set_date(xarray, index, value)
 }
 
 // [xpc.h:1486]
 // ID: objc-sym xpc.xpc_array_set_data
 func Xpc_array_set_data(xarray unsafe.Pointer, index uint64, bytes unsafe.Pointer, length uint64) {
-	var _exc unsafe.Pointer
-	C.xpc_fn_xpc_array_set_data(xarray, C.uint64_t(index), bytes, C.uint64_t(length), &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_xpc_array_set_data(xarray, index, bytes, length)
 }
 
 // [xpc.h:1512]
 // ID: objc-sym xpc.xpc_array_set_string
 func Xpc_array_set_string(xarray unsafe.Pointer, index uint64, string_ string) {
-	_cstr_string_ := C.CString(string_)
-	defer C.free(unsafe.Pointer(_cstr_string_))
-	var _exc unsafe.Pointer
-	C.xpc_fn_xpc_array_set_string(xarray, C.uint64_t(index), _cstr_string_, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_xpc_array_set_string(xarray, index, string_)
 }
 
 // [xpc.h:1537]
 // ID: objc-sym xpc.xpc_array_set_uuid
 func Xpc_array_set_uuid(xarray unsafe.Pointer, index uint64, uuid *uint8) {
-	var _exc unsafe.Pointer
-	C.xpc_fn_xpc_array_set_uuid(xarray, C.uint64_t(index), unsafe.Pointer(uuid), &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_xpc_array_set_uuid(xarray, index, uuid)
 }
 
 // [xpc.h:1563]
 // ID: objc-sym xpc.xpc_array_set_fd
 func Xpc_array_set_fd(xarray unsafe.Pointer, index uint64, fd int32) {
-	var _exc unsafe.Pointer
-	C.xpc_fn_xpc_array_set_fd(xarray, C.uint64_t(index), C.int32_t(fd), &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_xpc_array_set_fd(xarray, index, fd)
 }
 
 // [xpc.h:1588]
 // ID: objc-sym xpc.xpc_array_set_connection
 func Xpc_array_set_connection(xarray unsafe.Pointer, index uint64, connection unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.xpc_fn_xpc_array_set_connection(xarray, C.uint64_t(index), connection, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_xpc_array_set_connection(xarray, index, connection)
 }
 
 // [xpc.h:1613]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_array_get_bool
 func Xpc_array_get_bool(xarray unsafe.Pointer, index uint64) bool {
-	var _exc unsafe.Pointer
-	_result := bool(C.xpc_fn_xpc_array_get_bool(xarray, C.uint64_t(index), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_array_get_bool(xarray, index)
 }
 
 // [xpc.h:1636]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_array_get_int64
 func Xpc_array_get_int64(xarray unsafe.Pointer, index uint64) int64 {
-	var _exc unsafe.Pointer
-	_result := int64(C.xpc_fn_xpc_array_get_int64(xarray, C.uint64_t(index), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_array_get_int64(xarray, index)
 }
 
 // [xpc.h:1659]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_array_get_uint64
 func Xpc_array_get_uint64(xarray unsafe.Pointer, index uint64) uint64 {
-	var _exc unsafe.Pointer
-	_result := uint64(C.xpc_fn_xpc_array_get_uint64(xarray, C.uint64_t(index), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_array_get_uint64(xarray, index)
 }
 
 // [xpc.h:1682]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_array_get_double
 func Xpc_array_get_double(xarray unsafe.Pointer, index uint64) float64 {
-	var _exc unsafe.Pointer
-	_result := float64(C.xpc_fn_xpc_array_get_double(xarray, C.uint64_t(index), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_array_get_double(xarray, index)
 }
 
 // [xpc.h:1707]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_array_get_date
 func Xpc_array_get_date(xarray unsafe.Pointer, index uint64) int64 {
-	var _exc unsafe.Pointer
-	_result := int64(C.xpc_fn_xpc_array_get_date(xarray, C.uint64_t(index), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_array_get_date(xarray, index)
 }
 
 // [xpc.h:1734]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_array_get_data
 func Xpc_array_get_data(xarray unsafe.Pointer, index uint64, length *uint64) unsafe.Pointer {
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_array_get_data(xarray, C.uint64_t(index), unsafe.Pointer(length), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_array_get_data(xarray, index, length)
 }
 
 // [xpc.h:1758]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_array_get_string
 func Xpc_array_get_string(xarray unsafe.Pointer, index uint64) string {
-	var _exc unsafe.Pointer
-	_result := C.GoString(C.xpc_fn_xpc_array_get_string(xarray, C.uint64_t(index), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_array_get_string(xarray, index)
 }
 
 // [xpc.h:1782]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_array_get_uuid
 func Xpc_array_get_uuid(xarray unsafe.Pointer, index uint64) unsafe.Pointer {
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_array_get_uuid(xarray, C.uint64_t(index), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_array_get_uuid(xarray, index)
 }
 
 // [xpc.h:1806]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_array_dup_fd
 func Xpc_array_dup_fd(xarray unsafe.Pointer, index uint64) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.xpc_fn_xpc_array_dup_fd(xarray, C.uint64_t(index), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_array_dup_fd(xarray, index)
 }
 
 // [xpc.h:1834]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_array_create_connection
 func Xpc_array_create_connection(xarray unsafe.Pointer, index uint64) unsafe.Pointer {
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_array_create_connection(xarray, C.uint64_t(index), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_array_create_connection(xarray, index)
 }
 
 // [xpc.h:1861]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_array_get_dictionary
 func Xpc_array_get_dictionary(xarray unsafe.Pointer, index uint64) unsafe.Pointer {
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_array_get_dictionary(xarray, C.uint64_t(index), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_array_get_dictionary(xarray, index)
 }
 
 // [xpc.h:1888]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_array_get_array
 func Xpc_array_get_array(xarray unsafe.Pointer, index uint64) unsafe.Pointer {
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_array_get_array(xarray, C.uint64_t(index), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_array_get_array(xarray, index)
 }
 
 // [xpc.h:1942]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_dictionary_create
 func Xpc_dictionary_create(keys unsafe.Pointer, values unsafe.Pointer, count uint64) unsafe.Pointer {
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_dictionary_create(keys, values, C.uint64_t(count), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_dictionary_create(keys, values, count)
 }
 
 // [xpc.h:1962]
 // Introduced: macOS 11.0
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_dictionary_create_empty
 func Xpc_dictionary_create_empty() unsafe.Pointer {
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_dictionary_create_empty(&_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_dictionary_create_empty()
 }
 
 // [xpc.h:1987]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_dictionary_create_reply
 func Xpc_dictionary_create_reply(original unsafe.Pointer) unsafe.Pointer {
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_dictionary_create_reply(original, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_dictionary_create_reply(original)
 }
 
 // [xpc.h:2010]
 // ID: objc-sym xpc.xpc_dictionary_set_value
 func Xpc_dictionary_set_value(xdict unsafe.Pointer, key string, value unsafe.Pointer) {
-	_cstr_key := C.CString(key)
-	defer C.free(unsafe.Pointer(_cstr_key))
-	var _exc unsafe.Pointer
-	C.xpc_fn_xpc_dictionary_set_value(xdict, _cstr_key, value, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_xpc_dictionary_set_value(xdict, key, value)
 }
 
 // [xpc.h:2037]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_dictionary_get_value
 func Xpc_dictionary_get_value(xdict unsafe.Pointer, key string) unsafe.Pointer {
-	_cstr_key := C.CString(key)
-	defer C.free(unsafe.Pointer(_cstr_key))
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_dictionary_get_value(xdict, _cstr_key, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_dictionary_get_value(xdict, key)
 }
 
 // [xpc.h:2057]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_dictionary_get_count
 func Xpc_dictionary_get_count(xdict unsafe.Pointer) uint64 {
-	var _exc unsafe.Pointer
-	_result := uint64(C.xpc_fn_xpc_dictionary_get_count(xdict, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_dictionary_get_count(xdict)
 }
 
 // [xpc.h:2084]
 // ID: objc-sym xpc.xpc_dictionary_apply
 func Xpc_dictionary_apply(xdict unsafe.Pointer, applier func(unsafe.Pointer, unsafe.Pointer) bool) bool {
-	_blk_applier := blocks.MakeBlock_bool_ptr_ptr(applier)
-	defer blocks.FreeBlock(_blk_applier)
-	var _exc unsafe.Pointer
-	_result := bool(C.xpc_fn_xpc_dictionary_apply(xdict, _blk_applier, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	var _blk_applier objc.Block
+	if applier != nil {
+		_blk_applier = objc.NewBlock(func(_ objc.Block, _a0 unsafe.Pointer, _a1 unsafe.Pointer) bool { return applier(_a0, _a1) })
+		defer _blk_applier.Release()
+	}
+	return _pg_xpc_dictionary_apply(xdict, _blk_applier)
 }
 
 // [xpc.h:2106]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_dictionary_get_remote_connection
 func Xpc_dictionary_get_remote_connection(xdict unsafe.Pointer) unsafe.Pointer {
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_dictionary_get_remote_connection(xdict, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_dictionary_get_remote_connection(xdict)
 }
 
 // [xpc.h:2129]
 // ID: objc-sym xpc.xpc_dictionary_set_bool
 func Xpc_dictionary_set_bool(xdict unsafe.Pointer, key string, value bool) {
-	_cstr_key := C.CString(key)
-	defer C.free(unsafe.Pointer(_cstr_key))
-	var _exc unsafe.Pointer
-	C.xpc_fn_xpc_dictionary_set_bool(xdict, _cstr_key, C.bool(value), &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_xpc_dictionary_set_bool(xdict, key, value)
 }
 
 // [xpc.h:2151]
 // ID: objc-sym xpc.xpc_dictionary_set_int64
 func Xpc_dictionary_set_int64(xdict unsafe.Pointer, key string, value int64) {
-	_cstr_key := C.CString(key)
-	defer C.free(unsafe.Pointer(_cstr_key))
-	var _exc unsafe.Pointer
-	C.xpc_fn_xpc_dictionary_set_int64(xdict, _cstr_key, C.int64_t(value), &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_xpc_dictionary_set_int64(xdict, key, value)
 }
 
 // [xpc.h:2173]
 // ID: objc-sym xpc.xpc_dictionary_set_uint64
 func Xpc_dictionary_set_uint64(xdict unsafe.Pointer, key string, value uint64) {
-	_cstr_key := C.CString(key)
-	defer C.free(unsafe.Pointer(_cstr_key))
-	var _exc unsafe.Pointer
-	C.xpc_fn_xpc_dictionary_set_uint64(xdict, _cstr_key, C.uint64_t(value), &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_xpc_dictionary_set_uint64(xdict, key, value)
 }
 
 // [xpc.h:2195]
 // ID: objc-sym xpc.xpc_dictionary_set_double
 func Xpc_dictionary_set_double(xdict unsafe.Pointer, key string, value float64) {
-	_cstr_key := C.CString(key)
-	defer C.free(unsafe.Pointer(_cstr_key))
-	var _exc unsafe.Pointer
-	C.xpc_fn_xpc_dictionary_set_double(xdict, _cstr_key, C.double(value), &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_xpc_dictionary_set_double(xdict, key, value)
 }
 
 // [xpc.h:2219]
 // ID: objc-sym xpc.xpc_dictionary_set_date
 func Xpc_dictionary_set_date(xdict unsafe.Pointer, key string, value int64) {
-	_cstr_key := C.CString(key)
-	defer C.free(unsafe.Pointer(_cstr_key))
-	var _exc unsafe.Pointer
-	C.xpc_fn_xpc_dictionary_set_date(xdict, _cstr_key, C.int64_t(value), &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_xpc_dictionary_set_date(xdict, key, value)
 }
 
 // [xpc.h:2244]
 // ID: objc-sym xpc.xpc_dictionary_set_data
 func Xpc_dictionary_set_data(xdict unsafe.Pointer, key string, bytes unsafe.Pointer, length uint64) {
-	_cstr_key := C.CString(key)
-	defer C.free(unsafe.Pointer(_cstr_key))
-	var _exc unsafe.Pointer
-	C.xpc_fn_xpc_dictionary_set_data(xdict, _cstr_key, bytes, C.uint64_t(length), &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_xpc_dictionary_set_data(xdict, key, bytes, length)
 }
 
 // [xpc.h:2267]
 // ID: objc-sym xpc.xpc_dictionary_set_string
 func Xpc_dictionary_set_string(xdict unsafe.Pointer, key string, string_ string) {
-	_cstr_key := C.CString(key)
-	defer C.free(unsafe.Pointer(_cstr_key))
-	_cstr_string_ := C.CString(string_)
-	defer C.free(unsafe.Pointer(_cstr_string_))
-	var _exc unsafe.Pointer
-	C.xpc_fn_xpc_dictionary_set_string(xdict, _cstr_key, _cstr_string_, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_xpc_dictionary_set_string(xdict, key, string_)
 }
 
 // [xpc.h:2290]
 // ID: objc-sym xpc.xpc_dictionary_set_uuid
 func Xpc_dictionary_set_uuid(xdict unsafe.Pointer, key string, uuid *uint8) {
-	_cstr_key := C.CString(key)
-	defer C.free(unsafe.Pointer(_cstr_key))
-	var _exc unsafe.Pointer
-	C.xpc_fn_xpc_dictionary_set_uuid(xdict, _cstr_key, unsafe.Pointer(uuid), &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_xpc_dictionary_set_uuid(xdict, key, uuid)
 }
 
 // [xpc.h:2313]
 // ID: objc-sym xpc.xpc_dictionary_set_fd
 func Xpc_dictionary_set_fd(xdict unsafe.Pointer, key string, fd int32) {
-	_cstr_key := C.CString(key)
-	defer C.free(unsafe.Pointer(_cstr_key))
-	var _exc unsafe.Pointer
-	C.xpc_fn_xpc_dictionary_set_fd(xdict, _cstr_key, C.int32_t(fd), &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_xpc_dictionary_set_fd(xdict, key, fd)
 }
 
 // [xpc.h:2336]
 // ID: objc-sym xpc.xpc_dictionary_set_connection
 func Xpc_dictionary_set_connection(xdict unsafe.Pointer, key string, connection unsafe.Pointer) {
-	_cstr_key := C.CString(key)
-	defer C.free(unsafe.Pointer(_cstr_key))
-	var _exc unsafe.Pointer
-	C.xpc_fn_xpc_dictionary_set_connection(xdict, _cstr_key, connection, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_xpc_dictionary_set_connection(xdict, key, connection)
 }
 
 // [xpc.h:2362]
 // ID: objc-sym xpc.xpc_dictionary_set_mach_send
 func Xpc_dictionary_set_mach_send(xdict unsafe.Pointer, key string, p uint32) {
-	_cstr_key := C.CString(key)
-	defer C.free(unsafe.Pointer(_cstr_key))
-	var _exc unsafe.Pointer
-	C.xpc_fn_xpc_dictionary_set_mach_send(xdict, _cstr_key, C.uint32_t(p), &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_xpc_dictionary_set_mach_send(xdict, key, p)
 }
 
 // [xpc.h:2386]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_dictionary_get_bool
 func Xpc_dictionary_get_bool(xdict unsafe.Pointer, key string) bool {
-	_cstr_key := C.CString(key)
-	defer C.free(unsafe.Pointer(_cstr_key))
-	var _exc unsafe.Pointer
-	_result := bool(C.xpc_fn_xpc_dictionary_get_bool(xdict, _cstr_key, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_dictionary_get_bool(xdict, key)
 }
 
 // [xpc.h:2408]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_dictionary_get_int64
 func Xpc_dictionary_get_int64(xdict unsafe.Pointer, key string) int64 {
-	_cstr_key := C.CString(key)
-	defer C.free(unsafe.Pointer(_cstr_key))
-	var _exc unsafe.Pointer
-	_result := int64(C.xpc_fn_xpc_dictionary_get_int64(xdict, _cstr_key, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_dictionary_get_int64(xdict, key)
 }
 
 // [xpc.h:2430]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_dictionary_get_uint64
 func Xpc_dictionary_get_uint64(xdict unsafe.Pointer, key string) uint64 {
-	_cstr_key := C.CString(key)
-	defer C.free(unsafe.Pointer(_cstr_key))
-	var _exc unsafe.Pointer
-	_result := uint64(C.xpc_fn_xpc_dictionary_get_uint64(xdict, _cstr_key, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_dictionary_get_uint64(xdict, key)
 }
 
 // [xpc.h:2452]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_dictionary_get_double
 func Xpc_dictionary_get_double(xdict unsafe.Pointer, key string) float64 {
-	_cstr_key := C.CString(key)
-	defer C.free(unsafe.Pointer(_cstr_key))
-	var _exc unsafe.Pointer
-	_result := float64(C.xpc_fn_xpc_dictionary_get_double(xdict, _cstr_key, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_dictionary_get_double(xdict, key)
 }
 
 // [xpc.h:2475]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_dictionary_get_date
 func Xpc_dictionary_get_date(xdict unsafe.Pointer, key string) int64 {
-	_cstr_key := C.CString(key)
-	defer C.free(unsafe.Pointer(_cstr_key))
-	var _exc unsafe.Pointer
-	_result := int64(C.xpc_fn_xpc_dictionary_get_date(xdict, _cstr_key, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_dictionary_get_date(xdict, key)
 }
 
 // [xpc.h:2501]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_dictionary_get_data
 func Xpc_dictionary_get_data(xdict unsafe.Pointer, key string, length *uint64) unsafe.Pointer {
-	_cstr_key := C.CString(key)
-	defer C.free(unsafe.Pointer(_cstr_key))
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_dictionary_get_data(xdict, _cstr_key, unsafe.Pointer(length), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_dictionary_get_data(xdict, key, length)
 }
 
 // [xpc.h:2524]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_dictionary_get_string
 func Xpc_dictionary_get_string(xdict unsafe.Pointer, key string) string {
-	_cstr_key := C.CString(key)
-	defer C.free(unsafe.Pointer(_cstr_key))
-	var _exc unsafe.Pointer
-	_result := C.GoString(C.xpc_fn_xpc_dictionary_get_string(xdict, _cstr_key, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_dictionary_get_string(xdict, key)
 }
 
 // [xpc.h:2546]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_dictionary_get_uuid
 func Xpc_dictionary_get_uuid(xdict unsafe.Pointer, key string) unsafe.Pointer {
-	_cstr_key := C.CString(key)
-	defer C.free(unsafe.Pointer(_cstr_key))
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_dictionary_get_uuid(xdict, _cstr_key, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_dictionary_get_uuid(xdict, key)
 }
 
 // [xpc.h:2569]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_dictionary_dup_fd
 func Xpc_dictionary_dup_fd(xdict unsafe.Pointer, key string) int32 {
-	_cstr_key := C.CString(key)
-	defer C.free(unsafe.Pointer(_cstr_key))
-	var _exc unsafe.Pointer
-	_result := int32(C.xpc_fn_xpc_dictionary_dup_fd(xdict, _cstr_key, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_dictionary_dup_fd(xdict, key)
 }
 
 // [xpc.h:2595]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_dictionary_create_connection
 func Xpc_dictionary_create_connection(xdict unsafe.Pointer, key string) unsafe.Pointer {
-	_cstr_key := C.CString(key)
-	defer C.free(unsafe.Pointer(_cstr_key))
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_dictionary_create_connection(xdict, _cstr_key, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_dictionary_create_connection(xdict, key)
 }
 
 // [xpc.h:2621]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_dictionary_get_dictionary
 func Xpc_dictionary_get_dictionary(xdict unsafe.Pointer, key string) unsafe.Pointer {
-	_cstr_key := C.CString(key)
-	defer C.free(unsafe.Pointer(_cstr_key))
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_dictionary_get_dictionary(xdict, _cstr_key, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_dictionary_get_dictionary(xdict, key)
 }
 
 // [xpc.h:2647]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_dictionary_get_array
 func Xpc_dictionary_get_array(xdict unsafe.Pointer, key string) unsafe.Pointer {
-	_cstr_key := C.CString(key)
-	defer C.free(unsafe.Pointer(_cstr_key))
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_dictionary_get_array(xdict, _cstr_key, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_dictionary_get_array(xdict, key)
 }
 
 // [xpc.h:2674]
-// Return value must not be discarded.
 // ID: objc-sym xpc.xpc_dictionary_copy_mach_send
 func Xpc_dictionary_copy_mach_send(xdict unsafe.Pointer, key string) uint32 {
-	_cstr_key := C.CString(key)
-	defer C.free(unsafe.Pointer(_cstr_key))
-	var _exc unsafe.Pointer
-	_result := uint32(C.xpc_fn_xpc_dictionary_copy_mach_send(xdict, _cstr_key, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_xpc_dictionary_copy_mach_send(xdict, key)
 }
 
 // [xpc.h:2698]
 // Introduced: macOS 10.7
 // ID: objc-sym xpc.xpc_main
 func Xpc_main(handler unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.xpc_fn_xpc_main(handler, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_xpc_main(handler)
 }
 
 // [xpc.h:2736]
 // Introduced: macOS 10.7
 // ID: objc-sym xpc.xpc_transaction_begin
 func Xpc_transaction_begin() {
-	var _exc unsafe.Pointer
-	C.xpc_fn_xpc_transaction_begin(&_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_xpc_transaction_begin()
 }
 
 // [xpc.h:2754]
 // Introduced: macOS 10.7
 // ID: objc-sym xpc.xpc_transaction_end
 func Xpc_transaction_end() {
-	var _exc unsafe.Pointer
-	C.xpc_fn_xpc_transaction_end(&_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_xpc_transaction_end()
 }
 
 // [xpc.h:2789]
 // Introduced: macOS 10.7
 // ID: objc-sym xpc.xpc_set_event_stream_handler
 func Xpc_set_event_stream_handler(stream string, targetq unsafe.Pointer, handler unsafe.Pointer) {
-	_cstr_stream := C.CString(stream)
-	defer C.free(unsafe.Pointer(_cstr_stream))
-	var _exc unsafe.Pointer
-	C.xpc_fn_xpc_set_event_stream_handler(_cstr_stream, targetq, handler, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_xpc_set_event_stream_handler(stream, targetq, handler)
 }
