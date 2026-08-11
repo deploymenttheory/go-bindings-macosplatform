@@ -6,7 +6,6 @@ package applearchive
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/bsd"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo"
 	"unsafe"
 )
 
@@ -46,7 +45,6 @@ func NewAAArchiveStream(ptr unsafe.Pointer) *AAArchiveStream {
 		return nil
 	}
 	o := &AAArchiveStream{ptr: ptr}
-	cgo.Track(o, o.Ptr)
 	return o
 }
 
@@ -66,7 +64,6 @@ func NewAAByteStream(ptr unsafe.Pointer) *AAByteStream {
 		return nil
 	}
 	o := &AAByteStream{ptr: ptr}
-	cgo.Track(o, o.Ptr)
 	return o
 }
 
@@ -86,7 +83,6 @@ func NewAAEntryACLBlob(ptr unsafe.Pointer) *AAEntryACLBlob {
 		return nil
 	}
 	o := &AAEntryACLBlob{ptr: ptr}
-	cgo.Track(o, o.Ptr)
 	return o
 }
 
@@ -106,7 +102,6 @@ func NewAAEntryXATBlob(ptr unsafe.Pointer) *AAEntryXATBlob {
 		return nil
 	}
 	o := &AAEntryXATBlob{ptr: ptr}
-	cgo.Track(o, o.Ptr)
 	return o
 }
 
@@ -126,7 +121,6 @@ func NewAAFieldKeySet(ptr unsafe.Pointer) *AAFieldKeySet {
 		return nil
 	}
 	o := &AAFieldKeySet{ptr: ptr}
-	cgo.Track(o, o.Ptr)
 	return o
 }
 
@@ -146,7 +140,6 @@ func NewAAHeader(ptr unsafe.Pointer) *AAHeader {
 		return nil
 	}
 	o := &AAHeader{ptr: ptr}
-	cgo.Track(o, o.Ptr)
 	return o
 }
 
@@ -166,7 +159,6 @@ func NewAAPathList(ptr unsafe.Pointer) *AAPathList {
 		return nil
 	}
 	o := &AAPathList{ptr: ptr}
-	cgo.Track(o, o.Ptr)
 	return o
 }
 
@@ -186,7 +178,6 @@ func NewAEAAuthData(ptr unsafe.Pointer) *AEAAuthData {
 		return nil
 	}
 	o := &AEAAuthData{ptr: ptr}
-	cgo.Track(o, o.Ptr)
 	return o
 }
 
@@ -206,6 +197,5 @@ func NewAEAContext(ptr unsafe.Pointer) *AEAContext {
 		return nil
 	}
 	o := &AEAContext{ptr: ptr}
-	cgo.Track(o, o.Ptr)
 	return o
 }

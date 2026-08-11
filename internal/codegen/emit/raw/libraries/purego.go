@@ -584,7 +584,17 @@ func EmitPuregoRuntime(
 // cannot bind them. The normal emitter skips these names (see
 // EmitPuregoFunctions) so the manual body is the sole definition.
 var manualPuregoFuncs = map[string]map[string]bool{
-	"dispatch": {"dispatch_get_main_queue": true},
+	"dispatch":     {"dispatch_get_main_queue": true},
+	"AppleArchive": appleArchiveManualSet(),
+}
+
+// appleArchiveManualSet builds the AppleArchive skip-set from the ordered list.
+func appleArchiveManualSet() map[string]bool {
+	m := make(map[string]bool, len(appleArchiveManualFuncs))
+	for _, name := range appleArchiveManualFuncs {
+		m[name] = true
+	}
+	return m
 }
 
 // HasPuregoManual reports whether framework has any hand-written purego
@@ -643,4 +653,5 @@ func Dispatch_get_main_queue() unsafe.Pointer {
 }
 `
 	},
+	"AppleArchive": func(pkgName string) string { return appleArchiveManualBody },
 }

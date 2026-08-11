@@ -1,5 +1,6 @@
 {
  "AppleArchive": {
+  "backend": "purego",
   "link_lib": "AppleArchive"
  },
  "Compression": {
