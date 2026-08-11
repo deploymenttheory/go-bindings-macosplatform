@@ -7,6 +7,7 @@ import (
 
 	bsm "github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/libraries/bsm"
 	compression "github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/libraries/compression"
+	dispatch "github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/libraries/dispatch"
 	endpointsecurity "github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/libraries/endpointsecurity"
 	ioreport "github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/libraries/ioreport"
 	libproc "github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/libraries/libproc"
@@ -39,6 +40,7 @@ func TestSymbolsResolve(t *testing.T) {
 		{"libproc", libproc.SymbolAvailable, "proc_pidpath"},
 		{"endpointsecurity", endpointsecurity.SymbolAvailable, "es_new_client"},
 		{"xpc", xpc.SymbolAvailable, "xpc_int64_create"},
+		{"dispatch", dispatch.SymbolAvailable, "dispatch_async"},
 	}
 	for _, c := range cases {
 		if !c.available(c.symbol) {

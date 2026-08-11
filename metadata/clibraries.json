@@ -25,6 +25,7 @@
   "link_lib": "bsm"
  },
  "dispatch": {
+  "backend": "purego",
   "header": "dispatch/dispatch.h",
   "header_dir": "dispatch/",
   "link_lib": "System"

@@ -4,10 +4,7 @@
 
 package dispatch
 
-import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo"
-	"unsafe"
-)
+import "unsafe"
 
 // [data.h:55]
 // Introduced: macOS 10.7
@@ -44,6 +41,5 @@ func NewDispatchSourceTypeT(ptr unsafe.Pointer) *DispatchSourceTypeT {
 		return nil
 	}
 	o := &DispatchSourceTypeT{ptr: ptr}
-	cgo.Track(o, o.Ptr)
 	return o
 }
