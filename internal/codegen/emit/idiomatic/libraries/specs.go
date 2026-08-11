@@ -116,7 +116,7 @@ func EmitSpecs(w io.Writer, pkgName, rawImportPath string, framework *macosplatf
 				needsFoundation = true
 				needsObjc = true
 			}
-			if strings.Contains(f.goType, "cgo.") {
+			if strings.Contains(f.goType, "objptr.") {
 				needsObjc = true
 			}
 		}
@@ -145,9 +145,9 @@ func EmitSpecs(w io.Writer, pkgName, rawImportPath string, framework *macosplatf
 		for _, f := range spec.fields {
 			if f.isSlice {
 				fmt.Fprintf(&body, "\tif len(spec.%s) > 0 {\n", f.name)
-				fmt.Fprintf(&body, "\t\t_objs := make([]cgo.Object, len(spec.%s))\n", f.name)
+				fmt.Fprintf(&body, "\t\t_objs := make([]objptr.Object, len(spec.%s))\n", f.name)
 				fmt.Fprintf(&body, "\t\tfor _i, _d := range spec.%s { _objs[_i] = _d }\n", f.name)
-				fmt.Fprintf(&body, "\t\tc.%s(foundation.NSArrayOf[cgo.Object](_objs...))\n", f.setter)
+				fmt.Fprintf(&body, "\t\tc.%s(foundation.NSArrayOf[objptr.Object](_objs...))\n", f.setter)
 				fmt.Fprintf(&body, "\t}\n")
 			} else if strings.HasPrefix(f.goType, "*") || f.isInterface {
 				fmt.Fprintf(&body, "\tif spec.%s != nil { c.%s(spec.%s) }\n", f.name, f.setter, f.name)

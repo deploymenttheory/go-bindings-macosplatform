@@ -29,7 +29,7 @@ your case.
 |---|---|---|
 | **Idiomatic** (the framework/library API) | `bindings/frameworks/<name>`, `bindings/libraries/<name>` | **The default, and the only consumable binding API.** Calling a framework class or C function with Go types, Go errors, and automatic memory management. |
 | **Tools** | `opinionated/tools/<name>` | Hand-crafted, task-oriented helpers for a workflow that would otherwise be many low-level calls (e.g. `keychain` turns the whole SecItem dance into `CreateGenericPassword`). |
-| **Runtime** | `bindings/runtime/purego` (ObjC frameworks), `bindings/runtime/cgo` (C libraries) | The dispatch machinery the layers above are built on. Reach for it **only** for things that have no typed binding at all: defining a custom ObjC subclass, NSXPC, dispatch queues, or sending a selector by hand. |
+| **Runtime** | `bindings/runtime/purego` (ObjC frameworks and C libraries), `bindings/runtime/objptr` (the bare object interface) | The dispatch machinery the layers above are built on. Reach for it **only** for things that have no typed binding at all: defining a custom ObjC subclass, NSXPC, dispatch queues, or sending a selector by hand. |
 
 The RAW purego/CGo bindings still exist, but they are now **internal plumbing**
 under `bindings/internal/raw/...` — the implementation substrate the idiomatic layer

@@ -276,14 +276,14 @@ func TestGenericClassGeneration(t *testing.T) {
 		t.Fatalf("reading NSArray.go: %v", err)
 	}
 
-	// The struct must carry a type parameter. The constraint moved from the old
-	// internal runtime package (runtime.Object) to the public bindings/runtime/cgo
-	// package (cgo.Object) when the runtime was relocated.
+	// The struct must carry a type parameter. Frameworks constrain it with
+	// purego.AnyObject; the older internal runtime.Object spelling is still
+	// accepted so this check survives a runtime rename.
 	content := string(data)
-	hasGeneric := strings.Contains(content, "[T cgo.Object]") ||
+	hasGeneric := strings.Contains(content, "purego.AnyObject]") ||
 		strings.Contains(content, "[T runtime.Object]")
 	if !hasGeneric {
-		t.Errorf("NSArray.go: expected generic type parameter (e.g. '[T cgo.Object]'); got:\n%s", content)
+		t.Errorf("NSArray.go: expected generic type parameter (e.g. '[ObjectType purego.AnyObject]'); got:\n%s", content)
 	}
 
 	// The struct declaration must reference the type parameter.

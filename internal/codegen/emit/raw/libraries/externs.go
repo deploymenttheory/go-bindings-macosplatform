@@ -109,9 +109,6 @@ func buildExternsImports(items []view.ExternItemModel, usedImports typemap.Impor
 		if strings.Contains(it.GoType, "unsafe.Pointer") {
 			set["unsafe"] = true
 		}
-		if strings.Contains(it.GoType, "cgo.") {
-			set["github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo"] = true
-		}
 	}
 	for _, path := range usedImports {
 		set[path] = true

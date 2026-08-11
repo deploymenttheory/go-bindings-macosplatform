@@ -2,16 +2,16 @@ package rawlib
 
 import (
 	"fmt"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/libraries/render"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/libraries/view"
 	"io"
 	"sort"
 	"strings"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/libraries/render"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/libraries/view"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/libraries/naming"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/libraries/typemap"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/macosplatformmetadata"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/scanner"
 )
 
 // Protocols writes a complete _protocols.go file with Go interface definitions
@@ -40,16 +40,11 @@ func buildProtocolsModel(pkgName string, framework *macosplatformmetadata.Framew
 		protocols = append(protocols, pm)
 	}
 
-	// The purego backend must not import runtime/cgo (it pulls the cgo runtime
-	// into a CGO_ENABLED=0 package); embed the pure-Go objptr.Object instead —
-	// the same type cgo.Object aliases.
-	purego := scanner.CLibraryBackend(framework.Framework) == scanner.BackendPurego
-	rootObject := "cgo.Object"
-	if purego {
-		rootObject = "objptr.Object"
-	}
-	imports := buildProtocolsImports(usedImports, purego)
-	return view.ProtocolsFileModel{PkgName: pkgName, Imports: imports, RootObject: rootObject, Protocols: protocols}
+	// Library protocol interfaces embed the pure-Go objptr.Object (no cgo — the
+	// libraries are purego-only, so a CGO_ENABLED=0 consumer must not pull the
+	// cgo runtime in through a protocol file).
+	imports := buildProtocolsImports(usedImports)
+	return view.ProtocolsFileModel{PkgName: pkgName, Imports: imports, RootObject: "objptr.Object", Protocols: protocols}
 }
 
 // buildProtocolModel builds the model for a single ObjC @protocol → Go interface.
@@ -123,14 +118,10 @@ func buildProtocolModel(name string, p macosplatformmetadata.Protocol, framework
 }
 
 // buildProtocolsImports assembles and sorts the import list for a protocols file.
-func buildProtocolsImports(usedImports typemap.ImportSet, purego bool) []string {
-	rootPkg := "github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo"
-	if purego {
-		rootPkg = "github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/objptr"
-	}
+func buildProtocolsImports(usedImports typemap.ImportSet) []string {
 	set := map[string]bool{
 		"unsafe": true,
-		rootPkg:  true,
+		"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/objptr": true,
 	}
 	for _, path := range usedImports {
 		set[path] = true

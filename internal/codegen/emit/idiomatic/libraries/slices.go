@@ -112,9 +112,9 @@ func EmitSlices(w io.Writer, pkgName, rawImportPath string, framework *macosplat
 					e.propName, e.propName, e.className)
 				fmt.Fprintf(&body, "func Set%sList(recv *raw.%s, items []*raw.%s) {\n",
 					e.propName, e.className, e.elemClass)
-				fmt.Fprintf(&body, "\tobjects := make([]cgo.Object, len(items))\n")
+				fmt.Fprintf(&body, "\tobjects := make([]objptr.Object, len(items))\n")
 				fmt.Fprintf(&body, "\tfor i, item := range items {\n\t\tobjects[i] = item\n\t}\n")
-				fmt.Fprintf(&body, "\trecv.Set%s(foundation.NSArrayOf[cgo.Object](objects...))\n", e.propName)
+				fmt.Fprintf(&body, "\trecv.Set%s(foundation.NSArrayOf[objptr.Object](objects...))\n", e.propName)
 				fmt.Fprintf(&body, "}\n\n")
 			}
 		}
