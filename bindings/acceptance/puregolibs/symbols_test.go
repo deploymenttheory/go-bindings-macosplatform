@@ -5,6 +5,7 @@ package puregolibs_test
 import (
 	"testing"
 
+	applearchive "github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/libraries/applearchive"
 	bsm "github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/libraries/bsm"
 	compression "github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/libraries/compression"
 	dispatch "github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/libraries/dispatch"
@@ -43,6 +44,7 @@ func TestSymbolsResolve(t *testing.T) {
 		{"xpc", xpc.SymbolAvailable, "xpc_int64_create"},
 		{"dispatch", dispatch.SymbolAvailable, "dispatch_async"},
 		{"oslog", oslog.SymbolAvailable, "os_log_create"},
+		{"applearchive", applearchive.SymbolAvailable, "AEAContextDestroy"},
 	}
 	for _, c := range cases {
 		if !c.available(c.symbol) {
