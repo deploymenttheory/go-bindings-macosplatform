@@ -1,24 +1,15 @@
 package rawlib
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/libraries/render"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/libraries/view"
-	"io"
 	"sort"
 	"strings"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/libraries/view"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/libraries/naming"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/libraries/typemap"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/macosplatformmetadata"
 )
-
-// Externs writes a complete _externs.go file for the framework's extern symbols.
-func EmitExterns(w io.Writer, pkgName string, framework *macosplatformmetadata.FrameworkMeta, m *typemap.Mapper, knownClasses map[string]bool) error {
-	if len(framework.Externs) == 0 {
-		return nil
-	}
-	return render.Execute(w, "externs_file", buildExternsModel(pkgName, framework, m, knownClasses))
-}
 
 // externInitExpr returns the Go expression that populates an extern var from
 // its bridge address getter, or "" when the extern's shape is unsupported
@@ -62,20 +53,6 @@ func externGetterName(pkgName, symbol string) string {
 // buildExternGetters returns the bridge getter declarations for every extern
 // this package initialises. It mirrors buildExternsModel's dedup and shape
 // rules so the bridge and the Go init() always agree.
-func buildExternGetters(pkgName string, framework *macosplatformmetadata.FrameworkMeta, m *typemap.Mapper, knownClasses map[string]bool) []view.BridgeExternGetterModel {
-	var getters []view.BridgeExternGetterModel
-	for _, item := range buildExternsModel(pkgName, framework, m, knownClasses).Items {
-		if item.InitExpr == "" {
-			continue
-		}
-		getters = append(getters, view.BridgeExternGetterModel{
-			SymbolName: item.SymbolName,
-			GetterName: externGetterName(pkgName, item.SymbolName),
-		})
-	}
-	return getters
-}
-
 // buildExternsModel resolves types and collects imports, then returns a model
 // ready for template execution. All sorting, deduplication, and import decisions
 // are made here; the template itself is a pure structural description.

@@ -171,43 +171,8 @@ func buildGoReturn(method macosplatformmetadata.Method, ctx typemap.Context, m *
 	}
 }
 
-// cArgList builds the C function argument list for the bridge header.
-// It prepends a `void *self` argument for instance methods and adds
-// `void **outError` when hasNSError is true.
-func cArgList(isClassMethod bool, args []macosplatformmetadata.Param, hasNSError bool, m *typemap.Mapper, ctx typemap.Context, imports typemap.ImportSet) string {
-	resolved := buildParamNames(args)
-	var parts []string
-	if !isClassMethod {
-		parts = append(parts, "void *self")
-	}
-	for i, arg := range args {
-		cType := m.CType(arg.ObjCType, ctx, imports)
-		parts = append(parts, fmt.Sprintf("%s %s", cType, resolved[i]))
-	}
-	if hasNSError {
-		parts = append(parts, "void **outError")
-	}
-	if len(parts) == 0 {
-		return "void"
-	}
-	return strings.Join(parts, ", ")
-}
-
 // goCallArgs builds the C function call arguments for the Go-side CGo call.
 // It inserts o.ptr first for instance methods.
-func goCallArgs(isClassMethod bool, args []macosplatformmetadata.Param, hasNSError bool) string {
-	resolved := buildParamNames(args)
-	var parts []string
-	if !isClassMethod {
-		parts = append(parts, "o.ptr")
-	}
-	parts = append(parts, resolved...)
-	if hasNSError {
-		parts = append(parts, "&nsErr")
-	}
-	return strings.Join(parts, ", ")
-}
-
 // methodRefsUnavailableClass reports whether any argument or return type in
 // method references a class that is marked unavailable in framework. Methods that
 // reference unavailable (iOS-only) classes cannot be generated because the
@@ -261,4 +226,228 @@ func isPrimitiveGoType(s string) bool {
 		return true
 	}
 	return false
+}
+
+// ── Helpers relocated from the retired cgo class/bridge emitters ──────────────
+// These are the only members of the former classes.go / bridge.go still reached
+// by the live purego surface path: isObjectReturn/isKnownStruct/objectConstructExpr
+// (+ its cross-framework helpers) are used by the purego function emitter, and
+// isUPPFunction/hasByValueUnknownTypeFor (+ helpers) by EmittableFunctions. The
+// rest of those files was dead once every library moved to the purego backend.
+
+// isObjectReturn returns true if the Go return type is an ObjC wrapper pointer.
+func isObjectReturn(goType string) bool {
+	if !strings.HasPrefix(goType, "*") {
+		return false
+	}
+	inner := goType[1:]
+	switch inner {
+	case "bool", "int8", "int16", "int32", "int64",
+		"uint8", "uint16", "uint32", "uint64", "float32", "float64", "string":
+		return false
+	}
+	return true
+}
+
+// isKnownStruct reports whether bare (the Go type name with pkg. prefix stripped)
+// is a registered C struct. It checks both the Go-capitalized form (e.g. "Decform")
+// and the original ObjC-lowercase form (e.g. "decform"), because the StructIndex
+// registry stores ObjC names as-is while qualifiedStructType capitalises the first
+// letter via naming.GoTypeName.
+func isKnownStruct(bare string, m *typemap.Mapper) bool {
+	// Preferred: forward-mapped exported Go names (bare is the resolved Go type
+	// name, which uses the non-invertible ExportedTypeName mapping).
+	if m.IsStructGoName(bare) {
+		return true
+	}
+	// Fallback for single-word names (where ExportedTypeName == the capitalised C
+	// name) and callers that did not build the Go-name index: the StructIndex is
+	// keyed by the ObjC/C name, so also try the lowercase-first form.
+	if m.StructIndex[bare] != "" {
+		return true
+	}
+	if len(bare) > 0 {
+		lower := strings.ToLower(string(bare[0])) + bare[1:]
+		if m.StructIndex[lower] != "" {
+			return true
+		}
+	}
+	return false
+}
+
+// objectConstructExpr returns the Go expression that wraps _ptr in a typed Go object.
+// structType has no leading "*" (e.g. "NSString", "NSArray[T]", "foundation.NSString").
+func objectConstructExpr(
+	structType, ptrVar string,
+	fmClasses map[string]macosplatformmetadata.Class,
+	m *typemap.Mapper,
+) string {
+	// Cross-framework: "foundation.NSString" → foundation.NewNSString(_ptr)
+	if isCrossFrameworkType(structType) {
+		return crossFrameworkCtor(structType, ptrVar)
+	}
+
+	// T-generic same-framework: "NSArray[T]" → NewNSArrayT[T](_ptr)
+	if strings.Contains(structType, "[T]") {
+		baseName := structType[:strings.Index(structType, "[")]
+		return "New" + baseName + "T[T](" + ptrVar + ")"
+	}
+
+	// Non-T same-framework: "NSString" or "NSArray[runtime.Object]"
+	baseName := structType
+	if br := strings.Index(baseName, "["); br > 0 {
+		baseName = baseName[:br]
+	}
+	return "New" + baseName + "(" + ptrVar + ")"
+}
+
+// isCrossFrameworkType returns true when structType belongs to a foreign package:
+// it has a "." before any "[" (e.g. "foundation.NSString").
+func isCrossFrameworkType(structType string) bool {
+	bracket := strings.Index(structType, "[")
+	dot := strings.Index(structType, ".")
+	if dot < 0 {
+		return false
+	}
+	return bracket < 0 || dot < bracket
+}
+
+// crossFrameworkCtor builds a foreign constructor call: pkg.NewTypeName(ptr).
+func crossFrameworkCtor(structType, ptr string) string {
+	dot := strings.Index(structType, ".")
+	pkg := structType[:dot]
+	typeName := structType[dot+1:]
+	isGenericT := strings.Contains(typeName, "[T]")
+	if br := strings.Index(typeName, "["); br > 0 {
+		typeName = typeName[:br]
+	}
+	if isGenericT {
+		// Use the exported generic constructor to preserve the T type parameter.
+		return pkg + ".New" + typeName + "T[T](" + ptr + ")"
+	}
+	return pkg + ".New" + typeName + "(" + ptr + ")"
+}
+
+// isUPPFunction returns true for Carbon Universal Procedure Pointer functions
+// (Invoke*UPP, New*UPP, Dispose*UPP). These use macros that dereference the
+// UPP void* argument as a function pointer — which fails in a -fno-objc-arc
+// bridge context where all pointers are void*. Skip them entirely.
+func isUPPFunction(name string) bool {
+	return (strings.HasPrefix(name, "Invoke") || strings.HasPrefix(name, "New") || strings.HasPrefix(name, "Dispose")) &&
+		strings.HasSuffix(name, "UPP")
+}
+
+// hasByValueUnknownType returns true when any argument or return type is a
+// C value type (no '*') that the typemap cannot represent as void* — specifically
+// SIMD vector types (vFloat, vDouble) and structs passed by value (DenseMatrix_Float).
+// The compiler cannot cast a pointer to these types, producing build errors.
+//
+// This check is intentionally narrow: it allows through pointer typedefs (recognised
+// by _Nonnull / _Nullable nullability annotations — only valid on pointer types),
+// enums, and any named type that the mapper would handle via its enum or CF tables.
+// Entitlement-gated APIs (vmnet, NetworkExtension, etc.) use pointer typedefs and
+// integer enums — they must NOT be filtered here.
+// hasByValueUnknownTypeFor is hasByValueUnknownType with the declaring
+// framework's own enum table consulted first: a bare enum name that matches
+// none of the heuristics (compression_algorithm has no '_t' suffix) is still
+// a plain C integer and must not disqualify the function.
+func hasByValueUnknownTypeFor(
+	framework *macosplatformmetadata.FrameworkMeta,
+	fn macosplatformmetadata.Function,
+) bool {
+	if !hasByValueUnknownType(fn) {
+		return false
+	}
+	isEnum := func(objcType string) bool {
+		n := typemap.Normalise(objcType)
+		_, ok := framework.Enums[n]
+		return ok
+	}
+	if fn.Return.ObjCType != "" && hasByValueUnknownType(macosplatformmetadata.Function{
+		Return: fn.Return,
+	}) && !isEnum(fn.Return.ObjCType) {
+		return true
+	}
+	for _, arg := range fn.Params {
+		if hasByValueUnknownType(macosplatformmetadata.Function{
+			Params: []macosplatformmetadata.Param{arg},
+		}) && !isEnum(arg.ObjCType) {
+			return true
+		}
+	}
+	return false
+}
+
+func hasByValueUnknownType(fn macosplatformmetadata.Function) bool {
+	check := func(objcType string) bool {
+		if objcType == "" || objcType == "void" {
+			return false
+		}
+		// Pointer types (explicit * or nullability-annotated pointer typedefs).
+		if strings.Contains(objcType, "*") {
+			return false
+		}
+		// Nullability annotations (_Nonnull, _Nullable, _Null_unspecified) are only
+		// valid on pointer types — a bare typedef with one of these is a pointer.
+		if strings.Contains(objcType, "_Nonnull") ||
+			strings.Contains(objcType, "_Nullable") ||
+			strings.Contains(objcType, "_Null_unspecified") {
+			return false
+		}
+		n := typemap.Normalise(objcType)
+		// Known scalar / ObjC meta types.
+		if typemap.IsBOOL(n) || typemap.IsID(n) || typemap.IsSEL(n) || typemap.IsClass(n) {
+			return false
+		}
+		if isVAList(n) || typemap.IsBlock(n) {
+			return false
+		}
+		// Standard C scalar types.
+		switch n {
+		case "void", "bool", "_Bool",
+			"char", "signed char", "unsigned char",
+			"short", "unsigned short",
+			"int", "unsigned int",
+			"long", "unsigned long",
+			"long long", "unsigned long long",
+			"float", "double", "long double",
+			"int8_t", "int16_t", "int32_t", "int64_t",
+			"uint8_t", "uint16_t", "uint32_t", "uint64_t",
+			"size_t", "ssize_t", "ptrdiff_t", "intptr_t", "uintptr_t",
+			"NSInteger", "NSUInteger", "CGFloat":
+			return false
+		}
+		// Named types without a nullability annotation and without * fall into two
+		// categories:
+		//   (a) Enum / integer typedefs — safe, CType() maps them to the right int type.
+		//   (b) SIMD vector / struct-by-value types — unsafe.
+		// We conservatively allow any type whose normalised name contains "Ref" or
+		// ends in "_t" (common C typedef conventions for pointer/integer types), and
+		// any type that looks like an enum (e.g. vmnet_return_t, FFTDirection).
+		// Types known to be SIMD/vector (e.g. vFloat, vDouble, DenseMatrix_Float,
+		// DenseVector_Double) have neither characteristic.
+		if strings.HasSuffix(n, "_t") || strings.Contains(n, "Ref") {
+			return false
+		}
+		// Enum-like names: contain no spaces and are not a known struct prefix.
+		// Struct-by-value types from vecLib/BNNS look like: DenseMatrix_Float,
+		// DenseVector_Double, BNNSNearestNeighbors, vFloat, vDouble, etc.
+		// These all lack "_t"/"Ref" and represent value types.
+		return true
+	}
+	if check(fn.Return.ObjCType) {
+		return true
+	}
+	for _, arg := range fn.Params {
+		if check(arg.ObjCType) {
+			return true
+		}
+	}
+	return false
+}
+
+// isVAList returns true for va_list ObjC argument types.
+func isVAList(objcType string) bool {
+	n := typemap.Normalise(objcType)
+	return strings.Contains(n, "va_list") || strings.Contains(n, "__va_list")
 }

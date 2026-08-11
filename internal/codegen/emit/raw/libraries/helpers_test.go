@@ -261,53 +261,6 @@ func TestBuildGoReturnNSErrorOnly(t *testing.T) {
 }
 
 // --------------------------------------------------------------------------
-// cArgList
-// --------------------------------------------------------------------------
-
-func TestCArgListInstanceMethod(t *testing.T) {
-	m := testMapper()
-	ctx := testCtx("Foundation")
-	args := []macosplatformmetadata.Param{}
-	// Instance method, no args → prepends "void *self".
-	got := cArgList(false, args, false, m, ctx, nil)
-	if got != "void *self" {
-		t.Errorf("got %q, want %q", got, "void *self")
-	}
-}
-
-func TestCArgListClassMethod(t *testing.T) {
-	m := testMapper()
-	ctx := testCtx("Foundation")
-	// Class method, no args → "void" (no self, no args).
-	got := cArgList(true, nil, false, m, ctx, nil)
-	if got != "void" {
-		t.Errorf("got %q, want %q", got, "void")
-	}
-}
-
-func TestCArgListWithNSError(t *testing.T) {
-	m := testMapper()
-	ctx := testCtx("Foundation")
-	// Instance method with hasNSError=true.
-	got := cArgList(false, nil, true, m, ctx, nil)
-	// Expects "void *self, void **outError"
-	want := "void *self, void **outError"
-	if got != want {
-		t.Errorf("got %q, want %q", got, want)
-	}
-}
-
-func TestCArgListEmptyBecomesVoid(t *testing.T) {
-	m := testMapper()
-	ctx := testCtx("Foundation")
-	// Class method with no args and no NSError → "void".
-	got := cArgList(true, nil, false, m, ctx, nil)
-	if got != "void" {
-		t.Errorf("got %q, want %q", got, "void")
-	}
-}
-
-// --------------------------------------------------------------------------
 // availabilityComment
 // --------------------------------------------------------------------------
 
@@ -357,49 +310,5 @@ func TestIsPrimitiveGoTypeNonPrimitive(t *testing.T) {
 	}
 	if isPrimitiveGoType("unsafe.Pointer") {
 		t.Error("unsafe.Pointer should not be a primitive Go type")
-	}
-}
-
-// ── isValueStructReturn ───────────────────────────────────────────────────────
-
-func TestIsValueStructReturnEmpty(t *testing.T) {
-	if isValueStructReturn("", nil) {
-		t.Error("empty type should not be value struct return")
-	}
-}
-
-func TestIsValueStructReturnUnsafePointer(t *testing.T) {
-	if isValueStructReturn("unsafe.Pointer", nil) {
-		t.Error("unsafe.Pointer should not be value struct return")
-	}
-}
-
-func TestIsValueStructReturnPointerType(t *testing.T) {
-	if isValueStructReturn("*NSView", nil) {
-		t.Error("pointer type should not be value struct return")
-	}
-}
-
-func TestIsValueStructReturnPrimitive(t *testing.T) {
-	for _, typ := range []string{"bool", "int32", "uint64", "float32", "string", "error", "cgo.Object"} {
-		if isValueStructReturn(typ, nil) {
-			t.Errorf("%s should not be value struct return", typ)
-		}
-	}
-}
-
-func TestIsValueStructReturnEnumType(t *testing.T) {
-	m := &typemap.Mapper{
-		EnumGoTypeIndex: map[string]string{"MyEnum": "uint64"},
-	}
-	if isValueStructReturn("MyEnum", m) {
-		t.Error("enum type should not be value struct return")
-	}
-}
-
-func TestIsValueStructReturnActualStruct(t *testing.T) {
-	// A non-pointer, non-primitive, non-enum type → value struct return
-	if !isValueStructReturn("CGRect", nil) {
-		t.Error("CGRect should be a value struct return type")
 	}
 }
