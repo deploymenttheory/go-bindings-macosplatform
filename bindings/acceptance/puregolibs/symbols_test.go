@@ -15,6 +15,7 @@ import (
 	machinit "github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/libraries/machinit"
 	machtime "github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/libraries/machtime"
 	machvm "github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/libraries/machvm"
+	oslog "github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/libraries/oslog"
 	sandbox "github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/libraries/sandbox"
 	xar "github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/libraries/xar"
 	xpc "github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/libraries/xpc"
@@ -41,6 +42,7 @@ func TestSymbolsResolve(t *testing.T) {
 		{"endpointsecurity", endpointsecurity.SymbolAvailable, "es_new_client"},
 		{"xpc", xpc.SymbolAvailable, "xpc_int64_create"},
 		{"dispatch", dispatch.SymbolAvailable, "dispatch_async"},
+		{"oslog", oslog.SymbolAvailable, "os_log_create"},
 	}
 	for _, c := range cases {
 		if !c.available(c.symbol) {

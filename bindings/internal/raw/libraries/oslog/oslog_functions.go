@@ -4,125 +4,86 @@
 
 package oslog
 
-// #include "bridge/oslog_bridge.h"
-import "C"
-
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo"
 	"unsafe"
 )
 
-var _ unsafe.Pointer // suppress unused import
+var (
+	_pg_os_log_create                func(string, string) unsafe.Pointer
+	_pg_os_log_type_enabled          func(unsafe.Pointer, OsLogTypeT) bool
+	_pg__os_log_impl                 func(unsafe.Pointer, unsafe.Pointer, OsLogTypeT, string, *uint8, uint32)
+	_pg__os_log_debug_impl           func(unsafe.Pointer, unsafe.Pointer, OsLogTypeT, string, *uint8, uint32)
+	_pg__os_log_error_impl           func(unsafe.Pointer, unsafe.Pointer, OsLogTypeT, string, *uint8, uint32)
+	_pg__os_log_fault_impl           func(unsafe.Pointer, unsafe.Pointer, OsLogTypeT, string, *uint8, uint32)
+	_pg__os_log_create               func(unsafe.Pointer, string, string) unsafe.Pointer
+	_pg_os_log_is_enabled            func(unsafe.Pointer) bool
+	_pg_os_log_is_debug_enabled      func(unsafe.Pointer) bool
+	_pg__os_log_sensitive_deprecated func()
+)
 
 // [log.h:125]
 // Introduced: macOS 10.12
-// Return value must not be discarded.
 // ID: objc-sym oslog.os_log_create
 func Os_log_create(subsystem string, category string) unsafe.Pointer {
-	_cstr_subsystem := C.CString(subsystem)
-	defer C.free(unsafe.Pointer(_cstr_subsystem))
-	_cstr_category := C.CString(category)
-	defer C.free(unsafe.Pointer(_cstr_category))
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.oslog_fn_os_log_create(_cstr_subsystem, _cstr_category, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_os_log_create(subsystem, category)
 }
 
 // [log.h:425]
 // Introduced: macOS 10.12
-// Return value must not be discarded.
 // ID: objc-sym oslog.os_log_type_enabled
 func Os_log_type_enabled(oslog unsafe.Pointer, type_ OsLogTypeT) bool {
-	var _exc unsafe.Pointer
-	_result := bool(C.oslog_fn_os_log_type_enabled(oslog, C.uint8_t(type_), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_os_log_type_enabled(oslog, type_)
 }
 
 // [log.h:436]
 // Introduced: macOS 10.12
 // ID: objc-sym oslog._os_log_impl
 func _os_log_impl(dso unsafe.Pointer, log unsafe.Pointer, type_ OsLogTypeT, format string, buf *uint8, size uint32) {
-	_cstr_format := C.CString(format)
-	defer C.free(unsafe.Pointer(_cstr_format))
-	var _exc unsafe.Pointer
-	C.oslog_fn__os_log_impl(dso, log, C.uint8_t(type_), _cstr_format, unsafe.Pointer(buf), C.uint32_t(size), &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg__os_log_impl(dso, log, type_, format, buf, size)
 }
 
 // [log.h:448]
 // Introduced: macOS 10.15
 // ID: objc-sym oslog._os_log_debug_impl
 func _os_log_debug_impl(dso unsafe.Pointer, log unsafe.Pointer, type_ OsLogTypeT, format string, buf *uint8, size uint32) {
-	_cstr_format := C.CString(format)
-	defer C.free(unsafe.Pointer(_cstr_format))
-	var _exc unsafe.Pointer
-	C.oslog_fn__os_log_debug_impl(dso, log, C.uint8_t(type_), _cstr_format, unsafe.Pointer(buf), C.uint32_t(size), &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg__os_log_debug_impl(dso, log, type_, format, buf, size)
 }
 
 // [log.h:460]
 // Introduced: macOS 10.13
 // ID: objc-sym oslog._os_log_error_impl
 func _os_log_error_impl(dso unsafe.Pointer, log unsafe.Pointer, type_ OsLogTypeT, format string, buf *uint8, size uint32) {
-	_cstr_format := C.CString(format)
-	defer C.free(unsafe.Pointer(_cstr_format))
-	var _exc unsafe.Pointer
-	C.oslog_fn__os_log_error_impl(dso, log, C.uint8_t(type_), _cstr_format, unsafe.Pointer(buf), C.uint32_t(size), &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg__os_log_error_impl(dso, log, type_, format, buf, size)
 }
 
 // [log.h:472]
 // Introduced: macOS 10.13
 // ID: objc-sym oslog._os_log_fault_impl
 func _os_log_fault_impl(dso unsafe.Pointer, log unsafe.Pointer, type_ OsLogTypeT, format string, buf *uint8, size uint32) {
-	_cstr_format := C.CString(format)
-	defer C.free(unsafe.Pointer(_cstr_format))
-	var _exc unsafe.Pointer
-	C.oslog_fn__os_log_fault_impl(dso, log, C.uint8_t(type_), _cstr_format, unsafe.Pointer(buf), C.uint32_t(size), &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg__os_log_fault_impl(dso, log, type_, format, buf, size)
 }
 
 // [log.h:488]
 // Introduced: macOS 10.11
-// Return value must not be discarded.
 // ID: objc-sym oslog._os_log_create
 func _os_log_create(dso unsafe.Pointer, subsystem string, category string) unsafe.Pointer {
-	_cstr_subsystem := C.CString(subsystem)
-	defer C.free(unsafe.Pointer(_cstr_subsystem))
-	_cstr_category := C.CString(category)
-	defer C.free(unsafe.Pointer(_cstr_category))
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.oslog_fn__os_log_create(dso, _cstr_subsystem, _cstr_category, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg__os_log_create(dso, subsystem, category)
 }
 
 // [log.h:494]
-// Return value must not be discarded.
 // ID: objc-sym oslog.os_log_is_enabled
 func Os_log_is_enabled(log unsafe.Pointer) bool {
-	var _exc unsafe.Pointer
-	_result := bool(C.oslog_fn_os_log_is_enabled(log, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_os_log_is_enabled(log)
 }
 
 // [log.h:500]
-// Return value must not be discarded.
 // ID: objc-sym oslog.os_log_is_debug_enabled
 func Os_log_is_debug_enabled(log unsafe.Pointer) bool {
-	var _exc unsafe.Pointer
-	_result := bool(C.oslog_fn_os_log_is_debug_enabled(log, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_os_log_is_debug_enabled(log)
 }
 
 // [log.h:506]
 // ID: objc-sym oslog._os_log_sensitive_deprecated
 func _os_log_sensitive_deprecated() {
-	var _exc unsafe.Pointer
-	C.oslog_fn__os_log_sensitive_deprecated(&_exc)
-	cgo.RaiseIfException(_exc)
+	_pg__os_log_sensitive_deprecated()
 }
