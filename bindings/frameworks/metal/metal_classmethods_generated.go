@@ -5,6 +5,9 @@
 package metal
 
 import (
+	"runtime"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -114,6 +117,26 @@ func Data() *MotionKeyframeData {
 func MTLPrimitiveAccelerationStructureDescriptorDescriptor() *PrimitiveAccelerationStructureDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MTLPrimitiveAccelerationStructureDescriptor")), objc.RegisterName("descriptor"))
 	return PrimitiveAccelerationStructureDescriptorFromID(_r)
+}
+
+// RasterizationRateMapDescriptorWithScreenSize creates a rate map descriptor with a given size and identifier.
+func RasterizationRateMapDescriptorWithScreenSize(screenSize MTLSize) *RasterizationRateMapDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MTLRasterizationRateMapDescriptor")), objc.RegisterName("rasterizationRateMapDescriptorWithScreenSize:"), screenSize)
+	return RasterizationRateMapDescriptorFromID(_r)
+}
+
+// RasterizationRateMapDescriptorWithScreenSizeLayer creates a rate map descriptor with a single rate layer.
+func RasterizationRateMapDescriptorWithScreenSizeLayer(screenSize MTLSize, layer *RasterizationRateLayerDescriptor) *RasterizationRateMapDescriptor {
+	defer runtime.KeepAlive(layer)
+	_r := objc.Send[objc.ID](objc.ID(_class("MTLRasterizationRateMapDescriptor")), objc.RegisterName("rasterizationRateMapDescriptorWithScreenSize:layer:"), screenSize, objref.IDOf(layer))
+	return RasterizationRateMapDescriptorFromID(_r)
+}
+
+// RasterizationRateMapDescriptorWithScreenSizeLayerCountLayers creates a rate map descriptor with a set of layer descriptors.
+func RasterizationRateMapDescriptorWithScreenSizeLayerCountLayers(screenSize MTLSize, layerCount int, layers *RasterizationRateLayerDescriptor) *RasterizationRateMapDescriptor {
+	defer runtime.KeepAlive(layers)
+	_r := objc.Send[objc.ID](objc.ID(_class("MTLRasterizationRateMapDescriptor")), objc.RegisterName("rasterizationRateMapDescriptorWithScreenSize:layerCount:layers:"), screenSize, layerCount, objref.IDOf(layers))
+	return RasterizationRateMapDescriptorFromID(_r)
 }
 
 // MTLRenderPassDescriptorRenderPassDescriptor creates a default render pass descriptor.

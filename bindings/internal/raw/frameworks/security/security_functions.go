@@ -872,7 +872,7 @@ var (
 	_fnSecTaskCopyValueForEntitlement   func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	_fnSecTaskCopyValuesForEntitlements func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	_fnSecTaskCreateFromSelf            func(unsafe.Pointer) unsafe.Pointer
-	_fnSecTaskCreateWithAuditToken      func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnSecTaskCreateWithAuditToken      func(unsafe.Pointer, AuditTokenT) unsafe.Pointer
 	// @function SecTaskGetTypeID @abstract Returns the type ID for CF instances of SecTask. @result A CFTypeID for SecTask
 	_fnSecTaskGetTypeID              func() uint
 	_fnSecTranformCustomGetAttribute func(unsafe.Pointer, unsafe.Pointer, SecTransformMetaAttributeType) unsafe.Pointer
@@ -3568,7 +3568,7 @@ func SecTaskCreateFromSelf(allocator unsafe.Pointer) unsafe.Pointer {
 	return _fnSecTaskCreateFromSelf(allocator)
 }
 
-func SecTaskCreateWithAuditToken(allocator unsafe.Pointer, token unsafe.Pointer) unsafe.Pointer {
+func SecTaskCreateWithAuditToken(allocator unsafe.Pointer, token AuditTokenT) unsafe.Pointer {
 	return _fnSecTaskCreateWithAuditToken(allocator, token)
 }
 

@@ -1322,7 +1322,7 @@ func NwErrorCopyCfError(err obj.Object) corefoundation.CFErrorRef {
 		ebipurego.RegisterLibFunc(&_fnNwErrorCopyCfError, _lib, "nw_error_copy_cf_error")
 	}
 	_ret := _fnNwErrorCopyCfError(objref.IDOf(err))
-	return corefoundation.CFErrorRef{obj.Wrap(_ret)}
+	return corefoundation.CFErrorRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnNwErrorGetErrorCode func(objc.ID) int32

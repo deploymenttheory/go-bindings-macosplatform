@@ -21,7 +21,7 @@ func SMCopyAllJobDictionaries(domain corefoundation.CFStringRef) corefoundation.
 		ebipurego.RegisterLibFunc(&_fnSMCopyAllJobDictionaries, _lib, "SMCopyAllJobDictionaries")
 	}
 	_ret := _fnSMCopyAllJobDictionaries(objref.IDOf(domain.Object))
-	return corefoundation.CFArrayRef{obj.Wrap(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSMJobCopyDictionary func(objc.ID, objc.ID) objc.ID
@@ -33,7 +33,7 @@ func SMJobCopyDictionary(domain corefoundation.CFStringRef, jobLabel corefoundat
 		ebipurego.RegisterLibFunc(&_fnSMJobCopyDictionary, _lib, "SMJobCopyDictionary")
 	}
 	_ret := _fnSMJobCopyDictionary(objref.IDOf(domain.Object), objref.IDOf(jobLabel.Object))
-	return corefoundation.CFDictionaryRef{obj.Wrap(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSMLoginItemSetEnabled func(objc.ID, uint8) uint8

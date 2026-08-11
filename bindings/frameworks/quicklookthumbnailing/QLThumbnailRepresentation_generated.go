@@ -92,7 +92,7 @@ func (tr *ThumbnailRepresentation) Type() ThumbnailRepresentationType {
 func (tr *ThumbnailRepresentation) CGImage() coregraphics.CGImageRef {
 	defer runtime.KeepAlive(tr)
 	_r := objc.Send[objc.ID](objref.IDOf(tr), objc.RegisterName("CGImage"))
-	return coregraphics.CGImageRef{obj.Wrap(_r)}
+	return coregraphics.CGImageRef{Object: obj.Wrap(_r)}
 }
 
 // ContentRect returns the the effective rect within the thumbnail image representing the content of the document. In icon mode, this is the part of the image without all the image decorations.

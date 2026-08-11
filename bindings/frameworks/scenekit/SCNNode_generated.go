@@ -131,6 +131,48 @@ func (n *Node) WithWorldTransform(worldTransform quartzcore.CATransform3D) *Node
 	return n
 }
 
+// WithPosition sets the translation applied to the node. Animatable.
+func (n *Node) WithPosition(position SCNVector3) *Node {
+	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setPosition:"), position)
+	return n
+}
+
+// WithWorldPosition sets the node’s position relative to the scene’s world coordinate space.
+func (n *Node) WithWorldPosition(worldPosition SCNVector3) *Node {
+	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setWorldPosition:"), worldPosition)
+	return n
+}
+
+// WithRotation sets the node’s orientation, expressed as a rotation angle about an axis. Animatable.
+func (n *Node) WithRotation(rotation SCNVector4) *Node {
+	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setRotation:"), rotation)
+	return n
+}
+
+// WithOrientation sets the node’s orientation, expressed as a quaternion. Animatable.
+func (n *Node) WithOrientation(orientation SCNVector4) *Node {
+	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setOrientation:"), orientation)
+	return n
+}
+
+// WithWorldOrientation sets the node’s orientation relative to the scene’s world coordinate space.
+func (n *Node) WithWorldOrientation(worldOrientation SCNVector4) *Node {
+	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setWorldOrientation:"), worldOrientation)
+	return n
+}
+
+// WithEulerAngles sets the node’s orientation, expressed as pitch, yaw, and roll angles in radians. Animatable.
+func (n *Node) WithEulerAngles(eulerAngles SCNVector3) *Node {
+	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setEulerAngles:"), eulerAngles)
+	return n
+}
+
+// WithScale sets the scale factor applied to the node. Animatable.
+func (n *Node) WithScale(scale SCNVector3) *Node {
+	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setScale:"), scale)
+	return n
+}
+
 // WithPivot sets the pivot point for the node’s position, rotation, and scale. Animatable.
 func (n *Node) WithPivot(pivot quartzcore.CATransform3D) *Node {
 	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setPivot:"), pivot)
@@ -353,6 +395,38 @@ func (n *Node) EnumerateHierarchyUsing(block func(obj.Object, *bool)) {
 	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("enumerateHierarchyUsingBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), (*bool)(_b1)) }))
 }
 
+// ConvertPositionToNode converts a position from the node’s local coordinate space to that of another node.
+func (n *Node) ConvertPositionToNode(position SCNVector3, node *Node) SCNVector3 {
+	defer runtime.KeepAlive(n)
+	defer runtime.KeepAlive(node)
+	_r := objc.Send[SCNVector3](objref.IDOf(n), objc.RegisterName("convertPosition:toNode:"), position, objref.IDOf(node))
+	return _r
+}
+
+// ConvertPositionFromNode converts a position to the node’s local coordinate space from that of another node.
+func (n *Node) ConvertPositionFromNode(position SCNVector3, node *Node) SCNVector3 {
+	defer runtime.KeepAlive(n)
+	defer runtime.KeepAlive(node)
+	_r := objc.Send[SCNVector3](objref.IDOf(n), objc.RegisterName("convertPosition:fromNode:"), position, objref.IDOf(node))
+	return _r
+}
+
+// ConvertVectorToNode converts a direction vector from the node’s local coordinate space to that of another node.
+func (n *Node) ConvertVectorToNode(vector SCNVector3, node *Node) SCNVector3 {
+	defer runtime.KeepAlive(n)
+	defer runtime.KeepAlive(node)
+	_r := objc.Send[SCNVector3](objref.IDOf(n), objc.RegisterName("convertVector:toNode:"), vector, objref.IDOf(node))
+	return _r
+}
+
+// ConvertVectorFromNode converts a direction vector to the node’s local coordinate space from that of another node.
+func (n *Node) ConvertVectorFromNode(vector SCNVector3, node *Node) SCNVector3 {
+	defer runtime.KeepAlive(n)
+	defer runtime.KeepAlive(node)
+	_r := objc.Send[SCNVector3](objref.IDOf(n), objc.RegisterName("convertVector:fromNode:"), vector, objref.IDOf(node))
+	return _r
+}
+
 // ConvertTransformToNode converts a transform from the node’s local coordinate space to that of another node.
 func (n *Node) ConvertTransformToNode(transform quartzcore.CATransform3D, node *Node) quartzcore.CATransform3D {
 	defer runtime.KeepAlive(n)
@@ -367,6 +441,13 @@ func (n *Node) ConvertTransformFromNode(transform quartzcore.CATransform3D, node
 	defer runtime.KeepAlive(node)
 	_r := objc.Send[quartzcore.CATransform3D](objref.IDOf(n), objc.RegisterName("convertTransform:fromNode:"), transform, objref.IDOf(node))
 	return _r
+}
+
+// HitTestWithSegmentFromPointToPointOptions searches the node’s child node subtree for objects intersecting a line segment between two specified points.
+func (n *Node) HitTestWithSegmentFromPointToPointOptions(pointA SCNVector3, pointB SCNVector3, options map[string]obj.Object) []*HitTestResult {
+	defer runtime.KeepAlive(n)
+	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("hitTestWithSegmentFromPoint:toPoint:options:"), pointA, pointB, rt.MapToDict(options, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *HitTestResult { return HitTestResultFromID(_id) })
 }
 
 // Name determines the name of the receiver.
@@ -425,6 +506,55 @@ func (n *Node) Transform() quartzcore.CATransform3D {
 func (n *Node) WorldTransform() quartzcore.CATransform3D {
 	defer runtime.KeepAlive(n)
 	_r := objc.Send[quartzcore.CATransform3D](objref.IDOf(n), objc.RegisterName("worldTransform"))
+	return _r
+}
+
+// Position determines the receiver's position. Animatable.
+func (n *Node) Position() SCNVector3 {
+	defer runtime.KeepAlive(n)
+	_r := objc.Send[SCNVector3](objref.IDOf(n), objc.RegisterName("position"))
+	return _r
+}
+
+// WorldPosition determines the receiver's position in world space (relative to the scene's root node).
+func (n *Node) WorldPosition() SCNVector3 {
+	defer runtime.KeepAlive(n)
+	_r := objc.Send[SCNVector3](objref.IDOf(n), objc.RegisterName("worldPosition"))
+	return _r
+}
+
+// Rotation determines the receiver's rotation. Animatable. The rotation is axis angle rotation. The three first components are the axis, the fourth one is the rotation (in radian).
+func (n *Node) Rotation() SCNVector4 {
+	defer runtime.KeepAlive(n)
+	_r := objc.Send[SCNVector4](objref.IDOf(n), objc.RegisterName("rotation"))
+	return _r
+}
+
+// Orientation determines the receiver's orientation as a unit quaternion. Animatable.
+func (n *Node) Orientation() SCNVector4 {
+	defer runtime.KeepAlive(n)
+	_r := objc.Send[SCNVector4](objref.IDOf(n), objc.RegisterName("orientation"))
+	return _r
+}
+
+// WorldOrientation determines the receiver's orientation in world space (relative to the scene's root node). Animatable.
+func (n *Node) WorldOrientation() SCNVector4 {
+	defer runtime.KeepAlive(n)
+	_r := objc.Send[SCNVector4](objref.IDOf(n), objc.RegisterName("worldOrientation"))
+	return _r
+}
+
+// EulerAngles determines the receiver's euler angles. Animatable.
+func (n *Node) EulerAngles() SCNVector3 {
+	defer runtime.KeepAlive(n)
+	_r := objc.Send[SCNVector3](objref.IDOf(n), objc.RegisterName("eulerAngles"))
+	return _r
+}
+
+// Scale determines the receiver's scale. Animatable.
+func (n *Node) Scale() SCNVector3 {
+	defer runtime.KeepAlive(n)
+	_r := objc.Send[SCNVector3](objref.IDOf(n), objc.RegisterName("scale"))
 	return _r
 }
 
@@ -536,6 +666,57 @@ func (n *Node) IsPaused() bool {
 func (n *Node) CategoryBitMask() int {
 	defer runtime.KeepAlive(n)
 	_r := objc.Send[int](objref.IDOf(n), objc.RegisterName("categoryBitMask"))
+	return _r
+}
+
+// LookAt changes the node’s orientation so that its local forward vector points toward the specified location.
+func (n *Node) LookAt(worldTarget SCNVector3) {
+	defer runtime.KeepAlive(n)
+	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("lookAt:"), worldTarget)
+}
+
+// LookAtUpLocalFront changes the node’s orientation so that the specified forward vector points toward the specified location.
+func (n *Node) LookAtUpLocalFront(worldTarget SCNVector3, worldUp SCNVector3, localFront SCNVector3) {
+	defer runtime.KeepAlive(n)
+	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("lookAt:up:localFront:"), worldTarget, worldUp, localFront)
+}
+
+// LocalTranslateBy changes the node’s position relative to its current position.
+func (n *Node) LocalTranslateBy(translation SCNVector3) {
+	defer runtime.KeepAlive(n)
+	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("localTranslateBy:"), translation)
+}
+
+// LocalRotateBy changes the node’s orientation relative to its current orientation.
+func (n *Node) LocalRotateBy(rotation SCNVector4) {
+	defer runtime.KeepAlive(n)
+	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("localRotateBy:"), rotation)
+}
+
+// RotateByAroundTarget changes the node’s position and orientation, relative to its current transform, through a rotation around the specified point in scene space.
+func (n *Node) RotateByAroundTarget(worldRotation SCNVector4, worldTarget SCNVector3) {
+	defer runtime.KeepAlive(n)
+	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("rotateBy:aroundTarget:"), worldRotation, worldTarget)
+}
+
+// WorldUp returns the local unit Y axis (0, 1, 0) in world space.
+func (n *Node) WorldUp() SCNVector3 {
+	defer runtime.KeepAlive(n)
+	_r := objc.Send[SCNVector3](objref.IDOf(n), objc.RegisterName("worldUp"))
+	return _r
+}
+
+// WorldRight returns the local unit X axis (1, 0, 0) in world space.
+func (n *Node) WorldRight() SCNVector3 {
+	defer runtime.KeepAlive(n)
+	_r := objc.Send[SCNVector3](objref.IDOf(n), objc.RegisterName("worldRight"))
+	return _r
+}
+
+// WorldFront returns the local unit -Z axis (0, 0, -1) in world space.
+func (n *Node) WorldFront() SCNVector3 {
+	defer runtime.KeepAlive(n)
+	_r := objc.Send[SCNVector3](objref.IDOf(n), objc.RegisterName("worldFront"))
 	return _r
 }
 

@@ -118,6 +118,12 @@ func (ba *BasicAnimation) WithRemovedOnCompletion(removedOnCompletion bool) *Bas
 	return ba
 }
 
+// WithPreferredFrameRateRange sets the preferred frame rate range.
+func (ba *BasicAnimation) WithPreferredFrameRateRange(preferredFrameRateRange CAFrameRateRange) *BasicAnimation {
+	objc.Send[objc.ID](objref.IDOf(ba), objc.RegisterName("setPreferredFrameRateRange:"), preferredFrameRateRange)
+	return ba
+}
+
 // FromValue returns the from value.
 func (ba *BasicAnimation) FromValue() obj.Object {
 	defer runtime.KeepAlive(ba)

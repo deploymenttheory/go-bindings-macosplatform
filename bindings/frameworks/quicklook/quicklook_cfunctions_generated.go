@@ -25,7 +25,7 @@ func QLPreviewRequestCopyContentUTI(preview QLPreviewRequestRef) corefoundation.
 		ebipurego.RegisterLibFunc(&_fnQLPreviewRequestCopyContentUTI, _lib, "QLPreviewRequestCopyContentUTI")
 	}
 	_ret := _fnQLPreviewRequestCopyContentUTI(objref.IDOf(preview.Object))
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnQLPreviewRequestCopyOptions func(objc.ID) objc.ID
@@ -37,7 +37,7 @@ func QLPreviewRequestCopyOptions(preview QLPreviewRequestRef) corefoundation.CFD
 		ebipurego.RegisterLibFunc(&_fnQLPreviewRequestCopyOptions, _lib, "QLPreviewRequestCopyOptions")
 	}
 	_ret := _fnQLPreviewRequestCopyOptions(objref.IDOf(preview.Object))
-	return corefoundation.CFDictionaryRef{obj.Wrap(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnQLPreviewRequestCopyURL func(objc.ID) objc.ID
@@ -49,7 +49,7 @@ func QLPreviewRequestCopyURL(preview QLPreviewRequestRef) corefoundation.CFURLRe
 		ebipurego.RegisterLibFunc(&_fnQLPreviewRequestCopyURL, _lib, "QLPreviewRequestCopyURL")
 	}
 	_ret := _fnQLPreviewRequestCopyURL(objref.IDOf(preview.Object))
-	return corefoundation.CFURLRef{obj.Wrap(_ret)}
+	return corefoundation.CFURLRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnQLPreviewRequestCreateContext func(objc.ID, corefoundation.CGSize, uint8, objc.ID) objc.ID
@@ -61,7 +61,7 @@ func QLPreviewRequestCreateContext(preview QLPreviewRequestRef, size corefoundat
 		ebipurego.RegisterLibFunc(&_fnQLPreviewRequestCreateContext, _lib, "QLPreviewRequestCreateContext")
 	}
 	_ret := _fnQLPreviewRequestCreateContext(objref.IDOf(preview.Object), size, isBitmap, objref.IDOf(properties.Object))
-	return coregraphics.CGContextRef{obj.Wrap(_ret)}
+	return coregraphics.CGContextRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnQLPreviewRequestCreatePDFContext func(objc.ID, unsafe.Pointer, objc.ID, objc.ID) objc.ID
@@ -73,7 +73,7 @@ func QLPreviewRequestCreatePDFContext(preview QLPreviewRequestRef, mediaBox *cor
 		ebipurego.RegisterLibFunc(&_fnQLPreviewRequestCreatePDFContext, _lib, "QLPreviewRequestCreatePDFContext")
 	}
 	_ret := _fnQLPreviewRequestCreatePDFContext(objref.IDOf(preview.Object), unsafe.Pointer(mediaBox), objref.IDOf(auxiliaryInfo.Object), objref.IDOf(properties.Object))
-	return coregraphics.CGContextRef{obj.Wrap(_ret)}
+	return coregraphics.CGContextRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnQLPreviewRequestFlushContext func(objc.ID, objc.ID)
@@ -107,7 +107,7 @@ func QLPreviewRequestGetGeneratorBundle(preview QLPreviewRequestRef) corefoundat
 		ebipurego.RegisterLibFunc(&_fnQLPreviewRequestGetGeneratorBundle, _lib, "QLPreviewRequestGetGeneratorBundle")
 	}
 	_ret := _fnQLPreviewRequestGetGeneratorBundle(objref.IDOf(preview.Object))
-	return corefoundation.CFBundleRef{obj.Wrap(_ret)}
+	return corefoundation.CFBundleRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnQLPreviewRequestGetTypeID func() int
@@ -185,7 +185,7 @@ func QLThumbnailCopyDocumentURL(thumbnail QLThumbnailRef) corefoundation.CFURLRe
 		ebipurego.RegisterLibFunc(&_fnQLThumbnailCopyDocumentURL, _lib, "QLThumbnailCopyDocumentURL")
 	}
 	_ret := _fnQLThumbnailCopyDocumentURL(objref.IDOf(thumbnail.Object))
-	return corefoundation.CFURLRef{obj.Wrap(_ret)}
+	return corefoundation.CFURLRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnQLThumbnailCopyImage func(objc.ID) objc.ID
@@ -197,7 +197,7 @@ func QLThumbnailCopyImage(thumbnail QLThumbnailRef) coregraphics.CGImageRef {
 		ebipurego.RegisterLibFunc(&_fnQLThumbnailCopyImage, _lib, "QLThumbnailCopyImage")
 	}
 	_ret := _fnQLThumbnailCopyImage(objref.IDOf(thumbnail.Object))
-	return coregraphics.CGImageRef{obj.Wrap(_ret)}
+	return coregraphics.CGImageRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnQLThumbnailCopyOptions func(objc.ID) objc.ID
@@ -209,7 +209,7 @@ func QLThumbnailCopyOptions(thumbnail QLThumbnailRef) corefoundation.CFDictionar
 		ebipurego.RegisterLibFunc(&_fnQLThumbnailCopyOptions, _lib, "QLThumbnailCopyOptions")
 	}
 	_ret := _fnQLThumbnailCopyOptions(objref.IDOf(thumbnail.Object))
-	return corefoundation.CFDictionaryRef{obj.Wrap(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnQLThumbnailCreate func(objc.ID, objc.ID, corefoundation.CGSize, objc.ID) objc.ID
@@ -221,7 +221,7 @@ func QLThumbnailCreate(allocator corefoundation.CFAllocatorRef, url corefoundati
 		ebipurego.RegisterLibFunc(&_fnQLThumbnailCreate, _lib, "QLThumbnailCreate")
 	}
 	_ret := _fnQLThumbnailCreate(objref.IDOf(allocator.Object), objref.IDOf(url.Object), maxThumbnailSize, objref.IDOf(options.Object))
-	return QLThumbnailRef{obj.Wrap(_ret)}
+	return QLThumbnailRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnQLThumbnailDispatchAsync func(objc.ID, objc.ID, objc.Block)
@@ -277,7 +277,7 @@ func QLThumbnailImageCreate(allocator corefoundation.CFAllocatorRef, url corefou
 		ebipurego.RegisterLibFunc(&_fnQLThumbnailImageCreate, _lib, "QLThumbnailImageCreate")
 	}
 	_ret := _fnQLThumbnailImageCreate(objref.IDOf(allocator.Object), objref.IDOf(url.Object), maxThumbnailSize, objref.IDOf(options.Object))
-	return coregraphics.CGImageRef{obj.Wrap(_ret)}
+	return coregraphics.CGImageRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnQLThumbnailIsCancelled func(objc.ID) uint8
@@ -300,7 +300,7 @@ func QLThumbnailRequestCopyContentUTI(thumbnail QLThumbnailRequestRef) corefound
 		ebipurego.RegisterLibFunc(&_fnQLThumbnailRequestCopyContentUTI, _lib, "QLThumbnailRequestCopyContentUTI")
 	}
 	_ret := _fnQLThumbnailRequestCopyContentUTI(objref.IDOf(thumbnail.Object))
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnQLThumbnailRequestCopyOptions func(objc.ID) objc.ID
@@ -312,7 +312,7 @@ func QLThumbnailRequestCopyOptions(thumbnail QLThumbnailRequestRef) corefoundati
 		ebipurego.RegisterLibFunc(&_fnQLThumbnailRequestCopyOptions, _lib, "QLThumbnailRequestCopyOptions")
 	}
 	_ret := _fnQLThumbnailRequestCopyOptions(objref.IDOf(thumbnail.Object))
-	return corefoundation.CFDictionaryRef{obj.Wrap(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnQLThumbnailRequestCopyURL func(objc.ID) objc.ID
@@ -324,7 +324,7 @@ func QLThumbnailRequestCopyURL(thumbnail QLThumbnailRequestRef) corefoundation.C
 		ebipurego.RegisterLibFunc(&_fnQLThumbnailRequestCopyURL, _lib, "QLThumbnailRequestCopyURL")
 	}
 	_ret := _fnQLThumbnailRequestCopyURL(objref.IDOf(thumbnail.Object))
-	return corefoundation.CFURLRef{obj.Wrap(_ret)}
+	return corefoundation.CFURLRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnQLThumbnailRequestCreateContext func(objc.ID, corefoundation.CGSize, uint8, objc.ID) objc.ID
@@ -336,7 +336,7 @@ func QLThumbnailRequestCreateContext(thumbnail QLThumbnailRequestRef, size coref
 		ebipurego.RegisterLibFunc(&_fnQLThumbnailRequestCreateContext, _lib, "QLThumbnailRequestCreateContext")
 	}
 	_ret := _fnQLThumbnailRequestCreateContext(objref.IDOf(thumbnail.Object), size, isBitmap, objref.IDOf(properties.Object))
-	return coregraphics.CGContextRef{obj.Wrap(_ret)}
+	return coregraphics.CGContextRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnQLThumbnailRequestFlushContext func(objc.ID, objc.ID)
@@ -370,7 +370,7 @@ func QLThumbnailRequestGetGeneratorBundle(thumbnail QLThumbnailRequestRef) coref
 		ebipurego.RegisterLibFunc(&_fnQLThumbnailRequestGetGeneratorBundle, _lib, "QLThumbnailRequestGetGeneratorBundle")
 	}
 	_ret := _fnQLThumbnailRequestGetGeneratorBundle(objref.IDOf(thumbnail.Object))
-	return corefoundation.CFBundleRef{obj.Wrap(_ret)}
+	return corefoundation.CFBundleRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnQLThumbnailRequestGetMaximumSize func(objc.ID) corefoundation.CGSize

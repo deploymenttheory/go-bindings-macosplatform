@@ -57,6 +57,13 @@ func NewDecimalNumberWithMantissaExponentIsNegative(mantissa uint64, exponent in
 	return decimalNumberAdopt(_id)
 }
 
+// NewDecimalNumberWithDecimal initializes a decimal number to represent a given decimal.
+func NewDecimalNumberWithDecimal(dcm NSDecimal) *DecimalNumber {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDecimalNumber")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDecimal:"), dcm)
+	return decimalNumberAdopt(_id)
+}
+
 // NewDecimalNumberWithString initializes a decimal number so that its value is equivalent to that in a given numeric string.
 func NewDecimalNumberWithString(numberValue string) *DecimalNumber {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDecimalNumber")), objc.RegisterName("alloc"))

@@ -128,7 +128,7 @@ func (ppl *PhysicallyPlausibleLight) SetColorByTemperature(temperature float32) 
 func (ppl *PhysicallyPlausibleLight) Color() coregraphics.CGColorRef {
 	defer runtime.KeepAlive(ppl)
 	_r := objc.Send[objc.ID](objref.IDOf(ppl), objc.RegisterName("color"))
-	return coregraphics.CGColorRef{obj.Wrap(_r)}
+	return coregraphics.CGColorRef{Object: obj.Wrap(_r)}
 }
 
 // Lumens returns the lumens.

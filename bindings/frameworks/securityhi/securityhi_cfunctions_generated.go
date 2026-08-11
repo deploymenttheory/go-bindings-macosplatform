@@ -46,17 +46,6 @@ func InvokeURLNotifyUPP(userContext unsafe.Pointer, event int, callbackInfo unsa
 	return int(_fnInvokeURLNotifyUPP(userContext, event, callbackInfo, userUPP))
 }
 
-var _fnInvokeURLSystemEventUPP func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
-
-// InvokeURLSystemEventUPP calls the SecurityHI framework function InvokeURLSystemEventUPP.
-func InvokeURLSystemEventUPP(userContext unsafe.Pointer, event unsafe.Pointer, userUPP unsafe.Pointer) int {
-	_loadOnce.Do(_loadLibrary)
-	if _fnInvokeURLSystemEventUPP == nil {
-		ebipurego.RegisterLibFunc(&_fnInvokeURLSystemEventUPP, _lib, "InvokeURLSystemEventUPP")
-	}
-	return int(_fnInvokeURLSystemEventUPP(userContext, event, userUPP))
-}
-
 var _fnKCAddAppleSharePassword func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // KCAddAppleSharePassword calls the SecurityHI framework function KCAddAppleSharePassword.

@@ -76,6 +76,12 @@ func (rl *ReplicatorLayer) WithInstanceDelay(instanceDelay float64) *ReplicatorL
 	return rl
 }
 
+// WithInstanceTransform sets the transform matrix applied to the previous instance to produce the current instance. Animatable.
+func (rl *ReplicatorLayer) WithInstanceTransform(instanceTransform CATransform3D) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setInstanceTransform:"), instanceTransform)
+	return rl
+}
+
 // WithInstanceColor sets defines the color used to multiply the source object. Animatable.
 func (rl *ReplicatorLayer) WithInstanceColor(instanceColor coregraphics.CGColorRef) *ReplicatorLayer {
 	defer runtime.KeepAlive(instanceColor)
@@ -137,6 +143,12 @@ func (rl *ReplicatorLayer) WithAnchorPointZ(anchorPointZ float64) *ReplicatorLay
 	return rl
 }
 
+// WithTransform sets the transform applied to the layer’s contents. Animatable.
+func (rl *ReplicatorLayer) WithTransform(transform CATransform3D) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setTransform:"), transform)
+	return rl
+}
+
 // WithFrame sets the layer’s frame rectangle.
 func (rl *ReplicatorLayer) WithFrame(frame corefoundation.CGRect) *ReplicatorLayer {
 	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setFrame:"), frame)
@@ -165,6 +177,12 @@ func (rl *ReplicatorLayer) WithGeometryFlipped(geometryFlipped bool) *Replicator
 func (rl *ReplicatorLayer) WithSublayers(items ...LayerProvider) *ReplicatorLayer {
 	_arr := purego.SliceToNSArray(items, func(_v LayerProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setSublayers:"), _arr)
+	return rl
+}
+
+// WithSublayerTransform sets specifies the transform to apply to sublayers when rendering. Animatable.
+func (rl *ReplicatorLayer) WithSublayerTransform(sublayerTransform CATransform3D) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setSublayerTransform:"), sublayerTransform)
 	return rl
 }
 
@@ -461,11 +479,18 @@ func (rl *ReplicatorLayer) InstanceDelay() float64 {
 	return _r
 }
 
+// InstanceTransform returns the instance transform.
+func (rl *ReplicatorLayer) InstanceTransform() CATransform3D {
+	defer runtime.KeepAlive(rl)
+	_r := objc.Send[CATransform3D](objref.IDOf(rl), objc.RegisterName("instanceTransform"))
+	return _r
+}
+
 // InstanceColor returns the instance color.
 func (rl *ReplicatorLayer) InstanceColor() coregraphics.CGColorRef {
 	defer runtime.KeepAlive(rl)
 	_r := objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("instanceColor"))
-	return coregraphics.CGColorRef{obj.Wrap(_r)}
+	return coregraphics.CGColorRef{Object: obj.Wrap(_r)}
 }
 
 // InstanceRedOffset returns the instance red offset.

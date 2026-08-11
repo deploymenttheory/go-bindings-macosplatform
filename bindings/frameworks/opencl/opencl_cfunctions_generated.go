@@ -47,7 +47,7 @@ func ClCreateBuffer(arg ClContext, arg2 uint64, arg3 int, arg4 unsafe.Pointer) (
 	}
 	var _out0 int32
 	_ret := _fnClCreateBuffer(objref.IDOf(arg.Object), arg2, arg3, arg4, unsafe.Pointer(&_out0))
-	return ClMem{obj.WrapUnmanaged(_ret)}, _out0
+	return ClMem{Object: obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnClCreateCommandQueue func(objc.ID, objc.ID, uint64, unsafe.Pointer) objc.ID
@@ -60,7 +60,7 @@ func ClCreateCommandQueue(arg ClContext, arg2 ClDeviceId, arg3 uint64) (result C
 	}
 	var _out0 int32
 	_ret := _fnClCreateCommandQueue(objref.IDOf(arg.Object), objref.IDOf(arg2.Object), arg3, unsafe.Pointer(&_out0))
-	return ClCommandQueue{obj.WrapUnmanaged(_ret)}, _out0
+	return ClCommandQueue{Object: obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnClCreateCommandQueueWithPropertiesAPPLE func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -73,7 +73,7 @@ func ClCreateCommandQueueWithPropertiesAPPLE(arg ClContext, arg2 ClDeviceId, arg
 	}
 	var _out0 int32
 	_ret := _fnClCreateCommandQueueWithPropertiesAPPLE(objref.IDOf(arg.Object), objref.IDOf(arg2.Object), arg3, unsafe.Pointer(&_out0))
-	return ClCommandQueue{obj.WrapUnmanaged(_ret)}, _out0
+	return ClCommandQueue{Object: obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnClCreateContext func(unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -86,7 +86,7 @@ func ClCreateContext(arg unsafe.Pointer, arg2 uint32, arg3 unsafe.Pointer, arg4 
 	}
 	var _out0 int32
 	_ret := _fnClCreateContext(arg, arg2, arg3, arg4, arg5, unsafe.Pointer(&_out0))
-	return ClContext{obj.WrapUnmanaged(_ret)}, _out0
+	return ClContext{Object: obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnClCreateContextAndCommandQueueAPPLE func(unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint64, unsafe.Pointer, unsafe.Pointer) int32
@@ -110,7 +110,7 @@ func ClCreateContextFromType(arg unsafe.Pointer, arg2 uint64, arg3 unsafe.Pointe
 	}
 	var _out0 int32
 	_ret := _fnClCreateContextFromType(arg, arg2, arg3, arg4, unsafe.Pointer(&_out0))
-	return ClContext{obj.WrapUnmanaged(_ret)}, _out0
+	return ClContext{Object: obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnClCreateDAGAPPLE func(objc.ID) objc.ID
@@ -122,7 +122,7 @@ func ClCreateDAGAPPLE(c ClContext) ClDag {
 		ebipurego.RegisterLibFunc(&_fnClCreateDAGAPPLE, _lib, "clCreateDAGAPPLE")
 	}
 	_ret := _fnClCreateDAGAPPLE(objref.IDOf(c.Object))
-	return ClDag{obj.WrapUnmanaged(_ret)}
+	return ClDag{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnClCreateEventFromGLsyncKHR func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
@@ -135,7 +135,7 @@ func ClCreateEventFromGLsyncKHR(arg ClContext, arg2 ClGLsync) (result ClEvent, a
 	}
 	var _out0 int32
 	_ret := _fnClCreateEventFromGLsyncKHR(objref.IDOf(arg.Object), objref.IDOf(arg2.Object), unsafe.Pointer(&_out0))
-	return ClEvent{obj.WrapUnmanaged(_ret)}, _out0
+	return ClEvent{Object: obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnClCreateFromGLBuffer func(objc.ID, uint64, int, unsafe.Pointer) objc.ID
@@ -148,7 +148,7 @@ func ClCreateFromGLBuffer(arg ClContext, arg2 uint64, arg3 int) (result ClMem, a
 	}
 	var _out0 int32
 	_ret := _fnClCreateFromGLBuffer(objref.IDOf(arg.Object), arg2, arg3, unsafe.Pointer(&_out0))
-	return ClMem{obj.WrapUnmanaged(_ret)}, _out0
+	return ClMem{Object: obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnClCreateFromGLRenderbuffer func(objc.ID, uint64, int, unsafe.Pointer) objc.ID
@@ -161,7 +161,7 @@ func ClCreateFromGLRenderbuffer(arg ClContext, arg2 uint64, arg3 int) (result Cl
 	}
 	var _out0 int32
 	_ret := _fnClCreateFromGLRenderbuffer(objref.IDOf(arg.Object), arg2, arg3, unsafe.Pointer(&_out0))
-	return ClMem{obj.WrapUnmanaged(_ret)}, _out0
+	return ClMem{Object: obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnClCreateFromGLTexture func(objc.ID, uint64, int, int, int, unsafe.Pointer) objc.ID
@@ -174,7 +174,7 @@ func ClCreateFromGLTexture(arg ClContext, arg2 uint64, arg3 int, arg4 int, arg5 
 	}
 	var _out0 int32
 	_ret := _fnClCreateFromGLTexture(objref.IDOf(arg.Object), arg2, arg3, arg4, arg5, unsafe.Pointer(&_out0))
-	return ClMem{obj.WrapUnmanaged(_ret)}, _out0
+	return ClMem{Object: obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnClCreateFromGLTexture2D func(objc.ID, uint64, int, int, int, unsafe.Pointer) objc.ID
@@ -187,7 +187,7 @@ func ClCreateFromGLTexture2D(arg ClContext, arg2 uint64, arg3 int, arg4 int, arg
 	}
 	var _out0 int32
 	_ret := _fnClCreateFromGLTexture2D(objref.IDOf(arg.Object), arg2, arg3, arg4, arg5, unsafe.Pointer(&_out0))
-	return ClMem{obj.WrapUnmanaged(_ret)}, _out0
+	return ClMem{Object: obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnClCreateFromGLTexture3D func(objc.ID, uint64, int, int, int, unsafe.Pointer) objc.ID
@@ -200,7 +200,7 @@ func ClCreateFromGLTexture3D(arg ClContext, arg2 uint64, arg3 int, arg4 int, arg
 	}
 	var _out0 int32
 	_ret := _fnClCreateFromGLTexture3D(objref.IDOf(arg.Object), arg2, arg3, arg4, arg5, unsafe.Pointer(&_out0))
-	return ClMem{obj.WrapUnmanaged(_ret)}, _out0
+	return ClMem{Object: obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnClCreateImage func(objc.ID, uint64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -213,7 +213,7 @@ func ClCreateImage(arg ClContext, arg2 uint64, arg3 *ClImageFormat, arg4 unsafe.
 	}
 	var _out0 int32
 	_ret := _fnClCreateImage(objref.IDOf(arg.Object), arg2, unsafe.Pointer(arg3), arg4, arg5, unsafe.Pointer(&_out0))
-	return ClMem{obj.WrapUnmanaged(_ret)}, _out0
+	return ClMem{Object: obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnClCreateImage2D func(objc.ID, uint64, unsafe.Pointer, int, int, int, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -226,7 +226,7 @@ func ClCreateImage2D(arg ClContext, arg2 uint64, arg3 *ClImageFormat, arg4 int, 
 	}
 	var _out0 int32
 	_ret := _fnClCreateImage2D(objref.IDOf(arg.Object), arg2, unsafe.Pointer(arg3), arg4, arg5, arg6, arg7, unsafe.Pointer(&_out0))
-	return ClMem{obj.WrapUnmanaged(_ret)}, _out0
+	return ClMem{Object: obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnClCreateImage3D func(objc.ID, uint64, unsafe.Pointer, int, int, int, int, int, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -239,7 +239,7 @@ func ClCreateImage3D(arg ClContext, arg2 uint64, arg3 *ClImageFormat, arg4 int, 
 	}
 	var _out0 int32
 	_ret := _fnClCreateImage3D(objref.IDOf(arg.Object), arg2, unsafe.Pointer(arg3), arg4, arg5, arg6, arg7, arg8, arg9, unsafe.Pointer(&_out0))
-	return ClMem{obj.WrapUnmanaged(_ret)}, _out0
+	return ClMem{Object: obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnClCreateImageFromIOSurface2DAPPLE func(objc.ID, uint64, unsafe.Pointer, int, int, objc.ID, unsafe.Pointer) objc.ID
@@ -252,7 +252,7 @@ func ClCreateImageFromIOSurface2DAPPLE(arg ClContext, arg2 uint64, arg3 *ClImage
 	}
 	var _out0 int32
 	_ret := _fnClCreateImageFromIOSurface2DAPPLE(objref.IDOf(arg.Object), arg2, unsafe.Pointer(arg3), arg4, arg5, objref.IDOf(arg6.Object), unsafe.Pointer(&_out0))
-	return ClMem{obj.WrapUnmanaged(_ret)}, _out0
+	return ClMem{Object: obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnClCreateImageFromIOSurfaceWithPropertiesAPPLE func(objc.ID, uint64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -266,7 +266,7 @@ func ClCreateImageFromIOSurfaceWithPropertiesAPPLE(arg ClContext, arg2 uint64, a
 	var _out0 int
 	var _out1 int32
 	_ret := _fnClCreateImageFromIOSurfaceWithPropertiesAPPLE(objref.IDOf(arg.Object), arg2, unsafe.Pointer(arg3), arg4, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
-	return ClMem{obj.WrapUnmanaged(_ret)}, _out0, _out1
+	return ClMem{Object: obj.WrapUnmanaged(_ret)}, _out0, _out1
 }
 
 var _fnClCreateKernel func(objc.ID, string, unsafe.Pointer) objc.ID
@@ -279,7 +279,7 @@ func ClCreateKernel(arg ClProgram, arg2 string) (result ClKernel, arg3 int32) {
 	}
 	var _out0 int32
 	_ret := _fnClCreateKernel(objref.IDOf(arg.Object), arg2, unsafe.Pointer(&_out0))
-	return ClKernel{obj.WrapUnmanaged(_ret)}, _out0
+	return ClKernel{Object: obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnClCreateKernelFromDAGAPPLE func(objc.ID, uint32, unsafe.Pointer) objc.ID
@@ -291,7 +291,7 @@ func ClCreateKernelFromDAGAPPLE(d ClDag, n uint32, list unsafe.Pointer) ClKernel
 		ebipurego.RegisterLibFunc(&_fnClCreateKernelFromDAGAPPLE, _lib, "clCreateKernelFromDAGAPPLE")
 	}
 	_ret := _fnClCreateKernelFromDAGAPPLE(objref.IDOf(d.Object), n, list)
-	return ClKernel{obj.WrapUnmanaged(_ret)}
+	return ClKernel{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnClCreateKernelsInProgram func(objc.ID, uint32, unsafe.Pointer, unsafe.Pointer) int32
@@ -329,7 +329,7 @@ func ClCreateProgramWithBinary(arg ClContext, arg2 uint32, arg3 unsafe.Pointer, 
 	var _out0 int32
 	var _out1 int32
 	_ret := _fnClCreateProgramWithBinary(objref.IDOf(arg.Object), arg2, arg3, arg4, arg5, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
-	return ClProgram{obj.WrapUnmanaged(_ret)}, _out0, _out1
+	return ClProgram{Object: obj.WrapUnmanaged(_ret)}, _out0, _out1
 }
 
 var _fnClCreateProgramWithBuiltInKernels func(objc.ID, uint32, unsafe.Pointer, string, unsafe.Pointer) objc.ID
@@ -342,7 +342,7 @@ func ClCreateProgramWithBuiltInKernels(arg ClContext, arg2 uint32, arg3 unsafe.P
 	}
 	var _out0 int32
 	_ret := _fnClCreateProgramWithBuiltInKernels(objref.IDOf(arg.Object), arg2, arg3, arg4, unsafe.Pointer(&_out0))
-	return ClProgram{obj.WrapUnmanaged(_ret)}, _out0
+	return ClProgram{Object: obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnClCreateProgramWithSource func(objc.ID, uint32, string, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -355,7 +355,7 @@ func ClCreateProgramWithSource(arg ClContext, arg2 uint32, arg3 string, arg4 uns
 	}
 	var _out0 int32
 	_ret := _fnClCreateProgramWithSource(objref.IDOf(arg.Object), arg2, arg3, arg4, unsafe.Pointer(&_out0))
-	return ClProgram{obj.WrapUnmanaged(_ret)}, _out0
+	return ClProgram{Object: obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnClCreateSampler func(objc.ID, uint32, uint32, uint32, unsafe.Pointer) objc.ID
@@ -368,7 +368,7 @@ func ClCreateSampler(arg ClContext, arg2 uint32, arg3 uint32, arg4 uint32) (resu
 	}
 	var _out0 int32
 	_ret := _fnClCreateSampler(objref.IDOf(arg.Object), arg2, arg3, arg4, unsafe.Pointer(&_out0))
-	return ClSampler{obj.WrapUnmanaged(_ret)}, _out0
+	return ClSampler{Object: obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnClCreateSubBuffer func(objc.ID, uint64, uint32, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -381,7 +381,7 @@ func ClCreateSubBuffer(arg ClMem, arg2 uint64, arg3 uint32, arg4 unsafe.Pointer)
 	}
 	var _out0 int32
 	_ret := _fnClCreateSubBuffer(objref.IDOf(arg.Object), arg2, arg3, arg4, unsafe.Pointer(&_out0))
-	return ClMem{obj.WrapUnmanaged(_ret)}, _out0
+	return ClMem{Object: obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnClCreateSubDevices func(objc.ID, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
@@ -407,7 +407,7 @@ func ClCreateUserEvent(arg ClContext) (result ClEvent, arg2 int32) {
 	}
 	var _out0 int32
 	_ret := _fnClCreateUserEvent(objref.IDOf(arg.Object), unsafe.Pointer(&_out0))
-	return ClEvent{obj.WrapUnmanaged(_ret)}, _out0
+	return ClEvent{Object: obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnClEnqueueAcquireGLObjects func(objc.ID, uint32, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
@@ -1043,7 +1043,7 @@ func ClLinkProgram(arg ClContext, arg2 uint32, arg3 unsafe.Pointer, arg4 string,
 	}
 	var _out0 int32
 	_ret := _fnClLinkProgram(objref.IDOf(arg.Object), arg2, arg3, arg4, arg5, arg6, arg7, arg8, unsafe.Pointer(&_out0))
-	return ClProgram{obj.WrapUnmanaged(_ret)}, _out0
+	return ClProgram{Object: obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnClLogMessagesToStderrAPPLE func(string, unsafe.Pointer, int, unsafe.Pointer)
@@ -1418,7 +1418,7 @@ func GclCreateBufferFromPtr(ptr unsafe.Pointer) ClMem {
 		ebipurego.RegisterLibFunc(&_fnGclCreateBufferFromPtr, _lib, "gcl_create_buffer_from_ptr")
 	}
 	_ret := _fnGclCreateBufferFromPtr(ptr)
-	return ClMem{obj.WrapUnmanaged(_ret)}
+	return ClMem{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnGclCreateDispatchQueue func(uint64, objc.ID) unsafe.Pointer
@@ -1452,7 +1452,7 @@ func GclCreateKernelFromBlock(kernelBlockPtr unsafe.Pointer) ClKernel {
 		ebipurego.RegisterLibFunc(&_fnGclCreateKernelFromBlock, _lib, "gcl_create_kernel_from_block")
 	}
 	_ret := _fnGclCreateKernelFromBlock(kernelBlockPtr)
-	return ClKernel{obj.WrapUnmanaged(_ret)}
+	return ClKernel{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnGclFree func(unsafe.Pointer)
@@ -1475,7 +1475,7 @@ func GclGetContext() ClContext {
 		ebipurego.RegisterLibFunc(&_fnGclGetContext, _lib, "gcl_get_context")
 	}
 	_ret := _fnGclGetContext()
-	return ClContext{obj.WrapUnmanaged(_ret)}
+	return ClContext{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnGclGetDeviceIdWithDispatchQueue func(objc.ID) objc.ID
@@ -1487,7 +1487,7 @@ func GclGetDeviceIdWithDispatchQueue(queue dispatch.Queue) ClDeviceId {
 		ebipurego.RegisterLibFunc(&_fnGclGetDeviceIdWithDispatchQueue, _lib, "gcl_get_device_id_with_dispatch_queue")
 	}
 	_ret := _fnGclGetDeviceIdWithDispatchQueue(objc.ID(uintptr(queue.Ptr())))
-	return ClDeviceId{obj.WrapUnmanaged(_ret)}
+	return ClDeviceId{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnGclGetKernelBlockWorkgroupInfo func(unsafe.Pointer, uint32, int, unsafe.Pointer, unsafe.Pointer)

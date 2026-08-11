@@ -395,7 +395,7 @@ func (c *Color) LinearExposure() float64 {
 func (c *Color) CGColor() coregraphics.CGColorRef {
 	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("CGColor"))
-	return coregraphics.CGColorRef{obj.Wrap(_r)}
+	return coregraphics.CGColorRef{Object: obj.Wrap(_r)}
 }
 
 // ColorUsingColorSpaceNameDevice creates a new color object for the same color, but in the specified color space and specific to the provided device.

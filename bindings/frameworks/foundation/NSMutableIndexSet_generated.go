@@ -100,6 +100,18 @@ func (mis *MutableIndexSet) RemoveIndex(value int) {
 	objc.Send[objc.ID](objref.IDOf(mis), objc.RegisterName("removeIndex:"), value)
 }
 
+// AddIndexesInRange adds the indexes in an index range to the receiver.
+func (mis *MutableIndexSet) AddIndexesInRange(range_ NSRange) {
+	defer runtime.KeepAlive(mis)
+	objc.Send[objc.ID](objref.IDOf(mis), objc.RegisterName("addIndexesInRange:"), range_)
+}
+
+// RemoveIndexesInRange removes the indexes in an index range from the receiver.
+func (mis *MutableIndexSet) RemoveIndexesInRange(range_ NSRange) {
+	defer runtime.KeepAlive(mis)
+	objc.Send[objc.ID](objref.IDOf(mis), objc.RegisterName("removeIndexesInRange:"), range_)
+}
+
 // ShiftIndexesStartingAtIndexBy shifts a group of indexes to the left or the right within the receiver.
 func (mis *MutableIndexSet) ShiftIndexesStartingAtIndexBy(index int, delta int) {
 	defer runtime.KeepAlive(mis)

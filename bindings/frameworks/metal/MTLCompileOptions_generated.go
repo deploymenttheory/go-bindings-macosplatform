@@ -152,6 +152,12 @@ func (co *CompileOptions) WithMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerTh
 	return co
 }
 
+// WithRequiredThreadsPerThreadgroup sets sets the required threads-per-threadgroup during dispatches. The `threadsPerThreadgroup` argument of any dispatch must match this value if it is set. Setting this to a size of 0 in every dimension disables this property
+func (co *CompileOptions) WithRequiredThreadsPerThreadgroup(requiredThreadsPerThreadgroup MTLSize) *CompileOptions {
+	objc.Send[objc.ID](objref.IDOf(co), objc.RegisterName("setRequiredThreadsPerThreadgroup:"), requiredThreadsPerThreadgroup)
+	return co
+}
+
 // WithEnableLogging sets a Boolean value that enables shader logging.
 func (co *CompileOptions) WithEnableLogging(enableLogging bool) *CompileOptions {
 	objc.Send[objc.ID](objref.IDOf(co), objc.RegisterName("setEnableLogging:"), enableLogging)
@@ -255,6 +261,13 @@ func (co *CompileOptions) AllowReferencingUndefinedSymbols() bool {
 func (co *CompileOptions) MaxTotalThreadsPerThreadgroup() int {
 	defer runtime.KeepAlive(co)
 	_r := objc.Send[int](objref.IDOf(co), objc.RegisterName("maxTotalThreadsPerThreadgroup"))
+	return _r
+}
+
+// RequiredThreadsPerThreadgroup sets the required threads-per-threadgroup during dispatches. The `threadsPerThreadgroup` argument of any dispatch must match this value if it is set. Setting this to a size of 0 in every dimension disables this property
+func (co *CompileOptions) RequiredThreadsPerThreadgroup() MTLSize {
+	defer runtime.KeepAlive(co)
+	_r := objc.Send[MTLSize](objref.IDOf(co), objc.RegisterName("requiredThreadsPerThreadgroup"))
 	return _r
 }
 

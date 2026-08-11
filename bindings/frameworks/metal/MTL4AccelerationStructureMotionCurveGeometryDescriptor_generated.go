@@ -53,6 +53,12 @@ func NewMTL4AccelerationStructureMotionCurveGeometryDescriptor() *MTL4Accelerati
 	return mTL4AccelerationStructureMotionCurveGeometryDescriptorAdopt(_id)
 }
 
+// WithControlPointBuffers sets assigns a reference to a buffer where each entry contains a reference to a buffer of control points.
+func (masmcgd *MTL4AccelerationStructureMotionCurveGeometryDescriptor) WithControlPointBuffers(controlPointBuffers MTL4BufferRange) *MTL4AccelerationStructureMotionCurveGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(masmcgd), objc.RegisterName("setControlPointBuffers:"), controlPointBuffers)
+	return masmcgd
+}
+
 // WithControlPointCount sets specifies the number of control points in the buffers the control point buffers reference.
 func (masmcgd *MTL4AccelerationStructureMotionCurveGeometryDescriptor) WithControlPointCount(controlPointCount int) *MTL4AccelerationStructureMotionCurveGeometryDescriptor {
 	objc.Send[objc.ID](objref.IDOf(masmcgd), objc.RegisterName("setControlPointCount:"), controlPointCount)
@@ -71,6 +77,12 @@ func (masmcgd *MTL4AccelerationStructureMotionCurveGeometryDescriptor) WithContr
 	return masmcgd
 }
 
+// WithRadiusBuffers sets assigns a reference to a buffer containing, in turn, references to curve radii buffers.
+func (masmcgd *MTL4AccelerationStructureMotionCurveGeometryDescriptor) WithRadiusBuffers(radiusBuffers MTL4BufferRange) *MTL4AccelerationStructureMotionCurveGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(masmcgd), objc.RegisterName("setRadiusBuffers:"), radiusBuffers)
+	return masmcgd
+}
+
 // WithRadiusFormat sets sets the format of the radii in the radius buffer.
 func (masmcgd *MTL4AccelerationStructureMotionCurveGeometryDescriptor) WithRadiusFormat(radiusFormat AttributeFormat) *MTL4AccelerationStructureMotionCurveGeometryDescriptor {
 	objc.Send[objc.ID](objref.IDOf(masmcgd), objc.RegisterName("setRadiusFormat:"), radiusFormat)
@@ -80,6 +92,12 @@ func (masmcgd *MTL4AccelerationStructureMotionCurveGeometryDescriptor) WithRadiu
 // WithRadiusStride sets sets the stride, in bytes, between radii in the radius buffer.
 func (masmcgd *MTL4AccelerationStructureMotionCurveGeometryDescriptor) WithRadiusStride(radiusStride int) *MTL4AccelerationStructureMotionCurveGeometryDescriptor {
 	objc.Send[objc.ID](objref.IDOf(masmcgd), objc.RegisterName("setRadiusStride:"), radiusStride)
+	return masmcgd
+}
+
+// WithIndexBuffer sets assigns an optional index buffer containing references to control points in the control point buffers.
+func (masmcgd *MTL4AccelerationStructureMotionCurveGeometryDescriptor) WithIndexBuffer(indexBuffer MTL4BufferRange) *MTL4AccelerationStructureMotionCurveGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(masmcgd), objc.RegisterName("setIndexBuffer:"), indexBuffer)
 	return masmcgd
 }
 
@@ -143,6 +161,12 @@ func (masmcgd *MTL4AccelerationStructureMotionCurveGeometryDescriptor) WithLabel
 	return masmcgd
 }
 
+// WithPrimitiveDataBuffer sets assigns optional buffer containing data to associate with each primitive in this geometry.
+func (masmcgd *MTL4AccelerationStructureMotionCurveGeometryDescriptor) WithPrimitiveDataBuffer(primitiveDataBuffer MTL4BufferRange) *MTL4AccelerationStructureMotionCurveGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(masmcgd), objc.RegisterName("setPrimitiveDataBuffer:"), primitiveDataBuffer)
+	return masmcgd
+}
+
 // WithPrimitiveDataStride sets defines the stride, in bytes, between each primitive’s data in the primitive data buffer primitiveDataBuffer references.
 func (masmcgd *MTL4AccelerationStructureMotionCurveGeometryDescriptor) WithPrimitiveDataStride(primitiveDataStride int) *MTL4AccelerationStructureMotionCurveGeometryDescriptor {
 	objc.Send[objc.ID](objref.IDOf(masmcgd), objc.RegisterName("setPrimitiveDataStride:"), primitiveDataStride)
@@ -153,6 +177,13 @@ func (masmcgd *MTL4AccelerationStructureMotionCurveGeometryDescriptor) WithPrimi
 func (masmcgd *MTL4AccelerationStructureMotionCurveGeometryDescriptor) WithPrimitiveDataElementSize(primitiveDataElementSize int) *MTL4AccelerationStructureMotionCurveGeometryDescriptor {
 	objc.Send[objc.ID](objref.IDOf(masmcgd), objc.RegisterName("setPrimitiveDataElementSize:"), primitiveDataElementSize)
 	return masmcgd
+}
+
+// ControlPointBuffers returns assigns a reference to a buffer where each entry contains a reference to a buffer of control points. This property references a buffer that conceptually represents an array with one entry for each keyframe in the motion animation. Each one of these entries consists of a “MTL4BufferRange“ that, in turn, references a buffer containing the control points corresponding to the keyframe. You are responsible for ensuring the buffer address is not zero for the top-level buffer, as well as for all the vertex buffers it references.
+func (masmcgd *MTL4AccelerationStructureMotionCurveGeometryDescriptor) ControlPointBuffers() MTL4BufferRange {
+	defer runtime.KeepAlive(masmcgd)
+	_r := objc.Send[MTL4BufferRange](objref.IDOf(masmcgd), objc.RegisterName("controlPointBuffers"))
+	return _r
 }
 
 // ControlPointCount specifies the number of control points in the buffers the control point buffers reference. All keyframes have the same number of control points.
@@ -176,6 +207,13 @@ func (masmcgd *MTL4AccelerationStructureMotionCurveGeometryDescriptor) ControlPo
 	return _r
 }
 
+// RadiusBuffers returns assigns a reference to a buffer containing, in turn, references to curve radii buffers. This property references a buffer that conceptually represents an array with one entry for each keyframe in the motion animation. Each one of these entries consists of a “MTL4BufferRange“ that, in turn, references a buffer containing the radii corresponding to the keyframe. Metal interpolates curve radii according to the basis function you specify via “curveBasis“. You are responsible for ensuring the type of each radius matches the type property “radiusFormat“ specifies, that each radius is at least zero, and that the buffer address of the top-level buffer, as well as of buffer it references, is not zero.
+func (masmcgd *MTL4AccelerationStructureMotionCurveGeometryDescriptor) RadiusBuffers() MTL4BufferRange {
+	defer runtime.KeepAlive(masmcgd)
+	_r := objc.Send[MTL4BufferRange](objref.IDOf(masmcgd), objc.RegisterName("radiusBuffers"))
+	return _r
+}
+
 // RadiusFormat sets the format of the radii in the radius buffer. Defaults to  `MTLAttributeFormatFloat`. All keyframes share the same radius format.
 func (masmcgd *MTL4AccelerationStructureMotionCurveGeometryDescriptor) RadiusFormat() AttributeFormat {
 	defer runtime.KeepAlive(masmcgd)
@@ -187,6 +225,13 @@ func (masmcgd *MTL4AccelerationStructureMotionCurveGeometryDescriptor) RadiusFor
 func (masmcgd *MTL4AccelerationStructureMotionCurveGeometryDescriptor) RadiusStride() int {
 	defer runtime.KeepAlive(masmcgd)
 	_r := objc.Send[int](objref.IDOf(masmcgd), objc.RegisterName("radiusStride"))
+	return _r
+}
+
+// IndexBuffer returns assigns an optional index buffer containing references to control points in the control point buffers. All keyframes share the same index buffer, with each index representing the first control point of a curve segment. You are responsible for ensuring the buffer address of the range is not zero.
+func (masmcgd *MTL4AccelerationStructureMotionCurveGeometryDescriptor) IndexBuffer() MTL4BufferRange {
+	defer runtime.KeepAlive(masmcgd)
+	_r := objc.Send[MTL4BufferRange](objref.IDOf(masmcgd), objc.RegisterName("indexBuffer"))
 	return _r
 }
 

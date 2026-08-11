@@ -98,6 +98,12 @@ func (mdl *MetalDisplayLink) WithPreferredFrameLatency(preferredFrameLatency flo
 	return mdl
 }
 
+// WithPreferredFrameRateRange sets a range of frequencies your app allows for frame updates, affecting how often the system invokes your delegate’s callback.
+func (mdl *MetalDisplayLink) WithPreferredFrameRateRange(preferredFrameRateRange CAFrameRateRange) *MetalDisplayLink {
+	objc.Send[objc.ID](objref.IDOf(mdl), objc.RegisterName("setPreferredFrameRateRange:"), preferredFrameRateRange)
+	return mdl
+}
+
 // WithPaused sets a Boolean value that indicates whether the system suspends the display link’s notifications to the target.
 func (mdl *MetalDisplayLink) WithPaused(paused bool) *MetalDisplayLink {
 	objc.Send[objc.ID](objref.IDOf(mdl), objc.RegisterName("setPaused:"), paused)
@@ -130,6 +136,13 @@ func (mdl *MetalDisplayLink) Invalidate() {
 func (mdl *MetalDisplayLink) PreferredFrameLatency() float32 {
 	defer runtime.KeepAlive(mdl)
 	_r := objc.Send[float32](objref.IDOf(mdl), objc.RegisterName("preferredFrameLatency"))
+	return _r
+}
+
+// PreferredFrameRateRange returns the preferred frame rate range.
+func (mdl *MetalDisplayLink) PreferredFrameRateRange() CAFrameRateRange {
+	defer runtime.KeepAlive(mdl)
+	_r := objc.Send[CAFrameRateRange](objref.IDOf(mdl), objc.RegisterName("preferredFrameRateRange"))
 	return _r
 }
 

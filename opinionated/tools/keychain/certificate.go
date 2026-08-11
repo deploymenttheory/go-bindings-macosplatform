@@ -5,6 +5,7 @@ package keychain
 import (
 	"errors"
 
+	corefoundation "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	foundation "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	security "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/security"
 )
@@ -25,8 +26,11 @@ type Certificate struct {
 // CreateCertificate adds c. It fails if the certificate (by content) is already
 // present, or if c.DER is not a valid DER-encoded certificate.
 func CreateCertificate(c Certificate) error {
-	certRef := security.SecCertificateCreateWithData(nil, newData(c.DER))
-	if certRef == nil {
+	certRef := security.SecCertificateCreateWithData(
+		corefoundation.CFAllocatorRef{},
+		corefoundation.CFDataRef{Object: newData(c.DER)},
+	)
+	if certRef.IsNil() {
 		return errors.New("keychain: invalid DER certificate")
 	}
 	attrs := []attr{ref(security.KSecValueRef(), certRef)}

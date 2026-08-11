@@ -13,7 +13,7 @@ import (
 type Axis2DInput interface {
 	ValueDidChangeHandler() obj.Object
 	SetValueDidChangeHandler(valueDidChangeHandler obj.Object)
-	Value() obj.Object
+	Value() GCPoint2
 	IsAnalog() bool
 	CanWrap() bool
 	LastValueTimestamp() float64

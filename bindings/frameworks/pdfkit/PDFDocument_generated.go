@@ -259,7 +259,7 @@ func (d *Document) DocumentURL() string {
 func (d *Document) DocumentRef() coregraphics.CGPDFDocumentRef {
 	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("documentRef"))
-	return coregraphics.CGPDFDocumentRef{obj.Wrap(_r)}
+	return coregraphics.CGPDFDocumentRef{Object: obj.Wrap(_r)}
 }
 
 // DocumentAttributes returns the document attributes.

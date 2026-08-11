@@ -91,6 +91,12 @@ func (pb *PhysicsBody) WithMass(mass float64) *PhysicsBody {
 	return pb
 }
 
+// WithMomentOfInertia sets the body’s moment of inertia, expressed in the local coordinate system of the node that contains the body.
+func (pb *PhysicsBody) WithMomentOfInertia(momentOfInertia SCNVector3) *PhysicsBody {
+	objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("setMomentOfInertia:"), momentOfInertia)
+	return pb
+}
+
 // WithUsesDefaultMomentOfInertia sets a Boolean value that determines whether SceneKit automatically calculates the body’s moment of inertia or allows setting a custom value.
 func (pb *PhysicsBody) WithUsesDefaultMomentOfInertia(usesDefaultMomentOfInertia bool) *PhysicsBody {
 	objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("setUsesDefaultMomentOfInertia:"), usesDefaultMomentOfInertia)
@@ -134,6 +140,18 @@ func (pb *PhysicsBody) WithAllowsResting(allowsResting bool) *PhysicsBody {
 	return pb
 }
 
+// WithVelocity sets a vector describing both the current speed (in meters per second) and direction of motion of the physics body.
+func (pb *PhysicsBody) WithVelocity(velocity SCNVector3) *PhysicsBody {
+	objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("setVelocity:"), velocity)
+	return pb
+}
+
+// WithAngularVelocity sets a vector describing both the current rotation axis and rotational speed (in radians per second) of the physics body.
+func (pb *PhysicsBody) WithAngularVelocity(angularVelocity SCNVector4) *PhysicsBody {
+	objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("setAngularVelocity:"), angularVelocity)
+	return pb
+}
+
 // WithDamping sets a factor that reduces the body’s linear velocity.
 func (pb *PhysicsBody) WithDamping(damping float64) *PhysicsBody {
 	objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("setDamping:"), damping)
@@ -143,6 +161,18 @@ func (pb *PhysicsBody) WithDamping(damping float64) *PhysicsBody {
 // WithAngularDamping sets a factor that reduces the body’s angular velocity.
 func (pb *PhysicsBody) WithAngularDamping(angularDamping float64) *PhysicsBody {
 	objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("setAngularDamping:"), angularDamping)
+	return pb
+}
+
+// WithVelocityFactor sets a multiplier affecting how SceneKit applies translations computed by the physics simulation to the node containing the physics body.
+func (pb *PhysicsBody) WithVelocityFactor(velocityFactor SCNVector3) *PhysicsBody {
+	objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("setVelocityFactor:"), velocityFactor)
+	return pb
+}
+
+// WithAngularVelocityFactor sets a multiplier affecting how SceneKit applies rotations computed by the physics simulation to the node containing the physics body.
+func (pb *PhysicsBody) WithAngularVelocityFactor(angularVelocityFactor SCNVector3) *PhysicsBody {
+	objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("setAngularVelocityFactor:"), angularVelocityFactor)
 	return pb
 }
 
@@ -176,6 +206,12 @@ func (pb *PhysicsBody) WithContinuousCollisionDetectionThreshold(continuousColli
 	return pb
 }
 
+// WithCenterOfMassOffset sets the position of the body’s center of mass relative to its local coordinate origin.
+func (pb *PhysicsBody) WithCenterOfMassOffset(centerOfMassOffset SCNVector3) *PhysicsBody {
+	objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("setCenterOfMassOffset:"), centerOfMassOffset)
+	return pb
+}
+
 // WithLinearRestingThreshold sets the linear resting threshold.
 func (pb *PhysicsBody) WithLinearRestingThreshold(linearRestingThreshold float64) *PhysicsBody {
 	objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("setLinearRestingThreshold:"), linearRestingThreshold)
@@ -186,6 +222,24 @@ func (pb *PhysicsBody) WithLinearRestingThreshold(linearRestingThreshold float64
 func (pb *PhysicsBody) WithAngularRestingThreshold(angularRestingThreshold float64) *PhysicsBody {
 	objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("setAngularRestingThreshold:"), angularRestingThreshold)
 	return pb
+}
+
+// ApplyForceImpulse applies a force or impulse to the body at its center of mass.
+func (pb *PhysicsBody) ApplyForceImpulse(direction SCNVector3, impulse bool) {
+	defer runtime.KeepAlive(pb)
+	objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("applyForce:impulse:"), direction, impulse)
+}
+
+// ApplyForceAtPositionImpulse applies a force or impulse to the body at a specific point.
+func (pb *PhysicsBody) ApplyForceAtPositionImpulse(direction SCNVector3, position SCNVector3, impulse bool) {
+	defer runtime.KeepAlive(pb)
+	objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("applyForce:atPosition:impulse:"), direction, position, impulse)
+}
+
+// ApplyTorqueImpulse applies a net torque or a change in angular momentum to the body.
+func (pb *PhysicsBody) ApplyTorqueImpulse(torque SCNVector4, impulse bool) {
+	defer runtime.KeepAlive(pb)
+	objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("applyTorque:impulse:"), torque, impulse)
 }
 
 // ClearAllForces cancels all continuous forces and torques acting on the physics body during the current simulation step.
@@ -217,6 +271,13 @@ func (pb *PhysicsBody) Type() PhysicsBodyType {
 func (pb *PhysicsBody) Mass() float64 {
 	defer runtime.KeepAlive(pb)
 	_r := objc.Send[float64](objref.IDOf(pb), objc.RegisterName("mass"))
+	return _r
+}
+
+// MomentOfInertia returns the moment of inertia.
+func (pb *PhysicsBody) MomentOfInertia() SCNVector3 {
+	defer runtime.KeepAlive(pb)
+	_r := objc.Send[SCNVector3](objref.IDOf(pb), objc.RegisterName("momentOfInertia"))
 	return _r
 }
 
@@ -276,6 +337,20 @@ func (pb *PhysicsBody) AllowsResting() bool {
 	return _r
 }
 
+// Velocity returns the velocity.
+func (pb *PhysicsBody) Velocity() SCNVector3 {
+	defer runtime.KeepAlive(pb)
+	_r := objc.Send[SCNVector3](objref.IDOf(pb), objc.RegisterName("velocity"))
+	return _r
+}
+
+// AngularVelocity returns the angular velocity.
+func (pb *PhysicsBody) AngularVelocity() SCNVector4 {
+	defer runtime.KeepAlive(pb)
+	_r := objc.Send[SCNVector4](objref.IDOf(pb), objc.RegisterName("angularVelocity"))
+	return _r
+}
+
 // Damping returns the damping.
 func (pb *PhysicsBody) Damping() float64 {
 	defer runtime.KeepAlive(pb)
@@ -287,6 +362,20 @@ func (pb *PhysicsBody) Damping() float64 {
 func (pb *PhysicsBody) AngularDamping() float64 {
 	defer runtime.KeepAlive(pb)
 	_r := objc.Send[float64](objref.IDOf(pb), objc.RegisterName("angularDamping"))
+	return _r
+}
+
+// VelocityFactor returns the velocity factor.
+func (pb *PhysicsBody) VelocityFactor() SCNVector3 {
+	defer runtime.KeepAlive(pb)
+	_r := objc.Send[SCNVector3](objref.IDOf(pb), objc.RegisterName("velocityFactor"))
+	return _r
+}
+
+// AngularVelocityFactor returns the angular velocity factor.
+func (pb *PhysicsBody) AngularVelocityFactor() SCNVector3 {
+	defer runtime.KeepAlive(pb)
+	_r := objc.Send[SCNVector3](objref.IDOf(pb), objc.RegisterName("angularVelocityFactor"))
 	return _r
 }
 
@@ -322,6 +411,13 @@ func (pb *PhysicsBody) IsAffectedByGravity() bool {
 func (pb *PhysicsBody) ContinuousCollisionDetectionThreshold() float64 {
 	defer runtime.KeepAlive(pb)
 	_r := objc.Send[float64](objref.IDOf(pb), objc.RegisterName("continuousCollisionDetectionThreshold"))
+	return _r
+}
+
+// CenterOfMassOffset returns the center of mass offset.
+func (pb *PhysicsBody) CenterOfMassOffset() SCNVector3 {
+	defer runtime.KeepAlive(pb)
+	_r := objc.Send[SCNVector3](objref.IDOf(pb), objc.RegisterName("centerOfMassOffset"))
 	return _r
 }
 

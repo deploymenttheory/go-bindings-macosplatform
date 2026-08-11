@@ -138,7 +138,7 @@ func (c *Color) Alpha() float64 {
 func (c *Color) ColorSpace() coregraphics.CGColorSpaceRef {
 	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("colorSpace"))
-	return coregraphics.CGColorSpaceRef{obj.Wrap(_r)}
+	return coregraphics.CGColorSpaceRef{Object: obj.Wrap(_r)}
 }
 
 // Red returns the unpremultiplied red component of the color. If the “CIColor“ was initialized with a `CGColor` in a non-RGB `CGColorSpace` then it will be converted to sRGB to get the red component.

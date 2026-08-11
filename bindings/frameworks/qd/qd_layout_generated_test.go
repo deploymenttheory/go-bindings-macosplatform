@@ -31,7 +31,7 @@ func TestGeneratedLayout(t *testing.T) {
 		{"CMScreeningChannelRec", reflect.TypeOf(CMScreeningChannelRec{}).Size(), 12, uintptr(reflect.TypeOf(CMScreeningChannelRec{}).Align()), 0},
 		{"CMTagRecord", reflect.TypeOf(CMTagRecord{}).Size(), 12, uintptr(reflect.TypeOf(CMTagRecord{}).Align()), 0},
 		{"CMVideoCardGammaTable", reflect.TypeOf(CMVideoCardGammaTable{}).Size(), 8, uintptr(reflect.TypeOf(CMVideoCardGammaTable{}).Align()), 0},
-		{"ColorSpec", reflect.TypeOf(ColorSpec{}).Size(), 8, uintptr(reflect.TypeOf(ColorSpec{}).Align()), 2},
+		{"ColorSpec", reflect.TypeOf(ColorSpec{}).Size(), 8, uintptr(reflect.TypeOf(ColorSpec{}).Align()), 0},
 		{"NCMConcatProfileSpec", reflect.TypeOf(NCMConcatProfileSpec{}).Size(), 16, uintptr(reflect.TypeOf(NCMConcatProfileSpec{}).Align()), 8},
 		{"Point", reflect.TypeOf(Point{}).Size(), 4, uintptr(reflect.TypeOf(Point{}).Align()), 0},
 		{"RGBColor", reflect.TypeOf(RGBColor{}).Size(), 6, uintptr(reflect.TypeOf(RGBColor{}).Align()), 0},

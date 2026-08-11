@@ -60,6 +60,34 @@ func (dm *DeviceMotion) Attitude() *Attitude {
 	return AttitudeFromID(_r)
 }
 
+// RotationRate returns the rotation rate.
+func (dm *DeviceMotion) RotationRate() CMRotationRate {
+	defer runtime.KeepAlive(dm)
+	_r := objc.Send[CMRotationRate](objref.IDOf(dm), objc.RegisterName("rotationRate"))
+	return _r
+}
+
+// Gravity returns the gravity.
+func (dm *DeviceMotion) Gravity() CMAcceleration {
+	defer runtime.KeepAlive(dm)
+	_r := objc.Send[CMAcceleration](objref.IDOf(dm), objc.RegisterName("gravity"))
+	return _r
+}
+
+// UserAcceleration returns the user acceleration.
+func (dm *DeviceMotion) UserAcceleration() CMAcceleration {
+	defer runtime.KeepAlive(dm)
+	_r := objc.Send[CMAcceleration](objref.IDOf(dm), objc.RegisterName("userAcceleration"))
+	return _r
+}
+
+// MagneticField returns the magnetic field.
+func (dm *DeviceMotion) MagneticField() CMCalibratedMagneticField {
+	defer runtime.KeepAlive(dm)
+	_r := objc.Send[CMCalibratedMagneticField](objref.IDOf(dm), objc.RegisterName("magneticField"))
+	return _r
+}
+
 // Heading returns the heading.
 func (dm *DeviceMotion) Heading() float64 {
 	defer runtime.KeepAlive(dm)

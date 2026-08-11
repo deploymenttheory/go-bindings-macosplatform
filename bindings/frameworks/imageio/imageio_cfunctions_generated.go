@@ -90,7 +90,7 @@ func CGImageDestinationCopyTypeIdentifiers() corefoundation.CFArrayRef {
 		ebipurego.RegisterLibFunc(&_fnCGImageDestinationCopyTypeIdentifiers, _lib, "CGImageDestinationCopyTypeIdentifiers")
 	}
 	_ret := _fnCGImageDestinationCopyTypeIdentifiers()
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGImageDestinationCreateWithData func(objc.ID, objc.ID, int, objc.ID) objc.ID
@@ -102,7 +102,7 @@ func CGImageDestinationCreateWithData(data corefoundation.CFMutableDataRef, type
 		ebipurego.RegisterLibFunc(&_fnCGImageDestinationCreateWithData, _lib, "CGImageDestinationCreateWithData")
 	}
 	_ret := _fnCGImageDestinationCreateWithData(objref.IDOf(data.Object), objref.IDOf(type_.Object), count, objref.IDOf(options.Object))
-	return coregraphics.CGImageDestinationRef{obj.Adopt(_ret)}
+	return coregraphics.CGImageDestinationRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGImageDestinationCreateWithDataConsumer func(objc.ID, objc.ID, int, objc.ID) objc.ID
@@ -114,7 +114,7 @@ func CGImageDestinationCreateWithDataConsumer(consumer coregraphics.CGDataConsum
 		ebipurego.RegisterLibFunc(&_fnCGImageDestinationCreateWithDataConsumer, _lib, "CGImageDestinationCreateWithDataConsumer")
 	}
 	_ret := _fnCGImageDestinationCreateWithDataConsumer(objref.IDOf(consumer.Object), objref.IDOf(type_.Object), count, objref.IDOf(options.Object))
-	return coregraphics.CGImageDestinationRef{obj.Adopt(_ret)}
+	return coregraphics.CGImageDestinationRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGImageDestinationCreateWithURL func(objc.ID, objc.ID, int, objc.ID) objc.ID
@@ -126,7 +126,7 @@ func CGImageDestinationCreateWithURL(url corefoundation.CFURLRef, type_ corefoun
 		ebipurego.RegisterLibFunc(&_fnCGImageDestinationCreateWithURL, _lib, "CGImageDestinationCreateWithURL")
 	}
 	_ret := _fnCGImageDestinationCreateWithURL(objref.IDOf(url.Object), objref.IDOf(type_.Object), count, objref.IDOf(options.Object))
-	return coregraphics.CGImageDestinationRef{obj.Adopt(_ret)}
+	return coregraphics.CGImageDestinationRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGImageDestinationFinalize func(objc.ID) bool
@@ -171,7 +171,7 @@ func CGImageMetadataCopyStringValueWithPath(metadata coregraphics.CGImageMetadat
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataCopyStringValueWithPath, _lib, "CGImageMetadataCopyStringValueWithPath")
 	}
 	_ret := _fnCGImageMetadataCopyStringValueWithPath(objref.IDOf(metadata.Object), objref.IDOf(parent.Object), objref.IDOf(path.Object))
-	return corefoundation.CFStringRef{obj.Adopt(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGImageMetadataCopyTagMatchingImageProperty func(objc.ID, objc.ID, objc.ID) objc.ID
@@ -183,7 +183,7 @@ func CGImageMetadataCopyTagMatchingImageProperty(metadata coregraphics.CGImageMe
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataCopyTagMatchingImageProperty, _lib, "CGImageMetadataCopyTagMatchingImageProperty")
 	}
 	_ret := _fnCGImageMetadataCopyTagMatchingImageProperty(objref.IDOf(metadata.Object), objref.IDOf(dictionaryName.Object), objref.IDOf(propertyName.Object))
-	return coregraphics.CGImageMetadataTagRef{obj.Adopt(_ret)}
+	return coregraphics.CGImageMetadataTagRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGImageMetadataCopyTagWithPath func(objc.ID, objc.ID, objc.ID) objc.ID
@@ -195,7 +195,7 @@ func CGImageMetadataCopyTagWithPath(metadata coregraphics.CGImageMetadataRef, pa
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataCopyTagWithPath, _lib, "CGImageMetadataCopyTagWithPath")
 	}
 	_ret := _fnCGImageMetadataCopyTagWithPath(objref.IDOf(metadata.Object), objref.IDOf(parent.Object), objref.IDOf(path.Object))
-	return coregraphics.CGImageMetadataTagRef{obj.Adopt(_ret)}
+	return coregraphics.CGImageMetadataTagRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGImageMetadataCopyTags func(objc.ID) objc.ID
@@ -207,7 +207,7 @@ func CGImageMetadataCopyTags(metadata coregraphics.CGImageMetadataRef) corefound
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataCopyTags, _lib, "CGImageMetadataCopyTags")
 	}
 	_ret := _fnCGImageMetadataCopyTags(objref.IDOf(metadata.Object))
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGImageMetadataCreateFromXMPData func(objc.ID) objc.ID
@@ -219,7 +219,7 @@ func CGImageMetadataCreateFromXMPData(data corefoundation.CFDataRef) coregraphic
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataCreateFromXMPData, _lib, "CGImageMetadataCreateFromXMPData")
 	}
 	_ret := _fnCGImageMetadataCreateFromXMPData(objref.IDOf(data.Object))
-	return coregraphics.CGImageMetadataRef{obj.Adopt(_ret)}
+	return coregraphics.CGImageMetadataRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGImageMetadataCreateMutable func() objc.ID
@@ -231,7 +231,7 @@ func CGImageMetadataCreateMutable() coregraphics.CGMutableImageMetadataRef {
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataCreateMutable, _lib, "CGImageMetadataCreateMutable")
 	}
 	_ret := _fnCGImageMetadataCreateMutable()
-	return coregraphics.CGMutableImageMetadataRef{obj.Adopt(_ret)}
+	return coregraphics.CGMutableImageMetadataRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGImageMetadataCreateMutableCopy func(objc.ID) objc.ID
@@ -243,7 +243,7 @@ func CGImageMetadataCreateMutableCopy(metadata coregraphics.CGImageMetadataRef) 
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataCreateMutableCopy, _lib, "CGImageMetadataCreateMutableCopy")
 	}
 	_ret := _fnCGImageMetadataCreateMutableCopy(objref.IDOf(metadata.Object))
-	return coregraphics.CGMutableImageMetadataRef{obj.Adopt(_ret)}
+	return coregraphics.CGMutableImageMetadataRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGImageMetadataCreateXMPData func(objc.ID, objc.ID) objc.ID
@@ -255,7 +255,7 @@ func CGImageMetadataCreateXMPData(metadata coregraphics.CGImageMetadataRef, opti
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataCreateXMPData, _lib, "CGImageMetadataCreateXMPData")
 	}
 	_ret := _fnCGImageMetadataCreateXMPData(objref.IDOf(metadata.Object), objref.IDOf(options.Object))
-	return corefoundation.CFDataRef{obj.Adopt(_ret)}
+	return corefoundation.CFDataRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGImageMetadataEnumerateTagsUsingBlock func(objc.ID, objc.ID, objc.ID, objc.Block)
@@ -333,7 +333,7 @@ func CGImageMetadataTagCopyName(tag coregraphics.CGImageMetadataTagRef) corefoun
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataTagCopyName, _lib, "CGImageMetadataTagCopyName")
 	}
 	_ret := _fnCGImageMetadataTagCopyName(objref.IDOf(tag.Object))
-	return corefoundation.CFStringRef{obj.Adopt(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGImageMetadataTagCopyNamespace func(objc.ID) objc.ID
@@ -345,7 +345,7 @@ func CGImageMetadataTagCopyNamespace(tag coregraphics.CGImageMetadataTagRef) cor
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataTagCopyNamespace, _lib, "CGImageMetadataTagCopyNamespace")
 	}
 	_ret := _fnCGImageMetadataTagCopyNamespace(objref.IDOf(tag.Object))
-	return corefoundation.CFStringRef{obj.Adopt(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGImageMetadataTagCopyPrefix func(objc.ID) objc.ID
@@ -357,7 +357,7 @@ func CGImageMetadataTagCopyPrefix(tag coregraphics.CGImageMetadataTagRef) corefo
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataTagCopyPrefix, _lib, "CGImageMetadataTagCopyPrefix")
 	}
 	_ret := _fnCGImageMetadataTagCopyPrefix(objref.IDOf(tag.Object))
-	return corefoundation.CFStringRef{obj.Adopt(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGImageMetadataTagCopyQualifiers func(objc.ID) objc.ID
@@ -369,7 +369,7 @@ func CGImageMetadataTagCopyQualifiers(tag coregraphics.CGImageMetadataTagRef) co
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataTagCopyQualifiers, _lib, "CGImageMetadataTagCopyQualifiers")
 	}
 	_ret := _fnCGImageMetadataTagCopyQualifiers(objref.IDOf(tag.Object))
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGImageMetadataTagCopyValue func(objc.ID) objc.ID
@@ -393,7 +393,7 @@ func CGImageMetadataTagCreate(xmlns corefoundation.CFStringRef, prefix corefound
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataTagCreate, _lib, "CGImageMetadataTagCreate")
 	}
 	_ret := _fnCGImageMetadataTagCreate(objref.IDOf(xmlns.Object), objref.IDOf(prefix.Object), objref.IDOf(name.Object), type_, objref.IDOf(value))
-	return coregraphics.CGImageMetadataTagRef{obj.Adopt(_ret)}
+	return coregraphics.CGImageMetadataTagRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGImageMetadataTagGetType func(objc.ID) CGImageMetadataType
@@ -427,7 +427,7 @@ func CGImageSourceCopyAuxiliaryDataInfoAtIndex(isrc coregraphics.CGImageSourceRe
 		ebipurego.RegisterLibFunc(&_fnCGImageSourceCopyAuxiliaryDataInfoAtIndex, _lib, "CGImageSourceCopyAuxiliaryDataInfoAtIndex")
 	}
 	_ret := _fnCGImageSourceCopyAuxiliaryDataInfoAtIndex(objref.IDOf(isrc.Object), index, objref.IDOf(auxiliaryImageDataType.Object))
-	return corefoundation.CFDictionaryRef{obj.Adopt(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGImageSourceCopyMetadataAtIndex func(objc.ID, int, objc.ID) objc.ID
@@ -439,7 +439,7 @@ func CGImageSourceCopyMetadataAtIndex(isrc coregraphics.CGImageSourceRef, index 
 		ebipurego.RegisterLibFunc(&_fnCGImageSourceCopyMetadataAtIndex, _lib, "CGImageSourceCopyMetadataAtIndex")
 	}
 	_ret := _fnCGImageSourceCopyMetadataAtIndex(objref.IDOf(isrc.Object), index, objref.IDOf(options.Object))
-	return coregraphics.CGImageMetadataRef{obj.Adopt(_ret)}
+	return coregraphics.CGImageMetadataRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGImageSourceCopyProperties func(objc.ID, objc.ID) objc.ID
@@ -451,7 +451,7 @@ func CGImageSourceCopyProperties(isrc coregraphics.CGImageSourceRef, options cor
 		ebipurego.RegisterLibFunc(&_fnCGImageSourceCopyProperties, _lib, "CGImageSourceCopyProperties")
 	}
 	_ret := _fnCGImageSourceCopyProperties(objref.IDOf(isrc.Object), objref.IDOf(options.Object))
-	return corefoundation.CFDictionaryRef{obj.Adopt(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGImageSourceCopyPropertiesAtIndex func(objc.ID, int, objc.ID) objc.ID
@@ -463,7 +463,7 @@ func CGImageSourceCopyPropertiesAtIndex(isrc coregraphics.CGImageSourceRef, inde
 		ebipurego.RegisterLibFunc(&_fnCGImageSourceCopyPropertiesAtIndex, _lib, "CGImageSourceCopyPropertiesAtIndex")
 	}
 	_ret := _fnCGImageSourceCopyPropertiesAtIndex(objref.IDOf(isrc.Object), index, objref.IDOf(options.Object))
-	return corefoundation.CFDictionaryRef{obj.Adopt(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGImageSourceCopyTypeIdentifiers func() objc.ID
@@ -475,7 +475,7 @@ func CGImageSourceCopyTypeIdentifiers() corefoundation.CFArrayRef {
 		ebipurego.RegisterLibFunc(&_fnCGImageSourceCopyTypeIdentifiers, _lib, "CGImageSourceCopyTypeIdentifiers")
 	}
 	_ret := _fnCGImageSourceCopyTypeIdentifiers()
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGImageSourceCreateImageAtIndex func(objc.ID, int, objc.ID) objc.ID
@@ -487,7 +487,7 @@ func CGImageSourceCreateImageAtIndex(isrc coregraphics.CGImageSourceRef, index i
 		ebipurego.RegisterLibFunc(&_fnCGImageSourceCreateImageAtIndex, _lib, "CGImageSourceCreateImageAtIndex")
 	}
 	_ret := _fnCGImageSourceCreateImageAtIndex(objref.IDOf(isrc.Object), index, objref.IDOf(options.Object))
-	return coregraphics.CGImageRef{obj.Adopt(_ret)}
+	return coregraphics.CGImageRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGImageSourceCreateIncremental func(objc.ID) objc.ID
@@ -499,7 +499,7 @@ func CGImageSourceCreateIncremental(options corefoundation.CFDictionaryRef) core
 		ebipurego.RegisterLibFunc(&_fnCGImageSourceCreateIncremental, _lib, "CGImageSourceCreateIncremental")
 	}
 	_ret := _fnCGImageSourceCreateIncremental(objref.IDOf(options.Object))
-	return coregraphics.CGImageSourceRef{obj.Adopt(_ret)}
+	return coregraphics.CGImageSourceRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGImageSourceCreateThumbnailAtIndex func(objc.ID, int, objc.ID) objc.ID
@@ -511,7 +511,7 @@ func CGImageSourceCreateThumbnailAtIndex(isrc coregraphics.CGImageSourceRef, ind
 		ebipurego.RegisterLibFunc(&_fnCGImageSourceCreateThumbnailAtIndex, _lib, "CGImageSourceCreateThumbnailAtIndex")
 	}
 	_ret := _fnCGImageSourceCreateThumbnailAtIndex(objref.IDOf(isrc.Object), index, objref.IDOf(options.Object))
-	return coregraphics.CGImageRef{obj.Adopt(_ret)}
+	return coregraphics.CGImageRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGImageSourceCreateWithData func(objc.ID, objc.ID) objc.ID
@@ -523,7 +523,7 @@ func CGImageSourceCreateWithData(data corefoundation.CFDataRef, options corefoun
 		ebipurego.RegisterLibFunc(&_fnCGImageSourceCreateWithData, _lib, "CGImageSourceCreateWithData")
 	}
 	_ret := _fnCGImageSourceCreateWithData(objref.IDOf(data.Object), objref.IDOf(options.Object))
-	return coregraphics.CGImageSourceRef{obj.Adopt(_ret)}
+	return coregraphics.CGImageSourceRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGImageSourceCreateWithDataProvider func(objc.ID, objc.ID) objc.ID
@@ -535,7 +535,7 @@ func CGImageSourceCreateWithDataProvider(provider coregraphics.CGDataProviderRef
 		ebipurego.RegisterLibFunc(&_fnCGImageSourceCreateWithDataProvider, _lib, "CGImageSourceCreateWithDataProvider")
 	}
 	_ret := _fnCGImageSourceCreateWithDataProvider(objref.IDOf(provider.Object), objref.IDOf(options.Object))
-	return coregraphics.CGImageSourceRef{obj.Adopt(_ret)}
+	return coregraphics.CGImageSourceRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGImageSourceCreateWithURL func(objc.ID, objc.ID) objc.ID
@@ -547,7 +547,7 @@ func CGImageSourceCreateWithURL(url corefoundation.CFURLRef, options corefoundat
 		ebipurego.RegisterLibFunc(&_fnCGImageSourceCreateWithURL, _lib, "CGImageSourceCreateWithURL")
 	}
 	_ret := _fnCGImageSourceCreateWithURL(objref.IDOf(url.Object), objref.IDOf(options.Object))
-	return coregraphics.CGImageSourceRef{obj.Adopt(_ret)}
+	return coregraphics.CGImageSourceRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCGImageSourceGetCount func(objc.ID) int
@@ -603,7 +603,7 @@ func CGImageSourceGetType(isrc coregraphics.CGImageSourceRef) corefoundation.CFS
 		ebipurego.RegisterLibFunc(&_fnCGImageSourceGetType, _lib, "CGImageSourceGetType")
 	}
 	_ret := _fnCGImageSourceGetType(objref.IDOf(isrc.Object))
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCGImageSourceGetTypeID func() int

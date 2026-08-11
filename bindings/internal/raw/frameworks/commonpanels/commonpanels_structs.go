@@ -7,7 +7,6 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/ats"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/carboncore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/qd"
 )
 
@@ -34,7 +33,7 @@ type NColorPickerInfo struct {
 	DstProfile     unsafe.Pointer
 	Flags          uint32
 	PlaceWhere     int16
-	DialogOrigin   carboncore.Point
+	DialogOrigin   Point
 	PickerType     uint32
 	ColorProc      unsafe.Pointer
 	ColorProcData  unsafe.Pointer

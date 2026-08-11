@@ -53,6 +53,12 @@ func NewMTL4AccelerationStructureBoundingBoxGeometryDescriptor() *MTL4Accelerati
 	return mTL4AccelerationStructureBoundingBoxGeometryDescriptorAdopt(_id)
 }
 
+// WithBoundingBoxBuffer sets references a buffer containing bounding box data in MTLAxisAlignedBoundingBoxes format.
+func (masbbgd *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) WithBoundingBoxBuffer(boundingBoxBuffer MTL4BufferRange) *MTL4AccelerationStructureBoundingBoxGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(masbbgd), objc.RegisterName("setBoundingBoxBuffer:"), boundingBoxBuffer)
+	return masbbgd
+}
+
 // WithBoundingBoxStride sets assigns the stride, in bytes, between bounding boxes in the bounding box buffer boundingBoxBuffer references.
 func (masbbgd *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) WithBoundingBoxStride(boundingBoxStride int) *MTL4AccelerationStructureBoundingBoxGeometryDescriptor {
 	objc.Send[objc.ID](objref.IDOf(masbbgd), objc.RegisterName("setBoundingBoxStride:"), boundingBoxStride)
@@ -89,6 +95,12 @@ func (masbbgd *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) WithLabel
 	return masbbgd
 }
 
+// WithPrimitiveDataBuffer sets assigns optional buffer containing data to associate with each primitive in this geometry.
+func (masbbgd *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) WithPrimitiveDataBuffer(primitiveDataBuffer MTL4BufferRange) *MTL4AccelerationStructureBoundingBoxGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(masbbgd), objc.RegisterName("setPrimitiveDataBuffer:"), primitiveDataBuffer)
+	return masbbgd
+}
+
 // WithPrimitiveDataStride sets defines the stride, in bytes, between each primitive’s data in the primitive data buffer primitiveDataBuffer references.
 func (masbbgd *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) WithPrimitiveDataStride(primitiveDataStride int) *MTL4AccelerationStructureBoundingBoxGeometryDescriptor {
 	objc.Send[objc.ID](objref.IDOf(masbbgd), objc.RegisterName("setPrimitiveDataStride:"), primitiveDataStride)
@@ -99,6 +111,13 @@ func (masbbgd *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) WithPrimi
 func (masbbgd *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) WithPrimitiveDataElementSize(primitiveDataElementSize int) *MTL4AccelerationStructureBoundingBoxGeometryDescriptor {
 	objc.Send[objc.ID](objref.IDOf(masbbgd), objc.RegisterName("setPrimitiveDataElementSize:"), primitiveDataElementSize)
 	return masbbgd
+}
+
+// BoundingBoxBuffer returns references a buffer containing bounding box data in `MTLAxisAlignedBoundingBoxes` format. You are responsible for ensuring the buffer address of the range is not zero.
+func (masbbgd *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) BoundingBoxBuffer() MTL4BufferRange {
+	defer runtime.KeepAlive(masbbgd)
+	_r := objc.Send[MTL4BufferRange](objref.IDOf(masbbgd), objc.RegisterName("boundingBoxBuffer"))
+	return _r
 }
 
 // BoundingBoxStride returns assigns the stride, in bytes, between bounding boxes in the bounding box buffer `boundingBoxBuffer` references. You are responsible for ensuring this stride is at least 24 bytes and a multiple of 4 bytes. This property defaults to `24` bytes.

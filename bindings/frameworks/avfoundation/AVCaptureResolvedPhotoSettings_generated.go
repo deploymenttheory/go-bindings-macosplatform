@@ -86,6 +86,13 @@ func (crps *CaptureResolvedPhotoSettings) UniqueID() int64 {
 	return _r
 }
 
+// PhotoDimensions returns the resolved dimensions of the photo buffer that will be delivered to the -captureOutput:didFinishProcessingPhotoSampleBuffer:previewPhotoSampleBuffer:resolvedSettings:bracketSettings:error: callback. If you request a RAW capture with no processed companion image, photoDimensions resolve to { 0, 0 }.
+func (crps *CaptureResolvedPhotoSettings) PhotoDimensions() CMVideoDimensions {
+	defer runtime.KeepAlive(crps)
+	_r := objc.Send[CMVideoDimensions](objref.IDOf(crps), objc.RegisterName("photoDimensions"))
+	return _r
+}
+
 // ExpectedPhotoCount indicates the number of times your -captureOutput:didFinishProcessingPhoto:error: callback will be called. For instance, if you've requested an auto exposure bracket of 3 with JPEG and RAW, the expectedPhotoCount is 6.
 func (crps *CaptureResolvedPhotoSettings) ExpectedPhotoCount() int {
 	defer runtime.KeepAlive(crps)

@@ -171,7 +171,7 @@ func (ir *ImageRep) CGImageForProposedRectContextHints(proposedDestRect *corefou
 	defer runtime.KeepAlive(context_)
 	defer runtime.KeepAlive(hints)
 	_r := objc.Send[objc.ID](objref.IDOf(ir), objc.RegisterName("CGImageForProposedRect:context:hints:"), unsafe.Pointer(proposedDestRect), objref.IDOf(context_), objref.IDOf(hints))
-	return coregraphics.CGImageRef{obj.Wrap(_r)}
+	return coregraphics.CGImageRef{Object: obj.Wrap(_r)}
 }
 
 // Size returns the size.

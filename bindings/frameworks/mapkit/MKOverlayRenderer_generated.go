@@ -7,6 +7,8 @@ package mapkit
 import (
 	"runtime"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -81,10 +83,64 @@ func (or *OverlayRenderer) WithAlpha(alpha float64) *OverlayRenderer {
 	return or
 }
 
+// PointForMapPoint returns the point in the overlay renderer’s drawing area corresponding to the specified point on the map.
+func (or *OverlayRenderer) PointForMapPoint(mapPoint MKMapPoint) corefoundation.CGPoint {
+	defer runtime.KeepAlive(or)
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(or), objc.RegisterName("pointForMapPoint:"), mapPoint)
+	return _r
+}
+
+// MapPointForPoint returns the point on the map that corresponds to the specified point in the overlay renderer’s drawing area.
+func (or *OverlayRenderer) MapPointForPoint(point corefoundation.CGPoint) MKMapPoint {
+	defer runtime.KeepAlive(or)
+	_r := objc.Send[MKMapPoint](objref.IDOf(or), objc.RegisterName("mapPointForPoint:"), point)
+	return _r
+}
+
+// RectForMapRect returns the rectangle in the overlay renderer’s drawing area corresponding to the specified rectangle on the map.
+func (or *OverlayRenderer) RectForMapRect(mapRect MKMapRect) corefoundation.CGRect {
+	defer runtime.KeepAlive(or)
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(or), objc.RegisterName("rectForMapRect:"), mapRect)
+	return _r
+}
+
+// MapRectForRect returns the rectangle on the map that corresponds to the specified rectangle in the overlay renderer’s drawing area.
+func (or *OverlayRenderer) MapRectForRect(rect corefoundation.CGRect) MKMapRect {
+	defer runtime.KeepAlive(or)
+	_r := objc.Send[MKMapRect](objref.IDOf(or), objc.RegisterName("mapRectForRect:"), rect)
+	return _r
+}
+
+// CanDrawMapRectZoomScale returns a Boolean value that indicates whether the overlay view is ready to draw its content.
+func (or *OverlayRenderer) CanDrawMapRectZoomScale(mapRect MKMapRect, zoomScale float64) bool {
+	defer runtime.KeepAlive(or)
+	_r := objc.Send[bool](objref.IDOf(or), objc.RegisterName("canDrawMapRect:zoomScale:"), mapRect, zoomScale)
+	return _r
+}
+
+// DrawMapRectZoomScaleInContext draws the overlay’s contents at the specified location on the map.
+func (or *OverlayRenderer) DrawMapRectZoomScaleInContext(mapRect MKMapRect, zoomScale float64, context_ coregraphics.CGContextRef) {
+	defer runtime.KeepAlive(or)
+	defer runtime.KeepAlive(context_)
+	objc.Send[objc.ID](objref.IDOf(or), objc.RegisterName("drawMapRect:zoomScale:inContext:"), mapRect, zoomScale, objref.IDOf(context_.Object))
+}
+
 // SetNeedsDisplay invalidates the entire contents of the overlay for all zoom scales.
 func (or *OverlayRenderer) SetNeedsDisplay() {
 	defer runtime.KeepAlive(or)
 	objc.Send[objc.ID](objref.IDOf(or), objc.RegisterName("setNeedsDisplay"))
+}
+
+// SetNeedsDisplayInMapRect invalidates the specified portion of the overlay at all zoom scales.
+func (or *OverlayRenderer) SetNeedsDisplayInMapRect(mapRect MKMapRect) {
+	defer runtime.KeepAlive(or)
+	objc.Send[objc.ID](objref.IDOf(or), objc.RegisterName("setNeedsDisplayInMapRect:"), mapRect)
+}
+
+// SetNeedsDisplayInMapRectZoomScale invalidates the specified portion of the overlay, but only at the specified zoom scale.
+func (or *OverlayRenderer) SetNeedsDisplayInMapRectZoomScale(mapRect MKMapRect, zoomScale float64) {
+	defer runtime.KeepAlive(or)
+	objc.Send[objc.ID](objref.IDOf(or), objc.RegisterName("setNeedsDisplayInMapRect:zoomScale:"), mapRect, zoomScale)
 }
 
 // Alpha returns the alpha.

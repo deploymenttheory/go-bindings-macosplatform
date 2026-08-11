@@ -132,6 +132,48 @@ func (rn *ReferenceNode) WithWorldTransform(worldTransform quartzcore.CATransfor
 	return rn
 }
 
+// WithPosition sets the translation applied to the node. Animatable.
+func (rn *ReferenceNode) WithPosition(position SCNVector3) *ReferenceNode {
+	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setPosition:"), position)
+	return rn
+}
+
+// WithWorldPosition sets the node’s position relative to the scene’s world coordinate space.
+func (rn *ReferenceNode) WithWorldPosition(worldPosition SCNVector3) *ReferenceNode {
+	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setWorldPosition:"), worldPosition)
+	return rn
+}
+
+// WithRotation sets the node’s orientation, expressed as a rotation angle about an axis. Animatable.
+func (rn *ReferenceNode) WithRotation(rotation SCNVector4) *ReferenceNode {
+	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setRotation:"), rotation)
+	return rn
+}
+
+// WithOrientation sets the node’s orientation, expressed as a quaternion. Animatable.
+func (rn *ReferenceNode) WithOrientation(orientation SCNVector4) *ReferenceNode {
+	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setOrientation:"), orientation)
+	return rn
+}
+
+// WithWorldOrientation sets the node’s orientation relative to the scene’s world coordinate space.
+func (rn *ReferenceNode) WithWorldOrientation(worldOrientation SCNVector4) *ReferenceNode {
+	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setWorldOrientation:"), worldOrientation)
+	return rn
+}
+
+// WithEulerAngles sets the node’s orientation, expressed as pitch, yaw, and roll angles in radians. Animatable.
+func (rn *ReferenceNode) WithEulerAngles(eulerAngles SCNVector3) *ReferenceNode {
+	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setEulerAngles:"), eulerAngles)
+	return rn
+}
+
+// WithScale sets the scale factor applied to the node. Animatable.
+func (rn *ReferenceNode) WithScale(scale SCNVector3) *ReferenceNode {
+	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setScale:"), scale)
+	return rn
+}
+
 // WithPivot sets the pivot point for the node’s position, rotation, and scale. Animatable.
 func (rn *ReferenceNode) WithPivot(pivot quartzcore.CATransform3D) *ReferenceNode {
 	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setPivot:"), pivot)

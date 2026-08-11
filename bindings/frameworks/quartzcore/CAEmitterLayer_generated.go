@@ -183,6 +183,12 @@ func (el *EmitterLayer) WithAnchorPointZ(anchorPointZ float64) *EmitterLayer {
 	return el
 }
 
+// WithTransform sets the transform applied to the layer’s contents. Animatable.
+func (el *EmitterLayer) WithTransform(transform CATransform3D) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(el), objc.RegisterName("setTransform:"), transform)
+	return el
+}
+
 // WithFrame sets the layer’s frame rectangle.
 func (el *EmitterLayer) WithFrame(frame corefoundation.CGRect) *EmitterLayer {
 	objc.Send[objc.ID](objref.IDOf(el), objc.RegisterName("setFrame:"), frame)
@@ -211,6 +217,12 @@ func (el *EmitterLayer) WithGeometryFlipped(geometryFlipped bool) *EmitterLayer 
 func (el *EmitterLayer) WithSublayers(items ...LayerProvider) *EmitterLayer {
 	_arr := purego.SliceToNSArray(items, func(_v LayerProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(el), objc.RegisterName("setSublayers:"), _arr)
+	return el
+}
+
+// WithSublayerTransform sets specifies the transform to apply to sublayers when rendering. Animatable.
+func (el *EmitterLayer) WithSublayerTransform(sublayerTransform CATransform3D) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(el), objc.RegisterName("setSublayerTransform:"), sublayerTransform)
 	return el
 }
 

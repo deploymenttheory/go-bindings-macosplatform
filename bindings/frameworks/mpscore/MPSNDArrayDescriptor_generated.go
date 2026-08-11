@@ -104,6 +104,19 @@ func (nad *NDArrayDescriptor) LengthOfDimension(dimensionIndex int) int {
 	return _r
 }
 
+// SliceRangeForDimension the slice dimensions for each dimension
+func (nad *NDArrayDescriptor) SliceRangeForDimension(dimensionIndex int) MPSDimensionSlice {
+	defer runtime.KeepAlive(nad)
+	_r := objc.Send[MPSDimensionSlice](objref.IDOf(nad), objc.RegisterName("sliceRangeForDimension:"), dimensionIndex)
+	return _r
+}
+
+// SliceDimensionWithSubrange the slice dimensions for each dimension
+func (nad *NDArrayDescriptor) SliceDimensionWithSubrange(dimensionIndex int, subRange MPSDimensionSlice) {
+	defer runtime.KeepAlive(nad)
+	objc.Send[objc.ID](objref.IDOf(nad), objc.RegisterName("sliceDimension:withSubrange:"), dimensionIndex, subRange)
+}
+
 // TransposeDimensionWithDimension transpose two dimensions
 func (nad *NDArrayDescriptor) TransposeDimensionWithDimension(dimensionIndex int, dimensionIndex2 int) {
 	defer runtime.KeepAlive(nad)

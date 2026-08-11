@@ -53,6 +53,12 @@ func NewMTL4InstanceAccelerationStructureDescriptor() *MTL4InstanceAccelerationS
 	return mTL4InstanceAccelerationStructureDescriptorAdopt(_id)
 }
 
+// WithInstanceDescriptorBuffer sets assigns a reference to a buffer containing instance descriptors for acceleration structures to reference.
+func (miasd *MTL4InstanceAccelerationStructureDescriptor) WithInstanceDescriptorBuffer(instanceDescriptorBuffer MTL4BufferRange) *MTL4InstanceAccelerationStructureDescriptor {
+	objc.Send[objc.ID](objref.IDOf(miasd), objc.RegisterName("setInstanceDescriptorBuffer:"), instanceDescriptorBuffer)
+	return miasd
+}
+
 // WithInstanceDescriptorStride sets sets the stride, in bytes, between instance descriptors the instance descriptor buffer references.
 func (miasd *MTL4InstanceAccelerationStructureDescriptor) WithInstanceDescriptorStride(instanceDescriptorStride int) *MTL4InstanceAccelerationStructureDescriptor {
 	objc.Send[objc.ID](objref.IDOf(miasd), objc.RegisterName("setInstanceDescriptorStride:"), instanceDescriptorStride)
@@ -68,6 +74,12 @@ func (miasd *MTL4InstanceAccelerationStructureDescriptor) WithInstanceCount(inst
 // WithInstanceDescriptorType sets the type of instance descriptor that the instance descriptor buffer references.
 func (miasd *MTL4InstanceAccelerationStructureDescriptor) WithInstanceDescriptorType(instanceDescriptorType AccelerationStructureInstanceDescriptorType) *MTL4InstanceAccelerationStructureDescriptor {
 	objc.Send[objc.ID](objref.IDOf(miasd), objc.RegisterName("setInstanceDescriptorType:"), instanceDescriptorType)
+	return miasd
+}
+
+// WithMotionTransformBuffer sets a buffer containing transformation information for instance motion keyframes, formatted according to the motion transform type.
+func (miasd *MTL4InstanceAccelerationStructureDescriptor) WithMotionTransformBuffer(motionTransformBuffer MTL4BufferRange) *MTL4InstanceAccelerationStructureDescriptor {
+	objc.Send[objc.ID](objref.IDOf(miasd), objc.RegisterName("setMotionTransformBuffer:"), motionTransformBuffer)
 	return miasd
 }
 
@@ -101,6 +113,13 @@ func (miasd *MTL4InstanceAccelerationStructureDescriptor) WithUsage(usage Accele
 	return miasd
 }
 
+// InstanceDescriptorBuffer returns assigns a reference to a buffer containing instance descriptors for acceleration structures to reference. This buffer conceptually represents an array of instance data. The specific format for the structs that comprise each entry depends on the value of the  “instanceDescriptorType“ property. You are responsible for ensuring the buffer address the range contains is not zero.
+func (miasd *MTL4InstanceAccelerationStructureDescriptor) InstanceDescriptorBuffer() MTL4BufferRange {
+	defer runtime.KeepAlive(miasd)
+	_r := objc.Send[MTL4BufferRange](objref.IDOf(miasd), objc.RegisterName("instanceDescriptorBuffer"))
+	return _r
+}
+
 // InstanceDescriptorStride sets the stride, in bytes, between instance descriptors the instance descriptor buffer references. You are responsible for ensuring this stride is at least the size of the structure type corresponding to the instance descriptor type and a multiple of 4 bytes. Defaults to `0`, indicating the instance descriptors are tightly packed.
 func (miasd *MTL4InstanceAccelerationStructureDescriptor) InstanceDescriptorStride() int {
 	defer runtime.KeepAlive(miasd)
@@ -119,6 +138,13 @@ func (miasd *MTL4InstanceAccelerationStructureDescriptor) InstanceCount() int {
 func (miasd *MTL4InstanceAccelerationStructureDescriptor) InstanceDescriptorType() AccelerationStructureInstanceDescriptorType {
 	defer runtime.KeepAlive(miasd)
 	_r := objc.Send[AccelerationStructureInstanceDescriptorType](objref.IDOf(miasd), objc.RegisterName("instanceDescriptorType"))
+	return _r
+}
+
+// MotionTransformBuffer returns a buffer containing transformation information for instance motion keyframes, formatted according to the motion transform type. Each instance can have a different number of keyframes that you configure via individual instance descriptors. You are responsible for ensuring the buffer address the range references is not zero when using motion instance descriptors.
+func (miasd *MTL4InstanceAccelerationStructureDescriptor) MotionTransformBuffer() MTL4BufferRange {
+	defer runtime.KeepAlive(miasd)
+	_r := objc.Send[MTL4BufferRange](objref.IDOf(miasd), objc.RegisterName("motionTransformBuffer"))
 	return _r
 }
 

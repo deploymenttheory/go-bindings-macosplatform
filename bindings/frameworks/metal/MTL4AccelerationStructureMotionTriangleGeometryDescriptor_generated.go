@@ -53,6 +53,12 @@ func NewMTL4AccelerationStructureMotionTriangleGeometryDescriptor() *MTL4Acceler
 	return mTL4AccelerationStructureMotionTriangleGeometryDescriptorAdopt(_id)
 }
 
+// WithVertexBuffers sets assigns a buffer where each entry contains a reference to a vertex buffer.
+func (masmtgd *MTL4AccelerationStructureMotionTriangleGeometryDescriptor) WithVertexBuffers(vertexBuffers MTL4BufferRange) *MTL4AccelerationStructureMotionTriangleGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(masmtgd), objc.RegisterName("setVertexBuffers:"), vertexBuffers)
+	return masmtgd
+}
+
 // WithVertexFormat sets defines the format of the vertices in the vertex buffers.
 func (masmtgd *MTL4AccelerationStructureMotionTriangleGeometryDescriptor) WithVertexFormat(vertexFormat AttributeFormat) *MTL4AccelerationStructureMotionTriangleGeometryDescriptor {
 	objc.Send[objc.ID](objref.IDOf(masmtgd), objc.RegisterName("setVertexFormat:"), vertexFormat)
@@ -65,6 +71,12 @@ func (masmtgd *MTL4AccelerationStructureMotionTriangleGeometryDescriptor) WithVe
 	return masmtgd
 }
 
+// WithIndexBuffer sets assigns an optional index buffer containing references to vertices in the vertex buffers you reference through the vertex buffers property.
+func (masmtgd *MTL4AccelerationStructureMotionTriangleGeometryDescriptor) WithIndexBuffer(indexBuffer MTL4BufferRange) *MTL4AccelerationStructureMotionTriangleGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(masmtgd), objc.RegisterName("setIndexBuffer:"), indexBuffer)
+	return masmtgd
+}
+
 // WithIndexType sets specifies the size of the indices the indexBuffer contains, which is typically either 16 or 32-bits for each index.
 func (masmtgd *MTL4AccelerationStructureMotionTriangleGeometryDescriptor) WithIndexType(indexType IndexType) *MTL4AccelerationStructureMotionTriangleGeometryDescriptor {
 	objc.Send[objc.ID](objref.IDOf(masmtgd), objc.RegisterName("setIndexType:"), indexType)
@@ -74,6 +86,12 @@ func (masmtgd *MTL4AccelerationStructureMotionTriangleGeometryDescriptor) WithIn
 // WithTriangleCount sets declares the number of triangles in the vertex buffers that the buffer in the vertex buffers property references.
 func (masmtgd *MTL4AccelerationStructureMotionTriangleGeometryDescriptor) WithTriangleCount(triangleCount int) *MTL4AccelerationStructureMotionTriangleGeometryDescriptor {
 	objc.Send[objc.ID](objref.IDOf(masmtgd), objc.RegisterName("setTriangleCount:"), triangleCount)
+	return masmtgd
+}
+
+// WithTransformationMatrixBuffer sets assings an optional reference to a buffer containing a float4x3 transformation matrix.
+func (masmtgd *MTL4AccelerationStructureMotionTriangleGeometryDescriptor) WithTransformationMatrixBuffer(transformationMatrixBuffer MTL4BufferRange) *MTL4AccelerationStructureMotionTriangleGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(masmtgd), objc.RegisterName("setTransformationMatrixBuffer:"), transformationMatrixBuffer)
 	return masmtgd
 }
 
@@ -107,6 +125,12 @@ func (masmtgd *MTL4AccelerationStructureMotionTriangleGeometryDescriptor) WithLa
 	return masmtgd
 }
 
+// WithPrimitiveDataBuffer sets assigns optional buffer containing data to associate with each primitive in this geometry.
+func (masmtgd *MTL4AccelerationStructureMotionTriangleGeometryDescriptor) WithPrimitiveDataBuffer(primitiveDataBuffer MTL4BufferRange) *MTL4AccelerationStructureMotionTriangleGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(masmtgd), objc.RegisterName("setPrimitiveDataBuffer:"), primitiveDataBuffer)
+	return masmtgd
+}
+
 // WithPrimitiveDataStride sets defines the stride, in bytes, between each primitive’s data in the primitive data buffer primitiveDataBuffer references.
 func (masmtgd *MTL4AccelerationStructureMotionTriangleGeometryDescriptor) WithPrimitiveDataStride(primitiveDataStride int) *MTL4AccelerationStructureMotionTriangleGeometryDescriptor {
 	objc.Send[objc.ID](objref.IDOf(masmtgd), objc.RegisterName("setPrimitiveDataStride:"), primitiveDataStride)
@@ -117,6 +141,13 @@ func (masmtgd *MTL4AccelerationStructureMotionTriangleGeometryDescriptor) WithPr
 func (masmtgd *MTL4AccelerationStructureMotionTriangleGeometryDescriptor) WithPrimitiveDataElementSize(primitiveDataElementSize int) *MTL4AccelerationStructureMotionTriangleGeometryDescriptor {
 	objc.Send[objc.ID](objref.IDOf(masmtgd), objc.RegisterName("setPrimitiveDataElementSize:"), primitiveDataElementSize)
 	return masmtgd
+}
+
+// VertexBuffers returns assigns a buffer where each entry contains a reference to a vertex buffer. This property references a buffer that conceptually represents an array with one entry for each keyframe in the motion animation. Each one of these entries consists of a “MTL4BufferRange“ that, in turn, references a vertex buffer containing the vertex data for the keyframe. You are responsible for ensuring the buffer address is not zero for the top-level buffer, as well as for all the vertex buffers it references.
+func (masmtgd *MTL4AccelerationStructureMotionTriangleGeometryDescriptor) VertexBuffers() MTL4BufferRange {
+	defer runtime.KeepAlive(masmtgd)
+	_r := objc.Send[MTL4BufferRange](objref.IDOf(masmtgd), objc.RegisterName("vertexBuffers"))
+	return _r
 }
 
 // VertexFormat defines the format of the vertices in the vertex buffers. All keyframes share the same vertex format. Defaults to `MTLAttributeFormatFloat3`, corresponding to three packed floating point numbers.
@@ -133,6 +164,13 @@ func (masmtgd *MTL4AccelerationStructureMotionTriangleGeometryDescriptor) Vertex
 	return _r
 }
 
+// IndexBuffer returns assigns an optional index buffer containing references to vertices in the vertex buffers you reference through the vertex buffers property. You can set this property to `0`, the default, to avoid specifying an index buffer. All keyframes share the same index buffer.
+func (masmtgd *MTL4AccelerationStructureMotionTriangleGeometryDescriptor) IndexBuffer() MTL4BufferRange {
+	defer runtime.KeepAlive(masmtgd)
+	_r := objc.Send[MTL4BufferRange](objref.IDOf(masmtgd), objc.RegisterName("indexBuffer"))
+	return _r
+}
+
 // IndexType specifies the size of the indices the `indexBuffer` contains, which is typically either 16 or 32-bits for each index.
 func (masmtgd *MTL4AccelerationStructureMotionTriangleGeometryDescriptor) IndexType() IndexType {
 	defer runtime.KeepAlive(masmtgd)
@@ -144,6 +182,13 @@ func (masmtgd *MTL4AccelerationStructureMotionTriangleGeometryDescriptor) IndexT
 func (masmtgd *MTL4AccelerationStructureMotionTriangleGeometryDescriptor) TriangleCount() int {
 	defer runtime.KeepAlive(masmtgd)
 	_r := objc.Send[int](objref.IDOf(masmtgd), objc.RegisterName("triangleCount"))
+	return _r
+}
+
+// TransformationMatrixBuffer returns assings an optional reference to a buffer containing a `float4x3` transformation matrix. When the buffer address is non-zero, Metal applies this transform to the vertex data positions when building the acceleration structure. All keyframes share the same transformation matrix. Building an acceleration structure with a descriptor that specifies this property doesn't modify the contents of the input `vertexBuffer`.
+func (masmtgd *MTL4AccelerationStructureMotionTriangleGeometryDescriptor) TransformationMatrixBuffer() MTL4BufferRange {
+	defer runtime.KeepAlive(masmtgd)
+	_r := objc.Send[MTL4BufferRange](objref.IDOf(masmtgd), objc.RegisterName("transformationMatrixBuffer"))
 	return _r
 }
 

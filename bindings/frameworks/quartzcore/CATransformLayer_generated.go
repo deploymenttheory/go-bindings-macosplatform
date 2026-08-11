@@ -88,6 +88,12 @@ func (tl *TransformLayer) WithAnchorPointZ(anchorPointZ float64) *TransformLayer
 	return tl
 }
 
+// WithTransform sets the transform applied to the layer’s contents. Animatable.
+func (tl *TransformLayer) WithTransform(transform CATransform3D) *TransformLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setTransform:"), transform)
+	return tl
+}
+
 // WithFrame sets the layer’s frame rectangle.
 func (tl *TransformLayer) WithFrame(frame corefoundation.CGRect) *TransformLayer {
 	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setFrame:"), frame)
@@ -116,6 +122,12 @@ func (tl *TransformLayer) WithGeometryFlipped(geometryFlipped bool) *TransformLa
 func (tl *TransformLayer) WithSublayers(items ...LayerProvider) *TransformLayer {
 	_arr := purego.SliceToNSArray(items, func(_v LayerProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setSublayers:"), _arr)
+	return tl
+}
+
+// WithSublayerTransform sets specifies the transform to apply to sublayers when rendering. Animatable.
+func (tl *TransformLayer) WithSublayerTransform(sublayerTransform CATransform3D) *TransformLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setSublayerTransform:"), sublayerTransform)
 	return tl
 }
 

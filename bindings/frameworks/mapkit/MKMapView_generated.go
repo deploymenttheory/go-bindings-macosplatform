@@ -9,6 +9,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -121,6 +122,14 @@ func (mv *MapView) WithPreferredConfiguration(preferredConfiguration MapConfigur
 func (mv *MapView) WithCenterCoordinate(centerCoordinate unsafe.Pointer) *MapView {
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setCenterCoordinate:"), centerCoordinate)
+	})
+	return mv
+}
+
+// WithVisibleMapRect sets the area visible in the map view.
+func (mv *MapView) WithVisibleMapRect(visibleMapRect MKMapRect) *MapView {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setVisibleMapRect:"), visibleMapRect)
 	})
 	return mv
 }
@@ -290,6 +299,52 @@ func (mv *MapView) SetCenterCoordinateAnimated(coordinate unsafe.Pointer, animat
 
 }
 
+// SetVisibleMapRectAnimated changes the currently visible portion of the map, and optionally animates the change.
+func (mv *MapView) SetVisibleMapRectAnimated(mapRect MKMapRect, animate bool) {
+	defer runtime.KeepAlive(mv)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setVisibleMapRect:animated:"), mapRect, animate)
+	})
+
+}
+
+// MapRectThatFits returns a centered map rectangle with the same aspect ratio as the map view’s frame.
+func (mv *MapView) MapRectThatFits(mapRect MKMapRect) MKMapRect {
+	defer runtime.KeepAlive(mv)
+	var _mainthread0 MKMapRect
+	purego.Main(func() {
+		_mainthread0 = func() MKMapRect {
+			_r := objc.Send[MKMapRect](objref.IDOf(mv), objc.RegisterName("mapRectThatFits:"), mapRect)
+			return _r
+		}()
+	})
+	return _mainthread0
+
+}
+
+// SetVisibleMapRectEdgePaddingAnimated changes the currently visible portion of the map, allowing you to specify additional space around the edges.
+func (mv *MapView) SetVisibleMapRectEdgePaddingAnimated(mapRect MKMapRect, insets foundation.NSEdgeInsets, animate bool) {
+	defer runtime.KeepAlive(mv)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setVisibleMapRect:edgePadding:animated:"), mapRect, insets, animate)
+	})
+
+}
+
+// MapRectThatFitsEdgePadding returns a centered, inset map rectangle with the same aspect ratio as the map view’s frame.
+func (mv *MapView) MapRectThatFitsEdgePadding(mapRect MKMapRect, insets foundation.NSEdgeInsets) MKMapRect {
+	defer runtime.KeepAlive(mv)
+	var _mainthread0 MKMapRect
+	purego.Main(func() {
+		_mainthread0 = func() MKMapRect {
+			_r := objc.Send[MKMapRect](objref.IDOf(mv), objc.RegisterName("mapRectThatFits:edgePadding:"), mapRect, insets)
+			return _r
+		}()
+	})
+	return _mainthread0
+
+}
+
 // SetCameraAnimated changes the camera to use for determining the map’s viewing parameters, and optionally animates the change.
 func (mv *MapView) SetCameraAnimated(camera *MapCamera, animated bool) {
 	defer runtime.KeepAlive(mv)
@@ -377,6 +432,21 @@ func (mv *MapView) RemoveAnnotations(annotations []obj.Object) {
 
 }
 
+// AnnotationsInMapRect returns the annotation objects within the specified map rectangle.
+// The order of the returned elements is unspecified.
+func (mv *MapView) AnnotationsInMapRect(mapRect MKMapRect) []obj.Object {
+	defer runtime.KeepAlive(mv)
+	var _mainthread0 []obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() []obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("annotationsInMapRect:"), mapRect)
+			return rt.NSSetToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+		}()
+	})
+	return _mainthread0
+
+}
+
 // DequeueReusableAnnotationViewWithIdentifier returns a reusable annotation view using its identifier.
 func (mv *MapView) DequeueReusableAnnotationViewWithIdentifier(identifier string) *AnnotationView {
 	defer runtime.KeepAlive(mv)
@@ -435,6 +505,20 @@ func (mv *MapView) CenterCoordinate() unsafe.Pointer {
 	purego.Main(func() {
 		_mainthread0 = func() unsafe.Pointer {
 			_r := objc.Send[unsafe.Pointer](objref.IDOf(mv), objc.RegisterName("centerCoordinate"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
+}
+
+// VisibleMapRect returns the visible map rect.
+func (mv *MapView) VisibleMapRect() MKMapRect {
+	defer runtime.KeepAlive(mv)
+	var _mainthread0 MKMapRect
+	purego.Main(func() {
+		_mainthread0 = func() MKMapRect {
+			_r := objc.Send[MKMapRect](objref.IDOf(mv), objc.RegisterName("visibleMapRect"))
 			return _r
 		}()
 	})

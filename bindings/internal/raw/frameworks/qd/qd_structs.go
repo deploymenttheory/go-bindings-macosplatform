@@ -5,8 +5,6 @@ package qd
 
 import (
 	"unsafe"
-
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/carboncore"
 )
 
 type AsscEntry struct {
@@ -18,7 +16,7 @@ type AsscEntry struct {
 type BitMap struct {
 	BaseAddr string
 	RowBytes int16
-	Bounds   carboncore.Rect
+	Bounds   Rect
 }
 
 type CM2Header struct {
@@ -651,11 +649,9 @@ type CQDProcs struct {
 	NewProc6          unsafe.Pointer
 }
 
-// ColorSpec is held as its exact 8-byte C ABI layout (a union / packed /
-// variable layout not expressible as typed Go fields).
 type ColorSpec struct {
-	_    [0]uint16
-	data [8]byte
+	Value int16
+	Rgb   RGBColor
 }
 
 type ColorTable struct {
@@ -671,8 +667,8 @@ type FMInput struct {
 	Face     uint8
 	NeedBits uint8
 	Device   int16
-	Numer    carboncore.Point
-	Denom    carboncore.Point
+	Numer    Point
+	Denom    Point
 }
 
 type FamRec struct {
@@ -731,7 +727,7 @@ type GDevice struct {
 	GdPMap       **PixMap
 	GdRefCon     int32
 	GdNextGD     **GDevice
-	GdRect       carboncore.Rect
+	GdRect       Rect
 	GdMode       int32
 	GdCCBytes    int16
 	GdCCDepth    int16
@@ -761,8 +757,8 @@ type KernTable struct {
 
 type MacPolygon struct {
 	PolySize   int16
-	PolyBBox   carboncore.Rect
-	PolyPoints [1]carboncore.Point
+	PolyBBox   Rect
+	PolyPoints [1]Point
 }
 
 type NCMConcatProfileSet struct {
@@ -813,7 +809,7 @@ type OpaqueRgnHandle struct{}
 type OpaqueWindowPtr struct{}
 
 type OpenCPicParams struct {
-	SrcRect   carboncore.Rect
+	SrcRect   Rect
 	HRes      int32
 	VRes      int32
 	Version   int16
@@ -827,13 +823,13 @@ type Pattern struct {
 
 type Picture struct {
 	PicSize  int16
-	PicFrame carboncore.Rect
+	PicFrame Rect
 }
 
 type PixMap struct {
 	BaseAddr    string
 	RowBytes    int16
-	Bounds      carboncore.Rect
+	Bounds      Rect
 	PmVersion   int16
 	PackType    int16
 	PackSize    int32

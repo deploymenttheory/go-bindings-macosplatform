@@ -6,7 +6,6 @@ package metal
 import (
 	"unsafe"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/compositorservices"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/foundation"
 )
 
@@ -168,8 +167,8 @@ type MTL4RenderCommandEncoder interface {
 	MTL4CommandEncoder
 	SetColorAttachmentMap(mapping *MTLLogicalToPhysicalColorAttachmentMap)
 	SetRenderPipelineState(pipelineState MTLRenderPipelineState)
-	SetViewport(viewport compositorservices.MTLViewport)
-	SetViewportsCount(viewports *compositorservices.MTLViewport, count uint)
+	SetViewport(viewport MTLViewport)
+	SetViewportsCount(viewports *MTLViewport, count uint)
 	SetVertexAmplificationCountViewMappings(count uint, viewMappings *MTLVertexAmplificationViewMapping)
 	SetCullMode(cullMode MTLCullMode)
 	SetDepthClipMode(depthClipMode MTLDepthClipMode)

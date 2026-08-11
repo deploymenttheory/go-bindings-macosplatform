@@ -139,5 +139,5 @@ func (r *Region) ContainsPoint(point corefoundation.CGPoint) bool {
 func (r *Region) Path() coregraphics.CGPathRef {
 	defer runtime.KeepAlive(r)
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("path"))
-	return coregraphics.CGPathRef{obj.Wrap(_r)}
+	return coregraphics.CGPathRef{Object: obj.Wrap(_r)}
 }

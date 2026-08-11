@@ -199,7 +199,7 @@ func (rd *RenderDestination) IsClamped() bool {
 func (rd *RenderDestination) ColorSpace() coregraphics.CGColorSpaceRef {
 	defer runtime.KeepAlive(rd)
 	_r := objc.Send[objc.ID](objref.IDOf(rd), objc.RegisterName("colorSpace"))
-	return coregraphics.CGColorSpaceRef{obj.Wrap(_r)}
+	return coregraphics.CGColorSpaceRef{Object: obj.Wrap(_r)}
 }
 
 // BlendKernel returns the blend kernel.

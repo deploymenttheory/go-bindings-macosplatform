@@ -141,7 +141,7 @@ func (c *Calendar) IsImmutable() bool {
 func (c *Calendar) CGColor() coregraphics.CGColorRef {
 	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("CGColor"))
-	return coregraphics.CGColorRef{obj.Wrap(_r)}
+	return coregraphics.CGColorRef{Object: obj.Wrap(_r)}
 }
 
 // Color returns the calendar color as a NSColor. This will be nil for new calendars until you set it.

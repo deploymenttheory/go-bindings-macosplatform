@@ -86,7 +86,7 @@ func (l *Light) WithHidden(hidden bool) *Light {
 func (l *Light) IrradianceAtPoint(point unsafe.Pointer) coregraphics.CGColorRef {
 	defer runtime.KeepAlive(l)
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("irradianceAtPoint:"), point)
-	return coregraphics.CGColorRef{obj.Wrap(_r)}
+	return coregraphics.CGColorRef{Object: obj.Wrap(_r)}
 }
 
 // IrradianceAtPointColorSpace returns the radiance of the light as received at a specific point in the same scene, expressed using the specified color space.
@@ -94,7 +94,7 @@ func (l *Light) IrradianceAtPointColorSpace(point unsafe.Pointer, colorSpace cor
 	defer runtime.KeepAlive(l)
 	defer runtime.KeepAlive(colorSpace)
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("irradianceAtPoint:colorSpace:"), point, objref.IDOf(colorSpace.Object))
-	return coregraphics.CGColorRef{obj.Wrap(_r)}
+	return coregraphics.CGColorRef{Object: obj.Wrap(_r)}
 }
 
 // LightType returns the light type.

@@ -122,6 +122,12 @@ func (dsat *DualSenseAdaptiveTrigger) SetModeFeedbackWithStartPositionResistiveS
 	objc.Send[objc.ID](objref.IDOf(dsat), objc.RegisterName("setModeFeedbackWithStartPosition:resistiveStrength:"), startPosition, resistiveStrength)
 }
 
+// SetModeFeedbackWithResistiveStrengths sets the mode to provide feedback with the specified strengths for each possible trigger position.
+func (dsat *DualSenseAdaptiveTrigger) SetModeFeedbackWithResistiveStrengths(positionalResistiveStrengths GCDualSenseAdaptiveTriggerPositionalResistiveStrengths) {
+	defer runtime.KeepAlive(dsat)
+	objc.Send[objc.ID](objref.IDOf(dsat), objc.RegisterName("setModeFeedbackWithResistiveStrengths:"), positionalResistiveStrengths)
+}
+
 // SetModeWeaponWithStartPositionEndPositionResistiveStrength sets the mode to provide feedback when the user depresses the trigger between the start and the end positions.
 func (dsat *DualSenseAdaptiveTrigger) SetModeWeaponWithStartPositionEndPositionResistiveStrength(startPosition float32, endPosition float32, resistiveStrength float32) {
 	defer runtime.KeepAlive(dsat)
@@ -132,6 +138,12 @@ func (dsat *DualSenseAdaptiveTrigger) SetModeWeaponWithStartPositionEndPositionR
 func (dsat *DualSenseAdaptiveTrigger) SetModeVibrationWithStartPositionAmplitudeFrequency(startPosition float32, amplitude float32, frequency float32) {
 	defer runtime.KeepAlive(dsat)
 	objc.Send[objc.ID](objref.IDOf(dsat), objc.RegisterName("setModeVibrationWithStartPosition:amplitude:frequency:"), startPosition, amplitude, frequency)
+}
+
+// SetModeVibrationWithAmplitudesFrequency sets the mode to vibrate with the specified amplitudes for each possible trigger position.
+func (dsat *DualSenseAdaptiveTrigger) SetModeVibrationWithAmplitudesFrequency(positionalAmplitudes GCDualSenseAdaptiveTriggerPositionalAmplitudes, frequency float32) {
+	defer runtime.KeepAlive(dsat)
+	objc.Send[objc.ID](objref.IDOf(dsat), objc.RegisterName("setModeVibrationWithAmplitudes:frequency:"), positionalAmplitudes, frequency)
 }
 
 // SetModeOff sets the mode to off and stops any trigger effect.

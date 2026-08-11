@@ -137,7 +137,7 @@ func AECreateRemoteProcessResolver(allocator corefoundation.CFAllocatorRef, url 
 		ebipurego.RegisterLibFunc(&_fnAECreateRemoteProcessResolver, _lib, "AECreateRemoteProcessResolver")
 	}
 	_ret := _fnAECreateRemoteProcessResolver(objref.IDOf(allocator.Object), objref.IDOf(url.Object))
-	return AERemoteProcessResolverRef{obj.WrapUnmanaged(_ret)}
+	return AERemoteProcessResolverRef{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnAEDecodeMessage func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
@@ -599,7 +599,7 @@ func AERemoteProcessResolverGetProcesses(ref AERemoteProcessResolverRef, outErro
 		ebipurego.RegisterLibFunc(&_fnAERemoteProcessResolverGetProcesses, _lib, "AERemoteProcessResolverGetProcesses")
 	}
 	_ret := _fnAERemoteProcessResolverGetProcesses(objref.IDOf(ref.Object), unsafe.Pointer(outError))
-	return corefoundation.CFArrayRef{obj.Wrap(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnAERemoteProcessResolverScheduleWithRunLoop func(objc.ID, objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer)
@@ -774,7 +774,7 @@ func AEStreamCreateEvent(clazz int, identifier int, targetType int, targetData u
 		ebipurego.RegisterLibFunc(&_fnAEStreamCreateEvent, _lib, "AEStreamCreateEvent")
 	}
 	_ret := _fnAEStreamCreateEvent(clazz, identifier, targetType, targetData, targetLength, returnID, transactionID)
-	return AEStreamRef{obj.WrapUnmanaged(_ret)}
+	return AEStreamRef{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnAEStreamOpen func() objc.ID
@@ -786,7 +786,7 @@ func AEStreamOpen() AEStreamRef {
 		ebipurego.RegisterLibFunc(&_fnAEStreamOpen, _lib, "AEStreamOpen")
 	}
 	_ret := _fnAEStreamOpen()
-	return AEStreamRef{obj.WrapUnmanaged(_ret)}
+	return AEStreamRef{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnAEStreamOpenEvent func(unsafe.Pointer) objc.ID
@@ -798,7 +798,7 @@ func AEStreamOpenEvent(event unsafe.Pointer) AEStreamRef {
 		ebipurego.RegisterLibFunc(&_fnAEStreamOpenEvent, _lib, "AEStreamOpenEvent")
 	}
 	_ret := _fnAEStreamOpenEvent(event)
-	return AEStreamRef{obj.WrapUnmanaged(_ret)}
+	return AEStreamRef{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnAEStreamWriteAEDesc func(objc.ID, unsafe.Pointer) int32

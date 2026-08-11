@@ -206,7 +206,7 @@ func (spm *ShareablePassMetadata) Preview() *ShareablePassMetadataPreview {
 func (spm *ShareablePassMetadata) PassThumbnailImage() coregraphics.CGImageRef {
 	defer runtime.KeepAlive(spm)
 	_r := objc.Send[objc.ID](objref.IDOf(spm), objc.RegisterName("passThumbnailImage"))
-	return coregraphics.CGImageRef{obj.Wrap(_r)}
+	return coregraphics.CGImageRef{Object: obj.Wrap(_r)}
 }
 
 // LocalizedDescription returns the localized description.

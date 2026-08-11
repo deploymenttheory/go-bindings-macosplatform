@@ -207,7 +207,7 @@ func (sct *SkyCubeTexture) HorizonElevation() float32 {
 func (sct *SkyCubeTexture) GroundColor() coregraphics.CGColorRef {
 	defer runtime.KeepAlive(sct)
 	_r := objc.Send[objc.ID](objref.IDOf(sct), objc.RegisterName("groundColor"))
-	return coregraphics.CGColorRef{obj.Wrap(_r)}
+	return coregraphics.CGColorRef{Object: obj.Wrap(_r)}
 }
 
 // Gamma returns the gamma.

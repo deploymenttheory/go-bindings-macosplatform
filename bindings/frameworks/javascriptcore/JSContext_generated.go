@@ -184,5 +184,5 @@ func (c *Context) SetObjectForKeyedSubscript(object obj.Object, key obj.Object) 
 func (c *Context) JSGlobalContextRef() JSGlobalContextRef {
 	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("JSGlobalContextRef"))
-	return JSGlobalContextRef{obj.WrapUnmanaged(_r)}
+	return JSGlobalContextRef{Object: obj.WrapUnmanaged(_r)}
 }

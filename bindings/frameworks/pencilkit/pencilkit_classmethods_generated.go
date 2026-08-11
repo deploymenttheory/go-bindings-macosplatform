@@ -56,5 +56,5 @@ func MaximumWidthForInkType(inkType obj.Object) float64 {
 func InvertColor(color coregraphics.CGColorRef) coregraphics.CGColorRef {
 	defer runtime.KeepAlive(color)
 	_r := objc.Send[objc.ID](objc.ID(_class("PKInkingTool")), objc.RegisterName("invertColor:"), objref.IDOf(color.Object))
-	return coregraphics.CGColorRef{obj.Wrap(_r)}
+	return coregraphics.CGColorRef{Object: obj.Wrap(_r)}
 }

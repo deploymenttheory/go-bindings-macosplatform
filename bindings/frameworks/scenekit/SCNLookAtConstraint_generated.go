@@ -60,6 +60,24 @@ func (lac *LookAtConstraint) WithTarget(target NodeProvider) *LookAtConstraint {
 	return lac
 }
 
+// WithTargetOffset sets offset look at position in target space. Defaults to zero. Animatable
+func (lac *LookAtConstraint) WithTargetOffset(targetOffset SCNVector3) *LookAtConstraint {
+	objc.Send[objc.ID](objref.IDOf(lac), objc.RegisterName("setTargetOffset:"), targetOffset)
+	return lac
+}
+
+// WithLocalFront sets front direction in the constraint owner local space. Defaults to -[SCNNode localFront]. Animatable
+func (lac *LookAtConstraint) WithLocalFront(localFront SCNVector3) *LookAtConstraint {
+	objc.Send[objc.ID](objref.IDOf(lac), objc.RegisterName("setLocalFront:"), localFront)
+	return lac
+}
+
+// WithWorldUp sets up reference direction in world space. Defaults to -[SCNNode localUp]. Animatable
+func (lac *LookAtConstraint) WithWorldUp(worldUp SCNVector3) *LookAtConstraint {
+	objc.Send[objc.ID](objref.IDOf(lac), objc.RegisterName("setWorldUp:"), worldUp)
+	return lac
+}
+
 // WithGimbalLockEnabled sets a Boolean value that specifies whether constrained nodes are allowed to rotate.
 func (lac *LookAtConstraint) WithGimbalLockEnabled(gimbalLockEnabled bool) *LookAtConstraint {
 	objc.Send[objc.ID](objref.IDOf(lac), objc.RegisterName("setGimbalLockEnabled:"), gimbalLockEnabled)
@@ -89,6 +107,27 @@ func (lac *LookAtConstraint) Target() *Node {
 	defer runtime.KeepAlive(lac)
 	_r := objc.Send[objc.ID](objref.IDOf(lac), objc.RegisterName("target"))
 	return NodeFromID(_r)
+}
+
+// TargetOffset returns offset look at position in target space. Defaults to zero. Animatable
+func (lac *LookAtConstraint) TargetOffset() SCNVector3 {
+	defer runtime.KeepAlive(lac)
+	_r := objc.Send[SCNVector3](objref.IDOf(lac), objc.RegisterName("targetOffset"))
+	return _r
+}
+
+// LocalFront returns front direction in the constraint owner local space. Defaults to -[SCNNode localFront]. Animatable
+func (lac *LookAtConstraint) LocalFront() SCNVector3 {
+	defer runtime.KeepAlive(lac)
+	_r := objc.Send[SCNVector3](objref.IDOf(lac), objc.RegisterName("localFront"))
+	return _r
+}
+
+// WorldUp returns up reference direction in world space. Defaults to -[SCNNode localUp]. Animatable
+func (lac *LookAtConstraint) WorldUp() SCNVector3 {
+	defer runtime.KeepAlive(lac)
+	_r := objc.Send[SCNVector3](objref.IDOf(lac), objc.RegisterName("worldUp"))
+	return _r
 }
 
 // GimbalLockEnabled reports whether the receiver enables the gimbal lock. Defaults to false. Enabling the gimbal lock prevents the receiver from rotating the constrained node around to roll axis.

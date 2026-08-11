@@ -73,10 +73,24 @@ func (mcb *MapCameraBoundary) String() string {
 	return rt.Description(objref.IDOf(mcb))
 }
 
+// NewMapCameraBoundaryWithMapRect creates a new MapCameraBoundary.
+func NewMapCameraBoundaryWithMapRect(mapRect MKMapRect) *MapCameraBoundary {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MKMapCameraBoundary")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMapRect:"), mapRect)
+	return mapCameraBoundaryAdopt(_id)
+}
+
 // NewMapCameraBoundaryWithCoder creates a new MapCameraBoundary.
 func NewMapCameraBoundaryWithCoder(coder obj.Object) *MapCameraBoundary {
 	defer runtime.KeepAlive(coder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKMapCameraBoundary")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return mapCameraBoundaryAdopt(_id)
+}
+
+// MapRect returns the map rect.
+func (mcb *MapCameraBoundary) MapRect() MKMapRect {
+	defer runtime.KeepAlive(mcb)
+	_r := objc.Send[MKMapRect](objref.IDOf(mcb), objc.RegisterName("mapRect"))
+	return _r
 }

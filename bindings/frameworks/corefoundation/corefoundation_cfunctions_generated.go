@@ -14,10 +14,10 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-var _fnCFAbsoluteTimeAddGregorianUnits func(float64, objc.ID, unsafe.Pointer) float64
+var _fnCFAbsoluteTimeAddGregorianUnits func(float64, objc.ID, CFGregorianUnits) float64
 
 // CFAbsoluteTimeAddGregorianUnits calls the CoreFoundation framework function CFAbsoluteTimeAddGregorianUnits.
-func CFAbsoluteTimeAddGregorianUnits(at float64, tz CFTimeZoneRef, units unsafe.Pointer) float64 {
+func CFAbsoluteTimeAddGregorianUnits(at float64, tz CFTimeZoneRef, units CFGregorianUnits) float64 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFAbsoluteTimeAddGregorianUnits == nil {
 		ebipurego.RegisterLibFunc(&_fnCFAbsoluteTimeAddGregorianUnits, _lib, "CFAbsoluteTimeAddGregorianUnits")
@@ -58,10 +58,10 @@ func CFAbsoluteTimeGetDayOfYear(at float64, tz CFTimeZoneRef) int {
 	return int(_fnCFAbsoluteTimeGetDayOfYear(at, objref.IDOf(tz.Object)))
 }
 
-var _fnCFAbsoluteTimeGetDifferenceAsGregorianUnits func(float64, float64, objc.ID, int) unsafe.Pointer
+var _fnCFAbsoluteTimeGetDifferenceAsGregorianUnits func(float64, float64, objc.ID, int) CFGregorianUnits
 
 // CFAbsoluteTimeGetDifferenceAsGregorianUnits calls the CoreFoundation framework function CFAbsoluteTimeGetDifferenceAsGregorianUnits.
-func CFAbsoluteTimeGetDifferenceAsGregorianUnits(at1 float64, at2 float64, tz CFTimeZoneRef, unitFlags int) unsafe.Pointer {
+func CFAbsoluteTimeGetDifferenceAsGregorianUnits(at1 float64, at2 float64, tz CFTimeZoneRef, unitFlags int) CFGregorianUnits {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFAbsoluteTimeGetDifferenceAsGregorianUnits == nil {
 		ebipurego.RegisterLibFunc(&_fnCFAbsoluteTimeGetDifferenceAsGregorianUnits, _lib, "CFAbsoluteTimeGetDifferenceAsGregorianUnits")
@@ -69,10 +69,10 @@ func CFAbsoluteTimeGetDifferenceAsGregorianUnits(at1 float64, at2 float64, tz CF
 	return _fnCFAbsoluteTimeGetDifferenceAsGregorianUnits(at1, at2, objref.IDOf(tz.Object), unitFlags)
 }
 
-var _fnCFAbsoluteTimeGetGregorianDate func(float64, objc.ID) unsafe.Pointer
+var _fnCFAbsoluteTimeGetGregorianDate func(float64, objc.ID) CFGregorianDate
 
 // CFAbsoluteTimeGetGregorianDate calls the CoreFoundation framework function CFAbsoluteTimeGetGregorianDate.
-func CFAbsoluteTimeGetGregorianDate(at float64, tz CFTimeZoneRef) unsafe.Pointer {
+func CFAbsoluteTimeGetGregorianDate(at float64, tz CFTimeZoneRef) CFGregorianDate {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFAbsoluteTimeGetGregorianDate == nil {
 		ebipurego.RegisterLibFunc(&_fnCFAbsoluteTimeGetGregorianDate, _lib, "CFAbsoluteTimeGetGregorianDate")
@@ -133,7 +133,7 @@ func CFAllocatorCreate(allocator CFAllocatorRef, context_ unsafe.Pointer) CFAllo
 		ebipurego.RegisterLibFunc(&_fnCFAllocatorCreate, _lib, "CFAllocatorCreate")
 	}
 	_ret := _fnCFAllocatorCreate(objref.IDOf(allocator.Object), context_)
-	return CFAllocatorRef{obj.Wrap(_ret)}
+	return CFAllocatorRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFAllocatorDeallocate func(objc.ID, unsafe.Pointer)
@@ -167,7 +167,7 @@ func CFAllocatorGetDefault() CFAllocatorRef {
 		ebipurego.RegisterLibFunc(&_fnCFAllocatorGetDefault, _lib, "CFAllocatorGetDefault")
 	}
 	_ret := _fnCFAllocatorGetDefault()
-	return CFAllocatorRef{obj.Wrap(_ret)}
+	return CFAllocatorRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFAllocatorGetPreferredSizeForSize func(objc.ID, int, int) int
@@ -236,10 +236,10 @@ func CFAllocatorSetDefault(allocator CFAllocatorRef) {
 	_fnCFAllocatorSetDefault(objref.IDOf(allocator.Object))
 }
 
-var _fnCFArrayAppendArray func(objc.ID, objc.ID, unsafe.Pointer)
+var _fnCFArrayAppendArray func(objc.ID, objc.ID, CFRange)
 
 // CFArrayAppendArray calls the CoreFoundation framework function CFArrayAppendArray.
-func CFArrayAppendArray(theArray CFMutableArrayRef, otherArray CFArrayRef, otherRange unsafe.Pointer) {
+func CFArrayAppendArray(theArray CFMutableArrayRef, otherArray CFArrayRef, otherRange CFRange) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFArrayAppendArray == nil {
 		ebipurego.RegisterLibFunc(&_fnCFArrayAppendArray, _lib, "CFArrayAppendArray")
@@ -258,10 +258,10 @@ func CFArrayAppendValue(theArray CFMutableArrayRef, value unsafe.Pointer) {
 	_fnCFArrayAppendValue(objref.IDOf(theArray.Object), value)
 }
 
-var _fnCFArrayApplyFunction func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCFArrayApplyFunction func(objc.ID, CFRange, unsafe.Pointer, unsafe.Pointer)
 
 // CFArrayApplyFunction calls the CoreFoundation framework function CFArrayApplyFunction.
-func CFArrayApplyFunction(theArray CFArrayRef, range_ unsafe.Pointer, applier unsafe.Pointer, context_ unsafe.Pointer) {
+func CFArrayApplyFunction(theArray CFArrayRef, range_ CFRange, applier unsafe.Pointer, context_ unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFArrayApplyFunction == nil {
 		ebipurego.RegisterLibFunc(&_fnCFArrayApplyFunction, _lib, "CFArrayApplyFunction")
@@ -269,10 +269,10 @@ func CFArrayApplyFunction(theArray CFArrayRef, range_ unsafe.Pointer, applier un
 	_fnCFArrayApplyFunction(objref.IDOf(theArray.Object), range_, applier, context_)
 }
 
-var _fnCFArrayBSearchValues func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnCFArrayBSearchValues func(objc.ID, CFRange, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // CFArrayBSearchValues calls the CoreFoundation framework function CFArrayBSearchValues.
-func CFArrayBSearchValues(theArray CFArrayRef, range_ unsafe.Pointer, value unsafe.Pointer, comparator unsafe.Pointer, context_ unsafe.Pointer) int {
+func CFArrayBSearchValues(theArray CFArrayRef, range_ CFRange, value unsafe.Pointer, comparator unsafe.Pointer, context_ unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFArrayBSearchValues == nil {
 		ebipurego.RegisterLibFunc(&_fnCFArrayBSearchValues, _lib, "CFArrayBSearchValues")
@@ -280,10 +280,10 @@ func CFArrayBSearchValues(theArray CFArrayRef, range_ unsafe.Pointer, value unsa
 	return _fnCFArrayBSearchValues(objref.IDOf(theArray.Object), range_, value, comparator, context_)
 }
 
-var _fnCFArrayContainsValue func(objc.ID, unsafe.Pointer, unsafe.Pointer) uint8
+var _fnCFArrayContainsValue func(objc.ID, CFRange, unsafe.Pointer) uint8
 
 // CFArrayContainsValue calls the CoreFoundation framework function CFArrayContainsValue.
-func CFArrayContainsValue(theArray CFArrayRef, range_ unsafe.Pointer, value unsafe.Pointer) uint8 {
+func CFArrayContainsValue(theArray CFArrayRef, range_ CFRange, value unsafe.Pointer) uint8 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFArrayContainsValue == nil {
 		ebipurego.RegisterLibFunc(&_fnCFArrayContainsValue, _lib, "CFArrayContainsValue")
@@ -300,7 +300,7 @@ func CFArrayCreate(allocator CFAllocatorRef, values unsafe.Pointer, numValues in
 		ebipurego.RegisterLibFunc(&_fnCFArrayCreate, _lib, "CFArrayCreate")
 	}
 	_ret := _fnCFArrayCreate(objref.IDOf(allocator.Object), values, numValues, callBacks)
-	return CFArrayRef{obj.Adopt(_ret)}
+	return CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFArrayCreateCopy func(objc.ID, objc.ID) objc.ID
@@ -312,7 +312,7 @@ func CFArrayCreateCopy(allocator CFAllocatorRef, theArray CFArrayRef) CFArrayRef
 		ebipurego.RegisterLibFunc(&_fnCFArrayCreateCopy, _lib, "CFArrayCreateCopy")
 	}
 	_ret := _fnCFArrayCreateCopy(objref.IDOf(allocator.Object), objref.IDOf(theArray.Object))
-	return CFArrayRef{obj.Adopt(_ret)}
+	return CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFArrayCreateMutable func(objc.ID, int, unsafe.Pointer) objc.ID
@@ -324,7 +324,7 @@ func CFArrayCreateMutable(allocator CFAllocatorRef, capacity int, callBacks unsa
 		ebipurego.RegisterLibFunc(&_fnCFArrayCreateMutable, _lib, "CFArrayCreateMutable")
 	}
 	_ret := _fnCFArrayCreateMutable(objref.IDOf(allocator.Object), capacity, callBacks)
-	return CFMutableArrayRef{obj.Adopt(_ret)}
+	return CFMutableArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFArrayCreateMutableCopy func(objc.ID, int, objc.ID) objc.ID
@@ -336,7 +336,7 @@ func CFArrayCreateMutableCopy(allocator CFAllocatorRef, capacity int, theArray C
 		ebipurego.RegisterLibFunc(&_fnCFArrayCreateMutableCopy, _lib, "CFArrayCreateMutableCopy")
 	}
 	_ret := _fnCFArrayCreateMutableCopy(objref.IDOf(allocator.Object), capacity, objref.IDOf(theArray.Object))
-	return CFMutableArrayRef{obj.Adopt(_ret)}
+	return CFMutableArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFArrayExchangeValuesAtIndices func(objc.ID, int, int)
@@ -361,10 +361,10 @@ func CFArrayGetCount(theArray CFArrayRef) int {
 	return _fnCFArrayGetCount(objref.IDOf(theArray.Object))
 }
 
-var _fnCFArrayGetCountOfValue func(objc.ID, unsafe.Pointer, unsafe.Pointer) int
+var _fnCFArrayGetCountOfValue func(objc.ID, CFRange, unsafe.Pointer) int
 
 // CFArrayGetCountOfValue calls the CoreFoundation framework function CFArrayGetCountOfValue.
-func CFArrayGetCountOfValue(theArray CFArrayRef, range_ unsafe.Pointer, value unsafe.Pointer) int {
+func CFArrayGetCountOfValue(theArray CFArrayRef, range_ CFRange, value unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFArrayGetCountOfValue == nil {
 		ebipurego.RegisterLibFunc(&_fnCFArrayGetCountOfValue, _lib, "CFArrayGetCountOfValue")
@@ -372,10 +372,10 @@ func CFArrayGetCountOfValue(theArray CFArrayRef, range_ unsafe.Pointer, value un
 	return _fnCFArrayGetCountOfValue(objref.IDOf(theArray.Object), range_, value)
 }
 
-var _fnCFArrayGetFirstIndexOfValue func(objc.ID, unsafe.Pointer, unsafe.Pointer) int
+var _fnCFArrayGetFirstIndexOfValue func(objc.ID, CFRange, unsafe.Pointer) int
 
 // CFArrayGetFirstIndexOfValue calls the CoreFoundation framework function CFArrayGetFirstIndexOfValue.
-func CFArrayGetFirstIndexOfValue(theArray CFArrayRef, range_ unsafe.Pointer, value unsafe.Pointer) int {
+func CFArrayGetFirstIndexOfValue(theArray CFArrayRef, range_ CFRange, value unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFArrayGetFirstIndexOfValue == nil {
 		ebipurego.RegisterLibFunc(&_fnCFArrayGetFirstIndexOfValue, _lib, "CFArrayGetFirstIndexOfValue")
@@ -383,10 +383,10 @@ func CFArrayGetFirstIndexOfValue(theArray CFArrayRef, range_ unsafe.Pointer, val
 	return _fnCFArrayGetFirstIndexOfValue(objref.IDOf(theArray.Object), range_, value)
 }
 
-var _fnCFArrayGetLastIndexOfValue func(objc.ID, unsafe.Pointer, unsafe.Pointer) int
+var _fnCFArrayGetLastIndexOfValue func(objc.ID, CFRange, unsafe.Pointer) int
 
 // CFArrayGetLastIndexOfValue calls the CoreFoundation framework function CFArrayGetLastIndexOfValue.
-func CFArrayGetLastIndexOfValue(theArray CFArrayRef, range_ unsafe.Pointer, value unsafe.Pointer) int {
+func CFArrayGetLastIndexOfValue(theArray CFArrayRef, range_ CFRange, value unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFArrayGetLastIndexOfValue == nil {
 		ebipurego.RegisterLibFunc(&_fnCFArrayGetLastIndexOfValue, _lib, "CFArrayGetLastIndexOfValue")
@@ -416,10 +416,10 @@ func CFArrayGetValueAtIndex(theArray CFArrayRef, idx int) unsafe.Pointer {
 	return _fnCFArrayGetValueAtIndex(objref.IDOf(theArray.Object), idx)
 }
 
-var _fnCFArrayGetValues func(objc.ID, unsafe.Pointer, unsafe.Pointer)
+var _fnCFArrayGetValues func(objc.ID, CFRange, unsafe.Pointer)
 
 // CFArrayGetValues calls the CoreFoundation framework function CFArrayGetValues.
-func CFArrayGetValues(theArray CFArrayRef, range_ unsafe.Pointer, values unsafe.Pointer) {
+func CFArrayGetValues(theArray CFArrayRef, range_ CFRange, values unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFArrayGetValues == nil {
 		ebipurego.RegisterLibFunc(&_fnCFArrayGetValues, _lib, "CFArrayGetValues")
@@ -460,10 +460,10 @@ func CFArrayRemoveValueAtIndex(theArray CFMutableArrayRef, idx int) {
 	_fnCFArrayRemoveValueAtIndex(objref.IDOf(theArray.Object), idx)
 }
 
-var _fnCFArrayReplaceValues func(objc.ID, unsafe.Pointer, unsafe.Pointer, int)
+var _fnCFArrayReplaceValues func(objc.ID, CFRange, unsafe.Pointer, int)
 
 // CFArrayReplaceValues calls the CoreFoundation framework function CFArrayReplaceValues.
-func CFArrayReplaceValues(theArray CFMutableArrayRef, range_ unsafe.Pointer, newValues unsafe.Pointer, newCount int) {
+func CFArrayReplaceValues(theArray CFMutableArrayRef, range_ CFRange, newValues unsafe.Pointer, newCount int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFArrayReplaceValues == nil {
 		ebipurego.RegisterLibFunc(&_fnCFArrayReplaceValues, _lib, "CFArrayReplaceValues")
@@ -482,10 +482,10 @@ func CFArraySetValueAtIndex(theArray CFMutableArrayRef, idx int, value unsafe.Po
 	_fnCFArraySetValueAtIndex(objref.IDOf(theArray.Object), idx, value)
 }
 
-var _fnCFArraySortValues func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCFArraySortValues func(objc.ID, CFRange, unsafe.Pointer, unsafe.Pointer)
 
 // CFArraySortValues calls the CoreFoundation framework function CFArraySortValues.
-func CFArraySortValues(theArray CFMutableArrayRef, range_ unsafe.Pointer, comparator unsafe.Pointer, context_ unsafe.Pointer) {
+func CFArraySortValues(theArray CFMutableArrayRef, range_ CFRange, comparator unsafe.Pointer, context_ unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFArraySortValues == nil {
 		ebipurego.RegisterLibFunc(&_fnCFArraySortValues, _lib, "CFArraySortValues")
@@ -513,7 +513,7 @@ func CFAttributedStringCreate(alloc CFAllocatorRef, str CFStringRef, attributes 
 		ebipurego.RegisterLibFunc(&_fnCFAttributedStringCreate, _lib, "CFAttributedStringCreate")
 	}
 	_ret := _fnCFAttributedStringCreate(objref.IDOf(alloc.Object), objref.IDOf(str.Object), objref.IDOf(attributes.Object))
-	return CFAttributedStringRef{obj.Adopt(_ret)}
+	return CFAttributedStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFAttributedStringCreateCopy func(objc.ID, objc.ID) objc.ID
@@ -525,7 +525,7 @@ func CFAttributedStringCreateCopy(alloc CFAllocatorRef, aStr CFAttributedStringR
 		ebipurego.RegisterLibFunc(&_fnCFAttributedStringCreateCopy, _lib, "CFAttributedStringCreateCopy")
 	}
 	_ret := _fnCFAttributedStringCreateCopy(objref.IDOf(alloc.Object), objref.IDOf(aStr.Object))
-	return CFAttributedStringRef{obj.Adopt(_ret)}
+	return CFAttributedStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFAttributedStringCreateMutable func(objc.ID, int) objc.ID
@@ -537,7 +537,7 @@ func CFAttributedStringCreateMutable(alloc CFAllocatorRef, maxLength int) CFMuta
 		ebipurego.RegisterLibFunc(&_fnCFAttributedStringCreateMutable, _lib, "CFAttributedStringCreateMutable")
 	}
 	_ret := _fnCFAttributedStringCreateMutable(objref.IDOf(alloc.Object), maxLength)
-	return CFMutableAttributedStringRef{obj.Adopt(_ret)}
+	return CFMutableAttributedStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFAttributedStringCreateMutableCopy func(objc.ID, int, objc.ID) objc.ID
@@ -549,19 +549,19 @@ func CFAttributedStringCreateMutableCopy(alloc CFAllocatorRef, maxLength int, aS
 		ebipurego.RegisterLibFunc(&_fnCFAttributedStringCreateMutableCopy, _lib, "CFAttributedStringCreateMutableCopy")
 	}
 	_ret := _fnCFAttributedStringCreateMutableCopy(objref.IDOf(alloc.Object), maxLength, objref.IDOf(aStr.Object))
-	return CFMutableAttributedStringRef{obj.Adopt(_ret)}
+	return CFMutableAttributedStringRef{Object: obj.Adopt(_ret)}
 }
 
-var _fnCFAttributedStringCreateWithSubstring func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
+var _fnCFAttributedStringCreateWithSubstring func(objc.ID, objc.ID, CFRange) objc.ID
 
 // CFAttributedStringCreateWithSubstring calls the CoreFoundation framework function CFAttributedStringCreateWithSubstring.
-func CFAttributedStringCreateWithSubstring(alloc CFAllocatorRef, aStr CFAttributedStringRef, range_ unsafe.Pointer) CFAttributedStringRef {
+func CFAttributedStringCreateWithSubstring(alloc CFAllocatorRef, aStr CFAttributedStringRef, range_ CFRange) CFAttributedStringRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFAttributedStringCreateWithSubstring == nil {
 		ebipurego.RegisterLibFunc(&_fnCFAttributedStringCreateWithSubstring, _lib, "CFAttributedStringCreateWithSubstring")
 	}
 	_ret := _fnCFAttributedStringCreateWithSubstring(objref.IDOf(alloc.Object), objref.IDOf(aStr.Object), range_)
-	return CFAttributedStringRef{obj.Adopt(_ret)}
+	return CFAttributedStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFAttributedStringEndEditing func(objc.ID)
@@ -588,10 +588,10 @@ func CFAttributedStringGetAttribute(aStr CFAttributedStringRef, loc int, attrNam
 	return obj.Wrap(_ret), _out0
 }
 
-var _fnCFAttributedStringGetAttributeAndLongestEffectiveRange func(objc.ID, int, objc.ID, unsafe.Pointer, unsafe.Pointer) objc.ID
+var _fnCFAttributedStringGetAttributeAndLongestEffectiveRange func(objc.ID, int, objc.ID, CFRange, unsafe.Pointer) objc.ID
 
 // CFAttributedStringGetAttributeAndLongestEffectiveRange calls the CoreFoundation framework function CFAttributedStringGetAttributeAndLongestEffectiveRange.
-func CFAttributedStringGetAttributeAndLongestEffectiveRange(aStr CFAttributedStringRef, loc int, attrName CFStringRef, inRange unsafe.Pointer) (result obj.Object, longestEffectiveRange CFRange) {
+func CFAttributedStringGetAttributeAndLongestEffectiveRange(aStr CFAttributedStringRef, loc int, attrName CFStringRef, inRange CFRange) (result obj.Object, longestEffectiveRange CFRange) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFAttributedStringGetAttributeAndLongestEffectiveRange == nil {
 		ebipurego.RegisterLibFunc(&_fnCFAttributedStringGetAttributeAndLongestEffectiveRange, _lib, "CFAttributedStringGetAttributeAndLongestEffectiveRange")
@@ -611,26 +611,26 @@ func CFAttributedStringGetAttributes(aStr CFAttributedStringRef, loc int) (resul
 	}
 	var _out0 CFRange
 	_ret := _fnCFAttributedStringGetAttributes(objref.IDOf(aStr.Object), loc, unsafe.Pointer(&_out0))
-	return CFDictionaryRef{obj.Wrap(_ret)}, _out0
+	return CFDictionaryRef{Object: obj.Wrap(_ret)}, _out0
 }
 
-var _fnCFAttributedStringGetAttributesAndLongestEffectiveRange func(objc.ID, int, unsafe.Pointer, unsafe.Pointer) objc.ID
+var _fnCFAttributedStringGetAttributesAndLongestEffectiveRange func(objc.ID, int, CFRange, unsafe.Pointer) objc.ID
 
 // CFAttributedStringGetAttributesAndLongestEffectiveRange calls the CoreFoundation framework function CFAttributedStringGetAttributesAndLongestEffectiveRange.
-func CFAttributedStringGetAttributesAndLongestEffectiveRange(aStr CFAttributedStringRef, loc int, inRange unsafe.Pointer) (result CFDictionaryRef, longestEffectiveRange CFRange) {
+func CFAttributedStringGetAttributesAndLongestEffectiveRange(aStr CFAttributedStringRef, loc int, inRange CFRange) (result CFDictionaryRef, longestEffectiveRange CFRange) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFAttributedStringGetAttributesAndLongestEffectiveRange == nil {
 		ebipurego.RegisterLibFunc(&_fnCFAttributedStringGetAttributesAndLongestEffectiveRange, _lib, "CFAttributedStringGetAttributesAndLongestEffectiveRange")
 	}
 	var _out0 CFRange
 	_ret := _fnCFAttributedStringGetAttributesAndLongestEffectiveRange(objref.IDOf(aStr.Object), loc, inRange, unsafe.Pointer(&_out0))
-	return CFDictionaryRef{obj.Wrap(_ret)}, _out0
+	return CFDictionaryRef{Object: obj.Wrap(_ret)}, _out0
 }
 
-var _fnCFAttributedStringGetBidiLevelsAndResolvedDirections func(objc.ID, unsafe.Pointer, int8, unsafe.Pointer, unsafe.Pointer) bool
+var _fnCFAttributedStringGetBidiLevelsAndResolvedDirections func(objc.ID, CFRange, int8, unsafe.Pointer, unsafe.Pointer) bool
 
 // CFAttributedStringGetBidiLevelsAndResolvedDirections calls the CoreFoundation framework function CFAttributedStringGetBidiLevelsAndResolvedDirections.
-func CFAttributedStringGetBidiLevelsAndResolvedDirections(attributedString CFAttributedStringRef, range_ unsafe.Pointer, baseDirection int8) (ok bool, bidiLevels uint8, baseDirections uint8) {
+func CFAttributedStringGetBidiLevelsAndResolvedDirections(attributedString CFAttributedStringRef, range_ CFRange, baseDirection int8) (ok bool, bidiLevels uint8, baseDirections uint8) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFAttributedStringGetBidiLevelsAndResolvedDirections == nil {
 		ebipurego.RegisterLibFunc(&_fnCFAttributedStringGetBidiLevelsAndResolvedDirections, _lib, "CFAttributedStringGetBidiLevelsAndResolvedDirections")
@@ -661,13 +661,13 @@ func CFAttributedStringGetMutableString(aStr CFMutableAttributedStringRef) CFMut
 		ebipurego.RegisterLibFunc(&_fnCFAttributedStringGetMutableString, _lib, "CFAttributedStringGetMutableString")
 	}
 	_ret := _fnCFAttributedStringGetMutableString(objref.IDOf(aStr.Object))
-	return CFMutableStringRef{obj.Wrap(_ret)}
+	return CFMutableStringRef{Object: obj.Wrap(_ret)}
 }
 
-var _fnCFAttributedStringGetStatisticalWritingDirections func(objc.ID, unsafe.Pointer, int8, unsafe.Pointer, unsafe.Pointer) bool
+var _fnCFAttributedStringGetStatisticalWritingDirections func(objc.ID, CFRange, int8, unsafe.Pointer, unsafe.Pointer) bool
 
 // CFAttributedStringGetStatisticalWritingDirections calls the CoreFoundation framework function CFAttributedStringGetStatisticalWritingDirections.
-func CFAttributedStringGetStatisticalWritingDirections(attributedString CFAttributedStringRef, range_ unsafe.Pointer, baseDirection int8) (ok bool, bidiLevels uint8, baseDirections uint8) {
+func CFAttributedStringGetStatisticalWritingDirections(attributedString CFAttributedStringRef, range_ CFRange, baseDirection int8) (ok bool, bidiLevels uint8, baseDirections uint8) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFAttributedStringGetStatisticalWritingDirections == nil {
 		ebipurego.RegisterLibFunc(&_fnCFAttributedStringGetStatisticalWritingDirections, _lib, "CFAttributedStringGetStatisticalWritingDirections")
@@ -687,7 +687,7 @@ func CFAttributedStringGetString(aStr CFAttributedStringRef) CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnCFAttributedStringGetString, _lib, "CFAttributedStringGetString")
 	}
 	_ret := _fnCFAttributedStringGetString(objref.IDOf(aStr.Object))
-	return CFStringRef{obj.Wrap(_ret)}
+	return CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFAttributedStringGetTypeID func() int
@@ -701,10 +701,10 @@ func CFAttributedStringGetTypeID() int {
 	return _fnCFAttributedStringGetTypeID()
 }
 
-var _fnCFAttributedStringRemoveAttribute func(objc.ID, unsafe.Pointer, objc.ID)
+var _fnCFAttributedStringRemoveAttribute func(objc.ID, CFRange, objc.ID)
 
 // CFAttributedStringRemoveAttribute calls the CoreFoundation framework function CFAttributedStringRemoveAttribute.
-func CFAttributedStringRemoveAttribute(aStr CFMutableAttributedStringRef, range_ unsafe.Pointer, attrName CFStringRef) {
+func CFAttributedStringRemoveAttribute(aStr CFMutableAttributedStringRef, range_ CFRange, attrName CFStringRef) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFAttributedStringRemoveAttribute == nil {
 		ebipurego.RegisterLibFunc(&_fnCFAttributedStringRemoveAttribute, _lib, "CFAttributedStringRemoveAttribute")
@@ -712,10 +712,10 @@ func CFAttributedStringRemoveAttribute(aStr CFMutableAttributedStringRef, range_
 	_fnCFAttributedStringRemoveAttribute(objref.IDOf(aStr.Object), range_, objref.IDOf(attrName.Object))
 }
 
-var _fnCFAttributedStringReplaceAttributedString func(objc.ID, unsafe.Pointer, objc.ID)
+var _fnCFAttributedStringReplaceAttributedString func(objc.ID, CFRange, objc.ID)
 
 // CFAttributedStringReplaceAttributedString calls the CoreFoundation framework function CFAttributedStringReplaceAttributedString.
-func CFAttributedStringReplaceAttributedString(aStr CFMutableAttributedStringRef, range_ unsafe.Pointer, replacement CFAttributedStringRef) {
+func CFAttributedStringReplaceAttributedString(aStr CFMutableAttributedStringRef, range_ CFRange, replacement CFAttributedStringRef) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFAttributedStringReplaceAttributedString == nil {
 		ebipurego.RegisterLibFunc(&_fnCFAttributedStringReplaceAttributedString, _lib, "CFAttributedStringReplaceAttributedString")
@@ -723,10 +723,10 @@ func CFAttributedStringReplaceAttributedString(aStr CFMutableAttributedStringRef
 	_fnCFAttributedStringReplaceAttributedString(objref.IDOf(aStr.Object), range_, objref.IDOf(replacement.Object))
 }
 
-var _fnCFAttributedStringReplaceString func(objc.ID, unsafe.Pointer, objc.ID)
+var _fnCFAttributedStringReplaceString func(objc.ID, CFRange, objc.ID)
 
 // CFAttributedStringReplaceString calls the CoreFoundation framework function CFAttributedStringReplaceString.
-func CFAttributedStringReplaceString(aStr CFMutableAttributedStringRef, range_ unsafe.Pointer, replacement CFStringRef) {
+func CFAttributedStringReplaceString(aStr CFMutableAttributedStringRef, range_ CFRange, replacement CFStringRef) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFAttributedStringReplaceString == nil {
 		ebipurego.RegisterLibFunc(&_fnCFAttributedStringReplaceString, _lib, "CFAttributedStringReplaceString")
@@ -734,10 +734,10 @@ func CFAttributedStringReplaceString(aStr CFMutableAttributedStringRef, range_ u
 	_fnCFAttributedStringReplaceString(objref.IDOf(aStr.Object), range_, objref.IDOf(replacement.Object))
 }
 
-var _fnCFAttributedStringSetAttribute func(objc.ID, unsafe.Pointer, objc.ID, objc.ID)
+var _fnCFAttributedStringSetAttribute func(objc.ID, CFRange, objc.ID, objc.ID)
 
 // CFAttributedStringSetAttribute calls the CoreFoundation framework function CFAttributedStringSetAttribute.
-func CFAttributedStringSetAttribute(aStr CFMutableAttributedStringRef, range_ unsafe.Pointer, attrName CFStringRef, value obj.Object) {
+func CFAttributedStringSetAttribute(aStr CFMutableAttributedStringRef, range_ CFRange, attrName CFStringRef, value obj.Object) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFAttributedStringSetAttribute == nil {
 		ebipurego.RegisterLibFunc(&_fnCFAttributedStringSetAttribute, _lib, "CFAttributedStringSetAttribute")
@@ -745,10 +745,10 @@ func CFAttributedStringSetAttribute(aStr CFMutableAttributedStringRef, range_ un
 	_fnCFAttributedStringSetAttribute(objref.IDOf(aStr.Object), range_, objref.IDOf(attrName.Object), objref.IDOf(value))
 }
 
-var _fnCFAttributedStringSetAttributes func(objc.ID, unsafe.Pointer, objc.ID, uint8)
+var _fnCFAttributedStringSetAttributes func(objc.ID, CFRange, objc.ID, uint8)
 
 // CFAttributedStringSetAttributes calls the CoreFoundation framework function CFAttributedStringSetAttributes.
-func CFAttributedStringSetAttributes(aStr CFMutableAttributedStringRef, range_ unsafe.Pointer, replacement CFDictionaryRef, clearOtherAttributes uint8) {
+func CFAttributedStringSetAttributes(aStr CFMutableAttributedStringRef, range_ CFRange, replacement CFDictionaryRef, clearOtherAttributes uint8) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFAttributedStringSetAttributes == nil {
 		ebipurego.RegisterLibFunc(&_fnCFAttributedStringSetAttributes, _lib, "CFAttributedStringSetAttributes")
@@ -810,7 +810,7 @@ func CFBagCreate(allocator CFAllocatorRef, values unsafe.Pointer, numValues int,
 		ebipurego.RegisterLibFunc(&_fnCFBagCreate, _lib, "CFBagCreate")
 	}
 	_ret := _fnCFBagCreate(objref.IDOf(allocator.Object), values, numValues, callBacks)
-	return CFBagRef{obj.Adopt(_ret)}
+	return CFBagRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFBagCreateCopy func(objc.ID, objc.ID) objc.ID
@@ -822,7 +822,7 @@ func CFBagCreateCopy(allocator CFAllocatorRef, theBag CFBagRef) CFBagRef {
 		ebipurego.RegisterLibFunc(&_fnCFBagCreateCopy, _lib, "CFBagCreateCopy")
 	}
 	_ret := _fnCFBagCreateCopy(objref.IDOf(allocator.Object), objref.IDOf(theBag.Object))
-	return CFBagRef{obj.Adopt(_ret)}
+	return CFBagRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFBagCreateMutable func(objc.ID, int, unsafe.Pointer) objc.ID
@@ -834,7 +834,7 @@ func CFBagCreateMutable(allocator CFAllocatorRef, capacity int, callBacks unsafe
 		ebipurego.RegisterLibFunc(&_fnCFBagCreateMutable, _lib, "CFBagCreateMutable")
 	}
 	_ret := _fnCFBagCreateMutable(objref.IDOf(allocator.Object), capacity, callBacks)
-	return CFMutableBagRef{obj.Adopt(_ret)}
+	return CFMutableBagRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFBagCreateMutableCopy func(objc.ID, int, objc.ID) objc.ID
@@ -846,7 +846,7 @@ func CFBagCreateMutableCopy(allocator CFAllocatorRef, capacity int, theBag CFBag
 		ebipurego.RegisterLibFunc(&_fnCFBagCreateMutableCopy, _lib, "CFBagCreateMutableCopy")
 	}
 	_ret := _fnCFBagCreateMutableCopy(objref.IDOf(allocator.Object), capacity, objref.IDOf(theBag.Object))
-	return CFMutableBagRef{obj.Adopt(_ret)}
+	return CFMutableBagRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFBagGetCount func(objc.ID) int
@@ -1001,7 +1001,7 @@ func CFBinaryHeapCreate(allocator CFAllocatorRef, capacity int, callBacks unsafe
 		ebipurego.RegisterLibFunc(&_fnCFBinaryHeapCreate, _lib, "CFBinaryHeapCreate")
 	}
 	_ret := _fnCFBinaryHeapCreate(objref.IDOf(allocator.Object), capacity, callBacks, compareContext)
-	return CFBinaryHeapRef{obj.Adopt(_ret)}
+	return CFBinaryHeapRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFBinaryHeapCreateCopy func(objc.ID, int, objc.ID) objc.ID
@@ -1013,7 +1013,7 @@ func CFBinaryHeapCreateCopy(allocator CFAllocatorRef, capacity int, heap CFBinar
 		ebipurego.RegisterLibFunc(&_fnCFBinaryHeapCreateCopy, _lib, "CFBinaryHeapCreateCopy")
 	}
 	_ret := _fnCFBinaryHeapCreateCopy(objref.IDOf(allocator.Object), capacity, objref.IDOf(heap.Object))
-	return CFBinaryHeapRef{obj.Adopt(_ret)}
+	return CFBinaryHeapRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFBinaryHeapGetCount func(objc.ID) int
@@ -1104,10 +1104,10 @@ func CFBinaryHeapRemoveMinimumValue(heap CFBinaryHeapRef) {
 	_fnCFBinaryHeapRemoveMinimumValue(objref.IDOf(heap.Object))
 }
 
-var _fnCFBitVectorContainsBit func(objc.ID, unsafe.Pointer, int) uint8
+var _fnCFBitVectorContainsBit func(objc.ID, CFRange, int) uint8
 
 // CFBitVectorContainsBit calls the CoreFoundation framework function CFBitVectorContainsBit.
-func CFBitVectorContainsBit(bv CFBitVectorRef, range_ unsafe.Pointer, value int) uint8 {
+func CFBitVectorContainsBit(bv CFBitVectorRef, range_ CFRange, value int) uint8 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFBitVectorContainsBit == nil {
 		ebipurego.RegisterLibFunc(&_fnCFBitVectorContainsBit, _lib, "CFBitVectorContainsBit")
@@ -1124,7 +1124,7 @@ func CFBitVectorCreate(allocator CFAllocatorRef, data unsafe.Pointer, numBits in
 		ebipurego.RegisterLibFunc(&_fnCFBitVectorCreate, _lib, "CFBitVectorCreate")
 	}
 	_ret := _fnCFBitVectorCreate(objref.IDOf(allocator.Object), data, numBits)
-	return CFBitVectorRef{obj.Adopt(_ret)}
+	return CFBitVectorRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFBitVectorCreateCopy func(objc.ID, objc.ID) objc.ID
@@ -1136,7 +1136,7 @@ func CFBitVectorCreateCopy(allocator CFAllocatorRef, bv CFBitVectorRef) CFBitVec
 		ebipurego.RegisterLibFunc(&_fnCFBitVectorCreateCopy, _lib, "CFBitVectorCreateCopy")
 	}
 	_ret := _fnCFBitVectorCreateCopy(objref.IDOf(allocator.Object), objref.IDOf(bv.Object))
-	return CFBitVectorRef{obj.Adopt(_ret)}
+	return CFBitVectorRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFBitVectorCreateMutable func(objc.ID, int) objc.ID
@@ -1148,7 +1148,7 @@ func CFBitVectorCreateMutable(allocator CFAllocatorRef, capacity int) CFMutableB
 		ebipurego.RegisterLibFunc(&_fnCFBitVectorCreateMutable, _lib, "CFBitVectorCreateMutable")
 	}
 	_ret := _fnCFBitVectorCreateMutable(objref.IDOf(allocator.Object), capacity)
-	return CFMutableBitVectorRef{obj.Adopt(_ret)}
+	return CFMutableBitVectorRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFBitVectorCreateMutableCopy func(objc.ID, int, objc.ID) objc.ID
@@ -1160,7 +1160,7 @@ func CFBitVectorCreateMutableCopy(allocator CFAllocatorRef, capacity int, bv CFB
 		ebipurego.RegisterLibFunc(&_fnCFBitVectorCreateMutableCopy, _lib, "CFBitVectorCreateMutableCopy")
 	}
 	_ret := _fnCFBitVectorCreateMutableCopy(objref.IDOf(allocator.Object), capacity, objref.IDOf(bv.Object))
-	return CFMutableBitVectorRef{obj.Adopt(_ret)}
+	return CFMutableBitVectorRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFBitVectorFlipBitAtIndex func(objc.ID, int)
@@ -1174,10 +1174,10 @@ func CFBitVectorFlipBitAtIndex(bv CFMutableBitVectorRef, idx int) {
 	_fnCFBitVectorFlipBitAtIndex(objref.IDOf(bv.Object), idx)
 }
 
-var _fnCFBitVectorFlipBits func(objc.ID, unsafe.Pointer)
+var _fnCFBitVectorFlipBits func(objc.ID, CFRange)
 
 // CFBitVectorFlipBits calls the CoreFoundation framework function CFBitVectorFlipBits.
-func CFBitVectorFlipBits(bv CFMutableBitVectorRef, range_ unsafe.Pointer) {
+func CFBitVectorFlipBits(bv CFMutableBitVectorRef, range_ CFRange) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFBitVectorFlipBits == nil {
 		ebipurego.RegisterLibFunc(&_fnCFBitVectorFlipBits, _lib, "CFBitVectorFlipBits")
@@ -1196,10 +1196,10 @@ func CFBitVectorGetBitAtIndex(bv CFBitVectorRef, idx int) int {
 	return int(_fnCFBitVectorGetBitAtIndex(objref.IDOf(bv.Object), idx))
 }
 
-var _fnCFBitVectorGetBits func(objc.ID, unsafe.Pointer, unsafe.Pointer)
+var _fnCFBitVectorGetBits func(objc.ID, CFRange, unsafe.Pointer)
 
 // CFBitVectorGetBits calls the CoreFoundation framework function CFBitVectorGetBits.
-func CFBitVectorGetBits(bv CFBitVectorRef, range_ unsafe.Pointer) (data uint8) {
+func CFBitVectorGetBits(bv CFBitVectorRef, range_ CFRange) (data uint8) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFBitVectorGetBits == nil {
 		ebipurego.RegisterLibFunc(&_fnCFBitVectorGetBits, _lib, "CFBitVectorGetBits")
@@ -1220,10 +1220,10 @@ func CFBitVectorGetCount(bv CFBitVectorRef) int {
 	return _fnCFBitVectorGetCount(objref.IDOf(bv.Object))
 }
 
-var _fnCFBitVectorGetCountOfBit func(objc.ID, unsafe.Pointer, int) int
+var _fnCFBitVectorGetCountOfBit func(objc.ID, CFRange, int) int
 
 // CFBitVectorGetCountOfBit calls the CoreFoundation framework function CFBitVectorGetCountOfBit.
-func CFBitVectorGetCountOfBit(bv CFBitVectorRef, range_ unsafe.Pointer, value int) int {
+func CFBitVectorGetCountOfBit(bv CFBitVectorRef, range_ CFRange, value int) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFBitVectorGetCountOfBit == nil {
 		ebipurego.RegisterLibFunc(&_fnCFBitVectorGetCountOfBit, _lib, "CFBitVectorGetCountOfBit")
@@ -1231,10 +1231,10 @@ func CFBitVectorGetCountOfBit(bv CFBitVectorRef, range_ unsafe.Pointer, value in
 	return _fnCFBitVectorGetCountOfBit(objref.IDOf(bv.Object), range_, value)
 }
 
-var _fnCFBitVectorGetFirstIndexOfBit func(objc.ID, unsafe.Pointer, int) int
+var _fnCFBitVectorGetFirstIndexOfBit func(objc.ID, CFRange, int) int
 
 // CFBitVectorGetFirstIndexOfBit calls the CoreFoundation framework function CFBitVectorGetFirstIndexOfBit.
-func CFBitVectorGetFirstIndexOfBit(bv CFBitVectorRef, range_ unsafe.Pointer, value int) int {
+func CFBitVectorGetFirstIndexOfBit(bv CFBitVectorRef, range_ CFRange, value int) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFBitVectorGetFirstIndexOfBit == nil {
 		ebipurego.RegisterLibFunc(&_fnCFBitVectorGetFirstIndexOfBit, _lib, "CFBitVectorGetFirstIndexOfBit")
@@ -1242,10 +1242,10 @@ func CFBitVectorGetFirstIndexOfBit(bv CFBitVectorRef, range_ unsafe.Pointer, val
 	return _fnCFBitVectorGetFirstIndexOfBit(objref.IDOf(bv.Object), range_, value)
 }
 
-var _fnCFBitVectorGetLastIndexOfBit func(objc.ID, unsafe.Pointer, int) int
+var _fnCFBitVectorGetLastIndexOfBit func(objc.ID, CFRange, int) int
 
 // CFBitVectorGetLastIndexOfBit calls the CoreFoundation framework function CFBitVectorGetLastIndexOfBit.
-func CFBitVectorGetLastIndexOfBit(bv CFBitVectorRef, range_ unsafe.Pointer, value int) int {
+func CFBitVectorGetLastIndexOfBit(bv CFBitVectorRef, range_ CFRange, value int) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFBitVectorGetLastIndexOfBit == nil {
 		ebipurego.RegisterLibFunc(&_fnCFBitVectorGetLastIndexOfBit, _lib, "CFBitVectorGetLastIndexOfBit")
@@ -1286,10 +1286,10 @@ func CFBitVectorSetBitAtIndex(bv CFMutableBitVectorRef, idx int, value int) {
 	_fnCFBitVectorSetBitAtIndex(objref.IDOf(bv.Object), idx, value)
 }
 
-var _fnCFBitVectorSetBits func(objc.ID, unsafe.Pointer, int)
+var _fnCFBitVectorSetBits func(objc.ID, CFRange, int)
 
 // CFBitVectorSetBits calls the CoreFoundation framework function CFBitVectorSetBits.
-func CFBitVectorSetBits(bv CFMutableBitVectorRef, range_ unsafe.Pointer, value int) {
+func CFBitVectorSetBits(bv CFMutableBitVectorRef, range_ CFRange, value int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFBitVectorSetBits == nil {
 		ebipurego.RegisterLibFunc(&_fnCFBitVectorSetBits, _lib, "CFBitVectorSetBits")
@@ -1350,7 +1350,7 @@ func CFBundleCopyAuxiliaryExecutableURL(bundle CFBundleRef, executableName CFStr
 		ebipurego.RegisterLibFunc(&_fnCFBundleCopyAuxiliaryExecutableURL, _lib, "CFBundleCopyAuxiliaryExecutableURL")
 	}
 	_ret := _fnCFBundleCopyAuxiliaryExecutableURL(objref.IDOf(bundle.Object), objref.IDOf(executableName.Object))
-	return CFURLRef{obj.Adopt(_ret)}
+	return CFURLRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFBundleCopyBuiltInPlugInsURL func(objc.ID) objc.ID
@@ -1362,7 +1362,7 @@ func CFBundleCopyBuiltInPlugInsURL(bundle CFBundleRef) CFURLRef {
 		ebipurego.RegisterLibFunc(&_fnCFBundleCopyBuiltInPlugInsURL, _lib, "CFBundleCopyBuiltInPlugInsURL")
 	}
 	_ret := _fnCFBundleCopyBuiltInPlugInsURL(objref.IDOf(bundle.Object))
-	return CFURLRef{obj.Adopt(_ret)}
+	return CFURLRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFBundleCopyBundleLocalizations func(objc.ID) objc.ID
@@ -1374,7 +1374,7 @@ func CFBundleCopyBundleLocalizations(bundle CFBundleRef) CFArrayRef {
 		ebipurego.RegisterLibFunc(&_fnCFBundleCopyBundleLocalizations, _lib, "CFBundleCopyBundleLocalizations")
 	}
 	_ret := _fnCFBundleCopyBundleLocalizations(objref.IDOf(bundle.Object))
-	return CFArrayRef{obj.Adopt(_ret)}
+	return CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFBundleCopyBundleURL func(objc.ID) objc.ID
@@ -1386,7 +1386,7 @@ func CFBundleCopyBundleURL(bundle CFBundleRef) CFURLRef {
 		ebipurego.RegisterLibFunc(&_fnCFBundleCopyBundleURL, _lib, "CFBundleCopyBundleURL")
 	}
 	_ret := _fnCFBundleCopyBundleURL(objref.IDOf(bundle.Object))
-	return CFURLRef{obj.Adopt(_ret)}
+	return CFURLRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFBundleCopyExecutableArchitectures func(objc.ID) objc.ID
@@ -1398,7 +1398,7 @@ func CFBundleCopyExecutableArchitectures(bundle CFBundleRef) CFArrayRef {
 		ebipurego.RegisterLibFunc(&_fnCFBundleCopyExecutableArchitectures, _lib, "CFBundleCopyExecutableArchitectures")
 	}
 	_ret := _fnCFBundleCopyExecutableArchitectures(objref.IDOf(bundle.Object))
-	return CFArrayRef{obj.Adopt(_ret)}
+	return CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFBundleCopyExecutableArchitecturesForURL func(objc.ID) objc.ID
@@ -1410,7 +1410,7 @@ func CFBundleCopyExecutableArchitecturesForURL(url CFURLRef) CFArrayRef {
 		ebipurego.RegisterLibFunc(&_fnCFBundleCopyExecutableArchitecturesForURL, _lib, "CFBundleCopyExecutableArchitecturesForURL")
 	}
 	_ret := _fnCFBundleCopyExecutableArchitecturesForURL(objref.IDOf(url.Object))
-	return CFArrayRef{obj.Adopt(_ret)}
+	return CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFBundleCopyExecutableURL func(objc.ID) objc.ID
@@ -1422,7 +1422,7 @@ func CFBundleCopyExecutableURL(bundle CFBundleRef) CFURLRef {
 		ebipurego.RegisterLibFunc(&_fnCFBundleCopyExecutableURL, _lib, "CFBundleCopyExecutableURL")
 	}
 	_ret := _fnCFBundleCopyExecutableURL(objref.IDOf(bundle.Object))
-	return CFURLRef{obj.Adopt(_ret)}
+	return CFURLRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFBundleCopyInfoDictionaryForURL func(objc.ID) objc.ID
@@ -1434,7 +1434,7 @@ func CFBundleCopyInfoDictionaryForURL(url CFURLRef) CFDictionaryRef {
 		ebipurego.RegisterLibFunc(&_fnCFBundleCopyInfoDictionaryForURL, _lib, "CFBundleCopyInfoDictionaryForURL")
 	}
 	_ret := _fnCFBundleCopyInfoDictionaryForURL(objref.IDOf(url.Object))
-	return CFDictionaryRef{obj.Adopt(_ret)}
+	return CFDictionaryRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFBundleCopyInfoDictionaryInDirectory func(objc.ID) objc.ID
@@ -1446,7 +1446,7 @@ func CFBundleCopyInfoDictionaryInDirectory(bundleURL CFURLRef) CFDictionaryRef {
 		ebipurego.RegisterLibFunc(&_fnCFBundleCopyInfoDictionaryInDirectory, _lib, "CFBundleCopyInfoDictionaryInDirectory")
 	}
 	_ret := _fnCFBundleCopyInfoDictionaryInDirectory(objref.IDOf(bundleURL.Object))
-	return CFDictionaryRef{obj.Adopt(_ret)}
+	return CFDictionaryRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFBundleCopyLocalizationsForPreferences func(objc.ID, objc.ID) objc.ID
@@ -1458,7 +1458,7 @@ func CFBundleCopyLocalizationsForPreferences(locArray CFArrayRef, prefArray CFAr
 		ebipurego.RegisterLibFunc(&_fnCFBundleCopyLocalizationsForPreferences, _lib, "CFBundleCopyLocalizationsForPreferences")
 	}
 	_ret := _fnCFBundleCopyLocalizationsForPreferences(objref.IDOf(locArray.Object), objref.IDOf(prefArray.Object))
-	return CFArrayRef{obj.Adopt(_ret)}
+	return CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFBundleCopyLocalizationsForURL func(objc.ID) objc.ID
@@ -1470,7 +1470,7 @@ func CFBundleCopyLocalizationsForURL(url CFURLRef) CFArrayRef {
 		ebipurego.RegisterLibFunc(&_fnCFBundleCopyLocalizationsForURL, _lib, "CFBundleCopyLocalizationsForURL")
 	}
 	_ret := _fnCFBundleCopyLocalizationsForURL(objref.IDOf(url.Object))
-	return CFArrayRef{obj.Adopt(_ret)}
+	return CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFBundleCopyLocalizedString func(objc.ID, objc.ID, objc.ID, objc.ID) objc.ID
@@ -1482,7 +1482,7 @@ func CFBundleCopyLocalizedString(bundle CFBundleRef, key CFStringRef, value CFSt
 		ebipurego.RegisterLibFunc(&_fnCFBundleCopyLocalizedString, _lib, "CFBundleCopyLocalizedString")
 	}
 	_ret := _fnCFBundleCopyLocalizedString(objref.IDOf(bundle.Object), objref.IDOf(key.Object), objref.IDOf(value.Object), objref.IDOf(tableName.Object))
-	return CFStringRef{obj.Adopt(_ret)}
+	return CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFBundleCopyLocalizedStringForLocalizations func(objc.ID, objc.ID, objc.ID, objc.ID, objc.ID) objc.ID
@@ -1494,7 +1494,7 @@ func CFBundleCopyLocalizedStringForLocalizations(bundle CFBundleRef, key CFStrin
 		ebipurego.RegisterLibFunc(&_fnCFBundleCopyLocalizedStringForLocalizations, _lib, "CFBundleCopyLocalizedStringForLocalizations")
 	}
 	_ret := _fnCFBundleCopyLocalizedStringForLocalizations(objref.IDOf(bundle.Object), objref.IDOf(key.Object), objref.IDOf(value.Object), objref.IDOf(tableName.Object), objref.IDOf(localizations.Object))
-	return CFStringRef{obj.Adopt(_ret)}
+	return CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFBundleCopyPreferredLocalizationsFromArray func(objc.ID) objc.ID
@@ -1506,7 +1506,7 @@ func CFBundleCopyPreferredLocalizationsFromArray(locArray CFArrayRef) CFArrayRef
 		ebipurego.RegisterLibFunc(&_fnCFBundleCopyPreferredLocalizationsFromArray, _lib, "CFBundleCopyPreferredLocalizationsFromArray")
 	}
 	_ret := _fnCFBundleCopyPreferredLocalizationsFromArray(objref.IDOf(locArray.Object))
-	return CFArrayRef{obj.Adopt(_ret)}
+	return CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFBundleCopyPrivateFrameworksURL func(objc.ID) objc.ID
@@ -1518,7 +1518,7 @@ func CFBundleCopyPrivateFrameworksURL(bundle CFBundleRef) CFURLRef {
 		ebipurego.RegisterLibFunc(&_fnCFBundleCopyPrivateFrameworksURL, _lib, "CFBundleCopyPrivateFrameworksURL")
 	}
 	_ret := _fnCFBundleCopyPrivateFrameworksURL(objref.IDOf(bundle.Object))
-	return CFURLRef{obj.Adopt(_ret)}
+	return CFURLRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFBundleCopyResourceURL func(objc.ID, objc.ID, objc.ID, objc.ID) objc.ID
@@ -1530,7 +1530,7 @@ func CFBundleCopyResourceURL(bundle CFBundleRef, resourceName CFStringRef, resou
 		ebipurego.RegisterLibFunc(&_fnCFBundleCopyResourceURL, _lib, "CFBundleCopyResourceURL")
 	}
 	_ret := _fnCFBundleCopyResourceURL(objref.IDOf(bundle.Object), objref.IDOf(resourceName.Object), objref.IDOf(resourceType.Object), objref.IDOf(subDirName.Object))
-	return CFURLRef{obj.Adopt(_ret)}
+	return CFURLRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFBundleCopyResourceURLForLocalization func(objc.ID, objc.ID, objc.ID, objc.ID, objc.ID) objc.ID
@@ -1542,7 +1542,7 @@ func CFBundleCopyResourceURLForLocalization(bundle CFBundleRef, resourceName CFS
 		ebipurego.RegisterLibFunc(&_fnCFBundleCopyResourceURLForLocalization, _lib, "CFBundleCopyResourceURLForLocalization")
 	}
 	_ret := _fnCFBundleCopyResourceURLForLocalization(objref.IDOf(bundle.Object), objref.IDOf(resourceName.Object), objref.IDOf(resourceType.Object), objref.IDOf(subDirName.Object), objref.IDOf(localizationName.Object))
-	return CFURLRef{obj.Adopt(_ret)}
+	return CFURLRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFBundleCopyResourceURLInDirectory func(objc.ID, objc.ID, objc.ID, objc.ID) objc.ID
@@ -1554,7 +1554,7 @@ func CFBundleCopyResourceURLInDirectory(bundleURL CFURLRef, resourceName CFStrin
 		ebipurego.RegisterLibFunc(&_fnCFBundleCopyResourceURLInDirectory, _lib, "CFBundleCopyResourceURLInDirectory")
 	}
 	_ret := _fnCFBundleCopyResourceURLInDirectory(objref.IDOf(bundleURL.Object), objref.IDOf(resourceName.Object), objref.IDOf(resourceType.Object), objref.IDOf(subDirName.Object))
-	return CFURLRef{obj.Adopt(_ret)}
+	return CFURLRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFBundleCopyResourceURLsOfType func(objc.ID, objc.ID, objc.ID) objc.ID
@@ -1566,7 +1566,7 @@ func CFBundleCopyResourceURLsOfType(bundle CFBundleRef, resourceType CFStringRef
 		ebipurego.RegisterLibFunc(&_fnCFBundleCopyResourceURLsOfType, _lib, "CFBundleCopyResourceURLsOfType")
 	}
 	_ret := _fnCFBundleCopyResourceURLsOfType(objref.IDOf(bundle.Object), objref.IDOf(resourceType.Object), objref.IDOf(subDirName.Object))
-	return CFArrayRef{obj.Adopt(_ret)}
+	return CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFBundleCopyResourceURLsOfTypeForLocalization func(objc.ID, objc.ID, objc.ID, objc.ID) objc.ID
@@ -1578,7 +1578,7 @@ func CFBundleCopyResourceURLsOfTypeForLocalization(bundle CFBundleRef, resourceT
 		ebipurego.RegisterLibFunc(&_fnCFBundleCopyResourceURLsOfTypeForLocalization, _lib, "CFBundleCopyResourceURLsOfTypeForLocalization")
 	}
 	_ret := _fnCFBundleCopyResourceURLsOfTypeForLocalization(objref.IDOf(bundle.Object), objref.IDOf(resourceType.Object), objref.IDOf(subDirName.Object), objref.IDOf(localizationName.Object))
-	return CFArrayRef{obj.Adopt(_ret)}
+	return CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFBundleCopyResourceURLsOfTypeInDirectory func(objc.ID, objc.ID, objc.ID) objc.ID
@@ -1590,7 +1590,7 @@ func CFBundleCopyResourceURLsOfTypeInDirectory(bundleURL CFURLRef, resourceType 
 		ebipurego.RegisterLibFunc(&_fnCFBundleCopyResourceURLsOfTypeInDirectory, _lib, "CFBundleCopyResourceURLsOfTypeInDirectory")
 	}
 	_ret := _fnCFBundleCopyResourceURLsOfTypeInDirectory(objref.IDOf(bundleURL.Object), objref.IDOf(resourceType.Object), objref.IDOf(subDirName.Object))
-	return CFArrayRef{obj.Adopt(_ret)}
+	return CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFBundleCopyResourcesDirectoryURL func(objc.ID) objc.ID
@@ -1602,7 +1602,7 @@ func CFBundleCopyResourcesDirectoryURL(bundle CFBundleRef) CFURLRef {
 		ebipurego.RegisterLibFunc(&_fnCFBundleCopyResourcesDirectoryURL, _lib, "CFBundleCopyResourcesDirectoryURL")
 	}
 	_ret := _fnCFBundleCopyResourcesDirectoryURL(objref.IDOf(bundle.Object))
-	return CFURLRef{obj.Adopt(_ret)}
+	return CFURLRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFBundleCopySharedFrameworksURL func(objc.ID) objc.ID
@@ -1614,7 +1614,7 @@ func CFBundleCopySharedFrameworksURL(bundle CFBundleRef) CFURLRef {
 		ebipurego.RegisterLibFunc(&_fnCFBundleCopySharedFrameworksURL, _lib, "CFBundleCopySharedFrameworksURL")
 	}
 	_ret := _fnCFBundleCopySharedFrameworksURL(objref.IDOf(bundle.Object))
-	return CFURLRef{obj.Adopt(_ret)}
+	return CFURLRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFBundleCopySharedSupportURL func(objc.ID) objc.ID
@@ -1626,7 +1626,7 @@ func CFBundleCopySharedSupportURL(bundle CFBundleRef) CFURLRef {
 		ebipurego.RegisterLibFunc(&_fnCFBundleCopySharedSupportURL, _lib, "CFBundleCopySharedSupportURL")
 	}
 	_ret := _fnCFBundleCopySharedSupportURL(objref.IDOf(bundle.Object))
-	return CFURLRef{obj.Adopt(_ret)}
+	return CFURLRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFBundleCopySupportFilesDirectoryURL func(objc.ID) objc.ID
@@ -1638,7 +1638,7 @@ func CFBundleCopySupportFilesDirectoryURL(bundle CFBundleRef) CFURLRef {
 		ebipurego.RegisterLibFunc(&_fnCFBundleCopySupportFilesDirectoryURL, _lib, "CFBundleCopySupportFilesDirectoryURL")
 	}
 	_ret := _fnCFBundleCopySupportFilesDirectoryURL(objref.IDOf(bundle.Object))
-	return CFURLRef{obj.Adopt(_ret)}
+	return CFURLRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFBundleCreate func(objc.ID, objc.ID) objc.ID
@@ -1650,7 +1650,7 @@ func CFBundleCreate(allocator CFAllocatorRef, bundleURL CFURLRef) CFBundleRef {
 		ebipurego.RegisterLibFunc(&_fnCFBundleCreate, _lib, "CFBundleCreate")
 	}
 	_ret := _fnCFBundleCreate(objref.IDOf(allocator.Object), objref.IDOf(bundleURL.Object))
-	return CFBundleRef{obj.Adopt(_ret)}
+	return CFBundleRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFBundleCreateBundlesFromDirectory func(objc.ID, objc.ID, objc.ID) objc.ID
@@ -1662,7 +1662,7 @@ func CFBundleCreateBundlesFromDirectory(allocator CFAllocatorRef, directoryURL C
 		ebipurego.RegisterLibFunc(&_fnCFBundleCreateBundlesFromDirectory, _lib, "CFBundleCreateBundlesFromDirectory")
 	}
 	_ret := _fnCFBundleCreateBundlesFromDirectory(objref.IDOf(allocator.Object), objref.IDOf(directoryURL.Object), objref.IDOf(bundleType.Object))
-	return CFArrayRef{obj.Adopt(_ret)}
+	return CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFBundleGetAllBundles func() objc.ID
@@ -1674,7 +1674,7 @@ func CFBundleGetAllBundles() CFArrayRef {
 		ebipurego.RegisterLibFunc(&_fnCFBundleGetAllBundles, _lib, "CFBundleGetAllBundles")
 	}
 	_ret := _fnCFBundleGetAllBundles()
-	return CFArrayRef{obj.Wrap(_ret)}
+	return CFArrayRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFBundleGetBundleWithIdentifier func(objc.ID) objc.ID
@@ -1686,7 +1686,7 @@ func CFBundleGetBundleWithIdentifier(bundleID CFStringRef) CFBundleRef {
 		ebipurego.RegisterLibFunc(&_fnCFBundleGetBundleWithIdentifier, _lib, "CFBundleGetBundleWithIdentifier")
 	}
 	_ret := _fnCFBundleGetBundleWithIdentifier(objref.IDOf(bundleID.Object))
-	return CFBundleRef{obj.Wrap(_ret)}
+	return CFBundleRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFBundleGetDataPointerForName func(objc.ID, objc.ID) unsafe.Pointer
@@ -1720,7 +1720,7 @@ func CFBundleGetDevelopmentRegion(bundle CFBundleRef) CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnCFBundleGetDevelopmentRegion, _lib, "CFBundleGetDevelopmentRegion")
 	}
 	_ret := _fnCFBundleGetDevelopmentRegion(objref.IDOf(bundle.Object))
-	return CFStringRef{obj.Wrap(_ret)}
+	return CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFBundleGetFunctionPointerForName func(objc.ID, objc.ID) unsafe.Pointer
@@ -1754,7 +1754,7 @@ func CFBundleGetIdentifier(bundle CFBundleRef) CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnCFBundleGetIdentifier, _lib, "CFBundleGetIdentifier")
 	}
 	_ret := _fnCFBundleGetIdentifier(objref.IDOf(bundle.Object))
-	return CFStringRef{obj.Wrap(_ret)}
+	return CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFBundleGetInfoDictionary func(objc.ID) objc.ID
@@ -1766,7 +1766,7 @@ func CFBundleGetInfoDictionary(bundle CFBundleRef) CFDictionaryRef {
 		ebipurego.RegisterLibFunc(&_fnCFBundleGetInfoDictionary, _lib, "CFBundleGetInfoDictionary")
 	}
 	_ret := _fnCFBundleGetInfoDictionary(objref.IDOf(bundle.Object))
-	return CFDictionaryRef{obj.Wrap(_ret)}
+	return CFDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFBundleGetLocalInfoDictionary func(objc.ID) objc.ID
@@ -1778,7 +1778,7 @@ func CFBundleGetLocalInfoDictionary(bundle CFBundleRef) CFDictionaryRef {
 		ebipurego.RegisterLibFunc(&_fnCFBundleGetLocalInfoDictionary, _lib, "CFBundleGetLocalInfoDictionary")
 	}
 	_ret := _fnCFBundleGetLocalInfoDictionary(objref.IDOf(bundle.Object))
-	return CFDictionaryRef{obj.Wrap(_ret)}
+	return CFDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFBundleGetMainBundle func() objc.ID
@@ -1790,7 +1790,7 @@ func CFBundleGetMainBundle() CFBundleRef {
 		ebipurego.RegisterLibFunc(&_fnCFBundleGetMainBundle, _lib, "CFBundleGetMainBundle")
 	}
 	_ret := _fnCFBundleGetMainBundle()
-	return CFBundleRef{obj.Wrap(_ret)}
+	return CFBundleRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFBundleGetPackageInfo func(objc.ID, unsafe.Pointer, unsafe.Pointer)
@@ -1830,7 +1830,7 @@ func CFBundleGetPlugIn(bundle CFBundleRef) CFPlugInRef {
 		ebipurego.RegisterLibFunc(&_fnCFBundleGetPlugIn, _lib, "CFBundleGetPlugIn")
 	}
 	_ret := _fnCFBundleGetPlugIn(objref.IDOf(bundle.Object))
-	return CFPlugInRef{obj.Wrap(_ret)}
+	return CFPlugInRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFBundleGetTypeID func() int
@@ -1978,7 +1978,7 @@ func CFCalendarCopyCurrent() CFCalendarRef {
 		ebipurego.RegisterLibFunc(&_fnCFCalendarCopyCurrent, _lib, "CFCalendarCopyCurrent")
 	}
 	_ret := _fnCFCalendarCopyCurrent()
-	return CFCalendarRef{obj.Adopt(_ret)}
+	return CFCalendarRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFCalendarCopyLocale func(objc.ID) objc.ID
@@ -1990,7 +1990,7 @@ func CFCalendarCopyLocale(calendar CFCalendarRef) CFLocaleRef {
 		ebipurego.RegisterLibFunc(&_fnCFCalendarCopyLocale, _lib, "CFCalendarCopyLocale")
 	}
 	_ret := _fnCFCalendarCopyLocale(objref.IDOf(calendar.Object))
-	return CFLocaleRef{obj.Adopt(_ret)}
+	return CFLocaleRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFCalendarCopyTimeZone func(objc.ID) objc.ID
@@ -2002,7 +2002,7 @@ func CFCalendarCopyTimeZone(calendar CFCalendarRef) CFTimeZoneRef {
 		ebipurego.RegisterLibFunc(&_fnCFCalendarCopyTimeZone, _lib, "CFCalendarCopyTimeZone")
 	}
 	_ret := _fnCFCalendarCopyTimeZone(objref.IDOf(calendar.Object))
-	return CFTimeZoneRef{obj.Adopt(_ret)}
+	return CFTimeZoneRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFCalendarCreateWithIdentifier func(objc.ID, unsafe.Pointer) objc.ID
@@ -2014,7 +2014,7 @@ func CFCalendarCreateWithIdentifier(allocator CFAllocatorRef, identifier unsafe.
 		ebipurego.RegisterLibFunc(&_fnCFCalendarCreateWithIdentifier, _lib, "CFCalendarCreateWithIdentifier")
 	}
 	_ret := _fnCFCalendarCreateWithIdentifier(objref.IDOf(allocator.Object), identifier)
-	return CFCalendarRef{obj.Adopt(_ret)}
+	return CFCalendarRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFCalendarGetFirstWeekday func(objc.ID) int
@@ -2039,10 +2039,10 @@ func CFCalendarGetIdentifier(calendar CFCalendarRef) unsafe.Pointer {
 	return _fnCFCalendarGetIdentifier(objref.IDOf(calendar.Object))
 }
 
-var _fnCFCalendarGetMaximumRangeOfUnit func(objc.ID, CFCalendarUnit) unsafe.Pointer
+var _fnCFCalendarGetMaximumRangeOfUnit func(objc.ID, CFCalendarUnit) CFRange
 
 // CFCalendarGetMaximumRangeOfUnit calls the CoreFoundation framework function CFCalendarGetMaximumRangeOfUnit.
-func CFCalendarGetMaximumRangeOfUnit(calendar CFCalendarRef, unit CFCalendarUnit) unsafe.Pointer {
+func CFCalendarGetMaximumRangeOfUnit(calendar CFCalendarRef, unit CFCalendarUnit) CFRange {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFCalendarGetMaximumRangeOfUnit == nil {
 		ebipurego.RegisterLibFunc(&_fnCFCalendarGetMaximumRangeOfUnit, _lib, "CFCalendarGetMaximumRangeOfUnit")
@@ -2061,10 +2061,10 @@ func CFCalendarGetMinimumDaysInFirstWeek(calendar CFCalendarRef) int {
 	return _fnCFCalendarGetMinimumDaysInFirstWeek(objref.IDOf(calendar.Object))
 }
 
-var _fnCFCalendarGetMinimumRangeOfUnit func(objc.ID, CFCalendarUnit) unsafe.Pointer
+var _fnCFCalendarGetMinimumRangeOfUnit func(objc.ID, CFCalendarUnit) CFRange
 
 // CFCalendarGetMinimumRangeOfUnit calls the CoreFoundation framework function CFCalendarGetMinimumRangeOfUnit.
-func CFCalendarGetMinimumRangeOfUnit(calendar CFCalendarRef, unit CFCalendarUnit) unsafe.Pointer {
+func CFCalendarGetMinimumRangeOfUnit(calendar CFCalendarRef, unit CFCalendarUnit) CFRange {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFCalendarGetMinimumRangeOfUnit == nil {
 		ebipurego.RegisterLibFunc(&_fnCFCalendarGetMinimumRangeOfUnit, _lib, "CFCalendarGetMinimumRangeOfUnit")
@@ -2083,10 +2083,10 @@ func CFCalendarGetOrdinalityOfUnit(calendar CFCalendarRef, smallerUnit CFCalenda
 	return _fnCFCalendarGetOrdinalityOfUnit(objref.IDOf(calendar.Object), smallerUnit, biggerUnit, at)
 }
 
-var _fnCFCalendarGetRangeOfUnit func(objc.ID, CFCalendarUnit, CFCalendarUnit, float64) unsafe.Pointer
+var _fnCFCalendarGetRangeOfUnit func(objc.ID, CFCalendarUnit, CFCalendarUnit, float64) CFRange
 
 // CFCalendarGetRangeOfUnit calls the CoreFoundation framework function CFCalendarGetRangeOfUnit.
-func CFCalendarGetRangeOfUnit(calendar CFCalendarRef, smallerUnit CFCalendarUnit, biggerUnit CFCalendarUnit, at float64) unsafe.Pointer {
+func CFCalendarGetRangeOfUnit(calendar CFCalendarRef, smallerUnit CFCalendarUnit, biggerUnit CFCalendarUnit, at float64) CFRange {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFCalendarGetRangeOfUnit == nil {
 		ebipurego.RegisterLibFunc(&_fnCFCalendarGetRangeOfUnit, _lib, "CFCalendarGetRangeOfUnit")
@@ -2163,10 +2163,10 @@ func CFCalendarSetTimeZone(calendar CFCalendarRef, tz CFTimeZoneRef) {
 	_fnCFCalendarSetTimeZone(objref.IDOf(calendar.Object), objref.IDOf(tz.Object))
 }
 
-var _fnCFCharacterSetAddCharactersInRange func(objc.ID, unsafe.Pointer)
+var _fnCFCharacterSetAddCharactersInRange func(objc.ID, CFRange)
 
 // CFCharacterSetAddCharactersInRange calls the CoreFoundation framework function CFCharacterSetAddCharactersInRange.
-func CFCharacterSetAddCharactersInRange(theSet CFMutableCharacterSetRef, theRange unsafe.Pointer) {
+func CFCharacterSetAddCharactersInRange(theSet CFMutableCharacterSetRef, theRange CFRange) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFCharacterSetAddCharactersInRange == nil {
 		ebipurego.RegisterLibFunc(&_fnCFCharacterSetAddCharactersInRange, _lib, "CFCharacterSetAddCharactersInRange")
@@ -2194,7 +2194,7 @@ func CFCharacterSetCreateBitmapRepresentation(alloc CFAllocatorRef, theSet CFCha
 		ebipurego.RegisterLibFunc(&_fnCFCharacterSetCreateBitmapRepresentation, _lib, "CFCharacterSetCreateBitmapRepresentation")
 	}
 	_ret := _fnCFCharacterSetCreateBitmapRepresentation(objref.IDOf(alloc.Object), objref.IDOf(theSet.Object))
-	return CFDataRef{obj.Adopt(_ret)}
+	return CFDataRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFCharacterSetCreateCopy func(objc.ID, objc.ID) objc.ID
@@ -2206,7 +2206,7 @@ func CFCharacterSetCreateCopy(alloc CFAllocatorRef, theSet CFCharacterSetRef) CF
 		ebipurego.RegisterLibFunc(&_fnCFCharacterSetCreateCopy, _lib, "CFCharacterSetCreateCopy")
 	}
 	_ret := _fnCFCharacterSetCreateCopy(objref.IDOf(alloc.Object), objref.IDOf(theSet.Object))
-	return CFCharacterSetRef{obj.Adopt(_ret)}
+	return CFCharacterSetRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFCharacterSetCreateInvertedSet func(objc.ID, objc.ID) objc.ID
@@ -2218,7 +2218,7 @@ func CFCharacterSetCreateInvertedSet(alloc CFAllocatorRef, theSet CFCharacterSet
 		ebipurego.RegisterLibFunc(&_fnCFCharacterSetCreateInvertedSet, _lib, "CFCharacterSetCreateInvertedSet")
 	}
 	_ret := _fnCFCharacterSetCreateInvertedSet(objref.IDOf(alloc.Object), objref.IDOf(theSet.Object))
-	return CFCharacterSetRef{obj.Adopt(_ret)}
+	return CFCharacterSetRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFCharacterSetCreateMutable func(objc.ID) objc.ID
@@ -2230,7 +2230,7 @@ func CFCharacterSetCreateMutable(alloc CFAllocatorRef) CFMutableCharacterSetRef 
 		ebipurego.RegisterLibFunc(&_fnCFCharacterSetCreateMutable, _lib, "CFCharacterSetCreateMutable")
 	}
 	_ret := _fnCFCharacterSetCreateMutable(objref.IDOf(alloc.Object))
-	return CFMutableCharacterSetRef{obj.Adopt(_ret)}
+	return CFMutableCharacterSetRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFCharacterSetCreateMutableCopy func(objc.ID, objc.ID) objc.ID
@@ -2242,7 +2242,7 @@ func CFCharacterSetCreateMutableCopy(alloc CFAllocatorRef, theSet CFCharacterSet
 		ebipurego.RegisterLibFunc(&_fnCFCharacterSetCreateMutableCopy, _lib, "CFCharacterSetCreateMutableCopy")
 	}
 	_ret := _fnCFCharacterSetCreateMutableCopy(objref.IDOf(alloc.Object), objref.IDOf(theSet.Object))
-	return CFMutableCharacterSetRef{obj.Adopt(_ret)}
+	return CFMutableCharacterSetRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFCharacterSetCreateWithBitmapRepresentation func(objc.ID, objc.ID) objc.ID
@@ -2254,19 +2254,19 @@ func CFCharacterSetCreateWithBitmapRepresentation(alloc CFAllocatorRef, theData 
 		ebipurego.RegisterLibFunc(&_fnCFCharacterSetCreateWithBitmapRepresentation, _lib, "CFCharacterSetCreateWithBitmapRepresentation")
 	}
 	_ret := _fnCFCharacterSetCreateWithBitmapRepresentation(objref.IDOf(alloc.Object), objref.IDOf(theData.Object))
-	return CFCharacterSetRef{obj.Adopt(_ret)}
+	return CFCharacterSetRef{Object: obj.Adopt(_ret)}
 }
 
-var _fnCFCharacterSetCreateWithCharactersInRange func(objc.ID, unsafe.Pointer) objc.ID
+var _fnCFCharacterSetCreateWithCharactersInRange func(objc.ID, CFRange) objc.ID
 
 // CFCharacterSetCreateWithCharactersInRange calls the CoreFoundation framework function CFCharacterSetCreateWithCharactersInRange.
-func CFCharacterSetCreateWithCharactersInRange(alloc CFAllocatorRef, theRange unsafe.Pointer) CFCharacterSetRef {
+func CFCharacterSetCreateWithCharactersInRange(alloc CFAllocatorRef, theRange CFRange) CFCharacterSetRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFCharacterSetCreateWithCharactersInRange == nil {
 		ebipurego.RegisterLibFunc(&_fnCFCharacterSetCreateWithCharactersInRange, _lib, "CFCharacterSetCreateWithCharactersInRange")
 	}
 	_ret := _fnCFCharacterSetCreateWithCharactersInRange(objref.IDOf(alloc.Object), theRange)
-	return CFCharacterSetRef{obj.Adopt(_ret)}
+	return CFCharacterSetRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFCharacterSetCreateWithCharactersInString func(objc.ID, objc.ID) objc.ID
@@ -2278,7 +2278,7 @@ func CFCharacterSetCreateWithCharactersInString(alloc CFAllocatorRef, theString 
 		ebipurego.RegisterLibFunc(&_fnCFCharacterSetCreateWithCharactersInString, _lib, "CFCharacterSetCreateWithCharactersInString")
 	}
 	_ret := _fnCFCharacterSetCreateWithCharactersInString(objref.IDOf(alloc.Object), objref.IDOf(theString.Object))
-	return CFCharacterSetRef{obj.Adopt(_ret)}
+	return CFCharacterSetRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFCharacterSetGetPredefined func(CFCharacterSetPredefinedSet) objc.ID
@@ -2290,7 +2290,7 @@ func CFCharacterSetGetPredefined(theSetIdentifier CFCharacterSetPredefinedSet) C
 		ebipurego.RegisterLibFunc(&_fnCFCharacterSetGetPredefined, _lib, "CFCharacterSetGetPredefined")
 	}
 	_ret := _fnCFCharacterSetGetPredefined(theSetIdentifier)
-	return CFCharacterSetRef{obj.Wrap(_ret)}
+	return CFCharacterSetRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFCharacterSetGetTypeID func() int
@@ -2370,10 +2370,10 @@ func CFCharacterSetIsSupersetOfSet(theSet CFCharacterSetRef, theOtherset CFChara
 	return _fnCFCharacterSetIsSupersetOfSet(objref.IDOf(theSet.Object), objref.IDOf(theOtherset.Object))
 }
 
-var _fnCFCharacterSetRemoveCharactersInRange func(objc.ID, unsafe.Pointer)
+var _fnCFCharacterSetRemoveCharactersInRange func(objc.ID, CFRange)
 
 // CFCharacterSetRemoveCharactersInRange calls the CoreFoundation framework function CFCharacterSetRemoveCharactersInRange.
-func CFCharacterSetRemoveCharactersInRange(theSet CFMutableCharacterSetRef, theRange unsafe.Pointer) {
+func CFCharacterSetRemoveCharactersInRange(theSet CFMutableCharacterSetRef, theRange CFRange) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFCharacterSetRemoveCharactersInRange == nil {
 		ebipurego.RegisterLibFunc(&_fnCFCharacterSetRemoveCharactersInRange, _lib, "CFCharacterSetRemoveCharactersInRange")
@@ -2403,10 +2403,10 @@ func CFCharacterSetUnion(theSet CFMutableCharacterSetRef, theOtherSet CFCharacte
 	_fnCFCharacterSetUnion(objref.IDOf(theSet.Object), objref.IDOf(theOtherSet.Object))
 }
 
-var _fnCFConvertDoubleHostToSwapped func(float64) unsafe.Pointer
+var _fnCFConvertDoubleHostToSwapped func(float64) CFSwappedFloat64
 
 // CFConvertDoubleHostToSwapped calls the CoreFoundation framework function CFConvertDoubleHostToSwapped.
-func CFConvertDoubleHostToSwapped(arg float64) unsafe.Pointer {
+func CFConvertDoubleHostToSwapped(arg float64) CFSwappedFloat64 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFConvertDoubleHostToSwapped == nil {
 		ebipurego.RegisterLibFunc(&_fnCFConvertDoubleHostToSwapped, _lib, "CFConvertDoubleHostToSwapped")
@@ -2414,10 +2414,10 @@ func CFConvertDoubleHostToSwapped(arg float64) unsafe.Pointer {
 	return _fnCFConvertDoubleHostToSwapped(arg)
 }
 
-var _fnCFConvertDoubleSwappedToHost func(unsafe.Pointer) float64
+var _fnCFConvertDoubleSwappedToHost func(CFSwappedFloat64) float64
 
 // CFConvertDoubleSwappedToHost calls the CoreFoundation framework function CFConvertDoubleSwappedToHost.
-func CFConvertDoubleSwappedToHost(arg unsafe.Pointer) float64 {
+func CFConvertDoubleSwappedToHost(arg CFSwappedFloat64) float64 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFConvertDoubleSwappedToHost == nil {
 		ebipurego.RegisterLibFunc(&_fnCFConvertDoubleSwappedToHost, _lib, "CFConvertDoubleSwappedToHost")
@@ -2425,10 +2425,10 @@ func CFConvertDoubleSwappedToHost(arg unsafe.Pointer) float64 {
 	return _fnCFConvertDoubleSwappedToHost(arg)
 }
 
-var _fnCFConvertFloat32HostToSwapped func(float32) unsafe.Pointer
+var _fnCFConvertFloat32HostToSwapped func(float32) CFSwappedFloat32
 
 // CFConvertFloat32HostToSwapped calls the CoreFoundation framework function CFConvertFloat32HostToSwapped.
-func CFConvertFloat32HostToSwapped(arg float32) unsafe.Pointer {
+func CFConvertFloat32HostToSwapped(arg float32) CFSwappedFloat32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFConvertFloat32HostToSwapped == nil {
 		ebipurego.RegisterLibFunc(&_fnCFConvertFloat32HostToSwapped, _lib, "CFConvertFloat32HostToSwapped")
@@ -2436,10 +2436,10 @@ func CFConvertFloat32HostToSwapped(arg float32) unsafe.Pointer {
 	return _fnCFConvertFloat32HostToSwapped(arg)
 }
 
-var _fnCFConvertFloat32SwappedToHost func(unsafe.Pointer) float32
+var _fnCFConvertFloat32SwappedToHost func(CFSwappedFloat32) float32
 
 // CFConvertFloat32SwappedToHost calls the CoreFoundation framework function CFConvertFloat32SwappedToHost.
-func CFConvertFloat32SwappedToHost(arg unsafe.Pointer) float32 {
+func CFConvertFloat32SwappedToHost(arg CFSwappedFloat32) float32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFConvertFloat32SwappedToHost == nil {
 		ebipurego.RegisterLibFunc(&_fnCFConvertFloat32SwappedToHost, _lib, "CFConvertFloat32SwappedToHost")
@@ -2447,10 +2447,10 @@ func CFConvertFloat32SwappedToHost(arg unsafe.Pointer) float32 {
 	return _fnCFConvertFloat32SwappedToHost(arg)
 }
 
-var _fnCFConvertFloat64HostToSwapped func(float64) unsafe.Pointer
+var _fnCFConvertFloat64HostToSwapped func(float64) CFSwappedFloat64
 
 // CFConvertFloat64HostToSwapped calls the CoreFoundation framework function CFConvertFloat64HostToSwapped.
-func CFConvertFloat64HostToSwapped(arg float64) unsafe.Pointer {
+func CFConvertFloat64HostToSwapped(arg float64) CFSwappedFloat64 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFConvertFloat64HostToSwapped == nil {
 		ebipurego.RegisterLibFunc(&_fnCFConvertFloat64HostToSwapped, _lib, "CFConvertFloat64HostToSwapped")
@@ -2458,10 +2458,10 @@ func CFConvertFloat64HostToSwapped(arg float64) unsafe.Pointer {
 	return _fnCFConvertFloat64HostToSwapped(arg)
 }
 
-var _fnCFConvertFloat64SwappedToHost func(unsafe.Pointer) float64
+var _fnCFConvertFloat64SwappedToHost func(CFSwappedFloat64) float64
 
 // CFConvertFloat64SwappedToHost calls the CoreFoundation framework function CFConvertFloat64SwappedToHost.
-func CFConvertFloat64SwappedToHost(arg unsafe.Pointer) float64 {
+func CFConvertFloat64SwappedToHost(arg CFSwappedFloat64) float64 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFConvertFloat64SwappedToHost == nil {
 		ebipurego.RegisterLibFunc(&_fnCFConvertFloat64SwappedToHost, _lib, "CFConvertFloat64SwappedToHost")
@@ -2469,10 +2469,10 @@ func CFConvertFloat64SwappedToHost(arg unsafe.Pointer) float64 {
 	return _fnCFConvertFloat64SwappedToHost(arg)
 }
 
-var _fnCFConvertFloatHostToSwapped func(float32) unsafe.Pointer
+var _fnCFConvertFloatHostToSwapped func(float32) CFSwappedFloat32
 
 // CFConvertFloatHostToSwapped calls the CoreFoundation framework function CFConvertFloatHostToSwapped.
-func CFConvertFloatHostToSwapped(arg float32) unsafe.Pointer {
+func CFConvertFloatHostToSwapped(arg float32) CFSwappedFloat32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFConvertFloatHostToSwapped == nil {
 		ebipurego.RegisterLibFunc(&_fnCFConvertFloatHostToSwapped, _lib, "CFConvertFloatHostToSwapped")
@@ -2480,10 +2480,10 @@ func CFConvertFloatHostToSwapped(arg float32) unsafe.Pointer {
 	return _fnCFConvertFloatHostToSwapped(arg)
 }
 
-var _fnCFConvertFloatSwappedToHost func(unsafe.Pointer) float32
+var _fnCFConvertFloatSwappedToHost func(CFSwappedFloat32) float32
 
 // CFConvertFloatSwappedToHost calls the CoreFoundation framework function CFConvertFloatSwappedToHost.
-func CFConvertFloatSwappedToHost(arg unsafe.Pointer) float32 {
+func CFConvertFloatSwappedToHost(arg CFSwappedFloat32) float32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFConvertFloatSwappedToHost == nil {
 		ebipurego.RegisterLibFunc(&_fnCFConvertFloatSwappedToHost, _lib, "CFConvertFloatSwappedToHost")
@@ -2500,7 +2500,7 @@ func CFCopyDescription(cf obj.Object) CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnCFCopyDescription, _lib, "CFCopyDescription")
 	}
 	_ret := _fnCFCopyDescription(objref.IDOf(cf))
-	return CFStringRef{obj.Adopt(_ret)}
+	return CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFCopyTypeIDDescription func(int) objc.ID
@@ -2512,7 +2512,7 @@ func CFCopyTypeIDDescription(typeId int) CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnCFCopyTypeIDDescription, _lib, "CFCopyTypeIDDescription")
 	}
 	_ret := _fnCFCopyTypeIDDescription(typeId)
-	return CFStringRef{obj.Adopt(_ret)}
+	return CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFDataAppendBytes func(objc.ID, unsafe.Pointer, int)
@@ -2535,7 +2535,7 @@ func CFDataCreate(allocator CFAllocatorRef, data unsafe.Pointer, length int) CFD
 		ebipurego.RegisterLibFunc(&_fnCFDataCreate, _lib, "CFDataCreate")
 	}
 	_ret := _fnCFDataCreate(objref.IDOf(allocator.Object), data, length)
-	return CFDataRef{obj.Adopt(_ret)}
+	return CFDataRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFDataCreateCopy func(objc.ID, objc.ID) objc.ID
@@ -2547,7 +2547,7 @@ func CFDataCreateCopy(allocator CFAllocatorRef, theData CFDataRef) CFDataRef {
 		ebipurego.RegisterLibFunc(&_fnCFDataCreateCopy, _lib, "CFDataCreateCopy")
 	}
 	_ret := _fnCFDataCreateCopy(objref.IDOf(allocator.Object), objref.IDOf(theData.Object))
-	return CFDataRef{obj.Adopt(_ret)}
+	return CFDataRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFDataCreateMutable func(objc.ID, int) objc.ID
@@ -2559,7 +2559,7 @@ func CFDataCreateMutable(allocator CFAllocatorRef, capacity int) CFMutableDataRe
 		ebipurego.RegisterLibFunc(&_fnCFDataCreateMutable, _lib, "CFDataCreateMutable")
 	}
 	_ret := _fnCFDataCreateMutable(objref.IDOf(allocator.Object), capacity)
-	return CFMutableDataRef{obj.Adopt(_ret)}
+	return CFMutableDataRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFDataCreateMutableCopy func(objc.ID, int, objc.ID) objc.ID
@@ -2571,7 +2571,7 @@ func CFDataCreateMutableCopy(allocator CFAllocatorRef, capacity int, theData CFD
 		ebipurego.RegisterLibFunc(&_fnCFDataCreateMutableCopy, _lib, "CFDataCreateMutableCopy")
 	}
 	_ret := _fnCFDataCreateMutableCopy(objref.IDOf(allocator.Object), capacity, objref.IDOf(theData.Object))
-	return CFMutableDataRef{obj.Adopt(_ret)}
+	return CFMutableDataRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFDataCreateWithBytesNoCopy func(objc.ID, unsafe.Pointer, int, objc.ID) objc.ID
@@ -2583,13 +2583,13 @@ func CFDataCreateWithBytesNoCopy(allocator CFAllocatorRef, data unsafe.Pointer, 
 		ebipurego.RegisterLibFunc(&_fnCFDataCreateWithBytesNoCopy, _lib, "CFDataCreateWithBytesNoCopy")
 	}
 	_ret := _fnCFDataCreateWithBytesNoCopy(objref.IDOf(allocator.Object), data, length, objref.IDOf(bytesDeallocator.Object))
-	return CFDataRef{obj.Adopt(_ret)}
+	return CFDataRef{Object: obj.Adopt(_ret)}
 }
 
-var _fnCFDataDeleteBytes func(objc.ID, unsafe.Pointer)
+var _fnCFDataDeleteBytes func(objc.ID, CFRange)
 
 // CFDataDeleteBytes calls the CoreFoundation framework function CFDataDeleteBytes.
-func CFDataDeleteBytes(theData CFMutableDataRef, range_ unsafe.Pointer) {
+func CFDataDeleteBytes(theData CFMutableDataRef, range_ CFRange) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFDataDeleteBytes == nil {
 		ebipurego.RegisterLibFunc(&_fnCFDataDeleteBytes, _lib, "CFDataDeleteBytes")
@@ -2597,10 +2597,10 @@ func CFDataDeleteBytes(theData CFMutableDataRef, range_ unsafe.Pointer) {
 	_fnCFDataDeleteBytes(objref.IDOf(theData.Object), range_)
 }
 
-var _fnCFDataFind func(objc.ID, objc.ID, unsafe.Pointer, CFDataSearchFlags) unsafe.Pointer
+var _fnCFDataFind func(objc.ID, objc.ID, CFRange, CFDataSearchFlags) CFRange
 
 // CFDataFind calls the CoreFoundation framework function CFDataFind.
-func CFDataFind(theData CFDataRef, dataToFind CFDataRef, searchRange unsafe.Pointer, compareOptions CFDataSearchFlags) unsafe.Pointer {
+func CFDataFind(theData CFDataRef, dataToFind CFDataRef, searchRange CFRange, compareOptions CFDataSearchFlags) CFRange {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFDataFind == nil {
 		ebipurego.RegisterLibFunc(&_fnCFDataFind, _lib, "CFDataFind")
@@ -2619,10 +2619,10 @@ func CFDataGetBytePtr(theData CFDataRef) unsafe.Pointer {
 	return _fnCFDataGetBytePtr(objref.IDOf(theData.Object))
 }
 
-var _fnCFDataGetBytes func(objc.ID, unsafe.Pointer, unsafe.Pointer)
+var _fnCFDataGetBytes func(objc.ID, CFRange, unsafe.Pointer)
 
 // CFDataGetBytes calls the CoreFoundation framework function CFDataGetBytes.
-func CFDataGetBytes(theData CFDataRef, range_ unsafe.Pointer) (buffer uint8) {
+func CFDataGetBytes(theData CFDataRef, range_ CFRange) (buffer uint8) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFDataGetBytes == nil {
 		ebipurego.RegisterLibFunc(&_fnCFDataGetBytes, _lib, "CFDataGetBytes")
@@ -2676,10 +2676,10 @@ func CFDataIncreaseLength(theData CFMutableDataRef, extraLength int) {
 	_fnCFDataIncreaseLength(objref.IDOf(theData.Object), extraLength)
 }
 
-var _fnCFDataReplaceBytes func(objc.ID, unsafe.Pointer, unsafe.Pointer, int)
+var _fnCFDataReplaceBytes func(objc.ID, CFRange, unsafe.Pointer, int)
 
 // CFDataReplaceBytes calls the CoreFoundation framework function CFDataReplaceBytes.
-func CFDataReplaceBytes(theData CFMutableDataRef, range_ unsafe.Pointer, newBytes unsafe.Pointer, newLength int) {
+func CFDataReplaceBytes(theData CFMutableDataRef, range_ CFRange, newBytes unsafe.Pointer, newLength int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFDataReplaceBytes == nil {
 		ebipurego.RegisterLibFunc(&_fnCFDataReplaceBytes, _lib, "CFDataReplaceBytes")
@@ -2718,7 +2718,7 @@ func CFDateCreate(allocator CFAllocatorRef, at float64) CFDateRef {
 		ebipurego.RegisterLibFunc(&_fnCFDateCreate, _lib, "CFDateCreate")
 	}
 	_ret := _fnCFDateCreate(objref.IDOf(allocator.Object), at)
-	return CFDateRef{obj.Adopt(_ret)}
+	return CFDateRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFDateFormatterCopyProperty func(objc.ID, unsafe.Pointer) objc.ID
@@ -2742,7 +2742,7 @@ func CFDateFormatterCreate(allocator CFAllocatorRef, locale CFLocaleRef, dateSty
 		ebipurego.RegisterLibFunc(&_fnCFDateFormatterCreate, _lib, "CFDateFormatterCreate")
 	}
 	_ret := _fnCFDateFormatterCreate(objref.IDOf(allocator.Object), objref.IDOf(locale.Object), dateStyle, timeStyle)
-	return CFDateFormatterRef{obj.Adopt(_ret)}
+	return CFDateFormatterRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFDateFormatterCreateDateFormatFromTemplate func(objc.ID, objc.ID, int, objc.ID) objc.ID
@@ -2754,7 +2754,7 @@ func CFDateFormatterCreateDateFormatFromTemplate(allocator CFAllocatorRef, tmpla
 		ebipurego.RegisterLibFunc(&_fnCFDateFormatterCreateDateFormatFromTemplate, _lib, "CFDateFormatterCreateDateFormatFromTemplate")
 	}
 	_ret := _fnCFDateFormatterCreateDateFormatFromTemplate(objref.IDOf(allocator.Object), objref.IDOf(tmplate.Object), options, objref.IDOf(locale.Object))
-	return CFStringRef{obj.Adopt(_ret)}
+	return CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFDateFormatterCreateDateFromString func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) objc.ID
@@ -2767,7 +2767,7 @@ func CFDateFormatterCreateDateFromString(allocator CFAllocatorRef, formatter CFD
 	}
 	var _out0 CFRange
 	_ret := _fnCFDateFormatterCreateDateFromString(objref.IDOf(allocator.Object), objref.IDOf(formatter.Object), objref.IDOf(str.Object), unsafe.Pointer(&_out0))
-	return CFDateRef{obj.Adopt(_ret)}, _out0
+	return CFDateRef{Object: obj.Adopt(_ret)}, _out0
 }
 
 var _fnCFDateFormatterCreateISO8601Formatter func(objc.ID, CFISO8601DateFormatOptions) objc.ID
@@ -2779,7 +2779,7 @@ func CFDateFormatterCreateISO8601Formatter(allocator CFAllocatorRef, formatOptio
 		ebipurego.RegisterLibFunc(&_fnCFDateFormatterCreateISO8601Formatter, _lib, "CFDateFormatterCreateISO8601Formatter")
 	}
 	_ret := _fnCFDateFormatterCreateISO8601Formatter(objref.IDOf(allocator.Object), formatOptions)
-	return CFDateFormatterRef{obj.Adopt(_ret)}
+	return CFDateFormatterRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFDateFormatterCreateStringWithAbsoluteTime func(objc.ID, objc.ID, float64) objc.ID
@@ -2791,7 +2791,7 @@ func CFDateFormatterCreateStringWithAbsoluteTime(allocator CFAllocatorRef, forma
 		ebipurego.RegisterLibFunc(&_fnCFDateFormatterCreateStringWithAbsoluteTime, _lib, "CFDateFormatterCreateStringWithAbsoluteTime")
 	}
 	_ret := _fnCFDateFormatterCreateStringWithAbsoluteTime(objref.IDOf(allocator.Object), objref.IDOf(formatter.Object), at)
-	return CFStringRef{obj.Adopt(_ret)}
+	return CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFDateFormatterCreateStringWithDate func(objc.ID, objc.ID, objc.ID) objc.ID
@@ -2803,7 +2803,7 @@ func CFDateFormatterCreateStringWithDate(allocator CFAllocatorRef, formatter CFD
 		ebipurego.RegisterLibFunc(&_fnCFDateFormatterCreateStringWithDate, _lib, "CFDateFormatterCreateStringWithDate")
 	}
 	_ret := _fnCFDateFormatterCreateStringWithDate(objref.IDOf(allocator.Object), objref.IDOf(formatter.Object), objref.IDOf(date.Object))
-	return CFStringRef{obj.Adopt(_ret)}
+	return CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFDateFormatterGetAbsoluteTimeFromString func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer) uint8
@@ -2840,7 +2840,7 @@ func CFDateFormatterGetFormat(formatter CFDateFormatterRef) CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnCFDateFormatterGetFormat, _lib, "CFDateFormatterGetFormat")
 	}
 	_ret := _fnCFDateFormatterGetFormat(objref.IDOf(formatter.Object))
-	return CFStringRef{obj.Wrap(_ret)}
+	return CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFDateFormatterGetLocale func(objc.ID) objc.ID
@@ -2852,7 +2852,7 @@ func CFDateFormatterGetLocale(formatter CFDateFormatterRef) CFLocaleRef {
 		ebipurego.RegisterLibFunc(&_fnCFDateFormatterGetLocale, _lib, "CFDateFormatterGetLocale")
 	}
 	_ret := _fnCFDateFormatterGetLocale(objref.IDOf(formatter.Object))
-	return CFLocaleRef{obj.Wrap(_ret)}
+	return CFLocaleRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFDateFormatterGetTimeStyle func(objc.ID) CFDateFormatterStyle
@@ -2985,7 +2985,7 @@ func CFDictionaryCreate(allocator CFAllocatorRef, keys unsafe.Pointer, values un
 		ebipurego.RegisterLibFunc(&_fnCFDictionaryCreate, _lib, "CFDictionaryCreate")
 	}
 	_ret := _fnCFDictionaryCreate(objref.IDOf(allocator.Object), keys, values, numValues, keyCallBacks, valueCallBacks)
-	return CFDictionaryRef{obj.Adopt(_ret)}
+	return CFDictionaryRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFDictionaryCreateCopy func(objc.ID, objc.ID) objc.ID
@@ -2997,7 +2997,7 @@ func CFDictionaryCreateCopy(allocator CFAllocatorRef, theDict CFDictionaryRef) C
 		ebipurego.RegisterLibFunc(&_fnCFDictionaryCreateCopy, _lib, "CFDictionaryCreateCopy")
 	}
 	_ret := _fnCFDictionaryCreateCopy(objref.IDOf(allocator.Object), objref.IDOf(theDict.Object))
-	return CFDictionaryRef{obj.Adopt(_ret)}
+	return CFDictionaryRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFDictionaryCreateMutable func(objc.ID, int, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -3009,7 +3009,7 @@ func CFDictionaryCreateMutable(allocator CFAllocatorRef, capacity int, keyCallBa
 		ebipurego.RegisterLibFunc(&_fnCFDictionaryCreateMutable, _lib, "CFDictionaryCreateMutable")
 	}
 	_ret := _fnCFDictionaryCreateMutable(objref.IDOf(allocator.Object), capacity, keyCallBacks, valueCallBacks)
-	return CFMutableDictionaryRef{obj.Adopt(_ret)}
+	return CFMutableDictionaryRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFDictionaryCreateMutableCopy func(objc.ID, int, objc.ID) objc.ID
@@ -3021,7 +3021,7 @@ func CFDictionaryCreateMutableCopy(allocator CFAllocatorRef, capacity int, theDi
 		ebipurego.RegisterLibFunc(&_fnCFDictionaryCreateMutableCopy, _lib, "CFDictionaryCreateMutableCopy")
 	}
 	_ret := _fnCFDictionaryCreateMutableCopy(objref.IDOf(allocator.Object), capacity, objref.IDOf(theDict.Object))
-	return CFMutableDictionaryRef{obj.Adopt(_ret)}
+	return CFMutableDictionaryRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFDictionaryGetCount func(objc.ID) int
@@ -3165,7 +3165,7 @@ func CFErrorCopyDescription(err CFErrorRef) CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnCFErrorCopyDescription, _lib, "CFErrorCopyDescription")
 	}
 	_ret := _fnCFErrorCopyDescription(objref.IDOf(err.Object))
-	return CFStringRef{obj.Adopt(_ret)}
+	return CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFErrorCopyFailureReason func(objc.ID) objc.ID
@@ -3177,7 +3177,7 @@ func CFErrorCopyFailureReason(err CFErrorRef) CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnCFErrorCopyFailureReason, _lib, "CFErrorCopyFailureReason")
 	}
 	_ret := _fnCFErrorCopyFailureReason(objref.IDOf(err.Object))
-	return CFStringRef{obj.Adopt(_ret)}
+	return CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFErrorCopyRecoverySuggestion func(objc.ID) objc.ID
@@ -3189,7 +3189,7 @@ func CFErrorCopyRecoverySuggestion(err CFErrorRef) CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnCFErrorCopyRecoverySuggestion, _lib, "CFErrorCopyRecoverySuggestion")
 	}
 	_ret := _fnCFErrorCopyRecoverySuggestion(objref.IDOf(err.Object))
-	return CFStringRef{obj.Adopt(_ret)}
+	return CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFErrorCopyUserInfo func(objc.ID) objc.ID
@@ -3201,7 +3201,7 @@ func CFErrorCopyUserInfo(err CFErrorRef) CFDictionaryRef {
 		ebipurego.RegisterLibFunc(&_fnCFErrorCopyUserInfo, _lib, "CFErrorCopyUserInfo")
 	}
 	_ret := _fnCFErrorCopyUserInfo(objref.IDOf(err.Object))
-	return CFDictionaryRef{obj.Adopt(_ret)}
+	return CFDictionaryRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFErrorCreate func(objc.ID, unsafe.Pointer, int, objc.ID) objc.ID
@@ -3213,7 +3213,7 @@ func CFErrorCreate(allocator CFAllocatorRef, domain unsafe.Pointer, code int, us
 		ebipurego.RegisterLibFunc(&_fnCFErrorCreate, _lib, "CFErrorCreate")
 	}
 	_ret := _fnCFErrorCreate(objref.IDOf(allocator.Object), domain, code, objref.IDOf(userInfo.Object))
-	return CFErrorRef{obj.Adopt(_ret)}
+	return CFErrorRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFErrorCreateWithUserInfoKeysAndValues func(objc.ID, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int) objc.ID
@@ -3225,7 +3225,7 @@ func CFErrorCreateWithUserInfoKeysAndValues(allocator CFAllocatorRef, domain uns
 		ebipurego.RegisterLibFunc(&_fnCFErrorCreateWithUserInfoKeysAndValues, _lib, "CFErrorCreateWithUserInfoKeysAndValues")
 	}
 	_ret := _fnCFErrorCreateWithUserInfoKeysAndValues(objref.IDOf(allocator.Object), domain, code, userInfoKeys, userInfoValues, numUserInfoValues)
-	return CFErrorRef{obj.Adopt(_ret)}
+	return CFErrorRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFErrorGetCode func(objc.ID) int
@@ -3270,7 +3270,7 @@ func CFFileDescriptorCreate(allocator CFAllocatorRef, fd int, closeOnInvalidate 
 		ebipurego.RegisterLibFunc(&_fnCFFileDescriptorCreate, _lib, "CFFileDescriptorCreate")
 	}
 	_ret := _fnCFFileDescriptorCreate(objref.IDOf(allocator.Object), fd, closeOnInvalidate, callout, context_)
-	return CFFileDescriptorRef{obj.Adopt(_ret)}
+	return CFFileDescriptorRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFFileDescriptorCreateRunLoopSource func(objc.ID, objc.ID, int) objc.ID
@@ -3282,7 +3282,7 @@ func CFFileDescriptorCreateRunLoopSource(allocator CFAllocatorRef, f CFFileDescr
 		ebipurego.RegisterLibFunc(&_fnCFFileDescriptorCreateRunLoopSource, _lib, "CFFileDescriptorCreateRunLoopSource")
 	}
 	_ret := _fnCFFileDescriptorCreateRunLoopSource(objref.IDOf(allocator.Object), objref.IDOf(f.Object), order)
-	return CFRunLoopSourceRef{obj.Adopt(_ret)}
+	return CFRunLoopSourceRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFFileDescriptorDisableCallBacks func(objc.ID, int)
@@ -3415,7 +3415,7 @@ func CFFileSecurityCreate(allocator CFAllocatorRef) CFFileSecurityRef {
 		ebipurego.RegisterLibFunc(&_fnCFFileSecurityCreate, _lib, "CFFileSecurityCreate")
 	}
 	_ret := _fnCFFileSecurityCreate(objref.IDOf(allocator.Object))
-	return CFFileSecurityRef{obj.Adopt(_ret)}
+	return CFFileSecurityRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFFileSecurityCreateCopy func(objc.ID, objc.ID) objc.ID
@@ -3427,7 +3427,7 @@ func CFFileSecurityCreateCopy(allocator CFAllocatorRef, fileSec CFFileSecurityRe
 		ebipurego.RegisterLibFunc(&_fnCFFileSecurityCreateCopy, _lib, "CFFileSecurityCreateCopy")
 	}
 	_ret := _fnCFFileSecurityCreateCopy(objref.IDOf(allocator.Object), objref.IDOf(fileSec.Object))
-	return CFFileSecurityRef{obj.Adopt(_ret)}
+	return CFFileSecurityRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFFileSecurityGetGroup func(objc.ID, unsafe.Pointer) uint8
@@ -3555,7 +3555,7 @@ func CFGetAllocator(cf obj.Object) CFAllocatorRef {
 		ebipurego.RegisterLibFunc(&_fnCFGetAllocator, _lib, "CFGetAllocator")
 	}
 	_ret := _fnCFGetAllocator(objref.IDOf(cf))
-	return CFAllocatorRef{obj.Wrap(_ret)}
+	return CFAllocatorRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFGetRetainCount func(objc.ID) int
@@ -3580,10 +3580,10 @@ func CFGetTypeID(cf obj.Object) int {
 	return _fnCFGetTypeID(objref.IDOf(cf))
 }
 
-var _fnCFGregorianDateGetAbsoluteTime func(unsafe.Pointer, objc.ID) float64
+var _fnCFGregorianDateGetAbsoluteTime func(CFGregorianDate, objc.ID) float64
 
 // CFGregorianDateGetAbsoluteTime calls the CoreFoundation framework function CFGregorianDateGetAbsoluteTime.
-func CFGregorianDateGetAbsoluteTime(gdate unsafe.Pointer, tz CFTimeZoneRef) float64 {
+func CFGregorianDateGetAbsoluteTime(gdate CFGregorianDate, tz CFTimeZoneRef) float64 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFGregorianDateGetAbsoluteTime == nil {
 		ebipurego.RegisterLibFunc(&_fnCFGregorianDateGetAbsoluteTime, _lib, "CFGregorianDateGetAbsoluteTime")
@@ -3591,10 +3591,10 @@ func CFGregorianDateGetAbsoluteTime(gdate unsafe.Pointer, tz CFTimeZoneRef) floa
 	return _fnCFGregorianDateGetAbsoluteTime(gdate, objref.IDOf(tz.Object))
 }
 
-var _fnCFGregorianDateIsValid func(unsafe.Pointer, int) uint8
+var _fnCFGregorianDateIsValid func(CFGregorianDate, int) uint8
 
 // CFGregorianDateIsValid calls the CoreFoundation framework function CFGregorianDateIsValid.
-func CFGregorianDateIsValid(gdate unsafe.Pointer, unitFlags int) uint8 {
+func CFGregorianDateIsValid(gdate CFGregorianDate, unitFlags int) uint8 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFGregorianDateIsValid == nil {
 		ebipurego.RegisterLibFunc(&_fnCFGregorianDateIsValid, _lib, "CFGregorianDateIsValid")
@@ -3622,7 +3622,7 @@ func CFLocaleCopyAvailableLocaleIdentifiers() CFArrayRef {
 		ebipurego.RegisterLibFunc(&_fnCFLocaleCopyAvailableLocaleIdentifiers, _lib, "CFLocaleCopyAvailableLocaleIdentifiers")
 	}
 	_ret := _fnCFLocaleCopyAvailableLocaleIdentifiers()
-	return CFArrayRef{obj.Adopt(_ret)}
+	return CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFLocaleCopyCommonISOCurrencyCodes func() objc.ID
@@ -3634,7 +3634,7 @@ func CFLocaleCopyCommonISOCurrencyCodes() CFArrayRef {
 		ebipurego.RegisterLibFunc(&_fnCFLocaleCopyCommonISOCurrencyCodes, _lib, "CFLocaleCopyCommonISOCurrencyCodes")
 	}
 	_ret := _fnCFLocaleCopyCommonISOCurrencyCodes()
-	return CFArrayRef{obj.Adopt(_ret)}
+	return CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFLocaleCopyCurrent func() objc.ID
@@ -3646,7 +3646,7 @@ func CFLocaleCopyCurrent() CFLocaleRef {
 		ebipurego.RegisterLibFunc(&_fnCFLocaleCopyCurrent, _lib, "CFLocaleCopyCurrent")
 	}
 	_ret := _fnCFLocaleCopyCurrent()
-	return CFLocaleRef{obj.Adopt(_ret)}
+	return CFLocaleRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFLocaleCopyDisplayNameForPropertyValue func(objc.ID, unsafe.Pointer, objc.ID) objc.ID
@@ -3658,7 +3658,7 @@ func CFLocaleCopyDisplayNameForPropertyValue(displayLocale CFLocaleRef, key unsa
 		ebipurego.RegisterLibFunc(&_fnCFLocaleCopyDisplayNameForPropertyValue, _lib, "CFLocaleCopyDisplayNameForPropertyValue")
 	}
 	_ret := _fnCFLocaleCopyDisplayNameForPropertyValue(objref.IDOf(displayLocale.Object), key, objref.IDOf(value.Object))
-	return CFStringRef{obj.Adopt(_ret)}
+	return CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFLocaleCopyISOCountryCodes func() objc.ID
@@ -3670,7 +3670,7 @@ func CFLocaleCopyISOCountryCodes() CFArrayRef {
 		ebipurego.RegisterLibFunc(&_fnCFLocaleCopyISOCountryCodes, _lib, "CFLocaleCopyISOCountryCodes")
 	}
 	_ret := _fnCFLocaleCopyISOCountryCodes()
-	return CFArrayRef{obj.Adopt(_ret)}
+	return CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFLocaleCopyISOCurrencyCodes func() objc.ID
@@ -3682,7 +3682,7 @@ func CFLocaleCopyISOCurrencyCodes() CFArrayRef {
 		ebipurego.RegisterLibFunc(&_fnCFLocaleCopyISOCurrencyCodes, _lib, "CFLocaleCopyISOCurrencyCodes")
 	}
 	_ret := _fnCFLocaleCopyISOCurrencyCodes()
-	return CFArrayRef{obj.Adopt(_ret)}
+	return CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFLocaleCopyISOLanguageCodes func() objc.ID
@@ -3694,7 +3694,7 @@ func CFLocaleCopyISOLanguageCodes() CFArrayRef {
 		ebipurego.RegisterLibFunc(&_fnCFLocaleCopyISOLanguageCodes, _lib, "CFLocaleCopyISOLanguageCodes")
 	}
 	_ret := _fnCFLocaleCopyISOLanguageCodes()
-	return CFArrayRef{obj.Adopt(_ret)}
+	return CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFLocaleCopyPreferredLanguages func() objc.ID
@@ -3706,7 +3706,7 @@ func CFLocaleCopyPreferredLanguages() CFArrayRef {
 		ebipurego.RegisterLibFunc(&_fnCFLocaleCopyPreferredLanguages, _lib, "CFLocaleCopyPreferredLanguages")
 	}
 	_ret := _fnCFLocaleCopyPreferredLanguages()
-	return CFArrayRef{obj.Adopt(_ret)}
+	return CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFLocaleCreate func(objc.ID, unsafe.Pointer) objc.ID
@@ -3718,7 +3718,7 @@ func CFLocaleCreate(allocator CFAllocatorRef, localeIdentifier unsafe.Pointer) C
 		ebipurego.RegisterLibFunc(&_fnCFLocaleCreate, _lib, "CFLocaleCreate")
 	}
 	_ret := _fnCFLocaleCreate(objref.IDOf(allocator.Object), localeIdentifier)
-	return CFLocaleRef{obj.Adopt(_ret)}
+	return CFLocaleRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFLocaleCreateCanonicalLanguageIdentifierFromString func(objc.ID, objc.ID) unsafe.Pointer
@@ -3763,7 +3763,7 @@ func CFLocaleCreateComponentsFromLocaleIdentifier(allocator CFAllocatorRef, loca
 		ebipurego.RegisterLibFunc(&_fnCFLocaleCreateComponentsFromLocaleIdentifier, _lib, "CFLocaleCreateComponentsFromLocaleIdentifier")
 	}
 	_ret := _fnCFLocaleCreateComponentsFromLocaleIdentifier(objref.IDOf(allocator.Object), localeID)
-	return CFDictionaryRef{obj.Adopt(_ret)}
+	return CFDictionaryRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFLocaleCreateCopy func(objc.ID, objc.ID) objc.ID
@@ -3775,7 +3775,7 @@ func CFLocaleCreateCopy(allocator CFAllocatorRef, locale CFLocaleRef) CFLocaleRe
 		ebipurego.RegisterLibFunc(&_fnCFLocaleCreateCopy, _lib, "CFLocaleCreateCopy")
 	}
 	_ret := _fnCFLocaleCreateCopy(objref.IDOf(allocator.Object), objref.IDOf(locale.Object))
-	return CFLocaleRef{obj.Adopt(_ret)}
+	return CFLocaleRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFLocaleCreateLocaleIdentifierFromComponents func(objc.ID, objc.ID) unsafe.Pointer
@@ -3842,7 +3842,7 @@ func CFLocaleGetSystem() CFLocaleRef {
 		ebipurego.RegisterLibFunc(&_fnCFLocaleGetSystem, _lib, "CFLocaleGetSystem")
 	}
 	_ret := _fnCFLocaleGetSystem()
-	return CFLocaleRef{obj.Wrap(_ret)}
+	return CFLocaleRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFLocaleGetTypeID func() int
@@ -3889,7 +3889,7 @@ func CFMachPortCreate(allocator CFAllocatorRef, callout unsafe.Pointer, context_
 	}
 	var _out0 uint8
 	_ret := _fnCFMachPortCreate(objref.IDOf(allocator.Object), callout, context_, unsafe.Pointer(&_out0))
-	return CFMachPortRef{obj.Adopt(_ret)}, _out0
+	return CFMachPortRef{Object: obj.Adopt(_ret)}, _out0
 }
 
 var _fnCFMachPortCreateRunLoopSource func(objc.ID, objc.ID, int) objc.ID
@@ -3901,7 +3901,7 @@ func CFMachPortCreateRunLoopSource(allocator CFAllocatorRef, port CFMachPortRef,
 		ebipurego.RegisterLibFunc(&_fnCFMachPortCreateRunLoopSource, _lib, "CFMachPortCreateRunLoopSource")
 	}
 	_ret := _fnCFMachPortCreateRunLoopSource(objref.IDOf(allocator.Object), objref.IDOf(port.Object), order)
-	return CFRunLoopSourceRef{obj.Adopt(_ret)}
+	return CFRunLoopSourceRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFMachPortCreateWithPort func(objc.ID, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -3914,7 +3914,7 @@ func CFMachPortCreateWithPort(allocator CFAllocatorRef, portNum int, callout uns
 	}
 	var _out0 uint8
 	_ret := _fnCFMachPortCreateWithPort(objref.IDOf(allocator.Object), portNum, callout, context_, unsafe.Pointer(&_out0))
-	return CFMachPortRef{obj.Adopt(_ret)}, _out0
+	return CFMachPortRef{Object: obj.Adopt(_ret)}, _out0
 }
 
 var _fnCFMachPortGetContext func(objc.ID, unsafe.Pointer)
@@ -4016,7 +4016,7 @@ func CFMessagePortCreateLocal(allocator CFAllocatorRef, name CFStringRef, callou
 	}
 	var _out0 uint8
 	_ret := _fnCFMessagePortCreateLocal(objref.IDOf(allocator.Object), objref.IDOf(name.Object), callout, context_, unsafe.Pointer(&_out0))
-	return CFMessagePortRef{obj.Adopt(_ret)}, _out0
+	return CFMessagePortRef{Object: obj.Adopt(_ret)}, _out0
 }
 
 var _fnCFMessagePortCreateRemote func(objc.ID, objc.ID) objc.ID
@@ -4028,7 +4028,7 @@ func CFMessagePortCreateRemote(allocator CFAllocatorRef, name CFStringRef) CFMes
 		ebipurego.RegisterLibFunc(&_fnCFMessagePortCreateRemote, _lib, "CFMessagePortCreateRemote")
 	}
 	_ret := _fnCFMessagePortCreateRemote(objref.IDOf(allocator.Object), objref.IDOf(name.Object))
-	return CFMessagePortRef{obj.Adopt(_ret)}
+	return CFMessagePortRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFMessagePortCreateRunLoopSource func(objc.ID, objc.ID, int) objc.ID
@@ -4040,7 +4040,7 @@ func CFMessagePortCreateRunLoopSource(allocator CFAllocatorRef, local CFMessageP
 		ebipurego.RegisterLibFunc(&_fnCFMessagePortCreateRunLoopSource, _lib, "CFMessagePortCreateRunLoopSource")
 	}
 	_ret := _fnCFMessagePortCreateRunLoopSource(objref.IDOf(allocator.Object), objref.IDOf(local.Object), order)
-	return CFRunLoopSourceRef{obj.Adopt(_ret)}
+	return CFRunLoopSourceRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFMessagePortGetContext func(objc.ID, unsafe.Pointer)
@@ -4074,7 +4074,7 @@ func CFMessagePortGetName(ms CFMessagePortRef) CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnCFMessagePortGetName, _lib, "CFMessagePortGetName")
 	}
 	_ret := _fnCFMessagePortGetName(objref.IDOf(ms.Object))
-	return CFStringRef{obj.Wrap(_ret)}
+	return CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFMessagePortGetTypeID func() int
@@ -4185,7 +4185,7 @@ func CFNotificationCenterGetDarwinNotifyCenter() CFNotificationCenterRef {
 		ebipurego.RegisterLibFunc(&_fnCFNotificationCenterGetDarwinNotifyCenter, _lib, "CFNotificationCenterGetDarwinNotifyCenter")
 	}
 	_ret := _fnCFNotificationCenterGetDarwinNotifyCenter()
-	return CFNotificationCenterRef{obj.Wrap(_ret)}
+	return CFNotificationCenterRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFNotificationCenterGetDistributedCenter func() objc.ID
@@ -4197,7 +4197,7 @@ func CFNotificationCenterGetDistributedCenter() CFNotificationCenterRef {
 		ebipurego.RegisterLibFunc(&_fnCFNotificationCenterGetDistributedCenter, _lib, "CFNotificationCenterGetDistributedCenter")
 	}
 	_ret := _fnCFNotificationCenterGetDistributedCenter()
-	return CFNotificationCenterRef{obj.Wrap(_ret)}
+	return CFNotificationCenterRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFNotificationCenterGetLocalCenter func() objc.ID
@@ -4209,7 +4209,7 @@ func CFNotificationCenterGetLocalCenter() CFNotificationCenterRef {
 		ebipurego.RegisterLibFunc(&_fnCFNotificationCenterGetLocalCenter, _lib, "CFNotificationCenterGetLocalCenter")
 	}
 	_ret := _fnCFNotificationCenterGetLocalCenter()
-	return CFNotificationCenterRef{obj.Wrap(_ret)}
+	return CFNotificationCenterRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFNotificationCenterGetTypeID func() int
@@ -4298,7 +4298,7 @@ func CFNumberCreate(allocator CFAllocatorRef, theType CFNumberType, valuePtr uns
 		ebipurego.RegisterLibFunc(&_fnCFNumberCreate, _lib, "CFNumberCreate")
 	}
 	_ret := _fnCFNumberCreate(objref.IDOf(allocator.Object), theType, valuePtr)
-	return CFNumberRef{obj.Adopt(_ret)}
+	return CFNumberRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFNumberFormatterCopyProperty func(objc.ID, unsafe.Pointer) objc.ID
@@ -4322,7 +4322,7 @@ func CFNumberFormatterCreate(allocator CFAllocatorRef, locale CFLocaleRef, style
 		ebipurego.RegisterLibFunc(&_fnCFNumberFormatterCreate, _lib, "CFNumberFormatterCreate")
 	}
 	_ret := _fnCFNumberFormatterCreate(objref.IDOf(allocator.Object), objref.IDOf(locale.Object), style)
-	return CFNumberFormatterRef{obj.Adopt(_ret)}
+	return CFNumberFormatterRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFNumberFormatterCreateNumberFromString func(objc.ID, objc.ID, objc.ID, unsafe.Pointer, int) objc.ID
@@ -4335,7 +4335,7 @@ func CFNumberFormatterCreateNumberFromString(allocator CFAllocatorRef, formatter
 	}
 	var _out0 CFRange
 	_ret := _fnCFNumberFormatterCreateNumberFromString(objref.IDOf(allocator.Object), objref.IDOf(formatter.Object), objref.IDOf(str.Object), unsafe.Pointer(&_out0), options)
-	return CFNumberRef{obj.Adopt(_ret)}, _out0
+	return CFNumberRef{Object: obj.Adopt(_ret)}, _out0
 }
 
 var _fnCFNumberFormatterCreateStringWithNumber func(objc.ID, objc.ID, objc.ID) objc.ID
@@ -4347,7 +4347,7 @@ func CFNumberFormatterCreateStringWithNumber(allocator CFAllocatorRef, formatter
 		ebipurego.RegisterLibFunc(&_fnCFNumberFormatterCreateStringWithNumber, _lib, "CFNumberFormatterCreateStringWithNumber")
 	}
 	_ret := _fnCFNumberFormatterCreateStringWithNumber(objref.IDOf(allocator.Object), objref.IDOf(formatter.Object), objref.IDOf(number.Object))
-	return CFStringRef{obj.Adopt(_ret)}
+	return CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFNumberFormatterCreateStringWithValue func(objc.ID, objc.ID, CFNumberType, unsafe.Pointer) objc.ID
@@ -4359,7 +4359,7 @@ func CFNumberFormatterCreateStringWithValue(allocator CFAllocatorRef, formatter 
 		ebipurego.RegisterLibFunc(&_fnCFNumberFormatterCreateStringWithValue, _lib, "CFNumberFormatterCreateStringWithValue")
 	}
 	_ret := _fnCFNumberFormatterCreateStringWithValue(objref.IDOf(allocator.Object), objref.IDOf(formatter.Object), numberType, valuePtr)
-	return CFStringRef{obj.Adopt(_ret)}
+	return CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFNumberFormatterGetDecimalInfoForCurrencyCode func(objc.ID, unsafe.Pointer, unsafe.Pointer) uint8
@@ -4385,7 +4385,7 @@ func CFNumberFormatterGetFormat(formatter CFNumberFormatterRef) CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnCFNumberFormatterGetFormat, _lib, "CFNumberFormatterGetFormat")
 	}
 	_ret := _fnCFNumberFormatterGetFormat(objref.IDOf(formatter.Object))
-	return CFStringRef{obj.Wrap(_ret)}
+	return CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFNumberFormatterGetLocale func(objc.ID) objc.ID
@@ -4397,7 +4397,7 @@ func CFNumberFormatterGetLocale(formatter CFNumberFormatterRef) CFLocaleRef {
 		ebipurego.RegisterLibFunc(&_fnCFNumberFormatterGetLocale, _lib, "CFNumberFormatterGetLocale")
 	}
 	_ret := _fnCFNumberFormatterGetLocale(objref.IDOf(formatter.Object))
-	return CFLocaleRef{obj.Wrap(_ret)}
+	return CFLocaleRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFNumberFormatterGetStyle func(objc.ID) CFNumberFormatterStyle
@@ -4532,7 +4532,7 @@ func CFPlugInCreate(allocator CFAllocatorRef, plugInURL CFURLRef) CFPlugInRef {
 		ebipurego.RegisterLibFunc(&_fnCFPlugInCreate, _lib, "CFPlugInCreate")
 	}
 	_ret := _fnCFPlugInCreate(objref.IDOf(allocator.Object), objref.IDOf(plugInURL.Object))
-	return CFPlugInRef{obj.Adopt(_ret)}
+	return CFPlugInRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFPlugInFindFactoriesForPlugInType func(objc.ID) objc.ID
@@ -4544,7 +4544,7 @@ func CFPlugInFindFactoriesForPlugInType(typeUUID CFUUIDRef) CFArrayRef {
 		ebipurego.RegisterLibFunc(&_fnCFPlugInFindFactoriesForPlugInType, _lib, "CFPlugInFindFactoriesForPlugInType")
 	}
 	_ret := _fnCFPlugInFindFactoriesForPlugInType(objref.IDOf(typeUUID.Object))
-	return CFArrayRef{obj.Adopt(_ret)}
+	return CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFPlugInFindFactoriesForPlugInTypeInPlugIn func(objc.ID, objc.ID) objc.ID
@@ -4556,7 +4556,7 @@ func CFPlugInFindFactoriesForPlugInTypeInPlugIn(typeUUID CFUUIDRef, plugIn CFPlu
 		ebipurego.RegisterLibFunc(&_fnCFPlugInFindFactoriesForPlugInTypeInPlugIn, _lib, "CFPlugInFindFactoriesForPlugInTypeInPlugIn")
 	}
 	_ret := _fnCFPlugInFindFactoriesForPlugInTypeInPlugIn(objref.IDOf(typeUUID.Object), objref.IDOf(plugIn.Object))
-	return CFArrayRef{obj.Adopt(_ret)}
+	return CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFPlugInGetBundle func(objc.ID) objc.ID
@@ -4568,7 +4568,7 @@ func CFPlugInGetBundle(plugIn CFPlugInRef) CFBundleRef {
 		ebipurego.RegisterLibFunc(&_fnCFPlugInGetBundle, _lib, "CFPlugInGetBundle")
 	}
 	_ret := _fnCFPlugInGetBundle(objref.IDOf(plugIn.Object))
-	return CFBundleRef{obj.Wrap(_ret)}
+	return CFBundleRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFPlugInGetTypeID func() int
@@ -4602,7 +4602,7 @@ func CFPlugInInstanceCreateWithInstanceDataSize(allocator CFAllocatorRef, instan
 		ebipurego.RegisterLibFunc(&_fnCFPlugInInstanceCreateWithInstanceDataSize, _lib, "CFPlugInInstanceCreateWithInstanceDataSize")
 	}
 	_ret := _fnCFPlugInInstanceCreateWithInstanceDataSize(objref.IDOf(allocator.Object), instanceDataSize, deallocateInstanceFunction, objref.IDOf(factoryName.Object), getInterfaceFunction)
-	return CFPlugInInstanceRef{obj.Adopt(_ret)}
+	return CFPlugInInstanceRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFPlugInInstanceGetFactoryName func(objc.ID) objc.ID
@@ -4614,7 +4614,7 @@ func CFPlugInInstanceGetFactoryName(instance CFPlugInInstanceRef) CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnCFPlugInInstanceGetFactoryName, _lib, "CFPlugInInstanceGetFactoryName")
 	}
 	_ret := _fnCFPlugInInstanceGetFactoryName(objref.IDOf(instance.Object))
-	return CFStringRef{obj.Adopt(_ret)}
+	return CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFPlugInInstanceGetInstanceData func(objc.ID) unsafe.Pointer
@@ -4780,7 +4780,7 @@ func CFPreferencesCopyAppValue(key CFStringRef, applicationID CFStringRef) CFPro
 		ebipurego.RegisterLibFunc(&_fnCFPreferencesCopyAppValue, _lib, "CFPreferencesCopyAppValue")
 	}
 	_ret := _fnCFPreferencesCopyAppValue(objref.IDOf(key.Object), objref.IDOf(applicationID.Object))
-	return CFPropertyListRef{obj.Adopt(_ret)}
+	return CFPropertyListRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFPreferencesCopyApplicationList func(objc.ID, objc.ID) objc.ID
@@ -4792,7 +4792,7 @@ func CFPreferencesCopyApplicationList(userName CFStringRef, hostName CFStringRef
 		ebipurego.RegisterLibFunc(&_fnCFPreferencesCopyApplicationList, _lib, "CFPreferencesCopyApplicationList")
 	}
 	_ret := _fnCFPreferencesCopyApplicationList(objref.IDOf(userName.Object), objref.IDOf(hostName.Object))
-	return CFArrayRef{obj.Adopt(_ret)}
+	return CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFPreferencesCopyKeyList func(objc.ID, objc.ID, objc.ID) objc.ID
@@ -4804,7 +4804,7 @@ func CFPreferencesCopyKeyList(applicationID CFStringRef, userName CFStringRef, h
 		ebipurego.RegisterLibFunc(&_fnCFPreferencesCopyKeyList, _lib, "CFPreferencesCopyKeyList")
 	}
 	_ret := _fnCFPreferencesCopyKeyList(objref.IDOf(applicationID.Object), objref.IDOf(userName.Object), objref.IDOf(hostName.Object))
-	return CFArrayRef{obj.Adopt(_ret)}
+	return CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFPreferencesCopyMultiple func(objc.ID, objc.ID, objc.ID, objc.ID) objc.ID
@@ -4816,7 +4816,7 @@ func CFPreferencesCopyMultiple(keysToFetch CFArrayRef, applicationID CFStringRef
 		ebipurego.RegisterLibFunc(&_fnCFPreferencesCopyMultiple, _lib, "CFPreferencesCopyMultiple")
 	}
 	_ret := _fnCFPreferencesCopyMultiple(objref.IDOf(keysToFetch.Object), objref.IDOf(applicationID.Object), objref.IDOf(userName.Object), objref.IDOf(hostName.Object))
-	return CFDictionaryRef{obj.Adopt(_ret)}
+	return CFDictionaryRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFPreferencesCopyValue func(objc.ID, objc.ID, objc.ID, objc.ID) objc.ID
@@ -4828,7 +4828,7 @@ func CFPreferencesCopyValue(key CFStringRef, applicationID CFStringRef, userName
 		ebipurego.RegisterLibFunc(&_fnCFPreferencesCopyValue, _lib, "CFPreferencesCopyValue")
 	}
 	_ret := _fnCFPreferencesCopyValue(objref.IDOf(key.Object), objref.IDOf(applicationID.Object), objref.IDOf(userName.Object), objref.IDOf(hostName.Object))
-	return CFPropertyListRef{obj.Adopt(_ret)}
+	return CFPropertyListRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFPreferencesGetAppBooleanValue func(objc.ID, objc.ID, unsafe.Pointer) uint8
@@ -4921,7 +4921,7 @@ func CFPropertyListCreateDeepCopy(allocator CFAllocatorRef, propertyList CFPrope
 		ebipurego.RegisterLibFunc(&_fnCFPropertyListCreateDeepCopy, _lib, "CFPropertyListCreateDeepCopy")
 	}
 	_ret := _fnCFPropertyListCreateDeepCopy(objref.IDOf(allocator.Object), objref.IDOf(propertyList.Object), mutabilityOption)
-	return CFPropertyListRef{obj.Adopt(_ret)}
+	return CFPropertyListRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFPropertyListCreateFromStream func(objc.ID, objc.ID, int, int, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -4934,7 +4934,7 @@ func CFPropertyListCreateFromStream(allocator CFAllocatorRef, stream CFReadStrea
 	}
 	var _out0 CFPropertyListFormat
 	_ret := _fnCFPropertyListCreateFromStream(objref.IDOf(allocator.Object), objref.IDOf(stream.Object), streamLength, mutabilityOption, unsafe.Pointer(&_out0), errorString)
-	return CFPropertyListRef{obj.Wrap(_ret)}, _out0
+	return CFPropertyListRef{Object: obj.Wrap(_ret)}, _out0
 }
 
 var _fnCFPropertyListCreateFromXMLData func(objc.ID, objc.ID, int, unsafe.Pointer) objc.ID
@@ -4946,7 +4946,7 @@ func CFPropertyListCreateFromXMLData(allocator CFAllocatorRef, xmlData CFDataRef
 		ebipurego.RegisterLibFunc(&_fnCFPropertyListCreateFromXMLData, _lib, "CFPropertyListCreateFromXMLData")
 	}
 	_ret := _fnCFPropertyListCreateFromXMLData(objref.IDOf(allocator.Object), objref.IDOf(xmlData.Object), mutabilityOption, errorString)
-	return CFPropertyListRef{obj.Wrap(_ret)}
+	return CFPropertyListRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFPropertyListCreateWithData func(objc.ID, objc.ID, int, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -4959,7 +4959,7 @@ func CFPropertyListCreateWithData(allocator CFAllocatorRef, data CFDataRef, opti
 	}
 	var _out0 CFPropertyListFormat
 	_ret := _fnCFPropertyListCreateWithData(objref.IDOf(allocator.Object), objref.IDOf(data.Object), options, unsafe.Pointer(&_out0), err)
-	return CFPropertyListRef{obj.Wrap(_ret)}, _out0
+	return CFPropertyListRef{Object: obj.Wrap(_ret)}, _out0
 }
 
 var _fnCFPropertyListCreateWithStream func(objc.ID, objc.ID, int, int, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -4972,7 +4972,7 @@ func CFPropertyListCreateWithStream(allocator CFAllocatorRef, stream CFReadStrea
 	}
 	var _out0 CFPropertyListFormat
 	_ret := _fnCFPropertyListCreateWithStream(objref.IDOf(allocator.Object), objref.IDOf(stream.Object), streamLength, options, unsafe.Pointer(&_out0), err)
-	return CFPropertyListRef{obj.Wrap(_ret)}, _out0
+	return CFPropertyListRef{Object: obj.Wrap(_ret)}, _out0
 }
 
 var _fnCFPropertyListCreateXMLData func(objc.ID, objc.ID) objc.ID
@@ -4984,7 +4984,7 @@ func CFPropertyListCreateXMLData(allocator CFAllocatorRef, propertyList CFProper
 		ebipurego.RegisterLibFunc(&_fnCFPropertyListCreateXMLData, _lib, "CFPropertyListCreateXMLData")
 	}
 	_ret := _fnCFPropertyListCreateXMLData(objref.IDOf(allocator.Object), objref.IDOf(propertyList.Object))
-	return CFDataRef{obj.Wrap(_ret)}
+	return CFDataRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFPropertyListIsValid func(objc.ID, CFPropertyListFormat) uint8
@@ -5009,10 +5009,10 @@ func CFPropertyListWriteToStream(propertyList CFPropertyListRef, stream CFWriteS
 	return _fnCFPropertyListWriteToStream(objref.IDOf(propertyList.Object), objref.IDOf(stream.Object), format, errorString)
 }
 
-var _fnCFRangeMake func(int, int) unsafe.Pointer
+var _fnCFRangeMake func(int, int) CFRange
 
 // CFRangeMake calls the CoreFoundation framework function CFRangeMake.
-func CFRangeMake(loc int, length int) unsafe.Pointer {
+func CFRangeMake(loc int, length int) CFRange {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFRangeMake == nil {
 		ebipurego.RegisterLibFunc(&_fnCFRangeMake, _lib, "CFRangeMake")
@@ -5051,7 +5051,7 @@ func CFReadStreamCopyError(stream CFReadStreamRef) CFErrorRef {
 		ebipurego.RegisterLibFunc(&_fnCFReadStreamCopyError, _lib, "CFReadStreamCopyError")
 	}
 	_ret := _fnCFReadStreamCopyError(objref.IDOf(stream.Object))
-	return CFErrorRef{obj.Adopt(_ret)}
+	return CFErrorRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFReadStreamCopyProperty func(objc.ID, unsafe.Pointer) objc.ID
@@ -5075,7 +5075,7 @@ func CFReadStreamCreateWithBytesNoCopy(alloc CFAllocatorRef, data unsafe.Pointer
 		ebipurego.RegisterLibFunc(&_fnCFReadStreamCreateWithBytesNoCopy, _lib, "CFReadStreamCreateWithBytesNoCopy")
 	}
 	_ret := _fnCFReadStreamCreateWithBytesNoCopy(objref.IDOf(alloc.Object), data, length, objref.IDOf(bytesDeallocator.Object))
-	return CFReadStreamRef{obj.Adopt(_ret)}
+	return CFReadStreamRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFReadStreamCreateWithFile func(objc.ID, objc.ID) objc.ID
@@ -5087,7 +5087,7 @@ func CFReadStreamCreateWithFile(alloc CFAllocatorRef, fileURL CFURLRef) CFReadSt
 		ebipurego.RegisterLibFunc(&_fnCFReadStreamCreateWithFile, _lib, "CFReadStreamCreateWithFile")
 	}
 	_ret := _fnCFReadStreamCreateWithFile(objref.IDOf(alloc.Object), objref.IDOf(fileURL.Object))
-	return CFReadStreamRef{obj.Adopt(_ret)}
+	return CFReadStreamRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFReadStreamGetBuffer func(objc.ID, int, unsafe.Pointer) unsafe.Pointer
@@ -5103,10 +5103,10 @@ func CFReadStreamGetBuffer(stream CFReadStreamRef, maxBytesToRead int) (result u
 	return _ret, _out0
 }
 
-var _fnCFReadStreamGetError func(objc.ID) unsafe.Pointer
+var _fnCFReadStreamGetError func(objc.ID) CFStreamError
 
 // CFReadStreamGetError calls the CoreFoundation framework function CFReadStreamGetError.
-func CFReadStreamGetError(stream CFReadStreamRef) unsafe.Pointer {
+func CFReadStreamGetError(stream CFReadStreamRef) CFStreamError {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFReadStreamGetError == nil {
 		ebipurego.RegisterLibFunc(&_fnCFReadStreamGetError, _lib, "CFReadStreamGetError")
@@ -5335,7 +5335,7 @@ func CFRunLoopCopyAllModes(rl CFRunLoopRef) CFArrayRef {
 		ebipurego.RegisterLibFunc(&_fnCFRunLoopCopyAllModes, _lib, "CFRunLoopCopyAllModes")
 	}
 	_ret := _fnCFRunLoopCopyAllModes(objref.IDOf(rl.Object))
-	return CFArrayRef{obj.Adopt(_ret)}
+	return CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFRunLoopCopyCurrentMode func(objc.ID) unsafe.Pointer
@@ -5358,7 +5358,7 @@ func CFRunLoopGetCurrent() CFRunLoopRef {
 		ebipurego.RegisterLibFunc(&_fnCFRunLoopGetCurrent, _lib, "CFRunLoopGetCurrent")
 	}
 	_ret := _fnCFRunLoopGetCurrent()
-	return CFRunLoopRef{obj.Wrap(_ret)}
+	return CFRunLoopRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFRunLoopGetMain func() objc.ID
@@ -5370,7 +5370,7 @@ func CFRunLoopGetMain() CFRunLoopRef {
 		ebipurego.RegisterLibFunc(&_fnCFRunLoopGetMain, _lib, "CFRunLoopGetMain")
 	}
 	_ret := _fnCFRunLoopGetMain()
-	return CFRunLoopRef{obj.Wrap(_ret)}
+	return CFRunLoopRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFRunLoopGetNextTimerFireDate func(objc.ID, unsafe.Pointer) float64
@@ -5415,7 +5415,7 @@ func CFRunLoopObserverCreate(allocator CFAllocatorRef, activities int, repeats u
 		ebipurego.RegisterLibFunc(&_fnCFRunLoopObserverCreate, _lib, "CFRunLoopObserverCreate")
 	}
 	_ret := _fnCFRunLoopObserverCreate(objref.IDOf(allocator.Object), activities, repeats, order, callout, context_)
-	return CFRunLoopObserverRef{obj.Adopt(_ret)}
+	return CFRunLoopObserverRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFRunLoopObserverCreateWithHandler func(objc.ID, int, uint8, int, objc.Block) objc.ID
@@ -5427,7 +5427,7 @@ func CFRunLoopObserverCreateWithHandler(allocator CFAllocatorRef, activities int
 		ebipurego.RegisterLibFunc(&_fnCFRunLoopObserverCreateWithHandler, _lib, "CFRunLoopObserverCreateWithHandler")
 	}
 	_ret := _fnCFRunLoopObserverCreateWithHandler(objref.IDOf(allocator.Object), activities, repeats, order, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 CFRunLoopActivity) { block(_b0, _b1) }))
-	return CFRunLoopObserverRef{obj.Adopt(_ret)}
+	return CFRunLoopObserverRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFRunLoopObserverDoesRepeat func(objc.ID) uint8
@@ -5582,7 +5582,7 @@ func CFRunLoopSourceCreate(allocator CFAllocatorRef, order int, context_ unsafe.
 		ebipurego.RegisterLibFunc(&_fnCFRunLoopSourceCreate, _lib, "CFRunLoopSourceCreate")
 	}
 	_ret := _fnCFRunLoopSourceCreate(objref.IDOf(allocator.Object), order, context_)
-	return CFRunLoopSourceRef{obj.Adopt(_ret)}
+	return CFRunLoopSourceRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFRunLoopSourceGetContext func(objc.ID, unsafe.Pointer)
@@ -5671,7 +5671,7 @@ func CFRunLoopTimerCreate(allocator CFAllocatorRef, fireDate float64, interval f
 		ebipurego.RegisterLibFunc(&_fnCFRunLoopTimerCreate, _lib, "CFRunLoopTimerCreate")
 	}
 	_ret := _fnCFRunLoopTimerCreate(objref.IDOf(allocator.Object), fireDate, interval, flags, order, callout, context_)
-	return CFRunLoopTimerRef{obj.Adopt(_ret)}
+	return CFRunLoopTimerRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFRunLoopTimerCreateWithHandler func(objc.ID, float64, float64, int, int, objc.Block) objc.ID
@@ -5683,7 +5683,7 @@ func CFRunLoopTimerCreateWithHandler(allocator CFAllocatorRef, fireDate float64,
 		ebipurego.RegisterLibFunc(&_fnCFRunLoopTimerCreateWithHandler, _lib, "CFRunLoopTimerCreateWithHandler")
 	}
 	_ret := _fnCFRunLoopTimerCreateWithHandler(objref.IDOf(allocator.Object), fireDate, interval, flags, order, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { block(_b0) }))
-	return CFRunLoopTimerRef{obj.Adopt(_ret)}
+	return CFRunLoopTimerRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFRunLoopTimerDoesRepeat func(objc.ID) uint8
@@ -5860,7 +5860,7 @@ func CFSetCreate(allocator CFAllocatorRef, values unsafe.Pointer, numValues int,
 		ebipurego.RegisterLibFunc(&_fnCFSetCreate, _lib, "CFSetCreate")
 	}
 	_ret := _fnCFSetCreate(objref.IDOf(allocator.Object), values, numValues, callBacks)
-	return CFSetRef{obj.Adopt(_ret)}
+	return CFSetRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFSetCreateCopy func(objc.ID, objc.ID) objc.ID
@@ -5872,7 +5872,7 @@ func CFSetCreateCopy(allocator CFAllocatorRef, theSet CFSetRef) CFSetRef {
 		ebipurego.RegisterLibFunc(&_fnCFSetCreateCopy, _lib, "CFSetCreateCopy")
 	}
 	_ret := _fnCFSetCreateCopy(objref.IDOf(allocator.Object), objref.IDOf(theSet.Object))
-	return CFSetRef{obj.Adopt(_ret)}
+	return CFSetRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFSetCreateMutable func(objc.ID, int, unsafe.Pointer) objc.ID
@@ -5884,7 +5884,7 @@ func CFSetCreateMutable(allocator CFAllocatorRef, capacity int, callBacks unsafe
 		ebipurego.RegisterLibFunc(&_fnCFSetCreateMutable, _lib, "CFSetCreateMutable")
 	}
 	_ret := _fnCFSetCreateMutable(objref.IDOf(allocator.Object), capacity, callBacks)
-	return CFMutableSetRef{obj.Adopt(_ret)}
+	return CFMutableSetRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFSetCreateMutableCopy func(objc.ID, int, objc.ID) objc.ID
@@ -5896,7 +5896,7 @@ func CFSetCreateMutableCopy(allocator CFAllocatorRef, capacity int, theSet CFSet
 		ebipurego.RegisterLibFunc(&_fnCFSetCreateMutableCopy, _lib, "CFSetCreateMutableCopy")
 	}
 	_ret := _fnCFSetCreateMutableCopy(objref.IDOf(allocator.Object), capacity, objref.IDOf(theSet.Object))
-	return CFMutableSetRef{obj.Adopt(_ret)}
+	return CFMutableSetRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFSetGetCount func(objc.ID) int
@@ -6051,7 +6051,7 @@ func CFSocketCopyAddress(s CFSocketRef) CFDataRef {
 		ebipurego.RegisterLibFunc(&_fnCFSocketCopyAddress, _lib, "CFSocketCopyAddress")
 	}
 	_ret := _fnCFSocketCopyAddress(objref.IDOf(s.Object))
-	return CFDataRef{obj.Adopt(_ret)}
+	return CFDataRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFSocketCopyPeerAddress func(objc.ID) objc.ID
@@ -6063,7 +6063,7 @@ func CFSocketCopyPeerAddress(s CFSocketRef) CFDataRef {
 		ebipurego.RegisterLibFunc(&_fnCFSocketCopyPeerAddress, _lib, "CFSocketCopyPeerAddress")
 	}
 	_ret := _fnCFSocketCopyPeerAddress(objref.IDOf(s.Object))
-	return CFDataRef{obj.Adopt(_ret)}
+	return CFDataRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFSocketCopyRegisteredSocketSignature func(unsafe.Pointer, float64, objc.ID, unsafe.Pointer, unsafe.Pointer) CFSocketError
@@ -6097,7 +6097,7 @@ func CFSocketCreate(allocator CFAllocatorRef, protocolFamily int, socketType int
 		ebipurego.RegisterLibFunc(&_fnCFSocketCreate, _lib, "CFSocketCreate")
 	}
 	_ret := _fnCFSocketCreate(objref.IDOf(allocator.Object), protocolFamily, socketType, protocol, callBackTypes, callout, context_)
-	return CFSocketRef{obj.Adopt(_ret)}
+	return CFSocketRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFSocketCreateConnectedToSocketSignature func(objc.ID, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, float64) objc.ID
@@ -6109,7 +6109,7 @@ func CFSocketCreateConnectedToSocketSignature(allocator CFAllocatorRef, signatur
 		ebipurego.RegisterLibFunc(&_fnCFSocketCreateConnectedToSocketSignature, _lib, "CFSocketCreateConnectedToSocketSignature")
 	}
 	_ret := _fnCFSocketCreateConnectedToSocketSignature(objref.IDOf(allocator.Object), signature, callBackTypes, callout, context_, timeout)
-	return CFSocketRef{obj.Adopt(_ret)}
+	return CFSocketRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFSocketCreateRunLoopSource func(objc.ID, objc.ID, int) objc.ID
@@ -6121,7 +6121,7 @@ func CFSocketCreateRunLoopSource(allocator CFAllocatorRef, s CFSocketRef, order 
 		ebipurego.RegisterLibFunc(&_fnCFSocketCreateRunLoopSource, _lib, "CFSocketCreateRunLoopSource")
 	}
 	_ret := _fnCFSocketCreateRunLoopSource(objref.IDOf(allocator.Object), objref.IDOf(s.Object), order)
-	return CFRunLoopSourceRef{obj.Adopt(_ret)}
+	return CFRunLoopSourceRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFSocketCreateWithNative func(objc.ID, int, int, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -6133,7 +6133,7 @@ func CFSocketCreateWithNative(allocator CFAllocatorRef, sock int, callBackTypes 
 		ebipurego.RegisterLibFunc(&_fnCFSocketCreateWithNative, _lib, "CFSocketCreateWithNative")
 	}
 	_ret := _fnCFSocketCreateWithNative(objref.IDOf(allocator.Object), sock, callBackTypes, callout, context_)
-	return CFSocketRef{obj.Adopt(_ret)}
+	return CFSocketRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFSocketCreateWithSocketSignature func(objc.ID, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -6145,7 +6145,7 @@ func CFSocketCreateWithSocketSignature(allocator CFAllocatorRef, signature unsaf
 		ebipurego.RegisterLibFunc(&_fnCFSocketCreateWithSocketSignature, _lib, "CFSocketCreateWithSocketSignature")
 	}
 	_ret := _fnCFSocketCreateWithSocketSignature(objref.IDOf(allocator.Object), signature, callBackTypes, callout, context_)
-	return CFSocketRef{obj.Adopt(_ret)}
+	return CFSocketRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFSocketDisableCallBacks func(objc.ID, int)
@@ -6458,10 +6458,10 @@ func CFStringCompare(theString1 CFStringRef, theString2 CFStringRef, compareOpti
 	return _fnCFStringCompare(objref.IDOf(theString1.Object), objref.IDOf(theString2.Object), compareOptions)
 }
 
-var _fnCFStringCompareWithOptions func(objc.ID, objc.ID, unsafe.Pointer, CFStringCompareFlags) CFComparisonResult
+var _fnCFStringCompareWithOptions func(objc.ID, objc.ID, CFRange, CFStringCompareFlags) CFComparisonResult
 
 // CFStringCompareWithOptions calls the CoreFoundation framework function CFStringCompareWithOptions.
-func CFStringCompareWithOptions(theString1 CFStringRef, theString2 CFStringRef, rangeToCompare unsafe.Pointer, compareOptions CFStringCompareFlags) CFComparisonResult {
+func CFStringCompareWithOptions(theString1 CFStringRef, theString2 CFStringRef, rangeToCompare CFRange, compareOptions CFStringCompareFlags) CFComparisonResult {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFStringCompareWithOptions == nil {
 		ebipurego.RegisterLibFunc(&_fnCFStringCompareWithOptions, _lib, "CFStringCompareWithOptions")
@@ -6469,10 +6469,10 @@ func CFStringCompareWithOptions(theString1 CFStringRef, theString2 CFStringRef, 
 	return _fnCFStringCompareWithOptions(objref.IDOf(theString1.Object), objref.IDOf(theString2.Object), rangeToCompare, compareOptions)
 }
 
-var _fnCFStringCompareWithOptionsAndLocale func(objc.ID, objc.ID, unsafe.Pointer, CFStringCompareFlags, objc.ID) CFComparisonResult
+var _fnCFStringCompareWithOptionsAndLocale func(objc.ID, objc.ID, CFRange, CFStringCompareFlags, objc.ID) CFComparisonResult
 
 // CFStringCompareWithOptionsAndLocale calls the CoreFoundation framework function CFStringCompareWithOptionsAndLocale.
-func CFStringCompareWithOptionsAndLocale(theString1 CFStringRef, theString2 CFStringRef, rangeToCompare unsafe.Pointer, compareOptions CFStringCompareFlags, locale CFLocaleRef) CFComparisonResult {
+func CFStringCompareWithOptionsAndLocale(theString1 CFStringRef, theString2 CFStringRef, rangeToCompare CFRange, compareOptions CFStringCompareFlags, locale CFLocaleRef) CFComparisonResult {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFStringCompareWithOptionsAndLocale == nil {
 		ebipurego.RegisterLibFunc(&_fnCFStringCompareWithOptionsAndLocale, _lib, "CFStringCompareWithOptionsAndLocale")
@@ -6489,7 +6489,7 @@ func CFStringConvertEncodingToIANACharSetName(encoding int) CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnCFStringConvertEncodingToIANACharSetName, _lib, "CFStringConvertEncodingToIANACharSetName")
 	}
 	_ret := _fnCFStringConvertEncodingToIANACharSetName(encoding)
-	return CFStringRef{obj.Wrap(_ret)}
+	return CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFStringConvertEncodingToNSStringEncoding func(int) int
@@ -6556,19 +6556,19 @@ func CFStringCreateArrayBySeparatingStrings(alloc CFAllocatorRef, theString CFSt
 		ebipurego.RegisterLibFunc(&_fnCFStringCreateArrayBySeparatingStrings, _lib, "CFStringCreateArrayBySeparatingStrings")
 	}
 	_ret := _fnCFStringCreateArrayBySeparatingStrings(objref.IDOf(alloc.Object), objref.IDOf(theString.Object), objref.IDOf(separatorString.Object))
-	return CFArrayRef{obj.Adopt(_ret)}
+	return CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
-var _fnCFStringCreateArrayWithFindResults func(objc.ID, objc.ID, objc.ID, unsafe.Pointer, CFStringCompareFlags) objc.ID
+var _fnCFStringCreateArrayWithFindResults func(objc.ID, objc.ID, objc.ID, CFRange, CFStringCompareFlags) objc.ID
 
 // CFStringCreateArrayWithFindResults calls the CoreFoundation framework function CFStringCreateArrayWithFindResults.
-func CFStringCreateArrayWithFindResults(alloc CFAllocatorRef, theString CFStringRef, stringToFind CFStringRef, rangeToSearch unsafe.Pointer, compareOptions CFStringCompareFlags) CFArrayRef {
+func CFStringCreateArrayWithFindResults(alloc CFAllocatorRef, theString CFStringRef, stringToFind CFStringRef, rangeToSearch CFRange, compareOptions CFStringCompareFlags) CFArrayRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFStringCreateArrayWithFindResults == nil {
 		ebipurego.RegisterLibFunc(&_fnCFStringCreateArrayWithFindResults, _lib, "CFStringCreateArrayWithFindResults")
 	}
 	_ret := _fnCFStringCreateArrayWithFindResults(objref.IDOf(alloc.Object), objref.IDOf(theString.Object), objref.IDOf(stringToFind.Object), rangeToSearch, compareOptions)
-	return CFArrayRef{obj.Adopt(_ret)}
+	return CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFStringCreateByCombiningStrings func(objc.ID, objc.ID, objc.ID) objc.ID
@@ -6580,7 +6580,7 @@ func CFStringCreateByCombiningStrings(alloc CFAllocatorRef, theArray CFArrayRef,
 		ebipurego.RegisterLibFunc(&_fnCFStringCreateByCombiningStrings, _lib, "CFStringCreateByCombiningStrings")
 	}
 	_ret := _fnCFStringCreateByCombiningStrings(objref.IDOf(alloc.Object), objref.IDOf(theArray.Object), objref.IDOf(separatorString.Object))
-	return CFStringRef{obj.Adopt(_ret)}
+	return CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFStringCreateCopy func(objc.ID, objc.ID) objc.ID
@@ -6592,7 +6592,7 @@ func CFStringCreateCopy(alloc CFAllocatorRef, theString CFStringRef) CFStringRef
 		ebipurego.RegisterLibFunc(&_fnCFStringCreateCopy, _lib, "CFStringCreateCopy")
 	}
 	_ret := _fnCFStringCreateCopy(objref.IDOf(alloc.Object), objref.IDOf(theString.Object))
-	return CFStringRef{obj.Adopt(_ret)}
+	return CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFStringCreateExternalRepresentation func(objc.ID, objc.ID, int, uint8) objc.ID
@@ -6604,7 +6604,7 @@ func CFStringCreateExternalRepresentation(alloc CFAllocatorRef, theString CFStri
 		ebipurego.RegisterLibFunc(&_fnCFStringCreateExternalRepresentation, _lib, "CFStringCreateExternalRepresentation")
 	}
 	_ret := _fnCFStringCreateExternalRepresentation(objref.IDOf(alloc.Object), objref.IDOf(theString.Object), encoding, lossByte)
-	return CFDataRef{obj.Adopt(_ret)}
+	return CFDataRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFStringCreateFromExternalRepresentation func(objc.ID, objc.ID, int) objc.ID
@@ -6616,7 +6616,7 @@ func CFStringCreateFromExternalRepresentation(alloc CFAllocatorRef, data CFDataR
 		ebipurego.RegisterLibFunc(&_fnCFStringCreateFromExternalRepresentation, _lib, "CFStringCreateFromExternalRepresentation")
 	}
 	_ret := _fnCFStringCreateFromExternalRepresentation(objref.IDOf(alloc.Object), objref.IDOf(data.Object), encoding)
-	return CFStringRef{obj.Adopt(_ret)}
+	return CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFStringCreateMutable func(objc.ID, int) objc.ID
@@ -6628,7 +6628,7 @@ func CFStringCreateMutable(alloc CFAllocatorRef, maxLength int) CFMutableStringR
 		ebipurego.RegisterLibFunc(&_fnCFStringCreateMutable, _lib, "CFStringCreateMutable")
 	}
 	_ret := _fnCFStringCreateMutable(objref.IDOf(alloc.Object), maxLength)
-	return CFMutableStringRef{obj.Adopt(_ret)}
+	return CFMutableStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFStringCreateMutableCopy func(objc.ID, int, objc.ID) objc.ID
@@ -6640,7 +6640,7 @@ func CFStringCreateMutableCopy(alloc CFAllocatorRef, maxLength int, theString CF
 		ebipurego.RegisterLibFunc(&_fnCFStringCreateMutableCopy, _lib, "CFStringCreateMutableCopy")
 	}
 	_ret := _fnCFStringCreateMutableCopy(objref.IDOf(alloc.Object), maxLength, objref.IDOf(theString.Object))
-	return CFMutableStringRef{obj.Adopt(_ret)}
+	return CFMutableStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFStringCreateMutableWithExternalCharactersNoCopy func(objc.ID, unsafe.Pointer, int, int, objc.ID) objc.ID
@@ -6653,7 +6653,7 @@ func CFStringCreateMutableWithExternalCharactersNoCopy(alloc CFAllocatorRef, num
 	}
 	var _out0 uint16
 	_ret := _fnCFStringCreateMutableWithExternalCharactersNoCopy(objref.IDOf(alloc.Object), unsafe.Pointer(&_out0), numChars, capacity, objref.IDOf(externalCharactersAllocator.Object))
-	return CFMutableStringRef{obj.Adopt(_ret)}, _out0
+	return CFMutableStringRef{Object: obj.Adopt(_ret)}, _out0
 }
 
 var _fnCFStringCreateWithBytes func(objc.ID, unsafe.Pointer, int, int, uint8) objc.ID
@@ -6665,7 +6665,7 @@ func CFStringCreateWithBytes(alloc CFAllocatorRef, data unsafe.Pointer, numBytes
 		ebipurego.RegisterLibFunc(&_fnCFStringCreateWithBytes, _lib, "CFStringCreateWithBytes")
 	}
 	_ret := _fnCFStringCreateWithBytes(objref.IDOf(alloc.Object), data, numBytes, encoding, isExternalRepresentation)
-	return CFStringRef{obj.Adopt(_ret)}
+	return CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFStringCreateWithBytesNoCopy func(objc.ID, unsafe.Pointer, int, int, uint8, objc.ID) objc.ID
@@ -6677,7 +6677,7 @@ func CFStringCreateWithBytesNoCopy(alloc CFAllocatorRef, data unsafe.Pointer, nu
 		ebipurego.RegisterLibFunc(&_fnCFStringCreateWithBytesNoCopy, _lib, "CFStringCreateWithBytesNoCopy")
 	}
 	_ret := _fnCFStringCreateWithBytesNoCopy(objref.IDOf(alloc.Object), data, numBytes, encoding, isExternalRepresentation, objref.IDOf(contentsDeallocator.Object))
-	return CFStringRef{obj.Adopt(_ret)}
+	return CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFStringCreateWithCString func(objc.ID, string, int) objc.ID
@@ -6689,7 +6689,7 @@ func CFStringCreateWithCString(alloc CFAllocatorRef, cStr string, encoding int) 
 		ebipurego.RegisterLibFunc(&_fnCFStringCreateWithCString, _lib, "CFStringCreateWithCString")
 	}
 	_ret := _fnCFStringCreateWithCString(objref.IDOf(alloc.Object), cStr, encoding)
-	return CFStringRef{obj.Adopt(_ret)}
+	return CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFStringCreateWithCStringNoCopy func(objc.ID, string, int, objc.ID) objc.ID
@@ -6701,7 +6701,7 @@ func CFStringCreateWithCStringNoCopy(alloc CFAllocatorRef, cStr string, encoding
 		ebipurego.RegisterLibFunc(&_fnCFStringCreateWithCStringNoCopy, _lib, "CFStringCreateWithCStringNoCopy")
 	}
 	_ret := _fnCFStringCreateWithCStringNoCopy(objref.IDOf(alloc.Object), cStr, encoding, objref.IDOf(contentsDeallocator.Object))
-	return CFStringRef{obj.Adopt(_ret)}
+	return CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFStringCreateWithCharacters func(objc.ID, unsafe.Pointer, int) objc.ID
@@ -6713,7 +6713,7 @@ func CFStringCreateWithCharacters(alloc CFAllocatorRef, chars unsafe.Pointer, nu
 		ebipurego.RegisterLibFunc(&_fnCFStringCreateWithCharacters, _lib, "CFStringCreateWithCharacters")
 	}
 	_ret := _fnCFStringCreateWithCharacters(objref.IDOf(alloc.Object), chars, numChars)
-	return CFStringRef{obj.Adopt(_ret)}
+	return CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFStringCreateWithCharactersNoCopy func(objc.ID, unsafe.Pointer, int, objc.ID) objc.ID
@@ -6725,7 +6725,7 @@ func CFStringCreateWithCharactersNoCopy(alloc CFAllocatorRef, chars unsafe.Point
 		ebipurego.RegisterLibFunc(&_fnCFStringCreateWithCharactersNoCopy, _lib, "CFStringCreateWithCharactersNoCopy")
 	}
 	_ret := _fnCFStringCreateWithCharactersNoCopy(objref.IDOf(alloc.Object), chars, numChars, objref.IDOf(contentsDeallocator.Object))
-	return CFStringRef{obj.Adopt(_ret)}
+	return CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFStringCreateWithFileSystemRepresentation func(objc.ID, string) objc.ID
@@ -6737,7 +6737,7 @@ func CFStringCreateWithFileSystemRepresentation(alloc CFAllocatorRef, buffer str
 		ebipurego.RegisterLibFunc(&_fnCFStringCreateWithFileSystemRepresentation, _lib, "CFStringCreateWithFileSystemRepresentation")
 	}
 	_ret := _fnCFStringCreateWithFileSystemRepresentation(objref.IDOf(alloc.Object), buffer)
-	return CFStringRef{obj.Adopt(_ret)}
+	return CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFStringCreateWithFormat func(objc.ID, objc.ID, objc.ID) objc.ID
@@ -6749,7 +6749,7 @@ func CFStringCreateWithFormat(alloc CFAllocatorRef, formatOptions CFDictionaryRe
 		ebipurego.RegisterLibFunc(&_fnCFStringCreateWithFormat, _lib, "CFStringCreateWithFormat")
 	}
 	_ret := _fnCFStringCreateWithFormat(objref.IDOf(alloc.Object), objref.IDOf(formatOptions.Object), objref.IDOf(format.Object))
-	return CFStringRef{obj.Adopt(_ret)}
+	return CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFStringCreateWithFormatAndArguments func(objc.ID, objc.ID, objc.ID, string) objc.ID
@@ -6761,7 +6761,7 @@ func CFStringCreateWithFormatAndArguments(alloc CFAllocatorRef, formatOptions CF
 		ebipurego.RegisterLibFunc(&_fnCFStringCreateWithFormatAndArguments, _lib, "CFStringCreateWithFormatAndArguments")
 	}
 	_ret := _fnCFStringCreateWithFormatAndArguments(objref.IDOf(alloc.Object), objref.IDOf(formatOptions.Object), objref.IDOf(format.Object), arguments)
-	return CFStringRef{obj.Adopt(_ret)}
+	return CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFStringCreateWithPascalString func(objc.ID, unsafe.Pointer, int) objc.ID
@@ -6774,7 +6774,7 @@ func CFStringCreateWithPascalString(alloc CFAllocatorRef, encoding int) (result 
 	}
 	var _out0 uint8
 	_ret := _fnCFStringCreateWithPascalString(objref.IDOf(alloc.Object), unsafe.Pointer(&_out0), encoding)
-	return CFStringRef{obj.Adopt(_ret)}, _out0
+	return CFStringRef{Object: obj.Adopt(_ret)}, _out0
 }
 
 var _fnCFStringCreateWithPascalStringNoCopy func(objc.ID, unsafe.Pointer, int, objc.ID) objc.ID
@@ -6787,25 +6787,25 @@ func CFStringCreateWithPascalStringNoCopy(alloc CFAllocatorRef, encoding int, co
 	}
 	var _out0 uint8
 	_ret := _fnCFStringCreateWithPascalStringNoCopy(objref.IDOf(alloc.Object), unsafe.Pointer(&_out0), encoding, objref.IDOf(contentsDeallocator.Object))
-	return CFStringRef{obj.Adopt(_ret)}, _out0
+	return CFStringRef{Object: obj.Adopt(_ret)}, _out0
 }
 
-var _fnCFStringCreateWithSubstring func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
+var _fnCFStringCreateWithSubstring func(objc.ID, objc.ID, CFRange) objc.ID
 
 // CFStringCreateWithSubstring calls the CoreFoundation framework function CFStringCreateWithSubstring.
-func CFStringCreateWithSubstring(alloc CFAllocatorRef, str CFStringRef, range_ unsafe.Pointer) CFStringRef {
+func CFStringCreateWithSubstring(alloc CFAllocatorRef, str CFStringRef, range_ CFRange) CFStringRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFStringCreateWithSubstring == nil {
 		ebipurego.RegisterLibFunc(&_fnCFStringCreateWithSubstring, _lib, "CFStringCreateWithSubstring")
 	}
 	_ret := _fnCFStringCreateWithSubstring(objref.IDOf(alloc.Object), objref.IDOf(str.Object), range_)
-	return CFStringRef{obj.Adopt(_ret)}
+	return CFStringRef{Object: obj.Adopt(_ret)}
 }
 
-var _fnCFStringDelete func(objc.ID, unsafe.Pointer)
+var _fnCFStringDelete func(objc.ID, CFRange)
 
 // CFStringDelete calls the CoreFoundation framework function CFStringDelete.
-func CFStringDelete(theString CFMutableStringRef, range_ unsafe.Pointer) {
+func CFStringDelete(theString CFMutableStringRef, range_ CFRange) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFStringDelete == nil {
 		ebipurego.RegisterLibFunc(&_fnCFStringDelete, _lib, "CFStringDelete")
@@ -6813,10 +6813,10 @@ func CFStringDelete(theString CFMutableStringRef, range_ unsafe.Pointer) {
 	_fnCFStringDelete(objref.IDOf(theString.Object), range_)
 }
 
-var _fnCFStringFind func(objc.ID, objc.ID, CFStringCompareFlags) unsafe.Pointer
+var _fnCFStringFind func(objc.ID, objc.ID, CFStringCompareFlags) CFRange
 
 // CFStringFind calls the CoreFoundation framework function CFStringFind.
-func CFStringFind(theString CFStringRef, stringToFind CFStringRef, compareOptions CFStringCompareFlags) unsafe.Pointer {
+func CFStringFind(theString CFStringRef, stringToFind CFStringRef, compareOptions CFStringCompareFlags) CFRange {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFStringFind == nil {
 		ebipurego.RegisterLibFunc(&_fnCFStringFind, _lib, "CFStringFind")
@@ -6824,10 +6824,10 @@ func CFStringFind(theString CFStringRef, stringToFind CFStringRef, compareOption
 	return _fnCFStringFind(objref.IDOf(theString.Object), objref.IDOf(stringToFind.Object), compareOptions)
 }
 
-var _fnCFStringFindAndReplace func(objc.ID, objc.ID, objc.ID, unsafe.Pointer, CFStringCompareFlags) int
+var _fnCFStringFindAndReplace func(objc.ID, objc.ID, objc.ID, CFRange, CFStringCompareFlags) int
 
 // CFStringFindAndReplace calls the CoreFoundation framework function CFStringFindAndReplace.
-func CFStringFindAndReplace(theString CFMutableStringRef, stringToFind CFStringRef, replacementString CFStringRef, rangeToSearch unsafe.Pointer, compareOptions CFStringCompareFlags) int {
+func CFStringFindAndReplace(theString CFMutableStringRef, stringToFind CFStringRef, replacementString CFStringRef, rangeToSearch CFRange, compareOptions CFStringCompareFlags) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFStringFindAndReplace == nil {
 		ebipurego.RegisterLibFunc(&_fnCFStringFindAndReplace, _lib, "CFStringFindAndReplace")
@@ -6835,10 +6835,10 @@ func CFStringFindAndReplace(theString CFMutableStringRef, stringToFind CFStringR
 	return _fnCFStringFindAndReplace(objref.IDOf(theString.Object), objref.IDOf(stringToFind.Object), objref.IDOf(replacementString.Object), rangeToSearch, compareOptions)
 }
 
-var _fnCFStringFindCharacterFromSet func(objc.ID, objc.ID, unsafe.Pointer, CFStringCompareFlags, unsafe.Pointer) uint8
+var _fnCFStringFindCharacterFromSet func(objc.ID, objc.ID, CFRange, CFStringCompareFlags, unsafe.Pointer) uint8
 
 // CFStringFindCharacterFromSet calls the CoreFoundation framework function CFStringFindCharacterFromSet.
-func CFStringFindCharacterFromSet(theString CFStringRef, theSet CFCharacterSetRef, rangeToSearch unsafe.Pointer, searchOptions CFStringCompareFlags) (result uint8, result_ CFRange) {
+func CFStringFindCharacterFromSet(theString CFStringRef, theSet CFCharacterSetRef, rangeToSearch CFRange, searchOptions CFStringCompareFlags) (result uint8, result_ CFRange) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFStringFindCharacterFromSet == nil {
 		ebipurego.RegisterLibFunc(&_fnCFStringFindCharacterFromSet, _lib, "CFStringFindCharacterFromSet")
@@ -6848,10 +6848,10 @@ func CFStringFindCharacterFromSet(theString CFStringRef, theSet CFCharacterSetRe
 	return _ret, _out0
 }
 
-var _fnCFStringFindWithOptions func(objc.ID, objc.ID, unsafe.Pointer, CFStringCompareFlags, unsafe.Pointer) uint8
+var _fnCFStringFindWithOptions func(objc.ID, objc.ID, CFRange, CFStringCompareFlags, unsafe.Pointer) uint8
 
 // CFStringFindWithOptions calls the CoreFoundation framework function CFStringFindWithOptions.
-func CFStringFindWithOptions(theString CFStringRef, stringToFind CFStringRef, rangeToSearch unsafe.Pointer, searchOptions CFStringCompareFlags) (result uint8, result_ CFRange) {
+func CFStringFindWithOptions(theString CFStringRef, stringToFind CFStringRef, rangeToSearch CFRange, searchOptions CFStringCompareFlags) (result uint8, result_ CFRange) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFStringFindWithOptions == nil {
 		ebipurego.RegisterLibFunc(&_fnCFStringFindWithOptions, _lib, "CFStringFindWithOptions")
@@ -6861,10 +6861,10 @@ func CFStringFindWithOptions(theString CFStringRef, stringToFind CFStringRef, ra
 	return _ret, _out0
 }
 
-var _fnCFStringFindWithOptionsAndLocale func(objc.ID, objc.ID, unsafe.Pointer, CFStringCompareFlags, objc.ID, unsafe.Pointer) uint8
+var _fnCFStringFindWithOptionsAndLocale func(objc.ID, objc.ID, CFRange, CFStringCompareFlags, objc.ID, unsafe.Pointer) uint8
 
 // CFStringFindWithOptionsAndLocale calls the CoreFoundation framework function CFStringFindWithOptionsAndLocale.
-func CFStringFindWithOptionsAndLocale(theString CFStringRef, stringToFind CFStringRef, rangeToSearch unsafe.Pointer, searchOptions CFStringCompareFlags, locale CFLocaleRef) (result uint8, result_ CFRange) {
+func CFStringFindWithOptionsAndLocale(theString CFStringRef, stringToFind CFStringRef, rangeToSearch CFRange, searchOptions CFStringCompareFlags, locale CFLocaleRef) (result uint8, result_ CFRange) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFStringFindWithOptionsAndLocale == nil {
 		ebipurego.RegisterLibFunc(&_fnCFStringFindWithOptionsAndLocale, _lib, "CFStringFindWithOptionsAndLocale")
@@ -6885,10 +6885,10 @@ func CFStringFold(theString CFMutableStringRef, theFlags CFStringCompareFlags, t
 	_fnCFStringFold(objref.IDOf(theString.Object), theFlags, objref.IDOf(theLocale.Object))
 }
 
-var _fnCFStringGetBytes func(objc.ID, unsafe.Pointer, int, uint8, uint8, unsafe.Pointer, int, unsafe.Pointer) int
+var _fnCFStringGetBytes func(objc.ID, CFRange, int, uint8, uint8, unsafe.Pointer, int, unsafe.Pointer) int
 
 // CFStringGetBytes calls the CoreFoundation framework function CFStringGetBytes.
-func CFStringGetBytes(theString CFStringRef, range_ unsafe.Pointer, encoding int, lossByte uint8, isExternalRepresentation uint8, maxBufLen int) (result int, buffer uint8, usedBufLen int) {
+func CFStringGetBytes(theString CFStringRef, range_ CFRange, encoding int, lossByte uint8, isExternalRepresentation uint8, maxBufLen int) (result int, buffer uint8, usedBufLen int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFStringGetBytes == nil {
 		ebipurego.RegisterLibFunc(&_fnCFStringGetBytes, _lib, "CFStringGetBytes")
@@ -6943,10 +6943,10 @@ func CFStringGetCharacterFromInlineBuffer(buf unsafe.Pointer, idx int) uint16 {
 	return _fnCFStringGetCharacterFromInlineBuffer(buf, idx)
 }
 
-var _fnCFStringGetCharacters func(objc.ID, unsafe.Pointer, unsafe.Pointer)
+var _fnCFStringGetCharacters func(objc.ID, CFRange, unsafe.Pointer)
 
 // CFStringGetCharacters calls the CoreFoundation framework function CFStringGetCharacters.
-func CFStringGetCharacters(theString CFStringRef, range_ unsafe.Pointer) (buffer uint16) {
+func CFStringGetCharacters(theString CFStringRef, range_ CFRange) (buffer uint16) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFStringGetCharacters == nil {
 		ebipurego.RegisterLibFunc(&_fnCFStringGetCharacters, _lib, "CFStringGetCharacters")
@@ -7000,10 +7000,10 @@ func CFStringGetFileSystemRepresentation(str CFStringRef, buffer string, maxBufL
 	return _fnCFStringGetFileSystemRepresentation(objref.IDOf(str.Object), buffer, maxBufLen)
 }
 
-var _fnCFStringGetHyphenationLocationBeforeIndex func(objc.ID, int, unsafe.Pointer, int, objc.ID, unsafe.Pointer) int
+var _fnCFStringGetHyphenationLocationBeforeIndex func(objc.ID, int, CFRange, int, objc.ID, unsafe.Pointer) int
 
 // CFStringGetHyphenationLocationBeforeIndex calls the CoreFoundation framework function CFStringGetHyphenationLocationBeforeIndex.
-func CFStringGetHyphenationLocationBeforeIndex(str CFStringRef, location int, limitRange unsafe.Pointer, options int, locale CFLocaleRef) (result int, character int) {
+func CFStringGetHyphenationLocationBeforeIndex(str CFStringRef, location int, limitRange CFRange, options int, locale CFLocaleRef) (result int, character int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFStringGetHyphenationLocationBeforeIndex == nil {
 		ebipurego.RegisterLibFunc(&_fnCFStringGetHyphenationLocationBeforeIndex, _lib, "CFStringGetHyphenationLocationBeforeIndex")
@@ -7035,10 +7035,10 @@ func CFStringGetLength(theString CFStringRef) int {
 	return _fnCFStringGetLength(objref.IDOf(theString.Object))
 }
 
-var _fnCFStringGetLineBounds func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCFStringGetLineBounds func(objc.ID, CFRange, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // CFStringGetLineBounds calls the CoreFoundation framework function CFStringGetLineBounds.
-func CFStringGetLineBounds(theString CFStringRef, range_ unsafe.Pointer) (lineBeginIndex int, lineEndIndex int, contentsEndIndex int) {
+func CFStringGetLineBounds(theString CFStringRef, range_ CFRange) (lineBeginIndex int, lineEndIndex int, contentsEndIndex int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFStringGetLineBounds == nil {
 		ebipurego.RegisterLibFunc(&_fnCFStringGetLineBounds, _lib, "CFStringGetLineBounds")
@@ -7114,13 +7114,13 @@ func CFStringGetNameOfEncoding(encoding int) CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnCFStringGetNameOfEncoding, _lib, "CFStringGetNameOfEncoding")
 	}
 	_ret := _fnCFStringGetNameOfEncoding(encoding)
-	return CFStringRef{obj.Wrap(_ret)}
+	return CFStringRef{Object: obj.Wrap(_ret)}
 }
 
-var _fnCFStringGetParagraphBounds func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCFStringGetParagraphBounds func(objc.ID, CFRange, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // CFStringGetParagraphBounds calls the CoreFoundation framework function CFStringGetParagraphBounds.
-func CFStringGetParagraphBounds(str CFStringRef, range_ unsafe.Pointer) (parBeginIndex int, parEndIndex int, contentsEndIndex int) {
+func CFStringGetParagraphBounds(str CFStringRef, range_ CFRange) (parBeginIndex int, parEndIndex int, contentsEndIndex int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFStringGetParagraphBounds == nil {
 		ebipurego.RegisterLibFunc(&_fnCFStringGetParagraphBounds, _lib, "CFStringGetParagraphBounds")
@@ -7156,10 +7156,10 @@ func CFStringGetPascalStringPtr(theString CFStringRef, encoding int) unsafe.Poin
 	return _fnCFStringGetPascalStringPtr(objref.IDOf(theString.Object), encoding)
 }
 
-var _fnCFStringGetRangeOfComposedCharactersAtIndex func(objc.ID, int) unsafe.Pointer
+var _fnCFStringGetRangeOfComposedCharactersAtIndex func(objc.ID, int) CFRange
 
 // CFStringGetRangeOfComposedCharactersAtIndex calls the CoreFoundation framework function CFStringGetRangeOfComposedCharactersAtIndex.
-func CFStringGetRangeOfComposedCharactersAtIndex(theString CFStringRef, theIndex int) unsafe.Pointer {
+func CFStringGetRangeOfComposedCharactersAtIndex(theString CFStringRef, theIndex int) CFRange {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFStringGetRangeOfComposedCharactersAtIndex == nil {
 		ebipurego.RegisterLibFunc(&_fnCFStringGetRangeOfComposedCharactersAtIndex, _lib, "CFStringGetRangeOfComposedCharactersAtIndex")
@@ -7235,10 +7235,10 @@ func CFStringHasSuffix(theString CFStringRef, suffix CFStringRef) uint8 {
 	return _fnCFStringHasSuffix(objref.IDOf(theString.Object), objref.IDOf(suffix.Object))
 }
 
-var _fnCFStringInitInlineBuffer func(objc.ID, unsafe.Pointer, unsafe.Pointer)
+var _fnCFStringInitInlineBuffer func(objc.ID, unsafe.Pointer, CFRange)
 
 // CFStringInitInlineBuffer calls the CoreFoundation framework function CFStringInitInlineBuffer.
-func CFStringInitInlineBuffer(str CFStringRef, buf unsafe.Pointer, range_ unsafe.Pointer) {
+func CFStringInitInlineBuffer(str CFStringRef, buf unsafe.Pointer, range_ CFRange) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFStringInitInlineBuffer == nil {
 		ebipurego.RegisterLibFunc(&_fnCFStringInitInlineBuffer, _lib, "CFStringInitInlineBuffer")
@@ -7334,10 +7334,10 @@ func CFStringPad(theString CFMutableStringRef, padString CFStringRef, length int
 	_fnCFStringPad(objref.IDOf(theString.Object), objref.IDOf(padString.Object), length, indexIntoPad)
 }
 
-var _fnCFStringReplace func(objc.ID, unsafe.Pointer, objc.ID)
+var _fnCFStringReplace func(objc.ID, CFRange, objc.ID)
 
 // CFStringReplace calls the CoreFoundation framework function CFStringReplace.
-func CFStringReplace(theString CFMutableStringRef, range_ unsafe.Pointer, replacement CFStringRef) {
+func CFStringReplace(theString CFMutableStringRef, range_ CFRange, replacement CFStringRef) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFStringReplace == nil {
 		ebipurego.RegisterLibFunc(&_fnCFStringReplace, _lib, "CFStringReplace")
@@ -7378,16 +7378,16 @@ func CFStringTokenizerAdvanceToNextToken(tokenizer CFStringTokenizerRef) CFStrin
 	return _fnCFStringTokenizerAdvanceToNextToken(objref.IDOf(tokenizer.Object))
 }
 
-var _fnCFStringTokenizerCopyBestStringLanguage func(objc.ID, unsafe.Pointer) objc.ID
+var _fnCFStringTokenizerCopyBestStringLanguage func(objc.ID, CFRange) objc.ID
 
 // CFStringTokenizerCopyBestStringLanguage calls the CoreFoundation framework function CFStringTokenizerCopyBestStringLanguage.
-func CFStringTokenizerCopyBestStringLanguage(str CFStringRef, range_ unsafe.Pointer) CFStringRef {
+func CFStringTokenizerCopyBestStringLanguage(str CFStringRef, range_ CFRange) CFStringRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFStringTokenizerCopyBestStringLanguage == nil {
 		ebipurego.RegisterLibFunc(&_fnCFStringTokenizerCopyBestStringLanguage, _lib, "CFStringTokenizerCopyBestStringLanguage")
 	}
 	_ret := _fnCFStringTokenizerCopyBestStringLanguage(objref.IDOf(str.Object), range_)
-	return CFStringRef{obj.Adopt(_ret)}
+	return CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFStringTokenizerCopyCurrentTokenAttribute func(objc.ID, int) objc.ID
@@ -7402,16 +7402,16 @@ func CFStringTokenizerCopyCurrentTokenAttribute(tokenizer CFStringTokenizerRef, 
 	return obj.Adopt(_ret)
 }
 
-var _fnCFStringTokenizerCreate func(objc.ID, objc.ID, unsafe.Pointer, int, objc.ID) objc.ID
+var _fnCFStringTokenizerCreate func(objc.ID, objc.ID, CFRange, int, objc.ID) objc.ID
 
 // CFStringTokenizerCreate calls the CoreFoundation framework function CFStringTokenizerCreate.
-func CFStringTokenizerCreate(alloc CFAllocatorRef, str CFStringRef, range_ unsafe.Pointer, options int, locale CFLocaleRef) CFStringTokenizerRef {
+func CFStringTokenizerCreate(alloc CFAllocatorRef, str CFStringRef, range_ CFRange, options int, locale CFLocaleRef) CFStringTokenizerRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFStringTokenizerCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnCFStringTokenizerCreate, _lib, "CFStringTokenizerCreate")
 	}
 	_ret := _fnCFStringTokenizerCreate(objref.IDOf(alloc.Object), objref.IDOf(str.Object), range_, options, objref.IDOf(locale.Object))
-	return CFStringTokenizerRef{obj.Adopt(_ret)}
+	return CFStringTokenizerRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFStringTokenizerGetCurrentSubTokens func(objc.ID, unsafe.Pointer, int, objc.ID) int
@@ -7427,10 +7427,10 @@ func CFStringTokenizerGetCurrentSubTokens(tokenizer CFStringTokenizerRef, maxRan
 	return _ret, _out0
 }
 
-var _fnCFStringTokenizerGetCurrentTokenRange func(objc.ID) unsafe.Pointer
+var _fnCFStringTokenizerGetCurrentTokenRange func(objc.ID) CFRange
 
 // CFStringTokenizerGetCurrentTokenRange calls the CoreFoundation framework function CFStringTokenizerGetCurrentTokenRange.
-func CFStringTokenizerGetCurrentTokenRange(tokenizer CFStringTokenizerRef) unsafe.Pointer {
+func CFStringTokenizerGetCurrentTokenRange(tokenizer CFStringTokenizerRef) CFRange {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFStringTokenizerGetCurrentTokenRange == nil {
 		ebipurego.RegisterLibFunc(&_fnCFStringTokenizerGetCurrentTokenRange, _lib, "CFStringTokenizerGetCurrentTokenRange")
@@ -7460,10 +7460,10 @@ func CFStringTokenizerGoToTokenAtIndex(tokenizer CFStringTokenizerRef, index int
 	return _fnCFStringTokenizerGoToTokenAtIndex(objref.IDOf(tokenizer.Object), index)
 }
 
-var _fnCFStringTokenizerSetString func(objc.ID, objc.ID, unsafe.Pointer)
+var _fnCFStringTokenizerSetString func(objc.ID, objc.ID, CFRange)
 
 // CFStringTokenizerSetString calls the CoreFoundation framework function CFStringTokenizerSetString.
-func CFStringTokenizerSetString(tokenizer CFStringTokenizerRef, str CFStringRef, range_ unsafe.Pointer) {
+func CFStringTokenizerSetString(tokenizer CFStringTokenizerRef, str CFStringRef, range_ CFRange) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFStringTokenizerSetString == nil {
 		ebipurego.RegisterLibFunc(&_fnCFStringTokenizerSetString, _lib, "CFStringTokenizerSetString")
@@ -7691,7 +7691,7 @@ func CFTimeZoneCopyAbbreviation(tz CFTimeZoneRef, at float64) CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnCFTimeZoneCopyAbbreviation, _lib, "CFTimeZoneCopyAbbreviation")
 	}
 	_ret := _fnCFTimeZoneCopyAbbreviation(objref.IDOf(tz.Object), at)
-	return CFStringRef{obj.Adopt(_ret)}
+	return CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFTimeZoneCopyAbbreviationDictionary func() objc.ID
@@ -7703,7 +7703,7 @@ func CFTimeZoneCopyAbbreviationDictionary() CFDictionaryRef {
 		ebipurego.RegisterLibFunc(&_fnCFTimeZoneCopyAbbreviationDictionary, _lib, "CFTimeZoneCopyAbbreviationDictionary")
 	}
 	_ret := _fnCFTimeZoneCopyAbbreviationDictionary()
-	return CFDictionaryRef{obj.Adopt(_ret)}
+	return CFDictionaryRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFTimeZoneCopyDefault func() objc.ID
@@ -7715,7 +7715,7 @@ func CFTimeZoneCopyDefault() CFTimeZoneRef {
 		ebipurego.RegisterLibFunc(&_fnCFTimeZoneCopyDefault, _lib, "CFTimeZoneCopyDefault")
 	}
 	_ret := _fnCFTimeZoneCopyDefault()
-	return CFTimeZoneRef{obj.Adopt(_ret)}
+	return CFTimeZoneRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFTimeZoneCopyKnownNames func() objc.ID
@@ -7727,7 +7727,7 @@ func CFTimeZoneCopyKnownNames() CFArrayRef {
 		ebipurego.RegisterLibFunc(&_fnCFTimeZoneCopyKnownNames, _lib, "CFTimeZoneCopyKnownNames")
 	}
 	_ret := _fnCFTimeZoneCopyKnownNames()
-	return CFArrayRef{obj.Adopt(_ret)}
+	return CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFTimeZoneCopyLocalizedName func(objc.ID, CFTimeZoneNameStyle, objc.ID) objc.ID
@@ -7739,7 +7739,7 @@ func CFTimeZoneCopyLocalizedName(tz CFTimeZoneRef, style CFTimeZoneNameStyle, lo
 		ebipurego.RegisterLibFunc(&_fnCFTimeZoneCopyLocalizedName, _lib, "CFTimeZoneCopyLocalizedName")
 	}
 	_ret := _fnCFTimeZoneCopyLocalizedName(objref.IDOf(tz.Object), style, objref.IDOf(locale.Object))
-	return CFStringRef{obj.Adopt(_ret)}
+	return CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFTimeZoneCopySystem func() objc.ID
@@ -7751,7 +7751,7 @@ func CFTimeZoneCopySystem() CFTimeZoneRef {
 		ebipurego.RegisterLibFunc(&_fnCFTimeZoneCopySystem, _lib, "CFTimeZoneCopySystem")
 	}
 	_ret := _fnCFTimeZoneCopySystem()
-	return CFTimeZoneRef{obj.Adopt(_ret)}
+	return CFTimeZoneRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFTimeZoneCreate func(objc.ID, objc.ID, objc.ID) objc.ID
@@ -7763,7 +7763,7 @@ func CFTimeZoneCreate(allocator CFAllocatorRef, name CFStringRef, data CFDataRef
 		ebipurego.RegisterLibFunc(&_fnCFTimeZoneCreate, _lib, "CFTimeZoneCreate")
 	}
 	_ret := _fnCFTimeZoneCreate(objref.IDOf(allocator.Object), objref.IDOf(name.Object), objref.IDOf(data.Object))
-	return CFTimeZoneRef{obj.Adopt(_ret)}
+	return CFTimeZoneRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFTimeZoneCreateWithName func(objc.ID, objc.ID, uint8) objc.ID
@@ -7775,7 +7775,7 @@ func CFTimeZoneCreateWithName(allocator CFAllocatorRef, name CFStringRef, tryAbb
 		ebipurego.RegisterLibFunc(&_fnCFTimeZoneCreateWithName, _lib, "CFTimeZoneCreateWithName")
 	}
 	_ret := _fnCFTimeZoneCreateWithName(objref.IDOf(allocator.Object), objref.IDOf(name.Object), tryAbbrev)
-	return CFTimeZoneRef{obj.Adopt(_ret)}
+	return CFTimeZoneRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFTimeZoneCreateWithTimeIntervalFromGMT func(objc.ID, float64) objc.ID
@@ -7787,7 +7787,7 @@ func CFTimeZoneCreateWithTimeIntervalFromGMT(allocator CFAllocatorRef, ti float6
 		ebipurego.RegisterLibFunc(&_fnCFTimeZoneCreateWithTimeIntervalFromGMT, _lib, "CFTimeZoneCreateWithTimeIntervalFromGMT")
 	}
 	_ret := _fnCFTimeZoneCreateWithTimeIntervalFromGMT(objref.IDOf(allocator.Object), ti)
-	return CFTimeZoneRef{obj.Adopt(_ret)}
+	return CFTimeZoneRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFTimeZoneGetData func(objc.ID) objc.ID
@@ -7799,7 +7799,7 @@ func CFTimeZoneGetData(tz CFTimeZoneRef) CFDataRef {
 		ebipurego.RegisterLibFunc(&_fnCFTimeZoneGetData, _lib, "CFTimeZoneGetData")
 	}
 	_ret := _fnCFTimeZoneGetData(objref.IDOf(tz.Object))
-	return CFDataRef{obj.Wrap(_ret)}
+	return CFDataRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFTimeZoneGetDaylightSavingTimeOffset func(objc.ID, float64) float64
@@ -7822,7 +7822,7 @@ func CFTimeZoneGetName(tz CFTimeZoneRef) CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnCFTimeZoneGetName, _lib, "CFTimeZoneGetName")
 	}
 	_ret := _fnCFTimeZoneGetName(objref.IDOf(tz.Object))
-	return CFStringRef{obj.Wrap(_ret)}
+	return CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFTimeZoneGetNextDaylightSavingTimeTransition func(objc.ID, float64) float64
@@ -7933,7 +7933,7 @@ func CFTreeCreate(allocator CFAllocatorRef, context_ unsafe.Pointer) CFTreeRef {
 		ebipurego.RegisterLibFunc(&_fnCFTreeCreate, _lib, "CFTreeCreate")
 	}
 	_ret := _fnCFTreeCreate(objref.IDOf(allocator.Object), context_)
-	return CFTreeRef{obj.Adopt(_ret)}
+	return CFTreeRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFTreeFindRoot func(objc.ID) objc.ID
@@ -7945,7 +7945,7 @@ func CFTreeFindRoot(tree CFTreeRef) CFTreeRef {
 		ebipurego.RegisterLibFunc(&_fnCFTreeFindRoot, _lib, "CFTreeFindRoot")
 	}
 	_ret := _fnCFTreeFindRoot(objref.IDOf(tree.Object))
-	return CFTreeRef{obj.Wrap(_ret)}
+	return CFTreeRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFTreeGetChildAtIndex func(objc.ID, int) objc.ID
@@ -7957,7 +7957,7 @@ func CFTreeGetChildAtIndex(tree CFTreeRef, idx int) CFTreeRef {
 		ebipurego.RegisterLibFunc(&_fnCFTreeGetChildAtIndex, _lib, "CFTreeGetChildAtIndex")
 	}
 	_ret := _fnCFTreeGetChildAtIndex(objref.IDOf(tree.Object), idx)
-	return CFTreeRef{obj.Wrap(_ret)}
+	return CFTreeRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFTreeGetChildCount func(objc.ID) int
@@ -8002,7 +8002,7 @@ func CFTreeGetFirstChild(tree CFTreeRef) CFTreeRef {
 		ebipurego.RegisterLibFunc(&_fnCFTreeGetFirstChild, _lib, "CFTreeGetFirstChild")
 	}
 	_ret := _fnCFTreeGetFirstChild(objref.IDOf(tree.Object))
-	return CFTreeRef{obj.Wrap(_ret)}
+	return CFTreeRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFTreeGetNextSibling func(objc.ID) objc.ID
@@ -8014,7 +8014,7 @@ func CFTreeGetNextSibling(tree CFTreeRef) CFTreeRef {
 		ebipurego.RegisterLibFunc(&_fnCFTreeGetNextSibling, _lib, "CFTreeGetNextSibling")
 	}
 	_ret := _fnCFTreeGetNextSibling(objref.IDOf(tree.Object))
-	return CFTreeRef{obj.Wrap(_ret)}
+	return CFTreeRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFTreeGetParent func(objc.ID) objc.ID
@@ -8026,7 +8026,7 @@ func CFTreeGetParent(tree CFTreeRef) CFTreeRef {
 		ebipurego.RegisterLibFunc(&_fnCFTreeGetParent, _lib, "CFTreeGetParent")
 	}
 	_ret := _fnCFTreeGetParent(objref.IDOf(tree.Object))
-	return CFTreeRef{obj.Wrap(_ret)}
+	return CFTreeRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFTreeGetTypeID func() int
@@ -8148,7 +8148,7 @@ func CFURLCopyAbsoluteURL(relativeURL CFURLRef) CFURLRef {
 		ebipurego.RegisterLibFunc(&_fnCFURLCopyAbsoluteURL, _lib, "CFURLCopyAbsoluteURL")
 	}
 	_ret := _fnCFURLCopyAbsoluteURL(objref.IDOf(relativeURL.Object))
-	return CFURLRef{obj.Adopt(_ret)}
+	return CFURLRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFURLCopyFileSystemPath func(objc.ID, CFURLPathStyle) objc.ID
@@ -8160,7 +8160,7 @@ func CFURLCopyFileSystemPath(anURL CFURLRef, pathStyle CFURLPathStyle) CFStringR
 		ebipurego.RegisterLibFunc(&_fnCFURLCopyFileSystemPath, _lib, "CFURLCopyFileSystemPath")
 	}
 	_ret := _fnCFURLCopyFileSystemPath(objref.IDOf(anURL.Object), pathStyle)
-	return CFStringRef{obj.Adopt(_ret)}
+	return CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFURLCopyFragment func(objc.ID, objc.ID) objc.ID
@@ -8172,7 +8172,7 @@ func CFURLCopyFragment(anURL CFURLRef, charactersToLeaveEscaped CFStringRef) CFS
 		ebipurego.RegisterLibFunc(&_fnCFURLCopyFragment, _lib, "CFURLCopyFragment")
 	}
 	_ret := _fnCFURLCopyFragment(objref.IDOf(anURL.Object), objref.IDOf(charactersToLeaveEscaped.Object))
-	return CFStringRef{obj.Adopt(_ret)}
+	return CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFURLCopyHostName func(objc.ID) objc.ID
@@ -8184,7 +8184,7 @@ func CFURLCopyHostName(anURL CFURLRef) CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnCFURLCopyHostName, _lib, "CFURLCopyHostName")
 	}
 	_ret := _fnCFURLCopyHostName(objref.IDOf(anURL.Object))
-	return CFStringRef{obj.Adopt(_ret)}
+	return CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFURLCopyLastPathComponent func(objc.ID) objc.ID
@@ -8196,7 +8196,7 @@ func CFURLCopyLastPathComponent(url CFURLRef) CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnCFURLCopyLastPathComponent, _lib, "CFURLCopyLastPathComponent")
 	}
 	_ret := _fnCFURLCopyLastPathComponent(objref.IDOf(url.Object))
-	return CFStringRef{obj.Adopt(_ret)}
+	return CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFURLCopyNetLocation func(objc.ID) objc.ID
@@ -8208,7 +8208,7 @@ func CFURLCopyNetLocation(anURL CFURLRef) CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnCFURLCopyNetLocation, _lib, "CFURLCopyNetLocation")
 	}
 	_ret := _fnCFURLCopyNetLocation(objref.IDOf(anURL.Object))
-	return CFStringRef{obj.Adopt(_ret)}
+	return CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFURLCopyParameterString func(objc.ID, objc.ID) objc.ID
@@ -8220,7 +8220,7 @@ func CFURLCopyParameterString(anURL CFURLRef, charactersToLeaveEscaped CFStringR
 		ebipurego.RegisterLibFunc(&_fnCFURLCopyParameterString, _lib, "CFURLCopyParameterString")
 	}
 	_ret := _fnCFURLCopyParameterString(objref.IDOf(anURL.Object), objref.IDOf(charactersToLeaveEscaped.Object))
-	return CFStringRef{obj.Adopt(_ret)}
+	return CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFURLCopyPassword func(objc.ID) objc.ID
@@ -8232,7 +8232,7 @@ func CFURLCopyPassword(anURL CFURLRef) CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnCFURLCopyPassword, _lib, "CFURLCopyPassword")
 	}
 	_ret := _fnCFURLCopyPassword(objref.IDOf(anURL.Object))
-	return CFStringRef{obj.Adopt(_ret)}
+	return CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFURLCopyPath func(objc.ID) objc.ID
@@ -8244,7 +8244,7 @@ func CFURLCopyPath(anURL CFURLRef) CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnCFURLCopyPath, _lib, "CFURLCopyPath")
 	}
 	_ret := _fnCFURLCopyPath(objref.IDOf(anURL.Object))
-	return CFStringRef{obj.Adopt(_ret)}
+	return CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFURLCopyPathExtension func(objc.ID) objc.ID
@@ -8256,7 +8256,7 @@ func CFURLCopyPathExtension(url CFURLRef) CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnCFURLCopyPathExtension, _lib, "CFURLCopyPathExtension")
 	}
 	_ret := _fnCFURLCopyPathExtension(objref.IDOf(url.Object))
-	return CFStringRef{obj.Adopt(_ret)}
+	return CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFURLCopyQueryString func(objc.ID, objc.ID) objc.ID
@@ -8268,7 +8268,7 @@ func CFURLCopyQueryString(anURL CFURLRef, charactersToLeaveEscaped CFStringRef) 
 		ebipurego.RegisterLibFunc(&_fnCFURLCopyQueryString, _lib, "CFURLCopyQueryString")
 	}
 	_ret := _fnCFURLCopyQueryString(objref.IDOf(anURL.Object), objref.IDOf(charactersToLeaveEscaped.Object))
-	return CFStringRef{obj.Adopt(_ret)}
+	return CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFURLCopyResourceSpecifier func(objc.ID) objc.ID
@@ -8280,7 +8280,7 @@ func CFURLCopyResourceSpecifier(anURL CFURLRef) CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnCFURLCopyResourceSpecifier, _lib, "CFURLCopyResourceSpecifier")
 	}
 	_ret := _fnCFURLCopyResourceSpecifier(objref.IDOf(anURL.Object))
-	return CFStringRef{obj.Adopt(_ret)}
+	return CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFURLCopyScheme func(objc.ID) objc.ID
@@ -8292,7 +8292,7 @@ func CFURLCopyScheme(anURL CFURLRef) CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnCFURLCopyScheme, _lib, "CFURLCopyScheme")
 	}
 	_ret := _fnCFURLCopyScheme(objref.IDOf(anURL.Object))
-	return CFStringRef{obj.Adopt(_ret)}
+	return CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFURLCopyStrictPath func(objc.ID, unsafe.Pointer) objc.ID
@@ -8305,7 +8305,7 @@ func CFURLCopyStrictPath(anURL CFURLRef) (result CFStringRef, isAbsolute uint8) 
 	}
 	var _out0 uint8
 	_ret := _fnCFURLCopyStrictPath(objref.IDOf(anURL.Object), unsafe.Pointer(&_out0))
-	return CFStringRef{obj.Adopt(_ret)}, _out0
+	return CFStringRef{Object: obj.Adopt(_ret)}, _out0
 }
 
 var _fnCFURLCopyUserName func(objc.ID) objc.ID
@@ -8317,7 +8317,7 @@ func CFURLCopyUserName(anURL CFURLRef) CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnCFURLCopyUserName, _lib, "CFURLCopyUserName")
 	}
 	_ret := _fnCFURLCopyUserName(objref.IDOf(anURL.Object))
-	return CFStringRef{obj.Adopt(_ret)}
+	return CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFURLCreateAbsoluteURLWithBytes func(objc.ID, unsafe.Pointer, int, int, objc.ID, uint8) objc.ID
@@ -8329,7 +8329,7 @@ func CFURLCreateAbsoluteURLWithBytes(alloc CFAllocatorRef, relativeURLBytes unsa
 		ebipurego.RegisterLibFunc(&_fnCFURLCreateAbsoluteURLWithBytes, _lib, "CFURLCreateAbsoluteURLWithBytes")
 	}
 	_ret := _fnCFURLCreateAbsoluteURLWithBytes(objref.IDOf(alloc.Object), relativeURLBytes, length, encoding, objref.IDOf(baseURL.Object), useCompatibilityMode)
-	return CFURLRef{obj.Adopt(_ret)}
+	return CFURLRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFURLCreateBookmarkDataFromAliasRecord func(objc.ID, objc.ID) objc.ID
@@ -8341,7 +8341,7 @@ func CFURLCreateBookmarkDataFromAliasRecord(allocatorRef CFAllocatorRef, aliasRe
 		ebipurego.RegisterLibFunc(&_fnCFURLCreateBookmarkDataFromAliasRecord, _lib, "CFURLCreateBookmarkDataFromAliasRecord")
 	}
 	_ret := _fnCFURLCreateBookmarkDataFromAliasRecord(objref.IDOf(allocatorRef.Object), objref.IDOf(aliasRecordDataRef.Object))
-	return CFDataRef{obj.Wrap(_ret)}
+	return CFDataRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFURLCreateByResolvingBookmarkData func(objc.ID, objc.ID, CFURLBookmarkResolutionOptions, objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -8354,7 +8354,7 @@ func CFURLCreateByResolvingBookmarkData(allocator CFAllocatorRef, bookmark CFDat
 	}
 	var _out0 uint8
 	_ret := _fnCFURLCreateByResolvingBookmarkData(objref.IDOf(allocator.Object), objref.IDOf(bookmark.Object), options, objref.IDOf(relativeToURL.Object), objref.IDOf(resourcePropertiesToInclude.Object), unsafe.Pointer(&_out0), err)
-	return CFURLRef{obj.Wrap(_ret)}, _out0
+	return CFURLRef{Object: obj.Wrap(_ret)}, _out0
 }
 
 var _fnCFURLCreateCopyAppendingPathComponent func(objc.ID, objc.ID, objc.ID, uint8) objc.ID
@@ -8366,7 +8366,7 @@ func CFURLCreateCopyAppendingPathComponent(allocator CFAllocatorRef, url CFURLRe
 		ebipurego.RegisterLibFunc(&_fnCFURLCreateCopyAppendingPathComponent, _lib, "CFURLCreateCopyAppendingPathComponent")
 	}
 	_ret := _fnCFURLCreateCopyAppendingPathComponent(objref.IDOf(allocator.Object), objref.IDOf(url.Object), objref.IDOf(pathComponent.Object), isDirectory)
-	return CFURLRef{obj.Adopt(_ret)}
+	return CFURLRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFURLCreateCopyAppendingPathExtension func(objc.ID, objc.ID, objc.ID) objc.ID
@@ -8378,7 +8378,7 @@ func CFURLCreateCopyAppendingPathExtension(allocator CFAllocatorRef, url CFURLRe
 		ebipurego.RegisterLibFunc(&_fnCFURLCreateCopyAppendingPathExtension, _lib, "CFURLCreateCopyAppendingPathExtension")
 	}
 	_ret := _fnCFURLCreateCopyAppendingPathExtension(objref.IDOf(allocator.Object), objref.IDOf(url.Object), objref.IDOf(extension.Object))
-	return CFURLRef{obj.Adopt(_ret)}
+	return CFURLRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFURLCreateCopyDeletingLastPathComponent func(objc.ID, objc.ID) objc.ID
@@ -8390,7 +8390,7 @@ func CFURLCreateCopyDeletingLastPathComponent(allocator CFAllocatorRef, url CFUR
 		ebipurego.RegisterLibFunc(&_fnCFURLCreateCopyDeletingLastPathComponent, _lib, "CFURLCreateCopyDeletingLastPathComponent")
 	}
 	_ret := _fnCFURLCreateCopyDeletingLastPathComponent(objref.IDOf(allocator.Object), objref.IDOf(url.Object))
-	return CFURLRef{obj.Adopt(_ret)}
+	return CFURLRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFURLCreateCopyDeletingPathExtension func(objc.ID, objc.ID) objc.ID
@@ -8402,7 +8402,7 @@ func CFURLCreateCopyDeletingPathExtension(allocator CFAllocatorRef, url CFURLRef
 		ebipurego.RegisterLibFunc(&_fnCFURLCreateCopyDeletingPathExtension, _lib, "CFURLCreateCopyDeletingPathExtension")
 	}
 	_ret := _fnCFURLCreateCopyDeletingPathExtension(objref.IDOf(allocator.Object), objref.IDOf(url.Object))
-	return CFURLRef{obj.Adopt(_ret)}
+	return CFURLRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFURLCreateData func(objc.ID, objc.ID, int, uint8) objc.ID
@@ -8414,7 +8414,7 @@ func CFURLCreateData(allocator CFAllocatorRef, url CFURLRef, encoding int, escap
 		ebipurego.RegisterLibFunc(&_fnCFURLCreateData, _lib, "CFURLCreateData")
 	}
 	_ret := _fnCFURLCreateData(objref.IDOf(allocator.Object), objref.IDOf(url.Object), encoding, escapeWhitespace)
-	return CFDataRef{obj.Adopt(_ret)}
+	return CFDataRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFURLCreateDataAndPropertiesFromResource func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer, objc.ID, unsafe.Pointer) uint8
@@ -8439,7 +8439,7 @@ func CFURLCreateFromFSRef(allocator CFAllocatorRef, fsRef obj.Object) CFURLRef {
 		ebipurego.RegisterLibFunc(&_fnCFURLCreateFromFSRef, _lib, "CFURLCreateFromFSRef")
 	}
 	_ret := _fnCFURLCreateFromFSRef(objref.IDOf(allocator.Object), objref.IDOf(fsRef))
-	return CFURLRef{obj.Adopt(_ret)}
+	return CFURLRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFURLCreateFromFileSystemRepresentation func(objc.ID, unsafe.Pointer, int, uint8) objc.ID
@@ -8451,7 +8451,7 @@ func CFURLCreateFromFileSystemRepresentation(allocator CFAllocatorRef, buffer un
 		ebipurego.RegisterLibFunc(&_fnCFURLCreateFromFileSystemRepresentation, _lib, "CFURLCreateFromFileSystemRepresentation")
 	}
 	_ret := _fnCFURLCreateFromFileSystemRepresentation(objref.IDOf(allocator.Object), buffer, bufLen, isDirectory)
-	return CFURLRef{obj.Adopt(_ret)}
+	return CFURLRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFURLCreateFromFileSystemRepresentationRelativeToBase func(objc.ID, unsafe.Pointer, int, uint8, objc.ID) objc.ID
@@ -8463,7 +8463,7 @@ func CFURLCreateFromFileSystemRepresentationRelativeToBase(allocator CFAllocator
 		ebipurego.RegisterLibFunc(&_fnCFURLCreateFromFileSystemRepresentationRelativeToBase, _lib, "CFURLCreateFromFileSystemRepresentationRelativeToBase")
 	}
 	_ret := _fnCFURLCreateFromFileSystemRepresentationRelativeToBase(objref.IDOf(allocator.Object), buffer, bufLen, isDirectory, objref.IDOf(baseURL.Object))
-	return CFURLRef{obj.Adopt(_ret)}
+	return CFURLRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFURLCreatePropertyFromResource func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) objc.ID
@@ -8488,7 +8488,7 @@ func CFURLCreateResourcePropertiesForKeysFromBookmarkData(allocator CFAllocatorR
 		ebipurego.RegisterLibFunc(&_fnCFURLCreateResourcePropertiesForKeysFromBookmarkData, _lib, "CFURLCreateResourcePropertiesForKeysFromBookmarkData")
 	}
 	_ret := _fnCFURLCreateResourcePropertiesForKeysFromBookmarkData(objref.IDOf(allocator.Object), objref.IDOf(resourcePropertiesToReturn.Object), objref.IDOf(bookmark.Object))
-	return CFDictionaryRef{obj.Wrap(_ret)}
+	return CFDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFURLCreateResourcePropertyForKeyFromBookmarkData func(objc.ID, objc.ID, objc.ID) objc.ID
@@ -8512,7 +8512,7 @@ func CFURLCreateStringByAddingPercentEscapes(allocator CFAllocatorRef, originalS
 		ebipurego.RegisterLibFunc(&_fnCFURLCreateStringByAddingPercentEscapes, _lib, "CFURLCreateStringByAddingPercentEscapes")
 	}
 	_ret := _fnCFURLCreateStringByAddingPercentEscapes(objref.IDOf(allocator.Object), objref.IDOf(originalString.Object), objref.IDOf(charactersToLeaveUnescaped.Object), objref.IDOf(legalURLCharactersToBeEscaped.Object), encoding)
-	return CFStringRef{obj.Adopt(_ret)}
+	return CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFURLCreateStringByReplacingPercentEscapes func(objc.ID, objc.ID, objc.ID) objc.ID
@@ -8524,7 +8524,7 @@ func CFURLCreateStringByReplacingPercentEscapes(allocator CFAllocatorRef, origin
 		ebipurego.RegisterLibFunc(&_fnCFURLCreateStringByReplacingPercentEscapes, _lib, "CFURLCreateStringByReplacingPercentEscapes")
 	}
 	_ret := _fnCFURLCreateStringByReplacingPercentEscapes(objref.IDOf(allocator.Object), objref.IDOf(originalString.Object), objref.IDOf(charactersToLeaveEscaped.Object))
-	return CFStringRef{obj.Adopt(_ret)}
+	return CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFURLCreateStringByReplacingPercentEscapesUsingEncoding func(objc.ID, objc.ID, objc.ID, int) objc.ID
@@ -8536,7 +8536,7 @@ func CFURLCreateStringByReplacingPercentEscapesUsingEncoding(allocator CFAllocat
 		ebipurego.RegisterLibFunc(&_fnCFURLCreateStringByReplacingPercentEscapesUsingEncoding, _lib, "CFURLCreateStringByReplacingPercentEscapesUsingEncoding")
 	}
 	_ret := _fnCFURLCreateStringByReplacingPercentEscapesUsingEncoding(objref.IDOf(allocator.Object), objref.IDOf(origString.Object), objref.IDOf(charsToLeaveEscaped.Object), encoding)
-	return CFStringRef{obj.Adopt(_ret)}
+	return CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFURLCreateWithBytes func(objc.ID, unsafe.Pointer, int, int, objc.ID) objc.ID
@@ -8548,7 +8548,7 @@ func CFURLCreateWithBytes(allocator CFAllocatorRef, urlBytes unsafe.Pointer, len
 		ebipurego.RegisterLibFunc(&_fnCFURLCreateWithBytes, _lib, "CFURLCreateWithBytes")
 	}
 	_ret := _fnCFURLCreateWithBytes(objref.IDOf(allocator.Object), urlBytes, length, encoding, objref.IDOf(baseURL.Object))
-	return CFURLRef{obj.Adopt(_ret)}
+	return CFURLRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFURLCreateWithFileSystemPath func(objc.ID, objc.ID, CFURLPathStyle, uint8) objc.ID
@@ -8560,7 +8560,7 @@ func CFURLCreateWithFileSystemPath(allocator CFAllocatorRef, filePath CFStringRe
 		ebipurego.RegisterLibFunc(&_fnCFURLCreateWithFileSystemPath, _lib, "CFURLCreateWithFileSystemPath")
 	}
 	_ret := _fnCFURLCreateWithFileSystemPath(objref.IDOf(allocator.Object), objref.IDOf(filePath.Object), pathStyle, isDirectory)
-	return CFURLRef{obj.Adopt(_ret)}
+	return CFURLRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFURLCreateWithFileSystemPathRelativeToBase func(objc.ID, objc.ID, CFURLPathStyle, uint8, objc.ID) objc.ID
@@ -8572,7 +8572,7 @@ func CFURLCreateWithFileSystemPathRelativeToBase(allocator CFAllocatorRef, fileP
 		ebipurego.RegisterLibFunc(&_fnCFURLCreateWithFileSystemPathRelativeToBase, _lib, "CFURLCreateWithFileSystemPathRelativeToBase")
 	}
 	_ret := _fnCFURLCreateWithFileSystemPathRelativeToBase(objref.IDOf(allocator.Object), objref.IDOf(filePath.Object), pathStyle, isDirectory, objref.IDOf(baseURL.Object))
-	return CFURLRef{obj.Adopt(_ret)}
+	return CFURLRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFURLCreateWithString func(objc.ID, objc.ID, objc.ID) objc.ID
@@ -8584,7 +8584,7 @@ func CFURLCreateWithString(allocator CFAllocatorRef, urlString CFStringRef, base
 		ebipurego.RegisterLibFunc(&_fnCFURLCreateWithString, _lib, "CFURLCreateWithString")
 	}
 	_ret := _fnCFURLCreateWithString(objref.IDOf(allocator.Object), objref.IDOf(urlString.Object), objref.IDOf(baseURL.Object))
-	return CFURLRef{obj.Adopt(_ret)}
+	return CFURLRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFURLDestroyResource func(objc.ID, unsafe.Pointer) uint8
@@ -8609,7 +8609,7 @@ func CFURLEnumeratorCreateForDirectoryURL(alloc CFAllocatorRef, directoryURL CFU
 		ebipurego.RegisterLibFunc(&_fnCFURLEnumeratorCreateForDirectoryURL, _lib, "CFURLEnumeratorCreateForDirectoryURL")
 	}
 	_ret := _fnCFURLEnumeratorCreateForDirectoryURL(objref.IDOf(alloc.Object), objref.IDOf(directoryURL.Object), option, objref.IDOf(propertyKeys.Object))
-	return CFURLEnumeratorRef{obj.Adopt(_ret)}
+	return CFURLEnumeratorRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFURLEnumeratorCreateForMountedVolumes func(objc.ID, CFURLEnumeratorOptions, objc.ID) objc.ID
@@ -8621,7 +8621,7 @@ func CFURLEnumeratorCreateForMountedVolumes(alloc CFAllocatorRef, option CFURLEn
 		ebipurego.RegisterLibFunc(&_fnCFURLEnumeratorCreateForMountedVolumes, _lib, "CFURLEnumeratorCreateForMountedVolumes")
 	}
 	_ret := _fnCFURLEnumeratorCreateForMountedVolumes(objref.IDOf(alloc.Object), option, objref.IDOf(propertyKeys.Object))
-	return CFURLEnumeratorRef{obj.Adopt(_ret)}
+	return CFURLEnumeratorRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFURLEnumeratorGetDescendentLevel func(objc.ID) int
@@ -8677,13 +8677,13 @@ func CFURLGetBaseURL(anURL CFURLRef) CFURLRef {
 		ebipurego.RegisterLibFunc(&_fnCFURLGetBaseURL, _lib, "CFURLGetBaseURL")
 	}
 	_ret := _fnCFURLGetBaseURL(objref.IDOf(anURL.Object))
-	return CFURLRef{obj.Wrap(_ret)}
+	return CFURLRef{Object: obj.Wrap(_ret)}
 }
 
-var _fnCFURLGetByteRangeForComponent func(objc.ID, CFURLComponentType, unsafe.Pointer) unsafe.Pointer
+var _fnCFURLGetByteRangeForComponent func(objc.ID, CFURLComponentType, unsafe.Pointer) CFRange
 
 // CFURLGetByteRangeForComponent calls the CoreFoundation framework function CFURLGetByteRangeForComponent.
-func CFURLGetByteRangeForComponent(url CFURLRef, component CFURLComponentType) (result unsafe.Pointer, rangeIncludingSeparators CFRange) {
+func CFURLGetByteRangeForComponent(url CFURLRef, component CFURLComponentType) (result CFRange, rangeIncludingSeparators CFRange) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFURLGetByteRangeForComponent == nil {
 		ebipurego.RegisterLibFunc(&_fnCFURLGetByteRangeForComponent, _lib, "CFURLGetByteRangeForComponent")
@@ -8750,7 +8750,7 @@ func CFURLGetString(anURL CFURLRef) CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnCFURLGetString, _lib, "CFURLGetString")
 	}
 	_ret := _fnCFURLGetString(objref.IDOf(anURL.Object))
-	return CFStringRef{obj.Wrap(_ret)}
+	return CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFURLGetTypeID func() int
@@ -8841,7 +8841,7 @@ func CFUUIDCreate(alloc CFAllocatorRef) CFUUIDRef {
 		ebipurego.RegisterLibFunc(&_fnCFUUIDCreate, _lib, "CFUUIDCreate")
 	}
 	_ret := _fnCFUUIDCreate(objref.IDOf(alloc.Object))
-	return CFUUIDRef{obj.Adopt(_ret)}
+	return CFUUIDRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFUUIDCreateFromString func(objc.ID, objc.ID) objc.ID
@@ -8853,19 +8853,19 @@ func CFUUIDCreateFromString(alloc CFAllocatorRef, uuidStr CFStringRef) CFUUIDRef
 		ebipurego.RegisterLibFunc(&_fnCFUUIDCreateFromString, _lib, "CFUUIDCreateFromString")
 	}
 	_ret := _fnCFUUIDCreateFromString(objref.IDOf(alloc.Object), objref.IDOf(uuidStr.Object))
-	return CFUUIDRef{obj.Adopt(_ret)}
+	return CFUUIDRef{Object: obj.Adopt(_ret)}
 }
 
-var _fnCFUUIDCreateFromUUIDBytes func(objc.ID, unsafe.Pointer) objc.ID
+var _fnCFUUIDCreateFromUUIDBytes func(objc.ID, CFUUIDBytes) objc.ID
 
 // CFUUIDCreateFromUUIDBytes calls the CoreFoundation framework function CFUUIDCreateFromUUIDBytes.
-func CFUUIDCreateFromUUIDBytes(alloc CFAllocatorRef, data unsafe.Pointer) CFUUIDRef {
+func CFUUIDCreateFromUUIDBytes(alloc CFAllocatorRef, data CFUUIDBytes) CFUUIDRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFUUIDCreateFromUUIDBytes == nil {
 		ebipurego.RegisterLibFunc(&_fnCFUUIDCreateFromUUIDBytes, _lib, "CFUUIDCreateFromUUIDBytes")
 	}
 	_ret := _fnCFUUIDCreateFromUUIDBytes(objref.IDOf(alloc.Object), data)
-	return CFUUIDRef{obj.Adopt(_ret)}
+	return CFUUIDRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFUUIDCreateString func(objc.ID, objc.ID) objc.ID
@@ -8877,7 +8877,7 @@ func CFUUIDCreateString(alloc CFAllocatorRef, uuid CFUUIDRef) CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnCFUUIDCreateString, _lib, "CFUUIDCreateString")
 	}
 	_ret := _fnCFUUIDCreateString(objref.IDOf(alloc.Object), objref.IDOf(uuid.Object))
-	return CFStringRef{obj.Adopt(_ret)}
+	return CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFUUIDCreateWithBytes func(objc.ID, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8) objc.ID
@@ -8889,7 +8889,7 @@ func CFUUIDCreateWithBytes(alloc CFAllocatorRef, byte0 uint8, byte1 uint8, byte2
 		ebipurego.RegisterLibFunc(&_fnCFUUIDCreateWithBytes, _lib, "CFUUIDCreateWithBytes")
 	}
 	_ret := _fnCFUUIDCreateWithBytes(objref.IDOf(alloc.Object), byte0, byte1, byte2, byte3, byte4, byte5, byte6, byte7, byte8, byte9, byte10, byte11, byte12, byte13, byte14, byte15)
-	return CFUUIDRef{obj.Adopt(_ret)}
+	return CFUUIDRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFUUIDGetConstantUUIDWithBytes func(objc.ID, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8) objc.ID
@@ -8901,7 +8901,7 @@ func CFUUIDGetConstantUUIDWithBytes(alloc CFAllocatorRef, byte0 uint8, byte1 uin
 		ebipurego.RegisterLibFunc(&_fnCFUUIDGetConstantUUIDWithBytes, _lib, "CFUUIDGetConstantUUIDWithBytes")
 	}
 	_ret := _fnCFUUIDGetConstantUUIDWithBytes(objref.IDOf(alloc.Object), byte0, byte1, byte2, byte3, byte4, byte5, byte6, byte7, byte8, byte9, byte10, byte11, byte12, byte13, byte14, byte15)
-	return CFUUIDRef{obj.Wrap(_ret)}
+	return CFUUIDRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFUUIDGetTypeID func() int
@@ -8915,10 +8915,10 @@ func CFUUIDGetTypeID() int {
 	return _fnCFUUIDGetTypeID()
 }
 
-var _fnCFUUIDGetUUIDBytes func(objc.ID) unsafe.Pointer
+var _fnCFUUIDGetUUIDBytes func(objc.ID) CFUUIDBytes
 
 // CFUUIDGetUUIDBytes calls the CoreFoundation framework function CFUUIDGetUUIDBytes.
-func CFUUIDGetUUIDBytes(uuid CFUUIDRef) unsafe.Pointer {
+func CFUUIDGetUUIDBytes(uuid CFUUIDRef) CFUUIDBytes {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFUUIDGetUUIDBytes == nil {
 		ebipurego.RegisterLibFunc(&_fnCFUUIDGetUUIDBytes, _lib, "CFUUIDGetUUIDBytes")
@@ -8958,7 +8958,7 @@ func CFUserNotificationCreate(allocator CFAllocatorRef, timeout float64, flags i
 	}
 	var _out0 int
 	_ret := _fnCFUserNotificationCreate(objref.IDOf(allocator.Object), timeout, flags, unsafe.Pointer(&_out0), objref.IDOf(dictionary.Object))
-	return CFUserNotificationRef{obj.Adopt(_ret)}, _out0
+	return CFUserNotificationRef{Object: obj.Adopt(_ret)}, _out0
 }
 
 var _fnCFUserNotificationCreateRunLoopSource func(objc.ID, objc.ID, unsafe.Pointer, int) objc.ID
@@ -8970,7 +8970,7 @@ func CFUserNotificationCreateRunLoopSource(allocator CFAllocatorRef, userNotific
 		ebipurego.RegisterLibFunc(&_fnCFUserNotificationCreateRunLoopSource, _lib, "CFUserNotificationCreateRunLoopSource")
 	}
 	_ret := _fnCFUserNotificationCreateRunLoopSource(objref.IDOf(allocator.Object), objref.IDOf(userNotification.Object), callout, order)
-	return CFRunLoopSourceRef{obj.Adopt(_ret)}
+	return CFRunLoopSourceRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFUserNotificationDisplayAlert func(float64, int, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, unsafe.Pointer) int32
@@ -9006,7 +9006,7 @@ func CFUserNotificationGetResponseDictionary(userNotification CFUserNotification
 		ebipurego.RegisterLibFunc(&_fnCFUserNotificationGetResponseDictionary, _lib, "CFUserNotificationGetResponseDictionary")
 	}
 	_ret := _fnCFUserNotificationGetResponseDictionary(objref.IDOf(userNotification.Object))
-	return CFDictionaryRef{obj.Wrap(_ret)}
+	return CFDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFUserNotificationGetResponseValue func(objc.ID, objc.ID, int) objc.ID
@@ -9018,7 +9018,7 @@ func CFUserNotificationGetResponseValue(userNotification CFUserNotificationRef, 
 		ebipurego.RegisterLibFunc(&_fnCFUserNotificationGetResponseValue, _lib, "CFUserNotificationGetResponseValue")
 	}
 	_ret := _fnCFUserNotificationGetResponseValue(objref.IDOf(userNotification.Object), objref.IDOf(key.Object), idx)
-	return CFStringRef{obj.Wrap(_ret)}
+	return CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFUserNotificationGetTypeID func() int
@@ -9120,7 +9120,7 @@ func CFWriteStreamCopyError(stream CFWriteStreamRef) CFErrorRef {
 		ebipurego.RegisterLibFunc(&_fnCFWriteStreamCopyError, _lib, "CFWriteStreamCopyError")
 	}
 	_ret := _fnCFWriteStreamCopyError(objref.IDOf(stream.Object))
-	return CFErrorRef{obj.Adopt(_ret)}
+	return CFErrorRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFWriteStreamCopyProperty func(objc.ID, unsafe.Pointer) objc.ID
@@ -9144,7 +9144,7 @@ func CFWriteStreamCreateWithAllocatedBuffers(alloc CFAllocatorRef, bufferAllocat
 		ebipurego.RegisterLibFunc(&_fnCFWriteStreamCreateWithAllocatedBuffers, _lib, "CFWriteStreamCreateWithAllocatedBuffers")
 	}
 	_ret := _fnCFWriteStreamCreateWithAllocatedBuffers(objref.IDOf(alloc.Object), objref.IDOf(bufferAllocator.Object))
-	return CFWriteStreamRef{obj.Adopt(_ret)}
+	return CFWriteStreamRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFWriteStreamCreateWithBuffer func(objc.ID, unsafe.Pointer, int) objc.ID
@@ -9157,7 +9157,7 @@ func CFWriteStreamCreateWithBuffer(alloc CFAllocatorRef, bufferCapacity int) (re
 	}
 	var _out0 uint8
 	_ret := _fnCFWriteStreamCreateWithBuffer(objref.IDOf(alloc.Object), unsafe.Pointer(&_out0), bufferCapacity)
-	return CFWriteStreamRef{obj.Adopt(_ret)}, _out0
+	return CFWriteStreamRef{Object: obj.Adopt(_ret)}, _out0
 }
 
 var _fnCFWriteStreamCreateWithFile func(objc.ID, objc.ID) objc.ID
@@ -9169,13 +9169,13 @@ func CFWriteStreamCreateWithFile(alloc CFAllocatorRef, fileURL CFURLRef) CFWrite
 		ebipurego.RegisterLibFunc(&_fnCFWriteStreamCreateWithFile, _lib, "CFWriteStreamCreateWithFile")
 	}
 	_ret := _fnCFWriteStreamCreateWithFile(objref.IDOf(alloc.Object), objref.IDOf(fileURL.Object))
-	return CFWriteStreamRef{obj.Adopt(_ret)}
+	return CFWriteStreamRef{Object: obj.Adopt(_ret)}
 }
 
-var _fnCFWriteStreamGetError func(objc.ID) unsafe.Pointer
+var _fnCFWriteStreamGetError func(objc.ID) CFStreamError
 
 // CFWriteStreamGetError calls the CoreFoundation framework function CFWriteStreamGetError.
-func CFWriteStreamGetError(stream CFWriteStreamRef) unsafe.Pointer {
+func CFWriteStreamGetError(stream CFWriteStreamRef) CFStreamError {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFWriteStreamGetError == nil {
 		ebipurego.RegisterLibFunc(&_fnCFWriteStreamGetError, _lib, "CFWriteStreamGetError")
@@ -9291,7 +9291,7 @@ func CFXMLCreateStringByEscapingEntities(allocator CFAllocatorRef, str CFStringR
 		ebipurego.RegisterLibFunc(&_fnCFXMLCreateStringByEscapingEntities, _lib, "CFXMLCreateStringByEscapingEntities")
 	}
 	_ret := _fnCFXMLCreateStringByEscapingEntities(objref.IDOf(allocator.Object), objref.IDOf(str.Object), objref.IDOf(entitiesDictionary.Object))
-	return CFStringRef{obj.Adopt(_ret)}
+	return CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFXMLCreateStringByUnescapingEntities func(objc.ID, objc.ID, objc.ID) objc.ID
@@ -9303,7 +9303,7 @@ func CFXMLCreateStringByUnescapingEntities(allocator CFAllocatorRef, str CFStrin
 		ebipurego.RegisterLibFunc(&_fnCFXMLCreateStringByUnescapingEntities, _lib, "CFXMLCreateStringByUnescapingEntities")
 	}
 	_ret := _fnCFXMLCreateStringByUnescapingEntities(objref.IDOf(allocator.Object), objref.IDOf(str.Object), objref.IDOf(entitiesDictionary.Object))
-	return CFStringRef{obj.Adopt(_ret)}
+	return CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFXMLNodeCreate func(objc.ID, CFXMLNodeTypeCode, objc.ID, unsafe.Pointer, int) objc.ID
@@ -9315,7 +9315,7 @@ func CFXMLNodeCreate(alloc CFAllocatorRef, xmlType CFXMLNodeTypeCode, dataString
 		ebipurego.RegisterLibFunc(&_fnCFXMLNodeCreate, _lib, "CFXMLNodeCreate")
 	}
 	_ret := _fnCFXMLNodeCreate(objref.IDOf(alloc.Object), xmlType, objref.IDOf(dataString.Object), additionalInfoPtr, version)
-	return CFXMLNodeRef{obj.Adopt(_ret)}
+	return CFXMLNodeRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFXMLNodeCreateCopy func(objc.ID, objc.ID) objc.ID
@@ -9327,7 +9327,7 @@ func CFXMLNodeCreateCopy(alloc CFAllocatorRef, origNode CFXMLNodeRef) CFXMLNodeR
 		ebipurego.RegisterLibFunc(&_fnCFXMLNodeCreateCopy, _lib, "CFXMLNodeCreateCopy")
 	}
 	_ret := _fnCFXMLNodeCreateCopy(objref.IDOf(alloc.Object), objref.IDOf(origNode.Object))
-	return CFXMLNodeRef{obj.Adopt(_ret)}
+	return CFXMLNodeRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFXMLNodeGetInfoPtr func(objc.ID) unsafe.Pointer
@@ -9350,7 +9350,7 @@ func CFXMLNodeGetString(node CFXMLNodeRef) CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnCFXMLNodeGetString, _lib, "CFXMLNodeGetString")
 	}
 	_ret := _fnCFXMLNodeGetString(objref.IDOf(node.Object))
-	return CFStringRef{obj.Wrap(_ret)}
+	return CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFXMLNodeGetTypeCode func(objc.ID) CFXMLNodeTypeCode
@@ -9406,7 +9406,7 @@ func CFXMLParserCopyErrorDescription(parser CFXMLParserRef) CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnCFXMLParserCopyErrorDescription, _lib, "CFXMLParserCopyErrorDescription")
 	}
 	_ret := _fnCFXMLParserCopyErrorDescription(objref.IDOf(parser.Object))
-	return CFStringRef{obj.Adopt(_ret)}
+	return CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFXMLParserCreate func(objc.ID, objc.ID, objc.ID, int, int, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -9418,7 +9418,7 @@ func CFXMLParserCreate(allocator CFAllocatorRef, xmlData CFDataRef, dataSource C
 		ebipurego.RegisterLibFunc(&_fnCFXMLParserCreate, _lib, "CFXMLParserCreate")
 	}
 	_ret := _fnCFXMLParserCreate(objref.IDOf(allocator.Object), objref.IDOf(xmlData.Object), objref.IDOf(dataSource.Object), parseOptions, versionOfNodes, callBacks, context_)
-	return CFXMLParserRef{obj.Adopt(_ret)}
+	return CFXMLParserRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFXMLParserCreateWithDataFromURL func(objc.ID, objc.ID, int, int, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -9430,7 +9430,7 @@ func CFXMLParserCreateWithDataFromURL(allocator CFAllocatorRef, dataSource CFURL
 		ebipurego.RegisterLibFunc(&_fnCFXMLParserCreateWithDataFromURL, _lib, "CFXMLParserCreateWithDataFromURL")
 	}
 	_ret := _fnCFXMLParserCreateWithDataFromURL(objref.IDOf(allocator.Object), objref.IDOf(dataSource.Object), parseOptions, versionOfNodes, callBacks, context_)
-	return CFXMLParserRef{obj.Adopt(_ret)}
+	return CFXMLParserRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFXMLParserGetCallBacks func(objc.ID, unsafe.Pointer)
@@ -9497,7 +9497,7 @@ func CFXMLParserGetSourceURL(parser CFXMLParserRef) CFURLRef {
 		ebipurego.RegisterLibFunc(&_fnCFXMLParserGetSourceURL, _lib, "CFXMLParserGetSourceURL")
 	}
 	_ret := _fnCFXMLParserGetSourceURL(objref.IDOf(parser.Object))
-	return CFURLRef{obj.Wrap(_ret)}
+	return CFURLRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFXMLParserGetStatusCode func(objc.ID) CFXMLParserStatusCode
@@ -9542,7 +9542,7 @@ func CFXMLTreeCreateFromData(allocator CFAllocatorRef, xmlData CFDataRef, dataSo
 		ebipurego.RegisterLibFunc(&_fnCFXMLTreeCreateFromData, _lib, "CFXMLTreeCreateFromData")
 	}
 	_ret := _fnCFXMLTreeCreateFromData(objref.IDOf(allocator.Object), objref.IDOf(xmlData.Object), objref.IDOf(dataSource.Object), parseOptions, versionOfNodes)
-	return CFXMLTreeRef{obj.Adopt(_ret)}
+	return CFXMLTreeRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFXMLTreeCreateFromDataWithError func(objc.ID, objc.ID, objc.ID, int, int, unsafe.Pointer) objc.ID
@@ -9554,7 +9554,7 @@ func CFXMLTreeCreateFromDataWithError(allocator CFAllocatorRef, xmlData CFDataRe
 		ebipurego.RegisterLibFunc(&_fnCFXMLTreeCreateFromDataWithError, _lib, "CFXMLTreeCreateFromDataWithError")
 	}
 	_ret := _fnCFXMLTreeCreateFromDataWithError(objref.IDOf(allocator.Object), objref.IDOf(xmlData.Object), objref.IDOf(dataSource.Object), parseOptions, versionOfNodes, errorDict)
-	return CFXMLTreeRef{obj.Adopt(_ret)}
+	return CFXMLTreeRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFXMLTreeCreateWithDataFromURL func(objc.ID, objc.ID, int, int) objc.ID
@@ -9566,7 +9566,7 @@ func CFXMLTreeCreateWithDataFromURL(allocator CFAllocatorRef, dataSource CFURLRe
 		ebipurego.RegisterLibFunc(&_fnCFXMLTreeCreateWithDataFromURL, _lib, "CFXMLTreeCreateWithDataFromURL")
 	}
 	_ret := _fnCFXMLTreeCreateWithDataFromURL(objref.IDOf(allocator.Object), objref.IDOf(dataSource.Object), parseOptions, versionOfNodes)
-	return CFXMLTreeRef{obj.Adopt(_ret)}
+	return CFXMLTreeRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFXMLTreeCreateWithNode func(objc.ID, objc.ID) objc.ID
@@ -9578,7 +9578,7 @@ func CFXMLTreeCreateWithNode(allocator CFAllocatorRef, node CFXMLNodeRef) CFXMLT
 		ebipurego.RegisterLibFunc(&_fnCFXMLTreeCreateWithNode, _lib, "CFXMLTreeCreateWithNode")
 	}
 	_ret := _fnCFXMLTreeCreateWithNode(objref.IDOf(allocator.Object), objref.IDOf(node.Object))
-	return CFXMLTreeRef{obj.Adopt(_ret)}
+	return CFXMLTreeRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFXMLTreeCreateXMLData func(objc.ID, objc.ID) objc.ID
@@ -9590,7 +9590,7 @@ func CFXMLTreeCreateXMLData(allocator CFAllocatorRef, xmlTree CFXMLTreeRef) CFDa
 		ebipurego.RegisterLibFunc(&_fnCFXMLTreeCreateXMLData, _lib, "CFXMLTreeCreateXMLData")
 	}
 	_ret := _fnCFXMLTreeCreateXMLData(objref.IDOf(allocator.Object), objref.IDOf(xmlTree.Object))
-	return CFDataRef{obj.Adopt(_ret)}
+	return CFDataRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnCFXMLTreeGetNode func(objc.ID) objc.ID
@@ -9602,7 +9602,7 @@ func CFXMLTreeGetNode(xmlTree CFXMLTreeRef) CFXMLNodeRef {
 		ebipurego.RegisterLibFunc(&_fnCFXMLTreeGetNode, _lib, "CFXMLTreeGetNode")
 	}
 	_ret := _fnCFXMLTreeGetNode(objref.IDOf(xmlTree.Object))
-	return CFXMLNodeRef{obj.Wrap(_ret)}
+	return CFXMLNodeRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCFStringMakeConstantString func(string) objc.ID
@@ -9614,7 +9614,7 @@ func CFStringMakeConstantString(cStr string) CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnCFStringMakeConstantString, _lib, "__CFStringMakeConstantString")
 	}
 	_ret := _fnCFStringMakeConstantString(cStr)
-	return CFStringRef{obj.Wrap(_ret)}
+	return CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnBuiltinConstantP func() int32

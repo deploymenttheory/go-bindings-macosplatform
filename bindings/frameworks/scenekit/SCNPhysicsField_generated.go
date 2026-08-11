@@ -109,6 +109,12 @@ func (pf *PhysicsField) WithExclusive(exclusive bool) *PhysicsField {
 	return pf
 }
 
+// WithHalfExtent sets a location marking the end of the field’s area of effect.
+func (pf *PhysicsField) WithHalfExtent(halfExtent SCNVector3) *PhysicsField {
+	objc.Send[objc.ID](objref.IDOf(pf), objc.RegisterName("setHalfExtent:"), halfExtent)
+	return pf
+}
+
 // WithUsesEllipsoidalExtent sets a Boolean value that determines whether the field’s area of effect is shaped like a box or ellipsoid.
 func (pf *PhysicsField) WithUsesEllipsoidalExtent(usesEllipsoidalExtent bool) *PhysicsField {
 	objc.Send[objc.ID](objref.IDOf(pf), objc.RegisterName("setUsesEllipsoidalExtent:"), usesEllipsoidalExtent)
@@ -118,6 +124,18 @@ func (pf *PhysicsField) WithUsesEllipsoidalExtent(usesEllipsoidalExtent bool) *P
 // WithScope sets the area affected by the field, either inside or outside its region.
 func (pf *PhysicsField) WithScope(scope PhysicsFieldScope) *PhysicsField {
 	objc.Send[objc.ID](objref.IDOf(pf), objc.RegisterName("setScope:"), scope)
+	return pf
+}
+
+// WithOffset sets the offset of the field’s center within its area of effect.
+func (pf *PhysicsField) WithOffset(offset SCNVector3) *PhysicsField {
+	objc.Send[objc.ID](objref.IDOf(pf), objc.RegisterName("setOffset:"), offset)
+	return pf
+}
+
+// WithDirection sets the field’s directional axis.
+func (pf *PhysicsField) WithDirection(direction SCNVector3) *PhysicsField {
+	objc.Send[objc.ID](objref.IDOf(pf), objc.RegisterName("setDirection:"), direction)
 	return pf
 }
 
@@ -162,6 +180,13 @@ func (pf *PhysicsField) IsExclusive() bool {
 	return _r
 }
 
+// HalfExtent returns the half extent.
+func (pf *PhysicsField) HalfExtent() SCNVector3 {
+	defer runtime.KeepAlive(pf)
+	_r := objc.Send[SCNVector3](objref.IDOf(pf), objc.RegisterName("halfExtent"))
+	return _r
+}
+
 // UsesEllipsoidalExtent wraps the corresponding Objective-C method.
 func (pf *PhysicsField) UsesEllipsoidalExtent() bool {
 	defer runtime.KeepAlive(pf)
@@ -173,6 +198,20 @@ func (pf *PhysicsField) UsesEllipsoidalExtent() bool {
 func (pf *PhysicsField) Scope() PhysicsFieldScope {
 	defer runtime.KeepAlive(pf)
 	_r := objc.Send[PhysicsFieldScope](objref.IDOf(pf), objc.RegisterName("scope"))
+	return _r
+}
+
+// Offset returns the offset.
+func (pf *PhysicsField) Offset() SCNVector3 {
+	defer runtime.KeepAlive(pf)
+	_r := objc.Send[SCNVector3](objref.IDOf(pf), objc.RegisterName("offset"))
+	return _r
+}
+
+// Direction returns the direction.
+func (pf *PhysicsField) Direction() SCNVector3 {
+	defer runtime.KeepAlive(pf)
+	_r := objc.Send[SCNVector3](objref.IDOf(pf), objc.RegisterName("direction"))
 	return _r
 }
 

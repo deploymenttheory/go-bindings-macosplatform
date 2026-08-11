@@ -12,6 +12,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/idioconf"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/mainactor"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/naming"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/overrides"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/typemap"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/pipeline/structindex"
@@ -32,7 +33,10 @@ type Registry struct {
 	TypedefIndex      map[string]string // typedef name → target ObjC qualType
 	TypedefOwnerIndex map[string]string
 	StructIndex       map[string]string // struct name → owning framework
-	CFTypeIndex       map[string]string // CF opaque typedef → owning framework
+	// LocalStructs maps framework name → exported Go names of field-bearing
+	// structs it declares locally (see typemap.Mapper.LocalStructs).
+	LocalStructs map[string]map[string]bool
+	CFTypeIndex  map[string]string // CF opaque typedef → owning framework
 	// NonRefcountedHandles is the subset of CFTypeIndex opaque handles that are NOT
 	// reference-counted — a plain C handle (e.g. AudioComponent, AudioQueueRef) with
 	// its own dispose function and no CFTypeID. Detected by the ABSENCE of a
@@ -339,6 +343,44 @@ func LoadAll(paths []string, modulePrefix, libraryModulePrefix string) (*Registr
 	// Pass 6: struct registry — owner attribution + underscore-tag typedef
 	// backfill (shared with the libraries loader).
 	structindex.Build(frameworks, reg.StructIndex, reg.TypedefIndex)
+
+	// Pass 6b: per-framework locally-declared field-bearing structs, keyed by
+	// exported Go name. The struct emitters (raw and idiomatic) write every
+	// framework's own structs regardless of global StructIndex ownership, so a
+	// type reference from a framework that declares the struct locally must
+	// resolve to the local copy — qualifying against the global owner
+	// manufactures import edges the cycle detector cannot see (protocol
+	// signatures and struct fields are not scanned) and produced the fatal
+	// metal⇄compositorservices and commonpanels⇄hitoolbox cycles. Admission
+	// mirrors the raw struct emitter: available, field-bearing, and not
+	// shadowed by a same-framework class/protocol/enum Go name.
+	reg.LocalStructs = make(map[string]map[string]bool, len(frameworks))
+	for _, framework := range frameworks {
+		reserved := make(map[string]bool)
+		for className := range framework.Classes {
+			reserved[className] = true
+		}
+		for protoName := range framework.Protocols {
+			reserved[naming.GoTypeName(protoName)] = true
+		}
+		for enumName := range framework.Enums {
+			reserved[naming.GoTypeName(enumName)] = true
+		}
+		set := make(map[string]bool)
+		for name, s := range framework.Structs {
+			if len(s.Fields) == 0 || s.Availability.IsUnavailable {
+				continue
+			}
+			goName := naming.ExportedTypeName(name)
+			if goName == "" || reserved[goName] {
+				continue
+			}
+			set[goName] = true
+		}
+		if len(set) > 0 {
+			reg.LocalStructs[framework.Framework] = set
+		}
+	}
 
 	// Pass 6c: framework-specific opaque CF pointer typedefs.
 	for _, framework := range frameworks {

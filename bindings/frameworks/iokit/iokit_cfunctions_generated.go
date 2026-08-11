@@ -24,7 +24,7 @@ func IOBSDNameMatching(mainPort int, options uint32, bsdName string) corefoundat
 		ebipurego.RegisterLibFunc(&_fnIOBSDNameMatching, _lib, "IOBSDNameMatching")
 	}
 	_ret := _fnIOBSDNameMatching(mainPort, options, bsdName)
-	return corefoundation.CFMutableDictionaryRef{obj.Wrap(_ret)}
+	return corefoundation.CFMutableDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnIOCatalogueGetData func(int, uint32, string, unsafe.Pointer) int32
@@ -493,7 +493,7 @@ func IONotificationPortCreate(mainPort int) IONotificationPortRef {
 		ebipurego.RegisterLibFunc(&_fnIONotificationPortCreate, _lib, "IONotificationPortCreate")
 	}
 	_ret := _fnIONotificationPortCreate(mainPort)
-	return IONotificationPortRef{obj.WrapUnmanaged(_ret)}
+	return IONotificationPortRef{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnIONotificationPortDestroy func(objc.ID)
@@ -527,7 +527,7 @@ func IONotificationPortGetRunLoopSource(notify IONotificationPortRef) corefounda
 		ebipurego.RegisterLibFunc(&_fnIONotificationPortGetRunLoopSource, _lib, "IONotificationPortGetRunLoopSource")
 	}
 	_ret := _fnIONotificationPortGetRunLoopSource(objref.IDOf(notify.Object))
-	return corefoundation.CFRunLoopSourceRef{obj.Wrap(_ret)}
+	return corefoundation.CFRunLoopSourceRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnIONotificationPortSetDispatchQueue func(objc.ID, objc.ID)
@@ -572,7 +572,7 @@ func IOObjectCopyBundleIdentifierForClass(classname corefoundation.CFStringRef) 
 		ebipurego.RegisterLibFunc(&_fnIOObjectCopyBundleIdentifierForClass, _lib, "IOObjectCopyBundleIdentifierForClass")
 	}
 	_ret := _fnIOObjectCopyBundleIdentifierForClass(objref.IDOf(classname.Object))
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnIOObjectCopyClass func(int) objc.ID
@@ -584,7 +584,7 @@ func IOObjectCopyClass(object int) corefoundation.CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnIOObjectCopyClass, _lib, "IOObjectCopyClass")
 	}
 	_ret := _fnIOObjectCopyClass(object)
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnIOObjectCopySuperclassForClass func(objc.ID) objc.ID
@@ -596,7 +596,7 @@ func IOObjectCopySuperclassForClass(classname corefoundation.CFStringRef) corefo
 		ebipurego.RegisterLibFunc(&_fnIOObjectCopySuperclassForClass, _lib, "IOObjectCopySuperclassForClass")
 	}
 	_ret := _fnIOObjectCopySuperclassForClass(objref.IDOf(classname.Object))
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnIOObjectGetClass func(int, string) int32
@@ -685,7 +685,7 @@ func IOOpenFirmwarePathMatching(mainPort int, options uint32, path string) coref
 		ebipurego.RegisterLibFunc(&_fnIOOpenFirmwarePathMatching, _lib, "IOOpenFirmwarePathMatching")
 	}
 	_ret := _fnIOOpenFirmwarePathMatching(mainPort, options, path)
-	return corefoundation.CFMutableDictionaryRef{obj.Wrap(_ret)}
+	return corefoundation.CFMutableDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnIORegistryCreateIterator func(int, string, int, unsafe.Pointer) int32
@@ -721,7 +721,7 @@ func IORegistryEntryCopyPath(entry int, plane string) corefoundation.CFStringRef
 		ebipurego.RegisterLibFunc(&_fnIORegistryEntryCopyPath, _lib, "IORegistryEntryCopyPath")
 	}
 	_ret := _fnIORegistryEntryCopyPath(entry, plane)
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnIORegistryEntryCreateCFProperties func(int, unsafe.Pointer, objc.ID, int) int32
@@ -902,7 +902,7 @@ func IORegistryEntryIDMatching(entryID uint64) corefoundation.CFMutableDictionar
 		ebipurego.RegisterLibFunc(&_fnIORegistryEntryIDMatching, _lib, "IORegistryEntryIDMatching")
 	}
 	_ret := _fnIORegistryEntryIDMatching(entryID)
-	return corefoundation.CFMutableDictionaryRef{obj.Wrap(_ret)}
+	return corefoundation.CFMutableDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnIORegistryEntryInPlane func(int, string) int32
@@ -1103,7 +1103,7 @@ func IOServiceMatching(name string) corefoundation.CFMutableDictionaryRef {
 		ebipurego.RegisterLibFunc(&_fnIOServiceMatching, _lib, "IOServiceMatching")
 	}
 	_ret := _fnIOServiceMatching(name)
-	return corefoundation.CFMutableDictionaryRef{obj.Wrap(_ret)}
+	return corefoundation.CFMutableDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnIOServiceNameMatching func(string) objc.ID
@@ -1115,7 +1115,7 @@ func IOServiceNameMatching(name string) corefoundation.CFMutableDictionaryRef {
 		ebipurego.RegisterLibFunc(&_fnIOServiceNameMatching, _lib, "IOServiceNameMatching")
 	}
 	_ret := _fnIOServiceNameMatching(name)
-	return corefoundation.CFMutableDictionaryRef{obj.Wrap(_ret)}
+	return corefoundation.CFMutableDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnIOServiceOFPathToBSDName func(int, string, string) int32

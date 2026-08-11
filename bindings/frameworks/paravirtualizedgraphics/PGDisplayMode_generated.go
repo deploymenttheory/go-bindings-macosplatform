@@ -73,10 +73,18 @@ func (pdm *PGDisplayMode) String() string {
 	return rt.Description(objref.IDOf(pdm))
 }
 
-// NewPGDisplayMode creates a new PGDisplayMode.
-func NewPGDisplayMode() *PGDisplayMode {
-	_id := objc.Send[objc.ID](objc.ID(_class("PGDisplayMode")), objc.RegisterName("new"))
+// NewPGDisplayModeWithSizeInPixelsRefreshRateInHz creates a new display mode.
+func NewPGDisplayModeWithSizeInPixelsRefreshRateInHz(sizeInPixels PGDisplayCoord_t, refreshRateInHz float64) *PGDisplayMode {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PGDisplayMode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSizeInPixels:refreshRateInHz:"), sizeInPixels, refreshRateInHz)
 	return pGDisplayModeAdopt(_id)
+}
+
+// SizeInPixels returns width/height of supported display mode.
+func (pdm *PGDisplayMode) SizeInPixels() PGDisplayCoord_t {
+	defer runtime.KeepAlive(pdm)
+	_r := objc.Send[PGDisplayCoord_t](objref.IDOf(pdm), objc.RegisterName("sizeInPixels"))
+	return _r
 }
 
 // RefreshRate returns refreshRate of supported display mode.  Consider only supplying modes using a refreshRate equal to that of host OS's physical display where representation is ultimately shown.

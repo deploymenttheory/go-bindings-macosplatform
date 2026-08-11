@@ -91,6 +91,36 @@ func (m *Motion) WithSensorsActive(sensorsActive bool) *Motion {
 	return m
 }
 
+// WithGravity sets the gravity acceleration vector from the controller’s reference frame.
+func (m *Motion) WithGravity(gravity GCAcceleration) *Motion {
+	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setGravity:"), gravity)
+	return m
+}
+
+// WithUserAcceleration sets the acceleration that the user applies to the controller.
+func (m *Motion) WithUserAcceleration(userAcceleration GCAcceleration) *Motion {
+	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setUserAcceleration:"), userAcceleration)
+	return m
+}
+
+// WithAcceleration sets the total acceleration of the controller that includes gravity and the acceleration the user applies to the controller.
+func (m *Motion) WithAcceleration(acceleration GCAcceleration) *Motion {
+	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setAcceleration:"), acceleration)
+	return m
+}
+
+// WithAttitude sets the attitude of the controller.
+func (m *Motion) WithAttitude(attitude GCQuaternion) *Motion {
+	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setAttitude:"), attitude)
+	return m
+}
+
+// WithRotationRate sets the rotation rate of the controller.
+func (m *Motion) WithRotationRate(rotationRate GCRotationRate) *Motion {
+	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setRotationRate:"), rotationRate)
+	return m
+}
+
 // SetStateFromMotion copies the input values from a specified motion profile to a snapshot of a motion profile.
 func (m *Motion) SetStateFromMotion(motion *Motion) {
 	defer runtime.KeepAlive(m)
@@ -126,6 +156,27 @@ func (m *Motion) HasGravityAndUserAcceleration() bool {
 	return _r
 }
 
+// Gravity returns the gravity vector expressed in the controller's reference frame. Note that the total acceleration of the controller is equal to gravity plus userAcceleration.
+func (m *Motion) Gravity() GCAcceleration {
+	defer runtime.KeepAlive(m)
+	_r := objc.Send[GCAcceleration](objref.IDOf(m), objc.RegisterName("gravity"))
+	return _r
+}
+
+// UserAcceleration returns the acceleration that the user is giving to the controller. Note that the total acceleration of the controller is equal to gravity plus userAcceleration.
+func (m *Motion) UserAcceleration() GCAcceleration {
+	defer runtime.KeepAlive(m)
+	_r := objc.Send[GCAcceleration](objref.IDOf(m), objc.RegisterName("userAcceleration"))
+	return _r
+}
+
+// Acceleration returns the total acceleration of the controller.
+func (m *Motion) Acceleration() GCAcceleration {
+	defer runtime.KeepAlive(m)
+	_r := objc.Send[GCAcceleration](objref.IDOf(m), objc.RegisterName("acceleration"))
+	return _r
+}
+
 // HasAttitudeAndRotationRate reports whether the controller generating the motion data has sensors that can accurately determine the current attitude and rotation rate. If this is enabled the motion data for attitude and rotation rate are usable for inputs.
 func (m *Motion) HasAttitudeAndRotationRate() bool {
 	defer runtime.KeepAlive(m)
@@ -144,5 +195,19 @@ func (m *Motion) HasAttitude() bool {
 func (m *Motion) HasRotationRate() bool {
 	defer runtime.KeepAlive(m)
 	_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("hasRotationRate"))
+	return _r
+}
+
+// Attitude returns the current attitude of the controller.
+func (m *Motion) Attitude() GCQuaternion {
+	defer runtime.KeepAlive(m)
+	_r := objc.Send[GCQuaternion](objref.IDOf(m), objc.RegisterName("attitude"))
+	return _r
+}
+
+// RotationRate returns the current rotation rate of the controller.
+func (m *Motion) RotationRate() GCRotationRate {
+	defer runtime.KeepAlive(m)
+	_r := objc.Send[GCRotationRate](objref.IDOf(m), objc.RegisterName("rotationRate"))
 	return _r
 }

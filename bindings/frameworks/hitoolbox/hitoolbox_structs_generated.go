@@ -8,7 +8,6 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/commonpanels"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -41,15 +40,15 @@ type AlertStdCFStringAlertParamRec struct {
 }
 
 type AlertTemplate struct {
-	BoundsRect carboncore.Rect
+	BoundsRect Rect
 	ItemsID    int16
 	Stages     int16
 }
 
 type BasicWindowDescription struct {
 	DescriptionSize         uint32
-	WindowContentRect       carboncore.Rect
-	WindowZoomRect          carboncore.Rect
+	WindowContentRect       Rect
+	WindowZoomRect          Rect
 	WindowRefCon            unsafe.Pointer
 	WindowStateFlags        uint32
 	WindowPositionMethod    uint32
@@ -69,8 +68,8 @@ type ControlFontStyleRec struct {
 	Style     int16
 	Mode      int16
 	Just      int16
-	ForeColor commonpanels.RGBColor
-	BackColor commonpanels.RGBColor
+	ForeColor RGBColor
+	BackColor RGBColor
 }
 
 type ControlID struct {
@@ -107,7 +106,7 @@ type ControlTabInfoRecV1 struct {
 }
 
 type ControlTemplate struct {
-	ControlRect      carboncore.Rect
+	ControlRect      Rect
 	ControlValue     int16
 	ControlVisible   uint8
 	Fill             uint8
@@ -172,7 +171,7 @@ type DataBrowserPropertyDesc struct {
 }
 
 type DialogTemplate struct {
-	BoundsRect carboncore.Rect
+	BoundsRect Rect
 	ProcID     int16
 	Visible    uint8
 	Filler1    uint8
@@ -189,7 +188,7 @@ type EvQEl struct {
 	EvtQWhat      uint16
 	EvtQMessage   uint
 	EvtQWhen      uint32
-	EvtQWhere     carboncore.Point
+	EvtQWhere     Point
 	EvtQModifiers uint16
 }
 
@@ -204,7 +203,7 @@ type EventRecord struct {
 	What      uint16
 	Message   uint
 	When      uint32
-	Where     carboncore.Point
+	Where     Point
 	Modifiers uint16
 }
 
@@ -235,7 +234,7 @@ type FileTypeSpec struct {
 }
 
 type GetGrowImageRegionRec struct {
-	GrowRect        carboncore.Rect
+	GrowRect        Rect
 	GrowImageRegion unsafe.Pointer
 }
 
@@ -548,7 +547,7 @@ type HIViewKind struct {
 
 type HMHelpContentRec struct {
 	Version    int32
-	AbsHotRect carboncore.Rect
+	AbsHotRect Rect
 	TagSide    int16
 	Content    [2]HMHelpContent
 }
@@ -569,8 +568,8 @@ type HMenuBarMenu struct {
 }
 
 type IndicatorDragConstraint struct {
-	LimitRect carboncore.Rect
-	SlopRect  carboncore.Rect
+	LimitRect Rect
+	SlopRect  Rect
 	Axis      uint16
 }
 
@@ -585,11 +584,11 @@ type ListDefSpec struct {
 }
 
 type ListRec struct {
-	RView       carboncore.Rect
+	RView       Rect
 	Port        unsafe.Pointer
-	Indent      carboncore.Point
-	CellSize    carboncore.Point
-	Visible     carboncore.Rect
+	Indent      Point
+	CellSize    Point
+	Visible     Rect
 	VScroll     unsafe.Pointer
 	HScroll     unsafe.Pointer
 	SelFlags    int8
@@ -597,17 +596,27 @@ type ListRec struct {
 	LReserved   int8
 	ListFlags   int8
 	ClikTime    int
-	ClikLoc     carboncore.Point
-	MouseLoc    carboncore.Point
+	ClikLoc     Point
+	MouseLoc    Point
 	LClickLoop  unsafe.Pointer
-	LastClick   carboncore.Point
+	LastClick   Point
 	RefCon      int
 	ListDefProc unsafe.Pointer
 	UserHandle  unsafe.Pointer
-	DataBounds  carboncore.Rect
+	DataBounds  Rect
 	Cells       unsafe.Pointer
 	MaxIndex    int16
 	CellArray   [1]int16
+}
+
+type MCEntry struct {
+	MctID       int16
+	MctItem     int16
+	MctRGB1     RGBColor
+	MctRGB2     RGBColor
+	MctRGB3     RGBColor
+	MctRGB4     RGBColor
+	MctReserved int16
 }
 
 type MDEFDrawData struct {
@@ -783,6 +792,16 @@ type Rect struct {
 	Right  int16
 }
 
+type STElement struct {
+	StCount  int16
+	StHeight int16
+	StAscent int16
+	StFont   int16
+	StFace   uint8
+	StSize   int16
+	StColor  RGBColor
+}
+
 type ScrapFlavorInfo struct {
 	FlavorType  uint32
 	FlavorFlags uint32
@@ -807,6 +826,16 @@ type ScriptLanguageRecord struct {
 type ScriptLanguageSupport struct {
 	FScriptLanguageCount int16
 	FScriptLanguageArray [1]ScriptLanguageRecord
+}
+
+type ScrpSTElement struct {
+	ScrpStartChar int32
+	ScrpHeight    int16
+	ScrpAscent    int16
+	ScrpFont      int16
+	ScrpFace      uint8
+	ScrpSize      int16
+	ScrpColor     RGBColor
 }
 
 type SetupWindowProxyDragImageRec struct {
@@ -839,12 +868,12 @@ type StyleRun struct {
 }
 
 type TERec struct {
-	DestRect     carboncore.Rect
-	ViewRect     carboncore.Rect
-	SelRect      carboncore.Rect
+	DestRect     Rect
+	ViewRect     Rect
+	SelRect      Rect
 	LineHeight   int16
 	FontAscent   int16
-	SelPoint     carboncore.Point
+	SelPoint     Point
 	SelStart     int16
 	SelEnd       int16
 	Active       int16
@@ -922,7 +951,7 @@ type TXNBackground struct {
 }
 
 type TXNBackgroundData struct {
-	Color commonpanels.RGBColor
+	Color RGBColor
 }
 
 type TXNCarbonEventInfo struct {
@@ -1010,7 +1039,7 @@ type TextStyle struct {
 	TsFont  int16
 	TsFace  uint8
 	TsSize  int16
-	TsColor commonpanels.RGBColor
+	TsColor RGBColor
 }
 
 type ThemeButtonDrawInfo struct {
@@ -1021,7 +1050,7 @@ type ThemeButtonDrawInfo struct {
 
 type ThemeTrackDrawInfo struct {
 	Kind        uint16
-	Bounds      carboncore.Rect
+	Bounds      Rect
 	Min         int32
 	Max         int32
 	Value       int32
@@ -1055,8 +1084,8 @@ type TypeSelectRecord struct {
 }
 
 type WStateData struct {
-	UserState carboncore.Rect
-	StdState  carboncore.Rect
+	UserState Rect
+	StdState  Rect
 }
 
 type WinCTab struct {
@@ -1410,29 +1439,6 @@ func (u *HMHelpContent) AsContentType() uint32 {
 // The C layout cannot be reproduced as a plain Go value struct, so it is held as
 // its exact-size bytes and read through the typed As* accessors below. It is
 // pointer-only: never pass it by value.
-type MCEntry struct {
-	_    [0]uint16
-	data [30]byte
-}
-
-// AsMctID returns the mctID field, read from the backing bytes at offset 0.
-func (u *MCEntry) AsMctID() int16 {
-	return *(*int16)(unsafe.Pointer(&u.data[0]))
-}
-
-// AsMctItem returns the mctItem field, read from the backing bytes at offset 2.
-func (u *MCEntry) AsMctItem() int16 {
-	return *(*int16)(unsafe.Pointer(&u.data[2]))
-}
-
-// AsMctReserved returns the mctReserved field, read from the backing bytes at offset 28.
-func (u *MCEntry) AsMctReserved() int16 {
-	return *(*int16)(unsafe.Pointer(&u.data[28]))
-}
-
-// The C layout cannot be reproduced as a plain Go value struct, so it is held as
-// its exact-size bytes and read through the typed As* accessors below. It is
-// pointer-only: never pass it by value.
 type MenuTrackingData struct {
 	_    [0]uint16
 	data [28]byte
@@ -1461,44 +1467,6 @@ func (u *MenuTrackingData) AsVirtualMenuBottom() int32 {
 // The C layout cannot be reproduced as a plain Go value struct, so it is held as
 // its exact-size bytes and read through the typed As* accessors below. It is
 // pointer-only: never pass it by value.
-type STElement struct {
-	_    [0]uint16
-	data [18]byte
-}
-
-// AsStCount returns the stCount field, read from the backing bytes at offset 0.
-func (u *STElement) AsStCount() int16 {
-	return *(*int16)(unsafe.Pointer(&u.data[0]))
-}
-
-// AsStHeight returns the stHeight field, read from the backing bytes at offset 2.
-func (u *STElement) AsStHeight() int16 {
-	return *(*int16)(unsafe.Pointer(&u.data[2]))
-}
-
-// AsStAscent returns the stAscent field, read from the backing bytes at offset 4.
-func (u *STElement) AsStAscent() int16 {
-	return *(*int16)(unsafe.Pointer(&u.data[4]))
-}
-
-// AsStFont returns the stFont field, read from the backing bytes at offset 6.
-func (u *STElement) AsStFont() int16 {
-	return *(*int16)(unsafe.Pointer(&u.data[6]))
-}
-
-// AsStFace returns the stFace field, read from the backing bytes at offset 8.
-func (u *STElement) AsStFace() uint8 {
-	return *(*uint8)(unsafe.Pointer(&u.data[8]))
-}
-
-// AsStSize returns the stSize field, read from the backing bytes at offset 10.
-func (u *STElement) AsStSize() int16 {
-	return *(*int16)(unsafe.Pointer(&u.data[10]))
-}
-
-// The C layout cannot be reproduced as a plain Go value struct, so it is held as
-// its exact-size bytes and read through the typed As* accessors below. It is
-// pointer-only: never pass it by value.
 type ScrollBarTrackInfo struct {
 	_    [0]uint16
 	data [6]byte
@@ -1512,44 +1480,6 @@ func (u *ScrollBarTrackInfo) AsViewsize() int32 {
 // AsPressState returns the pressState field, read from the backing bytes at offset 4.
 func (u *ScrollBarTrackInfo) AsPressState() uint8 {
 	return *(*uint8)(unsafe.Pointer(&u.data[4]))
-}
-
-// The C layout cannot be reproduced as a plain Go value struct, so it is held as
-// its exact-size bytes and read through the typed As* accessors below. It is
-// pointer-only: never pass it by value.
-type ScrpSTElement struct {
-	_    [0]uint16
-	data [20]byte
-}
-
-// AsScrpStartChar returns the scrpStartChar field, read from the backing bytes at offset 0.
-func (u *ScrpSTElement) AsScrpStartChar() int32 {
-	return *(*int32)(unsafe.Pointer(&u.data[0]))
-}
-
-// AsScrpHeight returns the scrpHeight field, read from the backing bytes at offset 4.
-func (u *ScrpSTElement) AsScrpHeight() int16 {
-	return *(*int16)(unsafe.Pointer(&u.data[4]))
-}
-
-// AsScrpAscent returns the scrpAscent field, read from the backing bytes at offset 6.
-func (u *ScrpSTElement) AsScrpAscent() int16 {
-	return *(*int16)(unsafe.Pointer(&u.data[6]))
-}
-
-// AsScrpFont returns the scrpFont field, read from the backing bytes at offset 8.
-func (u *ScrpSTElement) AsScrpFont() int16 {
-	return *(*int16)(unsafe.Pointer(&u.data[8]))
-}
-
-// AsScrpFace returns the scrpFace field, read from the backing bytes at offset 10.
-func (u *ScrpSTElement) AsScrpFace() uint8 {
-	return *(*uint8)(unsafe.Pointer(&u.data[10]))
-}
-
-// AsScrpSize returns the scrpSize field, read from the backing bytes at offset 12.
-func (u *ScrpSTElement) AsScrpSize() int16 {
-	return *(*int16)(unsafe.Pointer(&u.data[12]))
 }
 
 // The C layout cannot be reproduced as a plain Go value struct, so it is held as

@@ -53,6 +53,18 @@ func NewPhysicsBallSocketJoint() *PhysicsBallSocketJoint {
 	return physicsBallSocketJointAdopt(_id)
 }
 
+// WithAnchorA sets the point at which the joint connects, relative to the node containing the first body.
+func (pbsj *PhysicsBallSocketJoint) WithAnchorA(anchorA SCNVector3) *PhysicsBallSocketJoint {
+	objc.Send[objc.ID](objref.IDOf(pbsj), objc.RegisterName("setAnchorA:"), anchorA)
+	return pbsj
+}
+
+// WithAnchorB sets the point at which the joint connects, relative to the node containing the second body.
+func (pbsj *PhysicsBallSocketJoint) WithAnchorB(anchorB SCNVector3) *PhysicsBallSocketJoint {
+	objc.Send[objc.ID](objref.IDOf(pbsj), objc.RegisterName("setAnchorB:"), anchorB)
+	return pbsj
+}
+
 // BodyA returns the body a.
 func (pbsj *PhysicsBallSocketJoint) BodyA() *PhysicsBody {
 	defer runtime.KeepAlive(pbsj)
@@ -60,11 +72,25 @@ func (pbsj *PhysicsBallSocketJoint) BodyA() *PhysicsBody {
 	return PhysicsBodyFromID(_r)
 }
 
+// AnchorA returns the anchor a.
+func (pbsj *PhysicsBallSocketJoint) AnchorA() SCNVector3 {
+	defer runtime.KeepAlive(pbsj)
+	_r := objc.Send[SCNVector3](objref.IDOf(pbsj), objc.RegisterName("anchorA"))
+	return _r
+}
+
 // BodyB returns the body b.
 func (pbsj *PhysicsBallSocketJoint) BodyB() *PhysicsBody {
 	defer runtime.KeepAlive(pbsj)
 	_r := objc.Send[objc.ID](objref.IDOf(pbsj), objc.RegisterName("bodyB"))
 	return PhysicsBodyFromID(_r)
+}
+
+// AnchorB returns the anchor b.
+func (pbsj *PhysicsBallSocketJoint) AnchorB() SCNVector3 {
+	defer runtime.KeepAlive(pbsj)
+	_r := objc.Send[SCNVector3](objref.IDOf(pbsj), objc.RegisterName("anchorB"))
+	return _r
 }
 
 var _ PhysicsBehaviorProvider = (*PhysicsBallSocketJoint)(nil)

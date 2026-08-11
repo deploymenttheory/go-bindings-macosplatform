@@ -94,7 +94,7 @@ func (ibssr *IOBluetoothSDPServiceRecord) RemoveServiceRecord() int {
 func (ibssr *IOBluetoothSDPServiceRecord) SDPServiceRecordRef() IOBluetoothSDPServiceRecordRef {
 	defer runtime.KeepAlive(ibssr)
 	_r := objc.Send[objc.ID](objref.IDOf(ibssr), objc.RegisterName("getSDPServiceRecordRef"))
-	return IOBluetoothSDPServiceRecordRef{obj.WrapUnmanaged(_r)}
+	return IOBluetoothSDPServiceRecordRef{Object: obj.WrapUnmanaged(_r)}
 }
 
 // GetDevice returns the get device.

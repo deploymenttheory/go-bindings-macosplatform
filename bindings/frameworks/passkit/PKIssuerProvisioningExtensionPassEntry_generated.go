@@ -100,7 +100,7 @@ func (ipepe *IssuerProvisioningExtensionPassEntry) Title() string {
 func (ipepe *IssuerProvisioningExtensionPassEntry) Art() coregraphics.CGImageRef {
 	defer runtime.KeepAlive(ipepe)
 	_r := objc.Send[objc.ID](objref.IDOf(ipepe), objc.RegisterName("art"))
-	return coregraphics.CGImageRef{obj.Wrap(_r)}
+	return coregraphics.CGImageRef{Object: obj.Wrap(_r)}
 }
 
 // isIssuerProvisioningExtensionPassEntry marks IssuerProvisioningExtensionPassEntry — and, by embedding promotion, its

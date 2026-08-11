@@ -76,6 +76,24 @@ func (rc *ReplicatorConstraint) WithReplicatesScale(replicatesScale bool) *Repli
 	return rc
 }
 
+// WithOrientationOffset sets defines an addition orientation offset. Defaults to no offset. Animatable.
+func (rc *ReplicatorConstraint) WithOrientationOffset(orientationOffset SCNVector4) *ReplicatorConstraint {
+	objc.Send[objc.ID](objref.IDOf(rc), objc.RegisterName("setOrientationOffset:"), orientationOffset)
+	return rc
+}
+
+// WithPositionOffset sets defines an addition orientation offset. Defaults to no offset. Animatable.
+func (rc *ReplicatorConstraint) WithPositionOffset(positionOffset SCNVector3) *ReplicatorConstraint {
+	objc.Send[objc.ID](objref.IDOf(rc), objc.RegisterName("setPositionOffset:"), positionOffset)
+	return rc
+}
+
+// WithScaleOffset sets defines an addition scale offset. Defaults to no offset. Animatable.
+func (rc *ReplicatorConstraint) WithScaleOffset(scaleOffset SCNVector3) *ReplicatorConstraint {
+	objc.Send[objc.ID](objref.IDOf(rc), objc.RegisterName("setScaleOffset:"), scaleOffset)
+	return rc
+}
+
 // WithEnabled sets determines whether the constraint is enabled or not. Defaults to YES.
 func (rc *ReplicatorConstraint) WithEnabled(enabled bool) *ReplicatorConstraint {
 	objc.Send[objc.ID](objref.IDOf(rc), objc.RegisterName("setEnabled:"), enabled)
@@ -119,6 +137,27 @@ func (rc *ReplicatorConstraint) ReplicatesPosition() bool {
 func (rc *ReplicatorConstraint) ReplicatesScale() bool {
 	defer runtime.KeepAlive(rc)
 	_r := objc.Send[bool](objref.IDOf(rc), objc.RegisterName("replicatesScale"))
+	return _r
+}
+
+// OrientationOffset defines an addition orientation offset. Defaults to no offset. Animatable.
+func (rc *ReplicatorConstraint) OrientationOffset() SCNVector4 {
+	defer runtime.KeepAlive(rc)
+	_r := objc.Send[SCNVector4](objref.IDOf(rc), objc.RegisterName("orientationOffset"))
+	return _r
+}
+
+// PositionOffset defines an addition orientation offset. Defaults to no offset. Animatable.
+func (rc *ReplicatorConstraint) PositionOffset() SCNVector3 {
+	defer runtime.KeepAlive(rc)
+	_r := objc.Send[SCNVector3](objref.IDOf(rc), objc.RegisterName("positionOffset"))
+	return _r
+}
+
+// ScaleOffset defines an addition scale offset. Defaults to no offset. Animatable.
+func (rc *ReplicatorConstraint) ScaleOffset() SCNVector3 {
+	defer runtime.KeepAlive(rc)
+	_r := objc.Send[SCNVector3](objref.IDOf(rc), objc.RegisterName("scaleOffset"))
 	return _r
 }
 

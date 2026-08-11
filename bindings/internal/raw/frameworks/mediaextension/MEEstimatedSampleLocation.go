@@ -6,7 +6,6 @@ package mediaextension
 import (
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
@@ -37,7 +36,7 @@ func MEEstimatedSampleLocationFromID(id objc.ID) *MEEstimatedSampleLocation {
 }
 
 // Creates an estimated sample location object with the byte source, sample location, and data location that you specify.
-func (o *MEEstimatedSampleLocation) InitWithByteSourceEstimatedSampleLocationRefinementDataLocation(byteSource *MEByteSource, estimatedSampleLocation avfoundation.AVSampleCursorStorageRange, refinementDataLocation avfoundation.AVSampleCursorStorageRange) *MEEstimatedSampleLocation {
+func (o *MEEstimatedSampleLocation) InitWithByteSourceEstimatedSampleLocationRefinementDataLocation(byteSource *MEByteSource, estimatedSampleLocation AVSampleCursorStorageRange, refinementDataLocation AVSampleCursorStorageRange) *MEEstimatedSampleLocation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEEstimatedSampleLocationSelInitWithByteSourceEstimatedSampleLocationRefinementDataLocation, byteSource.Ptr(), estimatedSampleLocation, refinementDataLocation)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
@@ -46,14 +45,14 @@ func (o *MEEstimatedSampleLocation) InitWithByteSourceEstimatedSampleLocationRef
 }
 
 // @property		estimatedSampleLocation @abstract		The estimated starting file offset and size in bytes of the sample.
-func (o *MEEstimatedSampleLocation) EstimatedSampleLocation() avfoundation.AVSampleCursorStorageRange {
-	_ret := objc.Send[avfoundation.AVSampleCursorStorageRange](o.Ptr(), _mEEstimatedSampleLocationSelEstimatedSampleLocation)
+func (o *MEEstimatedSampleLocation) EstimatedSampleLocation() AVSampleCursorStorageRange {
+	_ret := objc.Send[AVSampleCursorStorageRange](o.Ptr(), _mEEstimatedSampleLocationSelEstimatedSampleLocation)
 	return _ret
 }
 
 // @property		refinementDataLocation @abstract		The starting file offset and size in bytes of the the data necessary to provide an accurate sample location. @discussion		The refinement data can be provided to the MESampleCursor method refineSampleLocation to determine the exact sample location.
-func (o *MEEstimatedSampleLocation) RefinementDataLocation() avfoundation.AVSampleCursorStorageRange {
-	_ret := objc.Send[avfoundation.AVSampleCursorStorageRange](o.Ptr(), _mEEstimatedSampleLocationSelRefinementDataLocation)
+func (o *MEEstimatedSampleLocation) RefinementDataLocation() AVSampleCursorStorageRange {
+	_ret := objc.Send[AVSampleCursorStorageRange](o.Ptr(), _mEEstimatedSampleLocationSelRefinementDataLocation)
 	return _ret
 }
 

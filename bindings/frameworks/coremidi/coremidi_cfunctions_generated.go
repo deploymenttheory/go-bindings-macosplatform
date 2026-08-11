@@ -102,10 +102,10 @@ func MIDI1UPProgramChange(group uint8, channel uint8, program uint8) int {
 	return int(_fnMIDI1UPProgramChange(group, channel, program))
 }
 
-var _fnMIDI1UPSysEx func(uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8) unsafe.Pointer
+var _fnMIDI1UPSysEx func(uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8) MIDIMessage_64
 
 // MIDI1UPSysEx calls the CoreMIDI framework function MIDI1UPSysEx.
-func MIDI1UPSysEx(group uint8, status uint8, bytesUsed uint8, byte1 uint8, byte2 uint8, byte3 uint8, byte4 uint8, byte5 uint8, byte6 uint8) unsafe.Pointer {
+func MIDI1UPSysEx(group uint8, status uint8, bytesUsed uint8, byte1 uint8, byte2 uint8, byte3 uint8, byte4 uint8, byte5 uint8, byte6 uint8) MIDIMessage_64 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDI1UPSysEx == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDI1UPSysEx, _lib, "MIDI1UPSysEx")
@@ -113,10 +113,10 @@ func MIDI1UPSysEx(group uint8, status uint8, bytesUsed uint8, byte1 uint8, byte2
 	return _fnMIDI1UPSysEx(group, status, bytesUsed, byte1, byte2, byte3, byte4, byte5, byte6)
 }
 
-var _fnMIDI1UPSysExArray func(uint8, uint8, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+var _fnMIDI1UPSysExArray func(uint8, uint8, unsafe.Pointer, unsafe.Pointer) MIDIMessage_64
 
 // MIDI1UPSysExArray calls the CoreMIDI framework function MIDI1UPSysExArray.
-func MIDI1UPSysExArray(group uint8, status uint8, begin unsafe.Pointer, end unsafe.Pointer) unsafe.Pointer {
+func MIDI1UPSysExArray(group uint8, status uint8, begin unsafe.Pointer, end unsafe.Pointer) MIDIMessage_64 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDI1UPSysExArray == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDI1UPSysExArray, _lib, "MIDI1UPSysExArray")
@@ -135,10 +135,10 @@ func MIDI1UPSystemCommon(group uint8, status uint8, byte1 uint8, byte2 uint8) in
 	return int(_fnMIDI1UPSystemCommon(group, status, byte1, byte2))
 }
 
-var _fnMIDI2AssignableControl func(uint8, uint8, uint8, uint8, int) unsafe.Pointer
+var _fnMIDI2AssignableControl func(uint8, uint8, uint8, uint8, int) MIDIMessage_64
 
 // MIDI2AssignableControl calls the CoreMIDI framework function MIDI2AssignableControl.
-func MIDI2AssignableControl(group uint8, channel uint8, bank uint8, index uint8, value int) unsafe.Pointer {
+func MIDI2AssignableControl(group uint8, channel uint8, bank uint8, index uint8, value int) MIDIMessage_64 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDI2AssignableControl == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDI2AssignableControl, _lib, "MIDI2AssignableControl")
@@ -146,10 +146,10 @@ func MIDI2AssignableControl(group uint8, channel uint8, bank uint8, index uint8,
 	return _fnMIDI2AssignableControl(group, channel, bank, index, value)
 }
 
-var _fnMIDI2AssignablePNC func(uint8, uint8, uint8, uint8, int) unsafe.Pointer
+var _fnMIDI2AssignablePNC func(uint8, uint8, uint8, uint8, int) MIDIMessage_64
 
 // MIDI2AssignablePNC calls the CoreMIDI framework function MIDI2AssignablePNC.
-func MIDI2AssignablePNC(group uint8, channel uint8, noteNumber uint8, index uint8, value int) unsafe.Pointer {
+func MIDI2AssignablePNC(group uint8, channel uint8, noteNumber uint8, index uint8, value int) MIDIMessage_64 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDI2AssignablePNC == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDI2AssignablePNC, _lib, "MIDI2AssignablePNC")
@@ -157,10 +157,10 @@ func MIDI2AssignablePNC(group uint8, channel uint8, noteNumber uint8, index uint
 	return _fnMIDI2AssignablePNC(group, channel, noteNumber, index, value)
 }
 
-var _fnMIDI2ChannelPressure func(uint8, uint8, int) unsafe.Pointer
+var _fnMIDI2ChannelPressure func(uint8, uint8, int) MIDIMessage_64
 
 // MIDI2ChannelPressure calls the CoreMIDI framework function MIDI2ChannelPressure.
-func MIDI2ChannelPressure(group uint8, channel uint8, value int) unsafe.Pointer {
+func MIDI2ChannelPressure(group uint8, channel uint8, value int) MIDIMessage_64 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDI2ChannelPressure == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDI2ChannelPressure, _lib, "MIDI2ChannelPressure")
@@ -168,10 +168,10 @@ func MIDI2ChannelPressure(group uint8, channel uint8, value int) unsafe.Pointer 
 	return _fnMIDI2ChannelPressure(group, channel, value)
 }
 
-var _fnMIDI2ChannelVoiceMessage func(uint8, uint8, uint8, uint16, int) unsafe.Pointer
+var _fnMIDI2ChannelVoiceMessage func(uint8, uint8, uint8, uint16, int) MIDIMessage_64
 
 // MIDI2ChannelVoiceMessage calls the CoreMIDI framework function MIDI2ChannelVoiceMessage.
-func MIDI2ChannelVoiceMessage(group uint8, status uint8, channel uint8, index uint16, value int) unsafe.Pointer {
+func MIDI2ChannelVoiceMessage(group uint8, status uint8, channel uint8, index uint16, value int) MIDIMessage_64 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDI2ChannelVoiceMessage == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDI2ChannelVoiceMessage, _lib, "MIDI2ChannelVoiceMessage")
@@ -179,10 +179,10 @@ func MIDI2ChannelVoiceMessage(group uint8, status uint8, channel uint8, index ui
 	return _fnMIDI2ChannelVoiceMessage(group, status, channel, index, value)
 }
 
-var _fnMIDI2ControlChange func(uint8, uint8, uint8, int) unsafe.Pointer
+var _fnMIDI2ControlChange func(uint8, uint8, uint8, int) MIDIMessage_64
 
 // MIDI2ControlChange calls the CoreMIDI framework function MIDI2ControlChange.
-func MIDI2ControlChange(group uint8, channel uint8, index uint8, value int) unsafe.Pointer {
+func MIDI2ControlChange(group uint8, channel uint8, index uint8, value int) MIDIMessage_64 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDI2ControlChange == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDI2ControlChange, _lib, "MIDI2ControlChange")
@@ -190,10 +190,10 @@ func MIDI2ControlChange(group uint8, channel uint8, index uint8, value int) unsa
 	return _fnMIDI2ControlChange(group, channel, index, value)
 }
 
-var _fnMIDI2EndOfClipMessage func() unsafe.Pointer
+var _fnMIDI2EndOfClipMessage func() MIDIMessage_128
 
 // MIDI2EndOfClipMessage calls the CoreMIDI framework function MIDI2EndOfClipMessage.
-func MIDI2EndOfClipMessage() unsafe.Pointer {
+func MIDI2EndOfClipMessage() MIDIMessage_128 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDI2EndOfClipMessage == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDI2EndOfClipMessage, _lib, "MIDI2EndOfClipMessage")
@@ -201,10 +201,10 @@ func MIDI2EndOfClipMessage() unsafe.Pointer {
 	return _fnMIDI2EndOfClipMessage()
 }
 
-var _fnMIDI2EndpointDeviceIdentityNotificationMessage func(uint8, uint8, uint8, uint16, uint16, int) unsafe.Pointer
+var _fnMIDI2EndpointDeviceIdentityNotificationMessage func(uint8, uint8, uint8, uint16, uint16, int) MIDIMessage_128
 
 // MIDI2EndpointDeviceIdentityNotificationMessage calls the CoreMIDI framework function MIDI2EndpointDeviceIdentityNotificationMessage.
-func MIDI2EndpointDeviceIdentityNotificationMessage(deviceManufacturer1 uint8, deviceManufacturer2 uint8, deviceManufacturer3 uint8, deviceFamily uint16, deviceFamilyModel uint16, revisionLevel int) unsafe.Pointer {
+func MIDI2EndpointDeviceIdentityNotificationMessage(deviceManufacturer1 uint8, deviceManufacturer2 uint8, deviceManufacturer3 uint8, deviceFamily uint16, deviceFamilyModel uint16, revisionLevel int) MIDIMessage_128 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDI2EndpointDeviceIdentityNotificationMessage == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDI2EndpointDeviceIdentityNotificationMessage, _lib, "MIDI2EndpointDeviceIdentityNotificationMessage")
@@ -212,10 +212,10 @@ func MIDI2EndpointDeviceIdentityNotificationMessage(deviceManufacturer1 uint8, d
 	return _fnMIDI2EndpointDeviceIdentityNotificationMessage(deviceManufacturer1, deviceManufacturer2, deviceManufacturer3, deviceFamily, deviceFamilyModel, revisionLevel)
 }
 
-var _fnMIDI2EndpointDiscoveryMessage func(uint8, uint8, bool, bool, bool, bool, bool) unsafe.Pointer
+var _fnMIDI2EndpointDiscoveryMessage func(uint8, uint8, bool, bool, bool, bool, bool) MIDIMessage_128
 
 // MIDI2EndpointDiscoveryMessage calls the CoreMIDI framework function MIDI2EndpointDiscoveryMessage.
-func MIDI2EndpointDiscoveryMessage(versionMajor uint8, versionMinor uint8, endpointInfoRequest bool, deviceIdentityRequest bool, endpointNameRequest bool, productInstanceIDRequest bool, streamConfigurationRequest bool) unsafe.Pointer {
+func MIDI2EndpointDiscoveryMessage(versionMajor uint8, versionMinor uint8, endpointInfoRequest bool, deviceIdentityRequest bool, endpointNameRequest bool, productInstanceIDRequest bool, streamConfigurationRequest bool) MIDIMessage_128 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDI2EndpointDiscoveryMessage == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDI2EndpointDiscoveryMessage, _lib, "MIDI2EndpointDiscoveryMessage")
@@ -223,10 +223,10 @@ func MIDI2EndpointDiscoveryMessage(versionMajor uint8, versionMinor uint8, endpo
 	return _fnMIDI2EndpointDiscoveryMessage(versionMajor, versionMinor, endpointInfoRequest, deviceIdentityRequest, endpointNameRequest, productInstanceIDRequest, streamConfigurationRequest)
 }
 
-var _fnMIDI2EndpointInfoNotificationMessage func(uint8, uint8, bool, uint8, bool, bool, bool, bool) unsafe.Pointer
+var _fnMIDI2EndpointInfoNotificationMessage func(uint8, uint8, bool, uint8, bool, bool, bool, bool) MIDIMessage_128
 
 // MIDI2EndpointInfoNotificationMessage calls the CoreMIDI framework function MIDI2EndpointInfoNotificationMessage.
-func MIDI2EndpointInfoNotificationMessage(versionMajor uint8, versionMinor uint8, staticFunctionBlocks bool, numberOfFunctionBlocks uint8, m1 bool, m2 bool, receiveJRTimestamp bool, transmitJRTimestamp bool) unsafe.Pointer {
+func MIDI2EndpointInfoNotificationMessage(versionMajor uint8, versionMinor uint8, staticFunctionBlocks bool, numberOfFunctionBlocks uint8, m1 bool, m2 bool, receiveJRTimestamp bool, transmitJRTimestamp bool) MIDIMessage_128 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDI2EndpointInfoNotificationMessage == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDI2EndpointInfoNotificationMessage, _lib, "MIDI2EndpointInfoNotificationMessage")
@@ -234,10 +234,10 @@ func MIDI2EndpointInfoNotificationMessage(versionMajor uint8, versionMinor uint8
 	return _fnMIDI2EndpointInfoNotificationMessage(versionMajor, versionMinor, staticFunctionBlocks, numberOfFunctionBlocks, m1, m2, receiveJRTimestamp, transmitJRTimestamp)
 }
 
-var _fnMIDI2EndpointNameNotificationMessage func(UMPStreamMessageFormat, unsafe.Pointer, int) unsafe.Pointer
+var _fnMIDI2EndpointNameNotificationMessage func(UMPStreamMessageFormat, unsafe.Pointer, int) MIDIMessage_128
 
 // MIDI2EndpointNameNotificationMessage calls the CoreMIDI framework function MIDI2EndpointNameNotificationMessage.
-func MIDI2EndpointNameNotificationMessage(format UMPStreamMessageFormat, data unsafe.Pointer, length int) unsafe.Pointer {
+func MIDI2EndpointNameNotificationMessage(format UMPStreamMessageFormat, data unsafe.Pointer, length int) MIDIMessage_128 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDI2EndpointNameNotificationMessage == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDI2EndpointNameNotificationMessage, _lib, "MIDI2EndpointNameNotificationMessage")
@@ -245,10 +245,10 @@ func MIDI2EndpointNameNotificationMessage(format UMPStreamMessageFormat, data un
 	return _fnMIDI2EndpointNameNotificationMessage(format, data, length)
 }
 
-var _fnMIDI2EndpointProductInstanceIDNotificationMessage func(UMPStreamMessageFormat, unsafe.Pointer, int) unsafe.Pointer
+var _fnMIDI2EndpointProductInstanceIDNotificationMessage func(UMPStreamMessageFormat, unsafe.Pointer, int) MIDIMessage_128
 
 // MIDI2EndpointProductInstanceIDNotificationMessage calls the CoreMIDI framework function MIDI2EndpointProductInstanceIDNotificationMessage.
-func MIDI2EndpointProductInstanceIDNotificationMessage(format UMPStreamMessageFormat, data unsafe.Pointer, length int) unsafe.Pointer {
+func MIDI2EndpointProductInstanceIDNotificationMessage(format UMPStreamMessageFormat, data unsafe.Pointer, length int) MIDIMessage_128 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDI2EndpointProductInstanceIDNotificationMessage == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDI2EndpointProductInstanceIDNotificationMessage, _lib, "MIDI2EndpointProductInstanceIDNotificationMessage")
@@ -256,10 +256,10 @@ func MIDI2EndpointProductInstanceIDNotificationMessage(format UMPStreamMessageFo
 	return _fnMIDI2EndpointProductInstanceIDNotificationMessage(format, data, length)
 }
 
-var _fnMIDI2FlexDataMessage func(uint8, uint8, uint8, uint8, uint8, uint8, int, int, int) unsafe.Pointer
+var _fnMIDI2FlexDataMessage func(uint8, uint8, uint8, uint8, uint8, uint8, int, int, int) MIDIMessage_128
 
 // MIDI2FlexDataMessage calls the CoreMIDI framework function MIDI2FlexDataMessage.
-func MIDI2FlexDataMessage(group uint8, format uint8, address uint8, channel uint8, statusBank uint8, status uint8, data1 int, data2 int, data3 int) unsafe.Pointer {
+func MIDI2FlexDataMessage(group uint8, format uint8, address uint8, channel uint8, statusBank uint8, status uint8, data1 int, data2 int, data3 int) MIDIMessage_128 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDI2FlexDataMessage == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDI2FlexDataMessage, _lib, "MIDI2FlexDataMessage")
@@ -267,10 +267,10 @@ func MIDI2FlexDataMessage(group uint8, format uint8, address uint8, channel uint
 	return _fnMIDI2FlexDataMessage(group, format, address, channel, statusBank, status, data1, data2, data3)
 }
 
-var _fnMIDI2FunctionBlockDiscoveryMessage func(uint8, bool, bool) unsafe.Pointer
+var _fnMIDI2FunctionBlockDiscoveryMessage func(uint8, bool, bool) MIDIMessage_128
 
 // MIDI2FunctionBlockDiscoveryMessage calls the CoreMIDI framework function MIDI2FunctionBlockDiscoveryMessage.
-func MIDI2FunctionBlockDiscoveryMessage(functionBlockNumber uint8, infoRequest bool, nameRequest bool) unsafe.Pointer {
+func MIDI2FunctionBlockDiscoveryMessage(functionBlockNumber uint8, infoRequest bool, nameRequest bool) MIDIMessage_128 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDI2FunctionBlockDiscoveryMessage == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDI2FunctionBlockDiscoveryMessage, _lib, "MIDI2FunctionBlockDiscoveryMessage")
@@ -278,10 +278,10 @@ func MIDI2FunctionBlockDiscoveryMessage(functionBlockNumber uint8, infoRequest b
 	return _fnMIDI2FunctionBlockDiscoveryMessage(functionBlockNumber, infoRequest, nameRequest)
 }
 
-var _fnMIDI2FunctionBlockInfoNotificationMessage func(bool, uint8, UMPFunctionBlockUIHint, UMPFunctionBlockMIDI1Info, UMPFunctionBlockDirection, uint8, uint8, uint8, uint8) unsafe.Pointer
+var _fnMIDI2FunctionBlockInfoNotificationMessage func(bool, uint8, UMPFunctionBlockUIHint, UMPFunctionBlockMIDI1Info, UMPFunctionBlockDirection, uint8, uint8, uint8, uint8) MIDIMessage_128
 
 // MIDI2FunctionBlockInfoNotificationMessage calls the CoreMIDI framework function MIDI2FunctionBlockInfoNotificationMessage.
-func MIDI2FunctionBlockInfoNotificationMessage(active bool, blockNumber uint8, uiHint UMPFunctionBlockUIHint, midi1 UMPFunctionBlockMIDI1Info, direction UMPFunctionBlockDirection, firstGroup uint8, numberOfGroupsSpanned uint8, ciVersion uint8, maxSysex8Streams uint8) unsafe.Pointer {
+func MIDI2FunctionBlockInfoNotificationMessage(active bool, blockNumber uint8, uiHint UMPFunctionBlockUIHint, midi1 UMPFunctionBlockMIDI1Info, direction UMPFunctionBlockDirection, firstGroup uint8, numberOfGroupsSpanned uint8, ciVersion uint8, maxSysex8Streams uint8) MIDIMessage_128 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDI2FunctionBlockInfoNotificationMessage == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDI2FunctionBlockInfoNotificationMessage, _lib, "MIDI2FunctionBlockInfoNotificationMessage")
@@ -289,10 +289,10 @@ func MIDI2FunctionBlockInfoNotificationMessage(active bool, blockNumber uint8, u
 	return _fnMIDI2FunctionBlockInfoNotificationMessage(active, blockNumber, uiHint, midi1, direction, firstGroup, numberOfGroupsSpanned, ciVersion, maxSysex8Streams)
 }
 
-var _fnMIDI2FunctionBlockNameNotificationMessage func(UMPStreamMessageFormat, uint8, unsafe.Pointer, int) unsafe.Pointer
+var _fnMIDI2FunctionBlockNameNotificationMessage func(UMPStreamMessageFormat, uint8, unsafe.Pointer, int) MIDIMessage_128
 
 // MIDI2FunctionBlockNameNotificationMessage calls the CoreMIDI framework function MIDI2FunctionBlockNameNotificationMessage.
-func MIDI2FunctionBlockNameNotificationMessage(format UMPStreamMessageFormat, blockNumber uint8, data unsafe.Pointer, length int) unsafe.Pointer {
+func MIDI2FunctionBlockNameNotificationMessage(format UMPStreamMessageFormat, blockNumber uint8, data unsafe.Pointer, length int) MIDIMessage_128 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDI2FunctionBlockNameNotificationMessage == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDI2FunctionBlockNameNotificationMessage, _lib, "MIDI2FunctionBlockNameNotificationMessage")
@@ -300,10 +300,10 @@ func MIDI2FunctionBlockNameNotificationMessage(format UMPStreamMessageFormat, bl
 	return _fnMIDI2FunctionBlockNameNotificationMessage(format, blockNumber, data, length)
 }
 
-var _fnMIDI2NoteOff func(uint8, uint8, uint8, uint8, uint16, uint16) unsafe.Pointer
+var _fnMIDI2NoteOff func(uint8, uint8, uint8, uint8, uint16, uint16) MIDIMessage_64
 
 // MIDI2NoteOff calls the CoreMIDI framework function MIDI2NoteOff.
-func MIDI2NoteOff(group uint8, channel uint8, noteNumber uint8, attributeType uint8, attributeData uint16, velocity uint16) unsafe.Pointer {
+func MIDI2NoteOff(group uint8, channel uint8, noteNumber uint8, attributeType uint8, attributeData uint16, velocity uint16) MIDIMessage_64 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDI2NoteOff == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDI2NoteOff, _lib, "MIDI2NoteOff")
@@ -311,10 +311,10 @@ func MIDI2NoteOff(group uint8, channel uint8, noteNumber uint8, attributeType ui
 	return _fnMIDI2NoteOff(group, channel, noteNumber, attributeType, attributeData, velocity)
 }
 
-var _fnMIDI2NoteOn func(uint8, uint8, uint8, uint8, uint16, uint16) unsafe.Pointer
+var _fnMIDI2NoteOn func(uint8, uint8, uint8, uint8, uint16, uint16) MIDIMessage_64
 
 // MIDI2NoteOn calls the CoreMIDI framework function MIDI2NoteOn.
-func MIDI2NoteOn(group uint8, channel uint8, noteNumber uint8, attributeType uint8, attributeData uint16, velocity uint16) unsafe.Pointer {
+func MIDI2NoteOn(group uint8, channel uint8, noteNumber uint8, attributeType uint8, attributeData uint16, velocity uint16) MIDIMessage_64 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDI2NoteOn == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDI2NoteOn, _lib, "MIDI2NoteOn")
@@ -322,10 +322,10 @@ func MIDI2NoteOn(group uint8, channel uint8, noteNumber uint8, attributeType uin
 	return _fnMIDI2NoteOn(group, channel, noteNumber, attributeType, attributeData, velocity)
 }
 
-var _fnMIDI2PerNoteManagment func(uint8, uint8, uint8, bool, bool) unsafe.Pointer
+var _fnMIDI2PerNoteManagment func(uint8, uint8, uint8, bool, bool) MIDIMessage_64
 
 // MIDI2PerNoteManagment calls the CoreMIDI framework function MIDI2PerNoteManagment.
-func MIDI2PerNoteManagment(group uint8, channel uint8, noteNumber uint8, detachPNCs bool, resetPNCsToDefault bool) unsafe.Pointer {
+func MIDI2PerNoteManagment(group uint8, channel uint8, noteNumber uint8, detachPNCs bool, resetPNCsToDefault bool) MIDIMessage_64 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDI2PerNoteManagment == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDI2PerNoteManagment, _lib, "MIDI2PerNoteManagment")
@@ -333,10 +333,10 @@ func MIDI2PerNoteManagment(group uint8, channel uint8, noteNumber uint8, detachP
 	return _fnMIDI2PerNoteManagment(group, channel, noteNumber, detachPNCs, resetPNCsToDefault)
 }
 
-var _fnMIDI2PerNotePitchBend func(uint8, uint8, uint8, int) unsafe.Pointer
+var _fnMIDI2PerNotePitchBend func(uint8, uint8, uint8, int) MIDIMessage_64
 
 // MIDI2PerNotePitchBend calls the CoreMIDI framework function MIDI2PerNotePitchBend.
-func MIDI2PerNotePitchBend(group uint8, channel uint8, noteNumber uint8, value int) unsafe.Pointer {
+func MIDI2PerNotePitchBend(group uint8, channel uint8, noteNumber uint8, value int) MIDIMessage_64 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDI2PerNotePitchBend == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDI2PerNotePitchBend, _lib, "MIDI2PerNotePitchBend")
@@ -344,10 +344,10 @@ func MIDI2PerNotePitchBend(group uint8, channel uint8, noteNumber uint8, value i
 	return _fnMIDI2PerNotePitchBend(group, channel, noteNumber, value)
 }
 
-var _fnMIDI2PitchBend func(uint8, uint8, int) unsafe.Pointer
+var _fnMIDI2PitchBend func(uint8, uint8, int) MIDIMessage_64
 
 // MIDI2PitchBend calls the CoreMIDI framework function MIDI2PitchBend.
-func MIDI2PitchBend(group uint8, channel uint8, value int) unsafe.Pointer {
+func MIDI2PitchBend(group uint8, channel uint8, value int) MIDIMessage_64 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDI2PitchBend == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDI2PitchBend, _lib, "MIDI2PitchBend")
@@ -355,10 +355,10 @@ func MIDI2PitchBend(group uint8, channel uint8, value int) unsafe.Pointer {
 	return _fnMIDI2PitchBend(group, channel, value)
 }
 
-var _fnMIDI2PolyPressure func(uint8, uint8, uint8, int) unsafe.Pointer
+var _fnMIDI2PolyPressure func(uint8, uint8, uint8, int) MIDIMessage_64
 
 // MIDI2PolyPressure calls the CoreMIDI framework function MIDI2PolyPressure.
-func MIDI2PolyPressure(group uint8, channel uint8, noteNumber uint8, value int) unsafe.Pointer {
+func MIDI2PolyPressure(group uint8, channel uint8, noteNumber uint8, value int) MIDIMessage_64 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDI2PolyPressure == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDI2PolyPressure, _lib, "MIDI2PolyPressure")
@@ -366,10 +366,10 @@ func MIDI2PolyPressure(group uint8, channel uint8, noteNumber uint8, value int) 
 	return _fnMIDI2PolyPressure(group, channel, noteNumber, value)
 }
 
-var _fnMIDI2ProgramChange func(uint8, uint8, bool, uint8, uint8, uint8) unsafe.Pointer
+var _fnMIDI2ProgramChange func(uint8, uint8, bool, uint8, uint8, uint8) MIDIMessage_64
 
 // MIDI2ProgramChange calls the CoreMIDI framework function MIDI2ProgramChange.
-func MIDI2ProgramChange(group uint8, channel uint8, bankIsValid bool, program uint8, bankMsb uint8, bankLsb uint8) unsafe.Pointer {
+func MIDI2ProgramChange(group uint8, channel uint8, bankIsValid bool, program uint8, bankMsb uint8, bankLsb uint8) MIDIMessage_64 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDI2ProgramChange == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDI2ProgramChange, _lib, "MIDI2ProgramChange")
@@ -377,10 +377,10 @@ func MIDI2ProgramChange(group uint8, channel uint8, bankIsValid bool, program ui
 	return _fnMIDI2ProgramChange(group, channel, bankIsValid, program, bankMsb, bankLsb)
 }
 
-var _fnMIDI2RegisteredControl func(uint8, uint8, uint8, uint8, int) unsafe.Pointer
+var _fnMIDI2RegisteredControl func(uint8, uint8, uint8, uint8, int) MIDIMessage_64
 
 // MIDI2RegisteredControl calls the CoreMIDI framework function MIDI2RegisteredControl.
-func MIDI2RegisteredControl(group uint8, channel uint8, bank uint8, index uint8, value int) unsafe.Pointer {
+func MIDI2RegisteredControl(group uint8, channel uint8, bank uint8, index uint8, value int) MIDIMessage_64 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDI2RegisteredControl == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDI2RegisteredControl, _lib, "MIDI2RegisteredControl")
@@ -388,10 +388,10 @@ func MIDI2RegisteredControl(group uint8, channel uint8, bank uint8, index uint8,
 	return _fnMIDI2RegisteredControl(group, channel, bank, index, value)
 }
 
-var _fnMIDI2RegisteredPNC func(uint8, uint8, uint8, uint8, int) unsafe.Pointer
+var _fnMIDI2RegisteredPNC func(uint8, uint8, uint8, uint8, int) MIDIMessage_64
 
 // MIDI2RegisteredPNC calls the CoreMIDI framework function MIDI2RegisteredPNC.
-func MIDI2RegisteredPNC(group uint8, channel uint8, noteNumber uint8, index uint8, value int) unsafe.Pointer {
+func MIDI2RegisteredPNC(group uint8, channel uint8, noteNumber uint8, index uint8, value int) MIDIMessage_64 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDI2RegisteredPNC == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDI2RegisteredPNC, _lib, "MIDI2RegisteredPNC")
@@ -399,10 +399,10 @@ func MIDI2RegisteredPNC(group uint8, channel uint8, noteNumber uint8, index uint
 	return _fnMIDI2RegisteredPNC(group, channel, noteNumber, index, value)
 }
 
-var _fnMIDI2RelAssignableControl func(uint8, uint8, uint8, uint8, int) unsafe.Pointer
+var _fnMIDI2RelAssignableControl func(uint8, uint8, uint8, uint8, int) MIDIMessage_64
 
 // MIDI2RelAssignableControl calls the CoreMIDI framework function MIDI2RelAssignableControl.
-func MIDI2RelAssignableControl(group uint8, channel uint8, bank uint8, index uint8, value int) unsafe.Pointer {
+func MIDI2RelAssignableControl(group uint8, channel uint8, bank uint8, index uint8, value int) MIDIMessage_64 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDI2RelAssignableControl == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDI2RelAssignableControl, _lib, "MIDI2RelAssignableControl")
@@ -410,10 +410,10 @@ func MIDI2RelAssignableControl(group uint8, channel uint8, bank uint8, index uin
 	return _fnMIDI2RelAssignableControl(group, channel, bank, index, value)
 }
 
-var _fnMIDI2RelRegisteredControl func(uint8, uint8, uint8, uint8, int) unsafe.Pointer
+var _fnMIDI2RelRegisteredControl func(uint8, uint8, uint8, uint8, int) MIDIMessage_64
 
 // MIDI2RelRegisteredControl calls the CoreMIDI framework function MIDI2RelRegisteredControl.
-func MIDI2RelRegisteredControl(group uint8, channel uint8, bank uint8, index uint8, value int) unsafe.Pointer {
+func MIDI2RelRegisteredControl(group uint8, channel uint8, bank uint8, index uint8, value int) MIDIMessage_64 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDI2RelRegisteredControl == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDI2RelRegisteredControl, _lib, "MIDI2RelRegisteredControl")
@@ -421,10 +421,10 @@ func MIDI2RelRegisteredControl(group uint8, channel uint8, bank uint8, index uin
 	return _fnMIDI2RelRegisteredControl(group, channel, bank, index, value)
 }
 
-var _fnMIDI2StartOfClipMessage func() unsafe.Pointer
+var _fnMIDI2StartOfClipMessage func() MIDIMessage_128
 
 // MIDI2StartOfClipMessage calls the CoreMIDI framework function MIDI2StartOfClipMessage.
-func MIDI2StartOfClipMessage() unsafe.Pointer {
+func MIDI2StartOfClipMessage() MIDIMessage_128 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDI2StartOfClipMessage == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDI2StartOfClipMessage, _lib, "MIDI2StartOfClipMessage")
@@ -432,10 +432,10 @@ func MIDI2StartOfClipMessage() unsafe.Pointer {
 	return _fnMIDI2StartOfClipMessage()
 }
 
-var _fnMIDI2StreamConfigurationNotificationMessage func(uint8, bool, bool) unsafe.Pointer
+var _fnMIDI2StreamConfigurationNotificationMessage func(uint8, bool, bool) MIDIMessage_128
 
 // MIDI2StreamConfigurationNotificationMessage calls the CoreMIDI framework function MIDI2StreamConfigurationNotificationMessage.
-func MIDI2StreamConfigurationNotificationMessage(protocol uint8, receiveJRTimestamp bool, transmitJRTimestamp bool) unsafe.Pointer {
+func MIDI2StreamConfigurationNotificationMessage(protocol uint8, receiveJRTimestamp bool, transmitJRTimestamp bool) MIDIMessage_128 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDI2StreamConfigurationNotificationMessage == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDI2StreamConfigurationNotificationMessage, _lib, "MIDI2StreamConfigurationNotificationMessage")
@@ -443,10 +443,10 @@ func MIDI2StreamConfigurationNotificationMessage(protocol uint8, receiveJRTimest
 	return _fnMIDI2StreamConfigurationNotificationMessage(protocol, receiveJRTimestamp, transmitJRTimestamp)
 }
 
-var _fnMIDI2StreamConfigurationRequestMessage func(uint8, bool, bool) unsafe.Pointer
+var _fnMIDI2StreamConfigurationRequestMessage func(uint8, bool, bool) MIDIMessage_128
 
 // MIDI2StreamConfigurationRequestMessage calls the CoreMIDI framework function MIDI2StreamConfigurationRequestMessage.
-func MIDI2StreamConfigurationRequestMessage(protocol uint8, receiveJRTimestamp bool, transmitJRTimestamp bool) unsafe.Pointer {
+func MIDI2StreamConfigurationRequestMessage(protocol uint8, receiveJRTimestamp bool, transmitJRTimestamp bool) MIDIMessage_128 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDI2StreamConfigurationRequestMessage == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDI2StreamConfigurationRequestMessage, _lib, "MIDI2StreamConfigurationRequestMessage")
@@ -454,10 +454,10 @@ func MIDI2StreamConfigurationRequestMessage(protocol uint8, receiveJRTimestamp b
 	return _fnMIDI2StreamConfigurationRequestMessage(protocol, receiveJRTimestamp, transmitJRTimestamp)
 }
 
-var _fnMIDI2StreamMessage func(UMPStreamMessageFormat, UMPStreamMessageStatus, uint16, int, int, int) unsafe.Pointer
+var _fnMIDI2StreamMessage func(UMPStreamMessageFormat, UMPStreamMessageStatus, uint16, int, int, int) MIDIMessage_128
 
 // MIDI2StreamMessage calls the CoreMIDI framework function MIDI2StreamMessage.
-func MIDI2StreamMessage(format UMPStreamMessageFormat, status UMPStreamMessageStatus, data1 uint16, data2 int, data3 int, data4 int) unsafe.Pointer {
+func MIDI2StreamMessage(format UMPStreamMessageFormat, status UMPStreamMessageStatus, data1 uint16, data2 int, data3 int, data4 int) MIDIMessage_128 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDI2StreamMessage == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDI2StreamMessage, _lib, "MIDI2StreamMessage")
@@ -465,10 +465,10 @@ func MIDI2StreamMessage(format UMPStreamMessageFormat, status UMPStreamMessageSt
 	return _fnMIDI2StreamMessage(format, status, data1, data2, data3, data4)
 }
 
-var _fnMIDI2StreamMessageFromData func(UMPStreamMessageFormat, UMPStreamMessageStatus, unsafe.Pointer, int) unsafe.Pointer
+var _fnMIDI2StreamMessageFromData func(UMPStreamMessageFormat, UMPStreamMessageStatus, unsafe.Pointer, int) MIDIMessage_128
 
 // MIDI2StreamMessageFromData calls the CoreMIDI framework function MIDI2StreamMessageFromData.
-func MIDI2StreamMessageFromData(format UMPStreamMessageFormat, status UMPStreamMessageStatus, data unsafe.Pointer, length int) unsafe.Pointer {
+func MIDI2StreamMessageFromData(format UMPStreamMessageFormat, status UMPStreamMessageStatus, data unsafe.Pointer, length int) MIDIMessage_128 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDI2StreamMessageFromData == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDI2StreamMessageFromData, _lib, "MIDI2StreamMessageFromData")
@@ -826,7 +826,7 @@ func MIDIGetDriverIORunLoop() corefoundation.CFRunLoopRef {
 		ebipurego.RegisterLibFunc(&_fnMIDIGetDriverIORunLoop, _lib, "MIDIGetDriverIORunLoop")
 	}
 	_ret := _fnMIDIGetDriverIORunLoop()
-	return corefoundation.CFRunLoopRef{obj.Wrap(_ret)}
+	return corefoundation.CFRunLoopRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnMIDIGetExternalDevice func(int) uint32

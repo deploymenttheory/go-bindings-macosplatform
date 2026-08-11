@@ -114,6 +114,14 @@ func (ip *IndexPath) IndexAtPosition(position int) int {
 	return _r
 }
 
+// GetIndexesRange copies the indexes stored in the index path from the positions specified by the position range into the specified indexes.
+func (ip *IndexPath) GetIndexesRange(positionRange NSRange) (indexes int) {
+	defer runtime.KeepAlive(ip)
+	var _out0 int
+	objc.Send[objc.ID](objref.IDOf(ip), objc.RegisterName("getIndexes:range:"), unsafe.Pointer(&_out0), positionRange)
+	return _out0
+}
+
 // Compare indicates the depth-first traversal order of the receiving index path and another index path.
 func (ip *IndexPath) Compare(otherObject *IndexPath) ComparisonResult {
 	defer runtime.KeepAlive(ip)

@@ -78,3 +78,11 @@ func NewMatrixCopyDescriptorWithSourceMatricesDestinationMatricesOffsetVectorOff
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceMatrices:destinationMatrices:offsetVector:offset:"), purego.SliceToNSArray(sourceMatrices, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(destinationMatrices, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(offsets), byteOffset)
 	return matrixCopyDescriptorAdopt(_id)
 }
+
+// SetCopyOperationAtIndexSourceMatrixDestinationMatrixOffsets initialize a MPSMatrixCopyDescriptor using offsets generated on the CPU This is for one at a time intialization of the copy operations
+func (mcd *MatrixCopyDescriptor) SetCopyOperationAtIndexSourceMatrixDestinationMatrixOffsets(index int, sourceMatrix obj.Object, destinationMatrix obj.Object, offsets MPSMatrixCopyOffsets) {
+	defer runtime.KeepAlive(mcd)
+	defer runtime.KeepAlive(sourceMatrix)
+	defer runtime.KeepAlive(destinationMatrix)
+	objc.Send[objc.ID](objref.IDOf(mcd), objc.RegisterName("setCopyOperationAtIndex:sourceMatrix:destinationMatrix:offsets:"), index, objref.IDOf(sourceMatrix), objref.IDOf(destinationMatrix), offsets)
+}

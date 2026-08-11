@@ -208,11 +208,24 @@ func (d *Data) GetBytesLength(buffer unsafe.Pointer, length int) {
 	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("getBytes:length:"), buffer, length)
 }
 
+// GetBytesRange copies a range of bytes from the data object into a given buffer.
+func (d *Data) GetBytesRange(buffer unsafe.Pointer, range_ NSRange) {
+	defer runtime.KeepAlive(d)
+	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("getBytes:range:"), buffer, range_)
+}
+
 // IsEqualToData returns a Boolean value indicating whether this data object is the same as another.
 func (d *Data) IsEqualToData(other []byte) bool {
 	defer runtime.KeepAlive(d)
 	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("isEqualToData:"), rt.BytesToNSData(other))
 	return _r
+}
+
+// SubdataWithRange returns a new data object containing the data object’s bytes that fall within the limits specified by a given range.
+func (d *Data) SubdataWithRange(range_ NSRange) []byte {
+	defer runtime.KeepAlive(d)
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("subdataWithRange:"), range_)
+	return rt.NSDataToBytes(_r)
 }
 
 // WriteToFileAtomically writes the data object’s bytes to the file specified by a given path.
@@ -249,6 +262,13 @@ func (d *Data) WriteToURL(url string, writeOptionsMask DataWritingOptions) error
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return nil
+}
+
+// RangeOfDataOptionsRange finds and returns the range of the first occurrence of the given data, within the given range, subject to given options.
+func (d *Data) RangeOfDataOptionsRange(dataToFind []byte, mask DataSearchOptions, searchRange NSRange) NSRange {
+	defer runtime.KeepAlive(d)
+	_r := objc.Send[NSRange](objref.IDOf(d), objc.RegisterName("rangeOfData:options:range:"), rt.BytesToNSData(dataToFind), mask, searchRange)
+	return _r
 }
 
 // Base64EncodedStringWith creates a Base64 encoded string from the string using the given options.

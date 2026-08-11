@@ -7,7 +7,6 @@ package mediaextension
 import (
 	"runtime"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -75,7 +74,7 @@ func (sl *SampleLocation) String() string {
 }
 
 // NewSampleLocationWithByteSourceSampleLocation creates a sample location object with the byte source and sample location that you specify.
-func NewSampleLocationWithByteSourceSampleLocation(byteSource *ByteSource, sampleLocation avfoundation.AVSampleCursorStorageRange) *SampleLocation {
+func NewSampleLocationWithByteSourceSampleLocation(byteSource *ByteSource, sampleLocation AVSampleCursorStorageRange) *SampleLocation {
 	defer runtime.KeepAlive(byteSource)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MESampleLocation")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithByteSource:sampleLocation:"), objref.IDOf(byteSource), sampleLocation)
@@ -83,9 +82,9 @@ func NewSampleLocationWithByteSourceSampleLocation(byteSource *ByteSource, sampl
 }
 
 // SampleLocation returns the starting file offset and size in bytes of the sample.
-func (sl *SampleLocation) SampleLocation() avfoundation.AVSampleCursorStorageRange {
+func (sl *SampleLocation) SampleLocation() AVSampleCursorStorageRange {
 	defer runtime.KeepAlive(sl)
-	_r := objc.Send[avfoundation.AVSampleCursorStorageRange](objref.IDOf(sl), objc.RegisterName("sampleLocation"))
+	_r := objc.Send[AVSampleCursorStorageRange](objref.IDOf(sl), objc.RegisterName("sampleLocation"))
 	return _r
 }
 

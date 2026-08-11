@@ -330,7 +330,7 @@ func (bp *BezierPath) ContainsPoint(point corefoundation.CGPoint) bool {
 func (bp *BezierPath) CGPath() coregraphics.CGPathRef {
 	defer runtime.KeepAlive(bp)
 	_r := objc.Send[objc.ID](objref.IDOf(bp), objc.RegisterName("CGPath"))
-	return coregraphics.CGPathRef{obj.Wrap(_r)}
+	return coregraphics.CGPathRef{Object: obj.Wrap(_r)}
 }
 
 // LineWidth returns the line width.

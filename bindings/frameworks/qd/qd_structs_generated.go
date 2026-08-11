@@ -7,7 +7,6 @@ package qd
 import (
 	"unsafe"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
@@ -20,7 +19,7 @@ type AsscEntry struct {
 type BitMap struct {
 	BaseAddr unsafe.Pointer
 	RowBytes int16
-	Bounds   carboncore.Rect
+	Bounds   Rect
 }
 
 type CM2Header struct {
@@ -618,6 +617,11 @@ type CQDProcs struct {
 	NewProc6          unsafe.Pointer
 }
 
+type ColorSpec struct {
+	Value int16
+	Rgb   RGBColor
+}
+
 type ColorTable struct {
 	CtSeed  int32
 	CtFlags int16
@@ -631,8 +635,8 @@ type FMInput struct {
 	Face     uint8
 	NeedBits uint8
 	Device   int16
-	Numer    carboncore.Point
-	Denom    carboncore.Point
+	Numer    Point
+	Denom    Point
 }
 
 type FamRec struct {
@@ -691,7 +695,7 @@ type GDevice struct {
 	GdPMap       unsafe.Pointer
 	GdRefCon     int32
 	GdNextGD     unsafe.Pointer
-	GdRect       carboncore.Rect
+	GdRect       Rect
 	GdMode       int32
 	GdCCBytes    int16
 	GdCCDepth    int16
@@ -721,8 +725,8 @@ type KernTable struct {
 
 type MacPolygon struct {
 	PolySize   int16
-	PolyBBox   carboncore.Rect
-	PolyPoints unsafe.Pointer
+	PolyBBox   Rect
+	PolyPoints [1]Point
 }
 
 type NCMConcatProfileSet struct {
@@ -760,7 +764,7 @@ type OpaqueRgnHandle struct{}
 type OpaqueWindowPtr struct{}
 
 type OpenCPicParams struct {
-	SrcRect   carboncore.Rect
+	SrcRect   Rect
 	HRes      int32
 	VRes      int32
 	Version   int16
@@ -774,13 +778,13 @@ type Pattern struct {
 
 type Picture struct {
 	PicSize  int16
-	PicFrame carboncore.Rect
+	PicFrame Rect
 }
 
 type PixMap struct {
 	BaseAddr    unsafe.Pointer
 	RowBytes    int16
-	Bounds      carboncore.Rect
+	Bounds      Rect
 	PmVersion   int16
 	PackType    int16
 	PackSize    int32
@@ -962,19 +966,6 @@ type CMProfileLocation struct {
 
 // AsLocType returns the locType field, read from the backing bytes at offset 0.
 func (u *CMProfileLocation) AsLocType() int16 {
-	return *(*int16)(unsafe.Pointer(&u.data[0]))
-}
-
-// The C layout cannot be reproduced as a plain Go value struct, so it is held as
-// its exact-size bytes and read through the typed As* accessors below. It is
-// pointer-only: never pass it by value.
-type ColorSpec struct {
-	_    [0]uint16
-	data [8]byte
-}
-
-// AsValue returns the value field, read from the backing bytes at offset 0.
-func (u *ColorSpec) AsValue() int16 {
 	return *(*int16)(unsafe.Pointer(&u.data[0]))
 }
 

@@ -7,7 +7,6 @@ package kerberos
 import (
 	"unsafe"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gss"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
@@ -80,10 +79,10 @@ type GssBufferDescStruct struct {
 
 type GssChannelBindingsStruct struct {
 	InitiatorAddrtype uint32
-	InitiatorAddress  unsafe.Pointer
+	InitiatorAddress  GssBufferDescStruct
 	AcceptorAddrtype  uint32
-	AcceptorAddress   unsafe.Pointer
-	ApplicationData   unsafe.Pointer
+	AcceptorAddress   GssBufferDescStruct
+	ApplicationData   GssBufferDescStruct
 }
 
 type GssCredIdStruct struct{}
@@ -92,8 +91,8 @@ type GssCtxIdStruct struct{}
 
 type GssKrb5CfxKeydata struct {
 	HaveAcceptorSubkey uint32
-	CtxKey             unsafe.Pointer
-	AcceptorSubkey     unsafe.Pointer
+	CtxKey             GssKrb5LucidKey
+	AcceptorSubkey     GssKrb5LucidKey
 }
 
 type GssKrb5LucidContextV1 struct {
@@ -103,8 +102,8 @@ type GssKrb5LucidContextV1 struct {
 	SendSeq   uint64
 	RecvSeq   uint64
 	Protocol  uint32
-	Rfc1964Kd unsafe.Pointer
-	CfxKd     unsafe.Pointer
+	Rfc1964Kd GssKrb5Rfc1964Keydata
+	CfxKd     GssKrb5CfxKeydata
 }
 
 type GssKrb5LucidContextVersion struct {
@@ -120,7 +119,7 @@ type GssKrb5LucidKey struct {
 type GssKrb5Rfc1964Keydata struct {
 	SignAlg uint32
 	SealAlg uint32
-	CtxKey  unsafe.Pointer
+	CtxKey  GssKrb5LucidKey
 }
 
 type GssNameStruct struct{}
@@ -436,40 +435,40 @@ type PasswdPhraseElement struct {
 type AppleGssKrb5AuthdataIfRelevant = AppleGssKrb5AuthdataIfRelevantKey
 
 // GssOID is an alias for the gss_OID_desc_struct value type.
-type GssOID = *gss.GssOIDDescStruct
+type GssOID = *GssOIDDescStruct
 
 // GssOIDDesc is an alias for the gss_OID_desc_struct value type.
-type GssOIDDesc = gss.GssOIDDescStruct
+type GssOIDDesc = GssOIDDescStruct
 
 // GssOIDSet is an alias for the gss_OID_set_desc_struct value type.
-type GssOIDSet = *gss.GssOIDSetDescStruct
+type GssOIDSet = *GssOIDSetDescStruct
 
 // GssOIDSetDesc is an alias for the gss_OID_set_desc_struct value type.
-type GssOIDSetDesc = gss.GssOIDSetDescStruct
+type GssOIDSetDesc = GssOIDSetDescStruct
 
 // GssBufferDesc is an alias for the gss_buffer_desc_struct value type.
-type GssBufferDesc = gss.GssBufferDescStruct
+type GssBufferDesc = GssBufferDescStruct
 
 // GssBufferT is an alias for the gss_buffer_desc_struct value type.
-type GssBufferT = *gss.GssBufferDescStruct
+type GssBufferT = *GssBufferDescStruct
 
 // GssChannelBindingsT is an alias for the gss_channel_bindings_struct value type.
-type GssChannelBindingsT = *gss.GssChannelBindingsStruct
+type GssChannelBindingsT = *GssChannelBindingsStruct
 
 // GssKrb5CfxKeydataT is an alias for the gss_krb5_cfx_keydata value type.
-type GssKrb5CfxKeydataT = gss.GssKrb5CfxKeydata
+type GssKrb5CfxKeydataT = GssKrb5CfxKeydata
 
 // GssKrb5LucidContextV1T is an alias for the gss_krb5_lucid_context_v1 value type.
-type GssKrb5LucidContextV1T = gss.GssKrb5LucidContextV1
+type GssKrb5LucidContextV1T = GssKrb5LucidContextV1
 
 // GssKrb5LucidContextVersionT is an alias for the gss_krb5_lucid_context_version value type.
-type GssKrb5LucidContextVersionT = gss.GssKrb5LucidContextVersion
+type GssKrb5LucidContextVersionT = GssKrb5LucidContextVersion
 
 // GssKrb5LucidKeyT is an alias for the gss_krb5_lucid_key value type.
-type GssKrb5LucidKeyT = gss.GssKrb5LucidKey
+type GssKrb5LucidKeyT = GssKrb5LucidKey
 
 // GssKrb5Rfc1964KeydataT is an alias for the gss_krb5_rfc1964_keydata value type.
-type GssKrb5Rfc1964KeydataT = gss.GssKrb5Rfc1964Keydata
+type GssKrb5Rfc1964KeydataT = GssKrb5Rfc1964Keydata
 
 // Krb5KeytabEntry is an alias for the krb5_keytab_entry_st value type.
 type Krb5KeytabEntry = Krb5KeytabEntrySt

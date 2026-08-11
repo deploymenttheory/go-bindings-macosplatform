@@ -34,6 +34,12 @@ func CircleWithCenterCoordinateRadius(coord unsafe.Pointer, radius unsafe.Pointe
 	return CircleFromID(_r)
 }
 
+// CircleWithMapRect creates and returns a circle object that derives the circular area from the specified rectangle.
+func CircleWithMapRect(mapRect MKMapRect) *Circle {
+	_r := objc.Send[objc.ID](objc.ID(_class("MKCircle")), objc.RegisterName("circleWithMapRect:"), mapRect)
+	return CircleFromID(_r)
+}
+
 // CompassButtonWithMapView creates a compass button and associates it with the specified map view.
 func CompassButtonWithMapView(mapView *MapView) *CompassButton {
 	defer runtime.KeepAlive(mapView)

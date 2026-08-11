@@ -6,7 +6,6 @@ package videotoolbox
 import (
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
@@ -107,14 +106,14 @@ func (o *VTLowLatencySuperResolutionScalerConfiguration) ScaleFactor() float32 {
 }
 
 // Maximum dimensions for a source frame for the processor.
-func VTLowLatencySuperResolutionScalerConfigurationMaximumDimensions() avfoundation.CMVideoDimensions {
-	_ret := objc.Send[avfoundation.CMVideoDimensions](objc.ID(_clsVTLowLatencySuperResolutionScalerConfiguration), _vTLowLatencySuperResolutionScalerConfigurationSelMaximumDimensions)
+func VTLowLatencySuperResolutionScalerConfigurationMaximumDimensions() CMVideoDimensions {
+	_ret := objc.Send[CMVideoDimensions](objc.ID(_clsVTLowLatencySuperResolutionScalerConfiguration), _vTLowLatencySuperResolutionScalerConfigurationSelMaximumDimensions)
 	return _ret
 }
 
 // Minimum dimensions for a source frame for the processor.
-func VTLowLatencySuperResolutionScalerConfigurationMinimumDimensions() avfoundation.CMVideoDimensions {
-	_ret := objc.Send[avfoundation.CMVideoDimensions](objc.ID(_clsVTLowLatencySuperResolutionScalerConfiguration), _vTLowLatencySuperResolutionScalerConfigurationSelMinimumDimensions)
+func VTLowLatencySuperResolutionScalerConfigurationMinimumDimensions() CMVideoDimensions {
+	_ret := objc.Send[CMVideoDimensions](objc.ID(_clsVTLowLatencySuperResolutionScalerConfiguration), _vTLowLatencySuperResolutionScalerConfigurationSelMinimumDimensions)
 	return _ret
 }
 

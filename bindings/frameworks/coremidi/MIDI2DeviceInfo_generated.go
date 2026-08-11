@@ -71,10 +71,18 @@ func (mdi *MIDI2DeviceInfo) String() string {
 	return rt.Description(objref.IDOf(mdi))
 }
 
-// NewMIDI2DeviceInfo creates a new MIDI2DeviceInfo.
-func NewMIDI2DeviceInfo() *MIDI2DeviceInfo {
-	_id := objc.Send[objc.ID](objc.ID(_class("MIDI2DeviceInfo")), objc.RegisterName("new"))
+// NewMIDI2DeviceInfoWithManufacturerIDFamilyModelNumberRevisionLevel the initializer for constructing the MIDI2DeviceInfo object. Provided values for family or modelNumber must be within their expected bit range. For example, if modelNumber is outside of the range of a 14-bit number.
+func NewMIDI2DeviceInfoWithManufacturerIDFamilyModelNumberRevisionLevel(manufacturerID MIDI2DeviceManufacturer, family uint16, modelNumber uint16, revisionLevel MIDI2DeviceRevisionLevel) *MIDI2DeviceInfo {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MIDI2DeviceInfo")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithManufacturerID:family:modelNumber:revisionLevel:"), manufacturerID, family, modelNumber, revisionLevel)
 	return mIDI2DeviceInfoAdopt(_id)
+}
+
+// ManufacturerID returns the MIDI System Exclusive ID of the device manufacturer, up to 3-Bytes. One-byte SysEx IDs use only the least significant byte (e.g., Apple's System Exclusive ID, 0x11).
+func (mdi *MIDI2DeviceInfo) ManufacturerID() MIDI2DeviceManufacturer {
+	defer runtime.KeepAlive(mdi)
+	_r := objc.Send[MIDI2DeviceManufacturer](objref.IDOf(mdi), objc.RegisterName("manufacturerID"))
+	return _r
 }
 
 // Family returns the family of models to which the device belongs, up to 14 bits.
@@ -88,5 +96,12 @@ func (mdi *MIDI2DeviceInfo) Family() uint16 {
 func (mdi *MIDI2DeviceInfo) ModelNumber() uint16 {
 	defer runtime.KeepAlive(mdi)
 	_r := objc.Send[uint16](objref.IDOf(mdi), objc.RegisterName("modelNumber"))
+	return _r
+}
+
+// RevisionLevel returns the version number of a device model number.
+func (mdi *MIDI2DeviceInfo) RevisionLevel() MIDI2DeviceRevisionLevel {
+	defer runtime.KeepAlive(mdi)
+	_r := objc.Send[MIDI2DeviceRevisionLevel](objref.IDOf(mdi), objc.RegisterName("revisionLevel"))
 	return _r
 }

@@ -72,6 +72,12 @@ func (mcpd *MTL4ComputePipelineDescriptor) WithMaxTotalThreadsPerThreadgroup(max
 	return mcpd
 }
 
+// WithRequiredThreadsPerThreadgroup sets the required number of threads per threadgroup for compute dispatches.
+func (mcpd *MTL4ComputePipelineDescriptor) WithRequiredThreadsPerThreadgroup(requiredThreadsPerThreadgroup MTLSize) *MTL4ComputePipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mcpd), objc.RegisterName("setRequiredThreadsPerThreadgroup:"), requiredThreadsPerThreadgroup)
+	return mcpd
+}
+
 // WithSupportBinaryLinking sets a boolean value indicating whether the compute pipeline supports linking binary functions.
 func (mcpd *MTL4ComputePipelineDescriptor) WithSupportBinaryLinking(supportBinaryLinking bool) *MTL4ComputePipelineDescriptor {
 	objc.Send[objc.ID](objref.IDOf(mcpd), objc.RegisterName("setSupportBinaryLinking:"), supportBinaryLinking)
@@ -128,6 +134,13 @@ func (mcpd *MTL4ComputePipelineDescriptor) ThreadGroupSizeIsMultipleOfThreadExec
 func (mcpd *MTL4ComputePipelineDescriptor) MaxTotalThreadsPerThreadgroup() int {
 	defer runtime.KeepAlive(mcpd)
 	_r := objc.Send[int](objref.IDOf(mcpd), objc.RegisterName("maxTotalThreadsPerThreadgroup"))
+	return _r
+}
+
+// RequiredThreadsPerThreadgroup returns the required number of threads per threadgroup for compute dispatches. When you set this value, you are responsible for ensuring that the `threadsPerThreadgroup` argument of any compute dispatch matches it. Setting this property is optional, except in cases where the pipeline uses *CooperativeTensors*. This property's default value is `0`, which disables its effect.
+func (mcpd *MTL4ComputePipelineDescriptor) RequiredThreadsPerThreadgroup() MTLSize {
+	defer runtime.KeepAlive(mcpd)
+	_r := objc.Send[MTLSize](objref.IDOf(mcpd), objc.RegisterName("requiredThreadsPerThreadgroup"))
 	return _r
 }
 

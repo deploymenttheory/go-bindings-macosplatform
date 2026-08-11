@@ -73,6 +73,34 @@ func (amb *ArrayMultiaryBase) String() string {
 	return rt.Description(objref.IDOf(amb))
 }
 
+// OffsetsAtSourceIndex read offsets to use when addressing a source NDArray The coordinate of the position read from this source array which is used to calculate the result value at [0,0,0,....] If the position read is actually a contiguous region (e.g. the area covered by a convolution kernel) then this is the center of that region, rounded down, for each dimension.
+func (amb *ArrayMultiaryBase) OffsetsAtSourceIndex(sourceIndex int) MPSNDArrayOffsets {
+	defer runtime.KeepAlive(amb)
+	_r := objc.Send[MPSNDArrayOffsets](objref.IDOf(amb), objc.RegisterName("offsetsAtSourceIndex:"), sourceIndex)
+	return _r
+}
+
+// KernelSizesForSourceIndex get the diameters of the point spread function (PSF) in each dimension
+func (amb *ArrayMultiaryBase) KernelSizesForSourceIndex(sourceIndex int) MPSNDArraySizes {
+	defer runtime.KeepAlive(amb)
+	_r := objc.Send[MPSNDArraySizes](objref.IDOf(amb), objc.RegisterName("kernelSizesForSourceIndex:"), sourceIndex)
+	return _r
+}
+
+// StridesForSourceIndex return the downsampling ratio for the kernel in each dimension If the filter is a "backwards" filter such as a gradient filter or convolution transpose, then this is the upsampling ratio and zeros are inserted in the result.
+func (amb *ArrayMultiaryBase) StridesForSourceIndex(sourceIndex int) MPSNDArrayOffsets {
+	defer runtime.KeepAlive(amb)
+	_r := objc.Send[MPSNDArrayOffsets](objref.IDOf(amb), objc.RegisterName("stridesForSourceIndex:"), sourceIndex)
+	return _r
+}
+
+// DilationRatesForSourceIndex get the kernel dilation rate for each dimension
+func (amb *ArrayMultiaryBase) DilationRatesForSourceIndex(sourceIndex int) MPSNDArraySizes {
+	defer runtime.KeepAlive(amb)
+	_r := objc.Send[MPSNDArraySizes](objref.IDOf(amb), objc.RegisterName("dilationRatesForSourceIndex:"), sourceIndex)
+	return _r
+}
+
 // EncodeWithCoder initialize a MPSNDArrayMultiaryKernel from a NSCoder
 func (amb *ArrayMultiaryBase) EncodeWithCoder(coder obj.Object) {
 	defer runtime.KeepAlive(amb)

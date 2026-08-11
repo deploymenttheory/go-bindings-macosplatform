@@ -96,6 +96,12 @@ func (pa *PropertyAnimation) WithRemovedOnCompletion(removedOnCompletion bool) *
 	return pa
 }
 
+// WithPreferredFrameRateRange sets the preferred frame rate range.
+func (pa *PropertyAnimation) WithPreferredFrameRateRange(preferredFrameRateRange CAFrameRateRange) *PropertyAnimation {
+	objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("setPreferredFrameRateRange:"), preferredFrameRateRange)
+	return pa
+}
+
 // KeyPath returns the key path.
 func (pa *PropertyAnimation) KeyPath() string {
 	defer runtime.KeepAlive(pa)

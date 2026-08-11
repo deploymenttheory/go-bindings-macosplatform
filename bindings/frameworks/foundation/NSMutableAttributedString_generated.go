@@ -68,6 +68,48 @@ func (mas *MutableAttributedString) WithScriptingProperties(scriptingProperties 
 	return mas
 }
 
+// ReplaceCharactersInRangeWithString replaces the characters in the given range with the characters of the given string.
+func (mas *MutableAttributedString) ReplaceCharactersInRangeWithString(range_ NSRange, str string) {
+	defer runtime.KeepAlive(mas)
+	objc.Send[objc.ID](objref.IDOf(mas), objc.RegisterName("replaceCharactersInRange:withString:"), range_, purego.NSString(str))
+}
+
+// SetAttributesRange sets the attributes for the characters in the specified range to the specified attributes.
+func (mas *MutableAttributedString) SetAttributesRange(attrs obj.Object, range_ NSRange) {
+	defer runtime.KeepAlive(mas)
+	defer runtime.KeepAlive(attrs)
+	objc.Send[objc.ID](objref.IDOf(mas), objc.RegisterName("setAttributes:range:"), objref.IDOf(attrs), range_)
+}
+
+// AddAttributeValueRange adds an attribute with the given name and value to the characters in the specified range.
+func (mas *MutableAttributedString) AddAttributeValueRange(name *String, value obj.Object, range_ NSRange) {
+	defer runtime.KeepAlive(mas)
+	defer runtime.KeepAlive(name)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mas), objc.RegisterName("addAttribute:value:range:"), objref.IDOf(name), objref.IDOf(value), range_)
+}
+
+// AddAttributesRange adds the given collection of attributes to the characters in the specified range.
+func (mas *MutableAttributedString) AddAttributesRange(attrs obj.Object, range_ NSRange) {
+	defer runtime.KeepAlive(mas)
+	defer runtime.KeepAlive(attrs)
+	objc.Send[objc.ID](objref.IDOf(mas), objc.RegisterName("addAttributes:range:"), objref.IDOf(attrs), range_)
+}
+
+// RemoveAttributeRange removes the named attribute from the characters in the specified range.
+func (mas *MutableAttributedString) RemoveAttributeRange(name *String, range_ NSRange) {
+	defer runtime.KeepAlive(mas)
+	defer runtime.KeepAlive(name)
+	objc.Send[objc.ID](objref.IDOf(mas), objc.RegisterName("removeAttribute:range:"), objref.IDOf(name), range_)
+}
+
+// ReplaceCharactersInRangeWithAttributedString replaces the characters and attributes in a given range with the characters and attributes of the given attributed string.
+func (mas *MutableAttributedString) ReplaceCharactersInRangeWithAttributedString(range_ NSRange, attrString *AttributedString) {
+	defer runtime.KeepAlive(mas)
+	defer runtime.KeepAlive(attrString)
+	objc.Send[objc.ID](objref.IDOf(mas), objc.RegisterName("replaceCharactersInRange:withAttributedString:"), range_, objref.IDOf(attrString))
+}
+
 // InsertAttributedStringAtIndex inserts the characters and attributes of the given attributed string into the receiver at the given index.
 func (mas *MutableAttributedString) InsertAttributedStringAtIndex(attrString *AttributedString, loc int) {
 	defer runtime.KeepAlive(mas)
@@ -80,6 +122,12 @@ func (mas *MutableAttributedString) AppendAttributedString(attrString *Attribute
 	defer runtime.KeepAlive(mas)
 	defer runtime.KeepAlive(attrString)
 	objc.Send[objc.ID](objref.IDOf(mas), objc.RegisterName("appendAttributedString:"), objref.IDOf(attrString))
+}
+
+// DeleteCharactersInRange deletes the characters in the given range along with their associated attributes.
+func (mas *MutableAttributedString) DeleteCharactersInRange(range_ NSRange) {
+	defer runtime.KeepAlive(mas)
+	objc.Send[objc.ID](objref.IDOf(mas), objc.RegisterName("deleteCharactersInRange:"), range_)
 }
 
 // SetAttributedString replaces the receiver’s entire contents with the characters and attributes of the given attributed string.

@@ -53,6 +53,30 @@ func NewPhysicsHingeJoint() *PhysicsHingeJoint {
 	return physicsHingeJointAdopt(_id)
 }
 
+// WithAxisA sets the axis that the hinge pivots around, relative to the node containing the first body.
+func (phj *PhysicsHingeJoint) WithAxisA(axisA SCNVector3) *PhysicsHingeJoint {
+	objc.Send[objc.ID](objref.IDOf(phj), objc.RegisterName("setAxisA:"), axisA)
+	return phj
+}
+
+// WithAnchorA sets the point at which the hinge connects, relative to the node containing the first body.
+func (phj *PhysicsHingeJoint) WithAnchorA(anchorA SCNVector3) *PhysicsHingeJoint {
+	objc.Send[objc.ID](objref.IDOf(phj), objc.RegisterName("setAnchorA:"), anchorA)
+	return phj
+}
+
+// WithAxisB sets the axis that the hinge pivots around, relative to the node containing the second body.
+func (phj *PhysicsHingeJoint) WithAxisB(axisB SCNVector3) *PhysicsHingeJoint {
+	objc.Send[objc.ID](objref.IDOf(phj), objc.RegisterName("setAxisB:"), axisB)
+	return phj
+}
+
+// WithAnchorB sets the point at which the hinge connects, relative to the node containing the second body.
+func (phj *PhysicsHingeJoint) WithAnchorB(anchorB SCNVector3) *PhysicsHingeJoint {
+	objc.Send[objc.ID](objref.IDOf(phj), objc.RegisterName("setAnchorB:"), anchorB)
+	return phj
+}
+
 // BodyA returns the body a.
 func (phj *PhysicsHingeJoint) BodyA() *PhysicsBody {
 	defer runtime.KeepAlive(phj)
@@ -60,11 +84,39 @@ func (phj *PhysicsHingeJoint) BodyA() *PhysicsBody {
 	return PhysicsBodyFromID(_r)
 }
 
+// AxisA returns the axis a.
+func (phj *PhysicsHingeJoint) AxisA() SCNVector3 {
+	defer runtime.KeepAlive(phj)
+	_r := objc.Send[SCNVector3](objref.IDOf(phj), objc.RegisterName("axisA"))
+	return _r
+}
+
+// AnchorA returns the anchor a.
+func (phj *PhysicsHingeJoint) AnchorA() SCNVector3 {
+	defer runtime.KeepAlive(phj)
+	_r := objc.Send[SCNVector3](objref.IDOf(phj), objc.RegisterName("anchorA"))
+	return _r
+}
+
 // BodyB returns the body b.
 func (phj *PhysicsHingeJoint) BodyB() *PhysicsBody {
 	defer runtime.KeepAlive(phj)
 	_r := objc.Send[objc.ID](objref.IDOf(phj), objc.RegisterName("bodyB"))
 	return PhysicsBodyFromID(_r)
+}
+
+// AxisB returns the axis b.
+func (phj *PhysicsHingeJoint) AxisB() SCNVector3 {
+	defer runtime.KeepAlive(phj)
+	_r := objc.Send[SCNVector3](objref.IDOf(phj), objc.RegisterName("axisB"))
+	return _r
+}
+
+// AnchorB returns the anchor b.
+func (phj *PhysicsHingeJoint) AnchorB() SCNVector3 {
+	defer runtime.KeepAlive(phj)
+	_r := objc.Send[SCNVector3](objref.IDOf(phj), objc.RegisterName("anchorB"))
+	return _r
 }
 
 var _ PhysicsBehaviorProvider = (*PhysicsHingeJoint)(nil)

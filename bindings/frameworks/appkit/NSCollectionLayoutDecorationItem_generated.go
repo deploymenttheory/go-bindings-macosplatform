@@ -67,6 +67,14 @@ func (cldi *CollectionLayoutDecorationItem) WithZIndex(zIndex int) *CollectionLa
 	return cldi
 }
 
+// WithContentInsets sets the amount of space added around the content of the item to adjust its final size after its position is computed.
+func (cldi *CollectionLayoutDecorationItem) WithContentInsets(contentInsets NSDirectionalEdgeInsets) *CollectionLayoutDecorationItem {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cldi), objc.RegisterName("setContentInsets:"), contentInsets)
+	})
+	return cldi
+}
+
 // WithEdgeSpacing sets the amount of space added around the boundaries of the item between other items and this item’s container.
 func (cldi *CollectionLayoutDecorationItem) WithEdgeSpacing(edgeSpacing *CollectionLayoutEdgeSpacing) *CollectionLayoutDecorationItem {
 	defer runtime.KeepAlive(edgeSpacing)

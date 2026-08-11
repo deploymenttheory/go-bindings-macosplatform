@@ -34,7 +34,7 @@ func CSGetDefaultIdentityAuthority() CSIdentityAuthorityRef {
 		ebipurego.RegisterLibFunc(&_fnCSGetDefaultIdentityAuthority, _lib, "CSGetDefaultIdentityAuthority")
 	}
 	_ret := _fnCSGetDefaultIdentityAuthority()
-	return CSIdentityAuthorityRef{obj.Wrap(_ret)}
+	return CSIdentityAuthorityRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCSGetLocalIdentityAuthority func() objc.ID
@@ -46,7 +46,7 @@ func CSGetLocalIdentityAuthority() CSIdentityAuthorityRef {
 		ebipurego.RegisterLibFunc(&_fnCSGetLocalIdentityAuthority, _lib, "CSGetLocalIdentityAuthority")
 	}
 	_ret := _fnCSGetLocalIdentityAuthority()
-	return CSIdentityAuthorityRef{obj.Wrap(_ret)}
+	return CSIdentityAuthorityRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCSGetManagedIdentityAuthority func() objc.ID
@@ -58,7 +58,7 @@ func CSGetManagedIdentityAuthority() CSIdentityAuthorityRef {
 		ebipurego.RegisterLibFunc(&_fnCSGetManagedIdentityAuthority, _lib, "CSGetManagedIdentityAuthority")
 	}
 	_ret := _fnCSGetManagedIdentityAuthority()
-	return CSIdentityAuthorityRef{obj.Wrap(_ret)}
+	return CSIdentityAuthorityRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCSIdentityAddAlias func(objc.ID, objc.ID)
@@ -103,7 +103,7 @@ func CSIdentityAuthorityCopyLocalizedName(authority CSIdentityAuthorityRef) core
 		ebipurego.RegisterLibFunc(&_fnCSIdentityAuthorityCopyLocalizedName, _lib, "CSIdentityAuthorityCopyLocalizedName")
 	}
 	_ret := _fnCSIdentityAuthorityCopyLocalizedName(objref.IDOf(authority.Object))
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCSIdentityAuthorityGetTypeID func() int
@@ -137,7 +137,7 @@ func CSIdentityCreate(allocator corefoundation.CFAllocatorRef, identityClass int
 		ebipurego.RegisterLibFunc(&_fnCSIdentityCreate, _lib, "CSIdentityCreate")
 	}
 	_ret := _fnCSIdentityCreate(objref.IDOf(allocator.Object), identityClass, objref.IDOf(fullName.Object), objref.IDOf(posixName.Object), flags, objref.IDOf(authority.Object))
-	return CSIdentityRef{obj.Wrap(_ret)}
+	return CSIdentityRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCSIdentityCreateCopy func(objc.ID, objc.ID) objc.ID
@@ -149,7 +149,7 @@ func CSIdentityCreateCopy(allocator corefoundation.CFAllocatorRef, identity CSId
 		ebipurego.RegisterLibFunc(&_fnCSIdentityCreateCopy, _lib, "CSIdentityCreateCopy")
 	}
 	_ret := _fnCSIdentityCreateCopy(objref.IDOf(allocator.Object), objref.IDOf(identity.Object))
-	return CSIdentityRef{obj.Wrap(_ret)}
+	return CSIdentityRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCSIdentityCreateGroupMembershipQuery func(objc.ID, objc.ID) objc.ID
@@ -161,7 +161,7 @@ func CSIdentityCreateGroupMembershipQuery(allocator corefoundation.CFAllocatorRe
 		ebipurego.RegisterLibFunc(&_fnCSIdentityCreateGroupMembershipQuery, _lib, "CSIdentityCreateGroupMembershipQuery")
 	}
 	_ret := _fnCSIdentityCreateGroupMembershipQuery(objref.IDOf(allocator.Object), objref.IDOf(group.Object))
-	return CSIdentityQueryRef{obj.Wrap(_ret)}
+	return CSIdentityQueryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCSIdentityCreatePersistentReference func(objc.ID, objc.ID) objc.ID
@@ -173,7 +173,7 @@ func CSIdentityCreatePersistentReference(allocator corefoundation.CFAllocatorRef
 		ebipurego.RegisterLibFunc(&_fnCSIdentityCreatePersistentReference, _lib, "CSIdentityCreatePersistentReference")
 	}
 	_ret := _fnCSIdentityCreatePersistentReference(objref.IDOf(allocator.Object), objref.IDOf(identity.Object))
-	return corefoundation.CFDataRef{obj.Wrap(_ret)}
+	return corefoundation.CFDataRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCSIdentityDelete func(objc.ID)
@@ -196,7 +196,7 @@ func CSIdentityGetAliases(identity CSIdentityRef) corefoundation.CFArrayRef {
 		ebipurego.RegisterLibFunc(&_fnCSIdentityGetAliases, _lib, "CSIdentityGetAliases")
 	}
 	_ret := _fnCSIdentityGetAliases(objref.IDOf(identity.Object))
-	return corefoundation.CFArrayRef{obj.Wrap(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCSIdentityGetAuthority func(objc.ID) objc.ID
@@ -208,7 +208,7 @@ func CSIdentityGetAuthority(identity CSIdentityRef) CSIdentityAuthorityRef {
 		ebipurego.RegisterLibFunc(&_fnCSIdentityGetAuthority, _lib, "CSIdentityGetAuthority")
 	}
 	_ret := _fnCSIdentityGetAuthority(objref.IDOf(identity.Object))
-	return CSIdentityAuthorityRef{obj.Wrap(_ret)}
+	return CSIdentityAuthorityRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCSIdentityGetCertificate func(objc.ID) objc.ID
@@ -243,7 +243,7 @@ func CSIdentityGetEmailAddress(identity CSIdentityRef) corefoundation.CFStringRe
 		ebipurego.RegisterLibFunc(&_fnCSIdentityGetEmailAddress, _lib, "CSIdentityGetEmailAddress")
 	}
 	_ret := _fnCSIdentityGetEmailAddress(objref.IDOf(identity.Object))
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCSIdentityGetFullName func(objc.ID) objc.ID
@@ -255,7 +255,7 @@ func CSIdentityGetFullName(identity CSIdentityRef) corefoundation.CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnCSIdentityGetFullName, _lib, "CSIdentityGetFullName")
 	}
 	_ret := _fnCSIdentityGetFullName(objref.IDOf(identity.Object))
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCSIdentityGetImageData func(objc.ID) objc.ID
@@ -267,7 +267,7 @@ func CSIdentityGetImageData(identity CSIdentityRef) corefoundation.CFDataRef {
 		ebipurego.RegisterLibFunc(&_fnCSIdentityGetImageData, _lib, "CSIdentityGetImageData")
 	}
 	_ret := _fnCSIdentityGetImageData(objref.IDOf(identity.Object))
-	return corefoundation.CFDataRef{obj.Wrap(_ret)}
+	return corefoundation.CFDataRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCSIdentityGetImageDataType func(objc.ID) objc.ID
@@ -279,7 +279,7 @@ func CSIdentityGetImageDataType(identity CSIdentityRef) corefoundation.CFStringR
 		ebipurego.RegisterLibFunc(&_fnCSIdentityGetImageDataType, _lib, "CSIdentityGetImageDataType")
 	}
 	_ret := _fnCSIdentityGetImageDataType(objref.IDOf(identity.Object))
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCSIdentityGetImageURL func(objc.ID) objc.ID
@@ -291,7 +291,7 @@ func CSIdentityGetImageURL(identity CSIdentityRef) corefoundation.CFURLRef {
 		ebipurego.RegisterLibFunc(&_fnCSIdentityGetImageURL, _lib, "CSIdentityGetImageURL")
 	}
 	_ret := _fnCSIdentityGetImageURL(objref.IDOf(identity.Object))
-	return corefoundation.CFURLRef{obj.Wrap(_ret)}
+	return corefoundation.CFURLRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCSIdentityGetPosixID func(objc.ID) uint32
@@ -314,7 +314,7 @@ func CSIdentityGetPosixName(identity CSIdentityRef) corefoundation.CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnCSIdentityGetPosixName, _lib, "CSIdentityGetPosixName")
 	}
 	_ret := _fnCSIdentityGetPosixName(objref.IDOf(identity.Object))
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCSIdentityGetTypeID func() int
@@ -337,7 +337,7 @@ func CSIdentityGetUUID(identity CSIdentityRef) corefoundation.CFUUIDRef {
 		ebipurego.RegisterLibFunc(&_fnCSIdentityGetUUID, _lib, "CSIdentityGetUUID")
 	}
 	_ret := _fnCSIdentityGetUUID(objref.IDOf(identity.Object))
-	return corefoundation.CFUUIDRef{obj.Wrap(_ret)}
+	return corefoundation.CFUUIDRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCSIdentityIsCommitting func(objc.ID) uint8
@@ -393,7 +393,7 @@ func CSIdentityQueryCopyResults(query CSIdentityQueryRef) corefoundation.CFArray
 		ebipurego.RegisterLibFunc(&_fnCSIdentityQueryCopyResults, _lib, "CSIdentityQueryCopyResults")
 	}
 	_ret := _fnCSIdentityQueryCopyResults(objref.IDOf(query.Object))
-	return corefoundation.CFArrayRef{obj.Wrap(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCSIdentityQueryCreate func(objc.ID, int, objc.ID) objc.ID
@@ -405,7 +405,7 @@ func CSIdentityQueryCreate(allocator corefoundation.CFAllocatorRef, identityClas
 		ebipurego.RegisterLibFunc(&_fnCSIdentityQueryCreate, _lib, "CSIdentityQueryCreate")
 	}
 	_ret := _fnCSIdentityQueryCreate(objref.IDOf(allocator.Object), identityClass, objref.IDOf(authority.Object))
-	return CSIdentityQueryRef{obj.Wrap(_ret)}
+	return CSIdentityQueryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCSIdentityQueryCreateForCurrentUser func(objc.ID) objc.ID
@@ -417,7 +417,7 @@ func CSIdentityQueryCreateForCurrentUser(allocator corefoundation.CFAllocatorRef
 		ebipurego.RegisterLibFunc(&_fnCSIdentityQueryCreateForCurrentUser, _lib, "CSIdentityQueryCreateForCurrentUser")
 	}
 	_ret := _fnCSIdentityQueryCreateForCurrentUser(objref.IDOf(allocator.Object))
-	return CSIdentityQueryRef{obj.Wrap(_ret)}
+	return CSIdentityQueryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCSIdentityQueryCreateForName func(objc.ID, objc.ID, int, int, objc.ID) objc.ID
@@ -429,7 +429,7 @@ func CSIdentityQueryCreateForName(allocator corefoundation.CFAllocatorRef, name 
 		ebipurego.RegisterLibFunc(&_fnCSIdentityQueryCreateForName, _lib, "CSIdentityQueryCreateForName")
 	}
 	_ret := _fnCSIdentityQueryCreateForName(objref.IDOf(allocator.Object), objref.IDOf(name.Object), comparisonMethod, identityClass, objref.IDOf(authority.Object))
-	return CSIdentityQueryRef{obj.Wrap(_ret)}
+	return CSIdentityQueryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCSIdentityQueryCreateForPersistentReference func(objc.ID, objc.ID) objc.ID
@@ -441,7 +441,7 @@ func CSIdentityQueryCreateForPersistentReference(allocator corefoundation.CFAllo
 		ebipurego.RegisterLibFunc(&_fnCSIdentityQueryCreateForPersistentReference, _lib, "CSIdentityQueryCreateForPersistentReference")
 	}
 	_ret := _fnCSIdentityQueryCreateForPersistentReference(objref.IDOf(allocator.Object), objref.IDOf(referenceData.Object))
-	return CSIdentityQueryRef{obj.Wrap(_ret)}
+	return CSIdentityQueryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCSIdentityQueryCreateForPosixID func(objc.ID, int, int, objc.ID) objc.ID
@@ -453,7 +453,7 @@ func CSIdentityQueryCreateForPosixID(allocator corefoundation.CFAllocatorRef, po
 		ebipurego.RegisterLibFunc(&_fnCSIdentityQueryCreateForPosixID, _lib, "CSIdentityQueryCreateForPosixID")
 	}
 	_ret := _fnCSIdentityQueryCreateForPosixID(objref.IDOf(allocator.Object), posixID, identityClass, objref.IDOf(authority.Object))
-	return CSIdentityQueryRef{obj.Wrap(_ret)}
+	return CSIdentityQueryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCSIdentityQueryCreateForUUID func(objc.ID, objc.ID, objc.ID) objc.ID
@@ -465,7 +465,7 @@ func CSIdentityQueryCreateForUUID(allocator corefoundation.CFAllocatorRef, uuid 
 		ebipurego.RegisterLibFunc(&_fnCSIdentityQueryCreateForUUID, _lib, "CSIdentityQueryCreateForUUID")
 	}
 	_ret := _fnCSIdentityQueryCreateForUUID(objref.IDOf(allocator.Object), objref.IDOf(uuid.Object), objref.IDOf(authority.Object))
-	return CSIdentityQueryRef{obj.Wrap(_ret)}
+	return CSIdentityQueryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnCSIdentityQueryExecuteAsynchronously func(objc.ID, int, unsafe.Pointer, objc.ID, objc.ID) uint8
@@ -1003,7 +1003,7 @@ func WSMethodInvocationCopyParameters(invocation WSMethodInvocationRef, paramete
 		ebipurego.RegisterLibFunc(&_fnWSMethodInvocationCopyParameters, _lib, "WSMethodInvocationCopyParameters")
 	}
 	_ret := _fnWSMethodInvocationCopyParameters(objref.IDOf(invocation.Object), parameterOrder)
-	return corefoundation.CFDictionaryRef{obj.Wrap(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnWSMethodInvocationCopyProperty func(objc.ID, objc.ID) objc.ID
@@ -1027,7 +1027,7 @@ func WSMethodInvocationCopySerialization(invocation WSMethodInvocationRef) coref
 		ebipurego.RegisterLibFunc(&_fnWSMethodInvocationCopySerialization, _lib, "WSMethodInvocationCopySerialization")
 	}
 	_ret := _fnWSMethodInvocationCopySerialization(objref.IDOf(invocation.Object))
-	return corefoundation.CFDataRef{obj.Wrap(_ret)}
+	return corefoundation.CFDataRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnWSMethodInvocationCreate func(objc.ID, objc.ID, objc.ID) objc.ID
@@ -1039,7 +1039,7 @@ func WSMethodInvocationCreate(url corefoundation.CFURLRef, methodName corefounda
 		ebipurego.RegisterLibFunc(&_fnWSMethodInvocationCreate, _lib, "WSMethodInvocationCreate")
 	}
 	_ret := _fnWSMethodInvocationCreate(objref.IDOf(url.Object), objref.IDOf(methodName.Object), objref.IDOf(protocol.Object))
-	return WSMethodInvocationRef{obj.Wrap(_ret)}
+	return WSMethodInvocationRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnWSMethodInvocationCreateFromSerialization func(objc.ID) objc.ID
@@ -1051,7 +1051,7 @@ func WSMethodInvocationCreateFromSerialization(contract corefoundation.CFDataRef
 		ebipurego.RegisterLibFunc(&_fnWSMethodInvocationCreateFromSerialization, _lib, "WSMethodInvocationCreateFromSerialization")
 	}
 	_ret := _fnWSMethodInvocationCreateFromSerialization(objref.IDOf(contract.Object))
-	return WSMethodInvocationRef{obj.Wrap(_ret)}
+	return WSMethodInvocationRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnWSMethodInvocationGetTypeID func() int
@@ -1074,7 +1074,7 @@ func WSMethodInvocationInvoke(invocation WSMethodInvocationRef) corefoundation.C
 		ebipurego.RegisterLibFunc(&_fnWSMethodInvocationInvoke, _lib, "WSMethodInvocationInvoke")
 	}
 	_ret := _fnWSMethodInvocationInvoke(objref.IDOf(invocation.Object))
-	return corefoundation.CFDictionaryRef{obj.Adopt(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnWSMethodInvocationScheduleWithRunLoop func(objc.ID, objc.ID, objc.ID)
@@ -1152,7 +1152,7 @@ func WSProtocolHandlerCopyFaultDocument(ref WSProtocolHandlerRef, methodContext 
 		ebipurego.RegisterLibFunc(&_fnWSProtocolHandlerCopyFaultDocument, _lib, "WSProtocolHandlerCopyFaultDocument")
 	}
 	_ret := _fnWSProtocolHandlerCopyFaultDocument(objref.IDOf(ref.Object), objref.IDOf(methodContext.Object), objref.IDOf(faultDict.Object))
-	return corefoundation.CFDataRef{obj.Wrap(_ret)}
+	return corefoundation.CFDataRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnWSProtocolHandlerCopyProperty func(objc.ID, objc.ID) objc.ID
@@ -1176,7 +1176,7 @@ func WSProtocolHandlerCopyReplyDictionary(ref WSProtocolHandlerRef, methodName c
 		ebipurego.RegisterLibFunc(&_fnWSProtocolHandlerCopyReplyDictionary, _lib, "WSProtocolHandlerCopyReplyDictionary")
 	}
 	_ret := _fnWSProtocolHandlerCopyReplyDictionary(objref.IDOf(ref.Object), objref.IDOf(methodName.Object), objref.IDOf(data.Object))
-	return corefoundation.CFDictionaryRef{obj.Wrap(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnWSProtocolHandlerCopyReplyDocument func(objc.ID, objc.ID, objc.ID) objc.ID
@@ -1188,7 +1188,7 @@ func WSProtocolHandlerCopyReplyDocument(ref WSProtocolHandlerRef, methodContext 
 		ebipurego.RegisterLibFunc(&_fnWSProtocolHandlerCopyReplyDocument, _lib, "WSProtocolHandlerCopyReplyDocument")
 	}
 	_ret := _fnWSProtocolHandlerCopyReplyDocument(objref.IDOf(ref.Object), objref.IDOf(methodContext.Object), objref.IDOf(resultValue))
-	return corefoundation.CFDataRef{obj.Wrap(_ret)}
+	return corefoundation.CFDataRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnWSProtocolHandlerCopyRequestDictionary func(objc.ID, objc.ID) objc.ID
@@ -1200,7 +1200,7 @@ func WSProtocolHandlerCopyRequestDictionary(ref WSProtocolHandlerRef, data coref
 		ebipurego.RegisterLibFunc(&_fnWSProtocolHandlerCopyRequestDictionary, _lib, "WSProtocolHandlerCopyRequestDictionary")
 	}
 	_ret := _fnWSProtocolHandlerCopyRequestDictionary(objref.IDOf(ref.Object), objref.IDOf(data.Object))
-	return corefoundation.CFDictionaryRef{obj.Wrap(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnWSProtocolHandlerCopyRequestDocument func(objc.ID, objc.ID, objc.ID, objc.ID, objc.ID) objc.ID
@@ -1212,7 +1212,7 @@ func WSProtocolHandlerCopyRequestDocument(ref WSProtocolHandlerRef, methodName c
 		ebipurego.RegisterLibFunc(&_fnWSProtocolHandlerCopyRequestDocument, _lib, "WSProtocolHandlerCopyRequestDocument")
 	}
 	_ret := _fnWSProtocolHandlerCopyRequestDocument(objref.IDOf(ref.Object), objref.IDOf(methodName.Object), objref.IDOf(methodParams.Object), objref.IDOf(methodParamOrder.Object), objref.IDOf(methodExtras.Object))
-	return corefoundation.CFDataRef{obj.Wrap(_ret)}
+	return corefoundation.CFDataRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnWSProtocolHandlerCreate func(objc.ID, objc.ID) objc.ID
@@ -1224,7 +1224,7 @@ func WSProtocolHandlerCreate(allocator corefoundation.CFAllocatorRef, protocol c
 		ebipurego.RegisterLibFunc(&_fnWSProtocolHandlerCreate, _lib, "WSProtocolHandlerCreate")
 	}
 	_ret := _fnWSProtocolHandlerCreate(objref.IDOf(allocator.Object), objref.IDOf(protocol.Object))
-	return WSProtocolHandlerRef{obj.Wrap(_ret)}
+	return WSProtocolHandlerRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnWSProtocolHandlerGetTypeID func() int

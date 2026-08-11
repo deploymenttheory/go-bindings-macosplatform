@@ -128,6 +128,12 @@ func (trpd *TileRenderPipelineDescriptor) WithShaderValidation(shaderValidation 
 	return trpd
 }
 
+// WithRequiredThreadsPerThreadgroup sets sets the required threads-per-threadgroup during tile dispatches. The `threadsPerTile` argument of any tile dispatch must match to this value if it is set. Setting this to a size of 0 in every dimension disables this property
+func (trpd *TileRenderPipelineDescriptor) WithRequiredThreadsPerThreadgroup(requiredThreadsPerThreadgroup MTLSize) *TileRenderPipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(trpd), objc.RegisterName("setRequiredThreadsPerThreadgroup:"), requiredThreadsPerThreadgroup)
+	return trpd
+}
+
 // Reset specifies the default rendering pipeline state values for the descriptor.
 func (trpd *TileRenderPipelineDescriptor) Reset() {
 	defer runtime.KeepAlive(trpd)
@@ -230,5 +236,12 @@ func (trpd *TileRenderPipelineDescriptor) MaxCallStackDepth() int {
 func (trpd *TileRenderPipelineDescriptor) ShaderValidation() ShaderValidation {
 	defer runtime.KeepAlive(trpd)
 	_r := objc.Send[ShaderValidation](objref.IDOf(trpd), objc.RegisterName("shaderValidation"))
+	return _r
+}
+
+// RequiredThreadsPerThreadgroup sets the required threads-per-threadgroup during tile dispatches. The `threadsPerTile` argument of any tile dispatch must match to this value if it is set. Setting this to a size of 0 in every dimension disables this property
+func (trpd *TileRenderPipelineDescriptor) RequiredThreadsPerThreadgroup() MTLSize {
+	defer runtime.KeepAlive(trpd)
+	_r := objc.Send[MTLSize](objref.IDOf(trpd), objc.RegisterName("requiredThreadsPerThreadgroup"))
 	return _r
 }

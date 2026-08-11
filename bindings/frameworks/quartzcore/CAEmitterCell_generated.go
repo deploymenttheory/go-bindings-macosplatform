@@ -435,7 +435,7 @@ func (ec *EmitterCell) SpinRange() float64 {
 func (ec *EmitterCell) Color() coregraphics.CGColorRef {
 	defer runtime.KeepAlive(ec)
 	_r := objc.Send[objc.ID](objref.IDOf(ec), objc.RegisterName("color"))
-	return coregraphics.CGColorRef{obj.Wrap(_r)}
+	return coregraphics.CGColorRef{Object: obj.Wrap(_r)}
 }
 
 // RedRange returns the red range.

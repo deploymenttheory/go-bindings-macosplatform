@@ -76,6 +76,13 @@ func (is *IndexSet) String() string {
 	return rt.Description(objref.IDOf(is))
 }
 
+// NewIndexSetWithIndexesInRange initializes an allocated NSIndexSet object with an index range.
+func NewIndexSetWithIndexesInRange(range_ NSRange) *IndexSet {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSIndexSet")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIndexesInRange:"), range_)
+	return indexSetAdopt(_id)
+}
+
 // NewIndexSetWithIndexSet initializes an allocated NSIndexSet object with an index set.
 func NewIndexSetWithIndexSet(indexSet *IndexSet) *IndexSet {
 	defer runtime.KeepAlive(indexSet)
@@ -147,10 +154,24 @@ func (is *IndexSet) GetIndexesMaxCountInIndexRange(bufferSize int, range_ *NSRan
 	return _r, _out0
 }
 
+// CountOfIndexesInRange returns the number of indexes in the index set that are members of a given range.
+func (is *IndexSet) CountOfIndexesInRange(range_ NSRange) int {
+	defer runtime.KeepAlive(is)
+	_r := objc.Send[int](objref.IDOf(is), objc.RegisterName("countOfIndexesInRange:"), range_)
+	return _r
+}
+
 // ContainsIndex indicates whether the index set contains a specific index.
 func (is *IndexSet) ContainsIndex(value int) bool {
 	defer runtime.KeepAlive(is)
 	_r := objc.Send[bool](objref.IDOf(is), objc.RegisterName("containsIndex:"), value)
+	return _r
+}
+
+// ContainsIndexesInRange indicates whether the index set contains the indexes represented by an index range.
+func (is *IndexSet) ContainsIndexesInRange(range_ NSRange) bool {
+	defer runtime.KeepAlive(is)
+	_r := objc.Send[bool](objref.IDOf(is), objc.RegisterName("containsIndexesInRange:"), range_)
 	return _r
 }
 
@@ -159,6 +180,13 @@ func (is *IndexSet) ContainsIndexes(indexSet *IndexSet) bool {
 	defer runtime.KeepAlive(is)
 	defer runtime.KeepAlive(indexSet)
 	_r := objc.Send[bool](objref.IDOf(is), objc.RegisterName("containsIndexes:"), objref.IDOf(indexSet))
+	return _r
+}
+
+// IntersectsIndexesInRange indicates whether the index set contains any of the indexes in a range.
+func (is *IndexSet) IntersectsIndexesInRange(range_ NSRange) bool {
+	defer runtime.KeepAlive(is)
+	_r := objc.Send[bool](objref.IDOf(is), objc.RegisterName("intersectsIndexesInRange:"), range_)
 	return _r
 }
 
@@ -172,6 +200,12 @@ func (is *IndexSet) EnumerateIndexesUsing(block func(int, *bool)) {
 func (is *IndexSet) EnumerateIndexesWithOptionsUsing(opts EnumerationOptions, block func(int, *bool)) {
 	defer runtime.KeepAlive(is)
 	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("enumerateIndexesWithOptions:usingBlock:"), opts, objc.NewBlock(func(_ objc.Block, _b0 int, _b1 unsafe.Pointer) { block(_b0, (*bool)(_b1)) }))
+}
+
+// EnumerateIndexesInRangeOptionsUsing executes a given Block using the indexes in the specified range, using the specified enumeration options.
+func (is *IndexSet) EnumerateIndexesInRangeOptionsUsing(range_ NSRange, opts EnumerationOptions, block func(int, *bool)) {
+	defer runtime.KeepAlive(is)
+	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("enumerateIndexesInRange:options:usingBlock:"), range_, opts, objc.NewBlock(func(_ objc.Block, _b0 int, _b1 unsafe.Pointer) { block(_b0, (*bool)(_b1)) }))
 }
 
 // IndexPassingTest returns the index of the first object that passes the predicate Block test.
@@ -188,6 +222,13 @@ func (is *IndexSet) IndexWithOptionsPassingTest(opts EnumerationOptions, predica
 	return _r
 }
 
+// IndexInRangeOptionsPassingTest returns the index of the first object in the specified range that passes the predicate Block test.
+func (is *IndexSet) IndexInRangeOptionsPassingTest(range_ NSRange, opts EnumerationOptions, predicate func(int, *bool) bool) int {
+	defer runtime.KeepAlive(is)
+	_r := objc.Send[int](objref.IDOf(is), objc.RegisterName("indexInRange:options:passingTest:"), range_, opts, objc.NewBlock(func(_ objc.Block, _b0 int, _b1 unsafe.Pointer) bool { return predicate(_b0, (*bool)(_b1)) }))
+	return _r
+}
+
 // IndexesPassingTest returns an NSIndexSet containing the receiving index set’s objects that pass the Block test.
 func (is *IndexSet) IndexesPassingTest(predicate func(int, *bool) bool) *IndexSet {
 	defer runtime.KeepAlive(is)
@@ -199,6 +240,13 @@ func (is *IndexSet) IndexesPassingTest(predicate func(int, *bool) bool) *IndexSe
 func (is *IndexSet) IndexesWithOptionsPassingTest(opts EnumerationOptions, predicate func(int, *bool) bool) *IndexSet {
 	defer runtime.KeepAlive(is)
 	_r := objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("indexesWithOptions:passingTest:"), opts, objc.NewBlock(func(_ objc.Block, _b0 int, _b1 unsafe.Pointer) bool { return predicate(_b0, (*bool)(_b1)) }))
+	return IndexSetFromID(_r)
+}
+
+// IndexesInRangeOptionsPassingTest returns an NSIndexSet containing the receiving index set’s objects in the specified range that pass the Block test.
+func (is *IndexSet) IndexesInRangeOptionsPassingTest(range_ NSRange, opts EnumerationOptions, predicate func(int, *bool) bool) *IndexSet {
+	defer runtime.KeepAlive(is)
+	_r := objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("indexesInRange:options:passingTest:"), range_, opts, objc.NewBlock(func(_ objc.Block, _b0 int, _b1 unsafe.Pointer) bool { return predicate(_b0, (*bool)(_b1)) }))
 	return IndexSetFromID(_r)
 }
 

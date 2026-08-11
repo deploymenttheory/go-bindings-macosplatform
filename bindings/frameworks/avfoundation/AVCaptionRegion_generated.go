@@ -92,6 +92,20 @@ func (cr *CaptionRegion) Identifier() string {
 	return purego.GoString(_r)
 }
 
+// Origin returns the position of the top-left of the region, potentially with unspecified fields. It returns an AVCaptionPoint potentially with unspecified x and/or y fields. Unspecified dimensions indicate the region doesn't have positioning information for that dimension.
+func (cr *CaptionRegion) Origin() AVCaptionPoint {
+	defer runtime.KeepAlive(cr)
+	_r := objc.Send[AVCaptionPoint](objref.IDOf(cr), objc.RegisterName("origin"))
+	return _r
+}
+
+// Size returns the width and height of the region, potentally with unspecified fields. It returns an AVCaptionSize potentially with unspecified width and/or height. CEA608 closed captions support limits the size.height property’s value to 1 cell except when the AVCaptionRegionScroll is AVCaptionRegionScrollRollUp. If the AVCaptionRegionScroll is AVCaptionRegionScrollRollUp, the size.height property’s value must be 2, 3 or 4 cells. It returns an AVCaptionSize with unspecifed width and height when the region doesn't have width or height information.
+func (cr *CaptionRegion) Size() AVCaptionSize {
+	defer runtime.KeepAlive(cr)
+	_r := objc.Send[AVCaptionSize](objref.IDOf(cr), objc.RegisterName("size"))
+	return _r
+}
+
 // Scroll returns scroll mode for the region See AVCaptionRegionScrollXXX enum for possible values.
 func (cr *CaptionRegion) Scroll() CaptionRegionScroll {
 	defer runtime.KeepAlive(cr)

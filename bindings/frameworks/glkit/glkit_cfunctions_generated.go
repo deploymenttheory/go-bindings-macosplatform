@@ -1002,7 +1002,7 @@ func GLKMatrixStackCreate(alloc corefoundation.CFAllocatorRef) GLKMatrixStackRef
 		ebipurego.RegisterLibFunc(&_fnGLKMatrixStackCreate, _lib, "GLKMatrixStackCreate")
 	}
 	_ret := _fnGLKMatrixStackCreate(objref.IDOf(alloc.Object))
-	return GLKMatrixStackRef{obj.Wrap(_ret)}
+	return GLKMatrixStackRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnGLKMatrixStackGetMatrix2 func(objc.ID) unsafe.Pointer
@@ -2388,10 +2388,10 @@ func GLKVector4SubtractScalar(vector unsafe.Pointer, value float32) unsafe.Point
 	return _fnGLKVector4SubtractScalar(vector, value)
 }
 
-var _fnGLKVertexAttributeParametersFromModelIO func(unsafe.Pointer) unsafe.Pointer
+var _fnGLKVertexAttributeParametersFromModelIO func(unsafe.Pointer) GLKVertexAttributeParameters
 
 // GLKVertexAttributeParametersFromModelIO calls the GLKit framework function GLKVertexAttributeParametersFromModelIO.
-func GLKVertexAttributeParametersFromModelIO(vertexFormat unsafe.Pointer) unsafe.Pointer {
+func GLKVertexAttributeParametersFromModelIO(vertexFormat unsafe.Pointer) GLKVertexAttributeParameters {
 	_loadOnce.Do(_loadLibrary)
 	if _fnGLKVertexAttributeParametersFromModelIO == nil {
 		ebipurego.RegisterLibFunc(&_fnGLKVertexAttributeParametersFromModelIO, _lib, "GLKVertexAttributeParametersFromModelIO")

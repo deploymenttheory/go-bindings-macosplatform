@@ -110,3 +110,10 @@ func (lmomc *LegibleMediaOptionsMenuController) Player() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(lmomc), objc.RegisterName("player"))
 	return obj.Wrap(_r)
 }
+
+// MenuState returns the current of the legible media options menu. Use this to check the legible options menu state.
+func (lmomc *LegibleMediaOptionsMenuController) MenuState() AVLegibleMediaOptionsMenuState {
+	defer runtime.KeepAlive(lmomc)
+	_r := objc.Send[AVLegibleMediaOptionsMenuState](objref.IDOf(lmomc), objc.RegisterName("menuState"))
+	return _r
+}

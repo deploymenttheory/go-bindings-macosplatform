@@ -4,10 +4,6 @@
 
 package avfaudio
 
-import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
-)
-
 // Audio3DMixing is the Go form of the Objective-C protocol AVAudio3DMixing.
 type Audio3DMixing interface {
 	RenderingAlgorithm() Audio3DMixingRenderingAlgorithm
@@ -24,8 +20,8 @@ type Audio3DMixing interface {
 	SetObstruction(obstruction float32)
 	Occlusion() float32
 	SetOcclusion(occlusion float32)
-	Position() obj.Object
-	SetPosition(position obj.Object)
+	Position() AVAudio3DPoint
+	SetPosition(position AVAudio3DPoint)
 }
 
 // AudioMixing is the Go form of the Objective-C protocol AVAudioMixing.

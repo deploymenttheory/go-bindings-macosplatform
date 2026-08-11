@@ -23,7 +23,7 @@ func SKDocumentCopyURL(inDocument unsafe.Pointer) corefoundation.CFURLRef {
 		ebipurego.RegisterLibFunc(&_fnSKDocumentCopyURL, _lib, "SKDocumentCopyURL")
 	}
 	_ret := _fnSKDocumentCopyURL(inDocument)
-	return corefoundation.CFURLRef{obj.Wrap(_ret)}
+	return corefoundation.CFURLRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSKDocumentCreate func(objc.ID, unsafe.Pointer, objc.ID) unsafe.Pointer
@@ -57,7 +57,7 @@ func SKDocumentGetName(inDocument unsafe.Pointer) corefoundation.CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnSKDocumentGetName, _lib, "SKDocumentGetName")
 	}
 	_ret := _fnSKDocumentGetName(inDocument)
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSKDocumentGetParent func(unsafe.Pointer) unsafe.Pointer
@@ -80,7 +80,7 @@ func SKDocumentGetSchemeName(inDocument unsafe.Pointer) corefoundation.CFStringR
 		ebipurego.RegisterLibFunc(&_fnSKDocumentGetSchemeName, _lib, "SKDocumentGetSchemeName")
 	}
 	_ret := _fnSKDocumentGetSchemeName(inDocument)
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSKDocumentGetTypeID func() int
@@ -158,7 +158,7 @@ func SKIndexCopyDocumentIDArrayForTermID(inIndex SKIndexRef, inTermID int) coref
 		ebipurego.RegisterLibFunc(&_fnSKIndexCopyDocumentIDArrayForTermID, _lib, "SKIndexCopyDocumentIDArrayForTermID")
 	}
 	_ret := _fnSKIndexCopyDocumentIDArrayForTermID(objref.IDOf(inIndex.Object), inTermID)
-	return corefoundation.CFArrayRef{obj.Wrap(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSKIndexCopyDocumentProperties func(objc.ID, unsafe.Pointer) objc.ID
@@ -170,7 +170,7 @@ func SKIndexCopyDocumentProperties(inIndex SKIndexRef, inDocument unsafe.Pointer
 		ebipurego.RegisterLibFunc(&_fnSKIndexCopyDocumentProperties, _lib, "SKIndexCopyDocumentProperties")
 	}
 	_ret := _fnSKIndexCopyDocumentProperties(objref.IDOf(inIndex.Object), inDocument)
-	return corefoundation.CFDictionaryRef{obj.Wrap(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSKIndexCopyDocumentRefsForDocumentIDs func(objc.ID, int, unsafe.Pointer, unsafe.Pointer)
@@ -222,7 +222,7 @@ func SKIndexCopyTermIDArrayForDocumentID(inIndex SKIndexRef, inDocumentID int) c
 		ebipurego.RegisterLibFunc(&_fnSKIndexCopyTermIDArrayForDocumentID, _lib, "SKIndexCopyTermIDArrayForDocumentID")
 	}
 	_ret := _fnSKIndexCopyTermIDArrayForDocumentID(objref.IDOf(inIndex.Object), inDocumentID)
-	return corefoundation.CFArrayRef{obj.Wrap(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSKIndexCopyTermStringForTermID func(objc.ID, int) objc.ID
@@ -234,7 +234,7 @@ func SKIndexCopyTermStringForTermID(inIndex SKIndexRef, inTermID int) corefounda
 		ebipurego.RegisterLibFunc(&_fnSKIndexCopyTermStringForTermID, _lib, "SKIndexCopyTermStringForTermID")
 	}
 	_ret := _fnSKIndexCopyTermStringForTermID(objref.IDOf(inIndex.Object), inTermID)
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSKIndexCreateWithMutableData func(objc.ID, objc.ID, SKIndexType, objc.ID) objc.ID
@@ -246,7 +246,7 @@ func SKIndexCreateWithMutableData(inData corefoundation.CFMutableDataRef, inInde
 		ebipurego.RegisterLibFunc(&_fnSKIndexCreateWithMutableData, _lib, "SKIndexCreateWithMutableData")
 	}
 	_ret := _fnSKIndexCreateWithMutableData(objref.IDOf(inData.Object), objref.IDOf(inIndexName.Object), inIndexType, objref.IDOf(inAnalysisProperties.Object))
-	return SKIndexRef{obj.Wrap(_ret)}
+	return SKIndexRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSKIndexCreateWithURL func(objc.ID, objc.ID, SKIndexType, objc.ID) objc.ID
@@ -258,7 +258,7 @@ func SKIndexCreateWithURL(inURL corefoundation.CFURLRef, inIndexName corefoundat
 		ebipurego.RegisterLibFunc(&_fnSKIndexCreateWithURL, _lib, "SKIndexCreateWithURL")
 	}
 	_ret := _fnSKIndexCreateWithURL(objref.IDOf(inURL.Object), objref.IDOf(inIndexName.Object), inIndexType, objref.IDOf(inAnalysisProperties.Object))
-	return SKIndexRef{obj.Wrap(_ret)}
+	return SKIndexRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSKIndexDocumentIteratorCopyNext func(objc.ID) unsafe.Pointer
@@ -281,7 +281,7 @@ func SKIndexDocumentIteratorCreate(inIndex SKIndexRef, inParentDocument unsafe.P
 		ebipurego.RegisterLibFunc(&_fnSKIndexDocumentIteratorCreate, _lib, "SKIndexDocumentIteratorCreate")
 	}
 	_ret := _fnSKIndexDocumentIteratorCreate(objref.IDOf(inIndex.Object), inParentDocument)
-	return SKIndexDocumentIteratorRef{obj.Wrap(_ret)}
+	return SKIndexDocumentIteratorRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSKIndexDocumentIteratorGetTypeID func() int
@@ -315,7 +315,7 @@ func SKIndexGetAnalysisProperties(inIndex SKIndexRef) corefoundation.CFDictionar
 		ebipurego.RegisterLibFunc(&_fnSKIndexGetAnalysisProperties, _lib, "SKIndexGetAnalysisProperties")
 	}
 	_ret := _fnSKIndexGetAnalysisProperties(objref.IDOf(inIndex.Object))
-	return corefoundation.CFDictionaryRef{obj.Wrap(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSKIndexGetDocumentCount func(objc.ID) int
@@ -470,7 +470,7 @@ func SKIndexOpenWithData(inData corefoundation.CFDataRef, inIndexName corefounda
 		ebipurego.RegisterLibFunc(&_fnSKIndexOpenWithData, _lib, "SKIndexOpenWithData")
 	}
 	_ret := _fnSKIndexOpenWithData(objref.IDOf(inData.Object), objref.IDOf(inIndexName.Object))
-	return SKIndexRef{obj.Wrap(_ret)}
+	return SKIndexRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSKIndexOpenWithMutableData func(objc.ID, objc.ID) objc.ID
@@ -482,7 +482,7 @@ func SKIndexOpenWithMutableData(inData corefoundation.CFMutableDataRef, inIndexN
 		ebipurego.RegisterLibFunc(&_fnSKIndexOpenWithMutableData, _lib, "SKIndexOpenWithMutableData")
 	}
 	_ret := _fnSKIndexOpenWithMutableData(objref.IDOf(inData.Object), objref.IDOf(inIndexName.Object))
-	return SKIndexRef{obj.Wrap(_ret)}
+	return SKIndexRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSKIndexOpenWithURL func(objc.ID, objc.ID, uint8) objc.ID
@@ -494,7 +494,7 @@ func SKIndexOpenWithURL(inURL corefoundation.CFURLRef, inIndexName corefoundatio
 		ebipurego.RegisterLibFunc(&_fnSKIndexOpenWithURL, _lib, "SKIndexOpenWithURL")
 	}
 	_ret := _fnSKIndexOpenWithURL(objref.IDOf(inURL.Object), objref.IDOf(inIndexName.Object), inWriteAccess)
-	return SKIndexRef{obj.Wrap(_ret)}
+	return SKIndexRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSKIndexRemoveDocument func(objc.ID, unsafe.Pointer) uint8
@@ -572,7 +572,7 @@ func SKSearchCreate(inIndex SKIndexRef, inQuery corefoundation.CFStringRef, inSe
 		ebipurego.RegisterLibFunc(&_fnSKSearchCreate, _lib, "SKSearchCreate")
 	}
 	_ret := _fnSKSearchCreate(objref.IDOf(inIndex.Object), objref.IDOf(inQuery.Object), inSearchOptions)
-	return SKSearchRef{obj.Wrap(_ret)}
+	return SKSearchRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSKSearchFindMatches func(objc.ID, int, unsafe.Pointer, unsafe.Pointer, float64, unsafe.Pointer) uint8
@@ -610,7 +610,7 @@ func SKSearchGroupCopyIndexes(inSearchGroup SKSearchGroupRef) corefoundation.CFA
 		ebipurego.RegisterLibFunc(&_fnSKSearchGroupCopyIndexes, _lib, "SKSearchGroupCopyIndexes")
 	}
 	_ret := _fnSKSearchGroupCopyIndexes(objref.IDOf(inSearchGroup.Object))
-	return corefoundation.CFArrayRef{obj.Wrap(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSKSearchGroupCreate func(objc.ID) objc.ID
@@ -622,7 +622,7 @@ func SKSearchGroupCreate(inArrayOfInIndexes corefoundation.CFArrayRef) SKSearchG
 		ebipurego.RegisterLibFunc(&_fnSKSearchGroupCreate, _lib, "SKSearchGroupCreate")
 	}
 	_ret := _fnSKSearchGroupCreate(objref.IDOf(inArrayOfInIndexes.Object))
-	return SKSearchGroupRef{obj.Wrap(_ret)}
+	return SKSearchGroupRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSKSearchGroupGetTypeID func() int
@@ -645,7 +645,7 @@ func SKSearchResultsCopyMatchingTerms(inSearchResults SKSearchResultsRef, inItem
 		ebipurego.RegisterLibFunc(&_fnSKSearchResultsCopyMatchingTerms, _lib, "SKSearchResultsCopyMatchingTerms")
 	}
 	_ret := _fnSKSearchResultsCopyMatchingTerms(objref.IDOf(inSearchResults.Object), inItem)
-	return corefoundation.CFArrayRef{obj.Wrap(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSKSearchResultsCreateWithDocuments func(objc.ID, objc.ID, int, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -657,7 +657,7 @@ func SKSearchResultsCreateWithDocuments(inSearchGroup SKSearchGroupRef, inExampl
 		ebipurego.RegisterLibFunc(&_fnSKSearchResultsCreateWithDocuments, _lib, "SKSearchResultsCreateWithDocuments")
 	}
 	_ret := _fnSKSearchResultsCreateWithDocuments(objref.IDOf(inSearchGroup.Object), objref.IDOf(inExampleDocuments.Object), inMaxFoundDocuments, inContext, inFilterCallBack)
-	return SKSearchResultsRef{obj.Wrap(_ret)}
+	return SKSearchResultsRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSKSearchResultsCreateWithQuery func(objc.ID, objc.ID, SKSearchType, int, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -669,7 +669,7 @@ func SKSearchResultsCreateWithQuery(inSearchGroup SKSearchGroupRef, inQuery core
 		ebipurego.RegisterLibFunc(&_fnSKSearchResultsCreateWithQuery, _lib, "SKSearchResultsCreateWithQuery")
 	}
 	_ret := _fnSKSearchResultsCreateWithQuery(objref.IDOf(inSearchGroup.Object), objref.IDOf(inQuery.Object), inSearchType, inMaxFoundDocuments, inContext, inFilterCallBack)
-	return SKSearchResultsRef{obj.Wrap(_ret)}
+	return SKSearchResultsRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSKSearchResultsGetCount func(objc.ID) int
@@ -716,7 +716,7 @@ func SKSummaryCopyParagraphAtIndex(summary SKSummaryRef, i int) corefoundation.C
 		ebipurego.RegisterLibFunc(&_fnSKSummaryCopyParagraphAtIndex, _lib, "SKSummaryCopyParagraphAtIndex")
 	}
 	_ret := _fnSKSummaryCopyParagraphAtIndex(objref.IDOf(summary.Object), i)
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSKSummaryCopyParagraphSummaryString func(objc.ID, int) objc.ID
@@ -728,7 +728,7 @@ func SKSummaryCopyParagraphSummaryString(summary SKSummaryRef, numParagraphs int
 		ebipurego.RegisterLibFunc(&_fnSKSummaryCopyParagraphSummaryString, _lib, "SKSummaryCopyParagraphSummaryString")
 	}
 	_ret := _fnSKSummaryCopyParagraphSummaryString(objref.IDOf(summary.Object), numParagraphs)
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSKSummaryCopySentenceAtIndex func(objc.ID, int) objc.ID
@@ -740,7 +740,7 @@ func SKSummaryCopySentenceAtIndex(summary SKSummaryRef, i int) corefoundation.CF
 		ebipurego.RegisterLibFunc(&_fnSKSummaryCopySentenceAtIndex, _lib, "SKSummaryCopySentenceAtIndex")
 	}
 	_ret := _fnSKSummaryCopySentenceAtIndex(objref.IDOf(summary.Object), i)
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSKSummaryCopySentenceSummaryString func(objc.ID, int) objc.ID
@@ -752,7 +752,7 @@ func SKSummaryCopySentenceSummaryString(summary SKSummaryRef, numSentences int) 
 		ebipurego.RegisterLibFunc(&_fnSKSummaryCopySentenceSummaryString, _lib, "SKSummaryCopySentenceSummaryString")
 	}
 	_ret := _fnSKSummaryCopySentenceSummaryString(objref.IDOf(summary.Object), numSentences)
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSKSummaryCreateWithString func(objc.ID) objc.ID
@@ -764,7 +764,7 @@ func SKSummaryCreateWithString(inString corefoundation.CFStringRef) SKSummaryRef
 		ebipurego.RegisterLibFunc(&_fnSKSummaryCreateWithString, _lib, "SKSummaryCreateWithString")
 	}
 	_ret := _fnSKSummaryCreateWithString(objref.IDOf(inString.Object))
-	return SKSummaryRef{obj.Wrap(_ret)}
+	return SKSummaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSKSummaryGetParagraphCount func(objc.ID) int

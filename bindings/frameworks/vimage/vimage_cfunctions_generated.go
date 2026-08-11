@@ -596,7 +596,7 @@ func VImageCVImageFormatCopy(format VImageConstCVImageFormatRef) VImageCVImageFo
 		ebipurego.RegisterLibFunc(&_fnVImageCVImageFormatCopy, _lib, "vImageCVImageFormat_Copy")
 	}
 	_ret := _fnVImageCVImageFormatCopy(objref.IDOf(format.Object))
-	return VImageCVImageFormatRef{obj.WrapUnmanaged(_ret)}
+	return VImageCVImageFormatRef{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnVImageCVImageFormatCopyChannelDescription func(objc.ID, unsafe.Pointer, uint32) int
@@ -630,7 +630,7 @@ func VImageCVImageFormatCreate(imageFormatType uint32, matrix *VImageARGBToYpCbC
 		ebipurego.RegisterLibFunc(&_fnVImageCVImageFormatCreate, _lib, "vImageCVImageFormat_Create")
 	}
 	_ret := _fnVImageCVImageFormatCreate(imageFormatType, unsafe.Pointer(matrix), objref.IDOf(cvImageBufferChromaLocation.Object), objref.IDOf(baseColorspace.Object), alphaIsOneHint)
-	return VImageCVImageFormatRef{obj.WrapUnmanaged(_ret)}
+	return VImageCVImageFormatRef{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnVImageCVImageFormatCreateWithCVPixelBuffer func(unsafe.Pointer) objc.ID
@@ -642,7 +642,7 @@ func VImageCVImageFormatCreateWithCVPixelBuffer(buffer unsafe.Pointer) VImageCVI
 		ebipurego.RegisterLibFunc(&_fnVImageCVImageFormatCreateWithCVPixelBuffer, _lib, "vImageCVImageFormat_CreateWithCVPixelBuffer")
 	}
 	_ret := _fnVImageCVImageFormatCreateWithCVPixelBuffer(buffer)
-	return VImageCVImageFormatRef{obj.WrapUnmanaged(_ret)}
+	return VImageCVImageFormatRef{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnVImageCVImageFormatGetAlphaHint func(objc.ID) int32
@@ -698,7 +698,7 @@ func VImageCVImageFormatGetChromaSiting(format VImageConstCVImageFormatRef) core
 		ebipurego.RegisterLibFunc(&_fnVImageCVImageFormatGetChromaSiting, _lib, "vImageCVImageFormat_GetChromaSiting")
 	}
 	_ret := _fnVImageCVImageFormatGetChromaSiting(objref.IDOf(format.Object))
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnVImageCVImageFormatGetColorSpace func(objc.ID) objc.ID
@@ -710,7 +710,7 @@ func VImageCVImageFormatGetColorSpace(format VImageConstCVImageFormatRef) coregr
 		ebipurego.RegisterLibFunc(&_fnVImageCVImageFormatGetColorSpace, _lib, "vImageCVImageFormat_GetColorSpace")
 	}
 	_ret := _fnVImageCVImageFormatGetColorSpace(objref.IDOf(format.Object))
-	return coregraphics.CGColorSpaceRef{obj.Wrap(_ret)}
+	return coregraphics.CGColorSpaceRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnVImageCVImageFormatGetConversionMatrix func(objc.ID, unsafe.Pointer) unsafe.Pointer
@@ -3001,7 +3001,7 @@ func VImageConverterCreateForCGToCVImageFormat(srcFormat unsafe.Pointer, destFor
 	}
 	var _out0 int
 	_ret := _fnVImageConverterCreateForCGToCVImageFormat(srcFormat, objref.IDOf(destFormat.Object), backgroundColor, flags, unsafe.Pointer(&_out0))
-	return VImageConverterRef{obj.WrapUnmanaged(_ret)}, _out0
+	return VImageConverterRef{Object: obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnVImageConverterCreateForCVToCGImageFormat func(objc.ID, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer) objc.ID
@@ -3014,7 +3014,7 @@ func VImageConverterCreateForCVToCGImageFormat(srcFormat VImageCVImageFormatRef,
 	}
 	var _out0 int
 	_ret := _fnVImageConverterCreateForCVToCGImageFormat(objref.IDOf(srcFormat.Object), destFormat, backgroundColor, flags, unsafe.Pointer(&_out0))
-	return VImageConverterRef{obj.WrapUnmanaged(_ret)}, _out0
+	return VImageConverterRef{Object: obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnVImageConverterCreateWithCGColorConversionInfo func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer) objc.ID
@@ -3027,7 +3027,7 @@ func VImageConverterCreateWithCGColorConversionInfo(colorConversionInfoRef coreg
 	}
 	var _out0 int
 	_ret := _fnVImageConverterCreateWithCGColorConversionInfo(objref.IDOf(colorConversionInfoRef.Object), sFormat, dFormat, bg, flags, unsafe.Pointer(&_out0))
-	return VImageConverterRef{obj.WrapUnmanaged(_ret)}, _out0
+	return VImageConverterRef{Object: obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnVImageConverterCreateWithCGImageFormat func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer) objc.ID
@@ -3040,7 +3040,7 @@ func VImageConverterCreateWithCGImageFormat(srcFormat unsafe.Pointer, destFormat
 	}
 	var _out0 int
 	_ret := _fnVImageConverterCreateWithCGImageFormat(srcFormat, destFormat, backgroundColor, flags, unsafe.Pointer(&_out0))
-	return VImageConverterRef{obj.WrapUnmanaged(_ret)}, _out0
+	return VImageConverterRef{Object: obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnVImageConverterCreateWithColorSyncCodeFragment func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer) objc.ID
@@ -3053,7 +3053,7 @@ func VImageConverterCreateWithColorSyncCodeFragment(codeFragment obj.Object, src
 	}
 	var _out0 int
 	_ret := _fnVImageConverterCreateWithColorSyncCodeFragment(objref.IDOf(codeFragment), srcFormat, destFormat, backgroundColor, flags, unsafe.Pointer(&_out0))
-	return VImageConverterRef{obj.WrapUnmanaged(_ret)}, _out0
+	return VImageConverterRef{Object: obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnVImageConverterGetDestinationBufferOrder func(objc.ID) unsafe.Pointer
@@ -3319,7 +3319,7 @@ func VImageCreateCGImageFromBuffer(buf unsafe.Pointer, format unsafe.Pointer, ca
 	}
 	var _out0 int
 	_ret := _fnVImageCreateCGImageFromBuffer(buf, format, callback, userData, flags, unsafe.Pointer(&_out0))
-	return coregraphics.CGImageRef{obj.Wrap(_ret)}, _out0
+	return coregraphics.CGImageRef{Object: obj.Wrap(_ret)}, _out0
 }
 
 var _fnVImageCreateGammaFunction func(float32, int, uint32) unsafe.Pointer
@@ -3343,7 +3343,7 @@ func VImageCreateMonochromeColorSpaceWithWhitePointAndTransferFunction(whitePoin
 	}
 	var _out0 int
 	_ret := _fnVImageCreateMonochromeColorSpaceWithWhitePointAndTransferFunction(unsafe.Pointer(whitePoint), unsafe.Pointer(tf), intent, flags, unsafe.Pointer(&_out0))
-	return coregraphics.CGColorSpaceRef{obj.Wrap(_ret)}, _out0
+	return coregraphics.CGColorSpaceRef{Object: obj.Wrap(_ret)}, _out0
 }
 
 var _fnVImageCreateRGBColorSpaceWithPrimariesAndTransferFunction func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer) objc.ID
@@ -3356,7 +3356,7 @@ func VImageCreateRGBColorSpaceWithPrimariesAndTransferFunction(primaries *VImage
 	}
 	var _out0 int
 	_ret := _fnVImageCreateRGBColorSpaceWithPrimariesAndTransferFunction(unsafe.Pointer(primaries), unsafe.Pointer(tf), intent, flags, unsafe.Pointer(&_out0))
-	return coregraphics.CGColorSpaceRef{obj.Wrap(_ret)}, _out0
+	return coregraphics.CGColorSpaceRef{Object: obj.Wrap(_ret)}, _out0
 }
 
 var _fnVImageDestroyGammaFunction func(unsafe.Pointer)
@@ -4655,7 +4655,7 @@ func VImageMultidimensionalTableCreate(tableData unsafe.Pointer, numSrcChannels 
 	}
 	var _out0 int
 	_ret := _fnVImageMultidimensionalTableCreate(tableData, numSrcChannels, numDestChannels, tableEntriesPerDimension, hint, flags, unsafe.Pointer(&_out0))
-	return VImageMultidimensionalTable{obj.WrapUnmanaged(_ret)}, _out0
+	return VImageMultidimensionalTable{Object: obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnVImageMultidimensionalTableRelease func(objc.ID) int

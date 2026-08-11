@@ -148,7 +148,7 @@ func (gc *GraphicsContext) IsDrawingToScreen() bool {
 func (gc *GraphicsContext) CGContext() coregraphics.CGContextRef {
 	defer runtime.KeepAlive(gc)
 	_r := objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("CGContext"))
-	return coregraphics.CGContextRef{obj.Wrap(_r)}
+	return coregraphics.CGContextRef{Object: obj.Wrap(_r)}
 }
 
 // IsFlipped reports whether the object is flipped.

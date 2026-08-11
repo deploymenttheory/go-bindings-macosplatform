@@ -47,7 +47,7 @@ func IOSurfaceCopyAllValues(buffer coregraphics.IOSurfaceRef) corefoundation.CFD
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceCopyAllValues, _lib, "IOSurfaceCopyAllValues")
 	}
 	_ret := _fnIOSurfaceCopyAllValues(objref.IDOf(buffer.Object))
-	return corefoundation.CFDictionaryRef{obj.Adopt(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnIOSurfaceCopyValue func(objc.ID, objc.ID) objc.ID
@@ -71,7 +71,7 @@ func IOSurfaceCreate(properties corefoundation.CFDictionaryRef) coregraphics.IOS
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceCreate, _lib, "IOSurfaceCreate")
 	}
 	_ret := _fnIOSurfaceCreate(objref.IDOf(properties.Object))
-	return coregraphics.IOSurfaceRef{obj.WrapUnmanaged(_ret)}
+	return coregraphics.IOSurfaceRef{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnIOSurfaceCreateMachPort func(objc.ID) uint32
@@ -481,7 +481,7 @@ func IOSurfaceLookup(csid uint32) coregraphics.IOSurfaceRef {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceLookup, _lib, "IOSurfaceLookup")
 	}
 	_ret := _fnIOSurfaceLookup(csid)
-	return coregraphics.IOSurfaceRef{obj.WrapUnmanaged(_ret)}
+	return coregraphics.IOSurfaceRef{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnIOSurfaceLookupFromMachPort func(int) objc.ID
@@ -493,7 +493,7 @@ func IOSurfaceLookupFromMachPort(port int) coregraphics.IOSurfaceRef {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceLookupFromMachPort, _lib, "IOSurfaceLookupFromMachPort")
 	}
 	_ret := _fnIOSurfaceLookupFromMachPort(port)
-	return coregraphics.IOSurfaceRef{obj.WrapUnmanaged(_ret)}
+	return coregraphics.IOSurfaceRef{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnIOSurfaceLookupFromXPCObject func(objc.ID) objc.ID
@@ -505,7 +505,7 @@ func IOSurfaceLookupFromXPCObject(xobj xpc.Object) coregraphics.IOSurfaceRef {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceLookupFromXPCObject, _lib, "IOSurfaceLookupFromXPCObject")
 	}
 	_ret := _fnIOSurfaceLookupFromXPCObject(objc.ID(uintptr(xobj.Ptr())))
-	return coregraphics.IOSurfaceRef{obj.WrapUnmanaged(_ret)}
+	return coregraphics.IOSurfaceRef{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnIOSurfaceRemoveAllValues func(objc.ID)

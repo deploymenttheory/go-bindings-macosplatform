@@ -109,6 +109,66 @@ func (ho *HostObject) DestroyWith(options HostObjectDestroyOptions) {
 	objc.Send[objc.ID](objref.IDOf(ho), objc.RegisterName("destroyWithOptions:"), options)
 }
 
+// SendDeviceRequestDataBytesTransferredCompletionTimeout sends a request on the default control endpoint.
+func (ho *HostObject) SendDeviceRequestDataBytesTransferredCompletionTimeout(request IOUSBDeviceRequest, data obj.Object, completionTimeout float64) (bytesTransferred int, err error) {
+	defer runtime.KeepAlive(ho)
+	defer runtime.KeepAlive(data)
+	var _out0 int
+	var _nsErr uintptr
+	objc.Send[bool](objref.IDOf(ho), objc.RegisterName("sendDeviceRequest:data:bytesTransferred:completionTimeout:error:"), request, objref.IDOf(data), unsafe.Pointer(&_out0), completionTimeout, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return 0, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return _out0, nil
+}
+
+// SendDeviceRequestDataBytesTransferred sends a request on the default control endpoint with a default completion timeout.
+func (ho *HostObject) SendDeviceRequestDataBytesTransferred(request IOUSBDeviceRequest, data obj.Object) (bytesTransferred int, err error) {
+	defer runtime.KeepAlive(ho)
+	defer runtime.KeepAlive(data)
+	var _out0 int
+	var _nsErr uintptr
+	objc.Send[bool](objref.IDOf(ho), objc.RegisterName("sendDeviceRequest:data:bytesTransferred:error:"), request, objref.IDOf(data), unsafe.Pointer(&_out0), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return 0, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return _out0, nil
+}
+
+// SendDeviceRequest sends a request on the default control endpoint without a data phase and default completion timeout.
+func (ho *HostObject) SendDeviceRequest(request IOUSBDeviceRequest) error {
+	defer runtime.KeepAlive(ho)
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(ho), objc.RegisterName("sendDeviceRequest:error:"), request, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// EnqueueDeviceRequestDataCompletionTimeoutErrorCompletionHandler enqueues a request on the default control endpoint.
+func (ho *HostObject) EnqueueDeviceRequestDataCompletionTimeoutErrorCompletionHandler(request IOUSBDeviceRequest, data obj.Object, completionTimeout float64, err unsafe.Pointer, completionHandler func(int, int)) bool {
+	defer runtime.KeepAlive(ho)
+	defer runtime.KeepAlive(data)
+	_r := objc.Send[bool](objref.IDOf(ho), objc.RegisterName("enqueueDeviceRequest:data:completionTimeout:error:completionHandler:"), request, objref.IDOf(data), completionTimeout, err, objc.NewBlock(func(_ objc.Block, _b0 int, _b1 int) { completionHandler(_b0, _b1) }))
+	return _r
+}
+
+// EnqueueDeviceRequestDataErrorCompletionHandler enqueues a request on the default control endpoint with a default completion timeout.
+func (ho *HostObject) EnqueueDeviceRequestDataErrorCompletionHandler(request IOUSBDeviceRequest, data obj.Object, err unsafe.Pointer, completionHandler func(int, int)) bool {
+	defer runtime.KeepAlive(ho)
+	defer runtime.KeepAlive(data)
+	_r := objc.Send[bool](objref.IDOf(ho), objc.RegisterName("enqueueDeviceRequest:data:error:completionHandler:"), request, objref.IDOf(data), err, objc.NewBlock(func(_ objc.Block, _b0 int, _b1 int) { completionHandler(_b0, _b1) }))
+	return _r
+}
+
+// EnqueueDeviceRequestErrorCompletionHandler enqueues a request on the default control endpoint without a data phase and a default timeout.
+func (ho *HostObject) EnqueueDeviceRequestErrorCompletionHandler(request IOUSBDeviceRequest, err unsafe.Pointer, completionHandler func(int, int)) bool {
+	defer runtime.KeepAlive(ho)
+	_r := objc.Send[bool](objref.IDOf(ho), objc.RegisterName("enqueueDeviceRequest:error:completionHandler:"), request, err, objc.NewBlock(func(_ objc.Block, _b0 int, _b1 int) { completionHandler(_b0, _b1) }))
+	return _r
+}
+
 // AbortDeviceRequestsWithOption aborts device requests.
 func (ho *HostObject) AbortDeviceRequestsWithOption(option HostAbortOption) error {
 	defer runtime.KeepAlive(ho)

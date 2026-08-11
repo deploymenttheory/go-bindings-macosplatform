@@ -24,7 +24,7 @@ func NetFSCopyURLForRemountingVolume(localPathURL corefoundation.CFURLRef) coref
 		ebipurego.RegisterLibFunc(&_fnNetFSCopyURLForRemountingVolume, _lib, "NetFSCopyURLForRemountingVolume")
 	}
 	_ret := _fnNetFSCopyURLForRemountingVolume(objref.IDOf(localPathURL.Object))
-	return corefoundation.CFURLRef{obj.Wrap(_ret)}
+	return corefoundation.CFURLRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnNetFSMountURLAsync func(objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, unsafe.Pointer, objc.ID, objc.Block) int32
@@ -58,7 +58,7 @@ func NetFSMountURLProbe(hostname corefoundation.CFStringRef) corefoundation.CFSt
 		ebipurego.RegisterLibFunc(&_fnNetFSMountURLProbe, _lib, "NetFSMountURLProbe")
 	}
 	_ret := _fnNetFSMountURLProbe(objref.IDOf(hostname.Object))
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnNetFSMountURLSync func(objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, unsafe.Pointer) int32

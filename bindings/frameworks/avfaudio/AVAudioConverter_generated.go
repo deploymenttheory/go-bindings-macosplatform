@@ -127,6 +127,12 @@ func (ac *AudioConverter) WithPrimeMethod(primeMethod AudioConverterPrimeMethod)
 	return ac
 }
 
+// WithPrimeInfo sets the number of priming frames the converter uses.
+func (ac *AudioConverter) WithPrimeInfo(primeInfo AVAudioConverterPrimeInfo) *AudioConverter {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setPrimeInfo:"), primeInfo)
+	return ac
+}
+
 // WithAudioSyncPacketFrequency sets number of packets between consecutive sync packets. A sync packet is an independently-decodable packet that completely refreshes the decoder without needing to decode other packets.  When compressing to a format which supports it (such as APAC), the audio sync packet frequency indicates the distance in packets between two sync packets, with non-sync packets between.  This is useful to set when saving compressed packets to a file and efficient random access is desired.  Note: Separating sync packets by at least one second of encoded audio (e.g. 75 packets) is recommended.
 func (ac *AudioConverter) WithAudioSyncPacketFrequency(audioSyncPacketFrequency int) *AudioConverter {
 	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setAudioSyncPacketFrequency:"), audioSyncPacketFrequency)
@@ -241,6 +247,13 @@ func (ac *AudioConverter) SampleRateConverterAlgorithm() string {
 func (ac *AudioConverter) PrimeMethod() AudioConverterPrimeMethod {
 	defer runtime.KeepAlive(ac)
 	_r := objc.Send[AudioConverterPrimeMethod](objref.IDOf(ac), objc.RegisterName("primeMethod"))
+	return _r
+}
+
+// PrimeInfo indicates the the number of priming frames.
+func (ac *AudioConverter) PrimeInfo() AVAudioConverterPrimeInfo {
+	defer runtime.KeepAlive(ac)
+	_r := objc.Send[AVAudioConverterPrimeInfo](objref.IDOf(ac), objc.RegisterName("primeInfo"))
 	return _r
 }
 

@@ -79,6 +79,12 @@ func (cpo *CapturePhotoOutput) WithHighResolutionCaptureEnabled(highResolutionCa
 	return cpo
 }
 
+// WithMaxPhotoDimensions sets the maximum resolution of the requested photo.
+func (cpo *CapturePhotoOutput) WithMaxPhotoDimensions(maxPhotoDimensions CMVideoDimensions) *CapturePhotoOutput {
+	objc.Send[objc.ID](objref.IDOf(cpo), objc.RegisterName("setMaxPhotoDimensions:"), maxPhotoDimensions)
+	return cpo
+}
+
 // WithPreservesLivePhotoCaptureSuspendedOnSessionStop sets a Boolean value that indicates whether to preserve the suspended state of Live Photo capture when the session stops.
 func (cpo *CapturePhotoOutput) WithPreservesLivePhotoCaptureSuspendedOnSessionStop(preservesLivePhotoCaptureSuspendedOnSessionStop bool) *CapturePhotoOutput {
 	objc.Send[objc.ID](objref.IDOf(cpo), objc.RegisterName("setPreservesLivePhotoCaptureSuspendedOnSessionStop:"), preservesLivePhotoCaptureSuspendedOnSessionStop)
@@ -186,6 +192,13 @@ func (cpo *CapturePhotoOutput) SupportedFlashModes() []obj.Object {
 func (cpo *CapturePhotoOutput) IsHighResolutionCaptureEnabled() bool {
 	defer runtime.KeepAlive(cpo)
 	_r := objc.Send[bool](objref.IDOf(cpo), objc.RegisterName("isHighResolutionCaptureEnabled"))
+	return _r
+}
+
+// MaxPhotoDimensions indicates the maximum resolution of the requested photo. Set this property to enable requesting of images up to as large as the specified dimensions. Images returned by AVCapturePhotoOutput may be smaller than these dimensions but will never be larger. Once set, images can be requested with any valid maximum photo dimensions by setting AVCapturePhotoSettings.maxPhotoDimensions on a per photo basis. The dimensions set must match one of the dimensions returned by AVCaptureDeviceFormat.supportedMaxPhotoDimensions for the current active format. Changing this property may trigger a lengthy reconfiguration of the capture render pipeline so it is recommended that this is set before calling -[AVCaptureSession startRunning]. Note: When supported, the 24MP setting (5712, 4284) is only serviced as 24MP when opted-in to autoDeferredPhotoDeliveryEnabled.
+func (cpo *CapturePhotoOutput) MaxPhotoDimensions() CMVideoDimensions {
+	defer runtime.KeepAlive(cpo)
+	_r := objc.Send[CMVideoDimensions](objref.IDOf(cpo), objc.RegisterName("maxPhotoDimensions"))
 	return _r
 }
 

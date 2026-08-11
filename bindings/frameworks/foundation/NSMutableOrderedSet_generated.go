@@ -156,11 +156,23 @@ func (mos *MutableOrderedSet) SetObjectAtIndexedSubscript(object obj.Object, idx
 	objc.Send[objc.ID](objref.IDOf(mos), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(object), idx)
 }
 
+// ReplaceObjectsInRangeWithObjectsCount replaces the objects in the receiving mutable ordered set at the range with the specified number of objects from a given C array.
+func (mos *MutableOrderedSet) ReplaceObjectsInRangeWithObjectsCount(range_ NSRange, objects unsafe.Pointer, count int) {
+	defer runtime.KeepAlive(mos)
+	objc.Send[objc.ID](objref.IDOf(mos), objc.RegisterName("replaceObjectsInRange:withObjects:count:"), range_, objects, count)
+}
+
 // ReplaceObjectsAtIndexesWithObjects replaces the objects at the specified indexes with the new objects.
 func (mos *MutableOrderedSet) ReplaceObjectsAtIndexesWithObjects(indexes *IndexSet, objects []obj.Object) {
 	defer runtime.KeepAlive(mos)
 	defer runtime.KeepAlive(indexes)
 	objc.Send[objc.ID](objref.IDOf(mos), objc.RegisterName("replaceObjectsAtIndexes:withObjects:"), objref.IDOf(indexes), purego.SliceToNSArray(objects, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+}
+
+// RemoveObjectsInRange removes from the mutable ordered set each of the objects within a given range.
+func (mos *MutableOrderedSet) RemoveObjectsInRange(range_ NSRange) {
+	defer runtime.KeepAlive(mos)
+	objc.Send[objc.ID](objref.IDOf(mos), objc.RegisterName("removeObjectsInRange:"), range_)
 }
 
 // RemoveObjectsAtIndexes removes the objects at the specified indexes from the mutable ordered set.
@@ -238,6 +250,12 @@ func (mos *MutableOrderedSet) SortUsingComparator(cmptr func(obj.Object, obj.Obj
 func (mos *MutableOrderedSet) SortWithOptionsUsingComparator(opts SortOptions, cmptr func(obj.Object, obj.Object) int) {
 	defer runtime.KeepAlive(mos)
 	objc.Send[objc.ID](objref.IDOf(mos), objc.RegisterName("sortWithOptions:usingComparator:"), opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) int { return cmptr(obj.Wrap(_b0), obj.Wrap(_b1)) }))
+}
+
+// SortRangeOptionsUsingComparator sorts the specified range of the mutable ordered set using the specified options and the comparison method specified by a given comparator block.
+func (mos *MutableOrderedSet) SortRangeOptionsUsingComparator(range_ NSRange, opts SortOptions, cmptr func(obj.Object, obj.Object) int) {
+	defer runtime.KeepAlive(mos)
+	objc.Send[objc.ID](objref.IDOf(mos), objc.RegisterName("sortRange:options:usingComparator:"), range_, opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) int { return cmptr(obj.Wrap(_b0), obj.Wrap(_b1)) }))
 }
 
 // ApplyDifference applies difference.

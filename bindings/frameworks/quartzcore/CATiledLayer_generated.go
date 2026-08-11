@@ -106,6 +106,12 @@ func (tl *TiledLayer) WithAnchorPointZ(anchorPointZ float64) *TiledLayer {
 	return tl
 }
 
+// WithTransform sets the transform applied to the layer’s contents. Animatable.
+func (tl *TiledLayer) WithTransform(transform CATransform3D) *TiledLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setTransform:"), transform)
+	return tl
+}
+
 // WithFrame sets the layer’s frame rectangle.
 func (tl *TiledLayer) WithFrame(frame corefoundation.CGRect) *TiledLayer {
 	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setFrame:"), frame)
@@ -134,6 +140,12 @@ func (tl *TiledLayer) WithGeometryFlipped(geometryFlipped bool) *TiledLayer {
 func (tl *TiledLayer) WithSublayers(items ...LayerProvider) *TiledLayer {
 	_arr := purego.SliceToNSArray(items, func(_v LayerProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setSublayers:"), _arr)
+	return tl
+}
+
+// WithSublayerTransform sets specifies the transform to apply to sublayers when rendering. Animatable.
+func (tl *TiledLayer) WithSublayerTransform(sublayerTransform CATransform3D) *TiledLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setSublayerTransform:"), sublayerTransform)
 	return tl
 }
 

@@ -6,8 +6,6 @@ package mapkit
 
 import (
 	"unsafe"
-
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
 // Annotation is the Go form of the Objective-C protocol MKAnnotation.
@@ -21,5 +19,5 @@ type GeoJSONObject interface {
 // Overlay is the Go form of the Objective-C protocol MKOverlay.
 type Overlay interface {
 	Coordinate() unsafe.Pointer
-	BoundingMapRect() obj.Object
+	BoundingMapRect() MKMapRect
 }

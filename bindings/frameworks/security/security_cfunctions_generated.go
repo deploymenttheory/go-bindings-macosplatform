@@ -970,10 +970,10 @@ func CSSM_ChangeKeyOwner(cspHandle int, accessCred unsafe.Pointer, key unsafe.Po
 	return _fnCSSM_ChangeKeyOwner(cspHandle, accessCred, key, newOwner)
 }
 
-var _fnCSSM_DL_Authenticate func(unsafe.Pointer, uint32, unsafe.Pointer) int32
+var _fnCSSM_DL_Authenticate func(CssmDlDbHandle, uint32, unsafe.Pointer) int32
 
 // CSSM_DL_Authenticate calls the Security framework function CSSM_DL_Authenticate.
-func CSSM_DL_Authenticate(dldbHandle unsafe.Pointer, accessRequest uint32, accessCred unsafe.Pointer) int32 {
+func CSSM_DL_Authenticate(dldbHandle CssmDlDbHandle, accessRequest uint32, accessCred unsafe.Pointer) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSSM_DL_Authenticate == nil {
 		ebipurego.RegisterLibFunc(&_fnCSSM_DL_Authenticate, _lib, "CSSM_DL_Authenticate")
@@ -981,10 +981,10 @@ func CSSM_DL_Authenticate(dldbHandle unsafe.Pointer, accessRequest uint32, acces
 	return _fnCSSM_DL_Authenticate(dldbHandle, accessRequest, accessCred)
 }
 
-var _fnCSSM_DL_ChangeDbAcl func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+var _fnCSSM_DL_ChangeDbAcl func(CssmDlDbHandle, unsafe.Pointer, unsafe.Pointer) int32
 
 // CSSM_DL_ChangeDbAcl calls the Security framework function CSSM_DL_ChangeDbAcl.
-func CSSM_DL_ChangeDbAcl(dldbHandle unsafe.Pointer, accessCred unsafe.Pointer, aclEdit unsafe.Pointer) int32 {
+func CSSM_DL_ChangeDbAcl(dldbHandle CssmDlDbHandle, accessCred unsafe.Pointer, aclEdit unsafe.Pointer) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSSM_DL_ChangeDbAcl == nil {
 		ebipurego.RegisterLibFunc(&_fnCSSM_DL_ChangeDbAcl, _lib, "CSSM_DL_ChangeDbAcl")
@@ -992,10 +992,10 @@ func CSSM_DL_ChangeDbAcl(dldbHandle unsafe.Pointer, accessCred unsafe.Pointer, a
 	return _fnCSSM_DL_ChangeDbAcl(dldbHandle, accessCred, aclEdit)
 }
 
-var _fnCSSM_DL_ChangeDbOwner func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+var _fnCSSM_DL_ChangeDbOwner func(CssmDlDbHandle, unsafe.Pointer, unsafe.Pointer) int32
 
 // CSSM_DL_ChangeDbOwner calls the Security framework function CSSM_DL_ChangeDbOwner.
-func CSSM_DL_ChangeDbOwner(dldbHandle unsafe.Pointer, accessCred unsafe.Pointer, newOwner unsafe.Pointer) int32 {
+func CSSM_DL_ChangeDbOwner(dldbHandle CssmDlDbHandle, accessCred unsafe.Pointer, newOwner unsafe.Pointer) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSSM_DL_ChangeDbOwner == nil {
 		ebipurego.RegisterLibFunc(&_fnCSSM_DL_ChangeDbOwner, _lib, "CSSM_DL_ChangeDbOwner")
@@ -1003,10 +1003,10 @@ func CSSM_DL_ChangeDbOwner(dldbHandle unsafe.Pointer, accessCred unsafe.Pointer,
 	return _fnCSSM_DL_ChangeDbOwner(dldbHandle, accessCred, newOwner)
 }
 
-var _fnCSSM_DL_CreateRelation func(unsafe.Pointer, uint32, string, uint32, unsafe.Pointer, uint32, unsafe.Pointer) int32
+var _fnCSSM_DL_CreateRelation func(CssmDlDbHandle, uint32, string, uint32, unsafe.Pointer, uint32, unsafe.Pointer) int32
 
 // CSSM_DL_CreateRelation calls the Security framework function CSSM_DL_CreateRelation.
-func CSSM_DL_CreateRelation(dldbHandle unsafe.Pointer, relationID uint32, relationName string, numberOfAttributes uint32, pAttributeInfo unsafe.Pointer, numberOfIndexes uint32, pIndexInfo *CssmDbSchemaIndexInfo) int32 {
+func CSSM_DL_CreateRelation(dldbHandle CssmDlDbHandle, relationID uint32, relationName string, numberOfAttributes uint32, pAttributeInfo unsafe.Pointer, numberOfIndexes uint32, pIndexInfo *CssmDbSchemaIndexInfo) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSSM_DL_CreateRelation == nil {
 		ebipurego.RegisterLibFunc(&_fnCSSM_DL_CreateRelation, _lib, "CSSM_DL_CreateRelation")
@@ -1014,10 +1014,10 @@ func CSSM_DL_CreateRelation(dldbHandle unsafe.Pointer, relationID uint32, relati
 	return _fnCSSM_DL_CreateRelation(dldbHandle, relationID, relationName, numberOfAttributes, pAttributeInfo, numberOfIndexes, unsafe.Pointer(pIndexInfo))
 }
 
-var _fnCSSM_DL_DataAbortQuery func(unsafe.Pointer, int) int32
+var _fnCSSM_DL_DataAbortQuery func(CssmDlDbHandle, int) int32
 
 // CSSM_DL_DataAbortQuery calls the Security framework function CSSM_DL_DataAbortQuery.
-func CSSM_DL_DataAbortQuery(dldbHandle unsafe.Pointer, resultsHandle int) int32 {
+func CSSM_DL_DataAbortQuery(dldbHandle CssmDlDbHandle, resultsHandle int) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSSM_DL_DataAbortQuery == nil {
 		ebipurego.RegisterLibFunc(&_fnCSSM_DL_DataAbortQuery, _lib, "CSSM_DL_DataAbortQuery")
@@ -1025,10 +1025,10 @@ func CSSM_DL_DataAbortQuery(dldbHandle unsafe.Pointer, resultsHandle int) int32 
 	return _fnCSSM_DL_DataAbortQuery(dldbHandle, resultsHandle)
 }
 
-var _fnCSSM_DL_DataDelete func(unsafe.Pointer, unsafe.Pointer) int32
+var _fnCSSM_DL_DataDelete func(CssmDlDbHandle, unsafe.Pointer) int32
 
 // CSSM_DL_DataDelete calls the Security framework function CSSM_DL_DataDelete.
-func CSSM_DL_DataDelete(dldbHandle unsafe.Pointer, uniqueRecordIdentifier unsafe.Pointer) int32 {
+func CSSM_DL_DataDelete(dldbHandle CssmDlDbHandle, uniqueRecordIdentifier unsafe.Pointer) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSSM_DL_DataDelete == nil {
 		ebipurego.RegisterLibFunc(&_fnCSSM_DL_DataDelete, _lib, "CSSM_DL_DataDelete")
@@ -1036,10 +1036,10 @@ func CSSM_DL_DataDelete(dldbHandle unsafe.Pointer, uniqueRecordIdentifier unsafe
 	return _fnCSSM_DL_DataDelete(dldbHandle, uniqueRecordIdentifier)
 }
 
-var _fnCSSM_DL_DataGetFirst func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+var _fnCSSM_DL_DataGetFirst func(CssmDlDbHandle, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // CSSM_DL_DataGetFirst calls the Security framework function CSSM_DL_DataGetFirst.
-func CSSM_DL_DataGetFirst(dldbHandle unsafe.Pointer, query unsafe.Pointer, attributes unsafe.Pointer, data unsafe.Pointer, uniqueId unsafe.Pointer) (result int32, resultsHandle int) {
+func CSSM_DL_DataGetFirst(dldbHandle CssmDlDbHandle, query unsafe.Pointer, attributes unsafe.Pointer, data unsafe.Pointer, uniqueId unsafe.Pointer) (result int32, resultsHandle int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSSM_DL_DataGetFirst == nil {
 		ebipurego.RegisterLibFunc(&_fnCSSM_DL_DataGetFirst, _lib, "CSSM_DL_DataGetFirst")
@@ -1049,10 +1049,10 @@ func CSSM_DL_DataGetFirst(dldbHandle unsafe.Pointer, query unsafe.Pointer, attri
 	return _ret, _out0
 }
 
-var _fnCSSM_DL_DataGetFromUniqueRecordId func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+var _fnCSSM_DL_DataGetFromUniqueRecordId func(CssmDlDbHandle, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // CSSM_DL_DataGetFromUniqueRecordId calls the Security framework function CSSM_DL_DataGetFromUniqueRecordId.
-func CSSM_DL_DataGetFromUniqueRecordId(dldbHandle unsafe.Pointer, uniqueRecord unsafe.Pointer, attributes unsafe.Pointer, data unsafe.Pointer) int32 {
+func CSSM_DL_DataGetFromUniqueRecordId(dldbHandle CssmDlDbHandle, uniqueRecord unsafe.Pointer, attributes unsafe.Pointer, data unsafe.Pointer) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSSM_DL_DataGetFromUniqueRecordId == nil {
 		ebipurego.RegisterLibFunc(&_fnCSSM_DL_DataGetFromUniqueRecordId, _lib, "CSSM_DL_DataGetFromUniqueRecordId")
@@ -1060,10 +1060,10 @@ func CSSM_DL_DataGetFromUniqueRecordId(dldbHandle unsafe.Pointer, uniqueRecord u
 	return _fnCSSM_DL_DataGetFromUniqueRecordId(dldbHandle, uniqueRecord, attributes, data)
 }
 
-var _fnCSSM_DL_DataGetNext func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+var _fnCSSM_DL_DataGetNext func(CssmDlDbHandle, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // CSSM_DL_DataGetNext calls the Security framework function CSSM_DL_DataGetNext.
-func CSSM_DL_DataGetNext(dldbHandle unsafe.Pointer, resultsHandle int, attributes unsafe.Pointer, data unsafe.Pointer, uniqueId unsafe.Pointer) int32 {
+func CSSM_DL_DataGetNext(dldbHandle CssmDlDbHandle, resultsHandle int, attributes unsafe.Pointer, data unsafe.Pointer, uniqueId unsafe.Pointer) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSSM_DL_DataGetNext == nil {
 		ebipurego.RegisterLibFunc(&_fnCSSM_DL_DataGetNext, _lib, "CSSM_DL_DataGetNext")
@@ -1071,10 +1071,10 @@ func CSSM_DL_DataGetNext(dldbHandle unsafe.Pointer, resultsHandle int, attribute
 	return _fnCSSM_DL_DataGetNext(dldbHandle, resultsHandle, attributes, data, uniqueId)
 }
 
-var _fnCSSM_DL_DataInsert func(unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+var _fnCSSM_DL_DataInsert func(CssmDlDbHandle, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // CSSM_DL_DataInsert calls the Security framework function CSSM_DL_DataInsert.
-func CSSM_DL_DataInsert(dldbHandle unsafe.Pointer, recordType uint32, attributes unsafe.Pointer, data unsafe.Pointer, uniqueId unsafe.Pointer) int32 {
+func CSSM_DL_DataInsert(dldbHandle CssmDlDbHandle, recordType uint32, attributes unsafe.Pointer, data unsafe.Pointer, uniqueId unsafe.Pointer) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSSM_DL_DataInsert == nil {
 		ebipurego.RegisterLibFunc(&_fnCSSM_DL_DataInsert, _lib, "CSSM_DL_DataInsert")
@@ -1082,10 +1082,10 @@ func CSSM_DL_DataInsert(dldbHandle unsafe.Pointer, recordType uint32, attributes
 	return _fnCSSM_DL_DataInsert(dldbHandle, recordType, attributes, data, uniqueId)
 }
 
-var _fnCSSM_DL_DataModify func(unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int32
+var _fnCSSM_DL_DataModify func(CssmDlDbHandle, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int32
 
 // CSSM_DL_DataModify calls the Security framework function CSSM_DL_DataModify.
-func CSSM_DL_DataModify(dldbHandle unsafe.Pointer, recordType uint32, uniqueRecordIdentifier unsafe.Pointer, attributesToBeModified unsafe.Pointer, dataToBeModified unsafe.Pointer, modifyMode uint32) int32 {
+func CSSM_DL_DataModify(dldbHandle CssmDlDbHandle, recordType uint32, uniqueRecordIdentifier unsafe.Pointer, attributesToBeModified unsafe.Pointer, dataToBeModified unsafe.Pointer, modifyMode uint32) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSSM_DL_DataModify == nil {
 		ebipurego.RegisterLibFunc(&_fnCSSM_DL_DataModify, _lib, "CSSM_DL_DataModify")
@@ -1093,10 +1093,10 @@ func CSSM_DL_DataModify(dldbHandle unsafe.Pointer, recordType uint32, uniqueReco
 	return _fnCSSM_DL_DataModify(dldbHandle, recordType, uniqueRecordIdentifier, attributesToBeModified, dataToBeModified, modifyMode)
 }
 
-var _fnCSSM_DL_DbClose func(unsafe.Pointer) int32
+var _fnCSSM_DL_DbClose func(CssmDlDbHandle) int32
 
 // CSSM_DL_DbClose calls the Security framework function CSSM_DL_DbClose.
-func CSSM_DL_DbClose(dldbHandle unsafe.Pointer) int32 {
+func CSSM_DL_DbClose(dldbHandle CssmDlDbHandle) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSSM_DL_DbClose == nil {
 		ebipurego.RegisterLibFunc(&_fnCSSM_DL_DbClose, _lib, "CSSM_DL_DbClose")
@@ -1141,10 +1141,10 @@ func CSSM_DL_DbOpen(dlHandle int, dbName string, dbLocation unsafe.Pointer, acce
 	return _ret, _out0
 }
 
-var _fnCSSM_DL_DestroyRelation func(unsafe.Pointer, uint32) int32
+var _fnCSSM_DL_DestroyRelation func(CssmDlDbHandle, uint32) int32
 
 // CSSM_DL_DestroyRelation calls the Security framework function CSSM_DL_DestroyRelation.
-func CSSM_DL_DestroyRelation(dldbHandle unsafe.Pointer, relationID uint32) int32 {
+func CSSM_DL_DestroyRelation(dldbHandle CssmDlDbHandle, relationID uint32) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSSM_DL_DestroyRelation == nil {
 		ebipurego.RegisterLibFunc(&_fnCSSM_DL_DestroyRelation, _lib, "CSSM_DL_DestroyRelation")
@@ -1163,10 +1163,10 @@ func CSSM_DL_FreeNameList(dlHandle int, nameList unsafe.Pointer) int32 {
 	return _fnCSSM_DL_FreeNameList(dlHandle, nameList)
 }
 
-var _fnCSSM_DL_FreeUniqueRecord func(unsafe.Pointer, unsafe.Pointer) int32
+var _fnCSSM_DL_FreeUniqueRecord func(CssmDlDbHandle, unsafe.Pointer) int32
 
 // CSSM_DL_FreeUniqueRecord calls the Security framework function CSSM_DL_FreeUniqueRecord.
-func CSSM_DL_FreeUniqueRecord(dldbHandle unsafe.Pointer, uniqueRecord unsafe.Pointer) int32 {
+func CSSM_DL_FreeUniqueRecord(dldbHandle CssmDlDbHandle, uniqueRecord unsafe.Pointer) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSSM_DL_FreeUniqueRecord == nil {
 		ebipurego.RegisterLibFunc(&_fnCSSM_DL_FreeUniqueRecord, _lib, "CSSM_DL_FreeUniqueRecord")
@@ -1174,10 +1174,10 @@ func CSSM_DL_FreeUniqueRecord(dldbHandle unsafe.Pointer, uniqueRecord unsafe.Poi
 	return _fnCSSM_DL_FreeUniqueRecord(dldbHandle, uniqueRecord)
 }
 
-var _fnCSSM_DL_GetDbAcl func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+var _fnCSSM_DL_GetDbAcl func(CssmDlDbHandle, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // CSSM_DL_GetDbAcl calls the Security framework function CSSM_DL_GetDbAcl.
-func CSSM_DL_GetDbAcl(dldbHandle unsafe.Pointer, selectionTag unsafe.Pointer, aclInfos unsafe.Pointer) (result int32, numberOfAclInfos uint32) {
+func CSSM_DL_GetDbAcl(dldbHandle CssmDlDbHandle, selectionTag unsafe.Pointer, aclInfos unsafe.Pointer) (result int32, numberOfAclInfos uint32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSSM_DL_GetDbAcl == nil {
 		ebipurego.RegisterLibFunc(&_fnCSSM_DL_GetDbAcl, _lib, "CSSM_DL_GetDbAcl")
@@ -1187,10 +1187,10 @@ func CSSM_DL_GetDbAcl(dldbHandle unsafe.Pointer, selectionTag unsafe.Pointer, ac
 	return _ret, _out0
 }
 
-var _fnCSSM_DL_GetDbNameFromHandle func(unsafe.Pointer, string) int32
+var _fnCSSM_DL_GetDbNameFromHandle func(CssmDlDbHandle, string) int32
 
 // CSSM_DL_GetDbNameFromHandle calls the Security framework function CSSM_DL_GetDbNameFromHandle.
-func CSSM_DL_GetDbNameFromHandle(dldbHandle unsafe.Pointer, dbName string) int32 {
+func CSSM_DL_GetDbNameFromHandle(dldbHandle CssmDlDbHandle, dbName string) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSSM_DL_GetDbNameFromHandle == nil {
 		ebipurego.RegisterLibFunc(&_fnCSSM_DL_GetDbNameFromHandle, _lib, "CSSM_DL_GetDbNameFromHandle")
@@ -1209,10 +1209,10 @@ func CSSM_DL_GetDbNames(dlHandle int, nameList unsafe.Pointer) int32 {
 	return _fnCSSM_DL_GetDbNames(dlHandle, nameList)
 }
 
-var _fnCSSM_DL_GetDbOwner func(unsafe.Pointer, unsafe.Pointer) int32
+var _fnCSSM_DL_GetDbOwner func(CssmDlDbHandle, unsafe.Pointer) int32
 
 // CSSM_DL_GetDbOwner calls the Security framework function CSSM_DL_GetDbOwner.
-func CSSM_DL_GetDbOwner(dldbHandle unsafe.Pointer, owner unsafe.Pointer) int32 {
+func CSSM_DL_GetDbOwner(dldbHandle CssmDlDbHandle, owner unsafe.Pointer) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSSM_DL_GetDbOwner == nil {
 		ebipurego.RegisterLibFunc(&_fnCSSM_DL_GetDbOwner, _lib, "CSSM_DL_GetDbOwner")
@@ -1220,10 +1220,10 @@ func CSSM_DL_GetDbOwner(dldbHandle unsafe.Pointer, owner unsafe.Pointer) int32 {
 	return _fnCSSM_DL_GetDbOwner(dldbHandle, owner)
 }
 
-var _fnCSSM_DL_PassThrough func(unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
+var _fnCSSM_DL_PassThrough func(CssmDlDbHandle, uint32, unsafe.Pointer, unsafe.Pointer) int32
 
 // CSSM_DL_PassThrough calls the Security framework function CSSM_DL_PassThrough.
-func CSSM_DL_PassThrough(dldbHandle unsafe.Pointer, passThroughId uint32, inputParams unsafe.Pointer, outputParams unsafe.Pointer) int32 {
+func CSSM_DL_PassThrough(dldbHandle CssmDlDbHandle, passThroughId uint32, inputParams unsafe.Pointer, outputParams unsafe.Pointer) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSSM_DL_PassThrough == nil {
 		ebipurego.RegisterLibFunc(&_fnCSSM_DL_PassThrough, _lib, "CSSM_DL_PassThrough")
@@ -2432,7 +2432,7 @@ func SSLCreateContext(alloc corefoundation.CFAllocatorRef, protocolSide SSLProto
 		ebipurego.RegisterLibFunc(&_fnSSLCreateContext, _lib, "SSLCreateContext")
 	}
 	_ret := _fnSSLCreateContext(objref.IDOf(alloc.Object), protocolSide, connectionType)
-	return SSLContextRef{obj.Adopt(_ret)}
+	return SSLContextRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSSLGetAllowsAnyRoot func(objc.ID, unsafe.Pointer) int32
@@ -2808,7 +2808,7 @@ func SecACLCopyAuthorizations(acl SecACLRef) corefoundation.CFArrayRef {
 		ebipurego.RegisterLibFunc(&_fnSecACLCopyAuthorizations, _lib, "SecACLCopyAuthorizations")
 	}
 	_ret := _fnSecACLCopyAuthorizations(objref.IDOf(acl.Object))
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSecACLCopyContents func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
@@ -2879,7 +2879,7 @@ func SecAccessCopyMatchingACLList(accessRef SecAccessRef, authorizationTag obj.O
 		ebipurego.RegisterLibFunc(&_fnSecAccessCopyMatchingACLList, _lib, "SecAccessCopyMatchingACLList")
 	}
 	_ret := _fnSecAccessCopyMatchingACLList(objref.IDOf(accessRef.Object), objref.IDOf(authorizationTag))
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSecAccessCopyOwnerAndACL func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
@@ -2952,7 +2952,7 @@ func SecCertificateCopyData(certificate SecCertificateRef) corefoundation.CFData
 		ebipurego.RegisterLibFunc(&_fnSecCertificateCopyData, _lib, "SecCertificateCopyData")
 	}
 	_ret := _fnSecCertificateCopyData(objref.IDOf(certificate.Object))
-	return corefoundation.CFDataRef{obj.Adopt(_ret)}
+	return corefoundation.CFDataRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSecCertificateCopyKey func(objc.ID) objc.ID
@@ -2964,7 +2964,7 @@ func SecCertificateCopyKey(certificate SecCertificateRef) SecKeyRef {
 		ebipurego.RegisterLibFunc(&_fnSecCertificateCopyKey, _lib, "SecCertificateCopyKey")
 	}
 	_ret := _fnSecCertificateCopyKey(objref.IDOf(certificate.Object))
-	return SecKeyRef{obj.Adopt(_ret)}
+	return SecKeyRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSecCertificateCopyNormalizedIssuerSequence func(objc.ID) objc.ID
@@ -2976,7 +2976,7 @@ func SecCertificateCopyNormalizedIssuerSequence(certificate SecCertificateRef) c
 		ebipurego.RegisterLibFunc(&_fnSecCertificateCopyNormalizedIssuerSequence, _lib, "SecCertificateCopyNormalizedIssuerSequence")
 	}
 	_ret := _fnSecCertificateCopyNormalizedIssuerSequence(objref.IDOf(certificate.Object))
-	return corefoundation.CFDataRef{obj.Adopt(_ret)}
+	return corefoundation.CFDataRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSecCertificateCopyNormalizedSubjectSequence func(objc.ID) objc.ID
@@ -2988,7 +2988,7 @@ func SecCertificateCopyNormalizedSubjectSequence(certificate SecCertificateRef) 
 		ebipurego.RegisterLibFunc(&_fnSecCertificateCopyNormalizedSubjectSequence, _lib, "SecCertificateCopyNormalizedSubjectSequence")
 	}
 	_ret := _fnSecCertificateCopyNormalizedSubjectSequence(objref.IDOf(certificate.Object))
-	return corefoundation.CFDataRef{obj.Adopt(_ret)}
+	return corefoundation.CFDataRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSecCertificateCopyNotValidAfterDate func(objc.ID) objc.ID
@@ -3000,7 +3000,7 @@ func SecCertificateCopyNotValidAfterDate(certificate SecCertificateRef) corefoun
 		ebipurego.RegisterLibFunc(&_fnSecCertificateCopyNotValidAfterDate, _lib, "SecCertificateCopyNotValidAfterDate")
 	}
 	_ret := _fnSecCertificateCopyNotValidAfterDate(objref.IDOf(certificate.Object))
-	return corefoundation.CFDateRef{obj.Adopt(_ret)}
+	return corefoundation.CFDateRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSecCertificateCopyNotValidBeforeDate func(objc.ID) objc.ID
@@ -3012,7 +3012,7 @@ func SecCertificateCopyNotValidBeforeDate(certificate SecCertificateRef) corefou
 		ebipurego.RegisterLibFunc(&_fnSecCertificateCopyNotValidBeforeDate, _lib, "SecCertificateCopyNotValidBeforeDate")
 	}
 	_ret := _fnSecCertificateCopyNotValidBeforeDate(objref.IDOf(certificate.Object))
-	return corefoundation.CFDateRef{obj.Adopt(_ret)}
+	return corefoundation.CFDateRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSecCertificateCopyPreferred func(objc.ID, objc.ID) objc.ID
@@ -3024,7 +3024,7 @@ func SecCertificateCopyPreferred(name corefoundation.CFStringRef, keyUsage coref
 		ebipurego.RegisterLibFunc(&_fnSecCertificateCopyPreferred, _lib, "SecCertificateCopyPreferred")
 	}
 	_ret := _fnSecCertificateCopyPreferred(objref.IDOf(name.Object), objref.IDOf(keyUsage.Object))
-	return SecCertificateRef{obj.Adopt(_ret)}
+	return SecCertificateRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSecCertificateCopySubjectSummary func(objc.ID) objc.ID
@@ -3036,7 +3036,7 @@ func SecCertificateCopySubjectSummary(certificate SecCertificateRef) corefoundat
 		ebipurego.RegisterLibFunc(&_fnSecCertificateCopySubjectSummary, _lib, "SecCertificateCopySubjectSummary")
 	}
 	_ret := _fnSecCertificateCopySubjectSummary(objref.IDOf(certificate.Object))
-	return corefoundation.CFStringRef{obj.Adopt(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSecCertificateCreateFromData func(unsafe.Pointer, uint32, uint32, unsafe.Pointer) int32
@@ -3059,7 +3059,7 @@ func SecCertificateCreateWithData(allocator corefoundation.CFAllocatorRef, data 
 		ebipurego.RegisterLibFunc(&_fnSecCertificateCreateWithData, _lib, "SecCertificateCreateWithData")
 	}
 	_ret := _fnSecCertificateCreateWithData(objref.IDOf(allocator.Object), objref.IDOf(data.Object))
-	return SecCertificateRef{obj.Adopt(_ret)}
+	return SecCertificateRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSecCertificateGetAlgorithmID func(objc.ID, unsafe.Pointer) int32
@@ -3163,7 +3163,7 @@ func SecCopyErrorMessageString(status int, reserved unsafe.Pointer) corefoundati
 		ebipurego.RegisterLibFunc(&_fnSecCopyErrorMessageString, _lib, "SecCopyErrorMessageString")
 	}
 	_ret := _fnSecCopyErrorMessageString(status, reserved)
-	return corefoundation.CFStringRef{obj.Adopt(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSecCreateSharedWebCredentialPassword func() objc.ID
@@ -3175,7 +3175,7 @@ func SecCreateSharedWebCredentialPassword() corefoundation.CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnSecCreateSharedWebCredentialPassword, _lib, "SecCreateSharedWebCredentialPassword")
 	}
 	_ret := _fnSecCreateSharedWebCredentialPassword()
-	return corefoundation.CFStringRef{obj.Adopt(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSecDecryptTransformGetTypeID func() int
@@ -3257,7 +3257,7 @@ func SecIdentityCopyPreferred(name corefoundation.CFStringRef, keyUsage corefoun
 		ebipurego.RegisterLibFunc(&_fnSecIdentityCopyPreferred, _lib, "SecIdentityCopyPreferred")
 	}
 	_ret := _fnSecIdentityCopyPreferred(objref.IDOf(name.Object), objref.IDOf(keyUsage.Object), objref.IDOf(validIssuers.Object))
-	return SecIdentityRef{obj.Adopt(_ret)}
+	return SecIdentityRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSecIdentityCreate func(objc.ID, objc.ID, objc.ID) objc.ID
@@ -3269,7 +3269,7 @@ func SecIdentityCreate(allocator corefoundation.CFAllocatorRef, certificate SecC
 		ebipurego.RegisterLibFunc(&_fnSecIdentityCreate, _lib, "SecIdentityCreate")
 	}
 	_ret := _fnSecIdentityCreate(objref.IDOf(allocator.Object), objref.IDOf(certificate.Object), objref.IDOf(privateKey.Object))
-	return SecIdentityRef{obj.Adopt(_ret)}
+	return SecIdentityRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSecIdentityGetTypeID func() int
@@ -3328,7 +3328,7 @@ func SecKeyCopyAttributes(key SecKeyRef) corefoundation.CFDictionaryRef {
 		ebipurego.RegisterLibFunc(&_fnSecKeyCopyAttributes, _lib, "SecKeyCopyAttributes")
 	}
 	_ret := _fnSecKeyCopyAttributes(objref.IDOf(key.Object))
-	return corefoundation.CFDictionaryRef{obj.Adopt(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSecKeyCopyPublicKey func(objc.ID) objc.ID
@@ -3340,7 +3340,7 @@ func SecKeyCopyPublicKey(key SecKeyRef) SecKeyRef {
 		ebipurego.RegisterLibFunc(&_fnSecKeyCopyPublicKey, _lib, "SecKeyCopyPublicKey")
 	}
 	_ret := _fnSecKeyCopyPublicKey(objref.IDOf(key.Object))
-	return SecKeyRef{obj.Adopt(_ret)}
+	return SecKeyRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSecKeyGeneratePairAsync func(objc.ID, objc.ID, objc.Block)
@@ -3720,7 +3720,7 @@ func SecPolicyCopyProperties(policyRef SecPolicyRef) corefoundation.CFDictionary
 		ebipurego.RegisterLibFunc(&_fnSecPolicyCopyProperties, _lib, "SecPolicyCopyProperties")
 	}
 	_ret := _fnSecPolicyCopyProperties(objref.IDOf(policyRef.Object))
-	return corefoundation.CFDictionaryRef{obj.Adopt(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSecPolicyCreateBasicX509 func() objc.ID
@@ -3732,7 +3732,7 @@ func SecPolicyCreateBasicX509() SecPolicyRef {
 		ebipurego.RegisterLibFunc(&_fnSecPolicyCreateBasicX509, _lib, "SecPolicyCreateBasicX509")
 	}
 	_ret := _fnSecPolicyCreateBasicX509()
-	return SecPolicyRef{obj.Adopt(_ret)}
+	return SecPolicyRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSecPolicyCreateRevocation func(int) objc.ID
@@ -3744,7 +3744,7 @@ func SecPolicyCreateRevocation(revocationFlags int) SecPolicyRef {
 		ebipurego.RegisterLibFunc(&_fnSecPolicyCreateRevocation, _lib, "SecPolicyCreateRevocation")
 	}
 	_ret := _fnSecPolicyCreateRevocation(revocationFlags)
-	return SecPolicyRef{obj.Adopt(_ret)}
+	return SecPolicyRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSecPolicyCreateSSL func(uint8, objc.ID) objc.ID
@@ -3756,7 +3756,7 @@ func SecPolicyCreateSSL(server uint8, hostname corefoundation.CFStringRef) SecPo
 		ebipurego.RegisterLibFunc(&_fnSecPolicyCreateSSL, _lib, "SecPolicyCreateSSL")
 	}
 	_ret := _fnSecPolicyCreateSSL(server, objref.IDOf(hostname.Object))
-	return SecPolicyRef{obj.Adopt(_ret)}
+	return SecPolicyRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSecPolicyCreateWithOID func(objc.ID) objc.ID
@@ -3768,7 +3768,7 @@ func SecPolicyCreateWithOID(policyOID obj.Object) SecPolicyRef {
 		ebipurego.RegisterLibFunc(&_fnSecPolicyCreateWithOID, _lib, "SecPolicyCreateWithOID")
 	}
 	_ret := _fnSecPolicyCreateWithOID(objref.IDOf(policyOID))
-	return SecPolicyRef{obj.Adopt(_ret)}
+	return SecPolicyRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSecPolicyCreateWithProperties func(objc.ID, objc.ID) objc.ID
@@ -3780,7 +3780,7 @@ func SecPolicyCreateWithProperties(policyIdentifier obj.Object, properties coref
 		ebipurego.RegisterLibFunc(&_fnSecPolicyCreateWithProperties, _lib, "SecPolicyCreateWithProperties")
 	}
 	_ret := _fnSecPolicyCreateWithProperties(objref.IDOf(policyIdentifier), objref.IDOf(properties.Object))
-	return SecPolicyRef{obj.Adopt(_ret)}
+	return SecPolicyRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSecPolicyGetOID func(objc.ID, unsafe.Pointer) int32
@@ -3915,19 +3915,19 @@ func SecTaskCreateFromSelf(allocator corefoundation.CFAllocatorRef) SecTaskRef {
 		ebipurego.RegisterLibFunc(&_fnSecTaskCreateFromSelf, _lib, "SecTaskCreateFromSelf")
 	}
 	_ret := _fnSecTaskCreateFromSelf(objref.IDOf(allocator.Object))
-	return SecTaskRef{obj.Adopt(_ret)}
+	return SecTaskRef{Object: obj.Adopt(_ret)}
 }
 
-var _fnSecTaskCreateWithAuditToken func(objc.ID, unsafe.Pointer) objc.ID
+var _fnSecTaskCreateWithAuditToken func(objc.ID, AuditTokenT) objc.ID
 
 // SecTaskCreateWithAuditToken calls the Security framework function SecTaskCreateWithAuditToken.
-func SecTaskCreateWithAuditToken(allocator corefoundation.CFAllocatorRef, token unsafe.Pointer) SecTaskRef {
+func SecTaskCreateWithAuditToken(allocator corefoundation.CFAllocatorRef, token AuditTokenT) SecTaskRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTaskCreateWithAuditToken == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTaskCreateWithAuditToken, _lib, "SecTaskCreateWithAuditToken")
 	}
 	_ret := _fnSecTaskCreateWithAuditToken(objref.IDOf(allocator.Object), token)
-	return SecTaskRef{obj.Adopt(_ret)}
+	return SecTaskRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSecTaskGetTypeID func() int
@@ -3962,7 +3962,7 @@ func SecTransformCopyExternalRepresentation(transformRef unsafe.Pointer) corefou
 		ebipurego.RegisterLibFunc(&_fnSecTransformCopyExternalRepresentation, _lib, "SecTransformCopyExternalRepresentation")
 	}
 	_ret := _fnSecTransformCopyExternalRepresentation(transformRef)
-	return corefoundation.CFDictionaryRef{obj.Adopt(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSecTransformCreateGroupTransform func() unsafe.Pointer
@@ -4089,7 +4089,7 @@ func SecTransformSetAttributeAction(ref SecTransformImplementationRef, action co
 		ebipurego.RegisterLibFunc(&_fnSecTransformSetAttributeAction, _lib, "SecTransformSetAttributeAction")
 	}
 	_ret := _fnSecTransformSetAttributeAction(objref.IDOf(ref.Object), objref.IDOf(action.Object), attribute, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 unsafe.Pointer) int { return newAction(_b0, _b1) }))
-	return corefoundation.CFErrorRef{obj.Wrap(_ret)}
+	return corefoundation.CFErrorRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSecTransformSetDataAction func(objc.ID, objc.ID, objc.Block) objc.ID
@@ -4101,7 +4101,7 @@ func SecTransformSetDataAction(ref SecTransformImplementationRef, action corefou
 		ebipurego.RegisterLibFunc(&_fnSecTransformSetDataAction, _lib, "SecTransformSetDataAction")
 	}
 	_ret := _fnSecTransformSetDataAction(objref.IDOf(ref.Object), objref.IDOf(action.Object), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) int { return newAction(_b0) }))
-	return corefoundation.CFErrorRef{obj.Wrap(_ret)}
+	return corefoundation.CFErrorRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSecTransformSetTransformAction func(objc.ID, objc.ID, objc.Block) objc.ID
@@ -4113,7 +4113,7 @@ func SecTransformSetTransformAction(ref SecTransformImplementationRef, action co
 		ebipurego.RegisterLibFunc(&_fnSecTransformSetTransformAction, _lib, "SecTransformSetTransformAction")
 	}
 	_ret := _fnSecTransformSetTransformAction(objref.IDOf(ref.Object), objref.IDOf(action.Object), objc.NewBlock(func(_ objc.Block) int { return newAction() }))
-	return corefoundation.CFErrorRef{obj.Wrap(_ret)}
+	return corefoundation.CFErrorRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSecTrustCopyCertificateChain func(objc.ID) objc.ID
@@ -4125,7 +4125,7 @@ func SecTrustCopyCertificateChain(trust SecTrustRef) corefoundation.CFArrayRef {
 		ebipurego.RegisterLibFunc(&_fnSecTrustCopyCertificateChain, _lib, "SecTrustCopyCertificateChain")
 	}
 	_ret := _fnSecTrustCopyCertificateChain(objref.IDOf(trust.Object))
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSecTrustCopyExceptions func(objc.ID) objc.ID
@@ -4137,7 +4137,7 @@ func SecTrustCopyExceptions(trust SecTrustRef) corefoundation.CFDataRef {
 		ebipurego.RegisterLibFunc(&_fnSecTrustCopyExceptions, _lib, "SecTrustCopyExceptions")
 	}
 	_ret := _fnSecTrustCopyExceptions(objref.IDOf(trust.Object))
-	return corefoundation.CFDataRef{obj.Adopt(_ret)}
+	return corefoundation.CFDataRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSecTrustCopyKey func(objc.ID) objc.ID
@@ -4149,7 +4149,7 @@ func SecTrustCopyKey(trust SecTrustRef) SecKeyRef {
 		ebipurego.RegisterLibFunc(&_fnSecTrustCopyKey, _lib, "SecTrustCopyKey")
 	}
 	_ret := _fnSecTrustCopyKey(objref.IDOf(trust.Object))
-	return SecKeyRef{obj.Adopt(_ret)}
+	return SecKeyRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSecTrustCopyProperties func(objc.ID) objc.ID
@@ -4161,7 +4161,7 @@ func SecTrustCopyProperties(trust SecTrustRef) corefoundation.CFArrayRef {
 		ebipurego.RegisterLibFunc(&_fnSecTrustCopyProperties, _lib, "SecTrustCopyProperties")
 	}
 	_ret := _fnSecTrustCopyProperties(objref.IDOf(trust.Object))
-	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSecTrustCopyPublicKey func(objc.ID) objc.ID
@@ -4173,7 +4173,7 @@ func SecTrustCopyPublicKey(trust SecTrustRef) SecKeyRef {
 		ebipurego.RegisterLibFunc(&_fnSecTrustCopyPublicKey, _lib, "SecTrustCopyPublicKey")
 	}
 	_ret := _fnSecTrustCopyPublicKey(objref.IDOf(trust.Object))
-	return SecKeyRef{obj.Adopt(_ret)}
+	return SecKeyRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSecTrustCopyResult func(objc.ID) objc.ID
@@ -4185,7 +4185,7 @@ func SecTrustCopyResult(trust SecTrustRef) corefoundation.CFDictionaryRef {
 		ebipurego.RegisterLibFunc(&_fnSecTrustCopyResult, _lib, "SecTrustCopyResult")
 	}
 	_ret := _fnSecTrustCopyResult(objref.IDOf(trust.Object))
-	return corefoundation.CFDictionaryRef{obj.Adopt(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnSecTrustEvaluate func(objc.ID, unsafe.Pointer) int32
@@ -4221,7 +4221,7 @@ func SecTrustGetCertificateAtIndex(trust SecTrustRef, ix int) SecCertificateRef 
 		ebipurego.RegisterLibFunc(&_fnSecTrustGetCertificateAtIndex, _lib, "SecTrustGetCertificateAtIndex")
 	}
 	_ret := _fnSecTrustGetCertificateAtIndex(objref.IDOf(trust.Object), ix)
-	return SecCertificateRef{obj.Wrap(_ret)}
+	return SecCertificateRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSecTrustGetCertificateCount func(objc.ID) int
@@ -4413,7 +4413,7 @@ func SecCertificateCopyRef(certificate unsafe.Pointer) SecCertificateRef {
 		ebipurego.RegisterLibFunc(&_fnSecCertificateCopyRef, _lib, "sec_certificate_copy_ref")
 	}
 	_ret := _fnSecCertificateCopyRef(certificate)
-	return SecCertificateRef{obj.Wrap(_ret)}
+	return SecCertificateRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSecCertificateCreate func(objc.ID) unsafe.Pointer
@@ -4447,7 +4447,7 @@ func SecIdentityCopyCertificatesRef(identity unsafe.Pointer) corefoundation.CFAr
 		ebipurego.RegisterLibFunc(&_fnSecIdentityCopyCertificatesRef, _lib, "sec_identity_copy_certificates_ref")
 	}
 	_ret := _fnSecIdentityCopyCertificatesRef(identity)
-	return corefoundation.CFArrayRef{obj.Wrap(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSecIdentityCopyRef func(unsafe.Pointer) objc.ID
@@ -4459,7 +4459,7 @@ func SecIdentityCopyRef(identity unsafe.Pointer) SecIdentityRef {
 		ebipurego.RegisterLibFunc(&_fnSecIdentityCopyRef, _lib, "sec_identity_copy_ref")
 	}
 	_ret := _fnSecIdentityCopyRef(identity)
-	return SecIdentityRef{obj.Wrap(_ret)}
+	return SecIdentityRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSecIdentityCreateWithCertificates func(objc.ID, objc.ID) unsafe.Pointer
@@ -5054,7 +5054,7 @@ func SecTrustCopyRef(trust unsafe.Pointer) SecTrustRef {
 		ebipurego.RegisterLibFunc(&_fnSecTrustCopyRef, _lib, "sec_trust_copy_ref")
 	}
 	_ret := _fnSecTrustCopyRef(trust)
-	return SecTrustRef{obj.Wrap(_ret)}
+	return SecTrustRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnSecTrustCreate func(objc.ID) unsafe.Pointer

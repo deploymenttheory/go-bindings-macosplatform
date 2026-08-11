@@ -99,6 +99,12 @@ func (masgd *MTL4AccelerationStructureGeometryDescriptor) WithLabel(label string
 	return masgd
 }
 
+// WithPrimitiveDataBuffer sets assigns optional buffer containing data to associate with each primitive in this geometry.
+func (masgd *MTL4AccelerationStructureGeometryDescriptor) WithPrimitiveDataBuffer(primitiveDataBuffer MTL4BufferRange) *MTL4AccelerationStructureGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(masgd), objc.RegisterName("setPrimitiveDataBuffer:"), primitiveDataBuffer)
+	return masgd
+}
+
 // WithPrimitiveDataStride sets defines the stride, in bytes, between each primitive’s data in the primitive data buffer primitiveDataBuffer references.
 func (masgd *MTL4AccelerationStructureGeometryDescriptor) WithPrimitiveDataStride(primitiveDataStride int) *MTL4AccelerationStructureGeometryDescriptor {
 	objc.Send[objc.ID](objref.IDOf(masgd), objc.RegisterName("setPrimitiveDataStride:"), primitiveDataStride)
@@ -140,6 +146,13 @@ func (masgd *MTL4AccelerationStructureGeometryDescriptor) Label() string {
 		return ""
 	}
 	return purego.GoString(_r)
+}
+
+// PrimitiveDataBuffer returns assigns optional buffer containing data to associate with each primitive in this geometry. You can use zero as the buffer address in this buffer range.
+func (masgd *MTL4AccelerationStructureGeometryDescriptor) PrimitiveDataBuffer() MTL4BufferRange {
+	defer runtime.KeepAlive(masgd)
+	_r := objc.Send[MTL4BufferRange](objref.IDOf(masgd), objc.RegisterName("primitiveDataBuffer"))
+	return _r
 }
 
 // PrimitiveDataStride defines the stride, in bytes, between each primitive's data in the primitive data buffer “primitiveDataBuffer“ references. You are responsible for ensuring the stride is at least “primitiveDataElementSize“ in size and a multiple of 4 bytes. This property defaults to `0` bytes,  which indicates the stride is equal to “primitiveDataElementSize“.

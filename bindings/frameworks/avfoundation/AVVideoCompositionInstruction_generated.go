@@ -80,7 +80,7 @@ func (vci *VideoCompositionInstruction) String() string {
 func (vci *VideoCompositionInstruction) BackgroundColor() coregraphics.CGColorRef {
 	defer runtime.KeepAlive(vci)
 	_r := objc.Send[objc.ID](objref.IDOf(vci), objc.RegisterName("backgroundColor"))
-	return coregraphics.CGColorRef{obj.Wrap(_r)}
+	return coregraphics.CGColorRef{Object: obj.Wrap(_r)}
 }
 
 // LayerInstructions provides an array of instances of AVVideoCompositionLayerInstruction that specify how video frames from source tracks should be layered and composed. Tracks are layered in the composition according to the top-to-bottom order of the layerInstructions array; the track with trackID of the first instruction in the array will be layered on top, with the track with the trackID of the second instruction immediately underneath, etc. If this key is nil, the output will be a fill of the background color.

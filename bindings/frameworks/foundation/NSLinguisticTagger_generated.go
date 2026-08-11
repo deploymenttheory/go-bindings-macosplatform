@@ -93,11 +93,38 @@ func (lt *LinguisticTagger) WithScriptingProperties(scriptingProperties map[stri
 	return lt
 }
 
+// SetOrthographyRange sets the orthography for the specified range.
+func (lt *LinguisticTagger) SetOrthographyRange(orthography *Orthography, range_ NSRange) {
+	defer runtime.KeepAlive(lt)
+	defer runtime.KeepAlive(orthography)
+	objc.Send[objc.ID](objref.IDOf(lt), objc.RegisterName("setOrthography:range:"), objref.IDOf(orthography), range_)
+}
+
 // OrthographyAtIndexEffectiveRange returns the orthography at the index and also returns the effective range.
 func (lt *LinguisticTagger) OrthographyAtIndexEffectiveRange(charIndex int, effectiveRange *NSRange) *Orthography {
 	defer runtime.KeepAlive(lt)
 	_r := objc.Send[objc.ID](objref.IDOf(lt), objc.RegisterName("orthographyAtIndex:effectiveRange:"), charIndex, unsafe.Pointer(effectiveRange))
 	return OrthographyFromID(_r)
+}
+
+// StringEditedInRangeChangeInLength notifies the linguistic tagger that the string (if mutable) has changed as specified by the parameters.
+func (lt *LinguisticTagger) StringEditedInRangeChangeInLength(newRange NSRange, delta int) {
+	defer runtime.KeepAlive(lt)
+	objc.Send[objc.ID](objref.IDOf(lt), objc.RegisterName("stringEditedInRange:changeInLength:"), newRange, delta)
+}
+
+// TokenRangeAtIndexUnit returns the range of the linguistic unit containing the specified character index.
+func (lt *LinguisticTagger) TokenRangeAtIndexUnit(charIndex int, unit LinguisticTaggerUnit) NSRange {
+	defer runtime.KeepAlive(lt)
+	_r := objc.Send[NSRange](objref.IDOf(lt), objc.RegisterName("tokenRangeAtIndex:unit:"), charIndex, unit)
+	return _r
+}
+
+// SentenceRangeForRange returns the range of a sentence containing the specified range.
+func (lt *LinguisticTagger) SentenceRangeForRange(range_ NSRange) NSRange {
+	defer runtime.KeepAlive(lt)
+	_r := objc.Send[NSRange](objref.IDOf(lt), objc.RegisterName("sentenceRangeForRange:"), range_)
+	return _r
 }
 
 // TagAtIndexUnitSchemeTokenRange returns a tag for a single scheme, for a given linguistic unit, at the specified character position.
@@ -108,12 +135,27 @@ func (lt *LinguisticTagger) TagAtIndexUnitSchemeTokenRange(charIndex int, unit L
 	return StringFromID(_r)
 }
 
+// TagsInRangeUnitSchemeOptionsTokenRanges returns an array of linguistic tags and token ranges for a given string range and linguistic unit.
+func (lt *LinguisticTagger) TagsInRangeUnitSchemeOptionsTokenRanges(range_ NSRange, unit LinguisticTaggerUnit, scheme *String, options LinguisticTaggerOptions, tokenRanges []*Value) []*String {
+	defer runtime.KeepAlive(lt)
+	defer runtime.KeepAlive(scheme)
+	_r := objc.Send[objc.ID](objref.IDOf(lt), objc.RegisterName("tagsInRange:unit:scheme:options:tokenRanges:"), range_, unit, objref.IDOf(scheme), options, purego.SliceToNSArray(tokenRanges, func(_v *Value) objc.ID { return objref.IDOf(_v) }))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *String { return StringFromID(_id) })
+}
+
 // TagAtIndexSchemeTokenRangeSentenceRange returns a tag for a single scheme at the specified character position.
 func (lt *LinguisticTagger) TagAtIndexSchemeTokenRangeSentenceRange(charIndex int, scheme *String, tokenRange *NSRange, sentenceRange *NSRange) *String {
 	defer runtime.KeepAlive(lt)
 	defer runtime.KeepAlive(scheme)
 	_r := objc.Send[objc.ID](objref.IDOf(lt), objc.RegisterName("tagAtIndex:scheme:tokenRange:sentenceRange:"), charIndex, objref.IDOf(scheme), unsafe.Pointer(tokenRange), unsafe.Pointer(sentenceRange))
 	return StringFromID(_r)
+}
+
+// TagsInRangeSchemeOptionsTokenRanges returns an array of linguistic tags and token ranges for a given string range.
+func (lt *LinguisticTagger) TagsInRangeSchemeOptionsTokenRanges(range_ NSRange, tagScheme string, opts LinguisticTaggerOptions, tokenRanges []*Value) []string {
+	defer runtime.KeepAlive(lt)
+	_r := objc.Send[objc.ID](objref.IDOf(lt), objc.RegisterName("tagsInRange:scheme:options:tokenRanges:"), range_, purego.NSString(tagScheme), opts, purego.SliceToNSArray(tokenRanges, func(_v *Value) objc.ID { return objref.IDOf(_v) }))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // PossibleTagsAtIndexSchemeTokenRangeSentenceRangeScores returns an array of possible tags for the given scheme at the specified range, supplying matching scores.

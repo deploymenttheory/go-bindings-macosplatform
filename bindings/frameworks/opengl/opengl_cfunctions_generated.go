@@ -222,7 +222,7 @@ func CGLGetCurrentContext() CGLContextObj {
 		ebipurego.RegisterLibFunc(&_fnCGLGetCurrentContext, _lib, "CGLGetCurrentContext")
 	}
 	_ret := _fnCGLGetCurrentContext()
-	return CGLContextObj{obj.WrapUnmanaged(_ret)}
+	return CGLContextObj{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnCGLGetDeviceFromGLRenderer func(int32) objc.ID
@@ -326,7 +326,7 @@ func CGLGetPixelFormat(ctx CGLContextObj) CGLPixelFormatObj {
 		ebipurego.RegisterLibFunc(&_fnCGLGetPixelFormat, _lib, "CGLGetPixelFormat")
 	}
 	_ret := _fnCGLGetPixelFormat(objref.IDOf(ctx.Object))
-	return CGLPixelFormatObj{obj.WrapUnmanaged(_ret)}
+	return CGLPixelFormatObj{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnCGLGetPixelFormatRetainCount func(objc.ID) uint32
@@ -349,7 +349,7 @@ func CGLGetShareGroup(ctx CGLContextObj) CGLShareGroupObj {
 		ebipurego.RegisterLibFunc(&_fnCGLGetShareGroup, _lib, "CGLGetShareGroup")
 	}
 	_ret := _fnCGLGetShareGroup(objref.IDOf(ctx.Object))
-	return CGLShareGroupObj{obj.WrapUnmanaged(_ret)}
+	return CGLShareGroupObj{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnCGLGetVersion func(unsafe.Pointer, unsafe.Pointer)
@@ -458,7 +458,7 @@ func CGLRetainContext(ctx CGLContextObj) CGLContextObj {
 		ebipurego.RegisterLibFunc(&_fnCGLRetainContext, _lib, "CGLRetainContext")
 	}
 	_ret := _fnCGLRetainContext(objref.IDOf(ctx.Object))
-	return CGLContextObj{obj.WrapUnmanaged(_ret)}
+	return CGLContextObj{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnCGLRetainPBuffer func(objc.ID) objc.ID
@@ -470,7 +470,7 @@ func CGLRetainPBuffer(pbuffer CGLPBufferObj) CGLPBufferObj {
 		ebipurego.RegisterLibFunc(&_fnCGLRetainPBuffer, _lib, "CGLRetainPBuffer")
 	}
 	_ret := _fnCGLRetainPBuffer(objref.IDOf(pbuffer.Object))
-	return CGLPBufferObj{obj.WrapUnmanaged(_ret)}
+	return CGLPBufferObj{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnCGLRetainPixelFormat func(objc.ID) objc.ID
@@ -482,7 +482,7 @@ func CGLRetainPixelFormat(pix CGLPixelFormatObj) CGLPixelFormatObj {
 		ebipurego.RegisterLibFunc(&_fnCGLRetainPixelFormat, _lib, "CGLRetainPixelFormat")
 	}
 	_ret := _fnCGLRetainPixelFormat(objref.IDOf(pix.Object))
-	return CGLPixelFormatObj{obj.WrapUnmanaged(_ret)}
+	return CGLPixelFormatObj{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnCGLSetCurrentContext func(objc.ID) unsafe.Pointer

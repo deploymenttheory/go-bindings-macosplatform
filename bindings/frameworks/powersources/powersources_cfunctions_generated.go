@@ -23,7 +23,7 @@ func IOPSCopyExternalPowerAdapterDetails() corefoundation.CFDictionaryRef {
 		ebipurego.RegisterLibFunc(&_fnIOPSCopyExternalPowerAdapterDetails, _lib, "IOPSCopyExternalPowerAdapterDetails")
 	}
 	_ret := _fnIOPSCopyExternalPowerAdapterDetails()
-	return corefoundation.CFDictionaryRef{obj.Wrap(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnIOPSCopyPowerSourcesInfo func() objc.ID
@@ -47,7 +47,7 @@ func IOPSCopyPowerSourcesList(blob obj.Object) corefoundation.CFArrayRef {
 		ebipurego.RegisterLibFunc(&_fnIOPSCopyPowerSourcesList, _lib, "IOPSCopyPowerSourcesList")
 	}
 	_ret := _fnIOPSCopyPowerSourcesList(objref.IDOf(blob))
-	return corefoundation.CFArrayRef{obj.Wrap(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnIOPSCreateLimitedPowerNotification func(unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -59,7 +59,7 @@ func IOPSCreateLimitedPowerNotification(callback unsafe.Pointer, context_ unsafe
 		ebipurego.RegisterLibFunc(&_fnIOPSCreateLimitedPowerNotification, _lib, "IOPSCreateLimitedPowerNotification")
 	}
 	_ret := _fnIOPSCreateLimitedPowerNotification(callback, context_)
-	return corefoundation.CFRunLoopSourceRef{obj.Wrap(_ret)}
+	return corefoundation.CFRunLoopSourceRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnIOPSGetBatteryWarningLevel func() IOPSLowBatteryWarningLevel
@@ -82,7 +82,7 @@ func IOPSGetPowerSourceDescription(blob obj.Object, ps obj.Object) corefoundatio
 		ebipurego.RegisterLibFunc(&_fnIOPSGetPowerSourceDescription, _lib, "IOPSGetPowerSourceDescription")
 	}
 	_ret := _fnIOPSGetPowerSourceDescription(objref.IDOf(blob), objref.IDOf(ps))
-	return corefoundation.CFDictionaryRef{obj.Wrap(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnIOPSGetProvidingPowerSourceType func(objc.ID) objc.ID
@@ -94,7 +94,7 @@ func IOPSGetProvidingPowerSourceType(snapshot obj.Object) corefoundation.CFStrin
 		ebipurego.RegisterLibFunc(&_fnIOPSGetProvidingPowerSourceType, _lib, "IOPSGetProvidingPowerSourceType")
 	}
 	_ret := _fnIOPSGetProvidingPowerSourceType(objref.IDOf(snapshot))
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnIOPSGetTimeRemainingEstimate func() float64
@@ -117,5 +117,5 @@ func IOPSNotificationCreateRunLoopSource(callback unsafe.Pointer, context_ unsaf
 		ebipurego.RegisterLibFunc(&_fnIOPSNotificationCreateRunLoopSource, _lib, "IOPSNotificationCreateRunLoopSource")
 	}
 	_ret := _fnIOPSNotificationCreateRunLoopSource(callback, context_)
-	return corefoundation.CFRunLoopSourceRef{obj.Wrap(_ret)}
+	return corefoundation.CFRunLoopSourceRef{Object: obj.Wrap(_ret)}
 }

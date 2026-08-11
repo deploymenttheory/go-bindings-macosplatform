@@ -117,6 +117,12 @@ func (l *Layer) WithAnchorPointZ(anchorPointZ float64) *Layer {
 	return l
 }
 
+// WithTransform sets the transform applied to the layer’s contents. Animatable.
+func (l *Layer) WithTransform(transform CATransform3D) *Layer {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setTransform:"), transform)
+	return l
+}
+
 // WithFrame sets the layer’s frame rectangle.
 func (l *Layer) WithFrame(frame corefoundation.CGRect) *Layer {
 	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setFrame:"), frame)
@@ -145,6 +151,12 @@ func (l *Layer) WithGeometryFlipped(geometryFlipped bool) *Layer {
 func (l *Layer) WithSublayers(items ...LayerProvider) *Layer {
 	_arr := purego.SliceToNSArray(items, func(_v LayerProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setSublayers:"), _arr)
+	return l
+}
+
+// WithSublayerTransform sets specifies the transform to apply to sublayers when rendering. Animatable.
+func (l *Layer) WithSublayerTransform(sublayerTransform CATransform3D) *Layer {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setSublayerTransform:"), sublayerTransform)
 	return l
 }
 
@@ -726,6 +738,13 @@ func (l *Layer) AnchorPointZ() float64 {
 	return _r
 }
 
+// Transform returns the transform.
+func (l *Layer) Transform() CATransform3D {
+	defer runtime.KeepAlive(l)
+	_r := objc.Send[CATransform3D](objref.IDOf(l), objc.RegisterName("transform"))
+	return _r
+}
+
 // Frame returns the frame.
 func (l *Layer) Frame() corefoundation.CGRect {
 	defer runtime.KeepAlive(l)
@@ -768,6 +787,13 @@ func (l *Layer) Sublayers() []*Layer {
 	defer runtime.KeepAlive(l)
 	_arr := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("sublayers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Layer { return LayerFromID(_id) })
+}
+
+// SublayerTransform returns the sublayer transform.
+func (l *Layer) SublayerTransform() CATransform3D {
+	defer runtime.KeepAlive(l)
+	_r := objc.Send[CATransform3D](objref.IDOf(l), objc.RegisterName("sublayerTransform"))
+	return _r
 }
 
 // Mask returns the mask.
@@ -914,7 +940,7 @@ func (l *Layer) AllowsEdgeAntialiasing() bool {
 func (l *Layer) BackgroundColor() coregraphics.CGColorRef {
 	defer runtime.KeepAlive(l)
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("backgroundColor"))
-	return coregraphics.CGColorRef{obj.Wrap(_r)}
+	return coregraphics.CGColorRef{Object: obj.Wrap(_r)}
 }
 
 // CornerRadius returns the corner radius.
@@ -949,7 +975,7 @@ func (l *Layer) BorderWidth() float64 {
 func (l *Layer) BorderColor() coregraphics.CGColorRef {
 	defer runtime.KeepAlive(l)
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("borderColor"))
-	return coregraphics.CGColorRef{obj.Wrap(_r)}
+	return coregraphics.CGColorRef{Object: obj.Wrap(_r)}
 }
 
 // Opacity returns the opacity.
@@ -1019,7 +1045,7 @@ func (l *Layer) RasterizationScale() float64 {
 func (l *Layer) ShadowColor() coregraphics.CGColorRef {
 	defer runtime.KeepAlive(l)
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("shadowColor"))
-	return coregraphics.CGColorRef{obj.Wrap(_r)}
+	return coregraphics.CGColorRef{Object: obj.Wrap(_r)}
 }
 
 // ShadowOpacity returns the shadow opacity.
@@ -1047,7 +1073,7 @@ func (l *Layer) ShadowRadius() float64 {
 func (l *Layer) ShadowPath() coregraphics.CGPathRef {
 	defer runtime.KeepAlive(l)
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("shadowPath"))
-	return coregraphics.CGPathRef{obj.Wrap(_r)}
+	return coregraphics.CGPathRef{Object: obj.Wrap(_r)}
 }
 
 // AutoresizingMask returns the autoresizing mask.

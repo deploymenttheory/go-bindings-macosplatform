@@ -79,6 +79,12 @@ func NewRasterizationRateMapDescriptor() *RasterizationRateMapDescriptor {
 	return rasterizationRateMapDescriptorAdopt(_id)
 }
 
+// WithScreenSize sets the size of the viewport coordinate system, in logical pixels.
+func (rrmd *RasterizationRateMapDescriptor) WithScreenSize(screenSize MTLSize) *RasterizationRateMapDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rrmd), objc.RegisterName("setScreenSize:"), screenSize)
+	return rrmd
+}
+
 // WithLabel sets a string used to identify the rate map you create with the descriptor.
 func (rrmd *RasterizationRateMapDescriptor) WithLabel(label string) *RasterizationRateMapDescriptor {
 	objc.Send[objc.ID](objref.IDOf(rrmd), objc.RegisterName("setLabel:"), purego.NSString(label))
@@ -104,6 +110,13 @@ func (rrmd *RasterizationRateMapDescriptor) Layers() *RasterizationRateLayerArra
 	defer runtime.KeepAlive(rrmd)
 	_r := objc.Send[objc.ID](objref.IDOf(rrmd), objc.RegisterName("layers"))
 	return RasterizationRateLayerArrayFromID(_r)
+}
+
+// ScreenSize returns the region always has its origin at [0, 0]. The depth component of MTLSize is ignored.
+func (rrmd *RasterizationRateMapDescriptor) ScreenSize() MTLSize {
+	defer runtime.KeepAlive(rrmd)
+	_r := objc.Send[MTLSize](objref.IDOf(rrmd), objc.RegisterName("screenSize"))
+	return _r
 }
 
 // Label returns a string to help identify this object. The default value is nil.

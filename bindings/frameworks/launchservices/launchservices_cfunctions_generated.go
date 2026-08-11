@@ -188,7 +188,7 @@ func LSCopyAllHandlersForURLScheme(inURLScheme corefoundation.CFStringRef) coref
 		ebipurego.RegisterLibFunc(&_fnLSCopyAllHandlersForURLScheme, _lib, "LSCopyAllHandlersForURLScheme")
 	}
 	_ret := _fnLSCopyAllHandlersForURLScheme(objref.IDOf(inURLScheme.Object))
-	return corefoundation.CFArrayRef{obj.Wrap(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnLSCopyAllRoleHandlersForContentType func(objc.ID, LSRolesMask) objc.ID
@@ -200,7 +200,7 @@ func LSCopyAllRoleHandlersForContentType(inContentType corefoundation.CFStringRe
 		ebipurego.RegisterLibFunc(&_fnLSCopyAllRoleHandlersForContentType, _lib, "LSCopyAllRoleHandlersForContentType")
 	}
 	_ret := _fnLSCopyAllRoleHandlersForContentType(objref.IDOf(inContentType.Object), inRole)
-	return corefoundation.CFArrayRef{obj.Wrap(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnLSCopyApplicationURLsForURL func(objc.ID, LSRolesMask) objc.ID
@@ -212,7 +212,7 @@ func LSCopyApplicationURLsForURL(inURL corefoundation.CFURLRef, inRoleMask LSRol
 		ebipurego.RegisterLibFunc(&_fnLSCopyApplicationURLsForURL, _lib, "LSCopyApplicationURLsForURL")
 	}
 	_ret := _fnLSCopyApplicationURLsForURL(objref.IDOf(inURL.Object), inRoleMask)
-	return corefoundation.CFArrayRef{obj.Wrap(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnLSCopyDefaultHandlerForURLScheme func(objc.ID) objc.ID
@@ -224,7 +224,7 @@ func LSCopyDefaultHandlerForURLScheme(inURLScheme corefoundation.CFStringRef) co
 		ebipurego.RegisterLibFunc(&_fnLSCopyDefaultHandlerForURLScheme, _lib, "LSCopyDefaultHandlerForURLScheme")
 	}
 	_ret := _fnLSCopyDefaultHandlerForURLScheme(objref.IDOf(inURLScheme.Object))
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnLSCopyDefaultRoleHandlerForContentType func(objc.ID, LSRolesMask) objc.ID
@@ -236,7 +236,7 @@ func LSCopyDefaultRoleHandlerForContentType(inContentType corefoundation.CFStrin
 		ebipurego.RegisterLibFunc(&_fnLSCopyDefaultRoleHandlerForContentType, _lib, "LSCopyDefaultRoleHandlerForContentType")
 	}
 	_ret := _fnLSCopyDefaultRoleHandlerForContentType(objref.IDOf(inContentType.Object), inRole)
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnLSCopyItemInfoForRef func(unsafe.Pointer, LSRequestedInfo, unsafe.Pointer) int32
@@ -415,7 +415,7 @@ func UTCreateStringForOSType(inOSType int) corefoundation.CFStringRef {
 		ebipurego.RegisterLibFunc(&_fnUTCreateStringForOSType, _lib, "UTCreateStringForOSType")
 	}
 	_ret := _fnUTCreateStringForOSType(inOSType)
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnUTGetOSTypeFromString func(objc.ID) uint32
@@ -449,7 +449,7 @@ func UTTypeCopyAllTagsWithClass(inUTI corefoundation.CFStringRef, inTagClass cor
 		ebipurego.RegisterLibFunc(&_fnUTTypeCopyAllTagsWithClass, _lib, "UTTypeCopyAllTagsWithClass")
 	}
 	_ret := _fnUTTypeCopyAllTagsWithClass(objref.IDOf(inUTI.Object), objref.IDOf(inTagClass.Object))
-	return corefoundation.CFArrayRef{obj.Wrap(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnUTTypeCopyDeclaration func(objc.ID) objc.ID
@@ -461,7 +461,7 @@ func UTTypeCopyDeclaration(inUTI corefoundation.CFStringRef) corefoundation.CFDi
 		ebipurego.RegisterLibFunc(&_fnUTTypeCopyDeclaration, _lib, "UTTypeCopyDeclaration")
 	}
 	_ret := _fnUTTypeCopyDeclaration(objref.IDOf(inUTI.Object))
-	return corefoundation.CFDictionaryRef{obj.Wrap(_ret)}
+	return corefoundation.CFDictionaryRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnUTTypeCopyDeclaringBundleURL func(objc.ID) objc.ID
@@ -473,7 +473,7 @@ func UTTypeCopyDeclaringBundleURL(inUTI corefoundation.CFStringRef) corefoundati
 		ebipurego.RegisterLibFunc(&_fnUTTypeCopyDeclaringBundleURL, _lib, "UTTypeCopyDeclaringBundleURL")
 	}
 	_ret := _fnUTTypeCopyDeclaringBundleURL(objref.IDOf(inUTI.Object))
-	return corefoundation.CFURLRef{obj.Wrap(_ret)}
+	return corefoundation.CFURLRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnUTTypeCopyDescription func(objc.ID) objc.ID
@@ -485,7 +485,7 @@ func UTTypeCopyDescription(inUTI corefoundation.CFStringRef) corefoundation.CFSt
 		ebipurego.RegisterLibFunc(&_fnUTTypeCopyDescription, _lib, "UTTypeCopyDescription")
 	}
 	_ret := _fnUTTypeCopyDescription(objref.IDOf(inUTI.Object))
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnUTTypeCopyPreferredTagWithClass func(objc.ID, objc.ID) objc.ID
@@ -497,7 +497,7 @@ func UTTypeCopyPreferredTagWithClass(inUTI corefoundation.CFStringRef, inTagClas
 		ebipurego.RegisterLibFunc(&_fnUTTypeCopyPreferredTagWithClass, _lib, "UTTypeCopyPreferredTagWithClass")
 	}
 	_ret := _fnUTTypeCopyPreferredTagWithClass(objref.IDOf(inUTI.Object), objref.IDOf(inTagClass.Object))
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnUTTypeCreateAllIdentifiersForTag func(objc.ID, objc.ID, objc.ID) objc.ID
@@ -509,7 +509,7 @@ func UTTypeCreateAllIdentifiersForTag(inTagClass corefoundation.CFStringRef, inT
 		ebipurego.RegisterLibFunc(&_fnUTTypeCreateAllIdentifiersForTag, _lib, "UTTypeCreateAllIdentifiersForTag")
 	}
 	_ret := _fnUTTypeCreateAllIdentifiersForTag(objref.IDOf(inTagClass.Object), objref.IDOf(inTag.Object), objref.IDOf(inConformingToUTI.Object))
-	return corefoundation.CFArrayRef{obj.Wrap(_ret)}
+	return corefoundation.CFArrayRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnUTTypeCreatePreferredIdentifierForTag func(objc.ID, objc.ID, objc.ID) objc.ID
@@ -521,7 +521,7 @@ func UTTypeCreatePreferredIdentifierForTag(inTagClass corefoundation.CFStringRef
 		ebipurego.RegisterLibFunc(&_fnUTTypeCreatePreferredIdentifierForTag, _lib, "UTTypeCreatePreferredIdentifierForTag")
 	}
 	_ret := _fnUTTypeCreatePreferredIdentifierForTag(objref.IDOf(inTagClass.Object), objref.IDOf(inTag.Object), objref.IDOf(inConformingToUTI.Object))
-	return corefoundation.CFStringRef{obj.Wrap(_ret)}
+	return corefoundation.CFStringRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnUTTypeEqual func(objc.ID, objc.ID) uint8

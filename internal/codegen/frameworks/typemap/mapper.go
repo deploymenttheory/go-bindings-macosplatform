@@ -61,6 +61,17 @@ type Mapper struct {
 	TypedefIndex map[string]string
 	// StructIndex maps struct name → owning framework.
 	StructIndex map[string]string
+	// LocalStructs maps framework name → the set of exported Go struct names
+	// the framework itself declares with at least one field. The struct
+	// emitters write every framework's own structs regardless of global
+	// StructIndex ownership, so a reference from a declaring framework must
+	// resolve to the LOCAL copy: qualifying it against the global owner
+	// manufactures cross-framework imports the cycle detector cannot see
+	// (metal⇄compositorservices and commonpanels⇄hitoolbox became fatal
+	// import cycles this way). Keyed by exported Go name so underscore-tagged
+	// declarations (_NSRange → NSRange) match the clean typedef spelling
+	// references use.
+	LocalStructs map[string]map[string]bool
 	// EmittableStructs is the set of value-struct Go names (across all
 	// frameworks) the idiomatic layer actually emits a definition for, so a
 	// cross-framework reference targets only a struct that exists. Keyed by the
@@ -410,6 +421,7 @@ func (m *Mapper) resolvePointer(n string, ctx Context, imports ImportSet, depth 
 	if m.StructIndex != nil {
 		if owner, ok := m.StructIndex[base]; ok {
 			if goName := m.exportedStructName(base); goName != "" {
+				owner = m.localStructOwner(goName, owner, ctx.Framework)
 				return m.qualifyType("*"+goName, base, owner, ctx.Framework, imports)
 			}
 		}
@@ -761,6 +773,7 @@ func (m *Mapper) resolveNamed(n string, ctx Context, imports ImportSet, depth in
 	if m.StructIndex != nil {
 		if owner, ok := m.StructIndex[bare]; ok {
 			if goName := m.exportedStructName(bare); goName != "" {
+				owner = m.localStructOwner(goName, owner, ctx.Framework)
 				return m.qualifyType(goName, bare, owner, ctx.Framework, imports)
 			}
 		}
@@ -852,6 +865,20 @@ func (m *Mapper) exportedStructName(structName string) string {
 		}
 	}
 	return goName
+}
+
+// localStructOwner returns currentFramework when it locally declares an
+// emitted field-bearing struct named goName, otherwise owner. Only struct
+// resolution uses this: classes and protocols are emitted solely by their
+// canonical owner, so local preference would dangle there.
+func (m *Mapper) localStructOwner(goName, owner, currentFramework string) string {
+	if owner == currentFramework || m.LocalStructs == nil {
+		return owner
+	}
+	if m.LocalStructs[currentFramework][goName] {
+		return currentFramework
+	}
+	return owner
 }
 
 // qualifyType returns the Go type string for a type owned by ownerFramework,

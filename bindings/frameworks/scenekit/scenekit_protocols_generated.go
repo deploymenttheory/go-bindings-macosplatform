@@ -113,8 +113,8 @@ type SceneRenderer interface {
 	HitTestOptions(point corefoundation.CGPoint, options obj.Object) []*HitTestResult
 	IsNodeInsideFrustumWithPointOfView(node *Node, pointOfView *Node) bool
 	NodesInsideFrustumWithPointOfView(pointOfView *Node) []*Node
-	ProjectPoint(point obj.Object) obj.Object
-	UnprojectPoint(point obj.Object) obj.Object
+	ProjectPoint(point SCNVector3) SCNVector3
+	UnprojectPoint(point SCNVector3) SCNVector3
 	PrepareObjectShouldAbortBlock(object obj.Object, block func() bool) bool
 	PrepareObjectsWithCompletionHandler(objects obj.Object, completionHandler func(bool))
 	Scene() *Scene

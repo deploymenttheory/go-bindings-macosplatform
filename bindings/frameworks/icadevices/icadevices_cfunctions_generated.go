@@ -376,7 +376,7 @@ func ICDCreateColorSpace(bitsPerPixel int, samplesPerPixel int, icaObject int, c
 		ebipurego.RegisterLibFunc(&_fnICDCreateColorSpace, _lib, "ICDCreateColorSpace")
 	}
 	_ret := _fnICDCreateColorSpace(bitsPerPixel, samplesPerPixel, icaObject, objref.IDOf(colorSyncMode.Object), objref.IDOf(abstractProfile.Object), tmpProfilePath)
-	return coregraphics.CGColorSpaceRef{obj.Wrap(_ret)}
+	return coregraphics.CGColorSpaceRef{Object: obj.Wrap(_ret)}
 }
 
 var _fnICDCreateEventDataCookie func(int, unsafe.Pointer) int16

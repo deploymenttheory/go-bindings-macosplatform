@@ -93,6 +93,13 @@ func (asmsp *AttributedStringMarkdownSourcePosition) WithScriptingProperties(scr
 	return asmsp
 }
 
+// RangeInString returns a range indicating the source portion within a Markdown string.
+func (asmsp *AttributedStringMarkdownSourcePosition) RangeInString(str string) NSRange {
+	defer runtime.KeepAlive(asmsp)
+	_r := objc.Send[NSRange](objref.IDOf(asmsp), objc.RegisterName("rangeInString:"), purego.NSString(str))
+	return _r
+}
+
 // StartLine returns the start line.
 func (asmsp *AttributedStringMarkdownSourcePosition) StartLine() int {
 	defer runtime.KeepAlive(asmsp)

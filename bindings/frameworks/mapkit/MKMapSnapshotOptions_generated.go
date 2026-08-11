@@ -94,6 +94,12 @@ func (mso *MapSnapshotOptions) WithCamera(camera *MapCamera) *MapSnapshotOptions
 	return mso
 }
 
+// WithMapRect sets the map rect.
+func (mso *MapSnapshotOptions) WithMapRect(mapRect MKMapRect) *MapSnapshotOptions {
+	objc.Send[objc.ID](objref.IDOf(mso), objc.RegisterName("setMapRect:"), mapRect)
+	return mso
+}
+
 // WithMapType sets the map type.
 func (mso *MapSnapshotOptions) WithMapType(mapType MapType) *MapSnapshotOptions {
 	objc.Send[objc.ID](objref.IDOf(mso), objc.RegisterName("setMapType:"), mapType)
@@ -144,6 +150,13 @@ func (mso *MapSnapshotOptions) Camera() *MapCamera {
 	defer runtime.KeepAlive(mso)
 	_r := objc.Send[objc.ID](objref.IDOf(mso), objc.RegisterName("camera"))
 	return MapCameraFromID(_r)
+}
+
+// MapRect returns the map rect.
+func (mso *MapSnapshotOptions) MapRect() MKMapRect {
+	defer runtime.KeepAlive(mso)
+	_r := objc.Send[MKMapRect](objref.IDOf(mso), objc.RegisterName("mapRect"))
+	return _r
 }
 
 // MapType returns the map type.

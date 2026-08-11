@@ -5,8 +5,6 @@ package kerberos
 
 import (
 	"unsafe"
-
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/gss"
 )
 
 // C struct: _krb5_address
@@ -545,7 +543,7 @@ type GssOIDDescStruct struct {
 // C struct: gss_OID_set_desc_struct
 type GssOIDSetDescStruct struct {
 	Count    uint
-	Elements *gss.GssOIDDescStruct
+	Elements *GssOIDDescStruct
 }
 
 // C struct: gss_buffer_desc_struct
@@ -557,10 +555,10 @@ type GssBufferDescStruct struct {
 // C struct: gss_channel_bindings_struct
 type GssChannelBindingsStruct struct {
 	Initiator_addrtype uint32
-	Initiator_address  gss.GssBufferDescStruct
+	Initiator_address  GssBufferDescStruct
 	Acceptor_addrtype  uint32
-	Acceptor_address   gss.GssBufferDescStruct
-	Application_data   gss.GssBufferDescStruct
+	Acceptor_address   GssBufferDescStruct
+	Application_data   GssBufferDescStruct
 }
 
 // C struct: gss_cred_id_struct
@@ -574,8 +572,8 @@ type GssCtxIdStruct struct{}
 // C struct: gss_krb5_cfx_keydata
 type GssKrb5CfxKeydata struct {
 	Have_acceptor_subkey uint32
-	Ctx_key              gss.GssKrb5LucidKey
-	Acceptor_subkey      gss.GssKrb5LucidKey
+	Ctx_key              GssKrb5LucidKey
+	Acceptor_subkey      GssKrb5LucidKey
 }
 
 // C struct: gss_krb5_lucid_context_v1
@@ -586,8 +584,8 @@ type GssKrb5LucidContextV1 struct {
 	Send_seq   uint64
 	Recv_seq   uint64
 	Protocol   uint32
-	Rfc1964_kd gss.GssKrb5Rfc1964Keydata
-	Cfx_kd     gss.GssKrb5CfxKeydata
+	Rfc1964_kd GssKrb5Rfc1964Keydata
+	Cfx_kd     GssKrb5CfxKeydata
 }
 
 // C struct: gss_krb5_lucid_context_version
@@ -606,7 +604,7 @@ type GssKrb5LucidKey struct {
 type GssKrb5Rfc1964Keydata struct {
 	Sign_alg uint32
 	Seal_alg uint32
-	Ctx_key  gss.GssKrb5LucidKey
+	Ctx_key  GssKrb5LucidKey
 }
 
 // C struct: gss_name_struct
@@ -654,40 +652,40 @@ type Krb5ReplayData struct {
 type AppleGssKrb5AuthdataIfRelevant = AppleGssKrb5AuthdataIfRelevantKey
 
 // GssOID is an opaque pointer to gss_OID_desc_struct (C typedef gss_OID).
-type GssOID = *gss.GssOIDDescStruct
+type GssOID = *GssOIDDescStruct
 
 // GssOIDDesc is an alias for gss_OID_desc_struct (C typedef gss_OID_desc).
-type GssOIDDesc = gss.GssOIDDescStruct
+type GssOIDDesc = GssOIDDescStruct
 
 // GssOIDSet is an opaque pointer to gss_OID_set_desc_struct (C typedef gss_OID_set).
-type GssOIDSet = *gss.GssOIDSetDescStruct
+type GssOIDSet = *GssOIDSetDescStruct
 
 // GssOIDSetDesc is an alias for gss_OID_set_desc_struct (C typedef gss_OID_set_desc).
-type GssOIDSetDesc = gss.GssOIDSetDescStruct
+type GssOIDSetDesc = GssOIDSetDescStruct
 
 // GssBufferDesc is an alias for gss_buffer_desc_struct (C typedef gss_buffer_desc).
-type GssBufferDesc = gss.GssBufferDescStruct
+type GssBufferDesc = GssBufferDescStruct
 
 // GssBufferT is an opaque pointer to gss_buffer_desc_struct (C typedef gss_buffer_t).
-type GssBufferT = *gss.GssBufferDescStruct
+type GssBufferT = *GssBufferDescStruct
 
 // GssChannelBindingsT is an opaque pointer to gss_channel_bindings_struct (C typedef gss_channel_bindings_t).
-type GssChannelBindingsT = *gss.GssChannelBindingsStruct
+type GssChannelBindingsT = *GssChannelBindingsStruct
 
 // GssKrb5CfxKeydataT is an alias for gss_krb5_cfx_keydata (C typedef gss_krb5_cfx_keydata_t).
-type GssKrb5CfxKeydataT = gss.GssKrb5CfxKeydata
+type GssKrb5CfxKeydataT = GssKrb5CfxKeydata
 
 // GssKrb5LucidContextV1T is an alias for gss_krb5_lucid_context_v1 (C typedef gss_krb5_lucid_context_v1_t).
-type GssKrb5LucidContextV1T = gss.GssKrb5LucidContextV1
+type GssKrb5LucidContextV1T = GssKrb5LucidContextV1
 
 // GssKrb5LucidContextVersionT is an alias for gss_krb5_lucid_context_version (C typedef gss_krb5_lucid_context_version_t).
-type GssKrb5LucidContextVersionT = gss.GssKrb5LucidContextVersion
+type GssKrb5LucidContextVersionT = GssKrb5LucidContextVersion
 
 // GssKrb5LucidKeyT is an alias for gss_krb5_lucid_key (C typedef gss_krb5_lucid_key_t).
-type GssKrb5LucidKeyT = gss.GssKrb5LucidKey
+type GssKrb5LucidKeyT = GssKrb5LucidKey
 
 // GssKrb5Rfc1964KeydataT is an alias for gss_krb5_rfc1964_keydata (C typedef gss_krb5_rfc1964_keydata_t).
-type GssKrb5Rfc1964KeydataT = gss.GssKrb5Rfc1964Keydata
+type GssKrb5Rfc1964KeydataT = GssKrb5Rfc1964Keydata
 
 // Krb5KeytabEntry is an alias for krb5_keytab_entry_st (C typedef krb5_keytab_entry).
 type Krb5KeytabEntry = Krb5KeytabEntrySt

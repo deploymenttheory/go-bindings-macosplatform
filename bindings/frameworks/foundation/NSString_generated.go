@@ -314,6 +314,24 @@ func (s *String) SubstringToIndex(to int) string {
 	return purego.GoString(_r)
 }
 
+// SubstringWithRange returns a string object containing the characters of the receiver that lie within a given range.
+func (s *String) SubstringWithRange(range_ NSRange) string {
+	defer runtime.KeepAlive(s)
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("substringWithRange:"), range_)
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// GetCharactersRange copies characters from a given range in the receiver into a given buffer.
+func (s *String) GetCharactersRange(range_ NSRange) (buffer uint16) {
+	defer runtime.KeepAlive(s)
+	var _out0 uint16
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("getCharacters:range:"), unsafe.Pointer(&_out0), range_)
+	return _out0
+}
+
 // Compare returns the result of invoking compare:options:range: with no options and the receiver’s full extent as the range.
 func (s *String) Compare(str string) ComparisonResult {
 	defer runtime.KeepAlive(s)
@@ -325,6 +343,21 @@ func (s *String) Compare(str string) ComparisonResult {
 func (s *String) CompareOptions(str string, mask StringCompareOptions) ComparisonResult {
 	defer runtime.KeepAlive(s)
 	_r := objc.Send[ComparisonResult](objref.IDOf(s), objc.RegisterName("compare:options:"), purego.NSString(str), mask)
+	return _r
+}
+
+// CompareOptionsRange returns the result of invoking compare:options:range:locale: with a nil locale.
+func (s *String) CompareOptionsRange(str string, mask StringCompareOptions, rangeOfReceiverToCompare NSRange) ComparisonResult {
+	defer runtime.KeepAlive(s)
+	_r := objc.Send[ComparisonResult](objref.IDOf(s), objc.RegisterName("compare:options:range:"), purego.NSString(str), mask, rangeOfReceiverToCompare)
+	return _r
+}
+
+// CompareOptionsRangeLocale compares the string using the specified options and returns the lexical ordering for the range.
+func (s *String) CompareOptionsRangeLocale(str string, mask StringCompareOptions, rangeOfReceiverToCompare NSRange, locale obj.Object) ComparisonResult {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(locale)
+	_r := objc.Send[ComparisonResult](objref.IDOf(s), objc.RegisterName("compare:options:range:locale:"), purego.NSString(str), mask, rangeOfReceiverToCompare, objref.IDOf(locale))
 	return _r
 }
 
@@ -408,6 +441,80 @@ func (s *String) LocalizedStandardContainsString(str string) bool {
 	return _r
 }
 
+// LocalizedStandardRangeOfString finds and returns the range of the first occurrence of a given string within the string by performing a case and diacritic insensitive, locale-aware search.
+func (s *String) LocalizedStandardRangeOfString(str string) NSRange {
+	defer runtime.KeepAlive(s)
+	_r := objc.Send[NSRange](objref.IDOf(s), objc.RegisterName("localizedStandardRangeOfString:"), purego.NSString(str))
+	return _r
+}
+
+// RangeOfString finds and returns the range of the first occurrence of a given string within the string.
+func (s *String) RangeOfString(searchString string) NSRange {
+	defer runtime.KeepAlive(s)
+	_r := objc.Send[NSRange](objref.IDOf(s), objc.RegisterName("rangeOfString:"), purego.NSString(searchString))
+	return _r
+}
+
+// RangeOfStringOptions finds and returns the range of the first occurrence of a given string within the string, subject to given options.
+func (s *String) RangeOfStringOptions(searchString string, mask StringCompareOptions) NSRange {
+	defer runtime.KeepAlive(s)
+	_r := objc.Send[NSRange](objref.IDOf(s), objc.RegisterName("rangeOfString:options:"), purego.NSString(searchString), mask)
+	return _r
+}
+
+// RangeOfStringOptionsRange finds and returns the range of the first occurrence of a given string, within the given range of the string, subject to given options.
+func (s *String) RangeOfStringOptionsRange(searchString string, mask StringCompareOptions, rangeOfReceiverToSearch NSRange) NSRange {
+	defer runtime.KeepAlive(s)
+	_r := objc.Send[NSRange](objref.IDOf(s), objc.RegisterName("rangeOfString:options:range:"), purego.NSString(searchString), mask, rangeOfReceiverToSearch)
+	return _r
+}
+
+// RangeOfStringOptionsRangeLocale finds and returns the range of the first occurrence of a given string within a given range of the string, subject to given options, using the specified locale, if any.
+func (s *String) RangeOfStringOptionsRangeLocale(searchString string, mask StringCompareOptions, rangeOfReceiverToSearch NSRange, locale *Locale) NSRange {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(locale)
+	_r := objc.Send[NSRange](objref.IDOf(s), objc.RegisterName("rangeOfString:options:range:locale:"), purego.NSString(searchString), mask, rangeOfReceiverToSearch, objref.IDOf(locale))
+	return _r
+}
+
+// RangeOfCharacterFromSet finds and returns the range in the string of the first character from a given character set.
+func (s *String) RangeOfCharacterFromSet(searchSet *CharacterSet) NSRange {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(searchSet)
+	_r := objc.Send[NSRange](objref.IDOf(s), objc.RegisterName("rangeOfCharacterFromSet:"), objref.IDOf(searchSet))
+	return _r
+}
+
+// RangeOfCharacterFromSetOptions finds and returns the range in the string of the first character, using given options, from a given character set.
+func (s *String) RangeOfCharacterFromSetOptions(searchSet *CharacterSet, mask StringCompareOptions) NSRange {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(searchSet)
+	_r := objc.Send[NSRange](objref.IDOf(s), objc.RegisterName("rangeOfCharacterFromSet:options:"), objref.IDOf(searchSet), mask)
+	return _r
+}
+
+// RangeOfCharacterFromSetOptionsRange finds and returns the range in the string of the first character from a given character set found in a given range with given options.
+func (s *String) RangeOfCharacterFromSetOptionsRange(searchSet *CharacterSet, mask StringCompareOptions, rangeOfReceiverToSearch NSRange) NSRange {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(searchSet)
+	_r := objc.Send[NSRange](objref.IDOf(s), objc.RegisterName("rangeOfCharacterFromSet:options:range:"), objref.IDOf(searchSet), mask, rangeOfReceiverToSearch)
+	return _r
+}
+
+// RangeOfComposedCharacterSequenceAtIndex returns the range in the receiver of the composed character sequence located at a given index.
+func (s *String) RangeOfComposedCharacterSequenceAtIndex(index int) NSRange {
+	defer runtime.KeepAlive(s)
+	_r := objc.Send[NSRange](objref.IDOf(s), objc.RegisterName("rangeOfComposedCharacterSequenceAtIndex:"), index)
+	return _r
+}
+
+// RangeOfComposedCharacterSequencesForRange returns the range in the string of the composed character sequences for a given range.
+func (s *String) RangeOfComposedCharacterSequencesForRange(range_ NSRange) NSRange {
+	defer runtime.KeepAlive(s)
+	_r := objc.Send[NSRange](objref.IDOf(s), objc.RegisterName("rangeOfComposedCharacterSequencesForRange:"), range_)
+	return _r
+}
+
 // Append returns a new string made by appending a given string to the receiver.
 func (s *String) Append(aString string) string {
 	defer runtime.KeepAlive(s)
@@ -461,6 +568,40 @@ func (s *String) CapitalizedStringWithLocale(locale *Locale) string {
 	return purego.GoString(_r)
 }
 
+// GetLineStartEndContentsEndForRange returns by reference the beginning of the first line and the end of the last line touched by the given range.
+func (s *String) GetLineStartEndContentsEndForRange(range_ NSRange) (startPtr int, lineEndPtr int, contentsEndPtr int) {
+	defer runtime.KeepAlive(s)
+	var _out0 int
+	var _out1 int
+	var _out2 int
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("getLineStart:end:contentsEnd:forRange:"), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), range_)
+	return _out0, _out1, _out2
+}
+
+// LineRangeForRange returns the range of characters representing the line or lines containing a given range.
+func (s *String) LineRangeForRange(range_ NSRange) NSRange {
+	defer runtime.KeepAlive(s)
+	_r := objc.Send[NSRange](objref.IDOf(s), objc.RegisterName("lineRangeForRange:"), range_)
+	return _r
+}
+
+// GetParagraphStartEndContentsEndForRange returns by reference the beginning of the first paragraph and the end of the last paragraph touched by the given range.
+func (s *String) GetParagraphStartEndContentsEndForRange(range_ NSRange) (startPtr int, parEndPtr int, contentsEndPtr int) {
+	defer runtime.KeepAlive(s)
+	var _out0 int
+	var _out1 int
+	var _out2 int
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("getParagraphStart:end:contentsEnd:forRange:"), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), range_)
+	return _out0, _out1, _out2
+}
+
+// ParagraphRangeForRange returns the range of characters representing the paragraph or paragraphs containing a given range.
+func (s *String) ParagraphRangeForRange(range_ NSRange) NSRange {
+	defer runtime.KeepAlive(s)
+	_r := objc.Send[NSRange](objref.IDOf(s), objc.RegisterName("paragraphRangeForRange:"), range_)
+	return _r
+}
+
 // EnumerateLinesUsing enumerates all the lines in the string.
 func (s *String) EnumerateLinesUsing(block func(obj.Object, *bool)) {
 	defer runtime.KeepAlive(s)
@@ -500,6 +641,14 @@ func (s *String) GetCStringMaxLengthEncoding(buffer string, maxBufferCount int, 
 	defer runtime.KeepAlive(s)
 	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("getCString:maxLength:encoding:"), buffer, maxBufferCount, encoding)
 	return _r
+}
+
+// GetBytesMaxLengthUsedLengthEncodingOptionsRangeRemainingRange gets a given range of characters as bytes in a specified encoding.
+func (s *String) GetBytesMaxLengthUsedLengthEncodingOptionsRangeRemainingRange(buffer unsafe.Pointer, maxBufferCount int, encoding int, options StringEncodingConversionOptions, range_ NSRange, leftover *NSRange) (ok bool, usedBufferCount int) {
+	defer runtime.KeepAlive(s)
+	var _out0 int
+	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("getBytes:maxLength:usedLength:encoding:options:range:remainingRange:"), buffer, maxBufferCount, unsafe.Pointer(&_out0), encoding, options, range_, unsafe.Pointer(leftover))
+	return _r, _out0
 }
 
 // MaximumLengthOfBytesUsingEncoding returns the maximum number of bytes needed to store the receiver in a given encoding.
@@ -563,10 +712,30 @@ func (s *String) StringByFoldingWithOptionsLocale(options StringCompareOptions, 
 	return purego.GoString(_r)
 }
 
+// StringByReplacingOccurrencesOfStringWithStringOptionsRange returns a new string in which all occurrences of a target string in a specified range of the receiver are replaced by another given string.
+func (s *String) StringByReplacingOccurrencesOfStringWithStringOptionsRange(target string, replacement string, options StringCompareOptions, searchRange NSRange) string {
+	defer runtime.KeepAlive(s)
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("stringByReplacingOccurrencesOfString:withString:options:range:"), purego.NSString(target), purego.NSString(replacement), options, searchRange)
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
 // ReplaceAll returns a new string in which all occurrences of a target string in the receiver are replaced by another given string.
 func (s *String) ReplaceAll(target string, replacement string) string {
 	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("stringByReplacingOccurrencesOfString:withString:"), purego.NSString(target), purego.NSString(replacement))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// StringByReplacingCharactersInRangeWithString returns a new string in which the characters in a specified range of the receiver are replaced by a given string.
+func (s *String) StringByReplacingCharactersInRangeWithString(range_ NSRange, replacement string) string {
+	defer runtime.KeepAlive(s)
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("stringByReplacingCharactersInRange:withString:"), range_, purego.NSString(replacement))
 	if _r == 0 {
 		return ""
 	}
@@ -816,6 +985,12 @@ func (s *String) GetCStringMaxLength(data string, maxLength int) {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("getCString:maxLength:"), data, maxLength)
 }
 
+// GetCStringMaxLengthRangeRemainingRange converts the receiver’s content to the default C-string encoding and stores them in a given buffer.
+func (s *String) GetCStringMaxLengthRangeRemainingRange(data string, maxLength int, aRange NSRange, leftoverRange *NSRange) {
+	defer runtime.KeepAlive(s)
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("getCString:maxLength:range:remainingRange:"), data, maxLength, aRange, unsafe.Pointer(leftoverRange))
+}
+
 // WriteToFileAtomically writes the contents of the receiver to the file specified by a given path.
 func (s *String) WriteToFileAtomically(path string, useAuxiliaryFile bool) bool {
 	defer runtime.KeepAlive(s)
@@ -1031,6 +1206,15 @@ func (s *String) StringByRemovingPercentEncoding() string {
 		return ""
 	}
 	return purego.GoString(_r)
+}
+
+// LinguisticTagsInRangeSchemeOptionsOrthographyTokenRanges returns an array of linguistic tags for the specified range and requested tags within the receiving string.
+func (s *String) LinguisticTagsInRangeSchemeOptionsOrthographyTokenRanges(range_ NSRange, scheme *String, options LinguisticTaggerOptions, orthography *Orthography, tokenRanges []*Value) []*String {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(scheme)
+	defer runtime.KeepAlive(orthography)
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("linguisticTagsInRange:scheme:options:orthography:tokenRanges:"), range_, objref.IDOf(scheme), options, objref.IDOf(orthography), purego.SliceToNSArray(tokenRanges, func(_v *Value) objc.ID { return objref.IDOf(_v) }))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *String { return StringFromID(_id) })
 }
 
 // isString marks String — and, by embedding promotion, its

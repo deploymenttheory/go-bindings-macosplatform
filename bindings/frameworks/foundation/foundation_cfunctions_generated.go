@@ -152,10 +152,10 @@ func NSContainsRect(aRect corefoundation.CGRect, bRect corefoundation.CGRect) bo
 	return _fnNSContainsRect(aRect, bRect)
 }
 
-var _fnNSConvertHostDoubleToSwapped func(float64) unsafe.Pointer
+var _fnNSConvertHostDoubleToSwapped func(float64) NSSwappedDouble
 
 // NSConvertHostDoubleToSwapped calls the Foundation framework function NSConvertHostDoubleToSwapped.
-func NSConvertHostDoubleToSwapped(x float64) unsafe.Pointer {
+func NSConvertHostDoubleToSwapped(x float64) NSSwappedDouble {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSConvertHostDoubleToSwapped == nil {
 		ebipurego.RegisterLibFunc(&_fnNSConvertHostDoubleToSwapped, _lib, "NSConvertHostDoubleToSwapped")
@@ -163,10 +163,10 @@ func NSConvertHostDoubleToSwapped(x float64) unsafe.Pointer {
 	return _fnNSConvertHostDoubleToSwapped(x)
 }
 
-var _fnNSConvertHostFloatToSwapped func(float32) unsafe.Pointer
+var _fnNSConvertHostFloatToSwapped func(float32) NSSwappedFloat
 
 // NSConvertHostFloatToSwapped calls the Foundation framework function NSConvertHostFloatToSwapped.
-func NSConvertHostFloatToSwapped(x float32) unsafe.Pointer {
+func NSConvertHostFloatToSwapped(x float32) NSSwappedFloat {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSConvertHostFloatToSwapped == nil {
 		ebipurego.RegisterLibFunc(&_fnNSConvertHostFloatToSwapped, _lib, "NSConvertHostFloatToSwapped")
@@ -174,10 +174,10 @@ func NSConvertHostFloatToSwapped(x float32) unsafe.Pointer {
 	return _fnNSConvertHostFloatToSwapped(x)
 }
 
-var _fnNSConvertSwappedDoubleToHost func(unsafe.Pointer) float64
+var _fnNSConvertSwappedDoubleToHost func(NSSwappedDouble) float64
 
 // NSConvertSwappedDoubleToHost calls the Foundation framework function NSConvertSwappedDoubleToHost.
-func NSConvertSwappedDoubleToHost(x unsafe.Pointer) float64 {
+func NSConvertSwappedDoubleToHost(x NSSwappedDouble) float64 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSConvertSwappedDoubleToHost == nil {
 		ebipurego.RegisterLibFunc(&_fnNSConvertSwappedDoubleToHost, _lib, "NSConvertSwappedDoubleToHost")
@@ -185,10 +185,10 @@ func NSConvertSwappedDoubleToHost(x unsafe.Pointer) float64 {
 	return _fnNSConvertSwappedDoubleToHost(x)
 }
 
-var _fnNSConvertSwappedFloatToHost func(unsafe.Pointer) float32
+var _fnNSConvertSwappedFloatToHost func(NSSwappedFloat) float32
 
 // NSConvertSwappedFloatToHost calls the Foundation framework function NSConvertSwappedFloatToHost.
-func NSConvertSwappedFloatToHost(x unsafe.Pointer) float32 {
+func NSConvertSwappedFloatToHost(x NSSwappedFloat) float32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSConvertSwappedFloatToHost == nil {
 		ebipurego.RegisterLibFunc(&_fnNSConvertSwappedFloatToHost, _lib, "NSConvertSwappedFloatToHost")
@@ -544,10 +544,10 @@ func NSDivideRect(inRect corefoundation.CGRect, slice *corefoundation.CGRect, re
 	_fnNSDivideRect(inRect, unsafe.Pointer(slice), unsafe.Pointer(rem), amount, edge)
 }
 
-var _fnNSEdgeInsetsEqual func(unsafe.Pointer, unsafe.Pointer) bool
+var _fnNSEdgeInsetsEqual func(NSEdgeInsets, NSEdgeInsets) bool
 
 // NSEdgeInsetsEqual calls the Foundation framework function NSEdgeInsetsEqual.
-func NSEdgeInsetsEqual(aInsets unsafe.Pointer, bInsets unsafe.Pointer) bool {
+func NSEdgeInsetsEqual(aInsets NSEdgeInsets, bInsets NSEdgeInsets) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSEdgeInsetsEqual == nil {
 		ebipurego.RegisterLibFunc(&_fnNSEdgeInsetsEqual, _lib, "NSEdgeInsetsEqual")
@@ -555,10 +555,10 @@ func NSEdgeInsetsEqual(aInsets unsafe.Pointer, bInsets unsafe.Pointer) bool {
 	return _fnNSEdgeInsetsEqual(aInsets, bInsets)
 }
 
-var _fnNSEdgeInsetsMake func(float64, float64, float64, float64) unsafe.Pointer
+var _fnNSEdgeInsetsMake func(float64, float64, float64, float64) NSEdgeInsets
 
 // NSEdgeInsetsMake calls the Foundation framework function NSEdgeInsetsMake.
-func NSEdgeInsetsMake(top float64, left float64, bottom float64, right float64) unsafe.Pointer {
+func NSEdgeInsetsMake(top float64, left float64, bottom float64, right float64) NSEdgeInsets {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSEdgeInsetsMake == nil {
 		ebipurego.RegisterLibFunc(&_fnNSEdgeInsetsMake, _lib, "NSEdgeInsetsMake")
@@ -621,10 +621,10 @@ func NSEqualPoints(aPoint corefoundation.CGPoint, bPoint corefoundation.CGPoint)
 	return _fnNSEqualPoints(aPoint, bPoint)
 }
 
-var _fnNSEqualRanges func(unsafe.Pointer, unsafe.Pointer) bool
+var _fnNSEqualRanges func(NSRange, NSRange) bool
 
 // NSEqualRanges calls the Foundation framework function NSEqualRanges.
-func NSEqualRanges(range1 unsafe.Pointer, range2 unsafe.Pointer) bool {
+func NSEqualRanges(range1 NSRange, range2 NSRange) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSEqualRanges == nil {
 		ebipurego.RegisterLibFunc(&_fnNSEqualRanges, _lib, "NSEqualRanges")
@@ -919,10 +919,10 @@ func NSIntegralRectWithOptions(aRect corefoundation.CGRect, opts AlignmentOption
 	return _fnNSIntegralRectWithOptions(aRect, opts)
 }
 
-var _fnNSIntersectionRange func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+var _fnNSIntersectionRange func(NSRange, NSRange) NSRange
 
 // NSIntersectionRange calls the Foundation framework function NSIntersectionRange.
-func NSIntersectionRange(range1 unsafe.Pointer, range2 unsafe.Pointer) unsafe.Pointer {
+func NSIntersectionRange(range1 NSRange, range2 NSRange) NSRange {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSIntersectionRange == nil {
 		ebipurego.RegisterLibFunc(&_fnNSIntersectionRange, _lib, "NSIntersectionRange")
@@ -963,10 +963,10 @@ func NSIsEmptyRect(aRect corefoundation.CGRect) bool {
 	return _fnNSIsEmptyRect(aRect)
 }
 
-var _fnNSLocationInRange func(int, unsafe.Pointer) bool
+var _fnNSLocationInRange func(int, NSRange) bool
 
 // NSLocationInRange calls the Foundation framework function NSLocationInRange.
-func NSLocationInRange(loc int, range_ unsafe.Pointer) bool {
+func NSLocationInRange(loc int, range_ NSRange) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSLocationInRange == nil {
 		ebipurego.RegisterLibFunc(&_fnNSLocationInRange, _lib, "NSLocationInRange")
@@ -1018,10 +1018,10 @@ func NSMakePoint(x float64, y float64) corefoundation.CGPoint {
 	return _fnNSMakePoint(x, y)
 }
 
-var _fnNSMakeRange func(int, int) unsafe.Pointer
+var _fnNSMakeRange func(int, int) NSRange
 
 // NSMakeRange calls the Foundation framework function NSMakeRange.
-func NSMakeRange(loc int, length int) unsafe.Pointer {
+func NSMakeRange(loc int, length int) NSRange {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSMakeRange == nil {
 		ebipurego.RegisterLibFunc(&_fnNSMakeRange, _lib, "NSMakeRange")
@@ -1117,10 +1117,10 @@ func NSMapRemove(table obj.Object, key unsafe.Pointer) {
 	_fnNSMapRemove(objref.IDOf(table), key)
 }
 
-var _fnNSMaxRange func(unsafe.Pointer) int
+var _fnNSMaxRange func(NSRange) int
 
 // NSMaxRange calls the Foundation framework function NSMaxRange.
-func NSMaxRange(range_ unsafe.Pointer) int {
+func NSMaxRange(range_ NSRange) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSMaxRange == nil {
 		ebipurego.RegisterLibFunc(&_fnNSMaxRange, _lib, "NSMaxRange")
@@ -1319,10 +1319,10 @@ func NSProtocolFromString(namestr string) unsafe.Pointer {
 	return _fnNSProtocolFromString(purego.NSString(namestr))
 }
 
-var _fnNSRangeFromString func(objc.ID) unsafe.Pointer
+var _fnNSRangeFromString func(objc.ID) NSRange
 
 // NSRangeFromString calls the Foundation framework function NSRangeFromString.
-func NSRangeFromString(aString string) unsafe.Pointer {
+func NSRangeFromString(aString string) NSRange {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSRangeFromString == nil {
 		ebipurego.RegisterLibFunc(&_fnNSRangeFromString, _lib, "NSRangeFromString")
@@ -1604,10 +1604,10 @@ func NSStringFromProtocol(proto unsafe.Pointer) string {
 	return purego.GoString(_ret)
 }
 
-var _fnNSStringFromRange func(unsafe.Pointer) objc.ID
+var _fnNSStringFromRange func(NSRange) objc.ID
 
 // NSStringFromRange calls the Foundation framework function NSStringFromRange.
-func NSStringFromRange(range_ unsafe.Pointer) string {
+func NSStringFromRange(range_ NSRange) string {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSStringFromRange == nil {
 		ebipurego.RegisterLibFunc(&_fnNSStringFromRange, _lib, "NSStringFromRange")
@@ -1664,10 +1664,10 @@ func NSStringFromSize(aSize corefoundation.CGSize) string {
 	return purego.GoString(_ret)
 }
 
-var _fnNSSwapBigDoubleToHost func(unsafe.Pointer) float64
+var _fnNSSwapBigDoubleToHost func(NSSwappedDouble) float64
 
 // NSSwapBigDoubleToHost calls the Foundation framework function NSSwapBigDoubleToHost.
-func NSSwapBigDoubleToHost(x unsafe.Pointer) float64 {
+func NSSwapBigDoubleToHost(x NSSwappedDouble) float64 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSSwapBigDoubleToHost == nil {
 		ebipurego.RegisterLibFunc(&_fnNSSwapBigDoubleToHost, _lib, "NSSwapBigDoubleToHost")
@@ -1675,10 +1675,10 @@ func NSSwapBigDoubleToHost(x unsafe.Pointer) float64 {
 	return _fnNSSwapBigDoubleToHost(x)
 }
 
-var _fnNSSwapBigFloatToHost func(unsafe.Pointer) float32
+var _fnNSSwapBigFloatToHost func(NSSwappedFloat) float32
 
 // NSSwapBigFloatToHost calls the Foundation framework function NSSwapBigFloatToHost.
-func NSSwapBigFloatToHost(x unsafe.Pointer) float32 {
+func NSSwapBigFloatToHost(x NSSwappedFloat) float32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSSwapBigFloatToHost == nil {
 		ebipurego.RegisterLibFunc(&_fnNSSwapBigFloatToHost, _lib, "NSSwapBigFloatToHost")
@@ -1730,10 +1730,10 @@ func NSSwapBigShortToHost(x uint16) uint16 {
 	return _fnNSSwapBigShortToHost(x)
 }
 
-var _fnNSSwapDouble func(unsafe.Pointer) unsafe.Pointer
+var _fnNSSwapDouble func(NSSwappedDouble) NSSwappedDouble
 
 // NSSwapDouble calls the Foundation framework function NSSwapDouble.
-func NSSwapDouble(x unsafe.Pointer) unsafe.Pointer {
+func NSSwapDouble(x NSSwappedDouble) NSSwappedDouble {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSSwapDouble == nil {
 		ebipurego.RegisterLibFunc(&_fnNSSwapDouble, _lib, "NSSwapDouble")
@@ -1741,10 +1741,10 @@ func NSSwapDouble(x unsafe.Pointer) unsafe.Pointer {
 	return _fnNSSwapDouble(x)
 }
 
-var _fnNSSwapFloat func(unsafe.Pointer) unsafe.Pointer
+var _fnNSSwapFloat func(NSSwappedFloat) NSSwappedFloat
 
 // NSSwapFloat calls the Foundation framework function NSSwapFloat.
-func NSSwapFloat(x unsafe.Pointer) unsafe.Pointer {
+func NSSwapFloat(x NSSwappedFloat) NSSwappedFloat {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSSwapFloat == nil {
 		ebipurego.RegisterLibFunc(&_fnNSSwapFloat, _lib, "NSSwapFloat")
@@ -1752,10 +1752,10 @@ func NSSwapFloat(x unsafe.Pointer) unsafe.Pointer {
 	return _fnNSSwapFloat(x)
 }
 
-var _fnNSSwapHostDoubleToBig func(float64) unsafe.Pointer
+var _fnNSSwapHostDoubleToBig func(float64) NSSwappedDouble
 
 // NSSwapHostDoubleToBig calls the Foundation framework function NSSwapHostDoubleToBig.
-func NSSwapHostDoubleToBig(x float64) unsafe.Pointer {
+func NSSwapHostDoubleToBig(x float64) NSSwappedDouble {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSSwapHostDoubleToBig == nil {
 		ebipurego.RegisterLibFunc(&_fnNSSwapHostDoubleToBig, _lib, "NSSwapHostDoubleToBig")
@@ -1763,10 +1763,10 @@ func NSSwapHostDoubleToBig(x float64) unsafe.Pointer {
 	return _fnNSSwapHostDoubleToBig(x)
 }
 
-var _fnNSSwapHostDoubleToLittle func(float64) unsafe.Pointer
+var _fnNSSwapHostDoubleToLittle func(float64) NSSwappedDouble
 
 // NSSwapHostDoubleToLittle calls the Foundation framework function NSSwapHostDoubleToLittle.
-func NSSwapHostDoubleToLittle(x float64) unsafe.Pointer {
+func NSSwapHostDoubleToLittle(x float64) NSSwappedDouble {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSSwapHostDoubleToLittle == nil {
 		ebipurego.RegisterLibFunc(&_fnNSSwapHostDoubleToLittle, _lib, "NSSwapHostDoubleToLittle")
@@ -1774,10 +1774,10 @@ func NSSwapHostDoubleToLittle(x float64) unsafe.Pointer {
 	return _fnNSSwapHostDoubleToLittle(x)
 }
 
-var _fnNSSwapHostFloatToBig func(float32) unsafe.Pointer
+var _fnNSSwapHostFloatToBig func(float32) NSSwappedFloat
 
 // NSSwapHostFloatToBig calls the Foundation framework function NSSwapHostFloatToBig.
-func NSSwapHostFloatToBig(x float32) unsafe.Pointer {
+func NSSwapHostFloatToBig(x float32) NSSwappedFloat {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSSwapHostFloatToBig == nil {
 		ebipurego.RegisterLibFunc(&_fnNSSwapHostFloatToBig, _lib, "NSSwapHostFloatToBig")
@@ -1785,10 +1785,10 @@ func NSSwapHostFloatToBig(x float32) unsafe.Pointer {
 	return _fnNSSwapHostFloatToBig(x)
 }
 
-var _fnNSSwapHostFloatToLittle func(float32) unsafe.Pointer
+var _fnNSSwapHostFloatToLittle func(float32) NSSwappedFloat
 
 // NSSwapHostFloatToLittle calls the Foundation framework function NSSwapHostFloatToLittle.
-func NSSwapHostFloatToLittle(x float32) unsafe.Pointer {
+func NSSwapHostFloatToLittle(x float32) NSSwappedFloat {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSSwapHostFloatToLittle == nil {
 		ebipurego.RegisterLibFunc(&_fnNSSwapHostFloatToLittle, _lib, "NSSwapHostFloatToLittle")
@@ -1895,10 +1895,10 @@ func NSSwapInt(inv int) int {
 	return int(_fnNSSwapInt(inv))
 }
 
-var _fnNSSwapLittleDoubleToHost func(unsafe.Pointer) float64
+var _fnNSSwapLittleDoubleToHost func(NSSwappedDouble) float64
 
 // NSSwapLittleDoubleToHost calls the Foundation framework function NSSwapLittleDoubleToHost.
-func NSSwapLittleDoubleToHost(x unsafe.Pointer) float64 {
+func NSSwapLittleDoubleToHost(x NSSwappedDouble) float64 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSSwapLittleDoubleToHost == nil {
 		ebipurego.RegisterLibFunc(&_fnNSSwapLittleDoubleToHost, _lib, "NSSwapLittleDoubleToHost")
@@ -1906,10 +1906,10 @@ func NSSwapLittleDoubleToHost(x unsafe.Pointer) float64 {
 	return _fnNSSwapLittleDoubleToHost(x)
 }
 
-var _fnNSSwapLittleFloatToHost func(unsafe.Pointer) float32
+var _fnNSSwapLittleFloatToHost func(NSSwappedFloat) float32
 
 // NSSwapLittleFloatToHost calls the Foundation framework function NSSwapLittleFloatToHost.
-func NSSwapLittleFloatToHost(x unsafe.Pointer) float32 {
+func NSSwapLittleFloatToHost(x NSSwappedFloat) float32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSSwapLittleFloatToHost == nil {
 		ebipurego.RegisterLibFunc(&_fnNSSwapLittleFloatToHost, _lib, "NSSwapLittleFloatToHost")
@@ -2009,10 +2009,10 @@ func NSTemporaryDirectory() string {
 	return purego.GoString(_ret)
 }
 
-var _fnNSUnionRange func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+var _fnNSUnionRange func(NSRange, NSRange) NSRange
 
 // NSUnionRange calls the Foundation framework function NSUnionRange.
-func NSUnionRange(range1 unsafe.Pointer, range2 unsafe.Pointer) unsafe.Pointer {
+func NSUnionRange(range1 NSRange, range2 NSRange) NSRange {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSUnionRange == nil {
 		ebipurego.RegisterLibFunc(&_fnNSUnionRange, _lib, "NSUnionRange")

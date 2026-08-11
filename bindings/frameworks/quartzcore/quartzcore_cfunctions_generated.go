@@ -5,8 +5,6 @@
 package quartzcore
 
 import (
-	"unsafe"
-
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	ebipurego "github.com/ebitengine/purego"
 )
@@ -22,10 +20,10 @@ func CACurrentMediaTime() float64 {
 	return _fnCACurrentMediaTime()
 }
 
-var _fnCAFrameRateRangeIsEqualToRange func(unsafe.Pointer, unsafe.Pointer) bool
+var _fnCAFrameRateRangeIsEqualToRange func(CAFrameRateRange, CAFrameRateRange) bool
 
 // CAFrameRateRangeIsEqualToRange calls the QuartzCore framework function CAFrameRateRangeIsEqualToRange.
-func CAFrameRateRangeIsEqualToRange(range_ unsafe.Pointer, other unsafe.Pointer) bool {
+func CAFrameRateRangeIsEqualToRange(range_ CAFrameRateRange, other CAFrameRateRange) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCAFrameRateRangeIsEqualToRange == nil {
 		ebipurego.RegisterLibFunc(&_fnCAFrameRateRangeIsEqualToRange, _lib, "CAFrameRateRangeIsEqualToRange")
@@ -33,10 +31,10 @@ func CAFrameRateRangeIsEqualToRange(range_ unsafe.Pointer, other unsafe.Pointer)
 	return _fnCAFrameRateRangeIsEqualToRange(range_, other)
 }
 
-var _fnCAFrameRateRangeMake func(float32, float32, float32) unsafe.Pointer
+var _fnCAFrameRateRangeMake func(float32, float32, float32) CAFrameRateRange
 
 // CAFrameRateRangeMake calls the QuartzCore framework function CAFrameRateRangeMake.
-func CAFrameRateRangeMake(minimum float32, maximum float32, preferred float32) unsafe.Pointer {
+func CAFrameRateRangeMake(minimum float32, maximum float32, preferred float32) CAFrameRateRange {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCAFrameRateRangeMake == nil {
 		ebipurego.RegisterLibFunc(&_fnCAFrameRateRangeMake, _lib, "CAFrameRateRangeMake")
@@ -44,10 +42,10 @@ func CAFrameRateRangeMake(minimum float32, maximum float32, preferred float32) u
 	return _fnCAFrameRateRangeMake(minimum, maximum, preferred)
 }
 
-var _fnCATransform3DConcat func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+var _fnCATransform3DConcat func(CATransform3D, CATransform3D) CATransform3D
 
 // CATransform3DConcat calls the QuartzCore framework function CATransform3DConcat.
-func CATransform3DConcat(a unsafe.Pointer, b unsafe.Pointer) unsafe.Pointer {
+func CATransform3DConcat(a CATransform3D, b CATransform3D) CATransform3D {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCATransform3DConcat == nil {
 		ebipurego.RegisterLibFunc(&_fnCATransform3DConcat, _lib, "CATransform3DConcat")
@@ -55,10 +53,10 @@ func CATransform3DConcat(a unsafe.Pointer, b unsafe.Pointer) unsafe.Pointer {
 	return _fnCATransform3DConcat(a, b)
 }
 
-var _fnCATransform3DEqualToTransform func(unsafe.Pointer, unsafe.Pointer) bool
+var _fnCATransform3DEqualToTransform func(CATransform3D, CATransform3D) bool
 
 // CATransform3DEqualToTransform calls the QuartzCore framework function CATransform3DEqualToTransform.
-func CATransform3DEqualToTransform(a unsafe.Pointer, b unsafe.Pointer) bool {
+func CATransform3DEqualToTransform(a CATransform3D, b CATransform3D) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCATransform3DEqualToTransform == nil {
 		ebipurego.RegisterLibFunc(&_fnCATransform3DEqualToTransform, _lib, "CATransform3DEqualToTransform")
@@ -66,10 +64,10 @@ func CATransform3DEqualToTransform(a unsafe.Pointer, b unsafe.Pointer) bool {
 	return _fnCATransform3DEqualToTransform(a, b)
 }
 
-var _fnCATransform3DGetAffineTransform func(unsafe.Pointer) corefoundation.CGAffineTransform
+var _fnCATransform3DGetAffineTransform func(CATransform3D) corefoundation.CGAffineTransform
 
 // CATransform3DGetAffineTransform calls the QuartzCore framework function CATransform3DGetAffineTransform.
-func CATransform3DGetAffineTransform(t unsafe.Pointer) corefoundation.CGAffineTransform {
+func CATransform3DGetAffineTransform(t CATransform3D) corefoundation.CGAffineTransform {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCATransform3DGetAffineTransform == nil {
 		ebipurego.RegisterLibFunc(&_fnCATransform3DGetAffineTransform, _lib, "CATransform3DGetAffineTransform")
@@ -77,10 +75,10 @@ func CATransform3DGetAffineTransform(t unsafe.Pointer) corefoundation.CGAffineTr
 	return _fnCATransform3DGetAffineTransform(t)
 }
 
-var _fnCATransform3DInvert func(unsafe.Pointer) unsafe.Pointer
+var _fnCATransform3DInvert func(CATransform3D) CATransform3D
 
 // CATransform3DInvert calls the QuartzCore framework function CATransform3DInvert.
-func CATransform3DInvert(t unsafe.Pointer) unsafe.Pointer {
+func CATransform3DInvert(t CATransform3D) CATransform3D {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCATransform3DInvert == nil {
 		ebipurego.RegisterLibFunc(&_fnCATransform3DInvert, _lib, "CATransform3DInvert")
@@ -88,10 +86,10 @@ func CATransform3DInvert(t unsafe.Pointer) unsafe.Pointer {
 	return _fnCATransform3DInvert(t)
 }
 
-var _fnCATransform3DIsAffine func(unsafe.Pointer) bool
+var _fnCATransform3DIsAffine func(CATransform3D) bool
 
 // CATransform3DIsAffine calls the QuartzCore framework function CATransform3DIsAffine.
-func CATransform3DIsAffine(t unsafe.Pointer) bool {
+func CATransform3DIsAffine(t CATransform3D) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCATransform3DIsAffine == nil {
 		ebipurego.RegisterLibFunc(&_fnCATransform3DIsAffine, _lib, "CATransform3DIsAffine")
@@ -99,10 +97,10 @@ func CATransform3DIsAffine(t unsafe.Pointer) bool {
 	return _fnCATransform3DIsAffine(t)
 }
 
-var _fnCATransform3DIsIdentity func(unsafe.Pointer) bool
+var _fnCATransform3DIsIdentity func(CATransform3D) bool
 
 // CATransform3DIsIdentity calls the QuartzCore framework function CATransform3DIsIdentity.
-func CATransform3DIsIdentity(t unsafe.Pointer) bool {
+func CATransform3DIsIdentity(t CATransform3D) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCATransform3DIsIdentity == nil {
 		ebipurego.RegisterLibFunc(&_fnCATransform3DIsIdentity, _lib, "CATransform3DIsIdentity")
@@ -110,10 +108,10 @@ func CATransform3DIsIdentity(t unsafe.Pointer) bool {
 	return _fnCATransform3DIsIdentity(t)
 }
 
-var _fnCATransform3DMakeAffineTransform func(corefoundation.CGAffineTransform) unsafe.Pointer
+var _fnCATransform3DMakeAffineTransform func(corefoundation.CGAffineTransform) CATransform3D
 
 // CATransform3DMakeAffineTransform calls the QuartzCore framework function CATransform3DMakeAffineTransform.
-func CATransform3DMakeAffineTransform(m corefoundation.CGAffineTransform) unsafe.Pointer {
+func CATransform3DMakeAffineTransform(m corefoundation.CGAffineTransform) CATransform3D {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCATransform3DMakeAffineTransform == nil {
 		ebipurego.RegisterLibFunc(&_fnCATransform3DMakeAffineTransform, _lib, "CATransform3DMakeAffineTransform")
@@ -121,10 +119,10 @@ func CATransform3DMakeAffineTransform(m corefoundation.CGAffineTransform) unsafe
 	return _fnCATransform3DMakeAffineTransform(m)
 }
 
-var _fnCATransform3DMakeRotation func(float64, float64, float64, float64) unsafe.Pointer
+var _fnCATransform3DMakeRotation func(float64, float64, float64, float64) CATransform3D
 
 // CATransform3DMakeRotation calls the QuartzCore framework function CATransform3DMakeRotation.
-func CATransform3DMakeRotation(angle float64, x float64, y float64, z float64) unsafe.Pointer {
+func CATransform3DMakeRotation(angle float64, x float64, y float64, z float64) CATransform3D {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCATransform3DMakeRotation == nil {
 		ebipurego.RegisterLibFunc(&_fnCATransform3DMakeRotation, _lib, "CATransform3DMakeRotation")
@@ -132,10 +130,10 @@ func CATransform3DMakeRotation(angle float64, x float64, y float64, z float64) u
 	return _fnCATransform3DMakeRotation(angle, x, y, z)
 }
 
-var _fnCATransform3DMakeScale func(float64, float64, float64) unsafe.Pointer
+var _fnCATransform3DMakeScale func(float64, float64, float64) CATransform3D
 
 // CATransform3DMakeScale calls the QuartzCore framework function CATransform3DMakeScale.
-func CATransform3DMakeScale(sx float64, sy float64, sz float64) unsafe.Pointer {
+func CATransform3DMakeScale(sx float64, sy float64, sz float64) CATransform3D {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCATransform3DMakeScale == nil {
 		ebipurego.RegisterLibFunc(&_fnCATransform3DMakeScale, _lib, "CATransform3DMakeScale")
@@ -143,10 +141,10 @@ func CATransform3DMakeScale(sx float64, sy float64, sz float64) unsafe.Pointer {
 	return _fnCATransform3DMakeScale(sx, sy, sz)
 }
 
-var _fnCATransform3DMakeTranslation func(float64, float64, float64) unsafe.Pointer
+var _fnCATransform3DMakeTranslation func(float64, float64, float64) CATransform3D
 
 // CATransform3DMakeTranslation calls the QuartzCore framework function CATransform3DMakeTranslation.
-func CATransform3DMakeTranslation(tx float64, ty float64, tz float64) unsafe.Pointer {
+func CATransform3DMakeTranslation(tx float64, ty float64, tz float64) CATransform3D {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCATransform3DMakeTranslation == nil {
 		ebipurego.RegisterLibFunc(&_fnCATransform3DMakeTranslation, _lib, "CATransform3DMakeTranslation")
@@ -154,10 +152,10 @@ func CATransform3DMakeTranslation(tx float64, ty float64, tz float64) unsafe.Poi
 	return _fnCATransform3DMakeTranslation(tx, ty, tz)
 }
 
-var _fnCATransform3DRotate func(unsafe.Pointer, float64, float64, float64, float64) unsafe.Pointer
+var _fnCATransform3DRotate func(CATransform3D, float64, float64, float64, float64) CATransform3D
 
 // CATransform3DRotate calls the QuartzCore framework function CATransform3DRotate.
-func CATransform3DRotate(t unsafe.Pointer, angle float64, x float64, y float64, z float64) unsafe.Pointer {
+func CATransform3DRotate(t CATransform3D, angle float64, x float64, y float64, z float64) CATransform3D {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCATransform3DRotate == nil {
 		ebipurego.RegisterLibFunc(&_fnCATransform3DRotate, _lib, "CATransform3DRotate")
@@ -165,10 +163,10 @@ func CATransform3DRotate(t unsafe.Pointer, angle float64, x float64, y float64, 
 	return _fnCATransform3DRotate(t, angle, x, y, z)
 }
 
-var _fnCATransform3DScale func(unsafe.Pointer, float64, float64, float64) unsafe.Pointer
+var _fnCATransform3DScale func(CATransform3D, float64, float64, float64) CATransform3D
 
 // CATransform3DScale calls the QuartzCore framework function CATransform3DScale.
-func CATransform3DScale(t unsafe.Pointer, sx float64, sy float64, sz float64) unsafe.Pointer {
+func CATransform3DScale(t CATransform3D, sx float64, sy float64, sz float64) CATransform3D {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCATransform3DScale == nil {
 		ebipurego.RegisterLibFunc(&_fnCATransform3DScale, _lib, "CATransform3DScale")
@@ -176,10 +174,10 @@ func CATransform3DScale(t unsafe.Pointer, sx float64, sy float64, sz float64) un
 	return _fnCATransform3DScale(t, sx, sy, sz)
 }
 
-var _fnCATransform3DTranslate func(unsafe.Pointer, float64, float64, float64) unsafe.Pointer
+var _fnCATransform3DTranslate func(CATransform3D, float64, float64, float64) CATransform3D
 
 // CATransform3DTranslate calls the QuartzCore framework function CATransform3DTranslate.
-func CATransform3DTranslate(t unsafe.Pointer, tx float64, ty float64, tz float64) unsafe.Pointer {
+func CATransform3DTranslate(t CATransform3D, tx float64, ty float64, tz float64) CATransform3D {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCATransform3DTranslate == nil {
 		ebipurego.RegisterLibFunc(&_fnCATransform3DTranslate, _lib, "CATransform3DTranslate")

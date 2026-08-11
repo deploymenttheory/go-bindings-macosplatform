@@ -56,7 +56,7 @@ func NewImageBilinearScale() *ImageBilinearScale {
 }
 
 // WithScaleTransform sets an optional transform that describes how to scale and translate the source image If the scaleTransform is NULL, then any image scaling factor such as MPSImageLanczosScale will rescale the image so that the source image fits exactly into the destination texture.  If the transform is not NULL, then the transform is used for determining how to map the source image to the destination. Default: NULL When the scaleTransform is set to non-NULL, the values pointed to by the new scaleTransform are copied to object storage, and the pointer is updated to point to internal storage. Do not attempt to free it.  You may free your copy of the MPSScaleTransform as soon as the property set operation is complete. When calculating a scaleTransform, use the limits of the bounding box for the intended source region of interest and the destination clipRect. Adjustments for pixel center coordinates are handled internally to the function.  For example, the scale transform to convert the entire source image to the entire destination image size (clipRect = MPSRectNoClip) would be:
-func (ibs *ImageBilinearScale) WithScaleTransform(scaleTransform *mpscore.MPSScaleTransform) *ImageBilinearScale {
+func (ibs *ImageBilinearScale) WithScaleTransform(scaleTransform *MPSScaleTransform) *ImageBilinearScale {
 	objc.Send[objc.ID](objref.IDOf(ibs), objc.RegisterName("setScaleTransform:"), unsafe.Pointer(scaleTransform))
 	return ibs
 }

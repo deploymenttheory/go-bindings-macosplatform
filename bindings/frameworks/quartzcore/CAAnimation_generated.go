@@ -99,6 +99,12 @@ func (a *Animation) WithRemovedOnCompletion(removedOnCompletion bool) *Animation
 	return a
 }
 
+// WithPreferredFrameRateRange sets the preferred frame rate range.
+func (a *Animation) WithPreferredFrameRateRange(preferredFrameRateRange CAFrameRateRange) *Animation {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setPreferredFrameRateRange:"), preferredFrameRateRange)
+	return a
+}
+
 // ShouldArchiveValueForKey specifies whether the value of the property for a given key is archived.
 func (a *Animation) ShouldArchiveValueForKey(key string) bool {
 	defer runtime.KeepAlive(a)
@@ -117,6 +123,13 @@ func (a *Animation) TimingFunction() *MediaTimingFunction {
 func (a *Animation) IsRemovedOnCompletion() bool {
 	defer runtime.KeepAlive(a)
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isRemovedOnCompletion"))
+	return _r
+}
+
+// PreferredFrameRateRange returns the preferred frame rate range.
+func (a *Animation) PreferredFrameRateRange() CAFrameRateRange {
+	defer runtime.KeepAlive(a)
+	_r := objc.Send[CAFrameRateRange](objref.IDOf(a), objc.RegisterName("preferredFrameRateRange"))
 	return _r
 }
 

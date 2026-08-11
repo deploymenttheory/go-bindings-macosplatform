@@ -131,14 +131,14 @@ func (t *Texture) WriteToURLTypeLevel(nsurl string, type_ corefoundation.CFStrin
 func (t *Texture) ImageFromTexture() coregraphics.CGImageRef {
 	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("imageFromTexture"))
-	return coregraphics.CGImageRef{obj.Wrap(_r)}
+	return coregraphics.CGImageRef{Object: obj.Wrap(_r)}
 }
 
 // ImageFromTextureAtLevel wraps the corresponding Objective-C method.
 func (t *Texture) ImageFromTextureAtLevel(level int) coregraphics.CGImageRef {
 	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("imageFromTextureAtLevel:"), level)
-	return coregraphics.CGImageRef{obj.Wrap(_r)}
+	return coregraphics.CGImageRef{Object: obj.Wrap(_r)}
 }
 
 // TexelDataWithTopLeftOrigin returns the texture’s image data, organized such that its first pixel represents the top-left corner of the image.

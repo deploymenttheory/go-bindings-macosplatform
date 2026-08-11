@@ -161,6 +161,12 @@ func (ka *KeyframeAnimation) WithRemovedOnCompletion(removedOnCompletion bool) *
 	return ka
 }
 
+// WithPreferredFrameRateRange sets the preferred frame rate range.
+func (ka *KeyframeAnimation) WithPreferredFrameRateRange(preferredFrameRateRange CAFrameRateRange) *KeyframeAnimation {
+	objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("setPreferredFrameRateRange:"), preferredFrameRateRange)
+	return ka
+}
+
 // Values returns the values.
 func (ka *KeyframeAnimation) Values() obj.Object {
 	defer runtime.KeepAlive(ka)
@@ -179,7 +185,7 @@ func (ka *KeyframeAnimation) SetValues(values obj.Object) {
 func (ka *KeyframeAnimation) Path() coregraphics.CGPathRef {
 	defer runtime.KeepAlive(ka)
 	_r := objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("path"))
-	return coregraphics.CGPathRef{obj.Wrap(_r)}
+	return coregraphics.CGPathRef{Object: obj.Wrap(_r)}
 }
 
 // KeyTimes returns the key times.

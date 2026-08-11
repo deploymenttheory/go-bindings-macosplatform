@@ -91,7 +91,7 @@ func NewIOBluetoothSDPUUIDWithUUID32(uuid32 uint32) *IOBluetoothSDPUUID {
 func (ibs *IOBluetoothSDPUUID) SDPUUIDRef() IOBluetoothSDPUUIDRef {
 	defer runtime.KeepAlive(ibs)
 	_r := objc.Send[objc.ID](objref.IDOf(ibs), objc.RegisterName("getSDPUUIDRef"))
-	return IOBluetoothSDPUUIDRef{obj.WrapUnmanaged(_r)}
+	return IOBluetoothSDPUUIDRef{Object: obj.WrapUnmanaged(_r)}
 }
 
 // GetUUIDWithLength returns an IOBluetoothSDPUUID object matching the target UUID, but with the given number of bytes.

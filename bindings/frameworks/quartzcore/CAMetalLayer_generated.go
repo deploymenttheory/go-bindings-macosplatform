@@ -145,6 +145,12 @@ func (ml *MetalLayer) WithAnchorPointZ(anchorPointZ float64) *MetalLayer {
 	return ml
 }
 
+// WithTransform sets the transform applied to the layer’s contents. Animatable.
+func (ml *MetalLayer) WithTransform(transform CATransform3D) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(ml), objc.RegisterName("setTransform:"), transform)
+	return ml
+}
+
 // WithFrame sets the layer’s frame rectangle.
 func (ml *MetalLayer) WithFrame(frame corefoundation.CGRect) *MetalLayer {
 	objc.Send[objc.ID](objref.IDOf(ml), objc.RegisterName("setFrame:"), frame)
@@ -173,6 +179,12 @@ func (ml *MetalLayer) WithGeometryFlipped(geometryFlipped bool) *MetalLayer {
 func (ml *MetalLayer) WithSublayers(items ...LayerProvider) *MetalLayer {
 	_arr := purego.SliceToNSArray(items, func(_v LayerProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(ml), objc.RegisterName("setSublayers:"), _arr)
+	return ml
+}
+
+// WithSublayerTransform sets specifies the transform to apply to sublayers when rendering. Animatable.
+func (ml *MetalLayer) WithSublayerTransform(sublayerTransform CATransform3D) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(ml), objc.RegisterName("setSublayerTransform:"), sublayerTransform)
 	return ml
 }
 
@@ -480,7 +492,7 @@ func (ml *MetalLayer) PresentsWithTransaction() bool {
 func (ml *MetalLayer) Colorspace() coregraphics.CGColorSpaceRef {
 	defer runtime.KeepAlive(ml)
 	_r := objc.Send[objc.ID](objref.IDOf(ml), objc.RegisterName("colorspace"))
-	return coregraphics.CGColorSpaceRef{obj.Wrap(_r)}
+	return coregraphics.CGColorSpaceRef{Object: obj.Wrap(_r)}
 }
 
 // EDRMetadata returns the edr metadata.

@@ -7,7 +7,6 @@ package metalperformanceshaders
 import (
 	"runtime"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsmatrix"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -83,7 +82,7 @@ func NewMatrixCopyDescriptorWithSourceMatricesDestinationMatricesOffsetVectorOff
 }
 
 // SetCopyOperationAtIndexSourceMatrixDestinationMatrixOffsets initialize a MPSMatrixCopyDescriptor using offsets generated on the CPU This is for one at a time intialization of the copy operations
-func (mcd *MatrixCopyDescriptor) SetCopyOperationAtIndexSourceMatrixDestinationMatrixOffsets(index int, sourceMatrix obj.Object, destinationMatrix obj.Object, offsets mpsmatrix.MPSMatrixCopyOffsets) {
+func (mcd *MatrixCopyDescriptor) SetCopyOperationAtIndexSourceMatrixDestinationMatrixOffsets(index int, sourceMatrix obj.Object, destinationMatrix obj.Object, offsets MPSMatrixCopyOffsets) {
 	defer runtime.KeepAlive(mcd)
 	defer runtime.KeepAlive(sourceMatrix)
 	defer runtime.KeepAlive(destinationMatrix)

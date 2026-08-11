@@ -329,7 +329,7 @@ func (i *Image) CGImageForProposedRectContextHints(proposedDestRect *corefoundat
 	defer runtime.KeepAlive(referenceContext)
 	defer runtime.KeepAlive(hints)
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("CGImageForProposedRect:context:hints:"), unsafe.Pointer(proposedDestRect), objref.IDOf(referenceContext), objref.IDOf(hints))
-	return coregraphics.CGImageRef{obj.Wrap(_r)}
+	return coregraphics.CGImageRef{Object: obj.Wrap(_r)}
 }
 
 // BestRepresentationForRectContextHints returns the best representation of the image for the specified rectangle using the provided hints.

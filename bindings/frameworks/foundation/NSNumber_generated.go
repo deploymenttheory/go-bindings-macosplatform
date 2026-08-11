@@ -317,6 +317,13 @@ func (n *Number) StringValue() string {
 	return purego.GoString(_r)
 }
 
+// DecimalValue returns the decimal value.
+func (n *Number) DecimalValue() NSDecimal {
+	defer runtime.KeepAlive(n)
+	_r := objc.Send[NSDecimal](objref.IDOf(n), objc.RegisterName("decimalValue"))
+	return _r
+}
+
 // isNumber marks Number — and, by embedding promotion, its
 // subclasses — as a member of the Number hierarchy, sealing its provider
 // interface so only real members satisfy it.

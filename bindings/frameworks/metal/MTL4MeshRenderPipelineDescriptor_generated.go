@@ -86,6 +86,18 @@ func (mmrpd *MTL4MeshRenderPipelineDescriptor) WithMaxTotalThreadsPerMeshThreadg
 	return mmrpd
 }
 
+// WithRequiredThreadsPerObjectThreadgroup sets controls the required number of object threads-per-threadgroup when drawing with a mesh shader pipeline you create from this descriptor.
+func (mmrpd *MTL4MeshRenderPipelineDescriptor) WithRequiredThreadsPerObjectThreadgroup(requiredThreadsPerObjectThreadgroup MTLSize) *MTL4MeshRenderPipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mmrpd), objc.RegisterName("setRequiredThreadsPerObjectThreadgroup:"), requiredThreadsPerObjectThreadgroup)
+	return mmrpd
+}
+
+// WithRequiredThreadsPerMeshThreadgroup sets controls the required number of mesh threads-per-threadgroup when drawing with a mesh shader pipeline you create from this descriptor.
+func (mmrpd *MTL4MeshRenderPipelineDescriptor) WithRequiredThreadsPerMeshThreadgroup(requiredThreadsPerMeshThreadgroup MTLSize) *MTL4MeshRenderPipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mmrpd), objc.RegisterName("setRequiredThreadsPerMeshThreadgroup:"), requiredThreadsPerMeshThreadgroup)
+	return mmrpd
+}
+
 // WithObjectThreadgroupSizeIsMultipleOfThreadExecutionWidth sets provides a guarantee to Metal regarding the number of threadgroup threads for the object stage of a pipeline you create from this descriptor.
 func (mmrpd *MTL4MeshRenderPipelineDescriptor) WithObjectThreadgroupSizeIsMultipleOfThreadExecutionWidth(objectThreadgroupSizeIsMultipleOfThreadExecutionWidth bool) *MTL4MeshRenderPipelineDescriptor {
 	objc.Send[objc.ID](objref.IDOf(mmrpd), objc.RegisterName("setObjectThreadgroupSizeIsMultipleOfThreadExecutionWidth:"), objectThreadgroupSizeIsMultipleOfThreadExecutionWidth)
@@ -242,6 +254,20 @@ func (mmrpd *MTL4MeshRenderPipelineDescriptor) MaxTotalThreadsPerObjectThreadgro
 func (mmrpd *MTL4MeshRenderPipelineDescriptor) MaxTotalThreadsPerMeshThreadgroup() int {
 	defer runtime.KeepAlive(mmrpd)
 	_r := objc.Send[int](objref.IDOf(mmrpd), objc.RegisterName("maxTotalThreadsPerMeshThreadgroup"))
+	return _r
+}
+
+// RequiredThreadsPerObjectThreadgroup returns controls the required number of object threads-per-threadgroup when drawing with a mesh shader pipeline you create from this descriptor. This argument is optional, unless this pipeline uses `CooperativeTensors`, in which case you are responsible for providing it. When this value is set to non-zero, you are responsible for ensuring the parameter `threadsPerObjectThreadgroup` in any mesh dispatch draw calls that use this mesh render pipeline, such as “MTL4RenderCommandEncoder/drawMeshThreadgroups:threadsPerObjectThreadgroup:threadsPerMeshThreadgroup:“, match it. Setting this value to a size of 0 in every dimension disables this property.
+func (mmrpd *MTL4MeshRenderPipelineDescriptor) RequiredThreadsPerObjectThreadgroup() MTLSize {
+	defer runtime.KeepAlive(mmrpd)
+	_r := objc.Send[MTLSize](objref.IDOf(mmrpd), objc.RegisterName("requiredThreadsPerObjectThreadgroup"))
+	return _r
+}
+
+// RequiredThreadsPerMeshThreadgroup returns controls the required number of mesh threads-per-threadgroup when drawing with a mesh shader pipeline you create from this descriptor. This argument is optional, unless this pipeline uses `CooperativeTensors`, in which case you are responsible for providing it. When this value is set to non-zero, you are responsible for ensuring the parameter `threadsPerMeshThreadgroup` in any mesh dispatch draw calls that use this mesh render pipeline, such as “MTL4RenderCommandEncoder/drawMeshThreadgroups:threadsPerObjectThreadgroup:threadsPerMeshThreadgroup:“, match it. Setting this value to a size of 0 in every dimension disables this property.
+func (mmrpd *MTL4MeshRenderPipelineDescriptor) RequiredThreadsPerMeshThreadgroup() MTLSize {
+	defer runtime.KeepAlive(mmrpd)
+	_r := objc.Send[MTLSize](objref.IDOf(mmrpd), objc.RegisterName("requiredThreadsPerMeshThreadgroup"))
 	return _r
 }
 

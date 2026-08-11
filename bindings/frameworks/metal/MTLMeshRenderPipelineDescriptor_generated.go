@@ -196,6 +196,18 @@ func (mrpd *MeshRenderPipelineDescriptor) WithShaderValidation(shaderValidation 
 	return mrpd
 }
 
+// WithRequiredThreadsPerObjectThreadgroup sets sets the required object threads-per-threadgroup during mesh draws. The `threadsPerObjectThreadgroup` argument of any draw must match to this value if it is set. Setting this to a size of 0 in every dimension disables this property
+func (mrpd *MeshRenderPipelineDescriptor) WithRequiredThreadsPerObjectThreadgroup(requiredThreadsPerObjectThreadgroup MTLSize) *MeshRenderPipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mrpd), objc.RegisterName("setRequiredThreadsPerObjectThreadgroup:"), requiredThreadsPerObjectThreadgroup)
+	return mrpd
+}
+
+// WithRequiredThreadsPerMeshThreadgroup sets sets the required mesh threads-per-threadgroup during mesh draws. The `threadsPerMeshThreadgroup` argument of any draw must match to this value if it is set. Setting this to a size of 0 in every dimension disables this property
+func (mrpd *MeshRenderPipelineDescriptor) WithRequiredThreadsPerMeshThreadgroup(requiredThreadsPerMeshThreadgroup MTLSize) *MeshRenderPipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mrpd), objc.RegisterName("setRequiredThreadsPerMeshThreadgroup:"), requiredThreadsPerMeshThreadgroup)
+	return mrpd
+}
+
 // Reset restore all mesh pipeline descriptor properties to their default values.
 func (mrpd *MeshRenderPipelineDescriptor) Reset() {
 	defer runtime.KeepAlive(mrpd)
@@ -376,5 +388,19 @@ func (mrpd *MeshRenderPipelineDescriptor) FragmentLinkedFunctions() *LinkedFunct
 func (mrpd *MeshRenderPipelineDescriptor) ShaderValidation() ShaderValidation {
 	defer runtime.KeepAlive(mrpd)
 	_r := objc.Send[ShaderValidation](objref.IDOf(mrpd), objc.RegisterName("shaderValidation"))
+	return _r
+}
+
+// RequiredThreadsPerObjectThreadgroup sets the required object threads-per-threadgroup during mesh draws. The `threadsPerObjectThreadgroup` argument of any draw must match to this value if it is set. Setting this to a size of 0 in every dimension disables this property
+func (mrpd *MeshRenderPipelineDescriptor) RequiredThreadsPerObjectThreadgroup() MTLSize {
+	defer runtime.KeepAlive(mrpd)
+	_r := objc.Send[MTLSize](objref.IDOf(mrpd), objc.RegisterName("requiredThreadsPerObjectThreadgroup"))
+	return _r
+}
+
+// RequiredThreadsPerMeshThreadgroup sets the required mesh threads-per-threadgroup during mesh draws. The `threadsPerMeshThreadgroup` argument of any draw must match to this value if it is set. Setting this to a size of 0 in every dimension disables this property
+func (mrpd *MeshRenderPipelineDescriptor) RequiredThreadsPerMeshThreadgroup() MTLSize {
+	defer runtime.KeepAlive(mrpd)
+	_r := objc.Send[MTLSize](objref.IDOf(mrpd), objc.RegisterName("requiredThreadsPerMeshThreadgroup"))
 	return _r
 }
