@@ -4,223 +4,170 @@
 
 package machvm
 
-// #include "bridge/machvm_bridge.h"
-import "C"
-
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo"
 	"unsafe"
 )
 
-var _ unsafe.Pointer // suppress unused import
+var (
+	_pg_mig_strncpy_zerofill      func(string, string, int32) int32
+	_pg_vm_allocate               func(uint32, *uint64, uint64, int32) int32
+	_pg_vm_deallocate             func(uint32, uint64, uint64) int32
+	_pg_vm_protect                func(uint32, uint64, uint64, int32, int32) int32
+	_pg_vm_inherit                func(uint32, uint64, uint64, uint32) int32
+	_pg_vm_read                   func(uint32, uint64, uint64, *uint64, *uint32) int32
+	_pg_vm_read_list              func(uint32, unsafe.Pointer, uint32) int32
+	_pg_vm_write                  func(uint32, uint64, uint64, uint32) int32
+	_pg_vm_copy                   func(uint32, uint64, uint64, uint64) int32
+	_pg_vm_read_overwrite         func(uint32, uint64, uint64, uint64, *uint64) int32
+	_pg_vm_msync                  func(uint32, uint64, uint64, uint32) int32
+	_pg_vm_behavior_set           func(uint32, uint64, uint64, int32) int32
+	_pg_vm_map                    func(uint32, *uint64, uint64, uint64, int32, uint32, uint64, int32, int32, int32, uint32) int32
+	_pg_vm_machine_attribute      func(uint32, uint64, uint64, uint32, *int32) int32
+	_pg_vm_remap                  func(uint32, *uint64, uint64, uint64, int32, uint32, uint64, int32, *int32, *int32, uint32) int32
+	_pg_mach_make_memory_entry    func(uint32, *uint64, uint64, int32, *uint32, uint32) int32
+	_pg_vm_map_page_query         func(uint32, uint64, *int32, *int32) int32
+	_pg_vm_region_recurse_64      func(uint32, *uint64, *uint64, *uint32, *int32, *uint32) int32
+	_pg_vm_region_64              func(uint32, *uint64, *uint64, int32, *int32, *uint32, *uint32) int32
+	_pg_mach_make_memory_entry_64 func(uint32, *uint64, uint64, int32, *uint32, uint32) int32
+	_pg_vm_purgable_control       func(uint32, uint64, int32, *int32) int32
+	_pg_vm_remap_new              func(uint32, *uint64, uint64, uint64, int32, uint32, uint64, int32, *int32, *int32, uint32) int32
+	_pg_vm_reallocate             func(uint32, uint64, uint64, *uint64, uint64, uint64, int32, int32) int32
+)
 
 // [vm_map.h:31]
 // ID: objc-sym machvm.mig_strncpy_zerofill
 func Mig_strncpy_zerofill(dest string, src string, len_ int32) int32 {
-	_cstr_dest := C.CString(dest)
-	defer C.free(unsafe.Pointer(_cstr_dest))
-	_cstr_src := C.CString(src)
-	defer C.free(unsafe.Pointer(_cstr_src))
-	var _exc unsafe.Pointer
-	_result := int32(C.machvm_fn_mig_strncpy_zerofill(_cstr_dest, _cstr_src, C.int32_t(len_), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_mig_strncpy_zerofill(dest, src, len_)
 }
 
 // [vm_map.h:96]
 // ID: objc-sym machvm.vm_allocate
 func Vm_allocate(target_task uint32, address *uint64, size uint64, flags int32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.machvm_fn_vm_allocate(C.uint32_t(target_task), unsafe.Pointer(address), C.uint64_t(size), C.int32_t(flags), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_vm_allocate(target_task, address, size, flags)
 }
 
 // [vm_map.h:110]
 // ID: objc-sym machvm.vm_deallocate
 func Vm_deallocate(target_task uint32, address uint64, size uint64) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.machvm_fn_vm_deallocate(C.uint32_t(target_task), C.uint64_t(address), C.uint64_t(size), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_vm_deallocate(target_task, address, size)
 }
 
 // [vm_map.h:123]
 // ID: objc-sym machvm.vm_protect
 func Vm_protect(target_task uint32, address uint64, size uint64, set_maximum int32, new_protection int32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.machvm_fn_vm_protect(C.uint32_t(target_task), C.uint64_t(address), C.uint64_t(size), C.int32_t(set_maximum), C.int32_t(new_protection), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_vm_protect(target_task, address, size, set_maximum, new_protection)
 }
 
 // [vm_map.h:138]
 // ID: objc-sym machvm.vm_inherit
 func Vm_inherit(target_task uint32, address uint64, size uint64, new_inheritance uint32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.machvm_fn_vm_inherit(C.uint32_t(target_task), C.uint64_t(address), C.uint64_t(size), C.uint32_t(new_inheritance), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_vm_inherit(target_task, address, size, new_inheritance)
 }
 
 // [vm_map.h:152]
 // ID: objc-sym machvm.vm_read
 func Vm_read(target_task uint32, address uint64, size uint64, data *uint64, dataCnt *uint32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.machvm_fn_vm_read(C.uint32_t(target_task), C.uint64_t(address), C.uint64_t(size), unsafe.Pointer(data), unsafe.Pointer(dataCnt), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_vm_read(target_task, address, size, data, dataCnt)
 }
 
 // [vm_map.h:167]
 // ID: objc-sym machvm.vm_read_list
 func Vm_read_list(target_task uint32, data_list unsafe.Pointer, count uint32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.machvm_fn_vm_read_list(C.uint32_t(target_task), data_list, C.uint32_t(count), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_vm_read_list(target_task, data_list, count)
 }
 
 // [vm_map.h:180]
 // ID: objc-sym machvm.vm_write
 func Vm_write(target_task uint32, address uint64, data uint64, dataCnt uint32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.machvm_fn_vm_write(C.uint32_t(target_task), C.uint64_t(address), C.uint64_t(data), C.uint32_t(dataCnt), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_vm_write(target_task, address, data, dataCnt)
 }
 
 // [vm_map.h:194]
 // ID: objc-sym machvm.vm_copy
 func Vm_copy(target_task uint32, source_address uint64, size uint64, dest_address uint64) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.machvm_fn_vm_copy(C.uint32_t(target_task), C.uint64_t(source_address), C.uint64_t(size), C.uint64_t(dest_address), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_vm_copy(target_task, source_address, size, dest_address)
 }
 
 // [vm_map.h:208]
 // ID: objc-sym machvm.vm_read_overwrite
 func Vm_read_overwrite(target_task uint32, address uint64, size uint64, data uint64, outsize *uint64) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.machvm_fn_vm_read_overwrite(C.uint32_t(target_task), C.uint64_t(address), C.uint64_t(size), C.uint64_t(data), unsafe.Pointer(outsize), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_vm_read_overwrite(target_task, address, size, data, outsize)
 }
 
 // [vm_map.h:223]
 // ID: objc-sym machvm.vm_msync
 func Vm_msync(target_task uint32, address uint64, size uint64, sync_flags uint32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.machvm_fn_vm_msync(C.uint32_t(target_task), C.uint64_t(address), C.uint64_t(size), C.uint32_t(sync_flags), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_vm_msync(target_task, address, size, sync_flags)
 }
 
 // [vm_map.h:237]
 // ID: objc-sym machvm.vm_behavior_set
 func Vm_behavior_set(target_task uint32, address uint64, size uint64, new_behavior int32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.machvm_fn_vm_behavior_set(C.uint32_t(target_task), C.uint64_t(address), C.uint64_t(size), C.int32_t(new_behavior), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_vm_behavior_set(target_task, address, size, new_behavior)
 }
 
 // [vm_map.h:251]
 // ID: objc-sym machvm.vm_map
 func Vm_map(target_task uint32, address *uint64, size uint64, mask uint64, flags int32, object uint32, offset uint64, copy_ int32, cur_protection int32, max_protection int32, inheritance uint32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.machvm_fn_vm_map(C.uint32_t(target_task), unsafe.Pointer(address), C.uint64_t(size), C.uint64_t(mask), C.int32_t(flags), C.uint32_t(object), C.uint64_t(offset), C.int32_t(copy_), C.int32_t(cur_protection), C.int32_t(max_protection), C.uint32_t(inheritance), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_vm_map(target_task, address, size, mask, flags, object, offset, copy_, cur_protection, max_protection, inheritance)
 }
 
 // [vm_map.h:272]
 // ID: objc-sym machvm.vm_machine_attribute
 func Vm_machine_attribute(target_task uint32, address uint64, size uint64, attribute uint32, value *int32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.machvm_fn_vm_machine_attribute(C.uint32_t(target_task), C.uint64_t(address), C.uint64_t(size), C.uint32_t(attribute), unsafe.Pointer(value), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_vm_machine_attribute(target_task, address, size, attribute, value)
 }
 
 // [vm_map.h:287]
 // ID: objc-sym machvm.vm_remap
 func Vm_remap(target_task uint32, target_address *uint64, size uint64, mask uint64, flags int32, src_task uint32, src_address uint64, copy_ int32, cur_protection *int32, max_protection *int32, inheritance uint32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.machvm_fn_vm_remap(C.uint32_t(target_task), unsafe.Pointer(target_address), C.uint64_t(size), C.uint64_t(mask), C.int32_t(flags), C.uint32_t(src_task), C.uint64_t(src_address), C.int32_t(copy_), unsafe.Pointer(cur_protection), unsafe.Pointer(max_protection), C.uint32_t(inheritance), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_vm_remap(target_task, target_address, size, mask, flags, src_task, src_address, copy_, cur_protection, max_protection, inheritance)
 }
 
 // [vm_map.h:321]
 // ID: objc-sym machvm.mach_make_memory_entry
 func Mach_make_memory_entry(target_task uint32, size *uint64, offset uint64, permission int32, object_handle *uint32, parent_entry uint32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.machvm_fn_mach_make_memory_entry(C.uint32_t(target_task), unsafe.Pointer(size), C.uint64_t(offset), C.int32_t(permission), unsafe.Pointer(object_handle), C.uint32_t(parent_entry), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_mach_make_memory_entry(target_task, size, offset, permission, object_handle, parent_entry)
 }
 
 // [vm_map.h:337]
 // ID: objc-sym machvm.vm_map_page_query
 func Vm_map_page_query(target_map uint32, offset uint64, disposition *int32, ref_count *int32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.machvm_fn_vm_map_page_query(C.uint32_t(target_map), C.uint64_t(offset), unsafe.Pointer(disposition), unsafe.Pointer(ref_count), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_vm_map_page_query(target_map, offset, disposition, ref_count)
 }
 
 // [vm_map.h:395]
 // ID: objc-sym machvm.vm_region_recurse_64
 func Vm_region_recurse_64(target_task uint32, address *uint64, size *uint64, nesting_depth *uint32, info *int32, infoCnt *uint32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.machvm_fn_vm_region_recurse_64(C.uint32_t(target_task), unsafe.Pointer(address), unsafe.Pointer(size), unsafe.Pointer(nesting_depth), unsafe.Pointer(info), unsafe.Pointer(infoCnt), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_vm_region_recurse_64(target_task, address, size, nesting_depth, info, infoCnt)
 }
 
 // [vm_map.h:426]
 // ID: objc-sym machvm.vm_region_64
 func Vm_region_64(target_task uint32, address *uint64, size *uint64, flavor int32, info *int32, infoCnt *uint32, object_name *uint32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.machvm_fn_vm_region_64(C.uint32_t(target_task), unsafe.Pointer(address), unsafe.Pointer(size), C.int32_t(flavor), unsafe.Pointer(info), unsafe.Pointer(infoCnt), unsafe.Pointer(object_name), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_vm_region_64(target_task, address, size, flavor, info, infoCnt, object_name)
 }
 
 // [vm_map.h:443]
 // ID: objc-sym machvm.mach_make_memory_entry_64
 func Mach_make_memory_entry_64(target_task uint32, size *uint64, offset uint64, permission int32, object_handle *uint32, parent_entry uint32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.machvm_fn_mach_make_memory_entry_64(C.uint32_t(target_task), unsafe.Pointer(size), C.uint64_t(offset), C.int32_t(permission), unsafe.Pointer(object_handle), C.uint32_t(parent_entry), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_mach_make_memory_entry_64(target_task, size, offset, permission, object_handle, parent_entry)
 }
 
 // [vm_map.h:480]
 // ID: objc-sym machvm.vm_purgable_control
 func Vm_purgable_control(target_task uint32, address uint64, control int32, state *int32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.machvm_fn_vm_purgable_control(C.uint32_t(target_task), C.uint64_t(address), C.int32_t(control), unsafe.Pointer(state), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_vm_purgable_control(target_task, address, control, state)
 }
 
 // [vm_map.h:505]
 // ID: objc-sym machvm.vm_remap_new
 func Vm_remap_new(target_task uint32, target_address *uint64, size uint64, mask uint64, flags int32, src_task uint32, src_address uint64, copy_ int32, cur_protection *int32, max_protection *int32, inheritance uint32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.machvm_fn_vm_remap_new(C.uint32_t(target_task), unsafe.Pointer(target_address), C.uint64_t(size), C.uint64_t(mask), C.int32_t(flags), C.uint32_t(src_task), C.uint64_t(src_address), C.int32_t(copy_), unsafe.Pointer(cur_protection), unsafe.Pointer(max_protection), C.uint32_t(inheritance), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_vm_remap_new(target_task, target_address, size, mask, flags, src_task, src_address, copy_, cur_protection, max_protection, inheritance)
 }
 
 // [vm_map.h:526]
 // ID: objc-sym machvm.vm_reallocate
 func Vm_reallocate(target_task uint32, src uint64, src_size uint64, dst *uint64, dst_size uint64, align_mask uint64, options int32, flags int32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.machvm_fn_vm_reallocate(C.uint32_t(target_task), C.uint64_t(src), C.uint64_t(src_size), unsafe.Pointer(dst), C.uint64_t(dst_size), C.uint64_t(align_mask), C.int32_t(options), C.int32_t(flags), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_vm_reallocate(target_task, src, src_size, dst, dst_size, align_mask, options, flags)
 }

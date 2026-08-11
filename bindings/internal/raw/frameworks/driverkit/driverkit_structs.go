@@ -114,7 +114,7 @@ type IOMemoryMap_LocalIVars struct{}
 
 type IONamedValue struct {
 	Value int32
-	Name  string
+	Name  *byte
 }
 
 type IONormDistReportValues struct {

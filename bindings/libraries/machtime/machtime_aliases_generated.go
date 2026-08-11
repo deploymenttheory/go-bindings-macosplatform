@@ -10,15 +10,14 @@ import raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/inter
 // types and values so callers name them through this package.
 
 type (
-	Ipc_info_object_type_t                = raw.Ipc_info_object_type_t
-	MachTimebaseInfo                      = raw.MachTimebaseInfo
-	MachTimebaseInfoDataT                 = raw.MachTimebaseInfoDataT
-	MachTimebaseInfoT                     = raw.MachTimebaseInfoT
-	Mach_vm_range_flags_t                 = raw.Mach_vm_range_flags_t
-	Mach_vm_range_flavor_t                = raw.Mach_vm_range_flavor_t
-	Mach_vm_range_tag_t                   = raw.Mach_vm_range_tag_t
-	Mpo_flags_t                           = raw.Mpo_flags_t
-	Virtual_memory_guard_exception_code_t = raw.Virtual_memory_guard_exception_code_t
+	IpcInfoObjectTypeT               = raw.IpcInfoObjectTypeT
+	MachTimebaseInfo                 = raw.MachTimebaseInfo
+	MachTimebaseInfoDataT            = raw.MachTimebaseInfoDataT
+	MachVmRangeFlagsT                = raw.MachVmRangeFlagsT
+	MachVmRangeFlavorT               = raw.MachVmRangeFlavorT
+	MachVmRangeTagT                  = raw.MachVmRangeTagT
+	MpoFlagsT                        = raw.MpoFlagsT
+	VirtualMemoryGuardExceptionCodeT = raw.VirtualMemoryGuardExceptionCodeT
 )
 
 const (

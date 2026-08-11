@@ -56,6 +56,17 @@ var Primitives = map[string]bool{
 // Arrays are corrected element-wise (int[4] → [4]int32). Other types (short→int16,
 // long→int, stdint) already match and pass through.
 func StructFieldGoType(objcType, mapped string) string {
+	// A char* field mapped to Go string would embed a 16-byte string header
+	// where C has an 8-byte pointer, mislaying every following field — and a C
+	// write through the struct would corrupt the header. string is a
+	// convenience only function parameters/returns can afford; fields keep the
+	// raw pointer.
+	if mapped == "string" {
+		return "*byte"
+	}
+	if strings.HasSuffix(mapped, "]string") {
+		return mapped[:len(mapped)-len("string")] + "*byte"
+	}
 	base := objcType
 	for _, q := range []string{"const", "volatile", "_Nonnull", "_Nullable", "_Null_unspecified"} {
 		base = strings.ReplaceAll(base, q, " ")

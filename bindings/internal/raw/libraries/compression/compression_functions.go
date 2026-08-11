@@ -4,11 +4,65 @@
 
 package compression
 
-// #include "bridge/compression_bridge.h"
-import "C"
-
 import (
 	"unsafe"
 )
 
-var _ unsafe.Pointer // suppress unused import
+var (
+	_pg_compression_encode_scratch_buffer_size func(CompressionAlgorithm) uint64
+	_pg_compression_encode_buffer              func(*uint8, uint64, *uint8, uint64, unsafe.Pointer, CompressionAlgorithm) uint64
+	_pg_compression_decode_scratch_buffer_size func(CompressionAlgorithm) uint64
+	_pg_compression_decode_buffer              func(*uint8, uint64, *uint8, uint64, unsafe.Pointer, CompressionAlgorithm) uint64
+	_pg_compression_stream_init                func(*CompressionStream, CompressionStreamOperation, CompressionAlgorithm) CompressionStatus
+	_pg_compression_stream_process             func(*CompressionStream, int32) CompressionStatus
+	_pg_compression_stream_destroy             func(*CompressionStream) CompressionStatus
+)
+
+// [compression.h:150]
+// Introduced: macOS 10.11
+// ID: objc-sym Compression.compression_encode_scratch_buffer_size
+func Compression_encode_scratch_buffer_size(algorithm CompressionAlgorithm) uint64 {
+	return _pg_compression_encode_scratch_buffer_size(algorithm)
+}
+
+// [compression.h:191]
+// Introduced: macOS 10.11
+// ID: objc-sym Compression.compression_encode_buffer
+func Compression_encode_buffer(dst_buffer *uint8, dst_size uint64, src_buffer *uint8, src_size uint64, scratch_buffer unsafe.Pointer, algorithm CompressionAlgorithm) uint64 {
+	return _pg_compression_encode_buffer(dst_buffer, dst_size, src_buffer, src_size, scratch_buffer, algorithm)
+}
+
+// [compression.h:213]
+// Introduced: macOS 10.11
+// ID: objc-sym Compression.compression_decode_scratch_buffer_size
+func Compression_decode_scratch_buffer_size(algorithm CompressionAlgorithm) uint64 {
+	return _pg_compression_decode_scratch_buffer_size(algorithm)
+}
+
+// [compression.h:256]
+// Introduced: macOS 10.11
+// ID: objc-sym Compression.compression_decode_buffer
+func Compression_decode_buffer(dst_buffer *uint8, dst_size uint64, src_buffer *uint8, src_size uint64, scratch_buffer unsafe.Pointer, algorithm CompressionAlgorithm) uint64 {
+	return _pg_compression_decode_buffer(dst_buffer, dst_size, src_buffer, src_size, scratch_buffer, algorithm)
+}
+
+// [compression.h:389]
+// Introduced: macOS 10.11
+// ID: objc-sym Compression.compression_stream_init
+func Compression_stream_init(stream *CompressionStream, operation CompressionStreamOperation, algorithm CompressionAlgorithm) CompressionStatus {
+	return _pg_compression_stream_init(stream, operation, algorithm)
+}
+
+// [compression.h:452]
+// Introduced: macOS 10.11
+// ID: objc-sym Compression.compression_stream_process
+func Compression_stream_process(stream *CompressionStream, flags int32) CompressionStatus {
+	return _pg_compression_stream_process(stream, flags)
+}
+
+// [compression.h:470]
+// Introduced: macOS 10.11
+// ID: objc-sym Compression.compression_stream_destroy
+func Compression_stream_destroy(stream *CompressionStream) CompressionStatus {
+	return _pg_compression_stream_destroy(stream)
+}

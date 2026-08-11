@@ -14,7 +14,7 @@ type AuthorizationExternalForm struct {
 
 // A structure containing information about an authorization right or the authorization environment.
 type AuthorizationItem struct {
-	Name        string
+	Name        *byte
 	ValueLength uint
 	Value       unsafe.Pointer
 	Flags       uint32
@@ -37,7 +37,7 @@ type CSSM_APPLE_CL_CSR_REQUEST struct {
 	CspHand           int
 	SubjectPublicKey  *CssmKey
 	SubjectPrivateKey *CssmKey
-	ChallengeString   string
+	ChallengeString   *byte
 }
 
 type CSSM_APPLE_TP_ACTION_DATA struct {
@@ -62,7 +62,7 @@ type CSSM_APPLE_TP_CERT_REQUEST struct {
 	NotAfter         uint32
 	NumExtensions    uint32
 	Extensions       *CE_DataAndType
-	ChallengeString  string
+	ChallengeString  *byte
 }
 
 type CSSM_APPLE_TP_CRL_OPTIONS struct {
@@ -82,13 +82,13 @@ type CSSM_APPLE_TP_SMIME_OPTIONS struct {
 	Version        uint32
 	IntendedUsage  uint16
 	SenderEmailLen uint32
-	SenderEmail    string
+	SenderEmail    *byte
 }
 
 type CSSM_APPLE_TP_SSL_OPTIONS struct {
 	Version       uint32
 	ServerNameLen uint32
-	ServerName    string
+	ServerName    *byte
 	Flags         uint32
 }
 
@@ -747,7 +747,7 @@ type CssmDbRecordIndexInfo struct {
 // C struct: cssm_db_schema_attribute_info
 type CssmDbSchemaAttributeInfo struct {
 	AttributeId     uint32
-	AttributeName   string
+	AttributeName   *byte
 	AttributeNameID CssmData
 	DataType        uint32
 }
@@ -773,7 +773,7 @@ type CssmDbinfo struct {
 	RecordAttributeNames  *CssmDbRecordAttributeInfo
 	RecordIndexes         *CssmDbRecordIndexInfo
 	IsLocal               int32
-	AccessPath            string
+	AccessPath            *byte
 	Reserved              unsafe.Pointer
 }
 
@@ -934,7 +934,7 @@ type CssmKrWrappedproductinfo struct {
 // C struct: cssm_krsubservice
 type CssmKrsubservice struct {
 	SubServiceId   uint32
-	Description    string
+	Description    *byte
 	WrappedProduct CssmKrWrappedproductinfo
 }
 
@@ -990,7 +990,7 @@ type CssmModuleFuncs struct {
 // C struct: cssm_name_list
 type CssmNameList struct {
 	NumStrings uint32
-	String     string
+	String     *byte
 }
 
 // C struct: cssm_net_address
@@ -1160,7 +1160,7 @@ type CssmTpAuthorityId struct {
 // C struct: cssm_tp_callerauth_context
 type CssmTpCallerauthContext struct {
 	Policy                   CssmTpPolicyinfo
-	VerifyTime               string
+	VerifyTime               *byte
 	VerificationAbortOn      uint32
 	CallbackWithVerifiedCert unsafe.Pointer
 	NumberOfAnchorCerts      uint32
@@ -1176,7 +1176,7 @@ type CssmTpCertchangeInput struct {
 	CLHandle          int
 	Cert              *CssmData
 	ChangeInfo        *CssmField
-	StartTime         string
+	StartTime         *byte
 	CallerCredentials *CssmAccessCredentials
 }
 
@@ -1264,7 +1264,7 @@ type CssmTpConfirmResponse struct {
 type CssmTpCrlissueInput struct {
 	CLHandle          int
 	CrlIdentifier     uint32
-	CrlThisTime       string
+	CrlThisTime       *byte
 	PolicyIdentifier  *CssmField
 	CallerCredentials *CssmAccessCredentials
 }
@@ -1273,7 +1273,7 @@ type CssmTpCrlissueInput struct {
 type CssmTpCrlissueOutput struct {
 	IssueStatus uint32
 	Crl         *CssmEncodedCrl
-	CrlNextTime string
+	CrlNextTime *byte
 }
 
 // C struct: cssm_tp_policyinfo

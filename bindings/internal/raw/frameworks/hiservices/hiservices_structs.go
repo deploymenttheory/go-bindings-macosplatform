@@ -97,7 +97,7 @@ type ProcessInfoExtendedRec struct {
 	ProcessType                  uint32
 	ProcessSignature             uint32
 	ProcessMode                  uint32
-	ProcessLocation              string
+	ProcessLocation              *byte
 	ProcessSize                  uint32
 	ProcessFreeMem               uint32
 	ProcessLauncher              unsafe.Pointer
@@ -115,7 +115,7 @@ type ProcessInfoRec struct {
 	ProcessType       uint32
 	ProcessSignature  uint32
 	ProcessMode       uint32
-	ProcessLocation   string
+	ProcessLocation   *byte
 	ProcessSize       uint32
 	ProcessFreeMem    uint32
 	ProcessLauncher   unsafe.Pointer

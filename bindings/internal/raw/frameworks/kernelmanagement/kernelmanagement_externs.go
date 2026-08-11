@@ -17,10 +17,7 @@ func KernelManagementVersionNumber() float64 {
 	return *(*float64)(unsafe.Pointer(ptr))
 }
 
-func KernelManagementVersionString() []unsafe.Pointer {
+func KernelManagementVersionString() uintptr {
 	ptr, _ := purego.Dlsym(_kernelmanagementLib, "KernelManagementVersionString")
-	if ptr == 0 {
-		return []unsafe.Pointer{}
-	}
-	return *(*[]unsafe.Pointer)(unsafe.Pointer(ptr))
+	return ptr
 }

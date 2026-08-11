@@ -177,10 +177,7 @@ func Gss_nt_user_name() *GssOIDDescStruct {
 	return *(**GssOIDDescStruct)(unsafe.Pointer(ptr))
 }
 
-func Krb5_gss_oid_array() []GssOIDDescStruct {
+func Krb5_gss_oid_array() uintptr {
 	ptr, _ := purego.Dlsym(_kerberosLib, "krb5_gss_oid_array")
-	if ptr == 0 {
-		return []GssOIDDescStruct{}
-	}
-	return *(*[]GssOIDDescStruct)(unsafe.Pointer(ptr))
+	return ptr
 }

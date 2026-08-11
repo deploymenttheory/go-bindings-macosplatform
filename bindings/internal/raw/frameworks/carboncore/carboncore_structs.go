@@ -367,7 +367,7 @@ type FSCatalogBulkParam struct {
 	QLink            *QElem
 	QType            int16
 	IoTrap           int16
-	IoCmdAddr        string
+	IoCmdAddr        *byte
 	IoCompletion     unsafe.Pointer
 	IoResult         unsafe.Pointer
 	ContainerChanged uint8
@@ -422,7 +422,7 @@ type FSForkCBInfoParam struct {
 	QLink         *QElem
 	QType         int16
 	IoTrap        int16
-	IoCmdAddr     string
+	IoCmdAddr     *byte
 	IoCompletion  unsafe.Pointer
 	IoResult      unsafe.Pointer
 	DesiredRefNum int32
@@ -438,7 +438,7 @@ type FSForkIOParam struct {
 	QLink            *QElem
 	QType            int16
 	IoTrap           int16
-	IoCmdAddr        string
+	IoCmdAddr        *byte
 	IoCompletion     unsafe.Pointer
 	IoResult         unsafe.Pointer
 	Reserved1        unsafe.Pointer
@@ -447,7 +447,7 @@ type FSForkIOParam struct {
 	Reserved3        uint8
 	Permissions      int8
 	Ref              *FSRef
-	Buffer           string
+	Buffer           *byte
 	RequestCount     uint32
 	ActualCount      uint32
 	PositionMode     uint16
@@ -486,7 +486,7 @@ type FSRangeLockParam struct {
 	QLink          *QElem
 	QType          int16
 	IoTrap         int16
-	IoCmdAddr      string
+	IoCmdAddr      *byte
 	IoCompletion   unsafe.Pointer
 	IoResult       unsafe.Pointer
 	ForkRefNum     int32
@@ -504,7 +504,7 @@ type FSRefForkIOParam struct {
 	QLink          *QElem
 	QType          int16
 	IoTrap         int16
-	IoCmdAddr      string
+	IoCmdAddr      *byte
 	IoCompletion   unsafe.Pointer
 	IoResult       unsafe.Pointer
 	ParentRef      *FSRef
@@ -524,7 +524,7 @@ type FSRefParam struct {
 	QLink            *QElem
 	QType            int16
 	IoTrap           int16
-	IoCmdAddr        string
+	IoCmdAddr        *byte
 	IoCompletion     unsafe.Pointer
 	IoResult         unsafe.Pointer
 	IoNamePtr        *uint8
@@ -586,7 +586,7 @@ type FSVolumeInfoParam struct {
 	QLink        *QElem
 	QType        int16
 	IoTrap       int16
-	IoCmdAddr    string
+	IoCmdAddr    *byte
 	IoCompletion unsafe.Pointer
 	IoResult     unsafe.Pointer
 	IoNamePtr    *uint8
@@ -1386,7 +1386,7 @@ type TECConversionInfo struct {
 }
 
 type TECConverterContextRec struct {
-	PluginRec            string
+	PluginRec            *byte
 	SourceEncoding       uint32
 	DestEncoding         uint32
 	Reserved1            uint32
@@ -1493,7 +1493,7 @@ type TECPluginStateRec struct {
 }
 
 type TECSnifferContextRec struct {
-	PluginRec            string
+	PluginRec            *byte
 	Encoding             uint32
 	MaxErrors            uint
 	MaxFeatures          uint
@@ -1563,12 +1563,12 @@ type TogglePB struct {
 
 // Deprecated: Deprecated
 type TokenBlock struct {
-	Source         string
+	Source         *byte
 	SourceLength   int
-	TokenList      string
+	TokenList      *byte
 	TokenLength    int
 	TokenCount     int
-	StringList     string
+	StringList     *byte
 	StringLength   int
 	StringCount    int
 	DoString       uint8
@@ -1588,7 +1588,7 @@ type TokenBlock struct {
 // Deprecated: Deprecated
 type TokenRec struct {
 	TheToken       int16
-	Position       string
+	Position       *byte
 	Length         int
 	StringPosition *uint8
 }

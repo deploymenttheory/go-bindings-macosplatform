@@ -19,7 +19,7 @@ type AuArg32T struct {
 	No   uint8
 	Val  uint32
 	Len  uint16
-	Text string
+	Text *byte
 }
 
 // [libbsm.h:200]
@@ -27,7 +27,7 @@ type AuArg64T struct {
 	No   uint8
 	Val  uint64
 	Len  uint16
-	Text string
+	Text *byte
 }
 
 // [libbsm.h:228]
@@ -58,9 +58,9 @@ type AuCertHashT struct {
 
 // [libbsm.h:124]
 type AuClassEnt struct {
-	Ac_name  string
+	Ac_name  *byte
 	Ac_class uint32
-	Ac_desc  string
+	Ac_desc  *byte
 }
 
 // [audit.h:329]
@@ -72,8 +72,8 @@ type AuEvclassMap struct {
 // [libbsm.h:116]
 type AuEventEnt struct {
 	Ae_number uint16
-	Ae_name   string
-	Ae_desc   string
+	Ae_name   *byte
+	Ae_desc   *byte
 	Ae_class  uint32
 }
 
@@ -107,7 +107,7 @@ type AuFileT struct {
 	S    uint32
 	Ms   uint32
 	Len  uint16
-	Name string
+	Name *byte
 }
 
 // [libbsm.h:309]
@@ -164,10 +164,10 @@ type AuHeader64T struct {
 type AuIdentityT struct {
 	Signer_type          uint32
 	Signing_id_len       uint16
-	Signing_id           string
+	Signing_id           *byte
 	Signing_id_truncated uint8
 	Team_id_len          uint16
-	Team_id              string
+	Team_id              *byte
 	Team_id_truncated    uint8
 	Cdhash_len           uint16
 	Cdhash               *uint8
@@ -187,7 +187,7 @@ type AuInaddrT struct {
 // [libbsm.h:711]
 type AuInvalidT struct {
 	Length uint16
-	Data   string
+	Data   *byte
 }
 
 // [libbsm.h:400]
@@ -250,13 +250,13 @@ type AuMask struct {
 // [libbsm.h:452]
 type AuOpaqueT struct {
 	Size uint16
-	Data string
+	Data *byte
 }
 
 // [libbsm.h:461]
 type AuPathT struct {
 	Len  uint16
-	Path string
+	Path *byte
 }
 
 // [libbsm.h:478]
@@ -430,7 +430,7 @@ type AuSubject64exT struct {
 // [libbsm.h:689]
 type AuTextT struct {
 	Len  uint16
-	Text string
+	Text *byte
 }
 
 // [audit.h:202]
@@ -484,7 +484,7 @@ type AuTrailerT struct {
 
 // [libbsm.h:131]
 type AuUserEnt struct {
-	Au_name   string
+	Au_name   *byte
 	Au_always AuMask
 	Au_never  AuMask
 }
@@ -492,7 +492,7 @@ type AuUserEnt struct {
 // [libbsm.h:698]
 type AuZonenameT struct {
 	Len      uint16
-	Zonename string
+	Zonename *byte
 }
 
 // [audit.h:320]

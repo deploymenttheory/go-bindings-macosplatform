@@ -3,6 +3,7 @@
   "link_lib": "AppleArchive"
  },
  "Compression": {
+  "backend": "purego",
   "header": "compression.h",
   "header_dir": "compression.h",
   "link_lib": "compression"
@@ -11,6 +12,7 @@
   "link_lib": "EndpointSecurity"
  },
  "Sandbox": {
+  "backend": "purego",
   "header": "sandbox.h",
   "header_dir": "sandbox.h",
   "link_lib": "sandbox"
@@ -26,6 +28,7 @@
   "link_lib": "System"
  },
  "ioreport": {
+  "backend": "purego",
   "link_lib": "IOReport",
   "shim_header": "metadata/shims/IOReport.h"
  },
@@ -40,6 +43,7 @@
   "link_lib": "System"
  },
  "machinit": {
+  "backend": "purego",
   "header": "mach/mach_init.h",
   "header_dir": "mach/mach_init.h",
   "link_lib": "System"
@@ -51,6 +55,7 @@
   "link_lib": "System"
  },
  "machvm": {
+  "backend": "purego",
   "header": "mach/vm_map.h",
   "header_dir": "mach/vm_map.h",
   "link_lib": "System"
@@ -61,6 +66,7 @@
   "link_lib": "System"
  },
  "xar": {
+  "backend": "purego",
   "link_lib": "xar"
  },
  "xpc": {

@@ -11,7 +11,7 @@ import (
 type JSClassDefinition struct {
 	Version           int32
 	Attributes        uint32
-	ClassName         string
+	ClassName         *byte
 	ParentClass       unsafe.Pointer
 	StaticValues      *JSStaticValue
 	StaticFunctions   *JSStaticFunction
@@ -30,14 +30,14 @@ type JSClassDefinition struct {
 
 // A statically declared function property.
 type JSStaticFunction struct {
-	Name           string
+	Name           *byte
 	CallAsFunction unsafe.Pointer
 	Attributes     uint32
 }
 
 // A statically declared value property.
 type JSStaticValue struct {
-	Name        string
+	Name        *byte
 	GetProperty unsafe.Pointer
 	SetProperty unsafe.Pointer
 	Attributes  uint32

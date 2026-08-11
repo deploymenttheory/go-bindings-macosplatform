@@ -8,9 +8,11 @@ import (
 	"sort"
 	"strings"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/structlayout"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/libraries/naming"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/libraries/typemap"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/macosplatformmetadata"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/scanner"
 )
 
 // Structs writes all C struct type definitions and struct typedef aliases to w.
@@ -45,7 +47,10 @@ func EmitStructs(w io.Writer, framework *macosplatformmetadata.FrameworkMeta, m 
 		primaryName := typedefNames[0]
 		goPrimary := naming.ExportedTypeName(primaryName)
 
-		if err := render.Execute(w, "cf_wrapper", view.CfWrapperModel{GoName: goPrimary}); err != nil {
+		if err := render.Execute(w, "cf_wrapper", view.CfWrapperModel{
+			GoName:  goPrimary,
+			NoTrack: scanner.CLibraryBackend(framework.Framework) == scanner.BackendPurego,
+		}); err != nil {
 			return nil, err
 		}
 		for _, alias := range typedefNames[1:] {
@@ -103,6 +108,10 @@ func buildStructModel(name string, s macosplatformmetadata.Struct, framework str
 		if goType == "" {
 			goType = "unsafe.Pointer"
 		}
+		// Width-correct the field: a char* field mapped to Go string would embed
+		// a 16-byte string header where C has an 8-byte pointer, mislaying every
+		// following field (shared rule with the frameworks struct emitters).
+		goType = structlayout.StructFieldGoType(f.ObjCType, goType)
 		fields = append(fields, view.StructFieldModel{Name: fieldName, GoType: goType})
 	}
 	return view.StructModel{

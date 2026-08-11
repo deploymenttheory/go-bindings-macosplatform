@@ -230,6 +230,12 @@ type NsStringOverloadModel struct {
 // CfWrapperModel is template data for a CoreFoundation opaque pointer wrapper type.
 type CfWrapperModel struct {
 	GoName string // Primary type name, e.g. CFStringRef
+	// NoTrack omits the cgo.Track finalizer from New<GoName>. Purego-backed
+	// libraries set it: cgo.Track finalizes with objc_release, which is
+	// undefined behaviour on a plain C handle (xar_t is not an ObjC object),
+	// and would pull the CGo runtime into a CGO_ENABLED=0 package. Handle
+	// lifetime is the library's own close/free API.
+	NoTrack bool
 }
 
 // CfAliasModel is template data for a CF typedef alias pointing to a primary wrapper.

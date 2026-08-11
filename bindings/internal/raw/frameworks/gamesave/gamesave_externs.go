@@ -17,10 +17,7 @@ func GameSaveVersionNumber() float64 {
 	return *(*float64)(unsafe.Pointer(ptr))
 }
 
-func GameSaveVersionString() []unsafe.Pointer {
+func GameSaveVersionString() uintptr {
 	ptr, _ := purego.Dlsym(_gamesaveLib, "GameSaveVersionString")
-	if ptr == 0 {
-		return []unsafe.Pointer{}
-	}
-	return *(*[]unsafe.Pointer)(unsafe.Pointer(ptr))
+	return ptr
 }

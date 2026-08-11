@@ -4,10 +4,10 @@
 
 package sandbox
 
-// #include "bridge/sandbox_bridge.h"
-import "C"
-
-import "unsafe"
+import (
+	"github.com/ebitengine/purego"
+	"unsafe"
+)
 
 var (
 	// [sandbox.h:63]
@@ -37,12 +37,23 @@ var (
 	KSBXProfilePureComputation unsafe.Pointer
 )
 
-// init populates the extern vars from the C globals via bridge address
-// getters, so package consumers read live values rather than zero stubs.
-func init() {
-	KSBXProfileNoInternet = *(*unsafe.Pointer)(C.sandbox_extern_kSBXProfileNoInternet())
-	KSBXProfileNoNetwork = *(*unsafe.Pointer)(C.sandbox_extern_kSBXProfileNoNetwork())
-	KSBXProfileNoWrite = *(*unsafe.Pointer)(C.sandbox_extern_kSBXProfileNoWrite())
-	KSBXProfileNoWriteExceptTemporary = *(*unsafe.Pointer)(C.sandbox_extern_kSBXProfileNoWriteExceptTemporary())
-	KSBXProfilePureComputation = *(*unsafe.Pointer)(C.sandbox_extern_kSBXProfilePureComputation())
+// _initExterns populates the extern vars once the dylib is loaded. An
+// extern whose symbol does not resolve keeps its zero value, matching the
+// CGo emission's unsupported-shape behaviour.
+func _initExterns(lib uintptr) {
+	if _addr, _ := purego.Dlsym(lib, "kSBXProfileNoInternet"); _addr != 0 {
+		KSBXProfileNoInternet = *(*unsafe.Pointer)(unsafe.Pointer(_addr))
+	}
+	if _addr, _ := purego.Dlsym(lib, "kSBXProfileNoNetwork"); _addr != 0 {
+		KSBXProfileNoNetwork = *(*unsafe.Pointer)(unsafe.Pointer(_addr))
+	}
+	if _addr, _ := purego.Dlsym(lib, "kSBXProfileNoWrite"); _addr != 0 {
+		KSBXProfileNoWrite = *(*unsafe.Pointer)(unsafe.Pointer(_addr))
+	}
+	if _addr, _ := purego.Dlsym(lib, "kSBXProfileNoWriteExceptTemporary"); _addr != 0 {
+		KSBXProfileNoWriteExceptTemporary = *(*unsafe.Pointer)(unsafe.Pointer(_addr))
+	}
+	if _addr, _ := purego.Dlsym(lib, "kSBXProfilePureComputation"); _addr != 0 {
+		KSBXProfilePureComputation = *(*unsafe.Pointer)(unsafe.Pointer(_addr))
+	}
 }

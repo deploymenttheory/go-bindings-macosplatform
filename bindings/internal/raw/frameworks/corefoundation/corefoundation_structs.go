@@ -222,7 +222,7 @@ type CFStringInlineBuffer struct {
 	Buffer              [64]uint16
 	TheString           unsafe.Pointer
 	DirectUniCharBuffer *uint16
-	DirectCStringBuffer string
+	DirectCStringBuffer *byte
 	RangeToBuffer       CFRange
 	BufferedRangeStart  int
 	BufferedRangeEnd    int

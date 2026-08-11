@@ -10,31 +10,31 @@ import (
 )
 
 func TimebaseInfo(info *raw.MachTimebaseInfo) error {
-	if _rc := raw.MachTimebaseInfoFn(info); _rc != 0 {
+	if _rc := raw.Mach_timebase_info(info); _rc != 0 {
 		return fmt.Errorf("TimebaseInfo"+": status %d", _rc)
 	}
 	return nil
 }
 
 func WaitUntil(deadline uint64) error {
-	if _rc := raw.MachWaitUntil(deadline); _rc != 0 {
+	if _rc := raw.Mach_wait_until(deadline); _rc != 0 {
 		return fmt.Errorf("WaitUntil"+": status %d", _rc)
 	}
 	return nil
 }
 
 func AbsoluteTime() uint64 {
-	return raw.MachAbsoluteTime()
+	return raw.Mach_absolute_time()
 }
 
 func ApproximateTime() uint64 {
-	return raw.MachApproximateTime()
+	return raw.Mach_approximate_time()
 }
 
 func ContinuousTime() uint64 {
-	return raw.MachContinuousTime()
+	return raw.Mach_continuous_time()
 }
 
 func ContinuousApproximateTime() uint64 {
-	return raw.MachContinuousApproximateTime()
+	return raw.Mach_continuous_approximate_time()
 }

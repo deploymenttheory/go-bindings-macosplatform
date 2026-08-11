@@ -188,7 +188,7 @@ func buildBridgeHeaderModel(framework *macosplatformmetadata.FrameworkMeta, m *t
 	for _, fn := range framework.Functions {
 		if fn.IsInline || fn.IsVariadic || fn.Availability.IsUnavailable ||
 			strings.HasPrefix(fn.Name, "__builtin") || isUPPFunction(fn.Name) ||
-			hasVAListArg(fn) || hasByValueUnknownType(fn) {
+			hasVAListArg(fn) || hasByValueUnknownTypeFor(framework, fn) {
 			continue
 		}
 		cFunc := strings.ToLower(framework.Framework) + "_fn_" + fn.Name
@@ -361,7 +361,7 @@ func buildBridgeImplModel(framework *macosplatformmetadata.FrameworkMeta, m *typ
 	for _, fn := range framework.Functions {
 		if fn.IsInline || fn.IsVariadic || fn.Availability.IsUnavailable ||
 			strings.HasPrefix(fn.Name, "__builtin") || isUPPFunction(fn.Name) ||
-			hasVAListArg(fn) || hasByValueUnknownType(fn) {
+			hasVAListArg(fn) || hasByValueUnknownTypeFor(framework, fn) {
 			continue
 		}
 		cFunc := strings.ToLower(framework.Framework) + "_fn_" + fn.Name
@@ -725,6 +725,37 @@ func isVAList(objcType string) bool {
 // enums, and any named type that the mapper would handle via its enum or CF tables.
 // Entitlement-gated APIs (vmnet, NetworkExtension, etc.) use pointer typedefs and
 // integer enums — they must NOT be filtered here.
+// hasByValueUnknownTypeFor is hasByValueUnknownType with the declaring
+// framework's own enum table consulted first: a bare enum name that matches
+// none of the heuristics (compression_algorithm has no '_t' suffix) is still
+// a plain C integer and must not disqualify the function.
+func hasByValueUnknownTypeFor(
+	framework *macosplatformmetadata.FrameworkMeta,
+	fn macosplatformmetadata.Function,
+) bool {
+	if !hasByValueUnknownType(fn) {
+		return false
+	}
+	isEnum := func(objcType string) bool {
+		n := typemap.Normalise(objcType)
+		_, ok := framework.Enums[n]
+		return ok
+	}
+	if fn.Return.ObjCType != "" && hasByValueUnknownType(macosplatformmetadata.Function{
+		Return: fn.Return,
+	}) && !isEnum(fn.Return.ObjCType) {
+		return true
+	}
+	for _, arg := range fn.Params {
+		if hasByValueUnknownType(macosplatformmetadata.Function{
+			Params: []macosplatformmetadata.Param{arg},
+		}) && !isEnum(arg.ObjCType) {
+			return true
+		}
+	}
+	return false
+}
+
 func hasByValueUnknownType(fn macosplatformmetadata.Function) bool {
 	check := func(objcType string) bool {
 		if objcType == "" || objcType == "void" {
