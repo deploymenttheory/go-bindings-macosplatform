@@ -99,10 +99,9 @@ type puregoFunctionModel struct {
 	body    string
 }
 
-// buildPuregoFunction builds one wrapper. The wrapper signature is exactly the
-// CGo emission's (buildGoArgs + GoReturnType); the classification of each
-// argument mirrors goCGoArgExpr branch for branch, translated from "cast to a
-// C.<type>" into "the Go type purego marshals natively".
+// buildPuregoFunction builds one wrapper. The wrapper signature matches the
+// library Go surface (buildGoArgs + GoReturnType); each argument is classified
+// by puregoArg into the Go type purego marshals natively (no C.<type> cast).
 func buildPuregoFunction(
 	fn macosplatformmetadata.Function,
 	goName string,
@@ -320,9 +319,9 @@ func splitGoFuncType(s string) (params []string, ret string, ok bool) {
 	return params, ret, true
 }
 
-// puregoArg mirrors goCGoArgExpr's classification: for each wrapper-signature
-// Go type it yields the func-var parameter type purego registers and the call
-// expression converting the wrapper argument. ok=false for shapes purego
+// puregoArg classifies one wrapper-signature Go type: it yields the func-var
+// parameter type purego registers and the call expression converting the
+// wrapper argument. ok=false for shapes purego
 // emission does not support yet.
 func puregoArg(
 	goType, argName string,
