@@ -25,8 +25,8 @@ func Emit(framework *meta.FrameworkMeta, outDir, pkgName string) error {
 	packageName := strings.ToLower(framework.Framework)
 
 	sections := []struct {
-		suffix string
-		fn     func(*meta.FrameworkMeta, string) ([]byte, error)
+		suffix     string
+		fn         func(*meta.FrameworkMeta, string) ([]byte, error)
 		hasContent func(*meta.FrameworkMeta) bool
 	}{
 		{"_enums", emitEnums, func(f *meta.FrameworkMeta) bool { return len(f.Enums) > 0 }},

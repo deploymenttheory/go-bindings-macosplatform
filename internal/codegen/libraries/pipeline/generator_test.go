@@ -126,9 +126,9 @@ func makeReg(frameworks []*macosplatformmetadata.FrameworkMeta, owner map[string
 		kc[cls] = true
 	}
 	return &Registry{
-		Frameworks:   frameworks,
+		Frameworks:     frameworks,
 		ClassNameIndex: kc,
-		OwnerIndex: owner,
+		OwnerIndex:     owner,
 		GenericClasses: map[string]bool{},
 		ClassIndex:     map[string]macosplatformmetadata.Class{},
 	}
@@ -334,12 +334,12 @@ func TestComputeBlockedImportsEnumCycle(t *testing.T) {
 	}
 	reg := &Registry{
 		Frameworks:     []*macosplatformmetadata.FrameworkMeta{fmA, fmB},
-		ClassNameIndex:   map[string]bool{"AClass": true},
-		OwnerIndex: map[string]string{"AClass": "FrameworkA"},
+		ClassNameIndex: map[string]bool{"AClass": true},
+		OwnerIndex:     map[string]string{"AClass": "FrameworkA"},
 		GenericClasses: map[string]bool{},
 		ClassIndex:     map[string]macosplatformmetadata.Class{},
-		EnumIndex:     map[string]string{"EnumB": "FrameworkB"},
-		ProtocolIndex: map[string]string{"ProtoA": "FrameworkA"},
+		EnumIndex:      map[string]string{"EnumB": "FrameworkB"},
+		ProtocolIndex:  map[string]string{"ProtoA": "FrameworkA"},
 	}
 	blocked := resolveBlockedImports(reg)
 
@@ -384,12 +384,12 @@ func TestComputeBlockedImportsProtocolEmbedPriority(t *testing.T) {
 	}
 	reg := &Registry{
 		Frameworks:     []*macosplatformmetadata.FrameworkMeta{fmA, fmB},
-		ClassNameIndex:   map[string]bool{"AClass": true, "BClass": true},
-		OwnerIndex: map[string]string{"AClass": "FrameworkA", "BClass": "FrameworkB"},
+		ClassNameIndex: map[string]bool{"AClass": true, "BClass": true},
+		OwnerIndex:     map[string]string{"AClass": "FrameworkA", "BClass": "FrameworkB"},
 		GenericClasses: map[string]bool{},
 		ClassIndex:     map[string]macosplatformmetadata.Class{},
-		EnumIndex:     map[string]string{},
-		ProtocolIndex: map[string]string{"ProtoA": "FrameworkA"},
+		EnumIndex:      map[string]string{},
+		ProtocolIndex:  map[string]string{"ProtoA": "FrameworkA"},
 	}
 	blocked := resolveBlockedImports(reg)
 
@@ -421,8 +421,8 @@ func TestTopoSortNoDeps(t *testing.T) {
 	fmC := &macosplatformmetadata.FrameworkMeta{Framework: "Gamma", Classes: map[string]macosplatformmetadata.Class{"CClass": {}}}
 	reg := &Registry{
 		Frameworks:     []*macosplatformmetadata.FrameworkMeta{fmA, fmB, fmC},
-		OwnerIndex: map[string]string{"AClass": "Alpha", "BClass": "Beta", "CClass": "Gamma"},
-		ClassNameIndex:   map[string]bool{"AClass": true, "BClass": true, "CClass": true},
+		OwnerIndex:     map[string]string{"AClass": "Alpha", "BClass": "Beta", "CClass": "Gamma"},
+		ClassNameIndex: map[string]bool{"AClass": true, "BClass": true, "CClass": true},
 		GenericClasses: map[string]bool{},
 		ClassIndex:     map[string]macosplatformmetadata.Class{},
 	}
@@ -457,8 +457,8 @@ func TestTopoSortLinearChain(t *testing.T) {
 	}
 	reg := &Registry{
 		Frameworks:     []*macosplatformmetadata.FrameworkMeta{fmA, fmB},
-		OwnerIndex: map[string]string{"AClass": "FrameworkA", "BClass": "FrameworkB"},
-		ClassNameIndex:   map[string]bool{"AClass": true, "BClass": true},
+		OwnerIndex:     map[string]string{"AClass": "FrameworkA", "BClass": "FrameworkB"},
+		ClassNameIndex: map[string]bool{"AClass": true, "BClass": true},
 		GenericClasses: map[string]bool{},
 		ClassIndex:     map[string]macosplatformmetadata.Class{},
 	}
@@ -503,7 +503,7 @@ func TestTopoSortDiamond(t *testing.T) {
 			"CClass":  "FrameworkC",
 			"CClass2": "FrameworkC",
 		},
-		ClassNameIndex:   map[string]bool{"AClass": true, "BClass": true, "CClass": true, "CClass2": true},
+		ClassNameIndex: map[string]bool{"AClass": true, "BClass": true, "CClass": true, "CClass2": true},
 		GenericClasses: map[string]bool{},
 		ClassIndex:     map[string]macosplatformmetadata.Class{},
 	}
@@ -536,8 +536,8 @@ func TestTopoSortIncludesAll(t *testing.T) {
 	}
 	reg := &Registry{
 		Frameworks:     frameworks,
-		OwnerIndex: owner,
-		ClassNameIndex:   kc,
+		OwnerIndex:     owner,
+		ClassNameIndex: kc,
 		GenericClasses: map[string]bool{},
 		ClassIndex:     map[string]macosplatformmetadata.Class{},
 	}

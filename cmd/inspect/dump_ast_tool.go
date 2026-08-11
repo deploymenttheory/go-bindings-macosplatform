@@ -20,10 +20,10 @@ func main() {
 
 	// Check whether inner is nil vs empty for known forward-decl and zero-method classes
 	targets := map[string]bool{
-		"NSScreen":        true,
-		"VZXHCIController": true,
-		"VZVirtioGraphicsDevice": true,
-		"VZMacGraphicsDevice": true,
+		"NSScreen":                     true,
+		"VZXHCIController":             true,
+		"VZVirtioGraphicsDevice":       true,
+		"VZMacGraphicsDevice":          true,
 		"VZVirtualMachineStartOptions": true,
 	}
 	seen := map[string]bool{}
@@ -33,13 +33,19 @@ func main() {
 			continue
 		}
 		key := fmt.Sprintf("%s@%d", n.Name, i)
-		if seen[key] { continue }
+		if seen[key] {
+			continue
+		}
 		seen[key] = true
 
 		loc := ""
-		if n.Loc != nil { loc = n.Loc.FilePath }
+		if n.Loc != nil {
+			loc = n.Loc.FilePath
+		}
 		super := "<nil>"
-		if n.Super != nil { super = n.Super.Name }
+		if n.Super != nil {
+			super = n.Super.Name
+		}
 		innerNil := n.Inner == nil
 		fmt.Printf("name=%-40s loc_short=%-40s super=%-15s inner_nil=%v inner_count=%d\n",
 			n.Name, shortPath(loc), super, innerNil, len(n.Inner))

@@ -58,9 +58,9 @@ var (
 
 // frame tracks one level of nested Swift type body.
 type frame struct {
-	name  string          // flattened Go name, e.g. "TranslationSessionRequest"
-	kind  string          // "enum", "errorStruct", "struct", "class", "skip"
-	depth int             // brace depth at which this frame's body opens
+	name  string // flattened Go name, e.g. "TranslationSessionRequest"
+	kind  string // "enum", "errorStruct", "struct", "class", "skip"
+	depth int    // brace depth at which this frame's body opens
 	enum  *meta.Enum
 	errS  *meta.ErrorStruct
 	strct *meta.Struct
@@ -232,13 +232,13 @@ func ParseContent(frameworkName, content string) (*meta.FrameworkMeta, error) {
 					// The framework emitter will later check if it needs to call async path.
 					// TODO Phase 2C: refine async detection for multi-line props.
 					top.cls.Properties = append(top.cls.Properties, meta.Property{
-						Name:        propName,
-						Type:        rawType,
-						Optional:    optional,
-						Writable:    strings.Contains(line, " var "),
-						IsAsync:     false, // updated by getAsyncBody scan below
-						IsStatic:    isStatic,
-						IsMainActor: isMainActor,
+						Name:         propName,
+						Type:         rawType,
+						Optional:     optional,
+						Writable:     strings.Contains(line, " var "),
+						IsAsync:      false, // updated by getAsyncBody scan below
+						IsStatic:     isStatic,
+						IsMainActor:  isMainActor,
 						Availability: av,
 					})
 				}
@@ -283,8 +283,8 @@ func ParseContent(frameworkName, content string) (*meta.FrameworkMeta, error) {
 						raw = strings.TrimSpace(m[2])
 					}
 					top.enum.Cases = append(top.enum.Cases, meta.EnumCase{
-						Name:        m[1],
-						RawValue:    raw,
+						Name:         m[1],
+						RawValue:     raw,
 						Availability: memberAvail,
 					})
 				}
@@ -293,7 +293,7 @@ func ParseContent(frameworkName, content string) (*meta.FrameworkMeta, error) {
 		case "errorStruct":
 			if m := reStaticLet.FindStringSubmatch(line); m != nil {
 				top.errS.StaticCodes = append(top.errS.StaticCodes, meta.StaticCode{
-					Name:        m[1],
+					Name:         m[1],
 					Availability: memberAvail,
 				})
 			}
@@ -301,7 +301,7 @@ func ParseContent(frameworkName, content string) (*meta.FrameworkMeta, error) {
 		case "struct":
 			if m := reStaticLet.FindStringSubmatch(line); m != nil {
 				top.strct.StaticValues = append(top.strct.StaticValues, meta.StaticValue{
-					Name:        m[1],
+					Name:         m[1],
 					Availability: memberAvail,
 				})
 				continue
@@ -322,9 +322,9 @@ func ParseContent(frameworkName, content string) (*meta.FrameworkMeta, error) {
 					continue // skip unmappable types
 				}
 				top.strct.Fields = append(top.strct.Fields, meta.StructField{
-					Name:        fieldName,
-					GoType:      goType,
-					Optional:    optional,
+					Name:         fieldName,
+					GoType:       goType,
+					Optional:     optional,
 					Availability: memberAvail,
 				})
 			}
@@ -448,12 +448,12 @@ func parseClassMember(line, attrLine string, cls *meta.Class, av meta.Availabili
 		} else {
 			rawParams := strings.TrimSpace(m[1])
 			cls.Methods = append(cls.Methods, meta.Method{
-				Name:        "init",
-				RawParams:   rawParams,
-				IsInit:      true,
-				IsAsync:     strings.Contains(clean, " async"),
-				IsThrows:    strings.Contains(clean, " throws"),
-				IsMainActor: isMainActor,
+				Name:         "init",
+				RawParams:    rawParams,
+				IsInit:       true,
+				IsAsync:      strings.Contains(clean, " async"),
+				IsThrows:     strings.Contains(clean, " throws"),
+				IsMainActor:  isMainActor,
 				Availability: av,
 			})
 			return
@@ -475,16 +475,16 @@ func parseClassMember(line, attrLine string, cls *meta.Class, av meta.Availabili
 			retType = retType[:len(retType)-1]
 		}
 		cls.Methods = append(cls.Methods, meta.Method{
-			Name:        name,
-			RawParams:   rawParams,
+			Name:      name,
+			RawParams: rawParams,
 			Return: meta.SwiftReturn{
 				Type:     retType,
 				Optional: optional,
 			},
-			IsAsync:     strings.TrimSpace(m[3]) == "async",
-			IsThrows:    strings.TrimSpace(m[4]) == "throws",
-			IsStatic:    isStatic,
-			IsMainActor: isMainActor,
+			IsAsync:      strings.TrimSpace(m[3]) == "async",
+			IsThrows:     strings.TrimSpace(m[4]) == "throws",
+			IsStatic:     isStatic,
+			IsMainActor:  isMainActor,
 			Availability: av,
 		})
 		return
@@ -509,13 +509,13 @@ func parseClassMember(line, attrLine string, cls *meta.Class, av meta.Availabili
 			// Stored let/var properties treated as writable if declared var.
 			writable := strings.Contains(clean, " var ") && strings.Contains(typeAndAccessor, "set")
 			cls.Properties = append(cls.Properties, meta.Property{
-				Name:        propName,
-				Type:        rawType,
-				Optional:    optional,
-				Writable:    writable,
-				IsAsync:     isAsync,
-				IsStatic:    isStatic,
-				IsMainActor: isMainActor,
+				Name:         propName,
+				Type:         rawType,
+				Optional:     optional,
+				Writable:     writable,
+				IsAsync:      isAsync,
+				IsStatic:     isStatic,
+				IsMainActor:  isMainActor,
 				Availability: av,
 			})
 		}
@@ -533,13 +533,13 @@ func parseClassMember(line, attrLine string, cls *meta.Class, av meta.Availabili
 			}
 			writable := strings.Contains(clean, " var ")
 			cls.Properties = append(cls.Properties, meta.Property{
-				Name:        propName,
-				Type:        rawType,
-				Optional:    optional,
-				Writable:    writable,
-				IsAsync:     false,
-				IsStatic:    isStatic,
-				IsMainActor: isMainActor,
+				Name:         propName,
+				Type:         rawType,
+				Optional:     optional,
+				Writable:     writable,
+				IsAsync:      false,
+				IsStatic:     isStatic,
+				IsMainActor:  isMainActor,
 				Availability: av,
 			})
 		}

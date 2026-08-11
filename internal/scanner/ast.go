@@ -28,15 +28,15 @@ func (r RawValue) String() string { return string(r) }
 // ASTNode is a node in the Clang JSON AST produced by clang -ast-dump=json.
 // Only fields we actually use are decoded; unknown fields are silently ignored.
 type ASTNode struct {
-	ID            string      `json:"id"`
-	Kind          string      `json:"kind"`
-	Loc           *Location   `json:"loc"`
-	Range         *SrcRange   `json:"range"`
-	Name          string      `json:"name"`
-	MangledName   string      `json:"mangledName"`
-	Type          *ASTType    `json:"type"`
-	ReturnType    *ASTType    `json:"returnType"`
-	Inner         []ASTNode   `json:"inner"`
+	ID          string    `json:"id"`
+	Kind        string    `json:"kind"`
+	Loc         *Location `json:"loc"`
+	Range       *SrcRange `json:"range"`
+	Name        string    `json:"name"`
+	MangledName string    `json:"mangledName"`
+	Type        *ASTType  `json:"type"`
+	ReturnType  *ASTType  `json:"returnType"`
+	Inner       []ASTNode `json:"inner"`
 
 	// PreviousDecl is the hex ID string of the previous declaration of this
 	// name in the same translation unit. When set, this node is a redeclaration
@@ -44,23 +44,23 @@ type ASTNode struct {
 	// an empty @class Foo; that precedes the canonical definition). Used in
 	// extractClass to distinguish canonical definitions from foreign-class
 	// forward declarations.
-	PreviousDecl  string      `json:"previousDecl"`
+	PreviousDecl string `json:"previousDecl"`
 
 	// ObjCInterfaceDecl / ObjCCategoryDecl
-	Super         *ASTRef     `json:"super"`
-	Protocols     []ASTRef    `json:"protocols"`
+	Super     *ASTRef  `json:"super"`
+	Protocols []ASTRef `json:"protocols"`
 	// ObjCCategoryDecl: the class this category extends
-	Interface     *ASTRef     `json:"interface"`
+	Interface *ASTRef `json:"interface"`
 
 	// ObjCMethodDecl — Clang uses "instance": true for instance methods,
 	// absence of the field (or false) means class method.
-	IsInstance    bool        `json:"instance"`
-	IsVariadic    bool        `json:"variadic"`
-	IsImplicit    bool        `json:"implicit"`
+	IsInstance bool `json:"instance"`
+	IsVariadic bool `json:"variadic"`
+	IsImplicit bool `json:"implicit"`
 
 	// ObjCPropertyDecl
-	Getter        *ASTRef     `json:"getter"`
-	Setter        *ASTRef     `json:"setter"`
+	Getter *ASTRef `json:"getter"`
+	Setter *ASTRef `json:"setter"`
 	// property attribute flags: "readonly", "copy", "weak", "assign", etc.
 	PropertyAttributes []string `json:"propertyAttributes"`
 
@@ -86,7 +86,7 @@ type ASTNode struct {
 	Availability []ASTNode `json:"availability"` // AvailabilityAttr nodes
 
 	// AvailabilityAttr fields
-	Platform   string `json:"platform"`   // "macos", "ios"
+	Platform   string `json:"platform"` // "macos", "ios"
 	Introduced string `json:"introduced"`
 	Deprecated string `json:"deprecated"`
 	Obsoleted  string `json:"obsoleted"`
@@ -136,13 +136,13 @@ type IncludedFromRef struct {
 }
 
 type Location struct {
-	FilePath     string           `json:"file"`
-	Line         int              `json:"line"`
-	Col          int              `json:"col"`
+	FilePath string `json:"file"`
+	Line     int    `json:"line"`
+	Col      int    `json:"col"`
 	// When the loc is a macro expansion the actual file is in ExpansionLoc
-	ExpansionLoc *Location        `json:"expansionLoc"`
+	ExpansionLoc *Location `json:"expansionLoc"`
 	// Spelling location (pre-macro-expansion)
-	SpellingLoc  *Location        `json:"spellingLoc"`
+	SpellingLoc *Location `json:"spellingLoc"`
 	// IncludedFrom is the file that directly includes the file this loc is in.
 	// Present when loc.file is absent (Clang cursor optimisation) or when Clang
 	// wants to indicate the include chain.
@@ -223,9 +223,9 @@ type SrcRange struct {
 }
 
 type ASTType struct {
-	QualType          string `json:"qualType"`           // e.g. "NSArray<ObjectType> *", "NSUInteger"
+	QualType          string `json:"qualType"` // e.g. "NSArray<ObjectType> *", "NSUInteger"
 	TypeAliasDeclID   string `json:"typeAliasDeclId"`
-	DesugaredQualType string `json:"desugaredQualType"`  // after typedef expansion
+	DesugaredQualType string `json:"desugaredQualType"` // after typedef expansion
 }
 
 type ASTRef struct {

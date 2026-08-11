@@ -572,7 +572,7 @@ func TestGoPointerTypeVoidStarVariants(t *testing.T) {
 	}{
 		{"void *", "unsafe.Pointer"},
 		{"void * restrict", "unsafe.Pointer"}, // normalised: void *
-		{"void **", "unsafe.Pointer"},          // double void pointer falls through to class check → unsafe.Pointer
+		{"void **", "unsafe.Pointer"},         // double void pointer falls through to class check → unsafe.Pointer
 	}
 	for _, c := range cases {
 		got := m.GoType(c.qt, ctx, nil)
@@ -827,4 +827,3 @@ func TestCFScalarPrimitives(t *testing.T) {
 		}
 	}
 }
-

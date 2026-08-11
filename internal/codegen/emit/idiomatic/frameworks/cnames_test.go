@@ -72,7 +72,7 @@ func TestCEnumMemberNames(t *testing.T) {
 
 func TestStructFieldGoName(t *testing.T) {
 	cases := map[string]string{
-		"virtual_address": "VirtualAddress",
+		"virtual_address":  "VirtualAddress",
 		"physical_address": "PhysicalAddress",
 		"reason":           "Reason",
 		"ipa":              "IPA",

@@ -584,10 +584,10 @@ func TestIsNSErrorOut(t *testing.T) {
 		want bool
 	}{
 		{"NSError **", true},
-		{"NSError * _Nullable *", true},                 // with nullability qualifier
-		{"NSError * __autoreleasing *", true},           // with ARC qualifier
-		{"NSError *", false},                            // single pointer — not an out-param
-		{"void (^)(NSError *)", false},                  // block completion handler — excluded
+		{"NSError * _Nullable *", true},       // with nullability qualifier
+		{"NSError * __autoreleasing *", true}, // with ARC qualifier
+		{"NSError *", false},                  // single pointer — not an out-param
+		{"void (^)(NSError *)", false},        // block completion handler — excluded
 		{"id", false},
 		{"", false},
 	}
@@ -811,9 +811,9 @@ func TestExtractEnumNode(t *testing.T) {
 		Kind: "TranslationUnitDecl",
 		Inner: []ASTNode{
 			{
-				Kind: "EnumDecl",
-				Name: "MyOptions",
-				Loc:  &Location{FilePath: "/SDK/System/Library/Frameworks/TestFW.framework/Headers/TestFW.h"},
+				Kind:                "EnumDecl",
+				Name:                "MyOptions",
+				Loc:                 &Location{FilePath: "/SDK/System/Library/Frameworks/TestFW.framework/Headers/TestFW.h"},
 				FixedUnderlyingType: &ASTType{QualType: "unsigned long"},
 				Inner: []ASTNode{
 					{
@@ -1312,9 +1312,9 @@ func TestExtractCategoryForeignExtension(t *testing.T) {
 		Kind: "TranslationUnitDecl",
 		Inner: []ASTNode{
 			{
-				Kind: "ObjCCategoryDecl",
-				Name: "NSBundle(MyCategory)",
-				Loc:  &Location{FilePath: fakeHdr},
+				Kind:      "ObjCCategoryDecl",
+				Name:      "NSBundle(MyCategory)",
+				Loc:       &Location{FilePath: fakeHdr},
 				Interface: &ASTRef{Name: "NSBundle"},
 				Inner: []ASTNode{
 					{
@@ -1457,9 +1457,9 @@ func TestExtractClassFull(t *testing.T) {
 		Kind: "TranslationUnitDecl",
 		Inner: []ASTNode{
 			{
-				Kind: "ObjCInterfaceDecl",
-				Name: "MyClass",
-				Loc:  &Location{FilePath: fakeHdr},
+				Kind:  "ObjCInterfaceDecl",
+				Name:  "MyClass",
+				Loc:   &Location{FilePath: fakeHdr},
 				Super: &ASTRef{Name: "NSObject"},
 				Protocols: []ASTRef{
 					{Name: "NSCopying"},
@@ -1838,9 +1838,9 @@ func TestExtractEnumNoFixedType(t *testing.T) {
 	}
 
 	cases := []struct {
-		name    string
-		values  []string
-		wantGo  string
+		name   string
+		values []string
+		wantGo string
 	}{
 		{"small non-negative → int32", []string{"0", "1", "2"}, "int32"},
 		{"negative fits int32", []string{"-1", "0", "2147483647"}, "int32"},

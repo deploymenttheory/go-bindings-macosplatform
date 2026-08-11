@@ -165,7 +165,7 @@ func TestGoPointerTypeStructPointerReturn(t *testing.T) {
 	m := newTestMapper()
 	m.StructIndex = map[string]string{"CGSize": "CoreFoundation"}
 	ctx := newTestCtx(m, "Foundation")
-ctx.IsReturn = true
+	ctx.IsReturn = true
 	// CGSize * in return position → unsafe.Pointer (emitter can't dereference C struct)
 	got := m.GoType("CGSize *", ctx, nil)
 	if got != "unsafe.Pointer" {
@@ -179,7 +179,7 @@ func TestGoPointerTypeLowercaseStructPointer(t *testing.T) {
 	m := newTestMapper()
 	m.StructIndex = map[string]string{"vmnet_network": "vmnet"}
 	ctx := newTestCtx(m, "Foundation")
-// "struct vmnet_network *" — ClassName returns "" (lowercase), so falls to bare strip path
+	// "struct vmnet_network *" — ClassName returns "" (lowercase), so falls to bare strip path
 	got := m.GoType("struct vmnet_network *", ctx, nil)
 	if got != "*vmnet.VmnetNetwork" {
 		t.Errorf("GoType(struct vmnet_network *) = %q, want *vmnet.VmnetNetwork", got)
@@ -190,7 +190,7 @@ func TestGoPointerTypeLowercaseStructPointerReturn(t *testing.T) {
 	m := newTestMapper()
 	m.StructIndex = map[string]string{"vmnet_network": "vmnet"}
 	ctx := newTestCtx(m, "Foundation")
-ctx.IsReturn = true
+	ctx.IsReturn = true
 	got := m.GoType("struct vmnet_network *", ctx, nil)
 	if got != "unsafe.Pointer" {
 		t.Errorf("GoType(struct vmnet_network *, IsReturn) = %q, want unsafe.Pointer", got)

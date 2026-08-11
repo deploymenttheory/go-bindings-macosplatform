@@ -11,8 +11,8 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/render"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/view"
-	rawfw "github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/layouttest"
+	rawfw "github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/structlayout"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emitmanifest"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"

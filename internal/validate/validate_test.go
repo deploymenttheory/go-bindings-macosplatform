@@ -138,11 +138,11 @@ func TestEmptyFrameworkReported(t *testing.T) {
 
 func TestAvailabilityAnomalies(t *testing.T) {
 	f := frameworkWith("Foo", map[string]macosplatformmetadata.Class{
-		"BadVersion":   {Availability: macosplatformmetadata.Availability{MacOSIntroduced: "minVers"}},
-		"Inverted":     {Availability: macosplatformmetadata.Availability{MacOSIntroduced: "12.0", MacOSDeprecated: "10.0"}},
-		"FutureDepr":   {Availability: macosplatformmetadata.Availability{MacOSIntroduced: "12.0", MacOSDeprecated: "API_TO_BE_DEPRECATED"}},
-		"SentinelNum":  {Availability: macosplatformmetadata.Availability{MacOSIntroduced: "12.0", MacOSDeprecated: "100000"}},
-		"NormalLife":   {Availability: macosplatformmetadata.Availability{MacOSIntroduced: "10.10", MacOSDeprecated: "13.0"}},
+		"BadVersion":  {Availability: macosplatformmetadata.Availability{MacOSIntroduced: "minVers"}},
+		"Inverted":    {Availability: macosplatformmetadata.Availability{MacOSIntroduced: "12.0", MacOSDeprecated: "10.0"}},
+		"FutureDepr":  {Availability: macosplatformmetadata.Availability{MacOSIntroduced: "12.0", MacOSDeprecated: "API_TO_BE_DEPRECATED"}},
+		"SentinelNum": {Availability: macosplatformmetadata.Availability{MacOSIntroduced: "12.0", MacOSDeprecated: "100000"}},
+		"NormalLife":  {Availability: macosplatformmetadata.Availability{MacOSIntroduced: "10.10", MacOSDeprecated: "13.0"}},
 	})
 	findings := Frameworks([]*macosplatformmetadata.FrameworkMeta{f})
 
@@ -175,8 +175,8 @@ func TestSDKConsistency(t *testing.T) {
 
 func TestParseVersion(t *testing.T) {
 	cases := []struct {
-		in   string
-		ok   bool
+		in string
+		ok bool
 	}{
 		{"10.12", true},
 		{"10.12.4", true},

@@ -88,7 +88,6 @@ func TestCurated_Vmnet_StartStopInterface(t *testing.T) {
 		t.Skip("vmnet_start_interface not available on this macOS release")
 	}
 
-
 	// Interface description: { vmnet_operation_mode_key: VMNET_SHARED_MODE }.
 	dict := xpc.Xpc_dictionary_create(nil, nil, 0)
 	if dict == nil {

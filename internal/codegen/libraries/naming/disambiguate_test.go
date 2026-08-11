@@ -52,7 +52,7 @@ func TestRule2_IBActionSkipped(t *testing.T) {
 	goBack := macosplatformmetadata.Method{Selector: "goBack"}
 	goBackSender := macosplatformmetadata.Method{
 		Selector: "goBack:",
-		Params:     []macosplatformmetadata.Param{{ObjCType: "id"}},
+		Params:   []macosplatformmetadata.Param{{ObjCType: "id"}},
 	}
 	ms := []macosplatformmetadata.Method{goBack, goBackSender}
 	counts := map[string]int{"GoBack": 2}

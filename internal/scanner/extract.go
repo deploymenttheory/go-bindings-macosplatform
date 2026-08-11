@@ -126,12 +126,12 @@ func Extract(root *ASTNode, sdkPath, frameworkName, sdkVersion, arch string, lay
 		ParentFramework: parentFramework,
 		SDKVersion:      sdkVersion,
 		Arch:            arch,
-		Classes:    make(map[string]macosplatformmetadata.Class),
-		Protocols:  make(map[string]macosplatformmetadata.Protocol),
-		Enums:      make(map[string]macosplatformmetadata.Enum),
-		Structs:    make(map[string]macosplatformmetadata.Struct),
-		BlockTypes: make(map[string]macosplatformmetadata.BlockType),
-		Typedefs:   make(map[string]string),
+		Classes:         make(map[string]macosplatformmetadata.Class),
+		Protocols:       make(map[string]macosplatformmetadata.Protocol),
+		Enums:           make(map[string]macosplatformmetadata.Enum),
+		Structs:         make(map[string]macosplatformmetadata.Struct),
+		BlockTypes:      make(map[string]macosplatformmetadata.BlockType),
+		Typedefs:        make(map[string]string),
 	}
 
 	// lastAnonEnum tracks the most recently seen anonymous EnumDecl so that a

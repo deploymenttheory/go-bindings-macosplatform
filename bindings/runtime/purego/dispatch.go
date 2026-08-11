@@ -37,7 +37,9 @@ func Send[T any](id ID, sel SEL, args ...any) T { return objc.Send[T](id, sel, a
 func SendSuper[T any](id ID, sel SEL, args ...any) T { return objc.SendSuper[T](id, sel, args...) }
 
 // InvokeBlock invokes block with args and returns the result typed as T.
-func InvokeBlock[T any](block Block, args ...any) (T, error) { return objc.InvokeBlock[T](block, args...) }
+func InvokeBlock[T any](block Block, args ...any) (T, error) {
+	return objc.InvokeBlock[T](block, args...)
+}
 
 // RegisterName returns the SEL for the given selector name, registering it if needed.
 func RegisterName(name string) SEL { return objc.RegisterName(name) }

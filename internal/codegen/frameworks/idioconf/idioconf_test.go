@@ -107,12 +107,12 @@ func TestMethodRenameWithoutKindMatchesEither(t *testing.T) {
 
 func TestLoadAdjacentRejectsMalformedEntries(t *testing.T) {
 	cases := map[string]string{
-		"missing go_name":     `{"rename_methods": [{"class": "NSString", "selector": "length"}]}`,
-		"unexported go_name":  `{"rename_methods": [{"class": "NSString", "selector": "length", "go_name": "length"}]}`,
-		"missing c_name":      `{"rename_functions": [{"go_name": "CreateVM"}]}`,
-		"missing domain":      `{"error_typedefs": [{"typedef": "hv_return_t"}]}`,
-		"unknown field":       `{"renamed_methods": []}`,
-		"invalid JSON":        `{`,
+		"missing go_name":    `{"rename_methods": [{"class": "NSString", "selector": "length"}]}`,
+		"unexported go_name": `{"rename_methods": [{"class": "NSString", "selector": "length", "go_name": "length"}]}`,
+		"missing c_name":     `{"rename_functions": [{"go_name": "CreateVM"}]}`,
+		"missing domain":     `{"error_typedefs": [{"typedef": "hv_return_t"}]}`,
+		"unknown field":      `{"renamed_methods": []}`,
+		"invalid JSON":       `{`,
 	}
 	for name, content := range cases {
 		t.Run(name, func(t *testing.T) {
@@ -138,12 +138,12 @@ func TestValidateWarnsOnStaleEntries(t *testing.T) {
 
 	file := &File{
 		RenameMethods: []MethodRename{
-			{Class: "NSString", Selector: "length", GoName: "Length"},       // valid
-			{Class: "NSString", Selector: "gone:", GoName: "Gone"},          // stale selector
-			{Class: "NSGone", Selector: "length", GoName: "Length"},         // stale class
+			{Class: "NSString", Selector: "length", GoName: "Length"}, // valid
+			{Class: "NSString", Selector: "gone:", GoName: "Gone"},    // stale selector
+			{Class: "NSGone", Selector: "length", GoName: "Length"},   // stale class
 		},
 		RenameFunctions: []FunctionRename{
-			{CName: "NSLog", GoName: "Log"},      // valid
+			{CName: "NSLog", GoName: "Log"},       // valid
 			{CName: "NSGoneFunc", GoName: "Gone"}, // stale
 		},
 		Delegates: DelegateConfig{
@@ -151,9 +151,9 @@ func TestValidateWarnsOnStaleEntries(t *testing.T) {
 			Exclude: []string{"NSAlsoGone"},
 		},
 		ErrorTypedefs: []ErrorTypedef{
-			{Typedef: "NSTimeInterval", Domain: "D"},                                // valid
-			{Typedef: "gone_t", Domain: "D"},                                        // stale typedef
-			{Typedef: "NSTimeInterval", Domain: "D", SentinelEnum: "missing_enum"},  // stale enum
+			{Typedef: "NSTimeInterval", Domain: "D"},                               // valid
+			{Typedef: "gone_t", Domain: "D"},                                       // stale typedef
+			{Typedef: "NSTimeInterval", Domain: "D", SentinelEnum: "missing_enum"}, // stale enum
 		},
 	}
 

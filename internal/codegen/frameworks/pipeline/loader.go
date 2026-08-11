@@ -1009,7 +1009,6 @@ func selectBestArch(files []string) []string {
 	return out
 }
 
-
 func lookupProtocol(frameworks []*meta.FrameworkMeta, fwName, name string) *meta.Protocol {
 	for _, framework := range frameworks {
 		if framework.Framework != fwName {

@@ -26,11 +26,11 @@ const (
 
 	// Generated filename constants. Keeping them here means a rename only
 	// requires a single edit rather than a grep-and-replace across test bodies.
-	fileDoc                    = "doc.go"
-	fileCgo                    = "cgo.go"
-	fileNSObject               = "NSObject.go"
-	fileAppkitEnums            = "appkit_enums.go"
-	fileForeignExtensions      = "applescriptobjc_foreign_extensions.go"
+	fileDoc               = "doc.go"
+	fileCgo               = "cgo.go"
+	fileNSObject          = "NSObject.go"
+	fileAppkitEnums       = "appkit_enums.go"
+	fileForeignExtensions = "applescriptobjc_foreign_extensions.go"
 )
 
 // metaDir returns the metadata directory to use for acceptance tests.
