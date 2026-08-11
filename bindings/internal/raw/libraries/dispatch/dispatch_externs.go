@@ -4,10 +4,10 @@
 
 package dispatch
 
-// #include "bridge/dispatch_bridge.h"
-import "C"
-
-import "unsafe"
+import (
+	"github.com/ebitengine/purego"
+	"unsafe"
+)
 
 var (
 	// [data.h:51]
@@ -63,22 +63,53 @@ var (
 	_dispatch_source_type_write unsafe.Pointer
 )
 
-// init populates the extern vars from the C globals via bridge address
-// getters, so package consumers read live values rather than zero stubs.
-func init() {
-	_dispatch_data_empty = C.dispatch_extern__dispatch_data_empty()
-	_dispatch_main_q = C.dispatch_extern__dispatch_main_q()
-	_dispatch_queue_attr_concurrent = C.dispatch_extern__dispatch_queue_attr_concurrent()
-	_dispatch_source_type_data_add = C.dispatch_extern__dispatch_source_type_data_add()
-	_dispatch_source_type_data_or = C.dispatch_extern__dispatch_source_type_data_or()
-	_dispatch_source_type_data_replace = C.dispatch_extern__dispatch_source_type_data_replace()
-	_dispatch_source_type_mach_recv = C.dispatch_extern__dispatch_source_type_mach_recv()
-	_dispatch_source_type_mach_send = C.dispatch_extern__dispatch_source_type_mach_send()
-	_dispatch_source_type_memorypressure = C.dispatch_extern__dispatch_source_type_memorypressure()
-	_dispatch_source_type_proc = C.dispatch_extern__dispatch_source_type_proc()
-	_dispatch_source_type_read = C.dispatch_extern__dispatch_source_type_read()
-	_dispatch_source_type_signal = C.dispatch_extern__dispatch_source_type_signal()
-	_dispatch_source_type_timer = C.dispatch_extern__dispatch_source_type_timer()
-	_dispatch_source_type_vnode = C.dispatch_extern__dispatch_source_type_vnode()
-	_dispatch_source_type_write = C.dispatch_extern__dispatch_source_type_write()
+// _initExterns populates the extern vars once the dylib is loaded. An
+// extern whose symbol does not resolve keeps its zero value, matching the
+// CGo emission's unsupported-shape behaviour.
+func _initExterns(lib uintptr) {
+	if _addr, _ := purego.Dlsym(lib, "_dispatch_data_empty"); _addr != 0 {
+		_dispatch_data_empty = unsafe.Pointer(_addr)
+	}
+	if _addr, _ := purego.Dlsym(lib, "_dispatch_main_q"); _addr != 0 {
+		_dispatch_main_q = unsafe.Pointer(_addr)
+	}
+	if _addr, _ := purego.Dlsym(lib, "_dispatch_queue_attr_concurrent"); _addr != 0 {
+		_dispatch_queue_attr_concurrent = unsafe.Pointer(_addr)
+	}
+	if _addr, _ := purego.Dlsym(lib, "_dispatch_source_type_data_add"); _addr != 0 {
+		_dispatch_source_type_data_add = unsafe.Pointer(_addr)
+	}
+	if _addr, _ := purego.Dlsym(lib, "_dispatch_source_type_data_or"); _addr != 0 {
+		_dispatch_source_type_data_or = unsafe.Pointer(_addr)
+	}
+	if _addr, _ := purego.Dlsym(lib, "_dispatch_source_type_data_replace"); _addr != 0 {
+		_dispatch_source_type_data_replace = unsafe.Pointer(_addr)
+	}
+	if _addr, _ := purego.Dlsym(lib, "_dispatch_source_type_mach_recv"); _addr != 0 {
+		_dispatch_source_type_mach_recv = unsafe.Pointer(_addr)
+	}
+	if _addr, _ := purego.Dlsym(lib, "_dispatch_source_type_mach_send"); _addr != 0 {
+		_dispatch_source_type_mach_send = unsafe.Pointer(_addr)
+	}
+	if _addr, _ := purego.Dlsym(lib, "_dispatch_source_type_memorypressure"); _addr != 0 {
+		_dispatch_source_type_memorypressure = unsafe.Pointer(_addr)
+	}
+	if _addr, _ := purego.Dlsym(lib, "_dispatch_source_type_proc"); _addr != 0 {
+		_dispatch_source_type_proc = unsafe.Pointer(_addr)
+	}
+	if _addr, _ := purego.Dlsym(lib, "_dispatch_source_type_read"); _addr != 0 {
+		_dispatch_source_type_read = unsafe.Pointer(_addr)
+	}
+	if _addr, _ := purego.Dlsym(lib, "_dispatch_source_type_signal"); _addr != 0 {
+		_dispatch_source_type_signal = unsafe.Pointer(_addr)
+	}
+	if _addr, _ := purego.Dlsym(lib, "_dispatch_source_type_timer"); _addr != 0 {
+		_dispatch_source_type_timer = unsafe.Pointer(_addr)
+	}
+	if _addr, _ := purego.Dlsym(lib, "_dispatch_source_type_vnode"); _addr != 0 {
+		_dispatch_source_type_vnode = unsafe.Pointer(_addr)
+	}
+	if _addr, _ := purego.Dlsym(lib, "_dispatch_source_type_write"); _addr != 0 {
+		_dispatch_source_type_write = unsafe.Pointer(_addr)
+	}
 }

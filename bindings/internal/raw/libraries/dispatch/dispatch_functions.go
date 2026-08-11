@@ -4,1134 +4,1031 @@
 
 package dispatch
 
-// #include "bridge/dispatch_bridge.h"
-import "C"
-
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/bsd"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/blocks"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo"
+	"github.com/ebitengine/purego/objc"
+	"runtime"
 	"unsafe"
 )
 
-var _ unsafe.Pointer // suppress unused import
+var (
+	_pg_dispatch_time                                       func(uint64, int64) uint64
+	_pg_dispatch_walltime                                   func(*bsd.Timespec, int64) uint64
+	_pg__dispatch_object_validate                           func(unsafe.Pointer)
+	_pg_dispatch_retain                                     func(unsafe.Pointer)
+	_pg_dispatch_release                                    func(unsafe.Pointer)
+	_pg_dispatch_get_context                                func(unsafe.Pointer) unsafe.Pointer
+	_pg_dispatch_set_context                                func(unsafe.Pointer, unsafe.Pointer)
+	_pg_dispatch_set_finalizer_f                            func(unsafe.Pointer, unsafe.Pointer)
+	_pg_dispatch_activate                                   func(unsafe.Pointer)
+	_pg_dispatch_suspend                                    func(unsafe.Pointer)
+	_pg_dispatch_resume                                     func(unsafe.Pointer)
+	_pg_dispatch_set_qos_class_floor                        func(unsafe.Pointer, QosClassT, int32)
+	_pg_dispatch_async                                      func(unsafe.Pointer, objc.Block)
+	_pg_dispatch_async_f                                    func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_pg_dispatch_sync                                       func(unsafe.Pointer, objc.Block)
+	_pg_dispatch_sync_f                                     func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_pg_dispatch_async_and_wait                             func(unsafe.Pointer, objc.Block)
+	_pg_dispatch_async_and_wait_f                           func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_pg_dispatch_apply                                      func(uint64, unsafe.Pointer, objc.Block)
+	_pg_dispatch_apply_f                                    func(uint64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_pg_dispatch_get_current_queue                          func() unsafe.Pointer
+	_pg_dispatch_get_global_queue                           func(int64, uint64) unsafe.Pointer
+	_pg_dispatch_queue_attr_make_initially_inactive         func(unsafe.Pointer) unsafe.Pointer
+	_pg_dispatch_queue_attr_make_with_autorelease_frequency func(unsafe.Pointer, DispatchAutoreleaseFrequencyT) unsafe.Pointer
+	_pg_dispatch_queue_attr_make_with_qos_class             func(unsafe.Pointer, QosClassT, int32) unsafe.Pointer
+	_pg_dispatch_queue_create_with_target                   func(string, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_pg_dispatch_queue_create                               func(string, unsafe.Pointer) unsafe.Pointer
+	_pg_dispatch_queue_get_label                            func(unsafe.Pointer) string
+	_pg_dispatch_queue_get_qos_class                        func(unsafe.Pointer, *int32) QosClassT
+	_pg_dispatch_set_target_queue                           func(unsafe.Pointer, unsafe.Pointer)
+	_pg_dispatch_main                                       func()
+	_pg_dispatch_after                                      func(uint64, unsafe.Pointer, objc.Block)
+	_pg_dispatch_after_f                                    func(uint64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_pg_dispatch_barrier_async                              func(unsafe.Pointer, objc.Block)
+	_pg_dispatch_barrier_async_f                            func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_pg_dispatch_barrier_sync                               func(unsafe.Pointer, objc.Block)
+	_pg_dispatch_barrier_sync_f                             func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_pg_dispatch_barrier_async_and_wait                     func(unsafe.Pointer, objc.Block)
+	_pg_dispatch_barrier_async_and_wait_f                   func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_pg_dispatch_queue_set_specific                         func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_pg_dispatch_queue_get_specific                         func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_pg_dispatch_get_specific                               func(unsafe.Pointer) unsafe.Pointer
+	_pg_dispatch_assert_queue                               func(unsafe.Pointer)
+	_pg_dispatch_assert_queue_barrier                       func(unsafe.Pointer)
+	_pg_dispatch_assert_queue_not                           func(unsafe.Pointer)
+	_pg_dispatch_allow_send_signals                         func(int32) int32
+	_pg_dispatch_block_create                               func(DispatchBlockFlagsT, objc.Block) unsafe.Pointer
+	_pg_dispatch_block_create_with_qos_class                func(DispatchBlockFlagsT, QosClassT, int32, objc.Block) unsafe.Pointer
+	_pg_dispatch_block_perform                              func(DispatchBlockFlagsT, objc.Block)
+	_pg_dispatch_block_wait                                 func(objc.Block, uint64) int64
+	_pg_dispatch_block_notify                               func(objc.Block, unsafe.Pointer, objc.Block)
+	_pg_dispatch_block_cancel                               func(objc.Block)
+	_pg_dispatch_block_testcancel                           func(objc.Block) int64
+	_pg_dispatch_source_create                              func(unsafe.Pointer, uint64, uint64, unsafe.Pointer) unsafe.Pointer
+	_pg_dispatch_source_set_event_handler                   func(unsafe.Pointer, objc.Block)
+	_pg_dispatch_source_set_event_handler_f                 func(unsafe.Pointer, unsafe.Pointer)
+	_pg_dispatch_source_set_cancel_handler                  func(unsafe.Pointer, objc.Block)
+	_pg_dispatch_source_set_cancel_handler_f                func(unsafe.Pointer, unsafe.Pointer)
+	_pg_dispatch_source_cancel                              func(unsafe.Pointer)
+	_pg_dispatch_source_testcancel                          func(unsafe.Pointer) int64
+	_pg_dispatch_source_get_handle                          func(unsafe.Pointer) uint64
+	_pg_dispatch_source_get_mask                            func(unsafe.Pointer) uint64
+	_pg_dispatch_source_get_data                            func(unsafe.Pointer) uint64
+	_pg_dispatch_source_merge_data                          func(unsafe.Pointer, uint64)
+	_pg_dispatch_source_set_timer                           func(unsafe.Pointer, uint64, uint64, uint64)
+	_pg_dispatch_source_set_registration_handler            func(unsafe.Pointer, objc.Block)
+	_pg_dispatch_source_set_registration_handler_f          func(unsafe.Pointer, unsafe.Pointer)
+	_pg_dispatch_group_create                               func() unsafe.Pointer
+	_pg_dispatch_group_async                                func(unsafe.Pointer, unsafe.Pointer, objc.Block)
+	_pg_dispatch_group_async_f                              func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_pg_dispatch_group_wait                                 func(unsafe.Pointer, uint64) int64
+	_pg_dispatch_group_notify                               func(unsafe.Pointer, unsafe.Pointer, objc.Block)
+	_pg_dispatch_group_notify_f                             func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_pg_dispatch_group_enter                                func(unsafe.Pointer)
+	_pg_dispatch_group_leave                                func(unsafe.Pointer)
+	_pg_dispatch_semaphore_create                           func(int64) unsafe.Pointer
+	_pg_dispatch_semaphore_wait                             func(unsafe.Pointer, uint64) int64
+	_pg_dispatch_semaphore_signal                           func(unsafe.Pointer) int64
+	_pg_dispatch_once                                       func(*int64, objc.Block)
+	_pg__dispatch_once                                      func(*int64, objc.Block)
+	_pg_dispatch_once_f                                     func(*int64, unsafe.Pointer, unsafe.Pointer)
+	_pg__dispatch_once_f                                    func(*int64, unsafe.Pointer, unsafe.Pointer)
+	_pg_dispatch_data_create                                func(unsafe.Pointer, uint64, unsafe.Pointer, objc.Block) unsafe.Pointer
+	_pg_dispatch_data_get_size                              func(unsafe.Pointer) uint64
+	_pg_dispatch_data_create_map                            func(unsafe.Pointer, unsafe.Pointer, *uint64) unsafe.Pointer
+	_pg_dispatch_data_create_concat                         func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_pg_dispatch_data_create_subrange                       func(unsafe.Pointer, uint64, uint64) unsafe.Pointer
+	_pg_dispatch_data_apply                                 func(unsafe.Pointer, objc.Block) bool
+	_pg_dispatch_data_copy_region                           func(unsafe.Pointer, uint64, *uint64) unsafe.Pointer
+	_pg_dispatch_read                                       func(int32, uint64, unsafe.Pointer, objc.Block)
+	_pg_dispatch_write                                      func(int32, unsafe.Pointer, unsafe.Pointer, objc.Block)
+	_pg_dispatch_io_create                                  func(uint64, int32, unsafe.Pointer, objc.Block) unsafe.Pointer
+	_pg_dispatch_io_create_with_path                        func(uint64, string, int32, uint16, unsafe.Pointer, objc.Block) unsafe.Pointer
+	_pg_dispatch_io_create_with_io                          func(uint64, unsafe.Pointer, unsafe.Pointer, objc.Block) unsafe.Pointer
+	_pg_dispatch_io_read                                    func(unsafe.Pointer, int64, uint64, unsafe.Pointer, objc.Block)
+	_pg_dispatch_io_write                                   func(unsafe.Pointer, int64, unsafe.Pointer, unsafe.Pointer, objc.Block)
+	_pg_dispatch_io_close                                   func(unsafe.Pointer, uint64)
+	_pg_dispatch_io_barrier                                 func(unsafe.Pointer, objc.Block)
+	_pg_dispatch_io_get_descriptor                          func(unsafe.Pointer) int32
+	_pg_dispatch_io_set_high_water                          func(unsafe.Pointer, uint64)
+	_pg_dispatch_io_set_low_water                           func(unsafe.Pointer, uint64)
+	_pg_dispatch_io_set_interval                            func(unsafe.Pointer, uint64, uint64)
+	_pg_dispatch_workloop_create                            func(string) unsafe.Pointer
+	_pg_dispatch_workloop_create_inactive                   func(string) unsafe.Pointer
+	_pg_dispatch_workloop_set_autorelease_frequency         func(unsafe.Pointer, DispatchAutoreleaseFrequencyT)
+	_pg_dispatch_workloop_set_os_workgroup                  func(unsafe.Pointer, unsafe.Pointer)
+)
 
 // [time.h:110]
 // Introduced: macOS 10.6
-// Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_time
 func Dispatch_time(when uint64, delta int64) uint64 {
-	var _exc unsafe.Pointer
-	_result := uint64(C.dispatch_fn_dispatch_time(C.uint64_t(when), C.int64_t(delta), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_dispatch_time(when, delta)
 }
 
 // [time.h:137]
 // Introduced: macOS 10.6
-// Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_walltime
 func Dispatch_walltime(when *bsd.Timespec, delta int64) uint64 {
-	var _exc unsafe.Pointer
-	_result := uint64(C.dispatch_fn_dispatch_walltime(unsafe.Pointer(when), C.int64_t(delta), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_dispatch_walltime(when, delta)
 }
 
 // [object.h:93]
 // ID: objc-sym dispatch._dispatch_object_validate
 func _dispatch_object_validate(object unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.dispatch_fn__dispatch_object_validate(object, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg__dispatch_object_validate(object)
 }
 
 // [object.h:272]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_retain
 func Dispatch_retain(object unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_retain(object, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_dispatch_retain(object)
 }
 
 // [object.h:300]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_release
 func Dispatch_release(object unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_release(object, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_dispatch_release(object)
 }
 
 // [object.h:325]
 // Introduced: macOS 10.6
-// Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_get_context
 func Dispatch_get_context(object unsafe.Pointer) unsafe.Pointer {
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.dispatch_fn_dispatch_get_context(object, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_dispatch_get_context(object)
 }
 
 // [object.h:344]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_set_context
 func Dispatch_set_context(object unsafe.Pointer, context_ unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_set_context(object, context_, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_dispatch_set_context(object, context_)
 }
 
 // [object.h:371]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_set_finalizer_f
 func Dispatch_set_finalizer_f(object unsafe.Pointer, finalizer unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_set_finalizer_f(object, finalizer, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_dispatch_set_finalizer_f(object, finalizer)
 }
 
 // [object.h:400]
 // Introduced: macOS 10.12
 // ID: objc-sym dispatch.dispatch_activate
 func Dispatch_activate(object unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_activate(object, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_dispatch_activate(object)
 }
 
 // [object.h:424]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_suspend
 func Dispatch_suspend(object unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_suspend(object, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_dispatch_suspend(object)
 }
 
 // [object.h:454]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_resume
 func Dispatch_resume(object unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_resume(object, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_dispatch_resume(object)
 }
 
 // [object.h:497]
 // Introduced: macOS 10.14
 // ID: objc-sym dispatch.dispatch_set_qos_class_floor
 func Dispatch_set_qos_class_floor(object unsafe.Pointer, qos_class QosClassT, relative_priority int32) {
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_set_qos_class_floor(object, C.uint32_t(qos_class), C.int32_t(relative_priority), &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_dispatch_set_qos_class_floor(object, qos_class, relative_priority)
 }
 
 // [queue.h:239]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_async
 func Dispatch_async(queue unsafe.Pointer, block func()) {
-	_blk_block := blocks.MakeBlock_void(block)
-	defer blocks.FreeBlock(_blk_block)
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_async(queue, _blk_block, &_exc)
-	cgo.RaiseIfException(_exc)
+	var _blk_block objc.Block
+	if block != nil {
+		_blk_block = objc.NewBlock(func(_ objc.Block) { block() })
+		defer _blk_block.Release()
+	}
+	_pg_dispatch_async(queue, _blk_block)
 }
 
 // [queue.h:270]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_async_f
 func Dispatch_async_f(queue unsafe.Pointer, context_ unsafe.Pointer, work unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_async_f(queue, context_, work, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_dispatch_async_f(queue, context_, work)
 }
 
 // [queue.h:314]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_sync
 func Dispatch_sync(queue unsafe.Pointer, block func()) {
-	_blk_block := blocks.MakeBlock_void(block)
-	defer blocks.FreeBlock(_blk_block)
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_sync(queue, _blk_block, &_exc)
-	cgo.RaiseIfException(_exc)
+	var _blk_block objc.Block
+	if block != nil {
+		_blk_block = objc.NewBlock(func(_ objc.Block) { block() })
+		defer _blk_block.Release()
+	}
+	_pg_dispatch_sync(queue, _blk_block)
 }
 
 // [queue.h:343]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_sync_f
 func Dispatch_sync_f(queue unsafe.Pointer, context_ unsafe.Pointer, work unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_sync_f(queue, context_, work, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_dispatch_sync_f(queue, context_, work)
 }
 
 // [queue.h:411]
 // Introduced: macOS 10.14
 // ID: objc-sym dispatch.dispatch_async_and_wait
 func Dispatch_async_and_wait(queue unsafe.Pointer, block func()) {
-	_blk_block := blocks.MakeBlock_void(block)
-	defer blocks.FreeBlock(_blk_block)
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_async_and_wait(queue, _blk_block, &_exc)
-	cgo.RaiseIfException(_exc)
+	var _blk_block objc.Block
+	if block != nil {
+		_blk_block = objc.NewBlock(func(_ objc.Block) { block() })
+		defer _blk_block.Release()
+	}
+	_pg_dispatch_async_and_wait(queue, _blk_block)
 }
 
 // [queue.h:441]
 // Introduced: macOS 10.14
 // ID: objc-sym dispatch.dispatch_async_and_wait_f
 func Dispatch_async_and_wait_f(queue unsafe.Pointer, context_ unsafe.Pointer, work unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_async_and_wait_f(queue, context_, work, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_dispatch_async_and_wait_f(queue, context_, work)
 }
 
 // [queue.h:514]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_apply
 func Dispatch_apply(iterations uint64, queue unsafe.Pointer, block func(uint64)) {
-	_blk_block := blocks.MakeBlock_void_uint64(block)
-	defer blocks.FreeBlock(_blk_block)
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_apply(C.uint64_t(iterations), queue, _blk_block, &_exc)
-	cgo.RaiseIfException(_exc)
+	var _blk_block objc.Block
+	if block != nil {
+		_blk_block = objc.NewBlock(func(_ objc.Block, _a0 uint64) { block(_a0) })
+		defer _blk_block.Release()
+	}
+	_pg_dispatch_apply(iterations, queue, _blk_block)
 }
 
 // [queue.h:550]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_apply_f
 func Dispatch_apply_f(iterations uint64, queue unsafe.Pointer, context_ unsafe.Pointer, work unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_apply_f(C.uint64_t(iterations), queue, context_, work, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_dispatch_apply_f(iterations, queue, context_, work)
 }
 
 // [queue.h:586]
 // Introduced: macOS 10.6
 //
 // Deprecated: Deprecated in macOS 10.9. unsupported interface
-// Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_get_current_queue
 func Dispatch_get_current_queue() unsafe.Pointer {
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.dispatch_fn_dispatch_get_current_queue(&_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
-}
-
-// [queue.h:619]
-// ID: objc-sym dispatch.dispatch_get_main_queue
-func Dispatch_get_main_queue() unsafe.Pointer {
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.dispatch_fn_dispatch_get_main_queue(&_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_dispatch_get_current_queue()
 }
 
 // [queue.h:701]
 // Introduced: macOS 10.6
-// Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_get_global_queue
 func Dispatch_get_global_queue(identifier int64, flags uint64) unsafe.Pointer {
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.dispatch_fn_dispatch_get_global_queue(C.int64_t(identifier), C.uint64_t(flags), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_dispatch_get_global_queue(identifier, flags)
 }
 
 // [queue.h:798]
 // Introduced: macOS 10.12
-// Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_queue_attr_make_initially_inactive
 func Dispatch_queue_attr_make_initially_inactive(attr unsafe.Pointer) unsafe.Pointer {
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.dispatch_fn_dispatch_queue_attr_make_initially_inactive(attr, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_dispatch_queue_attr_make_initially_inactive(attr)
 }
 
 // [queue.h:905]
 // Introduced: macOS 10.12
-// Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_queue_attr_make_with_autorelease_frequency
 func Dispatch_queue_attr_make_with_autorelease_frequency(attr unsafe.Pointer, frequency DispatchAutoreleaseFrequencyT) unsafe.Pointer {
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.dispatch_fn_dispatch_queue_attr_make_with_autorelease_frequency(attr, C.uint64_t(frequency), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_dispatch_queue_attr_make_with_autorelease_frequency(attr, frequency)
 }
 
 // [queue.h:970]
 // Introduced: macOS 10.10
-// Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_queue_attr_make_with_qos_class
 func Dispatch_queue_attr_make_with_qos_class(attr unsafe.Pointer, qos_class QosClassT, relative_priority int32) unsafe.Pointer {
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.dispatch_fn_dispatch_queue_attr_make_with_qos_class(attr, C.uint32_t(qos_class), C.int32_t(relative_priority), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_dispatch_queue_attr_make_with_qos_class(attr, qos_class, relative_priority)
 }
 
 // [queue.h:1037]
 // Introduced: macOS 10.12
-// Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_queue_create_with_target
 func Dispatch_queue_create_with_target(label string, attr unsafe.Pointer, target unsafe.Pointer) unsafe.Pointer {
-	_cstr_label := C.CString(label)
-	defer C.free(unsafe.Pointer(_cstr_label))
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.dispatch_fn_dispatch_queue_create_with_target(_cstr_label, attr, target, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_dispatch_queue_create_with_target(label, attr, target)
 }
 
 // [queue.h:1091]
 // Introduced: macOS 10.6
-// Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_queue_create
 func Dispatch_queue_create(label string, attr unsafe.Pointer) unsafe.Pointer {
-	_cstr_label := C.CString(label)
-	defer C.free(unsafe.Pointer(_cstr_label))
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.dispatch_fn_dispatch_queue_create(_cstr_label, attr, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_dispatch_queue_create(label, attr)
 }
 
 // [queue.h:1121]
 // Introduced: macOS 10.6
-// Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_queue_get_label
 func Dispatch_queue_get_label(queue unsafe.Pointer) string {
-	var _exc unsafe.Pointer
-	_result := C.GoString(C.dispatch_fn_dispatch_queue_get_label(queue, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_dispatch_queue_get_label(queue)
 }
 
 // [queue.h:1161]
 // Introduced: macOS 10.10
-// Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_queue_get_qos_class
 func Dispatch_queue_get_qos_class(queue unsafe.Pointer, relative_priority_ptr *int32) QosClassT {
-	var _exc unsafe.Pointer
-	_result := QosClassT(C.dispatch_fn_dispatch_queue_get_qos_class(queue, unsafe.Pointer(relative_priority_ptr), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_dispatch_queue_get_qos_class(queue, relative_priority_ptr)
 }
 
 // [queue.h:1229]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_set_target_queue
 func Dispatch_set_target_queue(object unsafe.Pointer, queue unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_set_target_queue(object, queue, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_dispatch_set_target_queue(object, queue)
 }
 
 // [queue.h:1249]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_main
 func Dispatch_main() {
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_main(&_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_dispatch_main()
 }
 
 // [queue.h:1278]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_after
 func Dispatch_after(when uint64, queue unsafe.Pointer, block func()) {
-	_blk_block := blocks.MakeBlock_void(block)
-	defer blocks.FreeBlock(_blk_block)
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_after(C.uint64_t(when), queue, _blk_block, &_exc)
-	cgo.RaiseIfException(_exc)
+	var _blk_block objc.Block
+	if block != nil {
+		_blk_block = objc.NewBlock(func(_ objc.Block) { block() })
+		defer _blk_block.Release()
+	}
+	_pg_dispatch_after(when, queue, _blk_block)
 }
 
 // [queue.h:1311]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_after_f
 func Dispatch_after_f(when uint64, queue unsafe.Pointer, context_ unsafe.Pointer, work unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_after_f(C.uint64_t(when), queue, context_, work, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_dispatch_after_f(when, queue, context_, work)
 }
 
 // [queue.h:1358]
 // Introduced: macOS 10.7
 // ID: objc-sym dispatch.dispatch_barrier_async
 func Dispatch_barrier_async(queue unsafe.Pointer, block func()) {
-	_blk_block := blocks.MakeBlock_void(block)
-	defer blocks.FreeBlock(_blk_block)
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_barrier_async(queue, _blk_block, &_exc)
-	cgo.RaiseIfException(_exc)
+	var _blk_block objc.Block
+	if block != nil {
+		_blk_block = objc.NewBlock(func(_ objc.Block) { block() })
+		defer _blk_block.Release()
+	}
+	_pg_dispatch_barrier_async(queue, _blk_block)
 }
 
 // [queue.h:1394]
 // Introduced: macOS 10.7
 // ID: objc-sym dispatch.dispatch_barrier_async_f
 func Dispatch_barrier_async_f(queue unsafe.Pointer, context_ unsafe.Pointer, work unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_barrier_async_f(queue, context_, work, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_dispatch_barrier_async_f(queue, context_, work)
 }
 
 // [queue.h:1423]
 // Introduced: macOS 10.7
 // ID: objc-sym dispatch.dispatch_barrier_sync
 func Dispatch_barrier_sync(queue unsafe.Pointer, block func()) {
-	_blk_block := blocks.MakeBlock_void(block)
-	defer blocks.FreeBlock(_blk_block)
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_barrier_sync(queue, _blk_block, &_exc)
-	cgo.RaiseIfException(_exc)
+	var _blk_block objc.Block
+	if block != nil {
+		_blk_block = objc.NewBlock(func(_ objc.Block) { block() })
+		defer _blk_block.Release()
+	}
+	_pg_dispatch_barrier_sync(queue, _blk_block)
 }
 
 // [queue.h:1456]
 // Introduced: macOS 10.7
 // ID: objc-sym dispatch.dispatch_barrier_sync_f
 func Dispatch_barrier_sync_f(queue unsafe.Pointer, context_ unsafe.Pointer, work unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_barrier_sync_f(queue, context_, work, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_dispatch_barrier_sync_f(queue, context_, work)
 }
 
 // [queue.h:1485]
 // Introduced: macOS 10.14
 // ID: objc-sym dispatch.dispatch_barrier_async_and_wait
 func Dispatch_barrier_async_and_wait(queue unsafe.Pointer, block func()) {
-	_blk_block := blocks.MakeBlock_void(block)
-	defer blocks.FreeBlock(_blk_block)
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_barrier_async_and_wait(queue, _blk_block, &_exc)
-	cgo.RaiseIfException(_exc)
+	var _blk_block objc.Block
+	if block != nil {
+		_blk_block = objc.NewBlock(func(_ objc.Block) { block() })
+		defer _blk_block.Release()
+	}
+	_pg_dispatch_barrier_async_and_wait(queue, _blk_block)
 }
 
 // [queue.h:1519]
 // Introduced: macOS 10.14
 // ID: objc-sym dispatch.dispatch_barrier_async_and_wait_f
 func Dispatch_barrier_async_and_wait_f(queue unsafe.Pointer, context_ unsafe.Pointer, work unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_barrier_async_and_wait_f(queue, context_, work, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_dispatch_barrier_async_and_wait_f(queue, context_, work)
 }
 
 // [queue.h:1562]
 // Introduced: macOS 10.7
 // ID: objc-sym dispatch.dispatch_queue_set_specific
 func Dispatch_queue_set_specific(queue unsafe.Pointer, key unsafe.Pointer, context_ unsafe.Pointer, destructor unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_queue_set_specific(queue, key, context_, destructor, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_dispatch_queue_set_specific(queue, key, context_, destructor)
 }
 
 // [queue.h:1593]
 // Introduced: macOS 10.7
-// Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_queue_get_specific
 func Dispatch_queue_get_specific(queue unsafe.Pointer, key unsafe.Pointer) unsafe.Pointer {
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.dispatch_fn_dispatch_queue_get_specific(queue, key, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_dispatch_queue_get_specific(queue, key)
 }
 
 // [queue.h:1620]
 // Introduced: macOS 10.7
-// Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_get_specific
 func Dispatch_get_specific(key unsafe.Pointer) unsafe.Pointer {
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.dispatch_fn_dispatch_get_specific(key, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_dispatch_get_specific(key)
 }
 
 // [queue.h:1675]
 // Introduced: macOS 10.12
 // ID: objc-sym dispatch.dispatch_assert_queue
 func Dispatch_assert_queue(queue unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_assert_queue(queue, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_dispatch_assert_queue(queue)
 }
 
 // [queue.h:1702]
 // Introduced: macOS 10.12
 // ID: objc-sym dispatch.dispatch_assert_queue_barrier
 func Dispatch_assert_queue_barrier(queue unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_assert_queue_barrier(queue, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_dispatch_assert_queue_barrier(queue)
 }
 
 // [queue.h:1726]
 // Introduced: macOS 10.12
 // ID: objc-sym dispatch.dispatch_assert_queue_not
 func Dispatch_assert_queue_not(queue unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_assert_queue_not(queue, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_dispatch_assert_queue_not(queue)
 }
 
 // [queue.h:1800]
 // Introduced: macOS 14.4
 // ID: objc-sym dispatch.dispatch_allow_send_signals
 func Dispatch_allow_send_signals(preserve_signum int32) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.dispatch_fn_dispatch_allow_send_signals(C.int32_t(preserve_signum), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_dispatch_allow_send_signals(preserve_signum)
 }
 
 // [block.h:181]
 // Introduced: macOS 10.10
-// Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_block_create
 func Dispatch_block_create(flags DispatchBlockFlagsT, block func()) unsafe.Pointer {
-	_blk_block := blocks.MakeBlock_void(block)
-	defer blocks.FreeBlock(_blk_block)
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.dispatch_fn_dispatch_block_create(C.uint64_t(flags), _blk_block, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	var _blk_block objc.Block
+	if block != nil {
+		_blk_block = objc.NewBlock(func(_ objc.Block) { block() })
+		defer _blk_block.Release()
+	}
+	return _pg_dispatch_block_create(flags, _blk_block)
 }
 
 // [block.h:254]
 // Introduced: macOS 10.10
-// Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_block_create_with_qos_class
 func Dispatch_block_create_with_qos_class(flags DispatchBlockFlagsT, qos_class QosClassT, relative_priority int32, block func()) unsafe.Pointer {
-	_blk_block := blocks.MakeBlock_void(block)
-	defer blocks.FreeBlock(_blk_block)
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.dispatch_fn_dispatch_block_create_with_qos_class(C.uint64_t(flags), C.uint32_t(qos_class), C.int32_t(relative_priority), _blk_block, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	var _blk_block objc.Block
+	if block != nil {
+		_blk_block = objc.NewBlock(func(_ objc.Block) { block() })
+		defer _blk_block.Release()
+	}
+	return _pg_dispatch_block_create_with_qos_class(flags, qos_class, relative_priority, _blk_block)
 }
 
 // [block.h:287]
 // Introduced: macOS 10.10
 // ID: objc-sym dispatch.dispatch_block_perform
 func Dispatch_block_perform(flags DispatchBlockFlagsT, block func()) {
-	_blk_block := blocks.MakeBlock_void(block)
-	defer blocks.FreeBlock(_blk_block)
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_block_perform(C.uint64_t(flags), _blk_block, &_exc)
-	cgo.RaiseIfException(_exc)
+	var _blk_block objc.Block
+	if block != nil {
+		_blk_block = objc.NewBlock(func(_ objc.Block) { block() })
+		defer _blk_block.Release()
+	}
+	_pg_dispatch_block_perform(flags, _blk_block)
 }
 
 // [block.h:339]
 // Introduced: macOS 10.10
 // ID: objc-sym dispatch.dispatch_block_wait
 func Dispatch_block_wait(block func(), timeout uint64) int64 {
-	_blk_block := blocks.MakeBlock_void(block)
-	defer blocks.FreeBlock(_blk_block)
-	var _exc unsafe.Pointer
-	_result := int64(C.dispatch_fn_dispatch_block_wait(_blk_block, C.uint64_t(timeout), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	var _blk_block objc.Block
+	if block != nil {
+		_blk_block = objc.NewBlock(func(_ objc.Block) { block() })
+		defer _blk_block.Release()
+	}
+	return _pg_dispatch_block_wait(_blk_block, timeout)
 }
 
 // [block.h:381]
 // Introduced: macOS 10.10
 // ID: objc-sym dispatch.dispatch_block_notify
 func Dispatch_block_notify(block func(), queue unsafe.Pointer, notification_block func()) {
-	_blk_block := blocks.MakeBlock_void(block)
-	defer blocks.FreeBlock(_blk_block)
-	_blk_notification_block := blocks.MakeBlock_void(notification_block)
-	defer blocks.FreeBlock(_blk_notification_block)
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_block_notify(_blk_block, queue, _blk_notification_block, &_exc)
-	cgo.RaiseIfException(_exc)
+	var _blk_block objc.Block
+	if block != nil {
+		_blk_block = objc.NewBlock(func(_ objc.Block) { block() })
+		defer _blk_block.Release()
+	}
+	var _blk_notification_block objc.Block
+	if notification_block != nil {
+		_blk_notification_block = objc.NewBlock(func(_ objc.Block) { notification_block() })
+		defer _blk_notification_block.Release()
+	}
+	_pg_dispatch_block_notify(_blk_block, queue, _blk_notification_block)
 }
 
 // [block.h:414]
 // Introduced: macOS 10.10
 // ID: objc-sym dispatch.dispatch_block_cancel
 func Dispatch_block_cancel(block func()) {
-	_blk_block := blocks.MakeBlock_void(block)
-	defer blocks.FreeBlock(_blk_block)
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_block_cancel(_blk_block, &_exc)
-	cgo.RaiseIfException(_exc)
+	var _blk_block objc.Block
+	if block != nil {
+		_blk_block = objc.NewBlock(func(_ objc.Block) { block() })
+		defer _blk_block.Release()
+	}
+	_pg_dispatch_block_cancel(_blk_block)
 }
 
 // [block.h:435]
 // Introduced: macOS 10.10
-// Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_block_testcancel
 func Dispatch_block_testcancel(block func()) int64 {
-	_blk_block := blocks.MakeBlock_void(block)
-	defer blocks.FreeBlock(_blk_block)
-	var _exc unsafe.Pointer
-	_result := int64(C.dispatch_fn_dispatch_block_testcancel(_blk_block, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	var _blk_block objc.Block
+	if block != nil {
+		_blk_block = objc.NewBlock(func(_ objc.Block) { block() })
+		defer _blk_block.Release()
+	}
+	return _pg_dispatch_block_testcancel(_blk_block)
 }
 
 // [source.h:400]
 // Introduced: macOS 10.6
-// Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_source_create
 func Dispatch_source_create(type_ *DispatchSourceTypeT, handle uint64, mask uint64, queue unsafe.Pointer) unsafe.Pointer {
-	defer cgo.KeepAlive(type_)
-	var _objcPtr_type_ unsafe.Pointer
+	var _ptr_type_ unsafe.Pointer
 	if type_ != nil {
-		_objcPtr_type_ = type_.Ptr()
+		_ptr_type_ = type_.Ptr()
 	}
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.dispatch_fn_dispatch_source_create(_objcPtr_type_, C.uint64_t(handle), C.uint64_t(mask), queue, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	defer runtime.KeepAlive(type_)
+	return _pg_dispatch_source_create(_ptr_type_, handle, mask, queue)
 }
 
 // [source.h:423]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_source_set_event_handler
 func Dispatch_source_set_event_handler(source unsafe.Pointer, handler func()) {
-	_blk_handler := blocks.MakeBlock_void(handler)
-	defer blocks.FreeBlock(_blk_handler)
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_source_set_event_handler(source, _blk_handler, &_exc)
-	cgo.RaiseIfException(_exc)
+	var _blk_handler objc.Block
+	if handler != nil {
+		_blk_handler = objc.NewBlock(func(_ objc.Block) { handler() })
+		defer _blk_handler.Release()
+	}
+	_pg_dispatch_source_set_event_handler(source, _blk_handler)
 }
 
 // [source.h:446]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_source_set_event_handler_f
 func Dispatch_source_set_event_handler_f(source unsafe.Pointer, handler unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_source_set_event_handler_f(source, handler, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_dispatch_source_set_event_handler_f(source, handler)
 }
 
 // [source.h:482]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_source_set_cancel_handler
 func Dispatch_source_set_cancel_handler(source unsafe.Pointer, handler func()) {
-	_blk_handler := blocks.MakeBlock_void(handler)
-	defer blocks.FreeBlock(_blk_handler)
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_source_set_cancel_handler(source, _blk_handler, &_exc)
-	cgo.RaiseIfException(_exc)
+	var _blk_handler objc.Block
+	if handler != nil {
+		_blk_handler = objc.NewBlock(func(_ objc.Block) { handler() })
+		defer _blk_handler.Release()
+	}
+	_pg_dispatch_source_set_cancel_handler(source, _blk_handler)
 }
 
 // [source.h:508]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_source_set_cancel_handler_f
 func Dispatch_source_set_cancel_handler_f(source unsafe.Pointer, handler unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_source_set_cancel_handler_f(source, handler, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_dispatch_source_set_cancel_handler_f(source, handler)
 }
 
 // [source.h:537]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_source_cancel
 func Dispatch_source_cancel(source unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_source_cancel(source, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_dispatch_source_cancel(source)
 }
 
 // [source.h:557]
 // Introduced: macOS 10.6
-// Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_source_testcancel
 func Dispatch_source_testcancel(source unsafe.Pointer) int64 {
-	var _exc unsafe.Pointer
-	_result := int64(C.dispatch_fn_dispatch_source_testcancel(source, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_dispatch_source_testcancel(source)
 }
 
 // [source.h:590]
 // Introduced: macOS 10.6
-// Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_source_get_handle
 func Dispatch_source_get_handle(source unsafe.Pointer) uint64 {
-	var _exc unsafe.Pointer
-	_result := uint64(C.dispatch_fn_dispatch_source_get_handle(source, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_dispatch_source_get_handle(source)
 }
 
 // [source.h:623]
 // Introduced: macOS 10.6
-// Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_source_get_mask
 func Dispatch_source_get_mask(source unsafe.Pointer) uint64 {
-	var _exc unsafe.Pointer
-	_result := uint64(C.dispatch_fn_dispatch_source_get_mask(source, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_dispatch_source_get_mask(source)
 }
 
 // [source.h:663]
 // Introduced: macOS 10.6
-// Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_source_get_data
 func Dispatch_source_get_data(source unsafe.Pointer) uint64 {
-	var _exc unsafe.Pointer
-	_result := uint64(C.dispatch_fn_dispatch_source_get_data(source, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_dispatch_source_get_data(source)
 }
 
 // [source.h:685]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_source_merge_data
 func Dispatch_source_merge_data(source unsafe.Pointer, value uint64) {
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_source_merge_data(source, C.uint64_t(value), &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_dispatch_source_merge_data(source, value)
 }
 
 // [source.h:739]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_source_set_timer
 func Dispatch_source_set_timer(source unsafe.Pointer, start uint64, interval uint64, leeway uint64) {
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_source_set_timer(source, C.uint64_t(start), C.uint64_t(interval), C.uint64_t(leeway), &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_dispatch_source_set_timer(source, start, interval, leeway)
 }
 
 // [source.h:770]
 // Introduced: macOS 10.7
 // ID: objc-sym dispatch.dispatch_source_set_registration_handler
 func Dispatch_source_set_registration_handler(source unsafe.Pointer, handler func()) {
-	_blk_handler := blocks.MakeBlock_void(handler)
-	defer blocks.FreeBlock(_blk_handler)
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_source_set_registration_handler(source, _blk_handler, &_exc)
-	cgo.RaiseIfException(_exc)
+	var _blk_handler objc.Block
+	if handler != nil {
+		_blk_handler = objc.NewBlock(func(_ objc.Block) { handler() })
+		defer _blk_handler.Release()
+	}
+	_pg_dispatch_source_set_registration_handler(source, _blk_handler)
 }
 
 // [source.h:796]
 // Introduced: macOS 10.7
 // ID: objc-sym dispatch.dispatch_source_set_registration_handler_f
 func Dispatch_source_set_registration_handler_f(source unsafe.Pointer, handler unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_source_set_registration_handler_f(source, handler, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_dispatch_source_set_registration_handler_f(source, handler)
 }
 
 // [group.h:60]
 // Introduced: macOS 10.6
-// Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_group_create
 func Dispatch_group_create() unsafe.Pointer {
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.dispatch_fn_dispatch_group_create(&_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_dispatch_group_create()
 }
 
 // [group.h:90]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_group_async
 func Dispatch_group_async(group unsafe.Pointer, queue unsafe.Pointer, block func()) {
-	_blk_block := blocks.MakeBlock_void(block)
-	defer blocks.FreeBlock(_blk_block)
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_group_async(group, queue, _blk_block, &_exc)
-	cgo.RaiseIfException(_exc)
+	var _blk_block objc.Block
+	if block != nil {
+		_blk_block = objc.NewBlock(func(_ objc.Block) { block() })
+		defer _blk_block.Release()
+	}
+	_pg_dispatch_group_async(group, queue, _blk_block)
 }
 
 // [group.h:126]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_group_async_f
 func Dispatch_group_async_f(group unsafe.Pointer, queue unsafe.Pointer, context_ unsafe.Pointer, work unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_group_async_f(group, queue, context_, work, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_dispatch_group_async_f(group, queue, context_, work)
 }
 
 // [group.h:169]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_group_wait
 func Dispatch_group_wait(group unsafe.Pointer, timeout uint64) int64 {
-	var _exc unsafe.Pointer
-	_result := int64(C.dispatch_fn_dispatch_group_wait(group, C.uint64_t(timeout), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_dispatch_group_wait(group, timeout)
 }
 
 // [group.h:206]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_group_notify
 func Dispatch_group_notify(group unsafe.Pointer, queue unsafe.Pointer, block func()) {
-	_blk_block := blocks.MakeBlock_void(block)
-	defer blocks.FreeBlock(_blk_block)
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_group_notify(group, queue, _blk_block, &_exc)
-	cgo.RaiseIfException(_exc)
+	var _blk_block objc.Block
+	if block != nil {
+		_blk_block = objc.NewBlock(func(_ objc.Block) { block() })
+		defer _blk_block.Release()
+	}
+	_pg_dispatch_group_notify(group, queue, _blk_block)
 }
 
 // [group.h:238]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_group_notify_f
 func Dispatch_group_notify_f(group unsafe.Pointer, queue unsafe.Pointer, context_ unsafe.Pointer, work unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_group_notify_f(group, queue, context_, work, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_dispatch_group_notify_f(group, queue, context_, work)
 }
 
 // [group.h:262]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_group_enter
 func Dispatch_group_enter(group unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_group_enter(group, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_dispatch_group_enter(group)
 }
 
 // [group.h:282]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_group_leave
 func Dispatch_group_leave(group unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_group_leave(group, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_dispatch_group_leave(group)
 }
 
 // [semaphore.h:66]
 // Introduced: macOS 10.6
-// Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_semaphore_create
 func Dispatch_semaphore_create(value int64) unsafe.Pointer {
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.dispatch_fn_dispatch_semaphore_create(C.int64_t(value), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_dispatch_semaphore_create(value)
 }
 
 // [semaphore.h:94]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_semaphore_wait
 func Dispatch_semaphore_wait(dsema unsafe.Pointer, timeout uint64) int64 {
-	var _exc unsafe.Pointer
-	_result := int64(C.dispatch_fn_dispatch_semaphore_wait(dsema, C.uint64_t(timeout), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_dispatch_semaphore_wait(dsema, timeout)
 }
 
 // [semaphore.h:117]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_semaphore_signal
 func Dispatch_semaphore_signal(dsema unsafe.Pointer) int64 {
-	var _exc unsafe.Pointer
-	_result := int64(C.dispatch_fn_dispatch_semaphore_signal(dsema, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_dispatch_semaphore_signal(dsema)
 }
 
 // [once.h:74]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_once
 func Dispatch_once(predicate *int64, block func()) {
-	_blk_block := blocks.MakeBlock_void(block)
-	defer blocks.FreeBlock(_blk_block)
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_once(unsafe.Pointer(predicate), _blk_block, &_exc)
-	cgo.RaiseIfException(_exc)
+	var _blk_block objc.Block
+	if block != nil {
+		_blk_block = objc.NewBlock(func(_ objc.Block) { block() })
+		defer _blk_block.Release()
+	}
+	_pg_dispatch_once(predicate, _blk_block)
 }
 
 // [once.h:82]
 // ID: objc-sym dispatch._dispatch_once
 func _dispatch_once(predicate *int64, block func()) {
-	_blk_block := blocks.MakeBlock_void(block)
-	defer blocks.FreeBlock(_blk_block)
-	var _exc unsafe.Pointer
-	C.dispatch_fn__dispatch_once(unsafe.Pointer(predicate), _blk_block, &_exc)
-	cgo.RaiseIfException(_exc)
+	var _blk_block objc.Block
+	if block != nil {
+		_blk_block = objc.NewBlock(func(_ objc.Block) { block() })
+		defer _blk_block.Release()
+	}
+	_pg__dispatch_once(predicate, _blk_block)
 }
 
 // [once.h:101]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_once_f
 func Dispatch_once_f(predicate *int64, context_ unsafe.Pointer, function unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_once_f(unsafe.Pointer(predicate), context_, function, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_dispatch_once_f(predicate, context_, function)
 }
 
 // [once.h:109]
 // ID: objc-sym dispatch._dispatch_once_f
 func _dispatch_once_f(predicate *int64, context_ unsafe.Pointer, function unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.dispatch_fn__dispatch_once_f(unsafe.Pointer(predicate), context_, function, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg__dispatch_once_f(predicate, context_, function)
 }
 
 // [data.h:122]
 // Introduced: macOS 10.7
-// Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_data_create
 func Dispatch_data_create(buffer unsafe.Pointer, size uint64, queue unsafe.Pointer, destructor func()) unsafe.Pointer {
-	_blk_destructor := blocks.MakeBlock_void(destructor)
-	defer blocks.FreeBlock(_blk_destructor)
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.dispatch_fn_dispatch_data_create(buffer, C.uint64_t(size), queue, _blk_destructor, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	var _blk_destructor objc.Block
+	if destructor != nil {
+		_blk_destructor = objc.NewBlock(func(_ objc.Block) { destructor() })
+		defer _blk_destructor.Release()
+	}
+	return _pg_dispatch_data_create(buffer, size, queue, _blk_destructor)
 }
 
 // [data.h:140]
 // Introduced: macOS 10.7
 // ID: objc-sym dispatch.dispatch_data_get_size
 func Dispatch_data_get_size(data unsafe.Pointer) uint64 {
-	var _exc unsafe.Pointer
-	_result := uint64(C.dispatch_fn_dispatch_data_get_size(data, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_dispatch_data_get_size(data)
 }
 
 // [data.h:166]
 // Introduced: macOS 10.7
-// Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_data_create_map
 func Dispatch_data_create_map(data unsafe.Pointer, buffer_ptr unsafe.Pointer, size_ptr *uint64) unsafe.Pointer {
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.dispatch_fn_dispatch_data_create_map(data, buffer_ptr, unsafe.Pointer(size_ptr), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_dispatch_data_create_map(data, buffer_ptr, size_ptr)
 }
 
 // [data.h:190]
 // Introduced: macOS 10.7
-// Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_data_create_concat
 func Dispatch_data_create_concat(data1 unsafe.Pointer, data2 unsafe.Pointer) unsafe.Pointer {
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.dispatch_fn_dispatch_data_create_concat(data1, data2, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_dispatch_data_create_concat(data1, data2)
 }
 
 // [data.h:212]
 // Introduced: macOS 10.7
-// Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_data_create_subrange
 func Dispatch_data_create_subrange(data unsafe.Pointer, offset uint64, length uint64) unsafe.Pointer {
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.dispatch_fn_dispatch_data_create_subrange(data, C.uint64_t(offset), C.uint64_t(length), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_dispatch_data_create_subrange(data, offset, length)
 }
 
 // [data.h:258]
 // Introduced: macOS 10.7
 // ID: objc-sym dispatch.dispatch_data_apply
 func Dispatch_data_apply(data unsafe.Pointer, applier func(unsafe.Pointer, uint64, unsafe.Pointer, uint64) bool) bool {
-	_blk_applier := blocks.MakeBlock_bool_ptr_uint64_ptr_uint64(applier)
-	defer blocks.FreeBlock(_blk_applier)
-	var _exc unsafe.Pointer
-	_result := bool(C.dispatch_fn_dispatch_data_apply(data, _blk_applier, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	var _blk_applier objc.Block
+	if applier != nil {
+		_blk_applier = objc.NewBlock(func(_ objc.Block, _a0 unsafe.Pointer, _a1 uint64, _a2 unsafe.Pointer, _a3 uint64) bool {
+			return applier(_a0, _a1, _a2, _a3)
+		})
+		defer _blk_applier.Release()
+	}
+	return _pg_dispatch_data_apply(data, _blk_applier)
 }
 
 // [data.h:281]
 // Introduced: macOS 10.7
-// Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_data_copy_region
 func Dispatch_data_copy_region(data unsafe.Pointer, location uint64, offset_ptr *uint64) unsafe.Pointer {
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.dispatch_fn_dispatch_data_copy_region(data, C.uint64_t(location), unsafe.Pointer(offset_ptr), &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_dispatch_data_copy_region(data, location, offset_ptr)
 }
 
 // [io.h:115]
 // Introduced: macOS 10.7
 // ID: objc-sym dispatch.dispatch_read
 func Dispatch_read(fd int32, length uint64, queue unsafe.Pointer, handler func(unsafe.Pointer, int32)) {
-	_blk_handler := blocks.MakeBlock_void_ptr_int32(handler)
-	defer blocks.FreeBlock(_blk_handler)
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_read(C.int32_t(fd), C.uint64_t(length), queue, _blk_handler, &_exc)
-	cgo.RaiseIfException(_exc)
+	var _blk_handler objc.Block
+	if handler != nil {
+		_blk_handler = objc.NewBlock(func(_ objc.Block, _a0 unsafe.Pointer, _a1 int32) { handler(_a0, _a1) })
+		defer _blk_handler.Release()
+	}
+	_pg_dispatch_read(fd, length, queue, _blk_handler)
 }
 
 // [io.h:155]
 // Introduced: macOS 10.7
 // ID: objc-sym dispatch.dispatch_write
 func Dispatch_write(fd int32, data unsafe.Pointer, queue unsafe.Pointer, handler func(unsafe.Pointer, int32)) {
-	_blk_handler := blocks.MakeBlock_void_ptr_int32(handler)
-	defer blocks.FreeBlock(_blk_handler)
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_write(C.int32_t(fd), data, queue, _blk_handler, &_exc)
-	cgo.RaiseIfException(_exc)
+	var _blk_handler objc.Block
+	if handler != nil {
+		_blk_handler = objc.NewBlock(func(_ objc.Block, _a0 unsafe.Pointer, _a1 int32) { handler(_a0, _a1) })
+		defer _blk_handler.Release()
+	}
+	_pg_dispatch_write(fd, data, queue, _blk_handler)
 }
 
 // [io.h:228]
 // Introduced: macOS 10.7
-// Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_io_create
 func Dispatch_io_create(type_ uint64, fd int32, queue unsafe.Pointer, cleanup_handler func(int32)) unsafe.Pointer {
-	_blk_cleanup_handler := blocks.MakeBlock_void_int32(cleanup_handler)
-	defer blocks.FreeBlock(_blk_cleanup_handler)
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.dispatch_fn_dispatch_io_create(C.uint64_t(type_), C.int32_t(fd), queue, _blk_cleanup_handler, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	var _blk_cleanup_handler objc.Block
+	if cleanup_handler != nil {
+		_blk_cleanup_handler = objc.NewBlock(func(_ objc.Block, _a0 int32) { cleanup_handler(_a0) })
+		defer _blk_cleanup_handler.Release()
+	}
+	return _pg_dispatch_io_create(type_, fd, queue, _blk_cleanup_handler)
 }
 
 // [io.h:265]
 // Introduced: macOS 10.7
-// Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_io_create_with_path
 func Dispatch_io_create_with_path(type_ uint64, path string, oflag int32, mode uint16, queue unsafe.Pointer, cleanup_handler func(int32)) unsafe.Pointer {
-	_cstr_path := C.CString(path)
-	defer C.free(unsafe.Pointer(_cstr_path))
-	_blk_cleanup_handler := blocks.MakeBlock_void_int32(cleanup_handler)
-	defer blocks.FreeBlock(_blk_cleanup_handler)
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.dispatch_fn_dispatch_io_create_with_path(C.uint64_t(type_), _cstr_path, C.int32_t(oflag), C.uint16_t(mode), queue, _blk_cleanup_handler, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	var _blk_cleanup_handler objc.Block
+	if cleanup_handler != nil {
+		_blk_cleanup_handler = objc.NewBlock(func(_ objc.Block, _a0 int32) { cleanup_handler(_a0) })
+		defer _blk_cleanup_handler.Release()
+	}
+	return _pg_dispatch_io_create_with_path(type_, path, oflag, mode, queue, _blk_cleanup_handler)
 }
 
 // [io.h:306]
 // Introduced: macOS 10.7
-// Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_io_create_with_io
 func Dispatch_io_create_with_io(type_ uint64, io unsafe.Pointer, queue unsafe.Pointer, cleanup_handler func(int32)) unsafe.Pointer {
-	_blk_cleanup_handler := blocks.MakeBlock_void_int32(cleanup_handler)
-	defer blocks.FreeBlock(_blk_cleanup_handler)
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.dispatch_fn_dispatch_io_create_with_io(C.uint64_t(type_), io, queue, _blk_cleanup_handler, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	var _blk_cleanup_handler objc.Block
+	if cleanup_handler != nil {
+		_blk_cleanup_handler = objc.NewBlock(func(_ objc.Block, _a0 int32) { cleanup_handler(_a0) })
+		defer _blk_cleanup_handler.Release()
+	}
+	return _pg_dispatch_io_create_with_io(type_, io, queue, _blk_cleanup_handler)
 }
 
 // [io.h:370]
 // Introduced: macOS 10.7
 // ID: objc-sym dispatch.dispatch_io_read
 func Dispatch_io_read(channel unsafe.Pointer, offset int64, length uint64, queue unsafe.Pointer, io_handler func(bool, unsafe.Pointer, int32)) {
-	_blk_io_handler := blocks.MakeBlock_void_bool_ptr_int32(io_handler)
-	defer blocks.FreeBlock(_blk_io_handler)
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_io_read(channel, C.int64_t(offset), C.uint64_t(length), queue, _blk_io_handler, &_exc)
-	cgo.RaiseIfException(_exc)
+	var _blk_io_handler objc.Block
+	if io_handler != nil {
+		_blk_io_handler = objc.NewBlock(func(_ objc.Block, _a0 bool, _a1 unsafe.Pointer, _a2 int32) { io_handler(_a0, _a1, _a2) })
+		defer _blk_io_handler.Release()
+	}
+	_pg_dispatch_io_read(channel, offset, length, queue, _blk_io_handler)
 }
 
 // [io.h:424]
 // Introduced: macOS 10.7
 // ID: objc-sym dispatch.dispatch_io_write
 func Dispatch_io_write(channel unsafe.Pointer, offset int64, data unsafe.Pointer, queue unsafe.Pointer, io_handler func(bool, unsafe.Pointer, int32)) {
-	_blk_io_handler := blocks.MakeBlock_void_bool_ptr_int32(io_handler)
-	defer blocks.FreeBlock(_blk_io_handler)
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_io_write(channel, C.int64_t(offset), data, queue, _blk_io_handler, &_exc)
-	cgo.RaiseIfException(_exc)
+	var _blk_io_handler objc.Block
+	if io_handler != nil {
+		_blk_io_handler = objc.NewBlock(func(_ objc.Block, _a0 bool, _a1 unsafe.Pointer, _a2 int32) { io_handler(_a0, _a1, _a2) })
+		defer _blk_io_handler.Release()
+	}
+	_pg_dispatch_io_write(channel, offset, data, queue, _blk_io_handler)
 }
 
 // [io.h:464]
 // Introduced: macOS 10.7
 // ID: objc-sym dispatch.dispatch_io_close
 func Dispatch_io_close(channel unsafe.Pointer, flags uint64) {
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_io_close(channel, C.uint64_t(flags), &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_dispatch_io_close(channel, flags)
 }
 
 // [io.h:492]
 // Introduced: macOS 10.7
 // ID: objc-sym dispatch.dispatch_io_barrier
 func Dispatch_io_barrier(channel unsafe.Pointer, barrier func()) {
-	_blk_barrier := blocks.MakeBlock_void(barrier)
-	defer blocks.FreeBlock(_blk_barrier)
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_io_barrier(channel, _blk_barrier, &_exc)
-	cgo.RaiseIfException(_exc)
+	var _blk_barrier objc.Block
+	if barrier != nil {
+		_blk_barrier = objc.NewBlock(func(_ objc.Block) { barrier() })
+		defer _blk_barrier.Release()
+	}
+	_pg_dispatch_io_barrier(channel, _blk_barrier)
 }
 
 // [io.h:513]
 // Introduced: macOS 10.7
-// Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_io_get_descriptor
 func Dispatch_io_get_descriptor(channel unsafe.Pointer) int32 {
-	var _exc unsafe.Pointer
-	_result := int32(C.dispatch_fn_dispatch_io_get_descriptor(channel, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_dispatch_io_get_descriptor(channel)
 }
 
 // [io.h:535]
 // Introduced: macOS 10.7
 // ID: objc-sym dispatch.dispatch_io_set_high_water
 func Dispatch_io_set_high_water(channel unsafe.Pointer, high_water uint64) {
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_io_set_high_water(channel, C.uint64_t(high_water), &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_dispatch_io_set_high_water(channel, high_water)
 }
 
 // [io.h:567]
 // Introduced: macOS 10.7
 // ID: objc-sym dispatch.dispatch_io_set_low_water
 func Dispatch_io_set_low_water(channel unsafe.Pointer, low_water uint64) {
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_io_set_low_water(channel, C.uint64_t(low_water), &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_dispatch_io_set_low_water(channel, low_water)
 }
 
 // [io.h:608]
 // Introduced: macOS 10.7
 // ID: objc-sym dispatch.dispatch_io_set_interval
 func Dispatch_io_set_interval(channel unsafe.Pointer, interval uint64, flags uint64) {
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_io_set_interval(channel, C.uint64_t(interval), C.uint64_t(flags), &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_dispatch_io_set_interval(channel, interval, flags)
 }
 
 // [workloop.h:83]
 // Introduced: macOS 10.14
-// Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_workloop_create
 func Dispatch_workloop_create(label string) unsafe.Pointer {
-	_cstr_label := C.CString(label)
-	defer C.free(unsafe.Pointer(_cstr_label))
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.dispatch_fn_dispatch_workloop_create(_cstr_label, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_dispatch_workloop_create(label)
 }
 
 // [workloop.h:110]
 // Introduced: macOS 10.14
-// Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_workloop_create_inactive
 func Dispatch_workloop_create_inactive(label string) unsafe.Pointer {
-	_cstr_label := C.CString(label)
-	defer C.free(unsafe.Pointer(_cstr_label))
-	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.dispatch_fn_dispatch_workloop_create_inactive(_cstr_label, &_exc))
-	cgo.RaiseIfException(_exc)
-	return _result
+	return _pg_dispatch_workloop_create_inactive(label)
 }
 
 // [workloop.h:136]
 // Introduced: macOS 10.14
 // ID: objc-sym dispatch.dispatch_workloop_set_autorelease_frequency
 func Dispatch_workloop_set_autorelease_frequency(workloop unsafe.Pointer, frequency DispatchAutoreleaseFrequencyT) {
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_workloop_set_autorelease_frequency(workloop, C.uint64_t(frequency), &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_dispatch_workloop_set_autorelease_frequency(workloop, frequency)
 }
 
 // [workloop.h:169]
 // Introduced: macOS 11.0
 // ID: objc-sym dispatch.dispatch_workloop_set_os_workgroup
 func Dispatch_workloop_set_os_workgroup(workloop unsafe.Pointer, workgroup unsafe.Pointer) {
-	var _exc unsafe.Pointer
-	C.dispatch_fn_dispatch_workloop_set_os_workgroup(workloop, workgroup, &_exc)
-	cgo.RaiseIfException(_exc)
+	_pg_dispatch_workloop_set_os_workgroup(workloop, workgroup)
 }

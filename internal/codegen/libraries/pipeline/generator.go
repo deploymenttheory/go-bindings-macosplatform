@@ -752,6 +752,18 @@ func emitFramework(
 		); err != nil {
 			return err
 		}
+		// <pkg>_manual.go — hand-written Go bodies for header-inline functions
+		// that have no exported dylib symbol to bind (e.g. dispatch_get_main_queue).
+		if rawlib.HasPuregoManual(framework.Framework) {
+			if err := writeFile(
+				filepath.Join(outDir, packageName+"_manual.go"),
+				func(buf *bytes.Buffer) error {
+					return rawlib.EmitPuregoManual(buf, pkgName, framework.Framework)
+				},
+			); err != nil {
+				return err
+			}
+		}
 	} else {
 		// bridge/{framework}_bridge.h and bridge/{framework}_bridge.m
 		if err := rawlib.EmitBridge(outDir, framework, m, reg.ClassNameIndex); err != nil {
