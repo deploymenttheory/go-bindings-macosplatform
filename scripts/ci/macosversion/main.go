@@ -1,7 +1,12 @@
 //go:build darwin
 
-// macosversion reports the current macOS version by querying NSProcessInfo from
-// the generated Foundation framework bindings.
+// macosversion reports the current macOS version so the acceptance workflow can
+// decide whether the committed bindings (generated against one SDK major) are
+// exercisable on this runner.
+//
+// Deliberately does NOT use the generated bindings: this check is what gates
+// their use, so it must work on a runner whose OS predates the bindings' SDK
+// (where loading them can fail). sw_vers is the narrowest OS-independent probe.
 //
 // When GITHUB_OUTPUT is set the results are written as GitHub Actions step outputs:
 //
@@ -15,36 +20,32 @@ package main
 import (
 	"fmt"
 	"os"
+	"os/exec"
 	"regexp"
 	"strings"
-
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
 func main() {
-	info := foundation.NSProcessInfoProcessInfo()
-	if info == nil {
-		fmt.Fprintln(os.Stderr, "NSProcessInfo.processInfo returned nil")
+	out, err := exec.Command("/usr/bin/sw_vers", "-productVersion").Output()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "sw_vers -productVersion: %v\n", err)
 		os.Exit(1)
 	}
-	raw := info.OperatingSystemVersionString()
+	raw := strings.TrimSpace(string(out))
 
-	// NSProcessInfo returns e.g. "Version 26.5 (Build 26A5252d)" — extract "26.5".
-	re := regexp.MustCompile(`Version\s+(\d+)\.(\d+)`)
+	// sw_vers prints e.g. "26.5" or "26.5.1" — extract major and minor.
+	re := regexp.MustCompile(`^(\d+)\.(\d+)`)
 	m := re.FindStringSubmatch(raw)
 	if m == nil {
-		fmt.Fprintf(os.Stderr, "could not parse version from NSProcessInfo string: %q\n", raw)
+		fmt.Fprintf(os.Stderr, "could not parse version from sw_vers output: %q\n", raw)
 		os.Exit(1)
 	}
 	major, minor := m[1], m[2]
 	version := major + "." + minor
 
-	parts := strings.SplitN(version, ".", 2)
 	emit("macos_version", version)
-	emit("macos_major", parts[0])
-	if len(parts) > 1 {
-		emit("macos_minor", parts[1])
-	}
+	emit("macos_major", major)
+	emit("macos_minor", minor)
 
 	fmt.Printf("macOS version : %s (major %s, minor %s)\n", version, major, minor)
 }
