@@ -1,5 +1,12 @@
 # go-bindings-macosplatform
 
+[![GoDoc](https://pkg.go.dev/badge/github.com/deploymenttheory/go-bindings-macosplatform)](https://pkg.go.dev/github.com/deploymenttheory/go-bindings-macosplatform)
+[![License](https://img.shields.io/github/license/deploymenttheory/go-bindings-macosplatform)](LICENSE)
+[![Go Version](https://img.shields.io/github/go-mod/go-version/deploymenttheory/go-bindings-macosplatform)](https://go.dev/)
+[![Release](https://img.shields.io/github/v/release/deploymenttheory/go-bindings-macosplatform)](https://github.com/deploymenttheory/go-bindings-macosplatform/releases)
+[![codecov](https://codecov.io/gh/deploymenttheory/go-bindings-macosplatform/graph/badge.svg)](https://codecov.io/gh/deploymenttheory/go-bindings-macosplatform)
+![Status: beta](https://img.shields.io/badge/status-beta-blue)
+
 Type-safe Go bindings for native macOS framework APIs, generated directly from the installed version of the Xcode SDK on macOS deterministically.
 
 This project provides three things:
