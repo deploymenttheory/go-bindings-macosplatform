@@ -104,6 +104,7 @@ func (o *NSScriptCommand) ResumeExecutionWithResult(result objc.ID) {
 	o.Ptr().Send(_nSScriptCommandSelResumeExecutionWithResult, result)
 }
 
+// The description of this script command.
 func (o *NSScriptCommand) CommandDescription() *NSScriptCommandDescription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptCommandSelCommandDescription)
 	if _ret != 0 {
@@ -112,6 +113,7 @@ func (o *NSScriptCommand) CommandDescription() *NSScriptCommandDescription {
 	return NSScriptCommandDescriptionFromID(_ret)
 }
 
+// The object that corresponds to the direct parameter of the Apple event from which this command derives.
 func (o *NSScriptCommand) DirectParameter() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptCommandSelDirectParameter)
 	return _ret
@@ -121,6 +123,7 @@ func (o *NSScriptCommand) SetDirectParameter(directParameter objc.ID) {
 	o.Ptr().Send(_nSScriptCommandSelSetDirectParameter, directParameter)
 }
 
+// The object specifier for the object or objects that will be given a chance to handle the command. If the direct parameter of the original event was an object specifier, `setDirectParameter:` sends a `setReceiversSpecifier:` message.
 func (o *NSScriptCommand) ReceiversSpecifier() *NSScriptObjectSpecifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptCommandSelReceiversSpecifier)
 	if _ret != 0 {
@@ -133,11 +136,13 @@ func (o *NSScriptCommand) SetReceiversSpecifier(receiversSpecifier *NSScriptObje
 	o.Ptr().Send(_nSScriptCommandSelSetReceiversSpecifier, receiversSpecifier.Ptr())
 }
 
+// If the direct parameter of the original event was an object specifier, returns the specified object or objects. Returns `nil` if the direct parameter was not an object specifier or could not be evaluated.
 func (o *NSScriptCommand) EvaluatedReceivers() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptCommandSelEvaluatedReceivers)
 	return _ret
 }
 
+// The arguments of the command.
 func (o *NSScriptCommand) Arguments() *NSDictionary[*NSString, objc.ID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptCommandSelArguments)
 	if _ret != 0 {
@@ -150,6 +155,7 @@ func (o *NSScriptCommand) SetArguments(arguments *NSDictionary[*NSString, objc.I
 	o.Ptr().Send(_nSScriptCommandSelSetArguments, arguments.Ptr())
 }
 
+// The arguments of the command, with any object specifiers already evaluated.
 func (o *NSScriptCommand) EvaluatedArguments() *NSDictionary[*NSString, objc.ID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptCommandSelEvaluatedArguments)
 	if _ret != 0 {
@@ -158,11 +164,13 @@ func (o *NSScriptCommand) EvaluatedArguments() *NSDictionary[*NSString, objc.ID]
 	return NSDictionaryFromID[*NSString, objc.ID](_ret)
 }
 
+// A Boolean value that indicates whether the command is well-formed according to its command description.
 func (o *NSScriptCommand) IsWellFormed() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSScriptCommandSelIsWellFormed)
 	return _ret
 }
 
+// The error number associated with this command, if any.
 func (o *NSScriptCommand) ScriptErrorNumber() int {
 	_ret := objc.Send[int](o.Ptr(), _nSScriptCommandSelScriptErrorNumber)
 	return _ret
@@ -172,6 +180,7 @@ func (o *NSScriptCommand) SetScriptErrorNumber(scriptErrorNumber int) {
 	o.Ptr().Send(_nSScriptCommandSelSetScriptErrorNumber, scriptErrorNumber)
 }
 
+// An `NSAppleEventDescriptor` that identifies the offending object when an error occurs.
 func (o *NSScriptCommand) ScriptErrorOffendingObjectDescriptor() *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptCommandSelScriptErrorOffendingObjectDescriptor)
 	if _ret != 0 {
@@ -184,6 +193,7 @@ func (o *NSScriptCommand) SetScriptErrorOffendingObjectDescriptor(scriptErrorOff
 	o.Ptr().Send(_nSScriptCommandSelSetScriptErrorOffendingObjectDescriptor, scriptErrorOffendingObjectDescriptor.Ptr())
 }
 
+// An `NSAppleEventDescriptor` that identifies the expected type when a type mismatch error occurs.
 func (o *NSScriptCommand) ScriptErrorExpectedTypeDescriptor() *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptCommandSelScriptErrorExpectedTypeDescriptor)
 	if _ret != 0 {
@@ -196,6 +206,7 @@ func (o *NSScriptCommand) SetScriptErrorExpectedTypeDescriptor(scriptErrorExpect
 	o.Ptr().Send(_nSScriptCommandSelSetScriptErrorExpectedTypeDescriptor, scriptErrorExpectedTypeDescriptor.Ptr())
 }
 
+// The error string associated with this command, if any.
 func (o *NSScriptCommand) ScriptErrorString() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptCommandSelScriptErrorString)
 	if _ret != 0 {
@@ -208,6 +219,7 @@ func (o *NSScriptCommand) SetScriptErrorString(scriptErrorString *NSString) {
 	o.Ptr().Send(_nSScriptCommandSelSetScriptErrorString, scriptErrorString.Ptr())
 }
 
+// The Apple event descriptor from which this command was constructed. Only available if the receiver was constructed by Cocoa Scripting's built-in Apple event handling.
 func (o *NSScriptCommand) AppleEvent() *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptCommandSelAppleEvent)
 	if _ret != 0 {

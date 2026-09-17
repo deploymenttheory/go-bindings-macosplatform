@@ -13,6 +13,7 @@ import (
 // An object representing metrics about the app’s memory use.
 //
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxmemorymetric
+// Deprecated: Use MetricResult instead.
 type MXMemoryMetric struct {
 	MXMetric
 }

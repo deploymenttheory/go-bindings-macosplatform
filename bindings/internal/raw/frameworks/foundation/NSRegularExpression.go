@@ -82,6 +82,7 @@ func NSRegularExpressionEscapedPatternForString(string_ *NSString) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns the regular expression pattern.
 func (o *NSRegularExpression) Pattern() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRegularExpressionSelPattern)
 	if _ret != 0 {
@@ -90,11 +91,13 @@ func (o *NSRegularExpression) Pattern() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns the options used when the regular expression option was created. The options property specifies aspects of the regular expression matching that are always used when matching the regular expression. For example, if the expression is case sensitive, allows comments, ignores metacharacters, etc.
 func (o *NSRegularExpression) Options() NSRegularExpressionOptions {
 	_ret := objc.Send[NSRegularExpressionOptions](o.Ptr(), _nSRegularExpressionSelOptions)
 	return _ret
 }
 
+// Returns the number of capture groups in the regular expression. A capture group consists of each possible match within a regular expression. Each capture group can then be used in a replacement template to insert that value into a replacement string. This value puts a limit on the values of `n` for `$n` in templates, and it determines the number of ranges in the returned `NSTextCheckingResult` instances returned in the match methods.
 func (o *NSRegularExpression) NumberOfCaptureGroups() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSRegularExpressionSelNumberOfCaptureGroups)
 	return _ret

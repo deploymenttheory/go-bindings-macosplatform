@@ -512,6 +512,16 @@ func UTTypeJSON() *Type {
 	return TypeFromID(id)
 }
 
+// UTTypeMarkdown returns the UTTypeMarkdown ObjC object as an idiomatic Type.
+func UTTypeMarkdown() *Type {
+	addr := _symbol("UTTypeMarkdown")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
 // UTTypePropertyList returns the UTTypePropertyList ObjC object as an idiomatic Type.
 func UTTypePropertyList() *Type {
 	addr := _symbol("UTTypePropertyList")

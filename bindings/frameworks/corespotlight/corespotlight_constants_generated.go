@@ -54,6 +54,16 @@ func CSIndexErrorDomain() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CSIndexErrorDomain")))
 }
 
+// CSSearchQueryErrorDomain returns the string constant CSSearchQueryErrorDomain, for use as a dictionary key or argument.
+func CSSearchQueryErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CSSearchQueryErrorDomain")))
+}
+
+// CSSuggestionHighlightAttributeName returns the string constant CSSuggestionHighlightAttributeName, for use as a dictionary key or argument.
+func CSSuggestionHighlightAttributeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CSSuggestionHighlightAttributeName")))
+}
+
 // CoreSpotlightVersionNumber returns the value of the constant CoreSpotlightVersionNumber.
 func CoreSpotlightVersionNumber() float64 {
 	addr := _symbol("CoreSpotlightVersionNumber")
@@ -65,11 +75,3 @@ func CoreSpotlightVersionNumber() float64 {
 
 // CoreSpotlightVersionString returns the address of the symbol CoreSpotlightVersionString.
 func CoreSpotlightVersionString() uintptr { return _symbol("CoreSpotlightVersionString") }
-
-// CSSearchQueryErrorDomain returns the address of the symbol CSSearchQueryErrorDomain.
-func CSSearchQueryErrorDomain() uintptr { return _symbol("CSSearchQueryErrorDomain") }
-
-// CSSuggestionHighlightAttributeName returns the address of the symbol CSSuggestionHighlightAttributeName.
-func CSSuggestionHighlightAttributeName() uintptr {
-	return _symbol("CSSuggestionHighlightAttributeName")
-}

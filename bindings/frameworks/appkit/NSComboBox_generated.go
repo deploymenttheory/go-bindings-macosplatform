@@ -226,6 +226,14 @@ func (cb *ComboBox) WithBezelStyle(bezelStyle TextFieldBezelStyle) *ComboBox {
 	return cb
 }
 
+// WithBorderShape sets set border shape NSControlBorderShapeAutomatic sets text field or subclass to default system shape. NSControlBorderShapeCircle sets text field or subclass to NSControlBorderShapeAutomatic.
+func (cb *ComboBox) WithBorderShape(borderShape ControlBorderShape) *ComboBox {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setBorderShape:"), borderShape)
+	})
+	return cb
+}
+
 // WithPreferredMaxLayoutWidth sets the maximum width of the text field’s intrinsic content size.
 func (cb *ComboBox) WithPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64) *ComboBox {
 	purego.Main(func() {
@@ -802,6 +810,14 @@ func (cb *ComboBox) WithGestureRecognizers(items ...GestureRecognizerProvider) *
 	return cb
 }
 
+// WithExclusiveGestureBehavior sets declares whether gesture recognizers should be exclusive in this view and its subviews.
+func (cb *ComboBox) WithExclusiveGestureBehavior(exclusiveGestureBehavior ViewExclusiveGestureBehavior) *ComboBox {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setExclusiveGestureBehavior:"), exclusiveGestureBehavior)
+	})
+	return cb
+}
+
 // WithAllowedTouchTypes sets the allowed touch types.
 func (cb *ComboBox) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *ComboBox {
 	purego.Main(func() {
@@ -863,6 +879,15 @@ func (cb *ComboBox) WithHorizontalContentSizeConstraintActive(horizontalContentS
 func (cb *ComboBox) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ComboBox {
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
+	return cb
+}
+
+// WithTextSelectionManager sets the text selection manager for this view.
+func (cb *ComboBox) WithTextSelectionManager(textSelectionManager *TextSelectionManager) *ComboBox {
+	defer runtime.KeepAlive(textSelectionManager)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setTextSelectionManager:"), objref.IDOf(textSelectionManager))
 	})
 	return cb
 }

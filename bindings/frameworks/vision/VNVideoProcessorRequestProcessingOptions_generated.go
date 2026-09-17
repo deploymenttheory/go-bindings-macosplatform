@@ -15,8 +15,6 @@ import (
 )
 
 // VideoProcessorRequestProcessingOptions is an idiomatic wrapper over the Objective-C class VNVideoProcessorRequestProcessingOptions.
-//
-// An object that defines a video processor’s configuration options.
 type VideoProcessorRequestProcessingOptions struct {
 	objref.Handle
 }

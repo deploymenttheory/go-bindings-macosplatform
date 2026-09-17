@@ -6,6 +6,7 @@ package fskit
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -101,4 +102,12 @@ func (v_ *Volume) Name() *FileName {
 	defer runtime.KeepAlive(v_)
 	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("name"))
 	return FileNameFromID(_r)
+}
+
+// SetCacheStateForItemCacheModeCoherencyTypeCoherencyAction sends a synchronous cache state update request from the module to the kernel.
+func (v_ *Volume) SetCacheStateForItemCacheModeCoherencyTypeCoherencyAction(item *Item, cacheMode DataCacheMode, coherencyType KernelCacheCoherencyType, action KernelCacheCoherencyAction) unsafe.Pointer {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(item)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(v_), objc.RegisterName("setCacheStateForItem:cacheMode:coherencyType:coherencyAction:"), objref.IDOf(item), cacheMode, coherencyType, action)
+	return _r
 }

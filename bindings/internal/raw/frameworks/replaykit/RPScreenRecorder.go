@@ -16,6 +16,7 @@ import (
 // The shared recorder object that provides the ability to record audio and video of your app.
 //
 // Apple documentation: https://developer.apple.com/documentation/replaykit/rpscreenrecorder
+// Deprecated: Use ScreenCaptureKit instead
 type RPScreenRecorder struct {
 	foundation.NSObject
 }
@@ -56,6 +57,7 @@ func RPScreenRecorderFromID(id objc.ID) *RPScreenRecorder {
 }
 
 // Returns an app’s instance of the shared screen recorder.
+// Deprecated: Use ScreenCaptureKit instead
 func RPScreenRecorderSharedRecorder() *RPScreenRecorder {
 	_ret := objc.Send[objc.ID](objc.ID(_clsRPScreenRecorder), _rPScreenRecorderSelSharedRecorder)
 	if _ret != 0 {
@@ -65,6 +67,7 @@ func RPScreenRecorderSharedRecorder() *RPScreenRecorder {
 }
 
 // Starts recording the app display.
+// Deprecated: Use ScreenCaptureKit SCStream with SCRecordingOutput instead
 func (o *RPScreenRecorder) StartRecordingWithHandler(handler func(unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -77,6 +80,7 @@ func (o *RPScreenRecorder) StartRecordingWithHandler(handler func(unsafe.Pointer
 }
 
 // Stops the current recording.
+// Deprecated: Use ScreenCaptureKit SCStream with SCRecordingOutput instead
 func (o *RPScreenRecorder) StopRecordingWithHandler(handler func(*RPPreviewViewController, unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -92,6 +96,7 @@ func (o *RPScreenRecorder) StopRecordingWithHandler(handler func(*RPPreviewViewC
 }
 
 // Stops the current recording and writes the movie to the specified output URL.
+// Deprecated: Use ScreenCaptureKit SCStream with SCRecordingOutput instead
 func (o *RPScreenRecorder) StopRecordingWithOutputURLCompletionHandler(url *foundation.NSURL, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -104,6 +109,7 @@ func (o *RPScreenRecorder) StopRecordingWithOutputURLCompletionHandler(url *foun
 }
 
 // Discards the current recording.
+// Deprecated: Use ScreenCaptureKit SCStream with SCRecordingOutput instead
 func (o *RPScreenRecorder) DiscardRecordingWithHandler(handler func()) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -116,6 +122,7 @@ func (o *RPScreenRecorder) DiscardRecordingWithHandler(handler func()) {
 }
 
 // Starts screen and audio capture.
+// Deprecated: Use ScreenCaptureKit SCStream with SCStreamOutput instead
 func (o *RPScreenRecorder) StartCaptureWithHandlerCompletionHandler(captureHandler func(unsafe.Pointer, RPSampleBufferType, unsafe.Pointer), completionHandler func(unsafe.Pointer)) {
 	var __block_captureHandler objc.Block
 	if captureHandler != nil {
@@ -135,6 +142,7 @@ func (o *RPScreenRecorder) StartCaptureWithHandlerCompletionHandler(captureHandl
 }
 
 // Stops screen capture
+// Deprecated: Use ScreenCaptureKit SCStream stopCaptureWithCompletionHandler: instead
 func (o *RPScreenRecorder) StopCaptureWithHandler(handler func(unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -147,6 +155,7 @@ func (o *RPScreenRecorder) StopCaptureWithHandler(handler func(unsafe.Pointer)) 
 }
 
 // Starts buffering a clip recording.
+// Deprecated: Use ScreenCaptureKit SCStream with SCClipBufferingOutput instead
 func (o *RPScreenRecorder) StartClipBufferingWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -159,6 +168,7 @@ func (o *RPScreenRecorder) StartClipBufferingWithCompletionHandler(completionHan
 }
 
 // Stops buffering a clip recording.
+// Deprecated: Use ScreenCaptureKit SCStream with SCClipBufferingOutput instead
 func (o *RPScreenRecorder) StopClipBufferingWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -171,6 +181,7 @@ func (o *RPScreenRecorder) StopClipBufferingWithCompletionHandler(completionHand
 }
 
 // Exports a clip recording to a file.
+// Deprecated: Use ScreenCaptureKit SCStream with SCClipBufferingOutput instead
 func (o *RPScreenRecorder) ExportClipToURLDurationCompletionHandler(url *foundation.NSURL, duration float64, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -182,52 +193,63 @@ func (o *RPScreenRecorder) ExportClipToURLDurationCompletionHandler(url *foundat
 	o.Ptr().Send(_rPScreenRecorderSelExportClipToURLDurationCompletionHandler, url.Ptr(), duration, __block_completionHandler)
 }
 
+// Deprecated: Use ScreenCaptureKit instead
 func (o *RPScreenRecorder) Delegate() RPScreenRecorderDelegate {
 	_ret := objc.Send[RPScreenRecorderDelegate](o.Ptr(), _rPScreenRecorderSelDelegate)
 	return _ret
 }
 
+// Deprecated: Use ScreenCaptureKit instead
 func (o *RPScreenRecorder) SetDelegate(delegate RPScreenRecorderDelegate) {
 	o.Ptr().Send(_rPScreenRecorderSelSetDelegate, delegate)
 }
 
+// Deprecated: Use SCContentSharingPicker isAvailable instead
 func (o *RPScreenRecorder) IsAvailable() bool {
 	_ret := objc.Send[bool](o.Ptr(), _rPScreenRecorderSelIsAvailable)
 	return _ret
 }
 
+// Deprecated: Use SCStream isCapturing instead
 func (o *RPScreenRecorder) IsRecording() bool {
 	_ret := objc.Send[bool](o.Ptr(), _rPScreenRecorderSelIsRecording)
 	return _ret
 }
 
+// Deprecated: Use SCContentSharingPickerConfiguration showsMicrophoneControl instead
 func (o *RPScreenRecorder) IsMicrophoneEnabled() bool {
 	_ret := objc.Send[bool](o.Ptr(), _rPScreenRecorderSelIsMicrophoneEnabled)
 	return _ret
 }
 
+// Deprecated: Use SCContentSharingPickerConfiguration showsMicrophoneControl instead
 func (o *RPScreenRecorder) SetMicrophoneEnabled(microphoneEnabled bool) {
 	o.Ptr().Send(_rPScreenRecorderSelSetMicrophoneEnabled, microphoneEnabled)
 }
 
+// Deprecated: Use SCContentSharingPickerConfiguration showsCameraControl instead
 func (o *RPScreenRecorder) IsCameraEnabled() bool {
 	_ret := objc.Send[bool](o.Ptr(), _rPScreenRecorderSelIsCameraEnabled)
 	return _ret
 }
 
+// Deprecated: Use SCContentSharingPickerConfiguration showsCameraControl instead
 func (o *RPScreenRecorder) SetCameraEnabled(cameraEnabled bool) {
 	o.Ptr().Send(_rPScreenRecorderSelSetCameraEnabled, cameraEnabled)
 }
 
+// Deprecated: Use SCVideoEffectOutput cameraDevice instead
 func (o *RPScreenRecorder) CameraPosition() RPCameraPosition {
 	_ret := objc.Send[RPCameraPosition](o.Ptr(), _rPScreenRecorderSelCameraPosition)
 	return _ret
 }
 
+// Deprecated: Use SCVideoEffectOutput cameraDevice instead
 func (o *RPScreenRecorder) SetCameraPosition(cameraPosition RPCameraPosition) {
 	o.Ptr().Send(_rPScreenRecorderSelSetCameraPosition, cameraPosition)
 }
 
+// Deprecated: Use ScreenCaptureKit instead
 func (o *RPScreenRecorder) CameraPreviewView() *appkit.NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _rPScreenRecorderSelCameraPreviewView)
 	if _ret != 0 {

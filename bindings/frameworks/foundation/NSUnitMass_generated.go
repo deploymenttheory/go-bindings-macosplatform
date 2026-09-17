@@ -17,8 +17,6 @@ import (
 // UnitMass is an idiomatic wrapper over the Objective-C class NSUnitMass.
 //
 // It embeds [Dimension], promoting that type's methods.
-//
-// A unit of measure for mass.
 type UnitMass struct {
 	Dimension
 }

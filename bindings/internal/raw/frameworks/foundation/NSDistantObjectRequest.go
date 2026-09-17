@@ -40,7 +40,7 @@ func (o *NSDistantObjectRequest) ReplyWithException(exception *NSException) {
 	o.Ptr().Send(_nSDistantObjectRequestSelReplyWithException, exception.Ptr())
 }
 
-// Deprecated: Use NSXPCConnection instead
+// The invocation object for the request.
 func (o *NSDistantObjectRequest) Invocation() *NSInvocation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDistantObjectRequestSelInvocation)
 	if _ret != 0 {
@@ -49,6 +49,7 @@ func (o *NSDistantObjectRequest) Invocation() *NSInvocation {
 	return NSInvocationFromID(_ret)
 }
 
+// The connection over which the request was received.
 func (o *NSDistantObjectRequest) Connection() *NSConnection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDistantObjectRequestSelConnection)
 	if _ret != 0 {
@@ -57,6 +58,7 @@ func (o *NSDistantObjectRequest) Connection() *NSConnection {
 	return NSConnectionFromID(_ret)
 }
 
+// The token object representing the conversation in which the request was received.
 func (o *NSDistantObjectRequest) Conversation() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDistantObjectRequestSelConversation)
 	return _ret

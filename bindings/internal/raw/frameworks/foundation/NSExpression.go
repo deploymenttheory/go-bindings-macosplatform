@@ -260,16 +260,19 @@ func (o *NSExpression) AllowEvaluation() {
 	o.Ptr().Send(_nSExpressionSelAllowEvaluation)
 }
 
+// The expression type for the expression. Accessing this property raises an exception if it is not applicable to the expression.
 func (o *NSExpression) ExpressionType() NSExpressionType {
 	_ret := objc.Send[NSExpressionType](o.Ptr(), _nSExpressionSelExpressionType)
 	return _ret
 }
 
+// The constant value of the expression.
 func (o *NSExpression) ConstantValue() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSExpressionSelConstantValue)
 	return _ret
 }
 
+// The key path for the expression.
 func (o *NSExpression) KeyPath() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSExpressionSelKeyPath)
 	if _ret != 0 {
@@ -278,6 +281,7 @@ func (o *NSExpression) KeyPath() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The function for the expression.
 func (o *NSExpression) Function() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSExpressionSelFunction)
 	if _ret != 0 {
@@ -286,6 +290,7 @@ func (o *NSExpression) Function() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The variable for the expression.
 func (o *NSExpression) Variable() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSExpressionSelVariable)
 	if _ret != 0 {
@@ -294,6 +299,7 @@ func (o *NSExpression) Variable() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The operand for the expression. The operand is the object on which the expression's selector or block will be invoked. The object is the result of evaluating a key path or one of the defined functions.
 func (o *NSExpression) Operand() *NSExpression {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSExpressionSelOperand)
 	if _ret != 0 {
@@ -302,6 +308,7 @@ func (o *NSExpression) Operand() *NSExpression {
 	return NSExpressionFromID(_ret)
 }
 
+// The arguments for the expression. The array of expressions which will be passed as parameters during invocation of the selector on the operand of a function expression.
 func (o *NSExpression) Arguments() *NSArray[*NSExpression] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSExpressionSelArguments)
 	if _ret != 0 {
@@ -310,11 +317,13 @@ func (o *NSExpression) Arguments() *NSArray[*NSExpression] {
 	return NSArrayFromID[*NSExpression](_ret)
 }
 
+// The collection of expressions in an aggregate expression, or the collection element of a subquery expression.
 func (o *NSExpression) Collection() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSExpressionSelCollection)
 	return _ret
 }
 
+// The predicate of a subquery expression.
 func (o *NSExpression) Predicate() *NSPredicate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSExpressionSelPredicate)
 	if _ret != 0 {
@@ -323,6 +332,7 @@ func (o *NSExpression) Predicate() *NSPredicate {
 	return NSPredicateFromID(_ret)
 }
 
+// The left expression of an aggregate expression.
 func (o *NSExpression) LeftExpression() *NSExpression {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSExpressionSelLeftExpression)
 	if _ret != 0 {
@@ -331,6 +341,7 @@ func (o *NSExpression) LeftExpression() *NSExpression {
 	return NSExpressionFromID(_ret)
 }
 
+// The right expression of an aggregate expression.
 func (o *NSExpression) RightExpression() *NSExpression {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSExpressionSelRightExpression)
 	if _ret != 0 {
@@ -339,6 +350,7 @@ func (o *NSExpression) RightExpression() *NSExpression {
 	return NSExpressionFromID(_ret)
 }
 
+// An expression to evaluate if a conditional expression's predicate evaluates to true.
 func (o *NSExpression) TrueExpression() *NSExpression {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSExpressionSelTrueExpression)
 	if _ret != 0 {
@@ -347,6 +359,7 @@ func (o *NSExpression) TrueExpression() *NSExpression {
 	return NSExpressionFromID(_ret)
 }
 
+// An expression to evaluate if a conditional expression's predicate evaluates to false.
 func (o *NSExpression) FalseExpression() *NSExpression {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSExpressionSelFalseExpression)
 	if _ret != 0 {
@@ -355,6 +368,7 @@ func (o *NSExpression) FalseExpression() *NSExpression {
 	return NSExpressionFromID(_ret)
 }
 
+// The block that executes to evaluate the expression.
 func (o *NSExpression) ExpressionBlock() objc.Block {
 	_ret := objc.Send[objc.Block](o.Ptr(), _nSExpressionSelExpressionBlock)
 	return _ret

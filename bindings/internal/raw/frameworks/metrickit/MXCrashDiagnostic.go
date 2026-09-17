@@ -13,6 +13,7 @@ import (
 // An object representing a diagnostic report for an app crash.
 //
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxcrashdiagnostic
+// Deprecated: Use DiagnosticResult instead.
 type MXCrashDiagnostic struct {
 	MXDiagnostic
 }

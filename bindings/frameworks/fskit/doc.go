@@ -29,7 +29,11 @@
 // Each base type below lists the concrete types you construct and pass where the
 // base is accepted:
 //
+//   - CreateItemResult: [CreateFileKOIOResult], [CreateSymlinkResult]
 //   - EntityIdentifier: [ContainerIdentifier], [VolumeIdentifier]
 //   - ItemAttributes: [ItemSetAttributesRequest]
+//   - LookupItemResult: [LookupItemKOIOResult]
+//   - PreallocateResult: [PreallocateKOIOResult]
 //   - Resource: [BlockDeviceResource], [GenericURLResource], [PathURLResource]
+//   - VolumeHandlerResult: [ActivateResult], [BlockmapResult], [CheckAccessResult], [CompleteIOResult], [CreateItemResult], [CreateLinkResult], [DeactivateItemResult], [EnumerateDirectoryResult], [GetAttributesResult], [GetXattrResult], [ListXattrsResult], [LookupItemResult], [OpenItemResult], [PreallocateResult], [ReadFileResult], [ReadSymlinkResult], [RemoveItemResult], [RenameItemResult], [SeekRegionResult], [SetAttributesResult], [SetXattrResult], [UpgradeItemResult], [VolumeRenameResult], [WriteFileResult]
 package fskit

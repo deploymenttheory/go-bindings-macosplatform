@@ -63,11 +63,13 @@ func NSTextCheckingResultFromID(id objc.ID) *NSTextCheckingResult {
 	return o
 }
 
+// Returns the text checking result type that the receiver represents.
 func (o *NSTextCheckingResult) ResultType() NSTextCheckingType {
 	_ret := objc.Send[NSTextCheckingType](o.Ptr(), _nSTextCheckingResultSelResultType)
 	return _ret
 }
 
+// Returns the range of the result that the receiver represents.
 func (o *NSTextCheckingResult) Range() NSRange {
 	_ret := objc.Send[NSRange](o.Ptr(), _nSTextCheckingResultSelRange)
 	return _ret
@@ -93,6 +95,7 @@ func (o *NSTextCheckingResult) ResultByAdjustingRangesWithOffset(offset int) *NS
 	return NSTextCheckingResultFromID(_ret)
 }
 
+// The detected orthography of a type checking result.
 func (o *NSTextCheckingResult) Orthography() *NSOrthography {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextCheckingResultSelOrthography)
 	if _ret != 0 {
@@ -101,6 +104,7 @@ func (o *NSTextCheckingResult) Orthography() *NSOrthography {
 	return NSOrthographyFromID(_ret)
 }
 
+// The details of a grammar checking result.
 func (o *NSTextCheckingResult) GrammarDetails() *NSArray[objc.ID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextCheckingResultSelGrammarDetails)
 	if _ret != 0 {
@@ -109,6 +113,7 @@ func (o *NSTextCheckingResult) GrammarDetails() *NSArray[objc.ID] {
 	return NSArrayFromID[objc.ID](_ret)
 }
 
+// The date component of a type checking result.
 func (o *NSTextCheckingResult) Date() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextCheckingResultSelDate)
 	if _ret != 0 {
@@ -117,6 +122,7 @@ func (o *NSTextCheckingResult) Date() *NSDate {
 	return NSDateFromID(_ret)
 }
 
+// The time zone component of a type checking result.
 func (o *NSTextCheckingResult) TimeZone() *NSTimeZone {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextCheckingResultSelTimeZone)
 	if _ret != 0 {
@@ -125,11 +131,13 @@ func (o *NSTextCheckingResult) TimeZone() *NSTimeZone {
 	return NSTimeZoneFromID(_ret)
 }
 
+// The duration component of a type checking result.
 func (o *NSTextCheckingResult) Duration() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSTextCheckingResultSelDuration)
 	return _ret
 }
 
+// The components of a type checking result.
 func (o *NSTextCheckingResult) Components() *NSDictionary[*NSString, *NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextCheckingResultSelComponents)
 	if _ret != 0 {
@@ -138,6 +146,7 @@ func (o *NSTextCheckingResult) Components() *NSDictionary[*NSString, *NSString] 
 	return NSDictionaryFromID[*NSString, *NSString](_ret)
 }
 
+// The URL component of a type checking result.
 func (o *NSTextCheckingResult) URL() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextCheckingResultSelURL)
 	if _ret != 0 {
@@ -146,6 +155,7 @@ func (o *NSTextCheckingResult) URL() *NSURL {
 	return NSURLFromID(_ret)
 }
 
+// The replacement string of a type checking result.
 func (o *NSTextCheckingResult) ReplacementString() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextCheckingResultSelReplacementString)
 	if _ret != 0 {
@@ -162,6 +172,7 @@ func (o *NSTextCheckingResult) AlternativeStrings() *NSArray[*NSString] {
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// The regular expression of a type checking result.
 func (o *NSTextCheckingResult) RegularExpression() *NSRegularExpression {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextCheckingResultSelRegularExpression)
 	if _ret != 0 {
@@ -170,6 +181,7 @@ func (o *NSTextCheckingResult) RegularExpression() *NSRegularExpression {
 	return NSRegularExpressionFromID(_ret)
 }
 
+// The phone number of a type checking result.
 func (o *NSTextCheckingResult) PhoneNumber() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextCheckingResultSelPhoneNumber)
 	if _ret != 0 {
@@ -178,11 +190,13 @@ func (o *NSTextCheckingResult) PhoneNumber() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns the number of ranges. A result must have at least one range, but may optionally have more (for example, to represent regular expression capture groups).
 func (o *NSTextCheckingResult) NumberOfRanges() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSTextCheckingResultSelNumberOfRanges)
 	return _ret
 }
 
+// The address dictionary of a type checking result.
 func (o *NSTextCheckingResult) AddressComponents() *NSDictionary[*NSString, *NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextCheckingResultSelAddressComponents)
 	if _ret != 0 {

@@ -8,7 +8,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// RequestTrackingAuthorizationWithCompletionHandler the request for user authorization to access app-related data.
+// RequestTrackingAuthorizationWithCompletionHandler presents a modal UI that asks someone for permission to access data that your app can use to track a person or device.
 func RequestTrackingAuthorizationWithCompletionHandler(completion func(TrackingManagerAuthorizationStatus)) {
 	objc.Send[objc.ID](objc.ID(_class("ATTrackingManager")), objc.RegisterName("requestTrackingAuthorizationWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 TrackingManagerAuthorizationStatus) { completion(_b0) }))
 }

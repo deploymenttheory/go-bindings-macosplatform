@@ -188,9 +188,40 @@ func (s *Stream) RemoveRecordingOutput(recordingOutput *RecordingOutput) error {
 	return nil
 }
 
+// AddClipBufferingOutput add a SCClipBufferingOutput to the SCStream to start clip buffering. Samples will begin accumulating in a rolling buffer that retains the most recent content up to 15 seconds. Returns a BOOL denoting if the add was successful. The stream must be actively capturing before clip buffering can be started. Only one clip buffering session can be active on a stream at a time. Once buffering is active, clips can be exported using the SCClipBufferingOutput's exportClipToURL:duration:completionHandler: method. Media to be buffered is based on the SCStream configuration.
+func (s *Stream) AddClipBufferingOutput(clipBufferingOutput *ClipBufferingOutput) error {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(clipBufferingOutput)
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(s), objc.RegisterName("addClipBufferingOutput:error:"), objref.IDOf(clipBufferingOutput), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// RemoveClipBufferingOutput remove SCClipBufferingOutput from the SCStream to stop clip buffering and flush the buffer Returns a BOOL denoting if the remove was successful. This method stops the accumulation of samples and releases all buffered content. Once removed, no new exports can be requested until clip buffering is added again. If the stream is stopped while clip buffering is active, clip buffering will be automatically stopped as well.
+func (s *Stream) RemoveClipBufferingOutput(clipBufferingOutput *ClipBufferingOutput) error {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(clipBufferingOutput)
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(s), objc.RegisterName("removeClipBufferingOutput:error:"), objref.IDOf(clipBufferingOutput), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
 // SynchronizationClock returns synchronization clock used for media capture.
 func (s *Stream) SynchronizationClock() obj.Object {
 	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("synchronizationClock"))
 	return obj.Wrap(_r)
+}
+
+// IsCapturing reports whether this stream is currently capturing screen content Returns true if the stream has been started and is actively capturing.
+func (s *Stream) IsCapturing() bool {
+	defer runtime.KeepAlive(s)
+	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("isCapturing"))
+	return _r
 }

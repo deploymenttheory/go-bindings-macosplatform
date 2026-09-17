@@ -18,8 +18,6 @@ import (
 // ValueTransformer is an idiomatic wrapper over the Objective-C class NSValueTransformer.
 //
 // ValueTransformer is an abstract base — you do not construct it directly. Construct one of [SecureUnarchiveFromDataTransformer] and pass it where a ValueTransformer is accepted.
-//
-// An abstract class used to transform values from one representation to another.
 type ValueTransformer struct {
 	objref.Handle
 }
@@ -88,7 +86,7 @@ func (vt *ValueTransformer) WithScriptingProperties(scriptingProperties map[stri
 	return vt
 }
 
-// TransformedValue wraps the corresponding Objective-C method.
+// TransformedValue returns the result of transforming a given value.
 func (vt *ValueTransformer) TransformedValue(value obj.Object) obj.Object {
 	defer runtime.KeepAlive(vt)
 	defer runtime.KeepAlive(value)
@@ -96,7 +94,7 @@ func (vt *ValueTransformer) TransformedValue(value obj.Object) obj.Object {
 	return obj.Wrap(_r)
 }
 
-// ReverseTransformedValue wraps the corresponding Objective-C method.
+// ReverseTransformedValue returns the result of the reverse transformation of a given value.
 func (vt *ValueTransformer) ReverseTransformedValue(value obj.Object) obj.Object {
 	defer runtime.KeepAlive(vt)
 	defer runtime.KeepAlive(value)

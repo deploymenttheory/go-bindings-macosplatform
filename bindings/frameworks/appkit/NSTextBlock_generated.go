@@ -77,6 +77,14 @@ func (tb *TextBlock) String() string {
 	return rt.Description(objref.IDOf(tb))
 }
 
+// NewTextBlockWithCoder creates a new TextBlock.
+func NewTextBlockWithCoder(coder obj.Object) *TextBlock {
+	defer runtime.KeepAlive(coder)
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextBlock")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+	return textBlockAdopt(_id)
+}
+
 // WithVerticalAlignment sets the vertical alignment of the text block.
 func (tb *TextBlock) WithVerticalAlignment(verticalAlignment TextBlockVerticalAlignment) *TextBlock {
 	objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("setVerticalAlignment:"), verticalAlignment)
@@ -91,9 +99,9 @@ func (tb *TextBlock) WithBackgroundColor(backgroundColor *Color) *TextBlock {
 }
 
 // SetValueTypeForDimension sets a dimension of the text block.
-func (tb *TextBlock) SetValueTypeForDimension(val float64, type_ TextBlockValueType, dimension TextBlockDimension) {
+func (tb *TextBlock) SetValueTypeForDimension(value float64, type_ TextBlockValueType, dimension TextBlockDimension) {
 	defer runtime.KeepAlive(tb)
-	objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("setValue:type:forDimension:"), val, type_, dimension)
+	objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("setValue:type:forDimension:"), value, type_, dimension)
 }
 
 // ValueForDimension returns the value of the specified text block dimension.
@@ -111,15 +119,15 @@ func (tb *TextBlock) ValueTypeForDimension(dimension TextBlockDimension) TextBlo
 }
 
 // SetContentWidthType sets the width of the text block.
-func (tb *TextBlock) SetContentWidthType(val float64, type_ TextBlockValueType) {
+func (tb *TextBlock) SetContentWidthType(contentWidth float64, type_ TextBlockValueType) {
 	defer runtime.KeepAlive(tb)
-	objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("setContentWidth:type:"), val, type_)
+	objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("setContentWidth:type:"), contentWidth, type_)
 }
 
 // SetWidthTypeForLayer sets the width of all edges of a specified layer of the text block.
-func (tb *TextBlock) SetWidthTypeForLayer(val float64, type_ TextBlockValueType, layer TextBlockLayer) {
+func (tb *TextBlock) SetWidthTypeForLayer(width float64, type_ TextBlockValueType, layer TextBlockLayer) {
 	defer runtime.KeepAlive(tb)
-	objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("setWidth:type:forLayer:"), val, type_, layer)
+	objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("setWidth:type:forLayer:"), width, type_, layer)
 }
 
 // SetBorderColor sets the color of all borders of the text block.

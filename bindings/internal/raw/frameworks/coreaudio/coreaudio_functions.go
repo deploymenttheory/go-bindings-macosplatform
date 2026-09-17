@@ -82,10 +82,10 @@ func AudioDeviceCreateIOProcID(inDevice uint, inProc unsafe.Pointer, inClientDat
 	return _fnAudioDeviceCreateIOProcID(inDevice, inProc, inClientData, outIOProcID)
 }
 
-func AudioDeviceCreateIOProcIDWithBlock(outIOProcID unsafe.Pointer, inDevice uint, inDispatchQueue *foundation.NSObject, inIOBlock func(*coreaudiotypes.AudioTimeStamp, *coreaudiotypes.AudioBufferList, *coreaudiotypes.AudioTimeStamp, *coreaudiotypes.AudioBufferList, unsafe.Pointer)) int {
+func AudioDeviceCreateIOProcIDWithBlock(outIOProcID unsafe.Pointer, inDevice uint, inDispatchQueue *foundation.NSObject, inIOBlock func(*coreaudiotypes.AudioTimeStamp, *coreaudiotypes.AudioBufferList, *coreaudiotypes.AudioTimeStamp, *coreaudiotypes.AudioBufferList, *coreaudiotypes.AudioTimeStamp)) int {
 	var __block_inIOBlock objc.Block
 	if inIOBlock != nil {
-		__block_inIOBlock = objc.NewBlock(func(_ objc.Block, blockParam0 *coreaudiotypes.AudioTimeStamp, blockParam1 *coreaudiotypes.AudioBufferList, blockParam2 *coreaudiotypes.AudioTimeStamp, blockParam3 *coreaudiotypes.AudioBufferList, blockParam4 unsafe.Pointer) {
+		__block_inIOBlock = objc.NewBlock(func(_ objc.Block, blockParam0 *coreaudiotypes.AudioTimeStamp, blockParam1 *coreaudiotypes.AudioBufferList, blockParam2 *coreaudiotypes.AudioTimeStamp, blockParam3 *coreaudiotypes.AudioBufferList, blockParam4 *coreaudiotypes.AudioTimeStamp) {
 			inIOBlock(blockParam0, blockParam1, blockParam2, blockParam3, blockParam4)
 		})
 		defer __block_inIOBlock.Release()

@@ -75,7 +75,7 @@ func MTRBaseClusterBooleanStateConfigurationFromID(id objc.ID) *MTRBaseClusterBo
 	return o
 }
 
-// Command SuppressAlarm This command is used to suppress the specified alarm mode.
+// Command SuppressAlarm This command will suppress the alarm modes specified.
 func (o *MTRBaseClusterBooleanStateConfiguration) SuppressAlarmWithParamsCompletion(params *MTRBooleanStateConfigurationClusterSuppressAlarmParams, completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -87,7 +87,7 @@ func (o *MTRBaseClusterBooleanStateConfiguration) SuppressAlarmWithParamsComplet
 	o.Ptr().Send(_mTRBaseClusterBooleanStateConfigurationSelSuppressAlarmWithParamsCompletion, params.Ptr(), __block_completion)
 }
 
-// Command EnableDisableAlarm This command is used to enable or disable the specified alarm mode.
+// Command EnableDisableAlarm This command allows setting the enable or disable value for the specified alarm modes.
 func (o *MTRBaseClusterBooleanStateConfiguration) EnableDisableAlarmWithParamsCompletion(params *MTRBooleanStateConfigurationClusterEnableDisableAlarmParams, completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {

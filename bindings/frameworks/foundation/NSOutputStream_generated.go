@@ -20,7 +20,7 @@ import (
 //
 // It embeds [Stream], promoting that type's methods.
 //
-// A stream that provides write-only stream functionality.
+// A stream that provides write-only stream functionality. “OutputStream“ is "toll-free bridged" with its Core Foundation counterpart, <doc://com.apple.documentation/documentation/corefoundation/cfwritestream>. For more information on toll-free bridging, see [Toll-Free Bridging](https://developer.apple.com/library/archive/documentation/General/Conceptual/CocoaEncyclopedia/Toll-FreeBridgin/Toll-FreeBridgin.html#//apple_ref/doc/uid/TP40010810-CH2). ### Subclassing Notes `NSOutputStream` is a concrete subclass of `NSStream` that lets you write data to a stream. Although `NSOutputStream` is probably sufficient for most situations requiring this capability, you can create a subclass of `NSOutputStream` if you want more specialized behavior (for example, you want to record statistics on the data in a stream). #### Methods to Override To create a subclass of `NSOutputStream` you may have to implement initializers for the type of stream data supported and suitably reimplement existing initializers. You must also provide complete implementations of the following methods: - “write(_:maxLength:)“ From the current write pointer, take up to the number of bytes specified in the `maxLength:` parameter from the client-supplied buffer (first parameter) and put them onto the stream. The buffer must be of the size specified by the second parameter. To prepare for the next operation, offset the write pointer by the number of bytes written. Return a signed integer based on the outcome of the current operation: - If the write operation is successful, return the actual number of bytes put onto the stream. - If the stream is of a fixed length and has reached its capacity, return `0`. - If there was an error writing to the stream, return `-1`. - “hasSpaceAvailable“ Return <doc://com.apple.documentation/documentation/swift/true> if the stream can currently accept more data, <doc://com.apple.documentation/documentation/swift/false> if it cannot. If you want to be semantically compatible with `NSOutputStream`, return <doc://com.apple.documentation/documentation/swift/true> if a write must be attempted to determine if space is available.
 type OutputStream struct {
 	Stream
 }
@@ -57,21 +57,21 @@ func NewOutputStream() *OutputStream {
 	return outputStreamAdopt(_id)
 }
 
-// NewOutputStreamWithURLAppend creates a new OutputStream.
+// NewOutputStreamWithURLAppend returns an initialized output stream for writing to a specified URL. The stream must be opened before it can be used. - Parameters: - url: The URL to the file the output stream will write to. - shouldAppend: `YES` if newly written data should be appended to any existing file contents, otherwise `NO`.
 func NewOutputStreamWithURLAppend(url string, shouldAppend bool) *OutputStream {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOutputStream")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:append:"), rt.FileURL(url), shouldAppend)
 	return outputStreamAdopt(_id)
 }
 
-// NewOutputStreamToFileAtPathAppend creates a new OutputStream.
+// NewOutputStreamToFileAtPathAppend returns an initialized output stream for writing to a specified file. The stream must be opened before it can be used. - Parameters: - path: The path to the file the output stream will write to. - shouldAppend: `YES` if newly written data should be appended to any existing file contents, otherwise `NO`.
 func NewOutputStreamToFileAtPathAppend(path string, shouldAppend bool) *OutputStream {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOutputStream")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initToFileAtPath:append:"), purego.NSString(path), shouldAppend)
 	return outputStreamAdopt(_id)
 }
 
-// WithDelegate sets the delegate.
+// WithDelegate sets the receiver's delegate. By default, a stream is its own delegate, and subclasses of `NSInputStream` and `NSOutputStream` must maintain this contract. If you override this method in a subclass, passing `nil` must restore the receiver as its own delegate. Delegates are not retained.
 func (os *OutputStream) WithDelegate(delegate StreamDelegate) *OutputStream {
 	_shim := newStreamDelegateShim(delegate)
 	_sel := objc.RegisterName("setDelegate:")
@@ -93,7 +93,7 @@ func (os *OutputStream) WithScriptingProperties(scriptingProperties map[string]o
 	return os
 }
 
-// WriteMaxLength writes max length.
+// WriteMaxLength writes the contents of a provided data buffer to the receiver. - Parameters: - buffer: The data to write. - len: The length of the data buffer, in bytes. The behavior of this method is undefined if you pass a negative or zero number. - Returns: A positive number indicates the number of bytes written; `0` indicates that a fixed-length stream has reached its capacity; `-1` means that the operation failed (more information about the error can be obtained with `streamError`).
 func (os *OutputStream) WriteMaxLength(length int) (result int, buffer uint8) {
 	defer runtime.KeepAlive(os)
 	var _out0 uint8
@@ -101,7 +101,7 @@ func (os *OutputStream) WriteMaxLength(length int) (result int, buffer uint8) {
 	return _r, _out0
 }
 
-// HasSpaceAvailable reports whether the object has space available.
+// HasSpaceAvailable reports whether the receiver can be written to. `YES` if the stream can be written to or if a write must be attempted in order to determine if space is available, `NO` otherwise.
 func (os *OutputStream) HasSpaceAvailable() bool {
 	defer runtime.KeepAlive(os)
 	_r := objc.Send[bool](objref.IDOf(os), objc.RegisterName("hasSpaceAvailable"))

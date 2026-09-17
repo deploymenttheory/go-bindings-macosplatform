@@ -26,6 +26,7 @@ var (
 	_wKNavigationActionSelRequest                   = objc.RegisterName("request")
 	_wKNavigationActionSelShouldPerformDownload     = objc.RegisterName("shouldPerformDownload")
 	_wKNavigationActionSelIsContentRuleListRedirect = objc.RegisterName("isContentRuleListRedirect")
+	_wKNavigationActionSelMainFrameNavigation       = objc.RegisterName("mainFrameNavigation")
 	_wKNavigationActionSelModifierFlags             = objc.RegisterName("modifierFlags")
 	_wKNavigationActionSelButtonNumber              = objc.RegisterName("buttonNumber")
 )
@@ -116,6 +117,21 @@ func (o *WKNavigationAction) IsContentRuleListRedirect() bool {
 		_mainthread0 = func() bool {
 			_ret := objc.Send[bool](o.Ptr(), _wKNavigationActionSelIsContentRuleListRedirect)
 			return _ret
+		}()
+	})
+	return _mainthread0
+}
+
+// @abstract The most recent main frame navigation that took place that encompasses this navigation action. @discussion If this WKNavigationAction represents a request to open a new WKWebView or it represents a frame load that is not in the main frame of an existing WKWebView, then mainFrameNavigation will be nil.
+func (o *WKNavigationAction) MainFrameNavigation() *WKNavigation {
+	var _mainthread0 *WKNavigation
+	purego.Main(func() {
+		_mainthread0 = func() *WKNavigation {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKNavigationActionSelMainFrameNavigation)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WKNavigationFromID(_ret)
 		}()
 	})
 	return _mainthread0

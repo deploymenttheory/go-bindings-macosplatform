@@ -16,8 +16,6 @@ import (
 )
 
 // Host is an idiomatic wrapper over the Objective-C class NSHost.
-//
-// A representation of an individual host on the network.
 type Host struct {
 	objref.Handle
 }
@@ -92,7 +90,7 @@ func (h *Host) WithScriptingProperties(scriptingProperties map[string]obj.Object
 	return h
 }
 
-// IsEqualToHost wraps the corresponding Objective-C method.
+// IsEqualToHost indicates whether the receiver represents the same host as another `NSHost` object. - Parameters: - aHost: Host to compare the receiver to. - Returns: `YES` when the receiver and `aHost` share at least one network address; `NO` otherwise.
 func (h *Host) IsEqualToHost(aHost *Host) bool {
 	defer runtime.KeepAlive(h)
 	defer runtime.KeepAlive(aHost)
@@ -100,7 +98,7 @@ func (h *Host) IsEqualToHost(aHost *Host) bool {
 	return _r
 }
 
-// Name returns the name.
+// Name returns one of the hostnames associated with the receiver. Can be either a simple hostname, such as `"sales"`, or a fully qualified domain name, such as `"sales.anycorp.com"`.
 func (h *Host) Name() string {
 	defer runtime.KeepAlive(h)
 	_r := objc.Send[objc.ID](objref.IDOf(h), objc.RegisterName("name"))
@@ -110,7 +108,7 @@ func (h *Host) Name() string {
 	return purego.GoString(_r)
 }
 
-// Names returns the names.
+// Names returns all of the hostnames associated with the receiver.
 //
 // Names returns the collection as a Go slice.
 func (h *Host) Names() []string {
@@ -119,7 +117,7 @@ func (h *Host) Names() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Address returns the address.
+// Address returns one of the addresses associated with the receiver, such as `"192.42.172.1"` or `"fe80::1"`.
 func (h *Host) Address() string {
 	defer runtime.KeepAlive(h)
 	_r := objc.Send[objc.ID](objref.IDOf(h), objc.RegisterName("address"))
@@ -129,7 +127,7 @@ func (h *Host) Address() string {
 	return purego.GoString(_r)
 }
 
-// Addresses returns the addresses.
+// Addresses returns all of the addresses associated with the receiver, including IPv6 and IPv4 addresses.
 //
 // Addresses returns the collection as a Go slice.
 func (h *Host) Addresses() []string {
@@ -138,7 +136,7 @@ func (h *Host) Addresses() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// LocalizedName returns the localized name.
+// LocalizedName returns the localized name for the host. This is the name displayed in the Finder sidebar and the Sharing preference panel. This property only returns a value when sent to the “currentHost“ instance; all other instances currently return `nil`. This property is key-value observable.
 func (h *Host) LocalizedName() string {
 	defer runtime.KeepAlive(h)
 	_r := objc.Send[objc.ID](objref.IDOf(h), objc.RegisterName("localizedName"))

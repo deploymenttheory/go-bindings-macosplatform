@@ -11,8 +11,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A URL session task that communicates over the WebSockets protocol standard.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsurlsessionwebsockettask
 type NSURLSessionWebSocketTask struct {
 	NSURLSessionTask
@@ -40,7 +38,7 @@ func NSURLSessionWebSocketTaskFromID(id objc.ID) *NSURLSessionWebSocketTask {
 	return o
 }
 
-// Sends a WebSocket message, receiving the result in a completion handler.
+// Sends a WebSocket message, receiving the result in a completion handler. If an error occurs while sending the message, any outstanding work also fails. Note that invocation of the completion handler does not guarantee that the remote side has received all the bytes, only that they have been written to the kernel. - Parameters: - message: The WebSocket message to send to the other endpoint. - completionHandler: A closure that receives an `NSError` that indicates an error encountered while sending, or `nil` if no error occurred.
 func (o *NSURLSessionWebSocketTask) SendMessageCompletionHandler(message *NSURLSessionWebSocketMessage, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -52,7 +50,7 @@ func (o *NSURLSessionWebSocketTask) SendMessageCompletionHandler(message *NSURLS
 	o.Ptr().Send(_nSURLSessionWebSocketTaskSelSendMessageCompletionHandler, message.Ptr(), __block_completionHandler)
 }
 
-// Reads a WebSocket message once all the frames of the message are available.
+// Reads a WebSocket message once all the frames of the message are available. If the task reaches the “maximumMessageSize“ while buffering the frames, the receive call will error out and all outstanding work will also fail, resulting in the end of the task. - Parameters: - completionHandler: A closure that receives the WebSocket message and an `NSError` that indicates an error encountered while receiving, or `nil` if no error occurred.
 func (o *NSURLSessionWebSocketTask) ReceiveMessageWithCompletionHandler(completionHandler func(*NSURLSessionWebSocketMessage, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -67,6 +65,7 @@ func (o *NSURLSessionWebSocketTask) ReceiveMessageWithCompletionHandler(completi
 	o.Ptr().Send(_nSURLSessionWebSocketTaskSelReceiveMessageWithCompletionHandler, __block_completionHandler)
 }
 
+// Sends a ping frame from the client side. The `pongReceiveHandler` is invoked when the client receives a pong from the server endpoint. If a connection is lost or an error occurs before receiving the pong from the endpoint, the handler will be invoked with an error. The handler will always be called in the order in which the pings were sent. - Parameter pongReceiveHandler: The handler to call when a pong is received or an error occurs.
 func (o *NSURLSessionWebSocketTask) SendPingWithPongReceiveHandler(pongReceiveHandler func(unsafe.Pointer)) {
 	var __block_pongReceiveHandler objc.Block
 	if pongReceiveHandler != nil {
@@ -78,10 +77,12 @@ func (o *NSURLSessionWebSocketTask) SendPingWithPongReceiveHandler(pongReceiveHa
 	o.Ptr().Send(_nSURLSessionWebSocketTaskSelSendPingWithPongReceiveHandler, __block_pongReceiveHandler)
 }
 
+// Sends a close frame with the given close code. An optional reason can be provided while sending the close frame. Simply calling `-cancel` on the task will result in a cancellation frame being sent without any reason. - Parameter closeCode: The close code to send. - Parameter reason: An optional data object containing the close reason.
 func (o *NSURLSessionWebSocketTask) CancelWithCloseCodeReason(closeCode NSURLSessionWebSocketCloseCode, reason *NSData) {
 	o.Ptr().Send(_nSURLSessionWebSocketTaskSelCancelWithCloseCodeReason, closeCode, reason.Ptr())
 }
 
+// The maximum number of bytes to be buffered before erroring out. This includes the sum of all bytes from continuation frames. Receive calls will error out if this value is reached.
 func (o *NSURLSessionWebSocketTask) MaximumMessageSize() int {
 	_ret := objc.Send[int](o.Ptr(), _nSURLSessionWebSocketTaskSelMaximumMessageSize)
 	return _ret
@@ -91,11 +92,13 @@ func (o *NSURLSessionWebSocketTask) SetMaximumMessageSize(maximumMessageSize int
 	o.Ptr().Send(_nSURLSessionWebSocketTaskSelSetMaximumMessageSize, maximumMessageSize)
 }
 
+// A code that indicates the reason a connection closed. You can retrieve the close code at any time. When the task is not yet closed, this value is `NSURLSessionWebSocketCloseCodeInvalid`.
 func (o *NSURLSessionWebSocketTask) CloseCode() NSURLSessionWebSocketCloseCode {
 	_ret := objc.Send[NSURLSessionWebSocketCloseCode](o.Ptr(), _nSURLSessionWebSocketTaskSelCloseCode)
 	return _ret
 }
 
+// The close reason received from the server. A task can be queried for its close reason at any point. A `nil` value indicates no close reason or that the task is still running.
 func (o *NSURLSessionWebSocketTask) CloseReason() *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionWebSocketTaskSelCloseReason)
 	if _ret != 0 {

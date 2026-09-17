@@ -4,53 +4,114 @@
 package videosubscriberaccount
 
 import (
+	"unsafe"
+
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/foundation"
 )
 
 // The identifier for responses that use any authentication protocol.
-func VSAccountProviderAuthenticationSchemeAPI() uintptr {
+func VSAccountProviderAuthenticationSchemeAPI() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_videosubscriberaccountLib, "VSAccountProviderAuthenticationSchemeAPI")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The authentication scheme for responses that use the SAML protocol.
-func VSAccountProviderAuthenticationSchemeSAML() uintptr {
+func VSAccountProviderAuthenticationSchemeSAML() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_videosubscriberaccountLib, "VSAccountProviderAuthenticationSchemeSAML")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A boolean indicating whether the user may be prompted to grant access.
-func VSCheckAccessOptionPrompt() uintptr {
+func VSCheckAccessOptionPrompt() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_videosubscriberaccountLib, "VSCheckAccessOptionPrompt")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The domain of all errors returned by VideoSubscriberAccount framework.
-func VSErrorDomain() uintptr {
+func VSErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_videosubscriberaccountLib, "VSErrorDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A key that can be used to obtain the account provider's response object from an error user info dictionary.
-func VSErrorInfoKeyAccountProviderResponse() uintptr {
+func VSErrorInfoKeyAccountProviderResponse() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_videosubscriberaccountLib, "VSErrorInfoKeyAccountProviderResponse")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A key that can be used to obtain the subscription provider's SAML response string from an error user info dictionary.
-func VSErrorInfoKeySAMLResponse() uintptr {
+func VSErrorInfoKeySAMLResponse() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_videosubscriberaccountLib, "VSErrorInfoKeySAMLResponse")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A key that can be used to obtain the subscription provider's SAML status code string from an error user info dictionary.
-func VSErrorInfoKeySAMLResponseStatus() uintptr {
+func VSErrorInfoKeySAMLResponseStatus() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_videosubscriberaccountLib, "VSErrorInfoKeySAMLResponseStatus")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A key that can be used to obtain the identifier string of the user's unsupported subscription provider from an error user info dictionary.
-func VSErrorInfoKeyUnsupportedProviderIdentifier() uintptr {
+func VSErrorInfoKeyUnsupportedProviderIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_videosubscriberaccountLib, "VSErrorInfoKeyUnsupportedProviderIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }

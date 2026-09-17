@@ -25,6 +25,17 @@ func AXAnimatedImagesEnabled() bool {
 	return _fnAXAnimatedImagesEnabled()
 }
 
+var _fnAXApplicationAccessibilityEnabled func() bool
+
+// AXApplicationAccessibilityEnabled calls the Accessibility framework function AXApplicationAccessibilityEnabled.
+func AXApplicationAccessibilityEnabled() bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAXApplicationAccessibilityEnabled == nil {
+		ebipurego.RegisterLibFunc(&_fnAXApplicationAccessibilityEnabled, _lib, "AXApplicationAccessibilityEnabled")
+	}
+	return _fnAXApplicationAccessibilityEnabled()
+}
+
 var _fnAXAssistiveAccessEnabled func() bool
 
 // AXAssistiveAccessEnabled calls the Accessibility framework function AXAssistiveAccessEnabled.

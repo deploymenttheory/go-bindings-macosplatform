@@ -12,7 +12,6 @@ import (
 // An object that accesses and manages resource data indicated by a URL.
 //
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsurlhandle
-// Deprecated: since macOS 10.4.
 type NSURLHandle struct {
 	NSObject
 }

@@ -11,7 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An abstract class representing a stream.
+// An abstract class representing a stream. This class's interface is common to all Cocoa stream classes, including its concrete subclasses “InputStream“ and “OutputStream“. “Stream“ objects provide an easy way to read and write data to and from a variety of media in a device-independent way. You can create stream objects for data located in memory, in a file, or on a network (using sockets), and you can use stream objects without loading all of the data into memory at once. By default, “Stream“ instances that aren't file-based are non-seekable, one-way streams (although custom seekable subclasses are possible). After you provide or consume data, you can't retrieve the data from the stream. ### Subclassing Notes “Stream“ is an abstract class, incapable of instantiation and intended for you to subclass it. It publishes a programmatic interface that all subclasses must adopt and provide implementations for. The two Apple-provided concrete subclasses of “Stream“, “InputStream“ and “OutputStream“, are suitable for most purposes. However, there might be situations when you want a peer subclass to “InputStream“ and “OutputStream“. For example, you might want a class that implements a full-duplex (two-way) stream, or a class whose instances are capable of seeking through a stream. #### Methods to Override All subclasses must fully implement the following methods: - “open()“ and “close()“ Implement “open()“ to open the stream for reading or writing and make the stream available to the client directly or, if the stream object is scheduled on a run loop, to the delegate. Implement “close()“ to close the stream and remove the stream object from the run loop, if necessary. A closed stream should still be able to accept new properties and report its current properties. Once you close a stream, you can't reopen it. - “delegate“ Return and set the delegate. By a default, a stream object must be its own delegate; so a “delegate“ message with an argument of `nil` should restore this delegate. Don't retain the delegate to prevent retain cycles. To learn about delegates and delegation, read "Delegation" in Cocoa Fundamentals Guide. - “schedule(in:forMode:)“ and “remove(from:forMode:)“ Implement “schedule(in:forMode:)“ to schedule the stream object on the specified run loop for the specified mode. Implement “remove(from:forMode:)“ to remove the object from the run loop. See the documentation of the “RunLoop“ class for details. Once the stream object for an open stream is scheduled on a run loop, it is the responsibility of the subclass as it processes stream data to send “StreamDelegate/stream(_:handle:)“ messages to its delegate. - “property(forKey:)“ and “setProperty(_:forKey:)“ Implement these methods to return and set, respectively, the property value for the specified key. You may add custom properties, but be sure to handle all properties defined by “Stream“ as well. - “streamStatus“ and “streamError“ Implement “streamStatus“ to return the current status of the stream as a “Status“ constant; you may define new “Status“ constants, but be sure to handle the system defined constants properly. Implement “streamError“ to return an “NSError“ object representing the current error. You might decide to return a custom “NSError“ object that can provide complete and localized information about the error.
 //
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsstream
 type NSStream struct {
@@ -45,32 +45,39 @@ func NSStreamFromID(id objc.ID) *NSStream {
 	return o
 }
 
+// Opens the receiving stream. A stream must be created before it can be opened. Once opened, a stream cannot be closed and reopened.
 func (o *NSStream) Open() {
 	o.Ptr().Send(_nSStreamSelOpen)
 }
 
+// Closes the receiver. Closing the stream terminates the flow of bytes and releases system resources that were reserved for the stream when it was opened. If the stream has been scheduled on a run loop, closing the stream implicitly removes the stream from the run loop. A stream that is closed can still be queried for its properties.
 func (o *NSStream) Close() {
 	o.Ptr().Send(_nSStreamSelClose)
 }
 
+// Returns the receiver's property for a given key. - Parameter key: The key for one of the receiver's properties. - Returns: The receiver's property for the key `key`.
 func (o *NSStream) PropertyForKey(key *NSString) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStreamSelPropertyForKey, key.Ptr())
 	return _ret
 }
 
+// Attempts to set the value of a given property of the receiver and returns a Boolean value that indicates whether the value is accepted by the receiver. - Parameters: - property: The value for `key`. - key: The key for one of the receiver's properties. - Returns: `YES` if the value is accepted by the receiver, otherwise `NO`.
 func (o *NSStream) SetPropertyForKey(property objc.ID, key *NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSStreamSelSetPropertyForKey, property, key.Ptr())
 	return _ret
 }
 
+// Schedules the receiver on a given run loop in a given mode. Unless the client is polling the stream, it is responsible for ensuring that the stream is scheduled on at least one run loop and that at least one of the run loops on which the stream is scheduled is being run. - Parameters: - aRunLoop: The run loop on which to schedule the receiver. - mode: The mode for the run loop.
 func (o *NSStream) ScheduleInRunLoopForMode(aRunLoop *NSRunLoop, mode *NSString) {
 	o.Ptr().Send(_nSStreamSelScheduleInRunLoopForMode, aRunLoop.Ptr(), mode.Ptr())
 }
 
+// Removes the receiver from a given run loop running in a given mode. - Parameters: - aRunLoop: The run loop on which the receiver was scheduled. - mode: The mode for the run loop.
 func (o *NSStream) RemoveFromRunLoopForMode(aRunLoop *NSRunLoop, mode *NSString) {
 	o.Ptr().Send(_nSStreamSelRemoveFromRunLoopForMode, aRunLoop.Ptr(), mode.Ptr())
 }
 
+// The receiver's delegate. By default, a stream is its own delegate, and subclasses of `NSInputStream` and `NSOutputStream` must maintain this contract. If you override this method in a subclass, passing `nil` must restore the receiver as its own delegate. Delegates are not retained.
 func (o *NSStream) Delegate() NSStreamDelegate {
 	_ret := objc.Send[NSStreamDelegate](o.Ptr(), _nSStreamSelDelegate)
 	return _ret
@@ -80,26 +87,31 @@ func (o *NSStream) SetDelegate(delegate NSStreamDelegate) {
 	o.Ptr().Send(_nSStreamSelSetDelegate, delegate)
 }
 
+// The receiver's status.
 func (o *NSStream) StreamStatus() NSStreamStatus {
 	_ret := objc.Send[NSStreamStatus](o.Ptr(), _nSStreamSelStreamStatus)
 	return _ret
 }
 
+// An `NSError` object representing the stream error, or `nil` if no error has been encountered.
 func (o *NSStream) StreamError() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSStreamSelStreamError)
 	return _ret
 }
 
+// Creates and returns by reference an `NSInputStream` object and `NSOutputStream` object for a socket connection with a given host on a given port. - Parameters: - hostname: The host to which to connect. - port: The port to connect to on `host`. - inputStream: Upon return, contains the input stream. If `nil` is passed, the stream object is not created. - outputStream: Upon return, contains the output stream. If `nil` is passed, the stream object is not created.
 // Deprecated: Use nw_connection_t in Network framework instead
 func NSStreamGetStreamsToHostWithNamePortInputStreamOutputStream(hostname *NSString, port int, inputStream *NSInputStream, outputStream *NSOutputStream) {
 	objc.ID(_clsNSStream).Send(_nSStreamSelGetStreamsToHostWithNamePortInputStreamOutputStream, hostname.Ptr(), port, inputStream.Ptr(), outputStream.Ptr())
 }
 
+// Creates and returns by reference an `NSInputStream` object and `NSOutputStream` object for a socket connection with a given host on a given port. If neither `port` nor `host` is properly specified, no socket connection is made. - Parameters: - host: The host to which to connect. - port: The port to connect to on `host`. - inputStream: Upon return, contains the input stream. If `nil` is passed, the stream object is not created. - outputStream: Upon return, contains the output stream. If `nil` is passed, the stream object is not created.
 // Deprecated: Use nw_connection_t in Network framework instead
 func NSStreamGetStreamsToHostPortInputStreamOutputStream(host *NSHost, port int, inputStream *NSInputStream, outputStream *NSOutputStream) {
 	objc.ID(_clsNSStream).Send(_nSStreamSelGetStreamsToHostPortInputStreamOutputStream, host.Ptr(), port, inputStream.Ptr(), outputStream.Ptr())
 }
 
+// Creates and returns by reference a bound pair of input and output streams. The created streams are bound to one another, such that any data written to `outputStream` is received by `inputStream`. - Parameters: - bufferSize: The size of the buffer, in bytes, used to transfer data from `inputStream` to `outputStream`. - inputStream: On return, contains an input stream. - outputStream: On return, contains an output stream.
 func NSStreamGetBoundStreamsWithBufferSizeInputStreamOutputStream(bufferSize uint, inputStream *NSInputStream, outputStream *NSOutputStream) {
 	objc.ID(_clsNSStream).Send(_nSStreamSelGetBoundStreamsWithBufferSizeInputStreamOutputStream, bufferSize, inputStream.Ptr(), outputStream.Ptr())
 }

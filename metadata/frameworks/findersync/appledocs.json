@@ -3,19 +3,9 @@
   "framework": "FinderSync",
   "source": "developer.apple.com DocC render API",
   "classes": {
-    "FIFinderSync": {
-      "doc": "A type to subclass to add badges, custom shortcut menus, and toolbar buttons to the Finder.",
-      "url": "https://developer.apple.com/documentation/findersync/fifindersync"
-    },
     "FIFinderSyncController": {
       "doc": "A controller that acts as a bridge between your Finder Sync extension and the Finder itself.",
       "url": "https://developer.apple.com/documentation/findersync/fifindersynccontroller"
-    }
-  },
-  "protocols": {
-    "FIFinderSync": {
-      "doc": "A type to subclass to add badges, custom shortcut menus, and toolbar buttons to the Finder.",
-      "url": "https://developer.apple.com/documentation/findersync/fifindersync"
     }
   },
   "enums": {

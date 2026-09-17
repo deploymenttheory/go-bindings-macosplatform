@@ -17,8 +17,6 @@ import (
 )
 
 // Detection is an idiomatic wrapper over the Objective-C class CNDetection.
-//
-// A structure that represents a detected subject, face, torso or pet at a particular time.
 type Detection struct {
 	objref.Handle
 }

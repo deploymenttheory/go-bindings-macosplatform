@@ -74,21 +74,25 @@ func (o *NSOrderedCollectionChange[ObjectType]) InitWithObjectTypeIndexAssociate
 	return NSOrderedCollectionChangeFromID[ObjectType](_ret)
 }
 
+// An object the change inserts or removes.
 func (o *NSOrderedCollectionChange[ObjectType]) Object() ObjectType {
 	_ret := objc.Send[ObjectType](o.Ptr(), _nSOrderedCollectionChangeSelObject)
 	return _ret
 }
 
+// The type of change.
 func (o *NSOrderedCollectionChange[ObjectType]) ChangeType() NSCollectionChangeType {
 	_ret := objc.Send[NSCollectionChangeType](o.Ptr(), _nSOrderedCollectionChangeSelChangeType)
 	return _ret
 }
 
+// The index location of the change. For removals, the index of the object in the original state. For insertions, the index of the object in the final state.
 func (o *NSOrderedCollectionChange[ObjectType]) Index() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSOrderedCollectionChangeSelIndex)
 	return _ret
 }
 
+// When this property is set to a value other than `NSNotFound`, the receiver is one half of a move, and this value is the index of the change's counterpart of the opposite type in the diff. Pairs of changes with opposite types that refer to each other represent the index location of their counterpart with the `associatedIndex` property. A move pair can have a different `object` in its removal and insertion changes, which can imply that the change represents moving and changing or replacing an element. > Note: > Don't ignore a move when the indexes of its changes are the same. The calculated difference may legitimately produce a diff where a change removes the object at one index and the object at another index moves to the same index. Ignoring the move produces an incorrect result.
 func (o *NSOrderedCollectionChange[ObjectType]) AssociatedIndex() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSOrderedCollectionChangeSelAssociatedIndex)
 	return _ret

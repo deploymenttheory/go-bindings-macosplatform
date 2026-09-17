@@ -52,6 +52,7 @@ func NSMorphologyFromID(id objc.ID) *NSMorphology {
 	return o
 }
 
+// The grammatical gender used for inflecting strings.
 func (o *NSMorphology) GrammaticalGender() NSGrammaticalGender {
 	_ret := objc.Send[NSGrammaticalGender](o.Ptr(), _nSMorphologySelGrammaticalGender)
 	return _ret
@@ -61,6 +62,7 @@ func (o *NSMorphology) SetGrammaticalGender(grammaticalGender NSGrammaticalGende
 	o.Ptr().Send(_nSMorphologySelSetGrammaticalGender, grammaticalGender)
 }
 
+// The grammatical part of speech used for inflecting strings.
 func (o *NSMorphology) PartOfSpeech() NSGrammaticalPartOfSpeech {
 	_ret := objc.Send[NSGrammaticalPartOfSpeech](o.Ptr(), _nSMorphologySelPartOfSpeech)
 	return _ret
@@ -70,6 +72,7 @@ func (o *NSMorphology) SetPartOfSpeech(partOfSpeech NSGrammaticalPartOfSpeech) {
 	o.Ptr().Send(_nSMorphologySelSetPartOfSpeech, partOfSpeech)
 }
 
+// The grammatical number used for inflecting strings.
 func (o *NSMorphology) Number() NSGrammaticalNumber {
 	_ret := objc.Send[NSGrammaticalNumber](o.Ptr(), _nSMorphologySelNumber)
 	return _ret
@@ -145,11 +148,13 @@ func (o *NSMorphology) SetCustomPronounForLanguageError(features *NSMorphologyCu
 	return _ret, nil
 }
 
+// A Boolean value that indicates whether the morphology has no specific settings.
 func (o *NSMorphology) IsUnspecified() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSMorphologySelIsUnspecified)
 	return _ret
 }
 
+// The current user's morphology.
 func NSMorphologyUserMorphology() *NSMorphology {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMorphology), _nSMorphologySelUserMorphology)
 	if _ret != 0 {

@@ -11,8 +11,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A challenge from a server requiring authentication from the client.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsurlauthenticationchallenge
 type NSURLAuthenticationChallenge struct {
 	NSObject
@@ -40,7 +38,7 @@ func NSURLAuthenticationChallengeFromID(id objc.ID) *NSURLAuthenticationChalleng
 	return o
 }
 
-// @method initWithProtectionSpace:proposedCredential:previousFailureCount:failureResponse:error: @abstract Initialize an authentication challenge @param space The NSURLProtectionSpace to use @param credential The proposed NSURLCredential for this challenge, or nil @param previousFailureCount A count of previous failures attempting access. @param response The NSURLResponse for the authentication failure, if applicable, else nil @param error The NSError for the authentication failure, if applicable, else nil @result An authentication challenge initialized with the specified parameters
+// Initializes an authentication challenge. - Parameter space: The `NSURLProtectionSpace` to use. - Parameter credential: The proposed `NSURLCredential` for this challenge, or `nil`. - Parameter previousFailureCount: A count of previous failures attempting access. - Parameter response: The `NSURLResponse` for the authentication failure, if applicable, else `nil`. - Parameter error: The `NSError` for the authentication failure, if applicable, else `nil`. - Parameter sender: The sender of this challenge. - Returns: An authentication challenge initialized with the specified parameters.
 func (o *NSURLAuthenticationChallenge) InitWithProtectionSpaceProposedCredentialPreviousFailureCountFailureResponseErrorSender(space *NSURLProtectionSpace, credential *NSURLCredential, previousFailureCount int, response *NSURLResponse, error_ unsafe.Pointer, sender NSURLAuthenticationChallengeSender) *NSURLAuthenticationChallenge {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLAuthenticationChallengeSelInitWithProtectionSpaceProposedCredentialPreviousFailureCountFailureResponseErrorSender, space.Ptr(), credential.Ptr(), previousFailureCount, response.Ptr(), error_, sender)
 	if _ret != 0 {
@@ -49,7 +47,7 @@ func (o *NSURLAuthenticationChallenge) InitWithProtectionSpaceProposedCredential
 	return NSURLAuthenticationChallengeFromID(_ret)
 }
 
-// @method initWithAuthenticationChallenge: @abstract Initialize an authentication challenge copying all parameters from another one. @result A new challenge initialized with the parameters from the passed in challenge @discussion This initializer may be useful to subclassers that want to proxy one type of authentication challenge to look like another type.
+// Initializes an authentication challenge copying all parameters from another one. - Parameter challenge: The existing challenge to copy. - Parameter sender: The sender of the challenge. - Returns: A new challenge initialized with the parameters from the passed in challenge. This initializer may be useful to subclassers that want to proxy one type of authentication challenge to look like another type.
 func (o *NSURLAuthenticationChallenge) InitWithAuthenticationChallengeSender(challenge *NSURLAuthenticationChallenge, sender NSURLAuthenticationChallengeSender) *NSURLAuthenticationChallenge {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLAuthenticationChallengeSelInitWithAuthenticationChallengeSender, challenge.Ptr(), sender)
 	if _ret != 0 {
@@ -58,7 +56,7 @@ func (o *NSURLAuthenticationChallenge) InitWithAuthenticationChallengeSender(cha
 	return NSURLAuthenticationChallengeFromID(_ret)
 }
 
-// @abstract Get a description of the protection space that requires authentication @result The protection space that needs authentication
+// A description of the protection space that requires authentication.
 func (o *NSURLAuthenticationChallenge) ProtectionSpace() *NSURLProtectionSpace {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLAuthenticationChallengeSelProtectionSpace)
 	if _ret != 0 {
@@ -67,7 +65,7 @@ func (o *NSURLAuthenticationChallenge) ProtectionSpace() *NSURLProtectionSpace {
 	return NSURLProtectionSpaceFromID(_ret)
 }
 
-// @abstract Get the proposed credential for this challenge @result The proposed credential @discussion proposedCredential may be nil, if there is no default credential to use for this challenge (either stored or in the URL). If the credential is not nil and returns YES for hasPassword, this means the NSURLConnection thinks the credential is ready to use as-is. If it returns NO for hasPassword, then the credential is not ready to use as-is, but provides a default username the client could use when prompting.
+// The proposed credential for this challenge. The proposed credential may be `nil`, if there is no default credential to use for this challenge (either stored or in the URL). If the credential is not `nil` and returns `YES` for `hasPassword`, it is ready to use as-is. If it returns `NO` for `hasPassword`, it provides a default username the client could use when prompting.
 func (o *NSURLAuthenticationChallenge) ProposedCredential() *NSURLCredential {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLAuthenticationChallengeSelProposedCredential)
 	if _ret != 0 {
@@ -76,13 +74,13 @@ func (o *NSURLAuthenticationChallenge) ProposedCredential() *NSURLCredential {
 	return NSURLCredentialFromID(_ret)
 }
 
-// @abstract Get count of previous failed authentication attempts @result The count of previous failures
+// The count of previous failed authentication attempts.
 func (o *NSURLAuthenticationChallenge) PreviousFailureCount() int {
 	_ret := objc.Send[int](o.Ptr(), _nSURLAuthenticationChallengeSelPreviousFailureCount)
 	return _ret
 }
 
-// @abstract Get the response representing authentication failure. @result The failure response or nil @discussion If there was a previous authentication failure, and this protocol uses responses to indicate authentication failure, then this method will return the response. Otherwise it will return nil.
+// The response representing authentication failure. If there was a previous authentication failure, and this protocol uses responses to indicate authentication failure, then this method will return the response. Otherwise it will return `nil`.
 func (o *NSURLAuthenticationChallenge) FailureResponse() *NSURLResponse {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLAuthenticationChallengeSelFailureResponse)
 	if _ret != 0 {
@@ -91,13 +89,13 @@ func (o *NSURLAuthenticationChallenge) FailureResponse() *NSURLResponse {
 	return NSURLResponseFromID(_ret)
 }
 
-// @abstract Get the error representing authentication failure. @discussion If there was a previous authentication failure, and this protocol uses errors to indicate authentication failure, then this method will return the error. Otherwise it will return nil.
+// The error representing authentication failure. If there was a previous authentication failure, and this protocol uses errors to indicate authentication failure, then this method will return the error. Otherwise it will return `nil`.
 func (o *NSURLAuthenticationChallenge) Error() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSURLAuthenticationChallengeSelError)
 	return _ret
 }
 
-// @abstract Get the sender of this challenge @result The sender of the challenge @discussion The sender is the object you should reply to when done processing the challenge.
+// The sender of this challenge. The sender is the object you should reply to when done processing the challenge.
 func (o *NSURLAuthenticationChallenge) Sender() NSURLAuthenticationChallengeSender {
 	_ret := objc.Send[NSURLAuthenticationChallengeSender](o.Ptr(), _nSURLAuthenticationChallengeSelSender)
 	return _ret

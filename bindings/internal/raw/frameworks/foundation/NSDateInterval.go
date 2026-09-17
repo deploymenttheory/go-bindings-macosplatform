@@ -111,6 +111,7 @@ func (o *NSDateInterval) ContainsDate(date *NSDate) bool {
 	return _ret
 }
 
+// The start date of the date interval.
 func (o *NSDateInterval) StartDate() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateIntervalSelStartDate)
 	if _ret != 0 {
@@ -119,6 +120,7 @@ func (o *NSDateInterval) StartDate() *NSDate {
 	return NSDateFromID(_ret)
 }
 
+// The end date of the date interval.
 func (o *NSDateInterval) EndDate() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateIntervalSelEndDate)
 	if _ret != 0 {
@@ -127,6 +129,7 @@ func (o *NSDateInterval) EndDate() *NSDate {
 	return NSDateFromID(_ret)
 }
 
+// The duration of the date interval.
 func (o *NSDateInterval) Duration() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSDateIntervalSelDuration)
 	return _ret

@@ -6,8 +6,10 @@ package virtualization
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -59,11 +61,30 @@ func (movmso *MacOSVirtualMachineStartOptions) WithStartUpFromMACOSRecovery(star
 	return movmso
 }
 
-// StartUpFromMACOSRecovery wraps the corresponding Objective-C method.
+// SetGuestProvisioning sets guest provisioning options with validation.
+func (movmso *MacOSVirtualMachineStartOptions) SetGuestProvisioning(guestProvisioningOptions *MacGuestProvisioningOptions) error {
+	defer runtime.KeepAlive(movmso)
+	defer runtime.KeepAlive(guestProvisioningOptions)
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(movmso), objc.RegisterName("setGuestProvisioningOptions:error:"), objref.IDOf(guestProvisioningOptions), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// StartUpFromMACOSRecovery reports whether to start up from macOS Recovery.
 func (movmso *MacOSVirtualMachineStartOptions) StartUpFromMACOSRecovery() bool {
 	defer runtime.KeepAlive(movmso)
 	_r := objc.Send[bool](objref.IDOf(movmso), objc.RegisterName("startUpFromMacOSRecovery"))
 	return _r
+}
+
+// GuestProvisioningOptions returns a value that controls provisioning a macOS guest. This property allows someone to provision a macOS guest by setting “VZMacGuestProvisioningOptions“.
+func (movmso *MacOSVirtualMachineStartOptions) GuestProvisioningOptions() *MacGuestProvisioningOptions {
+	defer runtime.KeepAlive(movmso)
+	_r := objc.Send[objc.ID](objref.IDOf(movmso), objc.RegisterName("guestProvisioningOptions"))
+	return MacGuestProvisioningOptionsFromID(_r)
 }
 
 var _ VirtualMachineStartOptionsProvider = (*MacOSVirtualMachineStartOptions)(nil)

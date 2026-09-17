@@ -43,10 +43,6 @@
       "doc": "The abstract superclass for objects representing notable features detected in an image.",
       "url": "https://developer.apple.com/documentation/coreimage/cifeature"
     },
-    "CIFilter": {
-      "doc": "An image processor that produces an image by manipulating one or more input images or by generating new image data.",
-      "url": "https://developer.apple.com/documentation/coreimage/cifilter"
-    },
     "CIFilterGenerator": {
       "doc": "An object that creates and configures chains of individual image filters.",
       "url": "https://developer.apple.com/documentation/coreimage/cifiltergenerator"
@@ -125,10 +121,6 @@
     }
   },
   "protocols": {
-    "CIFilter": {
-      "doc": "An image processor that produces an image by manipulating one or more input images or by generating new image data.",
-      "url": "https://developer.apple.com/documentation/coreimage/cifilter"
-    },
     "CIFilterConstructor": {
       "doc": "A general interface for objects that produce filters.",
       "url": "https://developer.apple.com/documentation/coreimage/cifilterconstructor"
@@ -147,14 +139,6 @@
     }
   },
   "enums": {
-    "CIDataMatrixCodeECCVersion": {
-      "doc": "Constants indicating the Data Matrix code ECC version.",
-      "url": "https://developer.apple.com/documentation/coreimage/cidatamatrixcodeeccversion"
-    },
-    "CIQRCodeErrorCorrectionLevel": {
-      "doc": "Constants indicating the percentage of the symbol that is dedicated to error correction.",
-      "url": "https://developer.apple.com/documentation/coreimage/ciqrcodeerrorcorrectionlevel"
-    },
     "CIRenderDestinationAlphaMode": {
       "doc": "Different ways of representing alpha.",
       "url": "https://developer.apple.com/documentation/coreimage/cirenderdestinationalphamode",
@@ -928,7 +912,7 @@
       },
       "+applyWithTiledExtent:inputs:arguments:error:": {
         "doc": "Call this method on your Core Image Processor Kernel subclass to create a new image based on an array of tile extents that together cover the output.",
-        "url": "https://developer.apple.com/documentation/coreimage/ciimageprocessorkernel/apply(withtiledextent:inputs:arguments:)"
+        "url": "https://developer.apple.com/documentation/coreimage/ciimageprocessorkernel/apply(tiledextent:inputs:arguments:)"
       },
       "+formatForInputAtIndex:": {
         "doc": "Override this class method if you want your any of the inputs to be in a specific pixel format.",

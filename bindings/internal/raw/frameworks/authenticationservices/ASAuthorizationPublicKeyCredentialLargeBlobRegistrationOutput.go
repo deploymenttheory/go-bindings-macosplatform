@@ -10,8 +10,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// The result of the large binary object support check, resulting from a passkey registration response.
-//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/asauthorizationpublickeycredentiallargeblobregistrationoutput
 type ASAuthorizationPublicKeyCredentialLargeBlobRegistrationOutput struct {
 	foundation.NSObject

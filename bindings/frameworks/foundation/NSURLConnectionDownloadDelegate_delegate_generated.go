@@ -19,7 +19,7 @@ import (
 // (URLConnectionDownloadDelegate…Handler): implement the ones you need on the same value and the
 // framework will call them too.
 type URLConnectionDownloadDelegate interface {
-	// ConnectionDidFinishDownloadingDestinationURL wraps the corresponding Objective-C method.
+	// ConnectionDidFinishDownloadingDestinationURL sent when a download connection finishes loading and provides the location of the downloaded file.
 	ConnectionDidFinishDownloadingDestinationURL(connection *URLConnection, destinationURL string)
 }
 

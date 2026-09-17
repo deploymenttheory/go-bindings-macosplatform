@@ -15,7 +15,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An object that provides Cinematic-specific information about an asset, including its tracks.
+// Information associated with an AVAsset for a cinematic video.
 //
 // Apple documentation: https://developer.apple.com/documentation/cinematic/cnassetinfo
 type CNAssetInfo struct {
@@ -23,22 +23,31 @@ type CNAssetInfo struct {
 }
 
 var (
-	_clsCNAssetInfo                                  = _objcClass("CNAssetInfo")
-	_cNAssetInfoSelCheckIfCinematicCompletionHandler = objc.RegisterName("checkIfCinematic:completionHandler:")
-	_cNAssetInfoSelLoadFromAssetCompletionHandler    = objc.RegisterName("loadFromAsset:completionHandler:")
-	_cNAssetInfoSelAsset                             = objc.RegisterName("asset")
-	_cNAssetInfoSelAllCinematicTracks                = objc.RegisterName("allCinematicTracks")
-	_cNAssetInfoSelCinematicVideoTrack               = objc.RegisterName("cinematicVideoTrack")
-	_cNAssetInfoSelCinematicDisparityTrack           = objc.RegisterName("cinematicDisparityTrack")
-	_cNAssetInfoSelCinematicMetadataTrack            = objc.RegisterName("cinematicMetadataTrack")
-	_cNAssetInfoSelTimeRange                         = objc.RegisterName("timeRange")
-	_cNAssetInfoSelNaturalSize                       = objc.RegisterName("naturalSize")
-	_cNAssetInfoSelPreferredSize                     = objc.RegisterName("preferredSize")
-	_cNAssetInfoSelPreferredTransform                = objc.RegisterName("preferredTransform")
-	_cNAssetInfoSelFrameTimingTrack                  = objc.RegisterName("frameTimingTrack")
-	_cNAssetInfoSelVideoCompositionTracks            = objc.RegisterName("videoCompositionTracks")
-	_cNAssetInfoSelVideoCompositionTrackIDs          = objc.RegisterName("videoCompositionTrackIDs")
-	_cNAssetInfoSelSampleDataTrackIDs                = objc.RegisterName("sampleDataTrackIDs")
+	_clsCNAssetInfo                                                     = _objcClass("CNAssetInfo")
+	_cNAssetInfoSelCheckCinematicCapabilityForAssetCompletionHandler    = objc.RegisterName("checkCinematicCapabilityForAsset:completionHandler:")
+	_cNAssetInfoSelCheckIfCinematicCompletionHandler                    = objc.RegisterName("checkIfCinematic:completionHandler:")
+	_cNAssetInfoSelLoadFromAssetCompletionHandler                       = objc.RegisterName("loadFromAsset:completionHandler:")
+	_cNAssetInfoSelAsset                                                = objc.RegisterName("asset")
+	_cNAssetInfoSelAllCinematicTracks                                   = objc.RegisterName("allCinematicTracks")
+	_cNAssetInfoSelCinematicVideoTrack                                  = objc.RegisterName("cinematicVideoTrack")
+	_cNAssetInfoSelCinematicDisparityTrack                              = objc.RegisterName("cinematicDisparityTrack")
+	_cNAssetInfoSelCinematicMetadataTrack                               = objc.RegisterName("cinematicMetadataTrack")
+	_cNAssetInfoSelTimeRange                                            = objc.RegisterName("timeRange")
+	_cNAssetInfoSelNaturalSize                                          = objc.RegisterName("naturalSize")
+	_cNAssetInfoSelPreferredSize                                        = objc.RegisterName("preferredSize")
+	_cNAssetInfoSelPreferredTransform                                   = objc.RegisterName("preferredTransform")
+	_cNAssetInfoSelFrameTimingTrack                                     = objc.RegisterName("frameTimingTrack")
+	_cNAssetInfoSelVideoCompositionTracks                               = objc.RegisterName("videoCompositionTracks")
+	_cNAssetInfoSelVideoCompositionTrackIDs                             = objc.RegisterName("videoCompositionTrackIDs")
+	_cNAssetInfoSelSampleDataTrackIDs                                   = objc.RegisterName("sampleDataTrackIDs")
+	_cNAssetInfoSelResourceStatusForVersions                            = objc.RegisterName("resourceStatusForVersions:")
+	_cNAssetInfoSelDownloadResourcesForVersionsTimeoutCompletionHandler = objc.RegisterName("downloadResourcesForVersions:timeout:completionHandler:")
+	_cNAssetInfoSelDownloadResourcesWithTimeoutCompletionHandler        = objc.RegisterName("downloadResourcesWithTimeout:completionHandler:")
+	_cNAssetInfoSelPreprocessAssetWithConfigurationCompletionHandler    = objc.RegisterName("preprocessAssetWithConfiguration:completionHandler:")
+	_cNAssetInfoSelDefaultResourceDownloadTimeout                       = objc.RegisterName("defaultResourceDownloadTimeout")
+	_cNAssetInfoSelIsPreprocessed                                       = objc.RegisterName("isPreprocessed")
+	_cNAssetInfoSelCinematicCapability                                  = objc.RegisterName("cinematicCapability")
+	_cNAssetInfoSelResourceStatus                                       = objc.RegisterName("resourceStatus")
 )
 
 func CNAssetInfoFromID(id objc.ID) *CNAssetInfo {
@@ -51,7 +60,19 @@ func CNAssetInfoFromID(id objc.ID) *CNAssetInfo {
 	return o
 }
 
-// Check if asset is cinematic asynchronously.
+// Asynchronously checks the cinematic capability of an asset. The completionHandler returns: CNCinematicCapabilityNone if a cinematic metadata track is not present. CNCinematicCapabilityRenderable if the cinematic asset can be used without preprocessing CNCinematicCapabilityNeedsPreprocessing If cinematic asset needs preprocessing before it can be used For assets that need preprocessing use [CNAssetInfo preprocessAssetWithConfiguration:completionHandler:] before using the asset
+func CNAssetInfoCheckCinematicCapabilityForAssetCompletionHandler(asset *avfoundation.AVAsset, completionHandler func(CNCinematicCapability)) {
+	var __block_completionHandler objc.Block
+	if completionHandler != nil {
+		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 CNCinematicCapability) {
+			completionHandler(blockParam0)
+		})
+		defer __block_completionHandler.Release()
+	}
+	objc.ID(_clsCNAssetInfo).Send(_cNAssetInfoSelCheckCinematicCapabilityForAssetCompletionHandler, asset.Ptr(), __block_completionHandler)
+}
+
+// Asynchronously check if asset is cinematic. Only Cinematic assets containing a disparity track and a metadata track will return YES.
 func CNAssetInfoCheckIfCinematicCompletionHandler(asset *avfoundation.AVAsset, completionHandler func(bool)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -176,4 +197,86 @@ func (o *CNAssetInfo) SampleDataTrackIDs() *foundation.NSArray[*foundation.NSNum
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
+}
+
+// Check status for a set of resources. @param resourceVersions Resource version(s) to check. Empty set to check all available resource versions. @return The first encountered non-ready status, or CNResourceStatusReady if all are ready.
+func CNAssetInfoResourceStatusForVersions(resourceVersions *foundation.NSSet[*foundation.NSNumber]) CNResourceStatus {
+	_ret := objc.Send[CNResourceStatus](objc.ID(_clsCNAssetInfo), _cNAssetInfoSelResourceStatusForVersions, resourceVersions.Ptr())
+	return _ret
+}
+
+// Downloads the resources required to render cinematic effects on assets Resources are device-wide and are cached once downloaded @param resourceVersions Resource version(s) to download. Pass an empty set to download all available resources @param downloadTimeout Maximum seconds to wait before timeout. Pass \c defaultResourceDownloadTimeout for the system default. @param completionHandler Called on completion; \c error is \c nil on success. @return A \c NSProgress tracking the download.
+func CNAssetInfoDownloadResourcesForVersionsTimeoutCompletionHandler(resourceVersions *foundation.NSSet[*foundation.NSNumber], downloadTimeout float64, completionHandler func(unsafe.Pointer)) *foundation.NSProgress {
+	var __block_completionHandler objc.Block
+	if completionHandler != nil {
+		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 unsafe.Pointer) {
+			completionHandler(blockParam0)
+		})
+		defer __block_completionHandler.Release()
+	}
+	_ret := objc.Send[objc.ID](objc.ID(_clsCNAssetInfo), _cNAssetInfoSelDownloadResourcesForVersionsTimeoutCompletionHandler, resourceVersions.Ptr(), downloadTimeout, __block_completionHandler)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSProgressFromID(_ret)
+}
+
+// Downloads the resources required to render cinematic effects for the given asset Resources are device-wide and are cached once downloaded @param downloadTimeout Maximum seconds to wait before timeout. Pass \c defaultResourceDownloadTimeout for the system default. @param completionHandler Called on completion; On success, \c newAssetInfo is a refreshed instance with the downloaded resources available; \c error is non-nil on failure @return A \c NSProgress tracking the download.
+func (o *CNAssetInfo) DownloadResourcesWithTimeoutCompletionHandler(downloadTimeout float64, completionHandler func(*CNAssetInfo, unsafe.Pointer)) *foundation.NSProgress {
+	var __block_completionHandler objc.Block
+	if completionHandler != nil {
+		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completionHandler(CNAssetInfoFromID(blockParam0), blockParam1)
+		})
+		defer __block_completionHandler.Release()
+	}
+	_ret := objc.Send[objc.ID](o.Ptr(), _cNAssetInfoSelDownloadResourcesWithTimeoutCompletionHandler, downloadTimeout, __block_completionHandler)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSProgressFromID(_ret)
+}
+
+// Preprocesses the asset by generating a disparity track, writing the result to the URL specified in `configuration`. Required for assets whose `cinematicCapability` is \c CNCinematicCapabilityNeedsPreprocessing; on success \c assetInfo will be \c CNCinematicCapabilityRenderable. Ensure \c resourceStatus is ready before calling — download resources first if needed. @param configuration Destination URL and whether to embed or reference source tracks. @param completionHandler Called on completion; on success \c assetInfo is the new preprocessed asset and \c error is \c nil. On failure \c assetInfo is \c nil and \c error is non-nil. @return A \c NSProgress tracking preprocessing progress.
+func (o *CNAssetInfo) PreprocessAssetWithConfigurationCompletionHandler(configuration *CNAssetPreprocessConfiguration, completionHandler func(*CNAssetInfo, unsafe.Pointer)) *foundation.NSProgress {
+	var __block_completionHandler objc.Block
+	if completionHandler != nil {
+		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completionHandler(CNAssetInfoFromID(blockParam0), blockParam1)
+		})
+		defer __block_completionHandler.Release()
+	}
+	_ret := objc.Send[objc.ID](o.Ptr(), _cNAssetInfoSelPreprocessAssetWithConfigurationCompletionHandler, configuration.Ptr(), __block_completionHandler)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSProgressFromID(_ret)
+}
+
+// Default timeout value for resource download for `+[CNAssetInfo downloadResourcesForVersions:timeout:completionHandler:]` `-[CNAssetInfo downloadResourcesWithTimeout:completionHandler:]`
+func CNAssetInfoDefaultResourceDownloadTimeout() float64 {
+	_ret := objc.Send[float64](objc.ID(_clsCNAssetInfo), _cNAssetInfoSelDefaultResourceDownloadTimeout)
+	return _ret
+}
+
+// True only when an asset has been preprocessed
+func (o *CNAssetInfo) IsPreprocessed() bool {
+	_ret := objc.Send[bool](o.Ptr(), _cNAssetInfoSelIsPreprocessed)
+	return _ret
+}
+
+func (o *CNAssetInfo) CinematicCapability() CNCinematicCapability {
+	_ret := objc.Send[CNCinematicCapability](o.Ptr(), _cNAssetInfoSelCinematicCapability)
+	return _ret
+}
+
+func (o *CNAssetInfo) ResourceStatus() CNResourceStatus {
+	_ret := objc.Send[CNResourceStatus](o.Ptr(), _cNAssetInfoSelResourceStatus)
+	return _ret
 }

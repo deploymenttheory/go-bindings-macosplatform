@@ -9,8 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A formatter that provides localized representations of units and measurements.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsmeasurementformatter
 type NSMeasurementFormatter struct {
 	NSFormatter
@@ -40,6 +38,7 @@ func NSMeasurementFormatterFromID(id objc.ID) *NSMeasurementFormatter {
 	return o
 }
 
+// Creates and returns a localized string representation of the provided measurement. - Parameters: - measurement: The measurement to be represented. - Returns: A user-readable string that represents the measurement.
 func (o *NSMeasurementFormatter) StringFromMeasurement(measurement *NSMeasurement[objc.ID]) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMeasurementFormatterSelStringFromMeasurement, measurement.Ptr())
 	if _ret != 0 {
@@ -48,6 +47,7 @@ func (o *NSMeasurementFormatter) StringFromMeasurement(measurement *NSMeasuremen
 	return NSStringFromID(_ret)
 }
 
+// Creates and returns a localized string representation of the provided unit of measure. If the unit cannot be localized, the unit's `symbol` value is used. - Parameters: - unit: The unit of measure to be represented. - Returns: A user-readable string that represents the unit of measure.
 func (o *NSMeasurementFormatter) StringFromUnit(unit *NSUnit) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMeasurementFormatterSelStringFromUnit, unit.Ptr())
 	if _ret != 0 {
@@ -56,6 +56,7 @@ func (o *NSMeasurementFormatter) StringFromUnit(unit *NSUnit) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The options for how the unit is formatted. This property can be set to ensure that the formatter behaves in a way the developer expects, even if it is not standard according to the preferences of the user's locale. If not specified, `unitOptions` defaults to localizing according to the preferences of the locale. Note that `NSMeasurementFormatter` will handle converting measurement objects to the preferred units in a particular locale. For instance, if provided a measurement object in kilometers and the set locale is en_US, the formatter will implicitly convert the measurement object to miles and return the formatted string as the equivalent measurement in miles.
 func (o *NSMeasurementFormatter) UnitOptions() NSMeasurementFormatterUnitOptions {
 	_ret := objc.Send[NSMeasurementFormatterUnitOptions](o.Ptr(), _nSMeasurementFormatterSelUnitOptions)
 	return _ret
@@ -65,6 +66,7 @@ func (o *NSMeasurementFormatter) SetUnitOptions(unitOptions NSMeasurementFormatt
 	o.Ptr().Send(_nSMeasurementFormatterSelSetUnitOptions, unitOptions)
 }
 
+// The unit style used when creating string representations of measurements. If not specified, `unitStyle` is set to `NSFormattingUnitStyleMedium`.
 func (o *NSMeasurementFormatter) UnitStyle() NSFormattingUnitStyle {
 	_ret := objc.Send[NSFormattingUnitStyle](o.Ptr(), _nSMeasurementFormatterSelUnitStyle)
 	return _ret
@@ -74,6 +76,7 @@ func (o *NSMeasurementFormatter) SetUnitStyle(unitStyle NSFormattingUnitStyle) {
 	o.Ptr().Send(_nSMeasurementFormatterSelSetUnitStyle, unitStyle)
 }
 
+// The locale used when formatting measurements. If not specified, the locale is set to the user's current locale.
 func (o *NSMeasurementFormatter) Locale() *NSLocale {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMeasurementFormatterSelLocale)
 	if _ret != 0 {
@@ -86,6 +89,7 @@ func (o *NSMeasurementFormatter) SetLocale(locale *NSLocale) {
 	o.Ptr().Send(_nSMeasurementFormatterSelSetLocale, locale.Ptr())
 }
 
+// The number formatter used to format the numeric value of a measurement. If not specified, the number formatter is set up with `NSNumberFormatterDecimalStyle`.
 func (o *NSMeasurementFormatter) NumberFormatter() *NSNumberFormatter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMeasurementFormatterSelNumberFormatter)
 	if _ret != 0 {

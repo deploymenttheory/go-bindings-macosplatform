@@ -478,6 +478,7 @@ func (o *NSURL) StopAccessingSecurityScopedResource() {
 	o.Ptr().Send(_nSURLSelStopAccessingSecurityScopedResource)
 }
 
+// The data representation of the URL's relativeString. If the URL was initialized with `initWithData:relativeToURL:`, the data representation returned are the same bytes as those used at initialization; otherwise, the data representation returned are the bytes of the relativeString encoded with `NSUTF8StringEncoding`.
 func (o *NSURL) DataRepresentation() *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelDataRepresentation)
 	if _ret != 0 {
@@ -486,6 +487,7 @@ func (o *NSURL) DataRepresentation() *NSData {
 	return NSDataFromID(_ret)
 }
 
+// The URL string for the receiver as an absolute URL.
 func (o *NSURL) AbsoluteString() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelAbsoluteString)
 	if _ret != 0 {
@@ -494,6 +496,7 @@ func (o *NSURL) AbsoluteString() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The relative portion of the URL. If `baseURL` is `nil`, or if the receiver is itself absolute, this is the same as `absoluteString`.
 func (o *NSURL) RelativeString() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelRelativeString)
 	if _ret != 0 {
@@ -502,6 +505,7 @@ func (o *NSURL) RelativeString() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The base URL. May be `nil`.
 func (o *NSURL) BaseURL() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelBaseURL)
 	if _ret != 0 {
@@ -510,6 +514,7 @@ func (o *NSURL) BaseURL() *NSURL {
 	return NSURLFromID(_ret)
 }
 
+// The absolute URL. If the receiver is itself absolute, this returns self.
 func (o *NSURL) AbsoluteURL() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelAbsoluteURL)
 	if _ret != 0 {
@@ -518,6 +523,7 @@ func (o *NSURL) AbsoluteURL() *NSURL {
 	return NSURLFromID(_ret)
 }
 
+// The scheme component of the URL. The full URL is the concatenation of `[myURL scheme]`, `':'`, `[myURL resourceSpecifier]`.
 func (o *NSURL) Scheme() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelScheme)
 	if _ret != 0 {
@@ -526,6 +532,7 @@ func (o *NSURL) Scheme() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The resource specifier component of the URL.
 func (o *NSURL) ResourceSpecifier() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelResourceSpecifier)
 	if _ret != 0 {
@@ -534,6 +541,7 @@ func (o *NSURL) ResourceSpecifier() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The host component of the URL, or `nil` if the URL does not conform to RFC 1808.
 func (o *NSURL) Host() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelHost)
 	if _ret != 0 {
@@ -542,6 +550,7 @@ func (o *NSURL) Host() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The port component of the URL, or `nil` if the URL does not conform to RFC 1808.
 func (o *NSURL) Port() *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelPort)
 	if _ret != 0 {
@@ -550,6 +559,7 @@ func (o *NSURL) Port() *NSNumber {
 	return NSNumberFromID(_ret)
 }
 
+// The user component of the URL, or `nil` if the URL does not conform to RFC 1808.
 func (o *NSURL) User() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelUser)
 	if _ret != 0 {
@@ -558,6 +568,7 @@ func (o *NSURL) User() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The password component of the URL, or `nil` if the URL does not conform to RFC 1808.
 func (o *NSURL) Password() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelPassword)
 	if _ret != 0 {
@@ -566,6 +577,7 @@ func (o *NSURL) Password() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The path component of the URL, or `nil` if the URL does not conform to RFC 1808.
 func (o *NSURL) Path() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelPath)
 	if _ret != 0 {
@@ -574,6 +586,7 @@ func (o *NSURL) Path() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The fragment component of the URL, or `nil` if the URL does not conform to RFC 1808.
 func (o *NSURL) Fragment() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelFragment)
 	if _ret != 0 {
@@ -582,6 +595,7 @@ func (o *NSURL) Fragment() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The parameter string of the URL.
 // Deprecated: The parameterString method is deprecated. Post deprecation for applications linked with or after the macOS 10.15, and for all iOS, watchOS, and tvOS applications, parameterString will always return nil, and the path method will return the complete path including the semicolon separator and params component if the URL string contains them.
 func (o *NSURL) ParameterString() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelParameterString)
@@ -591,6 +605,7 @@ func (o *NSURL) ParameterString() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The query component of the URL, or `nil` if the URL does not conform to RFC 1808.
 // Deprecated: The parameterString method is deprecated. Post deprecation for applications linked with or after the macOS 10.15, and for all iOS, watchOS, and tvOS applications, parameterString will always return nil, and the path method will return the complete path including the semicolon separator and params component if the URL string contains them.
 func (o *NSURL) Query() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelQuery)
@@ -600,6 +615,7 @@ func (o *NSURL) Query() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The relative path of the URL. Same as `path` if `baseURL` is `nil`.
 // Deprecated: The parameterString method is deprecated. Post deprecation for applications linked with or after the macOS 10.15, and for all iOS, watchOS, and tvOS applications, parameterString will always return nil, and the path method will return the complete path including the semicolon separator and params component if the URL string contains them.
 func (o *NSURL) RelativePath() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelRelativePath)
@@ -609,21 +625,25 @@ func (o *NSURL) RelativePath() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// A Boolean value that indicates whether the URL's path represents a directory. Determined from the URL string (whether the path component ends with a `/` character). Does not check the resource.
 func (o *NSURL) HasDirectoryPath() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSURLSelHasDirectoryPath)
 	return _ret
 }
 
+// The URL's path in file system representation. File system representation is a null-terminated C string with canonical UTF-8 encoding. The returned C string will be automatically freed just as a returned object would be released; use `getFileSystemRepresentation:maxLength:` if you need to store the representation outside of the autorelease context.
 func (o *NSURL) FileSystemRepresentation() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSURLSelFileSystemRepresentation)
 	return _ret
 }
 
+// A Boolean value that indicates whether the URL scheme is `file:`. If `isFileURL` is `YES`, then `path` is suitable for input into `NSFileManager` or `NSPathUtilities`.
 func (o *NSURL) IsFileURL() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSURLSelIsFileURL)
 	return _ret
 }
 
+// The standardized form of the URL.
 func (o *NSURL) StandardizedURL() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelStandardizedURL)
 	if _ret != 0 {
@@ -632,6 +652,7 @@ func (o *NSURL) StandardizedURL() *NSURL {
 	return NSURLFromID(_ret)
 }
 
+// A file path URL that refers to the same resource as this URL. File path URLs use a file system style path. The resource must exist and be reachable to be converted.
 func (o *NSURL) FilePathURL() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelFilePathURL)
 	if _ret != 0 {
@@ -719,6 +740,7 @@ func (o *NSURL) CheckResourceIsReachableAndReturnError() (bool, error) {
 	return _ret, nil
 }
 
+// An array containing the path components. Each component is unescaped. For example, in the URL `file:///directory/directory%202/file`, the path components array would be `@[@"/", @"directory", @"directory 2", @"file"]`.
 func (o *NSURL) PathComponents() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelPathComponents)
 	if _ret != 0 {
@@ -727,6 +749,7 @@ func (o *NSURL) PathComponents() *NSArray[*NSString] {
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// The last path component. This property contains the last path component, unescaped. For example, in the URL `file:///path/to/file`, the last path component is `file`.
 func (o *NSURL) LastPathComponent() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelLastPathComponent)
 	if _ret != 0 {
@@ -735,6 +758,7 @@ func (o *NSURL) LastPathComponent() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The path extension. This property contains the path extension, unescaped. For example, in the URL `file:///path/to/file.txt`, the path extension is `txt`.
 func (o *NSURL) PathExtension() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelPathExtension)
 	if _ret != 0 {
@@ -743,6 +767,7 @@ func (o *NSURL) PathExtension() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// A URL you create by removing the last path component from the receiver. If the URL represents the root path, this property contains a copy of the original URL. Otherwise, if the original URL has only one path component, this property contains the empty string.
 func (o *NSURL) URLByDeletingLastPathComponent() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelURLByDeletingLastPathComponent)
 	if _ret != 0 {
@@ -751,6 +776,7 @@ func (o *NSURL) URLByDeletingLastPathComponent() *NSURL {
 	return NSURLFromID(_ret)
 }
 
+// A URL you create by removing the path extension from the receiver, if any. If the URL represents the root path, this property contains a copy of the original URL. If the URL has multiple path extensions, only the last one is removed.
 func (o *NSURL) URLByDeletingPathExtension() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelURLByDeletingPathExtension)
 	if _ret != 0 {
@@ -759,6 +785,7 @@ func (o *NSURL) URLByDeletingPathExtension() *NSURL {
 	return NSURLFromID(_ret)
 }
 
+// A URL that points to the same resource as the original URL using an absolute path. This property only works on URLs with the `file:` path scheme. For all other URLs, it returns a copy of the original URL. Like “NSString/standardizingPath“, this property expands an initial tilde expression, reduces empty components and "`/./`" sequences, and resolves "`..`" references in absolute paths. The resulting path may still contain symbolic links.
 func (o *NSURL) URLByStandardizingPath() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelURLByStandardizingPath)
 	if _ret != 0 {
@@ -767,6 +794,7 @@ func (o *NSURL) URLByStandardizingPath() *NSURL {
 	return NSURLFromID(_ret)
 }
 
+// A URL that points to the same resource as the receiver and includes no symbolic links. If the receiver has no symbolic links, this property contains a copy of the original URL. If some symbolic links cannot be resolved, they are left in place. This property only works on URLs with the `file:` path scheme. For all other URLs, it returns a copy of the receiver.
 func (o *NSURL) URLByResolvingSymlinksInPath() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelURLByResolvingSymlinksInPath)
 	if _ret != 0 {

@@ -119,14 +119,14 @@ func (ma *MACAddress) IsUnicastAddress() bool {
 	return _r
 }
 
-// IsLocallyAdministeredAddress reports whether the address is a locally administered addresses (LAA).
+// IsLocallyAdministeredAddress reports whether the address is a locally administered address (LAA).
 func (ma *MACAddress) IsLocallyAdministeredAddress() bool {
 	defer runtime.KeepAlive(ma)
 	_r := objc.Send[bool](objref.IDOf(ma), objc.RegisterName("isLocallyAdministeredAddress"))
 	return _r
 }
 
-// IsUniversallyAdministeredAddress reports whether the address is a universally administered addresses (UAA).
+// IsUniversallyAdministeredAddress reports whether the address is a universally administered address (UAA).
 func (ma *MACAddress) IsUniversallyAdministeredAddress() bool {
 	defer runtime.KeepAlive(ma)
 	_r := objc.Send[bool](objref.IDOf(ma), objc.RegisterName("isUniversallyAdministeredAddress"))

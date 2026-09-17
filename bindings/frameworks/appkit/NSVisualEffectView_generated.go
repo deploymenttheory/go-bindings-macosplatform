@@ -383,6 +383,14 @@ func (vev *VisualEffectView) WithGestureRecognizers(items ...GestureRecognizerPr
 	return vev
 }
 
+// WithExclusiveGestureBehavior sets declares whether gesture recognizers should be exclusive in this view and its subviews.
+func (vev *VisualEffectView) WithExclusiveGestureBehavior(exclusiveGestureBehavior ViewExclusiveGestureBehavior) *VisualEffectView {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setExclusiveGestureBehavior:"), exclusiveGestureBehavior)
+	})
+	return vev
+}
+
 // WithAllowedTouchTypes sets the allowed touch types.
 func (vev *VisualEffectView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *VisualEffectView {
 	purego.Main(func() {
@@ -444,6 +452,15 @@ func (vev *VisualEffectView) WithHorizontalContentSizeConstraintActive(horizonta
 func (vev *VisualEffectView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *VisualEffectView {
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
+	return vev
+}
+
+// WithTextSelectionManager sets the text selection manager for this view.
+func (vev *VisualEffectView) WithTextSelectionManager(textSelectionManager *TextSelectionManager) *VisualEffectView {
+	defer runtime.KeepAlive(textSelectionManager)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setTextSelectionManager:"), objref.IDOf(textSelectionManager))
 	})
 	return vev
 }

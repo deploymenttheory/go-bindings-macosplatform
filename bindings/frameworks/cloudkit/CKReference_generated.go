@@ -15,8 +15,6 @@ import (
 )
 
 // Reference is an idiomatic wrapper over the Objective-C class CKReference.
-//
-// A relationship between two records in a record zone.
 type Reference struct {
 	objref.Handle
 }

@@ -9,8 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An abstract class representing a dimensional unit of measure.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsdimension
 type NSDimension struct {
 	NSUnit
@@ -33,6 +31,7 @@ func NSDimensionFromID(id objc.ID) *NSDimension {
 	return o
 }
 
+// Initializes a dimensional unit with the specified symbol and unit converter.
 func (o *NSDimension) InitWithSymbolConverter(symbol *NSString, converter *NSUnitConverter) *NSDimension {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDimensionSelInitWithSymbolConverter, symbol.Ptr(), converter.Ptr())
 	if _ret != 0 {
@@ -41,6 +40,7 @@ func (o *NSDimension) InitWithSymbolConverter(symbol *NSString, converter *NSUni
 	return NSDimensionFromID(_ret)
 }
 
+// Returns the base unit of the dimension. The default implementation returns `nil` to indicate that the `NSDimension` class should not be used directly. When implementing a subclass, you should return a unit converter that returns the inputted value for both the `baseUnitValueFromValue:` and `valueFromBaseUnitValue:` methods. You can create a unit converter for a base unit using the `NSUnitConverterLinear` `initWithCoefficient:` initializer, passing `1` as the coefficient.
 func NSDimensionBaseUnit() *NSDimension {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDimension), _nSDimensionSelBaseUnit)
 	if _ret != 0 {
@@ -49,6 +49,7 @@ func NSDimensionBaseUnit() *NSDimension {
 	return NSDimensionFromID(_ret)
 }
 
+// The unit converter that describes how this unit converts to and from the base unit of its dimension.
 func (o *NSDimension) Converter() *NSUnitConverter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDimensionSelConverter)
 	if _ret != 0 {

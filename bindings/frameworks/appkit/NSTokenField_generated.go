@@ -183,6 +183,14 @@ func (tf *TokenField) WithBezelStyle(bezelStyle TextFieldBezelStyle) *TokenField
 	return tf
 }
 
+// WithBorderShape sets set border shape NSControlBorderShapeAutomatic sets text field or subclass to default system shape. NSControlBorderShapeCircle sets text field or subclass to NSControlBorderShapeAutomatic.
+func (tf *TokenField) WithBorderShape(borderShape ControlBorderShape) *TokenField {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setBorderShape:"), borderShape)
+	})
+	return tf
+}
+
 // WithPreferredMaxLayoutWidth sets the maximum width of the text field’s intrinsic content size.
 func (tf *TokenField) WithPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64) *TokenField {
 	purego.Main(func() {
@@ -759,6 +767,14 @@ func (tf *TokenField) WithGestureRecognizers(items ...GestureRecognizerProvider)
 	return tf
 }
 
+// WithExclusiveGestureBehavior sets declares whether gesture recognizers should be exclusive in this view and its subviews.
+func (tf *TokenField) WithExclusiveGestureBehavior(exclusiveGestureBehavior ViewExclusiveGestureBehavior) *TokenField {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setExclusiveGestureBehavior:"), exclusiveGestureBehavior)
+	})
+	return tf
+}
+
 // WithAllowedTouchTypes sets the allowed touch types.
 func (tf *TokenField) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *TokenField {
 	purego.Main(func() {
@@ -820,6 +836,15 @@ func (tf *TokenField) WithHorizontalContentSizeConstraintActive(horizontalConten
 func (tf *TokenField) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *TokenField {
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
+	return tf
+}
+
+// WithTextSelectionManager sets the text selection manager for this view.
+func (tf *TokenField) WithTextSelectionManager(textSelectionManager *TextSelectionManager) *TokenField {
+	defer runtime.KeepAlive(textSelectionManager)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setTextSelectionManager:"), objref.IDOf(textSelectionManager))
 	})
 	return tf
 }

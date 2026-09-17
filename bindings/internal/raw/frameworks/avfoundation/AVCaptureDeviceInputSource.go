@@ -10,8 +10,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A distinct input source on a capture device.
-//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avcapturedeviceinputsource
 type AVCaptureDeviceInputSource struct {
 	foundation.NSObject

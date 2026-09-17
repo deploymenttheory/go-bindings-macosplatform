@@ -11,8 +11,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An object that represents a subprocess of the current process.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nstask
 type NSTask struct {
 	NSObject
@@ -70,6 +68,7 @@ func NSTaskFromID(id objc.ID) *NSTask {
 	return o
 }
 
+// Returns an initialized process object with the environment of the current process. If you need to modify the environment of a process, use alloc and init, and then set up the environment before launching the new process. Otherwise, use the class method “NSTask/launchedProcess(launchPath:arguments:)“ to create and run the process. - Returns: An initialized process object with the environment of the current process.
 func (o *NSTask) Init() *NSTask {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTaskSelInit)
 	if _ret != 0 {
@@ -78,6 +77,7 @@ func (o *NSTask) Init() *NSTask {
 	return NSTaskFromID(_ret)
 }
 
+// Runs the process with the current environment.
 func (o *NSTask) LaunchAndReturnError() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSTaskSelLaunchAndReturnError, unsafe.Pointer(&_nsErr))
@@ -87,24 +87,29 @@ func (o *NSTask) LaunchAndReturnError() (bool, error) {
 	return _ret, nil
 }
 
+// Sends an interrupt signal to the receiver and all of its subtasks. If the task terminates as a result, which is the default behavior, an `NSTaskDidTerminateNotification` gets sent to the default notification center. This method has no effect if the receiver was already launched and has already finished executing. If the system hasn't launched the receiver, this method raises an `NSInvalidArgumentException`. It isn't always possible to interrupt the receiver because it might be ignoring the interrupt signal. This method sends `SIGINT`.
 func (o *NSTask) Interrupt() {
 	o.Ptr().Send(_nSTaskSelInterrupt)
 }
 
+// Sends a terminate signal to the receiver and all of its subtasks. If the task terminates as a result, which is the default behavior, an `NSTaskDidTerminateNotification` gets sent to the default notification center. This method has no effect if the receiver was already launched and has already finished executing. If the receiver hasn't been launched yet, this method raises an `NSInvalidArgumentException`. It's not always possible to terminate the receiver because it might be ignoring the terminate signal. This method sends `SIGTERM`.
 func (o *NSTask) Terminate() {
 	o.Ptr().Send(_nSTaskSelTerminate)
 }
 
+// Suspends execution of the receiver task. Multiple `suspend` messages can be sent, but they must be balanced with an equal number of `resume` messages before the task resumes execution. - Returns: `YES` if the receiver was successfully suspended, `NO` otherwise.
 func (o *NSTask) Suspend() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTaskSelSuspend)
 	return _ret
 }
 
+// Resumes execution of a suspended task. If the system sent multiple `suspend` messages to the receiver, an equal number of `resume` messages must be sent before the task resumes execution. - Returns: `YES` if the receiver was able to resume execution, `NO` otherwise.
 func (o *NSTask) Resume() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTaskSelResume)
 	return _ret
 }
 
+// The receiver's executable.
 func (o *NSTask) ExecutableURL() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTaskSelExecutableURL)
 	if _ret != 0 {
@@ -117,6 +122,7 @@ func (o *NSTask) SetExecutableURL(executableURL *NSURL) {
 	o.Ptr().Send(_nSTaskSelSetExecutableURL, executableURL.Ptr())
 }
 
+// The command arguments that the system uses to launch the executable. The `NSTask` object converts both `path` and the strings in `arguments` to appropriate C-style strings (using `fileSystemRepresentation`) before passing them to the task through `argv[]`. The strings in `arguments` don't undergo shell expansion, so you don't need to do special quoting, and shell variables, such as `$PWD`, aren't resolved.
 func (o *NSTask) Arguments() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTaskSelArguments)
 	if _ret != 0 {
@@ -129,6 +135,7 @@ func (o *NSTask) SetArguments(arguments *NSArray[*NSString]) {
 	o.Ptr().Send(_nSTaskSelSetArguments, arguments.Ptr())
 }
 
+// The environment for the receiver. If this method isn't used, the environment is inherited from the process that created the receiver. This method raises an `NSInvalidArgumentException` if the system has launched the receiver.
 func (o *NSTask) Environment() *NSDictionary[*NSString, *NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTaskSelEnvironment)
 	if _ret != 0 {
@@ -141,6 +148,7 @@ func (o *NSTask) SetEnvironment(environment *NSDictionary[*NSString, *NSString])
 	o.Ptr().Send(_nSTaskSelSetEnvironment, environment.Ptr())
 }
 
+// The current directory for the receiver.
 func (o *NSTask) CurrentDirectoryURL() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTaskSelCurrentDirectoryURL)
 	if _ret != 0 {
@@ -153,6 +161,7 @@ func (o *NSTask) SetCurrentDirectoryURL(currentDirectoryURL *NSURL) {
 	o.Ptr().Send(_nSTaskSelSetCurrentDirectoryURL, currentDirectoryURL.Ptr())
 }
 
+// The launch requirement data for the receiver.
 func (o *NSTask) LaunchRequirementData() *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTaskSelLaunchRequirementData)
 	if _ret != 0 {
@@ -165,6 +174,7 @@ func (o *NSTask) SetLaunchRequirementData(launchRequirementData *NSData) {
 	o.Ptr().Send(_nSTaskSelSetLaunchRequirementData, launchRequirementData.Ptr())
 }
 
+// The standard input for the receiver. If this is an `NSPipe` object, launching the receiver automatically closes the read end of the pipe in the current task. Don't create a handle for the pipe and pass that as the argument, or the read end of the pipe won't be closed automatically. If this method isn't used, the standard input is inherited from the process that created the receiver. This method raises an `NSInvalidArgumentException` if the system has launched the receiver.
 func (o *NSTask) StandardInput() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTaskSelStandardInput)
 	return _ret
@@ -174,6 +184,7 @@ func (o *NSTask) SetStandardInput(standardInput objc.ID) {
 	o.Ptr().Send(_nSTaskSelSetStandardInput, standardInput)
 }
 
+// The standard output for the receiver. If this is an `NSPipe` object, launching the receiver automatically closes the write end of the pipe in the current task. Don't create a handle for the pipe and pass that as the argument, or the write end of the pipe won't be closed automatically. If this method isn't used, the standard output is inherited from the process that created the receiver. This method raises an `NSInvalidArgumentException` if the system has launched the receiver.
 func (o *NSTask) StandardOutput() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTaskSelStandardOutput)
 	return _ret
@@ -183,6 +194,7 @@ func (o *NSTask) SetStandardOutput(standardOutput objc.ID) {
 	o.Ptr().Send(_nSTaskSelSetStandardOutput, standardOutput)
 }
 
+// The standard error for the receiver. If this is an `NSPipe` object, launching the receiver automatically closes the write end of the pipe in the current task. Don't create a handle for the pipe and pass that as the argument, or the system won't automatically close the write end of the pipe. If this method isn't used, the standard error is inherited from the process that created the receiver. This method raises an `NSInvalidArgumentException` if the system has launched the receiver.
 func (o *NSTask) StandardError() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTaskSelStandardError)
 	return _ret
@@ -192,26 +204,31 @@ func (o *NSTask) SetStandardError(standardError objc.ID) {
 	o.Ptr().Send(_nSTaskSelSetStandardError, standardError)
 }
 
+// The receiver's process identifier.
 func (o *NSTask) ProcessIdentifier() int {
 	_ret := objc.Send[int](o.Ptr(), _nSTaskSelProcessIdentifier)
 	return _ret
 }
 
+// A status that indicates whether the receiver is still running.
 func (o *NSTask) IsRunning() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTaskSelIsRunning)
 	return _ret
 }
 
+// The exit status the receiver's executable returns. Each task defines and documents how your app should interpret the return value. For example, many commands return 0 if they complete successfully or an error code if they don't. You'll need to look at the documentation for that task to learn what values it returns under what circumstances. This method raises an `NSInvalidArgumentException` if the receiver is still running. Verify that the receiver isn't running before you use it.
 func (o *NSTask) TerminationStatus() int {
 	_ret := objc.Send[int](o.Ptr(), _nSTaskSelTerminationStatus)
 	return _ret
 }
 
+// The reason the system terminated the task. The possible values are described in `NSTaskTerminationReason`.
 func (o *NSTask) TerminationReason() NSTaskTerminationReason {
 	_ret := objc.Send[NSTaskTerminationReason](o.Ptr(), _nSTaskSelTerminationReason)
 	return _ret
 }
 
+// A completion block the system invokes when the task completes. The system passes the task object to the block to allow access to the task parameters, for example to determine if the task completed successfully. This block isn't guaranteed to be fully executed prior to `waitUntilExit` returning. Setting the block to nil is valid, and stops the previous block from being invoked, as long as it hasn't started in any way. Only one termination handler block can be set at any time. If a terminationHandler is set on an NSTask, the NSTaskDidTerminateNotification notification is not posted for that task.
 func (o *NSTask) TerminationHandler() objc.Block {
 	_ret := objc.Send[objc.Block](o.Ptr(), _nSTaskSelTerminationHandler)
 	return _ret
@@ -231,6 +248,7 @@ func (o *NSTask) SetTerminationHandler(terminationHandler func(*NSTask)) {
 	o.Ptr().Send(_nSTaskSelSetTerminationHandler, __block_terminationHandler)
 }
 
+// The default quality of service level the system applies to operations the task executes.
 func (o *NSTask) QualityOfService() NSQualityOfService {
 	_ret := objc.Send[NSQualityOfService](o.Ptr(), _nSTaskSelQualityOfService)
 	return _ret
@@ -240,6 +258,7 @@ func (o *NSTask) SetQualityOfService(qualityOfService NSQualityOfService) {
 	o.Ptr().Send(_nSTaskSelSetQualityOfService, qualityOfService)
 }
 
+// Creates and runs a task with a specified executable and arguments. - Parameter url: The URL for the executable. - Parameter arguments: An array of `NSString` objects that supplies the arguments to the task. - Parameter error: If an error occurs, upon return contains an `NSError` object that describes the problem. - Parameter terminationHandler: The system invokes this completion block when the task has completed. - Returns: An initialized `NSTask` object with the environment of the current process.
 func NSTaskLaunchedTaskWithExecutableURLArgumentsErrorTerminationHandler(url *NSURL, arguments *NSArray[*NSString], error_ unsafe.Pointer, terminationHandler func(*NSTask)) *NSTask {
 	var __block_terminationHandler objc.Block
 	if terminationHandler != nil {
@@ -258,15 +277,18 @@ func NSTaskLaunchedTaskWithExecutableURLArgumentsErrorTerminationHandler(url *NS
 	return NSTaskFromID(_ret)
 }
 
+// Blocks the process until the receiver is finished. This method first checks to see if the receiver is still running using `isRunning`. Then it polls the current run loop using `NSDefaultRunLoopMode` until the task completes. @TabNavigator { @Tab("Swift") { ```swift let task: NSTask = // Create and initialize a task task.launch() task.waitUntilExit() let status = task.terminationStatus if status == 0 { print("Task succeeded.") } else { print("Task failed.") } ``` } @Tab("Objective-C") { ```objc NSTask *task = // Create and initialize a task [task launch]; [task waitUntilExit]; int status = [task terminationStatus]; if (status == 0) { NSLog(@"Task succeeded."); } else { NSLog(@"Task failed."); } ``` } } `waitUntilExit` does not guarantee that the `terminationHandler` block has been fully executed before `waitUntilExit` returns.
 func (o *NSTask) WaitUntilExit() {
 	o.Ptr().Send(_nSTaskSelWaitUntilExit)
 }
 
+// Launches the task represented by the receiver. @DeprecationSummary { Use “run()“ instead. } Raises an `NSInvalidArgumentException` if the launch path has not been set or is invalid or if it fails to create a process.
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
 func (o *NSTask) Launch() {
 	o.Ptr().Send(_nSTaskSelLaunch)
 }
 
+// Creates and launches a task with a specified executable and arguments. @deprecated Use `launchedTaskWithExecutableURL:arguments:error:terminationHandler:` instead. The task inherits its environment from the process that invokes this method. The `NSTask` object converts both `path` and the strings in `arguments` to appropriate C-style strings (using `fileSystemRepresentation`) before passing them to the task via `argv[]`. The strings in `arguments` don't undergo shell expansion, so you don't need to do special quoting, and shell variables, such as `$PWD`, aren't resolved. - Parameter path: The path to the executable. - Parameter arguments: An array of `NSString` objects that supplies the arguments to the task. - Returns: An initialized `NSTask` object with the supplied `arguments`.
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
 func NSTaskLaunchedTaskWithLaunchPathArguments(path *NSString, arguments *NSArray[*NSString]) *NSTask {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTask), _nSTaskSelLaunchedTaskWithLaunchPathArguments, path.Ptr(), arguments.Ptr())
@@ -276,24 +298,32 @@ func NSTaskLaunchedTaskWithLaunchPathArguments(path *NSString, arguments *NSArra
 	return NSTaskFromID(_ret)
 }
 
+// Sets the receiver's executable. @deprecated Use `executableURL` instead.
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
-func (o *NSTask) LaunchPath() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSTaskSelLaunchPath)
-	return _ret
+func (o *NSTask) LaunchPath() *NSString {
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTaskSelLaunchPath)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSStringFromID(_ret)
 }
 
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
-func (o *NSTask) SetLaunchPath(launchPath unsafe.Pointer) {
-	o.Ptr().Send(_nSTaskSelSetLaunchPath, launchPath)
+func (o *NSTask) SetLaunchPath(launchPath *NSString) {
+	o.Ptr().Send(_nSTaskSelSetLaunchPath, launchPath.Ptr())
+}
+
+// Sets the current directory for the receiver. @deprecated Use `currentDirectoryURL` instead. If this method isn't used, the current directory is inherited from the process that created the receiver. This method raises an `NSInvalidArgumentException` if the receiver has already been launched.
+// Deprecated: since macOS API_TO_BE_DEPRECATED.
+func (o *NSTask) CurrentDirectoryPath() *NSString {
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTaskSelCurrentDirectoryPath)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSStringFromID(_ret)
 }
 
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
-func (o *NSTask) CurrentDirectoryPath() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSTaskSelCurrentDirectoryPath)
-	return _ret
-}
-
-// Deprecated: since macOS API_TO_BE_DEPRECATED.
-func (o *NSTask) SetCurrentDirectoryPath(currentDirectoryPath unsafe.Pointer) {
-	o.Ptr().Send(_nSTaskSelSetCurrentDirectoryPath, currentDirectoryPath)
+func (o *NSTask) SetCurrentDirectoryPath(currentDirectoryPath *NSString) {
+	o.Ptr().Send(_nSTaskSelSetCurrentDirectoryPath, currentDirectoryPath.Ptr())
 }

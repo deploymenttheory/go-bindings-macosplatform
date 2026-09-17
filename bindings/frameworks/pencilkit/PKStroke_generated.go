@@ -8,6 +8,7 @@ import (
 	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -16,8 +17,6 @@ import (
 )
 
 // Stroke is an idiomatic wrapper over the Objective-C class PKStroke.
-//
-// A structure that represents the paths, boundaries, and other properties of a stroke drawn on a canvas.
 type Stroke struct {
 	objref.Handle
 }
@@ -94,11 +93,46 @@ func NewStrokeWithInkStrokePathTransformMaskRandomSeed(ink *Ink, strokePath *Str
 	return strokeAdopt(_id)
 }
 
+// NewStrokeWithInkStrokePathTransformMaskRandomSeedStrokeIDRenderGroupIDRenderState creates a new Stroke.
+func NewStrokeWithInkStrokePathTransformMaskRandomSeedStrokeIDRenderGroupIDRenderState(ink *Ink, strokePath *StrokePath, transform corefoundation.CGAffineTransform, mask obj.Object, randomSeed uint32, strokeID obj.Object, renderGroupID obj.Object, renderState *StrokeRenderState) *Stroke {
+	defer runtime.KeepAlive(ink)
+	defer runtime.KeepAlive(strokePath)
+	defer runtime.KeepAlive(mask)
+	defer runtime.KeepAlive(strokeID)
+	defer runtime.KeepAlive(renderGroupID)
+	defer runtime.KeepAlive(renderState)
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PKStroke")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInk:strokePath:transform:mask:randomSeed:strokeID:renderGroupID:renderState:"), objref.IDOf(ink), objref.IDOf(strokePath), transform, objref.IDOf(mask), randomSeed, objref.IDOf(strokeID), objref.IDOf(renderGroupID), objref.IDOf(renderState))
+	return strokeAdopt(_id)
+}
+
+// SubstrokeWithRange returns a copy of the stroke containing the control points in the specified range. Maintains rendering information so the returned substroke renders the same as the corresponding portion of the receiver. The returned stroke may have a `renderState` set to maintain this information.
+func (s *Stroke) SubstrokeWithRange(range_ *FloatRange) *Stroke {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(range_)
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("substrokeWithRange:"), objref.IDOf(range_))
+	return StrokeFromID(_r)
+}
+
+// RequiredContentVersion returns the PencilKit version required to use this stroke.
+func (s *Stroke) RequiredContentVersion() ContentVersion {
+	defer runtime.KeepAlive(s)
+	_r := objc.Send[ContentVersion](objref.IDOf(s), objc.RegisterName("requiredContentVersion"))
+	return _r
+}
+
 // Ink returns the ink used to render this stroke.
 func (s *Stroke) Ink() *Ink {
 	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("ink"))
 	return InkFromID(_r)
+}
+
+// StrokeID returns the unique identity of the stroke.
+func (s *Stroke) StrokeID() *foundation.UUID {
+	defer runtime.KeepAlive(s)
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("strokeID"))
+	return foundation.UUIDFromID(_r)
 }
 
 // Transform returns the affine transform of the stroke when rendered.
@@ -122,14 +156,14 @@ func (s *Stroke) Mask() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// RenderBounds returns the bounds of the rendered stroke. This includes the width & ink of the stroke after the transform is applied.
+// RenderBounds returns the bounds of the rendered stroke, including its width and ink after the transform is applied.
 func (s *Stroke) RenderBounds() corefoundation.CGRect {
 	defer runtime.KeepAlive(s)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(s), objc.RegisterName("renderBounds"))
 	return _r
 }
 
-// MaskedPathRanges returns these are the parametric parameter ranges of points in `strokePath` that intersect the stroke's mask.
+// MaskedPathRanges returns the parametric ranges of points in the stroke path that intersect the mask.
 //
 // MaskedPathRanges returns the collection as a Go slice.
 func (s *Stroke) MaskedPathRanges() []*FloatRange {
@@ -145,9 +179,16 @@ func (s *Stroke) RandomSeed() uint32 {
 	return _r
 }
 
-// RequiredContentVersion returns the PencilKit version required to use this stroke.
-func (s *Stroke) RequiredContentVersion() ContentVersion {
+// RenderGroupID returns a UUID that groups strokes for wet-ink compositing with compatible inks such as marker. Set this to the same value for a run of strokes to render them as if drawn while the previous stroke with the same ink was still wet.
+func (s *Stroke) RenderGroupID() *foundation.UUID {
 	defer runtime.KeepAlive(s)
-	_r := objc.Send[ContentVersion](objref.IDOf(s), objc.RegisterName("requiredContentVersion"))
-	return _r
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("renderGroupID"))
+	return foundation.UUIDFromID(_r)
+}
+
+// RenderState returns the render details of the stroke, such as particle positioning. Uses default rendering when nil. This may be set on substrokes returned by `-substrokeWithRange:`.
+func (s *Stroke) RenderState() *StrokeRenderState {
+	defer runtime.KeepAlive(s)
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("renderState"))
+	return StrokeRenderStateFromID(_r)
 }

@@ -22,13 +22,16 @@ var (
 	_clsPHAssetResource                           = _objcClass("PHAssetResource")
 	_pHAssetResourceSelAssetResourcesForAsset     = objc.RegisterName("assetResourcesForAsset:")
 	_pHAssetResourceSelAssetResourcesForLivePhoto = objc.RegisterName("assetResourcesForLivePhoto:")
+	_pHAssetResourceSelAssetResourceForUploadJob  = objc.RegisterName("assetResourceForUploadJob:")
 	_pHAssetResourceSelType                       = objc.RegisterName("type")
 	_pHAssetResourceSelAssetLocalIdentifier       = objc.RegisterName("assetLocalIdentifier")
 	_pHAssetResourceSelOriginalFilename           = objc.RegisterName("originalFilename")
+	_pHAssetResourceSelFilename                   = objc.RegisterName("filename")
 	_pHAssetResourceSelContentType                = objc.RegisterName("contentType")
 	_pHAssetResourceSelUniformTypeIdentifier      = objc.RegisterName("uniformTypeIdentifier")
 	_pHAssetResourceSelPixelWidth                 = objc.RegisterName("pixelWidth")
 	_pHAssetResourceSelPixelHeight                = objc.RegisterName("pixelHeight")
+	_pHAssetResourceSelDataSize                   = objc.RegisterName("dataSize")
 )
 
 func PHAssetResourceFromID(id objc.ID) *PHAssetResource {
@@ -59,11 +62,22 @@ func PHAssetResourceAssetResourcesForLivePhoto(livePhoto *PHLivePhoto) *foundati
 	return foundation.NSArrayFromID[*PHAssetResource](_ret)
 }
 
+// Returns the asset resource associated with the given upload job.
+func PHAssetResourceAssetResourceForUploadJob(job *PHAssetResourceUploadJob) *PHAssetResource {
+	_ret := objc.Send[objc.ID](objc.ID(_clsPHAssetResource), _pHAssetResourceSelAssetResourceForUploadJob, job.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return PHAssetResourceFromID(_ret)
+}
+
+// Describes the type of asset resource represented by this object, e.g. `photo`
 func (o *PHAssetResource) Type() PHAssetResourceType {
 	_ret := objc.Send[PHAssetResourceType](o.Ptr(), _pHAssetResourceSelType)
 	return _ret
 }
 
+// The local identifier of the asset associated with this asset resource
 func (o *PHAssetResource) AssetLocalIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHAssetResourceSelAssetLocalIdentifier)
 	if _ret != 0 {
@@ -72,6 +86,7 @@ func (o *PHAssetResource) AssetLocalIdentifier() *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
+// Deprecated: Use filename instead
 func (o *PHAssetResource) OriginalFilename() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHAssetResourceSelOriginalFilename)
 	if _ret != 0 {
@@ -80,7 +95,16 @@ func (o *PHAssetResource) OriginalFilename() *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
-// The type of data associated with this asset resource (the data can be retrieved via PHAssetResourceManager)
+// The filename associated with this asset resource (if any)
+func (o *PHAssetResource) Filename() *foundation.NSString {
+	_ret := objc.Send[objc.ID](o.Ptr(), _pHAssetResourceSelFilename)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSStringFromID(_ret)
+}
+
+// The content type of the data associated with this asset resource (the data can be retrieved via `PHAssetResourceManager`)
 func (o *PHAssetResource) ContentType() *uniformtypeidentifiers.UTType {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHAssetResourceSelContentType)
 	if _ret != 0 {
@@ -106,4 +130,13 @@ func (o *PHAssetResource) PixelWidth() int {
 func (o *PHAssetResource) PixelHeight() int {
 	_ret := objc.Send[int](o.Ptr(), _pHAssetResourceSelPixelHeight)
 	return _ret
+}
+
+// The size of the resource in bytes if known, `nil` if unavailable (may not be available until resource download/processing is complete)
+func (o *PHAssetResource) DataSize() *foundation.NSNumber {
+	_ret := objc.Send[objc.ID](o.Ptr(), _pHAssetResourceSelDataSize)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSNumberFromID(_ret)
 }

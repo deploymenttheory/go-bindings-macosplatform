@@ -40,6 +40,32 @@ func (e ContainerState) String() string {
 	}
 }
 
+type DataCacheMode int64
+
+const (
+	// A mode that indicates no active caching.
+	DataCacheModeNone DataCacheMode = 0
+	// A mode that indicates read access with caching enabled.
+	DataCacheModeReadWithCache DataCacheMode = 1
+	// A mode that indicates read-write access with caching enabled.
+	DataCacheModeReadWriteWithCache DataCacheMode = 2
+)
+
+// String returns the DataCacheMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DataCacheMode) String() string {
+	switch e {
+	case DataCacheModeNone:
+		return "DataCacheModeNone"
+	case DataCacheModeReadWithCache:
+		return "DataCacheModeReadWithCache"
+	case DataCacheModeReadWriteWithCache:
+		return "DataCacheModeReadWriteWithCache"
+	default:
+		return fmt.Sprintf("DataCacheMode(%d)", int64(e))
+	}
+}
+
 // An enumeration of types of extents.
 type ExtentType int64
 
@@ -48,6 +74,8 @@ const (
 	ExtentTypeData ExtentType = 0
 	// An extent type to indicate uninitialized data.
 	ExtentTypeZeroFill ExtentType = 1
+	// An extent type to indicate read-only data.
+	ExtentTypeReadOnly ExtentType = 2
 )
 
 // String returns the ExtentType constant's name, or its numeric form when the
@@ -58,6 +86,8 @@ func (e ExtentType) String() string {
 		return "ExtentTypeData"
 	case ExtentTypeZeroFill:
 		return "ExtentTypeZeroFill"
+	case ExtentTypeReadOnly:
+		return "ExtentTypeReadOnly"
 	default:
 		return fmt.Sprintf("ExtentType(%d)", int64(e))
 	}
@@ -238,6 +268,70 @@ func (e ItemType) String() string {
 		return "ItemTypeSocket"
 	default:
 		return fmt.Sprintf("ItemType(%d)", int64(e))
+	}
+}
+
+type KernelCacheCoherencyAction int64
+
+const (
+	// An action to flush dirty data from cache to storage, preserving cache contents.
+	KernelCacheCoherencyActionPush KernelCacheCoherencyAction = 0
+	// An action to flush dirty data to storage and invalidate (clear) the cache.
+	KernelCacheCoherencyActionPushInvalidate KernelCacheCoherencyAction = 1
+	// An action to invalidate (clear) the cache, discarding any dirty data without writing to storage.
+	KernelCacheCoherencyActionInvalidate KernelCacheCoherencyAction = 2
+	// An action to update the coherency mode while keeping the cache valid, requiring no push or invalidation.
+	KernelCacheCoherencyActionUpdate KernelCacheCoherencyAction = 3
+	// An action to invalidate all caches, revoke all access to the item, and trigger vnode reclamation. Use this action when the module determines that an item no longer exists or is no longer accessible. Common scenarios include: - Another client deleted the item, as detected via server notification. - The module received a server callback indicating the file's absence.
+	KernelCacheCoherencyActionRevoke KernelCacheCoherencyAction = 4
+)
+
+// String returns the KernelCacheCoherencyAction constant's name, or its numeric form when the
+// value is not a known constant.
+func (e KernelCacheCoherencyAction) String() string {
+	switch e {
+	case KernelCacheCoherencyActionPush:
+		return "KernelCacheCoherencyActionPush"
+	case KernelCacheCoherencyActionPushInvalidate:
+		return "KernelCacheCoherencyActionPushInvalidate"
+	case KernelCacheCoherencyActionInvalidate:
+		return "KernelCacheCoherencyActionInvalidate"
+	case KernelCacheCoherencyActionUpdate:
+		return "KernelCacheCoherencyActionUpdate"
+	case KernelCacheCoherencyActionRevoke:
+		return "KernelCacheCoherencyActionRevoke"
+	default:
+		return fmt.Sprintf("KernelCacheCoherencyAction(%d)", int64(e))
+	}
+}
+
+type KernelCacheCoherencyType int64
+
+const (
+	// A type that indicates all I/O goes directly to storage, without caching.
+	KernelCacheCoherencyTypeNoCache KernelCacheCoherencyType = 0
+	// A type that indicates that writes bypass the cache and go directly to storage.
+	KernelCacheCoherencyTypeReadCache KernelCacheCoherencyType = 1
+	// A type that indicates writes update cache and storage synchronously.
+	KernelCacheCoherencyTypeWriteThrough KernelCacheCoherencyType = 2
+	// A type that indicates writes immediately update the cache only, followed by a deferred write to storage.
+	KernelCacheCoherencyTypeWriteBack KernelCacheCoherencyType = 3
+)
+
+// String returns the KernelCacheCoherencyType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e KernelCacheCoherencyType) String() string {
+	switch e {
+	case KernelCacheCoherencyTypeNoCache:
+		return "KernelCacheCoherencyTypeNoCache"
+	case KernelCacheCoherencyTypeReadCache:
+		return "KernelCacheCoherencyTypeReadCache"
+	case KernelCacheCoherencyTypeWriteThrough:
+		return "KernelCacheCoherencyTypeWriteThrough"
+	case KernelCacheCoherencyTypeWriteBack:
+		return "KernelCacheCoherencyTypeWriteBack"
+	default:
+		return fmt.Sprintf("KernelCacheCoherencyType(%d)", int64(e))
 	}
 }
 
@@ -587,7 +681,7 @@ const (
 	AccessWriteData AccessMask = 4
 	// The file system allows adding files.
 	AccessAddFile AccessMask = 4
-	// The file system allows file executuion.
+	// The file system allows file execution.
 	AccessExecute AccessMask = 8
 	// The file system allows searching files.
 	AccessSearch AccessMask = 8
@@ -735,6 +829,40 @@ func (e CompleteIOFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
+type DataCacheErrorCode int64
+
+const (
+	// The requested cache mode and coherency type combination is invalid.
+	ErrorInvalidCacheModeCoherency DataCacheErrorCode = 4510
+	// The cache transition is not allowed. This error occurs when attempting an invalid transition, such as using an upgrade method for a downgrade operation, or vice versa.
+	ErrorInvalidCacheTransition DataCacheErrorCode = 4511
+	// Failed to flush dirty cached data to storage.
+	ErrorCacheFlushFailed DataCacheErrorCode = 4512
+	// Failed to invalidate (clear) cached data.
+	ErrorCacheInvalidationFailed DataCacheErrorCode = 4513
+	// A conflicting cache operation is in progress. This error occurs when multiple cache operations on the same item conflict, such as attempting to change cache mode while I/O is active.
+	ErrorCacheOperationConflict DataCacheErrorCode = 4514
+)
+
+// String returns the DataCacheErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DataCacheErrorCode) String() string {
+	switch e {
+	case ErrorInvalidCacheModeCoherency:
+		return "ErrorInvalidCacheModeCoherency"
+	case ErrorInvalidCacheTransition:
+		return "ErrorInvalidCacheTransition"
+	case ErrorCacheFlushFailed:
+		return "ErrorCacheFlushFailed"
+	case ErrorCacheInvalidationFailed:
+		return "ErrorCacheInvalidationFailed"
+	case ErrorCacheOperationConflict:
+		return "ErrorCacheOperationConflict"
+	default:
+		return fmt.Sprintf("DataCacheErrorCode(%d)", int64(e))
+	}
+}
+
 // Options that affect the behavior of deactivate methods.
 // Bitmask — values may be combined with |.
 type DeactivateOptions int64
@@ -809,7 +937,7 @@ const (
 	ItemDeactivationAlways ItemDeactivationOptions = 18446744073709551615
 	// An option to process deactivation for open-unlinked items at the moment of last close.
 	ItemDeactivationForRemovedItems ItemDeactivationOptions = 1
-	// An option to process deactivation for for files with preallocated space. This option facilitates a sort of trim-on-close behavior. It is only meaningful for volumes that conform to ``FSVolume/PreallocateOperations``.
+	// An option to process deactivation for for files with preallocated space. This option facilitates a sort of trim-on-close behavior. It is only meaningful for volumes that conform to ``FSVolume/PreallocateHandler``.
 	ItemDeactivationForPreallocatedItems ItemDeactivationOptions = 2
 )
 
@@ -863,7 +991,7 @@ const (
 	PreallocateFlagsAll PreallocateFlags = 4
 	// Allocates space that isn't freed when deleting the descriptor. This space remains allocated even after calling `close(2)`.
 	PreallocateFlagsPersist PreallocateFlags = 8
-	// Allocates space from the physical end of file. When implementing this behavior, ignore any offset in the preallocate call. This flag is currently set for all ``FSVolume/PreallocateOperations/preallocateSpace(for:at:length:flags:replyHandler:)`` calls.
+	// Allocates space from the physical end of file. When implementing this behavior, ignore any offset in the preallocate call. This flag is currently set for all ``FSVolume/PreallocateHandler/preallocateSpace(for:at:length:flags:context:replyHandler:)`` calls.
 	PreallocateFlagsFromEOF PreallocateFlags = 16
 )
 
@@ -887,6 +1015,28 @@ func (e PreallocateFlags) String() string {
 		return "0"
 	}
 	return strings.Join(parts, "|")
+}
+
+type SeekRegion uint64
+
+const (
+	// Seek the next hole region. When there are no more hole regions past the supplied `offset`, the current file size (end-of-file offset) should be returned.
+	SeekRegionHole SeekRegion = 1
+	// Seek the next data region. When there are no more data regions past the supplied `offset`, an error code `ENXIO` should be returned.
+	SeekRegionData SeekRegion = 2
+)
+
+// String returns the SeekRegion constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SeekRegion) String() string {
+	switch e {
+	case SeekRegionHole:
+		return "SeekRegionHole"
+	case SeekRegionData:
+		return "SeekRegionData"
+	default:
+		return fmt.Sprintf("SeekRegion(%d)", int64(e))
+	}
 }
 
 type SetXattrPolicy uint64
@@ -1548,27 +1698,55 @@ func (e QosClass) String() string {
 	}
 }
 
+type TaskSharedRegionStubs uint8
+
+const (
+	TaskSharedRegionStubsDev  TaskSharedRegionStubs = 1
+	TaskSharedRegionStubsProd TaskSharedRegionStubs = 2
+)
+
+// String returns the TaskSharedRegionStubs constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TaskSharedRegionStubs) String() string {
+	switch e {
+	case TaskSharedRegionStubsDev:
+		return "TaskSharedRegionStubsDev"
+	case TaskSharedRegionStubsProd:
+		return "TaskSharedRegionStubsProd"
+	default:
+		return fmt.Sprintf("TaskSharedRegionStubs(%d)", int64(e))
+	}
+}
+
 type VirtualMemoryGuardExceptionCode uint32
 
 const (
-	KGUARD_EXC_DEALLOC_GAP                   VirtualMemoryGuardExceptionCode = 1
-	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        VirtualMemoryGuardExceptionCode = 2
-	KGUARD_EXC_RECLAIM_INDEX_FAILURE         VirtualMemoryGuardExceptionCode = 4
-	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    VirtualMemoryGuardExceptionCode = 8
-	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    VirtualMemoryGuardExceptionCode = 9
-	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         VirtualMemoryGuardExceptionCode = 10
-	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         VirtualMemoryGuardExceptionCode = 11
-	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  VirtualMemoryGuardExceptionCode = 12
-	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    VirtualMemoryGuardExceptionCode = 13
-	KGUARD_EXC_SEC_ACCESS_FAULT              VirtualMemoryGuardExceptionCode = 98
-	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        VirtualMemoryGuardExceptionCode = 99
-	KGUARD_EXC_SEC_COPY_DENIED               VirtualMemoryGuardExceptionCode = 100
-	KGUARD_EXC_SEC_SHARING_DENIED            VirtualMemoryGuardExceptionCode = 101
-	KGUARD_EXC_MTE_SYNC_FAULT                VirtualMemoryGuardExceptionCode = 200
-	KGUARD_EXC_MTE_ASYNC_USER_FAULT          VirtualMemoryGuardExceptionCode = 201
-	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          VirtualMemoryGuardExceptionCode = 202
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT VirtualMemoryGuardExceptionCode = 203
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT VirtualMemoryGuardExceptionCode = 204
+	KGUARD_EXC_DEALLOC_GAP                  VirtualMemoryGuardExceptionCode = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE       VirtualMemoryGuardExceptionCode = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE        VirtualMemoryGuardExceptionCode = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE   VirtualMemoryGuardExceptionCode = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE   VirtualMemoryGuardExceptionCode = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE        VirtualMemoryGuardExceptionCode = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE        VirtualMemoryGuardExceptionCode = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION VirtualMemoryGuardExceptionCode = 12
+	// Guard exception sent to a thread when a CoW defeatured map attempts to copy memory which is not permitted by system policy.
+	KGUARD_EXC_COW_DEFEATURED_COPY_DENIED VirtualMemoryGuardExceptionCode = 13
+	// Guard exception sent to a thread when it attempts to extract a given type of memory in a way which is not permitted for CoW defeatured maps.
+	KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED VirtualMemoryGuardExceptionCode = 14
+	// Guard exception sent to a thread when it attempts to copy-map a memory entry which was created for sharing by a CoW defeatured map.
+	KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED VirtualMemoryGuardExceptionCode = 15
+	KGUARD_EXC_COW_DEFEATURED_FIRST                    VirtualMemoryGuardExceptionCode = 13
+	KGUARD_EXC_COW_DEFEATURED_LAST                     VirtualMemoryGuardExceptionCode = 15
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY              VirtualMemoryGuardExceptionCode = 16
+	KGUARD_EXC_SEC_ACCESS_FAULT                        VirtualMemoryGuardExceptionCode = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT                  VirtualMemoryGuardExceptionCode = 99
+	KGUARD_EXC_SEC_COPY_DENIED                         VirtualMemoryGuardExceptionCode = 100
+	KGUARD_EXC_SEC_SHARING_DENIED                      VirtualMemoryGuardExceptionCode = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                          VirtualMemoryGuardExceptionCode = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT                    VirtualMemoryGuardExceptionCode = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT                    VirtualMemoryGuardExceptionCode = 202
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT           VirtualMemoryGuardExceptionCode = 203
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT           VirtualMemoryGuardExceptionCode = 204
 )
 
 // String returns the VirtualMemoryGuardExceptionCode constant's name, or its numeric form when the
@@ -1591,6 +1769,12 @@ func (e VirtualMemoryGuardExceptionCode) String() string {
 		return "KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE"
 	case KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION:
 		return "KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION"
+	case KGUARD_EXC_COW_DEFEATURED_COPY_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_COPY_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED"
 	case KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY:
 		return "KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY"
 	case KGUARD_EXC_SEC_ACCESS_FAULT:

@@ -243,126 +243,126 @@ func (dc *DateComponents) IsValidDateInCalendar(calendar *Calendar) bool {
 	return _r
 }
 
-// Calendar returns the calendar.
+// Calendar returns the calendar used to interpret the date components.
 func (dc *DateComponents) Calendar() *Calendar {
 	defer runtime.KeepAlive(dc)
 	_r := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("calendar"))
 	return CalendarFromID(_r)
 }
 
-// TimeZone returns the time zone.
+// TimeZone returns the time zone used to interpret the date components.
 func (dc *DateComponents) TimeZone() *TimeZone {
 	defer runtime.KeepAlive(dc)
 	_r := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("timeZone"))
 	return TimeZoneFromID(_r)
 }
 
-// Era returns the era.
+// Era returns the number of eras.
 func (dc *DateComponents) Era() int {
 	defer runtime.KeepAlive(dc)
 	_r := objc.Send[int](objref.IDOf(dc), objc.RegisterName("era"))
 	return _r
 }
 
-// Year returns the year.
+// Year returns the number of years.
 func (dc *DateComponents) Year() int {
 	defer runtime.KeepAlive(dc)
 	_r := objc.Send[int](objref.IDOf(dc), objc.RegisterName("year"))
 	return _r
 }
 
-// Month returns the month.
+// Month returns the number of months.
 func (dc *DateComponents) Month() int {
 	defer runtime.KeepAlive(dc)
 	_r := objc.Send[int](objref.IDOf(dc), objc.RegisterName("month"))
 	return _r
 }
 
-// Day returns the day.
+// Day returns the number of days.
 func (dc *DateComponents) Day() int {
 	defer runtime.KeepAlive(dc)
 	_r := objc.Send[int](objref.IDOf(dc), objc.RegisterName("day"))
 	return _r
 }
 
-// Hour returns the hour.
+// Hour returns the number of hour units for the receiver.
 func (dc *DateComponents) Hour() int {
 	defer runtime.KeepAlive(dc)
 	_r := objc.Send[int](objref.IDOf(dc), objc.RegisterName("hour"))
 	return _r
 }
 
-// Minute returns the minute.
+// Minute returns the number of minute units for the receiver.
 func (dc *DateComponents) Minute() int {
 	defer runtime.KeepAlive(dc)
 	_r := objc.Send[int](objref.IDOf(dc), objc.RegisterName("minute"))
 	return _r
 }
 
-// Second returns the second.
+// Second returns the number of second units for the receiver.
 func (dc *DateComponents) Second() int {
 	defer runtime.KeepAlive(dc)
 	_r := objc.Send[int](objref.IDOf(dc), objc.RegisterName("second"))
 	return _r
 }
 
-// Nanosecond returns the nanosecond.
+// Nanosecond returns the number of nanosecond units for the receiver.
 func (dc *DateComponents) Nanosecond() int {
 	defer runtime.KeepAlive(dc)
 	_r := objc.Send[int](objref.IDOf(dc), objc.RegisterName("nanosecond"))
 	return _r
 }
 
-// Weekday returns the weekday.
+// Weekday returns the number of the weekdays.
 func (dc *DateComponents) Weekday() int {
 	defer runtime.KeepAlive(dc)
 	_r := objc.Send[int](objref.IDOf(dc), objc.RegisterName("weekday"))
 	return _r
 }
 
-// WeekdayOrdinal returns the weekday ordinal.
+// WeekdayOrdinal returns the ordinal number of weekdays.
 func (dc *DateComponents) WeekdayOrdinal() int {
 	defer runtime.KeepAlive(dc)
 	_r := objc.Send[int](objref.IDOf(dc), objc.RegisterName("weekdayOrdinal"))
 	return _r
 }
 
-// Quarter returns the quarter.
+// Quarter returns the number of quarters.
 func (dc *DateComponents) Quarter() int {
 	defer runtime.KeepAlive(dc)
 	_r := objc.Send[int](objref.IDOf(dc), objc.RegisterName("quarter"))
 	return _r
 }
 
-// WeekOfMonth returns the week of month.
+// WeekOfMonth returns the week number of the months.
 func (dc *DateComponents) WeekOfMonth() int {
 	defer runtime.KeepAlive(dc)
 	_r := objc.Send[int](objref.IDOf(dc), objc.RegisterName("weekOfMonth"))
 	return _r
 }
 
-// WeekOfYear returns the week of year.
+// WeekOfYear returns the ISO 8601 week date of the year.
 func (dc *DateComponents) WeekOfYear() int {
 	defer runtime.KeepAlive(dc)
 	_r := objc.Send[int](objref.IDOf(dc), objc.RegisterName("weekOfYear"))
 	return _r
 }
 
-// YearForWeekOfYear returns the year for week of year.
+// YearForWeekOfYear returns the ISO 8601 week-numbering year.
 func (dc *DateComponents) YearForWeekOfYear() int {
 	defer runtime.KeepAlive(dc)
 	_r := objc.Send[int](objref.IDOf(dc), objc.RegisterName("yearForWeekOfYear"))
 	return _r
 }
 
-// DayOfYear returns the day of year.
+// DayOfYear returns the day of the year value of the date components.
 func (dc *DateComponents) DayOfYear() int {
 	defer runtime.KeepAlive(dc)
 	_r := objc.Send[int](objref.IDOf(dc), objc.RegisterName("dayOfYear"))
 	return _r
 }
 
-// IsLeapMonth reports whether the object is leap month.
+// IsLeapMonth reports whether the month is a leap month.
 func (dc *DateComponents) IsLeapMonth() bool {
 	defer runtime.KeepAlive(dc)
 	_r := objc.Send[bool](objref.IDOf(dc), objc.RegisterName("isLeapMonth"))
@@ -376,7 +376,7 @@ func (dc *DateComponents) IsRepeatedDay() bool {
 	return _r
 }
 
-// Date returns the date.
+// Date returns the date calculated from the current components using the stored calendar.
 func (dc *DateComponents) Date() time.Time {
 	defer runtime.KeepAlive(dc)
 	_r := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("date"))

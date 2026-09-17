@@ -23,9 +23,15 @@ type AVSampleBufferVideoRenderer struct {
 var (
 	_clsAVSampleBufferVideoRenderer                                                                   = _objcClass("AVSampleBufferVideoRenderer")
 	_aVSampleBufferVideoRendererSelFlushWithRemovalOfDisplayedImageCompletionHandler                  = objc.RegisterName("flushWithRemovalOfDisplayedImage:completionHandler:")
+	_aVSampleBufferVideoRendererSelEnqueueSampleBuffer                                                = objc.RegisterName("enqueueSampleBuffer:")
+	_aVSampleBufferVideoRendererSelFlush                                                              = objc.RegisterName("flush")
+	_aVSampleBufferVideoRendererSelRequestMediaDataWhenReadyOnQueueUsing                              = objc.RegisterName("requestMediaDataWhenReadyOnQueue:usingBlock:")
+	_aVSampleBufferVideoRendererSelStopRequestingMediaData                                            = objc.RegisterName("stopRequestingMediaData")
 	_aVSampleBufferVideoRendererSelStatus                                                             = objc.RegisterName("status")
 	_aVSampleBufferVideoRendererSelError                                                              = objc.RegisterName("error")
 	_aVSampleBufferVideoRendererSelRequiresFlushToResumeDecoding                                      = objc.RegisterName("requiresFlushToResumeDecoding")
+	_aVSampleBufferVideoRendererSelIsReadyForMoreMediaData                                            = objc.RegisterName("isReadyForMoreMediaData")
+	_aVSampleBufferVideoRendererSelHasSufficientMediaDataForReliablePlaybackStart                     = objc.RegisterName("hasSufficientMediaDataForReliablePlaybackStart")
 	_aVSampleBufferVideoRendererSelCopyDisplayedPixelBuffer                                           = objc.RegisterName("copyDisplayedPixelBuffer")
 	_aVSampleBufferVideoRendererSelExpectMinimumUpcomingSampleBufferPresentationTime                  = objc.RegisterName("expectMinimumUpcomingSampleBufferPresentationTime:")
 	_aVSampleBufferVideoRendererSelExpectMonotonicallyIncreasingUpcomingSampleBufferPresentationTimes = objc.RegisterName("expectMonotonicallyIncreasingUpcomingSampleBufferPresentationTimes")
@@ -56,41 +62,80 @@ func (o *AVSampleBufferVideoRenderer) FlushWithRemovalOfDisplayedImageCompletion
 	o.Ptr().Send(_aVSampleBufferVideoRendererSelFlushWithRemovalOfDisplayedImageCompletionHandler, removeDisplayedImage, __block_handler)
 }
 
-// @property		status @abstract		The ability of the video renderer to be used for enqueueing sample buffers. @discussion		The value of this property is an AVQueuedSampleBufferRenderingStatus that indicates whether the receiver can be used for enqueueing and rendering sample buffers. When the value of this property is AVQueuedSampleBufferRenderingStatusFailed, clients can check the value of the error property to determine the failure. To resume rendering sample buffers using the video renderer after a failure, clients must first reset the status to AVQueuedSampleBufferRenderingStatusUnknown. This can be achieved by invoking -flush on the video renderer. This property is key value observable.
+// Sends a sample buffer in order to render its contents.
+func (o *AVSampleBufferVideoRenderer) EnqueueSampleBuffer(sampleBuffer unsafe.Pointer) {
+	o.Ptr().Send(_aVSampleBufferVideoRendererSelEnqueueSampleBuffer, sampleBuffer)
+}
+
+// Instructs the receiver to discard pending enqueued sample buffers.
+func (o *AVSampleBufferVideoRenderer) Flush() {
+	o.Ptr().Send(_aVSampleBufferVideoRendererSelFlush)
+}
+
+// Instructs the target to invoke a client-supplied block repeatedly, at its convenience, in order to gather sample buffers for playback.
+func (o *AVSampleBufferVideoRenderer) RequestMediaDataWhenReadyOnQueueUsing(queue *foundation.NSObject, block func()) {
+	var __block_block objc.Block
+	if block != nil {
+		__block_block = objc.NewBlock(func(_ objc.Block) {
+			block()
+		})
+		defer __block_block.Release()
+	}
+	o.Ptr().Send(_aVSampleBufferVideoRendererSelRequestMediaDataWhenReadyOnQueueUsing, queue.Ptr(), __block_block)
+}
+
+// Cancels any current requestMediaDataWhenReadyOnQueue:usingBlock: call.
+func (o *AVSampleBufferVideoRenderer) StopRequestingMediaData() {
+	o.Ptr().Send(_aVSampleBufferVideoRendererSelStopRequestingMediaData)
+}
+
+// The ability of the video renderer to be used for enqueueing sample buffers. The value of this property is an AVQueuedSampleBufferRenderingStatus that indicates whether the receiver can be used for enqueueing and rendering sample buffers. When the value of this property is AVQueuedSampleBufferRenderingStatusFailed, clients can check the value of the error property to determine the failure. To resume rendering sample buffers using the video renderer after a failure, clients must first reset the status to AVQueuedSampleBufferRenderingStatusUnknown. This can be achieved by invoking -flush on the video renderer. This property is key value observable.
 func (o *AVSampleBufferVideoRenderer) Status() AVQueuedSampleBufferRenderingStatus {
 	_ret := objc.Send[AVQueuedSampleBufferRenderingStatus](o.Ptr(), _aVSampleBufferVideoRendererSelStatus)
 	return _ret
 }
 
-// @property		error @abstract		If the video renderer's status is AVQueuedSampleBufferRenderingStatusFailed, this describes the error that caused the failure. @discussion		The value of this property is an NSError that describes what caused the video renderer to no longer be able to enqueue sample buffers. If the status is not AVQueuedSampleBufferRenderingStatusFailed, the value of this property is nil.
+// If the video renderer's status is AVQueuedSampleBufferRenderingStatusFailed, this describes the error that caused the failure. The value of this property is an NSError that describes what caused the video renderer to no longer be able to enqueue sample buffers. If the status is not AVQueuedSampleBufferRenderingStatusFailed, the value of this property is nil.
 func (o *AVSampleBufferVideoRenderer) Error() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _aVSampleBufferVideoRendererSelError)
 	return _ret
 }
 
-// @property		requiresFlushToResumeDecoding @abstract		Indicates that the receiver is in a state where it requires a call to -flush to continue decoding frames. @discussion		When the application enters a state where use of video decoder resources is not permissible, the value of this property changes to YES along with the video renderer's status changing to AVQueuedSampleBufferRenderingStatusFailed. To resume rendering sample buffers using the video renderer after this property's value is YES, clients must first reset the video renderer by calling flush or flushWithRemovalOfDisplayedImage:completionHandler:. Clients can track changes to this property via AVSampleBufferVideoRendererRequiresFlushToResumeDecodingDidChangeNotification. This property is not key value observable.
+// Indicates that the receiver is in a state where it requires a call to -flush to continue decoding frames. When the application enters a state where use of video decoder resources is not permissible, the value of this property changes to YES along with the video renderer's status changing to AVQueuedSampleBufferRenderingStatusFailed. To resume rendering sample buffers using the video renderer after this property's value is YES, clients must first reset the video renderer by calling flush or flushWithRemovalOfDisplayedImage:completionHandler:. Clients can track changes to this property via AVSampleBufferVideoRendererRequiresFlushToResumeDecodingDidChangeNotification. This property is not key value observable.
 func (o *AVSampleBufferVideoRenderer) RequiresFlushToResumeDecoding() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVSampleBufferVideoRendererSelRequiresFlushToResumeDecoding)
 	return _ret
 }
 
-// @method			copyDisplayedPixelBuffer @abstract		Returns a retained reference to the pixel buffer currently displayed in the AVSampleBufferVideoRenderer's target. This will return NULL if the displayed pixel buffer is protected, no image is currently being displayed, or if the image is unavailable. @discussion		This will return NULL if the rate is non-zero.  Clients must release the pixel buffer after use. Do not write to the returned CVPixelBuffer's attachments or pixel data.
+// Indicates the readiness of the receiver to accept more sample buffers. An object conforming to AVQueuedSampleBufferRendering keeps track of the occupancy levels of its internal queues for the benefit of clients that enqueue sample buffers from non-real-time sources -- i.e., clients that can supply sample buffers faster than they are consumed, and so need to decide when to hold back. Clients enqueueing sample buffers from non-real-time sources may hold off from generating or obtaining more sample buffers to enqueue when the value of readyForMoreMediaData is NO. It is safe to call enqueueSampleBuffer: when readyForMoreMediaData is NO, but it is a bad idea to enqueue sample buffers without bound. To help with control of the non-real-time supply of sample buffers, such clients can use -requestMediaDataWhenReadyOnQueue:usingBlock in order to specify a block that the receiver should invoke whenever it's ready for sample buffers to be appended. The value of readyForMoreMediaData will often change from NO to YES asynchronously, as previously supplied sample buffers are decoded and rendered. This property is not key value observable.
+func (o *AVSampleBufferVideoRenderer) IsReadyForMoreMediaData() bool {
+	_ret := objc.Send[bool](o.Ptr(), _aVSampleBufferVideoRendererSelIsReadyForMoreMediaData)
+	return _ret
+}
+
+// Indicates whether the enqueued media data meets the renderer's preroll level. Clients should fetch the value of this property to learn if the renderer has had enough media data enqueued to start playback reliably. Starting playback when this property is NO may prevent smooth playback following an immediate start.
+func (o *AVSampleBufferVideoRenderer) HasSufficientMediaDataForReliablePlaybackStart() bool {
+	_ret := objc.Send[bool](o.Ptr(), _aVSampleBufferVideoRendererSelHasSufficientMediaDataForReliablePlaybackStart)
+	return _ret
+}
+
+// Returns a retained reference to the pixel buffer currently displayed in the AVSampleBufferVideoRenderer's target. This will return NULL if the displayed pixel buffer is protected, no image is currently being displayed, or if the image is unavailable. This will return NULL if the rate is non-zero. Clients must release the pixel buffer after use. Do not write to the returned CVPixelBuffer's attachments or pixel data.
 func (o *AVSampleBufferVideoRenderer) CopyDisplayedPixelBuffer() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _aVSampleBufferVideoRendererSelCopyDisplayedPixelBuffer)
 	return _ret
 }
 
-// @method			expectMinimumUpcomingSampleBufferPresentationTime: @abstract		Promises, for the purpose of enabling power optimizations, that future sample buffers will have PTS values no less than a specified lower-bound PTS. @discussion		Only applicable for forward playback. Sending this message and later calling -enqueueSampleBuffer: with a buffer with a lower PTS has the potential to lead to dropping that later buffer. For best results, call -expectMinimumUpcomingSampleBufferPresentationTime: regularly, in between calls to -enqueueSampleBuffer:, to advance the lower-bound PTS. Messaging -flush resets such expectations. (For example, it's OK to make this expectation, then in response to a seek back, flush and then enqueue buffers with lower PTS values.) @param			minimumUpcomingPresentationTime A lower bound on PTS values for buffers that will be passed to -enqueueSampleBuffer: in the future.
+// Promises, for the purpose of enabling power optimizations, that future sample buffers will have PTS values no less than a specified lower-bound PTS. Only applicable for forward playback. Sending this message and later calling -enqueueSampleBuffer: with a buffer with a lower PTS has the potential to lead to dropping that later buffer. For best results, call -expectMinimumUpcomingSampleBufferPresentationTime: regularly, in between calls to -enqueueSampleBuffer:, to advance the lower-bound PTS. Messaging -flush resets such expectations. (For example, it's OK to make this expectation, then in response to a seek back, flush and then enqueue buffers with lower PTS values.) - Parameter minimumUpcomingPresentationTime: A lower bound on PTS values for buffers that will be passed to -enqueueSampleBuffer: in the future.
 func (o *AVSampleBufferVideoRenderer) ExpectMinimumUpcomingSampleBufferPresentationTime(minimumUpcomingPresentationTime coremedia.CMTime) {
 	o.Ptr().Send(_aVSampleBufferVideoRendererSelExpectMinimumUpcomingSampleBufferPresentationTime, minimumUpcomingPresentationTime)
 }
 
-// @method			expectMonotonicallyIncreasingUpcomingSampleBufferPresentationTimes @abstract		Promises, for the purpose of enabling power optimizations, that future sample buffers will have monotonically increasing PTS values. @discussion		Only applicable for forward playback. Sending this message and later calling -enqueueSampleBuffer: with a buffer with a lower PTS than any previously enqueued PTS has the potential to lead to dropped buffers. Messaging -flush resets such expectations.
+// Promises, for the purpose of enabling power optimizations, that future sample buffers will have monotonically increasing PTS values. Only applicable for forward playback. Sending this message and later calling -enqueueSampleBuffer: with a buffer with a lower PTS than any previously enqueued PTS has the potential to lead to dropped buffers. Messaging -flush resets such expectations.
 func (o *AVSampleBufferVideoRenderer) ExpectMonotonicallyIncreasingUpcomingSampleBufferPresentationTimes() {
 	o.Ptr().Send(_aVSampleBufferVideoRendererSelExpectMonotonicallyIncreasingUpcomingSampleBufferPresentationTimes)
 }
 
-// @method			resetUpcomingSampleBufferPresentationTimeExpectations: @abstract		Resets previously-promised expectations about upcoming sample buffer PTSs. @discussion		This undoes the state set by messaging -expectMinimumUpcomingSampleBufferPresentationTime: or -expectMonotonicallyIncreasingUpcomingSampleBufferPresentationTimes. If you didn't use either of those, you don't have to use this.
+// Resets previously-promised expectations about upcoming sample buffer PTSs. This undoes the state set by messaging -expectMinimumUpcomingSampleBufferPresentationTime: or -expectMonotonicallyIncreasingUpcomingSampleBufferPresentationTimes. If you didn't use either of those, you don't have to use this.
 func (o *AVSampleBufferVideoRenderer) ResetUpcomingSampleBufferPresentationTimeExpectations() {
 	o.Ptr().Send(_aVSampleBufferVideoRendererSelResetUpcomingSampleBufferPresentationTimeExpectations)
 }
@@ -103,7 +148,7 @@ func (o *AVSampleBufferVideoRenderer) RecommendedPixelBufferAttributes() *founda
 	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
-// @method			loadVideoPerformanceMetricsWithCompletionHandler: @abstract		Gathers a snapshot of the video performance metrics and calls the completion handler with the results. @param			completionHandler The handler to invoke with the video performance metrics. @discussion		If there are no performance metrics available, the completion handler will be called with nil videoPerformanceMetrics.
+// Gathers a snapshot of the video performance metrics and calls the completion handler with the results. If there are no performance metrics available, the completion handler will be called with nil videoPerformanceMetrics. - Parameter completionHandler: The handler to invoke with the video performance metrics.
 func (o *AVSampleBufferVideoRenderer) LoadVideoPerformanceMetricsWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

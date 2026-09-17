@@ -123,7 +123,7 @@ func (bas *BackgroundActivityScheduler) Invalidate() {
 	objc.Send[objc.ID](objref.IDOf(bas), objc.RegisterName("invalidate"))
 }
 
-// Identifier returns the identifier.
+// Identifier returns a unique reverse DNS notation string, such as `com.example.MyApp.updatecheck`, that identifies the activity. This string should remain constant for an activity across launches of your app because the system uses this unique identifier to track the number of times the activity has run and to improve the heuristics for deciding when to run it again in the future. `nil` and zero-length strings are not allowed.
 func (bas *BackgroundActivityScheduler) Identifier() string {
 	defer runtime.KeepAlive(bas)
 	_r := objc.Send[objc.ID](objref.IDOf(bas), objc.RegisterName("identifier"))
@@ -133,35 +133,35 @@ func (bas *BackgroundActivityScheduler) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// QualityOfService returns the quality of service.
+// QualityOfService returns a value of type `NSQualityOfService`, which controls how aggressively the system schedules the activity. The default value is `NSQualityOfServiceBackground`. If you upgrade the quality of service above this level, the system schedules the activity more aggressively. The default value is the recommended value for most activities.
 func (bas *BackgroundActivityScheduler) QualityOfService() QualityOfService {
 	defer runtime.KeepAlive(bas)
 	_r := objc.Send[QualityOfService](objref.IDOf(bas), objc.RegisterName("qualityOfService"))
 	return _r
 }
 
-// Repeats wraps the corresponding Objective-C method.
+// Repeats reports whether the activity should be rescheduled after it completes. The default value for this property is `NO`.
 func (bas *BackgroundActivityScheduler) Repeats() bool {
 	defer runtime.KeepAlive(bas)
 	_r := objc.Send[bool](objref.IDOf(bas), objc.RegisterName("repeats"))
 	return _r
 }
 
-// Interval returns the interval.
+// Interval returns an integer providing a suggested interval between scheduling and invoking the activity. For repeating activities, the value of this property is also the suggested interval between invocations.
 func (bas *BackgroundActivityScheduler) Interval() float64 {
 	defer runtime.KeepAlive(bas)
 	_r := objc.Send[float64](objref.IDOf(bas), objc.RegisterName("interval"))
 	return _r
 }
 
-// Tolerance returns the tolerance.
+// Tolerance returns a value of type `NSTimeInterval`, which specifies a range of time during which the background activity may occur. A nominal fire date for scheduled background activity is calculated based on a combination of the `interval` property value and the time the activity began or the last execution date. The `tolerance` property specifies a grace period -- a range of time before and after the nominal fire date, during which the activity may be invoked. As the activity nears the end of its grace period, the system schedules the activity more aggressively. The default tolerance period is half the value of the `interval` property.
 func (bas *BackgroundActivityScheduler) Tolerance() float64 {
 	defer runtime.KeepAlive(bas)
 	_r := objc.Send[float64](objref.IDOf(bas), objc.RegisterName("tolerance"))
 	return _r
 }
 
-// ShouldDefer wraps the corresponding Objective-C method.
+// ShouldDefer reports whether your app should stop performing background activity and resume at a more optimal time. Your app can check the `shouldDefer` property while executing scheduled background activity. If this property contains a value of `YES`, system conditions have changed since the time the activity started and deferral is recommended. For example, perhaps the user unplugged the Mac and it's now running on battery power. In this case, your app should finish what it's currently doing, save its state, and invoke its completion handler with a value of `NSBackgroundActivityResultDeferred`. The system will invoke your activity again at a more optimal time, and your app can restore its previous state and resume where it left off.
 func (bas *BackgroundActivityScheduler) ShouldDefer() bool {
 	defer runtime.KeepAlive(bas)
 	_r := objc.Send[bool](objref.IDOf(bas), objc.RegisterName("shouldDefer"))

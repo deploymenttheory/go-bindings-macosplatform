@@ -305,18 +305,6 @@ func MADimFlashingLightsEnabled() bool {
 	return _fnMADimFlashingLightsEnabled()
 }
 
-var _fnMAImageCaptioningCopyCaption func(objc.ID, unsafe.Pointer) objc.ID
-
-// MAImageCaptioningCopyCaption calls the MediaAccessibility framework function MAImageCaptioningCopyCaption.
-func MAImageCaptioningCopyCaption(url corefoundation.CFURLRef, err unsafe.Pointer) corefoundation.CFStringRef {
-	_loadOnce.Do(_loadLibrary)
-	if _fnMAImageCaptioningCopyCaption == nil {
-		ebipurego.RegisterLibFunc(&_fnMAImageCaptioningCopyCaption, _lib, "MAImageCaptioningCopyCaption")
-	}
-	_ret := _fnMAImageCaptioningCopyCaption(objref.IDOf(url.Object), err)
-	return corefoundation.CFStringRef{Object: obj.Adopt(_ret)}
-}
-
 var _fnMAImageCaptioningCopyMetadataTagPath func() objc.ID
 
 // MAImageCaptioningCopyMetadataTagPath calls the MediaAccessibility framework function MAImageCaptioningCopyMetadataTagPath.
@@ -327,15 +315,4 @@ func MAImageCaptioningCopyMetadataTagPath() corefoundation.CFStringRef {
 	}
 	_ret := _fnMAImageCaptioningCopyMetadataTagPath()
 	return corefoundation.CFStringRef{Object: obj.Adopt(_ret)}
-}
-
-var _fnMAImageCaptioningSetCaption func(objc.ID, objc.ID, unsafe.Pointer) bool
-
-// MAImageCaptioningSetCaption calls the MediaAccessibility framework function MAImageCaptioningSetCaption.
-func MAImageCaptioningSetCaption(url corefoundation.CFURLRef, str corefoundation.CFStringRef, err unsafe.Pointer) bool {
-	_loadOnce.Do(_loadLibrary)
-	if _fnMAImageCaptioningSetCaption == nil {
-		ebipurego.RegisterLibFunc(&_fnMAImageCaptioningSetCaption, _lib, "MAImageCaptioningSetCaption")
-	}
-	return _fnMAImageCaptioningSetCaption(objref.IDOf(url.Object), objref.IDOf(str.Object), err)
 }

@@ -7,12 +7,22 @@ import (
 	"unsafe"
 
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/foundation"
 )
 
-// The `-[NSError userInfo]` key for an asset pack’s identifier. This key is relevant when the error code is “BAManagedErrorCode/BAManagedErrorCodeAssetPackNotFound“.
-func BAAssetPackIdentifierErrorKey() uintptr {
+// The `-[NSError userInfo]` key for an asset pack’s identifier. This key is relevant when the error code is “BAManagedErrorCode/BAManagedErrorCodeAssetPackNotFound“. Its value should be an `NSString` object.
+func BAAssetPackIdentifierErrorKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_backgroundassetsLib, "BAAssetPackIdentifierErrorKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @brief A value that represents average priority for a download.
@@ -42,13 +52,53 @@ func BADownloaderPriorityMin() int {
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
-func BAErrorDomain() uintptr {
+func BAErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_backgroundassetsLib, "BAErrorDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
+// The `-[NSError userInfo]` key for the set of asset packs the local availability of which the system couldn’t ensure and their respective associated underlying errors. This key is relevant when the error code is “BAManagedErrorCode/BAManagedErrorCodeLocalAvailabilityFailure“. Its value should be an `NSDictionary<BAAssetPack*, NSError*>` object.
+func BAFailuresErrorKey() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_backgroundassetsLib, "BAFailuresErrorKey")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The error domain for managed asset packs.
-func BAManagedErrorDomain() uintptr {
+func BAManagedErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_backgroundassetsLib, "BAManagedErrorDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
+// The `-[NSError userInfo]` key for the set of asset packs the local availability of which the system successfully ensured. This key is relevant when the error code is “BAManagedErrorCode/BAManagedErrorCodeLocalAvailabilityFailure“. Its value should be an `NSSet<BAAssetPack*>` object.
+func BASuccessesErrorKey() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_backgroundassetsLib, "BASuccessesErrorKey")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }

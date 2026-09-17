@@ -8,7 +8,7 @@ import (
 
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/accelerate"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/_screencapturekit_swiftui"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/carboncore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/coreaudio"
@@ -88,7 +88,7 @@ var (
 	_fnAudioCodecSetProperty               func(*carboncore.ComponentInstanceRecord, uint, uint, unsafe.Pointer) int
 	_fnAudioCodecUninitialize              func(*carboncore.ComponentInstanceRecord) int
 	_fnAudioComponentCopyConfigurationInfo func(unsafe.Pointer, unsafe.Pointer) int
-	_fnAudioComponentCopyIcon              func(unsafe.Pointer) unsafe.Pointer
+	_fnAudioComponentCopyIcon              func(unsafe.Pointer) objc.ID
 	_fnAudioComponentCopyName              func(unsafe.Pointer, unsafe.Pointer) int
 	_fnAudioComponentCount                 func(*AudioComponentDescription) uint
 	_fnAudioComponentFindNext              func(unsafe.Pointer, *AudioComponentDescription) unsafe.Pointer
@@ -275,7 +275,7 @@ var (
 	_fnAudioUnitSetParameter                          func(*carboncore.ComponentInstanceRecord, uint, uint, uint, float32, uint) int
 	_fnAudioUnitSetProperty                           func(*carboncore.ComponentInstanceRecord, uint, uint, uint, unsafe.Pointer, uint) int
 	_fnAudioUnitUninitialize                          func(*carboncore.ComponentInstanceRecord) int
-	_fnAudioWorkIntervalCreate                        func(string, accelerate.Os_clockid_t, unsafe.Pointer) unsafe.Pointer
+	_fnAudioWorkIntervalCreate                        func(string, _screencapturekit_swiftui.Os_clockid_t, unsafe.Pointer) unsafe.Pointer
 	_fnCAClockAddListener                             func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 	_fnCAClockArm                                     func(unsafe.Pointer) int
 	_fnCAClockBarBeatTimeToBeats                      func(unsafe.Pointer, *CABarBeatTime, *float64) int
@@ -698,8 +698,12 @@ func AudioComponentCopyConfigurationInfo(inComponent unsafe.Pointer, outConfigur
 	return _fnAudioComponentCopyConfigurationInfo(inComponent, outConfigurationInfo)
 }
 
-func AudioComponentCopyIcon(comp unsafe.Pointer) unsafe.Pointer {
-	return _fnAudioComponentCopyIcon(comp)
+func AudioComponentCopyIcon(comp unsafe.Pointer) *appkit.NSImage {
+	_ret := _fnAudioComponentCopyIcon(comp)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return appkit.NSImageFromID(_ret)
 }
 
 func AudioComponentCopyName(inComponent unsafe.Pointer, outName unsafe.Pointer) int {
@@ -1445,7 +1449,7 @@ func AudioUnitUninitialize(inUnit *carboncore.ComponentInstanceRecord) int {
 	return _fnAudioUnitUninitialize(inUnit)
 }
 
-func AudioWorkIntervalCreate(name string, clock accelerate.Os_clockid_t, attr unsafe.Pointer) unsafe.Pointer {
+func AudioWorkIntervalCreate(name string, clock _screencapturekit_swiftui.Os_clockid_t, attr unsafe.Pointer) unsafe.Pointer {
 	return _fnAudioWorkIntervalCreate(name, clock, attr)
 }
 

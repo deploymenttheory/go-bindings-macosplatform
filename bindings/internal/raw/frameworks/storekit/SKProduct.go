@@ -4,8 +4,6 @@
 package storekit
 
 import (
-	"unsafe"
-
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/foundation"
@@ -114,9 +112,12 @@ func (o *SKProduct) IsFamilyShareable() bool {
 }
 
 // Deprecated: since macOS 10.14.
-func (o *SKProduct) ContentLengths() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sKProductSelContentLengths)
-	return _ret
+func (o *SKProduct) ContentLengths() *foundation.NSArray[*foundation.NSNumber] {
+	_ret := objc.Send[objc.ID](o.Ptr(), _sKProductSelContentLengths)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // Deprecated: Hosted content is no longer supported.
@@ -129,9 +130,12 @@ func (o *SKProduct) DownloadContentLengths() *foundation.NSArray[*foundation.NSN
 }
 
 // Deprecated: since macOS 10.14.
-func (o *SKProduct) ContentVersion() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sKProductSelContentVersion)
-	return _ret
+func (o *SKProduct) ContentVersion() *foundation.NSString {
+	_ret := objc.Send[objc.ID](o.Ptr(), _sKProductSelContentVersion)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSStringFromID(_ret)
 }
 
 // Deprecated: Hosted content is no longer supported.

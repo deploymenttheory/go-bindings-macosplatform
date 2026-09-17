@@ -10,8 +10,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An object that monitors the conditions you add to it.
-//
 // Apple documentation: https://developer.apple.com/documentation/corelocation/clmonitor
 type CLMonitor struct {
 	foundation.NSObject

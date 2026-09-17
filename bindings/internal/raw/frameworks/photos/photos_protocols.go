@@ -25,3 +25,8 @@ type PHPhotoLibraryAvailabilityObserver interface {
 type PHPhotoLibraryChangeObserver interface {
 	PhotoLibraryDidChange(changeInstance *PHChange)
 }
+
+// PHPhotoLibraryPersistentChangesObserver wraps the ObjC protocol PHPhotoLibraryPersistentChangesObserver.
+type PHPhotoLibraryPersistentChangesObserver interface {
+	PhotoLibraryPersistentChangesDidUpdate(photoLibrary *PHPhotoLibrary)
+}

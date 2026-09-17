@@ -9,19 +9,18 @@ import (
 	"strings"
 )
 
-// Constants that indicate the axis and direction to use for a perspective projection matrix.
-type AxisDirectionConvention uint8
+type CpAxisDirectionConvention uint8
 
 const (
-	Cp_axis_direction_convention_right_up_back      AxisDirectionConvention = 0
-	Cp_axis_direction_convention_right_up_forward   AxisDirectionConvention = 1
-	Cp_axis_direction_convention_right_down_back    AxisDirectionConvention = 2
-	Cp_axis_direction_convention_right_down_forward AxisDirectionConvention = 3
+	Cp_axis_direction_convention_right_up_back      CpAxisDirectionConvention = 0
+	Cp_axis_direction_convention_right_up_forward   CpAxisDirectionConvention = 1
+	Cp_axis_direction_convention_right_down_back    CpAxisDirectionConvention = 2
+	Cp_axis_direction_convention_right_down_forward CpAxisDirectionConvention = 3
 )
 
-// String returns the AxisDirectionConvention constant's name, or its numeric form when the
+// String returns the CpAxisDirectionConvention constant's name, or its numeric form when the
 // value is not a known constant.
-func (e AxisDirectionConvention) String() string {
+func (e CpAxisDirectionConvention) String() string {
 	switch e {
 	case Cp_axis_direction_convention_right_up_back:
 		return "Cp_axis_direction_convention_right_up_back"
@@ -32,25 +31,24 @@ func (e AxisDirectionConvention) String() string {
 	case Cp_axis_direction_convention_right_down_forward:
 		return "Cp_axis_direction_convention_right_down_forward"
 	default:
-		return fmt.Sprintf("AxisDirectionConvention(%d)", int64(e))
+		return fmt.Sprintf("CpAxisDirectionConvention(%d)", int64(e))
 	}
 }
 
-// The state of ownership for the drawable.
-type DrawableState uint32
+type CpDrawableState uint32
 
 const (
 	// A drawable that is not in use and ready for assignment to a frame.
-	Cp_drawable_state_available DrawableState = 0
+	Cp_drawable_state_available CpDrawableState = 0
 	// A drawable that is assigned to a frame and ready to accept your drawing commands.
-	Cp_drawable_state_rendering DrawableState = 1
+	Cp_drawable_state_rendering CpDrawableState = 1
 	// A drawable that the compositor is currently displaying onscreen.
-	Cp_drawable_state_presenting DrawableState = 2
+	Cp_drawable_state_presenting CpDrawableState = 2
 )
 
-// String returns the DrawableState constant's name, or its numeric form when the
+// String returns the CpDrawableState constant's name, or its numeric form when the
 // value is not a known constant.
-func (e DrawableState) String() string {
+func (e CpDrawableState) String() string {
 	switch e {
 	case Cp_drawable_state_available:
 		return "Cp_drawable_state_available"
@@ -59,47 +57,46 @@ func (e DrawableState) String() string {
 	case Cp_drawable_state_presenting:
 		return "Cp_drawable_state_presenting"
 	default:
-		return fmt.Sprintf("DrawableState(%d)", int64(e))
+		return fmt.Sprintf("CpDrawableState(%d)", int64(e))
 	}
 }
 
-type DrawableTarget uint32
+type CpDrawableTarget uint32
 
 const (
 	// A drawable that is targeting the built-in display, this is what a user will see in the device.
-	Cp_drawable_target_built_in DrawableTarget = 0
+	Cp_drawable_target_built_in CpDrawableTarget = 0
 	// A drawable that will be used for capture purposes, this could be used for video or AirPlay streaming and will be visible to users outside of the device.
-	Cp_drawable_target_capture DrawableTarget = 1
+	Cp_drawable_target_capture CpDrawableTarget = 1
 )
 
-// String returns the DrawableTarget constant's name, or its numeric form when the
+// String returns the CpDrawableTarget constant's name, or its numeric form when the
 // value is not a known constant.
-func (e DrawableTarget) String() string {
+func (e CpDrawableTarget) String() string {
 	switch e {
 	case Cp_drawable_target_built_in:
 		return "Cp_drawable_target_built_in"
 	case Cp_drawable_target_capture:
 		return "Cp_drawable_target_capture"
 	default:
-		return fmt.Sprintf("DrawableTarget(%d)", int64(e))
+		return fmt.Sprintf("CpDrawableTarget(%d)", int64(e))
 	}
 }
 
-// Constants that specify the organization of the textures you use for drawing.
-type LayerRendererLayout uint32
+type CpLayerRendererLayout uint32
 
 const (
 	// A layout that assigns a separate texture to each rendered view. When the layout contains multiple views, each view receives its own dedicated texture. The type of each texture is MTLTextureType2D.
-	Cp_layer_renderer_layout_dedicated LayerRendererLayout = 0
+	Cp_layer_renderer_layout_dedicated CpLayerRendererLayout = 0
 	// A layout that uses a single texture to store the content for all rendered views. When a layer contains multiple views, the texture stores the images for those views side-by-side. The texture map for each view contains a viewport that defines the boundaries of the view’s content. The type of each texture is MTLTextureType2D.
-	Cp_layer_renderer_layout_shared LayerRendererLayout = 1
+	Cp_layer_renderer_layout_shared CpLayerRendererLayout = 1
 	// A layout that specifies each view’s content as a slice of a single texture. The layout uses a single texture to store the content for all rendered views. The type of the texture is MTLTextureType2DArray. The texture map’s slice index indicates which array slot contains the view’s content.
-	Cp_layer_renderer_layout_layered LayerRendererLayout = 2
+	Cp_layer_renderer_layout_layered CpLayerRendererLayout = 2
 )
 
-// String returns the LayerRendererLayout constant's name, or its numeric form when the
+// String returns the CpLayerRendererLayout constant's name, or its numeric form when the
 // value is not a known constant.
-func (e LayerRendererLayout) String() string {
+func (e CpLayerRendererLayout) String() string {
 	switch e {
 	case Cp_layer_renderer_layout_dedicated:
 		return "Cp_layer_renderer_layout_dedicated"
@@ -108,25 +105,24 @@ func (e LayerRendererLayout) String() string {
 	case Cp_layer_renderer_layout_layered:
 		return "Cp_layer_renderer_layout_layered"
 	default:
-		return fmt.Sprintf("LayerRendererLayout(%d)", int64(e))
+		return fmt.Sprintf("CpLayerRendererLayout(%d)", int64(e))
 	}
 }
 
-// The states of the layer renderer, which tell you how to proceed with drawing operations.
-type LayerRendererState uint32
+type CpLayerRendererState uint32
 
 const (
 	// A state that indicates the layer renderer isn't currently drawing. A layer renderer starts in this state and later transitions to the running or invalid states. Don't draw while in this state. Wait until the layer changes to one of the other states to take further action on the layer.
-	Cp_layer_renderer_state_paused LayerRendererState = 1
+	Cp_layer_renderer_state_paused CpLayerRendererState = 1
 	// A state that indicates the layer renderer is ready for you to draw your content. When the layer enters this state, start your rendering loop and draw your content. Keep drawing frames of content until the layer transitions to another state.
-	Cp_layer_renderer_state_running LayerRendererState = 2
+	Cp_layer_renderer_state_running CpLayerRendererState = 2
 	// A state that indicates the layer renderer no longer supports drawing operations. A layer enters this state shortly before the system releases its resources. When the layer enters this state, exit your rendering loop and release any drawing-related structures.
-	Cp_layer_renderer_state_invalidated LayerRendererState = 3
+	Cp_layer_renderer_state_invalidated CpLayerRendererState = 3
 )
 
-// String returns the LayerRendererState constant's name, or its numeric form when the
+// String returns the CpLayerRendererState constant's name, or its numeric form when the
 // value is not a known constant.
-func (e LayerRendererState) String() string {
+func (e CpLayerRendererState) String() string {
 	switch e {
 	case Cp_layer_renderer_state_paused:
 		return "Cp_layer_renderer_state_paused"
@@ -135,22 +131,22 @@ func (e LayerRendererState) String() string {
 	case Cp_layer_renderer_state_invalidated:
 		return "Cp_layer_renderer_state_invalidated"
 	default:
-		return fmt.Sprintf("LayerRendererState(%d)", int64(e))
+		return fmt.Sprintf("CpLayerRendererState(%d)", int64(e))
 	}
 }
 
 // The options to provide when calling cp_layer_renderer_capabilities_supported_color_formats and cp_layer_renderer_capabilities_supported_color_formats_count
 // Bitmask — values may be combined with |.
-type SupportedColorFormatsOptions uint32
+type CpSupportedColorFormatsOptions uint32
 
 const (
-	Cp_supported_color_formats_options_none                          SupportedColorFormatsOptions = 0
-	Cp_supported_color_formats_options_progressive_immersion_enabled SupportedColorFormatsOptions = 1
+	Cp_supported_color_formats_options_none                          CpSupportedColorFormatsOptions = 0
+	Cp_supported_color_formats_options_progressive_immersion_enabled CpSupportedColorFormatsOptions = 1
 )
 
-// String returns the SupportedColorFormatsOptions constant's name, or its numeric form when the
+// String returns the CpSupportedColorFormatsOptions constant's name, or its numeric form when the
 // value is not a known constant.
-func (e SupportedColorFormatsOptions) String() string {
+func (e CpSupportedColorFormatsOptions) String() string {
 	var parts []string
 	if e&Cp_supported_color_formats_options_progressive_immersion_enabled != 0 {
 		parts = append(parts, "Cp_supported_color_formats_options_progressive_immersion_enabled")
@@ -163,17 +159,17 @@ func (e SupportedColorFormatsOptions) String() string {
 
 // The options you can pass to functions that relate to rendering capabilities and layout support.
 // Bitmask — values may be combined with |.
-type SupportedLayoutsOptions uint32
+type CpSupportedLayoutsOptions uint32
 
 const (
-	Cp_supported_layouts_options_none                          SupportedLayoutsOptions = 0
-	Cp_supported_layouts_options_foveation_enabled             SupportedLayoutsOptions = 1
-	Cp_supported_layouts_options_progressive_immersion_enabled SupportedLayoutsOptions = 2
+	Cp_supported_layouts_options_none                          CpSupportedLayoutsOptions = 0
+	Cp_supported_layouts_options_foveation_enabled             CpSupportedLayoutsOptions = 1
+	Cp_supported_layouts_options_progressive_immersion_enabled CpSupportedLayoutsOptions = 2
 )
 
-// String returns the SupportedLayoutsOptions constant's name, or its numeric form when the
+// String returns the CpSupportedLayoutsOptions constant's name, or its numeric form when the
 // value is not a known constant.
-func (e SupportedLayoutsOptions) String() string {
+func (e CpSupportedLayoutsOptions) String() string {
 	var parts []string
 	if e&Cp_supported_layouts_options_foveation_enabled != 0 {
 		parts = append(parts, "Cp_supported_layouts_options_foveation_enabled")
@@ -363,17 +359,17 @@ func (e ACLType) String() string {
 	}
 }
 
-type ArAuthorizationStatus int64
+type AuthorizationStatus int64
 
 const (
-	Ar_authorization_status_not_determined ArAuthorizationStatus = 0
-	Ar_authorization_status_allowed        ArAuthorizationStatus = 1
-	Ar_authorization_status_denied         ArAuthorizationStatus = 2
+	Ar_authorization_status_not_determined AuthorizationStatus = 0
+	Ar_authorization_status_allowed        AuthorizationStatus = 1
+	Ar_authorization_status_denied         AuthorizationStatus = 2
 )
 
-// String returns the ArAuthorizationStatus constant's name, or its numeric form when the
+// String returns the AuthorizationStatus constant's name, or its numeric form when the
 // value is not a known constant.
-func (e ArAuthorizationStatus) String() string {
+func (e AuthorizationStatus) String() string {
 	switch e {
 	case Ar_authorization_status_not_determined:
 		return "Ar_authorization_status_not_determined"
@@ -382,26 +378,28 @@ func (e ArAuthorizationStatus) String() string {
 	case Ar_authorization_status_denied:
 		return "Ar_authorization_status_denied"
 	default:
-		return fmt.Sprintf("ArAuthorizationStatus(%d)", int64(e))
+		return fmt.Sprintf("AuthorizationStatus(%d)", int64(e))
 	}
 }
 
 // Bitmask — values may be combined with |.
-type ArAuthorizationType uint64
+type AuthorizationType uint64
 
 const (
-	Ar_authorization_type_none ArAuthorizationType = 0
+	Ar_authorization_type_none AuthorizationType = 0
 	// Authorization type used when requesting hand tracking.
-	Ar_authorization_type_hand_tracking ArAuthorizationType = 1
+	Ar_authorization_type_hand_tracking AuthorizationType = 1
 	// Authorization type used when requesting: - Image tracking
-	Ar_authorization_type_world_sensing ArAuthorizationType = 2
+	Ar_authorization_type_world_sensing AuthorizationType = 2
 	// Authorization type used when requesting: - Camera access
-	Ar_authorization_type_camera_access ArAuthorizationType = 8
+	Ar_authorization_type_camera_access AuthorizationType = 8
+	// Authorization type used when requesting: - Accessory tracking
+	Ar_authorization_type_accessory_tracking AuthorizationType = 32
 )
 
-// String returns the ArAuthorizationType constant's name, or its numeric form when the
+// String returns the AuthorizationType constant's name, or its numeric form when the
 // value is not a known constant.
-func (e ArAuthorizationType) String() string {
+func (e AuthorizationType) String() string {
 	var parts []string
 	if e&Ar_authorization_type_hand_tracking != 0 {
 		parts = append(parts, "Ar_authorization_type_hand_tracking")
@@ -412,24 +410,27 @@ func (e ArAuthorizationType) String() string {
 	if e&Ar_authorization_type_camera_access != 0 {
 		parts = append(parts, "Ar_authorization_type_camera_access")
 	}
+	if e&Ar_authorization_type_accessory_tracking != 0 {
+		parts = append(parts, "Ar_authorization_type_accessory_tracking")
+	}
 	if len(parts) == 0 {
 		return "0"
 	}
 	return strings.Join(parts, "|")
 }
 
-type ArDataProviderState int64
+type DataProviderState int64
 
 const (
-	Ar_data_provider_state_initialized ArDataProviderState = 0
-	Ar_data_provider_state_running     ArDataProviderState = 1
-	Ar_data_provider_state_paused      ArDataProviderState = 2
-	Ar_data_provider_state_stopped     ArDataProviderState = 3
+	Ar_data_provider_state_initialized DataProviderState = 0
+	Ar_data_provider_state_running     DataProviderState = 1
+	Ar_data_provider_state_paused      DataProviderState = 2
+	Ar_data_provider_state_stopped     DataProviderState = 3
 )
 
-// String returns the ArDataProviderState constant's name, or its numeric form when the
+// String returns the DataProviderState constant's name, or its numeric form when the
 // value is not a known constant.
-func (e ArDataProviderState) String() string {
+func (e DataProviderState) String() string {
 	switch e {
 	case Ar_data_provider_state_initialized:
 		return "Ar_data_provider_state_initialized"
@@ -440,41 +441,41 @@ func (e ArDataProviderState) String() string {
 	case Ar_data_provider_state_stopped:
 		return "Ar_data_provider_state_stopped"
 	default:
-		return fmt.Sprintf("ArDataProviderState(%d)", int64(e))
+		return fmt.Sprintf("DataProviderState(%d)", int64(e))
 	}
 }
 
-type ArDeviceAnchorQueryStatus int64
+type DeviceAnchorQueryStatus int64
 
 const (
-	Ar_device_anchor_query_status_success ArDeviceAnchorQueryStatus = 0
-	Ar_device_anchor_query_status_failure ArDeviceAnchorQueryStatus = 1
+	Ar_device_anchor_query_status_success DeviceAnchorQueryStatus = 0
+	Ar_device_anchor_query_status_failure DeviceAnchorQueryStatus = 1
 )
 
-// String returns the ArDeviceAnchorQueryStatus constant's name, or its numeric form when the
+// String returns the DeviceAnchorQueryStatus constant's name, or its numeric form when the
 // value is not a known constant.
-func (e ArDeviceAnchorQueryStatus) String() string {
+func (e DeviceAnchorQueryStatus) String() string {
 	switch e {
 	case Ar_device_anchor_query_status_success:
 		return "Ar_device_anchor_query_status_success"
 	case Ar_device_anchor_query_status_failure:
 		return "Ar_device_anchor_query_status_failure"
 	default:
-		return fmt.Sprintf("ArDeviceAnchorQueryStatus(%d)", int64(e))
+		return fmt.Sprintf("DeviceAnchorQueryStatus(%d)", int64(e))
 	}
 }
 
-type ArDeviceAnchorTrackingState int64
+type DeviceAnchorTrackingState int64
 
 const (
-	Ar_device_anchor_tracking_state_untracked           ArDeviceAnchorTrackingState = 0
-	Ar_device_anchor_tracking_state_orientation_tracked ArDeviceAnchorTrackingState = 1
-	Ar_device_anchor_tracking_state_tracked             ArDeviceAnchorTrackingState = 2
+	Ar_device_anchor_tracking_state_untracked           DeviceAnchorTrackingState = 0
+	Ar_device_anchor_tracking_state_orientation_tracked DeviceAnchorTrackingState = 1
+	Ar_device_anchor_tracking_state_tracked             DeviceAnchorTrackingState = 2
 )
 
-// String returns the ArDeviceAnchorTrackingState constant's name, or its numeric form when the
+// String returns the DeviceAnchorTrackingState constant's name, or its numeric form when the
 // value is not a known constant.
-func (e ArDeviceAnchorTrackingState) String() string {
+func (e DeviceAnchorTrackingState) String() string {
 	switch e {
 	case Ar_device_anchor_tracking_state_untracked:
 		return "Ar_device_anchor_tracking_state_untracked"
@@ -483,51 +484,222 @@ func (e ArDeviceAnchorTrackingState) String() string {
 	case Ar_device_anchor_tracking_state_tracked:
 		return "Ar_device_anchor_tracking_state_tracked"
 	default:
-		return fmt.Sprintf("ArDeviceAnchorTrackingState(%d)", int64(e))
+		return fmt.Sprintf("DeviceAnchorTrackingState(%d)", int64(e))
 	}
 }
 
-type ArSessionErrorCode int64
+// Get the timestamp corresponding to an anchor. - Parameter anchor: The anchor. - Returns: The timestamp associated with the anchor.
+type HandAnchorQueryStatus int64
+
+const (
+	Ar_hand_anchor_query_status_failure HandAnchorQueryStatus = 1
+)
+
+// String returns the HandAnchorQueryStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e HandAnchorQueryStatus) String() string {
+	switch e {
+	case Ar_hand_anchor_query_status_failure:
+		return "Ar_hand_anchor_query_status_failure"
+	default:
+		return fmt.Sprintf("HandAnchorQueryStatus(%d)", int64(e))
+	}
+}
+
+// Get the timestamp corresponding to an anchor. - Parameter anchor: The anchor. - Returns: The timestamp associated with the anchor.
+type HandChirality int64
+
+const ()
+
+// String returns the HandChirality constant's name, or its numeric form when the
+// value is not a known constant.
+func (e HandChirality) String() string {
+	switch e {
+	default:
+		return fmt.Sprintf("HandChirality(%d)", int64(e))
+	}
+}
+
+// Get the timestamp corresponding to an anchor. - Parameter anchor: The anchor. - Returns: The timestamp associated with the anchor.
+type HandFidelity int64
+
+const ()
+
+// String returns the HandFidelity constant's name, or its numeric form when the
+// value is not a known constant.
+func (e HandFidelity) String() string {
+	switch e {
+	default:
+		return fmt.Sprintf("HandFidelity(%d)", int64(e))
+	}
+}
+
+type HandSkeletonJointName uint64
+
+const (
+	Ar_hand_skeleton_joint_name_thumb_intermediate_tip          HandSkeletonJointName = 3
+	Ar_hand_skeleton_joint_name_thumb_tip                       HandSkeletonJointName = 4
+	Ar_hand_skeleton_joint_name_index_finger_metacarpal         HandSkeletonJointName = 5
+	Ar_hand_skeleton_joint_name_index_finger_knuckle            HandSkeletonJointName = 6
+	Ar_hand_skeleton_joint_name_index_finger_intermediate_base  HandSkeletonJointName = 7
+	Ar_hand_skeleton_joint_name_index_finger_intermediate_tip   HandSkeletonJointName = 8
+	Ar_hand_skeleton_joint_name_index_finger_tip                HandSkeletonJointName = 9
+	Ar_hand_skeleton_joint_name_middle_finger_metacarpal        HandSkeletonJointName = 10
+	Ar_hand_skeleton_joint_name_middle_finger_knuckle           HandSkeletonJointName = 11
+	Ar_hand_skeleton_joint_name_middle_finger_intermediate_base HandSkeletonJointName = 12
+	Ar_hand_skeleton_joint_name_middle_finger_intermediate_tip  HandSkeletonJointName = 13
+	Ar_hand_skeleton_joint_name_middle_finger_tip               HandSkeletonJointName = 14
+	Ar_hand_skeleton_joint_name_ring_finger_metacarpal          HandSkeletonJointName = 15
+	Ar_hand_skeleton_joint_name_ring_finger_knuckle             HandSkeletonJointName = 16
+	Ar_hand_skeleton_joint_name_ring_finger_intermediate_base   HandSkeletonJointName = 17
+	Ar_hand_skeleton_joint_name_ring_finger_intermediate_tip    HandSkeletonJointName = 18
+	Ar_hand_skeleton_joint_name_ring_finger_tip                 HandSkeletonJointName = 19
+	Ar_hand_skeleton_joint_name_little_finger_metacarpal        HandSkeletonJointName = 20
+	Ar_hand_skeleton_joint_name_little_finger_knuckle           HandSkeletonJointName = 21
+	Ar_hand_skeleton_joint_name_little_finger_intermediate_base HandSkeletonJointName = 22
+	Ar_hand_skeleton_joint_name_little_finger_intermediate_tip  HandSkeletonJointName = 23
+	Ar_hand_skeleton_joint_name_little_finger_tip               HandSkeletonJointName = 24
+	Ar_hand_skeleton_joint_name_forearm_wrist                   HandSkeletonJointName = 25
+	Ar_hand_skeleton_joint_name_forearm_arm                     HandSkeletonJointName = 26
+)
+
+// String returns the HandSkeletonJointName constant's name, or its numeric form when the
+// value is not a known constant.
+func (e HandSkeletonJointName) String() string {
+	switch e {
+	case Ar_hand_skeleton_joint_name_thumb_intermediate_tip:
+		return "Ar_hand_skeleton_joint_name_thumb_intermediate_tip"
+	case Ar_hand_skeleton_joint_name_thumb_tip:
+		return "Ar_hand_skeleton_joint_name_thumb_tip"
+	case Ar_hand_skeleton_joint_name_index_finger_metacarpal:
+		return "Ar_hand_skeleton_joint_name_index_finger_metacarpal"
+	case Ar_hand_skeleton_joint_name_index_finger_knuckle:
+		return "Ar_hand_skeleton_joint_name_index_finger_knuckle"
+	case Ar_hand_skeleton_joint_name_index_finger_intermediate_base:
+		return "Ar_hand_skeleton_joint_name_index_finger_intermediate_base"
+	case Ar_hand_skeleton_joint_name_index_finger_intermediate_tip:
+		return "Ar_hand_skeleton_joint_name_index_finger_intermediate_tip"
+	case Ar_hand_skeleton_joint_name_index_finger_tip:
+		return "Ar_hand_skeleton_joint_name_index_finger_tip"
+	case Ar_hand_skeleton_joint_name_middle_finger_metacarpal:
+		return "Ar_hand_skeleton_joint_name_middle_finger_metacarpal"
+	case Ar_hand_skeleton_joint_name_middle_finger_knuckle:
+		return "Ar_hand_skeleton_joint_name_middle_finger_knuckle"
+	case Ar_hand_skeleton_joint_name_middle_finger_intermediate_base:
+		return "Ar_hand_skeleton_joint_name_middle_finger_intermediate_base"
+	case Ar_hand_skeleton_joint_name_middle_finger_intermediate_tip:
+		return "Ar_hand_skeleton_joint_name_middle_finger_intermediate_tip"
+	case Ar_hand_skeleton_joint_name_middle_finger_tip:
+		return "Ar_hand_skeleton_joint_name_middle_finger_tip"
+	case Ar_hand_skeleton_joint_name_ring_finger_metacarpal:
+		return "Ar_hand_skeleton_joint_name_ring_finger_metacarpal"
+	case Ar_hand_skeleton_joint_name_ring_finger_knuckle:
+		return "Ar_hand_skeleton_joint_name_ring_finger_knuckle"
+	case Ar_hand_skeleton_joint_name_ring_finger_intermediate_base:
+		return "Ar_hand_skeleton_joint_name_ring_finger_intermediate_base"
+	case Ar_hand_skeleton_joint_name_ring_finger_intermediate_tip:
+		return "Ar_hand_skeleton_joint_name_ring_finger_intermediate_tip"
+	case Ar_hand_skeleton_joint_name_ring_finger_tip:
+		return "Ar_hand_skeleton_joint_name_ring_finger_tip"
+	case Ar_hand_skeleton_joint_name_little_finger_metacarpal:
+		return "Ar_hand_skeleton_joint_name_little_finger_metacarpal"
+	case Ar_hand_skeleton_joint_name_little_finger_knuckle:
+		return "Ar_hand_skeleton_joint_name_little_finger_knuckle"
+	case Ar_hand_skeleton_joint_name_little_finger_intermediate_base:
+		return "Ar_hand_skeleton_joint_name_little_finger_intermediate_base"
+	case Ar_hand_skeleton_joint_name_little_finger_intermediate_tip:
+		return "Ar_hand_skeleton_joint_name_little_finger_intermediate_tip"
+	case Ar_hand_skeleton_joint_name_little_finger_tip:
+		return "Ar_hand_skeleton_joint_name_little_finger_tip"
+	case Ar_hand_skeleton_joint_name_forearm_wrist:
+		return "Ar_hand_skeleton_joint_name_forearm_wrist"
+	case Ar_hand_skeleton_joint_name_forearm_arm:
+		return "Ar_hand_skeleton_joint_name_forearm_arm"
+	default:
+		return fmt.Sprintf("HandSkeletonJointName(%d)", int64(e))
+	}
+}
+
+type SessionErrorCode int64
 
 const (
 	// Error code indicating that a data provider requires an authorization that has not been granted by the user.
-	Ar_session_error_code_data_provider_not_authorized ArSessionErrorCode = 100
+	Ar_session_error_code_data_provider_not_authorized SessionErrorCode = 100
 	// Error code indicating a data provider has failed to run.
-	Ar_session_error_code_data_provider_failed_to_run ArSessionErrorCode = 101
+	Ar_session_error_code_data_provider_failed_to_run SessionErrorCode = 101
 )
 
-// String returns the ArSessionErrorCode constant's name, or its numeric form when the
+// String returns the SessionErrorCode constant's name, or its numeric form when the
 // value is not a known constant.
-func (e ArSessionErrorCode) String() string {
+func (e SessionErrorCode) String() string {
 	switch e {
 	case Ar_session_error_code_data_provider_not_authorized:
 		return "Ar_session_error_code_data_provider_not_authorized"
 	case Ar_session_error_code_data_provider_failed_to_run:
 		return "Ar_session_error_code_data_provider_failed_to_run"
 	default:
-		return fmt.Sprintf("ArSessionErrorCode(%d)", int64(e))
+		return fmt.Sprintf("SessionErrorCode(%d)", int64(e))
 	}
 }
 
-type ArWorldTrackingErrorCode int64
+type TransformCorrection int64
+
+const (
+	// Transforms are unaltered and represent actual locations.
+	Ar_transform_correction_none TransformCorrection = 0
+	// Transforms are corrected to render over physical objects in passthrough displays.
+	Ar_transform_correction_rendered TransformCorrection = 1
+)
+
+// String returns the TransformCorrection constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TransformCorrection) String() string {
+	switch e {
+	case Ar_transform_correction_none:
+		return "Ar_transform_correction_none"
+	case Ar_transform_correction_rendered:
+		return "Ar_transform_correction_rendered"
+	default:
+		return fmt.Sprintf("TransformCorrection(%d)", int64(e))
+	}
+}
+
+type WorldAnchorSharingAvailability int64
+
+const (
+	Ar_world_anchor_sharing_availability_unavailable WorldAnchorSharingAvailability = 1
+)
+
+// String returns the WorldAnchorSharingAvailability constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WorldAnchorSharingAvailability) String() string {
+	switch e {
+	case Ar_world_anchor_sharing_availability_unavailable:
+		return "Ar_world_anchor_sharing_availability_unavailable"
+	default:
+		return fmt.Sprintf("WorldAnchorSharingAvailability(%d)", int64(e))
+	}
+}
+
+type WorldTrackingErrorCode int64
 
 const (
 	// Error code indicating that the maximum amount of world anchors have been added.
-	Ar_world_tracking_error_code_anchor_max_limit_reached ArWorldTrackingErrorCode = 201
+	Ar_world_tracking_error_code_anchor_max_limit_reached WorldTrackingErrorCode = 201
 	// Error code indicating that a world anchor failed to be removed.
-	Ar_world_tracking_error_code_remove_anchor_failed ArWorldTrackingErrorCode = 202
+	Ar_world_tracking_error_code_remove_anchor_failed WorldTrackingErrorCode = 202
 )
 
-// String returns the ArWorldTrackingErrorCode constant's name, or its numeric form when the
+// String returns the WorldTrackingErrorCode constant's name, or its numeric form when the
 // value is not a known constant.
-func (e ArWorldTrackingErrorCode) String() string {
+func (e WorldTrackingErrorCode) String() string {
 	switch e {
 	case Ar_world_tracking_error_code_anchor_max_limit_reached:
 		return "Ar_world_tracking_error_code_anchor_max_limit_reached"
 	case Ar_world_tracking_error_code_remove_anchor_failed:
 		return "Ar_world_tracking_error_code_remove_anchor_failed"
 	default:
-		return fmt.Sprintf("ArWorldTrackingErrorCode(%d)", int64(e))
+		return fmt.Sprintf("WorldTrackingErrorCode(%d)", int64(e))
 	}
 }
 
@@ -570,46 +742,46 @@ func (e Clockid) String() string {
 }
 
 // Errors that can occur during layer configuration.
-type LayerRendererConfigurationErrorCode int64
+type CpLayerRendererConfigurationErrorCode int64
 
 const (
 	// An error that indicates the system didn’t find a default layer configuration.
-	Cp_layer_renderer_configuration_error_code_missing_configuration LayerRendererConfigurationErrorCode = -20
+	Cp_layer_renderer_configuration_error_code_missing_configuration CpLayerRendererConfigurationErrorCode = -20
 	// An error that indicates the system doesn’t support the specified color format choice.
-	Cp_layer_renderer_configuration_error_code_unsupported_color_format LayerRendererConfigurationErrorCode = -4
+	Cp_layer_renderer_configuration_error_code_unsupported_color_format CpLayerRendererConfigurationErrorCode = -4
 	// An error that indicates the system doesn’t support the specified color usage option.
-	Cp_layer_renderer_configuration_error_code_unsupported_color_usage LayerRendererConfigurationErrorCode = -5
+	Cp_layer_renderer_configuration_error_code_unsupported_color_usage CpLayerRendererConfigurationErrorCode = -5
 	// An error that indicates the system doesn’t support the specified depth format choice.
-	Cp_layer_renderer_configuration_error_code_unsupported_depth_format LayerRendererConfigurationErrorCode = -7
+	Cp_layer_renderer_configuration_error_code_unsupported_depth_format CpLayerRendererConfigurationErrorCode = -7
 	// An error that indicates the system doesn’t support the specified depth usage choice.
-	Cp_layer_renderer_configuration_error_code_unsupported_depth_usage LayerRendererConfigurationErrorCode = -8
+	Cp_layer_renderer_configuration_error_code_unsupported_depth_usage CpLayerRendererConfigurationErrorCode = -8
 	// An error that indicates foveation is enabled but not supported.
-	Cp_layer_renderer_configuration_error_code_variable_rasterization_rate_is_not_supported LayerRendererConfigurationErrorCode = -16
+	Cp_layer_renderer_configuration_error_code_variable_rasterization_rate_is_not_supported CpLayerRendererConfigurationErrorCode = -16
 	// An error that occurs when you try to enable temporal anti-aliasing but the current configuration parameters don’t support it.
-	Cp_layer_renderer_configuration_error_code_temporal_anti_aliasing_not_supported LayerRendererConfigurationErrorCode = -17
+	Cp_layer_renderer_configuration_error_code_temporal_anti_aliasing_not_supported CpLayerRendererConfigurationErrorCode = -17
 	// An error that indicates not enough frames are available for rendering.
-	Cp_layer_renderer_configuration_error_code_not_enough_frames_requested LayerRendererConfigurationErrorCode = -10
+	Cp_layer_renderer_configuration_error_code_not_enough_frames_requested CpLayerRendererConfigurationErrorCode = -10
 	// An error that indicates your app requested too many frames for rendering.
-	Cp_layer_renderer_configuration_error_code_too_many_frames_requested LayerRendererConfigurationErrorCode = -11
+	Cp_layer_renderer_configuration_error_code_too_many_frames_requested CpLayerRendererConfigurationErrorCode = -11
 	// An error that indicates the depth range values aren’t in reverse-z order.
-	Cp_layer_renderer_configuration_error_code_unsupported_forward_depth_range LayerRendererConfigurationErrorCode = -101
+	Cp_layer_renderer_configuration_error_code_unsupported_forward_depth_range CpLayerRendererConfigurationErrorCode = -101
 	// An error that indicates the configuration’s current layout value is invalid.
-	Cp_layer_renderer_configuration_error_code_layout_not_supported LayerRendererConfigurationErrorCode = -6
+	Cp_layer_renderer_configuration_error_code_layout_not_supported CpLayerRendererConfigurationErrorCode = -6
 	// An error that indicates the near plane of the client is closer than the minimum supported distance.
-	Cp_layer_renderer_configuration_error_code_unsupported_near_plane_distance LayerRendererConfigurationErrorCode = -104
+	Cp_layer_renderer_configuration_error_code_unsupported_near_plane_distance CpLayerRendererConfigurationErrorCode = -104
 	// An error that indicates the layer doesn’t support the current pixel format for tracking areas textures.
-	Cp_layer_renderer_configuration_error_code_unsupported_tracking_areas_format LayerRendererConfigurationErrorCode = -21
+	Cp_layer_renderer_configuration_error_code_unsupported_tracking_areas_format CpLayerRendererConfigurationErrorCode = -21
 	// An error that indicates the layer doesn’t support the current texture usage for tracking areas textures.
-	Cp_layer_renderer_configuration_error_code_unsupported_tracking_areas_usage LayerRendererConfigurationErrorCode = -22
+	Cp_layer_renderer_configuration_error_code_unsupported_tracking_areas_usage CpLayerRendererConfigurationErrorCode = -22
 	// An error that indicates the layer doesn’t support the current pixel format for stencil texture.
-	Cp_layer_renderer_configuration_error_code_unsupported_drawable_render_context_stencil_format LayerRendererConfigurationErrorCode = -23
+	Cp_layer_renderer_configuration_error_code_unsupported_drawable_render_context_stencil_format CpLayerRendererConfigurationErrorCode = -23
 	// An error that indicates the configuration’s render quality is unsupported. This could be because foveation is disabled or the quality is outside of the valid range of [0, 1], the error userInfo will contain additional information.
-	Cp_layer_renderer_configuration_error_code_unsupported_render_quality LayerRendererConfigurationErrorCode = -18
+	Cp_layer_renderer_configuration_error_code_unsupported_render_quality CpLayerRendererConfigurationErrorCode = -18
 )
 
-// String returns the LayerRendererConfigurationErrorCode constant's name, or its numeric form when the
+// String returns the CpLayerRendererConfigurationErrorCode constant's name, or its numeric form when the
 // value is not a known constant.
-func (e LayerRendererConfigurationErrorCode) String() string {
+func (e CpLayerRendererConfigurationErrorCode) String() string {
 	switch e {
 	case Cp_layer_renderer_configuration_error_code_missing_configuration:
 		return "Cp_layer_renderer_configuration_error_code_missing_configuration"
@@ -644,7 +816,7 @@ func (e LayerRendererConfigurationErrorCode) String() string {
 	case Cp_layer_renderer_configuration_error_code_unsupported_render_quality:
 		return "Cp_layer_renderer_configuration_error_code_unsupported_render_quality"
 	default:
-		return fmt.Sprintf("LayerRendererConfigurationErrorCode(%d)", int64(e))
+		return fmt.Sprintf("CpLayerRendererConfigurationErrorCode(%d)", int64(e))
 	}
 }
 
@@ -1330,27 +1502,55 @@ func (e QosClass) String() string {
 	}
 }
 
+type TaskSharedRegionStubs uint8
+
+const (
+	TaskSharedRegionStubsDev  TaskSharedRegionStubs = 1
+	TaskSharedRegionStubsProd TaskSharedRegionStubs = 2
+)
+
+// String returns the TaskSharedRegionStubs constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TaskSharedRegionStubs) String() string {
+	switch e {
+	case TaskSharedRegionStubsDev:
+		return "TaskSharedRegionStubsDev"
+	case TaskSharedRegionStubsProd:
+		return "TaskSharedRegionStubsProd"
+	default:
+		return fmt.Sprintf("TaskSharedRegionStubs(%d)", int64(e))
+	}
+}
+
 type VirtualMemoryGuardExceptionCode uint32
 
 const (
-	KGUARD_EXC_DEALLOC_GAP                   VirtualMemoryGuardExceptionCode = 1
-	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        VirtualMemoryGuardExceptionCode = 2
-	KGUARD_EXC_RECLAIM_INDEX_FAILURE         VirtualMemoryGuardExceptionCode = 4
-	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    VirtualMemoryGuardExceptionCode = 8
-	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    VirtualMemoryGuardExceptionCode = 9
-	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         VirtualMemoryGuardExceptionCode = 10
-	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         VirtualMemoryGuardExceptionCode = 11
-	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  VirtualMemoryGuardExceptionCode = 12
-	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    VirtualMemoryGuardExceptionCode = 13
-	KGUARD_EXC_SEC_ACCESS_FAULT              VirtualMemoryGuardExceptionCode = 98
-	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        VirtualMemoryGuardExceptionCode = 99
-	KGUARD_EXC_SEC_COPY_DENIED               VirtualMemoryGuardExceptionCode = 100
-	KGUARD_EXC_SEC_SHARING_DENIED            VirtualMemoryGuardExceptionCode = 101
-	KGUARD_EXC_MTE_SYNC_FAULT                VirtualMemoryGuardExceptionCode = 200
-	KGUARD_EXC_MTE_ASYNC_USER_FAULT          VirtualMemoryGuardExceptionCode = 201
-	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          VirtualMemoryGuardExceptionCode = 202
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT VirtualMemoryGuardExceptionCode = 203
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT VirtualMemoryGuardExceptionCode = 204
+	KGUARD_EXC_DEALLOC_GAP                  VirtualMemoryGuardExceptionCode = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE       VirtualMemoryGuardExceptionCode = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE        VirtualMemoryGuardExceptionCode = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE   VirtualMemoryGuardExceptionCode = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE   VirtualMemoryGuardExceptionCode = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE        VirtualMemoryGuardExceptionCode = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE        VirtualMemoryGuardExceptionCode = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION VirtualMemoryGuardExceptionCode = 12
+	// Guard exception sent to a thread when a CoW defeatured map attempts to copy memory which is not permitted by system policy.
+	KGUARD_EXC_COW_DEFEATURED_COPY_DENIED VirtualMemoryGuardExceptionCode = 13
+	// Guard exception sent to a thread when it attempts to extract a given type of memory in a way which is not permitted for CoW defeatured maps.
+	KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED VirtualMemoryGuardExceptionCode = 14
+	// Guard exception sent to a thread when it attempts to copy-map a memory entry which was created for sharing by a CoW defeatured map.
+	KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED VirtualMemoryGuardExceptionCode = 15
+	KGUARD_EXC_COW_DEFEATURED_FIRST                    VirtualMemoryGuardExceptionCode = 13
+	KGUARD_EXC_COW_DEFEATURED_LAST                     VirtualMemoryGuardExceptionCode = 15
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY              VirtualMemoryGuardExceptionCode = 16
+	KGUARD_EXC_SEC_ACCESS_FAULT                        VirtualMemoryGuardExceptionCode = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT                  VirtualMemoryGuardExceptionCode = 99
+	KGUARD_EXC_SEC_COPY_DENIED                         VirtualMemoryGuardExceptionCode = 100
+	KGUARD_EXC_SEC_SHARING_DENIED                      VirtualMemoryGuardExceptionCode = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                          VirtualMemoryGuardExceptionCode = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT                    VirtualMemoryGuardExceptionCode = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT                    VirtualMemoryGuardExceptionCode = 202
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT           VirtualMemoryGuardExceptionCode = 203
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT           VirtualMemoryGuardExceptionCode = 204
 )
 
 // String returns the VirtualMemoryGuardExceptionCode constant's name, or its numeric form when the
@@ -1373,6 +1573,12 @@ func (e VirtualMemoryGuardExceptionCode) String() string {
 		return "KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE"
 	case KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION:
 		return "KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION"
+	case KGUARD_EXC_COW_DEFEATURED_COPY_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_COPY_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED"
 	case KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY:
 		return "KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY"
 	case KGUARD_EXC_SEC_ACCESS_FAULT:

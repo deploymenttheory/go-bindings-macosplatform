@@ -24,6 +24,10 @@ type AsynchronousKeyValueLoading interface {
 type CaptureAudioDataOutputSampleBufferDelegate interface {
 }
 
+// CaptureBroadcastVideoOutputDelegate is the Go form of the Objective-C protocol AVCaptureBroadcastVideoOutputDelegate.
+type CaptureBroadcastVideoOutputDelegate interface {
+}
+
 // CaptureTimecodeGeneratorDelegate is the Go form of the Objective-C protocol AVCaptureTimecodeGeneratorDelegate.
 type CaptureTimecodeGeneratorDelegate interface {
 	TimecodeGeneratorDidReceiveUpdateFromSource(generator *CaptureTimecodeGenerator, timecode obj.Object, source *CaptureTimecodeSource)

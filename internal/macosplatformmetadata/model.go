@@ -259,6 +259,7 @@ type StructField struct {
 // Function is a plain C function declared in the framework headers.
 type Function struct {
 	Name         string       `json:"name"`
+	LinkName     string       `json:"link_name,omitempty"` // dlsym name when the header uses an asm label
 	Params       []Param      `json:"args,omitempty"`
 	Return       ReturnType   `json:"return"`
 	IsInline     bool         `json:"inline,omitempty"`
@@ -268,6 +269,14 @@ type Function struct {
 	SDKLine      int          `json:"sdk_line,omitempty"`
 	IsWarnUnused bool         `json:"warn_unused,omitempty"`
 	Doc          string       `json:"doc,omitempty"`
+}
+
+// LinkSymbol returns the exported dylib symbol while Name remains the C API name.
+func (f Function) LinkSymbol() string {
+	if f.LinkName != "" {
+		return f.LinkName
+	}
+	return f.Name
 }
 
 // Extern is an extern symbol (global constant or variable).

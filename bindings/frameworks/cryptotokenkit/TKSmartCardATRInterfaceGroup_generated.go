@@ -16,8 +16,6 @@ import (
 )
 
 // SmartCardATRInterfaceGroup is an idiomatic wrapper over the Objective-C class TKSmartCardATRInterfaceGroup.
-//
-// A single interface-bytes group for a Smart Card ATR (Answer to Reset).
 type SmartCardATRInterfaceGroup struct {
 	objref.Handle
 }

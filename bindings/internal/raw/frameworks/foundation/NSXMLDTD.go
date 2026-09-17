@@ -4,12 +4,14 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A representation of a Document Type Definition.
+// A representation of a Document Type Definition. An instance of the “XMLDTD“ class is held as a property of an “XMLDocument“ instance, accessed through the “XMLDocument“ property “XMLDocument/dtd“. In the data model, an “XMLDTD“ object is conceptually similar to namespace and attribute nodes: it is not considered to be a child of the “XMLDocument“ object although it is closely associated with it. It is at the "root" of a shallow tree consisting primarily of nodes representing DTD declarations. Acceptable child nodes are instances of the “XMLDTDNode“ class as well as “XMLNode“ objects representing comment nodes and processing-instruction nodes. You create an `NSXMLDTD` object in one of three ways: - By processing an XML document with its own internal (in-line) DTD - By process a standalone (external) DTD - Programmatically Once an “XMLDTD“ instance is in place, you can add, remove, and change the “XMLDTDNode“ objects representing various DTD declarations. When you write the document out as XML, the new or modified internal DTD is included (assuming you set the DTD in the “XMLDocument“ instance). You may also programmatically create an external DTD and write that out to its own file.
 //
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsxmldtd
 type NSXMLDTD struct {
@@ -19,6 +21,8 @@ type NSXMLDTD struct {
 var (
 	_clsNSXMLDTD                                       = _objcClass("NSXMLDTD")
 	_nSXMLDTDSelInit                                   = objc.RegisterName("init")
+	_nSXMLDTDSelInitWithContentsOfURLOptionsError      = objc.RegisterName("initWithContentsOfURL:options:error:")
+	_nSXMLDTDSelInitWithDataOptionsError               = objc.RegisterName("initWithData:options:error:")
 	_nSXMLDTDSelInsertChildAtIndex                     = objc.RegisterName("insertChild:atIndex:")
 	_nSXMLDTDSelInsertChildrenAtIndex                  = objc.RegisterName("insertChildren:atIndex:")
 	_nSXMLDTDSelRemoveChildAtIndex                     = objc.RegisterName("removeChildAtIndex:")
@@ -54,37 +58,63 @@ func (o *NSXMLDTD) Init() *NSXMLDTD {
 	return NSXMLDTDFromID(_ret)
 }
 
-// @method insertChild:atIndex: @abstract Inserts a child at a particular index.
+// Initializes and returns an `NSXMLDTD` object created from the DTD declarations in a URL-referenced source. - Parameters: - url: An `NSURL` object identifying a URL source. - mask: A bit mask specifying input options; bit-OR multiple options. The current valid options are `NSXMLNodePreserveWhitespace` and `NSXMLNodePreserveEntities`; these constants are described in the "Constants" section of the “XMLNode“ reference. - error: On return, this parameter holds an `NSError` object describing any errors and warnings related to parsing and remote connection. - Returns: An initialized `NSXMLDTD` object or `nil` if initialization fails because of parsing errors or other reasons. You use this method to create a stand-alone DTD which you can thereafter query and use for validation. You can associate the DTD created through this message with a document by setting the “XMLDocument/dtd“ property on an “XMLDocument“ object.
+func (o *NSXMLDTD) InitWithContentsOfURLOptionsError(url *NSURL, mask NSXMLNodeOptions) (*NSXMLDTD, error) {
+	var _nsErr uintptr
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDTDSelInitWithContentsOfURLOptionsError, url.Ptr(), mask, unsafe.Pointer(&_nsErr))
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	if _nsErr != 0 {
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+	}
+	return NSXMLDTDFromID(_ret), nil
+}
+
+// Initializes and returns an `NSXMLDTD` object created from the DTD declarations encapsulated in an `NSData` object. - Parameters: - data: A data object containing DTD declarations. - mask: A bit mask specifying input options; bit-OR multiple options. The current valid options are `NSXMLNodePreserveWhitespace` and `NSXMLNodePreserveEntities`; these constants are described in the "Constants" section of the “XMLNode“ reference. - error: On return, this parameter holds an `NSError` object describing any errors and warnings related to parsing and remote connection. - Returns: An initialized `NSXMLDTD` object or `nil` if initialization fails because of parsing errors or other reasons. This method is the designated initializer for the `NSXMLDTD` class. You use this method to create a stand-alone DTD which you can thereafter query and use for validation. You can associate the DTD created through this message with a document by setting the “XMLDocument/dtd“ property on an “XMLDocument“ object.
+func (o *NSXMLDTD) InitWithDataOptionsError(data *NSData, mask NSXMLNodeOptions) (*NSXMLDTD, error) {
+	var _nsErr uintptr
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDTDSelInitWithDataOptionsError, data.Ptr(), mask, unsafe.Pointer(&_nsErr))
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	if _nsErr != 0 {
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+	}
+	return NSXMLDTDFromID(_ret), nil
+}
+
+// Inserts a child node in the receiver's list of children at a specific location in the list. - Parameters: - child: An XML-node object that represents the child to insert. - index: An integer identifying the location in the receiver's list of children to insert `child`. The indices of subsequent children in the list are incremented by one.
 func (o *NSXMLDTD) InsertChildAtIndex(child *NSXMLNode, index uint) {
 	o.Ptr().Send(_nSXMLDTDSelInsertChildAtIndex, child.Ptr(), index)
 }
 
-// @method insertChildren:atIndex: @abstract Insert several children at a particular index.
+// Inserts an array of child nodes at a specified location in the receiver's list of children. - Parameters: - children: An array of “XMLNode“ objects to insert as children of the receiver. - index: An integer identifying the location in the list of current children to make the insertion. The indices of subsequent children in the list are incremented by the number of inserted children.
 func (o *NSXMLDTD) InsertChildrenAtIndex(children *NSArray[*NSXMLNode], index uint) {
 	o.Ptr().Send(_nSXMLDTDSelInsertChildrenAtIndex, children.Ptr(), index)
 }
 
-// @method removeChildAtIndex: @abstract Removes a child at a particular index.
+// Removes the child node at a particular location in the receiver's list of children. - Parameter index: An integer identifying the child node to remove. The indices of subsequent children in the list are decremented by one. The removed child node is released.
 func (o *NSXMLDTD) RemoveChildAtIndex(index uint) {
 	o.Ptr().Send(_nSXMLDTDSelRemoveChildAtIndex, index)
 }
 
-// @method setChildren: @abstract Removes all existing children and replaces them with the new children. Set children to nil to simply remove all children.
+// Removes all existing children of the receiver and replaces them with an array of new child nodes. - Parameter children: An array of “XMLNode“ objects. To remove all existing children, pass in `nil`. Replaced or removed child nodes are released.
 func (o *NSXMLDTD) SetChildren(children *NSArray[*NSXMLNode]) {
 	o.Ptr().Send(_nSXMLDTDSelSetChildren, children.Ptr())
 }
 
-// @method addChild: @abstract Adds a child to the end of the existing children.
+// Adds a child node to the end of the list of existing children. - Parameter child: The node object to add to the existing children.
 func (o *NSXMLDTD) AddChild(child *NSXMLNode) {
 	o.Ptr().Send(_nSXMLDTDSelAddChild, child.Ptr())
 }
 
-// @method replaceChildAtIndex:withNode: @abstract Replaces a child at a particular index with another child.
+// Replaces a child at a particular index with another child. - Parameters: - index: An integer identifying the position of a node in the receiver's list of child nodes. - node: An “XMLNode“ object to replace the object at `index`. The replaced child node is released.
 func (o *NSXMLDTD) ReplaceChildAtIndexWithNode(index uint, node *NSXMLNode) {
 	o.Ptr().Send(_nSXMLDTDSelReplaceChildAtIndexWithNode, index, node.Ptr())
 }
 
-// @method entityDeclarationForName: @abstract Returns the entity declaration matching this name.
+// Returns the DTD node representing the entity declaration matching this name. - Parameter name: A string that is the name of an entity. - Returns: An autoreleased “XMLDTDNode“ object, or `nil` if there is no match.
 func (o *NSXMLDTD) EntityDeclarationForName(name *NSString) *NSXMLDTDNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDTDSelEntityDeclarationForName, name.Ptr())
 	if _ret != 0 {
@@ -93,7 +123,7 @@ func (o *NSXMLDTD) EntityDeclarationForName(name *NSString) *NSXMLDTDNode {
 	return NSXMLDTDNodeFromID(_ret)
 }
 
-// @method notationDeclarationForName: @abstract Returns the notation declaration matching this name.
+// Returns the DTD node representing the notation declaration identified by the specified notation name. - Parameter name: A string that is the name of a notation. - Returns: An autoreleased “XMLDTDNode“ object, or `nil` if there is no match.
 func (o *NSXMLDTD) NotationDeclarationForName(name *NSString) *NSXMLDTDNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDTDSelNotationDeclarationForName, name.Ptr())
 	if _ret != 0 {
@@ -102,7 +132,7 @@ func (o *NSXMLDTD) NotationDeclarationForName(name *NSString) *NSXMLDTDNode {
 	return NSXMLDTDNodeFromID(_ret)
 }
 
-// @method elementDeclarationForName: @abstract Returns the element declaration matching this name.
+// Returns the DTD node representing an element declaration for a specified element. - Parameter name: A string that is the name of an element. - Returns: An autoreleased “XMLDTDNode“ object, or `nil` if there is no match.
 func (o *NSXMLDTD) ElementDeclarationForName(name *NSString) *NSXMLDTDNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDTDSelElementDeclarationForName, name.Ptr())
 	if _ret != 0 {
@@ -111,7 +141,7 @@ func (o *NSXMLDTD) ElementDeclarationForName(name *NSString) *NSXMLDTDNode {
 	return NSXMLDTDNodeFromID(_ret)
 }
 
-// @method attributeDeclarationForName: @abstract Returns the attribute declaration matching this name.
+// Returns the DTD node representing an attribute-list declaration for a given attribute and its element. - Parameters: - name: A string object identifying the name of an attribute. - elementName: A string object identifying the name of an element. - Returns: An autoreleased “XMLDTDNode“ object, or `nil` if there is no matching attribute-list declaration. For example, in the attribute-list declaration `<!ATTLIST person idnum CDATA "0000">`, "idnum" would correspond to `attrName` and "person" would correspond to `elementName`.
 func (o *NSXMLDTD) AttributeDeclarationForNameElementName(name *NSString, elementName *NSString) *NSXMLDTDNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDTDSelAttributeDeclarationForNameElementName, name.Ptr(), elementName.Ptr())
 	if _ret != 0 {
@@ -120,7 +150,7 @@ func (o *NSXMLDTD) AttributeDeclarationForNameElementName(name *NSString, elemen
 	return NSXMLDTDNodeFromID(_ret)
 }
 
-// @method predefinedEntityDeclarationForName: @abstract Returns the predefined entity declaration matching this name. @discussion The five predefined entities are <ul><li>&amp;lt; - &lt;</li><li>&amp;gt; - &gt;</li><li>&amp;amp; - &amp;</li><li>&amp;quot; - &quot;</li><li>&amp;apos; - &amp;</li></ul>
+// Returns a DTD node representing the predefined entity declaration with the specified name. - Parameter name: A string identifying a predefined entity declaration. - Returns: An autoreleased “XMLDTDNode“ object, or `nil` if there is no match for `name`. The five predefined entity references (or character references) are `&lt;` (less-than sign), `&gt;` (greater-than sign), `&amp;` (ampersand), `&quot;` (quotation mark), and `&apos;` (apostrophe).
 func NSXMLDTDPredefinedEntityDeclarationForName(name *NSString) *NSXMLDTDNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSXMLDTD), _nSXMLDTDSelPredefinedEntityDeclarationForName, name.Ptr())
 	if _ret != 0 {
@@ -129,7 +159,7 @@ func NSXMLDTDPredefinedEntityDeclarationForName(name *NSString) *NSXMLDTDNode {
 	return NSXMLDTDNodeFromID(_ret)
 }
 
-// @abstract Sets the public id. This identifier should be in the default catalog in /etc/xml/catalog or in a path specified by the environment variable XML_CATALOG_FILES. When the public id is set the system id must also be set.
+// Returns the receiver's public identifier. This identifier should be in the default catalog in `/etc/xml/catalog` or in a path specified by the environment variable `XML_CATALOG_FILES`. When the public id is set the system id must also be set.
 func (o *NSXMLDTD) PublicID() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDTDSelPublicID)
 	if _ret != 0 {
@@ -142,7 +172,7 @@ func (o *NSXMLDTD) SetPublicID(publicID *NSString) {
 	o.Ptr().Send(_nSXMLDTDSelSetPublicID, publicID.Ptr())
 }
 
-// @abstract Sets the system id. This should be a URL that points to a valid DTD.
+// Returns the receiver's system identifier. This should be a URL that points to a valid DTD.
 func (o *NSXMLDTD) SystemID() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDTDSelSystemID)
 	if _ret != 0 {

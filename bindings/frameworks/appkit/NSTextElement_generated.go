@@ -97,21 +97,21 @@ func (te *TextElement) WithElementRange(elementRange *TextRange) *TextElement {
 	return te
 }
 
-// TextContentManager returns the text content manager.
+// TextContentManager returns the value that represents the current content manager. A text element can migrate between text content managers.
 func (te *TextElement) TextContentManager() *TextContentManager {
 	defer runtime.KeepAlive(te)
 	_r := objc.Send[objc.ID](objref.IDOf(te), objc.RegisterName("textContentManager"))
 	return TextContentManagerFromID(_r)
 }
 
-// ElementRange returns the element range.
+// ElementRange returns a range value that represents the range of the element inside the document.
 func (te *TextElement) ElementRange() *TextRange {
 	defer runtime.KeepAlive(te)
 	_r := objc.Send[objc.ID](objref.IDOf(te), objc.RegisterName("elementRange"))
 	return TextRangeFromID(_r)
 }
 
-// ChildElements returns the child elements.
+// ChildElements returns an array of zero or more child text elements. A concrete `NSTextElement` subclass can be structured in a tree. An element can have zero or more child elements.
 //
 // ChildElements returns the collection as a Go slice.
 func (te *TextElement) ChildElements() []*TextElement {
@@ -120,14 +120,14 @@ func (te *TextElement) ChildElements() []*TextElement {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TextElement { return TextElementFromID(_id) })
 }
 
-// ParentElement returns the parent element.
+// ParentElement returns a value that represents the parent element if this text element is a child of an enclosing element.
 func (te *TextElement) ParentElement() *TextElement {
 	defer runtime.KeepAlive(te)
 	_r := objc.Send[objc.ID](objref.IDOf(te), objc.RegisterName("parentElement"))
 	return TextElementFromID(_r)
 }
 
-// IsRepresentedElement reports whether the object is represented element.
+// IsRepresentedElement reports whether this element is in the text layout. When `true`, the element is enumerated by “NSTextContentManager“.
 func (te *TextElement) IsRepresentedElement() bool {
 	defer runtime.KeepAlive(te)
 	_r := objc.Send[bool](objref.IDOf(te), objc.RegisterName("isRepresentedElement"))

@@ -53,7 +53,7 @@ func AVPortraitEffectsMattePortraitEffectsMatteFromDictionaryRepresentationError
 	return AVPortraitEffectsMatteFromID(_ret), nil
 }
 
-// Returns a derivative portrait effects matte after applying the specified EXIF orientation.
+// Returns a derivative portrait effects matte after applying the specified Exif orientation.
 func (o *AVPortraitEffectsMatte) PortraitEffectsMatteByApplyingExifOrientation(exifOrientation imageio.CGImagePropertyOrientation) *AVPortraitEffectsMatte {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPortraitEffectsMatteSelPortraitEffectsMatteByApplyingExifOrientation, exifOrientation)
 	if _ret != 0 {

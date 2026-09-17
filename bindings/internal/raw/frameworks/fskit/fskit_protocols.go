@@ -29,10 +29,56 @@ type FSUnaryFileSystemOperations interface {
 	UnloadResourceOptionsReplyHandler(resource *FSResource, options *FSTaskOptions, reply func(unsafe.Pointer))
 }
 
+// FSVolumeAccessCheckHandler wraps the ObjC protocol FSVolumeAccessCheckHandler.
+type FSVolumeAccessCheckHandler interface {
+	CheckAccessToItemRequestedAccessContextReplyHandler(theItem *FSItem, access FSAccessMask, context_ *FSContext, reply func(*FSCheckAccessResult, unsafe.Pointer))
+}
+
 // FSVolumeAccessCheckOperations wraps the ObjC protocol FSVolumeAccessCheckOperations.
 type FSVolumeAccessCheckOperations interface {
 	CheckAccessToItemRequestedAccessReplyHandler(theItem *FSItem, access FSAccessMask, reply func(bool, unsafe.Pointer))
 	SetAccessCheckInhibited(accessCheckInhibited bool)
+}
+
+// FSVolumeCommonOperations wraps the ObjC protocol FSVolumeCommonOperations.
+type FSVolumeCommonOperations interface {
+	MountWithOptionsReplyHandler(options *FSTaskOptions, reply func(unsafe.Pointer))
+	UnmountWithReplyHandler(reply func())
+	SynchronizeWithFlagsReplyHandler(flags FSSyncFlags, reply func(unsafe.Pointer))
+	ReclaimItemReplyHandler(item *FSItem, reply func(unsafe.Pointer))
+	SupportedVolumeCapabilities() *FSVolumeSupportedCapabilities
+	VolumeStatistics() *FSStatFSResult
+}
+
+// FSVolumeDataCacheHandler wraps the ObjC protocol FSVolumeDataCacheHandler.
+type FSVolumeDataCacheHandler interface {
+	OpenItemModesCacheModeContextReplyHandler(item *FSItem, modes FSVolumeOpenModes, cacheMode FSDataCacheMode, context_ *FSContext, reply func(*FSOpenItemResult, unsafe.Pointer))
+	CloseItemContextReplyHandler(item *FSItem, context_ *FSContext, reply func())
+	UpgradeItemCacheModeContextReplyHandler(item *FSItem, cacheMode FSDataCacheMode, context_ *FSContext, reply func(*FSUpgradeItemResult, unsafe.Pointer))
+}
+
+// FSVolumeHandler wraps the ObjC protocol FSVolumeHandler.
+type FSVolumeHandler interface {
+	FSVolumeCommonOperations
+	FSVolumePathConfOperations
+	ActivateVolumeWithOptionsReplyHandler(options *FSTaskOptions, reply func(*FSActivateResult, unsafe.Pointer))
+	DeactivateVolumeWithOptionsReplyHandler(options FSDeactivateOptions, reply func(unsafe.Pointer))
+	MountWithOptionsReplyHandler(options *FSTaskOptions, reply func(unsafe.Pointer))
+	UnmountWithReplyHandler(reply func())
+	SynchronizeWithFlagsReplyHandler(flags FSSyncFlags, reply func(unsafe.Pointer))
+	LookupItemNamedInDirectoryContextReplyHandler(name *FSFileName, directory *FSItem, context_ *FSContext, reply func(*FSLookupItemResult, unsafe.Pointer))
+	ReclaimItemReplyHandler(item *FSItem, reply func(unsafe.Pointer))
+	CreateItemNamedTypeInDirectoryAttributesContextReplyHandler(name *FSFileName, type_ FSItemType, directory *FSItem, newAttributes *FSItemSetAttributesRequest, context_ *FSContext, reply func(*FSCreateItemResult, unsafe.Pointer))
+	CreateSymbolicLinkNamedInDirectoryAttributesLinkContentsContextReplyHandler(name *FSFileName, directory *FSItem, newAttributes *FSItemSetAttributesRequest, contents *FSFileName, context_ *FSContext, reply func(*FSCreateSymlinkResult, unsafe.Pointer))
+	CreateLinkToItemNamedInDirectoryContextReplyHandler(item *FSItem, name *FSFileName, directory *FSItem, context_ *FSContext, reply func(*FSCreateLinkResult, unsafe.Pointer))
+	RenameItemInDirectoryNamedToNewNameInDirectoryOverItemContextReplyHandler(item *FSItem, sourceDirectory *FSItem, sourceName *FSFileName, destinationName *FSFileName, destinationDirectory *FSItem, overItem *FSItem, context_ *FSContext, reply func(*FSRenameItemResult, unsafe.Pointer))
+	RemoveItemNamedFromDirectoryContextReplyHandler(item *FSItem, name *FSFileName, directory *FSItem, context_ *FSContext, reply func(*FSRemoveItemResult, unsafe.Pointer))
+	GetAttributesOfItemContextReplyHandler(desiredAttributes *FSItemGetAttributesRequest, item *FSItem, context_ *FSContext, reply func(*FSGetAttributesResult, unsafe.Pointer))
+	SetAttributesOnItemContextReplyHandler(newAttributes *FSItemSetAttributesRequest, item *FSItem, context_ *FSContext, reply func(*FSSetAttributesResult, unsafe.Pointer))
+	EnumerateDirectoryStartingAtCookieVerifierProvidingAttributesUsingPackerContextReplyHandler(directory *FSItem, cookie uint64, verifier uint64, attributes *FSItemGetAttributesRequest, packer *FSDirectoryEntryPacker, context_ *FSContext, reply func(*FSEnumerateDirectoryResult, unsafe.Pointer))
+	ReadSymbolicLinkContextReplyHandler(item *FSItem, context_ *FSContext, reply func(*FSReadSymlinkResult, unsafe.Pointer))
+	SupportedVolumeCapabilities() *FSVolumeSupportedCapabilities
+	VolumeStatistics() *FSStatFSResult
 }
 
 // FSVolumeItemDeactivation wraps the ObjC protocol FSVolumeItemDeactivation.
@@ -41,12 +87,32 @@ type FSVolumeItemDeactivation interface {
 	ItemDeactivationPolicy() FSItemDeactivationOptions
 }
 
+// FSVolumeItemDeactivationHandler wraps the ObjC protocol FSVolumeItemDeactivationHandler.
+type FSVolumeItemDeactivationHandler interface {
+	DeactivateItemContextReplyHandler(item *FSItem, context_ *FSContext, reply func(*FSDeactivateItemResult, unsafe.Pointer))
+	ItemDeactivationPolicy() FSItemDeactivationOptions
+}
+
+// FSVolumeKernelOffloadedIOHandler wraps the ObjC protocol FSVolumeKernelOffloadedIOHandler.
+type FSVolumeKernelOffloadedIOHandler interface {
+	BlockmapFileOffsetLengthFlagsOperationIDPackerReplyHandler(file *FSItem, offset int64, length uint, flags FSBlockmapFlags, operationID uint, packer *FSExtentPacker, reply func(*FSBlockmapResult, unsafe.Pointer))
+	CompleteIOForFileOffsetLengthStatusFlagsOperationIDReplyHandler(file *FSItem, offset int64, length uint, status unsafe.Pointer, flags FSCompleteIOFlags, operationID uint, reply func(*FSCompleteIOResult, unsafe.Pointer))
+	CreateFileNamedInDirectoryAttributesPackerContextReplyHandler(name *FSFileName, directory *FSItem, newAttributes *FSItemSetAttributesRequest, packer *FSExtentPacker, context_ *FSContext, reply func(*FSCreateFileKOIOResult, unsafe.Pointer))
+	LookupItemNamedInDirectoryPackerContextReplyHandler(name *FSFileName, directory *FSItem, packer *FSExtentPacker, context_ *FSContext, reply func(*FSLookupItemKOIOResult, unsafe.Pointer))
+}
+
 // FSVolumeKernelOffloadedIOOperations wraps the ObjC protocol FSVolumeKernelOffloadedIOOperations.
 type FSVolumeKernelOffloadedIOOperations interface {
 	BlockmapFileOffsetLengthFlagsOperationIDPackerReplyHandler(file *FSItem, offset int64, length uint, flags FSBlockmapFlags, operationID uint, packer *FSExtentPacker, reply func(unsafe.Pointer))
 	CompleteIOForFileOffsetLengthStatusFlagsOperationIDReplyHandler(file *FSItem, offset int64, length uint, status unsafe.Pointer, flags FSCompleteIOFlags, operationID uint, reply func(unsafe.Pointer))
 	CreateFileNamedInDirectoryAttributesPackerReplyHandler(name *FSFileName, directory *FSItem, attributes *FSItemSetAttributesRequest, packer *FSExtentPacker, reply func(*FSItem, *FSFileName, unsafe.Pointer))
 	LookupItemNamedInDirectoryPackerReplyHandler(name *FSFileName, directory *FSItem, packer *FSExtentPacker, reply func(*FSItem, *FSFileName, unsafe.Pointer))
+}
+
+// FSVolumeOpenCloseHandler wraps the ObjC protocol FSVolumeOpenCloseHandler.
+type FSVolumeOpenCloseHandler interface {
+	OpenItemWithModesContextReplyHandler(item *FSItem, modes FSVolumeOpenModes, context_ *FSContext, reply func(unsafe.Pointer))
+	CloseItemKeepingModesContextReplyHandler(item *FSItem, modes FSVolumeOpenModes, context_ *FSContext, reply func(unsafe.Pointer))
 }
 
 // FSVolumeOpenCloseOperations wraps the ObjC protocol FSVolumeOpenCloseOperations.
@@ -58,27 +124,20 @@ type FSVolumeOpenCloseOperations interface {
 
 // FSVolumeOperations wraps the ObjC protocol FSVolumeOperations.
 type FSVolumeOperations interface {
+	FSVolumeCommonOperations
 	FSVolumePathConfOperations
-	MountWithOptionsReplyHandler(options *FSTaskOptions, reply func(unsafe.Pointer))
-	UnmountWithReplyHandler(reply func())
-	SynchronizeWithFlagsReplyHandler(flags FSSyncFlags, reply func(unsafe.Pointer))
-	GetAttributesOfItemReplyHandler(desiredAttributes *FSItemGetAttributesRequest, item *FSItem, reply func(*FSItemAttributes, unsafe.Pointer))
-	SetAttributesOnItemReplyHandler(newAttributes *FSItemSetAttributesRequest, item *FSItem, reply func(*FSItemAttributes, unsafe.Pointer))
+	ActivateWithOptionsReplyHandler(options *FSTaskOptions, reply func(*FSItem, unsafe.Pointer))
+	DeactivateWithOptionsReplyHandler(options FSDeactivateOptions, reply func(unsafe.Pointer))
 	LookupItemNamedInDirectoryReplyHandler(name *FSFileName, directory *FSItem, reply func(*FSItem, *FSFileName, unsafe.Pointer))
-	ReclaimItemReplyHandler(item *FSItem, reply func(unsafe.Pointer))
-	ReadSymbolicLinkReplyHandler(item *FSItem, reply func(*FSFileName, unsafe.Pointer))
 	CreateItemNamedTypeInDirectoryAttributesReplyHandler(name *FSFileName, type_ FSItemType, directory *FSItem, newAttributes *FSItemSetAttributesRequest, reply func(*FSItem, *FSFileName, unsafe.Pointer))
 	CreateSymbolicLinkNamedInDirectoryAttributesLinkContentsReplyHandler(name *FSFileName, directory *FSItem, newAttributes *FSItemSetAttributesRequest, contents *FSFileName, reply func(*FSItem, *FSFileName, unsafe.Pointer))
 	CreateLinkToItemNamedInDirectoryReplyHandler(item *FSItem, name *FSFileName, directory *FSItem, reply func(*FSFileName, unsafe.Pointer))
-	RemoveItemNamedFromDirectoryReplyHandler(item *FSItem, name *FSFileName, directory *FSItem, reply func(unsafe.Pointer))
 	RenameItemInDirectoryNamedToNewNameInDirectoryOverItemReplyHandler(item *FSItem, sourceDirectory *FSItem, sourceName *FSFileName, destinationName *FSFileName, destinationDirectory *FSItem, overItem *FSItem, reply func(*FSFileName, unsafe.Pointer))
+	RemoveItemNamedFromDirectoryReplyHandler(item *FSItem, name *FSFileName, directory *FSItem, reply func(unsafe.Pointer))
+	GetAttributesOfItemReplyHandler(desiredAttributes *FSItemGetAttributesRequest, item *FSItem, reply func(*FSItemAttributes, unsafe.Pointer))
+	SetAttributesOnItemReplyHandler(newAttributes *FSItemSetAttributesRequest, item *FSItem, reply func(*FSItemAttributes, unsafe.Pointer))
 	EnumerateDirectoryStartingAtCookieVerifierProvidingAttributesUsingPackerReplyHandler(directory *FSItem, cookie uint64, verifier uint64, attributes *FSItemGetAttributesRequest, packer *FSDirectoryEntryPacker, reply func(uint64, unsafe.Pointer))
-	ActivateWithOptionsReplyHandler(options *FSTaskOptions, reply func(*FSItem, unsafe.Pointer))
-	DeactivateWithOptionsReplyHandler(options FSDeactivateOptions, reply func(unsafe.Pointer))
-	SupportedVolumeCapabilities() *FSVolumeSupportedCapabilities
-	VolumeStatistics() *FSStatFSResult
-	SetEnableOpenUnlinkEmulation(enableOpenUnlinkEmulation bool)
-	SetRequestedMountOptions(requestedMountOptions FSMountOptions)
+	ReadSymbolicLinkReplyHandler(item *FSItem, reply func(*FSFileName, unsafe.Pointer))
 }
 
 // FSVolumePathConfOperations wraps the ObjC protocol FSVolumePathConfOperations.
@@ -89,10 +148,21 @@ type FSVolumePathConfOperations interface {
 	TruncatesLongNames() bool
 }
 
+// FSVolumePreallocateHandler wraps the ObjC protocol FSVolumePreallocateHandler.
+type FSVolumePreallocateHandler interface {
+	PreallocateSpaceForItemAtOffsetLengthFlagsContextReplyHandler(item *FSItem, offset int64, length uint, flags FSPreallocateFlags, context_ *FSContext, reply func(*FSPreallocateResult, unsafe.Pointer))
+}
+
 // FSVolumePreallocateOperations wraps the ObjC protocol FSVolumePreallocateOperations.
 type FSVolumePreallocateOperations interface {
 	PreallocateSpaceForItemAtOffsetLengthFlagsReplyHandler(item *FSItem, offset int64, length uint, flags FSPreallocateFlags, reply func(uint, unsafe.Pointer))
 	SetPreallocateInhibited(preallocateInhibited bool)
+}
+
+// FSVolumeReadWriteHandler wraps the ObjC protocol FSVolumeReadWriteHandler.
+type FSVolumeReadWriteHandler interface {
+	ReadFromFileOffsetLengthIntoBufferReplyHandler(item *FSItem, offset int64, length uint, buffer *FSMutableFileDataBuffer, reply func(*FSReadFileResult, unsafe.Pointer))
+	WriteContentsToFileAtOffsetReplyHandler(contents *foundation.NSData, item *FSItem, offset int64, reply func(*FSWriteFileResult, unsafe.Pointer))
 }
 
 // FSVolumeReadWriteOperations wraps the ObjC protocol FSVolumeReadWriteOperations.
@@ -101,10 +171,27 @@ type FSVolumeReadWriteOperations interface {
 	WriteContentsToFileAtOffsetReplyHandler(contents *foundation.NSData, item *FSItem, offset int64, reply func(uint, unsafe.Pointer))
 }
 
+// FSVolumeRenameHandler wraps the ObjC protocol FSVolumeRenameHandler.
+type FSVolumeRenameHandler interface {
+	SetVolumeNameContextReplyHandler(name *FSFileName, context_ *FSContext, reply func(*FSVolumeRenameResult, unsafe.Pointer))
+}
+
 // FSVolumeRenameOperations wraps the ObjC protocol FSVolumeRenameOperations.
 type FSVolumeRenameOperations interface {
 	SetVolumeNameReplyHandler(name *FSFileName, reply func(*FSFileName, unsafe.Pointer))
 	SetVolumeRenameInhibited(volumeRenameInhibited bool)
+}
+
+// FSVolumeSeekRegionHandler wraps the ObjC protocol FSVolumeSeekRegionHandler.
+type FSVolumeSeekRegionHandler interface {
+	SeekWithinItemFromOffsetRegionContextReplyHandler(item *FSItem, offset int64, region FSSeekRegion, context_ *FSContext, reply func(*FSSeekRegionResult, unsafe.Pointer))
+}
+
+// FSVolumeXattrHandler wraps the ObjC protocol FSVolumeXattrHandler.
+type FSVolumeXattrHandler interface {
+	GetXattrNamedOfItemContextReplyHandler(name *FSFileName, item *FSItem, context_ *FSContext, reply func(*FSGetXattrResult, unsafe.Pointer))
+	SetXattrNamedToDataOnItemPolicyContextReplyHandler(name *FSFileName, value *foundation.NSData, item *FSItem, policy FSSetXattrPolicy, context_ *FSContext, reply func(*FSSetXattrResult, unsafe.Pointer))
+	ListXattrsOfItemContextReplyHandler(item *FSItem, context_ *FSContext, reply func(*FSListXattrsResult, unsafe.Pointer))
 }
 
 // FSVolumeXattrOperations wraps the ObjC protocol FSVolumeXattrOperations.

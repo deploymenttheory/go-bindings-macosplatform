@@ -17,7 +17,7 @@ import (
 
 // UserDefaults is an idiomatic wrapper over the Objective-C class NSUserDefaults.
 //
-// An interface to the user’s defaults database, which stores system-wide and app-specific settings.
+// An interface to the user's defaults database, which stores system-wide and app-specific settings. A `UserDefaults` object provides access to the defaults system, which is a persistent store for app-specific and system-wide settings. You use this system to store nonsensitive information, such as app-specific configuration details. The system also stores configuration details that apply to all apps, such as the current language settings for the device. In your code, you check values from this system and use them to dynamically alter your app's appearance or behavior. The term *defaults* refers to the fact that the stored data determines the default startup state and behavior. > Important: Don't store personal or sensitive information as settings. The defaults system stores information on disk in an unencrypted format. Store personal or sensitive information in the person's Keychain instead. To access the defaults system, obtain a `UserDefaults` object and call its methods to read and write values. The “standard“ object is a shared object you use to read and write your app's standard settings. You can also create unique `UserDefaults` objects to manage specific sets of settings. For example, you can create a `UserDefaults` object that reads and writes settings your app shares with an app extension. Don't subclass `UserDefaults`. Each item you store in a defaults object consists of a key-value pair, where each key is a string that you use to locate the item and each value is a data object. The defaults database supports the same value types found in property list files, including types like `Int`, `Float`, `Double`, `Bool`, `String`, “URL“, `NSNumber`, “Date“, `Array`, and `Dictionary`. To include other types of objects in the defaults database, archive them to a “Data“ object first and store that object instead. Prefer simple types over custom objects whenever possible. With the exception of managed devices in educational institutions, the system stores defaults locally on the current device. When you write values to a `UserDefaults` object, the object updates its in-memory version of that information right away, and writes the value to disk asynchronously. When someone backs up their device, the system includes any persistent defaults databases in the backup data. Because the data is device-specific, you don't use the defaults system to share data between devices. To share data between someone's devices, use the “NSUbiquitousKeyValueStore“ instead. > Warning: Don't access the files of the defaults database directly from the file system. Modifying one of the underlying files directly may cause data loss, a delay in changes being available, or an app crash. In macOS, use the `defaults` command-line utility to safely view or modify the defaults database outside of your app. While your app is running, the defaults system generates notifications to let you know when values change. To observe changes to individual settings, add a key-value observer to your `UserDefaults` object, using key names to build the path to the setting you want. To observe changes for all settings, register for a “didChangeNotification“ with your `UserDefaults` object. The `UserDefaults` type is thread-safe, and you can use the same object in multiple threads or tasks simultaneously. ### Domains and Settings Search Paths To integrate settings from different sources, the defaults system organizes them into domains. An app defines its own custom settings, but the system defines settings that apply to all apps. Similarly, you might choose to override a specific setting temporarily to test one of your app's features. The defaults system provides domains for each of these cases along with several others. When you request the value of a setting, the `UserDefaults` object searches its domains in a specific order until it finds the value you want. The following table lists the key domains that the defaults system supports and their search order. Some domains might not be present for all apps. For example, the managed domain is present only on administrator-managed devices. | Domain | Type | Description | |----------|----------|----------| | Managed | persistent | This domain contains settings that an administrator provided for a managed device. | | Argument | volatile | This domain contains the settings you specified when launching your app from the command-line or Xcode. These keys represent temporary overrides of settings, and the system discards them after the app quits. | | Educational managed | persistent | For managed devices in an educational institution, this domain contains any settings saved to the iCloud key-value store for that institution. | | App | persistent | This domain contains the settings your app saves, either programmatically or using its settings UI. | | Suite | persistent | This domain contains custom settings from an app group or other app you specify at runtime. This domain is absent by default, but you can add a suite using the “addSuite(named:)“ method. | | Global | persistent | This domain contains keys present for all apps on the system. The system provides the keys for this domain, and apps can't write to it. | | Registration | volatile | This domain contains system-provided default values and the default values you register for your app at launch time. Registering a set of default values prevents your code from receiving `nil` values when requesting a setting. The system discards these values when your app quits, so you must register them each time your app launches. | The system stores data for most persistent domains on the current device, and doesn't share that data with other devices. To share settings among all of a person's devices, save them using an “NSUbiquitousKeyValueStore“ object instead. ### Settings in Managed Environments If your app supports managed environments, an administrator might configure any managed devices with a default set of settings. Apps can't write to managed domains, so if your app encounters a managed setting, disable or hide any controls that someone might use to change that setting's value. To determine if a setting is managed, call the “objectIsForced(forKey:)“ or “objectIsForced(forKey:inDomain:)“ method of your `UserDefaults` object. ### Sandbox Considerations A sandboxed app cannot access or modify the settings of another app or process, with the following exceptions: - An app can modify settings for one of its app extensions. - An app can modify settings for an app group to which it belongs.
 type UserDefaults struct {
 	objref.Handle
 }
@@ -80,14 +80,14 @@ func NewUserDefaults() *UserDefaults {
 	return userDefaultsAdopt(_id)
 }
 
-// NewUserDefaultsWithSuiteName -initWithSuiteName: initializes an instance of NSUserDefaults that searches the shared preferences search list for the domain 'suitename'. For example, using the identifier of an application group will cause the receiver to search the preferences for that group. Passing the current application's bundle identifier, NSGlobalDomain, or the corresponding CFPreferences constants is an error. Passing nil will search the default search list.
+// NewUserDefaultsWithSuiteName creates a new defaults object and initializes it with the settings from the specified database.
 func NewUserDefaultsWithSuiteName(suitename string) *UserDefaults {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSUserDefaults")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSuiteName:"), purego.NSString(suitename))
 	return userDefaultsAdopt(_id)
 }
 
-// NewUserDefaultsWithUser -initWithUser: is equivalent to -init
+// NewUserDefaultsWithUser creates a user defaults object initialized with the defaults for the specified user account.
 func NewUserDefaultsWithUser(username string) *UserDefaults {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSUserDefaults")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUser:"), purego.NSString(username))
@@ -106,27 +106,27 @@ func (ud *UserDefaults) WithScriptingProperties(scriptingProperties map[string]o
 	return ud
 }
 
-// ObjectForKey -objectForKey: will search the receiver's search list for a default with the key 'defaultName' and return it. If another process has changed defaults in the search list, NSUserDefaults will automatically update to the latest values. If the key in question has been marked as ubiquitous via a Defaults Configuration File, the latest value may not be immediately available, and the registered value will be returned instead.
+// ObjectForKey returns the object associated with the specified key. - Parameter defaultName: A key in the current user's defaults database. - Returns: The object associated with the specified key, or `nil` if the key was not found. This method searches the receiver's search list for a default with the key `defaultName` and returns it. If another process has changed defaults in the search list, NSUserDefaults will automatically update to the latest values. If the key in question has been marked as ubiquitous via a Defaults Configuration File, the latest value may not be immediately available, and the registered value will be returned instead. The returned object is immutable, even if the value you originally set was mutable.
 func (ud *UserDefaults) ObjectForKey(defaultName string) obj.Object {
 	defer runtime.KeepAlive(ud)
 	_r := objc.Send[objc.ID](objref.IDOf(ud), objc.RegisterName("objectForKey:"), purego.NSString(defaultName))
 	return obj.Wrap(_r)
 }
 
-// SetObjectForKey -setObject:forKey: immediately stores a value (or removes the value if nil is passed as the value) for the provided key in the search list entry for the receiver's suite name in the current user and any host, then asynchronously stores the value persistently, where it is made available to other processes.
+// SetObjectForKey sets the value of the specified key to a property list object. - Parameters: - value: The object to store in the defaults database. Pass `nil` to remove the value for `defaultName`. - defaultName: The key with which to associate the value. This method immediately stores a value (or removes the value if `nil` is passed) for the provided key in the search list entry for the receiver's suite name in the current user and any host, then asynchronously stores the value persistently, where it is made available to other processes. Setting a default value to a non-property-list object that can't be archived will throw an exception.
 func (ud *UserDefaults) SetObjectForKey(value obj.Object, defaultName string) {
 	defer runtime.KeepAlive(ud)
 	defer runtime.KeepAlive(value)
 	objc.Send[objc.ID](objref.IDOf(ud), objc.RegisterName("setObject:forKey:"), objref.IDOf(value), purego.NSString(defaultName))
 }
 
-// RemoveObjectForKey -removeObjectForKey: is equivalent to -[... setObject:nil forKey:defaultName]
+// RemoveObjectForKey removes the value for the specified key from the defaults database. - Parameter defaultName: The key whose value you want to remove. Removing a default has no effect on the value returned by the `object(forKey:)` method if the same key exists in a domain that precedes the application domain in the search list.
 func (ud *UserDefaults) RemoveObjectForKey(defaultName string) {
 	defer runtime.KeepAlive(ud)
 	objc.Send[objc.ID](objref.IDOf(ud), objc.RegisterName("removeObjectForKey:"), purego.NSString(defaultName))
 }
 
-// StringForKey -stringForKey: is equivalent to -objectForKey:, except that it will convert NSNumber values to their NSString representation. If a non-string non-number value is found, nil will be returned.
+// StringForKey returns the string associated with the specified key. - Parameter defaultName: A key in the current user's defaults database. - Returns: The string associated with the specified key, or `nil` if the key doesn't exist or the value is not a string. If the value is a number, this method converts it to a string representation.
 func (ud *UserDefaults) StringForKey(defaultName string) string {
 	defer runtime.KeepAlive(ud)
 	_r := objc.Send[objc.ID](objref.IDOf(ud), objc.RegisterName("stringForKey:"), purego.NSString(defaultName))
@@ -136,191 +136,191 @@ func (ud *UserDefaults) StringForKey(defaultName string) string {
 	return purego.GoString(_r)
 }
 
-// ArrayForKey -arrayForKey: is equivalent to -objectForKey:, except that it will return nil if the value is not an NSArray.
+// ArrayForKey returns the array associated with the specified key. - Parameter defaultName: A key in the current user's defaults database. - Returns: The array associated with the specified key, or `nil` if the key doesn't exist or its value is not an array. The returned array and its contents are immutable, even if the values you originally set were mutable.
 func (ud *UserDefaults) ArrayForKey(defaultName string) obj.Object {
 	defer runtime.KeepAlive(ud)
 	_r := objc.Send[objc.ID](objref.IDOf(ud), objc.RegisterName("arrayForKey:"), purego.NSString(defaultName))
 	return obj.Wrap(_r)
 }
 
-// DictionaryForKey -dictionaryForKey: is equivalent to -objectForKey:, except that it will return nil if the value is not an NSDictionary.
+// DictionaryForKey returns the dictionary object associated with the specified key. - Parameter defaultName: A key in the current user's defaults database. - Returns: The dictionary object associated with the specified key, or `nil` if the key doesn't exist or its value is not a dictionary. The returned dictionary and its contents are immutable, even if the values you originally set were mutable.
 func (ud *UserDefaults) DictionaryForKey(defaultName string) map[string]obj.Object {
 	defer runtime.KeepAlive(ud)
 	_r := objc.Send[objc.ID](objref.IDOf(ud), objc.RegisterName("dictionaryForKey:"), purego.NSString(defaultName))
 	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// DataForKey -dataForKey: is equivalent to -objectForKey:, except that it will return nil if the value is not an NSData.
+// DataForKey returns the data object associated with the specified key. - Parameter defaultName: A key in the current user's defaults database. - Returns: The data object associated with the specified key, or `nil` if the key doesn't exist or its value is not a data object. The returned data object is immutable, even if the value you originally set was mutable.
 func (ud *UserDefaults) DataForKey(defaultName string) []byte {
 	defer runtime.KeepAlive(ud)
 	_r := objc.Send[objc.ID](objref.IDOf(ud), objc.RegisterName("dataForKey:"), purego.NSString(defaultName))
 	return rt.NSDataToBytes(_r)
 }
 
-// StringArrayForKey -stringForKey: is equivalent to -objectForKey:, except that it will return nil if the value is not an NSArray<NSString *>. Note that unlike -stringForKey:, NSNumbers are not converted to NSStrings.
+// StringArrayForKey returns the array of strings associated with the specified key. - Parameter defaultName: A key in the current user's defaults database. - Returns: The array of strings associated with the specified key, or `nil` if the key doesn't exist, the value is not an array, or any element in the array is not a string. Unlike “UserDefaults/string(forKey:)“, `NSNumber` values are not converted to strings.
 func (ud *UserDefaults) StringArrayForKey(defaultName string) []string {
 	defer runtime.KeepAlive(ud)
 	_r := objc.Send[objc.ID](objref.IDOf(ud), objc.RegisterName("stringArrayForKey:"), purego.NSString(defaultName))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// IntegerForKey -integerForKey: is equivalent to -objectForKey:, except that it converts the returned value to an NSInteger. If the value is an NSNumber, the result of -integerValue will be returned. If the value is an NSString, it will be converted to NSInteger if possible. If the value is a boolean, it will be converted to either 1 for YES or 0 for NO. If the value is absent or can't be converted to an integer, 0 will be returned.
+// IntegerForKey returns the integer value associated with the specified key. - Parameter defaultName: A key in the current user's defaults database. - Returns: The integer value associated with the specified key. If the key doesn't exist, this method returns `0`. If the value is an `NSNumber`, the result of `-integerValue` will be returned. If the value is an `NSString`, it will be converted to `NSInteger` if possible. If the value is a Boolean, it will be converted to either `1` for `YES` or `0` for `NO`. If the value is absent or can't be converted to an integer, `0` will be returned.
 func (ud *UserDefaults) IntegerForKey(defaultName string) int {
 	defer runtime.KeepAlive(ud)
 	_r := objc.Send[int](objref.IDOf(ud), objc.RegisterName("integerForKey:"), purego.NSString(defaultName))
 	return _r
 }
 
-// FloatForKey -floatForKey: is similar to -integerForKey:, except that it returns a float, and boolean values will not be converted.
+// FloatForKey returns the floating-point value associated with the specified key. - Parameter defaultName: A key in the current user's defaults database. - Returns: The float value associated with the specified key. If the key doesn't exist, this method returns `0`. If the value is an `NSNumber`, the result of `-floatValue` will be returned. If the value is an `NSString`, it will be converted if possible. Boolean values will not be converted.
 func (ud *UserDefaults) FloatForKey(defaultName string) float32 {
 	defer runtime.KeepAlive(ud)
 	_r := objc.Send[float32](objref.IDOf(ud), objc.RegisterName("floatForKey:"), purego.NSString(defaultName))
 	return _r
 }
 
-// DoubleForKey -doubleForKey: is similar to -integerForKey:, except that it returns a double, and boolean values will not be converted.
+// DoubleForKey returns the double value associated with the specified key. - Parameter defaultName: A key in the current user's defaults database. - Returns: The double value associated with the specified key. If the key doesn't exist, this method returns `0`. If the value is an `NSNumber`, the result of `-doubleValue` will be returned. If the value is an `NSString`, it will be converted if possible. Boolean values will not be converted.
 func (ud *UserDefaults) DoubleForKey(defaultName string) float64 {
 	defer runtime.KeepAlive(ud)
 	_r := objc.Send[float64](objref.IDOf(ud), objc.RegisterName("doubleForKey:"), purego.NSString(defaultName))
 	return _r
 }
 
-// BoolForKey -boolForKey: is equivalent to -objectForKey:, except that it converts the returned value to a BOOL. If the value is an NSNumber, NO will be returned if the value is 0, YES otherwise. If the value is an NSString, values of "YES" or "1" will return YES, and values of "NO", "0", or any other string will return NO. If the value is absent or can't be converted to a BOOL, NO will be returned.
+// BoolForKey returns the Boolean value associated with the specified key. - Parameter defaultName: A key in the current user's defaults database. - Returns: The Boolean value associated with the specified key. If the key doesn't exist, this method returns `NO`. If the value is an `NSNumber`, `NO` will be returned if the value is `0`, `YES` otherwise. If the value is an `NSString`, values of `"YES"` or `"1"` will return `YES`, and values of `"NO"`, `"0"`, or any other string will return `NO`. If the value is absent or can't be converted to a `BOOL`, `NO` will be returned.
 func (ud *UserDefaults) BoolForKey(defaultName string) bool {
 	defer runtime.KeepAlive(ud)
 	_r := objc.Send[bool](objref.IDOf(ud), objc.RegisterName("boolForKey:"), purego.NSString(defaultName))
 	return _r
 }
 
-// URLForKey -URLForKey: is equivalent to -objectForKey: except that it converts the returned value to an NSURL. If the value is an NSString path, then it will construct a file URL to that path. If the value is an archived URL from -setURL:forKey: it will be unarchived. If the value is absent or can't be converted to an NSURL, nil will be returned.
+// URLForKey returns the URL associated with the specified key. - Parameter defaultName: A key in the current user's defaults database. - Returns: The URL associated with the specified key, or `nil` if the key doesn't exist or its value can't be converted to a URL. If the value is an `NSString` path, then it will construct a file URL to that path. If the value is an archived URL from “UserDefaults/set(_:forKey:)-2bqjt“ it will be unarchived.
 func (ud *UserDefaults) URLForKey(defaultName string) string {
 	defer runtime.KeepAlive(ud)
 	_r := objc.Send[objc.ID](objref.IDOf(ud), objc.RegisterName("URLForKey:"), purego.NSString(defaultName))
 	return rt.URLString(_r)
 }
 
-// SetIntegerForKey -setInteger:forKey: is equivalent to -setObject:forKey: except that the value is converted from an NSInteger to an NSNumber.
+// SetIntegerForKey sets the value of the specified key to an integer. - Parameters: - value: The integer value to store. - defaultName: The key with which to associate the value.
 func (ud *UserDefaults) SetIntegerForKey(value int, defaultName string) {
 	defer runtime.KeepAlive(ud)
 	objc.Send[objc.ID](objref.IDOf(ud), objc.RegisterName("setInteger:forKey:"), value, purego.NSString(defaultName))
 }
 
-// SetFloatForKey -setFloat:forKey: is equivalent to -setObject:forKey: except that the value is converted from a float to an NSNumber.
+// SetFloatForKey sets the value of the specified key to a floating-point number. - Parameters: - value: The floating-point value to store. - defaultName: The key with which to associate the value.
 func (ud *UserDefaults) SetFloatForKey(value float32, defaultName string) {
 	defer runtime.KeepAlive(ud)
 	objc.Send[objc.ID](objref.IDOf(ud), objc.RegisterName("setFloat:forKey:"), value, purego.NSString(defaultName))
 }
 
-// SetDoubleForKey -setDouble:forKey: is equivalent to -setObject:forKey: except that the value is converted from a double to an NSNumber.
+// SetDoubleForKey sets the value of the specified key to a double. - Parameters: - value: The double value to store. - defaultName: The key with which to associate the value.
 func (ud *UserDefaults) SetDoubleForKey(value float64, defaultName string) {
 	defer runtime.KeepAlive(ud)
 	objc.Send[objc.ID](objref.IDOf(ud), objc.RegisterName("setDouble:forKey:"), value, purego.NSString(defaultName))
 }
 
-// SetBoolForKey -setBool:forKey: is equivalent to -setObject:forKey: except that the value is converted from a BOOL to an NSNumber.
+// SetBoolForKey sets the value of the specified key to a Boolean value. - Parameters: - value: The Boolean value to store. - defaultName: The key with which to associate the value.
 func (ud *UserDefaults) SetBoolForKey(value bool, defaultName string) {
 	defer runtime.KeepAlive(ud)
 	objc.Send[objc.ID](objref.IDOf(ud), objc.RegisterName("setBool:forKey:"), value, purego.NSString(defaultName))
 }
 
-// SetURLForKey -setURL:forKey is equivalent to -setObject:forKey: except that the value is archived to an NSData. Use -URLForKey: to retrieve values set this way.
+// SetURLForKey sets the value of the specified key to a URL. - Parameters: - url: The URL to store. - defaultName: The key with which to associate the value. If `url` is a file URL, the value that is archived is the `path` with the user's home directory abbreviated using a tilde (`~`) character. Use “UserDefaults/url(forKey:)“ to retrieve values set this way.
 func (ud *UserDefaults) SetURLForKey(url string, defaultName string) {
 	defer runtime.KeepAlive(ud)
 	objc.Send[objc.ID](objref.IDOf(ud), objc.RegisterName("setURL:forKey:"), rt.FileURL(url), purego.NSString(defaultName))
 }
 
-// RegisterDefaults -registerDefaults: adds the registrationDictionary to the last item in every search list. This means that after NSUserDefaults has looked for a value in every other valid location, it will look in registered defaults, making them useful as a "fallback" value. Registered defaults are never stored between runs of an application, and are visible only to the application that registers them. Default values from Defaults Configuration Files will automatically be registered.
+// RegisterDefaults specifies the set of default settings and values to use as a fallback in cases where the app domain doesn't have them. - Parameter registrationDictionary: The dictionary of keys and values you want to register. The contents of the registration domain are not written to disk; you need to call this method each time your application starts. You can call this method more than once; each call adds or updates the entries in the registration domain. Default values from Defaults Configuration Files will automatically be registered.
 func (ud *UserDefaults) RegisterDefaults(registrationDictionary map[string]obj.Object) {
 	defer runtime.KeepAlive(ud)
 	objc.Send[objc.ID](objref.IDOf(ud), objc.RegisterName("registerDefaults:"), rt.MapToDict(registrationDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// AddSuiteNamed -addSuiteNamed: adds the full search list for 'suiteName' as a sub-search-list of the receiver's. The additional search lists are searched after the current domain, but before global defaults. Passing NSGlobalDomain or the current application's bundle identifier is unsupported.
+// AddSuiteNamed inserts settings for the specified domain into the search list of the current object. - Parameter suiteName: The domain name to insert. This domain is inserted after the application domain. Passing “NSGlobalDomain“ or the current application's bundle identifier is unsupported. The additional search lists are searched after the current domain, but before global defaults.
 func (ud *UserDefaults) AddSuiteNamed(suiteName string) {
 	defer runtime.KeepAlive(ud)
 	objc.Send[objc.ID](objref.IDOf(ud), objc.RegisterName("addSuiteNamed:"), purego.NSString(suiteName))
 }
 
-// RemoveSuiteNamed -removeSuiteNamed: removes a sub-searchlist added via -addSuiteNamed:.
+// RemoveSuiteNamed removes the specified domain from the search list of the current object. - Parameter suiteName: The domain name to remove.
 func (ud *UserDefaults) RemoveSuiteNamed(suiteName string) {
 	defer runtime.KeepAlive(ud)
 	objc.Send[objc.ID](objref.IDOf(ud), objc.RegisterName("removeSuiteNamed:"), purego.NSString(suiteName))
 }
 
-// DictionaryRepresentation returns -dictionaryRepresentation returns a composite snapshot of the values in the receiver's search list, such that [[receiver dictionaryRepresentation] objectForKey:x] will return the same thing as [receiver objectForKey:x].
+// DictionaryRepresentation returns a dictionary with the union of all key-value pairs found from all domains. - Returns: A dictionary that contains the keys and their corresponding values from each of the search list's domains. For duplicate keys, the object from the domain that is closest to the front of the search list is used.
 func (ud *UserDefaults) DictionaryRepresentation() map[string]obj.Object {
 	defer runtime.KeepAlive(ud)
 	_r := objc.Send[objc.ID](objref.IDOf(ud), objc.RegisterName("dictionaryRepresentation"))
 	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// VolatileDomainForName wraps the corresponding Objective-C method.
+// VolatileDomainForName retrieves the settings from the specified volatile domain. - Parameter domainName: The name of the volatile domain. - Returns: The dictionary for the volatile domain specified by `domainName`, or `nil` if the domain doesn't exist.
 func (ud *UserDefaults) VolatileDomainForName(domainName string) map[string]obj.Object {
 	defer runtime.KeepAlive(ud)
 	_r := objc.Send[objc.ID](objref.IDOf(ud), objc.RegisterName("volatileDomainForName:"), purego.NSString(domainName))
 	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetVolatileDomainForName wraps the corresponding Objective-C method.
+// SetVolatileDomainForName replaces the keys and values in the specified domain with the new keys and values you supply. - Parameters: - domain: The dictionary of keys and values to assign to the domain. - domainName: The name of the volatile domain.
 func (ud *UserDefaults) SetVolatileDomainForName(domain map[string]obj.Object, domainName string) {
 	defer runtime.KeepAlive(ud)
 	objc.Send[objc.ID](objref.IDOf(ud), objc.RegisterName("setVolatileDomain:forName:"), rt.MapToDict(domain, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(domainName))
 }
 
-// RemoveVolatileDomainForName removes volatile domain for name.
+// RemoveVolatileDomainForName removes the keys and values from the specified volatile domain. - Parameter domainName: The name of the volatile domain to remove.
 func (ud *UserDefaults) RemoveVolatileDomainForName(domainName string) {
 	defer runtime.KeepAlive(ud)
 	objc.Send[objc.ID](objref.IDOf(ud), objc.RegisterName("removeVolatileDomainForName:"), purego.NSString(domainName))
 }
 
-// PersistentDomainNames returns -persistentDomainNames returns an incomplete list of domains that have preferences stored in them.
+// PersistentDomainNames returns an array of the current persistent domain names.
 func (ud *UserDefaults) PersistentDomainNames() obj.Object {
 	defer runtime.KeepAlive(ud)
 	_r := objc.Send[objc.ID](objref.IDOf(ud), objc.RegisterName("persistentDomainNames"))
 	return obj.Wrap(_r)
 }
 
-// PersistentDomainForName -persistentDomainForName: returns a dictionary representation of the search list entry specified by 'domainName', the current user, and any host.
+// PersistentDomainForName retrieves the settings from the specified persistent domain. - Parameter domainName: The domain name. - Returns: A dictionary containing the keys and values in the specified persistent domain, or `nil` if the domain doesn't exist.
 func (ud *UserDefaults) PersistentDomainForName(domainName string) map[string]obj.Object {
 	defer runtime.KeepAlive(ud)
 	_r := objc.Send[objc.ID](objref.IDOf(ud), objc.RegisterName("persistentDomainForName:"), purego.NSString(domainName))
 	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetPersistentDomainForName -setPersistentDomain:forName: replaces all values in the search list entry specified by 'domainName', the current user, and any host, with the values in 'domain'. The change will be persisted.
+// SetPersistentDomainForName replaces the keys and values in the specified domain with the new keys and values you supply. - Parameters: - domain: The dictionary of keys and values to assign to the domain. - domainName: The name of the persistent domain. Replaces all values in the search list entry specified by `domainName`, the current user, and any host, with the values in `domain`. The change will be persisted.
 func (ud *UserDefaults) SetPersistentDomainForName(domain map[string]obj.Object, domainName string) {
 	defer runtime.KeepAlive(ud)
 	objc.Send[objc.ID](objref.IDOf(ud), objc.RegisterName("setPersistentDomain:forName:"), rt.MapToDict(domain, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(domainName))
 }
 
-// RemovePersistentDomainForName -removePersistentDomainForName: removes all values from the search list entry specified by 'domainName', the current user, and any host. The change is persistent.
+// RemovePersistentDomainForName removes the keys and values from the specified persistent domain. - Parameter domainName: The name of the persistent domain. Removes all values from the search list entry specified by `domainName`, the current user, and any host. The change is persistent.
 func (ud *UserDefaults) RemovePersistentDomainForName(domainName string) {
 	defer runtime.KeepAlive(ud)
 	objc.Send[objc.ID](objref.IDOf(ud), objc.RegisterName("removePersistentDomainForName:"), purego.NSString(domainName))
 }
 
-// Synchronize reports whether -synchronize is deprecated and will be marked with the API_DEPRECATED macro in a future release. -synchronize blocks the calling thread until all in-progress set operations have completed. This is no longer necessary. Replacements for previous uses of -synchronize depend on what the intent of calling synchronize was. If you synchronized... - ...before reading in order to fetch updated values: remove the synchronize call - ...after writing in order to notify another program to read: the other program can use KVO to observe the default without needing to notify - ...before exiting in a non-app (command line tool, agent, or daemon) process: call CFPreferencesAppSynchronize(kCFPreferencesCurrentApplication) - ...for any other reason: remove the synchronize call
+// Synchronize reports whether waits for any pending asynchronous updates to the defaults database and returns; this method is unnecessary and shouldn't be used. This method is unnecessary and shouldn't be used.
 func (ud *UserDefaults) Synchronize() bool {
 	defer runtime.KeepAlive(ud)
 	_r := objc.Send[bool](objref.IDOf(ud), objc.RegisterName("synchronize"))
 	return _r
 }
 
-// ObjectIsForcedForKey wraps the corresponding Objective-C method.
+// ObjectIsForcedForKey returns a Boolean value that indicates whether an administrator provided the value for the specified key. - Parameter key: The key whose status you want to check. - Returns: `YES` if the value for `key` is managed by an administrator; otherwise, `NO`. A key is managed when its value has been set by a configuration profile or managed by a mobile device management (MDM) server. For keys that are managed, you should disable any user interface that allows the user to modify the value of that key.
 func (ud *UserDefaults) ObjectIsForcedForKey(key string) bool {
 	defer runtime.KeepAlive(ud)
 	_r := objc.Send[bool](objref.IDOf(ud), objc.RegisterName("objectIsForcedForKey:"), purego.NSString(key))
 	return _r
 }
 
-// ObjectIsForcedForKeyInDomain wraps the corresponding Objective-C method.
+// ObjectIsForcedForKeyInDomain returns a Boolean value that indicates whether an administrator provided the value for the key in the specified domain. - Parameters: - key: The key whose status you want to check. - domain: The domain of the key. - Returns: `YES` if the value for `key` in `domain` is managed by an administrator; otherwise, `NO`. For keys that are managed, you should disable any user interface that allows the user to modify the value of that key.
 func (ud *UserDefaults) ObjectIsForcedForKeyInDomain(key string, domain string) bool {
 	defer runtime.KeepAlive(ud)
 	_r := objc.Send[bool](objref.IDOf(ud), objc.RegisterName("objectIsForcedForKey:inDomain:"), purego.NSString(key), purego.NSString(domain))
 	return _r
 }
 
-// VolatileDomainNames returns the volatile domain names.
+// VolatileDomainNames returns an array of identifiers for the volatile domains associated with the current object. Use “UserDefaults/volatileDomain(forName:)“ to retrieve the contents of a specific volatile domain.
 //
 // VolatileDomainNames returns the collection as a Go slice.
 func (ud *UserDefaults) VolatileDomainNames() []string {

@@ -3,10 +3,6 @@
   "framework": "CompositorServices",
   "source": "developer.apple.com DocC render API",
   "classes": {
-    "CP_OBJECT_cp_layer_renderer": {
-      "doc": "A type that provides the Metal types and timing information you need to draw your content.",
-      "url": "https://developer.apple.com/documentation/compositorservices/cp_object_cp_layer_renderer"
-    },
     "CP_OBJECT_cp_layer_renderer_capabilities": {
       "url": "https://developer.apple.com/documentation/compositorservices/cp_object_cp_layer_renderer_capabilities"
     },
@@ -18,14 +14,6 @@
     }
   },
   "enums": {
-    "cp_axis_direction_convention": {
-      "doc": "Constants that indicate the axis and direction to use for a perspective projection matrix.",
-      "url": "https://developer.apple.com/documentation/compositorservices/cp_axis_direction_convention"
-    },
-    "cp_drawable_state": {
-      "doc": "The state of ownership for the drawable.",
-      "url": "https://developer.apple.com/documentation/compositorservices/cp_drawable_state"
-    },
     "cp_layer_renderer_configuration_error_code": {
       "doc": "Errors that can occur during layer configuration.",
       "url": "https://developer.apple.com/documentation/compositorservices/cp_layer_renderer_configuration_error_code",
@@ -95,14 +83,6 @@
           "url": "https://developer.apple.com/documentation/compositorservices/cp_layer_renderer_configuration_error_code/cp_layer_renderer_configuration_error_code_variable_rasterization_rate_is_not_supported"
         }
       }
-    },
-    "cp_layer_renderer_layout": {
-      "doc": "Constants that specify the organization of the textures you use for drawing.",
-      "url": "https://developer.apple.com/documentation/compositorservices/cp_layer_renderer_layout"
-    },
-    "cp_layer_renderer_state": {
-      "doc": "The states of the layer renderer, which tell you how to proceed with drawing operations.",
-      "url": "https://developer.apple.com/documentation/compositorservices/cp_layer_renderer_state"
     },
     "cp_supported_color_formats_options": {
       "doc": "The options to provide when calling cp_layer_renderer_capabilities_supported_color_formats and cp_layer_renderer_capabilities_supported_color_formats_count",

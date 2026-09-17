@@ -57,16 +57,19 @@ func (o *NSPositionalSpecifier) Evaluate() {
 	o.Ptr().Send(_nSPositionalSpecifierSelEvaluate)
 }
 
+// The insertion position.
 func (o *NSPositionalSpecifier) Position() NSInsertionPosition {
 	_ret := objc.Send[NSInsertionPosition](o.Ptr(), _nSPositionalSpecifierSelPosition)
 	return _ret
 }
 
+// The container into which insertion should be done, if evaluation has been successful.
 func (o *NSPositionalSpecifier) InsertionContainer() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPositionalSpecifierSelInsertionContainer)
 	return _ret
 }
 
+// The key for the to-many relationship for which insertion should be done, if evaluation has been successful.
 func (o *NSPositionalSpecifier) InsertionKey() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPositionalSpecifierSelInsertionKey)
 	if _ret != 0 {
@@ -75,11 +78,13 @@ func (o *NSPositionalSpecifier) InsertionKey() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The index at which insertion should be done, if evaluation has been successful.
 func (o *NSPositionalSpecifier) InsertionIndex() int {
 	_ret := objc.Send[int](o.Ptr(), _nSPositionalSpecifierSelInsertionIndex)
 	return _ret
 }
 
+// A Boolean value that indicates whether the object to be inserted should replace the keyed, indexed object.
 func (o *NSPositionalSpecifier) InsertionReplaces() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSPositionalSpecifierSelInsertionReplaces)
 	return _ret

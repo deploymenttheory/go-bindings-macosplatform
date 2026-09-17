@@ -122,14 +122,14 @@ func (tcs *TextContentStorage) AdjustedRangeFromRangeForEditingTextSelection(tex
 	return TextRangeFromID(_r)
 }
 
-// IncludesTextListMarkers wraps the corresponding Objective-C method.
+// IncludesTextListMarkers reports whether when `true`, `NSTextContentStorage` assumes the paragraph with `NSTextList` includes the text list marker string. Utilizes `NSTextList.includesTextListMarkers` as the default value.
 func (tcs *TextContentStorage) IncludesTextListMarkers() bool {
 	defer runtime.KeepAlive(tcs)
 	_r := objc.Send[bool](objref.IDOf(tcs), objc.RegisterName("includesTextListMarkers"))
 	return _r
 }
 
-// AttributedString returns the attributed string.
+// AttributedString returns an attributed string that contains the contents of the document. KVO-compliant.
 func (tcs *TextContentStorage) AttributedString() *foundation.AttributedString {
 	defer runtime.KeepAlive(tcs)
 	_r := objc.Send[objc.ID](objref.IDOf(tcs), objc.RegisterName("attributedString"))

@@ -19,13 +19,13 @@ var (
 	_fnGSSNameCreateDisplayString                func(unsafe.Pointer) unsafe.Pointer
 	_gss_aapl_change_password                    func(unsafe.Pointer, *GssOIDDescStruct, unsafe.Pointer, unsafe.Pointer) uint32
 	_gss_aapl_initial_cred                       func(unsafe.Pointer, *GssOIDDescStruct, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint32
-	_gss_accept_sec_context                      func(*uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, **GssOIDDescStruct, *GssBufferDescStruct, *uint32, *uint32, unsafe.Pointer) uint32
-	_gss_acquire_cred                            func(*uint32, unsafe.Pointer, uint32, unsafe.Pointer, int, unsafe.Pointer, **GssOIDSetDescStruct, *uint32) uint32
-	_gss_acquire_cred_with_password              func(*uint32, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer, int, unsafe.Pointer, **GssOIDSetDescStruct, *uint32) uint32
-	_gss_add_buffer_set_member                   func(*uint32, unsafe.Pointer, **GssBufferSetDescStruct) uint32
-	_gss_add_cred                                func(*uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, uint32, uint32, unsafe.Pointer, **GssOIDSetDescStruct, *uint32, *uint32) uint32
+	_gss_accept_sec_context                      func(*uint32, unsafe.Pointer, unsafe.Pointer, *GssBufferDescStruct, *GssChannelBindingsStruct, unsafe.Pointer, **GssOIDDescStruct, *GssBufferDescStruct, *uint32, *uint32, unsafe.Pointer) uint32
+	_gss_acquire_cred                            func(*uint32, unsafe.Pointer, uint32, *GssOIDSetDescStruct, int, unsafe.Pointer, **GssOIDSetDescStruct, *uint32) uint32
+	_gss_acquire_cred_with_password              func(*uint32, unsafe.Pointer, *GssBufferDescStruct, uint32, *GssOIDSetDescStruct, int, unsafe.Pointer, **GssOIDSetDescStruct, *uint32) uint32
+	_gss_add_buffer_set_member                   func(*uint32, *GssBufferDescStruct, **GssBufferSetDescStruct) uint32
+	_gss_add_cred                                func(*uint32, unsafe.Pointer, unsafe.Pointer, *GssOIDDescStruct, int, uint32, uint32, unsafe.Pointer, **GssOIDSetDescStruct, *uint32, *uint32) uint32
 	_gss_add_oid_set_member                      func(*uint32, *GssOIDDescStruct, **GssOIDSetDescStruct) uint32
-	_gss_canonicalize_name                       func(*uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint32
+	_gss_canonicalize_name                       func(*uint32, unsafe.Pointer, *GssOIDDescStruct, unsafe.Pointer) uint32
 	_gss_compare_name                            func(*uint32, unsafe.Pointer, unsafe.Pointer, *int32) uint32
 	_gss_context_time                            func(*uint32, unsafe.Pointer, *uint32) uint32
 	_gss_create_empty_buffer_set                 func(*uint32, **GssBufferSetDescStruct) uint32
@@ -35,31 +35,31 @@ var (
 	_gss_destroy_cred                            func(*uint32, unsafe.Pointer) uint32
 	_gss_display_mech_attr                       func(*uint32, *GssOIDDescStruct, *GssBufferDescStruct, *GssBufferDescStruct, *GssBufferDescStruct) uint32
 	_gss_display_name                            func(*uint32, unsafe.Pointer, *GssBufferDescStruct, **GssOIDDescStruct) uint32
-	_gss_display_status                          func(*uint32, uint32, int, unsafe.Pointer, *uint32, *GssBufferDescStruct) uint32
+	_gss_display_status                          func(*uint32, uint32, int, *GssOIDDescStruct, *uint32, *GssBufferDescStruct) uint32
 	_gss_duplicate_name                          func(*uint32, unsafe.Pointer, unsafe.Pointer) uint32
 	_gss_duplicate_oid                           func(*uint32, *GssOIDDescStruct, **GssOIDDescStruct) uint32
 	_gss_encapsulate_token                       func(*GssBufferDescStruct, *GssOIDDescStruct, *GssBufferDescStruct) uint32
 	_gss_export_cred                             func(*uint32, unsafe.Pointer, *GssBufferDescStruct) uint32
 	_gss_export_name                             func(*uint32, unsafe.Pointer, *GssBufferDescStruct) uint32
 	_gss_export_sec_context                      func(*uint32, unsafe.Pointer, *GssBufferDescStruct) uint32
-	_gss_get_mic                                 func(*uint32, unsafe.Pointer, uint32, unsafe.Pointer, *GssBufferDescStruct) uint32
+	_gss_get_mic                                 func(*uint32, unsafe.Pointer, uint32, *GssBufferDescStruct, *GssBufferDescStruct) uint32
 	_gss_import_cred                             func(*uint32, *GssBufferDescStruct, unsafe.Pointer) uint32
-	_gss_import_name                             func(*uint32, unsafe.Pointer, *GssOIDDescStruct, unsafe.Pointer) uint32
-	_gss_import_sec_context                      func(*uint32, unsafe.Pointer, unsafe.Pointer) uint32
+	_gss_import_name                             func(*uint32, *GssBufferDescStruct, *GssOIDDescStruct, unsafe.Pointer) uint32
+	_gss_import_sec_context                      func(*uint32, *GssBufferDescStruct, unsafe.Pointer) uint32
 	_gss_indicate_mechs                          func(*uint32, **GssOIDSetDescStruct) uint32
 	_gss_indicate_mechs_by_attrs                 func(*uint32, *GssOIDSetDescStruct, *GssOIDSetDescStruct, *GssOIDSetDescStruct, **GssOIDSetDescStruct) uint32
-	_gss_init_sec_context                        func(*uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32, uint32, unsafe.Pointer, unsafe.Pointer, **GssOIDDescStruct, *GssBufferDescStruct, *uint32, *uint32) uint32
+	_gss_init_sec_context                        func(*uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *GssOIDDescStruct, uint32, uint32, *GssChannelBindingsStruct, *GssBufferDescStruct, **GssOIDDescStruct, *GssBufferDescStruct, *uint32, *uint32) uint32
 	_gss_inquire_attrs_for_mech                  func(*uint32, *GssOIDDescStruct, **GssOIDSetDescStruct, **GssOIDSetDescStruct) uint32
 	_gss_inquire_context                         func(*uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *uint32, **GssOIDDescStruct, *uint32, *int32, *int32) uint32
 	_gss_inquire_cred                            func(*uint32, unsafe.Pointer, unsafe.Pointer, *uint32, *int, **GssOIDSetDescStruct) uint32
-	_gss_inquire_cred_by_mech                    func(*uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *uint32, *uint32, *int) uint32
-	_gss_inquire_cred_by_oid                     func(*uint32, unsafe.Pointer, unsafe.Pointer, **GssBufferSetDescStruct) uint32
-	_gss_inquire_mech_for_saslname               func(*uint32, unsafe.Pointer, **GssOIDDescStruct) uint32
+	_gss_inquire_cred_by_mech                    func(*uint32, unsafe.Pointer, *GssOIDDescStruct, unsafe.Pointer, *uint32, *uint32, *int) uint32
+	_gss_inquire_cred_by_oid                     func(*uint32, unsafe.Pointer, *GssOIDDescStruct, **GssBufferSetDescStruct) uint32
+	_gss_inquire_mech_for_saslname               func(*uint32, *GssBufferDescStruct, **GssOIDDescStruct) uint32
 	_gss_inquire_mechs_for_name                  func(*uint32, unsafe.Pointer, **GssOIDSetDescStruct) uint32
 	_gss_inquire_name                            func(*uint32, unsafe.Pointer, *int32, **GssOIDDescStruct, **GssBufferSetDescStruct) uint32
 	_gss_inquire_names_for_mech                  func(*uint32, *GssOIDDescStruct, **GssOIDSetDescStruct) uint32
-	_gss_inquire_saslname_for_mech               func(*uint32, unsafe.Pointer, *GssBufferDescStruct, *GssBufferDescStruct, *GssBufferDescStruct) uint32
-	_gss_inquire_sec_context_by_oid              func(*uint32, unsafe.Pointer, unsafe.Pointer, **GssBufferSetDescStruct) uint32
+	_gss_inquire_saslname_for_mech               func(*uint32, *GssOIDDescStruct, *GssBufferDescStruct, *GssBufferDescStruct, *GssBufferDescStruct) uint32
+	_gss_inquire_sec_context_by_oid              func(*uint32, unsafe.Pointer, *GssOIDDescStruct, **GssBufferSetDescStruct) uint32
 	_gss_iter_creds                              func(*uint32, uint32, *GssOIDDescStruct, objc.Block) uint32
 	_gss_iter_creds_f                            func(*uint32, uint32, *GssOIDDescStruct, unsafe.Pointer, unsafe.Pointer) uint32
 	_gss_krb5_ccache_name                        func(*uint32, string, string) uint32
@@ -69,8 +69,8 @@ var (
 	_gss_krb5_set_allowable_enctypes             func(*uint32, unsafe.Pointer, uint32, *int32) uint32
 	_gss_oid_equal                               func(*GssOIDDescStruct, *GssOIDDescStruct) int
 	_gss_oid_to_str                              func(*uint32, *GssOIDDescStruct, *GssBufferDescStruct) uint32
-	_gss_process_context_token                   func(*uint32, unsafe.Pointer, unsafe.Pointer) uint32
-	_gss_pseudo_random                           func(*uint32, unsafe.Pointer, int, unsafe.Pointer, int, *GssBufferDescStruct) uint32
+	_gss_process_context_token                   func(*uint32, unsafe.Pointer, *GssBufferDescStruct) uint32
+	_gss_pseudo_random                           func(*uint32, unsafe.Pointer, int, *GssBufferDescStruct, int, *GssBufferDescStruct) uint32
 	_gss_release_buffer                          func(*uint32, *GssBufferDescStruct) uint32
 	_gss_release_buffer_set                      func(*uint32, **GssBufferSetDescStruct) uint32
 	_gss_release_cred                            func(*uint32, unsafe.Pointer) uint32
@@ -78,16 +78,16 @@ var (
 	_gss_release_oid                             func(*uint32, **GssOIDDescStruct) uint32
 	_gss_release_oid_set                         func(*uint32, **GssOIDSetDescStruct) uint32
 	_gss_seal                                    func(*uint32, unsafe.Pointer, int, int, *GssBufferDescStruct, *int32, *GssBufferDescStruct) uint32
-	_gss_set_cred_option                         func(*uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint32
-	_gss_set_sec_context_option                  func(*uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint32
+	_gss_set_cred_option                         func(*uint32, unsafe.Pointer, *GssOIDDescStruct, *GssBufferDescStruct) uint32
+	_gss_set_sec_context_option                  func(*uint32, unsafe.Pointer, *GssOIDDescStruct, *GssBufferDescStruct) uint32
 	_gss_sign                                    func(*uint32, unsafe.Pointer, int, *GssBufferDescStruct, *GssBufferDescStruct) uint32
-	_gss_test_oid_set_member                     func(*uint32, *GssOIDDescStruct, unsafe.Pointer, *int32) uint32
+	_gss_test_oid_set_member                     func(*uint32, *GssOIDDescStruct, *GssOIDSetDescStruct, *int32) uint32
 	_gss_unseal                                  func(*uint32, unsafe.Pointer, *GssBufferDescStruct, *GssBufferDescStruct, *int32, *int32) uint32
-	_gss_unwrap                                  func(*uint32, unsafe.Pointer, unsafe.Pointer, *GssBufferDescStruct, *int32, *uint32) uint32
+	_gss_unwrap                                  func(*uint32, unsafe.Pointer, *GssBufferDescStruct, *GssBufferDescStruct, *int32, *uint32) uint32
 	_gss_userok                                  func(unsafe.Pointer, string) int
 	_gss_verify                                  func(*uint32, unsafe.Pointer, *GssBufferDescStruct, *GssBufferDescStruct, *int32) uint32
-	_gss_verify_mic                              func(*uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *uint32) uint32
-	_gss_wrap                                    func(*uint32, unsafe.Pointer, int, uint32, unsafe.Pointer, *int32, *GssBufferDescStruct) uint32
+	_gss_verify_mic                              func(*uint32, unsafe.Pointer, *GssBufferDescStruct, *GssBufferDescStruct, *uint32) uint32
+	_gss_wrap                                    func(*uint32, unsafe.Pointer, int, uint32, *GssBufferDescStruct, *int32, *GssBufferDescStruct) uint32
 	_gss_wrap_size_limit                         func(*uint32, unsafe.Pointer, int, uint32, uint32, *uint32) uint32
 	_gsskrb5_extract_authz_data_from_sec_context func(*uint32, unsafe.Pointer, int, *GssBufferDescStruct) uint32
 	_gsskrb5_register_acceptor_identity          func(string) uint32
@@ -133,27 +133,27 @@ func GssAaplInitialCred(desiredName unsafe.Pointer, desiredMech *GssOIDDescStruc
 }
 
 // C function: gss_accept_sec_context
-func GssAcceptSecContext(minorStatus *uint32, contextHandle unsafe.Pointer, acceptorCredHandle unsafe.Pointer, inputToken unsafe.Pointer, inputChanBindings unsafe.Pointer, srcName unsafe.Pointer, mechType **GssOIDDescStruct, outputToken *GssBufferDescStruct, retFlags *uint32, timeRec *uint32, delegatedCredHandle unsafe.Pointer) uint32 {
+func GssAcceptSecContext(minorStatus *uint32, contextHandle unsafe.Pointer, acceptorCredHandle unsafe.Pointer, inputToken *GssBufferDescStruct, inputChanBindings *GssChannelBindingsStruct, srcName unsafe.Pointer, mechType **GssOIDDescStruct, outputToken *GssBufferDescStruct, retFlags *uint32, timeRec *uint32, delegatedCredHandle unsafe.Pointer) uint32 {
 	return _gss_accept_sec_context(minorStatus, contextHandle, acceptorCredHandle, inputToken, inputChanBindings, srcName, mechType, outputToken, retFlags, timeRec, delegatedCredHandle)
 }
 
 // C function: gss_acquire_cred
-func GssAcquireCred(minorStatus *uint32, desiredName unsafe.Pointer, timeReq uint32, desiredMechs unsafe.Pointer, credUsage int, outputCredHandle unsafe.Pointer, actualMechs **GssOIDSetDescStruct, timeRec *uint32) uint32 {
+func GssAcquireCred(minorStatus *uint32, desiredName unsafe.Pointer, timeReq uint32, desiredMechs *GssOIDSetDescStruct, credUsage int, outputCredHandle unsafe.Pointer, actualMechs **GssOIDSetDescStruct, timeRec *uint32) uint32 {
 	return _gss_acquire_cred(minorStatus, desiredName, timeReq, desiredMechs, credUsage, outputCredHandle, actualMechs, timeRec)
 }
 
 // C function: gss_acquire_cred_with_password
-func GssAcquireCredWithPassword(minorStatus *uint32, desiredName unsafe.Pointer, password unsafe.Pointer, timeReq uint32, desiredMechs unsafe.Pointer, credUsage int, outputCredHandle unsafe.Pointer, actualMechs **GssOIDSetDescStruct, timeRec *uint32) uint32 {
+func GssAcquireCredWithPassword(minorStatus *uint32, desiredName unsafe.Pointer, password *GssBufferDescStruct, timeReq uint32, desiredMechs *GssOIDSetDescStruct, credUsage int, outputCredHandle unsafe.Pointer, actualMechs **GssOIDSetDescStruct, timeRec *uint32) uint32 {
 	return _gss_acquire_cred_with_password(minorStatus, desiredName, password, timeReq, desiredMechs, credUsage, outputCredHandle, actualMechs, timeRec)
 }
 
 // C function: gss_add_buffer_set_member
-func GssAddBufferSetMember(minorStatus *uint32, memberBuffer unsafe.Pointer, bufferSet **GssBufferSetDescStruct) uint32 {
+func GssAddBufferSetMember(minorStatus *uint32, memberBuffer *GssBufferDescStruct, bufferSet **GssBufferSetDescStruct) uint32 {
 	return _gss_add_buffer_set_member(minorStatus, memberBuffer, bufferSet)
 }
 
 // C function: gss_add_cred
-func GssAddCred(minorStatus *uint32, inputCredHandle unsafe.Pointer, desiredName unsafe.Pointer, desiredMech unsafe.Pointer, credUsage int, initiatorTimeReq uint32, acceptorTimeReq uint32, outputCredHandle unsafe.Pointer, actualMechs **GssOIDSetDescStruct, initiatorTimeRec *uint32, acceptorTimeRec *uint32) uint32 {
+func GssAddCred(minorStatus *uint32, inputCredHandle unsafe.Pointer, desiredName unsafe.Pointer, desiredMech *GssOIDDescStruct, credUsage int, initiatorTimeReq uint32, acceptorTimeReq uint32, outputCredHandle unsafe.Pointer, actualMechs **GssOIDSetDescStruct, initiatorTimeRec *uint32, acceptorTimeRec *uint32) uint32 {
 	return _gss_add_cred(minorStatus, inputCredHandle, desiredName, desiredMech, credUsage, initiatorTimeReq, acceptorTimeReq, outputCredHandle, actualMechs, initiatorTimeRec, acceptorTimeRec)
 }
 
@@ -163,7 +163,7 @@ func GssAddOidSetMember(minorStatus *uint32, memberOid *GssOIDDescStruct, oidSet
 }
 
 // C function: gss_canonicalize_name
-func GssCanonicalizeName(minorStatus *uint32, inputName unsafe.Pointer, mechType unsafe.Pointer, outputName unsafe.Pointer) uint32 {
+func GssCanonicalizeName(minorStatus *uint32, inputName unsafe.Pointer, mechType *GssOIDDescStruct, outputName unsafe.Pointer) uint32 {
 	return _gss_canonicalize_name(minorStatus, inputName, mechType, outputName)
 }
 
@@ -213,7 +213,7 @@ func GssDisplayName(minorStatus *uint32, inputName unsafe.Pointer, outputNameBuf
 }
 
 // C function: gss_display_status
-func GssDisplayStatus(minorStatus *uint32, statusValue uint32, statusType int, mechType unsafe.Pointer, messageContent *uint32, statusString *GssBufferDescStruct) uint32 {
+func GssDisplayStatus(minorStatus *uint32, statusValue uint32, statusType int, mechType *GssOIDDescStruct, messageContent *uint32, statusString *GssBufferDescStruct) uint32 {
 	return _gss_display_status(minorStatus, statusValue, statusType, mechType, messageContent, statusString)
 }
 
@@ -248,7 +248,7 @@ func GssExportSecContext(minorStatus *uint32, contextHandle unsafe.Pointer, inte
 }
 
 // C function: gss_get_mic
-func GssGetMic(minorStatus *uint32, contextHandle unsafe.Pointer, qopReq uint32, messageBuffer unsafe.Pointer, messageToken *GssBufferDescStruct) uint32 {
+func GssGetMic(minorStatus *uint32, contextHandle unsafe.Pointer, qopReq uint32, messageBuffer *GssBufferDescStruct, messageToken *GssBufferDescStruct) uint32 {
 	return _gss_get_mic(minorStatus, contextHandle, qopReq, messageBuffer, messageToken)
 }
 
@@ -258,12 +258,12 @@ func GssImportCred(minorStatus *uint32, token *GssBufferDescStruct, credHandle u
 }
 
 // C function: gss_import_name
-func GssImportName(minorStatus *uint32, inputNameBuffer unsafe.Pointer, inputNameType *GssOIDDescStruct, outputName unsafe.Pointer) uint32 {
+func GssImportName(minorStatus *uint32, inputNameBuffer *GssBufferDescStruct, inputNameType *GssOIDDescStruct, outputName unsafe.Pointer) uint32 {
 	return _gss_import_name(minorStatus, inputNameBuffer, inputNameType, outputName)
 }
 
 // C function: gss_import_sec_context
-func GssImportSecContext(minorStatus *uint32, interprocessToken unsafe.Pointer, contextHandle unsafe.Pointer) uint32 {
+func GssImportSecContext(minorStatus *uint32, interprocessToken *GssBufferDescStruct, contextHandle unsafe.Pointer) uint32 {
 	return _gss_import_sec_context(minorStatus, interprocessToken, contextHandle)
 }
 
@@ -278,7 +278,7 @@ func GssIndicateMechsByAttrs(minorStatus *uint32, desiredMechAttrs *GssOIDSetDes
 }
 
 // C function: gss_init_sec_context
-func GssInitSecContext(minorStatus *uint32, initiatorCredHandle unsafe.Pointer, contextHandle unsafe.Pointer, targetName unsafe.Pointer, inputMechType unsafe.Pointer, reqFlags uint32, timeReq uint32, inputChanBindings unsafe.Pointer, inputToken unsafe.Pointer, actualMechType **GssOIDDescStruct, outputToken *GssBufferDescStruct, retFlags *uint32, timeRec *uint32) uint32 {
+func GssInitSecContext(minorStatus *uint32, initiatorCredHandle unsafe.Pointer, contextHandle unsafe.Pointer, targetName unsafe.Pointer, inputMechType *GssOIDDescStruct, reqFlags uint32, timeReq uint32, inputChanBindings *GssChannelBindingsStruct, inputToken *GssBufferDescStruct, actualMechType **GssOIDDescStruct, outputToken *GssBufferDescStruct, retFlags *uint32, timeRec *uint32) uint32 {
 	return _gss_init_sec_context(minorStatus, initiatorCredHandle, contextHandle, targetName, inputMechType, reqFlags, timeReq, inputChanBindings, inputToken, actualMechType, outputToken, retFlags, timeRec)
 }
 
@@ -298,17 +298,17 @@ func GssInquireCred(minorStatus *uint32, credHandle unsafe.Pointer, nameRet unsa
 }
 
 // C function: gss_inquire_cred_by_mech
-func GssInquireCredByMech(minorStatus *uint32, credHandle unsafe.Pointer, mechType unsafe.Pointer, credName unsafe.Pointer, initiatorLifetime *uint32, acceptorLifetime *uint32, credUsage *int) uint32 {
+func GssInquireCredByMech(minorStatus *uint32, credHandle unsafe.Pointer, mechType *GssOIDDescStruct, credName unsafe.Pointer, initiatorLifetime *uint32, acceptorLifetime *uint32, credUsage *int) uint32 {
 	return _gss_inquire_cred_by_mech(minorStatus, credHandle, mechType, credName, initiatorLifetime, acceptorLifetime, credUsage)
 }
 
 // C function: gss_inquire_cred_by_oid
-func GssInquireCredByOid(minorStatus *uint32, credHandle unsafe.Pointer, desiredObject unsafe.Pointer, dataSet **GssBufferSetDescStruct) uint32 {
+func GssInquireCredByOid(minorStatus *uint32, credHandle unsafe.Pointer, desiredObject *GssOIDDescStruct, dataSet **GssBufferSetDescStruct) uint32 {
 	return _gss_inquire_cred_by_oid(minorStatus, credHandle, desiredObject, dataSet)
 }
 
 // C function: gss_inquire_mech_for_saslname
-func GssInquireMechForSaslname(minorStatus *uint32, saslMechName unsafe.Pointer, mechType **GssOIDDescStruct) uint32 {
+func GssInquireMechForSaslname(minorStatus *uint32, saslMechName *GssBufferDescStruct, mechType **GssOIDDescStruct) uint32 {
 	return _gss_inquire_mech_for_saslname(minorStatus, saslMechName, mechType)
 }
 
@@ -328,12 +328,12 @@ func GssInquireNamesForMech(minorStatus *uint32, mechanism *GssOIDDescStruct, na
 }
 
 // C function: gss_inquire_saslname_for_mech
-func GssInquireSaslnameForMech(minorStatus *uint32, desiredMech unsafe.Pointer, saslMechName *GssBufferDescStruct, mechName *GssBufferDescStruct, mechDescription *GssBufferDescStruct) uint32 {
+func GssInquireSaslnameForMech(minorStatus *uint32, desiredMech *GssOIDDescStruct, saslMechName *GssBufferDescStruct, mechName *GssBufferDescStruct, mechDescription *GssBufferDescStruct) uint32 {
 	return _gss_inquire_saslname_for_mech(minorStatus, desiredMech, saslMechName, mechName, mechDescription)
 }
 
 // C function: gss_inquire_sec_context_by_oid
-func GssInquireSecContextByOid(minorStatus *uint32, contextHandle unsafe.Pointer, desiredObject unsafe.Pointer, dataSet **GssBufferSetDescStruct) uint32 {
+func GssInquireSecContextByOid(minorStatus *uint32, contextHandle unsafe.Pointer, desiredObject *GssOIDDescStruct, dataSet **GssBufferSetDescStruct) uint32 {
 	return _gss_inquire_sec_context_by_oid(minorStatus, contextHandle, desiredObject, dataSet)
 }
 
@@ -390,12 +390,12 @@ func GssOidToStr(minorStatus *uint32, oid *GssOIDDescStruct, oidStr *GssBufferDe
 }
 
 // C function: gss_process_context_token
-func GssProcessContextToken(minorStatus *uint32, contextHandle unsafe.Pointer, tokenBuffer unsafe.Pointer) uint32 {
+func GssProcessContextToken(minorStatus *uint32, contextHandle unsafe.Pointer, tokenBuffer *GssBufferDescStruct) uint32 {
 	return _gss_process_context_token(minorStatus, contextHandle, tokenBuffer)
 }
 
 // C function: gss_pseudo_random
-func GssPseudoRandom(minorStatus *uint32, context_ unsafe.Pointer, prfKey int, prfIn unsafe.Pointer, desiredOutputLen int, prfOut *GssBufferDescStruct) uint32 {
+func GssPseudoRandom(minorStatus *uint32, context_ unsafe.Pointer, prfKey int, prfIn *GssBufferDescStruct, desiredOutputLen int, prfOut *GssBufferDescStruct) uint32 {
 	return _gss_pseudo_random(minorStatus, context_, prfKey, prfIn, desiredOutputLen, prfOut)
 }
 
@@ -435,12 +435,12 @@ func GssSeal(minorStatus *uint32, contextHandle unsafe.Pointer, confReqFlag int,
 }
 
 // C function: gss_set_cred_option
-func GssSetCredOption(minorStatus *uint32, credHandle unsafe.Pointer, object unsafe.Pointer, value unsafe.Pointer) uint32 {
+func GssSetCredOption(minorStatus *uint32, credHandle unsafe.Pointer, object *GssOIDDescStruct, value *GssBufferDescStruct) uint32 {
 	return _gss_set_cred_option(minorStatus, credHandle, object, value)
 }
 
 // C function: gss_set_sec_context_option
-func GssSetSecContextOption(minorStatus *uint32, contextHandle unsafe.Pointer, object unsafe.Pointer, value unsafe.Pointer) uint32 {
+func GssSetSecContextOption(minorStatus *uint32, contextHandle unsafe.Pointer, object *GssOIDDescStruct, value *GssBufferDescStruct) uint32 {
 	return _gss_set_sec_context_option(minorStatus, contextHandle, object, value)
 }
 
@@ -450,7 +450,7 @@ func GssSign(minorStatus *uint32, contextHandle unsafe.Pointer, qopReq int, mess
 }
 
 // C function: gss_test_oid_set_member
-func GssTestOidSetMember(minorStatus *uint32, member *GssOIDDescStruct, set unsafe.Pointer, present *int32) uint32 {
+func GssTestOidSetMember(minorStatus *uint32, member *GssOIDDescStruct, set *GssOIDSetDescStruct, present *int32) uint32 {
 	return _gss_test_oid_set_member(minorStatus, member, set, present)
 }
 
@@ -460,7 +460,7 @@ func GssUnseal(minorStatus *uint32, contextHandle unsafe.Pointer, inputMessageBu
 }
 
 // C function: gss_unwrap
-func GssUnwrap(minorStatus *uint32, contextHandle unsafe.Pointer, inputMessageBuffer unsafe.Pointer, outputMessageBuffer *GssBufferDescStruct, confState *int32, qopState *uint32) uint32 {
+func GssUnwrap(minorStatus *uint32, contextHandle unsafe.Pointer, inputMessageBuffer *GssBufferDescStruct, outputMessageBuffer *GssBufferDescStruct, confState *int32, qopState *uint32) uint32 {
 	return _gss_unwrap(minorStatus, contextHandle, inputMessageBuffer, outputMessageBuffer, confState, qopState)
 }
 
@@ -475,12 +475,12 @@ func GssVerify(minorStatus *uint32, contextHandle unsafe.Pointer, messageBuffer 
 }
 
 // C function: gss_verify_mic
-func GssVerifyMic(minorStatus *uint32, contextHandle unsafe.Pointer, messageBuffer unsafe.Pointer, tokenBuffer unsafe.Pointer, qopState *uint32) uint32 {
+func GssVerifyMic(minorStatus *uint32, contextHandle unsafe.Pointer, messageBuffer *GssBufferDescStruct, tokenBuffer *GssBufferDescStruct, qopState *uint32) uint32 {
 	return _gss_verify_mic(minorStatus, contextHandle, messageBuffer, tokenBuffer, qopState)
 }
 
 // C function: gss_wrap
-func GssWrap(minorStatus *uint32, contextHandle unsafe.Pointer, confReqFlag int, qopReq uint32, inputMessageBuffer unsafe.Pointer, confState *int32, outputMessageBuffer *GssBufferDescStruct) uint32 {
+func GssWrap(minorStatus *uint32, contextHandle unsafe.Pointer, confReqFlag int, qopReq uint32, inputMessageBuffer *GssBufferDescStruct, confState *int32, outputMessageBuffer *GssBufferDescStruct) uint32 {
 	return _gss_wrap(minorStatus, contextHandle, confReqFlag, qopReq, inputMessageBuffer, confState, outputMessageBuffer)
 }
 

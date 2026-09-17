@@ -11,8 +11,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// The type of map item detail accessory presentation to use.
-//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkmapitemdetailselectionaccessorypresentationstyle
 type MKMapItemDetailSelectionAccessoryPresentationStyle struct {
 	foundation.NSObject
@@ -37,7 +35,6 @@ func MKMapItemDetailSelectionAccessoryPresentationStyleFromID(id objc.ID) *MKMap
 	return o
 }
 
-// An appropriate presentation style will be chosen automatically.
 func MKMapItemDetailSelectionAccessoryPresentationStyleAutomaticWithPresentationViewController(presentationViewController *appkit.NSViewController) *MKMapItemDetailSelectionAccessoryPresentationStyle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMKMapItemDetailSelectionAccessoryPresentationStyle), _mKMapItemDetailSelectionAccessoryPresentationStyleSelAutomaticWithPresentationViewController, presentationViewController.Ptr())
 	if _ret != 0 {
@@ -46,7 +43,6 @@ func MKMapItemDetailSelectionAccessoryPresentationStyleAutomaticWithPresentation
 	return MKMapItemDetailSelectionAccessoryPresentationStyleFromID(_ret)
 }
 
-// Show map item detail as an annotation callout on the map
 func MKMapItemDetailSelectionAccessoryPresentationStyleCalloutWithCalloutStyle(style MKMapItemDetailSelectionAccessoryCalloutStyle) *MKMapItemDetailSelectionAccessoryPresentationStyle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMKMapItemDetailSelectionAccessoryPresentationStyle), _mKMapItemDetailSelectionAccessoryPresentationStyleSelCalloutWithCalloutStyle, style)
 	if _ret != 0 {

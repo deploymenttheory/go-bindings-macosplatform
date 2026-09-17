@@ -50,6 +50,18 @@ func assetChangeRequestAdopt(id objc.ID) *AssetChangeRequest {
 	return x
 }
 
+// WithRating sets the rating for this asset
+func (acr *AssetChangeRequest) WithRating(rating AssetRating) *AssetChangeRequest {
+	objc.Send[objc.ID](objref.IDOf(acr), objc.RegisterName("setRating:"), rating)
+	return acr
+}
+
+// WithCaption sets an asset description to change to. Set to nil or an empty string to clear the caption.
+func (acr *AssetChangeRequest) WithCaption(caption string) *AssetChangeRequest {
+	objc.Send[objc.ID](objref.IDOf(acr), objc.RegisterName("setCaption:"), purego.NSString(caption))
+	return acr
+}
+
 // WithCreationDate sets the date and time at which the asset claims to have been originally created.
 func (acr *AssetChangeRequest) WithCreationDate(creationDate time.Time) *AssetChangeRequest {
 	objc.Send[objc.ID](objref.IDOf(acr), objc.RegisterName("setCreationDate:"), rt.TimeToNSDate(creationDate))
@@ -81,10 +93,34 @@ func (acr *AssetChangeRequest) WithContentEditingOutput(contentEditingOutput *Co
 	return acr
 }
 
+// SetLivePhotoVideoPlaybackEnabled disable or enable the video part of a Live Photo so it just appears as a still image (disabled) or a Live Photo (enabled)
+func (acr *AssetChangeRequest) SetLivePhotoVideoPlaybackEnabled(enabled bool) {
+	defer runtime.KeepAlive(acr)
+	objc.Send[objc.ID](objref.IDOf(acr), objc.RegisterName("setLivePhotoVideoPlaybackEnabled:"), enabled)
+}
+
+// AddKeyword add or remove a keyword associated with this asset Adding a keyword that is already associated (or removing a keyword that is not) will be silently ignored
+func (acr *AssetChangeRequest) AddKeyword(keyword string) {
+	defer runtime.KeepAlive(acr)
+	objc.Send[objc.ID](objref.IDOf(acr), objc.RegisterName("addKeyword:"), purego.NSString(keyword))
+}
+
+// RemoveKeyword removes keyword.
+func (acr *AssetChangeRequest) RemoveKeyword(keyword string) {
+	defer runtime.KeepAlive(acr)
+	objc.Send[objc.ID](objref.IDOf(acr), objc.RegisterName("removeKeyword:"), purego.NSString(keyword))
+}
+
 // RevertAssetContentToOriginal request to revert any edits made to the asset’s content.
 func (acr *AssetChangeRequest) RevertAssetContentToOriginal() {
 	defer runtime.KeepAlive(acr)
 	objc.Send[objc.ID](objref.IDOf(acr), objc.RegisterName("revertAssetContentToOriginal"))
+}
+
+// RevertAssetContentToOriginalResourceChoice reverts the asset’s content to its original, choosing which original resource to use as the unadjusted base for all renders.
+func (acr *AssetChangeRequest) RevertAssetContentToOriginalResourceChoice(choice OriginalResourceChoice) {
+	defer runtime.KeepAlive(acr)
+	objc.Send[objc.ID](objref.IDOf(acr), objc.RegisterName("revertAssetContentToOriginalResourceChoice:"), choice)
 }
 
 // PlaceholderForCreatedAsset returns the placeholder for created asset.
@@ -92,6 +128,23 @@ func (acr *AssetChangeRequest) PlaceholderForCreatedAsset() *ObjectPlaceholder {
 	defer runtime.KeepAlive(acr)
 	_r := objc.Send[objc.ID](objref.IDOf(acr), objc.RegisterName("placeholderForCreatedAsset"))
 	return ObjectPlaceholderFromID(_r)
+}
+
+// Rating returns the rating for this asset
+func (acr *AssetChangeRequest) Rating() AssetRating {
+	defer runtime.KeepAlive(acr)
+	_r := objc.Send[AssetRating](objref.IDOf(acr), objc.RegisterName("rating"))
+	return _r
+}
+
+// Caption returns an asset description to change to. Set to nil or an empty string to clear the caption.
+func (acr *AssetChangeRequest) Caption() string {
+	defer runtime.KeepAlive(acr)
+	_r := objc.Send[objc.ID](objref.IDOf(acr), objc.RegisterName("caption"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
 }
 
 // CreationDate returns the creation date.

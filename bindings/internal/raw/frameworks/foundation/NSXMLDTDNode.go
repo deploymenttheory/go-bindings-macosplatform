@@ -9,7 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A representation of element, attribute-list, entity, and notation declarations in a Document Type Definition.
+// The nodes that are exclusive to a DTD. Every DTD node has a name. Object value is defined as follows: - **Entity declaration** - the string that that entity resolves to eg `<` - **Attribute declaration** - the default value, if any - **Element declaration** - the validation string - **Notation declaration** - no objectValue
 //
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsxmldtdnode
 type NSXMLDTDNode struct {
@@ -42,7 +42,7 @@ func NSXMLDTDNodeFromID(id objc.ID) *NSXMLDTDNode {
 	return o
 }
 
-// @method initWithXMLString: @abstract Returns an element, attribute, entity, or notation DTD node based on the full XML string.
+// Returns an element, attribute, entity, or notation DTD node based on the full XML string. - Parameter string: The DTD declaration. - Returns: An `NSXMLDTDNode` object initialized with the DTD declaration in `string`. Returns `nil` if initialization did not succeed, as might occur if the passed-in declaration is malformed. The node kind (NSXMLNode) assigned to the returned object -- element, attribute, entity, or notation declaration -- is based on the full XML string that is parsed. To assign a subkind, set the “dtdKind“ property. You may also use the “XMLNode/dtdNode(withXMLString:)“ or “XMLNode/init(kind:)“ methods to create `NSXMLDTDNode` instances. However, you cannot use the latter method to create `NSXMLDTDNode` instances for attribute-list declarations.
 func (o *NSXMLDTDNode) InitWithXMLString(string_ *NSString) *NSXMLDTDNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDTDNodeSelInitWithXMLString, string_.Ptr())
 	if _ret != 0 {
@@ -67,7 +67,7 @@ func (o *NSXMLDTDNode) Init() *NSXMLDTDNode {
 	return NSXMLDTDNodeFromID(_ret)
 }
 
-// @abstract Sets the DTD sub kind.
+// Returns the receiver's DTD kind. The DTD kind is distinct from a `NSXMLDTDNode` object's node kind (returned by the `NSXMLNode` “XMLNode/kind“ method).
 func (o *NSXMLDTDNode) DTDKind() NSXMLDTDNodeKind {
 	_ret := objc.Send[NSXMLDTDNodeKind](o.Ptr(), _nSXMLDTDNodeSelDTDKind)
 	return _ret
@@ -77,13 +77,13 @@ func (o *NSXMLDTDNode) SetDTDKind(dtdKind NSXMLDTDNodeKind) {
 	o.Ptr().Send(_nSXMLDTDNodeSelSetDTDKind, dtdKind)
 }
 
-// @abstract True if the system id is set. Valid for entities and notations.
+// True if the system id is set. Valid for entities and notations.
 func (o *NSXMLDTDNode) IsExternal() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSXMLDTDNodeSelIsExternal)
 	return _ret
 }
 
-// @abstract Sets the public id. This identifier should be in the default catalog in /etc/xml/catalog or in a path specified by the environment variable XML_CATALOG_FILES. When the public id is set the system id must also be set. Valid for entities and notations.
+// Returns the public identifier associated with the receiver. The public ID is applicable to entities and notations. This identifier should be in the default catalog in `/etc/xml/catalog` or in a path specified by the environment variable `XML_CATALOG_FILES`. When the public id is set the system id must also be set.
 func (o *NSXMLDTDNode) PublicID() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDTDNodeSelPublicID)
 	if _ret != 0 {
@@ -96,7 +96,7 @@ func (o *NSXMLDTDNode) SetPublicID(publicID *NSString) {
 	o.Ptr().Send(_nSXMLDTDNodeSelSetPublicID, publicID.Ptr())
 }
 
-// @abstract Sets the system id. This should be a URL that points to a valid DTD. Valid for entities and notations.
+// Returns the system identifier associated with the receiver. This should be a URL that points to a valid DTD. Valid for entities and notations.
 func (o *NSXMLDTDNode) SystemID() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDTDNodeSelSystemID)
 	if _ret != 0 {
@@ -109,7 +109,7 @@ func (o *NSXMLDTDNode) SetSystemID(systemID *NSString) {
 	o.Ptr().Send(_nSXMLDTDNodeSelSetSystemID, systemID.Ptr())
 }
 
-// @abstract Set the notation name. Valid for entities only.
+// Returns the name of the notation associated with the receiver. Notations are applicable to unparsed external entities, processing instructions, and some attribute values.
 func (o *NSXMLDTDNode) NotationName() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDTDNodeSelNotationName)
 	if _ret != 0 {

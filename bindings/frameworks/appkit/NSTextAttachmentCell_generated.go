@@ -16,8 +16,6 @@ import (
 // TextAttachmentCell is an idiomatic wrapper over the Objective-C class NSTextAttachmentCell.
 //
 // It embeds [Cell], promoting that type's methods.
-//
-// An object that implements the functionality of the text attachment cell protocol.
 type TextAttachmentCell struct {
 	Cell
 }

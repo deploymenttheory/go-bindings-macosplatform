@@ -71,6 +71,21 @@ func KCIImageTextureFormat() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIImageTextureFormat")))
 }
 
+// KCIImageSubsampleFactor returns the string constant kCIImageSubsampleFactor, for use as a dictionary key or argument.
+func KCIImageSubsampleFactor() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCIImageSubsampleFactor")))
+}
+
+// KCIImageTypeIdentifierHint returns the string constant kCIImageTypeIdentifierHint, for use as a dictionary key or argument.
+func KCIImageTypeIdentifierHint() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCIImageTypeIdentifierHint")))
+}
+
+// KCIImageUseHardwareAcceleration returns the string constant kCIImageUseHardwareAcceleration, for use as a dictionary key or argument.
+func KCIImageUseHardwareAcceleration() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCIImageUseHardwareAcceleration")))
+}
+
 // KCIImageAuxiliaryDepth returns the string constant kCIImageAuxiliaryDepth, for use as a dictionary key or argument.
 func KCIImageAuxiliaryDepth() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIImageAuxiliaryDepth")))
@@ -189,14 +204,14 @@ func KCIContextAllowLowPower() obj.Object {
 // KCIContextName returns the string constant kCIContextName, for use as a dictionary key or argument.
 func KCIContextName() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCIContextName"))) }
 
-// KCIContextCVMetalTextureCache returns the string constant kCIContextCVMetalTextureCache, for use as a dictionary key or argument.
-func KCIContextCVMetalTextureCache() obj.Object {
-	return obj.Wrap(purego.CFConstant(_symbol("kCIContextCVMetalTextureCache")))
-}
-
 // KCIContextMemoryLimit returns the string constant kCIContextMemoryLimit, for use as a dictionary key or argument.
 func KCIContextMemoryLimit() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIContextMemoryLimit")))
+}
+
+// KCIContextCVMetalTextureCache returns the string constant kCIContextCVMetalTextureCache, for use as a dictionary key or argument.
+func KCIContextCVMetalTextureCache() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCIContextCVMetalTextureCache")))
 }
 
 // KCIImageRepresentationAVDepthData returns the string constant kCIImageRepresentationAVDepthData, for use as a dictionary key or argument.

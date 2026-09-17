@@ -13,6 +13,7 @@ import (
 // An object representing metrics about the responsiveness of animation in the app.
 //
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxanimationmetric
+// Deprecated: Use MetricResult instead.
 type MXAnimationMetric struct {
 	MXMetric
 }

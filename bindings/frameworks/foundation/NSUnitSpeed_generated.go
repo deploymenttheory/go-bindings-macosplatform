@@ -17,8 +17,6 @@ import (
 // UnitSpeed is an idiomatic wrapper over the Objective-C class NSUnitSpeed.
 //
 // It embeds [Dimension], promoting that type's methods.
-//
-// A unit of measure for speed.
 type UnitSpeed struct {
 	Dimension
 }

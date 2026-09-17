@@ -34,7 +34,7 @@ func VZMacOSConfigurationRequirementsFromID(id objc.ID) *VZMacOSConfigurationReq
 	return o
 }
 
-// @abstract The hardware model for this configuration. @discussion The hardware model can be used to configure a new virtual machine that meets the requirements. Use VZMacPlatformConfiguration.hardwareModel to configure the Mac platform, and -[VZMacAuxiliaryStorage initCreatingStorageAtURL:hardwareModel:options:error:] to create its auxiliary storage. @seealso VZMacPlatformConfiguration @seealso VZMacAuxiliaryStorage
+// @abstract The hardware model for this configuration. @discussion The hardware model can be used to configure a new virtual machine that meets the requirements. Use VZMacPlatformConfiguration.hardwareModel to configure the Mac platform, and -[VZMacAuxiliaryStorage initCreatingStorageAtURL:hardwareModel:options:error:] to create its auxiliary storage. @see VZMacPlatformConfiguration @see VZMacAuxiliaryStorage
 func (o *VZMacOSConfigurationRequirements) HardwareModel() *VZMacHardwareModel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZMacOSConfigurationRequirementsSelHardwareModel)
 	if _ret != 0 {

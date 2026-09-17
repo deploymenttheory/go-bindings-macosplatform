@@ -55,7 +55,7 @@ func (o *CSSearchQuery) InitWithQueryStringQueryContext(queryString *foundation.
 }
 
 // Initializes and returns a query object with the specified query string and item attributes.
-// Deprecated: since macOS 13.0.
+// Deprecated: Use initWithQueryString:queryContext instead
 func (o *CSSearchQuery) InitWithQueryStringAttributes(queryString *foundation.NSString, attributes *foundation.NSArray[*foundation.NSString]) *CSSearchQuery {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchQuerySelInitWithQueryStringAttributes, queryString.Ptr(), attributes.Ptr())
 	if _ret != 0 {
@@ -74,7 +74,7 @@ func (o *CSSearchQuery) Cancel() {
 	o.Ptr().Send(_cSSearchQuerySelCancel)
 }
 
-// Deprecated: since macOS 13.0.
+// Deprecated: Use initWithQueryString:queryContext instead
 func (o *CSSearchQuery) IsCancelled() bool {
 	_ret := objc.Send[bool](o.Ptr(), _cSSearchQuerySelIsCancelled)
 	return _ret

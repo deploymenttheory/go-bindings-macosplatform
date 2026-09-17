@@ -7,23 +7,20 @@ import (
 	"unsafe"
 
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/foundation"
 )
 
 // @const PGResumeErrorDomain The error domain for reporting errors in resume.
-func PGResumeErrorDomain() uintptr {
+func PGResumeErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_paravirtualizedgraphicsLib, "PGResumeErrorDomain")
-	return ptr
-}
-
-func ParavirtualizedGraphicsVersionNumber() float64 {
-	ptr, _ := purego.Dlsym(_paravirtualizedgraphicsLib, "ParavirtualizedGraphicsVersionNumber")
 	if ptr == 0 {
-		return 0
+		return nil
 	}
-	return *(*float64)(unsafe.Pointer(ptr))
-}
-
-func ParavirtualizedGraphicsVersionString() uintptr {
-	ptr, _ := purego.Dlsym(_paravirtualizedgraphicsLib, "ParavirtualizedGraphicsVersionString")
-	return ptr
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }

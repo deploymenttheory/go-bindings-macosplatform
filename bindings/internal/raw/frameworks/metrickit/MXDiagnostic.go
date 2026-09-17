@@ -13,6 +13,7 @@ import (
 // An abstract data class for a diagnostic.
 //
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxdiagnostic
+// Deprecated: Use DiagnosticResult instead.
 type MXDiagnostic struct {
 	foundation.NSObject
 }
@@ -37,6 +38,7 @@ func MXDiagnosticFromID(id objc.ID) *MXDiagnostic {
 }
 
 // Returns the contents of the diagnostic in JSON format.
+// Deprecated: Use DiagnosticResult instead.
 func (o *MXDiagnostic) JSONRepresentation() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXDiagnosticSelJSONRepresentation)
 	if _ret != 0 {
@@ -46,6 +48,7 @@ func (o *MXDiagnostic) JSONRepresentation() *foundation.NSData {
 }
 
 // Returns the contents of a diagnostic as a dictionary.
+// Deprecated: Use DiagnosticResult instead.
 func (o *MXDiagnostic) DictionaryRepresentation() *foundation.NSDictionary[objc.ID, objc.ID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXDiagnosticSelDictionaryRepresentation)
 	if _ret != 0 {
@@ -54,6 +57,7 @@ func (o *MXDiagnostic) DictionaryRepresentation() *foundation.NSDictionary[objc.
 	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
+// Deprecated: Use DiagnosticResult instead.
 func (o *MXDiagnostic) MetaData() *MXMetaData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXDiagnosticSelMetaData)
 	if _ret != 0 {

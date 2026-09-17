@@ -140,3 +140,16 @@ func SCStreamFrameInfoStatus() *foundation.NSString {
 	}
 	return foundation.NSStringFromID(id)
 }
+
+// @key SCStreamFrameInfoVideoOrientation @abstract The key for the CFDictionary attached to the CMSampleBuffer for the video orientation. @discussion The orientation value follows the CGImagePropertyOrientation enum.
+func SCStreamFrameInfoVideoOrientation() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_screencapturekitLib, "SCStreamFrameInfoVideoOrientation")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}

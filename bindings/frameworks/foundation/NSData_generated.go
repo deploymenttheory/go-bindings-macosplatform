@@ -188,14 +188,14 @@ func (d *Data) WithScriptingProperties(scriptingProperties map[string]obj.Object
 	return d
 }
 
-// Length returns the length.
+// Length returns the number of bytes contained by the data object.
 func (d *Data) Length() int {
 	defer runtime.KeepAlive(d)
 	_r := objc.Send[int](objref.IDOf(d), objc.RegisterName("length"))
 	return _r
 }
 
-// Bytes returns the bytes.
+// Bytes returns a pointer to the data object's contents. If the “NSData/length“ of the [NSData](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/PropertyLists/OldStylePlists/OldStylePLists.html#//apple_ref/doc/uid/20001012-47169) object is 0, this property returns `nil`. For an immutable data object, the returned pointer is valid until the data object is deallocated. For a mutable data object, the returned pointer is valid until the data object is deallocated or the data is mutated.
 func (d *Data) Bytes() unsafe.Pointer {
 	defer runtime.KeepAlive(d)
 	_r := objc.Send[unsafe.Pointer](objref.IDOf(d), objc.RegisterName("bytes"))

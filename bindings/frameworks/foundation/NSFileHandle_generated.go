@@ -17,8 +17,6 @@ import (
 )
 
 // FileHandle is an idiomatic wrapper over the Objective-C class NSFileHandle.
-//
-// An object-oriented wrapper for a file descriptor.
 type FileHandle struct {
 	objref.Handle
 }
@@ -75,14 +73,14 @@ func (fh *FileHandle) String() string {
 	return rt.Description(objref.IDOf(fh))
 }
 
-// NewFileHandleWithFileDescriptorCloseOnDealloc creates a new FileHandle.
+// NewFileHandleWithFileDescriptorCloseOnDealloc creates and returns a file handle object associated with the specified file descriptor and deallocation policy. - Parameters: - fd: The POSIX file descriptor with which to initialize the file handle. This descriptor represents an open file or socket that you created previously. For example, when creating a file handle for a socket, you would pass the value returned by the `socket` function. - closeopt: `YES` if the returned file handle object should take ownership of the file descriptor and close it for you or `NO` if you want to maintain ownership of the file descriptor. - Returns: An initialized file handle object. If `flag` is `NO`, you are responsible for closing the file descriptor at some point after disposing of the file handle object. If you want the file handle object to close the descriptor for you automatically, pass `YES` for the `flag` parameter. The file handle does not close the descriptor if you release the file handle after sending “FileHandle/closeFile()“ or “FileHandle/close()“.
 func NewFileHandleWithFileDescriptorCloseOnDealloc(fd int, closeopt bool) *FileHandle {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSFileHandle")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFileDescriptor:closeOnDealloc:"), fd, closeopt)
 	return fileHandleAdopt(_id)
 }
 
-// NewFileHandleWithCoder creates a new FileHandle.
+// NewFileHandleWithCoder returns a file handle initialized from data in an unarchiver.
 func NewFileHandleWithCoder(coder *Coder) *FileHandle {
 	defer runtime.KeepAlive(coder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSFileHandle")), objc.RegisterName("alloc"))
@@ -90,20 +88,20 @@ func NewFileHandleWithCoder(coder *Coder) *FileHandle {
 	return fileHandleAdopt(_id)
 }
 
-// NewFileHandleWithFileDescriptor creates a new FileHandle.
+// NewFileHandleWithFileDescriptor creates and returns a file handle object associated with the specified file descriptor. - Parameter fd: The POSIX file descriptor. - Returns: A file handle initialized with `fileDescriptor`. The file descriptor is not owned by the file handle object, so you are responsible for closing the file descriptor at some point after disposing of the file handle object. You can create a file handle for a socket by using the result of a `socket` call as `fileDescriptor`.
 func NewFileHandleWithFileDescriptor(fd int) *FileHandle {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSFileHandle")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFileDescriptor:"), fd)
 	return fileHandleAdopt(_id)
 }
 
-// WithReadabilityHandler sets the readability handler.
+// WithReadabilityHandler sets the block to use for reading the contents of the file handle asynchronously. The default value is `nil`. To read data asynchronously, assign a non-nil block. Doing so creates a dispatch source for the associated file descriptor and submits the block to that source when data arrives. Set to `nil` to stop reading.
 func (fh *FileHandle) WithReadabilityHandler(readabilityHandler func(obj.Object)) *FileHandle {
 	objc.Send[objc.ID](objref.IDOf(fh), objc.RegisterName("setReadabilityHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { readabilityHandler(obj.Wrap(_b0)) }))
 	return fh
 }
 
-// WithWriteabilityHandler sets the writeability handler.
+// WithWriteabilityHandler sets the block to use for writing the contents of the file handle asynchronously. The default value is `nil`. To write data asynchronously, assign a non-nil block. Doing so creates a dispatch source for the associated file descriptor and submits the block when the file handle has room for data. Set to `nil` to stop.
 func (fh *FileHandle) WithWriteabilityHandler(writeabilityHandler func(obj.Object)) *FileHandle {
 	objc.Send[objc.ID](objref.IDOf(fh), objc.RegisterName("setWriteabilityHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { writeabilityHandler(obj.Wrap(_b0)) }))
 	return fh
@@ -121,7 +119,7 @@ func (fh *FileHandle) WithScriptingProperties(scriptingProperties map[string]obj
 	return fh
 }
 
-// ReadDataToEndOfFileAndReturnError reads the available data synchronously up to the end of file or maximum number of bytes.
+// ReadDataToEndOfFileAndReturnError reads the available data synchronously up to the end of file or maximum number of bytes. - Returns: The data available through the receiver up to the maximum size that can be represented by an `NSData` object. This method invokes “FileHandle/readData(ofLength:)“ as part of its implementation.
 func (fh *FileHandle) ReadDataToEndOfFileAndReturnError() (result []byte, err error) {
 	defer runtime.KeepAlive(fh)
 	var _nsErr uintptr
@@ -132,7 +130,7 @@ func (fh *FileHandle) ReadDataToEndOfFileAndReturnError() (result []byte, err er
 	return rt.NSDataToBytes(_r), nil
 }
 
-// ReadDataUpToLength reads data synchronously up to the specified number of bytes.
+// ReadDataUpToLength reads data synchronously up to the specified number of bytes. - Parameters: - length: The number of bytes to read from the receiver. - error: If an error occurs, upon return contains an `NSError` object that describes the problem. - Returns: The data available through the receiver up to a maximum of `length` bytes, or `nil` if an error occurred. If the receiver is a file, this method returns data obtained by reading `length` bytes starting at the current file pointer. If `length` bytes are not available, returns as many bytes as are available. Returns an empty `NSData` when the end of file is reached.
 func (fh *FileHandle) ReadDataUpToLength(length int) (result []byte, err error) {
 	defer runtime.KeepAlive(fh)
 	var _nsErr uintptr
@@ -143,7 +141,7 @@ func (fh *FileHandle) ReadDataUpToLength(length int) (result []byte, err error) 
 	return rt.NSDataToBytes(_r), nil
 }
 
-// WriteData writes the specified data synchronously to the file handle.
+// WriteData writes the specified data synchronously to the file handle. - Parameters: - data: The data to write. - error: If an error occurs, upon return contains an `NSError` object that describes the problem. - Returns: `YES` if the data was written successfully; otherwise, `NO`. This method writes data at the current file pointer, advancing the file pointer.
 func (fh *FileHandle) WriteData(data []byte) error {
 	defer runtime.KeepAlive(fh)
 	var _nsErr uintptr
@@ -154,7 +152,7 @@ func (fh *FileHandle) WriteData(data []byte) error {
 	return nil
 }
 
-// GetOffset get the current position of the file pointer within the file.
+// GetOffset gets the position of the file pointer within the file. - Parameters: - offsetInFile: On return, contains the file offset. - error: If an error occurs, upon return contains an `NSError` object that describes the problem. - Returns: `YES` if the offset was retrieved successfully; otherwise, `NO`.
 func (fh *FileHandle) GetOffset() (offsetInFile uint64, err error) {
 	defer runtime.KeepAlive(fh)
 	var _out0 uint64
@@ -166,7 +164,7 @@ func (fh *FileHandle) GetOffset() (offsetInFile uint64, err error) {
 	return _out0, nil
 }
 
-// SeekToEndReturningOffset places the file pointer at the end of the file referenced by the file handle and returns the new file offset.
+// SeekToEndReturningOffset places the file pointer at the end of the file and returns the new file offset. - Parameters: - offsetInFile: On return, contains the new file offset, which is the file size. - error: If an error occurs, upon return contains an `NSError` object that describes the problem. - Returns: `YES` if the operation succeeded; otherwise, `NO`.
 func (fh *FileHandle) SeekToEndReturningOffset() (offsetInFile uint64, err error) {
 	defer runtime.KeepAlive(fh)
 	var _out0 uint64
@@ -178,7 +176,7 @@ func (fh *FileHandle) SeekToEndReturningOffset() (offsetInFile uint64, err error
 	return _out0, nil
 }
 
-// SeekToOffset wraps the corresponding Objective-C method.
+// SeekToOffset moves the file pointer to the specified offset within the file. - Parameters: - offset: The offset to seek to. - error: If an error occurs, upon return contains an `NSError` object that describes the problem. - Returns: `YES` if the operation succeeded; otherwise, `NO`.
 func (fh *FileHandle) SeekToOffset(offset uint64) error {
 	defer runtime.KeepAlive(fh)
 	var _nsErr uintptr
@@ -189,7 +187,7 @@ func (fh *FileHandle) SeekToOffset(offset uint64) error {
 	return nil
 }
 
-// TruncateAtOffset wraps the corresponding Objective-C method.
+// TruncateAtOffset truncates or extends the file represented by the file handle to a specified offset within the file and puts the file pointer at that position. - Parameters: - offset: The offset within the file that will mark the new end of the file. - error: If an error occurs, upon return contains an `NSError` object that describes the problem. - Returns: `YES` if the operation succeeded; otherwise, `NO`. If the file is extended (if `offset` is beyond the current end of file), the added characters are null bytes.
 func (fh *FileHandle) TruncateAtOffset(offset uint64) error {
 	defer runtime.KeepAlive(fh)
 	var _nsErr uintptr
@@ -200,7 +198,7 @@ func (fh *FileHandle) TruncateAtOffset(offset uint64) error {
 	return nil
 }
 
-// SynchronizeAndReturnError synchronizes and return error.
+// SynchronizeAndReturnError causes all in-memory data and attributes of the file represented by the file handle to write to permanent storage. This method should be invoked by programs that require the file to be in a known state. Invocation of this method does not return until memory is flushed.
 //
 // SynchronizeAndReturnError returns an error if the operation did not succeed.
 func (fh *FileHandle) SynchronizeAndReturnError() error {
@@ -213,7 +211,7 @@ func (fh *FileHandle) SynchronizeAndReturnError() error {
 	return nil
 }
 
-// CloseAndReturnError closes and return error.
+// CloseAndReturnError disallows further access to the represented file or communications channel and signals end of file on communications channels that permit writing. If the file handle object owns its file descriptor, it automatically closes that descriptor when it is deallocated. If you initialized the file handle object using the “FileHandle/init(fileDescriptor:closeOnDealloc:)“ method, the file handle object takes ownership of the file descriptor if you passed `YES` for the `flag` parameter. After invoking this method, you may still need to release the file handle object, but the object should not be used to read from or write to the file.
 //
 // CloseAndReturnError returns an error if the operation did not succeed.
 func (fh *FileHandle) CloseAndReturnError() error {
@@ -226,56 +224,56 @@ func (fh *FileHandle) CloseAndReturnError() error {
 	return nil
 }
 
-// AvailableData returns the available data.
+// AvailableData returns the data currently available in the receiver. If the receiver is a file, returns the data obtained by reading the file from the current file pointer to the end of the file. If the receiver is a communications channel, reads up to a buffer of data and returns it; if no data is available, the method blocks. Returns an empty data object if the end of file has been reached. Raises “NSExceptionName/fileHandleOperationException“ upon failure.
 func (fh *FileHandle) AvailableData() []byte {
 	defer runtime.KeepAlive(fh)
 	_r := objc.Send[objc.ID](objref.IDOf(fh), objc.RegisterName("availableData"))
 	return rt.NSDataToBytes(_r)
 }
 
-// ReadInBackgroundAndNotifyForModes reads in background and notify for modes.
+// ReadInBackgroundAndNotifyForModes reads from the file or communications channel in the background and posts a notification when finished. - Parameter modes: The runloop modes in which the read completion notification can be posted. See “FileHandle/readInBackgroundAndNotify()“ for details. This method differs in that the notification is queued for posting in the specified run-loop modes.
 func (fh *FileHandle) ReadInBackgroundAndNotifyForModes(modes []*String) {
 	defer runtime.KeepAlive(fh)
 	objc.Send[objc.ID](objref.IDOf(fh), objc.RegisterName("readInBackgroundAndNotifyForModes:"), purego.SliceToNSArray(modes, func(_v *String) objc.ID { return objref.IDOf(_v) }))
 }
 
-// ReadInBackgroundAndNotify reads in background and notify.
+// ReadInBackgroundAndNotify reads from the file or communications channel in the background and posts a notification when finished. This method performs an asynchronous “FileHandle/availableData“ operation on a file or communications channel and posts an “FileHandle/readCompletionNotification“. You must call this method from a thread that has an active run loop.
 func (fh *FileHandle) ReadInBackgroundAndNotify() {
 	defer runtime.KeepAlive(fh)
 	objc.Send[objc.ID](objref.IDOf(fh), objc.RegisterName("readInBackgroundAndNotify"))
 }
 
-// ReadToEndOfFileInBackgroundAndNotifyForModes reads to end of file in background and notify for modes.
+// ReadToEndOfFileInBackgroundAndNotifyForModes reads to the end of file from the file or communications channel in the background and posts a notification when finished. - Parameter modes: The runloop modes in which the read completion notification can be posted. See “FileHandle/readToEndOfFileInBackgroundAndNotify()“ for details. This method differs in that the notification is queued for posting in the specified run-loop modes.
 func (fh *FileHandle) ReadToEndOfFileInBackgroundAndNotifyForModes(modes []*String) {
 	defer runtime.KeepAlive(fh)
 	objc.Send[objc.ID](objref.IDOf(fh), objc.RegisterName("readToEndOfFileInBackgroundAndNotifyForModes:"), purego.SliceToNSArray(modes, func(_v *String) objc.ID { return objref.IDOf(_v) }))
 }
 
-// ReadToEndOfFileInBackgroundAndNotify reads to end of file in background and notify.
+// ReadToEndOfFileInBackgroundAndNotify reads to the end of file from the file or communications channel in the background and posts a notification when finished. This method performs an asynchronous “FileHandle/readDataToEndOfFile()“ operation on a file or communications channel and posts an `NSFileHandleReadToEndOfFileCompletionNotification`. You must call this method from a thread that has an active run loop.
 func (fh *FileHandle) ReadToEndOfFileInBackgroundAndNotify() {
 	defer runtime.KeepAlive(fh)
 	objc.Send[objc.ID](objref.IDOf(fh), objc.RegisterName("readToEndOfFileInBackgroundAndNotify"))
 }
 
-// AcceptConnectionInBackgroundAndNotifyForModes wraps the corresponding Objective-C method.
+// AcceptConnectionInBackgroundAndNotifyForModes accepts a socket connection (for stream-type sockets only) in the background and creates a file handle for the "near" (client) end of the communications channel. - Parameter modes: The runloop modes in which the connection accepted notification can be posted. See “FileHandle/acceptConnectionInBackgroundAndNotify()“ for details. This method differs in that the notification is queued for posting in the specified run-loop modes.
 func (fh *FileHandle) AcceptConnectionInBackgroundAndNotifyForModes(modes []*String) {
 	defer runtime.KeepAlive(fh)
 	objc.Send[objc.ID](objref.IDOf(fh), objc.RegisterName("acceptConnectionInBackgroundAndNotifyForModes:"), purego.SliceToNSArray(modes, func(_v *String) objc.ID { return objref.IDOf(_v) }))
 }
 
-// AcceptConnectionInBackgroundAndNotify wraps the corresponding Objective-C method.
+// AcceptConnectionInBackgroundAndNotify accepts a socket connection (for stream-type sockets only) in the background and creates a file handle for the "near" (client) end of the communications channel. This method asynchronously creates a file handle for the other end of the socket connection and returns that object by posting an `NSFileHandleConnectionAcceptedNotification`. The notification includes a `userInfo` dictionary with the created “FileHandle“ object, accessible using the `NSFileHandleNotificationFileHandleItem` key. You must call this method from a thread that has an active run loop.
 func (fh *FileHandle) AcceptConnectionInBackgroundAndNotify() {
 	defer runtime.KeepAlive(fh)
 	objc.Send[objc.ID](objref.IDOf(fh), objc.RegisterName("acceptConnectionInBackgroundAndNotify"))
 }
 
-// WaitForDataInBackgroundAndNotifyForModes wraps the corresponding Objective-C method.
+// WaitForDataInBackgroundAndNotifyForModes asynchronously checks to see if data is available. - Parameter modes: The runloop modes in which the data available notification can be posted. See “FileHandle/waitForDataInBackgroundAndNotify()“ for details. This method differs in that the notification is queued for posting in the specified run-loop modes.
 func (fh *FileHandle) WaitForDataInBackgroundAndNotifyForModes(modes []*String) {
 	defer runtime.KeepAlive(fh)
 	objc.Send[objc.ID](objref.IDOf(fh), objc.RegisterName("waitForDataInBackgroundAndNotifyForModes:"), purego.SliceToNSArray(modes, func(_v *String) objc.ID { return objref.IDOf(_v) }))
 }
 
-// WaitForDataInBackgroundAndNotify wraps the corresponding Objective-C method.
+// WaitForDataInBackgroundAndNotify asynchronously checks to see if data is available. When the data becomes available, this method posts a “FileHandle/dataAvailableNotification“ notification on the current thread. You must call this method from a thread that has an active run loop.
 func (fh *FileHandle) WaitForDataInBackgroundAndNotify() {
 	defer runtime.KeepAlive(fh)
 	objc.Send[objc.ID](objref.IDOf(fh), objc.RegisterName("waitForDataInBackgroundAndNotify"))
@@ -288,53 +286,53 @@ func (fh *FileHandle) FileDescriptor() int {
 	return _r
 }
 
-// ReadDataToEndOfFile returns the read data to end of file.
+// ReadDataToEndOfFile returns reads the available data synchronously up to the end of file or maximum number of bytes.
 func (fh *FileHandle) ReadDataToEndOfFile() []byte {
 	defer runtime.KeepAlive(fh)
 	_r := objc.Send[objc.ID](objref.IDOf(fh), objc.RegisterName("readDataToEndOfFile"))
 	return rt.NSDataToBytes(_r)
 }
 
-// ReadDataOfLength reads data of length.
+// ReadDataOfLength reads data synchronously up to the specified number of bytes.
 func (fh *FileHandle) ReadDataOfLength(length int) []byte {
 	defer runtime.KeepAlive(fh)
 	_r := objc.Send[objc.ID](objref.IDOf(fh), objc.RegisterName("readDataOfLength:"), length)
 	return rt.NSDataToBytes(_r)
 }
 
-// OffsetInFile returns the offset in file.
+// OffsetInFile returns the position of the file pointer within the file represented by the file handle.
 func (fh *FileHandle) OffsetInFile() uint64 {
 	defer runtime.KeepAlive(fh)
 	_r := objc.Send[uint64](objref.IDOf(fh), objc.RegisterName("offsetInFile"))
 	return _r
 }
 
-// SeekToEndOfFile returns the seek to end of file.
+// SeekToEndOfFile returns places the file pointer at the end of the file referenced by the file handle and returns the new file offset.
 func (fh *FileHandle) SeekToEndOfFile() uint64 {
 	defer runtime.KeepAlive(fh)
 	_r := objc.Send[uint64](objref.IDOf(fh), objc.RegisterName("seekToEndOfFile"))
 	return _r
 }
 
-// SeekToFileOffset wraps the corresponding Objective-C method.
+// SeekToFileOffset moves the file pointer to the specified offset within the file represented by the receiver.
 func (fh *FileHandle) SeekToFileOffset(offset uint64) {
 	defer runtime.KeepAlive(fh)
 	objc.Send[objc.ID](objref.IDOf(fh), objc.RegisterName("seekToFileOffset:"), offset)
 }
 
-// TruncateFileAtOffset wraps the corresponding Objective-C method.
+// TruncateFileAtOffset truncates or extends the file represented by the file handle to a specified offset within the file and puts the file pointer at that position.
 func (fh *FileHandle) TruncateFileAtOffset(offset uint64) {
 	defer runtime.KeepAlive(fh)
 	objc.Send[objc.ID](objref.IDOf(fh), objc.RegisterName("truncateFileAtOffset:"), offset)
 }
 
-// SynchronizeFile synchronizes file.
+// SynchronizeFile causes all in-memory data and attributes of the file represented by the handle to write to permanent storage.
 func (fh *FileHandle) SynchronizeFile() {
 	defer runtime.KeepAlive(fh)
 	objc.Send[objc.ID](objref.IDOf(fh), objc.RegisterName("synchronizeFile"))
 }
 
-// CloseFile closes file.
+// CloseFile disallows further access to the represented file or communications channel and signals end of file on communications channels that permit writing.
 func (fh *FileHandle) CloseFile() {
 	defer runtime.KeepAlive(fh)
 	objc.Send[objc.ID](objref.IDOf(fh), objc.RegisterName("closeFile"))

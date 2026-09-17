@@ -15,8 +15,6 @@ import (
 // VideoProcessorTimeIntervalCadence is an idiomatic wrapper over the Objective-C class VNVideoProcessorTimeIntervalCadence.
 //
 // It embeds [VideoProcessorCadence], promoting that type's methods.
-//
-// An object that defines a time-based cadence for processing a video stream.
 type VideoProcessorTimeIntervalCadence struct {
 	VideoProcessorCadence
 }

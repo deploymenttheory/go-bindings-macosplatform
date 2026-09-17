@@ -59,6 +59,30 @@ type MTLFXFrameInterpolatorBase interface {
 	OutputWidth() uint
 	OutputHeight() uint
 	UiTextureFormat() metal.MTLPixelFormat
+	ContentWidth() uint
+	SetContentWidth(contentWidth uint)
+	ContentHeight() uint
+	SetContentHeight(contentHeight uint)
+	DepthContentOffsetX() uint
+	SetDepthContentOffsetX(depthContentOffsetX uint)
+	DepthContentOffsetY() uint
+	SetDepthContentOffsetY(depthContentOffsetY uint)
+	MotionContentOffsetX() uint
+	SetMotionContentOffsetX(motionContentOffsetX uint)
+	MotionContentOffsetY() uint
+	SetMotionContentOffsetY(motionContentOffsetY uint)
+	OutputOffsetX() uint
+	SetOutputOffsetX(outputOffsetX uint)
+	OutputOffsetY() uint
+	SetOutputOffsetY(outputOffsetY uint)
+	DistortionOffsetX() uint
+	SetDistortionOffsetX(distortionOffsetX uint)
+	DistortionOffsetY() uint
+	SetDistortionOffsetY(distortionOffsetY uint)
+	DistortionWidth() uint
+	SetDistortionWidth(distortionWidth uint)
+	DistortionHeight() uint
+	SetDistortionHeight(distortionHeight uint)
 	ColorTexture() metal.MTLTexture
 	SetColorTexture(colorTexture metal.MTLTexture)
 	PrevColorTexture() metal.MTLTexture
@@ -81,6 +105,10 @@ type MTLFXFrameInterpolatorBase interface {
 	SetFieldOfView(fieldOfView float32)
 	AspectRatio() float32
 	SetAspectRatio(aspectRatio float32)
+	WorldToViewMatrix() unsafe.Pointer
+	SetWorldToViewMatrix(worldToViewMatrix unsafe.Pointer)
+	ViewToClipMatrix() unsafe.Pointer
+	SetViewToClipMatrix(viewToClipMatrix unsafe.Pointer)
 	UiTexture() metal.MTLTexture
 	SetUITexture(uiTexture metal.MTLTexture)
 	JitterOffsetX() float32
@@ -93,6 +121,8 @@ type MTLFXFrameInterpolatorBase interface {
 	SetShouldResetHistory(shouldResetHistory bool)
 	OutputTexture() metal.MTLTexture
 	SetOutputTexture(outputTexture metal.MTLTexture)
+	DistortionTexture() metal.MTLTexture
+	SetDistortionTexture(distortionTexture metal.MTLTexture)
 	Fence() metal.MTLFence
 	SetFence(fence metal.MTLFence)
 	IsDepthReversed() bool
@@ -139,6 +169,7 @@ type MTLFXTemporalDenoisedScalerBase interface {
 	ColorTextureUsage() metal.MTLTextureUsage
 	DepthTextureUsage() metal.MTLTextureUsage
 	MotionTextureUsage() metal.MTLTextureUsage
+	ReactiveMaskTextureUsage() metal.MTLTextureUsage
 	ReactiveTextureUsage() metal.MTLTextureUsage
 	DiffuseAlbedoTextureUsage() metal.MTLTextureUsage
 	SpecularAlbedoTextureUsage() metal.MTLTextureUsage
@@ -225,12 +256,33 @@ type MTLFXTemporalScalerBase interface {
 	ColorTextureUsage() metal.MTLTextureUsage
 	DepthTextureUsage() metal.MTLTextureUsage
 	MotionTextureUsage() metal.MTLTextureUsage
+	ReactiveMaskTextureUsage() metal.MTLTextureUsage
 	ReactiveTextureUsage() metal.MTLTextureUsage
 	OutputTextureUsage() metal.MTLTextureUsage
 	InputContentWidth() uint
 	SetInputContentWidth(inputContentWidth uint)
 	InputContentHeight() uint
 	SetInputContentHeight(inputContentHeight uint)
+	ColorContentOffsetX() uint
+	SetColorContentOffsetX(colorContentOffsetX uint)
+	ColorContentOffsetY() uint
+	SetColorContentOffsetY(colorContentOffsetY uint)
+	DepthContentOffsetX() uint
+	SetDepthContentOffsetX(depthContentOffsetX uint)
+	DepthContentOffsetY() uint
+	SetDepthContentOffsetY(depthContentOffsetY uint)
+	MotionContentOffsetX() uint
+	SetMotionContentOffsetX(motionContentOffsetX uint)
+	MotionContentOffsetY() uint
+	SetMotionContentOffsetY(motionContentOffsetY uint)
+	ReactiveMaskContentOffsetX() uint
+	SetReactiveMaskContentOffsetX(reactiveMaskContentOffsetX uint)
+	ReactiveMaskContentOffsetY() uint
+	SetReactiveMaskContentOffsetY(reactiveMaskContentOffsetY uint)
+	OutputOffsetX() uint
+	SetOutputOffsetX(outputOffsetX uint)
+	OutputOffsetY() uint
+	SetOutputOffsetY(outputOffsetY uint)
 	ColorTexture() metal.MTLTexture
 	SetColorTexture(colorTexture metal.MTLTexture)
 	DepthTexture() metal.MTLTexture

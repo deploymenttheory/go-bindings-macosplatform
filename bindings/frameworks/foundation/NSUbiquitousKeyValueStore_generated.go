@@ -214,7 +214,7 @@ func (ukvs *UbiquitousKeyValueStore) Synchronize() bool {
 	return _r
 }
 
-// DictionaryRepresentation returns the dictionary representation.
+// DictionaryRepresentation returns a dictionary with all of the key-value pairs in the iCloud key-value store.
 func (ukvs *UbiquitousKeyValueStore) DictionaryRepresentation() map[string]obj.Object {
 	defer runtime.KeepAlive(ukvs)
 	_r := objc.Send[objc.ID](objref.IDOf(ukvs), objc.RegisterName("dictionaryRepresentation"))

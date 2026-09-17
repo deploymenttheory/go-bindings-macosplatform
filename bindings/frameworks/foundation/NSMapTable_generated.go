@@ -152,21 +152,21 @@ func (mt *MapTable) DictionaryRepresentation() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// KeyPointerFunctions returns the key pointer functions.
+// KeyPointerFunctions returns the pointer functions the map table uses to manage keys.
 func (mt *MapTable) KeyPointerFunctions() *PointerFunctions {
 	defer runtime.KeepAlive(mt)
 	_r := objc.Send[objc.ID](objref.IDOf(mt), objc.RegisterName("keyPointerFunctions"))
 	return PointerFunctionsFromID(_r)
 }
 
-// ValuePointerFunctions returns the value pointer functions.
+// ValuePointerFunctions returns the pointer functions the map table uses to manage values.
 func (mt *MapTable) ValuePointerFunctions() *PointerFunctions {
 	defer runtime.KeepAlive(mt)
 	_r := objc.Send[objc.ID](objref.IDOf(mt), objc.RegisterName("valuePointerFunctions"))
 	return PointerFunctionsFromID(_r)
 }
 
-// Count returns the count.
+// Count returns the number of key-value pairs in the map table.
 func (mt *MapTable) Count() int {
 	defer runtime.KeepAlive(mt)
 	_r := objc.Send[int](objref.IDOf(mt), objc.RegisterName("count"))

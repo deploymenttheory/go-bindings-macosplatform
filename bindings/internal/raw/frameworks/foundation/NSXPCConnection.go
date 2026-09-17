@@ -160,6 +160,7 @@ func (o *NSXPCConnection) SetCodeSigningRequirement(requirement *NSString) {
 	o.Ptr().Send(_nSXPCConnectionSelSetCodeSigningRequirement, requirement.Ptr())
 }
 
+// The name of the XPC service that this connection was configured to connect to.
 func (o *NSXPCConnection) ServiceName() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXPCConnectionSelServiceName)
 	if _ret != 0 {
@@ -168,6 +169,7 @@ func (o *NSXPCConnection) ServiceName() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The endpoint that was provided when the connection was initialized.
 func (o *NSXPCConnection) Endpoint() *NSXPCListenerEndpoint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXPCConnectionSelEndpoint)
 	if _ret != 0 {
@@ -176,6 +178,7 @@ func (o *NSXPCConnection) Endpoint() *NSXPCListenerEndpoint {
 	return NSXPCListenerEndpointFromID(_ret)
 }
 
+// The interface that describes messages that are allowed to be received by the exported object on this connection. This value is required if an exported object is set.
 func (o *NSXPCConnection) ExportedInterface() *NSXPCInterface {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXPCConnectionSelExportedInterface)
 	if _ret != 0 {
@@ -188,6 +191,7 @@ func (o *NSXPCConnection) SetExportedInterface(exportedInterface *NSXPCInterface
 	o.Ptr().Send(_nSXPCConnectionSelSetExportedInterface, exportedInterface.Ptr())
 }
 
+// An object that is vended to the other side of this connection. Messages sent to the `remoteObjectProxy` from the other side of the connection will be dispatched to this object. Messages delivered to exported objects are serialized and sent on a non-main queue. The receiver is responsible for handling the messages on a different queue or thread if it is required.
 func (o *NSXPCConnection) ExportedObject() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXPCConnectionSelExportedObject)
 	return _ret
@@ -197,6 +201,7 @@ func (o *NSXPCConnection) SetExportedObject(exportedObject objc.ID) {
 	o.Ptr().Send(_nSXPCConnectionSelSetExportedObject, exportedObject)
 }
 
+// The interface that describes messages that are allowed to be received by the remote object on the other side of this connection. This value is required if messages are sent over this connection.
 func (o *NSXPCConnection) RemoteObjectInterface() *NSXPCInterface {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXPCConnectionSelRemoteObjectInterface)
 	if _ret != 0 {
@@ -209,11 +214,13 @@ func (o *NSXPCConnection) SetRemoteObjectInterface(remoteObjectInterface *NSXPCI
 	o.Ptr().Send(_nSXPCConnectionSelSetRemoteObjectInterface, remoteObjectInterface.Ptr())
 }
 
+// Returns a proxy for the remote object (that is, the object exported from the other side of this connection).
 func (o *NSXPCConnection) RemoteObjectProxy() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXPCConnectionSelRemoteObjectProxy)
 	return _ret
 }
 
+// A block that is called if the remote process exits or crashes. It may be possible to re-establish the connection by simply sending another message. The handler will be invoked on the same queue as replies and other handlers, but there is no guarantee of ordering between those callbacks and this one. The `interruptionHandler` property is cleared after the connection becomes invalid to mitigate the impact of a retain cycle created by referencing the `NSXPCConnection` instance inside this block.
 func (o *NSXPCConnection) InterruptionHandler() objc.Block {
 	_ret := objc.Send[objc.Block](o.Ptr(), _nSXPCConnectionSelInterruptionHandler)
 	return _ret
@@ -230,6 +237,7 @@ func (o *NSXPCConnection) SetInterruptionHandler(interruptionHandler func()) {
 	o.Ptr().Send(_nSXPCConnectionSelSetInterruptionHandler, __block_interruptionHandler)
 }
 
+// A block that is called if the connection can not be formed or has terminated and may not be re-established. The invalidation handler will also be called if a connection created with an `NSXPCListenerEndpoint` is invalidated from the remote side, or if the `NSXPCListener` used to create that endpoint is invalidated. You may not send messages over the connection from within an invalidation handler block. The `invalidationHandler` property is cleared after the connection becomes invalid to mitigate the impact of a retain cycle created by referencing the `NSXPCConnection` instance inside this block.
 func (o *NSXPCConnection) InvalidationHandler() objc.Block {
 	_ret := objc.Send[objc.Block](o.Ptr(), _nSXPCConnectionSelInvalidationHandler)
 	return _ret
@@ -246,21 +254,25 @@ func (o *NSXPCConnection) SetInvalidationHandler(invalidationHandler func()) {
 	o.Ptr().Send(_nSXPCConnectionSelSetInvalidationHandler, __block_invalidationHandler)
 }
 
+// The audit session identifier of the connecting process.
 func (o *NSXPCConnection) AuditSessionIdentifier() int {
 	_ret := objc.Send[int](o.Ptr(), _nSXPCConnectionSelAuditSessionIdentifier)
 	return _ret
 }
 
+// The process identifier (PID) of the connecting process.
 func (o *NSXPCConnection) ProcessIdentifier() int {
 	_ret := objc.Send[int](o.Ptr(), _nSXPCConnectionSelProcessIdentifier)
 	return _ret
 }
 
+// The effective user identifier (EUID) of the connecting process.
 func (o *NSXPCConnection) EffectiveUserIdentifier() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSXPCConnectionSelEffectiveUserIdentifier)
 	return _ret
 }
 
+// The effective group identifier (EGID) of the connecting process.
 func (o *NSXPCConnection) EffectiveGroupIdentifier() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSXPCConnectionSelEffectiveGroupIdentifier)
 	return _ret

@@ -48,6 +48,7 @@ func (o *NSTextElement) InitWithTextContentManager(textContentManager *NSTextCon
 	return NSTextElementFromID(_ret)
 }
 
+// The value that represents the current content manager. A text element can migrate between text content managers.
 func (o *NSTextElement) TextContentManager() *NSTextContentManager {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextElementSelTextContentManager)
 	if _ret != 0 {
@@ -60,6 +61,7 @@ func (o *NSTextElement) SetTextContentManager(textContentManager *NSTextContentM
 	o.Ptr().Send(_nSTextElementSelSetTextContentManager, textContentManager.Ptr())
 }
 
+// A range value that represents the range of the element inside the document.
 func (o *NSTextElement) ElementRange() *NSTextRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextElementSelElementRange)
 	if _ret != 0 {
@@ -72,6 +74,7 @@ func (o *NSTextElement) SetElementRange(elementRange *NSTextRange) {
 	o.Ptr().Send(_nSTextElementSelSetElementRange, elementRange.Ptr())
 }
 
+// An array of zero or more child text elements. A concrete `NSTextElement` subclass can be structured in a tree. An element can have zero or more child elements.
 func (o *NSTextElement) ChildElements() *foundation.NSArray[*NSTextElement] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextElementSelChildElements)
 	if _ret != 0 {
@@ -80,6 +83,7 @@ func (o *NSTextElement) ChildElements() *foundation.NSArray[*NSTextElement] {
 	return foundation.NSArrayFromID[*NSTextElement](_ret)
 }
 
+// A value that represents the parent element if this text element is a child of an enclosing element.
 func (o *NSTextElement) ParentElement() *NSTextElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextElementSelParentElement)
 	if _ret != 0 {
@@ -88,6 +92,7 @@ func (o *NSTextElement) ParentElement() *NSTextElement {
 	return NSTextElementFromID(_ret)
 }
 
+// A Boolean value that indicates whether this element is in the text layout. When `true`, the element is enumerated by “NSTextContentManager“.
 func (o *NSTextElement) IsRepresentedElement() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTextElementSelIsRepresentedElement)
 	return _ret

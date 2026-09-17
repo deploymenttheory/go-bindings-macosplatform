@@ -31,6 +31,8 @@ var (
 	_wKUserContentControllerSelAddContentRuleList                               = objc.RegisterName("addContentRuleList:")
 	_wKUserContentControllerSelRemoveContentRuleList                            = objc.RegisterName("removeContentRuleList:")
 	_wKUserContentControllerSelRemoveAllContentRuleLists                        = objc.RegisterName("removeAllContentRuleLists")
+	_wKUserContentControllerSelAddBufferNameContentWorld                        = objc.RegisterName("addBuffer:name:contentWorld:")
+	_wKUserContentControllerSelRemoveBufferWithNameContentWorld                 = objc.RegisterName("removeBufferWithName:contentWorld:")
 	_wKUserContentControllerSelUserScripts                                      = objc.RegisterName("userScripts")
 )
 
@@ -125,6 +127,20 @@ func (o *WKUserContentController) RemoveContentRuleList(contentRuleList *WKConte
 func (o *WKUserContentController) RemoveAllContentRuleLists() {
 	purego.Main(func() {
 		o.Ptr().Send(_wKUserContentControllerSelRemoveAllContentRuleLists)
+	})
+}
+
+// @abstract Adds a data buffer that will be available to JavaScript through the `window.webkit.buffers` object @param buffer The buffer to add. @param name The name of the buffer to be referenced from JavaScript. e.g. with a `name` parameter of `@"mybuffer"`, JavaScript can reference the buffer via `window.webkit.buffers.mybuffer` @param contentWorld The WKContentWorld to add the buffer to. The buffer will only be visible to JavaScript executing in that content world.
+func (o *WKUserContentController) AddBufferNameContentWorld(buffer *foundation.NSData, name *foundation.NSString, world *WKContentWorld) {
+	purego.Main(func() {
+		o.Ptr().Send(_wKUserContentControllerSelAddBufferNameContentWorld, buffer.Ptr(), name.Ptr(), world.Ptr())
+	})
+}
+
+// @abstract Removes a previously added data buffer from the given `WKContentWorld @param name The name of the buffer to remove. @param contentWorld The WKContentWorld from which to remove the buffer.
+func (o *WKUserContentController) RemoveBufferWithNameContentWorld(name *foundation.NSString, world *WKContentWorld) {
+	purego.Main(func() {
+		o.Ptr().Send(_wKUserContentControllerSelRemoveBufferWithNameContentWorld, name.Ptr(), world.Ptr())
 	})
 }
 

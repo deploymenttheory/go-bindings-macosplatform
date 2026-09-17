@@ -119,7 +119,7 @@ func (o *FSVolumeSupportedCapabilities) SetSupportsActiveJournal(supportsActiveJ
 	o.Ptr().Send(_fSVolumeSupportedCapabilitiesSelSetSupportsActiveJournal, supportsActiveJournal)
 }
 
-// A Boolan property that indicates the volume doesn't store reliable times for the root directory. If this value is `true` (Swift) or `YES` (Objective-C), the volume doesn't store reliable times for the root directory.
+// A Boolean property that indicates the volume doesn't store reliable times for the root directory. If this value is `true` (Swift) or `YES` (Objective-C), the volume doesn't store reliable times for the root directory.
 func (o *FSVolumeSupportedCapabilities) DoesNotSupportRootTimes() bool {
 	_ret := objc.Send[bool](o.Ptr(), _fSVolumeSupportedCapabilitiesSelDoesNotSupportRootTimes)
 	return _ret

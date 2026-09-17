@@ -95,6 +95,7 @@ func (o *NSTimeZone) NextDaylightSavingTimeTransitionAfterDate(aDate *NSDate) *N
 	return NSDateFromID(_ret)
 }
 
+// The geopolitical region ID that identifies the receiver.
 func (o *NSTimeZone) Name() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTimeZoneSelName)
 	if _ret != 0 {
@@ -103,6 +104,7 @@ func (o *NSTimeZone) Name() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The data that stores the information used by the receiver. Treat this data as an opaque object.
 func (o *NSTimeZone) Data() *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTimeZoneSelData)
 	if _ret != 0 {
@@ -139,6 +141,7 @@ func (o *NSTimeZone) LocalizedNameLocale(style NSTimeZoneNameStyle, locale *NSLo
 	return NSStringFromID(_ret)
 }
 
+// The time zone currently used by the system. If the current system time zone cannot be determined, the GMT time zone is used instead. If you access this class property, its value is cached by the app and doesn't update if the user subsequently changes the system time zone. In order for the property to reflect the new time zone, you must first call “resetSystemTimeZone“ to clear the cached value.
 func NSTimeZoneSystemTimeZone() *NSTimeZone {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTimeZone), _nSTimeZoneSelSystemTimeZone)
 	if _ret != 0 {
@@ -147,6 +150,7 @@ func NSTimeZoneSystemTimeZone() *NSTimeZone {
 	return NSTimeZoneFromID(_ret)
 }
 
+// The default time zone for the current app. If no default time zone has been set, the current system time zone is used. If the current system time zone cannot be determined, the GMT time zone is used instead. The default time zone is used by the app for date and time operations. You can set it to cause the app to run as if it were in a different time zone. Setting this property clears any value that was previously set.
 func NSTimeZoneDefaultTimeZone() *NSTimeZone {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTimeZone), _nSTimeZoneSelDefaultTimeZone)
 	if _ret != 0 {
@@ -159,6 +163,7 @@ func NSTimeZoneSetDefaultTimeZone(defaultTimeZone *NSTimeZone) {
 	objc.ID(_clsNSTimeZone).Send(_nSTimeZoneSelSetDefaultTimeZone, defaultTimeZone.Ptr())
 }
 
+// An object that tracks the current system time zone. Use this property when you want an object that always reflects the current system time zone. Contrast this behavior with that of the `systemTimeZone` class property, which has its value cached until you manually clear it by calling “resetSystemTimeZone“.
 func NSTimeZoneLocalTimeZone() *NSTimeZone {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTimeZone), _nSTimeZoneSelLocalTimeZone)
 	if _ret != 0 {
@@ -167,6 +172,7 @@ func NSTimeZoneLocalTimeZone() *NSTimeZone {
 	return NSTimeZoneFromID(_ret)
 }
 
+// Returns an array of strings listing the IDs of all the time zones known to the system.
 func NSTimeZoneKnownTimeZoneNames() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTimeZone), _nSTimeZoneSelKnownTimeZoneNames)
 	if _ret != 0 {
@@ -175,10 +181,12 @@ func NSTimeZoneKnownTimeZoneNames() *NSArray[*NSString] {
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// Returns a dictionary holding the mappings of time zone abbreviations to time zone names. Note that more than one time zone may have the same abbreviation--for example, US/Pacific and Canada/Pacific both use the abbreviation "PST." In these cases, this dictionary chooses a single name to map the abbreviation to.
 func NSTimeZoneSetAbbreviationDictionary(abbreviationDictionary *NSDictionary[*NSString, *NSString]) {
 	objc.ID(_clsNSTimeZone).Send(_nSTimeZoneSelSetAbbreviationDictionary, abbreviationDictionary.Ptr())
 }
 
+// Returns the time zone data version.
 func NSTimeZoneTimeZoneDataVersion() *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTimeZone), _nSTimeZoneSelTimeZoneDataVersion)
 	if _ret != 0 {
@@ -187,11 +195,13 @@ func NSTimeZoneTimeZoneDataVersion() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The current difference in seconds between the receiver and Greenwich Mean Time.
 func (o *NSTimeZone) SecondsFromGMT() int {
 	_ret := objc.Send[int](o.Ptr(), _nSTimeZoneSelSecondsFromGMT)
 	return _ret
 }
 
+// The abbreviation for the receiver, such as "EDT" (Eastern Daylight Time). Invokes `abbreviationForDate:` with the current date as the argument.
 func (o *NSTimeZone) Abbreviation() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTimeZoneSelAbbreviation)
 	if _ret != 0 {
@@ -200,16 +210,19 @@ func (o *NSTimeZone) Abbreviation() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// A Boolean value that indicates whether the receiver is currently using daylight saving time. Invokes `isDaylightSavingTimeForDate:` with the current date as the argument.
 func (o *NSTimeZone) IsDaylightSavingTime() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTimeZoneSelIsDaylightSavingTime)
 	return _ret
 }
 
+// The current daylight saving time offset of the receiver.
 func (o *NSTimeZone) DaylightSavingTimeOffset() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSTimeZoneSelDaylightSavingTimeOffset)
 	return _ret
 }
 
+// The date of the next daylight saving time transition for the receiver. This property contains the date of the next (after the current instant) daylight saving time transition for the receiver. Depending on the time zone of the receiver, the value of this property may represent a change of the time zone's offset from GMT. Returns `nil` if the time zone of the receiver does not currently observe daylight saving time.
 func (o *NSTimeZone) NextDaylightSavingTimeTransition() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTimeZoneSelNextDaylightSavingTimeTransition)
 	if _ret != 0 {

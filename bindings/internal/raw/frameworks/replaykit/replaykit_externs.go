@@ -12,6 +12,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/foundation"
 )
 
+// Deprecated: No longer supported
 func RPApplicationInfoBundleIdentifierKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_replaykitLib, "RPApplicationInfoBundleIdentifierKey")
 	if ptr == 0 {
@@ -24,6 +25,7 @@ func RPApplicationInfoBundleIdentifierKey() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
+// Deprecated: Use ScreenCaptureKit instead
 func RPRecordingErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_replaykitLib, "RPRecordingErrorDomain")
 	if ptr == 0 {
@@ -36,6 +38,7 @@ func RPRecordingErrorDomain() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
+// Deprecated: No longer supported
 func RPVideoSampleOrientationKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_replaykitLib, "RPVideoSampleOrientationKey")
 	if ptr == 0 {
@@ -48,6 +51,7 @@ func RPVideoSampleOrientationKey() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
+// Deprecated: Use ScreenCaptureKit instead
 func SCStreamErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_replaykitLib, "SCStreamErrorDomain")
 	if ptr == 0 {

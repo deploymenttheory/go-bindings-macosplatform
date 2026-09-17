@@ -148,7 +148,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SetYearDayScheduleWithParamsCompletion(para
 	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("setYearDayScheduleWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
-// GetYearDayScheduleWithParamsCompletion command GetYearDaySchedule Returns the year day schedule data for the specified schedule and user indexes.
+// GetYearDayScheduleWithParamsCompletion command GetYearDaySchedule Retrieve the specific year day schedule for the specific schedule and user indexes.
 //
 // GetYearDayScheduleWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) GetYearDayScheduleWithParamsCompletion(ctx context.Context, params *MTRDoorLockClusterGetYearDayScheduleParams) (result *MTRDoorLockClusterGetYearDayScheduleResponseParams, err error) {
@@ -223,14 +223,14 @@ func (mbcdl *MTRBaseClusterDoorLock) ClearHolidayScheduleWithParamsCompletion(pa
 	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("clearHolidayScheduleWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
-// SetUserWithParamsCompletion command SetUser Set User into the lock.
+// SetUserWithParamsCompletion command SetUser Set user into the lock.
 func (mbcdl *MTRBaseClusterDoorLock) SetUserWithParamsCompletion(params *MTRDoorLockClusterSetUserParams, completion func(unsafe.Pointer)) {
 	defer runtime.KeepAlive(mbcdl)
 	defer runtime.KeepAlive(params)
 	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("setUserWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
-// GetUserWithParamsCompletion command GetUser Retrieve User.
+// GetUserWithParamsCompletion command GetUser Retrieve user.
 //
 // GetUserWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) GetUserWithParamsCompletion(ctx context.Context, params *MTRDoorLockClusterGetUserParams) (result *MTRDoorLockClusterGetUserResponseParams, err error) {
@@ -257,7 +257,7 @@ func (mbcdl *MTRBaseClusterDoorLock) GetUserWithParamsCompletion(ctx context.Con
 	}
 }
 
-// ClearUserWithParamsCompletion command ClearUser Clears a User or all Users.
+// ClearUserWithParamsCompletion command ClearUser Clears a user or all Users.
 func (mbcdl *MTRBaseClusterDoorLock) ClearUserWithParamsCompletion(params *MTRDoorLockClusterClearUserParams, completion func(unsafe.Pointer)) {
 	defer runtime.KeepAlive(mbcdl)
 	defer runtime.KeepAlive(params)

@@ -103,6 +103,18 @@ func (fid *FrameInterpolatorDescriptor) WithOutputHeight(outputHeight int) *Fram
 	return fid
 }
 
+// WithDistortionTextureEnabled sets a Boolean value that indicates whether the frame interpolator supports barrel distortion correction.
+func (fid *FrameInterpolatorDescriptor) WithDistortionTextureEnabled(distortionTextureEnabled bool) *FrameInterpolatorDescriptor {
+	objc.Send[objc.ID](objref.IDOf(fid), objc.RegisterName("setDistortionTextureEnabled:"), distortionTextureEnabled)
+	return fid
+}
+
+// WithRequiresPrevColorTexture sets a Boolean value that indicates whether the frame interpolator requires the client to provide a previous color texture.
+func (fid *FrameInterpolatorDescriptor) WithRequiresPrevColorTexture(requiresPrevColorTexture bool) *FrameInterpolatorDescriptor {
+	objc.Send[objc.ID](objref.IDOf(fid), objc.RegisterName("setRequiresPrevColorTexture:"), requiresPrevColorTexture)
+	return fid
+}
+
 // InputWidth returns the width, in pixels, of the input motion and depth texture for the frame interpolator.
 func (fid *FrameInterpolatorDescriptor) InputWidth() int {
 	defer runtime.KeepAlive(fid)
@@ -128,5 +140,19 @@ func (fid *FrameInterpolatorDescriptor) OutputWidth() int {
 func (fid *FrameInterpolatorDescriptor) OutputHeight() int {
 	defer runtime.KeepAlive(fid)
 	_r := objc.Send[int](objref.IDOf(fid), objc.RegisterName("outputHeight"))
+	return _r
+}
+
+// IsDistortionTextureEnabled reports whether the frame interpolator supports barrel distortion correction. Set this property to <doc://com.apple.documentation/documentation/swift/true> to create a frame interpolator that can apply barrel distortion correction using a distortion field texture. When you enable this property, you can assign a distortion texture to the interpolator's “MTLFXFrameInterpolatorBase/distortionTexture“ property to correct lens distortion artifacts during frame interpolation. This property's default value is <doc://com.apple.documentation/documentation/swift/false>.
+func (fid *FrameInterpolatorDescriptor) IsDistortionTextureEnabled() bool {
+	defer runtime.KeepAlive(fid)
+	_r := objc.Send[bool](objref.IDOf(fid), objc.RegisterName("isDistortionTextureEnabled"))
+	return _r
+}
+
+// RequiresPrevColorTexture reports whether the frame interpolator requires the client to provide a previous color texture. When this property is true (the default), you must assign a valid texture to the interpolator's “prevColorTexture“ property before encoding. When false, the frame interpolator internally manages the previous color data and “prevColorTexture“ may be nil. This property's default value is <doc://com.apple.documentation/documentation/swift/true>.
+func (fid *FrameInterpolatorDescriptor) RequiresPrevColorTexture() bool {
+	defer runtime.KeepAlive(fid)
+	_r := objc.Send[bool](objref.IDOf(fid), objc.RegisterName("requiresPrevColorTexture"))
 	return _r
 }

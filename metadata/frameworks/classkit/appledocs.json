@@ -150,14 +150,6 @@
           "url": "https://developer.apple.com/documentation/classkit/clscontexttype/video"
         }
       }
-    },
-    "CLSErrorCode": {
-      "doc": "Error codes that ClassKit issues.",
-      "url": "https://developer.apple.com/documentation/classkit/clserrorcode"
-    },
-    "CLSProgressReportingCapabilityKind": {
-      "doc": "The available kinds of progress reporting that a context can perform.",
-      "url": "https://developer.apple.com/documentation/classkit/clsprogressreportingcapabilitykind"
     }
   },
   "methods": {

@@ -283,7 +283,7 @@ var (
 	_fnCGDataProviderGetTypeID               func() uint
 	_fnCGDataProviderRelease                 func(unsafe.Pointer)
 	_fnCGDataProviderRetain                  func(unsafe.Pointer) unsafe.Pointer
-	_fnCGDirectDisplayCopyCurrentMetalDevice func(uint32) unsafe.Pointer
+	_fnCGDirectDisplayCopyCurrentMetalDevice func(uint32) objc.ID
 	// Deprecated: No longer supported
 	_fnCGDisplayAvailableModes func(uint32) unsafe.Pointer
 	// Deprecated: No longer supported
@@ -498,65 +498,71 @@ var (
 	_fnCGImageRetain                                   func(unsafe.Pointer) unsafe.Pointer
 	_fnCGImageShouldToneMap                            func(unsafe.Pointer) bool
 	// Deprecated: No longer supported
-	_fnCGInhibitLocalEvents                func(int) CGError
-	_fnCGLayerCreateWithContext            func(unsafe.Pointer, corefoundation.CGSize, unsafe.Pointer) unsafe.Pointer
-	_fnCGLayerGetContext                   func(unsafe.Pointer) unsafe.Pointer
-	_fnCGLayerGetSize                      func(unsafe.Pointer) corefoundation.CGSize
-	_fnCGLayerGetTypeID                    func() uint
-	_fnCGLayerRelease                      func(unsafe.Pointer)
-	_fnCGLayerRetain                       func(unsafe.Pointer) unsafe.Pointer
-	_fnCGMainDisplayID                     func() uint32
-	_fnCGOpenGLDisplayMaskToDisplayID      func(uint32) uint32
-	_fnCGPDFArrayApplyBlock                func(unsafe.Pointer, objc.Block, unsafe.Pointer)
-	_fnCGPDFArrayGetArray                  func(unsafe.Pointer, uint, unsafe.Pointer) bool
-	_fnCGPDFArrayGetBoolean                func(unsafe.Pointer, uint, *uint8) bool
-	_fnCGPDFArrayGetCount                  func(unsafe.Pointer) uint
-	_fnCGPDFArrayGetDictionary             func(unsafe.Pointer, uint, unsafe.Pointer) bool
-	_fnCGPDFArrayGetInteger                func(unsafe.Pointer, uint, *int) bool
-	_fnCGPDFArrayGetName                   func(unsafe.Pointer, uint, string) bool
-	_fnCGPDFArrayGetNull                   func(unsafe.Pointer, uint) bool
-	_fnCGPDFArrayGetNumber                 func(unsafe.Pointer, uint, *float64) bool
-	_fnCGPDFArrayGetObject                 func(unsafe.Pointer, uint, unsafe.Pointer) bool
-	_fnCGPDFArrayGetStream                 func(unsafe.Pointer, uint, unsafe.Pointer) bool
-	_fnCGPDFArrayGetString                 func(unsafe.Pointer, uint, unsafe.Pointer) bool
-	_fnCGPDFContentStreamCreateWithPage    func(unsafe.Pointer) unsafe.Pointer
-	_fnCGPDFContentStreamCreateWithStream  func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCGPDFContentStreamGetResource       func(unsafe.Pointer, string, string) unsafe.Pointer
-	_fnCGPDFContentStreamGetStreams        func(unsafe.Pointer) unsafe.Pointer
-	_fnCGPDFContentStreamRelease           func(unsafe.Pointer)
-	_fnCGPDFContentStreamRetain            func(unsafe.Pointer) unsafe.Pointer
-	_fnCGPDFContextAddDestinationAtPoint   func(unsafe.Pointer, unsafe.Pointer, corefoundation.CGPoint)
-	_fnCGPDFContextAddDocumentMetadata     func(unsafe.Pointer, unsafe.Pointer)
-	_fnCGPDFContextBeginPage               func(unsafe.Pointer, unsafe.Pointer)
-	_fnCGPDFContextBeginTag                func(unsafe.Pointer, CGPDFTagType, unsafe.Pointer)
-	_fnCGPDFContextClose                   func(unsafe.Pointer)
-	_fnCGPDFContextCreate                  func(unsafe.Pointer, *corefoundation.CGRect, unsafe.Pointer) unsafe.Pointer
-	_fnCGPDFContextCreateWithURL           func(unsafe.Pointer, *corefoundation.CGRect, unsafe.Pointer) unsafe.Pointer
-	_fnCGPDFContextEndPage                 func(unsafe.Pointer)
-	_fnCGPDFContextEndTag                  func(unsafe.Pointer)
-	_fnCGPDFContextSetDestinationForRect   func(unsafe.Pointer, unsafe.Pointer, corefoundation.CGRect)
-	_fnCGPDFContextSetIDTree               func(unsafe.Pointer, unsafe.Pointer)
-	_fnCGPDFContextSetOutline              func(unsafe.Pointer, unsafe.Pointer)
-	_fnCGPDFContextSetPageTagStructureTree func(unsafe.Pointer, unsafe.Pointer)
-	_fnCGPDFContextSetParentTree           func(unsafe.Pointer, unsafe.Pointer)
-	_fnCGPDFContextSetURLForRect           func(unsafe.Pointer, unsafe.Pointer, corefoundation.CGRect)
-	_fnCGPDFDictionaryApplyBlock           func(unsafe.Pointer, objc.Block, unsafe.Pointer)
-	_fnCGPDFDictionaryApplyFunction        func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnCGPDFDictionaryGetArray             func(unsafe.Pointer, string, unsafe.Pointer) bool
-	_fnCGPDFDictionaryGetBoolean           func(unsafe.Pointer, string, *uint8) bool
-	_fnCGPDFDictionaryGetCount             func(unsafe.Pointer) uint
-	_fnCGPDFDictionaryGetDictionary        func(unsafe.Pointer, string, unsafe.Pointer) bool
-	_fnCGPDFDictionaryGetInteger           func(unsafe.Pointer, string, *int) bool
-	_fnCGPDFDictionaryGetName              func(unsafe.Pointer, string, string) bool
-	_fnCGPDFDictionaryGetNumber            func(unsafe.Pointer, string, *float64) bool
-	_fnCGPDFDictionaryGetObject            func(unsafe.Pointer, string, unsafe.Pointer) bool
-	_fnCGPDFDictionaryGetStream            func(unsafe.Pointer, string, unsafe.Pointer) bool
-	_fnCGPDFDictionaryGetString            func(unsafe.Pointer, string, unsafe.Pointer) bool
-	_fnCGPDFDocumentAllowsCopying          func(unsafe.Pointer) bool
-	_fnCGPDFDocumentAllowsPrinting         func(unsafe.Pointer) bool
-	_fnCGPDFDocumentCreateWithProvider     func(unsafe.Pointer) unsafe.Pointer
-	_fnCGPDFDocumentCreateWithURL          func(unsafe.Pointer) unsafe.Pointer
-	_fnCGPDFDocumentGetAccessPermissions   func(unsafe.Pointer) CGPDFAccessPermissions
+	_fnCGInhibitLocalEvents                                func(int) CGError
+	_fnCGLayerCreateWithContext                            func(unsafe.Pointer, corefoundation.CGSize, unsafe.Pointer) unsafe.Pointer
+	_fnCGLayerGetContext                                   func(unsafe.Pointer) unsafe.Pointer
+	_fnCGLayerGetSize                                      func(unsafe.Pointer) corefoundation.CGSize
+	_fnCGLayerGetTypeID                                    func() uint
+	_fnCGLayerRelease                                      func(unsafe.Pointer)
+	_fnCGLayerRetain                                       func(unsafe.Pointer) unsafe.Pointer
+	_fnCGMainDisplayID                                     func() uint32
+	_fnCGOpenGLDisplayMaskToDisplayID                      func(uint32) uint32
+	_fnCGPDFArrayApplyBlock                                func(unsafe.Pointer, objc.Block, unsafe.Pointer)
+	_fnCGPDFArrayGetArray                                  func(unsafe.Pointer, uint, unsafe.Pointer) bool
+	_fnCGPDFArrayGetBoolean                                func(unsafe.Pointer, uint, *uint8) bool
+	_fnCGPDFArrayGetCount                                  func(unsafe.Pointer) uint
+	_fnCGPDFArrayGetDictionary                             func(unsafe.Pointer, uint, unsafe.Pointer) bool
+	_fnCGPDFArrayGetInteger                                func(unsafe.Pointer, uint, *int) bool
+	_fnCGPDFArrayGetName                                   func(unsafe.Pointer, uint, string) bool
+	_fnCGPDFArrayGetNull                                   func(unsafe.Pointer, uint) bool
+	_fnCGPDFArrayGetNumber                                 func(unsafe.Pointer, uint, *float64) bool
+	_fnCGPDFArrayGetObject                                 func(unsafe.Pointer, uint, unsafe.Pointer) bool
+	_fnCGPDFArrayGetStream                                 func(unsafe.Pointer, uint, unsafe.Pointer) bool
+	_fnCGPDFArrayGetString                                 func(unsafe.Pointer, uint, unsafe.Pointer) bool
+	_fnCGPDFContentStreamCreateWithPage                    func(unsafe.Pointer) unsafe.Pointer
+	_fnCGPDFContentStreamCreateWithStream                  func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCGPDFContentStreamGetResource                       func(unsafe.Pointer, string, string) unsafe.Pointer
+	_fnCGPDFContentStreamGetStreams                        func(unsafe.Pointer) unsafe.Pointer
+	_fnCGPDFContentStreamRelease                           func(unsafe.Pointer)
+	_fnCGPDFContentStreamRetain                            func(unsafe.Pointer) unsafe.Pointer
+	_fnCGPDFContextAddDestinationAtPoint                   func(unsafe.Pointer, unsafe.Pointer, corefoundation.CGPoint)
+	_fnCGPDFContextAddDocumentMetadata                     func(unsafe.Pointer, unsafe.Pointer)
+	_fnCGPDFContextAddStructureTreeRootChild               func(unsafe.Pointer, unsafe.Pointer) int
+	_fnCGPDFContextBeginMarkedContentSequence              func(unsafe.Pointer, CGPDFTagType) unsafe.Pointer
+	_fnCGPDFContextBeginNonStructuralMarkedContentSequence func(unsafe.Pointer, CGPDFTagType)
+	_fnCGPDFContextBeginObjectReference                    func(unsafe.Pointer) unsafe.Pointer
+	_fnCGPDFContextBeginPage                               func(unsafe.Pointer, unsafe.Pointer)
+	_fnCGPDFContextBeginTag                                func(unsafe.Pointer, CGPDFTagType, unsafe.Pointer)
+	_fnCGPDFContextClose                                   func(unsafe.Pointer)
+	_fnCGPDFContextCreate                                  func(unsafe.Pointer, *corefoundation.CGRect, unsafe.Pointer) unsafe.Pointer
+	_fnCGPDFContextCreateWithURL                           func(unsafe.Pointer, *corefoundation.CGRect, unsafe.Pointer) unsafe.Pointer
+	_fnCGPDFContextEndMarkedContentSequence                func(unsafe.Pointer)
+	_fnCGPDFContextEndObjectReference                      func(unsafe.Pointer)
+	_fnCGPDFContextEndPage                                 func(unsafe.Pointer)
+	_fnCGPDFContextEndTag                                  func(unsafe.Pointer)
+	_fnCGPDFContextSetDestinationForRect                   func(unsafe.Pointer, unsafe.Pointer, corefoundation.CGRect)
+	_fnCGPDFContextSetIDTree                               func(unsafe.Pointer, unsafe.Pointer)
+	_fnCGPDFContextSetOutline                              func(unsafe.Pointer, unsafe.Pointer)
+	_fnCGPDFContextSetPageTagStructureTree                 func(unsafe.Pointer, unsafe.Pointer)
+	_fnCGPDFContextSetParentTree                           func(unsafe.Pointer, unsafe.Pointer)
+	_fnCGPDFContextSetURLForRect                           func(unsafe.Pointer, unsafe.Pointer, corefoundation.CGRect)
+	_fnCGPDFDictionaryApplyBlock                           func(unsafe.Pointer, objc.Block, unsafe.Pointer)
+	_fnCGPDFDictionaryApplyFunction                        func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnCGPDFDictionaryGetArray                             func(unsafe.Pointer, string, unsafe.Pointer) bool
+	_fnCGPDFDictionaryGetBoolean                           func(unsafe.Pointer, string, *uint8) bool
+	_fnCGPDFDictionaryGetCount                             func(unsafe.Pointer) uint
+	_fnCGPDFDictionaryGetDictionary                        func(unsafe.Pointer, string, unsafe.Pointer) bool
+	_fnCGPDFDictionaryGetInteger                           func(unsafe.Pointer, string, *int) bool
+	_fnCGPDFDictionaryGetName                              func(unsafe.Pointer, string, string) bool
+	_fnCGPDFDictionaryGetNumber                            func(unsafe.Pointer, string, *float64) bool
+	_fnCGPDFDictionaryGetObject                            func(unsafe.Pointer, string, unsafe.Pointer) bool
+	_fnCGPDFDictionaryGetStream                            func(unsafe.Pointer, string, unsafe.Pointer) bool
+	_fnCGPDFDictionaryGetString                            func(unsafe.Pointer, string, unsafe.Pointer) bool
+	_fnCGPDFDocumentAllowsCopying                          func(unsafe.Pointer) bool
+	_fnCGPDFDocumentAllowsPrinting                         func(unsafe.Pointer) bool
+	_fnCGPDFDocumentCreateWithProvider                     func(unsafe.Pointer) unsafe.Pointer
+	_fnCGPDFDocumentCreateWithURL                          func(unsafe.Pointer) unsafe.Pointer
+	_fnCGPDFDocumentGetAccessPermissions                   func(unsafe.Pointer) CGPDFAccessPermissions
 	// Deprecated: No longer supported
 	_fnCGPDFDocumentGetArtBox func(unsafe.Pointer, int) corefoundation.CGRect
 	// Deprecated: No longer supported
@@ -582,6 +588,8 @@ var (
 	_fnCGPDFDocumentRelease                        func(unsafe.Pointer)
 	_fnCGPDFDocumentRetain                         func(unsafe.Pointer) unsafe.Pointer
 	_fnCGPDFDocumentUnlockWithPassword             func(unsafe.Pointer, string) bool
+	_fnCGPDFMarkedContentItemRelease               func(unsafe.Pointer)
+	_fnCGPDFMarkedContentItemRetain                func(unsafe.Pointer) unsafe.Pointer
 	_fnCGPDFObjectGetType                          func(unsafe.Pointer) CGPDFObjectType
 	_fnCGPDFObjectGetValue                         func(unsafe.Pointer, CGPDFObjectType, unsafe.Pointer) bool
 	_fnCGPDFOperatorTableCreate                    func() unsafe.Pointer
@@ -618,6 +626,16 @@ var (
 	_fnCGPDFStringCopyTextString                   func(unsafe.Pointer) unsafe.Pointer
 	_fnCGPDFStringGetBytePtr                       func(unsafe.Pointer) unsafe.Pointer
 	_fnCGPDFStringGetLength                        func(unsafe.Pointer) uint
+	_fnCGPDFStructureElementAddMarkedContentItem   func(unsafe.Pointer, unsafe.Pointer) int
+	_fnCGPDFStructureElementAddStructureElement    func(unsafe.Pointer, unsafe.Pointer) int
+	_fnCGPDFStructureElementCreate                 func(CGPDFTagType) unsafe.Pointer
+	_fnCGPDFStructureElementRelease                func(unsafe.Pointer)
+	_fnCGPDFStructureElementRetain                 func(unsafe.Pointer) unsafe.Pointer
+	_fnCGPDFStructureElementSetActualText          func(unsafe.Pointer, unsafe.Pointer)
+	_fnCGPDFStructureElementSetAlternativeText     func(unsafe.Pointer, unsafe.Pointer)
+	_fnCGPDFStructureElementSetExpansionText       func(unsafe.Pointer, unsafe.Pointer)
+	_fnCGPDFStructureElementSetLanguageIdentifier  func(unsafe.Pointer, unsafe.Pointer)
+	_fnCGPDFStructureElementSetTitle               func(unsafe.Pointer, unsafe.Pointer)
 	_fnCGPDFTagTypeGetName                         func(CGPDFTagType) string
 	_fnCGPSConverterAbort                          func(unsafe.Pointer) bool
 	_fnCGPSConverterConvert                        func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
@@ -680,9 +698,10 @@ var (
 	_fnCGPointMake                                 func(float64, float64) corefoundation.CGPoint
 	_fnCGPointMakeWithDictionaryRepresentation     func(unsafe.Pointer, *corefoundation.CGPoint) bool
 	// Deprecated: No longer supported
-	_fnCGPostKeyboardEvent                    func(uint16, uint16, int) CGError
-	_fnCGPreflightListenEventAccess           func() bool
-	_fnCGPreflightPostEventAccess             func() bool
+	_fnCGPostKeyboardEvent          func(uint16, uint16, int) CGError
+	_fnCGPreflightListenEventAccess func() bool
+	_fnCGPreflightPostEventAccess   func() bool
+	// @function CGPreflightScreenCaptureAccess @abstract Returns whether the current process already has permission to capture the contents of the screen, without prompting the user. @discussion If this returns false, call CGRequestScreenCaptureAccess to prompt the user. @result true if the current process has screen capture access; otherwise false.
 	_fnCGPreflightScreenCaptureAccess         func() bool
 	_fnCGRectApplyAffineTransform             func(corefoundation.CGRect, corefoundation.CGAffineTransform) corefoundation.CGRect
 	_fnCGRectContainsPoint                    func(corefoundation.CGRect, corefoundation.CGPoint) bool
@@ -724,8 +743,9 @@ var (
 	_fnCGRenderingBufferUnlockBytePtr            func(unsafe.Pointer)
 	_fnCGRequestListenEventAccess                func() bool
 	_fnCGRequestPostEventAccess                  func() bool
-	_fnCGRequestScreenCaptureAccess              func() bool
-	_fnCGRestorePermanentDisplayConfiguration    func()
+	// @function CGRequestScreenCaptureAccess @abstract Requests screen capture access, prompting the user for permission if it has not yet been determined. @discussion A previously denied process is not re-prompted; the user must enable access in System Settings > Privacy & Security > Screen Recording. To check the current authorization without prompting, use CGPreflightScreenCaptureAccess. @result true if the current process has screen capture access; otherwise false.
+	_fnCGRequestScreenCaptureAccess           func() bool
+	_fnCGRestorePermanentDisplayConfiguration func()
 	// Deprecated: No longer supported
 	_fnCGScreenRegisterMoveCallback func(unsafe.Pointer, unsafe.Pointer) CGError
 	// Deprecated: No longer supported
@@ -940,8 +960,8 @@ func CGColorConversionInfoCreate(src unsafe.Pointer, dst unsafe.Pointer) unsafe.
 	return _fnCGColorConversionInfoCreate(src, dst)
 }
 
-func CGColorConversionInfoCreateForToneMapping(from unsafe.Pointer, sourceHeadroom float32, to unsafe.Pointer, targetHeadroom float32, method CGToneMapping, options unsafe.Pointer, error_ unsafe.Pointer) unsafe.Pointer {
-	return _fnCGColorConversionInfoCreateForToneMapping(from, sourceHeadroom, to, targetHeadroom, method, options, error_)
+func CGColorConversionInfoCreateForToneMapping(source unsafe.Pointer, sourceHeadroom float32, target unsafe.Pointer, targetHeadroom float32, method CGToneMapping, options unsafe.Pointer, error_ unsafe.Pointer) unsafe.Pointer {
+	return _fnCGColorConversionInfoCreateForToneMapping(source, sourceHeadroom, target, targetHeadroom, method, options, error_)
 }
 
 func CGColorConversionInfoCreateFromListWithArguments(options unsafe.Pointer, arg unsafe.Pointer, arg2 CGColorConversionInfoTransformType, arg3 CGColorRenderingIntent, arg4 string) unsafe.Pointer {
@@ -1841,7 +1861,7 @@ func CGDataProviderRetain(provider unsafe.Pointer) unsafe.Pointer {
 	return _fnCGDataProviderRetain(provider)
 }
 
-func CGDirectDisplayCopyCurrentMetalDevice(display uint32) unsafe.Pointer {
+func CGDirectDisplayCopyCurrentMetalDevice(display uint32) objc.ID {
 	return _fnCGDirectDisplayCopyCurrentMetalDevice(display)
 }
 
@@ -2788,6 +2808,22 @@ func CGPDFContextAddDocumentMetadata(context_ unsafe.Pointer, metadata unsafe.Po
 	_fnCGPDFContextAddDocumentMetadata(context_, metadata)
 }
 
+func CGPDFContextAddStructureTreeRootChild(context_ unsafe.Pointer, structureElement unsafe.Pointer) int {
+	return _fnCGPDFContextAddStructureTreeRootChild(context_, structureElement)
+}
+
+func CGPDFContextBeginMarkedContentSequence(context_ unsafe.Pointer, tagType CGPDFTagType) unsafe.Pointer {
+	return _fnCGPDFContextBeginMarkedContentSequence(context_, tagType)
+}
+
+func CGPDFContextBeginNonStructuralMarkedContentSequence(context_ unsafe.Pointer, tagType CGPDFTagType) {
+	_fnCGPDFContextBeginNonStructuralMarkedContentSequence(context_, tagType)
+}
+
+func CGPDFContextBeginObjectReference(context_ unsafe.Pointer) unsafe.Pointer {
+	return _fnCGPDFContextBeginObjectReference(context_)
+}
+
 func CGPDFContextBeginPage(context_ unsafe.Pointer, pageInfo unsafe.Pointer) {
 	_fnCGPDFContextBeginPage(context_, pageInfo)
 }
@@ -2806,6 +2842,14 @@ func CGPDFContextCreate(consumer unsafe.Pointer, mediaBox *corefoundation.CGRect
 
 func CGPDFContextCreateWithURL(url unsafe.Pointer, mediaBox *corefoundation.CGRect, auxiliaryInfo unsafe.Pointer) unsafe.Pointer {
 	return _fnCGPDFContextCreateWithURL(url, mediaBox, auxiliaryInfo)
+}
+
+func CGPDFContextEndMarkedContentSequence(context_ unsafe.Pointer) {
+	_fnCGPDFContextEndMarkedContentSequence(context_)
+}
+
+func CGPDFContextEndObjectReference(context_ unsafe.Pointer) {
+	_fnCGPDFContextEndObjectReference(context_)
 }
 
 func CGPDFContextEndPage(context_ unsafe.Pointer) {
@@ -2997,6 +3041,14 @@ func CGPDFDocumentUnlockWithPassword(document unsafe.Pointer, password string) b
 	return _fnCGPDFDocumentUnlockWithPassword(document, password)
 }
 
+func CGPDFMarkedContentItemRelease(markedContentItem unsafe.Pointer) {
+	_fnCGPDFMarkedContentItemRelease(markedContentItem)
+}
+
+func CGPDFMarkedContentItemRetain(markedContentItem unsafe.Pointer) unsafe.Pointer {
+	return _fnCGPDFMarkedContentItemRetain(markedContentItem)
+}
+
 func CGPDFObjectGetType(object unsafe.Pointer) CGPDFObjectType {
 	return _fnCGPDFObjectGetType(object)
 }
@@ -3139,6 +3191,46 @@ func CGPDFStringGetBytePtr(string_ unsafe.Pointer) unsafe.Pointer {
 
 func CGPDFStringGetLength(string_ unsafe.Pointer) uint {
 	return _fnCGPDFStringGetLength(string_)
+}
+
+func CGPDFStructureElementAddMarkedContentItem(structureElement unsafe.Pointer, markedContentItem unsafe.Pointer) int {
+	return _fnCGPDFStructureElementAddMarkedContentItem(structureElement, markedContentItem)
+}
+
+func CGPDFStructureElementAddStructureElement(structureElement unsafe.Pointer, childStructureElement unsafe.Pointer) int {
+	return _fnCGPDFStructureElementAddStructureElement(structureElement, childStructureElement)
+}
+
+func CGPDFStructureElementCreate(type_ CGPDFTagType) unsafe.Pointer {
+	return _fnCGPDFStructureElementCreate(type_)
+}
+
+func CGPDFStructureElementRelease(structureElemnt unsafe.Pointer) {
+	_fnCGPDFStructureElementRelease(structureElemnt)
+}
+
+func CGPDFStructureElementRetain(structureElemnt unsafe.Pointer) unsafe.Pointer {
+	return _fnCGPDFStructureElementRetain(structureElemnt)
+}
+
+func CGPDFStructureElementSetActualText(structureElement unsafe.Pointer, actualText unsafe.Pointer) {
+	_fnCGPDFStructureElementSetActualText(structureElement, actualText)
+}
+
+func CGPDFStructureElementSetAlternativeText(structureElement unsafe.Pointer, alternativeText unsafe.Pointer) {
+	_fnCGPDFStructureElementSetAlternativeText(structureElement, alternativeText)
+}
+
+func CGPDFStructureElementSetExpansionText(structureElement unsafe.Pointer, expansionText unsafe.Pointer) {
+	_fnCGPDFStructureElementSetExpansionText(structureElement, expansionText)
+}
+
+func CGPDFStructureElementSetLanguageIdentifier(structureElement unsafe.Pointer, languageID unsafe.Pointer) {
+	_fnCGPDFStructureElementSetLanguageIdentifier(structureElement, languageID)
+}
+
+func CGPDFStructureElementSetTitle(structureElement unsafe.Pointer, title unsafe.Pointer) {
+	_fnCGPDFStructureElementSetTitle(structureElement, title)
 }
 
 func CGPDFTagTypeGetName(tagType CGPDFTagType) string {
@@ -3405,6 +3497,7 @@ func CGPreflightPostEventAccess() bool {
 	return _fnCGPreflightPostEventAccess()
 }
 
+// @function CGPreflightScreenCaptureAccess @abstract Returns whether the current process already has permission to capture the contents of the screen, without prompting the user. @discussion If this returns false, call CGRequestScreenCaptureAccess to prompt the user. @result true if the current process has screen capture access; otherwise false.
 func CGPreflightScreenCaptureAccess() bool {
 	return _fnCGPreflightScreenCaptureAccess()
 }
@@ -3584,6 +3677,7 @@ func CGRequestPostEventAccess() bool {
 	return _fnCGRequestPostEventAccess()
 }
 
+// @function CGRequestScreenCaptureAccess @abstract Requests screen capture access, prompting the user for permission if it has not yet been determined. @discussion A previously denied process is not re-prompted; the user must enable access in System Settings > Privacy & Security > Screen Recording. To check the current authorization without prompting, use CGPreflightScreenCaptureAccess. @result true if the current process has screen capture access; otherwise false.
 func CGRequestScreenCaptureAccess() bool {
 	return _fnCGRequestScreenCaptureAccess()
 }

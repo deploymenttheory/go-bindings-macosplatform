@@ -18,7 +18,7 @@ import (
 
 // PlayerItemOutput is an idiomatic wrapper over the Objective-C class AVPlayerItemOutput.
 //
-// PlayerItemOutput is an abstract base — you do not construct it directly. Construct one of [PlayerItemLegibleOutput], [PlayerItemMetadataOutput], [PlayerItemRenderedLegibleOutput], [PlayerItemVideoOutput] and pass it where a PlayerItemOutput is accepted.
+// PlayerItemOutput is an abstract base — you do not construct it directly. Construct one of [PlayerItemLegibleOutput], [PlayerItemMetadataOutput], [PlayerItemRenderedLegibleOutput], [PlayerItemSampleBufferOutput], [PlayerItemVideoOutput] and pass it where a PlayerItemOutput is accepted.
 //
 // An abstract class that defines the common interface to output media data from a player item.
 type PlayerItemOutput struct {

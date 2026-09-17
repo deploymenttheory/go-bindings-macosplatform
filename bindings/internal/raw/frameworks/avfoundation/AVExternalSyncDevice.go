@@ -21,14 +21,15 @@ type AVExternalSyncDevice struct {
 }
 
 var (
-	_clsAVExternalSyncDevice                           = _objcClass("AVExternalSyncDevice")
-	_aVExternalSyncDeviceSelStatus                     = objc.RegisterName("status")
-	_aVExternalSyncDeviceSelClock                      = objc.RegisterName("clock")
-	_aVExternalSyncDeviceSelSignalCompensationDelay    = objc.RegisterName("signalCompensationDelay")
-	_aVExternalSyncDeviceSelSetSignalCompensationDelay = objc.RegisterName("setSignalCompensationDelay:")
-	_aVExternalSyncDeviceSelUuid                       = objc.RegisterName("uuid")
-	_aVExternalSyncDeviceSelVendorID                   = objc.RegisterName("vendorID")
-	_aVExternalSyncDeviceSelProductID                  = objc.RegisterName("productID")
+	_clsAVExternalSyncDevice                                   = _objcClass("AVExternalSyncDevice")
+	_aVExternalSyncDeviceSelStatus                             = objc.RegisterName("status")
+	_aVExternalSyncDeviceSelClock                              = objc.RegisterName("clock")
+	_aVExternalSyncDeviceSelIsSignalCompensationDelaySupported = objc.RegisterName("isSignalCompensationDelaySupported")
+	_aVExternalSyncDeviceSelSignalCompensationDelay            = objc.RegisterName("signalCompensationDelay")
+	_aVExternalSyncDeviceSelSetSignalCompensationDelay         = objc.RegisterName("setSignalCompensationDelay:")
+	_aVExternalSyncDeviceSelUuid                               = objc.RegisterName("uuid")
+	_aVExternalSyncDeviceSelVendorID                           = objc.RegisterName("vendorID")
+	_aVExternalSyncDeviceSelProductID                          = objc.RegisterName("productID")
 )
 
 func AVExternalSyncDeviceFromID(id objc.ID) *AVExternalSyncDevice {
@@ -53,7 +54,13 @@ func (o *AVExternalSyncDevice) Clock() unsafe.Pointer {
 	return _ret
 }
 
-// Delay to wait before starting the frame capture. An external sync is generally used to configure multiple devices in the real world. A display and a camera may receive a signal at the same time, but that does not mean the refresh of the display and camera are aligned in a way that does not cause tearing in the recording. The signal compensation delay can be used to offset the readout of a camera on an intra-frame scale. - Important: You should always set this property to a value less than the frame duration at which the camera is operating.
+// Whether adjusting the signal compensation delay property is currently supported. This property returns `true` if the “signalCompensationDelay“ can be adjusted. “signalCompensationDelay“ can be adjusted while the “AVCaptureSession“ is not running. Once the session is running, this property's value depends on “AVCaptureDevice/isAdjustingSignalCompensationDelayWhileRunningSupported“ of the “AVCaptureDevice“ backing the “AVCaptureDeviceInput“ that is following this external sync device. Inspect that property in advance to determine whether “signalCompensationDelay“ will remain adjustable while running on a given device.
+func (o *AVExternalSyncDevice) IsSignalCompensationDelaySupported() bool {
+	_ret := objc.Send[bool](o.Ptr(), _aVExternalSyncDeviceSelIsSignalCompensationDelaySupported)
+	return _ret
+}
+
+// Delay to wait before starting the frame capture. An external sync is generally used to configure multiple devices in the real world. A display and a camera may receive a signal at the same time, but that does not mean the refresh of the display and camera are aligned in a way that does not cause tearing in the recording. The signal compensation delay can be used to offset the readout of a camera on an intra-frame scale. Setting this property throws an NSInvalidArgumentException if called when “AVExternalSyncDevice/isSignalCompensationDelaySupported“ returns NO. - Important: You should always set this property to a value less than the frame duration at which the camera is operating.
 func (o *AVExternalSyncDevice) SignalCompensationDelay() coremedia.CMTime {
 	_ret := objc.Send[coremedia.CMTime](o.Ptr(), _aVExternalSyncDeviceSelSignalCompensationDelay)
 	return _ret

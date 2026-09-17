@@ -9,8 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An object that provides locale-correct formatting of a list of items using the appropriate separator and conjunction.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nslistformatter
 type NSListFormatter struct {
 	NSFormatter
@@ -36,6 +34,7 @@ func NSListFormatterFromID(id objc.ID) *NSListFormatter {
 	return o
 }
 
+// Returns a string constructed from an array of strings using the list format specific to the current locale. It is recommended to join only disjointed strings that are ready to display in a bullet-point list. Sentences, phrases with punctuations, and appositions may not work well when joined together.
 func NSListFormatterLocalizedStringByJoiningStrings(strings_ *NSArray[*NSString]) *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSListFormatter), _nSListFormatterSelLocalizedStringByJoiningStrings, strings_.Ptr())
 	if _ret != 0 {
@@ -44,6 +43,7 @@ func NSListFormatterLocalizedStringByJoiningStrings(strings_ *NSArray[*NSString]
 	return NSStringFromID(_ret)
 }
 
+// Returns a string constructed from an array using the locale-aware format. Each item is formatted using the `itemFormatter`. If the `itemFormatter` does not apply to a particular item, the method will fall back to the item's `descriptionWithLocale:` or `localizedDescription` if implemented, or `description` if not. Returns `nil` if `items` is `nil` or if the list formatter cannot generate a string representation for all items in the array.
 func (o *NSListFormatter) StringFromItems(items *NSArray[objc.ID]) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSListFormatterSelStringFromItems, items.Ptr())
 	if _ret != 0 {
@@ -52,6 +52,7 @@ func (o *NSListFormatter) StringFromItems(items *NSArray[objc.ID]) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Specifies the locale to format the items. Defaults to `autoupdatingCurrentLocale`. Also resets to `autoupdatingCurrentLocale` on assignment of `nil`.
 func (o *NSListFormatter) Locale() *NSLocale {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSListFormatterSelLocale)
 	if _ret != 0 {
@@ -64,6 +65,7 @@ func (o *NSListFormatter) SetLocale(locale *NSLocale) {
 	o.Ptr().Send(_nSListFormatterSelSetLocale, locale.Ptr())
 }
 
+// Specifies how each object should be formatted. If not set, the object is formatted using its instance method in the following order: `descriptionWithLocale:`, `localizedDescription`, and `description`.
 func (o *NSListFormatter) ItemFormatter() *NSFormatter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSListFormatterSelItemFormatter)
 	if _ret != 0 {

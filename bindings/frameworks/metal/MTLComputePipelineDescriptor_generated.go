@@ -141,6 +141,24 @@ func (cpd *ComputePipelineDescriptor) WithRequiredThreadsPerThreadgroup(required
 	return cpd
 }
 
+// WithForwardProgressUsage sets the forward progress usage.
+func (cpd *ComputePipelineDescriptor) WithForwardProgressUsage(forwardProgressUsage ForwardProgressUsage) *ComputePipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(cpd), objc.RegisterName("setForwardProgressUsage:"), forwardProgressUsage)
+	return cpd
+}
+
+// WithContentionRelief sets the contention relief.
+func (cpd *ComputePipelineDescriptor) WithContentionRelief(contentionRelief ContentionRelief) *ComputePipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(cpd), objc.RegisterName("setContentionRelief:"), contentionRelief)
+	return cpd
+}
+
+// WithOptimizeForPersistentKernel sets the optimize for persistent kernel.
+func (cpd *ComputePipelineDescriptor) WithOptimizeForPersistentKernel(optimizeForPersistentKernel bool) *ComputePipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(cpd), objc.RegisterName("setOptimizeForPersistentKernel:"), optimizeForPersistentKernel)
+	return cpd
+}
+
 // Reset resets all compute pipeline descriptor properties to their default values.
 func (cpd *ComputePipelineDescriptor) Reset() {
 	defer runtime.KeepAlive(cpd)
@@ -263,5 +281,26 @@ func (cpd *ComputePipelineDescriptor) ShaderValidation() ShaderValidation {
 func (cpd *ComputePipelineDescriptor) RequiredThreadsPerThreadgroup() MTLSize {
 	defer runtime.KeepAlive(cpd)
 	_r := objc.Send[MTLSize](objref.IDOf(cpd), objc.RegisterName("requiredThreadsPerThreadgroup"))
+	return _r
+}
+
+// ForwardProgressUsage returns the forward progress usage.
+func (cpd *ComputePipelineDescriptor) ForwardProgressUsage() ForwardProgressUsage {
+	defer runtime.KeepAlive(cpd)
+	_r := objc.Send[ForwardProgressUsage](objref.IDOf(cpd), objc.RegisterName("forwardProgressUsage"))
+	return _r
+}
+
+// ContentionRelief returns the contention relief.
+func (cpd *ComputePipelineDescriptor) ContentionRelief() ContentionRelief {
+	defer runtime.KeepAlive(cpd)
+	_r := objc.Send[ContentionRelief](objref.IDOf(cpd), objc.RegisterName("contentionRelief"))
+	return _r
+}
+
+// OptimizeForPersistentKernel wraps the corresponding Objective-C method.
+func (cpd *ComputePipelineDescriptor) OptimizeForPersistentKernel() bool {
+	defer runtime.KeepAlive(cpd)
+	_r := objc.Send[bool](objref.IDOf(cpd), objc.RegisterName("optimizeForPersistentKernel"))
 	return _r
 }

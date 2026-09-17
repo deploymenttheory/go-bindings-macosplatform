@@ -622,6 +622,14 @@ func (pe *PredicateEditor) WithGestureRecognizers(items ...GestureRecognizerProv
 	return pe
 }
 
+// WithExclusiveGestureBehavior sets declares whether gesture recognizers should be exclusive in this view and its subviews.
+func (pe *PredicateEditor) WithExclusiveGestureBehavior(exclusiveGestureBehavior ViewExclusiveGestureBehavior) *PredicateEditor {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setExclusiveGestureBehavior:"), exclusiveGestureBehavior)
+	})
+	return pe
+}
+
 // WithAllowedTouchTypes sets the allowed touch types.
 func (pe *PredicateEditor) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *PredicateEditor {
 	purego.Main(func() {
@@ -683,6 +691,15 @@ func (pe *PredicateEditor) WithHorizontalContentSizeConstraintActive(horizontalC
 func (pe *PredicateEditor) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *PredicateEditor {
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
+	return pe
+}
+
+// WithTextSelectionManager sets the text selection manager for this view.
+func (pe *PredicateEditor) WithTextSelectionManager(textSelectionManager *TextSelectionManager) *PredicateEditor {
+	defer runtime.KeepAlive(textSelectionManager)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setTextSelectionManager:"), objref.IDOf(textSelectionManager))
 	})
 	return pe
 }

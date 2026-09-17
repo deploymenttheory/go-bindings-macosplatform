@@ -140,7 +140,7 @@ func (scd *ScriptCommandDescription) CreateCommandInstanceWithZone(zone unsafe.P
 	return ScriptCommandFromID(_r)
 }
 
-// SuiteName returns the suite name.
+// SuiteName returns the name of the suite that contains the command described by the receiver. Within an application's scriptability information, named suites contain related sets of information.
 func (scd *ScriptCommandDescription) SuiteName() string {
 	defer runtime.KeepAlive(scd)
 	_r := objc.Send[objc.ID](objref.IDOf(scd), objc.RegisterName("suiteName"))
@@ -150,7 +150,7 @@ func (scd *ScriptCommandDescription) SuiteName() string {
 	return purego.GoString(_r)
 }
 
-// CommandName returns the command name.
+// CommandName returns the name of the command. The command name as it appears in the application's scriptability information; may be different from what is displayed to the scripter.
 func (scd *ScriptCommandDescription) CommandName() string {
 	defer runtime.KeepAlive(scd)
 	_r := objc.Send[objc.ID](objref.IDOf(scd), objc.RegisterName("commandName"))
@@ -160,21 +160,21 @@ func (scd *ScriptCommandDescription) CommandName() string {
 	return purego.GoString(_r)
 }
 
-// AppleEventClassCode returns the apple event class code.
+// AppleEventClassCode returns the four-character code for the Apple event class of the receiver's command. In an Apple event that specifies a script command, two four character codes -- the event class and event ID -- together identify the command. You use this property to obtain the event class. You use “NSScriptCommandDescription/appleEventCode“ to obtain the event ID. For example, commands in AppleScript's Core suite, such as `clone`, `count`, and `create`, have an event class code of `'core'`. This code and the event ID code returned by “appleEventCode“ together specify the necessary information for identifying and dispatching an Apple event.
 func (scd *ScriptCommandDescription) AppleEventClassCode() int {
 	defer runtime.KeepAlive(scd)
 	_r := objc.Send[int](objref.IDOf(scd), objc.RegisterName("appleEventClassCode"))
 	return _r
 }
 
-// AppleEventCode returns the apple event code.
+// AppleEventCode returns the four-character code for the Apple event ID of the receiver's command. This value, together with the event class code returned by “NSScriptCommandDescription/appleEventClassCode“, specifies the necessary information for identifying and dispatching an Apple event.
 func (scd *ScriptCommandDescription) AppleEventCode() int {
 	defer runtime.KeepAlive(scd)
 	_r := objc.Send[int](objref.IDOf(scd), objc.RegisterName("appleEventCode"))
 	return _r
 }
 
-// CommandClassName returns the command class name.
+// CommandClassName returns the name of the class that will be instantiated to handle the command. The Objective-C class name (for example, `"NSGetCommand"`). This is always “NSScriptCommand“ or a subclass.
 func (scd *ScriptCommandDescription) CommandClassName() string {
 	defer runtime.KeepAlive(scd)
 	_r := objc.Send[objc.ID](objref.IDOf(scd), objc.RegisterName("commandClassName"))
@@ -184,7 +184,7 @@ func (scd *ScriptCommandDescription) CommandClassName() string {
 	return purego.GoString(_r)
 }
 
-// ReturnType returns the return type.
+// ReturnType returns the return type of the command. The receiver's command return type (for example, `"NSNumber"` or `"NSDictionary"`), or `nil` if the described command is not declared to return a result.
 func (scd *ScriptCommandDescription) ReturnType() string {
 	defer runtime.KeepAlive(scd)
 	_r := objc.Send[objc.ID](objref.IDOf(scd), objc.RegisterName("returnType"))
@@ -194,14 +194,14 @@ func (scd *ScriptCommandDescription) ReturnType() string {
 	return purego.GoString(_r)
 }
 
-// AppleEventCodeForReturnType returns the apple event code for return type.
+// AppleEventCodeForReturnType returns the Apple event code that identifies the command's return type.
 func (scd *ScriptCommandDescription) AppleEventCodeForReturnType() int {
 	defer runtime.KeepAlive(scd)
 	_r := objc.Send[int](objref.IDOf(scd), objc.RegisterName("appleEventCodeForReturnType"))
 	return _r
 }
 
-// ArgumentNames returns the argument names.
+// ArgumentNames returns the names (or keys) for all arguments of the receiver's command. If there are no arguments for the command, returns an empty array.
 //
 // ArgumentNames returns the collection as a Go slice.
 func (scd *ScriptCommandDescription) ArgumentNames() []string {

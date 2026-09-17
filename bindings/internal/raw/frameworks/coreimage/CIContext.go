@@ -78,6 +78,7 @@ var (
 	_cIContextSelStartTaskToRenderFromRectToDestinationAtPointError                                                                           = objc.RegisterName("startTaskToRender:fromRect:toDestination:atPoint:error:")
 	_cIContextSelStartTaskToRenderToDestinationError                                                                                          = objc.RegisterName("startTaskToRender:toDestination:error:")
 	_cIContextSelPrepareRenderFromRectToDestinationAtPointError                                                                               = objc.RegisterName("prepareRender:fromRect:toDestination:atPoint:error:")
+	_cIContextSelEstimateRenderFromRectToDestinationAtPointError                                                                              = objc.RegisterName("estimateRender:fromRect:toDestination:atPoint:error:")
 	_cIContextSelStartTaskToClearError                                                                                                        = objc.RegisterName("startTaskToClear:error:")
 )
 
@@ -526,6 +527,19 @@ func (o *CIContext) PrepareRenderFromRectToDestinationAtPointError(image *CIImag
 		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
+}
+
+// Returns a task with estimated resource statistics for a render, without executing the render.
+func (o *CIContext) EstimateRenderFromRectToDestinationAtPointError(image *CIImage, fromRect corefoundation.CGRect, destination *CIRenderDestination, atPoint corefoundation.CGPoint) (*CIRenderTask, error) {
+	var _nsErr uintptr
+	_ret := objc.Send[objc.ID](o.Ptr(), _cIContextSelEstimateRenderFromRectToDestinationAtPointError, image.Ptr(), fromRect, destination.Ptr(), atPoint, unsafe.Pointer(&_nsErr))
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	if _nsErr != 0 {
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+	}
+	return CIRenderTaskFromID(_ret), nil
 }
 
 // Fills the entire destination with black or clear depending on its alphaMode.

@@ -574,6 +574,31 @@ func (e HKCategoryValueLowCardioFitnessEvent) String() string {
 	}
 }
 
+// A value that indicates the menopausal state at a recorded point in time.
+type HKCategoryValueMenopausalState int64
+
+const (
+	// A value that indicates the person is in menopause at the sample date.
+	HKCategoryValueMenopausalStateMenopause HKCategoryValueMenopausalState = 1
+	// A value that indicates the person is in perimenopause at the sample date.
+	HKCategoryValueMenopausalStatePerimenopause HKCategoryValueMenopausalState = 2
+	// A value that indicates no menopausal state applies at the sample date.
+	HKCategoryValueMenopausalStateNone HKCategoryValueMenopausalState = 3
+)
+
+func (e HKCategoryValueMenopausalState) String() string {
+	switch e {
+	case HKCategoryValueMenopausalStateMenopause:
+		return "HKCategoryValueMenopausalStateMenopause"
+	case HKCategoryValueMenopausalStatePerimenopause:
+		return "HKCategoryValueMenopausalStatePerimenopause"
+	case HKCategoryValueMenopausalStateNone:
+		return "HKCategoryValueMenopausalStateNone"
+	default:
+		return fmt.Sprintf("HKCategoryValueMenopausalState(%d)", int64(e))
+	}
+}
+
 // Categories that indicate the amount of menstrual flow for a given sample.
 // Deprecated: since macOS 15.0.
 type HKCategoryValueMenstrualFlow int64
@@ -868,7 +893,6 @@ func (e HKDevicePlacementSide) String() string {
 	}
 }
 
-// Classifications returned by Apple Watch’s ECG algorithm.
 type HKElectrocardiogramClassification int64
 
 const (
@@ -905,7 +929,6 @@ func (e HKElectrocardiogramClassification) String() string {
 	}
 }
 
-// The lead used to record a voltage measurement.
 type HKElectrocardiogramLead int64
 
 const (
@@ -921,7 +944,6 @@ func (e HKElectrocardiogramLead) String() string {
 	}
 }
 
-// Values indicating whether the user entered a symptom when they recorded the ECG.
 type HKElectrocardiogramSymptomsStatus int64
 
 const (
@@ -943,12 +965,10 @@ func (e HKElectrocardiogramSymptomsStatus) String() string {
 	}
 }
 
-// Error codes returned by HealthKit.
 type HKErrorCode int64
 
 const (
-	HKUnknownError HKErrorCode = 0
-	// No error occurred.
+	HKUnknownError                            HKErrorCode = 0
 	HKNoError                                 HKErrorCode = 0
 	HKErrorHealthDataUnavailable              HKErrorCode = 1
 	HKErrorHealthDataRestricted               HKErrorCode = 2
@@ -2296,8 +2316,6 @@ const (
 	HKWorkoutActivityTypeTransition HKWorkoutActivityType = 83
 	// The constant for underwater diving.
 	HKWorkoutActivityTypeUnderwaterDiving HKWorkoutActivityType = 84
-	// The constant for a workout that does not match any of the other workout activity types.
-	HKWorkoutActivityTypeOther HKWorkoutActivityType = 3000
 )
 
 func (e HKWorkoutActivityType) String() string {
@@ -2468,8 +2486,6 @@ func (e HKWorkoutActivityType) String() string {
 		return "HKWorkoutActivityTypeTransition"
 	case HKWorkoutActivityTypeUnderwaterDiving:
 		return "HKWorkoutActivityTypeUnderwaterDiving"
-	case HKWorkoutActivityTypeOther:
-		return "HKWorkoutActivityTypeOther"
 	default:
 		return fmt.Sprintf("HKWorkoutActivityType(%d)", int64(e))
 	}
@@ -3424,27 +3440,53 @@ func (e Qos_class_t) String() string {
 	}
 }
 
+type Task_shared_region_stubs_t uint8
+
+const (
+	TASK_SHARED_REGION_STUBS_DEV  Task_shared_region_stubs_t = 1
+	TASK_SHARED_REGION_STUBS_PROD Task_shared_region_stubs_t = 2
+)
+
+func (e Task_shared_region_stubs_t) String() string {
+	switch e {
+	case TASK_SHARED_REGION_STUBS_DEV:
+		return "TASK_SHARED_REGION_STUBS_DEV"
+	case TASK_SHARED_REGION_STUBS_PROD:
+		return "TASK_SHARED_REGION_STUBS_PROD"
+	default:
+		return fmt.Sprintf("Task_shared_region_stubs_t(%d)", int64(e))
+	}
+}
+
 type Virtual_memory_guard_exception_code_t uint32
 
 const (
-	KGUARD_EXC_DEALLOC_GAP                   Virtual_memory_guard_exception_code_t = 1
-	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        Virtual_memory_guard_exception_code_t = 2
-	KGUARD_EXC_RECLAIM_INDEX_FAILURE         Virtual_memory_guard_exception_code_t = 4
-	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    Virtual_memory_guard_exception_code_t = 8
-	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    Virtual_memory_guard_exception_code_t = 9
-	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         Virtual_memory_guard_exception_code_t = 10
-	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         Virtual_memory_guard_exception_code_t = 11
-	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  Virtual_memory_guard_exception_code_t = 12
-	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    Virtual_memory_guard_exception_code_t = 13
-	KGUARD_EXC_SEC_ACCESS_FAULT              Virtual_memory_guard_exception_code_t = 98
-	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        Virtual_memory_guard_exception_code_t = 99
-	KGUARD_EXC_SEC_COPY_DENIED               Virtual_memory_guard_exception_code_t = 100
-	KGUARD_EXC_SEC_SHARING_DENIED            Virtual_memory_guard_exception_code_t = 101
-	KGUARD_EXC_MTE_SYNC_FAULT                Virtual_memory_guard_exception_code_t = 200
-	KGUARD_EXC_MTE_ASYNC_USER_FAULT          Virtual_memory_guard_exception_code_t = 201
-	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          Virtual_memory_guard_exception_code_t = 202
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 203
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 204
+	KGUARD_EXC_DEALLOC_GAP                  Virtual_memory_guard_exception_code_t = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE       Virtual_memory_guard_exception_code_t = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE        Virtual_memory_guard_exception_code_t = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE   Virtual_memory_guard_exception_code_t = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE   Virtual_memory_guard_exception_code_t = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE        Virtual_memory_guard_exception_code_t = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE        Virtual_memory_guard_exception_code_t = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION Virtual_memory_guard_exception_code_t = 12
+	// Guard exception sent to a thread when a CoW defeatured map attempts to copy memory which is not permitted by system policy.
+	KGUARD_EXC_COW_DEFEATURED_COPY_DENIED Virtual_memory_guard_exception_code_t = 13
+	// Guard exception sent to a thread when it attempts to extract a given type of memory in a way which is not permitted for CoW defeatured maps.
+	KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED Virtual_memory_guard_exception_code_t = 14
+	// Guard exception sent to a thread when it attempts to copy-map a memory entry which was created for sharing by a CoW defeatured map.
+	KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED Virtual_memory_guard_exception_code_t = 15
+	KGUARD_EXC_COW_DEFEATURED_FIRST                    Virtual_memory_guard_exception_code_t = 13
+	KGUARD_EXC_COW_DEFEATURED_LAST                     Virtual_memory_guard_exception_code_t = 15
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY              Virtual_memory_guard_exception_code_t = 16
+	KGUARD_EXC_SEC_ACCESS_FAULT                        Virtual_memory_guard_exception_code_t = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT                  Virtual_memory_guard_exception_code_t = 99
+	KGUARD_EXC_SEC_COPY_DENIED                         Virtual_memory_guard_exception_code_t = 100
+	KGUARD_EXC_SEC_SHARING_DENIED                      Virtual_memory_guard_exception_code_t = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                          Virtual_memory_guard_exception_code_t = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT                    Virtual_memory_guard_exception_code_t = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT                    Virtual_memory_guard_exception_code_t = 202
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT           Virtual_memory_guard_exception_code_t = 203
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT           Virtual_memory_guard_exception_code_t = 204
 )
 
 func (e Virtual_memory_guard_exception_code_t) String() string {
@@ -3465,6 +3507,12 @@ func (e Virtual_memory_guard_exception_code_t) String() string {
 		return "KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE"
 	case KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION:
 		return "KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION"
+	case KGUARD_EXC_COW_DEFEATURED_COPY_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_COPY_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED"
 	case KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY:
 		return "KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY"
 	case KGUARD_EXC_SEC_ACCESS_FAULT:

@@ -110,21 +110,21 @@ func (ud *URLDownload) SetDestinationAllowOverwrite(path string, allowOverwrite 
 	objc.Send[objc.ID](objref.IDOf(ud), objc.RegisterName("setDestination:allowOverwrite:"), purego.NSString(path), allowOverwrite)
 }
 
-// Request returns the request of the download.
+// Request returns the URL request that initiated the receiver's download.
 func (ud *URLDownload) Request() *URLRequest {
 	defer runtime.KeepAlive(ud)
 	_r := objc.Send[objc.ID](objref.IDOf(ud), objc.RegisterName("request"))
 	return URLRequestFromID(_r)
 }
 
-// ResumeData returns the resume data of a download that is incomplete.
+// ResumeData returns the resume data for a download that is not yet complete. This data represents the necessary state information that an `NSURLDownload` object needs to resume a download. The resume data can later be used when initializing a download with `initWithResumeData:delegate:path:`. Returns `nil` if the download is not able to be resumed. Resume data is returned only if both the protocol and the server support resuming.
 func (ud *URLDownload) ResumeData() []byte {
 	defer runtime.KeepAlive(ud)
 	_r := objc.Send[objc.ID](objref.IDOf(ud), objc.RegisterName("resumeData"))
 	return rt.NSDataToBytes(_r)
 }
 
-// DeletesFileUponFailure reports whether sets whether or not the downloaded file should be deleted upon failure. 1
+// DeletesFileUponFailure reports whether the receiver deletes partially downloaded files when a download stops prematurely. The default value is `YES`. To allow the download to be resumed in case the download ends prematurely, set this property to `NO` as soon as possible to prevent the downloaded file from being deleted.
 func (ud *URLDownload) DeletesFileUponFailure() bool {
 	defer runtime.KeepAlive(ud)
 	_r := objc.Send[bool](objref.IDOf(ud), objc.RegisterName("deletesFileUponFailure"))

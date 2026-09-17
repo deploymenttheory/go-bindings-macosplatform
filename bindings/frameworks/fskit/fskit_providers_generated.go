@@ -8,6 +8,12 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 )
 
+// CreateItemResultProvider is accepted wherever a FSCreateItemResult (or one of its subclasses) is expected.
+type CreateItemResultProvider interface {
+	objref.Object
+	isCreateItemResult()
+}
+
 // EntityIdentifierProvider is accepted wherever a FSEntityIdentifier (or one of its subclasses) is expected.
 type EntityIdentifierProvider interface {
 	objref.Object
@@ -20,8 +26,26 @@ type ItemAttributesProvider interface {
 	isItemAttributes()
 }
 
+// LookupItemResultProvider is accepted wherever a FSLookupItemResult (or one of its subclasses) is expected.
+type LookupItemResultProvider interface {
+	objref.Object
+	isLookupItemResult()
+}
+
+// PreallocateResultProvider is accepted wherever a FSPreallocateResult (or one of its subclasses) is expected.
+type PreallocateResultProvider interface {
+	objref.Object
+	isPreallocateResult()
+}
+
 // ResourceProvider is accepted wherever a FSResource (or one of its subclasses) is expected.
 type ResourceProvider interface {
 	objref.Object
 	isResource()
+}
+
+// VolumeHandlerResultProvider is accepted wherever a FSVolumeHandlerResult (or one of its subclasses) is expected.
+type VolumeHandlerResultProvider interface {
+	objref.Object
+	isVolumeHandlerResult()
 }

@@ -20,6 +20,8 @@ type NSError struct {
 
 var (
 	_clsNSError                                          = _objcClass("NSError")
+	_nSErrorSelNew                                       = objc.RegisterName("new")
+	_nSErrorSelInit                                      = objc.RegisterName("init")
 	_nSErrorSelInitWithDomainCodeUserInfo                = objc.RegisterName("initWithDomain:code:userInfo:")
 	_nSErrorSelErrorWithDomainCodeUserInfo               = objc.RegisterName("errorWithDomain:code:userInfo:")
 	_nSErrorSelSetUserInfoValueProviderForDomainProvider = objc.RegisterName("setUserInfoValueProviderForDomain:provider:")
@@ -44,6 +46,21 @@ func NSErrorFromID(id objc.ID) *NSError {
 	o.InitPtr(id)
 	purego.Track(o)
 	return o
+}
+
+// Deprecated: Use +[NSError errorWithDomain:code:userInfo:] to specify an error domain and code instead
+func NSErrorNew() *NSError {
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSError), _nSErrorSelNew)
+	return NSErrorFromID(_ret)
+}
+
+// Deprecated: Use -[NSError initWithDomain:code:userInfo:] to specify an error domain and code instead.
+func (o *NSError) Init() *NSError {
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSErrorSelInit)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSErrorFromID(_ret)
 }
 
 // Returns an NSError object initialized for a given domain and code with a given userInfo dictionary.
@@ -85,6 +102,7 @@ func NSErrorUserInfoValueProviderForDomain(errorDomain *NSString) objc.Block {
 	return _ret
 }
 
+// A string containing the error domain. Domains are described by names that are arbitrary strings used to differentiate groups of codes; for custom domains, using reverse-DNS naming will help avoid conflicts.
 func (o *NSError) Domain() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSErrorSelDomain)
 	if _ret != 0 {
@@ -93,11 +111,13 @@ func (o *NSError) Domain() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The error code. Codes are domain-specific.
 func (o *NSError) Code() int {
 	_ret := objc.Send[int](o.Ptr(), _nSErrorSelCode)
 	return _ret
 }
 
+// The user info dictionary. Contains application-specific data related to the error. Examples of keys that might be included are @c NSLocalizedDescriptionKey, @c NSFilePathErrorKey, and @c NSUnderlyingErrorKey.
 func (o *NSError) UserInfo() *NSDictionary[*NSString, objc.ID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSErrorSelUserInfo)
 	if _ret != 0 {
@@ -106,6 +126,7 @@ func (o *NSError) UserInfo() *NSDictionary[*NSString, objc.ID] {
 	return NSDictionaryFromID[*NSString, objc.ID](_ret)
 }
 
+// A string containing the localized description of the error. For instance, for `NSFileReadNoPermissionError`: "The file "File Name" couldn't be opened because you don't have permission to view it.". This message should ideally indicate what failed and why it failed. This value either comes from `NSLocalizedDescriptionKey`, or `NSLocalizedFailureErrorKey` + `NSLocalizedFailureReasonErrorKey`, or `NSLocalizedFailureErrorKey`. The steps this takes to construct the description include: 1. Look for NSLocalizedDescriptionKey in userInfo, use value as-is if present. 2. Look for NSLocalizedFailureErrorKey in userInfo. If present, use, combining with value for NSLocalizedFailureReasonErrorKey if available. 3. Fetch NSLocalizedDescriptionKey from userInfoValueProvider, use value as-is if present. 4. Fetch NSLocalizedFailureErrorKey from userInfoValueProvider. If present, use, combining with value for NSLocalizedFailureReasonErrorKey if available. 5. Look for NSLocalizedFailureReasonErrorKey in userInfo or from userInfoValueProvider; combine with generic "Operation failed" message. 6. Last resort localized but barely-presentable string manufactured from domain and code. The result is never nil. This value either comes from @c NSLocalizedDescriptionKey, or @c NSLocalizedFailureErrorKey combined with @c NSLocalizedFailureReasonErrorKey, or a last-resort string manufactured from the domain and code.
 func (o *NSError) LocalizedDescription() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSErrorSelLocalizedDescription)
 	if _ret != 0 {
@@ -114,6 +135,7 @@ func (o *NSError) LocalizedDescription() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// A string containing the localized explanation of the reason for the error. Return a complete sentence which describes why the operation failed. For instance, for `NSFileReadNoPermissionError`: "You don't have permission.". In many cases this will be just the "because" part of the error message (but as a complete sentence, which makes localization easier).  Default implementation of this picks up the value of `NSLocalizedFailureReasonErrorKey` from the userInfo dictionary. If not present, it consults the `userInfoValueProvider` for the domain, and if that returns `nil`, this also returns `nil`. The object in the user info dictionary for the key @c NSLocalizedFailureReasonErrorKey. If not present, consults the @c userInfoValueProvider for the domain. Returns @c nil if unavailable.
 func (o *NSError) LocalizedFailureReason() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSErrorSelLocalizedFailureReason)
 	if _ret != 0 {
@@ -122,6 +144,7 @@ func (o *NSError) LocalizedFailureReason() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// A string containing the localized recovery suggestion for the error. For instance, for `NSFileReadNoPermissionError`: "To view or change permissions, select the item in the Finder and choose File > Get Info.". The default implementation of this picks up the value of `NSLocalizedRecoverySuggestionErrorKey` from the `userInfo` dictionary. If not present, it consults the `userInfoValueProvider` for the domain, and if that returns `nil`, this also returns `nil`. The object in the user info dictionary for the key @c NSLocalizedRecoverySuggestionErrorKey. The returned string is suitable for displaying as the secondary message in an alert panel. Returns @c nil if unavailable.
 func (o *NSError) LocalizedRecoverySuggestion() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSErrorSelLocalizedRecoverySuggestion)
 	if _ret != 0 {
@@ -130,6 +153,7 @@ func (o *NSError) LocalizedRecoverySuggestion() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// An array containing the localized titles of buttons appropriate for displaying in an alert panel. The object in the user info dictionary for the key @c NSLocalizedRecoveryOptionsErrorKey. These should match the string provided as a part of `localizedRecoverySuggestion`.  The first string would be the title of the right-most and default button, the second one next to it, and so on. If used in an alert the corresponding default return values are `NSAlertFirstButtonReturn` + `n`. Default implementation of this picks up the value of `NSLocalizedRecoveryOptionsErrorKey` from the `userInfo` dictionary. If not present, it consults the `userInfoValueProvider` for the domain, and if that returns `nil`, this also returns `nil`. `nil` return usually implies no special suggestion, which would imply a single "OK" button. Returns @c nil if no recovery options are available, which typically implies a single "OK" button.
 func (o *NSError) LocalizedRecoveryOptions() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSErrorSelLocalizedRecoveryOptions)
 	if _ret != 0 {
@@ -138,11 +162,13 @@ func (o *NSError) LocalizedRecoveryOptions() *NSArray[*NSString] {
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// The object in the user info dictionary corresponding to the @c NSRecoveryAttempterErrorKey key. The recovery attempter must be an object that conforms to the @c NSErrorRecoveryAttempting informal protocol. It must be able to correctly interpret an index into the @c localizedRecoveryOptions array. The default implementation of this picks up the value of `NSRecoveryAttempterErrorKey` from the `userInfo` dictionary. If not present, it consults the `userInfoValueProvider` for the domain. If that returns `nil`, this also returns `nil`. Returns @c nil if not present in the user info or from the @c userInfoValueProvider.
 func (o *NSError) RecoveryAttempter() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSErrorSelRecoveryAttempter)
 	return _ret
 }
 
+// A string to display in response to an alert panel help anchor button being pressed. The object in the user info dictionary for the key @c NSHelpAnchorErrorKey. Returns @c nil if not present.
 func (o *NSError) HelpAnchor() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSErrorSelHelpAnchor)
 	if _ret != 0 {

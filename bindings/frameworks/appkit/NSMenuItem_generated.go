@@ -152,6 +152,12 @@ func (mi *MenuItem) WithImage(image *Image) *MenuItem {
 	return mi
 }
 
+// WithPreferredImageVisibility sets a menu item’s image visibility determines whether the item’s image is displayed when the menu is open. The default visibility for an item’s image is Automatic. With this value, AppKit determines whether the item’s image is visible based on system configuration. If an item’s image should be visible in all cases, regardless of macOS version or other settings, then set the image visibility to .visible.
+func (mi *MenuItem) WithPreferredImageVisibility(preferredImageVisibility MenuItemImageVisibility) *MenuItem {
+	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setPreferredImageVisibility:"), preferredImageVisibility)
+	return mi
+}
+
 // WithState sets the state of the menu item.
 func (mi *MenuItem) WithState(state int) *MenuItem {
 	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setState:"), state)
@@ -360,11 +366,18 @@ func (mi *MenuItem) AllowsAutomaticKeyEquivalentMirroring() bool {
 	return _r
 }
 
-// Image returns the image.
+// Image set an image that is displayed next to the menu item's title. Note that in macOS 27 and later, AppKit determines the visibility of menu item images, and will typically hide images. Use the `preferredImageVisibility` property with the `.visible` constant to specify that an image should always be visible.
 func (mi *MenuItem) Image() *Image {
 	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("image"))
 	return ImageFromID(_r)
+}
+
+// PreferredImageVisibility returns a menu item's image visibility determines whether the item's image is displayed when the menu is open. The default visibility for an item's image is Automatic. With this value, AppKit determines whether the item's image is visible based on system configuration. If an item's image should be visible in all cases, regardless of macOS version or other settings, then set the image visibility to `.visible`.
+func (mi *MenuItem) PreferredImageVisibility() MenuItemImageVisibility {
+	defer runtime.KeepAlive(mi)
+	_r := objc.Send[MenuItemImageVisibility](objref.IDOf(mi), objc.RegisterName("preferredImageVisibility"))
+	return _r
 }
 
 // State returns the state.

@@ -16,7 +16,7 @@ import (
 
 // AssetDownloadTask is an idiomatic wrapper over the Objective-C class AVAssetDownloadTask.
 //
-// A session used to download HTTP Live Streaming assets.
+// A URL session task that downloads a remote asset to the device for offline playback.
 type AssetDownloadTask struct {
 	objref.Handle
 }

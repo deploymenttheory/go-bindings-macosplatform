@@ -78,3 +78,10 @@ func NewItem() *Item {
 	_id := objc.Send[objc.ID](objc.ID(_class("FSItem")), objc.RegisterName("new"))
 	return itemAdopt(_id)
 }
+
+// TryReclaimWith reclaims the item by executing the given block, if conditions allow.
+func (i *Item) TryReclaimWith(reclaimBlock func()) bool {
+	defer runtime.KeepAlive(i)
+	_r := objc.Send[bool](objref.IDOf(i), objc.RegisterName("tryReclaimWithBlock:"), objc.NewBlock(func(_ objc.Block) { reclaimBlock() }))
+	return _r
+}

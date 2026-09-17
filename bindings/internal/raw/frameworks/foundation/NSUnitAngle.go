@@ -9,8 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A unit of measure for planar angle and rotation.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsunitangle
 type NSUnitAngle struct {
 	NSDimension
@@ -36,6 +34,7 @@ func NSUnitAngleFromID(id objc.ID) *NSUnitAngle {
 	return o
 }
 
+// The degrees unit of angle.
 func NSUnitAngleDegrees() *NSUnitAngle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitAngle), _nSUnitAngleSelDegrees)
 	if _ret != 0 {
@@ -44,6 +43,7 @@ func NSUnitAngleDegrees() *NSUnitAngle {
 	return NSUnitAngleFromID(_ret)
 }
 
+// The arc minutes unit of angle.
 func NSUnitAngleArcMinutes() *NSUnitAngle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitAngle), _nSUnitAngleSelArcMinutes)
 	if _ret != 0 {
@@ -52,6 +52,7 @@ func NSUnitAngleArcMinutes() *NSUnitAngle {
 	return NSUnitAngleFromID(_ret)
 }
 
+// The arc seconds unit of angle.
 func NSUnitAngleArcSeconds() *NSUnitAngle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitAngle), _nSUnitAngleSelArcSeconds)
 	if _ret != 0 {
@@ -60,6 +61,7 @@ func NSUnitAngleArcSeconds() *NSUnitAngle {
 	return NSUnitAngleFromID(_ret)
 }
 
+// The radians unit of angle.
 func NSUnitAngleRadians() *NSUnitAngle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitAngle), _nSUnitAngleSelRadians)
 	if _ret != 0 {
@@ -68,6 +70,7 @@ func NSUnitAngleRadians() *NSUnitAngle {
 	return NSUnitAngleFromID(_ret)
 }
 
+// The gradians unit of angle.
 func NSUnitAngleGradians() *NSUnitAngle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitAngle), _nSUnitAngleSelGradians)
 	if _ret != 0 {
@@ -76,6 +79,7 @@ func NSUnitAngleGradians() *NSUnitAngle {
 	return NSUnitAngleFromID(_ret)
 }
 
+// The revolutions unit of angle.
 func NSUnitAngleRevolutions() *NSUnitAngle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitAngle), _nSUnitAngleSelRevolutions)
 	if _ret != 0 {

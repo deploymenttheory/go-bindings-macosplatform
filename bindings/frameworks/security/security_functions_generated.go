@@ -639,6 +639,22 @@ func SecTransformSetAttribute(transformRef unsafe.Pointer, key corefoundation.CF
 	return nil
 }
 
+// SecTrustEvaluateWithError reports an error if the Security framework function SecTrustEvaluateWithError fails.
+var _fnSecTrustEvaluateWithError func(objc.ID, unsafe.Pointer) bool
+
+func SecTrustEvaluateWithError(trust SecTrustRef) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecTrustEvaluateWithError == nil {
+		ebipurego.RegisterLibFunc(&_fnSecTrustEvaluateWithError, _lib, "SecTrustEvaluateWithError")
+	}
+	var _cfErr unsafe.Pointer
+	_ok := _fnSecTrustEvaluateWithError(objref.IDOf(trust.Object), unsafe.Pointer(&_cfErr))
+	if !_ok {
+		return errkit.FromCFError(_cfErr)
+	}
+	return nil
+}
+
 // SecVerifyTransformCreate reports an error if the Security framework function SecVerifyTransformCreate fails.
 var _fnSecVerifyTransformCreate func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
 

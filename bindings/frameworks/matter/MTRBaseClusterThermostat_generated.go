@@ -67,7 +67,7 @@ func NewMTRBaseClusterThermostatWithDeviceEndpointQueue(device *MTRBaseDevice, e
 	return mTRBaseClusterThermostatAdopt(_id)
 }
 
-// SetpointRaiseLowerWithParamsCompletion command SetpointRaiseLower Upon receipt, the attributes for the indicated setpoint(s) SHALL have the amount specified in the Amount field added to them.
+// SetpointRaiseLowerWithParamsCompletion command SetpointRaiseLower This command will raise or lower the setpoint based on the provided values.
 func (mbct *MTRBaseClusterThermostat) SetpointRaiseLowerWithParamsCompletion(params *MTRThermostatClusterSetpointRaiseLowerParams, completion func(unsafe.Pointer)) {
 	defer runtime.KeepAlive(mbct)
 	defer runtime.KeepAlive(params)

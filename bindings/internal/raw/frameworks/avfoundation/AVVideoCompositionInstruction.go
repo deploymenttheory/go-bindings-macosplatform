@@ -12,8 +12,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An operation that a compositor performs.
-//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avvideocompositioninstruction
 type AVVideoCompositionInstruction struct {
 	foundation.NSObject

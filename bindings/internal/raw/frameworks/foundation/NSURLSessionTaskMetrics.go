@@ -9,8 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An object encapsulating the metrics for a session task.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsurlsessiontaskmetrics
 type NSURLSessionTaskMetrics struct {
 	NSObject
@@ -35,6 +33,7 @@ func NSURLSessionTaskMetricsFromID(id objc.ID) *NSURLSessionTaskMetrics {
 	return o
 }
 
+// Creates a task metrics instance. You should never need to create your own “NSURLSessionTaskMetrics“ instances. If you are interested in task metrics, implement the “NSURLSessionTaskDelegate“ method `URLSession:task:didFinishCollectingMetrics:`. The “NSURLSession“ will collect task metrics for you and deliver them to this method.
 // Deprecated: Not supported
 func (o *NSURLSessionTaskMetrics) Init() *NSURLSessionTaskMetrics {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskMetricsSelInit)
@@ -44,12 +43,14 @@ func (o *NSURLSessionTaskMetrics) Init() *NSURLSessionTaskMetrics {
 	return NSURLSessionTaskMetricsFromID(_ret)
 }
 
+// Creates a task metrics instance. You should never need to create your own “NSURLSessionTaskMetrics“ instances.
 // Deprecated: Not supported
 func NSURLSessionTaskMetricsNew() *NSURLSessionTaskMetrics {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLSessionTaskMetrics), _nSURLSessionTaskMetricsSelNew)
 	return NSURLSessionTaskMetricsFromID(_ret)
 }
 
+// An array containing the metrics collected for every request/response transaction created during the task execution.
 func (o *NSURLSessionTaskMetrics) TransactionMetrics() *NSArray[*NSURLSessionTaskTransactionMetrics] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskMetricsSelTransactionMetrics)
 	if _ret != 0 {
@@ -58,6 +59,7 @@ func (o *NSURLSessionTaskMetrics) TransactionMetrics() *NSArray[*NSURLSessionTas
 	return NSArrayFromID[*NSURLSessionTaskTransactionMetrics](_ret)
 }
 
+// Interval from the task creation time to the task completion time. Task creation time is the time when the task was instantiated. Task completion time is the time when the task is about to change its internal state to completed.
 func (o *NSURLSessionTaskMetrics) TaskInterval() *NSDateInterval {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskMetricsSelTaskInterval)
 	if _ret != 0 {
@@ -66,6 +68,7 @@ func (o *NSURLSessionTaskMetrics) TaskInterval() *NSDateInterval {
 	return NSDateIntervalFromID(_ret)
 }
 
+// The number of redirects that were recorded.
 func (o *NSURLSessionTaskMetrics) RedirectCount() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSURLSessionTaskMetricsSelRedirectCount)
 	return _ret

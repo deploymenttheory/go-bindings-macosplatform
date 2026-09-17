@@ -9,8 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A formatter that provides localized descriptions of energy values.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsenergyformatter
 type NSEnergyFormatter struct {
 	NSFormatter
@@ -40,6 +38,7 @@ func NSEnergyFormatterFromID(id objc.ID) *NSEnergyFormatter {
 	return o
 }
 
+// Returns an energy string for the provided value and unit.
 func (o *NSEnergyFormatter) StringFromValueUnit(value float64, unit NSEnergyFormatterUnit) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSEnergyFormatterSelStringFromValueUnit, value, unit)
 	if _ret != 0 {
@@ -48,6 +47,7 @@ func (o *NSEnergyFormatter) StringFromValueUnit(value float64, unit NSEnergyForm
 	return NSStringFromID(_ret)
 }
 
+// Returns an energy string for the provided value in joules. Formats a number in joules to a localized string with the locale-appropriate unit and an appropriate scale (e.g. 10.3J = 2.46cal in the US locale).
 func (o *NSEnergyFormatter) StringFromJoules(numberInJoules float64) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSEnergyFormatterSelStringFromJoules, numberInJoules)
 	if _ret != 0 {
@@ -56,6 +56,7 @@ func (o *NSEnergyFormatter) StringFromJoules(numberInJoules float64) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns a unit string for the provided value and unit. Returns a localized string of the given unit, and if the unit is singular or plural is based on the given number.
 func (o *NSEnergyFormatter) UnitStringFromValueUnit(value float64, unit NSEnergyFormatterUnit) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSEnergyFormatterSelUnitStringFromValueUnit, value, unit)
 	if _ret != 0 {
@@ -64,6 +65,7 @@ func (o *NSEnergyFormatter) UnitStringFromValueUnit(value float64, unit NSEnergy
 	return NSStringFromID(_ret)
 }
 
+// Returns a unit string based on the provided value in joules. Returns the locale-appropriate unit, the same unit used by `stringFromJoules:`.
 func (o *NSEnergyFormatter) UnitStringFromJoulesUsedUnit(numberInJoules float64, unitp *NSEnergyFormatterUnit) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSEnergyFormatterSelUnitStringFromJoulesUsedUnit, numberInJoules, unitp)
 	if _ret != 0 {
@@ -72,6 +74,7 @@ func (o *NSEnergyFormatter) UnitStringFromJoulesUsedUnit(numberInJoules float64,
 	return NSStringFromID(_ret)
 }
 
+// The number formatter used to format the numbers in an energy string. The default value is an `NSNumberFormatter` with `NSNumberFormatterDecimalStyle`.
 func (o *NSEnergyFormatter) NumberFormatter() *NSNumberFormatter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSEnergyFormatterSelNumberFormatter)
 	if _ret != 0 {
@@ -84,6 +87,7 @@ func (o *NSEnergyFormatter) SetNumberFormatter(numberFormatter *NSNumberFormatte
 	o.Ptr().Send(_nSEnergyFormatterSelSetNumberFormatter, numberFormatter.Ptr())
 }
 
+// The unit style used when creating string representations of energy values. The default value is `NSFormattingUnitStyleMedium`.
 func (o *NSEnergyFormatter) UnitStyle() NSFormattingUnitStyle {
 	_ret := objc.Send[NSFormattingUnitStyle](o.Ptr(), _nSEnergyFormatterSelUnitStyle)
 	return _ret
@@ -93,6 +97,7 @@ func (o *NSEnergyFormatter) SetUnitStyle(unitStyle NSFormattingUnitStyle) {
 	o.Ptr().Send(_nSEnergyFormatterSelSetUnitStyle, unitStyle)
 }
 
+// A Boolean value that indicates whether the resulting string is used to represent food energy. The default value is `NO`. If set to `YES`, `NSEnergyFormatterUnitKilocalorie` may be displayed as "C" instead of "kcal".
 func (o *NSEnergyFormatter) IsForFoodEnergyUse() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSEnergyFormatterSelIsForFoodEnergyUse)
 	return _ret

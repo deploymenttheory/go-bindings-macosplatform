@@ -23,7 +23,7 @@ return {{.FromIDCall}}
 if ptr == 0 {
 return ""
 }
-return unsafe.String((*byte)(unsafe.Pointer(ptr)), strlen(ptr))
+return rtpurego.GoCString(*(*uintptr)(unsafe.Pointer(ptr)))
 {{- else}}
 if ptr == 0 {
 return {{.Zero}}

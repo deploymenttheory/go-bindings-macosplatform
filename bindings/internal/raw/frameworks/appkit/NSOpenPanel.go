@@ -25,12 +25,12 @@ var (
 	_nSOpenPanelSelURLs                                                                                = objc.RegisterName("URLs")
 	_nSOpenPanelSelResolvesAliases                                                                     = objc.RegisterName("resolvesAliases")
 	_nSOpenPanelSelSetResolvesAliases                                                                  = objc.RegisterName("setResolvesAliases:")
-	_nSOpenPanelSelCanChooseDirectories                                                                = objc.RegisterName("canChooseDirectories")
-	_nSOpenPanelSelSetCanChooseDirectories                                                             = objc.RegisterName("setCanChooseDirectories:")
 	_nSOpenPanelSelAllowsMultipleSelection                                                             = objc.RegisterName("allowsMultipleSelection")
 	_nSOpenPanelSelSetAllowsMultipleSelection                                                          = objc.RegisterName("setAllowsMultipleSelection:")
 	_nSOpenPanelSelCanChooseFiles                                                                      = objc.RegisterName("canChooseFiles")
 	_nSOpenPanelSelSetCanChooseFiles                                                                   = objc.RegisterName("setCanChooseFiles:")
+	_nSOpenPanelSelCanChooseDirectories                                                                = objc.RegisterName("canChooseDirectories")
+	_nSOpenPanelSelSetCanChooseDirectories                                                             = objc.RegisterName("setCanChooseDirectories:")
 	_nSOpenPanelSelCanResolveUbiquitousConflicts                                                       = objc.RegisterName("canResolveUbiquitousConflicts")
 	_nSOpenPanelSelSetCanResolveUbiquitousConflicts                                                    = objc.RegisterName("setCanResolveUbiquitousConflicts:")
 	_nSOpenPanelSelCanDownloadUbiquitousContents                                                       = objc.RegisterName("canDownloadUbiquitousContents")
@@ -100,23 +100,6 @@ func (o *NSOpenPanel) SetResolvesAliases(resolvesAliases bool) {
 	})
 }
 
-func (o *NSOpenPanel) CanChooseDirectories() bool {
-	var _mainthread0 bool
-	purego.Main(func() {
-		_mainthread0 = func() bool {
-			_ret := objc.Send[bool](o.Ptr(), _nSOpenPanelSelCanChooseDirectories)
-			return _ret
-		}()
-	})
-	return _mainthread0
-}
-
-func (o *NSOpenPanel) SetCanChooseDirectories(canChooseDirectories bool) {
-	purego.Main(func() {
-		o.Ptr().Send(_nSOpenPanelSelSetCanChooseDirectories, canChooseDirectories)
-	})
-}
-
 func (o *NSOpenPanel) AllowsMultipleSelection() bool {
 	var _mainthread0 bool
 	purego.Main(func() {
@@ -134,6 +117,7 @@ func (o *NSOpenPanel) SetAllowsMultipleSelection(allowsMultipleSelection bool) {
 	})
 }
 
+// Whether or not the user can choose files in the open panel. @discussion In macOS 27 and later, `canChooseFiles` is updated when you set `allowedContentTypes` or set `treatsFilePackagesAsDirectories`. If `allowedContentTypes` contains a type that does not conform to `UTTypeDirectory` then `canChooseFiles` is set to `YES`. If `allowedContentTypes` contains a type that conforms to `UTTypePackage` and `treatsFilePackagesAsDirectories` is `NO`, then `canChooseFiles` is set to `YES. By default `canChooseFiles` is `YES`. In general you will only need to set `canChooseFiles` to `NO` when `allowedContentTypes` is `[]` (the empty array).  If you set `canChooseFiles` to `NO` then set `allowedContentTypes` to `[]`, `canChooseFiles` will still be `NO`. However, if you reset `allowedContentTypes` from non-empty to empty, then that will also reset `canChooseFiles` to `YES`, the default value. In short, setting `allowedContentTypes` to `[]` keeps your setting or overrides the automatic system setting. If unsure, you can always set `canChooseFiles` after setting `allowedContentTypes`.
 func (o *NSOpenPanel) CanChooseFiles() bool {
 	var _mainthread0 bool
 	purego.Main(func() {
@@ -145,9 +129,29 @@ func (o *NSOpenPanel) CanChooseFiles() bool {
 	return _mainthread0
 }
 
+// Whether or not the user can choose files in the open panel. @discussion In macOS 27 and later, `canChooseFiles` is updated when you set `allowedContentTypes` or set `treatsFilePackagesAsDirectories`. If `allowedContentTypes` contains a type that does not conform to `UTTypeDirectory` then `canChooseFiles` is set to `YES`. If `allowedContentTypes` contains a type that conforms to `UTTypePackage` and `treatsFilePackagesAsDirectories` is `NO`, then `canChooseFiles` is set to `YES. By default `canChooseFiles` is `YES`. In general you will only need to set `canChooseFiles` to `NO` when `allowedContentTypes` is `[]` (the empty array).  If you set `canChooseFiles` to `NO` then set `allowedContentTypes` to `[]`, `canChooseFiles` will still be `NO`. However, if you reset `allowedContentTypes` from non-empty to empty, then that will also reset `canChooseFiles` to `YES`, the default value. In short, setting `allowedContentTypes` to `[]` keeps your setting or overrides the automatic system setting. If unsure, you can always set `canChooseFiles` after setting `allowedContentTypes`.
 func (o *NSOpenPanel) SetCanChooseFiles(canChooseFiles bool) {
 	purego.Main(func() {
 		o.Ptr().Send(_nSOpenPanelSelSetCanChooseFiles, canChooseFiles)
+	})
+}
+
+// Whether or not the user can choose directories in open the panel. @discussion In macOS 27 and later, `canChooseDirectories` is updated when you set `allowedContentTypes` or set `treatsFilePackagesAsDirectories`. If `allowedContentTypes` contains a type that conforms to `UTTypeDirectory` then `canChooseDirectories` is set to `YES`. If `allowedContentTypes` contains a type that conforms to `UTTypePackage` and `treatsFilePackagesAsDirectories` is `YES`, then `canChooseDirectories` is set to `YES`. By default `canChooseDirectories` is `NO`. In general you will only need to set `canChooseDirectories` to `YES` when `allowedContentTypes` is `[]` (the empty array). If you set `canChooseDirectories` to `YES` then set `allowedContentTypes` to `[]`, `canChooseDirectories` will still be `YES`. However, if you reset `allowedContentTypes` from non-empty to empty, then that will also reset `canChooseDirectories` to `NO`, the default value. In short, setting `allowedContentTypes` to `[]` keeps your setting or overrides the automatic system setting. If unsure, you can always set `canChooseDirectories` after setting `allowedContentTypes`.
+func (o *NSOpenPanel) CanChooseDirectories() bool {
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSOpenPanelSelCanChooseDirectories)
+			return _ret
+		}()
+	})
+	return _mainthread0
+}
+
+// Whether or not the user can choose directories in open the panel. @discussion In macOS 27 and later, `canChooseDirectories` is updated when you set `allowedContentTypes` or set `treatsFilePackagesAsDirectories`. If `allowedContentTypes` contains a type that conforms to `UTTypeDirectory` then `canChooseDirectories` is set to `YES`. If `allowedContentTypes` contains a type that conforms to `UTTypePackage` and `treatsFilePackagesAsDirectories` is `YES`, then `canChooseDirectories` is set to `YES`. By default `canChooseDirectories` is `NO`. In general you will only need to set `canChooseDirectories` to `YES` when `allowedContentTypes` is `[]` (the empty array). If you set `canChooseDirectories` to `YES` then set `allowedContentTypes` to `[]`, `canChooseDirectories` will still be `YES`. However, if you reset `allowedContentTypes` from non-empty to empty, then that will also reset `canChooseDirectories` to `NO`, the default value. In short, setting `allowedContentTypes` to `[]` keeps your setting or overrides the automatic system setting. If unsure, you can always set `canChooseDirectories` after setting `allowedContentTypes`.
+func (o *NSOpenPanel) SetCanChooseDirectories(canChooseDirectories bool) {
+	purego.Main(func() {
+		o.Ptr().Send(_nSOpenPanelSelSetCanChooseDirectories, canChooseDirectories)
 	})
 }
 

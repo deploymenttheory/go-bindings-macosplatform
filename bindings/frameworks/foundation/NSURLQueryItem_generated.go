@@ -93,7 +93,7 @@ func (uqi *URLQueryItem) WithScriptingProperties(scriptingProperties map[string]
 	return uqi
 }
 
-// Name returns the name.
+// Name returns the name of the query item. For example, in the URL `http://www.apple.com/search/?q=iPad`, the `name` parameter is `q`. This string is not percent-encoded.
 func (uqi *URLQueryItem) Name() string {
 	defer runtime.KeepAlive(uqi)
 	_r := objc.Send[objc.ID](objref.IDOf(uqi), objc.RegisterName("name"))
@@ -103,7 +103,7 @@ func (uqi *URLQueryItem) Name() string {
 	return purego.GoString(_r)
 }
 
-// Value returns the value.
+// Value returns the value for the query item. For example, in the URL `http://www.apple.com/search/?q=iPad`, the `value` parameter is `iPad`. This string is not percent-encoded.
 func (uqi *URLQueryItem) Value() string {
 	defer runtime.KeepAlive(uqi)
 	_r := objc.Send[objc.ID](objref.IDOf(uqi), objc.RegisterName("value"))

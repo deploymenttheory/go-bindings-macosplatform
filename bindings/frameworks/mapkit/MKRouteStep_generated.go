@@ -16,8 +16,6 @@ import (
 )
 
 // RouteStep is an idiomatic wrapper over the Objective-C class MKRouteStep.
-//
-// One portion of an overall route.
 type RouteStep struct {
 	objref.Handle
 }

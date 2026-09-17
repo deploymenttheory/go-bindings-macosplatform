@@ -17,7 +17,7 @@ import (
 
 // CaptureOutput is an idiomatic wrapper over the Objective-C class AVCaptureOutput.
 //
-// CaptureOutput is an abstract base — you do not construct it directly. Construct one of [CaptureAudioDataOutput], [CaptureAudioPreviewOutput], [CaptureFileOutput], [CaptureMetadataOutput], [CapturePhotoOutput], [CaptureStillImageOutput], [CaptureVideoDataOutput] and pass it where a CaptureOutput is accepted.
+// CaptureOutput is an abstract base — you do not construct it directly. Construct one of [CaptureAudioDataOutput], [CaptureAudioPreviewOutput], [CaptureBroadcastVideoOutput], [CaptureFileOutput], [CaptureMetadataOutput], [CapturePhotoOutput], [CaptureStillImageOutput], [CaptureVideoDataOutput] and pass it where a CaptureOutput is accepted.
 //
 // An abstract superclass for objects that provide media output destinations for a capture session.
 type CaptureOutput struct {

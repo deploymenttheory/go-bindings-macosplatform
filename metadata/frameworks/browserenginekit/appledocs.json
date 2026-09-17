@@ -125,6 +125,9 @@
         }
       }
     },
+    "BEAccessibilityOrientation": {
+      "url": "https://developer.apple.com/documentation/browserenginekit/beaccessibilityorientation"
+    },
     "BEAccessibilityPressedState": {
       "doc": "An enumeration that indicates whether an element is pressed.",
       "url": "https://developer.apple.com/documentation/browserenginekit/beaccessibilitypressedstate",

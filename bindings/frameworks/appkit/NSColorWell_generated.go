@@ -591,6 +591,14 @@ func (cw *ColorWell) WithGestureRecognizers(items ...GestureRecognizerProvider) 
 	return cw
 }
 
+// WithExclusiveGestureBehavior sets declares whether gesture recognizers should be exclusive in this view and its subviews.
+func (cw *ColorWell) WithExclusiveGestureBehavior(exclusiveGestureBehavior ViewExclusiveGestureBehavior) *ColorWell {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setExclusiveGestureBehavior:"), exclusiveGestureBehavior)
+	})
+	return cw
+}
+
 // WithAllowedTouchTypes sets the allowed touch types.
 func (cw *ColorWell) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *ColorWell {
 	purego.Main(func() {
@@ -652,6 +660,15 @@ func (cw *ColorWell) WithHorizontalContentSizeConstraintActive(horizontalContent
 func (cw *ColorWell) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ColorWell {
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
+	return cw
+}
+
+// WithTextSelectionManager sets the text selection manager for this view.
+func (cw *ColorWell) WithTextSelectionManager(textSelectionManager *TextSelectionManager) *ColorWell {
+	defer runtime.KeepAlive(textSelectionManager)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setTextSelectionManager:"), objref.IDOf(textSelectionManager))
 	})
 	return cw
 }

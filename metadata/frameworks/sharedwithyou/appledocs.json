@@ -59,18 +59,6 @@
     }
   },
   "enums": {
-    "SWAttributionViewBackgroundStyle": {
-      "doc": "The background styling of the attribution view’s contents.",
-      "url": "https://developer.apple.com/documentation/sharedwithyou/swattributionviewbackgroundstyle"
-    },
-    "SWAttributionViewDisplayContext": {
-      "doc": "The context for the content that influences the ranking of this view’s highlight.",
-      "url": "https://developer.apple.com/documentation/sharedwithyou/swattributionviewdisplaycontext"
-    },
-    "SWAttributionViewHorizontalAlignment": {
-      "doc": "The horizontal alignment of attribution view’s contents.",
-      "url": "https://developer.apple.com/documentation/sharedwithyou/swattributionviewhorizontalalignment"
-    },
     "SWHighlightCenterErrorCode": {
       "doc": "The error codes for the highlight center.",
       "url": "https://developer.apple.com/documentation/sharedwithyou/swhighlightcentererrorcode",
@@ -326,11 +314,15 @@
       },
       "menuFormRepresentation": {
         "doc": "Returns a menu item suitable to display the collaboration detail view from the toolbar overflow menu.",
-        "url": "https://developer.apple.com/documentation/sharedwithyou/swcollaborationview/menuformrepresentation-55skx"
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swcollaborationview/menuformrepresentation-3sffe"
       },
       "setDetailViewListContent(_:)": {
         "doc": "Sets the detail view for the list content from view builder closures.",
         "url": "https://developer.apple.com/documentation/sharedwithyou/swcollaborationview/setdetailviewlistcontent(_:)-8ml1c"
+      },
+      "showsParticipantCount": {
+        "doc": "Whether the collaboration button should show the participant count. Defaults to YES.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swcollaborationview/showsparticipantcount"
       }
     },
     "SWHighlight": {

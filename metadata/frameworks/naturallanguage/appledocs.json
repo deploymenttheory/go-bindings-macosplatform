@@ -41,10 +41,6 @@
     }
   },
   "enums": {
-    "NLContextualEmbeddingAssetsResult": {
-      "doc": "The availability of the contextual embedding model assets.",
-      "url": "https://developer.apple.com/documentation/naturallanguage/nlcontextualembeddingassetsresult"
-    },
     "NLDistanceType": {
       "doc": "The means of calculating a distance between two locations in a text embedding.",
       "url": "https://developer.apple.com/documentation/naturallanguage/nldistancetype",
@@ -54,18 +50,6 @@
           "url": "https://developer.apple.com/documentation/naturallanguage/nldistancetype/cosine"
         }
       }
-    },
-    "NLModelType": {
-      "doc": "The different types of a natural language model.",
-      "url": "https://developer.apple.com/documentation/naturallanguage/nlmodeltype"
-    },
-    "NLTaggerAssetsResult": {
-      "doc": "The response to an asset request.",
-      "url": "https://developer.apple.com/documentation/naturallanguage/nltaggerassetsresult"
-    },
-    "NLTaggerOptions": {
-      "doc": "Constants for linguistic tagger enumeration specifying which tokens to omit and whether to join names.",
-      "url": "https://developer.apple.com/documentation/naturallanguage/nltaggeroptions"
     },
     "NLTokenUnit": {
       "doc": "Constants representing linguistic units.",
@@ -88,10 +72,6 @@
           "url": "https://developer.apple.com/documentation/naturallanguage/nltokenunit/word"
         }
       }
-    },
-    "NLTokenizerAttributes": {
-      "doc": "Hints about the contents of the string for the tokenizer.",
-      "url": "https://developer.apple.com/documentation/naturallanguage/nltokenizerattributes"
     }
   },
   "methods": {
@@ -469,16 +449,16 @@
         "url": "https://developer.apple.com/documentation/naturallanguage/nlembedding/distance(between:and:distancetype:)"
       },
       "enumerateNeighbors(for:maximumCount:distanceType:using:)": {
-        "doc": "Passes the nearest strings of a string in the vocabulary to a closure.",
-        "url": "https://developer.apple.com/documentation/naturallanguage/nlembedding/enumerateneighbors(for:maximumcount:distancetype:using:)-72jda"
+        "doc": "Passes the nearest strings of a location in the vocabulary space to a closure.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlembedding/enumerateneighbors(for:maximumcount:distancetype:using:)-6dy4x"
       },
       "language": {
         "doc": "The language of the text in the word embedding.",
         "url": "https://developer.apple.com/documentation/naturallanguage/nlembedding/language"
       },
       "neighbors(for:maximumCount:distanceType:)": {
-        "doc": "Retrieves a limited number of strings near a string in the vocabulary.",
-        "url": "https://developer.apple.com/documentation/naturallanguage/nlembedding/neighbors(for:maximumcount:distancetype:)-8f1jc"
+        "doc": "Retrieves a limited number of strings near a location in the vocabulary space.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlembedding/neighbors(for:maximumcount:distancetype:)-8lp4z"
       },
       "revision": {
         "doc": "The revision of the word embedding.",
@@ -518,7 +498,7 @@
       },
       "languageHints": {
         "doc": "A dictionary that maps languages to their probabilities in the language identification process.",
-        "url": "https://developer.apple.com/documentation/naturallanguage/nllanguagerecognizer/languagehints-7dwgv"
+        "url": "https://developer.apple.com/documentation/naturallanguage/nllanguagerecognizer/languagehints-3gy00"
       },
       "languageHypotheses(withMaximum:)": {
         "doc": "Generates the probabilities of possible languages for the processed text.",

@@ -12,19 +12,40 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/foundation"
 )
 
-func MERAWProcessorReadyForMoreMediaDataDidChangeNotification() uintptr {
+func MERAWProcessorReadyForMoreMediaDataDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaextensionLib, "MERAWProcessorReadyForMoreMediaDataDidChangeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MERAWProcessorValuesDidChangeNotification() uintptr {
+func MERAWProcessorValuesDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaextensionLib, "MERAWProcessorValuesDidChangeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MEVideoDecoderReadyForMoreMediaDataDidChangeNotification() uintptr {
+func MEVideoDecoderReadyForMoreMediaDataDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaextensionLib, "MEVideoDecoderReadyForMoreMediaDataDidChangeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MediaExtensionErrorDomain() *foundation.NSString {

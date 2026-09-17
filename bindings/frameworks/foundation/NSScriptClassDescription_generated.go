@@ -154,7 +154,7 @@ func (scd *ScriptClassDescription) HasWritablePropertyForKey(key string) bool {
 	return _r
 }
 
-// SuiteName returns the suite name.
+// SuiteName returns the name of the receiver's suite. Within an application's scriptability information, named suites contain related sets of information.
 func (scd *ScriptClassDescription) SuiteName() string {
 	defer runtime.KeepAlive(scd)
 	_r := objc.Send[objc.ID](objref.IDOf(scd), objc.RegisterName("suiteName"))
@@ -164,7 +164,7 @@ func (scd *ScriptClassDescription) SuiteName() string {
 	return purego.GoString(_r)
 }
 
-// ImplementationClassName returns the implementation class name.
+// ImplementationClassName returns the name of the Objective-C class instantiated to implement the scripting class. The name returned by the “NSScriptClassDescription/className“ property for an instance of `NSScriptClassDescription` resulting from an sdef class declaration is the human-readable name for the class. To obtain the name of the Objective-C class instantiated to implement the class, use this property.
 func (scd *ScriptClassDescription) ImplementationClassName() string {
 	defer runtime.KeepAlive(scd)
 	_r := objc.Send[objc.ID](objref.IDOf(scd), objc.RegisterName("implementationClassName"))
@@ -174,21 +174,21 @@ func (scd *ScriptClassDescription) ImplementationClassName() string {
 	return purego.GoString(_r)
 }
 
-// SuperclassDescription returns the superclass description.
+// SuperclassDescription returns the class description instance for the superclass of the receiver's class. The instance of `NSScriptClassDescription` that describes the superclass can be in the same suite as the receiver or in a different suite. Returns `nil` if the class has no superclass.
 func (scd *ScriptClassDescription) SuperclassDescription() *ScriptClassDescription {
 	defer runtime.KeepAlive(scd)
 	_r := objc.Send[objc.ID](objref.IDOf(scd), objc.RegisterName("superclassDescription"))
 	return ScriptClassDescriptionFromID(_r)
 }
 
-// AppleEventCode returns the apple event code.
+// AppleEventCode returns the Apple event code associated with the receiver's class. This is the primary four-character code used to identify the described class in Apple events.
 func (scd *ScriptClassDescription) AppleEventCode() int {
 	defer runtime.KeepAlive(scd)
 	_r := objc.Send[int](objref.IDOf(scd), objc.RegisterName("appleEventCode"))
 	return _r
 }
 
-// DefaultSubcontainerAttributeKey returns the default subcontainer attribute key.
+// DefaultSubcontainerAttributeKey returns the value of the `DefaultSubcontainerAttribute` entry of the class declaration dictionary provided when the receiver was instantiated. Returns `nil` if there was no such entry.
 func (scd *ScriptClassDescription) DefaultSubcontainerAttributeKey() string {
 	defer runtime.KeepAlive(scd)
 	_r := objc.Send[objc.ID](objref.IDOf(scd), objc.RegisterName("defaultSubcontainerAttributeKey"))

@@ -112,7 +112,7 @@ func (ka *KeyedArchiver) FinishEncoding() {
 	objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("finishEncoding"))
 }
 
-// OutputFormat returns the output format.
+// OutputFormat returns the format in which the receiver encodes its data. The available formats are XML and binary.
 func (ka *KeyedArchiver) OutputFormat() PropertyListFormat {
 	defer runtime.KeepAlive(ka)
 	_r := objc.Send[PropertyListFormat](objref.IDOf(ka), objc.RegisterName("outputFormat"))

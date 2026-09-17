@@ -107,14 +107,14 @@ func OpenMapsWithItemsLaunchOptionsCompletionHandler(mapItems []*MapItem, launch
 	objc.Send[objc.ID](objc.ID(_class("MKMapItem")), objc.RegisterName("openMapsWithItems:launchOptions:completionHandler:"), purego.SliceToNSArray(mapItems, func(_v *MapItem) objc.ID { return objref.IDOf(_v) }), rt.MapToDict(launchOptions, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objc.NewBlock(func(_ objc.Block, _b0 bool) { completion(_b0) }))
 }
 
-// AutomaticWithPresentationViewController an appropriate presentation style will be chosen automatically.
+// AutomaticWithPresentationViewController wraps the corresponding Objective-C method.
 func AutomaticWithPresentationViewController(presentationViewController obj.Object) *MapItemDetailSelectionAccessoryPresentationStyle {
 	defer runtime.KeepAlive(presentationViewController)
 	_r := objc.Send[objc.ID](objc.ID(_class("MKMapItemDetailSelectionAccessoryPresentationStyle")), objc.RegisterName("automaticWithPresentationViewController:"), objref.IDOf(presentationViewController))
 	return MapItemDetailSelectionAccessoryPresentationStyleFromID(_r)
 }
 
-// CalloutWithCalloutStyle show map item detail as an annotation callout on the map
+// CalloutWithCalloutStyle wraps the corresponding Objective-C method.
 func CalloutWithCalloutStyle(style MapItemDetailSelectionAccessoryCalloutStyle) *MapItemDetailSelectionAccessoryPresentationStyle {
 	_r := objc.Send[objc.ID](objc.ID(_class("MKMapItemDetailSelectionAccessoryPresentationStyle")), objc.RegisterName("calloutWithCalloutStyle:"), style)
 	return MapItemDetailSelectionAccessoryPresentationStyleFromID(_r)

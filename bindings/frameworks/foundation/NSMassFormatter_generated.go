@@ -18,8 +18,6 @@ import (
 // MassFormatter is an idiomatic wrapper over the Objective-C class NSMassFormatter.
 //
 // It embeds [Formatter], promoting that type's methods.
-//
-// A formatter that provides localized descriptions of mass and weight values.
 type MassFormatter struct {
 	Formatter
 }
@@ -56,20 +54,20 @@ func NewMassFormatter() *MassFormatter {
 	return massFormatterAdopt(_id)
 }
 
-// WithNumberFormatter sets the number formatter.
+// WithNumberFormatter sets the number formatter used to format the numbers in a mass string. The default value is an `NSNumberFormatter` with `NSNumberFormatterDecimalStyle`.
 func (mf *MassFormatter) WithNumberFormatter(numberFormatter *NumberFormatter) *MassFormatter {
 	defer runtime.KeepAlive(numberFormatter)
 	objc.Send[objc.ID](objref.IDOf(mf), objc.RegisterName("setNumberFormatter:"), objref.IDOf(numberFormatter))
 	return mf
 }
 
-// WithUnitStyle sets the unit style.
+// WithUnitStyle sets the unit style used when creating string representations of mass values. The default value is `NSFormattingUnitStyleMedium`.
 func (mf *MassFormatter) WithUnitStyle(unitStyle FormattingUnitStyle) *MassFormatter {
 	objc.Send[objc.ID](objref.IDOf(mf), objc.RegisterName("setUnitStyle:"), unitStyle)
 	return mf
 }
 
-// WithForPersonMassUse sets the for person mass use.
+// WithForPersonMassUse sets a Boolean value that indicates whether the resulting string represents a person's mass. The default value is `NO`. If set to `YES`, the number argument for `stringFromKilograms:` and `unitStringFromKilograms:usedUnit:` is considered as a person's mass.
 func (mf *MassFormatter) WithForPersonMassUse(forPersonMassUse bool) *MassFormatter {
 	objc.Send[objc.ID](objref.IDOf(mf), objc.RegisterName("setForPersonMassUse:"), forPersonMassUse)
 	return mf
@@ -87,7 +85,7 @@ func (mf *MassFormatter) WithScriptingProperties(scriptingProperties map[string]
 	return mf
 }
 
-// StringFromValueUnit wraps the corresponding Objective-C method.
+// StringFromValueUnit returns a mass string for the provided value and unit.
 func (mf *MassFormatter) StringFromValueUnit(value float64, unit MassFormatterUnit) string {
 	defer runtime.KeepAlive(mf)
 	_r := objc.Send[objc.ID](objref.IDOf(mf), objc.RegisterName("stringFromValue:unit:"), value, unit)
@@ -97,7 +95,7 @@ func (mf *MassFormatter) StringFromValueUnit(value float64, unit MassFormatterUn
 	return purego.GoString(_r)
 }
 
-// StringFromKilograms wraps the corresponding Objective-C method.
+// StringFromKilograms returns a mass string for the provided value in kilograms. Formats a number in kilograms to a localized string with the locale-appropriate unit and an appropriate scale (e.g. 1.2kg = 2.64lb in the US locale).
 func (mf *MassFormatter) StringFromKilograms(numberInKilograms float64) string {
 	defer runtime.KeepAlive(mf)
 	_r := objc.Send[objc.ID](objref.IDOf(mf), objc.RegisterName("stringFromKilograms:"), numberInKilograms)
@@ -107,7 +105,7 @@ func (mf *MassFormatter) StringFromKilograms(numberInKilograms float64) string {
 	return purego.GoString(_r)
 }
 
-// UnitStringFromValueUnit wraps the corresponding Objective-C method.
+// UnitStringFromValueUnit returns a unit string for the provided value and unit. Returns a localized string of the given unit, and if the unit is singular or plural is based on the given number.
 func (mf *MassFormatter) UnitStringFromValueUnit(value float64, unit MassFormatterUnit) string {
 	defer runtime.KeepAlive(mf)
 	_r := objc.Send[objc.ID](objref.IDOf(mf), objc.RegisterName("unitStringFromValue:unit:"), value, unit)
@@ -117,7 +115,7 @@ func (mf *MassFormatter) UnitStringFromValueUnit(value float64, unit MassFormatt
 	return purego.GoString(_r)
 }
 
-// UnitStringFromKilogramsUsedUnit wraps the corresponding Objective-C method.
+// UnitStringFromKilogramsUsedUnit returns a unit string based on the provided value in kilograms. Returns the locale-appropriate unit, the same unit used by `stringFromKilograms:`.
 func (mf *MassFormatter) UnitStringFromKilogramsUsedUnit(numberInKilograms float64) (result string, unitp MassFormatterUnit) {
 	defer runtime.KeepAlive(mf)
 	var _out0 MassFormatterUnit
@@ -129,21 +127,21 @@ func (mf *MassFormatter) UnitStringFromKilogramsUsedUnit(numberInKilograms float
 	return _v, _out0
 }
 
-// NumberFormatter returns the number formatter.
+// NumberFormatter returns the number formatter used to format the numbers in a mass string. The default value is an `NSNumberFormatter` with `NSNumberFormatterDecimalStyle`.
 func (mf *MassFormatter) NumberFormatter() *NumberFormatter {
 	defer runtime.KeepAlive(mf)
 	_r := objc.Send[objc.ID](objref.IDOf(mf), objc.RegisterName("numberFormatter"))
 	return NumberFormatterFromID(_r)
 }
 
-// UnitStyle returns the unit style.
+// UnitStyle returns the unit style used when creating string representations of mass values. The default value is `NSFormattingUnitStyleMedium`.
 func (mf *MassFormatter) UnitStyle() FormattingUnitStyle {
 	defer runtime.KeepAlive(mf)
 	_r := objc.Send[FormattingUnitStyle](objref.IDOf(mf), objc.RegisterName("unitStyle"))
 	return _r
 }
 
-// IsForPersonMassUse reports whether the object is for person mass use.
+// IsForPersonMassUse reports whether the resulting string represents a person's mass. The default value is `NO`. If set to `YES`, the number argument for `stringFromKilograms:` and `unitStringFromKilograms:usedUnit:` is considered as a person's mass.
 func (mf *MassFormatter) IsForPersonMassUse() bool {
 	defer runtime.KeepAlive(mf)
 	_r := objc.Send[bool](objref.IDOf(mf), objc.RegisterName("isForPersonMassUse"))

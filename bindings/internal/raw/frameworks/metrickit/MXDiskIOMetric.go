@@ -13,6 +13,7 @@ import (
 // An object representing metrics about disk usage.
 //
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxdiskiometric
+// Deprecated: Use MetricResult instead.
 type MXDiskIOMetric struct {
 	MXMetric
 }

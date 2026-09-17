@@ -204,7 +204,7 @@ func (xc *XPCConnection) SetCodeSigningRequirement(requirement string) {
 	objc.Send[objc.ID](objref.IDOf(xc), objc.RegisterName("setCodeSigningRequirement:"), purego.NSString(requirement))
 }
 
-// ServiceName returns the service name.
+// ServiceName returns the name of the XPC service that this connection was configured to connect to.
 func (xc *XPCConnection) ServiceName() string {
 	defer runtime.KeepAlive(xc)
 	_r := objc.Send[objc.ID](objref.IDOf(xc), objc.RegisterName("serviceName"))
@@ -214,63 +214,63 @@ func (xc *XPCConnection) ServiceName() string {
 	return purego.GoString(_r)
 }
 
-// Endpoint returns the endpoint.
+// Endpoint returns the endpoint that was provided when the connection was initialized.
 func (xc *XPCConnection) Endpoint() *XPCListenerEndpoint {
 	defer runtime.KeepAlive(xc)
 	_r := objc.Send[objc.ID](objref.IDOf(xc), objc.RegisterName("endpoint"))
 	return XPCListenerEndpointFromID(_r)
 }
 
-// ExportedInterface returns the exported interface.
+// ExportedInterface returns the interface that describes messages that are allowed to be received by the exported object on this connection. This value is required if an exported object is set.
 func (xc *XPCConnection) ExportedInterface() *XPCInterface {
 	defer runtime.KeepAlive(xc)
 	_r := objc.Send[objc.ID](objref.IDOf(xc), objc.RegisterName("exportedInterface"))
 	return XPCInterfaceFromID(_r)
 }
 
-// ExportedObject returns the exported object.
+// ExportedObject returns an object that is vended to the other side of this connection. Messages sent to the `remoteObjectProxy` from the other side of the connection will be dispatched to this object. Messages delivered to exported objects are serialized and sent on a non-main queue. The receiver is responsible for handling the messages on a different queue or thread if it is required.
 func (xc *XPCConnection) ExportedObject() obj.Object {
 	defer runtime.KeepAlive(xc)
 	_r := objc.Send[objc.ID](objref.IDOf(xc), objc.RegisterName("exportedObject"))
 	return obj.Wrap(_r)
 }
 
-// RemoteObjectInterface returns the remote object interface.
+// RemoteObjectInterface returns the interface that describes messages that are allowed to be received by the remote object on the other side of this connection. This value is required if messages are sent over this connection.
 func (xc *XPCConnection) RemoteObjectInterface() *XPCInterface {
 	defer runtime.KeepAlive(xc)
 	_r := objc.Send[objc.ID](objref.IDOf(xc), objc.RegisterName("remoteObjectInterface"))
 	return XPCInterfaceFromID(_r)
 }
 
-// RemoteObjectProxy returns the remote object proxy.
+// RemoteObjectProxy returns a proxy for the remote object (that is, the object exported from the other side of this connection).
 func (xc *XPCConnection) RemoteObjectProxy() obj.Object {
 	defer runtime.KeepAlive(xc)
 	_r := objc.Send[objc.ID](objref.IDOf(xc), objc.RegisterName("remoteObjectProxy"))
 	return obj.Wrap(_r)
 }
 
-// AuditSessionIdentifier returns the audit session identifier.
+// AuditSessionIdentifier returns the audit session identifier of the connecting process.
 func (xc *XPCConnection) AuditSessionIdentifier() int {
 	defer runtime.KeepAlive(xc)
 	_r := objc.Send[int](objref.IDOf(xc), objc.RegisterName("auditSessionIdentifier"))
 	return _r
 }
 
-// ProcessIdentifier returns the process identifier.
+// ProcessIdentifier returns the process identifier (PID) of the connecting process.
 func (xc *XPCConnection) ProcessIdentifier() int {
 	defer runtime.KeepAlive(xc)
 	_r := objc.Send[int](objref.IDOf(xc), objc.RegisterName("processIdentifier"))
 	return _r
 }
 
-// EffectiveUserIdentifier returns the effective user identifier.
+// EffectiveUserIdentifier returns the effective user identifier (EUID) of the connecting process.
 func (xc *XPCConnection) EffectiveUserIdentifier() int {
 	defer runtime.KeepAlive(xc)
 	_r := objc.Send[int](objref.IDOf(xc), objc.RegisterName("effectiveUserIdentifier"))
 	return _r
 }
 
-// EffectiveGroupIdentifier returns the effective group identifier.
+// EffectiveGroupIdentifier returns the effective group identifier (EGID) of the connecting process.
 func (xc *XPCConnection) EffectiveGroupIdentifier() int {
 	defer runtime.KeepAlive(xc)
 	_r := objc.Send[int](objref.IDOf(xc), objc.RegisterName("effectiveGroupIdentifier"))

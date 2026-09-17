@@ -17,7 +17,7 @@ import (
 
 // Thread is an idiomatic wrapper over the Objective-C class NSThread.
 //
-// A thread of execution.
+// A thread of execution. Use this class when you want to have an Objective-C method run in its own thread of execution. Threads are especially useful when you need to perform a lengthy task, but don't want it to block the execution of the rest of the application. In particular, you can use threads to avoid blocking the main thread of the application, which handles user interface and event-related actions. Threads can also be used to divide a large job into several smaller jobs, which can lead to performance increases on multi-core computers. The “Thread“ class supports semantics similar to those of “Operation“ for monitoring the runtime condition of a thread. You can use these semantics to cancel the execution of a thread or determine if the thread is still executing or has finished its task. Canceling a thread requires support from your thread code; see the description for “cancel()“ for more information. ### Subclassing Notes You can subclass “Thread“ and override the “main()“ method to implement your thread's main entry point. If you override “main()“, you do not need to invoke the inherited behavior by calling `super`.
 type Thread struct {
 	objref.Handle
 }
@@ -87,7 +87,7 @@ func NewThreadWith(block func()) *Thread {
 	return threadAdopt(_id)
 }
 
-// WithThreadPriority sets the thread priority.
+// WithThreadPriority sets the receiver's priority. The thread's priority, which is specified by a floating point number from 0.0 to 1.0, where 1.0 is highest priority. The priorities in this range are mapped to the operating system's priority values. A "typical" thread priority might be 0.5, but because the priority is determined by the kernel, there is no guarantee what this value actually will be.
 func (t *Thread) WithThreadPriority(threadPriority float64) *Thread {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setThreadPriority:"), threadPriority)
 	return t
@@ -99,14 +99,14 @@ func (t *Thread) WithQualityOfService(qualityOfService QualityOfService) *Thread
 	return t
 }
 
-// WithName sets the name.
+// WithName sets the name of the receiver.
 func (t *Thread) WithName(name StringProvider) *Thread {
 	defer runtime.KeepAlive(name)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setName:"), objref.IDOf(name))
 	return t
 }
 
-// WithStackSize sets the stack size.
+// WithStackSize sets the stack size of the receiver, in bytes. This value must be in bytes and a multiple of 4KB. To change the stack size, you must set this property before starting your thread. Setting the stack size after the thread has started changes the attribute size (which is reflected by the `stackSize` method), but it does not affect the actual number of pages set aside for the thread.
 func (t *Thread) WithStackSize(stackSize int) *Thread {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setStackSize:"), stackSize)
 	return t
@@ -124,32 +124,32 @@ func (t *Thread) WithScriptingProperties(scriptingProperties map[string]obj.Obje
 	return t
 }
 
-// Cancel wraps the corresponding Objective-C method.
+// Cancel changes the cancelled state of the receiver to indicate that it should exit. The semantics of this method are the same as those used for `NSOperation`. This method sets state information in the receiver that is then reflected by the `isCancelled` property. Threads that support cancellation should periodically call the `isCancelled` method to determine if the thread has in fact been cancelled, and exit if it has been.
 func (t *Thread) Cancel() {
 	defer runtime.KeepAlive(t)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("cancel"))
 }
 
-// Start wraps the corresponding Objective-C method.
+// Start starts the receiver. This method asynchronously spawns the new thread and invokes the receiver's `main` method on the new thread. The `isExecuting` property returns `YES` once the thread starts executing, which may occur after the `start` method returns. If you initialized the receiver with a target and selector, the default `main` method invokes that selector automatically. If this thread is the first thread detached in the application, this method posts the `NSWillBecomeMultiThreaded` notification with object `nil` to the default notification center.
 func (t *Thread) Start() {
 	defer runtime.KeepAlive(t)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("start"))
 }
 
-// Main wraps the corresponding Objective-C method.
+// Main the main entry point routine for the thread. The default implementation of this method takes the target and selector used to initialize the receiver and invokes the selector on the specified target. If you subclass `NSThread`, you can override this method and use it to implement the main body of your thread instead. If you do so, you do not need to invoke `super`. You should never invoke this method directly. You should always start your thread by invoking the `start` method.
 func (t *Thread) Main() {
 	defer runtime.KeepAlive(t)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("main"))
 }
 
-// ThreadDictionary returns the thread dictionary.
+// ThreadDictionary returns the thread object's dictionary. You can use the returned dictionary to store thread-specific data. The thread dictionary is not used during any manipulations of the `NSThread` object -- it is simply a place where you can store any interesting data. For example, Foundation uses it to store the thread's default `NSConnection` and `NSAssertionHandler` instances. You may define your own keys for the dictionary.
 func (t *Thread) ThreadDictionary() obj.Object {
 	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("threadDictionary"))
 	return obj.Wrap(_r)
 }
 
-// ThreadPriority returns the thread priority.
+// ThreadPriority returns the receiver's priority. The thread's priority, which is specified by a floating point number from 0.0 to 1.0, where 1.0 is highest priority. The priorities in this range are mapped to the operating system's priority values. A "typical" thread priority might be 0.5, but because the priority is determined by the kernel, there is no guarantee what this value actually will be.
 func (t *Thread) ThreadPriority() float64 {
 	defer runtime.KeepAlive(t)
 	_r := objc.Send[float64](objref.IDOf(t), objc.RegisterName("threadPriority"))
@@ -163,7 +163,7 @@ func (t *Thread) QualityOfService() QualityOfService {
 	return _r
 }
 
-// Name returns the name.
+// Name returns the name of the receiver.
 func (t *Thread) Name() string {
 	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("name"))
@@ -173,35 +173,35 @@ func (t *Thread) Name() string {
 	return purego.GoString(_r)
 }
 
-// StackSize returns the stack size.
+// StackSize returns the stack size of the receiver, in bytes. This value must be in bytes and a multiple of 4KB. To change the stack size, you must set this property before starting your thread. Setting the stack size after the thread has started changes the attribute size (which is reflected by the `stackSize` method), but it does not affect the actual number of pages set aside for the thread.
 func (t *Thread) StackSize() int {
 	defer runtime.KeepAlive(t)
 	_r := objc.Send[int](objref.IDOf(t), objc.RegisterName("stackSize"))
 	return _r
 }
 
-// IsMainThread reports whether the object is main thread.
+// IsMainThread reports whether the receiver is the main thread.
 func (t *Thread) IsMainThread() bool {
 	defer runtime.KeepAlive(t)
 	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isMainThread"))
 	return _r
 }
 
-// IsExecuting reports whether the object is executing.
+// IsExecuting reports whether the receiver is executing.
 func (t *Thread) IsExecuting() bool {
 	defer runtime.KeepAlive(t)
 	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isExecuting"))
 	return _r
 }
 
-// IsFinished reports whether the object is finished.
+// IsFinished reports whether the receiver has finished execution.
 func (t *Thread) IsFinished() bool {
 	defer runtime.KeepAlive(t)
 	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isFinished"))
 	return _r
 }
 
-// IsCancelled reports whether the object is cancelled.
+// IsCancelled reports whether the receiver is cancelled. If your thread supports cancellation, it should check this property periodically and exit if it ever returns `YES`.
 func (t *Thread) IsCancelled() bool {
 	defer runtime.KeepAlive(t)
 	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isCancelled"))

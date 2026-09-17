@@ -13,6 +13,7 @@ import (
 // The MCNearbyServiceAdvertiser class publishes an advertisement for a specific service that your app provides through the Multipeer Connectivity framework and notifies its delegate about invitations from nearby peers.
 //
 // Apple documentation: https://developer.apple.com/documentation/multipeerconnectivity/mcnearbyserviceadvertiser
+// Deprecated: Use Network Framework instead
 type MCNearbyServiceAdvertiser struct {
 	foundation.NSObject
 }
@@ -40,6 +41,7 @@ func MCNearbyServiceAdvertiserFromID(id objc.ID) *MCNearbyServiceAdvertiser {
 }
 
 // Initializes an advertiser object.
+// Deprecated: Use Network Framework instead
 func (o *MCNearbyServiceAdvertiser) InitWithPeerDiscoveryInfoServiceType(myPeerID *MCPeerID, info *foundation.NSDictionary[*foundation.NSString, *foundation.NSString], serviceType *foundation.NSString) *MCNearbyServiceAdvertiser {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mCNearbyServiceAdvertiserSelInitWithPeerDiscoveryInfoServiceType, myPeerID.Ptr(), info.Ptr(), serviceType.Ptr())
 	if _ret != 0 {

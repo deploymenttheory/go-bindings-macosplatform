@@ -624,13 +624,13 @@ var (
 	_vImagePerspectiveWarp_Planar16F            func(*VImageBuffer, *VImageBuffer, unsafe.Pointer, *VImagePerpsectiveTransform, int32, uint16, uint32) int
 	_vImagePerspectiveWarp_Planar16U            func(*VImageBuffer, *VImageBuffer, unsafe.Pointer, *VImagePerpsectiveTransform, int32, uint16, uint32) int
 	_vImagePerspectiveWarp_Planar8              func(*VImageBuffer, *VImageBuffer, unsafe.Pointer, *VImagePerpsectiveTransform, int32, uint8, uint32) int
-	_vImagePiecewiseGamma_Planar16Q12           func(*VImageBuffer, *VImageBuffer, *float32, unsafe.Pointer, *float32, int16, uint32) int
-	_vImagePiecewiseGamma_Planar16Q12toPlanar8  func(*VImageBuffer, *VImageBuffer, *float32, unsafe.Pointer, *float32, int16, uint32) int
-	_vImagePiecewiseGamma_Planar8               func(*VImageBuffer, *VImageBuffer, *float32, unsafe.Pointer, *float32, uint8, uint32) int
-	_vImagePiecewiseGamma_Planar8toPlanar16Q12  func(*VImageBuffer, *VImageBuffer, *float32, unsafe.Pointer, *float32, uint8, uint32) int
-	_vImagePiecewiseGamma_Planar8toPlanarF      func(*VImageBuffer, *VImageBuffer, *float32, unsafe.Pointer, *float32, uint8, uint32) int
-	_vImagePiecewiseGamma_PlanarF               func(*VImageBuffer, *VImageBuffer, *float32, unsafe.Pointer, *float32, unsafe.Pointer, uint32) int
-	_vImagePiecewiseGamma_PlanarFtoPlanar8      func(*VImageBuffer, *VImageBuffer, *float32, unsafe.Pointer, *float32, unsafe.Pointer, uint32) int
+	_vImagePiecewiseGamma_Planar16Q12           func(*VImageBuffer, *VImageBuffer, *float32, float32, *float32, int16, uint32) int
+	_vImagePiecewiseGamma_Planar16Q12toPlanar8  func(*VImageBuffer, *VImageBuffer, *float32, float32, *float32, int16, uint32) int
+	_vImagePiecewiseGamma_Planar8               func(*VImageBuffer, *VImageBuffer, *float32, float32, *float32, uint8, uint32) int
+	_vImagePiecewiseGamma_Planar8toPlanar16Q12  func(*VImageBuffer, *VImageBuffer, *float32, float32, *float32, uint8, uint32) int
+	_vImagePiecewiseGamma_Planar8toPlanarF      func(*VImageBuffer, *VImageBuffer, *float32, float32, *float32, uint8, uint32) int
+	_vImagePiecewiseGamma_PlanarF               func(*VImageBuffer, *VImageBuffer, *float32, float32, *float32, float32, uint32) int
+	_vImagePiecewiseGamma_PlanarFtoPlanar8      func(*VImageBuffer, *VImageBuffer, *float32, float32, *float32, float32, uint32) int
 	_vImagePiecewisePolynomial_Planar8toPlanarF func(*VImageBuffer, *VImageBuffer, *float32, *float32, uint32, uint32, uint32) int
 	_vImagePiecewisePolynomial_PlanarF          func(*VImageBuffer, *VImageBuffer, *float32, *float32, uint32, uint32, uint32) int
 	_vImagePiecewisePolynomial_PlanarFtoPlanar8 func(*VImageBuffer, *VImageBuffer, *float32, *float32, uint32, uint32, uint32) int
@@ -739,8 +739,8 @@ var (
 	_vImageSepConvolve_Planar8                  func(*VImageBuffer, *VImageBuffer, unsafe.Pointer, uint, uint, *float32, uint32, *float32, uint32, float32, uint16, uint32) int
 	_vImageSepConvolve_Planar8to16U             func(*VImageBuffer, *VImageBuffer, unsafe.Pointer, uint, uint, *float32, uint32, *float32, uint32, float32, float32, uint8, uint32) int
 	_vImageSepConvolve_PlanarF                  func(*VImageBuffer, *VImageBuffer, unsafe.Pointer, uint, uint, *float32, uint32, *float32, uint32, float32, float32, uint32) int
-	_vImageSymmetricPiecewiseGamma_Planar16Q12  func(*VImageBuffer, *VImageBuffer, *float32, unsafe.Pointer, *float32, int16, uint32) int
-	_vImageSymmetricPiecewiseGamma_PlanarF      func(*VImageBuffer, *VImageBuffer, *float32, unsafe.Pointer, *float32, unsafe.Pointer, uint32) int
+	_vImageSymmetricPiecewiseGamma_Planar16Q12  func(*VImageBuffer, *VImageBuffer, *float32, float32, *float32, int16, uint32) int
+	_vImageSymmetricPiecewiseGamma_PlanarF      func(*VImageBuffer, *VImageBuffer, *float32, float32, *float32, float32, uint32) int
 	_vImageSymmetricPiecewisePolynomial_PlanarF func(*VImageBuffer, *VImageBuffer, *float32, *float32, uint32, uint32, uint32) int
 	// @function vImageTableLookUp_ARGB8888 @abstract Transforms an ARGB8888 image by substituting pixel values with pixel values provided by four lookup tables. @discussion For each pixel in src, do the following: Use a lookup table to remap 0...255 values in the source image to a different set of 0...255 values in the destination. A different lookup table is used for each channel in the ARGB image. This function can work in place provided the following are true: If src overlaps with dest, src->data must be equal to dest->data and src->rowBytes >= dest->rowBytes If an overlapping src has a different rowBytes from dest, kvImageDoNotTile must be also passed in the flags @note This function may be used to do table lookups on other 4 channel 8-bit/channel formats (e.g. RGBA8888) by adjusting the order of the tables passed into the function accordingly. @note Performance Advisory:   For 8-bit monochrome -> ARGB8888  or 8-bit indexed -> ARGB8888 conversions, it is likely significantly faster to use vImageLookupTable_Planar8toPlanarF. Use the desired ARGB8888 (32 bits/pixel) pixels in place of the planar 32-bit floats in the lookup table. @param src A pointer to a valid and initialized vImage_Buffer struct, that points to a buffer containing source pixels. @param dest A pointer to a valid and initialized vImage_Buffer struct, that points to a buffer containing destination pixels. @param alphaTable A table to remap A values. @param redTable A table to remap R values. @param greenTable A table to remap G values. @param blueTable A table to remap B values. @param flags \p kvImageNoFlags                     Default operation \p kvImageDoNotTile                   Disable internal multithreading. @return kvImageNoError                     Success @return kvImageRoiLargerThanInputBuffer    The height and width of the destination must be less than or equal to the height and width of the src buffer, respectively.
 	_vImageTableLookUp_ARGB8888 func(*VImageBuffer, *VImageBuffer, *uint8, *uint8, *uint8, *uint8, uint32) int
@@ -3219,37 +3219,37 @@ func VImagePerspectiveWarpPlanar8(src *VImageBuffer, dest *VImageBuffer, tempBuf
 }
 
 // C function: vImagePiecewiseGamma_Planar16Q12
-func VImagePiecewiseGammaPlanar16Q12(src *VImageBuffer, dest *VImageBuffer, exponentialCoeffs *float32, gamma unsafe.Pointer, linearCoeffs *float32, boundary int16, flags uint32) int {
+func VImagePiecewiseGammaPlanar16Q12(src *VImageBuffer, dest *VImageBuffer, exponentialCoeffs *float32, gamma float32, linearCoeffs *float32, boundary int16, flags uint32) int {
 	return _vImagePiecewiseGamma_Planar16Q12(src, dest, exponentialCoeffs, gamma, linearCoeffs, boundary, flags)
 }
 
 // C function: vImagePiecewiseGamma_Planar16Q12toPlanar8
-func VImagePiecewiseGammaPlanar16Q12toPlanar8(src *VImageBuffer, dest *VImageBuffer, exponentialCoeffs *float32, gamma unsafe.Pointer, linearCoeffs *float32, boundary int16, flags uint32) int {
+func VImagePiecewiseGammaPlanar16Q12toPlanar8(src *VImageBuffer, dest *VImageBuffer, exponentialCoeffs *float32, gamma float32, linearCoeffs *float32, boundary int16, flags uint32) int {
 	return _vImagePiecewiseGamma_Planar16Q12toPlanar8(src, dest, exponentialCoeffs, gamma, linearCoeffs, boundary, flags)
 }
 
 // C function: vImagePiecewiseGamma_Planar8
-func VImagePiecewiseGammaPlanar8(src *VImageBuffer, dest *VImageBuffer, exponentialCoeffs *float32, gamma unsafe.Pointer, linearCoeffs *float32, boundary uint8, flags uint32) int {
+func VImagePiecewiseGammaPlanar8(src *VImageBuffer, dest *VImageBuffer, exponentialCoeffs *float32, gamma float32, linearCoeffs *float32, boundary uint8, flags uint32) int {
 	return _vImagePiecewiseGamma_Planar8(src, dest, exponentialCoeffs, gamma, linearCoeffs, boundary, flags)
 }
 
 // C function: vImagePiecewiseGamma_Planar8toPlanar16Q12
-func VImagePiecewiseGammaPlanar8toPlanar16Q12(src *VImageBuffer, dest *VImageBuffer, exponentialCoeffs *float32, gamma unsafe.Pointer, linearCoeffs *float32, boundary uint8, flags uint32) int {
+func VImagePiecewiseGammaPlanar8toPlanar16Q12(src *VImageBuffer, dest *VImageBuffer, exponentialCoeffs *float32, gamma float32, linearCoeffs *float32, boundary uint8, flags uint32) int {
 	return _vImagePiecewiseGamma_Planar8toPlanar16Q12(src, dest, exponentialCoeffs, gamma, linearCoeffs, boundary, flags)
 }
 
 // C function: vImagePiecewiseGamma_Planar8toPlanarF
-func VImagePiecewiseGammaPlanar8toPlanarF(src *VImageBuffer, dest *VImageBuffer, exponentialCoeffs *float32, gamma unsafe.Pointer, linearCoeffs *float32, boundary uint8, flags uint32) int {
+func VImagePiecewiseGammaPlanar8toPlanarF(src *VImageBuffer, dest *VImageBuffer, exponentialCoeffs *float32, gamma float32, linearCoeffs *float32, boundary uint8, flags uint32) int {
 	return _vImagePiecewiseGamma_Planar8toPlanarF(src, dest, exponentialCoeffs, gamma, linearCoeffs, boundary, flags)
 }
 
 // C function: vImagePiecewiseGamma_PlanarF
-func VImagePiecewiseGammaPlanarF(src *VImageBuffer, dest *VImageBuffer, exponentialCoeffs *float32, gamma unsafe.Pointer, linearCoeffs *float32, boundary unsafe.Pointer, flags uint32) int {
+func VImagePiecewiseGammaPlanarF(src *VImageBuffer, dest *VImageBuffer, exponentialCoeffs *float32, gamma float32, linearCoeffs *float32, boundary float32, flags uint32) int {
 	return _vImagePiecewiseGamma_PlanarF(src, dest, exponentialCoeffs, gamma, linearCoeffs, boundary, flags)
 }
 
 // C function: vImagePiecewiseGamma_PlanarFtoPlanar8
-func VImagePiecewiseGammaPlanarFtoPlanar8(src *VImageBuffer, dest *VImageBuffer, exponentialCoeffs *float32, gamma unsafe.Pointer, linearCoeffs *float32, boundary unsafe.Pointer, flags uint32) int {
+func VImagePiecewiseGammaPlanarFtoPlanar8(src *VImageBuffer, dest *VImageBuffer, exponentialCoeffs *float32, gamma float32, linearCoeffs *float32, boundary float32, flags uint32) int {
 	return _vImagePiecewiseGamma_PlanarFtoPlanar8(src, dest, exponentialCoeffs, gamma, linearCoeffs, boundary, flags)
 }
 
@@ -3666,12 +3666,12 @@ func VImageSepConvolvePlanarF(src *VImageBuffer, dest *VImageBuffer, tempBuffer 
 }
 
 // C function: vImageSymmetricPiecewiseGamma_Planar16Q12
-func VImageSymmetricPiecewiseGammaPlanar16Q12(src *VImageBuffer, dest *VImageBuffer, exponentialCoeffs *float32, gamma unsafe.Pointer, linearCoeffs *float32, boundary int16, flags uint32) int {
+func VImageSymmetricPiecewiseGammaPlanar16Q12(src *VImageBuffer, dest *VImageBuffer, exponentialCoeffs *float32, gamma float32, linearCoeffs *float32, boundary int16, flags uint32) int {
 	return _vImageSymmetricPiecewiseGamma_Planar16Q12(src, dest, exponentialCoeffs, gamma, linearCoeffs, boundary, flags)
 }
 
 // C function: vImageSymmetricPiecewiseGamma_PlanarF
-func VImageSymmetricPiecewiseGammaPlanarF(src *VImageBuffer, dest *VImageBuffer, exponentialCoeffs *float32, gamma unsafe.Pointer, linearCoeffs *float32, boundary unsafe.Pointer, flags uint32) int {
+func VImageSymmetricPiecewiseGammaPlanarF(src *VImageBuffer, dest *VImageBuffer, exponentialCoeffs *float32, gamma float32, linearCoeffs *float32, boundary float32, flags uint32) int {
 	return _vImageSymmetricPiecewiseGamma_PlanarF(src, dest, exponentialCoeffs, gamma, linearCoeffs, boundary, flags)
 }
 

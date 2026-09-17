@@ -24,21 +24,25 @@ func VSAccountProviderAuthenticationSchemeAPI() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("VSAccountProviderAuthenticationSchemeAPI")))
 }
 
-// VSErrorDomain returns the address of the symbol VSErrorDomain.
-func VSErrorDomain() uintptr { return _symbol("VSErrorDomain") }
+// VSErrorDomain returns the string constant VSErrorDomain, for use as a dictionary key or argument.
+func VSErrorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("VSErrorDomain"))) }
 
-// VSErrorInfoKeySAMLResponse returns the address of the symbol VSErrorInfoKeySAMLResponse.
-func VSErrorInfoKeySAMLResponse() uintptr { return _symbol("VSErrorInfoKeySAMLResponse") }
-
-// VSErrorInfoKeySAMLResponseStatus returns the address of the symbol VSErrorInfoKeySAMLResponseStatus.
-func VSErrorInfoKeySAMLResponseStatus() uintptr { return _symbol("VSErrorInfoKeySAMLResponseStatus") }
-
-// VSErrorInfoKeyAccountProviderResponse returns the address of the symbol VSErrorInfoKeyAccountProviderResponse.
-func VSErrorInfoKeyAccountProviderResponse() uintptr {
-	return _symbol("VSErrorInfoKeyAccountProviderResponse")
+// VSErrorInfoKeySAMLResponse returns the string constant VSErrorInfoKeySAMLResponse, for use as a dictionary key or argument.
+func VSErrorInfoKeySAMLResponse() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VSErrorInfoKeySAMLResponse")))
 }
 
-// VSErrorInfoKeyUnsupportedProviderIdentifier returns the address of the symbol VSErrorInfoKeyUnsupportedProviderIdentifier.
-func VSErrorInfoKeyUnsupportedProviderIdentifier() uintptr {
-	return _symbol("VSErrorInfoKeyUnsupportedProviderIdentifier")
+// VSErrorInfoKeySAMLResponseStatus returns the string constant VSErrorInfoKeySAMLResponseStatus, for use as a dictionary key or argument.
+func VSErrorInfoKeySAMLResponseStatus() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VSErrorInfoKeySAMLResponseStatus")))
+}
+
+// VSErrorInfoKeyAccountProviderResponse returns the string constant VSErrorInfoKeyAccountProviderResponse, for use as a dictionary key or argument.
+func VSErrorInfoKeyAccountProviderResponse() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VSErrorInfoKeyAccountProviderResponse")))
+}
+
+// VSErrorInfoKeyUnsupportedProviderIdentifier returns the string constant VSErrorInfoKeyUnsupportedProviderIdentifier, for use as a dictionary key or argument.
+func VSErrorInfoKeyUnsupportedProviderIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VSErrorInfoKeyUnsupportedProviderIdentifier")))
 }

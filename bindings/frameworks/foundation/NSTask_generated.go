@@ -17,8 +17,6 @@ import (
 )
 
 // Task is an idiomatic wrapper over the Objective-C class NSTask.
-//
-// An object that represents a subprocess of the current process.
 type Task struct {
 	objref.Handle
 }
@@ -81,80 +79,82 @@ func NewTask() *Task {
 	return taskAdopt(_id)
 }
 
-// WithExecutableURL sets the executable URL.
+// WithExecutableURL sets the receiver's executable.
 func (t *Task) WithExecutableURL(executableURL string) *Task {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setExecutableURL:"), rt.FileURL(executableURL))
 	return t
 }
 
-// WithArguments sets the arguments.
+// WithArguments sets the command arguments that the system uses to launch the executable. The `NSTask` object converts both `path` and the strings in `arguments` to appropriate C-style strings (using `fileSystemRepresentation`) before passing them to the task through `argv[]`. The strings in `arguments` don't undergo shell expansion, so you don't need to do special quoting, and shell variables, such as `$PWD`, aren't resolved.
 func (t *Task) WithArguments(items ...StringProvider) *Task {
 	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setArguments:"), _arr)
 	return t
 }
 
-// WithEnvironment sets the environment.
+// WithEnvironment sets the environment for the receiver. If this method isn't used, the environment is inherited from the process that created the receiver. This method raises an `NSInvalidArgumentException` if the system has launched the receiver.
 func (t *Task) WithEnvironment(environment map[string]string) *Task {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setEnvironment:"), rt.MapToDict(environment, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v string) objc.ID { return purego.NSString(_v) }))
 	return t
 }
 
-// WithCurrentDirectoryURL sets the current directory URL.
+// WithCurrentDirectoryURL sets the current directory for the receiver.
 func (t *Task) WithCurrentDirectoryURL(currentDirectoryURL string) *Task {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setCurrentDirectoryURL:"), rt.FileURL(currentDirectoryURL))
 	return t
 }
 
-// WithLaunchRequirementData sets the launch requirement data.
+// WithLaunchRequirementData sets the launch requirement data for the receiver.
 func (t *Task) WithLaunchRequirementData(launchRequirementData DataProvider) *Task {
 	defer runtime.KeepAlive(launchRequirementData)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setLaunchRequirementData:"), objref.IDOf(launchRequirementData))
 	return t
 }
 
-// WithStandardInput sets the standard input.
+// WithStandardInput sets the standard input for the receiver. If this is an `NSPipe` object, launching the receiver automatically closes the read end of the pipe in the current task. Don't create a handle for the pipe and pass that as the argument, or the read end of the pipe won't be closed automatically. If this method isn't used, the standard input is inherited from the process that created the receiver. This method raises an `NSInvalidArgumentException` if the system has launched the receiver.
 func (t *Task) WithStandardInput(standardInput obj.Object) *Task {
 	defer runtime.KeepAlive(standardInput)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setStandardInput:"), objref.IDOf(standardInput))
 	return t
 }
 
-// WithStandardOutput sets the standard output.
+// WithStandardOutput sets the standard output for the receiver. If this is an `NSPipe` object, launching the receiver automatically closes the write end of the pipe in the current task. Don't create a handle for the pipe and pass that as the argument, or the write end of the pipe won't be closed automatically. If this method isn't used, the standard output is inherited from the process that created the receiver. This method raises an `NSInvalidArgumentException` if the system has launched the receiver.
 func (t *Task) WithStandardOutput(standardOutput obj.Object) *Task {
 	defer runtime.KeepAlive(standardOutput)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setStandardOutput:"), objref.IDOf(standardOutput))
 	return t
 }
 
-// WithStandardError sets the standard error.
+// WithStandardError sets the standard error for the receiver. If this is an `NSPipe` object, launching the receiver automatically closes the write end of the pipe in the current task. Don't create a handle for the pipe and pass that as the argument, or the system won't automatically close the write end of the pipe. If this method isn't used, the standard error is inherited from the process that created the receiver. This method raises an `NSInvalidArgumentException` if the system has launched the receiver.
 func (t *Task) WithStandardError(standardError obj.Object) *Task {
 	defer runtime.KeepAlive(standardError)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setStandardError:"), objref.IDOf(standardError))
 	return t
 }
 
-// WithTerminationHandler sets the termination handler.
+// WithTerminationHandler sets a completion block the system invokes when the task completes. The system passes the task object to the block to allow access to the task parameters, for example to determine if the task completed successfully. This block isn't guaranteed to be fully executed prior to `waitUntilExit` returning. Setting the block to nil is valid, and stops the previous block from being invoked, as long as it hasn't started in any way. Only one termination handler block can be set at any time. If a terminationHandler is set on an NSTask, the NSTaskDidTerminateNotification notification is not posted for that task.
 func (t *Task) WithTerminationHandler(terminationHandler func(obj.Object)) *Task {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setTerminationHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { terminationHandler(obj.Wrap(_b0)) }))
 	return t
 }
 
-// WithQualityOfService sets the quality of service.
+// WithQualityOfService sets the default quality of service level the system applies to operations the task executes.
 func (t *Task) WithQualityOfService(qualityOfService QualityOfService) *Task {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setQualityOfService:"), qualityOfService)
 	return t
 }
 
-// WithLaunchPath sets the launch path.
-func (t *Task) WithLaunchPath(launchPath unsafe.Pointer) *Task {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setLaunchPath:"), launchPath)
+// WithLaunchPath sets sets the receiver's executable.
+func (t *Task) WithLaunchPath(launchPath StringProvider) *Task {
+	defer runtime.KeepAlive(launchPath)
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setLaunchPath:"), objref.IDOf(launchPath))
 	return t
 }
 
-// WithCurrentDirectoryPath sets the current directory path.
-func (t *Task) WithCurrentDirectoryPath(currentDirectoryPath unsafe.Pointer) *Task {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setCurrentDirectoryPath:"), currentDirectoryPath)
+// WithCurrentDirectoryPath sets sets the current directory for the receiver.
+func (t *Task) WithCurrentDirectoryPath(currentDirectoryPath StringProvider) *Task {
+	defer runtime.KeepAlive(currentDirectoryPath)
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setCurrentDirectoryPath:"), objref.IDOf(currentDirectoryPath))
 	return t
 }
 
@@ -170,7 +170,7 @@ func (t *Task) WithScriptingProperties(scriptingProperties map[string]obj.Object
 	return t
 }
 
-// LaunchAndReturnError wraps the corresponding Objective-C method.
+// LaunchAndReturnError runs the process with the current environment.
 //
 // LaunchAndReturnError returns an error if the operation did not succeed.
 func (t *Task) LaunchAndReturnError() error {
@@ -183,40 +183,40 @@ func (t *Task) LaunchAndReturnError() error {
 	return nil
 }
 
-// Interrupt wraps the corresponding Objective-C method.
+// Interrupt sends an interrupt signal to the receiver and all of its subtasks. If the task terminates as a result, which is the default behavior, an `NSTaskDidTerminateNotification` gets sent to the default notification center. This method has no effect if the receiver was already launched and has already finished executing. If the system hasn't launched the receiver, this method raises an `NSInvalidArgumentException`. It isn't always possible to interrupt the receiver because it might be ignoring the interrupt signal. This method sends `SIGINT`.
 func (t *Task) Interrupt() {
 	defer runtime.KeepAlive(t)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("interrupt"))
 }
 
-// Terminate wraps the corresponding Objective-C method.
+// Terminate sends a terminate signal to the receiver and all of its subtasks. If the task terminates as a result, which is the default behavior, an `NSTaskDidTerminateNotification` gets sent to the default notification center. This method has no effect if the receiver was already launched and has already finished executing. If the receiver hasn't been launched yet, this method raises an `NSInvalidArgumentException`. It's not always possible to terminate the receiver because it might be ignoring the terminate signal. This method sends `SIGTERM`.
 func (t *Task) Terminate() {
 	defer runtime.KeepAlive(t)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("terminate"))
 }
 
-// Suspend wraps the corresponding Objective-C method.
+// Suspend reports whether suspends execution of the receiver task. Multiple `suspend` messages can be sent, but they must be balanced with an equal number of `resume` messages before the task resumes execution. - Returns: `YES` if the receiver was successfully suspended, `NO` otherwise.
 func (t *Task) Suspend() bool {
 	defer runtime.KeepAlive(t)
 	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("suspend"))
 	return _r
 }
 
-// Resume wraps the corresponding Objective-C method.
+// Resume reports whether resumes execution of a suspended task. If the system sent multiple `suspend` messages to the receiver, an equal number of `resume` messages must be sent before the task resumes execution. - Returns: `YES` if the receiver was able to resume execution, `NO` otherwise.
 func (t *Task) Resume() bool {
 	defer runtime.KeepAlive(t)
 	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("resume"))
 	return _r
 }
 
-// ExecutableURL returns the executable URL.
+// ExecutableURL returns the receiver's executable.
 func (t *Task) ExecutableURL() string {
 	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("executableURL"))
 	return rt.URLString(_r)
 }
 
-// Arguments returns the arguments.
+// Arguments returns the command arguments that the system uses to launch the executable. The `NSTask` object converts both `path` and the strings in `arguments` to appropriate C-style strings (using `fileSystemRepresentation`) before passing them to the task through `argv[]`. The strings in `arguments` don't undergo shell expansion, so you don't need to do special quoting, and shell variables, such as `$PWD`, aren't resolved.
 //
 // Arguments returns the collection as a Go slice.
 func (t *Task) Arguments() []string {
@@ -225,105 +225,111 @@ func (t *Task) Arguments() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Environment returns the environment.
+// Environment returns the environment for the receiver. If this method isn't used, the environment is inherited from the process that created the receiver. This method raises an `NSInvalidArgumentException` if the system has launched the receiver.
 func (t *Task) Environment() map[string]string {
 	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("environment"))
 	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// CurrentDirectoryURL returns the current directory URL.
+// CurrentDirectoryURL returns the current directory for the receiver.
 func (t *Task) CurrentDirectoryURL() string {
 	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("currentDirectoryURL"))
 	return rt.URLString(_r)
 }
 
-// LaunchRequirementData returns the launch requirement data.
+// LaunchRequirementData returns the launch requirement data for the receiver.
 func (t *Task) LaunchRequirementData() []byte {
 	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("launchRequirementData"))
 	return rt.NSDataToBytes(_r)
 }
 
-// StandardInput returns the standard input.
+// StandardInput returns the standard input for the receiver. If this is an `NSPipe` object, launching the receiver automatically closes the read end of the pipe in the current task. Don't create a handle for the pipe and pass that as the argument, or the read end of the pipe won't be closed automatically. If this method isn't used, the standard input is inherited from the process that created the receiver. This method raises an `NSInvalidArgumentException` if the system has launched the receiver.
 func (t *Task) StandardInput() obj.Object {
 	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("standardInput"))
 	return obj.Wrap(_r)
 }
 
-// StandardOutput returns the standard output.
+// StandardOutput returns the standard output for the receiver. If this is an `NSPipe` object, launching the receiver automatically closes the write end of the pipe in the current task. Don't create a handle for the pipe and pass that as the argument, or the write end of the pipe won't be closed automatically. If this method isn't used, the standard output is inherited from the process that created the receiver. This method raises an `NSInvalidArgumentException` if the system has launched the receiver.
 func (t *Task) StandardOutput() obj.Object {
 	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("standardOutput"))
 	return obj.Wrap(_r)
 }
 
-// StandardError returns the standard error.
+// StandardError returns the standard error for the receiver. If this is an `NSPipe` object, launching the receiver automatically closes the write end of the pipe in the current task. Don't create a handle for the pipe and pass that as the argument, or the system won't automatically close the write end of the pipe. If this method isn't used, the standard error is inherited from the process that created the receiver. This method raises an `NSInvalidArgumentException` if the system has launched the receiver.
 func (t *Task) StandardError() obj.Object {
 	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("standardError"))
 	return obj.Wrap(_r)
 }
 
-// ProcessIdentifier returns the process identifier.
+// ProcessIdentifier returns the receiver's process identifier.
 func (t *Task) ProcessIdentifier() int {
 	defer runtime.KeepAlive(t)
 	_r := objc.Send[int](objref.IDOf(t), objc.RegisterName("processIdentifier"))
 	return _r
 }
 
-// IsRunning reports whether the object is running.
+// IsRunning reports whether a status that indicates whether the receiver is still running.
 func (t *Task) IsRunning() bool {
 	defer runtime.KeepAlive(t)
 	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isRunning"))
 	return _r
 }
 
-// TerminationStatus returns the termination status.
+// TerminationStatus returns the exit status the receiver's executable returns. Each task defines and documents how your app should interpret the return value. For example, many commands return 0 if they complete successfully or an error code if they don't. You'll need to look at the documentation for that task to learn what values it returns under what circumstances. This method raises an `NSInvalidArgumentException` if the receiver is still running. Verify that the receiver isn't running before you use it.
 func (t *Task) TerminationStatus() int {
 	defer runtime.KeepAlive(t)
 	_r := objc.Send[int](objref.IDOf(t), objc.RegisterName("terminationStatus"))
 	return _r
 }
 
-// TerminationReason returns the termination reason.
+// TerminationReason returns the reason the system terminated the task. The possible values are described in `NSTaskTerminationReason`.
 func (t *Task) TerminationReason() TaskTerminationReason {
 	defer runtime.KeepAlive(t)
 	_r := objc.Send[TaskTerminationReason](objref.IDOf(t), objc.RegisterName("terminationReason"))
 	return _r
 }
 
-// QualityOfService returns the quality of service.
+// QualityOfService returns the default quality of service level the system applies to operations the task executes.
 func (t *Task) QualityOfService() QualityOfService {
 	defer runtime.KeepAlive(t)
 	_r := objc.Send[QualityOfService](objref.IDOf(t), objc.RegisterName("qualityOfService"))
 	return _r
 }
 
-// WaitUntilExit wraps the corresponding Objective-C method.
+// WaitUntilExit blocks the process until the receiver is finished. This method first checks to see if the receiver is still running using `isRunning`. Then it polls the current run loop using `NSDefaultRunLoopMode` until the task completes.
 func (t *Task) WaitUntilExit() {
 	defer runtime.KeepAlive(t)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("waitUntilExit"))
 }
 
-// Launch wraps the corresponding Objective-C method.
+// Launch launches the task represented by the receiver.
 func (t *Task) Launch() {
 	defer runtime.KeepAlive(t)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("launch"))
 }
 
-// LaunchPath returns the launch path.
-func (t *Task) LaunchPath() unsafe.Pointer {
+// LaunchPath sets the receiver's executable.
+func (t *Task) LaunchPath() string {
 	defer runtime.KeepAlive(t)
-	_r := objc.Send[unsafe.Pointer](objref.IDOf(t), objc.RegisterName("launchPath"))
-	return _r
+	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("launchPath"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
 }
 
-// CurrentDirectoryPath returns the current directory path.
-func (t *Task) CurrentDirectoryPath() unsafe.Pointer {
+// CurrentDirectoryPath sets the current directory for the receiver.
+func (t *Task) CurrentDirectoryPath() string {
 	defer runtime.KeepAlive(t)
-	_r := objc.Send[unsafe.Pointer](objref.IDOf(t), objc.RegisterName("currentDirectoryPath"))
-	return _r
+	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("currentDirectoryPath"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
 }

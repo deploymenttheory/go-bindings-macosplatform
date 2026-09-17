@@ -129,6 +129,19 @@ func (pc *PickerConfiguration) WithDisabledCapabilities(disabledCapabilities Pic
 	return pc
 }
 
+// WithMetadataOptions sets metadata options for the picker. Default is \c PHPickerMetadataOptionsNone.
+func (pc *PickerConfiguration) WithMetadataOptions(metadataOptions PickerMetadataOptions) *PickerConfiguration {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setMetadataOptions:"), metadataOptions)
+	return pc
+}
+
+// WithSearchText sets the search text for the picker. Default is \c nil.
+func (pc *PickerConfiguration) WithSearchText(searchText *PickerSearchText) *PickerConfiguration {
+	defer runtime.KeepAlive(searchText)
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setSearchText:"), objref.IDOf(searchText))
+	return pc
+}
+
 // PreferredAssetRepresentationMode returns the preferred representation mode of selected assets. Default is \c PHPickerConfigurationAssetRepresentationModeAutomatic. Setting \c preferredAssetRepresentationMode to \c PHPickerConfigurationAssetRepresentationModeAutomatic means the best representation determined by the system will be used.
 func (pc *PickerConfiguration) PreferredAssetRepresentationMode() PickerConfigurationAssetRepresentationMode {
 	defer runtime.KeepAlive(pc)
@@ -178,4 +191,18 @@ func (pc *PickerConfiguration) DisabledCapabilities() PickerCapabilities {
 	defer runtime.KeepAlive(pc)
 	_r := objc.Send[PickerCapabilities](objref.IDOf(pc), objc.RegisterName("disabledCapabilities"))
 	return _r
+}
+
+// MetadataOptions returns metadata options for the picker. Default is \c PHPickerMetadataOptionsNone.
+func (pc *PickerConfiguration) MetadataOptions() PickerMetadataOptions {
+	defer runtime.KeepAlive(pc)
+	_r := objc.Send[PickerMetadataOptions](objref.IDOf(pc), objc.RegisterName("metadataOptions"))
+	return _r
+}
+
+// SearchText returns the search text for the picker. Default is \c nil.
+func (pc *PickerConfiguration) SearchText() *PickerSearchText {
+	defer runtime.KeepAlive(pc)
+	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("searchText"))
+	return PickerSearchTextFromID(_r)
 }

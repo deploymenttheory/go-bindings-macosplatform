@@ -15,8 +15,6 @@ import (
 )
 
 // AssetVariantAudioAttributes is an idiomatic wrapper over the Objective-C class AVAssetVariantAudioAttributes.
-//
-// An object that defines the audio attributes for an asset variant.
 type AssetVariantAudioAttributes struct {
 	objref.Handle
 }

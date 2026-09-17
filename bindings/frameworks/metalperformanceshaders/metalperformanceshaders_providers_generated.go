@@ -158,6 +158,12 @@ type CNNUpsamplingGradientProvider interface {
 	isCNNUpsamplingGradient()
 }
 
+// FunctionProvider is accepted wherever a MPSFunction (or one of its subclasses) is expected.
+type FunctionProvider interface {
+	objref.Object
+	isFunction()
+}
+
 // ImageProvider is accepted wherever a MPSImage (or one of its subclasses) is expected.
 type ImageProvider interface {
 	objref.Object

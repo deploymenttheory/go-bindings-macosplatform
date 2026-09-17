@@ -904,9 +904,16 @@ func ITLibPlaylistPropertyKind() *foundation.NSString {
 
 // @constant ITLibPlaylistPropertyMaster.
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
-func ITLibPlaylistPropertyMaster() uintptr {
+func ITLibPlaylistPropertyMaster() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibPlaylistPropertyMaster")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant ITLibPlaylistPropertyName. @abstract Retrieves the name or title of the playlist. See @link name @/link.
@@ -936,9 +943,16 @@ func ITLibPlaylistPropertyParentPersistentID() *foundation.NSString {
 }
 
 // @constant ITLibPlaylistPropertyPrimary.
-func ITLibPlaylistPropertyPrimary() uintptr {
+func ITLibPlaylistPropertyPrimary() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibPlaylistPropertyPrimary")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant ITLibPlaylistPropertyVisible.
@@ -955,7 +969,14 @@ func ITLibPlaylistPropertyVisible() *foundation.NSString {
 }
 
 // @constant		ITLibraryDidChangeNotification @abstract		This notification is sent to NSDistributedNotificationCenter when a change has occurred in the library. The client should call [ITLibrary -reloadData] if it wants a new view of the library contents. @note			This is not a fine-grained notification.  This API does not support per-object change notifications.
-func ITLibraryDidChangeNotification() uintptr {
+func ITLibraryDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibraryDidChangeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }

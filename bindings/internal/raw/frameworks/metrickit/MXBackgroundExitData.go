@@ -13,6 +13,7 @@ import (
 // An object representing counts for the different types of background app exits.
 //
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxbackgroundexitdata
+// Deprecated: Use BackgroundTerminationMetric instead.
 type MXBackgroundExitData struct {
 	foundation.NSObject
 }

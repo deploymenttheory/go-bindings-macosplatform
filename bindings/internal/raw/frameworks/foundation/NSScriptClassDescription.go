@@ -149,6 +149,7 @@ func (o *NSScriptClassDescription) HasWritablePropertyForKey(key *NSString) bool
 	return _ret
 }
 
+// The name of the receiver's suite. Within an application's scriptability information, named suites contain related sets of information.
 func (o *NSScriptClassDescription) SuiteName() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptClassDescriptionSelSuiteName)
 	if _ret != 0 {
@@ -157,6 +158,7 @@ func (o *NSScriptClassDescription) SuiteName() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The name of the Objective-C class instantiated to implement the scripting class. The name returned by the “NSScriptClassDescription/className“ property for an instance of `NSScriptClassDescription` resulting from an sdef class declaration is the human-readable name for the class. To obtain the name of the Objective-C class instantiated to implement the class, use this property.
 func (o *NSScriptClassDescription) ImplementationClassName() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptClassDescriptionSelImplementationClassName)
 	if _ret != 0 {
@@ -165,6 +167,7 @@ func (o *NSScriptClassDescription) ImplementationClassName() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The class description instance for the superclass of the receiver's class. The instance of `NSScriptClassDescription` that describes the superclass can be in the same suite as the receiver or in a different suite. Returns `nil` if the class has no superclass.
 func (o *NSScriptClassDescription) SuperclassDescription() *NSScriptClassDescription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptClassDescriptionSelSuperclassDescription)
 	if _ret != 0 {
@@ -173,11 +176,13 @@ func (o *NSScriptClassDescription) SuperclassDescription() *NSScriptClassDescrip
 	return NSScriptClassDescriptionFromID(_ret)
 }
 
+// The Apple event code associated with the receiver's class. This is the primary four-character code used to identify the described class in Apple events.
 func (o *NSScriptClassDescription) AppleEventCode() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSScriptClassDescriptionSelAppleEventCode)
 	return _ret
 }
 
+// The value of the `DefaultSubcontainerAttribute` entry of the class declaration dictionary provided when the receiver was instantiated. Returns `nil` if there was no such entry.
 func (o *NSScriptClassDescription) DefaultSubcontainerAttributeKey() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptClassDescriptionSelDefaultSubcontainerAttributeKey)
 	if _ret != 0 {

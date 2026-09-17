@@ -13,6 +13,7 @@ import (
 // An object representing a custom metric.
 //
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxsignpostmetric
+// Deprecated: Use MetricResult instead.
 type MXSignpostMetric struct {
 	MXMetric
 }

@@ -85,9 +85,23 @@ func (puc *PickerUpdateConfiguration) WithSelectionLimit(selectionLimit int) *Pi
 	return puc
 }
 
+// WithSearchText sets the search text for the picker.
+func (puc *PickerUpdateConfiguration) WithSearchText(searchText *PickerSearchText) *PickerUpdateConfiguration {
+	defer runtime.KeepAlive(searchText)
+	objc.Send[objc.ID](objref.IDOf(puc), objc.RegisterName("setSearchText:"), objref.IDOf(searchText))
+	return puc
+}
+
 // SelectionLimit returns the maximum number of assets that can be selected.
 func (puc *PickerUpdateConfiguration) SelectionLimit() int {
 	defer runtime.KeepAlive(puc)
 	_r := objc.Send[int](objref.IDOf(puc), objc.RegisterName("selectionLimit"))
 	return _r
+}
+
+// SearchText returns the search text for the picker.
+func (puc *PickerUpdateConfiguration) SearchText() *PickerSearchText {
+	defer runtime.KeepAlive(puc)
+	_r := objc.Send[objc.ID](objref.IDOf(puc), objc.RegisterName("searchText"))
+	return PickerSearchTextFromID(_r)
 }

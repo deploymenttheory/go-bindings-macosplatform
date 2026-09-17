@@ -6,6 +6,7 @@ package safariservices
 
 import (
 	"context"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -245,4 +246,9 @@ func GetStateOfSafariExtensionWithIdentifier(ctx context.Context, identifier str
 		var _zero *SafariExtensionState
 		return _zero, ctx.Err()
 	}
+}
+
+// CheckAutoFillUserNamesAndPasswordsEnabledWithCompletionHandler query the value of the Safari settings toggle for AutoFill > User names and passwords
+func CheckAutoFillUserNamesAndPasswordsEnabledWithCompletionHandler(completionHandler func(bool, unsafe.Pointer)) {
+	objc.Send[objc.ID](objc.ID(_class("SFSafariSettings")), objc.RegisterName("checkAutoFillUserNamesAndPasswordsEnabledWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { completionHandler(_b0, _b1) }))
 }

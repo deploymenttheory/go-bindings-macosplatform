@@ -9,7 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A thread of execution.
+// A thread of execution. Use this class when you want to have an Objective-C method run in its own thread of execution. Threads are especially useful when you need to perform a lengthy task, but don't want it to block the execution of the rest of the application. In particular, you can use threads to avoid blocking the main thread of the application, which handles user interface and event-related actions. Threads can also be used to divide a large job into several smaller jobs, which can lead to performance increases on multi-core computers. The “Thread“ class supports semantics similar to those of “Operation“ for monitoring the runtime condition of a thread. You can use these semantics to cancel the execution of a thread or determine if the thread is still executing or has finished its task. Canceling a thread requires support from your thread code; see the description for “cancel()“ for more information. ### Subclassing Notes You can subclass “Thread“ and override the “main()“ method to implement your thread's main entry point. If you override “main()“, you do not need to invoke the inherited behavior by calling `super`.
 //
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsthread
 type NSThread struct {
@@ -70,37 +70,45 @@ func NSThreadDetachNewThreadWith(block func()) {
 	objc.ID(_clsNSThread).Send(_nSThreadSelDetachNewThreadWith, __block_block)
 }
 
+// Detaches a new thread and uses the specified selector as the thread entry point. The objects `aTarget` and `anArgument` are retained during the execution of the detached thread, then released. The detached thread is exited (using the `exit` class method) as soon as `aTarget` has completed executing the `aSelector` method. If this thread is the first thread detached in the application, this method posts the `NSWillBecomeMultiThreaded` notification with object `nil` to the default notification center. - Parameters: - selector: The selector for the message to send to the target. This selector must take only one argument and must not have a return value. - target: The object that will receive the message `aSelector` on the new thread. - argument: The single argument passed to the target. May be `nil`.
 func NSThreadDetachNewThreadSelectorToTargetWithObject(selector objc.SEL, target objc.ID, argument objc.ID) {
 	objc.ID(_clsNSThread).Send(_nSThreadSelDetachNewThreadSelectorToTargetWithObject, selector, target, argument)
 }
 
+// Returns whether the application is multithreaded. An application is considered multithreaded if a thread was ever detached from the main thread using either `detachNewThreadSelector:toTarget:withObject:` or `start`. If you detached a thread in your application using a non-Cocoa API, such as the POSIX or Multiprocessing Services APIs, this method could still return `NO`. The detached thread does not have to be currently running for the application to be considered multithreaded -- this method only indicates whether a single thread has been spawned. - Returns: `YES` if the application is multithreaded, otherwise `NO`.
 func NSThreadIsMultiThreaded() bool {
 	_ret := objc.Send[bool](objc.ID(_clsNSThread), _nSThreadSelIsMultiThreaded)
 	return _ret
 }
 
+// Blocks the current thread until the time specified. No run loop processing occurs while the thread is blocked. - Parameter date: The time at which to resume processing.
 func NSThreadSleepUntilDate(date *NSDate) {
 	objc.ID(_clsNSThread).Send(_nSThreadSelSleepUntilDate, date.Ptr())
 }
 
+// Sleeps the thread for a given time interval. No run loop processing occurs while the thread is blocked. - Parameter ti: The duration of the sleep.
 func NSThreadSleepForTimeInterval(ti float64) {
 	objc.ID(_clsNSThread).Send(_nSThreadSelSleepForTimeInterval, ti)
 }
 
+// Terminates the current thread. This method uses the `currentThread` class method to access the current thread. Before exiting the thread, this method posts the `NSThreadWillExit` notification with the thread being exited to the default notification center. Because notifications are delivered synchronously, all observers of `NSThreadWillExit` are guaranteed to receive the notification before the thread exits. Invoking this method should be avoided as it does not give your thread a chance to clean up any resources it allocated during its execution.
 func NSThreadExit() {
 	objc.ID(_clsNSThread).Send(_nSThreadSelExit)
 }
 
+// Returns the current thread's priority. The priorities in this range are mapped to the operating system's priority values. A "typical" thread priority might be 0.5, but because the priority is determined by the kernel, there is no guarantee what this value actually will be. - Returns: The current thread's priority, which is specified by a floating point number from 0.0 to 1.0, where 1.0 is highest priority.
 func NSThreadThreadPriority() float64 {
 	_ret := objc.Send[float64](objc.ID(_clsNSThread), _nSThreadSelThreadPriority)
 	return _ret
 }
 
+// Sets the current thread's priority. The priorities in this range are mapped to the operating system's priority values. - Parameter p: The new priority, specified with a floating point number from 0.0 to 1.0, where 1.0 is highest priority. - Returns: `YES` if the priority assignment succeeded, `NO` otherwise.
 func NSThreadSetThreadPriority(p float64) bool {
 	_ret := objc.Send[bool](objc.ID(_clsNSThread), _nSThreadSelSetThreadPriority, p)
 	return _ret
 }
 
+// Returns an initialized `NSThread` object. This is the designated initializer for `NSThread`.
 func (o *NSThread) Init() *NSThread {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSThreadSelInit)
 	if _ret != 0 {
@@ -109,6 +117,7 @@ func (o *NSThread) Init() *NSThread {
 	return NSThreadFromID(_ret)
 }
 
+// Returns an `NSThread` object initialized with the given arguments. The objects `target` and `argument` are retained during the execution of the detached thread. They are released when the thread finally exits. - Parameters: - target: The object to which the message specified by `selector` is sent. - selector: The selector for the message to send to `target`. This selector must take only one argument and must not have a return value. - argument: The single argument passed to the target. May be `nil`.
 func (o *NSThread) InitWithTargetSelectorObject(target objc.ID, selector objc.SEL, argument objc.ID) *NSThread {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSThreadSelInitWithTargetSelectorObject, target, selector, argument)
 	if _ret != 0 {
@@ -132,18 +141,22 @@ func (o *NSThread) InitWith(block func()) *NSThread {
 	return NSThreadFromID(_ret)
 }
 
+// Changes the cancelled state of the receiver to indicate that it should exit. The semantics of this method are the same as those used for `NSOperation`. This method sets state information in the receiver that is then reflected by the `isCancelled` property. Threads that support cancellation should periodically call the `isCancelled` method to determine if the thread has in fact been cancelled, and exit if it has been.
 func (o *NSThread) Cancel() {
 	o.Ptr().Send(_nSThreadSelCancel)
 }
 
+// Starts the receiver. This method asynchronously spawns the new thread and invokes the receiver's `main` method on the new thread. The `isExecuting` property returns `YES` once the thread starts executing, which may occur after the `start` method returns. If you initialized the receiver with a target and selector, the default `main` method invokes that selector automatically. If this thread is the first thread detached in the application, this method posts the `NSWillBecomeMultiThreaded` notification with object `nil` to the default notification center.
 func (o *NSThread) Start() {
 	o.Ptr().Send(_nSThreadSelStart)
 }
 
+// The main entry point routine for the thread. The default implementation of this method takes the target and selector used to initialize the receiver and invokes the selector on the specified target. If you subclass `NSThread`, you can override this method and use it to implement the main body of your thread instead. If you do so, you do not need to invoke `super`. You should never invoke this method directly. You should always start your thread by invoking the `start` method.
 func (o *NSThread) Main() {
 	o.Ptr().Send(_nSThreadSelMain)
 }
 
+// Returns the thread object representing the current thread of execution.
 func NSThreadCurrentThread() *NSThread {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSThread), _nSThreadSelCurrentThread)
 	if _ret != 0 {
@@ -152,6 +165,7 @@ func NSThreadCurrentThread() *NSThread {
 	return NSThreadFromID(_ret)
 }
 
+// The thread object's dictionary. You can use the returned dictionary to store thread-specific data. The thread dictionary is not used during any manipulations of the `NSThread` object -- it is simply a place where you can store any interesting data. For example, Foundation uses it to store the thread's default `NSConnection` and `NSAssertionHandler` instances. You may define your own keys for the dictionary.
 func (o *NSThread) ThreadDictionary() *NSMutableDictionary[objc.ID, objc.ID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSThreadSelThreadDictionary)
 	if _ret != 0 {
@@ -160,6 +174,7 @@ func (o *NSThread) ThreadDictionary() *NSMutableDictionary[objc.ID, objc.ID] {
 	return NSMutableDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
+// The receiver's priority. The thread's priority, which is specified by a floating point number from 0.0 to 1.0, where 1.0 is highest priority. The priorities in this range are mapped to the operating system's priority values. A "typical" thread priority might be 0.5, but because the priority is determined by the kernel, there is no guarantee what this value actually will be.
 func (o *NSThread) ThreadPriority() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSThreadSelThreadPriority)
 	return _ret
@@ -178,6 +193,7 @@ func (o *NSThread) SetQualityOfService(qualityOfService NSQualityOfService) {
 	o.Ptr().Send(_nSThreadSelSetQualityOfService, qualityOfService)
 }
 
+// Returns an array containing the call stack return addresses. Each element is an `NSNumber` object containing an `NSUInteger` value.
 func NSThreadCallStackReturnAddresses() *NSArray[*NSNumber] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSThread), _nSThreadSelCallStackReturnAddresses)
 	if _ret != 0 {
@@ -186,6 +202,7 @@ func NSThreadCallStackReturnAddresses() *NSArray[*NSNumber] {
 	return NSArrayFromID[*NSNumber](_ret)
 }
 
+// Returns an array containing the call stack symbols. Each element is an `NSString` object with a value in a format determined by the `backtrace_symbols()` function. The return value describes the call stack backtrace of the current thread at the moment this method was called.
 func NSThreadCallStackSymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSThread), _nSThreadSelCallStackSymbols)
 	if _ret != 0 {
@@ -194,6 +211,7 @@ func NSThreadCallStackSymbols() *NSArray[*NSString] {
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// The name of the receiver.
 func (o *NSThread) Name() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSThreadSelName)
 	if _ret != 0 {
@@ -206,6 +224,7 @@ func (o *NSThread) SetName(name *NSString) {
 	o.Ptr().Send(_nSThreadSelSetName, name.Ptr())
 }
 
+// The stack size of the receiver, in bytes. This value must be in bytes and a multiple of 4KB. To change the stack size, you must set this property before starting your thread. Setting the stack size after the thread has started changes the attribute size (which is reflected by the `stackSize` method), but it does not affect the actual number of pages set aside for the thread.
 func (o *NSThread) StackSize() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSThreadSelStackSize)
 	return _ret
@@ -215,16 +234,19 @@ func (o *NSThread) SetStackSize(stackSize uint) {
 	o.Ptr().Send(_nSThreadSelSetStackSize, stackSize)
 }
 
+// A Boolean value that indicates whether the receiver is the main thread.
 func (o *NSThread) IsMainThread() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSThreadSelIsMainThread)
 	return _ret
 }
 
+// Returns a Boolean value that indicates whether the current thread is the main thread.
 func NSThreadIsMainThread() bool {
 	_ret := objc.Send[bool](objc.ID(_clsNSThread), _nSThreadSelIsMainThread)
 	return _ret
 }
 
+// Returns the `NSThread` object representing the main thread.
 func NSThreadMainThread() *NSThread {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSThread), _nSThreadSelMainThread)
 	if _ret != 0 {
@@ -233,16 +255,19 @@ func NSThreadMainThread() *NSThread {
 	return NSThreadFromID(_ret)
 }
 
+// A Boolean value that indicates whether the receiver is executing.
 func (o *NSThread) IsExecuting() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSThreadSelIsExecuting)
 	return _ret
 }
 
+// A Boolean value that indicates whether the receiver has finished execution.
 func (o *NSThread) IsFinished() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSThreadSelIsFinished)
 	return _ret
 }
 
+// A Boolean value that indicates whether the receiver is cancelled. If your thread supports cancellation, it should check this property periodically and exit if it ever returns `YES`.
 func (o *NSThread) IsCancelled() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSThreadSelIsCancelled)
 	return _ret

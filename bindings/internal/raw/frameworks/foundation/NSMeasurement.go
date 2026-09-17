@@ -79,11 +79,13 @@ func (o *NSMeasurement[UnitType]) MeasurementBySubtractingMeasurement(measuremen
 	return NSMeasurementFromID[UnitType](_ret)
 }
 
+// The unit component of the measurement.
 func (o *NSMeasurement[UnitType]) Unit() UnitType {
 	_ret := objc.Send[UnitType](o.Ptr(), _nSMeasurementSelUnit)
 	return _ret
 }
 
+// The value component of the measurement.
 func (o *NSMeasurement[UnitType]) DoubleValue() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSMeasurementSelDoubleValue)
 	return _ret

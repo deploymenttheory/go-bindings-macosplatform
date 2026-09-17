@@ -61,9 +61,16 @@ func DOMXPathException() *foundation.NSString {
 }
 
 // @abstract Indicates which local files WebKit can access when loading content. @discussion If NSReadAccessURLDocumentOption references a single file, only that file may be loaded by WebKit. If NSReadAccessURLDocumentOption references a directory, files inside that directory may be loaded by WebKit.
-func NSReadAccessURLDocumentOption() uintptr {
+func NSReadAccessURLDocumentOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "NSReadAccessURLDocumentOption")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant WKErrorDomain Indicates a WebKit error.
@@ -79,34 +86,76 @@ func WKErrorDomain() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
-func WKWebExtensionContextDeniedPermissionMatchPatternsWereRemovedNotification() uintptr {
+func WKWebExtensionContextDeniedPermissionMatchPatternsWereRemovedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WKWebExtensionContextDeniedPermissionMatchPatternsWereRemovedNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func WKWebExtensionContextDeniedPermissionsWereRemovedNotification() uintptr {
+func WKWebExtensionContextDeniedPermissionsWereRemovedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WKWebExtensionContextDeniedPermissionsWereRemovedNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func WKWebExtensionContextErrorDomain() uintptr {
+func WKWebExtensionContextErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WKWebExtensionContextErrorDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func WKWebExtensionContextErrorsDidUpdateNotification() uintptr {
+func WKWebExtensionContextErrorsDidUpdateNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WKWebExtensionContextErrorsDidUpdateNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func WKWebExtensionContextGrantedPermissionMatchPatternsWereRemovedNotification() uintptr {
+func WKWebExtensionContextGrantedPermissionMatchPatternsWereRemovedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WKWebExtensionContextGrantedPermissionMatchPatternsWereRemovedNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func WKWebExtensionContextGrantedPermissionsWereRemovedNotification() uintptr {
+func WKWebExtensionContextGrantedPermissionsWereRemovedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WKWebExtensionContextGrantedPermissionsWereRemovedNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func WKWebExtensionContextNotificationUserInfoKeyMatchPatterns() *foundation.NSString {
@@ -133,29 +182,64 @@ func WKWebExtensionContextNotificationUserInfoKeyPermissions() *foundation.NSStr
 	return foundation.NSStringFromID(id)
 }
 
-func WKWebExtensionContextPermissionMatchPatternsWereDeniedNotification() uintptr {
+func WKWebExtensionContextPermissionMatchPatternsWereDeniedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WKWebExtensionContextPermissionMatchPatternsWereDeniedNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func WKWebExtensionContextPermissionMatchPatternsWereGrantedNotification() uintptr {
+func WKWebExtensionContextPermissionMatchPatternsWereGrantedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WKWebExtensionContextPermissionMatchPatternsWereGrantedNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func WKWebExtensionContextPermissionsWereDeniedNotification() uintptr {
+func WKWebExtensionContextPermissionsWereDeniedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WKWebExtensionContextPermissionsWereDeniedNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func WKWebExtensionContextPermissionsWereGrantedNotification() uintptr {
+func WKWebExtensionContextPermissionsWereGrantedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WKWebExtensionContextPermissionsWereGrantedNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func WKWebExtensionDataRecordErrorDomain() uintptr {
+func WKWebExtensionDataRecordErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WKWebExtensionDataRecordErrorDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func WKWebExtensionDataTypeLocal() *foundation.NSString {
@@ -194,19 +278,40 @@ func WKWebExtensionDataTypeSynchronized() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
-func WKWebExtensionErrorDomain() uintptr {
+func WKWebExtensionErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WKWebExtensionErrorDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func WKWebExtensionMatchPatternErrorDomain() uintptr {
+func WKWebExtensionMatchPatternErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WKWebExtensionMatchPatternErrorDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func WKWebExtensionMessagePortErrorDomain() uintptr {
+func WKWebExtensionMessagePortErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WKWebExtensionMessagePortErrorDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func WKWebExtensionPermissionActiveTab() *foundation.NSString {
@@ -533,9 +638,16 @@ func WKWebsiteDataTypeOfflineWebApplicationCache() *foundation.NSString {
 }
 
 // @constant WKWebsiteDataTypeScreenTime Screen Time information
-func WKWebsiteDataTypeScreenTime() uintptr {
+func WKWebsiteDataTypeScreenTime() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WKWebsiteDataTypeScreenTime")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant WKWebsiteDataTypeSearchFieldRecentSearches Search field history.

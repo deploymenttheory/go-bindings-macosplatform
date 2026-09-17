@@ -9,7 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An abstract class that declares an interface for objects that create, interpret, and validate the textual representation of values.
+// An abstract class that declares an interface for objects that create, interpret, and validate the textual representation of values. The Foundation framework provides several concrete subclasses of “Formatter“, including “ByteCountFormatter“, “DateFormatter“, “DateComponentsFormatter“, “DateIntervalFormatter“, “MeasurementFormatter“, “NumberFormatter“, and “PersonNameComponentsFormatter“. > Tip: > In Swift, you can use implementations of “FormatStyle“ rather than “Formatter“. The “FormatStyle“ API offers a declarative idiom for customizing the formatting of various types. Also, Foundation caches identical “FormatStyle“ instances, so you don't need to pass them around your app, or risk wasting memory with duplicate formatters. ### Subclassing Notes “Formatter“ is intended for subclassing. A custom formatter can restrict the input and enhance the display of data in novel ways. For example, you could have a custom formatter that ensures that serial numbers entered by a user conform to predefined formats. Before you decide to create a custom formatter, make sure that you cannot configure the public subclasses to satisfy your requirements. For instructions on how to create your own custom formatter, see [Creating a Custom Formatter](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/DataFormatting/Articles/CreatingACustomFormatter.html#//apple_ref/doc/uid/20000196).
 //
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsformatter
 type NSFormatter struct {
@@ -36,6 +36,7 @@ func NSFormatterFromID(id objc.ID) *NSFormatter {
 	return o
 }
 
+// Returns a string representation of a given object.
 func (o *NSFormatter) StringForObjectValue(obj objc.ID) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFormatterSelStringForObjectValue, obj)
 	if _ret != 0 {
@@ -44,6 +45,7 @@ func (o *NSFormatter) StringForObjectValue(obj objc.ID) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns an attributed string representation of a given object.
 func (o *NSFormatter) AttributedStringForObjectValueWithDefaultAttributes(obj objc.ID, attrs *NSDictionary[*NSString, objc.ID]) *NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFormatterSelAttributedStringForObjectValueWithDefaultAttributes, obj, attrs.Ptr())
 	if _ret != 0 {
@@ -52,6 +54,7 @@ func (o *NSFormatter) AttributedStringForObjectValueWithDefaultAttributes(obj ob
 	return NSAttributedStringFromID(_ret)
 }
 
+// Returns a string to use for editing a given object.
 func (o *NSFormatter) EditingStringForObjectValue(obj objc.ID) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFormatterSelEditingStringForObjectValue, obj)
 	if _ret != 0 {
@@ -60,16 +63,19 @@ func (o *NSFormatter) EditingStringForObjectValue(obj objc.ID) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns by reference an object after creating it from a string.
 func (o *NSFormatter) GetObjectValueForStringErrorDescription(obj **ObjcObject, string_ *NSString, error_ *NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSFormatterSelGetObjectValueForStringErrorDescription, obj, string_.Ptr(), error_.Ptr())
 	return _ret
 }
 
+// Returns a Boolean value that indicates whether a partial string is valid. Compatibility method.  If a subclass overrides this and does not override the new method below, this will be called as before (the new method just calls this one by default).  The selection range will always be set to the end of the text with this method if replacement occurs.
 func (o *NSFormatter) IsPartialStringValidNewEditingStringErrorDescription(partialString *NSString, newString *NSString, error_ *NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSFormatterSelIsPartialStringValidNewEditingStringErrorDescription, partialString.Ptr(), newString.Ptr(), error_.Ptr())
 	return _ret
 }
 
+// This method should be implemented in subclasses that want to validate user changes to a string in a field, where the user changes are not necessarily at the end of the string, and preserve the selection (or set a different one, such as selecting the erroneous part of the string the user has typed).
 func (o *NSFormatter) IsPartialStringValidProposedSelectedRangeOriginalStringOriginalSelectedRangeErrorDescription(partialStringPtr *NSString, proposedSelRangePtr *NSRange, origString *NSString, origSelRange NSRange, error_ *NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSFormatterSelIsPartialStringValidProposedSelectedRangeOriginalStringOriginalSelectedRangeErrorDescription, partialStringPtr.Ptr(), proposedSelRangePtr, origString.Ptr(), origSelRange, error_.Ptr())
 	return _ret

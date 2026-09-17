@@ -886,6 +886,12 @@ type NSStackViewDelegate interface {
 type NSStandardKeyBindingResponding interface {
 }
 
+// NSStatusItemExpandedInterfaceDelegate wraps the ObjC protocol NSStatusItemExpandedInterfaceDelegate.
+type NSStatusItemExpandedInterfaceDelegate interface {
+	StatusItemDidBeginExpandedInterfaceSession(statusItem *NSStatusItem, expandedInterfaceSession *NSStatusItemExpandedInterfaceSession)
+	StatusItemDidEndExpandedInterfaceSessionAnimated(statusItem *NSStatusItem, animated bool)
+}
+
 // NSTabViewDelegate wraps the ObjC protocol NSTabViewDelegate.
 type NSTabViewDelegate interface {
 }
@@ -1026,6 +1032,12 @@ type NSTextLocation interface {
 type NSTextSelectionDataSource interface {
 }
 
+// NSTextSelectionManagerDelegate wraps the ObjC protocol NSTextSelectionManagerDelegate.
+type NSTextSelectionManagerDelegate interface {
+	TextSelection() *NSTextSelection
+	SetTextSelection(textSelection *NSTextSelection)
+}
+
 // NSTextStorageDelegate wraps the ObjC protocol NSTextStorageDelegate.
 type NSTextStorageDelegate interface {
 }
@@ -1041,8 +1053,14 @@ type NSTextViewDelegate interface {
 
 // NSTextViewportLayoutControllerDelegate wraps the ObjC protocol NSTextViewportLayoutControllerDelegate.
 type NSTextViewportLayoutControllerDelegate interface {
-	ViewportBoundsForTextViewportLayoutController(textViewportLayoutController *NSTextViewportLayoutController) corefoundation.CGRect
-	TextViewportLayoutControllerConfigureRenderingSurfaceForTextLayoutFragment(textViewportLayoutController *NSTextViewportLayoutController, textLayoutFragment *NSTextLayoutFragment)
+}
+
+// NSTextViewportRenderingSurface wraps the ObjC protocol NSTextViewportRenderingSurface.
+type NSTextViewportRenderingSurface interface {
+}
+
+// NSTextViewportRenderingSurfaceKey wraps the ObjC protocol NSTextViewportRenderingSurfaceKey.
+type NSTextViewportRenderingSurfaceKey interface {
 }
 
 // NSTokenFieldCellDelegate wraps the ObjC protocol NSTokenFieldCellDelegate.

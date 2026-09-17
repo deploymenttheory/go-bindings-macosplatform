@@ -32,6 +32,8 @@ var (
 	_mPSGraphSelRunAsyncWithFeedsTargetTensorsTargetOperationsExecutionDescriptor                                                                                                            = objc.RegisterName("runAsyncWithFeeds:targetTensors:targetOperations:executionDescriptor:")
 	_mPSGraphSelRunAsyncWithMTLCommandQueueFeedsTargetTensorsTargetOperationsExecutionDescriptor                                                                                             = objc.RegisterName("runAsyncWithMTLCommandQueue:feeds:targetTensors:targetOperations:executionDescriptor:")
 	_mPSGraphSelRunAsyncWithMTLCommandQueueFeedsTargetOperationsResultsDictionaryExecutionDescriptor                                                                                         = objc.RegisterName("runAsyncWithMTLCommandQueue:feeds:targetOperations:resultsDictionary:executionDescriptor:")
+	_mPSGraphSelRunAsyncWithMTL4CommandQueueFeedsTargetTensorsTargetOperationsExecutionDescriptor                                                                                            = objc.RegisterName("runAsyncWithMTL4CommandQueue:feeds:targetTensors:targetOperations:executionDescriptor:")
+	_mPSGraphSelRunAsyncWithMTL4CommandQueueFeedsTargetOperationsResultsDictionaryExecutionDescriptor                                                                                        = objc.RegisterName("runAsyncWithMTL4CommandQueue:feeds:targetOperations:resultsDictionary:executionDescriptor:")
 	_mPSGraphSelEncodeToCommandBufferFeedsTargetTensorsTargetOperationsExecutionDescriptor                                                                                                   = objc.RegisterName("encodeToCommandBuffer:feeds:targetTensors:targetOperations:executionDescriptor:")
 	_mPSGraphSelEncodeToCommandBufferFeedsTargetOperationsResultsDictionaryExecutionDescriptor                                                                                               = objc.RegisterName("encodeToCommandBuffer:feeds:targetOperations:resultsDictionary:executionDescriptor:")
 	_mPSGraphSelOptions                                                                                                                                                                      = objc.RegisterName("options")
@@ -190,6 +192,7 @@ var (
 	_mPSGraphSelHammingDistanceWithPrimaryTensorSecondaryTensorResultDataTypeName                                                                                                            = objc.RegisterName("HammingDistanceWithPrimaryTensor:secondaryTensor:resultDataType:name:")
 	_mPSGraphSelScaledDotProductAttentionWithQueryTensorKeyTensorValueTensorMaskTensorScaleName                                                                                              = objc.RegisterName("scaledDotProductAttentionWithQueryTensor:keyTensor:valueTensor:maskTensor:scale:name:")
 	_mPSGraphSelScaledDotProductAttentionWithQueryTensorKeyTensorValueTensorScaleName                                                                                                        = objc.RegisterName("scaledDotProductAttentionWithQueryTensor:keyTensor:valueTensor:scale:name:")
+	_mPSGraphSelScaledDotProductAttentionWithQueryTensorKeyTensorValueTensorDescriptorName                                                                                                   = objc.RegisterName("scaledDotProductAttentionWithQueryTensor:keyTensor:valueTensor:descriptor:name:")
 	_mPSGraphSelPlaceholderWithShapeDataTypeName                                                                                                                                             = objc.RegisterName("placeholderWithShape:dataType:name:")
 	_mPSGraphSelPlaceholderWithShapeName                                                                                                                                                     = objc.RegisterName("placeholderWithShape:name:")
 	_mPSGraphSelConstantWithDataShapeDataType                                                                                                                                                = objc.RegisterName("constantWithData:shape:dataType:")
@@ -483,6 +486,17 @@ func (o *MPSGraph) RunAsyncWithMTLCommandQueueFeedsTargetTensorsTargetOperations
 // Encodes the graph for the given feeds to returns the target tensor values in the results dictionary provided by the user.
 func (o *MPSGraph) RunAsyncWithMTLCommandQueueFeedsTargetOperationsResultsDictionaryExecutionDescriptor(commandQueue metal.MTLCommandQueue, feeds unsafe.Pointer, targetOperations *foundation.NSArray[*MPSGraphOperation], resultsDictionary unsafe.Pointer, executionDescriptor *MPSGraphExecutionDescriptor) {
 	o.Ptr().Send(_mPSGraphSelRunAsyncWithMTLCommandQueueFeedsTargetOperationsResultsDictionaryExecutionDescriptor, commandQueue, feeds, targetOperations.Ptr(), resultsDictionary, executionDescriptor.Ptr())
+}
+
+// Runs the graph for the given feeds and returns the target tensor values, ensuring all target operations also executed.
+func (o *MPSGraph) RunAsyncWithMTL4CommandQueueFeedsTargetTensorsTargetOperationsExecutionDescriptor(commandQueue metal.MTL4CommandQueue, feeds unsafe.Pointer, targetTensors *foundation.NSArray[*MPSGraphTensor], targetOperations *foundation.NSArray[*MPSGraphOperation], executionDescriptor *MPSGraphExecutionDescriptor) unsafe.Pointer {
+	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _mPSGraphSelRunAsyncWithMTL4CommandQueueFeedsTargetTensorsTargetOperationsExecutionDescriptor, commandQueue, feeds, targetTensors.Ptr(), targetOperations.Ptr(), executionDescriptor.Ptr())
+	return _ret
+}
+
+// Encodes the graph for the given feeds to returns the target tensor values in the results dictionary provided by the user.
+func (o *MPSGraph) RunAsyncWithMTL4CommandQueueFeedsTargetOperationsResultsDictionaryExecutionDescriptor(commandQueue metal.MTL4CommandQueue, feeds unsafe.Pointer, targetOperations *foundation.NSArray[*MPSGraphOperation], resultsDictionary unsafe.Pointer, executionDescriptor *MPSGraphExecutionDescriptor) {
+	o.Ptr().Send(_mPSGraphSelRunAsyncWithMTL4CommandQueueFeedsTargetOperationsResultsDictionaryExecutionDescriptor, commandQueue, feeds, targetOperations.Ptr(), resultsDictionary, executionDescriptor.Ptr())
 }
 
 // Encodes the graph for the given feeds to returns the target tensor values, ensuring all target operations also executed.
@@ -1886,6 +1900,15 @@ func (o *MPSGraph) ScaledDotProductAttentionWithQueryTensorKeyTensorValueTensorM
 // Creates a scaled dot product attention (SDPA) operation (without a mask) and returns the result tensor.
 func (o *MPSGraph) ScaledDotProductAttentionWithQueryTensorKeyTensorValueTensorScaleName(queryTensor *MPSGraphTensor, keyTensor *MPSGraphTensor, valueTensor *MPSGraphTensor, scale float32, name *foundation.NSString) *MPSGraphTensor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSGraphSelScaledDotProductAttentionWithQueryTensorKeyTensorValueTensorScaleName, queryTensor.Ptr(), keyTensor.Ptr(), valueTensor.Ptr(), scale, name.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return MPSGraphTensorFromID(_ret)
+}
+
+// Creates a scaled dot product attention (SDPA) operation using a descriptor and returns the result tensor.
+func (o *MPSGraph) ScaledDotProductAttentionWithQueryTensorKeyTensorValueTensorDescriptorName(queryTensor *MPSGraphTensor, keyTensor *MPSGraphTensor, valueTensor *MPSGraphTensor, descriptor *MPSGraphSDPADescriptor, name *foundation.NSString) *MPSGraphTensor {
+	_ret := objc.Send[objc.ID](o.Ptr(), _mPSGraphSelScaledDotProductAttentionWithQueryTensorKeyTensorValueTensorDescriptorName, queryTensor.Ptr(), keyTensor.Ptr(), valueTensor.Ptr(), descriptor.Ptr(), name.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

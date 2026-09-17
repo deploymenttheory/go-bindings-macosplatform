@@ -104,6 +104,7 @@ func (o *NSMutableAttributedString) EndEditing() {
 	o.Ptr().Send(_nSMutableAttributedStringSelEndEditing)
 }
 
+// The character contents of the receiver as a mutable string object. The receiver tracks changes to this string and keeps its attribute mappings up to date.
 func (o *NSMutableAttributedString) MutableString() *NSMutableString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMutableAttributedStringSelMutableString)
 	if _ret != 0 {

@@ -64,6 +64,7 @@ func NSTextListElementTextListElementWithChildElementsTextListNestingLevel(child
 	return NSTextListElementFromID(_ret)
 }
 
+// The value that represents the text list.
 func (o *NSTextListElement) TextList() *NSTextList {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextListElementSelTextList)
 	if _ret != 0 {
@@ -72,6 +73,7 @@ func (o *NSTextListElement) TextList() *NSTextList {
 	return NSTextListFromID(_ret)
 }
 
+// The text list element contents without markers and formatting.
 func (o *NSTextListElement) Contents() *foundation.NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextListElementSelContents)
 	if _ret != 0 {
@@ -80,6 +82,7 @@ func (o *NSTextListElement) Contents() *foundation.NSAttributedString {
 	return foundation.NSAttributedStringFromID(_ret)
 }
 
+// A dictionary of attributed string keys and values that represent the list's marker attributes.
 func (o *NSTextListElement) MarkerAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextListElementSelMarkerAttributes)
 	if _ret != 0 {

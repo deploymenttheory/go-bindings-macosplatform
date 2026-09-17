@@ -17,6 +17,21 @@ var ErrDeviceInitializationFailure = errkit.New("VZErrorDomain", 30003)
 // ErrDeviceNotFound matches the Virtualization error VZErrorDeviceNotFound.
 var ErrDeviceNotFound = errkit.New("VZErrorDomain", 30004)
 
+// ErrEFISecureBootEnrollmentFailed matches the Virtualization error VZErrorEFISecureBootEnrollmentFailed.
+var ErrEFISecureBootEnrollmentFailed = errkit.New("VZErrorDomain", 50001)
+
+// ErrEFIVariableInaccessible matches the Virtualization error VZErrorEFIVariableInaccessible.
+var ErrEFIVariableInaccessible = errkit.New("VZErrorDomain", 50002)
+
+// ErrGuestProvisioningInvalidFullName matches the Virtualization error VZErrorGuestProvisioningInvalidFullName.
+var ErrGuestProvisioningInvalidFullName = errkit.New("VZErrorDomain", 40001)
+
+// ErrGuestProvisioningInvalidPassword matches the Virtualization error VZErrorGuestProvisioningInvalidPassword.
+var ErrGuestProvisioningInvalidPassword = errkit.New("VZErrorDomain", 40003)
+
+// ErrGuestProvisioningInvalidUsername matches the Virtualization error VZErrorGuestProvisioningInvalidUsername.
+var ErrGuestProvisioningInvalidUsername = errkit.New("VZErrorDomain", 40002)
+
 // ErrInstallationFailed matches the Virtualization error VZErrorInstallationFailed.
 var ErrInstallationFailed = errkit.New("VZErrorDomain", 10007)
 

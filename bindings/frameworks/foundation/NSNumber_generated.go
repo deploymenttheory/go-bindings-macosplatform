@@ -202,112 +202,112 @@ func (n *Number) DescriptionWithLocale(locale obj.Object) string {
 	return purego.GoString(_r)
 }
 
-// CharValue returns the char value.
+// CharValue returns the number object's value expressed as a `char`.
 func (n *Number) CharValue() int8 {
 	defer runtime.KeepAlive(n)
 	_r := objc.Send[int8](objref.IDOf(n), objc.RegisterName("charValue"))
 	return _r
 }
 
-// UnsignedCharValue returns the unsigned char value.
+// UnsignedCharValue returns the number object's value expressed as an `unsigned char`.
 func (n *Number) UnsignedCharValue() uint8 {
 	defer runtime.KeepAlive(n)
 	_r := objc.Send[uint8](objref.IDOf(n), objc.RegisterName("unsignedCharValue"))
 	return _r
 }
 
-// ShortValue returns the short value.
+// ShortValue returns the number object's value expressed as a `short`.
 func (n *Number) ShortValue() int16 {
 	defer runtime.KeepAlive(n)
 	_r := objc.Send[int16](objref.IDOf(n), objc.RegisterName("shortValue"))
 	return _r
 }
 
-// UnsignedShortValue returns the unsigned short value.
+// UnsignedShortValue returns the number object's value expressed as an `unsigned short`.
 func (n *Number) UnsignedShortValue() uint16 {
 	defer runtime.KeepAlive(n)
 	_r := objc.Send[uint16](objref.IDOf(n), objc.RegisterName("unsignedShortValue"))
 	return _r
 }
 
-// IntValue returns the int value.
+// IntValue returns the number object's value expressed as an `int`.
 func (n *Number) IntValue() int {
 	defer runtime.KeepAlive(n)
 	_r := objc.Send[int](objref.IDOf(n), objc.RegisterName("intValue"))
 	return _r
 }
 
-// UnsignedIntValue returns the unsigned int value.
+// UnsignedIntValue returns the number object's value expressed as an `unsigned int`.
 func (n *Number) UnsignedIntValue() int {
 	defer runtime.KeepAlive(n)
 	_r := objc.Send[int](objref.IDOf(n), objc.RegisterName("unsignedIntValue"))
 	return _r
 }
 
-// LongValue returns the long value.
+// LongValue returns the number object's value expressed as a `long`.
 func (n *Number) LongValue() int {
 	defer runtime.KeepAlive(n)
 	_r := objc.Send[int](objref.IDOf(n), objc.RegisterName("longValue"))
 	return _r
 }
 
-// UnsignedLongValue returns the unsigned long value.
+// UnsignedLongValue returns the number object's value expressed as an `unsigned long`.
 func (n *Number) UnsignedLongValue() int {
 	defer runtime.KeepAlive(n)
 	_r := objc.Send[int](objref.IDOf(n), objc.RegisterName("unsignedLongValue"))
 	return _r
 }
 
-// LongLongValue returns the long long value.
+// LongLongValue returns the number object's value expressed as a `long long`.
 func (n *Number) LongLongValue() int64 {
 	defer runtime.KeepAlive(n)
 	_r := objc.Send[int64](objref.IDOf(n), objc.RegisterName("longLongValue"))
 	return _r
 }
 
-// UnsignedLongLongValue returns the unsigned long long value.
+// UnsignedLongLongValue returns the number object's value expressed as an `unsigned long long`.
 func (n *Number) UnsignedLongLongValue() uint64 {
 	defer runtime.KeepAlive(n)
 	_r := objc.Send[uint64](objref.IDOf(n), objc.RegisterName("unsignedLongLongValue"))
 	return _r
 }
 
-// FloatValue returns the float value.
+// FloatValue returns the number object's value expressed as a `float`.
 func (n *Number) FloatValue() float32 {
 	defer runtime.KeepAlive(n)
 	_r := objc.Send[float32](objref.IDOf(n), objc.RegisterName("floatValue"))
 	return _r
 }
 
-// DoubleValue returns the double value.
+// DoubleValue returns the number object's value expressed as a `double`.
 func (n *Number) DoubleValue() float64 {
 	defer runtime.KeepAlive(n)
 	_r := objc.Send[float64](objref.IDOf(n), objc.RegisterName("doubleValue"))
 	return _r
 }
 
-// BoolValue wraps the corresponding Objective-C method.
+// BoolValue reports whether the number object's value expressed as a Boolean value. A `0` value always means `NO`, and any nonzero value is interpreted as `YES`.
 func (n *Number) BoolValue() bool {
 	defer runtime.KeepAlive(n)
 	_r := objc.Send[bool](objref.IDOf(n), objc.RegisterName("boolValue"))
 	return _r
 }
 
-// IntegerValue returns the integer value.
+// IntegerValue returns the number object's value expressed as an `NSInteger`.
 func (n *Number) IntegerValue() int {
 	defer runtime.KeepAlive(n)
 	_r := objc.Send[int](objref.IDOf(n), objc.RegisterName("integerValue"))
 	return _r
 }
 
-// UnsignedIntegerValue returns the unsigned integer value.
+// UnsignedIntegerValue returns the number object's value expressed as an `NSUInteger`.
 func (n *Number) UnsignedIntegerValue() int {
 	defer runtime.KeepAlive(n)
 	_r := objc.Send[int](objref.IDOf(n), objc.RegisterName("unsignedIntegerValue"))
 	return _r
 }
 
-// StringValue returns the string value.
+// StringValue returns the number object's value expressed as a human-readable string. The string is created by invoking “NSNumber/descriptionWithLocale:“ where locale is `nil`.
 func (n *Number) StringValue() string {
 	defer runtime.KeepAlive(n)
 	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("stringValue"))

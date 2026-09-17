@@ -372,6 +372,11 @@ func MPNowPlayingInfoProperty3x4AnimatedArtwork() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("MPNowPlayingInfoProperty3x4AnimatedArtwork")))
 }
 
+// MPNowPlayingInfoPropertyAppEntityIdentifiers returns the string constant MPNowPlayingInfoPropertyAppEntityIdentifiers, for use as a dictionary key or argument.
+func MPNowPlayingInfoPropertyAppEntityIdentifiers() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPNowPlayingInfoPropertyAppEntityIdentifiers")))
+}
+
 // MPLanguageOptionCharacteristicIsMainProgramContent returns the string constant MPLanguageOptionCharacteristicIsMainProgramContent, for use as a dictionary key or argument.
 func MPLanguageOptionCharacteristicIsMainProgramContent() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("MPLanguageOptionCharacteristicIsMainProgramContent")))

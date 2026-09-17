@@ -67,14 +67,14 @@ func NewMTRBaseClusterGroupKeyManagementWithDeviceEndpointQueue(device *MTRBaseD
 	return mTRBaseClusterGroupKeyManagementAdopt(_id)
 }
 
-// KeySetWriteWithParamsCompletion command KeySetWrite Write a new set of keys for the given key set id.
+// KeySetWriteWithParamsCompletion command KeySetWrite This command is used by Administrators to set the state of a given Group Key Set, including atomically updating the state of all epoch keys.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) KeySetWriteWithParamsCompletion(params *MTRGroupKeyManagementClusterKeySetWriteParams, completion func(unsafe.Pointer)) {
 	defer runtime.KeepAlive(mbcgkm)
 	defer runtime.KeepAlive(params)
 	objc.Send[objc.ID](objref.IDOf(mbcgkm), objc.RegisterName("keySetWriteWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
-// KeySetReadWithParamsCompletion command KeySetRead Read the keys for a given key set id.
+// KeySetReadWithParamsCompletion command KeySetRead This command is used by Administrators to read the state of a given Group Key Set.
 //
 // KeySetReadWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) KeySetReadWithParamsCompletion(ctx context.Context, params *MTRGroupKeyManagementClusterKeySetReadParams) (result *MTRGroupKeyManagementClusterKeySetReadResponseParams, err error) {
@@ -101,14 +101,14 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) KeySetReadWithParamsCompletion(c
 	}
 }
 
-// KeySetRemoveWithParamsCompletion command KeySetRemove Revoke a Root Key from a Group
+// KeySetRemoveWithParamsCompletion command KeySetRemove This command is used by Administrators to remove all state of a given Group Key Set.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) KeySetRemoveWithParamsCompletion(params *MTRGroupKeyManagementClusterKeySetRemoveParams, completion func(unsafe.Pointer)) {
 	defer runtime.KeepAlive(mbcgkm)
 	defer runtime.KeepAlive(params)
 	objc.Send[objc.ID](objref.IDOf(mbcgkm), objc.RegisterName("keySetRemoveWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
-// KeySetReadAllIndicesWithParamsCompletion command KeySetReadAllIndices Return the list of Group Key Sets associated with the accessing fabric
+// KeySetReadAllIndicesWithParamsCompletion command KeySetReadAllIndices This command is used by Administrators to query a list of all Group Key Sets associated with the accessing fabric.
 //
 // KeySetReadAllIndicesWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) KeySetReadAllIndicesWithParamsCompletion(ctx context.Context, params *MTRGroupKeyManagementClusterKeySetReadAllIndicesParams) (result *MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams, err error) {

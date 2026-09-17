@@ -4,81 +4,163 @@
 package corewlan
 
 import (
+	"unsafe"
+
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/foundation"
 )
 
 // @constant CWBSSIDDidChangeNotification @abstract Posted when the BSSID of the Wi-Fi interface changes. @discussion The <i>object</i> for this notification is the corresponding Wi-Fi interface name. This notification does not contain a <i>userInfo</i> dictionary.
 // Deprecated: since macOS 10.10.
-func CWBSSIDDidChangeNotification() uintptr {
+func CWBSSIDDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corewlanLib, "CWBSSIDDidChangeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant CWCountryCodeDidChangeNotification @abstract Posted when the adopted country code of the Wi-Fi interface changes. @discussion The <i>object</i> for this notification is the corresponding Wi-Fi interface name. This notification does not contain a <i>userInfo</i> dictionary.
 // Deprecated: since macOS 10.10.
-func CWCountryCodeDidChangeNotification() uintptr {
+func CWCountryCodeDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corewlanLib, "CWCountryCodeDidChangeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant CWErrorDomain @abstract Error domain corresponding to the CWErr type.
-func CWErrorDomain() uintptr {
+func CWErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corewlanLib, "CWErrorDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant CWLinkDidChangeNotification @abstract Posted when the link of the Wi-Fi interface changes. @discussion The <i>object</i> for this notification is the corresponding Wi-Fi interface name. This notification does not contain a <i>userInfo</i> dictionary.
 // Deprecated: since macOS 10.10.
-func CWLinkDidChangeNotification() uintptr {
+func CWLinkDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corewlanLib, "CWLinkDidChangeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant CWLinkQualityDidChangeNotification @abstract Posted when the link quality of the current Wi-Fi association changes. @discussion The <i>object</i> for this notification is the corresponding Wi-Fi interface name. This notification does not contain a <i>userInfo</i> dictionary.
 // Deprecated: since macOS 10.10.
-func CWLinkQualityDidChangeNotification() uintptr {
+func CWLinkQualityDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corewlanLib, "CWLinkQualityDidChangeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant CWLinkQualityNotificationRSSIKey @abstract NSNumber containing the current RSSI value for the Wi-Fi interface. @discussion Found in the <i>userInfo</i> dictionary for the <i>CWLinkQualityChangedNotification</i>.
 // Deprecated: since macOS 10.10.
-func CWLinkQualityNotificationRSSIKey() uintptr {
+func CWLinkQualityNotificationRSSIKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corewlanLib, "CWLinkQualityNotificationRSSIKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant CWLinkQualityNotificationTransmitRateKey @abstract NSNumber containing the current transmit rate for the Wi-Fi interface. @discussion Found in the <i>userInfo</i> dictionary for the <i>CWLinkQualityChangedNotification</i>.
 // Deprecated: since macOS 10.10.
-func CWLinkQualityNotificationTransmitRateKey() uintptr {
+func CWLinkQualityNotificationTransmitRateKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corewlanLib, "CWLinkQualityNotificationTransmitRateKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant CWModeDidChangeNotification @abstract Posted when the operating mode of the Wi-Fi interface changes. @discussion The <i>object</i> for this notification is the corresponding Wi-Fi interface name. This notification does not contain a <i>userInfo</i> dictionary.
 // Deprecated: since macOS 10.10.
-func CWModeDidChangeNotification() uintptr {
+func CWModeDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corewlanLib, "CWModeDidChangeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant CWPowerDidChangeNotification @abstract Posted when the power state of the Wi-Fi interface changes. @discussion The <i>object</i> for this notification is the corresponding Wi-Fi interface name. This notification does not contain a <i>userInfo</i> dictionary.
 // Deprecated: since macOS 10.10.
-func CWPowerDidChangeNotification() uintptr {
+func CWPowerDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corewlanLib, "CWPowerDidChangeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant CWSSIDDidChangeNotification @abstract Posted when the SSID of the Wi-Fi interface changes. @discussion The <i>object</i> for this notification is the corresponding Wi-Fi interface name. This notification does not contain a <i>userInfo</i> dictionary.
 // Deprecated: since macOS 10.10.
-func CWSSIDDidChangeNotification() uintptr {
+func CWSSIDDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corewlanLib, "CWSSIDDidChangeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant CWScanCacheDidUpdateNotification @abstract Posted when the scan cache of the Wi-Fi interface is updated with new scan results. @discussion The <i>object</i> for this notification is the corresponding Wi-Fi interface name. This notification does not contain a <i>userInfo</i> dictionary.
 // Deprecated: since macOS 10.10.
-func CWScanCacheDidUpdateNotification() uintptr {
+func CWScanCacheDidUpdateNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corewlanLib, "CWScanCacheDidUpdateNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }

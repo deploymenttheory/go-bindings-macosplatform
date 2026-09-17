@@ -71,6 +71,13 @@ func (a *Asset) PlaybackStyle() AssetPlaybackStyle {
 	return _r
 }
 
+// PlaybackVariation returns the Live Photo playback variation for the asset. Use this value to determine whether a Live Photo plays back as a Long Exposure, Mirror (Bounce), or Autoloop (Loop): - `PHAssetPlaybackVariationNone`: the asset is not a Live Photo, or uses the default Live Photo presentation. - `PHAssetPlaybackVariationAutoloop`: the Live Photo plays back as a Loop. - `PHAssetPlaybackVariationMirror`: the Live Photo plays back as a Bounce. - `PHAssetPlaybackVariationLongExposure`: the Live Photo plays back as a Long Exposure.
+func (a *Asset) PlaybackVariation() AssetPlaybackVariation {
+	defer runtime.KeepAlive(a)
+	_r := objc.Send[AssetPlaybackVariation](objref.IDOf(a), objc.RegisterName("playbackVariation"))
+	return _r
+}
+
 // MediaType returns the media type.
 func (a *Asset) MediaType() AssetMediaType {
 	defer runtime.KeepAlive(a)
@@ -155,6 +162,13 @@ func (a *Asset) IsFavorite() bool {
 	return _r
 }
 
+// Rating returns the rating of this PHAsset.
+func (a *Asset) Rating() AssetRating {
+	defer runtime.KeepAlive(a)
+	_r := objc.Send[AssetRating](objref.IDOf(a), objc.RegisterName("rating"))
+	return _r
+}
+
 // IsSyncFailureHidden reports whether the object is sync failure hidden.
 func (a *Asset) IsSyncFailureHidden() bool {
 	defer runtime.KeepAlive(a)
@@ -208,6 +222,34 @@ func (a *Asset) AdjustmentFormatIdentifier() string {
 		return ""
 	}
 	return purego.GoString(_r)
+}
+
+// OriginalResourceChoice returns the original resource used as the basis for rendering this asset's derivatives. This value is only meaningful for assets that have a RAW alternate, such as RAW+JPEG assets, where it indicates whether the RAW or the compressed resource serves as the unadjusted base. For all other assets the value is “PHOriginalResourceChoice/PHOriginalResourceChoiceCompressed“.
+func (a *Asset) OriginalResourceChoice() OriginalResourceChoice {
+	defer runtime.KeepAlive(a)
+	_r := objc.Send[OriginalResourceChoice](objref.IDOf(a), objc.RegisterName("originalResourceChoice"))
+	return _r
+}
+
+// ExtendedMetadata returns an accessor to other asset properties. By default these properties are fetched on demand. They can be prefetched by toggling `PHFetchOptions.prefetchAssetExtendedMetadata`.
+func (a *Asset) ExtendedMetadata() *AssetExtendedMetadata {
+	defer runtime.KeepAlive(a)
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("extendedMetadata"))
+	return AssetExtendedMetadataFromID(_r)
+}
+
+// AdjustmentsState returns the adjustments state.
+func (a *Asset) AdjustmentsState() AssetAdjustmentsState {
+	defer runtime.KeepAlive(a)
+	_r := objc.Send[AssetAdjustmentsState](objref.IDOf(a), objc.RegisterName("adjustmentsState"))
+	return _r
+}
+
+// AdjustmentTimestamp returns the date when the asset was last edited. If the asset has never been edited, then this property is nil. If the asset was edited and later reverted, such that hasAdjustments is false, then `adjustmentTimestamp` is the timestamp of the revert operation.
+func (a *Asset) AdjustmentTimestamp() time.Time {
+	defer runtime.KeepAlive(a)
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("adjustmentTimestamp"))
+	return rt.NSDateToTime(_r)
 }
 
 // RequestContentEditingInputWithOptionsCompletionHandler requests asset information for beginning a content editing session.

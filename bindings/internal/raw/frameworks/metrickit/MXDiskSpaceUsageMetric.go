@@ -13,6 +13,7 @@ import (
 // An object representing metrics about your app’s disk space usage.
 //
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxdiskspaceusagemetric
+// Deprecated: Use MetricResult instead.
 type MXDiskSpaceUsageMetric struct {
 	MXMetric
 }

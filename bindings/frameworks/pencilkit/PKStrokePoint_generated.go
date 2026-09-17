@@ -16,8 +16,6 @@ import (
 )
 
 // StrokePoint is an idiomatic wrapper over the Objective-C class PKStrokePoint.
-//
-// A structure that represents the properties of a specific point along a stroke’s path.
 type StrokePoint struct {
 	objref.Handle
 }
@@ -74,86 +72,100 @@ func (sp *StrokePoint) String() string {
 	return rt.Description(objref.IDOf(sp))
 }
 
-// NewStrokePointWithLocationTimeOffsetSizeOpacityForceAzimuthAltitude create a new point with the provided properties.
+// NewStrokePointWithLocationTimeOffsetSizeOpacityForceAzimuthAltitude creates a stroke point with the specified properties.
 func NewStrokePointWithLocationTimeOffsetSizeOpacityForceAzimuthAltitude(location corefoundation.CGPoint, timeOffset float64, size corefoundation.CGSize, opacity float64, force float64, azimuth float64, altitude float64) *StrokePoint {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKStrokePoint")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocation:timeOffset:size:opacity:force:azimuth:altitude:"), location, timeOffset, size, opacity, force, azimuth, altitude)
 	return strokePointAdopt(_id)
 }
 
-// NewStrokePointWithLocationTimeOffsetSizeOpacityForceAzimuthAltitudeSecondaryScale create a new point with the provided properties.
+// NewStrokePointWithLocationTimeOffsetSizeOpacityForceAzimuthAltitudeSecondaryScale creates a stroke point with the specified properties, including secondary scale.
 func NewStrokePointWithLocationTimeOffsetSizeOpacityForceAzimuthAltitudeSecondaryScale(location corefoundation.CGPoint, timeOffset float64, size corefoundation.CGSize, opacity float64, force float64, azimuth float64, altitude float64, secondaryScale float64) *StrokePoint {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKStrokePoint")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocation:timeOffset:size:opacity:force:azimuth:altitude:secondaryScale:"), location, timeOffset, size, opacity, force, azimuth, altitude, secondaryScale)
 	return strokePointAdopt(_id)
 }
 
-// NewStrokePointWithLocationTimeOffsetSizeOpacityForceAzimuthAltitudeSecondaryScaleThreshold create a new point with the provided properties.
+// NewStrokePointWithLocationTimeOffsetSizeOpacityForceAzimuthAltitudeSecondaryScaleThreshold creates a stroke point with the specified properties, including a rendering threshold.
 func NewStrokePointWithLocationTimeOffsetSizeOpacityForceAzimuthAltitudeSecondaryScaleThreshold(location corefoundation.CGPoint, timeOffset float64, size corefoundation.CGSize, opacity float64, force float64, azimuth float64, altitude float64, secondaryScale float64, threshold float64) *StrokePoint {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKStrokePoint")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocation:timeOffset:size:opacity:force:azimuth:altitude:secondaryScale:threshold:"), location, timeOffset, size, opacity, force, azimuth, altitude, secondaryScale, threshold)
 	return strokePointAdopt(_id)
 }
 
-// Location returns location of the point.
+// NewStrokePointWithLocationTimeOffsetSizeOpacityForceAzimuthAltitudeSecondaryScaleThresholdLateralJitter creates a stroke point with the specified properties, including lateral jitter.
+func NewStrokePointWithLocationTimeOffsetSizeOpacityForceAzimuthAltitudeSecondaryScaleThresholdLateralJitter(location corefoundation.CGPoint, timeOffset float64, size corefoundation.CGSize, opacity float64, force float64, azimuth float64, altitude float64, secondaryScale float64, threshold float64, lateralJitter float64) *StrokePoint {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PKStrokePoint")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocation:timeOffset:size:opacity:force:azimuth:altitude:secondaryScale:threshold:lateralJitter:"), location, timeOffset, size, opacity, force, azimuth, altitude, secondaryScale, threshold, lateralJitter)
+	return strokePointAdopt(_id)
+}
+
+// Location returns the location of the point.
 func (sp *StrokePoint) Location() corefoundation.CGPoint {
 	defer runtime.KeepAlive(sp)
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(sp), objc.RegisterName("location"))
 	return _r
 }
 
-// TimeOffset returns time offset since the start of the stroke path in seconds.
+// TimeOffset returns the time offset in seconds from the start of the stroke path.
 func (sp *StrokePoint) TimeOffset() float64 {
 	defer runtime.KeepAlive(sp)
 	_r := objc.Send[float64](objref.IDOf(sp), objc.RegisterName("timeOffset"))
 	return _r
 }
 
-// Size returns size of the point.
+// Size returns the size of the point.
 func (sp *StrokePoint) Size() corefoundation.CGSize {
 	defer runtime.KeepAlive(sp)
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(sp), objc.RegisterName("size"))
 	return _r
 }
 
-// Opacity returns opacity of the point 0-2.
+// Opacity returns the opacity of the point, in the range 0 to 2.
 func (sp *StrokePoint) Opacity() float64 {
 	defer runtime.KeepAlive(sp)
 	_r := objc.Send[float64](objref.IDOf(sp), objc.RegisterName("opacity"))
 	return _r
 }
 
-// Azimuth returns azimuth of the point in radians, 0.0-2π radians
-func (sp *StrokePoint) Azimuth() float64 {
-	defer runtime.KeepAlive(sp)
-	_r := objc.Send[float64](objref.IDOf(sp), objc.RegisterName("azimuth"))
-	return _r
-}
-
-// Force returns force used to create this point.
+// Force returns the force used to create the point.
 func (sp *StrokePoint) Force() float64 {
 	defer runtime.KeepAlive(sp)
 	_r := objc.Send[float64](objref.IDOf(sp), objc.RegisterName("force"))
 	return _r
 }
 
-// Altitude returns altitude used to create this point in radians, 0.0-π/2 radians
+// Azimuth returns the azimuth of the point in radians, in the range 0.0 to 2π.
+func (sp *StrokePoint) Azimuth() float64 {
+	defer runtime.KeepAlive(sp)
+	_r := objc.Send[float64](objref.IDOf(sp), objc.RegisterName("azimuth"))
+	return _r
+}
+
+// Altitude returns the altitude used to create the point in radians, in the range 0.0 to π/2.
 func (sp *StrokePoint) Altitude() float64 {
 	defer runtime.KeepAlive(sp)
 	_r := objc.Send[float64](objref.IDOf(sp), objc.RegisterName("altitude"))
 	return _r
 }
 
-// SecondaryScale returns the scaling of the point for secondary effects. For example the scaling of the pigment in the watercolor ink.
+// SecondaryScale returns the scale factor for secondary rendering effects at this point. For example, this controls the pigment spread in watercolor ink.
 func (sp *StrokePoint) SecondaryScale() float64 {
 	defer runtime.KeepAlive(sp)
 	_r := objc.Send[float64](objref.IDOf(sp), objc.RegisterName("secondaryScale"))
 	return _r
 }
 
-// Threshold returns the threshold for clipping the stroke rendering. When rendering only pixels with an alpha greater than the threshold are drawn. A threshold of 0 has no affect on rendering, a threshold of 1 does not draw anything. Thresholds are only used for some inks, eg. `PKInkIdentifierReed`.
+// Threshold returns the alpha threshold for clipping the stroke rendering for supported inks. Only pixels with an alpha greater than the threshold are drawn. A threshold of `0` has no effect on rendering; a threshold of `1` draws nothing. Thresholds apply only to some inks, such as `PKInkIdentifierReed`.
 func (sp *StrokePoint) Threshold() float64 {
 	defer runtime.KeepAlive(sp)
 	_r := objc.Send[float64](objref.IDOf(sp), objc.RegisterName("threshold"))
+	return _r
+}
+
+// LateralJitter returns the amount of lateral particle jitter at the stroke edge for supported inks. Lateral jitter applies only to some inks, such as `PKInkIdentifierPencil`.
+func (sp *StrokePoint) LateralJitter() float64 {
+	defer runtime.KeepAlive(sp)
+	_r := objc.Send[float64](objref.IDOf(sp), objc.RegisterName("lateralJitter"))
 	return _r
 }

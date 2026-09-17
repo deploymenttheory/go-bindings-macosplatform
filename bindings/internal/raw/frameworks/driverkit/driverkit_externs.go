@@ -9,104 +9,164 @@ import (
 	"github.com/ebitengine/purego"
 )
 
-func IOBufferMemoryDescriptor_Class() uintptr {
+func IOBufferMemoryDescriptor_Class() OSClassLoadInformation {
 	ptr, _ := purego.Dlsym(_driverkitLib, "IOBufferMemoryDescriptor_Class")
-	return ptr
+	if ptr == 0 {
+		return OSClassLoadInformation{}
+	}
+	return *(*OSClassLoadInformation)(unsafe.Pointer(ptr))
 }
 
-func IOCommandPool_Class() uintptr {
+func IOCommandPool_Class() OSClassLoadInformation {
 	ptr, _ := purego.Dlsym(_driverkitLib, "IOCommandPool_Class")
-	return ptr
+	if ptr == 0 {
+		return OSClassLoadInformation{}
+	}
+	return *(*OSClassLoadInformation)(unsafe.Pointer(ptr))
 }
 
-func IOCommand_Class() uintptr {
+func IOCommand_Class() OSClassLoadInformation {
 	ptr, _ := purego.Dlsym(_driverkitLib, "IOCommand_Class")
-	return ptr
+	if ptr == 0 {
+		return OSClassLoadInformation{}
+	}
+	return *(*OSClassLoadInformation)(unsafe.Pointer(ptr))
 }
 
-func IODMACommand_Class() uintptr {
+func IODMACommand_Class() OSClassLoadInformation {
 	ptr, _ := purego.Dlsym(_driverkitLib, "IODMACommand_Class")
-	return ptr
+	if ptr == 0 {
+		return OSClassLoadInformation{}
+	}
+	return *(*OSClassLoadInformation)(unsafe.Pointer(ptr))
 }
 
-func IODataQueueDispatchSource_Class() uintptr {
+func IODataQueueDispatchSource_Class() OSClassLoadInformation {
 	ptr, _ := purego.Dlsym(_driverkitLib, "IODataQueueDispatchSource_Class")
-	return ptr
+	if ptr == 0 {
+		return OSClassLoadInformation{}
+	}
+	return *(*OSClassLoadInformation)(unsafe.Pointer(ptr))
 }
 
-func IODispatchQueue_Class() uintptr {
+func IODispatchQueue_Class() OSClassLoadInformation {
 	ptr, _ := purego.Dlsym(_driverkitLib, "IODispatchQueue_Class")
-	return ptr
+	if ptr == 0 {
+		return OSClassLoadInformation{}
+	}
+	return *(*OSClassLoadInformation)(unsafe.Pointer(ptr))
 }
 
-func IODispatchSource_Class() uintptr {
+func IODispatchSource_Class() OSClassLoadInformation {
 	ptr, _ := purego.Dlsym(_driverkitLib, "IODispatchSource_Class")
-	return ptr
+	if ptr == 0 {
+		return OSClassLoadInformation{}
+	}
+	return *(*OSClassLoadInformation)(unsafe.Pointer(ptr))
 }
 
-func IOHistogramReporter_Class() uintptr {
+func IOHistogramReporter_Class() OSClassLoadInformation {
 	ptr, _ := purego.Dlsym(_driverkitLib, "IOHistogramReporter_Class")
-	return ptr
+	if ptr == 0 {
+		return OSClassLoadInformation{}
+	}
+	return *(*OSClassLoadInformation)(unsafe.Pointer(ptr))
 }
 
-func IOInterruptDispatchSource_Class() uintptr {
+func IOInterruptDispatchSource_Class() OSClassLoadInformation {
 	ptr, _ := purego.Dlsym(_driverkitLib, "IOInterruptDispatchSource_Class")
-	return ptr
+	if ptr == 0 {
+		return OSClassLoadInformation{}
+	}
+	return *(*OSClassLoadInformation)(unsafe.Pointer(ptr))
 }
 
-func IOMemoryDescriptor_Class() uintptr {
+func IOMemoryDescriptor_Class() OSClassLoadInformation {
 	ptr, _ := purego.Dlsym(_driverkitLib, "IOMemoryDescriptor_Class")
-	return ptr
+	if ptr == 0 {
+		return OSClassLoadInformation{}
+	}
+	return *(*OSClassLoadInformation)(unsafe.Pointer(ptr))
 }
 
-func IOMemoryMap_Class() uintptr {
+func IOMemoryMap_Class() OSClassLoadInformation {
 	ptr, _ := purego.Dlsym(_driverkitLib, "IOMemoryMap_Class")
-	return ptr
+	if ptr == 0 {
+		return OSClassLoadInformation{}
+	}
+	return *(*OSClassLoadInformation)(unsafe.Pointer(ptr))
 }
 
-func IOReportLegend_Class() uintptr {
+func IOReportLegend_Class() OSClassLoadInformation {
 	ptr, _ := purego.Dlsym(_driverkitLib, "IOReportLegend_Class")
-	return ptr
+	if ptr == 0 {
+		return OSClassLoadInformation{}
+	}
+	return *(*OSClassLoadInformation)(unsafe.Pointer(ptr))
 }
 
-func IOReporter_Class() uintptr {
+func IOReporter_Class() OSClassLoadInformation {
 	ptr, _ := purego.Dlsym(_driverkitLib, "IOReporter_Class")
-	return ptr
+	if ptr == 0 {
+		return OSClassLoadInformation{}
+	}
+	return *(*OSClassLoadInformation)(unsafe.Pointer(ptr))
 }
 
-func IOServiceNotificationDispatchSource_Class() uintptr {
+func IOServiceNotificationDispatchSource_Class() OSClassLoadInformation {
 	ptr, _ := purego.Dlsym(_driverkitLib, "IOServiceNotificationDispatchSource_Class")
-	return ptr
+	if ptr == 0 {
+		return OSClassLoadInformation{}
+	}
+	return *(*OSClassLoadInformation)(unsafe.Pointer(ptr))
 }
 
-func IOServiceStateNotificationDispatchSource_Class() uintptr {
+func IOServiceStateNotificationDispatchSource_Class() OSClassLoadInformation {
 	ptr, _ := purego.Dlsym(_driverkitLib, "IOServiceStateNotificationDispatchSource_Class")
-	return ptr
+	if ptr == 0 {
+		return OSClassLoadInformation{}
+	}
+	return *(*OSClassLoadInformation)(unsafe.Pointer(ptr))
 }
 
-func IOService_Class() uintptr {
+func IOService_Class() OSClassLoadInformation {
 	ptr, _ := purego.Dlsym(_driverkitLib, "IOService_Class")
-	return ptr
+	if ptr == 0 {
+		return OSClassLoadInformation{}
+	}
+	return *(*OSClassLoadInformation)(unsafe.Pointer(ptr))
 }
 
-func IOSimpleReporter_Class() uintptr {
+func IOSimpleReporter_Class() OSClassLoadInformation {
 	ptr, _ := purego.Dlsym(_driverkitLib, "IOSimpleReporter_Class")
-	return ptr
+	if ptr == 0 {
+		return OSClassLoadInformation{}
+	}
+	return *(*OSClassLoadInformation)(unsafe.Pointer(ptr))
 }
 
-func IOStateReporter_Class() uintptr {
+func IOStateReporter_Class() OSClassLoadInformation {
 	ptr, _ := purego.Dlsym(_driverkitLib, "IOStateReporter_Class")
-	return ptr
+	if ptr == 0 {
+		return OSClassLoadInformation{}
+	}
+	return *(*OSClassLoadInformation)(unsafe.Pointer(ptr))
 }
 
-func IOTimerDispatchSource_Class() uintptr {
+func IOTimerDispatchSource_Class() OSClassLoadInformation {
 	ptr, _ := purego.Dlsym(_driverkitLib, "IOTimerDispatchSource_Class")
-	return ptr
+	if ptr == 0 {
+		return OSClassLoadInformation{}
+	}
+	return *(*OSClassLoadInformation)(unsafe.Pointer(ptr))
 }
 
-func IOUserClient_Class() uintptr {
+func IOUserClient_Class() OSClassLoadInformation {
 	ptr, _ := purego.Dlsym(_driverkitLib, "IOUserClient_Class")
-	return ptr
+	if ptr == 0 {
+		return OSClassLoadInformation{}
+	}
+	return *(*OSClassLoadInformation)(unsafe.Pointer(ptr))
 }
 
 // @extern IOVMPageSize @abstract Containes the page size of the VM paging system in bytes.
@@ -118,84 +178,132 @@ func IOVMPageSize() uint64 {
 	return *(*uint64)(unsafe.Pointer(ptr))
 }
 
-func OSAction_Class() uintptr {
+func OSAction_Class() OSClassLoadInformation {
 	ptr, _ := purego.Dlsym(_driverkitLib, "OSAction_Class")
-	return ptr
+	if ptr == 0 {
+		return OSClassLoadInformation{}
+	}
+	return *(*OSClassLoadInformation)(unsafe.Pointer(ptr))
 }
 
-func OSAction_IOUserClient_KernelCompletion_Class() uintptr {
+func OSAction_IOUserClient_KernelCompletion_Class() OSClassLoadInformation {
 	ptr, _ := purego.Dlsym(_driverkitLib, "OSAction_IOUserClient_KernelCompletion_Class")
-	return ptr
+	if ptr == 0 {
+		return OSClassLoadInformation{}
+	}
+	return *(*OSClassLoadInformation)(unsafe.Pointer(ptr))
 }
 
-func OSArray_Class() uintptr {
+func OSArray_Class() OSClassLoadInformation {
 	ptr, _ := purego.Dlsym(_driverkitLib, "OSArray_Class")
-	return ptr
+	if ptr == 0 {
+		return OSClassLoadInformation{}
+	}
+	return *(*OSClassLoadInformation)(unsafe.Pointer(ptr))
 }
 
-func OSBoolean_Class() uintptr {
+func OSBoolean_Class() OSClassLoadInformation {
 	ptr, _ := purego.Dlsym(_driverkitLib, "OSBoolean_Class")
-	return ptr
+	if ptr == 0 {
+		return OSClassLoadInformation{}
+	}
+	return *(*OSClassLoadInformation)(unsafe.Pointer(ptr))
 }
 
-func OSBundle_Class() uintptr {
+func OSBundle_Class() OSClassLoadInformation {
 	ptr, _ := purego.Dlsym(_driverkitLib, "OSBundle_Class")
-	return ptr
+	if ptr == 0 {
+		return OSClassLoadInformation{}
+	}
+	return *(*OSClassLoadInformation)(unsafe.Pointer(ptr))
 }
 
-func OSCollection_Class() uintptr {
+func OSCollection_Class() OSClassLoadInformation {
 	ptr, _ := purego.Dlsym(_driverkitLib, "OSCollection_Class")
-	return ptr
+	if ptr == 0 {
+		return OSClassLoadInformation{}
+	}
+	return *(*OSClassLoadInformation)(unsafe.Pointer(ptr))
 }
 
-func OSContainer_Class() uintptr {
+func OSContainer_Class() OSClassLoadInformation {
 	ptr, _ := purego.Dlsym(_driverkitLib, "OSContainer_Class")
-	return ptr
+	if ptr == 0 {
+		return OSClassLoadInformation{}
+	}
+	return *(*OSClassLoadInformation)(unsafe.Pointer(ptr))
 }
 
-func OSData_Class() uintptr {
+func OSData_Class() OSClassLoadInformation {
 	ptr, _ := purego.Dlsym(_driverkitLib, "OSData_Class")
-	return ptr
+	if ptr == 0 {
+		return OSClassLoadInformation{}
+	}
+	return *(*OSClassLoadInformation)(unsafe.Pointer(ptr))
 }
 
-func OSDictionary_Class() uintptr {
+func OSDictionary_Class() OSClassLoadInformation {
 	ptr, _ := purego.Dlsym(_driverkitLib, "OSDictionary_Class")
-	return ptr
+	if ptr == 0 {
+		return OSClassLoadInformation{}
+	}
+	return *(*OSClassLoadInformation)(unsafe.Pointer(ptr))
 }
 
-func OSMappedFile_Class() uintptr {
+func OSMappedFile_Class() OSClassLoadInformation {
 	ptr, _ := purego.Dlsym(_driverkitLib, "OSMappedFile_Class")
-	return ptr
+	if ptr == 0 {
+		return OSClassLoadInformation{}
+	}
+	return *(*OSClassLoadInformation)(unsafe.Pointer(ptr))
 }
 
-func OSNumber_Class() uintptr {
+func OSNumber_Class() OSClassLoadInformation {
 	ptr, _ := purego.Dlsym(_driverkitLib, "OSNumber_Class")
-	return ptr
+	if ptr == 0 {
+		return OSClassLoadInformation{}
+	}
+	return *(*OSClassLoadInformation)(unsafe.Pointer(ptr))
 }
 
-func OSObject_Class() uintptr {
+func OSObject_Class() OSClassLoadInformation {
 	ptr, _ := purego.Dlsym(_driverkitLib, "OSObject_Class")
-	return ptr
+	if ptr == 0 {
+		return OSClassLoadInformation{}
+	}
+	return *(*OSClassLoadInformation)(unsafe.Pointer(ptr))
 }
 
-func OSOrderedSet_Class() uintptr {
+func OSOrderedSet_Class() OSClassLoadInformation {
 	ptr, _ := purego.Dlsym(_driverkitLib, "OSOrderedSet_Class")
-	return ptr
+	if ptr == 0 {
+		return OSClassLoadInformation{}
+	}
+	return *(*OSClassLoadInformation)(unsafe.Pointer(ptr))
 }
 
-func OSSerialization_Class() uintptr {
+func OSSerialization_Class() OSClassLoadInformation {
 	ptr, _ := purego.Dlsym(_driverkitLib, "OSSerialization_Class")
-	return ptr
+	if ptr == 0 {
+		return OSClassLoadInformation{}
+	}
+	return *(*OSClassLoadInformation)(unsafe.Pointer(ptr))
 }
 
-func OSSet_Class() uintptr {
+func OSSet_Class() OSClassLoadInformation {
 	ptr, _ := purego.Dlsym(_driverkitLib, "OSSet_Class")
-	return ptr
+	if ptr == 0 {
+		return OSClassLoadInformation{}
+	}
+	return *(*OSClassLoadInformation)(unsafe.Pointer(ptr))
 }
 
-func OSString_Class() uintptr {
+func OSString_Class() OSClassLoadInformation {
 	ptr, _ := purego.Dlsym(_driverkitLib, "OSString_Class")
-	return ptr
+	if ptr == 0 {
+		return OSClassLoadInformation{}
+	}
+	return *(*OSClassLoadInformation)(unsafe.Pointer(ptr))
 }
 
 func GIOBufferMemoryDescriptorMetaClass() *int32 {

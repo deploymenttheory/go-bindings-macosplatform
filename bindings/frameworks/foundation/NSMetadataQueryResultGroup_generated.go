@@ -99,7 +99,7 @@ func (mqrg *MetadataQueryResultGroup) ResultAtIndex(idx int) obj.Object {
 	return obj.Wrap(_r)
 }
 
-// Attribute returns the attribute.
+// Attribute returns the attribute name for this result group.
 func (mqrg *MetadataQueryResultGroup) Attribute() string {
 	defer runtime.KeepAlive(mqrg)
 	_r := objc.Send[objc.ID](objref.IDOf(mqrg), objc.RegisterName("attribute"))
@@ -109,14 +109,14 @@ func (mqrg *MetadataQueryResultGroup) Attribute() string {
 	return purego.GoString(_r)
 }
 
-// Value returns the value.
+// Value returns the attribute value for this result group.
 func (mqrg *MetadataQueryResultGroup) Value() obj.Object {
 	defer runtime.KeepAlive(mqrg)
 	_r := objc.Send[objc.ID](objref.IDOf(mqrg), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
 
-// Subgroups returns the subgroups.
+// Subgroups returns an array of subgroups for this result group, or nil if this is a leaf group.
 //
 // Subgroups returns the collection as a Go slice.
 func (mqrg *MetadataQueryResultGroup) Subgroups() []*MetadataQueryResultGroup {
@@ -125,14 +125,14 @@ func (mqrg *MetadataQueryResultGroup) Subgroups() []*MetadataQueryResultGroup {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MetadataQueryResultGroup { return MetadataQueryResultGroupFromID(_id) })
 }
 
-// ResultCount returns the result count.
+// ResultCount returns the number of results in this group.
 func (mqrg *MetadataQueryResultGroup) ResultCount() int {
 	defer runtime.KeepAlive(mqrg)
 	_r := objc.Send[int](objref.IDOf(mqrg), objc.RegisterName("resultCount"))
 	return _r
 }
 
-// Results returns the results.
+// Results returns an array containing the results in this group. This is for K-V Bindings, and causes side-effects on the query.
 func (mqrg *MetadataQueryResultGroup) Results() obj.Object {
 	defer runtime.KeepAlive(mqrg)
 	_r := objc.Send[objc.ID](objref.IDOf(mqrg), objc.RegisterName("results"))

@@ -67,7 +67,7 @@ func NewMTRBaseClusterMediaPlaybackWithDeviceEndpointQueue(device *MTRBaseDevice
 	return mTRBaseClusterMediaPlaybackAdopt(_id)
 }
 
-// PlayWithParamsCompletion command Play Upon receipt, this SHALL play media.
+// PlayWithParamsCompletion command Play This command is used to start playback of the media.
 //
 // PlayWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) PlayWithParamsCompletion(ctx context.Context, params *MTRMediaPlaybackClusterPlayParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
@@ -120,7 +120,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) PlayWithCompletion(ctx context.Context
 	}
 }
 
-// PauseWithParamsCompletion command Pause Upon receipt, this SHALL pause media.
+// PauseWithParamsCompletion command Pause This command is used to pause playback of the media.
 //
 // PauseWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) PauseWithParamsCompletion(ctx context.Context, params *MTRMediaPlaybackClusterPauseParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
@@ -173,7 +173,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) PauseWithCompletion(ctx context.Contex
 	}
 }
 
-// StopWithParamsCompletion command Stop Upon receipt, this SHALL stop media. User experience is context-specific. This will often navigate the user back to the location where media was originally launched.
+// StopWithParamsCompletion command Stop This command is used to stop playback of the media.
 //
 // StopWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) StopWithParamsCompletion(ctx context.Context, params *MTRMediaPlaybackClusterStopParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
@@ -226,7 +226,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) StopWithCompletion(ctx context.Context
 	}
 }
 
-// StartOverWithParamsCompletion command StartOver Upon receipt, this SHALL Start Over with the current media playback item.
+// StartOverWithParamsCompletion command StartOver This command is used to start playback of the media from the beginning.
 //
 // StartOverWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) StartOverWithParamsCompletion(ctx context.Context, params *MTRMediaPlaybackClusterStartOverParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
@@ -279,7 +279,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) StartOverWithCompletion(ctx context.Co
 	}
 }
 
-// PreviousWithParamsCompletion command Previous Upon receipt, this SHALL cause the handler to be invoked for "Previous". User experience is context-specific. This will often Go back to the previous media playback item.
+// PreviousWithParamsCompletion command Previous This command is used to go back to the previous media playback item.
 //
 // PreviousWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) PreviousWithParamsCompletion(ctx context.Context, params *MTRMediaPlaybackClusterPreviousParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
@@ -332,7 +332,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) PreviousWithCompletion(ctx context.Con
 	}
 }
 
-// NextWithParamsCompletion command Next Upon receipt, this SHALL cause the handler to be invoked for "Next". User experience is context-specific. This will often Go forward to the next media playback item.
+// NextWithParamsCompletion command Next This command is used to go to the next media playback item.
 //
 // NextWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) NextWithParamsCompletion(ctx context.Context, params *MTRMediaPlaybackClusterNextParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
@@ -385,7 +385,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) NextWithCompletion(ctx context.Context
 	}
 }
 
-// RewindWithParamsCompletion command Rewind Upon receipt, this SHALL Rewind through media. Different Rewind speeds can be used on the TV based upon the number of sequential calls to this function. This is to avoid needing to define every speed now (multiple fast, slow motion, etc).
+// RewindWithParamsCompletion command Rewind This command is used to rewind the media.
 //
 // RewindWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) RewindWithParamsCompletion(ctx context.Context, params *MTRMediaPlaybackClusterRewindParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
@@ -438,7 +438,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) RewindWithCompletion(ctx context.Conte
 	}
 }
 
-// FastForwardWithParamsCompletion command FastForward Upon receipt, this SHALL Advance through media. Different FF speeds can be used on the TV based upon the number of sequential calls to this function. This is to avoid needing to define every speed now (multiple fast, slow motion, etc).
+// FastForwardWithParamsCompletion command FastForward This command is used to fast forward the media.
 //
 // FastForwardWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) FastForwardWithParamsCompletion(ctx context.Context, params *MTRMediaPlaybackClusterFastForwardParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
@@ -491,7 +491,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) FastForwardWithCompletion(ctx context.
 	}
 }
 
-// SkipForwardWithParamsCompletion command SkipForward Upon receipt, this SHALL Skip forward in the media by the given number of seconds, using the data as follows:
+// SkipForwardWithParamsCompletion command SkipForward This command is used to skip forward in the media.
 //
 // SkipForwardWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) SkipForwardWithParamsCompletion(ctx context.Context, params *MTRMediaPlaybackClusterSkipForwardParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
@@ -518,7 +518,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SkipForwardWithParamsCompletion(ctx co
 	}
 }
 
-// SkipBackwardWithParamsCompletion command SkipBackward Upon receipt, this SHALL Skip backward in the media by the given number of seconds, using the data as follows:
+// SkipBackwardWithParamsCompletion command SkipBackward This command is used to skip backward in the media.
 //
 // SkipBackwardWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) SkipBackwardWithParamsCompletion(ctx context.Context, params *MTRMediaPlaybackClusterSkipBackwardParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
@@ -545,7 +545,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SkipBackwardWithParamsCompletion(ctx c
 	}
 }
 
-// SeekWithParamsCompletion command Seek Upon receipt, this SHALL Skip backward in the media by the given number of seconds, using the data as follows:
+// SeekWithParamsCompletion command Seek This command is used to seek to a specific position in the media.
 //
 // SeekWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) SeekWithParamsCompletion(ctx context.Context, params *MTRMediaPlaybackClusterSeekParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {

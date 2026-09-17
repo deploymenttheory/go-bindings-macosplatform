@@ -17,7 +17,7 @@ import (
 
 // PropertyListSerialization is an idiomatic wrapper over the Objective-C class NSPropertyListSerialization.
 //
-// An object that converts between a property list and one of several serialized representations.
+// An object that converts between a property list and one of several serialized representations. The “PropertyListSerialization“ class provides methods that convert a property list to and from several serialized formats. A property list is itself an array or dictionary that contains only “NSData“, “NSString“, “NSArray“, “NSDictionary“, “NSDate“, and “NSNumber“ objects. Property list objects are toll-free bridged with their respective Core Foundation types (<doc://com.apple.documentation/documentation/corefoundation/cfdata>, <doc://com.apple.documentation/documentation/corefoundation/cfstring>, and so on). See [Toll-Free Bridging](https://developer.apple.com/library/archive/documentation/General/Conceptual/CocoaEncyclopedia/Toll-FreeBridgin/Toll-FreeBridgin.html#//apple_ref/doc/uid/TP40010810-CH2)  for more information on toll-free bridging.
 type PropertyListSerialization struct {
 	objref.Handle
 }

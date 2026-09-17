@@ -19,7 +19,7 @@ import (
 
 // RunLoop is an idiomatic wrapper over the Objective-C class NSRunLoop.
 //
-// The programmatic interface to objects that manage input sources.
+// The programmatic interface to objects that manage input sources. A “RunLoop“ object processes input for sources, such as mouse and keyboard events from the window system and “Port“ objects. A “RunLoop“ object also processes “Timer“ events. Your application neither creates nor explicitly manages “RunLoop“ objects. The system creates a “RunLoop“ object as needed for each “Thread“ object, including the application's main thread. If you need to access the current thread's run loop, use the class method “current“. Note that from the perspective of “RunLoop“, “Timer“ objects aren't "input"—they're a special type, and they don't cause the run loop to return when they fire. > Warning: > The “RunLoop“ class is generally not thread-safe, and you must call its methods only within the context of the current thread. Don't call the methods of a “RunLoop“ object running in a different thread, which might cause unexpected results.
 type RunLoop struct {
 	objref.Handle
 }
@@ -94,14 +94,14 @@ func (rl *RunLoop) WithScriptingProperties(scriptingProperties map[string]obj.Ob
 	return rl
 }
 
-// CFRunLoop returns the cf run loop.
+// CFRunLoop returns the receiver's underlying `CFRunLoop` object. You can use the returned run loop to configure the current run loop using Core Foundation function calls, for example, to set up a run loop observer.
 func (rl *RunLoop) CFRunLoop() obj.Object {
 	defer runtime.KeepAlive(rl)
 	_r := objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("getCFRunLoop"))
 	return obj.Wrap(_r)
 }
 
-// AddTimerForMode adds timer for mode.
+// AddTimerForMode registers a given timer with a given input mode. - Parameters: - timer: The timer to register with the receiver. - mode: The mode in which to add the timer. You may specify a custom mode or use one of the modes listed in “RunLoop/Mode“. You can add a timer to multiple input modes. While running in the designated mode, the receiver causes the timer to fire on or after its scheduled fire date. Upon firing, the timer invokes its associated handler routine, which is a selector on a designated object. The receiver retains `aTimer`. To remove a timer from all run loop modes on which it is installed, send an “Timer/invalidate()“ message to the timer.
 func (rl *RunLoop) AddTimerForMode(timer *Timer, mode *String) {
 	defer runtime.KeepAlive(rl)
 	defer runtime.KeepAlive(timer)
@@ -109,7 +109,7 @@ func (rl *RunLoop) AddTimerForMode(timer *Timer, mode *String) {
 	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("addTimer:forMode:"), objref.IDOf(timer), objref.IDOf(mode))
 }
 
-// AddPortForMode adds port for mode.
+// AddPortForMode adds a port as an input source to the specified mode of the run loop. - Parameters: - aPort: The port to add to the receiver. - mode: The mode in which to add the port. You may specify a custom mode or use one of the modes listed in “RunLoop/Mode“. This method schedules the port with the receiver. You can add a port to multiple input modes. When the receiver is running in the specified mode, it dispatches messages destined for that port to the port's designated handler routine.
 func (rl *RunLoop) AddPortForMode(aPort *Port, mode *String) {
 	defer runtime.KeepAlive(rl)
 	defer runtime.KeepAlive(aPort)
@@ -117,7 +117,7 @@ func (rl *RunLoop) AddPortForMode(aPort *Port, mode *String) {
 	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("addPort:forMode:"), objref.IDOf(aPort), objref.IDOf(mode))
 }
 
-// RemovePortForMode removes port for mode.
+// RemovePortForMode removes a port from the specified input mode of the run loop. - Parameters: - aPort: The port to remove from the receiver. - mode: The mode from which to remove the port. You may specify a custom mode or use one of the modes listed in “RunLoop/Mode“. If you added the port to multiple input modes, you must remove it from each mode separately.
 func (rl *RunLoop) RemovePortForMode(aPort *Port, mode *String) {
 	defer runtime.KeepAlive(rl)
 	defer runtime.KeepAlive(aPort)
@@ -125,7 +125,7 @@ func (rl *RunLoop) RemovePortForMode(aPort *Port, mode *String) {
 	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("removePort:forMode:"), objref.IDOf(aPort), objref.IDOf(mode))
 }
 
-// LimitDateForMode wraps the corresponding Objective-C method.
+// LimitDateForMode performs one pass through the run loop in the specified mode and returns the date at which the next timer is scheduled to fire. - Parameter mode: The run loop mode to search. You may specify a custom mode or use one of the modes listed in “RunLoop/Mode“. - Returns: The date at which the next timer is scheduled to fire, or `nil` if there are no input sources for this mode. The run loop is entered with an immediate timeout, so the run loop does not block, waiting for input, if no input sources need processing.
 func (rl *RunLoop) LimitDateForMode(mode *String) time.Time {
 	defer runtime.KeepAlive(rl)
 	defer runtime.KeepAlive(mode)
@@ -133,33 +133,33 @@ func (rl *RunLoop) LimitDateForMode(mode *String) time.Time {
 	return rt.NSDateToTime(_r)
 }
 
-// AcceptInputForModeBeforeDate wraps the corresponding Objective-C method.
+// AcceptInputForModeBeforeDate runs the loop once or until the specified date, accepting input only for the specified mode. - Parameters: - mode: The mode in which to run. You may specify a custom mode or use one of the modes listed in “RunLoop/Mode“. - limitDate: The date up until which to run. If no input sources or timers are attached to the run loop, this method exits immediately; otherwise, it runs the run loop once, returning as soon as one input source processes a message or the specified time elapses. > Note: > A timer is not considered an input source and may fire multiple times when waiting for this method to return. Manually removing all known input sources and timers from the run loop is not a guarantee that the run loop will exit. macOS can install and remove additional input sources as needed to process requests targeted at the receiver's thread. Those sources could therefore prevent the run loop from exiting.
 func (rl *RunLoop) AcceptInputForModeBeforeDate(mode *String, limitDate time.Time) {
 	defer runtime.KeepAlive(rl)
 	defer runtime.KeepAlive(mode)
 	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("acceptInputForMode:beforeDate:"), objref.IDOf(mode), rt.TimeToNSDate(limitDate))
 }
 
-// CurrentMode returns the current mode.
+// CurrentMode returns the receiver's current input mode. This property contains the current input mode only while the receiver is running; otherwise, it returns `nil`. The current mode is set by the methods that run the run loop, such as “RunLoop/acceptInput(forMode:before:)“ and “RunLoop/run(mode:before:)“.
 func (rl *RunLoop) CurrentMode() *String {
 	defer runtime.KeepAlive(rl)
 	_r := objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("currentMode"))
 	return StringFromID(_r)
 }
 
-// Run wraps the corresponding Objective-C method.
+// Run puts the receiver into a permanent loop, during which time it processes data from all attached input sources. If no input sources or timers are attached to the run loop, this method exits immediately; otherwise, it runs the receiver in the “RunLoop/Mode/default“ mode by repeatedly invoking “RunLoop/run(mode:before:)“. In other words, this method effectively begins an infinite loop that processes data from the run loop's input sources and timers. Manually removing all known input sources and timers from the run loop is not a guarantee that the run loop will exit. macOS can install and remove additional input sources as needed to process requests targeted at the receiver's thread. Those sources could therefore prevent the run loop from exiting. If you want the run loop to terminate, you shouldn't use this method. Instead, use one of the other run methods and also check other arbitrary conditions of your own, in a loop. A simple example would be: ```objc BOOL shouldKeepRunning = YES; // global NSRunLoop *theRL = [NSRunLoop currentRunLoop]; while (shouldKeepRunning && [theRL runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]]); ```
 func (rl *RunLoop) Run() {
 	defer runtime.KeepAlive(rl)
 	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("run"))
 }
 
-// RunUntilDate runs until date.
+// RunUntilDate runs the loop until the specified date, during which time it processes data from all attached input sources. - Parameter limitDate: The date up until which to run. If no input sources or timers are attached to the run loop, this method exits immediately; otherwise, it runs the receiver in the “RunLoop/Mode/default“ mode by repeatedly invoking “RunLoop/run(mode:before:)“ until the specified expiration date.
 func (rl *RunLoop) RunUntilDate(limitDate time.Time) {
 	defer runtime.KeepAlive(rl)
 	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("runUntilDate:"), rt.TimeToNSDate(limitDate))
 }
 
-// RunModeBeforeDate runs mode before date.
+// RunModeBeforeDate runs the loop once, blocking for input in the specified mode until a given date. - Parameters: - mode: The mode in which to run. You may specify a custom mode or use one of the modes listed in “RunLoop/Mode“. - limitDate: The date until which to block. - Returns: `YES` if the run loop ran and processed an input source or if the specified timeout value was reached; otherwise, `NO` if the run loop could not be started. If no input sources or timers are attached to the run loop, this method exits immediately and returns `NO`; otherwise, it returns after either the first input source is processed or `limitDate` is reached. > Note: > A timer is not considered an input source and may fire multiple times when waiting for this method to return. Manually removing all known input sources and timers from the run loop does not guarantee that the run loop will exit immediately.
 func (rl *RunLoop) RunModeBeforeDate(mode *String, limitDate time.Time) bool {
 	defer runtime.KeepAlive(rl)
 	defer runtime.KeepAlive(mode)
@@ -209,7 +209,7 @@ func (rl *RunLoop) PerformBlock(ctx context.Context) error {
 	}
 }
 
-// CancelPerformSelectorsWithTarget cancels perform selectors with target.
+// CancelPerformSelectorsWithTarget cancels all outstanding ordered performs scheduled with a given target. - Parameter target: The previously-specified target. This method cancels the previously scheduled messages associated with the target, ignoring the selector and argument of the scheduled operation. This is in contrast to “RunLoop/cancelPerform(_:target:argument:)“, which requires you to match the selector and argument as well as the target. This method removes the perform requests from all modes of the run loop.
 func (rl *RunLoop) CancelPerformSelectorsWithTarget(target obj.Object) {
 	defer runtime.KeepAlive(rl)
 	defer runtime.KeepAlive(target)

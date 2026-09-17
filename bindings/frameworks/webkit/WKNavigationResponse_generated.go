@@ -127,3 +127,17 @@ func (wnr *WKNavigationResponse) CanShowMIMEType() bool {
 	return _mainthread0
 
 }
+
+// MainFrameNavigation returns the most recent main frame navigation that took place that encompasses this navigation response.
+func (wnr *WKNavigationResponse) MainFrameNavigation() *WKNavigation {
+	defer runtime.KeepAlive(wnr)
+	var _mainthread0 *WKNavigation
+	purego.Main(func() {
+		_mainthread0 = func() *WKNavigation {
+			_r := objc.Send[objc.ID](objref.IDOf(wnr), objc.RegisterName("mainFrameNavigation"))
+			return WKNavigationFromID(_r)
+		}()
+	})
+	return _mainthread0
+
+}

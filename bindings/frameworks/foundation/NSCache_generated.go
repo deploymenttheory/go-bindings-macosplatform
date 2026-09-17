@@ -165,7 +165,7 @@ func (c *Cache) RemoveAllObjects() {
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("removeAllObjects"))
 }
 
-// Name returns the name.
+// Name returns the name of the cache. The default value is an empty string ("").
 func (c *Cache) Name() string {
 	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("name"))
@@ -175,21 +175,21 @@ func (c *Cache) Name() string {
 	return purego.GoString(_r)
 }
 
-// TotalCostLimit returns the total cost limit.
+// TotalCostLimit returns the maximum total cost that the cache can hold before it starts evicting objects. If `0`, there is no total cost limit. The default value is `0`. This is not a strict limit, and if the cache goes over the limit, an object in the cache could be evicted instantly, at a later point in time, or possibly never, all depending on the implementation details of the cache.
 func (c *Cache) TotalCostLimit() int {
 	defer runtime.KeepAlive(c)
 	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("totalCostLimit"))
 	return _r
 }
 
-// CountLimit returns the count limit.
+// CountLimit returns the maximum number of objects the cache should hold. If `0`, there is no count limit. The default value is `0`. This is not a strict limit -- if the cache goes over the limit, an object in the cache could be evicted instantly, later, or possibly never, depending on the implementation details of the cache.
 func (c *Cache) CountLimit() int {
 	defer runtime.KeepAlive(c)
 	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("countLimit"))
 	return _r
 }
 
-// EvictsObjectsWithDiscardedContent wraps the corresponding Objective-C method.
+// EvictsObjectsWithDiscardedContent reports whether the cache will automatically evict discardable-content objects whose content has been discarded. If `YES`, the cache will evict a discardable-content object after its content is discarded. If `NO`, it will not. The default value is `YES`.
 func (c *Cache) EvictsObjectsWithDiscardedContent() bool {
 	defer runtime.KeepAlive(c)
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("evictsObjectsWithDiscardedContent"))

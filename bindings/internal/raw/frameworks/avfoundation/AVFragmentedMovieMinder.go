@@ -64,7 +64,7 @@ func (o *AVFragmentedMovieMinder) RemoveFragmentedMovie(movie *AVFragmentedMovie
 	o.Ptr().Send(_aVFragmentedMovieMinderSelRemoveFragmentedMovie, movie.Ptr())
 }
 
-// @property       movies @abstract       An NSArray of the AVFragmentedMovie objects being minded.
+// An NSArray of the AVFragmentedMovie objects being minded.
 func (o *AVFragmentedMovieMinder) Movies() *foundation.NSArray[*AVFragmentedMovie] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVFragmentedMovieMinderSelMovies)
 	if _ret != 0 {

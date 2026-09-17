@@ -281,10 +281,6 @@
         }
       }
     },
-    "CNErrorCode": {
-      "doc": "Error codes that the system may return when you use Contacts framework methods.",
-      "url": "https://developer.apple.com/documentation/contacts/cnerrorcode"
-    },
     "CNPostalAddressFormatterStyle": {
       "doc": "Constants for postal formatting styles.",
       "url": "https://developer.apple.com/documentation/contacts/cnpostaladdressformatterstyle",

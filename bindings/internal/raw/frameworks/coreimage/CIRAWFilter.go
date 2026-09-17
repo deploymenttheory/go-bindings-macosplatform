@@ -22,80 +22,85 @@ type CIRAWFilter struct {
 }
 
 var (
-	_clsCIRAWFilter                                   = _objcClass("CIRAWFilter")
-	_cIRAWFilterSelFilterWithImageURL                 = objc.RegisterName("filterWithImageURL:")
-	_cIRAWFilterSelFilterWithImageDataIdentifierHint  = objc.RegisterName("filterWithImageData:identifierHint:")
-	_cIRAWFilterSelFilterWithCVPixelBufferProperties  = objc.RegisterName("filterWithCVPixelBuffer:properties:")
-	_cIRAWFilterSelSupportedCameraModels              = objc.RegisterName("supportedCameraModels")
-	_cIRAWFilterSelSupportedDecoderVersions           = objc.RegisterName("supportedDecoderVersions")
-	_cIRAWFilterSelNativeSize                         = objc.RegisterName("nativeSize")
-	_cIRAWFilterSelProperties                         = objc.RegisterName("properties")
-	_cIRAWFilterSelOrientation                        = objc.RegisterName("orientation")
-	_cIRAWFilterSelSetOrientation                     = objc.RegisterName("setOrientation:")
-	_cIRAWFilterSelIsDraftModeEnabled                 = objc.RegisterName("isDraftModeEnabled")
-	_cIRAWFilterSelSetDraftModeEnabled                = objc.RegisterName("setDraftModeEnabled:")
-	_cIRAWFilterSelDecoderVersion                     = objc.RegisterName("decoderVersion")
-	_cIRAWFilterSelSetDecoderVersion                  = objc.RegisterName("setDecoderVersion:")
-	_cIRAWFilterSelScaleFactor                        = objc.RegisterName("scaleFactor")
-	_cIRAWFilterSelSetScaleFactor                     = objc.RegisterName("setScaleFactor:")
-	_cIRAWFilterSelExposure                           = objc.RegisterName("exposure")
-	_cIRAWFilterSelSetExposure                        = objc.RegisterName("setExposure:")
-	_cIRAWFilterSelBaselineExposure                   = objc.RegisterName("baselineExposure")
-	_cIRAWFilterSelSetBaselineExposure                = objc.RegisterName("setBaselineExposure:")
-	_cIRAWFilterSelShadowBias                         = objc.RegisterName("shadowBias")
-	_cIRAWFilterSelSetShadowBias                      = objc.RegisterName("setShadowBias:")
-	_cIRAWFilterSelBoostAmount                        = objc.RegisterName("boostAmount")
-	_cIRAWFilterSelSetBoostAmount                     = objc.RegisterName("setBoostAmount:")
-	_cIRAWFilterSelBoostShadowAmount                  = objc.RegisterName("boostShadowAmount")
-	_cIRAWFilterSelSetBoostShadowAmount               = objc.RegisterName("setBoostShadowAmount:")
-	_cIRAWFilterSelIsHighlightRecoverySupported       = objc.RegisterName("isHighlightRecoverySupported")
-	_cIRAWFilterSelIsHighlightRecoveryEnabled         = objc.RegisterName("isHighlightRecoveryEnabled")
-	_cIRAWFilterSelSetHighlightRecoveryEnabled        = objc.RegisterName("setHighlightRecoveryEnabled:")
-	_cIRAWFilterSelIsGamutMappingEnabled              = objc.RegisterName("isGamutMappingEnabled")
-	_cIRAWFilterSelSetGamutMappingEnabled             = objc.RegisterName("setGamutMappingEnabled:")
-	_cIRAWFilterSelIsLensCorrectionSupported          = objc.RegisterName("isLensCorrectionSupported")
-	_cIRAWFilterSelIsLensCorrectionEnabled            = objc.RegisterName("isLensCorrectionEnabled")
-	_cIRAWFilterSelSetLensCorrectionEnabled           = objc.RegisterName("setLensCorrectionEnabled:")
-	_cIRAWFilterSelIsLuminanceNoiseReductionSupported = objc.RegisterName("isLuminanceNoiseReductionSupported")
-	_cIRAWFilterSelLuminanceNoiseReductionAmount      = objc.RegisterName("luminanceNoiseReductionAmount")
-	_cIRAWFilterSelSetLuminanceNoiseReductionAmount   = objc.RegisterName("setLuminanceNoiseReductionAmount:")
-	_cIRAWFilterSelIsColorNoiseReductionSupported     = objc.RegisterName("isColorNoiseReductionSupported")
-	_cIRAWFilterSelColorNoiseReductionAmount          = objc.RegisterName("colorNoiseReductionAmount")
-	_cIRAWFilterSelSetColorNoiseReductionAmount       = objc.RegisterName("setColorNoiseReductionAmount:")
-	_cIRAWFilterSelIsSharpnessSupported               = objc.RegisterName("isSharpnessSupported")
-	_cIRAWFilterSelSharpnessAmount                    = objc.RegisterName("sharpnessAmount")
-	_cIRAWFilterSelSetSharpnessAmount                 = objc.RegisterName("setSharpnessAmount:")
-	_cIRAWFilterSelIsContrastSupported                = objc.RegisterName("isContrastSupported")
-	_cIRAWFilterSelContrastAmount                     = objc.RegisterName("contrastAmount")
-	_cIRAWFilterSelSetContrastAmount                  = objc.RegisterName("setContrastAmount:")
-	_cIRAWFilterSelIsDetailSupported                  = objc.RegisterName("isDetailSupported")
-	_cIRAWFilterSelDetailAmount                       = objc.RegisterName("detailAmount")
-	_cIRAWFilterSelSetDetailAmount                    = objc.RegisterName("setDetailAmount:")
-	_cIRAWFilterSelIsMoireReductionSupported          = objc.RegisterName("isMoireReductionSupported")
-	_cIRAWFilterSelMoireReductionAmount               = objc.RegisterName("moireReductionAmount")
-	_cIRAWFilterSelSetMoireReductionAmount            = objc.RegisterName("setMoireReductionAmount:")
-	_cIRAWFilterSelIsLocalToneMapSupported            = objc.RegisterName("isLocalToneMapSupported")
-	_cIRAWFilterSelLocalToneMapAmount                 = objc.RegisterName("localToneMapAmount")
-	_cIRAWFilterSelSetLocalToneMapAmount              = objc.RegisterName("setLocalToneMapAmount:")
-	_cIRAWFilterSelExtendedDynamicRangeAmount         = objc.RegisterName("extendedDynamicRangeAmount")
-	_cIRAWFilterSelSetExtendedDynamicRangeAmount      = objc.RegisterName("setExtendedDynamicRangeAmount:")
-	_cIRAWFilterSelNeutralChromaticity                = objc.RegisterName("neutralChromaticity")
-	_cIRAWFilterSelSetNeutralChromaticity             = objc.RegisterName("setNeutralChromaticity:")
-	_cIRAWFilterSelNeutralLocation                    = objc.RegisterName("neutralLocation")
-	_cIRAWFilterSelSetNeutralLocation                 = objc.RegisterName("setNeutralLocation:")
-	_cIRAWFilterSelNeutralTemperature                 = objc.RegisterName("neutralTemperature")
-	_cIRAWFilterSelSetNeutralTemperature              = objc.RegisterName("setNeutralTemperature:")
-	_cIRAWFilterSelNeutralTint                        = objc.RegisterName("neutralTint")
-	_cIRAWFilterSelSetNeutralTint                     = objc.RegisterName("setNeutralTint:")
-	_cIRAWFilterSelLinearSpaceFilter                  = objc.RegisterName("linearSpaceFilter")
-	_cIRAWFilterSelSetLinearSpaceFilter               = objc.RegisterName("setLinearSpaceFilter:")
-	_cIRAWFilterSelPreviewImage                       = objc.RegisterName("previewImage")
-	_cIRAWFilterSelPortraitEffectsMatte               = objc.RegisterName("portraitEffectsMatte")
-	_cIRAWFilterSelSemanticSegmentationSkinMatte      = objc.RegisterName("semanticSegmentationSkinMatte")
-	_cIRAWFilterSelSemanticSegmentationHairMatte      = objc.RegisterName("semanticSegmentationHairMatte")
-	_cIRAWFilterSelSemanticSegmentationGlassesMatte   = objc.RegisterName("semanticSegmentationGlassesMatte")
-	_cIRAWFilterSelSemanticSegmentationSkyMatte       = objc.RegisterName("semanticSegmentationSkyMatte")
-	_cIRAWFilterSelSemanticSegmentationTeethMatte     = objc.RegisterName("semanticSegmentationTeethMatte")
+	_clsCIRAWFilter                                              = _objcClass("CIRAWFilter")
+	_cIRAWFilterSelSupportedCameraModelsWithVersion              = objc.RegisterName("supportedCameraModelsWithVersion:")
+	_cIRAWFilterSelDownloadResourcesWithTimeoutCompletionHandler = objc.RegisterName("downloadResourcesWithTimeout:completionHandler:")
+	_cIRAWFilterSelFilterWithImageURL                            = objc.RegisterName("filterWithImageURL:")
+	_cIRAWFilterSelFilterWithImageDataIdentifierHint             = objc.RegisterName("filterWithImageData:identifierHint:")
+	_cIRAWFilterSelFilterWithCVPixelBufferProperties             = objc.RegisterName("filterWithCVPixelBuffer:properties:")
+	_cIRAWFilterSelSupportedCameraModels                         = objc.RegisterName("supportedCameraModels")
+	_cIRAWFilterSelSupportedDecoderVersions                      = objc.RegisterName("supportedDecoderVersions")
+	_cIRAWFilterSelNativeSize                                    = objc.RegisterName("nativeSize")
+	_cIRAWFilterSelProperties                                    = objc.RegisterName("properties")
+	_cIRAWFilterSelOrientation                                   = objc.RegisterName("orientation")
+	_cIRAWFilterSelSetOrientation                                = objc.RegisterName("setOrientation:")
+	_cIRAWFilterSelIsDraftModeEnabled                            = objc.RegisterName("isDraftModeEnabled")
+	_cIRAWFilterSelSetDraftModeEnabled                           = objc.RegisterName("setDraftModeEnabled:")
+	_cIRAWFilterSelDecoderVersion                                = objc.RegisterName("decoderVersion")
+	_cIRAWFilterSelSetDecoderVersion                             = objc.RegisterName("setDecoderVersion:")
+	_cIRAWFilterSelScaleFactor                                   = objc.RegisterName("scaleFactor")
+	_cIRAWFilterSelSetScaleFactor                                = objc.RegisterName("setScaleFactor:")
+	_cIRAWFilterSelExposure                                      = objc.RegisterName("exposure")
+	_cIRAWFilterSelSetExposure                                   = objc.RegisterName("setExposure:")
+	_cIRAWFilterSelBaselineExposure                              = objc.RegisterName("baselineExposure")
+	_cIRAWFilterSelSetBaselineExposure                           = objc.RegisterName("setBaselineExposure:")
+	_cIRAWFilterSelShadowBias                                    = objc.RegisterName("shadowBias")
+	_cIRAWFilterSelSetShadowBias                                 = objc.RegisterName("setShadowBias:")
+	_cIRAWFilterSelBoostAmount                                   = objc.RegisterName("boostAmount")
+	_cIRAWFilterSelSetBoostAmount                                = objc.RegisterName("setBoostAmount:")
+	_cIRAWFilterSelBoostShadowAmount                             = objc.RegisterName("boostShadowAmount")
+	_cIRAWFilterSelSetBoostShadowAmount                          = objc.RegisterName("setBoostShadowAmount:")
+	_cIRAWFilterSelIsHighlightRecoverySupported                  = objc.RegisterName("isHighlightRecoverySupported")
+	_cIRAWFilterSelIsHighlightRecoveryEnabled                    = objc.RegisterName("isHighlightRecoveryEnabled")
+	_cIRAWFilterSelSetHighlightRecoveryEnabled                   = objc.RegisterName("setHighlightRecoveryEnabled:")
+	_cIRAWFilterSelIsGamutMappingEnabled                         = objc.RegisterName("isGamutMappingEnabled")
+	_cIRAWFilterSelSetGamutMappingEnabled                        = objc.RegisterName("setGamutMappingEnabled:")
+	_cIRAWFilterSelIsLensCorrectionSupported                     = objc.RegisterName("isLensCorrectionSupported")
+	_cIRAWFilterSelIsLensCorrectionEnabled                       = objc.RegisterName("isLensCorrectionEnabled")
+	_cIRAWFilterSelSetLensCorrectionEnabled                      = objc.RegisterName("setLensCorrectionEnabled:")
+	_cIRAWFilterSelIsLuminanceNoiseReductionSupported            = objc.RegisterName("isLuminanceNoiseReductionSupported")
+	_cIRAWFilterSelLuminanceNoiseReductionAmount                 = objc.RegisterName("luminanceNoiseReductionAmount")
+	_cIRAWFilterSelSetLuminanceNoiseReductionAmount              = objc.RegisterName("setLuminanceNoiseReductionAmount:")
+	_cIRAWFilterSelIsColorNoiseReductionSupported                = objc.RegisterName("isColorNoiseReductionSupported")
+	_cIRAWFilterSelColorNoiseReductionAmount                     = objc.RegisterName("colorNoiseReductionAmount")
+	_cIRAWFilterSelSetColorNoiseReductionAmount                  = objc.RegisterName("setColorNoiseReductionAmount:")
+	_cIRAWFilterSelIsSharpnessSupported                          = objc.RegisterName("isSharpnessSupported")
+	_cIRAWFilterSelSharpnessAmount                               = objc.RegisterName("sharpnessAmount")
+	_cIRAWFilterSelSetSharpnessAmount                            = objc.RegisterName("setSharpnessAmount:")
+	_cIRAWFilterSelIsContrastSupported                           = objc.RegisterName("isContrastSupported")
+	_cIRAWFilterSelContrastAmount                                = objc.RegisterName("contrastAmount")
+	_cIRAWFilterSelSetContrastAmount                             = objc.RegisterName("setContrastAmount:")
+	_cIRAWFilterSelIsDetailSupported                             = objc.RegisterName("isDetailSupported")
+	_cIRAWFilterSelDetailAmount                                  = objc.RegisterName("detailAmount")
+	_cIRAWFilterSelSetDetailAmount                               = objc.RegisterName("setDetailAmount:")
+	_cIRAWFilterSelIsMoireReductionSupported                     = objc.RegisterName("isMoireReductionSupported")
+	_cIRAWFilterSelMoireReductionAmount                          = objc.RegisterName("moireReductionAmount")
+	_cIRAWFilterSelSetMoireReductionAmount                       = objc.RegisterName("setMoireReductionAmount:")
+	_cIRAWFilterSelIsDespeckleSupported                          = objc.RegisterName("isDespeckleSupported")
+	_cIRAWFilterSelDespeckleAmount                               = objc.RegisterName("despeckleAmount")
+	_cIRAWFilterSelSetDespeckleAmount                            = objc.RegisterName("setDespeckleAmount:")
+	_cIRAWFilterSelIsLocalToneMapSupported                       = objc.RegisterName("isLocalToneMapSupported")
+	_cIRAWFilterSelLocalToneMapAmount                            = objc.RegisterName("localToneMapAmount")
+	_cIRAWFilterSelSetLocalToneMapAmount                         = objc.RegisterName("setLocalToneMapAmount:")
+	_cIRAWFilterSelExtendedDynamicRangeAmount                    = objc.RegisterName("extendedDynamicRangeAmount")
+	_cIRAWFilterSelSetExtendedDynamicRangeAmount                 = objc.RegisterName("setExtendedDynamicRangeAmount:")
+	_cIRAWFilterSelNeutralChromaticity                           = objc.RegisterName("neutralChromaticity")
+	_cIRAWFilterSelSetNeutralChromaticity                        = objc.RegisterName("setNeutralChromaticity:")
+	_cIRAWFilterSelNeutralLocation                               = objc.RegisterName("neutralLocation")
+	_cIRAWFilterSelSetNeutralLocation                            = objc.RegisterName("setNeutralLocation:")
+	_cIRAWFilterSelNeutralTemperature                            = objc.RegisterName("neutralTemperature")
+	_cIRAWFilterSelSetNeutralTemperature                         = objc.RegisterName("setNeutralTemperature:")
+	_cIRAWFilterSelNeutralTint                                   = objc.RegisterName("neutralTint")
+	_cIRAWFilterSelSetNeutralTint                                = objc.RegisterName("setNeutralTint:")
+	_cIRAWFilterSelLinearSpaceFilter                             = objc.RegisterName("linearSpaceFilter")
+	_cIRAWFilterSelSetLinearSpaceFilter                          = objc.RegisterName("setLinearSpaceFilter:")
+	_cIRAWFilterSelPreviewImage                                  = objc.RegisterName("previewImage")
+	_cIRAWFilterSelPortraitEffectsMatte                          = objc.RegisterName("portraitEffectsMatte")
+	_cIRAWFilterSelSemanticSegmentationSkinMatte                 = objc.RegisterName("semanticSegmentationSkinMatte")
+	_cIRAWFilterSelSemanticSegmentationHairMatte                 = objc.RegisterName("semanticSegmentationHairMatte")
+	_cIRAWFilterSelSemanticSegmentationGlassesMatte              = objc.RegisterName("semanticSegmentationGlassesMatte")
+	_cIRAWFilterSelSemanticSegmentationSkyMatte                  = objc.RegisterName("semanticSegmentationSkyMatte")
+	_cIRAWFilterSelSemanticSegmentationTeethMatte                = objc.RegisterName("semanticSegmentationTeethMatte")
 )
 
 func CIRAWFilterFromID(id objc.ID) *CIRAWFilter {
@@ -106,6 +111,29 @@ func CIRAWFilterFromID(id objc.ID) *CIRAWFilter {
 	o.InitPtr(id)
 	purego.Track(o)
 	return o
+}
+
+func CIRAWFilterSupportedCameraModelsWithVersion(version *foundation.NSString) *foundation.NSArray[*foundation.NSString] {
+	_ret := objc.Send[objc.ID](objc.ID(_clsCIRAWFilter), _cIRAWFilterSelSupportedCameraModelsWithVersion, version.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
+}
+
+func (o *CIRAWFilter) DownloadResourcesWithTimeoutCompletionHandler(timeout float64, completionHandler func(unsafe.Pointer)) *foundation.NSProgress {
+	var __block_completionHandler objc.Block
+	if completionHandler != nil {
+		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 unsafe.Pointer) {
+			completionHandler(blockParam0)
+		})
+		defer __block_completionHandler.Release()
+	}
+	_ret := objc.Send[objc.ID](o.Ptr(), _cIRAWFilterSelDownloadResourcesWithTimeoutCompletionHandler, timeout, __block_completionHandler)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSProgressFromID(_ret)
 }
 
 // Creates a RAW filter from the image at the URL location that you specify.
@@ -367,6 +395,20 @@ func (o *CIRAWFilter) MoireReductionAmount() float32 {
 
 func (o *CIRAWFilter) SetMoireReductionAmount(moireReductionAmount float32) {
 	o.Ptr().Send(_cIRAWFilterSelSetMoireReductionAmount, moireReductionAmount)
+}
+
+func (o *CIRAWFilter) IsDespeckleSupported() bool {
+	_ret := objc.Send[bool](o.Ptr(), _cIRAWFilterSelIsDespeckleSupported)
+	return _ret
+}
+
+func (o *CIRAWFilter) DespeckleAmount() float32 {
+	_ret := objc.Send[float32](o.Ptr(), _cIRAWFilterSelDespeckleAmount)
+	return _ret
+}
+
+func (o *CIRAWFilter) SetDespeckleAmount(despeckleAmount float32) {
+	o.Ptr().Send(_cIRAWFilterSelSetDespeckleAmount, despeckleAmount)
 }
 
 func (o *CIRAWFilter) IsLocalToneMapSupported() bool {

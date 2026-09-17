@@ -215,63 +215,63 @@ func (aed *AppleEventDescriptor) CoerceToDescriptorType(descriptorType int) *App
 	return AppleEventDescriptorFromID(_r)
 }
 
-// AeDesc returns the ae desc.
+// AeDesc returns the `AEDesc` structure encapsulated by the receiver, if it has one. If the receiver has a valid `AEDesc` structure, returns a pointer to it; otherwise returns `nil`.
 func (aed *AppleEventDescriptor) AeDesc() unsafe.Pointer {
 	defer runtime.KeepAlive(aed)
 	_r := objc.Send[unsafe.Pointer](objref.IDOf(aed), objc.RegisterName("aeDesc"))
 	return _r
 }
 
-// DescriptorType returns the descriptor type.
+// DescriptorType returns the descriptor type of the receiver.
 func (aed *AppleEventDescriptor) DescriptorType() int {
 	defer runtime.KeepAlive(aed)
 	_r := objc.Send[int](objref.IDOf(aed), objc.RegisterName("descriptorType"))
 	return _r
 }
 
-// Data returns the data.
+// Data returns the receiver's data. An instance of `NSData` containing the receiver's data, or `nil` if an error occurs.
 func (aed *AppleEventDescriptor) Data() []byte {
 	defer runtime.KeepAlive(aed)
 	_r := objc.Send[objc.ID](objref.IDOf(aed), objc.RegisterName("data"))
 	return rt.NSDataToBytes(_r)
 }
 
-// BooleanValue returns the boolean value.
+// BooleanValue returns the contents of the receiver as a Boolean value, coercing (to `typeBoolean`) if necessary. The contents of the descriptor, as a Boolean value, or `false` if an error occurs.
 func (aed *AppleEventDescriptor) BooleanValue() uint8 {
 	defer runtime.KeepAlive(aed)
 	_r := objc.Send[uint8](objref.IDOf(aed), objc.RegisterName("booleanValue"))
 	return _r
 }
 
-// EnumCodeValue returns the enum code value.
+// EnumCodeValue returns the contents of the receiver as an enumeration type, coercing to `typeEnumerated` if necessary. The contents of the descriptor, as an enumeration type, or 0 if an error occurs.
 func (aed *AppleEventDescriptor) EnumCodeValue() int {
 	defer runtime.KeepAlive(aed)
 	_r := objc.Send[int](objref.IDOf(aed), objc.RegisterName("enumCodeValue"))
 	return _r
 }
 
-// Int32Value returns the int32 value.
+// Int32Value returns the contents of the receiver as an integer, coercing (to `typeSInt32`) if necessary. The contents of the descriptor, as an integer value, or 0 if an error occurs.
 func (aed *AppleEventDescriptor) Int32Value() int {
 	defer runtime.KeepAlive(aed)
 	_r := objc.Send[int](objref.IDOf(aed), objc.RegisterName("int32Value"))
 	return _r
 }
 
-// DoubleValue returns the double value.
+// DoubleValue returns the contents of the receiver as a double value, coercing (to `typeIEEE64BitFloatingPoint`) if necessary.
 func (aed *AppleEventDescriptor) DoubleValue() float64 {
 	defer runtime.KeepAlive(aed)
 	_r := objc.Send[float64](objref.IDOf(aed), objc.RegisterName("doubleValue"))
 	return _r
 }
 
-// TypeCodeValue returns the type code value.
+// TypeCodeValue returns the contents of the receiver as a type, coercing to `typeType` if necessary. The contents of the descriptor, as a type, or 0 if an error occurs.
 func (aed *AppleEventDescriptor) TypeCodeValue() int {
 	defer runtime.KeepAlive(aed)
 	_r := objc.Send[int](objref.IDOf(aed), objc.RegisterName("typeCodeValue"))
 	return _r
 }
 
-// StringValue returns the string value.
+// StringValue returns the contents of the receiver as a Unicode text string, coercing to `typeUnicodeText` if necessary. The contents of the descriptor, as a string, or `nil` if an error occurs.
 func (aed *AppleEventDescriptor) StringValue() string {
 	defer runtime.KeepAlive(aed)
 	_r := objc.Send[objc.ID](objref.IDOf(aed), objc.RegisterName("stringValue"))
@@ -281,56 +281,56 @@ func (aed *AppleEventDescriptor) StringValue() string {
 	return purego.GoString(_r)
 }
 
-// DateValue returns the date value.
+// DateValue returns the contents of the receiver as a date, coercing if necessary.
 func (aed *AppleEventDescriptor) DateValue() time.Time {
 	defer runtime.KeepAlive(aed)
 	_r := objc.Send[objc.ID](objref.IDOf(aed), objc.RegisterName("dateValue"))
 	return rt.NSDateToTime(_r)
 }
 
-// FileURLValue returns the file URL value.
+// FileURLValue returns the contents of the receiver as a file URL, coercing if necessary.
 func (aed *AppleEventDescriptor) FileURLValue() string {
 	defer runtime.KeepAlive(aed)
 	_r := objc.Send[objc.ID](objref.IDOf(aed), objc.RegisterName("fileURLValue"))
 	return rt.URLString(_r)
 }
 
-// EventClass returns the event class.
+// EventClass returns the event class for the receiver. The event class (a four-character code) for the receiver, or 0 if an error occurs. The receiver must be an Apple event. An Apple event is identified by its event class and event ID, a pair of four-character codes stored as 32-bit integers.
 func (aed *AppleEventDescriptor) EventClass() int {
 	defer runtime.KeepAlive(aed)
 	_r := objc.Send[int](objref.IDOf(aed), objc.RegisterName("eventClass"))
 	return _r
 }
 
-// EventID returns the event ID.
+// EventID returns the event ID for the receiver. The event ID (a four-character code) for the receiver, or 0 if an error occurs. The receiver must be an Apple event.
 func (aed *AppleEventDescriptor) EventID() int {
 	defer runtime.KeepAlive(aed)
 	_r := objc.Send[int](objref.IDOf(aed), objc.RegisterName("eventID"))
 	return _r
 }
 
-// ReturnID returns the return ID.
+// ReturnID returns the receiver's return ID (the ID for a reply Apple event). The receiver's return ID (an integer value), or 0 if an error occurs. The receiver must be an Apple event.
 func (aed *AppleEventDescriptor) ReturnID() int16 {
 	defer runtime.KeepAlive(aed)
 	_r := objc.Send[int16](objref.IDOf(aed), objc.RegisterName("returnID"))
 	return _r
 }
 
-// TransactionID returns the transaction ID.
+// TransactionID returns the receiver's transaction ID, if any. The receiver's transaction ID (an integer value), or 0 if an error occurs. The receiver must be an Apple event.
 func (aed *AppleEventDescriptor) TransactionID() int {
 	defer runtime.KeepAlive(aed)
 	_r := objc.Send[int](objref.IDOf(aed), objc.RegisterName("transactionID"))
 	return _r
 }
 
-// IsRecordDescriptor reports whether the object is record descriptor.
+// IsRecordDescriptor reports whether the receiver is a record-like descriptor. Record-like descriptors function as records, but may have a `descriptorType` other than `typeAERecord`, such as `typeObjectSpecifier`.
 func (aed *AppleEventDescriptor) IsRecordDescriptor() bool {
 	defer runtime.KeepAlive(aed)
 	_r := objc.Send[bool](objref.IDOf(aed), objc.RegisterName("isRecordDescriptor"))
 	return _r
 }
 
-// NumberOfItems returns the number of items.
+// NumberOfItems returns the number of descriptors in the receiver's descriptor list. The number of descriptors in the receiver's descriptor list (possibly 0); returns 0 if an error occurs.
 func (aed *AppleEventDescriptor) NumberOfItems() int {
 	defer runtime.KeepAlive(aed)
 	_r := objc.Send[int](objref.IDOf(aed), objc.RegisterName("numberOfItems"))

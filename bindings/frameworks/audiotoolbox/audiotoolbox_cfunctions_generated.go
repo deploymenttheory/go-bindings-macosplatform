@@ -533,15 +533,16 @@ func AudioCodecProduceOutputPackets(inCodec *carboncore.ComponentInstanceRecord,
 	return _ret, _out0, _out1, _out2
 }
 
-var _fnAudioComponentCopyIcon func(objc.ID) unsafe.Pointer
+var _fnAudioComponentCopyIcon func(objc.ID) objc.ID
 
 // AudioComponentCopyIcon calls the AudioToolbox framework function AudioComponentCopyIcon.
-func AudioComponentCopyIcon(comp AudioComponent) unsafe.Pointer {
+func AudioComponentCopyIcon(comp AudioComponent) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAudioComponentCopyIcon == nil {
 		ebipurego.RegisterLibFunc(&_fnAudioComponentCopyIcon, _lib, "AudioComponentCopyIcon")
 	}
-	return _fnAudioComponentCopyIcon(objref.IDOf(comp.Object))
+	_ret := _fnAudioComponentCopyIcon(objref.IDOf(comp.Object))
+	return obj.Wrap(_ret)
 }
 
 var _fnAudioComponentCount func(unsafe.Pointer) uint32

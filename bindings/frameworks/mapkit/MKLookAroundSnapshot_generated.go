@@ -15,8 +15,6 @@ import (
 )
 
 // LookAroundSnapshot is an idiomatic wrapper over the Objective-C class MKLookAroundSnapshot.
-//
-// An object that contains a snapshot image.
 type LookAroundSnapshot struct {
 	objref.Handle
 }

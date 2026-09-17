@@ -323,6 +323,39 @@ func (sv *ScrollView) WithScrollerInsets(scrollerInsets foundation.NSEdgeInsets)
 	return sv
 }
 
+// WithTouchScrollingEnabled sets enable touch scrolling
+func (sv *ScrollView) WithTouchScrollingEnabled(touchScrollingEnabled bool) *ScrollView {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setTouchScrollingEnabled:"), touchScrollingEnabled)
+	})
+	return sv
+}
+
+// WithMinimumNumberOfTouchesForScrolling sets the minimum number of touches needed for scrolling
+func (sv *ScrollView) WithMinimumNumberOfTouchesForScrolling(minimumNumberOfTouchesForScrolling int) *ScrollView {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setMinimumNumberOfTouchesForScrolling:"), minimumNumberOfTouchesForScrolling)
+	})
+	return sv
+}
+
+// WithMaximumNumberOfTouchesForScrolling sets the maximum number of touches needed for scrolling
+func (sv *ScrollView) WithMaximumNumberOfTouchesForScrolling(maximumNumberOfTouchesForScrolling int) *ScrollView {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setMaximumNumberOfTouchesForScrolling:"), maximumNumberOfTouchesForScrolling)
+	})
+	return sv
+}
+
+// WithRefreshController sets the refresh controller associated with this scroll view.
+func (sv *ScrollView) WithRefreshController(refreshController *RefreshController) *ScrollView {
+	defer runtime.KeepAlive(refreshController)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setRefreshController:"), objref.IDOf(refreshController))
+	})
+	return sv
+}
+
 // WithRulersVisible sets a Boolean that indicates whether the scroll view displays its rulers.
 func (sv *ScrollView) WithRulersVisible(rulersVisible bool) *ScrollView {
 	purego.Main(func() {
@@ -653,6 +686,14 @@ func (sv *ScrollView) WithGestureRecognizers(items ...GestureRecognizerProvider)
 	return sv
 }
 
+// WithExclusiveGestureBehavior sets declares whether gesture recognizers should be exclusive in this view and its subviews.
+func (sv *ScrollView) WithExclusiveGestureBehavior(exclusiveGestureBehavior ViewExclusiveGestureBehavior) *ScrollView {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setExclusiveGestureBehavior:"), exclusiveGestureBehavior)
+	})
+	return sv
+}
+
 // WithAllowedTouchTypes sets the allowed touch types.
 func (sv *ScrollView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *ScrollView {
 	purego.Main(func() {
@@ -714,6 +755,15 @@ func (sv *ScrollView) WithHorizontalContentSizeConstraintActive(horizontalConten
 func (sv *ScrollView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ScrollView {
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
+	return sv
+}
+
+// WithTextSelectionManager sets the text selection manager for this view.
+func (sv *ScrollView) WithTextSelectionManager(textSelectionManager *TextSelectionManager) *ScrollView {
+	defer runtime.KeepAlive(textSelectionManager)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setTextSelectionManager:"), objref.IDOf(textSelectionManager))
 	})
 	return sv
 }
@@ -1267,6 +1317,76 @@ func (sv *ScrollView) ScrollerInsets() foundation.NSEdgeInsets {
 		_mainthread0 = func() foundation.NSEdgeInsets {
 			_r := objc.Send[foundation.NSEdgeInsets](objref.IDOf(sv), objc.RegisterName("scrollerInsets"))
 			return _r
+		}()
+	})
+	return _mainthread0
+
+}
+
+// IsTouchScrollingEnabled reports whether enable touch scrolling Defaults to `true`.
+func (sv *ScrollView) IsTouchScrollingEnabled() bool {
+	defer runtime.KeepAlive(sv)
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(sv), objc.RegisterName("isTouchScrollingEnabled"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
+}
+
+// MinimumNumberOfTouchesForScrolling returns the minimum number of touches needed for scrolling Defaults to 1.
+func (sv *ScrollView) MinimumNumberOfTouchesForScrolling() int {
+	defer runtime.KeepAlive(sv)
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(sv), objc.RegisterName("minimumNumberOfTouchesForScrolling"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
+}
+
+// MaximumNumberOfTouchesForScrolling returns the maximum number of touches needed for scrolling Set this property to 0 to require exactly `minimumNumberOfTouchesForScrolling` touches to recognize the gesture. Defaults to `NSIntegerMax`.
+func (sv *ScrollView) MaximumNumberOfTouchesForScrolling() int {
+	defer runtime.KeepAlive(sv)
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(sv), objc.RegisterName("maximumNumberOfTouchesForScrolling"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
+}
+
+// ScrollGestureForRelationships returns a gesture recognizer for setting up failure or exclusion relationships against scrolling gestures
+func (sv *ScrollView) ScrollGestureForRelationships() *GestureRecognizer {
+	defer runtime.KeepAlive(sv)
+	var _mainthread0 *GestureRecognizer
+	purego.Main(func() {
+		_mainthread0 = func() *GestureRecognizer {
+			_r := objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("scrollGestureForRelationships"))
+			return GestureRecognizerFromID(_r)
+		}()
+	})
+	return _mainthread0
+
+}
+
+// RefreshController returns the refresh controller associated with this scroll view. Setting this property adds the refresh controller to the scroll view, enabling pull-to-refresh functionality. Set to nil to remove it.
+func (sv *ScrollView) RefreshController() *RefreshController {
+	defer runtime.KeepAlive(sv)
+	var _mainthread0 *RefreshController
+	purego.Main(func() {
+		_mainthread0 = func() *RefreshController {
+			_r := objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("refreshController"))
+			return RefreshControllerFromID(_r)
 		}()
 	})
 	return _mainthread0

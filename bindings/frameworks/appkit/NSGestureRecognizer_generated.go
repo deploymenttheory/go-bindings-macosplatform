@@ -185,6 +185,14 @@ func (gr *GestureRecognizer) WithDelaysRotationEvents(delaysRotationEvents bool)
 	return gr
 }
 
+// WithCancellableByScrollGesture sets causes the receiver to be cancelled when its enclosing scroll view’s gesture recognizer begins.
+func (gr *GestureRecognizer) WithCancellableByScrollGesture(cancellableByScrollGesture bool) *GestureRecognizer {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("setCancellableByScrollGesture:"), cancellableByScrollGesture)
+	})
+	return gr
+}
+
 // WithName sets the name.
 func (gr *GestureRecognizer) WithName(name string) *GestureRecognizer {
 	purego.Main(func() {
@@ -363,6 +371,20 @@ func (gr *GestureRecognizer) DelaysRotationEvents() bool {
 	purego.Main(func() {
 		_mainthread0 = func() bool {
 			_r := objc.Send[bool](objref.IDOf(gr), objc.RegisterName("delaysRotationEvents"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
+}
+
+// IsCancellableByScrollGesture reports whether causes the receiver to be cancelled when its enclosing scroll view's gesture recognizer begins. Defaults to `false`.
+func (gr *GestureRecognizer) IsCancellableByScrollGesture() bool {
+	defer runtime.KeepAlive(gr)
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(gr), objc.RegisterName("isCancellableByScrollGesture"))
 			return _r
 		}()
 	})

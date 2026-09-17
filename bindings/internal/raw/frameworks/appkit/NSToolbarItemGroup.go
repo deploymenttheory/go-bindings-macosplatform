@@ -29,6 +29,8 @@ var (
 	_nSToolbarItemGroupSelSetControlRepresentation                                     = objc.RegisterName("setControlRepresentation:")
 	_nSToolbarItemGroupSelSelectionMode                                                = objc.RegisterName("selectionMode")
 	_nSToolbarItemGroupSelSetSelectionMode                                             = objc.RegisterName("setSelectionMode:")
+	_nSToolbarItemGroupSelRole                                                         = objc.RegisterName("role")
+	_nSToolbarItemGroupSelSetRole                                                      = objc.RegisterName("setRole:")
 	_nSToolbarItemGroupSelSelectedIndex                                                = objc.RegisterName("selectedIndex")
 	_nSToolbarItemGroupSelSetSelectedIndex                                             = objc.RegisterName("setSelectedIndex:")
 )
@@ -146,6 +148,24 @@ func (o *NSToolbarItemGroup) SelectionMode() NSToolbarItemGroupSelectionMode {
 func (o *NSToolbarItemGroup) SetSelectionMode(selectionMode NSToolbarItemGroupSelectionMode) {
 	purego.Main(func() {
 		o.Ptr().Send(_nSToolbarItemGroupSelSetSelectionMode, selectionMode)
+	})
+}
+
+// The semantic role of the item. Defaults to `NSToolbarItemGroupRoleAutomatic`.
+func (o *NSToolbarItemGroup) Role() NSToolbarItemGroupRole {
+	var _mainthread0 NSToolbarItemGroupRole
+	purego.Main(func() {
+		_mainthread0 = func() NSToolbarItemGroupRole {
+			_ret := objc.Send[NSToolbarItemGroupRole](o.Ptr(), _nSToolbarItemGroupSelRole)
+			return _ret
+		}()
+	})
+	return _mainthread0
+}
+
+func (o *NSToolbarItemGroup) SetRole(role NSToolbarItemGroupRole) {
+	purego.Main(func() {
+		o.Ptr().Send(_nSToolbarItemGroupSelSetRole, role)
 	})
 }
 

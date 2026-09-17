@@ -21,6 +21,8 @@ var (
 	_clsVTLowLatencyFrameInterpolationConfiguration                                                        = _objcClass("VTLowLatencyFrameInterpolationConfiguration")
 	_vTLowLatencyFrameInterpolationConfigurationSelInitWithFrameWidthFrameHeightNumberOfInterpolatedFrames = objc.RegisterName("initWithFrameWidth:frameHeight:numberOfInterpolatedFrames:")
 	_vTLowLatencyFrameInterpolationConfigurationSelInitWithFrameWidthFrameHeightSpatialScaleFactor         = objc.RegisterName("initWithFrameWidth:frameHeight:spatialScaleFactor:")
+	_vTLowLatencyFrameInterpolationConfigurationSelMaximumDimensionForSpatialScaleFactor                   = objc.RegisterName("maximumDimensionForSpatialScaleFactor:")
+	_vTLowLatencyFrameInterpolationConfigurationSelMaximumPixelCountForSpatialScaleFactor                  = objc.RegisterName("maximumPixelCountForSpatialScaleFactor:")
 	_vTLowLatencyFrameInterpolationConfigurationSelFrameWidth                                              = objc.RegisterName("frameWidth")
 	_vTLowLatencyFrameInterpolationConfigurationSelFrameHeight                                             = objc.RegisterName("frameHeight")
 	_vTLowLatencyFrameInterpolationConfigurationSelSpatialScaleFactor                                      = objc.RegisterName("spatialScaleFactor")
@@ -57,6 +59,18 @@ func (o *VTLowLatencyFrameInterpolationConfiguration) InitWithFrameWidthFrameHei
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return VTLowLatencyFrameInterpolationConfigurationFromID(_ret)
+}
+
+// The maximum value for either dimension of the source frame, in pixels, for a given spatial scale factor.
+func VTLowLatencyFrameInterpolationConfigurationMaximumDimensionForSpatialScaleFactor(spatialScaleFactor int) int {
+	_ret := objc.Send[int](objc.ID(_clsVTLowLatencyFrameInterpolationConfiguration), _vTLowLatencyFrameInterpolationConfigurationSelMaximumDimensionForSpatialScaleFactor, spatialScaleFactor)
+	return _ret
+}
+
+// The maximum total number of pixels in the source frame for a given spatial scale factor.
+func VTLowLatencyFrameInterpolationConfigurationMaximumPixelCountForSpatialScaleFactor(spatialScaleFactor int) int {
+	_ret := objc.Send[int](objc.ID(_clsVTLowLatencyFrameInterpolationConfiguration), _vTLowLatencyFrameInterpolationConfigurationSelMaximumPixelCountForSpatialScaleFactor, spatialScaleFactor)
+	return _ret
 }
 
 // Width of source frames in pixels.

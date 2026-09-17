@@ -15,8 +15,6 @@ import (
 )
 
 // HapticParameterCurveControlPoint is an idiomatic wrapper over the Objective-C class CHHapticParameterCurveControlPoint.
-//
-// A single control point in a parameter curve.
 type HapticParameterCurveControlPoint struct {
 	objref.Handle
 }

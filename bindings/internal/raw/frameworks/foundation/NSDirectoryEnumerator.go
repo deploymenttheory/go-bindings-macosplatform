@@ -9,8 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An object that enumerates the contents of a directory.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsdirectoryenumerator
 type NSDirectoryEnumerator[ObjectType purego.AnyObject] struct {
 	NSEnumerator[ObjectType]
@@ -36,14 +34,17 @@ func NSDirectoryEnumeratorFromID[ObjectType purego.AnyObject](id objc.ID) *NSDir
 	return o
 }
 
+// Causes the receiver to skip recursion into the most recently obtained subdirectory.
 func (o *NSDirectoryEnumerator[ObjectType]) SkipDescendents() {
 	o.Ptr().Send(_nSDirectoryEnumeratorSelSkipDescendents)
 }
 
+// Causes the receiver to skip recursion into the most recently obtained subdirectory. This method is identical to `skipDescendents` except for the spelling.
 func (o *NSDirectoryEnumerator[ObjectType]) SkipDescendants() {
 	o.Ptr().Send(_nSDirectoryEnumeratorSelSkipDescendants)
 }
 
+// A dictionary with the attributes of the most recently returned file or subdirectory (as referenced by the pathname). See the description of the `fileAttributesAtPath:traverseLink:` method of “NSFileManager“ for details on obtaining the attributes from the dictionary.
 func (o *NSDirectoryEnumerator[ObjectType]) FileAttributes() *NSDictionary[*NSString, objc.ID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDirectoryEnumeratorSelFileAttributes)
 	if _ret != 0 {
@@ -52,6 +53,7 @@ func (o *NSDirectoryEnumerator[ObjectType]) FileAttributes() *NSDictionary[*NSSt
 	return NSDictionaryFromID[*NSString, objc.ID](_ret)
 }
 
+// A dictionary with the attributes of the directory at which enumeration started. See the description of the `fileAttributesAtPath:traverseLink:` method of “NSFileManager“ for details on obtaining the attributes from the dictionary.
 func (o *NSDirectoryEnumerator[ObjectType]) DirectoryAttributes() *NSDictionary[*NSString, objc.ID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDirectoryEnumeratorSelDirectoryAttributes)
 	if _ret != 0 {
@@ -65,6 +67,7 @@ func (o *NSDirectoryEnumerator[ObjectType]) IsEnumeratingDirectoryPostOrder() bo
 	return _ret
 }
 
+// The number of levels deep the current object is in the directory hierarchy being enumerated. The number of levels, with the directory passed to `enumeratorAtURL:includingPropertiesForKeys:options:errorHandler:` considered to be level `0`.
 func (o *NSDirectoryEnumerator[ObjectType]) Level() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSDirectoryEnumeratorSelLevel)
 	return _ret

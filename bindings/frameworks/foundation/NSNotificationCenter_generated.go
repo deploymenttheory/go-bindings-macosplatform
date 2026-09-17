@@ -18,8 +18,6 @@ import (
 // NotificationCenter is an idiomatic wrapper over the Objective-C class NSNotificationCenter.
 //
 // NotificationCenter is an abstract base — you do not construct it directly. Construct one of [DistributedNotificationCenter] and pass it where a NotificationCenter is accepted.
-//
-// A notification dispatch mechanism that enables the broadcast of information to registered observers.
 type NotificationCenter struct {
 	objref.Handle
 }
@@ -88,14 +86,14 @@ func (nc *NotificationCenter) WithScriptingProperties(scriptingProperties map[st
 	return nc
 }
 
-// PostNotification posts notification.
+// PostNotification posts a given notification to the notification center. - Parameter notification: The notification to post.
 func (nc *NotificationCenter) PostNotification(notification *Notification) {
 	defer runtime.KeepAlive(nc)
 	defer runtime.KeepAlive(notification)
 	objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("postNotification:"), objref.IDOf(notification))
 }
 
-// PostNotificationNameObject posts notification name object.
+// PostNotificationNameObject creates a notification with a given name and sender and posts it to the notification center. - Parameters: - aName: The name of the notification. - anObject: The object posting the notification.
 func (nc *NotificationCenter) PostNotificationNameObject(aName *String, anObject obj.Object) {
 	defer runtime.KeepAlive(nc)
 	defer runtime.KeepAlive(aName)
@@ -103,7 +101,7 @@ func (nc *NotificationCenter) PostNotificationNameObject(aName *String, anObject
 	objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("postNotificationName:object:"), objref.IDOf(aName), objref.IDOf(anObject))
 }
 
-// PostNotificationNameObjectUserInfo posts notification name object user info.
+// PostNotificationNameObjectUserInfo creates a notification with a given name, sender, and information and posts it to the notification center. - Parameters: - aName: The name of the notification. - anObject: The object posting the notification. - aUserInfo: Optional information about the notification.
 func (nc *NotificationCenter) PostNotificationNameObjectUserInfo(aName *String, anObject obj.Object, aUserInfo obj.Object) {
 	defer runtime.KeepAlive(nc)
 	defer runtime.KeepAlive(aName)
@@ -112,14 +110,14 @@ func (nc *NotificationCenter) PostNotificationNameObjectUserInfo(aName *String, 
 	objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("postNotificationName:object:userInfo:"), objref.IDOf(aName), objref.IDOf(anObject), objref.IDOf(aUserInfo))
 }
 
-// RemoveObserver removes observer.
+// RemoveObserver removes all entries specifying an observer from the notification center's dispatch table. - Parameter observer: The notification observer to remove.
 func (nc *NotificationCenter) RemoveObserver(observer obj.Object) {
 	defer runtime.KeepAlive(nc)
 	defer runtime.KeepAlive(observer)
 	objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("removeObserver:"), objref.IDOf(observer))
 }
 
-// RemoveObserverNameObject removes observer name object.
+// RemoveObserverNameObject removes matching entries from the notification center's dispatch table. - Parameters: - observer: The notification observer to remove. - aName: The name of the notification to remove from the dispatch table. Pass `nil` to remove all entries for the observer. - anObject: The sender to remove from the dispatch table. Pass `nil` to remove the observer regardless of the sender.
 func (nc *NotificationCenter) RemoveObserverNameObject(observer obj.Object, aName *String, anObject obj.Object) {
 	defer runtime.KeepAlive(nc)
 	defer runtime.KeepAlive(observer)

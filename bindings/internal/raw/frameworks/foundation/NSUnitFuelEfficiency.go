@@ -9,8 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A unit of measure for fuel efficiency.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsunitfuelefficiency
 type NSUnitFuelEfficiency struct {
 	NSDimension
@@ -33,6 +31,7 @@ func NSUnitFuelEfficiencyFromID(id objc.ID) *NSUnitFuelEfficiency {
 	return o
 }
 
+// The liters per 100 kilometers unit of fuel efficiency.
 func NSUnitFuelEfficiencyLitersPer100Kilometers() *NSUnitFuelEfficiency {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitFuelEfficiency), _nSUnitFuelEfficiencySelLitersPer100Kilometers)
 	if _ret != 0 {
@@ -41,6 +40,7 @@ func NSUnitFuelEfficiencyLitersPer100Kilometers() *NSUnitFuelEfficiency {
 	return NSUnitFuelEfficiencyFromID(_ret)
 }
 
+// The miles per imperial gallon unit of fuel efficiency.
 func NSUnitFuelEfficiencyMilesPerImperialGallon() *NSUnitFuelEfficiency {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitFuelEfficiency), _nSUnitFuelEfficiencySelMilesPerImperialGallon)
 	if _ret != 0 {
@@ -49,6 +49,7 @@ func NSUnitFuelEfficiencyMilesPerImperialGallon() *NSUnitFuelEfficiency {
 	return NSUnitFuelEfficiencyFromID(_ret)
 }
 
+// The miles per gallon unit of fuel efficiency.
 func NSUnitFuelEfficiencyMilesPerGallon() *NSUnitFuelEfficiency {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitFuelEfficiency), _nSUnitFuelEfficiencySelMilesPerGallon)
 	if _ret != 0 {

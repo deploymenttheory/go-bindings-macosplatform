@@ -79,35 +79,35 @@ func (cp *ComparisonPredicate) WithScriptingProperties(scriptingProperties map[s
 	return cp
 }
 
-// PredicateOperatorType returns the predicate operator type.
+// PredicateOperatorType returns the predicate type for the receiver.
 func (cp *ComparisonPredicate) PredicateOperatorType() PredicateOperatorType {
 	defer runtime.KeepAlive(cp)
 	_r := objc.Send[PredicateOperatorType](objref.IDOf(cp), objc.RegisterName("predicateOperatorType"))
 	return _r
 }
 
-// ComparisonPredicateModifier returns the comparison predicate modifier.
+// ComparisonPredicateModifier returns the comparison predicate modifier for the receiver. The default value is `NSDirectPredicateModifier`.
 func (cp *ComparisonPredicate) ComparisonPredicateModifier() ComparisonPredicateModifier {
 	defer runtime.KeepAlive(cp)
 	_r := objc.Send[ComparisonPredicateModifier](objref.IDOf(cp), objc.RegisterName("comparisonPredicateModifier"))
 	return _r
 }
 
-// LeftExpression returns the left expression.
+// LeftExpression returns the left expression for the receiver.
 func (cp *ComparisonPredicate) LeftExpression() *Expression {
 	defer runtime.KeepAlive(cp)
 	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("leftExpression"))
 	return ExpressionFromID(_r)
 }
 
-// RightExpression returns the right expression.
+// RightExpression returns the right expression for the receiver.
 func (cp *ComparisonPredicate) RightExpression() *Expression {
 	defer runtime.KeepAlive(cp)
 	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("rightExpression"))
 	return ExpressionFromID(_r)
 }
 
-// Options returns the options.
+// Options returns the options to use for the receiver.
 func (cp *ComparisonPredicate) Options() ComparisonPredicateOptions {
 	defer runtime.KeepAlive(cp)
 	_r := objc.Send[ComparisonPredicateOptions](objref.IDOf(cp), objc.RegisterName("options"))

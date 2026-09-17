@@ -83,6 +83,7 @@ func (o *NSOrderedCollectionDifference[ObjectType]) InverseDifference() *NSOrder
 	return NSOrderedCollectionDifferenceFromID[ObjectType](_ret)
 }
 
+// A collection of insertion change objects.
 func (o *NSOrderedCollectionDifference[ObjectType]) Insertions() *NSArray[objc.ID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedCollectionDifferenceSelInsertions)
 	if _ret != 0 {
@@ -91,6 +92,7 @@ func (o *NSOrderedCollectionDifference[ObjectType]) Insertions() *NSArray[objc.I
 	return NSArrayFromID[objc.ID](_ret)
 }
 
+// A collection of removal change objects.
 func (o *NSOrderedCollectionDifference[ObjectType]) Removals() *NSArray[objc.ID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedCollectionDifferenceSelRemovals)
 	if _ret != 0 {
@@ -99,6 +101,7 @@ func (o *NSOrderedCollectionDifference[ObjectType]) Removals() *NSArray[objc.ID]
 	return NSArrayFromID[objc.ID](_ret)
 }
 
+// A Boolean value that indicates if the difference has changes.
 func (o *NSOrderedCollectionDifference[ObjectType]) HasChanges() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSOrderedCollectionDifferenceSelHasChanges)
 	return _ret

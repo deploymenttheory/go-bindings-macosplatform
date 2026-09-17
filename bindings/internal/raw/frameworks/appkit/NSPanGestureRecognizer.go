@@ -26,6 +26,10 @@ var (
 	_nSPanGestureRecognizerSelSetButtonMask              = objc.RegisterName("setButtonMask:")
 	_nSPanGestureRecognizerSelNumberOfTouchesRequired    = objc.RegisterName("numberOfTouchesRequired")
 	_nSPanGestureRecognizerSelSetNumberOfTouchesRequired = objc.RegisterName("setNumberOfTouchesRequired:")
+	_nSPanGestureRecognizerSelMinimumNumberOfTouches     = objc.RegisterName("minimumNumberOfTouches")
+	_nSPanGestureRecognizerSelSetMinimumNumberOfTouches  = objc.RegisterName("setMinimumNumberOfTouches:")
+	_nSPanGestureRecognizerSelMaximumNumberOfTouches     = objc.RegisterName("maximumNumberOfTouches")
+	_nSPanGestureRecognizerSelSetMaximumNumberOfTouches  = objc.RegisterName("setMaximumNumberOfTouches:")
 )
 
 func NSPanGestureRecognizerFromID(id objc.ID) *NSPanGestureRecognizer {
@@ -86,6 +90,7 @@ func (o *NSPanGestureRecognizer) SetButtonMask(buttonMask uint) {
 	})
 }
 
+// Deprecated: since macOS 27.0.
 func (o *NSPanGestureRecognizer) NumberOfTouchesRequired() int {
 	var _mainthread0 int
 	purego.Main(func() {
@@ -97,8 +102,47 @@ func (o *NSPanGestureRecognizer) NumberOfTouchesRequired() int {
 	return _mainthread0
 }
 
+// Deprecated: since macOS 27.0.
 func (o *NSPanGestureRecognizer) SetNumberOfTouchesRequired(numberOfTouchesRequired int) {
 	purego.Main(func() {
 		o.Ptr().Send(_nSPanGestureRecognizerSelSetNumberOfTouchesRequired, numberOfTouchesRequired)
+	})
+}
+
+// The minimum number of touches needed to recognize this gesture Defaults to 1.
+func (o *NSPanGestureRecognizer) MinimumNumberOfTouches() int {
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSPanGestureRecognizerSelMinimumNumberOfTouches)
+			return _ret
+		}()
+	})
+	return _mainthread0
+}
+
+// The minimum number of touches needed to recognize this gesture Defaults to 1.
+func (o *NSPanGestureRecognizer) SetMinimumNumberOfTouches(minimumNumberOfTouches int) {
+	purego.Main(func() {
+		o.Ptr().Send(_nSPanGestureRecognizerSelSetMinimumNumberOfTouches, minimumNumberOfTouches)
+	})
+}
+
+// The maximum number of touches allowed to recognize this gesture Set this property to 0 to require exactly `minimumNumberOfTouches` touches to recognize the gesture. Defaults to `NSIntegerMax`.
+func (o *NSPanGestureRecognizer) MaximumNumberOfTouches() int {
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSPanGestureRecognizerSelMaximumNumberOfTouches)
+			return _ret
+		}()
+	})
+	return _mainthread0
+}
+
+// The maximum number of touches allowed to recognize this gesture Set this property to 0 to require exactly `minimumNumberOfTouches` touches to recognize the gesture. Defaults to `NSIntegerMax`.
+func (o *NSPanGestureRecognizer) SetMaximumNumberOfTouches(maximumNumberOfTouches int) {
+	purego.Main(func() {
+		o.Ptr().Send(_nSPanGestureRecognizerSelSetMaximumNumberOfTouches, maximumNumberOfTouches)
 	})
 }

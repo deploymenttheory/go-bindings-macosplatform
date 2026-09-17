@@ -53,6 +53,7 @@ func (o *NSRelativeSpecifier) InitWithContainerClassDescriptionContainerSpecifie
 	return NSRelativeSpecifierFromID(_ret)
 }
 
+// The relative position (before or after) of the object to be located.
 func (o *NSRelativeSpecifier) RelativePosition() NSRelativePosition {
 	_ret := objc.Send[NSRelativePosition](o.Ptr(), _nSRelativeSpecifierSelRelativePosition)
 	return _ret
@@ -62,6 +63,7 @@ func (o *NSRelativeSpecifier) SetRelativePosition(relativePosition NSRelativePos
 	o.Ptr().Send(_nSRelativeSpecifierSelSetRelativePosition, relativePosition)
 }
 
+// The specifier for the base object relative to which the target is located.
 func (o *NSRelativeSpecifier) BaseSpecifier() *NSScriptObjectSpecifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRelativeSpecifierSelBaseSpecifier)
 	if _ret != 0 {

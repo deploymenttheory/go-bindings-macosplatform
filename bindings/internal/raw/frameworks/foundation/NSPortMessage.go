@@ -9,7 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A low-level, operating system-independent type for inter-application (and inter-thread) messages.
+// A low-level, operating system-independent type for inter-application (and inter-thread) messages. Port messages are used primarily by the distributed objects system. You should implement inter-application communication using distributed objects whenever possible and use “NSPortMessage“ only when necessary. An “NSPortMessage“ object has three major parts: the send and receive ports, which are “NSPort“ objects that link the sender of the message to the receiver, and the components, which form the body of the message. The components are held as an “NSArray“ object containing “NSData“ and “NSPort“ objects. The “send(before:)“ message sends the components out through the send port; any replies to the message arrive on the receive port. See the “NSPort“ class specification for information on handling incoming messages. An “NSPortMessage“ instance can be initialized with a pair of “NSPort“ objects and an array of components. A port message's body can contain only “NSPort“ objects or “NSData“ objects. In the distributed objects system the byte/character arrays are usually encoded “NSInvocation“ objects that are being forwarded from a proxy to the corresponding real object. An “NSPortMessage“ object also maintains a message identifier, which can be used to indicate the class of a message, such as an Objective-C method invocation, a connection request, an error, and so on. Use the “msgid“ property to access the identifier.
 //
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsportmessage
 type NSPortMessage struct {
@@ -37,6 +37,7 @@ func NSPortMessageFromID(id objc.ID) *NSPortMessage {
 	return o
 }
 
+// Initializes a newly allocated “NSPortMessage“ to send a given array of components over a given port and to receive replies on another given port. An “NSPortMessage“ object initialized with this method has a message identifier of 0. This is the designated initializer for “NSPortMessage“. - Parameters: - sendPort: The port on which the message is sent. - replyPort: The port on which replies to the message arrive. - components: The data to send in the message. `components` should contain only `NSData` and `NSPort` objects, and the contents of the `NSData` objects should be in network byte order. - Returns: An “NSPortMessage“ object initialized to send `components` on `sendPort` and to receive replies on `replyPort`.
 func (o *NSPortMessage) InitWithSendPortReceivePortComponents(sendPort *NSPort, replyPort *NSPort, components *NSArray[objc.ID]) *NSPortMessage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPortMessageSelInitWithSendPortReceivePortComponents, sendPort.Ptr(), replyPort.Ptr(), components.Ptr())
 	if _ret != 0 {
@@ -45,11 +46,13 @@ func (o *NSPortMessage) InitWithSendPortReceivePortComponents(sendPort *NSPort, 
 	return NSPortMessageFromID(_ret)
 }
 
+// Attempts to send the message before the specified date. If the message cannot be sent immediately, the sending thread blocks until either the message is sent or `date` is reached. Sent messages are queued to minimize blocking, but failure can occur if multiple messages are sent to a port faster than the port's owner can receive them, causing the queue to fill up. If an error other than a time out occurs, this method could raise an `NSInvalidSendPortException`, `NSInvalidReceivePortException`, or an `NSPortSendException`. - Parameters: - date: The instant before which the message should be sent. - Returns: `YES` if the operation is successful, otherwise `NO` (for example, if the operation times out).
 func (o *NSPortMessage) SendBeforeDate(date *NSDate) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSPortMessageSelSendBeforeDate, date.Ptr())
 	return _ret
 }
 
+// The data components of the receiver. See “NSPortMessage“ for more information.
 func (o *NSPortMessage) Components() *NSArray[objc.ID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPortMessageSelComponents)
 	if _ret != 0 {
@@ -58,6 +61,7 @@ func (o *NSPortMessage) Components() *NSArray[objc.ID] {
 	return NSArrayFromID[objc.ID](_ret)
 }
 
+// For an outgoing message, the port on which replies to the receiver will arrive. For an incoming message, the port the receiver did arrive on.
 func (o *NSPortMessage) ReceivePort() *NSPort {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPortMessageSelReceivePort)
 	if _ret != 0 {
@@ -66,6 +70,7 @@ func (o *NSPortMessage) ReceivePort() *NSPort {
 	return NSPortFromID(_ret)
 }
 
+// For an outgoing message, the port the receiver will send itself through. For an incoming message, the port replies to the receiver should be sent through.
 func (o *NSPortMessage) SendPort() *NSPort {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPortMessageSelSendPort)
 	if _ret != 0 {
@@ -74,6 +79,7 @@ func (o *NSPortMessage) SendPort() *NSPort {
 	return NSPortFromID(_ret)
 }
 
+// The identifier for the receiver. Cooperating applications can use this to define different types of messages, such as connection requests, RPCs, errors, and so on.
 func (o *NSPortMessage) Msgid() uint32 {
 	_ret := objc.Send[uint32](o.Ptr(), _nSPortMessageSelMsgid)
 	return _ret

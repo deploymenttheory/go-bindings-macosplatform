@@ -17,8 +17,6 @@ import (
 // Tool is an idiomatic wrapper over the Objective-C class PKTool.
 //
 // Tool is an abstract base — you do not construct it directly. Construct one of [EraserTool], [InkingTool], [LassoTool] and pass it where a Tool is accepted.
-//
-// An interface adopted by drawing and writing tools used by a canvas view.
 type Tool struct {
 	objref.Handle
 }

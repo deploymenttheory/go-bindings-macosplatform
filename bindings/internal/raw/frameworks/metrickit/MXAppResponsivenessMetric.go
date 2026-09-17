@@ -13,6 +13,7 @@ import (
 // An object representing metrics about the responsiveness of the app to user interaction.
 //
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxappresponsivenessmetric
+// Deprecated: Use MetricResult instead.
 type MXAppResponsivenessMetric struct {
 	MXMetric
 }

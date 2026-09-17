@@ -13,9 +13,16 @@ import (
 )
 
 // Deprecated: Use MusicSubscription.subscriptionUpdates from MusicKit.
-func SKCloudServiceCapabilitiesDidChangeNotification() uintptr {
+func SKCloudServiceCapabilitiesDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_storekitLib, "SKCloudServiceCapabilitiesDidChangeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Hosted content is no longer supported.
@@ -78,49 +85,112 @@ func SKReceiptPropertyIsVolumePurchase() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
-func SKStoreProductParameterAdvertisingPartnerToken() uintptr {
+func SKStoreProductParameterAdvertisingPartnerToken() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_storekitLib, "SKStoreProductParameterAdvertisingPartnerToken")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func SKStoreProductParameterAffiliateToken() uintptr {
+func SKStoreProductParameterAffiliateToken() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_storekitLib, "SKStoreProductParameterAffiliateToken")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func SKStoreProductParameterCampaignToken() uintptr {
+func SKStoreProductParameterCampaignToken() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_storekitLib, "SKStoreProductParameterCampaignToken")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func SKStoreProductParameterCustomProductPageIdentifier() uintptr {
+func SKStoreProductParameterCustomProductPageIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_storekitLib, "SKStoreProductParameterCustomProductPageIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func SKStoreProductParameterITunesItemIdentifier() uintptr {
+func SKStoreProductParameterITunesItemIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_storekitLib, "SKStoreProductParameterITunesItemIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func SKStoreProductParameterProductIdentifier() uintptr {
+func SKStoreProductParameterProductIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_storekitLib, "SKStoreProductParameterProductIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func SKStoreProductParameterProviderToken() uintptr {
+func SKStoreProductParameterProviderToken() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_storekitLib, "SKStoreProductParameterProviderToken")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Use Storefront.updates.
-func SKStorefrontCountryCodeDidChangeNotification() uintptr {
+func SKStorefrontCountryCodeDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_storekitLib, "SKStorefrontCountryCodeDidChangeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Use Storefront.updates.
-func SKStorefrontIdentifierDidChangeNotification() uintptr {
+func SKStorefrontIdentifierDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_storekitLib, "SKStorefrontIdentifierDidChangeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }

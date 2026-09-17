@@ -3993,7 +3993,7 @@ var _fnSecTransformCustomGetAttribute func(objc.ID, unsafe.Pointer, SecTransform
 func SecTransformCustomGetAttribute(ref SecTransformImplementationRef, attribute unsafe.Pointer, type_ SecTransformMetaAttributeType) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTransformCustomGetAttribute == nil {
-		ebipurego.RegisterLibFunc(&_fnSecTransformCustomGetAttribute, _lib, "SecTransformCustomGetAttribute")
+		ebipurego.RegisterLibFunc(&_fnSecTransformCustomGetAttribute, _lib, "SecTranformCustomGetAttribute")
 	}
 	_ret := _fnSecTransformCustomGetAttribute(objref.IDOf(ref.Object), attribute, type_)
 	return obj.Wrap(_ret)
@@ -4199,17 +4199,6 @@ func SecTrustEvaluate(trust SecTrustRef) (result int, result_ SecTrustResultType
 	var _out0 SecTrustResultType
 	_ret := int(_fnSecTrustEvaluate(objref.IDOf(trust.Object), unsafe.Pointer(&_out0)))
 	return _ret, _out0
-}
-
-var _fnSecTrustEvaluateWithError func(objc.ID, unsafe.Pointer) bool
-
-// SecTrustEvaluateWithError calls the Security framework function SecTrustEvaluateWithError.
-func SecTrustEvaluateWithError(trust SecTrustRef, err unsafe.Pointer) bool {
-	_loadOnce.Do(_loadLibrary)
-	if _fnSecTrustEvaluateWithError == nil {
-		ebipurego.RegisterLibFunc(&_fnSecTrustEvaluateWithError, _lib, "SecTrustEvaluateWithError")
-	}
-	return _fnSecTrustEvaluateWithError(objref.IDOf(trust.Object), err)
 }
 
 var _fnSecTrustGetCertificateAtIndex func(objc.ID, int) objc.ID

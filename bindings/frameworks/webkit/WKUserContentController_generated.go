@@ -171,6 +171,26 @@ func (wucc *WKUserContentController) RemoveAllContentRuleLists() {
 
 }
 
+// AddBufferNameContentWorld adds a data buffer that will be available to JavaScript through the `window.webkit.buffers` object
+func (wucc *WKUserContentController) AddBufferNameContentWorld(buffer []byte, name string, world *WKContentWorld) {
+	defer runtime.KeepAlive(wucc)
+	defer runtime.KeepAlive(world)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wucc), objc.RegisterName("addBuffer:name:contentWorld:"), rt.BytesToNSData(buffer), purego.NSString(name), objref.IDOf(world))
+	})
+
+}
+
+// RemoveBufferWithNameContentWorld removes a previously added data buffer from the given `WKContentWorld
+func (wucc *WKUserContentController) RemoveBufferWithNameContentWorld(name string, world *WKContentWorld) {
+	defer runtime.KeepAlive(wucc)
+	defer runtime.KeepAlive(world)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wucc), objc.RegisterName("removeBufferWithName:contentWorld:"), purego.NSString(name), objref.IDOf(world))
+	})
+
+}
+
 // UserScripts returns the user scripts associated with this user content controller.
 //
 // UserScripts returns the collection as a Go slice.

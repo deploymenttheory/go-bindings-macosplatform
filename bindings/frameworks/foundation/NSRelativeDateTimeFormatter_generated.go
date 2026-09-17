@@ -19,8 +19,6 @@ import (
 // RelativeDateTimeFormatter is an idiomatic wrapper over the Objective-C class NSRelativeDateTimeFormatter.
 //
 // It embeds [Formatter], promoting that type's methods.
-//
-// A formatter that creates locale-aware string representations of a relative date or time.
 type RelativeDateTimeFormatter struct {
 	Formatter
 }
@@ -57,32 +55,32 @@ func NewRelativeDateTimeFormatter() *RelativeDateTimeFormatter {
 	return relativeDateTimeFormatterAdopt(_id)
 }
 
-// WithDateTimeStyle sets the date time style.
+// WithDateTimeStyle sets specifies how to describe a relative date. For example, "yesterday" vs "1 day ago" in English. Default is `NSRelativeDateTimeFormatterStyleNumeric`.
 func (rdtf *RelativeDateTimeFormatter) WithDateTimeStyle(dateTimeStyle RelativeDateTimeFormatterStyle) *RelativeDateTimeFormatter {
 	objc.Send[objc.ID](objref.IDOf(rdtf), objc.RegisterName("setDateTimeStyle:"), dateTimeStyle)
 	return rdtf
 }
 
-// WithUnitsStyle sets the units style.
+// WithUnitsStyle sets specifies how to format the quantity or the name of the unit. For example, "1 day ago" vs "one day ago" in English. Default is `NSRelativeDateTimeFormatterUnitsStyleFull`.
 func (rdtf *RelativeDateTimeFormatter) WithUnitsStyle(unitsStyle RelativeDateTimeFormatterUnitsStyle) *RelativeDateTimeFormatter {
 	objc.Send[objc.ID](objref.IDOf(rdtf), objc.RegisterName("setUnitsStyle:"), unitsStyle)
 	return rdtf
 }
 
-// WithFormattingContext sets the formatting context.
+// WithFormattingContext sets specifies the formatting context of the output. Default is `NSFormattingContextUnknown`.
 func (rdtf *RelativeDateTimeFormatter) WithFormattingContext(formattingContext FormattingContext) *RelativeDateTimeFormatter {
 	objc.Send[objc.ID](objref.IDOf(rdtf), objc.RegisterName("setFormattingContext:"), formattingContext)
 	return rdtf
 }
 
-// WithCalendar sets the calendar.
+// WithCalendar sets specifies the calendar to use for formatting values that do not have an inherent calendar of their own. Defaults to `autoupdatingCurrentCalendar`. Also resets to `autoupdatingCurrentCalendar` on assignment of `nil`.
 func (rdtf *RelativeDateTimeFormatter) WithCalendar(calendar *Calendar) *RelativeDateTimeFormatter {
 	defer runtime.KeepAlive(calendar)
 	objc.Send[objc.ID](objref.IDOf(rdtf), objc.RegisterName("setCalendar:"), objref.IDOf(calendar))
 	return rdtf
 }
 
-// WithLocale sets the locale.
+// WithLocale sets specifies the locale of the output string. Defaults to and resets on assignment of `nil` to the calendar's locale.
 func (rdtf *RelativeDateTimeFormatter) WithLocale(locale *Locale) *RelativeDateTimeFormatter {
 	defer runtime.KeepAlive(locale)
 	objc.Send[objc.ID](objref.IDOf(rdtf), objc.RegisterName("setLocale:"), objref.IDOf(locale))
@@ -101,7 +99,7 @@ func (rdtf *RelativeDateTimeFormatter) WithScriptingProperties(scriptingProperti
 	return rdtf
 }
 
-// LocalizedStringFromDateComponents wraps the corresponding Objective-C method.
+// LocalizedStringFromDateComponents returns a formatted string representing a relative time from the given date components. Negative component values are evaluated as a date in the past. This method formats the value of the least granular unit in the `NSDateComponents` object, and does not provide a compound format of the date component. Note this method only supports the following components: year, month, week of month, day, hour, minute, and second. The rest will be ignored.
 func (rdtf *RelativeDateTimeFormatter) LocalizedStringFromDateComponents(dateComponents *DateComponents) string {
 	defer runtime.KeepAlive(rdtf)
 	defer runtime.KeepAlive(dateComponents)
@@ -112,7 +110,7 @@ func (rdtf *RelativeDateTimeFormatter) LocalizedStringFromDateComponents(dateCom
 	return purego.GoString(_r)
 }
 
-// LocalizedStringFromTimeInterval wraps the corresponding Objective-C method.
+// LocalizedStringFromTimeInterval returns a formatted string representing a relative time from the given time interval. Negative time interval is evaluated as a date in the past.
 func (rdtf *RelativeDateTimeFormatter) LocalizedStringFromTimeInterval(timeInterval float64) string {
 	defer runtime.KeepAlive(rdtf)
 	_r := objc.Send[objc.ID](objref.IDOf(rdtf), objc.RegisterName("localizedStringFromTimeInterval:"), timeInterval)
@@ -122,7 +120,7 @@ func (rdtf *RelativeDateTimeFormatter) LocalizedStringFromTimeInterval(timeInter
 	return purego.GoString(_r)
 }
 
-// LocalizedStringForDateRelativeToDate wraps the corresponding Objective-C method.
+// LocalizedStringForDateRelativeToDate formats the date interval from the reference date to the given date using the formatter's calendar.
 func (rdtf *RelativeDateTimeFormatter) LocalizedStringForDateRelativeToDate(date time.Time, referenceDate time.Time) string {
 	defer runtime.KeepAlive(rdtf)
 	_r := objc.Send[objc.ID](objref.IDOf(rdtf), objc.RegisterName("localizedStringForDate:relativeToDate:"), rt.TimeToNSDate(date), rt.TimeToNSDate(referenceDate))
@@ -132,35 +130,35 @@ func (rdtf *RelativeDateTimeFormatter) LocalizedStringForDateRelativeToDate(date
 	return purego.GoString(_r)
 }
 
-// DateTimeStyle returns the date time style.
+// DateTimeStyle specifies how to describe a relative date. For example, "yesterday" vs "1 day ago" in English. Default is `NSRelativeDateTimeFormatterStyleNumeric`.
 func (rdtf *RelativeDateTimeFormatter) DateTimeStyle() RelativeDateTimeFormatterStyle {
 	defer runtime.KeepAlive(rdtf)
 	_r := objc.Send[RelativeDateTimeFormatterStyle](objref.IDOf(rdtf), objc.RegisterName("dateTimeStyle"))
 	return _r
 }
 
-// UnitsStyle returns the units style.
+// UnitsStyle specifies how to format the quantity or the name of the unit. For example, "1 day ago" vs "one day ago" in English. Default is `NSRelativeDateTimeFormatterUnitsStyleFull`.
 func (rdtf *RelativeDateTimeFormatter) UnitsStyle() RelativeDateTimeFormatterUnitsStyle {
 	defer runtime.KeepAlive(rdtf)
 	_r := objc.Send[RelativeDateTimeFormatterUnitsStyle](objref.IDOf(rdtf), objc.RegisterName("unitsStyle"))
 	return _r
 }
 
-// FormattingContext returns the formatting context.
+// FormattingContext specifies the formatting context of the output. Default is `NSFormattingContextUnknown`.
 func (rdtf *RelativeDateTimeFormatter) FormattingContext() FormattingContext {
 	defer runtime.KeepAlive(rdtf)
 	_r := objc.Send[FormattingContext](objref.IDOf(rdtf), objc.RegisterName("formattingContext"))
 	return _r
 }
 
-// Calendar returns the calendar.
+// Calendar specifies the calendar to use for formatting values that do not have an inherent calendar of their own. Defaults to `autoupdatingCurrentCalendar`. Also resets to `autoupdatingCurrentCalendar` on assignment of `nil`.
 func (rdtf *RelativeDateTimeFormatter) Calendar() *Calendar {
 	defer runtime.KeepAlive(rdtf)
 	_r := objc.Send[objc.ID](objref.IDOf(rdtf), objc.RegisterName("calendar"))
 	return CalendarFromID(_r)
 }
 
-// Locale returns the locale.
+// Locale specifies the locale of the output string. Defaults to and resets on assignment of `nil` to the calendar's locale.
 func (rdtf *RelativeDateTimeFormatter) Locale() *Locale {
 	defer runtime.KeepAlive(rdtf)
 	_r := objc.Send[objc.ID](objref.IDOf(rdtf), objc.RegisterName("locale"))

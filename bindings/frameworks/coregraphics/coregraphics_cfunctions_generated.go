@@ -5560,6 +5560,41 @@ func CGPDFContextAddDocumentMetadata(context_ CGContextRef, metadata obj.Object)
 	_fnCGPDFContextAddDocumentMetadata(objref.IDOf(context_.Object), objref.IDOf(metadata))
 }
 
+var _fnCGPDFContextBeginMarkedContentSequence func(objc.ID, CGPDFTagType) objc.ID
+
+// CGPDFContextBeginMarkedContentSequence calls the CoreGraphics framework function CGPDFContextBeginMarkedContentSequence.
+func CGPDFContextBeginMarkedContentSequence(context_ CGContextRef, tagType CGPDFTagType) CGPDFMarkedContentItemRef {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGPDFContextBeginMarkedContentSequence == nil {
+		ebipurego.RegisterLibFunc(&_fnCGPDFContextBeginMarkedContentSequence, _lib, "CGPDFContextBeginMarkedContentSequence")
+	}
+	_ret := _fnCGPDFContextBeginMarkedContentSequence(objref.IDOf(context_.Object), tagType)
+	return CGPDFMarkedContentItemRef{Object: obj.Adopt(_ret)}
+}
+
+var _fnCGPDFContextBeginNonStructuralMarkedContentSequence func(objc.ID, CGPDFTagType)
+
+// CGPDFContextBeginNonStructuralMarkedContentSequence calls the CoreGraphics framework function CGPDFContextBeginNonStructuralMarkedContentSequence.
+func CGPDFContextBeginNonStructuralMarkedContentSequence(context_ CGContextRef, tagType CGPDFTagType) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGPDFContextBeginNonStructuralMarkedContentSequence == nil {
+		ebipurego.RegisterLibFunc(&_fnCGPDFContextBeginNonStructuralMarkedContentSequence, _lib, "CGPDFContextBeginNonStructuralMarkedContentSequence")
+	}
+	_fnCGPDFContextBeginNonStructuralMarkedContentSequence(objref.IDOf(context_.Object), tagType)
+}
+
+var _fnCGPDFContextBeginObjectReference func(objc.ID) objc.ID
+
+// CGPDFContextBeginObjectReference calls the CoreGraphics framework function CGPDFContextBeginObjectReference.
+func CGPDFContextBeginObjectReference(context_ CGContextRef) CGPDFMarkedContentItemRef {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGPDFContextBeginObjectReference == nil {
+		ebipurego.RegisterLibFunc(&_fnCGPDFContextBeginObjectReference, _lib, "CGPDFContextBeginObjectReference")
+	}
+	_ret := _fnCGPDFContextBeginObjectReference(objref.IDOf(context_.Object))
+	return CGPDFMarkedContentItemRef{Object: obj.Adopt(_ret)}
+}
+
 var _fnCGPDFContextBeginPage func(objc.ID, objc.ID)
 
 // CGPDFContextBeginPage calls the CoreGraphics framework function CGPDFContextBeginPage.
@@ -5615,6 +5650,28 @@ func CGPDFContextCreateWithURL(url obj.Object, mediaBox *corefoundation.CGRect, 
 	}
 	_ret := _fnCGPDFContextCreateWithURL(objref.IDOf(url), unsafe.Pointer(mediaBox), objref.IDOf(auxiliaryInfo))
 	return CGContextRef{Object: obj.Adopt(_ret)}
+}
+
+var _fnCGPDFContextEndMarkedContentSequence func(objc.ID)
+
+// CGPDFContextEndMarkedContentSequence calls the CoreGraphics framework function CGPDFContextEndMarkedContentSequence.
+func CGPDFContextEndMarkedContentSequence(context_ CGContextRef) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGPDFContextEndMarkedContentSequence == nil {
+		ebipurego.RegisterLibFunc(&_fnCGPDFContextEndMarkedContentSequence, _lib, "CGPDFContextEndMarkedContentSequence")
+	}
+	_fnCGPDFContextEndMarkedContentSequence(objref.IDOf(context_.Object))
+}
+
+var _fnCGPDFContextEndObjectReference func(objc.ID)
+
+// CGPDFContextEndObjectReference calls the CoreGraphics framework function CGPDFContextEndObjectReference.
+func CGPDFContextEndObjectReference(context_ CGContextRef) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGPDFContextEndObjectReference == nil {
+		ebipurego.RegisterLibFunc(&_fnCGPDFContextEndObjectReference, _lib, "CGPDFContextEndObjectReference")
+	}
+	_fnCGPDFContextEndObjectReference(objref.IDOf(context_.Object))
 }
 
 var _fnCGPDFContextEndPage func(objc.ID)
@@ -6120,6 +6177,29 @@ func CGPDFDocumentUnlockWithPassword(document CGPDFDocumentRef, password string)
 	return _fnCGPDFDocumentUnlockWithPassword(objref.IDOf(document.Object), password)
 }
 
+var _fnCGPDFMarkedContentItemRelease func(objc.ID)
+
+// CGPDFMarkedContentItemRelease calls the CoreGraphics framework function CGPDFMarkedContentItemRelease.
+func CGPDFMarkedContentItemRelease(markedContentItem CGPDFMarkedContentItemRef) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGPDFMarkedContentItemRelease == nil {
+		ebipurego.RegisterLibFunc(&_fnCGPDFMarkedContentItemRelease, _lib, "CGPDFMarkedContentItemRelease")
+	}
+	_fnCGPDFMarkedContentItemRelease(objref.IDOf(markedContentItem.Object))
+}
+
+var _fnCGPDFMarkedContentItemRetain func(objc.ID) objc.ID
+
+// CGPDFMarkedContentItemRetain calls the CoreGraphics framework function CGPDFMarkedContentItemRetain.
+func CGPDFMarkedContentItemRetain(markedContentItem CGPDFMarkedContentItemRef) CGPDFMarkedContentItemRef {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGPDFMarkedContentItemRetain == nil {
+		ebipurego.RegisterLibFunc(&_fnCGPDFMarkedContentItemRetain, _lib, "CGPDFMarkedContentItemRetain")
+	}
+	_ret := _fnCGPDFMarkedContentItemRetain(objref.IDOf(markedContentItem.Object))
+	return CGPDFMarkedContentItemRef{Object: obj.Wrap(_ret)}
+}
+
 var _fnCGPDFObjectGetType func(objc.ID) CGPDFObjectType
 
 // CGPDFObjectGetType calls the CoreGraphics framework function CGPDFObjectGetType.
@@ -6533,6 +6613,96 @@ func CGPDFStringGetLength(str CGPDFStringRef) int {
 		ebipurego.RegisterLibFunc(&_fnCGPDFStringGetLength, _lib, "CGPDFStringGetLength")
 	}
 	return _fnCGPDFStringGetLength(objref.IDOf(str.Object))
+}
+
+var _fnCGPDFStructureElementCreate func(CGPDFTagType) objc.ID
+
+// CGPDFStructureElementCreate calls the CoreGraphics framework function CGPDFStructureElementCreate.
+func CGPDFStructureElementCreate(type_ CGPDFTagType) CGPDFStructureElementRef {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGPDFStructureElementCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnCGPDFStructureElementCreate, _lib, "CGPDFStructureElementCreate")
+	}
+	_ret := _fnCGPDFStructureElementCreate(type_)
+	return CGPDFStructureElementRef{Object: obj.Adopt(_ret)}
+}
+
+var _fnCGPDFStructureElementRelease func(objc.ID)
+
+// CGPDFStructureElementRelease calls the CoreGraphics framework function CGPDFStructureElementRelease.
+func CGPDFStructureElementRelease(structureElemnt CGPDFStructureElementRef) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGPDFStructureElementRelease == nil {
+		ebipurego.RegisterLibFunc(&_fnCGPDFStructureElementRelease, _lib, "CGPDFStructureElementRelease")
+	}
+	_fnCGPDFStructureElementRelease(objref.IDOf(structureElemnt.Object))
+}
+
+var _fnCGPDFStructureElementRetain func(objc.ID) objc.ID
+
+// CGPDFStructureElementRetain calls the CoreGraphics framework function CGPDFStructureElementRetain.
+func CGPDFStructureElementRetain(structureElemnt CGPDFStructureElementRef) CGPDFStructureElementRef {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGPDFStructureElementRetain == nil {
+		ebipurego.RegisterLibFunc(&_fnCGPDFStructureElementRetain, _lib, "CGPDFStructureElementRetain")
+	}
+	_ret := _fnCGPDFStructureElementRetain(objref.IDOf(structureElemnt.Object))
+	return CGPDFStructureElementRef{Object: obj.Wrap(_ret)}
+}
+
+var _fnCGPDFStructureElementSetActualText func(objc.ID, objc.ID)
+
+// CGPDFStructureElementSetActualText calls the CoreGraphics framework function CGPDFStructureElementSetActualText.
+func CGPDFStructureElementSetActualText(structureElement CGPDFStructureElementRef, actualText obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGPDFStructureElementSetActualText == nil {
+		ebipurego.RegisterLibFunc(&_fnCGPDFStructureElementSetActualText, _lib, "CGPDFStructureElementSetActualText")
+	}
+	_fnCGPDFStructureElementSetActualText(objref.IDOf(structureElement.Object), objref.IDOf(actualText))
+}
+
+var _fnCGPDFStructureElementSetAlternativeText func(objc.ID, objc.ID)
+
+// CGPDFStructureElementSetAlternativeText calls the CoreGraphics framework function CGPDFStructureElementSetAlternativeText.
+func CGPDFStructureElementSetAlternativeText(structureElement CGPDFStructureElementRef, alternativeText obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGPDFStructureElementSetAlternativeText == nil {
+		ebipurego.RegisterLibFunc(&_fnCGPDFStructureElementSetAlternativeText, _lib, "CGPDFStructureElementSetAlternativeText")
+	}
+	_fnCGPDFStructureElementSetAlternativeText(objref.IDOf(structureElement.Object), objref.IDOf(alternativeText))
+}
+
+var _fnCGPDFStructureElementSetExpansionText func(objc.ID, objc.ID)
+
+// CGPDFStructureElementSetExpansionText calls the CoreGraphics framework function CGPDFStructureElementSetExpansionText.
+func CGPDFStructureElementSetExpansionText(structureElement CGPDFStructureElementRef, expansionText obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGPDFStructureElementSetExpansionText == nil {
+		ebipurego.RegisterLibFunc(&_fnCGPDFStructureElementSetExpansionText, _lib, "CGPDFStructureElementSetExpansionText")
+	}
+	_fnCGPDFStructureElementSetExpansionText(objref.IDOf(structureElement.Object), objref.IDOf(expansionText))
+}
+
+var _fnCGPDFStructureElementSetLanguageIdentifier func(objc.ID, objc.ID)
+
+// CGPDFStructureElementSetLanguageIdentifier calls the CoreGraphics framework function CGPDFStructureElementSetLanguageIdentifier.
+func CGPDFStructureElementSetLanguageIdentifier(structureElement CGPDFStructureElementRef, languageID obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGPDFStructureElementSetLanguageIdentifier == nil {
+		ebipurego.RegisterLibFunc(&_fnCGPDFStructureElementSetLanguageIdentifier, _lib, "CGPDFStructureElementSetLanguageIdentifier")
+	}
+	_fnCGPDFStructureElementSetLanguageIdentifier(objref.IDOf(structureElement.Object), objref.IDOf(languageID))
+}
+
+var _fnCGPDFStructureElementSetTitle func(objc.ID, objc.ID)
+
+// CGPDFStructureElementSetTitle calls the CoreGraphics framework function CGPDFStructureElementSetTitle.
+func CGPDFStructureElementSetTitle(structureElement CGPDFStructureElementRef, title obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGPDFStructureElementSetTitle == nil {
+		ebipurego.RegisterLibFunc(&_fnCGPDFStructureElementSetTitle, _lib, "CGPDFStructureElementSetTitle")
+	}
+	_fnCGPDFStructureElementSetTitle(objref.IDOf(structureElement.Object), objref.IDOf(title))
 }
 
 var _fnCGPDFTagTypeGetName func(CGPDFTagType) string

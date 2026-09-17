@@ -15,8 +15,6 @@ import (
 )
 
 // CaptionRuby is an idiomatic wrapper over the Objective-C class AVCaptionRuby.
-//
-// An object that presents ruby characters.
 type CaptionRuby struct {
 	objref.Handle
 }

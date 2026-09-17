@@ -18,8 +18,6 @@ import (
 // UnitConverterLinear is an idiomatic wrapper over the Objective-C class NSUnitConverterLinear.
 //
 // It embeds [UnitConverter], promoting that type's methods.
-//
-// A description of how to convert between units using a linear equation.
 type UnitConverterLinear struct {
 	UnitConverter
 }
@@ -50,14 +48,14 @@ func unitConverterLinearAdopt(id objc.ID) *UnitConverterLinear {
 	return x
 }
 
-// NewUnitConverterLinearWithCoefficient creates a new UnitConverterLinear.
+// NewUnitConverterLinearWithCoefficient initializes a linear unit converter with the specified coefficient, using a constant of `0`.
 func NewUnitConverterLinearWithCoefficient(coefficient float64) *UnitConverterLinear {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSUnitConverterLinear")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoefficient:"), coefficient)
 	return unitConverterLinearAdopt(_id)
 }
 
-// NewUnitConverterLinearWithCoefficientConstant creates a new UnitConverterLinear.
+// NewUnitConverterLinearWithCoefficientConstant initializes a linear unit converter with the specified coefficient and constant.
 func NewUnitConverterLinearWithCoefficientConstant(coefficient float64, constant float64) *UnitConverterLinear {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSUnitConverterLinear")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoefficient:constant:"), coefficient, constant)
@@ -76,14 +74,14 @@ func (ucl *UnitConverterLinear) WithScriptingProperties(scriptingProperties map[
 	return ucl
 }
 
-// Coefficient returns the coefficient.
+// Coefficient returns the coefficient to use in the linear unit conversion calculation.
 func (ucl *UnitConverterLinear) Coefficient() float64 {
 	defer runtime.KeepAlive(ucl)
 	_r := objc.Send[float64](objref.IDOf(ucl), objc.RegisterName("coefficient"))
 	return _r
 }
 
-// Constant returns the constant.
+// Constant returns the constant to use in the linear unit conversion calculation.
 func (ucl *UnitConverterLinear) Constant() float64 {
 	defer runtime.KeepAlive(ucl)
 	_r := objc.Send[float64](objref.IDOf(ucl), objc.RegisterName("constant"))

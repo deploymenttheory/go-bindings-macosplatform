@@ -164,6 +164,12 @@ func (co *CompileOptions) WithEnableLogging(enableLogging bool) *CompileOptions 
 	return co
 }
 
+// WithFloatingPointConversionRoundingMode sets sets the rounding mode for narrowing floating-point conversions. Default is MTLFloatingPointConversionRoundingModeToNearestEven.
+func (co *CompileOptions) WithFloatingPointConversionRoundingMode(floatingPointConversionRoundingMode FloatingPointConversionRoundingMode) *CompileOptions {
+	objc.Send[objc.ID](objref.IDOf(co), objc.RegisterName("setFloatingPointConversionRoundingMode:"), floatingPointConversionRoundingMode)
+	return co
+}
+
 // PreprocessorMacros returns list of preprocessor macros to consider to when compiling this program. Specified as key value pairs, using a NSDictionary. The keys must be NSString objects and values can be either NSString or NSNumber objects. The default value is nil.
 func (co *CompileOptions) PreprocessorMacros() map[string]*foundation.Object {
 	defer runtime.KeepAlive(co)
@@ -275,5 +281,12 @@ func (co *CompileOptions) RequiredThreadsPerThreadgroup() MTLSize {
 func (co *CompileOptions) EnableLogging() bool {
 	defer runtime.KeepAlive(co)
 	_r := objc.Send[bool](objref.IDOf(co), objc.RegisterName("enableLogging"))
+	return _r
+}
+
+// FloatingPointConversionRoundingMode sets the rounding mode for narrowing floating-point conversions. Default is MTLFloatingPointConversionRoundingModeToNearestEven.
+func (co *CompileOptions) FloatingPointConversionRoundingMode() FloatingPointConversionRoundingMode {
+	defer runtime.KeepAlive(co)
+	_r := objc.Send[FloatingPointConversionRoundingMode](objref.IDOf(co), objc.RegisterName("floatingPointConversionRoundingMode"))
 	return _r
 }

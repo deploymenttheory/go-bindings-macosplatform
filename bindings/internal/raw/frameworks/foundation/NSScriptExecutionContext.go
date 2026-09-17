@@ -46,6 +46,7 @@ func NSScriptExecutionContextSharedScriptExecutionContext() *NSScriptExecutionCo
 	return NSScriptExecutionContextFromID(_ret)
 }
 
+// The top-level object in the current scripting context.
 func (o *NSScriptExecutionContext) TopLevelObject() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptExecutionContextSelTopLevelObject)
 	return _ret
@@ -55,6 +56,7 @@ func (o *NSScriptExecutionContext) SetTopLevelObject(topLevelObject objc.ID) {
 	o.Ptr().Send(_nSScriptExecutionContextSelSetTopLevelObject, topLevelObject)
 }
 
+// The object currently being tested by an `NSWhoseSpecifier`.
 func (o *NSScriptExecutionContext) ObjectBeingTested() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptExecutionContextSelObjectBeingTested)
 	return _ret
@@ -64,6 +66,7 @@ func (o *NSScriptExecutionContext) SetObjectBeingTested(objectBeingTested objc.I
 	o.Ptr().Send(_nSScriptExecutionContextSelSetObjectBeingTested, objectBeingTested)
 }
 
+// The container object for the current range specifier being evaluated.
 func (o *NSScriptExecutionContext) RangeContainerObject() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptExecutionContextSelRangeContainerObject)
 	return _ret

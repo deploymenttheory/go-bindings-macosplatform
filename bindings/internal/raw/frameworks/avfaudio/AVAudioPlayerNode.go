@@ -4,6 +4,8 @@
 package avfaudio
 
 import (
+	"unsafe"
+
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -30,7 +32,9 @@ var (
 	_aVAudioPlayerNodeSelStop                                                                                = objc.RegisterName("stop")
 	_aVAudioPlayerNodeSelPrepareWithFrameCount                                                               = objc.RegisterName("prepareWithFrameCount:")
 	_aVAudioPlayerNodeSelPlay                                                                                = objc.RegisterName("play")
+	_aVAudioPlayerNodeSelPlayAndReturnError                                                                  = objc.RegisterName("playAndReturnError:")
 	_aVAudioPlayerNodeSelPlayAtTime                                                                          = objc.RegisterName("playAtTime:")
+	_aVAudioPlayerNodeSelPlayAtTimeError                                                                     = objc.RegisterName("playAtTime:error:")
 	_aVAudioPlayerNodeSelPause                                                                               = objc.RegisterName("pause")
 	_aVAudioPlayerNodeSelNodeTimeForPlayerTime                                                               = objc.RegisterName("nodeTimeForPlayerTime:")
 	_aVAudioPlayerNodeSelPlayerTimeForNodeTime                                                               = objc.RegisterName("playerTimeForNodeTime:")
@@ -163,13 +167,35 @@ func (o *AVAudioPlayerNode) PrepareWithFrameCount(frameCount uint32) {
 }
 
 // Starts or resumes playback immediately.
+// Deprecated: since macOS 27.0.
 func (o *AVAudioPlayerNode) Play() {
 	o.Ptr().Send(_aVAudioPlayerNodeSelPlay)
 }
 
+// @method playAndReturnError: @abstract Start or resume playback immediately. @param outError on exit, if an error occurs, a description of the error. @return YES for success @discussion equivalent to playAtTime:nil error:&error
+func (o *AVAudioPlayerNode) PlayAndReturnError() (bool, error) {
+	var _nsErr uintptr
+	_ret := objc.Send[bool](o.Ptr(), _aVAudioPlayerNodeSelPlayAndReturnError, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
+	}
+	return _ret, nil
+}
+
 // Starts or resumes playback at a time you specify.
+// Deprecated: since macOS 27.0.
 func (o *AVAudioPlayerNode) PlayAtTime(when *AVAudioTime) {
 	o.Ptr().Send(_aVAudioPlayerNodeSelPlayAtTime, when.Ptr())
+}
+
+// @method playAtTime:error: @abstract Start or resume playback at a specific time. @param when the node time at which to start or resume playback. nil signifies "now". @param outError on exit, if an error occurs, a description of the error. @return YES for success @discussion This node is initially paused. Requests to play buffers or file segments are enqueued, and any necessary decoding begins immediately. Playback does not begin, however, until the player has started playing, via this method. Note that providing an AVAudioTime which is past (before lastRenderTime) will cause the player to begin playback immediately. E.g. To start a player X seconds in future: <pre> // start engine and player NSError *nsErr = nil; [_engine startAndReturnError:&nsErr]; if (!nsErr) { const float kStartDelayTime = 0.5; // sec AVAudioFormat *outputFormat = [_player outputFormatForBus:0]; AVAudioFramePosition startSampleTime = _player.lastRenderTime.sampleTime + kStartDelayTime * outputFormat.sampleRate; AVAudioTime *startTime = [AVAudioTime timeWithSampleTime:startSampleTime atRate:outputFormat.sampleRate]; [_player playAtTime:startTime]; } </pre>
+func (o *AVAudioPlayerNode) PlayAtTimeError(when *AVAudioTime) (bool, error) {
+	var _nsErr uintptr
+	_ret := objc.Send[bool](o.Ptr(), _aVAudioPlayerNodeSelPlayAtTimeError, when.Ptr(), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
+	}
+	return _ret, nil
 }
 
 // Pauses the node’s playback.

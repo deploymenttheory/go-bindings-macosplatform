@@ -31,6 +31,7 @@
 // Each base type below lists the concrete types you construct and pass where the
 // base is accepted:
 //
+//   - DeviceMotion: [RecordedDeviceMotion]
 //   - LogItem: [AccelerometerData], [AmbientPressureData], [DeviceMotion], [GyroData], [MagnetometerData], [MotionActivity], [RotationRateData]
 //   - RotationRateData: [RecordedRotationRateData]
 package coremotion

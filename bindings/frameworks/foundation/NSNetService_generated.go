@@ -17,8 +17,6 @@ import (
 )
 
 // NetService is an idiomatic wrapper over the Objective-C class NSNetService.
-//
-// A network service that broadcasts its availability using multicast DNS.
 type NetService struct {
 	objref.Handle
 }
@@ -75,21 +73,21 @@ func (ns *NetService) String() string {
 	return rt.Description(objref.IDOf(ns))
 }
 
-// NewNetServiceWithDomainTypeNamePort creates a new NetService.
+// NewNetServiceWithDomainTypeNamePort initializes the receiver for publishing a network service of type `type` at the socket location specified by `domain`, `name`, and `port`. - Parameters: - domain: The domain for the service. To use the default registration domains, pass in an empty string (`
 func NewNetServiceWithDomainTypeNamePort(domain string, type_ string, name string, port int) *NetService {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSNetService")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDomain:type:name:port:"), purego.NSString(domain), purego.NSString(type_), purego.NSString(name), port)
 	return netServiceAdopt(_id)
 }
 
-// NewNetServiceWithDomainTypeName creates a new NetService.
+// NewNetServiceWithDomainTypeName returns the receiver, initialized as a network service of a given type and sets the initial host information. - Parameters: - domain: The domain for the service. To resolve in the default domains, pass in an empty string (`
 func NewNetServiceWithDomainTypeName(domain string, type_ string, name string) *NetService {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSNetService")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDomain:type:name:"), purego.NSString(domain), purego.NSString(type_), purego.NSString(name))
 	return netServiceAdopt(_id)
 }
 
-// WithDelegate sets the delegate.
+// WithDelegate sets the delegate for the receiver. The delegate must conform to the `NSNetServiceDelegate` protocol, and is not retained.
 func (ns *NetService) WithDelegate(delegate NetServiceDelegate) *NetService {
 	_shim := newNetServiceDelegateShim(delegate)
 	_sel := objc.RegisterName("setDelegate:")
@@ -99,7 +97,7 @@ func (ns *NetService) WithDelegate(delegate NetServiceDelegate) *NetService {
 	return ns
 }
 
-// WithIncludesPeerToPeer sets the includes peer to peer.
+// WithIncludesPeerToPeer sets specifies whether to also publish, resolve, or monitor this service over peer-to-peer Bluetooth and Wi-Fi, if available. This property must be set before calling `-publish`, `-publishWithOptions:`, `-resolveWithTimeout:`, or `-startMonitoring` in order to take effect. Initially set to `NO`.
 func (ns *NetService) WithIncludesPeerToPeer(includesPeerToPeer bool) *NetService {
 	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("setIncludesPeerToPeer:"), includesPeerToPeer)
 	return ns
@@ -117,7 +115,7 @@ func (ns *NetService) WithScriptingProperties(scriptingProperties map[string]obj
 	return ns
 }
 
-// ScheduleInRunLoopForMode wraps the corresponding Objective-C method.
+// ScheduleInRunLoopForMode adds the service to the specified run loop. - Parameters: - aRunLoop: The run loop to which to add the receiver. - mode: The run loop mode to which to add the receiver. You can use this method in conjunction with `-removeFromRunLoop:forMode:` to transfer a service to a different run loop. You should not attempt to run a service on multiple run loops.
 func (ns *NetService) ScheduleInRunLoopForMode(aRunLoop *RunLoop, mode *String) {
 	defer runtime.KeepAlive(ns)
 	defer runtime.KeepAlive(aRunLoop)
@@ -125,7 +123,7 @@ func (ns *NetService) ScheduleInRunLoopForMode(aRunLoop *RunLoop, mode *String) 
 	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("scheduleInRunLoop:forMode:"), objref.IDOf(aRunLoop), objref.IDOf(mode))
 }
 
-// RemoveFromRunLoopForMode removes from run loop for mode.
+// RemoveFromRunLoopForMode removes the service from the given run loop for a given mode. - Parameters: - aRunLoop: The run loop from which to remove the receiver. - mode: The run loop mode from which to remove the receiver. You can use this method in conjunction with `-scheduleInRunLoop:forMode:` to transfer the service to a different run loop. Although it is possible to remove an `NSNetService` object completely from any run loop and then attempt actions on it, it is an error to do so.
 func (ns *NetService) RemoveFromRunLoopForMode(aRunLoop *RunLoop, mode *String) {
 	defer runtime.KeepAlive(ns)
 	defer runtime.KeepAlive(aRunLoop)
@@ -133,37 +131,37 @@ func (ns *NetService) RemoveFromRunLoopForMode(aRunLoop *RunLoop, mode *String) 
 	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("removeFromRunLoop:forMode:"), objref.IDOf(aRunLoop), objref.IDOf(mode))
 }
 
-// Publish wraps the corresponding Objective-C method.
+// Publish attempts to advertise the receiver's on the network. This method returns immediately, with success or failure indicated by the callbacks to the delegate. This is equivalent to calling `-publishWithOptions:` with the default options (`0`).
 func (ns *NetService) Publish() {
 	defer runtime.KeepAlive(ns)
 	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("publish"))
 }
 
-// PublishWith wraps the corresponding Objective-C method.
+// PublishWith attempts to advertise the receiver on the network, with the given options. - Parameters: - options: Options for the receiver. The supported options are described in `NSNetServiceOptions`. This method returns immediately, with success or failure indicated by the callbacks to the delegate.
 func (ns *NetService) PublishWith(options NetServiceOptions) {
 	defer runtime.KeepAlive(ns)
 	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("publishWithOptions:"), options)
 }
 
-// Resolve wraps the corresponding Objective-C method.
+// Resolve starts a resolve process for the service. Attempts to determine at least one address for the service. This method returns immediately, with success or failure indicated by the callbacks to the delegate. In OS X v10.4, this method calls `-resolveWithTimeout:` with a timeout value of `5`.
 func (ns *NetService) Resolve() {
 	defer runtime.KeepAlive(ns)
 	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("resolve"))
 }
 
-// Stop wraps the corresponding Objective-C method.
+// Stop halts a currently running attempt to publish or resolve a service. The delegate will receive `-netServiceDidStop:` after the service stops. It is safe to remove all strong references to the service immediately after calling this method.
 func (ns *NetService) Stop() {
 	defer runtime.KeepAlive(ns)
 	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("stop"))
 }
 
-// ResolveWithTimeout wraps the corresponding Objective-C method.
+// ResolveWithTimeout starts a resolve process of a finite duration for the service. - Parameters: - timeout: The maximum number of seconds to attempt a resolve. A value of `0.0` indicates no timeout and a resolve process of indefinite duration. During the resolve period, the service sends `-netServiceDidResolveAddress:` to the delegate for each address it discovers that matches the service parameters. Once the timeout is hit, the service sends `-netServiceDidStop:` to the delegate. If no addresses resolve during the timeout period, the service sends `-netService:didNotResolve:` to the delegate.
 func (ns *NetService) ResolveWithTimeout(timeout float64) {
 	defer runtime.KeepAlive(ns)
 	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("resolveWithTimeout:"), timeout)
 }
 
-// GetInputStreamOutputStream wraps the corresponding Objective-C method.
+// GetInputStreamOutputStream creates a pair of input and output streams for the receiver and returns a Boolean value that indicates whether they were retrieved successfully. - Parameters: - inputStream: Upon return, the input stream for the receiver. Pass `NULL` if you do not need this stream. - outputStream: Upon return, the output stream for the receiver. Pass `NULL` if you do not need this stream. - Returns: `YES` if the streams are created successfully, otherwise `NO`. After this method is called, no delegate callbacks are called by the receiver. The streams that are created are not open, and are not scheduled in any run loop for any mode.
 func (ns *NetService) GetInputStreamOutputStream(inputStream *InputStream, outputStream *OutputStream) bool {
 	defer runtime.KeepAlive(ns)
 	defer runtime.KeepAlive(inputStream)
@@ -172,40 +170,40 @@ func (ns *NetService) GetInputStreamOutputStream(inputStream *InputStream, outpu
 	return _r
 }
 
-// SetTXTRecordData wraps the corresponding Objective-C method.
+// SetTXTRecordData sets the TXT record for the receiver, and returns a Boolean value that indicates whether the operation was successful. - Parameters: - recordData: The TXT record for the receiver. Pass `nil` to remove the TXT record from the instance. - Returns: `YES` if `recordData` is successfully set as the TXT record, otherwise `NO`.
 func (ns *NetService) SetTXTRecordData(recordData []byte) bool {
 	defer runtime.KeepAlive(ns)
 	_r := objc.Send[bool](objref.IDOf(ns), objc.RegisterName("setTXTRecordData:"), rt.BytesToNSData(recordData))
 	return _r
 }
 
-// TXTRecordData returns the txt record data.
+// TXTRecordData returns the TXT record for the receiver. If the instance has not been resolved, or the delegate's `-netService:didUpdateTXTRecordData:` has not been called, this will return `nil`. It is permitted to have a zero-length TXT record.
 func (ns *NetService) TXTRecordData() []byte {
 	defer runtime.KeepAlive(ns)
 	_r := objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("TXTRecordData"))
 	return rt.NSDataToBytes(_r)
 }
 
-// StartMonitoring starts monitoring.
+// StartMonitoring starts the monitoring of TXT-record updates for the receiver. The delegate must implement `-netService:didUpdateTXTRecordData:`, which is called when the TXT record for the receiver is updated.
 func (ns *NetService) StartMonitoring() {
 	defer runtime.KeepAlive(ns)
 	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("startMonitoring"))
 }
 
-// StopMonitoring stops monitoring.
+// StopMonitoring stops the monitoring of TXT-record updates for the receiver.
 func (ns *NetService) StopMonitoring() {
 	defer runtime.KeepAlive(ns)
 	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("stopMonitoring"))
 }
 
-// IncludesPeerToPeer wraps the corresponding Objective-C method.
+// IncludesPeerToPeer reports whether to also publish, resolve, or monitor this service over peer-to-peer Bluetooth and Wi-Fi, if available. This property must be set before calling `-publish`, `-publishWithOptions:`, `-resolveWithTimeout:`, or `-startMonitoring` in order to take effect. Initially set to `NO`.
 func (ns *NetService) IncludesPeerToPeer() bool {
 	defer runtime.KeepAlive(ns)
 	_r := objc.Send[bool](objref.IDOf(ns), objc.RegisterName("includesPeerToPeer"))
 	return _r
 }
 
-// Name returns the name.
+// Name returns a string containing the name of this service. This value is set when the object is first initialized, whether by your code or by a browser object.
 func (ns *NetService) Name() string {
 	defer runtime.KeepAlive(ns)
 	_r := objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("name"))
@@ -215,7 +213,7 @@ func (ns *NetService) Name() string {
 	return purego.GoString(_r)
 }
 
-// Type returns the type.
+// Type returns the type of the published service. This value is set when the object is first initialized, whether by your code or by a browser object.
 func (ns *NetService) Type() string {
 	defer runtime.KeepAlive(ns)
 	_r := objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("type"))
@@ -225,7 +223,7 @@ func (ns *NetService) Type() string {
 	return purego.GoString(_r)
 }
 
-// Domain returns the domain.
+// Domain returns a string containing the domain for this service. This can be an explicit domain name or it can contain the generic local domain name, `
 func (ns *NetService) Domain() string {
 	defer runtime.KeepAlive(ns)
 	_r := objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("domain"))
@@ -235,7 +233,7 @@ func (ns *NetService) Domain() string {
 	return purego.GoString(_r)
 }
 
-// HostName returns the host name.
+// HostName returns a string containing the DNS hostname for this service. This value is `nil` until the service has been resolved (when `addresses` is non-`nil`).
 func (ns *NetService) HostName() string {
 	defer runtime.KeepAlive(ns)
 	_r := objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("hostName"))
@@ -245,7 +243,7 @@ func (ns *NetService) HostName() string {
 	return purego.GoString(_r)
 }
 
-// Addresses returns the addresses.
+// Addresses returns a read-only array containing `NSData` objects, each of which contains a socket address for the service. Each `NSData` object in the returned array contains an appropriate `sockaddr` structure that you can use to connect to the socket. The exact type of this structure depends on the service to which you are connecting. If no addresses were resolved for the service, the returned array contains zero elements. It is possible for a single service to resolve to more than one address or not resolve to any addresses. A service might resolve to multiple addresses if the computer publishing the service is currently multihoming.
 //
 // Addresses returns the collection as a Go slice.
 func (ns *NetService) Addresses() [][]byte {
@@ -254,7 +252,7 @@ func (ns *NetService) Addresses() [][]byte {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) []byte { return rt.NSDataToBytes(_id) })
 }
 
-// Port returns the port.
+// Port returns the port on which the service is listening for connections. If the object was initialized by calling `-initWithDomain:type:name:port:`, then the value was set when the object was first initialized. If the object was initialized by calling `-initWithDomain:type:name:`, the value of this property is not valid (`-1`) until after the service has successfully been resolved (when `addresses` is non-`nil`).
 func (ns *NetService) Port() int {
 	defer runtime.KeepAlive(ns)
 	_r := objc.Send[int](objref.IDOf(ns), objc.RegisterName("port"))

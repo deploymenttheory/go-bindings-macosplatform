@@ -30,7 +30,7 @@
   },
   "protocols": {
     "QLPreviewItem": {
-      "doc": "A protocol that defines a set of properties you implement to make a preview of your application’s content.",
+      "doc": "A protocol that defines a set of properties you implement to make a preview of your app’s content.",
       "url": "https://developer.apple.com/documentation/quicklookui/qlpreviewitem"
     },
     "QLPreviewPanelDataSource": {

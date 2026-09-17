@@ -27,9 +27,9 @@ For API reference, generated package docs, and generator CLI usage, see the [roo
 
 | Requirement | Version | Notes |
 | --- | --- | --- |
-| macOS | 13+ (Ventura) | Runtime requirement |
+| macOS | 27+ | Runtime requirement |
 | Go | 1.26.2+ | Generics required for parameterised types |
-| Xcode Command Line Tools | Latest | Needed only if re-running the generator |
+| Xcode | 27.0 | Needed for SDK scanning and Swift main-thread metadata; regeneration from committed metadata needs only Go |
 
 Add the module:
 

@@ -461,23 +461,28 @@ var (
 	_fnCFPlugInGetBundle                                             func(unsafe.Pointer) unsafe.Pointer
 	_fnCFPlugInGetTypeID                                             func() uint
 	_fnCFPlugInInstanceCreate                                        func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFPlugInInstanceCreateWithInstanceDataSize                    func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFPlugInInstanceGetFactoryName                                func(unsafe.Pointer) unsafe.Pointer
-	_fnCFPlugInInstanceGetInstanceData                               func(unsafe.Pointer) unsafe.Pointer
-	_fnCFPlugInInstanceGetInterfaceFunctionTable                     func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
-	_fnCFPlugInInstanceGetTypeID                                     func() uint
-	_fnCFPlugInIsLoadOnDemand                                        func(unsafe.Pointer) uint8
-	_fnCFPlugInRegisterFactoryFunction                               func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnCFPlugInRegisterFactoryFunctionByName                         func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
-	_fnCFPlugInRegisterPlugInType                                    func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnCFPlugInRemoveInstanceForFactory                              func(unsafe.Pointer)
-	_fnCFPlugInSetLoadOnDemand                                       func(unsafe.Pointer, uint8)
-	_fnCFPlugInUnregisterFactory                                     func(unsafe.Pointer) uint8
-	_fnCFPlugInUnregisterPlugInType                                  func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnCFPreferencesAddSuitePreferencesToApp                         func(unsafe.Pointer, unsafe.Pointer)
-	_fnCFPreferencesAppSynchronize                                   func(unsafe.Pointer) uint8
-	_fnCFPreferencesAppValueIsForced                                 func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnCFPreferencesCopyAppValue                                     func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	// Deprecated: Use UUID-based plugins instead
+	_fnCFPlugInInstanceCreateWithInstanceDataSize func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	// Deprecated: Use UUID-based plugins instead
+	_fnCFPlugInInstanceGetFactoryName func(unsafe.Pointer) unsafe.Pointer
+	// Deprecated: Use UUID-based plugins instead
+	_fnCFPlugInInstanceGetInstanceData func(unsafe.Pointer) unsafe.Pointer
+	// Deprecated: Use UUID-based plugins instead
+	_fnCFPlugInInstanceGetInterfaceFunctionTable func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
+	// Deprecated: Use UUID-based plugins instead
+	_fnCFPlugInInstanceGetTypeID             func() uint
+	_fnCFPlugInIsLoadOnDemand                func(unsafe.Pointer) uint8
+	_fnCFPlugInRegisterFactoryFunction       func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCFPlugInRegisterFactoryFunctionByName func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCFPlugInRegisterPlugInType            func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCFPlugInRemoveInstanceForFactory      func(unsafe.Pointer)
+	_fnCFPlugInSetLoadOnDemand               func(unsafe.Pointer, uint8)
+	_fnCFPlugInUnregisterFactory             func(unsafe.Pointer) uint8
+	_fnCFPlugInUnregisterPlugInType          func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCFPreferencesAddSuitePreferencesToApp func(unsafe.Pointer, unsafe.Pointer)
+	_fnCFPreferencesAppSynchronize           func(unsafe.Pointer) uint8
+	_fnCFPreferencesAppValueIsForced         func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCFPreferencesCopyAppValue             func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	// Deprecated: Unsupported API
 	_fnCFPreferencesCopyApplicationList           func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	_fnCFPreferencesCopyKeyList                   func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
@@ -2619,22 +2624,27 @@ func CFPlugInInstanceCreate(allocator unsafe.Pointer, factoryUUID unsafe.Pointer
 	return _fnCFPlugInInstanceCreate(allocator, factoryUUID, typeUUID)
 }
 
+// Deprecated: Use UUID-based plugins instead
 func CFPlugInInstanceCreateWithInstanceDataSize(allocator unsafe.Pointer, instanceDataSize int, deallocateInstanceFunction unsafe.Pointer, factoryName unsafe.Pointer, getInterfaceFunction unsafe.Pointer) unsafe.Pointer {
 	return _fnCFPlugInInstanceCreateWithInstanceDataSize(allocator, instanceDataSize, deallocateInstanceFunction, factoryName, getInterfaceFunction)
 }
 
+// Deprecated: Use UUID-based plugins instead
 func CFPlugInInstanceGetFactoryName(instance unsafe.Pointer) unsafe.Pointer {
 	return _fnCFPlugInInstanceGetFactoryName(instance)
 }
 
+// Deprecated: Use UUID-based plugins instead
 func CFPlugInInstanceGetInstanceData(instance unsafe.Pointer) unsafe.Pointer {
 	return _fnCFPlugInInstanceGetInstanceData(instance)
 }
 
+// Deprecated: Use UUID-based plugins instead
 func CFPlugInInstanceGetInterfaceFunctionTable(instance unsafe.Pointer, interfaceName unsafe.Pointer, ftbl unsafe.Pointer) uint8 {
 	return _fnCFPlugInInstanceGetInterfaceFunctionTable(instance, interfaceName, ftbl)
 }
 
+// Deprecated: Use UUID-based plugins instead
 func CFPlugInInstanceGetTypeID() uint {
 	return _fnCFPlugInInstanceGetTypeID()
 }

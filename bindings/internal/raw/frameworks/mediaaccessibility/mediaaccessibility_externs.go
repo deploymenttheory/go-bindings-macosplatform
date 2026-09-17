@@ -4,7 +4,12 @@
 package mediaaccessibility
 
 import (
+	"unsafe"
+
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/foundation"
 )
 
 func MAMediaCharacteristicDescribesMusicAndSoundForAccessibility() uintptr {
@@ -24,9 +29,16 @@ func MAMediaCharacteristicTranscribesSpokenDialogForAccessibility() uintptr {
 	return ptr
 }
 
-func MAMusicHapticsManagerActiveStatusDidChangeNotification() uintptr {
+func MAMusicHapticsManagerActiveStatusDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaaccessibilityLib, "MAMusicHapticsManagerActiveStatusDidChangeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant kMAAudibleMediaSettingsChangedNotification @abstract CFNotification sent when any user-defined audible media settings are changed.

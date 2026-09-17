@@ -3,6 +3,7 @@
 package scanner
 
 import (
+	"fmt"
 	"os"
 	"regexp"
 	"strings"
@@ -121,10 +122,14 @@ func lineAvailability(absFile string, lineNo int) macosplatformmetadata.Availabi
 // parseHeaderFile reads the SDK header at path and extracts:
 //   - doc comment text immediately preceding each declaration
 //   - availability annotations on each line
-func parseHeaderFile(path string) (*fileInfo, error) {
+//
+//nolint:gocyclo // Keep the header comment/annotation state machine together.
+func parseHeaderFile(
+	path string,
+) (*fileInfo, error) {
 	data, err := os.ReadFile(path)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("read header %s: %w", path, err)
 	}
 
 	rawLines := strings.Split(string(data), "\n")
@@ -328,7 +333,11 @@ func parseHeaderFile(path string) (*fileInfo, error) {
 
 // parseAvailAnnotation extracts macOS availability from a single raw source line.
 // It recognises the most common Apple annotation macros.
-func parseAvailAnnotation(line string) macosplatformmetadata.Availability {
+//
+//nolint:gocyclo // Explicit cases cover the SDK's availability macro families.
+func parseAvailAnnotation(
+	line string,
+) macosplatformmetadata.Availability {
 	var av macosplatformmetadata.Availability
 
 	// Pre-scan ALL *_UNAVAILABLE(macos...) occurrences on the line. This covers
@@ -366,12 +375,30 @@ func parseAvailAnnotation(line string) macosplatformmetadata.Availability {
 		}
 		s = s[i+len("_UNAVAILABLE_BEGIN("):]
 	}
-	// API_OBSOLETED_WITH_REPLACEMENT marks a symbol as fully removed on a platform.
-	// Any macOS entry means the symbol is gone and must not be called.
-	if i := strings.Index(line, "API_OBSOLETED_WITH_REPLACEMENT("); i >= 0 {
-		content := balancedContent(line[i+len("API_OBSOLETED_WITH_REPLACEMENT("):])
-		if strings.Contains(content, "macos(") {
-			av.IsUnavailable = true
+	// Both obsoletion forms identify removed APIs. Preserve the version window
+	// as well as the unavailability so SDK diffs expose why a binding disappears.
+	for _, marker := range []string{"API_OBSOLETED_WITH_REPLACEMENT(", "API_OBSOLETED("} {
+		if i := strings.Index(line, marker); i >= 0 {
+			content := balancedContent(line[i+len(marker):])
+			for _, platform := range []string{"macos(", "macosx("} {
+				if start := strings.Index(content, platform); start >= 0 {
+					versions := splitTopLevelCommas(balancedContent(content[start+len(platform):]))
+					if len(versions) == 3 {
+						av.MacOSIntroduced = strings.TrimSpace(versions[0])
+						av.MacOSDeprecated = strings.TrimSpace(versions[1])
+						av.MacOSObsoleted = strings.TrimSpace(versions[2])
+						av.IsUnavailable = true
+					}
+				}
+			}
+			if av.MacOSObsoleted != "" {
+				if marker == "API_OBSOLETED_WITH_REPLACEMENT(" {
+					av.ReplacedBy = extractFirstQuotedArg(content)
+				} else {
+					av.DeprecationMsg = extractFirstQuotedArg(content)
+				}
+				return av
+			}
 		}
 	}
 

@@ -139,14 +139,14 @@ func (rs *RelativeSpecifier) WithScriptingProperties(scriptingProperties map[str
 	return rs
 }
 
-// RelativePosition returns the relative position.
+// RelativePosition returns the relative position (before or after) of the object to be located.
 func (rs *RelativeSpecifier) RelativePosition() RelativePosition {
 	defer runtime.KeepAlive(rs)
 	_r := objc.Send[RelativePosition](objref.IDOf(rs), objc.RegisterName("relativePosition"))
 	return _r
 }
 
-// BaseSpecifier returns the base specifier.
+// BaseSpecifier returns the specifier for the base object relative to which the target is located.
 func (rs *RelativeSpecifier) BaseSpecifier() *ScriptObjectSpecifier {
 	defer runtime.KeepAlive(rs)
 	_r := objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("baseSpecifier"))

@@ -98,18 +98,8 @@
     "MEComposeUserAction": {
       "url": "https://developer.apple.com/documentation/mailkit/mecomposeuseraction"
     },
-    "MEMessageActionFlag": {
-      "url": "https://developer.apple.com/documentation/mailkit/memessageactionflag"
-    },
-    "MEMessageActionMessageColor": {
-      "doc": "A color that the system uses to display a message in the message list.",
-      "url": "https://developer.apple.com/documentation/mailkit/memessageactionmessagecolor"
-    },
     "MEMessageEncryptionState": {
       "url": "https://developer.apple.com/documentation/mailkit/memessageencryptionstate"
-    },
-    "MEMessageSecurityErrorCode": {
-      "url": "https://developer.apple.com/documentation/mailkit/memessagesecurityerrorcode"
     },
     "MEMessageState": {
       "doc": "The state of a message: sent, unsent, or received.",

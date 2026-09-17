@@ -17,8 +17,6 @@ import (
 // VideoProcessorCadence is an idiomatic wrapper over the Objective-C class VNVideoProcessorCadence.
 //
 // VideoProcessorCadence is an abstract base — you do not construct it directly. Construct one of [VideoProcessorFrameRateCadence], [VideoProcessorTimeIntervalCadence] and pass it where a VideoProcessorCadence is accepted.
-//
-// An object that defines the cadence at which to process video.
 type VideoProcessorCadence struct {
 	objref.Handle
 }

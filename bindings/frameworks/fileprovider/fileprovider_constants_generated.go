@@ -5,6 +5,8 @@
 package fileprovider
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
@@ -39,6 +41,11 @@ func NSFileProviderErrorDomain() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSFileProviderErrorDomain")))
 }
 
+// NSFileProviderErrorItemKey returns the string constant NSFileProviderErrorItemKey, for use as a dictionary key or argument.
+func NSFileProviderErrorItemKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFileProviderErrorItemKey")))
+}
+
 // NSFileProviderErrorNonExistentItemIdentifierKey returns the string constant NSFileProviderErrorNonExistentItemIdentifierKey, for use as a dictionary key or argument.
 func NSFileProviderErrorNonExistentItemIdentifierKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSFileProviderErrorNonExistentItemIdentifierKey")))
@@ -54,9 +61,13 @@ func NSFileProviderPendingSetDidChange() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSFileProviderPendingSetDidChange")))
 }
 
-// NSFileProviderFavoriteRankUnranked returns the address of the symbol NSFileProviderFavoriteRankUnranked.
-func NSFileProviderFavoriteRankUnranked() uintptr {
-	return _symbol("NSFileProviderFavoriteRankUnranked")
+// NSFileProviderFavoriteRankUnranked returns the value of the constant NSFileProviderFavoriteRankUnranked.
+func NSFileProviderFavoriteRankUnranked() uint64 {
+	addr := _symbol("NSFileProviderFavoriteRankUnranked")
+	if addr == 0 {
+		return 0
+	}
+	return *(*uint64)(unsafe.Pointer(addr))
 }
 
 // NSFileProviderInitialPageSortedByDate returns the address of the symbol NSFileProviderInitialPageSortedByDate.
@@ -68,6 +79,3 @@ func NSFileProviderInitialPageSortedByDate() uintptr {
 func NSFileProviderInitialPageSortedByName() uintptr {
 	return _symbol("NSFileProviderInitialPageSortedByName")
 }
-
-// NSFileProviderErrorItemKey returns the address of the symbol NSFileProviderErrorItemKey.
-func NSFileProviderErrorItemKey() uintptr { return _symbol("NSFileProviderErrorItemKey") }

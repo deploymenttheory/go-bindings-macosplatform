@@ -15,6 +15,7 @@ import (
 // The shared object that registers you to receive metrics, creates logs for custom metrics, and gives access to past reports.
 //
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxmetricmanager
+// Deprecated: Use MetricManager instead.
 type MXMetricManager struct {
 	foundation.NSObject
 }
@@ -42,6 +43,7 @@ func MXMetricManagerFromID(id objc.ID) *MXMetricManager {
 }
 
 // Returns a log handle used for writing custom metric events.
+// Deprecated: Use MetricManager.logHandle(category:) instead.
 func MXMetricManagerMakeLogHandleWithCategory(category *foundation.NSString) *foundation.NSObject {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMXMetricManager), _mXMetricManagerSelMakeLogHandleWithCategory, category.Ptr())
 	if _ret != 0 {
@@ -51,16 +53,19 @@ func MXMetricManagerMakeLogHandleWithCategory(category *foundation.NSString) *fo
 }
 
 // Registers to receive a daily report of app metrics from the metrics manager.
+// Deprecated: Use MetricManager instead.
 func (o *MXMetricManager) AddSubscriber(subscriber MXMetricManagerSubscriber) {
 	o.Ptr().Send(_mXMetricManagerSelAddSubscriber, subscriber)
 }
 
 // Unsubscribes from daily reports of app metrics.
+// Deprecated: Use MetricManager instead.
 func (o *MXMetricManager) RemoveSubscriber(subscriber MXMetricManagerSubscriber) {
 	o.Ptr().Send(_mXMetricManagerSelRemoveSubscriber, subscriber)
 }
 
 // Starts to measure an extended launch task with the given task identifier.
+// Deprecated: Use MetricManager.trackLaunchTask(id:onTrackingError:_:) instead.
 func MXMetricManagerExtendLaunchMeasurementForTaskIDError(taskID *foundation.NSString) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](objc.ID(_clsMXMetricManager), _mXMetricManagerSelExtendLaunchMeasurementForTaskIDError, taskID.Ptr(), unsafe.Pointer(&_nsErr))
@@ -71,6 +76,7 @@ func MXMetricManagerExtendLaunchMeasurementForTaskIDError(taskID *foundation.NSS
 }
 
 // Signals the end of an extended launch task.
+// Deprecated: Use MetricManager.trackLaunchTask(id:onTrackingError:_:) instead.
 func MXMetricManagerFinishExtendedLaunchMeasurementForTaskIDError(taskID *foundation.NSString) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](objc.ID(_clsMXMetricManager), _mXMetricManagerSelFinishExtendedLaunchMeasurementForTaskIDError, taskID.Ptr(), unsafe.Pointer(&_nsErr))
@@ -99,6 +105,7 @@ func (o *MXMetricManager) PastDiagnosticPayloads() *foundation.NSArray[*MXDiagno
 }
 
 // @property      sharedManager @abstract      Singleton instance of MXMetricManager.
+// Deprecated: Use MetricManager instead.
 func MXMetricManagerSharedManager() *MXMetricManager {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMXMetricManager), _mXMetricManagerSelSharedManager)
 	if _ret != 0 {

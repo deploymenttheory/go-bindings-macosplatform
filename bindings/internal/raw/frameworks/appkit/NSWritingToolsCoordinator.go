@@ -18,27 +18,30 @@ type NSWritingToolsCoordinator struct {
 }
 
 var (
-	_clsNSWritingToolsCoordinator                                                  = _objcClass("NSWritingToolsCoordinator")
-	_nSWritingToolsCoordinatorSelInitWithDelegate                                  = objc.RegisterName("initWithDelegate:")
-	_nSWritingToolsCoordinatorSelStopWritingTools                                  = objc.RegisterName("stopWritingTools")
-	_nSWritingToolsCoordinatorSelUpdateRangeWithTextReasonForContextWithIdentifier = objc.RegisterName("updateRange:withText:reason:forContextWithIdentifier:")
-	_nSWritingToolsCoordinatorSelUpdateForReflowedTextInContextWithIdentifier      = objc.RegisterName("updateForReflowedTextInContextWithIdentifier:")
-	_nSWritingToolsCoordinatorSelIsWritingToolsAvailable                           = objc.RegisterName("isWritingToolsAvailable")
-	_nSWritingToolsCoordinatorSelDelegate                                          = objc.RegisterName("delegate")
-	_nSWritingToolsCoordinatorSelView                                              = objc.RegisterName("view")
-	_nSWritingToolsCoordinatorSelEffectContainerView                               = objc.RegisterName("effectContainerView")
-	_nSWritingToolsCoordinatorSelSetEffectContainerView                            = objc.RegisterName("setEffectContainerView:")
-	_nSWritingToolsCoordinatorSelDecorationContainerView                           = objc.RegisterName("decorationContainerView")
-	_nSWritingToolsCoordinatorSelSetDecorationContainerView                        = objc.RegisterName("setDecorationContainerView:")
-	_nSWritingToolsCoordinatorSelState                                             = objc.RegisterName("state")
-	_nSWritingToolsCoordinatorSelPreferredBehavior                                 = objc.RegisterName("preferredBehavior")
-	_nSWritingToolsCoordinatorSelSetPreferredBehavior                              = objc.RegisterName("setPreferredBehavior:")
-	_nSWritingToolsCoordinatorSelBehavior                                          = objc.RegisterName("behavior")
-	_nSWritingToolsCoordinatorSelPreferredResultOptions                            = objc.RegisterName("preferredResultOptions")
-	_nSWritingToolsCoordinatorSelSetPreferredResultOptions                         = objc.RegisterName("setPreferredResultOptions:")
-	_nSWritingToolsCoordinatorSelResultOptions                                     = objc.RegisterName("resultOptions")
-	_nSWritingToolsCoordinatorSelIncludesTextListMarkers                           = objc.RegisterName("includesTextListMarkers")
-	_nSWritingToolsCoordinatorSelSetIncludesTextListMarkers                        = objc.RegisterName("setIncludesTextListMarkers:")
+	_clsNSWritingToolsCoordinator                                                    = _objcClass("NSWritingToolsCoordinator")
+	_nSWritingToolsCoordinatorSelInitWithDelegate                                    = objc.RegisterName("initWithDelegate:")
+	_nSWritingToolsCoordinatorSelStopWritingTools                                    = objc.RegisterName("stopWritingTools")
+	_nSWritingToolsCoordinatorSelUpdateRangeWithTextReasonForContextWithIdentifier   = objc.RegisterName("updateRange:withText:reason:forContextWithIdentifier:")
+	_nSWritingToolsCoordinatorSelUpdateForReflowedTextInContextWithIdentifier        = objc.RegisterName("updateForReflowedTextInContextWithIdentifier:")
+	_nSWritingToolsCoordinatorSelStartTextAnimationForRangeInContextWritingDirection = objc.RegisterName("startTextAnimation:forRange:inContext:writingDirection:")
+	_nSWritingToolsCoordinatorSelCancelTextAnimationsWithIdentifiers                 = objc.RegisterName("cancelTextAnimationsWithIdentifiers:")
+	_nSWritingToolsCoordinatorSelShowGrammarPresentationForRangeInContext            = objc.RegisterName("showGrammarPresentationForRange:inContext:")
+	_nSWritingToolsCoordinatorSelIsWritingToolsAvailable                             = objc.RegisterName("isWritingToolsAvailable")
+	_nSWritingToolsCoordinatorSelDelegate                                            = objc.RegisterName("delegate")
+	_nSWritingToolsCoordinatorSelView                                                = objc.RegisterName("view")
+	_nSWritingToolsCoordinatorSelEffectContainerView                                 = objc.RegisterName("effectContainerView")
+	_nSWritingToolsCoordinatorSelSetEffectContainerView                              = objc.RegisterName("setEffectContainerView:")
+	_nSWritingToolsCoordinatorSelDecorationContainerView                             = objc.RegisterName("decorationContainerView")
+	_nSWritingToolsCoordinatorSelSetDecorationContainerView                          = objc.RegisterName("setDecorationContainerView:")
+	_nSWritingToolsCoordinatorSelState                                               = objc.RegisterName("state")
+	_nSWritingToolsCoordinatorSelPreferredBehavior                                   = objc.RegisterName("preferredBehavior")
+	_nSWritingToolsCoordinatorSelSetPreferredBehavior                                = objc.RegisterName("setPreferredBehavior:")
+	_nSWritingToolsCoordinatorSelBehavior                                            = objc.RegisterName("behavior")
+	_nSWritingToolsCoordinatorSelPreferredResultOptions                              = objc.RegisterName("preferredResultOptions")
+	_nSWritingToolsCoordinatorSelSetPreferredResultOptions                           = objc.RegisterName("setPreferredResultOptions:")
+	_nSWritingToolsCoordinatorSelResultOptions                                       = objc.RegisterName("resultOptions")
+	_nSWritingToolsCoordinatorSelIncludesTextListMarkers                             = objc.RegisterName("includesTextListMarkers")
+	_nSWritingToolsCoordinatorSelSetIncludesTextListMarkers                          = objc.RegisterName("setIncludesTextListMarkers:")
 )
 
 func NSWritingToolsCoordinatorFromID(id objc.ID) *NSWritingToolsCoordinator {
@@ -87,7 +90,40 @@ func (o *NSWritingToolsCoordinator) UpdateForReflowedTextInContextWithIdentifier
 	})
 }
 
-// A Boolean value that indicates whether Writing Tools features are currently available. The value of this property is `true` when Writing Tools features are available, and `false` when they aren’t. Writing Tools support might be unavailable because of device constraints or because the system isn’t ready to process Writing Tools requests.
+func (o *NSWritingToolsCoordinator) StartTextAnimationForRangeInContextWritingDirection(textAnimation NSWritingToolsCoordinatorTextAnimation, range_ foundation.NSRange, context_ *NSWritingToolsCoordinatorContext, writingDirection NSWritingDirection) *foundation.NSUUID {
+	var _mainthread0 *foundation.NSUUID
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSUUID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWritingToolsCoordinatorSelStartTextAnimationForRangeInContextWritingDirection, textAnimation, range_, context_.Ptr(), writingDirection)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSUUIDFromID(_ret)
+		}()
+	})
+	return _mainthread0
+}
+
+// Used to support the presentation of grammar issues in text. If it is necessary to cancel the animation of one or more issues, call this to cancel theanimations.
+func (o *NSWritingToolsCoordinator) CancelTextAnimationsWithIdentifiers(identifiers *foundation.NSArray[*foundation.NSUUID]) {
+	purego.Main(func() {
+		o.Ptr().Send(_nSWritingToolsCoordinatorSelCancelTextAnimationsWithIdentifiers, identifiers.Ptr())
+	})
+}
+
+// Used to support the presentation of grammar issues in text. When the user interacts with an issue, call this to bring up the relevant UI.
+func (o *NSWritingToolsCoordinator) ShowGrammarPresentationForRangeInContext(range_ foundation.NSRange, context_ *NSWritingToolsCoordinatorContext) bool {
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWritingToolsCoordinatorSelShowGrammarPresentationForRangeInContext, range_, context_.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
+}
+
+// A Boolean value that indicates whether Writing Tools features are available to enable. The value of this property is `true` when Writing Tools features are supported, even when the user has not enabled the feature. Writing Tools support might be unavailable because of device constraints.
 func NSWritingToolsCoordinatorIsWritingToolsAvailable() bool {
 	var _mainthread0 bool
 	purego.Main(func() {

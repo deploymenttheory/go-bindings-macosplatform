@@ -71,6 +71,9 @@ var (
 	_aVAssetWriterSelSetOutputFileTypeProfile              = objc.RegisterName("setOutputFileTypeProfile:")
 	_aVAssetWriterSelDelegate                              = objc.RegisterName("delegate")
 	_aVAssetWriterSelSetDelegate                           = objc.RegisterName("setDelegate:")
+	_aVAssetWriterSelIsProVideoStorageSupported            = objc.RegisterName("isProVideoStorageSupported")
+	_aVAssetWriterSelUsesProVideoStorage                   = objc.RegisterName("usesProVideoStorage")
+	_aVAssetWriterSelSetUsesProVideoStorage                = objc.RegisterName("setUsesProVideoStorage:")
 )
 
 func AVAssetWriterFromID(id objc.ID) *AVAssetWriter {
@@ -175,7 +178,7 @@ func (o *AVAssetWriter) FinishWritingWithCompletionHandler(handler func()) {
 	o.Ptr().Send(_aVAssetWriterSelFinishWritingWithCompletionHandler, __block_handler)
 }
 
-// @property outputURL @abstract The location of the file for which the instance of AVAssetWriter was initialized for writing. @discussion You may use [[UTType typeWithIdentifier:outputFileType] preferredFilenameExtension] to obtain an appropriate path extension for the outputFileType you have specified. For more information, see <UniformTypeIdentifiers/UTType.h>.
+// The location of the file for which the instance of AVAssetWriter was initialized for writing. You may use [[UTType typeWithIdentifier:outputFileType] preferredFilenameExtension] to obtain an appropriate path extension for the outputFileType you have specified. For more information, see <UniformTypeIdentifiers/UTType.h>.
 func (o *AVAssetWriter) OutputURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetWriterSelOutputURL)
 	if _ret != 0 {
@@ -184,7 +187,7 @@ func (o *AVAssetWriter) OutputURL() *foundation.NSURL {
 	return foundation.NSURLFromID(_ret)
 }
 
-// @property outputFileType @abstract The UTI of the file format of the file for which the instance of AVAssetWriter was initialized for writing.
+// The UTI of the file format of the file for which the instance of AVAssetWriter was initialized for writing.
 func (o *AVAssetWriter) OutputFileType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetWriterSelOutputFileType)
 	if _ret != 0 {
@@ -193,7 +196,7 @@ func (o *AVAssetWriter) OutputFileType() *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
-// @property availableMediaTypes @abstract The media types for which inputs can be added to the receiver. @discussion Some media types may not be accepted within the file format with which an AVAssetWriter was initialized.
+// The media types for which inputs can be added to the receiver. Some media types may not be accepted within the file format with which an AVAssetWriter was initialized.
 func (o *AVAssetWriter) AvailableMediaTypes() *foundation.NSArray[*foundation.NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetWriterSelAvailableMediaTypes)
 	if _ret != 0 {
@@ -202,19 +205,19 @@ func (o *AVAssetWriter) AvailableMediaTypes() *foundation.NSArray[*foundation.NS
 	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
-// @property status @abstract The status of writing samples to the receiver's output file. @discussion The value of this property is an AVAssetWriterStatus that indicates whether writing is in progress, has completed successfully, has been canceled, or has failed. Clients of AVAssetWriterInput objects should check the value of this property after appending samples fails to determine why no more samples could be written. This property is thread safe.
+// The status of writing samples to the receiver's output file. The value of this property is an AVAssetWriterStatus that indicates whether writing is in progress, has completed successfully, has been canceled, or has failed. Clients of AVAssetWriterInput objects should check the value of this property after appending samples fails to determine why no more samples could be written. This property is thread safe.
 func (o *AVAssetWriter) Status() AVAssetWriterStatus {
 	_ret := objc.Send[AVAssetWriterStatus](o.Ptr(), _aVAssetWriterSelStatus)
 	return _ret
 }
 
-// @property error @abstract If the receiver's status is AVAssetWriterStatusFailed, this describes the error that caused the failure. @discussion The value of this property is an NSError that describes what caused the receiver to no longer be able to write to its output file. If the receiver's status is not AVAssetWriterStatusFailed, the value of this property is nil. This property is thread safe.
+// If the receiver's status is AVAssetWriterStatusFailed, this describes the error that caused the failure. The value of this property is an NSError that describes what caused the receiver to no longer be able to write to its output file. If the receiver's status is not AVAssetWriterStatusFailed, the value of this property is nil. This property is thread safe.
 func (o *AVAssetWriter) Error() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _aVAssetWriterSelError)
 	return _ret
 }
 
-// @property metadata @abstract A collection of metadata to be written to the receiver's output file. @discussion The value of this property is an array of AVMetadataItem objects representing the collection of top-level metadata to be written in the output file. This property cannot be set after writing has started.
+// A collection of metadata to be written to the receiver's output file. The value of this property is an array of AVMetadataItem objects representing the collection of top-level metadata to be written in the output file. This property cannot be set after writing has started.
 func (o *AVAssetWriter) Metadata() *foundation.NSArray[*AVMetadataItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetWriterSelMetadata)
 	if _ret != 0 {
@@ -227,7 +230,7 @@ func (o *AVAssetWriter) SetMetadata(metadata *foundation.NSArray[*AVMetadataItem
 	o.Ptr().Send(_aVAssetWriterSelSetMetadata, metadata.Ptr())
 }
 
-// @property shouldOptimizeForNetworkUse @abstract Specifies whether the output file should be written in way that makes it more suitable for playback over a network @discussion When the value of this property is YES, the output file will be written in such a way that playback can start after only a small amount of the file is downloaded. This property cannot be set after writing has started.
+// Specifies whether the output file should be written in way that makes it more suitable for playback over a network When the value of this property is YES, the output file will be written in such a way that playback can start after only a small amount of the file is downloaded. This property cannot be set after writing has started.
 func (o *AVAssetWriter) ShouldOptimizeForNetworkUse() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVAssetWriterSelShouldOptimizeForNetworkUse)
 	return _ret
@@ -237,7 +240,7 @@ func (o *AVAssetWriter) SetShouldOptimizeForNetworkUse(shouldOptimizeForNetworkU
 	o.Ptr().Send(_aVAssetWriterSelSetShouldOptimizeForNetworkUse, shouldOptimizeForNetworkUse)
 }
 
-// @property directoryForTemporaryFiles @abstract Specifies a directory that is suitable for containing temporary files generated during the process of writing an asset. @discussion AVAssetWriter may need to write temporary files when configured in certain ways, such as when performsMultiPassEncodingIfSupported is set to YES on one or more of its inputs.  This property can be used to control where in the filesystem those temporary files are created.  All temporary files will be deleted when asset writing is completed, is canceled, or fails. When the value of this property is nil, the asset writer will choose a suitable location when writing temporary files.  The default value is nil. This property cannot be set after writing has started.  The asset writer will fail if a file cannot be created in this directory (for example, due to insufficient permissions).
+// Specifies a directory that is suitable for containing temporary files generated during the process of writing an asset. AVAssetWriter may need to write temporary files when configured in certain ways, such as when performsMultiPassEncodingIfSupported is set to YES on one or more of its inputs. This property can be used to control where in the filesystem those temporary files are created. All temporary files will be deleted when asset writing is completed, is canceled, or fails. When the value of this property is nil, the asset writer will choose a suitable location when writing temporary files. The default value is nil. This property cannot be set after writing has started. The asset writer will fail if a file cannot be created in this directory (for example, due to insufficient permissions).
 func (o *AVAssetWriter) DirectoryForTemporaryFiles() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetWriterSelDirectoryForTemporaryFiles)
 	if _ret != 0 {
@@ -250,7 +253,7 @@ func (o *AVAssetWriter) SetDirectoryForTemporaryFiles(directoryForTemporaryFiles
 	o.Ptr().Send(_aVAssetWriterSelSetDirectoryForTemporaryFiles, directoryForTemporaryFiles.Ptr())
 }
 
-// @property inputs @abstract The inputs from which the asset writer receives media data. @discussion The value of this property is an NSArray containing concrete instances of AVAssetWriterInput. Inputs can be added to the receiver using the addInput: method.
+// The inputs from which the asset writer receives media data. The value of this property is an NSArray containing concrete instances of AVAssetWriterInput. Inputs can be added to the receiver using the addInput: method.
 func (o *AVAssetWriter) Inputs() *foundation.NSArray[*AVAssetWriterInput] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetWriterSelInputs)
 	if _ret != 0 {
@@ -259,7 +262,7 @@ func (o *AVAssetWriter) Inputs() *foundation.NSArray[*AVAssetWriterInput] {
 	return foundation.NSArrayFromID[*AVAssetWriterInput](_ret)
 }
 
-// @property movieFragmentInterval @abstract For file types that support movie fragments, specifies the frequency at which movie fragments should be written. @discussion When movie fragments are used, a partially written asset whose writing is unexpectedly interrupted can be successfully opened and played up to multiples of the specified time interval. The default value of this property is kCMTimeInvalid, which indicates that movie fragments should not be used. When using movie fragments, for best writing performance to external storage devices, set the movieFragmentInterval to 10 seconds or greater. This property cannot be set after writing has started.
+// For file types that support movie fragments, specifies the frequency at which movie fragments should be written. When movie fragments are used, a partially written asset whose writing is unexpectedly interrupted can be successfully opened and played up to multiples of the specified time interval. The default value of this property is kCMTimeInvalid, which indicates that movie fragments should not be used. When using movie fragments, for best writing performance to external storage devices, set the movieFragmentInterval to 10 seconds or greater. This property cannot be set after writing has started.
 func (o *AVAssetWriter) MovieFragmentInterval() coremedia.CMTime {
 	_ret := objc.Send[coremedia.CMTime](o.Ptr(), _aVAssetWriterSelMovieFragmentInterval)
 	return _ret
@@ -269,7 +272,7 @@ func (o *AVAssetWriter) SetMovieFragmentInterval(movieFragmentInterval coremedia
 	o.Ptr().Send(_aVAssetWriterSelSetMovieFragmentInterval, movieFragmentInterval)
 }
 
-// @property initialMovieFragmentInterval @abstract For file types that support movie fragments, specifies the interval at which initial movie fragment should be written. @discussion This property is irrelevant if the movieFragmentInterval property is not set. The default value is kCMTimeInvalid, which indicates that the interval for initial movie fragment is same as the one specified by movieFragmentInterval property. This property cannot be set after writing has started.
+// For file types that support movie fragments, specifies the interval at which initial movie fragment should be written. This property is irrelevant if the movieFragmentInterval property is not set. The default value is kCMTimeInvalid, which indicates that the interval for initial movie fragment is same as the one specified by movieFragmentInterval property. This property cannot be set after writing has started.
 func (o *AVAssetWriter) InitialMovieFragmentInterval() coremedia.CMTime {
 	_ret := objc.Send[coremedia.CMTime](o.Ptr(), _aVAssetWriterSelInitialMovieFragmentInterval)
 	return _ret
@@ -279,7 +282,7 @@ func (o *AVAssetWriter) SetInitialMovieFragmentInterval(initialMovieFragmentInte
 	o.Ptr().Send(_aVAssetWriterSelSetInitialMovieFragmentInterval, initialMovieFragmentInterval)
 }
 
-// @property initialMovieFragmentSequenceNumber @abstract For file types that support movie fragments, specifies the initial movie fragment sequence number. @discussion The value must be equal to or greater than 1. The default value is 1. Note that if you combine movie fragments produced by an instance of AVAssetWriter with additional movie fragments, produced either by a different instance of AVAssetWriter or by some other means, it is necessary to ensure that movie fragment sequence numbers increase monotonically across the entire combined collection, in temporal order. This property cannot be set after writing has started.
+// For file types that support movie fragments, specifies the initial movie fragment sequence number. The value must be equal to or greater than 1. The default value is 1. Note that if you combine movie fragments produced by an instance of AVAssetWriter with additional movie fragments, produced either by a different instance of AVAssetWriter or by some other means, it is necessary to ensure that movie fragment sequence numbers increase monotonically across the entire combined collection, in temporal order. This property cannot be set after writing has started.
 func (o *AVAssetWriter) InitialMovieFragmentSequenceNumber() int {
 	_ret := objc.Send[int](o.Ptr(), _aVAssetWriterSelInitialMovieFragmentSequenceNumber)
 	return _ret
@@ -289,7 +292,7 @@ func (o *AVAssetWriter) SetInitialMovieFragmentSequenceNumber(initialMovieFragme
 	o.Ptr().Send(_aVAssetWriterSelSetInitialMovieFragmentSequenceNumber, initialMovieFragmentSequenceNumber)
 }
 
-// @property producesCombinableFragments @abstract For file types that support fragmented MPEG-4, specifies whether the movie fragments should be produced in way that makes them suitable for combining with movie fragments produced by one or more other instances of AVAssetWriter into a single fragment stream of uniform encoding. @discussion The default value is NO. When multiple instances of AVAssetWriter are used to produce distinct streams that complement each other, for example to create HLS encoding or bitrate variants, it’s not necessary to set this property to YES. This property cannot be set after writing has started.
+// For file types that support fragmented MPEG-4, specifies whether the movie fragments should be produced in way that makes them suitable for combining with movie fragments produced by one or more other instances of AVAssetWriter into a single fragment stream of uniform encoding. The default value is NO. When multiple instances of AVAssetWriter are used to produce distinct streams that complement each other, for example to create HLS encoding or bitrate variants, it’s not necessary to set this property to YES. This property cannot be set after writing has started.
 func (o *AVAssetWriter) ProducesCombinableFragments() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVAssetWriterSelProducesCombinableFragments)
 	return _ret
@@ -299,7 +302,7 @@ func (o *AVAssetWriter) SetProducesCombinableFragments(producesCombinableFragmen
 	o.Ptr().Send(_aVAssetWriterSelSetProducesCombinableFragments, producesCombinableFragments)
 }
 
-// @property overallDurationHint @abstract For file types that support movie fragments, provides a hint of the final duration of the file to be written @discussion The value of this property must be a nonnegative, numeric CMTime.  Alternatively, if the value of this property is an invalid CMTime (e.g. kCMTimeInvalid), no overall duration hint will be written to the file.  The default value is kCMTimeInvalid. This property is currently ignored if movie fragments are not being written.  Use the movieFragmentInterval property to enable movie fragments. This property cannot be set after writing has started.
+// For file types that support movie fragments, provides a hint of the final duration of the file to be written The value of this property must be a nonnegative, numeric CMTime. Alternatively, if the value of this property is an invalid CMTime (e.g. kCMTimeInvalid), no overall duration hint will be written to the file. The default value is kCMTimeInvalid. This property is currently ignored if movie fragments are not being written. Use the movieFragmentInterval property to enable movie fragments. This property cannot be set after writing has started.
 func (o *AVAssetWriter) OverallDurationHint() coremedia.CMTime {
 	_ret := objc.Send[coremedia.CMTime](o.Ptr(), _aVAssetWriterSelOverallDurationHint)
 	return _ret
@@ -309,7 +312,7 @@ func (o *AVAssetWriter) SetOverallDurationHint(overallDurationHint coremedia.CMT
 	o.Ptr().Send(_aVAssetWriterSelSetOverallDurationHint, overallDurationHint)
 }
 
-// @property movieTimeScale @abstract For file types that contain a 'moov' atom, such as QuickTime Movie files, specifies the asset-level time scale to be used. @discussion The default value is 0, which indicates that the receiver should choose a convenient value, if applicable. This property cannot be set after writing has started.
+// For file types that contain a 'moov' atom, such as QuickTime Movie files, specifies the asset-level time scale to be used. The default value is 0, which indicates that the receiver should choose a convenient value, if applicable. This property cannot be set after writing has started.
 func (o *AVAssetWriter) MovieTimeScale() int32 {
 	_ret := objc.Send[int32](o.Ptr(), _aVAssetWriterSelMovieTimeScale)
 	return _ret
@@ -343,7 +346,7 @@ func (o *AVAssetWriter) FlushSegment() {
 	o.Ptr().Send(_aVAssetWriterSelFlushSegment)
 }
 
-// @property preferredOutputSegmentInterval @abstract Specifies preferred segment interval. @discussion The default value is kCMTimeInvalid, which means that the receiver will choose an appropriate default value. The value can be set to positive numeric or kCMTimeIndefinite. If the value is kCMTimeIndefinite, every time a client calls -flushSegment the receiver outputs a segment data. This property cannot be set after writing has started.
+// Specifies preferred segment interval. The default value is kCMTimeInvalid, which means that the receiver will choose an appropriate default value. The value can be set to positive numeric or kCMTimeIndefinite. If the value is kCMTimeIndefinite, every time a client calls -flushSegment the receiver outputs a segment data. This property cannot be set after writing has started.
 func (o *AVAssetWriter) PreferredOutputSegmentInterval() coremedia.CMTime {
 	_ret := objc.Send[coremedia.CMTime](o.Ptr(), _aVAssetWriterSelPreferredOutputSegmentInterval)
 	return _ret
@@ -353,7 +356,7 @@ func (o *AVAssetWriter) SetPreferredOutputSegmentInterval(preferredOutputSegment
 	o.Ptr().Send(_aVAssetWriterSelSetPreferredOutputSegmentInterval, preferredOutputSegmentInterval)
 }
 
-// @property initialSegmentStartTime @abstract Specifies start time of initial segment. @discussion A numeric time must be set if the value of preferredOutputSegmentInterval property is positive numeric. If not, this property is irrelevant. This property cannot be set after writing has started.
+// Specifies start time of initial segment. A numeric time must be set if the value of preferredOutputSegmentInterval property is positive numeric. If not, this property is irrelevant. This property cannot be set after writing has started.
 func (o *AVAssetWriter) InitialSegmentStartTime() coremedia.CMTime {
 	_ret := objc.Send[coremedia.CMTime](o.Ptr(), _aVAssetWriterSelInitialSegmentStartTime)
 	return _ret
@@ -363,6 +366,7 @@ func (o *AVAssetWriter) SetInitialSegmentStartTime(initialSegmentStartTime corem
 	o.Ptr().Send(_aVAssetWriterSelSetInitialSegmentStartTime, initialSegmentStartTime)
 }
 
+// Specifies a file type profile for the specified file type. The default value is nil, which means that the receiver will choose an appropriate default profile based on the specified file type. Clients that want to receive segment data that is suitable for streaming through the -assetWriter:didOutputSegmentData:segmentType:segmentReport: or -assetWriter:didOutputSegmentData:segmentType: delegate method should set AVFileTypeProfileMPEG4AppleHLS, or AVFileTypeProfileMPEG4CMAFCompliant to require output that is specifically compliant with CMAF format, with AVFileTypeMPEG4 file type. File type profiles are declared in AVMediaFormat.h. This property cannot be set after writing has started.
 func (o *AVAssetWriter) OutputFileTypeProfile() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetWriterSelOutputFileTypeProfile)
 	if _ret != 0 {
@@ -375,7 +379,7 @@ func (o *AVAssetWriter) SetOutputFileTypeProfile(outputFileTypeProfile *foundati
 	o.Ptr().Send(_aVAssetWriterSelSetOutputFileTypeProfile, outputFileTypeProfile.Ptr())
 }
 
-// @property delegate @abstract An object that implements one or more of the methods in the AVAssetWriterDelegate protocol. @discussion This property cannot be set after writing has started.
+// An object that implements one or more of the methods in the AVAssetWriterDelegate protocol. This property cannot be set after writing has started.
 func (o *AVAssetWriter) Delegate() AVAssetWriterDelegate {
 	_ret := objc.Send[AVAssetWriterDelegate](o.Ptr(), _aVAssetWriterSelDelegate)
 	return _ret
@@ -383,4 +387,20 @@ func (o *AVAssetWriter) Delegate() AVAssetWriterDelegate {
 
 func (o *AVAssetWriter) SetDelegate(delegate AVAssetWriterDelegate) {
 	o.Ptr().Send(_aVAssetWriterSelSetDelegate, delegate)
+}
+
+// Indicates whether the receiver supports writing to pre-allocated storage on this device for high data rate video capture formats such as ProRes. Check this value prior to setting the `usesProVideoStorage` property to avoid exceptions when pre-allocated storage is not supported.
+func (o *AVAssetWriter) IsProVideoStorageSupported() bool {
+	_ret := objc.Send[bool](o.Ptr(), _aVAssetWriterSelIsProVideoStorageSupported)
+	return _ret
+}
+
+// Indicates whether to use pre-allocated storage. The default value is `NO`. See more detailed description of ProVideoStorage in `AVProVideoStorage.h`. An exception will be thrown if clients try to set `YES` if the value of the `proVideoStorageSupported` property is `NO`. An exception will be thrown if clients try to set this property after `-startWriting` has been called on the receiver.
+func (o *AVAssetWriter) UsesProVideoStorage() bool {
+	_ret := objc.Send[bool](o.Ptr(), _aVAssetWriterSelUsesProVideoStorage)
+	return _ret
+}
+
+func (o *AVAssetWriter) SetUsesProVideoStorage(usesProVideoStorage bool) {
+	o.Ptr().Send(_aVAssetWriterSelSetUsesProVideoStorage, usesProVideoStorage)
 }

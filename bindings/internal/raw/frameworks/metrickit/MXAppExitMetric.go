@@ -12,6 +12,7 @@ import (
 // An object representing metrics about the types of foreground and background app exits.
 //
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxappexitmetric
+// Deprecated: Use MetricResult instead.
 type MXAppExitMetric struct {
 	MXMetric
 }

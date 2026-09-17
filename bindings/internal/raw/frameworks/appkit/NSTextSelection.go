@@ -93,6 +93,7 @@ func (o *NSTextSelection) TextSelectionWithTextRanges(textRanges *foundation.NSA
 	return NSTextSelectionFromID(_ret)
 }
 
+// An array of disjoint logical ranges in the selection. The array must be logically ordered. When editing, all ranges in a text selection constitute a single insertion point.
 func (o *NSTextSelection) TextRanges() *foundation.NSArray[*NSTextRange] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextSelectionSelTextRanges)
 	if _ret != 0 {
@@ -101,21 +102,25 @@ func (o *NSTextSelection) TextRanges() *foundation.NSArray[*NSTextRange] {
 	return foundation.NSArrayFromID[*NSTextRange](_ret)
 }
 
+// The granularity of the selection. `NSTextSelectionGranularityCharacter` by default. Extending operations should modify the selection by the granularity.
 func (o *NSTextSelection) Granularity() NSTextSelectionGranularity {
 	_ret := objc.Send[NSTextSelectionGranularity](o.Ptr(), _nSTextSelectionSelGranularity)
 	return _ret
 }
 
+// Either upstream or downstream selection. `NSTextSelectionAffinityDownstream` by default. For a 0-length selection, it describes the visual location of the text cursor between the head of line containing the selection location (downstream) or tail of the previous line (upstream). For a selection with contents, it describes the logical direction of the non-anchored edge of the selection.
 func (o *NSTextSelection) Affinity() NSTextSelectionAffinity {
 	_ret := objc.Send[NSTextSelectionAffinity](o.Ptr(), _nSTextSelectionSelAffinity)
 	return _ret
 }
 
+// A Boolean value indicating whether this is a transient text selection during drag handling.
 func (o *NSTextSelection) IsTransient() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTextSelectionSelIsTransient)
 	return _ret
 }
 
+// The anchor position offset from the beginning of a line fragment in visual order. That is, from the left for a horizontal line fragment and from the top for a vertical. Navigating between lines uses this point when the current line fragment associated with the selection is shorter than the next line visited. The default value is `0.0`.
 func (o *NSTextSelection) AnchorPositionOffset() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSTextSelectionSelAnchorPositionOffset)
 	return _ret
@@ -125,6 +130,7 @@ func (o *NSTextSelection) SetAnchorPositionOffset(anchorPositionOffset float64) 
 	o.Ptr().Send(_nSTextSelectionSelSetAnchorPositionOffset, anchorPositionOffset)
 }
 
+// A Boolean value indicating whether the selection should be interpreted as logical or visual.
 func (o *NSTextSelection) IsLogical() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTextSelectionSelIsLogical)
 	return _ret
@@ -134,6 +140,7 @@ func (o *NSTextSelection) SetLogical(logical bool) {
 	o.Ptr().Send(_nSTextSelectionSelSetLogical, logical)
 }
 
+// The secondary character location when the user taps or clicks at a directional boundary. Setting a non-nil location has a side effect of making “logical“ `false`.
 func (o *NSTextSelection) SecondarySelectionLocation() NSTextLocation {
 	_ret := objc.Send[NSTextLocation](o.Ptr(), _nSTextSelectionSelSecondarySelectionLocation)
 	return _ret
@@ -143,6 +150,7 @@ func (o *NSTextSelection) SetSecondarySelectionLocation(secondarySelectionLocati
 	o.Ptr().Send(_nSTextSelectionSelSetSecondarySelectionLocation, secondarySelectionLocation)
 }
 
+// The template attributes used for characters replacing the contents of this selection.
 func (o *NSTextSelection) TypingAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextSelectionSelTypingAttributes)
 	if _ret != 0 {

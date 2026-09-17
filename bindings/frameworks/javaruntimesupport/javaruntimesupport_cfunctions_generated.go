@@ -93,10 +93,10 @@ func JRSFontGetRenderingStyleForContext(context_ coregraphics.CGContextRef) uint
 	return _fnJRSFontGetRenderingStyleForContext(objref.IDOf(context_.Object))
 }
 
-var _fnJRSFontGetRenderingStyleForHints func(unsafe.Pointer, unsafe.Pointer) uint32
+var _fnJRSFontGetRenderingStyleForHints func(int, int) uint32
 
 // JRSFontGetRenderingStyleForHints calls the JavaRuntimeSupport framework function JRSFontGetRenderingStyleForHints.
-func JRSFontGetRenderingStyleForHints(fmHint unsafe.Pointer, aaHint unsafe.Pointer) uint32 {
+func JRSFontGetRenderingStyleForHints(fmHint int, aaHint int) uint32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJRSFontGetRenderingStyleForHints == nil {
 		ebipurego.RegisterLibFunc(&_fnJRSFontGetRenderingStyleForHints, _lib, "JRSFontGetRenderingStyleForHints")

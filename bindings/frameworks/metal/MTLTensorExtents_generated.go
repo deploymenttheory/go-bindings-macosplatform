@@ -16,7 +16,7 @@ import (
 
 // TensorExtents is an idiomatic wrapper over the Objective-C class MTLTensorExtents.
 //
-// An array of length matching the rank, holding the dimensions of a tensor.
+// An integer array that holds per-dimension values such as tensor sizes, strides, or block factors
 type TensorExtents struct {
 	objref.Handle
 }
@@ -79,14 +79,14 @@ func NewTensorExtents() *TensorExtents {
 	return tensorExtentsAdopt(_id)
 }
 
-// ExtentAtDimensionIndex returns the extent at an index.
+// ExtentAtDimensionIndex returns the value at the specified dimension index.
 func (te *TensorExtents) ExtentAtDimensionIndex(dimensionIndex int) int {
 	defer runtime.KeepAlive(te)
 	_r := objc.Send[int](objref.IDOf(te), objc.RegisterName("extentAtDimensionIndex:"), dimensionIndex)
 	return _r
 }
 
-// Rank returns obtains the rank of the tensor. The rank represents the number of dimensions.
+// Rank returns the number of values in the extents object.
 func (te *TensorExtents) Rank() int {
 	defer runtime.KeepAlive(te)
 	_r := objc.Send[int](objref.IDOf(te), objc.RegisterName("rank"))

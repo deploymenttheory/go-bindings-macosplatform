@@ -658,6 +658,8 @@ const (
 	KAudioDevicePropertySafetyOffset                   = 1935763060
 	KAudioDevicePropertyStreams                        = 1937009955
 	KAudioDevicePropertyTransportType                  = 1953653102
+	KAudioDevicePropertyWantsControlsRestored          = 1919251299
+	KAudioDevicePropertyWantsStreamFormatsRestored     = 1919251302
 	KAudioObjectPropertyControlList                    = 1668575852
 )
 
@@ -730,15 +732,11 @@ const (
 	KAudioDevicePropertySubVolumeScalar                          = 1937140845
 	KAudioDevicePropertySubVolumeScalarToDecibels                = 1937125988
 	KAudioDevicePropertyTalkback                                 = 1952541794
-	KAudioDevicePropertyVoiceActivityDetectionEnable             = 1983996971
-	KAudioDevicePropertyVoiceActivityDetectionState              = 1983997011
 	KAudioDevicePropertyVolumeDecibels                           = 1987013732
 	KAudioDevicePropertyVolumeDecibelsToScalar                   = 1684157046
 	KAudioDevicePropertyVolumeRangeDecibels                      = 1986290211
 	KAudioDevicePropertyVolumeScalar                             = 1987013741
 	KAudioDevicePropertyVolumeScalarToDecibels                   = 1983013986
-	KAudioDevicePropertyWantsControlsRestored                    = 1919251299
-	KAudioDevicePropertyWantsStreamFormatsRestored               = 1919251302
 )
 
 const (
@@ -757,7 +755,10 @@ const (
 	KAudioDevicePropertyPlugIn                       = 1886156135
 	KAudioDevicePropertyProcessMute                  = 1634758765
 	KAudioDevicePropertyStreamConfiguration          = 1936482681
+	KAudioDevicePropertySuggestedReferenceDevice     = 1701802596
 	KAudioDevicePropertyUsesVariableBufferFrameSizes = 1986425722
+	KAudioDevicePropertyVoiceActivityDetectionEnable = 1983996971
+	KAudioDevicePropertyVoiceActivityDetectionState  = 1983997011
 )
 
 const (
@@ -780,7 +781,8 @@ const (
 )
 
 const (
-	KAudioDeviceTransportTypeAutoAggregate = 1718055536
+	KAudioDeviceTransportTypeAutoAggregate     = 1718055536
+	KAudioDeviceTransportTypeContinuityCapture = 1667457392
 )
 
 const (
@@ -790,13 +792,14 @@ const (
 	KAudioDeviceTransportTypeBluetooth                 = 1651275109
 	KAudioDeviceTransportTypeBluetoothLE               = 1651271009
 	KAudioDeviceTransportTypeBuiltIn                   = 1651274862
-	KAudioDeviceTransportTypeContinuityCapture         = 1667457392
 	KAudioDeviceTransportTypeContinuityCaptureWired    = 1667463012
 	KAudioDeviceTransportTypeContinuityCaptureWireless = 1667463020
 	KAudioDeviceTransportTypeDisplayPort               = 1685090932
 	KAudioDeviceTransportTypeFireWire                  = 825440564
 	KAudioDeviceTransportTypeHDMI                      = 1751412073
 	KAudioDeviceTransportTypePCI                       = 1885563168
+	KAudioDeviceTransportTypeRemoteScreen              = 1920164722
+	KAudioDeviceTransportTypeRemoteStreaming           = 1920169074
 	KAudioDeviceTransportTypeThunderbolt               = 1953002862
 	KAudioDeviceTransportTypeUSB                       = 1970496032
 	KAudioDeviceTransportTypeUnknown                   = 0

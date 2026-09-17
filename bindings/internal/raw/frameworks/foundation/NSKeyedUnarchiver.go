@@ -208,6 +208,7 @@ func (o *NSKeyedUnarchiver) ClassForClassName(codedName *NSString) objc.Class {
 	return _ret
 }
 
+// The unarchiver's delegate.
 // Deprecated: Use +unarchivedObjectOfClass:fromData:error: instead
 func (o *NSKeyedUnarchiver) Delegate() NSKeyedUnarchiverDelegate {
 	_ret := objc.Send[NSKeyedUnarchiverDelegate](o.Ptr(), _nSKeyedUnarchiverSelDelegate)

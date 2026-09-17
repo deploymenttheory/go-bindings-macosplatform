@@ -93,6 +93,7 @@ func (o *NSXPCListener) SetConnectionCodeSigningRequirement(requirement *NSStrin
 	o.Ptr().Send(_nSXPCListenerSelSetConnectionCodeSigningRequirement, requirement.Ptr())
 }
 
+// The delegate for the connection listener. If no delegate is set, all new connections will be rejected. See the protocol for more information on how to implement it.
 func (o *NSXPCListener) Delegate() NSXPCListenerDelegate {
 	_ret := objc.Send[NSXPCListenerDelegate](o.Ptr(), _nSXPCListenerSelDelegate)
 	return _ret
@@ -102,6 +103,7 @@ func (o *NSXPCListener) SetDelegate(delegate NSXPCListenerDelegate) {
 	o.Ptr().Send(_nSXPCListenerSelSetDelegate, delegate)
 }
 
+// An endpoint object which may be sent over an existing connection. This allows the receiver of the endpoint to create a new connection to this `NSXPCListener`. The `NSXPCListenerEndpoint` uniquely names this listener object across connections.
 func (o *NSXPCListener) Endpoint() *NSXPCListenerEndpoint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXPCListenerSelEndpoint)
 	if _ret != 0 {

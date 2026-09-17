@@ -9,8 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An abstract class used to transform values from one representation to another.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsvaluetransformer
 type NSValueTransformer struct {
 	NSObject
@@ -37,10 +35,12 @@ func NSValueTransformerFromID(id objc.ID) *NSValueTransformer {
 	return o
 }
 
+// Registers the provided value transformer with a given identifier.
 func NSValueTransformerSetValueTransformerForName(transformer *NSValueTransformer, name *NSString) {
 	objc.ID(_clsNSValueTransformer).Send(_nSValueTransformerSelSetValueTransformerForName, transformer.Ptr(), name.Ptr())
 }
 
+// Returns the value transformer identified by a given identifier.
 func NSValueTransformerValueTransformerForName(name *NSString) *NSValueTransformer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSValueTransformer), _nSValueTransformerSelValueTransformerForName, name.Ptr())
 	if _ret != 0 {
@@ -49,6 +49,7 @@ func NSValueTransformerValueTransformerForName(name *NSString) *NSValueTransform
 	return NSValueTransformerFromID(_ret)
 }
 
+// Returns an array of all the registered value transformer names.
 func NSValueTransformerValueTransformerNames() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSValueTransformer), _nSValueTransformerSelValueTransformerNames)
 	if _ret != 0 {
@@ -57,21 +58,25 @@ func NSValueTransformerValueTransformerNames() *NSArray[*NSString] {
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// Returns the class of objects returned when applying the value transformer.
 func NSValueTransformerTransformedValueClass() objc.Class {
 	_ret := objc.Send[objc.Class](objc.ID(_clsNSValueTransformer), _nSValueTransformerSelTransformedValueClass)
 	return _ret
 }
 
+// Returns a Boolean value that indicates whether the receiver can reverse a transformation.
 func NSValueTransformerAllowsReverseTransformation() bool {
 	_ret := objc.Send[bool](objc.ID(_clsNSValueTransformer), _nSValueTransformerSelAllowsReverseTransformation)
 	return _ret
 }
 
+// Returns the result of transforming a given value.
 func (o *NSValueTransformer) TransformedValue(value objc.ID) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSValueTransformerSelTransformedValue, value)
 	return _ret
 }
 
+// Returns the result of the reverse transformation of a given value.
 func (o *NSValueTransformer) ReverseTransformedValue(value objc.ID) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSValueTransformerSelReverseTransformedValue, value)
 	return _ret

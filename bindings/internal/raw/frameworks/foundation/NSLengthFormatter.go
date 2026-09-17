@@ -9,8 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A formatter that provides localized descriptions of linear distances, such as length and height measurements.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nslengthformatter
 type NSLengthFormatter struct {
 	NSFormatter
@@ -40,6 +38,7 @@ func NSLengthFormatterFromID(id objc.ID) *NSLengthFormatter {
 	return o
 }
 
+// Returns a length string for the provided value and unit.
 func (o *NSLengthFormatter) StringFromValueUnit(value float64, unit NSLengthFormatterUnit) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLengthFormatterSelStringFromValueUnit, value, unit)
 	if _ret != 0 {
@@ -48,6 +47,7 @@ func (o *NSLengthFormatter) StringFromValueUnit(value float64, unit NSLengthForm
 	return NSStringFromID(_ret)
 }
 
+// Returns a length string for the provided value in meters. Formats a number in meters to a localized string with the locale-appropriate unit and an appropriate scale (e.g. 4.3m = 14.1ft in the US locale).
 func (o *NSLengthFormatter) StringFromMeters(numberInMeters float64) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLengthFormatterSelStringFromMeters, numberInMeters)
 	if _ret != 0 {
@@ -56,6 +56,7 @@ func (o *NSLengthFormatter) StringFromMeters(numberInMeters float64) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns a unit string for the provided value and unit. Returns a localized string of the given unit, and if the unit is singular or plural is based on the given number.
 func (o *NSLengthFormatter) UnitStringFromValueUnit(value float64, unit NSLengthFormatterUnit) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLengthFormatterSelUnitStringFromValueUnit, value, unit)
 	if _ret != 0 {
@@ -64,6 +65,7 @@ func (o *NSLengthFormatter) UnitStringFromValueUnit(value float64, unit NSLength
 	return NSStringFromID(_ret)
 }
 
+// Returns a unit string based on the provided value in meters. Returns the locale-appropriate unit, the same unit used by `stringFromMeters:`.
 func (o *NSLengthFormatter) UnitStringFromMetersUsedUnit(numberInMeters float64, unitp *NSLengthFormatterUnit) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLengthFormatterSelUnitStringFromMetersUsedUnit, numberInMeters, unitp)
 	if _ret != 0 {
@@ -72,6 +74,7 @@ func (o *NSLengthFormatter) UnitStringFromMetersUsedUnit(numberInMeters float64,
 	return NSStringFromID(_ret)
 }
 
+// The number formatter used to format the numbers in a length string. The default value is an `NSNumberFormatter` with `NSNumberFormatterDecimalStyle`.
 func (o *NSLengthFormatter) NumberFormatter() *NSNumberFormatter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLengthFormatterSelNumberFormatter)
 	if _ret != 0 {
@@ -84,6 +87,7 @@ func (o *NSLengthFormatter) SetNumberFormatter(numberFormatter *NSNumberFormatte
 	o.Ptr().Send(_nSLengthFormatterSelSetNumberFormatter, numberFormatter.Ptr())
 }
 
+// The unit style used when creating string representations of length values. The default value is `NSFormattingUnitStyleMedium`.
 func (o *NSLengthFormatter) UnitStyle() NSFormattingUnitStyle {
 	_ret := objc.Send[NSFormattingUnitStyle](o.Ptr(), _nSLengthFormatterSelUnitStyle)
 	return _ret
@@ -93,6 +97,7 @@ func (o *NSLengthFormatter) SetUnitStyle(unitStyle NSFormattingUnitStyle) {
 	o.Ptr().Send(_nSLengthFormatterSelSetUnitStyle, unitStyle)
 }
 
+// A Boolean value that indicates whether the resulting string represents a person's height. The default value is `NO`. If set to `YES`, the number argument for `stringFromMeters:` and `unitStringFromMeters:usedUnit:` is considered as a person's height.
 func (o *NSLengthFormatter) IsForPersonHeightUse() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSLengthFormatterSelIsForPersonHeightUse)
 	return _ret

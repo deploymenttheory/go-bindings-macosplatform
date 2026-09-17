@@ -52,6 +52,7 @@ func NSURLQueryItemQueryItemWithNameValue(name *NSString, value *NSString) *NSUR
 	return NSURLQueryItemFromID(_ret)
 }
 
+// The name of the query item. For example, in the URL `http://www.apple.com/search/?q=iPad`, the `name` parameter is `q`. This string is not percent-encoded.
 func (o *NSURLQueryItem) Name() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLQueryItemSelName)
 	if _ret != 0 {
@@ -60,6 +61,7 @@ func (o *NSURLQueryItem) Name() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The value for the query item. For example, in the URL `http://www.apple.com/search/?q=iPad`, the `value` parameter is `iPad`. This string is not percent-encoded.
 func (o *NSURLQueryItem) Value() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLQueryItemSelValue)
 	if _ret != 0 {

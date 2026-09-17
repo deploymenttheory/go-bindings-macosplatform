@@ -76,7 +76,7 @@ func (mp *MachPort) WithScriptingProperties(scriptingProperties map[string]obj.O
 	return mp
 }
 
-// MachPort returns the mach port.
+// MachPort returns the Mach port used by the receiver.
 func (mp *MachPort) MachPort() uint32 {
 	defer runtime.KeepAlive(mp)
 	_r := objc.Send[uint32](objref.IDOf(mp), objc.RegisterName("machPort"))

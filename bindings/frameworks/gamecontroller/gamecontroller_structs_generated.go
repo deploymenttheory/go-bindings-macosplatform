@@ -11,12 +11,10 @@ type GCAcceleration struct {
 	Z float64
 }
 
-// The amplitudes for multiple positions on a trigger.
 type GCDualSenseAdaptiveTriggerPositionalAmplitudes struct {
 	Values [10]float32
 }
 
-// The resistive strengths for multiple positions on a trigger.
 type GCDualSenseAdaptiveTriggerPositionalResistiveStrengths struct {
 	Values [10]float32
 }

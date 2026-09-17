@@ -23,6 +23,8 @@ var (
 	_pHAssetCreationRequestSelSupportsAssetResourceTypes        = objc.RegisterName("supportsAssetResourceTypes:")
 	_pHAssetCreationRequestSelAddResourceWithTypeFileURLOptions = objc.RegisterName("addResourceWithType:fileURL:options:")
 	_pHAssetCreationRequestSelAddResourceWithTypeDataOptions    = objc.RegisterName("addResourceWithType:data:options:")
+	_pHAssetCreationRequestSelOriginalResourceChoice            = objc.RegisterName("originalResourceChoice")
+	_pHAssetCreationRequestSelSetOriginalResourceChoice         = objc.RegisterName("setOriginalResourceChoice:")
 )
 
 func PHAssetCreationRequestFromID(id objc.ID) *PHAssetCreationRequest {
@@ -58,4 +60,14 @@ func (o *PHAssetCreationRequest) AddResourceWithTypeFileURLOptions(type_ PHAsset
 // Adds a data resource to the asset being created, using the specified data.
 func (o *PHAssetCreationRequest) AddResourceWithTypeDataOptions(type_ PHAssetResourceType, data *foundation.NSData, options *PHAssetResourceCreationOptions) {
 	o.Ptr().Send(_pHAssetCreationRequestSelAddResourceWithTypeDataOptions, type_, data.Ptr(), options.Ptr())
+}
+
+// The original resource to use as the unadjusted base for rendering derivatives of the new asset. This property applies to RAW+JPEG assets only, where it selects whether the RAW or the compressed resource serves as the original. Setting it on assets that have only a single original resource is an error.
+func (o *PHAssetCreationRequest) OriginalResourceChoice() PHOriginalResourceChoice {
+	_ret := objc.Send[PHOriginalResourceChoice](o.Ptr(), _pHAssetCreationRequestSelOriginalResourceChoice)
+	return _ret
+}
+
+func (o *PHAssetCreationRequest) SetOriginalResourceChoice(originalResourceChoice PHOriginalResourceChoice) {
+	o.Ptr().Send(_pHAssetCreationRequestSelSetOriginalResourceChoice, originalResourceChoice)
 }

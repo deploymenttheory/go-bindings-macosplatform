@@ -15,15 +15,16 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-var _fnCFBridgingRelease func(objc.ID) unsafe.Pointer
+var _fnCFBridgingRelease func(objc.ID) objc.ID
 
 // CFBridgingRelease calls the Foundation framework function CFBridgingRelease.
-func CFBridgingRelease(x obj.Object) unsafe.Pointer {
+func CFBridgingRelease(x obj.Object) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFBridgingRelease == nil {
 		ebipurego.RegisterLibFunc(&_fnCFBridgingRelease, _lib, "CFBridgingRelease")
 	}
-	return _fnCFBridgingRelease(objref.IDOf(x))
+	_ret := _fnCFBridgingRelease(objref.IDOf(x))
+	return obj.Wrap(_ret)
 }
 
 var _fnCFBridgingRetain func(objc.ID) objc.ID
@@ -208,15 +209,16 @@ func NSCopyHashTableWithZone(table obj.Object, zone unsafe.Pointer) obj.Object {
 	return obj.Wrap(_ret)
 }
 
-var _fnNSCopyMapTableWithZone func(objc.ID, unsafe.Pointer) unsafe.Pointer
+var _fnNSCopyMapTableWithZone func(objc.ID, unsafe.Pointer) objc.ID
 
 // NSCopyMapTableWithZone calls the Foundation framework function NSCopyMapTableWithZone.
-func NSCopyMapTableWithZone(table obj.Object, zone unsafe.Pointer) unsafe.Pointer {
+func NSCopyMapTableWithZone(table obj.Object, zone unsafe.Pointer) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSCopyMapTableWithZone == nil {
 		ebipurego.RegisterLibFunc(&_fnNSCopyMapTableWithZone, _lib, "NSCopyMapTableWithZone")
 	}
-	return _fnNSCopyMapTableWithZone(objref.IDOf(table), zone)
+	_ret := _fnNSCopyMapTableWithZone(objref.IDOf(table), zone)
+	return obj.Wrap(_ret)
 }
 
 var _fnNSCopyMemoryPages func(unsafe.Pointer, unsafe.Pointer, int)
@@ -288,26 +290,28 @@ func NSCreateHashTableWithZone(callBacks unsafe.Pointer, capacity int, zone unsa
 	return obj.Wrap(_ret)
 }
 
-var _fnNSCreateMapTable func(unsafe.Pointer, unsafe.Pointer, int) unsafe.Pointer
+var _fnNSCreateMapTable func(unsafe.Pointer, unsafe.Pointer, int) objc.ID
 
 // NSCreateMapTable calls the Foundation framework function NSCreateMapTable.
-func NSCreateMapTable(keyCallBacks unsafe.Pointer, valueCallBacks unsafe.Pointer, capacity int) unsafe.Pointer {
+func NSCreateMapTable(keyCallBacks unsafe.Pointer, valueCallBacks unsafe.Pointer, capacity int) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSCreateMapTable == nil {
 		ebipurego.RegisterLibFunc(&_fnNSCreateMapTable, _lib, "NSCreateMapTable")
 	}
-	return _fnNSCreateMapTable(keyCallBacks, valueCallBacks, capacity)
+	_ret := _fnNSCreateMapTable(keyCallBacks, valueCallBacks, capacity)
+	return obj.Wrap(_ret)
 }
 
-var _fnNSCreateMapTableWithZone func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer) unsafe.Pointer
+var _fnNSCreateMapTableWithZone func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer) objc.ID
 
 // NSCreateMapTableWithZone calls the Foundation framework function NSCreateMapTableWithZone.
-func NSCreateMapTableWithZone(keyCallBacks unsafe.Pointer, valueCallBacks unsafe.Pointer, capacity int, zone unsafe.Pointer) unsafe.Pointer {
+func NSCreateMapTableWithZone(keyCallBacks unsafe.Pointer, valueCallBacks unsafe.Pointer, capacity int, zone unsafe.Pointer) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSCreateMapTableWithZone == nil {
 		ebipurego.RegisterLibFunc(&_fnNSCreateMapTableWithZone, _lib, "NSCreateMapTableWithZone")
 	}
-	return _fnNSCreateMapTableWithZone(keyCallBacks, valueCallBacks, capacity, zone)
+	_ret := _fnNSCreateMapTableWithZone(keyCallBacks, valueCallBacks, capacity, zone)
+	return obj.Wrap(_ret)
 }
 
 var _fnNSCreateZone func(int, int, bool) unsafe.Pointer
@@ -996,15 +1000,16 @@ func NSLogv(arg obj.Object, arg2 string) {
 	_fnNSLogv(objref.IDOf(arg), arg2)
 }
 
-var _fnNSMakeCollectable func(objc.ID) unsafe.Pointer
+var _fnNSMakeCollectable func(objc.ID) objc.ID
 
 // NSMakeCollectable calls the Foundation framework function NSMakeCollectable.
-func NSMakeCollectable(cf obj.Object) unsafe.Pointer {
+func NSMakeCollectable(cf obj.Object) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSMakeCollectable == nil {
 		ebipurego.RegisterLibFunc(&_fnNSMakeCollectable, _lib, "NSMakeCollectable")
 	}
-	return _fnNSMakeCollectable(objref.IDOf(cf))
+	_ret := _fnNSMakeCollectable(objref.IDOf(cf))
+	return obj.Wrap(_ret)
 }
 
 var _fnNSMakePoint func(float64, float64) corefoundation.CGPoint

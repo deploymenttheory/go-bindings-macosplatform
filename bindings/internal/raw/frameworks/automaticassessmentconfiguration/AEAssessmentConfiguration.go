@@ -18,27 +18,90 @@ type AEAssessmentConfiguration struct {
 }
 
 var (
-	_clsAEAssessmentConfiguration                                   = _objcClass("AEAssessmentConfiguration")
-	_aEAssessmentConfigurationSelSetConfigurationForApplication     = objc.RegisterName("setConfiguration:forApplication:")
-	_aEAssessmentConfigurationSelRemoveApplication                  = objc.RegisterName("removeApplication:")
-	_aEAssessmentConfigurationSelAutocorrectMode                    = objc.RegisterName("autocorrectMode")
-	_aEAssessmentConfigurationSelSetAutocorrectMode                 = objc.RegisterName("setAutocorrectMode:")
-	_aEAssessmentConfigurationSelAllowsSpellCheck                   = objc.RegisterName("allowsSpellCheck")
-	_aEAssessmentConfigurationSelSetAllowsSpellCheck                = objc.RegisterName("setAllowsSpellCheck:")
-	_aEAssessmentConfigurationSelAllowsPredictiveKeyboard           = objc.RegisterName("allowsPredictiveKeyboard")
-	_aEAssessmentConfigurationSelSetAllowsPredictiveKeyboard        = objc.RegisterName("setAllowsPredictiveKeyboard:")
-	_aEAssessmentConfigurationSelAllowsKeyboardShortcuts            = objc.RegisterName("allowsKeyboardShortcuts")
-	_aEAssessmentConfigurationSelSetAllowsKeyboardShortcuts         = objc.RegisterName("setAllowsKeyboardShortcuts:")
-	_aEAssessmentConfigurationSelAllowsAccessibilityKeyboard        = objc.RegisterName("allowsAccessibilityKeyboard")
-	_aEAssessmentConfigurationSelSetAllowsAccessibilityKeyboard     = objc.RegisterName("setAllowsAccessibilityKeyboard:")
-	_aEAssessmentConfigurationSelAllowsAccessibilityLiveCaptions    = objc.RegisterName("allowsAccessibilityLiveCaptions")
-	_aEAssessmentConfigurationSelSetAllowsAccessibilityLiveCaptions = objc.RegisterName("setAllowsAccessibilityLiveCaptions:")
-	_aEAssessmentConfigurationSelAllowsAccessibilityReader          = objc.RegisterName("allowsAccessibilityReader")
-	_aEAssessmentConfigurationSelSetAllowsAccessibilityReader       = objc.RegisterName("setAllowsAccessibilityReader:")
-	_aEAssessmentConfigurationSelAllowsScreenshots                  = objc.RegisterName("allowsScreenshots")
-	_aEAssessmentConfigurationSelSetAllowsScreenshots               = objc.RegisterName("setAllowsScreenshots:")
-	_aEAssessmentConfigurationSelMainParticipantConfiguration       = objc.RegisterName("mainParticipantConfiguration")
-	_aEAssessmentConfigurationSelConfigurationsByApplication        = objc.RegisterName("configurationsByApplication")
+	_clsAEAssessmentConfiguration                                              = _objcClass("AEAssessmentConfiguration")
+	_aEAssessmentConfigurationSelSetConfigurationForApplication                = objc.RegisterName("setConfiguration:forApplication:")
+	_aEAssessmentConfigurationSelRemoveApplication                             = objc.RegisterName("removeApplication:")
+	_aEAssessmentConfigurationSelSetConfigurationForBinaryExecutable           = objc.RegisterName("setConfiguration:forBinaryExecutable:")
+	_aEAssessmentConfigurationSelRemoveBinaryExecutable                        = objc.RegisterName("removeBinaryExecutable:")
+	_aEAssessmentConfigurationSelAutocorrectMode                               = objc.RegisterName("autocorrectMode")
+	_aEAssessmentConfigurationSelSetAutocorrectMode                            = objc.RegisterName("setAutocorrectMode:")
+	_aEAssessmentConfigurationSelAllowsSpellCheck                              = objc.RegisterName("allowsSpellCheck")
+	_aEAssessmentConfigurationSelSetAllowsSpellCheck                           = objc.RegisterName("setAllowsSpellCheck:")
+	_aEAssessmentConfigurationSelAllowsPredictiveKeyboard                      = objc.RegisterName("allowsPredictiveKeyboard")
+	_aEAssessmentConfigurationSelSetAllowsPredictiveKeyboard                   = objc.RegisterName("setAllowsPredictiveKeyboard:")
+	_aEAssessmentConfigurationSelAllowsKeyboardShortcuts                       = objc.RegisterName("allowsKeyboardShortcuts")
+	_aEAssessmentConfigurationSelSetAllowsKeyboardShortcuts                    = objc.RegisterName("setAllowsKeyboardShortcuts:")
+	_aEAssessmentConfigurationSelAllowsDictation                               = objc.RegisterName("allowsDictation")
+	_aEAssessmentConfigurationSelSetAllowsDictation                            = objc.RegisterName("setAllowsDictation:")
+	_aEAssessmentConfigurationSelAllowsAccessibilityAlternativeInputMethods    = objc.RegisterName("allowsAccessibilityAlternativeInputMethods")
+	_aEAssessmentConfigurationSelSetAllowsAccessibilityAlternativeInputMethods = objc.RegisterName("setAllowsAccessibilityAlternativeInputMethods:")
+	_aEAssessmentConfigurationSelAllowsAccessibilityBackgroundSounds           = objc.RegisterName("allowsAccessibilityBackgroundSounds")
+	_aEAssessmentConfigurationSelSetAllowsAccessibilityBackgroundSounds        = objc.RegisterName("setAllowsAccessibilityBackgroundSounds:")
+	_aEAssessmentConfigurationSelAllowsAccessibilityFullKeyboardAccess         = objc.RegisterName("allowsAccessibilityFullKeyboardAccess")
+	_aEAssessmentConfigurationSelSetAllowsAccessibilityFullKeyboardAccess      = objc.RegisterName("setAllowsAccessibilityFullKeyboardAccess:")
+	_aEAssessmentConfigurationSelAllowsAccessibilityHoverText                  = objc.RegisterName("allowsAccessibilityHoverText")
+	_aEAssessmentConfigurationSelSetAllowsAccessibilityHoverText               = objc.RegisterName("setAllowsAccessibilityHoverText:")
+	_aEAssessmentConfigurationSelAllowsAccessibilityKeyboard                   = objc.RegisterName("allowsAccessibilityKeyboard")
+	_aEAssessmentConfigurationSelSetAllowsAccessibilityKeyboard                = objc.RegisterName("setAllowsAccessibilityKeyboard:")
+	_aEAssessmentConfigurationSelAllowsAccessibilityLiveCaptions               = objc.RegisterName("allowsAccessibilityLiveCaptions")
+	_aEAssessmentConfigurationSelSetAllowsAccessibilityLiveCaptions            = objc.RegisterName("setAllowsAccessibilityLiveCaptions:")
+	_aEAssessmentConfigurationSelAllowsAccessibilityLiveSpeech                 = objc.RegisterName("allowsAccessibilityLiveSpeech")
+	_aEAssessmentConfigurationSelSetAllowsAccessibilityLiveSpeech              = objc.RegisterName("setAllowsAccessibilityLiveSpeech:")
+	_aEAssessmentConfigurationSelAllowsAccessibilityReader                     = objc.RegisterName("allowsAccessibilityReader")
+	_aEAssessmentConfigurationSelSetAllowsAccessibilityReader                  = objc.RegisterName("setAllowsAccessibilityReader:")
+	_aEAssessmentConfigurationSelAllowsAccessibilitySpokenContent              = objc.RegisterName("allowsAccessibilitySpokenContent")
+	_aEAssessmentConfigurationSelSetAllowsAccessibilitySpokenContent           = objc.RegisterName("setAllowsAccessibilitySpokenContent:")
+	_aEAssessmentConfigurationSelAllowsAccessibilitySwitchControl              = objc.RegisterName("allowsAccessibilitySwitchControl")
+	_aEAssessmentConfigurationSelSetAllowsAccessibilitySwitchControl           = objc.RegisterName("setAllowsAccessibilitySwitchControl:")
+	_aEAssessmentConfigurationSelAllowsAccessibilityVoiceControl               = objc.RegisterName("allowsAccessibilityVoiceControl")
+	_aEAssessmentConfigurationSelSetAllowsAccessibilityVoiceControl            = objc.RegisterName("setAllowsAccessibilityVoiceControl:")
+	_aEAssessmentConfigurationSelAllowsAccessibilityVoiceOver                  = objc.RegisterName("allowsAccessibilityVoiceOver")
+	_aEAssessmentConfigurationSelSetAllowsAccessibilityVoiceOver               = objc.RegisterName("setAllowsAccessibilityVoiceOver:")
+	_aEAssessmentConfigurationSelAllowsAccessibilityZoom                       = objc.RegisterName("allowsAccessibilityZoom")
+	_aEAssessmentConfigurationSelSetAllowsAccessibilityZoom                    = objc.RegisterName("setAllowsAccessibilityZoom:")
+	_aEAssessmentConfigurationSelAllowsScreenshots                             = objc.RegisterName("allowsScreenshots")
+	_aEAssessmentConfigurationSelSetAllowsScreenshots                          = objc.RegisterName("setAllowsScreenshots:")
+	_aEAssessmentConfigurationSelAllowsEmojiKeyboard                           = objc.RegisterName("allowsEmojiKeyboard")
+	_aEAssessmentConfigurationSelSetAllowsEmojiKeyboard                        = objc.RegisterName("setAllowsEmojiKeyboard:")
+	_aEAssessmentConfigurationSelAllowsUserScriptExecution                     = objc.RegisterName("allowsUserScriptExecution")
+	_aEAssessmentConfigurationSelSetAllowsUserScriptExecution                  = objc.RegisterName("setAllowsUserScriptExecution:")
+	_aEAssessmentConfigurationSelAllowsAutoFill                                = objc.RegisterName("allowsAutoFill")
+	_aEAssessmentConfigurationSelSetAllowsAutoFill                             = objc.RegisterName("setAllowsAutoFill:")
+	_aEAssessmentConfigurationSelAllowsStructuralInput                         = objc.RegisterName("allowsStructuralInput")
+	_aEAssessmentConfigurationSelSetAllowsStructuralInput                      = objc.RegisterName("setAllowsStructuralInput:")
+	_aEAssessmentConfigurationSelAllowsForceQuitKeyboardShortcuts              = objc.RegisterName("allowsForceQuitKeyboardShortcuts")
+	_aEAssessmentConfigurationSelSetAllowsForceQuitKeyboardShortcuts           = objc.RegisterName("setAllowsForceQuitKeyboardShortcuts:")
+	_aEAssessmentConfigurationSelAllowedDirectoriesAndFiles                    = objc.RegisterName("allowedDirectoriesAndFiles")
+	_aEAssessmentConfigurationSelSetAllowedDirectoriesAndFiles                 = objc.RegisterName("setAllowedDirectoriesAndFiles:")
+	_aEAssessmentConfigurationSelAllowsDock                                    = objc.RegisterName("allowsDock")
+	_aEAssessmentConfigurationSelSetAllowsDock                                 = objc.RegisterName("setAllowsDock:")
+	_aEAssessmentConfigurationSelAllowsMenuBar                                 = objc.RegisterName("allowsMenuBar")
+	_aEAssessmentConfigurationSelSetAllowsMenuBar                              = objc.RegisterName("setAllowsMenuBar:")
+	_aEAssessmentConfigurationSelAllowedAppleMenuItems                         = objc.RegisterName("allowedAppleMenuItems")
+	_aEAssessmentConfigurationSelSetAllowedAppleMenuItems                      = objc.RegisterName("setAllowedAppleMenuItems:")
+	_aEAssessmentConfigurationSelAllowedMenuBarItems                           = objc.RegisterName("allowedMenuBarItems")
+	_aEAssessmentConfigurationSelSetAllowedMenuBarItems                        = objc.RegisterName("setAllowedMenuBarItems:")
+	_aEAssessmentConfigurationSelAllowsOnlyParticipantsToRun                   = objc.RegisterName("allowsOnlyParticipantsToRun")
+	_aEAssessmentConfigurationSelSetAllowsOnlyParticipantsToRun                = objc.RegisterName("setAllowsOnlyParticipantsToRun:")
+	_aEAssessmentConfigurationSelAllowsLockdownMode                            = objc.RegisterName("allowsLockdownMode")
+	_aEAssessmentConfigurationSelSetAllowsLockdownMode                         = objc.RegisterName("setAllowsLockdownMode:")
+	_aEAssessmentConfigurationSelAllowsPrivateRelay                            = objc.RegisterName("allowsPrivateRelay")
+	_aEAssessmentConfigurationSelSetAllowsPrivateRelay                         = objc.RegisterName("setAllowsPrivateRelay:")
+	_aEAssessmentConfigurationSelAllowsVirtualMachine                          = objc.RegisterName("allowsVirtualMachine")
+	_aEAssessmentConfigurationSelSetAllowsVirtualMachine                       = objc.RegisterName("setAllowsVirtualMachine:")
+	_aEAssessmentConfigurationSelRequiresManagedDevice                         = objc.RegisterName("requiresManagedDevice")
+	_aEAssessmentConfigurationSelSetRequiresManagedDevice                      = objc.RegisterName("setRequiresManagedDevice:")
+	_aEAssessmentConfigurationSelRequiresReleaseOS                             = objc.RegisterName("requiresReleaseOS")
+	_aEAssessmentConfigurationSelSetRequiresReleaseOS                          = objc.RegisterName("setRequiresReleaseOS:")
+	_aEAssessmentConfigurationSelRequiresSIP                                   = objc.RegisterName("requiresSIP")
+	_aEAssessmentConfigurationSelSetRequiresSIP                                = objc.RegisterName("setRequiresSIP:")
+	_aEAssessmentConfigurationSelRequiresSingleUser                            = objc.RegisterName("requiresSingleUser")
+	_aEAssessmentConfigurationSelSetRequiresSingleUser                         = objc.RegisterName("setRequiresSingleUser:")
+	_aEAssessmentConfigurationSelRequiresUserAccountType                       = objc.RegisterName("requiresUserAccountType")
+	_aEAssessmentConfigurationSelSetRequiresUserAccountType                    = objc.RegisterName("setRequiresUserAccountType:")
+	_aEAssessmentConfigurationSelMainParticipantConfiguration                  = objc.RegisterName("mainParticipantConfiguration")
+	_aEAssessmentConfigurationSelConfigurationsByApplication                   = objc.RegisterName("configurationsByApplication")
+	_aEAssessmentConfigurationSelConfigurationsByBinaryExecutable              = objc.RegisterName("configurationsByBinaryExecutable")
 )
 
 func AEAssessmentConfigurationFromID(id objc.ID) *AEAssessmentConfiguration {
@@ -59,6 +122,16 @@ func (o *AEAssessmentConfiguration) SetConfigurationForApplication(configuration
 // Removes the availability of a previously allowed app.
 func (o *AEAssessmentConfiguration) RemoveApplication(application *AEAssessmentApplication) {
 	o.Ptr().Send(_aEAssessmentConfigurationSelRemoveApplication, application.Ptr())
+}
+
+// Adds an executable participant to the list of participants available during an assessment.
+func (o *AEAssessmentConfiguration) SetConfigurationForBinaryExecutable(configuration *AEAssessmentBinaryExecutableConfiguration, binaryExecutable *AEAssessmentBinaryExecutable) {
+	o.Ptr().Send(_aEAssessmentConfigurationSelSetConfigurationForBinaryExecutable, configuration.Ptr(), binaryExecutable.Ptr())
+}
+
+// Removes the availability of a previously added executable participant.
+func (o *AEAssessmentConfiguration) RemoveBinaryExecutable(binaryExecutable *AEAssessmentBinaryExecutable) {
+	o.Ptr().Send(_aEAssessmentConfigurationSelRemoveBinaryExecutable, binaryExecutable.Ptr())
 }
 
 // The autocorrect mode that specifies which autocorrect features to allow during an assessment. Users can turn on autocorrect in the Settings app (General > Keyboard > Auto-Correction). An assessment session disables this feature by default, but you can allow it by setting “AEAssessmentConfiguration/autocorrectMode-swift.property“ in the “AEAssessmentConfiguration“ instance that you use to initialize a session. Set the mode's value to some combination of the the values from the “AEAssessmentConfiguration/AutocorrectMode-swift.struct“ structure.
@@ -101,7 +174,57 @@ func (o *AEAssessmentConfiguration) SetAllowsKeyboardShortcuts(allowsKeyboardSho
 	o.Ptr().Send(_aEAssessmentConfigurationSelSetAllowsKeyboardShortcuts, allowsKeyboardShortcuts)
 }
 
-// A Boolean value that indicates whether to allow alternative input methods in the Accessibility Keyboard during an assessment. Users can enable the Accessibility Keyboard in the Settings app (Accessibility > Keyboard > Accessibility Keyboard) to access an on-screen keyboard with alternative input methods. An assessment session disables alternative input methods in the Accessibility Keyboard by default, but you can allow them by setting “AEAssessmentConfiguration/allowsAccessibilityKeyboard“ to `true` in the “AEAssessmentConfiguration“ instance that you use to initialize a session.
+// A Boolean value that indicates whether to allow the use of dictation during an assessment. By turning on Enable Dictation (General > Keyboard in the Settings app on iOS and iPadOS), users can speak into their device and have the words they speak converted to text. An assessment session disables this feature by default, but you can allow it by setting “AEAssessmentConfiguration/allowsDictation“ to `true` in the “AEAssessmentConfiguration“ instance that you use to initialize a session.
+func (o *AEAssessmentConfiguration) AllowsDictation() bool {
+	_ret := objc.Send[bool](o.Ptr(), _aEAssessmentConfigurationSelAllowsDictation)
+	return _ret
+}
+
+func (o *AEAssessmentConfiguration) SetAllowsDictation(allowsDictation bool) {
+	o.Ptr().Send(_aEAssessmentConfigurationSelSetAllowsDictation, allowsDictation)
+}
+
+// A Boolean value that indicates whether to allow alternative input methods for accessibility features during an assessment. When the Accessibility Keyboard or Switch Control is enabled, alternative input methods such as Dwell Control may be available. An assessment session disables these alternative input methods by default, but you can allow them by setting “AEAssessmentConfiguration/allowsAccessibilityAlternativeInputMethods“ to `YES` in the “AEAssessmentConfiguration“ instance that you use to initialize a session. - Note: This property only takes effect when “AEAssessmentConfiguration/allowsAccessibilityKeyboard“ or “AEAssessmentConfiguration/allowsAccessibilitySwitchControl“ is `YES`.
+func (o *AEAssessmentConfiguration) AllowsAccessibilityAlternativeInputMethods() bool {
+	_ret := objc.Send[bool](o.Ptr(), _aEAssessmentConfigurationSelAllowsAccessibilityAlternativeInputMethods)
+	return _ret
+}
+
+func (o *AEAssessmentConfiguration) SetAllowsAccessibilityAlternativeInputMethods(allowsAccessibilityAlternativeInputMethods bool) {
+	o.Ptr().Send(_aEAssessmentConfigurationSelSetAllowsAccessibilityAlternativeInputMethods, allowsAccessibilityAlternativeInputMethods)
+}
+
+// A Boolean value that indicates whether to allow Background Sounds during an assessment. Users can enable Background Sounds in the Settings app (Accessibility > Audio & Visual > Background Sounds) to play ambient sounds that can mask unwanted environmental noise. An assessment session disables Background Sounds by default, but you can allow it by setting “AEAssessmentConfiguration/allowsAccessibilityBackgroundSounds“ to `true` in the “AEAssessmentConfiguration“ instance that you use to initialize a session.
+func (o *AEAssessmentConfiguration) AllowsAccessibilityBackgroundSounds() bool {
+	_ret := objc.Send[bool](o.Ptr(), _aEAssessmentConfigurationSelAllowsAccessibilityBackgroundSounds)
+	return _ret
+}
+
+func (o *AEAssessmentConfiguration) SetAllowsAccessibilityBackgroundSounds(allowsAccessibilityBackgroundSounds bool) {
+	o.Ptr().Send(_aEAssessmentConfigurationSelSetAllowsAccessibilityBackgroundSounds, allowsAccessibilityBackgroundSounds)
+}
+
+// A Boolean value that indicates whether to allow Full Keyboard Access during an assessment. Users can enable Full Keyboard Access in the Settings app (Accessibility > Keyboard > Full Keyboard Access) to navigate and operate the system using only the keyboard. An assessment session **does not** disable Full Keyboard Access by default, but you can disable it by setting “AEAssessmentConfiguration/allowsAccessibilityFullKeyboardAccess“ to `NO` in the “AEAssessmentConfiguration“ instance that you use to initialize a session.
+func (o *AEAssessmentConfiguration) AllowsAccessibilityFullKeyboardAccess() bool {
+	_ret := objc.Send[bool](o.Ptr(), _aEAssessmentConfigurationSelAllowsAccessibilityFullKeyboardAccess)
+	return _ret
+}
+
+func (o *AEAssessmentConfiguration) SetAllowsAccessibilityFullKeyboardAccess(allowsAccessibilityFullKeyboardAccess bool) {
+	o.Ptr().Send(_aEAssessmentConfigurationSelSetAllowsAccessibilityFullKeyboardAccess, allowsAccessibilityFullKeyboardAccess)
+}
+
+// A Boolean value that indicates whether to allow Hover Text during an assessment. Users can enable Hover Text in the Settings app (Accessibility > Zoom > Hover Text) to magnify text under the pointer. An assessment session **does not** disable Hover Text by default, but you can disable it by setting “AEAssessmentConfiguration/allowsAccessibilityHoverText“ to `NO` in the “AEAssessmentConfiguration“ instance that you use to initialize a session. This property governs Hover Typing as well as Hover Text.
+func (o *AEAssessmentConfiguration) AllowsAccessibilityHoverText() bool {
+	_ret := objc.Send[bool](o.Ptr(), _aEAssessmentConfigurationSelAllowsAccessibilityHoverText)
+	return _ret
+}
+
+func (o *AEAssessmentConfiguration) SetAllowsAccessibilityHoverText(allowsAccessibilityHoverText bool) {
+	o.Ptr().Send(_aEAssessmentConfigurationSelSetAllowsAccessibilityHoverText, allowsAccessibilityHoverText)
+}
+
+// A Boolean value that indicates whether to allow the Accessibility Keyboard during an assessment. Users can enable the Accessibility Keyboard in the Settings app (Accessibility > Keyboard > Accessibility Keyboard) to access an on-screen keyboard. An assessment session **does not** disable the Accessibility Keyboard by default, but you can disable it by setting “AEAssessmentConfiguration/allowsAccessibilityKeyboard“ to `NO` in the “AEAssessmentConfiguration“ instance that you use to initialize a session. - Note: To allow the full Accessibility Keyboard with alternative input methods (such as Dwell Control), you must also set “AEAssessmentConfiguration/allowsAccessibilityAlternativeInputMethods“ to `YES`.
 func (o *AEAssessmentConfiguration) AllowsAccessibilityKeyboard() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aEAssessmentConfigurationSelAllowsAccessibilityKeyboard)
 	return _ret
@@ -121,6 +244,16 @@ func (o *AEAssessmentConfiguration) SetAllowsAccessibilityLiveCaptions(allowsAcc
 	o.Ptr().Send(_aEAssessmentConfigurationSelSetAllowsAccessibilityLiveCaptions, allowsAccessibilityLiveCaptions)
 }
 
+// A Boolean value that indicates whether to allow Live Speech during an assessment. Users can enable Live Speech in the Settings app (Accessibility > Speech > Live Speech) to type what they want to say and have it spoken aloud. An assessment session disables Live Speech by default, but you can allow it by setting “AEAssessmentConfiguration/allowsAccessibilityLiveSpeech“ to `true` in the “AEAssessmentConfiguration“ instance that you use to initialize a session.
+func (o *AEAssessmentConfiguration) AllowsAccessibilityLiveSpeech() bool {
+	_ret := objc.Send[bool](o.Ptr(), _aEAssessmentConfigurationSelAllowsAccessibilityLiveSpeech)
+	return _ret
+}
+
+func (o *AEAssessmentConfiguration) SetAllowsAccessibilityLiveSpeech(allowsAccessibilityLiveSpeech bool) {
+	o.Ptr().Send(_aEAssessmentConfigurationSelSetAllowsAccessibilityLiveSpeech, allowsAccessibilityLiveSpeech)
+}
+
 // A Boolean value that indicates whether to allow the Accessibility Reader during an assessment. Users can enable the Accessibility Reader in the Settings app (Accessibility > Read & Speak > Accessibility Reader) to have text content formatted or read aloud. An assessment session disables the Accessibility Reader by default, but you can allow it by setting “AEAssessmentConfiguration/allowsAccessibilityReader“ to `true` in the “AEAssessmentConfiguration“ instance that you use to initialize a session.
 func (o *AEAssessmentConfiguration) AllowsAccessibilityReader() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aEAssessmentConfigurationSelAllowsAccessibilityReader)
@@ -131,6 +264,56 @@ func (o *AEAssessmentConfiguration) SetAllowsAccessibilityReader(allowsAccessibi
 	o.Ptr().Send(_aEAssessmentConfigurationSelSetAllowsAccessibilityReader, allowsAccessibilityReader)
 }
 
+// A Boolean value that indicates whether to allow Spoken Content during an assessment. Users can enable Spoken Content in the Settings app (Accessibility > Read & Speak) to have text read aloud. This includes Speak Selection, Speak Screen, and related features. An assessment session disables Spoken Content by default, but you can allow it by setting “AEAssessmentConfiguration/allowsAccessibilitySpokenContent“ to `true` in the “AEAssessmentConfiguration“ instance that you use to initialize a session.
+func (o *AEAssessmentConfiguration) AllowsAccessibilitySpokenContent() bool {
+	_ret := objc.Send[bool](o.Ptr(), _aEAssessmentConfigurationSelAllowsAccessibilitySpokenContent)
+	return _ret
+}
+
+func (o *AEAssessmentConfiguration) SetAllowsAccessibilitySpokenContent(allowsAccessibilitySpokenContent bool) {
+	o.Ptr().Send(_aEAssessmentConfigurationSelSetAllowsAccessibilitySpokenContent, allowsAccessibilitySpokenContent)
+}
+
+// A Boolean value that indicates whether to allow Switch Control during an assessment. Users can enable Switch Control in the Settings app (Accessibility > Switch Control) to control their device using adaptive switches. An assessment session **does not** disable Switch Control by default, but you can disable it by setting “AEAssessmentConfiguration/allowsAccessibilitySwitchControl“ to `NO` in the “AEAssessmentConfiguration“ instance that you use to initialize a session. - Note: To allow Switch Control with alternative input methods (such as Dwell Control), you must also set “AEAssessmentConfiguration/allowsAccessibilityAlternativeInputMethods“ to `YES`.
+func (o *AEAssessmentConfiguration) AllowsAccessibilitySwitchControl() bool {
+	_ret := objc.Send[bool](o.Ptr(), _aEAssessmentConfigurationSelAllowsAccessibilitySwitchControl)
+	return _ret
+}
+
+func (o *AEAssessmentConfiguration) SetAllowsAccessibilitySwitchControl(allowsAccessibilitySwitchControl bool) {
+	o.Ptr().Send(_aEAssessmentConfigurationSelSetAllowsAccessibilitySwitchControl, allowsAccessibilitySwitchControl)
+}
+
+// A Boolean value that indicates whether to allow Voice Control during an assessment. Users can enable Voice Control in the Settings app (Accessibility > Voice Control) to control their device using voice commands. An assessment session **does not** disable Voice Control by default, but you can disable it by setting “AEAssessmentConfiguration/allowsAccessibilityVoiceControl“ to `NO` in the “AEAssessmentConfiguration“ instance that you use to initialize a session.
+func (o *AEAssessmentConfiguration) AllowsAccessibilityVoiceControl() bool {
+	_ret := objc.Send[bool](o.Ptr(), _aEAssessmentConfigurationSelAllowsAccessibilityVoiceControl)
+	return _ret
+}
+
+func (o *AEAssessmentConfiguration) SetAllowsAccessibilityVoiceControl(allowsAccessibilityVoiceControl bool) {
+	o.Ptr().Send(_aEAssessmentConfigurationSelSetAllowsAccessibilityVoiceControl, allowsAccessibilityVoiceControl)
+}
+
+// A Boolean value that indicates whether to allow VoiceOver during an assessment. Users can enable VoiceOver in the Settings app (Accessibility > VoiceOver) to receive spoken descriptions of on-screen elements and gestures for navigating the interface. An assessment session **does not** disable VoiceOver by default, but you can disable it by setting “AEAssessmentConfiguration/allowsAccessibilityVoiceOver“ to `NO` in the “AEAssessmentConfiguration“ instance that you use to initialize a session.
+func (o *AEAssessmentConfiguration) AllowsAccessibilityVoiceOver() bool {
+	_ret := objc.Send[bool](o.Ptr(), _aEAssessmentConfigurationSelAllowsAccessibilityVoiceOver)
+	return _ret
+}
+
+func (o *AEAssessmentConfiguration) SetAllowsAccessibilityVoiceOver(allowsAccessibilityVoiceOver bool) {
+	o.Ptr().Send(_aEAssessmentConfigurationSelSetAllowsAccessibilityVoiceOver, allowsAccessibilityVoiceOver)
+}
+
+// A Boolean value that indicates whether to allow Zoom during an assessment. Users can enable Zoom in the Settings app (Accessibility > Zoom) to magnify the screen. An assessment session **does not** disable Zoom by default, but you can disable it by setting “AEAssessmentConfiguration/allowsAccessibilityZoom“ to `NO` in the “AEAssessmentConfiguration“ instance that you use to initialize a session.
+func (o *AEAssessmentConfiguration) AllowsAccessibilityZoom() bool {
+	_ret := objc.Send[bool](o.Ptr(), _aEAssessmentConfigurationSelAllowsAccessibilityZoom)
+	return _ret
+}
+
+func (o *AEAssessmentConfiguration) SetAllowsAccessibilityZoom(allowsAccessibilityZoom bool) {
+	o.Ptr().Send(_aEAssessmentConfigurationSelSetAllowsAccessibilityZoom, allowsAccessibilityZoom)
+}
+
 // A Boolean value that indicates whether to allow screenshots copied to the clipboard during an assessment. An assessment session disables the ability to take screenshots by default to maintain assessment integrity. This property specifically applies to screenshots that are copied to the clipboard, typically those taken using the Command+Control+Shift+3 and Command+Control+Shift+4 keyboard shortcuts. You can allow clipboard screenshots by setting `allowsScreenshots` to `true`. - Note: The clipboard is cleared before the assessment session ends to prevent exporting captured content.
 func (o *AEAssessmentConfiguration) AllowsScreenshots() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aEAssessmentConfigurationSelAllowsScreenshots)
@@ -139,6 +322,205 @@ func (o *AEAssessmentConfiguration) AllowsScreenshots() bool {
 
 func (o *AEAssessmentConfiguration) SetAllowsScreenshots(allowsScreenshots bool) {
 	o.Ptr().Send(_aEAssessmentConfigurationSelSetAllowsScreenshots, allowsScreenshots)
+}
+
+// A Boolean value that indicates whether to allow the emoji keyboard during an assessment. Users can access the emoji keyboard by tapping the emoji button on the keyboard (iOS) or through the Edit menu and keyboard shortcuts (macOS). An assessment session disables access to the emoji keyboard by default, but you can allow it by setting “AEAssessmentConfiguration/allowsEmojiKeyboard“ to `true` in the “AEAssessmentConfiguration“ instance that you use to initialize a session.
+func (o *AEAssessmentConfiguration) AllowsEmojiKeyboard() bool {
+	_ret := objc.Send[bool](o.Ptr(), _aEAssessmentConfigurationSelAllowsEmojiKeyboard)
+	return _ret
+}
+
+func (o *AEAssessmentConfiguration) SetAllowsEmojiKeyboard(allowsEmojiKeyboard bool) {
+	o.Ptr().Send(_aEAssessmentConfigurationSelSetAllowsEmojiKeyboard, allowsEmojiKeyboard)
+}
+
+// A Boolean value that indicates whether to allow user script execution during an assessment. User scripts, such as AppleScripts or Automator workflows, can automate tasks on the system. An assessment session disables user script execution by default, but you can allow it by setting “AEAssessmentConfiguration/allowsUserScriptExecution“ to `true` in the “AEAssessmentConfiguration“ instance that you use to initialize a session.
+func (o *AEAssessmentConfiguration) AllowsUserScriptExecution() bool {
+	_ret := objc.Send[bool](o.Ptr(), _aEAssessmentConfigurationSelAllowsUserScriptExecution)
+	return _ret
+}
+
+func (o *AEAssessmentConfiguration) SetAllowsUserScriptExecution(allowsUserScriptExecution bool) {
+	o.Ptr().Send(_aEAssessmentConfigurationSelSetAllowsUserScriptExecution, allowsUserScriptExecution)
+}
+
+// A Boolean value that indicates whether to allow autofill during an assessment. Users can enable autofill in System Settings (Passwords > Password Options > AutoFill Passwords and Passkeys). An assessment session disables autofill by default, but you can allow it by setting “AEAssessmentConfiguration/allowsAutoFill“ to `true` in the “AEAssessmentConfiguration“ instance that you use to initialize a session.
+func (o *AEAssessmentConfiguration) AllowsAutoFill() bool {
+	_ret := objc.Send[bool](o.Ptr(), _aEAssessmentConfigurationSelAllowsAutoFill)
+	return _ret
+}
+
+func (o *AEAssessmentConfiguration) SetAllowsAutoFill(allowsAutoFill bool) {
+	o.Ptr().Send(_aEAssessmentConfigurationSelSetAllowsAutoFill, allowsAutoFill)
+}
+
+// A Boolean value that indicates whether to allow Chinese and Japanese structural input during an assessment. Chinese and Japanese structural input methods allow users to enter characters using component-based input. An assessment session disables structural input by default, but you can allow it by setting “AEAssessmentConfiguration/allowsStructuralInput“ to `true` in the “AEAssessmentConfiguration“ instance that you use to initialize a session.
+func (o *AEAssessmentConfiguration) AllowsStructuralInput() bool {
+	_ret := objc.Send[bool](o.Ptr(), _aEAssessmentConfigurationSelAllowsStructuralInput)
+	return _ret
+}
+
+func (o *AEAssessmentConfiguration) SetAllowsStructuralInput(allowsStructuralInput bool) {
+	o.Ptr().Send(_aEAssessmentConfigurationSelSetAllowsStructuralInput, allowsStructuralInput)
+}
+
+// A Boolean value that indicates whether to allow force quitting apps during an assessment. Users can force quit apps by pressing Shift-Option-Command-Escape to force quit the frontmost app. An assessment session disables force quit by default, but you can allow it by setting “AEAssessmentConfiguration/allowsForceQuitKeyboardShortcuts“ to `true` in the “AEAssessmentConfiguration“ instance that you use to initialize a session. - Note: This property controls only the force quit keyboard shortcuts. Setting it to `false` does not remove the Force Quit item from the Apple menu. Use “AEAssessmentConfiguration/allowedAppleMenuItems“ to configure the allowed Apple menu items.
+func (o *AEAssessmentConfiguration) AllowsForceQuitKeyboardShortcuts() bool {
+	_ret := objc.Send[bool](o.Ptr(), _aEAssessmentConfigurationSelAllowsForceQuitKeyboardShortcuts)
+	return _ret
+}
+
+func (o *AEAssessmentConfiguration) SetAllowsForceQuitKeyboardShortcuts(allowsForceQuitKeyboardShortcuts bool) {
+	o.Ptr().Send(_aEAssessmentConfigurationSelSetAllowsForceQuitKeyboardShortcuts, allowsForceQuitKeyboardShortcuts)
+}
+
+// The set of directories and files that remain visible in the Finder during an assessment. Defaults to `nil`, which leaves Finder unrestricted. Setting a non-`nil` set hides everything except the given locations; pass an empty set to hide all of them. This restricts what the Finder displays. It doesn't sandbox participants, which can still reach other paths programmatically. Entries that aren't file URLs are ignored.
+func (o *AEAssessmentConfiguration) AllowedDirectoriesAndFiles() *foundation.NSSet[*foundation.NSURL] {
+	_ret := objc.Send[objc.ID](o.Ptr(), _aEAssessmentConfigurationSelAllowedDirectoriesAndFiles)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSSetFromID[*foundation.NSURL](_ret)
+}
+
+func (o *AEAssessmentConfiguration) SetAllowedDirectoriesAndFiles(allowedDirectoriesAndFiles *foundation.NSSet[*foundation.NSURL]) {
+	o.Ptr().Send(_aEAssessmentConfigurationSelSetAllowedDirectoriesAndFiles, allowedDirectoriesAndFiles.Ptr())
+}
+
+// A Boolean value that indicates whether to allow the Dock during an assessment. An assessment session hides the Dock by default, but you can allow it by setting “AEAssessmentConfiguration/allowsDock“ to `true` in the “AEAssessmentConfiguration“ instance that you use to initialize a session.
+func (o *AEAssessmentConfiguration) AllowsDock() bool {
+	_ret := objc.Send[bool](o.Ptr(), _aEAssessmentConfigurationSelAllowsDock)
+	return _ret
+}
+
+func (o *AEAssessmentConfiguration) SetAllowsDock(allowsDock bool) {
+	o.Ptr().Send(_aEAssessmentConfigurationSelSetAllowsDock, allowsDock)
+}
+
+// A Boolean value that indicates whether to allow the menu bar during an assessment. An assessment session hides the menu bar by default, but you can allow it by setting “AEAssessmentConfiguration/allowsMenuBar“ to `true` in the “AEAssessmentConfiguration“ instance that you use to initialize a session.
+func (o *AEAssessmentConfiguration) AllowsMenuBar() bool {
+	_ret := objc.Send[bool](o.Ptr(), _aEAssessmentConfigurationSelAllowsMenuBar)
+	return _ret
+}
+
+func (o *AEAssessmentConfiguration) SetAllowsMenuBar(allowsMenuBar bool) {
+	o.Ptr().Send(_aEAssessmentConfigurationSelSetAllowsMenuBar, allowsMenuBar)
+}
+
+// The set of allowed Apple menu items during an assessment. Defaults to `nil`, which leaves every Apple menu item available. Setting a non-`nil` set restricts the menu to the items it names; pass an empty set to restrict all of them. Some constants cover more than one menu item. - Note: “AEAppleMenuItemAboutThisMac“ is always visible during assessment sessions regardless of configuration.
+func (o *AEAssessmentConfiguration) AllowedAppleMenuItems() *foundation.NSSet[*foundation.NSString] {
+	_ret := objc.Send[objc.ID](o.Ptr(), _aEAssessmentConfigurationSelAllowedAppleMenuItems)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSSetFromID[*foundation.NSString](_ret)
+}
+
+func (o *AEAssessmentConfiguration) SetAllowedAppleMenuItems(allowedAppleMenuItems *foundation.NSSet[*foundation.NSString]) {
+	o.Ptr().Send(_aEAssessmentConfigurationSelSetAllowedAppleMenuItems, allowedAppleMenuItems.Ptr())
+}
+
+// The set of menu bar items that should remain visible during an assessment. When “AEAssessmentConfiguration/allowsMenuBar“ is `true`, the menu bar is restricted to only the items specified in this set. If this property is `nil`, all menu bar items are allowed (unrestricted menu bar). - Note: This property only takes effect when “AEAssessmentConfiguration/allowsMenuBar“ is `true`.
+func (o *AEAssessmentConfiguration) AllowedMenuBarItems() *foundation.NSSet[*foundation.NSString] {
+	_ret := objc.Send[objc.ID](o.Ptr(), _aEAssessmentConfigurationSelAllowedMenuBarItems)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSSetFromID[*foundation.NSString](_ret)
+}
+
+func (o *AEAssessmentConfiguration) SetAllowedMenuBarItems(allowedMenuBarItems *foundation.NSSet[*foundation.NSString]) {
+	o.Ptr().Send(_aEAssessmentConfigurationSelSetAllowedMenuBarItems, allowedMenuBarItems.Ptr())
+}
+
+// A Boolean value that indicates whether only participant applications are allowed to run during an assessment. Only validly signed participants can be permitted. The launch allowlist pins each entry to the code signing identifier and team identifier read from its signature, so an unsigned or invalidly signed participant has no identity to pin and is denied launch even though you configured it as a participant. This holds regardless of “AEAssessmentBinaryExecutable/requiresSignatureValidation“. - SeeAlso: “AEAssessmentBinaryExecutable“ for how an unenforceable executable participant affects the session.
+func (o *AEAssessmentConfiguration) AllowsOnlyParticipantsToRun() bool {
+	_ret := objc.Send[bool](o.Ptr(), _aEAssessmentConfigurationSelAllowsOnlyParticipantsToRun)
+	return _ret
+}
+
+func (o *AEAssessmentConfiguration) SetAllowsOnlyParticipantsToRun(allowsOnlyParticipantsToRun bool) {
+	o.Ptr().Send(_aEAssessmentConfigurationSelSetAllowsOnlyParticipantsToRun, allowsOnlyParticipantsToRun)
+}
+
+// A Boolean value that indicates whether the assessment allows Lockdown Mode to be active. When set to `false`, the assessment session will only start if Lockdown Mode is not enabled on the device. Defaults to `true`, which doesn't enforce the requirement.
+func (o *AEAssessmentConfiguration) AllowsLockdownMode() bool {
+	_ret := objc.Send[bool](o.Ptr(), _aEAssessmentConfigurationSelAllowsLockdownMode)
+	return _ret
+}
+
+func (o *AEAssessmentConfiguration) SetAllowsLockdownMode(allowsLockdownMode bool) {
+	o.Ptr().Send(_aEAssessmentConfigurationSelSetAllowsLockdownMode, allowsLockdownMode)
+}
+
+// A Boolean value that indicates whether the assessment allows iCloud Private Relay to be active. When set to `false`, the assessment session will only start if iCloud Private Relay is not enabled, and won't start if that status can't be determined. Defaults to `true`, which doesn't enforce the requirement.
+func (o *AEAssessmentConfiguration) AllowsPrivateRelay() bool {
+	_ret := objc.Send[bool](o.Ptr(), _aEAssessmentConfigurationSelAllowsPrivateRelay)
+	return _ret
+}
+
+func (o *AEAssessmentConfiguration) SetAllowsPrivateRelay(allowsPrivateRelay bool) {
+	o.Ptr().Send(_aEAssessmentConfigurationSelSetAllowsPrivateRelay, allowsPrivateRelay)
+}
+
+// A Boolean value that indicates whether the assessment allows running inside a virtual machine. When set to `false`, the assessment session will only start if the device is not a virtual machine, and won't start if that status can't be determined. Defaults to `true`, which doesn't enforce the requirement. > Important: Setting this to `false` may not block a session in every virtualized environment. - SeeAlso: “AEAssessmentConfiguration“ for the limits that apply to every enablement requirement.
+func (o *AEAssessmentConfiguration) AllowsVirtualMachine() bool {
+	_ret := objc.Send[bool](o.Ptr(), _aEAssessmentConfigurationSelAllowsVirtualMachine)
+	return _ret
+}
+
+func (o *AEAssessmentConfiguration) SetAllowsVirtualMachine(allowsVirtualMachine bool) {
+	o.Ptr().Send(_aEAssessmentConfigurationSelSetAllowsVirtualMachine, allowsVirtualMachine)
+}
+
+// A Boolean value that indicates whether the device must be managed to start an assessment. When set to `true`, the assessment session will only start if the device is enrolled in a Mobile Device Management (MDM) solution. Defaults to `false`.
+func (o *AEAssessmentConfiguration) RequiresManagedDevice() bool {
+	_ret := objc.Send[bool](o.Ptr(), _aEAssessmentConfigurationSelRequiresManagedDevice)
+	return _ret
+}
+
+func (o *AEAssessmentConfiguration) SetRequiresManagedDevice(requiresManagedDevice bool) {
+	o.Ptr().Send(_aEAssessmentConfigurationSelSetRequiresManagedDevice, requiresManagedDevice)
+}
+
+// A Boolean value that indicates whether the device must be running a final customer release of the operating system to start an assessment. When set to `true`, the assessment session will only start if the device is running a released build of the operating system, rather than a beta, seed, or other prerelease build. Defaults to `false`. - SeeAlso: “AEAssessmentConfiguration“ for the limits that apply to every enablement requirement.
+func (o *AEAssessmentConfiguration) RequiresReleaseOS() bool {
+	_ret := objc.Send[bool](o.Ptr(), _aEAssessmentConfigurationSelRequiresReleaseOS)
+	return _ret
+}
+
+func (o *AEAssessmentConfiguration) SetRequiresReleaseOS(requiresReleaseOS bool) {
+	o.Ptr().Send(_aEAssessmentConfigurationSelSetRequiresReleaseOS, requiresReleaseOS)
+}
+
+// A Boolean value that indicates whether System Integrity Protection (SIP) must be enabled to start an assessment. When set to `true`, the assessment session will only start if System Integrity Protection is enabled on the device. Defaults to `false`. > Important: The framework can't reliably detect whether SIP is enabled on systems where the user has administrator privileges, so setting `requiresSIP` to `true` may not block a session when SIP is in fact disabled. It also doesn't indicate whether the system was modified while SIP was previously disabled. - SeeAlso: “AEAssessmentConfiguration“ for the limits that apply to every enablement requirement.
+func (o *AEAssessmentConfiguration) RequiresSIP() bool {
+	_ret := objc.Send[bool](o.Ptr(), _aEAssessmentConfigurationSelRequiresSIP)
+	return _ret
+}
+
+func (o *AEAssessmentConfiguration) SetRequiresSIP(requiresSIP bool) {
+	o.Ptr().Send(_aEAssessmentConfigurationSelSetRequiresSIP, requiresSIP)
+}
+
+// A Boolean value that indicates whether only a single user account must be logged in to start an assessment. When set to `true`, the assessment session will only start if there is exactly one user account logged in on the device. Defaults to `false`.
+func (o *AEAssessmentConfiguration) RequiresSingleUser() bool {
+	_ret := objc.Send[bool](o.Ptr(), _aEAssessmentConfigurationSelRequiresSingleUser)
+	return _ret
+}
+
+func (o *AEAssessmentConfiguration) SetRequiresSingleUser(requiresSingleUser bool) {
+	o.Ptr().Send(_aEAssessmentConfigurationSelSetRequiresSingleUser, requiresSingleUser)
+}
+
+// Specifies the type of user account required to start an assessment. This property defines the account requirement for starting an assessment session. Set it to `.standard` to require a non-administrator account, `.guest` to require a guest account, or `.any` (the default) to allow any account type. - SeeAlso: “AEUserAccountType“.
+func (o *AEAssessmentConfiguration) RequiresUserAccountType() AEUserAccountType {
+	_ret := objc.Send[AEUserAccountType](o.Ptr(), _aEAssessmentConfigurationSelRequiresUserAccountType)
+	return _ret
+}
+
+func (o *AEAssessmentConfiguration) SetRequiresUserAccountType(requiresUserAccountType AEUserAccountType) {
+	o.Ptr().Send(_aEAssessmentConfigurationSelSetRequiresUserAccountType, requiresUserAccountType)
 }
 
 // The app-specific configuration for the app that invokes the assessment. Use this property to get and customize the app-specific configuration that's applied to your own app. For example, you can set the `allowsNetworkAccess` property for your own app: ```swift let config = AEAssessmentConfiguration() config.mainParticipantConfiguration.allowsNetworkAccess = false ```
@@ -157,4 +539,13 @@ func (o *AEAssessmentConfiguration) ConfigurationsByApplication() *foundation.NS
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return foundation.NSDictionaryFromID[*AEAssessmentApplication, *AEAssessmentParticipantConfiguration](_ret)
+}
+
+// The collection of executable participants available during an assessment, along with their associated configurations. Add executables with “AEAssessmentConfiguration/setConfiguration(_:for:)-(AEAssessmentBinaryExecutableConfiguration,_)“ and remove them with “AEAssessmentConfiguration/removeBinaryExecutable(_:)“. - SeeAlso: “AEAssessmentBinaryExecutable“
+func (o *AEAssessmentConfiguration) ConfigurationsByBinaryExecutable() *foundation.NSDictionary[*AEAssessmentBinaryExecutable, *AEAssessmentBinaryExecutableConfiguration] {
+	_ret := objc.Send[objc.ID](o.Ptr(), _aEAssessmentConfigurationSelConfigurationsByBinaryExecutable)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*AEAssessmentBinaryExecutable, *AEAssessmentBinaryExecutableConfiguration](_ret)
 }

@@ -148,6 +148,7 @@ func (o *NSScriptSuiteRegistry) AeteResource(languageName *NSString) *NSData {
 	return NSDataFromID(_ret)
 }
 
+// The names of the suite definitions currently loaded by the application.
 func (o *NSScriptSuiteRegistry) SuiteNames() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptSuiteRegistrySelSuiteNames)
 	if _ret != 0 {

@@ -469,6 +469,18 @@ func CMClockConvertHostTimeToSystemUnits(hostTime CMTime) uint64 {
 	return _fnCMClockConvertHostTimeToSystemUnits(hostTime)
 }
 
+var _fnCMClockCreateGenlockClock func() objc.ID
+
+// CMClockCreateGenlockClock calls the CoreMedia framework function CMClockCreateGenlockClock.
+func CMClockCreateGenlockClock() CMClockRef {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMClockCreateGenlockClock == nil {
+		ebipurego.RegisterLibFunc(&_fnCMClockCreateGenlockClock, _lib, "CMClockCreateGenlockClock")
+	}
+	_ret := _fnCMClockCreateGenlockClock()
+	return CMClockRef{Object: obj.Adopt(_ret)}
+}
+
 var _fnCMClockGetHostTimeClock func() objc.ID
 
 // CMClockGetHostTimeClock calls the CoreMedia framework function CMClockGetHostTimeClock.
@@ -501,6 +513,17 @@ func CMClockGetTypeID() int {
 		ebipurego.RegisterLibFunc(&_fnCMClockGetTypeID, _lib, "CMClockGetTypeID")
 	}
 	return _fnCMClockGetTypeID()
+}
+
+var _fnCMClockImplementsGetPreferredStartTimePattern func(objc.ID) uint8
+
+// CMClockImplementsGetPreferredStartTimePattern calls the CoreMedia framework function CMClockImplementsGetPreferredStartTimePattern.
+func CMClockImplementsGetPreferredStartTimePattern(clock CMClockRef) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMClockImplementsGetPreferredStartTimePattern == nil {
+		ebipurego.RegisterLibFunc(&_fnCMClockImplementsGetPreferredStartTimePattern, _lib, "CMClockImplementsGetPreferredStartTimePattern")
+	}
+	return _fnCMClockImplementsGetPreferredStartTimePattern(objref.IDOf(clock.Object))
 }
 
 var _fnCMClockInvalidate func(objc.ID)
@@ -660,6 +683,17 @@ func CMGetAttachment(target unsafe.Pointer, key corefoundation.CFStringRef) (res
 	var _out0 uint32
 	_ret := _fnCMGetAttachment(target, objref.IDOf(key.Object), unsafe.Pointer(&_out0))
 	return obj.Wrap(_ret), _out0
+}
+
+var _fnCMIsAnyDisplaySynchronizedToLockedGenlockSignal func() uint8
+
+// CMIsAnyDisplaySynchronizedToLockedGenlockSignal calls the CoreMedia framework function CMIsAnyDisplaySynchronizedToLockedGenlockSignal.
+func CMIsAnyDisplaySynchronizedToLockedGenlockSignal() uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMIsAnyDisplaySynchronizedToLockedGenlockSignal == nil {
+		ebipurego.RegisterLibFunc(&_fnCMIsAnyDisplaySynchronizedToLockedGenlockSignal, _lib, "CMIsAnyDisplaySynchronizedToLockedGenlockSignal")
+	}
+	return _fnCMIsAnyDisplaySynchronizedToLockedGenlockSignal()
 }
 
 var _fnCMMemoryPoolCreate func(objc.ID) objc.ID

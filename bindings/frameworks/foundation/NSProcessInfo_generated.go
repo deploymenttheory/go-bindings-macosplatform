@@ -17,8 +17,6 @@ import (
 )
 
 // ProcessInfo is an idiomatic wrapper over the Objective-C class NSProcessInfo.
-//
-// A collection of information about the current process.
 type ProcessInfo struct {
 	objref.Handle
 }
@@ -81,14 +79,14 @@ func NewProcessInfo() *ProcessInfo {
 	return processInfoAdopt(_id)
 }
 
-// WithProcessName sets the process name.
+// WithProcessName sets the name of the process. The process name is used to register application defaults and is used in error messages. It does not uniquely identify the process. > Warning: > User defaults and other aspects of the environment might depend on the process name, so be very careful if you change it. Setting the process name in this manner is not thread safe.
 func (pi *ProcessInfo) WithProcessName(processName StringProvider) *ProcessInfo {
 	defer runtime.KeepAlive(processName)
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setProcessName:"), objref.IDOf(processName))
 	return pi
 }
 
-// WithAutomaticTerminationSupportEnabled sets the automatic termination support enabled.
+// WithAutomaticTerminationSupportEnabled sets a Boolean value indicating whether the app supports automatic termination. Without setting this property or setting the equivalent `Info.plist` key (`NSSupportsAutomaticTermination`), the methods “disableAutomaticTermination:“ and “enableAutomaticTermination:“ have no effect, although the counter tracking automatic termination opt-outs is still kept up to date to ensure correctness if this is called later. Currently, setting this property to `NO` has no effect. This property should be set during `-applicationDidFinishLaunching:` or earlier.
 func (pi *ProcessInfo) WithAutomaticTerminationSupportEnabled(automaticTerminationSupportEnabled bool) *ProcessInfo {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setAutomaticTerminationSupportEnabled:"), automaticTerminationSupportEnabled)
 	return pi
@@ -106,14 +104,14 @@ func (pi *ProcessInfo) WithScriptingProperties(scriptingProperties map[string]ob
 	return pi
 }
 
-// OperatingSystem returns the operating system.
+// OperatingSystem returns a constant to indicate the operating system on which the process is executing.
 func (pi *ProcessInfo) OperatingSystem() int {
 	defer runtime.KeepAlive(pi)
 	_r := objc.Send[int](objref.IDOf(pi), objc.RegisterName("operatingSystem"))
 	return _r
 }
 
-// OperatingSystemName returns the operating system name.
+// OperatingSystemName returns a string containing the name of the operating system on which the process is executing.
 func (pi *ProcessInfo) OperatingSystemName() string {
 	defer runtime.KeepAlive(pi)
 	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("operatingSystemName"))
@@ -123,45 +121,45 @@ func (pi *ProcessInfo) OperatingSystemName() string {
 	return purego.GoString(_r)
 }
 
-// IsOperatingSystemAtLeastVersion wraps the corresponding Objective-C method.
+// IsOperatingSystemAtLeastVersion returns a Boolean value indicating whether the version of the operating system on which the process is executing is the same or later than the given version. This method accounts for major, minor, and update versions of the operating system. - Parameters: - version: The operating system version to test against. - Returns: `true` if the operating system on which the process is executing is the same or later than the given version; otherwise `false`.
 func (pi *ProcessInfo) IsOperatingSystemAtLeastVersion(version NSOperatingSystemVersion) bool {
 	defer runtime.KeepAlive(pi)
 	_r := objc.Send[bool](objref.IDOf(pi), objc.RegisterName("isOperatingSystemAtLeastVersion:"), version)
 	return _r
 }
 
-// DisableSuddenTermination disables sudden termination.
+// DisableSuddenTermination disables the application for quick killing using sudden termination. This method increments the sudden termination counter. When the termination counter reaches `0` the application allows sudden termination. By default the sudden termination counter is set to 1. This can be overridden in your application Info.plist. See <doc:ProcessInfo#Support-Sudden-Termination> for more information and debugging suggestions.
 func (pi *ProcessInfo) DisableSuddenTermination() {
 	defer runtime.KeepAlive(pi)
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("disableSuddenTermination"))
 }
 
-// EnableSuddenTermination enables sudden termination.
+// EnableSuddenTermination enables the application for quick killing using sudden termination. This method decrements the sudden termination counter. When the termination counter reaches `0` the application allows sudden termination. By default the sudden termination counter is set to 1. This can be overridden in your application Info.plist. See <doc:ProcessInfo#Support-Sudden-Termination> for more information and debugging suggestions.
 func (pi *ProcessInfo) EnableSuddenTermination() {
 	defer runtime.KeepAlive(pi)
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("enableSuddenTermination"))
 }
 
-// DisableAutomaticTermination disables automatic termination.
+// DisableAutomaticTermination disables automatic termination for the application. This method increments the automatic termination counter. When the counter is greater than `0`, the application is considered active and ineligible for automatic termination. For example, you could disable automatic termination when the user of an instant messaging application signs on, because the application requires a background connection to be maintained even if the application is otherwise inactive. The reason parameter is used to track why an application is or is not automatically terminable and can be inspected by debugging tools. A given reason can be used more than once at the same time. - Parameters: - reason: The reason why automatic termination is being disabled.
 func (pi *ProcessInfo) DisableAutomaticTermination(reason string) {
 	defer runtime.KeepAlive(pi)
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("disableAutomaticTermination:"), purego.NSString(reason))
 }
 
-// EnableAutomaticTermination enables automatic termination.
+// EnableAutomaticTermination enables automatic termination for the application. This method decrements the automatic termination counter. When the counter is `0`, the application is eligible for automatic termination. The reason parameter is used to track why an application is or is not automatically terminable and can be inspected by debugging tools. A given reason can be used more than once at the same time. - Parameters: - reason: The reason why automatic termination is being enabled.
 func (pi *ProcessInfo) EnableAutomaticTermination(reason string) {
 	defer runtime.KeepAlive(pi)
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("enableAutomaticTermination:"), purego.NSString(reason))
 }
 
-// Environment returns the environment.
+// Environment returns the variable names (keys) and their values in the environment from which the process was launched.
 func (pi *ProcessInfo) Environment() map[string]string {
 	defer runtime.KeepAlive(pi)
 	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("environment"))
 	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Arguments returns the arguments.
+// Arguments returns array of strings with the command-line arguments for the process. This array contains all the information passed in the `argv` array, including the executable name in the first element.
 //
 // Arguments returns the collection as a Go slice.
 func (pi *ProcessInfo) Arguments() []string {
@@ -170,7 +168,7 @@ func (pi *ProcessInfo) Arguments() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// HostName returns the host name.
+// HostName returns the name of the host computer on which the process is executing.
 func (pi *ProcessInfo) HostName() string {
 	defer runtime.KeepAlive(pi)
 	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("hostName"))
@@ -180,7 +178,7 @@ func (pi *ProcessInfo) HostName() string {
 	return purego.GoString(_r)
 }
 
-// ProcessName returns the process name.
+// ProcessName returns the name of the process. The process name is used to register application defaults and is used in error messages. It does not uniquely identify the process. > Warning: > User defaults and other aspects of the environment might depend on the process name, so be very careful if you change it. Setting the process name in this manner is not thread safe.
 func (pi *ProcessInfo) ProcessName() string {
 	defer runtime.KeepAlive(pi)
 	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("processName"))
@@ -190,14 +188,14 @@ func (pi *ProcessInfo) ProcessName() string {
 	return purego.GoString(_r)
 }
 
-// ProcessIdentifier returns the process identifier.
+// ProcessIdentifier returns the identifier of the process (often called process ID).
 func (pi *ProcessInfo) ProcessIdentifier() int {
 	defer runtime.KeepAlive(pi)
 	_r := objc.Send[int](objref.IDOf(pi), objc.RegisterName("processIdentifier"))
 	return _r
 }
 
-// GloballyUniqueString returns the globally unique string.
+// GloballyUniqueString returns global unique identifier for the process. The global ID for the process includes the host name, process ID, and a time stamp, which ensures that the ID is unique for the network. This property generates a new string each time its getter is invoked, and it uses a counter to guarantee that strings created from the same process are unique.
 func (pi *ProcessInfo) GloballyUniqueString() string {
 	defer runtime.KeepAlive(pi)
 	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("globallyUniqueString"))
@@ -207,7 +205,7 @@ func (pi *ProcessInfo) GloballyUniqueString() string {
 	return purego.GoString(_r)
 }
 
-// OperatingSystemVersionString returns the operating system version string.
+// OperatingSystemVersionString returns a string containing the version of the operating system on which the process is executing. The operating system version string is human readable, localized, and is appropriate for displaying to the user. This string is _not_ appropriate for parsing.
 func (pi *ProcessInfo) OperatingSystemVersionString() string {
 	defer runtime.KeepAlive(pi)
 	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("operatingSystemVersionString"))
@@ -217,49 +215,49 @@ func (pi *ProcessInfo) OperatingSystemVersionString() string {
 	return purego.GoString(_r)
 }
 
-// OperatingSystemVersion returns the operating system version.
+// OperatingSystemVersion returns the version of the operating system on which the process is executing.
 func (pi *ProcessInfo) OperatingSystemVersion() NSOperatingSystemVersion {
 	defer runtime.KeepAlive(pi)
 	_r := objc.Send[NSOperatingSystemVersion](objref.IDOf(pi), objc.RegisterName("operatingSystemVersion"))
 	return _r
 }
 
-// ProcessorCount returns the processor count.
+// ProcessorCount returns the number of processing cores available on the computer. This property value is equal to the result of entering the command `sysctl -n hw.ncpu` on the current system.
 func (pi *ProcessInfo) ProcessorCount() int {
 	defer runtime.KeepAlive(pi)
 	_r := objc.Send[int](objref.IDOf(pi), objc.RegisterName("processorCount"))
 	return _r
 }
 
-// ActiveProcessorCount returns the active processor count.
+// ActiveProcessorCount returns the number of active processing cores available on the computer. Whereas the “processorCount“ property reports the number of advertised processing cores, the “activeProcessorCount“ property reflects the actual number of active processing cores on the system. There are a number of different factors that may cause a core to not be active, including boot arguments, thermal throttling, or a manufacturing defect. This property value is equal to the result of entering the command `sysctl -n hw.logicalcpu` on the current system.
 func (pi *ProcessInfo) ActiveProcessorCount() int {
 	defer runtime.KeepAlive(pi)
 	_r := objc.Send[int](objref.IDOf(pi), objc.RegisterName("activeProcessorCount"))
 	return _r
 }
 
-// PhysicalMemory returns the physical memory.
+// PhysicalMemory returns the amount of physical memory on the computer in bytes.
 func (pi *ProcessInfo) PhysicalMemory() uint64 {
 	defer runtime.KeepAlive(pi)
 	_r := objc.Send[uint64](objref.IDOf(pi), objc.RegisterName("physicalMemory"))
 	return _r
 }
 
-// SystemUptime returns the system uptime.
+// SystemUptime returns the amount of time the system has been awake since the last time it was restarted. > Important: > This API has the potential of being misused to access device signals to try to identify the device or user, also known as fingerprinting. Regardless of whether a user gives your app permission to track, fingerprinting is not allowed. When you use this API in your app or third-party SDK (an SDK not provided by Apple), declare your usage and the reason for using the API in your app or third-party SDK's `PrivacyInfo.xcprivacy` file. For more information, including the list of valid reasons for using the API, see [Describing use of required reason API](https://developer.apple.com/documentation/bundleresources/describing-use-of-required-reason-api).
 func (pi *ProcessInfo) SystemUptime() float64 {
 	defer runtime.KeepAlive(pi)
 	_r := objc.Send[float64](objref.IDOf(pi), objc.RegisterName("systemUptime"))
 	return _r
 }
 
-// AutomaticTerminationSupportEnabled wraps the corresponding Objective-C method.
+// AutomaticTerminationSupportEnabled reports whether the app supports automatic termination. Without setting this property or setting the equivalent `Info.plist` key (`NSSupportsAutomaticTermination`), the methods “disableAutomaticTermination:“ and “enableAutomaticTermination:“ have no effect, although the counter tracking automatic termination opt-outs is still kept up to date to ensure correctness if this is called later. Currently, setting this property to `NO` has no effect. This property should be set during `-applicationDidFinishLaunching:` or earlier.
 func (pi *ProcessInfo) AutomaticTerminationSupportEnabled() bool {
 	defer runtime.KeepAlive(pi)
 	_r := objc.Send[bool](objref.IDOf(pi), objc.RegisterName("automaticTerminationSupportEnabled"))
 	return _r
 }
 
-// PerformActivityWithOptionsReasonUsing performs activity with options reason using.
+// PerformActivityWithOptionsReasonUsing synchronously performs an activity defined by a given block using the given options. The activity will be automatically ended after `block` returns. - Parameters: - options: Options for the activity. See “ProcessInfo/ActivityOptions“ for possible values. - reason: A string used in debugging to indicate the reason the activity began. - block: A block containing the work to be performed by the activity.
 //
 // PerformActivityWithOptionsReasonUsing blocks until the operation completes or ctx is cancelled.
 func (pi *ProcessInfo) PerformActivityWithOptionsReasonUsing(ctx context.Context, options ActivityOptions, reason string) error {
@@ -277,7 +275,7 @@ func (pi *ProcessInfo) PerformActivityWithOptionsReasonUsing(ctx context.Context
 	}
 }
 
-// UserName returns the user name.
+// UserName returns the account name of the current user.
 func (pi *ProcessInfo) UserName() string {
 	defer runtime.KeepAlive(pi)
 	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("userName"))
@@ -287,7 +285,7 @@ func (pi *ProcessInfo) UserName() string {
 	return purego.GoString(_r)
 }
 
-// FullUserName returns the full user name.
+// FullUserName returns the full name of the current user.
 func (pi *ProcessInfo) FullUserName() string {
 	defer runtime.KeepAlive(pi)
 	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("fullUserName"))
@@ -311,21 +309,21 @@ func (pi *ProcessInfo) IsLowPowerModeEnabled() bool {
 	return _r
 }
 
-// IsMACCatalystApp reports whether the object is MAC catalyst app.
+// IsMACCatalystApp reports whether the process originated as an iOS app and runs on macOS. The value of this property is `YES` when the process is a Mac app built with Mac Catalyst, or an iOS app running on Apple silicon, and is running on a Mac. Frameworks that support iOS and macOS use this property to determine if the process is a Mac app built with Mac Catalyst. > Note: > To distinguish between an iOS app running on Apple silicon and a Mac app built with Mac Catalyst, use the “isiOSAppOnMac“ property.
 func (pi *ProcessInfo) IsMACCatalystApp() bool {
 	defer runtime.KeepAlive(pi)
 	_r := objc.Send[bool](objref.IDOf(pi), objc.RegisterName("isMacCatalystApp"))
 	return _r
 }
 
-// IsiOSAppOnMAC wraps the corresponding Objective-C method.
+// IsiOSAppOnMAC reports whether the process is an iPhone or iPad app running on a Mac. The value of this property is `YES` only when the process is an iOS app running on a Mac. The value is `NO` for all other apps on the Mac, including Mac apps built using Mac Catalyst. The property is also `NO` for processes running on platforms other than macOS.
 func (pi *ProcessInfo) IsiOSAppOnMAC() bool {
 	defer runtime.KeepAlive(pi)
 	_r := objc.Send[bool](objref.IDOf(pi), objc.RegisterName("isiOSAppOnMac"))
 	return _r
 }
 
-// IsiOSAppOnVision wraps the corresponding Objective-C method.
+// IsiOSAppOnVision reports whether the process is an iPhone or iPad app running on visionOS. The value of this property is `YES` only when the process is an iOS app running on a visionOS device. The value is `NO` for all other apps on visionOS. The property is also `NO` for processes running on platforms other than visionOS.
 func (pi *ProcessInfo) IsiOSAppOnVision() bool {
 	defer runtime.KeepAlive(pi)
 	_r := objc.Send[bool](objref.IDOf(pi), objc.RegisterName("isiOSAppOnVision"))

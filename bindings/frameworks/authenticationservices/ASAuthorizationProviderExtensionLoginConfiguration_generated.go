@@ -162,6 +162,12 @@ func (apelc *AuthorizationProviderExtensionLoginConfiguration) WithAdditionalAut
 	return apelc
 }
 
+// WithIncludePlatformSSOAuthorizationScopes sets if true, the Platform SSO authorization scopes will be included in all requests.
+func (apelc *AuthorizationProviderExtensionLoginConfiguration) WithIncludePlatformSSOAuthorizationScopes(includePlatformSSOAuthorizationScopes bool) *AuthorizationProviderExtensionLoginConfiguration {
+	objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("setIncludePlatformSSOAuthorizationScopes:"), includePlatformSSOAuthorizationScopes)
+	return apelc
+}
+
 // WithIncludePreviousRefreshTokenInLoginRequest sets a Boolean value that indicates whether to include the previous refresh token in the authentation request.
 func (apelc *AuthorizationProviderExtensionLoginConfiguration) WithIncludePreviousRefreshTokenInLoginRequest(includePreviousRefreshTokenInLoginRequest bool) *AuthorizationProviderExtensionLoginConfiguration {
 	objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("setIncludePreviousRefreshTokenInLoginRequest:"), includePreviousRefreshTokenInLoginRequest)
@@ -231,6 +237,12 @@ func (apelc *AuthorizationProviderExtensionLoginConfiguration) WithFederationTyp
 	return apelc
 }
 
+// WithFallbackFederationType sets the federation method to use for fallback.
+func (apelc *AuthorizationProviderExtensionLoginConfiguration) WithFallbackFederationType(fallbackFederationType AuthorizationProviderExtensionFederationType) *AuthorizationProviderExtensionLoginConfiguration {
+	objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("setFallbackFederationType:"), fallbackFederationType)
+	return apelc
+}
+
 // WithFederationRequestURN sets the URN to request when performing a federated login.
 func (apelc *AuthorizationProviderExtensionLoginConfiguration) WithFederationRequestURN(federationRequestURN string) *AuthorizationProviderExtensionLoginConfiguration {
 	objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("setFederationRequestURN:"), purego.NSString(federationRequestURN))
@@ -265,6 +277,18 @@ func (apelc *AuthorizationProviderExtensionLoginConfiguration) WithFederationPre
 func (apelc *AuthorizationProviderExtensionLoginConfiguration) WithCustomFederationUserPreauthenticationRequestValues(items ...obj.Object) *AuthorizationProviderExtensionLoginConfiguration {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("setCustomFederationUserPreauthenticationRequestValues:"), _arr)
+	return apelc
+}
+
+// WithAuthorizationURL sets the OpenID authorization request URL.  This can be overwritten when using dynamic federation.
+func (apelc *AuthorizationProviderExtensionLoginConfiguration) WithAuthorizationURL(authorizationURL string) *AuthorizationProviderExtensionLoginConfiguration {
+	objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("setAuthorizationURL:"), rt.FileURL(authorizationURL))
+	return apelc
+}
+
+// WithAuthorizationURLKeypath sets the claim in the preauthentication response that contains the OpenID authorization URL.
+func (apelc *AuthorizationProviderExtensionLoginConfiguration) WithAuthorizationURLKeypath(authorizationURLKeypath string) *AuthorizationProviderExtensionLoginConfiguration {
+	objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("setAuthorizationURLKeypath:"), purego.NSString(authorizationURLKeypath))
 	return apelc
 }
 
@@ -597,6 +621,13 @@ func (apelc *AuthorizationProviderExtensionLoginConfiguration) AdditionalAuthori
 	return purego.GoString(_r)
 }
 
+// IncludePlatformSSOAuthorizationScopes reports whether if true, the Platform SSO authorization scopes will be included in all requests.
+func (apelc *AuthorizationProviderExtensionLoginConfiguration) IncludePlatformSSOAuthorizationScopes() bool {
+	defer runtime.KeepAlive(apelc)
+	_r := objc.Send[bool](objref.IDOf(apelc), objc.RegisterName("includePlatformSSOAuthorizationScopes"))
+	return _r
+}
+
 // IncludePreviousRefreshTokenInLoginRequest reports whether if true and there is a refresh token for the user in the SSO tokens, it will be included in the login request.
 func (apelc *AuthorizationProviderExtensionLoginConfiguration) IncludePreviousRefreshTokenInLoginRequest() bool {
 	defer runtime.KeepAlive(apelc)
@@ -697,6 +728,13 @@ func (apelc *AuthorizationProviderExtensionLoginConfiguration) FederationType() 
 	return _r
 }
 
+// FallbackFederationType returns the federation method to use for fallback.
+func (apelc *AuthorizationProviderExtensionLoginConfiguration) FallbackFederationType() AuthorizationProviderExtensionFederationType {
+	defer runtime.KeepAlive(apelc)
+	_r := objc.Send[AuthorizationProviderExtensionFederationType](objref.IDOf(apelc), objc.RegisterName("fallbackFederationType"))
+	return _r
+}
+
 // FederationRequestURN returns the URN to request when performing a federated login.
 func (apelc *AuthorizationProviderExtensionLoginConfiguration) FederationRequestURN() string {
 	defer runtime.KeepAlive(apelc)
@@ -748,6 +786,23 @@ func (apelc *AuthorizationProviderExtensionLoginConfiguration) CustomFederationU
 	defer runtime.KeepAlive(apelc)
 	_arr := objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("customFederationUserPreauthenticationRequestValues"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
+// AuthorizationURL returns the OpenID authorization request URL.  This can be overwritten when using dynamic federation.
+func (apelc *AuthorizationProviderExtensionLoginConfiguration) AuthorizationURL() string {
+	defer runtime.KeepAlive(apelc)
+	_r := objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("authorizationURL"))
+	return rt.URLString(_r)
+}
+
+// AuthorizationURLKeypath returns the claim in the preauthentication response that contains the OpenID authorization URL.
+func (apelc *AuthorizationProviderExtensionLoginConfiguration) AuthorizationURLKeypath() string {
+	defer runtime.KeepAlive(apelc)
+	_r := objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("authorizationURLKeypath"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
 }
 
 // LoginRequestEncryptionPublicKey returns the public key to use for encrypting the embedded login assertion. Only applies to password authentication.  If set, the password will encrypted in an embedded assertion instead of the login request itself.

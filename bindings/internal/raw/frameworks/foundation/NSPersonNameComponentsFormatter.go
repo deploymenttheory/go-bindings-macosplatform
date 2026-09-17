@@ -9,8 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A formatter that provides localized representations of the components of a person’s name.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nspersonnamecomponentsformatter
 type NSPersonNameComponentsFormatter struct {
 	NSFormatter
@@ -40,6 +38,7 @@ func NSPersonNameComponentsFormatterFromID(id objc.ID) *NSPersonNameComponentsFo
 	return o
 }
 
+// Returns a formatted string from the given person name components using the specified style and options. Shortcut for converting an `NSPersonNameComponents` object into a string without explicitly creating an instance. Create an instance for greater customizability.
 func NSPersonNameComponentsFormatterLocalizedStringFromPersonNameComponentsStyleOptions(components *NSPersonNameComponents, nameFormatStyle NSPersonNameComponentsFormatterStyle, nameOptions NSPersonNameComponentsFormatterOptions) *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPersonNameComponentsFormatter), _nSPersonNameComponentsFormatterSelLocalizedStringFromPersonNameComponentsStyleOptions, components.Ptr(), nameFormatStyle, nameOptions)
 	if _ret != 0 {
@@ -48,6 +47,7 @@ func NSPersonNameComponentsFormatterLocalizedStringFromPersonNameComponentsStyle
 	return NSStringFromID(_ret)
 }
 
+// Returns a string containing the formatted value of the provided components object.
 func (o *NSPersonNameComponentsFormatter) StringFromPersonNameComponents(components *NSPersonNameComponents) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersonNameComponentsFormatterSelStringFromPersonNameComponents, components.Ptr())
 	if _ret != 0 {
@@ -56,6 +56,7 @@ func (o *NSPersonNameComponentsFormatter) StringFromPersonNameComponents(compone
 	return NSStringFromID(_ret)
 }
 
+// Returns an attributed string with annotations for each component. For each range, attributes can be obtained by querying dictionary key `NSPersonNameComponentKey`, using `NSPersonNameComponent` constant values.
 func (o *NSPersonNameComponentsFormatter) AnnotatedStringFromPersonNameComponents(components *NSPersonNameComponents) *NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersonNameComponentsFormatterSelAnnotatedStringFromPersonNameComponents, components.Ptr())
 	if _ret != 0 {
@@ -64,6 +65,7 @@ func (o *NSPersonNameComponentsFormatter) AnnotatedStringFromPersonNameComponent
 	return NSAttributedStringFromID(_ret)
 }
 
+// Returns an `NSPersonNameComponents` object representing the name components found in the provided string.
 func (o *NSPersonNameComponentsFormatter) PersonNameComponentsFromString(string_ *NSString) *NSPersonNameComponents {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersonNameComponentsFormatterSelPersonNameComponentsFromString, string_.Ptr())
 	if _ret != 0 {
@@ -72,6 +74,7 @@ func (o *NSPersonNameComponentsFormatter) PersonNameComponentsFromString(string_
 	return NSPersonNameComponentsFromID(_ret)
 }
 
+// The formatting style for the formatted string on an instance. `ShortStyle` will fall back to user preferences and language-specific defaults.
 func (o *NSPersonNameComponentsFormatter) Style() NSPersonNameComponentsFormatterStyle {
 	_ret := objc.Send[NSPersonNameComponentsFormatterStyle](o.Ptr(), _nSPersonNameComponentsFormatterSelStyle)
 	return _ret
@@ -81,6 +84,7 @@ func (o *NSPersonNameComponentsFormatter) SetStyle(style NSPersonNameComponentsF
 	o.Ptr().Send(_nSPersonNameComponentsFormatterSelSetStyle, style)
 }
 
+// Specify that the formatter should only format the components object's phoneticRepresentation.
 func (o *NSPersonNameComponentsFormatter) IsPhonetic() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSPersonNameComponentsFormatterSelIsPhonetic)
 	return _ret
@@ -90,6 +94,7 @@ func (o *NSPersonNameComponentsFormatter) SetPhonetic(phonetic bool) {
 	o.Ptr().Send(_nSPersonNameComponentsFormatterSelSetPhonetic, phonetic)
 }
 
+// Specifies the locale to format names. Defaults to `autoupdatingCurrentLocale`. Also resets to `autoupdatingCurrentLocale` on assignment of `nil`.
 func (o *NSPersonNameComponentsFormatter) Locale() *NSLocale {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersonNameComponentsFormatterSelLocale)
 	if _ret != 0 {

@@ -5,12 +5,14 @@
 package avfoundation
 
 import (
+	"context"
 	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/rt"
@@ -113,21 +115,58 @@ func (sbar *SampleBufferAudioRenderer) WithMuted(muted bool) *SampleBufferAudioR
 	return sbar
 }
 
-// Status returns the status.
+// EnqueueSampleBuffer sends a sample buffer in order to render its contents.
+func (sbar *SampleBufferAudioRenderer) EnqueueSampleBuffer(sampleBuffer obj.Object) {
+	defer runtime.KeepAlive(sbar)
+	defer runtime.KeepAlive(sampleBuffer)
+	objc.Send[objc.ID](objref.IDOf(sbar), objc.RegisterName("enqueueSampleBuffer:"), objref.IDOf(sampleBuffer))
+}
+
+// Flush instructs the receiver to discard pending enqueued sample buffers.
+func (sbar *SampleBufferAudioRenderer) Flush() {
+	defer runtime.KeepAlive(sbar)
+	objc.Send[objc.ID](objref.IDOf(sbar), objc.RegisterName("flush"))
+}
+
+// RequestMediaDataWhenReadyOnQueueUsing instructs the target to invoke a client-supplied block repeatedly, at its convenience, in order to gather sample buffers for playback.
+//
+// RequestMediaDataWhenReadyOnQueueUsing blocks until the operation completes or ctx is cancelled.
+func (sbar *SampleBufferAudioRenderer) RequestMediaDataWhenReadyOnQueueUsing(ctx context.Context, queue dispatch.Queue) error {
+	defer runtime.KeepAlive(sbar)
+	_ch := make(chan error, 1)
+	_block := objc.NewBlock(func(_ objc.Block) {
+		_ch <- nil
+	})
+	objc.Send[objc.ID](objref.IDOf(sbar), objc.RegisterName("requestMediaDataWhenReadyOnQueue:usingBlock:"), objc.ID(uintptr(queue.Ptr())), _block)
+	select {
+	case err := <-_ch:
+		return err
+	case <-ctx.Done():
+		return ctx.Err()
+	}
+}
+
+// StopRequestingMediaData cancels any current requestMediaDataWhenReadyOnQueue:usingBlock: call.
+func (sbar *SampleBufferAudioRenderer) StopRequestingMediaData() {
+	defer runtime.KeepAlive(sbar)
+	objc.Send[objc.ID](objref.IDOf(sbar), objc.RegisterName("stopRequestingMediaData"))
+}
+
+// Status indicates the status of the audio renderer. A renderer begins with status AVQueuedSampleBufferRenderingStatusUnknown. As sample buffers are enqueued for rendering using -enqueueSampleBuffer:, the renderer will transition to either AVQueuedSampleBufferRenderingStatusRendering or AVQueuedSampleBufferRenderingStatusFailed. If the status is AVQueuedSampleBufferRenderingStatusFailed, check the value of the renderer's error property for information on the error encountered. This is terminal status from which recovery is not always possible. This property is key value observable.
 func (sbar *SampleBufferAudioRenderer) Status() QueuedSampleBufferRenderingStatus {
 	defer runtime.KeepAlive(sbar)
 	_r := objc.Send[QueuedSampleBufferRenderingStatus](objref.IDOf(sbar), objc.RegisterName("status"))
 	return _r
 }
 
-// Error returns the error.
+// Error returns if the renderer's status is AVQueuedSampleBufferRenderingStatusFailed, this describes the error that caused the failure. The value of this property is an NSError that describes what caused the renderer to no longer be able to render sample buffers. The value of this property is nil unless the value of status is AVQueuedSampleBufferRenderingStatusFailed.
 func (sbar *SampleBufferAudioRenderer) Error() unsafe.Pointer {
 	defer runtime.KeepAlive(sbar)
 	_r := objc.Send[unsafe.Pointer](objref.IDOf(sbar), objc.RegisterName("error"))
 	return _r
 }
 
-// AudioOutputDeviceUniqueID specifies the unique ID of the Core Audio output device used to play audio. By default, the value of this property is nil, indicating that the default audio output device is used. Otherwise the value of this property is an NSString containing the unique ID of the Core Audio output device to be used for audio output. Core Audio's kAudioDevicePropertyDeviceUID is a suitable source of audio output device unique IDs. Modifying this property while the timebase's rate is not 0.0 may cause the rate to briefly change to 0.0. On macOS, the audio device clock may be used as the AVSampleBufferRenderSynchronizer's and all attached AVQueuedSampleBufferRendering's timebase's clocks.  If the audioOutputDeviceUniqueID is modified, the clocks of all these timebases may also change. If multiple AVSampleBufferAudioRenderers with different values for audioOutputDeviceUniqueID are attached to the same AVSampleBufferRenderSynchronizer, audio may not stay in sync during playback.  To avoid this, ensure that all synchronized AVSampleBufferAudioRenderers are using the same audio output device.
+// AudioOutputDeviceUniqueID specifies the unique ID of the Core Audio output device used to play audio. By default, the value of this property is nil, indicating that the default audio output device is used. Otherwise the value of this property is an NSString containing the unique ID of the Core Audio output device to be used for audio output. Core Audio's kAudioDevicePropertyDeviceUID is a suitable source of audio output device unique IDs. Modifying this property while the timebase's rate is not 0.0 may cause the rate to briefly change to 0.0. On macOS, the audio device clock may be used as the AVSampleBufferRenderSynchronizer's and all attached AVQueuedSampleBufferRendering's timebase's clocks. If the audioOutputDeviceUniqueID is modified, the clocks of all these timebases may also change. If multiple AVSampleBufferAudioRenderers with different values for audioOutputDeviceUniqueID are attached to the same AVSampleBufferRenderSynchronizer, audio may not stay in sync during playback. To avoid this, ensure that all synchronized AVSampleBufferAudioRenderers are using the same audio output device.
 func (sbar *SampleBufferAudioRenderer) AudioOutputDeviceUniqueID() string {
 	defer runtime.KeepAlive(sbar)
 	_r := objc.Send[objc.ID](objref.IDOf(sbar), objc.RegisterName("audioOutputDeviceUniqueID"))
@@ -144,21 +183,35 @@ func (sbar *SampleBufferAudioRenderer) AudioTimePitchAlgorithm() *foundation.Str
 	return foundation.StringFromID(_r)
 }
 
-// AllowedAudioSpatializationFormats indicates the source audio channel layouts allowed by the receiver for spatialization. Spatialization uses psychoacoustic methods to create a more immersive audio rendering when the content is played on specialized headphones and speaker arrangements. When an  AVSampleBufferAudioRenderer's allowedAudioSpatializationFormats property is set to AVAudioSpatializationFormatMonoAndStereo the  AVSampleBufferAudioRenderer will attempt to spatialize content tagged with a stereo channel layout, two-channel content with no layout specified as well as mono. It is considered incorrect to render a binaural recording with spatialization. A binaural recording is captured using two carefully placed microphones at each ear where the intent, when played on headphones, is to reproduce a naturally occurring spatial effect. Content tagged with a binaural channel layout will ignore this property value. When an  AVSampleBufferAudioRenderer's allowedAudioSpatializationFormats property is set to AVAudioSpatializationFormatMultichannel the  AVSampleBufferAudioRenderer will attempt to spatialize any decodable multichannel layout. Setting this property to AVAudioSpatializationFormatMonoStereoAndMultichannel indicates that the sender allows the  AVSampleBufferAudioRenderer to spatialize any decodable mono, stereo or multichannel layout. This property is not observable. The default value for this property is AVAudioSpatializationFormatMultichannel.
+// AllowedAudioSpatializationFormats indicates the source audio channel layouts allowed by the receiver for spatialization. Spatialization uses psychoacoustic methods to create a more immersive audio rendering when the content is played on specialized headphones and speaker arrangements. When an AVSampleBufferAudioRenderer's allowedAudioSpatializationFormats property is set to AVAudioSpatializationFormatMonoAndStereo the AVSampleBufferAudioRenderer will attempt to spatialize content tagged with a stereo channel layout, two-channel content with no layout specified as well as mono. It is considered incorrect to render a binaural recording with spatialization. A binaural recording is captured using two carefully placed microphones at each ear where the intent, when played on headphones, is to reproduce a naturally occurring spatial effect. Content tagged with a binaural channel layout will ignore this property value. When an AVSampleBufferAudioRenderer's allowedAudioSpatializationFormats property is set to AVAudioSpatializationFormatMultichannel the AVSampleBufferAudioRenderer will attempt to spatialize any decodable multichannel layout. Setting this property to AVAudioSpatializationFormatMonoStereoAndMultichannel indicates that the sender allows the AVSampleBufferAudioRenderer to spatialize any decodable mono, stereo or multichannel layout. This property is not observable. The default value for this property is AVAudioSpatializationFormatMultichannel.
 func (sbar *SampleBufferAudioRenderer) AllowedAudioSpatializationFormats() AudioSpatializationFormats {
 	defer runtime.KeepAlive(sbar)
 	_r := objc.Send[AudioSpatializationFormats](objref.IDOf(sbar), objc.RegisterName("allowedAudioSpatializationFormats"))
 	return _r
 }
 
-// Volume returns the volume.
+// IsReadyForMoreMediaData reports whether indicates the readiness of the receiver to accept more sample buffers. An object conforming to AVQueuedSampleBufferRendering keeps track of the occupancy levels of its internal queues for the benefit of clients that enqueue sample buffers from non-real-time sources -- i.e., clients that can supply sample buffers faster than they are consumed, and so need to decide when to hold back. Clients enqueueing sample buffers from non-real-time sources may hold off from generating or obtaining more sample buffers to enqueue when the value of readyForMoreMediaData is false. It is safe to call enqueueSampleBuffer: when readyForMoreMediaData is false, but it is a bad idea to enqueue sample buffers without bound. To help with control of the non-real-time supply of sample buffers, such clients can use -requestMediaDataWhenReadyOnQueue:usingBlock in order to specify a block that the receiver should invoke whenever it's ready for sample buffers to be appended. The value of readyForMoreMediaData will often change from false to true asynchronously, as previously supplied sample buffers are decoded and rendered. This property is not key value observable.
+func (sbar *SampleBufferAudioRenderer) IsReadyForMoreMediaData() bool {
+	defer runtime.KeepAlive(sbar)
+	_r := objc.Send[bool](objref.IDOf(sbar), objc.RegisterName("isReadyForMoreMediaData"))
+	return _r
+}
+
+// HasSufficientMediaDataForReliablePlaybackStart reports whether the enqueued media data meets the renderer's preroll level. Clients should fetch the value of this property to learn if the renderer has had enough media data enqueued to start playback reliably. Starting playback when this property is false may prevent smooth playback following an immediate start.
+func (sbar *SampleBufferAudioRenderer) HasSufficientMediaDataForReliablePlaybackStart() bool {
+	defer runtime.KeepAlive(sbar)
+	_r := objc.Send[bool](objref.IDOf(sbar), objc.RegisterName("hasSufficientMediaDataForReliablePlaybackStart"))
+	return _r
+}
+
+// Volume indicates the current audio volume of the AVSampleBufferAudioRenderer. A value of 0.0 means "silence all audio", while 1.0 means "play at the full volume of the audio media". This property should be used for frequent volume changes, for example via a volume knob or fader. This property is most useful on iOS to control the volume of the AVSampleBufferAudioRenderer relative to other audio output, not for setting absolute volume.
 func (sbar *SampleBufferAudioRenderer) Volume() float32 {
 	defer runtime.KeepAlive(sbar)
 	_r := objc.Send[float32](objref.IDOf(sbar), objc.RegisterName("volume"))
 	return _r
 }
 
-// IsMuted reports whether the object is muted.
+// IsMuted reports whether audio output of the AVSampleBufferAudioRenderer is muted. Setting this property only affects audio muting for the renderer instance and not for the device.
 func (sbar *SampleBufferAudioRenderer) IsMuted() bool {
 	defer runtime.KeepAlive(sbar)
 	_r := objc.Send[bool](objref.IDOf(sbar), objc.RegisterName("isMuted"))

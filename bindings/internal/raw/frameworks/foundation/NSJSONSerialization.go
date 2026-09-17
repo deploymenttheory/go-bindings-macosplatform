@@ -11,8 +11,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An object that converts between JSON and the equivalent Foundation objects.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsjsonserialization
 type NSJSONSerialization struct {
 	NSObject
@@ -37,11 +35,13 @@ func NSJSONSerializationFromID(id objc.ID) *NSJSONSerialization {
 	return o
 }
 
+// Returns a Boolean value that indicates whether a given object can be converted to JSON data. The object must have the following properties: the top level object is an `NSArray` or `NSDictionary`; all objects are `NSString`, `NSNumber`, `NSArray`, `NSDictionary`, or `NSNull`; all dictionary keys are `NSString` instances; and `NSNumber` values are not NaN or infinity.
 func NSJSONSerializationIsValidJSONObject(obj objc.ID) bool {
 	_ret := objc.Send[bool](objc.ID(_clsNSJSONSerialization), _nSJSONSerializationSelIsValidJSONObject, obj)
 	return _ret
 }
 
+// Returns JSON data from a Foundation object. If the object will not produce valid JSON then an exception will be thrown. Setting the `NSJSONWritingPrettyPrinted` option will generate JSON with whitespace designed to make the output more readable. If that option is not set, the most compact possible JSON will be generated. The resulting data is encoded in UTF-8.
 func NSJSONSerializationDataWithJSONObjectOptionsError(obj objc.ID, opt NSJSONWritingOptions) (*NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSJSONSerialization), _nSJSONSerializationSelDataWithJSONObjectOptionsError, obj, opt, unsafe.Pointer(&_nsErr))
@@ -54,6 +54,7 @@ func NSJSONSerializationDataWithJSONObjectOptionsError(obj objc.ID, opt NSJSONWr
 	return NSDataFromID(_ret), nil
 }
 
+// Returns a Foundation object from JSON data. Set the `NSJSONReadingFragmentsAllowed` option if the parser should allow top-level objects that are not an `NSArray` or `NSDictionary`. Setting the `NSJSONReadingMutableContainers` option will make the parser generate mutable `NSArrays` and `NSDictionaries`. Setting the `NSJSONReadingMutableLeaves` option will make the parser generate mutable `NSString` objects. The data must be in one of the 5 supported encodings listed in the JSON specification: UTF-8, UTF-16LE, UTF-16BE, UTF-32LE, UTF-32BE. The most efficient encoding to use for parsing is UTF-8.
 func NSJSONSerializationJSONObjectWithDataOptionsError(data *NSData, opt NSJSONReadingOptions) (objc.ID, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSJSONSerialization), _nSJSONSerializationSelJSONObjectWithDataOptionsError, data.Ptr(), opt, unsafe.Pointer(&_nsErr))
@@ -63,6 +64,7 @@ func NSJSONSerializationJSONObjectWithDataOptionsError(data *NSData, opt NSJSONR
 	return _ret, nil
 }
 
+// Writes a Foundation object as JSON into an output stream. The stream should be opened and configured. The return value is the number of bytes written to the stream, or `0` on error. All other behavior of this method is the same as the `dataWithJSONObject:options:error:` method.
 func NSJSONSerializationWriteJSONObjectToStreamOptionsError(obj objc.ID, stream *NSOutputStream, opt NSJSONWritingOptions) (int, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[int](objc.ID(_clsNSJSONSerialization), _nSJSONSerializationSelWriteJSONObjectToStreamOptionsError, obj, stream.Ptr(), opt, unsafe.Pointer(&_nsErr))
@@ -72,6 +74,7 @@ func NSJSONSerializationWriteJSONObjectToStreamOptionsError(obj objc.ID, stream 
 	return _ret, nil
 }
 
+// Returns a Foundation object from a JSON data stream. The stream should be opened and configured. All other behavior of this method is the same as the `JSONObjectWithData:options:error:` method.
 func NSJSONSerializationJSONObjectWithStreamOptionsError(stream *NSInputStream, opt NSJSONReadingOptions) (objc.ID, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSJSONSerialization), _nSJSONSerializationSelJSONObjectWithStreamOptionsError, stream.Ptr(), opt, unsafe.Pointer(&_nsErr))

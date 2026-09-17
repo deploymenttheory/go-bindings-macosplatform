@@ -8,6 +8,21 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
 )
 
+// ErrFSErrorCacheFlushFailed matches the FSKit error FSErrorCacheFlushFailed.
+var ErrFSErrorCacheFlushFailed = errkit.New("FSDataCacheErrorDomain", 4512)
+
+// ErrFSErrorCacheInvalidationFailed matches the FSKit error FSErrorCacheInvalidationFailed.
+var ErrFSErrorCacheInvalidationFailed = errkit.New("FSDataCacheErrorDomain", 4513)
+
+// ErrFSErrorCacheOperationConflict matches the FSKit error FSErrorCacheOperationConflict.
+var ErrFSErrorCacheOperationConflict = errkit.New("FSDataCacheErrorDomain", 4514)
+
+// ErrFSErrorInvalidCacheModeCoherency matches the FSKit error FSErrorInvalidCacheModeCoherency.
+var ErrFSErrorInvalidCacheModeCoherency = errkit.New("FSDataCacheErrorDomain", 4510)
+
+// ErrFSErrorInvalidCacheTransition matches the FSKit error FSErrorInvalidCacheTransition.
+var ErrFSErrorInvalidCacheTransition = errkit.New("FSDataCacheErrorDomain", 4511)
+
 // ErrInvalidDirectoryCookie matches the FSKit error FSErrorInvalidDirectoryCookie.
 var ErrInvalidDirectoryCookie = errkit.New("FSErrorDomain", 4506)
 

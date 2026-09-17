@@ -1354,6 +1354,9 @@
       "doc": "A document that contains PDF (Portable Document Format) drawing information.",
       "url": "https://developer.apple.com/documentation/coregraphics/cgpdfdocument"
     },
+    "CGPDFMarkedContentItem": {
+      "url": "https://developer.apple.com/documentation/coregraphics/cgpdfmarkedcontentitem"
+    },
     "CGPDFObject": {
       "doc": "An object representing content within a PDF document.",
       "url": "https://developer.apple.com/documentation/coregraphics/cgpdfobject"
@@ -1377,6 +1380,9 @@
     "CGPDFString": {
       "doc": "A text string in a PDF document.",
       "url": "https://developer.apple.com/documentation/coregraphics/cgpdfstring"
+    },
+    "CGPDFStructureElement": {
+      "url": "https://developer.apple.com/documentation/coregraphics/cgpdfstructureelement"
     },
     "CGPSConverter": {
       "doc": "An opaque data type used to convert PostScript data to PDF data.",

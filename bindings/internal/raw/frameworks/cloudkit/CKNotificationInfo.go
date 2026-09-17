@@ -12,8 +12,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An object that describes the configuration of a subscription’s push notifications.
-//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/cknotificationinfo
 type CKNotificationInfo struct {
 	foundation.NSObject
@@ -222,7 +220,7 @@ func (o *CKNotificationInfo) SetShouldSendContentAvailable(shouldSendContentAvai
 	o.Ptr().Send(_cKNotificationInfoSelSetShouldSendContentAvailable, shouldSendContentAvailable)
 }
 
-// A Boolean value that indicates whether the push notification sets the mutable content flag. When this property is <doc://com.apple.documentation/documentation/swift/true>, the server includes the `mutable-content` flag with a value of `1` in the push notification's payload. When the value is `1`, the system passes the notification to your app extension for modification before delivery. See <doc://com.apple.documentation/documentation/usernotifications/generating-a-remote-notification> for more information about the `mutable-content` flag, and <doc://com.apple.documentation/documentation/usernotifications/modifying-content-in-newly-delivered-notifications> for information about how to modify push notifiction content in your app extension prior to delivery. The default value of this property is <doc://com.apple.documentation/documentation/swift/false>.
+// A Boolean value that indicates whether the push notification sets the mutable content flag. When this property is <doc://com.apple.documentation/documentation/swift/true>, the server includes the `mutable-content` flag with a value of `1` in the push notification's payload. When the value is `1`, the system passes the notification to your app extension for modification before delivery. See <doc://com.apple.documentation/documentation/usernotifications/generating-a-remote-notification> for more information about the `mutable-content` flag, and <doc://com.apple.documentation/documentation/usernotifications/modifying-content-in-newly-delivered-notifications> for information about how to modify push notification content in your app extension prior to delivery. The default value of this property is <doc://com.apple.documentation/documentation/swift/false>.
 func (o *CKNotificationInfo) ShouldSendMutableContent() bool {
 	_ret := objc.Send[bool](o.Ptr(), _cKNotificationInfoSelShouldSendMutableContent)
 	return _ret

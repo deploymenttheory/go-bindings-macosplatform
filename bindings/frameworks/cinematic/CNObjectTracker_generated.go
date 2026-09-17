@@ -19,7 +19,7 @@ import (
 
 // ObjectTracker is an idiomatic wrapper over the Objective-C class CNObjectTracker.
 //
-// An object that converts a normalized point or rectangle into a detection track that tracks an object over time.
+// Converts a normalized point or rectangle into a detection track that tracks an object over time.
 type ObjectTracker struct {
 	objref.Handle
 }
@@ -96,7 +96,7 @@ func (ot *ObjectTracker) StartTrackingAtWithinSourceImageSourceDisparity(time_ c
 	return _r
 }
 
-// ContinueTrackingAtSourceImageSourceDisparity continue tracking an object for which tracking has started, and add a new detection to the detection track being built. - Parameters: - time: the presentation time of the frame to be added to the detection track - Returns: a prediction of where the object is in the source image
+// ContinueTrackingAtSourceImageSourceDisparity continue tracking an object for which tracking has started, and add a new detection to the detection track being built. - Parameters: - time: the presentation time of the frame to be added to the detection track - sourceImage: image buffer containing the image - sourceDisparity: disparity buffer containing depth information - Returns: a prediction of where the object is in the source image
 func (ot *ObjectTracker) ContinueTrackingAtSourceImageSourceDisparity(time_ coremedia.CMTime, sourceImage unsafe.Pointer, sourceDisparity unsafe.Pointer) *BoundsPrediction {
 	defer runtime.KeepAlive(ot)
 	_r := objc.Send[objc.ID](objref.IDOf(ot), objc.RegisterName("continueTrackingAt:sourceImage:sourceDisparity:"), time_, sourceImage, sourceDisparity)

@@ -16,9 +16,9 @@ import (
 
 // Object is an idiomatic wrapper over the Objective-C class PHObject.
 //
-// Object is an abstract base — you do not construct it directly. Construct one of [Asset], [Collection], [ObjectPlaceholder] and pass it where a Object is accepted.
+// Object is an abstract base — you do not construct it directly. Construct one of [AssetResourceUploadJob], [Asset], [Collection], [ObjectPlaceholder] and pass it where a Object is accepted.
 //
-// The abstract superclass for Photos model objects (assets and collections).
+// The abstract superclass for Photos model objects, including assets and collections.
 type Object struct {
 	objref.Handle
 }

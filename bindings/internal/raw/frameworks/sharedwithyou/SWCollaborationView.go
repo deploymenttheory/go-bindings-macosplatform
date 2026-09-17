@@ -28,6 +28,8 @@ var (
 	_sWCollaborationViewSelSetCloudSharingDelegate        = objc.RegisterName("setCloudSharingDelegate:")
 	_sWCollaborationViewSelActiveParticipantCount         = objc.RegisterName("activeParticipantCount")
 	_sWCollaborationViewSelSetActiveParticipantCount      = objc.RegisterName("setActiveParticipantCount:")
+	_sWCollaborationViewSelPendingAccessRequestsCount     = objc.RegisterName("pendingAccessRequestsCount")
+	_sWCollaborationViewSelSetPendingAccessRequestsCount  = objc.RegisterName("setPendingAccessRequestsCount:")
 	_sWCollaborationViewSelDelegate                       = objc.RegisterName("delegate")
 	_sWCollaborationViewSelSetDelegate                    = objc.RegisterName("setDelegate:")
 	_sWCollaborationViewSelHeaderTitle                    = objc.RegisterName("headerTitle")
@@ -127,6 +129,23 @@ func (o *SWCollaborationView) ActiveParticipantCount() uint {
 func (o *SWCollaborationView) SetActiveParticipantCount(activeParticipantCount uint) {
 	purego.Main(func() {
 		o.Ptr().Send(_sWCollaborationViewSelSetActiveParticipantCount, activeParticipantCount)
+	})
+}
+
+func (o *SWCollaborationView) PendingAccessRequestsCount() uint {
+	var _mainthread0 uint
+	purego.Main(func() {
+		_mainthread0 = func() uint {
+			_ret := objc.Send[uint](o.Ptr(), _sWCollaborationViewSelPendingAccessRequestsCount)
+			return _ret
+		}()
+	})
+	return _mainthread0
+}
+
+func (o *SWCollaborationView) SetPendingAccessRequestsCount(pendingAccessRequestsCount uint) {
+	purego.Main(func() {
+		o.Ptr().Send(_sWCollaborationViewSelSetPendingAccessRequestsCount, pendingAccessRequestsCount)
 	})
 }
 

@@ -24,6 +24,8 @@ var (
 	_pHPickerUpdateConfigurationSelSetSelectionLimit             = objc.RegisterName("setSelectionLimit:")
 	_pHPickerUpdateConfigurationSelEdgesWithoutContentMargins    = objc.RegisterName("edgesWithoutContentMargins")
 	_pHPickerUpdateConfigurationSelSetEdgesWithoutContentMargins = objc.RegisterName("setEdgesWithoutContentMargins:")
+	_pHPickerUpdateConfigurationSelSearchText                    = objc.RegisterName("searchText")
+	_pHPickerUpdateConfigurationSelSetSearchText                 = objc.RegisterName("setSearchText:")
 )
 
 func PHPickerUpdateConfigurationFromID(id objc.ID) *PHPickerUpdateConfiguration {
@@ -56,4 +58,18 @@ func (o *PHPickerUpdateConfiguration) EdgesWithoutContentMargins() appkit.NSDire
 // Edges of the picker that have no margin between the content and the edge (e.g. without bars in between).
 func (o *PHPickerUpdateConfiguration) SetEdgesWithoutContentMargins(edgesWithoutContentMargins appkit.NSDirectionalRectEdge) {
 	o.Ptr().Send(_pHPickerUpdateConfigurationSelSetEdgesWithoutContentMargins, edgesWithoutContentMargins)
+}
+
+// The search text for the picker.
+func (o *PHPickerUpdateConfiguration) SearchText() *PHPickerSearchText {
+	_ret := objc.Send[objc.ID](o.Ptr(), _pHPickerUpdateConfigurationSelSearchText)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return PHPickerSearchTextFromID(_ret)
+}
+
+// The search text for the picker.
+func (o *PHPickerUpdateConfiguration) SetSearchText(searchText *PHPickerSearchText) {
+	o.Ptr().Send(_pHPickerUpdateConfigurationSelSetSearchText, searchText.Ptr())
 }

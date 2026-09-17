@@ -350,22 +350,6 @@
     "VNVideoProcessor": {
       "doc": "An object that performs offline analysis of video content.",
       "url": "https://developer.apple.com/documentation/vision/vnvideoprocessor"
-    },
-    "VNVideoProcessorCadence": {
-      "doc": "An object that defines the cadence at which to process video.",
-      "url": "https://developer.apple.com/documentation/vision/vnvideoprocessorcadence"
-    },
-    "VNVideoProcessorFrameRateCadence": {
-      "doc": "An object that defines a frame-based cadence for processing a video stream.",
-      "url": "https://developer.apple.com/documentation/vision/vnvideoprocessorframeratecadence"
-    },
-    "VNVideoProcessorRequestProcessingOptions": {
-      "doc": "An object that defines a video processor’s configuration options.",
-      "url": "https://developer.apple.com/documentation/vision/vnvideoprocessorrequestprocessingoptions"
-    },
-    "VNVideoProcessorTimeIntervalCadence": {
-      "doc": "An object that defines a time-based cadence for processing a video stream.",
-      "url": "https://developer.apple.com/documentation/vision/vnvideoprocessortimeintervalcadence"
     }
   },
   "protocols": {
@@ -547,18 +531,6 @@
         }
       }
     },
-    "VNGenerateOpticalFlowRequestComputationAccuracy": {
-      "doc": "The supported optical flow accuracy levels.",
-      "url": "https://developer.apple.com/documentation/vision/vngenerateopticalflowrequestcomputationaccuracy"
-    },
-    "VNGeneratePersonSegmentationRequestQualityLevel": {
-      "doc": "Constants that define the levels of quality for a person segmentation request.",
-      "url": "https://developer.apple.com/documentation/vision/vngeneratepersonsegmentationrequestqualitylevel"
-    },
-    "VNHumanBodyPose3DObservationHeightEstimation": {
-      "doc": "Constants that identify body height estimation techniques.",
-      "url": "https://developer.apple.com/documentation/vision/vnhumanbodypose3dobservationheightestimation"
-    },
     "VNImageCropAndScaleOption": {
       "doc": "Options that define how Vision crops and scales an input-image.",
       "url": "https://developer.apple.com/documentation/vision/vnimagecropandscaleoption",
@@ -634,10 +606,6 @@
           "url": "https://developer.apple.com/documentation/vision/vnrequesttrackinglevel/fast"
         }
       }
-    },
-    "VNTrackOpticalFlowRequestComputationAccuracy": {
-      "doc": "Computational accuracy options.",
-      "url": "https://developer.apple.com/documentation/vision/vntrackopticalflowrequestcomputationaccuracy"
     }
   },
   "methods": {

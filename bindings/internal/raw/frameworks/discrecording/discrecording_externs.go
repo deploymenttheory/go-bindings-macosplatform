@@ -819,33 +819,48 @@ func DRDeviceAppearedNotification() *foundation.NSString {
 }
 
 // @const	DRDeviceBurnSpeedBD1x	4496.0 KB/sec.
-func DRDeviceBurnSpeedBD1x() uintptr {
+func DRDeviceBurnSpeedBD1x() float32 {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceBurnSpeedBD1x")
-	return ptr
+	if ptr == 0 {
+		return 0
+	}
+	return *(*float32)(unsafe.Pointer(ptr))
 }
 
 // @const	DRDeviceBurnSpeedCD1x		176.4 KB/sec.
-func DRDeviceBurnSpeedCD1x() uintptr {
+func DRDeviceBurnSpeedCD1x() float32 {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceBurnSpeedCD1x")
-	return ptr
+	if ptr == 0 {
+		return 0
+	}
+	return *(*float32)(unsafe.Pointer(ptr))
 }
 
 // @const	DRDeviceBurnSpeedDVD1x	1385.0 KB/sec.
-func DRDeviceBurnSpeedDVD1x() uintptr {
+func DRDeviceBurnSpeedDVD1x() float32 {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceBurnSpeedDVD1x")
-	return ptr
+	if ptr == 0 {
+		return 0
+	}
+	return *(*float32)(unsafe.Pointer(ptr))
 }
 
 // @const	DRDeviceBurnSpeedHDDVD1x	4568.0 KB/sec.
-func DRDeviceBurnSpeedHDDVD1x() uintptr {
+func DRDeviceBurnSpeedHDDVD1x() float32 {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceBurnSpeedHDDVD1x")
-	return ptr
+	if ptr == 0 {
+		return 0
+	}
+	return *(*float32)(unsafe.Pointer(ptr))
 }
 
 // @const		DRDeviceBurnSpeedMax @discussion	A value representing the maximum speed at which a device can burn. The actual speed will vary from device to device.
-func DRDeviceBurnSpeedMax() uintptr {
+func DRDeviceBurnSpeedMax() float32 {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceBurnSpeedMax")
-	return ptr
+	if ptr == 0 {
+		return 0
+	}
+	return *(*float32)(unsafe.Pointer(ptr))
 }
 
 // @const		DRDeviceBurnSpeedsKey @discussion	One of the keys in the dictionary returned by the @link //apple_ref/occ/instm/DRDevice/status status @/link method. NSArray containing the possible burn speeds available to use. This key may not be present if no media is inserted.
@@ -4403,33 +4418,48 @@ func KDRDeviceAppearedNotification() uintptr {
 }
 
 // @const	kDRDeviceBurnSpeedBD1x @discussion			A predefined value for the minimum BD burn speed of 4,496.0 kilobytes per second, where 1 kilobyte = 1,000 bytes.
-func KDRDeviceBurnSpeedBD1x() uintptr {
+func KDRDeviceBurnSpeedBD1x() float32 {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "kDRDeviceBurnSpeedBD1x")
-	return ptr
+	if ptr == 0 {
+		return 0
+	}
+	return *(*float32)(unsafe.Pointer(ptr))
 }
 
 // @const	kDRDeviceBurnSpeedCD1x @discussion			A predefined value for the minimum CD burn speed of 176.4 kilobytes per second, where 1 kilobyte = 1,000 bytes.
-func KDRDeviceBurnSpeedCD1x() uintptr {
+func KDRDeviceBurnSpeedCD1x() float32 {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "kDRDeviceBurnSpeedCD1x")
-	return ptr
+	if ptr == 0 {
+		return 0
+	}
+	return *(*float32)(unsafe.Pointer(ptr))
 }
 
 // @const	kDRDeviceBurnSpeedDVD1x @discussion			A predefined value for the minimum DVD burn speed of 1,385.0 kilobytes per second, where 1 kilobyte = 1,000 bytes.
-func KDRDeviceBurnSpeedDVD1x() uintptr {
+func KDRDeviceBurnSpeedDVD1x() float32 {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "kDRDeviceBurnSpeedDVD1x")
-	return ptr
+	if ptr == 0 {
+		return 0
+	}
+	return *(*float32)(unsafe.Pointer(ptr))
 }
 
 // @const	kDRDeviceBurnSpeedHDDVD1x @discussion			A predefined value for the minimum HD DVD burn speed of 4,496.0 kilobytes per second, where 1 kilobyte = 1,000 bytes.
-func KDRDeviceBurnSpeedHDDVD1x() uintptr {
+func KDRDeviceBurnSpeedHDDVD1x() float32 {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "kDRDeviceBurnSpeedHDDVD1x")
-	return ptr
+	if ptr == 0 {
+		return 0
+	}
+	return *(*float32)(unsafe.Pointer(ptr))
 }
 
 // @const	kDRDeviceBurnSpeedMax @discussion			A predefined value used to request the maximum speed at which a device can perform a burn. On receiving a burn request of kDRDeviceBurnSpeedMax, a drive selects the highest usable speed given its capabilities, the bus bandwidth, and the capabilities of the recordable disc.
-func KDRDeviceBurnSpeedMax() uintptr {
+func KDRDeviceBurnSpeedMax() float32 {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "kDRDeviceBurnSpeedMax")
-	return ptr
+	if ptr == 0 {
+		return 0
+	}
+	return *(*float32)(unsafe.Pointer(ptr))
 }
 
 // @const kDRDeviceBurnSpeedsKey @discussion	A key for the dictionary returned by @link DRDeviceCopyStatus DRDeviceCopyStatus @/link. The value of this key is a reference to a CFArray object containing the available burn speeds. This key may not be accessible if there is no disc in the drive.

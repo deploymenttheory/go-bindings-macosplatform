@@ -51,6 +51,7 @@ func (o *NSXPCCoder) DecodeXPCObjectOfTypeForKey(type_ unsafe.Pointer, key *NSSt
 	return NSObjectFromID(_ret)
 }
 
+// User-defined information associated with this coder.
 func (o *NSXPCCoder) UserInfo() NSObjectProtocol {
 	_ret := objc.Send[NSObjectProtocol](o.Ptr(), _nSXPCCoderSelUserInfo)
 	return _ret
@@ -60,6 +61,7 @@ func (o *NSXPCCoder) SetUserInfo(userInfo NSObjectProtocol) {
 	o.Ptr().Send(_nSXPCCoderSelSetUserInfo, userInfo)
 }
 
+// The current `NSXPCConnection` that is encoding or decoding.
 func (o *NSXPCCoder) Connection() *NSXPCConnection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXPCCoderSelConnection)
 	if _ret != 0 {

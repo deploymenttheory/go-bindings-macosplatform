@@ -111,7 +111,7 @@ func (ec *ExtensionContext) OpenURLCompletionHandler(url string, completionHandl
 	objc.Send[objc.ID](objref.IDOf(ec), objc.RegisterName("openURL:completionHandler:"), rt.FileURL(url), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
 }
 
-// InputItems returns the input items.
+// InputItems returns the list of input NSExtensionItems associated with the context. If the context has no input items, this array will be empty.
 func (ec *ExtensionContext) InputItems() obj.Object {
 	defer runtime.KeepAlive(ec)
 	_r := objc.Send[objc.ID](objref.IDOf(ec), objc.RegisterName("inputItems"))

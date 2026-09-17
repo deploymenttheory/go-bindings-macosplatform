@@ -109,7 +109,7 @@ func (cc *CaptureConnection) WithAutomaticallyAdjustsVideoMirroring(automaticall
 	return cc
 }
 
-// WithVideoRotationAngle sets a rotation angle the connection applies to a video flowing through it.
+// WithVideoRotationAngle sets a rotation angle the connection applies to the video flowing through it.
 func (cc *CaptureConnection) WithVideoRotationAngle(videoRotationAngle float64) *CaptureConnection {
 	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setVideoRotationAngle:"), videoRotationAngle)
 	return cc
@@ -136,6 +136,18 @@ func (cc *CaptureConnection) WithVideoMinFrameDuration(videoMinFrameDuration cor
 // WithVideoMaxFrameDuration sets the largest time interval the connection can apply between consecutive video frames.
 func (cc *CaptureConnection) WithVideoMaxFrameDuration(videoMaxFrameDuration coremedia.CMTime) *CaptureConnection {
 	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setVideoMaxFrameDuration:"), videoMaxFrameDuration)
+	return cc
+}
+
+// WithAutomaticallyEnablesLowLightVideoNoiseReduction sets indicates whether the connection should automatically enable low light video noise reduction when the connection supports it.
+func (cc *CaptureConnection) WithAutomaticallyEnablesLowLightVideoNoiseReduction(automaticallyEnablesLowLightVideoNoiseReduction bool) *CaptureConnection {
+	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setAutomaticallyEnablesLowLightVideoNoiseReduction:"), automaticallyEnablesLowLightVideoNoiseReduction)
+	return cc
+}
+
+// WithLowLightVideoNoiseReductionEnabled sets indicates whether low light video noise reduction is enabled for the current session.
+func (cc *CaptureConnection) WithLowLightVideoNoiseReductionEnabled(lowLightVideoNoiseReductionEnabled bool) *CaptureConnection {
+	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setLowLightVideoNoiseReductionEnabled:"), lowLightVideoNoiseReductionEnabled)
 	return cc
 }
 
@@ -273,5 +285,26 @@ func (cc *CaptureConnection) IsVideoMaxFrameDurationSupported() bool {
 func (cc *CaptureConnection) VideoMaxFrameDuration() coremedia.CMTime {
 	defer runtime.KeepAlive(cc)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(cc), objc.RegisterName("videoMaxFrameDuration"))
+	return _r
+}
+
+// IsLowLightVideoNoiseReductionSupported reports whether the connection supports low light video noise reduction. This property returns `true` if the connection's source device's active format supports low light video noise reduction (see “AVCaptureDeviceFormat/isLowLightVideoNoiseReductionSupported“) and the connection's output supports the feature. This value reflects the active configuration and can change as the active format, video stabilization mode or auto video frame rate changes. See “automaticallyEnablesLowLightVideoNoiseReduction“ for a detailed discussion. This property is key-value observable.
+func (cc *CaptureConnection) IsLowLightVideoNoiseReductionSupported() bool {
+	defer runtime.KeepAlive(cc)
+	_r := objc.Send[bool](objref.IDOf(cc), objc.RegisterName("isLowLightVideoNoiseReductionSupported"))
+	return _r
+}
+
+// AutomaticallyEnablesLowLightVideoNoiseReduction reports whether the connection should automatically enable low light video noise reduction when the connection supports it. On a connection where “isLowLightVideoNoiseReductionSupported“ is `true`, the system can enable low light video noise reduction to improve video quality at the cost of additional power. This property defaults to `true` for movie file output connections. When “automaticallyEnablesLowLightVideoNoiseReduction“ is `true`, the connection sets “isLowLightVideoNoiseReductionEnabled“ to `true` automatically when the session configuration is committed and the connection supports the feature. For `AVCaptureMultiCamSession` configurations with multiple movie file outputs, automatic enablement is suppressed because the feature can only be active on one output at a time; in that case, set this property to `false` and control “isLowLightVideoNoiseReductionEnabled“ directly on the desired connection. Enabling the feature on more than one movie file output connection increases the session's `hardwareCost` and may result in an `AVCaptureSessionRuntimeErrorNotification`. Setting this property on a connection that does not support low light video noise reduction is permitted but has no effect. Clients can key-value observe “isLowLightVideoNoiseReductionEnabled“ to know when the connection has automatically changed the value.
+func (cc *CaptureConnection) AutomaticallyEnablesLowLightVideoNoiseReduction() bool {
+	defer runtime.KeepAlive(cc)
+	_r := objc.Send[bool](objref.IDOf(cc), objc.RegisterName("automaticallyEnablesLowLightVideoNoiseReduction"))
+	return _r
+}
+
+// IsLowLightVideoNoiseReductionEnabled reports whether low light video noise reduction is enabled for the current session. A `BOOL` indicating whether low light video noise reduction is enabled on the connection. To set this property directly, first set “automaticallyEnablesLowLightVideoNoiseReduction“ to `false`; setting this property while “automaticallyEnablesLowLightVideoNoiseReduction“ is `true` throws an `NSInvalidArgumentException`. This property may only be set to `true` if the connection's “isLowLightVideoNoiseReductionSupported“ property returns `true`, otherwise an `NSInvalidArgumentException` is thrown. This property is key-value observable.
+func (cc *CaptureConnection) IsLowLightVideoNoiseReductionEnabled() bool {
+	defer runtime.KeepAlive(cc)
+	_r := objc.Send[bool](objref.IDOf(cc), objc.RegisterName("isLowLightVideoNoiseReductionEnabled"))
 	return _r
 }

@@ -36,11 +36,13 @@ func NSProtocolCheckerFromID(id objc.ID) *NSProtocolChecker {
 	return o
 }
 
+// The protocol object the receiver uses to verify whether a given message should be forwarded to its target.
 func (o *NSProtocolChecker) Protocol() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSProtocolCheckerSelProtocol)
 	return _ret
 }
 
+// The target of the receiver.
 func (o *NSProtocolChecker) Target() *NSObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSProtocolCheckerSelTarget)
 	if _ret != 0 {

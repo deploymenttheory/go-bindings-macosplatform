@@ -26,6 +26,7 @@ var (
 	_mPSNDArrayMultiaryKernelSelEncodeToCommandBufferSourceArraysResultStateOutputStateIsTemporary = objc.RegisterName("encodeToCommandBuffer:sourceArrays:resultState:outputStateIsTemporary:")
 	_mPSNDArrayMultiaryKernelSelEncodeToCommandBufferSourceArraysResultStateDestinationArray       = objc.RegisterName("encodeToCommandBuffer:sourceArrays:resultState:destinationArray:")
 	_mPSNDArrayMultiaryKernelSelEncodeToCommandEncoderCommandBufferSourceArraysDestinationArray    = objc.RegisterName("encodeToCommandEncoder:commandBuffer:sourceArrays:destinationArray:")
+	_mPSNDArrayMultiaryKernelSelEncodeWithMTL4CommandEncoderSourceArraysDestinationArray           = objc.RegisterName("encodeWithMTL4CommandEncoder:sourceArrays:destinationArray:")
 )
 
 func MPSNDArrayMultiaryKernelFromID(id objc.ID) *MPSNDArrayMultiaryKernel {
@@ -85,4 +86,9 @@ func (o *MPSNDArrayMultiaryKernel) EncodeToCommandBufferSourceArraysResultStateD
 // @abstract   Encode a simple inference NDArray kernel and return a NDArray to hold the result @param      encoder                       The MTLComputeCommandEncoder that the kernel will be encoded on @param      commandBuffer          The command buffer into which to encode the kernel @param      sourceArrays             The list of sources for the filter in a NSArray. Ordering to be defined by subclass @param      destination               A destination array to contain the result of the calculation when the command buffer completes successfully.
 func (o *MPSNDArrayMultiaryKernel) EncodeToCommandEncoderCommandBufferSourceArraysDestinationArray(encoder metal.MTLComputeCommandEncoder, commandBuffer metal.MTLCommandBuffer, sourceArrays *foundation.NSArray[*mpscore.MPSNDArray], destination *mpscore.MPSNDArray) {
 	o.Ptr().Send(_mPSNDArrayMultiaryKernelSelEncodeToCommandEncoderCommandBufferSourceArraysDestinationArray, encoder, commandBuffer, sourceArrays.Ptr(), destination.Ptr())
+}
+
+// @abstract   Encode a simple inference NDArray kernel. The encoder associates the commands with MTLStageDispatch. Synchronize your workloads against this stage when using this function to prevent race conditions. @param      encoder      The MTL4ComputeCommandEncoder to encode the kernel with. @param      sourceArrays The source NDArray instances in a NSArray. Make sure the instances are arranged in the order required by the MPSNDArrayMultiaryKernel subclass. @param      destination  The destination NDArray.
+func (o *MPSNDArrayMultiaryKernel) EncodeWithMTL4CommandEncoderSourceArraysDestinationArray(encoder metal.MTL4ComputeCommandEncoder, sourceArrays *foundation.NSArray[*mpscore.MPSNDArray], destination *mpscore.MPSNDArray) {
+	o.Ptr().Send(_mPSNDArrayMultiaryKernelSelEncodeWithMTL4CommandEncoderSourceArraysDestinationArray, encoder, sourceArrays.Ptr(), destination.Ptr())
 }

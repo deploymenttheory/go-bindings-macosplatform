@@ -9,8 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A unit of measure for frequency.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsunitfrequency
 type NSUnitFrequency struct {
 	NSDimension
@@ -39,6 +37,7 @@ func NSUnitFrequencyFromID(id objc.ID) *NSUnitFrequency {
 	return o
 }
 
+// The terahertz unit of frequency.
 func NSUnitFrequencyTerahertz() *NSUnitFrequency {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitFrequency), _nSUnitFrequencySelTerahertz)
 	if _ret != 0 {
@@ -47,6 +46,7 @@ func NSUnitFrequencyTerahertz() *NSUnitFrequency {
 	return NSUnitFrequencyFromID(_ret)
 }
 
+// The gigahertz unit of frequency.
 func NSUnitFrequencyGigahertz() *NSUnitFrequency {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitFrequency), _nSUnitFrequencySelGigahertz)
 	if _ret != 0 {
@@ -55,6 +55,7 @@ func NSUnitFrequencyGigahertz() *NSUnitFrequency {
 	return NSUnitFrequencyFromID(_ret)
 }
 
+// The megahertz unit of frequency.
 func NSUnitFrequencyMegahertz() *NSUnitFrequency {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitFrequency), _nSUnitFrequencySelMegahertz)
 	if _ret != 0 {
@@ -63,6 +64,7 @@ func NSUnitFrequencyMegahertz() *NSUnitFrequency {
 	return NSUnitFrequencyFromID(_ret)
 }
 
+// The kilohertz unit of frequency.
 func NSUnitFrequencyKilohertz() *NSUnitFrequency {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitFrequency), _nSUnitFrequencySelKilohertz)
 	if _ret != 0 {
@@ -71,6 +73,7 @@ func NSUnitFrequencyKilohertz() *NSUnitFrequency {
 	return NSUnitFrequencyFromID(_ret)
 }
 
+// The hertz unit of frequency.
 func NSUnitFrequencyHertz() *NSUnitFrequency {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitFrequency), _nSUnitFrequencySelHertz)
 	if _ret != 0 {
@@ -79,6 +82,7 @@ func NSUnitFrequencyHertz() *NSUnitFrequency {
 	return NSUnitFrequencyFromID(_ret)
 }
 
+// The millihertz unit of frequency.
 func NSUnitFrequencyMillihertz() *NSUnitFrequency {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitFrequency), _nSUnitFrequencySelMillihertz)
 	if _ret != 0 {
@@ -87,6 +91,7 @@ func NSUnitFrequencyMillihertz() *NSUnitFrequency {
 	return NSUnitFrequencyFromID(_ret)
 }
 
+// The microhertz unit of frequency.
 func NSUnitFrequencyMicrohertz() *NSUnitFrequency {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitFrequency), _nSUnitFrequencySelMicrohertz)
 	if _ret != 0 {
@@ -95,6 +100,7 @@ func NSUnitFrequencyMicrohertz() *NSUnitFrequency {
 	return NSUnitFrequencyFromID(_ret)
 }
 
+// The nanohertz unit of frequency.
 func NSUnitFrequencyNanohertz() *NSUnitFrequency {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitFrequency), _nSUnitFrequencySelNanohertz)
 	if _ret != 0 {

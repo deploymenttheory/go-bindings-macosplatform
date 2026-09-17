@@ -92,13 +92,13 @@ func (o *NSURLRequest) InitWithURLCachePolicyTimeoutInterval(url *NSURL, cachePo
 	return NSURLRequestFromID(_ret)
 }
 
-// @property supportsSecureCoding @abstract Indicates that NSURLRequest implements the NSSecureCoding protocol. @result A BOOL value set to YES.
+// Indicates that `NSURLRequest` implements the `NSSecureCoding` protocol.
 func NSURLRequestSupportsSecureCoding() bool {
 	_ret := objc.Send[bool](objc.ID(_clsNSURLRequest), _nSURLRequestSelSupportsSecureCoding)
 	return _ret
 }
 
-// @abstract Returns the URL of the receiver. @result The URL of the receiver.
+// The URL of the receiver.
 func (o *NSURLRequest) URL() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLRequestSelURL)
 	if _ret != 0 {
@@ -107,19 +107,19 @@ func (o *NSURLRequest) URL() *NSURL {
 	return NSURLFromID(_ret)
 }
 
-// @abstract Returns the cache policy of the receiver. @result The cache policy of the receiver.
+// The cache policy of the receiver.
 func (o *NSURLRequest) CachePolicy() NSURLRequestCachePolicy {
 	_ret := objc.Send[NSURLRequestCachePolicy](o.Ptr(), _nSURLRequestSelCachePolicy)
 	return _ret
 }
 
-// @abstract Returns the timeout interval of the receiver. @discussion The timeout interval specifies the limit on the idle interval allotted to a request in the process of loading. The "idle interval" is defined as the period of time that has passed since the last instance of load activity occurred for a request that is in the process of loading. Hence, when an instance of load activity occurs (e.g. bytes are received from the network for a request), the idle interval for a request is reset to 0. If the idle interval ever becomes greater than or equal to the timeout interval, the request is considered to have timed out. This timeout interval is measured in seconds. @result The timeout interval of the receiver.
+// The timeout interval of the receiver, measured in seconds. The timeout interval specifies the limit on the idle interval allotted to a request in the process of loading. The "idle interval" is defined as the period of time that has passed since the last instance of load activity occurred for a request that is in the process of loading. Hence, when an instance of load activity occurs (e.g. bytes are received from the network for a request), the idle interval for a request is reset to 0. If the idle interval ever becomes greater than or equal to the timeout interval, the request is considered to have timed out.
 func (o *NSURLRequest) TimeoutInterval() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSURLRequestSelTimeoutInterval)
 	return _ret
 }
 
-// @abstract The main document URL associated with this load. @discussion This URL is used for the cookie "same domain as main document" policy, and attributing the request as a sub-resource of a user-specified URL. There may also be other future uses. See setMainDocumentURL: @result The main document URL.
+// The main document URL associated with this load. This URL is used for the cookie "same domain as main document" policy, and attributing the request as a sub-resource of a user-specified URL. There may also be other future uses.
 func (o *NSURLRequest) MainDocumentURL() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLRequestSelMainDocumentURL)
 	if _ret != 0 {
@@ -128,55 +128,55 @@ func (o *NSURLRequest) MainDocumentURL() *NSURL {
 	return NSURLFromID(_ret)
 }
 
-// @abstract Returns the NSURLRequestNetworkServiceType associated with this request. @discussion  This will return NSURLNetworkServiceTypeDefault for requests that have not explicitly set a networkServiceType (using the setNetworkServiceType method). @result The NSURLRequestNetworkServiceType associated with this request.
+// The `NSURLRequestNetworkServiceType` associated with this request. Returns `NSURLNetworkServiceTypeDefault` for requests that have not explicitly set a network service type.
 func (o *NSURLRequest) NetworkServiceType() NSURLRequestNetworkServiceType {
 	_ret := objc.Send[NSURLRequestNetworkServiceType](o.Ptr(), _nSURLRequestSelNetworkServiceType)
 	return _ret
 }
 
-// @abstract returns whether a connection created with this request is allowed to use the built in cellular radios (if present). @result YES if the receiver is allowed to use the built in cellular radios to satisfy the request, NO otherwise.
+// A Boolean value that indicates whether a connection created with this request is allowed to use the built-in cellular radios (if present).
 func (o *NSURLRequest) AllowsCellularAccess() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSURLRequestSelAllowsCellularAccess)
 	return _ret
 }
 
-// @abstract returns whether a connection created with this request is allowed to use network interfaces which have been marked as expensive. @result YES if the receiver is allowed to use an interface marked as expensive to satisfy the request, NO otherwise.
+// A Boolean value that indicates whether a connection created with this request is allowed to use network interfaces which have been marked as expensive.
 func (o *NSURLRequest) AllowsExpensiveNetworkAccess() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSURLRequestSelAllowsExpensiveNetworkAccess)
 	return _ret
 }
 
-// @abstract returns whether a connection created with this request is allowed to use network interfaces which have been marked as constrained. @result YES if the receiver is allowed to use an interface marked as constrained to satisfy the request, NO otherwise.
+// A Boolean value that indicates whether a connection created with this request is allowed to use network interfaces which have been marked as constrained.
 func (o *NSURLRequest) AllowsConstrainedNetworkAccess() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSURLRequestSelAllowsConstrainedNetworkAccess)
 	return _ret
 }
 
-// @abstract returns whether a connection created with this request is allowed to use network interfaces which have been marked as ultra constrained. @result YES if the receiver is allowed to use an interface marked as ultra constrained to satisfy the request, NO otherwise.
+// A Boolean value that indicates whether a connection created with this request is allowed to use network interfaces which have been marked as ultra constrained.
 func (o *NSURLRequest) AllowsUltraConstrainedNetworkAccess() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSURLRequestSelAllowsUltraConstrainedNetworkAccess)
 	return _ret
 }
 
-// @abstract returns whether we assume that server supports HTTP/3. Enables QUIC racing without HTTP/3 service discovery. @result YES if server endpoint is known to support HTTP/3. Defaults to NO. The default may be YES in a future OS update.
+// A Boolean value that indicates whether the server is assumed to support HTTP/3. When `YES`, enables QUIC racing without HTTP/3 service discovery. Defaults to `NO`. The default may be `YES` in a future OS update.
 func (o *NSURLRequest) AssumesHTTP3Capable() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSURLRequestSelAssumesHTTP3Capable)
 	return _ret
 }
 
-// @abstract Returns the NSURLRequestAttribution associated with this request. @discussion This will return NSURLRequestAttributionDeveloper for requests that have not explicitly set an attribution. @result The NSURLRequestAttribution associated with this request.
+// The `NSURLRequestAttribution` associated with this request. Returns `NSURLRequestAttributionDeveloper` for requests that have not explicitly set an attribution.
 func (o *NSURLRequest) Attribution() NSURLRequestAttribution {
 	_ret := objc.Send[NSURLRequestAttribution](o.Ptr(), _nSURLRequestSelAttribution)
 	return _ret
 }
 
-// @abstract sets whether a request is required to do DNSSEC validation during DNS lookup. @discussion YES, if the DNS lookup for this request should require DNSSEC validation, No otherwise. Defaults to NO.
+// A Boolean value that indicates whether a request requires DNSSEC validation during DNS lookup. `YES` if the DNS lookup for this request should require DNSSEC validation. Defaults to `NO`.
 func (o *NSURLRequest) RequiresDNSSECValidation() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSURLRequestSelRequiresDNSSECValidation)
 	return _ret
 }
 
-// @abstract Allows storing and usage of DNS answers, potentially beyond TTL expiry, in a persistent per-process cache. This should only be set for hostnames whose resolutions are not expected to change across networks. @discussion YES, if the DNS lookup for this request is allowed to use a persistent per-process cache, NO otherwise. Defaults to NO.
+// A Boolean value that indicates whether storing and usage of DNS answers in a persistent per-process cache is allowed. This should only be set for hostnames whose resolutions are not expected to change across networks. Defaults to `NO`.
 func (o *NSURLRequest) AllowsPersistentDNS() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSURLRequestSelAllowsPersistentDNS)
 	return _ret
@@ -199,7 +199,7 @@ func (o *NSURLRequest) ValueForHTTPHeaderField(field *NSString) *NSString {
 	return NSStringFromID(_ret)
 }
 
-// @abstract Returns the HTTP request method of the receiver. @result the HTTP request method of the receiver.
+// The HTTP request method of the receiver.
 func (o *NSURLRequest) HTTPMethod() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLRequestSelHTTPMethod)
 	if _ret != 0 {
@@ -208,7 +208,7 @@ func (o *NSURLRequest) HTTPMethod() *NSString {
 	return NSStringFromID(_ret)
 }
 
-// @abstract Returns a dictionary containing all the HTTP header fields of the receiver. @result a dictionary containing all the HTTP header fields of the receiver.
+// A dictionary containing all the HTTP header fields of the receiver.
 func (o *NSURLRequest) AllHTTPHeaderFields() *NSDictionary[*NSString, *NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLRequestSelAllHTTPHeaderFields)
 	if _ret != 0 {
@@ -217,7 +217,7 @@ func (o *NSURLRequest) AllHTTPHeaderFields() *NSDictionary[*NSString, *NSString]
 	return NSDictionaryFromID[*NSString, *NSString](_ret)
 }
 
-// @abstract Returns the request body data of the receiver. @discussion This data is sent as the message body of the request, as in done in an HTTP POST request. @result The request body data of the receiver.
+// The request body data of the receiver. This data is sent as the message body of the request, as in done in an HTTP POST request.
 func (o *NSURLRequest) HTTPBody() *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLRequestSelHTTPBody)
 	if _ret != 0 {
@@ -226,7 +226,7 @@ func (o *NSURLRequest) HTTPBody() *NSData {
 	return NSDataFromID(_ret)
 }
 
-// @abstract Returns the request body stream of the receiver if any has been set @discussion The stream is returned for examination only; it is not safe for the caller to manipulate the stream in any way.  Also note that the HTTPBodyStream and HTTPBody are mutually exclusive - only one can be set on a given request.  Also note that the body stream is preserved across copies, but is LOST when the request is coded via the NSCoding protocol @result The request body stream of the receiver.
+// The request body stream of the receiver, if any. The stream is returned for examination only; it is not safe for the caller to manipulate the stream in any way. Note that the `HTTPBodyStream` and `HTTPBody` are mutually exclusive - only one can be set on a given request. Also note that the body stream is preserved across copies, but is lost when the request is coded via the `NSCoding` protocol.
 func (o *NSURLRequest) HTTPBodyStream() *NSInputStream {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLRequestSelHTTPBodyStream)
 	if _ret != 0 {
@@ -235,13 +235,13 @@ func (o *NSURLRequest) HTTPBodyStream() *NSInputStream {
 	return NSInputStreamFromID(_ret)
 }
 
-// @abstract Determine whether default cookie handling will happen for this request. @discussion NOTE: This value is not used prior to 10.3 @result YES if cookies will be sent with and set for this request; otherwise NO.
+// A Boolean value that indicates whether the default cookie handling will happen for this request.
 func (o *NSURLRequest) HTTPShouldHandleCookies() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSURLRequestSelHTTPShouldHandleCookies)
 	return _ret
 }
 
-// @abstract Reports whether the receiver is not expected to wait for the previous response before transmitting. @result YES if the receiver should transmit before the previous response is received.  NO if the receiver should wait for the previous response before transmitting.
+// A Boolean value that indicates whether the request should not wait for the previous response before transmitting.
 // Deprecated: Only supported in the classic loader, please adopt HTTP/2 and HTTP/3 instead
 func (o *NSURLRequest) HTTPShouldUsePipelining() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSURLRequestSelHTTPShouldUsePipelining)

@@ -67,7 +67,7 @@ func NewMTRBaseClusterNetworkCommissioningWithDeviceEndpointQueue(device *MTRBas
 	return mTRBaseClusterNetworkCommissioningAdopt(_id)
 }
 
-// ScanNetworksWithParamsCompletion command ScanNetworks Detemine the set of networks the device sees as available.
+// ScanNetworksWithParamsCompletion command ScanNetworks This command is used to scan for available networks on the network interface associated with the cluster instance.
 //
 // ScanNetworksWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ScanNetworksWithParamsCompletion(ctx context.Context, params *MTRNetworkCommissioningClusterScanNetworksParams) (result *MTRNetworkCommissioningClusterScanNetworksResponseParams, err error) {
@@ -120,7 +120,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) ScanNetworksWithCompletion(ctx 
 	}
 }
 
-// AddOrUpdateWiFiNetworkWithParamsCompletion command AddOrUpdateWiFiNetwork Add or update the credentials for a given Wi-Fi network.
+// AddOrUpdateWiFiNetworkWithParamsCompletion command AddOrUpdateWiFiNetwork This command is used to add or update a Wi-Fi network configuration.
 //
 // AddOrUpdateWiFiNetworkWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) AddOrUpdateWiFiNetworkWithParamsCompletion(ctx context.Context, params *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) (result *MTRNetworkCommissioningClusterNetworkConfigResponseParams, err error) {
@@ -147,7 +147,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) AddOrUpdateWiFiNetworkWithParam
 	}
 }
 
-// AddOrUpdateThreadNetworkWithParamsCompletion command AddOrUpdateThreadNetwork Add or update the credentials for a given Thread network.
+// AddOrUpdateThreadNetworkWithParamsCompletion command AddOrUpdateThreadNetwork This command is used to add or update a Thread network configuration.
 //
 // AddOrUpdateThreadNetworkWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) AddOrUpdateThreadNetworkWithParamsCompletion(ctx context.Context, params *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams) (result *MTRNetworkCommissioningClusterNetworkConfigResponseParams, err error) {
@@ -174,7 +174,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) AddOrUpdateThreadNetworkWithPar
 	}
 }
 
-// RemoveNetworkWithParamsCompletion command RemoveNetwork Remove the definition of a given network (including its credentials).
+// RemoveNetworkWithParamsCompletion command RemoveNetwork This command is used to remove a network configuration on the network interface associated with the cluster instance.
 //
 // RemoveNetworkWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) RemoveNetworkWithParamsCompletion(ctx context.Context, params *MTRNetworkCommissioningClusterRemoveNetworkParams) (result *MTRNetworkCommissioningClusterNetworkConfigResponseParams, err error) {
@@ -201,7 +201,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) RemoveNetworkWithParamsCompleti
 	}
 }
 
-// ConnectNetworkWithParamsCompletion command ConnectNetwork Connect to the specified network, using previously-defined credentials.
+// ConnectNetworkWithParamsCompletion command ConnectNetwork This command is used to connect to a network on the network interface associated with the cluster instance.
 //
 // ConnectNetworkWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ConnectNetworkWithParamsCompletion(ctx context.Context, params *MTRNetworkCommissioningClusterConnectNetworkParams) (result *MTRNetworkCommissioningClusterConnectNetworkResponseParams, err error) {
@@ -228,7 +228,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) ConnectNetworkWithParamsComplet
 	}
 }
 
-// ReorderNetworkWithParamsCompletion command ReorderNetwork Modify the order in which networks will be presented in the Networks attribute.
+// ReorderNetworkWithParamsCompletion command ReorderNetwork This command is used to re-order the network configuration list.
 //
 // ReorderNetworkWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReorderNetworkWithParamsCompletion(ctx context.Context, params *MTRNetworkCommissioningClusterReorderNetworkParams) (result *MTRNetworkCommissioningClusterNetworkConfigResponseParams, err error) {

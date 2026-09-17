@@ -163,6 +163,9 @@ type CGPDFDictionary struct{}
 // CGPDFDocument is an opaque type.
 type CGPDFDocument struct{}
 
+// CGPDFMarkedContentItem is an opaque type.
+type CGPDFMarkedContentItem struct{}
+
 // An object representing content within a PDF document.
 // CGPDFObject is an opaque type.
 type CGPDFObject struct{}
@@ -186,6 +189,9 @@ type CGPDFStream struct{}
 // A text string in a PDF document.
 // CGPDFString is an opaque type.
 type CGPDFString struct{}
+
+// CGPDFStructureElement is an opaque type.
+type CGPDFStructureElement struct{}
 
 // An opaque data type used to convert PostScript data to PDF data.
 // CGPSConverter is an opaque type.

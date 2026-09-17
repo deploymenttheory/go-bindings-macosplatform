@@ -15,8 +15,6 @@ import (
 )
 
 // WorkspaceAuthorization is an idiomatic wrapper over the Objective-C class NSWorkspaceAuthorization.
-//
-// The authorization granted to the app by the user.
 type WorkspaceAuthorization struct {
 	objref.Handle
 }

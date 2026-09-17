@@ -164,6 +164,7 @@ func (o *NSHashTable[ObjectType]) MinusHashTable(other *NSHashTable[ObjectType])
 	o.Ptr().Send(_nSHashTableSelMinusHashTable, other.Ptr())
 }
 
+// The pointer functions for the hash table.
 func (o *NSHashTable[ObjectType]) PointerFunctions() *NSPointerFunctions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSHashTableSelPointerFunctions)
 	if _ret != 0 {
@@ -172,11 +173,13 @@ func (o *NSHashTable[ObjectType]) PointerFunctions() *NSPointerFunctions {
 	return NSPointerFunctionsFromID(_ret)
 }
 
+// The number of elements in the hash table.
 func (o *NSHashTable[ObjectType]) Count() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSHashTableSelCount)
 	return _ret
 }
 
+// The hash table's members.
 func (o *NSHashTable[ObjectType]) AllObjects() *NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSHashTableSelAllObjects)
 	if _ret != 0 {
@@ -185,11 +188,13 @@ func (o *NSHashTable[ObjectType]) AllObjects() *NSArray[ObjectType] {
 	return NSArrayFromID[ObjectType](_ret)
 }
 
+// One of the objects in the hash table. One of the objects in the hash table, or `nil` if the hash table contains no objects. The object returned is chosen at the hash table's convenience -- the selection is not guaranteed to be random.
 func (o *NSHashTable[ObjectType]) AnyObject() ObjectType {
 	_ret := objc.Send[ObjectType](o.Ptr(), _nSHashTableSelAnyObject)
 	return _ret
 }
 
+// A set that contains the hash table's members.
 func (o *NSHashTable[ObjectType]) SetRepresentation() *NSSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSHashTableSelSetRepresentation)
 	if _ret != 0 {

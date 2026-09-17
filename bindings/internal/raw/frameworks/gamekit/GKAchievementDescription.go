@@ -196,7 +196,10 @@ func GKAchievementDescriptionPlaceholderCompletedAchievementImage() *appkit.NSIm
 }
 
 // Deprecated: since macOS 14.2.
-func (o *GKAchievementDescription) Image() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _gKAchievementDescriptionSelImage)
-	return _ret
+func (o *GKAchievementDescription) Image() *appkit.NSImage {
+	_ret := objc.Send[objc.ID](o.Ptr(), _gKAchievementDescriptionSelImage)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return appkit.NSImageFromID(_ret)
 }

@@ -18,8 +18,6 @@ import (
 // UnitConverter is an idiomatic wrapper over the Objective-C class NSUnitConverter.
 //
 // UnitConverter is an abstract base — you do not construct it directly. Construct one of [UnitConverterLinear] and pass it where a UnitConverter is accepted.
-//
-// An abstract class that provides a description of how to convert a unit to and from the base unit of its dimension.
 type UnitConverter struct {
 	objref.Handle
 }
@@ -88,14 +86,14 @@ func (uc *UnitConverter) WithScriptingProperties(scriptingProperties map[string]
 	return uc
 }
 
-// BaseUnitValueFromValue wraps the corresponding Objective-C method.
+// BaseUnitValueFromValue for a given unit, returns the specified value of that unit in terms of the base unit of its dimension. This method takes a value in a particular unit and returns the result of converting it into the base unit of that unit's dimension. For example, a converter for the miles unit calling this method, passing `1.0` to the `value` parameter, results in `1609.34` (_1 mi = 1609.34 m_).
 func (uc *UnitConverter) BaseUnitValueFromValue(value float64) float64 {
 	defer runtime.KeepAlive(uc)
 	_r := objc.Send[float64](objref.IDOf(uc), objc.RegisterName("baseUnitValueFromValue:"), value)
 	return _r
 }
 
-// ValueFromBaseUnitValue wraps the corresponding Objective-C method.
+// ValueFromBaseUnitValue for a given unit, returns the specified base unit value in terms of that unit. This method takes in a value in terms of the base unit of a unit's dimension and returns the equivalent value in terms of the unit.
 func (uc *UnitConverter) ValueFromBaseUnitValue(baseUnitValue float64) float64 {
 	defer runtime.KeepAlive(uc)
 	_r := objc.Send[float64](objref.IDOf(uc), objc.RegisterName("valueFromBaseUnitValue:"), baseUnitValue)

@@ -80,7 +80,7 @@ func NewLocalIdentifierMapping() *LocalIdentifierMapping {
 	return localIdentifierMappingAdopt(_id)
 }
 
-// LocalIdentifier returns the \c NSString representing the local identifier of the resource found for this cloud identifier, or nil if the match was not found.
+// LocalIdentifier returns the `NSString` representing the local identifier of the record found for this cloud identifier, or nil if the match was not found.
 func (lim *LocalIdentifierMapping) LocalIdentifier() string {
 	defer runtime.KeepAlive(lim)
 	_r := objc.Send[objc.ID](objref.IDOf(lim), objc.RegisterName("localIdentifier"))
@@ -90,7 +90,7 @@ func (lim *LocalIdentifierMapping) LocalIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// Error returns an error indicating why the \c localIdentifier is nil. \c PHPhotosErrorIdentifierNotFound if no resource could be found for the provided cloud identifier. \c PHPhotosErrorMultipleLocalIdentifiersFound if the cloud identifier matched more than one photo library resource, so there were multiple local identifiers found. The array of matching local identifiers can be retrieved from the error's user info via the \c PHLocalIdentifiersErrorKey
+// Error returns an error indicating why the `localIdentifier` is `nil`. `PHPhotosErrorIdentifierNotFound` if no record could be found for the provided cloud identifier. `PHPhotosErrorMultipleLocalIdentifiersFound` if the cloud identifier matched more than one photo library record, so there were multiple local identifiers found. The array of matching local identifiers can be retrieved from the error's user info via the `PHLocalIdentifiersErrorKey`
 func (lim *LocalIdentifierMapping) Error() unsafe.Pointer {
 	defer runtime.KeepAlive(lim)
 	_r := objc.Send[unsafe.Pointer](objref.IDOf(lim), objc.RegisterName("error"))

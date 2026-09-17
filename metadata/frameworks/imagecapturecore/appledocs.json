@@ -213,35 +213,11 @@
         }
       }
     },
-    "ICLegacyReturnCode": {
-      "url": "https://developer.apple.com/documentation/imagecapturecore/iclegacyreturncode"
-    },
     "ICMediaPresentation": {
       "url": "https://developer.apple.com/documentation/imagecapturecore/icmediapresentation"
     },
-    "ICReturnCode": {
-      "url": "https://developer.apple.com/documentation/imagecapturecore/icreturncode"
-    },
     "ICReturnCodeOffset": {
       "url": "https://developer.apple.com/documentation/imagecapturecore/icreturncodeoffset"
-    },
-    "ICReturnConnectionErrorCode": {
-      "url": "https://developer.apple.com/documentation/imagecapturecore/icreturnconnectionerrorcode"
-    },
-    "ICReturnDownloadErrorCode": {
-      "url": "https://developer.apple.com/documentation/imagecapturecore/icreturndownloaderrorcode"
-    },
-    "ICReturnMetadataErrorCode": {
-      "url": "https://developer.apple.com/documentation/imagecapturecore/icreturnmetadataerrorcode"
-    },
-    "ICReturnObjectErrorCode": {
-      "url": "https://developer.apple.com/documentation/imagecapturecore/icreturnobjecterrorcode"
-    },
-    "ICReturnPTPDeviceErrorCode": {
-      "url": "https://developer.apple.com/documentation/imagecapturecore/icreturnptpdeviceerrorcode"
-    },
-    "ICReturnThumbnailErrorCode": {
-      "url": "https://developer.apple.com/documentation/imagecapturecore/icreturnthumbnailerrorcode"
     },
     "ICScannerBitDepth": {
       "doc": "The number of bits per channel in the scanned image.",

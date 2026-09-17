@@ -15,8 +15,6 @@ import (
 )
 
 // AuthorizationPublicKeyCredentialPRFRegistrationInput is an idiomatic wrapper over the Objective-C class ASAuthorizationPublicKeyCredentialPRFRegistrationInput.
-//
-// A type that encapsulates input for PRF extensions during registration.
 type AuthorizationPublicKeyCredentialPRFRegistrationInput struct {
 	objref.Handle
 }

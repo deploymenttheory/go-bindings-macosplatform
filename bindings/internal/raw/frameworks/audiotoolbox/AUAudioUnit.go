@@ -202,10 +202,10 @@ func (o *AUAudioUnit) Reset() {
 }
 
 // Adds a block to be called on each render cycle.
-func (o *AUAudioUnit) TokenByAddingRenderObserver(observer func(AudioUnitRenderActionFlags, *coreaudiotypes.AudioTimeStamp, uint32, unsafe.Pointer)) int {
+func (o *AUAudioUnit) TokenByAddingRenderObserver(observer func(AudioUnitRenderActionFlags, *coreaudiotypes.AudioTimeStamp, uint32, int)) int {
 	var __block_observer objc.Block
 	if observer != nil {
-		__block_observer = objc.NewBlock(func(_ objc.Block, blockParam0 AudioUnitRenderActionFlags, blockParam1 *coreaudiotypes.AudioTimeStamp, blockParam2 uint32, blockParam3 unsafe.Pointer) {
+		__block_observer = objc.NewBlock(func(_ objc.Block, blockParam0 AudioUnitRenderActionFlags, blockParam1 *coreaudiotypes.AudioTimeStamp, blockParam2 uint32, blockParam3 int) {
 			observer(blockParam0, blockParam1, blockParam2, blockParam3)
 		})
 		defer __block_observer.Release()
@@ -456,10 +456,10 @@ func (o *AUAudioUnit) MIDIOutputEventBlock() objc.Block {
 	return _ret
 }
 
-func (o *AUAudioUnit) SetMIDIOutputEventBlock(midiOutputEventBlock func(int64, uint8, int, unsafe.Pointer) int) {
+func (o *AUAudioUnit) SetMIDIOutputEventBlock(midiOutputEventBlock func(int64, uint8, int, *uint8) int) {
 	var __block_midiOutputEventBlock objc.Block
 	if midiOutputEventBlock != nil {
-		__block_midiOutputEventBlock = objc.NewBlock(func(_ objc.Block, blockParam0 int64, blockParam1 uint8, blockParam2 int, blockParam3 unsafe.Pointer) int {
+		__block_midiOutputEventBlock = objc.NewBlock(func(_ objc.Block, blockParam0 int64, blockParam1 uint8, blockParam2 int, blockParam3 *uint8) int {
 			return midiOutputEventBlock(blockParam0, blockParam1, blockParam2, blockParam3)
 		})
 		defer __block_midiOutputEventBlock.Release()
@@ -473,10 +473,10 @@ func (o *AUAudioUnit) MIDIOutputEventListBlock() objc.Block {
 	return _ret
 }
 
-func (o *AUAudioUnit) SetMIDIOutputEventListBlock(midiOutputEventListBlock func(int64, uint8, unsafe.Pointer) int) {
+func (o *AUAudioUnit) SetMIDIOutputEventListBlock(midiOutputEventListBlock func(int64, uint8, objc.ID) int) {
 	var __block_midiOutputEventListBlock objc.Block
 	if midiOutputEventListBlock != nil {
-		__block_midiOutputEventListBlock = objc.NewBlock(func(_ objc.Block, blockParam0 int64, blockParam1 uint8, blockParam2 unsafe.Pointer) int {
+		__block_midiOutputEventListBlock = objc.NewBlock(func(_ objc.Block, blockParam0 int64, blockParam1 uint8, blockParam2 objc.ID) int {
 			return midiOutputEventListBlock(blockParam0, blockParam1, blockParam2)
 		})
 		defer __block_midiOutputEventListBlock.Release()
@@ -632,10 +632,10 @@ func (o *AUAudioUnit) MusicalContextBlock() objc.Block {
 	return _ret
 }
 
-func (o *AUAudioUnit) SetMusicalContextBlock(musicalContextBlock func(*float64, *float64, *int64, *float64, *int64, unsafe.Pointer) bool) {
+func (o *AUAudioUnit) SetMusicalContextBlock(musicalContextBlock func(*float64, *float64, *int64, *float64, *int64, *float64) bool) {
 	var __block_musicalContextBlock objc.Block
 	if musicalContextBlock != nil {
-		__block_musicalContextBlock = objc.NewBlock(func(_ objc.Block, blockParam0 *float64, blockParam1 *float64, blockParam2 *int64, blockParam3 *float64, blockParam4 *int64, blockParam5 unsafe.Pointer) bool {
+		__block_musicalContextBlock = objc.NewBlock(func(_ objc.Block, blockParam0 *float64, blockParam1 *float64, blockParam2 *int64, blockParam3 *float64, blockParam4 *int64, blockParam5 *float64) bool {
 			return musicalContextBlock(blockParam0, blockParam1, blockParam2, blockParam3, blockParam4, blockParam5)
 		})
 		defer __block_musicalContextBlock.Release()
@@ -649,10 +649,10 @@ func (o *AUAudioUnit) TransportStateBlock() objc.Block {
 	return _ret
 }
 
-func (o *AUAudioUnit) SetTransportStateBlock(transportStateBlock func(*AUHostTransportStateFlags, *float64, *float64, unsafe.Pointer) bool) {
+func (o *AUAudioUnit) SetTransportStateBlock(transportStateBlock func(*AUHostTransportStateFlags, *float64, *float64, *float64) bool) {
 	var __block_transportStateBlock objc.Block
 	if transportStateBlock != nil {
-		__block_transportStateBlock = objc.NewBlock(func(_ objc.Block, blockParam0 *AUHostTransportStateFlags, blockParam1 *float64, blockParam2 *float64, blockParam3 unsafe.Pointer) bool {
+		__block_transportStateBlock = objc.NewBlock(func(_ objc.Block, blockParam0 *AUHostTransportStateFlags, blockParam1 *float64, blockParam2 *float64, blockParam3 *float64) bool {
 			return transportStateBlock(blockParam0, blockParam1, blockParam2, blockParam3)
 		})
 		defer __block_transportStateBlock.Release()
@@ -774,10 +774,10 @@ func (o *AUAudioUnit) OutputProvider() objc.Block {
 	return _ret
 }
 
-func (o *AUAudioUnit) SetOutputProvider(outputProvider func(*AudioUnitRenderActionFlags, *coreaudiotypes.AudioTimeStamp, uint32, int, unsafe.Pointer) int) {
+func (o *AUAudioUnit) SetOutputProvider(outputProvider func(*AudioUnitRenderActionFlags, *coreaudiotypes.AudioTimeStamp, uint32, int, *coreaudiotypes.AudioBufferList) int) {
 	var __block_outputProvider objc.Block
 	if outputProvider != nil {
-		__block_outputProvider = objc.NewBlock(func(_ objc.Block, blockParam0 *AudioUnitRenderActionFlags, blockParam1 *coreaudiotypes.AudioTimeStamp, blockParam2 uint32, blockParam3 int, blockParam4 unsafe.Pointer) int {
+		__block_outputProvider = objc.NewBlock(func(_ objc.Block, blockParam0 *AudioUnitRenderActionFlags, blockParam1 *coreaudiotypes.AudioTimeStamp, blockParam2 uint32, blockParam3 int, blockParam4 *coreaudiotypes.AudioBufferList) int {
 			return outputProvider(blockParam0, blockParam1, blockParam2, blockParam3, blockParam4)
 		})
 		defer __block_outputProvider.Release()
@@ -791,10 +791,10 @@ func (o *AUAudioUnit) InputHandler() objc.Block {
 	return _ret
 }
 
-func (o *AUAudioUnit) SetInputHandler(inputHandler func(*AudioUnitRenderActionFlags, *coreaudiotypes.AudioTimeStamp, uint32, unsafe.Pointer)) {
+func (o *AUAudioUnit) SetInputHandler(inputHandler func(*AudioUnitRenderActionFlags, *coreaudiotypes.AudioTimeStamp, uint32, int)) {
 	var __block_inputHandler objc.Block
 	if inputHandler != nil {
-		__block_inputHandler = objc.NewBlock(func(_ objc.Block, blockParam0 *AudioUnitRenderActionFlags, blockParam1 *coreaudiotypes.AudioTimeStamp, blockParam2 uint32, blockParam3 unsafe.Pointer) {
+		__block_inputHandler = objc.NewBlock(func(_ objc.Block, blockParam0 *AudioUnitRenderActionFlags, blockParam1 *coreaudiotypes.AudioTimeStamp, blockParam2 uint32, blockParam3 int) {
 			inputHandler(blockParam0, blockParam1, blockParam2, blockParam3)
 		})
 		defer __block_inputHandler.Release()

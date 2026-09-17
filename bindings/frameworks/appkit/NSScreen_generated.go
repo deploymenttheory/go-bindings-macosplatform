@@ -190,6 +190,13 @@ func (s *Screen) CGDirectDisplayID() uint32 {
 	return _r
 }
 
+// TouchCapabilities returns the touch capabilities.
+func (s *Screen) TouchCapabilities() ScreenTouchCapabilities {
+	defer runtime.KeepAlive(s)
+	_r := objc.Send[ScreenTouchCapabilities](objref.IDOf(s), objc.RegisterName("touchCapabilities"))
+	return _r
+}
+
 // MaximumExtendedDynamicRangeColorComponentValue returns the maximum extended dynamic range color component value.
 func (s *Screen) MaximumExtendedDynamicRangeColorComponentValue() float64 {
 	defer runtime.KeepAlive(s)

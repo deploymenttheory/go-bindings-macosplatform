@@ -139,6 +139,7 @@ func (o *NSKeyedArchiver) ClassNameForClass(cls objc.Class) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The archiver's delegate.
 // Deprecated: Use +archivedDataWithRootObject:requiringSecureCoding:error: and -writeToURL:options:error: instead
 func (o *NSKeyedArchiver) Delegate() NSKeyedArchiverDelegate {
 	_ret := objc.Send[NSKeyedArchiverDelegate](o.Ptr(), _nSKeyedArchiverSelDelegate)
@@ -149,6 +150,7 @@ func (o *NSKeyedArchiver) SetDelegate(delegate NSKeyedArchiverDelegate) {
 	o.Ptr().Send(_nSKeyedArchiverSelSetDelegate, delegate)
 }
 
+// The format in which the receiver encodes its data. The available formats are XML and binary.
 func (o *NSKeyedArchiver) OutputFormat() NSPropertyListFormat {
 	_ret := objc.Send[NSPropertyListFormat](o.Ptr(), _nSKeyedArchiverSelOutputFormat)
 	return _ret

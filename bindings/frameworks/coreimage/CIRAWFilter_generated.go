@@ -6,6 +6,7 @@ package coreimage
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
@@ -159,6 +160,12 @@ func (rf *RAWFilter) WithMoireReductionAmount(moireReductionAmount float32) *RAW
 	return rf
 }
 
+// WithDespeckleAmount sets the despeckle amount.
+func (rf *RAWFilter) WithDespeckleAmount(despeckleAmount float32) *RAWFilter {
+	objc.Send[objc.ID](objref.IDOf(rf), objc.RegisterName("setDespeckleAmount:"), despeckleAmount)
+	return rf
+}
+
 // WithLocalToneMapAmount sets a value that indicates the amount of local tone curve to apply to the image.
 func (rf *RAWFilter) WithLocalToneMapAmount(localToneMapAmount float32) *RAWFilter {
 	objc.Send[objc.ID](objref.IDOf(rf), objc.RegisterName("setLocalToneMapAmount:"), localToneMapAmount)
@@ -212,6 +219,13 @@ func (rf *RAWFilter) WithName(name string) *RAWFilter {
 func (rf *RAWFilter) WithEnabled(enabled bool) *RAWFilter {
 	objc.Send[objc.ID](objref.IDOf(rf), objc.RegisterName("setEnabled:"), enabled)
 	return rf
+}
+
+// DownloadResourcesWithTimeoutCompletionHandler wraps the corresponding Objective-C method.
+func (rf *RAWFilter) DownloadResourcesWithTimeoutCompletionHandler(timeout float64, completionHandler func(unsafe.Pointer)) *foundation.Progress {
+	defer runtime.KeepAlive(rf)
+	_r := objc.Send[objc.ID](objref.IDOf(rf), objc.RegisterName("downloadResourcesWithTimeout:completionHandler:"), timeout, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+	return foundation.ProgressFromID(_r)
 }
 
 // SupportedDecoderVersions returns the supported decoder versions.
@@ -409,6 +423,20 @@ func (rf *RAWFilter) IsMoireReductionSupported() bool {
 func (rf *RAWFilter) MoireReductionAmount() float32 {
 	defer runtime.KeepAlive(rf)
 	_r := objc.Send[float32](objref.IDOf(rf), objc.RegisterName("moireReductionAmount"))
+	return _r
+}
+
+// IsDespeckleSupported reports whether the object is despeckle supported.
+func (rf *RAWFilter) IsDespeckleSupported() bool {
+	defer runtime.KeepAlive(rf)
+	_r := objc.Send[bool](objref.IDOf(rf), objc.RegisterName("isDespeckleSupported"))
+	return _r
+}
+
+// DespeckleAmount returns the despeckle amount.
+func (rf *RAWFilter) DespeckleAmount() float32 {
+	defer runtime.KeepAlive(rf)
+	_r := objc.Send[float32](objref.IDOf(rf), objc.RegisterName("despeckleAmount"))
 	return _r
 }
 

@@ -35,7 +35,7 @@ func PHCloudIdentifierMappingFromID(id objc.ID) *PHCloudIdentifierMapping {
 	return o
 }
 
-// The cloud identifier of the resource found for this local identifier
+// The cloud identifier of the record found for this local identifier
 func (o *PHCloudIdentifierMapping) CloudIdentifier() *PHCloudIdentifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHCloudIdentifierMappingSelCloudIdentifier)
 	if _ret != 0 {
@@ -44,7 +44,7 @@ func (o *PHCloudIdentifierMapping) CloudIdentifier() *PHCloudIdentifier {
 	return PHCloudIdentifierFromID(_ret)
 }
 
-// error An error indicating why the \c cloudIdentifier is nil. \c PHPhotosErrorIdentifierNotFound if no resource could be found for the provided local identifier.
+// An error indicating why the `cloudIdentifier` is `nil`. `PHPhotosErrorIdentifierNotFound` if no record could be found for the provided local identifier.
 func (o *PHCloudIdentifierMapping) Error() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _pHCloudIdentifierMappingSelError)
 	return _ret

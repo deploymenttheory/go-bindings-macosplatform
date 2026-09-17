@@ -96,6 +96,14 @@ func (gev *GlassEffectView) WithStyle(style GlassEffectViewStyle) *GlassEffectVi
 	return gev
 }
 
+// WithEffectIsInteractive sets enables interactive glass behavior, which adds a visual response to user interactions.
+func (gev *GlassEffectView) WithEffectIsInteractive(effectIsInteractive bool) *GlassEffectView {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setEffectIsInteractive:"), effectIsInteractive)
+	})
+	return gev
+}
+
 // WithSubviews sets the subviews.
 func (gev *GlassEffectView) WithSubviews(items ...ViewProvider) *GlassEffectView {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
@@ -376,6 +384,14 @@ func (gev *GlassEffectView) WithGestureRecognizers(items ...GestureRecognizerPro
 	return gev
 }
 
+// WithExclusiveGestureBehavior sets declares whether gesture recognizers should be exclusive in this view and its subviews.
+func (gev *GlassEffectView) WithExclusiveGestureBehavior(exclusiveGestureBehavior ViewExclusiveGestureBehavior) *GlassEffectView {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setExclusiveGestureBehavior:"), exclusiveGestureBehavior)
+	})
+	return gev
+}
+
 // WithAllowedTouchTypes sets the allowed touch types.
 func (gev *GlassEffectView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *GlassEffectView {
 	purego.Main(func() {
@@ -437,6 +453,15 @@ func (gev *GlassEffectView) WithHorizontalContentSizeConstraintActive(horizontal
 func (gev *GlassEffectView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *GlassEffectView {
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
+	return gev
+}
+
+// WithTextSelectionManager sets the text selection manager for this view.
+func (gev *GlassEffectView) WithTextSelectionManager(textSelectionManager *TextSelectionManager) *GlassEffectView {
+	defer runtime.KeepAlive(textSelectionManager)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setTextSelectionManager:"), objref.IDOf(textSelectionManager))
 	})
 	return gev
 }
@@ -551,6 +576,20 @@ func (gev *GlassEffectView) Style() GlassEffectViewStyle {
 	purego.Main(func() {
 		_mainthread0 = func() GlassEffectViewStyle {
 			_r := objc.Send[GlassEffectViewStyle](objref.IDOf(gev), objc.RegisterName("style"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
+}
+
+// EffectIsInteractive reports whether enables interactive glass behavior, which adds a visual response to user interactions. This should be enabled for glass that is used as the background for interactive controls or when used as the container of interactive controls. When `YES`, the glass effect will provide visual feedback when it is interacted with. When `NO`, the glass effect remains static. The default value is `NO`.
+func (gev *GlassEffectView) EffectIsInteractive() bool {
+	defer runtime.KeepAlive(gev)
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(gev), objc.RegisterName("effectIsInteractive"))
 			return _r
 		}()
 	})

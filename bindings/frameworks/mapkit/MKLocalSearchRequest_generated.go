@@ -15,8 +15,6 @@ import (
 )
 
 // LocalSearchRequest is an idiomatic wrapper over the Objective-C class MKLocalSearchRequest.
-//
-// The parameters to use when searching for points of interest on the map.
 type LocalSearchRequest struct {
 	objref.Handle
 }

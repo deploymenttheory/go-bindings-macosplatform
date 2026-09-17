@@ -17,8 +17,6 @@ import (
 // UnitDuration is an idiomatic wrapper over the Objective-C class NSUnitDuration.
 //
 // It embeds [Dimension], promoting that type's methods.
-//
-// A unit of measure for a duration of time.
 type UnitDuration struct {
 	Dimension
 }

@@ -101,6 +101,9 @@ func _loadLibrary() {
 	_register("ar_device_anchor_get_origin_from_anchor_transform", func() {
 		purego.RegisterLibFunc(&_ar_device_anchor_get_origin_from_anchor_transform, _arkitLib, "ar_device_anchor_get_origin_from_anchor_transform")
 	})
+	_register("ar_device_anchor_get_origin_from_anchor_transform_with_correction", func() {
+		purego.RegisterLibFunc(&_ar_device_anchor_get_origin_from_anchor_transform_with_correction, _arkitLib, "ar_device_anchor_get_origin_from_anchor_transform_with_correction")
+	})
 	_register("ar_device_anchor_get_timestamp", func() {
 		purego.RegisterLibFunc(&_ar_device_anchor_get_timestamp, _arkitLib, "ar_device_anchor_get_timestamp")
 	})

@@ -85,6 +85,9 @@ func _loadLibrary() {
 	_register("ColorSyncIterateInstalledProfilesWithOptions", func() {
 		purego.RegisterLibFunc(&_fnColorSyncIterateInstalledProfilesWithOptions, _colorsyncLib, "ColorSyncIterateInstalledProfilesWithOptions")
 	})
+	_register("ColorSyncProfileContainsHeadroomAdaptiveGainCurve", func() {
+		purego.RegisterLibFunc(&_fnColorSyncProfileContainsHeadroomAdaptiveGainCurve, _colorsyncLib, "ColorSyncProfileContainsHeadroomAdaptiveGainCurve")
+	})
 	_register("ColorSyncProfileContainsTag", func() {
 		purego.RegisterLibFunc(&_fnColorSyncProfileContainsTag, _colorsyncLib, "ColorSyncProfileContainsTag")
 	})
@@ -97,11 +100,23 @@ func _loadLibrary() {
 	_register("ColorSyncProfileCopyHeader", func() {
 		purego.RegisterLibFunc(&_fnColorSyncProfileCopyHeader, _colorsyncLib, "ColorSyncProfileCopyHeader")
 	})
+	_register("ColorSyncProfileCopyHeadroomAdaptiveGainCurveInfoDictionary", func() {
+		purego.RegisterLibFunc(&_fnColorSyncProfileCopyHeadroomAdaptiveGainCurveInfoDictionary, _colorsyncLib, "ColorSyncProfileCopyHeadroomAdaptiveGainCurveInfoDictionary")
+	})
+	_register("ColorSyncProfileCopyHeadroomAdaptiveGainCurveMetadata", func() {
+		purego.RegisterLibFunc(&_fnColorSyncProfileCopyHeadroomAdaptiveGainCurveMetadata, _colorsyncLib, "ColorSyncProfileCopyHeadroomAdaptiveGainCurveMetadata")
+	})
 	_register("ColorSyncProfileCopyTag", func() { purego.RegisterLibFunc(&_fnColorSyncProfileCopyTag, _colorsyncLib, "ColorSyncProfileCopyTag") })
 	_register("ColorSyncProfileCopyTagSignatures", func() {
 		purego.RegisterLibFunc(&_fnColorSyncProfileCopyTagSignatures, _colorsyncLib, "ColorSyncProfileCopyTagSignatures")
 	})
 	_register("ColorSyncProfileCreate", func() { purego.RegisterLibFunc(&_fnColorSyncProfileCreate, _colorsyncLib, "ColorSyncProfileCreate") })
+	_register("ColorSyncProfileCreateCopyWithHeadroomAdaptiveGainCurveInfoDictionary", func() {
+		purego.RegisterLibFunc(&_fnColorSyncProfileCreateCopyWithHeadroomAdaptiveGainCurveInfoDictionary, _colorsyncLib, "ColorSyncProfileCreateCopyWithHeadroomAdaptiveGainCurveInfoDictionary")
+	})
+	_register("ColorSyncProfileCreateCopyWithHeadroomAdaptiveGainCurveMetadata", func() {
+		purego.RegisterLibFunc(&_fnColorSyncProfileCreateCopyWithHeadroomAdaptiveGainCurveMetadata, _colorsyncLib, "ColorSyncProfileCreateCopyWithHeadroomAdaptiveGainCurveMetadata")
+	})
 	_register("ColorSyncProfileCreateDeviceProfile", func() {
 		purego.RegisterLibFunc(&_fnColorSyncProfileCreateDeviceProfile, _colorsyncLib, "ColorSyncProfileCreateDeviceProfile")
 	})

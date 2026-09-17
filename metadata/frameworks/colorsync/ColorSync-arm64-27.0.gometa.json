@@ -1,0 +1,4091 @@
+{
+  "framework": "ColorSync",
+  "sdk_version": "27.0",
+  "arch": "arm64",
+  "schema_version": 1,
+  "clang_version": "Apple clang version 21.0.0 (clang-2100.3.34.2)",
+  "xcode_version": "Xcode 27.0 Build version 27A266a",
+  "classes": {},
+  "protocols": {},
+  "enums": {
+    "ColorSyncAlphaInfo": {
+      "go_type": "int32",
+      "members": [
+        {
+          "name": "kColorSyncAlphaNone",
+          "value": "0",
+          "availability": {},
+          "doc": "There is no alpha channel. For example, RGB."
+        },
+        {
+          "name": "kColorSyncAlphaPremultipliedLast",
+          "value": "1",
+          "availability": {},
+          "doc": "The alpha component is stored last and the color components are premultiplied by it. For example, premultiplied RGBA."
+        },
+        {
+          "name": "kColorSyncAlphaPremultipliedFirst",
+          "value": "2",
+          "availability": {},
+          "doc": "The alpha component is stored first and the color components are premultiplied by it. For example, premultiplied ARGB."
+        },
+        {
+          "name": "kColorSyncAlphaLast",
+          "value": "3",
+          "availability": {},
+          "doc": "The alpha component is stored last and is not premultiplied. For example, non-premultiplied RGBA."
+        },
+        {
+          "name": "kColorSyncAlphaFirst",
+          "value": "4",
+          "availability": {},
+          "doc": "The alpha component is stored first and is not premultiplied. For example, non-premultiplied ARGB."
+        },
+        {
+          "name": "kColorSyncAlphaNoneSkipLast",
+          "value": "5",
+          "availability": {},
+          "doc": "There is no alpha channel; the least significant bits are ignored. For example, RGBX."
+        },
+        {
+          "name": "kColorSyncAlphaNoneSkipFirst",
+          "value": "6",
+          "availability": {},
+          "doc": "There is no alpha channel; the most significant bits are ignored. For example, XRGB."
+        }
+      ],
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 99,
+      "doc": "The location of the alpha component in a pixel, and whether it's premultiplied."
+    },
+    "ColorSyncDataDepth": {
+      "go_type": "int32",
+      "members": [
+        {
+          "name": "kColorSync1BitGamut",
+          "value": "1",
+          "availability": {},
+          "doc": "One-bit values, used for gamut-check results."
+        },
+        {
+          "name": "kColorSync8BitInteger",
+          "value": "2",
+          "availability": {},
+          "doc": "8-bit integer components."
+        },
+        {
+          "name": "kColorSync16BitInteger",
+          "value": "3",
+          "availability": {},
+          "doc": "16-bit integer components."
+        },
+        {
+          "name": "kColorSync16BitFloat",
+          "value": "4",
+          "availability": {},
+          "doc": "16-bit floating-point (half-float) components."
+        },
+        {
+          "name": "kColorSync32BitInteger",
+          "value": "5",
+          "availability": {},
+          "doc": "32-bit integer components."
+        },
+        {
+          "name": "kColorSync32BitNamedColorIndex",
+          "value": "6",
+          "availability": {},
+          "doc": "32-bit named-color index values."
+        },
+        {
+          "name": "kColorSync32BitFloat",
+          "value": "7",
+          "availability": {},
+          "doc": "32-bit floating-point components."
+        },
+        {
+          "name": "kColorSync10BitInteger",
+          "value": "8",
+          "availability": {},
+          "doc": "10-bit integer components."
+        }
+      ],
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 77,
+      "doc": "The bit depth and numeric type of a color component in a pixel."
+    },
+    "_anon_kColorSyncAlphaInfoMask": {
+      "go_type": "int64",
+      "members": [
+        {
+          "name": "kColorSyncAlphaInfoMask",
+          "value": "31",
+          "availability": {}
+        },
+        {
+          "name": "kColorSyncByteOrderMask",
+          "value": "28672",
+          "availability": {}
+        },
+        {
+          "name": "kColorSyncByteOrderDefault",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "kColorSyncByteOrder16Little",
+          "value": "4096",
+          "availability": {}
+        },
+        {
+          "name": "kColorSyncByteOrder32Little",
+          "value": "8192",
+          "availability": {}
+        },
+        {
+          "name": "kColorSyncByteOrder16Big",
+          "value": "12288",
+          "availability": {}
+        },
+        {
+          "name": "kColorSyncByteOrder32Big",
+          "value": "16384",
+          "availability": {}
+        }
+      ],
+      "is_anon": true,
+      "availability": {}
+    },
+    "acl_entry_id_t": {
+      "go_type": "int32",
+      "members": [
+        {
+          "name": "ACL_FIRST_ENTRY",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "ACL_NEXT_ENTRY",
+          "value": "-1",
+          "availability": {}
+        },
+        {
+          "name": "ACL_LAST_ENTRY",
+          "value": "-2",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "acl.h",
+      "sdk_line": 118
+    },
+    "acl_flag_t": {
+      "go_type": "int32",
+      "members": [
+        {
+          "name": "ACL_FLAG_DEFER_INHERIT",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "ACL_FLAG_NO_INHERIT",
+          "value": "131072",
+          "availability": {}
+        },
+        {
+          "name": "ACL_ENTRY_INHERITED",
+          "value": "16",
+          "availability": {}
+        },
+        {
+          "name": "ACL_ENTRY_FILE_INHERIT",
+          "value": "32",
+          "availability": {}
+        },
+        {
+          "name": "ACL_ENTRY_DIRECTORY_INHERIT",
+          "value": "64",
+          "availability": {}
+        },
+        {
+          "name": "ACL_ENTRY_LIMIT_INHERIT",
+          "value": "128",
+          "availability": {}
+        },
+        {
+          "name": "ACL_ENTRY_ONLY_INHERIT",
+          "value": "256",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "acl.h",
+      "sdk_line": 125
+    },
+    "acl_perm_t": {
+      "go_type": "int32",
+      "members": [
+        {
+          "name": "ACL_READ_DATA",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ACL_LIST_DIRECTORY",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ACL_WRITE_DATA",
+          "value": "4",
+          "availability": {}
+        },
+        {
+          "name": "ACL_ADD_FILE",
+          "value": "4",
+          "availability": {}
+        },
+        {
+          "name": "ACL_EXECUTE",
+          "value": "8",
+          "availability": {}
+        },
+        {
+          "name": "ACL_SEARCH",
+          "value": "8",
+          "availability": {}
+        },
+        {
+          "name": "ACL_DELETE",
+          "value": "16",
+          "availability": {}
+        },
+        {
+          "name": "ACL_APPEND_DATA",
+          "value": "32",
+          "availability": {}
+        },
+        {
+          "name": "ACL_ADD_SUBDIRECTORY",
+          "value": "32",
+          "availability": {}
+        },
+        {
+          "name": "ACL_DELETE_CHILD",
+          "value": "64",
+          "availability": {}
+        },
+        {
+          "name": "ACL_READ_ATTRIBUTES",
+          "value": "128",
+          "availability": {}
+        },
+        {
+          "name": "ACL_WRITE_ATTRIBUTES",
+          "value": "256",
+          "availability": {}
+        },
+        {
+          "name": "ACL_READ_EXTATTRIBUTES",
+          "value": "512",
+          "availability": {}
+        },
+        {
+          "name": "ACL_WRITE_EXTATTRIBUTES",
+          "value": "1024",
+          "availability": {}
+        },
+        {
+          "name": "ACL_READ_SECURITY",
+          "value": "2048",
+          "availability": {}
+        },
+        {
+          "name": "ACL_WRITE_SECURITY",
+          "value": "4096",
+          "availability": {}
+        },
+        {
+          "name": "ACL_CHANGE_OWNER",
+          "value": "8192",
+          "availability": {}
+        },
+        {
+          "name": "ACL_SYNCHRONIZE",
+          "value": "1048576",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "acl.h",
+      "sdk_line": 72
+    },
+    "acl_tag_t": {
+      "go_type": "int32",
+      "members": [
+        {
+          "name": "ACL_UNDEFINED_TAG",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "ACL_EXTENDED_ALLOW",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "ACL_EXTENDED_DENY",
+          "value": "2",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "acl.h",
+      "sdk_line": 94
+    },
+    "acl_type_t": {
+      "go_type": "int32",
+      "members": [
+        {
+          "name": "ACL_TYPE_EXTENDED",
+          "value": "256",
+          "availability": {}
+        },
+        {
+          "name": "ACL_TYPE_ACCESS",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "ACL_TYPE_DEFAULT",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "ACL_TYPE_AFS",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ACL_TYPE_CODA",
+          "value": "3",
+          "availability": {}
+        },
+        {
+          "name": "ACL_TYPE_NTFS",
+          "value": "4",
+          "availability": {}
+        },
+        {
+          "name": "ACL_TYPE_NWFS",
+          "value": "5",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "acl.h",
+      "sdk_line": 101
+    },
+    "clockid_t": {
+      "go_type": "int32",
+      "members": [
+        {
+          "name": "_CLOCK_REALTIME",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "_CLOCK_MONOTONIC",
+          "value": "6",
+          "availability": {}
+        },
+        {
+          "name": "_CLOCK_MONOTONIC_RAW",
+          "value": "4",
+          "availability": {}
+        },
+        {
+          "name": "_CLOCK_MONOTONIC_RAW_APPROX",
+          "value": "5",
+          "availability": {}
+        },
+        {
+          "name": "_CLOCK_UPTIME_RAW",
+          "value": "8",
+          "availability": {}
+        },
+        {
+          "name": "_CLOCK_UPTIME_RAW_APPROX",
+          "value": "9",
+          "availability": {}
+        },
+        {
+          "name": "_CLOCK_PROCESS_CPUTIME_ID",
+          "value": "12",
+          "availability": {}
+        },
+        {
+          "name": "_CLOCK_THREAD_CPUTIME_ID",
+          "value": "16",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "_time.h",
+      "sdk_line": 156
+    },
+    "dispatch_autorelease_frequency_t": {
+      "go_type": "uint64",
+      "members": [
+        {
+          "name": "DISPATCH_AUTORELEASE_FREQUENCY_INHERIT",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "DISPATCH_AUTORELEASE_FREQUENCY_WORK_ITEM",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "DISPATCH_AUTORELEASE_FREQUENCY_NEVER",
+          "value": "2",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "queue.h",
+      "sdk_line": 300,
+      "is_extensible": true
+    },
+    "dispatch_block_flags_t": {
+      "go_type": "uint64",
+      "members": [
+        {
+          "name": "DISPATCH_BLOCK_BARRIER",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "DISPATCH_BLOCK_DETACHED",
+          "value": "2",
+          "availability": {
+            "macos_introduced": "10.10"
+          }
+        },
+        {
+          "name": "DISPATCH_BLOCK_ASSIGN_CURRENT",
+          "value": "4",
+          "availability": {
+            "macos_introduced": "10.10"
+          }
+        },
+        {
+          "name": "DISPATCH_BLOCK_NO_QOS_CLASS",
+          "value": "8",
+          "availability": {
+            "macos_introduced": "10.10"
+          }
+        },
+        {
+          "name": "DISPATCH_BLOCK_INHERIT_QOS_CLASS",
+          "value": "16",
+          "availability": {
+            "macos_introduced": "10.10"
+          }
+        },
+        {
+          "name": "DISPATCH_BLOCK_ENFORCE_QOS_CLASS",
+          "value": "32",
+          "availability": {
+            "macos_introduced": "10.10"
+          }
+        }
+      ],
+      "availability": {},
+      "sdk_file": "block.h",
+      "sdk_line": 302,
+      "is_bitmask": true,
+      "is_extensible": true
+    },
+    "filesec_property_t": {
+      "go_type": "int32",
+      "members": [
+        {
+          "name": "FILESEC_OWNER",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "FILESEC_GROUP",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "FILESEC_UUID",
+          "value": "3",
+          "availability": {}
+        },
+        {
+          "name": "FILESEC_MODE",
+          "value": "4",
+          "availability": {}
+        },
+        {
+          "name": "FILESEC_ACL",
+          "value": "5",
+          "availability": {}
+        },
+        {
+          "name": "FILESEC_GRPUUID",
+          "value": "6",
+          "availability": {}
+        },
+        {
+          "name": "FILESEC_ACL_RAW",
+          "value": "100",
+          "availability": {}
+        },
+        {
+          "name": "FILESEC_ACL_ALLOCSIZE",
+          "value": "101",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "fcntl.h",
+      "sdk_line": 601
+    },
+    "idtype_t": {
+      "go_type": "int32",
+      "members": [
+        {
+          "name": "P_ALL",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "P_PID",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "P_PGID",
+          "value": "2",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "wait.h",
+      "sdk_line": 79
+    },
+    "mpo_flags_t": {
+      "go_type": "uint32",
+      "members": [
+        {
+          "name": "MPO_PORT",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "MPO_SERVICE_PORT",
+          "value": "1024",
+          "availability": {}
+        },
+        {
+          "name": "MPO_CONNECTION_PORT",
+          "value": "2048",
+          "availability": {}
+        },
+        {
+          "name": "MPO_REPLY_PORT",
+          "value": "4096",
+          "availability": {}
+        },
+        {
+          "name": "MPO_WEAK_REPLY_PORT",
+          "value": "16384",
+          "availability": {}
+        },
+        {
+          "name": "MPO_NOTIFICATION_PORT",
+          "value": "17408",
+          "availability": {}
+        },
+        {
+          "name": "MPO_EXCEPTION_PORT",
+          "value": "32768",
+          "availability": {}
+        },
+        {
+          "name": "MPO_CONNECTION_PORT_WITH_PORT_ARRAY",
+          "value": "65536",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "port.h",
+      "sdk_line": 1102,
+      "is_bitmask": true,
+      "is_extensible": true
+    },
+    "os_clockid_t": {
+      "go_type": "uint32",
+      "members": [
+        {
+          "name": "OS_CLOCK_MACH_ABSOLUTE_TIME",
+          "value": "32",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "clock.h",
+      "sdk_line": 188
+    },
+    "ptrauth_key": {
+      "go_type": "int32",
+      "members": [
+        {
+          "name": "ptrauth_key_none",
+          "value": "-1",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_asia",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_asib",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_asda",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_asdb",
+          "value": "3",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_process_independent_code",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_process_dependent_code",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_process_independent_data",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_process_dependent_data",
+          "value": "3",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_return_address",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_frame_pointer",
+          "value": "3",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_function_pointer",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_block_function",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_cxx_vtable_pointer",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_method_list_pointer",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_objc_isa_pointer",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_objc_super_pointer",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_objc_sel_pointer",
+          "value": "3",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_objc_class_ro_pointer",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_block_descriptor_pointer",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "ptrauth_key_init_fini_pointer",
+          "value": "0",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "ptrauth.h",
+      "sdk_line": 13
+    },
+    "qos_class_t": {
+      "go_type": "uint32",
+      "members": [
+        {
+          "name": "QOS_CLASS_USER_INTERACTIVE",
+          "value": "33",
+          "availability": {}
+        },
+        {
+          "name": "QOS_CLASS_USER_INITIATED",
+          "value": "25",
+          "availability": {}
+        },
+        {
+          "name": "QOS_CLASS_DEFAULT",
+          "value": "21",
+          "availability": {}
+        },
+        {
+          "name": "QOS_CLASS_UTILITY",
+          "value": "17",
+          "availability": {}
+        },
+        {
+          "name": "QOS_CLASS_BACKGROUND",
+          "value": "9",
+          "availability": {}
+        },
+        {
+          "name": "QOS_CLASS_UNSPECIFIED",
+          "value": "0",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "qos.h",
+      "sdk_line": 121
+    }
+  },
+  "structs": {
+    "ColorSyncCMM": {
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncCMM.h",
+      "sdk_line": 31,
+      "doc": "A reference to a Color Management Module (CMM). This type is a lightweight wrapper around a Core Foundation bundle."
+    },
+    "ColorSyncMD5": {
+      "fields": [
+        {
+          "name": "digest",
+          "objc_type": "uint8_t[16]"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 323,
+      "doc": "An MD5 digest that uniquely identifies a profile, as defined by the ICC specification."
+    },
+    "ColorSyncProfile": {
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 17,
+      "doc": "A reference to an immutable International Color Consortium (ICC) color profile."
+    },
+    "ColorSyncTransform": {
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 17,
+      "doc": "A reference to a color transform that converts color data between profiles."
+    }
+  },
+  "functions": [
+    {
+      "name": "ColorSyncProfileGetTypeID",
+      "return": {
+        "objc_type": "CFTypeID"
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 181,
+      "doc": "Returns the unique identifier for the ColorSync profile opaque type. - Returns: The `CFTypeID` for `ColorSyncProfile` objects."
+    },
+    {
+      "name": "ColorSyncProfileCreate",
+      "args": [
+        {
+          "name": "data",
+          "objc_type": "CFDataRef _Nonnull"
+        },
+        {
+          "name": "error",
+          "objc_type": "CFErrorRef  _Nullable * _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "ColorSyncProfileRef  _Nullable",
+        "already_retained": true
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 189,
+      "doc": "Creates a profile from ICC profile data. - Parameters: - data: The ICC profile data. - error: On failure, a pointer to an error describing the problem. Optional. - Returns: A new profile, or `NULL` in case of failure."
+    },
+    {
+      "name": "ColorSyncProfileCreateWithURL",
+      "args": [
+        {
+          "name": "url",
+          "objc_type": "CFURLRef _Nonnull"
+        },
+        {
+          "name": "error",
+          "objc_type": "CFErrorRef  _Nullable * _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "ColorSyncProfileRef  _Nullable",
+        "already_retained": true
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 197,
+      "doc": "Creates a profile from ICC profile data at a URL. - Parameters: - url: The URL to the profile data. - error: On failure, a pointer to an error describing the problem. Optional. - Returns: A new profile, or `NULL` in case of failure."
+    },
+    {
+      "name": "ColorSyncProfileCreateWithURLAndOptions",
+      "args": [
+        {
+          "name": "url",
+          "objc_type": "CFURLRef _Nonnull"
+        },
+        {
+          "name": "options",
+          "objc_type": "CFDictionaryRef _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "error",
+          "objc_type": "CFErrorRef  _Nullable * _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "ColorSyncProfileRef  _Nullable",
+        "already_retained": true
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 208,
+      "doc": "Creates a profile from ICC profile data at a URL, using the given options. - Parameters: - url: The URL to the profile data. - options: A dictionary with creation options, for example ``kColorSyncDoNotSubstituteProfiles``. - error: On failure, a pointer to an error describing the problem. Optional. - Returns: A new profile, or `NULL` in case of failure."
+    },
+    {
+      "name": "ColorSyncProfileCreateWithName",
+      "args": [
+        {
+          "name": "name",
+          "objc_type": "CFStringRef _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "ColorSyncProfileRef  _Nullable",
+        "already_retained": true
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 214,
+      "doc": "Creates a profile from a predefined profile name. - Parameter name: The predefined profile name. - Returns: A new profile, or `NULL` in case of failure."
+    },
+    {
+      "name": "ColorSyncProfileCreateWithDisplayID",
+      "args": [
+        {
+          "name": "displayID",
+          "objc_type": "uint32_t"
+        }
+      ],
+      "return": {
+        "objc_type": "ColorSyncProfileRef  _Nullable",
+        "already_retained": true
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 221,
+      "doc": "Creates a profile for the specified display. - Parameter displayID: The system-wide unique display ID (defined by IOKit); pass `0` for the main display. - Returns: A new profile, or `NULL` in case of failure."
+    },
+    {
+      "name": "ColorSyncProfileCreateDeviceProfile",
+      "args": [
+        {
+          "name": "deviceClass",
+          "objc_type": "CFStringRef _Nonnull"
+        },
+        {
+          "name": "deviceID",
+          "objc_type": "CFUUIDRef _Nonnull"
+        },
+        {
+          "name": "profileID",
+          "objc_type": "CFTypeRef _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "ColorSyncProfileRef  _Nullable",
+        "already_retained": true
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 232,
+      "doc": "Creates a profile for a device registered with ColorSync. See `ColorSyncDevice.h` for more information on `deviceClass`, `deviceID`, and `profileID`. - Parameters: - deviceClass: The ColorSync device class. - deviceID: The device ID registered with ColorSync. - profileID: The profile ID registered with ColorSync; pass ``kColorSyncDeviceDefaultProfileID`` to get the default profile. - Returns: A new profile, or `NULL` in case of failure."
+    },
+    {
+      "name": "ColorSyncProfileCreateMutable",
+      "return": {
+        "objc_type": "ColorSyncMutableProfileRef  _Nullable",
+        "already_retained": true
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 238,
+      "doc": "Creates an empty mutable profile. - Returns: An empty mutable profile, or `NULL` in case of failure."
+    },
+    {
+      "name": "ColorSyncProfileCreateMutableCopy",
+      "args": [
+        {
+          "name": "prof",
+          "objc_type": "ColorSyncProfileRef _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "ColorSyncMutableProfileRef  _Nullable",
+        "already_retained": true
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 244,
+      "doc": "Creates a mutable copy of a profile. - Parameter prof: The profile whose data the function copies into the new mutable profile. - Returns: A new mutable profile, or `NULL` in case of failure."
+    },
+    {
+      "name": "ColorSyncProfileCreateLink",
+      "args": [
+        {
+          "name": "profileInfo",
+          "objc_type": "CFArrayRef _Nonnull"
+        },
+        {
+          "name": "options",
+          "objc_type": "CFDictionaryRef _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "ColorSyncProfileRef  _Nullable",
+        "already_retained": true
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 263,
+      "doc": "Creates a device link profile from an array of profiles. Each dictionary in `profileInfo` contains a profile object and information on the usage of the profile in the transform. Required keys: - ``kColorSyncProfile``: A ``ColorSyncProfileRef``. - ``kColorSyncRenderingIntent``: A `CFStringRef` defining the rendering intent. - ``kColorSyncTransformTag``: A `CFStringRef` defining which tags to use. Optional key: - ``kColorSyncBlackPointCompensation``: A `CFBooleanRef` to enable or disable black point compensation. - Parameters: - profileInfo: An array of dictionaries, each containing a profile object and the information on the usage of the profile in the transform. - options: A dictionary with additional public global options (for example, preferred CMM, quality, and so on). It can also contain custom options that are CMM specific. - Returns: A new profile, or `NULL` in case of failure."
+    },
+    {
+      "name": "ColorSyncProfileVerify",
+      "args": [
+        {
+          "name": "prof",
+          "objc_type": "ColorSyncProfileRef _Nonnull"
+        },
+        {
+          "name": "errors",
+          "objc_type": "CFErrorRef  _Nullable * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "warnings",
+          "objc_type": "CFErrorRef  _Nullable * _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "bool"
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 272,
+      "doc": "Verifies whether a profile can be used. - Parameters: - prof: The profile to verify. - errors: Returns error strings in case problems are found that would prevent use of the profile. - warnings: Returns warning strings indicating problems due to lack of conformance with the ICC specification, but not preventing use of the profile. - Returns: `true` if the profile can be used; otherwise, `false`."
+    },
+    {
+      "name": "ColorSyncProfileIsWideGamut",
+      "args": [
+        {
+          "name": "",
+          "objc_type": "ColorSyncProfileRef _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "bool"
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 275,
+      "doc": "Returns a Boolean value indicating whether the display profile describes a wide-gamut color space."
+    },
+    {
+      "name": "ColorSyncProfileIsMatrixBased",
+      "args": [
+        {
+          "name": "",
+          "objc_type": "ColorSyncProfileRef _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "bool"
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 278,
+      "doc": "Returns a Boolean value indicating whether the profile is matrix-based."
+    },
+    {
+      "name": "ColorSyncProfileIsPQBased",
+      "args": [
+        {
+          "name": "",
+          "objc_type": "ColorSyncProfileRef _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "bool"
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 281,
+      "doc": "Returns a Boolean value indicating whether the profile uses ITU BT.2100 PQ transfer functions."
+    },
+    {
+      "name": "ColorSyncProfileIsHLGBased",
+      "args": [
+        {
+          "name": "",
+          "objc_type": "ColorSyncProfileRef _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "bool"
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 284,
+      "doc": "Returns a Boolean value indicating whether the profile uses ITU BT.2100 HLG transfer functions."
+    },
+    {
+      "name": "ColorSyncProfileEstimateGammaWithDisplayID",
+      "args": [
+        {
+          "name": "displayID",
+          "objc_type": "const int32_t"
+        },
+        {
+          "name": "error",
+          "objc_type": "CFErrorRef  _Nullable * _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "float"
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 293,
+      "doc": "Estimates the gamma of the profile for the specified display. - Parameters: - displayID: The system-wide unique display ID (defined by IOKit). - error: On failure, a pointer to an error describing the problem. Optional. - Returns: A non-zero value on success, or `0.0` in case of error."
+    },
+    {
+      "name": "ColorSyncProfileGetDisplayTransferFormulaFromVCGT",
+      "args": [
+        {
+          "name": "profile",
+          "objc_type": "ColorSyncProfileRef _Nonnull"
+        },
+        {
+          "name": "redMin",
+          "objc_type": "float * _Nonnull"
+        },
+        {
+          "name": "redMax",
+          "objc_type": "float * _Nonnull"
+        },
+        {
+          "name": "redGamma",
+          "objc_type": "float * _Nonnull"
+        },
+        {
+          "name": "greenMin",
+          "objc_type": "float * _Nonnull"
+        },
+        {
+          "name": "greenMax",
+          "objc_type": "float * _Nonnull"
+        },
+        {
+          "name": "greenGamma",
+          "objc_type": "float * _Nonnull"
+        },
+        {
+          "name": "blueMin",
+          "objc_type": "float * _Nonnull"
+        },
+        {
+          "name": "blueMax",
+          "objc_type": "float * _Nonnull"
+        },
+        {
+          "name": "blueGamma",
+          "objc_type": "float * _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "bool"
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 298,
+      "doc": "Converts the profile's `vcgt` tag to formula components used by `CGSetDisplayTransferByFormula`. The function performs this conversion only if a `vcgt` tag exists in the profile and the conversion is possible."
+    },
+    {
+      "name": "ColorSyncProfileCreateDisplayTransferTablesFromVCGT",
+      "args": [
+        {
+          "name": "profile",
+          "objc_type": "ColorSyncProfileRef _Nonnull"
+        },
+        {
+          "name": "nSamplesPerChannel",
+          "objc_type": "size_t * _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "CFDataRef  _Nullable",
+        "already_retained": true
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 309,
+      "doc": "Creates display transfer tables from the profile's `vcgt` tag. Creates three tables of floats (a red table, a green table, and a blue table), each of size `nSamplesPerChannel`, packed into contiguous memory contained in the returned `CFDataRef`, from the `vcgt` tag of the profile (if a `vcgt` tag exists in the profile). `CGSetDisplayTransferByTable` uses these tables."
+    },
+    {
+      "name": "ColorSyncProfileEstimateGamma",
+      "args": [
+        {
+          "name": "prof",
+          "objc_type": "ColorSyncProfileRef _Nonnull"
+        },
+        {
+          "name": "error",
+          "objc_type": "CFErrorRef  _Nullable * _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "float"
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 318,
+      "doc": "Estimates the gamma of a profile. - Parameters: - prof: The profile to perform estimation on. - error: On failure, a pointer to an error describing the problem. Optional. - Returns: A non-zero value on success, or `0.0` in case of error."
+    },
+    {
+      "name": "ColorSyncProfileGetMD5",
+      "args": [
+        {
+          "name": "prof",
+          "objc_type": "ColorSyncProfileRef _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "ColorSyncMD5"
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 329,
+      "doc": "Returns the MD5 digest for a profile. - Parameter prof: The profile to compute the digest for. - Returns: The MD5 digest for the profile, calculated as defined by the ICC specification, or a \"zero\" signature (filled with zeros) in case of failure."
+    },
+    {
+      "name": "ColorSyncProfileCopyData",
+      "args": [
+        {
+          "name": "prof",
+          "objc_type": "ColorSyncProfileRef _Nonnull"
+        },
+        {
+          "name": "error",
+          "objc_type": "CFErrorRef  _Nullable * _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "CFDataRef  _Nonnull",
+        "already_retained": true
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 337,
+      "doc": "Copies the flattened data from a profile. - Parameters: - prof: The profile to copy the flattened data from. - error: On failure, a pointer to an error describing the problem. Optional. - Returns: The profile data on success, or `NULL` in case of failure."
+    },
+    {
+      "name": "ColorSyncProfileGetURL",
+      "args": [
+        {
+          "name": "prof",
+          "objc_type": "ColorSyncProfileRef _Nonnull"
+        },
+        {
+          "name": "error",
+          "objc_type": "CFErrorRef  _Nullable * _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "CFURLRef  _Nonnull"
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 345,
+      "doc": "Returns the URL of a profile. - Parameters: - prof: The profile to get the URL from. - error: On failure, a pointer to an error describing the problem. Optional. - Returns: The profile's URL on success, or `NULL` in case of failure."
+    },
+    {
+      "name": "ColorSyncProfileCopyHeader",
+      "args": [
+        {
+          "name": "prof",
+          "objc_type": "ColorSyncProfileRef _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "CFDataRef  _Nonnull",
+        "already_retained": true
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 351,
+      "doc": "Copies the header from a profile. - Parameter prof: The profile to copy the header from. - Returns: The profile header (in host endianness), or `NULL` in case of failure."
+    },
+    {
+      "name": "ColorSyncProfileSetHeader",
+      "args": [
+        {
+          "name": "prof",
+          "objc_type": "ColorSyncMutableProfileRef _Nonnull"
+        },
+        {
+          "name": "header",
+          "objc_type": "CFDataRef _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 358,
+      "doc": "Sets the header of a mutable profile. - Parameters: - prof: The profile in which to set the header. - header: The header data (must be in host endianness)."
+    },
+    {
+      "name": "ColorSyncProfileCopyDescriptionString",
+      "args": [
+        {
+          "name": "prof",
+          "objc_type": "ColorSyncProfileRef _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "CFStringRef  _Nullable",
+        "already_retained": true
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 364,
+      "doc": "Copies the localized description string of a profile. - Parameter prof: The profile to copy the description string from. - Returns: The profile description, localized to the current locale."
+    },
+    {
+      "name": "ColorSyncProfileCopyTagSignatures",
+      "args": [
+        {
+          "name": "prof",
+          "objc_type": "ColorSyncProfileRef _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "CFArrayRef  _Nullable",
+        "already_retained": true
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 370,
+      "doc": "Copies the tag signatures of a profile. - Parameter prof: The profile to copy tag signatures from. - Returns: An array with the signatures (`CFStringRef`) of the tags in the profile."
+    },
+    {
+      "name": "ColorSyncProfileContainsTag",
+      "args": [
+        {
+          "name": "prof",
+          "objc_type": "ColorSyncProfileRef _Nonnull"
+        },
+        {
+          "name": "signature",
+          "objc_type": "CFStringRef _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "bool"
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 378,
+      "doc": "Returns a Boolean value indicating whether a profile contains a given tag. - Parameters: - prof: The profile in which to search for the tag. - signature: The signature of the tag to search for. - Returns: `true` if the tag exists; otherwise, `false`."
+    },
+    {
+      "name": "ColorSyncProfileCopyTag",
+      "args": [
+        {
+          "name": "prof",
+          "objc_type": "ColorSyncProfileRef _Nonnull"
+        },
+        {
+          "name": "signature",
+          "objc_type": "CFStringRef _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "CFDataRef  _Nullable",
+        "already_retained": true
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 386,
+      "doc": "Copies a tag from a profile. - Parameters: - prof: The profile to copy the tag from. - signature: The signature of the tag to copy. - Returns: The tag data, or `NULL` in case of failure."
+    },
+    {
+      "name": "ColorSyncProfileSetTag",
+      "args": [
+        {
+          "name": "prof",
+          "objc_type": "ColorSyncMutableProfileRef _Nonnull"
+        },
+        {
+          "name": "signature",
+          "objc_type": "CFStringRef _Nonnull"
+        },
+        {
+          "name": "data",
+          "objc_type": "CFDataRef _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 394,
+      "doc": "Sets a tag in a mutable profile. - Parameters: - prof: The profile in which to set the tag. - signature: The signature of the tag to set in the profile. - data: The tag data."
+    },
+    {
+      "name": "ColorSyncProfileRemoveTag",
+      "args": [
+        {
+          "name": "prof",
+          "objc_type": "ColorSyncMutableProfileRef _Nonnull"
+        },
+        {
+          "name": "signature",
+          "objc_type": "CFStringRef _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 401,
+      "doc": "Removes a tag from a mutable profile. - Parameters: - prof: The profile to remove the tag from. - signature: The signature of the tag to remove."
+    },
+    {
+      "name": "ColorSyncIterateInstalledProfiles",
+      "args": [
+        {
+          "name": "callBack",
+          "objc_type": "ColorSyncProfileIterateCallback _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "seed",
+          "objc_type": "uint32_t * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "userInfo",
+          "objc_type": "void * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "error",
+          "objc_type": "CFErrorRef  _Nullable * _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 435,
+      "doc": "Iterates over the installed profiles. When called for the first time, this function returns only system profiles, because profile iteration is a slow process requiring multiple accesses to the file system. Clients are advised to register for ``kColorSyncProfileRepositoryChangeNotification`` using `CFNotificationCenter` or `NSNotificationCenter` to obtain all installed profiles. The notification callback receives, if possible, a `CFDictionary` containing a new seed value of the profile cache (key ``kColorSyncProfileCacheSeed`` / value `kCFNumberSInt32Type`). Comparing old and new seed values may prevent unnecessary calls to iterate installed profiles. Alternatively, call ``ColorSyncIterateInstalledProfilesWithOptions`` with the ``kColorSyncWaitForCacheReply`` option set to `kCFBooleanTrue` to obtain all installed profiles in one call. - Parameters: - callBack: A pointer to a client-provided function (can be `NULL`). - seed: A pointer to a cache seed owned by the client (can be `NULL`). - userInfo: User-defined data passed to the callback. - error: On failure, a pointer to an error describing the problem. Optional."
+    },
+    {
+      "name": "ColorSyncIterateInstalledProfilesWithOptions",
+      "args": [
+        {
+          "name": "callBack",
+          "objc_type": "ColorSyncProfileIterateCallback _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "seed",
+          "objc_type": "uint32_t * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "userInfo",
+          "objc_type": "void * _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "options",
+          "objc_type": "CFDictionaryRef _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "error",
+          "objc_type": "CFErrorRef  _Nullable * _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 452,
+      "doc": "Iterates over the installed profiles, using the given options. - Parameters: - callBack: A pointer to a client-provided function (can be `NULL`). - seed: A pointer to a cache seed owned by the client. - userInfo: User-defined data passed to the callback. - options: A dictionary with iteration options, for example ``kColorSyncWaitForCacheReply`` to wait for the cache to finish updating before returning. - error: On failure, a pointer to an error describing the problem. Optional."
+    },
+    {
+      "name": "ColorSyncProfileInstall",
+      "args": [
+        {
+          "name": "profile",
+          "objc_type": "ColorSyncProfileRef _Nonnull"
+        },
+        {
+          "name": "domain",
+          "objc_type": "CFStringRef _Nonnull"
+        },
+        {
+          "name": "subpath",
+          "objc_type": "CFStringRef _Nonnull"
+        },
+        {
+          "name": "error",
+          "objc_type": "CFErrorRef  _Nullable * _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "bool"
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 479,
+      "doc": "Installs a profile in the specified domain. The `domain` is either ``kColorSyncProfileComputerDomain`` or ``kColorSyncProfileUserDomain``. ``kColorSyncProfileComputerDomain`` is for sharing the profiles (from `/Library/ColorSync/Profiles`). ``kColorSyncProfileUserDomain`` is for user custom profiles (installed under the home directory, that is, in `~/Library/ColorSync/Profiles`). `NULL` is the same as ``kColorSyncProfileUserDomain``. The `subpath` is the file system representation of the path of the file to contain the installed profile. The function interprets the last component of the path as a file name if it ends with the extension `.icc`. Otherwise, the function interprets the subpath as the directory path and creates the file name from the profile description tag, appended with the `.icc` extension. Using this function requires `COLORSYNC_PROFILE_INSTALL_ENTITLEMENT`. - Parameters: - profile: The profile to install. - domain: The domain to install into, either ``kColorSyncProfileComputerDomain`` or ``kColorSyncProfileUserDomain``. - subpath: A string created from the file system representation of the path of the file to contain the installed profile. - error: On failure, a pointer to an error describing the problem. Optional. - Returns: `true` on success, or `false` in case of error."
+    },
+    {
+      "name": "ColorSyncProfileUninstall",
+      "args": [
+        {
+          "name": "profile",
+          "objc_type": "ColorSyncProfileRef _Nonnull"
+        },
+        {
+          "name": "error",
+          "objc_type": "CFErrorRef  _Nullable * _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "bool"
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 494,
+      "doc": "Uninstalls a profile. The profile must return a valid URL for ``ColorSyncProfileGetURL``; that is, it must be created with ``ColorSyncProfileCreateWithURL``. Also, the URL must be in either ``kColorSyncProfileComputerDomain`` or ``kColorSyncProfileUserDomain``, including subfolders of those. Using this function requires `COLORSYNC_PROFILE_INSTALL_ENTITLEMENT`. - Parameters: - profile: The profile to uninstall. - error: On failure, a pointer to an error describing the problem. Optional. - Returns: `true` on success, or `false` in case of error."
+    },
+    {
+      "name": "ColorSyncProfileCreateCopyWithHeadroomAdaptiveGainCurveMetadata",
+      "args": [
+        {
+          "name": "profile",
+          "objc_type": "ColorSyncProfileRef _Nonnull"
+        },
+        {
+          "name": "data",
+          "objc_type": "CFDataRef _Nonnull"
+        },
+        {
+          "name": "options",
+          "objc_type": "CFDictionaryRef _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "ColorSyncProfileRef  _Nullable",
+        "already_retained": true
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncHeadroomAdaptiveGainCurve.h",
+      "sdk_line": 34,
+      "doc": "Returns a copy of a profile with the supplied Headroom Adaptive Gain Curve data embedded as an HAGC tag. - Parameters: - profile: A profile whose CICP tag indicates a PQ, HLG, or linear transfer function. (Use linear for extended-range data.) Passing an SDR profile returns `NULL`. - data: The raw Headroom Adaptive Gain Curve data to embed. Must be non-`NULL`. - options: Reserved for future use. Pass `NULL`. - Returns: A new profile that the caller must release with `CFRelease`, or `NULL` on failure."
+    },
+    {
+      "name": "ColorSyncProfileCopyHeadroomAdaptiveGainCurveMetadata",
+      "args": [
+        {
+          "name": "profile",
+          "objc_type": "ColorSyncProfileRef _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "CFDataRef  _Nullable",
+        "already_retained": true
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncHeadroomAdaptiveGainCurve.h",
+      "sdk_line": 41,
+      "doc": "Returns a copy of the raw Headroom Adaptive Gain Curve data embedded in a profile. - Parameter profile: The profile to read the HAGC tag from. - Returns: A copy of the raw HAGC data that the caller must release with `CFRelease`, or `NULL` if the profile contains no HAGC tag."
+    },
+    {
+      "name": "ColorSyncProfileCreateCopyWithHeadroomAdaptiveGainCurveInfoDictionary",
+      "args": [
+        {
+          "name": "profile",
+          "objc_type": "ColorSyncProfileRef _Nonnull"
+        },
+        {
+          "name": "info",
+          "objc_type": "CFDictionaryRef _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "ColorSyncProfileRef  _Nullable",
+        "already_retained": true
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncHeadroomAdaptiveGainCurve.h",
+      "sdk_line": 53,
+      "doc": "Returns a copy of a profile with an HAGC tag synthesized from an info dictionary. - Parameters: - profile: A profile whose CICP tag indicates a PQ, HLG, or linear transfer function. (Use linear for extended-range data.) Passing an SDR profile returns `NULL`. - info: A dictionary describing the gain curve. See the key constants declared below for its structure. - Returns: A new profile that the caller must release with `CFRelease`, or `NULL` on failure."
+    },
+    {
+      "name": "ColorSyncProfileCopyHeadroomAdaptiveGainCurveInfoDictionary",
+      "args": [
+        {
+          "name": "profile",
+          "objc_type": "ColorSyncProfileRef _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "CFDictionaryRef  _Nullable",
+        "already_retained": true
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncHeadroomAdaptiveGainCurve.h",
+      "sdk_line": 61,
+      "doc": "Returns a dictionary describing the Headroom Adaptive Gain Curve decoded from a profile. - Parameter profile: The profile to decode the HAGC tag from. - Returns: A dictionary describing the gain curve, which the caller must release with `CFRelease`, or `NULL` if the profile carries no HAGC tag. See the key constants declared below for the dictionary's contents."
+    },
+    {
+      "name": "ColorSyncProfileContainsHeadroomAdaptiveGainCurve",
+      "args": [
+        {
+          "name": "profile",
+          "objc_type": "ColorSyncProfileRef _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "bool"
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncHeadroomAdaptiveGainCurve.h",
+      "sdk_line": 67,
+      "doc": "Returns whether a profile contains a Headroom Adaptive Gain Curve tag. - Parameter profile: The profile to test. - Returns: `true` if the profile contains an HAGC tag; otherwise, `false`."
+    },
+    {
+      "name": "ColorSyncTransformGetTypeID",
+      "return": {
+        "objc_type": "CFTypeID"
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 30,
+      "doc": "Returns the type identifier for the `ColorSyncTransform` opaque type. - Returns: The `CFTypeID` for `ColorSyncTransform` objects."
+    },
+    {
+      "name": "ColorSyncTransformCreate",
+      "args": [
+        {
+          "name": "profileSequence",
+          "objc_type": "CFArrayRef _Nullable",
+          "nullable": true
+        },
+        {
+          "name": "options",
+          "objc_type": "CFDictionaryRef _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "ColorSyncTransformRef  _Nullable",
+        "already_retained": true
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 51,
+      "doc": "Creates a color transform from a sequence of profiles. Each dictionary in `profileSequence` contains a profile object and information on the usage of the profile in the transform. Required keys: - ``kColorSyncProfile``: A ``ColorSyncProfileRef``. - ``kColorSyncRenderingIntent``: A `CFStringRef` defining the rendering intent. - ``kColorSyncTransformTag``: A `CFStringRef` defining which tags to use. Optional key: - ``kColorSyncBlackPointCompensation``: A `CFBooleanRef` to enable or disable black point compensation. - Parameters: - profileSequence: An array of dictionaries, each one containing a profile object and the information on the usage of the profile in the transform. - options: A dictionary with additional public global options (for example, preferred CMM, quality, and so on). It can also contain custom options that are CMM specific. - Returns: A new ``ColorSyncTransformRef``, or `NULL` in case of failure."
+    },
+    {
+      "name": "ColorSyncTransformCopyProperty",
+      "args": [
+        {
+          "name": "transform",
+          "objc_type": "ColorSyncTransformRef _Nonnull"
+        },
+        {
+          "name": "key",
+          "objc_type": "CFTypeRef _Nonnull"
+        },
+        {
+          "name": "options",
+          "objc_type": "CFDictionaryRef _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "CFTypeRef  _Nullable",
+        "already_retained": true
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 60,
+      "doc": "Copies a property from a color transform. - Parameters: - transform: The transform from which to copy the property. - key: A `CFTypeRef` used as a key to identify the property. - options: A dictionary with additional options."
+    },
+    {
+      "name": "ColorSyncTransformSetProperty",
+      "args": [
+        {
+          "name": "transform",
+          "objc_type": "ColorSyncTransformRef _Nonnull"
+        },
+        {
+          "name": "key",
+          "objc_type": "CFTypeRef _Nonnull"
+        },
+        {
+          "name": "property",
+          "objc_type": "CFTypeRef _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 69,
+      "doc": "Sets a property on a color transform. - Parameters: - transform: The transform in which to set the property. - key: A `CFTypeRef` used as a key to identify the property. - property: The `CFTypeRef` to set as the property."
+    },
+    {
+      "name": "ColorSyncTransformGetProfileSequence",
+      "args": [
+        {
+          "name": "transform",
+          "objc_type": "ColorSyncTransformRef _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "CFArrayRef  _Nullable"
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 74,
+      "doc": "Returns the profile sequence used to create a color transform. - Parameter transform: The transform from which to get the profile sequence used to create the transform."
+    },
+    {
+      "name": "ColorSyncTransformConvert",
+      "args": [
+        {
+          "name": "transform",
+          "objc_type": "ColorSyncTransformRef _Nonnull"
+        },
+        {
+          "name": "width",
+          "objc_type": "size_t"
+        },
+        {
+          "name": "height",
+          "objc_type": "size_t"
+        },
+        {
+          "name": "dst",
+          "objc_type": "void * _Nonnull"
+        },
+        {
+          "name": "dstDepth",
+          "objc_type": "ColorSyncDataDepth"
+        },
+        {
+          "name": "dstLayout",
+          "objc_type": "ColorSyncDataLayout"
+        },
+        {
+          "name": "dstBytesPerRow",
+          "objc_type": "size_t"
+        },
+        {
+          "name": "src",
+          "objc_type": "const void * _Nonnull"
+        },
+        {
+          "name": "srcDepth",
+          "objc_type": "ColorSyncDataDepth"
+        },
+        {
+          "name": "srcLayout",
+          "objc_type": "ColorSyncDataLayout"
+        },
+        {
+          "name": "srcBytesPerRow",
+          "objc_type": "size_t"
+        },
+        {
+          "name": "options",
+          "objc_type": "CFDictionaryRef _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": "bool"
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 167,
+      "doc": "Converts color data from a source layout to a destination layout using a color transform. Use this function with care for performance reasons. Color conversions are computationally intensive and the recommended way to perform these is by using the vImage converter with a ColorSync code fragment. vImage employs vectorized code which is not only faster but also more battery efficient. Please visit the following link to see a sample application of vImage used in conjunction with ColorSync: \u003chttps://developer.apple.com/library/prerelease/content/samplecode/convertImage/Listings/convertImage_main_c.html\u003e More details regarding ColorSync code fragments are included below, as well. - Parameters: - transform: The transform to use for converting color. - width: The width of the image in pixels. - height: The height of the image in pixels. - dst: A pointer to the destination where the function writes the results. - dstDepth: Describes the bit depth and type of the destination color components. - dstLayout: Describes the format and byte packing of the destination pixels. - dstBytesPerRow: The number of bytes in the row of data. - src: A pointer to the data to convert. - srcDepth: Describes the bit depth and type of the source color components. - srcLayout: Describes the format and byte packing of the source pixels. - srcBytesPerRow: The number of bytes in the row of data. - options: A dictionary with additional options. - Returns: `true` if the conversion succeeds, or `false` otherwise."
+    },
+    {
+      "name": "ColorSyncCreateCodeFragment",
+      "args": [
+        {
+          "name": "profileSequence",
+          "objc_type": "CFArrayRef _Nonnull"
+        },
+        {
+          "name": "options",
+          "objc_type": "CFDictionaryRef _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "CFTypeRef  _Nonnull",
+        "already_retained": true
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 389,
+      "doc": "Creates a code fragment from a sequence of profiles. Each dictionary in `profileSequence` contains a profile object and information on the usage of the profile in the code fragment. Required keys: - ``kColorSyncProfile``: A ``ColorSyncProfileRef``. - ``kColorSyncRenderingIntent``: A `CFStringRef` defining the rendering intent. - ``kColorSyncTransformTag``: A `CFStringRef` defining which tags to use. Optional key: - ``kColorSyncBlackPointCompensation``: A `CFBooleanRef` to enable or disable black point compensation. - ``kColorSyncExtendedRange``: A `CFBooleanRef` to enable or disable extended range; disabling implies floating point conversions. - Parameters: - profileSequence: An array of dictionaries, each one containing a profile object and the information on the usage of the profile in the code fragment. - options: A dictionary with additional options as in the case of creating a `ColorSyncTransform`. - Returns: A `CFTypeRef` representing a ColorSync code fragment, or `NULL` in case of failure."
+    },
+    {
+      "name": "ColorSyncCMMGetTypeID",
+      "return": {
+        "objc_type": "CFTypeID"
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncCMM.h",
+      "sdk_line": 42,
+      "doc": "Returns the `CFTypeID` for `ColorSyncCMM`s."
+    },
+    {
+      "name": "ColorSyncCMMCreate",
+      "args": [
+        {
+          "name": "cmmBundle",
+          "objc_type": "CFBundleRef _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "ColorSyncCMMRef  _Nullable",
+        "already_retained": true
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncCMM.h",
+      "sdk_line": 48,
+      "doc": "Creates a CMM object from a CMM bundle. - Parameter cmmBundle: The bundle containing the CMM. - Returns: A new ``ColorSyncCMMRef``, or `NULL` in case of failure."
+    },
+    {
+      "name": "ColorSyncCMMGetBundle",
+      "args": [
+        {
+          "name": "",
+          "objc_type": "ColorSyncCMMRef _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "CFBundleRef  _Nullable"
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncCMM.h",
+      "sdk_line": 53,
+      "doc": "Returns the bundle associated with a CMM. - Returns: The `CFBundleRef` for the CMM, or `NULL` for the built-in Apple CMM."
+    },
+    {
+      "name": "ColorSyncCMMCopyLocalizedName",
+      "args": [
+        {
+          "name": "",
+          "objc_type": "ColorSyncCMMRef _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "CFStringRef  _Nullable",
+        "already_retained": true
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncCMM.h",
+      "sdk_line": 60,
+      "doc": "Copies the localized name of a CMM. Use this function to get the name of the built-in CMM. - Returns: The localized name of the CMM."
+    },
+    {
+      "name": "ColorSyncCMMCopyCMMIdentifier",
+      "args": [
+        {
+          "name": "",
+          "objc_type": "ColorSyncCMMRef _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "CFStringRef  _Nullable",
+        "already_retained": true
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncCMM.h",
+      "sdk_line": 67,
+      "doc": "Copies the identifier of a CMM. Use this function to get the identifier of the built-in CMM. - Returns: The identifier of the CMM."
+    },
+    {
+      "name": "ColorSyncIterateInstalledCMMs",
+      "args": [
+        {
+          "name": "callBack",
+          "objc_type": "ColorSyncCMMIterateCallback _Nonnull"
+        },
+        {
+          "name": "userInfo",
+          "objc_type": "void * _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncCMM.h",
+      "sdk_line": 83,
+      "doc": "Iterates over the installed CMMs, invoking a callback for each one. - Parameters: - callBack: A pointer to a client-provided function. - userInfo: A pointer to the user info that the framework passes to the callback. Optional."
+    },
+    {
+      "name": "ColorSyncRegisterDevice",
+      "args": [
+        {
+          "name": "deviceClass",
+          "objc_type": "CFStringRef _Nonnull"
+        },
+        {
+          "name": "deviceID",
+          "objc_type": "CFUUIDRef _Nonnull"
+        },
+        {
+          "name": "deviceInfo",
+          "objc_type": "CFDictionaryRef _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "bool"
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncDevice.h",
+      "sdk_line": 170,
+      "doc": "Registers a device of the given class with ColorSync. The `deviceInfo` dictionary requires the following keys: - ``kColorSyncDeviceDescriptions``: A `CFDictionary` with localized names of the device. Localization keys must be five-character strings containing a language code and region code in the `lc_RG` format, and must contain (at least) the `en_US` locale. - ``kColorSyncFactoryProfiles``: A `CFDictionary` of factory profile info dictionaries. The keys are the profile IDs and the values are the profile info dictionaries. It may also include the following optional keys: - ``kColorSyncDeviceHostScope``: The host scope of the device; one of `kCFPreferencesCurrentHost` or `kCFPreferencesAnyHost`. If you don't specify it, the framework assumes `kCFPreferencesCurrentHost`. - ``kColorSyncDeviceUserScope``: The user scope of the device; one of `kCFPreferencesCurrentUser` or `kCFPreferencesAnyUser`. If you don't specify it, the framework assumes `kCFPreferencesCurrentUser`. The factory profiles dictionary (the value for the key ``kColorSyncFactoryProfiles`` in `deviceInfo`) requires the following keys and values. A ProfileID (of `CFStringRef` type) identifies each profile and serves as the key. The value associated with the key is a profile info dictionary that describes an individual device profile. - ``kColorSyncDeviceDefaultProfileID``: The associated value must be one of the ProfileIDs present in the dictionary. Presence of this key is not required if there is only one factory profile. Each profile info `CFDictionary` requires the following keys: - ``kColorSyncDeviceProfileURL``: The `CFURLRef` of the profile to register. - ``kColorSyncDeviceModeDescriptions``: A `CFDictionary` with localized device mode names for the profile. Localization keys must be five-character strings containing a language code and region code in the `lc_RG` format, and must contain (at least) the `en_US` locale. For example, `en_US` \"Glossy Paper with best quality\". Example of a `deviceInfo` dictionary: \u003c\u003c kColorSyncDeviceDescriptions   \u003c\u003c en_US  My Little Printer de_DE  Mein Kleiner Drucker fr_FR  Mon petit immprimeur ... \u003e\u003e kColorSyncFactoryProfiles       \u003c\u003c CFSTR(\"Profile 1\")  \u003c\u003c kColorSyncDeviceProfileURL    {CFURLRef} kColorSyncDeviceModeDescriptions    \u003c\u003c en_US Glossy Paper de_DE Glanzpapier fr_FR Papier glace ... \u003e\u003e ... kColorSyncDeviceDefaultProfileID  CFSTR(\"Profile 1\") \u003e\u003e kColorSyncDeviceUserScope   kCFPreferencesAnyUser kColorSyncDeviceHostScope   kCFPreferencesCurrentHost \u003c\u003c - Note: Scope for factory profiles is exactly the same as the device scope. - Note: Pass `kCFNull` in lieu of the profile URL, or no URL key/value pair at all, if a factory profile is not available. This enables setting a custom profile. - Note: For compatibility with the legacy API, create the profile keys as `CFString`s from `uint32_t` numbers as follows: `CFStringRef key = CFStringCreateWithFormat(NULL, NULL, CFSTR(\"%u\"), (uint32_t) i);` - Parameters: - deviceClass: The class of the device to register. - deviceID: The identifier of the device to register. - deviceInfo: A dictionary containing the information needed to register a device. - Returns: `true` on success and `false` in case of failure."
+    },
+    {
+      "name": "ColorSyncUnregisterDevice",
+      "args": [
+        {
+          "name": "deviceClass",
+          "objc_type": "CFStringRef _Nonnull"
+        },
+        {
+          "name": "deviceID",
+          "objc_type": "CFUUIDRef _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "bool"
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncDevice.h",
+      "sdk_line": 178,
+      "doc": "Unregisters a device of the given class and identifier. - Parameters: - deviceClass: The class of the device to unregister. - deviceID: The identifier of the device to unregister. - Returns: `true` on success and `false` in case of failure."
+    },
+    {
+      "name": "ColorSyncDeviceSetCustomProfiles",
+      "args": [
+        {
+          "name": "deviceClass",
+          "objc_type": "CFStringRef _Nonnull"
+        },
+        {
+          "name": "deviceID",
+          "objc_type": "CFUUIDRef _Nonnull"
+        },
+        {
+          "name": "profileInfo",
+          "objc_type": "CFDictionaryRef _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "bool"
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncDevice.h",
+      "sdk_line": 209,
+      "doc": "Sets custom profiles for a device in lieu of its factory profiles. The `profileInfo` dictionary requires the following keys: - ProfileIDs, which must be a subset of the ProfileIDs you registered the device with, or ``kColorSyncDeviceDefaultProfileID`` for setting a custom default profile. It requires the following values: - The `CFURLRef` of the profile to set as a custom profile. It may also include the following optional keys: - ``kColorSyncProfileHostScope``: The host scope of the profile; one of `kCFPreferencesCurrentHost` or `kCFPreferencesAnyHost`. If you don't specify it, the framework assumes `kCFPreferencesCurrentHost`. - ``kColorSyncProfileUserScope``: The user scope of the profile; one of `kCFPreferencesCurrentUser` or `kCFPreferencesAnyUser`. If you don't specify it, the framework assumes `kCFPreferencesCurrentUser`. - Note: Profile scope for custom profiles cannot exceed the scope of the factory profiles. - Note: There is only one host scope and user scope per dictionary (that is, per call). - Note: Pass `kCFNull` in lieu of the profile URL to unset the custom profile and reset the current profile to the factory profile. - Parameters: - deviceClass: The class of the device. - deviceID: The identifier of the device. - profileInfo: A `CFDictionary` containing the information about custom profiles to set in lieu of factory profiles. - Returns: `true` on success and `false` in case of failure."
+    },
+    {
+      "name": "ColorSyncDeviceCopyDeviceInfo",
+      "args": [
+        {
+          "name": "deviceClass",
+          "objc_type": "CFStringRef _Nonnull"
+        },
+        {
+          "name": "devID",
+          "objc_type": "CFUUIDRef _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "CFDictionaryRef  _Nullable",
+        "already_retained": true
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncDevice.h",
+      "sdk_line": 240,
+      "doc": "Copies information about a device, resolved for the current host and current user. Returns a dictionary with the following keys and values resolved for the current host and current user: \u003c\u003c kColorSyncDeviceClass                   {camera, display, printer, scanner} kColorSyncDeviceID                      {CFUUIDRef registered with ColorSync} kColorSyncDeviceDescription             {localized device description} kColorSyncFactoryProfiles  (dictionary) \u003c\u003c {ProfileID}    (dictionary) \u003c\u003c kColorSyncDeviceProfileURL      {CFURLRef or kCFNull} kColorSyncDeviceModeDescription {localized mode description} \u003e\u003e ... kColorSyncDeviceDefaultProfileID {ProfileID} \u003e\u003e kColorSyncCustomProfiles  (dictionary) \u003c\u003c {ProfileID}    {CFURLRef or kCFNull} ... \u003c\u003c kColorSyncDeviceUserScope              {kCFPreferencesAnyUser or kCFPreferencesCurrentUser} kColorSyncDeviceHostScope              {kCFPreferencesAnyHost or kCFPreferencesCurrentHost} \u003e\u003e - Parameters: - deviceClass: The class of the device. - devID: The identifier of the device. - Returns: A dictionary describing the device, or `NULL` if no matching device is registered."
+    },
+    {
+      "name": "ColorSyncIterateDeviceProfiles",
+      "args": [
+        {
+          "name": "callBack",
+          "objc_type": "ColorSyncDeviceProfileIterateCallback _Nonnull"
+        },
+        {
+          "name": "userInfo",
+          "objc_type": "void * _Nullable",
+          "nullable": true
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncDevice.h",
+      "sdk_line": 267,
+      "doc": "Iterates over the profiles registered for all devices, invoking a callback for each. - Parameters: - callBack: The callback to invoke for each registered device profile. - userInfo: Caller-supplied context passed through to the callback. Optional."
+    },
+    {
+      "name": "CGDisplayCreateUUIDFromDisplayID",
+      "args": [
+        {
+          "name": "displayID",
+          "objc_type": "uint32_t"
+        }
+      ],
+      "return": {
+        "objc_type": "CFUUIDRef  _Nonnull",
+        "already_retained": true
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncDevice.h",
+      "sdk_line": 270
+    },
+    {
+      "name": "CGDisplayGetDisplayIDFromUUID",
+      "args": [
+        {
+          "name": "uuid",
+          "objc_type": "CFUUIDRef _Nonnull"
+        }
+      ],
+      "return": {
+        "objc_type": "uint32_t"
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncDevice.h",
+      "sdk_line": 275
+    },
+    {
+      "name": "ColorSyncAPIVersion",
+      "return": {
+        "objc_type": "uint32_t"
+      },
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSync.h",
+      "sdk_line": 25,
+      "doc": "Returns the version of the ColorSync API. - Returns: The API version as a binary-coded decimal `uint32_t`. From most to least significant byte, the value encodes the major OS version, minor OS version, patch version, and API version — that is, `(major \u003c\u003c 24) | (minor \u003c\u003c 16) | (dot \u003c\u003c 8) | (apiVersion \u0026 0xFF)`."
+    }
+  ],
+  "externs": [
+    {
+      "name": "kColorSyncGenericGrayProfile",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 34,
+      "doc": "The generic gray color profile."
+    },
+    {
+      "name": "kColorSyncGenericGrayGamma22Profile",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 36,
+      "doc": "The generic gray color profile with a gamma of 2.2."
+    },
+    {
+      "name": "kColorSyncGenericRGBProfile",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 38,
+      "doc": "The generic RGB color profile."
+    },
+    {
+      "name": "kColorSyncGenericCMYKProfile",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 40,
+      "doc": "The generic CMYK color profile."
+    },
+    {
+      "name": "kColorSyncDisplayP3Profile",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 42,
+      "doc": "The Display P3 color profile."
+    },
+    {
+      "name": "kColorSyncSRGBProfile",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 44,
+      "doc": "The sRGB color profile."
+    },
+    {
+      "name": "kColorSyncAdobeRGB1998Profile",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 46,
+      "doc": "The Adobe RGB (1998) color profile."
+    },
+    {
+      "name": "kColorSyncGenericLabProfile",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 48,
+      "doc": "The generic CIELAB color profile."
+    },
+    {
+      "name": "kColorSyncGenericXYZProfile",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 50,
+      "doc": "The generic CIEXYZ color profile."
+    },
+    {
+      "name": "kColorSyncACESCGLinearProfile",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 53,
+      "doc": "The ACEScg linear color profile."
+    },
+    {
+      "name": "kColorSyncDCIP3Profile",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 55,
+      "doc": "The DCI-P3 color profile."
+    },
+    {
+      "name": "kColorSyncITUR709Profile",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 57,
+      "doc": "The ITU-R BT.709 color profile."
+    },
+    {
+      "name": "kColorSyncITUR2020Profile",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 59,
+      "doc": "The ITU-R BT.2020 color profile."
+    },
+    {
+      "name": "kColorSyncROMMRGBProfile",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 62,
+      "doc": "The ROMM RGB (ProPhoto RGB) color profile."
+    },
+    {
+      "name": "kColorSyncWebSafeColorsProfile",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 65,
+      "doc": "The web-safe colors profile."
+    },
+    {
+      "name": "kColorSyncProfileHeader",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 68,
+      "doc": "A key for the profile's header data."
+    },
+    {
+      "name": "kColorSyncProfileClass",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 70,
+      "doc": "A key for the profile's class."
+    },
+    {
+      "name": "kColorSyncProfileColorSpace",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 72,
+      "doc": "A key for the profile's color space."
+    },
+    {
+      "name": "kColorSyncProfilePCS",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 74,
+      "doc": "A key for the profile's connection space (PCS)."
+    },
+    {
+      "name": "kColorSyncProfileURL",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 76,
+      "doc": "A key for the profile's URL."
+    },
+    {
+      "name": "kColorSyncProfileDescription",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 78,
+      "doc": "A key for the profile's localized description."
+    },
+    {
+      "name": "kColorSyncProfileMD5Digest",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 80,
+      "doc": "A key for the profile's MD5 digest."
+    },
+    {
+      "name": "kColorSyncProfileIsValid",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 82,
+      "doc": "A key indicating whether the profile is valid."
+    },
+    {
+      "name": "kColorSyncSigAToB0Tag",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 85,
+      "doc": "The signature of the device-to-PCS transform tag for the perceptual rendering intent."
+    },
+    {
+      "name": "kColorSyncSigAToB1Tag",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 87,
+      "doc": "The signature of the device-to-PCS transform tag for the media-relative colorimetric rendering intent."
+    },
+    {
+      "name": "kColorSyncSigAToB2Tag",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 89,
+      "doc": "The signature of the device-to-PCS transform tag for the saturation rendering intent."
+    },
+    {
+      "name": "kColorSyncSigBToA0Tag",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 91,
+      "doc": "The signature of the PCS-to-device transform tag for the perceptual rendering intent."
+    },
+    {
+      "name": "kColorSyncSigBToA1Tag",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 93,
+      "doc": "The signature of the PCS-to-device transform tag for the media-relative colorimetric rendering intent."
+    },
+    {
+      "name": "kColorSyncSigBToA2Tag",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 95,
+      "doc": "The signature of the PCS-to-device transform tag for the saturation rendering intent."
+    },
+    {
+      "name": "kColorSyncSigCmykData",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 97,
+      "doc": "The signature identifying the CMYK data color space."
+    },
+    {
+      "name": "kColorSyncSigGrayData",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 99,
+      "doc": "The signature identifying the grayscale data color space."
+    },
+    {
+      "name": "kColorSyncSigLabData",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 101,
+      "doc": "The signature identifying the CIELAB data color space."
+    },
+    {
+      "name": "kColorSyncSigRgbData",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 103,
+      "doc": "The signature identifying the RGB data color space."
+    },
+    {
+      "name": "kColorSyncSigXYZData",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 105,
+      "doc": "The signature identifying the CIEXYZ data color space."
+    },
+    {
+      "name": "kColorSyncSigAbstractClass",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 107,
+      "doc": "The signature identifying an abstract profile class."
+    },
+    {
+      "name": "kColorSyncSigBlueTRCTag",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 109,
+      "doc": "The signature of the blue channel's tone reproduction curve (TRC) tag."
+    },
+    {
+      "name": "kColorSyncSigBlueColorantTag",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 111,
+      "doc": "The signature of the blue colorant tag, giving the blue channel's PCSXYZ values."
+    },
+    {
+      "name": "kColorSyncSigMediaBlackPointTag",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 113,
+      "doc": "The signature of the media black point tag."
+    },
+    {
+      "name": "kColorSyncSigCopyrightTag",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 115,
+      "doc": "The signature of the profile copyright tag."
+    },
+    {
+      "name": "kColorSyncSigProfileDescriptionTag",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 117,
+      "doc": "The signature of the profile description tag."
+    },
+    {
+      "name": "kColorSyncSigDeviceModelDescTag",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 119,
+      "doc": "The signature of the device model description tag."
+    },
+    {
+      "name": "kColorSyncSigDeviceMfgDescTag",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 121,
+      "doc": "The signature of the device manufacturer description tag."
+    },
+    {
+      "name": "kColorSyncSigGreenTRCTag",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 123,
+      "doc": "The signature of the green channel's tone reproduction curve (TRC) tag."
+    },
+    {
+      "name": "kColorSyncSigGreenColorantTag",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 125,
+      "doc": "The signature of the green colorant tag, giving the green channel's PCSXYZ values."
+    },
+    {
+      "name": "kColorSyncSigGamutTag",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 127,
+      "doc": "The signature of the gamut tag, marking which PCS colors fall outside the device gamut."
+    },
+    {
+      "name": "kColorSyncSigGrayTRCTag",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 129,
+      "doc": "The signature of the grayscale tone reproduction curve (TRC) tag."
+    },
+    {
+      "name": "kColorSyncSigLinkClass",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 131,
+      "doc": "The signature identifying a device-link profile class."
+    },
+    {
+      "name": "kColorSyncSigDisplayClass",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 133,
+      "doc": "The signature identifying a display device profile class."
+    },
+    {
+      "name": "kColorSyncSigNamedColor2Tag",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 135,
+      "doc": "The signature of the named color (version 2) tag."
+    },
+    {
+      "name": "kColorSyncSigNamedColorClass",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 137,
+      "doc": "The signature identifying a named color profile class."
+    },
+    {
+      "name": "kColorSyncSigPreview0Tag",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 139,
+      "doc": "The signature of the preview tag for the perceptual rendering intent."
+    },
+    {
+      "name": "kColorSyncSigPreview1Tag",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 141,
+      "doc": "The signature of the preview tag for the media-relative colorimetric rendering intent."
+    },
+    {
+      "name": "kColorSyncSigPreview2Tag",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 143,
+      "doc": "The signature of the preview tag for the saturation rendering intent."
+    },
+    {
+      "name": "kColorSyncSigOutputClass",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 145,
+      "doc": "The signature identifying an output (printer) device profile class."
+    },
+    {
+      "name": "kColorSyncSigProfileSequenceDescTag",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 147,
+      "doc": "The signature of the profile sequence description tag."
+    },
+    {
+      "name": "kColorSyncSigRedTRCTag",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 149,
+      "doc": "The signature of the red channel's tone reproduction curve (TRC) tag."
+    },
+    {
+      "name": "kColorSyncSigRedColorantTag",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 151,
+      "doc": "The signature of the red colorant tag, giving the red channel's PCSXYZ values."
+    },
+    {
+      "name": "kColorSyncSigInputClass",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 153,
+      "doc": "The signature identifying an input (scanner or camera) device profile class."
+    },
+    {
+      "name": "kColorSyncSigColorSpaceClass",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 155,
+      "doc": "The signature identifying a color-space conversion profile class."
+    },
+    {
+      "name": "kColorSyncSigTechnologyTag",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 157,
+      "doc": "The signature of the technology tag, identifying the device technology."
+    },
+    {
+      "name": "kColorSyncSigViewingConditionsTag",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 159,
+      "doc": "The signature of the viewing conditions tag."
+    },
+    {
+      "name": "kColorSyncSigViewingCondDescTag",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 161,
+      "doc": "The signature of the viewing conditions description tag."
+    },
+    {
+      "name": "kColorSyncSigMediaWhitePointTag",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 163,
+      "doc": "The signature of the media white point tag."
+    },
+    {
+      "name": "kColorSyncProfileComputerDomain",
+      "objc_type": "CS_AVAILABLE_STARTING CFStringRef",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 169,
+      "doc": "The profile domain for profiles shared by all users of the computer. On macOS, these profiles are in the `/Library/ColorSync/Profiles` folder."
+    },
+    {
+      "name": "kColorSyncProfileUserDomain",
+      "objc_type": "CS_AVAILABLE_STARTING CFStringRef",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 173,
+      "doc": "The profile domain for the current user's profiles. On macOS, these profiles are in the `~/Library/ColorSync/Profiles` folder."
+    },
+    {
+      "name": "kColorSyncDoNotSubstituteProfiles",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 200,
+      "doc": "An option that, when set to `kCFBooleanTrue`, skips substituting a matching system-provided profile."
+    },
+    {
+      "name": "kColorSyncProfileCacheSeed",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 416,
+      "doc": "The current profile-cache seed (uint32_t), sent with ``kColorSyncProfileRepositoryChangeNotification``."
+    },
+    {
+      "name": "kColorSyncWaitForCacheReply",
+      "objc_type": "CS_AVAILABLE_STARTING CFStringRef",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncProfile.h",
+      "sdk_line": 442,
+      "doc": "An iteration option that waits for the profile cache to finish updating before returning."
+    },
+    {
+      "name": "kColorSyncHeadroomAdaptiveGainCurveApplicationVersion",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncHeadroomAdaptiveGainCurve.h",
+      "sdk_line": 118,
+      "doc": "Application version (uint8_t). 3-bit field from ST 2094-50 Table C.1. Must be `0`; the framework rejects any other value."
+    },
+    {
+      "name": "kColorSyncHeadroomAdaptiveGainCurveColorVolumeTransform",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncHeadroomAdaptiveGainCurve.h",
+      "sdk_line": 125,
+      "doc": "Top-level container (CFDictionaryRef) for the color volume transform. It may contain parameters for Headroom-Adaptive tone mapping or indicate usage of the Reference-White Tone Mapping Method. It allows for specifying a custom HDR Reference White luminance."
+    },
+    {
+      "name": "kColorSyncCustomHDRReferenceWhite",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncHeadroomAdaptiveGainCurve.h",
+      "sdk_line": 132,
+      "doc": "Custom reference white luminance in nits (float), overriding the standard 203-nit reference white. Must be greater than `0`. The encoding has a resolution of 0.2 nits and a maximum of 10000 nits; the framework clamps values to that range."
+    },
+    {
+      "name": "kColorSyncHeadroomAdaptiveToneMappingInfo",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncHeadroomAdaptiveGainCurve.h",
+      "sdk_line": 140,
+      "doc": "Container (CFDictionaryRef) for Headroom-Adaptive tone mapping parameters. Present when Headroom-Adaptive tone mapping is encoded. Contains ``kColorSyncBaselineHeadroomStops`` and either ``kColorSyncHeadroomAdaptiveGainCurveInfo`` or, when set to `kCFBooleanFalse`, indicates the Reference-White Tone Mapping Operator (RWTMO) method."
+    },
+    {
+      "name": "kColorSyncBaselineHeadroomStops",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncHeadroomAdaptiveGainCurve.h",
+      "sdk_line": 143,
+      "doc": "Headroom of the source (baseline) curve in stops (log2) above reference white (float in the range [0.0, 6.0])."
+    },
+    {
+      "name": "kColorSyncHeadroomAdaptiveGainCurveInfo",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncHeadroomAdaptiveGainCurve.h",
+      "sdk_line": 150,
+      "doc": "Container (CFDictionaryRef) for the adaptive gain curve data. Contains the alternate curve count, sharing flags, chromaticities, and the per-alternate curve info array. When set to `kCFBooleanFalse` instead of a CFDictionary, indicates the Reference-White Tone Mapping Operator (RWTMO) method."
+    },
+    {
+      "name": "kColorSyncAlternateCurveCount",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncHeadroomAdaptiveGainCurve.h",
+      "sdk_line": 155,
+      "doc": "Number of alternate (tone-mapped) curves encoded in the metadata (uint8_t in the range [0, 4]). Each alternate targets a different display headroom."
+    },
+    {
+      "name": "kColorSyncAlternateGainCurveInfo",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncHeadroomAdaptiveGainCurve.h",
+      "sdk_line": 161,
+      "doc": "CFArrayRef of per-alternate dictionaries. Count equals ``kColorSyncAlternateCurveCount``. Only present when the alternate curve count is greater than 0. See the alternate curve keys below."
+    },
+    {
+      "name": "kColorSyncGainCurveChromaticities",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncHeadroomAdaptiveGainCurve.h",
+      "sdk_line": 170,
+      "doc": "Chromaticity primaries used to compute the driving signal for the gain curve. For standard primaries, pass a `CFNumberRef` (`uint8_t`): 0 = BT.709, 1 = Display P3, 2 = BT.2020. For custom primaries, pass a `CFArrayRef` of 8 `float` values encoding four xy chromaticity pairs in order R, G, B, white point; each component in [0, 1] with x + y ≤ 1. The framework rejects any numeric value other than 0, 1, or 2."
+    },
+    {
+      "name": "kColorSyncCommonComponentMixing",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncHeadroomAdaptiveGainCurve.h",
+      "sdk_line": 176,
+      "doc": "CFBooleanRef indicating whether alternate curves share one component-mixing configuration. When true, all alternate curves share the component mixing configuration from array index 0, reducing bitstream size."
+    },
+    {
+      "name": "kColorSyncCommonCurveParameters",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncHeadroomAdaptiveGainCurve.h",
+      "sdk_line": 182,
+      "doc": "CFBooleanRef indicating whether alternate curves share common gain-curve parameters. When true, all alternate curves share the gain curve x control points and slope interpolate flag from array index 0, reducing bitstream size."
+    },
+    {
+      "name": "kColorSyncAlternateCurveHeadroomStops",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncHeadroomAdaptiveGainCurve.h",
+      "sdk_line": 191,
+      "doc": "Target headroom of this alternate curve in stops (log2) above reference white (float in the range [0.0, 6.0]). The renderer selects the closest alternate to the actual display headroom."
+    },
+    {
+      "name": "kColorSyncComponentMix",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncHeadroomAdaptiveGainCurve.h",
+      "sdk_line": 202,
+      "doc": "Component mixing type (uint8_t) matching `component_mixing_value` in ST 2094-50. Determines how the framework derives the scalar driving signal from the RGB pixel: - 0 = MAX(R, G, B) - 1 = single component (the framework applies the gain curve to individual components) - 2 = luma_A (sum of 1/6 of each color channel and 1/2 of MAX(R, G, B)) - 3 = free-style (custom linear combination via ``kColorSyncComponentCoefficients``) Shared across all alternates from index 0 when ``kColorSyncCommonComponentMixing`` is true."
+    },
+    {
+      "name": "kColorSyncComponentCoefficients",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncHeadroomAdaptiveGainCurve.h",
+      "sdk_line": 210,
+      "doc": "Sub-dictionary of custom linear-combination coefficients for free-style component mixing. Each present key contributes its value as a weight in: `signal = R*red + G*green + B*blue + MAX*maxRGB + MIN*minRGB + C*component`. Only present when `kColorSyncComponentMix == 3`."
+    },
+    {
+      "name": "kColorSyncCoefficientRed",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncHeadroomAdaptiveGainCurve.h",
+      "sdk_line": 212,
+      "doc": "Weight for the red channel in the free-style component mixing sum."
+    },
+    {
+      "name": "kColorSyncCoefficientGreen",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncHeadroomAdaptiveGainCurve.h",
+      "sdk_line": 214,
+      "doc": "Weight for the green channel in the free-style component mixing sum."
+    },
+    {
+      "name": "kColorSyncCoefficientBlue",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncHeadroomAdaptiveGainCurve.h",
+      "sdk_line": 216,
+      "doc": "Weight for the blue channel in the free-style component mixing sum."
+    },
+    {
+      "name": "kColorSyncCoefficientMaxRGB",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncHeadroomAdaptiveGainCurve.h",
+      "sdk_line": 218,
+      "doc": "Weight for the MAX(R,G,B) term in the free-style component mixing sum."
+    },
+    {
+      "name": "kColorSyncCoefficientMinRGB",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncHeadroomAdaptiveGainCurve.h",
+      "sdk_line": 220,
+      "doc": "Weight for the MIN(R,G,B) term in the free-style component mixing sum."
+    },
+    {
+      "name": "kColorSyncCoefficientComponent",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncHeadroomAdaptiveGainCurve.h",
+      "sdk_line": 222,
+      "doc": "Weight for the 'component' term in the free-style component mixing sum."
+    },
+    {
+      "name": "kColorSyncMaxControlPointIndex",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncHeadroomAdaptiveGainCurve.h",
+      "sdk_line": 227,
+      "doc": "Index of the last control point (uint8_t, 0–31), i.e. the number of control points minus 1. Shared across all alternates from index 0 when ``kColorSyncCommonCurveParameters`` is true."
+    },
+    {
+      "name": "kColorSyncInterpolateSlopes",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncHeadroomAdaptiveGainCurve.h",
+      "sdk_line": 236,
+      "doc": "CFBooleanRef controlling how the framework determines control-point slopes. When true, the framework computes slopes at control points by Piecewise Cubic Hermite Interpolating Polynomial from the X,Y control point coordinates, and you must omit ``kColorSyncControlPointSlopes``. When false, you must supply explicit slopes in ``kColorSyncControlPointSlopes`` (see below). Shared across all alternates from index 0 when ``kColorSyncCommonCurveParameters`` is true."
+    },
+    {
+      "name": "kColorSyncControlPointsX",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncHeadroomAdaptiveGainCurve.h",
+      "sdk_line": 243,
+      "doc": "CFArrayRef of floats — the X-axis coordinates of the gain-curve control points. The coordinates are normalized by the reference white, so a value of `1.0` corresponds to the signal value at reference white. Shared across all alternates from index 0 when ``kColorSyncCommonCurveParameters`` is true."
+    },
+    {
+      "name": "kColorSyncControlPointsY",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncHeadroomAdaptiveGainCurve.h",
+      "sdk_line": 250,
+      "doc": "CFArrayRef of floats — the Y-axis gain offsets at the control points. Values are in stops (float in the range [0.0, 6.0]) and must be non-negative; the framework infers the gain direction (expand vs. compress) from the relationship between this alternate's headroom and the baseline headroom."
+    },
+    {
+      "name": "kColorSyncControlPointSlopes",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncHeadroomAdaptiveGainCurve.h",
+      "sdk_line": 254,
+      "doc": "CFArrayRef of floats — explicit tangent slopes at each control point, expressed as tan(slope_angle). Only present when ``kColorSyncInterpolateSlopes`` is false."
+    },
+    {
+      "name": "kColorSyncProfile",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 176,
+      "doc": "A key for the profile object in a profile-sequence dictionary passed to ``ColorSyncTransformCreate``."
+    },
+    {
+      "name": "kColorSyncRenderingIntent",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 178,
+      "doc": "A key for the rendering intent to use for the profile in a profile-sequence dictionary."
+    },
+    {
+      "name": "kColorSyncRenderingIntentPerceptual",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 182,
+      "doc": "A ``kColorSyncRenderingIntent`` value selecting the perceptual rendering intent."
+    },
+    {
+      "name": "kColorSyncRenderingIntentRelative",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 184,
+      "doc": "A ``kColorSyncRenderingIntent`` value selecting the media-relative colorimetric rendering intent."
+    },
+    {
+      "name": "kColorSyncRenderingIntentSaturation",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 186,
+      "doc": "A ``kColorSyncRenderingIntent`` value selecting the saturation rendering intent."
+    },
+    {
+      "name": "kColorSyncRenderingIntentAbsolute",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 188,
+      "doc": "A ``kColorSyncRenderingIntent`` value selecting the ICC-absolute colorimetric rendering intent."
+    },
+    {
+      "name": "kColorSyncRenderingIntentUseProfileHeader",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 190,
+      "doc": "A ``kColorSyncRenderingIntent`` value selecting the rendering intent stored in the profile header."
+    },
+    {
+      "name": "kColorSyncTransformTag",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 193,
+      "doc": "A key for the tag identifying which tags of the profile to use in a profile-sequence dictionary."
+    },
+    {
+      "name": "kColorSyncTransformDeviceToPCS",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 197,
+      "doc": "A ``kColorSyncTransformTag`` value selecting the device-to-PCS conversion direction."
+    },
+    {
+      "name": "kColorSyncTransformPCSToPCS",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 199,
+      "doc": "A ``kColorSyncTransformTag`` value selecting the PCS-to-PCS conversion direction."
+    },
+    {
+      "name": "kColorSyncTransformPCSToDevice",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 201,
+      "doc": "A ``kColorSyncTransformTag`` value selecting the PCS-to-device conversion direction."
+    },
+    {
+      "name": "kColorSyncTransformDeviceToDevice",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 203,
+      "doc": "A ``kColorSyncTransformTag`` value selecting the device-to-device conversion direction."
+    },
+    {
+      "name": "kColorSyncTransformGamutCheck",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 205,
+      "doc": "A ``kColorSyncTransformTag`` value that checks whether colors fall outside the destination gamut."
+    },
+    {
+      "name": "kColorSyncBlackPointCompensation",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 208,
+      "doc": "A key whose `CFBooleanRef` value enables or disables black point compensation."
+    },
+    {
+      "name": "kColorSyncExtendedRange",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 210,
+      "doc": "A key whose `CFBooleanRef` value enables or disables extended range."
+    },
+    {
+      "name": "kColorSyncHDRDerivative",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 212,
+      "doc": "A key for the HDR derivative to apply to the profile in a profile-sequence dictionary."
+    },
+    {
+      "name": "kColorSyncPQDerivative",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 214,
+      "doc": "A ``kColorSyncHDRDerivative`` value selecting the PQ HDR derivative."
+    },
+    {
+      "name": "kColorSyncHLGDerivative",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 216,
+      "doc": "A ``kColorSyncHDRDerivative`` value selecting the HLG HDR derivative."
+    },
+    {
+      "name": "kColorSyncPreferredCMM",
+      "objc_type": "CS_AVAILABLE_STARTING CFStringRef",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 220,
+      "doc": "A key whose value is the ``ColorSyncCMMRef`` of the preferred CMM."
+    },
+    {
+      "name": "kColorSyncConvertQuality",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 222,
+      "doc": "A key for the quality of the conversion performed by the transform."
+    },
+    {
+      "name": "kColorSyncBestQuality",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 226,
+      "doc": "A ``kColorSyncConvertQuality`` value that does not coalesce profile transforms; the default."
+    },
+    {
+      "name": "kColorSyncNormalQuality",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 228,
+      "doc": "A ``kColorSyncConvertQuality`` value that coalesces all transforms."
+    },
+    {
+      "name": "kColorSyncDraftQuality",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 230,
+      "doc": "A ``kColorSyncConvertQuality`` value that coalesces all transforms and does not interpolate."
+    },
+    {
+      "name": "kColorSyncConvertUseExtendedRange",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 234,
+      "doc": "A key whose `CFBooleanRef` value allows float data to exceed the `[0.0, 1.0]` range."
+    },
+    {
+      "name": "kColorSyncTransformInfo",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 239,
+      "doc": "A key for a dictionary of information about the transform."
+    },
+    {
+      "name": "kColorSyncTransformCreator",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 241,
+      "doc": "A key for the name of the CMM that created the transform."
+    },
+    {
+      "name": "kColorSyncTransformSrcSpace",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 243,
+      "doc": "A key for the transform's source color space."
+    },
+    {
+      "name": "kColorSyncTransformDstSpace",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 245,
+      "doc": "A key for the transform's destination color space."
+    },
+    {
+      "name": "kColorSyncTransformCodeFragmentType",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 282,
+      "doc": "A key for the type of code fragment to create, or that the framework created."
+    },
+    {
+      "name": "kColorSyncTransformCodeFragmentMD5",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 284,
+      "doc": "A key for the MD5 checksum of the code fragment."
+    },
+    {
+      "name": "kColorSyncTransformFullConversionData",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 286,
+      "doc": "A key for the full-conversion code fragment, containing all non-`NULL` components from the profile sequence."
+    },
+    {
+      "name": "kColorSyncTransformSimplifiedConversionData",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 288,
+      "doc": "A key for the simplified code fragment, collapsing the full conversion into one multi-dimensional table."
+    },
+    {
+      "name": "kColorSyncTransformParametricConversionData",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 290,
+      "doc": "A key for the parametric code fragment, consisting only of parametric curves, matrices, and BPC components."
+    },
+    {
+      "name": "kColorSyncTransformProfileSequnce",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 292,
+      "doc": "A key for the profile sequence used to create the transform."
+    },
+    {
+      "name": "kColorSyncTransformUseITU709OETF",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 295,
+      "doc": "A key whose `CFBooleanRef` value uses the ITU-R BT.709 opto-electronic transfer function."
+    },
+    {
+      "name": "kColorSyncConversionMatrix",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 302,
+      "doc": "A key for a conversion matrix component, represented as a `CFArray` of three `CFArray`s of four `Float32` `CFNumber`s."
+    },
+    {
+      "name": "kColorSyncConversionParamCurve0",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 320,
+      "doc": "A key for a parametric tone rendering curve of type 0, represented as a `CFArray` of seven `Float32` `CFNumber`s."
+    },
+    {
+      "name": "kColorSyncConversionParamCurve1",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 322,
+      "doc": "A key for a parametric tone rendering curve of type 1, represented as a `CFArray` of seven `Float32` `CFNumber`s."
+    },
+    {
+      "name": "kColorSyncConversionParamCurve2",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 324,
+      "doc": "A key for a parametric tone rendering curve of type 2, represented as a `CFArray` of seven `Float32` `CFNumber`s."
+    },
+    {
+      "name": "kColorSyncConversionParamCurve3",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 326,
+      "doc": "A key for a parametric tone rendering curve of type 3, represented as a `CFArray` of seven `Float32` `CFNumber`s."
+    },
+    {
+      "name": "kColorSyncConversionParamCurve4",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 328,
+      "doc": "A key for a parametric tone rendering curve of type 4, represented as a `CFArray` of seven `Float32` `CFNumber`s."
+    },
+    {
+      "name": "kColorSyncConversion1DLut",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 330,
+      "doc": "A key for a one-dimensional lookup table with interpolation, represented as `CFData` containing a `Float32` table."
+    },
+    {
+      "name": "kColorSyncConversionGridPoints",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 332,
+      "doc": "A key for the number of grid points in a lookup table."
+    },
+    {
+      "name": "kColorSyncConversionChannelID",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 334,
+      "doc": "A key for the identifier of the channel a conversion component applies to."
+    },
+    {
+      "name": "kColorSyncConversion3DLut",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 348,
+      "doc": "A key for a three-dimensional lookup table with interpolation, represented as `CFData`."
+    },
+    {
+      "name": "kColorSyncConversionNDLut",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 350,
+      "doc": "A key for a multi-dimensional lookup table with interpolation, represented as `CFData` for N inputs and M outputs."
+    },
+    {
+      "name": "kColorSyncConversionInpChan",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 352,
+      "doc": "A key for the number of input channels of a lookup table."
+    },
+    {
+      "name": "kColorSyncConversionOutChan",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 354,
+      "doc": "A key for the number of output channels of a lookup table."
+    },
+    {
+      "name": "kColorSyncConversionBPC",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 364,
+      "doc": "A key for a black point compensation component, represented as a `CFArray` of `Float32` `CFNumber`s."
+    },
+    {
+      "name": "kColorSyncFixedPointRange",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncTransform.h",
+      "sdk_line": 367,
+      "doc": "A key for the fixed-point range of the conversion data."
+    },
+    {
+      "name": "kCMMInitializeLinkProfileProcName",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncCMM.h",
+      "sdk_line": 110,
+      "doc": "The CMM bundle info-dictionary key whose value is the name of the function that initializes a device-link profile."
+    },
+    {
+      "name": "kCMMInitializeTransformProcName",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncCMM.h",
+      "sdk_line": 112,
+      "doc": "The CMM bundle info-dictionary key whose value is the name of the function that initializes a color transform."
+    },
+    {
+      "name": "kCMMApplyTransformProcName",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncCMM.h",
+      "sdk_line": 114,
+      "doc": "The CMM bundle info-dictionary key whose value is the name of the function that applies a color transform."
+    },
+    {
+      "name": "kCMMCreateTransformPropertyProcName",
+      "objc_type": "CFStringRef _Nonnull",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncCMM.h",
+      "sdk_line": 116,
+      "doc": "The CMM bundle info-dictionary key whose value is the name of the function that creates a transform property."
+    },
+    {
+      "name": "kColorSyncDeviceID",
+      "objc_type": "CS_AVAILABLE_STARTING CFStringRef",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncDevice.h",
+      "sdk_line": 25,
+      "doc": "A key whose value is the `CFUUIDRef` identifying the device."
+    },
+    {
+      "name": "kColorSyncDeviceClass",
+      "objc_type": "CS_AVAILABLE_STARTING CFStringRef",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncDevice.h",
+      "sdk_line": 27,
+      "doc": "A key whose value is one of the device-class constants below."
+    },
+    {
+      "name": "kColorSyncCameraDeviceClass",
+      "objc_type": "CS_AVAILABLE_STARTING CFStringRef",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncDevice.h",
+      "sdk_line": 31,
+      "doc": "The device class for a camera device. The string that represents a camera device is `cmra`."
+    },
+    {
+      "name": "kColorSyncDisplayDeviceClass",
+      "objc_type": "CS_AVAILABLE_STARTING CFStringRef",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncDevice.h",
+      "sdk_line": 35,
+      "doc": "The device class for a display device. The string that represents a display device is `mntr`."
+    },
+    {
+      "name": "kColorSyncPrinterDeviceClass",
+      "objc_type": "CS_AVAILABLE_STARTING CFStringRef",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncDevice.h",
+      "sdk_line": 39,
+      "doc": "The device class for a printer device. The string that represents a printer device is `prtr`."
+    },
+    {
+      "name": "kColorSyncScannerDeviceClass",
+      "objc_type": "CS_AVAILABLE_STARTING CFStringRef",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncDevice.h",
+      "sdk_line": 43,
+      "doc": "The device class for a scanner device. The string that represents a scanner device is `scnr`."
+    },
+    {
+      "name": "kColorSyncDeviceProfileURL",
+      "objc_type": "CS_AVAILABLE_STARTING CFStringRef",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncDevice.h",
+      "sdk_line": 46,
+      "doc": "A key whose value is the `CFURLRef` of a device profile."
+    },
+    {
+      "name": "kColorSyncDeviceDescription",
+      "objc_type": "CS_AVAILABLE_STARTING CFStringRef",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncDevice.h",
+      "sdk_line": 49,
+      "doc": "A key whose value is the device's localized name in the current locale."
+    },
+    {
+      "name": "kColorSyncDeviceDescriptions",
+      "objc_type": "CS_AVAILABLE_STARTING CFStringRef",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncDevice.h",
+      "sdk_line": 51,
+      "doc": "A key whose value is a `CFDictionary` of the device's localized names."
+    },
+    {
+      "name": "kColorSyncFactoryProfiles",
+      "objc_type": "CS_AVAILABLE_STARTING CFStringRef",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncDevice.h",
+      "sdk_line": 54,
+      "doc": "A key whose value is a `CFDictionary` describing the device's factory profiles."
+    },
+    {
+      "name": "kColorSyncCustomProfiles",
+      "objc_type": "CS_AVAILABLE_STARTING CFStringRef",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncDevice.h",
+      "sdk_line": 56,
+      "doc": "A key whose value is a `CFDictionary` describing the device's custom profiles."
+    },
+    {
+      "name": "kColorSyncDeviceModeDescription",
+      "objc_type": "CS_AVAILABLE_STARTING CFStringRef",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncDevice.h",
+      "sdk_line": 59,
+      "doc": "A key whose value is the device mode's localized name in the current locale."
+    },
+    {
+      "name": "kColorSyncDeviceModeDescriptions",
+      "objc_type": "CS_AVAILABLE_STARTING CFStringRef",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncDevice.h",
+      "sdk_line": 61,
+      "doc": "A key whose value is a `CFDictionary` of the device mode's localized names."
+    },
+    {
+      "name": "kColorSyncDeviceDefaultProfileID",
+      "objc_type": "CS_AVAILABLE_STARTING CFStringRef",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncDevice.h",
+      "sdk_line": 63,
+      "doc": "A key whose value is the ProfileID of the device's default profile."
+    },
+    {
+      "name": "kColorSyncDeviceHostScope",
+      "objc_type": "CS_AVAILABLE_STARTING CFStringRef",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncDevice.h",
+      "sdk_line": 65,
+      "doc": "A key specifying the host preference scope of a device; currently only `kCFPreferencesCurrentHost` is supported."
+    },
+    {
+      "name": "kColorSyncDeviceUserScope",
+      "objc_type": "CS_AVAILABLE_STARTING CFStringRef",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncDevice.h",
+      "sdk_line": 67,
+      "doc": "A key specifying the user preference scope of a device; one of `kCFPreferencesCurrentUser` or `kCFPreferencesAnyUser`."
+    },
+    {
+      "name": "kColorSyncProfileHostScope",
+      "objc_type": "CS_AVAILABLE_STARTING CFStringRef",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncDevice.h",
+      "sdk_line": 69,
+      "doc": "A key specifying the host preference scope of a profile; currently only `kCFPreferencesCurrentHost` is supported."
+    },
+    {
+      "name": "kColorSyncProfileUserScope",
+      "objc_type": "CS_AVAILABLE_STARTING CFStringRef",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncDevice.h",
+      "sdk_line": 71,
+      "doc": "A key specifying the user preference scope of a profile; one of `kCFPreferencesCurrentUser` or `kCFPreferencesAnyUser`."
+    },
+    {
+      "name": "kColorSyncDeviceProfileIsFactory",
+      "objc_type": "CS_AVAILABLE_STARTING CFStringRef",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncDevice.h",
+      "sdk_line": 74,
+      "doc": "A key in the device-profile-info dictionary whose value indicates whether the profile is a factory profile."
+    },
+    {
+      "name": "kColorSyncDeviceProfileIsDefault",
+      "objc_type": "CS_AVAILABLE_STARTING CFStringRef",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncDevice.h",
+      "sdk_line": 77,
+      "doc": "A key in the device-profile-info dictionary whose value indicates whether the profile is the default profile."
+    },
+    {
+      "name": "kColorSyncDeviceProfileIsCurrent",
+      "objc_type": "CS_AVAILABLE_STARTING CFStringRef",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncDevice.h",
+      "sdk_line": 79,
+      "doc": "A key in the device-profile-info dictionary whose value indicates whether the profile is the current profile."
+    },
+    {
+      "name": "kColorSyncDeviceProfileID",
+      "objc_type": "CS_AVAILABLE_STARTING CFStringRef",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncDevice.h",
+      "sdk_line": 81,
+      "doc": "A key in the device-profile-info dictionary whose value is the profile's ProfileID."
+    },
+    {
+      "name": "kColorSyncDeviceRegisteredNotification",
+      "objc_type": "CS_AVAILABLE_STARTING CFStringRef",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncDevice.h",
+      "sdk_line": 84,
+      "doc": "A notification that ColorSync posts when a device is registered."
+    },
+    {
+      "name": "kColorSyncDeviceUnregisteredNotification",
+      "objc_type": "CS_AVAILABLE_STARTING CFStringRef",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncDevice.h",
+      "sdk_line": 86,
+      "doc": "A notification that ColorSync posts when a device is unregistered."
+    },
+    {
+      "name": "kColorSyncDeviceProfilesNotification",
+      "objc_type": "CS_AVAILABLE_STARTING CFStringRef",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncDevice.h",
+      "sdk_line": 88,
+      "doc": "A notification that ColorSync posts when a device's profiles change."
+    },
+    {
+      "name": "kColorSyncDisplayDeviceProfilesNotification",
+      "objc_type": "CS_AVAILABLE_STARTING CFStringRef",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncDevice.h",
+      "sdk_line": 90,
+      "doc": "A notification that ColorSync posts when a display device's profiles change."
+    },
+    {
+      "name": "kColorSyncProfileRepositoryChangeNotification",
+      "objc_type": "CS_AVAILABLE_STARTING CFStringRef",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncDevice.h",
+      "sdk_line": 92,
+      "doc": "A notification that ColorSync posts when the profile repository changes."
+    },
+    {
+      "name": "kColorSyncRegistrationUpdateWindowServer",
+      "objc_type": "CS_AVAILABLE_STARTING CFStringRef",
+      "availability": {},
+      "sdk_file": "ColorSync/ColorSyncDevice.h",
+      "sdk_line": 94,
+      "doc": "A notification concerning the window server's device registration."
+    }
+  ],
+  "block_types": {},
+  "typedefs": {
+    "AbsoluteTime": "UnsignedWide",
+    "BOOL": "bool",
+    "Boolean": "unsigned char",
+    "Byte": "UInt8",
+    "ByteCount": "unsigned long",
+    "ByteOffset": "unsigned long",
+    "BytePtr": "UInt8 *",
+    "CMMApplyTransformProc": "bool (*)(ColorSyncTransformRef _Nonnull, size_t, size_t, size_t, void * _Nonnull * _Nonnull, ColorSyncDataDepth, ColorSyncDataLayout, size_t, size_t, const void * _Nonnull * _Nonnull, ColorSyncDataDepth, ColorSyncDataLayout, size_t, CFDictionaryRef _Nullable)",
+    "CMMCreateTransformPropertyProc": "CFTypeRef  _Nullable (*)(ColorSyncTransformRef _Nullable, CFTypeRef _Nonnull, CFDictionaryRef _Nullable)",
+    "CMMInitializeLinkProfileProc": "bool (*)(ColorSyncMutableProfileRef _Nonnull, CFArrayRef _Nonnull, CFDictionaryRef _Nullable)",
+    "CMMInitializeTransformProc": "bool (*)(ColorSyncTransformRef _Nonnull, CFArrayRef _Nonnull, CFDictionaryRef _Nullable)",
+    "CharParameter": "short",
+    "Class": "struct objc_class *",
+    "ColorSyncAlphaInfo": "enum ColorSyncAlphaInfo",
+    "ColorSyncCMMIterateCallback": "bool (*)(ColorSyncCMMRef _Nonnull, void * _Nonnull)",
+    "ColorSyncCMMRef": "struct ColorSyncCMM *",
+    "ColorSyncDataDepth": "enum ColorSyncDataDepth",
+    "ColorSyncDataLayout": "uint32_t",
+    "ColorSyncDeviceProfileIterateCallback": "bool (*)(CFDictionaryRef _Nonnull, void * _Nullable)",
+    "ColorSyncMD5": "struct ColorSyncMD5",
+    "ColorSyncMutableProfileRef": "struct ColorSyncProfile *",
+    "ColorSyncProfileIterateCallback": "bool (*)(CFDictionaryRef _Nonnull, void * _Nonnull)",
+    "ColorSyncProfileRef": "const struct ColorSyncProfile *",
+    "ColorSyncTransformRef": "struct ColorSyncTransform *",
+    "CompTimeValue": "wide",
+    "ConstLogicalAddress": "const void *",
+    "ConstStr15Param": "const unsigned char *",
+    "ConstStr255Param": "const unsigned char *",
+    "ConstStr27Param": "const unsigned char *",
+    "ConstStr31Param": "const unsigned char *",
+    "ConstStr32Param": "const unsigned char *",
+    "ConstStr63Param": "const unsigned char *",
+    "ConstStrFileNameParam": "ConstStr63Param",
+    "ConstStringPtr": "const unsigned char *",
+    "Duration": "SInt32",
+    "FILE": "struct __sFILE",
+    "Fixed": "SInt32",
+    "FixedPoint": "struct FixedPoint",
+    "FixedPtr": "Fixed *",
+    "FixedRect": "struct FixedRect",
+    "Float32": "float",
+    "Float32Point": "struct Float32Point",
+    "Float64": "double",
+    "Float80": "struct Float80",
+    "Float96": "struct Float96",
+    "FourCharCode": "UInt32",
+    "Fract": "SInt32",
+    "FractPtr": "Fract *",
+    "Handle": "Ptr *",
+    "IMP": "void (*)(void)",
+    "ItemCount": "unsigned long",
+    "LangCode": "SInt16",
+    "LogicalAddress": "void *",
+    "NSInteger": "long",
+    "NSUInteger": "unsigned long",
+    "NumVersion": "struct NumVersion",
+    "NumVersionVariant": "union NumVersionVariant",
+    "NumVersionVariantHandle": "NumVersionVariantPtr *",
+    "NumVersionVariantPtr": "NumVersionVariant *",
+    "OSErr": "SInt16",
+    "OSStatus": "SInt32",
+    "OSType": "FourCharCode",
+    "OSTypePtr": "OSType *",
+    "OptionBits": "UInt32",
+    "PBVersion": "UInt32",
+    "PRefCon": "void *",
+    "PhysicalAddress": "void *",
+    "Point": "struct Point",
+    "PointPtr": "Point *",
+    "ProcHandle": "ProcPtr *",
+    "ProcPtr": "long (*)(void)",
+    "ProcessSerialNumber": "struct ProcessSerialNumber",
+    "ProcessSerialNumberPtr": "ProcessSerialNumber *",
+    "Ptr": "char *",
+    "Rect": "struct Rect",
+    "RectPtr": "Rect *",
+    "RegionCode": "SInt16",
+    "Register68kProcPtr": "void (*)(void)",
+    "ResType": "FourCharCode",
+    "ResTypePtr": "ResType *",
+    "SEL": "struct objc_selector *",
+    "SInt16": "short",
+    "SInt32": "int",
+    "SInt64": "long long",
+    "SInt8": "signed char",
+    "SRefCon": "void *",
+    "ScriptCode": "SInt16",
+    "ShortFixed": "short",
+    "ShortFixedPtr": "ShortFixed *",
+    "SignedByte": "SInt8",
+    "Size": "long",
+    "Str15": "unsigned char[16]",
+    "Str255": "unsigned char[256]",
+    "Str27": "unsigned char[28]",
+    "Str31": "unsigned char[32]",
+    "Str32": "unsigned char[33]",
+    "Str32Field": "unsigned char[34]",
+    "Str63": "unsigned char[64]",
+    "StrFileName": "Str63",
+    "StringHandle": "StringPtr *",
+    "StringPtr": "unsigned char *",
+    "Style": "unsigned char",
+    "StyleField": "Style",
+    "StyleParameter": "short",
+    "TimeBase": "struct TimeBaseRecord *",
+    "TimeRecord": "struct TimeRecord",
+    "TimeScale": "SInt32",
+    "TimeValue": "SInt32",
+    "TimeValue64": "SInt64",
+    "UInt16": "unsigned short",
+    "UInt32": "unsigned int",
+    "UInt64": "unsigned long long",
+    "UInt8": "unsigned char",
+    "URefCon": "void *",
+    "UTF16Char": "UInt16",
+    "UTF32Char": "UInt32",
+    "UTF8Char": "UInt8",
+    "UniChar": "UInt16",
+    "UniCharCount": "unsigned long",
+    "UniCharCountPtr": "UniCharCount *",
+    "UniCharPtr": "UniChar *",
+    "UnicodeScalarValue": "UInt32",
+    "UniversalProcHandle": "UniversalProcPtr *",
+    "UniversalProcPtr": "ProcPtr",
+    "UnsignedFixed": "UInt32",
+    "UnsignedFixedPtr": "UnsignedFixed *",
+    "UnsignedWide": "struct UnsignedWide",
+    "UnsignedWidePtr": "UnsignedWide *",
+    "VHSelect": "SInt8",
+    "VersRec": "struct VersRec",
+    "VersRecHndl": "VersRecPtr *",
+    "VersRecPtr": "VersRec *",
+    "WidePtr": "wide *",
+    "_RuneCharClass": "struct _RuneCharClass",
+    "_RuneEntry": "struct _RuneEntry",
+    "_RuneLocale": "struct _RuneLocale",
+    "_RuneRange": "struct _RuneRange",
+    "__Bfloat16x4_t": "__attribute__((neon_vector_type(4))) __bf16",
+    "__Bfloat16x8_t": "__attribute__((neon_vector_type(8))) __bf16",
+    "__Float16x4_t": "__attribute__((neon_vector_type(4))) __fp16",
+    "__Float16x8_t": "__attribute__((neon_vector_type(8))) __fp16",
+    "__Float32x2_t": "__attribute__((neon_vector_type(2))) float",
+    "__Float32x4_t": "__attribute__((neon_vector_type(4))) float",
+    "__Float64x2_t": "__attribute__((neon_vector_type(2))) double",
+    "__Int16x4_t": "__attribute__((neon_vector_type(4))) short",
+    "__Int16x8_t": "__attribute__((neon_vector_type(8))) short",
+    "__Int32x2_t": "__attribute__((neon_vector_type(2))) int",
+    "__Int32x4_t": "__attribute__((neon_vector_type(4))) int",
+    "__Int64x2_t": "__attribute__((neon_vector_type(2))) long",
+    "__Int8x16_t": "__attribute__((neon_vector_type(16))) signed char",
+    "__Int8x8_t": "__attribute__((neon_vector_type(8))) signed char",
+    "__Mfloat8x16_t": "__attribute__((neon_vector_type(16))) __mfp8",
+    "__Mfloat8x8_t": "__attribute__((neon_vector_type(8))) __mfp8",
+    "__NSConstantString": "struct __NSConstantString_tag",
+    "__Poly16x4_t": "__attribute__((neon_polyvector_type(4))) unsigned short",
+    "__Poly16x8_t": "__attribute__((neon_polyvector_type(8))) unsigned short",
+    "__Poly64x2_t": "__attribute__((neon_polyvector_type(2))) unsigned long",
+    "__Poly8x16_t": "__attribute__((neon_polyvector_type(16))) unsigned char",
+    "__Poly8x8_t": "__attribute__((neon_polyvector_type(8))) unsigned char",
+    "__SVBfloat16_t": "__SVBfloat16_t",
+    "__SVBool_t": "__SVBool_t",
+    "__SVCount_t": "__SVCount_t",
+    "__SVFloat16_t": "__SVFloat16_t",
+    "__SVFloat32_t": "__SVFloat32_t",
+    "__SVFloat64_t": "__SVFloat64_t",
+    "__SVInt16_t": "__SVInt16_t",
+    "__SVInt32_t": "__SVInt32_t",
+    "__SVInt64_t": "__SVInt64_t",
+    "__SVInt8_t": "__SVInt8_t",
+    "__SVMfloat8_t": "__SVMfloat8_t",
+    "__SVUint16_t": "__SVUint16_t",
+    "__SVUint32_t": "__SVUint32_t",
+    "__SVUint64_t": "__SVUint64_t",
+    "__SVUint8_t": "__SVUint8_t",
+    "__Uint16x4_t": "__attribute__((neon_vector_type(4))) unsigned short",
+    "__Uint16x8_t": "__attribute__((neon_vector_type(8))) unsigned short",
+    "__Uint32x2_t": "__attribute__((neon_vector_type(2))) unsigned int",
+    "__Uint32x4_t": "__attribute__((neon_vector_type(4))) unsigned int",
+    "__Uint64x2_t": "__attribute__((neon_vector_type(2))) unsigned long",
+    "__Uint8x16_t": "__attribute__((neon_vector_type(16))) unsigned char",
+    "__Uint8x8_t": "__attribute__((neon_vector_type(8))) unsigned char",
+    "__builtin_ms_va_list": "char *",
+    "__builtin_va_list": "char *",
+    "__clang_svbfloat16x2_t": "__clang_svbfloat16x2_t",
+    "__clang_svbfloat16x3_t": "__clang_svbfloat16x3_t",
+    "__clang_svbfloat16x4_t": "__clang_svbfloat16x4_t",
+    "__clang_svboolx2_t": "__clang_svboolx2_t",
+    "__clang_svboolx4_t": "__clang_svboolx4_t",
+    "__clang_svfloat16x2_t": "__clang_svfloat16x2_t",
+    "__clang_svfloat16x3_t": "__clang_svfloat16x3_t",
+    "__clang_svfloat16x4_t": "__clang_svfloat16x4_t",
+    "__clang_svfloat32x2_t": "__clang_svfloat32x2_t",
+    "__clang_svfloat32x3_t": "__clang_svfloat32x3_t",
+    "__clang_svfloat32x4_t": "__clang_svfloat32x4_t",
+    "__clang_svfloat64x2_t": "__clang_svfloat64x2_t",
+    "__clang_svfloat64x3_t": "__clang_svfloat64x3_t",
+    "__clang_svfloat64x4_t": "__clang_svfloat64x4_t",
+    "__clang_svint16x2_t": "__clang_svint16x2_t",
+    "__clang_svint16x3_t": "__clang_svint16x3_t",
+    "__clang_svint16x4_t": "__clang_svint16x4_t",
+    "__clang_svint32x2_t": "__clang_svint32x2_t",
+    "__clang_svint32x3_t": "__clang_svint32x3_t",
+    "__clang_svint32x4_t": "__clang_svint32x4_t",
+    "__clang_svint64x2_t": "__clang_svint64x2_t",
+    "__clang_svint64x3_t": "__clang_svint64x3_t",
+    "__clang_svint64x4_t": "__clang_svint64x4_t",
+    "__clang_svint8x2_t": "__clang_svint8x2_t",
+    "__clang_svint8x3_t": "__clang_svint8x3_t",
+    "__clang_svint8x4_t": "__clang_svint8x4_t",
+    "__clang_svmfloat8x2_t": "__clang_svmfloat8x2_t",
+    "__clang_svmfloat8x3_t": "__clang_svmfloat8x3_t",
+    "__clang_svmfloat8x4_t": "__clang_svmfloat8x4_t",
+    "__clang_svuint16x2_t": "__clang_svuint16x2_t",
+    "__clang_svuint16x3_t": "__clang_svuint16x3_t",
+    "__clang_svuint16x4_t": "__clang_svuint16x4_t",
+    "__clang_svuint32x2_t": "__clang_svuint32x2_t",
+    "__clang_svuint32x3_t": "__clang_svuint32x3_t",
+    "__clang_svuint32x4_t": "__clang_svuint32x4_t",
+    "__clang_svuint64x2_t": "__clang_svuint64x2_t",
+    "__clang_svuint64x3_t": "__clang_svuint64x3_t",
+    "__clang_svuint64x4_t": "__clang_svuint64x4_t",
+    "__clang_svuint8x2_t": "__clang_svuint8x2_t",
+    "__clang_svuint8x3_t": "__clang_svuint8x3_t",
+    "__clang_svuint8x4_t": "__clang_svuint8x4_t",
+    "__darwin_blkcnt_t": "__int64_t",
+    "__darwin_blksize_t": "__int32_t",
+    "__darwin_clock_t": "unsigned long",
+    "__darwin_ct_rune_t": "int",
+    "__darwin_dev_t": "__int32_t",
+    "__darwin_fsblkcnt_t": "unsigned int",
+    "__darwin_fsfilcnt_t": "unsigned int",
+    "__darwin_gid_t": "__uint32_t",
+    "__darwin_id_t": "__uint32_t",
+    "__darwin_ino64_t": "__uint64_t",
+    "__darwin_ino_t": "__darwin_ino64_t",
+    "__darwin_intptr_t": "long",
+    "__darwin_mach_port_name_t": "__darwin_natural_t",
+    "__darwin_mach_port_t": "__darwin_mach_port_name_t",
+    "__darwin_mbstate_t": "__mbstate_t",
+    "__darwin_mode_t": "__uint16_t",
+    "__darwin_natural_t": "unsigned int",
+    "__darwin_nl_item": "int",
+    "__darwin_off_t": "__int64_t",
+    "__darwin_pid_t": "__int32_t",
+    "__darwin_pthread_attr_t": "struct _opaque_pthread_attr_t",
+    "__darwin_pthread_cond_t": "struct _opaque_pthread_cond_t",
+    "__darwin_pthread_condattr_t": "struct _opaque_pthread_condattr_t",
+    "__darwin_pthread_key_t": "unsigned long",
+    "__darwin_pthread_mutex_t": "struct _opaque_pthread_mutex_t",
+    "__darwin_pthread_mutexattr_t": "struct _opaque_pthread_mutexattr_t",
+    "__darwin_pthread_once_t": "struct _opaque_pthread_once_t",
+    "__darwin_pthread_rwlock_t": "struct _opaque_pthread_rwlock_t",
+    "__darwin_pthread_rwlockattr_t": "struct _opaque_pthread_rwlockattr_t",
+    "__darwin_pthread_t": "struct _opaque_pthread_t *",
+    "__darwin_ptrdiff_t": "long",
+    "__darwin_rune_t": "__darwin_wchar_t",
+    "__darwin_sigset_t": "__uint32_t",
+    "__darwin_size_t": "unsigned long",
+    "__darwin_socklen_t": "__uint32_t",
+    "__darwin_ssize_t": "long",
+    "__darwin_suseconds_t": "__int32_t",
+    "__darwin_time_t": "long",
+    "__darwin_uid_t": "__uint32_t",
+    "__darwin_useconds_t": "__uint32_t",
+    "__darwin_uuid_string_t": "char[37]",
+    "__darwin_uuid_t": "unsigned char[16]",
+    "__darwin_va_list": "__builtin_va_list",
+    "__darwin_wchar_t": "int",
+    "__darwin_wctrans_t": "int",
+    "__darwin_wctype_t": "__uint32_t",
+    "__darwin_wint_t": "int",
+    "__gnuc_va_list": "__builtin_va_list",
+    "__int128_t": "__int128",
+    "__int16_t": "short",
+    "__int32_t": "int",
+    "__int64_t": "long long",
+    "__int8_t": "signed char",
+    "__mbstate_t": "union __mbstate_t",
+    "__mfp8": "__mfp8",
+    "__uint128_t": "unsigned __int128",
+    "__uint16_t": "unsigned short",
+    "__uint32_t": "unsigned int",
+    "__uint64_t": "unsigned long long",
+    "__uint8_t": "unsigned char",
+    "acl_entry_id_t": "enum acl_entry_id_t",
+    "acl_entry_t": "struct _acl_entry *",
+    "acl_flag_t": "enum acl_flag_t",
+    "acl_flagset_t": "struct _acl_flagset *",
+    "acl_perm_t": "enum acl_perm_t",
+    "acl_permset_mask_t": "u_int64_t",
+    "acl_permset_t": "struct _acl_permset *",
+    "acl_t": "struct _acl *",
+    "acl_tag_t": "enum acl_tag_t",
+    "acl_type_t": "enum acl_type_t",
+    "alarm_type_t": "int",
+    "audit_token_t": "struct audit_token_t",
+    "blkcnt_t": "__darwin_blkcnt_t",
+    "blksize_t": "__darwin_blksize_t",
+    "boolean_t": "int",
+    "caddr_t": "char *",
+    "clock_attr_t": "int *",
+    "clock_flavor_t": "int",
+    "clock_id_t": "int",
+    "clock_res_t": "int",
+    "clock_t": "__darwin_clock_t",
+    "clockid_t": "enum clockid_t",
+    "cpu_subtype_t": "integer_t",
+    "cpu_threadtype_t": "integer_t",
+    "cpu_type_t": "integer_t",
+    "ct_rune_t": "__darwin_ct_rune_t",
+    "daddr_t": "int32_t",
+    "dev_t": "__darwin_dev_t",
+    "dispatch_autorelease_frequency_t": "enum dispatch_autorelease_frequency_t",
+    "dispatch_block_flags_t": "enum dispatch_block_flags_t",
+    "dispatch_block_t": "void (^)(void)",
+    "dispatch_data_applier_t": "bool (^)(dispatch_data_t _Nonnull, size_t, const void * _Nonnull, size_t)",
+    "dispatch_data_t": "NSObject\u003cOS_dispatch_data\u003e *",
+    "dispatch_fd_t": "int",
+    "dispatch_function_t": "void (*)(void * _Nullable)",
+    "dispatch_group_t": "NSObject\u003cOS_dispatch_group\u003e *",
+    "dispatch_io_close_flags_t": "unsigned long",
+    "dispatch_io_handler_t": "void (^)(bool, dispatch_data_t _Nullable, int)",
+    "dispatch_io_interval_flags_t": "unsigned long",
+    "dispatch_io_t": "NSObject\u003cOS_dispatch_io\u003e *",
+    "dispatch_io_type_t": "unsigned long",
+    "dispatch_object_t": "NSObject\u003cOS_dispatch_object\u003e *",
+    "dispatch_once_t": "intptr_t",
+    "dispatch_qos_class_t": "qos_class_t",
+    "dispatch_queue_attr_t": "NSObject\u003cOS_dispatch_queue_attr\u003e *",
+    "dispatch_queue_concurrent_t": "NSObject\u003cOS_dispatch_queue_concurrent\u003e *",
+    "dispatch_queue_global_t": "NSObject\u003cOS_dispatch_queue_global\u003e *",
+    "dispatch_queue_main_t": "NSObject\u003cOS_dispatch_queue_main\u003e *",
+    "dispatch_queue_priority_t": "long",
+    "dispatch_queue_serial_executor_t": "NSObject\u003cOS_dispatch_queue_serial_executor\u003e *",
+    "dispatch_queue_serial_t": "NSObject\u003cOS_dispatch_queue_serial\u003e *",
+    "dispatch_queue_t": "NSObject\u003cOS_dispatch_queue\u003e *",
+    "dispatch_semaphore_t": "NSObject\u003cOS_dispatch_semaphore\u003e *",
+    "dispatch_source_mach_recv_flags_t": "unsigned long",
+    "dispatch_source_mach_send_flags_t": "unsigned long",
+    "dispatch_source_memorypressure_flags_t": "unsigned long",
+    "dispatch_source_proc_flags_t": "unsigned long",
+    "dispatch_source_t": "NSObject\u003cOS_dispatch_source\u003e *",
+    "dispatch_source_timer_flags_t": "unsigned long",
+    "dispatch_source_type_t": "const struct dispatch_source_type_s *",
+    "dispatch_source_vnode_flags_t": "unsigned long",
+    "dispatch_time_t": "uint64_t",
+    "dispatch_workloop_t": "NSObject\u003cOS_dispatch_workloop\u003e *",
+    "div_t": "struct div_t",
+    "double_t": "double",
+    "errno_t": "int",
+    "extended80": "Float80",
+    "extended96": "Float96",
+    "fattributiontag_t": "struct fattributiontag",
+    "fchecklv_t": "struct fchecklv",
+    "fd_mask": "__int32_t",
+    "fd_set": "struct fd_set",
+    "fgetsigsinfo_t": "struct fgetsigsinfo",
+    "filesec_property_t": "enum filesec_property_t",
+    "filesec_t": "struct _filesec *",
+    "fixpt_t": "u_int32_t",
+    "float_t": "float",
+    "fpos_t": "__darwin_off_t",
+    "fpunchhole_t": "struct fpunchhole",
+    "fsblkcnt_t": "__darwin_fsblkcnt_t",
+    "fsfilcnt_t": "__darwin_fsfilcnt_t",
+    "fsignatures_t": "struct fsignatures",
+    "fspecread_t": "struct fspecread",
+    "fstore_t": "struct fstore",
+    "fsupplement_t": "struct fsupplement",
+    "ftrimactivefile_t": "struct ftrimactivefile",
+    "gid_t": "__darwin_gid_t",
+    "guid_t": "union guid_t",
+    "id": "struct objc_object *",
+    "id_t": "__darwin_id_t",
+    "idtype_t": "enum idtype_t",
+    "imaxdiv_t": "struct imaxdiv_t",
+    "in_addr_t": "__uint32_t",
+    "in_port_t": "__uint16_t",
+    "ino64_t": "__darwin_ino64_t",
+    "ino_t": "__darwin_ino_t",
+    "int16_t": "short",
+    "int32_t": "int",
+    "int64_t": "long long",
+    "int8_t": "signed char",
+    "int_fast16_t": "int16_t",
+    "int_fast32_t": "int32_t",
+    "int_fast64_t": "int64_t",
+    "int_fast8_t": "int8_t",
+    "int_least16_t": "int16_t",
+    "int_least32_t": "int32_t",
+    "int_least64_t": "int64_t",
+    "int_least8_t": "int8_t",
+    "integer_t": "int",
+    "intmax_t": "long",
+    "intptr_t": "__darwin_intptr_t",
+    "jmp_buf": "int[48]",
+    "kauth_ace_rights_t": "u_int32_t",
+    "kauth_ace_t": "struct kauth_ace *",
+    "kauth_acl_t": "struct kauth_acl *",
+    "kauth_filesec_t": "struct kauth_filesec *",
+    "kern_return_t": "int",
+    "key_t": "__int32_t",
+    "ldiv_t": "struct ldiv_t",
+    "lldiv_t": "struct lldiv_t",
+    "locale_t": "struct _xlocale *",
+    "mach_msg_audit_trailer_t": "struct mach_msg_audit_trailer_t",
+    "mach_msg_base_t": "struct mach_msg_base_t",
+    "mach_msg_bits_t": "unsigned int",
+    "mach_msg_body_t": "struct mach_msg_body_t",
+    "mach_msg_context_trailer_t": "struct mach_msg_context_trailer_t",
+    "mach_msg_copy_options_t": "unsigned int",
+    "mach_msg_descriptor_t": "union mach_msg_descriptor_t",
+    "mach_msg_descriptor_type_t": "unsigned int",
+    "mach_msg_empty_rcv_t": "struct mach_msg_empty_rcv_t",
+    "mach_msg_empty_send_t": "struct mach_msg_empty_send_t",
+    "mach_msg_empty_t": "union mach_msg_empty_t",
+    "mach_msg_filter_id": "int",
+    "mach_msg_format_0_trailer_t": "mach_msg_security_trailer_t",
+    "mach_msg_guard_flags_t": "unsigned int",
+    "mach_msg_guarded_port_descriptor32_t": "struct mach_msg_guarded_port_descriptor32_t",
+    "mach_msg_guarded_port_descriptor64_t": "struct mach_msg_guarded_port_descriptor64_t",
+    "mach_msg_guarded_port_descriptor_t": "struct mach_msg_guarded_port_descriptor_t",
+    "mach_msg_header_t": "struct mach_msg_header_t",
+    "mach_msg_id_t": "integer_t",
+    "mach_msg_mac_trailer_t": "struct mach_msg_mac_trailer_t",
+    "mach_msg_max_trailer_t": "mach_msg_mac_trailer_t",
+    "mach_msg_ool_descriptor32_t": "struct mach_msg_ool_descriptor32_t",
+    "mach_msg_ool_descriptor64_t": "struct mach_msg_ool_descriptor64_t",
+    "mach_msg_ool_descriptor_t": "struct mach_msg_ool_descriptor_t",
+    "mach_msg_ool_ports_descriptor32_t": "struct mach_msg_ool_ports_descriptor32_t",
+    "mach_msg_ool_ports_descriptor64_t": "struct mach_msg_ool_ports_descriptor64_t",
+    "mach_msg_ool_ports_descriptor_t": "struct mach_msg_ool_ports_descriptor_t",
+    "mach_msg_option_t": "integer_t",
+    "mach_msg_options_t": "integer_t",
+    "mach_msg_port_descriptor_t": "struct mach_msg_port_descriptor_t",
+    "mach_msg_priority_t": "unsigned int",
+    "mach_msg_return_t": "kern_return_t",
+    "mach_msg_security_trailer_t": "struct mach_msg_security_trailer_t",
+    "mach_msg_seqno_trailer_t": "struct mach_msg_seqno_trailer_t",
+    "mach_msg_size_t": "natural_t",
+    "mach_msg_timeout_t": "natural_t",
+    "mach_msg_trailer_info_t": "char *",
+    "mach_msg_trailer_size_t": "unsigned int",
+    "mach_msg_trailer_t": "struct mach_msg_trailer_t",
+    "mach_msg_trailer_type_t": "unsigned int",
+    "mach_msg_type_descriptor_t": "struct mach_msg_type_descriptor_t",
+    "mach_msg_type_name_t": "unsigned int",
+    "mach_msg_type_number_t": "natural_t",
+    "mach_msg_type_size_t": "natural_t",
+    "mach_port_array_t": "mach_port_t *",
+    "mach_port_context_t": "vm_offset_t",
+    "mach_port_delta_t": "integer_t",
+    "mach_port_flavor_t": "int",
+    "mach_port_guard_info_t": "struct mach_port_guard_info",
+    "mach_port_info_ext_t": "struct mach_port_info_ext",
+    "mach_port_info_t": "integer_t *",
+    "mach_port_limits_t": "struct mach_port_limits",
+    "mach_port_mscount_t": "natural_t",
+    "mach_port_msgcount_t": "natural_t",
+    "mach_port_name_array_t": "mach_port_name_t *",
+    "mach_port_name_t": "natural_t",
+    "mach_port_options_ptr_t": "mach_port_options_t *",
+    "mach_port_options_t": "struct mach_port_options",
+    "mach_port_qos_t": "struct mach_port_qos",
+    "mach_port_right_t": "natural_t",
+    "mach_port_rights_t": "natural_t",
+    "mach_port_seqno_t": "natural_t",
+    "mach_port_srights_t": "unsigned int",
+    "mach_port_status_t": "struct mach_port_status",
+    "mach_port_t": "__darwin_mach_port_t",
+    "mach_port_type_array_t": "mach_port_type_t *",
+    "mach_port_type_t": "natural_t",
+    "mach_port_urefs_t": "natural_t",
+    "mach_service_port_info_data_t": "struct mach_service_port_info",
+    "mach_service_port_info_t": "struct mach_service_port_info *",
+    "mach_timespec_t": "struct mach_timespec",
+    "mach_vm_address_t": "uint64_t",
+    "mach_vm_offset_t": "uint64_t",
+    "mach_vm_size_t": "uint64_t",
+    "malloc_type_id_t": "unsigned long long",
+    "malloc_zone_t": "struct _malloc_zone_t",
+    "max_align_t": "long double",
+    "mcontext_t": "struct __darwin_mcontext64 *",
+    "mode_t": "__darwin_mode_t",
+    "mpo_flags_t": "enum mpo_flags_t",
+    "msg_labels_t": "struct msg_labels_t",
+    "natural_t": "__darwin_natural_t",
+    "nlink_t": "__uint16_t",
+    "ntsid_t": "struct ntsid_t",
+    "objc_objectptr_t": "const void *",
+    "objc_zone_t": "struct _malloc_zone_t *",
+    "off_t": "__darwin_off_t",
+    "os_block_t": "void (^)(void)",
+    "os_clockid_t": "enum os_clockid_t",
+    "os_function_t": "void (*)(void * _Nullable)",
+    "os_workgroup_attr_s": "struct os_workgroup_attr_opaque_s",
+    "os_workgroup_attr_t": "struct os_workgroup_attr_opaque_s *",
+    "os_workgroup_index": "uint32_t",
+    "os_workgroup_interval_data_s": "struct os_workgroup_interval_data_opaque_s",
+    "os_workgroup_interval_data_t": "struct os_workgroup_interval_data_opaque_s *",
+    "os_workgroup_interval_t": "OS_os_workgroup\u003cOS_os_workgroup_interval\u003e *",
+    "os_workgroup_join_token_s": "struct os_workgroup_join_token_opaque_s",
+    "os_workgroup_join_token_t": "struct os_workgroup_join_token_opaque_s *",
+    "os_workgroup_mpt_attr_s": "struct os_workgroup_max_parallel_threads_attr_s",
+    "os_workgroup_mpt_attr_t": "struct os_workgroup_max_parallel_threads_attr_s *",
+    "os_workgroup_parallel_t": "OS_os_workgroup\u003cOS_os_workgroup_parallel\u003e *",
+    "os_workgroup_t": "OS_os_workgroup *",
+    "os_workgroup_working_arena_destructor_t": "void (*)(void * _Nullable)",
+    "pid_t": "__darwin_pid_t",
+    "pthread_attr_t": "__darwin_pthread_attr_t",
+    "pthread_cond_t": "__darwin_pthread_cond_t",
+    "pthread_condattr_t": "__darwin_pthread_condattr_t",
+    "pthread_key_t": "__darwin_pthread_key_t",
+    "pthread_mutex_t": "__darwin_pthread_mutex_t",
+    "pthread_mutexattr_t": "__darwin_pthread_mutexattr_t",
+    "pthread_once_t": "__darwin_pthread_once_t",
+    "pthread_rwlock_t": "__darwin_pthread_rwlock_t",
+    "pthread_rwlockattr_t": "__darwin_pthread_rwlockattr_t",
+    "pthread_t": "__darwin_pthread_t",
+    "ptrauth_extra_data_t": "unsigned long",
+    "ptrauth_generic_signature_t": "unsigned long",
+    "ptrauth_key": "enum ptrauth_key",
+    "ptrdiff_t": "long",
+    "qaddr_t": "quad_t *",
+    "qos_class_t": "enum qos_class_t",
+    "quad_t": "int64_t",
+    "register_t": "int64_t",
+    "rlim_t": "__uint64_t",
+    "rsize_t": "__darwin_size_t",
+    "rune_t": "__darwin_rune_t",
+    "rusage_info_current": "struct rusage_info_v6",
+    "rusage_info_t": "void *",
+    "security_token_t": "struct security_token_t",
+    "segsz_t": "int32_t",
+    "sig_atomic_t": "int",
+    "sig_t": "void (*)(int)",
+    "siginfo_t": "struct __siginfo",
+    "sigjmp_buf": "int[49]",
+    "sigset_t": "__darwin_sigset_t",
+    "size_t": "__darwin_size_t",
+    "sleep_type_t": "int",
+    "ssize_t": "__darwin_ssize_t",
+    "stack_t": "struct __darwin_sigaltstack",
+    "suseconds_t": "__darwin_suseconds_t",
+    "swblk_t": "int32_t",
+    "syscall_arg_t": "u_int64_t",
+    "time_t": "__darwin_time_t",
+    "time_value_t": "struct time_value",
+    "u_char": "unsigned char",
+    "u_int": "unsigned int",
+    "u_int16_t": "unsigned short",
+    "u_int32_t": "unsigned int",
+    "u_int64_t": "unsigned long long",
+    "u_int8_t": "unsigned char",
+    "u_long": "unsigned long",
+    "u_quad_t": "u_int64_t",
+    "u_short": "unsigned short",
+    "ucontext_t": "struct __darwin_ucontext",
+    "uid_t": "__darwin_uid_t",
+    "uint": "unsigned int",
+    "uint16_t": "unsigned short",
+    "uint32_t": "unsigned int",
+    "uint64_t": "unsigned long long",
+    "uint8_t": "unsigned char",
+    "uint_fast16_t": "uint16_t",
+    "uint_fast32_t": "uint32_t",
+    "uint_fast64_t": "uint64_t",
+    "uint_fast8_t": "uint8_t",
+    "uint_least16_t": "uint16_t",
+    "uint_least32_t": "uint32_t",
+    "uint_least64_t": "uint64_t",
+    "uint_least8_t": "uint8_t",
+    "uintmax_t": "unsigned long",
+    "uintptr_t": "unsigned long",
+    "useconds_t": "__darwin_useconds_t",
+    "user_addr_t": "u_int64_t",
+    "user_long_t": "int64_t",
+    "user_off_t": "int64_t",
+    "user_size_t": "u_int64_t",
+    "user_ssize_t": "int64_t",
+    "user_time_t": "int64_t",
+    "user_ulong_t": "u_int64_t",
+    "ushort": "unsigned short",
+    "uuid_t": "__darwin_uuid_t",
+    "va_list": "__darwin_va_list",
+    "vm32_address_t": "uint32_t",
+    "vm32_offset_t": "uint32_t",
+    "vm32_size_t": "uint32_t",
+    "vm_map_address_t": "uint64_t",
+    "vm_map_offset_t": "uint64_t",
+    "vm_map_size_t": "uint64_t",
+    "vm_offset_t": "uintptr_t",
+    "vm_size_t": "uintptr_t",
+    "wchar_t": "__darwin_wchar_t",
+    "wide": "struct wide",
+    "wint_t": "__darwin_wint_t"
+  }
+}

@@ -8,8 +8,14 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// New creates a new assessment participant configuration instance.
-func New() *AssessmentParticipantConfiguration {
+// New returns the new.
+func New() *AssessmentBinaryExecutableConfiguration {
+	_r := objc.Send[objc.ID](objc.ID(_class("AEAssessmentBinaryExecutableConfiguration")), objc.RegisterName("new"))
+	return AssessmentBinaryExecutableConfigurationFromID(_r)
+}
+
+// AEAssessmentParticipantConfigurationNew creates a new assessment participant configuration instance.
+func AEAssessmentParticipantConfigurationNew() *AssessmentParticipantConfiguration {
 	_r := objc.Send[objc.ID](objc.ID(_class("AEAssessmentParticipantConfiguration")), objc.RegisterName("new"))
 	return AssessmentParticipantConfigurationFromID(_r)
 }

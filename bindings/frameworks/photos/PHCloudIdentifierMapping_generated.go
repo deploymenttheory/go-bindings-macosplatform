@@ -80,14 +80,14 @@ func NewCloudIdentifierMapping() *CloudIdentifierMapping {
 	return cloudIdentifierMappingAdopt(_id)
 }
 
-// CloudIdentifier returns the cloud identifier of the resource found for this local identifier
+// CloudIdentifier returns the cloud identifier of the record found for this local identifier
 func (cim *CloudIdentifierMapping) CloudIdentifier() *CloudIdentifier {
 	defer runtime.KeepAlive(cim)
 	_r := objc.Send[objc.ID](objref.IDOf(cim), objc.RegisterName("cloudIdentifier"))
 	return CloudIdentifierFromID(_r)
 }
 
-// Error returns error An error indicating why the \c cloudIdentifier is nil. \c PHPhotosErrorIdentifierNotFound if no resource could be found for the provided local identifier.
+// Error returns an error indicating why the `cloudIdentifier` is `nil`. `PHPhotosErrorIdentifierNotFound` if no record could be found for the provided local identifier.
 func (cim *CloudIdentifierMapping) Error() unsafe.Pointer {
 	defer runtime.KeepAlive(cim)
 	_r := objc.Send[unsafe.Pointer](objref.IDOf(cim), objc.RegisterName("error"))

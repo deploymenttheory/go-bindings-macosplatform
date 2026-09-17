@@ -218,6 +218,7 @@ func (o *NSLinguisticTagger) PossibleTagsAtIndexSchemeTokenRangeSentenceRangeSco
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// Returns the tag schemes configured for this linguistic tagger.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func (o *NSLinguisticTagger) TagSchemes() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLinguisticTaggerSelTagSchemes)
@@ -227,6 +228,7 @@ func (o *NSLinguisticTagger) TagSchemes() *NSArray[*NSString] {
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// The string being analyzed by the linguistic tagger.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func (o *NSLinguisticTagger) String() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLinguisticTaggerSelString)
@@ -241,6 +243,7 @@ func (o *NSLinguisticTagger) SetString(string_ *NSString) {
 	o.Ptr().Send(_nSLinguisticTaggerSelSetString, string_.Ptr())
 }
 
+// Returns the dominant language of the string set for the linguistic tagger. Returns the BCP-47 tag identifying the dominant language of the string, or the tag "und" if a specific language cannot be determined.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func (o *NSLinguisticTagger) DominantLanguage() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLinguisticTaggerSelDominantLanguage)

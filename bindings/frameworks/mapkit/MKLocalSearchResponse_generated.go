@@ -15,8 +15,6 @@ import (
 )
 
 // LocalSearchResponse is an idiomatic wrapper over the Objective-C class MKLocalSearchResponse.
-//
-// The results from a map-based search.
 type LocalSearchResponse struct {
 	objref.Handle
 }

@@ -13,6 +13,7 @@ import (
 // An object representing the call stack for an exception.
 //
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxcallstacktree
+// Deprecated: Use CallStackTree instead.
 type MXCallStackTree struct {
 	foundation.NSObject
 }

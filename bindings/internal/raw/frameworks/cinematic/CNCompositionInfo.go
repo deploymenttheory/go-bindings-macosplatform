@@ -12,7 +12,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An object that enables you to add the appropriate number of tracks for a Cinematic asset.
+// Information about composition tracks added to an AVComposition for a cinematic asset.
 //
 // Apple documentation: https://developer.apple.com/documentation/cinematic/cncompositioninfo
 type CNCompositionInfo struct {

@@ -8,6 +8,7 @@ import (
 	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/rt"
@@ -75,7 +76,17 @@ func (uc *USBController) String() string {
 	return rt.Description(objref.IDOf(uc))
 }
 
-// USBDevices returns the USB devices.
+// WithDelegate sets the controller's delegate.
+func (uc *USBController) WithDelegate(delegate USBControllerDelegate) *USBController {
+	_shim := newUSBControllerDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(uc), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(uc), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return uc
+}
+
+// USBDevices returns a list of USB devices attached to controller. If corresponding USB controller configuration included in VZVirtualMachineConfiguration contained  any USB devices, those devices will appear here when virtual machine is started.
 func (uc *USBController) USBDevices() []obj.Object {
 	defer runtime.KeepAlive(uc)
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("usbDevices"))

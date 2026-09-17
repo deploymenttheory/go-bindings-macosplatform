@@ -215,6 +215,12 @@ func (sc *SpellChecker) SetIgnoredWordsInSpellDocumentWithTag(words []string, ta
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setIgnoredWords:inSpellDocumentWithTag:"), purego.SliceToNSArray(words, func(_v string) objc.ID { return purego.NSString(_v) }), tag)
 }
 
+// IgnoreGrammarRangeInSentenceInSpellDocumentWithTag wraps the corresponding Objective-C method.
+func (sc *SpellChecker) IgnoreGrammarRangeInSentenceInSpellDocumentWithTag(grammarRange foundation.NSRange, sentence string, tag int) {
+	defer runtime.KeepAlive(sc)
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("ignoreGrammarRange:inSentence:inSpellDocumentWithTag:"), grammarRange, purego.NSString(sentence), tag)
+}
+
 // GuessesForWordRangeInStringLanguageInSpellDocumentWithTag returns an array of possible substitutions for the specified string.
 func (sc *SpellChecker) GuessesForWordRangeInStringLanguageInSpellDocumentWithTag(range_ foundation.NSRange, str string, language string, tag int) []string {
 	defer runtime.KeepAlive(sc)

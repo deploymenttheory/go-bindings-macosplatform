@@ -10,9 +10,6 @@
       "doc": "A simple, reusable animation that changes attributes of any node you attach it to.",
       "url": "https://developer.apple.com/documentation/scenekit/scnaction"
     },
-    "SCNAnimation": {
-      "url": "https://developer.apple.com/documentation/scenekit/scnanimation"
-    },
     "SCNAnimationEvent": {
       "doc": "A container for a closure, a block in Objective-C, to be executed at a specific time during playback of an animation.",
       "url": "https://developer.apple.com/documentation/scenekit/scnanimationevent"
@@ -265,9 +262,6 @@
     "SCNAnimatable": {
       "doc": "The common interface for attaching animations to nodes, geometries, materials, and other SceneKit objects.",
       "url": "https://developer.apple.com/documentation/scenekit/scnanimatable"
-    },
-    "SCNAnimation": {
-      "url": "https://developer.apple.com/documentation/scenekit/scnanimation"
     },
     "SCNAvoidOccluderConstraintDelegate": {
       "url": "https://developer.apple.com/documentation/scenekit/scnavoidoccluderconstraintdelegate"

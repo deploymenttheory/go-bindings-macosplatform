@@ -756,6 +756,14 @@ func (sbb *StatusBarButton) WithGestureRecognizers(items ...GestureRecognizerPro
 	return sbb
 }
 
+// WithExclusiveGestureBehavior sets declares whether gesture recognizers should be exclusive in this view and its subviews.
+func (sbb *StatusBarButton) WithExclusiveGestureBehavior(exclusiveGestureBehavior ViewExclusiveGestureBehavior) *StatusBarButton {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sbb), objc.RegisterName("setExclusiveGestureBehavior:"), exclusiveGestureBehavior)
+	})
+	return sbb
+}
+
 // WithAllowedTouchTypes sets the allowed touch types.
 func (sbb *StatusBarButton) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *StatusBarButton {
 	purego.Main(func() {
@@ -817,6 +825,15 @@ func (sbb *StatusBarButton) WithHorizontalContentSizeConstraintActive(horizontal
 func (sbb *StatusBarButton) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *StatusBarButton {
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sbb), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
+	return sbb
+}
+
+// WithTextSelectionManager sets the text selection manager for this view.
+func (sbb *StatusBarButton) WithTextSelectionManager(textSelectionManager *TextSelectionManager) *StatusBarButton {
+	defer runtime.KeepAlive(textSelectionManager)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sbb), objc.RegisterName("setTextSelectionManager:"), objref.IDOf(textSelectionManager))
 	})
 	return sbb
 }

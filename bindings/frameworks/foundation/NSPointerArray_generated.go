@@ -144,14 +144,14 @@ func (pa *PointerArray) Compact() {
 	objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("compact"))
 }
 
-// PointerFunctions returns the pointer functions.
+// PointerFunctions returns the functions in use by the receiver. The returned object is a new `NSPointerFunctions` object that you can modify and/or use directly to create other pointer collections.
 func (pa *PointerArray) PointerFunctions() *PointerFunctions {
 	defer runtime.KeepAlive(pa)
 	_r := objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("pointerFunctions"))
 	return PointerFunctionsFromID(_r)
 }
 
-// Count returns the count.
+// Count returns the number of elements in the receiver. If you increase the `count`, `NULL` values are added. If you decrease the `count`, elements at indexes `count` and greater are removed.
 func (pa *PointerArray) Count() int {
 	defer runtime.KeepAlive(pa)
 	_r := objc.Send[int](objref.IDOf(pa), objc.RegisterName("count"))

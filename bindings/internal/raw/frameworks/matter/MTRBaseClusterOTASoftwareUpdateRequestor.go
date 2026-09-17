@@ -62,7 +62,7 @@ func MTRBaseClusterOTASoftwareUpdateRequestorFromID(id objc.ID) *MTRBaseClusterO
 	return o
 }
 
-// Command AnnounceOTAProvider Announce the presence of an OTA Provider
+// Command AnnounceOTAProvider This command MAY be invoked by Administrators to announce the presence of a particular OTA Provider.
 func (o *MTRBaseClusterOTASoftwareUpdateRequestor) AnnounceOTAProviderWithParamsCompletion(params *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams, completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {

@@ -154,21 +154,21 @@ func (di *DateInterval) ContainsDate(date time.Time) bool {
 	return _r
 }
 
-// StartDate returns the start date.
+// StartDate returns the start date of the date interval.
 func (di *DateInterval) StartDate() time.Time {
 	defer runtime.KeepAlive(di)
 	_r := objc.Send[objc.ID](objref.IDOf(di), objc.RegisterName("startDate"))
 	return rt.NSDateToTime(_r)
 }
 
-// EndDate returns the end date.
+// EndDate returns the end date of the date interval.
 func (di *DateInterval) EndDate() time.Time {
 	defer runtime.KeepAlive(di)
 	_r := objc.Send[objc.ID](objref.IDOf(di), objc.RegisterName("endDate"))
 	return rt.NSDateToTime(_r)
 }
 
-// Duration returns the duration.
+// Duration returns the duration of the date interval.
 func (di *DateInterval) Duration() float64 {
 	defer runtime.KeepAlive(di)
 	_r := objc.Send[float64](objref.IDOf(di), objc.RegisterName("duration"))

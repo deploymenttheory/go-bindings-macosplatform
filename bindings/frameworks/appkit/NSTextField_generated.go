@@ -146,6 +146,14 @@ func (tf *TextField) WithBezelStyle(bezelStyle TextFieldBezelStyle) *TextField {
 	return tf
 }
 
+// WithBorderShape sets set border shape NSControlBorderShapeAutomatic sets text field or subclass to default system shape. NSControlBorderShapeCircle sets text field or subclass to NSControlBorderShapeAutomatic.
+func (tf *TextField) WithBorderShape(borderShape ControlBorderShape) *TextField {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setBorderShape:"), borderShape)
+	})
+	return tf
+}
+
 // WithPreferredMaxLayoutWidth sets the maximum width of the text field’s intrinsic content size.
 func (tf *TextField) WithPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64) *TextField {
 	purego.Main(func() {
@@ -722,6 +730,14 @@ func (tf *TextField) WithGestureRecognizers(items ...GestureRecognizerProvider) 
 	return tf
 }
 
+// WithExclusiveGestureBehavior sets declares whether gesture recognizers should be exclusive in this view and its subviews.
+func (tf *TextField) WithExclusiveGestureBehavior(exclusiveGestureBehavior ViewExclusiveGestureBehavior) *TextField {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setExclusiveGestureBehavior:"), exclusiveGestureBehavior)
+	})
+	return tf
+}
+
 // WithAllowedTouchTypes sets the allowed touch types.
 func (tf *TextField) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *TextField {
 	purego.Main(func() {
@@ -783,6 +799,15 @@ func (tf *TextField) WithHorizontalContentSizeConstraintActive(horizontalContent
 func (tf *TextField) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *TextField {
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
+	return tf
+}
+
+// WithTextSelectionManager sets the text selection manager for this view.
+func (tf *TextField) WithTextSelectionManager(textSelectionManager *TextSelectionManager) *TextField {
+	defer runtime.KeepAlive(textSelectionManager)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setTextSelectionManager:"), objref.IDOf(textSelectionManager))
 	})
 	return tf
 }
@@ -1054,6 +1079,20 @@ func (tf *TextField) BezelStyle() TextFieldBezelStyle {
 	purego.Main(func() {
 		_mainthread0 = func() TextFieldBezelStyle {
 			_r := objc.Send[TextFieldBezelStyle](objref.IDOf(tf), objc.RegisterName("bezelStyle"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
+}
+
+// BorderShape set border shape `NSControlBorderShapeAutomatic` sets text field or subclass to default system shape. `NSControlBorderShapeCircle` sets text field or subclass to `NSControlBorderShapeAutomatic`.
+func (tf *TextField) BorderShape() ControlBorderShape {
+	defer runtime.KeepAlive(tf)
+	var _mainthread0 ControlBorderShape
+	purego.Main(func() {
+		_mainthread0 = func() ControlBorderShape {
+			_r := objc.Send[ControlBorderShape](objref.IDOf(tf), objc.RegisterName("borderShape"))
 			return _r
 		}()
 	})

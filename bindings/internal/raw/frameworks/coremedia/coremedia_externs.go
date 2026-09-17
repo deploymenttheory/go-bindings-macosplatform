@@ -49,67 +49,79 @@ func KCMFormatDescriptionCameraCalibrationLensRole_Right() uintptr {
 	return ptr
 }
 
+// @constant kCMFormatDescriptionCameraCalibration_ExtrinsicOrientationQuaternion @abstract	Specifies a camera’s orientation to a world or scene coordinate system. The orientation value is a unit quaternion(ix, iy, and iz) instead of the classical 3x3 matrix. @discussion The values are in a CFArray of three CFNumbers in ix, iy, and iz order.
 func KCMFormatDescriptionCameraCalibration_ExtrinsicOrientationQuaternion() uintptr {
 	ptr, _ := purego.Dlsym(_coremediaLib, "kCMFormatDescriptionCameraCalibration_ExtrinsicOrientationQuaternion")
 	return ptr
 }
 
+// @constant kCMFormatDescriptionCameraCalibration_ExtrinsicOriginSource @abstract	Identifies how the origin of the camera system's extrinsics are determined. @discussion The 'blin' value indicates the center of transform is determined by the point mid way along the dimensions indicated by the StereoCameraSystemBaselineBox held in the StereoCameraSystemBox. Each left and right lens within a stereoscopic camera system is equidistant from this point, so the 'blin' value is halved when associated with the respective left and right lenses.
 func KCMFormatDescriptionCameraCalibration_ExtrinsicOriginSource() uintptr {
 	ptr, _ := purego.Dlsym(_coremediaLib, "kCMFormatDescriptionCameraCalibration_ExtrinsicOriginSource")
 	return ptr
 }
 
+// @constant kCMFormatDescriptionCameraCalibration_IntrinsicMatrix @abstract	Specifies the 3x3 camera intrinsic matrix for camera calibration. @discussion Camera intrinsic matrix is a CFData containing a matrix_float3x3, which is column-major. Each element is in IEEE754 native-endian 32-bit floating point. It has the following contents: fx	s	cx 0	fy	cy 0	0	1 fx and fy are the focal length in pixels. For square pixels, they will have the same value. cx and cy are the coordinates of the principal point. The origin is the upper left of the frame. s is an optional skew factor.
 func KCMFormatDescriptionCameraCalibration_IntrinsicMatrix() uintptr {
 	ptr, _ := purego.Dlsym(_coremediaLib, "kCMFormatDescriptionCameraCalibration_IntrinsicMatrix")
 	return ptr
 }
 
+// @constant kCMFormatDescriptionCameraCalibration_IntrinsicMatrixProjectionOffset @abstract	Specifies the offset of the point of perspective relative to the rectilinear projection.
 func KCMFormatDescriptionCameraCalibration_IntrinsicMatrixProjectionOffset() uintptr {
 	ptr, _ := purego.Dlsym(_coremediaLib, "kCMFormatDescriptionCameraCalibration_IntrinsicMatrixProjectionOffset")
 	return ptr
 }
 
+// @constant kCMFormatDescriptionCameraCalibration_IntrinsicMatrixReferenceDimensions @abstract	Specifies the image dimensions to which the camera’s intrinsic matrix values are relative. @discussion Values are width and height in a CFDictionary. Dictionary keys are compatible with CGSize dictionary, namely "Width" and "Height".
 func KCMFormatDescriptionCameraCalibration_IntrinsicMatrixReferenceDimensions() uintptr {
 	ptr, _ := purego.Dlsym(_coremediaLib, "kCMFormatDescriptionCameraCalibration_IntrinsicMatrixReferenceDimensions")
 	return ptr
 }
 
-// The following keys are required in each kCMFormatDescriptionExtension_CameraCalibrationDataLensCollection dictionary. @constant kCMFormatDescriptionCameraCalibration_LensAlgorithmKind @abstract	Specifies the camera calibration methodology. @discussion If the algorithm kind is ParametricLens, the camera lens collection requires camera intrinsic and extrinsic parameters. @constant kCMFormatDescriptionCameraCalibration_LensDomain @abstract	Specifies the kind of lens (e.g., color). @constant kCMFormatDescriptionCameraCalibration_LensIdentifier @abstract	Specifies a unique number associated with a lens. @constant kCMFormatDescriptionCameraCalibration_LensRole @abstract	Specifies the particular use of the lens in the camera system (e.g., left or right for a stereo system). @discussion For a stereoscopic camera system, one lens should have the left role and another should have the right role. @constant kCMFormatDescriptionCameraCalibration_LensDistortions @abstract	Specifies the first and second radial distortion coefficients(k1 and k2) used to correct the distortion that appeared as curved lines for straight lines and the first and second tangential distortion coefficients(p1 and p2) used to correct the distortion caused by a lens's improper alignment of physical elements. @discussion The values are in a CFArray of four CFNumbers in k1, k2, p1 and p2 order. @constant kCMFormatDescriptionCameraCalibration_LensFrameAdjustmentsPolynomialX @abstract    Specifies a three element polynomial for mapping x axis UV parameters with an adjustment using the equation `x' = polynomialX[0] + polynomialX[1]*x + polynomialX[2]*x^3`. @discussion The values are in a CFArray of three CFNumbers(float) in the order polynomialX[0], polynomialX[1] & polynomialX[2]. The polynomial transform origin is at the center of the frame. The default values of elements of polynomialX[] are [0.0, 1.0, 0.0]. @constant kCMFormatDescriptionCameraCalibration_LensFrameAdjustmentsPolynomialY @abstract    Specifies a three element polynomial for mapping y axis UV parameters with an adjustment using the equation `y' = polynomialY[0] + polynomialY[1]*y + polynomialY[2]*y^3`. @discussion The values are in a CFArray of three CFNumbers(float) in the order polynomialY[0], polynomialY[1] & polynomialY[2]. The polynomial transform origin is at the center of the frame. The default values of elements of polynomialY[] are [0.0, 1.0, 0.0]. @constant kCMFormatDescriptionCameraCalibration_RadialAngleLimit @abstract	Specifies the outer limit of the calibration validity in degrees of angle eccentric from the optical axis. @discussion The value is linked to radial distortion corrections with k1 and k2. @constant kCMFormatDescriptionCameraCalibration_IntrinsicMatrix @abstract	Specifies the 3x3 camera intrinsic matrix for camera calibration. @discussion Camera intrinsic matrix is a CFData containing a matrix_float3x3, which is column-major. Each element is in IEEE754 native-endian 32-bit floating point. It has the following contents: fx	s	cx 0	fy	cy 0	0	1 fx and fy are the focal length in pixels. For square pixels, they will have the same value. cx and cy are the coordinates of the principal point. The origin is the upper left of the frame. s is an optional skew factor. @constant kCMFormatDescriptionCameraCalibration_IntrinsicMatrixProjectionOffset @abstract	Specifies the offset of the point of perspective relative to the rectilinear projection. @constant kCMFormatDescriptionCameraCalibration_IntrinsicMatrixReferenceDimensions @abstract	Specifies the image dimensions to which the camera’s intrinsic matrix values are relative. @discussion Values are width and height in a CFDictionary. Dictionary keys are compatible with CGSize dictionary, namely "Width" and "Height". @constant kCMFormatDescriptionCameraCalibration_ExtrinsicOriginSource @abstract	Identifies how the origin of the camera system's extrinsics are determined. @discussion The 'blin' value indicates the center of transform is determined by the point mid way along the dimensions indicated by the StereoCameraSystemBaselineBox held in the StereoCameraSystemBox. Each left and right lens within a stereoscopic camera system is equidistant from this point, so the 'blin' value is halved when associated with the respective left and right lenses. @constant kCMFormatDescriptionCameraCalibration_ExtrinsicOrientationQuaternion @abstract	Specifies a camera’s orientation to a world or scene coordinate system. The orientation value is a unit quaternion(ix, iy, and iz) instead of the classical 3x3 matrix. @discussion The values are in a CFArray of three CFNumbers in ix, iy, and iz order.
+// @constant kCMFormatDescriptionCameraCalibration_LensAlgorithmKind @abstract	Specifies the camera calibration methodology. @discussion If the algorithm kind is ParametricLens, the camera lens collection requires camera intrinsic and extrinsic parameters.
 func KCMFormatDescriptionCameraCalibration_LensAlgorithmKind() uintptr {
 	ptr, _ := purego.Dlsym(_coremediaLib, "kCMFormatDescriptionCameraCalibration_LensAlgorithmKind")
 	return ptr
 }
 
+// @constant kCMFormatDescriptionCameraCalibration_LensDistortions @abstract	Specifies the first and second radial distortion coefficients(k1 and k2) used to correct the distortion that appeared as curved lines for straight lines and the first and second tangential distortion coefficients(p1 and p2) used to correct the distortion caused by a lens's improper alignment of physical elements. @discussion The values are in a CFArray of four CFNumbers in k1, k2, p1 and p2 order.
 func KCMFormatDescriptionCameraCalibration_LensDistortions() uintptr {
 	ptr, _ := purego.Dlsym(_coremediaLib, "kCMFormatDescriptionCameraCalibration_LensDistortions")
 	return ptr
 }
 
+// @constant kCMFormatDescriptionCameraCalibration_LensDomain @abstract	Specifies the kind of lens (e.g., color).
 func KCMFormatDescriptionCameraCalibration_LensDomain() uintptr {
 	ptr, _ := purego.Dlsym(_coremediaLib, "kCMFormatDescriptionCameraCalibration_LensDomain")
 	return ptr
 }
 
+// @constant kCMFormatDescriptionCameraCalibration_LensFrameAdjustmentsPolynomialX @abstract    Specifies a three element polynomial for mapping x axis UV parameters with an adjustment using the equation `x' = polynomialX[0] + polynomialX[1]*x + polynomialX[2]*x^3`. @discussion The values are in a CFArray of three CFNumbers(float) in the order polynomialX[0], polynomialX[1] & polynomialX[2]. The polynomial transform origin is at the center of the frame. The default values of elements of polynomialX[] are [0.0, 1.0, 0.0].
 func KCMFormatDescriptionCameraCalibration_LensFrameAdjustmentsPolynomialX() uintptr {
 	ptr, _ := purego.Dlsym(_coremediaLib, "kCMFormatDescriptionCameraCalibration_LensFrameAdjustmentsPolynomialX")
 	return ptr
 }
 
+// @constant kCMFormatDescriptionCameraCalibration_LensFrameAdjustmentsPolynomialY @abstract    Specifies a three element polynomial for mapping y axis UV parameters with an adjustment using the equation `y' = polynomialY[0] + polynomialY[1]*y + polynomialY[2]*y^3`. @discussion The values are in a CFArray of three CFNumbers(float) in the order polynomialY[0], polynomialY[1] & polynomialY[2]. The polynomial transform origin is at the center of the frame. The default values of elements of polynomialY[] are [0.0, 1.0, 0.0].
 func KCMFormatDescriptionCameraCalibration_LensFrameAdjustmentsPolynomialY() uintptr {
 	ptr, _ := purego.Dlsym(_coremediaLib, "kCMFormatDescriptionCameraCalibration_LensFrameAdjustmentsPolynomialY")
 	return ptr
 }
 
+// @constant kCMFormatDescriptionCameraCalibration_LensIdentifier @abstract	Specifies a unique number associated with a lens.
 func KCMFormatDescriptionCameraCalibration_LensIdentifier() uintptr {
 	ptr, _ := purego.Dlsym(_coremediaLib, "kCMFormatDescriptionCameraCalibration_LensIdentifier")
 	return ptr
 }
 
+// @constant kCMFormatDescriptionCameraCalibration_LensRole @abstract	Specifies the particular use of the lens in the camera system (e.g., left or right for a stereo system). @discussion For a stereoscopic camera system, one lens should have the left role and another should have the right role.
 func KCMFormatDescriptionCameraCalibration_LensRole() uintptr {
 	ptr, _ := purego.Dlsym(_coremediaLib, "kCMFormatDescriptionCameraCalibration_LensRole")
 	return ptr
 }
 
+// @constant kCMFormatDescriptionCameraCalibration_RadialAngleLimit @abstract	Specifies the outer limit of the calibration validity in degrees of angle eccentric from the optical axis. @discussion The value is linked to radial distortion corrections with k1 and k2.
 func KCMFormatDescriptionCameraCalibration_RadialAngleLimit() uintptr {
 	ptr, _ := purego.Dlsym(_coremediaLib, "kCMFormatDescriptionCameraCalibration_RadialAngleLimit")
 	return ptr
@@ -225,7 +237,7 @@ func KCMFormatDescriptionExtension_BytesPerRow() uintptr {
 	return ptr
 }
 
-// @constant kCMFormatDescriptionExtension_CameraCalibrationDataLensCollection @abstract	Specifies intrinsic and extrinsic parameters for single or multiple lenses. @discussion The property value is an array of dictionaries describing the camera calibration data for each lens. The camera calibration data includes intrinsics and extrinics with other parameters. For a stereoscopic camera system, the left and right lens signaling can be done with the kCMFormatDescriptionCameraCalibration_LensRole key and its value.
+// @constant kCMFormatDescriptionExtension_CameraCalibrationDataLensCollection @abstract	Specifies intrinsic and extrinsic parameters for single or multiple lenses. @discussion The property value is an array of dictionaries describing the camera calibration data for each lens. The camera calibration data includes intrinsics and extrinics with other parameters. For a stereoscopic camera system, the left and right lens signaling can be done with the kCMFormatDescriptionCameraCalibration_LensRole key and its value. The following keys are required in each kCMFormatDescriptionExtension_CameraCalibrationDataLensCollection dictionary. kCMFormatDescriptionCameraCalibration_LensAlgorithmKind kCMFormatDescriptionCameraCalibration_LensDomain kCMFormatDescriptionCameraCalibration_LensIdentifier kCMFormatDescriptionCameraCalibration_LensRole kCMFormatDescriptionCameraCalibration_LensDistortions kCMFormatDescriptionCameraCalibration_LensFrameAdjustmentsPolynomialX kCMFormatDescriptionCameraCalibration_LensFrameAdjustmentsPolynomialY kCMFormatDescriptionCameraCalibration_RadialAngleLimit kCMFormatDescriptionCameraCalibration_IntrinsicMatrix kCMFormatDescriptionCameraCalibration_IntrinsicMatrixProjectionOffset kCMFormatDescriptionCameraCalibration_IntrinsicMatrixReferenceDimensions kCMFormatDescriptionCameraCalibration_ExtrinsicOriginSource
 func KCMFormatDescriptionExtension_CameraCalibrationDataLensCollection() uintptr {
 	ptr, _ := purego.Dlsym(_coremediaLib, "kCMFormatDescriptionExtension_CameraCalibrationDataLensCollection")
 	return ptr
@@ -342,7 +354,7 @@ func KCMFormatDescriptionExtension_ICCProfile() uintptr {
 	return ptr
 }
 
-// @constant    kCMFormatDescriptionExtension_LogTransferFunction Indicates that the transfer function or gamma of the content is a log format and identifies the specific log curve. @discussion The value is a CFString holding fully specified reverse DNS identifier. Content captured in Apple Log will have this key set to kCMFormatDescriptionLogTransferFunction_AppleLog. @constant    kCMFormatDescriptionLogTransferFunction_AppleLog Indicates the Apple Log identifier. @discussion You can download the Apple Log Profile White Paper from the Apple Developer Downloads website.
+// @constant    kCMFormatDescriptionExtension_LogTransferFunction Indicates that the transfer function or gamma of the content is a log format and identifies the specific log curve. @discussion The value is a CFString holding fully specified reverse DNS identifier. Content captured in Apple Log will have this key set to kCMFormatDescriptionLogTransferFunction_AppleLog.
 func KCMFormatDescriptionExtension_LogTransferFunction() uintptr {
 	ptr, _ := purego.Dlsym(_coremediaLib, "kCMFormatDescriptionExtension_LogTransferFunction")
 	return ptr
@@ -525,8 +537,15 @@ func KCMFormatDescriptionKey_PixelAspectRatioVerticalSpacing() uintptr {
 	return ptr
 }
 
+// Log Transfer Function identifier for Apple Log. You can download the Apple Log Profile and Apple Log 2 Profile White Papers from the Apple Developer Downloads website.
 func KCMFormatDescriptionLogTransferFunction_AppleLog() uintptr {
 	ptr, _ := purego.Dlsym(_coremediaLib, "kCMFormatDescriptionLogTransferFunction_AppleLog")
+	return ptr
+}
+
+// Log Transfer Function identifier for Apple Log 2. You can download the Apple Log Profile and Apple Log 2 Profile White Papers from the Apple Developer Downloads website.
+func KCMFormatDescriptionLogTransferFunction_AppleLog2() uintptr {
+	ptr, _ := purego.Dlsym(_coremediaLib, "kCMFormatDescriptionLogTransferFunction_AppleLog2")
 	return ptr
 }
 
@@ -635,6 +654,17 @@ func KCMFormatDescriptionYCbCrMatrix_SMPTE_240M_1995() uintptr {
 	return ptr
 }
 
+func KCMGenlockClockNotificationPayload_AnyDisplayIsSynchronizedToLockedGenlockSignal() uintptr {
+	ptr, _ := purego.Dlsym(_coremediaLib, "kCMGenlockClockNotificationPayload_AnyDisplayIsSynchronizedToLockedGenlockSignal")
+	return ptr
+}
+
+// Posted when the display mode changes from genlock to non-genlock or vice versa. Observe this notification using `CMNotificationCenterAddListener` on the default local `CMNotificationCenter`. The notification payload dictionary contains a `CFBoolean` value for the key `kCMGenlockClockNotificationPayload_AnyDisplayIsSynchronizedToLockedGenlockSignal`.
+func KCMGenlockClockNotification_DisplayGenlockModeChanged() uintptr {
+	ptr, _ := purego.Dlsym(_coremediaLib, "kCMGenlockClockNotification_DisplayGenlockModeChanged")
+	return ptr
+}
+
 func KCMHEVCTemporalLevelInfoKey_ConstraintIndicatorFlags() uintptr {
 	ptr, _ := purego.Dlsym(_coremediaLib, "kCMHEVCTemporalLevelInfoKey_ConstraintIndicatorFlags")
 	return ptr
@@ -735,6 +765,11 @@ func KCMMetadataBaseDataType_GIF() uintptr {
 	return ptr
 }
 
+func KCMMetadataBaseDataType_ISOLatin1() uintptr {
+	ptr, _ := purego.Dlsym(_coremediaLib, "kCMMetadataBaseDataType_ISOLatin1")
+	return ptr
+}
+
 func KCMMetadataBaseDataType_JPEG() uintptr {
 	ptr, _ := purego.Dlsym(_coremediaLib, "kCMMetadataBaseDataType_JPEG")
 	return ptr
@@ -742,6 +777,11 @@ func KCMMetadataBaseDataType_JPEG() uintptr {
 
 func KCMMetadataBaseDataType_JSON() uintptr {
 	ptr, _ := purego.Dlsym(_coremediaLib, "kCMMetadataBaseDataType_JSON")
+	return ptr
+}
+
+func KCMMetadataBaseDataType_MacRoman() uintptr {
+	ptr, _ := purego.Dlsym(_coremediaLib, "kCMMetadataBaseDataType_MacRoman")
 	return ptr
 }
 
@@ -852,6 +892,12 @@ func KCMMetadataDataType_QuickTimeMetadataMilliLux() uintptr {
 	return ptr
 }
 
+// @const kCMMetadataDataType_QuickTimeMetadataSMPTE2094_50 SMPTE ST2094-50 HDR metadata.  Conforms to kCMMetadataBaseDataType_RawData.
+func KCMMetadataDataType_QuickTimeMetadataSMPTE2094_50() uintptr {
+	ptr, _ := purego.Dlsym(_coremediaLib, "kCMMetadataDataType_QuickTimeMetadataSMPTE2094_50")
+	return ptr
+}
+
 // @const kCMMetadataDataType_QuickTimeMetadataUUID A string supplying a universally unique identifier.  Conforms to kCMMetadataBaseDataType_UTF8.
 func KCMMetadataDataType_QuickTimeMetadataUUID() uintptr {
 	ptr, _ := purego.Dlsym(_coremediaLib, "kCMMetadataDataType_QuickTimeMetadataUUID")
@@ -870,6 +916,11 @@ func KCMMetadataFormatDescriptionKey_DataType() uintptr {
 
 func KCMMetadataFormatDescriptionKey_DataTypeNamespace() uintptr {
 	ptr, _ := purego.Dlsym(_coremediaLib, "kCMMetadataFormatDescriptionKey_DataTypeNamespace")
+	return ptr
+}
+
+func KCMMetadataFormatDescriptionKey_HumanReadableString() uintptr {
+	ptr, _ := purego.Dlsym(_coremediaLib, "kCMMetadataFormatDescriptionKey_HumanReadableString")
 	return ptr
 }
 
@@ -913,6 +964,11 @@ func KCMMetadataFormatDescriptionMetadataSpecificationKey_ExtendedLanguageTag() 
 	return ptr
 }
 
+func KCMMetadataFormatDescriptionMetadataSpecificationKey_HumanReadableString() uintptr {
+	ptr, _ := purego.Dlsym(_coremediaLib, "kCMMetadataFormatDescriptionMetadataSpecificationKey_HumanReadableString")
+	return ptr
+}
+
 func KCMMetadataFormatDescriptionMetadataSpecificationKey_Identifier() uintptr {
 	ptr, _ := purego.Dlsym(_coremediaLib, "kCMMetadataFormatDescriptionMetadataSpecificationKey_Identifier")
 	return ptr
@@ -930,6 +986,12 @@ func KCMMetadataFormatDescriptionMetadataSpecificationKey_StructuralDependency()
 
 func KCMMetadataFormatDescription_StructuralDependencyKey_DependencyIsInvalidFlag() uintptr {
 	ptr, _ := purego.Dlsym(_coremediaLib, "kCMMetadataFormatDescription_StructuralDependencyKey_DependencyIsInvalidFlag")
+	return ptr
+}
+
+// @const kCMMetadataIdentifier_ITUT_T35MetadataSMPTE2094_50 SMPTE ST2094-50 HDR metadata. (it35 keyspace) Expected data type is kCMMetadataDataType_QuickTimeMetadataSMPTE2094_50.
+func KCMMetadataIdentifier_ITUT_T35MetadataSMPTE2094_50() uintptr {
+	ptr, _ := purego.Dlsym(_coremediaLib, "kCMMetadataIdentifier_ITUT_T35MetadataSMPTE2094_50")
 	return ptr
 }
 
@@ -1141,6 +1203,7 @@ func KCMSampleBufferAttachmentKey_DisplayEmptyMediaImmediately() uintptr {
 	return ptr
 }
 
+// @constant	kCMSampleBufferAttachmentKey_DrainAfterDecoding @abstract	A value of kCFBooleanTrue requires the media converter to emit all prior enqueued samples without any further enqueue expectation. @discussion kCMSampleBufferAttachmentKey_DrainAfterDecoding, value kCFBooleanTrue, indicates to the buffer consumer that all prior enqueued samples must be processed without waiting on further media dependencies. Clients should attach this marker to an empty CMSampleBuffer. Clients may use this marker as a signal to finish processing any remaining sample buffers in the queue.
 func KCMSampleBufferAttachmentKey_DrainAfterDecoding() uintptr {
 	ptr, _ := purego.Dlsym(_coremediaLib, "kCMSampleBufferAttachmentKey_DrainAfterDecoding")
 	return ptr

@@ -81,6 +81,10 @@ const (
 	FeatureRegDczidEl0       FeatureReg = 11
 	FeatureRegIDAa64smfr0EL1 FeatureReg = 12
 	FeatureRegIDAa64zfr0EL1  FeatureReg = 13
+	FeatureRegIDAa64isar2EL1 FeatureReg = 14
+	FeatureRegIDAa64pfr2EL1  FeatureReg = 15
+	FeatureRegIDAa64mmfr3EL1 FeatureReg = 16
+	FeatureRegIDAa64mmfr4EL1 FeatureReg = 17
 )
 
 // String returns the FeatureReg constant's name, or its numeric form when the
@@ -115,6 +119,14 @@ func (e FeatureReg) String() string {
 		return "FeatureRegIDAa64smfr0EL1"
 	case FeatureRegIDAa64zfr0EL1:
 		return "FeatureRegIDAa64zfr0EL1"
+	case FeatureRegIDAa64isar2EL1:
+		return "FeatureRegIDAa64isar2EL1"
+	case FeatureRegIDAa64pfr2EL1:
+		return "FeatureRegIDAa64pfr2EL1"
+	case FeatureRegIDAa64mmfr3EL1:
+		return "FeatureRegIDAa64mmfr3EL1"
+	case FeatureRegIDAa64mmfr4EL1:
+		return "FeatureRegIDAa64mmfr4EL1"
 	default:
 		return fmt.Sprintf("FeatureReg(%d)", int64(e))
 	}
@@ -5037,7 +5049,7 @@ func (e GICRedistributorReg) String() string {
 type InterruptType uint32
 
 const (
-	// Corresponds to an ARM IRQ .
+	// Corresponds to an ARM IRQ.
 	InterruptTypeIrq InterruptType = 0
 	// Corresponds to an ARM FIQ.
 	InterruptTypeFiq InterruptType = 1
@@ -5555,15 +5567,19 @@ const (
 	SysRegMpidrEL1       SysReg = 49157
 	SysRegIDAa64pfr0EL1  SysReg = 49184
 	SysRegIDAa64pfr1EL1  SysReg = 49185
+	SysRegIDAa64pfr2EL1  SysReg = 49186
 	SysRegIDAa64zfr0EL1  SysReg = 49188
 	SysRegIDAa64smfr0EL1 SysReg = 49189
 	SysRegIDAa64dfr0EL1  SysReg = 49192
 	SysRegIDAa64dfr1EL1  SysReg = 49193
 	SysRegIDAa64isar0EL1 SysReg = 49200
 	SysRegIDAa64isar1EL1 SysReg = 49201
+	SysRegIDAa64isar2EL1 SysReg = 49202
 	SysRegIDAa64mmfr0EL1 SysReg = 49208
 	SysRegIDAa64mmfr1EL1 SysReg = 49209
 	SysRegIDAa64mmfr2EL1 SysReg = 49210
+	SysRegIDAa64mmfr3EL1 SysReg = 49211
+	SysRegIDAa64mmfr4EL1 SysReg = 49212
 	SysRegSctlrEL1       SysReg = 49280
 	// The ACTLR_EL1 register This only allows getting / setting of the ACTLR_EL1.EnTSO bit (index 1). Setting this bit to 1 will cause the vcpu to use a TSO memory model, whereas clearing it will cause the vcpu to use the default ARM64 memory model (weakly ordered loads / stores).
 	SysRegActlrEL1      SysReg = 49281
@@ -5780,6 +5796,8 @@ func (e SysReg) String() string {
 		return "SysRegIDAa64pfr0EL1"
 	case SysRegIDAa64pfr1EL1:
 		return "SysRegIDAa64pfr1EL1"
+	case SysRegIDAa64pfr2EL1:
+		return "SysRegIDAa64pfr2EL1"
 	case SysRegIDAa64zfr0EL1:
 		return "SysRegIDAa64zfr0EL1"
 	case SysRegIDAa64smfr0EL1:
@@ -5792,12 +5810,18 @@ func (e SysReg) String() string {
 		return "SysRegIDAa64isar0EL1"
 	case SysRegIDAa64isar1EL1:
 		return "SysRegIDAa64isar1EL1"
+	case SysRegIDAa64isar2EL1:
+		return "SysRegIDAa64isar2EL1"
 	case SysRegIDAa64mmfr0EL1:
 		return "SysRegIDAa64mmfr0EL1"
 	case SysRegIDAa64mmfr1EL1:
 		return "SysRegIDAa64mmfr1EL1"
 	case SysRegIDAa64mmfr2EL1:
 		return "SysRegIDAa64mmfr2EL1"
+	case SysRegIDAa64mmfr3EL1:
+		return "SysRegIDAa64mmfr3EL1"
+	case SysRegIDAa64mmfr4EL1:
+		return "SysRegIDAa64mmfr4EL1"
 	case SysRegSctlrEL1:
 		return "SysRegSctlrEL1"
 	case SysRegActlrEL1:
@@ -5938,6 +5962,50 @@ func (e SysReg) String() string {
 		return "SysRegVttbrEL2"
 	default:
 		return fmt.Sprintf("SysReg(%d)", int64(e))
+	}
+}
+
+type TlbiOp uint16
+
+const (
+	TlbiOpRvae1is   TlbiOp = 17
+	TlbiOpRvaae1is  TlbiOp = 19
+	TlbiOpRvale1is  TlbiOp = 21
+	TlbiOpRvaale1is TlbiOp = 23
+	TlbiOpVmalle1is TlbiOp = 24
+	TlbiOpVae1is    TlbiOp = 25
+	TlbiOpAside1is  TlbiOp = 26
+	TlbiOpVaae1is   TlbiOp = 27
+	TlbiOpVale1is   TlbiOp = 29
+	TlbiOpVaale1is  TlbiOp = 31
+)
+
+// String returns the TlbiOp constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TlbiOp) String() string {
+	switch e {
+	case TlbiOpRvae1is:
+		return "TlbiOpRvae1is"
+	case TlbiOpRvaae1is:
+		return "TlbiOpRvaae1is"
+	case TlbiOpRvale1is:
+		return "TlbiOpRvale1is"
+	case TlbiOpRvaale1is:
+		return "TlbiOpRvaale1is"
+	case TlbiOpVmalle1is:
+		return "TlbiOpVmalle1is"
+	case TlbiOpVae1is:
+		return "TlbiOpVae1is"
+	case TlbiOpAside1is:
+		return "TlbiOpAside1is"
+	case TlbiOpVaae1is:
+		return "TlbiOpVaae1is"
+	case TlbiOpVale1is:
+		return "TlbiOpVale1is"
+	case TlbiOpVaale1is:
+		return "TlbiOpVaale1is"
+	default:
+		return fmt.Sprintf("TlbiOp(%d)", int64(e))
 	}
 }
 

@@ -15,6 +15,7 @@ import (
 // An MCSession object enables and manages communication among all peers in a Multipeer Connectivity session.
 //
 // Apple documentation: https://developer.apple.com/documentation/multipeerconnectivity/mcsession
+// Deprecated: Use Network Framework instead
 type MCSession struct {
 	foundation.NSObject
 }
@@ -49,6 +50,7 @@ func MCSessionFromID(id objc.ID) *MCSession {
 }
 
 // Creates a Multipeer Connectivity session.
+// Deprecated: Use Network Framework instead
 func (o *MCSession) InitWithPeer(myPeerID *MCPeerID) *MCSession {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mCSessionSelInitWithPeer, myPeerID.Ptr())
 	if _ret != 0 {

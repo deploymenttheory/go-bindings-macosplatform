@@ -42,7 +42,7 @@ func CNAssetSpatialAudioInfoFromID(id objc.ID) *CNAssetSpatialAudioInfo {
 	return o
 }
 
-// @method		checkIfContainsSpatialAudio: @abstract		Check if asset meets all the requirements to operate with Spatial Audio and its accompanying effects @param			asset An instance of AVAsset. @param			completionHandler Completion handler to return the result @result		Boolean
+// @method		checkIfContainsSpatialAudio: @abstract		Check if asset meets all the requirements to operate with Spatial Audio and its accompanying effects @param			asset An instance of AVAsset. @param			completionHandler Completion handler to return the result
 func CNAssetSpatialAudioInfoCheckIfContainsSpatialAudioCompletionHandler(asset *avfoundation.AVAsset, completionHandler func(bool)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -54,7 +54,7 @@ func CNAssetSpatialAudioInfoCheckIfContainsSpatialAudioCompletionHandler(asset *
 	objc.ID(_clsCNAssetSpatialAudioInfo).Send(_cNAssetSpatialAudioInfoSelCheckIfContainsSpatialAudioCompletionHandler, asset.Ptr(), __block_completionHandler)
 }
 
-// @method		loadFromAsset: @abstract		Returns an instance of CNAssetAudioInfo for an AVAsset object asynchronously. @param		asset An instance of AVAsset @param		completionHandler Completion handler to return the result @result	An instance of CNAssetSpatialAudioInfo delivered via the completion handler or an error on failure
+// @method		loadFromAsset: @abstract		Returns an instance of CNAssetAudioInfo for an AVAsset object asynchronously. @param		asset An instance of AVAsset @param		completionHandler Completion handler to return the result
 func CNAssetSpatialAudioInfoLoadFromAssetCompletionHandler(asset *avfoundation.AVAsset, completionHandler func(*CNAssetSpatialAudioInfo, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -90,13 +90,13 @@ func (o *CNAssetSpatialAudioInfo) DefaultEffectIntensity() float32 {
 	return _ret
 }
 
-// @method		defaultRenderingStyle @abstract		default rendering style as provided by the system
+// @property		defaultRenderingStyle @abstract		default rendering style as provided by the system
 func (o *CNAssetSpatialAudioInfo) DefaultRenderingStyle() CNSpatialAudioRenderingStyle {
 	_ret := objc.Send[CNSpatialAudioRenderingStyle](o.Ptr(), _cNAssetSpatialAudioInfoSelDefaultRenderingStyle)
 	return _ret
 }
 
-// @method		spatialAudioMixMetadata @abstract		The result of audio analysis during recording which contains metadata necessary to properly configure the Audio Mix feature during playback or editing.. Can be used with `AUAudioUnit` instances that support AudioUnitPropertyID `kProperty_SpatialAudioMixMetadata`
+// @property		spatialAudioMixMetadata @abstract		The result of audio analysis during recording which contains metadata necessary to properly configure the Audio Mix feature during playback or editing.. Can be used with `AUAudioUnit` instances that support AudioUnitPropertyID `kProperty_SpatialAudioMixMetadata`
 func (o *CNAssetSpatialAudioInfo) SpatialAudioMixMetadata() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNAssetSpatialAudioInfoSelSpatialAudioMixMetadata)
 	if _ret != 0 {

@@ -16,8 +16,6 @@ import (
 )
 
 // CaptionRendererScene is an idiomatic wrapper over the Objective-C class AVCaptionRendererScene.
-//
-// An object that holds a time range and an associated state which indicates when the renderer draws output.
 type CaptionRendererScene struct {
 	objref.Handle
 }

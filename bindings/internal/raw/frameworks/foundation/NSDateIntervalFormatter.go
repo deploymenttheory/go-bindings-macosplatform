@@ -9,8 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A formatter that creates string representations of time intervals.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsdateintervalformatter
 type NSDateIntervalFormatter struct {
 	NSFormatter
@@ -44,6 +42,7 @@ func NSDateIntervalFormatterFromID(id objc.ID) *NSDateIntervalFormatter {
 	return o
 }
 
+// Returns a formatted date interval from the specified start date to end date. If the range is smaller than the resolution specified by the `dateTemplate`, a single date format will be produced. If the range is larger than the format specified by the `dateTemplate`, a locale-specific fallback will be used to format the items missing from the pattern. For example, if the range is 2010-03-04 07:56 - 2010-03-04 19:56 (12 hours) - The pattern `jm` will produce for `en_US`, "7:56 AM - 7:56 PM" for `en_GB`, "7:56 - 19:56" - The pattern `MMMd` will produce for `en_US`, "Mar 4" for `en_GB`, "4 Mar" If the range is 2010-03-04 07:56 - 2010-03-08 16:11 (4 days, 8 hours, 15 minutes) - The pattern `jm` will produce for `en_US`, "3/4/2010 7:56 AM - 3/8/2010 4:11 PM" for `en_GB`, "4/3/2010 7:56 - 8/3/2010 16:11" - The pattern `MMMd` will produce for `en_US`, "Mar 4-8" for `en_GB`, "4-8 Mar"
 func (o *NSDateIntervalFormatter) StringFromDateToDate(fromDate *NSDate, toDate *NSDate) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateIntervalFormatterSelStringFromDateToDate, fromDate.Ptr(), toDate.Ptr())
 	if _ret != 0 {
@@ -52,6 +51,7 @@ func (o *NSDateIntervalFormatter) StringFromDateToDate(fromDate *NSDate, toDate 
 	return NSStringFromID(_ret)
 }
 
+// Returns a formatted string for the given date interval.
 func (o *NSDateIntervalFormatter) StringFromDateInterval(dateInterval *NSDateInterval) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateIntervalFormatterSelStringFromDateInterval, dateInterval.Ptr())
 	if _ret != 0 {
@@ -60,6 +60,7 @@ func (o *NSDateIntervalFormatter) StringFromDateInterval(dateInterval *NSDateInt
 	return NSStringFromID(_ret)
 }
 
+// The locale for the formatter. Default is `[NSLocale currentLocale]`.
 func (o *NSDateIntervalFormatter) Locale() *NSLocale {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateIntervalFormatterSelLocale)
 	if _ret != 0 {
@@ -72,6 +73,7 @@ func (o *NSDateIntervalFormatter) SetLocale(locale *NSLocale) {
 	o.Ptr().Send(_nSDateIntervalFormatterSelSetLocale, locale.Ptr())
 }
 
+// The calendar for the formatter. Default is the calendar of the locale.
 func (o *NSDateIntervalFormatter) Calendar() *NSCalendar {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateIntervalFormatterSelCalendar)
 	if _ret != 0 {
@@ -84,6 +86,7 @@ func (o *NSDateIntervalFormatter) SetCalendar(calendar *NSCalendar) {
 	o.Ptr().Send(_nSDateIntervalFormatterSelSetCalendar, calendar.Ptr())
 }
 
+// The time zone for the formatter. Default is `[NSTimeZone defaultTimeZone]`.
 func (o *NSDateIntervalFormatter) TimeZone() *NSTimeZone {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateIntervalFormatterSelTimeZone)
 	if _ret != 0 {
@@ -96,6 +99,7 @@ func (o *NSDateIntervalFormatter) SetTimeZone(timeZone *NSTimeZone) {
 	o.Ptr().Send(_nSDateIntervalFormatterSelSetTimeZone, timeZone.Ptr())
 }
 
+// The date template for the formatter. Default is an empty string.
 func (o *NSDateIntervalFormatter) DateTemplate() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateIntervalFormatterSelDateTemplate)
 	if _ret != 0 {
@@ -108,6 +112,7 @@ func (o *NSDateIntervalFormatter) SetDateTemplate(dateTemplate *NSString) {
 	o.Ptr().Send(_nSDateIntervalFormatterSelSetDateTemplate, dateTemplate.Ptr())
 }
 
+// The date style for the formatter. Default is `NSDateIntervalFormatterNoStyle`.
 func (o *NSDateIntervalFormatter) DateStyle() NSDateIntervalFormatterStyle {
 	_ret := objc.Send[NSDateIntervalFormatterStyle](o.Ptr(), _nSDateIntervalFormatterSelDateStyle)
 	return _ret
@@ -117,6 +122,7 @@ func (o *NSDateIntervalFormatter) SetDateStyle(dateStyle NSDateIntervalFormatter
 	o.Ptr().Send(_nSDateIntervalFormatterSelSetDateStyle, dateStyle)
 }
 
+// The time style for the formatter. Default is `NSDateIntervalFormatterNoStyle`.
 func (o *NSDateIntervalFormatter) TimeStyle() NSDateIntervalFormatterStyle {
 	_ret := objc.Send[NSDateIntervalFormatterStyle](o.Ptr(), _nSDateIntervalFormatterSelTimeStyle)
 	return _ret

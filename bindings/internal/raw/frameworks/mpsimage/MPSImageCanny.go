@@ -4,8 +4,6 @@
 package mpsimage
 
 import (
-	"unsafe"
-
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/foundation"
@@ -53,7 +51,7 @@ func (o *MPSImageCanny) InitWithDevice(device metal.MTLDevice) *MPSImageCanny {
 }
 
 // @abstract   Initialize a Canny filter on a given device with a non-default color transform and non-default sigma. @param      device             The device the filter will run on @param      transform       Array of three floats describing the rgb to gray scale color transform. @code Luminance = transform[0] * pixel.x + transform[1] * pixel.y + transform[2] * pixel.z; @endcode @param      sigma               The standard deviation of gaussian blur filter. Gaussian weight, centered at 0, at integer grid n is given as @code w(i) = 1/sqrt(2*pi*sigma) * exp(-n^2/2*sigma^2) @endcode If we take cut off at 1% of w(0) (max weight) beyond which weights are considered 0, we have @code ceil (sqrt(-log(0.01)*2)*sigma) ~ ceil(3.7*sigma) @endcode as rough estimate of filter width @return     A valid object or nil, if failure.
-func (o *MPSImageCanny) InitWithDeviceLinearToGrayScaleTransformSigma(device metal.MTLDevice, transform *float32, sigma unsafe.Pointer) *MPSImageCanny {
+func (o *MPSImageCanny) InitWithDeviceLinearToGrayScaleTransformSigma(device metal.MTLDevice, transform *float32, sigma float32) *MPSImageCanny {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageCannySelInitWithDeviceLinearToGrayScaleTransformSigma, device, transform, sigma)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))

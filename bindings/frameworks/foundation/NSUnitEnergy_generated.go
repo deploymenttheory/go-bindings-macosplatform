@@ -17,8 +17,6 @@ import (
 // UnitEnergy is an idiomatic wrapper over the Objective-C class NSUnitEnergy.
 //
 // It embeds [Dimension], promoting that type's methods.
-//
-// A unit of measure for energy.
 type UnitEnergy struct {
 	Dimension
 }

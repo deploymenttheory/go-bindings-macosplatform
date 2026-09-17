@@ -4,8 +4,6 @@
 package healthkit
 
 import (
-	"unsafe"
-
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/foundation"
@@ -125,7 +123,10 @@ func (o *HKVerifiableClinicalRecord) DataRepresentation() *foundation.NSData {
 }
 
 // @property      JWSRepresentation @abstract      The record's entirety as JSON Web Signature (JWS) data.
-func (o *HKVerifiableClinicalRecord) JWSRepresentation() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _hKVerifiableClinicalRecordSelJWSRepresentation)
-	return _ret
+func (o *HKVerifiableClinicalRecord) JWSRepresentation() *foundation.NSData {
+	_ret := objc.Send[objc.ID](o.Ptr(), _hKVerifiableClinicalRecordSelJWSRepresentation)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDataFromID(_ret)
 }

@@ -5,22 +5,11 @@
 package paravirtualizedgraphics
 
 import (
-	"unsafe"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// ParavirtualizedGraphicsVersionNumber returns the value of the constant ParavirtualizedGraphicsVersionNumber.
-func ParavirtualizedGraphicsVersionNumber() float64 {
-	addr := _symbol("ParavirtualizedGraphicsVersionNumber")
-	if addr == 0 {
-		return 0
-	}
-	return *(*float64)(unsafe.Pointer(addr))
+// PGResumeErrorDomain returns the string constant PGResumeErrorDomain, for use as a dictionary key or argument.
+func PGResumeErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PGResumeErrorDomain")))
 }
-
-// ParavirtualizedGraphicsVersionString returns the address of the symbol ParavirtualizedGraphicsVersionString.
-func ParavirtualizedGraphicsVersionString() uintptr {
-	return _symbol("ParavirtualizedGraphicsVersionString")
-}
-
-// PGResumeErrorDomain returns the address of the symbol PGResumeErrorDomain.
-func PGResumeErrorDomain() uintptr { return _symbol("PGResumeErrorDomain") }

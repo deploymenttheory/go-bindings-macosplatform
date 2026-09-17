@@ -108,6 +108,12 @@ func (tvd *TextureViewDescriptor) WithSwizzle(swizzle MTLTextureSwizzleChannels)
 	return tvd
 }
 
+// WithMinLOD sets the minimum level of detail for texture views you create with the descriptor.
+func (tvd *TextureViewDescriptor) WithMinLOD(minLOD float32) *TextureViewDescriptor {
+	objc.Send[objc.ID](objref.IDOf(tvd), objc.RegisterName("setMinLOD:"), minLOD)
+	return tvd
+}
+
 // PixelFormat returns a desired pixel format of a texture view.
 func (tvd *TextureViewDescriptor) PixelFormat() PixelFormat {
 	defer runtime.KeepAlive(tvd)
@@ -140,5 +146,12 @@ func (tvd *TextureViewDescriptor) SliceRange() foundation.NSRange {
 func (tvd *TextureViewDescriptor) Swizzle() MTLTextureSwizzleChannels {
 	defer runtime.KeepAlive(tvd)
 	_r := objc.Send[MTLTextureSwizzleChannels](objref.IDOf(tvd), objc.RegisterName("swizzle"))
+	return _r
+}
+
+// MinLOD returns the minimum level of detail for texture views you create with the descriptor. The property configures the lower limit of the level-of-detail (LOD) range that texture operations access for texture views you create with the descriptor. When the GPU calculates a mipmap level, it applies the value of this property as the final step, after clamping the sampler LOD and applying the texture view level range offsets. The default value is `0.0`. Each of the following texture operations has a requirement for the `minLOD` value. | Operation | Requirement | | --- | --- | | Read   | `floor(minLOD)` ≤ mip level | | Gather | `floor(minLOD)` ≤ `levelRange.location` | | Sample |        `minLOD` ≤ `levelRange.location` + `levelRange.length` | Each operation returns an out-of-bounds value if a parameter doesn't meet a requirement. > Note: For the specific out-of-bounds value for each operation, see the _Texture Functions_ section of the [Metal Shading Language Specification (PDF)](https://developer.apple.com/metal/Metal-Shading-Language-Specification.pdf).
+func (tvd *TextureViewDescriptor) MinLOD() float32 {
+	defer runtime.KeepAlive(tvd)
+	_r := objc.Send[float32](objref.IDOf(tvd), objc.RegisterName("minLOD"))
 	return _r
 }

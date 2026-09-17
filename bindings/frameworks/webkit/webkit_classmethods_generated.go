@@ -30,6 +30,13 @@ func StoreWithURL(url string) *WKContentRuleListStore {
 	return WKContentRuleListStoreFromID(_r)
 }
 
+// WorldWithConfiguration creates a world with the given WKContentWorldConfiguration Unlike all other worlds, worlds created with this factory method cannot be retrieved later. Clients therefore need to take care to reference them for as long as they are needed.
+func WorldWithConfiguration(configuration *WKContentWorldConfiguration) *WKContentWorld {
+	defer runtime.KeepAlive(configuration)
+	_r := objc.Send[objc.ID](objc.ID(_class("WKContentWorld")), objc.RegisterName("worldWithConfiguration:"), objref.IDOf(configuration))
+	return WKContentWorldFromID(_r)
+}
+
 // WorldWithName returns the custom content world with the specified name.
 func WorldWithName(name string) *WKContentWorld {
 	_r := objc.Send[objc.ID](objc.ID(_class("WKContentWorld")), objc.RegisterName("worldWithName:"), purego.NSString(name))

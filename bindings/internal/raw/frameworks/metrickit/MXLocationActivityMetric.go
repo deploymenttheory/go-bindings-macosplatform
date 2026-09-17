@@ -13,6 +13,7 @@ import (
 // An object representing metrics about the use of location-tracking features of a device.
 //
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxlocationactivitymetric
+// Deprecated: Use MetricResult instead.
 type MXLocationActivityMetric struct {
 	MXMetric
 }

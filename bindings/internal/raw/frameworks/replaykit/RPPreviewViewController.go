@@ -13,6 +13,7 @@ import (
 // An object that displays a user interface where users preview and edit a screen recording that you create with ReplayKit.
 //
 // Apple documentation: https://developer.apple.com/documentation/replaykit/rppreviewviewcontroller
+// Deprecated: Use SCRecordingEditor instead
 type RPPreviewViewController struct {
 	appkit.NSViewController
 }

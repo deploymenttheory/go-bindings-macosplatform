@@ -56,6 +56,24 @@ func NewAssetCreationRequest() *AssetCreationRequest {
 	return assetCreationRequestAdopt(_id)
 }
 
+// WithOriginalResourceChoice sets the original resource to use as the unadjusted base for rendering derivatives of the new asset.
+func (acr *AssetCreationRequest) WithOriginalResourceChoice(originalResourceChoice OriginalResourceChoice) *AssetCreationRequest {
+	objc.Send[objc.ID](objref.IDOf(acr), objc.RegisterName("setOriginalResourceChoice:"), originalResourceChoice)
+	return acr
+}
+
+// WithRating sets the rating for this asset
+func (acr *AssetCreationRequest) WithRating(rating AssetRating) *AssetCreationRequest {
+	objc.Send[objc.ID](objref.IDOf(acr), objc.RegisterName("setRating:"), rating)
+	return acr
+}
+
+// WithCaption sets an asset description to change to. Set to nil or an empty string to clear the caption.
+func (acr *AssetCreationRequest) WithCaption(caption string) *AssetCreationRequest {
+	objc.Send[objc.ID](objref.IDOf(acr), objc.RegisterName("setCaption:"), purego.NSString(caption))
+	return acr
+}
+
 // WithCreationDate sets the date and time at which the asset claims to have been originally created.
 func (acr *AssetCreationRequest) WithCreationDate(creationDate time.Time) *AssetCreationRequest {
 	objc.Send[objc.ID](objref.IDOf(acr), objc.RegisterName("setCreationDate:"), rt.TimeToNSDate(creationDate))
@@ -99,6 +117,13 @@ func (acr *AssetCreationRequest) AddResourceWithTypeData(type_ AssetResourceType
 	defer runtime.KeepAlive(acr)
 	defer runtime.KeepAlive(options)
 	objc.Send[objc.ID](objref.IDOf(acr), objc.RegisterName("addResourceWithType:data:options:"), type_, rt.BytesToNSData(data), objref.IDOf(options))
+}
+
+// OriginalResourceChoice returns the original resource to use as the unadjusted base for rendering derivatives of the new asset. This property applies to RAW+JPEG assets only, where it selects whether the RAW or the compressed resource serves as the original. Setting it on assets that have only a single original resource is an error.
+func (acr *AssetCreationRequest) OriginalResourceChoice() OriginalResourceChoice {
+	defer runtime.KeepAlive(acr)
+	_r := objc.Send[OriginalResourceChoice](objref.IDOf(acr), objc.RegisterName("originalResourceChoice"))
+	return _r
 }
 
 var _ AssetChangeRequestProvider = (*AssetCreationRequest)(nil)

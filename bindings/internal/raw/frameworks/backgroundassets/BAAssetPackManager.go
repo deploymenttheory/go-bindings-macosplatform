@@ -20,23 +20,33 @@ type BAAssetPackManager struct {
 }
 
 var (
-	_clsBAAssetPackManager                                                                        = _objcClass("BAAssetPackManager")
-	_bAAssetPackManagerSelGetAllAssetPacksWithCompletionHandler                                   = objc.RegisterName("getAllAssetPacksWithCompletionHandler:")
-	_bAAssetPackManagerSelGetAssetPackWithIdentifierCompletionHandler                             = objc.RegisterName("getAssetPackWithIdentifier:completionHandler:")
-	_bAAssetPackManagerSelGetStatusRelativeToAssetPackCompletionHandler                           = objc.RegisterName("getStatusRelativeToAssetPack:completionHandler:")
-	_bAAssetPackManagerSelGetLocalStatusOfAssetPackWithIdentifierCompletionHandler                = objc.RegisterName("getLocalStatusOfAssetPackWithIdentifier:completionHandler:")
-	_bAAssetPackManagerSelAssetPackIsAvailableLocallyWithIdentifier                               = objc.RegisterName("assetPackIsAvailableLocallyWithIdentifier:")
-	_bAAssetPackManagerSelEnsureLocalAvailabilityOfAssetPackCompletionHandler                     = objc.RegisterName("ensureLocalAvailabilityOfAssetPack:completionHandler:")
-	_bAAssetPackManagerSelEnsureLocalAvailabilityOfAssetPackRequireLatestVersionCompletionHandler = objc.RegisterName("ensureLocalAvailabilityOfAssetPack:requireLatestVersion:completionHandler:")
-	_bAAssetPackManagerSelCheckForUpdatesWithCompletionHandler                                    = objc.RegisterName("checkForUpdatesWithCompletionHandler:")
-	_bAAssetPackManagerSelContentsAtPathSearchingInAssetPackWithIdentifierOptionsError            = objc.RegisterName("contentsAtPath:searchingInAssetPackWithIdentifier:options:error:")
-	_bAAssetPackManagerSelFileDescriptorForPathSearchingInAssetPackWithIdentifierError            = objc.RegisterName("fileDescriptorForPath:searchingInAssetPackWithIdentifier:error:")
-	_bAAssetPackManagerSelURLForPathError                                                         = objc.RegisterName("URLForPath:error:")
-	_bAAssetPackManagerSelRemoveAssetPackWithIdentifierCompletionHandler                          = objc.RegisterName("removeAssetPackWithIdentifier:completionHandler:")
-	_bAAssetPackManagerSelGetStatusOfAssetPackWithIdentifierCompletionHandler                     = objc.RegisterName("getStatusOfAssetPackWithIdentifier:completionHandler:")
-	_bAAssetPackManagerSelSharedManager                                                           = objc.RegisterName("sharedManager")
-	_bAAssetPackManagerSelDelegate                                                                = objc.RegisterName("delegate")
-	_bAAssetPackManagerSelSetDelegate                                                             = objc.RegisterName("setDelegate:")
+	_clsBAAssetPackManager                                                                          = _objcClass("BAAssetPackManager")
+	_bAAssetPackManagerSelGetManifestWithCompletionHandler                                          = objc.RegisterName("getManifestWithCompletionHandler:")
+	_bAAssetPackManagerSelGetStatusRelativeToAssetPackCompletionHandler                             = objc.RegisterName("getStatusRelativeToAssetPack:completionHandler:")
+	_bAAssetPackManagerSelGetLocalStatusOfAssetPackWithIdentifierCompletionHandler                  = objc.RegisterName("getLocalStatusOfAssetPackWithIdentifier:completionHandler:")
+	_bAAssetPackManagerSelAssetPackIsAvailableLocallyWithIdentifier                                 = objc.RegisterName("assetPackIsAvailableLocallyWithIdentifier:")
+	_bAAssetPackManagerSelGetLocallyAvailableLanguagesWithCompletionHandler                         = objc.RegisterName("getLocallyAvailableLanguagesWithCompletionHandler:")
+	_bAAssetPackManagerSelReconcilePreferredLanguagesWithCompletionHandler                          = objc.RegisterName("reconcilePreferredLanguagesWithCompletionHandler:")
+	_bAAssetPackManagerSelEnsureLocalAvailabilityOfAssetPackCompletionHandler                       = objc.RegisterName("ensureLocalAvailabilityOfAssetPack:completionHandler:")
+	_bAAssetPackManagerSelEnsureLocalAvailabilityOfAssetPackRequireLatestVersionCompletionHandler   = objc.RegisterName("ensureLocalAvailabilityOfAssetPack:requireLatestVersion:completionHandler:")
+	_bAAssetPackManagerSelEnsureLocalAvailabilityOfAssetPacksCompletionHandler                      = objc.RegisterName("ensureLocalAvailabilityOfAssetPacks:completionHandler:")
+	_bAAssetPackManagerSelEnsureLocalAvailabilityOfAssetPacksRequireLatestVersionsCompletionHandler = objc.RegisterName("ensureLocalAvailabilityOfAssetPacks:requireLatestVersions:completionHandler:")
+	_bAAssetPackManagerSelCheckForUpdatesWithCompletionHandler                                      = objc.RegisterName("checkForUpdatesWithCompletionHandler:")
+	_bAAssetPackManagerSelContentsAtPathSearchingInAssetPackWithIdentifierOptionsError              = objc.RegisterName("contentsAtPath:searchingInAssetPackWithIdentifier:options:error:")
+	_bAAssetPackManagerSelContentsAtPathAsLocalizedForLanguageOptionsError                          = objc.RegisterName("contentsAtPath:asLocalizedForLanguage:options:error:")
+	_bAAssetPackManagerSelFileDescriptorForPathSearchingInAssetPackWithIdentifierError              = objc.RegisterName("fileDescriptorForPath:searchingInAssetPackWithIdentifier:error:")
+	_bAAssetPackManagerSelFileDescriptorForPathAsLocalizedForLanguageError                          = objc.RegisterName("fileDescriptorForPath:asLocalizedForLanguage:error:")
+	_bAAssetPackManagerSelURLForPathError                                                           = objc.RegisterName("URLForPath:error:")
+	_bAAssetPackManagerSelURLForPathAsLocalizedForLanguageError                                     = objc.RegisterName("URLForPath:asLocalizedForLanguage:error:")
+	_bAAssetPackManagerSelRemoveAssetPackWithIdentifierCompletionHandler                            = objc.RegisterName("removeAssetPackWithIdentifier:completionHandler:")
+	_bAAssetPackManagerSelGetAllAssetPacksWithCompletionHandler                                     = objc.RegisterName("getAllAssetPacksWithCompletionHandler:")
+	_bAAssetPackManagerSelGetAssetPackWithIdentifierCompletionHandler                               = objc.RegisterName("getAssetPackWithIdentifier:completionHandler:")
+	_bAAssetPackManagerSelGetStatusOfAssetPackWithIdentifierCompletionHandler                       = objc.RegisterName("getStatusOfAssetPackWithIdentifier:completionHandler:")
+	_bAAssetPackManagerSelSharedManager                                                             = objc.RegisterName("sharedManager")
+	_bAAssetPackManagerSelDelegate                                                                  = objc.RegisterName("delegate")
+	_bAAssetPackManagerSelSetDelegate                                                               = objc.RegisterName("setDelegate:")
+	_bAAssetPackManagerSelResolvedLanguage                                                          = objc.RegisterName("resolvedLanguage")
+	_bAAssetPackManagerSelSetResolvedLanguage                                                       = objc.RegisterName("setResolvedLanguage:")
 )
 
 func BAAssetPackManagerFromID(id objc.ID) *BAAssetPackManager {
@@ -49,34 +59,19 @@ func BAAssetPackManagerFromID(id objc.ID) *BAAssetPackManager {
 	return o
 }
 
-// Gets the asset packs that are available to download.
-func (o *BAAssetPackManager) GetAllAssetPacksWithCompletionHandler(completionHandler func(*foundation.NSSet[*BAAssetPack], unsafe.Pointer)) {
+// Gets the manifest of asset packs that are available to download.
+func (o *BAAssetPackManager) GetManifestWithCompletionHandler(completionHandler func(*BAAssetPackManifest, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
 		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
 			if blockParam0 != 0 {
 				blockParam0.Send(objc.RegisterName("retain"))
 			}
-			completionHandler(foundation.NSSetFromID[*BAAssetPack](blockParam0), blockParam1)
+			completionHandler(BAAssetPackManifestFromID(blockParam0), blockParam1)
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_bAAssetPackManagerSelGetAllAssetPacksWithCompletionHandler, __block_completionHandler)
-}
-
-// Gets the asset pack with the given identifier.
-func (o *BAAssetPackManager) GetAssetPackWithIdentifierCompletionHandler(assetPackIdentifier *foundation.NSString, completionHandler func(*BAAssetPack, unsafe.Pointer)) {
-	var __block_completionHandler objc.Block
-	if completionHandler != nil {
-		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
-			if blockParam0 != 0 {
-				blockParam0.Send(objc.RegisterName("retain"))
-			}
-			completionHandler(BAAssetPackFromID(blockParam0), blockParam1)
-		})
-		defer __block_completionHandler.Release()
-	}
-	o.Ptr().Send(_bAAssetPackManagerSelGetAssetPackWithIdentifierCompletionHandler, assetPackIdentifier.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_bAAssetPackManagerSelGetManifestWithCompletionHandler, __block_completionHandler)
 }
 
 // Gets the current status relative to a particular asset pack.
@@ -109,7 +104,34 @@ func (o *BAAssetPackManager) AssetPackIsAvailableLocallyWithIdentifier(assetPack
 	return _ret
 }
 
-// Ensures that the specified asset pack be available locally.
+// Gets the languages used by asset packs that are localized and are available locally.
+func (o *BAAssetPackManager) GetLocallyAvailableLanguagesWithCompletionHandler(completionHandler func(*foundation.NSArray[*foundation.NSString])) {
+	var __block_completionHandler objc.Block
+	if completionHandler != nil {
+		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completionHandler(foundation.NSArrayFromID[*foundation.NSString](blockParam0))
+		})
+		defer __block_completionHandler.Release()
+	}
+	o.Ptr().Send(_bAAssetPackManagerSelGetLocallyAvailableLanguagesWithCompletionHandler, __block_completionHandler)
+}
+
+// Reconciles the set of locally available asset packs with the current preferred languages.
+func (o *BAAssetPackManager) ReconcilePreferredLanguagesWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
+	var __block_completionHandler objc.Block
+	if completionHandler != nil {
+		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 unsafe.Pointer) {
+			completionHandler(blockParam0)
+		})
+		defer __block_completionHandler.Release()
+	}
+	o.Ptr().Send(_bAAssetPackManagerSelReconcilePreferredLanguagesWithCompletionHandler, __block_completionHandler)
+}
+
+// Ensures that the specified asset pack is available locally, performing a download if necessary.
 func (o *BAAssetPackManager) EnsureLocalAvailabilityOfAssetPackCompletionHandler(assetPack *BAAssetPack, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -131,6 +153,30 @@ func (o *BAAssetPackManager) EnsureLocalAvailabilityOfAssetPackRequireLatestVers
 		defer __block_completionHandler.Release()
 	}
 	o.Ptr().Send(_bAAssetPackManagerSelEnsureLocalAvailabilityOfAssetPackRequireLatestVersionCompletionHandler, assetPack.Ptr(), shouldUpdate, __block_completionHandler)
+}
+
+// Ensures that the specified asset packs are available locally.
+func (o *BAAssetPackManager) EnsureLocalAvailabilityOfAssetPacksCompletionHandler(assetPacks *foundation.NSSet[*BAAssetPack], completionHandler func(unsafe.Pointer)) {
+	var __block_completionHandler objc.Block
+	if completionHandler != nil {
+		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 unsafe.Pointer) {
+			completionHandler(blockParam0)
+		})
+		defer __block_completionHandler.Release()
+	}
+	o.Ptr().Send(_bAAssetPackManagerSelEnsureLocalAvailabilityOfAssetPacksCompletionHandler, assetPacks.Ptr(), __block_completionHandler)
+}
+
+// Ensures that the specified asset packs are available locally, performing a batch download if necessary.
+func (o *BAAssetPackManager) EnsureLocalAvailabilityOfAssetPacksRequireLatestVersionsCompletionHandler(assetPacks *foundation.NSSet[*BAAssetPack], shouldUpdate bool, completionHandler func(unsafe.Pointer)) {
+	var __block_completionHandler objc.Block
+	if completionHandler != nil {
+		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 unsafe.Pointer) {
+			completionHandler(blockParam0)
+		})
+		defer __block_completionHandler.Release()
+	}
+	o.Ptr().Send(_bAAssetPackManagerSelEnsureLocalAvailabilityOfAssetPacksRequireLatestVersionsCompletionHandler, assetPacks.Ptr(), shouldUpdate, __block_completionHandler)
 }
 
 // Gets the latest asset-pack information from the server, updates outdated asset packs, and removes obsolete asset packs.
@@ -164,10 +210,33 @@ func (o *BAAssetPackManager) ContentsAtPathSearchingInAssetPackWithIdentifierOpt
 	return foundation.NSDataFromID(_ret), nil
 }
 
+// Returns the contents of a localized asset file at the specified relative path.
+func (o *BAAssetPackManager) ContentsAtPathAsLocalizedForLanguageOptionsError(path *foundation.NSString, languageIdentifier *foundation.NSString, options foundation.NSDataReadingOptions) (*foundation.NSData, error) {
+	var _nsErr uintptr
+	_ret := objc.Send[objc.ID](o.Ptr(), _bAAssetPackManagerSelContentsAtPathAsLocalizedForLanguageOptionsError, path.Ptr(), languageIdentifier.Ptr(), options, unsafe.Pointer(&_nsErr))
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	if _nsErr != 0 {
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+	}
+	return foundation.NSDataFromID(_ret), nil
+}
+
 // Opens and returns a file descriptor for the asset file at the specified relative path.
 func (o *BAAssetPackManager) FileDescriptorForPathSearchingInAssetPackWithIdentifierError(path *foundation.NSString, assetPackIdentifier *foundation.NSString) (int, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[int](o.Ptr(), _bAAssetPackManagerSelFileDescriptorForPathSearchingInAssetPackWithIdentifierError, path.Ptr(), assetPackIdentifier.Ptr(), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return 0, purego.NSErrorToError(objc.ID(_nsErr))
+	}
+	return _ret, nil
+}
+
+// Opens and returns a file descriptor for a localized asset file at the specified relative path.
+func (o *BAAssetPackManager) FileDescriptorForPathAsLocalizedForLanguageError(path *foundation.NSString, languageIdentifier *foundation.NSString) (int, error) {
+	var _nsErr uintptr
+	_ret := objc.Send[int](o.Ptr(), _bAAssetPackManagerSelFileDescriptorForPathAsLocalizedForLanguageError, path.Ptr(), languageIdentifier.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return 0, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -187,6 +256,19 @@ func (o *BAAssetPackManager) URLForPathError(path *foundation.NSString) (*founda
 	return foundation.NSURLFromID(_ret), nil
 }
 
+// Returns a URL for the specified relative path.
+func (o *BAAssetPackManager) URLForPathAsLocalizedForLanguageError(path *foundation.NSString, languageIdentifier *foundation.NSString) (*foundation.NSURL, error) {
+	var _nsErr uintptr
+	_ret := objc.Send[objc.ID](o.Ptr(), _bAAssetPackManagerSelURLForPathAsLocalizedForLanguageError, path.Ptr(), languageIdentifier.Ptr(), unsafe.Pointer(&_nsErr))
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	if _nsErr != 0 {
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+	}
+	return foundation.NSURLFromID(_ret), nil
+}
+
 // Removes the specified asset pack from the device.
 func (o *BAAssetPackManager) RemoveAssetPackWithIdentifierCompletionHandler(assetPackIdentifier *foundation.NSString, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
@@ -197,6 +279,38 @@ func (o *BAAssetPackManager) RemoveAssetPackWithIdentifierCompletionHandler(asse
 		defer __block_completionHandler.Release()
 	}
 	o.Ptr().Send(_bAAssetPackManagerSelRemoveAssetPackWithIdentifierCompletionHandler, assetPackIdentifier.Ptr(), __block_completionHandler)
+}
+
+// Gets the asset packs that are available to download.
+// Deprecated: Send -getManifestWithCompletionHandler: to obtain a manifest, and send -assetPacks to that manifest to obtain the set of asset packs.
+func (o *BAAssetPackManager) GetAllAssetPacksWithCompletionHandler(completionHandler func(*foundation.NSSet[*BAAssetPack], unsafe.Pointer)) {
+	var __block_completionHandler objc.Block
+	if completionHandler != nil {
+		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completionHandler(foundation.NSSetFromID[*BAAssetPack](blockParam0), blockParam1)
+		})
+		defer __block_completionHandler.Release()
+	}
+	o.Ptr().Send(_bAAssetPackManagerSelGetAllAssetPacksWithCompletionHandler, __block_completionHandler)
+}
+
+// Gets the asset pack with the given identifier.
+// Deprecated: Send -getManifestWithCompletionHandler: to obtain a manifest, and send -assetPackWithIdentifier: to that manifest to obtain an asset pack.
+func (o *BAAssetPackManager) GetAssetPackWithIdentifierCompletionHandler(assetPackIdentifier *foundation.NSString, completionHandler func(*BAAssetPack, unsafe.Pointer)) {
+	var __block_completionHandler objc.Block
+	if completionHandler != nil {
+		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completionHandler(BAAssetPackFromID(blockParam0), blockParam1)
+		})
+		defer __block_completionHandler.Release()
+	}
+	o.Ptr().Send(_bAAssetPackManagerSelGetAssetPackWithIdentifierCompletionHandler, assetPackIdentifier.Ptr(), __block_completionHandler)
 }
 
 // Gets an asset pack’s status.
@@ -229,4 +343,18 @@ func (o *BAAssetPackManager) Delegate() BAManagedAssetPackDownloadDelegate {
 
 func (o *BAAssetPackManager) SetDelegate(delegate BAManagedAssetPackDownloadDelegate) {
 	o.Ptr().Send(_bAAssetPackManagerSelSetDelegate, delegate)
+}
+
+// The language asset packs that are localized for which the system automatically makes available locally, represented as a BCP-47 identifier. The user’s preferred languages inform the choice of resolved language, respecting any language that your application sets manually. This property may be `nil` if no localized asset packs are available. You can manually set this property to `nil` to revert to the user’s system-wide language preference. If the user recently changed their preferred language, then this property’s value could be temporarily out of sync with the set of asset packs that are available locally. Setting the language doesn’t immediately download or remove any asset packs; call “BAAssetPackManager/reconcilePreferredLanguagesWithCompletionHandler:“ to reconcile the set of downloaded asset packs with the new configuration. Setting a new resolved language also changes your application’s display language. - Note: Don’t set this property to a new value within your downloader extension.
+func (o *BAAssetPackManager) ResolvedLanguage() *foundation.NSString {
+	_ret := objc.Send[objc.ID](o.Ptr(), _bAAssetPackManagerSelResolvedLanguage)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSStringFromID(_ret)
+}
+
+// The language asset packs that are localized for which the system automatically makes available locally, represented as a BCP-47 identifier. The user’s preferred languages inform the choice of resolved language, respecting any language that your application sets manually. This property may be `nil` if no localized asset packs are available. You can manually set this property to `nil` to revert to the user’s system-wide language preference. If the user recently changed their preferred language, then this property’s value could be temporarily out of sync with the set of asset packs that are available locally. Setting the language doesn’t immediately download or remove any asset packs; call “BAAssetPackManager/reconcilePreferredLanguagesWithCompletionHandler:“ to reconcile the set of downloaded asset packs with the new configuration. Setting a new resolved language also changes your application’s display language. - Note: Don’t set this property to a new value within your downloader extension.
+func (o *BAAssetPackManager) SetResolvedLanguage(resolvedLanguage *foundation.NSString) {
+	o.Ptr().Send(_bAAssetPackManagerSelSetResolvedLanguage, resolvedLanguage.Ptr())
 }

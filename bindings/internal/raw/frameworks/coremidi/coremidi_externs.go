@@ -13,39 +13,81 @@ import (
 )
 
 // @constant		MIDICIDeviceObjectKey @brief			Value is an MIDIUMPEndpoint.
-func MIDICIDeviceObjectKey() uintptr {
+func MIDICIDeviceObjectKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coremidiLib, "MIDICIDeviceObjectKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant		MIDICIDeviceWasAddedNotification @brief			A notification posted when a MIDI-CI Device has been added to the subsystem. @discussion		The userInfo dictionary will contain a MIDICIDeviceObjectKey with the MIDI-CI Device which has been added to the subsystem.
-func MIDICIDeviceWasAddedNotification() uintptr {
+func MIDICIDeviceWasAddedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coremidiLib, "MIDICIDeviceWasAddedNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant		MIDICIDeviceWasRemovedNotification @brief			A notification posted when a MIDI-CI Device has been removed or has had its MUID invalidated. @discussion		Any previously discovered MIDICIDevice that fails to respond to a discovery message will be removed. The userInfo dictionary will contain a MIDICIDeviceObjectKey with the MIDI-CI Device which has been removed or has had its MUID invalidated.
-func MIDICIDeviceWasRemovedNotification() uintptr {
+func MIDICIDeviceWasRemovedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coremidiLib, "MIDICIDeviceWasRemovedNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant		MIDICIProfileObjectKey @brief			Value is an MIDIUMPCIProfile
-func MIDICIProfileObjectKey() uintptr {
+func MIDICIProfileObjectKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coremidiLib, "MIDICIProfileObjectKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant		MIDICIProfileWasRemovedNotification @brief			A notification posted when a MIDI-CI Device has been removed. @discussion 	The userInfo dictionary will contain a MIDICIDeviceObjectKey and MIDICIProfileObjectKey with the MIDICIDevice and MIDI-CI Profile which has been removed.
-func MIDICIProfileWasRemovedNotification() uintptr {
+func MIDICIProfileWasRemovedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coremidiLib, "MIDICIProfileWasRemovedNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant		MIDICIProfileWasUpdatedNotification @brief			A notification posted when a MIDI-CI Device has been enabled/disabled or updated. @discussion		The userInfo dictionary will contain a MIDICIDeviceObjectKey and MIDICIProfileObjectKey with the MIDICIDevice and MIDI-CI Profile which was recently enabled or disabled.
-func MIDICIProfileWasUpdatedNotification() uintptr {
+func MIDICIProfileWasUpdatedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coremidiLib, "MIDICIProfileWasUpdatedNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MIDINetworkBonjourServiceType() *foundation.NSString {
@@ -85,39 +127,81 @@ func MIDINetworkNotificationSessionDidChange() *foundation.NSString {
 }
 
 // @constant      MIDIUMPEndpointObjectKey @brief         Value is a MIDIUMPEndpoint
-func MIDIUMPEndpointObjectKey() uintptr {
+func MIDIUMPEndpointObjectKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coremidiLib, "MIDIUMPEndpointObjectKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant   MIDIUMPEndpointWasAddedNotification @brief		A notification posted when a MIDI UMP Endpoint has been added to the subsystem. @discussion	The MIDIUMPEndpoint sent in userInfo is the endpoint which was recently discovered.
-func MIDIUMPEndpointWasAddedNotification() uintptr {
+func MIDIUMPEndpointWasAddedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coremidiLib, "MIDIUMPEndpointWasAddedNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant   MIDIUMPEndpointWasRemovedNotification @brief		A notification posted when a MIDI UMP Endpoint has been removed from the subsystem. @discussion	Any MIDIUMPEndpoint sent with this notification is no longer available to the system. Any attempt to perform I/O with its source or destination may fail, as the MIDIEndpointRef associated with the UMP endpoint may no longer be valid. If this notification is posted, any resources related to communication with this UMP endpoint may be safely disposed.
-func MIDIUMPEndpointWasRemovedNotification() uintptr {
+func MIDIUMPEndpointWasRemovedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coremidiLib, "MIDIUMPEndpointWasRemovedNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant   MIDIUMPEndpointWasUpdatedNotification @brief		A notification posted when an UMP endpoint updates its stream configuration or changes the state of one of its Function Blocks. @discussion	If this notification is posted, an Endpoint Info Notification was sent from the UMP endpoint in userInfo.
-func MIDIUMPEndpointWasUpdatedNotification() uintptr {
+func MIDIUMPEndpointWasUpdatedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coremidiLib, "MIDIUMPEndpointWasUpdatedNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      MIDIUMPFunctionBlockObjectKey @brief         Value is a MIDIUMPFunctionBlock
-func MIDIUMPFunctionBlockObjectKey() uintptr {
+func MIDIUMPFunctionBlockObjectKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coremidiLib, "MIDIUMPFunctionBlockObjectKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      MIDIUMPFunctionBlockWasUpdatedNotification @brief         A notification posted when a Function Block is updated. @discussion    If this notification is posted, the supplied Function Block in userInfo has had a change to its enabled state, Group configuration, UI hint, MIDI 1.0 status, etc..
-func MIDIUMPFunctionBlockWasUpdatedNotification() uintptr {
+func MIDIUMPFunctionBlockWasUpdatedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coremidiLib, "MIDIUMPFunctionBlockWasUpdatedNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant		kMIDIDriverPropertyUsesSerial @discussion		This constant, "MIDIDriverUsesSerial", when defined to "YES" in a driver's bundle, tells MIDIServer that the driver uses serial ports and is eligible to have serial ports assigned to it. When a serial driver's Start() method is called, it should use MIDIGetSerialPortOwner to discover which serial ports it has been assigned to use, and only use those ports. New for CoreMIDI 1.1.

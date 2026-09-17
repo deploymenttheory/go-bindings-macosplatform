@@ -22,6 +22,12 @@ func NetworkInterfaces() []*BridgedNetworkInterface {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *BridgedNetworkInterface { return BridgedNetworkInterfaceFromID(_id) })
 }
 
+// MaximumAllowedSharedMemoryRegionCount returns the maximum number of Virtio shared memory regions the framework allows. ## See Also - “VZCustomVirtioDeviceConfiguration/sharedMemoryRegions“
+func MaximumAllowedSharedMemoryRegionCount() int {
+	_r := objc.Send[int](objc.ID(_class("VZCustomVirtioDeviceConfiguration")), objc.RegisterName("maximumAllowedSharedMemoryRegionCount"))
+	return _r
+}
+
 // IsNestedVirtualizationSupported reports whether nested virtualization is available. Nested virtualization is only available on some hardware and software configurations. It may also be disabled by policy. Use this property to check if support is available for the platform. If nested virtualization is supported, use `nestedVirtualizationEnabled` to enable the feature.
 func IsNestedVirtualizationSupported() bool {
 	_r := objc.Send[bool](objc.ID(_class("VZGenericPlatformConfiguration")), objc.RegisterName("isNestedVirtualizationSupported"))

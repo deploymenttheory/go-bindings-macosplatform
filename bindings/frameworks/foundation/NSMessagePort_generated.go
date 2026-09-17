@@ -17,8 +17,6 @@ import (
 // MessagePort is an idiomatic wrapper over the Objective-C class NSMessagePort.
 //
 // It embeds [Port], promoting that type's methods.
-//
-// A port that can be used as an endpoint for distributed object connections (or raw messaging).
 type MessagePort struct {
 	Port
 }

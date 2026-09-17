@@ -69,10 +69,6 @@
         }
       }
     },
-    "MCErrorCode": {
-      "doc": "Error codes found in MCErrorDomain error domain NSError objects returned by methods in the Multipeer Connectivity framework.",
-      "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcerrorcode"
-    },
     "MCSessionSendDataMode": {
       "doc": "Indicates whether delivery of data should be guaranteed.",
       "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcsessionsenddatamode",

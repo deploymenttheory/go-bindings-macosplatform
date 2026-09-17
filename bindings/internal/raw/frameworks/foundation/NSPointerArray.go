@@ -117,6 +117,7 @@ func (o *NSPointerArray) Compact() {
 	o.Ptr().Send(_nSPointerArraySelCompact)
 }
 
+// The functions in use by the receiver. The returned object is a new `NSPointerFunctions` object that you can modify and/or use directly to create other pointer collections.
 func (o *NSPointerArray) PointerFunctions() *NSPointerFunctions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPointerArraySelPointerFunctions)
 	if _ret != 0 {
@@ -125,6 +126,7 @@ func (o *NSPointerArray) PointerFunctions() *NSPointerFunctions {
 	return NSPointerFunctionsFromID(_ret)
 }
 
+// The number of elements in the receiver. If you increase the `count`, `NULL` values are added. If you decrease the `count`, elements at indexes `count` and greater are removed.
 func (o *NSPointerArray) Count() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSPointerArraySelCount)
 	return _ret

@@ -9,8 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A formatter that creates string representations of quantities of time.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsdatecomponentsformatter
 type NSDateComponentsFormatter struct {
 	NSFormatter
@@ -56,6 +54,7 @@ func NSDateComponentsFormatterFromID(id objc.ID) *NSDateComponentsFormatter {
 	return o
 }
 
+// Returns a formatted string based on the specified date component information. Use this method to format date information that is already broken down into the component day and time values. @param components A date components object containing the date and time information to format. The `allowedUnits` property determines which date components are actually used to generate the string. All other date components are ignored. This parameter must not be `nil`. @return A formatted string representing the specified date information.
 func (o *NSDateComponentsFormatter) StringFromDateComponents(components *NSDateComponents) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateComponentsFormatterSelStringFromDateComponents, components.Ptr())
 	if _ret != 0 {
@@ -64,6 +63,7 @@ func (o *NSDateComponentsFormatter) StringFromDateComponents(components *NSDateC
 	return NSStringFromID(_ret)
 }
 
+// Returns a formatted string based on the time difference between two dates. This method calculates the elapsed time between the `startDate` and `endDate` values and uses that information to generate the string. For example, if there is exactly one hour and ten minutes difference between the start and end dates, generating an abbreviated string would result in a string of "1h 10m". Note that this is still formatting the quantity of time between the dates, not the pair of dates itself. For strings like "Feb 22nd - Feb 28th", use `NSDateIntervalFormatter`. @param startDate The start time. This parameter must not be `nil`. @param endDate The end time. This parameter must not be `nil`. @return A formatted string representing the specified time information.
 func (o *NSDateComponentsFormatter) StringFromDateToDate(startDate *NSDate, endDate *NSDate) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateComponentsFormatterSelStringFromDateToDate, startDate.Ptr(), endDate.Ptr())
 	if _ret != 0 {
@@ -72,6 +72,7 @@ func (o *NSDateComponentsFormatter) StringFromDateToDate(startDate *NSDate, endD
 	return NSStringFromID(_ret)
 }
 
+// Returns a formatted string based on the specified number of seconds. This method formats the specified number of seconds into the appropriate units. For example, if the formatter allows the display of minutes and seconds, creating an abbreviated string for the value 70 seconds results in the string "1m 10s". @param ti The time interval, measured in seconds. The value must be a finite number. Negative numbers are treated as positive numbers when creating the string. @return A formatted string representing the specified time interval.
 func (o *NSDateComponentsFormatter) StringFromTimeInterval(ti float64) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateComponentsFormatterSelStringFromTimeInterval, ti)
 	if _ret != 0 {
@@ -80,6 +81,7 @@ func (o *NSDateComponentsFormatter) StringFromTimeInterval(ti float64) *NSString
 	return NSStringFromID(_ret)
 }
 
+// Returns a localized string based on the specified date components and style option. Use this convenience method to format a string using the default formatter values, with the exception of the `unitsStyle` value. @param components The value to format. @param unitsStyle The style for the resulting units. Use this parameter to specify whether you want the resulting string to use an abbreviated or more spelled out format. @return A string containing the localized date and time information.
 func NSDateComponentsFormatterLocalizedStringFromDateComponentsUnitsStyle(components *NSDateComponents, unitsStyle NSDateComponentsFormatterUnitsStyle) *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDateComponentsFormatter), _nSDateComponentsFormatterSelLocalizedStringFromDateComponentsUnitsStyle, components.Ptr(), unitsStyle)
 	if _ret != 0 {
@@ -88,6 +90,7 @@ func NSDateComponentsFormatterLocalizedStringFromDateComponentsUnitsStyle(compon
 	return NSStringFromID(_ret)
 }
 
+// The formatting style for unit names. Configures the strings to use (if any) for unit names such as days, hours, minutes, and seconds. Use this property to specify whether you want abbreviated or shortened versions of unit names---for example, "hrs" instead of "hours". The default value of this property is `NSDateComponentsFormatterUnitsStylePositional`.
 func (o *NSDateComponentsFormatter) UnitsStyle() NSDateComponentsFormatterUnitsStyle {
 	_ret := objc.Send[NSDateComponentsFormatterUnitsStyle](o.Ptr(), _nSDateComponentsFormatterSelUnitsStyle)
 	return _ret
@@ -97,6 +100,7 @@ func (o *NSDateComponentsFormatter) SetUnitsStyle(unitsStyle NSDateComponentsFor
 	o.Ptr().Send(_nSDateComponentsFormatterSelSetUnitsStyle, unitsStyle)
 }
 
+// The bitmask of calendrical units such as day and month to include in the output string. The allowed calendar units are: - `NSCalendarUnitYear` - `NSCalendarUnitMonth` - `NSCalendarUnitWeekOfMonth` (used to mean "quantity of weeks") - `NSCalendarUnitDay` - `NSCalendarUnitHour` - `NSCalendarUnitMinute` - `NSCalendarUnitSecond` Assigning any other calendar units to this property results in an exception.
 func (o *NSDateComponentsFormatter) AllowedUnits() NSCalendarUnit {
 	_ret := objc.Send[NSCalendarUnit](o.Ptr(), _nSDateComponentsFormatterSelAllowedUnits)
 	return _ret
@@ -106,6 +110,7 @@ func (o *NSDateComponentsFormatter) SetAllowedUnits(allowedUnits NSCalendarUnit)
 	o.Ptr().Send(_nSDateComponentsFormatterSelSetAllowedUnits, allowedUnits)
 }
 
+// The formatting style for units whose value is 0. When the value for a particular unit is 0, the zero formatting behavior determines whether that value is retained or omitted from any resulting strings. For example, when the formatting behavior is `NSDateComponentsFormatterZeroFormattingBehaviorDropTrailing`, the value of one hour, ten minutes, and zero seconds would omit the mention of seconds. The default value of this property is `NSDateComponentsFormatterZeroFormattingBehaviorDefault`.
 func (o *NSDateComponentsFormatter) ZeroFormattingBehavior() NSDateComponentsFormatterZeroFormattingBehavior {
 	_ret := objc.Send[NSDateComponentsFormatterZeroFormattingBehavior](o.Ptr(), _nSDateComponentsFormatterSelZeroFormattingBehavior)
 	return _ret
@@ -115,6 +120,7 @@ func (o *NSDateComponentsFormatter) SetZeroFormattingBehavior(zeroFormattingBeha
 	o.Ptr().Send(_nSDateComponentsFormatterSelSetZeroFormattingBehavior, zeroFormattingBehavior)
 }
 
+// The default calendar to use when formatting date components. The formatter uses the calendar in this property to format values that do not have an inherent calendar of their own. For example, the formatter uses this calendar when formatting an `NSTimeInterval` value. The default value of this property is the autoupdating current calendar. Setting this property to `nil` causes the formatter to use the Gregorian calendar with the `en_US_POSIX` locale.
 func (o *NSDateComponentsFormatter) Calendar() *NSCalendar {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateComponentsFormatterSelCalendar)
 	if _ret != 0 {
@@ -127,6 +133,7 @@ func (o *NSDateComponentsFormatter) SetCalendar(calendar *NSCalendar) {
 	o.Ptr().Send(_nSDateComponentsFormatterSelSetCalendar, calendar.Ptr())
 }
 
+// Where units have variable length (number of days in a month, number of hours in a day, etc.), `NSDateComponentsFormatter` will calculate as though counting from the date specified by the `referenceDate` in the appropriate calendar. Defaults to `[NSDate dateWithTimeIntervalSinceReferenceDate:0]` at the time of the `-stringForObjectValue:` call if not set. Set to `nil` to get the default behavior.
 func (o *NSDateComponentsFormatter) ReferenceDate() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateComponentsFormatterSelReferenceDate)
 	if _ret != 0 {
@@ -139,6 +146,7 @@ func (o *NSDateComponentsFormatter) SetReferenceDate(referenceDate *NSDate) {
 	o.Ptr().Send(_nSDateComponentsFormatterSelSetReferenceDate, referenceDate.Ptr())
 }
 
+// A Boolean indicating whether non-integer units may be used for values. Fractional units may be used when a value cannot be exactly represented using the available units. For example, if minutes are not allowed, the value "1h 30m" could be formatted as "1.5h". The default value of this property is `NO`.
 func (o *NSDateComponentsFormatter) AllowsFractionalUnits() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSDateComponentsFormatterSelAllowsFractionalUnits)
 	return _ret
@@ -148,6 +156,7 @@ func (o *NSDateComponentsFormatter) SetAllowsFractionalUnits(allowsFractionalUni
 	o.Ptr().Send(_nSDateComponentsFormatterSelSetAllowsFractionalUnits, allowsFractionalUnits)
 }
 
+// The maximum number of time units to include in the output string. Use this property to limit the number of units displayed in the resulting string. For example, with this property set to 2, instead of "1h 10m, 30s", the resulting string would be "1h 10m". Use this property when you are constrained for space or want to round up values to the nearest large unit. The default value of this property is `0`, which does not cause the elimination of any units.
 func (o *NSDateComponentsFormatter) MaximumUnitCount() int {
 	_ret := objc.Send[int](o.Ptr(), _nSDateComponentsFormatterSelMaximumUnitCount)
 	return _ret
@@ -157,6 +166,7 @@ func (o *NSDateComponentsFormatter) SetMaximumUnitCount(maximumUnitCount int) {
 	o.Ptr().Send(_nSDateComponentsFormatterSelSetMaximumUnitCount, maximumUnitCount)
 }
 
+// A Boolean value indicating whether to collapse the largest unit into smaller units when a certain threshold is met. An example of when this property might apply is when expressing 63 seconds worth of time. When this property is set to `YES`, the formatted value would be "63s". When the value of this property is `NO`, the formatted value would be "1m 3s". The default value of this property is `NO`.
 func (o *NSDateComponentsFormatter) CollapsesLargestUnit() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSDateComponentsFormatterSelCollapsesLargestUnit)
 	return _ret
@@ -166,6 +176,7 @@ func (o *NSDateComponentsFormatter) SetCollapsesLargestUnit(collapsesLargestUnit
 	o.Ptr().Send(_nSDateComponentsFormatterSelSetCollapsesLargestUnit, collapsesLargestUnit)
 }
 
+// A Boolean value indicating whether the resulting phrase reflects an inexact time value. Setting the value of this property to `YES` adds phrasing to output strings to reflect that the given time value is approximate and not exact. Using this property yields more correct phrasing than simply prepending the string "About" to an output string. The default value of this property is `NO`.
 func (o *NSDateComponentsFormatter) IncludesApproximationPhrase() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSDateComponentsFormatterSelIncludesApproximationPhrase)
 	return _ret
@@ -175,6 +186,7 @@ func (o *NSDateComponentsFormatter) SetIncludesApproximationPhrase(includesAppro
 	o.Ptr().Send(_nSDateComponentsFormatterSelSetIncludesApproximationPhrase, includesApproximationPhrase)
 }
 
+// A Boolean value indicating whether output strings reflect the amount of time remaining. Setting this property to `YES` results in output strings like "30 minutes remaining". The default value of this property is `NO`.
 func (o *NSDateComponentsFormatter) IncludesTimeRemainingPhrase() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSDateComponentsFormatterSelIncludesTimeRemainingPhrase)
 	return _ret
@@ -184,6 +196,7 @@ func (o *NSDateComponentsFormatter) SetIncludesTimeRemainingPhrase(includesTimeR
 	o.Ptr().Send(_nSDateComponentsFormatterSelSetIncludesTimeRemainingPhrase, includesTimeRemainingPhrase)
 }
 
+// Not yet supported.
 func (o *NSDateComponentsFormatter) FormattingContext() NSFormattingContext {
 	_ret := objc.Send[NSFormattingContext](o.Ptr(), _nSDateComponentsFormatterSelFormattingContext)
 	return _ret

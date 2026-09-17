@@ -44,7 +44,7 @@ func (o *CKSyncEngineFailedRecordSave) Record() *CKRecord {
 	return CKRecordFromID(_ret)
 }
 
-// A error that describes the reason for the unsuccessful attempt to modify the associated record.
+// An error that describes the reason for the unsuccessful attempt to modify the associated record.
 func (o *CKSyncEngineFailedRecordSave) Error() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _cKSyncEngineFailedRecordSaveSelError)
 	return _ret

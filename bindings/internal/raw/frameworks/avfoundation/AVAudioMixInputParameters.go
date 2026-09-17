@@ -44,13 +44,13 @@ func (o *AVAudioMixInputParameters) GetVolumeRampForTimeStartVolumeEndVolumeTime
 	return _ret
 }
 
-// @property		trackID @abstract		Indicates the trackID of the audio track to which the parameters should be applied.
+// Indicates the trackID of the audio track to which the parameters should be applied.
 func (o *AVAudioMixInputParameters) TrackID() int32 {
 	_ret := objc.Send[int32](o.Ptr(), _aVAudioMixInputParametersSelTrackID)
 	return _ret
 }
 
-// @property		audioTimePitchAlgorithm @abstract		Indicates the processing algorithm used to manage audio pitch at varying rates and for scaled audio edits. @discussion Constants for various time pitch algorithms, e.g. AVAudioTimePitchSpectral, are defined in AVAudioProcessingSettings.h. Can be nil, in which case the audioTimePitchAlgorithm set on the AVPlayerItem, AVAssetExportSession, or AVAssetReaderAudioMixOutput on which the AVAudioMix is set will be used for the associated track.
+// Indicates the processing algorithm used to manage audio pitch at varying rates and for scaled audio edits. Constants for various time pitch algorithms, e.g. AVAudioTimePitchSpectral, are defined in AVAudioProcessingSettings.h. Can be nil, in which case the audioTimePitchAlgorithm set on the AVPlayerItem, AVAssetExportSession, or AVAssetReaderAudioMixOutput on which the AVAudioMix is set will be used for the associated track.
 func (o *AVAudioMixInputParameters) AudioTimePitchAlgorithm() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioMixInputParametersSelAudioTimePitchAlgorithm)
 	if _ret != 0 {
@@ -59,7 +59,7 @@ func (o *AVAudioMixInputParameters) AudioTimePitchAlgorithm() *foundation.NSStri
 	return foundation.NSStringFromID(_ret)
 }
 
-// @property		audioTapProcessor @abstract		Indicates the audio processing tap that will be used for the audio track.
+// Indicates the audio processing tap that will be used for the audio track or tracks. If you wish to tap the mix of audio tracks (i.e. if trackID is equal to AVAudioMixInputParametersTrackMixID), use the function MTAudioProcessingTapCreateWithPreferredFormat to create the instance of MTAudioProcessingTap to set as the value of audioTapProcessor. Created otherwise, the processing format of a tap of a track mix is undefined (but may be observed via the use of your MTAudioProcessingTapPrepareCallback).
 func (o *AVAudioMixInputParameters) AudioTapProcessor() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _aVAudioMixInputParametersSelAudioTapProcessor)
 	return _ret

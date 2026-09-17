@@ -75,7 +75,7 @@ func (o *NSURLDownload) SetDestinationAllowOverwrite(path *NSString, allowOverwr
 	o.Ptr().Send(_nSURLDownloadSelSetDestinationAllowOverwrite, path.Ptr(), allowOverwrite)
 }
 
-// @abstract Returns the request of the download. @result The request of the download.
+// The URL request that initiated the receiver's download.
 func (o *NSURLDownload) Request() *NSURLRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLDownloadSelRequest)
 	if _ret != 0 {
@@ -84,7 +84,7 @@ func (o *NSURLDownload) Request() *NSURLRequest {
 	return NSURLRequestFromID(_ret)
 }
 
-// @abstract Returns the resume data of a download that is incomplete. @result The resume data. @description resumeData returns the resume data of a download that is incomplete. This data represents the necessary state information that NSURLDownload needs to resume a download. The resume data can later be used when initializing a download with initWithResumeData:delegate:path:. Non-nil is returned if resuming the download seems possible. Non-nil is returned if the download was cancelled or ended in error after some but not all data has been received. The protocol of the download as well as the server must support resuming for non-nil to be returned. In order to later resume a download, be sure to call setDeletesFileUponFailure: with NO.
+// The resume data for a download that is not yet complete. This data represents the necessary state information that an `NSURLDownload` object needs to resume a download. The resume data can later be used when initializing a download with `initWithResumeData:delegate:path:`. Returns `nil` if the download is not able to be resumed. Resume data is returned only if both the protocol and the server support resuming.
 func (o *NSURLDownload) ResumeData() *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLDownloadSelResumeData)
 	if _ret != 0 {
@@ -93,7 +93,7 @@ func (o *NSURLDownload) ResumeData() *NSData {
 	return NSDataFromID(_ret)
 }
 
-// @abstract Sets whether or not the downloaded file should be deleted upon failure. 1    @description To allow the download to be resumed in case the download ends prematurely, deletesFileUponFailure must be set to NO as soon as possible to prevent the downloaded file from being deleted. deletesFileUponFailure is YES by default.
+// Whether the receiver deletes partially downloaded files when a download stops prematurely. The default value is `YES`. To allow the download to be resumed in case the download ends prematurely, set this property to `NO` as soon as possible to prevent the downloaded file from being deleted.
 func (o *NSURLDownload) DeletesFileUponFailure() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSURLDownloadSelDeletesFileUponFailure)
 	return _ret

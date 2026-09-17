@@ -83,7 +83,7 @@ func (xc *XPCCoder) DecodeXPCObjectOfTypeForKey(type_ obj.Object, key string) *O
 	return ObjectFromID(_r)
 }
 
-// Connection returns the connection.
+// Connection returns the current `NSXPCConnection` that is encoding or decoding.
 func (xc *XPCCoder) Connection() *XPCConnection {
 	defer runtime.KeepAlive(xc)
 	_r := objc.Send[objc.ID](objref.IDOf(xc), objc.RegisterName("connection"))

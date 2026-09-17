@@ -216,6 +216,41 @@ func PKPaymentNetworkElCorteIngles() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("PKPaymentNetworkElCorteIngles")))
 }
 
+// PKPaymentNetworkRuPay returns the string constant PKPaymentNetworkRuPay, for use as a dictionary key or argument.
+func PKPaymentNetworkRuPay() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPaymentNetworkRuPay")))
+}
+
+// PKPaymentNetworkVerve returns the string constant PKPaymentNetworkVerve, for use as a dictionary key or argument.
+func PKPaymentNetworkVerve() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPaymentNetworkVerve")))
+}
+
+// PKPaymentNetworkHumo returns the string constant PKPaymentNetworkHumo, for use as a dictionary key or argument.
+func PKPaymentNetworkHumo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPaymentNetworkHumo")))
+}
+
+// PKPaymentNetworkUzCard returns the string constant PKPaymentNetworkUzCard, for use as a dictionary key or argument.
+func PKPaymentNetworkUzCard() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPaymentNetworkUzCard")))
+}
+
+// PKPaymentNetworkPayPak returns the string constant PKPaymentNetworkPayPak, for use as a dictionary key or argument.
+func PKPaymentNetworkPayPak() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPaymentNetworkPayPak")))
+}
+
+// PKPaymentNetworkMaal returns the string constant PKPaymentNetworkMaal, for use as a dictionary key or argument.
+func PKPaymentNetworkMaal() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPaymentNetworkMaal")))
+}
+
+// PKPaymentNetworkElcard returns the string constant PKPaymentNetworkElcard, for use as a dictionary key or argument.
+func PKPaymentNetworkElcard() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPaymentNetworkElcard")))
+}
+
 // PKContactFieldPostalAddress returns the string constant PKContactFieldPostalAddress, for use as a dictionary key or argument.
 func PKContactFieldPostalAddress() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("PKContactFieldPostalAddress")))

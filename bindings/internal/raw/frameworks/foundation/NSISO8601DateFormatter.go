@@ -9,8 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A formatter that converts between dates and their ISO 8601 string representations.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsiso8601dateformatter
 type NSISO8601DateFormatter struct {
 	NSFormatter
@@ -38,6 +36,7 @@ func NSISO8601DateFormatterFromID(id objc.ID) *NSISO8601DateFormatter {
 	return o
 }
 
+// Initializes an ISO 8601 date formatter with default format, time zone, and options. By default, a formatter is initialized to use the GMT time zone and preconfigured with the RFC 3339 standard format (`yyyy-MM-dd'T'HH:mm:ssXXXXX`) using the following options: `NSISO8601DateFormatWithInternetDateTime`, `NSISO8601DateFormatWithDashSeparatorInDate`, `NSISO8601DateFormatWithColonSeparatorInTime`, and `NSISO8601DateFormatWithColonSeparatorInTimeZone`.
 func (o *NSISO8601DateFormatter) Init() *NSISO8601DateFormatter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSISO8601DateFormatterSelInit)
 	if _ret != 0 {
@@ -46,6 +45,7 @@ func (o *NSISO8601DateFormatter) Init() *NSISO8601DateFormatter {
 	return NSISO8601DateFormatterFromID(_ret)
 }
 
+// Creates and returns an ISO 8601 formatted string representation of the specified date. - Parameter date: The date to be represented. - Returns: A user-readable string representing the date.
 func (o *NSISO8601DateFormatter) StringFromDate(date *NSDate) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSISO8601DateFormatterSelStringFromDate, date.Ptr())
 	if _ret != 0 {
@@ -54,6 +54,7 @@ func (o *NSISO8601DateFormatter) StringFromDate(date *NSDate) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Creates and returns a date object from the specified ISO 8601 formatted string representation. - Parameter string: The ISO 8601 formatted string representation of a date. - Returns: A date object, or `nil` if no valid date was found.
 func (o *NSISO8601DateFormatter) DateFromString(string_ *NSString) *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSISO8601DateFormatterSelDateFromString, string_.Ptr())
 	if _ret != 0 {
@@ -62,6 +63,7 @@ func (o *NSISO8601DateFormatter) DateFromString(string_ *NSString) *NSDate {
 	return NSDateFromID(_ret)
 }
 
+// Creates a representation of the specified date with a given time zone and format options. - Parameters: - date: The date to be represented. - timeZone: The time zone used. - formatOptions: The options used. For possible values, see `NSISO8601DateFormatOptions`. - Returns: A user-readable string representing the date.
 func NSISO8601DateFormatterStringFromDateTimeZoneFormatOptions(date *NSDate, timeZone *NSTimeZone, formatOptions NSISO8601DateFormatOptions) *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSISO8601DateFormatter), _nSISO8601DateFormatterSelStringFromDateTimeZoneFormatOptions, date.Ptr(), timeZone.Ptr(), formatOptions)
 	if _ret != 0 {
@@ -70,6 +72,7 @@ func NSISO8601DateFormatterStringFromDateTimeZoneFormatOptions(date *NSDate, tim
 	return NSStringFromID(_ret)
 }
 
+// The time zone used to create and parse date representations. When unspecified, GMT is used. Resetting this property can incur a significant performance cost, as it may cause internal state to be regenerated.
 func (o *NSISO8601DateFormatter) TimeZone() *NSTimeZone {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSISO8601DateFormatterSelTimeZone)
 	if _ret != 0 {
@@ -82,6 +85,7 @@ func (o *NSISO8601DateFormatter) SetTimeZone(timeZone *NSTimeZone) {
 	o.Ptr().Send(_nSISO8601DateFormatterSelSetTimeZone, timeZone.Ptr())
 }
 
+// Options for generating and parsing ISO 8601 date representations. The ISO 8601 specification allows for dates to be expressed in a variety of ways. You can configure the format used to parse and generate representations by specifying various combinations of format options. > Important: Resetting this property can incur a significant performance cost, > as it may cause internal state to be regenerated.
 func (o *NSISO8601DateFormatter) FormatOptions() NSISO8601DateFormatOptions {
 	_ret := objc.Send[NSISO8601DateFormatOptions](o.Ptr(), _nSISO8601DateFormatterSelFormatOptions)
 	return _ret

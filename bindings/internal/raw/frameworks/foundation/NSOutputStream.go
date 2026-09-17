@@ -9,7 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A stream that provides write-only stream functionality.
+// A stream that provides write-only stream functionality. “OutputStream“ is "toll-free bridged" with its Core Foundation counterpart, <doc://com.apple.documentation/documentation/corefoundation/cfwritestream>. For more information on toll-free bridging, see [Toll-Free Bridging](https://developer.apple.com/library/archive/documentation/General/Conceptual/CocoaEncyclopedia/Toll-FreeBridgin/Toll-FreeBridgin.html#//apple_ref/doc/uid/TP40010810-CH2). ### Subclassing Notes `NSOutputStream` is a concrete subclass of `NSStream` that lets you write data to a stream. Although `NSOutputStream` is probably sufficient for most situations requiring this capability, you can create a subclass of `NSOutputStream` if you want more specialized behavior (for example, you want to record statistics on the data in a stream). #### Methods to Override To create a subclass of `NSOutputStream` you may have to implement initializers for the type of stream data supported and suitably reimplement existing initializers. You must also provide complete implementations of the following methods: - “write(_:maxLength:)“ From the current write pointer, take up to the number of bytes specified in the `maxLength:` parameter from the client-supplied buffer (first parameter) and put them onto the stream. The buffer must be of the size specified by the second parameter. To prepare for the next operation, offset the write pointer by the number of bytes written. Return a signed integer based on the outcome of the current operation: - If the write operation is successful, return the actual number of bytes put onto the stream. - If the stream is of a fixed length and has reached its capacity, return `0`. - If there was an error writing to the stream, return `-1`. - “hasSpaceAvailable“ Return <doc://com.apple.documentation/documentation/swift/true> if the stream can currently accept more data, <doc://com.apple.documentation/documentation/swift/false> if it cannot. If you want to be semantically compatible with `NSOutputStream`, return <doc://com.apple.documentation/documentation/swift/true> if a write must be attempted to determine if space is available.
 //
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsoutputstream
 type NSOutputStream struct {
@@ -40,11 +40,13 @@ func NSOutputStreamFromID(id objc.ID) *NSOutputStream {
 	return o
 }
 
+// Writes the contents of a provided data buffer to the receiver. - Parameters: - buffer: The data to write. - len: The length of the data buffer, in bytes. The behavior of this method is undefined if you pass a negative or zero number. - Returns: A positive number indicates the number of bytes written; `0` indicates that a fixed-length stream has reached its capacity; `-1` means that the operation failed (more information about the error can be obtained with `streamError`).
 func (o *NSOutputStream) WriteMaxLength(buffer *uint8, len_ uint) int {
 	_ret := objc.Send[int](o.Ptr(), _nSOutputStreamSelWriteMaxLength, buffer, len_)
 	return _ret
 }
 
+// Returns an initialized output stream that will write to memory. The stream must be opened before it can be used. The contents of the memory stream are retrieved by passing `NSStreamDataWrittenToMemoryStreamKey` to `propertyForKey:`.
 func (o *NSOutputStream) InitToMemory() *NSOutputStream {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOutputStreamSelInitToMemory)
 	if _ret != 0 {
@@ -53,6 +55,7 @@ func (o *NSOutputStream) InitToMemory() *NSOutputStream {
 	return NSOutputStreamFromID(_ret)
 }
 
+// Returns an initialized output stream that can write to a provided buffer. The stream must be opened before it can be used. When the number of bytes written to `buffer` has reached `capacity`, the stream's `streamStatus` will return `NSStreamStatusAtEnd`. - Parameters: - buffer: The buffer the output stream will write to. - capacity: The size of the buffer in bytes.
 func (o *NSOutputStream) InitToBufferCapacity(buffer *uint8, capacity uint) *NSOutputStream {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOutputStreamSelInitToBufferCapacity, buffer, capacity)
 	if _ret != 0 {
@@ -61,6 +64,7 @@ func (o *NSOutputStream) InitToBufferCapacity(buffer *uint8, capacity uint) *NSO
 	return NSOutputStreamFromID(_ret)
 }
 
+// Returns an initialized output stream for writing to a specified URL. The stream must be opened before it can be used. - Parameters: - url: The URL to the file the output stream will write to. - shouldAppend: `YES` if newly written data should be appended to any existing file contents, otherwise `NO`.
 func (o *NSOutputStream) InitWithURLAppend(url *NSURL, shouldAppend bool) *NSOutputStream {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOutputStreamSelInitWithURLAppend, url.Ptr(), shouldAppend)
 	if _ret != 0 {
@@ -69,11 +73,13 @@ func (o *NSOutputStream) InitWithURLAppend(url *NSURL, shouldAppend bool) *NSOut
 	return NSOutputStreamFromID(_ret)
 }
 
+// A Boolean value that indicates whether the receiver can be written to. `YES` if the stream can be written to or if a write must be attempted in order to determine if space is available, `NO` otherwise.
 func (o *NSOutputStream) HasSpaceAvailable() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSOutputStreamSelHasSpaceAvailable)
 	return _ret
 }
 
+// Returns an initialized output stream for writing to a specified file. The stream must be opened before it can be used. - Parameters: - path: The path to the file the output stream will write to. - shouldAppend: `YES` if newly written data should be appended to any existing file contents, otherwise `NO`.
 func (o *NSOutputStream) InitToFileAtPathAppend(path *NSString, shouldAppend bool) *NSOutputStream {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOutputStreamSelInitToFileAtPathAppend, path.Ptr(), shouldAppend)
 	if _ret != 0 {
@@ -82,6 +88,7 @@ func (o *NSOutputStream) InitToFileAtPathAppend(path *NSString, shouldAppend boo
 	return NSOutputStreamFromID(_ret)
 }
 
+// Creates and returns an initialized output stream that will write stream data to memory. The stream must be opened before it can be used. You retrieve the contents of the memory stream by sending the message `propertyForKey:` to the receiver with an argument of `NSStreamDataWrittenToMemoryStreamKey`.
 func NSOutputStreamOutputStreamToMemory() *NSOutputStream {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSOutputStream), _nSOutputStreamSelOutputStreamToMemory)
 	if _ret != 0 {
@@ -90,7 +97,7 @@ func NSOutputStreamOutputStreamToMemory() *NSOutputStream {
 	return NSOutputStreamFromID(_ret)
 }
 
-// Creates and returns an initialized output stream that can write to a provided buffer.
+// Creates and returns an initialized output stream that can write to a provided buffer. The stream must be opened before it can be used. When the number of bytes written to `buffer` has reached `capacity`, the stream's `streamStatus` will return `NSStreamStatusAtEnd`. - Parameters: - buffer: The buffer the output stream will write to. - capacity: The size of the buffer in bytes. - Returns: An initialized output stream that can write to `buffer`.
 func NSOutputStreamOutputStreamToBufferCapacity(buffer *uint8, capacity uint) *NSOutputStream {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSOutputStream), _nSOutputStreamSelOutputStreamToBufferCapacity, buffer, capacity)
 	if _ret != 0 {
@@ -99,7 +106,7 @@ func NSOutputStreamOutputStreamToBufferCapacity(buffer *uint8, capacity uint) *N
 	return NSOutputStreamFromID(_ret)
 }
 
-// Creates and returns an initialized output stream for writing to a specified file.
+// Creates and returns an initialized output stream for writing to a specified file. The stream must be opened before it can be used. - Parameters: - path: The path to the file the output stream will write to. - shouldAppend: `YES` if newly written data should be appended to any existing file contents, otherwise `NO`. - Returns: An initialized output stream that can write to `path`.
 func NSOutputStreamOutputStreamToFileAtPathAppend(path *NSString, shouldAppend bool) *NSOutputStream {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSOutputStream), _nSOutputStreamSelOutputStreamToFileAtPathAppend, path.Ptr(), shouldAppend)
 	if _ret != 0 {
@@ -108,7 +115,7 @@ func NSOutputStreamOutputStreamToFileAtPathAppend(path *NSString, shouldAppend b
 	return NSOutputStreamFromID(_ret)
 }
 
-// Creates and returns an initialized output stream for writing to a specified URL.
+// Creates and returns an initialized output stream for writing to a specified URL. The stream must be opened before it can be used. - Parameters: - url: The URL to the file the output stream will write to. - shouldAppend: `YES` if newly written data should be appended to any existing file contents, otherwise `NO`.
 func NSOutputStreamOutputStreamWithURLAppend(url *NSURL, shouldAppend bool) *NSOutputStream {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSOutputStream), _nSOutputStreamSelOutputStreamWithURLAppend, url.Ptr(), shouldAppend)
 	if _ret != 0 {

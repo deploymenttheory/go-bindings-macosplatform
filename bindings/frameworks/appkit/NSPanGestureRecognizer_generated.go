@@ -78,6 +78,22 @@ func (pgr *PanGestureRecognizer) WithNumberOfTouchesRequired(numberOfTouchesRequ
 	return pgr
 }
 
+// WithMinimumNumberOfTouches sets the minimum number of touches needed to recognize this gesture
+func (pgr *PanGestureRecognizer) WithMinimumNumberOfTouches(minimumNumberOfTouches int) *PanGestureRecognizer {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setMinimumNumberOfTouches:"), minimumNumberOfTouches)
+	})
+	return pgr
+}
+
+// WithMaximumNumberOfTouches sets the maximum number of touches allowed to recognize this gesture
+func (pgr *PanGestureRecognizer) WithMaximumNumberOfTouches(maximumNumberOfTouches int) *PanGestureRecognizer {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setMaximumNumberOfTouches:"), maximumNumberOfTouches)
+	})
+	return pgr
+}
+
 // WithTarget sets the object that implements the action method.
 func (pgr *PanGestureRecognizer) WithTarget(target obj.Object) *PanGestureRecognizer {
 	defer runtime.KeepAlive(target)
@@ -172,6 +188,14 @@ func (pgr *PanGestureRecognizer) WithDelaysRotationEvents(delaysRotationEvents b
 	return pgr
 }
 
+// WithCancellableByScrollGesture sets causes the receiver to be cancelled when its enclosing scroll view’s gesture recognizer begins.
+func (pgr *PanGestureRecognizer) WithCancellableByScrollGesture(cancellableByScrollGesture bool) *PanGestureRecognizer {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setCancellableByScrollGesture:"), cancellableByScrollGesture)
+	})
+	return pgr
+}
+
 // WithName sets the name.
 func (pgr *PanGestureRecognizer) WithName(name string) *PanGestureRecognizer {
 	purego.Main(func() {
@@ -249,6 +273,34 @@ func (pgr *PanGestureRecognizer) NumberOfTouchesRequired() int {
 	purego.Main(func() {
 		_mainthread0 = func() int {
 			_r := objc.Send[int](objref.IDOf(pgr), objc.RegisterName("numberOfTouchesRequired"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
+}
+
+// MinimumNumberOfTouches returns the minimum number of touches needed to recognize this gesture Defaults to 1.
+func (pgr *PanGestureRecognizer) MinimumNumberOfTouches() int {
+	defer runtime.KeepAlive(pgr)
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(pgr), objc.RegisterName("minimumNumberOfTouches"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
+}
+
+// MaximumNumberOfTouches returns the maximum number of touches allowed to recognize this gesture Set this property to 0 to require exactly `minimumNumberOfTouches` touches to recognize the gesture. Defaults to `NSIntegerMax`.
+func (pgr *PanGestureRecognizer) MaximumNumberOfTouches() int {
+	defer runtime.KeepAlive(pgr)
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(pgr), objc.RegisterName("maximumNumberOfTouches"))
 			return _r
 		}()
 	})

@@ -9,7 +9,6 @@ import (
 	"strings"
 )
 
-// A style for the authorization button.
 type AuthorizationAppleIDButtonStyle int64
 
 const (
@@ -33,7 +32,6 @@ func (e AuthorizationAppleIDButtonStyle) String() string {
 	}
 }
 
-// A type for the authorization button.
 type AuthorizationAppleIDButtonType int64
 
 const (
@@ -58,7 +56,6 @@ func (e AuthorizationAppleIDButtonType) String() string {
 	}
 }
 
-// Possible values for the credential state of a user.
 type AuthorizationAppleIDProviderCredentialState int64
 
 const (
@@ -85,7 +82,6 @@ func (e AuthorizationAppleIDProviderCredentialState) String() string {
 	}
 }
 
-// Options that modify how a controller performs authorization requests.
 // Bitmask — values may be combined with |.
 type AuthorizationControllerRequestOptions uint64
 
@@ -138,6 +134,7 @@ const (
 	// Secure Enclave key authentication.
 	AuthorizationProviderExtensionAuthenticationMethodUserSecureEnclaveKey AuthorizationProviderExtensionAuthenticationMethod = 2
 	AuthorizationProviderExtensionAuthenticationMethodSmartCard            AuthorizationProviderExtensionAuthenticationMethod = 3
+	AuthorizationProviderExtensionAuthenticationMethodOpenID               AuthorizationProviderExtensionAuthenticationMethod = 5
 )
 
 // String returns the AuthorizationProviderExtensionAuthenticationMethod constant's name, or its numeric form when the
@@ -150,6 +147,8 @@ func (e AuthorizationProviderExtensionAuthenticationMethod) String() string {
 		return "AuthorizationProviderExtensionAuthenticationMethodUserSecureEnclaveKey"
 	case AuthorizationProviderExtensionAuthenticationMethodSmartCard:
 		return "AuthorizationProviderExtensionAuthenticationMethodSmartCard"
+	case AuthorizationProviderExtensionAuthenticationMethodOpenID:
+		return "AuthorizationProviderExtensionAuthenticationMethodOpenID"
 	default:
 		return fmt.Sprintf("AuthorizationProviderExtensionAuthenticationMethod(%d)", int64(e))
 	}
@@ -161,6 +160,8 @@ const (
 	AuthorizationProviderExtensionFederationTypeNone           AuthorizationProviderExtensionFederationType = 0
 	AuthorizationProviderExtensionFederationTypeWSTrust        AuthorizationProviderExtensionFederationType = 1
 	AuthorizationProviderExtensionFederationTypeDynamicWSTrust AuthorizationProviderExtensionFederationType = 2
+	AuthorizationProviderExtensionFederationTypeOpenID         AuthorizationProviderExtensionFederationType = 3
+	AuthorizationProviderExtensionFederationTypeDynamicOpenID  AuthorizationProviderExtensionFederationType = 4
 )
 
 // String returns the AuthorizationProviderExtensionFederationType constant's name, or its numeric form when the
@@ -173,6 +174,10 @@ func (e AuthorizationProviderExtensionFederationType) String() string {
 		return "AuthorizationProviderExtensionFederationTypeWSTrust"
 	case AuthorizationProviderExtensionFederationTypeDynamicWSTrust:
 		return "AuthorizationProviderExtensionFederationTypeDynamicWSTrust"
+	case AuthorizationProviderExtensionFederationTypeOpenID:
+		return "AuthorizationProviderExtensionFederationTypeOpenID"
+	case AuthorizationProviderExtensionFederationTypeDynamicOpenID:
+		return "AuthorizationProviderExtensionFederationTypeDynamicOpenID"
 	default:
 		return fmt.Sprintf("AuthorizationProviderExtensionFederationType(%d)", int64(e))
 	}
@@ -322,7 +327,6 @@ func (e AuthorizationPublicKeyCredentialLargeBlobSupportRequirement) String() st
 	}
 }
 
-// An enumeration of values that indicate whether the browser app has access to a person’s passkeys.
 type AuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState int64
 
 const (
@@ -346,12 +350,10 @@ func (e AuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState) Str
 	}
 }
 
-// The defined identity types for use in retrieving credentials.
 // Bitmask — values may be combined with |.
 type CredentialIdentityTypes uint64
 
 const (
-	// A value that matches all identity types.
 	CredentialIdentityTypesAll         CredentialIdentityTypes = 0
 	CredentialIdentityTypesPassword    CredentialIdentityTypes = 1
 	CredentialIdentityTypesPasskey     CredentialIdentityTypes = 2
@@ -377,7 +379,6 @@ func (e CredentialIdentityTypes) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Possible values for the service identifier type.
 type CredentialServiceIdentifierType int64
 
 const (
@@ -475,7 +476,6 @@ func (e UserDetectionStatus) String() string {
 	}
 }
 
-// Errors that can occur during authorization.
 type AuthorizationError int64
 
 const (
@@ -632,11 +632,12 @@ func (e AuthorizationProviderExtensionRequestOptions) String() string {
 type AuthorizationProviderExtensionSupportedGrantTypes int64
 
 const (
-	AuthorizationProviderExtensionSupportedGrantTypesNone      AuthorizationProviderExtensionSupportedGrantTypes = 0
-	AuthorizationProviderExtensionSupportedGrantTypesPassword  AuthorizationProviderExtensionSupportedGrantTypes = 1
-	AuthorizationProviderExtensionSupportedGrantTypesJWTBearer AuthorizationProviderExtensionSupportedGrantTypes = 2
-	AuthorizationProviderExtensionSupportedGrantTypesSAML1_1   AuthorizationProviderExtensionSupportedGrantTypes = 4
-	AuthorizationProviderExtensionSupportedGrantTypesSAML2_0   AuthorizationProviderExtensionSupportedGrantTypes = 8
+	AuthorizationProviderExtensionSupportedGrantTypesNone          AuthorizationProviderExtensionSupportedGrantTypes = 0
+	AuthorizationProviderExtensionSupportedGrantTypesPassword      AuthorizationProviderExtensionSupportedGrantTypes = 1
+	AuthorizationProviderExtensionSupportedGrantTypesJWTBearer     AuthorizationProviderExtensionSupportedGrantTypes = 2
+	AuthorizationProviderExtensionSupportedGrantTypesSAML1_1       AuthorizationProviderExtensionSupportedGrantTypes = 4
+	AuthorizationProviderExtensionSupportedGrantTypesSAML2_0       AuthorizationProviderExtensionSupportedGrantTypes = 8
+	AuthorizationProviderExtensionSupportedGrantTypesTokenExchange AuthorizationProviderExtensionSupportedGrantTypes = 16
 )
 
 // String returns the AuthorizationProviderExtensionSupportedGrantTypes constant's name, or its numeric form when the
@@ -655,13 +656,15 @@ func (e AuthorizationProviderExtensionSupportedGrantTypes) String() string {
 	if e&AuthorizationProviderExtensionSupportedGrantTypesSAML2_0 != 0 {
 		parts = append(parts, "AuthorizationProviderExtensionSupportedGrantTypesSAML2_0")
 	}
+	if e&AuthorizationProviderExtensionSupportedGrantTypesTokenExchange != 0 {
+		parts = append(parts, "AuthorizationProviderExtensionSupportedGrantTypesTokenExchange")
+	}
 	if len(parts) == 0 {
 		return "0"
 	}
 	return strings.Join(parts, "|")
 }
 
-// Constants that represent credential identity store error codes.
 type CredentialIdentityStoreErrorCode int64
 
 const (
@@ -716,7 +719,6 @@ func (e CredentialRequestType) String() string {
 	}
 }
 
-// The codes for a credential provider extension error.
 type ExtensionErrorCode int64
 
 const (
@@ -747,7 +749,6 @@ func (e ExtensionErrorCode) String() string {
 	}
 }
 
-// The error code for a web authentication session error.
 type WebAuthenticationSessionErrorCode int64
 
 const (
@@ -1711,27 +1712,55 @@ func (e QosClass) String() string {
 	}
 }
 
+type TaskSharedRegionStubs uint8
+
+const (
+	TaskSharedRegionStubsDev  TaskSharedRegionStubs = 1
+	TaskSharedRegionStubsProd TaskSharedRegionStubs = 2
+)
+
+// String returns the TaskSharedRegionStubs constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TaskSharedRegionStubs) String() string {
+	switch e {
+	case TaskSharedRegionStubsDev:
+		return "TaskSharedRegionStubsDev"
+	case TaskSharedRegionStubsProd:
+		return "TaskSharedRegionStubsProd"
+	default:
+		return fmt.Sprintf("TaskSharedRegionStubs(%d)", int64(e))
+	}
+}
+
 type VirtualMemoryGuardExceptionCode uint32
 
 const (
-	KGUARD_EXC_DEALLOC_GAP                   VirtualMemoryGuardExceptionCode = 1
-	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        VirtualMemoryGuardExceptionCode = 2
-	KGUARD_EXC_RECLAIM_INDEX_FAILURE         VirtualMemoryGuardExceptionCode = 4
-	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    VirtualMemoryGuardExceptionCode = 8
-	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    VirtualMemoryGuardExceptionCode = 9
-	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         VirtualMemoryGuardExceptionCode = 10
-	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         VirtualMemoryGuardExceptionCode = 11
-	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  VirtualMemoryGuardExceptionCode = 12
-	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    VirtualMemoryGuardExceptionCode = 13
-	KGUARD_EXC_SEC_ACCESS_FAULT              VirtualMemoryGuardExceptionCode = 98
-	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        VirtualMemoryGuardExceptionCode = 99
-	KGUARD_EXC_SEC_COPY_DENIED               VirtualMemoryGuardExceptionCode = 100
-	KGUARD_EXC_SEC_SHARING_DENIED            VirtualMemoryGuardExceptionCode = 101
-	KGUARD_EXC_MTE_SYNC_FAULT                VirtualMemoryGuardExceptionCode = 200
-	KGUARD_EXC_MTE_ASYNC_USER_FAULT          VirtualMemoryGuardExceptionCode = 201
-	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          VirtualMemoryGuardExceptionCode = 202
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT VirtualMemoryGuardExceptionCode = 203
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT VirtualMemoryGuardExceptionCode = 204
+	KGUARD_EXC_DEALLOC_GAP                  VirtualMemoryGuardExceptionCode = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE       VirtualMemoryGuardExceptionCode = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE        VirtualMemoryGuardExceptionCode = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE   VirtualMemoryGuardExceptionCode = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE   VirtualMemoryGuardExceptionCode = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE        VirtualMemoryGuardExceptionCode = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE        VirtualMemoryGuardExceptionCode = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION VirtualMemoryGuardExceptionCode = 12
+	// Guard exception sent to a thread when a CoW defeatured map attempts to copy memory which is not permitted by system policy.
+	KGUARD_EXC_COW_DEFEATURED_COPY_DENIED VirtualMemoryGuardExceptionCode = 13
+	// Guard exception sent to a thread when it attempts to extract a given type of memory in a way which is not permitted for CoW defeatured maps.
+	KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED VirtualMemoryGuardExceptionCode = 14
+	// Guard exception sent to a thread when it attempts to copy-map a memory entry which was created for sharing by a CoW defeatured map.
+	KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED VirtualMemoryGuardExceptionCode = 15
+	KGUARD_EXC_COW_DEFEATURED_FIRST                    VirtualMemoryGuardExceptionCode = 13
+	KGUARD_EXC_COW_DEFEATURED_LAST                     VirtualMemoryGuardExceptionCode = 15
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY              VirtualMemoryGuardExceptionCode = 16
+	KGUARD_EXC_SEC_ACCESS_FAULT                        VirtualMemoryGuardExceptionCode = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT                  VirtualMemoryGuardExceptionCode = 99
+	KGUARD_EXC_SEC_COPY_DENIED                         VirtualMemoryGuardExceptionCode = 100
+	KGUARD_EXC_SEC_SHARING_DENIED                      VirtualMemoryGuardExceptionCode = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                          VirtualMemoryGuardExceptionCode = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT                    VirtualMemoryGuardExceptionCode = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT                    VirtualMemoryGuardExceptionCode = 202
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT           VirtualMemoryGuardExceptionCode = 203
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT           VirtualMemoryGuardExceptionCode = 204
 )
 
 // String returns the VirtualMemoryGuardExceptionCode constant's name, or its numeric form when the
@@ -1754,6 +1783,12 @@ func (e VirtualMemoryGuardExceptionCode) String() string {
 		return "KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE"
 	case KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION:
 		return "KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION"
+	case KGUARD_EXC_COW_DEFEATURED_COPY_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_COPY_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED"
 	case KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY:
 		return "KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY"
 	case KGUARD_EXC_SEC_ACCESS_FAULT:

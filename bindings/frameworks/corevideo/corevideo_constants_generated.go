@@ -464,6 +464,11 @@ func KCVImageBufferDisplayMaskRectangle_RightEdgePointsKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferDisplayMaskRectangle_RightEdgePointsKey")))
 }
 
+// KCVImageBufferHorizontalDisparityAdjustmentKey returns the value of the constant kCVImageBufferHorizontalDisparityAdjustmentKey.
+func KCVImageBufferHorizontalDisparityAdjustmentKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferHorizontalDisparityAdjustmentKey")))
+}
+
 // KCVPixelBufferPixelFormatTypeKey returns the value of the constant kCVPixelBufferPixelFormatTypeKey.
 func KCVPixelBufferPixelFormatTypeKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelBufferPixelFormatTypeKey")))

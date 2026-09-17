@@ -71,6 +71,7 @@ func (o *NSCache[KeyType, ObjectType]) RemoveAllObjects() {
 	o.Ptr().Send(_nSCacheSelRemoveAllObjects)
 }
 
+// The name of the cache. The default value is an empty string ("").
 func (o *NSCache[KeyType, ObjectType]) Name() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCacheSelName)
 	if _ret != 0 {
@@ -83,6 +84,7 @@ func (o *NSCache[KeyType, ObjectType]) SetName(name *NSString) {
 	o.Ptr().Send(_nSCacheSelSetName, name.Ptr())
 }
 
+// The cache's delegate. The delegate must adopt the `NSCacheDelegate` protocol.
 func (o *NSCache[KeyType, ObjectType]) Delegate() NSCacheDelegate {
 	_ret := objc.Send[NSCacheDelegate](o.Ptr(), _nSCacheSelDelegate)
 	return _ret
@@ -92,6 +94,7 @@ func (o *NSCache[KeyType, ObjectType]) SetDelegate(delegate NSCacheDelegate) {
 	o.Ptr().Send(_nSCacheSelSetDelegate, delegate)
 }
 
+// The maximum total cost that the cache can hold before it starts evicting objects. If `0`, there is no total cost limit. The default value is `0`. This is not a strict limit, and if the cache goes over the limit, an object in the cache could be evicted instantly, at a later point in time, or possibly never, all depending on the implementation details of the cache.
 func (o *NSCache[KeyType, ObjectType]) TotalCostLimit() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSCacheSelTotalCostLimit)
 	return _ret
@@ -101,6 +104,7 @@ func (o *NSCache[KeyType, ObjectType]) SetTotalCostLimit(totalCostLimit uint) {
 	o.Ptr().Send(_nSCacheSelSetTotalCostLimit, totalCostLimit)
 }
 
+// The maximum number of objects the cache should hold. If `0`, there is no count limit. The default value is `0`. This is not a strict limit -- if the cache goes over the limit, an object in the cache could be evicted instantly, later, or possibly never, depending on the implementation details of the cache.
 func (o *NSCache[KeyType, ObjectType]) CountLimit() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSCacheSelCountLimit)
 	return _ret
@@ -110,6 +114,7 @@ func (o *NSCache[KeyType, ObjectType]) SetCountLimit(countLimit uint) {
 	o.Ptr().Send(_nSCacheSelSetCountLimit, countLimit)
 }
 
+// Whether the cache will automatically evict discardable-content objects whose content has been discarded. If `YES`, the cache will evict a discardable-content object after its content is discarded. If `NO`, it will not. The default value is `YES`.
 func (o *NSCache[KeyType, ObjectType]) EvictsObjectsWithDiscardedContent() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSCacheSelEvictsObjectsWithDiscardedContent)
 	return _ret

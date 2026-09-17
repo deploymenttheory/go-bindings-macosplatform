@@ -9,7 +9,6 @@ import (
 	"strings"
 )
 
-// Values that indicate the state of an export session.
 type AssetExportSessionStatus int64
 
 const (
@@ -42,7 +41,6 @@ func (e AssetExportSessionStatus) String() string {
 	}
 }
 
-// Values that represent the possible states of an asset reader.
 type AssetReaderStatus int64
 
 const (
@@ -170,14 +168,18 @@ func (e AssetTrackGroupOutputHandling) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Values that indicate the state of an asset writer.
 type AssetWriterStatus int64
 
 const (
-	AssetWriterStatusUnknown   AssetWriterStatus = 0
-	AssetWriterStatusWriting   AssetWriterStatus = 1
+	// Indicates that the status of the asset writer is not currently known.
+	AssetWriterStatusUnknown AssetWriterStatus = 0
+	// Indicates that the asset writer is successfully writing samples to its output file.
+	AssetWriterStatusWriting AssetWriterStatus = 1
+	// Indicates that the asset writer has successfully written all samples following a call to finishWriting.
 	AssetWriterStatusCompleted AssetWriterStatus = 2
-	AssetWriterStatusFailed    AssetWriterStatus = 3
+	// Indicates that the asset writer can no longer write samples to its output file because of an error. The error is described by the value of the asset writer's error property.
+	AssetWriterStatusFailed AssetWriterStatus = 3
+	// Indicates that the asset writer can no longer write samples because writing was canceled with the cancelWriting method.
 	AssetWriterStatusCancelled AssetWriterStatus = 4
 )
 
@@ -265,7 +267,6 @@ func (e AuthorizationStatus) String() string {
 	}
 }
 
-// Animation options for a caption.
 type CaptionAnimation int64
 
 const (
@@ -286,7 +287,6 @@ func (e CaptionAnimation) String() string {
 	}
 }
 
-// Constants that indicate the status of a validator.
 type CaptionConversionValidatorStatus int64
 
 const (
@@ -313,12 +313,10 @@ func (e CaptionConversionValidatorStatus) String() string {
 	}
 }
 
-// Text decorations for caption text.
 // Bitmask — values may be combined with |.
 type CaptionDecoration uint64
 
 const (
-	// No text decoration.
 	CaptionDecorationNone        CaptionDecoration = 0
 	CaptionDecorationUnderline   CaptionDecoration = 1
 	CaptionDecorationLineThrough CaptionDecoration = 2
@@ -344,7 +342,6 @@ func (e CaptionDecoration) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Font styles for caption text.
 type CaptionFontStyle int64
 
 const (
@@ -368,7 +365,6 @@ func (e CaptionFontStyle) String() string {
 	}
 }
 
-// Font weights for a caption.
 type CaptionFontWeight int64
 
 const (
@@ -392,7 +388,6 @@ func (e CaptionFontWeight) String() string {
 	}
 }
 
-// Constants that indicate the alignment of lines in a region.
 type CaptionRegionDisplayAlignment int64
 
 const (
@@ -416,7 +411,6 @@ func (e CaptionRegionDisplayAlignment) String() string {
 	}
 }
 
-// Constants that indicate the scrolling effects the system applies to a region.
 type CaptionRegionScroll int64
 
 const (
@@ -437,7 +431,6 @@ func (e CaptionRegionScroll) String() string {
 	}
 }
 
-// Constants that indicate the writing mode for a region.
 type CaptionRegionWritingMode int64
 
 const (
@@ -504,7 +497,6 @@ func (e CaptionRubyPosition) String() string {
 	}
 }
 
-// Text alignment options for a caption.
 type CaptionTextAlignment int64
 
 const (
@@ -534,7 +526,6 @@ func (e CaptionTextAlignment) String() string {
 	}
 }
 
-// The caption’s supported rendering policy options.
 type CaptionTextCombine int64
 
 const (
@@ -594,7 +585,6 @@ func (e CaptionUnitsType) String() string {
 	}
 }
 
-// An enumeration of auto focus systems.
 type CaptureAutoFocusSystem int64
 
 const (
@@ -615,6 +605,28 @@ func (e CaptureAutoFocusSystem) String() string {
 		return "CaptureAutoFocusSystemPhaseDetection"
 	default:
 		return fmt.Sprintf("CaptureAutoFocusSystem(%d)", int64(e))
+	}
+}
+
+type CaptureBroadcastVideoOutputDroppedFrameReplacementPolicy int64
+
+const (
+	// Repeat the previous frame as replacement. When a frame is dropped, the most recent successfully output frame is repeated at the expected presentation time. This is the default behavior and provides smoother visual continuity.
+	CaptureBroadcastVideoOutputDroppedFrameReplacementPolicyRepeatPreviousFrame CaptureBroadcastVideoOutputDroppedFrameReplacementPolicy = 0
+	// Insert a black frame as replacement. When a frame is dropped, a black frame is inserted at the expected presentation time. This maintains output timing continuity while providing a clear visual indication of the dropped frame.
+	CaptureBroadcastVideoOutputDroppedFrameReplacementPolicyBlackFrame CaptureBroadcastVideoOutputDroppedFrameReplacementPolicy = 1
+)
+
+// String returns the CaptureBroadcastVideoOutputDroppedFrameReplacementPolicy constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CaptureBroadcastVideoOutputDroppedFrameReplacementPolicy) String() string {
+	switch e {
+	case CaptureBroadcastVideoOutputDroppedFrameReplacementPolicyRepeatPreviousFrame:
+		return "CaptureBroadcastVideoOutputDroppedFrameReplacementPolicyRepeatPreviousFrame"
+	case CaptureBroadcastVideoOutputDroppedFrameReplacementPolicyBlackFrame:
+		return "CaptureBroadcastVideoOutputDroppedFrameReplacementPolicyBlackFrame"
+	default:
+		return fmt.Sprintf("CaptureBroadcastVideoOutputDroppedFrameReplacementPolicy(%d)", int64(e))
 	}
 }
 
@@ -649,7 +661,6 @@ func (e CaptureCameraLensSmudgeDetectionStatus) String() string {
 	}
 }
 
-// Constants that indicate the current Center Stage control mode.
 type CaptureCenterStageControlMode int64
 
 const (
@@ -722,7 +733,6 @@ func (e CaptureColorSpace) String() string {
 	}
 }
 
-// Constants that indicate the physical position of a capture device.
 type CaptureDevicePosition int64
 
 const (
@@ -746,7 +756,6 @@ func (e CaptureDevicePosition) String() string {
 	}
 }
 
-// Constants that indicate the transport control’s current mode of playback, if it has one.
 type CaptureDeviceTransportControlsPlaybackMode int64
 
 const (
@@ -767,7 +776,6 @@ func (e CaptureDeviceTransportControlsPlaybackMode) String() string {
 	}
 }
 
-// Constants that specify the exposure mode of a capture device.
 type CaptureExposureMode int64
 
 const (
@@ -794,7 +802,6 @@ func (e CaptureExposureMode) String() string {
 	}
 }
 
-// Constants that specify the flash modes of a capture device.
 type CaptureFlashMode int64
 
 const (
@@ -818,7 +825,6 @@ func (e CaptureFlashMode) String() string {
 	}
 }
 
-// Constants to specify the focus mode of a capture device.
 type CaptureFocusMode int64
 
 const (
@@ -842,7 +848,6 @@ func (e CaptureFocusMode) String() string {
 	}
 }
 
-// Constants that define the available microphone modes.
 type CaptureMicrophoneMode int64
 
 const (
@@ -893,7 +898,6 @@ func (e CaptureMultichannelAudioMode) String() string {
 	}
 }
 
-// Constants that indicate whether the output is ready to receive capture requests.
 type CapturePhotoOutputCaptureReadiness int64
 
 const (
@@ -923,7 +927,6 @@ func (e CapturePhotoOutputCaptureReadiness) String() string {
 	}
 }
 
-// Constants that indicate how to prioritize photo quality relative to capture speed.
 type CapturePhotoQualityPrioritization int64
 
 const (
@@ -947,12 +950,10 @@ func (e CapturePhotoQualityPrioritization) String() string {
 	}
 }
 
-// A structure that defines the conditions in which to restrict camera switching.
 // Bitmask — values may be combined with |.
 type CapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions uint64
 
 const (
-	// Disallow switching to a fallback camera.
 	CapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionNone                CapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions = 0
 	CapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionVideoZoomChanged    CapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions = 1
 	CapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionFocusModeChanged    CapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions = 2
@@ -978,7 +979,6 @@ func (e CapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions) St
 	return strings.Join(parts, "|")
 }
 
-// Constants that control when to allow a virtual device to switch its active primary constituent device.
 type CapturePrimaryConstituentDeviceSwitchingBehavior int64
 
 const (
@@ -1005,7 +1005,6 @@ func (e CapturePrimaryConstituentDeviceSwitchingBehavior) String() string {
 	}
 }
 
-// Constants that describe the capture device configuration user interfaces.
 type CaptureSystemUserInterface int64
 
 const (
@@ -1052,7 +1051,6 @@ func (e CaptureTimecodeSourceType) String() string {
 	}
 }
 
-// Constants to specify the capture device’s torch mode.
 type CaptureTorchMode int64
 
 const (
@@ -1109,7 +1107,6 @@ func (e CaptureVideoOrientation) String() string {
 	}
 }
 
-// Constants to specify the white balance mode of a capture device.
 type CaptureWhiteBalanceMode int64
 
 const (
@@ -1176,7 +1173,6 @@ func (e ContentAuthorizationStatus) String() string {
 	}
 }
 
-// The status for a content key request.
 type ContentKeyRequestStatus int64
 
 const (
@@ -1259,7 +1255,6 @@ func (e DelegatingPlaybackCoordinatorSeekOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Values indicating the general accuracy of a depth data map.
 type DepthDataAccuracy int64
 
 const (
@@ -1280,7 +1275,6 @@ func (e DepthDataAccuracy) String() string {
 	}
 }
 
-// Values indicating the overall quality of a depth data map.
 type DepthDataQuality int64
 
 const (
@@ -1398,6 +1392,29 @@ func (e KeyValueStatus) String() string {
 	}
 }
 
+// These constants are the possible playback modes returned by the property “mode” on AVMetricPlaybackModeSwitchEvent
+type MetricPlaybackMode int64
+
+const (
+	// Indicates that playback is local.
+	MetricPlaybackModeLocal MetricPlaybackMode = 0
+	// Indicates that playback is via AirPlay Video.
+	MetricPlaybackModeAirPlayVideo MetricPlaybackMode = 1
+)
+
+// String returns the MetricPlaybackMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MetricPlaybackMode) String() string {
+	switch e {
+	case MetricPlaybackModeLocal:
+		return "MetricPlaybackModeLocal"
+	case MetricPlaybackModeAirPlayVideo:
+		return "MetricPlaybackModeAirPlayVideo"
+	default:
+		return fmt.Sprintf("MetricPlaybackMode(%d)", int64(e))
+	}
+}
+
 // A structure that defines options to control the writing of a movie header to a destination URL.
 // Bitmask — values may be combined with |.
 type MovieWritingOptions uint64
@@ -1422,7 +1439,6 @@ func (e MovieWritingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// The actions a player can take when it finishes playing.
 type PlayerActionAtItemEnd int64
 
 const (
@@ -1476,19 +1492,17 @@ func (e PlayerAudiovisualBackgroundPlaybackPolicy) String() string {
 	}
 }
 
-// Constants that define restrictions on the playback of interstitial content.
 // Bitmask — values may be combined with |.
 type PlayerInterstitialEventRestrictions uint64
 
 const (
-	// A value that indicates no restrictions on playback of primary or interstitial content.
+	// Indicates that the user may freely employ playback controls, as available, both within the primary content and in the interstitial content specified for the event.
 	PlayerInterstitialEventRestrictionNone PlayerInterstitialEventRestrictions = 0
 	// Indicates that seeking within the primary content from a date prior to the date of the event to a date subsequent to the date of the event is not permitted.
 	PlayerInterstitialEventRestrictionConstrainsSeekingForwardInPrimaryContent PlayerInterstitialEventRestrictions = 1
 	// Indicates that advancing the currentTime within an interstitial item, either by seeking ahead or by setting the playback rate to a value greater than the item's asset's preferredRate, is not permitted.
 	PlayerInterstitialEventRestrictionRequiresPlaybackAtPreferredRateForAdvancement PlayerInterstitialEventRestrictions = 4
-	// The default restriction policy.
-	PlayerInterstitialEventRestrictionDefaultPolicy PlayerInterstitialEventRestrictions = 0
+	PlayerInterstitialEventRestrictionDefaultPolicy                                 PlayerInterstitialEventRestrictions = 0
 )
 
 // String returns the PlayerInterstitialEventRestrictions constant's name, or its numeric form when the
@@ -1537,7 +1551,6 @@ func (e PlayerInterstitialEventSkippableEventState) String() string {
 	}
 }
 
-// Constants that specify how an event occupies time on an integrated timeline.
 type PlayerInterstitialEventTimelineOccupancy int64
 
 const (
@@ -1560,7 +1573,6 @@ func (e PlayerInterstitialEventTimelineOccupancy) String() string {
 	}
 }
 
-// Constants that specify the type of segment.
 type PlayerItemSegmentType int64
 
 const (
@@ -1581,7 +1593,6 @@ func (e PlayerItemSegmentType) String() string {
 	}
 }
 
-// The statuses for a player item.
 type PlayerItemStatus int64
 
 const (
@@ -1608,7 +1619,6 @@ func (e PlayerItemStatus) String() string {
 	}
 }
 
-// Constants that define the ordering of items in a player looper.
 type PlayerLooperItemOrdering int64
 
 const (
@@ -1629,7 +1639,6 @@ func (e PlayerLooperItemOrdering) String() string {
 	}
 }
 
-// Status constants that indicate whether a looper can successfully perform looping playback.
 type PlayerLooperStatus int64
 
 const (
@@ -1682,7 +1691,6 @@ func (e PlayerNetworkResourcePriority) String() string {
 	}
 }
 
-// Status values that indicate whether a player can successfully play media.
 type PlayerStatus int64
 
 const (
@@ -1709,7 +1717,6 @@ func (e PlayerStatus) String() string {
 	}
 }
 
-// Constants that indicate the state of playback control.
 type PlayerTimeControlStatus int64
 
 const (
@@ -1763,7 +1770,6 @@ func (e QueuedSampleBufferRenderingStatus) String() string {
 	}
 }
 
-// The modes that describe the buffer request direction.
 type SampleBufferRequestDirection int64
 
 const (
@@ -1787,7 +1793,6 @@ func (e SampleBufferRequestDirection) String() string {
 	}
 }
 
-// The modes in which a sample buffer generator processes a request.
 type SampleBufferRequestMode int64
 
 const (
@@ -1889,7 +1894,6 @@ func (e CMTagCollectionVideoOutputPreset) String() string {
 	}
 }
 
-// Constants that indicate the result of an image generation request.
 type AssetImageGeneratorResult int64
 
 const (
@@ -1913,7 +1917,25 @@ func (e AssetImageGeneratorResult) String() string {
 	}
 }
 
-// Constants that define reasons for why the system dropped a frame.
+// Special value for the trackID property of AVAudioMixInputParameters.
+type AudioMixInputParametersTrackID int32
+
+const (
+	// Indicates that the specified input parameters should be applied to the mix of all audio tracks rather than to a single specific audio track. This is particularly useful for setting up volume ramps or an audio tap for streaming playback.
+	AudioMixInputParametersTrackMixID AudioMixInputParametersTrackID = 0
+)
+
+// String returns the AudioMixInputParametersTrackID constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AudioMixInputParametersTrackID) String() string {
+	switch e {
+	case AudioMixInputParametersTrackMixID:
+		return "AudioMixInputParametersTrackMixID"
+	default:
+		return fmt.Sprintf("AudioMixInputParametersTrackID(%d)", int64(e))
+	}
+}
+
 type CaptureOutputDataDroppedReason int64
 
 const (
@@ -1986,7 +2008,6 @@ func (e CaptureTimecodeGeneratorSynchronizationStatus) String() string {
 	}
 }
 
-// A structure that defines the errors that framework operations can generate.
 type Error int64
 
 const (
@@ -2065,6 +2086,7 @@ const (
 	ErrorToneMappingFailed                             Error = -11885
 	ErrorMediaExtensionDisabled                        Error = -11886
 	ErrorMediaExtensionConflict                        Error = -11887
+	ErrorNotEnoughSpaceForProVideoStorageReplenishment Error = -11897
 )
 
 // String returns the Error constant's name, or its numeric form when the
@@ -2221,6 +2243,8 @@ func (e Error) String() string {
 		return "ErrorMediaExtensionDisabled"
 	case ErrorMediaExtensionConflict:
 		return "ErrorMediaExtensionConflict"
+	case ErrorNotEnoughSpaceForProVideoStorageReplenishment:
+		return "ErrorNotEnoughSpaceForProVideoStorageReplenishment"
 	default:
 		return fmt.Sprintf("Error(%d)", int64(e))
 	}
@@ -3172,27 +3196,55 @@ func (e QosClass) String() string {
 	}
 }
 
+type TaskSharedRegionStubs uint8
+
+const (
+	TaskSharedRegionStubsDev  TaskSharedRegionStubs = 1
+	TaskSharedRegionStubsProd TaskSharedRegionStubs = 2
+)
+
+// String returns the TaskSharedRegionStubs constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TaskSharedRegionStubs) String() string {
+	switch e {
+	case TaskSharedRegionStubsDev:
+		return "TaskSharedRegionStubsDev"
+	case TaskSharedRegionStubsProd:
+		return "TaskSharedRegionStubsProd"
+	default:
+		return fmt.Sprintf("TaskSharedRegionStubs(%d)", int64(e))
+	}
+}
+
 type VirtualMemoryGuardExceptionCode uint32
 
 const (
-	KGUARD_EXC_DEALLOC_GAP                   VirtualMemoryGuardExceptionCode = 1
-	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        VirtualMemoryGuardExceptionCode = 2
-	KGUARD_EXC_RECLAIM_INDEX_FAILURE         VirtualMemoryGuardExceptionCode = 4
-	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    VirtualMemoryGuardExceptionCode = 8
-	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    VirtualMemoryGuardExceptionCode = 9
-	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         VirtualMemoryGuardExceptionCode = 10
-	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         VirtualMemoryGuardExceptionCode = 11
-	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  VirtualMemoryGuardExceptionCode = 12
-	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    VirtualMemoryGuardExceptionCode = 13
-	KGUARD_EXC_SEC_ACCESS_FAULT              VirtualMemoryGuardExceptionCode = 98
-	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        VirtualMemoryGuardExceptionCode = 99
-	KGUARD_EXC_SEC_COPY_DENIED               VirtualMemoryGuardExceptionCode = 100
-	KGUARD_EXC_SEC_SHARING_DENIED            VirtualMemoryGuardExceptionCode = 101
-	KGUARD_EXC_MTE_SYNC_FAULT                VirtualMemoryGuardExceptionCode = 200
-	KGUARD_EXC_MTE_ASYNC_USER_FAULT          VirtualMemoryGuardExceptionCode = 201
-	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          VirtualMemoryGuardExceptionCode = 202
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT VirtualMemoryGuardExceptionCode = 203
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT VirtualMemoryGuardExceptionCode = 204
+	KGUARD_EXC_DEALLOC_GAP                  VirtualMemoryGuardExceptionCode = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE       VirtualMemoryGuardExceptionCode = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE        VirtualMemoryGuardExceptionCode = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE   VirtualMemoryGuardExceptionCode = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE   VirtualMemoryGuardExceptionCode = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE        VirtualMemoryGuardExceptionCode = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE        VirtualMemoryGuardExceptionCode = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION VirtualMemoryGuardExceptionCode = 12
+	// Guard exception sent to a thread when a CoW defeatured map attempts to copy memory which is not permitted by system policy.
+	KGUARD_EXC_COW_DEFEATURED_COPY_DENIED VirtualMemoryGuardExceptionCode = 13
+	// Guard exception sent to a thread when it attempts to extract a given type of memory in a way which is not permitted for CoW defeatured maps.
+	KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED VirtualMemoryGuardExceptionCode = 14
+	// Guard exception sent to a thread when it attempts to copy-map a memory entry which was created for sharing by a CoW defeatured map.
+	KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED VirtualMemoryGuardExceptionCode = 15
+	KGUARD_EXC_COW_DEFEATURED_FIRST                    VirtualMemoryGuardExceptionCode = 13
+	KGUARD_EXC_COW_DEFEATURED_LAST                     VirtualMemoryGuardExceptionCode = 15
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY              VirtualMemoryGuardExceptionCode = 16
+	KGUARD_EXC_SEC_ACCESS_FAULT                        VirtualMemoryGuardExceptionCode = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT                  VirtualMemoryGuardExceptionCode = 99
+	KGUARD_EXC_SEC_COPY_DENIED                         VirtualMemoryGuardExceptionCode = 100
+	KGUARD_EXC_SEC_SHARING_DENIED                      VirtualMemoryGuardExceptionCode = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                          VirtualMemoryGuardExceptionCode = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT                    VirtualMemoryGuardExceptionCode = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT                    VirtualMemoryGuardExceptionCode = 202
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT           VirtualMemoryGuardExceptionCode = 203
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT           VirtualMemoryGuardExceptionCode = 204
 )
 
 // String returns the VirtualMemoryGuardExceptionCode constant's name, or its numeric form when the
@@ -3215,6 +3267,12 @@ func (e VirtualMemoryGuardExceptionCode) String() string {
 		return "KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE"
 	case KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION:
 		return "KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION"
+	case KGUARD_EXC_COW_DEFEATURED_COPY_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_COPY_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED"
 	case KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY:
 		return "KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY"
 	case KGUARD_EXC_SEC_ACCESS_FAULT:

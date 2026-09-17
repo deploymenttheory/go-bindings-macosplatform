@@ -18,8 +18,6 @@ import (
 // ByteCountFormatter is an idiomatic wrapper over the Objective-C class NSByteCountFormatter.
 //
 // It embeds [Formatter], promoting that type's methods.
-//
-// A formatter that converts a byte count value into a localized description that is formatted with the appropriate byte modifier (KB, MB, GB and so on).
 type ByteCountFormatter struct {
 	Formatter
 }
@@ -56,55 +54,55 @@ func NewByteCountFormatter() *ByteCountFormatter {
 	return byteCountFormatterAdopt(_id)
 }
 
-// WithAllowedUnits sets the allowed units.
+// WithAllowedUnits sets specify the units that can be used in the output. If the value is `NSByteCountFormatterUseDefault`, the formatter uses platform-appropriate settings; otherwise only the specified units are used. > Note: ZB and YB cannot be covered by the range of possible values, but you can still choose to use these units to get fractional display ("0.0035 ZB" for instance).
 func (bcf *ByteCountFormatter) WithAllowedUnits(allowedUnits ByteCountFormatterUnits) *ByteCountFormatter {
 	objc.Send[objc.ID](objref.IDOf(bcf), objc.RegisterName("setAllowedUnits:"), allowedUnits)
 	return bcf
 }
 
-// WithCountStyle sets the count style.
+// WithCountStyle sets specify the number of bytes to be used for kilobytes. The default setting is `NSByteCountFormatterCountStyleFile`, which is the system specific value for file and storage sizes.
 func (bcf *ByteCountFormatter) WithCountStyle(countStyle ByteCountFormatterCountStyle) *ByteCountFormatter {
 	objc.Send[objc.ID](objref.IDOf(bcf), objc.RegisterName("setCountStyle:"), countStyle)
 	return bcf
 }
 
-// WithAllowsNonnumericFormatting sets the allows nonnumeric formatting.
+// WithAllowsNonnumericFormatting sets determines whether to allow more natural display of some values. Displays a more natural display of some values, such as zero, where it may be displayed as "Zero KB", ignoring all other flags or options (with the exception of `NSByteCountFormatterUseBytes`, which would generate "Zero bytes"). The result is appropriate for standalone output. Special handling of certain values such as zero is especially important in some languages, so it's highly recommended that this property be left in its default state. Default value is `YES`.
 func (bcf *ByteCountFormatter) WithAllowsNonnumericFormatting(allowsNonnumericFormatting bool) *ByteCountFormatter {
 	objc.Send[objc.ID](objref.IDOf(bcf), objc.RegisterName("setAllowsNonnumericFormatting:"), allowsNonnumericFormatting)
 	return bcf
 }
 
-// WithIncludesUnit sets the includes unit.
+// WithIncludesUnit sets determines whether to include the units in the resulting formatted string. If set to `YES` and `includesCount` is set to `NO`, no count is displayed. For example, a value of 723 KB is formatted as "KB". You can set this property and `includesCount` individually to get both parts, separately. Note that putting them together yourself via string concatenation may be incorrect for some locales. The default value is `YES`.
 func (bcf *ByteCountFormatter) WithIncludesUnit(includesUnit bool) *ByteCountFormatter {
 	objc.Send[objc.ID](objref.IDOf(bcf), objc.RegisterName("setIncludesUnit:"), includesUnit)
 	return bcf
 }
 
-// WithIncludesCount sets the includes count.
+// WithIncludesCount sets determines whether to include the count in the resulting formatted string. If set to `YES` and `includesUnit` is set to `NO`, no unit is displayed. For example, a value of 723 KB is formatted as "723". You can set this property and `includesUnit` individually to get both parts, separately. Note that putting them together yourself via string concatenation may be incorrect for some locales. The default value is `YES`.
 func (bcf *ByteCountFormatter) WithIncludesCount(includesCount bool) *ByteCountFormatter {
 	objc.Send[objc.ID](objref.IDOf(bcf), objc.RegisterName("setIncludesCount:"), includesCount)
 	return bcf
 }
 
-// WithIncludesActualByteCount sets the includes actual byte count.
+// WithIncludesActualByteCount sets determines whether to include the number of bytes after the formatted string. Setting this value to `YES` causes the byte count to be displayed parenthetically (localized as appropriate), for instance "723 KB (722,842 bytes)". This will happen only if needed, that is, the first part is already not showing the exact byte count. If `includesUnit` or `includesCount` are `NO`, then this setting has no effect. Default value is `NO`.
 func (bcf *ByteCountFormatter) WithIncludesActualByteCount(includesActualByteCount bool) *ByteCountFormatter {
 	objc.Send[objc.ID](objref.IDOf(bcf), objc.RegisterName("setIncludesActualByteCount:"), includesActualByteCount)
 	return bcf
 }
 
-// WithAdaptive sets the adaptive.
+// WithAdaptive sets determines the display style of the size representation. The "adaptive" algorithm is platform specific and uses a different number of fraction digits based on the magnitude (in OS X v10.8: 0 fraction digits for bytes and KB; 1 fraction digits for MB; 2 for GB and above). Otherwise the result always tries to show at least three significant digits, introducing fraction digits as necessary. Default is `YES`.
 func (bcf *ByteCountFormatter) WithAdaptive(adaptive bool) *ByteCountFormatter {
 	objc.Send[objc.ID](objref.IDOf(bcf), objc.RegisterName("setAdaptive:"), adaptive)
 	return bcf
 }
 
-// WithZeroPadsFractionDigits sets the zero pads fraction digits.
+// WithZeroPadsFractionDigits sets determines whether to zero pad fraction digits so a consistent number of characters is displayed in a representation. Displaying values using zero pad fraction digits causes a consistent number of fraction digits to be displayed, causing updating displays to remain more stable. For instance, if the adaptive algorithm is used, this option formats 1.19 and 1.2 GB as "1.19 GB" and "1.20 GB", respectively, while without the option the latter would be displayed as "1.2 GB". Default value is `NO`.
 func (bcf *ByteCountFormatter) WithZeroPadsFractionDigits(zeroPadsFractionDigits bool) *ByteCountFormatter {
 	objc.Send[objc.ID](objref.IDOf(bcf), objc.RegisterName("setZeroPadsFractionDigits:"), zeroPadsFractionDigits)
 	return bcf
 }
 
-// WithFormattingContext sets the formatting context.
+// WithFormattingContext sets specify the formatting context for the formatted string. The default value is `NSFormattingContextUnknown`.
 func (bcf *ByteCountFormatter) WithFormattingContext(formattingContext FormattingContext) *ByteCountFormatter {
 	objc.Send[objc.ID](objref.IDOf(bcf), objc.RegisterName("setFormattingContext:"), formattingContext)
 	return bcf
@@ -122,7 +120,7 @@ func (bcf *ByteCountFormatter) WithScriptingProperties(scriptingProperties map[s
 	return bcf
 }
 
-// StringFromByteCount wraps the corresponding Objective-C method.
+// StringFromByteCount converts a byte count into a string without creating an `NSNumber` object. This is a convenience method on `stringForObjectValue:`.
 func (bcf *ByteCountFormatter) StringFromByteCount(byteCount int64) string {
 	defer runtime.KeepAlive(bcf)
 	_r := objc.Send[objc.ID](objref.IDOf(bcf), objc.RegisterName("stringFromByteCount:"), byteCount)
@@ -132,7 +130,7 @@ func (bcf *ByteCountFormatter) StringFromByteCount(byteCount int64) string {
 	return purego.GoString(_r)
 }
 
-// StringFromMeasurement wraps the corresponding Objective-C method.
+// StringFromMeasurement formats the value of the given measurement using the receiver's `countStyle`. Converts the measurement to the units allowed by the receiver's `allowedUnits` before formatting; depending on the value of the measurement, this may result in a string which implies an approximate value (e.g. if the measurement is too large to represent in `allowedUnits`, like `1e20 YB` expressed in `NSByteCountFormatterUseBytes`). Throws an exception if the given measurement's unit does not belong to the `NSUnitInformationStorage` dimension.
 func (bcf *ByteCountFormatter) StringFromMeasurement(measurement obj.Object) string {
 	defer runtime.KeepAlive(bcf)
 	defer runtime.KeepAlive(measurement)
@@ -143,63 +141,63 @@ func (bcf *ByteCountFormatter) StringFromMeasurement(measurement obj.Object) str
 	return purego.GoString(_r)
 }
 
-// AllowedUnits returns the allowed units.
+// AllowedUnits specify the units that can be used in the output. If the value is `NSByteCountFormatterUseDefault`, the formatter uses platform-appropriate settings; otherwise only the specified units are used. > Note: ZB and YB cannot be covered by the range of possible values, but you can still choose to use these units to get fractional display ("0.0035 ZB" for instance).
 func (bcf *ByteCountFormatter) AllowedUnits() ByteCountFormatterUnits {
 	defer runtime.KeepAlive(bcf)
 	_r := objc.Send[ByteCountFormatterUnits](objref.IDOf(bcf), objc.RegisterName("allowedUnits"))
 	return _r
 }
 
-// CountStyle returns the count style.
+// CountStyle specify the number of bytes to be used for kilobytes. The default setting is `NSByteCountFormatterCountStyleFile`, which is the system specific value for file and storage sizes.
 func (bcf *ByteCountFormatter) CountStyle() ByteCountFormatterCountStyle {
 	defer runtime.KeepAlive(bcf)
 	_r := objc.Send[ByteCountFormatterCountStyle](objref.IDOf(bcf), objc.RegisterName("countStyle"))
 	return _r
 }
 
-// AllowsNonnumericFormatting wraps the corresponding Objective-C method.
+// AllowsNonnumericFormatting reports whether to allow more natural display of some values. Displays a more natural display of some values, such as zero, where it may be displayed as "Zero KB", ignoring all other flags or options (with the exception of `NSByteCountFormatterUseBytes`, which would generate "Zero bytes"). The result is appropriate for standalone output. Special handling of certain values such as zero is especially important in some languages, so it's highly recommended that this property be left in its default state. Default value is `YES`.
 func (bcf *ByteCountFormatter) AllowsNonnumericFormatting() bool {
 	defer runtime.KeepAlive(bcf)
 	_r := objc.Send[bool](objref.IDOf(bcf), objc.RegisterName("allowsNonnumericFormatting"))
 	return _r
 }
 
-// IncludesUnit wraps the corresponding Objective-C method.
+// IncludesUnit reports whether to include the units in the resulting formatted string. If set to `YES` and `includesCount` is set to `NO`, no count is displayed. For example, a value of 723 KB is formatted as "KB". You can set this property and `includesCount` individually to get both parts, separately. Note that putting them together yourself via string concatenation may be incorrect for some locales. The default value is `YES`.
 func (bcf *ByteCountFormatter) IncludesUnit() bool {
 	defer runtime.KeepAlive(bcf)
 	_r := objc.Send[bool](objref.IDOf(bcf), objc.RegisterName("includesUnit"))
 	return _r
 }
 
-// IncludesCount wraps the corresponding Objective-C method.
+// IncludesCount reports whether to include the count in the resulting formatted string. If set to `YES` and `includesUnit` is set to `NO`, no unit is displayed. For example, a value of 723 KB is formatted as "723". You can set this property and `includesUnit` individually to get both parts, separately. Note that putting them together yourself via string concatenation may be incorrect for some locales. The default value is `YES`.
 func (bcf *ByteCountFormatter) IncludesCount() bool {
 	defer runtime.KeepAlive(bcf)
 	_r := objc.Send[bool](objref.IDOf(bcf), objc.RegisterName("includesCount"))
 	return _r
 }
 
-// IncludesActualByteCount wraps the corresponding Objective-C method.
+// IncludesActualByteCount reports whether to include the number of bytes after the formatted string. Setting this value to `YES` causes the byte count to be displayed parenthetically (localized as appropriate), for instance "723 KB (722,842 bytes)". This will happen only if needed, that is, the first part is already not showing the exact byte count. If `includesUnit` or `includesCount` are `NO`, then this setting has no effect. Default value is `NO`.
 func (bcf *ByteCountFormatter) IncludesActualByteCount() bool {
 	defer runtime.KeepAlive(bcf)
 	_r := objc.Send[bool](objref.IDOf(bcf), objc.RegisterName("includesActualByteCount"))
 	return _r
 }
 
-// IsAdaptive reports whether the object is adaptive.
+// IsAdaptive reports whether determines the display style of the size representation. The "adaptive" algorithm is platform specific and uses a different number of fraction digits based on the magnitude (in OS X v10.8: 0 fraction digits for bytes and KB; 1 fraction digits for MB; 2 for GB and above). Otherwise the result always tries to show at least three significant digits, introducing fraction digits as necessary. Default is `YES`.
 func (bcf *ByteCountFormatter) IsAdaptive() bool {
 	defer runtime.KeepAlive(bcf)
 	_r := objc.Send[bool](objref.IDOf(bcf), objc.RegisterName("isAdaptive"))
 	return _r
 }
 
-// ZeroPadsFractionDigits wraps the corresponding Objective-C method.
+// ZeroPadsFractionDigits reports whether to zero pad fraction digits so a consistent number of characters is displayed in a representation. Displaying values using zero pad fraction digits causes a consistent number of fraction digits to be displayed, causing updating displays to remain more stable. For instance, if the adaptive algorithm is used, this option formats 1.19 and 1.2 GB as "1.19 GB" and "1.20 GB", respectively, while without the option the latter would be displayed as "1.2 GB". Default value is `NO`.
 func (bcf *ByteCountFormatter) ZeroPadsFractionDigits() bool {
 	defer runtime.KeepAlive(bcf)
 	_r := objc.Send[bool](objref.IDOf(bcf), objc.RegisterName("zeroPadsFractionDigits"))
 	return _r
 }
 
-// FormattingContext returns the formatting context.
+// FormattingContext specify the formatting context for the formatted string. The default value is `NSFormattingContextUnknown`.
 func (bcf *ByteCountFormatter) FormattingContext() FormattingContext {
 	defer runtime.KeepAlive(bcf)
 	_r := objc.Send[FormattingContext](objref.IDOf(bcf), objc.RegisterName("formattingContext"))

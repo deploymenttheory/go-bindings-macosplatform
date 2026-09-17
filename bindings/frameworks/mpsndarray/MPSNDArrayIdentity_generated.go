@@ -5,7 +5,11 @@
 package mpsndarray
 
 import (
+	"runtime"
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -47,6 +51,14 @@ func arrayIdentityAdopt(id objc.ID) *ArrayIdentity {
 func NewArrayIdentity() *ArrayIdentity {
 	_id := objc.Send[objc.ID](objc.ID(_class("MPSNDArrayIdentity")), objc.RegisterName("new"))
 	return arrayIdentityAdopt(_id)
+}
+
+// ReshapeWithSourceArrayShape do a reshape operation on the CPU.
+func (ai *ArrayIdentity) ReshapeWithSourceArrayShape(sourceArray obj.Object, shape unsafe.Pointer) obj.Object {
+	defer runtime.KeepAlive(ai)
+	defer runtime.KeepAlive(sourceArray)
+	_r := objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("reshapeWithSourceArray:shape:"), objref.IDOf(sourceArray), shape)
+	return obj.Wrap(_r)
 }
 
 var _ ArrayUnaryKernelProvider = (*ArrayIdentity)(nil)

@@ -47,6 +47,7 @@ func NSInflectionRuleCanInflectLanguage(language *NSString) bool {
 	return _ret
 }
 
+// A Boolean value that indicates whether inflection will work in the language of the main bundle's first preferred localization.
 func NSInflectionRuleCanInflectPreferredLocalization() bool {
 	_ret := objc.Send[bool](objc.ID(_clsNSInflectionRule), _nSInflectionRuleSelCanInflectPreferredLocalization)
 	return _ret

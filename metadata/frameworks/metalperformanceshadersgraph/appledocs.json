@@ -87,6 +87,10 @@
       "doc": "A class that describes the random operation.",
       "url": "https://developer.apple.com/documentation/metalperformanceshadersgraph/mpsgraphrandomopdescriptor"
     },
+    "MPSGraphSDPADescriptor": {
+      "doc": "A descriptor that configures a scaled dot product attention (SDPA) operation.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshadersgraph/mpsgraphsdpadescriptor"
+    },
     "MPSGraphShapedType": {
       "doc": "The shaped type class for types on tensors with a shape and data type.",
       "url": "https://developer.apple.com/documentation/metalperformanceshadersgraph/mpsgraphshapedtype"
@@ -2389,6 +2393,12 @@
         "url": "https://developer.apple.com/documentation/metalperformanceshadersgraph/mpsgraphrandomopdescriptor/init(distribution:datatype:)"
       }
     },
+    "MPSGraphSDPADescriptor": {
+      "+descriptorWithScale:": {
+        "doc": "Creates a descriptor with the given scale and all other properties set to their defaults (no mask, isCausal = NO, no sinks).",
+        "url": "https://developer.apple.com/documentation/metalperformanceshadersgraph/mpsgraphsdpadescriptor/init(scale:)"
+      }
+    },
     "MPSGraphShapedType": {
       "-initWithShape:dataType:": {
         "doc": "Initializes a shaped type.",
@@ -3077,6 +3087,24 @@
       "standardDeviation": {
         "doc": "The standard deviation of the distribution.",
         "url": "https://developer.apple.com/documentation/metalperformanceshadersgraph/mpsgraphrandomopdescriptor/standarddeviation"
+      }
+    },
+    "MPSGraphSDPADescriptor": {
+      "isCausal": {
+        "doc": "When YES, a causal (lower-triangular) mask is applied so that each query position attends only to key positions at or before it. Mutually exclusive with maskTensor.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshadersgraph/mpsgraphsdpadescriptor/iscausal"
+      },
+      "maskTensor": {
+        "doc": "An optional additive mask tensor applied to the scaled QK^T scores before softmax. Must be broadcast-compatible with shape [batch, heads, T_q, T_kv]. Mutually exclusive with isCausal.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshadersgraph/mpsgraphsdpadescriptor/masktensor"
+      },
+      "scale": {
+        "doc": "The scale applied to the result of the query–key matrix multiply before softmax. Typically set to 1/sqrt(headDimension).",
+        "url": "https://developer.apple.com/documentation/metalperformanceshadersgraph/mpsgraphsdpadescriptor/scale"
+      },
+      "sinksTensor": {
+        "doc": "An optional attention-sinks tensor of shape [nHeads]. Each element seeds the online-softmax accumulator for the corresponding query head with a virtual token logit, causing real-token attention weights to sum to less than one.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshadersgraph/mpsgraphsdpadescriptor/sinkstensor"
       }
     },
     "MPSGraphShapedType": {

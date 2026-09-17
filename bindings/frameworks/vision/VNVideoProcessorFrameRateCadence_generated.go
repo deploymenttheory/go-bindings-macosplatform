@@ -15,8 +15,6 @@ import (
 // VideoProcessorFrameRateCadence is an idiomatic wrapper over the Objective-C class VNVideoProcessorFrameRateCadence.
 //
 // It embeds [VideoProcessorCadence], promoting that type's methods.
-//
-// An object that defines a frame-based cadence for processing a video stream.
 type VideoProcessorFrameRateCadence struct {
 	VideoProcessorCadence
 }

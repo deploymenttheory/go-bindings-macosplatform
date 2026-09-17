@@ -15,10 +15,6 @@
       "doc": "A language model built from custom training data.",
       "url": "https://developer.apple.com/documentation/speech/sfspeechlanguagemodel"
     },
-    "SFSpeechLanguageModelConfiguration": {
-      "doc": "An object describing the location of a custom language model and specialized vocabulary.",
-      "url": "https://developer.apple.com/documentation/speech/sfspeechlanguagemodelconfiguration"
-    },
     "SFSpeechRecognitionMetadata": {
       "doc": "The metadata of speech in the audio of a speech recognition request.",
       "url": "https://developer.apple.com/documentation/speech/sfspeechrecognitionmetadata"
@@ -67,10 +63,6 @@
     }
   },
   "enums": {
-    "SFSpeechErrorCode": {
-      "doc": "Error codes that can be thrown under the Speech framework’s error domain.",
-      "url": "https://developer.apple.com/documentation/speech/sfspeecherrorcode"
-    },
     "SFSpeechRecognitionTaskHint": {
       "doc": "The type of task for which you are using speech recognition.",
       "url": "https://developer.apple.com/documentation/speech/sfspeechrecognitiontaskhint",
@@ -218,7 +210,7 @@
     "SFAcousticFeature": {
       "acousticFeatureValuePerFrame": {
         "doc": "An array of feature values, one value per audio frame, corresponding to a transcript segment of recorded audio.",
-        "url": "https://developer.apple.com/documentation/speech/sfacousticfeature/acousticfeaturevalueperframe-5krkk"
+        "url": "https://developer.apple.com/documentation/speech/sfacousticfeature/acousticfeaturevalueperframe-gsz5"
       },
       "frameDuration": {
         "doc": "The duration of the audio frame.",

@@ -889,183 +889,393 @@ func MLMediaSourceiTunesIdentifier() *foundation.NSString {
 }
 
 // Deprecated: MediaLibrary.framework will be removed in a future OS version. Use Photos.framework or iTunesLibrary.framework instead.
-func MLPhotosAlbumTypeIdentifier() uintptr {
+func MLPhotosAlbumTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLPhotosAlbumTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: MediaLibrary.framework will be removed in a future OS version. Use Photos.framework or iTunesLibrary.framework instead.
-func MLPhotosAlbumsGroupTypeIdentifier() uintptr {
+func MLPhotosAlbumsGroupTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLPhotosAlbumsGroupTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: No longer supported
-func MLPhotosAllCollectionsGroupTypeIdentifier() uintptr {
+func MLPhotosAllCollectionsGroupTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLPhotosAllCollectionsGroupTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: No longer supported
-func MLPhotosAllMomentsGroupTypeIdentifier() uintptr {
+func MLPhotosAllMomentsGroupTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLPhotosAllMomentsGroupTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: MediaLibrary.framework will be removed in a future OS version. Use Photos.framework or iTunesLibrary.framework instead.
-func MLPhotosAllPhotosAlbumTypeIdentifier() uintptr {
+func MLPhotosAllPhotosAlbumTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLPhotosAllPhotosAlbumTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: No longer supported
-func MLPhotosAllYearsGroupTypeIdentifier() uintptr {
+func MLPhotosAllYearsGroupTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLPhotosAllYearsGroupTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: MediaLibrary.framework will be removed in a future OS version. Use Photos.framework or iTunesLibrary.framework instead.
-func MLPhotosAnimatedGroupTypeIdentifier() uintptr {
+func MLPhotosAnimatedGroupTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLPhotosAnimatedGroupTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: MediaLibrary.framework will be removed in a future OS version. Use Photos.framework or iTunesLibrary.framework instead.
-func MLPhotosBurstGroupTypeIdentifier() uintptr {
+func MLPhotosBurstGroupTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLPhotosBurstGroupTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: No longer supported
-func MLPhotosCollectionGroupTypeIdentifier() uintptr {
+func MLPhotosCollectionGroupTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLPhotosCollectionGroupTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: MediaLibrary.framework will be removed in a future OS version. Use Photos.framework or iTunesLibrary.framework instead.
-func MLPhotosDepthEffectGroupTypeIdentifier() uintptr {
+func MLPhotosDepthEffectGroupTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLPhotosDepthEffectGroupTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: MediaLibrary.framework will be removed in a future OS version. Use Photos.framework or iTunesLibrary.framework instead.
-func MLPhotosFacesAlbumTypeIdentifier() uintptr {
+func MLPhotosFacesAlbumTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLPhotosFacesAlbumTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: MediaLibrary.framework will be removed in a future OS version. Use Photos.framework or iTunesLibrary.framework instead.
-func MLPhotosFavoritesGroupTypeIdentifier() uintptr {
+func MLPhotosFavoritesGroupTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLPhotosFavoritesGroupTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: MediaLibrary.framework will be removed in a future OS version. Use Photos.framework or iTunesLibrary.framework instead.
-func MLPhotosFolderTypeIdentifier() uintptr {
+func MLPhotosFolderTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLPhotosFolderTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: MediaLibrary.framework will be removed in a future OS version. Use Photos.framework or iTunesLibrary.framework instead.
-func MLPhotosFrontCameraGroupTypeIdentifier() uintptr {
+func MLPhotosFrontCameraGroupTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLPhotosFrontCameraGroupTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: MediaLibrary.framework will be removed in a future OS version. Use Photos.framework or iTunesLibrary.framework instead.
-func MLPhotosLastImportGroupTypeIdentifier() uintptr {
+func MLPhotosLastImportGroupTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLPhotosLastImportGroupTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: MediaLibrary.framework will be removed in a future OS version. Use Photos.framework or iTunesLibrary.framework instead.
-func MLPhotosLivePhotosGroupTypeIdentifier() uintptr {
+func MLPhotosLivePhotosGroupTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLPhotosLivePhotosGroupTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: MediaLibrary.framework will be removed in a future OS version. Use Photos.framework or iTunesLibrary.framework instead.
-func MLPhotosLongExposureGroupTypeIdentifier() uintptr {
+func MLPhotosLongExposureGroupTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLPhotosLongExposureGroupTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: No longer supported
-func MLPhotosMomentGroupTypeIdentifier() uintptr {
+func MLPhotosMomentGroupTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLPhotosMomentGroupTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: MediaLibrary.framework will be removed in a future OS version. Use Photos.framework or iTunesLibrary.framework instead.
-func MLPhotosMyPhotoStreamTypeIdentifier() uintptr {
+func MLPhotosMyPhotoStreamTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLPhotosMyPhotoStreamTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: MediaLibrary.framework will be removed in a future OS version. Use Photos.framework or iTunesLibrary.framework instead.
-func MLPhotosPanoramasGroupTypeIdentifier() uintptr {
+func MLPhotosPanoramasGroupTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLPhotosPanoramasGroupTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: MediaLibrary.framework will be removed in a future OS version. Use Photos.framework or iTunesLibrary.framework instead.
-func MLPhotosPublishedAlbumTypeIdentifier() uintptr {
+func MLPhotosPublishedAlbumTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLPhotosPublishedAlbumTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: MediaLibrary.framework will be removed in a future OS version. Use Photos.framework or iTunesLibrary.framework instead.
-func MLPhotosRootGroupTypeIdentifier() uintptr {
+func MLPhotosRootGroupTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLPhotosRootGroupTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: MediaLibrary.framework will be removed in a future OS version. Use Photos.framework or iTunesLibrary.framework instead.
-func MLPhotosScreenshotGroupTypeIdentifier() uintptr {
+func MLPhotosScreenshotGroupTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLPhotosScreenshotGroupTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: MediaLibrary.framework will be removed in a future OS version. Use Photos.framework or iTunesLibrary.framework instead.
-func MLPhotosSharedGroupTypeIdentifier() uintptr {
+func MLPhotosSharedGroupTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLPhotosSharedGroupTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: MediaLibrary.framework will be removed in a future OS version. Use Photos.framework or iTunesLibrary.framework instead.
-func MLPhotosSharedPhotoStreamTypeIdentifier() uintptr {
+func MLPhotosSharedPhotoStreamTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLPhotosSharedPhotoStreamTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: MediaLibrary.framework will be removed in a future OS version. Use Photos.framework or iTunesLibrary.framework instead.
-func MLPhotosSloMoGroupTypeIdentifier() uintptr {
+func MLPhotosSloMoGroupTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLPhotosSloMoGroupTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: MediaLibrary.framework will be removed in a future OS version. Use Photos.framework or iTunesLibrary.framework instead.
-func MLPhotosSmartAlbumTypeIdentifier() uintptr {
+func MLPhotosSmartAlbumTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLPhotosSmartAlbumTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: MediaLibrary.framework will be removed in a future OS version. Use Photos.framework or iTunesLibrary.framework instead.
-func MLPhotosTimelapseGroupTypeIdentifier() uintptr {
+func MLPhotosTimelapseGroupTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLPhotosTimelapseGroupTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: MediaLibrary.framework will be removed in a future OS version. Use Photos.framework or iTunesLibrary.framework instead.
-func MLPhotosVideosGroupTypeIdentifier() uintptr {
+func MLPhotosVideosGroupTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLPhotosVideosGroupTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: No longer supported
-func MLPhotosYearGroupTypeIdentifier() uintptr {
+func MLPhotosYearGroupTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLPhotosYearGroupTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MLiMovieEventCalendarGroupTypeIdentifier() *foundation.NSString {
@@ -1494,9 +1704,16 @@ func MLiTunesMusicPlaylistTypeIdentifier() *foundation.NSString {
 }
 
 // Deprecated: MediaLibrary.framework will be removed in a future OS version. Use Photos.framework or iTunesLibrary.framework instead.
-func MLiTunesMusicVideosPlaylistTypeIdentifier() uintptr {
+func MLiTunesMusicVideosPlaylistTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLiTunesMusicVideosPlaylistTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MLiTunesPlaylistTypeIdentifier() *foundation.NSString {
@@ -1587,9 +1804,16 @@ func MLiTunesTVShowsPlaylistTypeIdentifier() *foundation.NSString {
 }
 
 // Deprecated: MediaLibrary.framework will be removed in a future OS version. Use Photos.framework or iTunesLibrary.framework instead.
-func MLiTunesVideoPlaylistTypeIdentifier() uintptr {
+func MLiTunesVideoPlaylistTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLiTunesVideoPlaylistTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: MediaLibrary.framework will be removed in a future OS version. Use Photos.framework or iTunesLibrary.framework instead.

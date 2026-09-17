@@ -18,7 +18,7 @@ import (
 
 // LivePhotoView is an idiomatic wrapper over the Objective-C class PHLivePhotoView.
 //
-// A view that displays a Live Photo—a picture that also includes motion and sound from the moments just before and after its capture.
+// A view that displays a Live Photo.
 type LivePhotoView struct {
 	objref.Handle
 }

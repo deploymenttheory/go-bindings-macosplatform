@@ -18,17 +18,25 @@ type WKWebpagePreferences struct {
 }
 
 var (
-	_clsWKWebpagePreferences                                  = _objcClass("WKWebpagePreferences")
-	_wKWebpagePreferencesSelPreferredContentMode              = objc.RegisterName("preferredContentMode")
-	_wKWebpagePreferencesSelSetPreferredContentMode           = objc.RegisterName("setPreferredContentMode:")
-	_wKWebpagePreferencesSelAllowsContentJavaScript           = objc.RegisterName("allowsContentJavaScript")
-	_wKWebpagePreferencesSelSetAllowsContentJavaScript        = objc.RegisterName("setAllowsContentJavaScript:")
-	_wKWebpagePreferencesSelIsLockdownModeEnabled             = objc.RegisterName("isLockdownModeEnabled")
-	_wKWebpagePreferencesSelSetLockdownModeEnabled            = objc.RegisterName("setLockdownModeEnabled:")
-	_wKWebpagePreferencesSelPreferredHTTPSNavigationPolicy    = objc.RegisterName("preferredHTTPSNavigationPolicy")
-	_wKWebpagePreferencesSelSetPreferredHTTPSNavigationPolicy = objc.RegisterName("setPreferredHTTPSNavigationPolicy:")
-	_wKWebpagePreferencesSelSecurityRestrictionMode           = objc.RegisterName("securityRestrictionMode")
-	_wKWebpagePreferencesSelSetSecurityRestrictionMode        = objc.RegisterName("setSecurityRestrictionMode:")
+	_clsWKWebpagePreferences                                     = _objcClass("WKWebpagePreferences")
+	_wKWebpagePreferencesSelPreferredContentMode                 = objc.RegisterName("preferredContentMode")
+	_wKWebpagePreferencesSelSetPreferredContentMode              = objc.RegisterName("setPreferredContentMode:")
+	_wKWebpagePreferencesSelAllowsContentJavaScript              = objc.RegisterName("allowsContentJavaScript")
+	_wKWebpagePreferencesSelSetAllowsContentJavaScript           = objc.RegisterName("setAllowsContentJavaScript:")
+	_wKWebpagePreferencesSelIsLockdownModeEnabled                = objc.RegisterName("isLockdownModeEnabled")
+	_wKWebpagePreferencesSelSetLockdownModeEnabled               = objc.RegisterName("setLockdownModeEnabled:")
+	_wKWebpagePreferencesSelPreferredHTTPSNavigationPolicy       = objc.RegisterName("preferredHTTPSNavigationPolicy")
+	_wKWebpagePreferencesSelSetPreferredHTTPSNavigationPolicy    = objc.RegisterName("setPreferredHTTPSNavigationPolicy:")
+	_wKWebpagePreferencesSelSecurityRestrictionMode              = objc.RegisterName("securityRestrictionMode")
+	_wKWebpagePreferencesSelSetSecurityRestrictionMode           = objc.RegisterName("setSecurityRestrictionMode:")
+	_wKWebpagePreferencesSelAlternateRequest                     = objc.RegisterName("alternateRequest")
+	_wKWebpagePreferencesSelSetAlternateRequest                  = objc.RegisterName("setAlternateRequest:")
+	_wKWebpagePreferencesSelOverrideReferrer                     = objc.RegisterName("overrideReferrer")
+	_wKWebpagePreferencesSelSetOverrideReferrer                  = objc.RegisterName("setOverrideReferrer:")
+	_wKWebpagePreferencesSelAllowsJSHandleCreationInPageWorld    = objc.RegisterName("allowsJSHandleCreationInPageWorld")
+	_wKWebpagePreferencesSelSetAllowsJSHandleCreationInPageWorld = objc.RegisterName("setAllowsJSHandleCreationInPageWorld:")
+	_wKWebpagePreferencesSelGlobalPrivacyControlEnabled          = objc.RegisterName("globalPrivacyControlEnabled")
+	_wKWebpagePreferencesSelSetGlobalPrivacyControlEnabled       = objc.RegisterName("setGlobalPrivacyControlEnabled:")
 )
 
 func WKWebpagePreferencesFromID(id objc.ID) *WKWebpagePreferences {
@@ -127,5 +135,81 @@ func (o *WKWebpagePreferences) SecurityRestrictionMode() WKSecurityRestrictionMo
 func (o *WKWebpagePreferences) SetSecurityRestrictionMode(securityRestrictionMode WKSecurityRestrictionMode) {
 	purego.Main(func() {
 		o.Ptr().Send(_wKWebpagePreferencesSelSetSecurityRestrictionMode, securityRestrictionMode)
+	})
+}
+
+func (o *WKWebpagePreferences) AlternateRequest() *foundation.NSURLRequest {
+	var _mainthread0 *foundation.NSURLRequest
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSURLRequest {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebpagePreferencesSelAlternateRequest)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSURLRequestFromID(_ret)
+		}()
+	})
+	return _mainthread0
+}
+
+func (o *WKWebpagePreferences) SetAlternateRequest(alternateRequest *foundation.NSURLRequest) {
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebpagePreferencesSelSetAlternateRequest, alternateRequest.Ptr())
+	})
+}
+
+func (o *WKWebpagePreferences) OverrideReferrer() *foundation.NSString {
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebpagePreferencesSelOverrideReferrer)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
+}
+
+func (o *WKWebpagePreferences) SetOverrideReferrer(overrideReferrer *foundation.NSString) {
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebpagePreferencesSelSetOverrideReferrer, overrideReferrer.Ptr())
+	})
+}
+
+// @abstract A boolean indicating whether `window.webkit.createJSHandle` will be available in `[WKContentWorld pageWorld]` @discussion The default value is false.
+func (o *WKWebpagePreferences) AllowsJSHandleCreationInPageWorld() bool {
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKWebpagePreferencesSelAllowsJSHandleCreationInPageWorld)
+			return _ret
+		}()
+	})
+	return _mainthread0
+}
+
+func (o *WKWebpagePreferences) SetAllowsJSHandleCreationInPageWorld(allowsJSHandleCreationInPageWorld bool) {
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebpagePreferencesSelSetAllowsJSHandleCreationInPageWorld, allowsJSHandleCreationInPageWorld)
+	})
+}
+
+// @abstract Whether the Global Privacy Control (GPC) signal is enabled for the navigation. @discussion The default value is NO. When enabled, both navigator.globalPrivacyControl and the Sec-GPC: 1 request header are active for the main frame, its subframes, and their subresources.
+func (o *WKWebpagePreferences) GlobalPrivacyControlEnabled() bool {
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKWebpagePreferencesSelGlobalPrivacyControlEnabled)
+			return _ret
+		}()
+	})
+	return _mainthread0
+}
+
+func (o *WKWebpagePreferences) SetGlobalPrivacyControlEnabled(globalPrivacyControlEnabled bool) {
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebpagePreferencesSelSetGlobalPrivacyControlEnabled, globalPrivacyControlEnabled)
 	})
 }

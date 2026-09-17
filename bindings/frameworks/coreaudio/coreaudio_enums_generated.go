@@ -722,6 +722,7 @@ const (
 	KAudioDevicePropertySubVolumeRangeDecibels                         = 1937138723
 	KAudioDevicePropertySubVolumeScalar                                = 1937140845
 	KAudioDevicePropertySubVolumeScalarToDecibels                      = 1937125988
+	KAudioDevicePropertySuggestedReferenceDevice                       = 1701802596
 	KAudioDevicePropertySupportsMixing                                 = 1835628607
 	KAudioDevicePropertyTalkback                                       = 1952541794
 	KAudioDevicePropertyTransportType                                  = 1953653102
@@ -754,6 +755,8 @@ const (
 	KAudioDeviceTransportTypeFireWire                                     = 825440564
 	KAudioDeviceTransportTypeHDMI                                         = 1751412073
 	KAudioDeviceTransportTypePCI                                          = 1885563168
+	KAudioDeviceTransportTypeRemoteScreen                                 = 1920164722
+	KAudioDeviceTransportTypeRemoteStreaming                              = 1920169074
 	KAudioDeviceTransportTypeThunderbolt                                  = 1953002862
 	KAudioDeviceTransportTypeUSB                                          = 1970496032
 	KAudioDeviceTransportTypeUnknown                                      = 0

@@ -54,6 +54,11 @@ func SCStreamFrameInfoPresenterOverlayContentRect() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("SCStreamFrameInfoPresenterOverlayContentRect")))
 }
 
+// SCStreamFrameInfoVideoOrientation returns the string constant SCStreamFrameInfoVideoOrientation, for use as a dictionary key or argument.
+func SCStreamFrameInfoVideoOrientation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SCStreamFrameInfoVideoOrientation")))
+}
+
 // SCStreamErrorDomain returns the string constant SCStreamErrorDomain, for use as a dictionary key or argument.
 func SCStreamErrorDomain() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("SCStreamErrorDomain")))

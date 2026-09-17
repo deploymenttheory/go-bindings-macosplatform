@@ -148,9 +148,16 @@ func (csp *ContentSharingPicker) MaximumStreamCount() *foundation.Number {
 	return foundation.NumberFromID(_r)
 }
 
-// IsActive reports whether active A picker needs to be marked as active for its UI to appear. If `startPickingContent` is called and the picker is not marked as active, the picker will not appear.
+// IsActive reports whether active A picker needs to be marked as active to enable user interaction with system UI (displayed picker, video menu bar, directly from a window). If the picker is not marked as active, when present is called, the displayed picker UI will not appear, and user will not be able to share content from system UI to your application.
 func (csp *ContentSharingPicker) IsActive() bool {
 	defer runtime.KeepAlive(csp)
 	_r := objc.Send[bool](objref.IDOf(csp), objc.RegisterName("isActive"))
+	return _r
+}
+
+// IsAvailable reports whether available Indicates whether screen recording is available on this device. Returns true if screen recording is supported and allowed on this device.
+func (csp *ContentSharingPicker) IsAvailable() bool {
+	defer runtime.KeepAlive(csp)
+	_r := objc.Send[bool](objref.IDOf(csp), objc.RegisterName("isAvailable"))
 	return _r
 }

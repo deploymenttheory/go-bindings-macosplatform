@@ -4,8 +4,6 @@
 package photos
 
 import (
-	"unsafe"
-
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/foundation"
@@ -20,10 +18,12 @@ type PHCloudIdentifier struct {
 }
 
 var (
-	_clsPHCloudIdentifier                    = _objcClass("PHCloudIdentifier")
-	_pHCloudIdentifierSelInitWithStringValue = objc.RegisterName("initWithStringValue:")
-	_pHCloudIdentifierSelNotFoundIdentifier  = objc.RegisterName("notFoundIdentifier")
-	_pHCloudIdentifierSelStringValue         = objc.RegisterName("stringValue")
+	_clsPHCloudIdentifier                            = _objcClass("PHCloudIdentifier")
+	_pHCloudIdentifierSelInitWithArchivalStringValue = objc.RegisterName("initWithArchivalStringValue:")
+	_pHCloudIdentifierSelInitWithStringValue         = objc.RegisterName("initWithStringValue:")
+	_pHCloudIdentifierSelNotFoundIdentifier          = objc.RegisterName("notFoundIdentifier")
+	_pHCloudIdentifierSelArchivalStringValue         = objc.RegisterName("archivalStringValue")
+	_pHCloudIdentifierSelStringValue                 = objc.RegisterName("stringValue")
 )
 
 func PHCloudIdentifierFromID(id objc.ID) *PHCloudIdentifier {
@@ -36,7 +36,17 @@ func PHCloudIdentifierFromID(id objc.ID) *PHCloudIdentifier {
 	return o
 }
 
+// Archival string can be used to serialize and deserialize the PHCloudIdentifier (Note the archival format is compatible with strings archived via the deprecated API stringValue)
+func (o *PHCloudIdentifier) InitWithArchivalStringValue(archivalString *foundation.NSString) *PHCloudIdentifier {
+	_ret := objc.Send[objc.ID](o.Ptr(), _pHCloudIdentifierSelInitWithArchivalStringValue, archivalString.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return PHCloudIdentifierFromID(_ret)
+}
+
 // Deserializes a cloud identifier from its string value.
+// Deprecated: Use initWithArchivalStringValue: instead
 func (o *PHCloudIdentifier) InitWithStringValue(stringValue *foundation.NSString) *PHCloudIdentifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHCloudIdentifierSelInitWithStringValue, stringValue.Ptr())
 	if _ret != 0 {
@@ -46,14 +56,24 @@ func (o *PHCloudIdentifier) InitWithStringValue(stringValue *foundation.NSString
 }
 
 // DEPRECATED: If there is a failure to determine the global identifier for a local identifier, the notFoundIdentifier is provided in that array slot.
-// Deprecated: since macOS 12.
-func PHCloudIdentifierNotFoundIdentifier() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](objc.ID(_clsPHCloudIdentifier), _pHCloudIdentifierSelNotFoundIdentifier)
-	return _ret
+// Deprecated: Check for PHPhotosErrorIdentifierNotFound in PHCloudIdentifierMapping.error
+func PHCloudIdentifierNotFoundIdentifier() *PHCloudIdentifier {
+	_ret := objc.Send[objc.ID](objc.ID(_clsPHCloudIdentifier), _pHCloudIdentifierSelNotFoundIdentifier)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return PHCloudIdentifierFromID(_ret)
 }
 
-// For use in serialization
-// Deprecated: since macOS 12.
+func (o *PHCloudIdentifier) ArchivalStringValue() *foundation.NSString {
+	_ret := objc.Send[objc.ID](o.Ptr(), _pHCloudIdentifierSelArchivalStringValue)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSStringFromID(_ret)
+}
+
+// Deprecated: since macOS 27.
 func (o *PHCloudIdentifier) StringValue() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHCloudIdentifierSelStringValue)
 	if _ret != 0 {

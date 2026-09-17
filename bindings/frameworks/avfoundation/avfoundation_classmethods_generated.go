@@ -55,7 +55,7 @@ func AllExportPresets() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// ExportPresetsCompatibleWithAsset returns compatible export presets for the asset.
+// ExportPresetsCompatibleWithAsset returns only the identifiers compatible with the given AVAsset object. Not all export presets are compatible with all AVAssets. For example an video only asset is not compatible with an audio only preset. This method returns only the identifiers for presets that will be compatible with the given asset. You should pass in an “AVAsset“ that is ready to be exported. In order to ensure that the setup and running of the export operation will succeed using a given preset no significant changes (such as adding or deleting tracks) should be made to the asset between retrieving compatible identifiers and performing the export operation. This method will access the tracks property of the AVAsset to build the returned NSArray. To avoid blocking the calling thread, the tracks property should be loaded using the AVAsynchronousKeyValueLoading protocol before calling this method. - Parameter asset: An AVAsset object that is intended to be exported. - Returns: An NSArray containing NSString values for the identifiers of compatible export types. The array is a complete list of the valid identifiers that can be used as arguments to initWithAsset:presetName: with the specified asset.
 func ExportPresetsCompatibleWithAsset(asset *Asset) []string {
 	defer runtime.KeepAlive(asset)
 	_r := objc.Send[objc.ID](objc.ID(_class("AVAssetExportSession")), objc.RegisterName("exportPresetsCompatibleWithAsset:"), objref.IDOf(asset))
@@ -248,6 +248,15 @@ func AssetWriterInputTaggedPixelBufferGroupAdaptorWithAssetWriterInputSourcePixe
 	return AssetWriterInputTaggedPixelBufferGroupAdaptorFromID(_r)
 }
 
+// SegmentBoundaryRecommendationsForVideoAVAssetTrackMinimumSegmentDurationMinimumSegmentFrameCount returns segment boundary recommendations for a given source video asset track.
+func SegmentBoundaryRecommendationsForVideoAVAssetTrackMinimumSegmentDurationMinimumSegmentFrameCount(videoAssetTrack *AssetTrack, minimumSegmentDuration coremedia.CMTime, minimumSegmentFrameCount int) []*PlannedVideoSegmentConfiguration {
+	defer runtime.KeepAlive(videoAssetTrack)
+	_r := objc.Send[objc.ID](objc.ID(_class("AVAssetWritingPlanner")), objc.RegisterName("segmentBoundaryRecommendationsForVideoAVAssetTrack:minimumSegmentDuration:minimumSegmentFrameCount:"), objref.IDOf(videoAssetTrack), minimumSegmentDuration, minimumSegmentFrameCount)
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *PlannedVideoSegmentConfiguration {
+		return PlannedVideoSegmentConfigurationFromID(_id)
+	})
+}
+
 // CaptionConversionValidatorWithCaptionsTimeRangeConversionSettings a convenience initializer to create an object that validates captions for a conversion operation.
 func CaptionConversionValidatorWithCaptionsTimeRangeConversionSettings(captions []*Caption, timeRange coremedia.CMTimeRange, conversionSettings obj.Object) *CaptionConversionValidator {
 	defer runtime.KeepAlive(conversionSettings)
@@ -322,6 +331,18 @@ func AvailableOutputFileTypes() []obj.Object {
 func AVCaptureAudioPreviewOutputNew() *CaptureAudioPreviewOutput {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVCaptureAudioPreviewOutput")), objc.RegisterName("new"))
 	return CaptureAudioPreviewOutputFromID(_r)
+}
+
+// AVCaptureBroadcastVideoOutputNew returns the av capture broadcast video output new.
+func AVCaptureBroadcastVideoOutputNew() *CaptureBroadcastVideoOutput {
+	_r := objc.Send[objc.ID](objc.ID(_class("AVCaptureBroadcastVideoOutput")), objc.RegisterName("new"))
+	return CaptureBroadcastVideoOutputFromID(_r)
+}
+
+// MaxSupportedBufferedFrameCount returns the maximum value supported for maxBufferedFrameCount. This class property returns the system-imposed limit for buffered frame count to ensure optimal performance and memory usage in broadcast workflows. The limit is determined based on system capabilities. ## See Also - “maxBufferedFrameCount“
+func MaxSupportedBufferedFrameCount() int {
+	_r := objc.Send[int](objc.ID(_class("AVCaptureBroadcastVideoOutput")), objc.RegisterName("maxSupportedBufferedFrameCount"))
+	return _r
 }
 
 // ConnectionWithInputPortsOutput returns a capture connection that represents a connection between multiple input ports and an output.
@@ -771,6 +792,12 @@ func MediaSelectionOptionsFromArrayWithoutMediaCharacteristics(mediaSelectionOpt
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *MediaSelectionOption { return MediaSelectionOptionFromID(_id) })
 }
 
+// CinematicVideoMetadataFormatDescription returns the format description for Cinematic video timed metadata sample buffers. Use this format description when creating your “AVAssetWriterInput“ for the Cinematic video timed metadata track.
+func CinematicVideoMetadataFormatDescription() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("AVMetadataCinematicVideoMetadataObject")), objc.RegisterName("cinematicVideoMetadataFormatDescription"))
+	return obj.Wrap(_r)
+}
+
 // MetadataItemsFromArrayFilteredAndSortedAccordingToPreferredLanguages returns metadata items whose locales match one of the specified language identifiers.
 func MetadataItemsFromArrayFilteredAndSortedAccordingToPreferredLanguages(metadataItems []*MetadataItem, preferredLanguages []string) []*MetadataItem {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVMetadataItem")), objc.RegisterName("metadataItemsFromArray:filteredAndSortedAccordingToPreferredLanguages:"), purego.SliceToNSArray(metadataItems, func(_v *MetadataItem) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(preferredLanguages, func(_v string) objc.ID { return purego.NSString(_v) }))
@@ -1202,6 +1229,18 @@ func PortraitEffectsMatteFromDictionaryRepresentation(imageSourceAuxDataInfoDict
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return PortraitEffectsMatteFromID(_r), nil
+}
+
+// SharedStorage returns the singleton instance for Pro Video Storage. - Returns: An instance of the Pro Video Storage class if supported; otherwise, `nil`.
+func SharedStorage() *ProVideoStorage {
+	_r := objc.Send[objc.ID](objc.ID(_class("AVProVideoStorage")), objc.RegisterName("sharedStorage"))
+	return ProVideoStorageFromID(_r)
+}
+
+// AVProVideoStorageIsSupported reports whether pro Video Storage is supported in its current configuration. - Returns: `YES` if the device and OS support Pro Video Storage functionality; otherwise, `NO`.
+func AVProVideoStorageIsSupported() bool {
+	_r := objc.Send[bool](objc.ID(_class("AVProVideoStorage")), objc.RegisterName("isSupported"))
+	return _r
 }
 
 // QueuePlayerWithItems returns an object that plays a queue of items.

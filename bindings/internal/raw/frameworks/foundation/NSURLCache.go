@@ -9,8 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An object that maps URL requests to cached response objects.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsurlcache
 type NSURLCache struct {
 	NSObject
@@ -48,7 +46,7 @@ func NSURLCacheFromID(id objc.ID) *NSURLCache {
 	return o
 }
 
-// @method initWithMemoryCapacity:diskCapacity:diskPath: @abstract Initializes an NSURLCache with the given capacity and path. @discussion The returned NSURLCache is backed by disk, so developers can be more liberal with space when choosing the capacity for this kind of cache. A disk cache measured in the tens of megabytes should be acceptable in most cases. @param memoryCapacity the capacity, measured in bytes, for the cache in memory. @param diskCapacity the capacity, measured in bytes, for the cache on disk. @param path the path on disk where the cache data is stored. @result an initialized NSURLCache, with the given capacity, backed by disk.
+// Initializes an `NSURLCache` with the given capacity and path. The returned `NSURLCache` is backed by disk. A disk cache measured in the tens of megabytes should be acceptable in most cases. - Parameters: - memoryCapacity: The capacity, measured in bytes, for the cache in memory. - diskCapacity: The capacity, measured in bytes, for the cache on disk. - path: The path on disk where the cache data is stored. - Returns: An initialized `NSURLCache`, with the given capacity, backed by disk.
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
 func (o *NSURLCache) InitWithMemoryCapacityDiskCapacityDiskPath(memoryCapacity uint, diskCapacity uint, path *NSString) *NSURLCache {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLCacheSelInitWithMemoryCapacityDiskCapacityDiskPath, memoryCapacity, diskCapacity, path.Ptr())
@@ -58,7 +56,7 @@ func (o *NSURLCache) InitWithMemoryCapacityDiskCapacityDiskPath(memoryCapacity u
 	return NSURLCacheFromID(_ret)
 }
 
-// Creates a URL cache object with the specified memory and disk capacities, in the specified directory.
+// Initializes an `NSURLCache` with the given capacity and directory. - Parameters: - memoryCapacity: The capacity, measured in bytes, for the cache in memory. Or `0` to disable memory cache. - diskCapacity: The capacity, measured in bytes, for the cache on disk. Or `0` to disable disk cache. - directoryURL: The path to a directory on disk where the cache data is stored. Or `nil` for default directory. - Returns: An initialized `NSURLCache`, with the given capacity, optionally backed by disk.
 func (o *NSURLCache) InitWithMemoryCapacityDiskCapacityDirectoryURL(memoryCapacity uint, diskCapacity uint, directoryURL *NSURL) *NSURLCache {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLCacheSelInitWithMemoryCapacityDiskCapacityDirectoryURL, memoryCapacity, diskCapacity, directoryURL.Ptr())
 	if _ret != 0 {
@@ -67,7 +65,7 @@ func (o *NSURLCache) InitWithMemoryCapacityDiskCapacityDirectoryURL(memoryCapaci
 	return NSURLCacheFromID(_ret)
 }
 
-// @method cachedResponseForRequest: @abstract Returns the NSCachedURLResponse stored in the cache with the given request. @discussion The method returns nil if there is no NSCachedURLResponse stored using the given request. @param request the NSURLRequest to use as a key for the lookup. @result The NSCachedURLResponse stored in the cache with the given request, or nil if there is no NSCachedURLResponse stored with the given request.
+// Returns the cached URL response in the cache for the specified URL request. Returns `nil` if there is no `NSCachedURLResponse` stored using the given request. - Parameter request: The `NSURLRequest` to use as a key for the lookup. - Returns: The `NSCachedURLResponse` stored in the cache with the given request, or `nil` if there is no cached response.
 func (o *NSURLCache) CachedResponseForRequest(request *NSURLRequest) *NSCachedURLResponse {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLCacheSelCachedResponseForRequest, request.Ptr())
 	if _ret != 0 {
@@ -76,27 +74,27 @@ func (o *NSURLCache) CachedResponseForRequest(request *NSURLRequest) *NSCachedUR
 	return NSCachedURLResponseFromID(_ret)
 }
 
-// @method storeCachedResponse:forRequest: @abstract Stores the given NSCachedURLResponse in the cache using the given request. @param cachedResponse The cached response to store. @param request the NSURLRequest to use as a key for the storage.
+// Stores a cached URL response for a specified request. - Parameters: - cachedResponse: The cached response to store. - request: The `NSURLRequest` to use as a key for the storage.
 func (o *NSURLCache) StoreCachedResponseForRequest(cachedResponse *NSCachedURLResponse, request *NSURLRequest) {
 	o.Ptr().Send(_nSURLCacheSelStoreCachedResponseForRequest, cachedResponse.Ptr(), request.Ptr())
 }
 
-// @method removeCachedResponseForRequest: @abstract Removes the NSCachedURLResponse from the cache that is stored using the given request. @discussion No action is taken if there is no NSCachedURLResponse stored with the given request. @param request the NSURLRequest to use as a key for the lookup.
+// Removes the cached URL response for a specified request. No action is taken if there is no `NSCachedURLResponse` stored with the given request. - Parameter request: The `NSURLRequest` to use as a key for the lookup.
 func (o *NSURLCache) RemoveCachedResponseForRequest(request *NSURLRequest) {
 	o.Ptr().Send(_nSURLCacheSelRemoveCachedResponseForRequest, request.Ptr())
 }
 
-// @method removeAllCachedResponses @abstract Clears the given cache, removing all NSCachedURLResponse objects that it stores.
+// Clears the cache, removing all `NSCachedURLResponse` objects that it stores.
 func (o *NSURLCache) RemoveAllCachedResponses() {
 	o.Ptr().Send(_nSURLCacheSelRemoveAllCachedResponses)
 }
 
-// @method removeCachedResponsesSince: @abstract Clears the given cache of any cached responses since the provided date.
+// Clears the cache of any cached responses since the provided date.
 func (o *NSURLCache) RemoveCachedResponsesSinceDate(date *NSDate) {
 	o.Ptr().Send(_nSURLCacheSelRemoveCachedResponsesSinceDate, date.Ptr())
 }
 
-// @property sharedURLCache @abstract Returns the shared NSURLCache instance or sets the NSURLCache instance shared by all clients of the current process. This will be the new object returned when calls to the <tt>sharedURLCache</tt> method are made. @discussion Unless set explicitly through a call to <tt>+setSharedURLCache:</tt>, this method returns an NSURLCache instance created with the following default values: <ul> <li>Memory capacity: 4 megabytes (4 * 1024 * 1024 bytes) <li>Disk capacity: 20 megabytes (20 * 1024 * 1024 bytes) <li>Disk path: <nobr>(user home directory)/Library/Caches/(application bundle id)</nobr> </ul> <p>Users who do not have special caching requirements or constraints should find the default shared cache instance acceptable. If this default shared cache instance is not acceptable, <tt>+setSharedURLCache:</tt> can be called to set a different NSURLCache instance to be returned from this method. Callers should take care to ensure that the setter is called at a time when no other caller has a reference to the previously-set shared URL cache. This is to prevent storing cache data from becoming unexpectedly unretrievable. @result the shared NSURLCache instance.
+// The shared URL cache instance. Unless set explicitly, this method returns an `NSURLCache` instance created with the following default values: - Memory capacity: 4 megabytes (4 * 1024 * 1024 bytes) - Disk capacity: 20 megabytes (20 * 1024 * 1024 bytes) - Disk path: `(user home directory)/Library/Caches/(application bundle id)` If your app doesn't have special caching requirements or constraints, the default shared cache instance should be acceptable. Callers should take care to ensure that the setter is called at a time when no other caller has a reference to the previously-set shared URL cache.
 func NSURLCacheSharedURLCache() *NSURLCache {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLCache), _nSURLCacheSelSharedURLCache)
 	if _ret != 0 {
@@ -109,7 +107,7 @@ func NSURLCacheSetSharedURLCache(sharedURLCache *NSURLCache) {
 	objc.ID(_clsNSURLCache).Send(_nSURLCacheSelSetSharedURLCache, sharedURLCache.Ptr())
 }
 
-// @abstract In-memory capacity of the receiver. @discussion At the time this call is made, the in-memory cache will truncate its contents to the size given, if necessary. @result The in-memory capacity, measured in bytes, for the receiver.
+// The in-memory capacity of the receiver, measured in bytes. At the time this value is set, the in-memory cache will truncate its contents to the size given, if necessary.
 func (o *NSURLCache) MemoryCapacity() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSURLCacheSelMemoryCapacity)
 	return _ret
@@ -119,7 +117,7 @@ func (o *NSURLCache) SetMemoryCapacity(memoryCapacity uint) {
 	o.Ptr().Send(_nSURLCacheSelSetMemoryCapacity, memoryCapacity)
 }
 
-// @abstract The on-disk capacity of the receiver. @discussion The on-disk capacity, measured in bytes, for the receiver. On mutation the on-disk cache will truncate its contents to the size given, if necessary.
+// The on-disk capacity of the receiver, measured in bytes. On mutation, the on-disk cache will truncate its contents to the size given, if necessary.
 func (o *NSURLCache) DiskCapacity() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSURLCacheSelDiskCapacity)
 	return _ret
@@ -129,22 +127,24 @@ func (o *NSURLCache) SetDiskCapacity(diskCapacity uint) {
 	o.Ptr().Send(_nSURLCacheSelSetDiskCapacity, diskCapacity)
 }
 
-// @abstract Returns the current amount of space consumed by the in-memory cache of the receiver. @discussion This size, measured in bytes, indicates the current usage of the in-memory cache. @result the current usage of the in-memory cache of the receiver.
+// The current amount of space consumed by the in-memory cache of the receiver, measured in bytes.
 func (o *NSURLCache) CurrentMemoryUsage() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSURLCacheSelCurrentMemoryUsage)
 	return _ret
 }
 
-// @abstract Returns the current amount of space consumed by the on-disk cache of the receiver. @discussion This size, measured in bytes, indicates the current usage of the on-disk cache. @result the current usage of the on-disk cache of the receiver.
+// The current amount of space consumed by the on-disk cache of the receiver, measured in bytes.
 func (o *NSURLCache) CurrentDiskUsage() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSURLCacheSelCurrentDiskUsage)
 	return _ret
 }
 
+// Stores a cached URL response for a specified data task.
 func (o *NSURLCache) StoreCachedResponseForDataTask(cachedResponse *NSCachedURLResponse, dataTask *NSURLSessionDataTask) {
 	o.Ptr().Send(_nSURLCacheSelStoreCachedResponseForDataTask, cachedResponse.Ptr(), dataTask.Ptr())
 }
 
+// Gets the cached URL response for a specified data task, passing it to a completion handler.
 func (o *NSURLCache) GetCachedResponseForDataTaskCompletionHandler(dataTask *NSURLSessionDataTask, completionHandler func(*NSCachedURLResponse)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -159,6 +159,7 @@ func (o *NSURLCache) GetCachedResponseForDataTaskCompletionHandler(dataTask *NSU
 	o.Ptr().Send(_nSURLCacheSelGetCachedResponseForDataTaskCompletionHandler, dataTask.Ptr(), __block_completionHandler)
 }
 
+// Removes the cached URL response for a specified data task.
 func (o *NSURLCache) RemoveCachedResponseForDataTask(dataTask *NSURLSessionDataTask) {
 	o.Ptr().Send(_nSURLCacheSelRemoveCachedResponseForDataTask, dataTask.Ptr())
 }

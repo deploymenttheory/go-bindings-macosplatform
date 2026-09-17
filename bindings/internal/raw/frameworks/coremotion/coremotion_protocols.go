@@ -3,6 +3,10 @@
 
 package coremotion
 
+// CMBodyIdentifiable wraps the ObjC protocol CMBodyIdentifiable.
+type CMBodyIdentifiable interface {
+}
+
 // CMHeadphoneMotionManagerDelegate wraps the ObjC protocol CMHeadphoneMotionManagerDelegate.
 type CMHeadphoneMotionManagerDelegate interface {
 }

@@ -133,6 +133,32 @@ func (tc *THClient) RetrieveAllActiveCredentials(ctx context.Context) (result ob
 	}
 }
 
+// RetrieveActiveCredentialsForNearbyNetworksWithCompletion requests all active Thread credentials with active border routers around from the framework.
+//
+// RetrieveActiveCredentialsForNearbyNetworksWithCompletion blocks until the operation completes or ctx is cancelled.
+func (tc *THClient) RetrieveActiveCredentialsForNearbyNetworksWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(tc)
+	type _result struct {
+		val obj.Object
+		err error
+	}
+	_ch := make(chan _result, 1)
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
+		var _o _result
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
+		_ch <- _o
+	})
+	objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("retrieveActiveCredentialsForNearbyNetworksWithCompletion:"), _block)
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero obj.Object
+		return _zero, ctx.Err()
+	}
+}
+
 // DeleteCredentialsForBorderAgentCompletion deletes Thread network credentials from the framework database for a Border Agent.
 //
 // DeleteCredentialsForBorderAgentCompletion blocks until the operation completes or ctx is cancelled.
@@ -261,4 +287,24 @@ func (tc *THClient) CheckPreferredNetworkForActiveOperationalDatasetCompletion(a
 func (tc *THClient) IsPreferredNetworkAvailableWithCompletion(completion func(bool)) {
 	defer runtime.KeepAlive(tc)
 	objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("isPreferredNetworkAvailableWithCompletion:"), objc.NewBlock(func(_ objc.Block, _b0 bool) { completion(_b0) }))
+}
+
+// EnableCredentialSharingModeForExtendedPANIDCompletion triggers Credential Share mode on a nearby eligible Apple Border Router (tvOS(27.0)).
+//
+// EnableCredentialSharingModeForExtendedPANIDCompletion blocks until the operation completes or ctx is cancelled.
+func (tc *THClient) EnableCredentialSharingModeForExtendedPANIDCompletion(ctx context.Context, extendedPANID []byte) error {
+	defer runtime.KeepAlive(tc)
+	_ch := make(chan error, 1)
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
+		var _err error
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
+		_ch <- _err
+	})
+	objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("enableCredentialSharingModeForExtendedPANID:completion:"), rt.BytesToNSData(extendedPANID), _block)
+	select {
+	case err := <-_ch:
+		return err
+	case <-ctx.Done():
+		return ctx.Err()
+	}
 }

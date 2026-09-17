@@ -46,14 +46,3 @@ func PGMaxDisplayPortCount() uint32 {
 	}
 	return _fnPGMaxDisplayPortCount()
 }
-
-var _fnPGNewDeviceWithDescriptor func(objc.ID) unsafe.Pointer
-
-// PGNewDeviceWithDescriptor calls the ParavirtualizedGraphics framework function PGNewDeviceWithDescriptor.
-func PGNewDeviceWithDescriptor(descriptor *PGDeviceDescriptor) unsafe.Pointer {
-	_loadOnce.Do(_loadLibrary)
-	if _fnPGNewDeviceWithDescriptor == nil {
-		ebipurego.RegisterLibFunc(&_fnPGNewDeviceWithDescriptor, _lib, "PGNewDeviceWithDescriptor")
-	}
-	return _fnPGNewDeviceWithDescriptor(objref.IDOf(descriptor))
-}

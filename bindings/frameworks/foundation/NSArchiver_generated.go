@@ -94,7 +94,7 @@ func (a *Archiver) ReplaceObjectWithObject(object obj.Object, newObject obj.Obje
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("replaceObject:withObject:"), objref.IDOf(object), objref.IDOf(newObject))
 }
 
-// ArchiverData returns the archiver data.
+// ArchiverData returns the receiver's archive data. The returned data object is the same one specified as the argument to “NSArchiver/init(forWritingWith:)“. It contains whatever data has been encoded thus far by invocations of the various encoding methods. It is safest not to invoke this method until after “NSArchiver/encodeRootObject(_:)“ has returned. In other words, although it is possible for a class to invoke this method from within its “NSCoding/encode(with:)“ method, that method must not alter the data.
 func (a *Archiver) ArchiverData() *MutableData {
 	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("archiverData"))

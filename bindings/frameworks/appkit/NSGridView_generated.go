@@ -397,6 +397,14 @@ func (gv *GridView) WithGestureRecognizers(items ...GestureRecognizerProvider) *
 	return gv
 }
 
+// WithExclusiveGestureBehavior sets declares whether gesture recognizers should be exclusive in this view and its subviews.
+func (gv *GridView) WithExclusiveGestureBehavior(exclusiveGestureBehavior ViewExclusiveGestureBehavior) *GridView {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setExclusiveGestureBehavior:"), exclusiveGestureBehavior)
+	})
+	return gv
+}
+
 // WithAllowedTouchTypes sets the allowed touch types.
 func (gv *GridView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *GridView {
 	purego.Main(func() {
@@ -458,6 +466,15 @@ func (gv *GridView) WithHorizontalContentSizeConstraintActive(horizontalContentS
 func (gv *GridView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *GridView {
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
+	return gv
+}
+
+// WithTextSelectionManager sets the text selection manager for this view.
+func (gv *GridView) WithTextSelectionManager(textSelectionManager *TextSelectionManager) *GridView {
+	defer runtime.KeepAlive(textSelectionManager)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setTextSelectionManager:"), objref.IDOf(textSelectionManager))
 	})
 	return gv
 }

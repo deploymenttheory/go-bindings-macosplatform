@@ -18,11 +18,12 @@ type WKContentWorld struct {
 }
 
 var (
-	_clsWKContentWorld                   = _objcClass("WKContentWorld")
-	_wKContentWorldSelWorldWithName      = objc.RegisterName("worldWithName:")
-	_wKContentWorldSelPageWorld          = objc.RegisterName("pageWorld")
-	_wKContentWorldSelDefaultClientWorld = objc.RegisterName("defaultClientWorld")
-	_wKContentWorldSelName               = objc.RegisterName("name")
+	_clsWKContentWorld                       = _objcClass("WKContentWorld")
+	_wKContentWorldSelWorldWithConfiguration = objc.RegisterName("worldWithConfiguration:")
+	_wKContentWorldSelWorldWithName          = objc.RegisterName("worldWithName:")
+	_wKContentWorldSelPageWorld              = objc.RegisterName("pageWorld")
+	_wKContentWorldSelDefaultClientWorld     = objc.RegisterName("defaultClientWorld")
+	_wKContentWorldSelName                   = objc.RegisterName("name")
 )
 
 func WKContentWorldFromID(id objc.ID) *WKContentWorld {
@@ -33,6 +34,21 @@ func WKContentWorldFromID(id objc.ID) *WKContentWorld {
 	o.InitPtr(id)
 	purego.Track(o)
 	return o
+}
+
+// @abstract Creates a world with the given WKContentWorldConfiguration @discussion Unlike all other worlds, worlds created with this factory method cannot be retrieved later. Clients therefore need to take care to reference them for as long as they are needed.
+func WKContentWorldWorldWithConfiguration(configuration *WKContentWorldConfiguration) *WKContentWorld {
+	var _mainthread0 *WKContentWorld
+	purego.Main(func() {
+		_mainthread0 = func() *WKContentWorld {
+			_ret := objc.Send[objc.ID](objc.ID(_clsWKContentWorld), _wKContentWorldSelWorldWithConfiguration, configuration.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WKContentWorldFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the custom content world with the specified name.
@@ -80,7 +96,7 @@ func WKContentWorldDefaultClientWorld() *WKContentWorld {
 	return _mainthread0
 }
 
-// @abstract The name of the WKContentWorld @discussion The pageWorld and defaultClientWorld instances will have a nil name. All other instances will have the non-nil name they were accessed by.
+// @abstract The name of the WKContentWorld @discussion The pageWorld and defaultClientWorld instances will have a nil name. Instances created with `worldWithConfiguration` will also have a nil name. All other instances will have the non-nil name they were accessed by.
 func (o *WKContentWorld) Name() *foundation.NSString {
 	var _mainthread0 *foundation.NSString
 	purego.Main(func() {

@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A class that provides a tracking authorization request and the tracking authorization status of the app.
+// A class that requests tracking authorization and provides the current authorization status.
 //
 // Apple documentation: https://developer.apple.com/documentation/apptrackingtransparency/attrackingmanager
 type ATTrackingManager struct {
@@ -33,7 +33,7 @@ func ATTrackingManagerFromID(id objc.ID) *ATTrackingManager {
 	return o
 }
 
-// The request for user authorization to access app-related data.
+// Presents a modal UI that asks someone for permission to access data that your app can use to track a person or device.
 func ATTrackingManagerRequestTrackingAuthorizationWithCompletionHandler(completion func(ATTrackingManagerAuthorizationStatus)) {
 	var __block_completion objc.Block
 	if completion != nil {

@@ -55,6 +55,12 @@ type MTRCommissioningDelegateCommissioningSucceededForNodeIDMetricsHandler inter
 	CommissioningSucceededForNodeIDMetrics(commissioning *MTRCommissioningOperation, nodeID obj.Object, metrics *MTRMetrics)
 }
 
+// MTRCommissioningDelegateCommissioningSucceededForNodeIDMetricsContextHandler is the optional MTRCommissioningDelegate method commissioning:succeededForNodeID:metrics:context:. Implement it on a MTRCommissioningDelegate value
+// to receive that callback; a value without it is simply never sent one.
+type MTRCommissioningDelegateCommissioningSucceededForNodeIDMetricsContextHandler interface {
+	CommissioningSucceededForNodeIDMetricsContext(commissioning *MTRCommissioningOperation, nodeID obj.Object, metrics *MTRMetrics, context_ obj.Object)
+}
+
 var (
 	_mTRCommissioningDelegateShimClassOnce sync.Once
 	_mTRCommissioningDelegateShimClass     objc.Class
@@ -97,6 +103,11 @@ func newMTRCommissioningDelegateShim(d MTRCommissioningDelegate) objc.ID {
 					_h.CommissioningSucceededForNodeIDMetrics(MTRCommissioningOperationFromID(_p0), obj.Wrap(_p1), MTRMetricsFromID(_p2))
 				}
 			}},
+			{Cmd: objc.RegisterName("commissioning:succeededForNodeID:metrics:context:"), Fn: func(_self objc.ID, _ objc.SEL, _p0 objc.ID, _p1 objc.ID, _p2 objc.ID, _p3 objc.ID) {
+				if _h, _ok := shim.Value(_self).(MTRCommissioningDelegateCommissioningSucceededForNodeIDMetricsContextHandler); _ok {
+					_h.CommissioningSucceededForNodeIDMetricsContext(MTRCommissioningOperationFromID(_p0), obj.Wrap(_p1), MTRMetricsFromID(_p2), obj.Wrap(_p3))
+				}
+			}},
 		})
 	})
 	_responds := map[objc.SEL]bool{}
@@ -110,5 +121,7 @@ func newMTRCommissioningDelegateShim(d MTRCommissioningDelegate) objc.ID {
 	_responds[objc.RegisterName("commissioning:failedWithError:metrics:")] = _ok3
 	_, _ok4 := d.(MTRCommissioningDelegateCommissioningSucceededForNodeIDMetricsHandler)
 	_responds[objc.RegisterName("commissioning:succeededForNodeID:metrics:")] = _ok4
+	_, _ok5 := d.(MTRCommissioningDelegateCommissioningSucceededForNodeIDMetricsContextHandler)
+	_responds[objc.RegisterName("commissioning:succeededForNodeID:metrics:context:")] = _ok5
 	return shim.New(_mTRCommissioningDelegateShimClass, d, _responds)
 }

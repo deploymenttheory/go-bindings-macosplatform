@@ -16,7 +16,7 @@ import (
 
 // AccessibilityCustomRotorSearchParameters is an idiomatic wrapper over the Objective-C class NSAccessibilityCustomRotorSearchParameters.
 //
-// Search parameters for a custom rotor.
+// NSAccessibilityCustomRotorSearchParameters is a container for search parameters. It should be examined to determine the next matching NSAccessibilityCustomRotorItemResult.
 type AccessibilityCustomRotorSearchParameters struct {
 	objref.Handle
 }

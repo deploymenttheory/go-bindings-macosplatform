@@ -124,6 +124,11 @@ func KCGImageSourceTypeIdentifierHint() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCGImageSourceTypeIdentifierHint")))
 }
 
+// KCGImageSourceAllowableTypes returns the value of the constant kCGImageSourceAllowableTypes.
+func KCGImageSourceAllowableTypes() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageSourceAllowableTypes")))
+}
+
 // KCGImageSourceShouldCache returns the value of the constant kCGImageSourceShouldCache.
 func KCGImageSourceShouldCache() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCGImageSourceShouldCache")))
@@ -137,6 +142,11 @@ func KCGImageSourceShouldCacheImmediately() obj.Object {
 // KCGImageSourceShouldAllowFloat returns the value of the constant kCGImageSourceShouldAllowFloat.
 func KCGImageSourceShouldAllowFloat() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCGImageSourceShouldAllowFloat")))
+}
+
+// KCGImageSourcePrioritizeQuality returns the value of the constant kCGImageSourcePrioritizeQuality.
+func KCGImageSourcePrioritizeQuality() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageSourcePrioritizeQuality")))
 }
 
 // KCGImageSourceCreateThumbnailFromImageIfAbsent returns the value of the constant kCGImageSourceCreateThumbnailFromImageIfAbsent.

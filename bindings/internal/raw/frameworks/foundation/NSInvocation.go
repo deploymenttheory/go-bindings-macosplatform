@@ -95,6 +95,7 @@ func (o *NSInvocation) InvokeUsingIMP(imp unsafe.Pointer) {
 	o.Ptr().Send(_nSInvocationSelInvokeUsingIMP, imp)
 }
 
+// The receiver's method signature.
 func (o *NSInvocation) MethodSignature() *NSMethodSignature {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSInvocationSelMethodSignature)
 	if _ret != 0 {
@@ -103,11 +104,13 @@ func (o *NSInvocation) MethodSignature() *NSMethodSignature {
 	return NSMethodSignatureFromID(_ret)
 }
 
+// A Boolean value that indicates if the receiver has retained its arguments.
 func (o *NSInvocation) ArgumentsRetained() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSInvocationSelArgumentsRetained)
 	return _ret
 }
 
+// The receiver's target, or `nil` if the receiver has no target. The target is the receiver of the message sent by `invoke`.
 func (o *NSInvocation) Target() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSInvocationSelTarget)
 	return _ret
@@ -117,6 +120,7 @@ func (o *NSInvocation) SetTarget(target objc.ID) {
 	o.Ptr().Send(_nSInvocationSelSetTarget, target)
 }
 
+// The receiver's selector, or 0 if it hasn't been set.
 func (o *NSInvocation) Selector() objc.SEL {
 	_ret := objc.Send[objc.SEL](o.Ptr(), _nSInvocationSelSelector)
 	return _ret

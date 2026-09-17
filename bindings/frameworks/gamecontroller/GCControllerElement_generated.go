@@ -75,12 +75,6 @@ func (ce *ControllerElement) String() string {
 	return rt.Description(objref.IDOf(ce))
 }
 
-// WithPreferredSystemGestureState sets the preferred state for handling input when the user binds the element to a system gesture.
-func (ce *ControllerElement) WithPreferredSystemGestureState(preferredSystemGestureState SystemGestureState) *ControllerElement {
-	objc.Send[objc.ID](objref.IDOf(ce), objc.RegisterName("setPreferredSystemGestureState:"), preferredSystemGestureState)
-	return ce
-}
-
 // WithSfSymbolsName sets a system symbol for the element or the remapped element.
 func (ce *ControllerElement) WithSfSymbolsName(sfSymbolsName string) *ControllerElement {
 	objc.Send[objc.ID](objref.IDOf(ce), objc.RegisterName("setSfSymbolsName:"), purego.NSString(sfSymbolsName))
@@ -105,6 +99,12 @@ func (ce *ControllerElement) WithUnmappedLocalizedName(unmappedLocalizedName str
 	return ce
 }
 
+// WithPreferredSystemGestureState sets the preferred state for handling input when the user binds the element to a system gesture.
+func (ce *ControllerElement) WithPreferredSystemGestureState(preferredSystemGestureState SystemGestureState) *ControllerElement {
+	objc.Send[objc.ID](objref.IDOf(ce), objc.RegisterName("setPreferredSystemGestureState:"), preferredSystemGestureState)
+	return ce
+}
+
 // Collection returns each element can be part of a wider collection of inputs that map to a single logical element. A directional pad (dpad) is a logical collection of two axis inputs and thus each axis belongs to the same collection element - the dpad.
 func (ce *ControllerElement) Collection() *ControllerElement {
 	defer runtime.KeepAlive(ce)
@@ -116,20 +116,6 @@ func (ce *ControllerElement) Collection() *ControllerElement {
 func (ce *ControllerElement) IsAnalog() bool {
 	defer runtime.KeepAlive(ce)
 	_r := objc.Send[bool](objref.IDOf(ce), objc.RegisterName("isAnalog"))
-	return _r
-}
-
-// IsBoundToSystemGesture reports whether check if the element is bound to a system gesture. Defaults to false for most elements.
-func (ce *ControllerElement) IsBoundToSystemGesture() bool {
-	defer runtime.KeepAlive(ce)
-	_r := objc.Send[bool](objref.IDOf(ce), objc.RegisterName("isBoundToSystemGesture"))
-	return _r
-}
-
-// PreferredSystemGestureState returns the preferred system gesture state for this element. Defaults to GCSystemGestureStateEnabled for most elements
-func (ce *ControllerElement) PreferredSystemGestureState() SystemGestureState {
-	defer runtime.KeepAlive(ce)
-	_r := objc.Send[SystemGestureState](objref.IDOf(ce), objc.RegisterName("preferredSystemGestureState"))
 	return _r
 }
 
@@ -179,6 +165,20 @@ func (ce *ControllerElement) Aliases() []string {
 	defer runtime.KeepAlive(ce)
 	_r := objc.Send[objc.ID](objref.IDOf(ce), objc.RegisterName("aliases"))
 	return rt.NSSetToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
+}
+
+// IsBoundToSystemGesture reports whether check if the element is bound to a system gesture. Defaults to false for most elements.
+func (ce *ControllerElement) IsBoundToSystemGesture() bool {
+	defer runtime.KeepAlive(ce)
+	_r := objc.Send[bool](objref.IDOf(ce), objc.RegisterName("isBoundToSystemGesture"))
+	return _r
+}
+
+// PreferredSystemGestureState returns the preferred system gesture state for this element. This is merely the preferred system gesture state - it is not guaranteed to be respected by the system.  It is highly recommended to leave this set to the default value, however there may be situations (for example, game streaming apps) where it is preferrable to disable system gestures. Defaults to `GCSystemGestureStateEnabled`.
+func (ce *ControllerElement) PreferredSystemGestureState() SystemGestureState {
+	defer runtime.KeepAlive(ce)
+	_r := objc.Send[SystemGestureState](objref.IDOf(ce), objc.RegisterName("preferredSystemGestureState"))
+	return _r
 }
 
 // isControllerElement marks ControllerElement — and, by embedding promotion, its

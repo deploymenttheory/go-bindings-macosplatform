@@ -183,7 +183,7 @@ func (tcm *TextContentManager) RecordEditActionInRangeNewTextRange(originalTextR
 	objc.Send[objc.ID](objref.IDOf(tcm), objc.RegisterName("recordEditActionInRange:newTextRange:"), objref.IDOf(originalTextRange), objref.IDOf(newTextRange))
 }
 
-// TextLayoutManagers returns the text layout managers.
+// TextLayoutManagers returns the array of text layout managers associated with this text content manager. This property is KVO-compliant.
 //
 // TextLayoutManagers returns the collection as a Go slice.
 func (tcm *TextContentManager) TextLayoutManagers() []*TextLayoutManager {
@@ -192,28 +192,28 @@ func (tcm *TextContentManager) TextLayoutManagers() []*TextLayoutManager {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TextLayoutManager { return TextLayoutManagerFromID(_id) })
 }
 
-// PrimaryTextLayoutManager returns the primary text layout manager.
+// PrimaryTextLayoutManager returns the primary text layout manager for this content. The primary “NSTextLayoutManager“ interacts with the user, allowing edits. Setting this property to an “NSTextLayoutManager“ not in “textLayoutManagers“ resets it to `nil`. It automatically synchronizes pending edits before switching to a new primary object. The operation is synchronous. This property is KVO-compliant.
 func (tcm *TextContentManager) PrimaryTextLayoutManager() *TextLayoutManager {
 	defer runtime.KeepAlive(tcm)
 	_r := objc.Send[objc.ID](objref.IDOf(tcm), objc.RegisterName("primaryTextLayoutManager"))
 	return TextLayoutManagerFromID(_r)
 }
 
-// HasEditingTransaction reports whether the object has editing transaction.
+// HasEditingTransaction reports whether indicates there's an active editing transaction from the primary text layout manager. The synchronization operations to non-primary text layout managers and the backing store block (or fail when synchronous) while this property is `true`. Non-primary text layout managers should avoid accessing the elements while this is `true`. KVO-compliant.
 func (tcm *TextContentManager) HasEditingTransaction() bool {
 	defer runtime.KeepAlive(tcm)
 	_r := objc.Send[bool](objref.IDOf(tcm), objc.RegisterName("hasEditingTransaction"))
 	return _r
 }
 
-// AutomaticallySynchronizesTextLayoutManagers wraps the corresponding Objective-C method.
+// AutomaticallySynchronizesTextLayoutManagers reports whether determines if the framework should automatically synchronize all text layout managers when exiting an editing transaction. The default value is `true`.
 func (tcm *TextContentManager) AutomaticallySynchronizesTextLayoutManagers() bool {
 	defer runtime.KeepAlive(tcm)
 	_r := objc.Send[bool](objref.IDOf(tcm), objc.RegisterName("automaticallySynchronizesTextLayoutManagers"))
 	return _r
 }
 
-// AutomaticallySynchronizesToBackingStore wraps the corresponding Objective-C method.
+// AutomaticallySynchronizesToBackingStore reports whether to automatically synchronize with the backing store when an editing transaction finishes. The default value is `false`.
 func (tcm *TextContentManager) AutomaticallySynchronizesToBackingStore() bool {
 	defer runtime.KeepAlive(tcm)
 	_r := objc.Send[bool](objref.IDOf(tcm), objc.RegisterName("automaticallySynchronizesToBackingStore"))

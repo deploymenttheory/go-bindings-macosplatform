@@ -24,9 +24,16 @@ func KCLErrorDomain() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
-func KCLErrorUserInfoAlternateRegionKey() uintptr {
+func KCLErrorUserInfoAlternateRegionKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corelocationLib, "kCLErrorUserInfoAlternateRegionKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KCLHeadingFilterNone() uintptr {

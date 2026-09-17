@@ -119,9 +119,16 @@ func PHImageResultRequestIDKey() *foundation.NSString {
 
 // The error domain for all Live Photo Editing errors (Deprecated).
 // Deprecated: since macOS 10.15.
-func PHLivePhotoEditingErrorDomain() uintptr {
+func PHLivePhotoEditingErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_photosLib, "PHLivePhotoEditingErrorDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PHLivePhotoInfoCancelledKey() *foundation.NSString {
@@ -174,11 +181,18 @@ func PHLivePhotoShouldRenderAtPlaybackTime() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
-// DEPRECATED: If the local object cannot be resolved from a global identifier, PHLocalIdentifierNotFound is provided in that array slot.
-// Deprecated: since macOS 12.
-func PHLocalIdentifierNotFound() uintptr {
+// DEPRECATED: If the local object cannot be resolved from a global identifier, `PHLocalIdentifierNotFound` is provided in that array slot.
+// Deprecated: Check for PHPhotosErrorIdentifierNotFound in PHLocalIdentifierMapping.error
+func PHLocalIdentifierNotFound() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_photosLib, "PHLocalIdentifierNotFound")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Array of NSString values representing local identifiers related to the specific error

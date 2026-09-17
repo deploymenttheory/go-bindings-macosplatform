@@ -18,8 +18,6 @@ import (
 // NumberFormatter is an idiomatic wrapper over the Objective-C class NSNumberFormatter.
 //
 // It embeds [Formatter], promoting that type's methods.
-//
-// A formatter that converts between numeric values and their textual representations.
 type NumberFormatter struct {
 	Formatter
 }
@@ -56,431 +54,431 @@ func NewNumberFormatter() *NumberFormatter {
 	return numberFormatterAdopt(_id)
 }
 
-// WithFormattingContext sets the formatting context.
+// WithFormattingContext sets the capitalization formatting context used when formatting a number. Defaults to \c NSFormattingContextUnknown.
 func (nf *NumberFormatter) WithFormattingContext(formattingContext FormattingContext) *NumberFormatter {
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setFormattingContext:"), formattingContext)
 	return nf
 }
 
-// WithMinimumGroupingDigits sets the minimum grouping digits.
+// WithMinimumGroupingDigits sets see \c kCFNumberFormatterMinGroupingDigits in \c CFNumberFormatter for an explanation on how minimum grouping digits is used.
 func (nf *NumberFormatter) WithMinimumGroupingDigits(minimumGroupingDigits int) *NumberFormatter {
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setMinimumGroupingDigits:"), minimumGroupingDigits)
 	return nf
 }
 
-// WithNumberStyle sets the number style.
+// WithNumberStyle sets the number style used by the receiver. Styles are essentially predetermined sets of values for certain properties. Examples of number-formatter styles are those used for decimal values, percentage values, and currency.
 func (nf *NumberFormatter) WithNumberStyle(numberStyle NumberFormatterStyle) *NumberFormatter {
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setNumberStyle:"), numberStyle)
 	return nf
 }
 
-// WithLocale sets the locale.
+// WithLocale sets the locale of the receiver. The locale determines the default values for many formatter attributes, such as ISO region and language codes, currency code, calendar, system of measurement, and decimal separator.
 func (nf *NumberFormatter) WithLocale(locale *Locale) *NumberFormatter {
 	defer runtime.KeepAlive(locale)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 	return nf
 }
 
-// WithGeneratesDecimalNumbers sets the generates decimal numbers.
+// WithGeneratesDecimalNumbers sets determines whether the receiver creates instances of \c NSDecimalNumber when it converts strings to number objects.
 func (nf *NumberFormatter) WithGeneratesDecimalNumbers(generatesDecimalNumbers bool) *NumberFormatter {
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setGeneratesDecimalNumbers:"), generatesDecimalNumbers)
 	return nf
 }
 
-// WithFormatterBehavior sets the formatter behavior.
+// WithFormatterBehavior sets the formatter behavior of the receiver.
 func (nf *NumberFormatter) WithFormatterBehavior(formatterBehavior NumberFormatterBehavior) *NumberFormatter {
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setFormatterBehavior:"), formatterBehavior)
 	return nf
 }
 
-// WithNegativeFormat sets the negative format.
+// WithNegativeFormat sets the format the receiver uses to display negative values.
 func (nf *NumberFormatter) WithNegativeFormat(negativeFormat StringProvider) *NumberFormatter {
 	defer runtime.KeepAlive(negativeFormat)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setNegativeFormat:"), objref.IDOf(negativeFormat))
 	return nf
 }
 
-// WithTextAttributesForNegativeValues sets the text attributes for negative values.
+// WithTextAttributesForNegativeValues sets the text attributes to be used in displaying negative values. This property is a dictionary that contains the attributes used to display negative values.
 func (nf *NumberFormatter) WithTextAttributesForNegativeValues(textAttributesForNegativeValues map[string]obj.Object) *NumberFormatter {
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setTextAttributesForNegativeValues:"), rt.MapToDict(textAttributesForNegativeValues, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return nf
 }
 
-// WithPositiveFormat sets the positive format.
+// WithPositiveFormat sets the format the receiver uses to display positive values.
 func (nf *NumberFormatter) WithPositiveFormat(positiveFormat StringProvider) *NumberFormatter {
 	defer runtime.KeepAlive(positiveFormat)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setPositiveFormat:"), objref.IDOf(positiveFormat))
 	return nf
 }
 
-// WithTextAttributesForPositiveValues sets the text attributes for positive values.
+// WithTextAttributesForPositiveValues sets the text attributes to be used in displaying positive values. This property is a dictionary that contains the attributes used to display positive values.
 func (nf *NumberFormatter) WithTextAttributesForPositiveValues(textAttributesForPositiveValues map[string]obj.Object) *NumberFormatter {
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setTextAttributesForPositiveValues:"), rt.MapToDict(textAttributesForPositiveValues, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return nf
 }
 
-// WithAllowsFloats sets the allows floats.
+// WithAllowsFloats sets determines whether the receiver allows as input floating-point values (that is, values that include the period character (\c .)). By default, floating point values are allowed.
 func (nf *NumberFormatter) WithAllowsFloats(allowsFloats bool) *NumberFormatter {
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setAllowsFloats:"), allowsFloats)
 	return nf
 }
 
-// WithDecimalSeparator sets the decimal separator.
+// WithDecimalSeparator sets the character the receiver uses as a decimal separator.
 func (nf *NumberFormatter) WithDecimalSeparator(decimalSeparator StringProvider) *NumberFormatter {
 	defer runtime.KeepAlive(decimalSeparator)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setDecimalSeparator:"), objref.IDOf(decimalSeparator))
 	return nf
 }
 
-// WithAlwaysShowsDecimalSeparator sets the always shows decimal separator.
+// WithAlwaysShowsDecimalSeparator sets determines whether the receiver always shows the decimal separator, even for integer numbers.
 func (nf *NumberFormatter) WithAlwaysShowsDecimalSeparator(alwaysShowsDecimalSeparator bool) *NumberFormatter {
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setAlwaysShowsDecimalSeparator:"), alwaysShowsDecimalSeparator)
 	return nf
 }
 
-// WithCurrencyDecimalSeparator sets the currency decimal separator.
+// WithCurrencyDecimalSeparator sets the string used by the receiver as a currency decimal separator.
 func (nf *NumberFormatter) WithCurrencyDecimalSeparator(currencyDecimalSeparator StringProvider) *NumberFormatter {
 	defer runtime.KeepAlive(currencyDecimalSeparator)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setCurrencyDecimalSeparator:"), objref.IDOf(currencyDecimalSeparator))
 	return nf
 }
 
-// WithUsesGroupingSeparator sets the uses grouping separator.
+// WithUsesGroupingSeparator sets determines whether the receiver displays the group separator.
 func (nf *NumberFormatter) WithUsesGroupingSeparator(usesGroupingSeparator bool) *NumberFormatter {
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setUsesGroupingSeparator:"), usesGroupingSeparator)
 	return nf
 }
 
-// WithGroupingSeparator sets the grouping separator.
+// WithGroupingSeparator sets the string used by the receiver for a grouping separator. For example, the grouping separator used in the United States is the comma ("10,000") whereas in France it is the space ("10 000").
 func (nf *NumberFormatter) WithGroupingSeparator(groupingSeparator StringProvider) *NumberFormatter {
 	defer runtime.KeepAlive(groupingSeparator)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setGroupingSeparator:"), objref.IDOf(groupingSeparator))
 	return nf
 }
 
-// WithZeroSymbol sets the zero symbol.
+// WithZeroSymbol sets the string used to represent a zero value. If not specified, zero values are formatted normally. You might, for example, set this property to \c "-" in a spreadsheet used for accounting.
 func (nf *NumberFormatter) WithZeroSymbol(zeroSymbol StringProvider) *NumberFormatter {
 	defer runtime.KeepAlive(zeroSymbol)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setZeroSymbol:"), objref.IDOf(zeroSymbol))
 	return nf
 }
 
-// WithTextAttributesForZero sets the text attributes for zero.
+// WithTextAttributesForZero sets the text attributes used to display a zero value. This property is a dictionary that contains the text attributes used to display zero values.
 func (nf *NumberFormatter) WithTextAttributesForZero(textAttributesForZero map[string]obj.Object) *NumberFormatter {
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setTextAttributesForZero:"), rt.MapToDict(textAttributesForZero, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return nf
 }
 
-// WithNilSymbol sets the nil symbol.
+// WithNilSymbol sets the string used to represent a \c nil value. By default, this property is set to an empty string ("").
 func (nf *NumberFormatter) WithNilSymbol(nilSymbol StringProvider) *NumberFormatter {
 	defer runtime.KeepAlive(nilSymbol)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setNilSymbol:"), objref.IDOf(nilSymbol))
 	return nf
 }
 
-// WithTextAttributesForNil sets the text attributes for nil.
+// WithTextAttributesForNil sets the text attributes used to display the \c nil symbol.
 func (nf *NumberFormatter) WithTextAttributesForNil(textAttributesForNil map[string]obj.Object) *NumberFormatter {
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setTextAttributesForNil:"), rt.MapToDict(textAttributesForNil, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return nf
 }
 
-// WithNotANumberSymbol sets the not a number symbol.
+// WithNotANumberSymbol sets the string used to represent a NaN ("not a number") value. By default, this property is set to the string "NaN".
 func (nf *NumberFormatter) WithNotANumberSymbol(notANumberSymbol StringProvider) *NumberFormatter {
 	defer runtime.KeepAlive(notANumberSymbol)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setNotANumberSymbol:"), objref.IDOf(notANumberSymbol))
 	return nf
 }
 
-// WithTextAttributesForNotANumber sets the text attributes for not a number.
+// WithTextAttributesForNotANumber sets the text attributes used to display the NaN ("not a number") string.
 func (nf *NumberFormatter) WithTextAttributesForNotANumber(textAttributesForNotANumber map[string]obj.Object) *NumberFormatter {
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setTextAttributesForNotANumber:"), rt.MapToDict(textAttributesForNotANumber, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return nf
 }
 
-// WithPositiveInfinitySymbol sets the positive infinity symbol.
+// WithPositiveInfinitySymbol sets the string used to represent a positive infinity symbol. By default, this property is set to the string "+\u221e".
 func (nf *NumberFormatter) WithPositiveInfinitySymbol(positiveInfinitySymbol StringProvider) *NumberFormatter {
 	defer runtime.KeepAlive(positiveInfinitySymbol)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setPositiveInfinitySymbol:"), objref.IDOf(positiveInfinitySymbol))
 	return nf
 }
 
-// WithTextAttributesForPositiveInfinity sets the text attributes for positive infinity.
+// WithTextAttributesForPositiveInfinity sets the text attributes used to display the positive infinity symbol. This property is a dictionary that contains the text attributes used to display the positive infinity string.
 func (nf *NumberFormatter) WithTextAttributesForPositiveInfinity(textAttributesForPositiveInfinity map[string]obj.Object) *NumberFormatter {
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setTextAttributesForPositiveInfinity:"), rt.MapToDict(textAttributesForPositiveInfinity, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return nf
 }
 
-// WithNegativeInfinitySymbol sets the negative infinity symbol.
+// WithNegativeInfinitySymbol sets the string used to represent a negative infinity symbol. By default, this property is set to the string "-\u221e".
 func (nf *NumberFormatter) WithNegativeInfinitySymbol(negativeInfinitySymbol StringProvider) *NumberFormatter {
 	defer runtime.KeepAlive(negativeInfinitySymbol)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setNegativeInfinitySymbol:"), objref.IDOf(negativeInfinitySymbol))
 	return nf
 }
 
-// WithTextAttributesForNegativeInfinity sets the text attributes for negative infinity.
+// WithTextAttributesForNegativeInfinity sets the text attributes used to display the negative infinity symbol. This property is a dictionary that contains the text attributes used to display the negative infinity string.
 func (nf *NumberFormatter) WithTextAttributesForNegativeInfinity(textAttributesForNegativeInfinity map[string]obj.Object) *NumberFormatter {
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setTextAttributesForNegativeInfinity:"), rt.MapToDict(textAttributesForNegativeInfinity, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return nf
 }
 
-// WithPositivePrefix sets the positive prefix.
+// WithPositivePrefix sets the string the receiver uses as the prefix for positive values.
 func (nf *NumberFormatter) WithPositivePrefix(positivePrefix StringProvider) *NumberFormatter {
 	defer runtime.KeepAlive(positivePrefix)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setPositivePrefix:"), objref.IDOf(positivePrefix))
 	return nf
 }
 
-// WithPositiveSuffix sets the positive suffix.
+// WithPositiveSuffix sets the string the receiver uses as the suffix for positive values.
 func (nf *NumberFormatter) WithPositiveSuffix(positiveSuffix StringProvider) *NumberFormatter {
 	defer runtime.KeepAlive(positiveSuffix)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setPositiveSuffix:"), objref.IDOf(positiveSuffix))
 	return nf
 }
 
-// WithNegativePrefix sets the negative prefix.
+// WithNegativePrefix sets the string the receiver uses as a prefix for negative values.
 func (nf *NumberFormatter) WithNegativePrefix(negativePrefix StringProvider) *NumberFormatter {
 	defer runtime.KeepAlive(negativePrefix)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setNegativePrefix:"), objref.IDOf(negativePrefix))
 	return nf
 }
 
-// WithNegativeSuffix sets the negative suffix.
+// WithNegativeSuffix sets the string the receiver uses as a suffix for negative values.
 func (nf *NumberFormatter) WithNegativeSuffix(negativeSuffix StringProvider) *NumberFormatter {
 	defer runtime.KeepAlive(negativeSuffix)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setNegativeSuffix:"), objref.IDOf(negativeSuffix))
 	return nf
 }
 
-// WithCurrencyCode sets the currency code.
+// WithCurrencyCode sets the receiver's currency code. A currency code is a three-letter code that is, in most cases, composed of a region's two-character Internet region code plus an extra character to denote the currency unit. For example, the currency code for the Australian dollar is "AUD". Currency codes are based on the ISO 4217 standard.
 func (nf *NumberFormatter) WithCurrencyCode(currencyCode StringProvider) *NumberFormatter {
 	defer runtime.KeepAlive(currencyCode)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setCurrencyCode:"), objref.IDOf(currencyCode))
 	return nf
 }
 
-// WithCurrencySymbol sets the currency symbol.
+// WithCurrencySymbol sets the string used by the receiver as a local currency symbol. A region typically has a local currency symbol and an international currency symbol. The local symbol is used within the region, while the international currency symbol is used in international contexts to specify that region's currency unambiguously. The local currency symbol is often represented by a Unicode code point.
 func (nf *NumberFormatter) WithCurrencySymbol(currencySymbol StringProvider) *NumberFormatter {
 	defer runtime.KeepAlive(currencySymbol)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setCurrencySymbol:"), objref.IDOf(currencySymbol))
 	return nf
 }
 
-// WithInternationalCurrencySymbol sets the international currency symbol.
+// WithInternationalCurrencySymbol sets the international currency symbol used by the receiver. A region typically has a local currency symbol and an international currency symbol. The local symbol is used within the region, while the international currency symbol is used in international contexts to specify that region's currency unambiguously. The international currency symbol is often represented by a Unicode code point.
 func (nf *NumberFormatter) WithInternationalCurrencySymbol(internationalCurrencySymbol StringProvider) *NumberFormatter {
 	defer runtime.KeepAlive(internationalCurrencySymbol)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setInternationalCurrencySymbol:"), objref.IDOf(internationalCurrencySymbol))
 	return nf
 }
 
-// WithPercentSymbol sets the percent symbol.
+// WithPercentSymbol sets the string used to represent a percent symbol. By default, this property is set to the percent sign (%).
 func (nf *NumberFormatter) WithPercentSymbol(percentSymbol StringProvider) *NumberFormatter {
 	defer runtime.KeepAlive(percentSymbol)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setPercentSymbol:"), objref.IDOf(percentSymbol))
 	return nf
 }
 
-// WithPerMillSymbol sets the per mill symbol.
+// WithPerMillSymbol sets the string used to represent a per-mill (per-thousand) symbol. By default, this property is set to the per mille sign (\u2030).
 func (nf *NumberFormatter) WithPerMillSymbol(perMillSymbol StringProvider) *NumberFormatter {
 	defer runtime.KeepAlive(perMillSymbol)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setPerMillSymbol:"), objref.IDOf(perMillSymbol))
 	return nf
 }
 
-// WithMinusSign sets the minus sign.
+// WithMinusSign sets the string used to represent a minus sign. By default, this property is set to the minus sign (-).
 func (nf *NumberFormatter) WithMinusSign(minusSign StringProvider) *NumberFormatter {
 	defer runtime.KeepAlive(minusSign)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setMinusSign:"), objref.IDOf(minusSign))
 	return nf
 }
 
-// WithPlusSign sets the plus sign.
+// WithPlusSign sets the string used to represent a plus sign. By default, this property is set to the plus sign (+).
 func (nf *NumberFormatter) WithPlusSign(plusSign StringProvider) *NumberFormatter {
 	defer runtime.KeepAlive(plusSign)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setPlusSign:"), objref.IDOf(plusSign))
 	return nf
 }
 
-// WithExponentSymbol sets the exponent symbol.
+// WithExponentSymbol sets the string used to represent an exponent symbol. By default, this property is set to the latin capital letter E. The exponent symbol is the "E" or "e" in the scientific notation of numbers, as in "1.0E+42".
 func (nf *NumberFormatter) WithExponentSymbol(exponentSymbol StringProvider) *NumberFormatter {
 	defer runtime.KeepAlive(exponentSymbol)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setExponentSymbol:"), objref.IDOf(exponentSymbol))
 	return nf
 }
 
-// WithGroupingSize sets the grouping size.
+// WithGroupingSize sets the grouping size of the receiver.
 func (nf *NumberFormatter) WithGroupingSize(groupingSize int) *NumberFormatter {
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setGroupingSize:"), groupingSize)
 	return nf
 }
 
-// WithSecondaryGroupingSize sets the secondary grouping size.
+// WithSecondaryGroupingSize sets the secondary grouping size of the receiver. Some locales allow the specification of another grouping size for larger numbers. For example, some locales may represent a number such as 61, 242, 378.46 (as in the United States) as 6,12,42,378.46. In this case, the secondary grouping size (covering the groups of digits furthest from the decimal point) is 2.
 func (nf *NumberFormatter) WithSecondaryGroupingSize(secondaryGroupingSize int) *NumberFormatter {
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setSecondaryGroupingSize:"), secondaryGroupingSize)
 	return nf
 }
 
-// WithMultiplier sets the multiplier.
+// WithMultiplier sets the multiplier of the receiver. A multiplier is a factor used in conversions between numbers and strings (that is, numbers as stored and numbers as displayed). When the input value is a string, the multiplier is used to divide, and when the input value is a number, the multiplier is used to multiply. These operations allow the formatted values to be different from the values that a program manipulates internally.
 func (nf *NumberFormatter) WithMultiplier(multiplier NumberProvider) *NumberFormatter {
 	defer runtime.KeepAlive(multiplier)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setMultiplier:"), objref.IDOf(multiplier))
 	return nf
 }
 
-// WithFormatWidth sets the format width.
+// WithFormatWidth sets the format width used by the receiver. The format width is the number of characters of a formatted number within a string that is either left justified or right justified based on the value contained in \c paddingPosition.
 func (nf *NumberFormatter) WithFormatWidth(formatWidth int) *NumberFormatter {
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setFormatWidth:"), formatWidth)
 	return nf
 }
 
-// WithPaddingCharacter sets the padding character.
+// WithPaddingCharacter sets the string that the receiver uses to pad numbers in the formatted string representation.
 func (nf *NumberFormatter) WithPaddingCharacter(paddingCharacter StringProvider) *NumberFormatter {
 	defer runtime.KeepAlive(paddingCharacter)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setPaddingCharacter:"), objref.IDOf(paddingCharacter))
 	return nf
 }
 
-// WithPaddingPosition sets the padding position.
+// WithPaddingPosition sets the padding position used by the receiver.
 func (nf *NumberFormatter) WithPaddingPosition(paddingPosition NumberFormatterPadPosition) *NumberFormatter {
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setPaddingPosition:"), paddingPosition)
 	return nf
 }
 
-// WithRoundingMode sets the rounding mode.
+// WithRoundingMode sets the rounding mode used by the receiver.
 func (nf *NumberFormatter) WithRoundingMode(roundingMode NumberFormatterRoundingMode) *NumberFormatter {
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setRoundingMode:"), roundingMode)
 	return nf
 }
 
-// WithRoundingIncrement sets the rounding increment.
+// WithRoundingIncrement sets the rounding increment used by the receiver.
 func (nf *NumberFormatter) WithRoundingIncrement(roundingIncrement NumberProvider) *NumberFormatter {
 	defer runtime.KeepAlive(roundingIncrement)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setRoundingIncrement:"), objref.IDOf(roundingIncrement))
 	return nf
 }
 
-// WithMinimumIntegerDigits sets the minimum integer digits.
+// WithMinimumIntegerDigits sets the minimum number of digits before the decimal separator. By default, this property is set to \c 0.
 func (nf *NumberFormatter) WithMinimumIntegerDigits(minimumIntegerDigits int) *NumberFormatter {
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setMinimumIntegerDigits:"), minimumIntegerDigits)
 	return nf
 }
 
-// WithMaximumIntegerDigits sets the maximum integer digits.
+// WithMaximumIntegerDigits sets the maximum number of digits before the decimal separator. By default, this property is set to \c 42.
 func (nf *NumberFormatter) WithMaximumIntegerDigits(maximumIntegerDigits int) *NumberFormatter {
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setMaximumIntegerDigits:"), maximumIntegerDigits)
 	return nf
 }
 
-// WithMinimumFractionDigits sets the minimum fraction digits.
+// WithMinimumFractionDigits sets the minimum number of digits after the decimal separator. By default, this property is set to \c 0.
 func (nf *NumberFormatter) WithMinimumFractionDigits(minimumFractionDigits int) *NumberFormatter {
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setMinimumFractionDigits:"), minimumFractionDigits)
 	return nf
 }
 
-// WithMaximumFractionDigits sets the maximum fraction digits.
+// WithMaximumFractionDigits sets the maximum number of digits after the decimal separator. By default, this property is set to \c 0.
 func (nf *NumberFormatter) WithMaximumFractionDigits(maximumFractionDigits int) *NumberFormatter {
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setMaximumFractionDigits:"), maximumFractionDigits)
 	return nf
 }
 
-// WithMinimum sets the minimum.
+// WithMinimum sets the lowest number allowed as input by the receiver.
 func (nf *NumberFormatter) WithMinimum(minimum NumberProvider) *NumberFormatter {
 	defer runtime.KeepAlive(minimum)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setMinimum:"), objref.IDOf(minimum))
 	return nf
 }
 
-// WithMaximum sets the maximum.
+// WithMaximum sets the highest number allowed as input by the receiver.
 func (nf *NumberFormatter) WithMaximum(maximum NumberProvider) *NumberFormatter {
 	defer runtime.KeepAlive(maximum)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setMaximum:"), objref.IDOf(maximum))
 	return nf
 }
 
-// WithCurrencyGroupingSeparator sets the currency grouping separator.
+// WithCurrencyGroupingSeparator sets the currency grouping separator for the receiver.
 func (nf *NumberFormatter) WithCurrencyGroupingSeparator(currencyGroupingSeparator StringProvider) *NumberFormatter {
 	defer runtime.KeepAlive(currencyGroupingSeparator)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setCurrencyGroupingSeparator:"), objref.IDOf(currencyGroupingSeparator))
 	return nf
 }
 
-// WithLenient sets the lenient.
+// WithLenient sets determines whether the receiver will use heuristics to guess at the number which is intended by a string. If the formatter is set to be lenient, as with any guessing it may get the result number wrong (that is, a number other than that which was intended).
 func (nf *NumberFormatter) WithLenient(lenient bool) *NumberFormatter {
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setLenient:"), lenient)
 	return nf
 }
 
-// WithUsesSignificantDigits sets the uses significant digits.
+// WithUsesSignificantDigits sets a Boolean value indicating whether the formatter uses minimum and maximum significant digits when formatting numbers. The \c NSNumberFormatter class has two ways of determining how many digits to represent: using integer and fraction digits and using significant digits. When this property is set to \c NO, numbers are formatted according to whether you want them formatted as fractions or as integers. This property is \c NO by default. Set this property to \c YES to format numbers according to the significant digits configuration specified by the \c minimumSignificantDigits and \c maximumSignificantDigits properties. By default, the minimum number of significant digits is 1, and the maximum number of significant digits is 6. When a number formatter is configured to use significant digits, it ignores any minimum or maximum values used to set integer or fraction digits.
 func (nf *NumberFormatter) WithUsesSignificantDigits(usesSignificantDigits bool) *NumberFormatter {
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setUsesSignificantDigits:"), usesSignificantDigits)
 	return nf
 }
 
-// WithMinimumSignificantDigits sets the minimum significant digits.
+// WithMinimumSignificantDigits sets the minimum number of significant digits for the number formatter. You must set the \c usesSignificantDigits property to \c YES in order for this property to affect formatting behavior. By default, the minimum number of significant digits is 1.
 func (nf *NumberFormatter) WithMinimumSignificantDigits(minimumSignificantDigits int) *NumberFormatter {
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setMinimumSignificantDigits:"), minimumSignificantDigits)
 	return nf
 }
 
-// WithMaximumSignificantDigits sets the maximum significant digits.
+// WithMaximumSignificantDigits sets the maximum number of significant digits for the number formatter. You must set the \c usesSignificantDigits property to \c YES in order for this property to affect formatting behavior. By default, the maximum number of significant digits is 6. Values less than 1 are ignored.
 func (nf *NumberFormatter) WithMaximumSignificantDigits(maximumSignificantDigits int) *NumberFormatter {
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setMaximumSignificantDigits:"), maximumSignificantDigits)
 	return nf
 }
 
-// WithPartialStringValidationEnabled sets the partial string validation enabled.
+// WithPartialStringValidationEnabled sets determines whether partial string validation is enabled for the receiver.
 func (nf *NumberFormatter) WithPartialStringValidationEnabled(partialStringValidationEnabled bool) *NumberFormatter {
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setPartialStringValidationEnabled:"), partialStringValidationEnabled)
 	return nf
 }
 
-// WithHasThousandSeparators sets the has thousand separators.
+// WithHasThousandSeparators sets determines whether the receiver uses thousand separators.
 func (nf *NumberFormatter) WithHasThousandSeparators(hasThousandSeparators bool) *NumberFormatter {
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setHasThousandSeparators:"), hasThousandSeparators)
 	return nf
 }
 
-// WithThousandSeparator sets the thousand separator.
+// WithThousandSeparator sets the character the receiver uses as a thousand separator. If you don't have thousand separators enabled through any other means (such as \c format), using this method enables them. This method is for use with formatters using \c NSNumberFormatterBehavior10_0 behavior.
 func (nf *NumberFormatter) WithThousandSeparator(thousandSeparator StringProvider) *NumberFormatter {
 	defer runtime.KeepAlive(thousandSeparator)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setThousandSeparator:"), objref.IDOf(thousandSeparator))
 	return nf
 }
 
-// WithLocalizesFormat sets the localizes format.
+// WithLocalizesFormat sets determines whether the dollar sign character (\c $), decimal separator character (\c .), and thousand separator character (\c ,) are converted to appropriately localized characters as specified by the user's localization preference. While the currency-symbol part of this feature may be useful in certain types of applications, it's probably more likely that you would tie a particular application to a particular currency (that is, that you would "hard-code" the currency symbol and separators instead of having them dynamically change based on the user's configuration). The reason for this, of course, is that \c NSNumberFormatter doesn't perform currency conversions, it just formats numeric data. You wouldn't want one user interpreting the value "56324" as US currency and another user who's accessing the same data interpreting it as Japanese currency, simply based on each user's localization preferences.
 func (nf *NumberFormatter) WithLocalizesFormat(localizesFormat bool) *NumberFormatter {
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setLocalizesFormat:"), localizesFormat)
 	return nf
 }
 
-// WithFormat sets the format.
+// WithFormat sets the receiver's format. The format string uses the format patterns from the Unicode Technical Standard #35. For more information, see the Data Formatting Guide.
 func (nf *NumberFormatter) WithFormat(format StringProvider) *NumberFormatter {
 	defer runtime.KeepAlive(format)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setFormat:"), objref.IDOf(format))
 	return nf
 }
 
-// WithAttributedStringForZero sets the attributed string for zero.
+// WithAttributedStringForZero sets the attributed string that the receiver uses to display zero values. By default zero values are displayed according to the format specified for positive values. This method is for use with formatters using \c NSNumberFormatterBehavior10_0 behavior.
 func (nf *NumberFormatter) WithAttributedStringForZero(attributedStringForZero AttributedStringProvider) *NumberFormatter {
 	defer runtime.KeepAlive(attributedStringForZero)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setAttributedStringForZero:"), objref.IDOf(attributedStringForZero))
 	return nf
 }
 
-// WithAttributedStringForNil sets the attributed string for nil.
+// WithAttributedStringForNil sets the attributed string the receiver uses to display \c nil values. By default \c nil values are displayed as an empty string. This method is for use with formatters using \c NSNumberFormatterBehavior10_0 behavior.
 func (nf *NumberFormatter) WithAttributedStringForNil(attributedStringForNil AttributedStringProvider) *NumberFormatter {
 	defer runtime.KeepAlive(attributedStringForNil)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setAttributedStringForNil:"), objref.IDOf(attributedStringForNil))
 	return nf
 }
 
-// WithAttributedStringForNotANumber sets the attributed string for not a number.
+// WithAttributedStringForNotANumber sets the attributed string the receiver uses to display "not a number" values. By default "not a number" values are displayed as the string "NaN". This method is for use with formatters using \c NSNumberFormatterBehavior10_0 behavior.
 func (nf *NumberFormatter) WithAttributedStringForNotANumber(attributedStringForNotANumber AttributedStringProvider) *NumberFormatter {
 	defer runtime.KeepAlive(attributedStringForNotANumber)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setAttributedStringForNotANumber:"), objref.IDOf(attributedStringForNotANumber))
 	return nf
 }
 
-// WithRoundingBehavior sets the rounding behavior.
+// WithRoundingBehavior sets the rounding behavior used by the receiver.
 func (nf *NumberFormatter) WithRoundingBehavior(roundingBehavior *DecimalNumberHandler) *NumberFormatter {
 	defer runtime.KeepAlive(roundingBehavior)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setRoundingBehavior:"), objref.IDOf(roundingBehavior))
@@ -499,7 +497,7 @@ func (nf *NumberFormatter) WithScriptingProperties(scriptingProperties map[strin
 	return nf
 }
 
-// StringFromNumber wraps the corresponding Objective-C method.
+// StringFromNumber returns a string containing the formatted value of the provided number object.
 func (nf *NumberFormatter) StringFromNumber(number *Number) string {
 	defer runtime.KeepAlive(nf)
 	defer runtime.KeepAlive(number)
@@ -510,56 +508,56 @@ func (nf *NumberFormatter) StringFromNumber(number *Number) string {
 	return purego.GoString(_r)
 }
 
-// NumberFromString wraps the corresponding Objective-C method.
+// NumberFromString returns an \c NSNumber object created by parsing a given string. If a string contains any characters other than numerical digits or locale-appropriate group or decimal separators, parsing will fail. Any leading or trailing space separator characters in a string are ignored. For example, the strings " 5", "5 ", and "5" all produce the number \c 5.
 func (nf *NumberFormatter) NumberFromString(str string) *Number {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("numberFromString:"), purego.NSString(str))
 	return NumberFromID(_r)
 }
 
-// FormattingContext returns the formatting context.
+// FormattingContext returns the capitalization formatting context used when formatting a number. Defaults to \c NSFormattingContextUnknown.
 func (nf *NumberFormatter) FormattingContext() FormattingContext {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[FormattingContext](objref.IDOf(nf), objc.RegisterName("formattingContext"))
 	return _r
 }
 
-// MinimumGroupingDigits returns the minimum grouping digits.
+// MinimumGroupingDigits returns see \c kCFNumberFormatterMinGroupingDigits in \c CFNumberFormatter for an explanation on how minimum grouping digits is used.
 func (nf *NumberFormatter) MinimumGroupingDigits() int {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[int](objref.IDOf(nf), objc.RegisterName("minimumGroupingDigits"))
 	return _r
 }
 
-// NumberStyle returns the number style.
+// NumberStyle returns the number style used by the receiver. Styles are essentially predetermined sets of values for certain properties. Examples of number-formatter styles are those used for decimal values, percentage values, and currency.
 func (nf *NumberFormatter) NumberStyle() NumberFormatterStyle {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[NumberFormatterStyle](objref.IDOf(nf), objc.RegisterName("numberStyle"))
 	return _r
 }
 
-// Locale returns the locale.
+// Locale returns the locale of the receiver. The locale determines the default values for many formatter attributes, such as ISO region and language codes, currency code, calendar, system of measurement, and decimal separator.
 func (nf *NumberFormatter) Locale() *Locale {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("locale"))
 	return LocaleFromID(_r)
 }
 
-// GeneratesDecimalNumbers wraps the corresponding Objective-C method.
+// GeneratesDecimalNumbers reports whether the receiver creates instances of \c NSDecimalNumber when it converts strings to number objects.
 func (nf *NumberFormatter) GeneratesDecimalNumbers() bool {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[bool](objref.IDOf(nf), objc.RegisterName("generatesDecimalNumbers"))
 	return _r
 }
 
-// FormatterBehavior returns the formatter behavior.
+// FormatterBehavior returns the formatter behavior of the receiver.
 func (nf *NumberFormatter) FormatterBehavior() NumberFormatterBehavior {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[NumberFormatterBehavior](objref.IDOf(nf), objc.RegisterName("formatterBehavior"))
 	return _r
 }
 
-// NegativeFormat returns the negative format.
+// NegativeFormat returns the format the receiver uses to display negative values.
 func (nf *NumberFormatter) NegativeFormat() string {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("negativeFormat"))
@@ -569,14 +567,14 @@ func (nf *NumberFormatter) NegativeFormat() string {
 	return purego.GoString(_r)
 }
 
-// TextAttributesForNegativeValues returns the text attributes for negative values.
+// TextAttributesForNegativeValues returns the text attributes to be used in displaying negative values. This property is a dictionary that contains the attributes used to display negative values.
 func (nf *NumberFormatter) TextAttributesForNegativeValues() map[string]obj.Object {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("textAttributesForNegativeValues"))
 	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// PositiveFormat returns the positive format.
+// PositiveFormat returns the format the receiver uses to display positive values.
 func (nf *NumberFormatter) PositiveFormat() string {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("positiveFormat"))
@@ -586,21 +584,21 @@ func (nf *NumberFormatter) PositiveFormat() string {
 	return purego.GoString(_r)
 }
 
-// TextAttributesForPositiveValues returns the text attributes for positive values.
+// TextAttributesForPositiveValues returns the text attributes to be used in displaying positive values. This property is a dictionary that contains the attributes used to display positive values.
 func (nf *NumberFormatter) TextAttributesForPositiveValues() map[string]obj.Object {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("textAttributesForPositiveValues"))
 	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// AllowsFloats wraps the corresponding Objective-C method.
+// AllowsFloats reports whether the receiver allows as input floating-point values (that is, values that include the period character (\c .)). By default, floating point values are allowed.
 func (nf *NumberFormatter) AllowsFloats() bool {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[bool](objref.IDOf(nf), objc.RegisterName("allowsFloats"))
 	return _r
 }
 
-// DecimalSeparator returns the decimal separator.
+// DecimalSeparator returns the character the receiver uses as a decimal separator.
 func (nf *NumberFormatter) DecimalSeparator() string {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("decimalSeparator"))
@@ -610,14 +608,14 @@ func (nf *NumberFormatter) DecimalSeparator() string {
 	return purego.GoString(_r)
 }
 
-// AlwaysShowsDecimalSeparator wraps the corresponding Objective-C method.
+// AlwaysShowsDecimalSeparator reports whether the receiver always shows the decimal separator, even for integer numbers.
 func (nf *NumberFormatter) AlwaysShowsDecimalSeparator() bool {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[bool](objref.IDOf(nf), objc.RegisterName("alwaysShowsDecimalSeparator"))
 	return _r
 }
 
-// CurrencyDecimalSeparator returns the currency decimal separator.
+// CurrencyDecimalSeparator returns the string used by the receiver as a currency decimal separator.
 func (nf *NumberFormatter) CurrencyDecimalSeparator() string {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("currencyDecimalSeparator"))
@@ -627,14 +625,14 @@ func (nf *NumberFormatter) CurrencyDecimalSeparator() string {
 	return purego.GoString(_r)
 }
 
-// UsesGroupingSeparator wraps the corresponding Objective-C method.
+// UsesGroupingSeparator reports whether the receiver displays the group separator.
 func (nf *NumberFormatter) UsesGroupingSeparator() bool {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[bool](objref.IDOf(nf), objc.RegisterName("usesGroupingSeparator"))
 	return _r
 }
 
-// GroupingSeparator returns the grouping separator.
+// GroupingSeparator returns the string used by the receiver for a grouping separator. For example, the grouping separator used in the United States is the comma ("10,000") whereas in France it is the space ("10 000").
 func (nf *NumberFormatter) GroupingSeparator() string {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("groupingSeparator"))
@@ -644,7 +642,7 @@ func (nf *NumberFormatter) GroupingSeparator() string {
 	return purego.GoString(_r)
 }
 
-// ZeroSymbol returns the zero symbol.
+// ZeroSymbol returns the string used to represent a zero value. If not specified, zero values are formatted normally. You might, for example, set this property to \c "-" in a spreadsheet used for accounting.
 func (nf *NumberFormatter) ZeroSymbol() string {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("zeroSymbol"))
@@ -654,14 +652,14 @@ func (nf *NumberFormatter) ZeroSymbol() string {
 	return purego.GoString(_r)
 }
 
-// TextAttributesForZero returns the text attributes for zero.
+// TextAttributesForZero returns the text attributes used to display a zero value. This property is a dictionary that contains the text attributes used to display zero values.
 func (nf *NumberFormatter) TextAttributesForZero() map[string]obj.Object {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("textAttributesForZero"))
 	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// NilSymbol returns the nil symbol.
+// NilSymbol returns the string used to represent a \c nil value. By default, this property is set to an empty string ("").
 func (nf *NumberFormatter) NilSymbol() string {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("nilSymbol"))
@@ -671,14 +669,14 @@ func (nf *NumberFormatter) NilSymbol() string {
 	return purego.GoString(_r)
 }
 
-// TextAttributesForNil returns the text attributes for nil.
+// TextAttributesForNil returns the text attributes used to display the \c nil symbol.
 func (nf *NumberFormatter) TextAttributesForNil() map[string]obj.Object {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("textAttributesForNil"))
 	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// NotANumberSymbol returns the not a number symbol.
+// NotANumberSymbol returns the string used to represent a NaN ("not a number") value. By default, this property is set to the string "NaN".
 func (nf *NumberFormatter) NotANumberSymbol() string {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("notANumberSymbol"))
@@ -688,14 +686,14 @@ func (nf *NumberFormatter) NotANumberSymbol() string {
 	return purego.GoString(_r)
 }
 
-// TextAttributesForNotANumber returns the text attributes for not a number.
+// TextAttributesForNotANumber returns the text attributes used to display the NaN ("not a number") string.
 func (nf *NumberFormatter) TextAttributesForNotANumber() map[string]obj.Object {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("textAttributesForNotANumber"))
 	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// PositiveInfinitySymbol returns the positive infinity symbol.
+// PositiveInfinitySymbol returns the string used to represent a positive infinity symbol. By default, this property is set to the string "+\u221e".
 func (nf *NumberFormatter) PositiveInfinitySymbol() string {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("positiveInfinitySymbol"))
@@ -705,14 +703,14 @@ func (nf *NumberFormatter) PositiveInfinitySymbol() string {
 	return purego.GoString(_r)
 }
 
-// TextAttributesForPositiveInfinity returns the text attributes for positive infinity.
+// TextAttributesForPositiveInfinity returns the text attributes used to display the positive infinity symbol. This property is a dictionary that contains the text attributes used to display the positive infinity string.
 func (nf *NumberFormatter) TextAttributesForPositiveInfinity() map[string]obj.Object {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("textAttributesForPositiveInfinity"))
 	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// NegativeInfinitySymbol returns the negative infinity symbol.
+// NegativeInfinitySymbol returns the string used to represent a negative infinity symbol. By default, this property is set to the string "-\u221e".
 func (nf *NumberFormatter) NegativeInfinitySymbol() string {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("negativeInfinitySymbol"))
@@ -722,14 +720,14 @@ func (nf *NumberFormatter) NegativeInfinitySymbol() string {
 	return purego.GoString(_r)
 }
 
-// TextAttributesForNegativeInfinity returns the text attributes for negative infinity.
+// TextAttributesForNegativeInfinity returns the text attributes used to display the negative infinity symbol. This property is a dictionary that contains the text attributes used to display the negative infinity string.
 func (nf *NumberFormatter) TextAttributesForNegativeInfinity() map[string]obj.Object {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("textAttributesForNegativeInfinity"))
 	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// PositivePrefix returns the positive prefix.
+// PositivePrefix returns the string the receiver uses as the prefix for positive values.
 func (nf *NumberFormatter) PositivePrefix() string {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("positivePrefix"))
@@ -739,7 +737,7 @@ func (nf *NumberFormatter) PositivePrefix() string {
 	return purego.GoString(_r)
 }
 
-// PositiveSuffix returns the positive suffix.
+// PositiveSuffix returns the string the receiver uses as the suffix for positive values.
 func (nf *NumberFormatter) PositiveSuffix() string {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("positiveSuffix"))
@@ -749,7 +747,7 @@ func (nf *NumberFormatter) PositiveSuffix() string {
 	return purego.GoString(_r)
 }
 
-// NegativePrefix returns the negative prefix.
+// NegativePrefix returns the string the receiver uses as a prefix for negative values.
 func (nf *NumberFormatter) NegativePrefix() string {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("negativePrefix"))
@@ -759,7 +757,7 @@ func (nf *NumberFormatter) NegativePrefix() string {
 	return purego.GoString(_r)
 }
 
-// NegativeSuffix returns the negative suffix.
+// NegativeSuffix returns the string the receiver uses as a suffix for negative values.
 func (nf *NumberFormatter) NegativeSuffix() string {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("negativeSuffix"))
@@ -769,7 +767,7 @@ func (nf *NumberFormatter) NegativeSuffix() string {
 	return purego.GoString(_r)
 }
 
-// CurrencyCode returns the currency code.
+// CurrencyCode returns the receiver's currency code. A currency code is a three-letter code that is, in most cases, composed of a region's two-character Internet region code plus an extra character to denote the currency unit. For example, the currency code for the Australian dollar is "AUD". Currency codes are based on the ISO 4217 standard.
 func (nf *NumberFormatter) CurrencyCode() string {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("currencyCode"))
@@ -779,7 +777,7 @@ func (nf *NumberFormatter) CurrencyCode() string {
 	return purego.GoString(_r)
 }
 
-// CurrencySymbol returns the currency symbol.
+// CurrencySymbol returns the string used by the receiver as a local currency symbol. A region typically has a local currency symbol and an international currency symbol. The local symbol is used within the region, while the international currency symbol is used in international contexts to specify that region's currency unambiguously. The local currency symbol is often represented by a Unicode code point.
 func (nf *NumberFormatter) CurrencySymbol() string {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("currencySymbol"))
@@ -789,7 +787,7 @@ func (nf *NumberFormatter) CurrencySymbol() string {
 	return purego.GoString(_r)
 }
 
-// InternationalCurrencySymbol returns the international currency symbol.
+// InternationalCurrencySymbol returns the international currency symbol used by the receiver. A region typically has a local currency symbol and an international currency symbol. The local symbol is used within the region, while the international currency symbol is used in international contexts to specify that region's currency unambiguously. The international currency symbol is often represented by a Unicode code point.
 func (nf *NumberFormatter) InternationalCurrencySymbol() string {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("internationalCurrencySymbol"))
@@ -799,7 +797,7 @@ func (nf *NumberFormatter) InternationalCurrencySymbol() string {
 	return purego.GoString(_r)
 }
 
-// PercentSymbol returns the percent symbol.
+// PercentSymbol returns the string used to represent a percent symbol. By default, this property is set to the percent sign (%).
 func (nf *NumberFormatter) PercentSymbol() string {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("percentSymbol"))
@@ -809,7 +807,7 @@ func (nf *NumberFormatter) PercentSymbol() string {
 	return purego.GoString(_r)
 }
 
-// PerMillSymbol returns the per mill symbol.
+// PerMillSymbol returns the string used to represent a per-mill (per-thousand) symbol. By default, this property is set to the per mille sign (\u2030).
 func (nf *NumberFormatter) PerMillSymbol() string {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("perMillSymbol"))
@@ -819,7 +817,7 @@ func (nf *NumberFormatter) PerMillSymbol() string {
 	return purego.GoString(_r)
 }
 
-// MinusSign returns the minus sign.
+// MinusSign returns the string used to represent a minus sign. By default, this property is set to the minus sign (-).
 func (nf *NumberFormatter) MinusSign() string {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("minusSign"))
@@ -829,7 +827,7 @@ func (nf *NumberFormatter) MinusSign() string {
 	return purego.GoString(_r)
 }
 
-// PlusSign returns the plus sign.
+// PlusSign returns the string used to represent a plus sign. By default, this property is set to the plus sign (+).
 func (nf *NumberFormatter) PlusSign() string {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("plusSign"))
@@ -839,7 +837,7 @@ func (nf *NumberFormatter) PlusSign() string {
 	return purego.GoString(_r)
 }
 
-// ExponentSymbol returns the exponent symbol.
+// ExponentSymbol returns the string used to represent an exponent symbol. By default, this property is set to the latin capital letter E. The exponent symbol is the "E" or "e" in the scientific notation of numbers, as in "1.0E+42".
 func (nf *NumberFormatter) ExponentSymbol() string {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("exponentSymbol"))
@@ -849,35 +847,35 @@ func (nf *NumberFormatter) ExponentSymbol() string {
 	return purego.GoString(_r)
 }
 
-// GroupingSize returns the grouping size.
+// GroupingSize returns the grouping size of the receiver.
 func (nf *NumberFormatter) GroupingSize() int {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[int](objref.IDOf(nf), objc.RegisterName("groupingSize"))
 	return _r
 }
 
-// SecondaryGroupingSize returns the secondary grouping size.
+// SecondaryGroupingSize returns the secondary grouping size of the receiver. Some locales allow the specification of another grouping size for larger numbers. For example, some locales may represent a number such as 61, 242, 378.46 (as in the United States) as 6,12,42,378.46. In this case, the secondary grouping size (covering the groups of digits furthest from the decimal point) is 2.
 func (nf *NumberFormatter) SecondaryGroupingSize() int {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[int](objref.IDOf(nf), objc.RegisterName("secondaryGroupingSize"))
 	return _r
 }
 
-// Multiplier returns the multiplier.
+// Multiplier returns the multiplier of the receiver. A multiplier is a factor used in conversions between numbers and strings (that is, numbers as stored and numbers as displayed). When the input value is a string, the multiplier is used to divide, and when the input value is a number, the multiplier is used to multiply. These operations allow the formatted values to be different from the values that a program manipulates internally.
 func (nf *NumberFormatter) Multiplier() *Number {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("multiplier"))
 	return NumberFromID(_r)
 }
 
-// FormatWidth returns the format width.
+// FormatWidth returns the format width used by the receiver. The format width is the number of characters of a formatted number within a string that is either left justified or right justified based on the value contained in \c paddingPosition.
 func (nf *NumberFormatter) FormatWidth() int {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[int](objref.IDOf(nf), objc.RegisterName("formatWidth"))
 	return _r
 }
 
-// PaddingCharacter returns the padding character.
+// PaddingCharacter returns the string that the receiver uses to pad numbers in the formatted string representation.
 func (nf *NumberFormatter) PaddingCharacter() string {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("paddingCharacter"))
@@ -887,70 +885,70 @@ func (nf *NumberFormatter) PaddingCharacter() string {
 	return purego.GoString(_r)
 }
 
-// PaddingPosition returns the padding position.
+// PaddingPosition returns the padding position used by the receiver.
 func (nf *NumberFormatter) PaddingPosition() NumberFormatterPadPosition {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[NumberFormatterPadPosition](objref.IDOf(nf), objc.RegisterName("paddingPosition"))
 	return _r
 }
 
-// RoundingMode returns the rounding mode.
+// RoundingMode returns the rounding mode used by the receiver.
 func (nf *NumberFormatter) RoundingMode() NumberFormatterRoundingMode {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[NumberFormatterRoundingMode](objref.IDOf(nf), objc.RegisterName("roundingMode"))
 	return _r
 }
 
-// RoundingIncrement returns the rounding increment.
+// RoundingIncrement returns the rounding increment used by the receiver.
 func (nf *NumberFormatter) RoundingIncrement() *Number {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("roundingIncrement"))
 	return NumberFromID(_r)
 }
 
-// MinimumIntegerDigits returns the minimum integer digits.
+// MinimumIntegerDigits returns the minimum number of digits before the decimal separator. By default, this property is set to \c 0.
 func (nf *NumberFormatter) MinimumIntegerDigits() int {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[int](objref.IDOf(nf), objc.RegisterName("minimumIntegerDigits"))
 	return _r
 }
 
-// MaximumIntegerDigits returns the maximum integer digits.
+// MaximumIntegerDigits returns the maximum number of digits before the decimal separator. By default, this property is set to \c 42.
 func (nf *NumberFormatter) MaximumIntegerDigits() int {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[int](objref.IDOf(nf), objc.RegisterName("maximumIntegerDigits"))
 	return _r
 }
 
-// MinimumFractionDigits returns the minimum fraction digits.
+// MinimumFractionDigits returns the minimum number of digits after the decimal separator. By default, this property is set to \c 0.
 func (nf *NumberFormatter) MinimumFractionDigits() int {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[int](objref.IDOf(nf), objc.RegisterName("minimumFractionDigits"))
 	return _r
 }
 
-// MaximumFractionDigits returns the maximum fraction digits.
+// MaximumFractionDigits returns the maximum number of digits after the decimal separator. By default, this property is set to \c 0.
 func (nf *NumberFormatter) MaximumFractionDigits() int {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[int](objref.IDOf(nf), objc.RegisterName("maximumFractionDigits"))
 	return _r
 }
 
-// Minimum returns the minimum.
+// Minimum returns the lowest number allowed as input by the receiver.
 func (nf *NumberFormatter) Minimum() *Number {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("minimum"))
 	return NumberFromID(_r)
 }
 
-// Maximum returns the maximum.
+// Maximum returns the highest number allowed as input by the receiver.
 func (nf *NumberFormatter) Maximum() *Number {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("maximum"))
 	return NumberFromID(_r)
 }
 
-// CurrencyGroupingSeparator returns the currency grouping separator.
+// CurrencyGroupingSeparator returns the currency grouping separator for the receiver.
 func (nf *NumberFormatter) CurrencyGroupingSeparator() string {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("currencyGroupingSeparator"))
@@ -960,49 +958,49 @@ func (nf *NumberFormatter) CurrencyGroupingSeparator() string {
 	return purego.GoString(_r)
 }
 
-// IsLenient reports whether the object is lenient.
+// IsLenient reports whether the receiver will use heuristics to guess at the number which is intended by a string. If the formatter is set to be lenient, as with any guessing it may get the result number wrong (that is, a number other than that which was intended).
 func (nf *NumberFormatter) IsLenient() bool {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[bool](objref.IDOf(nf), objc.RegisterName("isLenient"))
 	return _r
 }
 
-// UsesSignificantDigits wraps the corresponding Objective-C method.
+// UsesSignificantDigits reports whether the formatter uses minimum and maximum significant digits when formatting numbers. The \c NSNumberFormatter class has two ways of determining how many digits to represent: using integer and fraction digits and using significant digits. When this property is set to \c false, numbers are formatted according to whether you want them formatted as fractions or as integers. This property is \c false by default. Set this property to \c true to format numbers according to the significant digits configuration specified by the \c minimumSignificantDigits and \c maximumSignificantDigits properties. By default, the minimum number of significant digits is 1, and the maximum number of significant digits is 6. When a number formatter is configured to use significant digits, it ignores any minimum or maximum values used to set integer or fraction digits.
 func (nf *NumberFormatter) UsesSignificantDigits() bool {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[bool](objref.IDOf(nf), objc.RegisterName("usesSignificantDigits"))
 	return _r
 }
 
-// MinimumSignificantDigits returns the minimum significant digits.
+// MinimumSignificantDigits returns the minimum number of significant digits for the number formatter. You must set the \c usesSignificantDigits property to \c YES in order for this property to affect formatting behavior. By default, the minimum number of significant digits is 1.
 func (nf *NumberFormatter) MinimumSignificantDigits() int {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[int](objref.IDOf(nf), objc.RegisterName("minimumSignificantDigits"))
 	return _r
 }
 
-// MaximumSignificantDigits returns the maximum significant digits.
+// MaximumSignificantDigits returns the maximum number of significant digits for the number formatter. You must set the \c usesSignificantDigits property to \c YES in order for this property to affect formatting behavior. By default, the maximum number of significant digits is 6. Values less than 1 are ignored.
 func (nf *NumberFormatter) MaximumSignificantDigits() int {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[int](objref.IDOf(nf), objc.RegisterName("maximumSignificantDigits"))
 	return _r
 }
 
-// IsPartialStringValidationEnabled reports whether the object is partial string validation enabled.
+// IsPartialStringValidationEnabled reports whether partial string validation is enabled for the receiver.
 func (nf *NumberFormatter) IsPartialStringValidationEnabled() bool {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[bool](objref.IDOf(nf), objc.RegisterName("isPartialStringValidationEnabled"))
 	return _r
 }
 
-// HasThousandSeparators reports whether the object has thousand separators.
+// HasThousandSeparators reports whether the receiver uses thousand separators.
 func (nf *NumberFormatter) HasThousandSeparators() bool {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[bool](objref.IDOf(nf), objc.RegisterName("hasThousandSeparators"))
 	return _r
 }
 
-// ThousandSeparator returns the thousand separator.
+// ThousandSeparator returns the character the receiver uses as a thousand separator. If you don't have thousand separators enabled through any other means (such as \c format), using this method enables them. This method is for use with formatters using \c NSNumberFormatterBehavior10_0 behavior.
 func (nf *NumberFormatter) ThousandSeparator() string {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("thousandSeparator"))
@@ -1012,14 +1010,14 @@ func (nf *NumberFormatter) ThousandSeparator() string {
 	return purego.GoString(_r)
 }
 
-// LocalizesFormat wraps the corresponding Objective-C method.
+// LocalizesFormat reports whether the dollar sign character (\c $), decimal separator character (\c .), and thousand separator character (\c ,) are converted to appropriately localized characters as specified by the user's localization preference. While the currency-symbol part of this feature may be useful in certain types of applications, it's probably more likely that you would tie a particular application to a particular currency (that is, that you would "hard-code" the currency symbol and separators instead of having them dynamically change based on the user's configuration). The reason for this, of course, is that \c NSNumberFormatter doesn't perform currency conversions, it just formats numeric data. You wouldn't want one user interpreting the value "56324" as US currency and another user who's accessing the same data interpreting it as Japanese currency, simply based on each user's localization preferences.
 func (nf *NumberFormatter) LocalizesFormat() bool {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[bool](objref.IDOf(nf), objc.RegisterName("localizesFormat"))
 	return _r
 }
 
-// Format returns the format.
+// Format returns the receiver's format. The format string uses the format patterns from the Unicode Technical Standard #35. For more information, see the Data Formatting Guide.
 func (nf *NumberFormatter) Format() string {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("format"))
@@ -1029,28 +1027,28 @@ func (nf *NumberFormatter) Format() string {
 	return purego.GoString(_r)
 }
 
-// AttributedStringForZero returns the attributed string for zero.
+// AttributedStringForZero returns the attributed string that the receiver uses to display zero values. By default zero values are displayed according to the format specified for positive values. This method is for use with formatters using \c NSNumberFormatterBehavior10_0 behavior.
 func (nf *NumberFormatter) AttributedStringForZero() *AttributedString {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("attributedStringForZero"))
 	return AttributedStringFromID(_r)
 }
 
-// AttributedStringForNil returns the attributed string for nil.
+// AttributedStringForNil returns the attributed string the receiver uses to display \c nil values. By default \c nil values are displayed as an empty string. This method is for use with formatters using \c NSNumberFormatterBehavior10_0 behavior.
 func (nf *NumberFormatter) AttributedStringForNil() *AttributedString {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("attributedStringForNil"))
 	return AttributedStringFromID(_r)
 }
 
-// AttributedStringForNotANumber returns the attributed string for not a number.
+// AttributedStringForNotANumber returns the attributed string the receiver uses to display "not a number" values. By default "not a number" values are displayed as the string "NaN". This method is for use with formatters using \c NSNumberFormatterBehavior10_0 behavior.
 func (nf *NumberFormatter) AttributedStringForNotANumber() *AttributedString {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("attributedStringForNotANumber"))
 	return AttributedStringFromID(_r)
 }
 
-// RoundingBehavior returns the rounding behavior.
+// RoundingBehavior returns the rounding behavior used by the receiver.
 func (nf *NumberFormatter) RoundingBehavior() *DecimalNumberHandler {
 	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("roundingBehavior"))

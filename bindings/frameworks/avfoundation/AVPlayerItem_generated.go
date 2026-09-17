@@ -731,18 +731,26 @@ func (pi *PlayerItem) SelectMediaOptionAutomaticallyInMediaSelectionGroup(mediaS
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("selectMediaOptionAutomaticallyInMediaSelectionGroup:"), objref.IDOf(mediaSelectionGroup))
 }
 
-// CurrentMediaSelection returns the current media selection.
-func (pi *PlayerItem) CurrentMediaSelection() *MediaSelection {
+// SelectableMediaSelectionOptionsInMediaSelectionGroup returns the media selection options in the specified media selection group that can produce content.
+func (pi *PlayerItem) SelectableMediaSelectionOptionsInMediaSelectionGroup(mediaSelectionGroup *MediaSelectionGroup) []*MediaSelectionOption {
 	defer runtime.KeepAlive(pi)
-	var _mainthread0 *MediaSelection
+	defer runtime.KeepAlive(mediaSelectionGroup)
+	var _mainthread0 []*MediaSelectionOption
 	purego.Main(func() {
-		_mainthread0 = func() *MediaSelection {
-			_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("currentMediaSelection"))
-			return MediaSelectionFromID(_r)
+		_mainthread0 = func() []*MediaSelectionOption {
+			_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("selectableMediaSelectionOptionsInMediaSelectionGroup:"), objref.IDOf(mediaSelectionGroup))
+			return purego.NSArrayToSlice(_r, func(_id objc.ID) *MediaSelectionOption { return MediaSelectionOptionFromID(_id) })
 		}()
 	})
 	return _mainthread0
 
+}
+
+// CurrentMediaSelection provides an instance of AVMediaSelection carrying current selections for each of the receiver's media selection groups.
+func (pi *PlayerItem) CurrentMediaSelection() *MediaSelection {
+	defer runtime.KeepAlive(pi)
+	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("currentMediaSelection"))
+	return MediaSelectionFromID(_r)
 }
 
 // SelectMediaPresentationLanguageForMediaSelectionGroup when the associated AVPlayer’s appliesMediaSelectionCriteriaAutomatically property is set to YES, configures the player item to prefer a particular language, replacing any previous preference for available languages of the specified group’s custom media selection scheme.
@@ -841,6 +849,56 @@ func (pi *PlayerItem) ErrorLog() *PlayerItemErrorLog {
 	defer runtime.KeepAlive(pi)
 	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("errorLog"))
 	return PlayerItemErrorLogFromID(_r)
+}
+
+// FetchAccessLog asynchronously retrieves the access log without blocking the calling thread.
+//
+// FetchAccessLog blocks until the operation completes or ctx is cancelled.
+func (pi *PlayerItem) FetchAccessLog(ctx context.Context) (result *PlayerItemAccessLog, err error) {
+	defer runtime.KeepAlive(pi)
+	type _result struct {
+		val *PlayerItemAccessLog
+		err error
+	}
+	_ch := make(chan _result, 1)
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
+		var _o _result
+		_o.val = PlayerItemAccessLogFromID(_p0)
+		_ch <- _o
+	})
+	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("fetchAccessLogWithCompletionHandler:"), _block)
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *PlayerItemAccessLog
+		return _zero, ctx.Err()
+	}
+}
+
+// FetchErrorLog asynchronously retrieves the error log without blocking the calling thread.
+//
+// FetchErrorLog blocks until the operation completes or ctx is cancelled.
+func (pi *PlayerItem) FetchErrorLog(ctx context.Context) (result *PlayerItemErrorLog, err error) {
+	defer runtime.KeepAlive(pi)
+	type _result struct {
+		val *PlayerItemErrorLog
+		err error
+	}
+	_ch := make(chan _result, 1)
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
+		var _o _result
+		_o.val = PlayerItemErrorLogFromID(_p0)
+		_ch <- _o
+	})
+	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("fetchErrorLogWithCompletionHandler:"), _block)
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *PlayerItemErrorLog
+		return _zero, ctx.Err()
+	}
 }
 
 // AddOutput adds the specified player item output object to the receiver.

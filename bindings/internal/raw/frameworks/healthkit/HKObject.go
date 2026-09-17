@@ -4,8 +4,6 @@
 package healthkit
 
 import (
-	"unsafe"
-
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/foundation"
@@ -47,9 +45,12 @@ func (o *HKObject) UUID() *foundation.NSUUID {
 	return foundation.NSUUIDFromID(_ret)
 }
 
-func (o *HKObject) Source() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _hKObjectSelSource)
-	return _ret
+func (o *HKObject) Source() *HKSource {
+	_ret := objc.Send[objc.ID](o.Ptr(), _hKObjectSelSource)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return HKSourceFromID(_ret)
 }
 
 // @property      sourceRevision @abstract      Represents the revision of the source responsible for saving the receiver.

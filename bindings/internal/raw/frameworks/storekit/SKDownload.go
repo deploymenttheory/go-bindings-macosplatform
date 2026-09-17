@@ -69,9 +69,12 @@ func (o *SKDownload) State() SKDownloadState {
 }
 
 // Deprecated: since macOS 10.15.
-func (o *SKDownload) ContentLength() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sKDownloadSelContentLength)
-	return _ret
+func (o *SKDownload) ContentLength() *foundation.NSNumber {
+	_ret := objc.Send[objc.ID](o.Ptr(), _sKDownloadSelContentLength)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSNumberFromID(_ret)
 }
 
 // Deprecated: Hosted content is no longer supported.

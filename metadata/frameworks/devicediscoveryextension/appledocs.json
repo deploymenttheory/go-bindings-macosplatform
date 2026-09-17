@@ -17,18 +17,6 @@
     }
   },
   "enums": {
-    "DDDeviceCategory": {
-      "doc": "An option that determines the icon for the device in the picker UI.",
-      "url": "https://developer.apple.com/documentation/devicediscoveryextension/dddevicecategory"
-    },
-    "DDDeviceMediaPlaybackState": {
-      "doc": "States that indicate the status of a device’s media playback.",
-      "url": "https://developer.apple.com/documentation/devicediscoveryextension/dddevicemediaplaybackstate"
-    },
-    "DDDeviceProtocol": {
-      "doc": "An identifier for the manner in which an app interacts with a device.",
-      "url": "https://developer.apple.com/documentation/devicediscoveryextension/dddeviceprotocol"
-    },
     "DDDeviceState": {
       "doc": "A state that represents the level of user interaction with the device.",
       "url": "https://developer.apple.com/documentation/devicediscoveryextension/dddevicestate",
@@ -63,14 +51,6 @@
           "url": "https://developer.apple.com/documentation/devicediscoveryextension/dddevicesupports/bluetoothhid"
         }
       }
-    },
-    "DDErrorCode": {
-      "doc": "Codes that identify errors that can occur during the framework’s use.",
-      "url": "https://developer.apple.com/documentation/devicediscoveryextension/dderrorcode"
-    },
-    "DDEventType": {
-      "doc": "Identifiers for the types of events that occur in the device discovery life cycle.",
-      "url": "https://developer.apple.com/documentation/devicediscoveryextension/ddeventtype"
     }
   },
   "methods": {
@@ -137,7 +117,7 @@
       },
       "networkEndpoint": {
         "doc": "An object that describes a local-network device.",
-        "url": "https://developer.apple.com/documentation/devicediscoveryextension/dddevice/networkendpoint-3lah1"
+        "url": "https://developer.apple.com/documentation/devicediscoveryextension/dddevice/networkendpoint-7excg"
       },
       "protocol": {
         "doc": "The manner in which the system applies your app’s device discovery extension.",

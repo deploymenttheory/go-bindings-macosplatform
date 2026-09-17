@@ -15,8 +15,6 @@ import (
 )
 
 // ElectrocardiogramVoltageMeasurement is an idiomatic wrapper over the Objective-C class HKElectrocardiogramVoltageMeasurement.
-//
-// The voltage for all leads at a single point in time.
 type ElectrocardiogramVoltageMeasurement struct {
 	objref.Handle
 }

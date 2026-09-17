@@ -18,7 +18,7 @@ import (
 
 // XMLParser is an idiomatic wrapper over the Objective-C class NSXMLParser.
 //
-// An event driven parser of XML documents (including DTD declarations).
+// An event driven parser of XML documents (including DTD declarations). An “XMLParser“ notifies its delegate about the items (elements, attributes, CDATA blocks, comments, and so on) that it encounters as it processes an XML document. It does not itself do anything with those parsed items except report them. It also reports parsing errors. For convenience, an “XMLParser“ object in the following descriptions is sometimes referred to as a parser object. Unless used in a callback, the “XMLParser“ is a thread-safe class as long as any given instance is only used in one thread. > Note: > Namespace support was implemented in “XMLParser“ starting in macOS 10.4. Namespace-related methods of “XMLParser“ prior to this version have no effect.
 type XMLParser struct {
 	objref.Handle
 }
@@ -75,21 +75,21 @@ func (xp *XMLParser) String() string {
 	return rt.Description(objref.IDOf(xp))
 }
 
-// NewXMLParserWithContentsOfURL creates a new XMLParser.
+// NewXMLParserWithContentsOfURL initializes a parser with the XML content referenced by the given URL. - Parameter url: An `NSURL` object specifying a URL. The URL must be fully qualified and refer to a scheme that is supported by the `NSURL` class. - Returns: An initialized `NSXMLParser` object or `nil` if an error occurs.
 func NewXMLParserWithContentsOfURL(url string) *XMLParser {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSXMLParser")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:"), rt.FileURL(url))
 	return xMLParserAdopt(_id)
 }
 
-// NewXMLParserWithData creates a new XMLParser.
+// NewXMLParserWithData initializes a parser with the XML contents encapsulated in a given data object. This method is the designated initializer. - Parameter data: An `NSData` object containing XML markup. - Returns: An initialized `NSXMLParser` object or `nil` if an error occurs.
 func NewXMLParserWithData(data []byte) *XMLParser {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSXMLParser")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), rt.BytesToNSData(data))
 	return xMLParserAdopt(_id)
 }
 
-// NewXMLParserWithStream creates a new XMLParser.
+// NewXMLParserWithStream initializes a parser with the XML contents from the specified stream and parses it. - Parameter stream: The input stream. The content is incrementally loaded from the specified stream and parsed. The `NSXMLParser` will open the stream, and synchronously read from it without scheduling it. - Returns: An initialized `NSXMLParser` object or `nil` if an error occurs.
 func NewXMLParserWithStream(stream *InputStream) *XMLParser {
 	defer runtime.KeepAlive(stream)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSXMLParser")), objc.RegisterName("alloc"))
@@ -97,7 +97,7 @@ func NewXMLParserWithStream(stream *InputStream) *XMLParser {
 	return xMLParserAdopt(_id)
 }
 
-// WithDelegate sets the delegate.
+// WithDelegate sets a delegate object that receives messages about the parsing process. For methods to be implemented by the delegate, see `NSXMLParserDelegate`.
 func (xp *XMLParser) WithDelegate(delegate XMLParserDelegate) *XMLParser {
 	_shim := newXMLParserDelegateShim(delegate)
 	_sel := objc.RegisterName("setDelegate:")
@@ -107,31 +107,31 @@ func (xp *XMLParser) WithDelegate(delegate XMLParserDelegate) *XMLParser {
 	return xp
 }
 
-// WithShouldProcessNamespaces sets the should process namespaces.
+// WithShouldProcessNamespaces sets a Boolean value that determines whether the parser reports the namespaces and qualified names of elements. `YES` if the parser reports namespace and qualified name, `NO` otherwise. The parser reports element names with the delegate methods `-parser:didStartElement:namespaceURI:qualifiedName:attributes:` and `-parser:didEndElement:namespaceURI:qualifiedName:`.
 func (xp *XMLParser) WithShouldProcessNamespaces(shouldProcessNamespaces bool) *XMLParser {
 	objc.Send[objc.ID](objref.IDOf(xp), objc.RegisterName("setShouldProcessNamespaces:"), shouldProcessNamespaces)
 	return xp
 }
 
-// WithShouldReportNamespacePrefixes sets the should report namespace prefixes.
+// WithShouldReportNamespacePrefixes sets a Boolean value that determines whether the parser reports the prefixes indicating the scope of namespace declarations. `YES` if the parser reports the scope of namespace declarations, `NO` otherwise. The default value is `NO`. The parser reports prefixes with the delegate methods `-parser:didStartMappingPrefix:toURI:` and `-parser:didEndMappingPrefix:`.
 func (xp *XMLParser) WithShouldReportNamespacePrefixes(shouldReportNamespacePrefixes bool) *XMLParser {
 	objc.Send[objc.ID](objref.IDOf(xp), objc.RegisterName("setShouldReportNamespacePrefixes:"), shouldReportNamespacePrefixes)
 	return xp
 }
 
-// WithExternalEntityResolvingPolicy sets the external entity resolving policy.
+// WithExternalEntityResolvingPolicy sets the external entity resolving policy for the parser. Defaults to `NSXMLParserResolveExternalEntitiesNever`.
 func (xp *XMLParser) WithExternalEntityResolvingPolicy(externalEntityResolvingPolicy XMLParserExternalEntityResolvingPolicy) *XMLParser {
 	objc.Send[objc.ID](objref.IDOf(xp), objc.RegisterName("setExternalEntityResolvingPolicy:"), externalEntityResolvingPolicy)
 	return xp
 }
 
-// WithAllowedExternalEntityURLs sets the allowed external entity ur ls.
+// WithAllowedExternalEntityURLs sets the set of external entity URLs that the parser is allowed to load.
 func (xp *XMLParser) WithAllowedExternalEntityURLs(allowedExternalEntityURLs []string) *XMLParser {
 	objc.Send[objc.ID](objref.IDOf(xp), objc.RegisterName("setAllowedExternalEntityURLs:"), rt.SliceToNSSet(allowedExternalEntityURLs, func(_v string) objc.ID { return rt.FileURL(_v) }))
 	return xp
 }
 
-// WithShouldResolveExternalEntities sets the should resolve external entities.
+// WithShouldResolveExternalEntities sets a Boolean value that determines whether the parser reports declarations of external entities. `YES` if the parser reports declarations of external entities, `NO` otherwise. The default value is `NO`. If you set this property to `YES`, you may cause other I/O operations, either network-based or disk-based, to load the external DTD. Toggles between disabling external entities entirely, and the current setting of the `externalEntityResolvingPolicy`. The `externalEntityResolvingPolicy` property should be used instead of this, unless targeting 10.9/7.0 or earlier.
 func (xp *XMLParser) WithShouldResolveExternalEntities(shouldResolveExternalEntities bool) *XMLParser {
 	objc.Send[objc.ID](objref.IDOf(xp), objc.RegisterName("setShouldResolveExternalEntities:"), shouldResolveExternalEntities)
 	return xp
@@ -149,62 +149,63 @@ func (xp *XMLParser) WithScriptingProperties(scriptingProperties map[string]obj.
 	return xp
 }
 
-// Parse wraps the corresponding Objective-C method.
+// Parse reports whether starts the event-driven parsing operation. - Returns: `YES` if the parsing operation succeeds; `NO` if an error occurs or if the parsing operation aborts.
 func (xp *XMLParser) Parse() bool {
 	defer runtime.KeepAlive(xp)
 	_r := objc.Send[bool](objref.IDOf(xp), objc.RegisterName("parse"))
 	return _r
 }
 
-// AbortParsing wraps the corresponding Objective-C method.
+// AbortParsing stops the parser object. If you invoke this method, the delegate, if it implements `-parser:parseErrorOccurred:`, is informed of the cancelled parsing operation.
 func (xp *XMLParser) AbortParsing() {
 	defer runtime.KeepAlive(xp)
 	objc.Send[objc.ID](objref.IDOf(xp), objc.RegisterName("abortParsing"))
 }
 
-// ShouldProcessNamespaces wraps the corresponding Objective-C method.
+// ShouldProcessNamespaces reports whether a Boolean value that determines whether the parser reports the namespaces and qualified names of elements. `YES` if the parser reports namespace and qualified name, `NO` otherwise. The parser reports element names with the delegate methods `-parser:didStartElement:namespaceURI:qualifiedName:attributes:` and `-parser:didEndElement:namespaceURI:qualifiedName:`.
 func (xp *XMLParser) ShouldProcessNamespaces() bool {
 	defer runtime.KeepAlive(xp)
 	_r := objc.Send[bool](objref.IDOf(xp), objc.RegisterName("shouldProcessNamespaces"))
 	return _r
 }
 
-// ShouldReportNamespacePrefixes wraps the corresponding Objective-C method.
+// ShouldReportNamespacePrefixes reports whether a Boolean value that determines whether the parser reports the prefixes indicating the scope of namespace declarations. `YES` if the parser reports the scope of namespace declarations, `NO` otherwise. The default value is `NO`. The parser reports prefixes with the delegate methods `-parser:didStartMappingPrefix:toURI:` and `-parser:didEndMappingPrefix:`.
 func (xp *XMLParser) ShouldReportNamespacePrefixes() bool {
 	defer runtime.KeepAlive(xp)
 	_r := objc.Send[bool](objref.IDOf(xp), objc.RegisterName("shouldReportNamespacePrefixes"))
 	return _r
 }
 
-// ExternalEntityResolvingPolicy returns the external entity resolving policy.
+// ExternalEntityResolvingPolicy returns the external entity resolving policy for the parser. Defaults to `NSXMLParserResolveExternalEntitiesNever`.
 func (xp *XMLParser) ExternalEntityResolvingPolicy() XMLParserExternalEntityResolvingPolicy {
 	defer runtime.KeepAlive(xp)
 	_r := objc.Send[XMLParserExternalEntityResolvingPolicy](objref.IDOf(xp), objc.RegisterName("externalEntityResolvingPolicy"))
 	return _r
 }
 
-// AllowedExternalEntityURLs returns the order of the returned elements is unspecified.
+// AllowedExternalEntityURLs returns the set of external entity URLs that the parser is allowed to load.
+// The order of the returned elements is unspecified.
 func (xp *XMLParser) AllowedExternalEntityURLs() []string {
 	defer runtime.KeepAlive(xp)
 	_r := objc.Send[objc.ID](objref.IDOf(xp), objc.RegisterName("allowedExternalEntityURLs"))
 	return rt.NSSetToSlice(_r, func(_id objc.ID) string { return rt.URLString(_id) })
 }
 
-// ParserError returns the parser error.
+// ParserError returns an `NSError` object from which you can obtain information about a parsing error. You may access this property after a parsing operation abnormally terminates to determine the cause of error.
 func (xp *XMLParser) ParserError() unsafe.Pointer {
 	defer runtime.KeepAlive(xp)
 	_r := objc.Send[unsafe.Pointer](objref.IDOf(xp), objc.RegisterName("parserError"))
 	return _r
 }
 
-// ShouldResolveExternalEntities wraps the corresponding Objective-C method.
+// ShouldResolveExternalEntities reports whether a Boolean value that determines whether the parser reports declarations of external entities. `YES` if the parser reports declarations of external entities, `NO` otherwise. The default value is `NO`. If you set this property to `YES`, you may cause other I/O operations, either network-based or disk-based, to load the external DTD. Toggles between disabling external entities entirely, and the current setting of the `externalEntityResolvingPolicy`. The `externalEntityResolvingPolicy` property should be used instead of this, unless targeting 10.9/7.0 or earlier.
 func (xp *XMLParser) ShouldResolveExternalEntities() bool {
 	defer runtime.KeepAlive(xp)
 	_r := objc.Send[bool](objref.IDOf(xp), objc.RegisterName("shouldResolveExternalEntities"))
 	return _r
 }
 
-// PublicID returns the public ID.
+// PublicID returns the public identifier of the external entity referenced in the XML document. You may access this property once a parsing operation has begun or after an error occurs.
 func (xp *XMLParser) PublicID() string {
 	defer runtime.KeepAlive(xp)
 	_r := objc.Send[objc.ID](objref.IDOf(xp), objc.RegisterName("publicID"))
@@ -214,7 +215,7 @@ func (xp *XMLParser) PublicID() string {
 	return purego.GoString(_r)
 }
 
-// SystemID returns the system ID.
+// SystemID returns the system identifier of the external entity referenced in the XML document. You may access this property once a parsing operation has begun or after an error occurs.
 func (xp *XMLParser) SystemID() string {
 	defer runtime.KeepAlive(xp)
 	_r := objc.Send[objc.ID](objref.IDOf(xp), objc.RegisterName("systemID"))
@@ -224,14 +225,14 @@ func (xp *XMLParser) SystemID() string {
 	return purego.GoString(_r)
 }
 
-// LineNumber returns the line number.
+// LineNumber returns the line number of the XML document being processed by the parser. You may access this property once a parsing operation has begun or after an error occurs.
 func (xp *XMLParser) LineNumber() int {
 	defer runtime.KeepAlive(xp)
 	_r := objc.Send[int](objref.IDOf(xp), objc.RegisterName("lineNumber"))
 	return _r
 }
 
-// ColumnNumber returns the column number.
+// ColumnNumber returns the column number of the XML document being processed by the parser. The column refers to the nesting level of the XML elements in the document. You may access this property once a parsing operation has begun or after an error occurs.
 func (xp *XMLParser) ColumnNumber() int {
 	defer runtime.KeepAlive(xp)
 	_r := objc.Send[int](objref.IDOf(xp), objc.RegisterName("columnNumber"))

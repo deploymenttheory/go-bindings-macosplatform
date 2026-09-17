@@ -33,6 +33,7 @@ func NSMetadataQueryAttributeValueTupleFromID(id objc.ID) *NSMetadataQueryAttrib
 	return o
 }
 
+// The attribute name for the tuple.
 func (o *NSMetadataQueryAttributeValueTuple) Attribute() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMetadataQueryAttributeValueTupleSelAttribute)
 	if _ret != 0 {
@@ -41,11 +42,13 @@ func (o *NSMetadataQueryAttributeValueTuple) Attribute() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The attribute value for the tuple.
 func (o *NSMetadataQueryAttributeValueTuple) Value() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMetadataQueryAttributeValueTupleSelValue)
 	return _ret
 }
 
+// The number of results with the given attribute value.
 func (o *NSMetadataQueryAttributeValueTuple) Count() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSMetadataQueryAttributeValueTupleSelCount)
 	return _ret

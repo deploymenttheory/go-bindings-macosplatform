@@ -104,21 +104,21 @@ func (n *Notification) WithScriptingProperties(scriptingProperties map[string]ob
 	return n
 }
 
-// Name returns the name.
+// Name returns the name of the notification. Typically you use this property to find out what kind of notification you are dealing with when you receive a notification. Notification names can be any string. To avoid name collisions, you might want to use a prefix that's specific to your application.
 func (n *Notification) Name() *String {
 	defer runtime.KeepAlive(n)
 	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("name"))
 	return StringFromID(_r)
 }
 
-// Object returns the object.
+// Object returns the object associated with the notification. This is often the object that posted this notification. It may be `nil`. Typically you use this method to find out what object a notification applies to when you receive a notification.
 func (n *Notification) Object() obj.Object {
 	defer runtime.KeepAlive(n)
 	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("object"))
 	return obj.Wrap(_r)
 }
 
-// UserInfo returns the user info.
+// UserInfo returns the user information dictionary associated with the notification. This may be `nil`. The user information dictionary stores any additional objects that objects receiving the notification might use.
 func (n *Notification) UserInfo() obj.Object {
 	defer runtime.KeepAlive(n)
 	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("userInfo"))

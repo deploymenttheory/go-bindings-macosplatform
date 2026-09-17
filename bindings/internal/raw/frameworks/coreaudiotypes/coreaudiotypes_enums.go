@@ -8,7 +8,6 @@ import (
 	"strings"
 )
 
-// Codes that describe error conditions that may occur when performing audio session operations.
 type AVAudioSessionErrorCode int64
 
 const (

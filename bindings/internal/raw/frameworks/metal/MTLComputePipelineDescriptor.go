@@ -49,6 +49,12 @@ var (
 	_mTLComputePipelineDescriptorSelSetShaderValidation                                = objc.RegisterName("setShaderValidation:")
 	_mTLComputePipelineDescriptorSelRequiredThreadsPerThreadgroup                      = objc.RegisterName("requiredThreadsPerThreadgroup")
 	_mTLComputePipelineDescriptorSelSetRequiredThreadsPerThreadgroup                   = objc.RegisterName("setRequiredThreadsPerThreadgroup:")
+	_mTLComputePipelineDescriptorSelForwardProgressUsage                               = objc.RegisterName("forwardProgressUsage")
+	_mTLComputePipelineDescriptorSelSetForwardProgressUsage                            = objc.RegisterName("setForwardProgressUsage:")
+	_mTLComputePipelineDescriptorSelContentionRelief                                   = objc.RegisterName("contentionRelief")
+	_mTLComputePipelineDescriptorSelSetContentionRelief                                = objc.RegisterName("setContentionRelief:")
+	_mTLComputePipelineDescriptorSelOptimizeForPersistentKernel                        = objc.RegisterName("optimizeForPersistentKernel")
+	_mTLComputePipelineDescriptorSelSetOptimizeForPersistentKernel                     = objc.RegisterName("setOptimizeForPersistentKernel:")
 )
 
 func MTLComputePipelineDescriptorFromID(id objc.ID) *MTLComputePipelineDescriptor {
@@ -236,4 +242,31 @@ func (o *MTLComputePipelineDescriptor) RequiredThreadsPerThreadgroup() MTLSize {
 
 func (o *MTLComputePipelineDescriptor) SetRequiredThreadsPerThreadgroup(requiredThreadsPerThreadgroup MTLSize) {
 	o.Ptr().Send(_mTLComputePipelineDescriptorSelSetRequiredThreadsPerThreadgroup, requiredThreadsPerThreadgroup)
+}
+
+func (o *MTLComputePipelineDescriptor) ForwardProgressUsage() MTLForwardProgressUsage {
+	_ret := objc.Send[MTLForwardProgressUsage](o.Ptr(), _mTLComputePipelineDescriptorSelForwardProgressUsage)
+	return _ret
+}
+
+func (o *MTLComputePipelineDescriptor) SetForwardProgressUsage(forwardProgressUsage MTLForwardProgressUsage) {
+	o.Ptr().Send(_mTLComputePipelineDescriptorSelSetForwardProgressUsage, forwardProgressUsage)
+}
+
+func (o *MTLComputePipelineDescriptor) ContentionRelief() MTLContentionRelief {
+	_ret := objc.Send[MTLContentionRelief](o.Ptr(), _mTLComputePipelineDescriptorSelContentionRelief)
+	return _ret
+}
+
+func (o *MTLComputePipelineDescriptor) SetContentionRelief(contentionRelief MTLContentionRelief) {
+	o.Ptr().Send(_mTLComputePipelineDescriptorSelSetContentionRelief, contentionRelief)
+}
+
+func (o *MTLComputePipelineDescriptor) OptimizeForPersistentKernel() bool {
+	_ret := objc.Send[bool](o.Ptr(), _mTLComputePipelineDescriptorSelOptimizeForPersistentKernel)
+	return _ret
+}
+
+func (o *MTLComputePipelineDescriptor) SetOptimizeForPersistentKernel(optimizeForPersistentKernel bool) {
+	o.Ptr().Send(_mTLComputePipelineDescriptorSelSetOptimizeForPersistentKernel, optimizeForPersistentKernel)
 }

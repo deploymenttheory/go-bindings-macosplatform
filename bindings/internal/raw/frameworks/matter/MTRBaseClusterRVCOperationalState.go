@@ -71,7 +71,7 @@ func MTRBaseClusterRVCOperationalStateFromID(id objc.ID) *MTRBaseClusterRVCOpera
 	return o
 }
 
-// Command Pause Upon receipt, the device SHALL pause its operation if it is possible based on the current function of the server.
+// Command Pause This command SHALL be supported if the device supports remotely pausing the operation.
 func (o *MTRBaseClusterRVCOperationalState) PauseWithParamsCompletion(params *MTRRVCOperationalStateClusterPauseParams, completion func(*MTRRVCOperationalStateClusterOperationalCommandResponseParams, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -100,7 +100,7 @@ func (o *MTRBaseClusterRVCOperationalState) PauseWithCompletion(completion func(
 	o.Ptr().Send(_mTRBaseClusterRVCOperationalStateSelPauseWithCompletion, __block_completion)
 }
 
-// Command Resume Upon receipt, the device SHALL resume its operation from the point it was at when it received the Pause command, or from the point when it was paused by means outside of this cluster (for example by manual button press).
+// Command Resume This command SHALL be supported if the device supports remotely resuming the operation.
 func (o *MTRBaseClusterRVCOperationalState) ResumeWithParamsCompletion(params *MTRRVCOperationalStateClusterResumeParams, completion func(*MTRRVCOperationalStateClusterOperationalCommandResponseParams, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {

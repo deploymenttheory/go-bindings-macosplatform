@@ -87,6 +87,7 @@ func (o *NSXPCInterface) XPCTypeForSelectorArgumentIndexOfReply(sel objc.SEL, ar
 	return _ret
 }
 
+// The Objective-C protocol this `NSXPCInterface` is based upon.
 func (o *NSXPCInterface) Protocol() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSXPCInterfaceSelProtocol)
 	return _ret

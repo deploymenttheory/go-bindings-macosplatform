@@ -837,6 +837,14 @@ func (ov *OutlineView) WithGestureRecognizers(items ...GestureRecognizerProvider
 	return ov
 }
 
+// WithExclusiveGestureBehavior sets declares whether gesture recognizers should be exclusive in this view and its subviews.
+func (ov *OutlineView) WithExclusiveGestureBehavior(exclusiveGestureBehavior ViewExclusiveGestureBehavior) *OutlineView {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setExclusiveGestureBehavior:"), exclusiveGestureBehavior)
+	})
+	return ov
+}
+
 // WithAllowedTouchTypes sets the allowed touch types.
 func (ov *OutlineView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *OutlineView {
 	purego.Main(func() {
@@ -898,6 +906,15 @@ func (ov *OutlineView) WithHorizontalContentSizeConstraintActive(horizontalConte
 func (ov *OutlineView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *OutlineView {
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
+	return ov
+}
+
+// WithTextSelectionManager sets the text selection manager for this view.
+func (ov *OutlineView) WithTextSelectionManager(textSelectionManager *TextSelectionManager) *OutlineView {
+	defer runtime.KeepAlive(textSelectionManager)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setTextSelectionManager:"), objref.IDOf(textSelectionManager))
 	})
 	return ov
 }

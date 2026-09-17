@@ -53,6 +53,12 @@ func NewMutableParagraphStyle() *MutableParagraphStyle {
 	return mutableParagraphStyleAdopt(_id)
 }
 
+// WithAlignment sets the text alignment of the paragraph.
+func (mps *MutableParagraphStyle) WithAlignment(alignment TextAlignment) *MutableParagraphStyle {
+	objc.Send[objc.ID](objref.IDOf(mps), objc.RegisterName("setAlignment:"), alignment)
+	return mps
+}
+
 // WithLineSpacing sets the distance in points between the bottom of one line fragment and the top of the next.
 func (mps *MutableParagraphStyle) WithLineSpacing(lineSpacing float64) *MutableParagraphStyle {
 	objc.Send[objc.ID](objref.IDOf(mps), objc.RegisterName("setLineSpacing:"), lineSpacing)
@@ -125,7 +131,7 @@ func (mps *MutableParagraphStyle) WithHyphenationFactor(hyphenationFactor float3
 	return mps
 }
 
-// WithUsesDefaultHyphenation sets the uses default hyphenation.
+// WithUsesDefaultHyphenation sets a Boolean value that indicates whether the paragraph style uses the system hyphenation settings. The system determines the exact hyphenation logic dynamically by examining the layout context such as language, platform, etc. When `true`, it affects the return value from “hyphenationFactor“ when the property is set to `0.0`.
 func (mps *MutableParagraphStyle) WithUsesDefaultHyphenation(usesDefaultHyphenation bool) *MutableParagraphStyle {
 	objc.Send[objc.ID](objref.IDOf(mps), objc.RegisterName("setUsesDefaultHyphenation:"), usesDefaultHyphenation)
 	return mps
@@ -163,22 +169,16 @@ func (mps *MutableParagraphStyle) WithTextLists(items ...*TextList) *MutablePara
 	return mps
 }
 
-// WithAlignment sets the text alignment of the paragraph.
-func (mps *MutableParagraphStyle) WithAlignment(alignment TextAlignment) *MutableParagraphStyle {
-	objc.Send[objc.ID](objref.IDOf(mps), objc.RegisterName("setAlignment:"), alignment)
+// WithTextBlocks sets the text blocks that contain the paragraph.
+func (mps *MutableParagraphStyle) WithTextBlocks(items ...TextBlockProvider) *MutableParagraphStyle {
+	_arr := purego.SliceToNSArray(items, func(_v TextBlockProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(mps), objc.RegisterName("setTextBlocks:"), _arr)
 	return mps
 }
 
 // WithTighteningFactorForTruncation sets the threshold for using tightening as an alternative to truncation.
 func (mps *MutableParagraphStyle) WithTighteningFactorForTruncation(tighteningFactorForTruncation float32) *MutableParagraphStyle {
 	objc.Send[objc.ID](objref.IDOf(mps), objc.RegisterName("setTighteningFactorForTruncation:"), tighteningFactorForTruncation)
-	return mps
-}
-
-// WithTextBlocks sets the text blocks that contain the paragraph.
-func (mps *MutableParagraphStyle) WithTextBlocks(items ...TextBlockProvider) *MutableParagraphStyle {
-	_arr := purego.SliceToNSArray(items, func(_v TextBlockProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(mps), objc.RegisterName("setTextBlocks:"), _arr)
 	return mps
 }
 

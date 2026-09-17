@@ -451,6 +451,11 @@ func KCMFormatDescriptionLogTransferFunction_AppleLog() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionLogTransferFunction_AppleLog")))
 }
 
+// KCMFormatDescriptionLogTransferFunction_AppleLog2 returns the value of the constant kCMFormatDescriptionLogTransferFunction_AppleLog2.
+func KCMFormatDescriptionLogTransferFunction_AppleLog2() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionLogTransferFunction_AppleLog2")))
+}
+
 // KCMFormatDescriptionExtension_HeroEye returns the value of the constant kCMFormatDescriptionExtension_HeroEye.
 func KCMFormatDescriptionExtension_HeroEye() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_HeroEye")))
@@ -836,6 +841,11 @@ func KCMMetadataFormatDescriptionKey_SetupData() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataFormatDescriptionKey_SetupData")))
 }
 
+// KCMMetadataFormatDescriptionKey_HumanReadableString returns the value of the constant kCMMetadataFormatDescriptionKey_HumanReadableString.
+func KCMMetadataFormatDescriptionKey_HumanReadableString() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataFormatDescriptionKey_HumanReadableString")))
+}
+
 // KCMMetadataFormatDescription_StructuralDependencyKey_DependencyIsInvalidFlag returns the value of the constant kCMMetadataFormatDescription_StructuralDependencyKey_DependencyIsInvalidFlag.
 func KCMMetadataFormatDescription_StructuralDependencyKey_DependencyIsInvalidFlag() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataFormatDescription_StructuralDependencyKey_DependencyIsInvalidFlag")))
@@ -864,6 +874,11 @@ func KCMMetadataFormatDescriptionMetadataSpecificationKey_StructuralDependency()
 // KCMMetadataFormatDescriptionMetadataSpecificationKey_SetupData returns the value of the constant kCMMetadataFormatDescriptionMetadataSpecificationKey_SetupData.
 func KCMMetadataFormatDescriptionMetadataSpecificationKey_SetupData() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataFormatDescriptionMetadataSpecificationKey_SetupData")))
+}
+
+// KCMMetadataFormatDescriptionMetadataSpecificationKey_HumanReadableString returns the value of the constant kCMMetadataFormatDescriptionMetadataSpecificationKey_HumanReadableString.
+func KCMMetadataFormatDescriptionMetadataSpecificationKey_HumanReadableString() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataFormatDescriptionMetadataSpecificationKey_HumanReadableString")))
 }
 
 // KCMSampleBufferNotification_DataBecameReady returns the value of the constant kCMSampleBufferNotification_DataBecameReady.
@@ -1525,6 +1540,11 @@ func KCMMetadataIdentifier_QuickTimeMetadataPresentationImmersiveMedia() obj.Obj
 	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataIdentifier_QuickTimeMetadataPresentationImmersiveMedia")))
 }
 
+// KCMMetadataIdentifier_ITUT_T35MetadataSMPTE2094_50 returns the value of the constant kCMMetadataIdentifier_ITUT_T35MetadataSMPTE2094_50.
+func KCMMetadataIdentifier_ITUT_T35MetadataSMPTE2094_50() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataIdentifier_ITUT_T35MetadataSMPTE2094_50")))
+}
+
 // KCMMetadataBaseDataType_RawData returns the value of the constant kCMMetadataBaseDataType_RawData.
 func KCMMetadataBaseDataType_RawData() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataBaseDataType_RawData")))
@@ -1538,6 +1558,16 @@ func KCMMetadataBaseDataType_UTF8() obj.Object {
 // KCMMetadataBaseDataType_UTF16 returns the value of the constant kCMMetadataBaseDataType_UTF16.
 func KCMMetadataBaseDataType_UTF16() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataBaseDataType_UTF16")))
+}
+
+// KCMMetadataBaseDataType_MacRoman returns the value of the constant kCMMetadataBaseDataType_MacRoman.
+func KCMMetadataBaseDataType_MacRoman() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataBaseDataType_MacRoman")))
+}
+
+// KCMMetadataBaseDataType_ISOLatin1 returns the value of the constant kCMMetadataBaseDataType_ISOLatin1.
+func KCMMetadataBaseDataType_ISOLatin1() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataBaseDataType_ISOLatin1")))
 }
 
 // KCMMetadataBaseDataType_GIF returns the value of the constant kCMMetadataBaseDataType_GIF.
@@ -1680,6 +1710,21 @@ func KCMMetadataDataType_QuickTimeMetadataMilliLux() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataDataType_QuickTimeMetadataMilliLux")))
 }
 
+// KCMMetadataDataType_QuickTimeMetadataSMPTE2094_50 returns the value of the constant kCMMetadataDataType_QuickTimeMetadataSMPTE2094_50.
+func KCMMetadataDataType_QuickTimeMetadataSMPTE2094_50() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataDataType_QuickTimeMetadataSMPTE2094_50")))
+}
+
+// KCMGenlockClockNotification_DisplayGenlockModeChanged returns the value of the constant kCMGenlockClockNotification_DisplayGenlockModeChanged.
+func KCMGenlockClockNotification_DisplayGenlockModeChanged() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMGenlockClockNotification_DisplayGenlockModeChanged")))
+}
+
+// KCMGenlockClockNotificationPayload_AnyDisplayIsSynchronizedToLockedGenlockSignal returns the value of the constant kCMGenlockClockNotificationPayload_AnyDisplayIsSynchronizedToLockedGenlockSignal.
+func KCMGenlockClockNotificationPayload_AnyDisplayIsSynchronizedToLockedGenlockSignal() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMGenlockClockNotificationPayload_AnyDisplayIsSynchronizedToLockedGenlockSignal")))
+}
+
 // KCMTimeInvalid returns the address of the symbol kCMTimeInvalid.
 func KCMTimeInvalid() uintptr { return _symbol("kCMTimeInvalid") }
 
@@ -1703,46 +1748,6 @@ func KCMTimeRangeInvalid() uintptr { return _symbol("kCMTimeRangeInvalid") }
 
 // KCMTimeMappingInvalid returns the address of the symbol kCMTimeMappingInvalid.
 func KCMTimeMappingInvalid() uintptr { return _symbol("kCMTimeMappingInvalid") }
-
-// KCMImageDescriptionFlavor_QuickTimeMovie returns the address of the symbol kCMImageDescriptionFlavor_QuickTimeMovie.
-func KCMImageDescriptionFlavor_QuickTimeMovie() uintptr {
-	return _symbol("kCMImageDescriptionFlavor_QuickTimeMovie")
-}
-
-// KCMImageDescriptionFlavor_ISOFamily returns the address of the symbol kCMImageDescriptionFlavor_ISOFamily.
-func KCMImageDescriptionFlavor_ISOFamily() uintptr {
-	return _symbol("kCMImageDescriptionFlavor_ISOFamily")
-}
-
-// KCMImageDescriptionFlavor_3GPFamily returns the address of the symbol kCMImageDescriptionFlavor_3GPFamily.
-func KCMImageDescriptionFlavor_3GPFamily() uintptr {
-	return _symbol("kCMImageDescriptionFlavor_3GPFamily")
-}
-
-// KCMImageDescriptionFlavor_ISOFamilyWithAppleExtensions returns the address of the symbol kCMImageDescriptionFlavor_ISOFamilyWithAppleExtensions.
-func KCMImageDescriptionFlavor_ISOFamilyWithAppleExtensions() uintptr {
-	return _symbol("kCMImageDescriptionFlavor_ISOFamilyWithAppleExtensions")
-}
-
-// KCMSoundDescriptionFlavor_QuickTimeMovie returns the address of the symbol kCMSoundDescriptionFlavor_QuickTimeMovie.
-func KCMSoundDescriptionFlavor_QuickTimeMovie() uintptr {
-	return _symbol("kCMSoundDescriptionFlavor_QuickTimeMovie")
-}
-
-// KCMSoundDescriptionFlavor_QuickTimeMovieV2 returns the address of the symbol kCMSoundDescriptionFlavor_QuickTimeMovieV2.
-func KCMSoundDescriptionFlavor_QuickTimeMovieV2() uintptr {
-	return _symbol("kCMSoundDescriptionFlavor_QuickTimeMovieV2")
-}
-
-// KCMSoundDescriptionFlavor_ISOFamily returns the address of the symbol kCMSoundDescriptionFlavor_ISOFamily.
-func KCMSoundDescriptionFlavor_ISOFamily() uintptr {
-	return _symbol("kCMSoundDescriptionFlavor_ISOFamily")
-}
-
-// KCMSoundDescriptionFlavor_3GPFamily returns the address of the symbol kCMSoundDescriptionFlavor_3GPFamily.
-func KCMSoundDescriptionFlavor_3GPFamily() uintptr {
-	return _symbol("kCMSoundDescriptionFlavor_3GPFamily")
-}
 
 // KCMTimingInfoInvalid returns the address of the symbol kCMTimingInfoInvalid.
 func KCMTimingInfoInvalid() uintptr { return _symbol("kCMTimingInfoInvalid") }
@@ -1808,3 +1813,43 @@ func KCMTagPackingTypeSideBySide() uintptr { return _symbol("kCMTagPackingTypeSi
 
 // KCMTagPackingTypeOverUnder returns the address of the symbol kCMTagPackingTypeOverUnder.
 func KCMTagPackingTypeOverUnder() uintptr { return _symbol("kCMTagPackingTypeOverUnder") }
+
+// KCMImageDescriptionFlavor_QuickTimeMovie returns the address of the symbol kCMImageDescriptionFlavor_QuickTimeMovie.
+func KCMImageDescriptionFlavor_QuickTimeMovie() uintptr {
+	return _symbol("kCMImageDescriptionFlavor_QuickTimeMovie")
+}
+
+// KCMImageDescriptionFlavor_ISOFamily returns the address of the symbol kCMImageDescriptionFlavor_ISOFamily.
+func KCMImageDescriptionFlavor_ISOFamily() uintptr {
+	return _symbol("kCMImageDescriptionFlavor_ISOFamily")
+}
+
+// KCMImageDescriptionFlavor_3GPFamily returns the address of the symbol kCMImageDescriptionFlavor_3GPFamily.
+func KCMImageDescriptionFlavor_3GPFamily() uintptr {
+	return _symbol("kCMImageDescriptionFlavor_3GPFamily")
+}
+
+// KCMImageDescriptionFlavor_ISOFamilyWithAppleExtensions returns the address of the symbol kCMImageDescriptionFlavor_ISOFamilyWithAppleExtensions.
+func KCMImageDescriptionFlavor_ISOFamilyWithAppleExtensions() uintptr {
+	return _symbol("kCMImageDescriptionFlavor_ISOFamilyWithAppleExtensions")
+}
+
+// KCMSoundDescriptionFlavor_QuickTimeMovie returns the address of the symbol kCMSoundDescriptionFlavor_QuickTimeMovie.
+func KCMSoundDescriptionFlavor_QuickTimeMovie() uintptr {
+	return _symbol("kCMSoundDescriptionFlavor_QuickTimeMovie")
+}
+
+// KCMSoundDescriptionFlavor_QuickTimeMovieV2 returns the address of the symbol kCMSoundDescriptionFlavor_QuickTimeMovieV2.
+func KCMSoundDescriptionFlavor_QuickTimeMovieV2() uintptr {
+	return _symbol("kCMSoundDescriptionFlavor_QuickTimeMovieV2")
+}
+
+// KCMSoundDescriptionFlavor_ISOFamily returns the address of the symbol kCMSoundDescriptionFlavor_ISOFamily.
+func KCMSoundDescriptionFlavor_ISOFamily() uintptr {
+	return _symbol("kCMSoundDescriptionFlavor_ISOFamily")
+}
+
+// KCMSoundDescriptionFlavor_3GPFamily returns the address of the symbol kCMSoundDescriptionFlavor_3GPFamily.
+func KCMSoundDescriptionFlavor_3GPFamily() uintptr {
+	return _symbol("kCMSoundDescriptionFlavor_3GPFamily")
+}

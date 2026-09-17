@@ -81,7 +81,7 @@ func (o *BADownloadManager) ScheduleDownloadError(download *BADownload) (bool, e
 	return _ret, nil
 }
 
-// Attempts to acquire immediate, exclusive access to the download manager.
+// @brief Acquires exclusive access to the BADownloadManager across the app and application extension. @discussion Acquires exclusive access to the BADownloadManager across the app and application extension. This ensures that your extension and app do not perform operations at the same time. Both the extension and app must use this API to ensure exclusive access. @param performHandler A block that will be executed once exclusive control is acquired. If an error is non-nil then a problem occurred acquiring exclusive access.
 func (o *BADownloadManager) PerformWithExclusiveControl(performHandler func(bool, unsafe.Pointer)) {
 	var __block_performHandler objc.Block
 	if performHandler != nil {

@@ -15,8 +15,6 @@ import (
 )
 
 // QueryCursor is an idiomatic wrapper over the Objective-C class CKQueryCursor.
-//
-// An object that marks the stopping point for a query and the starting point for retrieving the remaining results.
 type QueryCursor struct {
 	objref.Handle
 }

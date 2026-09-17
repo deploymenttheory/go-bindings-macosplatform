@@ -9,8 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A unit of measure for electric current.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsunitelectriccurrent
 type NSUnitElectricCurrent struct {
 	NSDimension
@@ -35,6 +33,7 @@ func NSUnitElectricCurrentFromID(id objc.ID) *NSUnitElectricCurrent {
 	return o
 }
 
+// The megaamperes unit of electric current.
 func NSUnitElectricCurrentMegaamperes() *NSUnitElectricCurrent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitElectricCurrent), _nSUnitElectricCurrentSelMegaamperes)
 	if _ret != 0 {
@@ -43,6 +42,7 @@ func NSUnitElectricCurrentMegaamperes() *NSUnitElectricCurrent {
 	return NSUnitElectricCurrentFromID(_ret)
 }
 
+// The kiloamperes unit of electric current.
 func NSUnitElectricCurrentKiloamperes() *NSUnitElectricCurrent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitElectricCurrent), _nSUnitElectricCurrentSelKiloamperes)
 	if _ret != 0 {
@@ -51,6 +51,7 @@ func NSUnitElectricCurrentKiloamperes() *NSUnitElectricCurrent {
 	return NSUnitElectricCurrentFromID(_ret)
 }
 
+// The amperes unit of electric current.
 func NSUnitElectricCurrentAmperes() *NSUnitElectricCurrent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitElectricCurrent), _nSUnitElectricCurrentSelAmperes)
 	if _ret != 0 {
@@ -59,6 +60,7 @@ func NSUnitElectricCurrentAmperes() *NSUnitElectricCurrent {
 	return NSUnitElectricCurrentFromID(_ret)
 }
 
+// The milliamperes unit of electric current.
 func NSUnitElectricCurrentMilliamperes() *NSUnitElectricCurrent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitElectricCurrent), _nSUnitElectricCurrentSelMilliamperes)
 	if _ret != 0 {
@@ -67,6 +69,7 @@ func NSUnitElectricCurrentMilliamperes() *NSUnitElectricCurrent {
 	return NSUnitElectricCurrentFromID(_ret)
 }
 
+// The microamperes unit of electric current.
 func NSUnitElectricCurrentMicroamperes() *NSUnitElectricCurrent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitElectricCurrent), _nSUnitElectricCurrentSelMicroamperes)
 	if _ret != 0 {

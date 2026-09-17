@@ -7,6 +7,7 @@ package webkit
 import (
 	"runtime"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -125,6 +126,39 @@ func (wwp *WKWebpagePreferences) WithSecurityRestrictionMode(securityRestriction
 	return wwp
 }
 
+// WithAlternateRequest sets the alternate request.
+func (wwp *WKWebpagePreferences) WithAlternateRequest(alternateRequest obj.Object) *WKWebpagePreferences {
+	defer runtime.KeepAlive(alternateRequest)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwp), objc.RegisterName("setAlternateRequest:"), objref.IDOf(alternateRequest))
+	})
+	return wwp
+}
+
+// WithOverrideReferrer sets the override referrer.
+func (wwp *WKWebpagePreferences) WithOverrideReferrer(overrideReferrer string) *WKWebpagePreferences {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwp), objc.RegisterName("setOverrideReferrer:"), purego.NSString(overrideReferrer))
+	})
+	return wwp
+}
+
+// WithAllowsJSHandleCreationInPageWorld sets a boolean indicating whether `window.webkit.createJSHandle` will be available in `[WKContentWorld pageWorld]` The default value is false.
+func (wwp *WKWebpagePreferences) WithAllowsJSHandleCreationInPageWorld(allowsJSHandleCreationInPageWorld bool) *WKWebpagePreferences {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwp), objc.RegisterName("setAllowsJSHandleCreationInPageWorld:"), allowsJSHandleCreationInPageWorld)
+	})
+	return wwp
+}
+
+// WithGlobalPrivacyControlEnabled sets whether the Global Privacy Control (GPC) signal is enabled for the navigation. The default value is NO. When enabled, both navigator.globalPrivacyControl and the Sec-GPC: 1 request header are active for the main frame, its subframes, and their subresources.
+func (wwp *WKWebpagePreferences) WithGlobalPrivacyControlEnabled(globalPrivacyControlEnabled bool) *WKWebpagePreferences {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwp), objc.RegisterName("setGlobalPrivacyControlEnabled:"), globalPrivacyControlEnabled)
+	})
+	return wwp
+}
+
 // PreferredContentMode returns a WKContentMode indicating the content mode to prefer when loading and rendering a webpage. The default value is WKContentModeRecommended. The stated preference is ignored on subframe navigation
 func (wwp *WKWebpagePreferences) PreferredContentMode() WKContentMode {
 	defer runtime.KeepAlive(wwp)
@@ -188,6 +222,65 @@ func (wwp *WKWebpagePreferences) SecurityRestrictionMode() WKSecurityRestriction
 	purego.Main(func() {
 		_mainthread0 = func() WKSecurityRestrictionMode {
 			_r := objc.Send[WKSecurityRestrictionMode](objref.IDOf(wwp), objc.RegisterName("securityRestrictionMode"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
+}
+
+// AlternateRequest returns the alternate request.
+func (wwp *WKWebpagePreferences) AlternateRequest() *foundation.URLRequest {
+	defer runtime.KeepAlive(wwp)
+	var _mainthread0 *foundation.URLRequest
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.URLRequest {
+			_r := objc.Send[objc.ID](objref.IDOf(wwp), objc.RegisterName("alternateRequest"))
+			return foundation.URLRequestFromID(_r)
+		}()
+	})
+	return _mainthread0
+
+}
+
+// OverrideReferrer returns the override referrer.
+func (wwp *WKWebpagePreferences) OverrideReferrer() string {
+	defer runtime.KeepAlive(wwp)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(wwp), objc.RegisterName("overrideReferrer"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
+}
+
+// AllowsJSHandleCreationInPageWorld reports whether a boolean indicating whether `window.webkit.createJSHandle` will be available in `[WKContentWorld pageWorld]` The default value is false.
+func (wwp *WKWebpagePreferences) AllowsJSHandleCreationInPageWorld() bool {
+	defer runtime.KeepAlive(wwp)
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wwp), objc.RegisterName("allowsJSHandleCreationInPageWorld"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
+}
+
+// GlobalPrivacyControlEnabled reports whether the Global Privacy Control (GPC) signal is enabled for the navigation. The default value is false. When enabled, both navigator.globalPrivacyControl and the Sec-GPC: 1 request header are active for the main frame, its subframes, and their subresources.
+func (wwp *WKWebpagePreferences) GlobalPrivacyControlEnabled() bool {
+	defer runtime.KeepAlive(wwp)
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wwp), objc.RegisterName("globalPrivacyControlEnabled"))
 			return _r
 		}()
 	})

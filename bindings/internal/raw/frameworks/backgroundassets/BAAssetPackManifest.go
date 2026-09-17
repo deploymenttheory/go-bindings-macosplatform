@@ -23,9 +23,15 @@ var (
 	_clsBAAssetPackManifest                                                     = _objcClass("BAAssetPackManifest")
 	_bAAssetPackManifestSelInitWithContentsOfURLApplicationGroupIdentifierError = objc.RegisterName("initWithContentsOfURL:applicationGroupIdentifier:error:")
 	_bAAssetPackManifestSelInitFromDataApplicationGroupIdentifierError          = objc.RegisterName("initFromData:applicationGroupIdentifier:error:")
+	_bAAssetPackManifestSelAssetPackWithIdentifier                              = objc.RegisterName("assetPackWithIdentifier:")
+	_bAAssetPackManifestSelLocalizedAssetPacksForLanguage                       = objc.RegisterName("localizedAssetPacksForLanguage:")
 	_bAAssetPackManifestSelAllDownloads                                         = objc.RegisterName("allDownloads")
 	_bAAssetPackManifestSelAllDownloadsForContentRequest                        = objc.RegisterName("allDownloadsForContentRequest:")
 	_bAAssetPackManifestSelAssetPacks                                           = objc.RegisterName("assetPacks")
+	_bAAssetPackManifestSelPrimaryLanguage                                      = objc.RegisterName("primaryLanguage")
+	_bAAssetPackManifestSelAvailableLanguages                                   = objc.RegisterName("availableLanguages")
+	_bAAssetPackManifestSelResolvedLanguage                                     = objc.RegisterName("resolvedLanguage")
+	_bAAssetPackManifestSelLocalizedAssetPacks                                  = objc.RegisterName("localizedAssetPacks")
 )
 
 func BAAssetPackManifestFromID(id objc.ID) *BAAssetPackManifest {
@@ -64,6 +70,24 @@ func (o *BAAssetPackManifest) InitFromDataApplicationGroupIdentifierError(data *
 	return BAAssetPackManifestFromID(_ret), nil
 }
 
+// Returns the asset pack in this manifest with the given identifier.
+func (o *BAAssetPackManifest) AssetPackWithIdentifier(assetPackIdentifier *foundation.NSString) *BAAssetPack {
+	_ret := objc.Send[objc.ID](o.Ptr(), _bAAssetPackManifestSelAssetPackWithIdentifier, assetPackIdentifier.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return BAAssetPackFromID(_ret)
+}
+
+// Returns the subset of asset packs in this manifest that are available to download and that best match the specified language.
+func (o *BAAssetPackManifest) LocalizedAssetPacksForLanguage(languageIdentifier *foundation.NSString) *foundation.NSSet[*BAAssetPack] {
+	_ret := objc.Send[objc.ID](o.Ptr(), _bAAssetPackManifestSelLocalizedAssetPacksForLanguage, languageIdentifier.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSSetFromID[*BAAssetPack](_ret)
+}
+
 // Creates download objects for every asset pack in this manifest.
 func (o *BAAssetPackManifest) AllDownloads() *foundation.NSSet[*BADownload] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _bAAssetPackManifestSelAllDownloads)
@@ -82,9 +106,45 @@ func (o *BAAssetPackManifest) AllDownloadsForContentRequest(contentRequest BACon
 	return foundation.NSSetFromID[*BADownload](_ret)
 }
 
-// The asset packs that are available to download.
+// The asset packs in this manifest that are available to download.
 func (o *BAAssetPackManifest) AssetPacks() *foundation.NSSet[*BAAssetPack] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _bAAssetPackManifestSelAssetPacks)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSSetFromID[*BAAssetPack](_ret)
+}
+
+// The application’s primary language, represented as a BCP-47 identifier, as configured in App Store Connect. If no available localized asset packs match the current preferred languages, the system falls back on the application’s primary language.
+func (o *BAAssetPackManifest) PrimaryLanguage() *foundation.NSString {
+	_ret := objc.Send[objc.ID](o.Ptr(), _bAAssetPackManifestSelPrimaryLanguage)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSStringFromID(_ret)
+}
+
+// The languages, represented as their respective BCP-47 identifiers, for which asset packs in this manifest are localized.
+func (o *BAAssetPackManifest) AvailableLanguages() *foundation.NSArray[*foundation.NSString] {
+	_ret := objc.Send[objc.ID](o.Ptr(), _bAAssetPackManifestSelAvailableLanguages)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
+}
+
+// The language, represented as a BCP-47 identifier, asset packs in this manifest that are localized for which the system automatically makes available locally. The user’s preferred languages inform the choice of resolved language, respecting any language that your application sets manually by setting “BAAssetPackManager/resolvedLanguage“. This property may be `nil` if no localized asset packs are available. If the user recently changed their preferred language or if this manifest is outdated, this property’s value may be out of sync with the set of asset packs available locally.
+func (o *BAAssetPackManifest) ResolvedLanguage() *foundation.NSString {
+	_ret := objc.Send[objc.ID](o.Ptr(), _bAAssetPackManifestSelResolvedLanguage)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSStringFromID(_ret)
+}
+
+// The subset of asset packs in this manifest that best match the current preferred languages.
+func (o *BAAssetPackManifest) LocalizedAssetPacks() *foundation.NSSet[*BAAssetPack] {
+	_ret := objc.Send[objc.ID](o.Ptr(), _bAAssetPackManifestSelLocalizedAssetPacks)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

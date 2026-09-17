@@ -15,8 +15,6 @@ import (
 )
 
 // ComputePlan is an idiomatic wrapper over the Objective-C class MLComputePlan.
-//
-// A class representing the compute plan of a model.
 type ComputePlan struct {
 	objref.Handle
 }

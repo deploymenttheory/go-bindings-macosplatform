@@ -14,6 +14,11 @@ func SWCollaborationMetadataTypeIdentifier() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("SWCollaborationMetadataTypeIdentifier")))
 }
 
+// SWCopyRepresentationTypeIdentifier returns the string constant SWCopyRepresentationTypeIdentifier, for use as a dictionary key or argument.
+func SWCopyRepresentationTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SWCopyRepresentationTypeIdentifier")))
+}
+
 // NSPasteboardTypeCollaborationMetadata returns the string constant NSPasteboardTypeCollaborationMetadata, for use as a dictionary key or argument.
 func NSPasteboardTypeCollaborationMetadata() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSPasteboardTypeCollaborationMetadata")))

@@ -110,6 +110,16 @@ func (ap *AssetPack) DownloadSize() int {
 	return _r
 }
 
+// Language returns the language, represented as a BCP-47 identifier, for which this asset pack is localized. This property is `nil` if the asset pack isn’t localized and therefore isn’t language-specific.
+func (ap *AssetPack) Language() string {
+	defer runtime.KeepAlive(ap)
+	_r := objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("language"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
 // UserInfo returns JSON-encoded custom information that’s associated with the asset pack. This property is `nil` for Apple-hosted asset packs.
 func (ap *AssetPack) UserInfo() []byte {
 	defer runtime.KeepAlive(ap)

@@ -15,6 +15,7 @@ import (
 // An object that processes buffer objects as received from ReplayKit.
 //
 // Apple documentation: https://developer.apple.com/documentation/replaykit/rpbroadcastsamplehandler
+// Deprecated: No longer supported
 type RPBroadcastSampleHandler struct {
 	RPBroadcastHandler
 }

@@ -6,6 +6,7 @@ package virtualization
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -49,6 +50,16 @@ func xHCIControllerAdopt(id objc.ID) *XHCIController {
 func NewXHCIController() *XHCIController {
 	_id := objc.Send[objc.ID](objc.ID(_class("VZXHCIController")), objc.RegisterName("new"))
 	return xHCIControllerAdopt(_id)
+}
+
+// WithDelegate sets the controller's delegate.
+func (xc *XHCIController) WithDelegate(delegate USBControllerDelegate) *XHCIController {
+	_shim := newUSBControllerDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(xc), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(xc), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return xc
 }
 
 var _ USBControllerProvider = (*XHCIController)(nil)

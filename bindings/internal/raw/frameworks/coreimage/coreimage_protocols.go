@@ -6,7 +6,10 @@ package coreimage
 import (
 	"unsafe"
 
+	"github.com/ebitengine/purego/objc"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/metal"
 )
 
@@ -35,6 +38,8 @@ type CIImageProcessorInput interface {
 
 // CIImageProcessorOutput wraps the ObjC protocol CIImageProcessorOutput.
 type CIImageProcessorOutput interface {
+	TemporarySurfaceWithIdentifierFormatWidthHeight(identifier *foundation.NSString, format uint, width uint, height uint) unsafe.Pointer
+	TemporaryPixelBufferWithIdentifierFormatWidthHeightAttributes(identifier *foundation.NSString, format uint, width uint, height uint, attributes *foundation.NSDictionary[objc.ID, objc.ID]) unsafe.Pointer
 	Region() corefoundation.CGRect
 	BytesPerRow() uint
 	Format() int

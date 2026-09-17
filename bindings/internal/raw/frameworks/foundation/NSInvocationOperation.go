@@ -52,6 +52,7 @@ func (o *NSInvocationOperation) InitWithInvocation(inv *NSInvocation) *NSInvocat
 	return NSInvocationOperationFromID(_ret)
 }
 
+// The receiver's invocation object. The invocation object identifying the target object, selector, and parameters to use to execute the operation's task.
 func (o *NSInvocationOperation) Invocation() *NSInvocation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSInvocationOperationSelInvocation)
 	if _ret != 0 {
@@ -60,6 +61,7 @@ func (o *NSInvocationOperation) Invocation() *NSInvocation {
 	return NSInvocationFromID(_ret)
 }
 
+// The result of the invocation or method. The object returned by the method or an `NSValue` object containing the return value if it is not an object. `nil` if the method or invocation is not finished executing.
 func (o *NSInvocationOperation) Result() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSInvocationOperationSelResult)
 	return _ret

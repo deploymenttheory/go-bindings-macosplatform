@@ -17,8 +17,6 @@ import (
 )
 
 // NetServiceBrowser is an idiomatic wrapper over the Objective-C class NSNetServiceBrowser.
-//
-// A network service browser that finds published services on a network using multicast DNS.
 type NetServiceBrowser struct {
 	objref.Handle
 }
@@ -81,7 +79,7 @@ func NewNetServiceBrowser() *NetServiceBrowser {
 	return netServiceBrowserAdopt(_id)
 }
 
-// WithDelegate sets the delegate.
+// WithDelegate sets the delegate object for this instance.
 func (nsb *NetServiceBrowser) WithDelegate(delegate NetServiceBrowserDelegate) *NetServiceBrowser {
 	_shim := newNetServiceBrowserDelegateShim(delegate)
 	_sel := objc.RegisterName("setDelegate:")
@@ -91,7 +89,7 @@ func (nsb *NetServiceBrowser) WithDelegate(delegate NetServiceBrowserDelegate) *
 	return nsb
 }
 
-// WithIncludesPeerToPeer sets the includes peer to peer.
+// WithIncludesPeerToPeer sets whether to browse over peer-to-peer Bluetooth and Wi-Fi, if available. This property must be set before initiating a search to have an effect. Initially set to `NO`.
 func (nsb *NetServiceBrowser) WithIncludesPeerToPeer(includesPeerToPeer bool) *NetServiceBrowser {
 	objc.Send[objc.ID](objref.IDOf(nsb), objc.RegisterName("setIncludesPeerToPeer:"), includesPeerToPeer)
 	return nsb
@@ -109,7 +107,7 @@ func (nsb *NetServiceBrowser) WithScriptingProperties(scriptingProperties map[st
 	return nsb
 }
 
-// ScheduleInRunLoopForMode wraps the corresponding Objective-C method.
+// ScheduleInRunLoopForMode adds the receiver to the specified run loop. - Parameters: - aRunLoop: Run loop in which to schedule the receiver. - mode: Run loop mode in which to perform this operation. You can use this method in conjunction with `-removeFromRunLoop:forMode:` to transfer the receiver to a run loop other than the default one. You should not attempt to run the receiver on multiple run loops.
 func (nsb *NetServiceBrowser) ScheduleInRunLoopForMode(aRunLoop *RunLoop, mode *String) {
 	defer runtime.KeepAlive(nsb)
 	defer runtime.KeepAlive(aRunLoop)
@@ -117,7 +115,7 @@ func (nsb *NetServiceBrowser) ScheduleInRunLoopForMode(aRunLoop *RunLoop, mode *
 	objc.Send[objc.ID](objref.IDOf(nsb), objc.RegisterName("scheduleInRunLoop:forMode:"), objref.IDOf(aRunLoop), objref.IDOf(mode))
 }
 
-// RemoveFromRunLoopForMode removes from run loop for mode.
+// RemoveFromRunLoopForMode removes the receiver from the specified run loop. - Parameters: - aRunLoop: Run loop from which to remove the receiver. - mode: Run loop mode in which to perform this operation. You can use this method in conjunction with `-scheduleInRunLoop:forMode:` to transfer the receiver to a run loop other than the default one. Although it is possible to remove an `NSNetService` object completely from any run loop and then attempt actions on it, you must not do it.
 func (nsb *NetServiceBrowser) RemoveFromRunLoopForMode(aRunLoop *RunLoop, mode *String) {
 	defer runtime.KeepAlive(nsb)
 	defer runtime.KeepAlive(aRunLoop)
@@ -125,31 +123,31 @@ func (nsb *NetServiceBrowser) RemoveFromRunLoopForMode(aRunLoop *RunLoop, mode *
 	objc.Send[objc.ID](objref.IDOf(nsb), objc.RegisterName("removeFromRunLoop:forMode:"), objref.IDOf(aRunLoop), objref.IDOf(mode))
 }
 
-// SearchForBrowsableDomains wraps the corresponding Objective-C method.
+// SearchForBrowsableDomains initiates a search for domains visible to the host. This method returns immediately. The delegate receives a `-netServiceBrowser:didFindDomain:moreComing:` message for each domain discovered.
 func (nsb *NetServiceBrowser) SearchForBrowsableDomains() {
 	defer runtime.KeepAlive(nsb)
 	objc.Send[objc.ID](objref.IDOf(nsb), objc.RegisterName("searchForBrowsableDomains"))
 }
 
-// SearchForRegistrationDomains wraps the corresponding Objective-C method.
+// SearchForRegistrationDomains initiates a search for domains in which the host may register services. This method returns immediately, sending a `-netServiceBrowserWillSearch:` message to the delegate if the network was ready to initiate the search. The delegate receives a subsequent `-netServiceBrowser:didFindDomain:moreComing:` message for each domain discovered. Most network service browser clients do not have to use this method -- it is sufficient to publish a service with the empty string, which registers it in any available registration domains automatically.
 func (nsb *NetServiceBrowser) SearchForRegistrationDomains() {
 	defer runtime.KeepAlive(nsb)
 	objc.Send[objc.ID](objref.IDOf(nsb), objc.RegisterName("searchForRegistrationDomains"))
 }
 
-// SearchForServicesOfTypeInDomain wraps the corresponding Objective-C method.
+// SearchForServicesOfTypeInDomain starts a search for services of a particular type within a specific domain. - Parameters: - type: Type of the service to search for. Must contain both the service type and transport layer information (e.g. `_http._tcp.`). - domainString: Domain name in which to perform the search. Pass the empty string (`
 func (nsb *NetServiceBrowser) SearchForServicesOfTypeInDomain(type_ string, domainString string) {
 	defer runtime.KeepAlive(nsb)
 	objc.Send[objc.ID](objref.IDOf(nsb), objc.RegisterName("searchForServicesOfType:inDomain:"), purego.NSString(type_), purego.NSString(domainString))
 }
 
-// Stop wraps the corresponding Objective-C method.
+// Stop halts a currently running search or resolution. This method sends a `-netServiceBrowserDidStopSearch:` message to the delegate and causes the browser to discard any pending search results.
 func (nsb *NetServiceBrowser) Stop() {
 	defer runtime.KeepAlive(nsb)
 	objc.Send[objc.ID](objref.IDOf(nsb), objc.RegisterName("stop"))
 }
 
-// IncludesPeerToPeer wraps the corresponding Objective-C method.
+// IncludesPeerToPeer reports whether to browse over peer-to-peer Bluetooth and Wi-Fi, if available. This property must be set before initiating a search to have an effect. Initially set to `NO`.
 func (nsb *NetServiceBrowser) IncludesPeerToPeer() bool {
 	defer runtime.KeepAlive(nsb)
 	_r := objc.Send[bool](objref.IDOf(nsb), objc.RegisterName("includesPeerToPeer"))

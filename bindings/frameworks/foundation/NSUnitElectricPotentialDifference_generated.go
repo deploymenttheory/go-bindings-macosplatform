@@ -17,8 +17,6 @@ import (
 // UnitElectricPotentialDifference is an idiomatic wrapper over the Objective-C class NSUnitElectricPotentialDifference.
 //
 // It embeds [Dimension], promoting that type's methods.
-//
-// A unit of measure for electric potential difference.
 type UnitElectricPotentialDifference struct {
 	Dimension
 }

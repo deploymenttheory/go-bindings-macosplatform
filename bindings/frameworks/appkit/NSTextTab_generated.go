@@ -88,25 +88,25 @@ func NewTextTabWithTypeLocation(type_ TextTabType, loc float64) *TextTab {
 	return textTabAdopt(_id)
 }
 
-// Location returns the location.
+// Alignment returns the text alignment of the text tab. `NSTextAlignmentNatural` and `NSTextAlignmentJustified` are resolved to either `NSTextAlignmentLeft` or `NSTextAlignmentRight` based on the user's preferred language.
+func (tt *TextTab) Alignment() TextAlignment {
+	defer runtime.KeepAlive(tt)
+	_r := objc.Send[TextAlignment](objref.IDOf(tt), objc.RegisterName("alignment"))
+	return _r
+}
+
+// Location returns the text tab's ruler location relative to the back margin.
 func (tt *TextTab) Location() float64 {
 	defer runtime.KeepAlive(tt)
 	_r := objc.Send[float64](objref.IDOf(tt), objc.RegisterName("location"))
 	return _r
 }
 
-// Options returns the options.
+// Options returns the dictionary of attributes for the text tab.
 func (tt *TextTab) Options() obj.Object {
 	defer runtime.KeepAlive(tt)
 	_r := objc.Send[objc.ID](objref.IDOf(tt), objc.RegisterName("options"))
 	return obj.Wrap(_r)
-}
-
-// Alignment returns the alignment.
-func (tt *TextTab) Alignment() TextAlignment {
-	defer runtime.KeepAlive(tt)
-	_r := objc.Send[TextAlignment](objref.IDOf(tt), objc.RegisterName("alignment"))
-	return _r
 }
 
 // TabStopType returns the tab stop type.

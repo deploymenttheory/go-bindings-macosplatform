@@ -401,6 +401,14 @@ func (cv *ClipView) WithGestureRecognizers(items ...GestureRecognizerProvider) *
 	return cv
 }
 
+// WithExclusiveGestureBehavior sets declares whether gesture recognizers should be exclusive in this view and its subviews.
+func (cv *ClipView) WithExclusiveGestureBehavior(exclusiveGestureBehavior ViewExclusiveGestureBehavior) *ClipView {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setExclusiveGestureBehavior:"), exclusiveGestureBehavior)
+	})
+	return cv
+}
+
 // WithAllowedTouchTypes sets the allowed touch types.
 func (cv *ClipView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *ClipView {
 	purego.Main(func() {
@@ -462,6 +470,15 @@ func (cv *ClipView) WithHorizontalContentSizeConstraintActive(horizontalContentS
 func (cv *ClipView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ClipView {
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
+	return cv
+}
+
+// WithTextSelectionManager sets the text selection manager for this view.
+func (cv *ClipView) WithTextSelectionManager(textSelectionManager *TextSelectionManager) *ClipView {
+	defer runtime.KeepAlive(textSelectionManager)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setTextSelectionManager:"), objref.IDOf(textSelectionManager))
 	})
 	return cv
 }

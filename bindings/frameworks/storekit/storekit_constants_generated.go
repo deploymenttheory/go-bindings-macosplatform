@@ -11,6 +11,21 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// SKCloudServiceCapabilitiesDidChangeNotification returns the string constant SKCloudServiceCapabilitiesDidChangeNotification, for use as a dictionary key or argument.
+func SKCloudServiceCapabilitiesDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SKCloudServiceCapabilitiesDidChangeNotification")))
+}
+
+// SKStorefrontCountryCodeDidChangeNotification returns the string constant SKStorefrontCountryCodeDidChangeNotification, for use as a dictionary key or argument.
+func SKStorefrontCountryCodeDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SKStorefrontCountryCodeDidChangeNotification")))
+}
+
+// SKStorefrontIdentifierDidChangeNotification returns the string constant SKStorefrontIdentifierDidChangeNotification, for use as a dictionary key or argument.
+func SKStorefrontIdentifierDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SKStorefrontIdentifierDidChangeNotification")))
+}
+
 // SKErrorDomain returns the string constant SKErrorDomain, for use as a dictionary key or argument.
 func SKErrorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("SKErrorDomain"))) }
 
@@ -62,21 +77,6 @@ func SKStoreProductParameterProviderToken() obj.Object {
 // SKStoreProductParameterAdvertisingPartnerToken returns the string constant SKStoreProductParameterAdvertisingPartnerToken, for use as a dictionary key or argument.
 func SKStoreProductParameterAdvertisingPartnerToken() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("SKStoreProductParameterAdvertisingPartnerToken")))
-}
-
-// SKCloudServiceCapabilitiesDidChangeNotification returns the address of the symbol SKCloudServiceCapabilitiesDidChangeNotification.
-func SKCloudServiceCapabilitiesDidChangeNotification() uintptr {
-	return _symbol("SKCloudServiceCapabilitiesDidChangeNotification")
-}
-
-// SKStorefrontCountryCodeDidChangeNotification returns the address of the symbol SKStorefrontCountryCodeDidChangeNotification.
-func SKStorefrontCountryCodeDidChangeNotification() uintptr {
-	return _symbol("SKStorefrontCountryCodeDidChangeNotification")
-}
-
-// SKStorefrontIdentifierDidChangeNotification returns the address of the symbol SKStorefrontIdentifierDidChangeNotification.
-func SKStorefrontIdentifierDidChangeNotification() uintptr {
-	return _symbol("SKStorefrontIdentifierDidChangeNotification")
 }
 
 // SKDownloadTimeRemainingUnknown returns the value of the constant SKDownloadTimeRemainingUnknown.

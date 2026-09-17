@@ -15,8 +15,6 @@ import (
 )
 
 // MapCameraBoundary is an idiomatic wrapper over the Objective-C class MKMapCameraBoundary.
-//
-// A boundary of an area within which the map’s center needs to remain.
 type MapCameraBoundary struct {
 	objref.Handle
 }

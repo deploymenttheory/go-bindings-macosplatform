@@ -7,10 +7,6 @@
       "doc": "A request to generate a thumbnail for a custom file type.",
       "url": "https://developer.apple.com/documentation/quicklookthumbnailing/qlfilethumbnailrequest"
     },
-    "QLThumbnailGenerationRequest": {
-      "doc": "A request to generate a thumbnail for a file.",
-      "url": "https://developer.apple.com/documentation/quicklookthumbnailing/qlthumbnailgenerationrequest"
-    },
     "QLThumbnailGenerator": {
       "doc": "An object that generates thumbnail images based on provided requirements.",
       "url": "https://developer.apple.com/documentation/quicklookthumbnailing/qlthumbnailgenerator"
@@ -26,20 +22,6 @@
     "QLThumbnailRepresentation": {
       "doc": "Information about the thumbnail that the thumbnail generator returns.",
       "url": "https://developer.apple.com/documentation/quicklookthumbnailing/qlthumbnailrepresentation"
-    }
-  },
-  "enums": {
-    "QLThumbnailError": {
-      "doc": "Error information that might return when you generate a thumbnail.",
-      "url": "https://developer.apple.com/documentation/quicklookthumbnailing/qlthumbnailerror"
-    },
-    "QLThumbnailGenerationRequestRepresentationTypes": {
-      "doc": "The various types of thumbnails that you can request.",
-      "url": "https://developer.apple.com/documentation/quicklookthumbnailing/qlthumbnailgenerationrequestrepresentationtypes"
-    },
-    "QLThumbnailRepresentationType": {
-      "doc": "The different types of thumbnails that you can create.",
-      "url": "https://developer.apple.com/documentation/quicklookthumbnailing/qlthumbnailrepresentationtype"
     }
   },
   "methods": {

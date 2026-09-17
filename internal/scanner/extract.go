@@ -51,7 +51,11 @@ func frameworkNameFromPath(path string) string {
 // imports the other framework. This information is used by the cycle-breaker in
 // the code generator to distinguish intentional cross-framework edges from
 // incidental ones discovered only via type-token scanning.
-func trackDeclaredImport(node *ASTNode, framework *macosplatformmetadata.FrameworkMeta, f *frameworkFilter) {
+func trackDeclaredImport(
+	node *ASTNode,
+	framework *macosplatformmetadata.FrameworkMeta,
+	f *frameworkFilter,
+) {
 	if node.Loc == nil {
 		return
 	}
@@ -108,7 +112,13 @@ func nodeFileLine(node *ASTNode, fallbackFile string) (string, int) {
 
 // Extract walks the Clang AST root node and produces a FrameworkMeta
 // containing only declarations that originate from the named framework's headers.
-func Extract(root *ASTNode, sdkPath, frameworkName, sdkVersion, arch string, layouts map[string]RecordLayout) *macosplatformmetadata.FrameworkMeta {
+//
+//nolint:gocyclo // Central AST dispatch keeps declaration filtering consistent across node kinds.
+func Extract(
+	root *ASTNode,
+	sdkPath, frameworkName, sdkVersion, arch string,
+	layouts map[string]RecordLayout,
+) *macosplatformmetadata.FrameworkMeta {
 	filter := newFilter(sdkPath, frameworkName)
 	f := &filter
 	f.layouts = layouts
@@ -428,7 +438,11 @@ func scanClass(node *ASTNode, framework *macosplatformmetadata.FrameworkMeta, f 
 	framework.Classes[node.Name] = cls
 }
 
-func scanCategory(node *ASTNode, framework *macosplatformmetadata.FrameworkMeta, f *frameworkFilter) {
+func scanCategory(
+	node *ASTNode,
+	framework *macosplatformmetadata.FrameworkMeta,
+	f *frameworkFilter,
+) {
 	// Categories extend an existing class. The target class is in node.Interface.
 	className := ""
 	if node.Interface != nil {
@@ -462,7 +476,9 @@ func scanCategory(node *ASTNode, framework *macosplatformmetadata.FrameworkMeta,
 			}
 		}
 		if len(methods) > 0 {
-			framework.ForeignExtensions[className] = append(framework.ForeignExtensions[className], methods...)
+			framework.ForeignExtensions[className] = append(
+				framework.ForeignExtensions[className],
+				methods...)
 		}
 		return
 	}
@@ -487,7 +503,11 @@ func scanCategory(node *ASTNode, framework *macosplatformmetadata.FrameworkMeta,
 
 // --- Protocols ---
 
-func scanProtocol(node *ASTNode, framework *macosplatformmetadata.FrameworkMeta, f *frameworkFilter) {
+func scanProtocol(
+	node *ASTNode,
+	framework *macosplatformmetadata.FrameworkMeta,
+	f *frameworkFilter,
+) {
 	absFile, line := nodeFileLine(node, f.currentFile)
 	proto := macosplatformmetadata.Protocol{
 		Availability: scanAvailability(node, absFile, line),
@@ -512,7 +532,11 @@ func scanProtocol(node *ASTNode, framework *macosplatformmetadata.FrameworkMeta,
 
 // --- Methods ---
 
-func scanMethod(node *ASTNode, absFile, sdkPath string, classGenericParams []string) (macosplatformmetadata.Method, bool) {
+func scanMethod(
+	node *ASTNode,
+	absFile, sdkPath string,
+	classGenericParams []string,
+) (macosplatformmetadata.Method, bool) {
 	if node.IsImplicit {
 		return macosplatformmetadata.Method{}, false
 	}
@@ -594,6 +618,8 @@ func outParamModifier(qt string) string {
 // lets the rest of the pipeline see the underlying type.
 var attrPrefixes = []string{
 	"API_AVAILABLE ", "API_DEPRECATED ", "API_UNAVAILABLE ",
+	"API_OBSOLETED ", "API_OBSOLETED_WITH_REPLACEMENT ", "API_DEPRECATED_WITH_REPLACEMENT ",
+	"CF_RETURNS_RETAINED ", "CM_RETURNS_RETAINED ", "AR_OBJECT_RETURNS_RETAINED ",
 	"NS_REFINED_FOR_SWIFT ", "NS_SWIFT_NAME ", "NS_SWIFT_UI_ACTOR ",
 	"NS_SWIFT_UNAVAILABLE_FROM_ASYNC ", "NS_SWIFT_UNAVAILABLE ",
 	"NS_AVAILABLE_MAC ", "NS_AVAILABLE_IOS ", "NS_AVAILABLE ",
@@ -608,16 +634,23 @@ func bestQualType(t *ASTType) string {
 	if t == nil {
 		return ""
 	}
-	qt := t.QualType
-	for _, pfx := range attrPrefixes {
-		if strings.HasPrefix(qt, pfx) {
-			return strings.TrimSpace(qt[len(pfx):])
+	qt := strings.TrimSpace(t.QualType)
+	for {
+		previous := qt
+		for _, pfx := range attrPrefixes {
+			qt = strings.TrimSpace(strings.TrimPrefix(qt, pfx))
+		}
+		if qt == previous {
+			return qt
 		}
 	}
-	return qt
 }
 
-func makeReturnType(t *ASTType, method *ASTNode, classGenericParams []string) macosplatformmetadata.ReturnType {
+func makeReturnType(
+	t *ASTType,
+	method *ASTNode,
+	classGenericParams []string,
+) macosplatformmetadata.ReturnType {
 	qt := bestQualType(t)
 	r := macosplatformmetadata.ReturnType{
 		ObjCType:       qt,
@@ -628,14 +661,17 @@ func makeReturnType(t *ASTType, method *ASTNode, classGenericParams []string) ma
 	// the +1 create rule even without CF_RETURNS_RETAINED; detect via selector prefix.
 	sel := method.Name
 	for _, prefix := range []string{"new", "alloc", "copy", "mutableCopy"} {
-		if sel == prefix || strings.HasPrefix(sel, prefix) && (len(sel) == len(prefix) || sel[len(prefix)] >= 'A' && sel[len(prefix)] <= 'Z') {
+		if sel == prefix ||
+			strings.HasPrefix(sel, prefix) &&
+				(len(sel) == len(prefix) || sel[len(prefix)] >= 'A' && sel[len(prefix)] <= 'Z') {
 			r.IsAlreadyRetained = true
 			break
 		}
 	}
 	// Also honour the explicit NS_RETURNS_RETAINED / CF_RETURNS_RETAINED attributes
 	// that appear on factory methods outside the standard naming conventions.
-	if !r.IsAlreadyRetained && (method.hasAttr("NSReturnsRetainedAttr") || method.hasAttr("CFReturnsRetainedAttr")) {
+	if !r.IsAlreadyRetained &&
+		(method.hasAttr("NSReturnsRetainedAttr") || method.hasAttr("CFReturnsRetainedAttr")) {
 		r.IsAlreadyRetained = true
 	}
 	// Detect generic return types: if the return qualType matches one of the class's
@@ -934,7 +970,7 @@ func scanStruct(node *ASTNode, framework *macosplatformmetadata.FrameworkMeta, f
 		if child.Kind == "FieldDecl" {
 			qt := ""
 			if child.Type != nil {
-				qt = child.Type.QualType
+				qt = bestQualType(child.Type)
 			}
 			s.Fields = append(s.Fields, macosplatformmetadata.StructField{
 				Name:     child.Name,
@@ -947,7 +983,8 @@ func scanStruct(node *ASTNode, framework *macosplatformmetadata.FrameworkMeta, f
 	// than once (re-exported via #include chains, e.g. CGSize seen from both
 	// CoreFoundation and CoreGraphics), keep whichever entry actually carries
 	// fields. A complete struct shouldn't be replaced by a fields-less one.
-	if existing, ok := framework.Structs[node.Name]; ok && len(existing.Fields) > 0 && len(s.Fields) == 0 {
+	if existing, ok := framework.Structs[node.Name]; ok && len(existing.Fields) > 0 &&
+		len(s.Fields) == 0 {
 		return
 	}
 	// Stamp clang's authoritative layout when it matches this struct one-to-one:
@@ -982,7 +1019,9 @@ func scanStruct(node *ASTNode, framework *macosplatformmetadata.FrameworkMeta, f
 // pointer. Such a record has a trivially deterministic layout (8-byte slots, no
 // padding) that clang omits when the record is only referenced by pointer. It
 // returns ok=false for an empty field list or any non-pointer field.
-func pointerOnlyLayout(fields []macosplatformmetadata.StructField) (size int, offsets []int, ok bool) {
+func pointerOnlyLayout(
+	fields []macosplatformmetadata.StructField,
+) (size int, offsets []int, ok bool) {
 	if len(fields) == 0 {
 		return 0, nil, false
 	}
@@ -1119,7 +1158,11 @@ func hasPackedAttr(node *ASTNode) bool {
 // captured struct's own field are admitted — never every external struct — so no
 // spurious import-graph edges are introduced. The walk repeats to a fixpoint so a
 // referenced struct whose fields reference further structs pulls those in too.
-func captureReferencedStructs(root *ASTNode, framework *macosplatformmetadata.FrameworkMeta, f *frameworkFilter) {
+func captureReferencedStructs(
+	root *ASTNode,
+	framework *macosplatformmetadata.FrameworkMeta,
+	f *frameworkFilter,
+) {
 	for {
 		want := referencedStructNames(framework)
 		if len(want) == 0 {
@@ -1246,7 +1289,7 @@ func bareStructIdent(objcType string) string {
 	// A plain C identifier only.
 	for i := 0; i < len(ident); i++ {
 		c := ident[i]
-		if !(c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'z' || c >= '0' && c <= '9' || c == '_') {
+		if (c < 'A' || c > 'Z') && (c < 'a' || c > 'z') && (c < '0' || c > '9') && c != '_' {
 			return ""
 		}
 	}
@@ -1277,7 +1320,11 @@ func followsCreateRule(name string) bool {
 	return false
 }
 
-func scanFunction(node *ASTNode, framework *macosplatformmetadata.FrameworkMeta, f *frameworkFilter) {
+func scanFunction(
+	node *ASTNode,
+	framework *macosplatformmetadata.FrameworkMeta,
+	f *frameworkFilter,
+) {
 	if node.IsImplicit {
 		return
 	}
@@ -1291,15 +1338,23 @@ func scanFunction(node *ASTNode, framework *macosplatformmetadata.FrameworkMeta,
 		IsWarnUnused: node.hasAttr("WarnUnusedResultAttr"),
 		Doc:          docForNode(absFile, line),
 	}
+	if node.hasAttr("AsmLabelAttr") && node.MangledName != "" {
+		// Darwin's assembly label includes the Mach-O leading underscore;
+		// dlsym expects the exported name without that prefix.
+		linkName := strings.TrimPrefix(strings.TrimPrefix(node.MangledName, "\x01"), "_")
+		if linkName != fn.Name {
+			fn.LinkName = linkName
+		}
+	}
 	switch {
 	case node.ReturnType != nil:
 		// ObjCMethodDecl nodes carry a distinct returnType field.
-		fn.Return = macosplatformmetadata.ReturnType{ObjCType: node.ReturnType.QualType}
+		fn.Return = macosplatformmetadata.ReturnType{ObjCType: bestQualType(node.ReturnType)}
 	case node.Type != nil:
 		// Plain C FunctionDecl: Clang folds the full function signature into
 		// type.qualType (e.g. "CFIndex (CFArrayRef)"). Extract the return type
 		// as the portion before the first opening parenthesis.
-		if ret := parseFuncReturnType(node.Type.QualType); ret != "" && ret != "void" {
+		if ret := parseFuncReturnType(bestQualType(node.Type)); ret != "" && ret != "void" {
 			fn.Return = macosplatformmetadata.ReturnType{ObjCType: ret}
 		}
 	}
@@ -1343,7 +1398,7 @@ func scanExtern(node *ASTNode, framework *macosplatformmetadata.FrameworkMeta, f
 	}
 	qt := ""
 	if node.Type != nil {
-		qt = node.Type.QualType
+		qt = bestQualType(node.Type)
 	}
 	absFile, line := nodeFileLine(node, f.currentFile)
 	framework.Externs = append(framework.Externs, macosplatformmetadata.Extern{
@@ -1358,7 +1413,11 @@ func scanExtern(node *ASTNode, framework *macosplatformmetadata.FrameworkMeta, f
 
 // --- Typedefs ---
 
-func scanTypedef(node *ASTNode, framework *macosplatformmetadata.FrameworkMeta, f *frameworkFilter) {
+func scanTypedef(
+	node *ASTNode,
+	framework *macosplatformmetadata.FrameworkMeta,
+	f *frameworkFilter,
+) {
 	if node.Type == nil {
 		return
 	}
@@ -1379,7 +1438,7 @@ func scanTypedef(node *ASTNode, framework *macosplatformmetadata.FrameworkMeta, 
 	if strings.Contains(file, ".framework/") && !f.Accept() {
 		return
 	}
-	framework.Typedefs[node.Name] = node.Type.QualType
+	framework.Typedefs[node.Name] = bestQualType(node.Type)
 }
 
 // --- Availability ---
@@ -1389,7 +1448,11 @@ func scanTypedef(node *ASTNode, framework *macosplatformmetadata.FrameworkMeta, 
 // Clang that emits platform/version fields), then falls back to parsing the
 // raw SDK header source — necessary for Apple clang ≥ 21 where AvailabilityAttr
 // JSON nodes carry only range information with no platform/version fields.
-func scanAvailability(node *ASTNode, absFile string, lineNo int) macosplatformmetadata.Availability {
+func scanAvailability(
+	node *ASTNode,
+	absFile string,
+	lineNo int,
+) macosplatformmetadata.Availability {
 	var av macosplatformmetadata.Availability
 	// Try the top-level Availability array (populated by some Clang versions).
 	for i := range node.Availability {

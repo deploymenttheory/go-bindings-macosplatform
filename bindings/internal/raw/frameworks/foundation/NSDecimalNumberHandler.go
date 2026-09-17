@@ -51,6 +51,7 @@ func NSDecimalNumberHandlerDecimalNumberHandlerWithRoundingModeScaleRaiseOnExact
 	return NSDecimalNumberHandlerFromID(_ret)
 }
 
+// Returns the default instance of `NSDecimalNumberHandler`. The default handler rounds to closest possible return value (“NSRoundPlain“), assumes precision up to 38 significant digits, and raises on overflow, underflow, and divide by zero.
 func NSDecimalNumberHandlerDefaultDecimalNumberHandler() *NSDecimalNumberHandler {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDecimalNumberHandler), _nSDecimalNumberHandlerSelDefaultDecimalNumberHandler)
 	if _ret != 0 {

@@ -1860,6 +1860,11 @@ func KSecCFErrorRequirementSyntax() obj.Object {
 // KSecCFErrorPath returns the value of the constant kSecCFErrorPath.
 func KSecCFErrorPath() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecCFErrorPath"))) }
 
+// KSecCFErrorDetachedCertificates returns the value of the constant kSecCFErrorDetachedCertificates.
+func KSecCFErrorDetachedCertificates() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecCFErrorDetachedCertificates")))
+}
+
 // KSecCodeAttributeArchitecture returns the value of the constant kSecCodeAttributeArchitecture.
 func KSecCodeAttributeArchitecture() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecCodeAttributeArchitecture")))
@@ -1937,6 +1942,16 @@ func KSecCodeInfoChangedFiles() obj.Object {
 
 // KSecCodeInfoCMS returns the value of the constant kSecCodeInfoCMS.
 func KSecCodeInfoCMS() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecCodeInfoCMS"))) }
+
+// KSecCodeInfoTotalSignatures returns the value of the constant kSecCodeInfoTotalSignatures.
+func KSecCodeInfoTotalSignatures() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecCodeInfoTotalSignatures")))
+}
+
+// KSecCodeInfoChosenSignature returns the value of the constant kSecCodeInfoChosenSignature.
+func KSecCodeInfoChosenSignature() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecCodeInfoChosenSignature")))
+}
 
 // KSecCodeInfoDesignatedRequirement returns the value of the constant kSecCodeInfoDesignatedRequirement.
 func KSecCodeInfoDesignatedRequirement() obj.Object {
@@ -2053,6 +2068,11 @@ func KSecCodeInfoRuntimeVersion() obj.Object {
 // KSecCodeInfoStapledNotarizationTicket returns the value of the constant kSecCodeInfoStapledNotarizationTicket.
 func KSecCodeInfoStapledNotarizationTicket() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecCodeInfoStapledNotarizationTicket")))
+}
+
+// KSecCodeInfoSignerInfoSKID returns the value of the constant kSecCodeInfoSignerInfoSKID.
+func KSecCodeInfoSignerInfoSKID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecCodeInfoSignerInfoSKID")))
 }
 
 // KCMSEncoderDigestAlgorithmSHA1 returns the value of the constant kCMSEncoderDigestAlgorithmSHA1.
@@ -3014,6 +3034,16 @@ func CSSMOID_ECDSA_WithSHA512() uintptr { return _symbol("CSSMOID_ECDSA_WithSHA5
 
 // CSSMOID_ECDSA_WithSpecified returns the address of the symbol CSSMOID_ECDSA_WithSpecified.
 func CSSMOID_ECDSA_WithSpecified() uintptr { return _symbol("CSSMOID_ECDSA_WithSpecified") }
+
+// CSSMOID_HYBRID_COMPOSITE_MLDSA87_RSA3072_WithSHA512 returns the address of the symbol CSSMOID_HYBRID_COMPOSITE_MLDSA87_RSA3072_WithSHA512.
+func CSSMOID_HYBRID_COMPOSITE_MLDSA87_RSA3072_WithSHA512() uintptr {
+	return _symbol("CSSMOID_HYBRID_COMPOSITE_MLDSA87_RSA3072_WithSHA512")
+}
+
+// CSSMOID_HYBRID_COMPOSITE_MLDSA87_RSA3072_WithSHA512_draft_13 returns the address of the symbol CSSMOID_HYBRID_COMPOSITE_MLDSA87_RSA3072_WithSHA512_draft_13.
+func CSSMOID_HYBRID_COMPOSITE_MLDSA87_RSA3072_WithSHA512_draft_13() uintptr {
+	return _symbol("CSSMOID_HYBRID_COMPOSITE_MLDSA87_RSA3072_WithSHA512_draft_13")
+}
 
 // CSSMOID_APPLE_ISIGN returns the address of the symbol CSSMOID_APPLE_ISIGN.
 func CSSMOID_APPLE_ISIGN() uintptr { return _symbol("CSSMOID_APPLE_ISIGN") }

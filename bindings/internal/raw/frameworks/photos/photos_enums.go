@@ -154,6 +154,27 @@ func (e PHAccessLevel) String() string {
 	}
 }
 
+type PHAssetAdjustmentsState int64
+
+const (
+	PHAssetAdjustmentsStateNone               PHAssetAdjustmentsState = 0
+	PHAssetAdjustmentsStateUserAdjusted       PHAssetAdjustmentsState = 2
+	PHAssetAdjustmentsStateCameraAutoAdjusted PHAssetAdjustmentsState = 3
+)
+
+func (e PHAssetAdjustmentsState) String() string {
+	switch e {
+	case PHAssetAdjustmentsStateNone:
+		return "PHAssetAdjustmentsStateNone"
+	case PHAssetAdjustmentsStateUserAdjusted:
+		return "PHAssetAdjustmentsStateUserAdjusted"
+	case PHAssetAdjustmentsStateCameraAutoAdjusted:
+		return "PHAssetAdjustmentsStateCameraAutoAdjusted"
+	default:
+		return fmt.Sprintf("PHAssetAdjustmentsState(%d)", int64(e))
+	}
+}
+
 // Bit mask values indicating whether and how an asset is marked as a favorite member of a burst photo sequence. Used by the burstSelectionTypes property.
 type PHAssetBurstSelectionType uint64
 
@@ -242,6 +263,7 @@ const (
 	PHAssetMediaSubtypePhotoLive PHAssetMediaSubtype = 8
 	// The asset is a photo captured with the Camera app’s Portrait mode depth effect.
 	PHAssetMediaSubtypePhotoDepthEffect PHAssetMediaSubtype = 16
+	PHAssetMediaSubtypePhotoAnimation   PHAssetMediaSubtype = 64
 	PHAssetMediaSubtypeSpatialMedia     PHAssetMediaSubtype = 1024
 	// The asset is a video with contents that always stream over a network connection.
 	PHAssetMediaSubtypeVideoStreamed PHAssetMediaSubtype = 65536
@@ -271,6 +293,9 @@ func (e PHAssetMediaSubtype) String() string {
 	}
 	if e&PHAssetMediaSubtypePhotoDepthEffect != 0 {
 		parts = append(parts, "PHAssetMediaSubtypePhotoDepthEffect")
+	}
+	if e&PHAssetMediaSubtypePhotoAnimation != 0 {
+		parts = append(parts, "PHAssetMediaSubtypePhotoAnimation")
 	}
 	if e&PHAssetMediaSubtypeSpatialMedia != 0 {
 		parts = append(parts, "PHAssetMediaSubtypeSpatialMedia")
@@ -325,7 +350,6 @@ func (e PHAssetMediaType) String() string {
 	}
 }
 
-// An enumeration of asset playback styles that dictate how to present an asset to the user.
 type PHAssetPlaybackStyle int64
 
 const (
@@ -353,6 +377,61 @@ func (e PHAssetPlaybackStyle) String() string {
 		return "PHAssetPlaybackStyleVideoLooping"
 	default:
 		return fmt.Sprintf("PHAssetPlaybackStyle(%d)", int64(e))
+	}
+}
+
+type PHAssetPlaybackVariation int64
+
+const (
+	PHAssetPlaybackVariationNone         PHAssetPlaybackVariation = 0
+	PHAssetPlaybackVariationAutoloop     PHAssetPlaybackVariation = 1
+	PHAssetPlaybackVariationMirror       PHAssetPlaybackVariation = 2
+	PHAssetPlaybackVariationLongExposure PHAssetPlaybackVariation = 3
+)
+
+func (e PHAssetPlaybackVariation) String() string {
+	switch e {
+	case PHAssetPlaybackVariationNone:
+		return "PHAssetPlaybackVariationNone"
+	case PHAssetPlaybackVariationAutoloop:
+		return "PHAssetPlaybackVariationAutoloop"
+	case PHAssetPlaybackVariationMirror:
+		return "PHAssetPlaybackVariationMirror"
+	case PHAssetPlaybackVariationLongExposure:
+		return "PHAssetPlaybackVariationLongExposure"
+	default:
+		return fmt.Sprintf("PHAssetPlaybackVariation(%d)", int64(e))
+	}
+}
+
+// Describes a rating for an asset.
+type PHAssetRating int64
+
+const (
+	PHAssetRatingUnset PHAssetRating = 0
+	PHAssetRatingOne   PHAssetRating = 1
+	PHAssetRatingTwo   PHAssetRating = 2
+	PHAssetRatingThree PHAssetRating = 3
+	PHAssetRatingFour  PHAssetRating = 4
+	PHAssetRatingFive  PHAssetRating = 5
+)
+
+func (e PHAssetRating) String() string {
+	switch e {
+	case PHAssetRatingUnset:
+		return "PHAssetRatingUnset"
+	case PHAssetRatingOne:
+		return "PHAssetRatingOne"
+	case PHAssetRatingTwo:
+		return "PHAssetRatingTwo"
+	case PHAssetRatingThree:
+		return "PHAssetRatingThree"
+	case PHAssetRatingFour:
+		return "PHAssetRatingFour"
+	case PHAssetRatingFive:
+		return "PHAssetRatingFive"
+	default:
+		return fmt.Sprintf("PHAssetRating(%d)", int64(e))
 	}
 }
 
@@ -417,6 +496,85 @@ func (e PHAssetResourceType) String() string {
 		return "PHAssetResourceTypePhotoProxy"
 	default:
 		return fmt.Sprintf("PHAssetResourceType(%d)", int64(e))
+	}
+}
+
+// An action to perform on an upload job. Determine the available jobs for an action by calling the “PHAssetResourceUploadJob/fetchJobsWithAction:options:“ method.
+type PHAssetResourceUploadJobAction int64
+
+const (
+	// A job that requires acknowledgement. An acknowledgeable job has a ``PHAssetResourceUploadJob/state`` of `succeeded` or `failed` and hasn't been acknowledged. Call ``PHAssetResourceUploadJobChangeRequest/acknowledge`` to acknowledge a job and free queue capacity for new uploads.
+	PHAssetResourceUploadJobActionAcknowledge PHAssetResourceUploadJobAction = 1
+	// A job to retry processing. A retryable job has a ``PHAssetResourceUploadJob/state`` of `failed` and hasn't previously been retried. Call ``PHAssetResourceUploadJobChangeRequest/retryWithDestination:`` to retry the job.
+	PHAssetResourceUploadJobActionRetry PHAssetResourceUploadJobAction = 2
+	// A job to process. A processable job has a ``PHAssetResourceUploadJob/state`` of `registered` or `pending`.
+	PHAssetResourceUploadJobActionProcess PHAssetResourceUploadJobAction = 3
+)
+
+func (e PHAssetResourceUploadJobAction) String() string {
+	switch e {
+	case PHAssetResourceUploadJobActionAcknowledge:
+		return "PHAssetResourceUploadJobActionAcknowledge"
+	case PHAssetResourceUploadJobActionRetry:
+		return "PHAssetResourceUploadJobActionRetry"
+	case PHAssetResourceUploadJobActionProcess:
+		return "PHAssetResourceUploadJobActionProcess"
+	default:
+		return fmt.Sprintf("PHAssetResourceUploadJobAction(%d)", int64(e))
+	}
+}
+
+// The states of an upload job.
+type PHAssetResourceUploadJobState int64
+
+const (
+	// The job has been registered.
+	PHAssetResourceUploadJobStateRegistered PHAssetResourceUploadJobState = 1
+	// A request has been made to send the asset resource to the destination, but has not yet been fulfilled.
+	PHAssetResourceUploadJobStatePending PHAssetResourceUploadJobState = 2
+	// The job has failed to send over.
+	PHAssetResourceUploadJobStateFailed PHAssetResourceUploadJobState = 3
+	// The job has sent over successfully.
+	PHAssetResourceUploadJobStateSucceeded PHAssetResourceUploadJobState = 4
+	// The job has been cancelled.
+	PHAssetResourceUploadJobStateCancelled PHAssetResourceUploadJobState = 5
+)
+
+func (e PHAssetResourceUploadJobState) String() string {
+	switch e {
+	case PHAssetResourceUploadJobStateRegistered:
+		return "PHAssetResourceUploadJobStateRegistered"
+	case PHAssetResourceUploadJobStatePending:
+		return "PHAssetResourceUploadJobStatePending"
+	case PHAssetResourceUploadJobStateFailed:
+		return "PHAssetResourceUploadJobStateFailed"
+	case PHAssetResourceUploadJobStateSucceeded:
+		return "PHAssetResourceUploadJobStateSucceeded"
+	case PHAssetResourceUploadJobStateCancelled:
+		return "PHAssetResourceUploadJobStateCancelled"
+	default:
+		return fmt.Sprintf("PHAssetResourceUploadJobState(%d)", int64(e))
+	}
+}
+
+// The types of an upload job
+type PHAssetResourceUploadJobType int16
+
+const (
+	// An upload job type (will download the resource from iCloud if required. then upload)
+	PHAssetResourceUploadJobTypeUpload PHAssetResourceUploadJobType = 0
+	// A download job type (will download the resource from iCloud if required)
+	PHAssetResourceUploadJobTypeDownloadOnly PHAssetResourceUploadJobType = 1
+)
+
+func (e PHAssetResourceUploadJobType) String() string {
+	switch e {
+	case PHAssetResourceUploadJobTypeUpload:
+		return "PHAssetResourceUploadJobTypeUpload"
+	case PHAssetResourceUploadJobTypeDownloadOnly:
+		return "PHAssetResourceUploadJobTypeDownloadOnly"
+	default:
+		return fmt.Sprintf("PHAssetResourceUploadJobType(%d)", int64(e))
 	}
 }
 
@@ -526,12 +684,16 @@ func (e PHCollectionEditOperation) String() string {
 }
 
 // Major distinctions between kinds of collection list, used by the collectionListSubtype property and fetchCollectionListsWithType:subtype:options:, fetchMomentListsWithSubtype:containingMoment:options:, and fetchMomentListsWithSubtype:options: methods.
-type PHCollectionListSubtype uint64
+type PHCollectionListSubtype int64
 
 const (
-	// The collection list is a smart folder containing one or more Events synced from iPhoto.
+	// The collection list is a folder containing albums or other folders.
+	PHCollectionListSubtypeRegularFolder PHCollectionListSubtype = 100
+	// The collection list that contains the top-level user collections.
+	PHCollectionListSubtypeRootFolder PHCollectionListSubtype = 101
+	// The collection list is a smart folder containing one or more Events synced from a Mac.
 	PHCollectionListSubtypeSmartFolderEvents PHCollectionListSubtype = 200
-	// The collection list is a smart folder containing one or more Faces synced from iPhoto.
+	// The collection list is a smart folder containing one or more Faces groups synced from a Mac.
 	PHCollectionListSubtypeSmartFolderFaces PHCollectionListSubtype = 201
 	// Use this value to fetch collection lists of all possible subtypes.
 	PHCollectionListSubtypeAny PHCollectionListSubtype = 9223372036854775807
@@ -539,6 +701,10 @@ const (
 
 func (e PHCollectionListSubtype) String() string {
 	switch e {
+	case PHCollectionListSubtypeRegularFolder:
+		return "PHCollectionListSubtypeRegularFolder"
+	case PHCollectionListSubtypeRootFolder:
+		return "PHCollectionListSubtypeRootFolder"
 	case PHCollectionListSubtypeSmartFolderEvents:
 		return "PHCollectionListSubtypeSmartFolderEvents"
 	case PHCollectionListSubtypeSmartFolderFaces:
@@ -725,6 +891,26 @@ func (e PHObjectType) String() string {
 		return "PHObjectTypeCollectionList"
 	default:
 		return fmt.Sprintf("PHObjectType(%d)", int64(e))
+	}
+}
+
+type PHOriginalResourceChoice int64
+
+const (
+	// The compressed original resource, such as a JPEG or HEIC, is used.
+	PHOriginalResourceChoiceCompressed PHOriginalResourceChoice = 0
+	// The RAW original resource is used.
+	PHOriginalResourceChoiceRaw PHOriginalResourceChoice = 1
+)
+
+func (e PHOriginalResourceChoice) String() string {
+	switch e {
+	case PHOriginalResourceChoiceCompressed:
+		return "PHOriginalResourceChoiceCompressed"
+	case PHOriginalResourceChoiceRaw:
+		return "PHOriginalResourceChoiceRaw"
+	default:
+		return fmt.Sprintf("PHOriginalResourceChoice(%d)", int64(e))
 	}
 }
 
@@ -1603,27 +1789,53 @@ func (e Qos_class_t) String() string {
 	}
 }
 
+type Task_shared_region_stubs_t uint8
+
+const (
+	TASK_SHARED_REGION_STUBS_DEV  Task_shared_region_stubs_t = 1
+	TASK_SHARED_REGION_STUBS_PROD Task_shared_region_stubs_t = 2
+)
+
+func (e Task_shared_region_stubs_t) String() string {
+	switch e {
+	case TASK_SHARED_REGION_STUBS_DEV:
+		return "TASK_SHARED_REGION_STUBS_DEV"
+	case TASK_SHARED_REGION_STUBS_PROD:
+		return "TASK_SHARED_REGION_STUBS_PROD"
+	default:
+		return fmt.Sprintf("Task_shared_region_stubs_t(%d)", int64(e))
+	}
+}
+
 type Virtual_memory_guard_exception_code_t uint32
 
 const (
-	KGUARD_EXC_DEALLOC_GAP                   Virtual_memory_guard_exception_code_t = 1
-	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        Virtual_memory_guard_exception_code_t = 2
-	KGUARD_EXC_RECLAIM_INDEX_FAILURE         Virtual_memory_guard_exception_code_t = 4
-	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    Virtual_memory_guard_exception_code_t = 8
-	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    Virtual_memory_guard_exception_code_t = 9
-	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         Virtual_memory_guard_exception_code_t = 10
-	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         Virtual_memory_guard_exception_code_t = 11
-	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  Virtual_memory_guard_exception_code_t = 12
-	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    Virtual_memory_guard_exception_code_t = 13
-	KGUARD_EXC_SEC_ACCESS_FAULT              Virtual_memory_guard_exception_code_t = 98
-	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        Virtual_memory_guard_exception_code_t = 99
-	KGUARD_EXC_SEC_COPY_DENIED               Virtual_memory_guard_exception_code_t = 100
-	KGUARD_EXC_SEC_SHARING_DENIED            Virtual_memory_guard_exception_code_t = 101
-	KGUARD_EXC_MTE_SYNC_FAULT                Virtual_memory_guard_exception_code_t = 200
-	KGUARD_EXC_MTE_ASYNC_USER_FAULT          Virtual_memory_guard_exception_code_t = 201
-	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          Virtual_memory_guard_exception_code_t = 202
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 203
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 204
+	KGUARD_EXC_DEALLOC_GAP                  Virtual_memory_guard_exception_code_t = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE       Virtual_memory_guard_exception_code_t = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE        Virtual_memory_guard_exception_code_t = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE   Virtual_memory_guard_exception_code_t = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE   Virtual_memory_guard_exception_code_t = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE        Virtual_memory_guard_exception_code_t = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE        Virtual_memory_guard_exception_code_t = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION Virtual_memory_guard_exception_code_t = 12
+	// Guard exception sent to a thread when a CoW defeatured map attempts to copy memory which is not permitted by system policy.
+	KGUARD_EXC_COW_DEFEATURED_COPY_DENIED Virtual_memory_guard_exception_code_t = 13
+	// Guard exception sent to a thread when it attempts to extract a given type of memory in a way which is not permitted for CoW defeatured maps.
+	KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED Virtual_memory_guard_exception_code_t = 14
+	// Guard exception sent to a thread when it attempts to copy-map a memory entry which was created for sharing by a CoW defeatured map.
+	KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED Virtual_memory_guard_exception_code_t = 15
+	KGUARD_EXC_COW_DEFEATURED_FIRST                    Virtual_memory_guard_exception_code_t = 13
+	KGUARD_EXC_COW_DEFEATURED_LAST                     Virtual_memory_guard_exception_code_t = 15
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY              Virtual_memory_guard_exception_code_t = 16
+	KGUARD_EXC_SEC_ACCESS_FAULT                        Virtual_memory_guard_exception_code_t = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT                  Virtual_memory_guard_exception_code_t = 99
+	KGUARD_EXC_SEC_COPY_DENIED                         Virtual_memory_guard_exception_code_t = 100
+	KGUARD_EXC_SEC_SHARING_DENIED                      Virtual_memory_guard_exception_code_t = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                          Virtual_memory_guard_exception_code_t = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT                    Virtual_memory_guard_exception_code_t = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT                    Virtual_memory_guard_exception_code_t = 202
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT           Virtual_memory_guard_exception_code_t = 203
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT           Virtual_memory_guard_exception_code_t = 204
 )
 
 func (e Virtual_memory_guard_exception_code_t) String() string {
@@ -1644,6 +1856,12 @@ func (e Virtual_memory_guard_exception_code_t) String() string {
 		return "KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE"
 	case KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION:
 		return "KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION"
+	case KGUARD_EXC_COW_DEFEATURED_COPY_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_COPY_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED"
 	case KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY:
 		return "KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY"
 	case KGUARD_EXC_SEC_ACCESS_FAULT:

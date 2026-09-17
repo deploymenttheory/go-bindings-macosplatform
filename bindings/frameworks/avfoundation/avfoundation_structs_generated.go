@@ -37,20 +37,20 @@ type AVCaptureTimecode struct {
 	SourceType    CaptureTimecodeSourceType
 }
 
-// A structure that defines CIE 1931 xy chromaticity values.
+// Structure containing CIE 1931 xy chromaticity values.
 type AVCaptureWhiteBalanceChromaticityValues struct {
 	X float32
 	Y float32
 }
 
-// A structure that defines RGB white balance gain values.
+// Structure containing RGB white balance gain values.
 type AVCaptureWhiteBalanceGains struct {
 	RedGain   float32
 	GreenGain float32
 	BlueGain  float32
 }
 
-// A structure that defines temperature and tint values correlated to a white-balance color.
+// Structure containing a white balance color correlated temperature in kelvin, plus a tint value in the range of [-150 - +150].
 type AVCaptureWhiteBalanceTemperatureAndTintValues struct {
 	Temperature float32
 	Tint        float32
@@ -68,6 +68,12 @@ type AVEdgeWidths struct {
 type AVPixelAspectRatio struct {
 	HorizontalSpacing int
 	VerticalSpacing   int
+}
+
+// AVPlannedVideoSegmentBoundaryGuidelines provides guidance on determining planned segment boundaries for a video track in an incremental writing session executed by the AVAssetWritingPlanner. The properties provide guidance on determining segment boundaries for a video track in an incremental writing session. All conditions should be supported for best results. The client should choose frame count and minimum duration that meet the minimum requirement. However, the client should also consider the balance between overhead caused by completing and saving states for small segments, and the cost of having to redo a large segment if the incremental session stopped in the middle of a segment due to errors or crashes. For example, use 1 minute segments for 4K60fps video.
+type AVPlannedVideoSegmentBoundaryGuidelines struct {
+	MinimumFrameCount int
+	MinimumDuration   coremedia.CMTime
 }
 
 // A structure that describes the independent decodability of audio samples.

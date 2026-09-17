@@ -23,10 +23,6 @@
       "doc": "A curve that you send to a haptic pattern player to alter a property value gradually during playback.",
       "url": "https://developer.apple.com/documentation/corehaptics/chhapticparametercurve"
     },
-    "CHHapticParameterCurveControlPoint": {
-      "doc": "A single control point in a parameter curve.",
-      "url": "https://developer.apple.com/documentation/corehaptics/chhapticparametercurvecontrolpoint"
-    },
     "CHHapticPattern": {
       "doc": "An object representing a haptic waveform.",
       "url": "https://developer.apple.com/documentation/corehaptics/chhapticpattern"
@@ -48,20 +44,6 @@
     "CHHapticPatternPlayer": {
       "doc": "A protocol that defines a standard pattern player capable of playing haptic patterns with fixed parameters.",
       "url": "https://developer.apple.com/documentation/corehaptics/chhapticpatternplayer"
-    }
-  },
-  "enums": {
-    "CHHapticEngineFinishedAction": {
-      "doc": "Possible actions to take after the haptic engine finishes execution.",
-      "url": "https://developer.apple.com/documentation/corehaptics/chhapticenginefinishedaction"
-    },
-    "CHHapticEngineStoppedReason": {
-      "doc": "The enumeration of reasons the haptic engine stopped running.",
-      "url": "https://developer.apple.com/documentation/corehaptics/chhapticenginestoppedreason"
-    },
-    "CHHapticErrorCode": {
-      "doc": "Error codes for framework operations.",
-      "url": "https://developer.apple.com/documentation/corehaptics/chhapticerrorcode"
     }
   },
   "methods": {

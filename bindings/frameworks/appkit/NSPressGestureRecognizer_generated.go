@@ -187,6 +187,14 @@ func (pgr *PressGestureRecognizer) WithDelaysRotationEvents(delaysRotationEvents
 	return pgr
 }
 
+// WithCancellableByScrollGesture sets causes the receiver to be cancelled when its enclosing scroll view’s gesture recognizer begins.
+func (pgr *PressGestureRecognizer) WithCancellableByScrollGesture(cancellableByScrollGesture bool) *PressGestureRecognizer {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setCancellableByScrollGesture:"), cancellableByScrollGesture)
+	})
+	return pgr
+}
+
 // WithName sets the name.
 func (pgr *PressGestureRecognizer) WithName(name string) *PressGestureRecognizer {
 	purego.Main(func() {

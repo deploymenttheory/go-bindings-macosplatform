@@ -16,8 +16,6 @@ import (
 )
 
 // ShareParticipant is an idiomatic wrapper over the Objective-C class CKShareParticipant.
-//
-// An object that describes a user’s participation in a share.
 type ShareParticipant struct {
 	objref.Handle
 }

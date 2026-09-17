@@ -250,21 +250,21 @@ func (is *IndexSet) IndexesInRangeOptionsPassingTest(range_ NSRange, opts Enumer
 	return IndexSetFromID(_r)
 }
 
-// Count returns the count.
+// Count returns the number of indexes in the index set.
 func (is *IndexSet) Count() int {
 	defer runtime.KeepAlive(is)
 	_r := objc.Send[int](objref.IDOf(is), objc.RegisterName("count"))
 	return _r
 }
 
-// FirstIndex returns the first index.
+// FirstIndex returns the first index in the index set, or `NSNotFound` when the index set is empty.
 func (is *IndexSet) FirstIndex() int {
 	defer runtime.KeepAlive(is)
 	_r := objc.Send[int](objref.IDOf(is), objc.RegisterName("firstIndex"))
 	return _r
 }
 
-// LastIndex returns the last index.
+// LastIndex returns the last index in the index set, or `NSNotFound` when the index set is empty.
 func (is *IndexSet) LastIndex() int {
 	defer runtime.KeepAlive(is)
 	_r := objc.Send[int](objref.IDOf(is), objc.RegisterName("lastIndex"))

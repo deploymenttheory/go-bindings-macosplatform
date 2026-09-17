@@ -216,6 +216,21 @@ func NSProgressFileCompletedCountKey() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSProgressFileCompletedCountKey")))
 }
 
+// NSProgressFileAnimationImageKey returns the string constant NSProgressFileAnimationImageKey.
+func NSProgressFileAnimationImageKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSProgressFileAnimationImageKey")))
+}
+
+// NSProgressFileAnimationImageOriginalRectKey returns the string constant NSProgressFileAnimationImageOriginalRectKey.
+func NSProgressFileAnimationImageOriginalRectKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSProgressFileAnimationImageOriginalRectKey")))
+}
+
+// NSProgressFileIconKey returns the string constant NSProgressFileIconKey.
+func NSProgressFileIconKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSProgressFileIconKey")))
+}
+
 // NSBundleDidLoadNotification returns the string constant NSBundleDidLoadNotification.
 func NSBundleDidLoadNotification() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSBundleDidLoadNotification")))
@@ -372,6 +387,76 @@ func NSCalendarDayChangedNotification() *String {
 // NSInflectionConceptsKey returns the string constant NSInflectionConceptsKey.
 func NSInflectionConceptsKey() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSInflectionConceptsKey")))
+}
+
+// NSInlinePresentationIntentAttributeName returns the string constant NSInlinePresentationIntentAttributeName.
+func NSInlinePresentationIntentAttributeName() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSInlinePresentationIntentAttributeName")))
+}
+
+// NSAlternateDescriptionAttributeName returns the string constant NSAlternateDescriptionAttributeName.
+func NSAlternateDescriptionAttributeName() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSAlternateDescriptionAttributeName")))
+}
+
+// NSImageURLAttributeName returns the string constant NSImageURLAttributeName.
+func NSImageURLAttributeName() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSImageURLAttributeName")))
+}
+
+// NSLanguageIdentifierAttributeName returns the string constant NSLanguageIdentifierAttributeName.
+func NSLanguageIdentifierAttributeName() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSLanguageIdentifierAttributeName")))
+}
+
+// NSMarkdownSourcePositionAttributeName returns the string constant NSMarkdownSourcePositionAttributeName.
+func NSMarkdownSourcePositionAttributeName() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMarkdownSourcePositionAttributeName")))
+}
+
+// NSReplacementIndexAttributeName returns the string constant NSReplacementIndexAttributeName.
+func NSReplacementIndexAttributeName() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSReplacementIndexAttributeName")))
+}
+
+// NSMorphologyAttributeName returns the string constant NSMorphologyAttributeName.
+func NSMorphologyAttributeName() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMorphologyAttributeName")))
+}
+
+// NSInflectionRuleAttributeName returns the string constant NSInflectionRuleAttributeName.
+func NSInflectionRuleAttributeName() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSInflectionRuleAttributeName")))
+}
+
+// NSInflectionAgreementArgumentAttributeName returns the string constant NSInflectionAgreementArgumentAttributeName.
+func NSInflectionAgreementArgumentAttributeName() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSInflectionAgreementArgumentAttributeName")))
+}
+
+// NSInflectionAgreementConceptAttributeName returns the string constant NSInflectionAgreementConceptAttributeName.
+func NSInflectionAgreementConceptAttributeName() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSInflectionAgreementConceptAttributeName")))
+}
+
+// NSInflectionReferentConceptAttributeName returns the string constant NSInflectionReferentConceptAttributeName.
+func NSInflectionReferentConceptAttributeName() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSInflectionReferentConceptAttributeName")))
+}
+
+// NSInflectionAlternativeAttributeName returns the string constant NSInflectionAlternativeAttributeName.
+func NSInflectionAlternativeAttributeName() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSInflectionAlternativeAttributeName")))
+}
+
+// NSLocalizedNumberFormatAttributeName returns the string constant NSLocalizedNumberFormatAttributeName.
+func NSLocalizedNumberFormatAttributeName() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSLocalizedNumberFormatAttributeName")))
+}
+
+// NSListItemDelimiterAttributeName returns the string constant NSListItemDelimiterAttributeName.
+func NSListItemDelimiterAttributeName() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSListItemDelimiterAttributeName")))
 }
 
 // NSPresentationIntentAttributeName returns the string constant NSPresentationIntentAttributeName.
@@ -898,6 +983,11 @@ func NSURLIsApplicationKey() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSURLIsApplicationKey")))
 }
 
+// NSURLApplicationIsScriptableKey returns the string constant NSURLApplicationIsScriptableKey.
+func NSURLApplicationIsScriptableKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSURLApplicationIsScriptableKey")))
+}
+
 // NSURLIsSystemImmutableKey returns the string constant NSURLIsSystemImmutableKey.
 func NSURLIsSystemImmutableKey() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSURLIsSystemImmutableKey")))
@@ -1031,6 +1121,9 @@ func NSURLIsExcludedFromBackupKey() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSURLIsExcludedFromBackupKey")))
 }
 
+// NSURLTagNamesKey returns the string constant NSURLTagNamesKey.
+func NSURLTagNamesKey() *String { return StringFromID(purego.CFConstant(_symbol("NSURLTagNamesKey"))) }
+
 // NSURLPathKey returns the string constant NSURLPathKey.
 func NSURLPathKey() *String { return StringFromID(purego.CFConstant(_symbol("NSURLPathKey"))) }
 
@@ -1057,6 +1150,11 @@ func NSURLDocumentIdentifierKey() *String {
 // NSURLAddedToDirectoryDateKey returns the string constant NSURLAddedToDirectoryDateKey.
 func NSURLAddedToDirectoryDateKey() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSURLAddedToDirectoryDateKey")))
+}
+
+// NSURLQuarantinePropertiesKey returns the string constant NSURLQuarantinePropertiesKey.
+func NSURLQuarantinePropertiesKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSURLQuarantinePropertiesKey")))
 }
 
 // NSURLFileResourceTypeKey returns the string constant NSURLFileResourceTypeKey.
@@ -1135,6 +1233,11 @@ func NSURLFileResourceTypeUnknown() *String {
 // NSURLThumbnailDictionaryKey returns the string constant NSURLThumbnailDictionaryKey.
 func NSURLThumbnailDictionaryKey() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSURLThumbnailDictionaryKey")))
+}
+
+// NSURLThumbnailKey returns the string constant NSURLThumbnailKey.
+func NSURLThumbnailKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSURLThumbnailKey")))
 }
 
 // NSThumbnail1024x1024SizeKey returns the string constant NSThumbnail1024x1024SizeKey.
@@ -1560,6 +1663,11 @@ func NSURLUbiquitousItemIsSyncPausedKey() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSURLUbiquitousItemIsSyncPausedKey")))
 }
 
+// NSFileManagerUnmountDissentingProcessIdentifierErrorKey returns the string constant NSFileManagerUnmountDissentingProcessIdentifierErrorKey.
+func NSFileManagerUnmountDissentingProcessIdentifierErrorKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSFileManagerUnmountDissentingProcessIdentifierErrorKey")))
+}
+
 // NSUbiquityIdentityDidChangeNotification returns the string constant NSUbiquityIdentityDidChangeNotification.
 func NSUbiquityIdentityDidChangeNotification() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSUbiquityIdentityDidChangeNotification")))
@@ -1706,6 +1814,19 @@ func NSFileProtectionCompleteUnlessOpen() *String {
 // NSFileProtectionCompleteUntilFirstUserAuthentication returns the string constant NSFileProtectionCompleteUntilFirstUserAuthentication.
 func NSFileProtectionCompleteUntilFirstUserAuthentication() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSFileProtectionCompleteUntilFirstUserAuthentication")))
+}
+
+// NSFileSystemSize returns the string constant NSFileSystemSize.
+func NSFileSystemSize() *String { return StringFromID(purego.CFConstant(_symbol("NSFileSystemSize"))) }
+
+// NSFileSystemFreeSize returns the string constant NSFileSystemFreeSize.
+func NSFileSystemFreeSize() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSFileSystemFreeSize")))
+}
+
+// NSFileSystemNodes returns the string constant NSFileSystemNodes.
+func NSFileSystemNodes() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSFileSystemNodes")))
 }
 
 // NSFileSystemFreeNodes returns the string constant NSFileSystemFreeNodes.
@@ -2256,6 +2377,130 @@ func NSUserDefaultsDidChangeNotification() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSUserDefaultsDidChangeNotification")))
 }
 
+// NSWeekDayNameArray returns the string constant NSWeekDayNameArray.
+func NSWeekDayNameArray() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSWeekDayNameArray")))
+}
+
+// NSShortWeekDayNameArray returns the string constant NSShortWeekDayNameArray.
+func NSShortWeekDayNameArray() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSShortWeekDayNameArray")))
+}
+
+// NSMonthNameArray returns the string constant NSMonthNameArray.
+func NSMonthNameArray() *String { return StringFromID(purego.CFConstant(_symbol("NSMonthNameArray"))) }
+
+// NSShortMonthNameArray returns the string constant NSShortMonthNameArray.
+func NSShortMonthNameArray() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSShortMonthNameArray")))
+}
+
+// NSTimeFormatString returns the string constant NSTimeFormatString.
+func NSTimeFormatString() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSTimeFormatString")))
+}
+
+// NSDateFormatString returns the string constant NSDateFormatString.
+func NSDateFormatString() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSDateFormatString")))
+}
+
+// NSTimeDateFormatString returns the string constant NSTimeDateFormatString.
+func NSTimeDateFormatString() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSTimeDateFormatString")))
+}
+
+// NSShortTimeDateFormatString returns the string constant NSShortTimeDateFormatString.
+func NSShortTimeDateFormatString() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSShortTimeDateFormatString")))
+}
+
+// NSCurrencySymbol returns the string constant NSCurrencySymbol.
+func NSCurrencySymbol() *String { return StringFromID(purego.CFConstant(_symbol("NSCurrencySymbol"))) }
+
+// NSDecimalSeparator returns the string constant NSDecimalSeparator.
+func NSDecimalSeparator() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSDecimalSeparator")))
+}
+
+// NSThousandsSeparator returns the string constant NSThousandsSeparator.
+func NSThousandsSeparator() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSThousandsSeparator")))
+}
+
+// NSDecimalDigits returns the string constant NSDecimalDigits.
+func NSDecimalDigits() *String { return StringFromID(purego.CFConstant(_symbol("NSDecimalDigits"))) }
+
+// NSAMPMDesignation returns the string constant NSAMPMDesignation.
+func NSAMPMDesignation() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSAMPMDesignation")))
+}
+
+// NSHourNameDesignations returns the string constant NSHourNameDesignations.
+func NSHourNameDesignations() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSHourNameDesignations")))
+}
+
+// NSYearMonthWeekDesignations returns the string constant NSYearMonthWeekDesignations.
+func NSYearMonthWeekDesignations() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSYearMonthWeekDesignations")))
+}
+
+// NSEarlierTimeDesignations returns the string constant NSEarlierTimeDesignations.
+func NSEarlierTimeDesignations() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSEarlierTimeDesignations")))
+}
+
+// NSLaterTimeDesignations returns the string constant NSLaterTimeDesignations.
+func NSLaterTimeDesignations() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSLaterTimeDesignations")))
+}
+
+// NSThisDayDesignations returns the string constant NSThisDayDesignations.
+func NSThisDayDesignations() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSThisDayDesignations")))
+}
+
+// NSNextDayDesignations returns the string constant NSNextDayDesignations.
+func NSNextDayDesignations() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSNextDayDesignations")))
+}
+
+// NSNextNextDayDesignations returns the string constant NSNextNextDayDesignations.
+func NSNextNextDayDesignations() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSNextNextDayDesignations")))
+}
+
+// NSPriorDayDesignations returns the string constant NSPriorDayDesignations.
+func NSPriorDayDesignations() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSPriorDayDesignations")))
+}
+
+// NSDateTimeOrdering returns the string constant NSDateTimeOrdering.
+func NSDateTimeOrdering() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSDateTimeOrdering")))
+}
+
+// NSInternationalCurrencyString returns the string constant NSInternationalCurrencyString.
+func NSInternationalCurrencyString() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSInternationalCurrencyString")))
+}
+
+// NSShortDateFormatString returns the string constant NSShortDateFormatString.
+func NSShortDateFormatString() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSShortDateFormatString")))
+}
+
+// NSPositiveCurrencyFormatString returns the string constant NSPositiveCurrencyFormatString.
+func NSPositiveCurrencyFormatString() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSPositiveCurrencyFormatString")))
+}
+
+// NSNegativeCurrencyFormatString returns the string constant NSNegativeCurrencyFormatString.
+func NSNegativeCurrencyFormatString() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSNegativeCurrencyFormatString")))
+}
+
 // NSNegateBooleanTransformerName returns the string constant NSNegateBooleanTransformerName.
 func NSNegateBooleanTransformerName() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSNegateBooleanTransformerName")))
@@ -2681,6 +2926,731 @@ func NSMetadataUbiquitousSharedItemPermissionsReadWrite() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSMetadataUbiquitousSharedItemPermissionsReadWrite")))
 }
 
+// NSMetadataItemAttributeChangeDateKey returns the string constant NSMetadataItemAttributeChangeDateKey.
+func NSMetadataItemAttributeChangeDateKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemAttributeChangeDateKey")))
+}
+
+// NSMetadataItemKeywordsKey returns the string constant NSMetadataItemKeywordsKey.
+func NSMetadataItemKeywordsKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemKeywordsKey")))
+}
+
+// NSMetadataItemTitleKey returns the string constant NSMetadataItemTitleKey.
+func NSMetadataItemTitleKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemTitleKey")))
+}
+
+// NSMetadataItemAuthorsKey returns the string constant NSMetadataItemAuthorsKey.
+func NSMetadataItemAuthorsKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemAuthorsKey")))
+}
+
+// NSMetadataItemEditorsKey returns the string constant NSMetadataItemEditorsKey.
+func NSMetadataItemEditorsKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemEditorsKey")))
+}
+
+// NSMetadataItemParticipantsKey returns the string constant NSMetadataItemParticipantsKey.
+func NSMetadataItemParticipantsKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemParticipantsKey")))
+}
+
+// NSMetadataItemProjectsKey returns the string constant NSMetadataItemProjectsKey.
+func NSMetadataItemProjectsKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemProjectsKey")))
+}
+
+// NSMetadataItemDownloadedDateKey returns the string constant NSMetadataItemDownloadedDateKey.
+func NSMetadataItemDownloadedDateKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemDownloadedDateKey")))
+}
+
+// NSMetadataItemWhereFromsKey returns the string constant NSMetadataItemWhereFromsKey.
+func NSMetadataItemWhereFromsKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemWhereFromsKey")))
+}
+
+// NSMetadataItemCommentKey returns the string constant NSMetadataItemCommentKey.
+func NSMetadataItemCommentKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemCommentKey")))
+}
+
+// NSMetadataItemCopyrightKey returns the string constant NSMetadataItemCopyrightKey.
+func NSMetadataItemCopyrightKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemCopyrightKey")))
+}
+
+// NSMetadataItemLastUsedDateKey returns the string constant NSMetadataItemLastUsedDateKey.
+func NSMetadataItemLastUsedDateKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemLastUsedDateKey")))
+}
+
+// NSMetadataItemContentCreationDateKey returns the string constant NSMetadataItemContentCreationDateKey.
+func NSMetadataItemContentCreationDateKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemContentCreationDateKey")))
+}
+
+// NSMetadataItemContentModificationDateKey returns the string constant NSMetadataItemContentModificationDateKey.
+func NSMetadataItemContentModificationDateKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemContentModificationDateKey")))
+}
+
+// NSMetadataItemDateAddedKey returns the string constant NSMetadataItemDateAddedKey.
+func NSMetadataItemDateAddedKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemDateAddedKey")))
+}
+
+// NSMetadataItemDurationSecondsKey returns the string constant NSMetadataItemDurationSecondsKey.
+func NSMetadataItemDurationSecondsKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemDurationSecondsKey")))
+}
+
+// NSMetadataItemContactKeywordsKey returns the string constant NSMetadataItemContactKeywordsKey.
+func NSMetadataItemContactKeywordsKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemContactKeywordsKey")))
+}
+
+// NSMetadataItemVersionKey returns the string constant NSMetadataItemVersionKey.
+func NSMetadataItemVersionKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemVersionKey")))
+}
+
+// NSMetadataItemPixelHeightKey returns the string constant NSMetadataItemPixelHeightKey.
+func NSMetadataItemPixelHeightKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemPixelHeightKey")))
+}
+
+// NSMetadataItemPixelWidthKey returns the string constant NSMetadataItemPixelWidthKey.
+func NSMetadataItemPixelWidthKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemPixelWidthKey")))
+}
+
+// NSMetadataItemPixelCountKey returns the string constant NSMetadataItemPixelCountKey.
+func NSMetadataItemPixelCountKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemPixelCountKey")))
+}
+
+// NSMetadataItemColorSpaceKey returns the string constant NSMetadataItemColorSpaceKey.
+func NSMetadataItemColorSpaceKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemColorSpaceKey")))
+}
+
+// NSMetadataItemBitsPerSampleKey returns the string constant NSMetadataItemBitsPerSampleKey.
+func NSMetadataItemBitsPerSampleKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemBitsPerSampleKey")))
+}
+
+// NSMetadataItemFlashOnOffKey returns the string constant NSMetadataItemFlashOnOffKey.
+func NSMetadataItemFlashOnOffKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemFlashOnOffKey")))
+}
+
+// NSMetadataItemFocalLengthKey returns the string constant NSMetadataItemFocalLengthKey.
+func NSMetadataItemFocalLengthKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemFocalLengthKey")))
+}
+
+// NSMetadataItemAcquisitionMakeKey returns the string constant NSMetadataItemAcquisitionMakeKey.
+func NSMetadataItemAcquisitionMakeKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemAcquisitionMakeKey")))
+}
+
+// NSMetadataItemAcquisitionModelKey returns the string constant NSMetadataItemAcquisitionModelKey.
+func NSMetadataItemAcquisitionModelKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemAcquisitionModelKey")))
+}
+
+// NSMetadataItemISOSpeedKey returns the string constant NSMetadataItemISOSpeedKey.
+func NSMetadataItemISOSpeedKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemISOSpeedKey")))
+}
+
+// NSMetadataItemOrientationKey returns the string constant NSMetadataItemOrientationKey.
+func NSMetadataItemOrientationKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemOrientationKey")))
+}
+
+// NSMetadataItemLayerNamesKey returns the string constant NSMetadataItemLayerNamesKey.
+func NSMetadataItemLayerNamesKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemLayerNamesKey")))
+}
+
+// NSMetadataItemWhiteBalanceKey returns the string constant NSMetadataItemWhiteBalanceKey.
+func NSMetadataItemWhiteBalanceKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemWhiteBalanceKey")))
+}
+
+// NSMetadataItemApertureKey returns the string constant NSMetadataItemApertureKey.
+func NSMetadataItemApertureKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemApertureKey")))
+}
+
+// NSMetadataItemProfileNameKey returns the string constant NSMetadataItemProfileNameKey.
+func NSMetadataItemProfileNameKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemProfileNameKey")))
+}
+
+// NSMetadataItemResolutionWidthDPIKey returns the string constant NSMetadataItemResolutionWidthDPIKey.
+func NSMetadataItemResolutionWidthDPIKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemResolutionWidthDPIKey")))
+}
+
+// NSMetadataItemResolutionHeightDPIKey returns the string constant NSMetadataItemResolutionHeightDPIKey.
+func NSMetadataItemResolutionHeightDPIKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemResolutionHeightDPIKey")))
+}
+
+// NSMetadataItemExposureModeKey returns the string constant NSMetadataItemExposureModeKey.
+func NSMetadataItemExposureModeKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemExposureModeKey")))
+}
+
+// NSMetadataItemExposureTimeSecondsKey returns the string constant NSMetadataItemExposureTimeSecondsKey.
+func NSMetadataItemExposureTimeSecondsKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemExposureTimeSecondsKey")))
+}
+
+// NSMetadataItemEXIFVersionKey returns the string constant NSMetadataItemEXIFVersionKey.
+func NSMetadataItemEXIFVersionKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemEXIFVersionKey")))
+}
+
+// NSMetadataItemCameraOwnerKey returns the string constant NSMetadataItemCameraOwnerKey.
+func NSMetadataItemCameraOwnerKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemCameraOwnerKey")))
+}
+
+// NSMetadataItemFocalLength35mmKey returns the string constant NSMetadataItemFocalLength35mmKey.
+func NSMetadataItemFocalLength35mmKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemFocalLength35mmKey")))
+}
+
+// NSMetadataItemLensModelKey returns the string constant NSMetadataItemLensModelKey.
+func NSMetadataItemLensModelKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemLensModelKey")))
+}
+
+// NSMetadataItemEXIFGPSVersionKey returns the string constant NSMetadataItemEXIFGPSVersionKey.
+func NSMetadataItemEXIFGPSVersionKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemEXIFGPSVersionKey")))
+}
+
+// NSMetadataItemAltitudeKey returns the string constant NSMetadataItemAltitudeKey.
+func NSMetadataItemAltitudeKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemAltitudeKey")))
+}
+
+// NSMetadataItemLatitudeKey returns the string constant NSMetadataItemLatitudeKey.
+func NSMetadataItemLatitudeKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemLatitudeKey")))
+}
+
+// NSMetadataItemLongitudeKey returns the string constant NSMetadataItemLongitudeKey.
+func NSMetadataItemLongitudeKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemLongitudeKey")))
+}
+
+// NSMetadataItemSpeedKey returns the string constant NSMetadataItemSpeedKey.
+func NSMetadataItemSpeedKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemSpeedKey")))
+}
+
+// NSMetadataItemTimestampKey returns the string constant NSMetadataItemTimestampKey.
+func NSMetadataItemTimestampKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemTimestampKey")))
+}
+
+// NSMetadataItemGPSTrackKey returns the string constant NSMetadataItemGPSTrackKey.
+func NSMetadataItemGPSTrackKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemGPSTrackKey")))
+}
+
+// NSMetadataItemImageDirectionKey returns the string constant NSMetadataItemImageDirectionKey.
+func NSMetadataItemImageDirectionKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemImageDirectionKey")))
+}
+
+// NSMetadataItemNamedLocationKey returns the string constant NSMetadataItemNamedLocationKey.
+func NSMetadataItemNamedLocationKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemNamedLocationKey")))
+}
+
+// NSMetadataItemGPSStatusKey returns the string constant NSMetadataItemGPSStatusKey.
+func NSMetadataItemGPSStatusKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemGPSStatusKey")))
+}
+
+// NSMetadataItemGPSMeasureModeKey returns the string constant NSMetadataItemGPSMeasureModeKey.
+func NSMetadataItemGPSMeasureModeKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemGPSMeasureModeKey")))
+}
+
+// NSMetadataItemGPSDOPKey returns the string constant NSMetadataItemGPSDOPKey.
+func NSMetadataItemGPSDOPKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemGPSDOPKey")))
+}
+
+// NSMetadataItemGPSMapDatumKey returns the string constant NSMetadataItemGPSMapDatumKey.
+func NSMetadataItemGPSMapDatumKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemGPSMapDatumKey")))
+}
+
+// NSMetadataItemGPSDestLatitudeKey returns the string constant NSMetadataItemGPSDestLatitudeKey.
+func NSMetadataItemGPSDestLatitudeKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemGPSDestLatitudeKey")))
+}
+
+// NSMetadataItemGPSDestLongitudeKey returns the string constant NSMetadataItemGPSDestLongitudeKey.
+func NSMetadataItemGPSDestLongitudeKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemGPSDestLongitudeKey")))
+}
+
+// NSMetadataItemGPSDestBearingKey returns the string constant NSMetadataItemGPSDestBearingKey.
+func NSMetadataItemGPSDestBearingKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemGPSDestBearingKey")))
+}
+
+// NSMetadataItemGPSDestDistanceKey returns the string constant NSMetadataItemGPSDestDistanceKey.
+func NSMetadataItemGPSDestDistanceKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemGPSDestDistanceKey")))
+}
+
+// NSMetadataItemGPSProcessingMethodKey returns the string constant NSMetadataItemGPSProcessingMethodKey.
+func NSMetadataItemGPSProcessingMethodKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemGPSProcessingMethodKey")))
+}
+
+// NSMetadataItemGPSAreaInformationKey returns the string constant NSMetadataItemGPSAreaInformationKey.
+func NSMetadataItemGPSAreaInformationKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemGPSAreaInformationKey")))
+}
+
+// NSMetadataItemGPSDateStampKey returns the string constant NSMetadataItemGPSDateStampKey.
+func NSMetadataItemGPSDateStampKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemGPSDateStampKey")))
+}
+
+// NSMetadataItemGPSDifferentalKey returns the string constant NSMetadataItemGPSDifferentalKey.
+func NSMetadataItemGPSDifferentalKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemGPSDifferentalKey")))
+}
+
+// NSMetadataItemCodecsKey returns the string constant NSMetadataItemCodecsKey.
+func NSMetadataItemCodecsKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemCodecsKey")))
+}
+
+// NSMetadataItemMediaTypesKey returns the string constant NSMetadataItemMediaTypesKey.
+func NSMetadataItemMediaTypesKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemMediaTypesKey")))
+}
+
+// NSMetadataItemStreamableKey returns the string constant NSMetadataItemStreamableKey.
+func NSMetadataItemStreamableKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemStreamableKey")))
+}
+
+// NSMetadataItemTotalBitRateKey returns the string constant NSMetadataItemTotalBitRateKey.
+func NSMetadataItemTotalBitRateKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemTotalBitRateKey")))
+}
+
+// NSMetadataItemVideoBitRateKey returns the string constant NSMetadataItemVideoBitRateKey.
+func NSMetadataItemVideoBitRateKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemVideoBitRateKey")))
+}
+
+// NSMetadataItemAudioBitRateKey returns the string constant NSMetadataItemAudioBitRateKey.
+func NSMetadataItemAudioBitRateKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemAudioBitRateKey")))
+}
+
+// NSMetadataItemDeliveryTypeKey returns the string constant NSMetadataItemDeliveryTypeKey.
+func NSMetadataItemDeliveryTypeKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemDeliveryTypeKey")))
+}
+
+// NSMetadataItemAlbumKey returns the string constant NSMetadataItemAlbumKey.
+func NSMetadataItemAlbumKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemAlbumKey")))
+}
+
+// NSMetadataItemHasAlphaChannelKey returns the string constant NSMetadataItemHasAlphaChannelKey.
+func NSMetadataItemHasAlphaChannelKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemHasAlphaChannelKey")))
+}
+
+// NSMetadataItemRedEyeOnOffKey returns the string constant NSMetadataItemRedEyeOnOffKey.
+func NSMetadataItemRedEyeOnOffKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemRedEyeOnOffKey")))
+}
+
+// NSMetadataItemMeteringModeKey returns the string constant NSMetadataItemMeteringModeKey.
+func NSMetadataItemMeteringModeKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemMeteringModeKey")))
+}
+
+// NSMetadataItemMaxApertureKey returns the string constant NSMetadataItemMaxApertureKey.
+func NSMetadataItemMaxApertureKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemMaxApertureKey")))
+}
+
+// NSMetadataItemFNumberKey returns the string constant NSMetadataItemFNumberKey.
+func NSMetadataItemFNumberKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemFNumberKey")))
+}
+
+// NSMetadataItemExposureProgramKey returns the string constant NSMetadataItemExposureProgramKey.
+func NSMetadataItemExposureProgramKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemExposureProgramKey")))
+}
+
+// NSMetadataItemExposureTimeStringKey returns the string constant NSMetadataItemExposureTimeStringKey.
+func NSMetadataItemExposureTimeStringKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemExposureTimeStringKey")))
+}
+
+// NSMetadataItemHeadlineKey returns the string constant NSMetadataItemHeadlineKey.
+func NSMetadataItemHeadlineKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemHeadlineKey")))
+}
+
+// NSMetadataItemInstructionsKey returns the string constant NSMetadataItemInstructionsKey.
+func NSMetadataItemInstructionsKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemInstructionsKey")))
+}
+
+// NSMetadataItemCityKey returns the string constant NSMetadataItemCityKey.
+func NSMetadataItemCityKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemCityKey")))
+}
+
+// NSMetadataItemStateOrProvinceKey returns the string constant NSMetadataItemStateOrProvinceKey.
+func NSMetadataItemStateOrProvinceKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemStateOrProvinceKey")))
+}
+
+// NSMetadataItemCountryKey returns the string constant NSMetadataItemCountryKey.
+func NSMetadataItemCountryKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemCountryKey")))
+}
+
+// NSMetadataItemTextContentKey returns the string constant NSMetadataItemTextContentKey.
+func NSMetadataItemTextContentKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemTextContentKey")))
+}
+
+// NSMetadataItemAudioSampleRateKey returns the string constant NSMetadataItemAudioSampleRateKey.
+func NSMetadataItemAudioSampleRateKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemAudioSampleRateKey")))
+}
+
+// NSMetadataItemAudioChannelCountKey returns the string constant NSMetadataItemAudioChannelCountKey.
+func NSMetadataItemAudioChannelCountKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemAudioChannelCountKey")))
+}
+
+// NSMetadataItemTempoKey returns the string constant NSMetadataItemTempoKey.
+func NSMetadataItemTempoKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemTempoKey")))
+}
+
+// NSMetadataItemKeySignatureKey returns the string constant NSMetadataItemKeySignatureKey.
+func NSMetadataItemKeySignatureKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemKeySignatureKey")))
+}
+
+// NSMetadataItemTimeSignatureKey returns the string constant NSMetadataItemTimeSignatureKey.
+func NSMetadataItemTimeSignatureKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemTimeSignatureKey")))
+}
+
+// NSMetadataItemAudioEncodingApplicationKey returns the string constant NSMetadataItemAudioEncodingApplicationKey.
+func NSMetadataItemAudioEncodingApplicationKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemAudioEncodingApplicationKey")))
+}
+
+// NSMetadataItemComposerKey returns the string constant NSMetadataItemComposerKey.
+func NSMetadataItemComposerKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemComposerKey")))
+}
+
+// NSMetadataItemLyricistKey returns the string constant NSMetadataItemLyricistKey.
+func NSMetadataItemLyricistKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemLyricistKey")))
+}
+
+// NSMetadataItemAudioTrackNumberKey returns the string constant NSMetadataItemAudioTrackNumberKey.
+func NSMetadataItemAudioTrackNumberKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemAudioTrackNumberKey")))
+}
+
+// NSMetadataItemRecordingDateKey returns the string constant NSMetadataItemRecordingDateKey.
+func NSMetadataItemRecordingDateKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemRecordingDateKey")))
+}
+
+// NSMetadataItemMusicalGenreKey returns the string constant NSMetadataItemMusicalGenreKey.
+func NSMetadataItemMusicalGenreKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemMusicalGenreKey")))
+}
+
+// NSMetadataItemIsGeneralMIDISequenceKey returns the string constant NSMetadataItemIsGeneralMIDISequenceKey.
+func NSMetadataItemIsGeneralMIDISequenceKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemIsGeneralMIDISequenceKey")))
+}
+
+// NSMetadataItemRecordingYearKey returns the string constant NSMetadataItemRecordingYearKey.
+func NSMetadataItemRecordingYearKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemRecordingYearKey")))
+}
+
+// NSMetadataItemOrganizationsKey returns the string constant NSMetadataItemOrganizationsKey.
+func NSMetadataItemOrganizationsKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemOrganizationsKey")))
+}
+
+// NSMetadataItemLanguagesKey returns the string constant NSMetadataItemLanguagesKey.
+func NSMetadataItemLanguagesKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemLanguagesKey")))
+}
+
+// NSMetadataItemRightsKey returns the string constant NSMetadataItemRightsKey.
+func NSMetadataItemRightsKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemRightsKey")))
+}
+
+// NSMetadataItemPublishersKey returns the string constant NSMetadataItemPublishersKey.
+func NSMetadataItemPublishersKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemPublishersKey")))
+}
+
+// NSMetadataItemContributorsKey returns the string constant NSMetadataItemContributorsKey.
+func NSMetadataItemContributorsKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemContributorsKey")))
+}
+
+// NSMetadataItemCoverageKey returns the string constant NSMetadataItemCoverageKey.
+func NSMetadataItemCoverageKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemCoverageKey")))
+}
+
+// NSMetadataItemSubjectKey returns the string constant NSMetadataItemSubjectKey.
+func NSMetadataItemSubjectKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemSubjectKey")))
+}
+
+// NSMetadataItemThemeKey returns the string constant NSMetadataItemThemeKey.
+func NSMetadataItemThemeKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemThemeKey")))
+}
+
+// NSMetadataItemDescriptionKey returns the string constant NSMetadataItemDescriptionKey.
+func NSMetadataItemDescriptionKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemDescriptionKey")))
+}
+
+// NSMetadataItemIdentifierKey returns the string constant NSMetadataItemIdentifierKey.
+func NSMetadataItemIdentifierKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemIdentifierKey")))
+}
+
+// NSMetadataItemAudiencesKey returns the string constant NSMetadataItemAudiencesKey.
+func NSMetadataItemAudiencesKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemAudiencesKey")))
+}
+
+// NSMetadataItemNumberOfPagesKey returns the string constant NSMetadataItemNumberOfPagesKey.
+func NSMetadataItemNumberOfPagesKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemNumberOfPagesKey")))
+}
+
+// NSMetadataItemPageWidthKey returns the string constant NSMetadataItemPageWidthKey.
+func NSMetadataItemPageWidthKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemPageWidthKey")))
+}
+
+// NSMetadataItemPageHeightKey returns the string constant NSMetadataItemPageHeightKey.
+func NSMetadataItemPageHeightKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemPageHeightKey")))
+}
+
+// NSMetadataItemSecurityMethodKey returns the string constant NSMetadataItemSecurityMethodKey.
+func NSMetadataItemSecurityMethodKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemSecurityMethodKey")))
+}
+
+// NSMetadataItemCreatorKey returns the string constant NSMetadataItemCreatorKey.
+func NSMetadataItemCreatorKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemCreatorKey")))
+}
+
+// NSMetadataItemEncodingApplicationsKey returns the string constant NSMetadataItemEncodingApplicationsKey.
+func NSMetadataItemEncodingApplicationsKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemEncodingApplicationsKey")))
+}
+
+// NSMetadataItemDueDateKey returns the string constant NSMetadataItemDueDateKey.
+func NSMetadataItemDueDateKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemDueDateKey")))
+}
+
+// NSMetadataItemStarRatingKey returns the string constant NSMetadataItemStarRatingKey.
+func NSMetadataItemStarRatingKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemStarRatingKey")))
+}
+
+// NSMetadataItemPhoneNumbersKey returns the string constant NSMetadataItemPhoneNumbersKey.
+func NSMetadataItemPhoneNumbersKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemPhoneNumbersKey")))
+}
+
+// NSMetadataItemEmailAddressesKey returns the string constant NSMetadataItemEmailAddressesKey.
+func NSMetadataItemEmailAddressesKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemEmailAddressesKey")))
+}
+
+// NSMetadataItemInstantMessageAddressesKey returns the string constant NSMetadataItemInstantMessageAddressesKey.
+func NSMetadataItemInstantMessageAddressesKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemInstantMessageAddressesKey")))
+}
+
+// NSMetadataItemKindKey returns the string constant NSMetadataItemKindKey.
+func NSMetadataItemKindKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemKindKey")))
+}
+
+// NSMetadataItemRecipientsKey returns the string constant NSMetadataItemRecipientsKey.
+func NSMetadataItemRecipientsKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemRecipientsKey")))
+}
+
+// NSMetadataItemFinderCommentKey returns the string constant NSMetadataItemFinderCommentKey.
+func NSMetadataItemFinderCommentKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemFinderCommentKey")))
+}
+
+// NSMetadataItemFontsKey returns the string constant NSMetadataItemFontsKey.
+func NSMetadataItemFontsKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemFontsKey")))
+}
+
+// NSMetadataItemAppleLoopsRootKeyKey returns the string constant NSMetadataItemAppleLoopsRootKeyKey.
+func NSMetadataItemAppleLoopsRootKeyKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemAppleLoopsRootKeyKey")))
+}
+
+// NSMetadataItemAppleLoopsKeyFilterTypeKey returns the string constant NSMetadataItemAppleLoopsKeyFilterTypeKey.
+func NSMetadataItemAppleLoopsKeyFilterTypeKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemAppleLoopsKeyFilterTypeKey")))
+}
+
+// NSMetadataItemAppleLoopsLoopModeKey returns the string constant NSMetadataItemAppleLoopsLoopModeKey.
+func NSMetadataItemAppleLoopsLoopModeKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemAppleLoopsLoopModeKey")))
+}
+
+// NSMetadataItemAppleLoopDescriptorsKey returns the string constant NSMetadataItemAppleLoopDescriptorsKey.
+func NSMetadataItemAppleLoopDescriptorsKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemAppleLoopDescriptorsKey")))
+}
+
+// NSMetadataItemMusicalInstrumentCategoryKey returns the string constant NSMetadataItemMusicalInstrumentCategoryKey.
+func NSMetadataItemMusicalInstrumentCategoryKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemMusicalInstrumentCategoryKey")))
+}
+
+// NSMetadataItemMusicalInstrumentNameKey returns the string constant NSMetadataItemMusicalInstrumentNameKey.
+func NSMetadataItemMusicalInstrumentNameKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemMusicalInstrumentNameKey")))
+}
+
+// NSMetadataItemCFBundleIdentifierKey returns the string constant NSMetadataItemCFBundleIdentifierKey.
+func NSMetadataItemCFBundleIdentifierKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemCFBundleIdentifierKey")))
+}
+
+// NSMetadataItemInformationKey returns the string constant NSMetadataItemInformationKey.
+func NSMetadataItemInformationKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemInformationKey")))
+}
+
+// NSMetadataItemDirectorKey returns the string constant NSMetadataItemDirectorKey.
+func NSMetadataItemDirectorKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemDirectorKey")))
+}
+
+// NSMetadataItemProducerKey returns the string constant NSMetadataItemProducerKey.
+func NSMetadataItemProducerKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemProducerKey")))
+}
+
+// NSMetadataItemGenreKey returns the string constant NSMetadataItemGenreKey.
+func NSMetadataItemGenreKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemGenreKey")))
+}
+
+// NSMetadataItemPerformersKey returns the string constant NSMetadataItemPerformersKey.
+func NSMetadataItemPerformersKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemPerformersKey")))
+}
+
+// NSMetadataItemOriginalFormatKey returns the string constant NSMetadataItemOriginalFormatKey.
+func NSMetadataItemOriginalFormatKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemOriginalFormatKey")))
+}
+
+// NSMetadataItemOriginalSourceKey returns the string constant NSMetadataItemOriginalSourceKey.
+func NSMetadataItemOriginalSourceKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemOriginalSourceKey")))
+}
+
+// NSMetadataItemAuthorEmailAddressesKey returns the string constant NSMetadataItemAuthorEmailAddressesKey.
+func NSMetadataItemAuthorEmailAddressesKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemAuthorEmailAddressesKey")))
+}
+
+// NSMetadataItemRecipientEmailAddressesKey returns the string constant NSMetadataItemRecipientEmailAddressesKey.
+func NSMetadataItemRecipientEmailAddressesKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemRecipientEmailAddressesKey")))
+}
+
+// NSMetadataItemAuthorAddressesKey returns the string constant NSMetadataItemAuthorAddressesKey.
+func NSMetadataItemAuthorAddressesKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemAuthorAddressesKey")))
+}
+
+// NSMetadataItemRecipientAddressesKey returns the string constant NSMetadataItemRecipientAddressesKey.
+func NSMetadataItemRecipientAddressesKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemRecipientAddressesKey")))
+}
+
+// NSMetadataItemIsLikelyJunkKey returns the string constant NSMetadataItemIsLikelyJunkKey.
+func NSMetadataItemIsLikelyJunkKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemIsLikelyJunkKey")))
+}
+
+// NSMetadataItemExecutableArchitecturesKey returns the string constant NSMetadataItemExecutableArchitecturesKey.
+func NSMetadataItemExecutableArchitecturesKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemExecutableArchitecturesKey")))
+}
+
+// NSMetadataItemExecutablePlatformKey returns the string constant NSMetadataItemExecutablePlatformKey.
+func NSMetadataItemExecutablePlatformKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemExecutablePlatformKey")))
+}
+
+// NSMetadataItemApplicationCategoriesKey returns the string constant NSMetadataItemApplicationCategoriesKey.
+func NSMetadataItemApplicationCategoriesKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemApplicationCategoriesKey")))
+}
+
+// NSMetadataItemIsApplicationManagedKey returns the string constant NSMetadataItemIsApplicationManagedKey.
+func NSMetadataItemIsApplicationManagedKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemIsApplicationManagedKey")))
+}
+
 // NSMetadataQueryDidStartGatheringNotification returns the string constant NSMetadataQueryDidStartGatheringNotification.
 func NSMetadataQueryDidStartGatheringNotification() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSMetadataQueryDidStartGatheringNotification")))
@@ -2721,6 +3691,31 @@ func NSMetadataQueryResultContentRelevanceAttribute() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSMetadataQueryResultContentRelevanceAttribute")))
 }
 
+// NSMetadataQueryUserHomeScope returns the string constant NSMetadataQueryUserHomeScope.
+func NSMetadataQueryUserHomeScope() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataQueryUserHomeScope")))
+}
+
+// NSMetadataQueryLocalComputerScope returns the string constant NSMetadataQueryLocalComputerScope.
+func NSMetadataQueryLocalComputerScope() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataQueryLocalComputerScope")))
+}
+
+// NSMetadataQueryNetworkScope returns the string constant NSMetadataQueryNetworkScope.
+func NSMetadataQueryNetworkScope() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataQueryNetworkScope")))
+}
+
+// NSMetadataQueryIndexedLocalComputerScope returns the string constant NSMetadataQueryIndexedLocalComputerScope.
+func NSMetadataQueryIndexedLocalComputerScope() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataQueryIndexedLocalComputerScope")))
+}
+
+// NSMetadataQueryIndexedNetworkScope returns the string constant NSMetadataQueryIndexedNetworkScope.
+func NSMetadataQueryIndexedNetworkScope() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataQueryIndexedNetworkScope")))
+}
+
 // NSMetadataQueryUbiquitousDocumentsScope returns the string constant NSMetadataQueryUbiquitousDocumentsScope.
 func NSMetadataQueryUbiquitousDocumentsScope() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSMetadataQueryUbiquitousDocumentsScope")))
@@ -2734,6 +3729,16 @@ func NSMetadataQueryUbiquitousDataScope() *String {
 // NSMetadataQueryAccessibleUbiquitousExternalDocumentsScope returns the string constant NSMetadataQueryAccessibleUbiquitousExternalDocumentsScope.
 func NSMetadataQueryAccessibleUbiquitousExternalDocumentsScope() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSMetadataQueryAccessibleUbiquitousExternalDocumentsScope")))
+}
+
+// NSNetServicesErrorCode returns the string constant NSNetServicesErrorCode.
+func NSNetServicesErrorCode() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSNetServicesErrorCode")))
+}
+
+// NSNetServicesErrorDomain returns the string constant NSNetServicesErrorDomain.
+func NSNetServicesErrorDomain() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSNetServicesErrorDomain")))
 }
 
 // NSUbiquitousKeyValueStoreDidChangeExternallyNotification returns the string constant NSUbiquitousKeyValueStoreDidChangeExternallyNotification.
@@ -2811,6 +3816,51 @@ func NSUserActivityTypeBrowsingWeb() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSUserActivityTypeBrowsingWeb")))
 }
 
+// NSAppleScriptErrorMessage returns the string constant NSAppleScriptErrorMessage.
+func NSAppleScriptErrorMessage() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSAppleScriptErrorMessage")))
+}
+
+// NSAppleScriptErrorNumber returns the string constant NSAppleScriptErrorNumber.
+func NSAppleScriptErrorNumber() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSAppleScriptErrorNumber")))
+}
+
+// NSAppleScriptErrorAppName returns the string constant NSAppleScriptErrorAppName.
+func NSAppleScriptErrorAppName() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSAppleScriptErrorAppName")))
+}
+
+// NSAppleScriptErrorBriefMessage returns the string constant NSAppleScriptErrorBriefMessage.
+func NSAppleScriptErrorBriefMessage() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSAppleScriptErrorBriefMessage")))
+}
+
+// NSAppleScriptErrorRange returns the string constant NSAppleScriptErrorRange.
+func NSAppleScriptErrorRange() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSAppleScriptErrorRange")))
+}
+
+// NSConnectionReplyMode returns the string constant NSConnectionReplyMode.
+func NSConnectionReplyMode() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSConnectionReplyMode")))
+}
+
+// NSConnectionDidDieNotification returns the string constant NSConnectionDidDieNotification.
+func NSConnectionDidDieNotification() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSConnectionDidDieNotification")))
+}
+
+// NSFailedAuthenticationException returns the string constant NSFailedAuthenticationException.
+func NSFailedAuthenticationException() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSFailedAuthenticationException")))
+}
+
+// NSConnectionDidInitializeNotification returns the string constant NSConnectionDidInitializeNotification.
+func NSConnectionDidInitializeNotification() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSConnectionDidInitializeNotification")))
+}
+
 // NSLocalNotificationCenterType returns the string constant NSLocalNotificationCenterType.
 func NSLocalNotificationCenterType() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSLocalNotificationCenterType")))
@@ -2836,6 +3886,24 @@ func NSOperationNotSupportedForKeyException() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSOperationNotSupportedForKeyException")))
 }
 
+// NSGrammarRange returns the string constant NSGrammarRange.
+func NSGrammarRange() *String { return StringFromID(purego.CFConstant(_symbol("NSGrammarRange"))) }
+
+// NSGrammarUserDescription returns the string constant NSGrammarUserDescription.
+func NSGrammarUserDescription() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSGrammarUserDescription")))
+}
+
+// NSGrammarCorrections returns the string constant NSGrammarCorrections.
+func NSGrammarCorrections() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSGrammarCorrections")))
+}
+
+// NSUserNotificationDefaultSoundName returns the string constant NSUserNotificationDefaultSoundName.
+func NSUserNotificationDefaultSoundName() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSUserNotificationDefaultSoundName")))
+}
+
 // NSFoundationVersionNumber returns the value of the constant NSFoundationVersionNumber.
 func NSFoundationVersionNumber() float64 {
 	addr := _symbol("NSFoundationVersionNumber")
@@ -2843,92 +3911,6 @@ func NSFoundationVersionNumber() float64 {
 		return 0
 	}
 	return *(*float64)(unsafe.Pointer(addr))
-}
-
-// NSProgressFileAnimationImageKey returns the address of the symbol NSProgressFileAnimationImageKey.
-func NSProgressFileAnimationImageKey() uintptr { return _symbol("NSProgressFileAnimationImageKey") }
-
-// NSProgressFileAnimationImageOriginalRectKey returns the address of the symbol NSProgressFileAnimationImageOriginalRectKey.
-func NSProgressFileAnimationImageOriginalRectKey() uintptr {
-	return _symbol("NSProgressFileAnimationImageOriginalRectKey")
-}
-
-// NSProgressFileIconKey returns the address of the symbol NSProgressFileIconKey.
-func NSProgressFileIconKey() uintptr { return _symbol("NSProgressFileIconKey") }
-
-// NSInlinePresentationIntentAttributeName returns the address of the symbol NSInlinePresentationIntentAttributeName.
-func NSInlinePresentationIntentAttributeName() uintptr {
-	return _symbol("NSInlinePresentationIntentAttributeName")
-}
-
-// NSAlternateDescriptionAttributeName returns the address of the symbol NSAlternateDescriptionAttributeName.
-func NSAlternateDescriptionAttributeName() uintptr {
-	return _symbol("NSAlternateDescriptionAttributeName")
-}
-
-// NSImageURLAttributeName returns the address of the symbol NSImageURLAttributeName.
-func NSImageURLAttributeName() uintptr { return _symbol("NSImageURLAttributeName") }
-
-// NSLanguageIdentifierAttributeName returns the address of the symbol NSLanguageIdentifierAttributeName.
-func NSLanguageIdentifierAttributeName() uintptr { return _symbol("NSLanguageIdentifierAttributeName") }
-
-// NSMarkdownSourcePositionAttributeName returns the address of the symbol NSMarkdownSourcePositionAttributeName.
-func NSMarkdownSourcePositionAttributeName() uintptr {
-	return _symbol("NSMarkdownSourcePositionAttributeName")
-}
-
-// NSReplacementIndexAttributeName returns the address of the symbol NSReplacementIndexAttributeName.
-func NSReplacementIndexAttributeName() uintptr { return _symbol("NSReplacementIndexAttributeName") }
-
-// NSMorphologyAttributeName returns the address of the symbol NSMorphologyAttributeName.
-func NSMorphologyAttributeName() uintptr { return _symbol("NSMorphologyAttributeName") }
-
-// NSInflectionRuleAttributeName returns the address of the symbol NSInflectionRuleAttributeName.
-func NSInflectionRuleAttributeName() uintptr { return _symbol("NSInflectionRuleAttributeName") }
-
-// NSInflectionAgreementArgumentAttributeName returns the address of the symbol NSInflectionAgreementArgumentAttributeName.
-func NSInflectionAgreementArgumentAttributeName() uintptr {
-	return _symbol("NSInflectionAgreementArgumentAttributeName")
-}
-
-// NSInflectionAgreementConceptAttributeName returns the address of the symbol NSInflectionAgreementConceptAttributeName.
-func NSInflectionAgreementConceptAttributeName() uintptr {
-	return _symbol("NSInflectionAgreementConceptAttributeName")
-}
-
-// NSInflectionReferentConceptAttributeName returns the address of the symbol NSInflectionReferentConceptAttributeName.
-func NSInflectionReferentConceptAttributeName() uintptr {
-	return _symbol("NSInflectionReferentConceptAttributeName")
-}
-
-// NSInflectionAlternativeAttributeName returns the address of the symbol NSInflectionAlternativeAttributeName.
-func NSInflectionAlternativeAttributeName() uintptr {
-	return _symbol("NSInflectionAlternativeAttributeName")
-}
-
-// NSLocalizedNumberFormatAttributeName returns the address of the symbol NSLocalizedNumberFormatAttributeName.
-func NSLocalizedNumberFormatAttributeName() uintptr {
-	return _symbol("NSLocalizedNumberFormatAttributeName")
-}
-
-// NSListItemDelimiterAttributeName returns the address of the symbol NSListItemDelimiterAttributeName.
-func NSListItemDelimiterAttributeName() uintptr { return _symbol("NSListItemDelimiterAttributeName") }
-
-// NSURLApplicationIsScriptableKey returns the address of the symbol NSURLApplicationIsScriptableKey.
-func NSURLApplicationIsScriptableKey() uintptr { return _symbol("NSURLApplicationIsScriptableKey") }
-
-// NSURLTagNamesKey returns the address of the symbol NSURLTagNamesKey.
-func NSURLTagNamesKey() uintptr { return _symbol("NSURLTagNamesKey") }
-
-// NSURLQuarantinePropertiesKey returns the address of the symbol NSURLQuarantinePropertiesKey.
-func NSURLQuarantinePropertiesKey() uintptr { return _symbol("NSURLQuarantinePropertiesKey") }
-
-// NSURLThumbnailKey returns the address of the symbol NSURLThumbnailKey.
-func NSURLThumbnailKey() uintptr { return _symbol("NSURLThumbnailKey") }
-
-// NSFileManagerUnmountDissentingProcessIdentifierErrorKey returns the address of the symbol NSFileManagerUnmountDissentingProcessIdentifierErrorKey.
-func NSFileManagerUnmountDissentingProcessIdentifierErrorKey() uintptr {
-	return _symbol("NSFileManagerUnmountDissentingProcessIdentifierErrorKey")
 }
 
 // NSIntegerHashCallBacks returns the address of the symbol NSIntegerHashCallBacks.
@@ -3034,600 +4016,6 @@ func NSOwnedPointerMapValueCallBacks() uintptr { return _symbol("NSOwnedPointerM
 // NSIntMapValueCallBacks returns the address of the symbol NSIntMapValueCallBacks.
 func NSIntMapValueCallBacks() uintptr { return _symbol("NSIntMapValueCallBacks") }
 
-// NSWeekDayNameArray returns the address of the symbol NSWeekDayNameArray.
-func NSWeekDayNameArray() uintptr { return _symbol("NSWeekDayNameArray") }
-
-// NSShortWeekDayNameArray returns the address of the symbol NSShortWeekDayNameArray.
-func NSShortWeekDayNameArray() uintptr { return _symbol("NSShortWeekDayNameArray") }
-
-// NSMonthNameArray returns the address of the symbol NSMonthNameArray.
-func NSMonthNameArray() uintptr { return _symbol("NSMonthNameArray") }
-
-// NSShortMonthNameArray returns the address of the symbol NSShortMonthNameArray.
-func NSShortMonthNameArray() uintptr { return _symbol("NSShortMonthNameArray") }
-
-// NSTimeFormatString returns the address of the symbol NSTimeFormatString.
-func NSTimeFormatString() uintptr { return _symbol("NSTimeFormatString") }
-
-// NSDateFormatString returns the address of the symbol NSDateFormatString.
-func NSDateFormatString() uintptr { return _symbol("NSDateFormatString") }
-
-// NSTimeDateFormatString returns the address of the symbol NSTimeDateFormatString.
-func NSTimeDateFormatString() uintptr { return _symbol("NSTimeDateFormatString") }
-
-// NSShortTimeDateFormatString returns the address of the symbol NSShortTimeDateFormatString.
-func NSShortTimeDateFormatString() uintptr { return _symbol("NSShortTimeDateFormatString") }
-
-// NSCurrencySymbol returns the address of the symbol NSCurrencySymbol.
-func NSCurrencySymbol() uintptr { return _symbol("NSCurrencySymbol") }
-
-// NSDecimalSeparator returns the address of the symbol NSDecimalSeparator.
-func NSDecimalSeparator() uintptr { return _symbol("NSDecimalSeparator") }
-
-// NSThousandsSeparator returns the address of the symbol NSThousandsSeparator.
-func NSThousandsSeparator() uintptr { return _symbol("NSThousandsSeparator") }
-
-// NSDecimalDigits returns the address of the symbol NSDecimalDigits.
-func NSDecimalDigits() uintptr { return _symbol("NSDecimalDigits") }
-
-// NSAMPMDesignation returns the address of the symbol NSAMPMDesignation.
-func NSAMPMDesignation() uintptr { return _symbol("NSAMPMDesignation") }
-
-// NSHourNameDesignations returns the address of the symbol NSHourNameDesignations.
-func NSHourNameDesignations() uintptr { return _symbol("NSHourNameDesignations") }
-
-// NSYearMonthWeekDesignations returns the address of the symbol NSYearMonthWeekDesignations.
-func NSYearMonthWeekDesignations() uintptr { return _symbol("NSYearMonthWeekDesignations") }
-
-// NSEarlierTimeDesignations returns the address of the symbol NSEarlierTimeDesignations.
-func NSEarlierTimeDesignations() uintptr { return _symbol("NSEarlierTimeDesignations") }
-
-// NSLaterTimeDesignations returns the address of the symbol NSLaterTimeDesignations.
-func NSLaterTimeDesignations() uintptr { return _symbol("NSLaterTimeDesignations") }
-
-// NSThisDayDesignations returns the address of the symbol NSThisDayDesignations.
-func NSThisDayDesignations() uintptr { return _symbol("NSThisDayDesignations") }
-
-// NSNextDayDesignations returns the address of the symbol NSNextDayDesignations.
-func NSNextDayDesignations() uintptr { return _symbol("NSNextDayDesignations") }
-
-// NSNextNextDayDesignations returns the address of the symbol NSNextNextDayDesignations.
-func NSNextNextDayDesignations() uintptr { return _symbol("NSNextNextDayDesignations") }
-
-// NSPriorDayDesignations returns the address of the symbol NSPriorDayDesignations.
-func NSPriorDayDesignations() uintptr { return _symbol("NSPriorDayDesignations") }
-
-// NSDateTimeOrdering returns the address of the symbol NSDateTimeOrdering.
-func NSDateTimeOrdering() uintptr { return _symbol("NSDateTimeOrdering") }
-
-// NSInternationalCurrencyString returns the address of the symbol NSInternationalCurrencyString.
-func NSInternationalCurrencyString() uintptr { return _symbol("NSInternationalCurrencyString") }
-
-// NSShortDateFormatString returns the address of the symbol NSShortDateFormatString.
-func NSShortDateFormatString() uintptr { return _symbol("NSShortDateFormatString") }
-
-// NSPositiveCurrencyFormatString returns the address of the symbol NSPositiveCurrencyFormatString.
-func NSPositiveCurrencyFormatString() uintptr { return _symbol("NSPositiveCurrencyFormatString") }
-
-// NSNegativeCurrencyFormatString returns the address of the symbol NSNegativeCurrencyFormatString.
-func NSNegativeCurrencyFormatString() uintptr { return _symbol("NSNegativeCurrencyFormatString") }
-
-// NSMetadataItemAttributeChangeDateKey returns the address of the symbol NSMetadataItemAttributeChangeDateKey.
-func NSMetadataItemAttributeChangeDateKey() uintptr {
-	return _symbol("NSMetadataItemAttributeChangeDateKey")
-}
-
-// NSMetadataItemKeywordsKey returns the address of the symbol NSMetadataItemKeywordsKey.
-func NSMetadataItemKeywordsKey() uintptr { return _symbol("NSMetadataItemKeywordsKey") }
-
-// NSMetadataItemTitleKey returns the address of the symbol NSMetadataItemTitleKey.
-func NSMetadataItemTitleKey() uintptr { return _symbol("NSMetadataItemTitleKey") }
-
-// NSMetadataItemAuthorsKey returns the address of the symbol NSMetadataItemAuthorsKey.
-func NSMetadataItemAuthorsKey() uintptr { return _symbol("NSMetadataItemAuthorsKey") }
-
-// NSMetadataItemEditorsKey returns the address of the symbol NSMetadataItemEditorsKey.
-func NSMetadataItemEditorsKey() uintptr { return _symbol("NSMetadataItemEditorsKey") }
-
-// NSMetadataItemParticipantsKey returns the address of the symbol NSMetadataItemParticipantsKey.
-func NSMetadataItemParticipantsKey() uintptr { return _symbol("NSMetadataItemParticipantsKey") }
-
-// NSMetadataItemProjectsKey returns the address of the symbol NSMetadataItemProjectsKey.
-func NSMetadataItemProjectsKey() uintptr { return _symbol("NSMetadataItemProjectsKey") }
-
-// NSMetadataItemDownloadedDateKey returns the address of the symbol NSMetadataItemDownloadedDateKey.
-func NSMetadataItemDownloadedDateKey() uintptr { return _symbol("NSMetadataItemDownloadedDateKey") }
-
-// NSMetadataItemWhereFromsKey returns the address of the symbol NSMetadataItemWhereFromsKey.
-func NSMetadataItemWhereFromsKey() uintptr { return _symbol("NSMetadataItemWhereFromsKey") }
-
-// NSMetadataItemCommentKey returns the address of the symbol NSMetadataItemCommentKey.
-func NSMetadataItemCommentKey() uintptr { return _symbol("NSMetadataItemCommentKey") }
-
-// NSMetadataItemCopyrightKey returns the address of the symbol NSMetadataItemCopyrightKey.
-func NSMetadataItemCopyrightKey() uintptr { return _symbol("NSMetadataItemCopyrightKey") }
-
-// NSMetadataItemLastUsedDateKey returns the address of the symbol NSMetadataItemLastUsedDateKey.
-func NSMetadataItemLastUsedDateKey() uintptr { return _symbol("NSMetadataItemLastUsedDateKey") }
-
-// NSMetadataItemContentCreationDateKey returns the address of the symbol NSMetadataItemContentCreationDateKey.
-func NSMetadataItemContentCreationDateKey() uintptr {
-	return _symbol("NSMetadataItemContentCreationDateKey")
-}
-
-// NSMetadataItemContentModificationDateKey returns the address of the symbol NSMetadataItemContentModificationDateKey.
-func NSMetadataItemContentModificationDateKey() uintptr {
-	return _symbol("NSMetadataItemContentModificationDateKey")
-}
-
-// NSMetadataItemDateAddedKey returns the address of the symbol NSMetadataItemDateAddedKey.
-func NSMetadataItemDateAddedKey() uintptr { return _symbol("NSMetadataItemDateAddedKey") }
-
-// NSMetadataItemDurationSecondsKey returns the address of the symbol NSMetadataItemDurationSecondsKey.
-func NSMetadataItemDurationSecondsKey() uintptr { return _symbol("NSMetadataItemDurationSecondsKey") }
-
-// NSMetadataItemContactKeywordsKey returns the address of the symbol NSMetadataItemContactKeywordsKey.
-func NSMetadataItemContactKeywordsKey() uintptr { return _symbol("NSMetadataItemContactKeywordsKey") }
-
-// NSMetadataItemVersionKey returns the address of the symbol NSMetadataItemVersionKey.
-func NSMetadataItemVersionKey() uintptr { return _symbol("NSMetadataItemVersionKey") }
-
-// NSMetadataItemPixelHeightKey returns the address of the symbol NSMetadataItemPixelHeightKey.
-func NSMetadataItemPixelHeightKey() uintptr { return _symbol("NSMetadataItemPixelHeightKey") }
-
-// NSMetadataItemPixelWidthKey returns the address of the symbol NSMetadataItemPixelWidthKey.
-func NSMetadataItemPixelWidthKey() uintptr { return _symbol("NSMetadataItemPixelWidthKey") }
-
-// NSMetadataItemPixelCountKey returns the address of the symbol NSMetadataItemPixelCountKey.
-func NSMetadataItemPixelCountKey() uintptr { return _symbol("NSMetadataItemPixelCountKey") }
-
-// NSMetadataItemColorSpaceKey returns the address of the symbol NSMetadataItemColorSpaceKey.
-func NSMetadataItemColorSpaceKey() uintptr { return _symbol("NSMetadataItemColorSpaceKey") }
-
-// NSMetadataItemBitsPerSampleKey returns the address of the symbol NSMetadataItemBitsPerSampleKey.
-func NSMetadataItemBitsPerSampleKey() uintptr { return _symbol("NSMetadataItemBitsPerSampleKey") }
-
-// NSMetadataItemFlashOnOffKey returns the address of the symbol NSMetadataItemFlashOnOffKey.
-func NSMetadataItemFlashOnOffKey() uintptr { return _symbol("NSMetadataItemFlashOnOffKey") }
-
-// NSMetadataItemFocalLengthKey returns the address of the symbol NSMetadataItemFocalLengthKey.
-func NSMetadataItemFocalLengthKey() uintptr { return _symbol("NSMetadataItemFocalLengthKey") }
-
-// NSMetadataItemAcquisitionMakeKey returns the address of the symbol NSMetadataItemAcquisitionMakeKey.
-func NSMetadataItemAcquisitionMakeKey() uintptr { return _symbol("NSMetadataItemAcquisitionMakeKey") }
-
-// NSMetadataItemAcquisitionModelKey returns the address of the symbol NSMetadataItemAcquisitionModelKey.
-func NSMetadataItemAcquisitionModelKey() uintptr { return _symbol("NSMetadataItemAcquisitionModelKey") }
-
-// NSMetadataItemISOSpeedKey returns the address of the symbol NSMetadataItemISOSpeedKey.
-func NSMetadataItemISOSpeedKey() uintptr { return _symbol("NSMetadataItemISOSpeedKey") }
-
-// NSMetadataItemOrientationKey returns the address of the symbol NSMetadataItemOrientationKey.
-func NSMetadataItemOrientationKey() uintptr { return _symbol("NSMetadataItemOrientationKey") }
-
-// NSMetadataItemLayerNamesKey returns the address of the symbol NSMetadataItemLayerNamesKey.
-func NSMetadataItemLayerNamesKey() uintptr { return _symbol("NSMetadataItemLayerNamesKey") }
-
-// NSMetadataItemWhiteBalanceKey returns the address of the symbol NSMetadataItemWhiteBalanceKey.
-func NSMetadataItemWhiteBalanceKey() uintptr { return _symbol("NSMetadataItemWhiteBalanceKey") }
-
-// NSMetadataItemApertureKey returns the address of the symbol NSMetadataItemApertureKey.
-func NSMetadataItemApertureKey() uintptr { return _symbol("NSMetadataItemApertureKey") }
-
-// NSMetadataItemProfileNameKey returns the address of the symbol NSMetadataItemProfileNameKey.
-func NSMetadataItemProfileNameKey() uintptr { return _symbol("NSMetadataItemProfileNameKey") }
-
-// NSMetadataItemResolutionWidthDPIKey returns the address of the symbol NSMetadataItemResolutionWidthDPIKey.
-func NSMetadataItemResolutionWidthDPIKey() uintptr {
-	return _symbol("NSMetadataItemResolutionWidthDPIKey")
-}
-
-// NSMetadataItemResolutionHeightDPIKey returns the address of the symbol NSMetadataItemResolutionHeightDPIKey.
-func NSMetadataItemResolutionHeightDPIKey() uintptr {
-	return _symbol("NSMetadataItemResolutionHeightDPIKey")
-}
-
-// NSMetadataItemExposureModeKey returns the address of the symbol NSMetadataItemExposureModeKey.
-func NSMetadataItemExposureModeKey() uintptr { return _symbol("NSMetadataItemExposureModeKey") }
-
-// NSMetadataItemExposureTimeSecondsKey returns the address of the symbol NSMetadataItemExposureTimeSecondsKey.
-func NSMetadataItemExposureTimeSecondsKey() uintptr {
-	return _symbol("NSMetadataItemExposureTimeSecondsKey")
-}
-
-// NSMetadataItemEXIFVersionKey returns the address of the symbol NSMetadataItemEXIFVersionKey.
-func NSMetadataItemEXIFVersionKey() uintptr { return _symbol("NSMetadataItemEXIFVersionKey") }
-
-// NSMetadataItemCameraOwnerKey returns the address of the symbol NSMetadataItemCameraOwnerKey.
-func NSMetadataItemCameraOwnerKey() uintptr { return _symbol("NSMetadataItemCameraOwnerKey") }
-
-// NSMetadataItemFocalLength35mmKey returns the address of the symbol NSMetadataItemFocalLength35mmKey.
-func NSMetadataItemFocalLength35mmKey() uintptr { return _symbol("NSMetadataItemFocalLength35mmKey") }
-
-// NSMetadataItemLensModelKey returns the address of the symbol NSMetadataItemLensModelKey.
-func NSMetadataItemLensModelKey() uintptr { return _symbol("NSMetadataItemLensModelKey") }
-
-// NSMetadataItemEXIFGPSVersionKey returns the address of the symbol NSMetadataItemEXIFGPSVersionKey.
-func NSMetadataItemEXIFGPSVersionKey() uintptr { return _symbol("NSMetadataItemEXIFGPSVersionKey") }
-
-// NSMetadataItemAltitudeKey returns the address of the symbol NSMetadataItemAltitudeKey.
-func NSMetadataItemAltitudeKey() uintptr { return _symbol("NSMetadataItemAltitudeKey") }
-
-// NSMetadataItemLatitudeKey returns the address of the symbol NSMetadataItemLatitudeKey.
-func NSMetadataItemLatitudeKey() uintptr { return _symbol("NSMetadataItemLatitudeKey") }
-
-// NSMetadataItemLongitudeKey returns the address of the symbol NSMetadataItemLongitudeKey.
-func NSMetadataItemLongitudeKey() uintptr { return _symbol("NSMetadataItemLongitudeKey") }
-
-// NSMetadataItemSpeedKey returns the address of the symbol NSMetadataItemSpeedKey.
-func NSMetadataItemSpeedKey() uintptr { return _symbol("NSMetadataItemSpeedKey") }
-
-// NSMetadataItemTimestampKey returns the address of the symbol NSMetadataItemTimestampKey.
-func NSMetadataItemTimestampKey() uintptr { return _symbol("NSMetadataItemTimestampKey") }
-
-// NSMetadataItemGPSTrackKey returns the address of the symbol NSMetadataItemGPSTrackKey.
-func NSMetadataItemGPSTrackKey() uintptr { return _symbol("NSMetadataItemGPSTrackKey") }
-
-// NSMetadataItemImageDirectionKey returns the address of the symbol NSMetadataItemImageDirectionKey.
-func NSMetadataItemImageDirectionKey() uintptr { return _symbol("NSMetadataItemImageDirectionKey") }
-
-// NSMetadataItemNamedLocationKey returns the address of the symbol NSMetadataItemNamedLocationKey.
-func NSMetadataItemNamedLocationKey() uintptr { return _symbol("NSMetadataItemNamedLocationKey") }
-
-// NSMetadataItemGPSStatusKey returns the address of the symbol NSMetadataItemGPSStatusKey.
-func NSMetadataItemGPSStatusKey() uintptr { return _symbol("NSMetadataItemGPSStatusKey") }
-
-// NSMetadataItemGPSMeasureModeKey returns the address of the symbol NSMetadataItemGPSMeasureModeKey.
-func NSMetadataItemGPSMeasureModeKey() uintptr { return _symbol("NSMetadataItemGPSMeasureModeKey") }
-
-// NSMetadataItemGPSDOPKey returns the address of the symbol NSMetadataItemGPSDOPKey.
-func NSMetadataItemGPSDOPKey() uintptr { return _symbol("NSMetadataItemGPSDOPKey") }
-
-// NSMetadataItemGPSMapDatumKey returns the address of the symbol NSMetadataItemGPSMapDatumKey.
-func NSMetadataItemGPSMapDatumKey() uintptr { return _symbol("NSMetadataItemGPSMapDatumKey") }
-
-// NSMetadataItemGPSDestLatitudeKey returns the address of the symbol NSMetadataItemGPSDestLatitudeKey.
-func NSMetadataItemGPSDestLatitudeKey() uintptr { return _symbol("NSMetadataItemGPSDestLatitudeKey") }
-
-// NSMetadataItemGPSDestLongitudeKey returns the address of the symbol NSMetadataItemGPSDestLongitudeKey.
-func NSMetadataItemGPSDestLongitudeKey() uintptr { return _symbol("NSMetadataItemGPSDestLongitudeKey") }
-
-// NSMetadataItemGPSDestBearingKey returns the address of the symbol NSMetadataItemGPSDestBearingKey.
-func NSMetadataItemGPSDestBearingKey() uintptr { return _symbol("NSMetadataItemGPSDestBearingKey") }
-
-// NSMetadataItemGPSDestDistanceKey returns the address of the symbol NSMetadataItemGPSDestDistanceKey.
-func NSMetadataItemGPSDestDistanceKey() uintptr { return _symbol("NSMetadataItemGPSDestDistanceKey") }
-
-// NSMetadataItemGPSProcessingMethodKey returns the address of the symbol NSMetadataItemGPSProcessingMethodKey.
-func NSMetadataItemGPSProcessingMethodKey() uintptr {
-	return _symbol("NSMetadataItemGPSProcessingMethodKey")
-}
-
-// NSMetadataItemGPSAreaInformationKey returns the address of the symbol NSMetadataItemGPSAreaInformationKey.
-func NSMetadataItemGPSAreaInformationKey() uintptr {
-	return _symbol("NSMetadataItemGPSAreaInformationKey")
-}
-
-// NSMetadataItemGPSDateStampKey returns the address of the symbol NSMetadataItemGPSDateStampKey.
-func NSMetadataItemGPSDateStampKey() uintptr { return _symbol("NSMetadataItemGPSDateStampKey") }
-
-// NSMetadataItemGPSDifferentalKey returns the address of the symbol NSMetadataItemGPSDifferentalKey.
-func NSMetadataItemGPSDifferentalKey() uintptr { return _symbol("NSMetadataItemGPSDifferentalKey") }
-
-// NSMetadataItemCodecsKey returns the address of the symbol NSMetadataItemCodecsKey.
-func NSMetadataItemCodecsKey() uintptr { return _symbol("NSMetadataItemCodecsKey") }
-
-// NSMetadataItemMediaTypesKey returns the address of the symbol NSMetadataItemMediaTypesKey.
-func NSMetadataItemMediaTypesKey() uintptr { return _symbol("NSMetadataItemMediaTypesKey") }
-
-// NSMetadataItemStreamableKey returns the address of the symbol NSMetadataItemStreamableKey.
-func NSMetadataItemStreamableKey() uintptr { return _symbol("NSMetadataItemStreamableKey") }
-
-// NSMetadataItemTotalBitRateKey returns the address of the symbol NSMetadataItemTotalBitRateKey.
-func NSMetadataItemTotalBitRateKey() uintptr { return _symbol("NSMetadataItemTotalBitRateKey") }
-
-// NSMetadataItemVideoBitRateKey returns the address of the symbol NSMetadataItemVideoBitRateKey.
-func NSMetadataItemVideoBitRateKey() uintptr { return _symbol("NSMetadataItemVideoBitRateKey") }
-
-// NSMetadataItemAudioBitRateKey returns the address of the symbol NSMetadataItemAudioBitRateKey.
-func NSMetadataItemAudioBitRateKey() uintptr { return _symbol("NSMetadataItemAudioBitRateKey") }
-
-// NSMetadataItemDeliveryTypeKey returns the address of the symbol NSMetadataItemDeliveryTypeKey.
-func NSMetadataItemDeliveryTypeKey() uintptr { return _symbol("NSMetadataItemDeliveryTypeKey") }
-
-// NSMetadataItemAlbumKey returns the address of the symbol NSMetadataItemAlbumKey.
-func NSMetadataItemAlbumKey() uintptr { return _symbol("NSMetadataItemAlbumKey") }
-
-// NSMetadataItemHasAlphaChannelKey returns the address of the symbol NSMetadataItemHasAlphaChannelKey.
-func NSMetadataItemHasAlphaChannelKey() uintptr { return _symbol("NSMetadataItemHasAlphaChannelKey") }
-
-// NSMetadataItemRedEyeOnOffKey returns the address of the symbol NSMetadataItemRedEyeOnOffKey.
-func NSMetadataItemRedEyeOnOffKey() uintptr { return _symbol("NSMetadataItemRedEyeOnOffKey") }
-
-// NSMetadataItemMeteringModeKey returns the address of the symbol NSMetadataItemMeteringModeKey.
-func NSMetadataItemMeteringModeKey() uintptr { return _symbol("NSMetadataItemMeteringModeKey") }
-
-// NSMetadataItemMaxApertureKey returns the address of the symbol NSMetadataItemMaxApertureKey.
-func NSMetadataItemMaxApertureKey() uintptr { return _symbol("NSMetadataItemMaxApertureKey") }
-
-// NSMetadataItemFNumberKey returns the address of the symbol NSMetadataItemFNumberKey.
-func NSMetadataItemFNumberKey() uintptr { return _symbol("NSMetadataItemFNumberKey") }
-
-// NSMetadataItemExposureProgramKey returns the address of the symbol NSMetadataItemExposureProgramKey.
-func NSMetadataItemExposureProgramKey() uintptr { return _symbol("NSMetadataItemExposureProgramKey") }
-
-// NSMetadataItemExposureTimeStringKey returns the address of the symbol NSMetadataItemExposureTimeStringKey.
-func NSMetadataItemExposureTimeStringKey() uintptr {
-	return _symbol("NSMetadataItemExposureTimeStringKey")
-}
-
-// NSMetadataItemHeadlineKey returns the address of the symbol NSMetadataItemHeadlineKey.
-func NSMetadataItemHeadlineKey() uintptr { return _symbol("NSMetadataItemHeadlineKey") }
-
-// NSMetadataItemInstructionsKey returns the address of the symbol NSMetadataItemInstructionsKey.
-func NSMetadataItemInstructionsKey() uintptr { return _symbol("NSMetadataItemInstructionsKey") }
-
-// NSMetadataItemCityKey returns the address of the symbol NSMetadataItemCityKey.
-func NSMetadataItemCityKey() uintptr { return _symbol("NSMetadataItemCityKey") }
-
-// NSMetadataItemStateOrProvinceKey returns the address of the symbol NSMetadataItemStateOrProvinceKey.
-func NSMetadataItemStateOrProvinceKey() uintptr { return _symbol("NSMetadataItemStateOrProvinceKey") }
-
-// NSMetadataItemCountryKey returns the address of the symbol NSMetadataItemCountryKey.
-func NSMetadataItemCountryKey() uintptr { return _symbol("NSMetadataItemCountryKey") }
-
-// NSMetadataItemTextContentKey returns the address of the symbol NSMetadataItemTextContentKey.
-func NSMetadataItemTextContentKey() uintptr { return _symbol("NSMetadataItemTextContentKey") }
-
-// NSMetadataItemAudioSampleRateKey returns the address of the symbol NSMetadataItemAudioSampleRateKey.
-func NSMetadataItemAudioSampleRateKey() uintptr { return _symbol("NSMetadataItemAudioSampleRateKey") }
-
-// NSMetadataItemAudioChannelCountKey returns the address of the symbol NSMetadataItemAudioChannelCountKey.
-func NSMetadataItemAudioChannelCountKey() uintptr {
-	return _symbol("NSMetadataItemAudioChannelCountKey")
-}
-
-// NSMetadataItemTempoKey returns the address of the symbol NSMetadataItemTempoKey.
-func NSMetadataItemTempoKey() uintptr { return _symbol("NSMetadataItemTempoKey") }
-
-// NSMetadataItemKeySignatureKey returns the address of the symbol NSMetadataItemKeySignatureKey.
-func NSMetadataItemKeySignatureKey() uintptr { return _symbol("NSMetadataItemKeySignatureKey") }
-
-// NSMetadataItemTimeSignatureKey returns the address of the symbol NSMetadataItemTimeSignatureKey.
-func NSMetadataItemTimeSignatureKey() uintptr { return _symbol("NSMetadataItemTimeSignatureKey") }
-
-// NSMetadataItemAudioEncodingApplicationKey returns the address of the symbol NSMetadataItemAudioEncodingApplicationKey.
-func NSMetadataItemAudioEncodingApplicationKey() uintptr {
-	return _symbol("NSMetadataItemAudioEncodingApplicationKey")
-}
-
-// NSMetadataItemComposerKey returns the address of the symbol NSMetadataItemComposerKey.
-func NSMetadataItemComposerKey() uintptr { return _symbol("NSMetadataItemComposerKey") }
-
-// NSMetadataItemLyricistKey returns the address of the symbol NSMetadataItemLyricistKey.
-func NSMetadataItemLyricistKey() uintptr { return _symbol("NSMetadataItemLyricistKey") }
-
-// NSMetadataItemAudioTrackNumberKey returns the address of the symbol NSMetadataItemAudioTrackNumberKey.
-func NSMetadataItemAudioTrackNumberKey() uintptr { return _symbol("NSMetadataItemAudioTrackNumberKey") }
-
-// NSMetadataItemRecordingDateKey returns the address of the symbol NSMetadataItemRecordingDateKey.
-func NSMetadataItemRecordingDateKey() uintptr { return _symbol("NSMetadataItemRecordingDateKey") }
-
-// NSMetadataItemMusicalGenreKey returns the address of the symbol NSMetadataItemMusicalGenreKey.
-func NSMetadataItemMusicalGenreKey() uintptr { return _symbol("NSMetadataItemMusicalGenreKey") }
-
-// NSMetadataItemIsGeneralMIDISequenceKey returns the address of the symbol NSMetadataItemIsGeneralMIDISequenceKey.
-func NSMetadataItemIsGeneralMIDISequenceKey() uintptr {
-	return _symbol("NSMetadataItemIsGeneralMIDISequenceKey")
-}
-
-// NSMetadataItemRecordingYearKey returns the address of the symbol NSMetadataItemRecordingYearKey.
-func NSMetadataItemRecordingYearKey() uintptr { return _symbol("NSMetadataItemRecordingYearKey") }
-
-// NSMetadataItemOrganizationsKey returns the address of the symbol NSMetadataItemOrganizationsKey.
-func NSMetadataItemOrganizationsKey() uintptr { return _symbol("NSMetadataItemOrganizationsKey") }
-
-// NSMetadataItemLanguagesKey returns the address of the symbol NSMetadataItemLanguagesKey.
-func NSMetadataItemLanguagesKey() uintptr { return _symbol("NSMetadataItemLanguagesKey") }
-
-// NSMetadataItemRightsKey returns the address of the symbol NSMetadataItemRightsKey.
-func NSMetadataItemRightsKey() uintptr { return _symbol("NSMetadataItemRightsKey") }
-
-// NSMetadataItemPublishersKey returns the address of the symbol NSMetadataItemPublishersKey.
-func NSMetadataItemPublishersKey() uintptr { return _symbol("NSMetadataItemPublishersKey") }
-
-// NSMetadataItemContributorsKey returns the address of the symbol NSMetadataItemContributorsKey.
-func NSMetadataItemContributorsKey() uintptr { return _symbol("NSMetadataItemContributorsKey") }
-
-// NSMetadataItemCoverageKey returns the address of the symbol NSMetadataItemCoverageKey.
-func NSMetadataItemCoverageKey() uintptr { return _symbol("NSMetadataItemCoverageKey") }
-
-// NSMetadataItemSubjectKey returns the address of the symbol NSMetadataItemSubjectKey.
-func NSMetadataItemSubjectKey() uintptr { return _symbol("NSMetadataItemSubjectKey") }
-
-// NSMetadataItemThemeKey returns the address of the symbol NSMetadataItemThemeKey.
-func NSMetadataItemThemeKey() uintptr { return _symbol("NSMetadataItemThemeKey") }
-
-// NSMetadataItemDescriptionKey returns the address of the symbol NSMetadataItemDescriptionKey.
-func NSMetadataItemDescriptionKey() uintptr { return _symbol("NSMetadataItemDescriptionKey") }
-
-// NSMetadataItemIdentifierKey returns the address of the symbol NSMetadataItemIdentifierKey.
-func NSMetadataItemIdentifierKey() uintptr { return _symbol("NSMetadataItemIdentifierKey") }
-
-// NSMetadataItemAudiencesKey returns the address of the symbol NSMetadataItemAudiencesKey.
-func NSMetadataItemAudiencesKey() uintptr { return _symbol("NSMetadataItemAudiencesKey") }
-
-// NSMetadataItemNumberOfPagesKey returns the address of the symbol NSMetadataItemNumberOfPagesKey.
-func NSMetadataItemNumberOfPagesKey() uintptr { return _symbol("NSMetadataItemNumberOfPagesKey") }
-
-// NSMetadataItemPageWidthKey returns the address of the symbol NSMetadataItemPageWidthKey.
-func NSMetadataItemPageWidthKey() uintptr { return _symbol("NSMetadataItemPageWidthKey") }
-
-// NSMetadataItemPageHeightKey returns the address of the symbol NSMetadataItemPageHeightKey.
-func NSMetadataItemPageHeightKey() uintptr { return _symbol("NSMetadataItemPageHeightKey") }
-
-// NSMetadataItemSecurityMethodKey returns the address of the symbol NSMetadataItemSecurityMethodKey.
-func NSMetadataItemSecurityMethodKey() uintptr { return _symbol("NSMetadataItemSecurityMethodKey") }
-
-// NSMetadataItemCreatorKey returns the address of the symbol NSMetadataItemCreatorKey.
-func NSMetadataItemCreatorKey() uintptr { return _symbol("NSMetadataItemCreatorKey") }
-
-// NSMetadataItemEncodingApplicationsKey returns the address of the symbol NSMetadataItemEncodingApplicationsKey.
-func NSMetadataItemEncodingApplicationsKey() uintptr {
-	return _symbol("NSMetadataItemEncodingApplicationsKey")
-}
-
-// NSMetadataItemDueDateKey returns the address of the symbol NSMetadataItemDueDateKey.
-func NSMetadataItemDueDateKey() uintptr { return _symbol("NSMetadataItemDueDateKey") }
-
-// NSMetadataItemStarRatingKey returns the address of the symbol NSMetadataItemStarRatingKey.
-func NSMetadataItemStarRatingKey() uintptr { return _symbol("NSMetadataItemStarRatingKey") }
-
-// NSMetadataItemPhoneNumbersKey returns the address of the symbol NSMetadataItemPhoneNumbersKey.
-func NSMetadataItemPhoneNumbersKey() uintptr { return _symbol("NSMetadataItemPhoneNumbersKey") }
-
-// NSMetadataItemEmailAddressesKey returns the address of the symbol NSMetadataItemEmailAddressesKey.
-func NSMetadataItemEmailAddressesKey() uintptr { return _symbol("NSMetadataItemEmailAddressesKey") }
-
-// NSMetadataItemInstantMessageAddressesKey returns the address of the symbol NSMetadataItemInstantMessageAddressesKey.
-func NSMetadataItemInstantMessageAddressesKey() uintptr {
-	return _symbol("NSMetadataItemInstantMessageAddressesKey")
-}
-
-// NSMetadataItemKindKey returns the address of the symbol NSMetadataItemKindKey.
-func NSMetadataItemKindKey() uintptr { return _symbol("NSMetadataItemKindKey") }
-
-// NSMetadataItemRecipientsKey returns the address of the symbol NSMetadataItemRecipientsKey.
-func NSMetadataItemRecipientsKey() uintptr { return _symbol("NSMetadataItemRecipientsKey") }
-
-// NSMetadataItemFinderCommentKey returns the address of the symbol NSMetadataItemFinderCommentKey.
-func NSMetadataItemFinderCommentKey() uintptr { return _symbol("NSMetadataItemFinderCommentKey") }
-
-// NSMetadataItemFontsKey returns the address of the symbol NSMetadataItemFontsKey.
-func NSMetadataItemFontsKey() uintptr { return _symbol("NSMetadataItemFontsKey") }
-
-// NSMetadataItemAppleLoopsRootKeyKey returns the address of the symbol NSMetadataItemAppleLoopsRootKeyKey.
-func NSMetadataItemAppleLoopsRootKeyKey() uintptr {
-	return _symbol("NSMetadataItemAppleLoopsRootKeyKey")
-}
-
-// NSMetadataItemAppleLoopsKeyFilterTypeKey returns the address of the symbol NSMetadataItemAppleLoopsKeyFilterTypeKey.
-func NSMetadataItemAppleLoopsKeyFilterTypeKey() uintptr {
-	return _symbol("NSMetadataItemAppleLoopsKeyFilterTypeKey")
-}
-
-// NSMetadataItemAppleLoopsLoopModeKey returns the address of the symbol NSMetadataItemAppleLoopsLoopModeKey.
-func NSMetadataItemAppleLoopsLoopModeKey() uintptr {
-	return _symbol("NSMetadataItemAppleLoopsLoopModeKey")
-}
-
-// NSMetadataItemAppleLoopDescriptorsKey returns the address of the symbol NSMetadataItemAppleLoopDescriptorsKey.
-func NSMetadataItemAppleLoopDescriptorsKey() uintptr {
-	return _symbol("NSMetadataItemAppleLoopDescriptorsKey")
-}
-
-// NSMetadataItemMusicalInstrumentCategoryKey returns the address of the symbol NSMetadataItemMusicalInstrumentCategoryKey.
-func NSMetadataItemMusicalInstrumentCategoryKey() uintptr {
-	return _symbol("NSMetadataItemMusicalInstrumentCategoryKey")
-}
-
-// NSMetadataItemMusicalInstrumentNameKey returns the address of the symbol NSMetadataItemMusicalInstrumentNameKey.
-func NSMetadataItemMusicalInstrumentNameKey() uintptr {
-	return _symbol("NSMetadataItemMusicalInstrumentNameKey")
-}
-
-// NSMetadataItemCFBundleIdentifierKey returns the address of the symbol NSMetadataItemCFBundleIdentifierKey.
-func NSMetadataItemCFBundleIdentifierKey() uintptr {
-	return _symbol("NSMetadataItemCFBundleIdentifierKey")
-}
-
-// NSMetadataItemInformationKey returns the address of the symbol NSMetadataItemInformationKey.
-func NSMetadataItemInformationKey() uintptr { return _symbol("NSMetadataItemInformationKey") }
-
-// NSMetadataItemDirectorKey returns the address of the symbol NSMetadataItemDirectorKey.
-func NSMetadataItemDirectorKey() uintptr { return _symbol("NSMetadataItemDirectorKey") }
-
-// NSMetadataItemProducerKey returns the address of the symbol NSMetadataItemProducerKey.
-func NSMetadataItemProducerKey() uintptr { return _symbol("NSMetadataItemProducerKey") }
-
-// NSMetadataItemGenreKey returns the address of the symbol NSMetadataItemGenreKey.
-func NSMetadataItemGenreKey() uintptr { return _symbol("NSMetadataItemGenreKey") }
-
-// NSMetadataItemPerformersKey returns the address of the symbol NSMetadataItemPerformersKey.
-func NSMetadataItemPerformersKey() uintptr { return _symbol("NSMetadataItemPerformersKey") }
-
-// NSMetadataItemOriginalFormatKey returns the address of the symbol NSMetadataItemOriginalFormatKey.
-func NSMetadataItemOriginalFormatKey() uintptr { return _symbol("NSMetadataItemOriginalFormatKey") }
-
-// NSMetadataItemOriginalSourceKey returns the address of the symbol NSMetadataItemOriginalSourceKey.
-func NSMetadataItemOriginalSourceKey() uintptr { return _symbol("NSMetadataItemOriginalSourceKey") }
-
-// NSMetadataItemAuthorEmailAddressesKey returns the address of the symbol NSMetadataItemAuthorEmailAddressesKey.
-func NSMetadataItemAuthorEmailAddressesKey() uintptr {
-	return _symbol("NSMetadataItemAuthorEmailAddressesKey")
-}
-
-// NSMetadataItemRecipientEmailAddressesKey returns the address of the symbol NSMetadataItemRecipientEmailAddressesKey.
-func NSMetadataItemRecipientEmailAddressesKey() uintptr {
-	return _symbol("NSMetadataItemRecipientEmailAddressesKey")
-}
-
-// NSMetadataItemAuthorAddressesKey returns the address of the symbol NSMetadataItemAuthorAddressesKey.
-func NSMetadataItemAuthorAddressesKey() uintptr { return _symbol("NSMetadataItemAuthorAddressesKey") }
-
-// NSMetadataItemRecipientAddressesKey returns the address of the symbol NSMetadataItemRecipientAddressesKey.
-func NSMetadataItemRecipientAddressesKey() uintptr {
-	return _symbol("NSMetadataItemRecipientAddressesKey")
-}
-
-// NSMetadataItemIsLikelyJunkKey returns the address of the symbol NSMetadataItemIsLikelyJunkKey.
-func NSMetadataItemIsLikelyJunkKey() uintptr { return _symbol("NSMetadataItemIsLikelyJunkKey") }
-
-// NSMetadataItemExecutableArchitecturesKey returns the address of the symbol NSMetadataItemExecutableArchitecturesKey.
-func NSMetadataItemExecutableArchitecturesKey() uintptr {
-	return _symbol("NSMetadataItemExecutableArchitecturesKey")
-}
-
-// NSMetadataItemExecutablePlatformKey returns the address of the symbol NSMetadataItemExecutablePlatformKey.
-func NSMetadataItemExecutablePlatformKey() uintptr {
-	return _symbol("NSMetadataItemExecutablePlatformKey")
-}
-
-// NSMetadataItemApplicationCategoriesKey returns the address of the symbol NSMetadataItemApplicationCategoriesKey.
-func NSMetadataItemApplicationCategoriesKey() uintptr {
-	return _symbol("NSMetadataItemApplicationCategoriesKey")
-}
-
-// NSMetadataItemIsApplicationManagedKey returns the address of the symbol NSMetadataItemIsApplicationManagedKey.
-func NSMetadataItemIsApplicationManagedKey() uintptr {
-	return _symbol("NSMetadataItemIsApplicationManagedKey")
-}
-
-// NSMetadataQueryUserHomeScope returns the address of the symbol NSMetadataQueryUserHomeScope.
-func NSMetadataQueryUserHomeScope() uintptr { return _symbol("NSMetadataQueryUserHomeScope") }
-
-// NSMetadataQueryLocalComputerScope returns the address of the symbol NSMetadataQueryLocalComputerScope.
-func NSMetadataQueryLocalComputerScope() uintptr { return _symbol("NSMetadataQueryLocalComputerScope") }
-
-// NSMetadataQueryNetworkScope returns the address of the symbol NSMetadataQueryNetworkScope.
-func NSMetadataQueryNetworkScope() uintptr { return _symbol("NSMetadataQueryNetworkScope") }
-
-// NSMetadataQueryIndexedLocalComputerScope returns the address of the symbol NSMetadataQueryIndexedLocalComputerScope.
-func NSMetadataQueryIndexedLocalComputerScope() uintptr {
-	return _symbol("NSMetadataQueryIndexedLocalComputerScope")
-}
-
-// NSMetadataQueryIndexedNetworkScope returns the address of the symbol NSMetadataQueryIndexedNetworkScope.
-func NSMetadataQueryIndexedNetworkScope() uintptr {
-	return _symbol("NSMetadataQueryIndexedNetworkScope")
-}
-
-// NSNetServicesErrorCode returns the address of the symbol NSNetServicesErrorCode.
-func NSNetServicesErrorCode() uintptr { return _symbol("NSNetServicesErrorCode") }
-
-// NSNetServicesErrorDomain returns the address of the symbol NSNetServicesErrorDomain.
-func NSNetServicesErrorDomain() uintptr { return _symbol("NSNetServicesErrorDomain") }
-
 // NSURLSessionTransferSizeUnknown returns the value of the constant NSURLSessionTransferSizeUnknown.
 func NSURLSessionTransferSizeUnknown() int64 {
 	addr := _symbol("NSURLSessionTransferSizeUnknown")
@@ -3637,60 +4025,47 @@ func NSURLSessionTransferSizeUnknown() int64 {
 	return *(*int64)(unsafe.Pointer(addr))
 }
 
-// NSURLSessionTaskPriorityDefault returns the address of the symbol NSURLSessionTaskPriorityDefault.
-func NSURLSessionTaskPriorityDefault() uintptr { return _symbol("NSURLSessionTaskPriorityDefault") }
-
-// NSURLSessionTaskPriorityLow returns the address of the symbol NSURLSessionTaskPriorityLow.
-func NSURLSessionTaskPriorityLow() uintptr { return _symbol("NSURLSessionTaskPriorityLow") }
-
-// NSURLSessionTaskPriorityHigh returns the address of the symbol NSURLSessionTaskPriorityHigh.
-func NSURLSessionTaskPriorityHigh() uintptr { return _symbol("NSURLSessionTaskPriorityHigh") }
-
-// NSAppleScriptErrorMessage returns the address of the symbol NSAppleScriptErrorMessage.
-func NSAppleScriptErrorMessage() uintptr { return _symbol("NSAppleScriptErrorMessage") }
-
-// NSAppleScriptErrorNumber returns the address of the symbol NSAppleScriptErrorNumber.
-func NSAppleScriptErrorNumber() uintptr { return _symbol("NSAppleScriptErrorNumber") }
-
-// NSAppleScriptErrorAppName returns the address of the symbol NSAppleScriptErrorAppName.
-func NSAppleScriptErrorAppName() uintptr { return _symbol("NSAppleScriptErrorAppName") }
-
-// NSAppleScriptErrorBriefMessage returns the address of the symbol NSAppleScriptErrorBriefMessage.
-func NSAppleScriptErrorBriefMessage() uintptr { return _symbol("NSAppleScriptErrorBriefMessage") }
-
-// NSAppleScriptErrorRange returns the address of the symbol NSAppleScriptErrorRange.
-func NSAppleScriptErrorRange() uintptr { return _symbol("NSAppleScriptErrorRange") }
-
-// NSConnectionReplyMode returns the address of the symbol NSConnectionReplyMode.
-func NSConnectionReplyMode() uintptr { return _symbol("NSConnectionReplyMode") }
-
-// NSConnectionDidDieNotification returns the address of the symbol NSConnectionDidDieNotification.
-func NSConnectionDidDieNotification() uintptr { return _symbol("NSConnectionDidDieNotification") }
-
-// NSFailedAuthenticationException returns the address of the symbol NSFailedAuthenticationException.
-func NSFailedAuthenticationException() uintptr { return _symbol("NSFailedAuthenticationException") }
-
-// NSConnectionDidInitializeNotification returns the address of the symbol NSConnectionDidInitializeNotification.
-func NSConnectionDidInitializeNotification() uintptr {
-	return _symbol("NSConnectionDidInitializeNotification")
+// NSURLSessionTaskPriorityDefault returns the value of the constant NSURLSessionTaskPriorityDefault.
+func NSURLSessionTaskPriorityDefault() float32 {
+	addr := _symbol("NSURLSessionTaskPriorityDefault")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float32)(unsafe.Pointer(addr))
 }
 
-// NSAppleEventTimeOutDefault returns the address of the symbol NSAppleEventTimeOutDefault.
-func NSAppleEventTimeOutDefault() uintptr { return _symbol("NSAppleEventTimeOutDefault") }
+// NSURLSessionTaskPriorityLow returns the value of the constant NSURLSessionTaskPriorityLow.
+func NSURLSessionTaskPriorityLow() float32 {
+	addr := _symbol("NSURLSessionTaskPriorityLow")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float32)(unsafe.Pointer(addr))
+}
 
-// NSAppleEventTimeOutNone returns the address of the symbol NSAppleEventTimeOutNone.
-func NSAppleEventTimeOutNone() uintptr { return _symbol("NSAppleEventTimeOutNone") }
+// NSURLSessionTaskPriorityHigh returns the value of the constant NSURLSessionTaskPriorityHigh.
+func NSURLSessionTaskPriorityHigh() float32 {
+	addr := _symbol("NSURLSessionTaskPriorityHigh")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float32)(unsafe.Pointer(addr))
+}
 
-// NSGrammarRange returns the address of the symbol NSGrammarRange.
-func NSGrammarRange() uintptr { return _symbol("NSGrammarRange") }
+// NSAppleEventTimeOutDefault returns the value of the constant NSAppleEventTimeOutDefault.
+func NSAppleEventTimeOutDefault() float64 {
+	addr := _symbol("NSAppleEventTimeOutDefault")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float64)(unsafe.Pointer(addr))
+}
 
-// NSGrammarUserDescription returns the address of the symbol NSGrammarUserDescription.
-func NSGrammarUserDescription() uintptr { return _symbol("NSGrammarUserDescription") }
-
-// NSGrammarCorrections returns the address of the symbol NSGrammarCorrections.
-func NSGrammarCorrections() uintptr { return _symbol("NSGrammarCorrections") }
-
-// NSUserNotificationDefaultSoundName returns the address of the symbol NSUserNotificationDefaultSoundName.
-func NSUserNotificationDefaultSoundName() uintptr {
-	return _symbol("NSUserNotificationDefaultSoundName")
+// NSAppleEventTimeOutNone returns the value of the constant NSAppleEventTimeOutNone.
+func NSAppleEventTimeOutNone() float64 {
+	addr := _symbol("NSAppleEventTimeOutNone")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float64)(unsafe.Pointer(addr))
 }

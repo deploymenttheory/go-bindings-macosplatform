@@ -3,10 +3,6 @@
   "framework": "CoreAudioTypes",
   "source": "developer.apple.com DocC render API",
   "enums": {
-    "AVAudioSessionErrorCode": {
-      "doc": "Codes that describe error conditions that may occur when performing audio session operations.",
-      "url": "https://developer.apple.com/documentation/coreaudiotypes/avaudiosessionerrorcode"
-    },
     "AudioChannelBitmap": {
       "doc": "The supported channel bitmaps to use when defining channel layouts.",
       "url": "https://developer.apple.com/documentation/coreaudiotypes/audiochannelbitmap",

@@ -58,7 +58,7 @@ func NewMTRBaseClusterOperationalStateWithDeviceEndpointIDQueue(device *MTRBaseD
 	return mTRBaseClusterOperationalStateAdopt(_id)
 }
 
-// PauseWithParamsCompletion command Pause Upon receipt, the device SHALL pause its operation if it is possible based on the current function of the server.
+// PauseWithParamsCompletion command Pause This command SHALL be supported if the device supports remotely pausing the operation.
 //
 // PauseWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOperationalState) PauseWithParamsCompletion(ctx context.Context, params *MTROperationalStateClusterPauseParams) (result *MTROperationalStateClusterOperationalCommandResponseParams, err error) {
@@ -111,7 +111,7 @@ func (mbcos *MTRBaseClusterOperationalState) PauseWithCompletion(ctx context.Con
 	}
 }
 
-// StopWithParamsCompletion command Stop Upon receipt, the device SHALL stop its operation if it is at a position where it is safe to do so and/or permitted.
+// StopWithParamsCompletion command Stop This command SHALL be supported if the device supports remotely stopping the operation.
 //
 // StopWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOperationalState) StopWithParamsCompletion(ctx context.Context, params *MTROperationalStateClusterStopParams) (result *MTROperationalStateClusterOperationalCommandResponseParams, err error) {
@@ -164,7 +164,7 @@ func (mbcos *MTRBaseClusterOperationalState) StopWithCompletion(ctx context.Cont
 	}
 }
 
-// StartWithParamsCompletion command Start Upon receipt, the device SHALL start its operation if it is safe to do so and the device is in an operational state from which it can be started.
+// StartWithParamsCompletion command Start This command SHALL be supported if the device supports remotely starting the operation.
 //
 // StartWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOperationalState) StartWithParamsCompletion(ctx context.Context, params *MTROperationalStateClusterStartParams) (result *MTROperationalStateClusterOperationalCommandResponseParams, err error) {
@@ -217,7 +217,7 @@ func (mbcos *MTRBaseClusterOperationalState) StartWithCompletion(ctx context.Con
 	}
 }
 
-// ResumeWithParamsCompletion command Resume Upon receipt, the device SHALL resume its operation from the point it was at when it received the Pause command, or from the point when it was paused by means outside of this cluster (for example by manual button press).
+// ResumeWithParamsCompletion command Resume This command SHALL be supported if the device supports remotely resuming the operation.
 //
 // ResumeWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOperationalState) ResumeWithParamsCompletion(ctx context.Context, params *MTROperationalStateClusterResumeParams) (result *MTROperationalStateClusterOperationalCommandResponseParams, err error) {

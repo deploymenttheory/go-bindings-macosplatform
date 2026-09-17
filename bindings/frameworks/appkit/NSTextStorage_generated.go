@@ -122,20 +122,6 @@ func (ts *TextStorage) WithForegroundColor(foregroundColor *Color) *TextStorage 
 	return ts
 }
 
-// AddLayoutManager adds a layout manager to the text storage object’s set of layout managers.
-func (ts *TextStorage) AddLayoutManager(aLayoutManager *LayoutManager) {
-	defer runtime.KeepAlive(ts)
-	defer runtime.KeepAlive(aLayoutManager)
-	objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("addLayoutManager:"), objref.IDOf(aLayoutManager))
-}
-
-// RemoveLayoutManager removes a layout manager from the text storage object’s set of layout managers.
-func (ts *TextStorage) RemoveLayoutManager(aLayoutManager *LayoutManager) {
-	defer runtime.KeepAlive(ts)
-	defer runtime.KeepAlive(aLayoutManager)
-	objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("removeLayoutManager:"), objref.IDOf(aLayoutManager))
-}
-
 // EditedRangeChangeInLength tracks changes made to the text storage object, allowing the text storage to record the full extent of changes.
 func (ts *TextStorage) EditedRangeChangeInLength(editedMask TextStorageEditActions, editedRange foundation.NSRange, delta int) {
 	defer runtime.KeepAlive(ts)
@@ -160,6 +146,48 @@ func (ts *TextStorage) EnsureAttributesAreFixedInRange(range_ foundation.NSRange
 	objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("ensureAttributesAreFixedInRange:"), range_)
 }
 
+// EditedMask returns a mask that describes the kinds of edits pending for the text storage object.
+func (ts *TextStorage) EditedMask() TextStorageEditActions {
+	defer runtime.KeepAlive(ts)
+	_r := objc.Send[TextStorageEditActions](objref.IDOf(ts), objc.RegisterName("editedMask"))
+	return _r
+}
+
+// EditedRange returns the range of text that contains changes. `{NSNotFound, 0}` when there is no pending changes.
+func (ts *TextStorage) EditedRange() foundation.NSRange {
+	defer runtime.KeepAlive(ts)
+	_r := objc.Send[foundation.NSRange](objref.IDOf(ts), objc.RegisterName("editedRange"))
+	return _r
+}
+
+// ChangeInLength returns the difference between the current length of the edited range and its length before editing.
+func (ts *TextStorage) ChangeInLength() int {
+	defer runtime.KeepAlive(ts)
+	_r := objc.Send[int](objref.IDOf(ts), objc.RegisterName("changeInLength"))
+	return _r
+}
+
+// FixesAttributesLazily reports whether the receiver fixes invalidated attributes lazily. The concrete UIKit subclass fixes attributes lazily by default. The abstract class (hence, all custom subclasses) is not lazy.
+func (ts *TextStorage) FixesAttributesLazily() bool {
+	defer runtime.KeepAlive(ts)
+	_r := objc.Send[bool](objref.IDOf(ts), objc.RegisterName("fixesAttributesLazily"))
+	return _r
+}
+
+// AddLayoutManager adds a layout manager to the text storage object’s set of layout managers.
+func (ts *TextStorage) AddLayoutManager(aLayoutManager *LayoutManager) {
+	defer runtime.KeepAlive(ts)
+	defer runtime.KeepAlive(aLayoutManager)
+	objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("addLayoutManager:"), objref.IDOf(aLayoutManager))
+}
+
+// RemoveLayoutManager removes a layout manager from the text storage object’s set of layout managers.
+func (ts *TextStorage) RemoveLayoutManager(aLayoutManager *LayoutManager) {
+	defer runtime.KeepAlive(ts)
+	defer runtime.KeepAlive(aLayoutManager)
+	objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("removeLayoutManager:"), objref.IDOf(aLayoutManager))
+}
+
 // LayoutManagers returns the layout managers.
 //
 // LayoutManagers returns the collection as a Go slice.
@@ -167,34 +195,6 @@ func (ts *TextStorage) LayoutManagers() []*LayoutManager {
 	defer runtime.KeepAlive(ts)
 	_arr := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("layoutManagers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *LayoutManager { return LayoutManagerFromID(_id) })
-}
-
-// EditedMask returns the edited mask.
-func (ts *TextStorage) EditedMask() TextStorageEditActions {
-	defer runtime.KeepAlive(ts)
-	_r := objc.Send[TextStorageEditActions](objref.IDOf(ts), objc.RegisterName("editedMask"))
-	return _r
-}
-
-// EditedRange returns the edited range.
-func (ts *TextStorage) EditedRange() foundation.NSRange {
-	defer runtime.KeepAlive(ts)
-	_r := objc.Send[foundation.NSRange](objref.IDOf(ts), objc.RegisterName("editedRange"))
-	return _r
-}
-
-// ChangeInLength returns the change in length.
-func (ts *TextStorage) ChangeInLength() int {
-	defer runtime.KeepAlive(ts)
-	_r := objc.Send[int](objref.IDOf(ts), objc.RegisterName("changeInLength"))
-	return _r
-}
-
-// FixesAttributesLazily wraps the corresponding Objective-C method.
-func (ts *TextStorage) FixesAttributesLazily() bool {
-	defer runtime.KeepAlive(ts)
-	_r := objc.Send[bool](objref.IDOf(ts), objc.RegisterName("fixesAttributesLazily"))
-	return _r
 }
 
 // AttributeRuns returns the attribute runs.

@@ -120,28 +120,28 @@ func (tlf *TextLayoutFragment) DrawAtPointInContext(point corefoundation.CGPoint
 	objc.Send[objc.ID](objref.IDOf(tlf), objc.RegisterName("drawAtPoint:inContext:"), point, objref.IDOf(context_.Object))
 }
 
-// TextLayoutManager returns the text layout manager.
+// TextLayoutManager returns the text layout manager for this text layout fragment.
 func (tlf *TextLayoutFragment) TextLayoutManager() *TextLayoutManager {
 	defer runtime.KeepAlive(tlf)
 	_r := objc.Send[objc.ID](objref.IDOf(tlf), objc.RegisterName("textLayoutManager"))
 	return TextLayoutManagerFromID(_r)
 }
 
-// TextElement returns the text element.
+// TextElement returns the parent text element.
 func (tlf *TextLayoutFragment) TextElement() *TextElement {
 	defer runtime.KeepAlive(tlf)
 	_r := objc.Send[objc.ID](objref.IDOf(tlf), objc.RegisterName("textElement"))
 	return TextElementFromID(_r)
 }
 
-// RangeInElement returns the range in element.
+// RangeInElement returns the range inside the text element relative to the document origin.
 func (tlf *TextLayoutFragment) RangeInElement() *TextRange {
 	defer runtime.KeepAlive(tlf)
 	_r := objc.Send[objc.ID](objref.IDOf(tlf), objc.RegisterName("rangeInElement"))
 	return TextRangeFromID(_r)
 }
 
-// TextLineFragments returns the text line fragments.
+// TextLineFragments returns an array of text line fragments. Valid when “state“ is `NSTextLayoutFragmentStateLayoutAvailable`. KVO-compliant.
 //
 // TextLineFragments returns the collection as a Go slice.
 func (tlf *TextLayoutFragment) TextLineFragments() []*TextLineFragment {
@@ -150,63 +150,63 @@ func (tlf *TextLayoutFragment) TextLineFragments() []*TextLineFragment {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TextLineFragment { return TextLineFragmentFromID(_id) })
 }
 
-// LayoutQueue returns the layout queue.
+// LayoutQueue returns the queue on which the framework dispatches layout operations. When non-nil, the layout operation is dispatched to the queue asynchronously.
 func (tlf *TextLayoutFragment) LayoutQueue() *foundation.OperationQueue {
 	defer runtime.KeepAlive(tlf)
 	_r := objc.Send[objc.ID](objref.IDOf(tlf), objc.RegisterName("layoutQueue"))
 	return foundation.OperationQueueFromID(_r)
 }
 
-// State returns the state.
+// State returns the layout information state. KVO-compliant.
 func (tlf *TextLayoutFragment) State() TextLayoutFragmentState {
 	defer runtime.KeepAlive(tlf)
 	_r := objc.Send[TextLayoutFragmentState](objref.IDOf(tlf), objc.RegisterName("state"))
 	return _r
 }
 
-// LayoutFragmentFrame returns the layout fragment frame.
+// LayoutFragmentFrame returns the rectangle the framework uses for tiling the layout fragment inside the target layout coordinate system. Typically in an “NSTextContainer“ coordinate system.
 func (tlf *TextLayoutFragment) LayoutFragmentFrame() corefoundation.CGRect {
 	defer runtime.KeepAlive(tlf)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(tlf), objc.RegisterName("layoutFragmentFrame"))
 	return _r
 }
 
-// RenderingSurfaceBounds returns the rendering surface bounds.
+// RenderingSurfaceBounds returns the bounds defining the area required for rendering the contents. The coordinate system is relative to “layoutFragmentFrame“. The coordinate system is vertically flipped, meaning origin (`{0,0}`) is at the upper-left corner. The size should be larger than `layoutFragmentFrame.size`. The origin could be in the negative coordinate since the rendering could be stretched out of `layoutFragmentFrame`. Only valid when “state“ is greater than `NSTextLayoutFragmentStateEstimatedUsageBounds`.
 func (tlf *TextLayoutFragment) RenderingSurfaceBounds() corefoundation.CGRect {
 	defer runtime.KeepAlive(tlf)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(tlf), objc.RegisterName("renderingSurfaceBounds"))
 	return _r
 }
 
-// LeadingPadding returns the leading padding.
+// LeadingPadding returns the amount of margin space reserved during paragraph layout between the leading edge of the text layout fragment and the start of the lines in the paragraph. The leading edge is according to the primary writing direction of the paragraph.
 func (tlf *TextLayoutFragment) LeadingPadding() float64 {
 	defer runtime.KeepAlive(tlf)
 	_r := objc.Send[float64](objref.IDOf(tlf), objc.RegisterName("leadingPadding"))
 	return _r
 }
 
-// TrailingPadding returns the trailing padding.
+// TrailingPadding returns the amount of margin space reserved during paragraph layout between the end of the lines in the paragraph and the trailing edge of the text layout fragment. The trailing edge is according to the primary writing direction of the paragraph.
 func (tlf *TextLayoutFragment) TrailingPadding() float64 {
 	defer runtime.KeepAlive(tlf)
 	_r := objc.Send[float64](objref.IDOf(tlf), objc.RegisterName("trailingPadding"))
 	return _r
 }
 
-// TopMargin returns the top margin.
+// TopMargin returns the amount of space reserved during paragraph layout between the top of the text layout fragment and the top of the first line in the paragraph.
 func (tlf *TextLayoutFragment) TopMargin() float64 {
 	defer runtime.KeepAlive(tlf)
 	_r := objc.Send[float64](objref.IDOf(tlf), objc.RegisterName("topMargin"))
 	return _r
 }
 
-// BottomMargin returns the bottom margin.
+// BottomMargin returns the amount of space reserved during paragraph layout between the bottom of the last line in the paragraph and the bottom of the text layout fragment.
 func (tlf *TextLayoutFragment) BottomMargin() float64 {
 	defer runtime.KeepAlive(tlf)
 	_r := objc.Send[float64](objref.IDOf(tlf), objc.RegisterName("bottomMargin"))
 	return _r
 }
 
-// TextAttachmentViewProviders returns the text attachment view providers.
+// TextAttachmentViewProviders returns the attachment view providers associated with the text layout fragment. The property contents are only valid with `NSTextLayoutFragmentStateLayoutAvailable`.
 //
 // TextAttachmentViewProviders returns the collection as a Go slice.
 func (tlf *TextLayoutFragment) TextAttachmentViewProviders() []*TextAttachmentViewProvider {

@@ -21,3 +21,8 @@ func SFExtensionMessageKey() obj.Object {
 func SFExtensionProfileKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("SFExtensionProfileKey")))
 }
+
+// SFSafariSettingsErrorDomain returns the string constant SFSafariSettingsErrorDomain, for use as a dictionary key or argument.
+func SFSafariSettingsErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SFSafariSettingsErrorDomain")))
+}

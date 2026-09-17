@@ -296,6 +296,16 @@
       "url": "https://developer.apple.com/documentation/avfaudio/avspeechutterance"
     }
   },
+  "structs": {
+    "AVAudio3DAngularOrientation": {
+      "doc": "A structure that represents the angular orientation of the listener in 3D space.",
+      "url": "https://developer.apple.com/documentation/avfaudio/avaudio3dangularorientation"
+    },
+    "AVAudio3DPoint": {
+      "doc": "A structure that represents a point in 3D space.",
+      "url": "https://developer.apple.com/documentation/avfaudio/avaudio3dpoint"
+    }
+  },
   "methods": {
     "AVAUPresetEvent": {
       "-initWithScope:element:dictionary:": {
@@ -889,7 +899,7 @@
         "url": "https://developer.apple.com/documentation/avfaudio/avaudiosession/sharedinstance()"
       },
       "-activateWithOptions:completionHandler:": {
-        "doc": "Activates an audio session asynchronously on watchOS.",
+        "doc": "Activates an audio session asynchronously.",
         "url": "https://developer.apple.com/documentation/avfaudio/avaudiosession/activate(options:completionhandler:)"
       },
       "-deactivateWithOptions:completionHandler:": {
@@ -1536,7 +1546,7 @@
       },
       "packetDependencies": {
         "doc": "The buffer’s array of packet dependencies.",
-        "url": "https://developer.apple.com/documentation/avfaudio/avaudiocompressedbuffer/packetdependencies-5oae6"
+        "url": "https://developer.apple.com/documentation/avfaudio/avaudiocompressedbuffer/packetdependencies-3a6ln"
       },
       "packetDescriptions": {
         "doc": "The buffer’s array of packet descriptions.",
@@ -2004,7 +2014,7 @@
       },
       "intendedSpatialExperience": {
         "doc": "The intended spatial experience for this player.",
-        "url": "https://developer.apple.com/documentation/avfaudio/avaudioplayer/intendedspatialexperience-27klj"
+        "url": "https://developer.apple.com/documentation/avfaudio/avaudioplayer/intendedspatialexperience-6py9z"
       },
       "meteringEnabled": {
         "doc": "A Boolean value that indicates whether the player is able to generate audio-level metering data.",
@@ -2049,8 +2059,8 @@
         "url": "https://developer.apple.com/documentation/avfaudio/avaudioplayernode/isplaying"
       },
       "scheduleBuffer(_:atTime:options:completionCallbackType:completionHandler:)": {
-        "doc": "Schedules playing samples from an audio buffer.",
-        "url": "https://developer.apple.com/documentation/avfaudio/avaudioplayernode/schedulebuffer(_:attime:options:completioncallbacktype:completionhandler:)-3ewd3"
+        "doc": "Schedules playing samples from a read-only audio buffer.",
+        "url": "https://developer.apple.com/documentation/avfaudio/avaudioplayernode/schedulebuffer(_:attime:options:completioncallbacktype:completionhandler:)-81qje"
       }
     },
     "AVAudioRecorder": {
@@ -2267,6 +2277,10 @@
       "AVAudioSessionSilenceSecondaryAudioHintNotification": {
         "doc": "A notification the system posts when the primary audio from other apps starts and stops.",
         "url": "https://developer.apple.com/documentation/avfaudio/avaudiosession/silencesecondaryaudiohintnotification"
+      },
+      "AVAudioSessionSoundStageSize": {
+        "doc": "Constants that specify the perceived size of sounds the audio session plays.",
+        "url": "https://developer.apple.com/documentation/avfaudio/avaudiosession/soundstagesize"
       },
       "AVAudioSessionSpatialPlaybackCapabilitiesChangedNotification": {
         "doc": "A notification the system posts when its spatial playback capabilities change.",

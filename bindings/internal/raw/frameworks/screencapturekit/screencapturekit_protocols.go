@@ -7,11 +7,19 @@ import (
 	"unsafe"
 )
 
+// SCClipBufferingOutputDelegate wraps the ObjC protocol SCClipBufferingOutputDelegate.
+type SCClipBufferingOutputDelegate interface {
+}
+
 // SCContentSharingPickerObserver wraps the ObjC protocol SCContentSharingPickerObserver.
 type SCContentSharingPickerObserver interface {
 	ContentSharingPickerDidCancelForStream(picker *SCContentSharingPicker, stream *SCStream)
 	ContentSharingPickerDidUpdateWithFilterForStream(picker *SCContentSharingPicker, filter *SCContentFilter, stream *SCStream)
 	ContentSharingPickerStartDidFailWithError(error_ unsafe.Pointer)
+}
+
+// SCRecordingEditorDelegate wraps the ObjC protocol SCRecordingEditorDelegate.
+type SCRecordingEditorDelegate interface {
 }
 
 // SCRecordingOutputDelegate wraps the ObjC protocol SCRecordingOutputDelegate.

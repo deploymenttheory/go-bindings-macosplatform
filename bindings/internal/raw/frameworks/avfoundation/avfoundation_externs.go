@@ -26,9 +26,16 @@ func AVAssetChapterMetadataGroupsDidChangeNotification() *foundation.NSString {
 }
 
 // Posted after the value of @"containsFragments" has already been loaded and the AVFragmentedAsset is added to an AVFragmentedAssetMinder, either when 1) fragments are detected in the asset on disk after it had previously contained none or when 2) no fragments are detected in the asset on disk after it had previously contained one or more.
-func AVAssetContainsFragmentsDidChangeNotification() uintptr {
+func AVAssetContainsFragmentsDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetContainsFragmentsDidChangeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The media selection for this download. The value for this key should be an AVMediaSelection. By default, media selections for AVAssetDownloadTask will be automatically selected.
@@ -154,69 +161,160 @@ func AVAssetDurationDidChangeNotification() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
-func AVAssetExportPreset1280x720() uintptr {
+func AVAssetExportPreset1280x720() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetExportPreset1280x720")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVAssetExportPreset1920x1080() uintptr {
+func AVAssetExportPreset1920x1080() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetExportPreset1920x1080")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVAssetExportPreset3840x2160() uintptr {
+func AVAssetExportPreset3840x2160() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetExportPreset3840x2160")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVAssetExportPreset640x480() uintptr {
+func AVAssetExportPreset640x480() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetExportPreset640x480")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVAssetExportPreset960x540() uintptr {
+func AVAssetExportPreset960x540() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetExportPreset960x540")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVAssetExportPresetAppleM4A() uintptr {
+func AVAssetExportPresetAppleM4A() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetExportPresetAppleM4A")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVAssetExportPresetAppleM4V1080pHD() uintptr {
+func AVAssetExportPresetAppleM4V1080pHD() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetExportPresetAppleM4V1080pHD")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVAssetExportPresetAppleM4V480pSD() uintptr {
+func AVAssetExportPresetAppleM4V480pSD() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetExportPresetAppleM4V480pSD")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVAssetExportPresetAppleM4V720pHD() uintptr {
+func AVAssetExportPresetAppleM4V720pHD() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetExportPresetAppleM4V720pHD")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVAssetExportPresetAppleM4VAppleTV() uintptr {
+func AVAssetExportPresetAppleM4VAppleTV() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetExportPresetAppleM4VAppleTV")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVAssetExportPresetAppleM4VCellular() uintptr {
+func AVAssetExportPresetAppleM4VCellular() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetExportPresetAppleM4VCellular")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVAssetExportPresetAppleM4VWiFi() uintptr {
+func AVAssetExportPresetAppleM4VWiFi() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetExportPresetAppleM4VWiFi")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVAssetExportPresetAppleM4ViPod() uintptr {
+func AVAssetExportPresetAppleM4ViPod() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetExportPresetAppleM4ViPod")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVAssetExportPresetAppleProRes422LPCM() *foundation.NSString {
@@ -243,24 +341,52 @@ func AVAssetExportPresetAppleProRes4444LPCM() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
-func AVAssetExportPresetHEVC1920x1080() uintptr {
+func AVAssetExportPresetHEVC1920x1080() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetExportPresetHEVC1920x1080")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVAssetExportPresetHEVC1920x1080WithAlpha() uintptr {
+func AVAssetExportPresetHEVC1920x1080WithAlpha() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetExportPresetHEVC1920x1080WithAlpha")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVAssetExportPresetHEVC3840x2160() uintptr {
+func AVAssetExportPresetHEVC3840x2160() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetExportPresetHEVC3840x2160")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVAssetExportPresetHEVC3840x2160WithAlpha() uintptr {
+func AVAssetExportPresetHEVC3840x2160WithAlpha() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetExportPresetHEVC3840x2160WithAlpha")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVAssetExportPresetHEVC4320x2160() *foundation.NSString {
@@ -287,29 +413,64 @@ func AVAssetExportPresetHEVC7680x4320() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
-func AVAssetExportPresetHEVCHighestQuality() uintptr {
+func AVAssetExportPresetHEVCHighestQuality() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetExportPresetHEVCHighestQuality")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVAssetExportPresetHEVCHighestQualityWithAlpha() uintptr {
+func AVAssetExportPresetHEVCHighestQualityWithAlpha() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetExportPresetHEVCHighestQualityWithAlpha")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVAssetExportPresetHighestQuality() uintptr {
+func AVAssetExportPresetHighestQuality() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetExportPresetHighestQuality")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVAssetExportPresetLowQuality() uintptr {
+func AVAssetExportPresetLowQuality() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetExportPresetLowQuality")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVAssetExportPresetMVHEVC1440x1440() uintptr {
+func AVAssetExportPresetMVHEVC1440x1440() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetExportPresetMVHEVC1440x1440")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVAssetExportPresetMVHEVC4320x4320() *foundation.NSString {
@@ -336,47 +497,155 @@ func AVAssetExportPresetMVHEVC7680x7680() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
-func AVAssetExportPresetMVHEVC960x960() uintptr {
+func AVAssetExportPresetMVHEVC960x960() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetExportPresetMVHEVC960x960")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVAssetExportPresetMediumQuality() uintptr {
+func AVAssetExportPresetMediumQuality() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetExportPresetMediumQuality")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVAssetExportPresetPassthrough() uintptr {
+func AVAssetExportPresetPassthrough() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetExportPresetPassthrough")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
+// Indicates the export session settings are incompatible with resumable export.
+func AVAssetExportSessionResumptionFailureReasonIncompatibleSessionSettings() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetExportSessionResumptionFailureReasonIncompatibleSessionSettings")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
+// Indicates that the contents of the specified temporary files directory are inconsistent with the current resuming export. You're likely aliasing two distinct exports together. Use a unique temporary files directory for each export, or clear the directory before resuming.
+func AVAssetExportSessionResumptionFailureReasonIncompatibleTemporaryDirectoryContents() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetExportSessionResumptionFailureReasonIncompatibleTemporaryDirectoryContents")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
+// Indicates that the specified temporary files directory doesn't exist. Create the temporary files directory and call “configureForResumableExportWithCompletionHandler:“ again.
+func AVAssetExportSessionResumptionFailureReasonTemporaryDirectoryDoesNotExist() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetExportSessionResumptionFailureReasonTemporaryDirectoryDoesNotExist")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
+// Indicates that resumption isn't supported for this preset and platform combination. You can continue the export, but it runs as a non-resumable (default) export.
+func AVAssetExportSessionResumptionFailureReasonUnsupportedForPresetOnPlatform() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetExportSessionResumptionFailureReasonUnsupportedForPresetOnPlatform")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant		AVAssetImageGeneratorApertureModeCleanAperture @abstract		Both pixel aspect ratio and clean aperture will be applied. @discussion An image's clean aperture is a region of video free from transition artifacts caused by the encoding of the signal.
-func AVAssetImageGeneratorApertureModeCleanAperture() uintptr {
+func AVAssetImageGeneratorApertureModeCleanAperture() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetImageGeneratorApertureModeCleanAperture")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant		AVAssetImageGeneratorApertureModeEncodedPixels @abstract		Neither pixel aspect ratio nor clean aperture will be applied. @discussion The image is not cropped to the clean aperture region and is not scaled according to the pixel aspect ratio. The encoded dimensions of the image description are displayed.
-func AVAssetImageGeneratorApertureModeEncodedPixels() uintptr {
+func AVAssetImageGeneratorApertureModeEncodedPixels() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetImageGeneratorApertureModeEncodedPixels")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant		AVAssetImageGeneratorApertureModeProductionAperture @abstract		Only pixel aspect ratio will be applied. @discussion The image is not cropped to the clean aperture region, but it is scaled according to the pixel aspect ratio. Use this option when you want to see all the pixels in your video, including the edges.
-func AVAssetImageGeneratorApertureModeProductionAperture() uintptr {
+func AVAssetImageGeneratorApertureModeProductionAperture() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetImageGeneratorApertureModeProductionAperture")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVAssetImageGeneratorDynamicRangePolicyForceSDR() uintptr {
+func AVAssetImageGeneratorDynamicRangePolicyForceSDR() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetImageGeneratorDynamicRangePolicyForceSDR")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVAssetImageGeneratorDynamicRangePolicyMatchSource() uintptr {
+func AVAssetImageGeneratorDynamicRangePolicyMatchSource() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetImageGeneratorDynamicRangePolicyMatchSource")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Posted when the collection of media selection groups provided by an AVAsset changes and when any of the contents of its media selection groups change, but only for changes that occur after the status of the value of @"availableMediaCharacteristicsWithMediaSelectionOptions" has reached AVKeyValueStatusLoaded.
@@ -511,27 +780,55 @@ func AVAssetTrackTrackAssociationsDidChangeNotification() *foundation.NSString {
 }
 
 // Posted when the asset on disk is defragmented while an AVFragmentedAsset is being minded by an AVFragmentedAssetMinder, but only if the defragmentation occurs after the status of the value of @"canContainFragments" has reached AVKeyValueStatusLoaded. After this notification is posted, the value of the asset properties canContainFragments and containsFragments will both be NO.
-func AVAssetWasDefragmentedNotification() uintptr {
+func AVAssetWasDefragmentedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetWasDefragmentedNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Indicates that the media data should be laid out before all the media data with AVAssetWriterInputMediaDataLocationInterleavedWithMainMediaData and not be interleaved.
-func AVAssetWriterInputMediaDataLocationBeforeMainMediaDataNotInterleaved() uintptr {
+func AVAssetWriterInputMediaDataLocationBeforeMainMediaDataNotInterleaved() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetWriterInputMediaDataLocationBeforeMainMediaDataNotInterleaved")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Indicates that the media data should be interleaved with all other media data with this constant.
-func AVAssetWriterInputMediaDataLocationInterleavedWithMainMediaData() uintptr {
+func AVAssetWriterInputMediaDataLocationInterleavedWithMainMediaData() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetWriterInputMediaDataLocationInterleavedWithMainMediaData")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Indicates that there may be large segments of time without any media data from this track. When mediaDataLocation is set to this value, AVAssetWriter will interleave the media data, but will not wait for media data from this track to achieve tight interleaving with other tracks.
-func AVAssetWriterInputMediaDataLocationSparselyInterleavedWithMainMediaData() uintptr {
+func AVAssetWriterInputMediaDataLocationSparselyInterleavedWithMainMediaData() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetWriterInputMediaDataLocationSparselyInterleavedWithMainMediaData")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVAudioTimePitchAlgorithmSpectral() *foundation.NSString {
@@ -648,240 +945,548 @@ func AVCaptionUseDropFrameTimeCodeKey() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
+// An AVCaptureAncillaryDataEncoder key corresponding with the optional RDD18 user defined metadata Instance UID Clients may set the Instance UID with “AVCaptureAncillaryDataEncoder/setUserInstanceUID:userUdamVersion:“
+func AVCaptureAncillaryDataUserKeyRDD18InstanceUID() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCaptureAncillaryDataUserKeyRDD18InstanceUID")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
+// An AVCaptureAncillaryDataEncoder key corresponding with the optional RDD18 user defined metadata UDAM Set Version Clients may set the UDAM Set Version with “AVCaptureAncillaryDataEncoder/setUserInstanceUID:userUdamVersion:“
+func AVCaptureAncillaryDataUserKeyRDD18UDAMSetVersion() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCaptureAncillaryDataUserKeyRDD18UDAMSetVersion")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
+// An AVCaptureAncillaryDataEncoder key corresponding with RDD18 user defined metadata Clients may inspect the user metadata with “AVCaptureAncillaryDataEncoder\currentUserDefinedAncillaryData“ and set it with “AVCaptureAncillaryDataEncoder\setRDD18AncillaryData:forTag:error:“ “AVCaptureAncillaryDataEncoder\setRDD18AncillaryDataString:forTag:error:“ or remove it with “AVCaptureAncillaryDataEncoder\removeRDD18AncillaryDataForTag:“
+func AVCaptureAncillaryDataUserKeyRDD18UserItems() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCaptureAncillaryDataUserKeyRDD18UserItems")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
 // @constant AVCaptureDeviceTypeBuiltInMicrophone A deprecated synonym for AVCaptureDeviceTypeMicrophone. Please use AVCaptureDeviceTypeMicrophone instead.
 // Deprecated: since macOS 14.0.
-func AVCaptureDeviceTypeBuiltInMicrophone() uintptr {
+func AVCaptureDeviceTypeBuiltInMicrophone() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCaptureDeviceTypeBuiltInMicrophone")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVCaptureDeviceTypeBuiltInWideAngleCamera A built-in wide angle camera device. These devices are suitable for general purpose use.
-func AVCaptureDeviceTypeBuiltInWideAngleCamera() uintptr {
+func AVCaptureDeviceTypeBuiltInWideAngleCamera() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCaptureDeviceTypeBuiltInWideAngleCamera")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVCaptureDeviceTypeContinuityCamera A continuity camera device. These devices are suitable for general purpose use. Note that devices of this type may only be discovered using an AVCaptureDeviceDiscoverySession or -[AVCaptureDevice defaultDeviceWithDeviceType:mediaType:position:]. @discussion Starting in macOS 14.0 and Mac Catalyst 17.0, apps may opt in for using AVCaptureDeviceTypeContinuityCamera by adding the following key to their Info.plist: <key>NSCameraUseContinuityCameraDeviceType</key> <true/> Otherwise, continuity cameras on macOS and Mac Catalyst report that their device type is AVCaptureDeviceTypeBuiltInWideAngleCamera.
-func AVCaptureDeviceTypeContinuityCamera() uintptr {
+func AVCaptureDeviceTypeContinuityCamera() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCaptureDeviceTypeContinuityCamera")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVCaptureDeviceTypeDeskViewCamera A distortion corrected cut out from an ultra wide camera, made to approximate an overhead camera pointing at a desk. Supports multicam operation.
-func AVCaptureDeviceTypeDeskViewCamera() uintptr {
+func AVCaptureDeviceTypeDeskViewCamera() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCaptureDeviceTypeDeskViewCamera")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVCaptureDeviceTypeExternal An external device type. On iPad, external devices are those that conform to the UVC (USB Video Class) specification. @discussion Starting in Mac Catalyst 17.0, apps may opt in for using AVCaptureDeviceTypeExternal by adding the following key to their Info.plist: <key>NSCameraUseExternalDeviceType</key> <true/> Otherwise, external cameras on Mac Catalyst report that their device type is AVCaptureDeviceTypeBuiltInWideAngleCamera. Prior to visionOS 3.0, your app must have the `com.apple.developer.avfoundation.uvc-device-access` entitlement in order to discover and use devices of type `AVCaptureDeviceTypeExternal` on visionOS.
-func AVCaptureDeviceTypeExternal() uintptr {
+func AVCaptureDeviceTypeExternal() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCaptureDeviceTypeExternal")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVCaptureDeviceTypeExternalUnknown A deprecated synonym for AVCaptureDeviceTypeExternal. Please use AVCaptureDeviceTypeExternal instead.
 // Deprecated: since macOS 14.0.
-func AVCaptureDeviceTypeExternalUnknown() uintptr {
+func AVCaptureDeviceTypeExternalUnknown() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCaptureDeviceTypeExternalUnknown")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVCaptureDeviceTypeMicrophone A microphone. On iOS and tvOS, only one AVCaptureDevice of type AVCaptureDeviceTypeMicrophone is exposed to the system. The audio routing subsystem decides which physical microphone to use, be it a built in microphone, a wired headset, an external microphone, etc. The microphone device's `localizedName` will change as the audio subsystem switches to a different physical device.
-func AVCaptureDeviceTypeMicrophone() uintptr {
+func AVCaptureDeviceTypeMicrophone() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCaptureDeviceTypeMicrophone")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVCaptureDeviceWasConnectedNotification @abstract Posted when a device becomes available on the system. @discussion The notification object is an AVCaptureDevice instance representing the device that became available.
-func AVCaptureDeviceWasConnectedNotification() uintptr {
+func AVCaptureDeviceWasConnectedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCaptureDeviceWasConnectedNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVCaptureDeviceWasDisconnectedNotification @abstract Posted when a device becomes unavailable on the system. @discussion The notification object is an AVCaptureDevice instance representing the device that became unavailable.
-func AVCaptureDeviceWasDisconnectedNotification() uintptr {
+func AVCaptureDeviceWasDisconnectedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCaptureDeviceWasDisconnectedNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVCaptureInputPortFormatDescriptionDidChangeNotification @abstract This notification is posted when the value of an AVCaptureInputPort instance's formatDescription property changes. @discussion The notification object is the AVCaptureInputPort instance whose format description changed.
-func AVCaptureInputPortFormatDescriptionDidChangeNotification() uintptr {
+func AVCaptureInputPortFormatDescriptionDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCaptureInputPortFormatDescriptionDidChangeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVCaptureMaxAvailableTorchLevel A special value that may be passed to -setTorchModeWithLevel:error: to set the torch to the maximum level currently available. Under thermal duress, the maximum available torch level may be less than 1.0.
-func AVCaptureMaxAvailableTorchLevel() uintptr {
+func AVCaptureMaxAvailableTorchLevel() float32 {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCaptureMaxAvailableTorchLevel")
-	return ptr
+	if ptr == 0 {
+		return 0
+	}
+	return *(*float32)(unsafe.Pointer(ptr))
 }
 
 // @constant AVCaptureReactionTypeBalloons @abstract Indicates a reaction which features balloons rising through the scene.
-func AVCaptureReactionTypeBalloons() uintptr {
+func AVCaptureReactionTypeBalloons() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCaptureReactionTypeBalloons")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVCaptureReactionTypeConfetti @abstract Indicates a reaction which features festive spots of color falling through the scene.
-func AVCaptureReactionTypeConfetti() uintptr {
+func AVCaptureReactionTypeConfetti() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCaptureReactionTypeConfetti")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVCaptureReactionTypeFireworks @abstract Indicates a reaction which features fireworks bursting in the background.
-func AVCaptureReactionTypeFireworks() uintptr {
+func AVCaptureReactionTypeFireworks() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCaptureReactionTypeFireworks")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVCaptureReactionTypeHeart @abstract Indicates a reaction which features one or more heart symbols.
-func AVCaptureReactionTypeHeart() uintptr {
+func AVCaptureReactionTypeHeart() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCaptureReactionTypeHeart")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVCaptureReactionTypeLasers @abstract Indicates a reaction which features a bright laser display projecting into the scene.
-func AVCaptureReactionTypeLasers() uintptr {
+func AVCaptureReactionTypeLasers() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCaptureReactionTypeLasers")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVCaptureReactionTypeRain @abstract Indicates a reaction which features a dark and stormy night.
-func AVCaptureReactionTypeRain() uintptr {
+func AVCaptureReactionTypeRain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCaptureReactionTypeRain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVCaptureReactionTypeThumbsDown @abstract Indicates a reaction which features a thumbs-down symbol.
-func AVCaptureReactionTypeThumbsDown() uintptr {
+func AVCaptureReactionTypeThumbsDown() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCaptureReactionTypeThumbsDown")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVCaptureReactionTypeThumbsUp @abstract Indicates a reaction which features a thumbs-up symbol.
-func AVCaptureReactionTypeThumbsUp() uintptr {
+func AVCaptureReactionTypeThumbsUp() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCaptureReactionTypeThumbsUp")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The light level of the current scene is insufficient for the current set of features to function optimally.
-func AVCaptureSceneMonitoringStatusNotEnoughLight() uintptr {
+func AVCaptureSceneMonitoringStatusNotEnoughLight() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCaptureSceneMonitoringStatusNotEnoughLight")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVCaptureSessionDidStartRunningNotification @abstract Posted when an instance of AVCaptureSession successfully starts running. @discussion Clients may observe the AVCaptureSessionDidStartRunningNotification to know when an instance of AVCaptureSession starts running.
-func AVCaptureSessionDidStartRunningNotification() uintptr {
+func AVCaptureSessionDidStartRunningNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCaptureSessionDidStartRunningNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVCaptureSessionDidStopRunningNotification @abstract Posted when an instance of AVCaptureSession stops running. @discussion Clients may observe the AVCaptureSessionDidStopRunningNotification to know when an instance of AVCaptureSession stops running. An AVCaptureSession instance may stop running automatically due to external system conditions, such as the device going to sleep, or being locked by a user.
-func AVCaptureSessionDidStopRunningNotification() uintptr {
+func AVCaptureSessionDidStopRunningNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCaptureSessionDidStopRunningNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVCaptureSessionErrorKey @abstract The key used to provide an NSError describing the failure condition in an AVCaptureSessionRuntimeErrorNotification. @discussion AVCaptureSessionErrorKey may be found in the userInfo dictionary provided with an AVCaptureSessionRuntimeErrorNotification. The NSError associated with the notification gives greater detail on the nature of the error, and in some cases recovery suggestions.
-func AVCaptureSessionErrorKey() uintptr {
+func AVCaptureSessionErrorKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCaptureSessionErrorKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVCaptureSessionInterruptionEndedNotification @abstract Posted when an instance of AVCaptureSession ceases to be interrupted. @discussion Clients may observe the AVCaptureSessionInterruptionEndedNotification to know when an instance of AVCaptureSession ceases to be interrupted, for example, when a phone call ends, and hardware resources needed to run the session are again available. When appropriate, the AVCaptureSession instance that was previously stopped in response to an interruption will automatically restart once the interruption ends.
-func AVCaptureSessionInterruptionEndedNotification() uintptr {
+func AVCaptureSessionInterruptionEndedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCaptureSessionInterruptionEndedNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVCaptureSessionPreset1280x720 @abstract An AVCaptureSession preset suitable for 1280x720 video output. @discussion Clients may set an AVCaptureSession instance's sessionPreset to AVCaptureSessionPreset1280x720 to achieve 1280x720 output.
-func AVCaptureSessionPreset1280x720() uintptr {
+func AVCaptureSessionPreset1280x720() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCaptureSessionPreset1280x720")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVCaptureSessionPreset1920x1080 @abstract An AVCaptureSession preset suitable for 1920x1080 video output. @discussion Clients may set an AVCaptureSession instance's sessionPreset to AVCaptureSessionPreset1920x1080 to achieve 1920x1080 output.
-func AVCaptureSessionPreset1920x1080() uintptr {
+func AVCaptureSessionPreset1920x1080() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCaptureSessionPreset1920x1080")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVCaptureSessionPreset320x240 @abstract An AVCaptureSession preset suitable for 320x240 video output. @discussion Clients may set an AVCaptureSession instance's sessionPreset to AVCaptureSessionPreset320x240 to achieve 320x240 output.
-func AVCaptureSessionPreset320x240() uintptr {
+func AVCaptureSessionPreset320x240() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCaptureSessionPreset320x240")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVCaptureSessionPreset352x288 @abstract An AVCaptureSession preset suitable for 352x288 video output. @discussion Clients may set an AVCaptureSession instance's sessionPreset to AVCaptureSessionPreset352x288 to achieve CIF quality (352x288) output.
-func AVCaptureSessionPreset352x288() uintptr {
+func AVCaptureSessionPreset352x288() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCaptureSessionPreset352x288")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVCaptureSessionPreset3840x2160 @abstract An AVCaptureSession preset suitable for 3840x2160 (UHD 4K) video output. @discussion Clients may set an AVCaptureSession instance's sessionPreset to AVCaptureSessionPreset3840x2160 to achieve 3840x2160 output.
-func AVCaptureSessionPreset3840x2160() uintptr {
+func AVCaptureSessionPreset3840x2160() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCaptureSessionPreset3840x2160")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVCaptureSessionPreset640x480 @abstract An AVCaptureSession preset suitable for 640x480 video output. @discussion Clients may set an AVCaptureSession instance's sessionPreset to AVCaptureSessionPreset640x480 to achieve VGA quality (640x480) output.
-func AVCaptureSessionPreset640x480() uintptr {
+func AVCaptureSessionPreset640x480() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCaptureSessionPreset640x480")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVCaptureSessionPreset960x540 @abstract An AVCaptureSession preset suitable for 960x540 video output. @discussion Clients may set an AVCaptureSession instance's sessionPreset to AVCaptureSessionPreset960x540 to achieve quarter HD quality (960x540) output.
-func AVCaptureSessionPreset960x540() uintptr {
+func AVCaptureSessionPreset960x540() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCaptureSessionPreset960x540")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVCaptureSessionPresetHigh @abstract An AVCaptureSession preset suitable for high quality video and audio output. @discussion Clients may set an AVCaptureSession instance's sessionPreset to AVCaptureSessionPresetHigh to achieve high quality video and audio output. AVCaptureSessionPresetHigh is the default sessionPreset value.
-func AVCaptureSessionPresetHigh() uintptr {
+func AVCaptureSessionPresetHigh() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCaptureSessionPresetHigh")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVCaptureSessionPresetLow @abstract An AVCaptureSession preset suitable for low quality output. @discussion Clients may set an AVCaptureSession instance's sessionPreset to AVCaptureSessionPresetLow to achieve output video and audio bitrates suitable for sharing over 3G.
-func AVCaptureSessionPresetLow() uintptr {
+func AVCaptureSessionPresetLow() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCaptureSessionPresetLow")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVCaptureSessionPresetMedium @abstract An AVCaptureSession preset suitable for medium quality output. @discussion Clients may set an AVCaptureSession instance's sessionPreset to AVCaptureSessionPresetMedium to achieve output video and audio bitrates suitable for sharing over WiFi.
-func AVCaptureSessionPresetMedium() uintptr {
+func AVCaptureSessionPresetMedium() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCaptureSessionPresetMedium")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVCaptureSessionPresetPhoto @abstract An AVCaptureSession preset suitable for high resolution photo quality output. @discussion Clients may set an AVCaptureSession instance's sessionPreset to AVCaptureSessionPresetPhoto for full resolution photo quality output.
-func AVCaptureSessionPresetPhoto() uintptr {
+func AVCaptureSessionPresetPhoto() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCaptureSessionPresetPhoto")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVCaptureSessionPresetiFrame1280x720 @abstract An AVCaptureSession preset producing 1280x720 Apple iFrame video and audio content. @discussion Clients may set an AVCaptureSession instance's sessionPreset to AVCaptureSessionPresetiFrame1280x720 to achieve 1280x720 quality iFrame H.264 video at ~40 Mbits/sec with AAC audio. QuickTime movies captured in iFrame format are optimal for editing applications.
-func AVCaptureSessionPresetiFrame1280x720() uintptr {
+func AVCaptureSessionPresetiFrame1280x720() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCaptureSessionPresetiFrame1280x720")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVCaptureSessionPresetiFrame960x540 @abstract An AVCaptureSession preset producing 960x540 Apple iFrame video and audio content. @discussion Clients may set an AVCaptureSession instance's sessionPreset to AVCaptureSessionPresetiFrame960x540 to achieve 960x540 quality iFrame H.264 video at ~30 Mbits/sec with AAC audio. QuickTime movies captured in iFrame format are optimal for editing applications.
-func AVCaptureSessionPresetiFrame960x540() uintptr {
+func AVCaptureSessionPresetiFrame960x540() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCaptureSessionPresetiFrame960x540")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVCaptureSessionRuntimeErrorNotification @abstract Posted when an unexpected error occurs while an AVCaptureSession instance is running. @discussion The notification object is the AVCaptureSession instance that encountered a runtime error. The userInfo dictionary contains an NSError for the key AVCaptureSessionErrorKey.
-func AVCaptureSessionRuntimeErrorNotification() uintptr {
+func AVCaptureSessionRuntimeErrorNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCaptureSessionRuntimeErrorNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVCaptureSessionWasInterruptedNotification @abstract Posted when an instance of AVCaptureSession becomes interrupted. @discussion Clients may observe the AVCaptureSessionWasInterruptedNotification to know when an instance of AVCaptureSession has been interrupted, for example, by an incoming phone call, or alarm, or another application taking control of needed hardware resources. When appropriate, the AVCaptureSession instance will stop running automatically in response to an interruption. Beginning in iOS 9.0, the AVCaptureSessionWasInterruptedNotification userInfo dictionary contains an AVCaptureSessionInterruptionReasonKey indicating the reason for the interruption.
-func AVCaptureSessionWasInterruptedNotification() uintptr {
+func AVCaptureSessionWasInterruptedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCaptureSessionWasInterruptedNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Specifies the versions of the content protection protocol supported by the application as an NSArray of one or more NSNumber objects.
@@ -1041,39 +1646,81 @@ func AVContentKeySystemFairPlayStreaming() *foundation.NSString {
 }
 
 // The participant's audio session was interrupted.
-func AVCoordinatedPlaybackSuspensionReasonAudioSessionInterrupted() uintptr {
+func AVCoordinatedPlaybackSuspensionReasonAudioSessionInterrupted() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCoordinatedPlaybackSuspensionReasonAudioSessionInterrupted")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The participant cannot participate in coordinated playback.
-func AVCoordinatedPlaybackSuspensionReasonCoordinatedPlaybackNotPossible() uintptr {
+func AVCoordinatedPlaybackSuspensionReasonCoordinatedPlaybackNotPossible() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCoordinatedPlaybackSuspensionReasonCoordinatedPlaybackNotPossible")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The participant is presented with interstitial content instead of the main player.
-func AVCoordinatedPlaybackSuspensionReasonPlayingInterstitial() uintptr {
+func AVCoordinatedPlaybackSuspensionReasonPlayingInterstitial() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCoordinatedPlaybackSuspensionReasonPlayingInterstitial")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The player is buffering data after a stall.
-func AVCoordinatedPlaybackSuspensionReasonStallRecovery() uintptr {
+func AVCoordinatedPlaybackSuspensionReasonStallRecovery() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCoordinatedPlaybackSuspensionReasonStallRecovery")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The participant's playback object is in a state that requires manual intervention by the user to resume playback.
-func AVCoordinatedPlaybackSuspensionReasonUserActionRequired() uintptr {
+func AVCoordinatedPlaybackSuspensionReasonUserActionRequired() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCoordinatedPlaybackSuspensionReasonUserActionRequired")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The participant is actively changing current time.
-func AVCoordinatedPlaybackSuspensionReasonUserIsChangingCurrentTime() uintptr {
+func AVCoordinatedPlaybackSuspensionReasonUserIsChangingCurrentTime() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVCoordinatedPlaybackSuspensionReasonUserIsChangingCurrentTime")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant					AVCoreAnimationBeginTimeAtZero @discussion				Use this constant to set the CoreAnimation's animation beginTime property to be time 0. The constant is a small, non-zero, positive value which avoids CoreAnimation from replacing 0.0 with CACurrentMediaTime().
@@ -1207,6 +1854,58 @@ func AVErrorRecordingSuccessfullyFinishedKey() *foundation.NSString {
 
 func AVErrorTimeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVErrorTimeKey")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
+// @constant AVExternalStorageDeviceReasonNotRecommendedForCaptureUseEncrypted @abstract Indicates that the storage device is not recommended for capture as it is encrypted.
+func AVExternalStorageDeviceReasonNotRecommendedForCaptureUseEncrypted() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_avfoundationLib, "AVExternalStorageDeviceReasonNotRecommendedForCaptureUseEncrypted")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
+// @constant AVExternalStorageDeviceReasonNotRecommendedForCaptureUseSlowWritingSpeed @abstract Indicates that the storage device is not recommended for capture as it doesn't support the recommended writing speed.
+func AVExternalStorageDeviceReasonNotRecommendedForCaptureUseSlowWritingSpeed() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_avfoundationLib, "AVExternalStorageDeviceReasonNotRecommendedForCaptureUseSlowWritingSpeed")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
+// @constant AVExternalStorageDeviceReasonNotRecommendedForCaptureUseUnknownWritingSpeed @abstract Indicates that the storage device is not recommended for capture as its writing speed is unknown.
+func AVExternalStorageDeviceReasonNotRecommendedForCaptureUseUnknownWritingSpeed() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_avfoundationLib, "AVExternalStorageDeviceReasonNotRecommendedForCaptureUseUnknownWritingSpeed")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
+// @constant AVExternalStorageDeviceReasonNotRecommendedForCaptureUseUnsupportedFileSystem @abstract Indicates that the storage device is not recommended for capture as it is not a supported file system.
+func AVExternalStorageDeviceReasonNotRecommendedForCaptureUseUnsupportedFileSystem() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_avfoundationLib, "AVExternalStorageDeviceReasonNotRecommendedForCaptureUseUnsupportedFileSystem")
 	if ptr == 0 {
 		return nil
 	}
@@ -1593,41 +2292,83 @@ func AVFoundationErrorDomain() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
-// @constant       AVFragmentedMovieContainsMovieFragmentsDidChangeNotification @abstract       Posted after the value of @"containsMovieFragments" has already been loaded and the AVFragmentedMovie is added to an AVFragmentedMovieMinder, either when 1) movie fragments are detected in the movie file on disk after it had previously contained none or when 2) no movie fragments are detected in the movie file on disk after it had previously contained one or more.
-func AVFragmentedMovieContainsMovieFragmentsDidChangeNotification() uintptr {
+// Posted after the value of @"containsMovieFragments" has already been loaded and the AVFragmentedMovie is added to an AVFragmentedMovieMinder, either when 1) movie fragments are detected in the movie file on disk after it had previously contained none or when 2) no movie fragments are detected in the movie file on disk after it had previously contained one or more.
+func AVFragmentedMovieContainsMovieFragmentsDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVFragmentedMovieContainsMovieFragmentsDidChangeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-// @constant       AVFragmentedMovieDurationDidChangeNotification @abstract       Posted when the duration of an AVFragmentedMovie changes while it's being minded by an AVFragmentedMovieMinder, but only for changes that occur after the status of the value of @"duration" has reached AVKeyValueStatusLoaded.
-func AVFragmentedMovieDurationDidChangeNotification() uintptr {
+// Posted when the duration of an AVFragmentedMovie changes while it's being minded by an AVFragmentedMovieMinder, but only for changes that occur after the status of the value of @"duration" has reached AVKeyValueStatusLoaded.
+func AVFragmentedMovieDurationDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVFragmentedMovieDurationDidChangeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant       AVFragmentedMovieTrackSegmentsDidChangeNotification @abstract       Posted when the array of segments of an AVFragmentedMovieTrack changes while the associated instance of AVFragmentedMovie is being minded by an AVFragmentedMovieMinder, but only for changes that occur after the status of the value of @"segments" has reached AVKeyValueStatusLoaded.
-func AVFragmentedMovieTrackSegmentsDidChangeNotification() uintptr {
+func AVFragmentedMovieTrackSegmentsDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVFragmentedMovieTrackSegmentsDidChangeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant       AVFragmentedMovieTrackTimeRangeDidChangeNotification @abstract       Posted when the timeRange of an AVFragmentedMovieTrack changes while the associated instance of AVFragmentedMovie is being minded by an AVFragmentedMovieMinder, but only for changes that occur after the status of the value of @"timeRange" has reached AVKeyValueStatusLoaded.
-func AVFragmentedMovieTrackTimeRangeDidChangeNotification() uintptr {
+func AVFragmentedMovieTrackTimeRangeDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVFragmentedMovieTrackTimeRangeDidChangeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant       AVFragmentedMovieTrackTotalSampleDataLengthDidChangeNotification @discussion     This notification name has been deprecated. Use either AVFragmentedMovieTrackTimeRangeDidChangeNotification or AVFragmentedMovieTrackSegmentsDidChangeNotification instead; in either case, you can assume that timing changes to fragmented tracks result in changes to the total length of the sample data used by the track.
 // Deprecated: Upon receipt of either AVFragmentedMovieTrackTimeRangeDidChangeNotification or AVFragmentedMovieTrackSegmentsDidChangeNotification, you can assume that the sender's totalSampleDataLength has changed.
-func AVFragmentedMovieTrackTotalSampleDataLengthDidChangeNotification() uintptr {
+func AVFragmentedMovieTrackTotalSampleDataLengthDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVFragmentedMovieTrackTotalSampleDataLengthDidChangeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-// @constant       AVFragmentedMovieWasDefragmentedNotification @abstract       Posted when the movie file on disk is defragmented while an AVFragmentedMovie is being minded by an AVFragmentedMovieMinder, but only if the defragmentation occurs after the status of the value of @"canContainMovieFragments" has reached AVKeyValueStatusLoaded.
-func AVFragmentedMovieWasDefragmentedNotification() uintptr {
+// Posted when the movie file on disk is defragmented while an AVFragmentedMovie is being minded by an AVFragmentedMovieMinder, but only if the defragmentation occurs after the status of the value of @"canContainMovieFragments" has reached AVKeyValueStatusLoaded.
+func AVFragmentedMovieWasDefragmentedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVFragmentedMovieWasDefragmentedNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant		AVLayerVideoGravityResize @abstract		Stretch to fill layer bounds. @discussion     AVLayerVideoGravityResize may be used when setting the videoGravity property of an AVPlayerLayer or AVCaptureVideoPreviewLayer instance.
@@ -6009,7 +6750,7 @@ func AVMetadataIdentifierQuickTimeMetadataEncodedBy() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
-// A value of type kCMMetadataBaseDataType_UInt8 indicating whether this movie is intended to be played back at the full frame rate (1), or at a slow motion rate (0). Historically, some apps have played movies recorded at frame rates of 120fps or higher in slow motion by default. With the introduction of this metadata, apps that record high-frame-rate movies may add this movie-level metadata to indicate whether the movie is intended to be played at the full frame rate (1) or at a slow motion rate (0). Apps that play movies may use this metadata, when present, to guide their behavior.
+// A value of type kCMMetadataBaseDataType_UInt8 indicating whether this movie is intended to be played back at the full frame rate (1), or at a slow motion rate (0). Historically, some apps have played movies recorded at high frame rates in slow motion by default. For example, QuickTime Player and Photos will by default play video with frame rates of 85 fps or higher in slow motion. With the introduction of this metadata, apps that record high-frame-rate movies may add this movie-level metadata to indicate whether the movie is intended to be played at the full frame rate (1) or at a slow motion rate (0). If this metadata is present, apps that play movies (e.g. QuickTime Player and Photos) may use it to guide their behavior.
 func AVMetadataIdentifierQuickTimeMetadataFullFrameRatePlaybackIntent() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataIdentifierQuickTimeMetadataFullFrameRatePlaybackIntent")
 	if ptr == 0 {
@@ -7583,21 +8324,55 @@ func AVMetadataObjectTypeAztecCode() *foundation.NSString {
 }
 
 // @constant AVMetadataObjectTypeCatBody @abstract An identifier for an instance of AVMetadataCatBodyObject. @discussion AVMetadataCatBodyObject objects return this constant as their type.
-func AVMetadataObjectTypeCatBody() uintptr {
+func AVMetadataObjectTypeCatBody() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataObjectTypeCatBody")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // An identifier for an instance of a cat head object. “AVMetadataCatHeadObject“ objects return this constant as their type.
-func AVMetadataObjectTypeCatHead() uintptr {
+func AVMetadataObjectTypeCatHead() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataObjectTypeCatHead")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
+// A constant that identifies Cinematic video metadata for post-capture Cinematic video editing. This metadata object type is only available when the source “AVCaptureDevice“'s `activeFormat` has “AVCaptureDeviceFormat/isCinematicVideoMetadataCaptureSupported“ equal to `true`. It can therefore appear and disappear from “AVCaptureMetadataOutput/availableMetadataObjectTypes“ as the active format changes; observers should not assume it is statically available for the lifetime of the session.
+func AVMetadataObjectTypeCinematicVideoMetadata() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataObjectTypeCinematicVideoMetadata")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVMetadataObjectTypeCodabarCode @abstract An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeCodabarCode. @discussion AVMetadataMachineReadableCodeObject objects generated from Codabar codes return this constant as their type.
-func AVMetadataObjectTypeCodabarCode() uintptr {
+func AVMetadataObjectTypeCodabarCode() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataObjectTypeCodabarCode")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVMetadataObjectTypeCode128Code @abstract An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeCode128Code. @discussion AVMetadataMachineReadableCodeObject objects generated from Code 128 codes return this constant as their type.
@@ -7666,15 +8441,29 @@ func AVMetadataObjectTypeDataMatrixCode() *foundation.NSString {
 }
 
 // @constant AVMetadataObjectTypeDogBody @abstract An identifier for an instance of AVMetadataDogBodyObject. @discussion AVMetadataDogBodyObject objects return this constant as their type.
-func AVMetadataObjectTypeDogBody() uintptr {
+func AVMetadataObjectTypeDogBody() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataObjectTypeDogBody")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // An identifier for an instance of a dog head object. “AVMetadataDogHeadObject“ objects return this constant as their type.
-func AVMetadataObjectTypeDogHead() uintptr {
+func AVMetadataObjectTypeDogHead() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataObjectTypeDogHead")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVMetadataObjectTypeEAN13Code @abstract An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeEAN13Code. @discussion AVMetadataMachineReadableCodeObject objects generated from EAN-13 (including UPC-A) codes return this constant as their type.
@@ -7716,34 +8505,82 @@ func AVMetadataObjectTypeFace() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
+// An identifier for an instance of “AVMetadataFocusTrackedObject“. This metadata object type is only available when the source “AVCaptureDevice“'s `activeFormat` has “AVCaptureDeviceFormat/isContinuousAutoFocusTrackingSupported“ equal to `true`. It can therefore appear and disappear from “AVCaptureMetadataOutput/availableMetadataObjectTypes“ as the active format changes; observers should not assume it is statically available for the lifetime of the session.
+func AVMetadataObjectTypeFocusTrackedObject() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataObjectTypeFocusTrackedObject")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
 // @constant AVMetadataObjectTypeGS1DataBarCode @abstract An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeGS1DataBarCode. @discussion AVMetadataMachineReadableCodeObject objects generated from GS1DataBar codes return this constant as their type.
-func AVMetadataObjectTypeGS1DataBarCode() uintptr {
+func AVMetadataObjectTypeGS1DataBarCode() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataObjectTypeGS1DataBarCode")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVMetadataObjectTypeGS1DataBarExpandedCode @abstract An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeGS1DataBarExpandedCode. @discussion AVMetadataMachineReadableCodeObject objects generated from GS1DataBarExpanded codes return this constant as their type.
-func AVMetadataObjectTypeGS1DataBarExpandedCode() uintptr {
+func AVMetadataObjectTypeGS1DataBarExpandedCode() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataObjectTypeGS1DataBarExpandedCode")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVMetadataObjectTypeGS1DataBarLimitedCode @abstract An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeGS1DataBarLimitedCode. @discussion AVMetadataMachineReadableCodeObject objects generated from GS1DataBarLimited codes return this constant as their type.
-func AVMetadataObjectTypeGS1DataBarLimitedCode() uintptr {
+func AVMetadataObjectTypeGS1DataBarLimitedCode() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataObjectTypeGS1DataBarLimitedCode")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVMetadataObjectTypeHumanBody @abstract An identifier for an instance of AVMetadataHumanBodyObject. @discussion AVMetadataHumanBodyObject objects return this constant as their type.
-func AVMetadataObjectTypeHumanBody() uintptr {
+func AVMetadataObjectTypeHumanBody() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataObjectTypeHumanBody")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVMetadataObjectTypeHumanFullBody @abstract An identifier for an instance of AVMetadataHumanFullBodyObject. @discussion AVMetadataHumanFullBodyObject objects return this constant as their type.
-func AVMetadataObjectTypeHumanFullBody() uintptr {
+func AVMetadataObjectTypeHumanFullBody() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataObjectTypeHumanFullBody")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVMetadataObjectTypeITF14Code @abstract An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeITF14Code. @discussion AVMetadataMachineReadableCodeObject objects generated from ITF14 codes return this constant as their type.
@@ -7773,15 +8610,29 @@ func AVMetadataObjectTypeInterleaved2of5Code() *foundation.NSString {
 }
 
 // @constant AVMetadataObjectTypeMicroPDF417Code @abstract An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeMicroPDF417Code. @discussion AVMetadataMachineReadableCodeObject objects generated from MicroPDF417 codes return this constant as their type.
-func AVMetadataObjectTypeMicroPDF417Code() uintptr {
+func AVMetadataObjectTypeMicroPDF417Code() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataObjectTypeMicroPDF417Code")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVMetadataObjectTypeMicroQRCode @abstract An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeMicroQRCode. @discussion AVMetadataMachineReadableCodeObject objects generated from MicroQR codes return this constant as their type.
-func AVMetadataObjectTypeMicroQRCode() uintptr {
+func AVMetadataObjectTypeMicroQRCode() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataObjectTypeMicroQRCode")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVMetadataObjectTypePDF417Code @abstract An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypePDF417Code. @discussion AVMetadataMachineReadableCodeObject objects generated from PDF417 codes return this constant as their type.
@@ -7811,9 +8662,16 @@ func AVMetadataObjectTypeQRCode() *foundation.NSString {
 }
 
 // @constant AVMetadataObjectTypeSalientObject @abstract An identifier for an instance of AVMetadataSalientObject. @discussion AVMetadataSalientObject objects return this constant as their type.
-func AVMetadataObjectTypeSalientObject() uintptr {
+func AVMetadataObjectTypeSalientObject() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMetadataObjectTypeSalientObject")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVMetadataObjectTypeUPCECode @abstract An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeUPCECode. @discussion AVMetadataMachineReadableCodeObject objects generated from UPC-E codes return this constant as their type.
@@ -9532,61 +10390,138 @@ func AVMetadataiTunesMetadataKeyUserGenre() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
-// @constant		AVMovieReferenceRestrictionsKey @abstract Indicates the restrictions used by the movie when resolving references to external media data. The value of this key is an NSNumber wrapping an AVAssetReferenceRestrictions enum value or the logical combination of multiple such values. See AVAsset.h for the declaration of the AVAssetReferenceRestrictions enum. @discussion Some movies can contain references to media data stored outside the movie's container, for example in another file. This key can be used to specify a policy to use when these references are encountered. If a movie contains one or more references of a type that is forbidden by the reference restrictions, loading of movie properties will fail. In addition, such a movie cannot be used with other AVFoundation modules, such as AVPlayerItem or AVAssetExportSession.
-func AVMovieReferenceRestrictionsKey() uintptr {
+// Indicates the restrictions used by the movie when resolving references to external media data. The value of this key is an NSNumber wrapping an AVAssetReferenceRestrictions enum value or the logical combination of multiple such values. See AVAsset.h for the declaration of the AVAssetReferenceRestrictions enum. Some movies can contain references to media data stored outside the movie's container, for example in another file. This key can be used to specify a policy to use when these references are encountered. If a movie contains one or more references of a type that is forbidden by the reference restrictions, loading of movie properties will fail. In addition, such a movie cannot be used with other AVFoundation modules, such as AVPlayerItem or AVAssetExportSession.
+func AVMovieReferenceRestrictionsKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMovieReferenceRestrictionsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-// @constant		AVMovieShouldSupportAliasDataReferencesKey @abstract		Indicates whether alias data references in the movie should be parsed and resolved. @discussion Default is NO. Although the majority of QuickTime movie files contain all of the media data they require, some contain references to media stored in other files. While AVFoundation and CoreMedia typically employ a URL reference for this purpose, older implementations such as QuickTime 7 have commonly employed a Macintosh alias instead, as documented in the QuickTime File Format specification. If your application must work with legacy QuickTime movie files containing alias-based references to media data stored in other files, the use of this AVMovie initialization option is appropriate. AVMovie and AVMutableMovie do not create movies using alias data references to external media files. If you provide a value for AVMovieReferenceRestrictionsKey, restrictions will be observed for resolved alias references just as they are for URL references. For more details about alias resolution, consult documentation of the bookmark-related interfaces of NSURL.
-func AVMovieShouldSupportAliasDataReferencesKey() uintptr {
+// Indicates whether alias data references in the movie should be parsed and resolved. Default is NO. Although the majority of QuickTime movie files contain all of the media data they require, some contain references to media stored in other files. While AVFoundation and CoreMedia typically employ a URL reference for this purpose, older implementations such as QuickTime 7 have commonly employed a Macintosh alias instead, as documented in the QuickTime File Format specification. If your application must work with legacy QuickTime movie files containing alias-based references to media data stored in other files, the use of this AVMovie initialization option is appropriate. AVMovie and AVMutableMovie do not create movies using alias data references to external media files. If you provide a value for AVMovieReferenceRestrictionsKey, restrictions will be observed for resolved alias references just as they are for URL references. For more details about alias resolution, consult documentation of the bookmark-related interfaces of NSURL.
+func AVMovieShouldSupportAliasDataReferencesKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVMovieShouldSupportAliasDataReferencesKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVOutputSettingsPreset1280x720() uintptr {
+func AVOutputSettingsPreset1280x720() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVOutputSettingsPreset1280x720")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVOutputSettingsPreset1920x1080() uintptr {
+func AVOutputSettingsPreset1920x1080() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVOutputSettingsPreset1920x1080")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVOutputSettingsPreset3840x2160() uintptr {
+func AVOutputSettingsPreset3840x2160() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVOutputSettingsPreset3840x2160")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVOutputSettingsPreset640x480() uintptr {
+func AVOutputSettingsPreset640x480() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVOutputSettingsPreset640x480")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVOutputSettingsPreset960x540() uintptr {
+func AVOutputSettingsPreset960x540() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVOutputSettingsPreset960x540")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVOutputSettingsPresetHEVC1920x1080() uintptr {
+func AVOutputSettingsPresetHEVC1920x1080() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVOutputSettingsPresetHEVC1920x1080")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVOutputSettingsPresetHEVC1920x1080WithAlpha() uintptr {
+func AVOutputSettingsPresetHEVC1920x1080WithAlpha() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVOutputSettingsPresetHEVC1920x1080WithAlpha")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVOutputSettingsPresetHEVC3840x2160() uintptr {
+func AVOutputSettingsPresetHEVC3840x2160() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVOutputSettingsPresetHEVC3840x2160")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVOutputSettingsPresetHEVC3840x2160WithAlpha() uintptr {
+func AVOutputSettingsPresetHEVC3840x2160WithAlpha() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVOutputSettingsPresetHEVC3840x2160WithAlpha")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVOutputSettingsPresetHEVC4320x2160() *foundation.NSString {
@@ -9613,9 +10548,16 @@ func AVOutputSettingsPresetHEVC7680x4320() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
-func AVOutputSettingsPresetMVHEVC1440x1440() uintptr {
+func AVOutputSettingsPresetMVHEVC1440x1440() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVOutputSettingsPresetMVHEVC1440x1440")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVOutputSettingsPresetMVHEVC4320x4320() *foundation.NSString {
@@ -9642,21 +10584,42 @@ func AVOutputSettingsPresetMVHEVC7680x7680() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
-func AVOutputSettingsPresetMVHEVC960x960() uintptr {
+func AVOutputSettingsPresetMVHEVC960x960() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVOutputSettingsPresetMVHEVC960x960")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Posted by the playback coordinator when its otherParticipants property changes.
-func AVPlaybackCoordinatorOtherParticipantsDidChangeNotification() uintptr {
+func AVPlaybackCoordinatorOtherParticipantsDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlaybackCoordinatorOtherParticipantsDidChangeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Posted by the playback coordinator when its suspensionReasons property changes.
-func AVPlaybackCoordinatorSuspensionReasonsDidChangeNotification() uintptr {
+func AVPlaybackCoordinatorSuspensionReasonsDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlaybackCoordinatorSuspensionReasonsDidChangeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVPlayerEligibleForHDRPlaybackDidChangeNotification() *foundation.NSString {
@@ -10108,15 +11071,29 @@ func AVPlayerItemFailedToPlayToEndTimeNotification() *foundation.NSString {
 }
 
 // @constant		AVPlayerItemLegibleOutputTextStylingResolutionDefault @abstract		Specify this level of text styling resolution to receive attributed strings from an AVPlayerItemLegibleOutput that include the same level of styling information that AVFoundation would use itself to render text within an AVPlayerLayer. The text styling will accommodate user-level Media Accessibility settings.
-func AVPlayerItemLegibleOutputTextStylingResolutionDefault() uintptr {
+func AVPlayerItemLegibleOutputTextStylingResolutionDefault() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerItemLegibleOutputTextStylingResolutionDefault")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant		AVPlayerItemLegibleOutputTextStylingResolutionSourceAndRulesOnly @abstract		Specify this level of text styling resolution to receive only the styling present in the source media and the styling provided via AVPlayerItem.textStyleRules. @discussion This level of resolution excludes styling provided by the user-level Media Accessibility settings. You would typically use it if you wish to override the styling specified in source media. If you do this, you are strongly encouraged to allow your custom styling in turn to be overriden by user preferences for text styling that are available as Media Accessibility settings.
-func AVPlayerItemLegibleOutputTextStylingResolutionSourceAndRulesOnly() uintptr {
+func AVPlayerItemLegibleOutputTextStylingResolutionSourceAndRulesOnly() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerItemLegibleOutputTextStylingResolutionSourceAndRulesOnly")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVPlayerItemMediaSelectionDidChangeNotification() *foundation.NSString {
@@ -10192,15 +11169,29 @@ func AVPlayerItemTimeJumpedNotification() *foundation.NSString {
 }
 
 // Indicates a time jump was caused by another participant connected through AVPlayerPlaybackCoordinator. Informs the receiver of an AVPlayerItemTimeJumpedNotification that a time jump originated from another AVCoordinatedPlaybackParticipant connected through AVPlayerPlaybackCoordinator. This can be used to inform UI showing why the current time changed. The type of the value for this key is an AVCoordinatedPlaybackParticipant, which is part of the AVPlayerPlaybackCoordinator.otherParticipants array.
-func AVPlayerItemTimeJumpedOriginatingParticipantKey() uintptr {
+func AVPlayerItemTimeJumpedOriginatingParticipantKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerItemTimeJumpedOriginatingParticipantKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant		AVPlayerItemTrackVideoFieldModeDeinterlaceFields @abstract		Use with videoFieldMode property to request deinterlacing of video fields.
-func AVPlayerItemTrackVideoFieldModeDeinterlaceFields() uintptr {
+func AVPlayerItemTrackVideoFieldModeDeinterlaceFields() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerItemTrackVideoFieldModeDeinterlaceFields")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Indicates a player rate change. Posted by the player when its rate changes. Similar to KVO of AVPlayer.rate, but providing additional information about the rate change in the userInfo. See keys below.
@@ -10217,27 +11208,58 @@ func AVPlayerRateDidChangeNotification() *foundation.NSString {
 }
 
 // Indicates a rate change was caused by another participant connected through AVPlayerPlaybackCoordinator. Informs the receiver of an AVPlayerRateDidChangeNotification about a rate change originated from another AVCoordinatedPlaybackParticipant connected through AVPlayerPlaybackCoordinator. This can be used to inform UI showing why the playback rate changed. The type of the value for this key is an AVCoordinatedPlaybackParticipant, which is part of the AVPlayerPlaybackCoordinator.otherParticipants array.
-func AVPlayerRateDidChangeOriginatingParticipantKey() uintptr {
+func AVPlayerRateDidChangeOriginatingParticipantKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerRateDidChangeOriginatingParticipantKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVPlayerRateDidChangeReasonAppBackgrounded() uintptr {
+// An app transitions to the background.
+func AVPlayerRateDidChangeReasonAppBackgrounded() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerRateDidChangeReasonAppBackgrounded")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVPlayerRateDidChangeReasonAudioSessionInterrupted() uintptr {
+// The system interrupts the app's audio session.
+func AVPlayerRateDidChangeReasonAudioSessionInterrupted() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerRateDidChangeReasonAudioSessionInterrupted")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Indicates a reason for the rate change notification. The value corresponding to this key is of type AVPlayerRateDidChangeReason.
-func AVPlayerRateDidChangeReasonKey() uintptr {
+func AVPlayerRateDidChangeReasonKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerRateDidChangeReasonKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
+// Indicates that the player automatically switched the playback rate from > 1.0 back to 1.0 when the playhead reached the live edge during live streaming.
 func AVPlayerRateDidChangeReasonPlayheadReachedLiveEdge() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerRateDidChangeReasonPlayheadReachedLiveEdge")
 	if ptr == 0 {
@@ -10250,6 +11272,7 @@ func AVPlayerRateDidChangeReasonPlayheadReachedLiveEdge() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
+// Indicates that the player automatically switched rate to 1.0 when the reverse playback reached start of seekable range. only for live.
 func AVPlayerRateDidChangeReasonReversePlaybackReachedStartOfSeekableRange() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerRateDidChangeReasonReversePlaybackReachedStartOfSeekableRange")
 	if ptr == 0 {
@@ -10262,14 +11285,30 @@ func AVPlayerRateDidChangeReasonReversePlaybackReachedStartOfSeekableRange() *fo
 	return foundation.NSStringFromID(id)
 }
 
-func AVPlayerRateDidChangeReasonSetRateCalled() uintptr {
+// An app makes a call to set the player's rate.
+func AVPlayerRateDidChangeReasonSetRateCalled() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerRateDidChangeReasonSetRateCalled")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVPlayerRateDidChangeReasonSetRateFailed() uintptr {
+// An attempt to change the player's rate fails.
+func AVPlayerRateDidChangeReasonSetRateFailed() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerRateDidChangeReasonSetRateFailed")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Indicates that the player is waiting for the completion of an interstitial event. The player is waiting for playback because an interstitial event is currently in progress. Interstitial events can be monitored via use of an AVPlayerInterstitialEventMonitor.
@@ -10286,12 +11325,19 @@ func AVPlayerWaitingDuringInterstitialEventReason() *foundation.NSString {
 }
 
 // Indicates that the player is waiting for another participant connected through its AVPlayerPlaybackCoordinator. The player is waiting for playback because its connected AVPlayerPlaybackCoordinator requires information from one of the other participants before playback can start.
-func AVPlayerWaitingForCoordinatedPlaybackReason() uintptr {
+func AVPlayerWaitingForCoordinatedPlaybackReason() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerWaitingForCoordinatedPlaybackReason")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-// Indicates that the player is waiting for appropriate playback buffer conditions before starting playback The player is waiting for playback because automaticallyWaitToMinimizeStalling is YES and playback at the specified rate would likely cause the playback buffer to become empty before playback completes. Playback will resume when 1) playback at the specified rate will likely complete without a stall or 2) the playback buffer becomes full, meaning no forther buffering of media data is possible. When the value of automaticallyWaitsToMinimizeStalling is NO, timeControlStatus cannot become AVPlayerTimeControlStatusWaitingToPlayAtSpecifiedRate for this reason.
+// Indicates that the player is waiting for appropriate playback buffer conditions before starting playback The player is waiting for playback because automaticallyWaitsToMinimizeStalling is YES and playback at the specified rate would likely cause the playback buffer to become empty before playback completes. Playback will resume when 1) playback at the specified rate will likely complete without a stall or 2) the playback buffer becomes full, meaning no forther buffering of media data is possible. When the value of automaticallyWaitsToMinimizeStalling is NO, timeControlStatus cannot become AVPlayerTimeControlStatusWaitingToPlayAtSpecifiedRate for this reason.
 func AVPlayerWaitingToMinimizeStallsReason() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerWaitingToMinimizeStallsReason")
 	if ptr == 0 {
@@ -10304,7 +11350,7 @@ func AVPlayerWaitingToMinimizeStallsReason() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
-// Indicates that the player is monitoring the playback buffer fill rate to determine if playback is likely to complete without interruptions. The player is waiting for playback because automaticallyWaitToMinimizeStalling is YES and it has not yet determined if starting playback at the specified rate would likely cause the buffer to become empty. When the brief initial monitoring period is over, either playback will begin or the value of reasonForWaitingToPlayAtSpecifiedRate will switch to AVPlayerWaitingToMinimizeStallsReason. Recommended practice is not to show UI indicating the waiting state to the user while the value of reasonForWaitingToPlayAtSpecifiedRate is AVPlayerWaitingWhileEvaluatingBufferingRateReason.
+// Indicates that the player is monitoring the playback buffer fill rate to determine if playback is likely to complete without interruptions. The player is waiting for playback because automaticallyWaitsToMinimizeStalling is YES and it has not yet determined if starting playback at the specified rate would likely cause the buffer to become empty. When the brief initial monitoring period is over, either playback will begin or the value of reasonForWaitingToPlayAtSpecifiedRate will switch to AVPlayerWaitingToMinimizeStallsReason. Recommended practice is not to show UI indicating the waiting state to the user while the value of reasonForWaitingToPlayAtSpecifiedRate is AVPlayerWaitingWhileEvaluatingBufferingRateReason.
 func AVPlayerWaitingWhileEvaluatingBufferingRateReason() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerWaitingWhileEvaluatingBufferingRateReason")
 	if ptr == 0 {
@@ -10317,7 +11363,7 @@ func AVPlayerWaitingWhileEvaluatingBufferingRateReason() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
-// Indicates that the AVPlayer is waiting because its currentItem is nil The player is waiting for playback because automaticallyWaitToMinimizeStalling is YES and the value of currentItem is nil. When an item becomes available, either because of a call to -replaceCurrentItemWithPlayerItem: or -insertItem: afterItem:, playback will begin or the value of reasonForWaitingToPlay will change.
+// Indicates that the AVPlayer is waiting because its currentItem is nil The player is waiting for playback because automaticallyWaitsToMinimizeStalling is YES and the value of currentItem is nil. When an item becomes available, either because of a call to -replaceCurrentItemWithPlayerItem: or -insertItem: afterItem:, playback will begin or the value of reasonForWaitingToPlay will change.
 func AVPlayerWaitingWithNoItemToPlayReason() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerWaitingWithNoItemToPlayReason")
 	if ptr == 0 {
@@ -10330,13 +11376,59 @@ func AVPlayerWaitingWithNoItemToPlayReason() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
-// @constant	AVRouteDetectorMultipleRoutesDetectedDidChangeNotification @abstract	Posted when the value of multipleRoutesDetected changes.
-func AVRouteDetectorMultipleRoutesDetectedDidChangeNotification() uintptr {
-	ptr, _ := purego.Dlsym(_avfoundationLib, "AVRouteDetectorMultipleRoutesDetectedDidChangeNotification")
-	return ptr
+// Pro Video Storage is being created or resized.
+func AVProVideoStorageBusyReasonAdjustingCapacity() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_avfoundationLib, "AVProVideoStorageBusyReasonAdjustingCapacity")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-// @constant		AVSampleBufferAudioRendererFlushTimeKey @abstract		The presentation timestamp of the first enqueued sample that was flushed. @discussion The value of this key is an NSValue wrapping a CMTime.
+// A capture to Pro Video Storage is in progress.
+func AVProVideoStorageBusyReasonCapturing() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_avfoundationLib, "AVProVideoStorageBusyReasonCapturing")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
+// Pro Video Storage capacity is being replenished.
+func AVProVideoStorageBusyReasonReplenishing() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_avfoundationLib, "AVProVideoStorageBusyReasonReplenishing")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
+// @constant	AVRouteDetectorMultipleRoutesDetectedDidChangeNotification @abstract	Posted when the value of multipleRoutesDetected changes.
+func AVRouteDetectorMultipleRoutesDetectedDidChangeNotification() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_avfoundationLib, "AVRouteDetectorMultipleRoutesDetectedDidChangeNotification")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
+// The presentation timestamp of the first enqueued sample that was flushed. The value of this key is an NSValue wrapping a CMTime.
 func AVSampleBufferAudioRendererFlushTimeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVSampleBufferAudioRendererFlushTimeKey")
 	if ptr == 0 {
@@ -10349,7 +11441,7 @@ func AVSampleBufferAudioRendererFlushTimeKey() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
-// @constant		AVSampleBufferAudioRendererOutputConfigurationDidChangeNotification @abstract		A notification that indicates the hardware configuration does not match the enqueued data format. @discussion The output configuration of the playback hardware might change during the playback session if other clients play content with different format. In such cases, if the media content format does not match the hardware configuration it would produce suboptimal rendering of the enqueued media data. When the framework detects such mismatch it will issue this notification, so the client can flush the renderer and re-enqueue the sample buffers from the current media playhead, which will configure the hardware based on the format of newly enqueued sample buffers.
+// A notification that indicates the hardware configuration does not match the enqueued data format. The output configuration of the playback hardware might change during the playback session if other clients play content with different format. In such cases, if the media content format does not match the hardware configuration it would produce suboptimal rendering of the enqueued media data. When the framework detects such mismatch it will issue this notification, so the client can flush the renderer and re-enqueue the sample buffers from the current media playhead, which will configure the hardware based on the format of newly enqueued sample buffers.
 func AVSampleBufferAudioRendererOutputConfigurationDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVSampleBufferAudioRendererOutputConfigurationDidChangeNotification")
 	if ptr == 0 {
@@ -10362,7 +11454,7 @@ func AVSampleBufferAudioRendererOutputConfigurationDidChangeNotification() *foun
 	return foundation.NSStringFromID(id)
 }
 
-// @constant		AVSampleBufferAudioRendererWasFlushedAutomaticallyNotification @abstract		A notification that fires whenever the receiver's enqueued media data has been flushed for a reason other than a call to the -flush method. @discussion The renderer may flush enqueued media data when the user routes playback to a new destination.  The renderer may also flush enqueued media data when the playback rate of the attached AVSampleBufferRenderSynchronizer is changed (e.g. 1.0 -> 2.0 or 1.0 -> 0.0 -> 2.0), however no flush will occur for normal pauses (non-zero -> 0.0) and resumes (0.0 -> same non-zero rate as before). When an automatic flush occurs, the attached render synchronizer's timebase will remain running at its current rate.  It is typically best to respond to this notification by enqueueing media data with timestamps starting at the timebase's current time.  To the listener, this will sound similar to muting the audio for a short period of time.  If it is more desirable to ensure that all audio is played than to keep the timeline moving, you may also stop the synchronizer, set the synchronizer's current time to the value of AVSampleBufferAudioRendererFlushTimeKey, start reenqueueing sample buffers with timestamps starting at that time, and restart the synchronizer.  To the listener, this will sound similar to pausing the audio for a short period of time. This notification is delivered on an arbitrary thread.  If sample buffers are being enqueued with the renderer concurrently with the receipt of this notification, it is possible that one or more sample buffers will remain enqueued in the renderer.  This is generally undesirable, because the sample buffers that remain will likely have timestamps far ahead of the timebase's current time and so won't be rendered for some time.  The best practice is to invoke the -flush method, in a manner that is serialized with enqueueing sample buffers, after receiving this notification and before resuming the enqueueing of sample buffers.
+// A notification that fires whenever the receiver's enqueued media data has been flushed for a reason other than a call to the -flush method. The renderer may flush enqueued media data when the user routes playback to a new destination. The renderer may also flush enqueued media data when the playback rate of the attached AVSampleBufferRenderSynchronizer is changed (e.g. 1.0 -> 2.0 or 1.0 -> 0.0 -> 2.0), however no flush will occur for normal pauses (non-zero -> 0.0) and resumes (0.0 -> same non-zero rate as before). When an automatic flush occurs, the attached render synchronizer's timebase will remain running at its current rate. It is typically best to respond to this notification by enqueueing media data with timestamps starting at the timebase's current time. To the listener, this will sound similar to muting the audio for a short period of time. If it is more desirable to ensure that all audio is played than to keep the timeline moving, you may also stop the synchronizer, set the synchronizer's current time to the value of AVSampleBufferAudioRendererFlushTimeKey, start reenqueueing sample buffers with timestamps starting at that time, and restart the synchronizer. To the listener, this will sound similar to pausing the audio for a short period of time. This notification is delivered on an arbitrary thread. If sample buffers are being enqueued with the renderer concurrently with the receipt of this notification, it is possible that one or more sample buffers will remain enqueued in the renderer. This is generally undesirable, because the sample buffers that remain will likely have timestamps far ahead of the timebase's current time and so won't be rendered for some time. The best practice is to invoke the -flush method, in a manner that is serialized with enqueueing sample buffers, after receiving this notification and before resuming the enqueueing of sample buffers.
 func AVSampleBufferAudioRendererWasFlushedAutomaticallyNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVSampleBufferAudioRendererWasFlushedAutomaticallyNotification")
 	if ptr == 0 {
@@ -10375,14 +11467,28 @@ func AVSampleBufferAudioRendererWasFlushedAutomaticallyNotification() *foundatio
 	return foundation.NSStringFromID(id)
 }
 
-func AVSampleBufferDisplayLayerFailedToDecodeNotification() uintptr {
+func AVSampleBufferDisplayLayerFailedToDecodeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVSampleBufferDisplayLayerFailedToDecodeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVSampleBufferDisplayLayerFailedToDecodeNotificationErrorKey() uintptr {
+func AVSampleBufferDisplayLayerFailedToDecodeNotificationErrorKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVSampleBufferDisplayLayerFailedToDecodeNotificationErrorKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVSampleBufferDisplayLayerOutputObscuredDueToInsufficientExternalProtectionDidChangeNotification() *foundation.NSString {
@@ -10397,14 +11503,28 @@ func AVSampleBufferDisplayLayerOutputObscuredDueToInsufficientExternalProtection
 	return foundation.NSStringFromID(id)
 }
 
-func AVSampleBufferDisplayLayerReadyForDisplayDidChangeNotification() uintptr {
+func AVSampleBufferDisplayLayerReadyForDisplayDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVSampleBufferDisplayLayerReadyForDisplayDidChangeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVSampleBufferDisplayLayerRequiresFlushToResumeDecodingDidChangeNotification() uintptr {
+func AVSampleBufferDisplayLayerRequiresFlushToResumeDecodingDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVSampleBufferDisplayLayerRequiresFlushToResumeDecodingDidChangeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A notification that fires whenever the value of the "rate" property changes. The rate can change as a result of setting the rate property, either by directly setting the property or calling -setRate:time:. The rate can also change at any time, without any action by the client of the render synchronizer. For example, on iOS if the app's playback is interrupted (e.g. by a phone call or another non-mixable app starting playback), the rate will automatically be set to zero. This notification will be sent in all of those cases.
@@ -10420,19 +11540,52 @@ func AVSampleBufferRenderSynchronizerRateDidChangeNotification() *foundation.NSS
 	return foundation.NSStringFromID(id)
 }
 
-func AVSampleBufferVideoRendererDidFailToDecodeNotification() uintptr {
+func AVSampleBufferVideoRendererDidFailToDecodeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVSampleBufferVideoRendererDidFailToDecodeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVSampleBufferVideoRendererDidFailToDecodeNotificationErrorKey() uintptr {
+func AVSampleBufferVideoRendererDidFailToDecodeNotificationErrorKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVSampleBufferVideoRendererDidFailToDecodeNotificationErrorKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVSampleBufferVideoRendererRequiresFlushToResumeDecodingDidChangeNotification() uintptr {
+func AVSampleBufferVideoRendererRequiresFlushToResumeDecodingDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVSampleBufferVideoRendererRequiresFlushToResumeDecodingDidChangeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
+func AVSampleBufferVideoRendererRequiresFlushToResumeDecodingDidChangeNotificationRequiresFlushKey() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_avfoundationLib, "AVSampleBufferVideoRendererRequiresFlushToResumeDecodingDidChangeNotificationRequiresFlushKey")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVSemanticSegmentationMatteTypeGlasses A matting image segmenting all glasses ( e.g. eyeglasses, sunglasses ) from all persons wearing glasses in the visible field-of-view of an image.
@@ -10488,15 +11641,29 @@ func AVSemanticSegmentationMatteTypeTeeth() *foundation.NSString {
 }
 
 // @constant AVSpatialCaptureDiscomfortReasonNotEnoughLight The lighting of the current scene is not bright enough; the playback experience will likely be uncomfortable due to noise differences between the two cameras.
-func AVSpatialCaptureDiscomfortReasonNotEnoughLight() uintptr {
+func AVSpatialCaptureDiscomfortReasonNotEnoughLight() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVSpatialCaptureDiscomfortReasonNotEnoughLight")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVSpatialCaptureDiscomfortReasonSubjectTooClose The focus point of the current scene is too close; the playback experience will likely be uncomfortable due to the subject being closer than the minimum focus distance of one or both of the lenses.
-func AVSpatialCaptureDiscomfortReasonSubjectTooClose() uintptr {
+func AVSpatialCaptureDiscomfortReasonSubjectTooClose() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVSpatialCaptureDiscomfortReasonSubjectTooClose")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A UTI for streaming key delivery content keys The value of this UTI is @"com.apple.streamingkeydelivery.contentkey".
@@ -10721,9 +11888,16 @@ func AVURLAssetPrimarySessionIdentifierKey() *foundation.NSString {
 }
 
 // Indicates the restrictions used by the asset when resolving references to external media data. The value of this key is an NSNumber wrapping an AVAssetReferenceRestrictions enum value or the logical combination of multiple such values. Some assets can contain references to media data stored outside the asset's container file, for example in another file. This key can be used to specify a policy to use when these references are encountered. If an asset contains one or more references of a type that is forbidden by the reference restrictions, loading of asset properties will fail. In addition, such an asset cannot be used with other AVFoundation modules, such as AVPlayerItem or AVAssetExportSession.
-func AVURLAssetReferenceRestrictionsKey() uintptr {
+func AVURLAssetReferenceRestrictionsKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVURLAssetReferenceRestrictionsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Indicates whether additional projected media signaling in the asset should be parsed and resolved as format description extensions. Default is NO.
@@ -10740,9 +11914,16 @@ func AVURLAssetShouldParseExternalSphericalTagsKey() *foundation.NSString {
 }
 
 // Indicates whether alias data references in the asset should be parsed and resolved. Default is NO. Although the majority of QuickTime movie files contain all of the media data they require, some contain references to media stored in other files. While AVFoundation and CoreMedia typically employ a URL reference for this purpose, older implementations such as QuickTime 7 have commonly employed a Macintosh alias instead, as documented in the QuickTime File Format specification. If your application must work with legacy QuickTime movie files containing alias-based references to media data stored in other files, the use of this AVURLAsset initialization option is appropriate. If you provide a value for AVURLAssetReferenceRestrictionsKey, restrictions will be observed for resolved alias references just as they are for URL references. For more details about alias resolution, consult documentation of the bookmark-related interfaces of NSURL.
-func AVURLAssetShouldSupportAliasDataReferencesKey() uintptr {
+func AVURLAssetShouldSupportAliasDataReferencesKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVURLAssetShouldSupportAliasDataReferencesKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Specifies the attribution of the URLs requested by this asset. Value is an NSNumber whose value is an NSURLRequestAttribution (see NSURLRequest.h). Default value is NSURLRequestAttributionDeveloper. All NSURLRequests issed on behalf of this AVURLAsset will be attributed with this value and follow the App Privacy Policy accordingly.
@@ -11355,6 +12536,42 @@ func AVVideoH264EntropyModeKey() *foundation.NSString {
 
 func AVVideoHeightKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoHeightKey")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
+func AVVideoLogTransferFunctionKey() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoLogTransferFunctionKey")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
+func AVVideoLogTransferFunction_AppleLog() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoLogTransferFunction_AppleLog")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
+func AVVideoLogTransferFunction_AppleLog2() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoLogTransferFunction_AppleLog2")
 	if ptr == 0 {
 		return nil
 	}

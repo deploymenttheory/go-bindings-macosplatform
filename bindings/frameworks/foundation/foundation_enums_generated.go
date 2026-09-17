@@ -13,17 +13,28 @@ import (
 type ActivityOptions uint64
 
 const (
-	ActivityIdleDisplaySleepDisabled             ActivityOptions = 1099511627776
-	ActivityIdleSystemSleepDisabled              ActivityOptions = 1048576
-	ActivitySuddenTerminationDisabled            ActivityOptions = 16384
-	ActivityAutomaticTerminationDisabled         ActivityOptions = 32768
-	ActivityAnimationTrackingEnabled             ActivityOptions = 35184372088832
-	ActivityTrackingEnabled                      ActivityOptions = 70368744177664
-	ActivityUserInitiated                        ActivityOptions = 16777215
+	// A flag to require the screen to stay powered on.
+	ActivityIdleDisplaySleepDisabled ActivityOptions = 1099511627776
+	// A flag to prevent idle sleep. This is negated by `NSActivityUserInitiatedAllowingIdleSystemSleep`.
+	ActivityIdleSystemSleepDisabled ActivityOptions = 1048576
+	// A flag to prevent sudden termination. This is included by `NSActivityUserInitiatedAllowingIdleSystemSleep`.
+	ActivitySuddenTerminationDisabled ActivityOptions = 16384
+	// A flag to prevent automatic termination. This is included by `NSActivityUserInitiatedAllowingIdleSystemSleep`.
+	ActivityAutomaticTerminationDisabled ActivityOptions = 32768
+	// A flag to track the activity with an animation signpost interval. Use this to track the timing of a user interaction by annotating the beginning and end of an activity using an animation signpost interval. This differs from `NSActivityTrackingEnabled` in the type of interval signposts the logging system emits. Use this when the interaction involves an animation.
+	ActivityAnimationTrackingEnabled ActivityOptions = 35184372088832
+	// A flag to track the activity with a signpost interval. Use this to track the timing of a user interaction by annotating the beginning and end of an activity using a signpost interval. This differs from `NSActivityAnimationTrackingEnabled` in the type of interval signposts the logging system emits. Use `NSActivityAnimationTrackingEnabled` when the interaction involves an animation.
+	ActivityTrackingEnabled ActivityOptions = 70368744177664
+	// A flag to indicate the app is performing a user-requested action. Examples of user initiated actions are exporting or downloading a user-specified file or dismissing a form sheet.
+	ActivityUserInitiated ActivityOptions = 16777215
+	// A flag to indicate the app is performing a user-requested action, but that the system can sleep on idle.
 	ActivityUserInitiatedAllowingIdleSystemSleep ActivityOptions = 15728639
-	ActivityBackground                           ActivityOptions = 255
-	ActivityLatencyCritical                      ActivityOptions = 1095216660480
-	ActivityUserInteractive                      ActivityOptions = 1095233437695
+	// A flag to indicate the app has initiated some kind of work, but not as the direct result of user request.
+	ActivityBackground ActivityOptions = 255
+	// A flag to indicate the activity requires the highest amount of timer and I/O precision available. Very few applications should need to use this constant.
+	ActivityLatencyCritical ActivityOptions = 1095216660480
+	// A flag to indicate the app is responding to user interaction. Examples of user-interactive actions include scrolling and interactively dismissing from a navigation controller.
+	ActivityUserInteractive ActivityOptions = 1095233437695
 )
 
 // String returns the ActivityOptions constant's name, or its numeric form when the
@@ -69,32 +80,53 @@ func (e ActivityOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Values representing alignment operations.
 // Bitmask — values may be combined with |.
 type AlignmentOptions uint64
 
 const (
-	AlignMinXInward      AlignmentOptions = 1
-	AlignMinYInward      AlignmentOptions = 2
-	AlignMaxXInward      AlignmentOptions = 4
-	AlignMaxYInward      AlignmentOptions = 8
-	AlignWidthInward     AlignmentOptions = 16
-	AlignHeightInward    AlignmentOptions = 32
-	AlignMinXOutward     AlignmentOptions = 256
-	AlignMinYOutward     AlignmentOptions = 512
-	AlignMaxXOutward     AlignmentOptions = 1024
-	AlignMaxYOutward     AlignmentOptions = 2048
-	AlignWidthOutward    AlignmentOptions = 4096
-	AlignHeightOutward   AlignmentOptions = 8192
-	AlignMinXNearest     AlignmentOptions = 65536
-	AlignMinYNearest     AlignmentOptions = 131072
-	AlignMaxXNearest     AlignmentOptions = 262144
-	AlignMaxYNearest     AlignmentOptions = 524288
-	AlignWidthNearest    AlignmentOptions = 1048576
-	AlignHeightNearest   AlignmentOptions = 2097152
-	AlignRectFlipped     AlignmentOptions = 9223372036854775808
-	AlignAllEdgesInward  AlignmentOptions = 15
+	// Specifies that alignment of the minimum X coordinate should be to the nearest inward integral value.
+	AlignMinXInward AlignmentOptions = 1
+	// Specifies that alignment of the minimum Y coordinate should be to the nearest inward integral value.
+	AlignMinYInward AlignmentOptions = 2
+	// Specifies that alignment of the maximum X coordinate should be to the nearest inward integral value.
+	AlignMaxXInward AlignmentOptions = 4
+	// Specifies that alignment of the maximum Y coordinate should be to the nearest inward integral value.
+	AlignMaxYInward AlignmentOptions = 8
+	// Specifies that alignment of the width should be to the nearest inward integral value.
+	AlignWidthInward AlignmentOptions = 16
+	// Specifies that alignment of the height should be to the nearest inward integral value.
+	AlignHeightInward AlignmentOptions = 32
+	// Specifies that alignment of the minimum X coordinate should be to the nearest outward integral value.
+	AlignMinXOutward AlignmentOptions = 256
+	// Specifies that alignment of the minimum Y coordinate should be to the nearest outward integral value.
+	AlignMinYOutward AlignmentOptions = 512
+	// Specifies that alignment of the maximum X coordinate should be to the nearest outward integral value.
+	AlignMaxXOutward AlignmentOptions = 1024
+	// Specifies that alignment of the maximum Y coordinate should be to the nearest outward integral value.
+	AlignMaxYOutward AlignmentOptions = 2048
+	// Specifies that alignment of the width should be to the nearest outward integral value.
+	AlignWidthOutward AlignmentOptions = 4096
+	// Specifies that alignment of the height should be to the nearest outward integral value.
+	AlignHeightOutward AlignmentOptions = 8192
+	// Specifies that alignment of the minimum X coordinate should be to the nearest integral value.
+	AlignMinXNearest AlignmentOptions = 65536
+	// Specifies that alignment of the minimum Y coordinate should be to the nearest integral value.
+	AlignMinYNearest AlignmentOptions = 131072
+	// Specifies that alignment of the maximum X coordinate should be to the nearest integral value.
+	AlignMaxXNearest AlignmentOptions = 262144
+	// Specifies that alignment of the maximum Y coordinate should be to the nearest integral value.
+	AlignMaxYNearest AlignmentOptions = 524288
+	// Specifies that alignment of the width should be to the nearest integral value.
+	AlignWidthNearest AlignmentOptions = 1048576
+	// Specifies that alignment of the height should be to the nearest integral value.
+	AlignHeightNearest AlignmentOptions = 2097152
+	// This option should be included if the rectangle is in a flipped coordinate system. This allows 0.5 to be treated in a visually consistent way.
+	AlignRectFlipped AlignmentOptions = 9223372036854775808
+	// Aligns all edges inward. This is the same as `NSAlignMinXInward|NSAlignMaxXInward|NSAlignMinYInward|NSAlignMaxYInward`.
+	AlignAllEdgesInward AlignmentOptions = 15
+	// Aligns all edges outward. This is the same as `NSAlignMinXOutward|NSAlignMaxXOutward|NSAlignMinYOutward|NSAlignMaxYOutward`.
 	AlignAllEdgesOutward AlignmentOptions = 3840
+	// Aligns all edges to the nearest integral value. This is the same as `NSAlignMinXNearest|NSAlignMaxXNearest|NSAlignMinYNearest|NSAlignMaxYNearest`.
 	AlignAllEdgesNearest AlignmentOptions = 983040
 )
 
@@ -178,16 +210,27 @@ func (e AlignmentOptions) String() string {
 type AppleEventSendOptions uint64
 
 const (
-	AppleEventSendNoReply        AppleEventSendOptions = 1
-	AppleEventSendQueueReply     AppleEventSendOptions = 2
-	AppleEventSendWaitForReply   AppleEventSendOptions = 3
-	AppleEventSendNeverInteract  AppleEventSendOptions = 16
-	AppleEventSendCanInteract    AppleEventSendOptions = 32
+	// Sender doesn't want a reply to event.
+	AppleEventSendNoReply AppleEventSendOptions = 1
+	// Sender wants a reply but won't wait.
+	AppleEventSendQueueReply AppleEventSendOptions = 2
+	// Sender wants a reply and will wait.
+	AppleEventSendWaitForReply AppleEventSendOptions = 3
+	// Server should not interact with user.
+	AppleEventSendNeverInteract AppleEventSendOptions = 16
+	// Server may try to interact with user.
+	AppleEventSendCanInteract AppleEventSendOptions = 32
+	// Server should always interact with user where appropriate.
 	AppleEventSendAlwaysInteract AppleEventSendOptions = 48
+	// Interaction may switch layer.
 	AppleEventSendCanSwitchLayer AppleEventSendOptions = 64
-	AppleEventSendDontRecord     AppleEventSendOptions = 4096
-	AppleEventSendDontExecute    AppleEventSendOptions = 8192
-	AppleEventSendDontAnnotate   AppleEventSendOptions = 65536
+	// Don't record this event.
+	AppleEventSendDontRecord AppleEventSendOptions = 4096
+	// Don't execute this event; used for recording.
+	AppleEventSendDontExecute AppleEventSendOptions = 8192
+	// Don't automatically add any sandbox or other annotations to the event.
+	AppleEventSendDontAnnotate AppleEventSendOptions = 65536
+	// The default options: wait for reply and allow interaction.
 	AppleEventSendDefaultOptions AppleEventSendOptions = 35
 )
 
@@ -234,12 +277,13 @@ func (e AppleEventSendOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Options for enumerating attributes.
 // Bitmask — values may be combined with |.
 type AttributedStringEnumerationOptions uint64
 
 const (
-	AttributedStringEnumerationReverse                          AttributedStringEnumerationOptions = 2
+	// Causes the enumeration to occur in reverse.
+	AttributedStringEnumerationReverse AttributedStringEnumerationOptions = 2
+	// If this option is supplied, the longest effective range computation is not performed; the blocks may be invoked with consecutive attribute runs that have the same value.
 	AttributedStringEnumerationLongestEffectiveRangeNotRequired AttributedStringEnumerationOptions = 1048576
 )
 
@@ -368,14 +412,17 @@ func (e BinarySearchingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Specifies display of file or storage byte counts. The display style is platform specific.
 type ByteCountFormatterCountStyle int64
 
 const (
-	ByteCountFormatterCountStyleFile    ByteCountFormatterCountStyle = 0
-	ByteCountFormatterCountStyleMemory  ByteCountFormatterCountStyle = 1
+	// Specifies display of file byte counts. The actual behavior for this is platform-specific; in macOS 10.8, this uses the decimal style, but that may change over time.
+	ByteCountFormatterCountStyleFile ByteCountFormatterCountStyle = 0
+	// Specifies display of memory byte counts. The actual behavior for this is platform-specific; in macOS 10.8, this uses the binary style, but that may change over time.
+	ByteCountFormatterCountStyleMemory ByteCountFormatterCountStyle = 1
+	// Causes 1000 bytes to be shown as 1 KB. It is better to use `NSByteCountFormatterCountStyleFile` or `NSByteCountFormatterCountStyleMemory` in most cases.
 	ByteCountFormatterCountStyleDecimal ByteCountFormatterCountStyle = 2
-	ByteCountFormatterCountStyleBinary  ByteCountFormatterCountStyle = 3
+	// Causes 1024 bytes to be shown as 1 KB. It is better to use `NSByteCountFormatterCountStyleFile` or `NSByteCountFormatterCountStyleMemory` in most cases.
+	ByteCountFormatterCountStyleBinary ByteCountFormatterCountStyle = 3
 )
 
 // String returns the ByteCountFormatterCountStyle constant's name, or its numeric form when the
@@ -395,23 +442,32 @@ func (e ByteCountFormatterCountStyle) String() string {
 	}
 }
 
-// Specifies the units appropriate for the formatter to display. Specifying any units explicitly causes just those units to be used in showing the number.
 // Bitmask — values may be combined with |.
 type ByteCountFormatterUnits uint64
 
 const (
 	// This causes default units appropriate for the platform to be used. This is the default.
-	ByteCountFormatterUseDefault    ByteCountFormatterUnits = 0
-	ByteCountFormatterUseBytes      ByteCountFormatterUnits = 1
-	ByteCountFormatterUseKB         ByteCountFormatterUnits = 2
-	ByteCountFormatterUseMB         ByteCountFormatterUnits = 4
-	ByteCountFormatterUseGB         ByteCountFormatterUnits = 8
-	ByteCountFormatterUseTB         ByteCountFormatterUnits = 16
-	ByteCountFormatterUsePB         ByteCountFormatterUnits = 32
-	ByteCountFormatterUseEB         ByteCountFormatterUnits = 64
-	ByteCountFormatterUseZB         ByteCountFormatterUnits = 128
+	ByteCountFormatterUseDefault ByteCountFormatterUnits = 0
+	// Displays bytes in the formatter content.
+	ByteCountFormatterUseBytes ByteCountFormatterUnits = 1
+	// Displays kilobytes in the formatter content.
+	ByteCountFormatterUseKB ByteCountFormatterUnits = 2
+	// Displays megabytes in the formatter content.
+	ByteCountFormatterUseMB ByteCountFormatterUnits = 4
+	// Displays gigabytes in the formatter content.
+	ByteCountFormatterUseGB ByteCountFormatterUnits = 8
+	// Displays terabytes in the formatter content.
+	ByteCountFormatterUseTB ByteCountFormatterUnits = 16
+	// Displays petabytes in the formatter content.
+	ByteCountFormatterUsePB ByteCountFormatterUnits = 32
+	// Displays exabytes in the formatter content.
+	ByteCountFormatterUseEB ByteCountFormatterUnits = 64
+	// Displays zettabytes in the formatter content.
+	ByteCountFormatterUseZB ByteCountFormatterUnits = 128
+	// Displays yottabytes in the formatter content.
 	ByteCountFormatterUseYBOrHigher ByteCountFormatterUnits = 65280
-	ByteCountFormatterUseAll        ByteCountFormatterUnits = 65535
+	// Can use any unit in the formatter content.
+	ByteCountFormatterUseAll ByteCountFormatterUnits = 65535
 )
 
 // String returns the ByteCountFormatterUnits constant's name, or its numeric form when the
@@ -457,11 +513,16 @@ func (e ByteCountFormatterUnits) String() string {
 type CalculationError uint64
 
 const (
-	CalculationNoError         CalculationError = 0
+	// No error occurred.
+	CalculationNoError CalculationError = 0
+	// The number can't be represented in 38 significant digits.
 	CalculationLossOfPrecision CalculationError = 1
-	CalculationUnderflow       CalculationError = 2
-	CalculationOverflow        CalculationError = 3
-	CalculationDivideByZero    CalculationError = 4
+	// The number is too small to represent.
+	CalculationUnderflow CalculationError = 2
+	// The number is too large to represent.
+	CalculationOverflow CalculationError = 3
+	// The caller tried to divide by `0`.
+	CalculationDivideByZero CalculationError = 4
 )
 
 // String returns the CalculationError constant's name, or its numeric form when the
@@ -483,19 +544,26 @@ func (e CalculationError) String() string {
 	}
 }
 
-// The options for arithmetic operations involving calendars.
 // Bitmask — values may be combined with |.
 type CalendarOptions uint64
 
 const (
-	CalendarWrapComponents                          CalendarOptions = 1
-	CalendarMatchStrictly                           CalendarOptions = 2
-	CalendarSearchBackwards                         CalendarOptions = 4
+	// Specifies that the components specified for an `NSDateComponents` object should be incremented and wrap around to zero/one on overflow, but should not cause higher units to be incremented.
+	CalendarWrapComponents CalendarOptions = 1
+	// Specifies that the operation should travel as far forward or backward as necessary looking for a match.
+	CalendarMatchStrictly CalendarOptions = 2
+	// Specifies that the operation should travel backwards to find the previous match before the given date.
+	CalendarSearchBackwards CalendarOptions = 4
+	// Specifies that, when there is no matching time before the end of the next instance of the next highest unit specified in the given `NSDateComponents` object, this method uses the previous existing value of the missing unit and preserves the lower units' values.
 	CalendarMatchPreviousTimePreservingSmallerUnits CalendarOptions = 256
-	CalendarMatchNextTimePreservingSmallerUnits     CalendarOptions = 512
-	CalendarMatchNextTime                           CalendarOptions = 1024
-	CalendarMatchFirst                              CalendarOptions = 4096
-	CalendarMatchLast                               CalendarOptions = 8192
+	// Specifies that, when there is no matching time before the end of the next instance of the next highest unit specified in the given `NSDateComponents` object, this method uses the next existing value of the missing unit and preserves the lower units' values.
+	CalendarMatchNextTimePreservingSmallerUnits CalendarOptions = 512
+	// Specifies that, when there is no matching time before the end of the next instance of the next highest unit specified in the given `NSDateComponents` object, this method uses the next existing value of the missing unit and does not preserve the lower units' values.
+	CalendarMatchNextTime CalendarOptions = 1024
+	// Specifies that, if there are two or more matching times, the operation should return the first occurrence.
+	CalendarMatchFirst CalendarOptions = 4096
+	// Specifies that, if there are two or more matching times, the operation should return the last occurrence.
+	CalendarMatchLast CalendarOptions = 8192
 )
 
 // String returns the CalendarOptions constant's name, or its numeric form when the
@@ -532,60 +600,107 @@ func (e CalendarOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Calendrical units such as year, month, day and hour.
 // Bitmask — values may be combined with |.
 type CalendarUnit uint64
 
 const (
-	CalendarUnitEra               CalendarUnit = 2
-	CalendarUnitYear              CalendarUnit = 4
-	CalendarUnitMonth             CalendarUnit = 8
-	CalendarUnitDay               CalendarUnit = 16
-	CalendarUnitHour              CalendarUnit = 32
-	CalendarUnitMinute            CalendarUnit = 64
-	CalendarUnitSecond            CalendarUnit = 128
-	CalendarUnitWeekday           CalendarUnit = 512
-	CalendarUnitWeekdayOrdinal    CalendarUnit = 1024
-	CalendarUnitQuarter           CalendarUnit = 2048
-	CalendarUnitWeekOfMonth       CalendarUnit = 4096
-	CalendarUnitWeekOfYear        CalendarUnit = 8192
+	// Identifier for the era unit. The corresponding value is an `NSInteger`.
+	CalendarUnitEra CalendarUnit = 2
+	// Identifier for the year unit. The corresponding value is an `NSInteger`.
+	CalendarUnitYear CalendarUnit = 4
+	// Identifier for the month unit. The corresponding value is an `NSInteger`.
+	CalendarUnitMonth CalendarUnit = 8
+	// Identifier for the day unit. The corresponding value is an `NSInteger`.
+	CalendarUnitDay CalendarUnit = 16
+	// Identifier for the hour unit. The corresponding value is an `NSInteger`.
+	CalendarUnitHour CalendarUnit = 32
+	// Identifier for the minute unit. The corresponding value is an `NSInteger`.
+	CalendarUnitMinute CalendarUnit = 64
+	// Identifier for the second unit. The corresponding value is a `double`.
+	CalendarUnitSecond CalendarUnit = 128
+	// Identifier for the weekday unit. The corresponding value is an `NSInteger`. The weekday units are the numbers `1` through `N` (where for the Gregorian calendar `N`=`7` and `1` is Sunday).
+	CalendarUnitWeekday CalendarUnit = 512
+	// Identifier for the ordinal weekday unit. The corresponding value is an `NSInteger`. The weekday ordinal unit describes ordinal position within the month unit of the corresponding weekday unit. For example, in the Gregorian calendar a weekday ordinal unit of `2` for a weekday unit `3` indicates "the second Tuesday in the month".
+	CalendarUnitWeekdayOrdinal CalendarUnit = 1024
+	// Identifier for the quarter of the calendar. The corresponding value is an `NSInteger`. > Important: The `NSCalendarUnitQuarter` unit is largely unimplemented, and is not recommended for use.
+	CalendarUnitQuarter CalendarUnit = 2048
+	// Identifier for the week of the month calendar unit.
+	CalendarUnitWeekOfMonth CalendarUnit = 4096
+	// Identifier for the week of the year calendar unit.
+	CalendarUnitWeekOfYear CalendarUnit = 8192
+	// Identifier for the week-counting year unit.
 	CalendarUnitYearForWeekOfYear CalendarUnit = 16384
-	CalendarUnitNanosecond        CalendarUnit = 32768
-	CalendarUnitDayOfYear         CalendarUnit = 65536
-	CalendarUnitCalendar          CalendarUnit = 1048576
-	CalendarUnitTimeZone          CalendarUnit = 2097152
-	CalendarUnitIsLeapMonth       CalendarUnit = 1073741824
-	CalendarUnitIsRepeatedDay     CalendarUnit = 2147483648
+	// Identifier for the nanosecond unit.
+	CalendarUnitNanosecond CalendarUnit = 32768
+	CalendarUnitDayOfYear  CalendarUnit = 65536
+	// Identifier for the calendar of a date components object. The corresponding value is an `NSCalendar`.
+	CalendarUnitCalendar CalendarUnit = 1048576
+	// Identifier for the time zone of a date components object. The corresponding value is an `NSTimeZone`.
+	CalendarUnitTimeZone      CalendarUnit = 2097152
+	CalendarUnitIsLeapMonth   CalendarUnit = 1073741824
+	CalendarUnitIsRepeatedDay CalendarUnit = 2147483648
+	// Specifies the era unit.
+	//
 	// Deprecated: since macOS 10.10.
 	EraCalendarUnit CalendarUnit = 2
+	// Specifies the year unit.
+	//
 	// Deprecated: since macOS 10.10.
 	YearCalendarUnit CalendarUnit = 4
+	// Specifies the month unit.
+	//
 	// Deprecated: since macOS 10.10.
 	MonthCalendarUnit CalendarUnit = 8
+	// Specifies the day unit.
+	//
 	// Deprecated: since macOS 10.10.
 	DayCalendarUnit CalendarUnit = 16
+	// Specifies the hour unit.
+	//
 	// Deprecated: since macOS 10.10.
 	HourCalendarUnit CalendarUnit = 32
+	// Specifies the minute unit.
+	//
 	// Deprecated: since macOS 10.10.
 	MinuteCalendarUnit CalendarUnit = 64
+	// Specifies the second unit.
+	//
 	// Deprecated: since macOS 10.10.
 	SecondCalendarUnit CalendarUnit = 128
+	// Specifies the week unit. Equal to `kCFCalendarUnitWeek`.
+	//
 	// Deprecated: NSCalendarUnitWeekOfMonth or NSCalendarUnitWeekOfYear, depending on which you mean
 	WeekCalendarUnit CalendarUnit = 256
+	// Specifies the weekday unit.
+	//
 	// Deprecated: since macOS 10.10.
 	WeekdayCalendarUnit CalendarUnit = 512
+	// Specifies the ordinal weekday unit. The weekday ordinal unit describes the ordinal position within the month of the corresponding weekday unit. For example, in the Gregorian calendar a weekday ordinal of 2 for a weekday of 3 indicates "the second Tuesday in the month". Equal to `kCFCalendarUnitWeekdayOrdinal`.
+	//
 	// Deprecated: since macOS 10.10.
 	WeekdayOrdinalCalendarUnit CalendarUnit = 1024
+	// Specifies the quarter unit.
+	//
 	// Deprecated: since macOS 10.10.
 	QuarterCalendarUnit CalendarUnit = 2048
+	// Specifies the week of the month calendar unit.
+	//
 	// Deprecated: since macOS 10.10.
 	WeekOfMonthCalendarUnit CalendarUnit = 4096
+	// Specifies the week of the year calendar unit.
+	//
 	// Deprecated: since macOS 10.10.
 	WeekOfYearCalendarUnit CalendarUnit = 8192
+	// Specifies the year when the calendar is being interpreted as a week-based calendar.
+	//
 	// Deprecated: since macOS 10.10.
 	YearForWeekOfYearCalendarUnit CalendarUnit = 16384
+	// Specifies the calendar of the calendar.
+	//
 	// Deprecated: since macOS 10.10.
 	CalendarCalendarUnit CalendarUnit = 1048576
+	// Specifies the time zone of the calendar as an `NSTimeZone`.
+	//
 	// Deprecated: since macOS 10.10.
 	TimeZoneCalendarUnit CalendarUnit = 2097152
 )
@@ -728,13 +843,15 @@ func (e CollectionChangeType) String() string {
 	}
 }
 
-// Constants that describe the possible types of modifier for a comparison predicate.
 type ComparisonPredicateModifier uint64
 
 const (
+	// A predicate to compare directly the left and right hand sides.
 	DirectPredicateModifier ComparisonPredicateModifier = 0
-	AllPredicateModifier    ComparisonPredicateModifier = 1
-	AnyPredicateModifier    ComparisonPredicateModifier = 2
+	// A predicate to compare all entries in the destination of a to-many relationship.
+	AllPredicateModifier ComparisonPredicateModifier = 1
+	// A predicate to match with any entry in the destination of a to-many relationship.
+	AnyPredicateModifier ComparisonPredicateModifier = 2
 )
 
 // String returns the ComparisonPredicateModifier constant's name, or its numeric form when the
@@ -752,14 +869,16 @@ func (e ComparisonPredicateModifier) String() string {
 	}
 }
 
-// Constants that describe the possible types of string comparison for comparison predicates.
 // Bitmask — values may be combined with |.
 type ComparisonPredicateOptions uint64
 
 const (
-	CaseInsensitivePredicateOption      ComparisonPredicateOptions = 1
+	// A case-insensitive predicate. You represent this option in a predicate format string using a `[c]` following a string operation (for example, `"NeXT" like[c] "next"`).
+	CaseInsensitivePredicateOption ComparisonPredicateOptions = 1
+	// A diacritic-insensitive predicate. You represent this option in a predicate format string using a `[d]` following a string operation (for example, `"naïve" like[d] "naive"`).
 	DiacriticInsensitivePredicateOption ComparisonPredicateOptions = 2
-	NormalizedPredicateOption           ComparisonPredicateOptions = 4
+	// Indicates that the strings to be compared have been preprocessed; this supersedes other options and is intended as a performance optimization option.
+	NormalizedPredicateOption ComparisonPredicateOptions = 4
 )
 
 // String returns the ComparisonPredicateOptions constant's name, or its numeric form when the
@@ -781,12 +900,14 @@ func (e ComparisonPredicateOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Constants that indicate sort order.
 type ComparisonResult int64
 
 const (
-	OrderedAscending  ComparisonResult = -1
-	OrderedSame       ComparisonResult = 0
+	// The left operand is smaller than the right operand.
+	OrderedAscending ComparisonResult = -1
+	// The two operands are equal.
+	OrderedSame ComparisonResult = 0
+	// The left operand is greater than the right operand.
 	OrderedDescending ComparisonResult = 1
 )
 
@@ -805,13 +926,15 @@ func (e ComparisonResult) String() string {
 	}
 }
 
-// Constants that describe the possible types of a compound predicate.
 type CompoundPredicateType uint64
 
 const (
+	// A logical NOT predicate.
 	NotPredicateType CompoundPredicateType = 0
+	// A logical AND predicate.
 	AndPredicateType CompoundPredicateType = 1
-	OrPredicateType  CompoundPredicateType = 2
+	// A logical OR predicate.
+	OrPredicateType CompoundPredicateType = 2
 )
 
 // String returns the CompoundPredicateType constant's name, or its numeric form when the
@@ -829,11 +952,11 @@ func (e CompoundPredicateType) String() string {
 	}
 }
 
-// Options to modify the decoding algorithm used to decode Base64 encoded data.
 // Bitmask — values may be combined with |.
 type DataBase64DecodingOptions uint64
 
 const (
+	// Modify the decoding algorithm so that it ignores unknown non-Base-64 bytes, including line ending characters.
 	DataBase64DecodingIgnoreUnknownCharacters DataBase64DecodingOptions = 1
 )
 
@@ -850,15 +973,18 @@ func (e DataBase64DecodingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Options for methods used to Base64 encode data.
 // Bitmask — values may be combined with |.
 type DataBase64EncodingOptions uint64
 
 const (
-	DataBase64Encoding64CharacterLineLength     DataBase64EncodingOptions = 1
-	DataBase64Encoding76CharacterLineLength     DataBase64EncodingOptions = 2
+	// Set the maximum line length to 64 characters, after which a line ending is inserted.
+	DataBase64Encoding64CharacterLineLength DataBase64EncodingOptions = 1
+	// Set the maximum line length to 76 characters, after which a line ending is inserted.
+	DataBase64Encoding76CharacterLineLength DataBase64EncodingOptions = 2
+	// When a maximum line length is set, specify that the line ending to insert should include a carriage return.
 	DataBase64EncodingEndLineWithCarriageReturn DataBase64EncodingOptions = 16
-	DataBase64EncodingEndLineWithLineFeed       DataBase64EncodingOptions = 32
+	// When a maximum line length is set, specify that the line ending to insert should include a line feed.
+	DataBase64EncodingEndLineWithLineFeed DataBase64EncodingOptions = 32
 )
 
 // String returns the DataBase64EncodingOptions constant's name, or its numeric form when the
@@ -883,14 +1009,17 @@ func (e DataBase64EncodingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// An algorithm that indicates how to compress or decompress data.
 type DataCompressionAlgorithm int64
 
 const (
+	// The LZFSE compression algorithm, recommended for use on Apple platforms. LZFSE is the recommended compression algorithm if you don't have a specific reason to use another algorithm. Note that LZFSE is intended for use with Apple devices only. This algorithm generally compresses better than Zlib, but not as well as LZMA. It is generally slower than LZ4.
 	DataCompressionAlgorithmLZFSE DataCompressionAlgorithm = 0
-	DataCompressionAlgorithmLZ4   DataCompressionAlgorithm = 1
-	DataCompressionAlgorithmLZMA  DataCompressionAlgorithm = 2
-	DataCompressionAlgorithmZlib  DataCompressionAlgorithm = 3
+	// The LZ4 compression algorithm, recommended for fast compression. LZ4 is appropriate if compression speed is critical. LZ4 generally sacrifices compression ratio in order to achieve its greater speed.
+	DataCompressionAlgorithmLZ4 DataCompressionAlgorithm = 1
+	// The LZMA compression algorithm, recommended for high-compression ratio. LZMA is appropriate if compression ratio is critical and memory usage and compression speed are not a factor. LZMA is an order of magnitude slower for both compression and decompression than other algorithms. It can also use a very large amount of memory, so if you need to compress large amounts of data on embedded devices with limited memory you should probably avoid LZMA. Encoding uses LZMA level 6 only, but decompression works with any compression level.
+	DataCompressionAlgorithmLZMA DataCompressionAlgorithm = 2
+	// The zlib compression algorithm, recommended for cross-platform compression. Zlib is appropriate if you want a good balance between compression speed and compression ratio, but only if you need interoperability with non-Apple platforms. Otherwise, LZFSE is generally a better choice than Zlib. Encoding uses Zlib level 5 only, but decompression works with any compression level. It uses the raw DEFLATE format as described in IETF RFC 1951.
+	DataCompressionAlgorithmZlib DataCompressionAlgorithm = 3
 )
 
 // String returns the DataCompressionAlgorithm constant's name, or its numeric form when the
@@ -910,18 +1039,26 @@ func (e DataCompressionAlgorithm) String() string {
 	}
 }
 
-// Options for methods used to read data objects.
 // Bitmask — values may be combined with |.
 type DataReadingOptions uint64
 
 const (
+	// A hint indicating the file should be mapped into virtual memory, if possible and safe.
 	DataReadingMappedIfSafe DataReadingOptions = 1
-	DataReadingUncached     DataReadingOptions = 2
+	// A hint indicating the file should not be stored in the file-system caches. For data being read once and discarded, this option can improve performance.
+	DataReadingUncached DataReadingOptions = 2
+	// Hint to map the file in if possible. This takes precedence over `NSDataReadingMappedIfSafe` if both are given.
 	DataReadingMappedAlways DataReadingOptions = 8
+	// Deprecated name for `NSDataReadingMappedIfSafe`.
+	//
 	// Deprecated: since macOS API_TO_BE_DEPRECATED.
 	DataReadingMapped DataReadingOptions = 1
+	// Deprecated name for `NSDataReadingMapped`.
+	//
 	// Deprecated: since macOS API_TO_BE_DEPRECATED.
 	MappedRead DataReadingOptions = 1
+	// Deprecated name for `NSDataReadingUncached`.
+	//
 	// Deprecated: since macOS API_TO_BE_DEPRECATED.
 	UncachedRead DataReadingOptions = 2
 )
@@ -954,13 +1091,14 @@ func (e DataReadingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Options for method used to search data objects.
 // Bitmask — values may be combined with |.
 type DataSearchOptions uint64
 
 const (
+	// Search from the end of the data object.
 	DataSearchBackwards DataSearchOptions = 1
-	DataSearchAnchored  DataSearchOptions = 2
+	// Search is limited to start (or end, if searching backwards) of the data object. This option performs searching only on bytes at the beginning of the range (or the end when using `NSDataSearchBackwards`). No match at the beginning or end means nothing is found, even if a matching sequence of bytes occurs elsewhere in the data object.
+	DataSearchAnchored DataSearchOptions = 2
 )
 
 // String returns the DataSearchOptions constant's name, or its numeric form when the
@@ -979,19 +1117,26 @@ func (e DataSearchOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Options for methods used to write data objects.
 // Bitmask — values may be combined with |.
 type DataWritingOptions uint64
 
 const (
-	// Deprecated: since macOS API_TO_BE_DEPRECATED.
-	DataWritingAtomic                                             DataWritingOptions = 1
-	DataWritingWithoutOverwriting                                 DataWritingOptions = 2
-	DataWritingFileProtectionNone                                 DataWritingOptions = 268435456
-	DataWritingFileProtectionComplete                             DataWritingOptions = 536870912
-	DataWritingFileProtectionCompleteUnlessOpen                   DataWritingOptions = 805306368
+	// An option to write data to an auxiliary file first and then replace the original file with the auxiliary file when the write completes. This option is equivalent to using a write method that takes the parameter `atomically` as `YES`.
+	DataWritingAtomic DataWritingOptions = 1
+	// An option that attempts to write data to a file and fails with an error if the destination file already exists. You can't combine this constant with `NSDataWritingAtomic` because atomic allows the system to overwrite the original file.
+	DataWritingWithoutOverwriting DataWritingOptions = 2
+	// An option to not encrypt the file when writing it out. The system doesn't store the file in an encrypted format and your app can access this file at boot time and while the device is unlocked.
+	DataWritingFileProtectionNone DataWritingOptions = 268435456
+	// An option to make the file accessible only while the device is unlocked. The system stores the file in an encrypted format and your app may only read or write to the file while the device is unlocked. At all other times, any attempts your app makes to read and write the file will fail.
+	DataWritingFileProtectionComplete DataWritingOptions = 536870912
+	// An option to allow the file to be accessible while the device is unlocked or the file is already open. Your app cannot open the file to read it or write to it when the device is locked, but your app can create new files with this class. If one of these files is open when the device is locked, your app can read and write to the opened file.
+	DataWritingFileProtectionCompleteUnlessOpen DataWritingOptions = 805306368
+	// An option to allow the file to be accessible after a user first unlocks the device. The app can read or write to the file while the device is unlocked, but while it's booting up, the file has the protection equivalent to `NSDataWritingFileProtectionComplete`.
 	DataWritingFileProtectionCompleteUntilFirstUserAuthentication DataWritingOptions = 1073741824
-	DataWritingFileProtectionMask                                 DataWritingOptions = 4026531840
+	// An option the system uses when determining the file protection options that the system assigns to the data.
+	DataWritingFileProtectionMask DataWritingOptions = 4026531840
+	// An option that attempts to write data to an auxiliary file first and then exchange the files.
+	//
 	// Deprecated: since macOS API_TO_BE_DEPRECATED.
 	AtomicWrite DataWritingOptions = 1
 )
@@ -1030,16 +1175,21 @@ func (e DataWritingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Constants for specifying how to represent quantities of time.
 type DateComponentsFormatterUnitsStyle int64
 
 const (
-	DateComponentsFormatterUnitsStylePositional  DateComponentsFormatterUnitsStyle = 0
+	// A style that uses the position of a unit of time to identify its value. This style is most commonly used for time values where the hour, minute, and second values are separated by colons. For example, one hour and ten minutes is displayed in the U.S. English locale as "1:10:00". > Note: This style may fall back to the behavior of `NSDateComponentsFormatterUnitsStyleAbbreviated` when attempting to display large time quantities.
+	DateComponentsFormatterUnitsStylePositional DateComponentsFormatterUnitsStyle = 0
+	// A style that uses the most abbreviated spelling for units of time. This style represents the shortest representation of units and quantities of time. For example, the quantity of 3 years, 9 months, 26 days, 19 hours, and 17 seconds is displayed in the U.S. English locale as "3y 9mo 26d 19h 17s".
 	DateComponentsFormatterUnitsStyleAbbreviated DateComponentsFormatterUnitsStyle = 1
-	DateComponentsFormatterUnitsStyleShort       DateComponentsFormatterUnitsStyle = 2
-	DateComponentsFormatterUnitsStyleFull        DateComponentsFormatterUnitsStyle = 3
-	DateComponentsFormatterUnitsStyleSpellOut    DateComponentsFormatterUnitsStyle = 4
-	DateComponentsFormatterUnitsStyleBrief       DateComponentsFormatterUnitsStyle = 5
+	// A style that uses a shortened spelling for units. For example, the quantity of 3 years, 9 months, 26 days, 19 hours, and 17 seconds is displayed in the U.S. English locale as "3 yrs, 9 mths, 26 days, 19 hr, 17 sec".
+	DateComponentsFormatterUnitsStyleShort DateComponentsFormatterUnitsStyle = 2
+	// A style that spells out the units of time, but not the quantities. For example, the quantity of 3 years, 9 months, 26 days, 19 hours, and 17 seconds is displayed in the U.S. English locale as "3 years, 9 months, 26 days, 19 hours, 17 seconds".
+	DateComponentsFormatterUnitsStyleFull DateComponentsFormatterUnitsStyle = 3
+	// A style that spells out the units and quantities of time. For example, the quantity of 3 years, 9 months, 26 days, 19 hours, and 17 seconds is displayed in the U.S. English locale as "three years, nine months, twenty-six days, nineteen hours, seventeen seconds".
+	DateComponentsFormatterUnitsStyleSpellOut DateComponentsFormatterUnitsStyle = 4
+	// A style that uses a shortened spelling for units of time that is shorter than `NSDateComponentsFormatterUnitsStyleShort`. For example, the quantity of 3 years, 9 months, 26 days, 19 hours, and 17 seconds is displayed in the U.S. English locale as "3yrs 9mths 26days 19hr 17sec".
+	DateComponentsFormatterUnitsStyleBrief DateComponentsFormatterUnitsStyle = 5
 )
 
 // String returns the DateComponentsFormatterUnitsStyle constant's name, or its numeric form when the
@@ -1063,19 +1213,24 @@ func (e DateComponentsFormatterUnitsStyle) String() string {
 	}
 }
 
-// Formatting constants for when values contain zeroes.
 // Bitmask — values may be combined with |.
 type DateComponentsFormatterZeroFormattingBehavior uint64
 
 const (
-	// No formatting behavior. This behavior prevents the dropping of zero values or adding of zeroes for padding. For example, with hours, minutes, and seconds displayed, the abbreviated value for one hour and 10 seconds is “1h 0m 10s”.
-	DateComponentsFormatterZeroFormattingBehaviorNone         DateComponentsFormatterZeroFormattingBehavior = 0
-	DateComponentsFormatterZeroFormattingBehaviorDefault      DateComponentsFormatterZeroFormattingBehavior = 1
-	DateComponentsFormatterZeroFormattingBehaviorDropLeading  DateComponentsFormatterZeroFormattingBehavior = 2
-	DateComponentsFormatterZeroFormattingBehaviorDropMiddle   DateComponentsFormatterZeroFormattingBehavior = 4
+	// No formatting behavior. This behavior prevents the dropping of zero values or adding of zeroes for padding. For example, with hours, minutes, and seconds displayed, the abbreviated value for one hour and 10 seconds is "1h 0m 10s".
+	DateComponentsFormatterZeroFormattingBehaviorNone DateComponentsFormatterZeroFormattingBehavior = 0
+	// The default formatting behavior. When using positional units, this behavior drops leading zeroes but pads middle and trailing values with zeros as needed. For example, with hours, minutes, and seconds displayed, the value for one hour and 10 seconds is "1:00:10". For all other unit styles, this behavior drops all units whose values are 0. For example, when days, hours, minutes, and seconds are allowed, the abbreviated version of one hour and 10 seconds is displayed as "1h 10s".
+	DateComponentsFormatterZeroFormattingBehaviorDefault DateComponentsFormatterZeroFormattingBehavior = 1
+	// The drop leading zeroes formatting behavior. Units whose values are 0 are dropped starting at the beginning of the sequence. Units continue to be dropped until a non-zero value is encountered. For example, when days, hours, minutes, and seconds are allowed, the abbreviated version of ten minutes is displayed as "10m 0s".
+	DateComponentsFormatterZeroFormattingBehaviorDropLeading DateComponentsFormatterZeroFormattingBehavior = 2
+	// The drop middle zero units behavior. Units whose values are 0 are dropped from anywhere in the middle of a sequence. For example, when days, hours, minutes, and seconds are allowed, the abbreviated version of one hour, zero minutes, and five seconds is displayed as "0d 1h 5s".
+	DateComponentsFormatterZeroFormattingBehaviorDropMiddle DateComponentsFormatterZeroFormattingBehavior = 4
+	// The drop trailing zero units behavior. Units whose value is 0 are dropped starting at the end of the sequence. For example, when days, hours, minutes, and seconds are allowed, the abbreviated version of one hour is displayed as "0d 1h".
 	DateComponentsFormatterZeroFormattingBehaviorDropTrailing DateComponentsFormatterZeroFormattingBehavior = 8
-	DateComponentsFormatterZeroFormattingBehaviorDropAll      DateComponentsFormatterZeroFormattingBehavior = 14
-	DateComponentsFormatterZeroFormattingBehaviorPad          DateComponentsFormatterZeroFormattingBehavior = 65536
+	// The drop all zero units behavior. This behavior drops all units whose values are 0. For example, when days, hours, minutes, and seconds are allowed, the abbreviated version of one hour is displayed as "1h".
+	DateComponentsFormatterZeroFormattingBehaviorDropAll DateComponentsFormatterZeroFormattingBehavior = 14
+	// The add padding zeroes behavior. This behavior pads values with zeroes as appropriate. For example, consider the value of one hour formatted using the positional and abbreviated unit styles. When days, hours, minutes, and seconds are allowed, the value is displayed as "0d 1:00:00" using the positional style, and as "0d 1h 0m 0s" using the abbreviated style.
+	DateComponentsFormatterZeroFormattingBehaviorPad DateComponentsFormatterZeroFormattingBehavior = 65536
 )
 
 // String returns the DateComponentsFormatterZeroFormattingBehavior constant's name, or its numeric form when the
@@ -1106,13 +1261,15 @@ func (e DateComponentsFormatterZeroFormattingBehavior) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Constants that specify the behavior NSDateFormatter should exhibit.
 type DateFormatterBehavior uint64
 
 const (
+	// Specifies default formatting behavior.
 	DateFormatterBehaviorDefault DateFormatterBehavior = 0
-	DateFormatterBehavior10_0    DateFormatterBehavior = 1000
-	DateFormatterBehavior10_4    DateFormatterBehavior = 1040
+	// Specifies formatting behavior equivalent to that in OS X 10.0.
+	DateFormatterBehavior10_0 DateFormatterBehavior = 1000
+	// Specifies formatting behavior equivalent for OS X 10.4.
+	DateFormatterBehavior10_4 DateFormatterBehavior = 1040
 )
 
 // String returns the DateFormatterBehavior constant's name, or its numeric form when the
@@ -1130,15 +1287,19 @@ func (e DateFormatterBehavior) String() string {
 	}
 }
 
-// The following constants specify predefined format styles for dates and times.
 type DateFormatterStyle uint64
 
 const (
-	DateFormatterNoStyle     DateFormatterStyle = 0
-	DateFormatterShortStyle  DateFormatterStyle = 1
+	// Specifies no style. Equal to `kCFDateFormatterNoStyle`.
+	DateFormatterNoStyle DateFormatterStyle = 0
+	// Specifies a short style, typically numeric only, such as "11/23/37" or "3:30 PM". Equal to `kCFDateFormatterShortStyle`.
+	DateFormatterShortStyle DateFormatterStyle = 1
+	// Specifies a medium style, typically with abbreviated text, such as "Nov 23, 1937" or "3:30:32 PM". Equal to `kCFDateFormatterMediumStyle`.
 	DateFormatterMediumStyle DateFormatterStyle = 2
-	DateFormatterLongStyle   DateFormatterStyle = 3
-	DateFormatterFullStyle   DateFormatterStyle = 4
+	// Specifies a long style, typically with full text, such as "November 23, 1937" or "3:30:32 PM PST". Equal to `kCFDateFormatterLongStyle`.
+	DateFormatterLongStyle DateFormatterStyle = 3
+	// Specifies a full style with complete details, such as "Tuesday, April 12, 1952 AD" or "3:30:42 PM Pacific Standard Time". Equal to `kCFDateFormatterFullStyle`.
+	DateFormatterFullStyle DateFormatterStyle = 4
 )
 
 // String returns the DateFormatterStyle constant's name, or its numeric form when the
@@ -1160,15 +1321,19 @@ func (e DateFormatterStyle) String() string {
 	}
 }
 
-// Formatting styles for individual date and time values.
 type DateIntervalFormatterStyle uint64
 
 const (
-	DateIntervalFormatterNoStyle     DateIntervalFormatterStyle = 0
-	DateIntervalFormatterShortStyle  DateIntervalFormatterStyle = 1
+	// No style.
+	DateIntervalFormatterNoStyle DateIntervalFormatterStyle = 0
+	// A short style.
+	DateIntervalFormatterShortStyle DateIntervalFormatterStyle = 1
+	// A medium style.
 	DateIntervalFormatterMediumStyle DateIntervalFormatterStyle = 2
-	DateIntervalFormatterLongStyle   DateIntervalFormatterStyle = 3
-	DateIntervalFormatterFullStyle   DateIntervalFormatterStyle = 4
+	// A long style.
+	DateIntervalFormatterLongStyle DateIntervalFormatterStyle = 3
+	// A full style.
+	DateIntervalFormatterFullStyle DateIntervalFormatterStyle = 4
 )
 
 // String returns the DateIntervalFormatterStyle constant's name, or its numeric form when the
@@ -1190,11 +1355,12 @@ func (e DateIntervalFormatterStyle) String() string {
 	}
 }
 
-// Policies describing the action the coder should take when encountering decode failures.
 type DecodingFailurePolicy int64
 
 const (
-	DecodingFailurePolicyRaiseException    DecodingFailurePolicy = 0
+	// A failure policy that directs the coder to raise an exception. With this policy, the `NSCoder` raises an exception internally to propagate failure messages (and unwind the stack). This exception can be transformed into an `NSError` via any of the TopLevel decode APIs.
+	DecodingFailurePolicyRaiseException DecodingFailurePolicy = 0
+	// A failure policy that directs the coder to capture the failure as an error object. On decode failure, the `NSCoder` will capture the failure as an `NSError`, and prevent further decodes (by returning `0` / `nil` equivalent as appropriate). Use this policy if you know that all encoded objects use `failWithError:` to communicate decode failures and don't raise exceptions for error propagation.
 	DecodingFailurePolicySetErrorAndReturn DecodingFailurePolicy = 1
 )
 
@@ -1211,13 +1377,15 @@ func (e DecodingFailurePolicy) String() string {
 	}
 }
 
-// Options for enumerating the contents of directories.
 // Bitmask — values may be combined with |.
 type DirectoryEnumerationOptions uint64
 
 const (
+	// An option to perform a shallow enumeration that doesn't descend into directories.
 	DirectoryEnumerationSkipsSubdirectoryDescendants DirectoryEnumerationOptions = 1
-	DirectoryEnumerationSkipsPackageDescendants      DirectoryEnumerationOptions = 2
+	// An option to treat packages like files and not descend into their contents.
+	DirectoryEnumerationSkipsPackageDescendants DirectoryEnumerationOptions = 2
+	// An option to skip hidden files.
 	DirectoryEnumerationSkipsHiddenFiles             DirectoryEnumerationOptions = 4
 	DirectoryEnumerationIncludesDirectoriesPostOrder DirectoryEnumerationOptions = 8
 	DirectoryEnumerationProducesRelativePathURLs     DirectoryEnumerationOptions = 16
@@ -1252,8 +1420,10 @@ func (e DirectoryEnumerationOptions) String() string {
 type DistributedNotificationOptions uint64
 
 const (
+	// When set, the notification is delivered immediately to all observers, regardless of their suspension behavior or suspension state.
 	DistributedNotificationDeliverImmediately DistributedNotificationOptions = 1
-	DistributedNotificationPostToAllSessions  DistributedNotificationOptions = 2
+	// When set, the notification is posted to all sessions. When not set, the notification is sent only to applications within the same login session as the posting task.
+	DistributedNotificationPostToAllSessions DistributedNotificationOptions = 2
 )
 
 // String returns the DistributedNotificationOptions constant's name, or its numeric form when the
@@ -1272,13 +1442,16 @@ func (e DistributedNotificationOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// The units supported by the NSEnergyFormatter class.
 type EnergyFormatterUnit int64
 
 const (
-	EnergyFormatterUnitJoule       EnergyFormatterUnit = 11
-	EnergyFormatterUnitKilojoule   EnergyFormatterUnit = 14
-	EnergyFormatterUnitCalorie     EnergyFormatterUnit = 1793
+	// The joule unit.
+	EnergyFormatterUnitJoule EnergyFormatterUnit = 11
+	// The kilojoule unit.
+	EnergyFormatterUnitKilojoule EnergyFormatterUnit = 14
+	// The calorie unit (chemistry "calories", abbreviated "cal").
+	EnergyFormatterUnitCalorie EnergyFormatterUnit = 1793
+	// The kilocalorie unit (kilocalories in general, abbreviated "kcal", or "C" in some locales when `isForFoodEnergyUse` is set to `YES`).
 	EnergyFormatterUnitKilocalorie EnergyFormatterUnit = 1794
 )
 
@@ -1326,23 +1499,35 @@ func (e EnumerationOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Defines the possible types of an expression.
 type ExpressionType uint64
 
 const (
-	ConstantValueExpressionType   ExpressionType = 0
+	// An expression that always returns the same value.
+	ConstantValueExpressionType ExpressionType = 0
+	// An expression that always returns the parameter object itself.
 	EvaluatedObjectExpressionType ExpressionType = 1
-	VariableExpressionType        ExpressionType = 2
-	KeyPathExpressionType         ExpressionType = 3
-	FunctionExpressionType        ExpressionType = 4
-	UnionSetExpressionType        ExpressionType = 5
-	IntersectSetExpressionType    ExpressionType = 6
-	MinusSetExpressionType        ExpressionType = 7
-	SubqueryExpressionType        ExpressionType = 13
-	AggregateExpressionType       ExpressionType = 14
-	AnyKeyExpressionType          ExpressionType = 15
-	BlockExpressionType           ExpressionType = 19
-	ConditionalExpressionType     ExpressionType = 20
+	// An expression that always returns whatever is stored at 'variable' in the bindings dictionary.
+	VariableExpressionType ExpressionType = 2
+	// An expression that returns something that can be used as a key path.
+	KeyPathExpressionType ExpressionType = 3
+	// An expression that returns the result of evaluating a symbol.
+	FunctionExpressionType ExpressionType = 4
+	// An expression that returns the result of doing a unionSet: on two expressions that evaluate to flat collections (arrays or sets).
+	UnionSetExpressionType ExpressionType = 5
+	// An expression that returns the result of doing an intersectSet: on two expressions that evaluate to flat collections (arrays or sets).
+	IntersectSetExpressionType ExpressionType = 6
+	// An expression that returns the result of doing a minusSet: on two expressions that evaluate to flat collections (arrays or sets).
+	MinusSetExpressionType ExpressionType = 7
+	// A subquery expression.
+	SubqueryExpressionType ExpressionType = 13
+	// An aggregate expression.
+	AggregateExpressionType ExpressionType = 14
+	// An expression that represents any key for a Spotlight query.
+	AnyKeyExpressionType ExpressionType = 15
+	// A block expression.
+	BlockExpressionType ExpressionType = 19
+	// A conditional expression that evaluates a predicate to determine which expression to return.
+	ConditionalExpressionType ExpressionType = 20
 )
 
 // String returns the ExpressionType constant's name, or its numeric form when the
@@ -1380,15 +1565,18 @@ func (e ExpressionType) String() string {
 	}
 }
 
-// Options to use when reading the contents or attributes of a file or directory.
 // Bitmask — values may be combined with |.
 type FileCoordinatorReadingOptions uint64
 
 const (
-	FileCoordinatorReadingWithoutChanges                   FileCoordinatorReadingOptions = 1
-	FileCoordinatorReadingResolvesSymbolicLink             FileCoordinatorReadingOptions = 2
+	// Whether reading does _not_ trigger sending of -savePresentedItemChangesWithCompletionHandler: to certain NSFilePresenters in the system and waiting for those NSFilePresenters to respond. The default behavior during coordinated reading is to send -savePresentedItemChangesWithCompletionHandler: to NSFilePresenters. Specify this constant if your code does not need other objects to save changes first. If you do _not_ specify this constant, the -savePresentedItemChangesWithCompletionHandler: method of relevant file presenters is called before your code reads the item.
+	FileCoordinatorReadingWithoutChanges FileCoordinatorReadingOptions = 1
+	// Whether reading of an item that might be a symbolic link file causes the resolution of the link if it is. This affects the URL passed to the block passed to an invocation of one of the -coordinateReadingItemAtURL:... methods. Specify this constant if you want an item that might be a symbolic link to resolve to the file pointed to by that link (instead of to the link itself). When you use this option, the system provides the resolved URL to the accessor block in place of the original URL. This is not a valid option to use with -prepareForReadingItemsAtURLs:options:writingItemsAtURLs:options:error:byAccessor:.
+	FileCoordinatorReadingResolvesSymbolicLink FileCoordinatorReadingOptions = 2
+	// Whether the reading to be done will only attempt to get an item's metadata that is immediately available (name, modification date, tags, and other attributes), and not its contents. For ubiquitous items, specifying this option causes coordinated reads to be granted immediately (barring other coordinated readers or writers or file presenters on the same system preventing this) instead of waiting for any downloading of contents or additional metadata like conflicting versions or thumbnails. Attempting to read the item's contents during such a coordinated read may give unexpected results or fail.
 	FileCoordinatorReadingImmediatelyAvailableMetadataOnly FileCoordinatorReadingOptions = 4
-	FileCoordinatorReadingForUploading                     FileCoordinatorReadingOptions = 8
+	// Whether reading of an item is being done for the purpose of uploading. When using this option, NSFileCoordinator will create a temporary snapshot of the item being read and will relinquish its claim on the file once that snapshot is made to avoid blocking other coordinated writes during a potentially long upload. If the item at the URL being read is a directory (such as a document package), then the snapshot will be a new file that contains the zipped contents of that directory, and the URL passed to the accessor block will locate that file. When using this option, you may upload the document outside of the accessor block. However, you should open a file descriptor to the file or relocate the file within the accessor block before you do so, because NSFileCoordinator will unlink the file after the block returns, rendering it inaccessible via the URL.
+	FileCoordinatorReadingForUploading FileCoordinatorReadingOptions = 8
 )
 
 // String returns the FileCoordinatorReadingOptions constant's name, or its numeric form when the
@@ -1413,15 +1601,19 @@ func (e FileCoordinatorReadingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Options to use when changing the contents or attributes of a file or directory.
 // Bitmask — values may be combined with |.
 type FileCoordinatorWritingOptions uint64
 
 const (
-	FileCoordinatorWritingForDeleting                    FileCoordinatorWritingOptions = 1
-	FileCoordinatorWritingForMoving                      FileCoordinatorWritingOptions = 2
-	FileCoordinatorWritingForMerging                     FileCoordinatorWritingOptions = 4
-	FileCoordinatorWritingForReplacing                   FileCoordinatorWritingOptions = 8
+	// Whether the writing to be done is actually the deletion of the item. This affects how the writing waits for previously scheduled coordinated reading and writing, how the writing causes subsequently scheduled reading and writing to wait, and what NSFilePresenter messaging is done. When this constant is specified, the file coordinator calls the -accommodatePresentedItemDeletionWithCompletionHandler: or -accommodatePresentedSubitemDeletionAtURL:completionHandler: method of relevant file presenters to give them a chance to make adjustments before the item is deleted. For example, Finder uses this when it's emptying the trash to give NSFilePresenters a chance to close documents before their files disappear, or would disappear if the files weren't still open.
+	FileCoordinatorWritingForDeleting FileCoordinatorWritingOptions = 1
+	// Whether the writing to be done is actually the moving or renaming of the item. This affects how the writing waits for previously scheduled coordinated reading and writing, how the writing causes subsequently scheduled reading and writing to wait, and what NSFilePresenter messaging is done. When specified for a directory item, the file coordinator waits for already running read and write operations of the directory's contents, which were themselves initiated through a file coordinator, to finish before moving the directory. Queued, but not executing, read and write operations on the directory's contents wait until the move operation finishes. This option has no effect when what's being moved is a plain file so you can use it in code that moves file system items without checking whether the items are files or directories. Any such check would invite a race condition anyway.
+	FileCoordinatorWritingForMoving FileCoordinatorWritingOptions = 2
+	// Whether coordinated writing triggers sending of -savePresentedItemChangesWithCompletionHandler: to certain NSFilePresenters in the system and waiting for those NSFilePresenters to respond. When this constant is specified, the file coordinator calls the -savePresentedItemChangesWithCompletionHandler: method of relevant file presenters to give them a chance to save their changes before your code makes its changes.
+	FileCoordinatorWritingForMerging FileCoordinatorWritingOptions = 4
+	// Whether the writing to be done is actually the replacement of the item with a different item. It causes the same behavior as NSFileCoordinatorWritingForDeleting except that when the item being written to is renamed or moved while the writer is being made to wait the item is considered to have been a different item, so the writer is not passed an updated URL to reflect the renaming or moving. Use this when the moving or creation of an item will replace any item that gets in its way. To avoid a race condition use it regardless of whether there is actually an item in the way before the writing begins. Don't use this when simply updating the contents of a file, even if the way you do that is writing the contents to another file and renaming it into place. This is not a valid option to use with -prepareForReadingItemsAtURLs:options:writingItemsAtURLs:options:error:byAccessor:. For example, NSDocument uses this for NSSaveAsOperation and NSSaveToOperation to announce that it is possibly overwriting an item with a brand new file or file package. This gives any NSFilePresenter of the overwritten item, including perhaps a different instance of NSDocument, perhaps in the same application, a chance to close itself before the item is overwritten. For another example, the most accurate and safe way to coordinate a move is to invoke -coordinateWritingItemAtURL:options:writingItemAtURL:options:error:byAccessor: using the NSFileCoordinatorWritingForMoving option with the source URL and NSFileCoordinatorWritingForReplacing with the destination URL.
+	FileCoordinatorWritingForReplacing FileCoordinatorWritingOptions = 8
+	// Whether the writing to be done will change the item's metadata only and not its contents. If the item being written to is ubiquitous, then changes to the item's contents during this coordinated write may not be preserved or fail. When using this option, changing metadata that is related to the item's contents is not supported for ubiquitous items and such changes may not be preserved. For example, changing the value of NSURLTagNamesKey is supported, but changing the value of NSURLContentModificationDateKey is not.
 	FileCoordinatorWritingContentIndependentMetadataOnly FileCoordinatorWritingOptions = 16
 )
 
@@ -1450,12 +1642,13 @@ func (e FileCoordinatorWritingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Options for specifying the behavior of file replacement operations.
 // Bitmask — values may be combined with |.
 type FileManagerItemReplacementOptions uint64
 
 const (
-	FileManagerItemReplacementUsingNewMetadataOnly      FileManagerItemReplacementOptions = 1
+	// Only metadata from the new item is used, and metadata from the original item isn't preserved (default).
+	FileManagerItemReplacementUsingNewMetadataOnly FileManagerItemReplacementOptions = 1
+	// The backup item remains in place after a successful replacement.
 	FileManagerItemReplacementWithoutDeletingBackupItem FileManagerItemReplacementOptions = 2
 )
 
@@ -1506,8 +1699,10 @@ func (e FileManagerResumeSyncBehavior) String() string {
 type FileManagerUnmountOptions uint64
 
 const (
+	// Specifies that all partitions on an unmountable disk should be unmounted. If the volume is on a partitioned disk, this option unmounts all volumes on that disk. Then, then the disk is ejected (if it is ejectable).
 	FileManagerUnmountAllPartitionsAndEjectDisk FileManagerUnmountOptions = 1
-	FileManagerUnmountWithoutUI                 FileManagerUnmountOptions = 2
+	// Specifies that no UI should accompany the unmount operation. If this option is not specified when calling `unmountVolumeAtURL:options:completionHandler:`, any needed UI will delay completion of the completion handler.
+	FileManagerUnmountWithoutUI FileManagerUnmountOptions = 2
 )
 
 // String returns the FileManagerUnmountOptions constant's name, or its numeric form when the
@@ -1549,11 +1744,11 @@ func (e FileManagerUploadLocalVersionConflictPolicy) String() string {
 	}
 }
 
-// Options for adding a new file version.
 // Bitmask — values may be combined with |.
 type FileVersionAddingOptions uint64
 
 const (
+	// Whether +addVersionOfItemAtURL:withContentsOfURL:options:error: can move the new version contents file into the version store instead of copying it. Moving is much faster. See the comment for -temporaryDirectoryURLForNewVersionOfItemAtURL: for an example of when this useful.
 	FileVersionAddingByMoving FileVersionAddingOptions = 1
 )
 
@@ -1570,11 +1765,11 @@ func (e FileVersionAddingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Options for replacing a file version.
 // Bitmask — values may be combined with |.
 type FileVersionReplacingOptions uint64
 
 const (
+	// Whether -replaceItemAtURL:options:error: must move the version's contents out of the version store instead of copying it. This is useful when you want to promote a version's contents to a separate file. You wouldn't use this to restore a version of a file.
 	FileVersionReplacingByMoving FileVersionReplacingOptions = 1
 )
 
@@ -1591,12 +1786,13 @@ func (e FileVersionReplacingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Reading options that can be set by the initWithURL:options:error: and readFromURL:options:error: methods.
 // Bitmask — values may be combined with |.
 type FileWrapperReadingOptions uint64
 
 const (
-	FileWrapperReadingImmediate      FileWrapperReadingOptions = 1
+	// Whether the contents are read immediately, applied recursively in the case of directory file wrappers. If reading with this option succeeds then subsequent invocations of -fileWrappers, -regularFileContents, -symbolicLinkDestinationURL:, -serializedRepresentation, and, on Mac OS X, -[NSFileWrapper(NSExtensions) icon] sent to the receiver and all its descendant file wrappers won't fail. For performance NSFileWrapper may or may not immediately read the contents of some file packages immediately even when this option is chosen. For example, the contents of bundles (not all file packages are bundles) are immutable to the user so on Mac OS X NSFileWrapper may read the children of such a directory lazily. You can use this option to take a reasonable snapshot of a file or folder for writing later. For example, a Mac OS X application like TextEdit can use this option when creating new file wrappers to represent attachments that the user creates by copying and pasting or dragging and dropping from the Finder to a TextEdit document. You wouldn't use this option when reading a document file package because that would cause unnecessarily bad perfomance. For example, an application wouldn't use this option when creating file wrappers to represent attachments as it's opening a document stored in a file package.
+	FileWrapperReadingImmediate FileWrapperReadingOptions = 1
+	// Whether file mapping for regular file wrappers is disallowed. In Mac OS 10.6 and newer NSFileWrapper only ever memory maps files on internal drives, regardless of whether this option is used. It never memory maps files on external drives or network volumes. You can use this option to keep NSFileWrapper from memory mapping files at all, even ones on internal drives. This is useful if you want to make sure your application doesn't hold files open (mapped files are open files) and therefore prevent the user from ejecting DVDs, unmounting disk partitions, or unmounting disk images.
 	FileWrapperReadingWithoutMapping FileWrapperReadingOptions = 2
 )
 
@@ -1616,12 +1812,13 @@ func (e FileWrapperReadingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Writing options that can be set by the writeToURL:options:originalContentsURL:error: method.
 // Bitmask — values may be combined with |.
 type FileWrapperWritingOptions uint64
 
 const (
-	FileWrapperWritingAtomic           FileWrapperWritingOptions = 1
+	// Whether writing is done atomically. You can use this option to ensure that, when overwriting a file package, the overwriting either completely succeeds or completely fails, with no possibility of leaving the file package in an inconsistent state. Because this option causes additional I/O, you shouldn't use it unnecessarily. For example, don't use this option in an override of `-[NSDocument writeToURL:ofType:error:]`, because `NSDocument` safe-saving is already done atomically.
+	FileWrapperWritingAtomic FileWrapperWritingOptions = 1
+	// Whether descendant file wrappers are sent -setFilename: if the writing succeeds. This is necessary when your application passes original contents URLs to -writeToURL:options:originalContentsURL:error:. Without using this and reusing child file wrappers properly subsequent invocations of -writeToURL:options:originalContentsURL:error: wouldn't be able to reliably create hard links in a new file package for performance because the record of names in the old file package would be out of date.
 	FileWrapperWritingWithNameUpdating FileWrapperWritingOptions = 2
 )
 
@@ -1641,16 +1838,21 @@ func (e FileWrapperWritingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// The formatting context for a formatter.
 type FormattingContext int64
 
 const (
-	FormattingContextUnknown             FormattingContext = 0
-	FormattingContextDynamic             FormattingContext = 1
-	FormattingContextStandalone          FormattingContext = 2
-	FormattingContextListItem            FormattingContext = 3
+	// The capitalization context to be used is unknown (this is the default value).
+	FormattingContextUnknown FormattingContext = 0
+	// The capitalization context is determined dynamically from the set {NSFormattingContextStandalone, NSFormattingContextBeginningOfSentence, NSFormattingContextMiddleOfSentence}. For example, if a date is placed at the beginning of a sentence, NSFormattingContextBeginningOfSentence is used to format the string automatically. When this context is used, the formatter will return a string proxy that works like a normal string in most cases. After returning from the formatter, the string in the string proxy is formatted by using NSFormattingContextUnknown. When the string proxy is used in stringWithFormat:, we can determine where the %
+	FormattingContextDynamic FormattingContext = 1
+	// The capitalization context if a date or date symbol is to be formatted with capitalization appropriate for stand-alone usage such as an isolated name on a calendar page.
+	FormattingContextStandalone FormattingContext = 2
+	// The capitalization context if a date or date symbol is to be formatted with capitalization appropriate for a list or menu item.
+	FormattingContextListItem FormattingContext = 3
+	// The capitalization context if a date or date symbol is to be formatted with capitalization appropriate for the beginning of a sentence.
 	FormattingContextBeginningOfSentence FormattingContext = 4
-	FormattingContextMiddleOfSentence    FormattingContext = 5
+	// The capitalization context if a date or date symbol is to be formatted with capitalization appropriate for the middle of a sentence.
+	FormattingContextMiddleOfSentence FormattingContext = 5
 )
 
 // String returns the FormattingContext constant's name, or its numeric form when the
@@ -1674,13 +1876,15 @@ func (e FormattingContext) String() string {
 	}
 }
 
-// Specifies the width of the unit, determining the textual representation.
 type FormattingUnitStyle int64
 
 const (
-	FormattingUnitStyleShort  FormattingUnitStyle = 1
+	// The shortest spelling for a unit.
+	FormattingUnitStyleShort FormattingUnitStyle = 1
+	// The medium-length spelling for a unit.
 	FormattingUnitStyleMedium FormattingUnitStyle = 2
-	FormattingUnitStyleLong   FormattingUnitStyle = 3
+	// The long spelling for a unit.
+	FormattingUnitStyleLong FormattingUnitStyle = 3
 )
 
 // String returns the FormattingUnitStyle constant's name, or its numeric form when the
@@ -2004,12 +2208,14 @@ func (e GrammaticalPronounType) String() string {
 	}
 }
 
-// Cookie acceptance policies implemented by the NSHTTPCookieStorage class.
 type HTTPCookieAcceptPolicy uint64
 
 const (
-	HTTPCookieAcceptPolicyAlways                     HTTPCookieAcceptPolicy = 0
-	HTTPCookieAcceptPolicyNever                      HTTPCookieAcceptPolicy = 1
+	// Accept all cookies. This is the default cookie accept policy.
+	HTTPCookieAcceptPolicyAlways HTTPCookieAcceptPolicy = 0
+	// Reject all cookies.
+	HTTPCookieAcceptPolicyNever HTTPCookieAcceptPolicy = 1
+	// Accept cookies only from the main document domain.
 	HTTPCookieAcceptPolicyOnlyFromMainDocumentDomain HTTPCookieAcceptPolicy = 2
 )
 
@@ -2028,25 +2234,37 @@ func (e HTTPCookieAcceptPolicy) String() string {
 	}
 }
 
-// Options used to generate and parse ISO 8601 date representations.
 // Bitmask — values may be combined with |.
 type ISO8601DateFormatOptions uint64
 
 const (
-	ISO8601DateFormatWithYear                     ISO8601DateFormatOptions = 1
-	ISO8601DateFormatWithMonth                    ISO8601DateFormatOptions = 2
-	ISO8601DateFormatWithWeekOfYear               ISO8601DateFormatOptions = 4
-	ISO8601DateFormatWithDay                      ISO8601DateFormatOptions = 16
-	ISO8601DateFormatWithTime                     ISO8601DateFormatOptions = 32
-	ISO8601DateFormatWithTimeZone                 ISO8601DateFormatOptions = 64
-	ISO8601DateFormatWithSpaceBetweenDateAndTime  ISO8601DateFormatOptions = 128
-	ISO8601DateFormatWithDashSeparatorInDate      ISO8601DateFormatOptions = 256
-	ISO8601DateFormatWithColonSeparatorInTime     ISO8601DateFormatOptions = 512
+	// The date representation includes the year. The format for year is inferred based on whether or not the week of year option is specified. - If week of year is present, `YYYY` is used to display week dates. - If week of year is not present, `yyyy` is used by default.
+	ISO8601DateFormatWithYear ISO8601DateFormatOptions = 1
+	// The date representation includes the month. The format for month is `MM`.
+	ISO8601DateFormatWithMonth ISO8601DateFormatOptions = 2
+	// The date representation includes the week of the year. The format for week of year is `ww`, including the `W` prefix.
+	ISO8601DateFormatWithWeekOfYear ISO8601DateFormatOptions = 4
+	// The date representation includes the day. The format for day is inferred based on provided options: - If month is not present, day of year (`DDD`) is used. - If month is present, day of month (`dd`) is used. - If either weekOfMonth or weekOfYear is present, local day of week (`ee`) is used.
+	ISO8601DateFormatWithDay ISO8601DateFormatOptions = 16
+	// The date representation includes the time. The format for time is `HH:mm:ss`.
+	ISO8601DateFormatWithTime ISO8601DateFormatOptions = 32
+	// The date representation includes the timezone. The format for timezone is `ZZZZZ`.
+	ISO8601DateFormatWithTimeZone ISO8601DateFormatOptions = 64
+	// The date representation uses a space (` `) instead of `T` between the date and time.
+	ISO8601DateFormatWithSpaceBetweenDateAndTime ISO8601DateFormatOptions = 128
+	// The date representation uses the dash separator (`-`) in the date.
+	ISO8601DateFormatWithDashSeparatorInDate ISO8601DateFormatOptions = 256
+	// The date representation uses the colon separator (`:`) in the time.
+	ISO8601DateFormatWithColonSeparatorInTime ISO8601DateFormatOptions = 512
+	// The date representation uses the colon separator (`:`) in the time zone.
 	ISO8601DateFormatWithColonSeparatorInTimeZone ISO8601DateFormatOptions = 1024
 	ISO8601DateFormatWithFractionalSeconds        ISO8601DateFormatOptions = 2048
-	ISO8601DateFormatWithFullDate                 ISO8601DateFormatOptions = 275
-	ISO8601DateFormatWithFullTime                 ISO8601DateFormatOptions = 1632
-	ISO8601DateFormatWithInternetDateTime         ISO8601DateFormatOptions = 1907
+	// The date representation includes the year, month, and day. Equivalent to specifying `NSISO8601DateFormatWithYear`, `NSISO8601DateFormatWithMonth`, and `NSISO8601DateFormatWithDay`.
+	ISO8601DateFormatWithFullDate ISO8601DateFormatOptions = 275
+	// The date representation includes the hour, minute, and second.
+	ISO8601DateFormatWithFullTime ISO8601DateFormatOptions = 1632
+	// The format used for internet date times, according to the RFC 3339 standard. Equivalent to specifying `NSISO8601DateFormatWithFullDate`, `NSISO8601DateFormatWithFullTime`, `NSISO8601DateFormatWithDashSeparatorInDate`, `NSISO8601DateFormatWithColonSeparatorInTime`, and `NSISO8601DateFormatWithColonSeparatorInTimeZone`.
+	ISO8601DateFormatWithInternetDateTime ISO8601DateFormatOptions = 1907
 )
 
 // String returns the ISO8601DateFormatOptions constant's name, or its numeric form when the
@@ -2101,15 +2319,19 @@ func (e ISO8601DateFormatOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// The following constants are defined by NSPositionalSpecifier to specify an insertion position.
 type InsertionPosition uint64
 
 const (
-	PositionAfter     InsertionPosition = 0
-	PositionBefore    InsertionPosition = 1
+	// After the specified object.
+	PositionAfter InsertionPosition = 0
+	// Before the specified object.
+	PositionBefore InsertionPosition = 1
+	// At the beginning of the container.
 	PositionBeginning InsertionPosition = 2
-	PositionEnd       InsertionPosition = 3
-	PositionReplace   InsertionPosition = 4
+	// At the end of the container.
+	PositionEnd InsertionPosition = 3
+	// Replacing the specified object.
+	PositionReplace InsertionPosition = 4
 )
 
 // String returns the InsertionPosition constant's name, or its numeric form when the
@@ -2180,16 +2402,22 @@ func (e ItemProviderRepresentationVisibility) String() string {
 	}
 }
 
-// Options used when creating Foundation objects from JSON data.
 // Bitmask — values may be combined with |.
 type JSONReadingOptions uint64
 
 const (
-	JSONReadingMutableContainers         JSONReadingOptions = 1
-	JSONReadingMutableLeaves             JSONReadingOptions = 2
-	JSONReadingFragmentsAllowed          JSONReadingOptions = 4
-	JSONReadingJSON5Allowed              JSONReadingOptions = 8
+	// Specifies that arrays and dictionaries in the returned object are mutable.
+	JSONReadingMutableContainers JSONReadingOptions = 1
+	// Specifies that leaf strings in the JSON object graph are mutable.
+	JSONReadingMutableLeaves JSONReadingOptions = 2
+	// Specifies that the parser should allow top-level objects that are not an `NSArray` or `NSDictionary`.
+	JSONReadingFragmentsAllowed JSONReadingOptions = 4
+	// Specifies that reading serialized JSON data supports the JSON5 syntax.
+	JSONReadingJSON5Allowed JSONReadingOptions = 8
+	// Specifies that the parser assumes the top-level object is a dictionary, even without surrounding curly braces.
 	JSONReadingTopLevelDictionaryAssumed JSONReadingOptions = 16
+	// Specifies that the parser should allow top-level objects that are not an `NSArray` or `NSDictionary`.
+	//
 	// Deprecated: since macOS API_TO_BE_DEPRECATED.
 	JSONReadingAllowFragments JSONReadingOptions = 4
 )
@@ -2222,14 +2450,17 @@ func (e JSONReadingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Options for writing JSON data.
 // Bitmask — values may be combined with |.
 type JSONWritingOptions uint64
 
 const (
-	JSONWritingPrettyPrinted          JSONWritingOptions = 1
-	JSONWritingSortedKeys             JSONWritingOptions = 2
-	JSONWritingFragmentsAllowed       JSONWritingOptions = 4
+	// Specifies that the JSON output uses whitespace and indentation to make the output more readable.
+	JSONWritingPrettyPrinted JSONWritingOptions = 1
+	// Specifies that the output sorts dictionary keys using `[NSLocale systemLocale]` and `NSNumericSearch`.
+	JSONWritingSortedKeys JSONWritingOptions = 2
+	// Specifies that the serializer should allow top-level objects that are not an `NSArray` or `NSDictionary`.
+	JSONWritingFragmentsAllowed JSONWritingOptions = 4
+	// Specifies that the serializer should not escape forward slashes (`/`).
 	JSONWritingWithoutEscapingSlashes JSONWritingOptions = 8
 )
 
@@ -2349,18 +2580,25 @@ func (e KeyValueSetMutationKind) String() string {
 	}
 }
 
-// The units supported by the NSLengthFormatter class.
 type LengthFormatterUnit int64
 
 const (
+	// The millimeter unit.
 	LengthFormatterUnitMillimeter LengthFormatterUnit = 8
+	// The centimeter unit.
 	LengthFormatterUnitCentimeter LengthFormatterUnit = 9
-	LengthFormatterUnitMeter      LengthFormatterUnit = 11
-	LengthFormatterUnitKilometer  LengthFormatterUnit = 14
-	LengthFormatterUnitInch       LengthFormatterUnit = 1281
-	LengthFormatterUnitFoot       LengthFormatterUnit = 1282
-	LengthFormatterUnitYard       LengthFormatterUnit = 1283
-	LengthFormatterUnitMile       LengthFormatterUnit = 1284
+	// The meter unit.
+	LengthFormatterUnitMeter LengthFormatterUnit = 11
+	// The kilometer unit.
+	LengthFormatterUnitKilometer LengthFormatterUnit = 14
+	// The inch unit.
+	LengthFormatterUnitInch LengthFormatterUnit = 1281
+	// The foot unit.
+	LengthFormatterUnitFoot LengthFormatterUnit = 1282
+	// The yard unit.
+	LengthFormatterUnitYard LengthFormatterUnit = 1283
+	// The mile unit.
+	LengthFormatterUnitMile LengthFormatterUnit = 1284
 )
 
 // String returns the LengthFormatterUnit constant's name, or its numeric form when the
@@ -2388,16 +2626,20 @@ func (e LengthFormatterUnit) String() string {
 	}
 }
 
-// Constants for linguistic tagger enumeration specifying which tokens to omit and whether to join names.
 // Bitmask — values may be combined with |.
 type LinguisticTaggerOptions uint64
 
 const (
-	LinguisticTaggerOmitWords       LinguisticTaggerOptions = 1
+	// Omit tokens of type `NSLinguisticTagWord` (items considered to be words).
+	LinguisticTaggerOmitWords LinguisticTaggerOptions = 1
+	// Omit tokens of type `NSLinguisticTagPunctuation` (all punctuation).
 	LinguisticTaggerOmitPunctuation LinguisticTaggerOptions = 2
-	LinguisticTaggerOmitWhitespace  LinguisticTaggerOptions = 4
-	LinguisticTaggerOmitOther       LinguisticTaggerOptions = 8
-	LinguisticTaggerJoinNames       LinguisticTaggerOptions = 16
+	// Omit tokens of type `NSLinguisticTagWhitespace` (whitespace of all sorts).
+	LinguisticTaggerOmitWhitespace LinguisticTaggerOptions = 4
+	// Omit tokens of type `NSLinguisticTagOther` (non-linguistic items, such as symbols).
+	LinguisticTaggerOmitOther LinguisticTaggerOptions = 8
+	// Typically, multiple-word names will be returned as multiple tokens, following the standard tokenization practice of the tagger. If this option is set, then multiple-word names will be joined together and returned as a single token.
+	LinguisticTaggerJoinNames LinguisticTaggerOptions = 16
 )
 
 // String returns the LinguisticTaggerOptions constant's name, or its numeric form when the
@@ -2456,14 +2698,18 @@ func (e LinguisticTaggerUnit) String() string {
 	}
 }
 
-// The directions that a language may take across a page of text.
 type LocaleLanguageDirection uint64
 
 const (
-	LocaleLanguageDirectionUnknown     LocaleLanguageDirection = 0
+	// The language direction is unknown.
+	LocaleLanguageDirectionUnknown LocaleLanguageDirection = 0
+	// The language direction is from left to right.
 	LocaleLanguageDirectionLeftToRight LocaleLanguageDirection = 1
+	// The language direction is from right to left.
 	LocaleLanguageDirectionRightToLeft LocaleLanguageDirection = 2
+	// The language direction is from top to bottom.
 	LocaleLanguageDirectionTopToBottom LocaleLanguageDirection = 3
+	// The language direction is from bottom to top.
 	LocaleLanguageDirectionBottomToTop LocaleLanguageDirection = 4
 )
 
@@ -2486,14 +2732,15 @@ func (e LocaleLanguageDirection) String() string {
 	}
 }
 
-// Used to remove access rights to a mach port when the NSMachPort object is invalidated or destroyed.
 // Bitmask — values may be combined with |.
 type MachPortOptions uint64
 
 const (
 	// Do not remove any send or receive rights.
-	MachPortDeallocateNone         MachPortOptions = 0
-	MachPortDeallocateSendRight    MachPortOptions = 1
+	MachPortDeallocateNone MachPortOptions = 0
+	// Deallocate the port's send right when the port is invalidated or destroyed.
+	MachPortDeallocateSendRight MachPortOptions = 1
+	// Deallocate the port's receive right when the port is invalidated or destroyed.
 	MachPortDeallocateReceiveRight MachPortOptions = 2
 )
 
@@ -2513,15 +2760,19 @@ func (e MachPortOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// The units supported by the NSMassFormatter class.
 type MassFormatterUnit int64
 
 const (
-	MassFormatterUnitGram     MassFormatterUnit = 11
+	// The gram unit.
+	MassFormatterUnitGram MassFormatterUnit = 11
+	// The kilogram unit.
 	MassFormatterUnitKilogram MassFormatterUnit = 14
-	MassFormatterUnitOunce    MassFormatterUnit = 1537
-	MassFormatterUnitPound    MassFormatterUnit = 1538
-	MassFormatterUnitStone    MassFormatterUnit = 1539
+	// The ounce unit.
+	MassFormatterUnitOunce MassFormatterUnit = 1537
+	// The pound unit.
+	MassFormatterUnitPound MassFormatterUnit = 1538
+	// The stone unit.
+	MassFormatterUnitStone MassFormatterUnit = 1539
 )
 
 // String returns the MassFormatterUnit constant's name, or its numeric form when the
@@ -2547,10 +2798,15 @@ func (e MassFormatterUnit) String() string {
 type MatchingFlags uint64
 
 const (
-	MatchingProgress      MatchingFlags = 1
-	MatchingCompleted     MatchingFlags = 2
-	MatchingHitEnd        MatchingFlags = 4
-	MatchingRequiredEnd   MatchingFlags = 8
+	// Set when the Block is called to report progress during a long-running match operation.
+	MatchingProgress MatchingFlags = 1
+	// Set when the Block is called after matching has completed.
+	MatchingCompleted MatchingFlags = 2
+	// Set when the current match operation reached the end of the search range.
+	MatchingHitEnd MatchingFlags = 4
+	// Set when the current match depended on the location of the end of the search range.
+	MatchingRequiredEnd MatchingFlags = 8
+	// Set when matching failed due to an internal error.
 	MatchingInternalError MatchingFlags = 16
 )
 
@@ -2579,15 +2835,19 @@ func (e MatchingFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-// The matching options constants specify the reporting, completion and matching rules to the expression matching methods. These constants are used by all methods that search for, or replace values, using a regular expression.
 // Bitmask — values may be combined with |.
 type MatchingOptions uint64
 
 const (
-	MatchingReportProgress         MatchingOptions = 1
-	MatchingReportCompletion       MatchingOptions = 2
-	MatchingAnchored               MatchingOptions = 4
-	MatchingWithTransparentBounds  MatchingOptions = 8
+	// Call the Block periodically during long-running match operations. This option has no effect for methods other than `enumerateMatchesInString:options:range:usingBlock:`.
+	MatchingReportProgress MatchingOptions = 1
+	// Call the Block once after the completion of any matching. This option has no effect for methods other than `enumerateMatchesInString:options:range:usingBlock:`.
+	MatchingReportCompletion MatchingOptions = 2
+	// Specifies that matches are limited to those at the start of the search range.
+	MatchingAnchored MatchingOptions = 4
+	// Specifies that matching may examine parts of the string beyond the bounds of the search range, for purposes such as word boundary detection, lookahead, etc. This constant has no effect if the search range contains the entire string.
+	MatchingWithTransparentBounds MatchingOptions = 8
+	// Specifies that `^` and `$` will not automatically match the beginning and end of the search range, but will still match the beginning and end of the entire string. This constant has no effect if the search range contains the entire string.
 	MatchingWithoutAnchoringBounds MatchingOptions = 16
 )
 
@@ -2616,13 +2876,15 @@ func (e MatchingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Measurement formatter options.
 // Bitmask — values may be combined with |.
 type MeasurementFormatterUnitOptions uint64
 
 const (
-	MeasurementFormatterUnitOptionsProvidedUnit           MeasurementFormatterUnitOptions = 1
-	MeasurementFormatterUnitOptionsNaturalScale           MeasurementFormatterUnitOptions = 2
+	// Ensures the formatter uses the provided unit even if it is not the preferred unit of the set locale.
+	MeasurementFormatterUnitOptionsProvidedUnit MeasurementFormatterUnitOptions = 1
+	// Makes the formatter show a natural scale (e.g. "12 kilometers" instead of "12000 meters"). Note that setting this option results in scaling within the unit system of the preferred unit of the locale. To scale within the unit system of the provided unit, combine with `NSMeasurementFormatterUnitOptionsProvidedUnit`.
+	MeasurementFormatterUnitOptionsNaturalScale MeasurementFormatterUnitOptions = 2
+	// Displays the temperature value without a unit (e.g. "90\u00B0" rather than "90\u00B0F" or "90\u00B0C").
 	MeasurementFormatterUnitOptionsTemperatureWithoutUnit MeasurementFormatterUnitOptions = 4
 )
 
@@ -2645,12 +2907,13 @@ func (e MeasurementFormatterUnitOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// These constants specify options for a network service.
 // Bitmask — values may be combined with |.
 type NetServiceOptions uint64
 
 const (
-	NetServiceNoAutoRename         NetServiceOptions = 1
+	// Specifies that the network service should not rename itself in the event of a name collision.
+	NetServiceNoAutoRename NetServiceOptions = 1
+	// Specifies that a TCP listener should be started for both IPv4 and IPv6 on the port specified by this service. If the listening port can't be opened, the service calls its delegate's `-netService:didNotPublish:` method to report the error. The listener supports only TCP connections. If the service's type does not end with `_tcp`, publication fails with `NSNetServicesBadArgumentError`. Whenever a client connects to the listening socket, the service calls its delegate's `-netService:didAcceptConnectionWithInputStream:outputStream:` method with a pair of `NSStream` objects.
 	NetServiceListenForConnections NetServiceOptions = 2
 )
 
@@ -2670,13 +2933,15 @@ func (e NetServiceOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// The constants that specify how notifications are coalesced.
 // Bitmask — values may be combined with |.
 type NotificationCoalescing uint64
 
 const (
-	NotificationNoCoalescing       NotificationCoalescing = 0
-	NotificationCoalescingOnName   NotificationCoalescing = 1
+	// Do not coalesce notifications in the queue.
+	NotificationNoCoalescing NotificationCoalescing = 0
+	// Coalesce notifications with the same name.
+	NotificationCoalescingOnName NotificationCoalescing = 1
+	// Coalesce notifications with the same object (sender).
 	NotificationCoalescingOnSender NotificationCoalescing = 2
 )
 
@@ -2696,13 +2961,15 @@ func (e NotificationCoalescing) String() string {
 	return strings.Join(parts, "|")
 }
 
-// These constants specify the behavior of a number formatter. These constants are returned by the defaultFormatterBehavior class method and the formatterBehavior property.
 type NumberFormatterBehavior uint64
 
 const (
+	// The number-formatter behavior set as the default for new instances. You can set the default formatter behavior with the class method \c setDefaultFormatterBehavior: .
 	NumberFormatterBehaviorDefault NumberFormatterBehavior = 0
-	NumberFormatterBehavior10_0    NumberFormatterBehavior = 1000
-	NumberFormatterBehavior10_4    NumberFormatterBehavior = 1040
+	// The number-formatter behavior as it existed prior to macOS 10.4.
+	NumberFormatterBehavior10_0 NumberFormatterBehavior = 1000
+	// The number-formatter behavior since macOS 10.4.
+	NumberFormatterBehavior10_4 NumberFormatterBehavior = 1040
 )
 
 // String returns the NumberFormatterBehavior constant's name, or its numeric form when the
@@ -2720,14 +2987,17 @@ func (e NumberFormatterBehavior) String() string {
 	}
 }
 
-// These constants are used to specify how numbers should be padded. These constants are used by the paddingPosition property.
 type NumberFormatterPadPosition uint64
 
 const (
+	// Specifies that the padding should occur before the prefix.
 	NumberFormatterPadBeforePrefix NumberFormatterPadPosition = 0
-	NumberFormatterPadAfterPrefix  NumberFormatterPadPosition = 1
+	// Specifies that the padding should occur after the prefix.
+	NumberFormatterPadAfterPrefix NumberFormatterPadPosition = 1
+	// Specifies that the padding should occur before the suffix.
 	NumberFormatterPadBeforeSuffix NumberFormatterPadPosition = 2
-	NumberFormatterPadAfterSuffix  NumberFormatterPadPosition = 3
+	// Specifies that the padding should occur after the suffix.
+	NumberFormatterPadAfterSuffix NumberFormatterPadPosition = 3
 )
 
 // String returns the NumberFormatterPadPosition constant's name, or its numeric form when the
@@ -2747,17 +3017,23 @@ func (e NumberFormatterPadPosition) String() string {
 	}
 }
 
-// These constants are used to specify how numbers should be rounded. These constants are used by the roundingMode property.
 type NumberFormatterRoundingMode uint64
 
 const (
-	NumberFormatterRoundCeiling  NumberFormatterRoundingMode = 0
-	NumberFormatterRoundFloor    NumberFormatterRoundingMode = 1
-	NumberFormatterRoundDown     NumberFormatterRoundingMode = 2
-	NumberFormatterRoundUp       NumberFormatterRoundingMode = 3
+	// Round towards positive infinity.
+	NumberFormatterRoundCeiling NumberFormatterRoundingMode = 0
+	// Round towards negative infinity.
+	NumberFormatterRoundFloor NumberFormatterRoundingMode = 1
+	// Round towards zero.
+	NumberFormatterRoundDown NumberFormatterRoundingMode = 2
+	// Round away from zero.
+	NumberFormatterRoundUp NumberFormatterRoundingMode = 3
+	// Round towards the nearest integer, or towards an even number if equidistant.
 	NumberFormatterRoundHalfEven NumberFormatterRoundingMode = 4
+	// Round towards the nearest integer, or towards zero if equidistant.
 	NumberFormatterRoundHalfDown NumberFormatterRoundingMode = 5
-	NumberFormatterRoundHalfUp   NumberFormatterRoundingMode = 6
+	// Round towards the nearest integer, or away from zero if equidistant.
+	NumberFormatterRoundHalfUp NumberFormatterRoundingMode = 6
 )
 
 // String returns the NumberFormatterRoundingMode constant's name, or its numeric form when the
@@ -2783,19 +3059,28 @@ func (e NumberFormatterRoundingMode) String() string {
 	}
 }
 
-// The predefined number format styles used by the numberStyle property.
 type NumberFormatterStyle uint64
 
 const (
-	NumberFormatterNoStyle                 NumberFormatterStyle = 0
-	NumberFormatterDecimalStyle            NumberFormatterStyle = 1
-	NumberFormatterCurrencyStyle           NumberFormatterStyle = 2
-	NumberFormatterPercentStyle            NumberFormatterStyle = 3
-	NumberFormatterScientificStyle         NumberFormatterStyle = 4
-	NumberFormatterSpellOutStyle           NumberFormatterStyle = 5
-	NumberFormatterOrdinalStyle            NumberFormatterStyle = 6
-	NumberFormatterCurrencyISOCodeStyle    NumberFormatterStyle = 8
-	NumberFormatterCurrencyPluralStyle     NumberFormatterStyle = 9
+	// An integer representation. For example, the number 1234.5678 is represented as 1235.
+	NumberFormatterNoStyle NumberFormatterStyle = 0
+	// A decimal style format. For example, in the en_US locale, the number 1234.5678 is represented as 1,234.568.
+	NumberFormatterDecimalStyle NumberFormatterStyle = 1
+	// A currency style format that uses the currency symbol defined by the number formatter locale. For example, in the en_US locale, the number 1234.5678 is represented as $1,234.57; in the fr_FR locale, the number 1234.5678 is represented as 1 234,57 EUR.
+	NumberFormatterCurrencyStyle NumberFormatterStyle = 2
+	// A percent style format. For example, in the en_US locale, the number 0.123 is represented as 12%.
+	NumberFormatterPercentStyle NumberFormatterStyle = 3
+	// A scientific style format. For example, in the en_US locale, the number 1234.5678 is represented as 1.2345678E3.
+	NumberFormatterScientificStyle NumberFormatterStyle = 4
+	// A style format in which numbers are spelled out in the language defined by the number formatter locale. For example, in the en_US locale, the number 1234.5678 is represented as one thousand two hundred thirty-four point five six seven eight; in the fr_FR locale, the number 1234.5678 is represented as mille deux cent trente-quatre virgule cinq six sept huit. This style is supported for most user locales. If this style doesn't support the number formatter locale, the en_US locale is used as a fallback.
+	NumberFormatterSpellOutStyle NumberFormatterStyle = 5
+	// An ordinal style format. For example, in the en_US locale, the number 3 is represented as 3rd; in the fr_FR locale, the number 3 is represented as 3e.
+	NumberFormatterOrdinalStyle NumberFormatterStyle = 6
+	// A currency style format that uses the ISO 4217 currency code defined by the number formatter locale. This style behaves like the currency style, except that the currency symbol is replaced by the corresponding ISO 4217 currency code. For example, in the en_US locale, the number 1234.5678 is represented as USD1,234.57; in the fr_FR locale, the number 1234.5678 is represented as 1 234,57 EUR.
+	NumberFormatterCurrencyISOCodeStyle NumberFormatterStyle = 8
+	// A currency style format that uses the pluralized denomination defined by the number formatter locale. This style behaves like the currency style, except that the currency symbol is replaced by the corresponding pluralized denomination. For example, in the en_US locale, the number 1234.5678 is represented as 1,234.57 US dollars; in the fr_FR locale, the number 1234.5678 is represented as 1 234,57 euros.
+	NumberFormatterCurrencyPluralStyle NumberFormatterStyle = 9
+	// An accounting currency style format that uses the currency symbol defined by the number formatter locale. This style behaves like the currency style, except that negative numbers representations are surrounded by parentheses rather than preceded by a negative symbol. For example, in the en_US locale, the number -1234.5678 is represented as ($1,234.57); in the fr_FR locale, the number -1234.5678 is represented as (1 234,57 EUR).
 	NumberFormatterCurrencyAccountingStyle NumberFormatterStyle = 10
 )
 
@@ -2828,14 +3113,18 @@ func (e NumberFormatterStyle) String() string {
 	}
 }
 
-// These constants let you prioritize the order in which operations execute.
 type OperationQueuePriority int64
 
 const (
-	OperationQueuePriorityVeryLow  OperationQueuePriority = -8
-	OperationQueuePriorityLow      OperationQueuePriority = -4
-	OperationQueuePriorityNormal   OperationQueuePriority = 0
-	OperationQueuePriorityHigh     OperationQueuePriority = 4
+	// Operations receive very low priority for execution.
+	OperationQueuePriorityVeryLow OperationQueuePriority = -8
+	// Operations receive low priority for execution.
+	OperationQueuePriorityLow OperationQueuePriority = -4
+	// Operations receive the normal priority for execution.
+	OperationQueuePriorityNormal OperationQueuePriority = 0
+	// Operations receive high priority for execution.
+	OperationQueuePriorityHigh OperationQueuePriority = 4
+	// Operations receive very high priority for execution.
 	OperationQueuePriorityVeryHigh OperationQueuePriority = 8
 )
 
@@ -2890,11 +3179,11 @@ func (e OrderedCollectionDifferenceCalculationOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Options for formatting person name components.
 // Bitmask — values may be combined with |.
 type PersonNameComponentsFormatterOptions uint64
 
 const (
+	// Indicates that the formatter should format the component object's phoneticRepresentation components instead of its own components.
 	PersonNameComponentsFormatterPhonetic PersonNameComponentsFormatterOptions = 2
 )
 
@@ -2911,14 +3200,18 @@ func (e PersonNameComponentsFormatterOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// The formatting styles for person name components.
 type PersonNameComponentsFormatterStyle int64
 
 const (
-	PersonNameComponentsFormatterStyleDefault     PersonNameComponentsFormatterStyle = 0
-	PersonNameComponentsFormatterStyleShort       PersonNameComponentsFormatterStyle = 1
-	PersonNameComponentsFormatterStyleMedium      PersonNameComponentsFormatterStyle = 2
-	PersonNameComponentsFormatterStyleLong        PersonNameComponentsFormatterStyle = 3
+	// The default style, determined by the formatter.
+	PersonNameComponentsFormatterStyleDefault PersonNameComponentsFormatterStyle = 0
+	// Relies on user preferences and language defaults to display shortened form appropriate for display in space-constrained settings, e.g. C Darwin.
+	PersonNameComponentsFormatterStyleShort PersonNameComponentsFormatterStyle = 1
+	// The minimally necessary features for differentiation in a casual setting, e.g. Charles Darwin.
+	PersonNameComponentsFormatterStyleMedium PersonNameComponentsFormatterStyle = 2
+	// The fully-qualified name complete with all known components, e.g. Charles Robert Darwin, FRS.
+	PersonNameComponentsFormatterStyleLong PersonNameComponentsFormatterStyle = 3
+	// The maximally-abbreviated form of a name suitable for monograms, e.g. CRD.
 	PersonNameComponentsFormatterStyleAbbreviated PersonNameComponentsFormatterStyle = 4
 )
 
@@ -2941,27 +3234,38 @@ func (e PersonNameComponentsFormatterStyle) String() string {
 	}
 }
 
-// Defines the memory and personality options for an NSPointerFunctions object.
 // Bitmask — values may be combined with |.
 type PointerFunctionsOptions uint64
 
 const (
+	// Use strong write-barriers to backing store; use garbage-collected memory on copy-in. This is the default memory value. As a special case, if you do not use garbage collection and specify this value in conjunction with `NSPointerFunctionsObjectPersonality` or `NSPointerFunctionsObjectPointerPersonality` then the `NSPointerFunctions` object uses `retain` and `release`. If you do not use garbage collection, and specify this value in conjunction with a valid non-object personality, it is the same as specifying `NSPointerFunctionsMallocMemory`.
 	PointerFunctionsStrongMemory PointerFunctionsOptions = 0
-	// Use weak read and write barriers; use garbage-collected memory on copyIn.
+	// Use weak read and write barriers; use garbage-collected memory on copyIn. If you do not use garbage collection, for object personalities, it will hold a non-retained object pointer.
 	//
 	// Deprecated: GC no longer supported
-	PointerFunctionsZeroingWeakMemory        PointerFunctionsOptions = 1
-	PointerFunctionsOpaqueMemory             PointerFunctionsOptions = 2
-	PointerFunctionsMallocMemory             PointerFunctionsOptions = 3
-	PointerFunctionsMachVirtualMemory        PointerFunctionsOptions = 4
-	PointerFunctionsWeakMemory               PointerFunctionsOptions = 5
-	PointerFunctionsObjectPersonality        PointerFunctionsOptions = 0
-	PointerFunctionsOpaquePersonality        PointerFunctionsOptions = 256
+	PointerFunctionsZeroingWeakMemory PointerFunctionsOptions = 1
+	// Take no action when pointers are deleted. This is usually the preferred memory option for holding arbitrary pointers. The acquire function is only used for copy-in operations. This option is unlikely to be a good choice for objects.
+	PointerFunctionsOpaqueMemory PointerFunctionsOptions = 2
+	// Use `free()` on removal, `calloc()` on copy in.
+	PointerFunctionsMallocMemory PointerFunctionsOptions = 3
+	// Use Mach memory.
+	PointerFunctionsMachVirtualMemory PointerFunctionsOptions = 4
+	// Uses weak read and write barriers appropriate for ARC or GC. Using `NSPointerFunctionsWeakMemory` object references will turn to `NULL` on last release.
+	PointerFunctionsWeakMemory PointerFunctionsOptions = 5
+	// Use `hash` and `isEqual` methods for hashing and equality comparisons, use the `description` method for a description. This is the default personality value. As a special case, if you do not use garbage collection and specify this value in conjunction with `NSPointerFunctionsStrongMemory` then the `NSPointerFunctions` object uses `retain` and `release`.
+	PointerFunctionsObjectPersonality PointerFunctionsOptions = 0
+	// Use shifted pointer for the hash value and direct comparison to determine equality.
+	PointerFunctionsOpaquePersonality PointerFunctionsOptions = 256
+	// Use shifted pointer for the hash value and direct comparison to determine equality; use the `description` method for a description. As a special case, if you do not use garbage collection and specify this value in conjunction with `NSPointerFunctionsStrongMemory` then the `NSPointerFunctions` object uses `retain` and `release`.
 	PointerFunctionsObjectPointerPersonality PointerFunctionsOptions = 512
-	PointerFunctionsCStringPersonality       PointerFunctionsOptions = 768
-	PointerFunctionsStructPersonality        PointerFunctionsOptions = 1024
-	PointerFunctionsIntegerPersonality       PointerFunctionsOptions = 1280
-	PointerFunctionsCopyIn                   PointerFunctionsOptions = 65536
+	// Use a string hash and `strcmp`; C-string '`%s`' style description.
+	PointerFunctionsCStringPersonality PointerFunctionsOptions = 768
+	// Use a memory hash and `memcmp` (using a size function that you must set---see `sizeFunction`).
+	PointerFunctionsStructPersonality PointerFunctionsOptions = 1024
+	// Use unshifted value as hash and equality.
+	PointerFunctionsIntegerPersonality PointerFunctionsOptions = 1280
+	// Use the memory acquire function to allocate and copy items on input (see `acquireFunction`).
+	PointerFunctionsCopyIn PointerFunctionsOptions = 65536
 )
 
 // String returns the PointerFunctionsOptions constant's name, or its numeric form when the
@@ -3007,13 +3311,15 @@ func (e PointerFunctionsOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// The constants that specify when notifications are posted.
 type PostingStyle uint64
 
 const (
+	// The notification is posted at the end of the current notification callout or timer.
 	PostWhenIdle PostingStyle = 1
-	PostASAP     PostingStyle = 2
-	PostNow      PostingStyle = 3
+	// The notification is posted at the end of the current event processing cycle.
+	PostASAP PostingStyle = 2
+	// The notification is posted immediately after coalescing.
+	PostNow PostingStyle = 3
 )
 
 // String returns the PostingStyle constant's name, or its numeric form when the
@@ -3031,24 +3337,37 @@ func (e PostingStyle) String() string {
 	}
 }
 
-// Defines the type of comparison for a comparison predicate.
 type PredicateOperatorType uint64
 
 const (
-	LessThanPredicateOperatorType             PredicateOperatorType = 0
-	LessThanOrEqualToPredicateOperatorType    PredicateOperatorType = 1
-	GreaterThanPredicateOperatorType          PredicateOperatorType = 2
+	// A less-than predicate.
+	LessThanPredicateOperatorType PredicateOperatorType = 0
+	// A less-than-or-equal-to predicate.
+	LessThanOrEqualToPredicateOperatorType PredicateOperatorType = 1
+	// A greater-than predicate.
+	GreaterThanPredicateOperatorType PredicateOperatorType = 2
+	// A greater-than-or-equal-to predicate.
 	GreaterThanOrEqualToPredicateOperatorType PredicateOperatorType = 3
-	EqualToPredicateOperatorType              PredicateOperatorType = 4
-	NotEqualToPredicateOperatorType           PredicateOperatorType = 5
-	MatchesPredicateOperatorType              PredicateOperatorType = 6
-	LikePredicateOperatorType                 PredicateOperatorType = 7
-	BeginsWithPredicateOperatorType           PredicateOperatorType = 8
-	EndsWithPredicateOperatorType             PredicateOperatorType = 9
-	InPredicateOperatorType                   PredicateOperatorType = 10
-	CustomSelectorPredicateOperatorType       PredicateOperatorType = 11
-	ContainsPredicateOperatorType             PredicateOperatorType = 99
-	BetweenPredicateOperatorType              PredicateOperatorType = 100
+	// An equal-to predicate.
+	EqualToPredicateOperatorType PredicateOperatorType = 4
+	// A not-equal-to predicate.
+	NotEqualToPredicateOperatorType PredicateOperatorType = 5
+	// A full regular expression matching predicate.
+	MatchesPredicateOperatorType PredicateOperatorType = 6
+	// A simple subset of the `MATCHES` predicate, similar in behavior to SQL `LIKE`.
+	LikePredicateOperatorType PredicateOperatorType = 7
+	// A begins-with predicate.
+	BeginsWithPredicateOperatorType PredicateOperatorType = 8
+	// An ends-with predicate.
+	EndsWithPredicateOperatorType PredicateOperatorType = 9
+	// A predicate to determine if the left hand side is in the right hand side. For strings, returns `YES` if the left hand side is a substring of the right hand side. For collections, returns `YES` if the left hand side is in the right hand side.
+	InPredicateOperatorType PredicateOperatorType = 10
+	// A predicate that uses a custom selector that takes a single argument and returns a `BOOL` value. The selector is invoked on the left hand side with the right hand side as the argument.
+	CustomSelectorPredicateOperatorType PredicateOperatorType = 11
+	// A predicate to determine if the left hand side contains the right hand side. Returns `YES` if `[lhs contains rhs]`; the left hand side must be an `NSExpression` object that evaluates to a collection.
+	ContainsPredicateOperatorType PredicateOperatorType = 99
+	// A predicate to determine if the left hand side lies at or between bounds specified by the right hand side. The right hand side must be an array in which the first element sets the lower bound and the second element the upper, inclusive.
+	BetweenPredicateOperatorType PredicateOperatorType = 100
 )
 
 // String returns the PredicateOperatorType constant's name, or its numeric form when the
@@ -3151,13 +3470,16 @@ func (e PresentationIntentKind) String() string {
 	}
 }
 
-// Values used to indicate the system’s thermal state.
 type ProcessInfoThermalState int64
 
 const (
-	ProcessInfoThermalStateNominal  ProcessInfoThermalState = 0
-	ProcessInfoThermalStateFair     ProcessInfoThermalState = 1
-	ProcessInfoThermalStateSerious  ProcessInfoThermalState = 2
+	// The thermal state is within normal limits.
+	ProcessInfoThermalStateNominal ProcessInfoThermalState = 0
+	// The thermal state is slightly elevated. Reduce or defer background work, like prefetching content over the network or updating database indexes.
+	ProcessInfoThermalStateFair ProcessInfoThermalState = 1
+	// The thermal state is high. Reduce usage of resources that generate heat and consume battery. Reduce CPU and GPU usage, reduce the target framerate, and reduce the level of detail in rendered content.
+	ProcessInfoThermalStateSerious ProcessInfoThermalState = 2
+	// The thermal state is significantly impacting the performance of the system and the device needs to cool down. Reduce usage of the CPU, GPU, and I/O to the minimum level required for user interaction. If possible, stop using peripherals such as the camera, flash, microphone, and speaker.
 	ProcessInfoThermalStateCritical ProcessInfoThermalState = 3
 )
 
@@ -3178,12 +3500,14 @@ func (e ProcessInfoThermalState) String() string {
 	}
 }
 
-// These constants are used to specify a property list serialization format.
 type PropertyListFormat uint64
 
 const (
-	PropertyListOpenStepFormat    PropertyListFormat = 1
-	PropertyListXMLFormat_v1_0    PropertyListFormat = 100
+	// Specifies the ASCII property list format inherited from the OpenStep APIs.
+	PropertyListOpenStepFormat PropertyListFormat = 1
+	// Specifies the XML property list format.
+	PropertyListXMLFormat_v1_0 PropertyListFormat = 100
+	// Specifies the binary property list format.
 	PropertyListBinaryFormat_v1_0 PropertyListFormat = 200
 )
 
@@ -3202,14 +3526,15 @@ func (e PropertyListFormat) String() string {
 	}
 }
 
-// These constants specify mutability options in property lists.
 // Bitmask — values may be combined with |.
 type PropertyListMutabilityOptions uint64
 
 const (
 	// Causes the returned property list to contain immutable objects.
-	PropertyListImmutable                  PropertyListMutabilityOptions = 0
-	PropertyListMutableContainers          PropertyListMutabilityOptions = 1
+	PropertyListImmutable PropertyListMutabilityOptions = 0
+	// Causes the returned property list to have mutable containers but immutable leaves.
+	PropertyListMutableContainers PropertyListMutabilityOptions = 1
+	// Causes the returned property list to have mutable containers and mutable leaves.
 	PropertyListMutableContainersAndLeaves PropertyListMutabilityOptions = 2
 )
 
@@ -3229,15 +3554,19 @@ func (e PropertyListMutabilityOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Constants that indicate the nature and importance of work to the system.
 type QualityOfService int64
 
 const (
+	// The quality-of-service class for user-interactive tasks, such as animations, event handling, or updating your app's user interface.
 	QualityOfServiceUserInteractive QualityOfService = 33
-	QualityOfServiceUserInitiated   QualityOfService = 25
-	QualityOfServiceUtility         QualityOfService = 17
-	QualityOfServiceBackground      QualityOfService = 9
-	QualityOfServiceDefault         QualityOfService = -1
+	// The quality-of-service class for tasks that prevent the user from actively using your app.
+	QualityOfServiceUserInitiated QualityOfService = 25
+	// The quality-of-service class for tasks that the user does not track actively.
+	QualityOfServiceUtility QualityOfService = 17
+	// The quality-of-service class for maintenance or cleanup tasks that you create.
+	QualityOfServiceBackground QualityOfService = 9
+	// The default quality-of-service class.
+	QualityOfServiceDefault QualityOfService = -1
 )
 
 // String returns the QualityOfService constant's name, or its numeric form when the
@@ -3301,13 +3630,20 @@ func (e RectEdge) String() string {
 type RegularExpressionOptions uint64
 
 const (
-	RegularExpressionCaseInsensitive            RegularExpressionOptions = 1
+	// Match letters in the pattern independent of case.
+	RegularExpressionCaseInsensitive RegularExpressionOptions = 1
+	// Ignore whitespace and #-prefixed comments in the pattern.
 	RegularExpressionAllowCommentsAndWhitespace RegularExpressionOptions = 2
-	RegularExpressionIgnoreMetacharacters       RegularExpressionOptions = 4
-	RegularExpressionDotMatchesLineSeparators   RegularExpressionOptions = 8
-	RegularExpressionAnchorsMatchLines          RegularExpressionOptions = 16
-	RegularExpressionUseUnixLineSeparators      RegularExpressionOptions = 32
-	RegularExpressionUseUnicodeWordBoundaries   RegularExpressionOptions = 64
+	// Treat the entire pattern as a literal string.
+	RegularExpressionIgnoreMetacharacters RegularExpressionOptions = 4
+	// Allow `.` to match any character, including line separators.
+	RegularExpressionDotMatchesLineSeparators RegularExpressionOptions = 8
+	// Allow `^` and `$` to match the start and end of lines.
+	RegularExpressionAnchorsMatchLines RegularExpressionOptions = 16
+	// Treat only `\n` as a line separator (otherwise, all standard line separators are used).
+	RegularExpressionUseUnixLineSeparators RegularExpressionOptions = 32
+	// Use Unicode TR#29 to specify word boundaries (otherwise, traditional regular expression word boundaries are used).
+	RegularExpressionUseUnicodeWordBoundaries RegularExpressionOptions = 64
 )
 
 // String returns the RegularExpressionOptions constant's name, or its numeric form when the
@@ -3341,12 +3677,13 @@ func (e RegularExpressionOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// A type that represents the style to use when formatting relative dates, such as “1 week ago” or “last week”.
 type RelativeDateTimeFormatterStyle int64
 
 const (
+	// A numeric relative date style (e.g. "1 day ago", "2 days ago", "1 week ago", "in 1 week").
 	RelativeDateTimeFormatterStyleNumeric RelativeDateTimeFormatterStyle = 0
-	RelativeDateTimeFormatterStyleNamed   RelativeDateTimeFormatterStyle = 1
+	// A named relative date style (e.g. "yesterday", "2 days ago", "last week", "next week"). Falls back to the numeric style if no name is available.
+	RelativeDateTimeFormatterStyleNamed RelativeDateTimeFormatterStyle = 1
 )
 
 // String returns the RelativeDateTimeFormatterStyle constant's name, or its numeric form when the
@@ -3362,13 +3699,16 @@ func (e RelativeDateTimeFormatterStyle) String() string {
 	}
 }
 
-// A type that represents the style to use when formatting the units of relative dates.
 type RelativeDateTimeFormatterUnitsStyle int64
 
 const (
-	RelativeDateTimeFormatterUnitsStyleFull        RelativeDateTimeFormatterUnitsStyle = 0
-	RelativeDateTimeFormatterUnitsStyleSpellOut    RelativeDateTimeFormatterUnitsStyle = 1
-	RelativeDateTimeFormatterUnitsStyleShort       RelativeDateTimeFormatterUnitsStyle = 2
+	// The full units style (e.g. "2 months ago").
+	RelativeDateTimeFormatterUnitsStyleFull RelativeDateTimeFormatterUnitsStyle = 0
+	// The spelled-out units style (e.g. "two months ago").
+	RelativeDateTimeFormatterUnitsStyleSpellOut RelativeDateTimeFormatterUnitsStyle = 1
+	// The short units style (e.g. "2 mo. ago").
+	RelativeDateTimeFormatterUnitsStyleShort RelativeDateTimeFormatterUnitsStyle = 2
+	// The abbreviated units style (e.g. "2 mo. ago"). May give different results in languages other than English.
 	RelativeDateTimeFormatterUnitsStyleAbbreviated RelativeDateTimeFormatterUnitsStyle = 3
 )
 
@@ -3389,11 +3729,12 @@ func (e RelativeDateTimeFormatterUnitsStyle) String() string {
 	}
 }
 
-// These constants are used by relativePosition and relativePosition.
 type RelativePosition uint64
 
 const (
-	RelativeAfter  RelativePosition = 0
+	// After the base object.
+	RelativeAfter RelativePosition = 0
+	// Before the base object.
 	RelativeBefore RelativePosition = 1
 )
 
@@ -3410,13 +3751,16 @@ func (e RelativePosition) String() string {
 	}
 }
 
-// These constants specify rounding behaviors.
 type RoundingMode uint64
 
 const (
-	RoundPlain   RoundingMode = 0
-	RoundDown    RoundingMode = 1
-	RoundUp      RoundingMode = 2
+	// Round to the closest possible return value; when caught halfway between two positive numbers, round up; when caught between two negative numbers, round down.
+	RoundPlain RoundingMode = 0
+	// Round return values down.
+	RoundDown RoundingMode = 1
+	// Round return values up.
+	RoundUp RoundingMode = 2
+	// Round to the closest possible return value; when halfway between two possibilities, return the possibility whose last digit is even.
 	RoundBankers RoundingMode = 3
 )
 
@@ -3464,37 +3808,63 @@ func (e SaveOptions) String() string {
 	}
 }
 
-// The location of significant directories.
 type SearchPathDirectory uint64
 
 const (
-	ApplicationDirectory          SearchPathDirectory = 1
-	DemoApplicationDirectory      SearchPathDirectory = 2
+	// Supported applications (`/Applications`).
+	ApplicationDirectory SearchPathDirectory = 1
+	// Unsupported applications and demonstration versions.
+	DemoApplicationDirectory SearchPathDirectory = 2
+	// Developer applications (`/Developer/Applications`). Deprecated: As of Xcode 4.3, there is no longer a Developer Application directory directory; instead, Xcode.app is a self-contained application that gets installed in the user's Applications directory, by default, although it can be put anywhere.
 	DeveloperApplicationDirectory SearchPathDirectory = 3
-	AdminApplicationDirectory     SearchPathDirectory = 4
-	LibraryDirectory              SearchPathDirectory = 5
-	DeveloperDirectory            SearchPathDirectory = 6
-	UserDirectory                 SearchPathDirectory = 7
-	DocumentationDirectory        SearchPathDirectory = 8
-	DocumentDirectory             SearchPathDirectory = 9
-	CoreServiceDirectory          SearchPathDirectory = 10
+	// System and network administration applications.
+	AdminApplicationDirectory SearchPathDirectory = 4
+	// Various user-visible documentation, support, and configuration files (`/Library`).
+	LibraryDirectory SearchPathDirectory = 5
+	// Developer resources (`/Developer`). Deprecated: As of Xcode 4.3, there is no longer a Developer directory; instead, Xcode.app is a self-contained application that gets installed in the user's Applications directory, by default, although it can be put anywhere.
+	DeveloperDirectory SearchPathDirectory = 6
+	// User home directories (`/Users`).
+	UserDirectory SearchPathDirectory = 7
+	// Documentation.
+	DocumentationDirectory SearchPathDirectory = 8
+	// Document directory.
+	DocumentDirectory SearchPathDirectory = 9
+	// Core services (`System/Library/CoreServices`).
+	CoreServiceDirectory SearchPathDirectory = 10
+	// The user's autosaved documents (`Library/Autosave Information`).
 	AutosavedInformationDirectory SearchPathDirectory = 11
-	DesktopDirectory              SearchPathDirectory = 12
-	CachesDirectory               SearchPathDirectory = 13
-	ApplicationSupportDirectory   SearchPathDirectory = 14
-	DownloadsDirectory            SearchPathDirectory = 15
-	InputMethodsDirectory         SearchPathDirectory = 16
-	MoviesDirectory               SearchPathDirectory = 17
-	MusicDirectory                SearchPathDirectory = 18
-	PicturesDirectory             SearchPathDirectory = 19
-	PrinterDescriptionDirectory   SearchPathDirectory = 20
-	SharedPublicDirectory         SearchPathDirectory = 21
-	PreferencePanesDirectory      SearchPathDirectory = 22
-	ApplicationScriptsDirectory   SearchPathDirectory = 23
-	ItemReplacementDirectory      SearchPathDirectory = 99
-	AllApplicationsDirectory      SearchPathDirectory = 100
-	AllLibrariesDirectory         SearchPathDirectory = 101
-	TrashDirectory                SearchPathDirectory = 102
+	// The user's desktop directory.
+	DesktopDirectory SearchPathDirectory = 12
+	// Discardable cache files (`Library/Caches`).
+	CachesDirectory SearchPathDirectory = 13
+	// Application support files (`Library/Application Support`).
+	ApplicationSupportDirectory SearchPathDirectory = 14
+	// The user's downloads directory. The `NSDownloadsDirectory` flag only produces a path when you provide a `NSUserDomainMask`.
+	DownloadsDirectory SearchPathDirectory = 15
+	// Input Methods (`Library/Input Methods`).
+	InputMethodsDirectory SearchPathDirectory = 16
+	// The user's Movies directory (`~/Movies`).
+	MoviesDirectory SearchPathDirectory = 17
+	// The user's Music directory (`~/Music`).
+	MusicDirectory SearchPathDirectory = 18
+	// The user's Pictures directory (`~/Pictures`).
+	PicturesDirectory SearchPathDirectory = 19
+	// The system's PPDs directory (`Library/Printers/PPDs`).
+	PrinterDescriptionDirectory SearchPathDirectory = 20
+	// The user's Public sharing directory (`~/Public`).
+	SharedPublicDirectory SearchPathDirectory = 21
+	// The PreferencePanes directory for use with System Preferences (`Library/PreferencePanes`).
+	PreferencePanesDirectory SearchPathDirectory = 22
+	// The user scripts folder for the calling application (`~/Library/Application Scripts/<code-signing-id>`).
+	ApplicationScriptsDirectory SearchPathDirectory = 23
+	// The constant used to create a temporary directory. Pass this constant to the `NSFileManager` method `URLForDirectory:inDomain:appropriateForURL:create:error:` in order to create a temporary directory.
+	ItemReplacementDirectory SearchPathDirectory = 99
+	// All directories where applications can be stored.
+	AllApplicationsDirectory SearchPathDirectory = 100
+	// All directories where resources can be stored.
+	AllLibrariesDirectory SearchPathDirectory = 101
+	// The trash directory.
+	TrashDirectory SearchPathDirectory = 102
 )
 
 // String returns the SearchPathDirectory constant's name, or its numeric form when the
@@ -3560,16 +3930,20 @@ func (e SearchPathDirectory) String() string {
 	}
 }
 
-// Domain constants specifying base locations to use when you search for significant directories.
 // Bitmask — values may be combined with |.
 type SearchPathDomainMask uint64
 
 const (
-	UserDomainMask    SearchPathDomainMask = 1
-	LocalDomainMask   SearchPathDomainMask = 2
+	// The user's home directory---the place to install user's personal items (`~`).
+	UserDomainMask SearchPathDomainMask = 1
+	// The place to install items available to everyone on this machine.
+	LocalDomainMask SearchPathDomainMask = 2
+	// The place to install items available on the network (`/Network`).
 	NetworkDomainMask SearchPathDomainMask = 4
-	SystemDomainMask  SearchPathDomainMask = 8
-	AllDomainsMask    SearchPathDomainMask = 65535
+	// A directory for system files provided by Apple (`/System`). This directory can't be modified.
+	SystemDomainMask SearchPathDomainMask = 8
+	// All domains. Includes all of the above and future items.
+	AllDomainsMask SearchPathDomainMask = 65535
 )
 
 // String returns the SearchPathDomainMask constant's name, or its numeric form when the
@@ -3628,12 +4002,18 @@ func (e SortOptions) String() string {
 type StreamEvent uint64
 
 const (
-	StreamEventNone              StreamEvent = 0
-	StreamEventOpenCompleted     StreamEvent = 1
+	// No event has occurred.
+	StreamEventNone StreamEvent = 0
+	// The open has completed successfully.
+	StreamEventOpenCompleted StreamEvent = 1
+	// The stream has bytes to be read.
 	StreamEventHasBytesAvailable StreamEvent = 2
+	// The stream can accept bytes for writing.
 	StreamEventHasSpaceAvailable StreamEvent = 4
-	StreamEventErrorOccurred     StreamEvent = 8
-	StreamEventEndEncountered    StreamEvent = 16
+	// An error has occurred on the stream.
+	StreamEventErrorOccurred StreamEvent = 8
+	// The end of the stream has been reached.
+	StreamEventEndEncountered StreamEvent = 16
 )
 
 // String returns the StreamEvent constant's name, or its numeric form when the
@@ -3661,18 +4041,25 @@ func (e StreamEvent) String() string {
 	return strings.Join(parts, "|")
 }
 
-// The type declared for the constants listed in doc:stream/stream_status_constants.
 type StreamStatus uint64
 
 const (
+	// The stream is not open for reading or writing. This status is returned before the underlying call to open a stream but after it's been created.
 	StreamStatusNotOpen StreamStatus = 0
+	// The stream is in the process of being opened for reading or for writing. For network streams, this status might include the time after the stream was opened, but while network DNS resolution is happening.
 	StreamStatusOpening StreamStatus = 1
-	StreamStatusOpen    StreamStatus = 2
+	// The stream is open, but no reading or writing is occurring.
+	StreamStatusOpen StreamStatus = 2
+	// Data is being read from the stream.
 	StreamStatusReading StreamStatus = 3
+	// Data is being written to the stream.
 	StreamStatusWriting StreamStatus = 4
-	StreamStatusAtEnd   StreamStatus = 5
-	StreamStatusClosed  StreamStatus = 6
-	StreamStatusError   StreamStatus = 7
+	// There is no more data to read, or no more data can be written to the stream.
+	StreamStatusAtEnd StreamStatus = 5
+	// The stream is closed.
+	StreamStatusClosed StreamStatus = 6
+	// The remote end of the connection can't be contacted, or the connection has been severed for some other reason.
+	StreamStatusError StreamStatus = 7
 )
 
 // String returns the StreamStatus constant's name, or its numeric form when the
@@ -3700,20 +4087,28 @@ func (e StreamStatus) String() string {
 	}
 }
 
-// These values represent the options available to many of the string classes’ search and comparison methods.
 // Bitmask — values may be combined with |.
 type StringCompareOptions uint64
 
 const (
-	CaseInsensitiveSearch      StringCompareOptions = 1
-	LiteralSearch              StringCompareOptions = 2
-	BackwardsSearch            StringCompareOptions = 4
-	AnchoredSearch             StringCompareOptions = 8
-	NumericSearch              StringCompareOptions = 64
+	// A case-insensitive search.
+	CaseInsensitiveSearch StringCompareOptions = 1
+	// Exact character-by-character equivalence.
+	LiteralSearch StringCompareOptions = 2
+	// Search from end of source string.
+	BackwardsSearch StringCompareOptions = 4
+	// Search is limited to start (or end, if `NSBackwardsSearch`) of source string.
+	AnchoredSearch StringCompareOptions = 8
+	// Numbers within strings are compared using numeric value, that is, `Name2.txt` < `Name7.txt` < `Name25.txt`. Numeric comparison only applies to the numerals in the string, not other characters that would have meaning in a numeric representation such as a negative sign, a comma, or a decimal point. This option only applies to compare methods, not find.
+	NumericSearch StringCompareOptions = 64
+	// Search ignores diacritic marks. For example, 'o' is equal to 'o'.
 	DiacriticInsensitiveSearch StringCompareOptions = 128
-	WidthInsensitiveSearch     StringCompareOptions = 256
-	ForcedOrderingSearch       StringCompareOptions = 512
-	RegularExpressionSearch    StringCompareOptions = 1024
+	// Search ignores width differences in characters that have full-width and half-width forms, as occurs in East Asian character sets. For example, with this option, the full-width Latin small letter 'a' (`U+FF41`) is equal to the basic Latin small letter 'a' (`U+0061`).
+	WidthInsensitiveSearch StringCompareOptions = 256
+	// Comparisons are forced to return either `NSOrderedAscending` or `NSOrderedDescending` if the strings are equivalent but not strictly equal. This option ensures reliable, reproducible results when sorting. For example, "aaa" is greater than "AAA" if `NSCaseInsensitiveSearch` is specified.
+	ForcedOrderingSearch StringCompareOptions = 512
+	// The search string is treated as an ICU-compatible regular expression. If set, no other options can apply except `NSCaseInsensitiveSearch` and `NSAnchoredSearch`. You can use this option only with the `rangeOfString:` methods and `stringByReplacingOccurrencesOfString:withString:options:range:`.
+	RegularExpressionSearch StringCompareOptions = 1024
 )
 
 // String returns the StringCompareOptions constant's name, or its numeric form when the
@@ -3753,12 +4148,13 @@ func (e StringCompareOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Options for converting string encodings.
 // Bitmask — values may be combined with |.
 type StringEncodingConversionOptions uint64
 
 const (
-	StringEncodingConversionAllowLossy             StringEncodingConversionOptions = 1
+	// Allows lossy conversion.
+	StringEncodingConversionAllowLossy StringEncodingConversionOptions = 1
+	// Specifies an external representation (with a byte-order mark, if necessary, to indicate endianness).
 	StringEncodingConversionExternalRepresentation StringEncodingConversionOptions = 2
 )
 
@@ -3778,7 +4174,6 @@ func (e StringEncodingConversionOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Constants to specify kinds of substrings and styles of enumeration.
 // Bitmask — values may be combined with |.
 type StringEnumerationOptions uint64
 
@@ -3832,11 +4227,12 @@ func (e StringEnumerationOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Constants that specify the termination reason values that the system returns.
 type TaskTerminationReason int64
 
 const (
-	TaskTerminationReasonExit           TaskTerminationReason = 1
+	// The task exited normally.
+	TaskTerminationReasonExit TaskTerminationReason = 1
+	// The task exited due to an uncaught signal.
 	TaskTerminationReasonUncaughtSignal TaskTerminationReason = 2
 )
 
@@ -3853,18 +4249,25 @@ func (e TaskTerminationReason) String() string {
 	}
 }
 
-// These are passed to initWithObjectSpecifier:comparisonOperator:testObject: to specify the comparison operator.
 type TestComparisonOperation uint64
 
 const (
-	EqualToComparison              TestComparisonOperation = 0
-	LessThanOrEqualToComparison    TestComparisonOperation = 1
-	LessThanComparison             TestComparisonOperation = 2
+	// Tests for equality.
+	EqualToComparison TestComparisonOperation = 0
+	// Tests for less-than-or-equal-to.
+	LessThanOrEqualToComparison TestComparisonOperation = 1
+	// Tests for less-than.
+	LessThanComparison TestComparisonOperation = 2
+	// Tests for greater-than-or-equal-to.
 	GreaterThanOrEqualToComparison TestComparisonOperation = 3
-	GreaterThanComparison          TestComparisonOperation = 4
-	BeginsWithComparison           TestComparisonOperation = 5
-	EndsWithComparison             TestComparisonOperation = 6
-	ContainsComparison             TestComparisonOperation = 7
+	// Tests for greater-than.
+	GreaterThanComparison TestComparisonOperation = 4
+	// Tests whether a string begins with another string.
+	BeginsWithComparison TestComparisonOperation = 5
+	// Tests whether a string ends with another string.
+	EndsWithComparison TestComparisonOperation = 6
+	// Tests whether a string contains another string.
+	ContainsComparison TestComparisonOperation = 7
 )
 
 // String returns the TestComparisonOperation constant's name, or its numeric form when the
@@ -3896,18 +4299,31 @@ func (e TestComparisonOperation) String() string {
 type TextCheckingType uint64
 
 const (
-	TextCheckingTypeOrthography        TextCheckingType = 1
-	TextCheckingTypeSpelling           TextCheckingType = 2
-	TextCheckingTypeGrammar            TextCheckingType = 4
-	TextCheckingTypeDate               TextCheckingType = 8
-	TextCheckingTypeAddress            TextCheckingType = 16
-	TextCheckingTypeLink               TextCheckingType = 32
-	TextCheckingTypeQuote              TextCheckingType = 64
-	TextCheckingTypeDash               TextCheckingType = 128
-	TextCheckingTypeReplacement        TextCheckingType = 256
-	TextCheckingTypeCorrection         TextCheckingType = 512
-	TextCheckingTypeRegularExpression  TextCheckingType = 1024
-	TextCheckingTypePhoneNumber        TextCheckingType = 2048
+	// Language identification.
+	TextCheckingTypeOrthography TextCheckingType = 1
+	// Spell checking.
+	TextCheckingTypeSpelling TextCheckingType = 2
+	// Grammar checking.
+	TextCheckingTypeGrammar TextCheckingType = 4
+	// Date and time detection.
+	TextCheckingTypeDate TextCheckingType = 8
+	// Address detection.
+	TextCheckingTypeAddress TextCheckingType = 16
+	// Link detection.
+	TextCheckingTypeLink TextCheckingType = 32
+	// Smart quotes.
+	TextCheckingTypeQuote TextCheckingType = 64
+	// Smart dashes.
+	TextCheckingTypeDash TextCheckingType = 128
+	// Fixed replacements, such as copyright symbol for (c).
+	TextCheckingTypeReplacement TextCheckingType = 256
+	// Autocorrection.
+	TextCheckingTypeCorrection TextCheckingType = 512
+	// Regular expression matches.
+	TextCheckingTypeRegularExpression TextCheckingType = 1024
+	// Phone number detection.
+	TextCheckingTypePhoneNumber TextCheckingType = 2048
+	// Transit (e.g. flight) info detection.
 	TextCheckingTypeTransitInformation TextCheckingType = 4096
 )
 
@@ -3960,16 +4376,21 @@ func (e TextCheckingType) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Constants you use to specify a style when presenting time zone names.
 type TimeZoneNameStyle int64
 
 const (
-	TimeZoneNameStyleStandard            TimeZoneNameStyle = 0
-	TimeZoneNameStyleShortStandard       TimeZoneNameStyle = 1
-	TimeZoneNameStyleDaylightSaving      TimeZoneNameStyle = 2
+	// Specifies a standard name style. For example, "Central Standard Time" for Central Time.
+	TimeZoneNameStyleStandard TimeZoneNameStyle = 0
+	// Specifies a short name style. For example, "CST" for Central Time.
+	TimeZoneNameStyleShortStandard TimeZoneNameStyle = 1
+	// Specifies a daylight saving name style. For example, "Central Daylight Time" for Central Time.
+	TimeZoneNameStyleDaylightSaving TimeZoneNameStyle = 2
+	// Specifies a short daylight saving name style. For example, "CDT" for Central Time.
 	TimeZoneNameStyleShortDaylightSaving TimeZoneNameStyle = 3
-	TimeZoneNameStyleGeneric             TimeZoneNameStyle = 4
-	TimeZoneNameStyleShortGeneric        TimeZoneNameStyle = 5
+	// Specifies a generic name style. For example, "Central Time" for Central Time.
+	TimeZoneNameStyleGeneric TimeZoneNameStyle = 4
+	// Specifies a generic time zone name. For example, "CT" for Central Time.
+	TimeZoneNameStyleShortGeneric TimeZoneNameStyle = 5
 )
 
 // String returns the TimeZoneNameStyle constant's name, or its numeric form when the
@@ -3993,20 +4414,28 @@ func (e TimeZoneNameStyle) String() string {
 	}
 }
 
-// Options used when creating bookmark data.
 // Bitmask — values may be combined with |.
 type URLBookmarkCreationOptions uint64
 
 const (
+	// This option does nothing and has no effect on bookmark resolution.
+	//
 	// Deprecated: Not supported
 	URLBookmarkCreationPreferFileIDResolution URLBookmarkCreationOptions = 256
+	// Creates bookmark data with "less" information, which may be smaller but still be able to resolve in certain ways.
+	//
 	// Deprecated: Not supported
 	URLBookmarkCreationMinimalBookmark URLBookmarkCreationOptions = 512
+	// Specifies that the bookmark data includes the required properties for creating Finder alias files.
+	//
 	// Deprecated: Not supported
-	URLBookmarkCreationSuitableForBookmarkFile          URLBookmarkCreationOptions = 1024
-	URLBookmarkCreationWithSecurityScope                URLBookmarkCreationOptions = 2048
+	URLBookmarkCreationSuitableForBookmarkFile URLBookmarkCreationOptions = 1024
+	// Specifies that when creating a security-scoped bookmark, upon resolution, it provides a security-scoped URL allowing read/write access to a file-system resource.
+	URLBookmarkCreationWithSecurityScope URLBookmarkCreationOptions = 2048
+	// Specifies that when creating a security-scoped bookmark, upon resolution, it provides a security-scoped URL allowing read-only access to a file-system resource. This option is only meaningful when used along with `NSURLBookmarkCreationWithSecurityScope`.
 	URLBookmarkCreationSecurityScopeAllowOnlyReadAccess URLBookmarkCreationOptions = 4096
-	URLBookmarkCreationWithoutImplicitSecurityScope     URLBookmarkCreationOptions = 536870912
+	// Prevents inclusion of a bookmark's implicit ephemeral security scope, when creating one without security scope. Bookmarks that you create without security scope automatically carry implicit ephemeral security scope. This security scope is valid until reboot at the latest, and confers access to the resource to any other process that resolves the bookmark. Using this option prevents inclusion of this ephemeral security scope. When using this option, other processes can't call `startAccessingSecurityScopedResource` on the resolved URL.
+	URLBookmarkCreationWithoutImplicitSecurityScope URLBookmarkCreationOptions = 536870912
 )
 
 // String returns the URLBookmarkCreationOptions constant's name, or its numeric form when the
@@ -4037,14 +4466,17 @@ func (e URLBookmarkCreationOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Options used when resolving bookmark data.
 // Bitmask — values may be combined with |.
 type URLBookmarkResolutionOptions uint64
 
 const (
-	URLBookmarkResolutionWithoutUI                     URLBookmarkResolutionOptions = 256
-	URLBookmarkResolutionWithoutMounting               URLBookmarkResolutionOptions = 512
-	URLBookmarkResolutionWithSecurityScope             URLBookmarkResolutionOptions = 1024
+	// Specifies that no UI feedback should accompany resolution of the bookmark data.
+	URLBookmarkResolutionWithoutUI URLBookmarkResolutionOptions = 256
+	// Specifies that no volume should be mounted during resolution of the bookmark data.
+	URLBookmarkResolutionWithoutMounting URLBookmarkResolutionOptions = 512
+	// Specifies that the security scope, applied to the bookmark when it was created, should be used during resolution of the bookmark data.
+	URLBookmarkResolutionWithSecurityScope URLBookmarkResolutionOptions = 1024
+	// Specifies that resolution doesn't implicitly start accessing the ephemeral security-scoped resource. Instead, call `startAccessingSecurityScopedResource` on the returned URL when ready to use the resource. Not applicable to security-scoped bookmarks.
 	URLBookmarkResolutionWithoutImplicitStartAccessing URLBookmarkResolutionOptions = 32768
 )
 
@@ -4070,13 +4502,15 @@ func (e URLBookmarkResolutionOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// These constants specify the caching strategy used by an NSCachedURLResponse object.
 type URLCacheStoragePolicy uint64
 
 const (
-	URLCacheStorageAllowed             URLCacheStoragePolicy = 0
+	// Storage in `NSURLCache` is allowed without restriction.
+	URLCacheStorageAllowed URLCacheStoragePolicy = 0
+	// Storage in `NSURLCache` is allowed; however storage should be restricted to memory only.
 	URLCacheStorageAllowedInMemoryOnly URLCacheStoragePolicy = 1
-	URLCacheStorageNotAllowed          URLCacheStoragePolicy = 2
+	// Storage in `NSURLCache` is not allowed in any fashion, either in memory or on disk.
+	URLCacheStorageNotAllowed URLCacheStoragePolicy = 2
 )
 
 // String returns the URLCacheStoragePolicy constant's name, or its numeric form when the
@@ -4094,13 +4528,16 @@ func (e URLCacheStoragePolicy) String() string {
 	}
 }
 
-// Constants that specify how long the credential will be kept.
 type URLCredentialPersistence uint64
 
 const (
-	URLCredentialPersistenceNone           URLCredentialPersistence = 0
-	URLCredentialPersistenceForSession     URLCredentialPersistence = 1
-	URLCredentialPersistencePermanent      URLCredentialPersistence = 2
+	// The credential should not be stored.
+	URLCredentialPersistenceNone URLCredentialPersistence = 0
+	// The credential should be stored only for this session.
+	URLCredentialPersistenceForSession URLCredentialPersistence = 1
+	// The credential should be stored in the keychain.
+	URLCredentialPersistencePermanent URLCredentialPersistence = 2
+	// The credential should be stored permanently in the keychain, and in addition should be distributed to other devices based on the owning Apple ID.
 	URLCredentialPersistenceSynchronizable URLCredentialPersistence = 3
 )
 
@@ -4121,14 +4558,17 @@ func (e URLCredentialPersistence) String() string {
 	}
 }
 
-// These following constants are defined by NSURLHandle and are returned by status.
 type URLHandleStatus uint64
 
 const (
-	URLHandleNotLoaded      URLHandleStatus = 0
-	URLHandleLoadSucceeded  URLHandleStatus = 1
+	// The resource data has not been loaded.
+	URLHandleNotLoaded URLHandleStatus = 0
+	// The resource data was successfully loaded.
+	URLHandleLoadSucceeded URLHandleStatus = 1
+	// The resource data is in the process of loading.
 	URLHandleLoadInProgress URLHandleStatus = 2
-	URLHandleLoadFailed     URLHandleStatus = 3
+	// The resource data failed to load.
+	URLHandleLoadFailed URLHandleStatus = 3
 )
 
 // String returns the URLHandleStatus constant's name, or its numeric form when the
@@ -4148,13 +4588,15 @@ func (e URLHandleStatus) String() string {
 	}
 }
 
-// Constants indicating the relationship between a directory and an item.
 type URLRelationship int64
 
 const (
+	// The directory contains the specified item.
 	URLRelationshipContains URLRelationship = 0
-	URLRelationshipSame     URLRelationship = 1
-	URLRelationshipOther    URLRelationship = 2
+	// The directory and the item are the same. This relationship occurs when the value of the `NSURLFileResourceIdentifierKey` is the same for the directory and item.
+	URLRelationshipSame URLRelationship = 1
+	// The directory does not contain the item and is not the same as the item.
+	URLRelationshipOther URLRelationship = 2
 )
 
 // String returns the URLRelationship constant's name, or its numeric form when the
@@ -4172,12 +4614,13 @@ func (e URLRelationship) String() string {
 	}
 }
 
-// The entities that can make a network request.
 type URLRequestAttribution uint64
 
 const (
+	// A developer-initiated network request. This is the default value. Use this for any purpose other than when the user explicitly accesses a link.
 	URLRequestAttributionDeveloper URLRequestAttribution = 0
-	URLRequestAttributionUser      URLRequestAttribution = 1
+	// The user explicitly directs the app to make a network request. Use this for URL requests that satisfy a user request to access an explicit, unmodified URL.
+	URLRequestAttributionUser URLRequestAttribution = 1
 )
 
 // String returns the URLRequestAttribution constant's name, or its numeric form when the
@@ -4193,17 +4636,23 @@ func (e URLRequestAttribution) String() string {
 	}
 }
 
-// The constants used to specify interaction with the cached responses.
 type URLRequestCachePolicy uint64
 
 const (
-	URLRequestUseProtocolCachePolicy                URLRequestCachePolicy = 0
-	URLRequestReloadIgnoringLocalCacheData          URLRequestCachePolicy = 1
+	// Use the caching logic defined in the protocol implementation, if any, for a particular URL load request. This is the default policy for URL load requests.
+	URLRequestUseProtocolCachePolicy URLRequestCachePolicy = 0
+	// The URL load should be loaded only from the originating source. No existing cache data should be used to satisfy a URL load request.
+	URLRequestReloadIgnoringLocalCacheData URLRequestCachePolicy = 1
+	// Ignore local cache data, and instruct proxies and other intermediates to disregard their caches so far as the protocol allows.
 	URLRequestReloadIgnoringLocalAndRemoteCacheData URLRequestCachePolicy = 4
-	URLRequestReloadIgnoringCacheData               URLRequestCachePolicy = 1
-	URLRequestReturnCacheDataElseLoad               URLRequestCachePolicy = 2
-	URLRequestReturnCacheDataDontLoad               URLRequestCachePolicy = 3
-	URLRequestReloadRevalidatingCacheData           URLRequestCachePolicy = 5
+	// Replaced by `NSURLRequestReloadIgnoringLocalCacheData`.
+	URLRequestReloadIgnoringCacheData URLRequestCachePolicy = 1
+	// Use existing cache data, regardless of age or expiration date, loading from originating source only if there is no cached data.
+	URLRequestReturnCacheDataElseLoad URLRequestCachePolicy = 2
+	// Use existing cache data, regardless of age or expiration date, and fail if no cached data is available. If there is no existing data in the cache corresponding to a URL load request, no attempt is made to load the data from the originating source, and the load is considered to have failed. This constant specifies a behavior that is similar to an "offline" mode.
+	URLRequestReturnCacheDataDontLoad URLRequestCachePolicy = 3
+	// Use cache data if the origin source can validate it; otherwise, load from the origin.
+	URLRequestReloadRevalidatingCacheData URLRequestCachePolicy = 5
 )
 
 // String returns the URLRequestCachePolicy constant's name, or its numeric form when the
@@ -4227,24 +4676,33 @@ func (e URLRequestCachePolicy) String() string {
 	}
 }
 
-// Constants that specify how a request uses network resources.
 type URLRequestNetworkServiceType uint64
 
 const (
+	// A service type for standard network traffic.
 	URLNetworkServiceTypeDefault URLRequestNetworkServiceType = 0
+	// A service type for VoIP traffic.
+	//
 	// Deprecated: Use PushKit for VoIP control purposes
 	URLNetworkServiceTypeVoIP URLRequestNetworkServiceType = 1
+	// A service type for low-delay tolerant, very low-loss tolerant, inelastic flow, and constant packet rate connections.
+	//
 	// Deprecated: Use PushKit for VoIP control purposes
 	URLNetworkServiceTypeVideo URLRequestNetworkServiceType = 2
+	// A service type for high-delay tolerant, high-loss tolerant, elastic flow, and variable size connections.
+	//
 	// Deprecated: Use PushKit for VoIP control purposes
 	URLNetworkServiceTypeBackground URLRequestNetworkServiceType = 3
-	// Deprecated: Use PushKit for VoIP control purposes
+	// A service type for low-delay tolerant, very low-loss tolerant, inelastic flow, and constant packet rate connections.
 	URLNetworkServiceTypeVoice URLRequestNetworkServiceType = 4
-	// Deprecated: Use PushKit for VoIP control purposes
+	// A service type for medium-delay tolerant, elastic and inelastic flow, bursty, and long-lived connections.
 	URLNetworkServiceTypeResponsiveData URLRequestNetworkServiceType = 6
-	URLNetworkServiceTypeAVStreaming    URLRequestNetworkServiceType = 8
-	URLNetworkServiceTypeResponsiveAV   URLRequestNetworkServiceType = 9
-	URLNetworkServiceTypeCallSignaling  URLRequestNetworkServiceType = 11
+	// A service type for medium-delay tolerant, low-medium-loss tolerant, elastic flow, constant packet interval, and variable rate and size connections.
+	URLNetworkServiceTypeAVStreaming URLRequestNetworkServiceType = 8
+	// A service type for low-delay tolerant, low-to-medium-loss tolerant, elastic flow, variable packet interval, rate, size responsive and time-sensitive connections.
+	URLNetworkServiceTypeResponsiveAV URLRequestNetworkServiceType = 9
+	// A service for low-loss tolerant, inelastic flow, jitter tolerant, short but bursty rate, and variable size connections.
+	URLNetworkServiceTypeCallSignaling URLRequestNetworkServiceType = 11
 )
 
 // String returns the URLRequestNetworkServiceType constant's name, or its numeric form when the
@@ -4303,14 +4761,19 @@ func (e URLSessionTaskMetricsDomainResolutionProtocol) String() string {
 	}
 }
 
-// The manner in which a resource is fetched.
 type URLSessionTaskMetricsResourceFetchType int64
 
 const (
-	URLSessionTaskMetricsResourceFetchTypeUnknown     URLSessionTaskMetricsResourceFetchType = 0
+	// The manner in which the resource was fetched could not be determined.
+	URLSessionTaskMetricsResourceFetchTypeUnknown URLSessionTaskMetricsResourceFetchType = 0
+	// The resource was loaded over the network.
 	URLSessionTaskMetricsResourceFetchTypeNetworkLoad URLSessionTaskMetricsResourceFetchType = 1
+	// The resource was pushed by the server to the client.
+	//
 	// Deprecated: Server push is no longer supported as of iOS 17 and aligned releases
 	URLSessionTaskMetricsResourceFetchTypeServerPush URLSessionTaskMetricsResourceFetchType = 2
+	// The resource was retrieved from the local storage.
+	//
 	// Deprecated: Server push is no longer supported as of iOS 17 and aligned releases
 	URLSessionTaskMetricsResourceFetchTypeLocalCache URLSessionTaskMetricsResourceFetchType = 3
 )
@@ -4332,13 +4795,16 @@ func (e URLSessionTaskMetricsResourceFetchType) String() string {
 	}
 }
 
-// Constants for determining the current state of a task.
 type URLSessionTaskState int64
 
 const (
-	URLSessionTaskStateRunning   URLSessionTaskState = 0
+	// The task is currently being serviced by the session. A task in this state is subject to the request and resource timeouts specified in the session configuration object.
+	URLSessionTaskStateRunning URLSessionTaskState = 0
+	// The task was suspended by the app. No further processing takes place until the task is resumed. A task in this state is not subject to timeouts.
 	URLSessionTaskStateSuspended URLSessionTaskState = 1
+	// The task has received a cancel message. The delegate may or may not have received a `URLSession:task:didCompleteWithError:` message yet. A task in this state is not subject to timeouts.
 	URLSessionTaskStateCanceling URLSessionTaskState = 2
+	// The task has completed (without being canceled), and the task's delegate receives no further callbacks. If the task completed successfully, the task's `error` property is `nil`. Otherwise, it provides an error object that tells what went wrong. A task in this state is not subject to timeouts.
 	URLSessionTaskStateCompleted URLSessionTaskState = 3
 )
 
@@ -4359,23 +4825,35 @@ func (e URLSessionTaskState) String() string {
 	}
 }
 
-// A code that indicates why a WebSocket connection closed.
 type URLSessionWebSocketCloseCode int64
 
 const (
-	URLSessionWebSocketCloseCodeInvalid                   URLSessionWebSocketCloseCode = 0
-	URLSessionWebSocketCloseCodeNormalClosure             URLSessionWebSocketCloseCode = 1000
-	URLSessionWebSocketCloseCodeGoingAway                 URLSessionWebSocketCloseCode = 1001
-	URLSessionWebSocketCloseCodeProtocolError             URLSessionWebSocketCloseCode = 1002
-	URLSessionWebSocketCloseCodeUnsupportedData           URLSessionWebSocketCloseCode = 1003
-	URLSessionWebSocketCloseCodeNoStatusReceived          URLSessionWebSocketCloseCode = 1005
-	URLSessionWebSocketCloseCodeAbnormalClosure           URLSessionWebSocketCloseCode = 1006
-	URLSessionWebSocketCloseCodeInvalidFramePayloadData   URLSessionWebSocketCloseCode = 1007
-	URLSessionWebSocketCloseCodePolicyViolation           URLSessionWebSocketCloseCode = 1008
-	URLSessionWebSocketCloseCodeMessageTooBig             URLSessionWebSocketCloseCode = 1009
+	// A code that indicates the connection is still open.
+	URLSessionWebSocketCloseCodeInvalid URLSessionWebSocketCloseCode = 0
+	// A code that indicates normal connection closure.
+	URLSessionWebSocketCloseCodeNormalClosure URLSessionWebSocketCloseCode = 1000
+	// A code that indicates an endpoint is going away. This code indicates situations like a server going down or a browser having navigated away from a page.
+	URLSessionWebSocketCloseCodeGoingAway URLSessionWebSocketCloseCode = 1001
+	// A code that indicates an endpoint terminated the connection due to a protocol error.
+	URLSessionWebSocketCloseCodeProtocolError URLSessionWebSocketCloseCode = 1002
+	// A code that indicates an endpoint terminated the connection after receiving a type of data it can't accept. An endpoint that only accepts text may send this close code if it receives a binary message.
+	URLSessionWebSocketCloseCodeUnsupportedData URLSessionWebSocketCloseCode = 1003
+	// A reserved code that indicates an endpoint expected a status code and didn't receive one.
+	URLSessionWebSocketCloseCodeNoStatusReceived URLSessionWebSocketCloseCode = 1005
+	// A reserved code that indicates the connection closed without a close control frame.
+	URLSessionWebSocketCloseCodeAbnormalClosure URLSessionWebSocketCloseCode = 1006
+	// A code that indicates the server terminated the connection because it received data inconsistent with the message's type.
+	URLSessionWebSocketCloseCodeInvalidFramePayloadData URLSessionWebSocketCloseCode = 1007
+	// A code that indicates an endpoint terminated the connection because it received a message that violates its policy. This is a generic code for use when a more specific code is unavailable.
+	URLSessionWebSocketCloseCodePolicyViolation URLSessionWebSocketCloseCode = 1008
+	// A code that indicates an endpoint is terminating the connection because it received a message too big for it to process.
+	URLSessionWebSocketCloseCodeMessageTooBig URLSessionWebSocketCloseCode = 1009
+	// A code that indicates the client terminated the connection because the server didn't negotiate a required extension. RFC 6455 indicates the client should provide a close reason with a list of the needed extensions.
 	URLSessionWebSocketCloseCodeMandatoryExtensionMissing URLSessionWebSocketCloseCode = 1010
-	URLSessionWebSocketCloseCodeInternalServerError       URLSessionWebSocketCloseCode = 1011
-	URLSessionWebSocketCloseCodeTLSHandshakeFailure       URLSessionWebSocketCloseCode = 1015
+	// A code that indicates the server terminated the connection because it encountered an unexpected condition.
+	URLSessionWebSocketCloseCodeInternalServerError URLSessionWebSocketCloseCode = 1011
+	// A reserved code that indicates the connection closed due to the failure to perform a TLS handshake.
+	URLSessionWebSocketCloseCodeTLSHandshakeFailure URLSessionWebSocketCloseCode = 1015
 )
 
 // String returns the URLSessionWebSocketCloseCode constant's name, or its numeric form when the
@@ -4434,16 +4912,19 @@ func (e URLSessionWebSocketMessageType) String() string {
 	}
 }
 
-// These constants describe how the user notification was activated.
-//
 // Deprecated: All NSUserNotifications API should be replaced with UserNotifications.frameworks API
 type UserNotificationActivationType int64
 
 const (
-	UserNotificationActivationTypeNone                    UserNotificationActivationType = 0
-	UserNotificationActivationTypeContentsClicked         UserNotificationActivationType = 1
-	UserNotificationActivationTypeActionButtonClicked     UserNotificationActivationType = 2
-	UserNotificationActivationTypeReplied                 UserNotificationActivationType = 3
+	// The user did not interact with the notification.
+	UserNotificationActivationTypeNone UserNotificationActivationType = 0
+	// The user clicked on the body of the notification.
+	UserNotificationActivationTypeContentsClicked UserNotificationActivationType = 1
+	// The user clicked the action button of the notification.
+	UserNotificationActivationTypeActionButtonClicked UserNotificationActivationType = 2
+	// The user replied to the notification.
+	UserNotificationActivationTypeReplied UserNotificationActivationType = 3
+	// The user clicked an additional action of the notification.
 	UserNotificationActivationTypeAdditionalActionClicked UserNotificationActivationType = 4
 )
 
@@ -4470,7 +4951,9 @@ func (e UserNotificationActivationType) String() string {
 type VolumeEnumerationOptions uint64
 
 const (
-	VolumeEnumerationSkipHiddenVolumes        VolumeEnumerationOptions = 2
+	// The enumeration skips hidden volumes.
+	VolumeEnumerationSkipHiddenVolumes VolumeEnumerationOptions = 2
+	// The enumeration produces file reference URLs rather than path-based URLs.
 	VolumeEnumerationProduceFileReferenceURLs VolumeEnumerationOptions = 4
 )
 
@@ -4490,15 +4973,19 @@ func (e VolumeEnumerationOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// NSWhoseSpecifier uses these constants to specify sub-elements within the collection of objects being tested that pass the specifier’s test.
 type WhoseSubelementIdentifier uint64
 
 const (
-	IndexSubelement  WhoseSubelementIdentifier = 0
-	EverySubelement  WhoseSubelementIdentifier = 1
+	// Select the subelement at a specific index.
+	IndexSubelement WhoseSubelementIdentifier = 0
+	// Select every subelement.
+	EverySubelement WhoseSubelementIdentifier = 1
+	// Select the middle subelement.
 	MiddleSubelement WhoseSubelementIdentifier = 2
+	// Select a random subelement.
 	RandomSubelement WhoseSubelementIdentifier = 3
-	NoSubelement     WhoseSubelementIdentifier = 4
+	// No subelement, only valid for the end subelement.
+	NoSubelement WhoseSubelementIdentifier = 4
 )
 
 // String returns the WhoseSubelementIdentifier constant's name, or its numeric form when the
@@ -4520,30 +5007,49 @@ func (e WhoseSubelementIdentifier) String() string {
 	}
 }
 
-// The type defined for the constants that specify the kind and subkind of DTD declaration represented by an NSXMLDTDNode object. You set the DTD-node kind using the doc:nsxmldtdnode/1806486-setdtdkind method.
 type XMLDTDNodeKind uint64
 
 const (
-	XMLEntityGeneralKind               XMLDTDNodeKind = 1
-	XMLEntityParsedKind                XMLDTDNodeKind = 2
-	XMLEntityUnparsedKind              XMLDTDNodeKind = 3
-	XMLEntityParameterKind             XMLDTDNodeKind = 4
-	XMLEntityPredefined                XMLDTDNodeKind = 5
-	XMLAttributeCDATAKind              XMLDTDNodeKind = 6
-	XMLAttributeIDKind                 XMLDTDNodeKind = 7
-	XMLAttributeIDRefKind              XMLDTDNodeKind = 8
-	XMLAttributeIDRefsKind             XMLDTDNodeKind = 9
-	XMLAttributeEntityKind             XMLDTDNodeKind = 10
-	XMLAttributeEntitiesKind           XMLDTDNodeKind = 11
-	XMLAttributeNMTokenKind            XMLDTDNodeKind = 12
-	XMLAttributeNMTokensKind           XMLDTDNodeKind = 13
-	XMLAttributeEnumerationKind        XMLDTDNodeKind = 14
-	XMLAttributeNotationKind           XMLDTDNodeKind = 15
+	// Identifies a general entity declaration.
+	XMLEntityGeneralKind XMLDTDNodeKind = 1
+	// Identifies a parsed entity declaration.
+	XMLEntityParsedKind XMLDTDNodeKind = 2
+	// Identifies an unparsed entity declaration.
+	XMLEntityUnparsedKind XMLDTDNodeKind = 3
+	// Identifies a parameter entity declaration.
+	XMLEntityParameterKind XMLDTDNodeKind = 4
+	// Identifies a predefined entity declaration.
+	XMLEntityPredefined XMLDTDNodeKind = 5
+	// Identifies an attribute-list declaration with a `CDATA` (character data) value type.
+	XMLAttributeCDATAKind XMLDTDNodeKind = 6
+	// Identifies an attribute-list declaration with an `ID` value type (per-document unique element name).
+	XMLAttributeIDKind XMLDTDNodeKind = 7
+	// Identifies an attribute-list declaration with an `IDREF` value type (refers to element `ID` type).
+	XMLAttributeIDRefKind XMLDTDNodeKind = 8
+	// Identifies an attribute-list declaration with an `IDREFS` value type (refers to multiple elements of `ID` type).
+	XMLAttributeIDRefsKind XMLDTDNodeKind = 9
+	// Identifies an attribute-list declaration with an `ENTITY` value type (refers to unparsed entity declared in document).
+	XMLAttributeEntityKind XMLDTDNodeKind = 10
+	// Identifies an attribute-list declaration with an `ENTITIES` value type (refers to multiple unparsed entities declared elsewhere in document).
+	XMLAttributeEntitiesKind XMLDTDNodeKind = 11
+	// Identifies an attribute-list declaration with a `NMTOKEN` value type (name token).
+	XMLAttributeNMTokenKind XMLDTDNodeKind = 12
+	// Identifies an attribute-list declaration with a `NMTOKENS` value type (multiple name tokens).
+	XMLAttributeNMTokensKind XMLDTDNodeKind = 13
+	// Identifies an attribute-list declaration with an enumeration value type (list of all possible values).
+	XMLAttributeEnumerationKind XMLDTDNodeKind = 14
+	// Identifies an attribute-list declaration with a `NOTATION` value type (name of declared notation).
+	XMLAttributeNotationKind XMLDTDNodeKind = 15
+	// Identifies an undefined element declaration.
 	XMLElementDeclarationUndefinedKind XMLDTDNodeKind = 16
-	XMLElementDeclarationEmptyKind     XMLDTDNodeKind = 17
-	XMLElementDeclarationAnyKind       XMLDTDNodeKind = 18
-	XMLElementDeclarationMixedKind     XMLDTDNodeKind = 19
-	XMLElementDeclarationElementKind   XMLDTDNodeKind = 20
+	// Identifies a declaration (`EMPTY`) of an empty element.
+	XMLElementDeclarationEmptyKind XMLDTDNodeKind = 17
+	// Identifies an `ANY` element declaration.
+	XMLElementDeclarationAnyKind XMLDTDNodeKind = 18
+	// Identifies a declaration of an element with mixed content (`(#PCDATA | child)`).
+	XMLElementDeclarationMixedKind XMLDTDNodeKind = 19
+	// Identifies a declaration of an element with child elements.
+	XMLElementDeclarationElementKind XMLDTDNodeKind = 20
 )
 
 // String returns the XMLDTDNodeKind constant's name, or its numeric form when the
@@ -4595,14 +5101,17 @@ func (e XMLDTDNodeKind) String() string {
 	}
 }
 
-// Type used to define the kind of document content.
 type XMLDocumentContentKind uint64
 
 const (
-	XMLDocumentXMLKind   XMLDocumentContentKind = 0
+	// The default type of document content type, which is XML.
+	XMLDocumentXMLKind XMLDocumentContentKind = 0
+	// The document output is XHTML. This is set automatically if the
 	XMLDocumentXHTMLKind XMLDocumentContentKind = 1
-	XMLDocumentHTMLKind  XMLDocumentContentKind = 2
-	XMLDocumentTextKind  XMLDocumentContentKind = 3
+	// Outputs empty tags in HTML without a close tag, such as
+	XMLDocumentHTMLKind XMLDocumentContentKind = 2
+	// Outputs the string value of the document by extracting the string values from all text nodes.
+	XMLDocumentTextKind XMLDocumentContentKind = 3
 )
 
 // String returns the XMLDocumentContentKind constant's name, or its numeric form when the
@@ -4622,23 +5131,35 @@ func (e XMLDocumentContentKind) String() string {
 	}
 }
 
-// NSXMLNode declares the following constants of type NSXMLNodeKind for specifying a node’s kind in the initializer methods initWithKind: and initWithKind:options::
 type XMLNodeKind uint64
 
 const (
-	XMLInvalidKind               XMLNodeKind = 0
-	XMLDocumentKind              XMLNodeKind = 1
-	XMLElementKind               XMLNodeKind = 2
-	XMLAttributeKind             XMLNodeKind = 3
-	XMLNamespaceKind             XMLNodeKind = 4
+	// Indicates a node object created without a valid kind being specified (as returned by the
+	XMLInvalidKind XMLNodeKind = 0
+	// Specifies a document node.
+	XMLDocumentKind XMLNodeKind = 1
+	// Specifies an element node.
+	XMLElementKind XMLNodeKind = 2
+	// Specifies an attribute node.
+	XMLAttributeKind XMLNodeKind = 3
+	// Specifies a namespace node.
+	XMLNamespaceKind XMLNodeKind = 4
+	// Specifies a processing-instruction node.
 	XMLProcessingInstructionKind XMLNodeKind = 5
-	XMLCommentKind               XMLNodeKind = 6
-	XMLTextKind                  XMLNodeKind = 7
-	XMLDTDKind                   XMLNodeKind = 8
-	XMLEntityDeclarationKind     XMLNodeKind = 9
-	XMLAttributeDeclarationKind  XMLNodeKind = 10
-	XMLElementDeclarationKind    XMLNodeKind = 11
-	XMLNotationDeclarationKind   XMLNodeKind = 12
+	// Specifies a comment node.
+	XMLCommentKind XMLNodeKind = 6
+	// Specifies a text node.
+	XMLTextKind XMLNodeKind = 7
+	// Specifies a document-type declaration (DTD) node.
+	XMLDTDKind XMLNodeKind = 8
+	// Specifies an entity-declaration node.
+	XMLEntityDeclarationKind XMLNodeKind = 9
+	// Specifies an attribute-list declaration node.
+	XMLAttributeDeclarationKind XMLNodeKind = 10
+	// Specifies an element declaration node.
+	XMLElementDeclarationKind XMLNodeKind = 11
+	// Specifies a notation declaration node.
+	XMLNotationDeclarationKind XMLNodeKind = 12
 )
 
 // String returns the XMLNodeKind constant's name, or its numeric form when the
@@ -4676,40 +5197,65 @@ func (e XMLNodeKind) String() string {
 	}
 }
 
-// These constants are input and output options for all NSXMLNode objects (unless otherwise indicated), including NSXMLDocument objects. You can specify these options in the NSXMLNode methods initWithKind:options: and XMLStringWithOptions:.
 // Bitmask — values may be combined with |.
 type XMLNodeOptions uint64
 
 const (
 	// No options are requested for this input or output action.
-	XMLNodeOptionsNone                        XMLNodeOptions = 0
-	XMLNodeIsCDATA                            XMLNodeOptions = 1
-	XMLNodeExpandEmptyElement                 XMLNodeOptions = 2
-	XMLNodeCompactEmptyElement                XMLNodeOptions = 4
-	XMLNodeUseSingleQuotes                    XMLNodeOptions = 8
-	XMLNodeUseDoubleQuotes                    XMLNodeOptions = 16
-	XMLNodeNeverEscapeContents                XMLNodeOptions = 32
-	XMLDocumentTidyHTML                       XMLNodeOptions = 512
-	XMLDocumentTidyXML                        XMLNodeOptions = 1024
-	XMLDocumentValidate                       XMLNodeOptions = 8192
-	XMLNodeLoadExternalEntitiesAlways         XMLNodeOptions = 16384
+	XMLNodeOptionsNone XMLNodeOptions = 0
+	// Specifies that a text node contains and is written out as a CDATA section.
+	XMLNodeIsCDATA XMLNodeOptions = 1
+	// This element should be expanded when empty, ie
+	XMLNodeExpandEmptyElement XMLNodeOptions = 2
+	// This element should contract when empty, ie
+	XMLNodeCompactEmptyElement XMLNodeOptions = 4
+	// Use single quotes on this attribute or namespace.
+	XMLNodeUseSingleQuotes XMLNodeOptions = 8
+	// Use double quotes on this attribute or namespace. This is the default.
+	XMLNodeUseDoubleQuotes XMLNodeOptions = 16
+	// When generating a string representation of an XML document, don't escape the reserved characters '<' and '&' in Text nodes.
+	XMLNodeNeverEscapeContents XMLNodeOptions = 32
+	// Try to change HTML into valid XHTML.
+	XMLDocumentTidyHTML XMLNodeOptions = 512
+	// Try to change malformed XML into valid XML.
+	XMLDocumentTidyXML XMLNodeOptions = 1024
+	// Validate this document against its DTD.
+	XMLDocumentValidate XMLNodeOptions = 8192
+	// Load all external entities instead of just non-network ones.
+	XMLNodeLoadExternalEntitiesAlways XMLNodeOptions = 16384
+	// Load non-network external entities and external entities from URLs with the same domain, host, and port as the document.
 	XMLNodeLoadExternalEntitiesSameOriginOnly XMLNodeOptions = 32768
-	XMLNodeLoadExternalEntitiesNever          XMLNodeOptions = 524288
-	XMLDocumentXInclude                       XMLNodeOptions = 65536
-	XMLNodePrettyPrint                        XMLNodeOptions = 131072
-	XMLDocumentIncludeContentTypeDeclaration  XMLNodeOptions = 262144
-	XMLNodePreserveNamespaceOrder             XMLNodeOptions = 1048576
-	XMLNodePreserveAttributeOrder             XMLNodeOptions = 2097152
-	XMLNodePreserveEntities                   XMLNodeOptions = 4194304
-	XMLNodePreservePrefixes                   XMLNodeOptions = 8388608
-	XMLNodePreserveCDATA                      XMLNodeOptions = 16777216
-	XMLNodePreserveWhitespace                 XMLNodeOptions = 33554432
-	XMLNodePreserveDTD                        XMLNodeOptions = 67108864
-	XMLNodePreserveCharacterReferences        XMLNodeOptions = 134217728
-	XMLNodePromoteSignificantWhitespace       XMLNodeOptions = 268435456
-	XMLNodePreserveEmptyElements              XMLNodeOptions = 6
-	XMLNodePreserveQuotes                     XMLNodeOptions = 24
-	XMLNodePreserveAll                        XMLNodeOptions = 4293918750
+	// Load no external entities, even those that don't require network access.
+	XMLNodeLoadExternalEntitiesNever XMLNodeOptions = 524288
+	XMLDocumentXInclude              XMLNodeOptions = 65536
+	// Output this node with extra space for readability.
+	XMLNodePrettyPrint XMLNodeOptions = 131072
+	// Include a content type declaration for HTML or XHTML.
+	XMLDocumentIncludeContentTypeDeclaration XMLNodeOptions = 262144
+	// Preserve the order of namespaces.
+	XMLNodePreserveNamespaceOrder XMLNodeOptions = 1048576
+	// Preserve the order of attributes.
+	XMLNodePreserveAttributeOrder XMLNodeOptions = 2097152
+	// Entities should not be resolved on output.
+	XMLNodePreserveEntities XMLNodeOptions = 4194304
+	// Prefixes should not be chosen based on closest URI definition.
+	XMLNodePreservePrefixes XMLNodeOptions = 8388608
+	// CDATA should be preserved.
+	XMLNodePreserveCDATA XMLNodeOptions = 16777216
+	// Preserve non-content whitespace.
+	XMLNodePreserveWhitespace XMLNodeOptions = 33554432
+	// Preserve the DTD until it is modified.
+	XMLNodePreserveDTD XMLNodeOptions = 67108864
+	// Preserve character references.
+	XMLNodePreserveCharacterReferences XMLNodeOptions = 134217728
+	// When significant whitespace is encountered in the document, create Text nodes representing it rather than removing it. Has no effect if
+	XMLNodePromoteSignificantWhitespace XMLNodeOptions = 268435456
+	// Remember whether an empty element was in expanded or contracted form.
+	XMLNodePreserveEmptyElements XMLNodeOptions = 6
+	// Remember whether an attribute used single or double quotes.
+	XMLNodePreserveQuotes XMLNodeOptions = 24
+	// Turn all preservation options on.
+	XMLNodePreserveAll XMLNodeOptions = 4293918750
 )
 
 // String returns the XMLNodeOptions constant's name, or its numeric form when the
@@ -4803,14 +5349,17 @@ func (e XMLNodeOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Defines the external entity resolving policy used by an NSXMLParser instance.
 type XMLParserExternalEntityResolvingPolicy uint64
 
 const (
-	XMLParserResolveExternalEntitiesNever          XMLParserExternalEntityResolvingPolicy = 0
-	XMLParserResolveExternalEntitiesNoNetwork      XMLParserExternalEntityResolvingPolicy = 1
+	// The parser should never resolve external entities.
+	XMLParserResolveExternalEntitiesNever XMLParserExternalEntityResolvingPolicy = 0
+	// The parser resolves external entities but does not load them over the network.
+	XMLParserResolveExternalEntitiesNoNetwork XMLParserExternalEntityResolvingPolicy = 1
+	// The parser resolves external entities only from the same origin as the original URL. Only applies to `NSXMLParser` instances initialized with `-initWithContentsOfURL:`.
 	XMLParserResolveExternalEntitiesSameOriginOnly XMLParserExternalEntityResolvingPolicy = 2
-	XMLParserResolveExternalEntitiesAlways         XMLParserExternalEntityResolvingPolicy = 3
+	// The parser always resolves external entities.
+	XMLParserResolveExternalEntitiesAlways XMLParserExternalEntityResolvingPolicy = 3
 )
 
 // String returns the XMLParserExternalEntityResolvingPolicy constant's name, or its numeric form when the
@@ -4830,11 +5379,11 @@ func (e XMLParserExternalEntityResolvingPolicy) String() string {
 	}
 }
 
-// Options that you can pass to a connection.
 // Bitmask — values may be combined with |.
 type XPCConnectionOptions uint64
 
 const (
+	// Use this option if connecting to a service in the privileged Mach bootstrap (for example, a `launchd.plist` in `/Library/LaunchDaemons`).
 	XPCConnectionPrivileged XPCConnectionOptions = 4096
 )
 
@@ -5581,11 +6130,12 @@ func (e MpoFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-// These constants indicate whether background activity has been completed successfully or whether additional processing should be deferred until a more optimal time.
 type BackgroundActivityResult int64
 
 const (
+	// The activity has finished executing. If the activity repeats, the next invocation is scheduled by the system.
 	BackgroundActivityResultFinished BackgroundActivityResult = 1
+	// System conditions have changed since the time the activity began executing, and deferral of additional work is recommended.
 	BackgroundActivityResultDeferred BackgroundActivityResult = 2
 )
 
@@ -5629,19 +6179,26 @@ func (e FileManagerSupportedSyncControls) String() string {
 	return strings.Join(parts, "|")
 }
 
-// A type that defines presentation intent for runs of characters for traits like emphasis, strikethrough, and code voice.
 // Bitmask — values may be combined with |.
 type InlinePresentationIntent uint64
 
 const (
-	InlinePresentationIntentEmphasized         InlinePresentationIntent = 1
+	// An intent that represents an emphasized presentation.
+	InlinePresentationIntentEmphasized InlinePresentationIntent = 1
+	// An intent that represents a strongly emphasized presentation.
 	InlinePresentationIntentStronglyEmphasized InlinePresentationIntent = 2
-	InlinePresentationIntentCode               InlinePresentationIntent = 4
-	InlinePresentationIntentStrikethrough      InlinePresentationIntent = 32
-	InlinePresentationIntentSoftBreak          InlinePresentationIntent = 64
-	InlinePresentationIntentLineBreak          InlinePresentationIntent = 128
-	InlinePresentationIntentInlineHTML         InlinePresentationIntent = 256
-	InlinePresentationIntentBlockHTML          InlinePresentationIntent = 512
+	// An intent that represents a code voice presentation.
+	InlinePresentationIntentCode InlinePresentationIntent = 4
+	// An intent that represents a strikethrough presentation.
+	InlinePresentationIntentStrikethrough InlinePresentationIntent = 32
+	// An intent that represents a soft line break.
+	InlinePresentationIntentSoftBreak InlinePresentationIntent = 64
+	// An intent that represents a line break.
+	InlinePresentationIntentLineBreak InlinePresentationIntent = 128
+	// An intent that represents an inline HTML presentation.
+	InlinePresentationIntentInlineHTML InlinePresentationIntent = 256
+	// An intent that represents a block HTML presentation.
+	InlinePresentationIntentBlockHTML InlinePresentationIntent = 512
 )
 
 // String returns the InlinePresentationIntent constant's name, or its numeric form when the
@@ -5678,14 +6235,17 @@ func (e InlinePresentationIntent) String() string {
 	return strings.Join(parts, "|")
 }
 
-// The error codes that describe problems with consuming data from an item provider.
 type ItemProviderErrorCode int64
 
 const (
-	ItemProviderUnknownError              ItemProviderErrorCode = -1
-	ItemProviderItemUnavailableError      ItemProviderErrorCode = -1000
+	// An unknown error occurred.
+	ItemProviderUnknownError ItemProviderErrorCode = -1
+	// The item is unavailable.
+	ItemProviderItemUnavailableError ItemProviderErrorCode = -1000
+	// The item had an unexpected value class.
 	ItemProviderUnexpectedValueClassError ItemProviderErrorCode = -1100
-	ItemProviderUnavailableCoercionError  ItemProviderErrorCode = -1200
+	// The coercion of the item to the requested type was unavailable.
+	ItemProviderUnavailableCoercionError ItemProviderErrorCode = -1200
 )
 
 // String returns the ItemProviderErrorCode constant's name, or its numeric form when the
@@ -5705,18 +6265,26 @@ func (e ItemProviderErrorCode) String() string {
 	}
 }
 
-// These constants identify errors that can occur when accessing net services.
 type NetServicesError int64
 
 const (
-	NetServicesUnknownError                      NetServicesError = -72000
-	NetServicesCollisionError                    NetServicesError = -72001
-	NetServicesNotFoundError                     NetServicesError = -72002
-	NetServicesActivityInProgress                NetServicesError = -72003
-	NetServicesBadArgumentError                  NetServicesError = -72004
-	NetServicesCancelledError                    NetServicesError = -72005
-	NetServicesInvalidError                      NetServicesError = -72006
-	NetServicesTimeoutError                      NetServicesError = -72007
+	// An unknown error occurred.
+	NetServicesUnknownError NetServicesError = -72000
+	// The service could not be published because the name is already in use. The name could be in use locally or on another system.
+	NetServicesCollisionError NetServicesError = -72001
+	// The service could not be found on the network.
+	NetServicesNotFoundError NetServicesError = -72002
+	// The net service cannot process the request at this time. No additional information about the network state is known.
+	NetServicesActivityInProgress NetServicesError = -72003
+	// An invalid argument was used when creating the `NSNetService` object.
+	NetServicesBadArgumentError NetServicesError = -72004
+	// The client canceled the action.
+	NetServicesCancelledError NetServicesError = -72005
+	// The net service was improperly configured.
+	NetServicesInvalidError NetServicesError = -72006
+	// The net service has timed out.
+	NetServicesTimeoutError NetServicesError = -72007
+	// Missing required configuration for local network access. `NSBonjourServices` and `NSLocalNetworkUsageDescription` are required in Info.plist.
 	NetServicesMissingRequiredConfigurationError NetServicesError = -72008
 )
 
@@ -5747,13 +6315,16 @@ func (e NetServicesError) String() string {
 	}
 }
 
-// These constants specify the types of notification delivery suspension behaviors.
 type NotificationSuspensionBehavior uint64
 
 const (
-	NotificationSuspensionBehaviorDrop               NotificationSuspensionBehavior = 1
-	NotificationSuspensionBehaviorCoalesce           NotificationSuspensionBehavior = 2
-	NotificationSuspensionBehaviorHold               NotificationSuspensionBehavior = 3
+	// The server doesn't queue any notifications with this name and object until the notification center resumes notification delivery.
+	NotificationSuspensionBehaviorDrop NotificationSuspensionBehavior = 1
+	// The server only queues the last notification of the specified name and object; earlier notifications are dropped. In cover methods for which suspension behavior is not an explicit argument, `NSNotificationSuspensionBehaviorCoalesce` is the default.
+	NotificationSuspensionBehaviorCoalesce NotificationSuspensionBehavior = 2
+	// The server holds all matching notifications until the queue has been filled (queue size determined by the server), at which point the server may flush queued notifications.
+	NotificationSuspensionBehaviorHold NotificationSuspensionBehavior = 3
+	// The server will deliver notifications matching this registration irrespective of whether setSuspended:YES has been called. When a notification with this suspension behavior is matched, it has the effect of first flushing any queued notifications. The effect is somewhat as if setSuspended:NO were first called if the app is suspended, followed by the notification in question being delivered, followed by a transition back to the previous suspended or unsuspended state.
 	NotificationSuspensionBehaviorDeliverImmediately NotificationSuspensionBehavior = 4
 )
 
@@ -5832,14 +6403,17 @@ func (e URLErrorNetworkUnavailableReason) String() string {
 	}
 }
 
-// Constants passed by session or task delegates to the provided continuation block in response to an authentication challenge.
 type URLSessionAuthChallengeDisposition int64
 
 const (
-	URLSessionAuthChallengeUseCredential                 URLSessionAuthChallengeDisposition = 0
-	URLSessionAuthChallengePerformDefaultHandling        URLSessionAuthChallengeDisposition = 1
+	// Use the specified credential, which may be `nil`.
+	URLSessionAuthChallengeUseCredential URLSessionAuthChallengeDisposition = 0
+	// Use the default handling for the challenge as though this delegate method were not implemented. The provided credential parameter is ignored.
+	URLSessionAuthChallengePerformDefaultHandling URLSessionAuthChallengeDisposition = 1
+	// Cancel the entire request. The provided credential parameter is ignored.
 	URLSessionAuthChallengeCancelAuthenticationChallenge URLSessionAuthChallengeDisposition = 2
-	URLSessionAuthChallengeRejectProtectionSpace         URLSessionAuthChallengeDisposition = 3
+	// Reject this challenge, and call the authentication delegate method again with the next authentication protection space. The provided credential parameter is ignored. This disposition is only appropriate in fairly unusual situations. For example, a Windows server might use both `NSURLAuthenticationMethodNegotiate` and `NSURLAuthenticationMethodNTLM`. If your app can only handle NTLM, you would want to reject the Negotiate challenge, in order to then receive the queued NTLM challenge. However, most apps won't face this scenario, and if you cannot provide a credential for a certain authentication method, you should usually fall back to the `performDefaultHandling` disposition instead.
+	URLSessionAuthChallengeRejectProtectionSpace URLSessionAuthChallengeDisposition = 3
 )
 
 // String returns the URLSessionAuthChallengeDisposition constant's name, or its numeric form when the
@@ -5859,13 +6433,15 @@ func (e URLSessionAuthChallengeDisposition) String() string {
 	}
 }
 
-// The action to take on a delayed URL session task.
 type URLSessionDelayedRequestDisposition int64
 
 const (
+	// A disposition indicating that the task should proceed with the original request.
 	URLSessionDelayedRequestContinueLoading URLSessionDelayedRequestDisposition = 0
-	URLSessionDelayedRequestUseNewRequest   URLSessionDelayedRequestDisposition = 1
-	URLSessionDelayedRequestCancel          URLSessionDelayedRequestDisposition = 2
+	// A disposition indicating that the task should use a new request to perform the network load.
+	URLSessionDelayedRequestUseNewRequest URLSessionDelayedRequestDisposition = 1
+	// A disposition indicating that the task should be canceled.
+	URLSessionDelayedRequestCancel URLSessionDelayedRequestDisposition = 2
 )
 
 // String returns the URLSessionDelayedRequestDisposition constant's name, or its numeric form when the
@@ -5883,14 +6459,17 @@ func (e URLSessionDelayedRequestDisposition) String() string {
 	}
 }
 
-// Constants indicating how a data or upload session should proceed after receiving the initial headers.
 type URLSessionResponseDisposition int64
 
 const (
-	URLSessionResponseCancel         URLSessionResponseDisposition = 0
-	URLSessionResponseAllow          URLSessionResponseDisposition = 1
+	// Cancel the load. Using this disposition is equivalent to calling `cancel` on the task.
+	URLSessionResponseCancel URLSessionResponseDisposition = 0
+	// Allow the load operation to continue.
+	URLSessionResponseAllow URLSessionResponseDisposition = 1
+	// Convert the response for this request to use a download task. When used with the completion handler from `URLSession:dataTask:didReceiveResponse:completionHandler:`, this disposition converts the data task to a download task, resulting in the delegate's `URLSession:dataTask:didBecomeDownloadTask:` being called with the new download task that supersedes the current task.
 	URLSessionResponseBecomeDownload URLSessionResponseDisposition = 2
-	URLSessionResponseBecomeStream   URLSessionResponseDisposition = 3
+	// Convert the response for this request to use a stream task. When used with the completion handler from `URLSession:dataTask:didReceiveResponse:completionHandler:`, this disposition converts the task to a stream task, resulting in the delegate's `URLSession:dataTask:didBecomeStreamTask:` being called with the new stream task that supersedes the current task.
+	URLSessionResponseBecomeStream URLSessionResponseDisposition = 3
 )
 
 // String returns the URLSessionResponseDisposition constant's name, or its numeric form when the
@@ -5910,103 +6489,195 @@ func (e URLSessionResponseDisposition) String() string {
 	}
 }
 
-// The following error codes are defined by NSXMLParser. For error codes not listed here, see the <libxml/xmlerror.h> header file.
 type XMLParserError int64
 
 const (
-	XMLParserInternalError                         XMLParserError = 1
-	XMLParserOutOfMemoryError                      XMLParserError = 2
-	XMLParserDocumentStartError                    XMLParserError = 3
-	XMLParserEmptyDocumentError                    XMLParserError = 4
-	XMLParserPrematureDocumentEndError             XMLParserError = 5
-	XMLParserInvalidHexCharacterRefError           XMLParserError = 6
-	XMLParserInvalidDecimalCharacterRefError       XMLParserError = 7
-	XMLParserInvalidCharacterRefError              XMLParserError = 8
-	XMLParserInvalidCharacterError                 XMLParserError = 9
-	XMLParserCharacterRefAtEOFError                XMLParserError = 10
-	XMLParserCharacterRefInPrologError             XMLParserError = 11
-	XMLParserCharacterRefInEpilogError             XMLParserError = 12
-	XMLParserCharacterRefInDTDError                XMLParserError = 13
-	XMLParserEntityRefAtEOFError                   XMLParserError = 14
-	XMLParserEntityRefInPrologError                XMLParserError = 15
-	XMLParserEntityRefInEpilogError                XMLParserError = 16
-	XMLParserEntityRefInDTDError                   XMLParserError = 17
-	XMLParserParsedEntityRefAtEOFError             XMLParserError = 18
-	XMLParserParsedEntityRefInPrologError          XMLParserError = 19
-	XMLParserParsedEntityRefInEpilogError          XMLParserError = 20
-	XMLParserParsedEntityRefInInternalSubsetError  XMLParserError = 21
-	XMLParserEntityReferenceWithoutNameError       XMLParserError = 22
-	XMLParserEntityReferenceMissingSemiError       XMLParserError = 23
-	XMLParserParsedEntityRefNoNameError            XMLParserError = 24
-	XMLParserParsedEntityRefMissingSemiError       XMLParserError = 25
-	XMLParserUndeclaredEntityError                 XMLParserError = 26
-	XMLParserUnparsedEntityError                   XMLParserError = 28
-	XMLParserEntityIsExternalError                 XMLParserError = 29
-	XMLParserEntityIsParameterError                XMLParserError = 30
-	XMLParserUnknownEncodingError                  XMLParserError = 31
-	XMLParserEncodingNotSupportedError             XMLParserError = 32
-	XMLParserStringNotStartedError                 XMLParserError = 33
-	XMLParserStringNotClosedError                  XMLParserError = 34
-	XMLParserNamespaceDeclarationError             XMLParserError = 35
-	XMLParserEntityNotStartedError                 XMLParserError = 36
-	XMLParserEntityNotFinishedError                XMLParserError = 37
-	XMLParserLessThanSymbolInAttributeError        XMLParserError = 38
-	XMLParserAttributeNotStartedError              XMLParserError = 39
-	XMLParserAttributeNotFinishedError             XMLParserError = 40
-	XMLParserAttributeHasNoValueError              XMLParserError = 41
-	XMLParserAttributeRedefinedError               XMLParserError = 42
-	XMLParserLiteralNotStartedError                XMLParserError = 43
-	XMLParserLiteralNotFinishedError               XMLParserError = 44
-	XMLParserCommentNotFinishedError               XMLParserError = 45
-	XMLParserProcessingInstructionNotStartedError  XMLParserError = 46
+	// The parser object encountered an internal error.
+	XMLParserInternalError XMLParserError = 1
+	// The parser object ran out of memory.
+	XMLParserOutOfMemoryError XMLParserError = 2
+	// The parser object is unable to start parsing.
+	XMLParserDocumentStartError XMLParserError = 3
+	// The document is empty.
+	XMLParserEmptyDocumentError XMLParserError = 4
+	// The document ended unexpectedly.
+	XMLParserPrematureDocumentEndError XMLParserError = 5
+	// Invalid hexadecimal character reference encountered.
+	XMLParserInvalidHexCharacterRefError XMLParserError = 6
+	// Invalid decimal character reference encountered.
+	XMLParserInvalidDecimalCharacterRefError XMLParserError = 7
+	// Invalid character reference encountered.
+	XMLParserInvalidCharacterRefError XMLParserError = 8
+	// Invalid character encountered.
+	XMLParserInvalidCharacterError XMLParserError = 9
+	// Target of character reference cannot be found.
+	XMLParserCharacterRefAtEOFError XMLParserError = 10
+	// Invalid character found in the prolog.
+	XMLParserCharacterRefInPrologError XMLParserError = 11
+	// Invalid character found in the epilog.
+	XMLParserCharacterRefInEpilogError XMLParserError = 12
+	// Invalid character encountered in the DTD.
+	XMLParserCharacterRefInDTDError XMLParserError = 13
+	// Target of entity reference is not found.
+	XMLParserEntityRefAtEOFError XMLParserError = 14
+	// Invalid entity reference found in the prolog.
+	XMLParserEntityRefInPrologError XMLParserError = 15
+	// Invalid entity reference found in the epilog.
+	XMLParserEntityRefInEpilogError XMLParserError = 16
+	// Invalid entity reference found in the DTD.
+	XMLParserEntityRefInDTDError XMLParserError = 17
+	// Target of parsed entity reference is not found.
+	XMLParserParsedEntityRefAtEOFError XMLParserError = 18
+	// Target of parsed entity reference is not found in prolog.
+	XMLParserParsedEntityRefInPrologError XMLParserError = 19
+	// Target of parsed entity reference is not found in epilog.
+	XMLParserParsedEntityRefInEpilogError XMLParserError = 20
+	// Target of parsed entity reference is not found in internal subset.
+	XMLParserParsedEntityRefInInternalSubsetError XMLParserError = 21
+	// Entity reference is without name.
+	XMLParserEntityReferenceWithoutNameError XMLParserError = 22
+	// Entity reference is missing semicolon.
+	XMLParserEntityReferenceMissingSemiError XMLParserError = 23
+	// Parsed entity reference is without an entity name.
+	XMLParserParsedEntityRefNoNameError XMLParserError = 24
+	// Parsed entity reference is missing semicolon.
+	XMLParserParsedEntityRefMissingSemiError XMLParserError = 25
+	// Entity is not declared.
+	XMLParserUndeclaredEntityError XMLParserError = 26
+	// Cannot parse entity.
+	XMLParserUnparsedEntityError XMLParserError = 28
+	// Cannot parse external entity.
+	XMLParserEntityIsExternalError XMLParserError = 29
+	// Entity is a parameter.
+	XMLParserEntityIsParameterError XMLParserError = 30
+	// Document encoding is unknown.
+	XMLParserUnknownEncodingError XMLParserError = 31
+	// Document encoding is not supported.
+	XMLParserEncodingNotSupportedError XMLParserError = 32
+	// String is not started.
+	XMLParserStringNotStartedError XMLParserError = 33
+	// String is not closed.
+	XMLParserStringNotClosedError XMLParserError = 34
+	// Invalid namespace declaration encountered.
+	XMLParserNamespaceDeclarationError XMLParserError = 35
+	// Entity is not started.
+	XMLParserEntityNotStartedError XMLParserError = 36
+	// Entity is not finished.
+	XMLParserEntityNotFinishedError XMLParserError = 37
+	// Angle bracket is used in attribute.
+	XMLParserLessThanSymbolInAttributeError XMLParserError = 38
+	// Attribute is not started.
+	XMLParserAttributeNotStartedError XMLParserError = 39
+	// Attribute is not finished.
+	XMLParserAttributeNotFinishedError XMLParserError = 40
+	// Attribute doesn't contain a value.
+	XMLParserAttributeHasNoValueError XMLParserError = 41
+	// Attribute is redefined.
+	XMLParserAttributeRedefinedError XMLParserError = 42
+	// Literal is not started.
+	XMLParserLiteralNotStartedError XMLParserError = 43
+	// Literal is not finished.
+	XMLParserLiteralNotFinishedError XMLParserError = 44
+	// Comment is not finished.
+	XMLParserCommentNotFinishedError XMLParserError = 45
+	// Processing instruction is not started.
+	XMLParserProcessingInstructionNotStartedError XMLParserError = 46
+	// Processing instruction is not finished.
 	XMLParserProcessingInstructionNotFinishedError XMLParserError = 47
-	XMLParserNotationNotStartedError               XMLParserError = 48
-	XMLParserNotationNotFinishedError              XMLParserError = 49
-	XMLParserAttributeListNotStartedError          XMLParserError = 50
-	XMLParserAttributeListNotFinishedError         XMLParserError = 51
-	XMLParserMixedContentDeclNotStartedError       XMLParserError = 52
-	XMLParserMixedContentDeclNotFinishedError      XMLParserError = 53
-	XMLParserElementContentDeclNotStartedError     XMLParserError = 54
-	XMLParserElementContentDeclNotFinishedError    XMLParserError = 55
-	XMLParserXMLDeclNotStartedError                XMLParserError = 56
-	XMLParserXMLDeclNotFinishedError               XMLParserError = 57
-	XMLParserConditionalSectionNotStartedError     XMLParserError = 58
-	XMLParserConditionalSectionNotFinishedError    XMLParserError = 59
-	XMLParserExternalSubsetNotFinishedError        XMLParserError = 60
-	XMLParserDOCTYPEDeclNotFinishedError           XMLParserError = 61
-	XMLParserMisplacedCDATAEndStringError          XMLParserError = 62
-	XMLParserCDATANotFinishedError                 XMLParserError = 63
-	XMLParserMisplacedXMLDeclarationError          XMLParserError = 64
-	XMLParserSpaceRequiredError                    XMLParserError = 65
-	XMLParserSeparatorRequiredError                XMLParserError = 66
-	XMLParserNMTOKENRequiredError                  XMLParserError = 67
-	XMLParserNAMERequiredError                     XMLParserError = 68
-	XMLParserPCDATARequiredError                   XMLParserError = 69
-	XMLParserURIRequiredError                      XMLParserError = 70
-	XMLParserPublicIdentifierRequiredError         XMLParserError = 71
-	XMLParserLTRequiredError                       XMLParserError = 72
-	XMLParserGTRequiredError                       XMLParserError = 73
-	XMLParserLTSlashRequiredError                  XMLParserError = 74
-	XMLParserEqualExpectedError                    XMLParserError = 75
-	XMLParserTagNameMismatchError                  XMLParserError = 76
-	XMLParserUnfinishedTagError                    XMLParserError = 77
-	XMLParserStandaloneValueError                  XMLParserError = 78
-	XMLParserInvalidEncodingNameError              XMLParserError = 79
-	XMLParserCommentContainsDoubleHyphenError      XMLParserError = 80
-	XMLParserInvalidEncodingError                  XMLParserError = 81
-	XMLParserExternalStandaloneEntityError         XMLParserError = 82
-	XMLParserInvalidConditionalSectionError        XMLParserError = 83
-	XMLParserEntityValueRequiredError              XMLParserError = 84
-	XMLParserNotWellBalancedError                  XMLParserError = 85
-	XMLParserExtraContentError                     XMLParserError = 86
-	XMLParserInvalidCharacterInEntityError         XMLParserError = 87
-	XMLParserParsedEntityRefInInternalError        XMLParserError = 88
-	XMLParserEntityRefLoopError                    XMLParserError = 89
-	XMLParserEntityBoundaryError                   XMLParserError = 90
-	XMLParserInvalidURIError                       XMLParserError = 91
-	XMLParserURIFragmentError                      XMLParserError = 92
-	XMLParserNoDTDError                            XMLParserError = 94
-	XMLParserDelegateAbortedParseError             XMLParserError = 512
+	// Notation is not started.
+	XMLParserNotationNotStartedError XMLParserError = 48
+	// Notation is not finished.
+	XMLParserNotationNotFinishedError XMLParserError = 49
+	// Attribute list is not started.
+	XMLParserAttributeListNotStartedError XMLParserError = 50
+	// Attribute list is not finished.
+	XMLParserAttributeListNotFinishedError XMLParserError = 51
+	// Mixed content declaration is not started.
+	XMLParserMixedContentDeclNotStartedError XMLParserError = 52
+	// Mixed content declaration is not finished.
+	XMLParserMixedContentDeclNotFinishedError XMLParserError = 53
+	// Element content declaration is not started.
+	XMLParserElementContentDeclNotStartedError XMLParserError = 54
+	// Element content declaration is not finished.
+	XMLParserElementContentDeclNotFinishedError XMLParserError = 55
+	// XML declaration is not started.
+	XMLParserXMLDeclNotStartedError XMLParserError = 56
+	// XML declaration is not finished.
+	XMLParserXMLDeclNotFinishedError XMLParserError = 57
+	// Conditional section is not started.
+	XMLParserConditionalSectionNotStartedError XMLParserError = 58
+	// Conditional section is not finished.
+	XMLParserConditionalSectionNotFinishedError XMLParserError = 59
+	// External subset is not finished.
+	XMLParserExternalSubsetNotFinishedError XMLParserError = 60
+	// Document type declaration is not finished.
+	XMLParserDOCTYPEDeclNotFinishedError XMLParserError = 61
+	// Misplaced CDATA end string.
+	XMLParserMisplacedCDATAEndStringError XMLParserError = 62
+	// CDATA block is not finished.
+	XMLParserCDATANotFinishedError XMLParserError = 63
+	// Misplaced XML declaration.
+	XMLParserMisplacedXMLDeclarationError XMLParserError = 64
+	// Space is required.
+	XMLParserSpaceRequiredError XMLParserError = 65
+	// Separator is required.
+	XMLParserSeparatorRequiredError XMLParserError = 66
+	// Name token is required.
+	XMLParserNMTOKENRequiredError XMLParserError = 67
+	// Name is required.
+	XMLParserNAMERequiredError XMLParserError = 68
+	// CDATA is required.
+	XMLParserPCDATARequiredError XMLParserError = 69
+	// URI is required.
+	XMLParserURIRequiredError XMLParserError = 70
+	// Public identifier is required.
+	XMLParserPublicIdentifierRequiredError XMLParserError = 71
+	// Left angle bracket is required.
+	XMLParserLTRequiredError XMLParserError = 72
+	// Right angle bracket is required.
+	XMLParserGTRequiredError XMLParserError = 73
+	// Left angle bracket slash is required.
+	XMLParserLTSlashRequiredError XMLParserError = 74
+	// Equal sign expected.
+	XMLParserEqualExpectedError XMLParserError = 75
+	// Tag name mismatch.
+	XMLParserTagNameMismatchError XMLParserError = 76
+	// Unfinished tag found.
+	XMLParserUnfinishedTagError XMLParserError = 77
+	// Standalone value found.
+	XMLParserStandaloneValueError XMLParserError = 78
+	// Invalid encoding name found.
+	XMLParserInvalidEncodingNameError XMLParserError = 79
+	// Comment contains double hyphen.
+	XMLParserCommentContainsDoubleHyphenError XMLParserError = 80
+	// Invalid encoding.
+	XMLParserInvalidEncodingError XMLParserError = 81
+	// External standalone entity.
+	XMLParserExternalStandaloneEntityError XMLParserError = 82
+	// Invalid conditional section.
+	XMLParserInvalidConditionalSectionError XMLParserError = 83
+	// Entity value is required.
+	XMLParserEntityValueRequiredError XMLParserError = 84
+	// Document is not well balanced.
+	XMLParserNotWellBalancedError XMLParserError = 85
+	// Error in content found.
+	XMLParserExtraContentError XMLParserError = 86
+	// Invalid character in entity found.
+	XMLParserInvalidCharacterInEntityError XMLParserError = 87
+	// Internal error in parsed entity reference found.
+	XMLParserParsedEntityRefInInternalError XMLParserError = 88
+	// Entity reference loop encountered.
+	XMLParserEntityRefLoopError XMLParserError = 89
+	// Entity boundary error.
+	XMLParserEntityBoundaryError XMLParserError = 90
+	// Invalid URI specified.
+	XMLParserInvalidURIError XMLParserError = 91
+	// URI fragment.
+	XMLParserURIFragmentError XMLParserError = 92
+	// Missing DTD.
+	XMLParserNoDTDError XMLParserError = 94
+	// Delegate aborted parse.
+	XMLParserDelegateAbortedParseError XMLParserError = 512
 )
 
 // String returns the XMLParserError constant's name, or its numeric form when the
@@ -6298,27 +6969,55 @@ func (e QosClass) String() string {
 	}
 }
 
+type TaskSharedRegionStubs uint8
+
+const (
+	TaskSharedRegionStubsDev  TaskSharedRegionStubs = 1
+	TaskSharedRegionStubsProd TaskSharedRegionStubs = 2
+)
+
+// String returns the TaskSharedRegionStubs constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TaskSharedRegionStubs) String() string {
+	switch e {
+	case TaskSharedRegionStubsDev:
+		return "TaskSharedRegionStubsDev"
+	case TaskSharedRegionStubsProd:
+		return "TaskSharedRegionStubsProd"
+	default:
+		return fmt.Sprintf("TaskSharedRegionStubs(%d)", int64(e))
+	}
+}
+
 type VirtualMemoryGuardExceptionCode uint32
 
 const (
-	KGUARD_EXC_DEALLOC_GAP                   VirtualMemoryGuardExceptionCode = 1
-	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        VirtualMemoryGuardExceptionCode = 2
-	KGUARD_EXC_RECLAIM_INDEX_FAILURE         VirtualMemoryGuardExceptionCode = 4
-	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    VirtualMemoryGuardExceptionCode = 8
-	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    VirtualMemoryGuardExceptionCode = 9
-	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         VirtualMemoryGuardExceptionCode = 10
-	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         VirtualMemoryGuardExceptionCode = 11
-	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  VirtualMemoryGuardExceptionCode = 12
-	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    VirtualMemoryGuardExceptionCode = 13
-	KGUARD_EXC_SEC_ACCESS_FAULT              VirtualMemoryGuardExceptionCode = 98
-	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        VirtualMemoryGuardExceptionCode = 99
-	KGUARD_EXC_SEC_COPY_DENIED               VirtualMemoryGuardExceptionCode = 100
-	KGUARD_EXC_SEC_SHARING_DENIED            VirtualMemoryGuardExceptionCode = 101
-	KGUARD_EXC_MTE_SYNC_FAULT                VirtualMemoryGuardExceptionCode = 200
-	KGUARD_EXC_MTE_ASYNC_USER_FAULT          VirtualMemoryGuardExceptionCode = 201
-	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          VirtualMemoryGuardExceptionCode = 202
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT VirtualMemoryGuardExceptionCode = 203
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT VirtualMemoryGuardExceptionCode = 204
+	KGUARD_EXC_DEALLOC_GAP                  VirtualMemoryGuardExceptionCode = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE       VirtualMemoryGuardExceptionCode = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE        VirtualMemoryGuardExceptionCode = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE   VirtualMemoryGuardExceptionCode = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE   VirtualMemoryGuardExceptionCode = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE        VirtualMemoryGuardExceptionCode = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE        VirtualMemoryGuardExceptionCode = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION VirtualMemoryGuardExceptionCode = 12
+	// Guard exception sent to a thread when a CoW defeatured map attempts to copy memory which is not permitted by system policy.
+	KGUARD_EXC_COW_DEFEATURED_COPY_DENIED VirtualMemoryGuardExceptionCode = 13
+	// Guard exception sent to a thread when it attempts to extract a given type of memory in a way which is not permitted for CoW defeatured maps.
+	KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED VirtualMemoryGuardExceptionCode = 14
+	// Guard exception sent to a thread when it attempts to copy-map a memory entry which was created for sharing by a CoW defeatured map.
+	KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED VirtualMemoryGuardExceptionCode = 15
+	KGUARD_EXC_COW_DEFEATURED_FIRST                    VirtualMemoryGuardExceptionCode = 13
+	KGUARD_EXC_COW_DEFEATURED_LAST                     VirtualMemoryGuardExceptionCode = 15
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY              VirtualMemoryGuardExceptionCode = 16
+	KGUARD_EXC_SEC_ACCESS_FAULT                        VirtualMemoryGuardExceptionCode = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT                  VirtualMemoryGuardExceptionCode = 99
+	KGUARD_EXC_SEC_COPY_DENIED                         VirtualMemoryGuardExceptionCode = 100
+	KGUARD_EXC_SEC_SHARING_DENIED                      VirtualMemoryGuardExceptionCode = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                          VirtualMemoryGuardExceptionCode = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT                    VirtualMemoryGuardExceptionCode = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT                    VirtualMemoryGuardExceptionCode = 202
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT           VirtualMemoryGuardExceptionCode = 203
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT           VirtualMemoryGuardExceptionCode = 204
 )
 
 // String returns the VirtualMemoryGuardExceptionCode constant's name, or its numeric form when the
@@ -6341,6 +7040,12 @@ func (e VirtualMemoryGuardExceptionCode) String() string {
 		return "KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE"
 	case KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION:
 		return "KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION"
+	case KGUARD_EXC_COW_DEFEATURED_COPY_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_COPY_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED"
 	case KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY:
 		return "KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY"
 	case KGUARD_EXC_SEC_ACCESS_FAULT:

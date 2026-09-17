@@ -10,8 +10,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// The criteria to use when searching for discoverable iCloud users.
-//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/ckuseridentitylookupinfo
 type CKUserIdentityLookupInfo struct {
 	foundation.NSObject

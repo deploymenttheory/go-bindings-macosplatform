@@ -253,11 +253,11 @@
     "VTLowLatencyFrameInterpolationConfiguration": {
       "+maximumDimensionForSpatialScaleFactor:": {
         "doc": "The maximum value for either dimension of the source frame, in pixels, for a given spatial scale factor.",
-        "url": "https://developer.apple.com/documentation/videotoolbox/vtlowlatencyframeinterpolationconfiguration/maximumdimension(forspatialscalefactor:)"
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtlowlatencyframeinterpolationconfiguration/maximumdimensionforspatialscalefactor:"
       },
       "+maximumPixelCountForSpatialScaleFactor:": {
         "doc": "The maximum total number of pixels in the source frame for a given spatial scale factor.",
-        "url": "https://developer.apple.com/documentation/videotoolbox/vtlowlatencyframeinterpolationconfiguration/maximumpixelcount(forspatialscalefactor:)"
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtlowlatencyframeinterpolationconfiguration/maximumpixelcountforspatialscalefactor:"
       },
       "-initWithFrameWidth:frameHeight:numberOfInterpolatedFrames:": {
         "doc": "Creates a new low-latency frame interpolation configuration for frame-rate conversion.",
@@ -275,6 +275,14 @@
       }
     },
     "VTLowLatencySuperResolutionScalerConfiguration": {
+      "+maximumDimensionForSpatialScaleFactor:": {
+        "doc": "The maximum value for either dimension of the source frame, in pixels, for a given spatial scale factor.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtlowlatencysuperresolutionscalerconfiguration/maximumdimensionforspatialscalefactor:"
+      },
+      "+maximumPixelCountForSpatialScaleFactor:": {
+        "doc": "The maximum total number of pixels in the source frame for a given spatial scale factor.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtlowlatencysuperresolutionscalerconfiguration/maximumpixelcountforspatialscalefactor:"
+      },
       "+supportedScaleFactorsForFrameWidth:frameHeight:": {
         "doc": "Returns an array of supported scale factors values, or an empty list if the processor doesn’t support the dimensions.",
         "url": "https://developer.apple.com/documentation/videotoolbox/vtlowlatencysuperresolutionscalerconfiguration/supportedscalefactorsforframewidth:frameheight:"
@@ -419,7 +427,7 @@
       },
       "interpolationPhase": {
         "doc": "An array of floating-point values that indicate which intervals to insert a frame between the current and next frame.",
-        "url": "https://developer.apple.com/documentation/videotoolbox/vtframerateconversionparameters/interpolationphase-2jky5"
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtframerateconversionparameters/interpolationphase-6wdns"
       },
       "nextFrame": {
         "doc": "The next source frame in presentation time order.",
@@ -454,6 +462,14 @@
       "frameWidth": {
         "doc": "Width of source frames in pixels.",
         "url": "https://developer.apple.com/documentation/videotoolbox/vtlowlatencyframeinterpolationconfiguration/framewidth"
+      },
+      "maximumDimension(forSpatialScaleFactor:)": {
+        "doc": "The maximum value for either dimension of the source frame, in pixels, for a given spatial scale factor.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtlowlatencyframeinterpolationconfiguration/maximumdimension(forspatialscalefactor:)"
+      },
+      "maximumPixelCount(forSpatialScaleFactor:)": {
+        "doc": "The maximum total number of pixels in the source frame for a given spatial scale factor.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtlowlatencyframeinterpolationconfiguration/maximumpixelcount(forspatialscalefactor:)"
       },
       "numberOfInterpolatedFrames": {
         "doc": "Number of uniformly spaced frames for which you configured the processor.",
@@ -507,9 +523,17 @@
         "doc": "Width of source frame in pixels.",
         "url": "https://developer.apple.com/documentation/videotoolbox/vtlowlatencysuperresolutionscalerconfiguration/framewidth"
       },
+      "maximumDimension(forSpatialScaleFactor:)": {
+        "doc": "The maximum value for either dimension of the source frame, in pixels, for a given spatial scale factor.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtlowlatencysuperresolutionscalerconfiguration/maximumdimension(forspatialscalefactor:)"
+      },
       "maximumDimensions": {
         "doc": "Maximum dimensions for a source frame for the processor.",
         "url": "https://developer.apple.com/documentation/videotoolbox/vtlowlatencysuperresolutionscalerconfiguration/maximumdimensions"
+      },
+      "maximumPixelCount(forSpatialScaleFactor:)": {
+        "doc": "The maximum total number of pixels in the source frame for a given spatial scale factor.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtlowlatencysuperresolutionscalerconfiguration/maximumpixelcount(forspatialscalefactor:)"
       },
       "minimumDimensions": {
         "doc": "Minimum dimensions for a source frame for the processor.",
@@ -526,6 +550,10 @@
       "supported": {
         "doc": "Reports whether the system supports this processor on the current configuration.",
         "url": "https://developer.apple.com/documentation/videotoolbox/vtlowlatencysuperresolutionscalerconfiguration/issupported"
+      },
+      "supportedScaleFactors": {
+        "doc": "Reports the set of supported scale factors to use when initializing a low latency super-resolution scaler configuration. Note: not all scale factors are available for all source dimensions.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtlowlatencysuperresolutionscalerconfiguration/supportedscalefactors-66l10"
       }
     },
     "VTLowLatencySuperResolutionScalerParameters": {
@@ -656,8 +684,8 @@
         "url": "https://developer.apple.com/documentation/videotoolbox/vtopticalflowconfiguration/frameheight"
       },
       "frameSupportedPixelFormats": {
-        "doc": "Supported pixel formats for source frames for current configuration.",
-        "url": "https://developer.apple.com/documentation/videotoolbox/vtopticalflowconfiguration/framesupportedpixelformats-85kob"
+        "doc": "A list of source frame supported pixel formats for the current configuration.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtopticalflowconfiguration/framesupportedpixelformats-gm6u"
       },
       "frameWidth": {
         "doc": "The width of a source frame in pixels.",

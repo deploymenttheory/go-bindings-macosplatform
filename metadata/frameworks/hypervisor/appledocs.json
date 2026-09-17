@@ -176,6 +176,9 @@
           "url": "https://developer.apple.com/documentation/hypervisor/hv_sys_reg_t/rawvalue"
         }
       }
+    },
+    "hv_tlbi_op_t": {
+      "url": "https://developer.apple.com/documentation/hypervisor/hv_tlbi_op_t"
     }
   },
   "structs": {

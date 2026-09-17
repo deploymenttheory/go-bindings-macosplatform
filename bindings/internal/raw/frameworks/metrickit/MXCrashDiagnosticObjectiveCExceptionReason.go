@@ -13,6 +13,7 @@ import (
 // An object that represents the exception reason for an uncaught ObjC exception.
 //
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxcrashdiagnosticobjectivecexceptionreason
+// Deprecated: Use CrashDiagnostic.ObjectiveCExceptionReason instead.
 type MXCrashDiagnosticObjectiveCExceptionReason struct {
 	foundation.NSObject
 }

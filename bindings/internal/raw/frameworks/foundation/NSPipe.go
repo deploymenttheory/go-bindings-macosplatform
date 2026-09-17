@@ -9,8 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A one-way communications channel between related processes.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nspipe
 type NSPipe struct {
 	NSObject
@@ -33,7 +31,7 @@ func NSPipeFromID(id objc.ID) *NSPipe {
 	return o
 }
 
-// Returns an NSPipe object.
+// Returns a new `NSPipe` object.
 func NSPipePipe() *NSPipe {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPipe), _nSPipeSelPipe)
 	if _ret != 0 {
@@ -42,6 +40,7 @@ func NSPipePipe() *NSPipe {
 	return NSPipeFromID(_ret)
 }
 
+// The receiver's read file handle.
 func (o *NSPipe) FileHandleForReading() *NSFileHandle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPipeSelFileHandleForReading)
 	if _ret != 0 {
@@ -50,6 +49,7 @@ func (o *NSPipe) FileHandleForReading() *NSFileHandle {
 	return NSFileHandleFromID(_ret)
 }
 
+// The receiver's write file handle.
 func (o *NSPipe) FileHandleForWriting() *NSFileHandle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPipeSelFileHandleForWriting)
 	if _ret != 0 {

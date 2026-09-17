@@ -37,7 +37,7 @@ func CKQueryFromID(id objc.ID) *CKQuery {
 	return o
 }
 
-// Creates an operation group from a serialized instance.
+// Creates a query from a serialized instance.
 func (o *CKQuery) InitWithCoder(aDecoder *foundation.NSCoder) *CKQuery {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKQuerySelInitWithCoder, aDecoder.Ptr())
 	if _ret != 0 {

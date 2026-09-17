@@ -82,6 +82,24 @@ func (cmfo *CaptureMovieFileOutput) WithSpatialVideoCaptureEnabled(spatialVideoC
 	return cmfo
 }
 
+// WithAutomaticallyAdjustsCinematicVideoMetadataCaptureEnabled sets controls whether cinematic video metadata capture is automatically managed by the framework.
+func (cmfo *CaptureMovieFileOutput) WithAutomaticallyAdjustsCinematicVideoMetadataCaptureEnabled(automaticallyAdjustsCinematicVideoMetadataCaptureEnabled bool) *CaptureMovieFileOutput {
+	objc.Send[objc.ID](objref.IDOf(cmfo), objc.RegisterName("setAutomaticallyAdjustsCinematicVideoMetadataCaptureEnabled:"), automaticallyAdjustsCinematicVideoMetadataCaptureEnabled)
+	return cmfo
+}
+
+// WithCinematicVideoMetadataCaptureEnabled sets indicates whether cinematic video metadata is captured to movie files.
+func (cmfo *CaptureMovieFileOutput) WithCinematicVideoMetadataCaptureEnabled(cinematicVideoMetadataCaptureEnabled bool) *CaptureMovieFileOutput {
+	objc.Send[objc.ID](objref.IDOf(cmfo), objc.RegisterName("setCinematicVideoMetadataCaptureEnabled:"), cinematicVideoMetadataCaptureEnabled)
+	return cmfo
+}
+
+// WithUsesProVideoStorage sets whether this movie file output is configured to write to Pro Video Storage.
+func (cmfo *CaptureMovieFileOutput) WithUsesProVideoStorage(usesProVideoStorage bool) *CaptureMovieFileOutput {
+	objc.Send[objc.ID](objref.IDOf(cmfo), objc.RegisterName("setUsesProVideoStorage:"), usesProVideoStorage)
+	return cmfo
+}
+
 // WithDelegate sets the delegate object for the capture file output.
 func (cmfo *CaptureMovieFileOutput) WithDelegate(delegate CaptureFileOutputDelegate) *CaptureMovieFileOutput {
 	_shim := newCaptureFileOutputDelegateShim(delegate)
@@ -185,6 +203,41 @@ func (cmfo *CaptureMovieFileOutput) IsSpatialVideoCaptureSupported() bool {
 func (cmfo *CaptureMovieFileOutput) IsSpatialVideoCaptureEnabled() bool {
 	defer runtime.KeepAlive(cmfo)
 	_r := objc.Send[bool](objref.IDOf(cmfo), objc.RegisterName("isSpatialVideoCaptureEnabled"))
+	return _r
+}
+
+// IsCinematicVideoMetadataCaptureSupported reports whether capturing cinematic video metadata to the movie file is supported in the current session configuration. Cinematic video metadata enables post-capture cinematic video editing using the Cinematic framework. This property returns `true` when all of the following conditions are met: - The source device's `activeFormat` supports cinematic video metadata capture. - The source device's dynamic aspect ratio is 16:9 or 9:16 (or unset). - Spatial video capture (`spatialVideoCaptureEnabled`) is not enabled. - No other incompatible features are enabled. When switching cameras, formats, or toggling other features, this property may change. This property is key-value observable.
+func (cmfo *CaptureMovieFileOutput) IsCinematicVideoMetadataCaptureSupported() bool {
+	defer runtime.KeepAlive(cmfo)
+	_r := objc.Send[bool](objref.IDOf(cmfo), objc.RegisterName("isCinematicVideoMetadataCaptureSupported"))
+	return _r
+}
+
+// AutomaticallyAdjustsCinematicVideoMetadataCaptureEnabled reports whether controls whether cinematic video metadata capture is automatically managed by the framework. When this property is `true` (the default), the framework manages `cinematicVideoMetadataCaptureEnabled` automatically. The framework decides when to enable cinematic video metadata capture; capture is not guaranteed even when `cinematicVideoMetadataCaptureSupported` is `true`. Clients that need explicit control over whether metadata is captured should set this property to `false` and manage `cinematicVideoMetadataCaptureEnabled` directly. When this property is `false`, `cinematicVideoMetadataCaptureEnabled` is not automatically managed and must be explicitly set by the client. Setting this property from `true` to `false` sets `cinematicVideoMetadataCaptureEnabled` to `false`. This property can be set before calling `-[AVCaptureSession startRunning]` or within `-[AVCaptureSession beginConfiguration]` and `-[AVCaptureSession commitConfiguration]` while the session is running. Default value: `true`.
+func (cmfo *CaptureMovieFileOutput) AutomaticallyAdjustsCinematicVideoMetadataCaptureEnabled() bool {
+	defer runtime.KeepAlive(cmfo)
+	_r := objc.Send[bool](objref.IDOf(cmfo), objc.RegisterName("automaticallyAdjustsCinematicVideoMetadataCaptureEnabled"))
+	return _r
+}
+
+// IsCinematicVideoMetadataCaptureEnabled reports whether cinematic video metadata is captured to movie files. When `true`, recorded movie files include a cinematic video metadata track that enables post-capture cinematic video editing using the Cinematic framework. This property may only be set when `automaticallyAdjustsCinematicVideoMetadataCaptureEnabled` is `false`. Setting this property when `automaticallyAdjustsCinematicVideoMetadataCaptureEnabled` is `true` throws an `NSInvalidArgumentException`. This property may only be set to `true` when `cinematicVideoMetadataCaptureSupported` is `true`. Setting to `true` when not supported throws an `NSInvalidArgumentException`. This property is key-value observable.
+func (cmfo *CaptureMovieFileOutput) IsCinematicVideoMetadataCaptureEnabled() bool {
+	defer runtime.KeepAlive(cmfo)
+	_r := objc.Send[bool](objref.IDOf(cmfo), objc.RegisterName("isCinematicVideoMetadataCaptureEnabled"))
+	return _r
+}
+
+// IsProVideoStorageSupported reports whether this movie file output supports writing to Pro Video Storage in its current configuration. A value of `YES` indicates that Pro Video Storage support is enabled for this output while `NO` indicates it is not. Check this value prior to setting property usesProVideoStorage to avoid exceptions when Pro Video Storage support is not enabled.
+func (cmfo *CaptureMovieFileOutput) IsProVideoStorageSupported() bool {
+	defer runtime.KeepAlive(cmfo)
+	_r := objc.Send[bool](objref.IDOf(cmfo), objc.RegisterName("isProVideoStorageSupported"))
+	return _r
+}
+
+// UsesProVideoStorage reports whether this movie file output is configured to write to Pro Video Storage. Default is `NO`. Raises an exception if set to `YES` while proVideoStorageSupported is `NO`.
+func (cmfo *CaptureMovieFileOutput) UsesProVideoStorage() bool {
+	defer runtime.KeepAlive(cmfo)
+	_r := objc.Send[bool](objref.IDOf(cmfo), objc.RegisterName("usesProVideoStorage"))
 	return _r
 }
 

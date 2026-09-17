@@ -10,8 +10,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// The configuration options for opening URLs or launching apps.
-//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsworkspaceopenconfiguration
 type NSWorkspaceOpenConfiguration struct {
 	foundation.NSObject
@@ -58,7 +56,6 @@ func NSWorkspaceOpenConfigurationFromID(id objc.ID) *NSWorkspaceOpenConfiguratio
 	return o
 }
 
-// Creates and returns a new workspace configuration object containing default values.
 func NSWorkspaceOpenConfigurationConfiguration() *NSWorkspaceOpenConfiguration {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSWorkspaceOpenConfiguration), _nSWorkspaceOpenConfigurationSelConfiguration)
 	if _ret != 0 {

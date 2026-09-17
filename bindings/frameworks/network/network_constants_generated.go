@@ -61,10 +61,10 @@ func Nw_content_context_default_stream() uintptr {
 }
 
 // Nw_data_transfer_report_all_paths returns the value of the constant _nw_data_transfer_report_all_paths.
-func Nw_data_transfer_report_all_paths() uint {
+func Nw_data_transfer_report_all_paths() uint32 {
 	addr := _symbol("_nw_data_transfer_report_all_paths")
 	if addr == 0 {
 		return 0
 	}
-	return *(*uint)(unsafe.Pointer(addr))
+	return *(*uint32)(unsafe.Pointer(addr))
 }

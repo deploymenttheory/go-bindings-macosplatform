@@ -98,7 +98,7 @@ func (xi *XPCInterface) WithScriptingProperties(scriptingProperties map[string]o
 	return xi
 }
 
-// Protocol returns the protocol.
+// Protocol returns the Objective-C protocol this `NSXPCInterface` is based upon.
 func (xi *XPCInterface) Protocol() unsafe.Pointer {
 	defer runtime.KeepAlive(xi)
 	_r := objc.Send[unsafe.Pointer](objref.IDOf(xi), objc.RegisterName("protocol"))

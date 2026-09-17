@@ -8,6 +8,7 @@ import (
 	"context"
 	"runtime"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -168,6 +169,13 @@ func (si *SearchableIndex) DeleteAllSearchableItems(ctx context.Context) error {
 	case <-ctx.Done():
 		return ctx.Err()
 	}
+}
+
+// ProtectionClass returns the protection class.
+func (si *SearchableIndex) ProtectionClass() *foundation.String {
+	defer runtime.KeepAlive(si)
+	_r := objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("protectionClass"))
+	return foundation.StringFromID(_r)
 }
 
 // BeginIndexBatch begins a batch of updates to an index.

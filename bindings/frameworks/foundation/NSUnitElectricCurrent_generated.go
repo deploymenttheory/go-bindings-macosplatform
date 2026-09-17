@@ -17,8 +17,6 @@ import (
 // UnitElectricCurrent is an idiomatic wrapper over the Objective-C class NSUnitElectricCurrent.
 //
 // It embeds [Dimension], promoting that type's methods.
-//
-// A unit of measure for electric current.
 type UnitElectricCurrent struct {
 	Dimension
 }

@@ -24,6 +24,7 @@ var (
 	_tHClientSelInit                                                             = objc.RegisterName("init")
 	_tHClientSelRetrieveAllCredentials                                           = objc.RegisterName("retrieveAllCredentials:")
 	_tHClientSelRetrieveAllActiveCredentials                                     = objc.RegisterName("retrieveAllActiveCredentials:")
+	_tHClientSelRetrieveActiveCredentialsForNearbyNetworksWithCompletion         = objc.RegisterName("retrieveActiveCredentialsForNearbyNetworksWithCompletion:")
 	_tHClientSelDeleteCredentialsForBorderAgentCompletion                        = objc.RegisterName("deleteCredentialsForBorderAgent:completion:")
 	_tHClientSelRetrieveCredentialsForBorderAgentCompletion                      = objc.RegisterName("retrieveCredentialsForBorderAgent:completion:")
 	_tHClientSelStoreCredentialsForBorderAgentActiveOperationalDataSetCompletion = objc.RegisterName("storeCredentialsForBorderAgent:activeOperationalDataSet:completion:")
@@ -31,6 +32,7 @@ var (
 	_tHClientSelRetrieveCredentialsForExtendedPANIDCompletion                    = objc.RegisterName("retrieveCredentialsForExtendedPANID:completion:")
 	_tHClientSelCheckPreferredNetworkForActiveOperationalDatasetCompletion       = objc.RegisterName("checkPreferredNetworkForActiveOperationalDataset:completion:")
 	_tHClientSelIsPreferredNetworkAvailableWithCompletion                        = objc.RegisterName("isPreferredNetworkAvailableWithCompletion:")
+	_tHClientSelEnableCredentialSharingModeForExtendedPANIDCompletion            = objc.RegisterName("enableCredentialSharingModeForExtendedPANID:completion:")
 )
 
 func THClientFromID(id objc.ID) *THClient {
@@ -80,6 +82,21 @@ func (o *THClient) RetrieveAllActiveCredentials(completion func(*foundation.NSSe
 		defer __block_completion.Release()
 	}
 	o.Ptr().Send(_tHClientSelRetrieveAllActiveCredentials, __block_completion)
+}
+
+// Requests all active Thread credentials with active border routers around from the framework.
+func (o *THClient) RetrieveActiveCredentialsForNearbyNetworksWithCompletion(completion func(*foundation.NSSet[*THCredentials], unsafe.Pointer)) {
+	var __block_completion objc.Block
+	if completion != nil {
+		__block_completion = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completion(foundation.NSSetFromID[*THCredentials](blockParam0), blockParam1)
+		})
+		defer __block_completion.Release()
+	}
+	o.Ptr().Send(_tHClientSelRetrieveActiveCredentialsForNearbyNetworksWithCompletion, __block_completion)
 }
 
 // Deletes Thread network credentials from the framework database for a Border Agent.
@@ -173,4 +190,16 @@ func (o *THClient) IsPreferredNetworkAvailableWithCompletion(completion func(boo
 		defer __block_completion.Release()
 	}
 	o.Ptr().Send(_tHClientSelIsPreferredNetworkAvailableWithCompletion, __block_completion)
+}
+
+// Triggers Credential Share mode on a nearby eligible Apple Border Router (tvOS(27.0)).
+func (o *THClient) EnableCredentialSharingModeForExtendedPANIDCompletion(extendedPANID *foundation.NSData, completion func(unsafe.Pointer)) {
+	var __block_completion objc.Block
+	if completion != nil {
+		__block_completion = objc.NewBlock(func(_ objc.Block, blockParam0 unsafe.Pointer) {
+			completion(blockParam0)
+		})
+		defer __block_completion.Release()
+	}
+	o.Ptr().Send(_tHClientSelEnableCredentialSharingModeForExtendedPANIDCompletion, extendedPANID.Ptr(), __block_completion)
 }

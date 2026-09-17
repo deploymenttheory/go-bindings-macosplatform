@@ -18,8 +18,6 @@ import (
 // MeasurementFormatter is an idiomatic wrapper over the Objective-C class NSMeasurementFormatter.
 //
 // It embeds [Formatter], promoting that type's methods.
-//
-// A formatter that provides localized representations of units and measurements.
 type MeasurementFormatter struct {
 	Formatter
 }
@@ -56,26 +54,26 @@ func NewMeasurementFormatter() *MeasurementFormatter {
 	return measurementFormatterAdopt(_id)
 }
 
-// WithUnitOptions sets the unit options.
+// WithUnitOptions sets the options for how the unit is formatted. This property can be set to ensure that the formatter behaves in a way the developer expects, even if it is not standard according to the preferences of the user's locale. If not specified, `unitOptions` defaults to localizing according to the preferences of the locale. Note that `NSMeasurementFormatter` will handle converting measurement objects to the preferred units in a particular locale. For instance, if provided a measurement object in kilometers and the set locale is en_US, the formatter will implicitly convert the measurement object to miles and return the formatted string as the equivalent measurement in miles.
 func (mf *MeasurementFormatter) WithUnitOptions(unitOptions MeasurementFormatterUnitOptions) *MeasurementFormatter {
 	objc.Send[objc.ID](objref.IDOf(mf), objc.RegisterName("setUnitOptions:"), unitOptions)
 	return mf
 }
 
-// WithUnitStyle sets the unit style.
+// WithUnitStyle sets the unit style used when creating string representations of measurements. If not specified, `unitStyle` is set to `NSFormattingUnitStyleMedium`.
 func (mf *MeasurementFormatter) WithUnitStyle(unitStyle FormattingUnitStyle) *MeasurementFormatter {
 	objc.Send[objc.ID](objref.IDOf(mf), objc.RegisterName("setUnitStyle:"), unitStyle)
 	return mf
 }
 
-// WithLocale sets the locale.
+// WithLocale sets the locale used when formatting measurements. If not specified, the locale is set to the user's current locale.
 func (mf *MeasurementFormatter) WithLocale(locale *Locale) *MeasurementFormatter {
 	defer runtime.KeepAlive(locale)
 	objc.Send[objc.ID](objref.IDOf(mf), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 	return mf
 }
 
-// WithNumberFormatter sets the number formatter.
+// WithNumberFormatter sets the number formatter used to format the numeric value of a measurement. If not specified, the number formatter is set up with `NSNumberFormatterDecimalStyle`.
 func (mf *MeasurementFormatter) WithNumberFormatter(numberFormatter *NumberFormatter) *MeasurementFormatter {
 	defer runtime.KeepAlive(numberFormatter)
 	objc.Send[objc.ID](objref.IDOf(mf), objc.RegisterName("setNumberFormatter:"), objref.IDOf(numberFormatter))
@@ -94,7 +92,7 @@ func (mf *MeasurementFormatter) WithScriptingProperties(scriptingProperties map[
 	return mf
 }
 
-// StringFromMeasurement wraps the corresponding Objective-C method.
+// StringFromMeasurement creates and returns a localized string representation of the provided measurement. - Parameters: - measurement: The measurement to be represented. - Returns: A user-readable string that represents the measurement.
 func (mf *MeasurementFormatter) StringFromMeasurement(measurement obj.Object) string {
 	defer runtime.KeepAlive(mf)
 	defer runtime.KeepAlive(measurement)
@@ -105,7 +103,7 @@ func (mf *MeasurementFormatter) StringFromMeasurement(measurement obj.Object) st
 	return purego.GoString(_r)
 }
 
-// StringFromUnit wraps the corresponding Objective-C method.
+// StringFromUnit creates and returns a localized string representation of the provided unit of measure. If the unit cannot be localized, the unit's `symbol` value is used. - Parameters: - unit: The unit of measure to be represented. - Returns: A user-readable string that represents the unit of measure.
 func (mf *MeasurementFormatter) StringFromUnit(unit *Unit) string {
 	defer runtime.KeepAlive(mf)
 	defer runtime.KeepAlive(unit)
@@ -116,28 +114,28 @@ func (mf *MeasurementFormatter) StringFromUnit(unit *Unit) string {
 	return purego.GoString(_r)
 }
 
-// UnitOptions returns the unit options.
+// UnitOptions returns the options for how the unit is formatted. This property can be set to ensure that the formatter behaves in a way the developer expects, even if it is not standard according to the preferences of the user's locale. If not specified, `unitOptions` defaults to localizing according to the preferences of the locale. Note that `NSMeasurementFormatter` will handle converting measurement objects to the preferred units in a particular locale. For instance, if provided a measurement object in kilometers and the set locale is en_US, the formatter will implicitly convert the measurement object to miles and return the formatted string as the equivalent measurement in miles.
 func (mf *MeasurementFormatter) UnitOptions() MeasurementFormatterUnitOptions {
 	defer runtime.KeepAlive(mf)
 	_r := objc.Send[MeasurementFormatterUnitOptions](objref.IDOf(mf), objc.RegisterName("unitOptions"))
 	return _r
 }
 
-// UnitStyle returns the unit style.
+// UnitStyle returns the unit style used when creating string representations of measurements. If not specified, `unitStyle` is set to `NSFormattingUnitStyleMedium`.
 func (mf *MeasurementFormatter) UnitStyle() FormattingUnitStyle {
 	defer runtime.KeepAlive(mf)
 	_r := objc.Send[FormattingUnitStyle](objref.IDOf(mf), objc.RegisterName("unitStyle"))
 	return _r
 }
 
-// Locale returns the locale.
+// Locale returns the locale used when formatting measurements. If not specified, the locale is set to the user's current locale.
 func (mf *MeasurementFormatter) Locale() *Locale {
 	defer runtime.KeepAlive(mf)
 	_r := objc.Send[objc.ID](objref.IDOf(mf), objc.RegisterName("locale"))
 	return LocaleFromID(_r)
 }
 
-// NumberFormatter returns the number formatter.
+// NumberFormatter returns the number formatter used to format the numeric value of a measurement. If not specified, the number formatter is set up with `NSNumberFormatterDecimalStyle`.
 func (mf *MeasurementFormatter) NumberFormatter() *NumberFormatter {
 	defer runtime.KeepAlive(mf)
 	_r := objc.Send[objc.ID](objref.IDOf(mf), objc.RegisterName("numberFormatter"))

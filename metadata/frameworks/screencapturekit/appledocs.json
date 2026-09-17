@@ -3,6 +3,9 @@
   "framework": "ScreenCaptureKit",
   "source": "developer.apple.com DocC render API",
   "classes": {
+    "SCClipBufferingOutput": {
+      "url": "https://developer.apple.com/documentation/screencapturekit/scclipbufferingoutput"
+    },
     "SCContentFilter": {
       "doc": "An instance that filters the content a stream captures.",
       "url": "https://developer.apple.com/documentation/screencapturekit/sccontentfilter"
@@ -11,13 +14,12 @@
       "doc": "An instance of a picker presented by the operating system for managing frame-capture streams.",
       "url": "https://developer.apple.com/documentation/screencapturekit/sccontentsharingpicker"
     },
-    "SCContentSharingPickerConfiguration": {
-      "doc": "An instance for configuring the system content-sharing picker.",
-      "url": "https://developer.apple.com/documentation/screencapturekit/sccontentsharingpickerconfiguration"
-    },
     "SCDisplay": {
       "doc": "An instance that represents a display device.",
       "url": "https://developer.apple.com/documentation/screencapturekit/scdisplay"
+    },
+    "SCRecordingEditor": {
+      "url": "https://developer.apple.com/documentation/screencapturekit/screcordingeditor"
     },
     "SCRecordingOutput": {
       "url": "https://developer.apple.com/documentation/screencapturekit/screcordingoutput"
@@ -57,15 +59,24 @@
       "doc": "An instance that provides the output configuration for a stream.",
       "url": "https://developer.apple.com/documentation/screencapturekit/scstreamconfiguration"
     },
+    "SCVideoEffectOutput": {
+      "url": "https://developer.apple.com/documentation/screencapturekit/scvideoeffectoutput"
+    },
     "SCWindow": {
       "doc": "An instance that represents an onscreen window.",
       "url": "https://developer.apple.com/documentation/screencapturekit/scwindow"
     }
   },
   "protocols": {
+    "SCClipBufferingOutputDelegate": {
+      "url": "https://developer.apple.com/documentation/screencapturekit/scclipbufferingoutputdelegate"
+    },
     "SCContentSharingPickerObserver": {
       "doc": "An observer protocol your app implements to receive messages from the operating system’s content picker.",
       "url": "https://developer.apple.com/documentation/screencapturekit/sccontentsharingpickerobserver"
+    },
+    "SCRecordingEditorDelegate": {
+      "url": "https://developer.apple.com/documentation/screencapturekit/screcordingeditordelegate"
     },
     "SCRecordingOutputDelegate": {
       "url": "https://developer.apple.com/documentation/screencapturekit/screcordingoutputdelegate"
@@ -215,13 +226,6 @@
           "url": "https://developer.apple.com/documentation/screencapturekit/scshareablecontentstyle/window"
         }
       }
-    },
-    "SCStreamConfigurationPreset": {
-      "url": "https://developer.apple.com/documentation/screencapturekit/scstreamconfigurationpreset"
-    },
-    "SCStreamErrorCode": {
-      "doc": "Codes for user cancellation events and errors that can occur in ScreenCaptureKit.",
-      "url": "https://developer.apple.com/documentation/screencapturekit/scstreamerrorcode"
     },
     "SCStreamOutputType": {
       "doc": "Constants that represent output types for a stream frame.",
@@ -398,7 +402,7 @@
       },
       "defaultConfiguration": {
         "doc": "The default configuration to use for the content capture picker.",
-        "url": "https://developer.apple.com/documentation/screencapturekit/sccontentsharingpicker/defaultconfiguration-94q2b"
+        "url": "https://developer.apple.com/documentation/screencapturekit/sccontentsharingpicker/defaultconfiguration-9v5sa"
       },
       "maximumStreamCount": {
         "doc": "The maximum number of streams the content capture picker allows.",

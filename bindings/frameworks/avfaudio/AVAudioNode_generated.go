@@ -6,6 +6,7 @@ package avfaudio
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -120,6 +121,14 @@ func (an *AudioNode) InstallTapOnBusBufferSizeFormatBlock(bus int, bufferSize ui
 	defer runtime.KeepAlive(an)
 	defer runtime.KeepAlive(format)
 	objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("installTapOnBus:bufferSize:format:block:"), bus, bufferSize, objref.IDOf(format), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { tapBlock(obj.Wrap(_b0), obj.Wrap(_b1)) }))
+}
+
+// InstallTapOnBusBufferSizeFormatErrorBlock create a "tap" to record/monitor/observe the output of the node. Only one tap may be installed on any bus. Taps may be safely installed and removed while the engine is running. Note that if you have a tap installed on AVAudioOutputNode, there could be a mismatch between the tap buffer format and AVAudioOutputNode's output format, depending on the underlying physical device. Hence, instead of tapping the AVAudioOutputNode, it is advised to tap the node connected to it. E.g. to capture audio from input node: <pre> AVAudioEngine *engine = [[AVAudioEngine alloc] init]; AVAudioInputNode *input = [engine inputNode]; AVAudioFormat *format = [input outputFormatForBus: 0]; NSError *error = nil; BOOL success = [input installTapOnBus: 0 bufferSize: 8192 format: format error:&error block: ^(AVAudioPCMBuffer *buf, AVAudioTime *when) { // ‘buf' contains audio captured from input node at time 'when' }]; .... // start engine </pre>
+func (an *AudioNode) InstallTapOnBusBufferSizeFormatErrorBlock(bus int, bufferSize uint32, format *AudioFormat, outError unsafe.Pointer, tapBlock func(obj.Object, obj.Object)) bool {
+	defer runtime.KeepAlive(an)
+	defer runtime.KeepAlive(format)
+	_r := objc.Send[bool](objref.IDOf(an), objc.RegisterName("installTapOnBus:bufferSize:format:error:block:"), bus, bufferSize, objref.IDOf(format), outError, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { tapBlock(obj.Wrap(_b0), obj.Wrap(_b1)) }))
+	return _r
 }
 
 // RemoveTapOnBus removes an audio tap on a bus you specify.

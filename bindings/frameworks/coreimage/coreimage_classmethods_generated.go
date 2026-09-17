@@ -913,6 +913,16 @@ func ApplyWithExtentsInputsArguments(extents []*Vector, inputs []*Image, argumen
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Image { return ImageFromID(_id) }), nil
 }
 
+// ApplyWithTiledExtentInputsArguments call this method on your Core Image Processor Kernel subclass to create a new image based on an array of tile extents that together cover the output.
+func ApplyWithTiledExtentInputsArguments(tileExtents []*Vector, inputs []*Image, args map[string]obj.Object) (result *Image, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImageProcessorKernel")), objc.RegisterName("applyWithTiledExtent:inputs:arguments:error:"), purego.SliceToNSArray(tileExtents, func(_v *Vector) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(inputs, func(_v *Image) objc.ID { return objref.IDOf(_v) }), rt.MapToDict(args, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return ImageFromID(_r), nil
+}
+
 // KernelsWithString creates and returns and array of CIKernel objects.
 func KernelsWithString(str string) []*Kernel {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIKernel")), objc.RegisterName("kernelsWithString:"), purego.NSString(str))
@@ -996,6 +1006,13 @@ func LoadNonExecutablePlugIn(url string) {
 func DescriptorWithPayloadSymbolVersionMaskPatternErrorCorrectionLevel(errorCorrectedPayload []byte, symbolVersion int, maskPattern uint8, errorCorrectionLevel QRCodeErrorCorrectionLevel) *QRCodeDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIQRCodeDescriptor")), objc.RegisterName("descriptorWithPayload:symbolVersion:maskPattern:errorCorrectionLevel:"), rt.BytesToNSData(errorCorrectedPayload), symbolVersion, maskPattern, errorCorrectionLevel)
 	return QRCodeDescriptorFromID(_r)
+}
+
+// SupportedCameraModelsWithVersion wraps the corresponding Objective-C method.
+func SupportedCameraModelsWithVersion(version obj.Object) []string {
+	defer runtime.KeepAlive(version)
+	_r := objc.Send[objc.ID](objc.ID(_class("CIRAWFilter")), objc.RegisterName("supportedCameraModelsWithVersion:"), objref.IDOf(version))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // FilterWithImageURL creates a RAW filter from the image at the URL location that you specify.

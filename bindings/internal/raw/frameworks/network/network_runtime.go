@@ -1091,6 +1091,9 @@ func _loadLibrary() {
 	_register("nw_tcp_options_set_retransmit_fin_drop", func() {
 		purego.RegisterLibFunc(&_nw_tcp_options_set_retransmit_fin_drop, _networkLib, "nw_tcp_options_set_retransmit_fin_drop")
 	})
+	_register("nw_tcp_set_max_pacing_rate", func() {
+		purego.RegisterLibFunc(&_nw_tcp_set_max_pacing_rate, _networkLib, "nw_tcp_set_max_pacing_rate")
+	})
 	_register("nw_tls_copy_sec_protocol_metadata", func() {
 		purego.RegisterLibFunc(&_nw_tls_copy_sec_protocol_metadata, _networkLib, "nw_tls_copy_sec_protocol_metadata")
 	})

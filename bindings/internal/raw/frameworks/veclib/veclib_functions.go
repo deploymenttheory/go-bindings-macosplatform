@@ -16,7 +16,7 @@ var (
 	// @abstract Query what the currently selected threading model is. @discussion This routine will return what the currently selected threading model is. This setting is per thread, saved in a thread local variable. @return An enum representing the currently selected threading model.
 	_fnBLASGetThreading func() BLAS_THREADING
 	// @abstract Set the threading model to use for BLAS and LAPACK @discussion Set the threading model to use for the subsequent calls into BLAS and LAPACK. This setting is per thread, saved in a thread local variable. @param threading (input) The desired threading model. @return 0:  Success <br> -1: Option is not supported on this platform
-	_fnBLASSetThreading func(unsafe.Pointer) int
+	_fnBLASSetThreading func(BLAS_THREADING) int
 	// @abstract Applies a previously created multihead attention layer @discussion When training, the backward pass can be accelerated by caching intermediate values from the forward pass. This is done by providing a memory buffer backprop_cache. The recommended size for this buffer may be obtained by calling the function with the pointer backprop_cache_size set to non-NULL, and backprop_cache set to NULL. The recommended size will be stored in *backprop_cache_size (the layer application will not be perfomed). The user may optionally provide a scratch workspace. The required size will depend the size of backprop_cache provided, and if no scratch workspace is provided one will be allocated internally. The size of required workspace can be obtained by calling the routine with a non-NULL workspace_size parameter and a NULL workspace pointer, and the required size will be returned in *workspace_size (the layer application will not be perfomed). If both backprop_cache_size and workspace_size are queried simulateneously, the returned workspace size will assume that the full backprop_cache_size is provided. @param F Filter to apply created by a previous call to BNNSFilterCreateLayerMultiheadAttention() @param batch_size Number of inputs in batch @param query Pointer to data for query input matrix, layout as described by layer_params->query.target_desc @param query_stride Batch stride for query @param key Pointer to data for key input matrix, layout as described by layer_params->key.target_desc @param key_stride Batch stride for key @param key_mask Mask applied to key for ignoring entries. A 1D tensor of type BNNSDataTypeBoolean and shape source_length. Where this tensor evalautes to true, the corresponding elements of the key matrix are ignored in the attention operation. No key mask is applied if NULL is passed. @param key_mask_stride Batch stride for key_mask @param value Pointer to data for value input matrix, layout as described by layer_params->value.target_desc @param value_stride Batch stride for value @param output Pointer to data for output matrix, layout as described by layer_params->output.target_desc @param output_stride Batch stride for output @param add_to_attention Optional, one of: 1) a 2D tensor of shape target_length x source_length; or 2) a 3D tensor of shape num_heads x target_length x source_length; or 3) a 4D tensor of shape batch_size x num_heads x target_length x source_length. This is used as part of the mask function prior to softmax in the attention calculation (the matrix X in the layer description). If the data type is BNNSDataTypeBoolean, true is treated as adding -inf, and false as adding zero (that is to say attention is not permitted in locations indicated by the the mask). No matrix is added if this pointer is NULL. Note: The 3D, 4D and BNNSDataTypeBoolean variants of this parameter are only supported in macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0 and later. @param backprop_cache_size Specifies the size of the array backprop_cache, in bytes. If backprop_cache_size is not-NULL but backprop_cache is NULL, the recommended size for backprop_cache_size will be set, but not other calculations will be performed (except to set workspace_size if requested). @param backprop_cache Is used to store intermediate results that can be used to accelerate a future call to BNNSApplyMultiheadAttentionBackward. @param workspace_size Specifies the size of the array workspace, in bytes. If workspace_size is not-NULL but workspace is NULL, the recommended size for workspace_size will be set, but not other calculations will be performed (except to set backprop_cache_size if requested). @param workspace Is used as a scratch buffer during the calculation.
 	// Deprecated: Use BNNSGraph* APIs
 	_fnBNNSApplyMultiheadAttention func(unsafe.Pointer, uint, unsafe.Pointer, uint, unsafe.Pointer, uint, *BNNSNDArrayDescriptor, uint, unsafe.Pointer, uint, unsafe.Pointer, uint, *BNNSNDArrayDescriptor, *uint, unsafe.Pointer, *uint, unsafe.Pointer) int
@@ -31,7 +31,7 @@ var (
 	_fnBNNSArithmeticFilterApplyBatch func(unsafe.Pointer, uint, uint, unsafe.Pointer, *uint, unsafe.Pointer, uint) int
 	// @abstract Set elements outside a center band to zeros for the innermost matrix (the two dimensions with the lowest stride values) @discussion Currently only works on contiguous input and output @param num_lower The number of subdiagonals that the function copies. Set to a negative value to copy the entire lower triangle @param num_upper The number of superdiagonals that the function copies. Set to a negative value to copy the entire upper triangle @param input Pointer to the input tensor descriptor @param output Pointer to the output tensor descriptor @param filter_params Filter runtime parameters, may be NULL for default parameters @return Zero on success, nonzero on failure.
 	// Deprecated: Use BNNSGraph* APIs
-	_fnBNNSBandPart func(unsafe.Pointer, unsafe.Pointer, *BNNSNDArrayDescriptor, *BNNSNDArrayDescriptor, *BNNSFilterParameters) int
+	_fnBNNSBandPart func(int, int, *BNNSNDArrayDescriptor, *BNNSNDArrayDescriptor, *BNNSFilterParameters) int
 	// @abstract Clip values of a list of tensors by a maximum global L2-norm. @discussion Given a list of tensors src, and a maximum global L2-norm, max_norm, this operation computes a list of clipped tensors. If you already know the global norm of src, you can specify the global norm to use with use_norm. @param dest array of destination tensor descriptors @param src array of source tensor descriptors. Each descriptor data in the array must be the same size as its matching dest descriptor in the dest array. @param count number of descriptors in the dest and src arrays @param max_norm maximum global L2-norm @param use_norm The global norm to use. If zero, global norm is computed based on src. @returns 0 on success, nonzero on failure
 	// Deprecated: Use BNNSGraph* APIs
 	_fnBNNSClipByGlobalNorm func(*BNNSNDArrayDescriptor, *BNNSNDArrayDescriptor, uint, float32, float32) int
@@ -56,7 +56,7 @@ var (
 	// @abstract Copies the contents of one BNNSNDArrayDescriptor to another of the same shape. @discussion Equivalent to using a contraction layer with opstring "src_* -> dest_*" @param dest The destination tensor @param src The source tensor - must not overlap in memory with the destination tensor
 	_fnBNNSCopy func(*BNNSNDArrayDescriptor, *BNNSNDArrayDescriptor, *BNNSFilterParameters) int
 	// @abstract Create a BNNSNearestNeighbors object, that is used to calculate k nearest neighbors of data points based on Euclidean distance @param max_n_samples - maximum number of data points @param n_features - number of features (dimensions) of each data point @param n_neighbors - number of nearest neighbors @param data_type - data type of the features, only fp32 and fp16 is supported by now @param filter_params - filter runtime parameters, may be NULL for default parameters @return On success, a BNNSNearestNeighbors object is created. On failure, returns NULL.
-	_fnBNNSCreateNearestNeighbors func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, accelerate.BNNSDataType, *BNNSFilterParameters) unsafe.Pointer
+	_fnBNNSCreateNearestNeighbors func(uint, uint, uint, accelerate.BNNSDataType, *BNNSFilterParameters) unsafe.Pointer
 	// @abstract Create a random number generator @discussion Creates a BNNSRandomGenerator object that can be used to generate a stream of random numbers. The generator will be intialized using an interally generated seed that will vary from call to call. @param method - method to be used for random number generation. @param filter_params - options structure, if NULL, defaults are used. @returns On success, an BNNSRandomGenerator object describing the RNG state. On failure, returns NULL. @seealso BNNSCreateRandomGeneratorWithSeed
 	_fnBNNSCreateRandomGenerator func(accelerate.BNNSRandomGeneratorMethod, *BNNSFilterParameters) unsafe.Pointer
 	// @abstract Create a random number generator using the given seed @discussion Creates a BNNSRandomGenerator object that can be used to generate a stream of random numbers. @param method - method to be used for random number generation. @param seed - random seed to be used when initializing generator. @param filter_params - options structure, if NULL, defaults are used. @returns On success, an BNNSRandomGenerator object describing the RNG state. On failure, returns NULL. @seealso BNNSCreateRandomGenerator
@@ -78,7 +78,7 @@ var (
 	_fnBNNSDirectApplyActivationBatch func(*BNNSLayerParametersActivation, *BNNSFilterParameters, uint, uint, uint) int
 	// @abstract Directly apply a broadcast matrix multiplication layer. @description Performs the same action as a broadcast matrix multiplication layer without instantiating a BNNSFilter. @param transA - if true, transposes the last two dimensions of A @param transB - if true, transposes the last two dimensions of B @param alpha - scalar by which to scale the result @param inputA - descriptor for tensor A @param inputB - descriptor for tensor B @param output - descriptor for tensor C; on output only the data values are changed @param filter_params - filter runtime parameters, may be NULL for default parameters
 	// Deprecated: since macOS 13.0.
-	_fnBNNSDirectApplyBroadcastMatMul func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *BNNSNDArrayDescriptor, *BNNSNDArrayDescriptor, *BNNSNDArrayDescriptor, *BNNSFilterParameters)
+	_fnBNNSDirectApplyBroadcastMatMul func(bool, bool, float32, *BNNSNDArrayDescriptor, *BNNSNDArrayDescriptor, *BNNSNDArrayDescriptor, *BNNSFilterParameters)
 	// @abstract Given a tensor index for each member of a batch, returns a boolean vector indicating whether each index corresponds to a top-k value of the input. @discussion Consider the 4x4 tensor in a batch size of 3: X(:,:,0) = [ 1 3 5 7 ]         X(:,:,1) = [ 1 8 3 4 ]         X(:,:,2) = [ 4 8 7 7 ] [ 2 5 1 9 ]                       [ 8 1 3 5 ]                        [ 4 3 8 5 ] [ 1 5 3 2 ]                       [ 1 7 2 3 ]                        [ 5 7 3 1 ] and the test indices: T(:, 0) = (0, 3, 1) T(:, 1) = (2, 2, 0) T(:, 2) = (3, 2, 1) with K= 2 and axis=1, the result would be: (F, F, T)      from comparing values (1, 1, 5) against the top K sets (5, 7), (5, 9), (3,5) in the first batch (F, F, F)      from comparing values (3, 3, 1) against the top K set (4, 8), (5, 8), (3,7) in the second batch (T, T, T)      from comparing values (7, 8, 7) against the top K set (7, 8), (5, 8), (5, 7) in the third batch Observe that in the case of ties, all possible entries are included in the top K. @param K Number of entries to find @param axis Axis along which to find top K entries @param batch_size Number of batches @param input The input tensor @param input_batch_stride The batch stride for input.data @param test_indices Test index tensor, shape must match that of input, with the given axis removed @param test_indices_batch_stride The batch stride for test_indices.data @param output The boolean output tensor @param output_batch_stride The batch stride for output.data, of shape matching test_indices @param filter_params Filter runtime parameters, may be NULL for default parameters @return Zero on success, nonzero on failure.
 	_fnBNNSDirectApplyInTopK func(uint, uint, uint, *BNNSNDArrayDescriptor, uint, *BNNSNDArrayDescriptor, uint, *BNNSNDArrayDescriptor, uint, *BNNSFilterParameters) int
 	// @abstract Direct Apply LSTM with training caching @discussion compute LSTM backward @param layer_params - layer parameters @param layer_delta_params - layer delta parameters (include inputs & outputs for backward) @param filter_params - filter parameters @param training_cache_ptr - buffer with intermediate results to accelerate backward computation. if Null, intermediate results weren't cached and forward pass will be recomupted @param training_cache_capacity - size in bytes of training_cache_ptr. return failure when training_cache_capacity is lower than the minimum bytes capacity of the training cache @return 0 on success, and -1 on failure.
@@ -229,7 +229,7 @@ var (
 	_fnBNNSGraphCompileOptionsSetOutputPath func(BnnsGraphCompileOptionsT, string)
 	// Sets option for compiled graph to execute on only one thread. Default behavior is to execute on multiple threads.
 	_fnBNNSGraphCompileOptionsSetTargetSingleThread func(BnnsGraphCompileOptionsT, bool)
-	// Destroys a graph context created through a call to `BNNSGraphContextCreate` Arguments: `context`: object to be destroyed
+	// Destroys a graph context created through a call to `BNNSGraphContextMake` or `BNNSGraphContextMakeStreaming` Arguments: `context`: object to be destroyed
 	_fnBNNSGraphContextDestroy func(BnnsGraphContextT)
 	// Enables debug mode, checks intermediate tensors for nans and infs. Not for use in production code.
 	_fnBNNSGraphContextEnableNanAndInfChecks func(BnnsGraphContextT, bool)
@@ -291,10 +291,10 @@ var (
 	_fnBNNSLossFilterApplyBatch func(unsafe.Pointer, uint, unsafe.Pointer, uint, unsafe.Pointer, uint, unsafe.Pointer, uint, unsafe.Pointer, *BNNSNDArrayDescriptor, uint) int
 	// @abstract Directly apply a broadcast matrix multiplication layer. @discussion This routine performs to operation C = alpha * op(A) * op(B), with approriate broadcasting if dimensions are absent on one or more matrices. Matrix multiplication is always on the final two indices of each operand. For example, if we have A is 4x5x6 B is 6x7 C is 4x5x7 Then the operation performed (if transA=transB=false) is: c_pij = sum_k a_pik * b_kj Noting that the matrix B has been broadcast in the p dimension Performs the same action as a broadcast matrix multiplication layer without instantiating a BNNSFilter. This function replaces the deprecated BNNSDirectApplyBroadcastMatMul and allows explicit provision of workspace memory. If workspace is not null, no allocation is performed internally. @param transA - if true, transposes the last two dimensions of A @param transB - if true, transposes the last two dimensions of B @param alpha - scalar by which to scale the result @param inputA - descriptor for tensor A @param inputB - descriptor for tensor B @param output - descriptor for tensor C; on output only the data values are changed @param workspace - pointer to memory region to be used as scratch. Must have size no less than the value returned by BNNSMatMulWorkspaceSize @param filter_params - filter runtime parameters, may be NULL for default parameters @returns 0 on success, non-zero on failure
 	// Deprecated: Use BNNSGraph* APIs
-	_fnBNNSMatMul func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *BNNSNDArrayDescriptor, *BNNSNDArrayDescriptor, *BNNSNDArrayDescriptor, unsafe.Pointer, *BNNSFilterParameters) int
+	_fnBNNSMatMul func(bool, bool, float32, *BNNSNDArrayDescriptor, *BNNSNDArrayDescriptor, *BNNSNDArrayDescriptor, unsafe.Pointer, *BNNSFilterParameters) int
 	// @abstract Returns required workspace size for a call to BNNSMatMul() with the given paramters. @discussion This routine does not access the data pointers on the array descriptors, so they need not point to actual data. @param transA - if true, transposes the last two dimensions of A @param transB - if true, transposes the last two dimensions of B @param alpha - scalar by which to scale the result @param inputA - descriptor for tensor A @param inputB - descriptor for tensor B @param output - descriptor for tensor C @param filter_params - filter runtime parameters, may be NULL for default parameters @returns Required allocation size for workspace paramter to BNNSMatMul, in bytes. If parameters are invalid, a negative value is returned.
 	// Deprecated: Use BNNSGraph* APIs
-	_fnBNNSMatMulWorkspaceSize func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *BNNSNDArrayDescriptor, *BNNSNDArrayDescriptor, *BNNSNDArrayDescriptor, *BNNSFilterParameters) int
+	_fnBNNSMatMulWorkspaceSize func(bool, bool, float32, *BNNSNDArrayDescriptor, *BNNSNDArrayDescriptor, *BNNSNDArrayDescriptor, *BNNSFilterParameters) int
 	// @abstract Converts sparse tensor from the standardized COO layout to a device specific sparse layout used by FullyConnected @discussion The COO format is similar to that used in tensorflow and described at  https://www.tensorflow.org/guide/sparse_tensor - If the developer preallocates the workspace, it must be at least twice the size of the dense input. - BNNS will allocate scratch memory if workspace is NULL - the developer may pre allocate out->data to equal to the memory size of the dense input. - BNNS will allocate the memory for the sparse NDArray given by out if out->data is NULL, it will be the developer's responsibility to free this memory allocated by BNNS - if out->data was allocated to be >= size of input->data, we recommend query the output actual data size using BNNSNDArrayGeteDataSize after sparsify operation has been completed and reallocate to the smaller size - the size of dense input can be obtained by calling BNNSNDArrayGetDataSize - sparse_params are optional for the user to hint the attributes of the sparsity in the input. specifying pattern that doesn't match the sparse weights could result in failure to Sparsify the weights for Sparse Fully Connected @param in_dense_shape - describe the dense shape of the sparse 2D array. developer should set sizes and layout. @param in_indices - A 2D NDArray with shape [NNZ, rank], that contains the interleaved indices of the nonzero values. For row-major ordering, the even elements are the column indices and the odd elements are the row indices. For column-major ordering, the even element are the row indices and the odd elements are the column indices. @param in_values -  A 1D NDArray with shape [NNZ] containing all nonzero values. @param out - nd array descriptor of device optimized BNNS Sparse Fully Connected weights. use it when setting BNNSLayerParametersFullyConnected for BNNSDirectApplyFullyConnectedBatch or BNNSFilterCreateLayerFullyConnected @param sparse_params - optional data structure to hint the sparsify function. this could help identifying specialized patterns that can be accelerated compared to unstructured sparsity. see BNNSSparsityType for pattern types. @param batch_size - the expected batch_size when calling BNNSFilterCreateLayerFullyConnected or BNNSFilterApplyBatch with device optimized BNNS Sparse Fully Connected weights. this is important in the decision of how to pack the weights. when set to 0, assuming it will be set to 1 during inference @param workspace - scratch memory to use while generating the opaque BNNS Sparse Fully Connected weights. it is recommended that the size of this buffer should be equal to the memory size of the dense input. if set to NULL, BNNS will allocate and free during the run of BNNSNDArrayFullyConnectedSparsify. @param workspace_size - size in bytes of workspace when preallocated by the developer. Will be ignored if workspace is NULL. @return 0 for success, non 0 on failure (failure reason will reported in os logs)
 	// Deprecated: Use BNNSGraph* APIs
 	_fnBNNSNDArrayFullyConnectedSparsifySparseCOO func(*BNNSNDArrayDescriptor, *BNNSNDArrayDescriptor, *BNNSNDArrayDescriptor, *BNNSNDArrayDescriptor, *BNNSSparsityParameters, uint, unsafe.Pointer, uint, *BNNSFilterParameters) int
@@ -304,9 +304,9 @@ var (
 	// @abstract calculate the size in bytes of the array data @return 0 if unable to determine the size (or array->data is null)
 	_fnBNNSNDArrayGetDataSize func(*BNNSNDArrayDescriptor) uint
 	// @abstract Return the sorted indices and distances of the k nearest neighbors to certain sample point @param knn -  the BNNSNearestNeighbors object used for calculation and storage @param sample_number - sample number to return the k nearest neighbors, if negative return all of them @param indices - sorted indices of the k nearest neighbors to the sample point (sample_number), if not null. If sample_number is negative, indices is an array of [n_samples, n_neighbors], otherwise indices is an array of [n_neighbors]. Return -1 for n_neighbors larger than n_samples. @param distances - sorted distances of the k nearest neighbors to the sample point (sample_number), if not null. If sample_number is negative, distances is an array of [n_samples, n_neighbors], otherwise distances is an array of [n_neighbors]. Return INFINITY for n_neighbors larger than n_samples. @return 0 for success, nonzero on failure (failure reason will reported in os logs)
-	_fnBNNSNearestNeighborsGetInfo func(unsafe.Pointer, unsafe.Pointer, *int32, unsafe.Pointer) int
+	_fnBNNSNearestNeighborsGetInfo func(unsafe.Pointer, int, *int32, unsafe.Pointer) int
 	// @abstract Add new sample data to BNNSNearestNeighbors @param knn - the BNNSNearestNeighbors object used for calculation and storage @param n_new_samples - number of new data points to be added @param data_ptr - pointer to the new data array of size [n_new_samples, n_features] @return 0 for success, nonzero on failure (failure reason will reported in os logs)
-	_fnBNNSNearestNeighborsLoad func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnBNNSNearestNeighborsLoad func(unsafe.Pointer, uint, unsafe.Pointer) int
 	// @abstract Apply a normalization filter backward to generate input delta, beta delta and gamma delta @discussion similar to BNNSFilterApplyBackwardBatch, but computing input delta, beta delta and gamma delta It is mandatory to compute all active gradients in a single function call. computation of input delta is not required in case the filter is the first layer in the network @param filter Filter to apply backward @param batch_size Number of (input, output) pairs to process @param in_delta Pointer to the input delta descriptor - not produced if null - must be in BNNSDataTypeFloat32 or BNNSDataTypeBFloat16 @param in_delta_stride Increment (in values) between input deltas @param out Pointer to the forward pass output data (y) - out is ignored if activation is BNNSActivationFunctionIdentity - forward pass output must be provided in case of fused instance normalization and activation @param out_stride Increment (in values) between outputs @param out_delta Pointer to the output delta descriptor (dy) - out delta may be modified in order to save memory allocations when computing fused activation backward - must be in BNNSDataTypeFloat32 or BNNSDataTypeBFloat16 @param out_delta_stride Increment (in values) between output deltas @param beta_delta Pointer to the beta delta descriptor - not produced if null - must be in BNNSDataTypeFloat32 or BNNSDataTypeBFloat16 @param gamma_delta Pointer to the gamma delta descriptor - not produced if null - must be in BNNSDataTypeFloat32 or BNNSDataTypeBFloat16 @return 0 on success, and -1 on failure.
 	// Deprecated: Use BNNSGraph* APIs
 	_fnBNNSNormalizationFilterApplyBackwardBatch func(unsafe.Pointer, uint, *BNNSNDArrayDescriptor, uint, unsafe.Pointer, uint, *BNNSNDArrayDescriptor, uint, *BNNSNDArrayDescriptor, *BNNSNDArrayDescriptor) int
@@ -516,18 +516,18 @@ var (
 	__SparseSolveOpaque_Complex_Float                  func(*SparseOpaqueFactorization_Complex_Float, *DenseMatrix_Complex_Float, *DenseMatrix_Complex_Float, unsafe.Pointer)
 	__SparseSolveOpaque_Double                         func(*SparseOpaqueFactorization_Double, *DenseMatrix_Double, *DenseMatrix_Double, unsafe.Pointer)
 	__SparseSolveOpaque_Float                          func(*SparseOpaqueFactorization_Float, *DenseMatrix_Float, *DenseMatrix_Float, unsafe.Pointer)
-	__SparseSolveSubfactor_Complex_Double              func(*SparseOpaqueSubfactor_Complex_Double, *DenseMatrix_Complex_Double, *DenseMatrix_Complex_Double, string)
-	__SparseSolveSubfactor_Complex_Float               func(*SparseOpaqueSubfactor_Complex_Float, *DenseMatrix_Complex_Float, *DenseMatrix_Complex_Float, string)
-	__SparseSolveSubfactor_Double                      func(*SparseOpaqueSubfactor_Double, *DenseMatrix_Double, *DenseMatrix_Double, string)
-	__SparseSolveSubfactor_Float                       func(*SparseOpaqueSubfactor_Float, *DenseMatrix_Float, *DenseMatrix_Float, string)
-	__SparseSpMV_Complex_Double                        func(unsafe.Pointer, SparseMatrix_Complex_Double, DenseMatrix_Complex_Double, bool, DenseMatrix_Complex_Double)
-	__SparseSpMV_Complex_Float                         func(unsafe.Pointer, SparseMatrix_Complex_Float, DenseMatrix_Complex_Float, bool, DenseMatrix_Complex_Float)
-	__SparseSpMV_Double                                func(float64, SparseMatrix_Double, DenseMatrix_Double, bool, DenseMatrix_Double)
-	__SparseSpMV_Float                                 func(float32, SparseMatrix_Float, DenseMatrix_Float, bool, DenseMatrix_Float)
-	__SparseSubFactorGetDimn_Complex_Double            func(SparseOpaqueSubfactor_Complex_Double, *int32, *int32)
-	__SparseSubFactorGetDimn_Complex_Float             func(SparseOpaqueSubfactor_Complex_Float, *int32, *int32)
-	__SparseSubFactorGetDimn_Double                    func(SparseOpaqueSubfactor_Double, *int32, *int32)
 	// **************************************************************************** External functions used to implement public API ****************************************************************************
+	__SparseSolveSubfactor_Complex_Double          func(*SparseOpaqueSubfactor_Complex_Double, *DenseMatrix_Complex_Double, *DenseMatrix_Complex_Double, string)
+	__SparseSolveSubfactor_Complex_Float           func(*SparseOpaqueSubfactor_Complex_Float, *DenseMatrix_Complex_Float, *DenseMatrix_Complex_Float, string)
+	__SparseSolveSubfactor_Double                  func(*SparseOpaqueSubfactor_Double, *DenseMatrix_Double, *DenseMatrix_Double, string)
+	__SparseSolveSubfactor_Float                   func(*SparseOpaqueSubfactor_Float, *DenseMatrix_Float, *DenseMatrix_Float, string)
+	__SparseSpMV_Complex_Double                    func(unsafe.Pointer, SparseMatrix_Complex_Double, DenseMatrix_Complex_Double, bool, DenseMatrix_Complex_Double)
+	__SparseSpMV_Complex_Float                     func(unsafe.Pointer, SparseMatrix_Complex_Float, DenseMatrix_Complex_Float, bool, DenseMatrix_Complex_Float)
+	__SparseSpMV_Double                            func(float64, SparseMatrix_Double, DenseMatrix_Double, bool, DenseMatrix_Double)
+	__SparseSpMV_Float                             func(float32, SparseMatrix_Float, DenseMatrix_Float, bool, DenseMatrix_Float)
+	__SparseSubFactorGetDimn_Complex_Double        func(SparseOpaqueSubfactor_Complex_Double, *int32, *int32)
+	__SparseSubFactorGetDimn_Complex_Float         func(SparseOpaqueSubfactor_Complex_Float, *int32, *int32)
+	__SparseSubFactorGetDimn_Double                func(SparseOpaqueSubfactor_Double, *int32, *int32)
 	__SparseSubFactorGetDimn_Float                 func(SparseOpaqueSubfactor_Float, *int32, *int32)
 	__SparseSymbolicFactorLU                       func(accelerate.SparseFactorization_t, *SparseMatrixStructure, *SparseSymbolicFactorOptions) SparseOpaqueSymbolicFactorization
 	__SparseSymbolicFactorQR                       func(accelerate.SparseFactorization_t, *SparseMatrixStructure, *SparseSymbolicFactorOptions) SparseOpaqueSymbolicFactorization
@@ -547,321 +547,321 @@ var (
 	___builtin_unreachable                         func()
 	___builtin_verbose_trap                        func(string, string)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_appleblas_dgeadd func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *float64, unsafe.Pointer, unsafe.Pointer, *float64, unsafe.Pointer, *float64, unsafe.Pointer)
+	_appleblas_dgeadd func(CBLAS_ORDER, CBLAS_TRANSPOSE, CBLAS_TRANSPOSE, int, int, float64, *float64, int, float64, *float64, int, *float64, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_appleblas_sgeadd func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *float32, unsafe.Pointer, unsafe.Pointer, *float32, unsafe.Pointer, *float32, unsafe.Pointer)
+	_appleblas_sgeadd func(CBLAS_ORDER, CBLAS_TRANSPOSE, CBLAS_TRANSPOSE, int, int, float32, *float32, int, float32, *float32, int, *float32, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_catlas_caxpby func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_catlas_caxpby func(int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_catlas_cset func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_catlas_cset func(int, unsafe.Pointer, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_catlas_daxpby func(unsafe.Pointer, unsafe.Pointer, *float64, unsafe.Pointer, unsafe.Pointer, *float64, unsafe.Pointer)
+	_catlas_daxpby func(int, float64, *float64, int, float64, *float64, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_catlas_dset func(unsafe.Pointer, unsafe.Pointer, *float64, unsafe.Pointer)
+	_catlas_dset func(int, float64, *float64, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_catlas_saxpby func(unsafe.Pointer, unsafe.Pointer, *float32, unsafe.Pointer, unsafe.Pointer, *float32, unsafe.Pointer)
+	_catlas_saxpby func(int, float32, *float32, int, float32, *float32, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_catlas_sset func(unsafe.Pointer, unsafe.Pointer, *float32, unsafe.Pointer)
+	_catlas_sset func(int, float32, *float32, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_catlas_zaxpby func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_catlas_zaxpby func(int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_catlas_zset func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_catlas_zset func(int, unsafe.Pointer, unsafe.Pointer, int)
 	// Deprecated: An updated BLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
 	_caxpy_ func(*int32, unsafe.Pointer, unsafe.Pointer, *int32, unsafe.Pointer, *int32) int
 	// Deprecated: The CLAPACK interface is deprecated.  Please compile with -DACCELERATE_NEW_LAPACK to access the new lapack headers.
 	_cbdsqr_ func(string, *int, *int, *int, *int, *float32, *float32, *CLPKComplex, *int, *CLPKComplex, *int, *CLPKComplex, *int, *float32, *int) int
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_caxpy func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_caxpy func(int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_ccopy func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_ccopy func(int, unsafe.Pointer, int, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_cdotc_sub func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_cdotc_sub func(int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_cdotu_sub func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_cdotu_sub func(int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_cgbmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_cgbmv func(CBLAS_ORDER, CBLAS_TRANSPOSE, int, int, int, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_cgemm func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_cgemm func(CBLAS_ORDER, CBLAS_TRANSPOSE, CBLAS_TRANSPOSE, int, int, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_cgemv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_cgemv func(CBLAS_ORDER, CBLAS_TRANSPOSE, int, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_cgerc func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_cgerc func(CBLAS_ORDER, int, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_cgeru func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_cgeru func(CBLAS_ORDER, int, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_chbmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_chbmv func(CBLAS_ORDER, CBLAS_UPLO, int, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_chemm func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_chemm func(CBLAS_ORDER, CBLAS_SIDE, CBLAS_UPLO, int, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_chemv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_chemv func(CBLAS_ORDER, CBLAS_UPLO, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_cher func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_cher func(CBLAS_ORDER, CBLAS_UPLO, int, float32, unsafe.Pointer, int, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_cher2 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_cher2 func(CBLAS_ORDER, CBLAS_UPLO, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_cher2k func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_cher2k func(CBLAS_ORDER, CBLAS_UPLO, CBLAS_TRANSPOSE, int, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, float32, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_cherk func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_cherk func(CBLAS_ORDER, CBLAS_UPLO, CBLAS_TRANSPOSE, int, int, float32, unsafe.Pointer, int, float32, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_chpmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_chpmv func(CBLAS_ORDER, CBLAS_UPLO, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_chpr func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_chpr func(CBLAS_ORDER, CBLAS_UPLO, int, float32, unsafe.Pointer, int, unsafe.Pointer)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_chpr2 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_chpr2 func(CBLAS_ORDER, CBLAS_UPLO, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
 	_cblas_crotg func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_cscal func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_cscal func(int, unsafe.Pointer, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_csrot func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_csrot func(int, unsafe.Pointer, int, unsafe.Pointer, int, float32, float32)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_csscal func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_csscal func(int, float32, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_cswap func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_cswap func(int, unsafe.Pointer, int, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_csymm func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_csymm func(CBLAS_ORDER, CBLAS_SIDE, CBLAS_UPLO, int, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_csyr2k func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_csyr2k func(CBLAS_ORDER, CBLAS_UPLO, CBLAS_TRANSPOSE, int, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_csyrk func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_csyrk func(CBLAS_ORDER, CBLAS_UPLO, CBLAS_TRANSPOSE, int, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_ctbmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_ctbmv func(CBLAS_ORDER, CBLAS_UPLO, CBLAS_TRANSPOSE, CBLAS_DIAG, int, int, unsafe.Pointer, int, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_ctbsv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_ctbsv func(CBLAS_ORDER, CBLAS_UPLO, CBLAS_TRANSPOSE, CBLAS_DIAG, int, int, unsafe.Pointer, int, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_ctpmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_ctpmv func(CBLAS_ORDER, CBLAS_UPLO, CBLAS_TRANSPOSE, CBLAS_DIAG, int, unsafe.Pointer, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_ctpsv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_ctpsv func(CBLAS_ORDER, CBLAS_UPLO, CBLAS_TRANSPOSE, CBLAS_DIAG, int, unsafe.Pointer, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_ctrmm func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_ctrmm func(CBLAS_ORDER, CBLAS_SIDE, CBLAS_UPLO, CBLAS_TRANSPOSE, CBLAS_DIAG, int, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_ctrmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_ctrmv func(CBLAS_ORDER, CBLAS_UPLO, CBLAS_TRANSPOSE, CBLAS_DIAG, int, unsafe.Pointer, int, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_ctrsm func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_ctrsm func(CBLAS_ORDER, CBLAS_SIDE, CBLAS_UPLO, CBLAS_TRANSPOSE, CBLAS_DIAG, int, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_ctrsv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_ctrsv func(CBLAS_ORDER, CBLAS_UPLO, CBLAS_TRANSPOSE, CBLAS_DIAG, int, unsafe.Pointer, int, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_dasum func(unsafe.Pointer, *float64, unsafe.Pointer) float64
+	_cblas_dasum func(int, *float64, int) float64
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_daxpy func(unsafe.Pointer, unsafe.Pointer, *float64, unsafe.Pointer, *float64, unsafe.Pointer)
+	_cblas_daxpy func(int, float64, *float64, int, *float64, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_dcopy func(unsafe.Pointer, *float64, unsafe.Pointer, *float64, unsafe.Pointer)
+	_cblas_dcopy func(int, *float64, int, *float64, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_ddot func(unsafe.Pointer, *float64, unsafe.Pointer, *float64, unsafe.Pointer) float64
+	_cblas_ddot func(int, *float64, int, *float64, int) float64
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_dgbmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *float64, unsafe.Pointer, *float64, unsafe.Pointer, unsafe.Pointer, *float64, unsafe.Pointer)
+	_cblas_dgbmv func(CBLAS_ORDER, CBLAS_TRANSPOSE, int, int, int, int, float64, *float64, int, *float64, int, float64, *float64, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_dgemm func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *float64, unsafe.Pointer, *float64, unsafe.Pointer, unsafe.Pointer, *float64, unsafe.Pointer)
+	_cblas_dgemm func(CBLAS_ORDER, CBLAS_TRANSPOSE, CBLAS_TRANSPOSE, int, int, int, float64, *float64, int, *float64, int, float64, *float64, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_dgemv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *float64, unsafe.Pointer, *float64, unsafe.Pointer, unsafe.Pointer, *float64, unsafe.Pointer)
+	_cblas_dgemv func(CBLAS_ORDER, CBLAS_TRANSPOSE, int, int, float64, *float64, int, *float64, int, float64, *float64, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_dger func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *float64, unsafe.Pointer, *float64, unsafe.Pointer, *float64, unsafe.Pointer)
+	_cblas_dger func(CBLAS_ORDER, int, int, float64, *float64, int, *float64, int, *float64, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_dnrm2 func(unsafe.Pointer, *float64, unsafe.Pointer) float64
+	_cblas_dnrm2 func(int, *float64, int) float64
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_drot func(unsafe.Pointer, *float64, unsafe.Pointer, *float64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_drot func(int, *float64, int, *float64, int, float64, float64)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
 	_cblas_drotg func(*float64, *float64, *float64, *float64)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_drotm func(unsafe.Pointer, *float64, unsafe.Pointer, *float64, unsafe.Pointer, *float64)
+	_cblas_drotm func(int, *float64, int, *float64, int, *float64)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_drotmg func(*float64, *float64, *float64, unsafe.Pointer, *float64)
+	_cblas_drotmg func(*float64, *float64, *float64, float64, *float64)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_dsbmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *float64, unsafe.Pointer, *float64, unsafe.Pointer, unsafe.Pointer, *float64, unsafe.Pointer)
+	_cblas_dsbmv func(CBLAS_ORDER, CBLAS_UPLO, int, int, float64, *float64, int, *float64, int, float64, *float64, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_dscal func(unsafe.Pointer, unsafe.Pointer, *float64, unsafe.Pointer)
+	_cblas_dscal func(int, float64, *float64, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_dsdot func(unsafe.Pointer, *float32, unsafe.Pointer, *float32, unsafe.Pointer) float64
+	_cblas_dsdot func(int, *float32, int, *float32, int) float64
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_dspmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *float64, *float64, unsafe.Pointer, unsafe.Pointer, *float64, unsafe.Pointer)
+	_cblas_dspmv func(CBLAS_ORDER, CBLAS_UPLO, int, float64, *float64, *float64, int, float64, *float64, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_dspr func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *float64, unsafe.Pointer, *float64)
+	_cblas_dspr func(CBLAS_ORDER, CBLAS_UPLO, int, float64, *float64, int, *float64)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_dspr2 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *float64, unsafe.Pointer, *float64, unsafe.Pointer, *float64)
+	_cblas_dspr2 func(CBLAS_ORDER, CBLAS_UPLO, int, float64, *float64, int, *float64, int, *float64)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_dswap func(unsafe.Pointer, *float64, unsafe.Pointer, *float64, unsafe.Pointer)
+	_cblas_dswap func(int, *float64, int, *float64, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_dsymm func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *float64, unsafe.Pointer, *float64, unsafe.Pointer, unsafe.Pointer, *float64, unsafe.Pointer)
+	_cblas_dsymm func(CBLAS_ORDER, CBLAS_SIDE, CBLAS_UPLO, int, int, float64, *float64, int, *float64, int, float64, *float64, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_dsymv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *float64, unsafe.Pointer, *float64, unsafe.Pointer, unsafe.Pointer, *float64, unsafe.Pointer)
+	_cblas_dsymv func(CBLAS_ORDER, CBLAS_UPLO, int, float64, *float64, int, *float64, int, float64, *float64, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_dsyr func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *float64, unsafe.Pointer, *float64, unsafe.Pointer)
+	_cblas_dsyr func(CBLAS_ORDER, CBLAS_UPLO, int, float64, *float64, int, *float64, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_dsyr2 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *float64, unsafe.Pointer, *float64, unsafe.Pointer, *float64, unsafe.Pointer)
+	_cblas_dsyr2 func(CBLAS_ORDER, CBLAS_UPLO, int, float64, *float64, int, *float64, int, *float64, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_dsyr2k func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *float64, unsafe.Pointer, *float64, unsafe.Pointer, unsafe.Pointer, *float64, unsafe.Pointer)
+	_cblas_dsyr2k func(CBLAS_ORDER, CBLAS_UPLO, CBLAS_TRANSPOSE, int, int, float64, *float64, int, *float64, int, float64, *float64, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_dsyrk func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *float64, unsafe.Pointer, unsafe.Pointer, *float64, unsafe.Pointer)
+	_cblas_dsyrk func(CBLAS_ORDER, CBLAS_UPLO, CBLAS_TRANSPOSE, int, int, float64, *float64, int, float64, *float64, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_dtbmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *float64, unsafe.Pointer, *float64, unsafe.Pointer)
+	_cblas_dtbmv func(CBLAS_ORDER, CBLAS_UPLO, CBLAS_TRANSPOSE, CBLAS_DIAG, int, int, *float64, int, *float64, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_dtbsv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *float64, unsafe.Pointer, *float64, unsafe.Pointer)
+	_cblas_dtbsv func(CBLAS_ORDER, CBLAS_UPLO, CBLAS_TRANSPOSE, CBLAS_DIAG, int, int, *float64, int, *float64, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_dtpmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *float64, *float64, unsafe.Pointer)
+	_cblas_dtpmv func(CBLAS_ORDER, CBLAS_UPLO, CBLAS_TRANSPOSE, CBLAS_DIAG, int, *float64, *float64, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_dtpsv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *float64, *float64, unsafe.Pointer)
+	_cblas_dtpsv func(CBLAS_ORDER, CBLAS_UPLO, CBLAS_TRANSPOSE, CBLAS_DIAG, int, *float64, *float64, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_dtrmm func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *float64, unsafe.Pointer, *float64, unsafe.Pointer)
+	_cblas_dtrmm func(CBLAS_ORDER, CBLAS_SIDE, CBLAS_UPLO, CBLAS_TRANSPOSE, CBLAS_DIAG, int, int, float64, *float64, int, *float64, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_dtrmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *float64, unsafe.Pointer, *float64, unsafe.Pointer)
+	_cblas_dtrmv func(CBLAS_ORDER, CBLAS_UPLO, CBLAS_TRANSPOSE, CBLAS_DIAG, int, *float64, int, *float64, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_dtrsm func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *float64, unsafe.Pointer, *float64, unsafe.Pointer)
+	_cblas_dtrsm func(CBLAS_ORDER, CBLAS_SIDE, CBLAS_UPLO, CBLAS_TRANSPOSE, CBLAS_DIAG, int, int, float64, *float64, int, *float64, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_dtrsv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *float64, unsafe.Pointer, *float64, unsafe.Pointer)
+	_cblas_dtrsv func(CBLAS_ORDER, CBLAS_UPLO, CBLAS_TRANSPOSE, CBLAS_DIAG, int, *float64, int, *float64, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_dzasum func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) float64
+	_cblas_dzasum func(int, unsafe.Pointer, int) float64
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_dznrm2 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) float64
+	_cblas_dznrm2 func(int, unsafe.Pointer, int) float64
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_icamax func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_cblas_icamax func(int, unsafe.Pointer, int) int
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_idamax func(unsafe.Pointer, *float64, unsafe.Pointer) int
+	_cblas_idamax func(int, *float64, int) int
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_isamax func(unsafe.Pointer, *float32, unsafe.Pointer) int
+	_cblas_isamax func(int, *float32, int) int
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_izamax func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_cblas_izamax func(int, unsafe.Pointer, int) int
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_sasum func(unsafe.Pointer, *float32, unsafe.Pointer) float32
+	_cblas_sasum func(int, *float32, int) float32
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_saxpy func(unsafe.Pointer, unsafe.Pointer, *float32, unsafe.Pointer, *float32, unsafe.Pointer)
+	_cblas_saxpy func(int, float32, *float32, int, *float32, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_scasum func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) float32
+	_cblas_scasum func(int, unsafe.Pointer, int) float32
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_scnrm2 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) float32
+	_cblas_scnrm2 func(int, unsafe.Pointer, int) float32
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_scopy func(unsafe.Pointer, *float32, unsafe.Pointer, *float32, unsafe.Pointer)
+	_cblas_scopy func(int, *float32, int, *float32, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_sdot func(unsafe.Pointer, *float32, unsafe.Pointer, *float32, unsafe.Pointer) float32
+	_cblas_sdot func(int, *float32, int, *float32, int) float32
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_sdsdot func(unsafe.Pointer, unsafe.Pointer, *float32, unsafe.Pointer, *float32, unsafe.Pointer) float32
+	_cblas_sdsdot func(int, float32, *float32, int, *float32, int) float32
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_sgbmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *float32, unsafe.Pointer, *float32, unsafe.Pointer, unsafe.Pointer, *float32, unsafe.Pointer)
+	_cblas_sgbmv func(CBLAS_ORDER, CBLAS_TRANSPOSE, int, int, int, int, float32, *float32, int, *float32, int, float32, *float32, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_sgemm func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *float32, unsafe.Pointer, *float32, unsafe.Pointer, unsafe.Pointer, *float32, unsafe.Pointer)
+	_cblas_sgemm func(CBLAS_ORDER, CBLAS_TRANSPOSE, CBLAS_TRANSPOSE, int, int, int, float32, *float32, int, *float32, int, float32, *float32, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_sgemv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *float32, unsafe.Pointer, *float32, unsafe.Pointer, unsafe.Pointer, *float32, unsafe.Pointer)
+	_cblas_sgemv func(CBLAS_ORDER, CBLAS_TRANSPOSE, int, int, float32, *float32, int, *float32, int, float32, *float32, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_sger func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *float32, unsafe.Pointer, *float32, unsafe.Pointer, *float32, unsafe.Pointer)
+	_cblas_sger func(CBLAS_ORDER, int, int, float32, *float32, int, *float32, int, *float32, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_snrm2 func(unsafe.Pointer, *float32, unsafe.Pointer) float32
+	_cblas_snrm2 func(int, *float32, int) float32
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_srot func(unsafe.Pointer, *float32, unsafe.Pointer, *float32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_srot func(int, *float32, int, *float32, int, float32, float32)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
 	_cblas_srotg func(*float32, *float32, *float32, *float32)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_srotm func(unsafe.Pointer, *float32, unsafe.Pointer, *float32, unsafe.Pointer, *float32)
+	_cblas_srotm func(int, *float32, int, *float32, int, *float32)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_srotmg func(*float32, *float32, *float32, unsafe.Pointer, *float32)
+	_cblas_srotmg func(*float32, *float32, *float32, float32, *float32)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_ssbmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *float32, unsafe.Pointer, *float32, unsafe.Pointer, unsafe.Pointer, *float32, unsafe.Pointer)
+	_cblas_ssbmv func(CBLAS_ORDER, CBLAS_UPLO, int, int, float32, *float32, int, *float32, int, float32, *float32, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_sscal func(unsafe.Pointer, unsafe.Pointer, *float32, unsafe.Pointer)
+	_cblas_sscal func(int, float32, *float32, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_sspmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *float32, *float32, unsafe.Pointer, unsafe.Pointer, *float32, unsafe.Pointer)
+	_cblas_sspmv func(CBLAS_ORDER, CBLAS_UPLO, int, float32, *float32, *float32, int, float32, *float32, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_sspr func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *float32, unsafe.Pointer, *float32)
+	_cblas_sspr func(CBLAS_ORDER, CBLAS_UPLO, int, float32, *float32, int, *float32)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_sspr2 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *float32, unsafe.Pointer, *float32, unsafe.Pointer, *float32)
+	_cblas_sspr2 func(CBLAS_ORDER, CBLAS_UPLO, int, float32, *float32, int, *float32, int, *float32)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_sswap func(unsafe.Pointer, *float32, unsafe.Pointer, *float32, unsafe.Pointer)
+	_cblas_sswap func(int, *float32, int, *float32, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_ssymm func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *float32, unsafe.Pointer, *float32, unsafe.Pointer, unsafe.Pointer, *float32, unsafe.Pointer)
+	_cblas_ssymm func(CBLAS_ORDER, CBLAS_SIDE, CBLAS_UPLO, int, int, float32, *float32, int, *float32, int, float32, *float32, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_ssymv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *float32, unsafe.Pointer, *float32, unsafe.Pointer, unsafe.Pointer, *float32, unsafe.Pointer)
+	_cblas_ssymv func(CBLAS_ORDER, CBLAS_UPLO, int, float32, *float32, int, *float32, int, float32, *float32, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_ssyr func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *float32, unsafe.Pointer, *float32, unsafe.Pointer)
+	_cblas_ssyr func(CBLAS_ORDER, CBLAS_UPLO, int, float32, *float32, int, *float32, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_ssyr2 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *float32, unsafe.Pointer, *float32, unsafe.Pointer, *float32, unsafe.Pointer)
+	_cblas_ssyr2 func(CBLAS_ORDER, CBLAS_UPLO, int, float32, *float32, int, *float32, int, *float32, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_ssyr2k func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *float32, unsafe.Pointer, *float32, unsafe.Pointer, unsafe.Pointer, *float32, unsafe.Pointer)
+	_cblas_ssyr2k func(CBLAS_ORDER, CBLAS_UPLO, CBLAS_TRANSPOSE, int, int, float32, *float32, int, *float32, int, float32, *float32, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_ssyrk func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *float32, unsafe.Pointer, unsafe.Pointer, *float32, unsafe.Pointer)
+	_cblas_ssyrk func(CBLAS_ORDER, CBLAS_UPLO, CBLAS_TRANSPOSE, int, int, float32, *float32, int, float32, *float32, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_stbmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *float32, unsafe.Pointer, *float32, unsafe.Pointer)
+	_cblas_stbmv func(CBLAS_ORDER, CBLAS_UPLO, CBLAS_TRANSPOSE, CBLAS_DIAG, int, int, *float32, int, *float32, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_stbsv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *float32, unsafe.Pointer, *float32, unsafe.Pointer)
+	_cblas_stbsv func(CBLAS_ORDER, CBLAS_UPLO, CBLAS_TRANSPOSE, CBLAS_DIAG, int, int, *float32, int, *float32, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_stpmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *float32, *float32, unsafe.Pointer)
+	_cblas_stpmv func(CBLAS_ORDER, CBLAS_UPLO, CBLAS_TRANSPOSE, CBLAS_DIAG, int, *float32, *float32, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_stpsv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *float32, *float32, unsafe.Pointer)
+	_cblas_stpsv func(CBLAS_ORDER, CBLAS_UPLO, CBLAS_TRANSPOSE, CBLAS_DIAG, int, *float32, *float32, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_strmm func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *float32, unsafe.Pointer, *float32, unsafe.Pointer)
+	_cblas_strmm func(CBLAS_ORDER, CBLAS_SIDE, CBLAS_UPLO, CBLAS_TRANSPOSE, CBLAS_DIAG, int, int, float32, *float32, int, *float32, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_strmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *float32, unsafe.Pointer, *float32, unsafe.Pointer)
+	_cblas_strmv func(CBLAS_ORDER, CBLAS_UPLO, CBLAS_TRANSPOSE, CBLAS_DIAG, int, *float32, int, *float32, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_strsm func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *float32, unsafe.Pointer, *float32, unsafe.Pointer)
+	_cblas_strsm func(CBLAS_ORDER, CBLAS_SIDE, CBLAS_UPLO, CBLAS_TRANSPOSE, CBLAS_DIAG, int, int, float32, *float32, int, *float32, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_strsv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *float32, unsafe.Pointer, *float32, unsafe.Pointer)
+	_cblas_strsv func(CBLAS_ORDER, CBLAS_UPLO, CBLAS_TRANSPOSE, CBLAS_DIAG, int, *float32, int, *float32, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_zaxpy func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_zaxpy func(int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_zcopy func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_zcopy func(int, unsafe.Pointer, int, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_zdotc_sub func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_zdotc_sub func(int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_zdotu_sub func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_zdotu_sub func(int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_zdrot func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_zdrot func(int, unsafe.Pointer, int, unsafe.Pointer, int, float64, float64)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_zdscal func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_zdscal func(int, float64, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_zgbmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_zgbmv func(CBLAS_ORDER, CBLAS_TRANSPOSE, int, int, int, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_zgemm func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_zgemm func(CBLAS_ORDER, CBLAS_TRANSPOSE, CBLAS_TRANSPOSE, int, int, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_zgemv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_zgemv func(CBLAS_ORDER, CBLAS_TRANSPOSE, int, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_zgerc func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_zgerc func(CBLAS_ORDER, int, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_zgeru func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_zgeru func(CBLAS_ORDER, int, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_zhbmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_zhbmv func(CBLAS_ORDER, CBLAS_UPLO, int, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_zhemm func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_zhemm func(CBLAS_ORDER, CBLAS_SIDE, CBLAS_UPLO, int, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_zhemv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_zhemv func(CBLAS_ORDER, CBLAS_UPLO, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_zher func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_zher func(CBLAS_ORDER, CBLAS_UPLO, int, float64, unsafe.Pointer, int, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_zher2 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_zher2 func(CBLAS_ORDER, CBLAS_UPLO, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_zher2k func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_zher2k func(CBLAS_ORDER, CBLAS_UPLO, CBLAS_TRANSPOSE, int, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, float64, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_zherk func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_zherk func(CBLAS_ORDER, CBLAS_UPLO, CBLAS_TRANSPOSE, int, int, float64, unsafe.Pointer, int, float64, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_zhpmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_zhpmv func(CBLAS_ORDER, CBLAS_UPLO, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_zhpr func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_zhpr func(CBLAS_ORDER, CBLAS_UPLO, int, float64, unsafe.Pointer, int, unsafe.Pointer)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_zhpr2 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_zhpr2 func(CBLAS_ORDER, CBLAS_UPLO, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
 	_cblas_zrotg func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_zscal func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_zscal func(int, unsafe.Pointer, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_zswap func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_zswap func(int, unsafe.Pointer, int, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_zsymm func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_zsymm func(CBLAS_ORDER, CBLAS_SIDE, CBLAS_UPLO, int, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_zsyr2k func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_zsyr2k func(CBLAS_ORDER, CBLAS_UPLO, CBLAS_TRANSPOSE, int, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_zsyrk func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_zsyrk func(CBLAS_ORDER, CBLAS_UPLO, CBLAS_TRANSPOSE, int, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_ztbmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_ztbmv func(CBLAS_ORDER, CBLAS_UPLO, CBLAS_TRANSPOSE, CBLAS_DIAG, int, int, unsafe.Pointer, int, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_ztbsv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_ztbsv func(CBLAS_ORDER, CBLAS_UPLO, CBLAS_TRANSPOSE, CBLAS_DIAG, int, int, unsafe.Pointer, int, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_ztpmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_ztpmv func(CBLAS_ORDER, CBLAS_UPLO, CBLAS_TRANSPOSE, CBLAS_DIAG, int, unsafe.Pointer, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_ztpsv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_ztpsv func(CBLAS_ORDER, CBLAS_UPLO, CBLAS_TRANSPOSE, CBLAS_DIAG, int, unsafe.Pointer, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_ztrmm func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_ztrmm func(CBLAS_ORDER, CBLAS_SIDE, CBLAS_UPLO, CBLAS_TRANSPOSE, CBLAS_DIAG, int, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_ztrmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_ztrmv func(CBLAS_ORDER, CBLAS_UPLO, CBLAS_TRANSPOSE, CBLAS_DIAG, int, unsafe.Pointer, int, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_ztrsm func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_ztrsm func(CBLAS_ORDER, CBLAS_SIDE, CBLAS_UPLO, CBLAS_TRANSPOSE, CBLAS_DIAG, int, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int)
 	// Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-	_cblas_ztrsv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_cblas_ztrsv func(CBLAS_ORDER, CBLAS_UPLO, CBLAS_TRANSPOSE, CBLAS_DIAG, int, unsafe.Pointer, int, unsafe.Pointer, int)
 	// Deprecated: An updated BLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
 	_ccopy_ func(*int32, unsafe.Pointer, *int32, unsafe.Pointer, *int32) int
 	// Deprecated: An updated BLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
@@ -5197,7 +5197,7 @@ func BLASGetThreading() BLAS_THREADING {
 }
 
 // @abstract Set the threading model to use for BLAS and LAPACK @discussion Set the threading model to use for the subsequent calls into BLAS and LAPACK. This setting is per thread, saved in a thread local variable. @param threading (input) The desired threading model. @return 0:  Success <br> -1: Option is not supported on this platform
-func BLASSetThreading(threading unsafe.Pointer) int {
+func BLASSetThreading(threading BLAS_THREADING) int {
 	return _fnBLASSetThreading(threading)
 }
 
@@ -5227,7 +5227,7 @@ func BNNSArithmeticFilterApplyBatch(filter unsafe.Pointer, batchSize uint, numbe
 
 // @abstract Set elements outside a center band to zeros for the innermost matrix (the two dimensions with the lowest stride values) @discussion Currently only works on contiguous input and output @param num_lower The number of subdiagonals that the function copies. Set to a negative value to copy the entire lower triangle @param num_upper The number of superdiagonals that the function copies. Set to a negative value to copy the entire upper triangle @param input Pointer to the input tensor descriptor @param output Pointer to the output tensor descriptor @param filter_params Filter runtime parameters, may be NULL for default parameters @return Zero on success, nonzero on failure.
 // Deprecated: Use BNNSGraph* APIs
-func BNNSBandPart(numLower unsafe.Pointer, numUpper unsafe.Pointer, input *BNNSNDArrayDescriptor, output *BNNSNDArrayDescriptor, filterParams *BNNSFilterParameters) int {
+func BNNSBandPart(numLower int, numUpper int, input *BNNSNDArrayDescriptor, output *BNNSNDArrayDescriptor, filterParams *BNNSFilterParameters) int {
 	return _fnBNNSBandPart(numLower, numUpper, input, output, filterParams)
 }
 
@@ -5279,7 +5279,7 @@ func BNNSCopy(dest *BNNSNDArrayDescriptor, src *BNNSNDArrayDescriptor, filterPar
 }
 
 // @abstract Create a BNNSNearestNeighbors object, that is used to calculate k nearest neighbors of data points based on Euclidean distance @param max_n_samples - maximum number of data points @param n_features - number of features (dimensions) of each data point @param n_neighbors - number of nearest neighbors @param data_type - data type of the features, only fp32 and fp16 is supported by now @param filter_params - filter runtime parameters, may be NULL for default parameters @return On success, a BNNSNearestNeighbors object is created. On failure, returns NULL.
-func BNNSCreateNearestNeighbors(maxNSamples unsafe.Pointer, nFeatures unsafe.Pointer, nNeighbors unsafe.Pointer, dataType accelerate.BNNSDataType, filterParams *BNNSFilterParameters) unsafe.Pointer {
+func BNNSCreateNearestNeighbors(maxNSamples uint, nFeatures uint, nNeighbors uint, dataType accelerate.BNNSDataType, filterParams *BNNSFilterParameters) unsafe.Pointer {
 	return _fnBNNSCreateNearestNeighbors(maxNSamples, nFeatures, nNeighbors, dataType, filterParams)
 }
 
@@ -5328,7 +5328,7 @@ func BNNSDirectApplyActivationBatch(layerParams *BNNSLayerParametersActivation, 
 
 // @abstract Directly apply a broadcast matrix multiplication layer. @description Performs the same action as a broadcast matrix multiplication layer without instantiating a BNNSFilter. @param transA - if true, transposes the last two dimensions of A @param transB - if true, transposes the last two dimensions of B @param alpha - scalar by which to scale the result @param inputA - descriptor for tensor A @param inputB - descriptor for tensor B @param output - descriptor for tensor C; on output only the data values are changed @param filter_params - filter runtime parameters, may be NULL for default parameters
 // Deprecated: since macOS 13.0.
-func BNNSDirectApplyBroadcastMatMul(transA unsafe.Pointer, transB unsafe.Pointer, alpha unsafe.Pointer, inputA *BNNSNDArrayDescriptor, inputB *BNNSNDArrayDescriptor, output *BNNSNDArrayDescriptor, filterParams *BNNSFilterParameters) {
+func BNNSDirectApplyBroadcastMatMul(transA bool, transB bool, alpha float32, inputA *BNNSNDArrayDescriptor, inputB *BNNSNDArrayDescriptor, output *BNNSNDArrayDescriptor, filterParams *BNNSFilterParameters) {
 	_fnBNNSDirectApplyBroadcastMatMul(transA, transB, alpha, inputA, inputB, output, filterParams)
 }
 
@@ -5656,7 +5656,7 @@ func BNNSGraphCompileOptionsSetTargetSingleThread(options BnnsGraphCompileOption
 	_fnBNNSGraphCompileOptionsSetTargetSingleThread(options, value)
 }
 
-// Destroys a graph context created through a call to `BNNSGraphContextCreate` Arguments: `context`: object to be destroyed
+// Destroys a graph context created through a call to `BNNSGraphContextMake` or `BNNSGraphContextMakeStreaming` Arguments: `context`: object to be destroyed
 func BNNSGraphContextDestroy(context_ BnnsGraphContextT) {
 	_fnBNNSGraphContextDestroy(context_)
 }
@@ -5805,13 +5805,13 @@ func BNNSLossFilterApplyBatch(filter unsafe.Pointer, batchSize uint, in unsafe.P
 
 // @abstract Directly apply a broadcast matrix multiplication layer. @discussion This routine performs to operation C = alpha * op(A) * op(B), with approriate broadcasting if dimensions are absent on one or more matrices. Matrix multiplication is always on the final two indices of each operand. For example, if we have A is 4x5x6 B is 6x7 C is 4x5x7 Then the operation performed (if transA=transB=false) is: c_pij = sum_k a_pik * b_kj Noting that the matrix B has been broadcast in the p dimension Performs the same action as a broadcast matrix multiplication layer without instantiating a BNNSFilter. This function replaces the deprecated BNNSDirectApplyBroadcastMatMul and allows explicit provision of workspace memory. If workspace is not null, no allocation is performed internally. @param transA - if true, transposes the last two dimensions of A @param transB - if true, transposes the last two dimensions of B @param alpha - scalar by which to scale the result @param inputA - descriptor for tensor A @param inputB - descriptor for tensor B @param output - descriptor for tensor C; on output only the data values are changed @param workspace - pointer to memory region to be used as scratch. Must have size no less than the value returned by BNNSMatMulWorkspaceSize @param filter_params - filter runtime parameters, may be NULL for default parameters @returns 0 on success, non-zero on failure
 // Deprecated: Use BNNSGraph* APIs
-func BNNSMatMul(transA unsafe.Pointer, transB unsafe.Pointer, alpha unsafe.Pointer, inputA *BNNSNDArrayDescriptor, inputB *BNNSNDArrayDescriptor, output *BNNSNDArrayDescriptor, workspace unsafe.Pointer, filterParams *BNNSFilterParameters) int {
+func BNNSMatMul(transA bool, transB bool, alpha float32, inputA *BNNSNDArrayDescriptor, inputB *BNNSNDArrayDescriptor, output *BNNSNDArrayDescriptor, workspace unsafe.Pointer, filterParams *BNNSFilterParameters) int {
 	return _fnBNNSMatMul(transA, transB, alpha, inputA, inputB, output, workspace, filterParams)
 }
 
 // @abstract Returns required workspace size for a call to BNNSMatMul() with the given paramters. @discussion This routine does not access the data pointers on the array descriptors, so they need not point to actual data. @param transA - if true, transposes the last two dimensions of A @param transB - if true, transposes the last two dimensions of B @param alpha - scalar by which to scale the result @param inputA - descriptor for tensor A @param inputB - descriptor for tensor B @param output - descriptor for tensor C @param filter_params - filter runtime parameters, may be NULL for default parameters @returns Required allocation size for workspace paramter to BNNSMatMul, in bytes. If parameters are invalid, a negative value is returned.
 // Deprecated: Use BNNSGraph* APIs
-func BNNSMatMulWorkspaceSize(transA unsafe.Pointer, transB unsafe.Pointer, alpha unsafe.Pointer, inputA *BNNSNDArrayDescriptor, inputB *BNNSNDArrayDescriptor, output *BNNSNDArrayDescriptor, filterParams *BNNSFilterParameters) int {
+func BNNSMatMulWorkspaceSize(transA bool, transB bool, alpha float32, inputA *BNNSNDArrayDescriptor, inputB *BNNSNDArrayDescriptor, output *BNNSNDArrayDescriptor, filterParams *BNNSFilterParameters) int {
 	return _fnBNNSMatMulWorkspaceSize(transA, transB, alpha, inputA, inputB, output, filterParams)
 }
 
@@ -5833,12 +5833,12 @@ func BNNSNDArrayGetDataSize(array *BNNSNDArrayDescriptor) uint {
 }
 
 // @abstract Return the sorted indices and distances of the k nearest neighbors to certain sample point @param knn -  the BNNSNearestNeighbors object used for calculation and storage @param sample_number - sample number to return the k nearest neighbors, if negative return all of them @param indices - sorted indices of the k nearest neighbors to the sample point (sample_number), if not null. If sample_number is negative, indices is an array of [n_samples, n_neighbors], otherwise indices is an array of [n_neighbors]. Return -1 for n_neighbors larger than n_samples. @param distances - sorted distances of the k nearest neighbors to the sample point (sample_number), if not null. If sample_number is negative, distances is an array of [n_samples, n_neighbors], otherwise distances is an array of [n_neighbors]. Return INFINITY for n_neighbors larger than n_samples. @return 0 for success, nonzero on failure (failure reason will reported in os logs)
-func BNNSNearestNeighborsGetInfo(knn unsafe.Pointer, sampleNumber unsafe.Pointer, indices *int32, distances unsafe.Pointer) int {
+func BNNSNearestNeighborsGetInfo(knn unsafe.Pointer, sampleNumber int, indices *int32, distances unsafe.Pointer) int {
 	return _fnBNNSNearestNeighborsGetInfo(knn, sampleNumber, indices, distances)
 }
 
 // @abstract Add new sample data to BNNSNearestNeighbors @param knn - the BNNSNearestNeighbors object used for calculation and storage @param n_new_samples - number of new data points to be added @param data_ptr - pointer to the new data array of size [n_new_samples, n_features] @return 0 for success, nonzero on failure (failure reason will reported in os logs)
-func BNNSNearestNeighborsLoad(knn unsafe.Pointer, nNewSamples unsafe.Pointer, dataPtr unsafe.Pointer) int {
+func BNNSNearestNeighborsLoad(knn unsafe.Pointer, nNewSamples uint, dataPtr unsafe.Pointer) int {
 	return _fnBNNSNearestNeighborsLoad(knn, nNewSamples, dataPtr)
 }
 
@@ -6701,6 +6701,7 @@ func SparseSolveOpaqueFloat(factored *SparseOpaqueFactorization_Float, rhs *Dens
 	__SparseSolveOpaque_Float(factored, rhs, soln, workspace)
 }
 
+// **************************************************************************** External functions used to implement public API ****************************************************************************
 // C function: _SparseSolveSubfactor_Complex_Double
 func SparseSolveSubfactorComplexDouble(subfactor *SparseOpaqueSubfactor_Complex_Double, b *DenseMatrix_Complex_Double, x *DenseMatrix_Complex_Double, workspace string) {
 	__SparseSolveSubfactor_Complex_Double(subfactor, b, x, workspace)
@@ -6756,7 +6757,6 @@ func SparseSubFactorGetDimnDouble(subfactor SparseOpaqueSubfactor_Double, m *int
 	__SparseSubFactorGetDimn_Double(subfactor, m, n)
 }
 
-// **************************************************************************** External functions used to implement public API ****************************************************************************
 // C function: _SparseSubFactorGetDimn_Float
 func SparseSubFactorGetDimnFloat(subfactor SparseOpaqueSubfactor_Float, m *int32, n *int32) {
 	__SparseSubFactorGetDimn_Float(subfactor, m, n)
@@ -6849,61 +6849,61 @@ func BuiltinVerboseTrap(arg string, arg2 string) {
 
 // C function: appleblas_dgeadd
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func AppleblasDgeadd(order unsafe.Pointer, transA unsafe.Pointer, transB unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a *float64, lda unsafe.Pointer, beta unsafe.Pointer, b *float64, ldb unsafe.Pointer, c *float64, ldc unsafe.Pointer) {
+func AppleblasDgeadd(order CBLAS_ORDER, transA CBLAS_TRANSPOSE, transB CBLAS_TRANSPOSE, m int, n int, alpha float64, a *float64, lda int, beta float64, b *float64, ldb int, c *float64, ldc int) {
 	_appleblas_dgeadd(order, transA, transB, m, n, alpha, a, lda, beta, b, ldb, c, ldc)
 }
 
 // C function: appleblas_sgeadd
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func AppleblasSgeadd(order unsafe.Pointer, transA unsafe.Pointer, transB unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a *float32, lda unsafe.Pointer, beta unsafe.Pointer, b *float32, ldb unsafe.Pointer, c *float32, ldc unsafe.Pointer) {
+func AppleblasSgeadd(order CBLAS_ORDER, transA CBLAS_TRANSPOSE, transB CBLAS_TRANSPOSE, m int, n int, alpha float32, a *float32, lda int, beta float32, b *float32, ldb int, c *float32, ldc int) {
 	_appleblas_sgeadd(order, transA, transB, m, n, alpha, a, lda, beta, b, ldb, c, ldc)
 }
 
 // C function: catlas_caxpby
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CatlasCaxpby(n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer) {
+func CatlasCaxpby(n int, alpha unsafe.Pointer, x unsafe.Pointer, incX int, beta unsafe.Pointer, y unsafe.Pointer, incY int) {
 	_catlas_caxpby(n, alpha, x, incX, beta, y, incY)
 }
 
 // C function: catlas_cset
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CatlasCset(n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) {
+func CatlasCset(n int, alpha unsafe.Pointer, x unsafe.Pointer, incX int) {
 	_catlas_cset(n, alpha, x, incX)
 }
 
 // C function: catlas_daxpby
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CatlasDaxpby(n unsafe.Pointer, alpha unsafe.Pointer, x *float64, incX unsafe.Pointer, beta unsafe.Pointer, y *float64, incY unsafe.Pointer) {
+func CatlasDaxpby(n int, alpha float64, x *float64, incX int, beta float64, y *float64, incY int) {
 	_catlas_daxpby(n, alpha, x, incX, beta, y, incY)
 }
 
 // C function: catlas_dset
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CatlasDset(n unsafe.Pointer, alpha unsafe.Pointer, x *float64, incX unsafe.Pointer) {
+func CatlasDset(n int, alpha float64, x *float64, incX int) {
 	_catlas_dset(n, alpha, x, incX)
 }
 
 // C function: catlas_saxpby
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CatlasSaxpby(n unsafe.Pointer, alpha unsafe.Pointer, x *float32, incX unsafe.Pointer, beta unsafe.Pointer, y *float32, incY unsafe.Pointer) {
+func CatlasSaxpby(n int, alpha float32, x *float32, incX int, beta float32, y *float32, incY int) {
 	_catlas_saxpby(n, alpha, x, incX, beta, y, incY)
 }
 
 // C function: catlas_sset
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CatlasSset(n unsafe.Pointer, alpha unsafe.Pointer, x *float32, incX unsafe.Pointer) {
+func CatlasSset(n int, alpha float32, x *float32, incX int) {
 	_catlas_sset(n, alpha, x, incX)
 }
 
 // C function: catlas_zaxpby
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CatlasZaxpby(n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer) {
+func CatlasZaxpby(n int, alpha unsafe.Pointer, x unsafe.Pointer, incX int, beta unsafe.Pointer, y unsafe.Pointer, incY int) {
 	_catlas_zaxpby(n, alpha, x, incX, beta, y, incY)
 }
 
 // C function: catlas_zset
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CatlasZset(n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) {
+func CatlasZset(n int, alpha unsafe.Pointer, x unsafe.Pointer, incX int) {
 	_catlas_zset(n, alpha, x, incX)
 }
 
@@ -6921,115 +6921,115 @@ func Cbdsqr(uplo string, n *int, ncvt *int, nru *int, ncc *int, d *float32, e *f
 
 // C function: cblas_caxpy
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasCaxpy(n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer) {
+func CblasCaxpy(n int, alpha unsafe.Pointer, x unsafe.Pointer, incX int, y unsafe.Pointer, incY int) {
 	_cblas_caxpy(n, alpha, x, incX, y, incY)
 }
 
 // C function: cblas_ccopy
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasCcopy(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer) {
+func CblasCcopy(n int, x unsafe.Pointer, incX int, y unsafe.Pointer, incY int) {
 	_cblas_ccopy(n, x, incX, y, incY)
 }
 
 // C function: cblas_cdotc_sub
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasCdotcSub(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer, dotc unsafe.Pointer) {
+func CblasCdotcSub(n int, x unsafe.Pointer, incX int, y unsafe.Pointer, incY int, dotc unsafe.Pointer) {
 	_cblas_cdotc_sub(n, x, incX, y, incY, dotc)
 }
 
 // C function: cblas_cdotu_sub
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasCdotuSub(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer, dotu unsafe.Pointer) {
+func CblasCdotuSub(n int, x unsafe.Pointer, incX int, y unsafe.Pointer, incY int, dotu unsafe.Pointer) {
 	_cblas_cdotu_sub(n, x, incX, y, incY, dotu)
 }
 
 // C function: cblas_cgbmv
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasCgbmv(order unsafe.Pointer, transA unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, kl unsafe.Pointer, ku unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer) {
+func CblasCgbmv(order CBLAS_ORDER, transA CBLAS_TRANSPOSE, m int, n int, kl int, ku int, alpha unsafe.Pointer, a unsafe.Pointer, lda int, x unsafe.Pointer, incX int, beta unsafe.Pointer, y unsafe.Pointer, incY int) {
 	_cblas_cgbmv(order, transA, m, n, kl, ku, alpha, a, lda, x, incX, beta, y, incY)
 }
 
 // C function: cblas_cgemm
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasCgemm(order unsafe.Pointer, transA unsafe.Pointer, transB unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, b unsafe.Pointer, ldb unsafe.Pointer, beta unsafe.Pointer, c unsafe.Pointer, ldc unsafe.Pointer) {
+func CblasCgemm(order CBLAS_ORDER, transA CBLAS_TRANSPOSE, transB CBLAS_TRANSPOSE, m int, n int, k int, alpha unsafe.Pointer, a unsafe.Pointer, lda int, b unsafe.Pointer, ldb int, beta unsafe.Pointer, c unsafe.Pointer, ldc int) {
 	_cblas_cgemm(order, transA, transB, m, n, k, alpha, a, lda, b, ldb, beta, c, ldc)
 }
 
 // C function: cblas_cgemv
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasCgemv(order unsafe.Pointer, transA unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer) {
+func CblasCgemv(order CBLAS_ORDER, transA CBLAS_TRANSPOSE, m int, n int, alpha unsafe.Pointer, a unsafe.Pointer, lda int, x unsafe.Pointer, incX int, beta unsafe.Pointer, y unsafe.Pointer, incY int) {
 	_cblas_cgemv(order, transA, m, n, alpha, a, lda, x, incX, beta, y, incY)
 }
 
 // C function: cblas_cgerc
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasCgerc(order unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer) {
+func CblasCgerc(order CBLAS_ORDER, m int, n int, alpha unsafe.Pointer, x unsafe.Pointer, incX int, y unsafe.Pointer, incY int, a unsafe.Pointer, lda int) {
 	_cblas_cgerc(order, m, n, alpha, x, incX, y, incY, a, lda)
 }
 
 // C function: cblas_cgeru
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasCgeru(order unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer) {
+func CblasCgeru(order CBLAS_ORDER, m int, n int, alpha unsafe.Pointer, x unsafe.Pointer, incX int, y unsafe.Pointer, incY int, a unsafe.Pointer, lda int) {
 	_cblas_cgeru(order, m, n, alpha, x, incX, y, incY, a, lda)
 }
 
 // C function: cblas_chbmv
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasChbmv(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer) {
+func CblasChbmv(order CBLAS_ORDER, uplo CBLAS_UPLO, n int, k int, alpha unsafe.Pointer, a unsafe.Pointer, lda int, x unsafe.Pointer, incX int, beta unsafe.Pointer, y unsafe.Pointer, incY int) {
 	_cblas_chbmv(order, uplo, n, k, alpha, a, lda, x, incX, beta, y, incY)
 }
 
 // C function: cblas_chemm
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasChemm(order unsafe.Pointer, side unsafe.Pointer, uplo unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, b unsafe.Pointer, ldb unsafe.Pointer, beta unsafe.Pointer, c unsafe.Pointer, ldc unsafe.Pointer) {
+func CblasChemm(order CBLAS_ORDER, side CBLAS_SIDE, uplo CBLAS_UPLO, m int, n int, alpha unsafe.Pointer, a unsafe.Pointer, lda int, b unsafe.Pointer, ldb int, beta unsafe.Pointer, c unsafe.Pointer, ldc int) {
 	_cblas_chemm(order, side, uplo, m, n, alpha, a, lda, b, ldb, beta, c, ldc)
 }
 
 // C function: cblas_chemv
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasChemv(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer) {
+func CblasChemv(order CBLAS_ORDER, uplo CBLAS_UPLO, n int, alpha unsafe.Pointer, a unsafe.Pointer, lda int, x unsafe.Pointer, incX int, beta unsafe.Pointer, y unsafe.Pointer, incY int) {
 	_cblas_chemv(order, uplo, n, alpha, a, lda, x, incX, beta, y, incY)
 }
 
 // C function: cblas_cher
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasCher(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer) {
+func CblasCher(order CBLAS_ORDER, uplo CBLAS_UPLO, n int, alpha float32, x unsafe.Pointer, incX int, a unsafe.Pointer, lda int) {
 	_cblas_cher(order, uplo, n, alpha, x, incX, a, lda)
 }
 
 // C function: cblas_cher2
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasCher2(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer) {
+func CblasCher2(order CBLAS_ORDER, uplo CBLAS_UPLO, n int, alpha unsafe.Pointer, x unsafe.Pointer, incX int, y unsafe.Pointer, incY int, a unsafe.Pointer, lda int) {
 	_cblas_cher2(order, uplo, n, alpha, x, incX, y, incY, a, lda)
 }
 
 // C function: cblas_cher2k
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasCher2k(order unsafe.Pointer, uplo unsafe.Pointer, trans unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, b unsafe.Pointer, ldb unsafe.Pointer, beta unsafe.Pointer, c unsafe.Pointer, ldc unsafe.Pointer) {
+func CblasCher2k(order CBLAS_ORDER, uplo CBLAS_UPLO, trans CBLAS_TRANSPOSE, n int, k int, alpha unsafe.Pointer, a unsafe.Pointer, lda int, b unsafe.Pointer, ldb int, beta float32, c unsafe.Pointer, ldc int) {
 	_cblas_cher2k(order, uplo, trans, n, k, alpha, a, lda, b, ldb, beta, c, ldc)
 }
 
 // C function: cblas_cherk
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasCherk(order unsafe.Pointer, uplo unsafe.Pointer, trans unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, beta unsafe.Pointer, c unsafe.Pointer, ldc unsafe.Pointer) {
+func CblasCherk(order CBLAS_ORDER, uplo CBLAS_UPLO, trans CBLAS_TRANSPOSE, n int, k int, alpha float32, a unsafe.Pointer, lda int, beta float32, c unsafe.Pointer, ldc int) {
 	_cblas_cherk(order, uplo, trans, n, k, alpha, a, lda, beta, c, ldc)
 }
 
 // C function: cblas_chpmv
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasChpmv(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, ap unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer) {
+func CblasChpmv(order CBLAS_ORDER, uplo CBLAS_UPLO, n int, alpha unsafe.Pointer, ap unsafe.Pointer, x unsafe.Pointer, incX int, beta unsafe.Pointer, y unsafe.Pointer, incY int) {
 	_cblas_chpmv(order, uplo, n, alpha, ap, x, incX, beta, y, incY)
 }
 
 // C function: cblas_chpr
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasChpr(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, a unsafe.Pointer) {
+func CblasChpr(order CBLAS_ORDER, uplo CBLAS_UPLO, n int, alpha float32, x unsafe.Pointer, incX int, a unsafe.Pointer) {
 	_cblas_chpr(order, uplo, n, alpha, x, incX, a)
 }
 
 // C function: cblas_chpr2
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasChpr2(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer, ap unsafe.Pointer) {
+func CblasChpr2(order CBLAS_ORDER, uplo CBLAS_UPLO, n int, alpha unsafe.Pointer, x unsafe.Pointer, incX int, y unsafe.Pointer, incY int, ap unsafe.Pointer) {
 	_cblas_chpr2(order, uplo, n, alpha, x, incX, y, incY, ap)
 }
 
@@ -7041,151 +7041,151 @@ func CblasCrotg(a unsafe.Pointer, b unsafe.Pointer, c unsafe.Pointer, s unsafe.P
 
 // C function: cblas_cscal
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasCscal(n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) {
+func CblasCscal(n int, alpha unsafe.Pointer, x unsafe.Pointer, incX int) {
 	_cblas_cscal(n, alpha, x, incX)
 }
 
 // C function: cblas_csrot
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasCsrot(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer, c unsafe.Pointer, s unsafe.Pointer) {
+func CblasCsrot(n int, x unsafe.Pointer, incX int, y unsafe.Pointer, incY int, c float32, s float32) {
 	_cblas_csrot(n, x, incX, y, incY, c, s)
 }
 
 // C function: cblas_csscal
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasCsscal(n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) {
+func CblasCsscal(n int, alpha float32, x unsafe.Pointer, incX int) {
 	_cblas_csscal(n, alpha, x, incX)
 }
 
 // C function: cblas_cswap
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasCswap(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer) {
+func CblasCswap(n int, x unsafe.Pointer, incX int, y unsafe.Pointer, incY int) {
 	_cblas_cswap(n, x, incX, y, incY)
 }
 
 // C function: cblas_csymm
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasCsymm(order unsafe.Pointer, side unsafe.Pointer, uplo unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, b unsafe.Pointer, ldb unsafe.Pointer, beta unsafe.Pointer, c unsafe.Pointer, ldc unsafe.Pointer) {
+func CblasCsymm(order CBLAS_ORDER, side CBLAS_SIDE, uplo CBLAS_UPLO, m int, n int, alpha unsafe.Pointer, a unsafe.Pointer, lda int, b unsafe.Pointer, ldb int, beta unsafe.Pointer, c unsafe.Pointer, ldc int) {
 	_cblas_csymm(order, side, uplo, m, n, alpha, a, lda, b, ldb, beta, c, ldc)
 }
 
 // C function: cblas_csyr2k
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasCsyr2k(order unsafe.Pointer, uplo unsafe.Pointer, trans unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, b unsafe.Pointer, ldb unsafe.Pointer, beta unsafe.Pointer, c unsafe.Pointer, ldc unsafe.Pointer) {
+func CblasCsyr2k(order CBLAS_ORDER, uplo CBLAS_UPLO, trans CBLAS_TRANSPOSE, n int, k int, alpha unsafe.Pointer, a unsafe.Pointer, lda int, b unsafe.Pointer, ldb int, beta unsafe.Pointer, c unsafe.Pointer, ldc int) {
 	_cblas_csyr2k(order, uplo, trans, n, k, alpha, a, lda, b, ldb, beta, c, ldc)
 }
 
 // C function: cblas_csyrk
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasCsyrk(order unsafe.Pointer, uplo unsafe.Pointer, trans unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, beta unsafe.Pointer, c unsafe.Pointer, ldc unsafe.Pointer) {
+func CblasCsyrk(order CBLAS_ORDER, uplo CBLAS_UPLO, trans CBLAS_TRANSPOSE, n int, k int, alpha unsafe.Pointer, a unsafe.Pointer, lda int, beta unsafe.Pointer, c unsafe.Pointer, ldc int) {
 	_cblas_csyrk(order, uplo, trans, n, k, alpha, a, lda, beta, c, ldc)
 }
 
 // C function: cblas_ctbmv
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasCtbmv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) {
+func CblasCtbmv(order CBLAS_ORDER, uplo CBLAS_UPLO, transA CBLAS_TRANSPOSE, diag CBLAS_DIAG, n int, k int, a unsafe.Pointer, lda int, x unsafe.Pointer, incX int) {
 	_cblas_ctbmv(order, uplo, transA, diag, n, k, a, lda, x, incX)
 }
 
 // C function: cblas_ctbsv
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasCtbsv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) {
+func CblasCtbsv(order CBLAS_ORDER, uplo CBLAS_UPLO, transA CBLAS_TRANSPOSE, diag CBLAS_DIAG, n int, k int, a unsafe.Pointer, lda int, x unsafe.Pointer, incX int) {
 	_cblas_ctbsv(order, uplo, transA, diag, n, k, a, lda, x, incX)
 }
 
 // C function: cblas_ctpmv
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasCtpmv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, ap unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) {
+func CblasCtpmv(order CBLAS_ORDER, uplo CBLAS_UPLO, transA CBLAS_TRANSPOSE, diag CBLAS_DIAG, n int, ap unsafe.Pointer, x unsafe.Pointer, incX int) {
 	_cblas_ctpmv(order, uplo, transA, diag, n, ap, x, incX)
 }
 
 // C function: cblas_ctpsv
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasCtpsv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, ap unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) {
+func CblasCtpsv(order CBLAS_ORDER, uplo CBLAS_UPLO, transA CBLAS_TRANSPOSE, diag CBLAS_DIAG, n int, ap unsafe.Pointer, x unsafe.Pointer, incX int) {
 	_cblas_ctpsv(order, uplo, transA, diag, n, ap, x, incX)
 }
 
 // C function: cblas_ctrmm
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasCtrmm(order unsafe.Pointer, side unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, b unsafe.Pointer, ldb unsafe.Pointer) {
+func CblasCtrmm(order CBLAS_ORDER, side CBLAS_SIDE, uplo CBLAS_UPLO, transA CBLAS_TRANSPOSE, diag CBLAS_DIAG, m int, n int, alpha unsafe.Pointer, a unsafe.Pointer, lda int, b unsafe.Pointer, ldb int) {
 	_cblas_ctrmm(order, side, uplo, transA, diag, m, n, alpha, a, lda, b, ldb)
 }
 
 // C function: cblas_ctrmv
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasCtrmv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) {
+func CblasCtrmv(order CBLAS_ORDER, uplo CBLAS_UPLO, transA CBLAS_TRANSPOSE, diag CBLAS_DIAG, n int, a unsafe.Pointer, lda int, x unsafe.Pointer, incX int) {
 	_cblas_ctrmv(order, uplo, transA, diag, n, a, lda, x, incX)
 }
 
 // C function: cblas_ctrsm
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasCtrsm(order unsafe.Pointer, side unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, b unsafe.Pointer, ldb unsafe.Pointer) {
+func CblasCtrsm(order CBLAS_ORDER, side CBLAS_SIDE, uplo CBLAS_UPLO, transA CBLAS_TRANSPOSE, diag CBLAS_DIAG, m int, n int, alpha unsafe.Pointer, a unsafe.Pointer, lda int, b unsafe.Pointer, ldb int) {
 	_cblas_ctrsm(order, side, uplo, transA, diag, m, n, alpha, a, lda, b, ldb)
 }
 
 // C function: cblas_ctrsv
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasCtrsv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) {
+func CblasCtrsv(order CBLAS_ORDER, uplo CBLAS_UPLO, transA CBLAS_TRANSPOSE, diag CBLAS_DIAG, n int, a unsafe.Pointer, lda int, x unsafe.Pointer, incX int) {
 	_cblas_ctrsv(order, uplo, transA, diag, n, a, lda, x, incX)
 }
 
 // C function: cblas_dasum
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasDasum(n unsafe.Pointer, x *float64, incX unsafe.Pointer) float64 {
+func CblasDasum(n int, x *float64, incX int) float64 {
 	return _cblas_dasum(n, x, incX)
 }
 
 // C function: cblas_daxpy
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasDaxpy(n unsafe.Pointer, alpha unsafe.Pointer, x *float64, incX unsafe.Pointer, y *float64, incY unsafe.Pointer) {
+func CblasDaxpy(n int, alpha float64, x *float64, incX int, y *float64, incY int) {
 	_cblas_daxpy(n, alpha, x, incX, y, incY)
 }
 
 // C function: cblas_dcopy
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasDcopy(n unsafe.Pointer, x *float64, incX unsafe.Pointer, y *float64, incY unsafe.Pointer) {
+func CblasDcopy(n int, x *float64, incX int, y *float64, incY int) {
 	_cblas_dcopy(n, x, incX, y, incY)
 }
 
 // C function: cblas_ddot
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasDdot(n unsafe.Pointer, x *float64, incX unsafe.Pointer, y *float64, incY unsafe.Pointer) float64 {
+func CblasDdot(n int, x *float64, incX int, y *float64, incY int) float64 {
 	return _cblas_ddot(n, x, incX, y, incY)
 }
 
 // C function: cblas_dgbmv
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasDgbmv(order unsafe.Pointer, transA unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, kl unsafe.Pointer, ku unsafe.Pointer, alpha unsafe.Pointer, a *float64, lda unsafe.Pointer, x *float64, incX unsafe.Pointer, beta unsafe.Pointer, y *float64, incY unsafe.Pointer) {
+func CblasDgbmv(order CBLAS_ORDER, transA CBLAS_TRANSPOSE, m int, n int, kl int, ku int, alpha float64, a *float64, lda int, x *float64, incX int, beta float64, y *float64, incY int) {
 	_cblas_dgbmv(order, transA, m, n, kl, ku, alpha, a, lda, x, incX, beta, y, incY)
 }
 
 // C function: cblas_dgemm
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasDgemm(order unsafe.Pointer, transA unsafe.Pointer, transB unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, a *float64, lda unsafe.Pointer, b *float64, ldb unsafe.Pointer, beta unsafe.Pointer, c *float64, ldc unsafe.Pointer) {
+func CblasDgemm(order CBLAS_ORDER, transA CBLAS_TRANSPOSE, transB CBLAS_TRANSPOSE, m int, n int, k int, alpha float64, a *float64, lda int, b *float64, ldb int, beta float64, c *float64, ldc int) {
 	_cblas_dgemm(order, transA, transB, m, n, k, alpha, a, lda, b, ldb, beta, c, ldc)
 }
 
 // C function: cblas_dgemv
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasDgemv(order unsafe.Pointer, transA unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a *float64, lda unsafe.Pointer, x *float64, incX unsafe.Pointer, beta unsafe.Pointer, y *float64, incY unsafe.Pointer) {
+func CblasDgemv(order CBLAS_ORDER, transA CBLAS_TRANSPOSE, m int, n int, alpha float64, a *float64, lda int, x *float64, incX int, beta float64, y *float64, incY int) {
 	_cblas_dgemv(order, transA, m, n, alpha, a, lda, x, incX, beta, y, incY)
 }
 
 // C function: cblas_dger
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasDger(order unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, x *float64, incX unsafe.Pointer, y *float64, incY unsafe.Pointer, a *float64, lda unsafe.Pointer) {
+func CblasDger(order CBLAS_ORDER, m int, n int, alpha float64, x *float64, incX int, y *float64, incY int, a *float64, lda int) {
 	_cblas_dger(order, m, n, alpha, x, incX, y, incY, a, lda)
 }
 
 // C function: cblas_dnrm2
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasDnrm2(n unsafe.Pointer, x *float64, incX unsafe.Pointer) float64 {
+func CblasDnrm2(n int, x *float64, incX int) float64 {
 	return _cblas_dnrm2(n, x, incX)
 }
 
 // C function: cblas_drot
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasDrot(n unsafe.Pointer, x *float64, incX unsafe.Pointer, y *float64, incY unsafe.Pointer, c unsafe.Pointer, s unsafe.Pointer) {
+func CblasDrot(n int, x *float64, incX int, y *float64, incY int, c float64, s float64) {
 	_cblas_drot(n, x, incX, y, incY, c, s)
 }
 
@@ -7197,253 +7197,253 @@ func CblasDrotg(a *float64, b *float64, c *float64, s *float64) {
 
 // C function: cblas_drotm
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasDrotm(n unsafe.Pointer, x *float64, incX unsafe.Pointer, y *float64, incY unsafe.Pointer, p *float64) {
+func CblasDrotm(n int, x *float64, incX int, y *float64, incY int, p *float64) {
 	_cblas_drotm(n, x, incX, y, incY, p)
 }
 
 // C function: cblas_drotmg
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasDrotmg(d1 *float64, d2 *float64, b1 *float64, b2 unsafe.Pointer, p *float64) {
+func CblasDrotmg(d1 *float64, d2 *float64, b1 *float64, b2 float64, p *float64) {
 	_cblas_drotmg(d1, d2, b1, b2, p)
 }
 
 // C function: cblas_dsbmv
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasDsbmv(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, a *float64, lda unsafe.Pointer, x *float64, incX unsafe.Pointer, beta unsafe.Pointer, y *float64, incY unsafe.Pointer) {
+func CblasDsbmv(order CBLAS_ORDER, uplo CBLAS_UPLO, n int, k int, alpha float64, a *float64, lda int, x *float64, incX int, beta float64, y *float64, incY int) {
 	_cblas_dsbmv(order, uplo, n, k, alpha, a, lda, x, incX, beta, y, incY)
 }
 
 // C function: cblas_dscal
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasDscal(n unsafe.Pointer, alpha unsafe.Pointer, x *float64, incX unsafe.Pointer) {
+func CblasDscal(n int, alpha float64, x *float64, incX int) {
 	_cblas_dscal(n, alpha, x, incX)
 }
 
 // C function: cblas_dsdot
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasDsdot(n unsafe.Pointer, x *float32, incX unsafe.Pointer, y *float32, incY unsafe.Pointer) float64 {
+func CblasDsdot(n int, x *float32, incX int, y *float32, incY int) float64 {
 	return _cblas_dsdot(n, x, incX, y, incY)
 }
 
 // C function: cblas_dspmv
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasDspmv(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, ap *float64, x *float64, incX unsafe.Pointer, beta unsafe.Pointer, y *float64, incY unsafe.Pointer) {
+func CblasDspmv(order CBLAS_ORDER, uplo CBLAS_UPLO, n int, alpha float64, ap *float64, x *float64, incX int, beta float64, y *float64, incY int) {
 	_cblas_dspmv(order, uplo, n, alpha, ap, x, incX, beta, y, incY)
 }
 
 // C function: cblas_dspr
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasDspr(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, x *float64, incX unsafe.Pointer, ap *float64) {
+func CblasDspr(order CBLAS_ORDER, uplo CBLAS_UPLO, n int, alpha float64, x *float64, incX int, ap *float64) {
 	_cblas_dspr(order, uplo, n, alpha, x, incX, ap)
 }
 
 // C function: cblas_dspr2
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasDspr2(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, x *float64, incX unsafe.Pointer, y *float64, incY unsafe.Pointer, a *float64) {
+func CblasDspr2(order CBLAS_ORDER, uplo CBLAS_UPLO, n int, alpha float64, x *float64, incX int, y *float64, incY int, a *float64) {
 	_cblas_dspr2(order, uplo, n, alpha, x, incX, y, incY, a)
 }
 
 // C function: cblas_dswap
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasDswap(n unsafe.Pointer, x *float64, incX unsafe.Pointer, y *float64, incY unsafe.Pointer) {
+func CblasDswap(n int, x *float64, incX int, y *float64, incY int) {
 	_cblas_dswap(n, x, incX, y, incY)
 }
 
 // C function: cblas_dsymm
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasDsymm(order unsafe.Pointer, side unsafe.Pointer, uplo unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a *float64, lda unsafe.Pointer, b *float64, ldb unsafe.Pointer, beta unsafe.Pointer, c *float64, ldc unsafe.Pointer) {
+func CblasDsymm(order CBLAS_ORDER, side CBLAS_SIDE, uplo CBLAS_UPLO, m int, n int, alpha float64, a *float64, lda int, b *float64, ldb int, beta float64, c *float64, ldc int) {
 	_cblas_dsymm(order, side, uplo, m, n, alpha, a, lda, b, ldb, beta, c, ldc)
 }
 
 // C function: cblas_dsymv
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasDsymv(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a *float64, lda unsafe.Pointer, x *float64, incX unsafe.Pointer, beta unsafe.Pointer, y *float64, incY unsafe.Pointer) {
+func CblasDsymv(order CBLAS_ORDER, uplo CBLAS_UPLO, n int, alpha float64, a *float64, lda int, x *float64, incX int, beta float64, y *float64, incY int) {
 	_cblas_dsymv(order, uplo, n, alpha, a, lda, x, incX, beta, y, incY)
 }
 
 // C function: cblas_dsyr
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasDsyr(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, x *float64, incX unsafe.Pointer, a *float64, lda unsafe.Pointer) {
+func CblasDsyr(order CBLAS_ORDER, uplo CBLAS_UPLO, n int, alpha float64, x *float64, incX int, a *float64, lda int) {
 	_cblas_dsyr(order, uplo, n, alpha, x, incX, a, lda)
 }
 
 // C function: cblas_dsyr2
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasDsyr2(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, x *float64, incX unsafe.Pointer, y *float64, incY unsafe.Pointer, a *float64, lda unsafe.Pointer) {
+func CblasDsyr2(order CBLAS_ORDER, uplo CBLAS_UPLO, n int, alpha float64, x *float64, incX int, y *float64, incY int, a *float64, lda int) {
 	_cblas_dsyr2(order, uplo, n, alpha, x, incX, y, incY, a, lda)
 }
 
 // C function: cblas_dsyr2k
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasDsyr2k(order unsafe.Pointer, uplo unsafe.Pointer, trans unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, a *float64, lda unsafe.Pointer, b *float64, ldb unsafe.Pointer, beta unsafe.Pointer, c *float64, ldc unsafe.Pointer) {
+func CblasDsyr2k(order CBLAS_ORDER, uplo CBLAS_UPLO, trans CBLAS_TRANSPOSE, n int, k int, alpha float64, a *float64, lda int, b *float64, ldb int, beta float64, c *float64, ldc int) {
 	_cblas_dsyr2k(order, uplo, trans, n, k, alpha, a, lda, b, ldb, beta, c, ldc)
 }
 
 // C function: cblas_dsyrk
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasDsyrk(order unsafe.Pointer, uplo unsafe.Pointer, trans unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, a *float64, lda unsafe.Pointer, beta unsafe.Pointer, c *float64, ldc unsafe.Pointer) {
+func CblasDsyrk(order CBLAS_ORDER, uplo CBLAS_UPLO, trans CBLAS_TRANSPOSE, n int, k int, alpha float64, a *float64, lda int, beta float64, c *float64, ldc int) {
 	_cblas_dsyrk(order, uplo, trans, n, k, alpha, a, lda, beta, c, ldc)
 }
 
 // C function: cblas_dtbmv
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasDtbmv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, a *float64, lda unsafe.Pointer, x *float64, incX unsafe.Pointer) {
+func CblasDtbmv(order CBLAS_ORDER, uplo CBLAS_UPLO, transA CBLAS_TRANSPOSE, diag CBLAS_DIAG, n int, k int, a *float64, lda int, x *float64, incX int) {
 	_cblas_dtbmv(order, uplo, transA, diag, n, k, a, lda, x, incX)
 }
 
 // C function: cblas_dtbsv
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasDtbsv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, a *float64, lda unsafe.Pointer, x *float64, incX unsafe.Pointer) {
+func CblasDtbsv(order CBLAS_ORDER, uplo CBLAS_UPLO, transA CBLAS_TRANSPOSE, diag CBLAS_DIAG, n int, k int, a *float64, lda int, x *float64, incX int) {
 	_cblas_dtbsv(order, uplo, transA, diag, n, k, a, lda, x, incX)
 }
 
 // C function: cblas_dtpmv
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasDtpmv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, ap *float64, x *float64, incX unsafe.Pointer) {
+func CblasDtpmv(order CBLAS_ORDER, uplo CBLAS_UPLO, transA CBLAS_TRANSPOSE, diag CBLAS_DIAG, n int, ap *float64, x *float64, incX int) {
 	_cblas_dtpmv(order, uplo, transA, diag, n, ap, x, incX)
 }
 
 // C function: cblas_dtpsv
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasDtpsv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, ap *float64, x *float64, incX unsafe.Pointer) {
+func CblasDtpsv(order CBLAS_ORDER, uplo CBLAS_UPLO, transA CBLAS_TRANSPOSE, diag CBLAS_DIAG, n int, ap *float64, x *float64, incX int) {
 	_cblas_dtpsv(order, uplo, transA, diag, n, ap, x, incX)
 }
 
 // C function: cblas_dtrmm
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasDtrmm(order unsafe.Pointer, side unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a *float64, lda unsafe.Pointer, b *float64, ldb unsafe.Pointer) {
+func CblasDtrmm(order CBLAS_ORDER, side CBLAS_SIDE, uplo CBLAS_UPLO, transA CBLAS_TRANSPOSE, diag CBLAS_DIAG, m int, n int, alpha float64, a *float64, lda int, b *float64, ldb int) {
 	_cblas_dtrmm(order, side, uplo, transA, diag, m, n, alpha, a, lda, b, ldb)
 }
 
 // C function: cblas_dtrmv
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasDtrmv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, a *float64, lda unsafe.Pointer, x *float64, incX unsafe.Pointer) {
+func CblasDtrmv(order CBLAS_ORDER, uplo CBLAS_UPLO, transA CBLAS_TRANSPOSE, diag CBLAS_DIAG, n int, a *float64, lda int, x *float64, incX int) {
 	_cblas_dtrmv(order, uplo, transA, diag, n, a, lda, x, incX)
 }
 
 // C function: cblas_dtrsm
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasDtrsm(order unsafe.Pointer, side unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a *float64, lda unsafe.Pointer, b *float64, ldb unsafe.Pointer) {
+func CblasDtrsm(order CBLAS_ORDER, side CBLAS_SIDE, uplo CBLAS_UPLO, transA CBLAS_TRANSPOSE, diag CBLAS_DIAG, m int, n int, alpha float64, a *float64, lda int, b *float64, ldb int) {
 	_cblas_dtrsm(order, side, uplo, transA, diag, m, n, alpha, a, lda, b, ldb)
 }
 
 // C function: cblas_dtrsv
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasDtrsv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, a *float64, lda unsafe.Pointer, x *float64, incX unsafe.Pointer) {
+func CblasDtrsv(order CBLAS_ORDER, uplo CBLAS_UPLO, transA CBLAS_TRANSPOSE, diag CBLAS_DIAG, n int, a *float64, lda int, x *float64, incX int) {
 	_cblas_dtrsv(order, uplo, transA, diag, n, a, lda, x, incX)
 }
 
 // C function: cblas_dzasum
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasDzasum(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) float64 {
+func CblasDzasum(n int, x unsafe.Pointer, incX int) float64 {
 	return _cblas_dzasum(n, x, incX)
 }
 
 // C function: cblas_dznrm2
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasDznrm2(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) float64 {
+func CblasDznrm2(n int, x unsafe.Pointer, incX int) float64 {
 	return _cblas_dznrm2(n, x, incX)
 }
 
 // C function: cblas_icamax
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasIcamax(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) int {
+func CblasIcamax(n int, x unsafe.Pointer, incX int) int {
 	return _cblas_icamax(n, x, incX)
 }
 
 // C function: cblas_idamax
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasIdamax(n unsafe.Pointer, x *float64, incX unsafe.Pointer) int {
+func CblasIdamax(n int, x *float64, incX int) int {
 	return _cblas_idamax(n, x, incX)
 }
 
 // C function: cblas_isamax
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasIsamax(n unsafe.Pointer, x *float32, incX unsafe.Pointer) int {
+func CblasIsamax(n int, x *float32, incX int) int {
 	return _cblas_isamax(n, x, incX)
 }
 
 // C function: cblas_izamax
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasIzamax(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) int {
+func CblasIzamax(n int, x unsafe.Pointer, incX int) int {
 	return _cblas_izamax(n, x, incX)
 }
 
 // C function: cblas_sasum
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasSasum(n unsafe.Pointer, x *float32, incX unsafe.Pointer) float32 {
+func CblasSasum(n int, x *float32, incX int) float32 {
 	return _cblas_sasum(n, x, incX)
 }
 
 // C function: cblas_saxpy
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasSaxpy(n unsafe.Pointer, alpha unsafe.Pointer, x *float32, incX unsafe.Pointer, y *float32, incY unsafe.Pointer) {
+func CblasSaxpy(n int, alpha float32, x *float32, incX int, y *float32, incY int) {
 	_cblas_saxpy(n, alpha, x, incX, y, incY)
 }
 
 // C function: cblas_scasum
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasScasum(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) float32 {
+func CblasScasum(n int, x unsafe.Pointer, incX int) float32 {
 	return _cblas_scasum(n, x, incX)
 }
 
 // C function: cblas_scnrm2
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasScnrm2(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) float32 {
+func CblasScnrm2(n int, x unsafe.Pointer, incX int) float32 {
 	return _cblas_scnrm2(n, x, incX)
 }
 
 // C function: cblas_scopy
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasScopy(n unsafe.Pointer, x *float32, incX unsafe.Pointer, y *float32, incY unsafe.Pointer) {
+func CblasScopy(n int, x *float32, incX int, y *float32, incY int) {
 	_cblas_scopy(n, x, incX, y, incY)
 }
 
 // C function: cblas_sdot
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasSdot(n unsafe.Pointer, x *float32, incX unsafe.Pointer, y *float32, incY unsafe.Pointer) float32 {
+func CblasSdot(n int, x *float32, incX int, y *float32, incY int) float32 {
 	return _cblas_sdot(n, x, incX, y, incY)
 }
 
 // C function: cblas_sdsdot
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasSdsdot(n unsafe.Pointer, alpha unsafe.Pointer, x *float32, incX unsafe.Pointer, y *float32, incY unsafe.Pointer) float32 {
+func CblasSdsdot(n int, alpha float32, x *float32, incX int, y *float32, incY int) float32 {
 	return _cblas_sdsdot(n, alpha, x, incX, y, incY)
 }
 
 // C function: cblas_sgbmv
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasSgbmv(order unsafe.Pointer, transA unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, kl unsafe.Pointer, ku unsafe.Pointer, alpha unsafe.Pointer, a *float32, lda unsafe.Pointer, x *float32, incX unsafe.Pointer, beta unsafe.Pointer, y *float32, incY unsafe.Pointer) {
+func CblasSgbmv(order CBLAS_ORDER, transA CBLAS_TRANSPOSE, m int, n int, kl int, ku int, alpha float32, a *float32, lda int, x *float32, incX int, beta float32, y *float32, incY int) {
 	_cblas_sgbmv(order, transA, m, n, kl, ku, alpha, a, lda, x, incX, beta, y, incY)
 }
 
 // C function: cblas_sgemm
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasSgemm(order unsafe.Pointer, transA unsafe.Pointer, transB unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, a *float32, lda unsafe.Pointer, b *float32, ldb unsafe.Pointer, beta unsafe.Pointer, c *float32, ldc unsafe.Pointer) {
+func CblasSgemm(order CBLAS_ORDER, transA CBLAS_TRANSPOSE, transB CBLAS_TRANSPOSE, m int, n int, k int, alpha float32, a *float32, lda int, b *float32, ldb int, beta float32, c *float32, ldc int) {
 	_cblas_sgemm(order, transA, transB, m, n, k, alpha, a, lda, b, ldb, beta, c, ldc)
 }
 
 // C function: cblas_sgemv
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasSgemv(order unsafe.Pointer, transA unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a *float32, lda unsafe.Pointer, x *float32, incX unsafe.Pointer, beta unsafe.Pointer, y *float32, incY unsafe.Pointer) {
+func CblasSgemv(order CBLAS_ORDER, transA CBLAS_TRANSPOSE, m int, n int, alpha float32, a *float32, lda int, x *float32, incX int, beta float32, y *float32, incY int) {
 	_cblas_sgemv(order, transA, m, n, alpha, a, lda, x, incX, beta, y, incY)
 }
 
 // C function: cblas_sger
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasSger(order unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, x *float32, incX unsafe.Pointer, y *float32, incY unsafe.Pointer, a *float32, lda unsafe.Pointer) {
+func CblasSger(order CBLAS_ORDER, m int, n int, alpha float32, x *float32, incX int, y *float32, incY int, a *float32, lda int) {
 	_cblas_sger(order, m, n, alpha, x, incX, y, incY, a, lda)
 }
 
 // C function: cblas_snrm2
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasSnrm2(n unsafe.Pointer, x *float32, incX unsafe.Pointer) float32 {
+func CblasSnrm2(n int, x *float32, incX int) float32 {
 	return _cblas_snrm2(n, x, incX)
 }
 
 // C function: cblas_srot
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasSrot(n unsafe.Pointer, x *float32, incX unsafe.Pointer, y *float32, incY unsafe.Pointer, c unsafe.Pointer, s unsafe.Pointer) {
+func CblasSrot(n int, x *float32, incX int, y *float32, incY int, c float32, s float32) {
 	_cblas_srot(n, x, incX, y, incY, c, s)
 }
 
@@ -7455,259 +7455,259 @@ func CblasSrotg(a *float32, b *float32, c *float32, s *float32) {
 
 // C function: cblas_srotm
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasSrotm(n unsafe.Pointer, x *float32, incX unsafe.Pointer, y *float32, incY unsafe.Pointer, p *float32) {
+func CblasSrotm(n int, x *float32, incX int, y *float32, incY int, p *float32) {
 	_cblas_srotm(n, x, incX, y, incY, p)
 }
 
 // C function: cblas_srotmg
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasSrotmg(d1 *float32, d2 *float32, b1 *float32, b2 unsafe.Pointer, p *float32) {
+func CblasSrotmg(d1 *float32, d2 *float32, b1 *float32, b2 float32, p *float32) {
 	_cblas_srotmg(d1, d2, b1, b2, p)
 }
 
 // C function: cblas_ssbmv
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasSsbmv(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, a *float32, lda unsafe.Pointer, x *float32, incX unsafe.Pointer, beta unsafe.Pointer, y *float32, incY unsafe.Pointer) {
+func CblasSsbmv(order CBLAS_ORDER, uplo CBLAS_UPLO, n int, k int, alpha float32, a *float32, lda int, x *float32, incX int, beta float32, y *float32, incY int) {
 	_cblas_ssbmv(order, uplo, n, k, alpha, a, lda, x, incX, beta, y, incY)
 }
 
 // C function: cblas_sscal
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasSscal(n unsafe.Pointer, alpha unsafe.Pointer, x *float32, incX unsafe.Pointer) {
+func CblasSscal(n int, alpha float32, x *float32, incX int) {
 	_cblas_sscal(n, alpha, x, incX)
 }
 
 // C function: cblas_sspmv
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasSspmv(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, ap *float32, x *float32, incX unsafe.Pointer, beta unsafe.Pointer, y *float32, incY unsafe.Pointer) {
+func CblasSspmv(order CBLAS_ORDER, uplo CBLAS_UPLO, n int, alpha float32, ap *float32, x *float32, incX int, beta float32, y *float32, incY int) {
 	_cblas_sspmv(order, uplo, n, alpha, ap, x, incX, beta, y, incY)
 }
 
 // C function: cblas_sspr
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasSspr(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, x *float32, incX unsafe.Pointer, ap *float32) {
+func CblasSspr(order CBLAS_ORDER, uplo CBLAS_UPLO, n int, alpha float32, x *float32, incX int, ap *float32) {
 	_cblas_sspr(order, uplo, n, alpha, x, incX, ap)
 }
 
 // C function: cblas_sspr2
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasSspr2(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, x *float32, incX unsafe.Pointer, y *float32, incY unsafe.Pointer, a *float32) {
+func CblasSspr2(order CBLAS_ORDER, uplo CBLAS_UPLO, n int, alpha float32, x *float32, incX int, y *float32, incY int, a *float32) {
 	_cblas_sspr2(order, uplo, n, alpha, x, incX, y, incY, a)
 }
 
 // C function: cblas_sswap
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasSswap(n unsafe.Pointer, x *float32, incX unsafe.Pointer, y *float32, incY unsafe.Pointer) {
+func CblasSswap(n int, x *float32, incX int, y *float32, incY int) {
 	_cblas_sswap(n, x, incX, y, incY)
 }
 
 // C function: cblas_ssymm
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasSsymm(order unsafe.Pointer, side unsafe.Pointer, uplo unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a *float32, lda unsafe.Pointer, b *float32, ldb unsafe.Pointer, beta unsafe.Pointer, c *float32, ldc unsafe.Pointer) {
+func CblasSsymm(order CBLAS_ORDER, side CBLAS_SIDE, uplo CBLAS_UPLO, m int, n int, alpha float32, a *float32, lda int, b *float32, ldb int, beta float32, c *float32, ldc int) {
 	_cblas_ssymm(order, side, uplo, m, n, alpha, a, lda, b, ldb, beta, c, ldc)
 }
 
 // C function: cblas_ssymv
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasSsymv(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a *float32, lda unsafe.Pointer, x *float32, incX unsafe.Pointer, beta unsafe.Pointer, y *float32, incY unsafe.Pointer) {
+func CblasSsymv(order CBLAS_ORDER, uplo CBLAS_UPLO, n int, alpha float32, a *float32, lda int, x *float32, incX int, beta float32, y *float32, incY int) {
 	_cblas_ssymv(order, uplo, n, alpha, a, lda, x, incX, beta, y, incY)
 }
 
 // C function: cblas_ssyr
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasSsyr(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, x *float32, incX unsafe.Pointer, a *float32, lda unsafe.Pointer) {
+func CblasSsyr(order CBLAS_ORDER, uplo CBLAS_UPLO, n int, alpha float32, x *float32, incX int, a *float32, lda int) {
 	_cblas_ssyr(order, uplo, n, alpha, x, incX, a, lda)
 }
 
 // C function: cblas_ssyr2
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasSsyr2(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, x *float32, incX unsafe.Pointer, y *float32, incY unsafe.Pointer, a *float32, lda unsafe.Pointer) {
+func CblasSsyr2(order CBLAS_ORDER, uplo CBLAS_UPLO, n int, alpha float32, x *float32, incX int, y *float32, incY int, a *float32, lda int) {
 	_cblas_ssyr2(order, uplo, n, alpha, x, incX, y, incY, a, lda)
 }
 
 // C function: cblas_ssyr2k
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasSsyr2k(order unsafe.Pointer, uplo unsafe.Pointer, trans unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, a *float32, lda unsafe.Pointer, b *float32, ldb unsafe.Pointer, beta unsafe.Pointer, c *float32, ldc unsafe.Pointer) {
+func CblasSsyr2k(order CBLAS_ORDER, uplo CBLAS_UPLO, trans CBLAS_TRANSPOSE, n int, k int, alpha float32, a *float32, lda int, b *float32, ldb int, beta float32, c *float32, ldc int) {
 	_cblas_ssyr2k(order, uplo, trans, n, k, alpha, a, lda, b, ldb, beta, c, ldc)
 }
 
 // C function: cblas_ssyrk
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasSsyrk(order unsafe.Pointer, uplo unsafe.Pointer, trans unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, a *float32, lda unsafe.Pointer, beta unsafe.Pointer, c *float32, ldc unsafe.Pointer) {
+func CblasSsyrk(order CBLAS_ORDER, uplo CBLAS_UPLO, trans CBLAS_TRANSPOSE, n int, k int, alpha float32, a *float32, lda int, beta float32, c *float32, ldc int) {
 	_cblas_ssyrk(order, uplo, trans, n, k, alpha, a, lda, beta, c, ldc)
 }
 
 // C function: cblas_stbmv
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasStbmv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, a *float32, lda unsafe.Pointer, x *float32, incX unsafe.Pointer) {
+func CblasStbmv(order CBLAS_ORDER, uplo CBLAS_UPLO, transA CBLAS_TRANSPOSE, diag CBLAS_DIAG, n int, k int, a *float32, lda int, x *float32, incX int) {
 	_cblas_stbmv(order, uplo, transA, diag, n, k, a, lda, x, incX)
 }
 
 // C function: cblas_stbsv
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasStbsv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, a *float32, lda unsafe.Pointer, x *float32, incX unsafe.Pointer) {
+func CblasStbsv(order CBLAS_ORDER, uplo CBLAS_UPLO, transA CBLAS_TRANSPOSE, diag CBLAS_DIAG, n int, k int, a *float32, lda int, x *float32, incX int) {
 	_cblas_stbsv(order, uplo, transA, diag, n, k, a, lda, x, incX)
 }
 
 // C function: cblas_stpmv
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasStpmv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, ap *float32, x *float32, incX unsafe.Pointer) {
+func CblasStpmv(order CBLAS_ORDER, uplo CBLAS_UPLO, transA CBLAS_TRANSPOSE, diag CBLAS_DIAG, n int, ap *float32, x *float32, incX int) {
 	_cblas_stpmv(order, uplo, transA, diag, n, ap, x, incX)
 }
 
 // C function: cblas_stpsv
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasStpsv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, ap *float32, x *float32, incX unsafe.Pointer) {
+func CblasStpsv(order CBLAS_ORDER, uplo CBLAS_UPLO, transA CBLAS_TRANSPOSE, diag CBLAS_DIAG, n int, ap *float32, x *float32, incX int) {
 	_cblas_stpsv(order, uplo, transA, diag, n, ap, x, incX)
 }
 
 // C function: cblas_strmm
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasStrmm(order unsafe.Pointer, side unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a *float32, lda unsafe.Pointer, b *float32, ldb unsafe.Pointer) {
+func CblasStrmm(order CBLAS_ORDER, side CBLAS_SIDE, uplo CBLAS_UPLO, transA CBLAS_TRANSPOSE, diag CBLAS_DIAG, m int, n int, alpha float32, a *float32, lda int, b *float32, ldb int) {
 	_cblas_strmm(order, side, uplo, transA, diag, m, n, alpha, a, lda, b, ldb)
 }
 
 // C function: cblas_strmv
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasStrmv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, a *float32, lda unsafe.Pointer, x *float32, incX unsafe.Pointer) {
+func CblasStrmv(order CBLAS_ORDER, uplo CBLAS_UPLO, transA CBLAS_TRANSPOSE, diag CBLAS_DIAG, n int, a *float32, lda int, x *float32, incX int) {
 	_cblas_strmv(order, uplo, transA, diag, n, a, lda, x, incX)
 }
 
 // C function: cblas_strsm
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasStrsm(order unsafe.Pointer, side unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a *float32, lda unsafe.Pointer, b *float32, ldb unsafe.Pointer) {
+func CblasStrsm(order CBLAS_ORDER, side CBLAS_SIDE, uplo CBLAS_UPLO, transA CBLAS_TRANSPOSE, diag CBLAS_DIAG, m int, n int, alpha float32, a *float32, lda int, b *float32, ldb int) {
 	_cblas_strsm(order, side, uplo, transA, diag, m, n, alpha, a, lda, b, ldb)
 }
 
 // C function: cblas_strsv
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasStrsv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, a *float32, lda unsafe.Pointer, x *float32, incX unsafe.Pointer) {
+func CblasStrsv(order CBLAS_ORDER, uplo CBLAS_UPLO, transA CBLAS_TRANSPOSE, diag CBLAS_DIAG, n int, a *float32, lda int, x *float32, incX int) {
 	_cblas_strsv(order, uplo, transA, diag, n, a, lda, x, incX)
 }
 
 // C function: cblas_zaxpy
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasZaxpy(n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer) {
+func CblasZaxpy(n int, alpha unsafe.Pointer, x unsafe.Pointer, incX int, y unsafe.Pointer, incY int) {
 	_cblas_zaxpy(n, alpha, x, incX, y, incY)
 }
 
 // C function: cblas_zcopy
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasZcopy(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer) {
+func CblasZcopy(n int, x unsafe.Pointer, incX int, y unsafe.Pointer, incY int) {
 	_cblas_zcopy(n, x, incX, y, incY)
 }
 
 // C function: cblas_zdotc_sub
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasZdotcSub(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer, dotc unsafe.Pointer) {
+func CblasZdotcSub(n int, x unsafe.Pointer, incX int, y unsafe.Pointer, incY int, dotc unsafe.Pointer) {
 	_cblas_zdotc_sub(n, x, incX, y, incY, dotc)
 }
 
 // C function: cblas_zdotu_sub
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasZdotuSub(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer, dotu unsafe.Pointer) {
+func CblasZdotuSub(n int, x unsafe.Pointer, incX int, y unsafe.Pointer, incY int, dotu unsafe.Pointer) {
 	_cblas_zdotu_sub(n, x, incX, y, incY, dotu)
 }
 
 // C function: cblas_zdrot
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasZdrot(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer, c unsafe.Pointer, s unsafe.Pointer) {
+func CblasZdrot(n int, x unsafe.Pointer, incX int, y unsafe.Pointer, incY int, c float64, s float64) {
 	_cblas_zdrot(n, x, incX, y, incY, c, s)
 }
 
 // C function: cblas_zdscal
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasZdscal(n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) {
+func CblasZdscal(n int, alpha float64, x unsafe.Pointer, incX int) {
 	_cblas_zdscal(n, alpha, x, incX)
 }
 
 // C function: cblas_zgbmv
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasZgbmv(order unsafe.Pointer, transA unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, kl unsafe.Pointer, ku unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer) {
+func CblasZgbmv(order CBLAS_ORDER, transA CBLAS_TRANSPOSE, m int, n int, kl int, ku int, alpha unsafe.Pointer, a unsafe.Pointer, lda int, x unsafe.Pointer, incX int, beta unsafe.Pointer, y unsafe.Pointer, incY int) {
 	_cblas_zgbmv(order, transA, m, n, kl, ku, alpha, a, lda, x, incX, beta, y, incY)
 }
 
 // C function: cblas_zgemm
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasZgemm(order unsafe.Pointer, transA unsafe.Pointer, transB unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, b unsafe.Pointer, ldb unsafe.Pointer, beta unsafe.Pointer, c unsafe.Pointer, ldc unsafe.Pointer) {
+func CblasZgemm(order CBLAS_ORDER, transA CBLAS_TRANSPOSE, transB CBLAS_TRANSPOSE, m int, n int, k int, alpha unsafe.Pointer, a unsafe.Pointer, lda int, b unsafe.Pointer, ldb int, beta unsafe.Pointer, c unsafe.Pointer, ldc int) {
 	_cblas_zgemm(order, transA, transB, m, n, k, alpha, a, lda, b, ldb, beta, c, ldc)
 }
 
 // C function: cblas_zgemv
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasZgemv(order unsafe.Pointer, transA unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer) {
+func CblasZgemv(order CBLAS_ORDER, transA CBLAS_TRANSPOSE, m int, n int, alpha unsafe.Pointer, a unsafe.Pointer, lda int, x unsafe.Pointer, incX int, beta unsafe.Pointer, y unsafe.Pointer, incY int) {
 	_cblas_zgemv(order, transA, m, n, alpha, a, lda, x, incX, beta, y, incY)
 }
 
 // C function: cblas_zgerc
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasZgerc(order unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer) {
+func CblasZgerc(order CBLAS_ORDER, m int, n int, alpha unsafe.Pointer, x unsafe.Pointer, incX int, y unsafe.Pointer, incY int, a unsafe.Pointer, lda int) {
 	_cblas_zgerc(order, m, n, alpha, x, incX, y, incY, a, lda)
 }
 
 // C function: cblas_zgeru
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasZgeru(order unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer) {
+func CblasZgeru(order CBLAS_ORDER, m int, n int, alpha unsafe.Pointer, x unsafe.Pointer, incX int, y unsafe.Pointer, incY int, a unsafe.Pointer, lda int) {
 	_cblas_zgeru(order, m, n, alpha, x, incX, y, incY, a, lda)
 }
 
 // C function: cblas_zhbmv
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasZhbmv(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer) {
+func CblasZhbmv(order CBLAS_ORDER, uplo CBLAS_UPLO, n int, k int, alpha unsafe.Pointer, a unsafe.Pointer, lda int, x unsafe.Pointer, incX int, beta unsafe.Pointer, y unsafe.Pointer, incY int) {
 	_cblas_zhbmv(order, uplo, n, k, alpha, a, lda, x, incX, beta, y, incY)
 }
 
 // C function: cblas_zhemm
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasZhemm(order unsafe.Pointer, side unsafe.Pointer, uplo unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, b unsafe.Pointer, ldb unsafe.Pointer, beta unsafe.Pointer, c unsafe.Pointer, ldc unsafe.Pointer) {
+func CblasZhemm(order CBLAS_ORDER, side CBLAS_SIDE, uplo CBLAS_UPLO, m int, n int, alpha unsafe.Pointer, a unsafe.Pointer, lda int, b unsafe.Pointer, ldb int, beta unsafe.Pointer, c unsafe.Pointer, ldc int) {
 	_cblas_zhemm(order, side, uplo, m, n, alpha, a, lda, b, ldb, beta, c, ldc)
 }
 
 // C function: cblas_zhemv
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasZhemv(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer) {
+func CblasZhemv(order CBLAS_ORDER, uplo CBLAS_UPLO, n int, alpha unsafe.Pointer, a unsafe.Pointer, lda int, x unsafe.Pointer, incX int, beta unsafe.Pointer, y unsafe.Pointer, incY int) {
 	_cblas_zhemv(order, uplo, n, alpha, a, lda, x, incX, beta, y, incY)
 }
 
 // C function: cblas_zher
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasZher(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer) {
+func CblasZher(order CBLAS_ORDER, uplo CBLAS_UPLO, n int, alpha float64, x unsafe.Pointer, incX int, a unsafe.Pointer, lda int) {
 	_cblas_zher(order, uplo, n, alpha, x, incX, a, lda)
 }
 
 // C function: cblas_zher2
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasZher2(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer) {
+func CblasZher2(order CBLAS_ORDER, uplo CBLAS_UPLO, n int, alpha unsafe.Pointer, x unsafe.Pointer, incX int, y unsafe.Pointer, incY int, a unsafe.Pointer, lda int) {
 	_cblas_zher2(order, uplo, n, alpha, x, incX, y, incY, a, lda)
 }
 
 // C function: cblas_zher2k
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasZher2k(order unsafe.Pointer, uplo unsafe.Pointer, trans unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, b unsafe.Pointer, ldb unsafe.Pointer, beta unsafe.Pointer, c unsafe.Pointer, ldc unsafe.Pointer) {
+func CblasZher2k(order CBLAS_ORDER, uplo CBLAS_UPLO, trans CBLAS_TRANSPOSE, n int, k int, alpha unsafe.Pointer, a unsafe.Pointer, lda int, b unsafe.Pointer, ldb int, beta float64, c unsafe.Pointer, ldc int) {
 	_cblas_zher2k(order, uplo, trans, n, k, alpha, a, lda, b, ldb, beta, c, ldc)
 }
 
 // C function: cblas_zherk
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasZherk(order unsafe.Pointer, uplo unsafe.Pointer, trans unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, beta unsafe.Pointer, c unsafe.Pointer, ldc unsafe.Pointer) {
+func CblasZherk(order CBLAS_ORDER, uplo CBLAS_UPLO, trans CBLAS_TRANSPOSE, n int, k int, alpha float64, a unsafe.Pointer, lda int, beta float64, c unsafe.Pointer, ldc int) {
 	_cblas_zherk(order, uplo, trans, n, k, alpha, a, lda, beta, c, ldc)
 }
 
 // C function: cblas_zhpmv
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasZhpmv(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, ap unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer) {
+func CblasZhpmv(order CBLAS_ORDER, uplo CBLAS_UPLO, n int, alpha unsafe.Pointer, ap unsafe.Pointer, x unsafe.Pointer, incX int, beta unsafe.Pointer, y unsafe.Pointer, incY int) {
 	_cblas_zhpmv(order, uplo, n, alpha, ap, x, incX, beta, y, incY)
 }
 
 // C function: cblas_zhpr
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasZhpr(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, a unsafe.Pointer) {
+func CblasZhpr(order CBLAS_ORDER, uplo CBLAS_UPLO, n int, alpha float64, x unsafe.Pointer, incX int, a unsafe.Pointer) {
 	_cblas_zhpr(order, uplo, n, alpha, x, incX, a)
 }
 
 // C function: cblas_zhpr2
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasZhpr2(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer, ap unsafe.Pointer) {
+func CblasZhpr2(order CBLAS_ORDER, uplo CBLAS_UPLO, n int, alpha unsafe.Pointer, x unsafe.Pointer, incX int, y unsafe.Pointer, incY int, ap unsafe.Pointer) {
 	_cblas_zhpr2(order, uplo, n, alpha, x, incX, y, incY, ap)
 }
 
@@ -7719,79 +7719,79 @@ func CblasZrotg(a unsafe.Pointer, b unsafe.Pointer, c unsafe.Pointer, s unsafe.P
 
 // C function: cblas_zscal
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasZscal(n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) {
+func CblasZscal(n int, alpha unsafe.Pointer, x unsafe.Pointer, incX int) {
 	_cblas_zscal(n, alpha, x, incX)
 }
 
 // C function: cblas_zswap
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasZswap(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer) {
+func CblasZswap(n int, x unsafe.Pointer, incX int, y unsafe.Pointer, incY int) {
 	_cblas_zswap(n, x, incX, y, incY)
 }
 
 // C function: cblas_zsymm
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasZsymm(order unsafe.Pointer, side unsafe.Pointer, uplo unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, b unsafe.Pointer, ldb unsafe.Pointer, beta unsafe.Pointer, c unsafe.Pointer, ldc unsafe.Pointer) {
+func CblasZsymm(order CBLAS_ORDER, side CBLAS_SIDE, uplo CBLAS_UPLO, m int, n int, alpha unsafe.Pointer, a unsafe.Pointer, lda int, b unsafe.Pointer, ldb int, beta unsafe.Pointer, c unsafe.Pointer, ldc int) {
 	_cblas_zsymm(order, side, uplo, m, n, alpha, a, lda, b, ldb, beta, c, ldc)
 }
 
 // C function: cblas_zsyr2k
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasZsyr2k(order unsafe.Pointer, uplo unsafe.Pointer, trans unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, b unsafe.Pointer, ldb unsafe.Pointer, beta unsafe.Pointer, c unsafe.Pointer, ldc unsafe.Pointer) {
+func CblasZsyr2k(order CBLAS_ORDER, uplo CBLAS_UPLO, trans CBLAS_TRANSPOSE, n int, k int, alpha unsafe.Pointer, a unsafe.Pointer, lda int, b unsafe.Pointer, ldb int, beta unsafe.Pointer, c unsafe.Pointer, ldc int) {
 	_cblas_zsyr2k(order, uplo, trans, n, k, alpha, a, lda, b, ldb, beta, c, ldc)
 }
 
 // C function: cblas_zsyrk
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasZsyrk(order unsafe.Pointer, uplo unsafe.Pointer, trans unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, beta unsafe.Pointer, c unsafe.Pointer, ldc unsafe.Pointer) {
+func CblasZsyrk(order CBLAS_ORDER, uplo CBLAS_UPLO, trans CBLAS_TRANSPOSE, n int, k int, alpha unsafe.Pointer, a unsafe.Pointer, lda int, beta unsafe.Pointer, c unsafe.Pointer, ldc int) {
 	_cblas_zsyrk(order, uplo, trans, n, k, alpha, a, lda, beta, c, ldc)
 }
 
 // C function: cblas_ztbmv
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasZtbmv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) {
+func CblasZtbmv(order CBLAS_ORDER, uplo CBLAS_UPLO, transA CBLAS_TRANSPOSE, diag CBLAS_DIAG, n int, k int, a unsafe.Pointer, lda int, x unsafe.Pointer, incX int) {
 	_cblas_ztbmv(order, uplo, transA, diag, n, k, a, lda, x, incX)
 }
 
 // C function: cblas_ztbsv
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasZtbsv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) {
+func CblasZtbsv(order CBLAS_ORDER, uplo CBLAS_UPLO, transA CBLAS_TRANSPOSE, diag CBLAS_DIAG, n int, k int, a unsafe.Pointer, lda int, x unsafe.Pointer, incX int) {
 	_cblas_ztbsv(order, uplo, transA, diag, n, k, a, lda, x, incX)
 }
 
 // C function: cblas_ztpmv
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasZtpmv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, ap unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) {
+func CblasZtpmv(order CBLAS_ORDER, uplo CBLAS_UPLO, transA CBLAS_TRANSPOSE, diag CBLAS_DIAG, n int, ap unsafe.Pointer, x unsafe.Pointer, incX int) {
 	_cblas_ztpmv(order, uplo, transA, diag, n, ap, x, incX)
 }
 
 // C function: cblas_ztpsv
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasZtpsv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, ap unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) {
+func CblasZtpsv(order CBLAS_ORDER, uplo CBLAS_UPLO, transA CBLAS_TRANSPOSE, diag CBLAS_DIAG, n int, ap unsafe.Pointer, x unsafe.Pointer, incX int) {
 	_cblas_ztpsv(order, uplo, transA, diag, n, ap, x, incX)
 }
 
 // C function: cblas_ztrmm
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasZtrmm(order unsafe.Pointer, side unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, b unsafe.Pointer, ldb unsafe.Pointer) {
+func CblasZtrmm(order CBLAS_ORDER, side CBLAS_SIDE, uplo CBLAS_UPLO, transA CBLAS_TRANSPOSE, diag CBLAS_DIAG, m int, n int, alpha unsafe.Pointer, a unsafe.Pointer, lda int, b unsafe.Pointer, ldb int) {
 	_cblas_ztrmm(order, side, uplo, transA, diag, m, n, alpha, a, lda, b, ldb)
 }
 
 // C function: cblas_ztrmv
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasZtrmv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) {
+func CblasZtrmv(order CBLAS_ORDER, uplo CBLAS_UPLO, transA CBLAS_TRANSPOSE, diag CBLAS_DIAG, n int, a unsafe.Pointer, lda int, x unsafe.Pointer, incX int) {
 	_cblas_ztrmv(order, uplo, transA, diag, n, a, lda, x, incX)
 }
 
 // C function: cblas_ztrsm
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasZtrsm(order unsafe.Pointer, side unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, b unsafe.Pointer, ldb unsafe.Pointer) {
+func CblasZtrsm(order CBLAS_ORDER, side CBLAS_SIDE, uplo CBLAS_UPLO, transA CBLAS_TRANSPOSE, diag CBLAS_DIAG, m int, n int, alpha unsafe.Pointer, a unsafe.Pointer, lda int, b unsafe.Pointer, ldb int) {
 	_cblas_ztrsm(order, side, uplo, transA, diag, m, n, alpha, a, lda, b, ldb)
 }
 
 // C function: cblas_ztrsv
 // Deprecated: An updated CBLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.
-func CblasZtrsv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) {
+func CblasZtrsv(order CBLAS_ORDER, uplo CBLAS_UPLO, transA CBLAS_TRANSPOSE, diag CBLAS_DIAG, n int, a unsafe.Pointer, lda int, x unsafe.Pointer, incX int) {
 	_cblas_ztrsv(order, uplo, transA, diag, n, a, lda, x, incX)
 }
 

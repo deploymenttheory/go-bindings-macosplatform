@@ -93,14 +93,14 @@ func (tcr *TextCheckingResult) WithScriptingProperties(scriptingProperties map[s
 	return tcr
 }
 
-// ResultType returns the result type.
+// ResultType returns the text checking result type that the receiver represents.
 func (tcr *TextCheckingResult) ResultType() TextCheckingType {
 	defer runtime.KeepAlive(tcr)
 	_r := objc.Send[TextCheckingType](objref.IDOf(tcr), objc.RegisterName("resultType"))
 	return _r
 }
 
-// Range returns the range.
+// Range returns the range of the result that the receiver represents.
 func (tcr *TextCheckingResult) Range() NSRange {
 	defer runtime.KeepAlive(tcr)
 	_r := objc.Send[NSRange](objref.IDOf(tcr), objc.RegisterName("range"))
@@ -128,14 +128,14 @@ func (tcr *TextCheckingResult) ResultByAdjustingRangesWithOffset(offset int) *Te
 	return TextCheckingResultFromID(_r)
 }
 
-// Orthography returns the orthography.
+// Orthography returns the detected orthography of a type checking result.
 func (tcr *TextCheckingResult) Orthography() *Orthography {
 	defer runtime.KeepAlive(tcr)
 	_r := objc.Send[objc.ID](objref.IDOf(tcr), objc.RegisterName("orthography"))
 	return OrthographyFromID(_r)
 }
 
-// GrammarDetails returns the grammar details.
+// GrammarDetails returns the details of a grammar checking result.
 //
 // GrammarDetails returns the collection as a Go slice.
 func (tcr *TextCheckingResult) GrammarDetails() []obj.Object {
@@ -144,42 +144,42 @@ func (tcr *TextCheckingResult) GrammarDetails() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Date returns the date.
+// Date returns the date component of a type checking result.
 func (tcr *TextCheckingResult) Date() time.Time {
 	defer runtime.KeepAlive(tcr)
 	_r := objc.Send[objc.ID](objref.IDOf(tcr), objc.RegisterName("date"))
 	return rt.NSDateToTime(_r)
 }
 
-// TimeZone returns the time zone.
+// TimeZone returns the time zone component of a type checking result.
 func (tcr *TextCheckingResult) TimeZone() *TimeZone {
 	defer runtime.KeepAlive(tcr)
 	_r := objc.Send[objc.ID](objref.IDOf(tcr), objc.RegisterName("timeZone"))
 	return TimeZoneFromID(_r)
 }
 
-// Duration returns the duration.
+// Duration returns the duration component of a type checking result.
 func (tcr *TextCheckingResult) Duration() float64 {
 	defer runtime.KeepAlive(tcr)
 	_r := objc.Send[float64](objref.IDOf(tcr), objc.RegisterName("duration"))
 	return _r
 }
 
-// Components returns the components.
+// Components returns the components of a type checking result.
 func (tcr *TextCheckingResult) Components() obj.Object {
 	defer runtime.KeepAlive(tcr)
 	_r := objc.Send[objc.ID](objref.IDOf(tcr), objc.RegisterName("components"))
 	return obj.Wrap(_r)
 }
 
-// URL returns the URL.
+// URL returns the URL component of a type checking result.
 func (tcr *TextCheckingResult) URL() string {
 	defer runtime.KeepAlive(tcr)
 	_r := objc.Send[objc.ID](objref.IDOf(tcr), objc.RegisterName("URL"))
 	return rt.URLString(_r)
 }
 
-// ReplacementString returns the replacement string.
+// ReplacementString returns the replacement string of a type checking result.
 func (tcr *TextCheckingResult) ReplacementString() string {
 	defer runtime.KeepAlive(tcr)
 	_r := objc.Send[objc.ID](objref.IDOf(tcr), objc.RegisterName("replacementString"))
@@ -198,14 +198,14 @@ func (tcr *TextCheckingResult) AlternativeStrings() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// RegularExpression returns the regular expression.
+// RegularExpression returns the regular expression of a type checking result.
 func (tcr *TextCheckingResult) RegularExpression() *RegularExpression {
 	defer runtime.KeepAlive(tcr)
 	_r := objc.Send[objc.ID](objref.IDOf(tcr), objc.RegisterName("regularExpression"))
 	return RegularExpressionFromID(_r)
 }
 
-// PhoneNumber returns the phone number.
+// PhoneNumber returns the phone number of a type checking result.
 func (tcr *TextCheckingResult) PhoneNumber() string {
 	defer runtime.KeepAlive(tcr)
 	_r := objc.Send[objc.ID](objref.IDOf(tcr), objc.RegisterName("phoneNumber"))
@@ -215,14 +215,14 @@ func (tcr *TextCheckingResult) PhoneNumber() string {
 	return purego.GoString(_r)
 }
 
-// NumberOfRanges returns the number of ranges.
+// NumberOfRanges returns the number of ranges. A result must have at least one range, but may optionally have more (for example, to represent regular expression capture groups).
 func (tcr *TextCheckingResult) NumberOfRanges() int {
 	defer runtime.KeepAlive(tcr)
 	_r := objc.Send[int](objref.IDOf(tcr), objc.RegisterName("numberOfRanges"))
 	return _r
 }
 
-// AddressComponents returns the address components.
+// AddressComponents returns the address dictionary of a type checking result.
 func (tcr *TextCheckingResult) AddressComponents() obj.Object {
 	defer runtime.KeepAlive(tcr)
 	_r := objc.Send[objc.ID](objref.IDOf(tcr), objc.RegisterName("addressComponents"))

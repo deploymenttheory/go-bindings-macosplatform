@@ -39,6 +39,22 @@
       "doc": "The base class for a console port configuration.",
       "url": "https://developer.apple.com/documentation/virtualization/vzconsoleportconfiguration"
     },
+    "VZCustomVirtioDevice": {
+      "doc": "An interface that represents a custom Virtio device that you provide the implementation for.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzcustomvirtiodevice"
+    },
+    "VZCustomVirtioDeviceConfiguration": {
+      "doc": "An object that defines a custom Virtio Device configuration.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzcustomvirtiodeviceconfiguration"
+    },
+    "VZCustomVirtioDeviceDelegateProvider": {
+      "doc": "A custom Virtio Device provider for devices that implement a custom Virtio device configuration delegate.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzcustomvirtiodevicedelegateprovider"
+    },
+    "VZCustomVirtioDeviceProvider": {
+      "doc": "A base class that describes the provider of a custom Virtio device.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzcustomvirtiodeviceprovider"
+    },
     "VZDirectoryShare": {
       "doc": "The base class for a directory share.",
       "url": "https://developer.apple.com/documentation/virtualization/vzdirectoryshare"
@@ -62,6 +78,22 @@
     "VZEFIBootLoader": {
       "doc": "The boot loader configuration the system uses to boot guest-operating systems that expect an Extensible Firmware Interface (EFI) ROM.",
       "url": "https://developer.apple.com/documentation/virtualization/vzefibootloader"
+    },
+    "VZEFISignatureDatabaseConfiguration": {
+      "doc": "A container for Unified Extensible Firmware Interface (UEFI) Secure Boot signature lists.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzefisignaturedatabaseconfiguration"
+    },
+    "VZEFISignatureList": {
+      "doc": "A class that represents a Unified Extensible Firmware Interface (UEFI) signature list.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzefisignaturelist"
+    },
+    "VZEFISignatureSHA256Hash": {
+      "doc": "A class that represents a Unified Extensible Firmware Interface (UEFI) signature based on a SHA-256 cryptographic hash.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzefisignaturesha256hash"
+    },
+    "VZEFISignatureX509Certificate": {
+      "doc": "A class that represents a Unified Extensible Firmware Interface (UEFI) signature based on an X.509 certificate.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzefisignaturex509certificate"
     },
     "VZEFIVariableStore": {
       "doc": "An object that represents the Extensible Firmware Interface (EFI) variable store that contains NVRAM variables the EFI exposes.",
@@ -106,6 +138,14 @@
     "VZGraphicsDisplayConfiguration": {
       "doc": "The base class for a graphics display configuration.",
       "url": "https://developer.apple.com/documentation/virtualization/vzgraphicsdisplayconfiguration"
+    },
+    "VZGuestMemoryMapping": {
+      "doc": "An object that represents a chunk of the guest operating system’s dynamic random access memory (DRAM).",
+      "url": "https://developer.apple.com/documentation/virtualization/vzguestmemorymapping"
+    },
+    "VZGuestProvisioningOptions": {
+      "doc": "The base class for guest provisioning options.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzguestprovisioningoptions"
     },
     "VZHostAudioInputStreamSource": {
       "doc": "The host audio input stream source that provides audio from the host system’s default input device.",
@@ -162,6 +202,10 @@
     "VZMacGraphicsDisplayConfiguration": {
       "doc": "The configuration for a Mac graphics device.",
       "url": "https://developer.apple.com/documentation/virtualization/vzmacgraphicsdisplayconfiguration"
+    },
+    "VZMacGuestProvisioningOptions": {
+      "doc": "The configuration for guest setup during macOS virtual machine startup.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzmacguestprovisioningoptions"
     },
     "VZMacHardwareModel": {
       "doc": "A specification for the hardware elements and configurations present in a particular Mac hardware model.",
@@ -222,6 +266,10 @@
     "VZNVMExpressControllerDeviceConfiguration": {
       "doc": "The configuration object that represents an NVM Express Controller storage device.",
       "url": "https://developer.apple.com/documentation/virtualization/vznvmexpresscontrollerdeviceconfiguration"
+    },
+    "VZNegotiatedVirtioFeatureSet": {
+      "doc": "Values that represent a set of negotiated Virtio feature bits.",
+      "url": "https://developer.apple.com/documentation/virtualization/vznegotiatedvirtiofeatureset"
     },
     "VZNetworkBlockDeviceStorageDeviceAttachment": {
       "doc": "A storage device attachment backed by a Network Block Device (NBD) client.",
@@ -307,6 +355,12 @@
       "doc": "The configuration object that represents a USB Mass storage device.",
       "url": "https://developer.apple.com/documentation/virtualization/vzusbmassstoragedeviceconfiguration"
     },
+    "VZUSBPassthroughDevice": {
+      "url": "https://developer.apple.com/documentation/virtualization/vzusbpassthroughdevice"
+    },
+    "VZUSBPassthroughDeviceConfiguration": {
+      "url": "https://developer.apple.com/documentation/virtualization/vzusbpassthroughdeviceconfiguration"
+    },
     "VZUSBScreenCoordinatePointingDeviceConfiguration": {
       "doc": "An object that defines the configuration for a USB pointing device that reports absolute coordinates.",
       "url": "https://developer.apple.com/documentation/virtualization/vzusbscreencoordinatepointingdeviceconfiguration"
@@ -343,9 +397,17 @@
       "doc": "A class that represents a collection of Virtio console port configurations.",
       "url": "https://developer.apple.com/documentation/virtualization/vzvirtioconsoleportconfigurationarray"
     },
+    "VZVirtioDeviceSpecificConfiguration": {
+      "doc": "The device-specific configuration for a Virtio device",
+      "url": "https://developer.apple.com/documentation/virtualization/vzvirtiodevicespecificconfiguration"
+    },
     "VZVirtioEntropyDeviceConfiguration": {
       "doc": "A source of entropy for the guest’s random number generator.",
       "url": "https://developer.apple.com/documentation/virtualization/vzvirtioentropydeviceconfiguration"
+    },
+    "VZVirtioFeatureSet": {
+      "doc": "Values that represent a set of Virtio feature bits.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzvirtiofeatureset"
     },
     "VZVirtioFileSystemDevice": {
       "doc": "An object the defines a VIRTIO file system device.",
@@ -374,6 +436,22 @@
     "VZVirtioNetworkDeviceConfiguration": {
       "doc": "A configuration object that requests the creation of a network device for the guest system.",
       "url": "https://developer.apple.com/documentation/virtualization/vzvirtionetworkdeviceconfiguration"
+    },
+    "VZVirtioQueue": {
+      "doc": "A Virtio queue.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzvirtioqueue"
+    },
+    "VZVirtioQueueElement": {
+      "doc": "A unit of work on a Virtio queue, also known as a descriptor chain.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzvirtioqueueelement"
+    },
+    "VZVirtioSharedMemoryRegion": {
+      "doc": "A class that represents a Virtio shared memory region for a custom Virtio device in a virtual machine.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzvirtiosharedmemoryregion"
+    },
+    "VZVirtioSharedMemoryRegionConfiguration": {
+      "doc": "The configuration of a Virtio shared memory region.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzvirtiosharedmemoryregionconfiguration"
     },
     "VZVirtioSocketConnection": {
       "doc": "A port-based connection between the guest operating system and the host computer.",
@@ -445,6 +523,14 @@
     }
   },
   "protocols": {
+    "VZCustomVirtioDeviceConfigurationDelegate": {
+      "doc": "A class that conforms to the custom Virtio device configuration delegate protocol that can provide methods for tracking the state of a custom Virtio device configuration object.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzcustomvirtiodeviceconfigurationdelegate"
+    },
+    "VZCustomVirtioDeviceDelegate": {
+      "doc": "A delegate protocol that defines the methods you implement to respond to the life cycle events of a custom Virtio device.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzcustomvirtiodevicedelegate"
+    },
     "VZGraphicsDisplayObserver": {
       "doc": "A protocol you implement to observe state changes in graphic displays.",
       "url": "https://developer.apple.com/documentation/virtualization/vzgraphicsdisplayobserver"
@@ -525,14 +611,6 @@
         }
       }
     },
-    "VZEFIVariableStoreInitializationOptions": {
-      "doc": "Constants that describe the options available when creating a new Extensible Firmware Interface (EFI) variable store.",
-      "url": "https://developer.apple.com/documentation/virtualization/vzefivariablestoreinitializationoptions"
-    },
-    "VZErrorCode": {
-      "doc": "Errors you might encounter when configuring or using a virtual machine.",
-      "url": "https://developer.apple.com/documentation/virtualization/vzerrorcode"
-    },
     "VZLinuxRosettaAvailability": {
       "doc": "Constants that describe the availability and installation status of Rosetta.",
       "url": "https://developer.apple.com/documentation/virtualization/vzlinuxrosettaavailability",
@@ -550,14 +628,6 @@
           "url": "https://developer.apple.com/documentation/virtualization/vzlinuxrosettaavailability/notsupported"
         }
       }
-    },
-    "VZMacAuxiliaryStorageInitializationOptions": {
-      "doc": "Options you can set when creating new auxiliary storage.",
-      "url": "https://developer.apple.com/documentation/virtualization/vzmacauxiliarystorageinitializationoptions"
-    },
-    "VZVirtualMachineState": {
-      "doc": "The execution states of the VM.",
-      "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachinestate"
     }
   },
   "methods": {
@@ -565,6 +635,30 @@
       "-initWithInterface:": {
         "doc": "Creates the attachment from a bridged network interface object.",
         "url": "https://developer.apple.com/documentation/virtualization/vzbridgednetworkdeviceattachment/init(interface:)"
+      }
+    },
+    "VZCustomVirtioDevice": {
+      "-guestMemoryMappingAtPhysicalAddress:length:": {
+        "doc": "Returns guest memory mapping referred to by physicalAddress and length.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzcustomvirtiodevice/guestmemorymapping(atphysicaladdress:length:)"
+      },
+      "-queueAtIndex:": {
+        "doc": "Returns Virtio queue at the specified index that belongs to this device.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzcustomvirtiodevice/queue(at:)"
+      },
+      "-requestDeviceReset": {
+        "doc": "A request to reset the device.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzcustomvirtiodevice/requestreset()"
+      },
+      "-updateDeviceSpecificConfiguration:completionHandler:": {
+        "doc": "Updates the device’s device-specific configuration.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzcustomvirtiodevice/update(_:completionhandler:)"
+      }
+    },
+    "VZCustomVirtioDeviceDelegateProvider": {
+      "-initWithDeviceQueue:delegate:": {
+        "doc": "Creates a custom Virtio device delegate provider.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzcustomvirtiodevicedelegateprovider/init(devicequeue:delegate:)"
       }
     },
     "VZDiskBlockDeviceStorageDeviceAttachment": {
@@ -587,6 +681,34 @@
       "-init": {
         "doc": "Creates a new EFI boot loader.",
         "url": "https://developer.apple.com/documentation/virtualization/vzefibootloader/init()"
+      }
+    },
+    "VZEFISignatureDatabaseConfiguration": {
+      "-initWithKeyExchangeKeys:dbSignatures:dbxSignatures:": {
+        "doc": "Creates a signature lists container from signature list objects.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzefisignaturedatabaseconfiguration/init(keyexchangekeys:dbsignatures:dbxsignatures:)"
+      }
+    },
+    "VZEFISignatureList": {
+      "-initWithContentsOfURL:error:": {
+        "doc": "Creates a signature list from a file.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzefisignaturelist/init(contentsof:)"
+      },
+      "-initWithSignatures:": {
+        "doc": "Creates a signature list from the provided signatures.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzefisignaturelist/initwithsignatures:"
+      }
+    },
+    "VZEFISignatureSHA256Hash": {
+      "-initWithData:": {
+        "doc": "Creates a signature from SHA-256 hash data.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzefisignaturesha256hash/initwithdata:"
+      }
+    },
+    "VZEFISignatureX509Certificate": {
+      "-initWithCertificate:": {
+        "doc": "Creates a signature from an X.509 certificate.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzefisignaturex509certificate/initwithcertificate:"
       }
     },
     "VZEFIVariableStore": {
@@ -681,6 +803,12 @@
       "-removeObserver:": {
         "doc": "Removes a display configuration change observer.",
         "url": "https://developer.apple.com/documentation/virtualization/vzgraphicsdisplay/removeobserver(_:)"
+      }
+    },
+    "VZGuestProvisioningOptions": {
+      "-validateWithError:": {
+        "doc": "Validates the provisioning options.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzguestprovisioningoptions/validate()"
       }
     },
     "VZHostAudioInputStreamSource": {
@@ -969,6 +1097,12 @@
         "url": "https://developer.apple.com/documentation/virtualization/vzvirtioconsoleportconfigurationarray/subscript(_:)"
       }
     },
+    "VZVirtioDeviceSpecificConfiguration": {
+      "-initWithConfigurationData:": {
+        "doc": "Initializes a Virtio device specific configuration object with the configuration data you provide",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtiodevicespecificconfiguration/init(configurationdata:)"
+      }
+    },
     "VZVirtioEntropyDeviceConfiguration": {
       "-init": {
         "doc": "Creates an entropy device configuration object.",
@@ -1001,6 +1135,58 @@
       "-init": {
         "doc": "Creates a network device configuration object for you to configure.",
         "url": "https://developer.apple.com/documentation/virtualization/vzvirtionetworkdeviceconfiguration/init()"
+      }
+    },
+    "VZVirtioQueue": {
+      "-nextElement": {
+        "doc": "Gets the next element in this queue, if any.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtioqueue/nextelement()"
+      }
+    },
+    "VZVirtioQueueElement": {
+      "-peekIntoReadBuffersWithExactLength:error:": {
+        "doc": "Peeks into the read buffers and copy exactLength bytes from the read buffer into the data object it returns.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtioqueueelement/peekintoreadbuffers(withexactlength:)"
+      },
+      "-readBuffers": {
+        "doc": "Gets the remaining read buffers memory represented as an array of data.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtioqueueelement/readbuffers()"
+      },
+      "-readBytesIntoBuffer:exactLength:error:": {
+        "doc": "Reads the number of bytes you specify from the read buffers into the memory pointed to by the pointer to the buffer you provide.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtioqueueelement/readbytes(intobuffer:exactlength:)"
+      },
+      "-readBytesWithExactLength:error:": {
+        "doc": "Reads the number of bytes you specify from the read buffers and return result as a data object.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtioqueueelement/readbytes(withexactlength:)"
+      },
+      "-returnToQueue": {
+        "doc": "Returns this element back to the guest.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtioqueueelement/returntoqueue()"
+      },
+      "-writeBuffer:exactLength:error:": {
+        "doc": "Writes to the memory represented by the pointer to the buffer you provide to the write buffers.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtioqueueelement/writebuffer(_:exactlength:)"
+      },
+      "-writeData:error:": {
+        "doc": "Writes the memory represented by the data object you provide into the write buffers.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtioqueueelement/write(_:)"
+      }
+    },
+    "VZVirtioSharedMemoryRegion": {
+      "-mapMemory:atOffset:size:completionHandler:": {
+        "doc": "Maps a chunk of host memory into the shared memory region.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtiosharedmemoryregion/mapmemory(_:atoffset:size:completionhandler:)"
+      },
+      "-unmapMemoryAtOffset:size:completionHandler:": {
+        "doc": "Unmaps a chunk of host memory from the shared memory region.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtiosharedmemoryregion/unmapmemory(atoffset:size:completionhandler:)"
+      }
+    },
+    "VZVirtioSharedMemoryRegionConfiguration": {
+      "-initWithRegionID:size:": {
+        "doc": "Initializes a shared memory region with a shared memory region ID and size.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtiosharedmemoryregionconfiguration/init(regionid:size:)"
       }
     },
     "VZVirtioSocketConnection": {
@@ -1145,6 +1331,76 @@
         "url": "https://developer.apple.com/documentation/virtualization/vzconsoleportconfiguration/attachment"
       }
     },
+    "VZCustomVirtioDevice": {
+      "delegate": {
+        "doc": "The device’s delegate.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzcustomvirtiodevice/delegate"
+      },
+      "deviceQueue": {
+        "doc": "The dispatch queue this device uses.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzcustomvirtiodevice/devicequeue"
+      },
+      "negotiatedFeatures": {
+        "doc": "The set of features that the driver and the device have successfully negotiated, or nil if no feature negotiation has taken place.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzcustomvirtiodevice/negotiatedfeatures"
+      },
+      "sharedMemoryRegions": {
+        "doc": "An array of shared memory regions that this device exposes to the guest.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzcustomvirtiodevice/sharedmemoryregions"
+      }
+    },
+    "VZCustomVirtioDeviceConfiguration": {
+      "PCIClassID": {
+        "doc": "The PCI class ID of the device.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzcustomvirtiodeviceconfiguration/pciclassid"
+      },
+      "PCISubclassID": {
+        "doc": "The PCI subclass ID of the device.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzcustomvirtiodeviceconfiguration/pcisubclassid"
+      },
+      "deviceID": {
+        "doc": "The Virtio device ID of the device.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzcustomvirtiodeviceconfiguration/deviceid"
+      },
+      "deviceSpecificConfiguration": {
+        "doc": "The device-specific configuration for the device.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzcustomvirtiodeviceconfiguration/devicespecificconfiguration"
+      },
+      "mandatoryFeatures": {
+        "doc": "The set of mandatory features that the device offers and the guest must accept.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzcustomvirtiodeviceconfiguration/mandatoryfeatures"
+      },
+      "maximumAllowedSharedMemoryRegionCount": {
+        "doc": "The maximum number of Virtio shared memory regions the framework allows.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzcustomvirtiodeviceconfiguration/maximumallowedsharedmemoryregioncount"
+      },
+      "optionalFeatures": {
+        "doc": "The set of optional features that the device offers.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzcustomvirtiodeviceconfiguration/optionalfeatures"
+      },
+      "provider": {
+        "doc": "The custom Virtio device provider.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzcustomvirtiodeviceconfiguration/provider"
+      },
+      "sharedMemoryRegions": {
+        "doc": "The list of shared memory regions.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzcustomvirtiodeviceconfiguration/sharedmemoryregions"
+      },
+      "virtioQueueCount": {
+        "doc": "The number of virtqueues (Virtio queues) on this device.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzcustomvirtiodeviceconfiguration/virtioqueuecount"
+      }
+    },
+    "VZCustomVirtioDeviceDelegateProvider": {
+      "delegate": {
+        "doc": "The delegate object that implements the device.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzcustomvirtiodevicedelegateprovider/delegate"
+      },
+      "deviceQueue": {
+        "doc": "The queue the framework uses to synchronize operations for this device.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzcustomvirtiodevicedelegateprovider/devicequeue"
+      }
+    },
     "VZDiskBlockDeviceStorageDeviceAttachment": {
       "fileHandle": {
         "doc": "A file handle to a block device.",
@@ -1185,6 +1441,38 @@
       "variableStore": {
         "doc": "The boot loader’s EFI variable store.",
         "url": "https://developer.apple.com/documentation/virtualization/vzefibootloader/variablestore"
+      }
+    },
+    "VZEFISignatureDatabaseConfiguration": {
+      "dbSignatures": {
+        "doc": "Allowed signature database (db) entries.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzefisignaturedatabaseconfiguration/dbsignatures"
+      },
+      "dbxSignatures": {
+        "doc": "Forbidden signature database (dbx) entries.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzefisignaturedatabaseconfiguration/dbxsignatures"
+      },
+      "keyExchangeKeys": {
+        "doc": "Key Exchange Key (KEK) database entries.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzefisignaturedatabaseconfiguration/keyexchangekeys"
+      }
+    },
+    "VZEFISignatureList": {
+      "signatures": {
+        "doc": "An array of EFI signatures this signature list contains.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzefisignaturelist/signatures-78pcm"
+      }
+    },
+    "VZEFISignatureSHA256Hash": {
+      "data": {
+        "doc": "The SHA-256 hash data this signature contains.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzefisignaturesha256hash/data"
+      }
+    },
+    "VZEFISignatureX509Certificate": {
+      "certificate": {
+        "doc": "The X.509 certificate contained in this signature.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzefisignaturex509certificate/certificate"
       }
     },
     "VZEFIVariableStore": {
@@ -1265,6 +1553,20 @@
       "sizeInPixels": {
         "doc": "Returns the size of the display, in pixels.",
         "url": "https://developer.apple.com/documentation/virtualization/vzgraphicsdisplay/sizeinpixels"
+      }
+    },
+    "VZGuestMemoryMapping": {
+      "length": {
+        "doc": "The number of bytes contained by this guest memory mapping object.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzguestmemorymapping/length"
+      },
+      "mutableBytes": {
+        "doc": "A pointer to the data this guest memory mapping object contains.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzguestmemorymapping/mutablebytes"
+      },
+      "physicalAddress": {
+        "doc": "The guest’s physical memory base address of this guest memory mapping object.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzguestmemorymapping/physicaladdress"
       }
     },
     "VZLinuxBootLoader": {
@@ -1393,6 +1695,28 @@
         "url": "https://developer.apple.com/documentation/virtualization/vzmacgraphicsdisplayconfiguration/widthinpixels"
       }
     },
+    "VZMacGuestProvisioningOptions": {
+      "enablesRemoteLogin": {
+        "doc": "A Boolean value that indicates whether to enable Remote Login (using SSH) for the macOS virtual machine.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacguestprovisioningoptions/enablesremotelogin"
+      },
+      "fullName": {
+        "doc": "A person’s full name to configure for the macOS virtual machine.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacguestprovisioningoptions/fullname"
+      },
+      "logsInAutomatically": {
+        "doc": "A Boolean value that indicates whether to automatically log in the person at startup.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacguestprovisioningoptions/logsinautomatically"
+      },
+      "password": {
+        "doc": "The password to configure for the macOS virtual machine.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacguestprovisioningoptions/password"
+      },
+      "username": {
+        "doc": "The username for logging into the macOS virtual machine.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacguestprovisioningoptions/username"
+      }
+    },
     "VZMacHardwareModel": {
       "dataRepresentation": {
         "doc": "Returns the opaque data representation of the hardware model.",
@@ -1499,6 +1823,16 @@
       "directories": {
         "doc": "The directories on the host to expose to the guest.",
         "url": "https://developer.apple.com/documentation/virtualization/vzmultipledirectoryshare/directories"
+      }
+    },
+    "VZNegotiatedVirtioFeatureSet": {
+      "subset0": {
+        "doc": "The values that represent feature bits 0 through 31.",
+        "url": "https://developer.apple.com/documentation/virtualization/vznegotiatedvirtiofeatureset/subset0"
+      },
+      "subset1": {
+        "doc": "The value that represent feature bits 32 through 63.",
+        "url": "https://developer.apple.com/documentation/virtualization/vznegotiatedvirtiofeatureset/subset1"
       }
     },
     "VZNetworkBlockDeviceStorageDeviceAttachment": {
@@ -1643,6 +1977,22 @@
         "url": "https://developer.apple.com/documentation/virtualization/vzvirtioconsoleportconfigurationarray/maximumportcount"
       }
     },
+    "VZVirtioDeviceSpecificConfiguration": {
+      "configurationData": {
+        "doc": "The serialized device-specific configuration.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtiodevicespecificconfiguration/configurationdata"
+      }
+    },
+    "VZVirtioFeatureSet": {
+      "subset0": {
+        "doc": "An unsigned 32-bit integer that represents Virtio feature bits 0 through 31.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtiofeatureset/subset0"
+      },
+      "subset1": {
+        "doc": "An unsigned 32-bit integer that represents Virtio feature bits 32 through 63.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtiofeatureset/subset1"
+      }
+    },
     "VZVirtioFileSystemDevice": {
       "share": {
         "doc": "A value that defines the directory share the host exposes to the guest VM.",
@@ -1681,6 +2031,58 @@
       "widthInPixels": {
         "doc": "An integer value that describes the width of the graphics device in pixels.",
         "url": "https://developer.apple.com/documentation/virtualization/vzvirtiographicsscanoutconfiguration/widthinpixels"
+      }
+    },
+    "VZVirtioQueue": {
+      "queueIndex": {
+        "doc": "The index for this queue.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtioqueue/queueindex"
+      },
+      "queueSize": {
+        "doc": "Size of this queue.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtioqueue/queuesize"
+      }
+    },
+    "VZVirtioQueueElement": {
+      "readBuffersAvailableByteCount": {
+        "doc": "The size of the read buffers memory (in bytes) exposed by the Virtio queue element that’s currently available for reading.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtioqueueelement/readbuffersavailablebytecount"
+      },
+      "readBuffersByteCount": {
+        "doc": "The total size of the read buffers memory (in bytes) exposed by the Virtio queue element.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtioqueueelement/readbuffersbytecount"
+      },
+      "writeBuffersAvailableByteCount": {
+        "doc": "The size of the write buffers memory (in bytes) exposed by the Virtio queue element that’s currently available for writing.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtioqueueelement/writebuffersavailablebytecount"
+      },
+      "writeBuffersByteCount": {
+        "doc": "The total size of the write buffers memory (in bytes) exposed by the Virtio queue element.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtioqueueelement/writebuffersbytecount"
+      },
+      "writtenByteCount": {
+        "doc": "The size of the write buffers memory exposed (in bytes) by the Virtio queue element that has already been written to.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtioqueueelement/writtenbytecount"
+      }
+    },
+    "VZVirtioSharedMemoryRegion": {
+      "regionID": {
+        "doc": "The shared memory region ID.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtiosharedmemoryregion/regionid"
+      },
+      "size": {
+        "doc": "The size of the shared memory region.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtiosharedmemoryregion/size"
+      }
+    },
+    "VZVirtioSharedMemoryRegionConfiguration": {
+      "regionID": {
+        "doc": "The shared memory region ID.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtiosharedmemoryregionconfiguration/regionid"
+      },
+      "size": {
+        "doc": "The size of the shared memory region.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtiosharedmemoryregionconfiguration/size"
       }
     },
     "VZVirtioSocketConnection": {

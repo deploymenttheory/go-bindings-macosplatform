@@ -233,7 +233,7 @@ func (ua *UserActivity) GetContinuationStreamsWithCompletionHandler(completionHa
 	}))
 }
 
-// ActivityType returns the activity type.
+// ActivityType returns the activity type the user activity was created with.
 func (ua *UserActivity) ActivityType() string {
 	defer runtime.KeepAlive(ua)
 	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("activityType"))
@@ -243,7 +243,7 @@ func (ua *UserActivity) ActivityType() string {
 	return purego.GoString(_r)
 }
 
-// Title returns the title.
+// Title returns an optional, user-visible title for this activity, such as a document name or web page title.
 func (ua *UserActivity) Title() string {
 	defer runtime.KeepAlive(ua)
 	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("title"))
@@ -253,63 +253,64 @@ func (ua *UserActivity) Title() string {
 	return purego.GoString(_r)
 }
 
-// UserInfo returns the user info.
+// UserInfo returns the user info dictionary contains application-specific state needed to continue an activity on another device. Each key and value must be of the following types:
 func (ua *UserActivity) UserInfo() obj.Object {
 	defer runtime.KeepAlive(ua)
 	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)
 }
 
-// RequiredUserInfoKeys returns the order of the returned elements is unspecified.
+// RequiredUserInfoKeys returns the keys from the user info property which represent the minimal information about this user activity that should be stored for later restoration. A
 func (ua *UserActivity) RequiredUserInfoKeys() []string {
 	defer runtime.KeepAlive(ua)
 	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("requiredUserInfoKeys"))
 	return rt.NSSetToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// NeedsSave wraps the corresponding Objective-C method.
+// NeedsSave reports whether if set to
 func (ua *UserActivity) NeedsSave() bool {
 	defer runtime.KeepAlive(ua)
 	_r := objc.Send[bool](objref.IDOf(ua), objc.RegisterName("needsSave"))
 	return _r
 }
 
-// WebpageURL returns the webpage URL.
+// WebpageURL returns when no suitable application is installed on a resuming device and this is set, the user activity will instead be continued in a web browser by loading this resource.
 func (ua *UserActivity) WebpageURL() string {
 	defer runtime.KeepAlive(ua)
 	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("webpageURL"))
 	return rt.URLString(_r)
 }
 
-// ReferrerURL returns the referrer URL.
+// ReferrerURL returns the URL of the webpage that referred (linked to)
 func (ua *UserActivity) ReferrerURL() string {
 	defer runtime.KeepAlive(ua)
 	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("referrerURL"))
 	return rt.URLString(_r)
 }
 
-// ExpirationDate returns the expiration date.
+// ExpirationDate returns if non-nil, an absolute date after which this activity is no longer eligible to be indexed or handed off.
 func (ua *UserActivity) ExpirationDate() time.Time {
 	defer runtime.KeepAlive(ua)
 	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("expirationDate"))
 	return rt.NSDateToTime(_r)
 }
 
-// Keywords returns the order of the returned elements is unspecified.
+// Keywords returns a set of keywords, representing words or phrases in the current user’s language that might help the user to find this activity in the application history.
+// The order of the returned elements is unspecified.
 func (ua *UserActivity) Keywords() []string {
 	defer runtime.KeepAlive(ua)
 	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("keywords"))
 	return rt.NSSetToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SupportsContinuationStreams wraps the corresponding Objective-C method.
+// SupportsContinuationStreams reports whether when used for continuation, the user activity can allow the continuing side to connect back for more information using streams. This value is set to
 func (ua *UserActivity) SupportsContinuationStreams() bool {
 	defer runtime.KeepAlive(ua)
 	_r := objc.Send[bool](objref.IDOf(ua), objc.RegisterName("supportsContinuationStreams"))
 	return _r
 }
 
-// TargetContentIdentifier returns the target content identifier.
+// TargetContentIdentifier returns a string that identifies the content of this NSUserActivity, for matching against existing documents when re-opening to see if they are the same. Setting this property is optional and does not automatically set
 func (ua *UserActivity) TargetContentIdentifier() string {
 	defer runtime.KeepAlive(ua)
 	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("targetContentIdentifier"))
@@ -319,28 +320,28 @@ func (ua *UserActivity) TargetContentIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// IsEligibleForHandoff reports whether the object is eligible for handoff.
+// IsEligibleForHandoff reports whether set to
 func (ua *UserActivity) IsEligibleForHandoff() bool {
 	defer runtime.KeepAlive(ua)
 	_r := objc.Send[bool](objref.IDOf(ua), objc.RegisterName("isEligibleForHandoff"))
 	return _r
 }
 
-// IsEligibleForSearch reports whether the object is eligible for search.
+// IsEligibleForSearch reports whether set to
 func (ua *UserActivity) IsEligibleForSearch() bool {
 	defer runtime.KeepAlive(ua)
 	_r := objc.Send[bool](objref.IDOf(ua), objc.RegisterName("isEligibleForSearch"))
 	return _r
 }
 
-// IsEligibleForPublicIndexing reports whether the object is eligible for public indexing.
+// IsEligibleForPublicIndexing reports whether set to
 func (ua *UserActivity) IsEligibleForPublicIndexing() bool {
 	defer runtime.KeepAlive(ua)
 	_r := objc.Send[bool](objref.IDOf(ua), objc.RegisterName("isEligibleForPublicIndexing"))
 	return _r
 }
 
-// PersistentIdentifier returns the persistent identifier.
+// PersistentIdentifier returns a persistent identifier for this user activity.
 func (ua *UserActivity) PersistentIdentifier() *String {
 	defer runtime.KeepAlive(ua)
 	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("persistentIdentifier"))

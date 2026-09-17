@@ -349,6 +349,131 @@ func KColorSyncWaitForCacheReply() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kColorSyncWaitForCacheReply")))
 }
 
+// KColorSyncHeadroomAdaptiveGainCurveApplicationVersion returns the value of the constant kColorSyncHeadroomAdaptiveGainCurveApplicationVersion.
+func KColorSyncHeadroomAdaptiveGainCurveApplicationVersion() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kColorSyncHeadroomAdaptiveGainCurveApplicationVersion")))
+}
+
+// KColorSyncHeadroomAdaptiveGainCurveColorVolumeTransform returns the value of the constant kColorSyncHeadroomAdaptiveGainCurveColorVolumeTransform.
+func KColorSyncHeadroomAdaptiveGainCurveColorVolumeTransform() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kColorSyncHeadroomAdaptiveGainCurveColorVolumeTransform")))
+}
+
+// KColorSyncCustomHDRReferenceWhite returns the value of the constant kColorSyncCustomHDRReferenceWhite.
+func KColorSyncCustomHDRReferenceWhite() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kColorSyncCustomHDRReferenceWhite")))
+}
+
+// KColorSyncHeadroomAdaptiveToneMappingInfo returns the value of the constant kColorSyncHeadroomAdaptiveToneMappingInfo.
+func KColorSyncHeadroomAdaptiveToneMappingInfo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kColorSyncHeadroomAdaptiveToneMappingInfo")))
+}
+
+// KColorSyncBaselineHeadroomStops returns the value of the constant kColorSyncBaselineHeadroomStops.
+func KColorSyncBaselineHeadroomStops() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kColorSyncBaselineHeadroomStops")))
+}
+
+// KColorSyncHeadroomAdaptiveGainCurveInfo returns the value of the constant kColorSyncHeadroomAdaptiveGainCurveInfo.
+func KColorSyncHeadroomAdaptiveGainCurveInfo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kColorSyncHeadroomAdaptiveGainCurveInfo")))
+}
+
+// KColorSyncAlternateCurveCount returns the value of the constant kColorSyncAlternateCurveCount.
+func KColorSyncAlternateCurveCount() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kColorSyncAlternateCurveCount")))
+}
+
+// KColorSyncAlternateGainCurveInfo returns the value of the constant kColorSyncAlternateGainCurveInfo.
+func KColorSyncAlternateGainCurveInfo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kColorSyncAlternateGainCurveInfo")))
+}
+
+// KColorSyncGainCurveChromaticities returns the value of the constant kColorSyncGainCurveChromaticities.
+func KColorSyncGainCurveChromaticities() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kColorSyncGainCurveChromaticities")))
+}
+
+// KColorSyncCommonComponentMixing returns the value of the constant kColorSyncCommonComponentMixing.
+func KColorSyncCommonComponentMixing() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kColorSyncCommonComponentMixing")))
+}
+
+// KColorSyncCommonCurveParameters returns the value of the constant kColorSyncCommonCurveParameters.
+func KColorSyncCommonCurveParameters() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kColorSyncCommonCurveParameters")))
+}
+
+// KColorSyncAlternateCurveHeadroomStops returns the value of the constant kColorSyncAlternateCurveHeadroomStops.
+func KColorSyncAlternateCurveHeadroomStops() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kColorSyncAlternateCurveHeadroomStops")))
+}
+
+// KColorSyncComponentMix returns the value of the constant kColorSyncComponentMix.
+func KColorSyncComponentMix() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kColorSyncComponentMix")))
+}
+
+// KColorSyncComponentCoefficients returns the value of the constant kColorSyncComponentCoefficients.
+func KColorSyncComponentCoefficients() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kColorSyncComponentCoefficients")))
+}
+
+// KColorSyncCoefficientRed returns the value of the constant kColorSyncCoefficientRed.
+func KColorSyncCoefficientRed() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kColorSyncCoefficientRed")))
+}
+
+// KColorSyncCoefficientGreen returns the value of the constant kColorSyncCoefficientGreen.
+func KColorSyncCoefficientGreen() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kColorSyncCoefficientGreen")))
+}
+
+// KColorSyncCoefficientBlue returns the value of the constant kColorSyncCoefficientBlue.
+func KColorSyncCoefficientBlue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kColorSyncCoefficientBlue")))
+}
+
+// KColorSyncCoefficientMaxRGB returns the value of the constant kColorSyncCoefficientMaxRGB.
+func KColorSyncCoefficientMaxRGB() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kColorSyncCoefficientMaxRGB")))
+}
+
+// KColorSyncCoefficientMinRGB returns the value of the constant kColorSyncCoefficientMinRGB.
+func KColorSyncCoefficientMinRGB() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kColorSyncCoefficientMinRGB")))
+}
+
+// KColorSyncCoefficientComponent returns the value of the constant kColorSyncCoefficientComponent.
+func KColorSyncCoefficientComponent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kColorSyncCoefficientComponent")))
+}
+
+// KColorSyncMaxControlPointIndex returns the value of the constant kColorSyncMaxControlPointIndex.
+func KColorSyncMaxControlPointIndex() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kColorSyncMaxControlPointIndex")))
+}
+
+// KColorSyncInterpolateSlopes returns the value of the constant kColorSyncInterpolateSlopes.
+func KColorSyncInterpolateSlopes() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kColorSyncInterpolateSlopes")))
+}
+
+// KColorSyncControlPointsX returns the value of the constant kColorSyncControlPointsX.
+func KColorSyncControlPointsX() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kColorSyncControlPointsX")))
+}
+
+// KColorSyncControlPointsY returns the value of the constant kColorSyncControlPointsY.
+func KColorSyncControlPointsY() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kColorSyncControlPointsY")))
+}
+
+// KColorSyncControlPointSlopes returns the value of the constant kColorSyncControlPointSlopes.
+func KColorSyncControlPointSlopes() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kColorSyncControlPointSlopes")))
+}
+
 // KColorSyncProfile returns the value of the constant kColorSyncProfile.
 func KColorSyncProfile() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kColorSyncProfile"))) }
 

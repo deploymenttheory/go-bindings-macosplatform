@@ -157,7 +157,7 @@ func (ip *ItemProvider) CanLoadObjectOfClass(aClass unsafe.Pointer) bool {
 	return _r
 }
 
-// RegisteredTypeIdentifiers returns the registered type identifiers.
+// RegisteredTypeIdentifiers returns the array of type identifiers for the item provider, in the same order they were registered.
 //
 // RegisteredTypeIdentifiers returns the collection as a Go slice.
 func (ip *ItemProvider) RegisteredTypeIdentifiers() []string {
@@ -166,7 +166,7 @@ func (ip *ItemProvider) RegisteredTypeIdentifiers() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SuggestedName returns the suggested name.
+// SuggestedName returns the suggested name for the item.
 func (ip *ItemProvider) SuggestedName() string {
 	defer runtime.KeepAlive(ip)
 	_r := objc.Send[objc.ID](objref.IDOf(ip), objc.RegisterName("suggestedName"))

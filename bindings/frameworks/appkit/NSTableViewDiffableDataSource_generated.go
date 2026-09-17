@@ -16,8 +16,6 @@ import (
 )
 
 // TableViewDiffableDataSource is an idiomatic wrapper over the Objective-C class NSTableViewDiffableDataSource.
-//
-// The object you use to manage data and provide items for a table view.
 type TableViewDiffableDataSource struct {
 	objref.Handle
 }

@@ -13,6 +13,7 @@ import (
 // An object representing metrics about the use of the GPU.
 //
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxgpumetric
+// Deprecated: Use MetricResult instead.
 type MXGPUMetric struct {
 	MXMetric
 }

@@ -243,10 +243,19 @@ func _loadLibrary() {
 	_register("CMClockConvertHostTimeToSystemUnits", func() {
 		purego.RegisterLibFunc(&_fnCMClockConvertHostTimeToSystemUnits, _coremediaLib, "CMClockConvertHostTimeToSystemUnits")
 	})
+	_register("CMClockCreateGenlockClock", func() {
+		purego.RegisterLibFunc(&_fnCMClockCreateGenlockClock, _coremediaLib, "CMClockCreateGenlockClock")
+	})
 	_register("CMClockGetAnchorTime", func() { purego.RegisterLibFunc(&_fnCMClockGetAnchorTime, _coremediaLib, "CMClockGetAnchorTime") })
 	_register("CMClockGetHostTimeClock", func() { purego.RegisterLibFunc(&_fnCMClockGetHostTimeClock, _coremediaLib, "CMClockGetHostTimeClock") })
+	_register("CMClockGetPreferredStartTimePattern", func() {
+		purego.RegisterLibFunc(&_fnCMClockGetPreferredStartTimePattern, _coremediaLib, "CMClockGetPreferredStartTimePattern")
+	})
 	_register("CMClockGetTime", func() { purego.RegisterLibFunc(&_fnCMClockGetTime, _coremediaLib, "CMClockGetTime") })
 	_register("CMClockGetTypeID", func() { purego.RegisterLibFunc(&_fnCMClockGetTypeID, _coremediaLib, "CMClockGetTypeID") })
+	_register("CMClockImplementsGetPreferredStartTimePattern", func() {
+		purego.RegisterLibFunc(&_fnCMClockImplementsGetPreferredStartTimePattern, _coremediaLib, "CMClockImplementsGetPreferredStartTimePattern")
+	})
 	_register("CMClockInvalidate", func() { purego.RegisterLibFunc(&_fnCMClockInvalidate, _coremediaLib, "CMClockInvalidate") })
 	_register("CMClockMakeHostTimeFromSystemUnits", func() {
 		purego.RegisterLibFunc(&_fnCMClockMakeHostTimeFromSystemUnits, _coremediaLib, "CMClockMakeHostTimeFromSystemUnits")
@@ -292,6 +301,9 @@ func _loadLibrary() {
 		purego.RegisterLibFunc(&_fnCMFormatDescriptionGetTypeID, _coremediaLib, "CMFormatDescriptionGetTypeID")
 	})
 	_register("CMGetAttachment", func() { purego.RegisterLibFunc(&_fnCMGetAttachment, _coremediaLib, "CMGetAttachment") })
+	_register("CMIsAnyDisplaySynchronizedToLockedGenlockSignal", func() {
+		purego.RegisterLibFunc(&_fnCMIsAnyDisplaySynchronizedToLockedGenlockSignal, _coremediaLib, "CMIsAnyDisplaySynchronizedToLockedGenlockSignal")
+	})
 	_register("CMMemoryPoolCreate", func() { purego.RegisterLibFunc(&_fnCMMemoryPoolCreate, _coremediaLib, "CMMemoryPoolCreate") })
 	_register("CMMemoryPoolFlush", func() { purego.RegisterLibFunc(&_fnCMMemoryPoolFlush, _coremediaLib, "CMMemoryPoolFlush") })
 	_register("CMMemoryPoolGetAllocator", func() {

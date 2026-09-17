@@ -148,21 +148,21 @@ func (i *Invocation) InvokeUsingIMP(imp unsafe.Pointer) {
 	objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("invokeUsingIMP:"), imp)
 }
 
-// MethodSignature returns the method signature.
+// MethodSignature returns the receiver's method signature.
 func (i *Invocation) MethodSignature() *MethodSignature {
 	defer runtime.KeepAlive(i)
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("methodSignature"))
 	return MethodSignatureFromID(_r)
 }
 
-// ArgumentsRetained wraps the corresponding Objective-C method.
+// ArgumentsRetained reports whether a Boolean value that indicates if the receiver has retained its arguments.
 func (i *Invocation) ArgumentsRetained() bool {
 	defer runtime.KeepAlive(i)
 	_r := objc.Send[bool](objref.IDOf(i), objc.RegisterName("argumentsRetained"))
 	return _r
 }
 
-// Target returns the target.
+// Target returns the receiver's target, or `nil` if the receiver has no target. The target is the receiver of the message sent by `invoke`.
 func (i *Invocation) Target() obj.Object {
 	defer runtime.KeepAlive(i)
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("target"))

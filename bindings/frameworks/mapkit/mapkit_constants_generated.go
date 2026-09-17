@@ -22,6 +22,11 @@ func MKPointOfInterestCategoryAirport() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryAirport")))
 }
 
+// MKPointOfInterestCategoryAirportTerminal returns the string constant MKPointOfInterestCategoryAirportTerminal, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryAirportTerminal() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryAirportTerminal")))
+}
+
 // MKPointOfInterestCategoryAmusementPark returns the string constant MKPointOfInterestCategoryAmusementPark, for use as a dictionary key or argument.
 func MKPointOfInterestCategoryAmusementPark() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryAmusementPark")))
@@ -35,6 +40,11 @@ func MKPointOfInterestCategoryAquarium() obj.Object {
 // MKPointOfInterestCategoryATM returns the string constant MKPointOfInterestCategoryATM, for use as a dictionary key or argument.
 func MKPointOfInterestCategoryATM() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryATM")))
+}
+
+// MKPointOfInterestCategoryAutomotiveDealership returns the string constant MKPointOfInterestCategoryAutomotiveDealership, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryAutomotiveDealership() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryAutomotiveDealership")))
 }
 
 // MKPointOfInterestCategoryAutomotiveRepair returns the string constant MKPointOfInterestCategoryAutomotiveRepair, for use as a dictionary key or argument.
@@ -100,6 +110,11 @@ func MKPointOfInterestCategoryCarRental() obj.Object {
 // MKPointOfInterestCategoryCastle returns the string constant MKPointOfInterestCategoryCastle, for use as a dictionary key or argument.
 func MKPointOfInterestCategoryCastle() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryCastle")))
+}
+
+// MKPointOfInterestCategoryCommercialVehicleDealership returns the string constant MKPointOfInterestCategoryCommercialVehicleDealership, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryCommercialVehicleDealership() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryCommercialVehicleDealership")))
 }
 
 // MKPointOfInterestCategoryConventionCenter returns the string constant MKPointOfInterestCategoryConventionCenter, for use as a dictionary key or argument.
@@ -177,6 +192,11 @@ func MKPointOfInterestCategoryHotel() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryHotel")))
 }
 
+// MKPointOfInterestCategoryInformationBooth returns the string constant MKPointOfInterestCategoryInformationBooth, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryInformationBooth() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryInformationBooth")))
+}
+
 // MKPointOfInterestCategoryKayaking returns the string constant MKPointOfInterestCategoryKayaking, for use as a dictionary key or argument.
 func MKPointOfInterestCategoryKayaking() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryKayaking")))
@@ -210,6 +230,11 @@ func MKPointOfInterestCategoryMarina() obj.Object {
 // MKPointOfInterestCategoryMiniGolf returns the string constant MKPointOfInterestCategoryMiniGolf, for use as a dictionary key or argument.
 func MKPointOfInterestCategoryMiniGolf() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryMiniGolf")))
+}
+
+// MKPointOfInterestCategoryMotorbikeDealership returns the string constant MKPointOfInterestCategoryMotorbikeDealership, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryMotorbikeDealership() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryMotorbikeDealership")))
 }
 
 // MKPointOfInterestCategoryMovieTheater returns the string constant MKPointOfInterestCategoryMovieTheater, for use as a dictionary key or argument.
@@ -257,6 +282,11 @@ func MKPointOfInterestCategoryPharmacy() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryPharmacy")))
 }
 
+// MKPointOfInterestCategoryPicnicArea returns the string constant MKPointOfInterestCategoryPicnicArea, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryPicnicArea() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryPicnicArea")))
+}
+
 // MKPointOfInterestCategoryPlanetarium returns the string constant MKPointOfInterestCategoryPlanetarium, for use as a dictionary key or argument.
 func MKPointOfInterestCategoryPlanetarium() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryPlanetarium")))
@@ -277,6 +307,16 @@ func MKPointOfInterestCategoryPublicTransport() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryPublicTransport")))
 }
 
+// MKPointOfInterestCategoryRangerStation returns the string constant MKPointOfInterestCategoryRangerStation, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryRangerStation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryRangerStation")))
+}
+
+// MKPointOfInterestCategoryRestArea returns the string constant MKPointOfInterestCategoryRestArea, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryRestArea() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryRestArea")))
+}
+
 // MKPointOfInterestCategoryRestaurant returns the string constant MKPointOfInterestCategoryRestaurant, for use as a dictionary key or argument.
 func MKPointOfInterestCategoryRestaurant() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryRestaurant")))
@@ -295,6 +335,11 @@ func MKPointOfInterestCategoryRockClimbing() obj.Object {
 // MKPointOfInterestCategoryRVPark returns the string constant MKPointOfInterestCategoryRVPark, for use as a dictionary key or argument.
 func MKPointOfInterestCategoryRVPark() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryRVPark")))
+}
+
+// MKPointOfInterestCategoryScenicView returns the string constant MKPointOfInterestCategoryScenicView, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryScenicView() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryScenicView")))
 }
 
 // MKPointOfInterestCategorySchool returns the string constant MKPointOfInterestCategorySchool, for use as a dictionary key or argument.
@@ -357,9 +402,19 @@ func MKPointOfInterestCategoryTheater() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryTheater")))
 }
 
+// MKPointOfInterestCategoryTicketOffice returns the string constant MKPointOfInterestCategoryTicketOffice, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryTicketOffice() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryTicketOffice")))
+}
+
 // MKPointOfInterestCategoryUniversity returns the string constant MKPointOfInterestCategoryUniversity, for use as a dictionary key or argument.
 func MKPointOfInterestCategoryUniversity() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryUniversity")))
+}
+
+// MKPointOfInterestCategoryVisitorCenter returns the string constant MKPointOfInterestCategoryVisitorCenter, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryVisitorCenter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryVisitorCenter")))
 }
 
 // MKPointOfInterestCategoryWinery returns the string constant MKPointOfInterestCategoryWinery, for use as a dictionary key or argument.

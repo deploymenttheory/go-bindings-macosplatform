@@ -615,6 +615,14 @@ func (iv *ImageView) WithGestureRecognizers(items ...GestureRecognizerProvider) 
 	return iv
 }
 
+// WithExclusiveGestureBehavior sets declares whether gesture recognizers should be exclusive in this view and its subviews.
+func (iv *ImageView) WithExclusiveGestureBehavior(exclusiveGestureBehavior ViewExclusiveGestureBehavior) *ImageView {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setExclusiveGestureBehavior:"), exclusiveGestureBehavior)
+	})
+	return iv
+}
+
 // WithAllowedTouchTypes sets the allowed touch types.
 func (iv *ImageView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *ImageView {
 	purego.Main(func() {
@@ -676,6 +684,15 @@ func (iv *ImageView) WithHorizontalContentSizeConstraintActive(horizontalContent
 func (iv *ImageView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ImageView {
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
+	return iv
+}
+
+// WithTextSelectionManager sets the text selection manager for this view.
+func (iv *ImageView) WithTextSelectionManager(textSelectionManager *TextSelectionManager) *ImageView {
+	defer runtime.KeepAlive(textSelectionManager)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setTextSelectionManager:"), objref.IDOf(textSelectionManager))
 	})
 	return iv
 }

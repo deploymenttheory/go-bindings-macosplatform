@@ -65,7 +65,7 @@ func (o *VZDiskImageStorageDeviceAttachment) InitWithURLReadOnlyCachingModeSynch
 	return VZDiskImageStorageDeviceAttachmentFromID(_ret), nil
 }
 
-// @abstract URL of the underlying disk image.
+// @abstract URL of the underlying disk image. @discussion If the attachment was created with `initWithDiskImage:`, this is the URL of the top image in the stack.
 func (o *VZDiskImageStorageDeviceAttachment) URL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZDiskImageStorageDeviceAttachmentSelURL)
 	if _ret != 0 {

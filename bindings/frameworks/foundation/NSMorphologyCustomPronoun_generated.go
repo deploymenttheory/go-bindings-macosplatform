@@ -127,7 +127,7 @@ func (mcp *MorphologyCustomPronoun) WithScriptingProperties(scriptingProperties 
 	return mcp
 }
 
-// SubjectForm returns the subject form.
+// SubjectForm returns the subject pronoun form.
 func (mcp *MorphologyCustomPronoun) SubjectForm() string {
 	defer runtime.KeepAlive(mcp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("subjectForm"))
@@ -137,7 +137,7 @@ func (mcp *MorphologyCustomPronoun) SubjectForm() string {
 	return purego.GoString(_r)
 }
 
-// ObjectForm returns the object form.
+// ObjectForm returns the object pronoun form.
 func (mcp *MorphologyCustomPronoun) ObjectForm() string {
 	defer runtime.KeepAlive(mcp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("objectForm"))
@@ -147,7 +147,7 @@ func (mcp *MorphologyCustomPronoun) ObjectForm() string {
 	return purego.GoString(_r)
 }
 
-// PossessiveForm returns the possessive form.
+// PossessiveForm returns the possessive pronoun form.
 func (mcp *MorphologyCustomPronoun) PossessiveForm() string {
 	defer runtime.KeepAlive(mcp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("possessiveForm"))
@@ -167,7 +167,7 @@ func (mcp *MorphologyCustomPronoun) PossessiveAdjectiveForm() string {
 	return purego.GoString(_r)
 }
 
-// ReflexiveForm returns the reflexive form.
+// ReflexiveForm returns the reflexive pronoun form.
 func (mcp *MorphologyCustomPronoun) ReflexiveForm() string {
 	defer runtime.KeepAlive(mcp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("reflexiveForm"))

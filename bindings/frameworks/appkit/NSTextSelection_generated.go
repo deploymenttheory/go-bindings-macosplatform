@@ -122,7 +122,7 @@ func (ts *TextSelection) TextSelectionWithTextRanges(textRanges []*TextRange) *T
 	return TextSelectionFromID(_r)
 }
 
-// TextRanges returns the text ranges.
+// TextRanges returns an array of disjoint logical ranges in the selection. The array must be logically ordered. When editing, all ranges in a text selection constitute a single insertion point.
 //
 // TextRanges returns the collection as a Go slice.
 func (ts *TextSelection) TextRanges() []*TextRange {
@@ -131,42 +131,42 @@ func (ts *TextSelection) TextRanges() []*TextRange {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TextRange { return TextRangeFromID(_id) })
 }
 
-// Granularity returns the granularity.
+// Granularity returns the granularity of the selection. `NSTextSelectionGranularityCharacter` by default. Extending operations should modify the selection by the granularity.
 func (ts *TextSelection) Granularity() TextSelectionGranularity {
 	defer runtime.KeepAlive(ts)
 	_r := objc.Send[TextSelectionGranularity](objref.IDOf(ts), objc.RegisterName("granularity"))
 	return _r
 }
 
-// Affinity returns the affinity.
+// Affinity returns either upstream or downstream selection. `NSTextSelectionAffinityDownstream` by default. For a 0-length selection, it describes the visual location of the text cursor between the head of line containing the selection location (downstream) or tail of the previous line (upstream). For a selection with contents, it describes the logical direction of the non-anchored edge of the selection.
 func (ts *TextSelection) Affinity() TextSelectionAffinity {
 	defer runtime.KeepAlive(ts)
 	_r := objc.Send[TextSelectionAffinity](objref.IDOf(ts), objc.RegisterName("affinity"))
 	return _r
 }
 
-// IsTransient reports whether the object is transient.
+// IsTransient reports whether this is a transient text selection during drag handling.
 func (ts *TextSelection) IsTransient() bool {
 	defer runtime.KeepAlive(ts)
 	_r := objc.Send[bool](objref.IDOf(ts), objc.RegisterName("isTransient"))
 	return _r
 }
 
-// AnchorPositionOffset returns the anchor position offset.
+// AnchorPositionOffset returns the anchor position offset from the beginning of a line fragment in visual order. That is, from the left for a horizontal line fragment and from the top for a vertical. Navigating between lines uses this point when the current line fragment associated with the selection is shorter than the next line visited. The default value is `0.0`.
 func (ts *TextSelection) AnchorPositionOffset() float64 {
 	defer runtime.KeepAlive(ts)
 	_r := objc.Send[float64](objref.IDOf(ts), objc.RegisterName("anchorPositionOffset"))
 	return _r
 }
 
-// IsLogical reports whether the object is logical.
+// IsLogical reports whether the selection should be interpreted as logical or visual.
 func (ts *TextSelection) IsLogical() bool {
 	defer runtime.KeepAlive(ts)
 	_r := objc.Send[bool](objref.IDOf(ts), objc.RegisterName("isLogical"))
 	return _r
 }
 
-// TypingAttributes returns the typing attributes.
+// TypingAttributes returns the template attributes used for characters replacing the contents of this selection.
 func (ts *TextSelection) TypingAttributes() obj.Object {
 	defer runtime.KeepAlive(ts)
 	_r := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("typingAttributes"))

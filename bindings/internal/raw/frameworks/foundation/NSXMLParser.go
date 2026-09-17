@@ -11,7 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An event driven parser of XML documents (including DTD declarations).
+// An event driven parser of XML documents (including DTD declarations). An “XMLParser“ notifies its delegate about the items (elements, attributes, CDATA blocks, comments, and so on) that it encounters as it processes an XML document. It does not itself do anything with those parsed items except report them. It also reports parsing errors. For convenience, an “XMLParser“ object in the following descriptions is sometimes referred to as a parser object. Unless used in a callback, the “XMLParser“ is a thread-safe class as long as any given instance is only used in one thread. > Note: > Namespace support was implemented in “XMLParser“ starting in macOS 10.4. Namespace-related methods of “XMLParser“ prior to this version have no effect.
 //
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsxmlparser
 type NSXMLParser struct {
@@ -54,6 +54,7 @@ func NSXMLParserFromID(id objc.ID) *NSXMLParser {
 	return o
 }
 
+// Initializes a parser with the XML content referenced by the given URL. - Parameter url: An `NSURL` object specifying a URL. The URL must be fully qualified and refer to a scheme that is supported by the `NSURL` class. - Returns: An initialized `NSXMLParser` object or `nil` if an error occurs.
 func (o *NSXMLParser) InitWithContentsOfURL(url *NSURL) *NSXMLParser {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLParserSelInitWithContentsOfURL, url.Ptr())
 	if _ret != 0 {
@@ -62,6 +63,7 @@ func (o *NSXMLParser) InitWithContentsOfURL(url *NSURL) *NSXMLParser {
 	return NSXMLParserFromID(_ret)
 }
 
+// Initializes a parser with the XML contents encapsulated in a given data object. This method is the designated initializer. - Parameter data: An `NSData` object containing XML markup. - Returns: An initialized `NSXMLParser` object or `nil` if an error occurs.
 func (o *NSXMLParser) InitWithData(data *NSData) *NSXMLParser {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLParserSelInitWithData, data.Ptr())
 	if _ret != 0 {
@@ -70,6 +72,7 @@ func (o *NSXMLParser) InitWithData(data *NSData) *NSXMLParser {
 	return NSXMLParserFromID(_ret)
 }
 
+// Initializes a parser with the XML contents from the specified stream and parses it. - Parameter stream: The input stream. The content is incrementally loaded from the specified stream and parsed. The `NSXMLParser` will open the stream, and synchronously read from it without scheduling it. - Returns: An initialized `NSXMLParser` object or `nil` if an error occurs.
 func (o *NSXMLParser) InitWithStream(stream *NSInputStream) *NSXMLParser {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLParserSelInitWithStream, stream.Ptr())
 	if _ret != 0 {
@@ -78,15 +81,18 @@ func (o *NSXMLParser) InitWithStream(stream *NSInputStream) *NSXMLParser {
 	return NSXMLParserFromID(_ret)
 }
 
+// Starts the event-driven parsing operation. - Returns: `YES` if the parsing operation succeeds; `NO` if an error occurs or if the parsing operation aborts.
 func (o *NSXMLParser) Parse() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSXMLParserSelParse)
 	return _ret
 }
 
+// Stops the parser object. If you invoke this method, the delegate, if it implements `-parser:parseErrorOccurred:`, is informed of the cancelled parsing operation.
 func (o *NSXMLParser) AbortParsing() {
 	o.Ptr().Send(_nSXMLParserSelAbortParsing)
 }
 
+// A delegate object that receives messages about the parsing process. For methods to be implemented by the delegate, see `NSXMLParserDelegate`.
 func (o *NSXMLParser) Delegate() NSXMLParserDelegate {
 	_ret := objc.Send[NSXMLParserDelegate](o.Ptr(), _nSXMLParserSelDelegate)
 	return _ret
@@ -96,6 +102,7 @@ func (o *NSXMLParser) SetDelegate(delegate NSXMLParserDelegate) {
 	o.Ptr().Send(_nSXMLParserSelSetDelegate, delegate)
 }
 
+// A Boolean value that determines whether the parser reports the namespaces and qualified names of elements. `YES` if the parser reports namespace and qualified name, `NO` otherwise. The parser reports element names with the delegate methods `-parser:didStartElement:namespaceURI:qualifiedName:attributes:` and `-parser:didEndElement:namespaceURI:qualifiedName:`.
 func (o *NSXMLParser) ShouldProcessNamespaces() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSXMLParserSelShouldProcessNamespaces)
 	return _ret
@@ -105,6 +112,7 @@ func (o *NSXMLParser) SetShouldProcessNamespaces(shouldProcessNamespaces bool) {
 	o.Ptr().Send(_nSXMLParserSelSetShouldProcessNamespaces, shouldProcessNamespaces)
 }
 
+// A Boolean value that determines whether the parser reports the prefixes indicating the scope of namespace declarations. `YES` if the parser reports the scope of namespace declarations, `NO` otherwise. The default value is `NO`. The parser reports prefixes with the delegate methods `-parser:didStartMappingPrefix:toURI:` and `-parser:didEndMappingPrefix:`.
 func (o *NSXMLParser) ShouldReportNamespacePrefixes() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSXMLParserSelShouldReportNamespacePrefixes)
 	return _ret
@@ -114,6 +122,7 @@ func (o *NSXMLParser) SetShouldReportNamespacePrefixes(shouldReportNamespacePref
 	o.Ptr().Send(_nSXMLParserSelSetShouldReportNamespacePrefixes, shouldReportNamespacePrefixes)
 }
 
+// The external entity resolving policy for the parser. Defaults to `NSXMLParserResolveExternalEntitiesNever`.
 func (o *NSXMLParser) ExternalEntityResolvingPolicy() NSXMLParserExternalEntityResolvingPolicy {
 	_ret := objc.Send[NSXMLParserExternalEntityResolvingPolicy](o.Ptr(), _nSXMLParserSelExternalEntityResolvingPolicy)
 	return _ret
@@ -123,6 +132,7 @@ func (o *NSXMLParser) SetExternalEntityResolvingPolicy(externalEntityResolvingPo
 	o.Ptr().Send(_nSXMLParserSelSetExternalEntityResolvingPolicy, externalEntityResolvingPolicy)
 }
 
+// The set of external entity URLs that the parser is allowed to load.
 func (o *NSXMLParser) AllowedExternalEntityURLs() *NSSet[*NSURL] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLParserSelAllowedExternalEntityURLs)
 	if _ret != 0 {
@@ -135,11 +145,13 @@ func (o *NSXMLParser) SetAllowedExternalEntityURLs(allowedExternalEntityURLs *NS
 	o.Ptr().Send(_nSXMLParserSelSetAllowedExternalEntityURLs, allowedExternalEntityURLs.Ptr())
 }
 
+// An `NSError` object from which you can obtain information about a parsing error. You may access this property after a parsing operation abnormally terminates to determine the cause of error.
 func (o *NSXMLParser) ParserError() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSXMLParserSelParserError)
 	return _ret
 }
 
+// A Boolean value that determines whether the parser reports declarations of external entities. `YES` if the parser reports declarations of external entities, `NO` otherwise. The default value is `NO`. If you set this property to `YES`, you may cause other I/O operations, either network-based or disk-based, to load the external DTD. Toggles between disabling external entities entirely, and the current setting of the `externalEntityResolvingPolicy`. The `externalEntityResolvingPolicy` property should be used instead of this, unless targeting 10.9/7.0 or earlier.
 func (o *NSXMLParser) ShouldResolveExternalEntities() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSXMLParserSelShouldResolveExternalEntities)
 	return _ret
@@ -149,6 +161,7 @@ func (o *NSXMLParser) SetShouldResolveExternalEntities(shouldResolveExternalEnti
 	o.Ptr().Send(_nSXMLParserSelSetShouldResolveExternalEntities, shouldResolveExternalEntities)
 }
 
+// The public identifier of the external entity referenced in the XML document. You may access this property once a parsing operation has begun or after an error occurs.
 func (o *NSXMLParser) PublicID() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLParserSelPublicID)
 	if _ret != 0 {
@@ -157,6 +170,7 @@ func (o *NSXMLParser) PublicID() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The system identifier of the external entity referenced in the XML document. You may access this property once a parsing operation has begun or after an error occurs.
 func (o *NSXMLParser) SystemID() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLParserSelSystemID)
 	if _ret != 0 {
@@ -165,11 +179,13 @@ func (o *NSXMLParser) SystemID() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The line number of the XML document being processed by the parser. You may access this property once a parsing operation has begun or after an error occurs.
 func (o *NSXMLParser) LineNumber() int {
 	_ret := objc.Send[int](o.Ptr(), _nSXMLParserSelLineNumber)
 	return _ret
 }
 
+// The column number of the XML document being processed by the parser. The column refers to the nesting level of the XML elements in the document. You may access this property once a parsing operation has begun or after an error occurs.
 func (o *NSXMLParser) ColumnNumber() int {
 	_ret := objc.Send[int](o.Ptr(), _nSXMLParserSelColumnNumber)
 	return _ret

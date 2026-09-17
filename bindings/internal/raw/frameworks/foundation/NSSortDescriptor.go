@@ -132,6 +132,7 @@ func (o *NSSortDescriptor) CompareObjectToObject(object1 objc.ID, object2 objc.I
 	return _ret
 }
 
+// The key that specifies the property to compare during sorting.
 func (o *NSSortDescriptor) Key() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSortDescriptorSelKey)
 	if _ret != 0 {
@@ -140,21 +141,25 @@ func (o *NSSortDescriptor) Key() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// A Boolean value that indicates whether the receiver specifies sorting in ascending order. `YES` if the receiver specifies sorting in ascending order, otherwise `NO`.
 func (o *NSSortDescriptor) Ascending() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSSortDescriptorSelAscending)
 	return _ret
 }
 
+// The selector for comparing objects.
 func (o *NSSortDescriptor) Selector() objc.SEL {
 	_ret := objc.Send[objc.SEL](o.Ptr(), _nSSortDescriptorSelSelector)
 	return _ret
 }
 
+// The comparator for the sort descriptor. Call this property only for sort descriptors initialized with `initWithKey:ascending:comparator:`.
 func (o *NSSortDescriptor) Comparator() objc.Block {
 	_ret := objc.Send[objc.Block](o.Ptr(), _nSSortDescriptorSelComparator)
 	return _ret
 }
 
+// Returns a sort descriptor that reverses the sort order.
 func (o *NSSortDescriptor) ReversedSortDescriptor() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSortDescriptorSelReversedSortDescriptor)
 	return _ret

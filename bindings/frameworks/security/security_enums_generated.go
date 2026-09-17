@@ -656,6 +656,8 @@ const (
 	KSecCSApplyEmbeddedPolicy           SecCSFlags = 33554432
 	KSecCSStripDisallowedXattrs         SecCSFlags = 16777216
 	KSecCSMatchGuestRequirementInKernel SecCSFlags = 8388608
+	KSecCSUseClassicalSignature         SecCSFlags = 4194304
+	KSecCSUsePostQuantumSignature       SecCSFlags = 2097152
 )
 
 // String returns the SecCSFlags constant's name, or its numeric form when the
@@ -688,6 +690,12 @@ func (e SecCSFlags) String() string {
 	}
 	if e&KSecCSMatchGuestRequirementInKernel != 0 {
 		parts = append(parts, "KSecCSMatchGuestRequirementInKernel")
+	}
+	if e&KSecCSUseClassicalSignature != 0 {
+		parts = append(parts, "KSecCSUseClassicalSignature")
+	}
+	if e&KSecCSUsePostQuantumSignature != 0 {
+		parts = append(parts, "KSecCSUsePostQuantumSignature")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -3248,27 +3256,55 @@ func (e SecTrustSettingsResult) String() string {
 	}
 }
 
+type TaskSharedRegionStubs uint8
+
+const (
+	TaskSharedRegionStubsDev  TaskSharedRegionStubs = 1
+	TaskSharedRegionStubsProd TaskSharedRegionStubs = 2
+)
+
+// String returns the TaskSharedRegionStubs constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TaskSharedRegionStubs) String() string {
+	switch e {
+	case TaskSharedRegionStubsDev:
+		return "TaskSharedRegionStubsDev"
+	case TaskSharedRegionStubsProd:
+		return "TaskSharedRegionStubsProd"
+	default:
+		return fmt.Sprintf("TaskSharedRegionStubs(%d)", int64(e))
+	}
+}
+
 type VirtualMemoryGuardExceptionCode uint32
 
 const (
-	KGUARD_EXC_DEALLOC_GAP                   VirtualMemoryGuardExceptionCode = 1
-	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        VirtualMemoryGuardExceptionCode = 2
-	KGUARD_EXC_RECLAIM_INDEX_FAILURE         VirtualMemoryGuardExceptionCode = 4
-	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    VirtualMemoryGuardExceptionCode = 8
-	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    VirtualMemoryGuardExceptionCode = 9
-	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         VirtualMemoryGuardExceptionCode = 10
-	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         VirtualMemoryGuardExceptionCode = 11
-	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  VirtualMemoryGuardExceptionCode = 12
-	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    VirtualMemoryGuardExceptionCode = 13
-	KGUARD_EXC_SEC_ACCESS_FAULT              VirtualMemoryGuardExceptionCode = 98
-	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        VirtualMemoryGuardExceptionCode = 99
-	KGUARD_EXC_SEC_COPY_DENIED               VirtualMemoryGuardExceptionCode = 100
-	KGUARD_EXC_SEC_SHARING_DENIED            VirtualMemoryGuardExceptionCode = 101
-	KGUARD_EXC_MTE_SYNC_FAULT                VirtualMemoryGuardExceptionCode = 200
-	KGUARD_EXC_MTE_ASYNC_USER_FAULT          VirtualMemoryGuardExceptionCode = 201
-	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          VirtualMemoryGuardExceptionCode = 202
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT VirtualMemoryGuardExceptionCode = 203
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT VirtualMemoryGuardExceptionCode = 204
+	KGUARD_EXC_DEALLOC_GAP                  VirtualMemoryGuardExceptionCode = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE       VirtualMemoryGuardExceptionCode = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE        VirtualMemoryGuardExceptionCode = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE   VirtualMemoryGuardExceptionCode = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE   VirtualMemoryGuardExceptionCode = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE        VirtualMemoryGuardExceptionCode = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE        VirtualMemoryGuardExceptionCode = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION VirtualMemoryGuardExceptionCode = 12
+	// Guard exception sent to a thread when a CoW defeatured map attempts to copy memory which is not permitted by system policy.
+	KGUARD_EXC_COW_DEFEATURED_COPY_DENIED VirtualMemoryGuardExceptionCode = 13
+	// Guard exception sent to a thread when it attempts to extract a given type of memory in a way which is not permitted for CoW defeatured maps.
+	KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED VirtualMemoryGuardExceptionCode = 14
+	// Guard exception sent to a thread when it attempts to copy-map a memory entry which was created for sharing by a CoW defeatured map.
+	KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED VirtualMemoryGuardExceptionCode = 15
+	KGUARD_EXC_COW_DEFEATURED_FIRST                    VirtualMemoryGuardExceptionCode = 13
+	KGUARD_EXC_COW_DEFEATURED_LAST                     VirtualMemoryGuardExceptionCode = 15
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY              VirtualMemoryGuardExceptionCode = 16
+	KGUARD_EXC_SEC_ACCESS_FAULT                        VirtualMemoryGuardExceptionCode = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT                  VirtualMemoryGuardExceptionCode = 99
+	KGUARD_EXC_SEC_COPY_DENIED                         VirtualMemoryGuardExceptionCode = 100
+	KGUARD_EXC_SEC_SHARING_DENIED                      VirtualMemoryGuardExceptionCode = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                          VirtualMemoryGuardExceptionCode = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT                    VirtualMemoryGuardExceptionCode = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT                    VirtualMemoryGuardExceptionCode = 202
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT           VirtualMemoryGuardExceptionCode = 203
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT           VirtualMemoryGuardExceptionCode = 204
 )
 
 // String returns the VirtualMemoryGuardExceptionCode constant's name, or its numeric form when the
@@ -3291,6 +3327,12 @@ func (e VirtualMemoryGuardExceptionCode) String() string {
 		return "KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE"
 	case KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION:
 		return "KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION"
+	case KGUARD_EXC_COW_DEFEATURED_COPY_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_COPY_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED"
 	case KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY:
 		return "KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY"
 	case KGUARD_EXC_SEC_ACCESS_FAULT:
@@ -5317,6 +5359,7 @@ const (
 	ErrSecCSDBDenied                                = -67033
 	ErrSecCSDSStoreSymlink                          = -67012
 	ErrSecCSDbCorrupt                               = -67024
+	ErrSecCSDetachedCertificates                    = -66985
 	ErrSecCSFileHardQuarantined                     = -67026
 	ErrSecCSGuestInvalid                            = -67063
 	ErrSecCSHelperFailed                            = -67019
@@ -5341,6 +5384,7 @@ const (
 	ErrSecCSInvalidSymlink                          = -67003
 	ErrSecCSInvalidTeamIdentifier                   = -66998
 	ErrSecCSMultipleGuests                          = -67064
+	ErrSecCSMultipleSelfSigning                     = -66986
 	ErrSecCSNoMainExecutable                        = -67029
 	ErrSecCSNoMatches                               = -67027
 	ErrSecCSNoSuchCode                              = -67065
@@ -5351,6 +5395,8 @@ const (
 	ErrSecCSOutdated                                = -67025
 	ErrSecCSRegularFile                             = -67015
 	ErrSecCSRemoteSignerFailed                      = -66990
+	ErrSecCSRemoteSignerFirstSlotFull               = -66989
+	ErrSecCSRemoteSignerSecondSlotFull              = -66988
 	ErrSecCSReqFailed                               = -67050
 	ErrSecCSReqInvalid                              = -67052
 	ErrSecCSReqUnsupported                          = -67051
@@ -5376,6 +5422,7 @@ const (
 	ErrSecCSUnsealedFrameworkRoot                   = -67008
 	ErrSecCSUnsigned                                = -67062
 	ErrSecCSUnsignedNestedCode                      = -67022
+	ErrSecCSUnsupportedAlgorithm                    = -66987
 	ErrSecCSUnsupportedDigestAlgorithm              = -67000
 	ErrSecCSUnsupportedGuestAttributes              = -67067
 	ErrSecCSVetoed                                  = -67018
@@ -5761,6 +5808,7 @@ const (
 	KSecCSFullReport                          = 32
 	KSecCSGenerateGuestHash                   = 2
 	KSecCSInternalInformation                 = 1
+	KSecCSMaxSignatures                       = 2
 	KSecCSRequirementInformation              = 4
 	KSecCSRestrictSidebandData                = 512
 	KSecCSRestrictSymlinks                    = 128

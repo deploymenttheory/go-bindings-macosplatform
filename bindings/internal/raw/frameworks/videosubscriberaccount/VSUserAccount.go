@@ -10,8 +10,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An object that represents a user’s account.
-//
 // Apple documentation: https://developer.apple.com/documentation/videosubscriberaccount/vsuseraccount
 type VSUserAccount struct {
 	foundation.NSObject

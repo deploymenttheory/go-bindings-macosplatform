@@ -19,13 +19,10 @@ type NSTextStorage struct {
 
 var (
 	_clsNSTextStorage                                = _objcClass("NSTextStorage")
-	_nSTextStorageSelAddLayoutManager                = objc.RegisterName("addLayoutManager:")
-	_nSTextStorageSelRemoveLayoutManager             = objc.RegisterName("removeLayoutManager:")
 	_nSTextStorageSelEditedRangeChangeInLength       = objc.RegisterName("edited:range:changeInLength:")
 	_nSTextStorageSelProcessEditing                  = objc.RegisterName("processEditing")
 	_nSTextStorageSelInvalidateAttributesInRange     = objc.RegisterName("invalidateAttributesInRange:")
 	_nSTextStorageSelEnsureAttributesAreFixedInRange = objc.RegisterName("ensureAttributesAreFixedInRange:")
-	_nSTextStorageSelLayoutManagers                  = objc.RegisterName("layoutManagers")
 	_nSTextStorageSelEditedMask                      = objc.RegisterName("editedMask")
 	_nSTextStorageSelEditedRange                     = objc.RegisterName("editedRange")
 	_nSTextStorageSelChangeInLength                  = objc.RegisterName("changeInLength")
@@ -34,6 +31,9 @@ var (
 	_nSTextStorageSelFixesAttributesLazily           = objc.RegisterName("fixesAttributesLazily")
 	_nSTextStorageSelTextStorageObserver             = objc.RegisterName("textStorageObserver")
 	_nSTextStorageSelSetTextStorageObserver          = objc.RegisterName("setTextStorageObserver:")
+	_nSTextStorageSelAddLayoutManager                = objc.RegisterName("addLayoutManager:")
+	_nSTextStorageSelRemoveLayoutManager             = objc.RegisterName("removeLayoutManager:")
+	_nSTextStorageSelLayoutManagers                  = objc.RegisterName("layoutManagers")
 	_nSTextStorageSelAttributeRuns                   = objc.RegisterName("attributeRuns")
 	_nSTextStorageSelSetAttributeRuns                = objc.RegisterName("setAttributeRuns:")
 	_nSTextStorageSelParagraphs                      = objc.RegisterName("paragraphs")
@@ -58,16 +58,6 @@ func NSTextStorageFromID(id objc.ID) *NSTextStorage {
 	return o
 }
 
-// Adds a layout manager to the text storage object’s set of layout managers.
-func (o *NSTextStorage) AddLayoutManager(aLayoutManager *NSLayoutManager) {
-	o.Ptr().Send(_nSTextStorageSelAddLayoutManager, aLayoutManager.Ptr())
-}
-
-// Removes a layout manager from the text storage object’s set of layout managers.
-func (o *NSTextStorage) RemoveLayoutManager(aLayoutManager *NSLayoutManager) {
-	o.Ptr().Send(_nSTextStorageSelRemoveLayoutManager, aLayoutManager.Ptr())
-}
-
 // Tracks changes made to the text storage object, allowing the text storage to record the full extent of changes.
 func (o *NSTextStorage) EditedRangeChangeInLength(editedMask NSTextStorageEditActions, editedRange foundation.NSRange, delta int) {
 	o.Ptr().Send(_nSTextStorageSelEditedRangeChangeInLength, editedMask, editedRange, delta)
@@ -88,29 +78,25 @@ func (o *NSTextStorage) EnsureAttributesAreFixedInRange(range_ foundation.NSRang
 	o.Ptr().Send(_nSTextStorageSelEnsureAttributesAreFixedInRange, range_)
 }
 
-func (o *NSTextStorage) LayoutManagers() *foundation.NSArray[*NSLayoutManager] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextStorageSelLayoutManagers)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*NSLayoutManager](_ret)
-}
-
+// A mask that describes the kinds of edits pending for the text storage object.
 func (o *NSTextStorage) EditedMask() NSTextStorageEditActions {
 	_ret := objc.Send[NSTextStorageEditActions](o.Ptr(), _nSTextStorageSelEditedMask)
 	return _ret
 }
 
+// The range of text that contains changes. `{NSNotFound, 0}` when there is no pending changes.
 func (o *NSTextStorage) EditedRange() foundation.NSRange {
 	_ret := objc.Send[foundation.NSRange](o.Ptr(), _nSTextStorageSelEditedRange)
 	return _ret
 }
 
+// The difference between the current length of the edited range and its length before editing.
 func (o *NSTextStorage) ChangeInLength() int {
 	_ret := objc.Send[int](o.Ptr(), _nSTextStorageSelChangeInLength)
 	return _ret
 }
 
+// The delegate for the text storage object.
 func (o *NSTextStorage) Delegate() NSTextStorageDelegate {
 	_ret := objc.Send[NSTextStorageDelegate](o.Ptr(), _nSTextStorageSelDelegate)
 	return _ret
@@ -120,11 +106,13 @@ func (o *NSTextStorage) SetDelegate(delegate NSTextStorageDelegate) {
 	o.Ptr().Send(_nSTextStorageSelSetDelegate, delegate)
 }
 
+// A Boolean value that indicates whether the receiver fixes invalidated attributes lazily. The concrete UIKit subclass fixes attributes lazily by default. The abstract class (hence, all custom subclasses) is not lazy.
 func (o *NSTextStorage) FixesAttributesLazily() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTextStorageSelFixesAttributesLazily)
 	return _ret
 }
 
+// ************************** NSTextStorageObserving *************************** An object conforming to `NSTextStorageObserving` that observes and retains the text storage.
 func (o *NSTextStorage) TextStorageObserver() NSTextStorageObserving {
 	_ret := objc.Send[NSTextStorageObserving](o.Ptr(), _nSTextStorageSelTextStorageObserver)
 	return _ret
@@ -132,6 +120,24 @@ func (o *NSTextStorage) TextStorageObserver() NSTextStorageObserving {
 
 func (o *NSTextStorage) SetTextStorageObserver(textStorageObserver NSTextStorageObserving) {
 	o.Ptr().Send(_nSTextStorageSelSetTextStorageObserver, textStorageObserver)
+}
+
+// Adds a layout manager to the text storage object’s set of layout managers.
+func (o *NSTextStorage) AddLayoutManager(aLayoutManager *NSLayoutManager) {
+	o.Ptr().Send(_nSTextStorageSelAddLayoutManager, aLayoutManager.Ptr())
+}
+
+// Removes a layout manager from the text storage object’s set of layout managers.
+func (o *NSTextStorage) RemoveLayoutManager(aLayoutManager *NSLayoutManager) {
+	o.Ptr().Send(_nSTextStorageSelRemoveLayoutManager, aLayoutManager.Ptr())
+}
+
+func (o *NSTextStorage) LayoutManagers() *foundation.NSArray[*NSLayoutManager] {
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextStorageSelLayoutManagers)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*NSLayoutManager](_ret)
 }
 
 func (o *NSTextStorage) AttributeRuns() *foundation.NSArray[*NSTextStorage] {

@@ -10,8 +10,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A relationship between two records in a record zone.
-//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/ckreference
 type CKReference struct {
 	foundation.NSObject

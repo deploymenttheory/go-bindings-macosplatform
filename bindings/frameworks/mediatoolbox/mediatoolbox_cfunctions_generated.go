@@ -26,6 +26,17 @@ func MTAudioProcessingTapCreate(allocator corefoundation.CFAllocatorRef, callbac
 	return int(_fnMTAudioProcessingTapCreate(objref.IDOf(allocator.Object), callbacks, flags, tapOut))
 }
 
+var _fnMTAudioProcessingTapCreateWithPreferredFormat func(objc.ID, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
+
+// MTAudioProcessingTapCreateWithPreferredFormat calls the MediaToolbox framework function MTAudioProcessingTapCreateWithPreferredFormat.
+func MTAudioProcessingTapCreateWithPreferredFormat(allocator corefoundation.CFAllocatorRef, callbacks unsafe.Pointer, flags uint32, preferredFormat unsafe.Pointer, tapOut unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMTAudioProcessingTapCreateWithPreferredFormat == nil {
+		ebipurego.RegisterLibFunc(&_fnMTAudioProcessingTapCreateWithPreferredFormat, _lib, "MTAudioProcessingTapCreateWithPreferredFormat")
+	}
+	return int(_fnMTAudioProcessingTapCreateWithPreferredFormat(objref.IDOf(allocator.Object), callbacks, flags, preferredFormat, tapOut))
+}
+
 var _fnMTAudioProcessingTapGetSourceAudio func(objc.ID, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // MTAudioProcessingTapGetSourceAudio calls the MediaToolbox framework function MTAudioProcessingTapGetSourceAudio.

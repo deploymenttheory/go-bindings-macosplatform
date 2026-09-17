@@ -463,6 +463,12 @@ func MPSCNNYOLOLossNodeNodeWithSourceLossDescriptor(source obj.Object, descripto
 	return CNNYOLOLossNodeFromID(_r)
 }
 
+// MPSFunctionSupportsSecureCoding reports whether part of the NSSecureCoding
+func MPSFunctionSupportsSecureCoding() bool {
+	_r := objc.Send[bool](objc.ID(_class("MPSFunction")), objc.RegisterName("supportsSecureCoding"))
+	return _r
+}
+
 // CreateGRUDescriptorWithInputFeatureChannelsOutputFeatureChannels creates a GRU descriptor.
 func CreateGRUDescriptorWithInputFeatureChannelsOutputFeatureChannels(inputFeatureChannels int, outputFeatureChannels int) *GRUDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSGRUDescriptor")), objc.RegisterName("createGRUDescriptorWithInputFeatureChannels:outputFeatureChannels:"), inputFeatureChannels, outputFeatureChannels)

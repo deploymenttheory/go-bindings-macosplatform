@@ -57,9 +57,6 @@ func _loadLibrary() {
 	_register("PGMaxDisplayPortCount", func() {
 		purego.RegisterLibFunc(&_fnPGMaxDisplayPortCount, _paravirtualizedgraphicsLib, "PGMaxDisplayPortCount")
 	})
-	_register("PGNewDeviceWithDescriptor", func() {
-		purego.RegisterLibFunc(&_fnPGNewDeviceWithDescriptor, _paravirtualizedgraphicsLib, "PGNewDeviceWithDescriptor")
-	})
 }
 
 func init() {

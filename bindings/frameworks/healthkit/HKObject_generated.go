@@ -6,7 +6,6 @@ package healthkit
 
 import (
 	"runtime"
-	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -85,10 +84,10 @@ func (o *Object) UUID() *foundation.UUID {
 }
 
 // Source returns the source.
-func (o *Object) Source() unsafe.Pointer {
+func (o *Object) Source() *Source {
 	defer runtime.KeepAlive(o)
-	_r := objc.Send[unsafe.Pointer](objref.IDOf(o), objc.RegisterName("source"))
-	return _r
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("source"))
+	return SourceFromID(_r)
 }
 
 // SourceRevision represents the revision of the source responsible for saving the receiver.

@@ -219,7 +219,7 @@ func MTRBaseClusterWindowCoveringFromID(id objc.ID) *MTRBaseClusterWindowCoverin
 	return o
 }
 
-// Command UpOrOpen Moves window covering to InstalledOpenLimitLift and InstalledOpenLimitTilt
+// Command UpOrOpen Upon receipt of this command, the window covering will adjust its position so the physical lift/slide and tilt is at the maximum open/up position.
 func (o *MTRBaseClusterWindowCovering) UpOrOpenWithParamsCompletion(params *MTRWindowCoveringClusterUpOrOpenParams, completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -242,7 +242,7 @@ func (o *MTRBaseClusterWindowCovering) UpOrOpenWithCompletion(completion func(un
 	o.Ptr().Send(_mTRBaseClusterWindowCoveringSelUpOrOpenWithCompletion, __block_completion)
 }
 
-// Command DownOrClose Moves window covering to InstalledClosedLimitLift and InstalledCloseLimitTilt
+// Command DownOrClose Upon receipt of this command, the window covering will adjust its position so the physical lift/slide and tilt is at the maximum closed/down position.
 func (o *MTRBaseClusterWindowCovering) DownOrCloseWithParamsCompletion(params *MTRWindowCoveringClusterDownOrCloseParams, completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -265,7 +265,7 @@ func (o *MTRBaseClusterWindowCovering) DownOrCloseWithCompletion(completion func
 	o.Ptr().Send(_mTRBaseClusterWindowCoveringSelDownOrCloseWithCompletion, __block_completion)
 }
 
-// Command StopMotion Stop any adjusting of window covering
+// Command StopMotion Upon receipt of this command, the window covering will stop any adjusting to the physical tilt and lift/slide that is currently occurring.
 func (o *MTRBaseClusterWindowCovering) StopMotionWithParamsCompletion(params *MTRWindowCoveringClusterStopMotionParams, completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -300,7 +300,7 @@ func (o *MTRBaseClusterWindowCovering) GoToLiftValueWithParamsCompletion(params 
 	o.Ptr().Send(_mTRBaseClusterWindowCoveringSelGoToLiftValueWithParamsCompletion, params.Ptr(), __block_completion)
 }
 
-// Command GoToLiftPercentage Go to lift percentage specified
+// Command GoToLiftPercentage This command is used to set the target lift position of the window covering to the percentage value specified in the command.
 func (o *MTRBaseClusterWindowCovering) GoToLiftPercentageWithParamsCompletion(params *MTRWindowCoveringClusterGoToLiftPercentageParams, completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -324,7 +324,7 @@ func (o *MTRBaseClusterWindowCovering) GoToTiltValueWithParamsCompletion(params 
 	o.Ptr().Send(_mTRBaseClusterWindowCoveringSelGoToTiltValueWithParamsCompletion, params.Ptr(), __block_completion)
 }
 
-// Command GoToTiltPercentage Go to tilt percentage specified
+// Command GoToTiltPercentage This command is used to set the target tilt position of the window covering to the percentage value specified in the command.
 func (o *MTRBaseClusterWindowCovering) GoToTiltPercentageWithParamsCompletion(params *MTRWindowCoveringClusterGoToTiltPercentageParams, completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {

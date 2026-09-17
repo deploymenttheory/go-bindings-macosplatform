@@ -86,16 +86,19 @@ func (o *NSComparisonPredicate) InitWithCoder(coder *NSCoder) *NSComparisonPredi
 	return NSComparisonPredicateFromID(_ret)
 }
 
+// The predicate type for the receiver.
 func (o *NSComparisonPredicate) PredicateOperatorType() NSPredicateOperatorType {
 	_ret := objc.Send[NSPredicateOperatorType](o.Ptr(), _nSComparisonPredicateSelPredicateOperatorType)
 	return _ret
 }
 
+// The comparison predicate modifier for the receiver. The default value is `NSDirectPredicateModifier`.
 func (o *NSComparisonPredicate) ComparisonPredicateModifier() NSComparisonPredicateModifier {
 	_ret := objc.Send[NSComparisonPredicateModifier](o.Ptr(), _nSComparisonPredicateSelComparisonPredicateModifier)
 	return _ret
 }
 
+// The left expression for the receiver.
 func (o *NSComparisonPredicate) LeftExpression() *NSExpression {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSComparisonPredicateSelLeftExpression)
 	if _ret != 0 {
@@ -104,6 +107,7 @@ func (o *NSComparisonPredicate) LeftExpression() *NSExpression {
 	return NSExpressionFromID(_ret)
 }
 
+// The right expression for the receiver.
 func (o *NSComparisonPredicate) RightExpression() *NSExpression {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSComparisonPredicateSelRightExpression)
 	if _ret != 0 {
@@ -112,11 +116,13 @@ func (o *NSComparisonPredicate) RightExpression() *NSExpression {
 	return NSExpressionFromID(_ret)
 }
 
+// The selector for the receiver, or `NULL` if there is none.
 func (o *NSComparisonPredicate) CustomSelector() objc.SEL {
 	_ret := objc.Send[objc.SEL](o.Ptr(), _nSComparisonPredicateSelCustomSelector)
 	return _ret
 }
 
+// The options to use for the receiver.
 func (o *NSComparisonPredicate) Options() NSComparisonPredicateOptions {
 	_ret := objc.Send[NSComparisonPredicateOptions](o.Ptr(), _nSComparisonPredicateSelOptions)
 	return _ret

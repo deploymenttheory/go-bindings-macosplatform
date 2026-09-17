@@ -15,8 +15,6 @@ import (
 )
 
 // AuthorizationPublicKeyCredentialLargeBlobAssertionOutput is an idiomatic wrapper over the Objective-C class ASAuthorizationPublicKeyCredentialLargeBlobAssertionOutput.
-//
-// A type to represent the output of the requested large binary object operation, which returns in a passkey sign-in response.
 type AuthorizationPublicKeyCredentialLargeBlobAssertionOutput struct {
 	objref.Handle
 }

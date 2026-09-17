@@ -338,6 +338,7 @@ func (o *NSResponder) SwipeWithEvent(event *NSEvent) {
 }
 
 // Informs the receiver that the user has begun a touch gesture.
+// Deprecated: Begin/end gesture events are no longer delivered. Use the phase property on NSEvent or NSGestureRecognizer instead.
 func (o *NSResponder) BeginGestureWithEvent(event *NSEvent) {
 	purego.Main(func() {
 		o.Ptr().Send(_nSResponderSelBeginGestureWithEvent, event.Ptr())
@@ -345,6 +346,7 @@ func (o *NSResponder) BeginGestureWithEvent(event *NSEvent) {
 }
 
 // Informs the receiver that the user has ended a touch gesture.
+// Deprecated: Begin/end gesture events are no longer delivered. Use the phase property on NSEvent or NSGestureRecognizer instead.
 func (o *NSResponder) EndGestureWithEvent(event *NSEvent) {
 	purego.Main(func() {
 		o.Ptr().Send(_nSResponderSelEndGestureWithEvent, event.Ptr())

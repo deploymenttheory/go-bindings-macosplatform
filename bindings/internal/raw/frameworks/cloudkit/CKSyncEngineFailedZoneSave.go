@@ -44,7 +44,7 @@ func (o *CKSyncEngineFailedZoneSave) RecordZone() *CKRecordZone {
 	return CKRecordZoneFromID(_ret)
 }
 
-// A error that describes the reason for the unsuccessful attempt to modify the associated record zone.
+// An error that describes the reason for the unsuccessful attempt to modify the associated record zone.
 func (o *CKSyncEngineFailedZoneSave) Error() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _cKSyncEngineFailedZoneSaveSelError)
 	return _ret

@@ -139,14 +139,14 @@ func (uc *URLConnection) SetDelegateQueue(queue *OperationQueue) {
 	objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("setDelegateQueue:"), objref.IDOf(queue))
 }
 
-// OriginalRequest returns the original request.
+// OriginalRequest returns a deep copy of the original connection request. As the connection performs the load, the request may change as a result of protocol canonicalization or due to following redirects.
 func (uc *URLConnection) OriginalRequest() *URLRequest {
 	defer runtime.KeepAlive(uc)
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("originalRequest"))
 	return URLRequestFromID(_r)
 }
 
-// CurrentRequest returns the current request.
+// CurrentRequest returns the current connection request. As the connection performs the load, the request may change as a result of protocol canonicalization or due to following redirects. This property provides the current value of the request.
 func (uc *URLConnection) CurrentRequest() *URLRequest {
 	defer runtime.KeepAlive(uc)
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("currentRequest"))

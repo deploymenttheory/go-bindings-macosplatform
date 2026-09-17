@@ -22,6 +22,10 @@ type CIRenderTask struct {
 var (
 	_clsCIRenderTask                                 = _objcClass("CIRenderTask")
 	_cIRenderTaskSelWaitUntilCompletedAndReturnError = objc.RegisterName("waitUntilCompletedAndReturnError:")
+	_cIRenderTaskSelPlannedPixelsProcessed           = objc.RegisterName("plannedPixelsProcessed")
+	_cIRenderTaskSelPlannedPixelsOverdrawn           = objc.RegisterName("plannedPixelsOverdrawn")
+	_cIRenderTaskSelPlannedPassCount                 = objc.RegisterName("plannedPassCount")
+	_cIRenderTaskSelPlannedPeakMemory                = objc.RegisterName("plannedPeakMemory")
 )
 
 func CIRenderTaskFromID(id objc.ID) *CIRenderTask {
@@ -45,4 +49,24 @@ func (o *CIRenderTask) WaitUntilCompletedAndReturnError() (*CIRenderInfo, error)
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return CIRenderInfoFromID(_ret), nil
+}
+
+func (o *CIRenderTask) PlannedPixelsProcessed() int {
+	_ret := objc.Send[int](o.Ptr(), _cIRenderTaskSelPlannedPixelsProcessed)
+	return _ret
+}
+
+func (o *CIRenderTask) PlannedPixelsOverdrawn() int {
+	_ret := objc.Send[int](o.Ptr(), _cIRenderTaskSelPlannedPixelsOverdrawn)
+	return _ret
+}
+
+func (o *CIRenderTask) PlannedPassCount() int {
+	_ret := objc.Send[int](o.Ptr(), _cIRenderTaskSelPlannedPassCount)
+	return _ret
+}
+
+func (o *CIRenderTask) PlannedPeakMemory() int {
+	_ret := objc.Send[int](o.Ptr(), _cIRenderTaskSelPlannedPeakMemory)
+	return _ret
 }

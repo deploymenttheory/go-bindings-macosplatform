@@ -31,6 +31,7 @@ func NSAssertionHandlerFromID(id objc.ID) *NSAssertionHandler {
 	return o
 }
 
+// Returns the `NSAssertionHandler` object associated with the current thread. If no assertion handler is associated with the current thread, this method creates one and assigns it to the thread.
 func NSAssertionHandlerCurrentHandler() *NSAssertionHandler {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAssertionHandler), _nSAssertionHandlerSelCurrentHandler)
 	if _ret != 0 {

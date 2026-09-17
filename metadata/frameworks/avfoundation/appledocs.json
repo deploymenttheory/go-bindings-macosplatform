@@ -32,16 +32,20 @@
       "url": "https://developer.apple.com/documentation/avfoundation/avassetdownloadstoragemanager"
     },
     "AVAssetDownloadTask": {
-      "doc": "A session used to download HTTP Live Streaming assets.",
+      "doc": "A URL session task that downloads a remote asset to the device for offline playback.",
       "url": "https://developer.apple.com/documentation/avfoundation/avassetdownloadtask"
     },
     "AVAssetDownloadURLSession": {
-      "doc": "A URL session that creates and executes asset download tasks.",
+      "doc": "A URL session that creates and manages asset download tasks.",
       "url": "https://developer.apple.com/documentation/avfoundation/avassetdownloadurlsession"
     },
     "AVAssetExportSession": {
       "doc": "An object that exports assets in a format that you specify using an export preset.",
       "url": "https://developer.apple.com/documentation/avfoundation/avassetexportsession"
+    },
+    "AVAssetExportSessionResumptionState": {
+      "doc": "The current resumption state of the export session.",
+      "url": "https://developer.apple.com/documentation/avfoundation/avassetexportsessionresumptionstate"
     },
     "AVAssetImageGenerator": {
       "doc": "An object that generates images from a video asset.",
@@ -127,6 +131,10 @@
       "doc": "A group of related tracks in an asset.",
       "url": "https://developer.apple.com/documentation/avfoundation/avassettrackgroup"
     },
+    "AVAssetTrackPlan": {
+      "doc": "AVAssetTrackPlan holds information about a track and how it should be segmented and executed in an incremental writing session.",
+      "url": "https://developer.apple.com/documentation/avfoundation/avassettrackplan"
+    },
     "AVAssetTrackSegment": {
       "doc": "An object that represents a time range segment of an asset track.",
       "url": "https://developer.apple.com/documentation/avfoundation/avassettracksegment"
@@ -135,25 +143,13 @@
       "doc": "An object that represents a bit rate variant.",
       "url": "https://developer.apple.com/documentation/avfoundation/avassetvariant"
     },
-    "AVAssetVariantAudioAttributes": {
-      "doc": "An object that defines the audio attributes for an asset variant.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avassetvariantaudioattributes"
-    },
-    "AVAssetVariantAudioRenditionSpecificAttributes": {
-      "doc": "An object that represents attributes specific to a particular rendition.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avassetvariantaudiorenditionspecificattributes"
-    },
     "AVAssetVariantQualifier": {
       "doc": "An object that represents an HTTP Live Streaming asset variant.",
       "url": "https://developer.apple.com/documentation/avfoundation/avassetvariantqualifier"
     },
-    "AVAssetVariantVideoAttributes": {
-      "doc": "An object that defines the video attributes for an asset variant.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avassetvariantvideoattributes"
-    },
-    "AVAssetVariantVideoLayoutAttributes": {
-      "doc": "Attributes that describe the layout of video content.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avassetvariantvideolayoutattributes"
+    "AVAssetVideoTrackPlan": {
+      "doc": "AVAssetVideoTrackPlan holds information about a track and how it should be segmented and executed in an incremental writing session.",
+      "url": "https://developer.apple.com/documentation/avfoundation/avassetvideotrackplan"
     },
     "AVAssetWriter": {
       "doc": "An object that writes media data to a container file.",
@@ -186,6 +182,14 @@
     "AVAssetWriterInputTaggedPixelBufferGroupAdaptor": {
       "doc": "An object that appends tagged buffer groups to an asset writer input.",
       "url": "https://developer.apple.com/documentation/avfoundation/avassetwriterinputtaggedpixelbuffergroupadaptor"
+    },
+    "AVAssetWritingPlanner": {
+      "doc": "AVAssetWritingPlanner orchestrates incremental writing of media files.",
+      "url": "https://developer.apple.com/documentation/avfoundation/avassetwritingplanner"
+    },
+    "AVAssetWritingPlannerProgress": {
+      "doc": "AVAssetWritingPlannerProgress tracks the progress of incremental writing for each track in an AVAssetWritingPlanner session.",
+      "url": "https://developer.apple.com/documentation/avfoundation/avassetwritingplannerprogress"
     },
     "AVAsynchronousCIImageFilteringRequest": {
       "doc": "An object that supports using Core Image filters to process an individual video frame in a video composition.",
@@ -247,13 +251,8 @@
       "doc": "An object that renders captions for display at a particular time.",
       "url": "https://developer.apple.com/documentation/avfoundation/avcaptionrenderer"
     },
-    "AVCaptionRendererScene": {
-      "doc": "An object that holds a time range and an associated state which indicates when the renderer draws output.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avcaptionrendererscene"
-    },
-    "AVCaptionRuby": {
-      "doc": "An object that presents ruby characters.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avcaptionruby"
+    "AVCaptureAncillaryDataEncoder": {
+      "url": "https://developer.apple.com/documentation/avfoundation/avcaptureancillarydataencoder"
     },
     "AVCaptureAudioChannel": {
       "doc": "An object that monitors average and peak power levels for an audio channel in a capture connection.",
@@ -279,6 +278,10 @@
       "doc": "The abstract superclass for bracketed photo capture settings.",
       "url": "https://developer.apple.com/documentation/avfoundation/avcapturebracketedstillimagesettings"
     },
+    "AVCaptureBroadcastVideoOutput": {
+      "doc": "AVCaptureBroadcastVideoOutput is a subclass of AVCaptureOutput that delivers broadcast-quality video and ancillary data through the device’s DisplayPort hardware interface (USB-C DP Alt Mode)",
+      "url": "https://developer.apple.com/documentation/avfoundation/avcapturebroadcastvideooutput"
+    },
     "AVCaptureConnection": {
       "doc": "An object that represents a connection from a capture input to a capture output.",
       "url": "https://developer.apple.com/documentation/avfoundation/avcaptureconnection"
@@ -303,33 +306,13 @@
       "doc": "An object that programmatically presents Desk View.",
       "url": "https://developer.apple.com/documentation/avfoundation/avcapturedeskviewapplication"
     },
-    "AVCaptureDeskViewApplicationLaunchConfiguration": {
-      "doc": "An object that configures how to present Desk View.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avcapturedeskviewapplicationlaunchconfiguration"
-    },
     "AVCaptureDevice": {
       "doc": "An object that represents a hardware or virtual capture device like a camera or microphone.",
       "url": "https://developer.apple.com/documentation/avfoundation/avcapturedevice"
     },
-    "AVCaptureDeviceDiscoverySession": {
-      "doc": "An object that finds capture devices that match specific search criteria.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avcapturedevicediscoverysession"
-    },
-    "AVCaptureDeviceFormat": {
-      "doc": "A class that defines media formats and capture settings that capture devices support.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avcapturedeviceformat"
-    },
     "AVCaptureDeviceInput": {
       "doc": "An object that provides media input from a capture device to a capture session.",
       "url": "https://developer.apple.com/documentation/avfoundation/avcapturedeviceinput"
-    },
-    "AVCaptureDeviceInputSource": {
-      "doc": "A distinct input source on a capture device.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avcapturedeviceinputsource"
-    },
-    "AVCaptureDeviceRotationCoordinator": {
-      "doc": "A class that monitors the physical orientation of a capture device and provides adjustment angles to keep images level, relative to gravity.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avcapturedevicerotationcoordinator"
     },
     "AVCaptureExternalDisplayConfiguration": {
       "doc": "A class you use to specify a configuration to your external display configurator.",
@@ -354,10 +337,6 @@
     "AVCaptureInput": {
       "doc": "An abstract superclass for objects that provide input data to a capture session.",
       "url": "https://developer.apple.com/documentation/avfoundation/avcaptureinput"
-    },
-    "AVCaptureInputPort": {
-      "doc": "An object that represents a stream of data that a capture input provides.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avcaptureinputport"
     },
     "AVCaptureManualExposureBracketedStillImageSettings": {
       "doc": "A configuration for defining bracketed photo captures in terms of specific exposure and ISO values.",
@@ -458,10 +437,6 @@
     "AVCaptureSystemExposureBiasSlider": {
       "doc": "A control that adjusts the exposure bias of a capture device within the system-recommended range.",
       "url": "https://developer.apple.com/documentation/avfoundation/avcapturesystemexposurebiasslider"
-    },
-    "AVCaptureSystemPressureState": {
-      "doc": "An object that provides information about OS and hardware status affecting capture system performance and availability.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avcapturesystempressurestate"
     },
     "AVCaptureSystemZoomSlider": {
       "doc": "A control that adjusts the video zoom factor of a capture device within the system-recommended range.",
@@ -647,6 +622,10 @@
       "doc": "A concrete metadata object subclass representing a cat head.",
       "url": "https://developer.apple.com/documentation/avfoundation/avmetadatacatheadobject"
     },
+    "AVMetadataCinematicVideoMetadataObject": {
+      "doc": "A metadata object containing opaque Cinematic video metadata for Cinematic video editing.",
+      "url": "https://developer.apple.com/documentation/avfoundation/avmetadatacinematicvideometadataobject"
+    },
     "AVMetadataDogBodyObject": {
       "doc": "An object representing a single detected dog body in a picture.",
       "url": "https://developer.apple.com/documentation/avfoundation/avmetadatadogbodyobject"
@@ -658,6 +637,10 @@
     "AVMetadataFaceObject": {
       "doc": "Face information detected by a metadata capture output.",
       "url": "https://developer.apple.com/documentation/avfoundation/avmetadatafaceobject"
+    },
+    "AVMetadataFocusTrackedObject": {
+      "doc": "A metadata object that is maintained in focus by the camera’s auto focus system continuously tracking it.",
+      "url": "https://developer.apple.com/documentation/avfoundation/avmetadatafocustrackedobject"
     },
     "AVMetadataGroup": {
       "doc": "A collection of metadata items associated with a timeline segment.",
@@ -729,6 +712,10 @@
     "AVMetricMediaResourceRequestEvent": {
       "doc": "An event that represents a media resource request.",
       "url": "https://developer.apple.com/documentation/avfoundation/avmetricmediaresourcerequestevent"
+    },
+    "AVMetricPlaybackModeSwitchEvent": {
+      "doc": "Represents a change in playback state, entering one of AVMetricPlaybackMode",
+      "url": "https://developer.apple.com/documentation/avfoundation/avmetricplaybackmodeswitchevent"
     },
     "AVMetricPlayerItemInitialLikelyToKeepUpEvent": {
       "doc": "An event that represents the initial state for whether playback is likely to continue without stalling.",
@@ -846,6 +833,22 @@
       "doc": "An object that encapsulates information about a persistable content decryption key request issued from a content key session.",
       "url": "https://developer.apple.com/documentation/avfoundation/avpersistablecontentkeyrequest"
     },
+    "AVPlannedSegmentConfiguration": {
+      "doc": "AVPlannedSegmentConfiguration describes the requirements for a planned segment in an incremental writing session executed by the AVAssetWritingPlanner. Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.",
+      "url": "https://developer.apple.com/documentation/avfoundation/avplannedsegmentconfiguration"
+    },
+    "AVPlannedSegmentWritingRequest": {
+      "doc": "AVPlannedSegmentWritingRequest encompasses a request from the AVAssetWritingPlanner to the client code to write one incremental track segment.",
+      "url": "https://developer.apple.com/documentation/avfoundation/avplannedsegmentwritingrequest"
+    },
+    "AVPlannedVideoSegmentConfiguration": {
+      "doc": "AVPlannedVideoSegmentConfiguration describes the requirements for a planned video segment in an incremental writing session executed by the AVAssetWritingPlanner.",
+      "url": "https://developer.apple.com/documentation/avfoundation/avplannedvideosegmentconfiguration"
+    },
+    "AVPlannedVideoSegmentWritingRequest": {
+      "doc": "AVPlannedVideoSegmentWritingRequest encompasses a request from the AVAssetWritingPlanner to the client code to write one incremental video track segment with compression.",
+      "url": "https://developer.apple.com/documentation/avfoundation/avplannedvideosegmentwritingrequest"
+    },
     "AVPlaybackCoordinationMedium": {
       "doc": "The AVPlaybackCoordinationMedium passes states and messages between its connected playback coordinators.",
       "url": "https://developer.apple.com/documentation/avfoundation/avplaybackcoordinationmedium"
@@ -922,6 +925,18 @@
       "doc": "A player item output that vends media with a legible characteristic as rendered pixel buffers.",
       "url": "https://developer.apple.com/documentation/avfoundation/avplayeritemrenderedlegibleoutput"
     },
+    "AVPlayerItemSampleBufferOutput": {
+      "doc": "AVPlayerItemSampleBufferOutput delivers CMSampleBuffers for AVPlayerItem playback.",
+      "url": "https://developer.apple.com/documentation/avfoundation/avplayeritemsamplebufferoutput"
+    },
+    "AVPlayerItemSampleBufferOutputAudioConfiguration": {
+      "doc": "Audio-specific configuration options specified when creating an AVPlayerItemSampleBufferOutput.",
+      "url": "https://developer.apple.com/documentation/avfoundation/avplayeritemsamplebufferoutputaudioconfiguration"
+    },
+    "AVPlayerItemSampleBufferOutputConfiguration": {
+      "doc": "Configuration options specified when creating an AVPlayerItemSampleBufferOutput.",
+      "url": "https://developer.apple.com/documentation/avfoundation/avplayeritemsamplebufferoutputconfiguration"
+    },
     "AVPlayerItemSegment": {
       "doc": "An immutable object that represents a segment of time on the integrated timeline.",
       "url": "https://developer.apple.com/documentation/avfoundation/avplayeritemsegment"
@@ -954,13 +969,13 @@
       "doc": "An object that receives video data from a player object.",
       "url": "https://developer.apple.com/documentation/avfoundation/avplayervideooutput"
     },
-    "AVPlayerVideoOutputConfiguration": {
-      "doc": "An object that provides configuration information for the related player item.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avplayervideooutputconfiguration"
-    },
     "AVPortraitEffectsMatte": {
       "doc": "An auxiliary image used to separate foreground from background with high resolution.",
       "url": "https://developer.apple.com/documentation/avfoundation/avportraiteffectsmatte"
+    },
+    "AVProVideoStorage": {
+      "doc": "A class to track and manage pre-allocated storage for high data rate video capture.",
+      "url": "https://developer.apple.com/documentation/avfoundation/avprovideostorage"
     },
     "AVQueuePlayer": {
       "doc": "An object that plays a sequence of player items.",
@@ -1034,10 +1049,6 @@
       "doc": "An object used to incorporate Core Animation into a video composition.",
       "url": "https://developer.apple.com/documentation/avfoundation/avvideocompositioncoreanimationtool"
     },
-    "AVVideoCompositionInstruction": {
-      "doc": "An operation that a compositor performs.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avvideocompositioninstruction"
-    },
     "AVVideoCompositionLayerInstruction": {
       "doc": "An object used to modify the transform, cropping, and opacity ramps applied to a given track in a composition.",
       "url": "https://developer.apple.com/documentation/avfoundation/avvideocompositionlayerinstruction"
@@ -1087,6 +1098,10 @@
     "AVCaptureAudioDataOutputSampleBufferDelegate": {
       "doc": "Methods for receiving audio sample data from an audio capture.",
       "url": "https://developer.apple.com/documentation/avfoundation/avcaptureaudiodataoutputsamplebufferdelegate"
+    },
+    "AVCaptureBroadcastVideoOutputDelegate": {
+      "doc": "Protocol for receiving broadcast video output events and data.",
+      "url": "https://developer.apple.com/documentation/avfoundation/avcapturebroadcastvideooutputdelegate"
     },
     "AVCaptureDataOutputSynchronizerDelegate": {
       "doc": "Methods for receiving captured data from multiple capture outputs synchronized to the same timestamp.",
@@ -1192,6 +1207,10 @@
       "doc": "A delegate that handles the rendered pixel buffers produced by a rendered legible output object.",
       "url": "https://developer.apple.com/documentation/avfoundation/avplayeritemrenderedlegibleoutputpushdelegate"
     },
+    "AVPlayerItemSampleBufferOutputDelegate": {
+      "doc": "Defines common delegate methods for objects participating in sample buffer output.",
+      "url": "https://developer.apple.com/documentation/avfoundation/avplayeritemsamplebufferoutputdelegate"
+    },
     "AVPlayerPlaybackCoordinatorDelegate": {
       "doc": "A protocol that defines the methods to implement to participate in playback coordination.",
       "url": "https://developer.apple.com/documentation/avfoundation/avplayerplaybackcoordinatordelegate"
@@ -1204,28 +1223,12 @@
       "doc": "A protocol that defines the methods custom video compositors must implement.",
       "url": "https://developer.apple.com/documentation/avfoundation/avvideocompositing"
     },
-    "AVVideoCompositionInstruction": {
-      "doc": "An operation that a compositor performs.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avvideocompositioninstruction"
-    },
     "AVVideoCompositionValidationHandling": {
       "doc": "Methods you can implement to indicate whether validation of a video composition should continue after specific errors are found.",
       "url": "https://developer.apple.com/documentation/avfoundation/avvideocompositionvalidationhandling"
     }
   },
   "enums": {
-    "AVAssetExportSessionStatus": {
-      "doc": "Values that indicate the state of an export session.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avassetexportsessionstatus"
-    },
-    "AVAssetImageGeneratorResult": {
-      "doc": "Constants that indicate the result of an image generation request.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avassetimagegeneratorresult"
-    },
-    "AVAssetReaderStatus": {
-      "doc": "Values that represent the possible states of an asset reader.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avassetreaderstatus"
-    },
     "AVAssetReferenceRestrictions": {
       "doc": "Restrictions to use when resolving references to external media data.",
       "url": "https://developer.apple.com/documentation/avfoundation/avassetreferencerestrictions",
@@ -1300,9 +1303,15 @@
         }
       }
     },
-    "AVAssetWriterStatus": {
-      "doc": "Values that indicate the state of an asset writer.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avassetwriterstatus"
+    "AVAudioMixInputParametersTrackID": {
+      "doc": "Special value for the trackID property of AVAudioMixInputParameters.",
+      "url": "https://developer.apple.com/documentation/avfoundation/avaudiomixinputparameterstrackid",
+      "members": {
+        "AVAudioMixInputParametersTrackMixID": {
+          "doc": "Indicates that the specified input parameters should be applied to the mix of all audio tracks rather than to a single specific audio track. This is particularly useful for setting up volume ramps or an audio tap for streaming playback.",
+          "url": "https://developer.apple.com/documentation/avfoundation/avaudiomixinputparameterstrackid/mixid"
+        }
+      }
     },
     "AVAudioSpatializationFormats": {
       "doc": "A structure that defines the spatialization formats that a player item supports.",
@@ -1352,52 +1361,6 @@
         }
       }
     },
-    "AVCaptionAnimation": {
-      "doc": "Animation options for a caption.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avcaptionanimation"
-    },
-    "AVCaptionConversionValidatorStatus": {
-      "doc": "Constants that indicate the status of a validator.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avcaptionconversionvalidatorstatus"
-    },
-    "AVCaptionDecoration": {
-      "doc": "Text decorations for caption text.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avcaptiondecoration",
-      "members": {
-        "AVCaptionDecorationNone": {
-          "doc": "No text decoration.",
-          "url": "https://developer.apple.com/documentation/avfoundation/avcaptiondecoration/avcaptiondecorationnone"
-        }
-      }
-    },
-    "AVCaptionFontStyle": {
-      "doc": "Font styles for caption text.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avcaptionfontstyle"
-    },
-    "AVCaptionFontWeight": {
-      "doc": "Font weights for a caption.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avcaptionfontweight"
-    },
-    "AVCaptionRegionDisplayAlignment": {
-      "doc": "Constants that indicate the alignment of lines in a region.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avcaptionregiondisplayalignment"
-    },
-    "AVCaptionRegionScroll": {
-      "doc": "Constants that indicate the scrolling effects the system applies to a region.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avcaptionregionscroll"
-    },
-    "AVCaptionRegionWritingMode": {
-      "doc": "Constants that indicate the writing mode for a region.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avcaptionregionwritingmode"
-    },
-    "AVCaptionTextAlignment": {
-      "doc": "Text alignment options for a caption.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avcaptiontextalignment"
-    },
-    "AVCaptionTextCombine": {
-      "doc": "The caption’s supported rendering policy options.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avcaptiontextcombine"
-    },
     "AVCaptionUnitsType": {
       "doc": "A structure that defines a units for caption formats.",
       "url": "https://developer.apple.com/documentation/avfoundation/avcaptionunitstype",
@@ -1415,14 +1378,6 @@
           "url": "https://developer.apple.com/documentation/avfoundation/avcaptionunitstype/unspecified"
         }
       }
-    },
-    "AVCaptureAutoFocusRangeRestriction": {
-      "doc": "Constants to specify the autofocus range of a capture device.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avcaptureautofocusrangerestriction"
-    },
-    "AVCaptureAutoFocusSystem": {
-      "doc": "An enumeration of auto focus systems.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avcaptureautofocussystem"
     },
     "AVCaptureCameraLensSmudgeDetectionStatus": {
       "doc": "Constants indicating the current camera lens smudge detection status.",
@@ -1445,10 +1400,6 @@
           "url": "https://developer.apple.com/documentation/avfoundation/avcapturecameralenssmudgedetectionstatus/unknown"
         }
       }
-    },
-    "AVCaptureCenterStageControlMode": {
-      "doc": "Constants that indicate the current Center Stage control mode.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avcapturecenterstagecontrolmode"
     },
     "AVCaptureColorSpace": {
       "doc": "An enumeration of color spaces a device can support.",
@@ -1476,34 +1427,6 @@
         }
       }
     },
-    "AVCaptureDevicePosition": {
-      "doc": "Constants that indicate the physical position of a capture device.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avcapturedeviceposition"
-    },
-    "AVCaptureDeviceTransportControlsPlaybackMode": {
-      "doc": "Constants that indicate the transport control’s current mode of playback, if it has one.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avcapturedevicetransportcontrolsplaybackmode"
-    },
-    "AVCaptureExposureMode": {
-      "doc": "Constants that specify the exposure mode of a capture device.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avcaptureexposuremode"
-    },
-    "AVCaptureFlashMode": {
-      "doc": "Constants that specify the flash modes of a capture device.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avcaptureflashmode"
-    },
-    "AVCaptureFocusMode": {
-      "doc": "Constants to specify the focus mode of a capture device.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avcapturefocusmode"
-    },
-    "AVCaptureLensStabilizationStatus": {
-      "doc": "Constants that indicate the status of optical image stabilization hardware during a bracketed photo capture.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avcapturelensstabilizationstatus"
-    },
-    "AVCaptureMicrophoneMode": {
-      "doc": "Constants that define the available microphone modes.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avcapturemicrophonemode"
-    },
     "AVCaptureMultichannelAudioMode": {
       "doc": "Constants that indicate the modes of multichannel audio.",
       "url": "https://developer.apple.com/documentation/avfoundation/avcapturemultichannelaudiomode",
@@ -1521,54 +1444,6 @@
           "url": "https://developer.apple.com/documentation/avfoundation/avcapturemultichannelaudiomode/stereo"
         }
       }
-    },
-    "AVCaptureOutputDataDroppedReason": {
-      "doc": "Constants that define reasons for why the system dropped a frame.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avcaptureoutputdatadroppedreason"
-    },
-    "AVCapturePhotoOutputCaptureReadiness": {
-      "doc": "Constants that indicate whether the output is ready to receive capture requests.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avcapturephotooutputcapturereadiness"
-    },
-    "AVCapturePhotoQualityPrioritization": {
-      "doc": "Constants that indicate how to prioritize photo quality relative to capture speed.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avcapturephotoqualityprioritization"
-    },
-    "AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions": {
-      "doc": "A structure that defines the conditions in which to restrict camera switching.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avcaptureprimaryconstituentdevicerestrictedswitchingbehaviorconditions",
-      "members": {
-        "AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionNone": {
-          "doc": "Disallow switching to a fallback camera.",
-          "url": "https://developer.apple.com/documentation/avfoundation/avcaptureprimaryconstituentdevicerestrictedswitchingbehaviorconditions/avcaptureprimaryconstituentdevicerestrictedswitchingbehaviorconditionnone"
-        }
-      }
-    },
-    "AVCapturePrimaryConstituentDeviceSwitchingBehavior": {
-      "doc": "Constants that control when to allow a virtual device to switch its active primary constituent device.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avcaptureprimaryconstituentdeviceswitchingbehavior"
-    },
-    "AVCaptureSessionInterruptionReason": {
-      "doc": "Constants identifying the reason a capture session was interrupted, found in an wasInterruptedNotification user info dictionary.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avcapturesessioninterruptionreason"
-    },
-    "AVCaptureSystemPressureFactors": {
-      "doc": "A structure that defines the factors affecting capture system performance.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avcapturesystempressurefactors",
-      "members": {
-        "AVCaptureSystemPressureFactorNone": {
-          "doc": "System pressure is currently nominal.",
-          "url": "https://developer.apple.com/documentation/avfoundation/avcapturesystempressurefactors/avcapturesystempressurefactornone"
-        }
-      }
-    },
-    "AVCaptureSystemUserInterface": {
-      "doc": "Constants that describe the capture device configuration user interfaces.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avcapturesystemuserinterface"
-    },
-    "AVCaptureTorchMode": {
-      "doc": "Constants to specify the capture device’s torch mode.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avcapturetorchmode"
     },
     "AVCaptureVideoOrientation": {
       "doc": "Constants indicating video orientation.",
@@ -1630,10 +1505,6 @@
         }
       }
     },
-    "AVCaptureWhiteBalanceMode": {
-      "doc": "Constants to specify the white balance mode of a capture device.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avcapturewhitebalancemode"
-    },
     "AVContentAuthorizationStatus": {
       "doc": "A value representing the status of a content authorization request.",
       "url": "https://developer.apple.com/documentation/avfoundation/avcontentauthorizationstatus",
@@ -1668,10 +1539,6 @@
         }
       }
     },
-    "AVContentKeyRequestStatus": {
-      "doc": "The status for a content key request.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avcontentkeyrequeststatus"
-    },
     "AVDelegatingPlaybackCoordinatorRateChangeOptions": {
       "doc": "Constants that define rate change options.",
       "url": "https://developer.apple.com/documentation/avfoundation/avdelegatingplaybackcoordinatorratechangeoptions",
@@ -1699,18 +1566,6 @@
           "url": "https://developer.apple.com/documentation/avfoundation/avdelegatingplaybackcoordinatorseekoptions/init(rawvalue:)"
         }
       }
-    },
-    "AVDepthDataAccuracy": {
-      "doc": "Values indicating the general accuracy of a depth data map.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avdepthdataaccuracy"
-    },
-    "AVDepthDataQuality": {
-      "doc": "Values indicating the overall quality of a depth data map.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avdepthdataquality"
-    },
-    "AVError": {
-      "doc": "A structure that defines the errors that framework operations can generate.",
-      "url": "https://developer.apple.com/documentation/avfoundation/averror"
     },
     "AVExternalContentProtectionStatus": {
       "doc": "Constants that specify whether sufficient protection exists to display the content.",
@@ -1782,6 +1637,20 @@
         }
       }
     },
+    "AVMetricPlaybackMode": {
+      "doc": "These constants are the possible playback modes returned by the property “mode” on AVMetricPlaybackModeSwitchEvent",
+      "url": "https://developer.apple.com/documentation/avfoundation/avmetricplaybackmode",
+      "members": {
+        "AVMetricPlaybackModeAirPlayVideo": {
+          "doc": "Indicates that playback is via AirPlay Video.",
+          "url": "https://developer.apple.com/documentation/avfoundation/avmetricplaybackmode/airplayvideo"
+        },
+        "AVMetricPlaybackModeLocal": {
+          "doc": "Indicates that playback is local.",
+          "url": "https://developer.apple.com/documentation/avfoundation/avmetricplaybackmode/local"
+        }
+      }
+    },
     "AVMovieWritingOptions": {
       "doc": "A structure that defines options to control the writing of a movie header to a destination URL.",
       "url": "https://developer.apple.com/documentation/avfoundation/avmoviewritingoptions",
@@ -1799,10 +1668,6 @@
           "url": "https://developer.apple.com/documentation/avfoundation/avmoviewritingoptions/init(rawvalue:)"
         }
       }
-    },
-    "AVPlayerActionAtItemEnd": {
-      "doc": "The actions a player can take when it finishes playing.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avplayeractionatitemend"
     },
     "AVPlayerAudiovisualBackgroundPlaybackPolicy": {
       "doc": "Policies that describe playback behavior when an app transitions to the background while playing video.",
@@ -1822,10 +1687,6 @@
         }
       }
     },
-    "AVPlayerHDRMode": {
-      "doc": "A bitfield type that specifies an HDR mode.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avplayerhdrmode"
-    },
     "AVPlayerInterstitialEventAssetListResponseStatus": {
       "doc": "Constants that describe the status of the asset list response for an interstitial event.",
       "url": "https://developer.apple.com/documentation/avfoundation/avplayerinterstitialeventassetlistresponsestatus",
@@ -1844,48 +1705,6 @@
         }
       }
     },
-    "AVPlayerInterstitialEventRestrictions": {
-      "doc": "Constants that define restrictions on the playback of interstitial content.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avplayerinterstitialeventrestrictions",
-      "members": {
-        "AVPlayerInterstitialEventRestrictionDefaultPolicy": {
-          "doc": "The default restriction policy.",
-          "url": "https://developer.apple.com/documentation/avfoundation/avplayerinterstitialeventrestrictions/avplayerinterstitialeventrestrictiondefaultpolicy"
-        },
-        "AVPlayerInterstitialEventRestrictionNone": {
-          "doc": "A value that indicates no restrictions on playback of primary or interstitial content.",
-          "url": "https://developer.apple.com/documentation/avfoundation/avplayerinterstitialeventrestrictions/avplayerinterstitialeventrestrictionnone"
-        }
-      }
-    },
-    "AVPlayerInterstitialEventTimelineOccupancy": {
-      "doc": "Constants that specify how an event occupies time on an integrated timeline.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avplayerinterstitialeventtimelineoccupancy"
-    },
-    "AVPlayerItemSegmentType": {
-      "doc": "Constants that specify the type of segment.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avplayeritemsegmenttype"
-    },
-    "AVPlayerItemStatus": {
-      "doc": "The statuses for a player item.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avplayeritemstatus"
-    },
-    "AVPlayerLooperItemOrdering": {
-      "doc": "Constants that define the ordering of items in a player looper.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avplayerlooperitemordering"
-    },
-    "AVPlayerLooperStatus": {
-      "doc": "Status constants that indicate whether a looper can successfully perform looping playback.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avplayerlooperstatus"
-    },
-    "AVPlayerStatus": {
-      "doc": "Status values that indicate whether a player can successfully play media.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avplayerstatus"
-    },
-    "AVPlayerTimeControlStatus": {
-      "doc": "Constants that indicate the state of playback control.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avplayertimecontrolstatus"
-    },
     "AVQueuedSampleBufferRenderingStatus": {
       "doc": "The statuses for sample buffer rendering.",
       "url": "https://developer.apple.com/documentation/avfoundation/avqueuedsamplebufferrenderingstatus",
@@ -1903,14 +1722,6 @@
           "url": "https://developer.apple.com/documentation/avfoundation/avqueuedsamplebufferrenderingstatus/unknown"
         }
       }
-    },
-    "AVSampleBufferRequestDirection": {
-      "doc": "The modes that describe the buffer request direction.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avsamplebufferrequestdirection"
-    },
-    "AVSampleBufferRequestMode": {
-      "doc": "The modes in which a sample buffer generator processes a request.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avsamplebufferrequestmode"
     },
     "AVVariantPreferences": {
       "doc": "Defines the preferences the player item uses when selecting variant playlists.",
@@ -1983,18 +1794,6 @@
     "AVCaptureTimecode": {
       "doc": "This structure represents a timecode, adhering to SMPTE standards, which define precise time information and associated timestamps for video or audio synchronization.",
       "url": "https://developer.apple.com/documentation/avfoundation/avcapturetimecode"
-    },
-    "AVCaptureWhiteBalanceChromaticityValues": {
-      "doc": "A structure that defines CIE 1931 xy chromaticity values.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avcapturewhitebalancechromaticityvalues"
-    },
-    "AVCaptureWhiteBalanceGains": {
-      "doc": "A structure that defines RGB white balance gain values.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avcapturewhitebalancegains"
-    },
-    "AVCaptureWhiteBalanceTemperatureAndTintValues": {
-      "doc": "A structure that defines temperature and tint values correlated to a white-balance color.",
-      "url": "https://developer.apple.com/documentation/avfoundation/avcapturewhitebalancetemperatureandtintvalues"
     },
     "AVEdgeWidths": {
       "doc": "A structure that defines edge processing region widths.",
@@ -2169,10 +1968,6 @@
         "doc": "Determines an export preset’s compatibility to export the asset in a container of the output file type.",
         "url": "https://developer.apple.com/documentation/avfoundation/avassetexportsession/determinecompatibility(ofexportpreset:with:outputfiletype:completionhandler:)"
       },
-      "+exportPresetsCompatibleWithAsset:": {
-        "doc": "Returns compatible export presets for the asset.",
-        "url": "https://developer.apple.com/documentation/avfoundation/avassetexportsession/exportpresets(compatiblewith:)"
-      },
       "+exportSessionWithAsset:presetName:": {
         "doc": "Returns a new asset export session that uses the specified preset.",
         "url": "https://developer.apple.com/documentation/avfoundation/avassetexportsession/exportsessionwithasset:presetname:"
@@ -2182,7 +1977,7 @@
         "url": "https://developer.apple.com/documentation/avfoundation/avassetexportsession/cancelexport()"
       },
       "-configureForResumableExportWithCompletionHandler:": {
-        "doc": "Attempt to configure the exportSession into resumption mode.",
+        "doc": "Attempts to configure the export session into resumption mode.",
         "url": "https://developer.apple.com/documentation/avfoundation/avassetexportsession/configureforresumableexportwithcompletionhandler:"
       },
       "-determineCompatibleFileTypesWithCompletionHandler:": {
@@ -2438,6 +2233,12 @@
         "url": "https://developer.apple.com/documentation/avfoundation/avassettrack/segment(fortracktime:)"
       }
     },
+    "AVAssetTrackPlan": {
+      "-initWithMediaType:segmentConfigurations:assemblyTrackID:": {
+        "doc": "Returns an instance of AVAssetTrackPlan",
+        "url": "https://developer.apple.com/documentation/avfoundation/avassettrackplan/init(mediatype:segmentconfigurations:assemblytrackid:)"
+      }
+    },
     "AVAssetVariantQualifier": {
       "+assetVariantQualifierForMaximumValueInKeyPath:": {
         "doc": "Returns a qualifer for finding variant with maximum value in the input key path",
@@ -2502,6 +2303,12 @@
       "+predicateForPresentationWidth:operatorType:": {
         "doc": "Creates a predicate with a width and operator type.",
         "url": "https://developer.apple.com/documentation/avfoundation/avassetvariantqualifier/predicate(forpresentationwidth:operatortype:)"
+      }
+    },
+    "AVAssetVideoTrackPlan": {
+      "-initWithVideoCodecType:encoderSpecification:mediaType:segmentConfigurations:assemblyTrackID:": {
+        "doc": "Returns an instance of AVAssetVideoTrackPlan",
+        "url": "https://developer.apple.com/documentation/avfoundation/avassetvideotrackplan/initwithvideocodectype:encoderspecification:mediatype:segmentconfigurations:assemblytrackid:"
       }
     },
     "AVAssetWriter": {
@@ -2682,6 +2489,38 @@
         "url": "https://developer.apple.com/documentation/avfoundation/avassetwriterinputtaggedpixelbuffergroupadaptor/init(assetwriterinput:sourcepixelbufferattributes:)"
       }
     },
+    "AVAssetWritingPlanner": {
+      "+segmentBoundaryGuidelinesForVideoCodecType:videoEncoderSpecification:": {
+        "doc": "Returns segment boundary guidelines that help clients determine how to segment compression video tracks with best results.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avassetwritingplanner/segmentboundaryguidelinesforvideocodectype:videoencoderspecification:"
+      },
+      "+segmentBoundaryRecommendationsForVideoAVAssetTrack:minimumSegmentDuration:minimumSegmentFrameCount:": {
+        "doc": "Returns segment boundary recommendations for a given source video asset track.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avassetwritingplanner/segmentboundaryrecommendations(forvideotrack:minimumsegmentduration:minimumsegmentframecount:)"
+      },
+      "-executePlanOnQueue:withCompletionHandler:": {
+        "doc": "Starts the incremental segment writing on a given dispatch queue",
+        "url": "https://developer.apple.com/documentation/avfoundation/avassetwritingplanner/executeplanonqueue:withcompletionhandler:"
+      },
+      "-executePlanWithCompletionHandler:": {
+        "doc": "Starts the incremental segment writing.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avassetwritingplanner/executeplanwithcompletionhandler:"
+      },
+      "-initWithDirectoryForTemporaryFiles:": {
+        "doc": "Creates an instance of AVAssetWritingPlanner given a unique file directory to host all incremental segment files and other intermediate files.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avassetwritingplanner/initwithdirectoryfortemporaryfiles:"
+      },
+      "-planTrack:withSegmentsGeneratedBy:": {
+        "doc": "Adds an AVAssetTrackPlan to this AVAssetWritingPlanner, with a block to be called by the planner to generate each segment of the track.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avassetwritingplanner/plantrack:withsegmentsgeneratedby:"
+      }
+    },
+    "AVAssetWritingPlannerProgress": {
+      "-progressForTrack:": {
+        "doc": "Returns the progress for a specific track identified by its assemblyTrackID.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avassetwritingplannerprogress/progress(fortrack:)"
+      }
+    },
     "AVAsynchronousCIImageFilteringRequest": {
       "-finishWithError:": {
         "doc": "Notifies AVFoundation that you cannot fulfill the image filtering request.",
@@ -2850,6 +2689,24 @@
         "url": "https://developer.apple.com/documentation/avfoundation/avcaptionrenderer/render(in:for:)"
       }
     },
+    "AVCaptureAncillaryDataEncoder": {
+      "-removeRDD18AncillaryDataForTag:": {
+        "doc": "Allows the user to remove the ancillary data associated with the tag.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avcaptureancillarydataencoder/removerdd18ancillarydata(fortag:)"
+      },
+      "-setRDD18AncillaryData:forTag:error:": {
+        "doc": "Allows the user to add their own data to be encoded and transmitted using SMPTE RDD 18 standards.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avcaptureancillarydataencoder/setrdd18ancillarydata(_:fortag:)"
+      },
+      "-setRDD18AncillaryDataString:forTag:error:": {
+        "doc": "Allows the user to add their own string to be encoded as data and transmitted using SMPTE RDD 18 standards.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avcaptureancillarydataencoder/setrdd18ancillarydatastring(_:fortag:)"
+      },
+      "-setUserInstanceUID:forUserUDAMVersion:": {
+        "doc": "Set the UID and Version number for the user data.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avcaptureancillarydataencoder/setuserinstanceuid(_:foruserudamversion:)"
+      }
+    },
     "AVCaptureAudioDataOutput": {
       "+new": {
         "doc": "Provides a convenience initializer to create an instance of audio data output.",
@@ -2900,6 +2757,16 @@
       "+autoExposureSettingsWithExposureTargetBias:": {
         "doc": "Creates an AVCaptureAutoExposureBracketedStillImageSettings using the specified exposure target bias.",
         "url": "https://developer.apple.com/documentation/avfoundation/avcaptureautoexposurebracketedstillimagesettings/autoexposuresettings(exposuretargetbias:)"
+      }
+    },
+    "AVCaptureBroadcastVideoOutput": {
+      "-resetFrameBuffer": {
+        "doc": "Tells the broadcast video output to reset the frame buffer and drop all currently buffered frames.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avcapturebroadcastvideooutput/resetframebuffer()"
+      },
+      "-setDelegate:queue:": {
+        "doc": "Sets the receiver’s delegate and the dispatch queue on which the delegate will be called.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avcapturebroadcastvideooutput/setdelegate(_:queue:)"
       }
     },
     "AVCaptureConnection": {
@@ -3022,6 +2889,10 @@
       "-setPrimaryConstituentDeviceSwitchingBehavior:restrictedSwitchingBehaviorConditions:": {
         "doc": "Sets the switching behavior of the primary constituent device.",
         "url": "https://developer.apple.com/documentation/avfoundation/avcapturedevice/setprimaryconstituentdeviceswitchingbehavior(_:restrictedswitchingbehaviorconditions:)"
+      },
+      "-setPrimaryConstituentDeviceSwitchingBehaviorLockedWithDevice:": {
+        "doc": "Sets the switching behavior of the primary constituent device to locked with the specified device.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avcapturedevice/setprimaryconstituentdeviceswitchingbehaviorlockedwith(_:)"
       },
       "-supportsAVCaptureSessionPreset:": {
         "doc": "Returns a Boolean value that indicates whether you can use the device with capture session configured with the specified preset.",
@@ -4628,6 +4499,46 @@
         "url": "https://developer.apple.com/documentation/avfoundation/avpersistablecontentkeyrequest/persistablecontentkey(fromkeyvendorresponse:options:)"
       }
     },
+    "AVPlannedSegmentConfiguration": {
+      "-initWithDuration:": {
+        "doc": "Creates an instance of AVPlannedSegmentConfiguration specifying the duration of the planned segment.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avplannedsegmentconfiguration/init(duration:)"
+      }
+    },
+    "AVPlannedSegmentWritingRequest": {
+      "-cancel": {
+        "doc": "Clients should call this if the current segment is to be cancelled, but the export is still expected to be resumed at a later time. For example, this could happen if the export is running in the background and the expiration handler is called due to changes in system conditions.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avplannedsegmentwritingrequest/cancel"
+      },
+      "-finish": {
+        "doc": "Clients must call this method after all writing activities for the intermediate segment file have successfully completed.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avplannedsegmentwritingrequest/finish"
+      },
+      "-finishWithClientState:": {
+        "doc": "Clients must call this method after all writing activities for the intermediate segment file have successfully completed. If called with nil, this is equivalent to calling finish.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avplannedsegmentwritingrequest/finishwithclientstate:"
+      },
+      "-finishWithError:": {
+        "doc": "Clients must call this method if a non-recoverable error occurs while generating the segment file. The completionHandler of AVAssetWritingPlanner will be called with an error whose code is AVErrorAssetWritingPlannerClientWritingError, and the error provided here will be available in the NSUnderlyingErrorKey of the userInfo dictionary. If called with nil, this is equivalent to calling finish.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avplannedsegmentwritingrequest/finishwitherror:"
+      }
+    },
+    "AVPlannedVideoSegmentConfiguration": {
+      "-initWithNumberOfFrames:duration:": {
+        "doc": "Creates an instance of AVPlannedVideoSegmentConfiguration specifying the number of frames in and total duration of the segment.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avplannedvideosegmentconfiguration/init(numberofframes:duration:)"
+      }
+    },
+    "AVPlannedVideoSegmentWritingRequest": {
+      "-createResumableCompressionSessionWithAllocator:width:height:codecType:encoderSpecification:sourceImageBufferAttributes:compressedDataAllocator:outputCallback:outputCallbackRefCon:returningError:": {
+        "doc": "Helper function to create a VTCompressionSession that restores the video encoder state persisted at the end of the previous segment.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avplannedvideosegmentwritingrequest/createresumablecompressionsessionwithallocator:width:height:codectype:encoderspecification:sourceimagebufferattributes:compresseddataallocator:outputcallback:outputcallbackrefcon:returningerror:"
+      },
+      "-resumableAssetWriterInputWithMediaType:outputSettings:sourceFormatHint:returningError:": {
+        "doc": "Helper function that returns a minimally configured AVAssetWriterInput object for writing the current segment. The final video encoder state from the previous segment will be restored before writing starts.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avplannedvideosegmentwritingrequest/resumableassetwriterinputwithmediatype:outputsettings:sourceformathint:returningerror:"
+      }
+    },
     "AVPlaybackCoordinationMedium": {
       "-init": {
         "doc": "Initializes an AVPlaybackCoordinationMedium",
@@ -5030,6 +4941,20 @@
         "url": "https://developer.apple.com/documentation/avfoundation/avplayeritemrenderedlegibleoutput/setdelegate(_:queue:)"
       }
     },
+    "AVPlayerItemSampleBufferOutput": {
+      "-copyNextSampleBuffer": {
+        "doc": "Copies the next sample buffer for the output synchronously.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avplayeritemsamplebufferoutput/copynextsamplebuffer"
+      },
+      "-initWithConfiguration:": {
+        "doc": "Initializes an instance of AVPlayerItemSampleBufferOutput.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avplayeritemsamplebufferoutput/init(configuration:)"
+      },
+      "-setDelegate:queue:": {
+        "doc": "Sets the receiver’s delegate and a dispatch queue on which the delegate will be called.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avplayeritemsamplebufferoutput/setdelegate:queue:"
+      }
+    },
     "AVPlayerItemVideoOutput": {
       "-copyPixelBufferForItemTime:itemTimeForDisplay:": {
         "doc": "Retrieves an image that is appropriate for display at the specified item time, and marks the image as acquired.",
@@ -5128,12 +5053,22 @@
         "url": "https://developer.apple.com/documentation/avfoundation/avportraiteffectsmatte/dictionaryrepresentation(forauxiliarydatatype:)"
       },
       "-portraitEffectsMatteByApplyingExifOrientation:": {
-        "doc": "Returns a derivative portrait effects matte after applying the specified EXIF orientation.",
+        "doc": "Returns a derivative portrait effects matte after applying the specified Exif orientation.",
         "url": "https://developer.apple.com/documentation/avfoundation/avportraiteffectsmatte/applyingexiforientation(_:)"
       },
       "-portraitEffectsMatteByReplacingPortraitEffectsMatteWithPixelBuffer:error:": {
         "doc": "Returns a portrait effects matte by wrapping the replacement pixel buffer.",
         "url": "https://developer.apple.com/documentation/avfoundation/avportraiteffectsmatte/replacingportraiteffectsmatte(with:)"
+      }
+    },
+    "AVProVideoStorage": {
+      "-openSettings": {
+        "doc": "Opens the Pro Video Storage UI in Settings app.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avprovideostorage/opensettings()"
+      },
+      "-replenishCapacityWithCompletionHandler:": {
+        "doc": "Performs a best-effort attempt to restore Pro Video Storage to the initial capacity specified by the user in Settings app.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avprovideostorage/replenishcapacity(completionhandler:)"
       }
     },
     "AVQueuePlayer": {
@@ -5171,9 +5106,25 @@
       }
     },
     "AVSampleBufferAudioRenderer": {
+      "-enqueueSampleBuffer:": {
+        "doc": "Sends a sample buffer in order to render its contents.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avsamplebufferaudiorenderer/enqueue(_:)"
+      },
+      "-flush": {
+        "doc": "Instructs the receiver to discard pending enqueued sample buffers.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avsamplebufferaudiorenderer/flush()"
+      },
       "-flushFromSourceTime:completionHandler:": {
         "doc": "Flushes queued sample buffers with presentation time stamps later than or equal to the specified time.",
         "url": "https://developer.apple.com/documentation/avfoundation/avsamplebufferaudiorenderer/flush(fromsourcetime:completionhandler:)"
+      },
+      "-requestMediaDataWhenReadyOnQueue:usingBlock:": {
+        "doc": "Instructs the target to invoke a client-supplied block repeatedly, at its convenience, in order to gather sample buffers for playback.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avsamplebufferaudiorenderer/requestmediadatawhenready(on:using:)"
+      },
+      "-stopRequestingMediaData": {
+        "doc": "Cancels any current requestMediaDataWhenReadyOnQueue:usingBlock: call.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avsamplebufferaudiorenderer/stoprequestingmediadata()"
       }
     },
     "AVSampleBufferGenerator": {
@@ -5253,9 +5204,25 @@
       }
     },
     "AVSampleBufferVideoRenderer": {
+      "-enqueueSampleBuffer:": {
+        "doc": "Sends a sample buffer in order to render its contents.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avsamplebuffervideorenderer/enqueue(_:)"
+      },
+      "-flush": {
+        "doc": "Instructs the receiver to discard pending enqueued sample buffers.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avsamplebuffervideorenderer/flush()"
+      },
       "-flushWithRemovalOfDisplayedImage:completionHandler:": {
         "doc": "Tells the video renderer to discard pending enqueued sample buffers.",
         "url": "https://developer.apple.com/documentation/avfoundation/avsamplebuffervideorenderer/flush(removingdisplayedimage:completionhandler:)"
+      },
+      "-requestMediaDataWhenReadyOnQueue:usingBlock:": {
+        "doc": "Instructs the target to invoke a client-supplied block repeatedly, at its convenience, in order to gather sample buffers for playback.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avsamplebuffervideorenderer/requestmediadatawhenready(on:using:)"
+      },
+      "-stopRequestingMediaData": {
+        "doc": "Cancels any current requestMediaDataWhenReadyOnQueue:usingBlock: call.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avsamplebuffervideorenderer/stoprequestingmediadata()"
       }
     },
     "AVSampleCursor": {
@@ -5674,7 +5641,7 @@
         "url": "https://developer.apple.com/documentation/avfoundation/avassetexportsession/state"
       },
       "AVAssetExportSessionResumptionFailureReason": {
-        "doc": "An enum that identifies various reasons why resumable export configuration has failed.",
+        "doc": "The reason that configuring the export session for resumption failed.",
         "url": "https://developer.apple.com/documentation/avfoundation/avassetexportsession/resumptionfailurereason"
       },
       "AVAssetExportSessionStatus": {
@@ -5721,10 +5688,6 @@
         "doc": "An optional error object.",
         "url": "https://developer.apple.com/documentation/avfoundation/avassetexportsession/error"
       },
-      "estimatedOutputFileLength": {
-        "doc": "The estimated length of the exported file, in bytes.",
-        "url": "https://developer.apple.com/documentation/avfoundation/avassetexportsession/estimatedoutputfilelength"
-      },
       "export(to:as:isolation:)": {
         "doc": "Exports the asset to the output location in the specified file type.",
         "url": "https://developer.apple.com/documentation/avfoundation/avassetexportsession/export(to:as:isolation:)"
@@ -5732,10 +5695,6 @@
       "fileLengthLimit": {
         "doc": "The file length that the output of the session must not exceed.",
         "url": "https://developer.apple.com/documentation/avfoundation/avassetexportsession/filelengthlimit"
-      },
-      "maxDuration": {
-        "doc": "Provides an estimate of the maximum duration of the exported media.",
-        "url": "https://developer.apple.com/documentation/avfoundation/avassetexportsession/maxduration"
       },
       "metadata": {
         "doc": "The metadata an export session writes to the output container file.",
@@ -5784,6 +5743,20 @@
       "videoComposition": {
         "doc": "An optional object that provides instructions for how to composite frames of video.",
         "url": "https://developer.apple.com/documentation/avfoundation/avassetexportsession/videocomposition"
+      }
+    },
+    "AVAssetExportSessionResumptionState": {
+      "configurationFailureReason": {
+        "doc": "The reason that the export session couldn’t be configured as resumable.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avassetexportsessionresumptionstate/configurationfailurereason"
+      },
+      "resumingFromPreviousState": {
+        "doc": "A Boolean value that indicates whether or not a resuming export is continuing from a previous state.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avassetexportsessionresumptionstate/resumingfrompreviousstate"
+      },
+      "resumptionConfigured": {
+        "doc": "A Boolean value that indicates whether the export session is configured as resumable.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avassetexportsessionresumptionstate/resumptionconfigured"
       }
     },
     "AVAssetImageGenerator": {
@@ -6264,6 +6237,20 @@
         "url": "https://developer.apple.com/documentation/avfoundation/avassettrackgroup/trackids"
       }
     },
+    "AVAssetTrackPlan": {
+      "assemblyTrackID": {
+        "doc": "This is the track ID of this track when it is included in the assemblyComposition the planner passes to the completion handler to assemble all planned segments of all tracks into a single AVComposition.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avassettrackplan/assemblytrackid"
+      },
+      "mediaType": {
+        "doc": "The media type of this track.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avassettrackplan/mediatype"
+      },
+      "segmentConfigurations": {
+        "doc": "Array of AVPlannedSegmentConfigurations, each element specifying the configuration of a planned segment, ordered in output PTS order.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avassettrackplan/segmentconfigurations"
+      }
+    },
     "AVAssetTrackSegment": {
       "empty": {
         "doc": "A Boolean value that indicates whether the segment is empty.",
@@ -6304,26 +6291,14 @@
         "url": "https://developer.apple.com/documentation/avfoundation/avassetvariant/videoattributes-swift.property"
       }
     },
-    "AVAssetVariantAudioAttributes": {
-      "formatIDs": {
-        "doc": "The audio formats of the renditions present in the variant.",
-        "url": "https://developer.apple.com/documentation/avfoundation/avassetvariantaudioattributes/formatids"
-      }
-    },
-    "AVAssetVariantAudioRenditionSpecificAttributes": {
-      "channelCount": {
-        "doc": "The count of audio channels in the rendition.",
-        "url": "https://developer.apple.com/documentation/avfoundation/avassetvariantaudiorenditionspecificattributes/channelcount"
-      }
-    },
-    "AVAssetVariantVideoAttributes": {
-      "codecTypes": {
-        "doc": "The video sample codec types present in the variant’s renditions.",
-        "url": "https://developer.apple.com/documentation/avfoundation/avassetvariantvideoattributes/codectypes"
+    "AVAssetVideoTrackPlan": {
+      "init(videoCodecType:encoderSpecification:mediaType:segmentConfigurations:assemblyTrackID:)": {
+        "doc": "Creates an instance of AVAssetVideoTrackPlan.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avassetvideotrackplan/init(videocodectype:encoderspecification:mediatype:segmentconfigurations:assemblytrackid:)"
       },
-      "nominalFrameRate": {
-        "doc": "The nominal frame rate of the variant’s renditions.",
-        "url": "https://developer.apple.com/documentation/avfoundation/avassetvariantvideoattributes/nominalframerate"
+      "videoCodecType": {
+        "doc": "Video codec type of this track",
+        "url": "https://developer.apple.com/documentation/avfoundation/avassetvideotrackplan/videocodectype"
       }
     },
     "AVAssetWriter": {
@@ -6634,6 +6609,42 @@
         "url": "https://developer.apple.com/documentation/avfoundation/avassetwriterinputtaggedpixelbuffergroupadaptor/sourcepixelbufferattributes"
       }
     },
+    "AVAssetWritingPlanner": {
+      "AVAssetWritingPlanner.SegmentResult": {
+        "doc": "Result type for manual segment completion control.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avassetwritingplanner/segmentresult"
+      },
+      "AVPlannedVideoSegmentBoundaryGuidelines": {
+        "doc": "AVPlannedVideoSegmentBoundaryGuidelines provides guidance on determining planned segment boundaries for a video track in an incremental writing session executed by the AVAssetWritingPlanner.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avassetwritingplanner/segmentboundaryguidelines"
+      },
+      "executePlan()": {
+        "doc": "Starts the incremental segment writing.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avassetwritingplanner/executeplan()"
+      },
+      "init(directoryForTemporaryFiles:)": {
+        "doc": "Creates an instance of AVAssetWritingPlanner given a unique file directory to host all incremental segment files and other intermediate files.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avassetwritingplanner/init(directoryfortemporaryfiles:)"
+      },
+      "plan(_:segmentHandler:)": {
+        "doc": "Adds a track plan with manual segment completion control.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avassetwritingplanner/plan(_:segmenthandler:)"
+      },
+      "progress": {
+        "doc": "The current progress of the AVAssetWritingPlanner.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avassetwritingplanner/progress"
+      },
+      "segmentBoundaryGuidelinesForVideo(codecType:encoderSpecification:)": {
+        "doc": "Returns segment boundary guidelines that help clients determine how to segment compression video tracks with best results.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avassetwritingplanner/segmentboundaryguidelinesforvideo(codectype:encoderspecification:)"
+      }
+    },
+    "AVAssetWritingPlannerProgress": {
+      "overallProgress": {
+        "doc": "The overall progress across all tracks.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avassetwritingplannerprogress/overallprogress"
+      }
+    },
     "AVAsynchronousCIImageFilteringRequest": {
       "compositionTime": {
         "doc": "The time in the video composition corresponding to the frame being processed.",
@@ -6678,8 +6689,8 @@
         "url": "https://developer.apple.com/documentation/avfoundation/avasynchronousvideocompositionrequest/sourcereadysamplebuffer(bytrackid:)"
       },
       "sourceSampleDataTrackIDs": {
-        "doc": "The identifiers of tracks that contain source sample data.",
-        "url": "https://developer.apple.com/documentation/avfoundation/avasynchronousvideocompositionrequest/sourcesampledatatrackids-3yiab"
+        "doc": "The identifiers of tracks that contain source metadata.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avasynchronousvideocompositionrequest/sourcesampledatatrackids-9vxz5"
       },
       "sourceTaggedDynamicBuffers(byTrackID:)": {
         "doc": "Returns the source tagged dynamic buffers for the given track ID. Returns nil if the video track does not contain tagged buffers, or if the track does not contain video. This function should only be called when supportsSourceTaggedBuffers is YES.",
@@ -6970,6 +6981,20 @@
         "url": "https://developer.apple.com/documentation/avfoundation/avcaptionrenderer/captions"
       }
     },
+    "AVCaptureAncillaryDataEncoder": {
+      "currentUserDefinedAncillaryData": {
+        "doc": "This is a representation of the user defined anacillary data.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avcaptureancillarydataencoder/currentuserdefinedancillarydata"
+      },
+      "enabled": {
+        "doc": "Indicates whether ancillary data should be encoded and transmitted.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avcaptureancillarydataencoder/isenabled"
+      },
+      "userDefinedAncillaryDataSizeRemaining": {
+        "doc": "Allows users to track how much data in bytes can be added to the userDefinedAncillaryData.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avcaptureancillarydataencoder/userdefinedancillarydatasizeremaining"
+      }
+    },
     "AVCaptureAudioChannel": {
       "averagePowerLevel": {
         "doc": "The instantaneous average power level in decibels.",
@@ -7032,6 +7057,40 @@
         "url": "https://developer.apple.com/documentation/avfoundation/avcaptureautoexposurebracketedstillimagesettings/exposuretargetbias"
       }
     },
+    "AVCaptureBroadcastVideoOutput": {
+      "AVCaptureBroadcastVideoOutputDroppedFrameReplacementPolicy": {
+        "doc": "Constants indicating the replacement policy when a video frame is dropped.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avcapturebroadcastvideooutput/droppedframereplacementpolicy-swift.enum"
+      },
+      "ancillaryDataEncoder": {
+        "doc": "The AVCaptureAncillaryDataEncoder that sends per-frame lens/camera/user-defined acquisition data along with the video buffer.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avcapturebroadcastvideooutput/ancillarydataencoder"
+      },
+      "delegate": {
+        "doc": "The receiver’s delegate.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avcapturebroadcastvideooutput/delegate"
+      },
+      "delegateCallbackQueue": {
+        "doc": "The dispatch queue on which all AVCaptureBroadcastVideoOutputDelegate methods will be called.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avcapturebroadcastvideooutput/delegatecallbackqueue"
+      },
+      "droppedFrameReplacementPolicy": {
+        "doc": "The strategy used to replace dropped video frames.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avcapturebroadcastvideooutput/droppedframereplacementpolicy-swift.property"
+      },
+      "maxBufferedFrameCount": {
+        "doc": "This represents the maximum count of buffered frames. By default the value is 0, which means late frames are immediately dropped to maintain minimal latency.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avcapturebroadcastvideooutput/maxbufferedframecount"
+      },
+      "maxSupportedBufferedFrameCount": {
+        "doc": "The maximum value supported for maxBufferedFrameCount.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avcapturebroadcastvideooutput/maxsupportedbufferedframecount"
+      },
+      "videoSettings": {
+        "doc": "The current video output settings for the broadcast video output.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avcapturebroadcastvideooutput/videosettings"
+      }
+    },
     "AVCaptureConnection": {
       "active": {
         "doc": "Indicates whether the connection is active.",
@@ -7048,6 +7107,10 @@
       "automaticallyAdjustsVideoMirroring": {
         "doc": "A Boolean value that indicates whether you can enable mirroring based on a session’s configuration.",
         "url": "https://developer.apple.com/documentation/avfoundation/avcaptureconnection/automaticallyadjustsvideomirroring"
+      },
+      "automaticallyEnablesLowLightVideoNoiseReduction": {
+        "doc": "Indicates whether the connection should automatically enable low light video noise reduction when the connection supports it.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avcaptureconnection/automaticallyenableslowlightvideonoisereduction"
       },
       "cameraIntrinsicMatrixDeliveryEnabled": {
         "doc": "A Boolean value that indicates whether the connection can configure the capture pipeline to deliver camera intrinsics information.",
@@ -7068,6 +7131,14 @@
       "inputPorts": {
         "doc": "An array of the connection’s input ports.",
         "url": "https://developer.apple.com/documentation/avfoundation/avcaptureconnection/inputports"
+      },
+      "lowLightVideoNoiseReductionEnabled": {
+        "doc": "Indicates whether low light video noise reduction is enabled for the current session.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avcaptureconnection/islowlightvideonoisereductionenabled"
+      },
+      "lowLightVideoNoiseReductionSupported": {
+        "doc": "Indicates whether the connection supports low light video noise reduction.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avcaptureconnection/islowlightvideonoisereductionsupported"
       },
       "output": {
         "doc": "The connection’s output port, if applicable.",
@@ -7130,7 +7201,7 @@
         "url": "https://developer.apple.com/documentation/avfoundation/avcaptureconnection/videopreviewlayer"
       },
       "videoRotationAngle": {
-        "doc": "A rotation angle the connection applies to a video flowing through it.",
+        "doc": "A rotation angle the connection applies to the video flowing through it.",
         "url": "https://developer.apple.com/documentation/avfoundation/avcaptureconnection/videorotationangle"
       },
       "videoScaleAndCropFactor": {
@@ -7291,6 +7362,18 @@
         "doc": "A Boolean value that indicates whether the device is a Continuity Camera.",
         "url": "https://developer.apple.com/documentation/avfoundation/avcapturedevice/iscontinuitycamera"
       },
+      "continuousAutoFocusTrackingEnabled": {
+        "doc": "Indicates whether the device should use continuous autofocus tracking.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avcapturedevice/iscontinuousautofocustrackingenabled"
+      },
+      "continuousAutoFocusTrackingLensPositionBias": {
+        "doc": "Bias applied to the lens position during continuous autofocus tracking, normalized between -1 and 1.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avcapturedevice/continuousautofocustrackinglenspositionbias"
+      },
+      "continuousAutoFocusTrackingSubjectAcquired": {
+        "doc": "Indicates whether the device is actively tracking a subject in the scene to maintain focus.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avcapturedevice/iscontinuousautofocustrackingsubjectacquired"
+      },
       "deviceType": {
         "doc": "The type of device, such as a built-in microphone or wide-angle camera.",
         "url": "https://developer.apple.com/documentation/avfoundation/avcapturedevice/devicetype-swift.property"
@@ -7359,6 +7442,10 @@
         "doc": "The switching behavior for the primary constituent device.",
         "url": "https://developer.apple.com/documentation/avfoundation/avcapturedevice/primaryconstituentdeviceswitchingbehavior-swift.property"
       },
+      "primaryConstituentDeviceSwitchingBehaviorLockedWithDeviceSupported": {
+        "doc": "Whether locking to a particular primary constituent device is supported.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avcapturedevice/isprimaryconstituentdeviceswitchingbehaviorlockedwithdevicesupported"
+      },
       "smartFramingMonitor": {
         "doc": "A monitor owned by the device that recommends an optimal framing based on the content in the scene.",
         "url": "https://developer.apple.com/documentation/avfoundation/avcapturedevice/smartframingmonitor"
@@ -7406,36 +7493,6 @@
       "virtualDevice": {
         "doc": "A Boolean value that indicates whether the device consists of two or more physical devices.",
         "url": "https://developer.apple.com/documentation/avfoundation/avcapturedevice/isvirtualdevice"
-      }
-    },
-    "AVCaptureDeviceFormat": {
-      "secondaryNativeResolutionZoomFactors": {
-        "doc": "The zoom factors at which this device transitions to secondary native resolution modes.",
-        "url": "https://developer.apple.com/documentation/avfoundation/avcapturedeviceformat/secondarynativeresolutionzoomfactors"
-      },
-      "supportedColorSpaces": {
-        "doc": "The list of color spaces the format supports for image and video capture.",
-        "url": "https://developer.apple.com/documentation/avfoundation/avcapturedeviceformat/supportedcolorspaces"
-      },
-      "supportedMaxPhotoDimensions": {
-        "doc": "The maximum photo dimension this format supports.",
-        "url": "https://developer.apple.com/documentation/avfoundation/avcapturedeviceformat/supportedmaxphotodimensions"
-      },
-      "supportedVideoZoomFactorsForDepthDataDelivery": {
-        "doc": "The zoom factors that a format supports for depth data delivery.",
-        "url": "https://developer.apple.com/documentation/avfoundation/avcapturedeviceformat/supportedvideozoomfactorsfordepthdatadelivery"
-      },
-      "supportedVideoZoomRangesForDepthDataDelivery": {
-        "doc": "The zoom ranges that support the delivery of depth data.",
-        "url": "https://developer.apple.com/documentation/avfoundation/avcapturedeviceformat/supportedvideozoomrangesfordepthdatadelivery"
-      },
-      "systemRecommendedExposureBiasRange": {
-        "doc": "The system’s recommended exposure bias range for this device format.",
-        "url": "https://developer.apple.com/documentation/avfoundation/avcapturedeviceformat/systemrecommendedexposurebiasrange"
-      },
-      "systemRecommendedVideoZoomRange": {
-        "doc": "The system’s recommended zoom range for this device format.",
-        "url": "https://developer.apple.com/documentation/avfoundation/avcapturedeviceformat/systemrecommendedvideozoomrange"
       }
     },
     "AVCaptureDeviceInput": {
@@ -7665,9 +7722,21 @@
       }
     },
     "AVCaptureMovieFileOutput": {
+      "automaticallyAdjustsCinematicVideoMetadataCaptureEnabled": {
+        "doc": "Controls whether cinematic video metadata capture is automatically managed by the framework.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avcapturemoviefileoutput/automaticallyadjustscinematicvideometadatacaptureenabled"
+      },
       "availableVideoCodecTypes": {
         "doc": "The video codecs types the output supports for recording movie files.",
         "url": "https://developer.apple.com/documentation/avfoundation/avcapturemoviefileoutput/availablevideocodectypes"
+      },
+      "cinematicVideoMetadataCaptureEnabled": {
+        "doc": "Indicates whether cinematic video metadata is captured to movie files.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avcapturemoviefileoutput/iscinematicvideometadatacaptureenabled"
+      },
+      "cinematicVideoMetadataCaptureSupported": {
+        "doc": "Returns whether capturing cinematic video metadata to the movie file is supported in the current session configuration.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avcapturemoviefileoutput/iscinematicvideometadatacapturesupported"
       },
       "metadata": {
         "doc": "The metadata for the output file.",
@@ -7865,7 +7934,7 @@
       },
       "availablePhotoPixelFormatTypes": {
         "doc": "The pixel formats the capture output supports for photo capture.",
-        "url": "https://developer.apple.com/documentation/avfoundation/avcapturephotooutput/availablephotopixelformattypes-6eyb"
+        "url": "https://developer.apple.com/documentation/avfoundation/avcapturephotooutput/availablephotopixelformattypes-3ydgm"
       },
       "availableRawPhotoFileTypes": {
         "doc": "The list of file types currently supported for RAW format capture and output.",
@@ -9484,6 +9553,16 @@
         "url": "https://developer.apple.com/documentation/avfoundation/avmetadatabodyobject/bodyid"
       }
     },
+    "AVMetadataCinematicVideoMetadataObject": {
+      "cinematicVideoMetadataFormatDescription": {
+        "doc": "The format description for Cinematic video timed metadata sample buffers.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avmetadatacinematicvideometadataobject/cinematicvideometadataformatdescription"
+      },
+      "timedMetadataGroup": {
+        "doc": "A timed metadata group containing the Cinematic video metadata.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avmetadatacinematicvideometadataobject/timedmetadatagroup"
+      }
+    },
     "AVMetadataFaceObject": {
       "faceID": {
         "doc": "The unique ID for this face metadata object.",
@@ -9598,8 +9677,8 @@
     },
     "AVMetadataMachineReadableCodeObject": {
       "corners": {
-        "doc": "A Swift array of corner points.",
-        "url": "https://developer.apple.com/documentation/avfoundation/avmetadatamachinereadablecodeobject/corners-58qbe"
+        "doc": "The points defining the (x, y) locations of the corners.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avmetadatamachinereadablecodeobject/corners-8f6bv"
       },
       "descriptor": {
         "doc": "A barcode description for use in Core Image.",
@@ -9636,7 +9715,7 @@
         "url": "https://developer.apple.com/documentation/avfoundation/avmetadataobject/groupid"
       },
       "objectID": {
-        "doc": "A unique identifier for each detected object type (face, body, hands, heads and salient objects) in a collection.",
+        "doc": "A unique identifier for each detected object type (face, body, hands, heads, salient objects and focus-tracked objects) in a collection.",
         "url": "https://developer.apple.com/documentation/avfoundation/avmetadataobject/objectid"
       },
       "time": {
@@ -9694,6 +9773,12 @@
       "segmentDuration": {
         "doc": "Returns the duration of segment in seconds.",
         "url": "https://developer.apple.com/documentation/avfoundation/avmetrichlsmediasegmentrequestevent/segmentduration"
+      }
+    },
+    "AVMetricPlaybackModeSwitchEvent": {
+      "mode": {
+        "doc": "Returns the mode into which playback entered.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avmetricplaybackmodeswitchevent/mode"
       }
     },
     "AVMetricPlayerItemVariantSwitchEvent": {
@@ -10340,8 +10425,8 @@
         "url": "https://developer.apple.com/documentation/avfoundation/avmutablevideocomposition/rendersize"
       },
       "sourceSampleDataTrackIDs": {
-        "doc": "The identifiers of source sample data tracks in the composition that the compositor requires to compose frames.",
-        "url": "https://developer.apple.com/documentation/avfoundation/avmutablevideocomposition/sourcesampledatatrackids-21o6b"
+        "doc": "The identifiers of source sample data tracks in the composition that the object requires to compose frames.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avmutablevideocomposition/sourcesampledatatrackids-7i02t"
       },
       "sourceTrackIDForFrameTiming": {
         "doc": "An identifier of the source track from which the video composition derives frame timing.",
@@ -10404,6 +10489,54 @@
       "videoSettings": {
         "doc": "A video settings dictionary.",
         "url": "https://developer.apple.com/documentation/avfoundation/avoutputsettingsassistant/videosettings"
+      }
+    },
+    "AVPlannedSegmentConfiguration": {
+      "duration": {
+        "doc": "The duration of this planned segment.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avplannedsegmentconfiguration/duration"
+      }
+    },
+    "AVPlannedSegmentWritingRequest": {
+      "assemblyTrackID": {
+        "doc": "The trackID identifies which track should be written to this segment file. This is the same track ID in the AVAssetTrackPlan object. This is also the trackID the AVAssetWritingPlanner uses to build the assembled AVComposition before it calls the completion handler.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avplannedsegmentwritingrequest/assemblytrackid"
+      },
+      "clientStateToRestore": {
+        "doc": "The client state persisted from the previous segment, if any. Specifically, this is the NSData provided to the previous segment’s finishWithClientState: method. The client is responsible to restore its client state before writing the current segment. For example, clients such as compositors with a temporal element may need some processing history of previous samples in order to generate an output sample at time N. This will be nil for algorithms that are stateless.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avplannedsegmentwritingrequest/clientstatetorestore"
+      },
+      "progress": {
+        "doc": "The current progress for the track identified by assemblyTrackID.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avplannedsegmentwritingrequest/progress"
+      },
+      "segmentFileOutputURL": {
+        "doc": "The URL of the file where this incremental segment should be written to.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avplannedsegmentwritingrequest/segmentfileoutputurl"
+      },
+      "timeRange": {
+        "doc": "The PTS range for this segment.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avplannedsegmentwritingrequest/timerange"
+      }
+    },
+    "AVPlannedVideoSegmentConfiguration": {
+      "frameCount": {
+        "doc": "The number of frames in this planned video segment.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avplannedvideosegmentconfiguration/framecount"
+      }
+    },
+    "AVPlannedVideoSegmentWritingRequest": {
+      "createResumableCompressionSession(width:height:codecType:encoderSpecification:sourceImageBufferAttributes:outputHandler:)": {
+        "doc": "Helper function to create a VTCompressionSession that restores the video encoder state persisted at the end of the previous segment.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avplannedvideosegmentwritingrequest/createresumablecompressionsession(width:height:codectype:encoderspecification:sourceimagebufferattributes:outputhandler:)"
+      },
+      "frameCount": {
+        "doc": "The number of frames in this planned video segment. This is provided for convenience, and is the same value that was configured for the segment in AVPlannedVideoSegmentConfiguration.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avplannedvideosegmentwritingrequest/framecount"
+      },
+      "makeResumableWriterInput(for:outputSettings:sourceFormatHint:)": {
+        "doc": "Helper function that returns a minimally configured AVAssetWriterInput object for writing the current segment.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avplannedvideosegmentwritingrequest/makeresumablewriterinput(for:outputsettings:sourceformathint:)"
       }
     },
     "AVPlaybackCoordinationMedium": {
@@ -10932,7 +11065,7 @@
         "url": "https://developer.apple.com/documentation/avfoundation/avplayeritem/automaticallypreservestimeoffsetfromlive"
       },
       "canPlayFastForward": {
-        "doc": "A Boolean value that indicates whether the item can be fast forwarded.",
+        "doc": "A Boolean value that indicates whether the item can play at fast-forward rates.",
         "url": "https://developer.apple.com/documentation/avfoundation/avplayeritem/canplayfastforward"
       },
       "canPlayFastReverse": {
@@ -11426,6 +11559,34 @@
         "url": "https://developer.apple.com/documentation/avfoundation/avplayeritemrenderedlegibleoutput/videodisplaysize"
       }
     },
+    "AVPlayerItemSampleBufferOutput": {
+      "AVPlayerItemSampleBufferOutput.SampleBufferInSequence": {
+        "doc": "Holds the information necessary for processing generated sample buffers.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avplayeritemsamplebufferoutput/samplebufferinsequence"
+      },
+      "delegate": {
+        "doc": "The receiver’s delegate.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avplayeritemsamplebufferoutput/delegate"
+      },
+      "delegateQueue": {
+        "doc": "The dispatch queue where the delegate is messaged.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avplayeritemsamplebufferoutput/delegatequeue"
+      },
+      "nextAvailableSampleBuffer()": {
+        "doc": "Returns the next sample buffer if it is already available.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avplayeritemsamplebufferoutput/nextavailablesamplebuffer()"
+      },
+      "nextSampleBuffer()": {
+        "doc": "Returns next sample buffer once it becomes available.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avplayeritemsamplebufferoutput/nextsamplebuffer()"
+      }
+    },
+    "AVPlayerItemSampleBufferOutputAudioConfiguration": {
+      "requestedAudioFormat": {
+        "doc": "Indicates the audio format in which the client prefers to receive the output sample buffers.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avplayeritemsamplebufferoutputaudioconfiguration/requestedaudioformat"
+      }
+    },
     "AVPlayerItemSegment": {
       "AVPlayerItemSegmentType": {
         "doc": "Constants that specify the type of segment.",
@@ -11437,7 +11598,7 @@
       },
       "loadedTimeRanges": {
         "doc": "The time ranges for the segment that have media data is readily available.",
-        "url": "https://developer.apple.com/documentation/avfoundation/avplayeritemsegment/loadedtimeranges-879hc"
+        "url": "https://developer.apple.com/documentation/avfoundation/avplayeritemsegment/loadedtimeranges-2p0fl"
       },
       "segmentType": {
         "doc": "The type content this segment represents.",
@@ -11578,12 +11739,6 @@
         "url": "https://developer.apple.com/documentation/avfoundation/avplayervideooutput/sample(forhosttime:)"
       }
     },
-    "AVPlayerVideoOutputConfiguration": {
-      "dataChannelDescriptions": {
-        "doc": "An array of data channels selected for this configuration.",
-        "url": "https://developer.apple.com/documentation/avfoundation/avplayervideooutputconfiguration/datachanneldescriptions"
-      }
-    },
     "AVPortraitEffectsMatte": {
       "mattingImage": {
         "doc": "The portrait effects matte’s internal image, formatted as a pixel buffer.",
@@ -11592,6 +11747,32 @@
       "pixelFormatType": {
         "doc": "The pixel format type of this portrait effects matte’s internal image.",
         "url": "https://developer.apple.com/documentation/avfoundation/avportraiteffectsmatte/pixelformattype"
+      }
+    },
+    "AVProVideoStorage": {
+      "AVProVideoStorageBusyReason": {
+        "doc": "A reason that Pro Video Storage may be busy.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avprovideostorage/busyreason"
+      },
+      "busyReasons": {
+        "doc": "Whether Pro Video Storage is busy and the associated reasons.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avprovideostorage/busyreasons"
+      },
+      "initialCapacity": {
+        "doc": "Initial size of Pro Video Storage in bytes.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avprovideostorage/initialcapacity"
+      },
+      "remainingCapacity": {
+        "doc": "Current size of Pro Video Storage in bytes.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avprovideostorage/remainingcapacity"
+      },
+      "sharedStorage": {
+        "doc": "Returns the singleton instance for Pro Video Storage.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avprovideostorage/shared"
+      },
+      "supported": {
+        "doc": "Whether Pro Video Storage is supported in its current configuration.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avprovideostorage/issupported"
       }
     },
     "AVRenderedCaptionImage": {
@@ -11639,9 +11820,17 @@
         "doc": "The error that caused the renderer to no longer render sample buffers.",
         "url": "https://developer.apple.com/documentation/avfoundation/avsamplebufferaudiorenderer/error"
       },
+      "hasSufficientMediaDataForReliablePlaybackStart": {
+        "doc": "Indicates whether the enqueued media data meets the renderer’s preroll level.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avsamplebufferaudiorenderer/hassufficientmediadataforreliableplaybackstart"
+      },
       "muted": {
         "doc": "A Boolean value that indicates whether audio for the renderer is in a muted state.",
         "url": "https://developer.apple.com/documentation/avfoundation/avsamplebufferaudiorenderer/ismuted"
+      },
+      "readyForMoreMediaData": {
+        "doc": "Indicates the readiness of the receiver to accept more sample buffers.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avsamplebufferaudiorenderer/isreadyformoremediadata"
       },
       "status": {
         "doc": "The status of the audio renderer.",
@@ -11696,8 +11885,8 @@
         "url": "https://developer.apple.com/documentation/avfoundation/avsamplebufferrendersynchronizer/delaysratechangeuntilhassufficientmediadata"
       },
       "intendedSpatialAudioExperience": {
-        "doc": "The intended spatial audio experience applied to all AVSampleBufferAudioRenderers within this synchronizer.",
-        "url": "https://developer.apple.com/documentation/avfoundation/avsamplebufferrendersynchronizer/intendedspatialaudioexperience-2wthu"
+        "doc": "The synchronizer’s intended Spatial Audio experience.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avsamplebufferrendersynchronizer/intendedspatialaudioexperience-3z7d3"
       },
       "rate": {
         "doc": "The current playback rate.",
@@ -11705,11 +11894,7 @@
       },
       "removeReceiver(_:at:)": {
         "doc": "Removes a receiver and its renderer from the synchronizer.",
-        "url": "https://developer.apple.com/documentation/avfoundation/avsamplebufferrendersynchronizer/removereceiver(_:at:)"
-      },
-      "removeReceiver(receiver:at:)": {
-        "doc": "Removes a receiver and its renderer from the synchronizer.",
-        "url": "https://developer.apple.com/documentation/avfoundation/avsamplebufferrendersynchronizer/removereceiver(receiver:at:)"
+        "url": "https://developer.apple.com/documentation/avfoundation/avsamplebufferrendersynchronizer/removereceiver(_:at:)-3yxub"
       },
       "renderers": {
         "doc": "An array of queued sample buffer renderers currently attached to the synchronizer.",
@@ -11717,7 +11902,7 @@
       },
       "sampleBufferReceiver(adding:)": {
         "doc": "Adds a renderer to the list of renderers under the synchronizer’s control and returns a sample buffer receiver to enqueue samples.",
-        "url": "https://developer.apple.com/documentation/avfoundation/avsamplebufferrendersynchronizer/samplebufferreceiver(adding:)-rxap"
+        "url": "https://developer.apple.com/documentation/avfoundation/avsamplebufferrendersynchronizer/samplebufferreceiver(adding:)-5dw84"
       },
       "timebase": {
         "doc": "The synchronizer’s rendering timebase which determines how it interprets timestamps.",
@@ -11783,9 +11968,17 @@
         "doc": "An object the describes the error that caused the rendering failure.",
         "url": "https://developer.apple.com/documentation/avfoundation/avsamplebuffervideorenderer/error"
       },
+      "hasSufficientMediaDataForReliablePlaybackStart": {
+        "doc": "Indicates whether the enqueued media data meets the renderer’s preroll level.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avsamplebuffervideorenderer/hassufficientmediadataforreliableplaybackstart"
+      },
+      "readyForMoreMediaData": {
+        "doc": "Indicates the readiness of the receiver to accept more sample buffers.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avsamplebuffervideorenderer/isreadyformoremediadata"
+      },
       "recommendedPixelBufferAttributes": {
-        "doc": "Recommended pixel buffer attributes for optimal performance when using CMSampleBuffers containing CVPixelbuffers.",
-        "url": "https://developer.apple.com/documentation/avfoundation/avsamplebuffervideorenderer/recommendedpixelbufferattributes-6zrqb"
+        "doc": "Recommended pixel buffer attributes for optimal performance when using CMSampleBuffers containing CVPixelBuffers.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avsamplebuffervideorenderer/recommendedpixelbufferattributes-6326f"
       },
       "requiresFlushToResumeDecoding": {
         "doc": "A Boolean value that Indicates whether the renderer requires flushing to continue decoding frames.",
@@ -11880,7 +12073,7 @@
         "url": "https://developer.apple.com/documentation/avfoundation/avtextstylerule/textmarkupattributes"
       },
       "textSelector": {
-        "doc": "A string that identifies the text to which the attributes should apply.",
+        "doc": "A string that identifies the text the style attributes apply to.",
         "url": "https://developer.apple.com/documentation/avfoundation/avtextstylerule/textselector"
       }
     },
@@ -12011,7 +12204,7 @@
       },
       "spatialVideoConfigurations": {
         "doc": "Indicates the spatial configurations that are available to associate with the output of the video composition.",
-        "url": "https://developer.apple.com/documentation/avfoundation/avvideocomposition/spatialvideoconfigurations-2ipps"
+        "url": "https://developer.apple.com/documentation/avfoundation/avvideocomposition/spatialvideoconfigurations-80iab"
       }
     },
     "AVVideoCompositionCoreAnimationTool": {

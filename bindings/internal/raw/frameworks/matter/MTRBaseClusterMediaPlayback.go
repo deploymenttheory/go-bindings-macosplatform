@@ -147,7 +147,7 @@ func MTRBaseClusterMediaPlaybackFromID(id objc.ID) *MTRBaseClusterMediaPlayback 
 	return o
 }
 
-// Command Play Upon receipt, this SHALL play media.
+// Command Play This command is used to start playback of the media.
 func (o *MTRBaseClusterMediaPlayback) PlayWithParamsCompletion(params *MTRMediaPlaybackClusterPlayParams, completion func(*MTRMediaPlaybackClusterPlaybackResponseParams, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -176,7 +176,7 @@ func (o *MTRBaseClusterMediaPlayback) PlayWithCompletion(completion func(*MTRMed
 	o.Ptr().Send(_mTRBaseClusterMediaPlaybackSelPlayWithCompletion, __block_completion)
 }
 
-// Command Pause Upon receipt, this SHALL pause media.
+// Command Pause This command is used to pause playback of the media.
 func (o *MTRBaseClusterMediaPlayback) PauseWithParamsCompletion(params *MTRMediaPlaybackClusterPauseParams, completion func(*MTRMediaPlaybackClusterPlaybackResponseParams, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -205,7 +205,7 @@ func (o *MTRBaseClusterMediaPlayback) PauseWithCompletion(completion func(*MTRMe
 	o.Ptr().Send(_mTRBaseClusterMediaPlaybackSelPauseWithCompletion, __block_completion)
 }
 
-// Command Stop Upon receipt, this SHALL stop media. User experience is context-specific. This will often navigate the user back to the location where media was originally launched.
+// Command Stop This command is used to stop playback of the media.
 func (o *MTRBaseClusterMediaPlayback) StopWithParamsCompletion(params *MTRMediaPlaybackClusterStopParams, completion func(*MTRMediaPlaybackClusterPlaybackResponseParams, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -234,7 +234,7 @@ func (o *MTRBaseClusterMediaPlayback) StopWithCompletion(completion func(*MTRMed
 	o.Ptr().Send(_mTRBaseClusterMediaPlaybackSelStopWithCompletion, __block_completion)
 }
 
-// Command StartOver Upon receipt, this SHALL Start Over with the current media playback item.
+// Command StartOver This command is used to start playback of the media from the beginning.
 func (o *MTRBaseClusterMediaPlayback) StartOverWithParamsCompletion(params *MTRMediaPlaybackClusterStartOverParams, completion func(*MTRMediaPlaybackClusterPlaybackResponseParams, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -263,7 +263,7 @@ func (o *MTRBaseClusterMediaPlayback) StartOverWithCompletion(completion func(*M
 	o.Ptr().Send(_mTRBaseClusterMediaPlaybackSelStartOverWithCompletion, __block_completion)
 }
 
-// Command Previous Upon receipt, this SHALL cause the handler to be invoked for "Previous". User experience is context-specific. This will often Go back to the previous media playback item.
+// Command Previous This command is used to go back to the previous media playback item.
 func (o *MTRBaseClusterMediaPlayback) PreviousWithParamsCompletion(params *MTRMediaPlaybackClusterPreviousParams, completion func(*MTRMediaPlaybackClusterPlaybackResponseParams, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -292,7 +292,7 @@ func (o *MTRBaseClusterMediaPlayback) PreviousWithCompletion(completion func(*MT
 	o.Ptr().Send(_mTRBaseClusterMediaPlaybackSelPreviousWithCompletion, __block_completion)
 }
 
-// Command Next Upon receipt, this SHALL cause the handler to be invoked for "Next". User experience is context-specific. This will often Go forward to the next media playback item.
+// Command Next This command is used to go to the next media playback item.
 func (o *MTRBaseClusterMediaPlayback) NextWithParamsCompletion(params *MTRMediaPlaybackClusterNextParams, completion func(*MTRMediaPlaybackClusterPlaybackResponseParams, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -321,7 +321,7 @@ func (o *MTRBaseClusterMediaPlayback) NextWithCompletion(completion func(*MTRMed
 	o.Ptr().Send(_mTRBaseClusterMediaPlaybackSelNextWithCompletion, __block_completion)
 }
 
-// Command Rewind Upon receipt, this SHALL Rewind through media. Different Rewind speeds can be used on the TV based upon the number of sequential calls to this function. This is to avoid needing to define every speed now (multiple fast, slow motion, etc).
+// Command Rewind This command is used to rewind the media.
 func (o *MTRBaseClusterMediaPlayback) RewindWithParamsCompletion(params *MTRMediaPlaybackClusterRewindParams, completion func(*MTRMediaPlaybackClusterPlaybackResponseParams, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -350,7 +350,7 @@ func (o *MTRBaseClusterMediaPlayback) RewindWithCompletion(completion func(*MTRM
 	o.Ptr().Send(_mTRBaseClusterMediaPlaybackSelRewindWithCompletion, __block_completion)
 }
 
-// Command FastForward Upon receipt, this SHALL Advance through media. Different FF speeds can be used on the TV based upon the number of sequential calls to this function. This is to avoid needing to define every speed now (multiple fast, slow motion, etc).
+// Command FastForward This command is used to fast forward the media.
 func (o *MTRBaseClusterMediaPlayback) FastForwardWithParamsCompletion(params *MTRMediaPlaybackClusterFastForwardParams, completion func(*MTRMediaPlaybackClusterPlaybackResponseParams, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -379,7 +379,7 @@ func (o *MTRBaseClusterMediaPlayback) FastForwardWithCompletion(completion func(
 	o.Ptr().Send(_mTRBaseClusterMediaPlaybackSelFastForwardWithCompletion, __block_completion)
 }
 
-// Command SkipForward Upon receipt, this SHALL Skip forward in the media by the given number of seconds, using the data as follows:
+// Command SkipForward This command is used to skip forward in the media.
 func (o *MTRBaseClusterMediaPlayback) SkipForwardWithParamsCompletion(params *MTRMediaPlaybackClusterSkipForwardParams, completion func(*MTRMediaPlaybackClusterPlaybackResponseParams, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -394,7 +394,7 @@ func (o *MTRBaseClusterMediaPlayback) SkipForwardWithParamsCompletion(params *MT
 	o.Ptr().Send(_mTRBaseClusterMediaPlaybackSelSkipForwardWithParamsCompletion, params.Ptr(), __block_completion)
 }
 
-// Command SkipBackward Upon receipt, this SHALL Skip backward in the media by the given number of seconds, using the data as follows:
+// Command SkipBackward This command is used to skip backward in the media.
 func (o *MTRBaseClusterMediaPlayback) SkipBackwardWithParamsCompletion(params *MTRMediaPlaybackClusterSkipBackwardParams, completion func(*MTRMediaPlaybackClusterPlaybackResponseParams, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -409,7 +409,7 @@ func (o *MTRBaseClusterMediaPlayback) SkipBackwardWithParamsCompletion(params *M
 	o.Ptr().Send(_mTRBaseClusterMediaPlaybackSelSkipBackwardWithParamsCompletion, params.Ptr(), __block_completion)
 }
 
-// Command Seek Upon receipt, this SHALL Skip backward in the media by the given number of seconds, using the data as follows:
+// Command Seek This command is used to seek to a specific position in the media.
 func (o *MTRBaseClusterMediaPlayback) SeekWithParamsCompletion(params *MTRMediaPlaybackClusterSeekParams, completion func(*MTRMediaPlaybackClusterPlaybackResponseParams, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {

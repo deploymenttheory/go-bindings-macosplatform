@@ -15,8 +15,6 @@ import (
 )
 
 // AuthorizationPublicKeyCredentialLargeBlobRegistrationInput is an idiomatic wrapper over the Objective-C class ASAuthorizationPublicKeyCredentialLargeBlobRegistrationInput.
-//
-// A type that encapsulates input for large binary object extensions during registration.
 type AuthorizationPublicKeyCredentialLargeBlobRegistrationInput struct {
 	objref.Handle
 }

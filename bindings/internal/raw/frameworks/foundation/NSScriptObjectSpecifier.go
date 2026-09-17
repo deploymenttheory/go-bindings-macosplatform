@@ -101,6 +101,7 @@ func (o *NSScriptObjectSpecifier) ObjectsByEvaluatingWithContainers(containers o
 	return _ret
 }
 
+// The child specifier of this specifier.
 func (o *NSScriptObjectSpecifier) ChildSpecifier() *NSScriptObjectSpecifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptObjectSpecifierSelChildSpecifier)
 	if _ret != 0 {
@@ -113,6 +114,7 @@ func (o *NSScriptObjectSpecifier) SetChildSpecifier(childSpecifier *NSScriptObje
 	o.Ptr().Send(_nSScriptObjectSpecifierSelSetChildSpecifier, childSpecifier.Ptr())
 }
 
+// The container specifier of this specifier.
 func (o *NSScriptObjectSpecifier) ContainerSpecifier() *NSScriptObjectSpecifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptObjectSpecifierSelContainerSpecifier)
 	if _ret != 0 {
@@ -125,6 +127,7 @@ func (o *NSScriptObjectSpecifier) SetContainerSpecifier(containerSpecifier *NSSc
 	o.Ptr().Send(_nSScriptObjectSpecifierSelSetContainerSpecifier, containerSpecifier.Ptr())
 }
 
+// A Boolean value that indicates whether the container is the object currently being tested by an `NSWhoseSpecifier`.
 func (o *NSScriptObjectSpecifier) ContainerIsObjectBeingTested() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSScriptObjectSpecifierSelContainerIsObjectBeingTested)
 	return _ret
@@ -134,6 +137,7 @@ func (o *NSScriptObjectSpecifier) SetContainerIsObjectBeingTested(containerIsObj
 	o.Ptr().Send(_nSScriptObjectSpecifierSelSetContainerIsObjectBeingTested, containerIsObjectBeingTested)
 }
 
+// A Boolean value that indicates whether the container is the container for the current range specifier being evaluated.
 func (o *NSScriptObjectSpecifier) ContainerIsRangeContainerObject() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSScriptObjectSpecifierSelContainerIsRangeContainerObject)
 	return _ret
@@ -143,6 +147,7 @@ func (o *NSScriptObjectSpecifier) SetContainerIsRangeContainerObject(containerIs
 	o.Ptr().Send(_nSScriptObjectSpecifierSelSetContainerIsRangeContainerObject, containerIsRangeContainerObject)
 }
 
+// The name of the key in the container object to be accessed by this specifier.
 func (o *NSScriptObjectSpecifier) Key() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptObjectSpecifierSelKey)
 	if _ret != 0 {
@@ -155,6 +160,7 @@ func (o *NSScriptObjectSpecifier) SetKey(key *NSString) {
 	o.Ptr().Send(_nSScriptObjectSpecifierSelSetKey, key.Ptr())
 }
 
+// The class description for the container.
 func (o *NSScriptObjectSpecifier) ContainerClassDescription() *NSScriptClassDescription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptObjectSpecifierSelContainerClassDescription)
 	if _ret != 0 {
@@ -167,6 +173,7 @@ func (o *NSScriptObjectSpecifier) SetContainerClassDescription(containerClassDes
 	o.Ptr().Send(_nSScriptObjectSpecifierSelSetContainerClassDescription, containerClassDescription.Ptr())
 }
 
+// The class description for the keyed objects.
 func (o *NSScriptObjectSpecifier) KeyClassDescription() *NSScriptClassDescription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptObjectSpecifierSelKeyClassDescription)
 	if _ret != 0 {
@@ -175,11 +182,13 @@ func (o *NSScriptObjectSpecifier) KeyClassDescription() *NSScriptClassDescriptio
 	return NSScriptClassDescriptionFromID(_ret)
 }
 
+// The actual objects represented by this specifier.
 func (o *NSScriptObjectSpecifier) ObjectsByEvaluatingSpecifier() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptObjectSpecifierSelObjectsByEvaluatingSpecifier)
 	return _ret
 }
 
+// The error number from the most recent evaluation.
 func (o *NSScriptObjectSpecifier) EvaluationErrorNumber() int {
 	_ret := objc.Send[int](o.Ptr(), _nSScriptObjectSpecifierSelEvaluationErrorNumber)
 	return _ret
@@ -189,6 +198,7 @@ func (o *NSScriptObjectSpecifier) SetEvaluationErrorNumber(evaluationErrorNumber
 	o.Ptr().Send(_nSScriptObjectSpecifierSelSetEvaluationErrorNumber, evaluationErrorNumber)
 }
 
+// The specifier in which an evaluation error occurred.
 func (o *NSScriptObjectSpecifier) EvaluationErrorSpecifier() *NSScriptObjectSpecifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptObjectSpecifierSelEvaluationErrorSpecifier)
 	if _ret != 0 {
@@ -197,6 +207,7 @@ func (o *NSScriptObjectSpecifier) EvaluationErrorSpecifier() *NSScriptObjectSpec
 	return NSScriptObjectSpecifierFromID(_ret)
 }
 
+// An Apple event descriptor that represents this specifier.
 func (o *NSScriptObjectSpecifier) Descriptor() *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptObjectSpecifierSelDescriptor)
 	if _ret != 0 {

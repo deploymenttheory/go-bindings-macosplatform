@@ -21,6 +21,7 @@ type NSShadow struct {
 var (
 	_clsNSShadow                    = _objcClass("NSShadow")
 	_nSShadowSelInit                = objc.RegisterName("init")
+	_nSShadowSelInitWithCoder       = objc.RegisterName("initWithCoder:")
 	_nSShadowSelSet                 = objc.RegisterName("set")
 	_nSShadowSelShadowOffset        = objc.RegisterName("shadowOffset")
 	_nSShadowSelSetShadowOffset     = objc.RegisterName("setShadowOffset:")
@@ -43,6 +44,14 @@ func NSShadowFromID(id objc.ID) *NSShadow {
 // Creates a shadow object with default values.
 func (o *NSShadow) Init() *NSShadow {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSShadowSelInit)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSShadowFromID(_ret)
+}
+
+func (o *NSShadow) InitWithCoder(coder *foundation.NSCoder) *NSShadow {
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSShadowSelInitWithCoder, coder.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

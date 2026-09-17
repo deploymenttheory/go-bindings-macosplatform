@@ -34,6 +34,7 @@ var (
 	_sCContentFilterSelIncludedDisplays                                     = objc.RegisterName("includedDisplays")
 	_sCContentFilterSelIncludedApplications                                 = objc.RegisterName("includedApplications")
 	_sCContentFilterSelIncludedWindows                                      = objc.RegisterName("includedWindows")
+	_sCContentFilterSelIsMicrophoneEnabled                                  = objc.RegisterName("isMicrophoneEnabled")
 )
 
 func SCContentFilterFromID(id objc.ID) *SCContentFilter {
@@ -151,4 +152,10 @@ func (o *SCContentFilter) IncludedWindows() *foundation.NSArray[*SCWindow] {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return foundation.NSArrayFromID[*SCWindow](_ret)
+}
+
+// @abstract Indicates whether the microphone is enabled via the picker. @discussion Readonly - microphone enable state determined by user via system picker when showsMicrophoneControl is enabled in SCContentSharingPickerConfiguration.
+func (o *SCContentFilter) IsMicrophoneEnabled() bool {
+	_ret := objc.Send[bool](o.Ptr(), _sCContentFilterSelIsMicrophoneEnabled)
+	return _ret
 }

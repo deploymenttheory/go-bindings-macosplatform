@@ -411,6 +411,14 @@ func (sv *StackView) WithGestureRecognizers(items ...GestureRecognizerProvider) 
 	return sv
 }
 
+// WithExclusiveGestureBehavior sets declares whether gesture recognizers should be exclusive in this view and its subviews.
+func (sv *StackView) WithExclusiveGestureBehavior(exclusiveGestureBehavior ViewExclusiveGestureBehavior) *StackView {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setExclusiveGestureBehavior:"), exclusiveGestureBehavior)
+	})
+	return sv
+}
+
 // WithAllowedTouchTypes sets the allowed touch types.
 func (sv *StackView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *StackView {
 	purego.Main(func() {
@@ -472,6 +480,15 @@ func (sv *StackView) WithHorizontalContentSizeConstraintActive(horizontalContent
 func (sv *StackView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *StackView {
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
+	return sv
+}
+
+// WithTextSelectionManager sets the text selection manager for this view.
+func (sv *StackView) WithTextSelectionManager(textSelectionManager *TextSelectionManager) *StackView {
+	defer runtime.KeepAlive(textSelectionManager)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setTextSelectionManager:"), objref.IDOf(textSelectionManager))
 	})
 	return sv
 }

@@ -827,10 +827,6 @@ type TextInputClient interface {
 type TextInputTraits interface {
 }
 
-// TextLayoutManagerDelegate is the Go form of the Objective-C protocol NSTextLayoutManagerDelegate.
-type TextLayoutManagerDelegate interface {
-}
-
 // TextLayoutOrientationProvider is the Go form of the Objective-C protocol NSTextLayoutOrientationProvider.
 type TextLayoutOrientationProvider interface {
 }
@@ -843,6 +839,12 @@ type TextLocation interface {
 type TextSelectionDataSource interface {
 }
 
+// TextSelectionManagerDelegate is the Go form of the Objective-C protocol NSTextSelectionManagerDelegate.
+type TextSelectionManagerDelegate interface {
+	TextSelection() *TextSelection
+	SetTextSelection(textSelection *TextSelection)
+}
+
 // TextStorageDelegate is the Go form of the Objective-C protocol NSTextStorageDelegate.
 type TextStorageDelegate interface {
 }
@@ -853,8 +855,14 @@ type TextStorageObserving interface {
 
 // TextViewportLayoutControllerDelegate is the Go form of the Objective-C protocol NSTextViewportLayoutControllerDelegate.
 type TextViewportLayoutControllerDelegate interface {
-	ViewportBoundsForTextViewportLayoutController(textViewportLayoutController *TextViewportLayoutController) corefoundation.CGRect
-	TextViewportLayoutControllerConfigureRenderingSurfaceForTextLayoutFragment(textViewportLayoutController *TextViewportLayoutController, textLayoutFragment *TextLayoutFragment)
+}
+
+// TextViewportRenderingSurface is the Go form of the Objective-C protocol NSTextViewportRenderingSurface.
+type TextViewportRenderingSurface interface {
+}
+
+// TextViewportRenderingSurfaceKey is the Go form of the Objective-C protocol NSTextViewportRenderingSurfaceKey.
+type TextViewportRenderingSurfaceKey interface {
 }
 
 // ToolbarItemValidation is the Go form of the Objective-C protocol NSToolbarItemValidation.

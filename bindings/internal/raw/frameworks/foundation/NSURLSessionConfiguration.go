@@ -10,8 +10,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A configuration object that defines behavior and policies for a URL session.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsurlsessionconfiguration
 type NSURLSessionConfiguration struct {
 	NSObject
@@ -98,6 +96,7 @@ func NSURLSessionConfigurationFromID(id objc.ID) *NSURLSessionConfiguration {
 	return o
 }
 
+// Creates a session configuration object that allows HTTP and HTTPS uploads or downloads to be performed in the background. Use this method to initialize a configuration object suitable for transferring data files while the app runs in the background. A session configured with this object hands control of the transfers over to the system, which handles the transfers in a separate process. In iOS, this configuration makes it possible for transfers to continue even when the app itself is suspended or terminated. If an iOS app is terminated by the system and relaunched, the app can use the same `identifier` to create a new configuration object and session and to retrieve the status of transfers that were in progress at the time of termination. This behavior applies only for normal termination of the app by the system. If the user terminates the app from the multitasking screen, the system cancels all of the session's background transfers. - Parameter identifier: The unique identifier for the configuration object. This parameter must not be `nil` or an empty string. - Returns: A configuration object that causes the system to perform upload and download tasks in a separate process.
 func NSURLSessionConfigurationBackgroundSessionConfigurationWithIdentifier(identifier *NSString) *NSURLSessionConfiguration {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLSessionConfiguration), _nSURLSessionConfigurationSelBackgroundSessionConfigurationWithIdentifier, identifier.Ptr())
 	if _ret != 0 {
@@ -106,6 +105,7 @@ func NSURLSessionConfigurationBackgroundSessionConfigurationWithIdentifier(ident
 	return NSURLSessionConfigurationFromID(_ret)
 }
 
+// Creates an empty session configuration. @DeprecationSummary { Use “NSURLSessionConfiguration/defaultSessionConfiguration“ or other class methods to create instances. }
 // Deprecated: Please use NSURLSessionConfiguration.defaultSessionConfiguration or other class methods to create instances
 func (o *NSURLSessionConfiguration) Init() *NSURLSessionConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionConfigurationSelInit)
@@ -121,6 +121,7 @@ func NSURLSessionConfigurationNew() *NSURLSessionConfiguration {
 	return NSURLSessionConfigurationFromID(_ret)
 }
 
+// A default session configuration object. The default session configuration uses a persistent disk-based cache (except when the result is downloaded to a file) and stores credentials in the user's keychain. It also stores cookies (by default) in the same shared cookie store as `NSURLConnection` and `NSURLDownload`. Modifying the returned session configuration object does not affect any configuration objects returned by future calls to this method, and does not change the default behavior for existing sessions. It is therefore always safe to use the returned object as a starting point for additional customization.
 func NSURLSessionConfigurationDefaultSessionConfiguration() *NSURLSessionConfiguration {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLSessionConfiguration), _nSURLSessionConfigurationSelDefaultSessionConfiguration)
 	if _ret != 0 {
@@ -129,6 +130,7 @@ func NSURLSessionConfigurationDefaultSessionConfiguration() *NSURLSessionConfigu
 	return NSURLSessionConfigurationFromID(_ret)
 }
 
+// A session configuration that uses no persistent storage for caches, cookies, or credentials. An ephemeral session configuration object is similar to a default session configuration (see `defaultSessionConfiguration`), except that the corresponding session object doesn't store caches, credential stores, or any session-related data to disk. Instead, session-related data is stored in RAM. The only time an ephemeral session writes data to disk is when you tell it to write the contents of a URL to a file. The main advantage to using ephemeral sessions is privacy. By not writing potentially sensitive data to disk, you make it less likely that the data will be intercepted and used later. For this reason, ephemeral sessions are ideal for private browsing modes in web browsers and other similar situations. When your app invalidates the session, all ephemeral session data is purged automatically. Additionally, in iOS, the in-memory cache isn't purged automatically when your app is suspended but may be purged when your app is terminated or when the system experiences memory pressure.
 func NSURLSessionConfigurationEphemeralSessionConfiguration() *NSURLSessionConfiguration {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLSessionConfiguration), _nSURLSessionConfigurationSelEphemeralSessionConfiguration)
 	if _ret != 0 {
@@ -137,6 +139,7 @@ func NSURLSessionConfigurationEphemeralSessionConfiguration() *NSURLSessionConfi
 	return NSURLSessionConfigurationFromID(_ret)
 }
 
+// The background session identifier of the configuration object. The value of this property is set only when you use `+backgroundSessionConfigurationWithIdentifier:` to create the configuration object. The string uniquely identifies a background session object. In iOS, you use this string in cases where the app was terminated while transfers were occurring in the background. When the app relaunches, it uses the string to recreate the configuration and session objects associated with the transfers.
 func (o *NSURLSessionConfiguration) Identifier() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionConfigurationSelIdentifier)
 	if _ret != 0 {
@@ -145,6 +148,7 @@ func (o *NSURLSessionConfiguration) Identifier() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// A predefined constant that determines when to return a response from the cache. This property determines the request caching policy used by tasks within sessions based on this configuration. The default value is `NSURLRequestUseProtocolCachePolicy`.
 func (o *NSURLSessionConfiguration) RequestCachePolicy() NSURLRequestCachePolicy {
 	_ret := objc.Send[NSURLRequestCachePolicy](o.Ptr(), _nSURLSessionConfigurationSelRequestCachePolicy)
 	return _ret
@@ -154,6 +158,7 @@ func (o *NSURLSessionConfiguration) SetRequestCachePolicy(requestCachePolicy NSU
 	o.Ptr().Send(_nSURLSessionConfigurationSelSetRequestCachePolicy, requestCachePolicy)
 }
 
+// The timeout interval to use when waiting for additional data. This property determines the request timeout interval for all tasks within sessions based on this configuration. The request timeout interval controls how long (in seconds) a task should wait for additional data to arrive before giving up. The timer associated with this value is reset whenever new data arrives. When the request timer reaches the specified interval without receiving any new data, it triggers a timeout. The default value is `60`. > Important: Any upload or download tasks created by a background session are automatically > retried if the original request fails due to a timeout. To configure how long an upload > or download task should be allowed to be retried or transferred, use the > `timeoutIntervalForResource` property.
 func (o *NSURLSessionConfiguration) TimeoutIntervalForRequest() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSURLSessionConfigurationSelTimeoutIntervalForRequest)
 	return _ret
@@ -163,6 +168,7 @@ func (o *NSURLSessionConfiguration) SetTimeoutIntervalForRequest(timeoutInterval
 	o.Ptr().Send(_nSURLSessionConfigurationSelSetTimeoutIntervalForRequest, timeoutIntervalForRequest)
 }
 
+// The maximum amount of time that a resource request should be allowed to take. This property determines the resource timeout interval for all tasks within sessions based on this configuration. The resource timeout interval controls how long (in seconds) to wait for an entire resource to transfer before giving up. The resource timer starts when the request is initiated and counts until either the request completes or this timeout interval is reached, whichever comes first. The default value is 7 days.
 func (o *NSURLSessionConfiguration) TimeoutIntervalForResource() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSURLSessionConfigurationSelTimeoutIntervalForResource)
 	return _ret
@@ -172,6 +178,7 @@ func (o *NSURLSessionConfiguration) SetTimeoutIntervalForResource(timeoutInterva
 	o.Ptr().Send(_nSURLSessionConfigurationSelSetTimeoutIntervalForResource, timeoutIntervalForResource)
 }
 
+// The type of network service for all tasks within network sessions to enable Cellular Network Slicing.
 func (o *NSURLSessionConfiguration) NetworkServiceType() NSURLRequestNetworkServiceType {
 	_ret := objc.Send[NSURLRequestNetworkServiceType](o.Ptr(), _nSURLSessionConfigurationSelNetworkServiceType)
 	return _ret
@@ -181,6 +188,7 @@ func (o *NSURLSessionConfiguration) SetNetworkServiceType(networkServiceType NSU
 	o.Ptr().Send(_nSURLSessionConfigurationSelSetNetworkServiceType, networkServiceType)
 }
 
+// A Boolean value that determines whether connections should be made over a cellular network. This property controls whether tasks in sessions based on this session configuration are allowed to make connections over a cellular network. The default value is `YES`.
 func (o *NSURLSessionConfiguration) AllowsCellularAccess() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSURLSessionConfigurationSelAllowsCellularAccess)
 	return _ret
@@ -190,6 +198,7 @@ func (o *NSURLSessionConfiguration) SetAllowsCellularAccess(allowsCellularAccess
 	o.Ptr().Send(_nSURLSessionConfigurationSelSetAllowsCellularAccess, allowsCellularAccess)
 }
 
+// A Boolean value that indicates whether connections may use a network interface that the system considers expensive. The default value is `YES`.
 func (o *NSURLSessionConfiguration) AllowsExpensiveNetworkAccess() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSURLSessionConfigurationSelAllowsExpensiveNetworkAccess)
 	return _ret
@@ -199,6 +208,7 @@ func (o *NSURLSessionConfiguration) SetAllowsExpensiveNetworkAccess(allowsExpens
 	o.Ptr().Send(_nSURLSessionConfigurationSelSetAllowsExpensiveNetworkAccess, allowsExpensiveNetworkAccess)
 }
 
+// A Boolean value that indicates whether connections may use the network when the user has specified Low Data Mode. The default value is `YES`.
 func (o *NSURLSessionConfiguration) AllowsConstrainedNetworkAccess() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSURLSessionConfigurationSelAllowsConstrainedNetworkAccess)
 	return _ret
@@ -226,6 +236,7 @@ func (o *NSURLSessionConfiguration) SetRequiresDNSSECValidation(requiresDNSSECVa
 	o.Ptr().Send(_nSURLSessionConfigurationSelSetRequiresDNSSECValidation, requiresDNSSECValidation)
 }
 
+// A Boolean value that indicates whether the session should wait for connectivity to become available, or fail immediately. Connectivity might be temporarily unavailable for several reasons. For example, a device might only have a cellular connection when `allowsCellularAccess` is set to `NO`, or the device might require a VPN connection but none is available. If the value of this property is `YES` and sufficient connectivity is unavailable, the session calls the `URLSession:taskIsWaitingForConnectivity:` delegate method and waits for connectivity. If the value is `NO` and connectivity is unavailable, the connection fails immediately with an error. Default value is `NO`. Ignored by background sessions, as background sessions always wait for connectivity.
 func (o *NSURLSessionConfiguration) WaitsForConnectivity() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSURLSessionConfigurationSelWaitsForConnectivity)
 	return _ret
@@ -235,6 +246,7 @@ func (o *NSURLSessionConfiguration) SetWaitsForConnectivity(waitsForConnectivity
 	o.Ptr().Send(_nSURLSessionConfigurationSelSetWaitsForConnectivity, waitsForConnectivity)
 }
 
+// A Boolean value that determines whether background tasks can be scheduled at the discretion of the system for optimal performance. For configuration objects created using `+backgroundSessionConfigurationWithIdentifier:`, use this property to give the system control over when transfers should occur. This property is ignored for configuration objects created using other methods. When transferring large amounts of data, you are encouraged to set this to `YES`. Doing so lets the system schedule those transfers at times that are more optimal for the device. The default value is `NO`.
 func (o *NSURLSessionConfiguration) IsDiscretionary() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSURLSessionConfigurationSelIsDiscretionary)
 	return _ret
@@ -244,6 +256,7 @@ func (o *NSURLSessionConfiguration) SetDiscretionary(discretionary bool) {
 	o.Ptr().Send(_nSURLSessionConfigurationSelSetDiscretionary, discretionary)
 }
 
+// The identifier for the shared container into which files in background URL sessions should be downloaded. To create a URL session for use by an app extension, set this property to a valid identifier for a container shared between the app extension and its containing app. > Important: If you try to create a URL session from your app extension but fail to set > this property to a valid value, the URL session is invalidated upon creation.
 func (o *NSURLSessionConfiguration) SharedContainerIdentifier() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionConfigurationSelSharedContainerIdentifier)
 	if _ret != 0 {
@@ -256,6 +269,7 @@ func (o *NSURLSessionConfiguration) SetSharedContainerIdentifier(sharedContainer
 	o.Ptr().Send(_nSURLSessionConfigurationSelSetSharedContainerIdentifier, sharedContainerIdentifier.Ptr())
 }
 
+// A Boolean value that indicates whether the app should be resumed or launched in the background when transfers finish. For configuration objects created using `+backgroundSessionConfigurationWithIdentifier:`, you can use this property to control the launching behavior for an iOS app. This property is ignored for configuration objects created using other methods. The default value is `YES`. When `YES`, the system automatically wakes up or launches the iOS app in the background when the session's tasks finish or require authentication. > Note: macOS apps based on AppKit do not support background launch.
 func (o *NSURLSessionConfiguration) SessionSendsLaunchEvents() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSURLSessionConfigurationSelSessionSendsLaunchEvents)
 	return _ret
@@ -265,6 +279,7 @@ func (o *NSURLSessionConfiguration) SetSessionSendsLaunchEvents(sessionSendsLaun
 	o.Ptr().Send(_nSURLSessionConfigurationSelSetSessionSendsLaunchEvents, sessionSendsLaunchEvents)
 }
 
+// A dictionary containing information about the proxy to use within this session. Prefer using `proxyConfigurations`, which supports secure proxy and relay types. The default value is `NULL`, which means that tasks use the default system settings.
 func (o *NSURLSessionConfiguration) ConnectionProxyDictionary() *NSDictionary[objc.ID, objc.ID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionConfigurationSelConnectionProxyDictionary)
 	if _ret != 0 {
@@ -277,6 +292,7 @@ func (o *NSURLSessionConfiguration) SetConnectionProxyDictionary(connectionProxy
 	o.Ptr().Send(_nSURLSessionConfigurationSelSetConnectionProxyDictionary, connectionProxyDictionary.Ptr())
 }
 
+// The minimum TLS protocol to accept during protocol negotiation.
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
 func (o *NSURLSessionConfiguration) TLSMinimumSupportedProtocol() security.SSLProtocol {
 	_ret := objc.Send[security.SSLProtocol](o.Ptr(), _nSURLSessionConfigurationSelTLSMinimumSupportedProtocol)
@@ -288,6 +304,7 @@ func (o *NSURLSessionConfiguration) SetTLSMinimumSupportedProtocol(tlsMinimumSup
 	o.Ptr().Send(_nSURLSessionConfigurationSelSetTLSMinimumSupportedProtocol, tlsMinimumSupportedProtocol)
 }
 
+// The maximum TLS protocol version that the client should request when making connections in this session.
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
 func (o *NSURLSessionConfiguration) TLSMaximumSupportedProtocol() security.SSLProtocol {
 	_ret := objc.Send[security.SSLProtocol](o.Ptr(), _nSURLSessionConfigurationSelTLSMaximumSupportedProtocol)
@@ -299,6 +316,7 @@ func (o *NSURLSessionConfiguration) SetTLSMaximumSupportedProtocol(tlsMaximumSup
 	o.Ptr().Send(_nSURLSessionConfigurationSelSetTLSMaximumSupportedProtocol, tlsMaximumSupportedProtocol)
 }
 
+// The minimum TLS protocol version that the client should accept when making connections in this session.
 func (o *NSURLSessionConfiguration) TLSMinimumSupportedProtocolVersion() security.Tls_protocol_version_t {
 	_ret := objc.Send[security.Tls_protocol_version_t](o.Ptr(), _nSURLSessionConfigurationSelTLSMinimumSupportedProtocolVersion)
 	return _ret
@@ -308,6 +326,7 @@ func (o *NSURLSessionConfiguration) SetTLSMinimumSupportedProtocolVersion(tlsMin
 	o.Ptr().Send(_nSURLSessionConfigurationSelSetTLSMinimumSupportedProtocolVersion, tlsMinimumSupportedProtocolVersion)
 }
 
+// The maximum TLS protocol version that the client should request when making connections in this session.
 func (o *NSURLSessionConfiguration) TLSMaximumSupportedProtocolVersion() security.Tls_protocol_version_t {
 	_ret := objc.Send[security.Tls_protocol_version_t](o.Ptr(), _nSURLSessionConfigurationSelTLSMaximumSupportedProtocolVersion)
 	return _ret
@@ -317,6 +336,7 @@ func (o *NSURLSessionConfiguration) SetTLSMaximumSupportedProtocolVersion(tlsMax
 	o.Ptr().Send(_nSURLSessionConfigurationSelSetTLSMaximumSupportedProtocolVersion, tlsMaximumSupportedProtocolVersion)
 }
 
+// A Boolean value that determines whether the session should use HTTP pipelining. The default value is `NO`.
 // Deprecated: Only supported in the classic loader, please adopt HTTP/2 and HTTP/3 instead
 func (o *NSURLSessionConfiguration) HTTPShouldUsePipelining() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSURLSessionConfigurationSelHTTPShouldUsePipelining)
@@ -328,7 +348,7 @@ func (o *NSURLSessionConfiguration) SetHTTPShouldUsePipelining(httpShouldUsePipe
 	o.Ptr().Send(_nSURLSessionConfigurationSelSetHTTPShouldUsePipelining, httpShouldUsePipelining)
 }
 
-// Deprecated: Only supported in the classic loader, please adopt HTTP/2 and HTTP/3 instead
+// A Boolean value that determines whether requests should contain cookies from the cookie store. The default value is `YES`.
 func (o *NSURLSessionConfiguration) HTTPShouldSetCookies() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSURLSessionConfigurationSelHTTPShouldSetCookies)
 	return _ret
@@ -338,6 +358,7 @@ func (o *NSURLSessionConfiguration) SetHTTPShouldSetCookies(httpShouldSetCookies
 	o.Ptr().Send(_nSURLSessionConfigurationSelSetHTTPShouldSetCookies, httpShouldSetCookies)
 }
 
+// A policy constant that determines when cookies should be accepted. This property determines the cookie accept policy for all tasks within sessions based on this configuration.
 func (o *NSURLSessionConfiguration) HTTPCookieAcceptPolicy() NSHTTPCookieAcceptPolicy {
 	_ret := objc.Send[NSHTTPCookieAcceptPolicy](o.Ptr(), _nSURLSessionConfigurationSelHTTPCookieAcceptPolicy)
 	return _ret
@@ -347,6 +368,7 @@ func (o *NSURLSessionConfiguration) SetHTTPCookieAcceptPolicy(httpCookieAcceptPo
 	o.Ptr().Send(_nSURLSessionConfigurationSelSetHTTPCookieAcceptPolicy, httpCookieAcceptPolicy)
 }
 
+// A dictionary of additional headers to send with requests. This property specifies additional headers that are added to all tasks within sessions based on this configuration. If the same header appears in both this dictionary and the request object (where applicable), the request object's value takes precedence. An `NSURLSession` object is designed to handle various aspects of the HTTP protocol for you. As a result, you should not modify the following headers: `Authorization`, `Connection`, `Host`, `Proxy-Authenticate`, `Proxy-Authorization`, `WWW-Authenticate`.
 func (o *NSURLSessionConfiguration) HTTPAdditionalHeaders() *NSDictionary[objc.ID, objc.ID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionConfigurationSelHTTPAdditionalHeaders)
 	if _ret != 0 {
@@ -359,6 +381,7 @@ func (o *NSURLSessionConfiguration) SetHTTPAdditionalHeaders(httpAdditionalHeade
 	o.Ptr().Send(_nSURLSessionConfigurationSelSetHTTPAdditionalHeaders, httpAdditionalHeaders.Ptr())
 }
 
+// The maximum number of simultaneous connections to make to a given host. This limit is per session, so if you use multiple sessions, your app as a whole may exceed this limit. The default value is `6`.
 func (o *NSURLSessionConfiguration) HTTPMaximumConnectionsPerHost() int {
 	_ret := objc.Send[int](o.Ptr(), _nSURLSessionConfigurationSelHTTPMaximumConnectionsPerHost)
 	return _ret
@@ -368,6 +391,7 @@ func (o *NSURLSessionConfiguration) SetHTTPMaximumConnectionsPerHost(httpMaximum
 	o.Ptr().Send(_nSURLSessionConfigurationSelSetHTTPMaximumConnectionsPerHost, httpMaximumConnectionsPerHost)
 }
 
+// The cookie store for storing cookies within this session. To disable cookie storage, set this property to `nil`. For default and background sessions, the default value is the shared cookie storage object. For ephemeral sessions, the default value is a private cookie storage object that stores data in memory only, and is destroyed when you invalidate the session.
 func (o *NSURLSessionConfiguration) HTTPCookieStorage() *NSHTTPCookieStorage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionConfigurationSelHTTPCookieStorage)
 	if _ret != 0 {
@@ -380,6 +404,7 @@ func (o *NSURLSessionConfiguration) SetHTTPCookieStorage(httpCookieStorage *NSHT
 	o.Ptr().Send(_nSURLSessionConfigurationSelSetHTTPCookieStorage, httpCookieStorage.Ptr())
 }
 
+// A credential store that provides credentials for authentication. To not use a credential store, set this property to `nil`. For default and background sessions, the default value is the shared credential storage object. For ephemeral sessions, the default value is a private credential store object that stores data in memory only, and is destroyed when you invalidate the session.
 func (o *NSURLSessionConfiguration) URLCredentialStorage() *NSURLCredentialStorage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionConfigurationSelURLCredentialStorage)
 	if _ret != 0 {
@@ -392,6 +417,7 @@ func (o *NSURLSessionConfiguration) SetURLCredentialStorage(urlCredentialStorage
 	o.Ptr().Send(_nSURLSessionConfigurationSelSetURLCredentialStorage, urlCredentialStorage.Ptr())
 }
 
+// The URL cache for providing cached responses to requests within the session. To disable caching, set this property to `nil`. For default sessions, the default value is the shared URL cache object. For background sessions, the default value is `nil`. For ephemeral sessions, the default value is a private cache object that stores data in memory only, and is destroyed when you invalidate the session.
 func (o *NSURLSessionConfiguration) URLCache() *NSURLCache {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionConfigurationSelURLCache)
 	if _ret != 0 {
@@ -404,6 +430,7 @@ func (o *NSURLSessionConfiguration) SetURLCache(urlCache *NSURLCache) {
 	o.Ptr().Send(_nSURLSessionConfigurationSelSetURLCache, urlCache.Ptr())
 }
 
+// A Boolean value that indicates whether TCP connections should be kept open when the app moves to the background.
 // Deprecated: Not supported
 func (o *NSURLSessionConfiguration) ShouldUseExtendedBackgroundIdleMode() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSURLSessionConfigurationSelShouldUseExtendedBackgroundIdleMode)
@@ -415,6 +442,7 @@ func (o *NSURLSessionConfiguration) SetShouldUseExtendedBackgroundIdleMode(shoul
 	o.Ptr().Send(_nSURLSessionConfigurationSelSetShouldUseExtendedBackgroundIdleMode, shouldUseExtendedBackgroundIdleMode)
 }
 
+// An array of extra protocol subclasses that handle requests in a session. Use this array to extend the default set of common networking protocols available for use by a session with one or more custom protocols that you define. You should not use `+[NSURLProtocol registerClass:]`, as that method will register your class with the default session rather than with an instance of `NSURLSession`. > Note: You cannot use custom `NSURLProtocol` subclasses in conjunction with background > sessions.
 func (o *NSURLSessionConfiguration) ProtocolClasses() *NSArray[objc.Class] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionConfigurationSelProtocolClasses)
 	if _ret != 0 {
@@ -445,6 +473,7 @@ func (o *NSURLSessionConfiguration) SetEnablesEarlyData(enablesEarlyData bool) {
 	o.Ptr().Send(_nSURLSessionConfigurationSelSetEnablesEarlyData, enablesEarlyData)
 }
 
+// Returns a session configuration object that allows HTTP and HTTPS uploads or downloads to be performed in the background. @DeprecationSummary { Use “NSURLSessionConfiguration/backgroundSessionConfigurationWithIdentifier:“ instead. } - Parameter identifier: The unique identifier for the configuration object. This parameter must not be `nil` or an empty string. - Returns: A URL session configuration object that causes upload and download tasks to be performed by the system in a separate process.
 // Deprecated: since macOS 10.10.
 func NSURLSessionConfigurationBackgroundSessionConfiguration(identifier *NSString) *NSURLSessionConfiguration {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLSessionConfiguration), _nSURLSessionConfigurationSelBackgroundSessionConfiguration, identifier.Ptr())

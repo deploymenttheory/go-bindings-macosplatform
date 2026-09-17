@@ -4,20 +4,18 @@
   "source": "developer.apple.com DocC render API",
   "classes": {
     "ATTrackingManager": {
-      "doc": "A class that provides a tracking authorization request and the tracking authorization status of the app.",
+      "doc": "A class that requests tracking authorization and provides the current authorization status.",
       "url": "https://developer.apple.com/documentation/apptrackingtransparency/attrackingmanager"
-    }
-  },
-  "enums": {
-    "ATTrackingManagerAuthorizationStatus": {
-      "doc": "The status values for app tracking authorization.",
-      "url": "https://developer.apple.com/documentation/apptrackingtransparency/attrackingmanagerauthorizationstatus"
     }
   },
   "methods": {
     "ATTrackingManager": {
+      "+requestTrackingAuthorizationUsingExpandedInterface:additionalInformationAction:completionHandler:": {
+        "doc": "Presents a modal UI that asks someone for permission to access data that your app can use to track a person or device.",
+        "url": "https://developer.apple.com/documentation/apptrackingtransparency/attrackingmanager/requesttrackingauthorization(usingexpandedinterface:additionalinformationaction:completionhandler:)"
+      },
       "+requestTrackingAuthorizationWithCompletionHandler:": {
-        "doc": "The request for user authorization to access app-related data.",
+        "doc": "Presents a modal UI that asks someone for permission to access data that your app can use to track a person or device.",
         "url": "https://developer.apple.com/documentation/apptrackingtransparency/attrackingmanager/requesttrackingauthorization(completionhandler:)"
       }
     }
@@ -25,11 +23,11 @@
   "properties": {
     "ATTrackingManager": {
       "ATTrackingManagerAuthorizationStatus": {
-        "doc": "The status values for app tracking authorization.",
+        "doc": "A type that represents the tracking-authorization status of an app.",
         "url": "https://developer.apple.com/documentation/apptrackingtransparency/attrackingmanager/authorizationstatus"
       },
       "trackingAuthorizationStatus": {
-        "doc": "The authorization status that is current for the calling application.",
+        "doc": "A value that indicates the status of the app’s tracking authorization.",
         "url": "https://developer.apple.com/documentation/apptrackingtransparency/attrackingmanager/trackingauthorizationstatus"
       }
     }

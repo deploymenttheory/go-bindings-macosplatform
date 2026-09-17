@@ -18,8 +18,6 @@ import (
 // Unit is an idiomatic wrapper over the Objective-C class NSUnit.
 //
 // Unit is an abstract base — you do not construct it directly. Construct one of [Dimension] and pass it where a Unit is accepted.
-//
-// An abstract class representing a unit of measure.
 type Unit struct {
 	objref.Handle
 }
@@ -88,7 +86,7 @@ func (u *Unit) WithScriptingProperties(scriptingProperties map[string]obj.Object
 	return u
 }
 
-// Symbol returns the symbol.
+// Symbol returns the symbolic representation of the unit. The symbol of a unit is a string that can be used to designate a number as a quantity of a particular unit in user-readable representations. Units typically have symbols that are abbreviated and standardized, so as to be easily and unambiguously conveyed. For example, the `milePerHour` unit has the symbol `mph`. If a unit does not have a standardized or well-understood symbol, the lowercase name of the unit can be used. For example, the `metricCup` unit has the symbol `metric cup`. Unit symbols may incorporate a metric prefix to indicate a multiple or fraction of existing unit symbols. For example, the `kilogram` unit has the symbol `kg`, which uses the SI prefix k for kilo- to indicate a magnitude of 10^3 for the `gram` unit, and the `microgram` unit has the symbol `µg`, which uses the SI prefix µ for micro- to indicate a magnitude of 10^-6 for the `gram` unit.
 func (u *Unit) Symbol() string {
 	defer runtime.KeepAlive(u)
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("symbol"))

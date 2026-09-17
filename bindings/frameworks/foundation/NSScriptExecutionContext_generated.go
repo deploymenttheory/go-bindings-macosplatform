@@ -113,21 +113,21 @@ func (sec *ScriptExecutionContext) WithScriptingProperties(scriptingProperties m
 	return sec
 }
 
-// TopLevelObject returns the top level object.
+// TopLevelObject returns the top-level object in the current scripting context.
 func (sec *ScriptExecutionContext) TopLevelObject() obj.Object {
 	defer runtime.KeepAlive(sec)
 	_r := objc.Send[objc.ID](objref.IDOf(sec), objc.RegisterName("topLevelObject"))
 	return obj.Wrap(_r)
 }
 
-// ObjectBeingTested returns the object being tested.
+// ObjectBeingTested returns the object currently being tested by an `NSWhoseSpecifier`.
 func (sec *ScriptExecutionContext) ObjectBeingTested() obj.Object {
 	defer runtime.KeepAlive(sec)
 	_r := objc.Send[objc.ID](objref.IDOf(sec), objc.RegisterName("objectBeingTested"))
 	return obj.Wrap(_r)
 }
 
-// RangeContainerObject returns the range container object.
+// RangeContainerObject returns the container object for the current range specifier being evaluated.
 func (sec *ScriptExecutionContext) RangeContainerObject() obj.Object {
 	defer runtime.KeepAlive(sec)
 	_r := objc.Send[objc.ID](objref.IDOf(sec), objc.RegisterName("rangeContainerObject"))

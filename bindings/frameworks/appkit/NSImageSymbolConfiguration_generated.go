@@ -15,8 +15,6 @@ import (
 )
 
 // ImageSymbolConfiguration is an idiomatic wrapper over the Objective-C class NSImageSymbolConfiguration.
-//
-// An object that contains the specific font, style, and weight attributes to apply to a symbol image.
 type ImageSymbolConfiguration struct {
 	objref.Handle
 }

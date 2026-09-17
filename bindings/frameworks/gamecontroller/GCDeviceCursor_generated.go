@@ -60,12 +60,6 @@ func (dc *DeviceCursor) WithValueChangedHandler(valueChangedHandler func(obj.Obj
 	return dc
 }
 
-// WithPreferredSystemGestureState sets the preferred state for handling input when the user binds the element to a system gesture.
-func (dc *DeviceCursor) WithPreferredSystemGestureState(preferredSystemGestureState SystemGestureState) *DeviceCursor {
-	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setPreferredSystemGestureState:"), preferredSystemGestureState)
-	return dc
-}
-
 // WithSfSymbolsName sets a system symbol for the element or the remapped element.
 func (dc *DeviceCursor) WithSfSymbolsName(sfSymbolsName string) *DeviceCursor {
 	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setSfSymbolsName:"), purego.NSString(sfSymbolsName))
@@ -87,6 +81,12 @@ func (dc *DeviceCursor) WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) 
 // WithUnmappedLocalizedName sets the element’s localized name, not the remapped name.
 func (dc *DeviceCursor) WithUnmappedLocalizedName(unmappedLocalizedName string) *DeviceCursor {
 	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setUnmappedLocalizedName:"), purego.NSString(unmappedLocalizedName))
+	return dc
+}
+
+// WithPreferredSystemGestureState sets the preferred state for handling input when the user binds the element to a system gesture.
+func (dc *DeviceCursor) WithPreferredSystemGestureState(preferredSystemGestureState SystemGestureState) *DeviceCursor {
+	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setPreferredSystemGestureState:"), preferredSystemGestureState)
 	return dc
 }
 

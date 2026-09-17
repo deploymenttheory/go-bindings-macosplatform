@@ -134,6 +134,13 @@ func NewAudioFormatWithCMAudioFormatDescription(formatDescription unsafe.Pointer
 	return audioFormatAdopt(_id)
 }
 
+// NewAudioFormatWithFormatDescription initialize from a CMAudioFormatDescriptionRef. If formatDescription is invalid, this method fails (returns nil).
+func NewAudioFormatWithFormatDescription(formatDescription unsafe.Pointer) *AudioFormat {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioFormat")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormatDescription:"), formatDescription)
+	return audioFormatAdopt(_id)
+}
+
 // WithMagicCookie sets an object that contains metadata that encoders and decoders require.
 func (af *AudioFormat) WithMagicCookie(magicCookie []byte) *AudioFormat {
 	objc.Send[objc.ID](objref.IDOf(af), objc.RegisterName("setMagicCookie:"), rt.BytesToNSData(magicCookie))

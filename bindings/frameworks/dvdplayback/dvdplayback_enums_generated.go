@@ -9,271 +9,6 @@ import (
 	"strings"
 )
 
-type DVDAspectRatio int16
-
-const (
-	KDVDAspectRatioUninitialized DVDAspectRatio = 0
-	KDVDAspectRatio4x3           DVDAspectRatio = 1
-	KDVDAspectRatio4x3PanAndScan DVDAspectRatio = 2
-	KDVDAspectRatio16x9          DVDAspectRatio = 3
-	KDVDAspectRatioLetterBox     DVDAspectRatio = 4
-)
-
-// String returns the DVDAspectRatio constant's name, or its numeric form when the
-// value is not a known constant.
-func (e DVDAspectRatio) String() string {
-	switch e {
-	case KDVDAspectRatioUninitialized:
-		return "KDVDAspectRatioUninitialized"
-	case KDVDAspectRatio4x3:
-		return "KDVDAspectRatio4x3"
-	case KDVDAspectRatio4x3PanAndScan:
-		return "KDVDAspectRatio4x3PanAndScan"
-	case KDVDAspectRatio16x9:
-		return "KDVDAspectRatio16x9"
-	case KDVDAspectRatioLetterBox:
-		return "KDVDAspectRatioLetterBox"
-	default:
-		return fmt.Sprintf("DVDAspectRatio(%d)", int64(e))
-	}
-}
-
-type DVDAudioFormat int16
-
-const (
-	KDVDAudioUnknownFormat DVDAudioFormat = 0
-	KDVDAudioAC3Format     DVDAudioFormat = 1
-	KDVDAudioMPEG1Format   DVDAudioFormat = 2
-	KDVDAudioMPEG2Format   DVDAudioFormat = 3
-	KDVDAudioPCMFormat     DVDAudioFormat = 4
-	KDVDAudioDTSFormat     DVDAudioFormat = 5
-	KDVDAudioSDDSFormat    DVDAudioFormat = 6
-	KDVDAudioMLPFormat     DVDAudioFormat = 7
-	KDVDAudioDDPlusFormat  DVDAudioFormat = 8
-	KDVDAudioDTSHDFormat   DVDAudioFormat = 9
-)
-
-// String returns the DVDAudioFormat constant's name, or its numeric form when the
-// value is not a known constant.
-func (e DVDAudioFormat) String() string {
-	switch e {
-	case KDVDAudioUnknownFormat:
-		return "KDVDAudioUnknownFormat"
-	case KDVDAudioAC3Format:
-		return "KDVDAudioAC3Format"
-	case KDVDAudioMPEG1Format:
-		return "KDVDAudioMPEG1Format"
-	case KDVDAudioMPEG2Format:
-		return "KDVDAudioMPEG2Format"
-	case KDVDAudioPCMFormat:
-		return "KDVDAudioPCMFormat"
-	case KDVDAudioDTSFormat:
-		return "KDVDAudioDTSFormat"
-	case KDVDAudioSDDSFormat:
-		return "KDVDAudioSDDSFormat"
-	case KDVDAudioMLPFormat:
-		return "KDVDAudioMLPFormat"
-	case KDVDAudioDDPlusFormat:
-		return "KDVDAudioDDPlusFormat"
-	case KDVDAudioDTSHDFormat:
-		return "KDVDAudioDTSHDFormat"
-	default:
-		return fmt.Sprintf("DVDAudioFormat(%d)", int64(e))
-	}
-}
-
-type DVDFormat int16
-
-const (
-	KDVDFormatUninitialized DVDFormat = 0
-	KDVDFormatNTSC          DVDFormat = 1
-	KDVDFormatPAL           DVDFormat = 2
-	KDVDFormatNTSC_HDTV     DVDFormat = 3
-	KDVDFormatPAL_HDTV      DVDFormat = 4
-)
-
-// String returns the DVDFormat constant's name, or its numeric form when the
-// value is not a known constant.
-func (e DVDFormat) String() string {
-	switch e {
-	case KDVDFormatUninitialized:
-		return "KDVDFormatUninitialized"
-	case KDVDFormatNTSC:
-		return "KDVDFormatNTSC"
-	case KDVDFormatPAL:
-		return "KDVDFormatPAL"
-	case KDVDFormatNTSC_HDTV:
-		return "KDVDFormatNTSC_HDTV"
-	case KDVDFormatPAL_HDTV:
-		return "KDVDFormatPAL_HDTV"
-	default:
-		return fmt.Sprintf("DVDFormat(%d)", int64(e))
-	}
-}
-
-type DVDMenu uint32
-
-const (
-	KDVDMenuTitle      DVDMenu = 0
-	KDVDMenuRoot       DVDMenu = 1
-	KDVDMenuSubPicture DVDMenu = 2
-	KDVDMenuAudio      DVDMenu = 3
-	KDVDMenuAngle      DVDMenu = 4
-	KDVDMenuPTT        DVDMenu = 5
-	KDVDMenuNone       DVDMenu = 6
-)
-
-// String returns the DVDMenu constant's name, or its numeric form when the
-// value is not a known constant.
-func (e DVDMenu) String() string {
-	switch e {
-	case KDVDMenuTitle:
-		return "KDVDMenuTitle"
-	case KDVDMenuRoot:
-		return "KDVDMenuRoot"
-	case KDVDMenuSubPicture:
-		return "KDVDMenuSubPicture"
-	case KDVDMenuAudio:
-		return "KDVDMenuAudio"
-	case KDVDMenuAngle:
-		return "KDVDMenuAngle"
-	case KDVDMenuPTT:
-		return "KDVDMenuPTT"
-	case KDVDMenuNone:
-		return "KDVDMenuNone"
-	default:
-		return fmt.Sprintf("DVDMenu(%d)", int64(e))
-	}
-}
-
-type DVDScanDirection int8
-
-const (
-	KDVDScanDirectionForward  DVDScanDirection = 0
-	KDVDScanDirectionBackward DVDScanDirection = 1
-)
-
-// String returns the DVDScanDirection constant's name, or its numeric form when the
-// value is not a known constant.
-func (e DVDScanDirection) String() string {
-	switch e {
-	case KDVDScanDirectionForward:
-		return "KDVDScanDirectionForward"
-	case KDVDScanDirectionBackward:
-		return "KDVDScanDirectionBackward"
-	default:
-		return fmt.Sprintf("DVDScanDirection(%d)", int64(e))
-	}
-}
-
-type DVDScanRate int16
-
-const (
-	KDVDScanRateOneEigth  DVDScanRate = -8
-	KDVDScanRateOneFourth DVDScanRate = -4
-	KDVDScanRateOneHalf   DVDScanRate = -2
-	KDVDScanRate1x        DVDScanRate = 1
-	KDVDScanRate2x        DVDScanRate = 2
-	KDVDScanRate4x        DVDScanRate = 4
-	KDVDScanRate8x        DVDScanRate = 8
-	KDVDScanRate16x       DVDScanRate = 16
-	KDVDScanRate32x       DVDScanRate = 32
-)
-
-// String returns the DVDScanRate constant's name, or its numeric form when the
-// value is not a known constant.
-func (e DVDScanRate) String() string {
-	switch e {
-	case KDVDScanRateOneEigth:
-		return "KDVDScanRateOneEigth"
-	case KDVDScanRateOneFourth:
-		return "KDVDScanRateOneFourth"
-	case KDVDScanRateOneHalf:
-		return "KDVDScanRateOneHalf"
-	case KDVDScanRate1x:
-		return "KDVDScanRate1x"
-	case KDVDScanRate2x:
-		return "KDVDScanRate2x"
-	case KDVDScanRate4x:
-		return "KDVDScanRate4x"
-	case KDVDScanRate8x:
-		return "KDVDScanRate8x"
-	case KDVDScanRate16x:
-		return "KDVDScanRate16x"
-	case KDVDScanRate32x:
-		return "KDVDScanRate32x"
-	default:
-		return fmt.Sprintf("DVDScanRate(%d)", int64(e))
-	}
-}
-
-type DVDState int32
-
-const (
-	KDVDStateUnknown      DVDState = 0
-	KDVDStatePlaying      DVDState = 1
-	KDVDStatePlayingStill DVDState = 2
-	KDVDStatePaused       DVDState = 3
-	KDVDStateStopped      DVDState = 4
-	KDVDStateScanning     DVDState = 5
-	KDVDStateIdle         DVDState = 6
-	KDVDStatePlayingSlow  DVDState = 7
-)
-
-// String returns the DVDState constant's name, or its numeric form when the
-// value is not a known constant.
-func (e DVDState) String() string {
-	switch e {
-	case KDVDStateUnknown:
-		return "KDVDStateUnknown"
-	case KDVDStatePlaying:
-		return "KDVDStatePlaying"
-	case KDVDStatePlayingStill:
-		return "KDVDStatePlayingStill"
-	case KDVDStatePaused:
-		return "KDVDStatePaused"
-	case KDVDStateStopped:
-		return "KDVDStateStopped"
-	case KDVDStateScanning:
-		return "KDVDStateScanning"
-	case KDVDStateIdle:
-		return "KDVDStateIdle"
-	case KDVDStatePlayingSlow:
-		return "KDVDStatePlayingSlow"
-	default:
-		return fmt.Sprintf("DVDState(%d)", int64(e))
-	}
-}
-
-type DVDUserNavigation uint32
-
-const (
-	KDVDUserNavigationMoveUp    DVDUserNavigation = 1
-	KDVDUserNavigationMoveDown  DVDUserNavigation = 2
-	KDVDUserNavigationMoveLeft  DVDUserNavigation = 3
-	KDVDUserNavigationMoveRight DVDUserNavigation = 4
-	KDVDUserNavigationEnter     DVDUserNavigation = 5
-)
-
-// String returns the DVDUserNavigation constant's name, or its numeric form when the
-// value is not a known constant.
-func (e DVDUserNavigation) String() string {
-	switch e {
-	case KDVDUserNavigationMoveUp:
-		return "KDVDUserNavigationMoveUp"
-	case KDVDUserNavigationMoveDown:
-		return "KDVDUserNavigationMoveDown"
-	case KDVDUserNavigationMoveLeft:
-		return "KDVDUserNavigationMoveLeft"
-	case KDVDUserNavigationMoveRight:
-		return "KDVDUserNavigationMoveRight"
-	case KDVDUserNavigationEnter:
-		return "KDVDUserNavigationEnter"
-	default:
-		return fmt.Sprintf("DVDUserNavigation(%d)", int64(e))
-	}
-}
-
 type EntryID int32
 
 const (
@@ -488,6 +223,79 @@ func (e Clockid) String() string {
 	}
 }
 
+type DVDAspectRatio int16
+
+const (
+	KDVDAspectRatioUninitialized DVDAspectRatio = 0
+	KDVDAspectRatio4x3           DVDAspectRatio = 1
+	KDVDAspectRatio4x3PanAndScan DVDAspectRatio = 2
+	KDVDAspectRatio16x9          DVDAspectRatio = 3
+	KDVDAspectRatioLetterBox     DVDAspectRatio = 4
+)
+
+// String returns the DVDAspectRatio constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DVDAspectRatio) String() string {
+	switch e {
+	case KDVDAspectRatioUninitialized:
+		return "KDVDAspectRatioUninitialized"
+	case KDVDAspectRatio4x3:
+		return "KDVDAspectRatio4x3"
+	case KDVDAspectRatio4x3PanAndScan:
+		return "KDVDAspectRatio4x3PanAndScan"
+	case KDVDAspectRatio16x9:
+		return "KDVDAspectRatio16x9"
+	case KDVDAspectRatioLetterBox:
+		return "KDVDAspectRatioLetterBox"
+	default:
+		return fmt.Sprintf("DVDAspectRatio(%d)", int64(e))
+	}
+}
+
+type DVDAudioFormat int16
+
+const (
+	KDVDAudioUnknownFormat DVDAudioFormat = 0
+	KDVDAudioAC3Format     DVDAudioFormat = 1
+	KDVDAudioMPEG1Format   DVDAudioFormat = 2
+	KDVDAudioMPEG2Format   DVDAudioFormat = 3
+	KDVDAudioPCMFormat     DVDAudioFormat = 4
+	KDVDAudioDTSFormat     DVDAudioFormat = 5
+	KDVDAudioSDDSFormat    DVDAudioFormat = 6
+	KDVDAudioMLPFormat     DVDAudioFormat = 7
+	KDVDAudioDDPlusFormat  DVDAudioFormat = 8
+	KDVDAudioDTSHDFormat   DVDAudioFormat = 9
+)
+
+// String returns the DVDAudioFormat constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DVDAudioFormat) String() string {
+	switch e {
+	case KDVDAudioUnknownFormat:
+		return "KDVDAudioUnknownFormat"
+	case KDVDAudioAC3Format:
+		return "KDVDAudioAC3Format"
+	case KDVDAudioMPEG1Format:
+		return "KDVDAudioMPEG1Format"
+	case KDVDAudioMPEG2Format:
+		return "KDVDAudioMPEG2Format"
+	case KDVDAudioPCMFormat:
+		return "KDVDAudioPCMFormat"
+	case KDVDAudioDTSFormat:
+		return "KDVDAudioDTSFormat"
+	case KDVDAudioSDDSFormat:
+		return "KDVDAudioSDDSFormat"
+	case KDVDAudioMLPFormat:
+		return "KDVDAudioMLPFormat"
+	case KDVDAudioDDPlusFormat:
+		return "KDVDAudioDDPlusFormat"
+	case KDVDAudioDTSHDFormat:
+		return "KDVDAudioDTSHDFormat"
+	default:
+		return fmt.Sprintf("DVDAudioFormat(%d)", int64(e))
+	}
+}
+
 type DVDDomainCode uint32
 
 const (
@@ -612,6 +420,198 @@ func (e DVDEventCode) String() string {
 		return "KDVDEventChapterTime"
 	default:
 		return fmt.Sprintf("DVDEventCode(%d)", int64(e))
+	}
+}
+
+type DVDFormat int16
+
+const (
+	KDVDFormatUninitialized DVDFormat = 0
+	KDVDFormatNTSC          DVDFormat = 1
+	KDVDFormatPAL           DVDFormat = 2
+	KDVDFormatNTSC_HDTV     DVDFormat = 3
+	KDVDFormatPAL_HDTV      DVDFormat = 4
+)
+
+// String returns the DVDFormat constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DVDFormat) String() string {
+	switch e {
+	case KDVDFormatUninitialized:
+		return "KDVDFormatUninitialized"
+	case KDVDFormatNTSC:
+		return "KDVDFormatNTSC"
+	case KDVDFormatPAL:
+		return "KDVDFormatPAL"
+	case KDVDFormatNTSC_HDTV:
+		return "KDVDFormatNTSC_HDTV"
+	case KDVDFormatPAL_HDTV:
+		return "KDVDFormatPAL_HDTV"
+	default:
+		return fmt.Sprintf("DVDFormat(%d)", int64(e))
+	}
+}
+
+type DVDMenu uint32
+
+const (
+	KDVDMenuTitle      DVDMenu = 0
+	KDVDMenuRoot       DVDMenu = 1
+	KDVDMenuSubPicture DVDMenu = 2
+	KDVDMenuAudio      DVDMenu = 3
+	KDVDMenuAngle      DVDMenu = 4
+	KDVDMenuPTT        DVDMenu = 5
+	KDVDMenuNone       DVDMenu = 6
+)
+
+// String returns the DVDMenu constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DVDMenu) String() string {
+	switch e {
+	case KDVDMenuTitle:
+		return "KDVDMenuTitle"
+	case KDVDMenuRoot:
+		return "KDVDMenuRoot"
+	case KDVDMenuSubPicture:
+		return "KDVDMenuSubPicture"
+	case KDVDMenuAudio:
+		return "KDVDMenuAudio"
+	case KDVDMenuAngle:
+		return "KDVDMenuAngle"
+	case KDVDMenuPTT:
+		return "KDVDMenuPTT"
+	case KDVDMenuNone:
+		return "KDVDMenuNone"
+	default:
+		return fmt.Sprintf("DVDMenu(%d)", int64(e))
+	}
+}
+
+type DVDScanDirection int8
+
+const (
+	KDVDScanDirectionForward  DVDScanDirection = 0
+	KDVDScanDirectionBackward DVDScanDirection = 1
+)
+
+// String returns the DVDScanDirection constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DVDScanDirection) String() string {
+	switch e {
+	case KDVDScanDirectionForward:
+		return "KDVDScanDirectionForward"
+	case KDVDScanDirectionBackward:
+		return "KDVDScanDirectionBackward"
+	default:
+		return fmt.Sprintf("DVDScanDirection(%d)", int64(e))
+	}
+}
+
+type DVDScanRate int16
+
+const (
+	KDVDScanRateOneEigth  DVDScanRate = -8
+	KDVDScanRateOneFourth DVDScanRate = -4
+	KDVDScanRateOneHalf   DVDScanRate = -2
+	KDVDScanRate1x        DVDScanRate = 1
+	KDVDScanRate2x        DVDScanRate = 2
+	KDVDScanRate4x        DVDScanRate = 4
+	KDVDScanRate8x        DVDScanRate = 8
+	KDVDScanRate16x       DVDScanRate = 16
+	KDVDScanRate32x       DVDScanRate = 32
+)
+
+// String returns the DVDScanRate constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DVDScanRate) String() string {
+	switch e {
+	case KDVDScanRateOneEigth:
+		return "KDVDScanRateOneEigth"
+	case KDVDScanRateOneFourth:
+		return "KDVDScanRateOneFourth"
+	case KDVDScanRateOneHalf:
+		return "KDVDScanRateOneHalf"
+	case KDVDScanRate1x:
+		return "KDVDScanRate1x"
+	case KDVDScanRate2x:
+		return "KDVDScanRate2x"
+	case KDVDScanRate4x:
+		return "KDVDScanRate4x"
+	case KDVDScanRate8x:
+		return "KDVDScanRate8x"
+	case KDVDScanRate16x:
+		return "KDVDScanRate16x"
+	case KDVDScanRate32x:
+		return "KDVDScanRate32x"
+	default:
+		return fmt.Sprintf("DVDScanRate(%d)", int64(e))
+	}
+}
+
+type DVDState int32
+
+const (
+	KDVDStateUnknown      DVDState = 0
+	KDVDStatePlaying      DVDState = 1
+	KDVDStatePlayingStill DVDState = 2
+	KDVDStatePaused       DVDState = 3
+	KDVDStateStopped      DVDState = 4
+	KDVDStateScanning     DVDState = 5
+	KDVDStateIdle         DVDState = 6
+	KDVDStatePlayingSlow  DVDState = 7
+)
+
+// String returns the DVDState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DVDState) String() string {
+	switch e {
+	case KDVDStateUnknown:
+		return "KDVDStateUnknown"
+	case KDVDStatePlaying:
+		return "KDVDStatePlaying"
+	case KDVDStatePlayingStill:
+		return "KDVDStatePlayingStill"
+	case KDVDStatePaused:
+		return "KDVDStatePaused"
+	case KDVDStateStopped:
+		return "KDVDStateStopped"
+	case KDVDStateScanning:
+		return "KDVDStateScanning"
+	case KDVDStateIdle:
+		return "KDVDStateIdle"
+	case KDVDStatePlayingSlow:
+		return "KDVDStatePlayingSlow"
+	default:
+		return fmt.Sprintf("DVDState(%d)", int64(e))
+	}
+}
+
+type DVDUserNavigation uint32
+
+const (
+	KDVDUserNavigationMoveUp    DVDUserNavigation = 1
+	KDVDUserNavigationMoveDown  DVDUserNavigation = 2
+	KDVDUserNavigationMoveLeft  DVDUserNavigation = 3
+	KDVDUserNavigationMoveRight DVDUserNavigation = 4
+	KDVDUserNavigationEnter     DVDUserNavigation = 5
+)
+
+// String returns the DVDUserNavigation constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DVDUserNavigation) String() string {
+	switch e {
+	case KDVDUserNavigationMoveUp:
+		return "KDVDUserNavigationMoveUp"
+	case KDVDUserNavigationMoveDown:
+		return "KDVDUserNavigationMoveDown"
+	case KDVDUserNavigationMoveLeft:
+		return "KDVDUserNavigationMoveLeft"
+	case KDVDUserNavigationMoveRight:
+		return "KDVDUserNavigationMoveRight"
+	case KDVDUserNavigationEnter:
+		return "KDVDUserNavigationEnter"
+	default:
+		return fmt.Sprintf("DVDUserNavigation(%d)", int64(e))
 	}
 }
 
@@ -1297,27 +1297,55 @@ func (e QosClass) String() string {
 	}
 }
 
+type TaskSharedRegionStubs uint8
+
+const (
+	TaskSharedRegionStubsDev  TaskSharedRegionStubs = 1
+	TaskSharedRegionStubsProd TaskSharedRegionStubs = 2
+)
+
+// String returns the TaskSharedRegionStubs constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TaskSharedRegionStubs) String() string {
+	switch e {
+	case TaskSharedRegionStubsDev:
+		return "TaskSharedRegionStubsDev"
+	case TaskSharedRegionStubsProd:
+		return "TaskSharedRegionStubsProd"
+	default:
+		return fmt.Sprintf("TaskSharedRegionStubs(%d)", int64(e))
+	}
+}
+
 type VirtualMemoryGuardExceptionCode uint32
 
 const (
-	KGUARD_EXC_DEALLOC_GAP                   VirtualMemoryGuardExceptionCode = 1
-	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        VirtualMemoryGuardExceptionCode = 2
-	KGUARD_EXC_RECLAIM_INDEX_FAILURE         VirtualMemoryGuardExceptionCode = 4
-	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    VirtualMemoryGuardExceptionCode = 8
-	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    VirtualMemoryGuardExceptionCode = 9
-	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         VirtualMemoryGuardExceptionCode = 10
-	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         VirtualMemoryGuardExceptionCode = 11
-	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  VirtualMemoryGuardExceptionCode = 12
-	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    VirtualMemoryGuardExceptionCode = 13
-	KGUARD_EXC_SEC_ACCESS_FAULT              VirtualMemoryGuardExceptionCode = 98
-	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        VirtualMemoryGuardExceptionCode = 99
-	KGUARD_EXC_SEC_COPY_DENIED               VirtualMemoryGuardExceptionCode = 100
-	KGUARD_EXC_SEC_SHARING_DENIED            VirtualMemoryGuardExceptionCode = 101
-	KGUARD_EXC_MTE_SYNC_FAULT                VirtualMemoryGuardExceptionCode = 200
-	KGUARD_EXC_MTE_ASYNC_USER_FAULT          VirtualMemoryGuardExceptionCode = 201
-	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          VirtualMemoryGuardExceptionCode = 202
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT VirtualMemoryGuardExceptionCode = 203
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT VirtualMemoryGuardExceptionCode = 204
+	KGUARD_EXC_DEALLOC_GAP                  VirtualMemoryGuardExceptionCode = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE       VirtualMemoryGuardExceptionCode = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE        VirtualMemoryGuardExceptionCode = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE   VirtualMemoryGuardExceptionCode = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE   VirtualMemoryGuardExceptionCode = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE        VirtualMemoryGuardExceptionCode = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE        VirtualMemoryGuardExceptionCode = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION VirtualMemoryGuardExceptionCode = 12
+	// Guard exception sent to a thread when a CoW defeatured map attempts to copy memory which is not permitted by system policy.
+	KGUARD_EXC_COW_DEFEATURED_COPY_DENIED VirtualMemoryGuardExceptionCode = 13
+	// Guard exception sent to a thread when it attempts to extract a given type of memory in a way which is not permitted for CoW defeatured maps.
+	KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED VirtualMemoryGuardExceptionCode = 14
+	// Guard exception sent to a thread when it attempts to copy-map a memory entry which was created for sharing by a CoW defeatured map.
+	KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED VirtualMemoryGuardExceptionCode = 15
+	KGUARD_EXC_COW_DEFEATURED_FIRST                    VirtualMemoryGuardExceptionCode = 13
+	KGUARD_EXC_COW_DEFEATURED_LAST                     VirtualMemoryGuardExceptionCode = 15
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY              VirtualMemoryGuardExceptionCode = 16
+	KGUARD_EXC_SEC_ACCESS_FAULT                        VirtualMemoryGuardExceptionCode = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT                  VirtualMemoryGuardExceptionCode = 99
+	KGUARD_EXC_SEC_COPY_DENIED                         VirtualMemoryGuardExceptionCode = 100
+	KGUARD_EXC_SEC_SHARING_DENIED                      VirtualMemoryGuardExceptionCode = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                          VirtualMemoryGuardExceptionCode = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT                    VirtualMemoryGuardExceptionCode = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT                    VirtualMemoryGuardExceptionCode = 202
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT           VirtualMemoryGuardExceptionCode = 203
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT           VirtualMemoryGuardExceptionCode = 204
 )
 
 // String returns the VirtualMemoryGuardExceptionCode constant's name, or its numeric form when the
@@ -1340,6 +1368,12 @@ func (e VirtualMemoryGuardExceptionCode) String() string {
 		return "KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE"
 	case KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION:
 		return "KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION"
+	case KGUARD_EXC_COW_DEFEATURED_COPY_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_COPY_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED"
 	case KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY:
 		return "KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY"
 	case KGUARD_EXC_SEC_ACCESS_FAULT:

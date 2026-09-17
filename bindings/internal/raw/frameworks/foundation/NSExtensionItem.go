@@ -38,6 +38,7 @@ func NSExtensionItemFromID(id objc.ID) *NSExtensionItem {
 	return o
 }
 
+// An optional title for the item.
 func (o *NSExtensionItem) AttributedTitle() *NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSExtensionItemSelAttributedTitle)
 	if _ret != 0 {
@@ -50,6 +51,7 @@ func (o *NSExtensionItem) SetAttributedTitle(attributedTitle *NSAttributedString
 	o.Ptr().Send(_nSExtensionItemSelSetAttributedTitle, attributedTitle.Ptr())
 }
 
+// Optional content text.
 func (o *NSExtensionItem) AttributedContentText() *NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSExtensionItemSelAttributedContentText)
 	if _ret != 0 {
@@ -62,6 +64,7 @@ func (o *NSExtensionItem) SetAttributedContentText(attributedContentText *NSAttr
 	o.Ptr().Send(_nSExtensionItemSelSetAttributedContentText, attributedContentText.Ptr())
 }
 
+// Optional array of media data associated with the extension item, including images, videos, and URLs. This is not meant to be an array of alternate data formats/types, but instead a collection to include in a social media post for example.
 func (o *NSExtensionItem) Attachments() *NSArray[*NSItemProvider] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSExtensionItemSelAttachments)
 	if _ret != 0 {
@@ -74,6 +77,7 @@ func (o *NSExtensionItem) SetAttachments(attachments *NSArray[*NSItemProvider]) 
 	o.Ptr().Send(_nSExtensionItemSelSetAttachments, attachments.Ptr())
 }
 
+// Optional dictionary of key-value data. The key/value pairs accepted by the service are expected to be specified in the extension's @c Info.plist. The values of @c NSExtensionItem's properties will be reflected into the dictionary.
 func (o *NSExtensionItem) UserInfo() *NSDictionary[objc.ID, objc.ID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSExtensionItemSelUserInfo)
 	if _ret != 0 {

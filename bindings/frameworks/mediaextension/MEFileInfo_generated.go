@@ -98,6 +98,13 @@ func (fi *FileInfo) WithSidecarFileName(sidecarFileName string) *FileInfo {
 	return fi
 }
 
+// WithConstituentFileNames sets list of media files that collectively represent the media asset. Represents a list of media files that constitute the media asset. All files must be located in the same directory. The returned filenames should include just the file name and file extension, omitting any file path or directory slashes. The file extensions should all be explicitly supported by the format reader as declared in the EXAppExtensionAttributes and UTExportedTypeDeclarations dictionaries in the MediaExtension format reader Info.plist.
+func (fi *FileInfo) WithConstituentFileNames(items ...obj.Object) *FileInfo {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(fi), objc.RegisterName("setConstituentFileNames:"), _arr)
+	return fi
+}
+
 // Duration returns the duration of the media asset if known, otherwise kCMTimeInvalid.
 func (fi *FileInfo) Duration() coremedia.CMTime {
 	defer runtime.KeepAlive(fi)
@@ -120,4 +127,13 @@ func (fi *FileInfo) SidecarFileName() string {
 		return ""
 	}
 	return purego.GoString(_r)
+}
+
+// ConstituentFileNames returns list of media files that collectively represent the media asset. Represents a list of media files that constitute the media asset. All files must be located in the same directory. The returned filenames should include just the file name and file extension, omitting any file path or directory slashes. The file extensions should all be explicitly supported by the format reader as declared in the EXAppExtensionAttributes and UTExportedTypeDeclarations dictionaries in the MediaExtension format reader Info.plist.
+//
+// ConstituentFileNames returns the collection as a Go slice.
+func (fi *FileInfo) ConstituentFileNames() []string {
+	defer runtime.KeepAlive(fi)
+	_arr := objc.Send[objc.ID](objref.IDOf(fi), objc.RegisterName("constituentFileNames"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }

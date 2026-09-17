@@ -49,9 +49,16 @@ func NSAffectedStoresErrorKey() *foundation.NSString {
 }
 
 // Deprecated: Spotlight integration is deprecated. Use CoreSpotlight integration instead.
-func NSBinaryExternalRecordType() uintptr {
+func NSBinaryExternalRecordType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSBinaryExternalRecordType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSBinaryStoreInsecureDecodingCompatibilityOption() *foundation.NSString {
@@ -159,9 +166,16 @@ func NSDetailedErrorsKey() *foundation.NSString {
 }
 
 // Deprecated: Spotlight integration is deprecated. Use CoreSpotlight integration instead.
-func NSEntityNameInPathKey() uintptr {
+func NSEntityNameInPathKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSEntityNameInPathKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSErrorMergePolicy() objc.ID {
@@ -173,21 +187,42 @@ func NSErrorMergePolicy() objc.ID {
 }
 
 // Deprecated: Spotlight integration is deprecated. Use CoreSpotlight integration instead.
-func NSExternalRecordExtensionOption() uintptr {
+func NSExternalRecordExtensionOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSExternalRecordExtensionOption")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Spotlight integration is deprecated. Use CoreSpotlight integration instead.
-func NSExternalRecordsDirectoryOption() uintptr {
+func NSExternalRecordsDirectoryOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSExternalRecordsDirectoryOption")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Spotlight integration is deprecated. Use CoreSpotlight integration instead.
-func NSExternalRecordsFileFormatOption() uintptr {
+func NSExternalRecordsFileFormatOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSExternalRecordsFileFormatOption")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSIgnorePersistentStoreVersioningOption() *foundation.NSString {
@@ -459,15 +494,29 @@ func NSMigrationSourceObjectKey() *foundation.NSString {
 }
 
 // Deprecated: Spotlight integration is deprecated. Use CoreSpotlight integration instead.
-func NSModelPathKey() uintptr {
+func NSModelPathKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSModelPathKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Spotlight integration is deprecated. Use CoreSpotlight integration instead.
-func NSObjectURIKey() uintptr {
+func NSObjectURIKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSObjectURIKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSOverwriteMergePolicy() objc.ID {
@@ -478,14 +527,28 @@ func NSOverwriteMergePolicy() objc.ID {
 	return *(*objc.ID)(unsafe.Pointer(ptr))
 }
 
-func NSPersistentCloudKitContainerEventChangedNotification() uintptr {
+func NSPersistentCloudKitContainerEventChangedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSPersistentCloudKitContainerEventChangedNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSPersistentCloudKitContainerEventUserInfoKey() uintptr {
+func NSPersistentCloudKitContainerEventUserInfoKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSPersistentCloudKitContainerEventUserInfoKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSPersistentHistoryTokenKey() *foundation.NSString {
@@ -925,9 +988,16 @@ func NSStoreModelVersionIdentifiersKey() *foundation.NSString {
 }
 
 // Deprecated: Spotlight integration is deprecated. Use CoreSpotlight integration instead.
-func NSStorePathKey() uintptr {
+func NSStorePathKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSStorePathKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSStoreTypeKey() *foundation.NSString {
@@ -943,9 +1013,16 @@ func NSStoreTypeKey() *foundation.NSString {
 }
 
 // Deprecated: Spotlight integration is deprecated. Use CoreSpotlight integration instead.
-func NSStoreUUIDInPathKey() uintptr {
+func NSStoreUUIDInPathKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSStoreUUIDInPathKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSStoreUUIDKey() *foundation.NSString {
@@ -996,9 +1073,16 @@ func NSUpdatedObjectsKey() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
-func NSValidateXMLStoreOption() uintptr {
+func NSValidateXMLStoreOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSValidateXMLStoreOption")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSValidationKeyErrorKey() *foundation.NSString {
@@ -1050,12 +1134,26 @@ func NSValidationValueErrorKey() *foundation.NSString {
 }
 
 // Deprecated: Spotlight integration is deprecated. Use CoreSpotlight integration instead.
-func NSXMLExternalRecordType() uintptr {
+func NSXMLExternalRecordType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSXMLExternalRecordType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSXMLStoreType() uintptr {
+func NSXMLStoreType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSXMLStoreType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }

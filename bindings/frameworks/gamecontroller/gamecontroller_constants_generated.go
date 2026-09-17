@@ -250,6 +250,46 @@ func GCInputRightPaddle() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("GCInputRightPaddle")))
 }
 
+// GCHapticsLocalityDefault returns the string constant GCHapticsLocalityDefault, for use as a dictionary key or argument.
+func GCHapticsLocalityDefault() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCHapticsLocalityDefault")))
+}
+
+// GCHapticsLocalityAll returns the string constant GCHapticsLocalityAll, for use as a dictionary key or argument.
+func GCHapticsLocalityAll() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCHapticsLocalityAll")))
+}
+
+// GCHapticsLocalityHandles returns the string constant GCHapticsLocalityHandles, for use as a dictionary key or argument.
+func GCHapticsLocalityHandles() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCHapticsLocalityHandles")))
+}
+
+// GCHapticsLocalityLeftHandle returns the string constant GCHapticsLocalityLeftHandle, for use as a dictionary key or argument.
+func GCHapticsLocalityLeftHandle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCHapticsLocalityLeftHandle")))
+}
+
+// GCHapticsLocalityRightHandle returns the string constant GCHapticsLocalityRightHandle, for use as a dictionary key or argument.
+func GCHapticsLocalityRightHandle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCHapticsLocalityRightHandle")))
+}
+
+// GCHapticsLocalityTriggers returns the string constant GCHapticsLocalityTriggers, for use as a dictionary key or argument.
+func GCHapticsLocalityTriggers() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCHapticsLocalityTriggers")))
+}
+
+// GCHapticsLocalityLeftTrigger returns the string constant GCHapticsLocalityLeftTrigger, for use as a dictionary key or argument.
+func GCHapticsLocalityLeftTrigger() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCHapticsLocalityLeftTrigger")))
+}
+
+// GCHapticsLocalityRightTrigger returns the string constant GCHapticsLocalityRightTrigger, for use as a dictionary key or argument.
+func GCHapticsLocalityRightTrigger() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCHapticsLocalityRightTrigger")))
+}
+
 // GCKeyA returns the string constant GCKeyA, for use as a dictionary key or argument.
 func GCKeyA() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyA"))) }
 
@@ -791,48 +831,17 @@ func GCRacingWheelDidDisconnectNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("GCRacingWheelDidDisconnectNotification")))
 }
 
-// GCHapticsLocalityDefault returns the string constant GCHapticsLocalityDefault, for use as a dictionary key or argument.
-func GCHapticsLocalityDefault() obj.Object {
-	return obj.Wrap(purego.CFConstant(_symbol("GCHapticsLocalityDefault")))
-}
-
-// GCHapticsLocalityAll returns the string constant GCHapticsLocalityAll, for use as a dictionary key or argument.
-func GCHapticsLocalityAll() obj.Object {
-	return obj.Wrap(purego.CFConstant(_symbol("GCHapticsLocalityAll")))
-}
-
-// GCHapticsLocalityHandles returns the string constant GCHapticsLocalityHandles, for use as a dictionary key or argument.
-func GCHapticsLocalityHandles() obj.Object {
-	return obj.Wrap(purego.CFConstant(_symbol("GCHapticsLocalityHandles")))
-}
-
-// GCHapticsLocalityLeftHandle returns the string constant GCHapticsLocalityLeftHandle, for use as a dictionary key or argument.
-func GCHapticsLocalityLeftHandle() obj.Object {
-	return obj.Wrap(purego.CFConstant(_symbol("GCHapticsLocalityLeftHandle")))
-}
-
-// GCHapticsLocalityRightHandle returns the string constant GCHapticsLocalityRightHandle, for use as a dictionary key or argument.
-func GCHapticsLocalityRightHandle() obj.Object {
-	return obj.Wrap(purego.CFConstant(_symbol("GCHapticsLocalityRightHandle")))
-}
-
-// GCHapticsLocalityTriggers returns the string constant GCHapticsLocalityTriggers, for use as a dictionary key or argument.
-func GCHapticsLocalityTriggers() obj.Object {
-	return obj.Wrap(purego.CFConstant(_symbol("GCHapticsLocalityTriggers")))
-}
-
-// GCHapticsLocalityLeftTrigger returns the string constant GCHapticsLocalityLeftTrigger, for use as a dictionary key or argument.
-func GCHapticsLocalityLeftTrigger() obj.Object {
-	return obj.Wrap(purego.CFConstant(_symbol("GCHapticsLocalityLeftTrigger")))
-}
-
-// GCHapticsLocalityRightTrigger returns the string constant GCHapticsLocalityRightTrigger, for use as a dictionary key or argument.
-func GCHapticsLocalityRightTrigger() obj.Object {
-	return obj.Wrap(purego.CFConstant(_symbol("GCHapticsLocalityRightTrigger")))
-}
-
 // GCPoint2Zero returns the address of the symbol GCPoint2Zero.
 func GCPoint2Zero() uintptr { return _symbol("GCPoint2Zero") }
+
+// GCHapticDurationInfinite returns the value of the constant GCHapticDurationInfinite.
+func GCHapticDurationInfinite() float32 {
+	addr := _symbol("GCHapticDurationInfinite")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float32)(unsafe.Pointer(addr))
+}
 
 // GCCurrentExtendedGamepadSnapshotDataVersion returns the address of the symbol GCCurrentExtendedGamepadSnapshotDataVersion.
 func GCCurrentExtendedGamepadSnapshotDataVersion() uintptr {
@@ -2049,6 +2058,3 @@ func GCKeyCodeRightGUI() int {
 func GCCurrentMicroGamepadSnapshotDataVersion() uintptr {
 	return _symbol("GCCurrentMicroGamepadSnapshotDataVersion")
 }
-
-// GCHapticDurationInfinite returns the address of the symbol GCHapticDurationInfinite.
-func GCHapticDurationInfinite() uintptr { return _symbol("GCHapticDurationInfinite") }

@@ -18,8 +18,6 @@ import (
 // PersonNameComponentsFormatter is an idiomatic wrapper over the Objective-C class NSPersonNameComponentsFormatter.
 //
 // It embeds [Formatter], promoting that type's methods.
-//
-// A formatter that provides localized representations of the components of a person’s name.
 type PersonNameComponentsFormatter struct {
 	Formatter
 }
@@ -56,19 +54,19 @@ func NewPersonNameComponentsFormatter() *PersonNameComponentsFormatter {
 	return personNameComponentsFormatterAdopt(_id)
 }
 
-// WithStyle sets the style.
+// WithStyle sets the formatting style for the formatted string on an instance. `ShortStyle` will fall back to user preferences and language-specific defaults.
 func (pncf *PersonNameComponentsFormatter) WithStyle(style PersonNameComponentsFormatterStyle) *PersonNameComponentsFormatter {
 	objc.Send[objc.ID](objref.IDOf(pncf), objc.RegisterName("setStyle:"), style)
 	return pncf
 }
 
-// WithPhonetic sets the phonetic.
+// WithPhonetic sets specify that the formatter should only format the components object's phoneticRepresentation.
 func (pncf *PersonNameComponentsFormatter) WithPhonetic(phonetic bool) *PersonNameComponentsFormatter {
 	objc.Send[objc.ID](objref.IDOf(pncf), objc.RegisterName("setPhonetic:"), phonetic)
 	return pncf
 }
 
-// WithLocale sets the locale.
+// WithLocale sets specifies the locale to format names. Defaults to `autoupdatingCurrentLocale`. Also resets to `autoupdatingCurrentLocale` on assignment of `nil`.
 func (pncf *PersonNameComponentsFormatter) WithLocale(locale *Locale) *PersonNameComponentsFormatter {
 	defer runtime.KeepAlive(locale)
 	objc.Send[objc.ID](objref.IDOf(pncf), objc.RegisterName("setLocale:"), objref.IDOf(locale))
@@ -87,7 +85,7 @@ func (pncf *PersonNameComponentsFormatter) WithScriptingProperties(scriptingProp
 	return pncf
 }
 
-// StringFromPersonNameComponents wraps the corresponding Objective-C method.
+// StringFromPersonNameComponents returns a string containing the formatted value of the provided components object.
 func (pncf *PersonNameComponentsFormatter) StringFromPersonNameComponents(components *PersonNameComponents) string {
 	defer runtime.KeepAlive(pncf)
 	defer runtime.KeepAlive(components)
@@ -98,7 +96,7 @@ func (pncf *PersonNameComponentsFormatter) StringFromPersonNameComponents(compon
 	return purego.GoString(_r)
 }
 
-// AnnotatedStringFromPersonNameComponents wraps the corresponding Objective-C method.
+// AnnotatedStringFromPersonNameComponents returns an attributed string with annotations for each component. For each range, attributes can be obtained by querying dictionary key `NSPersonNameComponentKey`, using `NSPersonNameComponent` constant values.
 func (pncf *PersonNameComponentsFormatter) AnnotatedStringFromPersonNameComponents(components *PersonNameComponents) *AttributedString {
 	defer runtime.KeepAlive(pncf)
 	defer runtime.KeepAlive(components)
@@ -106,28 +104,28 @@ func (pncf *PersonNameComponentsFormatter) AnnotatedStringFromPersonNameComponen
 	return AttributedStringFromID(_r)
 }
 
-// PersonNameComponentsFromString wraps the corresponding Objective-C method.
+// PersonNameComponentsFromString returns an `NSPersonNameComponents` object representing the name components found in the provided string.
 func (pncf *PersonNameComponentsFormatter) PersonNameComponentsFromString(str string) *PersonNameComponents {
 	defer runtime.KeepAlive(pncf)
 	_r := objc.Send[objc.ID](objref.IDOf(pncf), objc.RegisterName("personNameComponentsFromString:"), purego.NSString(str))
 	return PersonNameComponentsFromID(_r)
 }
 
-// Style returns the style.
+// Style returns the formatting style for the formatted string on an instance. `ShortStyle` will fall back to user preferences and language-specific defaults.
 func (pncf *PersonNameComponentsFormatter) Style() PersonNameComponentsFormatterStyle {
 	defer runtime.KeepAlive(pncf)
 	_r := objc.Send[PersonNameComponentsFormatterStyle](objref.IDOf(pncf), objc.RegisterName("style"))
 	return _r
 }
 
-// IsPhonetic reports whether the object is phonetic.
+// IsPhonetic reports whether specify that the formatter should only format the components object's phoneticRepresentation.
 func (pncf *PersonNameComponentsFormatter) IsPhonetic() bool {
 	defer runtime.KeepAlive(pncf)
 	_r := objc.Send[bool](objref.IDOf(pncf), objc.RegisterName("isPhonetic"))
 	return _r
 }
 
-// Locale returns the locale.
+// Locale specifies the locale to format names. Defaults to `autoupdatingCurrentLocale`. Also resets to `autoupdatingCurrentLocale` on assignment of `nil`.
 func (pncf *PersonNameComponentsFormatter) Locale() *Locale {
 	defer runtime.KeepAlive(pncf)
 	_r := objc.Send[objc.ID](objref.IDOf(pncf), objc.RegisterName("locale"))

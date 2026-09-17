@@ -25,6 +25,10 @@ var (
 	_pHContentEditingInputRequestOptionsSelSetNetworkAccessAllowed    = objc.RegisterName("setNetworkAccessAllowed:")
 	_pHContentEditingInputRequestOptionsSelProgressHandler            = objc.RegisterName("progressHandler")
 	_pHContentEditingInputRequestOptionsSelSetProgressHandler         = objc.RegisterName("setProgressHandler:")
+	_pHContentEditingInputRequestOptionsSelSkipsDisplaySizeImage      = objc.RegisterName("skipsDisplaySizeImage")
+	_pHContentEditingInputRequestOptionsSelSetSkipsDisplaySizeImage   = objc.RegisterName("setSkipsDisplaySizeImage:")
+	_pHContentEditingInputRequestOptionsSelOriginalResourceChoice     = objc.RegisterName("originalResourceChoice")
+	_pHContentEditingInputRequestOptionsSelSetOriginalResourceChoice  = objc.RegisterName("setOriginalResourceChoice:")
 )
 
 func PHContentEditingInputRequestOptionsFromID(id objc.ID) *PHContentEditingInputRequestOptions {
@@ -79,4 +83,24 @@ func (o *PHContentEditingInputRequestOptions) SetProgressHandler(progressHandler
 		defer __block_progressHandler.Release()
 	}
 	o.Ptr().Send(_pHContentEditingInputRequestOptionsSelSetProgressHandler, __block_progressHandler)
+}
+
+// Set this value to `true` if you don't want a `displaySizeImage` on the `PHContentEditingInput`. This can give performance wins when the image will not be used.
+func (o *PHContentEditingInputRequestOptions) SkipsDisplaySizeImage() bool {
+	_ret := objc.Send[bool](o.Ptr(), _pHContentEditingInputRequestOptionsSelSkipsDisplaySizeImage)
+	return _ret
+}
+
+func (o *PHContentEditingInputRequestOptions) SetSkipsDisplaySizeImage(skipsDisplaySizeImage bool) {
+	o.Ptr().Send(_pHContentEditingInputRequestOptionsSelSetSkipsDisplaySizeImage, skipsDisplaySizeImage)
+}
+
+// The original resource to use as the unadjusted base when fulfilling the request. When set, the content editing input request is fulfilled as though the asset's original resource choice were the value specified here. This property applies to RAW+JPEG assets only, and is intended for switching between the RAW and compressed resource of such an asset. Setting it for an asset that has only a RAW resource is an error.
+func (o *PHContentEditingInputRequestOptions) OriginalResourceChoice() PHOriginalResourceChoice {
+	_ret := objc.Send[PHOriginalResourceChoice](o.Ptr(), _pHContentEditingInputRequestOptionsSelOriginalResourceChoice)
+	return _ret
+}
+
+func (o *PHContentEditingInputRequestOptions) SetOriginalResourceChoice(originalResourceChoice PHOriginalResourceChoice) {
+	o.Ptr().Send(_pHContentEditingInputRequestOptionsSelSetOriginalResourceChoice, originalResourceChoice)
 }

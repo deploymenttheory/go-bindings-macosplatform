@@ -192,14 +192,14 @@ func (mq *MetadataQuery) ValueOfAttributeForResultAtIndex(attrName string, idx i
 	return obj.Wrap(_r)
 }
 
-// Predicate returns the predicate.
+// Predicate returns the predicate used to filter query results. Setting this property while a query is running stops the query and discards the current results. The receiver immediately starts a new query.
 func (mq *MetadataQuery) Predicate() *Predicate {
 	defer runtime.KeepAlive(mq)
 	_r := objc.Send[objc.ID](objref.IDOf(mq), objc.RegisterName("predicate"))
 	return PredicateFromID(_r)
 }
 
-// SortDescriptors returns the sort descriptors.
+// SortDescriptors returns an array of sort descriptors to use when sorting the query results.
 //
 // SortDescriptors returns the collection as a Go slice.
 func (mq *MetadataQuery) SortDescriptors() []*SortDescriptor {
@@ -208,7 +208,7 @@ func (mq *MetadataQuery) SortDescriptors() []*SortDescriptor {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SortDescriptor { return SortDescriptorFromID(_id) })
 }
 
-// ValueListAttributes returns the value list attributes.
+// ValueListAttributes returns an array of attributes whose values are gathered by the query.
 //
 // ValueListAttributes returns the collection as a Go slice.
 func (mq *MetadataQuery) ValueListAttributes() []string {
@@ -217,7 +217,7 @@ func (mq *MetadataQuery) ValueListAttributes() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// GroupingAttributes returns the grouping attributes.
+// GroupingAttributes returns an array of attributes used to group query results.
 //
 // GroupingAttributes returns the collection as a Go slice.
 func (mq *MetadataQuery) GroupingAttributes() []string {
@@ -226,14 +226,14 @@ func (mq *MetadataQuery) GroupingAttributes() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// NotificationBatchingInterval returns the notification batching interval.
+// NotificationBatchingInterval returns the interval at which notification of updated results occurs.
 func (mq *MetadataQuery) NotificationBatchingInterval() float64 {
 	defer runtime.KeepAlive(mq)
 	_r := objc.Send[float64](objref.IDOf(mq), objc.RegisterName("notificationBatchingInterval"))
 	return _r
 }
 
-// SearchScopes returns the search scopes.
+// SearchScopes returns an array of search scopes that limits where the query searches for results. Scopes is an NSArray of NSURL objects (file URLs only) and/or string paths and/or the special string constants below, which specifies the locations to which the search is limited; an empty array means no limits, which is the default state.
 func (mq *MetadataQuery) SearchScopes() obj.Object {
 	defer runtime.KeepAlive(mq)
 	_r := objc.Send[objc.ID](objref.IDOf(mq), objc.RegisterName("searchScopes"))
@@ -247,7 +247,7 @@ func (mq *MetadataQuery) SetSearchScopes(searchScopes obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mq), objc.RegisterName("setSearchScopes:"), objref.IDOf(searchScopes))
 }
 
-// SearchItems returns the search items.
+// SearchItems returns an array of objects that the query will search. Items can be a mixture of NSMetadataItem, NSURL objects (file URLs only) and/or string paths; the getter returns the same mixture as was set.
 func (mq *MetadataQuery) SearchItems() obj.Object {
 	defer runtime.KeepAlive(mq)
 	_r := objc.Send[objc.ID](objref.IDOf(mq), objc.RegisterName("searchItems"))
@@ -261,56 +261,56 @@ func (mq *MetadataQuery) SetSearchItems(searchItems obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mq), objc.RegisterName("setSearchItems:"), objref.IDOf(searchItems))
 }
 
-// OperationQueue returns the operation queue.
+// OperationQueue returns an optional operation queue for notifications and delegate method calls.
 func (mq *MetadataQuery) OperationQueue() *OperationQueue {
 	defer runtime.KeepAlive(mq)
 	_r := objc.Send[objc.ID](objref.IDOf(mq), objc.RegisterName("operationQueue"))
 	return OperationQueueFromID(_r)
 }
 
-// IsStarted reports whether the object is started.
+// IsStarted reports whether the query has started.
 func (mq *MetadataQuery) IsStarted() bool {
 	defer runtime.KeepAlive(mq)
 	_r := objc.Send[bool](objref.IDOf(mq), objc.RegisterName("isStarted"))
 	return _r
 }
 
-// IsGathering reports whether the object is gathering.
+// IsGathering reports whether the query is in its initial gathering phase.
 func (mq *MetadataQuery) IsGathering() bool {
 	defer runtime.KeepAlive(mq)
 	_r := objc.Send[bool](objref.IDOf(mq), objc.RegisterName("isGathering"))
 	return _r
 }
 
-// IsStopped reports whether the object is stopped.
+// IsStopped reports whether the query has been stopped.
 func (mq *MetadataQuery) IsStopped() bool {
 	defer runtime.KeepAlive(mq)
 	_r := objc.Send[bool](objref.IDOf(mq), objc.RegisterName("isStopped"))
 	return _r
 }
 
-// ResultCount returns the result count.
+// ResultCount returns the number of results returned by the query.
 func (mq *MetadataQuery) ResultCount() int {
 	defer runtime.KeepAlive(mq)
 	_r := objc.Send[int](objref.IDOf(mq), objc.RegisterName("resultCount"))
 	return _r
 }
 
-// Results returns the results.
+// Results returns an array containing the query's results. This is for key-value bindings, and causes side-effects on the query.
 func (mq *MetadataQuery) Results() obj.Object {
 	defer runtime.KeepAlive(mq)
 	_r := objc.Send[objc.ID](objref.IDOf(mq), objc.RegisterName("results"))
 	return obj.Wrap(_r)
 }
 
-// ValueLists returns the value lists.
+// ValueLists returns a dictionary containing arrays of attribute value tuples, keyed by attribute name. Values are arrays of `NSMetadataQueryAttributeValueTuple`.
 func (mq *MetadataQuery) ValueLists() map[string]obj.Object {
 	defer runtime.KeepAlive(mq)
 	_r := objc.Send[objc.ID](objref.IDOf(mq), objc.RegisterName("valueLists"))
 	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// GroupedResults returns the grouped results.
+// GroupedResults returns an array of NSMetadataQueryResultGroups, for the first grouping attribute.
 //
 // GroupedResults returns the collection as a Go slice.
 func (mq *MetadataQuery) GroupedResults() []*MetadataQueryResultGroup {

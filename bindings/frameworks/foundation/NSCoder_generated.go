@@ -433,14 +433,14 @@ func (c *Coder) FailWithError(err unsafe.Pointer) {
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("failWithError:"), err)
 }
 
-// SystemVersion returns the system version.
+// SystemVersion returns the system version in effect for the archive. During encoding, the current version. During decoding, the version that was in effect when the data was encoded. Subclasses that implement decoding must override this property to return the system version of the data being decoded.
 func (c *Coder) SystemVersion() int {
 	defer runtime.KeepAlive(c)
 	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("systemVersion"))
 	return _r
 }
 
-// AllowsKeyedCoding wraps the corresponding Objective-C method.
+// AllowsKeyedCoding reports whether the receiver supports keyed coding of objects. `NO` by default. Concrete subclasses that support keyed coding, such as `NSKeyedArchiver`, need to override this property to return `YES`.
 func (c *Coder) AllowsKeyedCoding() bool {
 	defer runtime.KeepAlive(c)
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("allowsKeyedCoding"))
@@ -461,14 +461,14 @@ func (c *Coder) AllowedClasses() []obj.Object {
 	return rt.NSSetToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// DecodingFailurePolicy defines the behavior this NSCoder should take on decode failure (i.e. corrupt archive, invalid data, etc.). The default result of this property is NSDecodingFailurePolicyRaiseException, subclasses can change this to an alternative policy.
+// DecodingFailurePolicy returns the action the coder should take when decoding fails. A decode call can fail for the following reasons: - The keyed archive data is corrupt or missing. - A type mismatch occurs, such as expecting a class but encountering a numeric type instead. This also occurs when `decodeInteger(forKey:)` encounters a value encoded as floating-point, or vice versa. - A secure coding violation occurs. This happens when you attempt to decode an object that doesn't conform to `NSSecureCoding`, or when the encoded type doesn't match any of the expected types.
 func (c *Coder) DecodingFailurePolicy() DecodingFailurePolicy {
 	defer runtime.KeepAlive(c)
 	_r := objc.Send[DecodingFailurePolicy](objref.IDOf(c), objc.RegisterName("decodingFailurePolicy"))
 	return _r
 }
 
-// Error returns the current error (if there is one) for the current TopLevel decode. The meaning of this property changes based on the result of the decodingFailurePolicy property: For NSDecodingFailurePolicyRaiseException, this property will always be nil. For NSDecodingFailurePolicySetErrorAndReturn, this property can be non-nil, and if so, indicates that there was a failure while decoding the archive (specifically its the very first error encountered). While .error is non-nil, all attempts to decode data from this coder will return a nil/zero-equivalent value. This error is consumed by a TopLevel decode API (which resets this coder back to a being able to potentially decode data).
+// Error returns an error in the top-level decode. The meaning of this property depends on the setting of the `decodingFailurePolicy` property. For `NSDecodingFailurePolicyRaiseException`, this property is always `nil`. For `NSDecodingFailurePolicySetErrorAndReturn`, a non-`nil` value represents the first error encountered while decoding the archive. While `error` is non-`nil`, all attempts to decode data from this coder will return a `nil`/zero-equivalent value. This error is consumed by a top-level decode API, which resets the coder back to being able to potentially decode data.
 func (c *Coder) Error() unsafe.Pointer {
 	defer runtime.KeepAlive(c)
 	_r := objc.Send[unsafe.Pointer](objref.IDOf(c), objc.RegisterName("error"))

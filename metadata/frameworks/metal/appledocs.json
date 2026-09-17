@@ -526,12 +526,28 @@
       "doc": "A description of a structure.",
       "url": "https://developer.apple.com/documentation/metal/mtlstructtype"
     },
+    "MTLTensorAuxiliaryPlaneDescriptor": {
+      "doc": "A configuration for an auxiliary plane in a multi-plane tensor.",
+      "url": "https://developer.apple.com/documentation/metal/mtltensorauxiliaryplanedescriptor"
+    },
+    "MTLTensorAuxiliaryPlaneDescriptorMap": {
+      "doc": "A map of auxiliary plane descriptors keyed by plane type.",
+      "url": "https://developer.apple.com/documentation/metal/mtltensorauxiliaryplanedescriptormap"
+    },
+    "MTLTensorAuxiliaryPlaneType": {
+      "doc": "An auxiliary plane that a shader’s tensor argument requires.",
+      "url": "https://developer.apple.com/documentation/metal/mtltensorauxiliaryplanetype"
+    },
+    "MTLTensorBufferAttachments": {
+      "doc": "An object that associates each plane of a tensor with a buffer and byte offset for buffer-backed tensor creation.",
+      "url": "https://developer.apple.com/documentation/metal/mtltensorbufferattachments"
+    },
     "MTLTensorDescriptor": {
       "doc": "A configuration type for creating new tensor instances.",
       "url": "https://developer.apple.com/documentation/metal/mtltensordescriptor"
     },
     "MTLTensorExtents": {
-      "doc": "An array of length matching the rank, holding the dimensions of a tensor.",
+      "doc": "An integer array that holds per-dimension values such as tensor sizes, strides, or block factors",
       "url": "https://developer.apple.com/documentation/metal/mtltensorextents"
     },
     "MTLTensorReferenceType": {
@@ -825,10 +841,6 @@
       "doc": "A collection of Metal shader functions.",
       "url": "https://developer.apple.com/documentation/metal/mtllibrary"
     },
-    "MTLLogContainer": {
-      "doc": "A collection of logged messages, created when a Metal device runs a command buffer.",
-      "url": "https://developer.apple.com/documentation/metal/mtllogcontainer"
-    },
     "MTLLogState": {
       "doc": "A container for shader log messages.",
       "url": "https://developer.apple.com/documentation/metal/mtllogstate"
@@ -879,6 +891,10 @@
     "MTLTensor": {
       "doc": "A resource representing a multi-dimensional array that you can use with machine learning workloads.",
       "url": "https://developer.apple.com/documentation/metal/mtltensor"
+    },
+    "MTLTensorAuxiliaryPlane": {
+      "doc": "A type that represents the configuration and storage of an auxiliary plane in a multi-plane tensor.",
+      "url": "https://developer.apple.com/documentation/metal/mtltensorauxiliaryplane"
     },
     "MTLTensorBinding": {
       "doc": "An object that represents a tensor bound to a graphics or compute function or a machine learning function.",
@@ -1503,10 +1519,6 @@
         }
       }
     },
-    "MTLBinaryArchiveError": {
-      "doc": "An error that occurred when creating a binary shader archive.",
-      "url": "https://developer.apple.com/documentation/metal/mtlbinaryarchiveerror"
-    },
     "MTLBindingAccess": {
       "url": "https://developer.apple.com/documentation/metal/mtlbindingaccess",
       "members": {
@@ -1767,10 +1779,6 @@
         }
       }
     },
-    "MTLCommandBufferError": {
-      "doc": "The command buffer error codes that indicate why the GPU doesn’t finish executing a command buffer.",
-      "url": "https://developer.apple.com/documentation/metal/mtlcommandbuffererror"
-    },
     "MTLCommandBufferErrorOption": {
       "doc": "Options for reporting errors from a command buffer.",
       "url": "https://developer.apple.com/documentation/metal/mtlcommandbuffererroroption",
@@ -1886,9 +1894,8 @@
     "MTLCompileSymbolVisibility": {
       "url": "https://developer.apple.com/documentation/metal/mtlcompilesymbolvisibility"
     },
-    "MTLCounterSampleBufferError": {
-      "doc": "The error codes that indicate why a GPU driver can’t create a counter sample buffer.",
-      "url": "https://developer.apple.com/documentation/metal/mtlcountersamplebuffererror"
+    "MTLContentionRelief": {
+      "url": "https://developer.apple.com/documentation/metal/mtlcontentionrelief"
     },
     "MTLCounterSamplingPoint": {
       "doc": "Options for different times when you can sample GPU counters.",
@@ -2391,10 +2398,6 @@
         }
       }
     },
-    "MTLDynamicLibraryError": {
-      "doc": "Errors when compiling dynamic libraries.",
-      "url": "https://developer.apple.com/documentation/metal/mtldynamiclibraryerror"
-    },
     "MTLFeatureSet": {
       "doc": "The device feature sets that define specific platform, hardware, and software configurations.",
       "url": "https://developer.apple.com/documentation/metal/mtlfeatureset",
@@ -2516,6 +2519,12 @@
           "url": "https://developer.apple.com/documentation/metal/mtlfeatureset/tvos_gpufamily2_v2"
         }
       }
+    },
+    "MTLFloatingPointConversionRoundingMode": {
+      "url": "https://developer.apple.com/documentation/metal/mtlfloatingpointconversionroundingmode"
+    },
+    "MTLForwardProgressUsage": {
+      "url": "https://developer.apple.com/documentation/metal/mtlforwardprogressusage"
     },
     "MTLFunctionLogType": {
       "doc": "Options for different kinds of function logs.",
@@ -2755,10 +2764,6 @@
         }
       }
     },
-    "MTLIOError": {
-      "doc": "The categories of errors for creating an input/output file handle.",
-      "url": "https://developer.apple.com/documentation/metal/mtlioerror"
-    },
     "MTLIOPriority": {
       "doc": "Designates the priority for a new input/output command queue.",
       "url": "https://developer.apple.com/documentation/metal/mtliopriority",
@@ -2922,10 +2927,6 @@
           "url": "https://developer.apple.com/documentation/metal/mtllanguageversion/version3_2"
         }
       }
-    },
-    "MTLLibraryError": {
-      "doc": "Metal errors related to libraries.",
-      "url": "https://developer.apple.com/documentation/metal/mtllibraryerror"
     },
     "MTLLibraryOptimizationLevel": {
       "doc": "The optimization options for the Metal compiler.",
@@ -3645,6 +3646,54 @@
           "doc": "A 32-bit packed pixel format with four normalized unsigned integer components: 10-bit red, 10-bit green, 10-bit blue, and 2-bit alpha.",
           "url": "https://developer.apple.com/documentation/metal/mtlpixelformat/rgb10a2unorm"
         },
+        "MTLPixelFormatRGB16Float": {
+          "doc": "An ordinary format with three components of 16-bit floating-point values in RGB order.",
+          "url": "https://developer.apple.com/documentation/metal/mtlpixelformat/rgb16float"
+        },
+        "MTLPixelFormatRGB16Sint": {
+          "doc": "An ordinary format with three components of 16-bit signed integer values in RGB order.",
+          "url": "https://developer.apple.com/documentation/metal/mtlpixelformat/rgb16sint"
+        },
+        "MTLPixelFormatRGB16Snorm": {
+          "doc": "An ordinary format with three components of 16-bit normalized, signed integer values in RGB order.",
+          "url": "https://developer.apple.com/documentation/metal/mtlpixelformat/rgb16snorm"
+        },
+        "MTLPixelFormatRGB16Uint": {
+          "doc": "An ordinary format with three components of 16-bit unsigned integer values in RGB order.",
+          "url": "https://developer.apple.com/documentation/metal/mtlpixelformat/rgb16uint"
+        },
+        "MTLPixelFormatRGB16Unorm": {
+          "doc": "An ordinary format with three components of 16-bit normalized, unsigned integer values in RGB order.",
+          "url": "https://developer.apple.com/documentation/metal/mtlpixelformat/rgb16unorm"
+        },
+        "MTLPixelFormatRGB32Float": {
+          "doc": "An ordinary format with three components of 32-bit floating-point values in RGB order.",
+          "url": "https://developer.apple.com/documentation/metal/mtlpixelformat/rgb32float"
+        },
+        "MTLPixelFormatRGB32Sint": {
+          "doc": "An ordinary format with three components of 32-bit signed integer values in RGB order.",
+          "url": "https://developer.apple.com/documentation/metal/mtlpixelformat/rgb32sint"
+        },
+        "MTLPixelFormatRGB32Uint": {
+          "doc": "An ordinary format with three components of 32-bit unsigned integer values in RGB order.",
+          "url": "https://developer.apple.com/documentation/metal/mtlpixelformat/rgb32uint"
+        },
+        "MTLPixelFormatRGB8Sint": {
+          "doc": "An ordinary format with three components of 8-bit signed integer values in RGB order.",
+          "url": "https://developer.apple.com/documentation/metal/mtlpixelformat/rgb8sint"
+        },
+        "MTLPixelFormatRGB8Snorm": {
+          "doc": "An ordinary format with three components of 8-bit normalized, signed integer values in RGB order.",
+          "url": "https://developer.apple.com/documentation/metal/mtlpixelformat/rgb8snorm"
+        },
+        "MTLPixelFormatRGB8Uint": {
+          "doc": "An ordinary format with three components of 8-bit unsigned integer values in RGB order.",
+          "url": "https://developer.apple.com/documentation/metal/mtlpixelformat/rgb8uint"
+        },
+        "MTLPixelFormatRGB8Unorm": {
+          "doc": "An ordinary format with three components of 8-bit normalized, unsigned integer values in RGB order.",
+          "url": "https://developer.apple.com/documentation/metal/mtlpixelformat/rgb8unorm"
+        },
         "MTLPixelFormatRGB9E5Float": {
           "doc": "Packed 32-bit format with floating-point color components: 9 bits each for RGB and 5 bits for an exponent shared by RGB, packed into 32 bits.",
           "url": "https://developer.apple.com/documentation/metal/mtlpixelformat/rgb9e5float"
@@ -4281,7 +4330,7 @@
       "url": "https://developer.apple.com/documentation/metal/mtltensordatatype",
       "members": {
         "MTLTensorDataTypeBFloat16": {
-          "doc": "A 16-bit floating point data type with 8 exponent bits, 7 mantissa bits and 1 sign bit.",
+          "doc": "A 16-bit floating point data type with 8 exponent bits, 7 mantissa bits, and 1 sign bit.",
           "url": "https://developer.apple.com/documentation/metal/mtltensordatatype/bfloat16"
         },
         "MTLTensorDataTypeFloat16": {
@@ -4292,36 +4341,20 @@
           "doc": "A single-precision floating point data type.",
           "url": "https://developer.apple.com/documentation/metal/mtltensordatatype/float32"
         },
-        "MTLTensorDataTypeFloat4E2M1": {
-          "doc": "A 4-bit floating point format data type with 2 exponent bits, 1 mantissa bit and 1 sign bit.",
-          "url": "https://developer.apple.com/documentation/metal/mtltensordatatype/float4e2m1"
-        },
-        "MTLTensorDataTypeFloat8E4M3": {
-          "doc": "An 8-bit floating point format data type with 4 exponent bits, 3 mantissa bits and 1 sign bit.",
-          "url": "https://developer.apple.com/documentation/metal/mtltensordatatype/float8e4m3"
-        },
-        "MTLTensorDataTypeFloat8E5M2": {
-          "doc": "An 8-bit floating point format data type with 5 exponent bits, 2 mantissa bits and 1 sign bit.",
-          "url": "https://developer.apple.com/documentation/metal/mtltensordatatype/float8e5m2"
-        },
-        "MTLTensorDataTypeFloat8UE8M0": {
-          "doc": "An 8-bit floating point format data type with 8 exponent bits.",
-          "url": "https://developer.apple.com/documentation/metal/mtltensordatatype/float8ue8m0"
-        },
         "MTLTensorDataTypeInt16": {
           "doc": "A 16-bit signed integer data type.",
           "url": "https://developer.apple.com/documentation/metal/mtltensordatatype/int16"
         },
         "MTLTensorDataTypeInt2": {
-          "doc": "A 2-bit signed integer format data type.",
+          "doc": "A 2-bit signed integer data type.",
           "url": "https://developer.apple.com/documentation/metal/mtltensordatatype/int2"
         },
         "MTLTensorDataTypeInt32": {
-          "doc": "A 32-bit integer data type.",
+          "doc": "A 32-bit signed integer data type.",
           "url": "https://developer.apple.com/documentation/metal/mtltensordatatype/int32"
         },
         "MTLTensorDataTypeInt4": {
-          "doc": "A 4-bit signed integer format data type.",
+          "doc": "A 4-bit signed integer data type.",
           "url": "https://developer.apple.com/documentation/metal/mtltensordatatype/int4"
         },
         "MTLTensorDataTypeInt8": {
@@ -4329,19 +4362,19 @@
           "url": "https://developer.apple.com/documentation/metal/mtltensordatatype/int8"
         },
         "MTLTensorDataTypeMetalFloat4E2M1": {
-          "doc": "A 4-bit floating point format data type with 2 exponent bits, 1 mantissa bit and 1 sign bit.",
+          "doc": "A 4-bit floating point data type with 2 exponent bits, 1 mantissa bit, and 1 sign bit.",
           "url": "https://developer.apple.com/documentation/metal/mtltensordatatype/metalfloat4e2m1"
         },
         "MTLTensorDataTypeMetalFloat8E4M3": {
-          "doc": "An 8-bit floating point format data type with 4 exponent bits, 3 mantissa bits and 1 sign bit.",
+          "doc": "An 8-bit floating point data type with 4 exponent bits, 3 mantissa bits, and 1 sign bit.",
           "url": "https://developer.apple.com/documentation/metal/mtltensordatatype/metalfloat8e4m3"
         },
         "MTLTensorDataTypeMetalFloat8E5M2": {
-          "doc": "An 8-bit floating point format data type with 5 exponent bits, 2 mantissa bits and 1 sign bit.",
+          "doc": "An 8-bit floating point data type with 5 exponent bits, 2 mantissa bits, and 1 sign bit.",
           "url": "https://developer.apple.com/documentation/metal/mtltensordatatype/metalfloat8e5m2"
         },
         "MTLTensorDataTypeMetalFloat8UE8M0": {
-          "doc": "An 8-bit floating point format data type with 8 exponent bits.",
+          "doc": "An 8-bit floating point data type with 8 exponent bits, 0 mantissa bits, and no sign bit.",
           "url": "https://developer.apple.com/documentation/metal/mtltensordatatype/metalfloat8ue8m0"
         },
         "MTLTensorDataTypeNone": {
@@ -4353,7 +4386,7 @@
           "url": "https://developer.apple.com/documentation/metal/mtltensordatatype/uint16"
         },
         "MTLTensorDataTypeUInt2": {
-          "doc": "A 2-bit unsigned integer format data type.",
+          "doc": "A 2-bit unsigned integer data type.",
           "url": "https://developer.apple.com/documentation/metal/mtltensordatatype/uint2"
         },
         "MTLTensorDataTypeUInt32": {
@@ -4361,7 +4394,7 @@
           "url": "https://developer.apple.com/documentation/metal/mtltensordatatype/uint32"
         },
         "MTLTensorDataTypeUInt4": {
-          "doc": "A 4-bit unsigned integer format data type.",
+          "doc": "A 4-bit unsigned integer data type.",
           "url": "https://developer.apple.com/documentation/metal/mtltensordatatype/uint4"
         },
         "MTLTensorDataTypeUInt8": {
@@ -4370,8 +4403,22 @@
         }
       }
     },
+    "MTLTensorPlaneType": {
+      "doc": "The possible tensor plane types.",
+      "url": "https://developer.apple.com/documentation/metal/mtltensorplanetype",
+      "members": {
+        "MTLTensorPlaneTypeData": {
+          "doc": "The main data plane, which every tensor has",
+          "url": "https://developer.apple.com/documentation/metal/mtltensorplanetype/data"
+        },
+        "MTLTensorPlaneTypeScales": {
+          "doc": "The auxiliary plane that stores scale factors for elements in the data plane.",
+          "url": "https://developer.apple.com/documentation/metal/mtltensorplanetype/scales"
+        }
+      }
+    },
     "MTLTensorUsage": {
-      "doc": "The type that represents the different contexts for a tensor.",
+      "doc": "The contexts in which you can use a tensor.",
       "url": "https://developer.apple.com/documentation/metal/mtltensorusage",
       "members": {
         "MTLTensorUsageCompute": {
@@ -4879,7 +4926,7 @@
       }
     },
     "MTLVisibilityResultType": {
-      "doc": "This enumeration controls if Metal accumulates visibility results between render encoders or resets them.",
+      "doc": "Actions for visibility results between render passes.",
       "url": "https://developer.apple.com/documentation/metal/mtlvisibilityresulttype",
       "members": {
         "MTLVisibilityResultTypeAccumulate": {
@@ -5562,13 +5609,45 @@
         "url": "https://developer.apple.com/documentation/metal/mtlstructtype/memberbyname(_:)"
       }
     },
+    "MTLTensorAuxiliaryPlaneDescriptorMap": {
+      "-descriptorForPlane:": {
+        "doc": "Returns the auxiliary plane descriptor for the given plane type, or nil if none has been set.",
+        "url": "https://developer.apple.com/documentation/metal/mtltensorauxiliaryplanedescriptormap/descriptor(for:)"
+      },
+      "-reset": {
+        "doc": "Empties the map of all its elements.",
+        "url": "https://developer.apple.com/documentation/metal/mtltensorauxiliaryplanedescriptormap/reset()"
+      },
+      "-setDescriptor:forPlane:": {
+        "doc": "Sets the auxiliary plane descriptor for the given plane type.",
+        "url": "https://developer.apple.com/documentation/metal/mtltensorauxiliaryplanedescriptormap/setdescriptor(_:for:)"
+      }
+    },
+    "MTLTensorBufferAttachments": {
+      "-bufferForPlane:": {
+        "doc": "Returns the buffer backing the given plane, or nil if none has been set.",
+        "url": "https://developer.apple.com/documentation/metal/mtltensorbufferattachments/buffer(for:)"
+      },
+      "-offsetForPlane:": {
+        "doc": "Returns the byte offset into the buffer for the given plane.",
+        "url": "https://developer.apple.com/documentation/metal/mtltensorbufferattachments/offset(for:)"
+      },
+      "-reset": {
+        "doc": "Empties the container of all its elements.",
+        "url": "https://developer.apple.com/documentation/metal/mtltensorbufferattachments/reset()"
+      },
+      "-setBuffer:offset:forPlane:": {
+        "doc": "Sets the buffer and byte offset to use as backing storage for the given plane.",
+        "url": "https://developer.apple.com/documentation/metal/mtltensorbufferattachments/setbuffer(_:offset:for:)"
+      }
+    },
     "MTLTensorExtents": {
       "-extentAtDimensionIndex:": {
-        "doc": "Returns the extent at an index.",
+        "doc": "Returns the value at the specified dimension index.",
         "url": "https://developer.apple.com/documentation/metal/mtltensorextents/extentatdimensionindex:"
       },
       "-initWithRank:values:": {
-        "doc": "Creates a new tensor extents with the rank and extent values you provide.",
+        "doc": "Creates an extents object with the rank and values you provide.",
         "url": "https://developer.apple.com/documentation/metal/mtltensorextents/initwithrank:values:"
       }
     },
@@ -8210,6 +8289,30 @@
         "url": "https://developer.apple.com/documentation/metal/mtlstructtype/members"
       }
     },
+    "MTLTensorAuxiliaryPlaneDescriptor": {
+      "blockFactors": {
+        "doc": "An extents instance that represents the number of data plane elements which correspond to one element in a plane you create with this descriptor.",
+        "url": "https://developer.apple.com/documentation/metal/mtltensorauxiliaryplanedescriptor/blockfactors"
+      },
+      "dataType": {
+        "doc": "The data format of all elements in the plane.",
+        "url": "https://developer.apple.com/documentation/metal/mtltensorauxiliaryplanedescriptor/datatype"
+      }
+    },
+    "MTLTensorAuxiliaryPlaneType": {
+      "blockFactors": {
+        "doc": "The number of data plane elements that correspond to one element in this plane.",
+        "url": "https://developer.apple.com/documentation/metal/mtltensorauxiliaryplanetype/blockfactors"
+      },
+      "dataType": {
+        "doc": "The data format of all elements in the plane.",
+        "url": "https://developer.apple.com/documentation/metal/mtltensorauxiliaryplanetype/datatype"
+      },
+      "planeType": {
+        "doc": "The type of information this plane stores.",
+        "url": "https://developer.apple.com/documentation/metal/mtltensorauxiliaryplanetype/planetype"
+      }
+    },
     "MTLTensorDescriptor": {
       "auxiliaryPlanes": {
         "doc": "The auxiliary plane configurations for this tensor.",
@@ -8232,7 +8335,7 @@
         "url": "https://developer.apple.com/documentation/metal/mtltensordescriptor/hazardtrackingmode"
       },
       "resourceOptions": {
-        "doc": "A packed set of the storageMode, cpuCacheMode and hazardTrackingMode properties.",
+        "doc": "A packed set of the storageMode, cpuCacheMode, and hazardTrackingMode properties.",
         "url": "https://developer.apple.com/documentation/metal/mtltensordescriptor/resourceoptions"
       },
       "storageMode": {
@@ -8240,7 +8343,7 @@
         "url": "https://developer.apple.com/documentation/metal/mtltensordescriptor/storagemode"
       },
       "strides": {
-        "doc": "An array of strides, in elements, one for each dimension in the tensors you create with this descriptor, if applicable.",
+        "doc": "An array of strides, in elements, one for each dimension of this tensor, if applicable.",
         "url": "https://developer.apple.com/documentation/metal/mtltensordescriptor/strides"
       },
       "usage": {
@@ -8258,7 +8361,7 @@
         "url": "https://developer.apple.com/documentation/metal/mtltensorextents/init(_:)"
       },
       "rank": {
-        "doc": "Obtains the rank of the tensor.",
+        "doc": "The number of values in the extents object.",
         "url": "https://developer.apple.com/documentation/metal/mtltensorextents/rank"
       }
     },
@@ -8372,6 +8475,10 @@
       "levelRange": {
         "doc": "A desired range of mip levels of a texture view.",
         "url": "https://developer.apple.com/documentation/metal/mtltextureviewdescriptor/levelrange-55q8m"
+      },
+      "minLOD": {
+        "doc": "The minimum level of detail for texture views you create with the descriptor.",
+        "url": "https://developer.apple.com/documentation/metal/mtltextureviewdescriptor/minlod"
       },
       "sliceRange": {
         "doc": "A desired range of slices of a texture view.",

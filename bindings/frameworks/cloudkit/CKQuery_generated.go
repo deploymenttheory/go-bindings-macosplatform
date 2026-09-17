@@ -74,7 +74,7 @@ func (q *Query) String() string {
 	return rt.Description(objref.IDOf(q))
 }
 
-// NewQueryWithCoder creates an operation group from a serialized instance.
+// NewQueryWithCoder creates a query from a serialized instance.
 func NewQueryWithCoder(aDecoder obj.Object) *Query {
 	defer runtime.KeepAlive(aDecoder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKQuery")), objc.RegisterName("alloc"))

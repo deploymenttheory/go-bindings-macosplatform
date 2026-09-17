@@ -15,8 +15,6 @@ import (
 )
 
 // VSAppleSubscription is an idiomatic wrapper over the Objective-C class VSAppleSubscription.
-//
-// An Apple streaming service customer and their subscriptions.
 type VSAppleSubscription struct {
 	objref.Handle
 }

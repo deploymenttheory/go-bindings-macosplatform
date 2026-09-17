@@ -17,8 +17,6 @@ import (
 // UnitAngle is an idiomatic wrapper over the Objective-C class NSUnitAngle.
 //
 // It embeds [Dimension], promoting that type's methods.
-//
-// A unit of measure for planar angle and rotation.
 type UnitAngle struct {
 	Dimension
 }

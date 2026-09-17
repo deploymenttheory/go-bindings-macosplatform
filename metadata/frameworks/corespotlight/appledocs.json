@@ -35,6 +35,9 @@
       "doc": "An on-device index for your app’s searchable content.",
       "url": "https://developer.apple.com/documentation/corespotlight/cssearchableindex"
     },
+    "CSSearchableIndexDescription": {
+      "url": "https://developer.apple.com/documentation/corespotlight/cssearchableindexdescription"
+    },
     "CSSearchableItem": {
       "doc": "The details of your app-specific content that someone might search for on their devices.",
       "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitem"
@@ -60,30 +63,6 @@
     "CSSearchableIndexDelegate": {
       "doc": "A protocol that defines methods a delegate object or app extension uses to handle communication from the on-device index.",
       "url": "https://developer.apple.com/documentation/corespotlight/cssearchableindexdelegate"
-    }
-  },
-  "enums": {
-    "CSIndexErrorCode": {
-      "doc": "Error codes that describe indexing-specific errors.",
-      "url": "https://developer.apple.com/documentation/corespotlight/csindexerrorcode"
-    },
-    "CSSearchQueryErrorCode": {
-      "doc": "Error codes that describe reasons a query might fail.",
-      "url": "https://developer.apple.com/documentation/corespotlight/cssearchqueryerrorcode"
-    },
-    "CSSearchQuerySourceOptions": {
-      "doc": "The query source options to allow or deny Mail messages in the search.",
-      "url": "https://developer.apple.com/documentation/corespotlight/cssearchquerysourceoptions",
-      "members": {
-        "CSSearchQuerySourceOptionDefault": {
-          "doc": "The query uses the default search option that excludes Mail messages.",
-          "url": "https://developer.apple.com/documentation/corespotlight/cssearchquerysourceoptions/cssearchquerysourceoptiondefault"
-        }
-      }
-    },
-    "CSSuggestionKind": {
-      "doc": "The suggestion type that determines how the system handles a suggestion.",
-      "url": "https://developer.apple.com/documentation/corespotlight/cssuggestionkind"
     }
   },
   "methods": {
@@ -375,8 +354,8 @@
         "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitem/updatelisteneroptions-swift.struct"
       },
       "associateAppEntity(_:priority:)": {
-        "doc": "Associates an app entity with this searchable item. Resolves deferred properties before association.",
-        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitem/associateappentity(_:priority:)-6h7ym"
+        "doc": "Associates an app entity with this searchable item.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitem/associateappentity(_:priority:)-736lx"
       },
       "attributeSet": {
         "doc": "The set of attributes that contain metadata associated with the item in a CSSearchableItemAttributeSet object.",
@@ -395,8 +374,8 @@
         "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitem/init(appentity:)-89ehq"
       },
       "init(appEntity:priority:)": {
-        "doc": "Initializes a new searchable item with the relevant fields populated from the provided app entity. Resolves deferred properties before indexing.",
-        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitem/init(appentity:priority:)-7xlow"
+        "doc": "Initializes a new searchable item with the relevant fields populated from the provided app entity.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitem/init(appentity:priority:)-7h9s"
       },
       "isUpdate": {
         "doc": "A Boolean value that indicates whether to treat the item as an update instead of a new item.",

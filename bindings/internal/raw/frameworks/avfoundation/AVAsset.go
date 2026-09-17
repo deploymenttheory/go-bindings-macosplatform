@@ -30,6 +30,7 @@ var (
 	_aVAssetSelPreferredTransform                                                                     = objc.RegisterName("preferredTransform")
 	_aVAssetSelNaturalSize                                                                            = objc.RegisterName("naturalSize")
 	_aVAssetSelMinimumTimeOffsetFromLive                                                              = objc.RegisterName("minimumTimeOffsetFromLive")
+	_aVAssetSelConstituentFileURLs                                                                    = objc.RegisterName("constituentFileURLs")
 	_aVAssetSelCancelLoading                                                                          = objc.RegisterName("cancelLoading")
 	_aVAssetSelProvidesPreciseDurationAndTiming                                                       = objc.RegisterName("providesPreciseDurationAndTiming")
 	_aVAssetSelReferenceRestrictions                                                                  = objc.RegisterName("referenceRestrictions")
@@ -125,6 +126,15 @@ func (o *AVAsset) NaturalSize() corefoundation.CGSize {
 func (o *AVAsset) MinimumTimeOffsetFromLive() coremedia.CMTime {
 	_ret := objc.Send[coremedia.CMTime](o.Ptr(), _aVAssetSelMinimumTimeOffsetFromLive)
 	return _ret
+}
+
+// The list of file URLs that collectively represent the media asset. The list of file URLs that constitute the asset are returned only for QuickTime reference movies, or if the MediaExtension format reader implements this property [MEFileInfo setConstituentFileNames:].
+func (o *AVAsset) ConstituentFileURLs() *foundation.NSArray[*foundation.NSURL] {
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetSelConstituentFileURLs)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSURL](_ret)
 }
 
 // Cancels all pending requests to asynchronously load property values.

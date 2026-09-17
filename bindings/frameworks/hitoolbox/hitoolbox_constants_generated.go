@@ -5,6 +5,8 @@
 package hitoolbox
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
@@ -417,5 +419,11 @@ func KHIViewWindowToolbarID() uintptr { return _symbol("kHIViewWindowToolbarID")
 // KHIViewWindowGrowBoxID returns the address of the symbol kHIViewWindowGrowBoxID.
 func KHIViewWindowGrowBoxID() uintptr { return _symbol("kHIViewWindowGrowBoxID") }
 
-// KHIToolboxVersionNumber returns the address of the symbol kHIToolboxVersionNumber.
-func KHIToolboxVersionNumber() uintptr { return _symbol("kHIToolboxVersionNumber") }
+// KHIToolboxVersionNumber returns the value of the constant kHIToolboxVersionNumber.
+func KHIToolboxVersionNumber() float32 {
+	addr := _symbol("kHIToolboxVersionNumber")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float32)(unsafe.Pointer(addr))
+}

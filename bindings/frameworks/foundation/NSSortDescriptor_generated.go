@@ -123,7 +123,7 @@ func (sd *SortDescriptor) CompareObjectToObject(object1 obj.Object, object2 obj.
 	return _r
 }
 
-// Key returns the key.
+// Key returns the key that specifies the property to compare during sorting.
 func (sd *SortDescriptor) Key() string {
 	defer runtime.KeepAlive(sd)
 	_r := objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("key"))
@@ -133,14 +133,14 @@ func (sd *SortDescriptor) Key() string {
 	return purego.GoString(_r)
 }
 
-// Ascending wraps the corresponding Objective-C method.
+// Ascending reports whether the receiver specifies sorting in ascending order. `YES` if the receiver specifies sorting in ascending order, otherwise `NO`.
 func (sd *SortDescriptor) Ascending() bool {
 	defer runtime.KeepAlive(sd)
 	_r := objc.Send[bool](objref.IDOf(sd), objc.RegisterName("ascending"))
 	return _r
 }
 
-// ReversedSortDescriptor returns the reversed sort descriptor.
+// ReversedSortDescriptor returns a sort descriptor that reverses the sort order.
 func (sd *SortDescriptor) ReversedSortDescriptor() obj.Object {
 	defer runtime.KeepAlive(sd)
 	_r := objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("reversedSortDescriptor"))

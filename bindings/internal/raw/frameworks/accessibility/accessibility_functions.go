@@ -13,6 +13,8 @@ import (
 
 var (
 	_fnAXAnimatedImagesEnabled func() bool
+	// Returns whether application accessibility is currently enabled for this process. Returns `YES` when at least one assistive technology — such as VoiceOver, Switch Control, Voice Control, or Full Keyboard Access — has requested access to this app's accessibility information. Apps can use this signal to avoid building expensive accessibility data when no assistive technology is consuming it. The value can change during a process's lifetime; observe `AXApplicationAccessibilityEnabledDidChangeNotification` to react to changes.
+	_fnAXApplicationAccessibilityEnabled func() bool
 	// Returns whether Assistive Access is running. The value does not change during a process's lifetime, so it is not necessary to observe changes.
 	_fnAXAssistiveAccessEnabled                   func() bool
 	_fnAXNameFromColor                            func(unsafe.Pointer) objc.ID
@@ -27,6 +29,11 @@ var (
 
 func AXAnimatedImagesEnabled() bool {
 	return _fnAXAnimatedImagesEnabled()
+}
+
+// Returns whether application accessibility is currently enabled for this process. Returns `YES` when at least one assistive technology — such as VoiceOver, Switch Control, Voice Control, or Full Keyboard Access — has requested access to this app's accessibility information. Apps can use this signal to avoid building expensive accessibility data when no assistive technology is consuming it. The value can change during a process's lifetime; observe `AXApplicationAccessibilityEnabledDidChangeNotification` to react to changes.
+func AXApplicationAccessibilityEnabled() bool {
+	return _fnAXApplicationAccessibilityEnabled()
 }
 
 // Returns whether Assistive Access is running. The value does not change during a process's lifetime, so it is not necessary to observe changes.

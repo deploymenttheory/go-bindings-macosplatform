@@ -20,6 +20,7 @@ type SCSensitivityAnalysis struct {
 var (
 	_clsSCSensitivityAnalysis                          = _objcClass("SCSensitivityAnalysis")
 	_sCSensitivityAnalysisSelIsSensitive               = objc.RegisterName("isSensitive")
+	_sCSensitivityAnalysisSelDetectedTypes             = objc.RegisterName("detectedTypes")
 	_sCSensitivityAnalysisSelShouldIndicateSensitivity = objc.RegisterName("shouldIndicateSensitivity")
 	_sCSensitivityAnalysisSelShouldMuteAudio           = objc.RegisterName("shouldMuteAudio")
 )
@@ -37,6 +38,15 @@ func SCSensitivityAnalysisFromID(id objc.ID) *SCSensitivityAnalysis {
 func (o *SCSensitivityAnalysis) IsSensitive() bool {
 	_ret := objc.Send[bool](o.Ptr(), _sCSensitivityAnalysisSelIsSensitive)
 	return _ret
+}
+
+// Type of sensitive content the analyzed media contains
+func (o *SCSensitivityAnalysis) DetectedTypes() *foundation.NSSet[*foundation.NSString] {
+	_ret := objc.Send[objc.ID](o.Ptr(), _sCSensitivityAnalysisSelDetectedTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSSetFromID[*foundation.NSString](_ret)
 }
 
 // Intervention guidance that suggests the app indicate the presence of sensitive content.

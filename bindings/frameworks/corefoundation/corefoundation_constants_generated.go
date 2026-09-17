@@ -1634,11 +1634,23 @@ func KCFStreamPropertySocketRemotePortNumber() uintptr {
 	return _symbol("kCFStreamPropertySocketRemotePortNumber")
 }
 
-// KCFStreamErrorDomainSOCKS returns the address of the symbol kCFStreamErrorDomainSOCKS.
-func KCFStreamErrorDomainSOCKS() uintptr { return _symbol("kCFStreamErrorDomainSOCKS") }
+// KCFStreamErrorDomainSOCKS returns the value of the constant kCFStreamErrorDomainSOCKS.
+func KCFStreamErrorDomainSOCKS() int {
+	addr := _symbol("kCFStreamErrorDomainSOCKS")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
 
-// KCFStreamErrorDomainSSL returns the address of the symbol kCFStreamErrorDomainSSL.
-func KCFStreamErrorDomainSSL() uintptr { return _symbol("kCFStreamErrorDomainSSL") }
+// KCFStreamErrorDomainSSL returns the value of the constant kCFStreamErrorDomainSSL.
+func KCFStreamErrorDomainSSL() int {
+	addr := _symbol("kCFStreamErrorDomainSSL")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
 
 // KCFTypeSetCallBacks returns the address of the symbol kCFTypeSetCallBacks.
 func KCFTypeSetCallBacks() uintptr { return _symbol("kCFTypeSetCallBacks") }

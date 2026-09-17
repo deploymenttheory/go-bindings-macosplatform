@@ -80,6 +80,14 @@ func NewShadow() *Shadow {
 	return shadowAdopt(_id)
 }
 
+// NewShadowWithCoder creates a new Shadow.
+func NewShadowWithCoder(coder obj.Object) *Shadow {
+	defer runtime.KeepAlive(coder)
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSShadow")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+	return shadowAdopt(_id)
+}
+
 // WithShadowOffset sets the shadow’s relative position, which you specify with horizontal and vertical offset values.
 func (s *Shadow) WithShadowOffset(shadowOffset corefoundation.CGSize) *Shadow {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setShadowOffset:"), shadowOffset)

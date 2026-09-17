@@ -35,7 +35,6 @@ func NSUserNotificationActionFromID(id objc.ID) *NSUserNotificationAction {
 }
 
 // Creates a user notification action with a specified identifier and title.
-// Deprecated: All NSUserNotifications API should be replaced with UserNotifications.frameworks API
 func NSUserNotificationActionActionWithIdentifierTitle(identifier *NSString, title *NSString) *NSUserNotificationAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUserNotificationAction), _nSUserNotificationActionSelActionWithIdentifierTitle, identifier.Ptr(), title.Ptr())
 	if _ret != 0 {
@@ -44,6 +43,7 @@ func NSUserNotificationActionActionWithIdentifierTitle(identifier *NSString, tit
 	return NSUserNotificationActionFromID(_ret)
 }
 
+// The identifier for the user notification action.
 func (o *NSUserNotificationAction) Identifier() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserNotificationActionSelIdentifier)
 	if _ret != 0 {
@@ -52,6 +52,7 @@ func (o *NSUserNotificationAction) Identifier() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The localized title shown to the user.
 func (o *NSUserNotificationAction) Title() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserNotificationActionSelTitle)
 	if _ret != 0 {

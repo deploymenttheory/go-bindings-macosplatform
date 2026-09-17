@@ -222,7 +222,6 @@ func (e VZDiskSynchronizationMode) String() string {
 	}
 }
 
-// Constants that describe the options available when creating a new Extensible Firmware Interface (EFI) variable store.
 type VZEFIVariableStoreInitializationOptions uint64
 
 const (
@@ -240,35 +239,69 @@ func (e VZEFIVariableStoreInitializationOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Errors you might encounter when configuring or using a virtual machine.
 type VZErrorCode int64
 
 const (
-	VZErrorInternal                             VZErrorCode = 1
-	VZErrorInvalidVirtualMachineConfiguration   VZErrorCode = 2
-	VZErrorInvalidVirtualMachineState           VZErrorCode = 3
+	// An error that indicates there was an internal error, such as the virtual machine unexpectedly stopping. The framework reports this error when the virtual machine unexpectedly stops.
+	VZErrorInternal VZErrorCode = 1
+	// An error that indicates the machine configuration was invalid. This error indicates that your ``VZVirtualMachineConfiguration`` object contains invalid data.
+	VZErrorInvalidVirtualMachineConfiguration VZErrorCode = 2
+	// An error that indicates the app used the API with a machine in the wrong state. This error occurs when the virtual machine is in the wrong state for the current operation. For example, you might receive this error when you attempt to interact with a stopped or paused virtual machine.
+	VZErrorInvalidVirtualMachineState VZErrorCode = 3
+	// An error that indicates there was an invalid change of state. This error occurs when you attempt to change the state of the virtual machine in an invalid way. For example, it occurs when you attempt to start a virtual machine when its ``VZVirtualMachine/canStart`` property is `false`.
 	VZErrorInvalidVirtualMachineStateTransition VZErrorCode = 4
-	VZErrorInvalidDiskImage                     VZErrorCode = 5
-	VZErrorVirtualMachineLimitExceeded          VZErrorCode = 6
-	VZErrorNetworkError                         VZErrorCode = 7
-	VZErrorOutOfDiskSpace                       VZErrorCode = 8
-	VZErrorOperationCancelled                   VZErrorCode = 9
-	VZErrorNotSupported                         VZErrorCode = 10
-	VZErrorSave                                 VZErrorCode = 11
-	VZErrorRestore                              VZErrorCode = 12
-	VZErrorRestoreImageCatalogLoadFailed        VZErrorCode = 10001
-	VZErrorInvalidRestoreImageCatalog           VZErrorCode = 10002
-	VZErrorNoSupportedRestoreImagesInCatalog    VZErrorCode = 10003
-	VZErrorRestoreImageLoadFailed               VZErrorCode = 10004
-	VZErrorInvalidRestoreImage                  VZErrorCode = 10005
-	VZErrorInstallationRequiresUpdate           VZErrorCode = 10006
-	VZErrorInstallationFailed                   VZErrorCode = 10007
-	VZErrorNetworkBlockDeviceNegotiationFailed  VZErrorCode = 20001
-	VZErrorNetworkBlockDeviceDisconnected       VZErrorCode = 20002
-	VZErrorUSBControllerNotFound                VZErrorCode = 30001
-	VZErrorDeviceAlreadyAttached                VZErrorCode = 30002
-	VZErrorDeviceInitializationFailure          VZErrorCode = 30003
-	VZErrorDeviceNotFound                       VZErrorCode = 30004
+	// An error that indicates an unrecognized disk image format or invalid disk image. This error occurs when you supply a disk image in an unrecognized format, when there’s damage to the disk image, or the disk image is invalid.
+	VZErrorInvalidDiskImage VZErrorCode = 5
+	// An error that indicates an attempt to start a virtual machine (VM) exceeded the limit of the number of running VMs the framework allows. This error occurs when starting a VM would exceed the system’s limit on the number of simultaneously running virtual machines.
+	VZErrorVirtualMachineLimitExceeded VZErrorCode = 6
+	// An error that indicates a network issue, such as a failed connection error, occurred.
+	VZErrorNetworkError VZErrorCode = 7
+	// An error that indicates the host ran out of disk space, such as while attempting to install Rosetta.
+	VZErrorOutOfDiskSpace VZErrorCode = 8
+	// An error that indicates the framework cancelled the operation.
+	VZErrorOperationCancelled VZErrorCode = 9
+	// An error that indicates the framework doesn't support the operation.
+	VZErrorNotSupported VZErrorCode = 10
+	// An error that indicates the VM failed to save to the save file.
+	VZErrorSave VZErrorCode = 11
+	// An error that indicates the restore operation failed.
+	VZErrorRestore VZErrorCode = 12
+	// An error that indicates the restore image catalog failed to load.
+	VZErrorRestoreImageCatalogLoadFailed VZErrorCode = 10001
+	// An error that indicates the restore image catalog is invalid.
+	VZErrorInvalidRestoreImageCatalog VZErrorCode = 10002
+	// An error that indicates the restore image catalog has no supported restore images.
+	VZErrorNoSupportedRestoreImagesInCatalog VZErrorCode = 10003
+	// An error that indicates the restore image failed to load.
+	VZErrorRestoreImageLoadFailed VZErrorCode = 10004
+	// An error that indicates the restore image is invalid.
+	VZErrorInvalidRestoreImage VZErrorCode = 10005
+	// An error that indicates the installation requires a software update in order to complete.
+	VZErrorInstallationRequiresUpdate VZErrorCode = 10006
+	// An error that indicates that an error occurred during installation.
+	VZErrorInstallationFailed VZErrorCode = 10007
+	// An error that indicates the connection or the negotiation with the Network Block Device (NBD) server failed.
+	VZErrorNetworkBlockDeviceNegotiationFailed VZErrorCode = 20001
+	// An error that indicates the Network Block Device (NBD) client disconnected from the server.
+	VZErrorNetworkBlockDeviceDisconnected VZErrorCode = 20002
+	// An error that indicates the framework wasn't able to find the controller.
+	VZErrorUSBControllerNotFound VZErrorCode = 30001
+	// An error that indicates the device is already attached.
+	VZErrorDeviceAlreadyAttached VZErrorCode = 30002
+	// An error that indicates the device failed to initialize.
+	VZErrorDeviceInitializationFailure VZErrorCode = 30003
+	// An error that indicates the framework wasn't able to find the specified device.
+	VZErrorDeviceNotFound VZErrorCode = 30004
+	// An error that indicates the full name for guest provisioning is invalid.
+	VZErrorGuestProvisioningInvalidFullName VZErrorCode = 40001
+	// An error that indicates the username for guest provisioning is invalid.
+	VZErrorGuestProvisioningInvalidUsername VZErrorCode = 40002
+	// An error that indicates the password for guest provisioning is invalid.
+	VZErrorGuestProvisioningInvalidPassword VZErrorCode = 40003
+	// An error that indicates the Secure Boot signatures failed to enroll.
+	VZErrorEFISecureBootEnrollmentFailed VZErrorCode = 50001
+	// An error that indicates the framework can't access the EFI variable store.
+	VZErrorEFIVariableInaccessible VZErrorCode = 50002
 )
 
 func (e VZErrorCode) String() string {
@@ -323,6 +356,16 @@ func (e VZErrorCode) String() string {
 		return "VZErrorDeviceInitializationFailure"
 	case VZErrorDeviceNotFound:
 		return "VZErrorDeviceNotFound"
+	case VZErrorGuestProvisioningInvalidFullName:
+		return "VZErrorGuestProvisioningInvalidFullName"
+	case VZErrorGuestProvisioningInvalidUsername:
+		return "VZErrorGuestProvisioningInvalidUsername"
+	case VZErrorGuestProvisioningInvalidPassword:
+		return "VZErrorGuestProvisioningInvalidPassword"
+	case VZErrorEFISecureBootEnrollmentFailed:
+		return "VZErrorEFISecureBootEnrollmentFailed"
+	case VZErrorEFIVariableInaccessible:
+		return "VZErrorEFIVariableInaccessible"
 	default:
 		return fmt.Sprintf("VZErrorCode(%d)", int64(e))
 	}
@@ -353,7 +396,6 @@ func (e VZLinuxRosettaAvailability) String() string {
 	}
 }
 
-// Options you can set when creating new auxiliary storage.
 type VZMacAuxiliaryStorageInitializationOptions uint64
 
 const (
@@ -372,7 +414,6 @@ func (e VZMacAuxiliaryStorageInitializationOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// The execution states of the VM.
 type VZVirtualMachineState int64
 
 const (
@@ -390,7 +431,7 @@ const (
 	VZVirtualMachineStatePausing VZVirtualMachineState = 5
 	// The virtual machine is being resumed. This is the intermediate state between VZVirtualMachineStatePaused and VZVirtualMachineStateRunning.
 	VZVirtualMachineStateResuming VZVirtualMachineState = 6
-	// The virtual machine is being stopped. This is the intermediate state between VZVirtualMachineStateRunning and VZVirtualMachineStateStop.
+	// The virtual machine is being stopped. This is the intermediate state between VZVirtualMachineStateRunning and VZVirtualMachineStateStopped.
 	VZVirtualMachineStateStopping VZVirtualMachineState = 7
 	// The virtual machine is being saved. This is the intermediate state between VZVirtualMachineStatePaused and VZVirtualMachineStatePaused.
 	VZVirtualMachineStateSaving VZVirtualMachineState = 8
@@ -1165,27 +1206,53 @@ func (e Qos_class_t) String() string {
 	}
 }
 
+type Task_shared_region_stubs_t uint8
+
+const (
+	TASK_SHARED_REGION_STUBS_DEV  Task_shared_region_stubs_t = 1
+	TASK_SHARED_REGION_STUBS_PROD Task_shared_region_stubs_t = 2
+)
+
+func (e Task_shared_region_stubs_t) String() string {
+	switch e {
+	case TASK_SHARED_REGION_STUBS_DEV:
+		return "TASK_SHARED_REGION_STUBS_DEV"
+	case TASK_SHARED_REGION_STUBS_PROD:
+		return "TASK_SHARED_REGION_STUBS_PROD"
+	default:
+		return fmt.Sprintf("Task_shared_region_stubs_t(%d)", int64(e))
+	}
+}
+
 type Virtual_memory_guard_exception_code_t uint32
 
 const (
-	KGUARD_EXC_DEALLOC_GAP                   Virtual_memory_guard_exception_code_t = 1
-	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        Virtual_memory_guard_exception_code_t = 2
-	KGUARD_EXC_RECLAIM_INDEX_FAILURE         Virtual_memory_guard_exception_code_t = 4
-	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    Virtual_memory_guard_exception_code_t = 8
-	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    Virtual_memory_guard_exception_code_t = 9
-	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         Virtual_memory_guard_exception_code_t = 10
-	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         Virtual_memory_guard_exception_code_t = 11
-	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  Virtual_memory_guard_exception_code_t = 12
-	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    Virtual_memory_guard_exception_code_t = 13
-	KGUARD_EXC_SEC_ACCESS_FAULT              Virtual_memory_guard_exception_code_t = 98
-	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        Virtual_memory_guard_exception_code_t = 99
-	KGUARD_EXC_SEC_COPY_DENIED               Virtual_memory_guard_exception_code_t = 100
-	KGUARD_EXC_SEC_SHARING_DENIED            Virtual_memory_guard_exception_code_t = 101
-	KGUARD_EXC_MTE_SYNC_FAULT                Virtual_memory_guard_exception_code_t = 200
-	KGUARD_EXC_MTE_ASYNC_USER_FAULT          Virtual_memory_guard_exception_code_t = 201
-	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          Virtual_memory_guard_exception_code_t = 202
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 203
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 204
+	KGUARD_EXC_DEALLOC_GAP                  Virtual_memory_guard_exception_code_t = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE       Virtual_memory_guard_exception_code_t = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE        Virtual_memory_guard_exception_code_t = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE   Virtual_memory_guard_exception_code_t = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE   Virtual_memory_guard_exception_code_t = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE        Virtual_memory_guard_exception_code_t = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE        Virtual_memory_guard_exception_code_t = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION Virtual_memory_guard_exception_code_t = 12
+	// Guard exception sent to a thread when a CoW defeatured map attempts to copy memory which is not permitted by system policy.
+	KGUARD_EXC_COW_DEFEATURED_COPY_DENIED Virtual_memory_guard_exception_code_t = 13
+	// Guard exception sent to a thread when it attempts to extract a given type of memory in a way which is not permitted for CoW defeatured maps.
+	KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED Virtual_memory_guard_exception_code_t = 14
+	// Guard exception sent to a thread when it attempts to copy-map a memory entry which was created for sharing by a CoW defeatured map.
+	KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED Virtual_memory_guard_exception_code_t = 15
+	KGUARD_EXC_COW_DEFEATURED_FIRST                    Virtual_memory_guard_exception_code_t = 13
+	KGUARD_EXC_COW_DEFEATURED_LAST                     Virtual_memory_guard_exception_code_t = 15
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY              Virtual_memory_guard_exception_code_t = 16
+	KGUARD_EXC_SEC_ACCESS_FAULT                        Virtual_memory_guard_exception_code_t = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT                  Virtual_memory_guard_exception_code_t = 99
+	KGUARD_EXC_SEC_COPY_DENIED                         Virtual_memory_guard_exception_code_t = 100
+	KGUARD_EXC_SEC_SHARING_DENIED                      Virtual_memory_guard_exception_code_t = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                          Virtual_memory_guard_exception_code_t = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT                    Virtual_memory_guard_exception_code_t = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT                    Virtual_memory_guard_exception_code_t = 202
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT           Virtual_memory_guard_exception_code_t = 203
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT           Virtual_memory_guard_exception_code_t = 204
 )
 
 func (e Virtual_memory_guard_exception_code_t) String() string {
@@ -1206,6 +1273,12 @@ func (e Virtual_memory_guard_exception_code_t) String() string {
 		return "KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE"
 	case KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION:
 		return "KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION"
+	case KGUARD_EXC_COW_DEFEATURED_COPY_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_COPY_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED"
 	case KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY:
 		return "KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY"
 	case KGUARD_EXC_SEC_ACCESS_FAULT:

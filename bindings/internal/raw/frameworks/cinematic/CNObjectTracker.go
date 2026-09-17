@@ -15,7 +15,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An object that converts a normalized point or rectangle into a detection track that tracks an object over time.
+// Converts a normalized point or rectangle into a detection track that tracks an object over time.
 //
 // Apple documentation: https://developer.apple.com/documentation/cinematic/cnobjecttracker
 type CNObjectTracker struct {
@@ -67,7 +67,7 @@ func (o *CNObjectTracker) StartTrackingAtWithinSourceImageSourceDisparity(time_ 
 	return _ret
 }
 
-// Continue tracking an object for which tracking has started, and add a new detection to the detection track being built. - Parameters: - time: the presentation time of the frame to be added to the detection track - Returns: a prediction of where the object is in the source image
+// Continue tracking an object for which tracking has started, and add a new detection to the detection track being built. - Parameters: - time: the presentation time of the frame to be added to the detection track - sourceImage: image buffer containing the image - sourceDisparity: disparity buffer containing depth information - Returns: a prediction of where the object is in the source image
 func (o *CNObjectTracker) ContinueTrackingAtSourceImageSourceDisparity(time_ coremedia.CMTime, sourceImage unsafe.Pointer, sourceDisparity unsafe.Pointer) *CNBoundsPrediction {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNObjectTrackerSelContinueTrackingAtSourceImageSourceDisparity, time_, sourceImage, sourceDisparity)
 	if _ret != 0 {

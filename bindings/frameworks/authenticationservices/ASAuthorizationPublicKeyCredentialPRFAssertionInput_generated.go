@@ -15,8 +15,6 @@ import (
 )
 
 // AuthorizationPublicKeyCredentialPRFAssertionInput is an idiomatic wrapper over the Objective-C class ASAuthorizationPublicKeyCredentialPRFAssertionInput.
-//
-// A type that represents input for the web authentication PRF extension in passkey assertion requests.
 type AuthorizationPublicKeyCredentialPRFAssertionInput struct {
 	objref.Handle
 }

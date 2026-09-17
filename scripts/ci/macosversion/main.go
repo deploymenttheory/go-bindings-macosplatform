@@ -10,9 +10,9 @@
 //
 // When GITHUB_OUTPUT is set the results are written as GitHub Actions step outputs:
 //
-//	macos_version  – full macOS version string, e.g. "26.5"
-//	macos_major    – macOS major version number, e.g. "26"
-//	macos_minor    – macOS minor version number, e.g. "5"
+//	macos_version  – full macOS version string, e.g. "27.0"
+//	macos_major    – macOS major version number, e.g. "27"
+//	macos_minor    – macOS minor version number, e.g. "0"
 //
 // When running locally the same key=value pairs are printed to stdout.
 package main
@@ -33,7 +33,7 @@ func main() {
 	}
 	raw := strings.TrimSpace(string(out))
 
-	// sw_vers prints e.g. "26.5" or "26.5.1" — extract major and minor.
+	// sw_vers prints e.g. "27.0" or "27.0.1" — extract major and minor.
 	re := regexp.MustCompile(`^(\d+)\.(\d+)`)
 	m := re.FindStringSubmatch(raw)
 	if m == nil {

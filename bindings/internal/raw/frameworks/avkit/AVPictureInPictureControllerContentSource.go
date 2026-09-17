@@ -11,8 +11,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An object that represents the source of the content to present in Picture in Picture.
-//
 // Apple documentation: https://developer.apple.com/documentation/avkit/avpictureinpicturecontrollercontentsource
 type AVPictureInPictureControllerContentSource struct {
 	foundation.NSObject

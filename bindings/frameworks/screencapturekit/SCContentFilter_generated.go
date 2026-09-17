@@ -181,3 +181,10 @@ func (cf *ContentFilter) IncludedWindows() []*Window {
 	_arr := objc.Send[objc.ID](objref.IDOf(cf), objc.RegisterName("includedWindows"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Window { return WindowFromID(_id) })
 }
+
+// IsMicrophoneEnabled reports whether the microphone is enabled via the picker. Readonly - microphone enable state determined by user via system picker when showsMicrophoneControl is enabled in SCContentSharingPickerConfiguration.
+func (cf *ContentFilter) IsMicrophoneEnabled() bool {
+	defer runtime.KeepAlive(cf)
+	_r := objc.Send[bool](objref.IDOf(cf), objc.RegisterName("isMicrophoneEnabled"))
+	return _r
+}

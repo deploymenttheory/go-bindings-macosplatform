@@ -12,7 +12,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An object that manages access and changes to the user’s photo library.
+// An object that manages access and changes to a person’s photo library.
 //
 // Apple documentation: https://developer.apple.com/documentation/photos/phphotolibrary
 type PHPhotoLibrary struct {
@@ -20,25 +20,33 @@ type PHPhotoLibrary struct {
 }
 
 var (
-	_clsPHPhotoLibrary                                           = _objcClass("PHPhotoLibrary")
-	_pHPhotoLibrarySelSharedPhotoLibrary                         = objc.RegisterName("sharedPhotoLibrary")
-	_pHPhotoLibrarySelAuthorizationStatusForAccessLevel          = objc.RegisterName("authorizationStatusForAccessLevel:")
-	_pHPhotoLibrarySelRequestAuthorizationForAccessLevelHandler  = objc.RegisterName("requestAuthorizationForAccessLevel:handler:")
-	_pHPhotoLibrarySelAuthorizationStatus                        = objc.RegisterName("authorizationStatus")
-	_pHPhotoLibrarySelRequestAuthorization                       = objc.RegisterName("requestAuthorization:")
-	_pHPhotoLibrarySelRegisterAvailabilityObserver               = objc.RegisterName("registerAvailabilityObserver:")
-	_pHPhotoLibrarySelUnregisterAvailabilityObserver             = objc.RegisterName("unregisterAvailabilityObserver:")
-	_pHPhotoLibrarySelPerformChangesCompletionHandler            = objc.RegisterName("performChanges:completionHandler:")
-	_pHPhotoLibrarySelPerformChangesAndWaitError                 = objc.RegisterName("performChangesAndWait:error:")
-	_pHPhotoLibrarySelRegisterChangeObserver                     = objc.RegisterName("registerChangeObserver:")
-	_pHPhotoLibrarySelUnregisterChangeObserver                   = objc.RegisterName("unregisterChangeObserver:")
-	_pHPhotoLibrarySelFetchPersistentChangesSinceTokenError      = objc.RegisterName("fetchPersistentChangesSinceToken:error:")
-	_pHPhotoLibrarySelUnavailabilityReason                       = objc.RegisterName("unavailabilityReason")
-	_pHPhotoLibrarySelCurrentChangeToken                         = objc.RegisterName("currentChangeToken")
-	_pHPhotoLibrarySelLocalIdentifierMappingsForCloudIdentifiers = objc.RegisterName("localIdentifierMappingsForCloudIdentifiers:")
-	_pHPhotoLibrarySelCloudIdentifierMappingsForLocalIdentifiers = objc.RegisterName("cloudIdentifierMappingsForLocalIdentifiers:")
-	_pHPhotoLibrarySelLocalIdentifiersForCloudIdentifiers        = objc.RegisterName("localIdentifiersForCloudIdentifiers:")
-	_pHPhotoLibrarySelCloudIdentifiersForLocalIdentifiers        = objc.RegisterName("cloudIdentifiersForLocalIdentifiers:")
+	_clsPHPhotoLibrary                                                 = _objcClass("PHPhotoLibrary")
+	_pHPhotoLibrarySelSharedPhotoLibrary                               = objc.RegisterName("sharedPhotoLibrary")
+	_pHPhotoLibrarySelAuthorizationStatusForAccessLevel                = objc.RegisterName("authorizationStatusForAccessLevel:")
+	_pHPhotoLibrarySelRequestAuthorizationForAccessLevelHandler        = objc.RegisterName("requestAuthorizationForAccessLevel:handler:")
+	_pHPhotoLibrarySelAuthorizationStatus                              = objc.RegisterName("authorizationStatus")
+	_pHPhotoLibrarySelRequestAuthorization                             = objc.RegisterName("requestAuthorization:")
+	_pHPhotoLibrarySelEnableUploadJobExtensionWithOptionsError         = objc.RegisterName("enableUploadJobExtensionWithOptions:error:")
+	_pHPhotoLibrarySelDisableUploadJobExtensionWithError               = objc.RegisterName("disableUploadJobExtensionWithError:")
+	_pHPhotoLibrarySelSetUploadJobExtensionOptionsError                = objc.RegisterName("setUploadJobExtensionOptions:error:")
+	_pHPhotoLibrarySelRegisterAvailabilityObserver                     = objc.RegisterName("registerAvailabilityObserver:")
+	_pHPhotoLibrarySelUnregisterAvailabilityObserver                   = objc.RegisterName("unregisterAvailabilityObserver:")
+	_pHPhotoLibrarySelPerformChangesCompletionHandler                  = objc.RegisterName("performChanges:completionHandler:")
+	_pHPhotoLibrarySelPerformChangesAndWaitError                       = objc.RegisterName("performChangesAndWait:error:")
+	_pHPhotoLibrarySelRegisterChangeObserver                           = objc.RegisterName("registerChangeObserver:")
+	_pHPhotoLibrarySelUnregisterChangeObserver                         = objc.RegisterName("unregisterChangeObserver:")
+	_pHPhotoLibrarySelRegisterPersistentChangesObserver                = objc.RegisterName("registerPersistentChangesObserver:")
+	_pHPhotoLibrarySelUnregisterPersistentChangesObserver              = objc.RegisterName("unregisterPersistentChangesObserver:")
+	_pHPhotoLibrarySelFetchPersistentChangesSinceTokenError            = objc.RegisterName("fetchPersistentChangesSinceToken:error:")
+	_pHPhotoLibrarySelIsUploadJobExtensionEnabled                      = objc.RegisterName("isUploadJobExtensionEnabled")
+	_pHPhotoLibrarySelUploadJobExtensionOptions                        = objc.RegisterName("uploadJobExtensionOptions")
+	_pHPhotoLibrarySelUnavailabilityReason                             = objc.RegisterName("unavailabilityReason")
+	_pHPhotoLibrarySelCurrentChangeToken                               = objc.RegisterName("currentChangeToken")
+	_pHPhotoLibrarySelLocalIdentifierMappingsForCloudIdentifiers       = objc.RegisterName("localIdentifierMappingsForCloudIdentifiers:")
+	_pHPhotoLibrarySelLocalIdentifierMappingsForSyncedCloudIdentifiers = objc.RegisterName("localIdentifierMappingsForSyncedCloudIdentifiers:")
+	_pHPhotoLibrarySelCloudIdentifierMappingsForLocalIdentifiers       = objc.RegisterName("cloudIdentifierMappingsForLocalIdentifiers:")
+	_pHPhotoLibrarySelLocalIdentifiersForCloudIdentifiers              = objc.RegisterName("localIdentifiersForCloudIdentifiers:")
+	_pHPhotoLibrarySelCloudIdentifiersForLocalIdentifiers              = objc.RegisterName("cloudIdentifiersForLocalIdentifiers:")
 )
 
 func PHPhotoLibraryFromID(id objc.ID) *PHPhotoLibrary {
@@ -98,6 +106,36 @@ func PHPhotoLibraryRequestAuthorization(handler func(PHAuthorizationStatus)) {
 	objc.ID(_clsPHPhotoLibrary).Send(_pHPhotoLibrarySelRequestAuthorization, __block_handler)
 }
 
+// Enables the background asset resource upload job feature with the given options, atomically.
+func (o *PHPhotoLibrary) EnableUploadJobExtensionWithOptionsError(options *PHAssetResourceUploadJobOptions) (bool, error) {
+	var _nsErr uintptr
+	_ret := objc.Send[bool](o.Ptr(), _pHPhotoLibrarySelEnableUploadJobExtensionWithOptionsError, options.Ptr(), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
+	}
+	return _ret, nil
+}
+
+// Disables the background asset resource upload job feature.
+func (o *PHPhotoLibrary) DisableUploadJobExtensionWithError() (bool, error) {
+	var _nsErr uintptr
+	_ret := objc.Send[bool](o.Ptr(), _pHPhotoLibrarySelDisableUploadJobExtensionWithError, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
+	}
+	return _ret, nil
+}
+
+// Sets the options for the calling app’s background asset resource upload job configuration.
+func (o *PHPhotoLibrary) SetUploadJobExtensionOptionsError(options *PHAssetResourceUploadJobOptions) (bool, error) {
+	var _nsErr uintptr
+	_ret := objc.Send[bool](o.Ptr(), _pHPhotoLibrarySelSetUploadJobExtensionOptionsError, options.Ptr(), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
+	}
+	return _ret, nil
+}
+
 // Registers an object to observe changes to the photo library’s availability.
 func (o *PHPhotoLibrary) RegisterAvailabilityObserver(observer PHPhotoLibraryAvailabilityObserver) {
 	o.Ptr().Send(_pHPhotoLibrarySelRegisterAvailabilityObserver, observer)
@@ -154,6 +192,16 @@ func (o *PHPhotoLibrary) UnregisterChangeObserver(observer PHPhotoLibraryChangeO
 	o.Ptr().Send(_pHPhotoLibrarySelUnregisterChangeObserver, observer)
 }
 
+// Registers an observer to be notified when persistent changes occur in the photo library.
+func (o *PHPhotoLibrary) RegisterPersistentChangesObserver(observer PHPhotoLibraryPersistentChangesObserver) {
+	o.Ptr().Send(_pHPhotoLibrarySelRegisterPersistentChangesObserver, observer)
+}
+
+// Unregisters a previously registered persistent changes observer.
+func (o *PHPhotoLibrary) UnregisterPersistentChangesObserver(observer PHPhotoLibraryPersistentChangesObserver) {
+	o.Ptr().Send(_pHPhotoLibrarySelUnregisterPersistentChangesObserver, observer)
+}
+
 // Retrieves the Photos library changes since the token you specify.
 func (o *PHPhotoLibrary) FetchPersistentChangesSinceTokenError(token *PHPersistentChangeToken) (*PHPersistentChangeFetchResult, error) {
 	var _nsErr uintptr
@@ -165,6 +213,21 @@ func (o *PHPhotoLibrary) FetchPersistentChangesSinceTokenError(token *PHPersiste
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return PHPersistentChangeFetchResultFromID(_ret), nil
+}
+
+// A Boolean value that indicates whether background asset resource uploading is enabled. The value is `true` if the extension is enabled and active, and is `false` otherwise. The extension's host app uses this property to determine the background processing status. See “PHAssetResourceUploadJob“ and ````PHAssetResourceUploadJobChangeRequest“ for more information.
+func (o *PHPhotoLibrary) IsUploadJobExtensionEnabled() bool {
+	_ret := objc.Send[bool](o.Ptr(), _pHPhotoLibrarySelIsUploadJobExtensionEnabled)
+	return _ret
+}
+
+// The options for the calling app's background asset resource upload job configuration. The value is `nil` if the extension isn't enabled or the caller isn't authorized. Otherwise, the value is an options object with default values if the configuration exists but no options have been set.
+func (o *PHPhotoLibrary) UploadJobExtensionOptions() *PHAssetResourceUploadJobOptions {
+	_ret := objc.Send[objc.ID](o.Ptr(), _pHPhotoLibrarySelUploadJobExtensionOptions)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return PHAssetResourceUploadJobOptionsFromID(_ret)
 }
 
 func (o *PHPhotoLibrary) UnavailabilityReason() unsafe.Pointer {
@@ -189,6 +252,15 @@ func (o *PHPhotoLibrary) LocalIdentifierMappingsForCloudIdentifiers(cloudIdentif
 	return foundation.NSDictionaryFromID[*PHCloudIdentifier, *PHLocalIdentifierMapping](_ret)
 }
 
+// Returns a dictionary that maps each cloud identifier from the provided array to a PHLocalIdentifierMapping result containing the local identifier found for that cloud identifier if that cloud identifier is a known synced identifier.
+func (o *PHPhotoLibrary) LocalIdentifierMappingsForSyncedCloudIdentifiers(cloudIdentifiers *foundation.NSArray[*PHCloudIdentifier]) *foundation.NSDictionary[*PHCloudIdentifier, *PHLocalIdentifierMapping] {
+	_ret := objc.Send[objc.ID](o.Ptr(), _pHPhotoLibrarySelLocalIdentifierMappingsForSyncedCloudIdentifiers, cloudIdentifiers.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*PHCloudIdentifier, *PHLocalIdentifierMapping](_ret)
+}
+
 // Retrieves the cloud identifier mappings for the list of local identifiers.
 func (o *PHPhotoLibrary) CloudIdentifierMappingsForLocalIdentifiers(localIdentifiers *foundation.NSArray[*foundation.NSString]) *foundation.NSDictionary[*foundation.NSString, *PHCloudIdentifierMapping] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHPhotoLibrarySelCloudIdentifierMappingsForLocalIdentifiers, localIdentifiers.Ptr())
@@ -199,7 +271,7 @@ func (o *PHPhotoLibrary) CloudIdentifierMappingsForLocalIdentifiers(localIdentif
 }
 
 // Retrieves the equivalent local identifiers for the list of iCloud identifiers.
-// Deprecated: since macOS 12.
+// Deprecated: Use localIdentifierMappingsForCloudIdentifiers: instead
 func (o *PHPhotoLibrary) LocalIdentifiersForCloudIdentifiers(cloudIdentifiers *foundation.NSArray[*PHCloudIdentifier]) *foundation.NSArray[*foundation.NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHPhotoLibrarySelLocalIdentifiersForCloudIdentifiers, cloudIdentifiers.Ptr())
 	if _ret != 0 {
@@ -209,7 +281,7 @@ func (o *PHPhotoLibrary) LocalIdentifiersForCloudIdentifiers(cloudIdentifiers *f
 }
 
 // Retrieves the equivalent iCloud identifiers for the list of local identifiers.
-// Deprecated: since macOS 12.
+// Deprecated: Use cloudIdentifierMappingsForLocalIdentifiers: instead
 func (o *PHPhotoLibrary) CloudIdentifiersForLocalIdentifiers(localIdentifiers *foundation.NSArray[*foundation.NSString]) *foundation.NSArray[*PHCloudIdentifier] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHPhotoLibrarySelCloudIdentifiersForLocalIdentifiers, localIdentifiers.Ptr())
 	if _ret != 0 {

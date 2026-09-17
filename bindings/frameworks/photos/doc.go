@@ -39,8 +39,8 @@
 //
 //   - AssetChangeRequest: [AssetCreationRequest]
 //   - AssetCollection: [Project]
-//   - ChangeRequest: [AssetChangeRequest], [AssetCollectionChangeRequest], [CollectionListChangeRequest], [ProjectChangeRequest]
+//   - ChangeRequest: [AssetChangeRequest], [AssetCollectionChangeRequest], [AssetResourceUploadJobChangeRequest], [CollectionListChangeRequest], [ProjectChangeRequest]
 //   - Collection: [AssetCollection], [CollectionList]
 //   - ImageManager: [CachingImageManager]
-//   - Object: [Asset], [Collection], [ObjectPlaceholder]
+//   - Object: [Asset], [AssetResourceUploadJob], [Collection], [ObjectPlaceholder]
 package photos

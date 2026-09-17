@@ -971,28 +971,6 @@ func DsGetRecordTypeFromEntry(outRecType string) (result TDirStatus, inRecEntryP
 	return _ret, _out0
 }
 
-var _fnDsIsDirServiceLocalRunning func() TDirStatus
-
-// DsIsDirServiceLocalRunning calls the DirectoryService framework function dsIsDirServiceLocalRunning.
-func DsIsDirServiceLocalRunning() TDirStatus {
-	_loadOnce.Do(_loadLibrary)
-	if _fnDsIsDirServiceLocalRunning == nil {
-		ebipurego.RegisterLibFunc(&_fnDsIsDirServiceLocalRunning, _lib, "dsIsDirServiceLocalRunning")
-	}
-	return _fnDsIsDirServiceLocalRunning()
-}
-
-var _fnDsIsDirServiceRunning func() TDirStatus
-
-// DsIsDirServiceRunning calls the DirectoryService framework function dsIsDirServiceRunning.
-func DsIsDirServiceRunning() TDirStatus {
-	_loadOnce.Do(_loadLibrary)
-	if _fnDsIsDirServiceRunning == nil {
-		ebipurego.RegisterLibFunc(&_fnDsIsDirServiceRunning, _lib, "dsIsDirServiceRunning")
-	}
-	return _fnDsIsDirServiceRunning()
-}
-
 var _fnDsOpenDirNode func(int, unsafe.Pointer, unsafe.Pointer) TDirStatus
 
 // DsOpenDirNode calls the DirectoryService framework function dsOpenDirNode.

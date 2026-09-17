@@ -123,28 +123,28 @@ func (asmpo *AttributedStringMarkdownParsingOptions) WithScriptingProperties(scr
 	return asmpo
 }
 
-// AllowsExtendedAttributes wraps the corresponding Objective-C method.
+// AllowsExtendedAttributes reports whether parsing allows extensions to Markdown that specify extended attributes. Defaults to `NO` (only parse CommonMark syntax).
 func (asmpo *AttributedStringMarkdownParsingOptions) AllowsExtendedAttributes() bool {
 	defer runtime.KeepAlive(asmpo)
 	_r := objc.Send[bool](objref.IDOf(asmpo), objc.RegisterName("allowsExtendedAttributes"))
 	return _r
 }
 
-// InterpretedSyntax returns the interpreted syntax.
+// InterpretedSyntax returns the syntax for interpreting a Markdown string. If your Markdown data uses syntax that this setting excludes, the parser still parses it and includes its text in the final result. However, the relevant text won't have attributes.
 func (asmpo *AttributedStringMarkdownParsingOptions) InterpretedSyntax() AttributedStringMarkdownInterpretedSyntax {
 	defer runtime.KeepAlive(asmpo)
 	_r := objc.Send[AttributedStringMarkdownInterpretedSyntax](objref.IDOf(asmpo), objc.RegisterName("interpretedSyntax"))
 	return _r
 }
 
-// FailurePolicy returns the failure policy.
+// FailurePolicy returns the policy for handling a parsing failure. The default is `NSAttributedStringMarkdownParsingFailureReturnError`.
 func (asmpo *AttributedStringMarkdownParsingOptions) FailurePolicy() AttributedStringMarkdownParsingFailurePolicy {
 	defer runtime.KeepAlive(asmpo)
 	_r := objc.Send[AttributedStringMarkdownParsingFailurePolicy](objref.IDOf(asmpo), objc.RegisterName("failurePolicy"))
 	return _r
 }
 
-// LanguageCode returns the language code.
+// LanguageCode returns the BCP-47 language code for this document. If not `nil`, the `NSLanguageIdentifierAttributeName` attribute will be applied to any range in the returned string that doesn't otherwise specify a language attribute. The default is `nil`, which applies no attributes.
 func (asmpo *AttributedStringMarkdownParsingOptions) LanguageCode() string {
 	defer runtime.KeepAlive(asmpo)
 	_r := objc.Send[objc.ID](objref.IDOf(asmpo), objc.RegisterName("languageCode"))
@@ -154,7 +154,7 @@ func (asmpo *AttributedStringMarkdownParsingOptions) LanguageCode() string {
 	return purego.GoString(_r)
 }
 
-// AppliesSourcePositionAttributes wraps the corresponding Objective-C method.
+// AppliesSourcePositionAttributes reports whether parsing applies attributes that indicate the position of attributed text in the original Markdown string.
 func (asmpo *AttributedStringMarkdownParsingOptions) AppliesSourcePositionAttributes() bool {
 	defer runtime.KeepAlive(asmpo)
 	_r := objc.Send[bool](objref.IDOf(asmpo), objc.RegisterName("appliesSourcePositionAttributes"))

@@ -6,7 +6,7 @@ this split is a non-negotiable of the architecture:
 | Pipeline | Binds via | Struct ABI | Packages |
 |---|---|---|---|
 | **frameworks** | purego / ObjC runtime | Go struct passed **by value** through purego func vars → Go layout must match the C ABI byte-exactly | `frameworks/*`, `emit/*/frameworks` |
-| **libraries** | cgo / C bridge shims | the C bridge handles the ABI | `libraries/*`, `emit/*/libraries` |
+| **libraries** | purego / C function symbols | library-specific marshalling handles C ABI calls and struct values | `libraries/*`, `emit/*/libraries` |
 
 Because the two pipelines bind differently, their type mappers, naming, and
 emitters **diverge in behaviour, not just structure**. Do not assume that a
@@ -30,7 +30,7 @@ Every non-obvious package declares its scope in its package doc with a scannable
   - `naming/core` — only behaviour-identical naming helpers
 - **FRAMEWORKS pipeline (purego/ObjC)** — everything under `frameworks/` and
   `emit/*/frameworks`. `frameworks/typemap` is pipeline-specific by design.
-- **LIBRARIES pipeline (cgo/C)** — everything under `libraries/` and
+- **LIBRARIES pipeline (purego/C)** — everything under `libraries/` and
   `emit/*/libraries`. `libraries/typemap` is pipeline-specific by design and
   additionally carries a `CType()` dimension the frameworks side has no use for.
 

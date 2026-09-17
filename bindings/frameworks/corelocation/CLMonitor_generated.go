@@ -15,8 +15,6 @@ import (
 )
 
 // Monitor is an idiomatic wrapper over the Objective-C class CLMonitor.
-//
-// An object that monitors the conditions you add to it.
 type Monitor struct {
 	objref.Handle
 }

@@ -9,8 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A unit of measure for power.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsunitpower
 type NSUnitPower struct {
 	NSDimension
@@ -41,6 +39,7 @@ func NSUnitPowerFromID(id objc.ID) *NSUnitPower {
 	return o
 }
 
+// The terawatts unit of power.
 func NSUnitPowerTerawatts() *NSUnitPower {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitPower), _nSUnitPowerSelTerawatts)
 	if _ret != 0 {
@@ -49,6 +48,7 @@ func NSUnitPowerTerawatts() *NSUnitPower {
 	return NSUnitPowerFromID(_ret)
 }
 
+// The gigawatts unit of power.
 func NSUnitPowerGigawatts() *NSUnitPower {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitPower), _nSUnitPowerSelGigawatts)
 	if _ret != 0 {
@@ -57,6 +57,7 @@ func NSUnitPowerGigawatts() *NSUnitPower {
 	return NSUnitPowerFromID(_ret)
 }
 
+// The megawatts unit of power.
 func NSUnitPowerMegawatts() *NSUnitPower {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitPower), _nSUnitPowerSelMegawatts)
 	if _ret != 0 {
@@ -65,6 +66,7 @@ func NSUnitPowerMegawatts() *NSUnitPower {
 	return NSUnitPowerFromID(_ret)
 }
 
+// The kilowatts unit of power.
 func NSUnitPowerKilowatts() *NSUnitPower {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitPower), _nSUnitPowerSelKilowatts)
 	if _ret != 0 {
@@ -73,6 +75,7 @@ func NSUnitPowerKilowatts() *NSUnitPower {
 	return NSUnitPowerFromID(_ret)
 }
 
+// The watts unit of power.
 func NSUnitPowerWatts() *NSUnitPower {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitPower), _nSUnitPowerSelWatts)
 	if _ret != 0 {
@@ -81,6 +84,7 @@ func NSUnitPowerWatts() *NSUnitPower {
 	return NSUnitPowerFromID(_ret)
 }
 
+// The milliwatts unit of power.
 func NSUnitPowerMilliwatts() *NSUnitPower {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitPower), _nSUnitPowerSelMilliwatts)
 	if _ret != 0 {
@@ -89,6 +93,7 @@ func NSUnitPowerMilliwatts() *NSUnitPower {
 	return NSUnitPowerFromID(_ret)
 }
 
+// The microwatts unit of power.
 func NSUnitPowerMicrowatts() *NSUnitPower {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitPower), _nSUnitPowerSelMicrowatts)
 	if _ret != 0 {
@@ -97,6 +102,7 @@ func NSUnitPowerMicrowatts() *NSUnitPower {
 	return NSUnitPowerFromID(_ret)
 }
 
+// The nanowatts unit of power.
 func NSUnitPowerNanowatts() *NSUnitPower {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitPower), _nSUnitPowerSelNanowatts)
 	if _ret != 0 {
@@ -105,6 +111,7 @@ func NSUnitPowerNanowatts() *NSUnitPower {
 	return NSUnitPowerFromID(_ret)
 }
 
+// The picowatts unit of power.
 func NSUnitPowerPicowatts() *NSUnitPower {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitPower), _nSUnitPowerSelPicowatts)
 	if _ret != 0 {
@@ -113,6 +120,7 @@ func NSUnitPowerPicowatts() *NSUnitPower {
 	return NSUnitPowerFromID(_ret)
 }
 
+// The femtowatts unit of power.
 func NSUnitPowerFemtowatts() *NSUnitPower {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitPower), _nSUnitPowerSelFemtowatts)
 	if _ret != 0 {
@@ -121,6 +129,7 @@ func NSUnitPowerFemtowatts() *NSUnitPower {
 	return NSUnitPowerFromID(_ret)
 }
 
+// The horsepower unit of power.
 func NSUnitPowerHorsepower() *NSUnitPower {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitPower), _nSUnitPowerSelHorsepower)
 	if _ret != 0 {

@@ -397,14 +397,6 @@
         }
       }
     },
-    "AVAudioApplicationMicrophoneInjectionPermission": {
-      "doc": "Constants that indicate an app’s permission to add audio to calls.",
-      "url": "https://developer.apple.com/documentation/avfaudio/avaudioapplicationmicrophoneinjectionpermission"
-    },
-    "AVAudioApplicationRecordPermission": {
-      "doc": "Constants that indicate the app’s permission to record audio.",
-      "url": "https://developer.apple.com/documentation/avfaudio/avaudioapplicationrecordpermission"
-    },
     "AVAudioCommonFormat": {
       "doc": "The format options that describe common audio formats.",
       "url": "https://developer.apple.com/documentation/avfaudio/avaudiocommonformat",
@@ -655,83 +647,29 @@
         }
       }
     },
-    "AVAudioRoutingArbitrationCategory": {
-      "doc": "Categories that describe the general nature of your app’s audio use.",
-      "url": "https://developer.apple.com/documentation/avfaudio/avaudioroutingarbitrationcategory"
-    },
     "AVAudioSessionActivationOptions": {
       "doc": "Constants that describe the options to pass when activating the audio session.",
       "url": "https://developer.apple.com/documentation/avfaudio/avaudiosessionactivationoptions",
       "members": {
-        "AVAudioSessionActivationOptionNone": {
-          "doc": "A value that indicates the system should activate the audio session with no options.",
-          "url": "https://developer.apple.com/documentation/avfaudio/avaudiosessionactivationoptions/avaudiosessionactivationoptionnone"
-        },
         "init(rawValue:)": {
-          "doc": "Creates a new instance with the raw value you specify.",
+          "doc": "Creates an activation-options set from a raw bitmask.",
           "url": "https://developer.apple.com/documentation/avfaudio/avaudiosessionactivationoptions/init(rawvalue:)"
         }
       }
     },
-    "AVAudioSessionCategoryOptions": {
-      "doc": "Constants that specify optional audio behaviors.",
-      "url": "https://developer.apple.com/documentation/avfaudio/avaudiosessioncategoryoptions"
-    },
-    "AVAudioSessionIOType": {
-      "doc": "Constant values used to specify the audio session’s aggregated I/O behavior.",
-      "url": "https://developer.apple.com/documentation/avfaudio/avaudiosessioniotype"
-    },
-    "AVAudioSessionInterruptionOptions": {
-      "doc": "Constants that indicate the state of an audio session after an interruption.",
-      "url": "https://developer.apple.com/documentation/avfaudio/avaudiosessioninterruptionoptions"
-    },
-    "AVAudioSessionInterruptionReason": {
-      "doc": "Constants that define the reasons for an audio session interruption.",
-      "url": "https://developer.apple.com/documentation/avfaudio/avaudiosessioninterruptionreason"
-    },
-    "AVAudioSessionInterruptionType": {
-      "doc": "Constants that describe the type of an audio interruption.",
-      "url": "https://developer.apple.com/documentation/avfaudio/avaudiosessioninterruptiontype"
-    },
-    "AVAudioSessionMicrophoneInjectionMode": {
-      "doc": "The modes of injecting audio into another app’s input stream.",
-      "url": "https://developer.apple.com/documentation/avfaudio/avaudiosessionmicrophoneinjectionmode"
-    },
-    "AVAudioSessionPortOverride": {
-      "doc": "Constants for use with the overrideOutputAudioPort(_:) method.",
-      "url": "https://developer.apple.com/documentation/avfaudio/avaudiosessionportoverride"
-    },
-    "AVAudioSessionPromptStyle": {
-      "doc": "Constants that indicate the prompt style to use.",
-      "url": "https://developer.apple.com/documentation/avfaudio/avaudiosessionpromptstyle"
-    },
-    "AVAudioSessionRecordPermission": {
-      "doc": "The values that define the current state of the record permission request.",
-      "url": "https://developer.apple.com/documentation/avfaudio/avaudiosessionrecordpermission"
-    },
-    "AVAudioSessionRenderingMode": {
-      "doc": "Audio session rendering mode identifiers.",
-      "url": "https://developer.apple.com/documentation/avfaudio/avaudiosessionrenderingmode"
-    },
-    "AVAudioSessionRouteChangeReason": {
-      "doc": "Constants that indicate the reason for an audio route change.",
-      "url": "https://developer.apple.com/documentation/avfaudio/avaudiosessionroutechangereason"
-    },
-    "AVAudioSessionRouteSharingPolicy": {
-      "doc": "Cases that indicate the possible route-sharing policies for an audio session.",
-      "url": "https://developer.apple.com/documentation/avfaudio/avaudiosessionroutesharingpolicy"
-    },
-    "AVAudioSessionSetActiveOptions": {
-      "doc": "Options that provide additional information about your app’s audio intentions upon session deactivation.",
-      "url": "https://developer.apple.com/documentation/avfaudio/avaudiosessionsetactiveoptions"
-    },
-    "AVAudioSessionSilenceSecondaryAudioHintType": {
-      "doc": "Constants that indicate whether optional secondary audio muting should begin or end.",
-      "url": "https://developer.apple.com/documentation/avfaudio/avaudiosessionsilencesecondaryaudiohinttype"
-    },
-    "AVAudioStereoOrientation": {
-      "doc": "Constants that define the supported stereo orientations.",
-      "url": "https://developer.apple.com/documentation/avfaudio/avaudiostereoorientation"
+    "AVAudioSessionDeactivationOptions": {
+      "doc": "Options for deactivating an AVAudioSession",
+      "url": "https://developer.apple.com/documentation/avfaudio/avaudiosessiondeactivationoptions",
+      "members": {
+        "AVAudioSessionDeactivationOptionNotifyOthersOnDeactivation": {
+          "doc": "Notify an interrupted app that the interruption has ended and it may resume playback.",
+          "url": "https://developer.apple.com/documentation/avfaudio/avaudiosessiondeactivationoptions/notifyothersondeactivation"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates a deactivation-options set from a raw bitmask.",
+          "url": "https://developer.apple.com/documentation/avfaudio/avaudiosessiondeactivationoptions/init(rawvalue:)"
+        }
+      }
     },
     "AVAudioUnitDistortionPreset": {
       "doc": "Constants that represent preset audio distortions.",
@@ -935,10 +873,6 @@
         }
       }
     },
-    "AVAudioVoiceProcessingOtherAudioDuckingLevel": {
-      "doc": "Constants that define the supported ducking levels.",
-      "url": "https://developer.apple.com/documentation/avfaudio/avaudiovoiceprocessingotheraudioduckinglevel"
-    },
     "AVAudioVoiceProcessingSpeechActivityEvent": {
       "doc": "Types of speech activity events.",
       "url": "https://developer.apple.com/documentation/avfaudio/avaudiovoiceprocessingspeechactivityevent",
@@ -952,14 +886,6 @@
           "url": "https://developer.apple.com/documentation/avfaudio/avaudiovoiceprocessingspeechactivityevent/started"
         }
       }
-    },
-    "AVMIDIControlChangeMessageType": {
-      "doc": "Constants that represents control change event types.",
-      "url": "https://developer.apple.com/documentation/avfaudio/avmidicontrolchangemessagetype"
-    },
-    "AVMIDIMetaEventType": {
-      "doc": "Constants that represent the types of meta events.",
-      "url": "https://developer.apple.com/documentation/avfaudio/avmidimetaeventtype"
     },
     "AVMusicSequenceLoadOptions": {
       "doc": "A structure that defines whether data on different MIDI channels map to multiple tracks, or whether the framework preserves the tracks as they are.",
@@ -1003,14 +929,6 @@
         }
       }
     },
-    "AVSpeechSynthesisMarkerMark": {
-      "doc": "Constants that describe the type of text.",
-      "url": "https://developer.apple.com/documentation/avfaudio/avspeechsynthesismarkermark"
-    },
-    "AVSpeechSynthesisPersonalVoiceAuthorizationStatus": {
-      "doc": "An enumeration that models the personal voices authorization status.",
-      "url": "https://developer.apple.com/documentation/avfaudio/avspeechsynthesispersonalvoiceauthorizationstatus"
-    },
     "AVSpeechSynthesisVoiceGender": {
       "doc": "The gender for a voice.",
       "url": "https://developer.apple.com/documentation/avfaudio/avspeechsynthesisvoicegender",
@@ -1044,16 +962,6 @@
         "AVSpeechSynthesisVoiceQualityPremium": {
           "doc": "A premium quality voice that you must download to use.",
           "url": "https://developer.apple.com/documentation/avfaudio/avspeechsynthesisvoicequality/premium"
-        }
-      }
-    },
-    "AVSpeechSynthesisVoiceTraits": {
-      "doc": "Traits that describe a voice.",
-      "url": "https://developer.apple.com/documentation/avfaudio/avspeechsynthesisvoicetraits",
-      "members": {
-        "AVSpeechSynthesisVoiceTraitNone": {
-          "doc": "The trait that indicates a voice is a regular voice.",
-          "url": "https://developer.apple.com/documentation/avfaudio/avspeechsynthesisvoicetraits/avspeechsynthesisvoicetraitnone"
         }
       }
     }
@@ -1673,7 +1581,7 @@
         "url": "https://developer.apple.com/documentation/avfaudio/avaudiosession/sharedinstance()"
       },
       "-activateWithOptions:completionHandler:": {
-        "doc": "Activates an audio session asynchronously on watchOS.",
+        "doc": "Activates an audio session asynchronously.",
         "url": "https://developer.apple.com/documentation/avfaudio/avaudiosession/activate(options:completionhandler:)"
       },
       "-deactivateWithOptions:completionHandler:": {
@@ -2320,7 +2228,7 @@
       },
       "packetDependencies": {
         "doc": "The buffer’s array of packet dependencies.",
-        "url": "https://developer.apple.com/documentation/avfaudio/avaudiocompressedbuffer/packetdependencies-5oae6"
+        "url": "https://developer.apple.com/documentation/avfaudio/avaudiocompressedbuffer/packetdependencies-3a6ln"
       },
       "packetDescriptions": {
         "doc": "The buffer’s array of packet descriptions.",
@@ -2696,7 +2604,7 @@
     "AVAudioOutputNode": {
       "intendedSpatialExperience": {
         "doc": "The intended spatial experience for this output node.",
-        "url": "https://developer.apple.com/documentation/avfaudio/avaudiooutputnode/intendedspatialexperience-3ts59"
+        "url": "https://developer.apple.com/documentation/avfaudio/avaudiooutputnode/intendedspatialexperience-3uznq"
       }
     },
     "AVAudioPCMBuffer": {
@@ -2725,8 +2633,8 @@
         "url": "https://developer.apple.com/documentation/avfaudio/avaudiopcmbuffer/framelength"
       },
       "init(copying:)": {
-        "doc": "Creates a mutable buffer by copying a read-only buffer’s audio data.",
-        "url": "https://developer.apple.com/documentation/avfaudio/avaudiopcmbuffer/init(copying:)-875xm"
+        "doc": "Creates a mutable buffer by copying another PCM buffer’s audio data.",
+        "url": "https://developer.apple.com/documentation/avfaudio/avaudiopcmbuffer/init(copying:)-68es5"
       },
       "int16ChannelData": {
         "doc": "The buffer’s 16-bit integer audio samples.",
@@ -3051,6 +2959,10 @@
       "AVAudioSessionSilenceSecondaryAudioHintNotification": {
         "doc": "A notification the system posts when the primary audio from other apps starts and stops.",
         "url": "https://developer.apple.com/documentation/avfaudio/avaudiosession/silencesecondaryaudiohintnotification"
+      },
+      "AVAudioSessionSoundStageSize": {
+        "doc": "Constants that specify the perceived size of sounds the audio session plays.",
+        "url": "https://developer.apple.com/documentation/avfaudio/avaudiosession/soundstagesize"
       },
       "AVAudioSessionSpatialPlaybackCapabilitiesChangedNotification": {
         "doc": "A notification the system posts when its spatial playback capabilities change.",

@@ -176,16 +176,65 @@ func AssetResourcesForLivePhoto(livePhoto *LivePhoto) []*AssetResource {
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *AssetResource { return AssetResourceFromID(_id) })
 }
 
+// AssetResourceForUploadJob returns the asset resource associated with the given upload job.
+func AssetResourceForUploadJob(job *AssetResourceUploadJob) *AssetResource {
+	defer runtime.KeepAlive(job)
+	_r := objc.Send[objc.ID](objc.ID(_class("PHAssetResource")), objc.RegisterName("assetResourceForUploadJob:"), objref.IDOf(job))
+	return AssetResourceFromID(_r)
+}
+
 // DefaultManager returns the shared asset resource manager object.
 func DefaultManager() *AssetResourceManager {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHAssetResourceManager")), objc.RegisterName("defaultManager"))
 	return AssetResourceManagerFromID(_r)
 }
 
-// NotFoundIdentifier returns DEPRECATED: If there is a failure to determine the global identifier for a local identifier, the notFoundIdentifier is provided in that array slot.
-func NotFoundIdentifier() unsafe.Pointer {
-	_r := objc.Send[unsafe.Pointer](objc.ID(_class("PHCloudIdentifier")), objc.RegisterName("notFoundIdentifier"))
+// FetchJobsWithActionOptions returns all asset resource upload jobs applicable for a given action.
+func FetchJobsWithActionOptions(action AssetResourceUploadJobAction, options *FetchOptions) obj.Object {
+	defer runtime.KeepAlive(options)
+	_r := objc.Send[objc.ID](objc.ID(_class("PHAssetResourceUploadJob")), objc.RegisterName("fetchJobsWithAction:options:"), action, objref.IDOf(options))
+	return obj.Wrap(_r)
+}
+
+// JobLimit returns the maximum number of unacknowledged upload jobs allowed. This includes jobs that are in-flight and those that have succeeded or failed.
+func JobLimit() int {
+	_r := objc.Send[int](objc.ID(_class("PHAssetResourceUploadJob")), objc.RegisterName("jobLimit"))
 	return _r
+}
+
+// CreateJobWithDestinationResource creates an asset resource upload job.
+func CreateJobWithDestinationResource(destination obj.Object, resource *AssetResource) {
+	defer runtime.KeepAlive(destination)
+	defer runtime.KeepAlive(resource)
+	objc.Send[objc.ID](objc.ID(_class("PHAssetResourceUploadJobChangeRequest")), objc.RegisterName("createJobWithDestination:resource:"), objref.IDOf(destination), objref.IDOf(resource))
+}
+
+// CreationRequestForJobWithDestinationResource creates an asset resource upload job and returns the change request.
+func CreationRequestForJobWithDestinationResource(destination obj.Object, resource *AssetResource) *AssetResourceUploadJobChangeRequest {
+	defer runtime.KeepAlive(destination)
+	defer runtime.KeepAlive(resource)
+	_r := objc.Send[objc.ID](objc.ID(_class("PHAssetResourceUploadJobChangeRequest")), objc.RegisterName("creationRequestForJobWithDestination:resource:"), objref.IDOf(destination), objref.IDOf(resource))
+	return AssetResourceUploadJobChangeRequestFromID(_r)
+}
+
+// CreationRequestForDownloadJobWithResource creates a download-only job request for the specified asset resource.
+func CreationRequestForDownloadJobWithResource(resource *AssetResource) *AssetResourceUploadJobChangeRequest {
+	defer runtime.KeepAlive(resource)
+	_r := objc.Send[objc.ID](objc.ID(_class("PHAssetResourceUploadJobChangeRequest")), objc.RegisterName("creationRequestForDownloadJobWithResource:"), objref.IDOf(resource))
+	return AssetResourceUploadJobChangeRequestFromID(_r)
+}
+
+// ChangeRequestForUploadJob creates a request for modifying the specified upload job.
+func ChangeRequestForUploadJob(job *AssetResourceUploadJob) *AssetResourceUploadJobChangeRequest {
+	defer runtime.KeepAlive(job)
+	_r := objc.Send[objc.ID](objc.ID(_class("PHAssetResourceUploadJobChangeRequest")), objc.RegisterName("changeRequestForUploadJob:"), objref.IDOf(job))
+	return AssetResourceUploadJobChangeRequestFromID(_r)
+}
+
+// NotFoundIdentifier returns DEPRECATED: If there is a failure to determine the global identifier for a local identifier, the notFoundIdentifier is provided in that array slot.
+func NotFoundIdentifier() *CloudIdentifier {
+	_r := objc.Send[objc.ID](objc.ID(_class("PHCloudIdentifier")), objc.RegisterName("notFoundIdentifier"))
+	return CloudIdentifierFromID(_r)
 }
 
 // FetchCollectionsInCollectionListOptions retrieves collections from the specified collection list.

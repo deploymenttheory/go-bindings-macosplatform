@@ -99,10 +99,6 @@
     }
   },
   "enums": {
-    "CXCallDirectoryEnabledStatus": {
-      "doc": "The enabled status of a Call Directory app extension, as reported by the getEnabledStatusForExtension(withIdentifier:completionHandler:) method.",
-      "url": "https://developer.apple.com/documentation/callkit/cxcalldirectoryenabledstatus"
-    },
     "CXCallEndedReason": {
       "doc": "The reason that a call ended.",
       "url": "https://developer.apple.com/documentation/callkit/cxcallendedreason",
@@ -128,33 +124,6 @@
           "url": "https://developer.apple.com/documentation/callkit/cxcallendedreason/unanswered"
         }
       }
-    },
-    "CXErrorCode": {
-      "doc": "Error codes for the CallKit errors.",
-      "url": "https://developer.apple.com/documentation/callkit/cxerrorcode"
-    },
-    "CXErrorCodeCallDirectoryManagerError": {
-      "doc": "Errors when interacting with a call directory manager.",
-      "url": "https://developer.apple.com/documentation/callkit/cxerrorcodecalldirectorymanagererror"
-    },
-    "CXErrorCodeIncomingCallError": {
-      "doc": "Codes for errors that occur during incoming calls.",
-      "url": "https://developer.apple.com/documentation/callkit/cxerrorcodeincomingcallerror"
-    },
-    "CXErrorCodeNotificationServiceExtensionError": {
-      "doc": "Errors that can occur when reporting new, incoming VoIP calls.",
-      "url": "https://developer.apple.com/documentation/callkit/cxerrorcodenotificationserviceextensionerror"
-    },
-    "CXErrorCodeRequestTransactionError": {
-      "url": "https://developer.apple.com/documentation/callkit/cxerrorcoderequesttransactionerror"
-    },
-    "CXHandleType": {
-      "doc": "The possible types of handles.",
-      "url": "https://developer.apple.com/documentation/callkit/cxhandletype"
-    },
-    "CXPlayDTMFCallActionType": {
-      "doc": "The types of events that generate dial tones.",
-      "url": "https://developer.apple.com/documentation/callkit/cxplaydtmfcallactiontype"
     }
   },
   "methods": {

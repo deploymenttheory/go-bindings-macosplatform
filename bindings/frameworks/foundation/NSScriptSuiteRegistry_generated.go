@@ -180,7 +180,7 @@ func (ssr *ScriptSuiteRegistry) AeteResource(languageName string) []byte {
 	return rt.NSDataToBytes(_r)
 }
 
-// SuiteNames returns the suite names.
+// SuiteNames returns the names of the suite definitions currently loaded by the application.
 //
 // SuiteNames returns the collection as a Go slice.
 func (ssr *ScriptSuiteRegistry) SuiteNames() []string {

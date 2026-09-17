@@ -18,8 +18,6 @@ import (
 // VideoCompositionInstruction is an idiomatic wrapper over the Objective-C class AVVideoCompositionInstruction.
 //
 // VideoCompositionInstruction is an abstract base — you do not construct it directly. Construct one of [MutableVideoCompositionInstruction] and pass it where a VideoCompositionInstruction is accepted.
-//
-// An operation that a compositor performs.
 type VideoCompositionInstruction struct {
 	objref.Handle
 }

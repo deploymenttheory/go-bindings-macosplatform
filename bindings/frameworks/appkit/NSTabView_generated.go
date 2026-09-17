@@ -429,6 +429,14 @@ func (tv *TabView) WithGestureRecognizers(items ...GestureRecognizerProvider) *T
 	return tv
 }
 
+// WithExclusiveGestureBehavior sets declares whether gesture recognizers should be exclusive in this view and its subviews.
+func (tv *TabView) WithExclusiveGestureBehavior(exclusiveGestureBehavior ViewExclusiveGestureBehavior) *TabView {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setExclusiveGestureBehavior:"), exclusiveGestureBehavior)
+	})
+	return tv
+}
+
 // WithAllowedTouchTypes sets the allowed touch types.
 func (tv *TabView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *TabView {
 	purego.Main(func() {
@@ -490,6 +498,15 @@ func (tv *TabView) WithHorizontalContentSizeConstraintActive(horizontalContentSi
 func (tv *TabView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *TabView {
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
+	return tv
+}
+
+// WithTextSelectionManager sets the text selection manager for this view.
+func (tv *TabView) WithTextSelectionManager(textSelectionManager *TextSelectionManager) *TabView {
+	defer runtime.KeepAlive(textSelectionManager)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setTextSelectionManager:"), objref.IDOf(textSelectionManager))
 	})
 	return tv
 }

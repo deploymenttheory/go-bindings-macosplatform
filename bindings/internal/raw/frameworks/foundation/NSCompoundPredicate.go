@@ -82,11 +82,13 @@ func NSCompoundPredicateNotPredicateWithSubpredicate(predicate *NSPredicate) *NS
 	return NSCompoundPredicateFromID(_ret)
 }
 
+// The predicate type for the receiver.
 func (o *NSCompoundPredicate) CompoundPredicateType() NSCompoundPredicateType {
 	_ret := objc.Send[NSCompoundPredicateType](o.Ptr(), _nSCompoundPredicateSelCompoundPredicateType)
 	return _ret
 }
 
+// The receiver's subpredicates.
 func (o *NSCompoundPredicate) Subpredicates() *NSArray[objc.ID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCompoundPredicateSelSubpredicates)
 	if _ret != 0 {

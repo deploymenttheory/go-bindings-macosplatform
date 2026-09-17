@@ -77,14 +77,14 @@ func (cp *CompoundPredicate) WithScriptingProperties(scriptingProperties map[str
 	return cp
 }
 
-// CompoundPredicateType returns the compound predicate type.
+// CompoundPredicateType returns the predicate type for the receiver.
 func (cp *CompoundPredicate) CompoundPredicateType() CompoundPredicateType {
 	defer runtime.KeepAlive(cp)
 	_r := objc.Send[CompoundPredicateType](objref.IDOf(cp), objc.RegisterName("compoundPredicateType"))
 	return _r
 }
 
-// Subpredicates returns the subpredicates.
+// Subpredicates returns the receiver's subpredicates.
 func (cp *CompoundPredicate) Subpredicates() obj.Object {
 	defer runtime.KeepAlive(cp)
 	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("subpredicates"))

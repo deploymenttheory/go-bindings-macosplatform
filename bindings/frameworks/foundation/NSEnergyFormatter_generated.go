@@ -18,8 +18,6 @@ import (
 // EnergyFormatter is an idiomatic wrapper over the Objective-C class NSEnergyFormatter.
 //
 // It embeds [Formatter], promoting that type's methods.
-//
-// A formatter that provides localized descriptions of energy values.
 type EnergyFormatter struct {
 	Formatter
 }
@@ -56,20 +54,20 @@ func NewEnergyFormatter() *EnergyFormatter {
 	return energyFormatterAdopt(_id)
 }
 
-// WithNumberFormatter sets the number formatter.
+// WithNumberFormatter sets the number formatter used to format the numbers in an energy string. The default value is an `NSNumberFormatter` with `NSNumberFormatterDecimalStyle`.
 func (ef *EnergyFormatter) WithNumberFormatter(numberFormatter *NumberFormatter) *EnergyFormatter {
 	defer runtime.KeepAlive(numberFormatter)
 	objc.Send[objc.ID](objref.IDOf(ef), objc.RegisterName("setNumberFormatter:"), objref.IDOf(numberFormatter))
 	return ef
 }
 
-// WithUnitStyle sets the unit style.
+// WithUnitStyle sets the unit style used when creating string representations of energy values. The default value is `NSFormattingUnitStyleMedium`.
 func (ef *EnergyFormatter) WithUnitStyle(unitStyle FormattingUnitStyle) *EnergyFormatter {
 	objc.Send[objc.ID](objref.IDOf(ef), objc.RegisterName("setUnitStyle:"), unitStyle)
 	return ef
 }
 
-// WithForFoodEnergyUse sets the for food energy use.
+// WithForFoodEnergyUse sets a Boolean value that indicates whether the resulting string is used to represent food energy. The default value is `NO`. If set to `YES`, `NSEnergyFormatterUnitKilocalorie` may be displayed as "C" instead of "kcal".
 func (ef *EnergyFormatter) WithForFoodEnergyUse(forFoodEnergyUse bool) *EnergyFormatter {
 	objc.Send[objc.ID](objref.IDOf(ef), objc.RegisterName("setForFoodEnergyUse:"), forFoodEnergyUse)
 	return ef
@@ -87,7 +85,7 @@ func (ef *EnergyFormatter) WithScriptingProperties(scriptingProperties map[strin
 	return ef
 }
 
-// StringFromValueUnit wraps the corresponding Objective-C method.
+// StringFromValueUnit returns an energy string for the provided value and unit.
 func (ef *EnergyFormatter) StringFromValueUnit(value float64, unit EnergyFormatterUnit) string {
 	defer runtime.KeepAlive(ef)
 	_r := objc.Send[objc.ID](objref.IDOf(ef), objc.RegisterName("stringFromValue:unit:"), value, unit)
@@ -97,7 +95,7 @@ func (ef *EnergyFormatter) StringFromValueUnit(value float64, unit EnergyFormatt
 	return purego.GoString(_r)
 }
 
-// StringFromJoules wraps the corresponding Objective-C method.
+// StringFromJoules returns an energy string for the provided value in joules. Formats a number in joules to a localized string with the locale-appropriate unit and an appropriate scale (e.g. 10.3J = 2.46cal in the US locale).
 func (ef *EnergyFormatter) StringFromJoules(numberInJoules float64) string {
 	defer runtime.KeepAlive(ef)
 	_r := objc.Send[objc.ID](objref.IDOf(ef), objc.RegisterName("stringFromJoules:"), numberInJoules)
@@ -107,7 +105,7 @@ func (ef *EnergyFormatter) StringFromJoules(numberInJoules float64) string {
 	return purego.GoString(_r)
 }
 
-// UnitStringFromValueUnit wraps the corresponding Objective-C method.
+// UnitStringFromValueUnit returns a unit string for the provided value and unit. Returns a localized string of the given unit, and if the unit is singular or plural is based on the given number.
 func (ef *EnergyFormatter) UnitStringFromValueUnit(value float64, unit EnergyFormatterUnit) string {
 	defer runtime.KeepAlive(ef)
 	_r := objc.Send[objc.ID](objref.IDOf(ef), objc.RegisterName("unitStringFromValue:unit:"), value, unit)
@@ -117,7 +115,7 @@ func (ef *EnergyFormatter) UnitStringFromValueUnit(value float64, unit EnergyFor
 	return purego.GoString(_r)
 }
 
-// UnitStringFromJoulesUsedUnit wraps the corresponding Objective-C method.
+// UnitStringFromJoulesUsedUnit returns a unit string based on the provided value in joules. Returns the locale-appropriate unit, the same unit used by `stringFromJoules:`.
 func (ef *EnergyFormatter) UnitStringFromJoulesUsedUnit(numberInJoules float64) (result string, unitp EnergyFormatterUnit) {
 	defer runtime.KeepAlive(ef)
 	var _out0 EnergyFormatterUnit
@@ -129,21 +127,21 @@ func (ef *EnergyFormatter) UnitStringFromJoulesUsedUnit(numberInJoules float64) 
 	return _v, _out0
 }
 
-// NumberFormatter returns the number formatter.
+// NumberFormatter returns the number formatter used to format the numbers in an energy string. The default value is an `NSNumberFormatter` with `NSNumberFormatterDecimalStyle`.
 func (ef *EnergyFormatter) NumberFormatter() *NumberFormatter {
 	defer runtime.KeepAlive(ef)
 	_r := objc.Send[objc.ID](objref.IDOf(ef), objc.RegisterName("numberFormatter"))
 	return NumberFormatterFromID(_r)
 }
 
-// UnitStyle returns the unit style.
+// UnitStyle returns the unit style used when creating string representations of energy values. The default value is `NSFormattingUnitStyleMedium`.
 func (ef *EnergyFormatter) UnitStyle() FormattingUnitStyle {
 	defer runtime.KeepAlive(ef)
 	_r := objc.Send[FormattingUnitStyle](objref.IDOf(ef), objc.RegisterName("unitStyle"))
 	return _r
 }
 
-// IsForFoodEnergyUse reports whether the object is for food energy use.
+// IsForFoodEnergyUse reports whether the resulting string is used to represent food energy. The default value is `NO`. If set to `YES`, `NSEnergyFormatterUnitKilocalorie` may be displayed as "C" instead of "kcal".
 func (ef *EnergyFormatter) IsForFoodEnergyUse() bool {
 	defer runtime.KeepAlive(ef)
 	_r := objc.Send[bool](objref.IDOf(ef), objc.RegisterName("isForFoodEnergyUse"))

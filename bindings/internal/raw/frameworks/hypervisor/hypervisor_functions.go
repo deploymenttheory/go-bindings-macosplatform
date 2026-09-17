@@ -56,6 +56,7 @@ var (
 	_hv_vcpu_get_exec_time                        func(uint64, *uint64) int
 	_hv_vcpu_get_pending_interrupt                func(uint64, Hv_interrupt_type_t, *bool) int
 	_hv_vcpu_get_reg                              func(uint64, Hv_reg_t, *uint64) int
+	_hv_vcpu_get_serror                           func(uint64, *bool) int
 	_hv_vcpu_get_simd_fp_reg                      func(uint64, Hv_simd_fp_reg_t, unsafe.Pointer) int
 	_hv_vcpu_get_sme_p_reg                        func(uint64, Hv_sme_p_reg_t, *uint8, uint) int
 	_hv_vcpu_get_sme_state                        func(uint64, *HvVcpuSmeStateT) int
@@ -67,9 +68,12 @@ var (
 	_hv_vcpu_get_trap_debug_reg_accesses          func(uint64, *bool) int
 	_hv_vcpu_get_vtimer_mask                      func(uint64, *bool) int
 	_hv_vcpu_get_vtimer_offset                    func(uint64, *uint64) int
+	_hv_vcpu_get_wait_for_interrupt_time          func(uint64, *uint64) int
+	_hv_vcpu_invalidate_tlb                       func(uint64, Hv_tlbi_op_t, uint64) int
 	_hv_vcpu_run                                  func(uint64) int
 	_hv_vcpu_set_pending_interrupt                func(uint64, Hv_interrupt_type_t, bool) int
 	_hv_vcpu_set_reg                              func(uint64, Hv_reg_t, uint64) int
+	_hv_vcpu_set_serror                           func(uint64, bool) int
 	_hv_vcpu_set_simd_fp_reg                      func(uint64, Hv_simd_fp_reg_t, unsafe.Pointer) int
 	_hv_vcpu_set_sme_p_reg                        func(uint64, Hv_sme_p_reg_t, *uint8, uint) int
 	_hv_vcpu_set_sme_state                        func(uint64, *HvVcpuSmeStateT) int
@@ -323,6 +327,11 @@ func HvVcpuGetReg(vcpu uint64, reg Hv_reg_t, value *uint64) int {
 	return _hv_vcpu_get_reg(vcpu, reg, value)
 }
 
+// C function: hv_vcpu_get_serror
+func HvVcpuGetSerror(vcpu uint64, pending *bool) int {
+	return _hv_vcpu_get_serror(vcpu, pending)
+}
+
 // C function: hv_vcpu_get_simd_fp_reg
 func HvVcpuGetSimdFpReg(vcpu uint64, reg Hv_simd_fp_reg_t, value unsafe.Pointer) int {
 	return _hv_vcpu_get_simd_fp_reg(vcpu, reg, value)
@@ -378,6 +387,16 @@ func HvVcpuGetVtimerOffset(vcpu uint64, vtimerOffset *uint64) int {
 	return _hv_vcpu_get_vtimer_offset(vcpu, vtimerOffset)
 }
 
+// C function: hv_vcpu_get_wait_for_interrupt_time
+func HvVcpuGetWaitForInterruptTime(vcpu uint64, time_ *uint64) int {
+	return _hv_vcpu_get_wait_for_interrupt_time(vcpu, time_)
+}
+
+// C function: hv_vcpu_invalidate_tlb
+func HvVcpuInvalidateTlb(vcpu uint64, op Hv_tlbi_op_t, param uint64) int {
+	return _hv_vcpu_invalidate_tlb(vcpu, op, param)
+}
+
 // C function: hv_vcpu_run
 func HvVcpuRun(vcpu uint64) int {
 	return _hv_vcpu_run(vcpu)
@@ -391,6 +410,11 @@ func HvVcpuSetPendingInterrupt(vcpu uint64, type_ Hv_interrupt_type_t, pending b
 // C function: hv_vcpu_set_reg
 func HvVcpuSetReg(vcpu uint64, reg Hv_reg_t, value uint64) int {
 	return _hv_vcpu_set_reg(vcpu, reg, value)
+}
+
+// C function: hv_vcpu_set_serror
+func HvVcpuSetSerror(vcpu uint64, pending bool) int {
+	return _hv_vcpu_set_serror(vcpu, pending)
 }
 
 // C function: hv_vcpu_set_simd_fp_reg

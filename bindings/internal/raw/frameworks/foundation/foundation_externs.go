@@ -12,17 +12,34 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/corefoundation"
 )
 
+// Key for the value that specifies how the morning and afternoon designations are printed, affecting strings that use the `%p` format specifier.
 // Deprecated: since macOS 10.5.
-func NSAMPMDesignation() uintptr {
+func NSAMPMDesignation() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSAMPMDesignation")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSAlternateDescriptionAttributeName() uintptr {
+// An attribute key whose value is an `NSString` providing an alternate description.
+func NSAlternateDescriptionAttributeName() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSAlternateDescriptionAttributeName")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
+// Posted by `NSAppleEventManager` before it first dispatches an Apple event.
 func NSAppleEventManagerWillProcessFirstEventNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSAppleEventManagerWillProcessFirstEventNotification")
 	if ptr == 0 {
@@ -35,42 +52,90 @@ func NSAppleEventManagerWillProcessFirstEventNotification() *NSString {
 	return NSStringFromID(id)
 }
 
-func NSAppleEventTimeOutDefault() uintptr {
+// A timeout constant indicating that the default timeout should be used.
+func NSAppleEventTimeOutDefault() float64 {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSAppleEventTimeOutDefault")
-	return ptr
+	if ptr == 0 {
+		return 0
+	}
+	return *(*float64)(unsafe.Pointer(ptr))
 }
 
-func NSAppleEventTimeOutNone() uintptr {
+// A timeout constant indicating that there is no timeout.
+func NSAppleEventTimeOutNone() float64 {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSAppleEventTimeOutNone")
-	return ptr
+	if ptr == 0 {
+		return 0
+	}
+	return *(*float64)(unsafe.Pointer(ptr))
 }
 
-func NSAppleScriptErrorAppName() uintptr {
+// An `NSString` that specifies the name of the application that generated the error.
+func NSAppleScriptErrorAppName() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSAppleScriptErrorAppName")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSAppleScriptErrorBriefMessage() uintptr {
+// An `NSString` that provides a brief description of the error.
+func NSAppleScriptErrorBriefMessage() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSAppleScriptErrorBriefMessage")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSAppleScriptErrorMessage() uintptr {
+// An `NSString` that supplies a detailed description of the error condition.
+func NSAppleScriptErrorMessage() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSAppleScriptErrorMessage")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSAppleScriptErrorNumber() uintptr {
+// An `NSNumber` that specifies the error number.
+func NSAppleScriptErrorNumber() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSAppleScriptErrorNumber")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSAppleScriptErrorRange() uintptr {
+// An `NSValue` that specifies a range.
+func NSAppleScriptErrorRange() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSAppleScriptErrorRange")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-// NSArgumentDomain identifies a search list entry containing the commandline arguments the application was launched with, if any. Arguments must be formatted as '-key plistvalue'. NSArgumentDomain is automatically included in all search lists, after forced defaults, but before all other entries. This can be useful for testing purposes.
+// The identifier for the domain that contains command-line settings.
 func NSArgumentDomain() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSArgumentDomain")
 	if ptr == 0 {
@@ -95,6 +160,7 @@ func NSAssertionHandlerKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// An operator that returns the average of a collection's values for the specified key path.
 func NSAverageKeyValueOperator() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSAverageKeyValueOperator")
 	if ptr == 0 {
@@ -107,6 +173,7 @@ func NSAverageKeyValueOperator() *NSString {
 	return NSStringFromID(id)
 }
 
+// Identifier for the Buddhist calendar.
 // Deprecated: since macOS 10.10.
 func NSBuddhistCalendar() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSBuddhistCalendar")
@@ -120,6 +187,7 @@ func NSBuddhistCalendar() *NSString {
 	return NSStringFromID(id)
 }
 
+// A notification that lets observers know when classes are dynamically loaded. The notification object is the @c NSBundle instance that dynamically loads classes. The @c userInfo dictionary contains an @c NSLoadedClasses key.
 func NSBundleDidLoadNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSBundleDidLoadNotification")
 	if ptr == 0 {
@@ -132,6 +200,7 @@ func NSBundleDidLoadNotification() *NSString {
 	return NSStringFromID(id)
 }
 
+// A notification posted whenever the calendar day of the system changes, as determined by the system calendar, locale, and time zone. If the device is asleep when the day changes, this notification will be posted on wakeup. Only one notification will be posted on wakeup if the device has been asleep for multiple days. There are no guarantees about the timeliness of when this notification will be received by observers.
 func NSCalendarDayChangedNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSCalendarDayChangedNotification")
 	if ptr == 0 {
@@ -156,6 +225,7 @@ func NSCalendarIdentifierBangla() *NSString {
 	return NSStringFromID(id)
 }
 
+// Identifier for the Buddhist calendar.
 func NSCalendarIdentifierBuddhist() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSCalendarIdentifierBuddhist")
 	if ptr == 0 {
@@ -168,6 +238,7 @@ func NSCalendarIdentifierBuddhist() *NSString {
 	return NSStringFromID(id)
 }
 
+// Identifier for the Chinese calendar.
 func NSCalendarIdentifierChinese() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSCalendarIdentifierChinese")
 	if ptr == 0 {
@@ -180,6 +251,7 @@ func NSCalendarIdentifierChinese() *NSString {
 	return NSStringFromID(id)
 }
 
+// Identifier for the Coptic calendar.
 func NSCalendarIdentifierCoptic() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSCalendarIdentifierCoptic")
 	if ptr == 0 {
@@ -204,6 +276,7 @@ func NSCalendarIdentifierDangi() *NSString {
 	return NSStringFromID(id)
 }
 
+// Identifier for the Ethiopic Amete Alem calendar.
 func NSCalendarIdentifierEthiopicAmeteAlem() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSCalendarIdentifierEthiopicAmeteAlem")
 	if ptr == 0 {
@@ -216,6 +289,7 @@ func NSCalendarIdentifierEthiopicAmeteAlem() *NSString {
 	return NSStringFromID(id)
 }
 
+// Identifier for the Ethiopic Amete Mihret calendar.
 func NSCalendarIdentifierEthiopicAmeteMihret() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSCalendarIdentifierEthiopicAmeteMihret")
 	if ptr == 0 {
@@ -228,6 +302,7 @@ func NSCalendarIdentifierEthiopicAmeteMihret() *NSString {
 	return NSStringFromID(id)
 }
 
+// Identifier for the Gregorian calendar.
 func NSCalendarIdentifierGregorian() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSCalendarIdentifierGregorian")
 	if ptr == 0 {
@@ -252,6 +327,7 @@ func NSCalendarIdentifierGujarati() *NSString {
 	return NSStringFromID(id)
 }
 
+// Identifier for the Hebrew calendar.
 func NSCalendarIdentifierHebrew() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSCalendarIdentifierHebrew")
 	if ptr == 0 {
@@ -264,6 +340,7 @@ func NSCalendarIdentifierHebrew() *NSString {
 	return NSStringFromID(id)
 }
 
+// Identifier for the ISO 8601 calendar.
 func NSCalendarIdentifierISO8601() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSCalendarIdentifierISO8601")
 	if ptr == 0 {
@@ -276,6 +353,7 @@ func NSCalendarIdentifierISO8601() *NSString {
 	return NSStringFromID(id)
 }
 
+// Identifier for the Indian calendar.
 func NSCalendarIdentifierIndian() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSCalendarIdentifierIndian")
 	if ptr == 0 {
@@ -288,6 +366,7 @@ func NSCalendarIdentifierIndian() *NSString {
 	return NSStringFromID(id)
 }
 
+// Identifier for the Islamic calendar.
 func NSCalendarIdentifierIslamic() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSCalendarIdentifierIslamic")
 	if ptr == 0 {
@@ -300,6 +379,7 @@ func NSCalendarIdentifierIslamic() *NSString {
 	return NSStringFromID(id)
 }
 
+// Identifier for the Islamic civil calendar.
 func NSCalendarIdentifierIslamicCivil() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSCalendarIdentifierIslamicCivil")
 	if ptr == 0 {
@@ -312,6 +392,7 @@ func NSCalendarIdentifierIslamicCivil() *NSString {
 	return NSStringFromID(id)
 }
 
+// Identifier for the Islamic tabular calendar. A simple tabular Islamic calendar using the astronomical/Thursday epoch of CE 622 July 15.
 func NSCalendarIdentifierIslamicTabular() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSCalendarIdentifierIslamicTabular")
 	if ptr == 0 {
@@ -324,6 +405,7 @@ func NSCalendarIdentifierIslamicTabular() *NSString {
 	return NSStringFromID(id)
 }
 
+// Identifier for the Islamic Umm al-Qura calendar. The Islamic Umm al-Qura calendar used in Saudi Arabia. This is based on astronomical calculation, instead of tabular behavior.
 func NSCalendarIdentifierIslamicUmmAlQura() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSCalendarIdentifierIslamicUmmAlQura")
 	if ptr == 0 {
@@ -336,6 +418,7 @@ func NSCalendarIdentifierIslamicUmmAlQura() *NSString {
 	return NSStringFromID(id)
 }
 
+// Identifier for the Japanese calendar.
 func NSCalendarIdentifierJapanese() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSCalendarIdentifierJapanese")
 	if ptr == 0 {
@@ -396,6 +479,7 @@ func NSCalendarIdentifierOdia() *NSString {
 	return NSStringFromID(id)
 }
 
+// Identifier for the Persian calendar.
 func NSCalendarIdentifierPersian() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSCalendarIdentifierPersian")
 	if ptr == 0 {
@@ -408,6 +492,7 @@ func NSCalendarIdentifierPersian() *NSString {
 	return NSStringFromID(id)
 }
 
+// Identifier for the Republic of China (Minguo) calendar.
 func NSCalendarIdentifierRepublicOfChina() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSCalendarIdentifierRepublicOfChina")
 	if ptr == 0 {
@@ -468,6 +553,7 @@ func NSCalendarIdentifierVikram() *NSString {
 	return NSStringFromID(id)
 }
 
+// Name of an exception raised when a string encoding conversion fails.
 func NSCharacterConversionException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSCharacterConversionException")
 	if ptr == 0 {
@@ -480,6 +566,7 @@ func NSCharacterConversionException() *NSString {
 	return NSStringFromID(id)
 }
 
+// Identifier for the Chinese calendar.
 // Deprecated: since macOS 10.10.
 func NSChineseCalendar() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSChineseCalendar")
@@ -493,6 +580,7 @@ func NSChineseCalendar() *NSString {
 	return NSStringFromID(id)
 }
 
+// Posted when an “NSClassDescription“ is needed for a class but one has not yet been registered.
 func NSClassDescriptionNeededForClassNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSClassDescriptionNeededForClassNotification")
 	if ptr == 0 {
@@ -505,6 +593,7 @@ func NSClassDescriptionNeededForClassNotification() *NSString {
 	return NSStringFromID(id)
 }
 
+// The error domain for Cocoa errors.
 func NSCocoaErrorDomain() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSCocoaErrorDomain")
 	if ptr == 0 {
@@ -517,24 +606,49 @@ func NSCocoaErrorDomain() *NSString {
 	return NSStringFromID(id)
 }
 
+// Posted when an `NSConnection` object is deallocated or when it's notified that its port has been invalidated.
 // Deprecated: Use NSXPCConnection instead
-func NSConnectionDidDieNotification() uintptr {
+func NSConnectionDidDieNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSConnectionDidDieNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
+// Posted when an `NSConnection` object is initialized.
 // Deprecated: Use NSXPCConnection instead
-func NSConnectionDidInitializeNotification() uintptr {
+func NSConnectionDidInitializeNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSConnectionDidInitializeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
+// The run loop mode that `NSConnection` objects use for waiting for replies.
 // Deprecated: Use NSXPCConnection instead
-func NSConnectionReplyMode() uintptr {
+func NSConnectionReplyMode() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSConnectionReplyMode")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
+// An operator that returns the number of objects in a collection.
 func NSCountKeyValueOperator() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSCountKeyValueOperator")
 	if ptr == 0 {
@@ -547,12 +661,21 @@ func NSCountKeyValueOperator() *NSString {
 	return NSStringFromID(id)
 }
 
+// A string that specifies the symbol used to denote currency in this language.
 // Deprecated: since macOS 10.5.
-func NSCurrencySymbol() uintptr {
+func NSCurrencySymbol() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSCurrencySymbol")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
+// A notification that indicates that the user's locale changed.
 func NSCurrentLocaleDidChangeNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSCurrentLocaleDidChangeNotification")
 	if ptr == 0 {
@@ -565,16 +688,32 @@ func NSCurrentLocaleDidChangeNotification() *NSString {
 	return NSStringFromID(id)
 }
 
+// Key for the format string that specifies how dates are printed using the date format specifiers.
 // Deprecated: since macOS 10.5.
-func NSDateFormatString() uintptr {
+func NSDateFormatString() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSDateFormatString")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
+// Key for the string that specifies how to use ambiguous numbers in date strings.
 // Deprecated: since macOS 10.5.
-func NSDateTimeOrdering() uintptr {
+func NSDateTimeOrdering() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSDateTimeOrdering")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSDebugDescriptionErrorKey() *NSString {
@@ -589,12 +728,21 @@ func NSDebugDescriptionErrorKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// Strings that identify the decimal digits in addition to or instead of the ASCII digits.
 // Deprecated: since macOS 10.5.
-func NSDecimalDigits() uintptr {
+func NSDecimalDigits() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSDecimalDigits")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
+// The name of an exception raised on divide by zero.
 func NSDecimalNumberDivideByZeroException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSDecimalNumberDivideByZeroException")
 	if ptr == 0 {
@@ -607,6 +755,7 @@ func NSDecimalNumberDivideByZeroException() *NSString {
 	return NSStringFromID(id)
 }
 
+// The name of an exception raised if there is an exactness error.
 func NSDecimalNumberExactnessException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSDecimalNumberExactnessException")
 	if ptr == 0 {
@@ -619,6 +768,7 @@ func NSDecimalNumberExactnessException() *NSString {
 	return NSStringFromID(id)
 }
 
+// The name of an exception raised on overflow.
 func NSDecimalNumberOverflowException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSDecimalNumberOverflowException")
 	if ptr == 0 {
@@ -631,6 +781,7 @@ func NSDecimalNumberOverflowException() *NSString {
 	return NSStringFromID(id)
 }
 
+// The name of an exception raised on underflow.
 func NSDecimalNumberUnderflowException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSDecimalNumberUnderflowException")
 	if ptr == 0 {
@@ -643,12 +794,21 @@ func NSDecimalNumberUnderflowException() *NSString {
 	return NSStringFromID(id)
 }
 
+// A string that specifies the decimal separator.
 // Deprecated: since macOS 10.5.
-func NSDecimalSeparator() uintptr {
+func NSDecimalSeparator() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSDecimalSeparator")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
+// The mode set to handle input sources other than connection objects. This is the most commonly used run-loop mode.
 func NSDefaultRunLoopMode() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSDefaultRunLoopMode")
 	if ptr == 0 {
@@ -661,6 +821,7 @@ func NSDefaultRunLoopMode() *NSString {
 	return NSStringFromID(id)
 }
 
+// Name of an exception that occurs when an internal assertion fails for a destination.
 func NSDestinationInvalidException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSDestinationInvalidException")
 	if ptr == 0 {
@@ -673,6 +834,7 @@ func NSDestinationInvalidException() *NSString {
 	return NSStringFromID(id)
 }
 
+// Not implemented.
 // Deprecated: Programs no longer transition to single-threaded mode from threaded environments
 func NSDidBecomeSingleThreadedNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSDidBecomeSingleThreadedNotification")
@@ -686,6 +848,7 @@ func NSDidBecomeSingleThreadedNotification() *NSString {
 	return NSStringFromID(id)
 }
 
+// An operator that returns an array of the distinct values found in the sub-arrays of all arrays in the collection.
 func NSDistinctUnionOfArraysKeyValueOperator() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSDistinctUnionOfArraysKeyValueOperator")
 	if ptr == 0 {
@@ -698,6 +861,7 @@ func NSDistinctUnionOfArraysKeyValueOperator() *NSString {
 	return NSStringFromID(id)
 }
 
+// An operator that returns an array of the distinct values of a collection.
 func NSDistinctUnionOfObjectsKeyValueOperator() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSDistinctUnionOfObjectsKeyValueOperator")
 	if ptr == 0 {
@@ -710,6 +874,7 @@ func NSDistinctUnionOfObjectsKeyValueOperator() *NSString {
 	return NSStringFromID(id)
 }
 
+// An operator that returns an array of the distinct values found in the sub-sets of all sets in the collection.
 func NSDistinctUnionOfSetsKeyValueOperator() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSDistinctUnionOfSetsKeyValueOperator")
 	if ptr == 0 {
@@ -722,12 +887,21 @@ func NSDistinctUnionOfSetsKeyValueOperator() *NSString {
 	return NSStringFromID(id)
 }
 
+// Key for an array of strings that denote a time in the past.
 // Deprecated: since macOS 10.5.
-func NSEarlierTimeDesignations() uintptr {
+func NSEarlierTimeDesignations() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSEarlierTimeDesignations")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
+// Edge insets with all values set to `0`.
 func NSEdgeInsetsZero() NSEdgeInsets {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSEdgeInsetsZero")
 	if ptr == 0 {
@@ -736,7 +910,7 @@ func NSEdgeInsetsZero() NSEdgeInsets {
 	return *(*NSEdgeInsets)(unsafe.Pointer(ptr))
 }
 
-// @const NSErrorFailingURLStringKey @abstract The NSError userInfo dictionary key used to store and retrieve the NSString object for the URL which caused a load to fail. @discussion This constant is deprecated in Mac OS X 10.6, and is superseded by NSURLErrorFailingURLStringErrorKey.  Both constants refer to the same value for backward-compatibility, but the new symbol name has a better prefix.
+// The `NSError` userInfo dictionary key used to store and retrieve the `NSString` for the URL which caused a load to fail. This constant is deprecated and superseded by “NSURLErrorFailingURLStringErrorKey“.
 // Deprecated: Use NSURLErrorFailingURLErrorKey instead
 func NSErrorFailingURLStringKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSErrorFailingURLStringKey")
@@ -750,6 +924,7 @@ func NSErrorFailingURLStringKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The key for the attachments property.
 func NSExtensionItemAttachmentsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSExtensionItemAttachmentsKey")
 	if ptr == 0 {
@@ -762,6 +937,7 @@ func NSExtensionItemAttachmentsKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The key for the attributed content text property.
 func NSExtensionItemAttributedContentTextKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSExtensionItemAttributedContentTextKey")
 	if ptr == 0 {
@@ -774,6 +950,7 @@ func NSExtensionItemAttributedContentTextKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// Keys corresponding to properties exposed on the NSExtensionItem interface.
 func NSExtensionItemAttributedTitleKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSExtensionItemAttributedTitleKey")
 	if ptr == 0 {
@@ -786,6 +963,7 @@ func NSExtensionItemAttributedTitleKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// Key in userInfo. Value is a dictionary of NSExtensionItems and associated NSError instances.
 func NSExtensionItemsAndErrorsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSExtensionItemsAndErrorsKey")
 	if ptr == 0 {
@@ -798,6 +976,7 @@ func NSExtensionItemsAndErrorsKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// A key whose value is an item of type `kUTTypePropertyList`. The item contains an `NSDictionary` that contains the object returned by the JavaScript code to its completion function.
 func NSExtensionJavaScriptPreprocessingResultsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSExtensionJavaScriptPreprocessingResultsKey")
 	if ptr == 0 {
@@ -810,6 +989,7 @@ func NSExtensionJavaScriptPreprocessingResultsKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// An `NSNumber` boolean indicating whether to use active transfer mode. Default is `NO` (passive mode).
 // Deprecated: since macOS 10.4.
 func NSFTPPropertyActiveTransferModeKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFTPPropertyActiveTransferModeKey")
@@ -823,6 +1003,7 @@ func NSFTPPropertyActiveTransferModeKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// An `NSDictionary` containing proxy information to use in place of proxy identified in SystemConfiguration.framework. To avoid any proxy use, pass an empty dictionary.
 // Deprecated: since macOS 10.4.
 func NSFTPPropertyFTPProxy() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFTPPropertyFTPProxy")
@@ -836,6 +1017,7 @@ func NSFTPPropertyFTPProxy() *NSString {
 	return NSStringFromID(id)
 }
 
+// An `NSNumber` indicating the file offset for FTP transfers. Default is `0`.
 // Deprecated: since macOS 10.4.
 func NSFTPPropertyFileOffsetKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFTPPropertyFileOffsetKey")
@@ -849,6 +1031,7 @@ func NSFTPPropertyFileOffsetKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The FTP user login name. Default is `"anonymous"`.
 // Deprecated: since macOS 10.4.
 func NSFTPPropertyUserLoginKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFTPPropertyUserLoginKey")
@@ -862,6 +1045,7 @@ func NSFTPPropertyUserLoginKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The FTP user password. Default is `"NSURLHandle@apple.com"`.
 // Deprecated: since macOS 10.4.
 func NSFTPPropertyUserPasswordKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFTPPropertyUserPasswordKey")
@@ -875,12 +1059,21 @@ func NSFTPPropertyUserPasswordKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The name of an exception raised in case of authentication failure.
 // Deprecated: Use NSXPCConnection instead
-func NSFailedAuthenticationException() uintptr {
+func NSFailedAuthenticationException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFailedAuthenticationException")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
+// The key in a file attribute dictionary whose value indicates whether the file is read-only. The corresponding value is an `NSNumber` object containing a Boolean value.
 func NSFileAppendOnly() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileAppendOnly")
 	if ptr == 0 {
@@ -893,6 +1086,7 @@ func NSFileAppendOnly() *NSString {
 	return NSStringFromID(id)
 }
 
+// The key in a file attribute dictionary whose value indicates whether the file is busy. The corresponding value is an `NSNumber` object containing a Boolean value.
 func NSFileBusy() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileBusy")
 	if ptr == 0 {
@@ -905,6 +1099,7 @@ func NSFileBusy() *NSString {
 	return NSStringFromID(id)
 }
 
+// The key in a file attribute dictionary whose value indicates the file's creation date. The corresponding value is an `NSDate` object. > Important: This API has the potential of being misused to access device signals to try to identify the device or user, also known as fingerprinting. Regardless of whether a user gives your app permission to track, fingerprinting is not allowed. When you use this API in your app or third-party SDK (an SDK not provided by Apple), declare your usage and the reason for using the API in your app or third-party SDK's `PrivacyInfo.xcprivacy` file. For more information, including the list of valid reasons for using the API, see [Describing use of required reason API](https://developer.apple.com/documentation/bundleresources/describing-use-of-required-reason-api).
 func NSFileCreationDate() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileCreationDate")
 	if ptr == 0 {
@@ -917,6 +1112,7 @@ func NSFileCreationDate() *NSString {
 	return NSStringFromID(id)
 }
 
+// The key in a file attribute dictionary whose value indicates the identifier for the device on which the file resides. The corresponding value is an `NSNumber` object containing an `unsigned long`.
 func NSFileDeviceIdentifier() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileDeviceIdentifier")
 	if ptr == 0 {
@@ -929,6 +1125,7 @@ func NSFileDeviceIdentifier() *NSString {
 	return NSStringFromID(id)
 }
 
+// The key in a file attribute dictionary whose value indicates whether the file's extension is hidden. The corresponding value is an `NSNumber` object containing a Boolean value.
 func NSFileExtensionHidden() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileExtensionHidden")
 	if ptr == 0 {
@@ -941,6 +1138,7 @@ func NSFileExtensionHidden() *NSString {
 	return NSStringFromID(id)
 }
 
+// The key in a file attribute dictionary whose value indicates the file's group ID. The corresponding value is an `NSNumber` object containing an `unsigned long`.
 func NSFileGroupOwnerAccountID() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileGroupOwnerAccountID")
 	if ptr == 0 {
@@ -953,6 +1151,7 @@ func NSFileGroupOwnerAccountID() *NSString {
 	return NSStringFromID(id)
 }
 
+// The key in a file attribute dictionary whose value indicates the group name of the file's owner. The corresponding value is an `NSString` object.
 func NSFileGroupOwnerAccountName() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileGroupOwnerAccountName")
 	if ptr == 0 {
@@ -965,6 +1164,7 @@ func NSFileGroupOwnerAccountName() *NSString {
 	return NSStringFromID(id)
 }
 
+// The key in a file attribute dictionary whose value indicates the file's HFS creator code. The corresponding value is an `NSNumber` object containing an `OSType` (unsigned 32-bit integer).
 func NSFileHFSCreatorCode() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileHFSCreatorCode")
 	if ptr == 0 {
@@ -977,6 +1177,7 @@ func NSFileHFSCreatorCode() *NSString {
 	return NSStringFromID(id)
 }
 
+// The key in a file attribute dictionary whose value indicates the file's HFS type code. The corresponding value is an `NSNumber` object containing an `OSType` (unsigned 32-bit integer). See HFS File Types for possible values.
 func NSFileHFSTypeCode() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileHFSTypeCode")
 	if ptr == 0 {
@@ -989,6 +1190,7 @@ func NSFileHFSTypeCode() *NSString {
 	return NSStringFromID(id)
 }
 
+// Posted when an “FileHandle“ object establishes a socket connection between two processes, creates a “FileHandle“ object for one end of the connection, and makes this object available to observers by putting it in the `userInfo` dictionary.
 func NSFileHandleConnectionAcceptedNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileHandleConnectionAcceptedNotification")
 	if ptr == 0 {
@@ -1001,6 +1203,7 @@ func NSFileHandleConnectionAcceptedNotification() *NSString {
 	return NSStringFromID(id)
 }
 
+// Posted when the file handle determines that data is currently available for reading in a file or at a communications channel.
 func NSFileHandleDataAvailableNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileHandleDataAvailableNotification")
 	if ptr == 0 {
@@ -1013,6 +1216,7 @@ func NSFileHandleDataAvailableNotification() *NSString {
 	return NSStringFromID(id)
 }
 
+// A key in a userInfo dictionary to access the data object received by a “FileHandle/readCompletionNotification“.
 func NSFileHandleNotificationDataItem() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileHandleNotificationDataItem")
 	if ptr == 0 {
@@ -1025,6 +1229,7 @@ func NSFileHandleNotificationDataItem() *NSString {
 	return NSStringFromID(id)
 }
 
+// A key in a userInfo dictionary to access the “FileHandle“ object of a connected-socket.
 func NSFileHandleNotificationFileHandleItem() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileHandleNotificationFileHandleItem")
 	if ptr == 0 {
@@ -1037,6 +1242,7 @@ func NSFileHandleNotificationFileHandleItem() *NSString {
 	return NSStringFromID(id)
 }
 
+// Currently unused.
 // Deprecated: Not supported
 func NSFileHandleNotificationMonitorModes() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileHandleNotificationMonitorModes")
@@ -1050,6 +1256,7 @@ func NSFileHandleNotificationMonitorModes() *NSString {
 	return NSStringFromID(id)
 }
 
+// The name of a file-operation exception.
 func NSFileHandleOperationException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileHandleOperationException")
 	if ptr == 0 {
@@ -1062,6 +1269,7 @@ func NSFileHandleOperationException() *NSString {
 	return NSStringFromID(id)
 }
 
+// Posted when the file handle reads the data currently available in a file or at a communications channel. The notification object is the “FileHandle“ object that sent the notification. To cause the posting of this notification, you must send either “FileHandle/readInBackgroundAndNotify()“ or “FileHandle/readInBackgroundAndNotify(forModes:)“ to an appropriate file handle object. The notification's `userInfo` dictionary contains the `NSFileHandleNotificationDataItem` key.
 func NSFileHandleReadCompletionNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileHandleReadCompletionNotification")
 	if ptr == 0 {
@@ -1074,6 +1282,7 @@ func NSFileHandleReadCompletionNotification() *NSString {
 	return NSStringFromID(id)
 }
 
+// Posted when the file handle reads all data in the file or, if a communications channel, until the other process signals the end of data.
 func NSFileHandleReadToEndOfFileCompletionNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileHandleReadToEndOfFileCompletionNotification")
 	if ptr == 0 {
@@ -1086,6 +1295,7 @@ func NSFileHandleReadToEndOfFileCompletionNotification() *NSString {
 	return NSStringFromID(id)
 }
 
+// The key in a file attribute dictionary whose value indicates whether the file is mutable. The corresponding value is an `NSNumber` object containing a Boolean value.
 func NSFileImmutable() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileImmutable")
 	if ptr == 0 {
@@ -1098,11 +1308,20 @@ func NSFileImmutable() *NSString {
 	return NSStringFromID(id)
 }
 
-func NSFileManagerUnmountDissentingProcessIdentifierErrorKey() uintptr {
+// The process identifier of the process that prevented a volume from unmounting. If “unmountVolume(at:options:completionHandler:)“ fails, the process identifier of the dissenter can be found in the `NSError`'s `userInfo` dictionary with this key. The value is an `NSNumber` containing the process identifier.
+func NSFileManagerUnmountDissentingProcessIdentifierErrorKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileManagerUnmountDissentingProcessIdentifierErrorKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
+// The key in a file attribute dictionary whose value indicates the file's last modified date. The corresponding value is an `NSDate` object.
 func NSFileModificationDate() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileModificationDate")
 	if ptr == 0 {
@@ -1115,6 +1334,7 @@ func NSFileModificationDate() *NSString {
 	return NSStringFromID(id)
 }
 
+// The key in a file attribute dictionary whose value indicates the file's owner's account ID. The corresponding value is an `NSNumber` object containing an `unsigned long`.
 func NSFileOwnerAccountID() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileOwnerAccountID")
 	if ptr == 0 {
@@ -1127,6 +1347,7 @@ func NSFileOwnerAccountID() *NSString {
 	return NSStringFromID(id)
 }
 
+// The key in a file attribute dictionary whose value indicates the name of the file's owner. The corresponding value is an `NSString` object.
 func NSFileOwnerAccountName() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileOwnerAccountName")
 	if ptr == 0 {
@@ -1139,6 +1360,7 @@ func NSFileOwnerAccountName() *NSString {
 	return NSStringFromID(id)
 }
 
+// The file path of the error.
 func NSFilePathErrorKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFilePathErrorKey")
 	if ptr == 0 {
@@ -1151,6 +1373,7 @@ func NSFilePathErrorKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The key in a file attribute dictionary whose value indicates the file's Posix permissions. The corresponding value is an `NSNumber` object. Use the `int16Value` method to retrieve the integer value for the permissions.
 func NSFilePosixPermissions() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFilePosixPermissions")
 	if ptr == 0 {
@@ -1163,6 +1386,7 @@ func NSFilePosixPermissions() *NSString {
 	return NSStringFromID(id)
 }
 
+// The file is stored in an encrypted format on disk and cannot be read from or written to while the device is locked or booting.
 func NSFileProtectionComplete() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileProtectionComplete")
 	if ptr == 0 {
@@ -1175,6 +1399,7 @@ func NSFileProtectionComplete() *NSString {
 	return NSStringFromID(id)
 }
 
+// The file is stored in an encrypted format on disk after it is closed. Files with this type of protection can be created while the device is locked, but once closed, cannot be opened again until the device is unlocked. If the file is opened when unlocked, you may continue to access the file normally, even if the user locks the device.
 func NSFileProtectionCompleteUnlessOpen() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileProtectionCompleteUnlessOpen")
 	if ptr == 0 {
@@ -1187,6 +1412,7 @@ func NSFileProtectionCompleteUnlessOpen() *NSString {
 	return NSStringFromID(id)
 }
 
+// The file is stored in an encrypted format on disk and cannot be accessed until after the device has booted. After the user unlocks the device for the first time, your app can access the file and continue to access it even if the user subsequently locks the device.
 func NSFileProtectionCompleteUntilFirstUserAuthentication() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileProtectionCompleteUntilFirstUserAuthentication")
 	if ptr == 0 {
@@ -1199,6 +1425,7 @@ func NSFileProtectionCompleteUntilFirstUserAuthentication() *NSString {
 	return NSStringFromID(id)
 }
 
+// The key in a file attribute dictionary whose value identifies the protection level for this file. The corresponding value is an `NSString` value. For a list of possible values, see `NSFileProtectionType`.
 func NSFileProtectionKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileProtectionKey")
 	if ptr == 0 {
@@ -1211,6 +1438,7 @@ func NSFileProtectionKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The file has no special protections associated with it. A file with this type of protection can be read from or written to at any time.
 func NSFileProtectionNone() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileProtectionNone")
 	if ptr == 0 {
@@ -1223,6 +1451,7 @@ func NSFileProtectionNone() *NSString {
 	return NSStringFromID(id)
 }
 
+// The key in a file attribute dictionary whose value indicates the file's reference count. The corresponding value is an `NSNumber` object containing an `unsigned long`. The number specifies the number of hard links to a file.
 func NSFileReferenceCount() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileReferenceCount")
 	if ptr == 0 {
@@ -1235,6 +1464,7 @@ func NSFileReferenceCount() *NSString {
 	return NSStringFromID(id)
 }
 
+// The key in a file attribute dictionary whose value indicates the file's size in bytes. The corresponding value is an `NSNumber` object containing an `unsigned long long`. > Important: If the file has a resource fork, the returned value does _not_ include the size of the resource fork.
 func NSFileSize() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileSize")
 	if ptr == 0 {
@@ -1247,6 +1477,7 @@ func NSFileSize() *NSString {
 	return NSStringFromID(id)
 }
 
+// The key in a file attribute dictionary whose value indicates the file's filesystem file number. The corresponding value is an `NSNumber` object containing an `unsigned long`. The value corresponds to the value of `st_ino`, as returned by `stat`(2).
 func NSFileSystemFileNumber() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileSystemFileNumber")
 	if ptr == 0 {
@@ -1259,6 +1490,7 @@ func NSFileSystemFileNumber() *NSString {
 	return NSStringFromID(id)
 }
 
+// The key in a file system attribute dictionary whose value indicates the number of free nodes in the file system. The corresponding value is an `NSNumber` object that specifies the number of free nodes in the file system.
 func NSFileSystemFreeNodes() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileSystemFreeNodes")
 	if ptr == 0 {
@@ -1271,6 +1503,33 @@ func NSFileSystemFreeNodes() *NSString {
 	return NSStringFromID(id)
 }
 
+// The key in a file system attribute dictionary whose value indicates the amount of free space on the file system. The corresponding value is an `NSNumber` object that specifies the amount of free space on the file system in bytes. The value is determined by `statfs()`.
+func NSFileSystemFreeSize() *NSString {
+	ptr, _ := purego.Dlsym(_foundationLib, "NSFileSystemFreeSize")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
+}
+
+// The key in a file system attribute dictionary whose value indicates the number of nodes in the file system. The corresponding value is an `NSNumber` object that specifies the number of nodes in the file system.
+func NSFileSystemNodes() *NSString {
+	ptr, _ := purego.Dlsym(_foundationLib, "NSFileSystemNodes")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
+}
+
+// The key in a file system attribute dictionary whose value indicates the filesystem number of the file system. The corresponding value is an `NSNumber` object that specifies the filesystem number. The value corresponds to the value of `st_dev`, as returned by `stat`(2).
 func NSFileSystemNumber() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileSystemNumber")
 	if ptr == 0 {
@@ -1283,6 +1542,20 @@ func NSFileSystemNumber() *NSString {
 	return NSStringFromID(id)
 }
 
+// The key in a file system attribute dictionary whose value indicates the size of the file system. The corresponding value is an `NSNumber` object that specifies the size of the file system in bytes. The value is determined by `statfs()`. > Important: This API has the potential of being misused to access device signals to try to identify the device or user, also known as fingerprinting. Regardless of whether a user gives your app permission to track, fingerprinting is not allowed. When you use this API in your app or third-party SDK (an SDK not provided by Apple), declare your usage and the reason for using the API in your app or third-party SDK's `PrivacyInfo.xcprivacy` file. For more information, including the list of valid reasons for using the API, see [Describing use of required reason API](https://developer.apple.com/documentation/bundleresources/describing-use-of-required-reason-api).
+func NSFileSystemSize() *NSString {
+	ptr, _ := purego.Dlsym(_foundationLib, "NSFileSystemSize")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
+}
+
+// The key in a file attribute dictionary whose value indicates the file's type. The corresponding value is an `NSString` object. See `NSFileAttributeType` for possible values.
 func NSFileType() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileType")
 	if ptr == 0 {
@@ -1295,6 +1568,7 @@ func NSFileType() *NSString {
 	return NSStringFromID(id)
 }
 
+// A block special file.
 func NSFileTypeBlockSpecial() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileTypeBlockSpecial")
 	if ptr == 0 {
@@ -1307,6 +1581,7 @@ func NSFileTypeBlockSpecial() *NSString {
 	return NSStringFromID(id)
 }
 
+// A character special file.
 func NSFileTypeCharacterSpecial() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileTypeCharacterSpecial")
 	if ptr == 0 {
@@ -1319,6 +1594,7 @@ func NSFileTypeCharacterSpecial() *NSString {
 	return NSStringFromID(id)
 }
 
+// A directory.
 func NSFileTypeDirectory() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileTypeDirectory")
 	if ptr == 0 {
@@ -1331,6 +1607,7 @@ func NSFileTypeDirectory() *NSString {
 	return NSStringFromID(id)
 }
 
+// A regular file.
 func NSFileTypeRegular() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileTypeRegular")
 	if ptr == 0 {
@@ -1343,6 +1620,7 @@ func NSFileTypeRegular() *NSString {
 	return NSStringFromID(id)
 }
 
+// A socket.
 func NSFileTypeSocket() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileTypeSocket")
 	if ptr == 0 {
@@ -1355,6 +1633,7 @@ func NSFileTypeSocket() *NSString {
 	return NSStringFromID(id)
 }
 
+// A symbolic link.
 func NSFileTypeSymbolicLink() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileTypeSymbolicLink")
 	if ptr == 0 {
@@ -1367,6 +1646,7 @@ func NSFileTypeSymbolicLink() *NSString {
 	return NSStringFromID(id)
 }
 
+// A file whose type is unknown.
 func NSFileTypeUnknown() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileTypeUnknown")
 	if ptr == 0 {
@@ -1379,6 +1659,7 @@ func NSFileTypeUnknown() *NSString {
 	return NSStringFromID(id)
 }
 
+// The version of the Foundation framework in the current environment.
 func NSFoundationVersionNumber() float64 {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFoundationVersionNumber")
 	if ptr == 0 {
@@ -1387,6 +1668,7 @@ func NSFoundationVersionNumber() float64 {
 	return *(*float64)(unsafe.Pointer(ptr))
 }
 
+// Name of a generic exception for general purpose use.
 func NSGenericException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSGenericException")
 	if ptr == 0 {
@@ -1399,7 +1681,7 @@ func NSGenericException() *NSString {
 	return NSStringFromID(id)
 }
 
-// NSGlobalDomain identifies a domain shared between all applications for a given user. NSGlobalDomain is automatically included in all search lists, after the entries for the search list's domain.
+// The identifier for the domain that contains system-specified settings for all apps.
 func NSGlobalDomain() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSGlobalDomain")
 	if ptr == 0 {
@@ -1412,21 +1694,46 @@ func NSGlobalDomain() *NSString {
 	return NSStringFromID(id)
 }
 
-func NSGrammarCorrections() uintptr {
+// The value for this key should be an `NSArray` of `NSString` objects representing potential substitutions to correct the problem, but it is expected that this may not be available in all cases.
+func NSGrammarCorrections() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSGrammarCorrections")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSGrammarRange() uintptr {
+// The value for this key should be an `NSValue` containing an `NSRange`, a subrange of the sentence range used as the return value, whose location should be an offset from the beginning of the sentence. If the `NSGrammarRange` key is not present in the dictionary it is assumed to be equal to the overall sentence range.
+func NSGrammarRange() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSGrammarRange")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSGrammarUserDescription() uintptr {
+// The value for this key should be an `NSString` containing descriptive text about that range, to be presented directly to the user; it is intended that the user description should provide enough information to allow the user to correct the problem.
+func NSGrammarUserDescription() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSGrammarUserDescription")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
+// Identifier for the Gregorian calendar.
 // Deprecated: since macOS 10.10.
 func NSGregorianCalendar() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSGregorianCalendar")
@@ -1440,7 +1747,7 @@ func NSGregorianCalendar() *NSString {
 	return NSStringFromID(id)
 }
 
-// @const NSHTTPCookieComment @discussion Key for cookie comment text
+// An `NSString` object containing the comment for the cookie. Only valid for Version 1 cookies and later. This cookie attribute is optional.
 func NSHTTPCookieComment() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHTTPCookieComment")
 	if ptr == 0 {
@@ -1453,7 +1760,7 @@ func NSHTTPCookieComment() *NSString {
 	return NSStringFromID(id)
 }
 
-// @const NSHTTPCookieCommentURL @discussion Key for cookie comment URL
+// An `NSURL` object or `NSString` object containing the comment URL for the cookie. Only valid for Version 1 cookies or later. This cookie attribute is optional.
 func NSHTTPCookieCommentURL() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHTTPCookieCommentURL")
 	if ptr == 0 {
@@ -1466,7 +1773,7 @@ func NSHTTPCookieCommentURL() *NSString {
 	return NSStringFromID(id)
 }
 
-// @const NSHTTPCookieDiscard @discussion Key for cookie discard (session-only) flag
+// An `NSString` object stating whether the cookie should be discarded at the end of the session. String value must be either `"TRUE"` or `"FALSE"`. This cookie attribute is optional. The default is `"FALSE"`, unless this cookie is version 1 or greater and a value for `NSHTTPCookieMaximumAge` is not specified, in which case it is assumed to be `"TRUE"`.
 func NSHTTPCookieDiscard() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHTTPCookieDiscard")
 	if ptr == 0 {
@@ -1479,7 +1786,7 @@ func NSHTTPCookieDiscard() *NSString {
 	return NSStringFromID(id)
 }
 
-// @const NSHTTPCookieDomain @discussion Key for cookie domain
+// An `NSString` object containing the domain for the cookie. If this cookie attribute is missing, the domain is inferred from the value for `NSHTTPCookieOriginURL`. If you do not specify a value for `NSHTTPCookieOriginURL`, you _must_ specify a value for `NSHTTPCookieDomain`.
 func NSHTTPCookieDomain() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHTTPCookieDomain")
 	if ptr == 0 {
@@ -1492,7 +1799,7 @@ func NSHTTPCookieDomain() *NSString {
 	return NSStringFromID(id)
 }
 
-// @const NSHTTPCookieExpires @discussion Key for cookie expiration date
+// An `NSDate` object or `NSString` object specifying the expiration date for the cookie. This cookie attribute is only used for Version 0 cookies. This cookie attribute is optional.
 func NSHTTPCookieExpires() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHTTPCookieExpires")
 	if ptr == 0 {
@@ -1505,7 +1812,7 @@ func NSHTTPCookieExpires() *NSString {
 	return NSStringFromID(id)
 }
 
-// @const NSHTTPCookieManagerAcceptPolicyChangedNotification @discussion Name of notification that should be posted to the distributed notification center whenever the accept cookies preference is changed
+// Name of notification that should be posted to the distributed notification center whenever the accept cookies preference is changed.
 // Deprecated: Notification is never posted
 func NSHTTPCookieManagerAcceptPolicyChangedNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHTTPCookieManagerAcceptPolicyChangedNotification")
@@ -1519,7 +1826,7 @@ func NSHTTPCookieManagerAcceptPolicyChangedNotification() *NSString {
 	return NSStringFromID(id)
 }
 
-// @const NSHTTPCookieManagerCookiesChangedNotification @abstract Notification sent when the set of cookies changes
+// Notification sent when the set of cookies changes.
 func NSHTTPCookieManagerCookiesChangedNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHTTPCookieManagerCookiesChangedNotification")
 	if ptr == 0 {
@@ -1532,7 +1839,7 @@ func NSHTTPCookieManagerCookiesChangedNotification() *NSString {
 	return NSStringFromID(id)
 }
 
-// @const NSHTTPCookieMaximumAge @discussion Key for cookie maximum age (an alternate way of specifying the expiration)
+// An `NSString` object containing an integer value stating how long in seconds the cookie should be kept, at most. Only valid for Version 1 cookies and later. Default is `"0"`. This cookie attribute is optional.
 func NSHTTPCookieMaximumAge() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHTTPCookieMaximumAge")
 	if ptr == 0 {
@@ -1545,7 +1852,7 @@ func NSHTTPCookieMaximumAge() *NSString {
 	return NSStringFromID(id)
 }
 
-// @const NSHTTPCookieName @discussion Key for cookie name
+// An `NSString` object containing the name of the cookie (required).
 func NSHTTPCookieName() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHTTPCookieName")
 	if ptr == 0 {
@@ -1558,7 +1865,7 @@ func NSHTTPCookieName() *NSString {
 	return NSStringFromID(id)
 }
 
-// @const NSHTTPCookieOriginURL @discussion Key for cookie origin URL
+// An NSURL or `NSString` object containing the URL that set this cookie. If you do not provide a value for `NSHTTPCookieOriginURL`, you must provide a value for `NSHTTPCookieDomain`.
 func NSHTTPCookieOriginURL() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHTTPCookieOriginURL")
 	if ptr == 0 {
@@ -1571,7 +1878,7 @@ func NSHTTPCookieOriginURL() *NSString {
 	return NSStringFromID(id)
 }
 
-// @const NSHTTPCookiePath @discussion Key for cookie path
+// An `NSString` object containing the path for the cookie. This cookie attribute is required.
 func NSHTTPCookiePath() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHTTPCookiePath")
 	if ptr == 0 {
@@ -1584,7 +1891,7 @@ func NSHTTPCookiePath() *NSString {
 	return NSStringFromID(id)
 }
 
-// @const NSHTTPCookiePort @discussion Key for cookie ports
+// An `NSString` object containing comma-separated integer values specifying the ports for the cookie. Only valid for Version 1 cookies or later. The default value is an empty string (`""`). This cookie attribute is optional.
 func NSHTTPCookiePort() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHTTPCookiePort")
 	if ptr == 0 {
@@ -1597,7 +1904,7 @@ func NSHTTPCookiePort() *NSString {
 	return NSStringFromID(id)
 }
 
-// @const NSHTTPCookieSameSiteLax @discussion String constant "lax" to be used as a value for the property key NSHTTPCookieSameSite
+// A policy that allows certain cross-site requests to include the cookie. When a cookie has this policy, a request includes the cookie if the request is "top-level," meaning one that changes the URL in the address bar.
 func NSHTTPCookieSameSiteLax() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHTTPCookieSameSiteLax")
 	if ptr == 0 {
@@ -1610,7 +1917,7 @@ func NSHTTPCookieSameSiteLax() *NSString {
 	return NSStringFromID(id)
 }
 
-// @const NSHTTPCookieSameSitePolicy @discussion Key for cookie same site
+// A string indicating the same-site policy for the cookie.
 func NSHTTPCookieSameSitePolicy() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHTTPCookieSameSitePolicy")
 	if ptr == 0 {
@@ -1623,7 +1930,7 @@ func NSHTTPCookieSameSitePolicy() *NSString {
 	return NSStringFromID(id)
 }
 
-// @const NSHTTPCookieSameSiteStrict @discussion String constant "strict" to be used as a value for the property key NSHTTPCookieSameSite
+// A policy that prohibits a cross-site request from including the cookie.
 func NSHTTPCookieSameSiteStrict() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHTTPCookieSameSiteStrict")
 	if ptr == 0 {
@@ -1636,7 +1943,7 @@ func NSHTTPCookieSameSiteStrict() *NSString {
 	return NSStringFromID(id)
 }
 
-// @const NSHTTPCookieSecure @discussion Key for cookie secure flag
+// An `NSString` object indicating that the cookie should be transmitted only over secure channels. Providing any value for this key indicates that the cookie should remain secure.
 func NSHTTPCookieSecure() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHTTPCookieSecure")
 	if ptr == 0 {
@@ -1649,7 +1956,7 @@ func NSHTTPCookieSecure() *NSString {
 	return NSStringFromID(id)
 }
 
-// @const NSHTTPCookieSetByJavaScript @discussion An NSString object indicating that the cookie is set via JavaScript.
+// An NSString object indicating that the cookie is set via JavaScript.
 func NSHTTPCookieSetByJavaScript() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHTTPCookieSetByJavaScript")
 	if ptr == 0 {
@@ -1662,7 +1969,7 @@ func NSHTTPCookieSetByJavaScript() *NSString {
 	return NSStringFromID(id)
 }
 
-// @const NSHTTPCookieValue @discussion Key for cookie value
+// An `NSString` object containing the value of the cookie. This cookie attribute is required.
 func NSHTTPCookieValue() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHTTPCookieValue")
 	if ptr == 0 {
@@ -1675,7 +1982,7 @@ func NSHTTPCookieValue() *NSString {
 	return NSStringFromID(id)
 }
 
-// @const NSHTTPCookieVersion @discussion Key for cookie version
+// An `NSString` object that specifies the version of the cookie. Must be either `"0"` or `"1"`. The default is `"0"`. This cookie attribute is optional.
 func NSHTTPCookieVersion() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHTTPCookieVersion")
 	if ptr == 0 {
@@ -1688,6 +1995,7 @@ func NSHTTPCookieVersion() *NSString {
 	return NSStringFromID(id)
 }
 
+// The body data from an HTTP error response page.
 // Deprecated: since macOS 10.4.
 func NSHTTPPropertyErrorPageDataKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHTTPPropertyErrorPageDataKey")
@@ -1701,6 +2009,7 @@ func NSHTTPPropertyErrorPageDataKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// An `NSDictionary` containing proxy information to use in place of proxy identified in SystemConfiguration.framework. To avoid any proxy use, pass an empty dictionary.
 // Deprecated: since macOS 10.4.
 func NSHTTPPropertyHTTPProxy() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHTTPPropertyHTTPProxy")
@@ -1714,6 +2023,7 @@ func NSHTTPPropertyHTTPProxy() *NSString {
 	return NSStringFromID(id)
 }
 
+// The headers from an HTTP redirection response.
 // Deprecated: since macOS 10.4.
 func NSHTTPPropertyRedirectionHeadersKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHTTPPropertyRedirectionHeadersKey")
@@ -1727,6 +2037,7 @@ func NSHTTPPropertyRedirectionHeadersKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The HTTP version of the server's response.
 // Deprecated: since macOS 10.4.
 func NSHTTPPropertyServerHTTPVersionKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHTTPPropertyServerHTTPVersionKey")
@@ -1740,6 +2051,7 @@ func NSHTTPPropertyServerHTTPVersionKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The HTTP status code for the response.
 // Deprecated: since macOS 10.4.
 func NSHTTPPropertyStatusCodeKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHTTPPropertyStatusCodeKey")
@@ -1753,6 +2065,7 @@ func NSHTTPPropertyStatusCodeKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The HTTP status reason phrase for the response.
 // Deprecated: since macOS 10.4.
 func NSHTTPPropertyStatusReasonKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHTTPPropertyStatusReasonKey")
@@ -1766,6 +2079,7 @@ func NSHTTPPropertyStatusReasonKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// Identifier for the Hebrew calendar.
 // Deprecated: since macOS 10.10.
 func NSHebrewCalendar() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHebrewCalendar")
@@ -1779,6 +2093,7 @@ func NSHebrewCalendar() *NSString {
 	return NSStringFromID(id)
 }
 
+// A string to display in response to an attempt to show help related to an error.
 func NSHelpAnchorErrorKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHelpAnchorErrorKey")
 	if ptr == 0 {
@@ -1791,12 +2106,21 @@ func NSHelpAnchorErrorKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// Key for strings that identify the time of day.
 // Deprecated: since macOS 10.5.
-func NSHourNameDesignations() uintptr {
+func NSHourNameDesignations() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHourNameDesignations")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
+// Identifier for the ISO8601 calendar.
 // Deprecated: since macOS 10.10.
 func NSISO8601Calendar() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSISO8601Calendar")
@@ -1810,11 +2134,20 @@ func NSISO8601Calendar() *NSString {
 	return NSStringFromID(id)
 }
 
-func NSImageURLAttributeName() uintptr {
+// An attribute key whose value is an `NSURL` for an image.
+func NSImageURLAttributeName() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSImageURLAttributeName")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
+// Name of an exception that occurs when there is an inconsistency in an archive.
 func NSInconsistentArchiveException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSInconsistentArchiveException")
 	if ptr == 0 {
@@ -1827,6 +2160,7 @@ func NSInconsistentArchiveException() *NSString {
 	return NSStringFromID(id)
 }
 
+// Identifier for the Indian calendar.
 // Deprecated: since macOS 10.10.
 func NSIndianCalendar() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSIndianCalendar")
@@ -1840,21 +2174,46 @@ func NSIndianCalendar() *NSString {
 	return NSStringFromID(id)
 }
 
-func NSInflectionAgreementArgumentAttributeName() uintptr {
+// An attribute key whose value indicates inflection agreement with a specific argument.
+func NSInflectionAgreementArgumentAttributeName() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSInflectionAgreementArgumentAttributeName")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSInflectionAgreementConceptAttributeName() uintptr {
+// An attribute key whose value indicates inflection agreement with a specific concept.
+func NSInflectionAgreementConceptAttributeName() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSInflectionAgreementConceptAttributeName")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSInflectionAlternativeAttributeName() uintptr {
+// An attribute key whose value provides an alternative inflection for the attributed string.
+func NSInflectionAlternativeAttributeName() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSInflectionAlternativeAttributeName")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
+// A key for the inflection concepts in the formatting context dictionary.
 func NSInflectionConceptsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSInflectionConceptsKey")
 	if ptr == 0 {
@@ -1867,19 +2226,43 @@ func NSInflectionConceptsKey() *NSString {
 	return NSStringFromID(id)
 }
 
-func NSInflectionReferentConceptAttributeName() uintptr {
+// An attribute key whose value indicates the referent concept for inflection.
+func NSInflectionReferentConceptAttributeName() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSInflectionReferentConceptAttributeName")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSInflectionRuleAttributeName() uintptr {
+// An attribute key whose value is an `NSInflectionRule` object that specifies the inflection rule to apply to the attributed string.
+func NSInflectionRuleAttributeName() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSInflectionRuleAttributeName")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSInlinePresentationIntentAttributeName() uintptr {
+// An attribute key whose value is an `NSNumber` wrapping a value of type `NSInlinePresentationIntent`.
+func NSInlinePresentationIntentAttributeName() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSInlinePresentationIntentAttributeName")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: Not supported
@@ -1933,6 +2316,7 @@ func NSIntegerMapValueCallBacks() NSMapTableValueCallBacks {
 	return *(*NSMapTableValueCallBacks)(unsafe.Pointer(ptr))
 }
 
+// Name of an exception that occurs when an internal assertion fails and implies an unexpected condition within the called code.
 func NSInternalInconsistencyException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSInternalInconsistencyException")
 	if ptr == 0 {
@@ -1945,12 +2329,21 @@ func NSInternalInconsistencyException() *NSString {
 	return NSStringFromID(id)
 }
 
+// A string containing a three-letter abbreviation for currency, following the ISO 4217 standard.
 // Deprecated: since macOS 10.5.
-func NSInternationalCurrencyString() uintptr {
+func NSInternationalCurrencyString() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSInternationalCurrencyString")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
+// Name of an exception that occurs when there is a problem during archive creation.
 func NSInvalidArchiveOperationException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSInvalidArchiveOperationException")
 	if ptr == 0 {
@@ -1963,6 +2356,7 @@ func NSInvalidArchiveOperationException() *NSString {
 	return NSStringFromID(id)
 }
 
+// Name of an exception that occurs when you pass an invalid argument to a method, such as a `nil` pointer where a non-`nil` object is required.
 func NSInvalidArgumentException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSInvalidArgumentException")
 	if ptr == 0 {
@@ -1975,6 +2369,7 @@ func NSInvalidArgumentException() *NSString {
 	return NSStringFromID(id)
 }
 
+// Name of an exception that occurs when the receive port of a connection has become invalid.
 func NSInvalidReceivePortException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSInvalidReceivePortException")
 	if ptr == 0 {
@@ -1987,6 +2382,7 @@ func NSInvalidReceivePortException() *NSString {
 	return NSStringFromID(id)
 }
 
+// Name of an exception that occurs when the send port of a connection has become invalid.
 func NSInvalidSendPortException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSInvalidSendPortException")
 	if ptr == 0 {
@@ -1999,6 +2395,7 @@ func NSInvalidSendPortException() *NSString {
 	return NSStringFromID(id)
 }
 
+// Name of an exception that occurs when there is a problem during unarchive.
 func NSInvalidUnarchiveOperationException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSInvalidUnarchiveOperationException")
 	if ptr == 0 {
@@ -2011,6 +2408,7 @@ func NSInvalidUnarchiveOperationException() *NSString {
 	return NSStringFromID(id)
 }
 
+// Name of an exception raised when the result of an `NSInvocationOperation` is requested after the operation was cancelled.
 func NSInvocationOperationCancelledException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSInvocationOperationCancelledException")
 	if ptr == 0 {
@@ -2023,6 +2421,7 @@ func NSInvocationOperationCancelledException() *NSString {
 	return NSStringFromID(id)
 }
 
+// Name of an exception raised when the result of an `NSInvocationOperation` is requested for an invocation method with a `void` return type.
 func NSInvocationOperationVoidResultException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSInvocationOperationVoidResultException")
 	if ptr == 0 {
@@ -2035,6 +2434,7 @@ func NSInvocationOperationVoidResultException() *NSString {
 	return NSStringFromID(id)
 }
 
+// The name of the transformer that returns `true` if the value is `nil`.
 func NSIsNilTransformerName() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSIsNilTransformerName")
 	if ptr == 0 {
@@ -2047,6 +2447,7 @@ func NSIsNilTransformerName() *NSString {
 	return NSStringFromID(id)
 }
 
+// The name of the transformer that returns `true` if the value is non-`nil`.
 func NSIsNotNilTransformerName() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSIsNotNilTransformerName")
 	if ptr == 0 {
@@ -2059,6 +2460,7 @@ func NSIsNotNilTransformerName() *NSString {
 	return NSStringFromID(id)
 }
 
+// Identifier for the Islamic calendar.
 // Deprecated: since macOS 10.10.
 func NSIslamicCalendar() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSIslamicCalendar")
@@ -2072,6 +2474,7 @@ func NSIslamicCalendar() *NSString {
 	return NSStringFromID(id)
 }
 
+// Identifier for the Islamic civil calendar.
 // Deprecated: since macOS 10.10.
 func NSIslamicCivilCalendar() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSIslamicCivilCalendar")
@@ -2085,6 +2488,7 @@ func NSIslamicCivilCalendar() *NSString {
 	return NSStringFromID(id)
 }
 
+// The error domain associated with the item provider.
 func NSItemProviderErrorDomain() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSItemProviderErrorDomain")
 	if ptr == 0 {
@@ -2097,6 +2501,7 @@ func NSItemProviderErrorDomain() *NSString {
 	return NSStringFromID(id)
 }
 
+// A key provided to the options dictionary to indicate a preferred image size. The value is an `NSValue` of `CGSize` or `NSSize`, specifying image size in pixels.
 func NSItemProviderPreferredImageSizeKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSItemProviderPreferredImageSizeKey")
 	if ptr == 0 {
@@ -2109,6 +2514,7 @@ func NSItemProviderPreferredImageSizeKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// Identifier for the Japanese calendar.
 // Deprecated: since macOS 10.10.
 func NSJapaneseCalendar() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSJapaneseCalendar")
@@ -2122,6 +2528,7 @@ func NSJapaneseCalendar() *NSString {
 	return NSStringFromID(id)
 }
 
+// A key for an “NSIndexSet“ specifying the indexes of objects being inserted, removed, or replaced.
 func NSKeyValueChangeIndexesKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSKeyValueChangeIndexesKey")
 	if ptr == 0 {
@@ -2134,6 +2541,7 @@ func NSKeyValueChangeIndexesKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// A key for the type of change, as an “NSNumber“ wrapping an “NSKeyValueChange“.
 func NSKeyValueChangeKindKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSKeyValueChangeKindKey")
 	if ptr == 0 {
@@ -2146,6 +2554,7 @@ func NSKeyValueChangeKindKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// A key for the new value of the property after the change.
 func NSKeyValueChangeNewKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSKeyValueChangeNewKey")
 	if ptr == 0 {
@@ -2158,6 +2567,7 @@ func NSKeyValueChangeNewKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// A key indicating whether this notification is sent prior to the change.
 func NSKeyValueChangeNotificationIsPriorKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSKeyValueChangeNotificationIsPriorKey")
 	if ptr == 0 {
@@ -2170,6 +2580,7 @@ func NSKeyValueChangeNotificationIsPriorKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// A key for the old value of the property before the change.
 func NSKeyValueChangeOldKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSKeyValueChangeOldKey")
 	if ptr == 0 {
@@ -2182,6 +2593,7 @@ func NSKeyValueChangeOldKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The key used for the root object in the hierarchy of encoded objects. Archives created using “NSKeyedArchiver/archivedData(withRootObject:requiringSecureCoding:)“ use this key for the root object. The “NSKeyedUnarchiver“ class method “NSKeyedUnarchiver/unarchivedObject(ofClass:from:)“ will look for this root key as well. You can also use it as the key for the root object in your own archives.
 func NSKeyedArchiveRootObjectKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSKeyedArchiveRootObjectKey")
 	if ptr == 0 {
@@ -2194,6 +2606,7 @@ func NSKeyedArchiveRootObjectKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The name of the transformer that uses “NSKeyedUnarchiver“ to unarchive data.
 // Deprecated: since macOS 10.14.
 func NSKeyedUnarchiveFromDataTransformerName() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSKeyedUnarchiveFromDataTransformerName")
@@ -2207,17 +2620,34 @@ func NSKeyedUnarchiveFromDataTransformerName() *NSString {
 	return NSStringFromID(id)
 }
 
-func NSLanguageIdentifierAttributeName() uintptr {
+// An attribute key whose value is an `NSString` containing a BCP-47 language identifier.
+func NSLanguageIdentifierAttributeName() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLanguageIdentifierAttributeName")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
+// Key for an array of strings that denote a time in the future.
 // Deprecated: since macOS 10.5.
-func NSLaterTimeDesignations() uintptr {
+func NSLaterTimeDesignations() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLaterTimeDesignations")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
+// The token is an adjective.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagAdjective() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagAdjective")
@@ -2231,6 +2661,7 @@ func NSLinguisticTagAdjective() *NSString {
 	return NSStringFromID(id)
 }
 
+// The token is an adverb.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagAdverb() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagAdverb")
@@ -2244,6 +2675,7 @@ func NSLinguisticTagAdverb() *NSString {
 	return NSStringFromID(id)
 }
 
+// The token is a classifier.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagClassifier() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagClassifier")
@@ -2257,6 +2689,7 @@ func NSLinguisticTagClassifier() *NSString {
 	return NSStringFromID(id)
 }
 
+// The token is a close parenthesis.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagCloseParenthesis() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagCloseParenthesis")
@@ -2270,6 +2703,7 @@ func NSLinguisticTagCloseParenthesis() *NSString {
 	return NSStringFromID(id)
 }
 
+// The token is a close quote.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagCloseQuote() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagCloseQuote")
@@ -2283,6 +2717,7 @@ func NSLinguisticTagCloseQuote() *NSString {
 	return NSStringFromID(id)
 }
 
+// The token is a conjunction.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagConjunction() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagConjunction")
@@ -2296,6 +2731,7 @@ func NSLinguisticTagConjunction() *NSString {
 	return NSStringFromID(id)
 }
 
+// The token is a dash.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagDash() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagDash")
@@ -2309,6 +2745,7 @@ func NSLinguisticTagDash() *NSString {
 	return NSStringFromID(id)
 }
 
+// The token is a determiner.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagDeterminer() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagDeterminer")
@@ -2322,6 +2759,7 @@ func NSLinguisticTagDeterminer() *NSString {
 	return NSStringFromID(id)
 }
 
+// The token is an idiom.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagIdiom() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagIdiom")
@@ -2335,6 +2773,7 @@ func NSLinguisticTagIdiom() *NSString {
 	return NSStringFromID(id)
 }
 
+// The token is an interjection.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagInterjection() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagInterjection")
@@ -2348,6 +2787,7 @@ func NSLinguisticTagInterjection() *NSString {
 	return NSStringFromID(id)
 }
 
+// The token is a noun.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagNoun() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagNoun")
@@ -2361,6 +2801,7 @@ func NSLinguisticTagNoun() *NSString {
 	return NSStringFromID(id)
 }
 
+// The token is a number.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagNumber() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagNumber")
@@ -2374,6 +2815,7 @@ func NSLinguisticTagNumber() *NSString {
 	return NSStringFromID(id)
 }
 
+// The token is an open parenthesis.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagOpenParenthesis() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagOpenParenthesis")
@@ -2387,6 +2829,7 @@ func NSLinguisticTagOpenParenthesis() *NSString {
 	return NSStringFromID(id)
 }
 
+// The token is an open quote.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagOpenQuote() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagOpenQuote")
@@ -2400,6 +2843,7 @@ func NSLinguisticTagOpenQuote() *NSString {
 	return NSStringFromID(id)
 }
 
+// The token is an organization name.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagOrganizationName() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagOrganizationName")
@@ -2413,6 +2857,7 @@ func NSLinguisticTagOrganizationName() *NSString {
 	return NSStringFromID(id)
 }
 
+// Other tokens, including non-linguistic items such as symbols.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagOther() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagOther")
@@ -2426,6 +2871,7 @@ func NSLinguisticTagOther() *NSString {
 	return NSStringFromID(id)
 }
 
+// The token is punctuation that doesn't fall into any other category.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagOtherPunctuation() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagOtherPunctuation")
@@ -2439,6 +2885,7 @@ func NSLinguisticTagOtherPunctuation() *NSString {
 	return NSStringFromID(id)
 }
 
+// The token is whitespace that doesn't fall into any other category.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagOtherWhitespace() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagOtherWhitespace")
@@ -2452,6 +2899,7 @@ func NSLinguisticTagOtherWhitespace() *NSString {
 	return NSStringFromID(id)
 }
 
+// The token is a word that doesn't fall into any other category.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagOtherWord() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagOtherWord")
@@ -2465,6 +2913,7 @@ func NSLinguisticTagOtherWord() *NSString {
 	return NSStringFromID(id)
 }
 
+// The token is a paragraph break.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagParagraphBreak() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagParagraphBreak")
@@ -2478,6 +2927,7 @@ func NSLinguisticTagParagraphBreak() *NSString {
 	return NSStringFromID(id)
 }
 
+// The token is a particle.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagParticle() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagParticle")
@@ -2491,6 +2941,7 @@ func NSLinguisticTagParticle() *NSString {
 	return NSStringFromID(id)
 }
 
+// The token is a personal name.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagPersonalName() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagPersonalName")
@@ -2504,6 +2955,7 @@ func NSLinguisticTagPersonalName() *NSString {
 	return NSStringFromID(id)
 }
 
+// The token is a place name.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagPlaceName() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagPlaceName")
@@ -2517,6 +2969,7 @@ func NSLinguisticTagPlaceName() *NSString {
 	return NSStringFromID(id)
 }
 
+// The token is a preposition.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagPreposition() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagPreposition")
@@ -2530,6 +2983,7 @@ func NSLinguisticTagPreposition() *NSString {
 	return NSStringFromID(id)
 }
 
+// The token is a pronoun.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagPronoun() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagPronoun")
@@ -2543,6 +2997,7 @@ func NSLinguisticTagPronoun() *NSString {
 	return NSStringFromID(id)
 }
 
+// The token indicates punctuation.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagPunctuation() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagPunctuation")
@@ -2556,6 +3011,7 @@ func NSLinguisticTagPunctuation() *NSString {
 	return NSStringFromID(id)
 }
 
+// Tags tokens according to their most likely language (if known).
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagSchemeLanguage() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagSchemeLanguage")
@@ -2569,6 +3025,7 @@ func NSLinguisticTagSchemeLanguage() *NSString {
 	return NSStringFromID(id)
 }
 
+// Supplies a stem form for each word token (if known).
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagSchemeLemma() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagSchemeLemma")
@@ -2582,6 +3039,7 @@ func NSLinguisticTagSchemeLemma() *NSString {
 	return NSStringFromID(id)
 }
 
+// Classifies tokens according to class: part of speech for words, type of punctuation or whitespace, etc.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagSchemeLexicalClass() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagSchemeLexicalClass")
@@ -2595,6 +3053,7 @@ func NSLinguisticTagSchemeLexicalClass() *NSString {
 	return NSStringFromID(id)
 }
 
+// Classifies tokens as to whether they are part of named entities of various types or not.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagSchemeNameType() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagSchemeNameType")
@@ -2608,6 +3067,7 @@ func NSLinguisticTagSchemeNameType() *NSString {
 	return NSStringFromID(id)
 }
 
+// Follows `NSLinguisticTagSchemeNameType` for names, `NSLinguisticTagSchemeLexicalClass` for all other tokens.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagSchemeNameTypeOrLexicalClass() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagSchemeNameTypeOrLexicalClass")
@@ -2621,6 +3081,7 @@ func NSLinguisticTagSchemeNameTypeOrLexicalClass() *NSString {
 	return NSStringFromID(id)
 }
 
+// Tags tokens according to their script.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagSchemeScript() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagSchemeScript")
@@ -2634,6 +3095,7 @@ func NSLinguisticTagSchemeScript() *NSString {
 	return NSStringFromID(id)
 }
 
+// Classifies tokens according to their broad type:  word, punctuation, or whitespace. For possible values, see Token Types. To classify tokens by a more specific type, for example, distinguishing words between nouns and verbs, use the `NSLinguisticTagSchemeLexicalClass` scheme.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagSchemeTokenType() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagSchemeTokenType")
@@ -2647,6 +3109,7 @@ func NSLinguisticTagSchemeTokenType() *NSString {
 	return NSStringFromID(id)
 }
 
+// The token is a sentence terminator.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagSentenceTerminator() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagSentenceTerminator")
@@ -2660,6 +3123,7 @@ func NSLinguisticTagSentenceTerminator() *NSString {
 	return NSStringFromID(id)
 }
 
+// The token is a verb.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagVerb() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagVerb")
@@ -2673,6 +3137,7 @@ func NSLinguisticTagVerb() *NSString {
 	return NSStringFromID(id)
 }
 
+// Tokens made up of whitespace of all sorts.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagWhitespace() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagWhitespace")
@@ -2686,6 +3151,7 @@ func NSLinguisticTagWhitespace() *NSString {
 	return NSStringFromID(id)
 }
 
+// Tokens considered to be words or word-like linguistic items.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagWord() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagWord")
@@ -2699,6 +3165,7 @@ func NSLinguisticTagWord() *NSString {
 	return NSStringFromID(id)
 }
 
+// The token is a word joiner.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagWordJoiner() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagWordJoiner")
@@ -2712,11 +3179,20 @@ func NSLinguisticTagWordJoiner() *NSString {
 	return NSStringFromID(id)
 }
 
-func NSListItemDelimiterAttributeName() uintptr {
+// An attribute key whose value is an `NSString` representing the delimiter used when declaring the current list item.
+func NSListItemDelimiterAttributeName() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSListItemDelimiterAttributeName")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
+// Generates a log of the class names loaded by the runtime.
 func NSLoadedClasses() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLoadedClasses")
 	if ptr == 0 {
@@ -2729,6 +3205,7 @@ func NSLoadedClasses() *NSString {
 	return NSStringFromID(id)
 }
 
+// Distributes notifications to all tasks on the sender's computer.
 func NSLocalNotificationCenterType() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLocalNotificationCenterType")
 	if ptr == 0 {
@@ -2741,6 +3218,7 @@ func NSLocalNotificationCenterType() *NSString {
 	return NSStringFromID(id)
 }
 
+// The alternate begin quotation delimiter key for the locale.
 func NSLocaleAlternateQuotationBeginDelimiterKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLocaleAlternateQuotationBeginDelimiterKey")
 	if ptr == 0 {
@@ -2753,6 +3231,7 @@ func NSLocaleAlternateQuotationBeginDelimiterKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The alternate end quotation delimiter key for the locale.
 func NSLocaleAlternateQuotationEndDelimiterKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLocaleAlternateQuotationEndDelimiterKey")
 	if ptr == 0 {
@@ -2765,6 +3244,7 @@ func NSLocaleAlternateQuotationEndDelimiterKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The locale calendar.
 func NSLocaleCalendar() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLocaleCalendar")
 	if ptr == 0 {
@@ -2777,6 +3257,7 @@ func NSLocaleCalendar() *NSString {
 	return NSStringFromID(id)
 }
 
+// The locale collation identifier.
 func NSLocaleCollationIdentifier() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLocaleCollationIdentifier")
 	if ptr == 0 {
@@ -2789,6 +3270,7 @@ func NSLocaleCollationIdentifier() *NSString {
 	return NSStringFromID(id)
 }
 
+// The collator identifier for the locale.
 func NSLocaleCollatorIdentifier() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLocaleCollatorIdentifier")
 	if ptr == 0 {
@@ -2801,6 +3283,7 @@ func NSLocaleCollatorIdentifier() *NSString {
 	return NSStringFromID(id)
 }
 
+// The locale country code.
 func NSLocaleCountryCode() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLocaleCountryCode")
 	if ptr == 0 {
@@ -2813,6 +3296,7 @@ func NSLocaleCountryCode() *NSString {
 	return NSStringFromID(id)
 }
 
+// The currency code for the locale.
 func NSLocaleCurrencyCode() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLocaleCurrencyCode")
 	if ptr == 0 {
@@ -2825,6 +3309,7 @@ func NSLocaleCurrencyCode() *NSString {
 	return NSStringFromID(id)
 }
 
+// The currency symbol for the locale.
 func NSLocaleCurrencySymbol() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLocaleCurrencySymbol")
 	if ptr == 0 {
@@ -2837,6 +3322,7 @@ func NSLocaleCurrencySymbol() *NSString {
 	return NSStringFromID(id)
 }
 
+// The decimal separator for the locale.
 func NSLocaleDecimalSeparator() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLocaleDecimalSeparator")
 	if ptr == 0 {
@@ -2849,6 +3335,7 @@ func NSLocaleDecimalSeparator() *NSString {
 	return NSStringFromID(id)
 }
 
+// The locale exemplar character set.
 func NSLocaleExemplarCharacterSet() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLocaleExemplarCharacterSet")
 	if ptr == 0 {
@@ -2861,6 +3348,7 @@ func NSLocaleExemplarCharacterSet() *NSString {
 	return NSStringFromID(id)
 }
 
+// The grouping separator for the locale.
 func NSLocaleGroupingSeparator() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLocaleGroupingSeparator")
 	if ptr == 0 {
@@ -2873,6 +3361,7 @@ func NSLocaleGroupingSeparator() *NSString {
 	return NSStringFromID(id)
 }
 
+// The locale identifier.
 func NSLocaleIdentifier() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLocaleIdentifier")
 	if ptr == 0 {
@@ -2885,6 +3374,7 @@ func NSLocaleIdentifier() *NSString {
 	return NSStringFromID(id)
 }
 
+// The locale language code.
 func NSLocaleLanguageCode() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLocaleLanguageCode")
 	if ptr == 0 {
@@ -2897,6 +3387,7 @@ func NSLocaleLanguageCode() *NSString {
 	return NSStringFromID(id)
 }
 
+// The measurement system for the locale.
 func NSLocaleMeasurementSystem() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLocaleMeasurementSystem")
 	if ptr == 0 {
@@ -2909,6 +3400,7 @@ func NSLocaleMeasurementSystem() *NSString {
 	return NSStringFromID(id)
 }
 
+// The begin quotation delimiter key for the locale.
 func NSLocaleQuotationBeginDelimiterKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLocaleQuotationBeginDelimiterKey")
 	if ptr == 0 {
@@ -2921,6 +3413,7 @@ func NSLocaleQuotationBeginDelimiterKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The end quotation delimiter key for the locale.
 func NSLocaleQuotationEndDelimiterKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLocaleQuotationEndDelimiterKey")
 	if ptr == 0 {
@@ -2933,6 +3426,7 @@ func NSLocaleQuotationEndDelimiterKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The locale script code.
 func NSLocaleScriptCode() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLocaleScriptCode")
 	if ptr == 0 {
@@ -2945,6 +3439,7 @@ func NSLocaleScriptCode() *NSString {
 	return NSStringFromID(id)
 }
 
+// A Boolean value that indicates whether the locale uses the metric system.
 func NSLocaleUsesMetricSystem() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLocaleUsesMetricSystem")
 	if ptr == 0 {
@@ -2957,6 +3452,7 @@ func NSLocaleUsesMetricSystem() *NSString {
 	return NSStringFromID(id)
 }
 
+// The locale variant code.
 func NSLocaleVariantCode() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLocaleVariantCode")
 	if ptr == 0 {
@@ -2969,6 +3465,7 @@ func NSLocaleVariantCode() *NSString {
 	return NSStringFromID(id)
 }
 
+// A human-readable description of the error.
 func NSLocalizedDescriptionKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLocalizedDescriptionKey")
 	if ptr == 0 {
@@ -2993,6 +3490,7 @@ func NSLocalizedFailureErrorKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// A human-readable reason for the failure.
 func NSLocalizedFailureReasonErrorKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLocalizedFailureReasonErrorKey")
 	if ptr == 0 {
@@ -3005,11 +3503,20 @@ func NSLocalizedFailureReasonErrorKey() *NSString {
 	return NSStringFromID(id)
 }
 
-func NSLocalizedNumberFormatAttributeName() uintptr {
+// An attribute key whose value specifies a localized number format.
+func NSLocalizedNumberFormatAttributeName() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLocalizedNumberFormatAttributeName")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
+// An array of localized titles for buttons appropriate for displaying in an alert panel.
 func NSLocalizedRecoveryOptionsErrorKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLocalizedRecoveryOptionsErrorKey")
 	if ptr == 0 {
@@ -3022,6 +3529,7 @@ func NSLocalizedRecoveryOptionsErrorKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// A human-readable suggestion for recovering from the error.
 func NSLocalizedRecoverySuggestionErrorKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLocalizedRecoverySuggestionErrorKey")
 	if ptr == 0 {
@@ -3034,6 +3542,7 @@ func NSLocalizedRecoverySuggestionErrorKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The error domain for Mach errors.
 func NSMachErrorDomain() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMachErrorDomain")
 	if ptr == 0 {
@@ -3046,6 +3555,7 @@ func NSMachErrorDomain() *NSString {
 	return NSStringFromID(id)
 }
 
+// Name of an exception that occurs when the system fails to allocate required memory.
 func NSMallocException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMallocException")
 	if ptr == 0 {
@@ -3058,11 +3568,20 @@ func NSMallocException() *NSString {
 	return NSStringFromID(id)
 }
 
-func NSMarkdownSourcePositionAttributeName() uintptr {
+// An attribute key whose value is an `NSAttributedStringMarkdownSourcePosition` indicating the position in the original Markdown source.
+func NSMarkdownSourcePositionAttributeName() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMarkdownSourcePositionAttributeName")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
+// An operator that returns the maximum value of a collection's values for the specified key path.
 func NSMaximumKeyValueOperator() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMaximumKeyValueOperator")
 	if ptr == 0 {
@@ -3075,161 +3594,379 @@ func NSMaximumKeyValueOperator() *NSString {
 	return NSStringFromID(id)
 }
 
-func NSMetadataItemAcquisitionMakeKey() uintptr {
+func NSMetadataItemAcquisitionMakeKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemAcquisitionMakeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemAcquisitionModelKey() uintptr {
+func NSMetadataItemAcquisitionModelKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemAcquisitionModelKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemAlbumKey() uintptr {
+func NSMetadataItemAlbumKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemAlbumKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemAltitudeKey() uintptr {
+func NSMetadataItemAltitudeKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemAltitudeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemApertureKey() uintptr {
+func NSMetadataItemApertureKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemApertureKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemAppleLoopDescriptorsKey() uintptr {
+func NSMetadataItemAppleLoopDescriptorsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemAppleLoopDescriptorsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemAppleLoopsKeyFilterTypeKey() uintptr {
+func NSMetadataItemAppleLoopsKeyFilterTypeKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemAppleLoopsKeyFilterTypeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemAppleLoopsLoopModeKey() uintptr {
+func NSMetadataItemAppleLoopsLoopModeKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemAppleLoopsLoopModeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemAppleLoopsRootKeyKey() uintptr {
+func NSMetadataItemAppleLoopsRootKeyKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemAppleLoopsRootKeyKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemApplicationCategoriesKey() uintptr {
+func NSMetadataItemApplicationCategoriesKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemApplicationCategoriesKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemAttributeChangeDateKey() uintptr {
+func NSMetadataItemAttributeChangeDateKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemAttributeChangeDateKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemAudiencesKey() uintptr {
+func NSMetadataItemAudiencesKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemAudiencesKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemAudioBitRateKey() uintptr {
+func NSMetadataItemAudioBitRateKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemAudioBitRateKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemAudioChannelCountKey() uintptr {
+func NSMetadataItemAudioChannelCountKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemAudioChannelCountKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemAudioEncodingApplicationKey() uintptr {
+func NSMetadataItemAudioEncodingApplicationKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemAudioEncodingApplicationKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemAudioSampleRateKey() uintptr {
+func NSMetadataItemAudioSampleRateKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemAudioSampleRateKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemAudioTrackNumberKey() uintptr {
+func NSMetadataItemAudioTrackNumberKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemAudioTrackNumberKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemAuthorAddressesKey() uintptr {
+func NSMetadataItemAuthorAddressesKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemAuthorAddressesKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemAuthorEmailAddressesKey() uintptr {
+func NSMetadataItemAuthorEmailAddressesKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemAuthorEmailAddressesKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemAuthorsKey() uintptr {
+func NSMetadataItemAuthorsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemAuthorsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemBitsPerSampleKey() uintptr {
+func NSMetadataItemBitsPerSampleKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemBitsPerSampleKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemCFBundleIdentifierKey() uintptr {
+func NSMetadataItemCFBundleIdentifierKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemCFBundleIdentifierKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemCameraOwnerKey() uintptr {
+func NSMetadataItemCameraOwnerKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemCameraOwnerKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemCityKey() uintptr {
+func NSMetadataItemCityKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemCityKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemCodecsKey() uintptr {
+func NSMetadataItemCodecsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemCodecsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemColorSpaceKey() uintptr {
+func NSMetadataItemColorSpaceKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemColorSpaceKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemCommentKey() uintptr {
+func NSMetadataItemCommentKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemCommentKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemComposerKey() uintptr {
+func NSMetadataItemComposerKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemComposerKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemContactKeywordsKey() uintptr {
+func NSMetadataItemContactKeywordsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemContactKeywordsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemContentCreationDateKey() uintptr {
+func NSMetadataItemContentCreationDateKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemContentCreationDateKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemContentModificationDateKey() uintptr {
+func NSMetadataItemContentModificationDateKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemContentModificationDateKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
+// The content type (UTI) of the metadata item.
 func NSMetadataItemContentTypeKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemContentTypeKey")
 	if ptr == 0 {
@@ -3242,6 +3979,7 @@ func NSMetadataItemContentTypeKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The content type tree of the metadata item.
 func NSMetadataItemContentTypeTreeKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemContentTypeTreeKey")
 	if ptr == 0 {
@@ -3254,51 +3992,115 @@ func NSMetadataItemContentTypeTreeKey() *NSString {
 	return NSStringFromID(id)
 }
 
-func NSMetadataItemContributorsKey() uintptr {
+func NSMetadataItemContributorsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemContributorsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemCopyrightKey() uintptr {
+func NSMetadataItemCopyrightKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemCopyrightKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemCountryKey() uintptr {
+func NSMetadataItemCountryKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemCountryKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemCoverageKey() uintptr {
+func NSMetadataItemCoverageKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemCoverageKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemCreatorKey() uintptr {
+func NSMetadataItemCreatorKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemCreatorKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemDateAddedKey() uintptr {
+func NSMetadataItemDateAddedKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemDateAddedKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemDeliveryTypeKey() uintptr {
+func NSMetadataItemDeliveryTypeKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemDeliveryTypeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemDescriptionKey() uintptr {
+func NSMetadataItemDescriptionKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemDescriptionKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemDirectorKey() uintptr {
+func NSMetadataItemDirectorKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemDirectorKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
+// The display name of the metadata item.
 func NSMetadataItemDisplayNameKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemDisplayNameKey")
 	if ptr == 0 {
@@ -3311,81 +4113,187 @@ func NSMetadataItemDisplayNameKey() *NSString {
 	return NSStringFromID(id)
 }
 
-func NSMetadataItemDownloadedDateKey() uintptr {
+func NSMetadataItemDownloadedDateKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemDownloadedDateKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemDueDateKey() uintptr {
+func NSMetadataItemDueDateKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemDueDateKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemDurationSecondsKey() uintptr {
+func NSMetadataItemDurationSecondsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemDurationSecondsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemEXIFGPSVersionKey() uintptr {
+func NSMetadataItemEXIFGPSVersionKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemEXIFGPSVersionKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemEXIFVersionKey() uintptr {
+func NSMetadataItemEXIFVersionKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemEXIFVersionKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemEditorsKey() uintptr {
+func NSMetadataItemEditorsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemEditorsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemEmailAddressesKey() uintptr {
+func NSMetadataItemEmailAddressesKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemEmailAddressesKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemEncodingApplicationsKey() uintptr {
+func NSMetadataItemEncodingApplicationsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemEncodingApplicationsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemExecutableArchitecturesKey() uintptr {
+func NSMetadataItemExecutableArchitecturesKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemExecutableArchitecturesKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemExecutablePlatformKey() uintptr {
+func NSMetadataItemExecutablePlatformKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemExecutablePlatformKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemExposureModeKey() uintptr {
+func NSMetadataItemExposureModeKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemExposureModeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemExposureProgramKey() uintptr {
+func NSMetadataItemExposureProgramKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemExposureProgramKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemExposureTimeSecondsKey() uintptr {
+func NSMetadataItemExposureTimeSecondsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemExposureTimeSecondsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemExposureTimeStringKey() uintptr {
+func NSMetadataItemExposureTimeStringKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemExposureTimeStringKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemFNumberKey() uintptr {
+func NSMetadataItemFNumberKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemFNumberKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
+// The date the metadata item's contents last changed.
 func NSMetadataItemFSContentChangeDateKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemFSContentChangeDateKey")
 	if ptr == 0 {
@@ -3398,6 +4306,7 @@ func NSMetadataItemFSContentChangeDateKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The date the metadata item was created.
 func NSMetadataItemFSCreationDateKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemFSCreationDateKey")
 	if ptr == 0 {
@@ -3410,6 +4319,7 @@ func NSMetadataItemFSCreationDateKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The file system name of the metadata item.
 func NSMetadataItemFSNameKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemFSNameKey")
 	if ptr == 0 {
@@ -3422,6 +4332,7 @@ func NSMetadataItemFSNameKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The file system size, in bytes, of the metadata item.
 func NSMetadataItemFSSizeKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemFSSizeKey")
 	if ptr == 0 {
@@ -3434,156 +4345,367 @@ func NSMetadataItemFSSizeKey() *NSString {
 	return NSStringFromID(id)
 }
 
-func NSMetadataItemFinderCommentKey() uintptr {
+func NSMetadataItemFinderCommentKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemFinderCommentKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemFlashOnOffKey() uintptr {
+func NSMetadataItemFlashOnOffKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemFlashOnOffKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemFocalLength35mmKey() uintptr {
+func NSMetadataItemFocalLength35mmKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemFocalLength35mmKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemFocalLengthKey() uintptr {
+func NSMetadataItemFocalLengthKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemFocalLengthKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemFontsKey() uintptr {
+func NSMetadataItemFontsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemFontsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemGPSAreaInformationKey() uintptr {
+func NSMetadataItemGPSAreaInformationKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemGPSAreaInformationKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemGPSDOPKey() uintptr {
+func NSMetadataItemGPSDOPKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemGPSDOPKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemGPSDateStampKey() uintptr {
+func NSMetadataItemGPSDateStampKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemGPSDateStampKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemGPSDestBearingKey() uintptr {
+func NSMetadataItemGPSDestBearingKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemGPSDestBearingKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemGPSDestDistanceKey() uintptr {
+func NSMetadataItemGPSDestDistanceKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemGPSDestDistanceKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemGPSDestLatitudeKey() uintptr {
+func NSMetadataItemGPSDestLatitudeKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemGPSDestLatitudeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemGPSDestLongitudeKey() uintptr {
+func NSMetadataItemGPSDestLongitudeKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemGPSDestLongitudeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemGPSDifferentalKey() uintptr {
+func NSMetadataItemGPSDifferentalKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemGPSDifferentalKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemGPSMapDatumKey() uintptr {
+func NSMetadataItemGPSMapDatumKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemGPSMapDatumKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemGPSMeasureModeKey() uintptr {
+func NSMetadataItemGPSMeasureModeKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemGPSMeasureModeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemGPSProcessingMethodKey() uintptr {
+func NSMetadataItemGPSProcessingMethodKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemGPSProcessingMethodKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemGPSStatusKey() uintptr {
+func NSMetadataItemGPSStatusKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemGPSStatusKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemGPSTrackKey() uintptr {
+func NSMetadataItemGPSTrackKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemGPSTrackKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemGenreKey() uintptr {
+func NSMetadataItemGenreKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemGenreKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemHasAlphaChannelKey() uintptr {
+func NSMetadataItemHasAlphaChannelKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemHasAlphaChannelKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemHeadlineKey() uintptr {
+func NSMetadataItemHeadlineKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemHeadlineKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemISOSpeedKey() uintptr {
+func NSMetadataItemISOSpeedKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemISOSpeedKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemIdentifierKey() uintptr {
+func NSMetadataItemIdentifierKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemIdentifierKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemImageDirectionKey() uintptr {
+func NSMetadataItemImageDirectionKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemImageDirectionKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemInformationKey() uintptr {
+func NSMetadataItemInformationKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemInformationKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemInstantMessageAddressesKey() uintptr {
+func NSMetadataItemInstantMessageAddressesKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemInstantMessageAddressesKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemInstructionsKey() uintptr {
+func NSMetadataItemInstructionsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemInstructionsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemIsApplicationManagedKey() uintptr {
+func NSMetadataItemIsApplicationManagedKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemIsApplicationManagedKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemIsGeneralMIDISequenceKey() uintptr {
+func NSMetadataItemIsGeneralMIDISequenceKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemIsGeneralMIDISequenceKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemIsLikelyJunkKey() uintptr {
+func NSMetadataItemIsLikelyJunkKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemIsLikelyJunkKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
+// A Boolean value indicating whether the metadata item is ubiquitous.
 func NSMetadataItemIsUbiquitousKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemIsUbiquitousKey")
 	if ptr == 0 {
@@ -3596,131 +4718,307 @@ func NSMetadataItemIsUbiquitousKey() *NSString {
 	return NSStringFromID(id)
 }
 
-func NSMetadataItemKeySignatureKey() uintptr {
+func NSMetadataItemKeySignatureKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemKeySignatureKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemKeywordsKey() uintptr {
+func NSMetadataItemKeywordsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemKeywordsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemKindKey() uintptr {
+func NSMetadataItemKindKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemKindKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemLanguagesKey() uintptr {
+func NSMetadataItemLanguagesKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemLanguagesKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemLastUsedDateKey() uintptr {
+func NSMetadataItemLastUsedDateKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemLastUsedDateKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemLatitudeKey() uintptr {
+func NSMetadataItemLatitudeKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemLatitudeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemLayerNamesKey() uintptr {
+func NSMetadataItemLayerNamesKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemLayerNamesKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemLensModelKey() uintptr {
+func NSMetadataItemLensModelKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemLensModelKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemLongitudeKey() uintptr {
+func NSMetadataItemLongitudeKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemLongitudeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemLyricistKey() uintptr {
+func NSMetadataItemLyricistKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemLyricistKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemMaxApertureKey() uintptr {
+func NSMetadataItemMaxApertureKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemMaxApertureKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemMediaTypesKey() uintptr {
+func NSMetadataItemMediaTypesKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemMediaTypesKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemMeteringModeKey() uintptr {
+func NSMetadataItemMeteringModeKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemMeteringModeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemMusicalGenreKey() uintptr {
+func NSMetadataItemMusicalGenreKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemMusicalGenreKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemMusicalInstrumentCategoryKey() uintptr {
+func NSMetadataItemMusicalInstrumentCategoryKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemMusicalInstrumentCategoryKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemMusicalInstrumentNameKey() uintptr {
+func NSMetadataItemMusicalInstrumentNameKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemMusicalInstrumentNameKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemNamedLocationKey() uintptr {
+func NSMetadataItemNamedLocationKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemNamedLocationKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemNumberOfPagesKey() uintptr {
+func NSMetadataItemNumberOfPagesKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemNumberOfPagesKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemOrganizationsKey() uintptr {
+func NSMetadataItemOrganizationsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemOrganizationsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemOrientationKey() uintptr {
+func NSMetadataItemOrientationKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemOrientationKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemOriginalFormatKey() uintptr {
+func NSMetadataItemOriginalFormatKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemOriginalFormatKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemOriginalSourceKey() uintptr {
+func NSMetadataItemOriginalSourceKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemOriginalSourceKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemPageHeightKey() uintptr {
+func NSMetadataItemPageHeightKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemPageHeightKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemPageWidthKey() uintptr {
+func NSMetadataItemPageWidthKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemPageWidthKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemParticipantsKey() uintptr {
+func NSMetadataItemParticipantsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemParticipantsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
+// The file system path of the metadata item.
 func NSMetadataItemPathKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemPathKey")
 	if ptr == 0 {
@@ -3733,161 +5031,379 @@ func NSMetadataItemPathKey() *NSString {
 	return NSStringFromID(id)
 }
 
-func NSMetadataItemPerformersKey() uintptr {
+func NSMetadataItemPerformersKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemPerformersKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemPhoneNumbersKey() uintptr {
+func NSMetadataItemPhoneNumbersKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemPhoneNumbersKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemPixelCountKey() uintptr {
+func NSMetadataItemPixelCountKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemPixelCountKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemPixelHeightKey() uintptr {
+func NSMetadataItemPixelHeightKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemPixelHeightKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemPixelWidthKey() uintptr {
+func NSMetadataItemPixelWidthKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemPixelWidthKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemProducerKey() uintptr {
+func NSMetadataItemProducerKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemProducerKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemProfileNameKey() uintptr {
+func NSMetadataItemProfileNameKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemProfileNameKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemProjectsKey() uintptr {
+func NSMetadataItemProjectsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemProjectsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemPublishersKey() uintptr {
+func NSMetadataItemPublishersKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemPublishersKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemRecipientAddressesKey() uintptr {
+func NSMetadataItemRecipientAddressesKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemRecipientAddressesKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemRecipientEmailAddressesKey() uintptr {
+func NSMetadataItemRecipientEmailAddressesKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemRecipientEmailAddressesKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemRecipientsKey() uintptr {
+func NSMetadataItemRecipientsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemRecipientsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemRecordingDateKey() uintptr {
+func NSMetadataItemRecordingDateKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemRecordingDateKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemRecordingYearKey() uintptr {
+func NSMetadataItemRecordingYearKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemRecordingYearKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemRedEyeOnOffKey() uintptr {
+func NSMetadataItemRedEyeOnOffKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemRedEyeOnOffKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemResolutionHeightDPIKey() uintptr {
+func NSMetadataItemResolutionHeightDPIKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemResolutionHeightDPIKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemResolutionWidthDPIKey() uintptr {
+func NSMetadataItemResolutionWidthDPIKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemResolutionWidthDPIKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemRightsKey() uintptr {
+func NSMetadataItemRightsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemRightsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemSecurityMethodKey() uintptr {
+func NSMetadataItemSecurityMethodKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemSecurityMethodKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemSpeedKey() uintptr {
+func NSMetadataItemSpeedKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemSpeedKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemStarRatingKey() uintptr {
+func NSMetadataItemStarRatingKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemStarRatingKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemStateOrProvinceKey() uintptr {
+func NSMetadataItemStateOrProvinceKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemStateOrProvinceKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemStreamableKey() uintptr {
+func NSMetadataItemStreamableKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemStreamableKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemSubjectKey() uintptr {
+func NSMetadataItemSubjectKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemSubjectKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemTempoKey() uintptr {
+func NSMetadataItemTempoKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemTempoKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemTextContentKey() uintptr {
+func NSMetadataItemTextContentKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemTextContentKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemThemeKey() uintptr {
+func NSMetadataItemThemeKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemThemeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemTimeSignatureKey() uintptr {
+func NSMetadataItemTimeSignatureKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemTimeSignatureKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemTimestampKey() uintptr {
+func NSMetadataItemTimestampKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemTimestampKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemTitleKey() uintptr {
+func NSMetadataItemTitleKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemTitleKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemTotalBitRateKey() uintptr {
+func NSMetadataItemTotalBitRateKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemTotalBitRateKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
+// The URL of the metadata item.
 func NSMetadataItemURLKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemURLKey")
 	if ptr == 0 {
@@ -3900,26 +5416,55 @@ func NSMetadataItemURLKey() *NSString {
 	return NSStringFromID(id)
 }
 
-func NSMetadataItemVersionKey() uintptr {
+func NSMetadataItemVersionKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemVersionKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemVideoBitRateKey() uintptr {
+func NSMetadataItemVideoBitRateKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemVideoBitRateKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemWhereFromsKey() uintptr {
+func NSMetadataItemWhereFromsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemWhereFromsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemWhiteBalanceKey() uintptr {
+func NSMetadataItemWhiteBalanceKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemWhiteBalanceKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
+// Documents from outside the application's container that are accessible without user interaction. NSMetadataItemURLKey attributes of results are security-scoped NSURLs.
 func NSMetadataQueryAccessibleUbiquitousExternalDocumentsScope() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataQueryAccessibleUbiquitousExternalDocumentsScope")
 	if ptr == 0 {
@@ -3932,6 +5477,7 @@ func NSMetadataQueryAccessibleUbiquitousExternalDocumentsScope() *NSString {
 	return NSStringFromID(id)
 }
 
+// Posted when the receiver has finished with the initial result-gathering phase of the query.
 func NSMetadataQueryDidFinishGatheringNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataQueryDidFinishGatheringNotification")
 	if ptr == 0 {
@@ -3944,6 +5490,7 @@ func NSMetadataQueryDidFinishGatheringNotification() *NSString {
 	return NSStringFromID(id)
 }
 
+// Posted when the receiver begins with the initial result-gathering phase of the query.
 func NSMetadataQueryDidStartGatheringNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataQueryDidStartGatheringNotification")
 	if ptr == 0 {
@@ -3956,6 +5503,7 @@ func NSMetadataQueryDidStartGatheringNotification() *NSString {
 	return NSStringFromID(id)
 }
 
+// Posted when the receiver's results have changed during the live-update phase of the query.
 func NSMetadataQueryDidUpdateNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataQueryDidUpdateNotification")
 	if ptr == 0 {
@@ -3968,6 +5516,7 @@ func NSMetadataQueryDidUpdateNotification() *NSString {
 	return NSStringFromID(id)
 }
 
+// Posted as the receiver is collecting results during the initial result-gathering phase of the query.
 func NSMetadataQueryGatheringProgressNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataQueryGatheringProgressNotification")
 	if ptr == 0 {
@@ -3980,24 +5529,56 @@ func NSMetadataQueryGatheringProgressNotification() *NSString {
 	return NSStringFromID(id)
 }
 
-func NSMetadataQueryIndexedLocalComputerScope() uintptr {
+// Searches all indexed local mounted volumes and the user home directory (even if remote).
+func NSMetadataQueryIndexedLocalComputerScope() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataQueryIndexedLocalComputerScope")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataQueryIndexedNetworkScope() uintptr {
+// Searches all indexed user-mounted remote volumes.
+func NSMetadataQueryIndexedNetworkScope() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataQueryIndexedNetworkScope")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataQueryLocalComputerScope() uintptr {
+// Searches all local mounted volumes and the user home directory (even if remote).
+func NSMetadataQueryLocalComputerScope() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataQueryLocalComputerScope")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataQueryNetworkScope() uintptr {
+// Searches all user-mounted remote volumes.
+func NSMetadataQueryNetworkScope() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataQueryNetworkScope")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSMetadataQueryResultContentRelevanceAttribute() *NSString {
@@ -4012,6 +5593,7 @@ func NSMetadataQueryResultContentRelevanceAttribute() *NSString {
 	return NSStringFromID(id)
 }
 
+// The application's Ubiquity container, excluding the "Documents" subdirectory.
 func NSMetadataQueryUbiquitousDataScope() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataQueryUbiquitousDataScope")
 	if ptr == 0 {
@@ -4024,6 +5606,7 @@ func NSMetadataQueryUbiquitousDataScope() *NSString {
 	return NSStringFromID(id)
 }
 
+// The "Documents" subdirectory in the application's Ubiquity container.
 func NSMetadataQueryUbiquitousDocumentsScope() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataQueryUbiquitousDocumentsScope")
 	if ptr == 0 {
@@ -4036,6 +5619,7 @@ func NSMetadataQueryUbiquitousDocumentsScope() *NSString {
 	return NSStringFromID(id)
 }
 
+// The key for retrieving an array of items added to the query result. By default, this array contains “NSMetadataItem“ objects, representing the query's results; however, the query's delegate can substitute these objects with instances of a different class.
 func NSMetadataQueryUpdateAddedItemsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataQueryUpdateAddedItemsKey")
 	if ptr == 0 {
@@ -4048,6 +5632,7 @@ func NSMetadataQueryUpdateAddedItemsKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The key for retrieving an array of items that have changed in the query result. By default, this array contains “NSMetadataItem“ objects, representing the query's results; however, the query's delegate can substitute these objects with instances of a different class.
 func NSMetadataQueryUpdateChangedItemsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataQueryUpdateChangedItemsKey")
 	if ptr == 0 {
@@ -4060,6 +5645,7 @@ func NSMetadataQueryUpdateChangedItemsKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The key for retrieving an array of items removed from the query result. By default, this array contains “NSMetadataItem“ objects, representing the query's results; however, the query's delegate can substitute these objects with instances of a different class.
 func NSMetadataQueryUpdateRemovedItemsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataQueryUpdateRemovedItemsKey")
 	if ptr == 0 {
@@ -4072,11 +5658,20 @@ func NSMetadataQueryUpdateRemovedItemsKey() *NSString {
 	return NSStringFromID(id)
 }
 
-func NSMetadataQueryUserHomeScope() uintptr {
+// Searches the user's home directory.
+func NSMetadataQueryUserHomeScope() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataQueryUserHomeScope")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
+// The display name of the container that stores the ubiquitous item.
 func NSMetadataUbiquitousItemContainerDisplayNameKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataUbiquitousItemContainerDisplayNameKey")
 	if ptr == 0 {
@@ -4089,6 +5684,7 @@ func NSMetadataUbiquitousItemContainerDisplayNameKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// A Boolean value indicating whether a download has been requested for the ubiquitous item.
 func NSMetadataUbiquitousItemDownloadRequestedKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataUbiquitousItemDownloadRequestedKey")
 	if ptr == 0 {
@@ -4101,6 +5697,7 @@ func NSMetadataUbiquitousItemDownloadRequestedKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The error when downloading the ubiquitous item from iCloud failed.
 func NSMetadataUbiquitousItemDownloadingErrorKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataUbiquitousItemDownloadingErrorKey")
 	if ptr == 0 {
@@ -4113,6 +5710,7 @@ func NSMetadataUbiquitousItemDownloadingErrorKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// There is a local version of this item and it is the most up-to-date version known to this device.
 func NSMetadataUbiquitousItemDownloadingStatusCurrent() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataUbiquitousItemDownloadingStatusCurrent")
 	if ptr == 0 {
@@ -4125,6 +5723,7 @@ func NSMetadataUbiquitousItemDownloadingStatusCurrent() *NSString {
 	return NSStringFromID(id)
 }
 
+// There is a local version of this item available. The most current version will get downloaded as soon as possible.
 func NSMetadataUbiquitousItemDownloadingStatusDownloaded() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataUbiquitousItemDownloadingStatusDownloaded")
 	if ptr == 0 {
@@ -4137,6 +5736,7 @@ func NSMetadataUbiquitousItemDownloadingStatusDownloaded() *NSString {
 	return NSStringFromID(id)
 }
 
+// The download status of the ubiquitous item.
 func NSMetadataUbiquitousItemDownloadingStatusKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataUbiquitousItemDownloadingStatusKey")
 	if ptr == 0 {
@@ -4149,6 +5749,7 @@ func NSMetadataUbiquitousItemDownloadingStatusKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The item has not been downloaded yet. Use `startDownloadingUbiquitousItem(at:)` to download it.
 func NSMetadataUbiquitousItemDownloadingStatusNotDownloaded() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataUbiquitousItemDownloadingStatusNotDownloaded")
 	if ptr == 0 {
@@ -4161,6 +5762,7 @@ func NSMetadataUbiquitousItemDownloadingStatusNotDownloaded() *NSString {
 	return NSStringFromID(id)
 }
 
+// A Boolean value indicating whether the ubiquitous item has unresolved conflicts.
 func NSMetadataUbiquitousItemHasUnresolvedConflictsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataUbiquitousItemHasUnresolvedConflictsKey")
 	if ptr == 0 {
@@ -4173,6 +5775,7 @@ func NSMetadataUbiquitousItemHasUnresolvedConflictsKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// A Boolean value indicating whether the ubiquitous item has been downloaded.
 // Deprecated: Use NSMetadataUbiquitousItemDownloadingStatusKey instead
 func NSMetadataUbiquitousItemIsDownloadedKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataUbiquitousItemIsDownloadedKey")
@@ -4186,6 +5789,7 @@ func NSMetadataUbiquitousItemIsDownloadedKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// A Boolean value indicating whether the ubiquitous item is currently being downloaded.
 func NSMetadataUbiquitousItemIsDownloadingKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataUbiquitousItemIsDownloadingKey")
 	if ptr == 0 {
@@ -4198,6 +5802,7 @@ func NSMetadataUbiquitousItemIsDownloadingKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// A Boolean value indicating whether the ubiquitous item is from an external document.
 func NSMetadataUbiquitousItemIsExternalDocumentKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataUbiquitousItemIsExternalDocumentKey")
 	if ptr == 0 {
@@ -4210,6 +5815,7 @@ func NSMetadataUbiquitousItemIsExternalDocumentKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// A Boolean value indicating whether the ubiquitous item is shared.
 func NSMetadataUbiquitousItemIsSharedKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataUbiquitousItemIsSharedKey")
 	if ptr == 0 {
@@ -4222,6 +5828,7 @@ func NSMetadataUbiquitousItemIsSharedKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// A Boolean value indicating whether the ubiquitous item has been uploaded.
 func NSMetadataUbiquitousItemIsUploadedKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataUbiquitousItemIsUploadedKey")
 	if ptr == 0 {
@@ -4234,6 +5841,7 @@ func NSMetadataUbiquitousItemIsUploadedKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// A Boolean value indicating whether the ubiquitous item is currently being uploaded.
 func NSMetadataUbiquitousItemIsUploadingKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataUbiquitousItemIsUploadingKey")
 	if ptr == 0 {
@@ -4246,6 +5854,7 @@ func NSMetadataUbiquitousItemIsUploadingKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The percentage of the ubiquitous item that has been downloaded.
 func NSMetadataUbiquitousItemPercentDownloadedKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataUbiquitousItemPercentDownloadedKey")
 	if ptr == 0 {
@@ -4258,6 +5867,7 @@ func NSMetadataUbiquitousItemPercentDownloadedKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The percentage of the ubiquitous item that has been uploaded.
 func NSMetadataUbiquitousItemPercentUploadedKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataUbiquitousItemPercentUploadedKey")
 	if ptr == 0 {
@@ -4270,6 +5880,7 @@ func NSMetadataUbiquitousItemPercentUploadedKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The URL for the ubiquitous item in the local container.
 func NSMetadataUbiquitousItemURLInLocalContainerKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataUbiquitousItemURLInLocalContainerKey")
 	if ptr == 0 {
@@ -4282,6 +5893,7 @@ func NSMetadataUbiquitousItemURLInLocalContainerKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The error when uploading the ubiquitous item to iCloud failed.
 func NSMetadataUbiquitousItemUploadingErrorKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataUbiquitousItemUploadingErrorKey")
 	if ptr == 0 {
@@ -4294,6 +5906,7 @@ func NSMetadataUbiquitousItemUploadingErrorKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The permissions for the current user, or `nil` if not shared.
 func NSMetadataUbiquitousSharedItemCurrentUserPermissionsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataUbiquitousSharedItemCurrentUserPermissionsKey")
 	if ptr == 0 {
@@ -4306,6 +5919,7 @@ func NSMetadataUbiquitousSharedItemCurrentUserPermissionsKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The current user's role for the shared item, or `nil` if not shared.
 func NSMetadataUbiquitousSharedItemCurrentUserRoleKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataUbiquitousSharedItemCurrentUserRoleKey")
 	if ptr == 0 {
@@ -4318,6 +5932,7 @@ func NSMetadataUbiquitousSharedItemCurrentUserRoleKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The name components of the most recent editor of the shared document, or `nil` if it is the current user.
 func NSMetadataUbiquitousSharedItemMostRecentEditorNameComponentsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataUbiquitousSharedItemMostRecentEditorNameComponentsKey")
 	if ptr == 0 {
@@ -4330,6 +5945,7 @@ func NSMetadataUbiquitousSharedItemMostRecentEditorNameComponentsKey() *NSString
 	return NSStringFromID(id)
 }
 
+// The name components of the shared item's owner, or `nil` if the current user is the owner.
 func NSMetadataUbiquitousSharedItemOwnerNameComponentsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataUbiquitousSharedItemOwnerNameComponentsKey")
 	if ptr == 0 {
@@ -4342,6 +5958,7 @@ func NSMetadataUbiquitousSharedItemOwnerNameComponentsKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The current user is only allowed to read this item.
 func NSMetadataUbiquitousSharedItemPermissionsReadOnly() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataUbiquitousSharedItemPermissionsReadOnly")
 	if ptr == 0 {
@@ -4354,6 +5971,7 @@ func NSMetadataUbiquitousSharedItemPermissionsReadOnly() *NSString {
 	return NSStringFromID(id)
 }
 
+// The current user is allowed to both read and write this item.
 func NSMetadataUbiquitousSharedItemPermissionsReadWrite() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataUbiquitousSharedItemPermissionsReadWrite")
 	if ptr == 0 {
@@ -4366,6 +5984,7 @@ func NSMetadataUbiquitousSharedItemPermissionsReadWrite() *NSString {
 	return NSStringFromID(id)
 }
 
+// The current user is the owner of the shared item.
 func NSMetadataUbiquitousSharedItemRoleOwner() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataUbiquitousSharedItemRoleOwner")
 	if ptr == 0 {
@@ -4378,6 +5997,7 @@ func NSMetadataUbiquitousSharedItemRoleOwner() *NSString {
 	return NSStringFromID(id)
 }
 
+// The current user is a participant of the shared item.
 func NSMetadataUbiquitousSharedItemRoleParticipant() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataUbiquitousSharedItemRoleParticipant")
 	if ptr == 0 {
@@ -4390,6 +6010,7 @@ func NSMetadataUbiquitousSharedItemRoleParticipant() *NSString {
 	return NSStringFromID(id)
 }
 
+// An operator that returns the minimum value of a collection's values for the specified key path.
 func NSMinimumKeyValueOperator() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMinimumKeyValueOperator")
 	if ptr == 0 {
@@ -4402,15 +6023,31 @@ func NSMinimumKeyValueOperator() *NSString {
 	return NSStringFromID(id)
 }
 
+// Key for the value that specifies the names for the months, affecting strings that use the `%B` format specifier.
 // Deprecated: since macOS 10.5.
-func NSMonthNameArray() uintptr {
+func NSMonthNameArray() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMonthNameArray")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMorphologyAttributeName() uintptr {
+// An attribute key whose value is an `NSMorphology` object that specifies the morphology for the attributed string.
+func NSMorphologyAttributeName() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMorphologyAttributeName")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSMultipleUnderlyingErrorsKey() *NSString {
@@ -4425,6 +6062,7 @@ func NSMultipleUnderlyingErrorsKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The name of the transformer that negates a Boolean value.
 func NSNegateBooleanTransformerName() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSNegateBooleanTransformerName")
 	if ptr == 0 {
@@ -4437,32 +6075,72 @@ func NSNegateBooleanTransformerName() *NSString {
 	return NSStringFromID(id)
 }
 
+// A format string that specifies how negative numbers are printed when representing a currency value.
 // Deprecated: since macOS 10.5.
-func NSNegativeCurrencyFormatString() uintptr {
+func NSNegativeCurrencyFormatString() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSNegativeCurrencyFormatString")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSNetServicesErrorCode() uintptr {
+// This key identifies the error that occurred during the most recent operation.
+func NSNetServicesErrorCode() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSNetServicesErrorCode")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSNetServicesErrorDomain() uintptr {
+// This key identifies the originator of the error, which is either the `NSNetService` object or the mach network layer. For most errors, you should not need the value provided by this key.
+func NSNetServicesErrorDomain() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSNetServicesErrorDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
+// Key for an array of strings that denote the day after today.
 // Deprecated: since macOS 10.5.
-func NSNextDayDesignations() uintptr {
+func NSNextDayDesignations() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSNextDayDesignations")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
+// Key for an array of strings that denote the day after tomorrow.
 // Deprecated: since macOS 10.5.
-func NSNextNextDayDesignations() uintptr {
+func NSNextNextDayDesignations() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSNextNextDayDesignations")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSNonOwnedPointerHashCallBacks() NSHashTableCallBacks {
@@ -4521,6 +6199,7 @@ func NSNonRetainedObjectMapValueCallBacks() NSMapTableValueCallBacks {
 	return *(*NSMapTableValueCallBacks)(unsafe.Pointer(ptr))
 }
 
+// The error domain for Mac OS 9/Carbon errors.
 func NSOSStatusErrorDomain() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSOSStatusErrorDomain")
 	if ptr == 0 {
@@ -4541,6 +6220,7 @@ func NSObjectHashCallBacks() NSHashTableCallBacks {
 	return *(*NSHashTableCallBacks)(unsafe.Pointer(ptr))
 }
 
+// Name of an exception that occurs when a remote object is accessed from a thread that should not access it.
 func NSObjectInaccessibleException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSObjectInaccessibleException")
 	if ptr == 0 {
@@ -4569,6 +6249,7 @@ func NSObjectMapValueCallBacks() NSMapTableValueCallBacks {
 	return *(*NSMapTableValueCallBacks)(unsafe.Pointer(ptr))
 }
 
+// Name of an exception that occurs when the remote side of the object is no longer available.
 func NSObjectNotAvailableException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSObjectNotAvailableException")
 	if ptr == 0 {
@@ -4581,6 +6262,7 @@ func NSObjectNotAvailableException() *NSString {
 	return NSStringFromID(id)
 }
 
+// Name of an obsolete exception.
 func NSOldStyleException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSOldStyleException")
 	if ptr == 0 {
@@ -4637,6 +6319,7 @@ func NSOwnedPointerMapValueCallBacks() NSMapTableValueCallBacks {
 	return *(*NSMapTableValueCallBacks)(unsafe.Pointer(ptr))
 }
 
+// The error domain for POSIX errors.
 func NSPOSIXErrorDomain() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSPOSIXErrorDomain")
 	if ptr == 0 {
@@ -4649,6 +6332,7 @@ func NSPOSIXErrorDomain() *NSString {
 	return NSStringFromID(id)
 }
 
+// Name of an exception raised by `-propertyList` when parsing fails.
 func NSParseErrorException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSParseErrorException")
 	if ptr == 0 {
@@ -4661,6 +6345,7 @@ func NSParseErrorException() *NSString {
 	return NSStringFromID(id)
 }
 
+// Identifier for the Persian calendar.
 // Deprecated: since macOS 10.10.
 func NSPersianCalendar() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSPersianCalendar")
@@ -4674,6 +6359,7 @@ func NSPersianCalendar() *NSString {
 	return NSStringFromID(id)
 }
 
+// The delimiter is the character or characters used to separate name components. For CJK languages there is no delimiter.
 func NSPersonNameComponentDelimiter() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSPersonNameComponentDelimiter")
 	if ptr == 0 {
@@ -4686,6 +6372,7 @@ func NSPersonNameComponentDelimiter() *NSString {
 	return NSStringFromID(id)
 }
 
+// The family name component of a person's name.
 func NSPersonNameComponentFamilyName() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSPersonNameComponentFamilyName")
 	if ptr == 0 {
@@ -4698,6 +6385,7 @@ func NSPersonNameComponentFamilyName() *NSString {
 	return NSStringFromID(id)
 }
 
+// The given name component of a person's name.
 func NSPersonNameComponentGivenName() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSPersonNameComponentGivenName")
 	if ptr == 0 {
@@ -4710,6 +6398,7 @@ func NSPersonNameComponentGivenName() *NSString {
 	return NSStringFromID(id)
 }
 
+// The attributed string key used to identify person name components.
 func NSPersonNameComponentKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSPersonNameComponentKey")
 	if ptr == 0 {
@@ -4722,6 +6411,7 @@ func NSPersonNameComponentKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The middle name component of a person's name.
 func NSPersonNameComponentMiddleName() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSPersonNameComponentMiddleName")
 	if ptr == 0 {
@@ -4734,6 +6424,7 @@ func NSPersonNameComponentMiddleName() *NSString {
 	return NSStringFromID(id)
 }
 
+// The nickname component of a person's name.
 func NSPersonNameComponentNickname() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSPersonNameComponentNickname")
 	if ptr == 0 {
@@ -4746,6 +6437,7 @@ func NSPersonNameComponentNickname() *NSString {
 	return NSStringFromID(id)
 }
 
+// The name prefix component of a person's name.
 func NSPersonNameComponentPrefix() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSPersonNameComponentPrefix")
 	if ptr == 0 {
@@ -4758,6 +6450,7 @@ func NSPersonNameComponentPrefix() *NSString {
 	return NSStringFromID(id)
 }
 
+// The name suffix component of a person's name.
 func NSPersonNameComponentSuffix() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSPersonNameComponentSuffix")
 	if ptr == 0 {
@@ -4778,6 +6471,7 @@ func NSPointerToStructHashCallBacks() NSHashTableCallBacks {
 	return *(*NSHashTableCallBacks)(unsafe.Pointer(ptr))
 }
 
+// Posted from the “invalidate“ method, which is invoked when the “NSPort“ is deallocated or when it notices that its communication channel has been damaged.
 func NSPortDidBecomeInvalidNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSPortDidBecomeInvalidNotification")
 	if ptr == 0 {
@@ -4790,6 +6484,7 @@ func NSPortDidBecomeInvalidNotification() *NSString {
 	return NSStringFromID(id)
 }
 
+// Name of an exception that occurs when an error occurs while receiving a message through a port.
 func NSPortReceiveException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSPortReceiveException")
 	if ptr == 0 {
@@ -4802,6 +6497,7 @@ func NSPortReceiveException() *NSString {
 	return NSStringFromID(id)
 }
 
+// Name of an exception that occurs when an error occurs while sending a message through a port.
 func NSPortSendException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSPortSendException")
 	if ptr == 0 {
@@ -4814,6 +6510,7 @@ func NSPortSendException() *NSString {
 	return NSStringFromID(id)
 }
 
+// Name of an exception that occurs when a port operation times out.
 func NSPortTimeoutException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSPortTimeoutException")
 	if ptr == 0 {
@@ -4826,10 +6523,18 @@ func NSPortTimeoutException() *NSString {
 	return NSStringFromID(id)
 }
 
+// A format string that specifies how positive numbers are printed when representing a currency value.
 // Deprecated: since macOS 10.5.
-func NSPositiveCurrencyFormatString() uintptr {
+func NSPositiveCurrencyFormatString() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSPositiveCurrencyFormatString")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSPresentationIntentAttributeName() *NSString {
@@ -4844,12 +6549,21 @@ func NSPresentationIntentAttributeName() *NSString {
 	return NSStringFromID(id)
 }
 
+// Key for an array of strings that denote the day before today.
 // Deprecated: since macOS 10.5.
-func NSPriorDayDesignations() uintptr {
+func NSPriorDayDesignations() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSPriorDayDesignations")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
+// Posts when the power state of a device changes. After your observer receives this notification, query the `isLowPowerModeEnabled` property to determine the current power state of the device. If Low Power Mode is active, take appropriate steps to reduce activity in your app. Otherwise, your app can resume normal operations. This notification is posted on the global dispatch queue. Register for it using the default notification center. The object associated with the notification is `NSProcessInfo.processInfo`.
 func NSProcessInfoPowerStateDidChangeNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSProcessInfoPowerStateDidChangeNotification")
 	if ptr == 0 {
@@ -4862,6 +6576,7 @@ func NSProcessInfoPowerStateDidChangeNotification() *NSString {
 	return NSStringFromID(id)
 }
 
+// Posts when the thermal state of the system changes. The notification object is an `NSProcessInfo` instance. To receive this notification, you must access the `thermalState` property prior to registering for the notification. You can use this opportunity to take corrective action in your application to help cool the system down. Work that could be done in the background or at opportunistic times should be using the Quality of Service levels in `NSOperation` or the `NSBackgroundActivityScheduler` API. This notification is posted on the global dispatch queue. Register for it using the default notification center.
 func NSProcessInfoThermalStateDidChangeNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSProcessInfoThermalStateDidChangeNotification")
 	if ptr == 0 {
@@ -4874,6 +6589,7 @@ func NSProcessInfoThermalStateDidChangeNotification() *NSString {
 	return NSStringFromID(id)
 }
 
+// How much time is probably left in the operation, as an `NSNumber` containing a number of seconds.
 func NSProgressEstimatedTimeRemainingKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSProgressEstimatedTimeRemainingKey")
 	if ptr == 0 {
@@ -4886,16 +6602,33 @@ func NSProgressEstimatedTimeRemainingKey() *NSString {
 	return NSStringFromID(id)
 }
 
-func NSProgressFileAnimationImageKey() uintptr {
+// A user info dictionary key for an animation image, typically an icon. The value must be an `NSImage`.
+func NSProgressFileAnimationImageKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSProgressFileAnimationImageKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSProgressFileAnimationImageOriginalRectKey() uintptr {
+// A user info dictionary key for the original screen location of the animation image. The value must be an `NSValue` containing an `NSRect` in screen coordinates.
+func NSProgressFileAnimationImageOriginalRectKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSProgressFileAnimationImageOriginalRectKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
+// A user info dictionary key for the number of completed files. The value must be an `NSNumber` containing an integer. This entry is optional but if both `NSProgressFileTotalCountKey` and `NSProgressFileCompletedCountKey` are present then the default implementation of `localizedAdditionalDescription` uses them to determine the text that it returns.
 func NSProgressFileCompletedCountKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSProgressFileCompletedCountKey")
 	if ptr == 0 {
@@ -4908,11 +6641,20 @@ func NSProgressFileCompletedCountKey() *NSString {
 	return NSStringFromID(id)
 }
 
-func NSProgressFileIconKey() uintptr {
+// A user info dictionary key for a file icon. The value must be an `NSImage`. This entry is optional but, if it is present, the Finder will use it to show the icon of a file while progress is being made on that file. For example, the App Store uses this to specify an icon for an application being downloaded before the icon can be obtained from the application bundle itself.
+func NSProgressFileIconKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSProgressFileIconKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
+// The progress is tracking the copying of a file from source to destination.
 func NSProgressFileOperationKindCopying() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSProgressFileOperationKindCopying")
 	if ptr == 0 {
@@ -4925,6 +6667,7 @@ func NSProgressFileOperationKindCopying() *NSString {
 	return NSStringFromID(id)
 }
 
+// The progress is tracking file decompression after a download.
 func NSProgressFileOperationKindDecompressingAfterDownloading() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSProgressFileOperationKindDecompressingAfterDownloading")
 	if ptr == 0 {
@@ -4937,6 +6680,7 @@ func NSProgressFileOperationKindDecompressingAfterDownloading() *NSString {
 	return NSStringFromID(id)
 }
 
+// The progress is tracking a file download operation.
 func NSProgressFileOperationKindDownloading() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSProgressFileOperationKindDownloading")
 	if ptr == 0 {
@@ -4961,6 +6705,7 @@ func NSProgressFileOperationKindDuplicating() *NSString {
 	return NSStringFromID(id)
 }
 
+// A user info dictionary key for the kind of file operation. This entry is required when the value for the `kind` property is `NSProgressKindFile`. The value must be one of the `NSProgressFileOperationKind` constants. The default implementations of `localizedDescription` and `localizedItemDescription` use this value to determine the text that they return.
 func NSProgressFileOperationKindKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSProgressFileOperationKindKey")
 	if ptr == 0 {
@@ -4973,6 +6718,7 @@ func NSProgressFileOperationKindKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The progress is tracking the receipt of a file from another source.
 func NSProgressFileOperationKindReceiving() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSProgressFileOperationKindReceiving")
 	if ptr == 0 {
@@ -4985,6 +6731,7 @@ func NSProgressFileOperationKindReceiving() *NSString {
 	return NSStringFromID(id)
 }
 
+// The progress is tracking a file upload operation.
 func NSProgressFileOperationKindUploading() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSProgressFileOperationKindUploading")
 	if ptr == 0 {
@@ -4997,6 +6744,7 @@ func NSProgressFileOperationKindUploading() *NSString {
 	return NSStringFromID(id)
 }
 
+// A user info dictionary key for the total number of files. The value must be an `NSNumber` containing an integer. This entry is optional but if both `NSProgressFileTotalCountKey` and `NSProgressFileCompletedCountKey` are present then the default implementation of `localizedAdditionalDescription` uses them to determine the text that it returns.
 func NSProgressFileTotalCountKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSProgressFileTotalCountKey")
 	if ptr == 0 {
@@ -5009,6 +6757,7 @@ func NSProgressFileTotalCountKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// A user info dictionary key for the URL of the file on which progress is being made. This is required for any `NSProgress` that is published using `-publish` to be reported to subscribers registered with `+addSubscriberForFileURL:withPublishingHandler:`.
 func NSProgressFileURLKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSProgressFileURLKey")
 	if ptr == 0 {
@@ -5021,6 +6770,7 @@ func NSProgressFileURLKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The value for the kind property that indicates that the work being done is a file operation. `NSProgress` of this kind is assumed to use bytes as the unit of work being done and the default implementation of `localizedDescription` takes advantage of that to return more specific text than it could otherwise. The `NSProgressFileTotalCountKey` and `NSProgressFileCompletedCountKey` keys in the `userInfo` dictionary are used for the overall count of files.
 func NSProgressKindFile() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSProgressKindFile")
 	if ptr == 0 {
@@ -5033,6 +6783,7 @@ func NSProgressKindFile() *NSString {
 	return NSStringFromID(id)
 }
 
+// How fast data is being processed, as an `NSNumber` containing bytes per second.
 func NSProgressThroughputKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSProgressThroughputKey")
 	if ptr == 0 {
@@ -5045,6 +6796,7 @@ func NSProgressThroughputKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// Name of an exception that occurs when you access outside the bounds of some data, such as beyond the end of a string or array.
 func NSRangeException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSRangeException")
 	if ptr == 0 {
@@ -5057,6 +6809,7 @@ func NSRangeException() *NSString {
 	return NSStringFromID(id)
 }
 
+// An object that conforms to the `NSErrorRecoveryAttempting` protocol.
 func NSRecoveryAttempterErrorKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSRecoveryAttempterErrorKey")
 	if ptr == 0 {
@@ -5069,7 +6822,7 @@ func NSRecoveryAttempterErrorKey() *NSString {
 	return NSStringFromID(id)
 }
 
-// NSRegistrationDomain identifies a search list entry containing all defaults set with -registerDefaults:, if any. NSRegistrationDomain is automatically included as the final entry of all search lists.
+// The identifier for the domain that contains your app's registered default values.
 func NSRegistrationDomain() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSRegistrationDomain")
 	if ptr == 0 {
@@ -5082,11 +6835,20 @@ func NSRegistrationDomain() *NSString {
 	return NSStringFromID(id)
 }
 
-func NSReplacementIndexAttributeName() uintptr {
+// An attribute key whose value is an `NSNumber` indicating the replacement's position in a format string.
+func NSReplacementIndexAttributeName() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSReplacementIndexAttributeName")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
+// Identifier for the Republic of China calendar.
 // Deprecated: since macOS 10.10.
 func NSRepublicOfChinaCalendar() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSRepublicOfChinaCalendar")
@@ -5100,6 +6862,7 @@ func NSRepublicOfChinaCalendar() *NSString {
 	return NSStringFromID(id)
 }
 
+// A pseudo-mode that includes one or more other run loop modes. You can use this mode to add an object to all the common modes. For details on how to add modes to this group, see `CFRunLoopAddCommonMode`.
 func NSRunLoopCommonModes() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSRunLoopCommonModes")
 	if ptr == 0 {
@@ -5112,6 +6875,7 @@ func NSRunLoopCommonModes() *NSString {
 	return NSStringFromID(id)
 }
 
+// The name of the transformer that uses “NSKeyedUnarchiver“ with secure coding to unarchive data.
 func NSSecureUnarchiveFromDataTransformerName() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSSecureUnarchiveFromDataTransformerName")
 	if ptr == 0 {
@@ -5124,30 +6888,63 @@ func NSSecureUnarchiveFromDataTransformerName() *NSString {
 	return NSStringFromID(id)
 }
 
+// Key for a format string that specifies how dates are abbreviated.
 // Deprecated: since macOS 10.5.
-func NSShortDateFormatString() uintptr {
+func NSShortDateFormatString() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSShortDateFormatString")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
+// Key for an array of strings that specify the abbreviations for the months, affecting strings that use the `%b` format specifier.
 // Deprecated: since macOS 10.5.
-func NSShortMonthNameArray() uintptr {
+func NSShortMonthNameArray() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSShortMonthNameArray")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
+// Key for a format string that specifies how times and dates are abbreviated.
 // Deprecated: since macOS 10.5.
-func NSShortTimeDateFormatString() uintptr {
+func NSShortTimeDateFormatString() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSShortTimeDateFormatString")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
+// Key for an array of strings that specify the abbreviations for the days of the week, affecting strings that use the `%a` format specifier.
 // Deprecated: since macOS 10.5.
-func NSShortWeekDayNameArray() uintptr {
+func NSShortWeekDayNameArray() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSShortWeekDayNameArray")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
+// Value is an `NSData` instance containing the data written to a memory stream. Use this property when you have an output-stream object instantiated to collect written data in memory. The value of this property is read-only.
 func NSStreamDataWrittenToMemoryStreamKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStreamDataWrittenToMemoryStreamKey")
 	if ptr == 0 {
@@ -5160,6 +6957,7 @@ func NSStreamDataWrittenToMemoryStreamKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// Value is an `NSNumber` object containing the current absolute offset of the stream.
 func NSStreamFileCurrentOffsetKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStreamFileCurrentOffsetKey")
 	if ptr == 0 {
@@ -5172,6 +6970,7 @@ func NSStreamFileCurrentOffsetKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The type of service for the stream. Providing the service type allows the system to properly handle certain attributes of the stream, including routing and suspension behavior.
 func NSStreamNetworkServiceType() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStreamNetworkServiceType")
 	if ptr == 0 {
@@ -5184,6 +6983,7 @@ func NSStreamNetworkServiceType() *NSString {
 	return NSStringFromID(id)
 }
 
+// The background network service type.
 func NSStreamNetworkServiceTypeBackground() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStreamNetworkServiceTypeBackground")
 	if ptr == 0 {
@@ -5208,6 +7008,7 @@ func NSStreamNetworkServiceTypeCallSignaling() *NSString {
 	return NSStringFromID(id)
 }
 
+// The video network service type.
 func NSStreamNetworkServiceTypeVideo() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStreamNetworkServiceTypeVideo")
 	if ptr == 0 {
@@ -5220,6 +7021,7 @@ func NSStreamNetworkServiceTypeVideo() *NSString {
 	return NSStringFromID(id)
 }
 
+// The VoIP network service type.
 func NSStreamNetworkServiceTypeVoIP() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStreamNetworkServiceTypeVoIP")
 	if ptr == 0 {
@@ -5232,6 +7034,7 @@ func NSStreamNetworkServiceTypeVoIP() *NSString {
 	return NSStringFromID(id)
 }
 
+// The voice network service type.
 func NSStreamNetworkServiceTypeVoice() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStreamNetworkServiceTypeVoice")
 	if ptr == 0 {
@@ -5244,6 +7047,7 @@ func NSStreamNetworkServiceTypeVoice() *NSString {
 	return NSStringFromID(id)
 }
 
+// The error domain used by `NSError` when reporting SOCKS errors.
 func NSStreamSOCKSErrorDomain() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStreamSOCKSErrorDomain")
 	if ptr == 0 {
@@ -5256,6 +7060,7 @@ func NSStreamSOCKSErrorDomain() *NSString {
 	return NSStringFromID(id)
 }
 
+// Value is an `NSDictionary` object containing SOCKS proxy configuration information. The dictionary returned from the System Configuration framework for SOCKS proxies usually suffices.
 func NSStreamSOCKSProxyConfigurationKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStreamSOCKSProxyConfigurationKey")
 	if ptr == 0 {
@@ -5268,6 +7073,7 @@ func NSStreamSOCKSProxyConfigurationKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The SOCKS proxy host key.
 func NSStreamSOCKSProxyHostKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStreamSOCKSProxyHostKey")
 	if ptr == 0 {
@@ -5280,6 +7086,7 @@ func NSStreamSOCKSProxyHostKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The SOCKS proxy password key.
 func NSStreamSOCKSProxyPasswordKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStreamSOCKSProxyPasswordKey")
 	if ptr == 0 {
@@ -5292,6 +7099,7 @@ func NSStreamSOCKSProxyPasswordKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The SOCKS proxy port key. Value is an `NSNumber`.
 func NSStreamSOCKSProxyPortKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStreamSOCKSProxyPortKey")
 	if ptr == 0 {
@@ -5304,6 +7112,7 @@ func NSStreamSOCKSProxyPortKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The SOCKS proxy user key.
 func NSStreamSOCKSProxyUserKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStreamSOCKSProxyUserKey")
 	if ptr == 0 {
@@ -5316,6 +7125,7 @@ func NSStreamSOCKSProxyUserKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// SOCKS proxy version 4.
 func NSStreamSOCKSProxyVersion4() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStreamSOCKSProxyVersion4")
 	if ptr == 0 {
@@ -5328,6 +7138,7 @@ func NSStreamSOCKSProxyVersion4() *NSString {
 	return NSStringFromID(id)
 }
 
+// SOCKS proxy version 5.
 func NSStreamSOCKSProxyVersion5() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStreamSOCKSProxyVersion5")
 	if ptr == 0 {
@@ -5340,6 +7151,7 @@ func NSStreamSOCKSProxyVersion5() *NSString {
 	return NSStringFromID(id)
 }
 
+// The SOCKS proxy version key.
 func NSStreamSOCKSProxyVersionKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStreamSOCKSProxyVersionKey")
 	if ptr == 0 {
@@ -5352,6 +7164,7 @@ func NSStreamSOCKSProxyVersionKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The error domain used by `NSError` when reporting SSL errors.
 func NSStreamSocketSSLErrorDomain() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStreamSocketSSLErrorDomain")
 	if ptr == 0 {
@@ -5364,6 +7177,7 @@ func NSStreamSocketSSLErrorDomain() *NSString {
 	return NSStringFromID(id)
 }
 
+// The security level of the target stream.
 func NSStreamSocketSecurityLevelKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStreamSocketSecurityLevelKey")
 	if ptr == 0 {
@@ -5376,6 +7190,7 @@ func NSStreamSocketSecurityLevelKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// Specifies that the highest level security protocol that can be negotiated be set as the security protocol for a socket stream.
 func NSStreamSocketSecurityLevelNegotiatedSSL() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStreamSocketSecurityLevelNegotiatedSSL")
 	if ptr == 0 {
@@ -5388,6 +7203,7 @@ func NSStreamSocketSecurityLevelNegotiatedSSL() *NSString {
 	return NSStringFromID(id)
 }
 
+// No security on the socket stream.
 func NSStreamSocketSecurityLevelNone() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStreamSocketSecurityLevelNone")
 	if ptr == 0 {
@@ -5400,6 +7216,7 @@ func NSStreamSocketSecurityLevelNone() *NSString {
 	return NSStringFromID(id)
 }
 
+// Specifies that the SSL version 2 security protocol should be set as the security protocol for a socket stream.
 func NSStreamSocketSecurityLevelSSLv2() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStreamSocketSecurityLevelSSLv2")
 	if ptr == 0 {
@@ -5412,6 +7229,7 @@ func NSStreamSocketSecurityLevelSSLv2() *NSString {
 	return NSStringFromID(id)
 }
 
+// Specifies that the SSL version 3 security protocol should be set as the security protocol for a socket stream.
 func NSStreamSocketSecurityLevelSSLv3() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStreamSocketSecurityLevelSSLv3")
 	if ptr == 0 {
@@ -5424,6 +7242,7 @@ func NSStreamSocketSecurityLevelSSLv3() *NSString {
 	return NSStringFromID(id)
 }
 
+// Specifies that the TLS version 1 security protocol should be set as the security protocol for a socket stream.
 func NSStreamSocketSecurityLevelTLSv1() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStreamSocketSecurityLevelTLSv1")
 	if ptr == 0 {
@@ -5436,6 +7255,7 @@ func NSStreamSocketSecurityLevelTLSv1() *NSString {
 	return NSStringFromID(id)
 }
 
+// An `NSNumber` boolean value. If `YES`, lossy encodings may be used. Default is `YES`.
 func NSStringEncodingDetectionAllowLossyKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStringEncodingDetectionAllowLossyKey")
 	if ptr == 0 {
@@ -5448,6 +7268,7 @@ func NSStringEncodingDetectionAllowLossyKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// An array of `NSNumber` values containing `NSStringEncoding` values representing disallowed encodings. If not present, all encodings are considered.
 func NSStringEncodingDetectionDisallowedEncodingsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStringEncodingDetectionDisallowedEncodingsKey")
 	if ptr == 0 {
@@ -5460,6 +7281,7 @@ func NSStringEncodingDetectionDisallowedEncodingsKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// An `NSNumber` boolean value. If `YES`, Windows encodings are considered. Default is `NO`.
 func NSStringEncodingDetectionFromWindowsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStringEncodingDetectionFromWindowsKey")
 	if ptr == 0 {
@@ -5472,6 +7294,7 @@ func NSStringEncodingDetectionFromWindowsKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// An `NSString` value containing an ISO language code. If present, the language is used to aid in encoding detection.
 func NSStringEncodingDetectionLikelyLanguageKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStringEncodingDetectionLikelyLanguageKey")
 	if ptr == 0 {
@@ -5484,6 +7307,7 @@ func NSStringEncodingDetectionLikelyLanguageKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// An `NSString` value used as a substitute for characters that cannot be represented in the encoding. Default is U+FFFD.
 func NSStringEncodingDetectionLossySubstitutionKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStringEncodingDetectionLossySubstitutionKey")
 	if ptr == 0 {
@@ -5496,6 +7320,7 @@ func NSStringEncodingDetectionLossySubstitutionKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// An array of `NSNumber` values containing `NSStringEncoding` values representing suggested encodings. If not present, all encodings are weighted the same.
 func NSStringEncodingDetectionSuggestedEncodingsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStringEncodingDetectionSuggestedEncodingsKey")
 	if ptr == 0 {
@@ -5508,6 +7333,7 @@ func NSStringEncodingDetectionSuggestedEncodingsKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// An `NSNumber` boolean value. If `YES`, only the suggested encodings are used. Default is `NO`.
 func NSStringEncodingDetectionUseOnlySuggestedEncodingsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStringEncodingDetectionUseOnlySuggestedEncodingsKey")
 	if ptr == 0 {
@@ -5520,6 +7346,7 @@ func NSStringEncodingDetectionUseOnlySuggestedEncodingsKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The corresponding value is an `NSNumber` object containing the `NSStringEncoding` value.
 func NSStringEncodingErrorKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStringEncodingErrorKey")
 	if ptr == 0 {
@@ -5532,6 +7359,7 @@ func NSStringEncodingErrorKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// A transform that converts fullwidth characters to halfwidth.
 func NSStringTransformFullwidthToHalfwidth() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStringTransformFullwidthToHalfwidth")
 	if ptr == 0 {
@@ -5544,6 +7372,7 @@ func NSStringTransformFullwidthToHalfwidth() *NSString {
 	return NSStringFromID(id)
 }
 
+// A transform that converts Hiragana to Katakana.
 func NSStringTransformHiraganaToKatakana() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStringTransformHiraganaToKatakana")
 	if ptr == 0 {
@@ -5556,6 +7385,7 @@ func NSStringTransformHiraganaToKatakana() *NSString {
 	return NSStringFromID(id)
 }
 
+// A transform that converts Latin script to Arabic.
 func NSStringTransformLatinToArabic() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStringTransformLatinToArabic")
 	if ptr == 0 {
@@ -5568,6 +7398,7 @@ func NSStringTransformLatinToArabic() *NSString {
 	return NSStringFromID(id)
 }
 
+// A transform that converts Latin script to Cyrillic.
 func NSStringTransformLatinToCyrillic() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStringTransformLatinToCyrillic")
 	if ptr == 0 {
@@ -5580,6 +7411,7 @@ func NSStringTransformLatinToCyrillic() *NSString {
 	return NSStringFromID(id)
 }
 
+// A transform that converts Latin script to Greek.
 func NSStringTransformLatinToGreek() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStringTransformLatinToGreek")
 	if ptr == 0 {
@@ -5592,6 +7424,7 @@ func NSStringTransformLatinToGreek() *NSString {
 	return NSStringFromID(id)
 }
 
+// A transform that converts Latin script to Hangul.
 func NSStringTransformLatinToHangul() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStringTransformLatinToHangul")
 	if ptr == 0 {
@@ -5604,6 +7437,7 @@ func NSStringTransformLatinToHangul() *NSString {
 	return NSStringFromID(id)
 }
 
+// A transform that converts Latin script to Hebrew.
 func NSStringTransformLatinToHebrew() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStringTransformLatinToHebrew")
 	if ptr == 0 {
@@ -5616,6 +7450,7 @@ func NSStringTransformLatinToHebrew() *NSString {
 	return NSStringFromID(id)
 }
 
+// A transform that converts Latin script to Hiragana.
 func NSStringTransformLatinToHiragana() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStringTransformLatinToHiragana")
 	if ptr == 0 {
@@ -5628,6 +7463,7 @@ func NSStringTransformLatinToHiragana() *NSString {
 	return NSStringFromID(id)
 }
 
+// A transform that converts Latin script to Katakana.
 func NSStringTransformLatinToKatakana() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStringTransformLatinToKatakana")
 	if ptr == 0 {
@@ -5640,6 +7476,7 @@ func NSStringTransformLatinToKatakana() *NSString {
 	return NSStringFromID(id)
 }
 
+// A transform that converts Latin script to Thai.
 func NSStringTransformLatinToThai() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStringTransformLatinToThai")
 	if ptr == 0 {
@@ -5652,6 +7489,7 @@ func NSStringTransformLatinToThai() *NSString {
 	return NSStringFromID(id)
 }
 
+// A transform that converts Mandarin to Latin script.
 func NSStringTransformMandarinToLatin() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStringTransformMandarinToLatin")
 	if ptr == 0 {
@@ -5664,6 +7502,7 @@ func NSStringTransformMandarinToLatin() *NSString {
 	return NSStringFromID(id)
 }
 
+// A transform that strips combining marks (accents or diacritics).
 func NSStringTransformStripCombiningMarks() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStringTransformStripCombiningMarks")
 	if ptr == 0 {
@@ -5676,6 +7515,7 @@ func NSStringTransformStripCombiningMarks() *NSString {
 	return NSStringFromID(id)
 }
 
+// A transform that strips diacritics from the string.
 func NSStringTransformStripDiacritics() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStringTransformStripDiacritics")
 	if ptr == 0 {
@@ -5688,6 +7528,7 @@ func NSStringTransformStripDiacritics() *NSString {
 	return NSStringFromID(id)
 }
 
+// A transform that converts text to Latin script.
 func NSStringTransformToLatin() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStringTransformToLatin")
 	if ptr == 0 {
@@ -5700,6 +7541,7 @@ func NSStringTransformToLatin() *NSString {
 	return NSStringFromID(id)
 }
 
+// A transform that converts characters to their Unicode names.
 func NSStringTransformToUnicodeName() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStringTransformToUnicodeName")
 	if ptr == 0 {
@@ -5712,6 +7554,7 @@ func NSStringTransformToUnicodeName() *NSString {
 	return NSStringFromID(id)
 }
 
+// A transform that converts characters to XML hex escape codes.
 func NSStringTransformToXMLHex() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStringTransformToXMLHex")
 	if ptr == 0 {
@@ -5724,6 +7567,7 @@ func NSStringTransformToXMLHex() *NSString {
 	return NSStringFromID(id)
 }
 
+// An operator that returns the sum of a collection's values for the specified key path.
 func NSSumKeyValueOperator() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSSumKeyValueOperator")
 	if ptr == 0 {
@@ -5736,6 +7580,7 @@ func NSSumKeyValueOperator() *NSString {
 	return NSStringFromID(id)
 }
 
+// A notification posted whenever the system clock is changed. This can be initiated by a call to `settimeofday()` or the user changing values in the Date and Time Preference panel. The notification object is `nil`. This notification does not contain a `userInfo` dictionary.
 func NSSystemClockDidChangeNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSSystemClockDidChangeNotification")
 	if ptr == 0 {
@@ -5748,6 +7593,7 @@ func NSSystemClockDidChangeNotification() *NSString {
 	return NSStringFromID(id)
 }
 
+// A notification posted when the time zone changes.
 func NSSystemTimeZoneDidChangeNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSSystemTimeZoneDidChangeNotification")
 	if ptr == 0 {
@@ -5760,6 +7606,7 @@ func NSSystemTimeZoneDidChangeNotification() *NSString {
 	return NSStringFromID(id)
 }
 
+// Posted when the task has stopped execution. The notification object is the `NSTask` object that the system terminated. This notification doesn't contain a `userInfo` dictionary. The system posts this notification from the thread in which the `NSTask` object called `launch`. When launching a task from a secondary thread or background queue, you can use the `terminationHandler` property instead for greater control over the execution context of any operations to be performed after the task finishes. This notification can be posted either when the task has exited normally or as a result of `terminate` being sent to the `NSTask` object. If the `NSTask` object gets released, however, this notification won't get sent, as the port the message would have been sent on was released as part of the task release. The observer method can use `terminationStatus` to determine why the task died.
 func NSTaskDidTerminateNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSTaskDidTerminateNotification")
 	if ptr == 0 {
@@ -5772,6 +7619,7 @@ func NSTaskDidTerminateNotification() *NSString {
 	return NSStringFromID(id)
 }
 
+// A key for the airline component of a transit information text checking result.
 func NSTextCheckingAirlineKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSTextCheckingAirlineKey")
 	if ptr == 0 {
@@ -5784,6 +7632,7 @@ func NSTextCheckingAirlineKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// A key for the city component of a text checking result.
 func NSTextCheckingCityKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSTextCheckingCityKey")
 	if ptr == 0 {
@@ -5796,6 +7645,7 @@ func NSTextCheckingCityKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// A key for the country component of a text checking result.
 func NSTextCheckingCountryKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSTextCheckingCountryKey")
 	if ptr == 0 {
@@ -5808,6 +7658,7 @@ func NSTextCheckingCountryKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// A key for the flight number component of a transit information text checking result.
 func NSTextCheckingFlightKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSTextCheckingFlightKey")
 	if ptr == 0 {
@@ -5820,6 +7671,7 @@ func NSTextCheckingFlightKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// A key for the job title component of a text checking result.
 func NSTextCheckingJobTitleKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSTextCheckingJobTitleKey")
 	if ptr == 0 {
@@ -5832,6 +7684,7 @@ func NSTextCheckingJobTitleKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// A key for the name component of a text checking result.
 func NSTextCheckingNameKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSTextCheckingNameKey")
 	if ptr == 0 {
@@ -5844,6 +7697,7 @@ func NSTextCheckingNameKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// A key for the organization component of a text checking result.
 func NSTextCheckingOrganizationKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSTextCheckingOrganizationKey")
 	if ptr == 0 {
@@ -5856,6 +7710,7 @@ func NSTextCheckingOrganizationKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// A key for the phone number component of a text checking result.
 func NSTextCheckingPhoneKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSTextCheckingPhoneKey")
 	if ptr == 0 {
@@ -5868,6 +7723,7 @@ func NSTextCheckingPhoneKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// A key for the state component of a text checking result.
 func NSTextCheckingStateKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSTextCheckingStateKey")
 	if ptr == 0 {
@@ -5880,6 +7736,7 @@ func NSTextCheckingStateKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// A key for the street component of a text checking result.
 func NSTextCheckingStreetKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSTextCheckingStreetKey")
 	if ptr == 0 {
@@ -5892,6 +7749,7 @@ func NSTextCheckingStreetKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// A key for the ZIP code component of a text checking result.
 func NSTextCheckingZIPKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSTextCheckingZIPKey")
 	if ptr == 0 {
@@ -5904,18 +7762,35 @@ func NSTextCheckingZIPKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// Key for an array of strings that specify what this day is called.
 // Deprecated: since macOS 10.5.
-func NSThisDayDesignations() uintptr {
+func NSThisDayDesignations() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSThisDayDesignations")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
+// A string that specifies the separator character for the thousands place of a decimal number.
 // Deprecated: since macOS 10.5.
-func NSThousandsSeparator() uintptr {
+func NSThousandsSeparator() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSThousandsSeparator")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
+// Posted when a thread receives the `exit()` message, before the thread exits. The notification object is the exiting `NSThread` object. This notification does not contain a `userInfo` dictionary. Observer methods invoked to receive this notification execute in the exiting thread, before it exits.
 // Deprecated: This notification does not protect against data races
 func NSThreadWillExitNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSThreadWillExitNotification")
@@ -5929,6 +7804,7 @@ func NSThreadWillExitNotification() *NSString {
 	return NSStringFromID(id)
 }
 
+// A 1024 x 1024 pixel thumbnail as a `UIImage` on iOS or an `NSImage` on macOS.
 // Deprecated: Use the QuickLookThumbnailing framework and extension point instead
 func NSThumbnail1024x1024SizeKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSThumbnail1024x1024SizeKey")
@@ -5942,18 +7818,35 @@ func NSThumbnail1024x1024SizeKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// Key for the value that specifies how dates with times are printed, affecting strings that use the format specifiers `%c`, `%X`, or `%x`.
 // Deprecated: since macOS 10.5.
-func NSTimeDateFormatString() uintptr {
+func NSTimeDateFormatString() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSTimeDateFormatString")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
+// Key for a format string that specifies how dates with times are printed.
 // Deprecated: since macOS 10.5.
-func NSTimeFormatString() uintptr {
+func NSTimeFormatString() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSTimeFormatString")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
+// The date the resource was created, or renamed into or within its parent directory. (Read-only before macOS 10.15/iOS 13.0; Read-write after, value type `NSDate`).
 func NSURLAddedToDirectoryDateKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLAddedToDirectoryDateKey")
 	if ptr == 0 {
@@ -5966,11 +7859,20 @@ func NSURLAddedToDirectoryDateKey() *NSString {
 	return NSStringFromID(id)
 }
 
-func NSURLApplicationIsScriptableKey() uintptr {
+// `true` if the resource is scriptable. Only applies to applications (Read-only, value type boolean `NSNumber`).
+func NSURLApplicationIsScriptableKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLApplicationIsScriptableKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
+// The time the resource's attributes were last modified (Read-only, value type `NSDate`).
 func NSURLAttributeModificationDateKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLAttributeModificationDateKey")
 	if ptr == 0 {
@@ -5983,7 +7885,7 @@ func NSURLAttributeModificationDateKey() *NSString {
 	return NSStringFromID(id)
 }
 
-// @const NSURLAuthenticationMethodClientCertificate @abstract SSL Client certificate.  Applies to any protocol.
+// SSL client certificate. Applies to any protocol.
 func NSURLAuthenticationMethodClientCertificate() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLAuthenticationMethodClientCertificate")
 	if ptr == 0 {
@@ -5996,7 +7898,7 @@ func NSURLAuthenticationMethodClientCertificate() *NSString {
 	return NSStringFromID(id)
 }
 
-// @const NSURLAuthenticationMethodDefault @abstract The default authentication method for a protocol
+// The default authentication method for a protocol.
 func NSURLAuthenticationMethodDefault() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLAuthenticationMethodDefault")
 	if ptr == 0 {
@@ -6009,7 +7911,7 @@ func NSURLAuthenticationMethodDefault() *NSString {
 	return NSStringFromID(id)
 }
 
-// @const NSURLAuthenticationMethodHTMLForm @abstract HTML form authentication. Applies to any protocol.
+// HTML form authentication. Applies to any protocol.
 func NSURLAuthenticationMethodHTMLForm() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLAuthenticationMethodHTMLForm")
 	if ptr == 0 {
@@ -6022,7 +7924,7 @@ func NSURLAuthenticationMethodHTMLForm() *NSString {
 	return NSStringFromID(id)
 }
 
-// @const NSURLAuthenticationMethodHTTPBasic @abstract HTTP basic authentication. Equivalent to NSURLAuthenticationMethodDefault for http.
+// HTTP basic authentication. Equivalent to “NSURLAuthenticationMethodDefault“ for HTTP.
 func NSURLAuthenticationMethodHTTPBasic() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLAuthenticationMethodHTTPBasic")
 	if ptr == 0 {
@@ -6035,7 +7937,7 @@ func NSURLAuthenticationMethodHTTPBasic() *NSString {
 	return NSStringFromID(id)
 }
 
-// @const NSURLAuthenticationMethodHTTPDigest @abstract HTTP digest authentication.
+// HTTP digest authentication.
 func NSURLAuthenticationMethodHTTPDigest() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLAuthenticationMethodHTTPDigest")
 	if ptr == 0 {
@@ -6048,7 +7950,7 @@ func NSURLAuthenticationMethodHTTPDigest() *NSString {
 	return NSStringFromID(id)
 }
 
-// @const NSURLAuthenticationMethodNTLM @abstract NTLM authentication.
+// NTLM authentication.
 func NSURLAuthenticationMethodNTLM() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLAuthenticationMethodNTLM")
 	if ptr == 0 {
@@ -6061,7 +7963,7 @@ func NSURLAuthenticationMethodNTLM() *NSString {
 	return NSStringFromID(id)
 }
 
-// @const NSURLAuthenticationMethodNegotiate @abstract Negotiate authentication.
+// Negotiate authentication.
 func NSURLAuthenticationMethodNegotiate() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLAuthenticationMethodNegotiate")
 	if ptr == 0 {
@@ -6074,7 +7976,7 @@ func NSURLAuthenticationMethodNegotiate() *NSString {
 	return NSStringFromID(id)
 }
 
-// @const NSURLAuthenticationMethodServerTrust @abstract SecTrustRef validation required.  Applies to any protocol.
+// `SecTrustRef` validation required. Applies to any protocol.
 func NSURLAuthenticationMethodServerTrust() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLAuthenticationMethodServerTrust")
 	if ptr == 0 {
@@ -6087,6 +7989,7 @@ func NSURLAuthenticationMethodServerTrust() *NSString {
 	return NSStringFromID(id)
 }
 
+// The URL's path as a canonical absolute file system path (Read-only, value type `NSString`).
 func NSURLCanonicalPathKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLCanonicalPathKey")
 	if ptr == 0 {
@@ -6099,6 +8002,7 @@ func NSURLCanonicalPathKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The date the resource was last accessed (Read-write, value type `NSDate`).
 func NSURLContentAccessDateKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLContentAccessDateKey")
 	if ptr == 0 {
@@ -6111,6 +8015,7 @@ func NSURLContentAccessDateKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The time the resource content was last modified (Read-write, value type `NSDate`).
 func NSURLContentModificationDateKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLContentModificationDateKey")
 	if ptr == 0 {
@@ -6123,6 +8028,7 @@ func NSURLContentModificationDateKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// File type (`UTType`) for the resource (Read-only, value type `UTType`).
 func NSURLContentTypeKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLContentTypeKey")
 	if ptr == 0 {
@@ -6135,6 +8041,7 @@ func NSURLContentTypeKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The date the resource was created (Read-write, value type `NSDate`).
 func NSURLCreationDateKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLCreationDateKey")
 	if ptr == 0 {
@@ -6147,7 +8054,7 @@ func NSURLCreationDateKey() *NSString {
 	return NSStringFromID(id)
 }
 
-// @const NSURLCredentialStorageChangedNotification @abstract This notification is sent on the main thread whenever the set of stored credentials changes.
+// This notification is sent on the main thread whenever the set of stored credentials changes.
 // Deprecated: Notification is never posted
 func NSURLCredentialStorageChangedNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLCredentialStorageChangedNotification")
@@ -6161,6 +8068,7 @@ func NSURLCredentialStorageChangedNotification() *NSString {
 	return NSStringFromID(id)
 }
 
+// The corresponding value is an `NSNumber` object representing a Boolean value that indicates whether credentials which contain the “URLCredential/Persistence/synchronizable“ attribute should be removed. If the key is missing or the value is `@NO`, then no attempt will be made to remove such a credential.
 func NSURLCredentialStorageRemoveSynchronizableCredentials() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLCredentialStorageRemoveSynchronizableCredentials")
 	if ptr == 0 {
@@ -6173,6 +8081,7 @@ func NSURLCredentialStorageRemoveSynchronizableCredentials() *NSString {
 	return NSStringFromID(id)
 }
 
+// The custom icon assigned to the resource, if any (Currently not implemented, value type `NSImage`).
 func NSURLCustomIconKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLCustomIconKey")
 	if ptr == 0 {
@@ -6185,6 +8094,7 @@ func NSURLCustomIconKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The count of file system objects contained in the directory (Read-only, value type `NSNumber`). This is a count of objects actually stored in the file system, so excludes virtual items like `.` and `..`. The property is useful for quickly identifying an empty directory for backup and syncing. If the URL is not a directory or the file system cannot cheaply compute the value, `nil` is returned. Not all file systems can provide this information.
 func NSURLDirectoryEntryCountKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLDirectoryEntryCountKey")
 	if ptr == 0 {
@@ -6197,6 +8107,7 @@ func NSURLDirectoryEntryCountKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The document identifier assigned by the kernel, used to identify the document regardless of where it moves on a volume. (Read-only, value type `NSNumber`).
 func NSURLDocumentIdentifierKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLDocumentIdentifierKey")
 	if ptr == 0 {
@@ -6209,6 +8120,7 @@ func NSURLDocumentIdentifierKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The icon normally displayed for the resource (Read-only, value type `NSImage`).
 func NSURLEffectiveIconKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLEffectiveIconKey")
 	if ptr == 0 {
@@ -6221,7 +8133,7 @@ func NSURLEffectiveIconKey() *NSString {
 	return NSStringFromID(id)
 }
 
-// @const NSURLErrorBackgroundTaskCancelledReasonKey @abstract The NSError userInfo dictionary key used to store and retrieve the NSNumber corresponding to the reason why a background NSURLSessionTask was cancelled
+// The `NSError` userInfo dictionary key used to store and retrieve the `NSNumber` corresponding to the reason why a background `NSURLSessionTask` was cancelled.
 func NSURLErrorBackgroundTaskCancelledReasonKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLErrorBackgroundTaskCancelledReasonKey")
 	if ptr == 0 {
@@ -6234,6 +8146,7 @@ func NSURLErrorBackgroundTaskCancelledReasonKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// URL loading system errors.
 func NSURLErrorDomain() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLErrorDomain")
 	if ptr == 0 {
@@ -6246,7 +8159,7 @@ func NSURLErrorDomain() *NSString {
 	return NSStringFromID(id)
 }
 
-// @const NSURLErrorFailingURLErrorKey @abstract The NSError userInfo dictionary key used to store and retrieve the URL which caused a load to fail.
+// The `NSError` userInfo dictionary key used to store and retrieve the URL which caused a load to fail. The corresponding value is an “NSURL“ instance.
 func NSURLErrorFailingURLErrorKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLErrorFailingURLErrorKey")
 	if ptr == 0 {
@@ -6259,7 +8172,7 @@ func NSURLErrorFailingURLErrorKey() *NSString {
 	return NSStringFromID(id)
 }
 
-// @const NSURLErrorFailingURLPeerTrustErrorKey @abstract The NSError userInfo dictionary key used to store and retrieve the SecTrustRef object representing the state of a failed SSL handshake.
+// The `NSError` userInfo dictionary key used to store and retrieve the `SecTrustRef` object representing the state of a failed SSL handshake.
 func NSURLErrorFailingURLPeerTrustErrorKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLErrorFailingURLPeerTrustErrorKey")
 	if ptr == 0 {
@@ -6272,7 +8185,7 @@ func NSURLErrorFailingURLPeerTrustErrorKey() *NSString {
 	return NSStringFromID(id)
 }
 
-// @const NSURLErrorFailingURLStringErrorKey @abstract The NSError userInfo dictionary key used to store and retrieve the NSString object for the URL which caused a load to fail. @discussion This constant supersedes NSErrorFailingURLStringKey, which was deprecated in Mac OS X 10.6.  Both constants refer to the same value for backward-compatibility, but this symbol name has a better prefix.
+// The `NSError` userInfo dictionary key used to store and retrieve the `NSString` for the URL which caused a load to fail. This constant supersedes “NSErrorFailingURLStringKey“, which was deprecated starting in macOS 10.6. Both constants refer to the same value for backward-compatibility, but this symbol name has a better prefix.
 // Deprecated: Use NSURLErrorFailingURLErrorKey instead
 func NSURLErrorFailingURLStringErrorKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLErrorFailingURLStringErrorKey")
@@ -6286,6 +8199,7 @@ func NSURLErrorFailingURLStringErrorKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The URL which caused the error.
 func NSURLErrorKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLErrorKey")
 	if ptr == 0 {
@@ -6298,7 +8212,7 @@ func NSURLErrorKey() *NSString {
 	return NSStringFromID(id)
 }
 
-// @const NSURLErrorNetworkUnavailableReasonKey @abstract The NSErrorUserInfoKey used to store and retrieve the NSNumber object corresponding to the reason why the network is unavailable when the task failed due to unsatisfiable network constraints.  See the NSURLErrorNetworkUnavailableReason enum for details.
+// The `NSError` userInfo key for the `NSNumber` corresponding to the reason why the network is unavailable when the task failed due to unsatisfiable network constraints. See “NSURLErrorNetworkUnavailableReason“ for possible values.
 func NSURLErrorNetworkUnavailableReasonKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLErrorNetworkUnavailableReasonKey")
 	if ptr == 0 {
@@ -6311,6 +8225,7 @@ func NSURLErrorNetworkUnavailableReasonKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The total allocated size on-disk for the file, in bytes (number of blocks times block size) (Read-only, value type `NSNumber`).
 func NSURLFileAllocatedSizeKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLFileAllocatedSizeKey")
 	if ptr == 0 {
@@ -6323,6 +8238,7 @@ func NSURLFileAllocatedSizeKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// A 64-bit value assigned by APFS that identifies a file's content data stream. (Read-only, value type `NSNumber`).
 func NSURLFileContentIdentifierKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLFileContentIdentifierKey")
 	if ptr == 0 {
@@ -6335,6 +8251,7 @@ func NSURLFileContentIdentifierKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The file system's internal inode identifier for the item. Not stable across all file systems or mounts. (Read-only, value type `NSNumber` containing an unsigned long long).
 func NSURLFileIdentifierKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLFileIdentifierKey")
 	if ptr == 0 {
@@ -6347,6 +8264,7 @@ func NSURLFileIdentifierKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The file is stored in an encrypted format on disk and cannot be read from or written to while the device is locked or booting.
 func NSURLFileProtectionComplete() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLFileProtectionComplete")
 	if ptr == 0 {
@@ -6359,6 +8277,7 @@ func NSURLFileProtectionComplete() *NSString {
 	return NSStringFromID(id)
 }
 
+// The file is stored in an encrypted format on disk after it closes. Files can be created while the device is locked, but once closed, cannot be opened again until the device is unlocked.
 func NSURLFileProtectionCompleteUnlessOpen() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLFileProtectionCompleteUnlessOpen")
 	if ptr == 0 {
@@ -6371,6 +8290,7 @@ func NSURLFileProtectionCompleteUnlessOpen() *NSString {
 	return NSStringFromID(id)
 }
 
+// The file is stored in an encrypted format on disk and cannot be accessed until after the device has booted. After the user unlocks the device for the first time, your app can access the file and continue to access it even if the user subsequently locks the device.
 func NSURLFileProtectionCompleteUntilFirstUserAuthentication() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLFileProtectionCompleteUntilFirstUserAuthentication")
 	if ptr == 0 {
@@ -6383,6 +8303,7 @@ func NSURLFileProtectionCompleteUntilFirstUserAuthentication() *NSString {
 	return NSStringFromID(id)
 }
 
+// The protection level for this file (Read-write, value type `NSURLFileProtectionType`).
 func NSURLFileProtectionKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLFileProtectionKey")
 	if ptr == 0 {
@@ -6395,6 +8316,7 @@ func NSURLFileProtectionKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The file has no special protections associated with it. It can be read from or written to at any time.
 func NSURLFileProtectionNone() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLFileProtectionNone")
 	if ptr == 0 {
@@ -6407,6 +8329,7 @@ func NSURLFileProtectionNone() *NSString {
 	return NSStringFromID(id)
 }
 
+// An identifier which can be used to compare two file system objects for equality using `isEqual`. Not persistent across system restarts. (Read-only, value type `id <NSCopying, NSCoding, NSSecureCoding, NSObject>`).
 func NSURLFileResourceIdentifierKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLFileResourceIdentifierKey")
 	if ptr == 0 {
@@ -6419,6 +8342,7 @@ func NSURLFileResourceIdentifierKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The resource is a block special file.
 func NSURLFileResourceTypeBlockSpecial() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLFileResourceTypeBlockSpecial")
 	if ptr == 0 {
@@ -6431,6 +8355,7 @@ func NSURLFileResourceTypeBlockSpecial() *NSString {
 	return NSStringFromID(id)
 }
 
+// The resource is a character special file.
 func NSURLFileResourceTypeCharacterSpecial() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLFileResourceTypeCharacterSpecial")
 	if ptr == 0 {
@@ -6443,6 +8368,7 @@ func NSURLFileResourceTypeCharacterSpecial() *NSString {
 	return NSStringFromID(id)
 }
 
+// The resource is a directory.
 func NSURLFileResourceTypeDirectory() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLFileResourceTypeDirectory")
 	if ptr == 0 {
@@ -6455,6 +8381,7 @@ func NSURLFileResourceTypeDirectory() *NSString {
 	return NSStringFromID(id)
 }
 
+// The file system object type. (Read-only, value type `NSString`).
 func NSURLFileResourceTypeKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLFileResourceTypeKey")
 	if ptr == 0 {
@@ -6467,6 +8394,7 @@ func NSURLFileResourceTypeKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The resource is a named pipe.
 func NSURLFileResourceTypeNamedPipe() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLFileResourceTypeNamedPipe")
 	if ptr == 0 {
@@ -6479,6 +8407,7 @@ func NSURLFileResourceTypeNamedPipe() *NSString {
 	return NSStringFromID(id)
 }
 
+// The resource is a regular file.
 func NSURLFileResourceTypeRegular() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLFileResourceTypeRegular")
 	if ptr == 0 {
@@ -6491,6 +8420,7 @@ func NSURLFileResourceTypeRegular() *NSString {
 	return NSStringFromID(id)
 }
 
+// The resource is a socket.
 func NSURLFileResourceTypeSocket() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLFileResourceTypeSocket")
 	if ptr == 0 {
@@ -6503,6 +8433,7 @@ func NSURLFileResourceTypeSocket() *NSString {
 	return NSStringFromID(id)
 }
 
+// The resource is a symbolic link.
 func NSURLFileResourceTypeSymbolicLink() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLFileResourceTypeSymbolicLink")
 	if ptr == 0 {
@@ -6515,6 +8446,7 @@ func NSURLFileResourceTypeSymbolicLink() *NSString {
 	return NSStringFromID(id)
 }
 
+// The resource's type is unknown.
 func NSURLFileResourceTypeUnknown() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLFileResourceTypeUnknown")
 	if ptr == 0 {
@@ -6527,6 +8459,7 @@ func NSURLFileResourceTypeUnknown() *NSString {
 	return NSStringFromID(id)
 }
 
+// A string constant for the "file" URL scheme. If you are comparing to a URL's scheme to check for file URLs, use the `fileURL` property instead - it is much faster.
 func NSURLFileScheme() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLFileScheme")
 	if ptr == 0 {
@@ -6539,6 +8472,7 @@ func NSURLFileScheme() *NSString {
 	return NSStringFromID(id)
 }
 
+// The file system object's security information encapsulated in an `NSFileSecurity` object. (Read-write, value type `NSFileSecurity`).
 func NSURLFileSecurityKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLFileSecurityKey")
 	if ptr == 0 {
@@ -6551,6 +8485,7 @@ func NSURLFileSecurityKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The file's size, in bytes (Read-only, value type `NSNumber`).
 func NSURLFileSizeKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLFileSizeKey")
 	if ptr == 0 {
@@ -6563,6 +8498,7 @@ func NSURLFileSizeKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// An opaque generation identifier for change detection. Persistent across system restarts. (Read-only, value type `id <NSCopying, NSCoding, NSSecureCoding, NSObject>`).
 func NSURLGenerationIdentifierKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLGenerationIdentifierKey")
 	if ptr == 0 {
@@ -6575,6 +8511,7 @@ func NSURLGenerationIdentifierKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` for resources whose filename extension is removed from the localized name property (Read-write, value type boolean `NSNumber`).
 func NSURLHasHiddenExtensionKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLHasHiddenExtensionKey")
 	if ptr == 0 {
@@ -6587,6 +8524,7 @@ func NSURLHasHiddenExtensionKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` if the resource is a Finder alias file or a symlink, `false` otherwise (Read-only, value type boolean `NSNumber`).
 func NSURLIsAliasFileKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLIsAliasFileKey")
 	if ptr == 0 {
@@ -6599,6 +8537,7 @@ func NSURLIsAliasFileKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` if resource is an application (Read-only, value type boolean `NSNumber`).
 func NSURLIsApplicationKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLIsApplicationKey")
 	if ptr == 0 {
@@ -6611,6 +8550,7 @@ func NSURLIsApplicationKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` for directories (Read-only, value type boolean `NSNumber`).
 func NSURLIsDirectoryKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLIsDirectoryKey")
 	if ptr == 0 {
@@ -6623,6 +8563,7 @@ func NSURLIsDirectoryKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` if resource should be excluded from backups, `false` otherwise (Read-write, value type boolean `NSNumber`).
 func NSURLIsExcludedFromBackupKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLIsExcludedFromBackupKey")
 	if ptr == 0 {
@@ -6635,6 +8576,7 @@ func NSURLIsExcludedFromBackupKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` if this process (as determined by EUID) can execute a file resource or search a directory resource. (Read-only, value type boolean `NSNumber`).
 func NSURLIsExecutableKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLIsExecutableKey")
 	if ptr == 0 {
@@ -6647,6 +8589,7 @@ func NSURLIsExecutableKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` for resources normally not displayed to users (Read-write, value type boolean `NSNumber`).
 func NSURLIsHiddenKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLIsHiddenKey")
 	if ptr == 0 {
@@ -6659,6 +8602,7 @@ func NSURLIsHiddenKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` if this URL is a file system trigger directory. (Read-only, value type boolean `NSNumber`).
 func NSURLIsMountTriggerKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLIsMountTriggerKey")
 	if ptr == 0 {
@@ -6671,6 +8615,7 @@ func NSURLIsMountTriggerKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` for packaged directories (Read-only 10_6 and 10_7, read-write 10_8, value type boolean `NSNumber`).
 func NSURLIsPackageKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLIsPackageKey")
 	if ptr == 0 {
@@ -6683,6 +8628,7 @@ func NSURLIsPackageKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` if the file can be deleted by the file system when asked to free space. (Read-only, value type `NSNumber`).
 func NSURLIsPurgeableKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLIsPurgeableKey")
 	if ptr == 0 {
@@ -6695,6 +8641,7 @@ func NSURLIsPurgeableKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` if this process (as determined by EUID) can read the resource. (Read-only, value type boolean `NSNumber`).
 func NSURLIsReadableKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLIsReadableKey")
 	if ptr == 0 {
@@ -6707,6 +8654,7 @@ func NSURLIsReadableKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` for regular files (Read-only, value type boolean `NSNumber`).
 func NSURLIsRegularFileKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLIsRegularFileKey")
 	if ptr == 0 {
@@ -6719,6 +8667,7 @@ func NSURLIsRegularFileKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` if the file has sparse regions. (Read-only, value type `NSNumber`).
 func NSURLIsSparseKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLIsSparseKey")
 	if ptr == 0 {
@@ -6731,6 +8680,7 @@ func NSURLIsSparseKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` for symlinks (Read-only, value type boolean `NSNumber`).
 func NSURLIsSymbolicLinkKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLIsSymbolicLinkKey")
 	if ptr == 0 {
@@ -6743,6 +8693,7 @@ func NSURLIsSymbolicLinkKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` for system-immutable resources (Read-write, value type boolean `NSNumber`).
 func NSURLIsSystemImmutableKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLIsSystemImmutableKey")
 	if ptr == 0 {
@@ -6755,6 +8706,7 @@ func NSURLIsSystemImmutableKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` if this item is synced to the cloud, `false` if it is only a local file. (Read-only, value type boolean `NSNumber`).
 func NSURLIsUbiquitousItemKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLIsUbiquitousItemKey")
 	if ptr == 0 {
@@ -6767,6 +8719,7 @@ func NSURLIsUbiquitousItemKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` for user-immutable resources (Read-write, value type boolean `NSNumber`).
 func NSURLIsUserImmutableKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLIsUserImmutableKey")
 	if ptr == 0 {
@@ -6779,6 +8732,7 @@ func NSURLIsUserImmutableKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` for the root directory of a volume (Read-only, value type boolean `NSNumber`).
 func NSURLIsVolumeKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLIsVolumeKey")
 	if ptr == 0 {
@@ -6791,6 +8745,7 @@ func NSURLIsVolumeKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` if this process (as determined by EUID) can write to the resource. (Read-only, value type boolean `NSNumber`).
 func NSURLIsWritableKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLIsWritableKey")
 	if ptr == 0 {
@@ -6803,6 +8758,7 @@ func NSURLIsWritableKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// Key for the resource properties that have not been set after `setResourceValues:error:` returns an error, returned as an array of strings.
 func NSURLKeysOfUnsetValuesKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLKeysOfUnsetValuesKey")
 	if ptr == 0 {
@@ -6815,6 +8771,7 @@ func NSURLKeysOfUnsetValuesKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The color of the assigned label (Read-only, value type `NSColor`).
 func NSURLLabelColorKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLLabelColorKey")
 	if ptr == 0 {
@@ -6827,6 +8784,7 @@ func NSURLLabelColorKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The label number assigned to the resource (Read-write, value type `NSNumber`).
 func NSURLLabelNumberKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLLabelNumberKey")
 	if ptr == 0 {
@@ -6839,6 +8797,7 @@ func NSURLLabelNumberKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// Number of hard links to the resource (Read-only, value type `NSNumber`).
 func NSURLLinkCountKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLLinkCountKey")
 	if ptr == 0 {
@@ -6851,6 +8810,7 @@ func NSURLLinkCountKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The user-visible label text (Read-only, value type `NSString`).
 func NSURLLocalizedLabelKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLLocalizedLabelKey")
 	if ptr == 0 {
@@ -6863,6 +8823,7 @@ func NSURLLocalizedLabelKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// Localized or extension-hidden name as displayed to users (Read-only, value type `NSString`).
 func NSURLLocalizedNameKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLLocalizedNameKey")
 	if ptr == 0 {
@@ -6875,6 +8836,7 @@ func NSURLLocalizedNameKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// User-visible type or “kind” description (Read-only, value type `NSString`).
 func NSURLLocalizedTypeDescriptionKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLLocalizedTypeDescriptionKey")
 	if ptr == 0 {
@@ -6887,6 +8849,7 @@ func NSURLLocalizedTypeDescriptionKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` if the file has extended attributes. `false` guarantees there are none. (Read-only, value type `NSNumber`).
 func NSURLMayHaveExtendedAttributesKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLMayHaveExtendedAttributesKey")
 	if ptr == 0 {
@@ -6899,6 +8862,7 @@ func NSURLMayHaveExtendedAttributesKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` for cloned files and their originals that may share data blocks. (Read-only, value type `NSNumber`).
 func NSURLMayShareFileContentKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLMayShareFileContentKey")
 	if ptr == 0 {
@@ -6911,6 +8875,7 @@ func NSURLMayShareFileContentKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The resource name provided by the file system (Read-write, value type `NSString`).
 func NSURLNameKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLNameKey")
 	if ptr == 0 {
@@ -6923,6 +8888,7 @@ func NSURLNameKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The resource's parent directory, if any (Read-only, value type `NSURL`).
 func NSURLParentDirectoryURLKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLParentDirectoryURLKey")
 	if ptr == 0 {
@@ -6935,6 +8901,7 @@ func NSURLParentDirectoryURLKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The URL's path as a file system path (Read-only, value type `NSString`).
 func NSURLPathKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLPathKey")
 	if ptr == 0 {
@@ -6947,6 +8914,7 @@ func NSURLPathKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The optimal block size when reading or writing this file's data, or `nil` if not available. (Read-only, value type `NSNumber`).
 func NSURLPreferredIOBlockSizeKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLPreferredIOBlockSizeKey")
 	if ptr == 0 {
@@ -6959,7 +8927,7 @@ func NSURLPreferredIOBlockSizeKey() *NSString {
 	return NSStringFromID(id)
 }
 
-// @const NSURLProtectionSpaceFTP @abstract The protocol for FTP
+// The protocol for FTP.
 // Deprecated: FTP is deprecated and only supported in the classic loading mode
 func NSURLProtectionSpaceFTP() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLProtectionSpaceFTP")
@@ -6973,7 +8941,7 @@ func NSURLProtectionSpaceFTP() *NSString {
 	return NSStringFromID(id)
 }
 
-// @const NSURLProtectionSpaceFTPProxy @abstract The proxy type for ftp proxies
+// The proxy type for FTP proxies.
 // Deprecated: FTP is deprecated and only supported in the classic loading mode
 func NSURLProtectionSpaceFTPProxy() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLProtectionSpaceFTPProxy")
@@ -6987,7 +8955,7 @@ func NSURLProtectionSpaceFTPProxy() *NSString {
 	return NSStringFromID(id)
 }
 
-// @const NSURLProtectionSpaceHTTP @abstract The protocol for HTTP
+// The protocol for HTTP.
 func NSURLProtectionSpaceHTTP() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLProtectionSpaceHTTP")
 	if ptr == 0 {
@@ -7000,7 +8968,7 @@ func NSURLProtectionSpaceHTTP() *NSString {
 	return NSStringFromID(id)
 }
 
-// @const NSURLProtectionSpaceHTTPProxy @abstract The proxy type for http proxies
+// The proxy type for HTTP proxies.
 func NSURLProtectionSpaceHTTPProxy() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLProtectionSpaceHTTPProxy")
 	if ptr == 0 {
@@ -7013,7 +8981,7 @@ func NSURLProtectionSpaceHTTPProxy() *NSString {
 	return NSStringFromID(id)
 }
 
-// @const NSURLProtectionSpaceHTTPS @abstract The protocol for HTTPS
+// The protocol for HTTPS.
 func NSURLProtectionSpaceHTTPS() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLProtectionSpaceHTTPS")
 	if ptr == 0 {
@@ -7026,7 +8994,7 @@ func NSURLProtectionSpaceHTTPS() *NSString {
 	return NSStringFromID(id)
 }
 
-// @const NSURLProtectionSpaceHTTPSProxy @abstract The proxy type for https proxies
+// The proxy type for HTTPS proxies.
 func NSURLProtectionSpaceHTTPSProxy() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLProtectionSpaceHTTPSProxy")
 	if ptr == 0 {
@@ -7039,7 +9007,7 @@ func NSURLProtectionSpaceHTTPSProxy() *NSString {
 	return NSStringFromID(id)
 }
 
-// @const NSURLProtectionSpaceSOCKSProxy @abstract The proxy type for SOCKS proxies
+// The proxy type for SOCKS proxies.
 func NSURLProtectionSpaceSOCKSProxy() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLProtectionSpaceSOCKSProxy")
 	if ptr == 0 {
@@ -7052,11 +9020,20 @@ func NSURLProtectionSpaceSOCKSProxy() *NSString {
 	return NSStringFromID(id)
 }
 
-func NSURLQuarantinePropertiesKey() uintptr {
+// The quarantine properties as defined in `LSQuarantine.h`. Pass `NSNull` to remove quarantine information. (Read-write, value type `NSDictionary`).
+func NSURLQuarantinePropertiesKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLQuarantinePropertiesKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
+// Key in the `userInfo` dictionary of an `NSError` received during a failed download.
 func NSURLSessionDownloadTaskResumeData() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLSessionDownloadTaskResumeData")
 	if ptr == 0 {
@@ -7069,21 +9046,34 @@ func NSURLSessionDownloadTaskResumeData() *NSString {
 	return NSStringFromID(id)
 }
 
-func NSURLSessionTaskPriorityDefault() uintptr {
+// The default URL session task priority, used implicitly for any task you have not prioritized. The floating point value of this constant is `0.5`.
+func NSURLSessionTaskPriorityDefault() float32 {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLSessionTaskPriorityDefault")
-	return ptr
+	if ptr == 0 {
+		return 0
+	}
+	return *(*float32)(unsafe.Pointer(ptr))
 }
 
-func NSURLSessionTaskPriorityHigh() uintptr {
+// A high URL session task priority, with a floating point value above the default value and below the maximum of `1.0`.
+func NSURLSessionTaskPriorityHigh() float32 {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLSessionTaskPriorityHigh")
-	return ptr
+	if ptr == 0 {
+		return 0
+	}
+	return *(*float32)(unsafe.Pointer(ptr))
 }
 
-func NSURLSessionTaskPriorityLow() uintptr {
+// A low URL session task priority, with a floating point value above the minimum of `0` and below the default value.
+func NSURLSessionTaskPriorityLow() float32 {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLSessionTaskPriorityLow")
-	return ptr
+	if ptr == 0 {
+		return 0
+	}
+	return *(*float32)(unsafe.Pointer(ptr))
 }
 
+// The total size of the transfer cannot be determined.
 func NSURLSessionTransferSizeUnknown() int64 {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLSessionTransferSizeUnknown")
 	if ptr == 0 {
@@ -7105,11 +9095,20 @@ func NSURLSessionUploadTaskResumeData() *NSString {
 	return NSStringFromID(id)
 }
 
-func NSURLTagNamesKey() uintptr {
+// The array of Tag names (Read-write, value type `NSArray` of `NSString`).
+func NSURLTagNamesKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLTagNamesKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
+// A dictionary of `NSImage`/`UIImage` objects keyed by size (Read-write, value type `NSDictionary`). See `NSURLThumbnailDictionaryItem` for possible keys.
 // Deprecated: Use the QuickLookThumbnailing framework and extension point instead
 func NSURLThumbnailDictionaryKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLThumbnailDictionaryKey")
@@ -7123,12 +9122,21 @@ func NSURLThumbnailDictionaryKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// All thumbnails as a single `NSImage` (Read-write, value type `NSImage`).
 // Deprecated: Use the QuickLookThumbnailing framework and extension point instead
-func NSURLThumbnailKey() uintptr {
+func NSURLThumbnailKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLThumbnailKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
+// Total allocated size of the file in bytes (this may include space used by metadata), or `nil` if not available. This can be less than the value returned by `NSURLTotalFileSizeKey` if the resource is compressed. (Read-only, value type `NSNumber`).
 func NSURLTotalFileAllocatedSizeKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLTotalFileAllocatedSizeKey")
 	if ptr == 0 {
@@ -7141,6 +9149,7 @@ func NSURLTotalFileAllocatedSizeKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// Total displayable size of the file in bytes (this may include space used by metadata), or `nil` if not available. (Read-only, value type `NSNumber`).
 func NSURLTotalFileSizeKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLTotalFileSizeKey")
 	if ptr == 0 {
@@ -7153,6 +9162,7 @@ func NSURLTotalFileSizeKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// Uniform type identifier (UTI) for the resource (Read-only, value type `NSString`).
 // Deprecated: Use NSURLContentTypeKey instead
 func NSURLTypeIdentifierKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLTypeIdentifierKey")
@@ -7166,6 +9176,7 @@ func NSURLTypeIdentifierKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The name of this item's container as displayed to users. (Read-only, value type `NSString`).
 func NSURLUbiquitousItemContainerDisplayNameKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLUbiquitousItemContainerDisplayNameKey")
 	if ptr == 0 {
@@ -7178,6 +9189,7 @@ func NSURLUbiquitousItemContainerDisplayNameKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` if a download of this item has already been requested with an API like `startDownloadingUbiquitousItemAtURL:error:`. (Read-only, value type boolean `NSNumber`).
 func NSURLUbiquitousItemDownloadRequestedKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLUbiquitousItemDownloadRequestedKey")
 	if ptr == 0 {
@@ -7190,6 +9202,7 @@ func NSURLUbiquitousItemDownloadRequestedKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// An error object that indicates why downloading the item from iCloud failed, see the `NSUbiquitousFile` section in FoundationErrors.h. (Read-only, value type `NSError`).
 func NSURLUbiquitousItemDownloadingErrorKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLUbiquitousItemDownloadingErrorKey")
 	if ptr == 0 {
@@ -7202,6 +9215,7 @@ func NSURLUbiquitousItemDownloadingErrorKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// A local copy of this item exists and is the most up-to-date version known to the device.
 func NSURLUbiquitousItemDownloadingStatusCurrent() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLUbiquitousItemDownloadingStatusCurrent")
 	if ptr == 0 {
@@ -7214,6 +9228,7 @@ func NSURLUbiquitousItemDownloadingStatusCurrent() *NSString {
 	return NSStringFromID(id)
 }
 
+// A local copy of this item exists, but it is stale. The most recent version will be downloaded as soon as possible.
 func NSURLUbiquitousItemDownloadingStatusDownloaded() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLUbiquitousItemDownloadingStatusDownloaded")
 	if ptr == 0 {
@@ -7226,6 +9241,7 @@ func NSURLUbiquitousItemDownloadingStatusDownloaded() *NSString {
 	return NSStringFromID(id)
 }
 
+// The current download state for the item. (Read-only, value type `NSString`). The value indicates whether a local copy exists and whether that copy is the most current version of the item. See `NSURLUbiquitousItemDownloadingStatus` for possible values.
 func NSURLUbiquitousItemDownloadingStatusKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLUbiquitousItemDownloadingStatusKey")
 	if ptr == 0 {
@@ -7238,6 +9254,7 @@ func NSURLUbiquitousItemDownloadingStatusKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The values returned for the `NSURLUbiquitousItemDownloadingStatusKey`. This item has not been downloaded yet. Use `startDownloadingUbiquitousItemAtURL:error:` to download it.
 func NSURLUbiquitousItemDownloadingStatusNotDownloaded() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLUbiquitousItemDownloadingStatusNotDownloaded")
 	if ptr == 0 {
@@ -7250,6 +9267,7 @@ func NSURLUbiquitousItemDownloadingStatusNotDownloaded() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` if this item has conflicts outstanding. (Read-only, value type boolean `NSNumber`).
 func NSURLUbiquitousItemHasUnresolvedConflictsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLUbiquitousItemHasUnresolvedConflictsKey")
 	if ptr == 0 {
@@ -7262,6 +9280,7 @@ func NSURLUbiquitousItemHasUnresolvedConflictsKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// Equivalent to `NSURLUbiquitousItemDownloadingStatusKey == NSURLUbiquitousItemDownloadingStatusCurrent`. Has never behaved as documented in earlier releases, hence deprecated. (Read-only, value type boolean `NSNumber`).
 // Deprecated: Use NSURLUbiquitousItemDownloadingStatusKey instead
 func NSURLUbiquitousItemIsDownloadedKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLUbiquitousItemIsDownloadedKey")
@@ -7275,6 +9294,7 @@ func NSURLUbiquitousItemIsDownloadedKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` if data is being downloaded for this item. (Read-only, value type boolean `NSNumber`).
 func NSURLUbiquitousItemIsDownloadingKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLUbiquitousItemIsDownloadingKey")
 	if ptr == 0 {
@@ -7287,6 +9307,7 @@ func NSURLUbiquitousItemIsDownloadingKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` if the item is excluded from sync, which means it is locally on disk but won't be available on the server. An excluded item is no longer ubiquitous. (Read-write, value type boolean `NSNumber`).
 func NSURLUbiquitousItemIsExcludedFromSyncKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLUbiquitousItemIsExcludedFromSyncKey")
 	if ptr == 0 {
@@ -7299,6 +9320,7 @@ func NSURLUbiquitousItemIsExcludedFromSyncKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` if the ubiquitous item is shared. (Read-only, value type boolean `NSNumber`).
 func NSURLUbiquitousItemIsSharedKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLUbiquitousItemIsSharedKey")
 	if ptr == 0 {
@@ -7311,6 +9333,7 @@ func NSURLUbiquitousItemIsSharedKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// A Boolean value that indicates whether sync is paused for this item (value type boolean `NSNumber`).
 func NSURLUbiquitousItemIsSyncPausedKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLUbiquitousItemIsSyncPausedKey")
 	if ptr == 0 {
@@ -7323,6 +9346,7 @@ func NSURLUbiquitousItemIsSyncPausedKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` if there is data present in the cloud for this item. (Read-only, value type boolean `NSNumber`).
 func NSURLUbiquitousItemIsUploadedKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLUbiquitousItemIsUploadedKey")
 	if ptr == 0 {
@@ -7335,6 +9359,7 @@ func NSURLUbiquitousItemIsUploadedKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` if data is being uploaded for this item. (Read-only, value type boolean `NSNumber`).
 func NSURLUbiquitousItemIsUploadingKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLUbiquitousItemIsUploadingKey")
 	if ptr == 0 {
@@ -7347,6 +9372,7 @@ func NSURLUbiquitousItemIsUploadingKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// Use `NSMetadataQuery` and `NSMetadataUbiquitousItemPercentDownloadedKey` on `NSMetadataItem` instead.
 // Deprecated: Use NSMetadataUbiquitousItemPercentDownloadedKey instead
 func NSURLUbiquitousItemPercentDownloadedKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLUbiquitousItemPercentDownloadedKey")
@@ -7360,6 +9386,7 @@ func NSURLUbiquitousItemPercentDownloadedKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// Use `NSMetadataQuery` and `NSMetadataUbiquitousItemPercentUploadedKey` on `NSMetadataItem` instead.
 // Deprecated: Use NSMetadataUbiquitousItemPercentUploadedKey instead
 func NSURLUbiquitousItemPercentUploadedKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLUbiquitousItemPercentUploadedKey")
@@ -7373,6 +9400,7 @@ func NSURLUbiquitousItemPercentUploadedKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The read-only value of the `NSFileManagerSupportedSyncControls` options (value type `NSNumber`).
 func NSURLUbiquitousItemSupportedSyncControlsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLUbiquitousItemSupportedSyncControlsKey")
 	if ptr == 0 {
@@ -7385,6 +9413,7 @@ func NSURLUbiquitousItemSupportedSyncControlsKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// An error object that indicates why uploading the item to iCloud failed, see the `NSUbiquitousFile` section in FoundationErrors.h. (Read-only, value type `NSError`).
 func NSURLUbiquitousItemUploadingErrorKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLUbiquitousItemUploadingErrorKey")
 	if ptr == 0 {
@@ -7397,6 +9426,7 @@ func NSURLUbiquitousItemUploadingErrorKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The permissions for the current user, or `nil` if not shared. (Read-only, value type `NSString`). See `NSURLUbiquitousSharedItemPermissions` for possible values.
 func NSURLUbiquitousSharedItemCurrentUserPermissionsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLUbiquitousSharedItemCurrentUserPermissionsKey")
 	if ptr == 0 {
@@ -7409,6 +9439,7 @@ func NSURLUbiquitousSharedItemCurrentUserPermissionsKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The current user's role for this shared item, or `nil` if not shared. (Read-only, value type `NSString`). See `NSURLUbiquitousSharedItemRole` for possible values.
 func NSURLUbiquitousSharedItemCurrentUserRoleKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLUbiquitousSharedItemCurrentUserRoleKey")
 	if ptr == 0 {
@@ -7421,6 +9452,7 @@ func NSURLUbiquitousSharedItemCurrentUserRoleKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The name components of the most recent editor of the document, or `nil` if it is the current user. (Read-only, value type `NSPersonNameComponents`).
 func NSURLUbiquitousSharedItemMostRecentEditorNameComponentsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLUbiquitousSharedItemMostRecentEditorNameComponentsKey")
 	if ptr == 0 {
@@ -7433,6 +9465,7 @@ func NSURLUbiquitousSharedItemMostRecentEditorNameComponentsKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The name components of the item's owner, or `nil` if the current user is the owner. (Read-only, value type `NSPersonNameComponents`).
 func NSURLUbiquitousSharedItemOwnerNameComponentsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLUbiquitousSharedItemOwnerNameComponentsKey")
 	if ptr == 0 {
@@ -7445,6 +9478,7 @@ func NSURLUbiquitousSharedItemOwnerNameComponentsKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The values returned for the `NSURLUbiquitousSharedItemCurrentUserPermissionsKey`. The current user is only allowed to read this item.
 func NSURLUbiquitousSharedItemPermissionsReadOnly() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLUbiquitousSharedItemPermissionsReadOnly")
 	if ptr == 0 {
@@ -7457,6 +9491,7 @@ func NSURLUbiquitousSharedItemPermissionsReadOnly() *NSString {
 	return NSStringFromID(id)
 }
 
+// The current user is allowed to both read and write this item.
 func NSURLUbiquitousSharedItemPermissionsReadWrite() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLUbiquitousSharedItemPermissionsReadWrite")
 	if ptr == 0 {
@@ -7469,6 +9504,7 @@ func NSURLUbiquitousSharedItemPermissionsReadWrite() *NSString {
 	return NSStringFromID(id)
 }
 
+// The values returned for the `NSURLUbiquitousSharedItemCurrentUserRoleKey`. The current user is the owner of this shared item.
 func NSURLUbiquitousSharedItemRoleOwner() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLUbiquitousSharedItemRoleOwner")
 	if ptr == 0 {
@@ -7481,6 +9517,7 @@ func NSURLUbiquitousSharedItemRoleOwner() *NSString {
 	return NSStringFromID(id)
 }
 
+// The current user is a participant of this shared item.
 func NSURLUbiquitousSharedItemRoleParticipant() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLUbiquitousSharedItemRoleParticipant")
 	if ptr == 0 {
@@ -7493,6 +9530,7 @@ func NSURLUbiquitousSharedItemRoleParticipant() *NSString {
 	return NSStringFromID(id)
 }
 
+// The volume's available capacity in bytes for storing important resources, including space expected to be cleared by purging non-essential and cached resources. (Read-only, value type `NSNumber`). "Important" means something that the user or application clearly expects to be present on the local system, but is ultimately replaceable. This would include items that the user has explicitly requested via the UI, and resources that an application requires in order to provide functionality. Examples: A video that the user has explicitly requested to watch but has not yet finished watching or an audio file that the user has requested to download. This value should not be used in determining if there is room for an irreplaceable resource. In the case of irreplaceable resources, always attempt to save the resource regardless of available capacity and handle failure as gracefully as possible.
 func NSURLVolumeAvailableCapacityForImportantUsageKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeAvailableCapacityForImportantUsageKey")
 	if ptr == 0 {
@@ -7505,6 +9543,7 @@ func NSURLVolumeAvailableCapacityForImportantUsageKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The volume's available capacity in bytes for storing nonessential resources, including space expected to be cleared by purging non-essential and cached resources. (Read-only, value type `NSNumber`). "Opportunistic" means something that the user is likely to want but does not expect to be present on the local system, but is ultimately non-essential and replaceable. This would include items that will be created or downloaded without an explicit request from the user on the current device. Examples: A background download of a newly available episode of a TV series that a user has been recently watching, a piece of content explicitly requested on another device, or a new document saved to a network server by the current user from another device.
 func NSURLVolumeAvailableCapacityForOpportunisticUsageKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeAvailableCapacityForOpportunisticUsageKey")
 	if ptr == 0 {
@@ -7517,6 +9556,7 @@ func NSURLVolumeAvailableCapacityForOpportunisticUsageKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The volume's available capacity in bytes (Read-only, value type `NSNumber`).
 func NSURLVolumeAvailableCapacityKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeAvailableCapacityKey")
 	if ptr == 0 {
@@ -7529,6 +9569,7 @@ func NSURLVolumeAvailableCapacityKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The volume's creation date, or `nil` if this cannot be determined. (Read-only, value type `NSDate`).
 func NSURLVolumeCreationDateKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeCreationDateKey")
 	if ptr == 0 {
@@ -7541,6 +9582,7 @@ func NSURLVolumeCreationDateKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// An identifier that can be used to identify the volume the file system object is on. Not persistent across system restarts. (Read-only, value type `id <NSCopying, NSCoding, NSSecureCoding, NSObject>`).
 func NSURLVolumeIdentifierKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeIdentifierKey")
 	if ptr == 0 {
@@ -7553,6 +9595,7 @@ func NSURLVolumeIdentifierKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` if the volume is automounted. Note: do not mistake this with the functionality provided by `kCFURLVolumeSupportsBrowsingKey`. (Read-only, value type boolean `NSNumber`).
 func NSURLVolumeIsAutomountedKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeIsAutomountedKey")
 	if ptr == 0 {
@@ -7565,6 +9608,7 @@ func NSURLVolumeIsAutomountedKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` if the volume should be visible via the GUI (i.e., appear on the Desktop as a separate volume). (Read-only, value type boolean `NSNumber`).
 func NSURLVolumeIsBrowsableKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeIsBrowsableKey")
 	if ptr == 0 {
@@ -7577,6 +9621,7 @@ func NSURLVolumeIsBrowsableKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` if the volume's media is ejectable from the drive mechanism under software control. (Read-only, value type boolean `NSNumber`).
 func NSURLVolumeIsEjectableKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeIsEjectableKey")
 	if ptr == 0 {
@@ -7589,6 +9634,7 @@ func NSURLVolumeIsEjectableKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` if the volume is encrypted. (Read-only, value type boolean `NSNumber`).
 func NSURLVolumeIsEncryptedKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeIsEncryptedKey")
 	if ptr == 0 {
@@ -7601,6 +9647,7 @@ func NSURLVolumeIsEncryptedKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` if the volume's device is connected to an internal bus, `false` if connected to an external bus, or `nil` if not available. (Read-only, value type boolean `NSNumber`).
 func NSURLVolumeIsInternalKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeIsInternalKey")
 	if ptr == 0 {
@@ -7613,6 +9660,7 @@ func NSURLVolumeIsInternalKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` if the volume is currently using a journal for speedy recovery after an unplanned restart. (Read-only, value type boolean `NSNumber`).
 func NSURLVolumeIsJournalingKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeIsJournalingKey")
 	if ptr == 0 {
@@ -7625,6 +9673,7 @@ func NSURLVolumeIsJournalingKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` if the volume is stored on a local device. (Read-only, value type boolean `NSNumber`).
 func NSURLVolumeIsLocalKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeIsLocalKey")
 	if ptr == 0 {
@@ -7637,6 +9686,7 @@ func NSURLVolumeIsLocalKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` if the volume is read-only. (Read-only, value type boolean `NSNumber`).
 func NSURLVolumeIsReadOnlyKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeIsReadOnlyKey")
 	if ptr == 0 {
@@ -7649,6 +9699,7 @@ func NSURLVolumeIsReadOnlyKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` if the volume's media is removable from the drive mechanism. (Read-only, value type boolean `NSNumber`).
 func NSURLVolumeIsRemovableKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeIsRemovableKey")
 	if ptr == 0 {
@@ -7661,6 +9712,7 @@ func NSURLVolumeIsRemovableKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` if the volume is the root filesystem. (Read-only, value type boolean `NSNumber`).
 func NSURLVolumeIsRootFileSystemKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeIsRootFileSystemKey")
 	if ptr == 0 {
@@ -7673,6 +9725,7 @@ func NSURLVolumeIsRootFileSystemKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The user-visible volume format (Read-only, value type `NSString`).
 func NSURLVolumeLocalizedFormatDescriptionKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeLocalizedFormatDescriptionKey")
 	if ptr == 0 {
@@ -7685,6 +9738,7 @@ func NSURLVolumeLocalizedFormatDescriptionKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The user-presentable name of the volume (Read-only, value type `NSString`).
 func NSURLVolumeLocalizedNameKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeLocalizedNameKey")
 	if ptr == 0 {
@@ -7697,6 +9751,7 @@ func NSURLVolumeLocalizedNameKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The largest file size (in bytes) supported by this file system, or `nil` if this cannot be determined. (Read-only, value type `NSNumber`).
 func NSURLVolumeMaximumFileSizeKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeMaximumFileSizeKey")
 	if ptr == 0 {
@@ -7709,6 +9764,7 @@ func NSURLVolumeMaximumFileSizeKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The volume mounted from location. (Read-only, value type `NSString`).
 func NSURLVolumeMountFromLocationKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeMountFromLocationKey")
 	if ptr == 0 {
@@ -7721,6 +9777,7 @@ func NSURLVolumeMountFromLocationKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The name of the volume (Read-write if `NSURLVolumeSupportsRenamingKey` is `YES`, otherwise read-only, value type `NSString`).
 func NSURLVolumeNameKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeNameKey")
 	if ptr == 0 {
@@ -7733,6 +9790,7 @@ func NSURLVolumeNameKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The total number of resources on the volume (Read-only, value type `NSNumber`).
 func NSURLVolumeResourceCountKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeResourceCountKey")
 	if ptr == 0 {
@@ -7745,6 +9803,7 @@ func NSURLVolumeResourceCountKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The file system subtype value. (Read-only, value type `NSNumber`).
 func NSURLVolumeSubtypeKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeSubtypeKey")
 	if ptr == 0 {
@@ -7757,6 +9816,7 @@ func NSURLVolumeSubtypeKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` if the volume supports setting POSIX access permissions with the `NSURLFileSecurityKey` property. (Read-only, value type boolean `NSNumber`).
 func NSURLVolumeSupportsAccessPermissionsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeSupportsAccessPermissionsKey")
 	if ptr == 0 {
@@ -7769,6 +9829,7 @@ func NSURLVolumeSupportsAccessPermissionsKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` if the volume implements whole-file flock(2) style advisory locks, and the `O_EXLOCK` and `O_SHLOCK` flags of the open(2) call. (Read-only, value type boolean `NSNumber`).
 func NSURLVolumeSupportsAdvisoryFileLockingKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeSupportsAdvisoryFileLockingKey")
 	if ptr == 0 {
@@ -7781,6 +9842,7 @@ func NSURLVolumeSupportsAdvisoryFileLockingKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` if the volume format preserves the case of file and directory names. Otherwise the volume may change the case of some characters (typically making them all upper or all lower case). (Read-only, value type boolean `NSNumber`).
 func NSURLVolumeSupportsCasePreservedNamesKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeSupportsCasePreservedNamesKey")
 	if ptr == 0 {
@@ -7793,6 +9855,7 @@ func NSURLVolumeSupportsCasePreservedNamesKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` if the volume format treats upper and lower case characters in file and directory names as different. Otherwise an upper case character is equivalent to a lower case character, and you can't have two names that differ solely in the case of the characters. (Read-only, value type boolean `NSNumber`).
 func NSURLVolumeSupportsCaseSensitiveNamesKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeSupportsCaseSensitiveNamesKey")
 	if ptr == 0 {
@@ -7805,6 +9868,7 @@ func NSURLVolumeSupportsCaseSensitiveNamesKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` if the volume supports transparent decompression of compressed files using `decmpfs`. (Read-only, value type boolean `NSNumber`).
 func NSURLVolumeSupportsCompressionKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeSupportsCompressionKey")
 	if ptr == 0 {
@@ -7817,6 +9881,7 @@ func NSURLVolumeSupportsCompressionKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` if the volume supports `renamex_np(2)`'s `RENAME_EXCL` option. (Read-only, value type boolean `NSNumber`).
 func NSURLVolumeSupportsExclusiveRenamingKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeSupportsExclusiveRenamingKey")
 	if ptr == 0 {
@@ -7829,6 +9894,7 @@ func NSURLVolumeSupportsExclusiveRenamingKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` if the volume implements extended security (ACLs). (Read-only, value type boolean `NSNumber`).
 func NSURLVolumeSupportsExtendedSecurityKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeSupportsExtendedSecurityKey")
 	if ptr == 0 {
@@ -7841,6 +9907,7 @@ func NSURLVolumeSupportsExtendedSecurityKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` if the volume supports `clonefile(2)`. (Read-only, value type boolean `NSNumber`).
 func NSURLVolumeSupportsFileCloningKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeSupportsFileCloningKey")
 	if ptr == 0 {
@@ -7853,6 +9920,7 @@ func NSURLVolumeSupportsFileCloningKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` if the volume supports the File Protection attribute (see `NSURLFileProtectionKey`). (Read-only, value type `NSNumber`).
 func NSURLVolumeSupportsFileProtectionKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeSupportsFileProtectionKey")
 	if ptr == 0 {
@@ -7865,6 +9933,7 @@ func NSURLVolumeSupportsFileProtectionKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` if the volume format supports hard links (Read-only, value type boolean `NSNumber`).
 func NSURLVolumeSupportsHardLinksKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeSupportsHardLinksKey")
 	if ptr == 0 {
@@ -7877,6 +9946,7 @@ func NSURLVolumeSupportsHardLinksKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` if the volume supports making files immutable with the `NSURLIsUserImmutableKey` or `NSURLIsSystemImmutableKey` properties. (Read-only, value type boolean `NSNumber`).
 func NSURLVolumeSupportsImmutableFilesKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeSupportsImmutableFilesKey")
 	if ptr == 0 {
@@ -7889,6 +9959,7 @@ func NSURLVolumeSupportsImmutableFilesKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` if the volume format supports a journal used to speed recovery in case of unplanned restart (such as a power outage or crash). This does not necessarily mean the volume is actively using a journal. (Read-only, value type boolean `NSNumber`).
 func NSURLVolumeSupportsJournalingKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeSupportsJournalingKey")
 	if ptr == 0 {
@@ -7901,6 +9972,7 @@ func NSURLVolumeSupportsJournalingKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` if the volume format supports persistent object identifiers and can look up file system objects by their IDs (Read-only, value type boolean `NSNumber`).
 func NSURLVolumeSupportsPersistentIDsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeSupportsPersistentIDsKey")
 	if ptr == 0 {
@@ -7913,6 +9985,7 @@ func NSURLVolumeSupportsPersistentIDsKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` if the volume can be renamed. (Read-only, value type boolean `NSNumber`).
 func NSURLVolumeSupportsRenamingKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeSupportsRenamingKey")
 	if ptr == 0 {
@@ -7925,6 +9998,7 @@ func NSURLVolumeSupportsRenamingKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` if the volume supports reliable storage of times for the root directory. (Read-only, value type boolean `NSNumber`).
 func NSURLVolumeSupportsRootDirectoryDatesKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeSupportsRootDirectoryDatesKey")
 	if ptr == 0 {
@@ -7937,6 +10011,7 @@ func NSURLVolumeSupportsRootDirectoryDatesKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` if the volume format supports sparse files, that is, files which can have 'holes' that have never been written to, and thus do not consume space on disk. A sparse file may have an allocated size on disk that is less than its logical length. (Read-only, value type boolean `NSNumber`).
 func NSURLVolumeSupportsSparseFilesKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeSupportsSparseFilesKey")
 	if ptr == 0 {
@@ -7949,6 +10024,7 @@ func NSURLVolumeSupportsSparseFilesKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` if the volume supports `renamex_np(2)`'s `RENAME_SWAP` option. (Read-only, value type boolean `NSNumber`).
 func NSURLVolumeSupportsSwapRenamingKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeSupportsSwapRenamingKey")
 	if ptr == 0 {
@@ -7961,6 +10037,7 @@ func NSURLVolumeSupportsSwapRenamingKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` if the volume format supports symbolic links (Read-only, value type boolean `NSNumber`).
 func NSURLVolumeSupportsSymbolicLinksKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeSupportsSymbolicLinksKey")
 	if ptr == 0 {
@@ -7973,6 +10050,7 @@ func NSURLVolumeSupportsSymbolicLinksKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` if the volume supports returning volume size values (`NSURLVolumeTotalCapacityKey` and `NSURLVolumeAvailableCapacityKey`). (Read-only, value type boolean `NSNumber`).
 func NSURLVolumeSupportsVolumeSizesKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeSupportsVolumeSizesKey")
 	if ptr == 0 {
@@ -7985,6 +10063,7 @@ func NSURLVolumeSupportsVolumeSizesKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// `true` if the volume keeps track of allocated but unwritten runs of a file so that it can substitute zeroes without actually writing zeroes to the media. For security reasons, parts of a file (runs) that have never been written to must appear to contain zeroes. (Read-only, value type boolean `NSNumber`).
 func NSURLVolumeSupportsZeroRunsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeSupportsZeroRunsKey")
 	if ptr == 0 {
@@ -7997,6 +10076,7 @@ func NSURLVolumeSupportsZeroRunsKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The volume's total capacity in bytes (Read-only, value type `NSNumber`).
 func NSURLVolumeTotalCapacityKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeTotalCapacityKey")
 	if ptr == 0 {
@@ -8009,6 +10089,7 @@ func NSURLVolumeTotalCapacityKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The name of the file system type. (Read-only, value type `NSString`).
 func NSURLVolumeTypeNameKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeTypeNameKey")
 	if ptr == 0 {
@@ -8021,6 +10102,7 @@ func NSURLVolumeTypeNameKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The `NSURL` needed to remount a network volume, or `nil` if not available. (Read-only, value type `NSURL`).
 func NSURLVolumeURLForRemountingKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeURLForRemountingKey")
 	if ptr == 0 {
@@ -8033,6 +10115,7 @@ func NSURLVolumeURLForRemountingKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// URL of the volume on which the resource is stored (Read-only, value type `NSURL`).
 func NSURLVolumeURLKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeURLKey")
 	if ptr == 0 {
@@ -8045,6 +10128,7 @@ func NSURLVolumeURLKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// The volume's persistent UUID as a string, or `nil` if a persistent UUID is not available for the volume. (Read-only, value type `NSString`).
 func NSURLVolumeUUIDStringKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeUUIDStringKey")
 	if ptr == 0 {
@@ -8057,6 +10141,7 @@ func NSURLVolumeUUIDStringKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// A key that indicates the reason why the key-value store changed.
 func NSUbiquitousKeyValueStoreChangeReasonKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSUbiquitousKeyValueStoreChangeReasonKey")
 	if ptr == 0 {
@@ -8069,6 +10154,7 @@ func NSUbiquitousKeyValueStoreChangeReasonKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// A key that indicates which keys changed in the iCloud key-value store.
 func NSUbiquitousKeyValueStoreChangedKeysKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSUbiquitousKeyValueStoreChangedKeysKey")
 	if ptr == 0 {
@@ -8081,6 +10167,7 @@ func NSUbiquitousKeyValueStoreChangedKeysKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// Posted when the value of one or more keys changes due to incoming data from iCloud.
 func NSUbiquitousKeyValueStoreDidChangeExternallyNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSUbiquitousKeyValueStoreDidChangeExternallyNotification")
 	if ptr == 0 {
@@ -8093,6 +10180,7 @@ func NSUbiquitousKeyValueStoreDidChangeExternallyNotification() *NSString {
 	return NSStringFromID(id)
 }
 
+// Sent after the iCloud ("ubiquity") identity has changed. The system generates this notification when the user logs into or out of an iCloud account or enables or disables the syncing of documents and data. When your app receives this notification, get the new token from the `ubiquityIdentityToken` property. The value of that token is `nil` if the user disabled iCloud or logged out. There is no `userInfo` dictionary.
 func NSUbiquityIdentityDidChangeNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSUbiquityIdentityDidChangeNotification")
 	if ptr == 0 {
@@ -8105,6 +10193,7 @@ func NSUbiquityIdentityDidChangeNotification() *NSString {
 	return NSStringFromID(id)
 }
 
+// The name of the transformer that uses “NSUnarchiver“ to unarchive data.
 // Deprecated: since macOS 10.14.
 func NSUnarchiveFromDataTransformerName() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSUnarchiveFromDataTransformerName")
@@ -8118,6 +10207,7 @@ func NSUnarchiveFromDataTransformerName() *NSString {
 	return NSStringFromID(id)
 }
 
+// Raised when a key value coding operation fails. The exception's user info dictionary will contain at least two entries: - `NSTargetObjectUserInfoKey`: the receiver of the failed KVC message. - `NSUnknownUserInfoKey`: the key that was used in the failed KVC message.
 func NSUndefinedKeyException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSUndefinedKeyException")
 	if ptr == 0 {
@@ -8130,6 +10220,7 @@ func NSUndefinedKeyException() *NSString {
 	return NSStringFromID(id)
 }
 
+// The underlying error that caused this error.
 func NSUnderlyingErrorKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSUnderlyingErrorKey")
 	if ptr == 0 {
@@ -8142,6 +10233,7 @@ func NSUnderlyingErrorKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// Posted whenever an undo manager opens or closes an undo group (except when it opens a top-level group) and when checking the redo stack.
 func NSUndoManagerCheckpointNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSUndoManagerCheckpointNotification")
 	if ptr == 0 {
@@ -8154,6 +10246,7 @@ func NSUndoManagerCheckpointNotification() *NSString {
 	return NSStringFromID(id)
 }
 
+// Posted after an undo group closes. It should be safe to undo at this time.
 func NSUndoManagerDidCloseUndoGroupNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSUndoManagerDidCloseUndoGroupNotification")
 	if ptr == 0 {
@@ -8166,6 +10259,7 @@ func NSUndoManagerDidCloseUndoGroupNotification() *NSString {
 	return NSStringFromID(id)
 }
 
+// Posted whenever an undo manager opens an undo group. This notification originates in the implementation of `beginUndoGrouping`. The notification object is the `NSUndoManager` object. This notification doesn't contain a `userInfo` dictionary.
 func NSUndoManagerDidOpenUndoGroupNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSUndoManagerDidOpenUndoGroupNotification")
 	if ptr == 0 {
@@ -8178,6 +10272,7 @@ func NSUndoManagerDidOpenUndoGroupNotification() *NSString {
 	return NSStringFromID(id)
 }
 
+// Posted just after an undo manager performs a redo operation. The notification object is the `NSUndoManager` object. This notification doesn't contain a `userInfo` dictionary.
 func NSUndoManagerDidRedoChangeNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSUndoManagerDidRedoChangeNotification")
 	if ptr == 0 {
@@ -8190,6 +10285,7 @@ func NSUndoManagerDidRedoChangeNotification() *NSString {
 	return NSStringFromID(id)
 }
 
+// Posted just after an undo manager performs an undo operation. If you invoke `undo` or `undoNestedGroup`, this notification is posted. The notification object is the `NSUndoManager` object. This notification doesn't contain a `userInfo` dictionary.
 func NSUndoManagerDidUndoChangeNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSUndoManagerDidUndoChangeNotification")
 	if ptr == 0 {
@@ -8202,6 +10298,7 @@ func NSUndoManagerDidUndoChangeNotification() *NSString {
 	return NSStringFromID(id)
 }
 
+// This key is set on the user info dictionary of the NSUndoManagerDidCloseUndoGroupNotification, with a NSNumber boolean value of YES, if the undo group as a whole is discardable.
 func NSUndoManagerGroupIsDiscardableKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSUndoManagerGroupIsDiscardableKey")
 	if ptr == 0 {
@@ -8214,6 +10311,7 @@ func NSUndoManagerGroupIsDiscardableKey() *NSString {
 	return NSStringFromID(id)
 }
 
+// Posted before an undo manager closes an undo group. This notification originates in the implementation of `endUndoGrouping`. The notification object is the `NSUndoManager` object. The `userInfo` dictionary may contain `NSUndoManagerGroupIsDiscardableKey` with a Boolean value of YES if the undo group as a whole is discardable.
 func NSUndoManagerWillCloseUndoGroupNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSUndoManagerWillCloseUndoGroupNotification")
 	if ptr == 0 {
@@ -8226,6 +10324,7 @@ func NSUndoManagerWillCloseUndoGroupNotification() *NSString {
 	return NSStringFromID(id)
 }
 
+// Posted just before an undo manager performs a redo operation. The notification object is the `NSUndoManager` object. This notification doesn't contain a `userInfo` dictionary.
 func NSUndoManagerWillRedoChangeNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSUndoManagerWillRedoChangeNotification")
 	if ptr == 0 {
@@ -8238,6 +10337,7 @@ func NSUndoManagerWillRedoChangeNotification() *NSString {
 	return NSStringFromID(id)
 }
 
+// Posted just before an undo manager performs an undo operation. If you invoke `undo` or `undoNestedGroup`, this notification is posted. The notification object is the `NSUndoManager` object. This notification doesn't contain a `userInfo` dictionary.
 func NSUndoManagerWillUndoChangeNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSUndoManagerWillUndoChangeNotification")
 	if ptr == 0 {
@@ -8250,6 +10350,7 @@ func NSUndoManagerWillUndoChangeNotification() *NSString {
 	return NSStringFromID(id)
 }
 
+// An operator that returns all of the objects in the sub-arrays of all arrays in the collection, without removing duplicates.
 func NSUnionOfArraysKeyValueOperator() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSUnionOfArraysKeyValueOperator")
 	if ptr == 0 {
@@ -8262,6 +10363,7 @@ func NSUnionOfArraysKeyValueOperator() *NSString {
 	return NSStringFromID(id)
 }
 
+// An operator that returns all of a collection's values for the specified key path, without removing duplicates.
 func NSUnionOfObjectsKeyValueOperator() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSUnionOfObjectsKeyValueOperator")
 	if ptr == 0 {
@@ -8274,6 +10376,7 @@ func NSUnionOfObjectsKeyValueOperator() *NSString {
 	return NSStringFromID(id)
 }
 
+// An operator that returns all of the objects in the sub-sets of all sets in the collection, without removing duplicates.
 func NSUnionOfSetsKeyValueOperator() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSUnionOfSetsKeyValueOperator")
 	if ptr == 0 {
@@ -8286,6 +10389,7 @@ func NSUnionOfSetsKeyValueOperator() *NSString {
 	return NSStringFromID(id)
 }
 
+// An activity that continues from Handoff or a universal link. Only activities of this type can be continued from a web browser to a native app.
 func NSUserActivityTypeBrowsingWeb() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSUserActivityTypeBrowsingWeb")
 	if ptr == 0 {
@@ -8298,7 +10402,7 @@ func NSUserActivityTypeBrowsingWeb() *NSString {
 	return NSStringFromID(id)
 }
 
-// NSUserDefaultsDidChangeNotification is posted whenever any user defaults changed within the current process, but is not posted when ubiquitous defaults change, or when an outside process changes defaults. Using key-value observing to register observers for the specific keys of interest will inform you of all updates, regardless of where they're from.
+// Posted when the current process changes the value of a setting. This notification isn't posted when ubiquitous defaults change, or when an outside process changes defaults. Using key-value observing to register observers for the specific keys of interest will inform you of all updates, regardless of where they're from.
 func NSUserDefaultsDidChangeNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSUserDefaultsDidChangeNotification")
 	if ptr == 0 {
@@ -8311,18 +10415,35 @@ func NSUserDefaultsDidChangeNotification() *NSString {
 	return NSStringFromID(id)
 }
 
+// The default notification sound.
 // Deprecated: All NSUserNotifications API should be replaced with UserNotifications.frameworks API
-func NSUserNotificationDefaultSoundName() uintptr {
+func NSUserNotificationDefaultSoundName() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSUserNotificationDefaultSoundName")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
+// Key for an array of strings that specify the names for the days of the week, affecting strings that use the `%A` format specifier.
 // Deprecated: since macOS 10.5.
-func NSWeekDayNameArray() uintptr {
+func NSWeekDayNameArray() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSWeekDayNameArray")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
+// Posted when the first thread is detached from the current thread. The `NSThread` class posts this notification at most once --- the first time a thread is detached using `detachNewThreadSelector(_:toTarget:with:)` or the `start()` method. Subsequent invocations of those methods do not post this notification. Observers of this notification have their notification method invoked in the main thread, not the new thread. The observer notification methods always execute before the new thread begins executing. This notification does not contain a notification object or a `userInfo` dictionary.
 // Deprecated: This notification does not protect against data races
 func NSWillBecomeMultiThreadedNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSWillBecomeMultiThreadedNotification")
@@ -8336,6 +10457,7 @@ func NSWillBecomeMultiThreadedNotification() *NSString {
 	return NSStringFromID(id)
 }
 
+// Indicates an error in XML parsing. Used by `NSError`.
 func NSXMLParserErrorDomain() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSXMLParserErrorDomain")
 	if ptr == 0 {
@@ -8348,12 +10470,21 @@ func NSXMLParserErrorDomain() *NSString {
 	return NSStringFromID(id)
 }
 
+// Key for an array of strings that specify the words for year, month, and week in the current locale.
 // Deprecated: since macOS 10.5.
-func NSYearMonthWeekDesignations() uintptr {
+func NSYearMonthWeekDesignations() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSYearMonthWeekDesignations")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
+// A point with both coordinates set to `0`.
 func NSZeroPoint() corefoundation.CGPoint {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSZeroPoint")
 	if ptr == 0 {
@@ -8362,6 +10493,7 @@ func NSZeroPoint() corefoundation.CGPoint {
 	return *(*corefoundation.CGPoint)(unsafe.Pointer(ptr))
 }
 
+// A rectangle with origin and size set to `0`.
 func NSZeroRect() corefoundation.CGRect {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSZeroRect")
 	if ptr == 0 {
@@ -8370,6 +10502,7 @@ func NSZeroRect() corefoundation.CGRect {
 	return *(*corefoundation.CGRect)(unsafe.Pointer(ptr))
 }
 
+// A size with both dimensions set to `0`.
 func NSZeroSize() corefoundation.CGSize {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSZeroSize")
 	if ptr == 0 {

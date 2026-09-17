@@ -3,45 +3,13 @@
   "framework": "Cinematic",
   "source": "developer.apple.com DocC render API",
   "classes": {
-    "CNAssetInfo": {
-      "doc": "An object that provides Cinematic-specific information about an asset, including its tracks.",
-      "url": "https://developer.apple.com/documentation/cinematic/cnassetinfo"
+    "CNImageRenderingSession": {
+      "doc": "A session for rendering a shallow depth-of-field (SDoF) effect onto still images using Metal.",
+      "url": "https://developer.apple.com/documentation/cinematic/cnimagerenderingsession"
     },
-    "CNBoundsPrediction": {
-      "doc": "A structure representing the bounds of the predicted subject.",
-      "url": "https://developer.apple.com/documentation/cinematic/cnboundsprediction"
-    },
-    "CNCompositionInfo": {
-      "doc": "An object that enables you to add the appropriate number of tracks for a Cinematic asset.",
-      "url": "https://developer.apple.com/documentation/cinematic/cncompositioninfo"
-    },
-    "CNCustomDetectionTrack": {
-      "doc": "An object representing a discrete detection track composed of individual detections.",
-      "url": "https://developer.apple.com/documentation/cinematic/cncustomdetectiontrack"
-    },
-    "CNDecision": {
-      "doc": "An object that represents a decision to focus on a particular detection, or group of detections, at a particular time.",
-      "url": "https://developer.apple.com/documentation/cinematic/cndecision"
-    },
-    "CNDetection": {
-      "doc": "A structure that represents a detected subject, face, torso or pet at a particular time.",
-      "url": "https://developer.apple.com/documentation/cinematic/cndetection"
-    },
-    "CNDetectionTrack": {
-      "doc": "An object representing a series of detections of the same subject over time.",
-      "url": "https://developer.apple.com/documentation/cinematic/cndetectiontrack"
-    },
-    "CNFixedDetectionTrack": {
-      "doc": "An object representing the fixed detection track.",
-      "url": "https://developer.apple.com/documentation/cinematic/cnfixeddetectiontrack"
-    },
-    "CNObjectTracker": {
-      "doc": "An object that converts a normalized point or rectangle into a detection track that tracks an object over time.",
-      "url": "https://developer.apple.com/documentation/cinematic/cnobjecttracker"
-    },
-    "CNRenderingSession": {
-      "doc": "An object representing the context in which rendering occurs.",
-      "url": "https://developer.apple.com/documentation/cinematic/cnrenderingsession"
+    "CNImageRenderingSessionConfiguration": {
+      "doc": "Configuration for a CNImageRenderingSession, specifying the rendering quality and algorithm version.",
+      "url": "https://developer.apple.com/documentation/cinematic/cnimagerenderingsessionconfiguration"
     },
     "CNRenderingSessionAttributes": {
       "doc": "A structure for movie-wide attributes required for proper rendering.",
@@ -50,10 +18,6 @@
     "CNRenderingSessionFrameAttributes": {
       "doc": "Creates an object with the per frame attributes that control the appearance of a single frame of the Cinematic movie.",
       "url": "https://developer.apple.com/documentation/cinematic/cnrenderingsessionframeattributes"
-    },
-    "CNScript": {
-      "doc": "A collection of focus decisions, focus transitions, detections, and detection tracks associated with a movie captured in Cinematic mode and methods to change them.",
-      "url": "https://developer.apple.com/documentation/cinematic/cnscript"
     },
     "CNScriptChanges": {
       "doc": "An object that represents a snapshot of the changes made to a movie script, including the added user decisions and detection tracks.",
@@ -65,8 +29,25 @@
     }
   },
   "enums": {
-    "CNCinematicErrorCode": {
-      "url": "https://developer.apple.com/documentation/cinematic/cncinematicerrorcode"
+    "CNCinematicCapability": {
+      "url": "https://developer.apple.com/documentation/cinematic/cncinematiccapability",
+      "members": {
+        "CNCinematicCapabilityNeedsPreprocessing": {
+          "doc": "The cinematic asset needs preprocessing before it can be used",
+          "url": "https://developer.apple.com/documentation/cinematic/cncinematiccapability/needspreprocessing"
+        },
+        "CNCinematicCapabilityNone": {
+          "doc": "No cinematic capabilities",
+          "url": "https://developer.apple.com/documentation/cinematic/cncinematiccapability/none"
+        },
+        "CNCinematicCapabilityRenderable": {
+          "doc": "The cinematic asset can be used without preprocessing",
+          "url": "https://developer.apple.com/documentation/cinematic/cncinematiccapability/renderable"
+        }
+      }
+    },
+    "CNCinematicResourceVersion": {
+      "url": "https://developer.apple.com/documentation/cinematic/cncinematicresourceversion"
     },
     "CNDetectionType": {
       "doc": "The type of object detected, such as face, torso, cat, dog and so on.",
@@ -75,6 +56,27 @@
     "CNRenderingQuality": {
       "doc": "The rendering quality, such as thumbnail, preview, export and so on.",
       "url": "https://developer.apple.com/documentation/cinematic/cnrenderingquality"
+    },
+    "CNResourceStatus": {
+      "url": "https://developer.apple.com/documentation/cinematic/cnresourcestatus",
+      "members": {
+        "CNResourceStatusNeedsDownloading": {
+          "doc": "Configuration is supported but requires download of resources",
+          "url": "https://developer.apple.com/documentation/cinematic/cnresourcestatus/needsdownloading"
+        },
+        "CNResourceStatusReady": {
+          "doc": "Configuration is supported",
+          "url": "https://developer.apple.com/documentation/cinematic/cnresourcestatus/ready"
+        },
+        "CNResourceStatusUnsupportedAsset": {
+          "doc": "The given asset is unsupported on the current build",
+          "url": "https://developer.apple.com/documentation/cinematic/cnresourcestatus/unsupportedasset"
+        },
+        "CNResourceStatusUnsupportedDevice": {
+          "doc": "The device lacks hardware capabilities for the given configuration",
+          "url": "https://developer.apple.com/documentation/cinematic/cnresourcestatus/unsupporteddevice"
+        }
+      }
     },
     "CNSpatialAudioContentType": {
       "url": "https://developer.apple.com/documentation/cinematic/cnspatialaudiocontenttype",
@@ -93,49 +95,77 @@
       "url": "https://developer.apple.com/documentation/cinematic/cnspatialaudiorenderingstyle",
       "members": {
         "CNSpatialAudioRenderingStyleCinematic": {
-          "doc": "Isolates the ambience and place it in a spatial stem. Isolates all voices and place them in a mono stem.",
+          "doc": "Isolates background and foreground sounds and places them in separate stems.",
           "url": "https://developer.apple.com/documentation/cinematic/cnspatialaudiorenderingstyle/cinematic"
         },
         "CNSpatialAudioRenderingStyleCinematicBackgroundStem": {
-          "doc": "Isolates the ambience when foreground is cinematic Audio Mix and place it in a spatial stem. There is no voice stem.",
+          "doc": "Isolates background sounds in a stem.",
           "url": "https://developer.apple.com/documentation/cinematic/cnspatialaudiorenderingstyle/cinematicbackgroundstem"
         },
         "CNSpatialAudioRenderingStyleCinematicForegroundStem": {
-          "doc": "Isolates all voices and places them in a mono stem. There is no ambience stem.",
+          "doc": "Isolates foreground sounds in a stem.",
           "url": "https://developer.apple.com/documentation/cinematic/cnspatialaudiorenderingstyle/cinematicforegroundstem"
         },
         "CNSpatialAudioRenderingStyleInFrame": {
-          "doc": "Isolates the ambience and place it in a spatial stem. Isolates only voices from the camera field of view and place them in a mono stem.",
+          "doc": "Isolates background from foreground sounds in the camera field of view and places them in separate stems.",
           "url": "https://developer.apple.com/documentation/cinematic/cnspatialaudiorenderingstyle/inframe"
         },
         "CNSpatialAudioRenderingStyleInFrameBackgroundStem": {
-          "doc": "Isolates the ambience and foreground that is out of frame and place it in a spatial stem. There is no voice stem.",
+          "doc": "Isolates background plus foreground sounds outside the camera field of view in a stem.",
           "url": "https://developer.apple.com/documentation/cinematic/cnspatialaudiorenderingstyle/inframebackgroundstem"
         },
         "CNSpatialAudioRenderingStyleInFrameForegroundStem": {
-          "doc": "Isolates only voices from the camera field of view and place them in a mono stem. There is no ambience stem.",
+          "doc": "Isolates foreground sounds within the camera field of view in a stem.",
           "url": "https://developer.apple.com/documentation/cinematic/cnspatialaudiorenderingstyle/inframeforegroundstem"
         },
         "CNSpatialAudioRenderingStyleStandard": {
-          "doc": "This produces a spatial stem of the original recording that is unprocessed. This is the default rendering style.",
+          "doc": "Produces an unprocessed spatial stem of the original recording. This is the default rendering style.",
           "url": "https://developer.apple.com/documentation/cinematic/cnspatialaudiorenderingstyle/standard"
         },
         "CNSpatialAudioRenderingStyleStudio": {
-          "doc": "Isolates the ambience and place it in a spatial stem. Isolates all voices, add a studio/proximity effect in the voice track and place them in a mono stem.",
+          "doc": "Isolates background and foreground in separate stems. Adds a proximity effect to foreground sounds.",
           "url": "https://developer.apple.com/documentation/cinematic/cnspatialaudiorenderingstyle/studio"
         },
         "CNSpatialAudioRenderingStyleStudioBackgroundStem": {
-          "doc": "Isolates the ambience when foreground is studio Audio Mix and place it in a spatial stem. There is no voice stem.",
+          "doc": "Isolates background sounds in a stem.",
           "url": "https://developer.apple.com/documentation/cinematic/cnspatialaudiorenderingstyle/studiobackgroundstem"
         },
         "CNSpatialAudioRenderingStyleStudioForegroundStem": {
-          "doc": "Isolates all voices, add a studio/proximity effect in the voice track and place them in a mono stem. There is no ambience stem.",
+          "doc": "Isolates foreground sounds in a stem, and adds a proximity effect.",
           "url": "https://developer.apple.com/documentation/cinematic/cnspatialaudiorenderingstyle/studioforegroundstem"
         }
       }
     }
   },
   "methods": {
+    "CNImageRenderingSession": {
+      "+minimumTileExtendRectForTileRect:sourceRGBASize:": {
+        "doc": "Returns the minimum source rect that must be sampled to render tileRect without edge artifacts.",
+        "url": "https://developer.apple.com/documentation/cinematic/cnimagerenderingsession/minimumtileextendrect(fortilerect:sourcergbasize:)"
+      },
+      "-encodeRenderToCommandBuffer:sourceRGBA:sourceDisparity:destinationRGBA:fNumber:focusDisparity:": {
+        "doc": "Encode a command to render a shallow depth of field (SDoF) image to a metal texture",
+        "url": "https://developer.apple.com/documentation/cinematic/cnimagerenderingsession/encoderender(to:sourcergba:sourcedisparity:destinationrgba:fnumber:focusdisparity:)"
+      },
+      "-encodeTileRenderToCommandBuffer:sourceTileRGBA:sourceDisparity:destinationTileRGBA:fNumber:focusDisparity:sourceRGBASize:tileOffset:tileExtendOffset:": {
+        "doc": "Encode a command to render a shallow depth of field (SDoF) image to a metal texture",
+        "url": "https://developer.apple.com/documentation/cinematic/cnimagerenderingsession/encodetilerender(to:sourcetilergba:sourcedisparity:destinationtilergba:fnumber:focusdisparity:sourcergbasize:tileoffset:tileextendoffset:)"
+      }
+    },
+    "CNImageRenderingSessionConfiguration": {
+      "+isRenderingVersionSupported:": {
+        "doc": "Checks if a given rendering version is supported on the current build",
+        "url": "https://developer.apple.com/documentation/cinematic/cnimagerenderingsessionconfiguration/isrenderingversionsupported(_:)"
+      },
+      "-initWithQuality:": {
+        "doc": "Initialize with the latest rendering version",
+        "url": "https://developer.apple.com/documentation/cinematic/cnimagerenderingsessionconfiguration/init(quality:)"
+      },
+      "-initWithQuality:renderingVersion:": {
+        "doc": "Initialize with a specific rendering version.",
+        "url": "https://developer.apple.com/documentation/cinematic/cnimagerenderingsessionconfiguration/init(quality:renderingversion:)"
+      }
+    },
     "CNRenderingSessionAttributes": {
       "+loadFromAsset:completionHandler:": {
         "doc": "Loads the rendering session attributes from an asset asynchronously.",
@@ -170,6 +200,16 @@
     }
   },
   "properties": {
+    "CNImageRenderingSessionConfiguration": {
+      "latestRenderingVersion": {
+        "doc": "The version of the newest rendering algorithm",
+        "url": "https://developer.apple.com/documentation/cinematic/cnimagerenderingsessionconfiguration/latestrenderingversion"
+      },
+      "renderingVersion": {
+        "doc": "Rendering version used to render",
+        "url": "https://developer.apple.com/documentation/cinematic/cnimagerenderingsessionconfiguration/renderingversion"
+      }
+    },
     "CNRenderingSessionAttributes": {
       "renderingVersion": {
         "doc": "The primary version number used to render the original Cinematic move that determines compatibility.",

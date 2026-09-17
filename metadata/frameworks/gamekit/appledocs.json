@@ -78,10 +78,6 @@
       "doc": "A leaderboard for a game that Game Center stores.",
       "url": "https://developer.apple.com/documentation/gamekit/gkleaderboard"
     },
-    "GKLeaderboardEntry": {
-      "doc": "Information about a single score by a player on a leaderboard.",
-      "url": "https://developer.apple.com/documentation/gamekit/gkleaderboardentry"
-    },
     "GKLeaderboardScore": {
       "doc": "Information about a player’s score on a leaderboard.",
       "url": "https://developer.apple.com/documentation/gamekit/gkleaderboardscore"
@@ -257,10 +253,6 @@
     }
   },
   "enums": {
-    "GKAccessPointLocation": {
-      "doc": "Specifies the corner of the screen to display the access point.",
-      "url": "https://developer.apple.com/documentation/gamekit/gkaccesspointlocation"
-    },
     "GKChallengeState": {
       "doc": "The state of a challenge.",
       "url": "https://developer.apple.com/documentation/gamekit/gkchallengestate",
@@ -296,10 +288,6 @@
           "url": "https://developer.apple.com/documentation/gamekit/gkconnectionstate/notconnected"
         }
       }
-    },
-    "GKErrorCode": {
-      "doc": "Error codes for the GameKit error domain.",
-      "url": "https://developer.apple.com/documentation/gamekit/gkerrorcode"
     },
     "GKFriendsAuthorizationStatus": {
       "doc": "Constants that indicate if the local player grants access to their friends list.",
@@ -361,10 +349,6 @@
         }
       }
     },
-    "GKGameSessionErrorCode": {
-      "doc": "Error codes for the game session domain.",
-      "url": "https://developer.apple.com/documentation/gamekit/gkgamesessionerrorcode"
-    },
     "GKInviteRecipientResponse": {
       "doc": "A player’s response to an invitation to join a match.",
       "url": "https://developer.apple.com/documentation/gamekit/gkinviterecipientresponse",
@@ -418,22 +402,6 @@
           "url": "https://developer.apple.com/documentation/gamekit/gkinviterecipientresponse/inviteeresponseunabletoconnect"
         }
       }
-    },
-    "GKLeaderboardPlayerScope": {
-      "doc": "Specifies the type of players for filtering data.",
-      "url": "https://developer.apple.com/documentation/gamekit/gkleaderboardplayerscope"
-    },
-    "GKLeaderboardTimeScope": {
-      "doc": "Specifies the time period for filtering data.",
-      "url": "https://developer.apple.com/documentation/gamekit/gkleaderboardtimescope"
-    },
-    "GKLeaderboardType": {
-      "doc": "Specifies whether a leaderboard is recurring.",
-      "url": "https://developer.apple.com/documentation/gamekit/gkleaderboardtype"
-    },
-    "GKMatchSendDataMode": {
-      "doc": "The mechanism used to transmit data to other players.",
-      "url": "https://developer.apple.com/documentation/gamekit/gkmatchsenddatamode"
     },
     "GKMatchType": {
       "doc": "The kind of match managed by Game Center.",
@@ -501,10 +469,6 @@
         }
       }
     },
-    "GKPhotoSize": {
-      "doc": "The size of a photo that Game Center loads.",
-      "url": "https://developer.apple.com/documentation/gamekit/gkphotosize"
-    },
     "GKPlayerConnectionState": {
       "doc": "The possible states of a connection to a match.",
       "url": "https://developer.apple.com/documentation/gamekit/gkplayerconnectionstate",
@@ -554,9 +518,6 @@
           "url": "https://developer.apple.com/documentation/gamekit/gksenddatamode/unreliable"
         }
       }
-    },
-    "GKSessionError": {
-      "url": "https://developer.apple.com/documentation/gamekit/gksessionerror"
     },
     "GKSessionMode": {
       "doc": "Modes that determine how a session interacts with other peers.",
@@ -615,25 +576,6 @@
           "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedexchangestatus/unknown"
         }
       }
-    },
-    "GKTurnBasedMatchOutcome": {
-      "doc": "The state of a participant when they forfeit a match or when a match ends.",
-      "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedmatchoutcome"
-    },
-    "GKTurnBasedMatchStatus": {
-      "doc": "The states of a match from when it’s created to when it ends.",
-      "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedmatchstatus"
-    },
-    "GKTurnBasedParticipantStatus": {
-      "doc": "The state the participant is in during the match.",
-      "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedparticipantstatus"
-    },
-    "GKVoiceChatPlayerState": {
-      "doc": "The state of a player in a voice chat.",
-      "url": "https://developer.apple.com/documentation/gamekit/gkvoicechatplayerstate"
-    },
-    "GKVoiceChatServiceError": {
-      "url": "https://developer.apple.com/documentation/gamekit/gkvoicechatserviceerror"
     }
   },
   "methods": {
@@ -1674,7 +1616,7 @@
       },
       "rarityPercent": {
         "doc": "The percentage of players of this game that earned the achievement.",
-        "url": "https://developer.apple.com/documentation/gamekit/gkachievementdescription/raritypercent-4bh6k"
+        "url": "https://developer.apple.com/documentation/gamekit/gkachievementdescription/raritypercent-3zqw6"
       },
       "releaseState": {
         "doc": "The release state of the achievement in App Store Connect.",

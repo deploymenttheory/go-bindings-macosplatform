@@ -22,10 +22,6 @@
     "SNClassifySoundRequest": {
       "doc": "A request that classifies sound using a Core ML model.",
       "url": "https://developer.apple.com/documentation/soundanalysis/snclassifysoundrequest"
-    },
-    "SNTimeDurationConstraint": {
-      "doc": "Defines the time duration windows the request’s underlying sound classifier accepts with a range, or an array, of durations.",
-      "url": "https://developer.apple.com/documentation/soundanalysis/sntimedurationconstraint"
     }
   },
   "protocols": {
@@ -43,10 +39,6 @@
     }
   },
   "enums": {
-    "SNErrorCode": {
-      "doc": "The enumerated error codes that the Sound Analysis framework produces.",
-      "url": "https://developer.apple.com/documentation/soundanalysis/snerrorcode"
-    },
     "SNTimeDurationConstraintType": {
       "doc": "Defines the types a time duration constraint uses.",
       "url": "https://developer.apple.com/documentation/soundanalysis/sntimedurationconstrainttype",

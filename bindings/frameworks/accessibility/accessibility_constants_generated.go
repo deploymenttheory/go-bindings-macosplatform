@@ -9,6 +9,11 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// AXSpeechAttributeSSML returns the string constant AXSpeechAttributeSSML, for use as a dictionary key or argument.
+func AXSpeechAttributeSSML() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AXSpeechAttributeSSML")))
+}
+
 // AXTechnologyVoiceOver returns the string constant AXTechnologyVoiceOver, for use as a dictionary key or argument.
 func AXTechnologyVoiceOver() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AXTechnologyVoiceOver")))
@@ -57,22 +62,27 @@ func AXAnimatedImagesEnabledDidChangeNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AXAnimatedImagesEnabledDidChangeNotification")))
 }
 
-// AXPrefersNonBlinkingTextInsertionIndicatorDidChangeNotification returns the address of the symbol AXPrefersNonBlinkingTextInsertionIndicatorDidChangeNotification.
-func AXPrefersNonBlinkingTextInsertionIndicatorDidChangeNotification() uintptr {
-	return _symbol("AXPrefersNonBlinkingTextInsertionIndicatorDidChangeNotification")
+// AXPrefersNonBlinkingTextInsertionIndicatorDidChangeNotification returns the string constant AXPrefersNonBlinkingTextInsertionIndicatorDidChangeNotification, for use as a dictionary key or argument.
+func AXPrefersNonBlinkingTextInsertionIndicatorDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AXPrefersNonBlinkingTextInsertionIndicatorDidChangeNotification")))
 }
 
-// AXPrefersActionSliderAlternativeDidChangeNotification returns the address of the symbol AXPrefersActionSliderAlternativeDidChangeNotification.
-func AXPrefersActionSliderAlternativeDidChangeNotification() uintptr {
-	return _symbol("AXPrefersActionSliderAlternativeDidChangeNotification")
+// AXPrefersActionSliderAlternativeDidChangeNotification returns the string constant AXPrefersActionSliderAlternativeDidChangeNotification, for use as a dictionary key or argument.
+func AXPrefersActionSliderAlternativeDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AXPrefersActionSliderAlternativeDidChangeNotification")))
 }
 
-// AXShowBordersEnabledStatusDidChangeNotification returns the address of the symbol AXShowBordersEnabledStatusDidChangeNotification.
-func AXShowBordersEnabledStatusDidChangeNotification() uintptr {
-	return _symbol("AXShowBordersEnabledStatusDidChangeNotification")
+// AXShowBordersEnabledStatusDidChangeNotification returns the string constant AXShowBordersEnabledStatusDidChangeNotification, for use as a dictionary key or argument.
+func AXShowBordersEnabledStatusDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AXShowBordersEnabledStatusDidChangeNotification")))
 }
 
-// AXReduceHighlightingEffectsEnabledDidChangeNotification returns the address of the symbol AXReduceHighlightingEffectsEnabledDidChangeNotification.
-func AXReduceHighlightingEffectsEnabledDidChangeNotification() uintptr {
-	return _symbol("AXReduceHighlightingEffectsEnabledDidChangeNotification")
+// AXReduceHighlightingEffectsEnabledDidChangeNotification returns the string constant AXReduceHighlightingEffectsEnabledDidChangeNotification, for use as a dictionary key or argument.
+func AXReduceHighlightingEffectsEnabledDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AXReduceHighlightingEffectsEnabledDidChangeNotification")))
+}
+
+// AXApplicationAccessibilityEnabledDidChangeNotification returns the string constant AXApplicationAccessibilityEnabledDidChangeNotification, for use as a dictionary key or argument.
+func AXApplicationAccessibilityEnabledDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AXApplicationAccessibilityEnabledDidChangeNotification")))
 }

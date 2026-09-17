@@ -101,7 +101,6 @@ func NSConnectionConnectionWithRegisteredNameHost(name *NSString, hostName *NSSt
 }
 
 // Returns the NSConnection object whose send port links it to the NSConnection object registered under a given name with a given server on a given host.
-// Deprecated: since macOS 10.6.
 func NSConnectionConnectionWithRegisteredNameHostUsingNameServer(name *NSString, hostName *NSString, server *NSPortNameServer) *NSConnection {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSConnection), _nSConnectionSelConnectionWithRegisteredNameHostUsingNameServer, name.Ptr(), hostName.Ptr(), server.Ptr())
 	if _ret != 0 {
@@ -111,7 +110,6 @@ func NSConnectionConnectionWithRegisteredNameHostUsingNameServer(name *NSString,
 }
 
 // Returns a proxy for the root object of the NSConnection object registered with the default NSPortNameServer under a given name on a given host.
-// Deprecated: since macOS 10.6.
 func NSConnectionRootProxyForConnectionWithRegisteredNameHost(name *NSString, hostName *NSString) *NSDistantObject {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSConnection), _nSConnectionSelRootProxyForConnectionWithRegisteredNameHost, name.Ptr(), hostName.Ptr())
 	if _ret != 0 {
@@ -223,6 +221,7 @@ func (o *NSConnection) DispatchWithComponents(components *NSArray[objc.ID]) {
 	o.Ptr().Send(_nSConnectionSelDispatchWithComponents, components.Ptr())
 }
 
+// A dictionary containing various statistics for the receiver. An `NSDictionary` object containing various statistics for the receiver, such as the number of vended objects, the number of requests and replies, and so on. The statistics dictionary should be used only for debugging purposes.
 func (o *NSConnection) Statistics() *NSDictionary[*NSString, *NSNumber] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSConnectionSelStatistics)
 	if _ret != 0 {
@@ -231,6 +230,7 @@ func (o *NSConnection) Statistics() *NSDictionary[*NSString, *NSNumber] {
 	return NSDictionaryFromID[*NSString, *NSNumber](_ret)
 }
 
+// The timeout interval for outgoing requests.
 func (o *NSConnection) RequestTimeout() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSConnectionSelRequestTimeout)
 	return _ret
@@ -240,6 +240,7 @@ func (o *NSConnection) SetRequestTimeout(requestTimeout float64) {
 	o.Ptr().Send(_nSConnectionSelSetRequestTimeout, requestTimeout)
 }
 
+// The timeout interval for replies.
 func (o *NSConnection) ReplyTimeout() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSConnectionSelReplyTimeout)
 	return _ret
@@ -249,6 +250,7 @@ func (o *NSConnection) SetReplyTimeout(replyTimeout float64) {
 	o.Ptr().Send(_nSConnectionSelSetReplyTimeout, replyTimeout)
 }
 
+// The object that the receiver makes available to other applications or threads.
 func (o *NSConnection) RootObject() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSConnectionSelRootObject)
 	return _ret
@@ -258,6 +260,7 @@ func (o *NSConnection) SetRootObject(rootObject objc.ID) {
 	o.Ptr().Send(_nSConnectionSelSetRootObject, rootObject)
 }
 
+// The receiver's delegate. A connection's delegate can process incoming messages itself instead of letting the `NSConnection` object handle them. The delegate can also authenticate messages and accept, deny, or modify new connections.
 func (o *NSConnection) Delegate() NSConnectionDelegate {
 	_ret := objc.Send[NSConnectionDelegate](o.Ptr(), _nSConnectionSelDelegate)
 	return _ret
@@ -267,6 +270,7 @@ func (o *NSConnection) SetDelegate(delegate NSConnectionDelegate) {
 	o.Ptr().Send(_nSConnectionSelSetDelegate, delegate)
 }
 
+// A Boolean value that indicates whether the receiver handles requests atomically.
 func (o *NSConnection) IndependentConversationQueueing() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSConnectionSelIndependentConversationQueueing)
 	return _ret
@@ -276,11 +280,13 @@ func (o *NSConnection) SetIndependentConversationQueueing(independentConversatio
 	o.Ptr().Send(_nSConnectionSelSetIndependentConversationQueueing, independentConversationQueueing)
 }
 
+// A Boolean value that indicates whether the receiver is known to be valid.
 func (o *NSConnection) IsValid() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSConnectionSelIsValid)
 	return _ret
 }
 
+// The proxy for the root object of the receiver's peer in another application or thread. The proxy returned can change between invocations if the peer `NSConnection` object's root object is changed. > Note: If the `NSConnection` object uses separate send and receive ports and has no peer, when you invoke > `rootProxy` it will block for the duration of the reply timeout interval, waiting for a reply.
 func (o *NSConnection) RootProxy() *NSDistantObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSConnectionSelRootProxy)
 	if _ret != 0 {
@@ -289,6 +295,7 @@ func (o *NSConnection) RootProxy() *NSDistantObject {
 	return NSDistantObjectFromID(_ret)
 }
 
+// The set of request modes the receiver's receive port is registered for with its `NSRunLoop` object.
 func (o *NSConnection) RequestModes() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSConnectionSelRequestModes)
 	if _ret != 0 {
@@ -297,6 +304,7 @@ func (o *NSConnection) RequestModes() *NSArray[*NSString] {
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// The port on which the receiver sends messages.
 func (o *NSConnection) SendPort() *NSPort {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSConnectionSelSendPort)
 	if _ret != 0 {
@@ -305,6 +313,7 @@ func (o *NSConnection) SendPort() *NSPort {
 	return NSPortFromID(_ret)
 }
 
+// The port on which the receiver receives messages.
 func (o *NSConnection) ReceivePort() *NSPort {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSConnectionSelReceivePort)
 	if _ret != 0 {
@@ -313,11 +322,13 @@ func (o *NSConnection) ReceivePort() *NSPort {
 	return NSPortFromID(_ret)
 }
 
+// A Boolean value that indicates whether the receiver supports requests from multiple threads.
 func (o *NSConnection) MultipleThreadsEnabled() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSConnectionSelMultipleThreadsEnabled)
 	return _ret
 }
 
+// The proxies for all remote objects that have been received over the connection but have not yet been deallocated.
 func (o *NSConnection) RemoteObjects() *NSArray[objc.ID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSConnectionSelRemoteObjects)
 	if _ret != 0 {
@@ -326,6 +337,7 @@ func (o *NSConnection) RemoteObjects() *NSArray[objc.ID] {
 	return NSArrayFromID[objc.ID](_ret)
 }
 
+// All local objects that are being vended over the connection.
 func (o *NSConnection) LocalObjects() *NSArray[objc.ID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSConnectionSelLocalObjects)
 	if _ret != 0 {

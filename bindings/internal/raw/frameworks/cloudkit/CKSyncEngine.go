@@ -12,8 +12,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An object that manages the synchronization of local and remote record data.
-//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/cksyncengine
 type CKSyncEngine struct {
 	foundation.NSObject
@@ -98,7 +96,7 @@ func (o *CKSyncEngine) SendChangesWithOptionsCompletionHandler(options *CKSyncEn
 	o.Ptr().Send(_cKSyncEngineSelSendChangesWithOptionsCompletionHandler, options.Ptr(), __block_completionHandler)
 }
 
-// Cancels any in-progress or pending sync operations. The sync engine processes cancelation requests asynchronously, meaning it's possible for in-progress operations to complete even after this method returns.
+// Cancels any in-progress or pending sync operations. The sync engine processes cancellation requests asynchronously, meaning it's possible for in-progress operations to complete even after this method returns.
 func (o *CKSyncEngine) CancelOperationsWithCompletionHandler(completionHandler func()) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

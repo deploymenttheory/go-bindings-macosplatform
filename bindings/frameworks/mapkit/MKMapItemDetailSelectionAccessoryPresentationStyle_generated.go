@@ -15,8 +15,6 @@ import (
 )
 
 // MapItemDetailSelectionAccessoryPresentationStyle is an idiomatic wrapper over the Objective-C class MKMapItemDetailSelectionAccessoryPresentationStyle.
-//
-// The type of map item detail accessory presentation to use.
 type MapItemDetailSelectionAccessoryPresentationStyle struct {
 	objref.Handle
 }

@@ -16,8 +16,6 @@ import (
 )
 
 // MapCameraZoomRange is an idiomatic wrapper over the Objective-C class MKMapCameraZoomRange.
-//
-// A camera zoom range that limits the distances to which the user can zoom.
 type MapCameraZoomRange struct {
 	objref.Handle
 }

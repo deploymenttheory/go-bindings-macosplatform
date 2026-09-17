@@ -19,7 +19,7 @@ import (
 //
 // AssetCollection is an abstract base — you do not construct it directly. Construct one of [Project] and pass it where a AssetCollection is accepted.
 //
-// A representation of a Photos asset grouping, such as a moment, user-created album, or smart album.
+// A representation of a Photos asset grouping, such as Moments, a user-created album, or a Smart Album.
 type AssetCollection struct {
 	Collection
 }

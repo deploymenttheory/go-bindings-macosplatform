@@ -93,7 +93,106 @@ func NewEFIVariableStoreCreatingVariableStoreAtURLOptions(url string, options EF
 	return eFIVariableStoreAdopt(_id), nil
 }
 
-// URL returns the URL.
+// EnableSecureBootUsingDefaultPlatformKey enables Secure Boot with an Apple-managed Platform Key.
+//
+// EnableSecureBootUsingDefaultPlatformKey returns an error if the operation did not succeed.
+func (evs *EFIVariableStore) EnableSecureBootUsingDefaultPlatformKey() error {
+	defer runtime.KeepAlive(evs)
+	var _nsErr uintptr
+	objc.Send[bool](objref.IDOf(evs), objc.RegisterName("enableSecureBootUsingDefaultPlatformKeyWithError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// EnableSecureBootWithPlatformKey enables Secure Boot with a custom Platform Key.
+func (evs *EFIVariableStore) EnableSecureBootWithPlatformKey(platformKey obj.Object) error {
+	defer runtime.KeepAlive(evs)
+	defer runtime.KeepAlive(platformKey)
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(evs), objc.RegisterName("enableSecureBootWithPlatformKey:error:"), objref.IDOf(platformKey), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// DisableSecureBoot disables Secure Boot while preserving the existing configuration.
+//
+// DisableSecureBoot returns an error if the operation did not succeed.
+func (evs *EFIVariableStore) DisableSecureBoot() error {
+	defer runtime.KeepAlive(evs)
+	var _nsErr uintptr
+	objc.Send[bool](objref.IDOf(evs), objc.RegisterName("disableSecureBootWithError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// ResetSecureBoot clears any previously applied Secure Boot configuration and disables Secure Boot.
+//
+// ResetSecureBoot returns an error if the operation did not succeed.
+func (evs *EFIVariableStore) ResetSecureBoot() error {
+	defer runtime.KeepAlive(evs)
+	var _nsErr uintptr
+	objc.Send[bool](objref.IDOf(evs), objc.RegisterName("resetSecureBootWithError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// GetSecureBootEnabled returns a Boolean value that indicates whether Secure Boot is in an enabled state in the variable store.
+func (evs *EFIVariableStore) GetSecureBootEnabled() (enabled bool, err error) {
+	defer runtime.KeepAlive(evs)
+	var _out0 bool
+	var _nsErr uintptr
+	objc.Send[bool](objref.IDOf(evs), objc.RegisterName("getSecureBootEnabled:error:"), unsafe.Pointer(&_out0), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return false, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return _out0, nil
+}
+
+// EnrollDefaultSecureBootSignatures enrolls the default signatures to Secure Boot databases.
+//
+// EnrollDefaultSecureBootSignatures returns an error if the operation did not succeed.
+func (evs *EFIVariableStore) EnrollDefaultSecureBootSignatures() error {
+	defer runtime.KeepAlive(evs)
+	var _nsErr uintptr
+	objc.Send[bool](objref.IDOf(evs), objc.RegisterName("enrollDefaultSecureBootSignaturesWithError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// EnrollSecureBootSignatures enrolls the given signatures to Secure Boot databases.
+func (evs *EFIVariableStore) EnrollSecureBootSignatures(signatures *EFISignatureDatabaseConfiguration) error {
+	defer runtime.KeepAlive(evs)
+	defer runtime.KeepAlive(signatures)
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(evs), objc.RegisterName("enrollSecureBootSignatures:error:"), objref.IDOf(signatures), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// GetEnrolledSecureBootSignatures returns the currently enrolled Secure Boot signatures in the Key Exchange Key (KEK), allowed signature (db), and forbidden signature (dbx) databases.
+func (evs *EFIVariableStore) GetEnrolledSecureBootSignatures() (result *EFISignatureDatabaseConfiguration, err error) {
+	defer runtime.KeepAlive(evs)
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(evs), objc.RegisterName("getEnrolledSecureBootSignaturesWithError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return EFISignatureDatabaseConfigurationFromID(_r), nil
+}
+
+// URL returns the URL of the variable store on the local file system.
 func (evs *EFIVariableStore) URL() string {
 	defer runtime.KeepAlive(evs)
 	_r := objc.Send[objc.ID](objref.IDOf(evs), objc.RegisterName("URL"))

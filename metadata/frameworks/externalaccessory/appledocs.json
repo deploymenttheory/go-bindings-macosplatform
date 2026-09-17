@@ -35,10 +35,6 @@
     }
   },
   "enums": {
-    "EABluetoothAccessoryPickerErrorCode": {
-      "doc": "The error codes that may be passed in an error object for the Bluetooth picker completion block.",
-      "url": "https://developer.apple.com/documentation/externalaccessory/eabluetoothaccessorypickererrorcode"
-    },
     "EAWiFiUnconfiguredAccessoryBrowserState": {
       "doc": "The possible states of an accessory browser.",
       "url": "https://developer.apple.com/documentation/externalaccessory/eawifiunconfiguredaccessorybrowserstate",

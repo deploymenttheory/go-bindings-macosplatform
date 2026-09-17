@@ -51,6 +51,9 @@ func _loadLibrary() {
 	_register("MTAudioProcessingTapCreate", func() {
 		purego.RegisterLibFunc(&_fnMTAudioProcessingTapCreate, _mediatoolboxLib, "MTAudioProcessingTapCreate")
 	})
+	_register("MTAudioProcessingTapCreateWithPreferredFormat", func() {
+		purego.RegisterLibFunc(&_fnMTAudioProcessingTapCreateWithPreferredFormat, _mediatoolboxLib, "MTAudioProcessingTapCreateWithPreferredFormat")
+	})
 	_register("MTAudioProcessingTapGetSourceAudio", func() {
 		purego.RegisterLibFunc(&_fnMTAudioProcessingTapGetSourceAudio, _mediatoolboxLib, "MTAudioProcessingTapGetSourceAudio")
 	})

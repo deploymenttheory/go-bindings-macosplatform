@@ -30,7 +30,10 @@ var (
 	_sCStreamSelStopCaptureWithCompletionHandler           = objc.RegisterName("stopCaptureWithCompletionHandler:")
 	_sCStreamSelAddRecordingOutputError                    = objc.RegisterName("addRecordingOutput:error:")
 	_sCStreamSelRemoveRecordingOutputError                 = objc.RegisterName("removeRecordingOutput:error:")
+	_sCStreamSelAddClipBufferingOutputError                = objc.RegisterName("addClipBufferingOutput:error:")
+	_sCStreamSelRemoveClipBufferingOutputError             = objc.RegisterName("removeClipBufferingOutput:error:")
 	_sCStreamSelSynchronizationClock                       = objc.RegisterName("synchronizationClock")
+	_sCStreamSelIsCapturing                                = objc.RegisterName("isCapturing")
 )
 
 func SCStreamFromID(id objc.ID) *SCStream {
@@ -140,8 +143,34 @@ func (o *SCStream) RemoveRecordingOutputError(recordingOutput *SCRecordingOutput
 	return _ret, nil
 }
 
+// @method addClipBufferingOutput:error: @abstract Add a SCClipBufferingOutput to the SCStream to start clip buffering. Samples will begin accumulating in a rolling buffer that retains the most recent content up to 15 seconds. @param clipBufferingOutput a SCClipBufferingOutput object @param error the error pertaining to adding clip buffering output @discussion Returns a BOOL denoting if the add was successful. The stream must be actively capturing before clip buffering can be started. Only one clip buffering session can be active on a stream at a time. Once buffering is active, clips can be exported using the SCClipBufferingOutput's exportClipToURL:duration:completionHandler: method. Media to be buffered is based on the SCStream configuration.
+func (o *SCStream) AddClipBufferingOutputError(clipBufferingOutput *SCClipBufferingOutput) (bool, error) {
+	var _nsErr uintptr
+	_ret := objc.Send[bool](o.Ptr(), _sCStreamSelAddClipBufferingOutputError, clipBufferingOutput.Ptr(), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
+	}
+	return _ret, nil
+}
+
+// @method removeClipBufferingOutput:error: @abstract Remove SCClipBufferingOutput from the SCStream to stop clip buffering and flush the buffer @param clipBufferingOutput a SCClipBufferingOutput object @param error the error pertaining to removing clip buffering output @discussion Returns a BOOL denoting if the remove was successful. This method stops the accumulation of samples and releases all buffered content. Once removed, no new exports can be requested until clip buffering is added again. If the stream is stopped while clip buffering is active, clip buffering will be automatically stopped as well.
+func (o *SCStream) RemoveClipBufferingOutputError(clipBufferingOutput *SCClipBufferingOutput) (bool, error) {
+	var _nsErr uintptr
+	_ret := objc.Send[bool](o.Ptr(), _sCStreamSelRemoveClipBufferingOutputError, clipBufferingOutput.Ptr(), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
+	}
+	return _ret, nil
+}
+
 // @abstract Synchronization clock used for media capture.
 func (o *SCStream) SynchronizationClock() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sCStreamSelSynchronizationClock)
+	return _ret
+}
+
+// @abstract indicates whether this stream is currently capturing screen content @discussion Returns YES if the stream has been started and is actively capturing, NO otherwise.
+func (o *SCStream) IsCapturing() bool {
+	_ret := objc.Send[bool](o.Ptr(), _sCStreamSelIsCapturing)
 	return _ret
 }

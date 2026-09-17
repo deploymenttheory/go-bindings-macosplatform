@@ -13,6 +13,7 @@ import (
 // An object representing metrics about network transfers.
 //
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxnetworktransfermetric
+// Deprecated: Use MetricResult instead.
 type MXNetworkTransferMetric struct {
 	MXMetric
 }

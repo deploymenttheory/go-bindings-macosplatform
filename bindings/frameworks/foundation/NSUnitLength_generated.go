@@ -17,8 +17,6 @@ import (
 // UnitLength is an idiomatic wrapper over the Objective-C class NSUnitLength.
 //
 // It embeds [Dimension], promoting that type's methods.
-//
-// A unit of measure for length.
 type UnitLength struct {
 	Dimension
 }

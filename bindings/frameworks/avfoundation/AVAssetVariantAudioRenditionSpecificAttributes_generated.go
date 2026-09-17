@@ -15,8 +15,6 @@ import (
 )
 
 // AssetVariantAudioRenditionSpecificAttributes is an idiomatic wrapper over the Objective-C class AVAssetVariantAudioRenditionSpecificAttributes.
-//
-// An object that represents attributes specific to a particular rendition.
 type AssetVariantAudioRenditionSpecificAttributes struct {
 	objref.Handle
 }

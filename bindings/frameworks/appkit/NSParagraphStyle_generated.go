@@ -75,98 +75,105 @@ func (ps *ParagraphStyle) String() string {
 	return rt.Description(objref.IDOf(ps))
 }
 
-// LineSpacing returns the line spacing.
+// Alignment returns the text alignment of the paragraph.
+func (ps *ParagraphStyle) Alignment() TextAlignment {
+	defer runtime.KeepAlive(ps)
+	_r := objc.Send[TextAlignment](objref.IDOf(ps), objc.RegisterName("alignment"))
+	return _r
+}
+
+// LineSpacing returns the distance in points between the bottom of one line fragment and the top of the next. This value is always nonnegative. The text layout manager uses this value in the line fragment height.
 func (ps *ParagraphStyle) LineSpacing() float64 {
 	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("lineSpacing"))
 	return _r
 }
 
-// ParagraphSpacing returns the paragraph spacing.
+// ParagraphSpacing returns distance between the bottom of this paragraph and top of next. This property contains the space (measured in points) between paragraphs. This value is always nonnegative. The framework determines the space between paragraphs by adding the previous paragraph's `paragraphSpacing` and the current paragraph's “NSParagraphStyle/paragraphSpacingBefore“.
 func (ps *ParagraphStyle) ParagraphSpacing() float64 {
 	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("paragraphSpacing"))
 	return _r
 }
 
-// HeadIndent returns the head indent.
+// HeadIndent returns the indentation of the paragraph's lines other than the first. This property contains the distance (in points) from the leading margin of a text container to the beginning of lines other than the first. This value is always nonnegative.
 func (ps *ParagraphStyle) HeadIndent() float64 {
 	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("headIndent"))
 	return _r
 }
 
-// TailIndent returns the tail indent.
+// TailIndent returns the trailing indentation of the paragraph. If positive, this value is the distance from the leading margin (for example, the left margin in left-to-right text). If `0` or negative, it's the distance from the trailing margin. For example, a paragraph style designed to fit exactly in a two-inch wide container has a head indent of `0.0` and a tail indent of `0.0`. One designed to fit with a quarter-inch margin has a head indent of `0.25` and a tail indent of `–0.25`.
 func (ps *ParagraphStyle) TailIndent() float64 {
 	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("tailIndent"))
 	return _r
 }
 
-// FirstLineHeadIndent returns the first line head indent.
+// FirstLineHeadIndent returns the indentation of the first line of the paragraph. This property contains the distance (in points) from the leading margin of a text container to the beginning of the paragraph's first line. This value is always nonnegative.
 func (ps *ParagraphStyle) FirstLineHeadIndent() float64 {
 	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("firstLineHeadIndent"))
 	return _r
 }
 
-// MinimumLineHeight returns the minimum line height.
+// MinimumLineHeight returns the paragraph's minimum line height. This property contains the minimum height in points that any line in the receiver occupies, regardless of the font size or size of any attached graphic. This value is always nonnegative.
 func (ps *ParagraphStyle) MinimumLineHeight() float64 {
 	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("minimumLineHeight"))
 	return _r
 }
 
-// MaximumLineHeight returns the maximum line height.
+// MaximumLineHeight returns the paragraph's maximum line height. This property contains the maximum height in points that any line in the receiver occupies, regardless of the font size or size of any attached graphic. This value is always nonnegative. The default value is `0`. Glyphs and graphics exceeding this height overlap neighboring lines; however, a maximum height of `0` implies no line height limit. Although this limit applies to the line itself, line spacing adds extra space between adjacent lines.
 func (ps *ParagraphStyle) MaximumLineHeight() float64 {
 	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("maximumLineHeight"))
 	return _r
 }
 
-// LineBreakMode returns the line break mode.
+// LineBreakMode returns the mode for breaking lines in the paragraph that don't fit within a container. This property controls how the text system lays out lines that don't fit in its container, such as by truncating with an ellipsis (…) or clipping the text. This is different from “NSParagraphStyle/LineBreakStrategy“, which controls where the system places line breaks in a paragraph.
 func (ps *ParagraphStyle) LineBreakMode() LineBreakMode {
 	defer runtime.KeepAlive(ps)
 	_r := objc.Send[LineBreakMode](objref.IDOf(ps), objc.RegisterName("lineBreakMode"))
 	return _r
 }
 
-// BaseWritingDirection returns the base writing direction.
+// BaseWritingDirection returns the base writing direction for the paragraph. If the value of this property is “NSWritingDirection/natural“, the consumer of the value must resolve the writing direction based on the paragraph contents using the Unicode Bidi Algorithm.
 func (ps *ParagraphStyle) BaseWritingDirection() WritingDirection {
 	defer runtime.KeepAlive(ps)
 	_r := objc.Send[WritingDirection](objref.IDOf(ps), objc.RegisterName("baseWritingDirection"))
 	return _r
 }
 
-// LineHeightMultiple returns the line height multiple.
+// LineHeightMultiple returns the line height multiple. The framework multiplies the natural line height of the receiver by this factor (if positive), and constrains the resulting value by the minimum and maximum line height. The default value of this property is `0.0`.
 func (ps *ParagraphStyle) LineHeightMultiple() float64 {
 	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("lineHeightMultiple"))
 	return _r
 }
 
-// ParagraphSpacingBefore returns the paragraph spacing before.
+// ParagraphSpacingBefore returns the distance between the paragraph's top and the beginning of its text content. This property contains the space (measured in points) between the current and previous paragraphs. The default value of this property is `0.0`.
 func (ps *ParagraphStyle) ParagraphSpacingBefore() float64 {
 	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("paragraphSpacingBefore"))
 	return _r
 }
 
-// HyphenationFactor returns the hyphenation factor.
+// HyphenationFactor returns the paragraph's threshold for hyphenation. The system attempts hyphenation when the ratio of the text width (as broken without hyphenation) to the width of the line fragment is less than the hyphenation factor. When the paragraph's hyphenation factor is `0.0`, the system uses the text layout manager's hyphenation factor instead. The system disables hyphenation when both are `0.0`. This property detects the user-selected language by examining the first item in <doc://com.apple.documentation/documentation/foundation/nslocale/1415614-preferredlanguages>. ## See Also - <doc://com.apple.documentation/documentation/coretext/kCTLanguageAttributeName>
 func (ps *ParagraphStyle) HyphenationFactor() float32 {
 	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float32](objref.IDOf(ps), objc.RegisterName("hyphenationFactor"))
 	return _r
 }
 
-// UsesDefaultHyphenation wraps the corresponding Objective-C method.
+// UsesDefaultHyphenation reports whether the paragraph style uses the system hyphenation settings. The system determines the exact hyphenation logic dynamically by examining the layout context such as language, platform, etc. When `true`, it affects the return value from “hyphenationFactor“ when the property is set to `0.0`.
 func (ps *ParagraphStyle) UsesDefaultHyphenation() bool {
 	defer runtime.KeepAlive(ps)
 	_r := objc.Send[bool](objref.IDOf(ps), objc.RegisterName("usesDefaultHyphenation"))
 	return _r
 }
 
-// TabStops returns the tab stops.
+// TabStops returns the text tab objects that represent the paragraph's tab stops. The “NSTextTab“ objects, sorted by location, define the tab stops for the paragraph style. The default value is an array of 12 left-aligned tabs at 28-point intervals.
 //
 // TabStops returns the collection as a Go slice.
 func (ps *ParagraphStyle) TabStops() []*TextTab {
@@ -175,14 +182,14 @@ func (ps *ParagraphStyle) TabStops() []*TextTab {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TextTab { return TextTabFromID(_id) })
 }
 
-// DefaultTabInterval returns the default tab interval.
+// DefaultTabInterval returns the documentwide default tab interval. This property represents the default tab interval in points. Tabs after the last specified in “NSParagraphStyle/tabStops“ are placed at integer multiples of this distance (if positive). Default value is `0.0`.
 func (ps *ParagraphStyle) DefaultTabInterval() float64 {
 	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("defaultTabInterval"))
 	return _r
 }
 
-// TextLists returns the text lists.
+// TextLists returns the text lists that contain the paragraph, nested from outermost to innermost.
 //
 // TextLists returns the collection as a Go slice.
 func (ps *ParagraphStyle) TextLists() []*TextList {
@@ -191,35 +198,7 @@ func (ps *ParagraphStyle) TextLists() []*TextList {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TextList { return TextListFromID(_id) })
 }
 
-// AllowsDefaultTighteningForTruncation wraps the corresponding Objective-C method.
-func (ps *ParagraphStyle) AllowsDefaultTighteningForTruncation() bool {
-	defer runtime.KeepAlive(ps)
-	_r := objc.Send[bool](objref.IDOf(ps), objc.RegisterName("allowsDefaultTighteningForTruncation"))
-	return _r
-}
-
-// LineBreakStrategy returns the line break strategy.
-func (ps *ParagraphStyle) LineBreakStrategy() LineBreakStrategy {
-	defer runtime.KeepAlive(ps)
-	_r := objc.Send[LineBreakStrategy](objref.IDOf(ps), objc.RegisterName("lineBreakStrategy"))
-	return _r
-}
-
-// Alignment returns the alignment.
-func (ps *ParagraphStyle) Alignment() TextAlignment {
-	defer runtime.KeepAlive(ps)
-	_r := objc.Send[TextAlignment](objref.IDOf(ps), objc.RegisterName("alignment"))
-	return _r
-}
-
-// TighteningFactorForTruncation returns the tightening factor for truncation.
-func (ps *ParagraphStyle) TighteningFactorForTruncation() float32 {
-	defer runtime.KeepAlive(ps)
-	_r := objc.Send[float32](objref.IDOf(ps), objc.RegisterName("tighteningFactorForTruncation"))
-	return _r
-}
-
-// TextBlocks returns the text blocks.
+// TextBlocks returns the text blocks that contain the paragraph, nested from outermost to innermost.
 //
 // TextBlocks returns the collection as a Go slice.
 func (ps *ParagraphStyle) TextBlocks() []*TextBlock {
@@ -228,7 +207,28 @@ func (ps *ParagraphStyle) TextBlocks() []*TextBlock {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TextBlock { return TextBlockFromID(_id) })
 }
 
-// HeaderLevel returns the header level.
+// AllowsDefaultTighteningForTruncation reports whether the system tightens character spacing before truncating text. When this property is <doc://com.apple.documentation/documentation/swift/true>, the system tries to reduce the space between characters before truncating characters. The system performs this tightening in cases where the text wouldn't otherwise fit in the available space. The maximum amount of tightening performed by the system is dependent on the font, line width, and other factors. The default value of this property is <doc://com.apple.documentation/documentation/swift/false>.
+func (ps *ParagraphStyle) AllowsDefaultTighteningForTruncation() bool {
+	defer runtime.KeepAlive(ps)
+	_r := objc.Send[bool](objref.IDOf(ps), objc.RegisterName("allowsDefaultTighteningForTruncation"))
+	return _r
+}
+
+// LineBreakStrategy returns the strategy for breaking lines while laying out paragraphs. Line-break strategies are collections of options the system uses to determine where to break lines in a paragraph. This is different from “NSParagraphStyle/lineBreakMode“, which controls how to lay out lines of text that don't fit in a container. The system ignores this property if the paragraph style's “NSParagraphStyle/lineBreakMode“ property specifies a mode that doesn't support multiple lines, such as “NSLineBreakMode/byClipping“. The default value is “NSLineBreakStrategy/NSLineBreakStrategyNone“.
+func (ps *ParagraphStyle) LineBreakStrategy() LineBreakStrategy {
+	defer runtime.KeepAlive(ps)
+	_r := objc.Send[LineBreakStrategy](objref.IDOf(ps), objc.RegisterName("lineBreakStrategy"))
+	return _r
+}
+
+// TighteningFactorForTruncation returns the threshold for using tightening as an alternative to truncation. When the line break mode specifies truncation, the text system will attempt to tighten inter-character spacing as an alternative to truncation, provided that the ratio of the text width to the line fragment width does not exceed `1.0 + tighteningFactorForTruncation`. Otherwise the text will be truncated at a location determined by the line break mode. The default value is `0.0` for apps linked against 10.11 and later SDK. This property is ignored when “allowsDefaultTighteningForTruncation“ is `true`. Explicitly setting this property to `0.0` has a side effect of also setting “allowsDefaultTighteningForTruncation“ to `false`.
+func (ps *ParagraphStyle) TighteningFactorForTruncation() float32 {
+	defer runtime.KeepAlive(ps)
+	_r := objc.Send[float32](objref.IDOf(ps), objc.RegisterName("tighteningFactorForTruncation"))
+	return _r
+}
+
+// HeaderLevel returns the paragraph's header level for HTML generation. Should be set to `0` (the default value) if the paragraph is not a header, or from 1 through 6 if the paragraph is to be treated as a header.
 func (ps *ParagraphStyle) HeaderLevel() int {
 	defer runtime.KeepAlive(ps)
 	_r := objc.Send[int](objref.IDOf(ps), objc.RegisterName("headerLevel"))

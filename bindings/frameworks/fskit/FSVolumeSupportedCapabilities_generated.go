@@ -107,7 +107,7 @@ func (vsc *VolumeSupportedCapabilities) WithSupportsActiveJournal(supportsActive
 	return vsc
 }
 
-// WithDoesNotSupportRootTimes sets a Boolan property that indicates the volume doesn't store reliable times for the root directory. If this value is `true` (Swift) or `YES` (Objective-C), the volume doesn't store reliable times for the root directory.
+// WithDoesNotSupportRootTimes sets a Boolean property that indicates the volume doesn't store reliable times for the root directory. If this value is `true` (Swift) or `YES` (Objective-C), the volume doesn't store reliable times for the root directory.
 func (vsc *VolumeSupportedCapabilities) WithDoesNotSupportRootTimes(doesNotSupportRootTimes bool) *VolumeSupportedCapabilities {
 	objc.Send[objc.ID](objref.IDOf(vsc), objc.RegisterName("setDoesNotSupportRootTimes:"), doesNotSupportRootTimes)
 	return vsc
@@ -232,7 +232,7 @@ func (vsc *VolumeSupportedCapabilities) SupportsActiveJournal() bool {
 	return _r
 }
 
-// DoesNotSupportRootTimes reports whether a Boolan property that indicates the volume doesn't store reliable times for the root directory. If this value is `true` (Swift) or `YES` (Objective-C), the volume doesn't store reliable times for the root directory.
+// DoesNotSupportRootTimes reports whether a Boolean property that indicates the volume doesn't store reliable times for the root directory. If this value is `true` (Swift) or `YES` (Objective-C), the volume doesn't store reliable times for the root directory.
 func (vsc *VolumeSupportedCapabilities) DoesNotSupportRootTimes() bool {
 	defer runtime.KeepAlive(vsc)
 	_r := objc.Send[bool](objref.IDOf(vsc), objc.RegisterName("doesNotSupportRootTimes"))

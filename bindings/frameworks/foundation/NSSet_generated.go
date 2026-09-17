@@ -147,7 +147,7 @@ func (s *Set) ObjectEnumerator() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// Count returns the count.
+// Count returns the number of members in the set.
 func (s *Set) Count() int {
 	defer runtime.KeepAlive(s)
 	_r := objc.Send[int](objref.IDOf(s), objc.RegisterName("count"))
@@ -258,7 +258,7 @@ func (s *Set) ObjectsWithOptionsPassingTest(opts EnumerationOptions, predicate f
 	return rt.NSSetToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// AllObjects returns the all objects.
+// AllObjects returns an array containing the set's members, or an empty array if the set has no members. The order of the objects in the array is undefined.
 func (s *Set) AllObjects() []obj.Object {
 	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("allObjects"))

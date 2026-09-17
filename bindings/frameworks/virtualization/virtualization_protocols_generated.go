@@ -9,6 +9,10 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
+// CustomVirtioDeviceConfigurationDelegate is the Go form of the Objective-C protocol VZCustomVirtioDeviceConfigurationDelegate.
+type CustomVirtioDeviceConfigurationDelegate interface {
+}
+
 // USBDevice is the Go form of the Objective-C protocol VZUSBDevice.
 type USBDevice interface {
 	USBController() *USBController

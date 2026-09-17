@@ -572,6 +572,14 @@ func (s *Scroller) WithGestureRecognizers(items ...GestureRecognizerProvider) *S
 	return s
 }
 
+// WithExclusiveGestureBehavior sets declares whether gesture recognizers should be exclusive in this view and its subviews.
+func (s *Scroller) WithExclusiveGestureBehavior(exclusiveGestureBehavior ViewExclusiveGestureBehavior) *Scroller {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setExclusiveGestureBehavior:"), exclusiveGestureBehavior)
+	})
+	return s
+}
+
 // WithAllowedTouchTypes sets the allowed touch types.
 func (s *Scroller) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *Scroller {
 	purego.Main(func() {
@@ -633,6 +641,15 @@ func (s *Scroller) WithHorizontalContentSizeConstraintActive(horizontalContentSi
 func (s *Scroller) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Scroller {
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
+	return s
+}
+
+// WithTextSelectionManager sets the text selection manager for this view.
+func (s *Scroller) WithTextSelectionManager(textSelectionManager *TextSelectionManager) *Scroller {
+	defer runtime.KeepAlive(textSelectionManager)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTextSelectionManager:"), objref.IDOf(textSelectionManager))
 	})
 	return s
 }

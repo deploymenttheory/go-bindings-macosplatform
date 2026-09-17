@@ -23,10 +23,6 @@
       "doc": "A parsed ATR (Answer To Reset) message from a Smart Card.",
       "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardatr"
     },
-    "TKSmartCardATRInterfaceGroup": {
-      "doc": "A single interface-bytes group for a Smart Card ATR (Answer to Reset).",
-      "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardatrinterfacegroup"
-    },
     "TKSmartCardPINFormat": {
       "doc": "The formatting properties for a PIN, such as character encoding and length constraints.",
       "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardpinformat"
@@ -87,17 +83,9 @@
       "doc": "An authentication operation for a cryptographic token.",
       "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokenauthoperation"
     },
-    "TKTokenConfiguration": {
-      "doc": "A token’s configuration.",
-      "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokenconfiguration"
-    },
     "TKTokenDriver": {
       "doc": "A base class for building token drivers.",
       "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokendriver"
-    },
-    "TKTokenDriverConfiguration": {
-      "doc": "A configuration for one class of token.",
-      "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokendriverconfiguration"
     },
     "TKTokenKeyAlgorithm": {
       "doc": "Cryptographic algorithms used by token keys.",
@@ -138,9 +126,6 @@
     "TKTokenWatcher": {
       "doc": "An object that tracks the tokens available in the system.",
       "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokenwatcher"
-    },
-    "TKTokenWatcherTokenInfo": {
-      "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokenwatchertokeninfo"
     }
   },
   "protocols": {
@@ -166,35 +151,9 @@
     }
   },
   "enums": {
-    "TKErrorCode": {
-      "doc": "Error codes from CryptoTokenKit.",
-      "url": "https://developer.apple.com/documentation/cryptotokenkit/tkerrorcode"
-    },
-    "TKSmartCardPINCharset": {
-      "doc": "Possible PIN character sets.",
-      "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardpincharset"
-    },
-    "TKSmartCardPINCompletion": {
-      "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardpincompletion"
-    },
-    "TKSmartCardPINConfirmation": {
-      "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardpinconfirmation"
-    },
-    "TKSmartCardPINEncoding": {
-      "doc": "Possible PIN encoding types.",
-      "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardpinencoding"
-    },
-    "TKSmartCardPINJustification": {
-      "doc": "Possible PIN justification types",
-      "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardpinjustification"
-    },
     "TKSmartCardProtocol": {
       "doc": "Smart Card transmission protocols.",
       "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardprotocol"
-    },
-    "TKSmartCardSlotState": {
-      "doc": "All smart card slot states.",
-      "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardslotstate"
     },
     "TKTokenOperation": {
       "doc": "Operations that can be performed with a token’s keys and certificates.",

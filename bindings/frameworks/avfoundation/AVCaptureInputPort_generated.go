@@ -16,8 +16,6 @@ import (
 )
 
 // CaptureInputPort is an idiomatic wrapper over the Objective-C class AVCaptureInputPort.
-//
-// An object that represents a stream of data that a capture input provides.
 type CaptureInputPort struct {
 	objref.Handle
 }

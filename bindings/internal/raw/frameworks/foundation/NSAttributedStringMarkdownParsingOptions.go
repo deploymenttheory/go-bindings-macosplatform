@@ -50,6 +50,7 @@ func (o *NSAttributedStringMarkdownParsingOptions) Init() *NSAttributedStringMar
 	return NSAttributedStringMarkdownParsingOptionsFromID(_ret)
 }
 
+// A Boolean value that indicates whether parsing allows extensions to Markdown that specify extended attributes. Defaults to `NO` (only parse CommonMark syntax).
 func (o *NSAttributedStringMarkdownParsingOptions) AllowsExtendedAttributes() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSAttributedStringMarkdownParsingOptionsSelAllowsExtendedAttributes)
 	return _ret
@@ -59,6 +60,7 @@ func (o *NSAttributedStringMarkdownParsingOptions) SetAllowsExtendedAttributes(a
 	o.Ptr().Send(_nSAttributedStringMarkdownParsingOptionsSelSetAllowsExtendedAttributes, allowsExtendedAttributes)
 }
 
+// The syntax for interpreting a Markdown string. If your Markdown data uses syntax that this setting excludes, the parser still parses it and includes its text in the final result. However, the relevant text won't have attributes.
 func (o *NSAttributedStringMarkdownParsingOptions) InterpretedSyntax() NSAttributedStringMarkdownInterpretedSyntax {
 	_ret := objc.Send[NSAttributedStringMarkdownInterpretedSyntax](o.Ptr(), _nSAttributedStringMarkdownParsingOptionsSelInterpretedSyntax)
 	return _ret
@@ -68,6 +70,7 @@ func (o *NSAttributedStringMarkdownParsingOptions) SetInterpretedSyntax(interpre
 	o.Ptr().Send(_nSAttributedStringMarkdownParsingOptionsSelSetInterpretedSyntax, interpretedSyntax)
 }
 
+// The policy for handling a parsing failure. The default is `NSAttributedStringMarkdownParsingFailureReturnError`.
 func (o *NSAttributedStringMarkdownParsingOptions) FailurePolicy() NSAttributedStringMarkdownParsingFailurePolicy {
 	_ret := objc.Send[NSAttributedStringMarkdownParsingFailurePolicy](o.Ptr(), _nSAttributedStringMarkdownParsingOptionsSelFailurePolicy)
 	return _ret
@@ -77,6 +80,7 @@ func (o *NSAttributedStringMarkdownParsingOptions) SetFailurePolicy(failurePolic
 	o.Ptr().Send(_nSAttributedStringMarkdownParsingOptionsSelSetFailurePolicy, failurePolicy)
 }
 
+// The BCP-47 language code for this document. If not `nil`, the `NSLanguageIdentifierAttributeName` attribute will be applied to any range in the returned string that doesn't otherwise specify a language attribute. The default is `nil`, which applies no attributes.
 func (o *NSAttributedStringMarkdownParsingOptions) LanguageCode() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAttributedStringMarkdownParsingOptionsSelLanguageCode)
 	if _ret != 0 {
@@ -89,6 +93,7 @@ func (o *NSAttributedStringMarkdownParsingOptions) SetLanguageCode(languageCode 
 	o.Ptr().Send(_nSAttributedStringMarkdownParsingOptionsSelSetLanguageCode, languageCode.Ptr())
 }
 
+// A Boolean value that indicates whether parsing applies attributes that indicate the position of attributed text in the original Markdown string.
 func (o *NSAttributedStringMarkdownParsingOptions) AppliesSourcePositionAttributes() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSAttributedStringMarkdownParsingOptionsSelAppliesSourcePositionAttributes)
 	return _ret

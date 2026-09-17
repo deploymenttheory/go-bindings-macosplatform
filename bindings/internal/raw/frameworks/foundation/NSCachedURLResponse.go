@@ -9,8 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A cached response to a URL request.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nscachedurlresponse
 type NSCachedURLResponse struct {
 	NSObject
@@ -36,7 +34,7 @@ func NSCachedURLResponseFromID(id objc.ID) *NSCachedURLResponse {
 	return o
 }
 
-// @method initWithResponse:data @abstract Initializes an NSCachedURLResponse with the given response and data. @discussion A default NSURLCacheStoragePolicy is used for NSCachedURLResponse objects initialized with this method: NSURLCacheStorageAllowed. @param response a NSURLResponse object. @param data an NSData object representing the URL content corresponding to the given response. @result an initialized NSCachedURLResponse.
+// Creates a cached URL response instance. The cache storage policy is set to the default, `NSURLCacheStorageAllowed`. - Parameters: - response: The response to cache. - data: The data to cache. - Returns: A cached URL response object, containing the response and data.
 func (o *NSCachedURLResponse) InitWithResponseData(response *NSURLResponse, data *NSData) *NSCachedURLResponse {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCachedURLResponseSelInitWithResponseData, response.Ptr(), data.Ptr())
 	if _ret != 0 {
@@ -45,7 +43,7 @@ func (o *NSCachedURLResponse) InitWithResponseData(response *NSURLResponse, data
 	return NSCachedURLResponseFromID(_ret)
 }
 
-// @method initWithResponse:data:userInfo:storagePolicy: @abstract Initializes an NSCachedURLResponse with the given response, data, user-info dictionary, and storage policy. @param response a NSURLResponse object. @param data an NSData object representing the URL content corresponding to the given response. @param userInfo a dictionary user-specified information to be stored with the NSCachedURLResponse. @param storagePolicy an NSURLCacheStoragePolicy constant. @result an initialized NSCachedURLResponse.
+// Creates a cached URL response with a given server response, data, user-info dictionary, and storage policy. - Parameters: - response: The response to cache. - data: The data to cache. - userInfo: An optional dictionary of user information. May be `nil`. - storagePolicy: An `NSURLCacheStoragePolicy` constant. - Returns: A cached URL response object, containing the response and data.
 func (o *NSCachedURLResponse) InitWithResponseDataUserInfoStoragePolicy(response *NSURLResponse, data *NSData, userInfo *NSDictionary[objc.ID, objc.ID], storagePolicy NSURLCacheStoragePolicy) *NSCachedURLResponse {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCachedURLResponseSelInitWithResponseDataUserInfoStoragePolicy, response.Ptr(), data.Ptr(), userInfo.Ptr(), storagePolicy)
 	if _ret != 0 {
@@ -54,7 +52,7 @@ func (o *NSCachedURLResponse) InitWithResponseDataUserInfoStoragePolicy(response
 	return NSCachedURLResponseFromID(_ret)
 }
 
-// @abstract Returns the response wrapped by this instance. @result The response wrapped by this instance.
+// The URL response object associated with the instance.
 func (o *NSCachedURLResponse) Response() *NSURLResponse {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCachedURLResponseSelResponse)
 	if _ret != 0 {
@@ -63,7 +61,7 @@ func (o *NSCachedURLResponse) Response() *NSURLResponse {
 	return NSURLResponseFromID(_ret)
 }
 
-// @abstract Returns the data of the receiver. @result The data of the receiver.
+// The cached response's data.
 func (o *NSCachedURLResponse) Data() *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCachedURLResponseSelData)
 	if _ret != 0 {
@@ -72,7 +70,7 @@ func (o *NSCachedURLResponse) Data() *NSData {
 	return NSDataFromID(_ret)
 }
 
-// @abstract Returns the userInfo dictionary of the receiver. @result The userInfo dictionary of the receiver.
+// The cached response's user info dictionary.
 func (o *NSCachedURLResponse) UserInfo() *NSDictionary[objc.ID, objc.ID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCachedURLResponseSelUserInfo)
 	if _ret != 0 {
@@ -81,7 +79,7 @@ func (o *NSCachedURLResponse) UserInfo() *NSDictionary[objc.ID, objc.ID] {
 	return NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
-// @abstract Returns the NSURLCacheStoragePolicy constant of the receiver. @result The NSURLCacheStoragePolicy constant of the receiver.
+// The cached response's storage policy.
 func (o *NSCachedURLResponse) StoragePolicy() NSURLCacheStoragePolicy {
 	_ret := objc.Send[NSURLCacheStoragePolicy](o.Ptr(), _nSCachedURLResponseSelStoragePolicy)
 	return _ret

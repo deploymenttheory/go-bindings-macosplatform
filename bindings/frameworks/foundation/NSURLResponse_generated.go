@@ -18,8 +18,6 @@ import (
 // URLResponse is an idiomatic wrapper over the Objective-C class NSURLResponse.
 //
 // URLResponse is an abstract base — you do not construct it directly. Construct one of [HTTPURLResponse] and pass it where a URLResponse is accepted.
-//
-// The metadata associated with the response to a URL load request, independent of protocol and URL scheme.
 type URLResponse struct {
 	objref.Handle
 }
@@ -76,7 +74,7 @@ func (ur *URLResponse) String() string {
 	return rt.Description(objref.IDOf(ur))
 }
 
-// NewURLResponseWithURLMIMETypeExpectedContentLengthTextEncodingName initialize an NSURLResponse with the provided values. This is the designated initializer for NSURLResponse.
+// NewURLResponseWithURLMIMETypeExpectedContentLengthTextEncodingName creates an initialized `NSURLResponse` object with the URL, MIME type, length, and text encoding set to given values. This is the designated initializer for `NSURLResponse`. - Parameters: - URL: The URL for the new object. - MIMEType: The MIME content type of the response. - length: The expected content length. This value should be `-1` if the expected length is undetermined. - name: The name of the text encoding for the associated data, if applicable, else `nil`. - Returns: The initialized URL response.
 func NewURLResponseWithURLMIMETypeExpectedContentLengthTextEncodingName(url string, mimeType string, length int, name string) *URLResponse {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSURLResponse")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:MIMEType:expectedContentLength:textEncodingName:"), rt.FileURL(url), purego.NSString(mimeType), length, purego.NSString(name))
@@ -95,14 +93,14 @@ func (ur *URLResponse) WithScriptingProperties(scriptingProperties map[string]ob
 	return ur
 }
 
-// URL returns the URL of the receiver.
+// URL returns the URL for the response.
 func (ur *URLResponse) URL() string {
 	defer runtime.KeepAlive(ur)
 	_r := objc.Send[objc.ID](objref.IDOf(ur), objc.RegisterName("URL"))
 	return rt.URLString(_r)
 }
 
-// MIMEType returns the MIME type of the receiver. The MIME type is based on the information provided from an origin source. However, that value may be changed or corrected by a protocol implementation if it can be determined that the origin server or source reported the information incorrectly or imprecisely. An attempt to guess the MIME type may be made if the origin source did not report any such information.
+// MIMEType returns the MIME type of the response. The MIME type is often provided by the response's originating source. However, that value may be changed or corrected by a protocol implementation if it can be determined that the response's source reported the information incorrectly. If the response's originating source does not provide a MIME type, an attempt to guess the MIME type may be made.
 func (ur *URLResponse) MIMEType() string {
 	defer runtime.KeepAlive(ur)
 	_r := objc.Send[objc.ID](objref.IDOf(ur), objc.RegisterName("MIMEType"))
@@ -112,14 +110,14 @@ func (ur *URLResponse) MIMEType() string {
 	return purego.GoString(_r)
 }
 
-// ExpectedContentLength returns the expected content length of the receiver. Some protocol implementations report a content length as part of delivering load metadata, but not all protocols guarantee the amount of data that will be delivered in actuality. Hence, this method returns an expected amount. Clients should use this value as an advisory, and should be prepared to deal with either more or less data.
+// ExpectedContentLength returns the expected length of the response's content. This property's value is `NSURLResponseUnknownLength` if the length can't be determined. Some protocol implementations report the content length as part of the response, but not all protocols guarantee to deliver that amount of data. Your app should be prepared to deal with more or less data.
 func (ur *URLResponse) ExpectedContentLength() int64 {
 	defer runtime.KeepAlive(ur)
 	_r := objc.Send[int64](objref.IDOf(ur), objc.RegisterName("expectedContentLength"))
 	return _r
 }
 
-// TextEncodingName returns the name of the text encoding of the receiver. This name will be the actual string reported by the origin source during the course of performing a protocol-specific URL load. Clients can inspect this string and convert it to an NSStringEncoding or CFStringEncoding using the methods and functions made available in the appropriate framework.
+// TextEncodingName returns the name of the text encoding provided by the response's originating source. If no text encoding was provided by the protocol, this property's value is `nil`. You can convert this string to a `CFStringEncoding` value by calling `CFStringConvertIANACharSetNameToEncoding(_:)`. You can subsequently convert that value to an `NSStringEncoding` value by calling `CFStringConvertEncodingToNSStringEncoding(_:)`.
 func (ur *URLResponse) TextEncodingName() string {
 	defer runtime.KeepAlive(ur)
 	_r := objc.Send[objc.ID](objref.IDOf(ur), objc.RegisterName("textEncodingName"))
@@ -129,7 +127,7 @@ func (ur *URLResponse) TextEncodingName() string {
 	return purego.GoString(_r)
 }
 
-// SuggestedFilename returns a suggested filename if the resource were saved to disk. The method first checks if the server has specified a filename using the content disposition header. If no valid filename is specified using that mechanism, this method checks the last path component of the URL. If no valid filename can be obtained using the last path component, this method uses the URL's host as the filename. If the URL's host can't be converted to a valid filename, the filename "unknown" is used. In most cases, this method appends the proper file extension based on the MIME type. This method always returns a valid filename.
+// SuggestedFilename returns a suggested filename for the response data. Accessing this property attempts to generate a filename using the following information, in order: 1. A filename specified using the content disposition header. 2. The last path component of the URL. 3. The host of the URL. If the host of URL can't be converted to a valid filename, the filename `"unknown"` is used. In most cases, this property appends the proper file extension based on the MIME type. Accessing this property always returns a valid filename regardless of whether the resource is saved to disk.
 func (ur *URLResponse) SuggestedFilename() string {
 	defer runtime.KeepAlive(ur)
 	_r := objc.Send[objc.ID](objref.IDOf(ur), objc.RegisterName("suggestedFilename"))

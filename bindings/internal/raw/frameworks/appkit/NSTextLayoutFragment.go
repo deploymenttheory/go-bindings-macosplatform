@@ -107,6 +107,7 @@ func (o *NSTextLayoutFragment) FrameForTextAttachmentAtLocation(location NSTextL
 	return _ret
 }
 
+// The text layout manager for this text layout fragment.
 func (o *NSTextLayoutFragment) TextLayoutManager() *NSTextLayoutManager {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextLayoutFragmentSelTextLayoutManager)
 	if _ret != 0 {
@@ -115,6 +116,7 @@ func (o *NSTextLayoutFragment) TextLayoutManager() *NSTextLayoutManager {
 	return NSTextLayoutManagerFromID(_ret)
 }
 
+// The parent text element.
 func (o *NSTextLayoutFragment) TextElement() *NSTextElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextLayoutFragmentSelTextElement)
 	if _ret != 0 {
@@ -123,6 +125,7 @@ func (o *NSTextLayoutFragment) TextElement() *NSTextElement {
 	return NSTextElementFromID(_ret)
 }
 
+// The range inside the text element relative to the document origin.
 func (o *NSTextLayoutFragment) RangeInElement() *NSTextRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextLayoutFragmentSelRangeInElement)
 	if _ret != 0 {
@@ -131,6 +134,7 @@ func (o *NSTextLayoutFragment) RangeInElement() *NSTextRange {
 	return NSTextRangeFromID(_ret)
 }
 
+// An array of text line fragments. Valid when “state“ is `NSTextLayoutFragmentStateLayoutAvailable`. KVO-compliant.
 func (o *NSTextLayoutFragment) TextLineFragments() *foundation.NSArray[*NSTextLineFragment] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextLayoutFragmentSelTextLineFragments)
 	if _ret != 0 {
@@ -139,6 +143,7 @@ func (o *NSTextLayoutFragment) TextLineFragments() *foundation.NSArray[*NSTextLi
 	return foundation.NSArrayFromID[*NSTextLineFragment](_ret)
 }
 
+// The queue on which the framework dispatches layout operations. When non-nil, the layout operation is dispatched to the queue asynchronously.
 func (o *NSTextLayoutFragment) LayoutQueue() *foundation.NSOperationQueue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextLayoutFragmentSelLayoutQueue)
 	if _ret != 0 {
@@ -151,41 +156,49 @@ func (o *NSTextLayoutFragment) SetLayoutQueue(layoutQueue *foundation.NSOperatio
 	o.Ptr().Send(_nSTextLayoutFragmentSelSetLayoutQueue, layoutQueue.Ptr())
 }
 
+// The layout information state. KVO-compliant.
 func (o *NSTextLayoutFragment) State() NSTextLayoutFragmentState {
 	_ret := objc.Send[NSTextLayoutFragmentState](o.Ptr(), _nSTextLayoutFragmentSelState)
 	return _ret
 }
 
+// The rectangle the framework uses for tiling the layout fragment inside the target layout coordinate system. Typically in an “NSTextContainer“ coordinate system.
 func (o *NSTextLayoutFragment) LayoutFragmentFrame() corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSTextLayoutFragmentSelLayoutFragmentFrame)
 	return _ret
 }
 
+// The bounds defining the area required for rendering the contents. The coordinate system is relative to “layoutFragmentFrame“. The coordinate system is vertically flipped, meaning origin (`{0,0}`) is at the upper-left corner. The size should be larger than `layoutFragmentFrame.size`. The origin could be in the negative coordinate since the rendering could be stretched out of `layoutFragmentFrame`. Only valid when “state“ is greater than `NSTextLayoutFragmentStateEstimatedUsageBounds`.
 func (o *NSTextLayoutFragment) RenderingSurfaceBounds() corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSTextLayoutFragmentSelRenderingSurfaceBounds)
 	return _ret
 }
 
+// The amount of margin space reserved during paragraph layout between the leading edge of the text layout fragment and the start of the lines in the paragraph. The leading edge is according to the primary writing direction of the paragraph.
 func (o *NSTextLayoutFragment) LeadingPadding() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSTextLayoutFragmentSelLeadingPadding)
 	return _ret
 }
 
+// The amount of margin space reserved during paragraph layout between the end of the lines in the paragraph and the trailing edge of the text layout fragment. The trailing edge is according to the primary writing direction of the paragraph.
 func (o *NSTextLayoutFragment) TrailingPadding() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSTextLayoutFragmentSelTrailingPadding)
 	return _ret
 }
 
+// The amount of space reserved during paragraph layout between the top of the text layout fragment and the top of the first line in the paragraph.
 func (o *NSTextLayoutFragment) TopMargin() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSTextLayoutFragmentSelTopMargin)
 	return _ret
 }
 
+// The amount of space reserved during paragraph layout between the bottom of the last line in the paragraph and the bottom of the text layout fragment.
 func (o *NSTextLayoutFragment) BottomMargin() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSTextLayoutFragmentSelBottomMargin)
 	return _ret
 }
 
+// The attachment view providers associated with the text layout fragment. The property contents are only valid with `NSTextLayoutFragmentStateLayoutAvailable`.
 func (o *NSTextLayoutFragment) TextAttachmentViewProviders() *foundation.NSArray[*NSTextAttachmentViewProvider] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextLayoutFragmentSelTextAttachmentViewProviders)
 	if _ret != 0 {

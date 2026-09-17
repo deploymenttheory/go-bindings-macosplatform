@@ -50,6 +50,12 @@ type ConsolePortConfigurationProvider interface {
 	isConsolePortConfiguration()
 }
 
+// CustomVirtioDeviceProviderProvider is accepted wherever a VZCustomVirtioDeviceProvider (or one of its subclasses) is expected.
+type CustomVirtioDeviceProviderProvider interface {
+	objref.Object
+	isCustomVirtioDeviceProvider()
+}
+
 // DirectoryShareProvider is accepted wherever a VZDirectoryShare (or one of its subclasses) is expected.
 type DirectoryShareProvider interface {
 	objref.Object
@@ -66,6 +72,12 @@ type DirectorySharingDeviceProvider interface {
 type DirectorySharingDeviceConfigurationProvider interface {
 	objref.Object
 	isDirectorySharingDeviceConfiguration()
+}
+
+// EFISignatureProvider is accepted wherever a VZEFISignature (or one of its subclasses) is expected.
+type EFISignatureProvider interface {
+	objref.Object
+	isEFISignature()
 }
 
 // EntropyDeviceConfigurationProvider is accepted wherever a VZEntropyDeviceConfiguration (or one of its subclasses) is expected.
@@ -96,6 +108,12 @@ type GraphicsDisplayProvider interface {
 type GraphicsDisplayConfigurationProvider interface {
 	objref.Object
 	isGraphicsDisplayConfiguration()
+}
+
+// GuestProvisioningOptionsProvider is accepted wherever a VZGuestProvisioningOptions (or one of its subclasses) is expected.
+type GuestProvisioningOptionsProvider interface {
+	objref.Object
+	isGuestProvisioningOptions()
 }
 
 // KeyboardConfigurationProvider is accepted wherever a VZKeyboardConfiguration (or one of its subclasses) is expected.

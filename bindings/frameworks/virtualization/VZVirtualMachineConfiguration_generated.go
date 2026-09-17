@@ -121,6 +121,13 @@ func (vmc *VirtualMachineConfiguration) WithConsoleDevices(items ...ConsoleDevic
 	return vmc
 }
 
+// WithCustomVirtioDevices sets the array of custom virtio devices that you expose to the guest operating system.
+func (vmc *VirtualMachineConfiguration) WithCustomVirtioDevices(items ...*CustomVirtioDeviceConfiguration) *VirtualMachineConfiguration {
+	_arr := purego.SliceToNSArray(items, func(_v *CustomVirtioDeviceConfiguration) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(vmc), objc.RegisterName("setCustomVirtioDevices:"), _arr)
+	return vmc
+}
+
 // WithDirectorySharingDevices sets the list of directory sharing devices.
 func (vmc *VirtualMachineConfiguration) WithDirectorySharingDevices(items ...DirectorySharingDeviceConfigurationProvider) *VirtualMachineConfiguration {
 	_arr := purego.SliceToNSArray(items, func(_v DirectorySharingDeviceConfigurationProvider) objc.ID { return objref.IDOf(_v) })
@@ -198,6 +205,12 @@ func (vmc *VirtualMachineConfiguration) WithUSBControllers(items ...USBControlle
 	return vmc
 }
 
+// WithLabel sets an optional label for the virtual machine.
+func (vmc *VirtualMachineConfiguration) WithLabel(label string) *VirtualMachineConfiguration {
+	objc.Send[objc.ID](objref.IDOf(vmc), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return vmc
+}
+
 // BootLoader returns boot loader used when the virtual machine starts.
 func (vmc *VirtualMachineConfiguration) BootLoader() *BootLoader {
 	defer runtime.KeepAlive(vmc)
@@ -242,6 +255,15 @@ func (vmc *VirtualMachineConfiguration) ConsoleDevices() []*ConsoleDeviceConfigu
 	defer runtime.KeepAlive(vmc)
 	_arr := objc.Send[objc.ID](objref.IDOf(vmc), objc.RegisterName("consoleDevices"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ConsoleDeviceConfiguration { return ConsoleDeviceConfigurationFromID(_id) })
+}
+
+// CustomVirtioDevices returns a list of custom Virtio devices. The list is empty by default. ## See Also - “VZCustomVirtioDeviceConfiguration“
+//
+// CustomVirtioDevices returns the collection as a Go slice.
+func (vmc *VirtualMachineConfiguration) CustomVirtioDevices() []*CustomVirtioDeviceConfiguration {
+	defer runtime.KeepAlive(vmc)
+	_arr := objc.Send[objc.ID](objref.IDOf(vmc), objc.RegisterName("customVirtioDevices"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CustomVirtioDeviceConfiguration { return CustomVirtioDeviceConfigurationFromID(_id) })
 }
 
 // DirectorySharingDevices returns list of directory sharing devices. Empty by default.
@@ -345,6 +367,16 @@ func (vmc *VirtualMachineConfiguration) USBControllers() []*USBControllerConfigu
 	defer runtime.KeepAlive(vmc)
 	_arr := objc.Send[objc.ID](objref.IDOf(vmc), objc.RegisterName("usbControllers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *USBControllerConfiguration { return USBControllerConfigurationFromID(_id) })
+}
+
+// Label returns an optional label for the virtual machine. The framework uses this string as part of the name of the virtual machine in some system services. The label must be non-empty, less than or equal to 64 characters in length, and contain at least one non-whitespace character.
+func (vmc *VirtualMachineConfiguration) Label() string {
+	defer runtime.KeepAlive(vmc)
+	_r := objc.Send[objc.ID](objref.IDOf(vmc), objc.RegisterName("label"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
 }
 
 // Validate validates the current configuration settings and reports any issues that might prevent the successful initialization of the VM.

@@ -100,6 +100,14 @@ func NewEntityIdentifierWithUUIDData(uuid obj.Object, qualifierData []byte) *Ent
 	return entityIdentifierAdopt(_id)
 }
 
+// NewEntityIdentifierWithUUIDQualifierData creates an entity identifier with the given UUID and qualifier data.
+func NewEntityIdentifierWithUUIDQualifierData(uuid obj.Object, qualifierData []byte) *EntityIdentifier {
+	defer runtime.KeepAlive(uuid)
+	_alloc := objc.Send[objc.ID](objc.ID(_class("FSEntityIdentifier")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUUID:qualifierData:"), objref.IDOf(uuid), rt.BytesToNSData(qualifierData))
+	return entityIdentifierAdopt(_id)
+}
+
 // WithUUID sets a UUID to uniquely identify this entity.
 func (ei *EntityIdentifier) WithUUID(uuid obj.Object) *EntityIdentifier {
 	defer runtime.KeepAlive(uuid)

@@ -188,6 +188,12 @@ func (aw *AssetWriter) WithDelegate(delegate AssetWriterDelegate) *AssetWriter {
 	return aw
 }
 
+// WithUsesProVideoStorage sets indicates whether to use pre-allocated storage.
+func (aw *AssetWriter) WithUsesProVideoStorage(usesProVideoStorage bool) *AssetWriter {
+	objc.Send[objc.ID](objref.IDOf(aw), objc.RegisterName("setUsesProVideoStorage:"), usesProVideoStorage)
+	return aw
+}
+
 // CanApplyOutputSettingsForMediaType determines whether the output file format supports the output settings for a specific media type.
 func (aw *AssetWriter) CanApplyOutputSettingsForMediaType(outputSettings map[string]obj.Object, mediaType obj.Object) bool {
 	defer runtime.KeepAlive(aw)
@@ -296,7 +302,7 @@ func (aw *AssetWriter) ShouldOptimizeForNetworkUse() bool {
 	return _r
 }
 
-// DirectoryForTemporaryFiles specifies a directory that is suitable for containing temporary files generated during the process of writing an asset. AVAssetWriter may need to write temporary files when configured in certain ways, such as when performsMultiPassEncodingIfSupported is set to YES on one or more of its inputs.  This property can be used to control where in the filesystem those temporary files are created.  All temporary files will be deleted when asset writing is completed, is canceled, or fails. When the value of this property is nil, the asset writer will choose a suitable location when writing temporary files.  The default value is nil. This property cannot be set after writing has started.  The asset writer will fail if a file cannot be created in this directory (for example, due to insufficient permissions).
+// DirectoryForTemporaryFiles specifies a directory that is suitable for containing temporary files generated during the process of writing an asset. AVAssetWriter may need to write temporary files when configured in certain ways, such as when performsMultiPassEncodingIfSupported is set to YES on one or more of its inputs. This property can be used to control where in the filesystem those temporary files are created. All temporary files will be deleted when asset writing is completed, is canceled, or fails. When the value of this property is nil, the asset writer will choose a suitable location when writing temporary files. The default value is nil. This property cannot be set after writing has started. The asset writer will fail if a file cannot be created in this directory (for example, due to insufficient permissions).
 func (aw *AssetWriter) DirectoryForTemporaryFiles() string {
 	defer runtime.KeepAlive(aw)
 	_r := objc.Send[objc.ID](objref.IDOf(aw), objc.RegisterName("directoryForTemporaryFiles"))
@@ -326,7 +332,7 @@ func (aw *AssetWriter) ProducesCombinableFragments() bool {
 	return _r
 }
 
-// OverallDurationHint returns for file types that support movie fragments, provides a hint of the final duration of the file to be written The value of this property must be a nonnegative, numeric CMTime.  Alternatively, if the value of this property is an invalid CMTime (e.g. kCMTimeInvalid), no overall duration hint will be written to the file.  The default value is kCMTimeInvalid. This property is currently ignored if movie fragments are not being written.  Use the movieFragmentInterval property to enable movie fragments. This property cannot be set after writing has started.
+// OverallDurationHint returns for file types that support movie fragments, provides a hint of the final duration of the file to be written The value of this property must be a nonnegative, numeric CMTime. Alternatively, if the value of this property is an invalid CMTime (e.g. kCMTimeInvalid), no overall duration hint will be written to the file. The default value is kCMTimeInvalid. This property is currently ignored if movie fragments are not being written. Use the movieFragmentInterval property to enable movie fragments. This property cannot be set after writing has started.
 func (aw *AssetWriter) OverallDurationHint() coremedia.CMTime {
 	defer runtime.KeepAlive(aw)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(aw), objc.RegisterName("overallDurationHint"))
@@ -377,9 +383,23 @@ func (aw *AssetWriter) PreferredOutputSegmentInterval() coremedia.CMTime {
 	return _r
 }
 
-// OutputFileTypeProfile returns the output file type profile.
+// OutputFileTypeProfile specifies a file type profile for the specified file type. The default value is nil, which means that the receiver will choose an appropriate default profile based on the specified file type. Clients that want to receive segment data that is suitable for streaming through the -assetWriter:didOutputSegmentData:segmentType:segmentReport: or -assetWriter:didOutputSegmentData:segmentType: delegate method should set AVFileTypeProfileMPEG4AppleHLS, or AVFileTypeProfileMPEG4CMAFCompliant to require output that is specifically compliant with CMAF format, with AVFileTypeMPEG4 file type. File type profiles are declared in AVMediaFormat.h. This property cannot be set after writing has started.
 func (aw *AssetWriter) OutputFileTypeProfile() *foundation.String {
 	defer runtime.KeepAlive(aw)
 	_r := objc.Send[objc.ID](objref.IDOf(aw), objc.RegisterName("outputFileTypeProfile"))
 	return foundation.StringFromID(_r)
+}
+
+// IsProVideoStorageSupported reports whether the receiver supports writing to pre-allocated storage on this device for high data rate video capture formats such as ProRes. Check this value prior to setting the `usesProVideoStorage` property to avoid exceptions when pre-allocated storage is not supported.
+func (aw *AssetWriter) IsProVideoStorageSupported() bool {
+	defer runtime.KeepAlive(aw)
+	_r := objc.Send[bool](objref.IDOf(aw), objc.RegisterName("isProVideoStorageSupported"))
+	return _r
+}
+
+// UsesProVideoStorage reports whether to use pre-allocated storage. The default value is `NO`. See more detailed description of ProVideoStorage in `AVProVideoStorage.h`. An exception will be thrown if clients try to set `YES` if the value of the `proVideoStorageSupported` property is `NO`. An exception will be thrown if clients try to set this property after `-startWriting` has been called on the receiver.
+func (aw *AssetWriter) UsesProVideoStorage() bool {
+	defer runtime.KeepAlive(aw)
+	_r := objc.Send[bool](objref.IDOf(aw), objc.RegisterName("usesProVideoStorage"))
+	return _r
 }

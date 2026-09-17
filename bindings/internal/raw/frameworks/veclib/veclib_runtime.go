@@ -196,7 +196,9 @@ func _loadLibrary() {
 	_register("BNNSGather", func() { purego.RegisterLibFunc(&_fnBNNSGather, _veclibLib, "BNNSGather") })
 	_register("BNNSGatherND", func() { purego.RegisterLibFunc(&_fnBNNSGatherND, _veclibLib, "BNNSGatherND") })
 	_register("BNNSGetPointer", func() { purego.RegisterLibFunc(&_fnBNNSGetPointer, _veclibLib, "BNNSGetPointer") })
-	_register("BNNSGraphCompileFromFile", func() { purego.RegisterLibFunc(&_fnBNNSGraphCompileFromFile, _veclibLib, "BNNSGraphCompileFromFile") })
+	_register("BNNSGraphCompileFromFile", func() {
+		purego.RegisterLibFunc(&_fnBNNSGraphCompileFromFile, _veclibLib, "BNNSGraphCompileFromFile_v2")
+	})
 	_register("BNNSGraphCompileOptionsDestroy", func() {
 		purego.RegisterLibFunc(&_fnBNNSGraphCompileOptionsDestroy, _veclibLib, "BNNSGraphCompileOptionsDestroy")
 	})
@@ -239,14 +241,14 @@ func _loadLibrary() {
 	_register("BNNSGraphCompileOptionsSetTargetSingleThread", func() {
 		purego.RegisterLibFunc(&_fnBNNSGraphCompileOptionsSetTargetSingleThread, _veclibLib, "BNNSGraphCompileOptionsSetTargetSingleThread")
 	})
-	_register("BNNSGraphContextDestroy", func() { purego.RegisterLibFunc(&_fnBNNSGraphContextDestroy, _veclibLib, "BNNSGraphContextDestroy") })
+	_register("BNNSGraphContextDestroy", func() { purego.RegisterLibFunc(&_fnBNNSGraphContextDestroy, _veclibLib, "BNNSGraphContextDestroy_v2") })
 	_register("BNNSGraphContextEnableNanAndInfChecks", func() {
 		purego.RegisterLibFunc(&_fnBNNSGraphContextEnableNanAndInfChecks, _veclibLib, "BNNSGraphContextEnableNanAndInfChecks")
 	})
-	_register("BNNSGraphContextExecute", func() { purego.RegisterLibFunc(&_fnBNNSGraphContextExecute, _veclibLib, "BNNSGraphContextExecute") })
+	_register("BNNSGraphContextExecute", func() { purego.RegisterLibFunc(&_fnBNNSGraphContextExecute, _veclibLib, "BNNSGraphContextExecute_v2") })
 	_register("BNNSGraphContextGetTensor", func() { purego.RegisterLibFunc(&_fnBNNSGraphContextGetTensor, _veclibLib, "BNNSGraphContextGetTensor") })
 	_register("BNNSGraphContextGetWorkspaceSize", func() {
-		purego.RegisterLibFunc(&_fnBNNSGraphContextGetWorkspaceSize, _veclibLib, "BNNSGraphContextGetWorkspaceSize")
+		purego.RegisterLibFunc(&_fnBNNSGraphContextGetWorkspaceSize, _veclibLib, "BNNSGraphContextGetWorkspaceSize_v2")
 	})
 	_register("BNNSGraphContextMake", func() { purego.RegisterLibFunc(&_fnBNNSGraphContextMake, _veclibLib, "BNNSGraphContextMake") })
 	_register("BNNSGraphContextMakeStreaming", func() {
@@ -256,10 +258,10 @@ func _loadLibrary() {
 		purego.RegisterLibFunc(&_fnBNNSGraphContextSetArgumentType, _veclibLib, "BNNSGraphContextSetArgumentType")
 	})
 	_register("BNNSGraphContextSetBatchSize", func() {
-		purego.RegisterLibFunc(&_fnBNNSGraphContextSetBatchSize, _veclibLib, "BNNSGraphContextSetBatchSize")
+		purego.RegisterLibFunc(&_fnBNNSGraphContextSetBatchSize, _veclibLib, "BNNSGraphContextSetBatchSize_v2")
 	})
 	_register("BNNSGraphContextSetDynamicShapes", func() {
-		purego.RegisterLibFunc(&_fnBNNSGraphContextSetDynamicShapes, _veclibLib, "BNNSGraphContextSetDynamicShapes")
+		purego.RegisterLibFunc(&_fnBNNSGraphContextSetDynamicShapes, _veclibLib, "BNNSGraphContextSetDynamicShapes_v2")
 	})
 	_register("BNNSGraphContextSetMessageLogCallback", func() {
 		purego.RegisterLibFunc(&_fnBNNSGraphContextSetMessageLogCallback, _veclibLib, "BNNSGraphContextSetMessageLogCallback")
@@ -268,13 +270,13 @@ func _loadLibrary() {
 		purego.RegisterLibFunc(&_fnBNNSGraphContextSetMessageLogMask, _veclibLib, "BNNSGraphContextSetMessageLogMask")
 	})
 	_register("BNNSGraphContextSetOutputAllocationCallback", func() {
-		purego.RegisterLibFunc(&_fnBNNSGraphContextSetOutputAllocationCallback, _veclibLib, "BNNSGraphContextSetOutputAllocationCallback")
+		purego.RegisterLibFunc(&_fnBNNSGraphContextSetOutputAllocationCallback, _veclibLib, "BNNSGraphContextSetOutputAllocationCallback_v2")
 	})
 	_register("BNNSGraphContextSetStreamingAdvanceCount", func() {
 		purego.RegisterLibFunc(&_fnBNNSGraphContextSetStreamingAdvanceCount, _veclibLib, "BNNSGraphContextSetStreamingAdvanceCount")
 	})
 	_register("BNNSGraphContextSetWorkspaceAllocationCallback", func() {
-		purego.RegisterLibFunc(&_fnBNNSGraphContextSetWorkspaceAllocationCallback, _veclibLib, "BNNSGraphContextSetWorkspaceAllocationCallback")
+		purego.RegisterLibFunc(&_fnBNNSGraphContextSetWorkspaceAllocationCallback, _veclibLib, "BNNSGraphContextSetWorkspaceAllocationCallback_v2")
 	})
 	_register("BNNSGraphGetArgumentCount", func() { purego.RegisterLibFunc(&_fnBNNSGraphGetArgumentCount, _veclibLib, "BNNSGraphGetArgumentCount") })
 	_register("BNNSGraphGetArgumentIntents", func() {
@@ -290,9 +292,9 @@ func _loadLibrary() {
 	_register("BNNSGraphGetFunctionCount", func() { purego.RegisterLibFunc(&_fnBNNSGraphGetFunctionCount, _veclibLib, "BNNSGraphGetFunctionCount") })
 	_register("BNNSGraphGetFunctionNames", func() { purego.RegisterLibFunc(&_fnBNNSGraphGetFunctionNames, _veclibLib, "BNNSGraphGetFunctionNames") })
 	_register("BNNSGraphGetInputCount", func() { purego.RegisterLibFunc(&_fnBNNSGraphGetInputCount, _veclibLib, "BNNSGraphGetInputCount") })
-	_register("BNNSGraphGetInputNames", func() { purego.RegisterLibFunc(&_fnBNNSGraphGetInputNames, _veclibLib, "BNNSGraphGetInputNames") })
+	_register("BNNSGraphGetInputNames", func() { purego.RegisterLibFunc(&_fnBNNSGraphGetInputNames, _veclibLib, "BNNSGraphGetInputNames_v2") })
 	_register("BNNSGraphGetOutputCount", func() { purego.RegisterLibFunc(&_fnBNNSGraphGetOutputCount, _veclibLib, "BNNSGraphGetOutputCount") })
-	_register("BNNSGraphGetOutputNames", func() { purego.RegisterLibFunc(&_fnBNNSGraphGetOutputNames, _veclibLib, "BNNSGraphGetOutputNames") })
+	_register("BNNSGraphGetOutputNames", func() { purego.RegisterLibFunc(&_fnBNNSGraphGetOutputNames, _veclibLib, "BNNSGraphGetOutputNames_v2") })
 	_register("BNNSGraphTensorFillStrides", func() {
 		purego.RegisterLibFunc(&_fnBNNSGraphTensorFillStrides, _veclibLib, "BNNSGraphTensorFillStrides")
 	})

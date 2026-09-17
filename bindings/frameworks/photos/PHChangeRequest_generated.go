@@ -16,7 +16,7 @@ import (
 
 // ChangeRequest is an idiomatic wrapper over the Objective-C class PHChangeRequest.
 //
-// ChangeRequest is an abstract base — you do not construct it directly. Construct one of [AssetChangeRequest], [AssetCollectionChangeRequest], [CollectionListChangeRequest], [ProjectChangeRequest] and pass it where a ChangeRequest is accepted.
+// ChangeRequest is an abstract base — you do not construct it directly. Construct one of [AssetChangeRequest], [AssetCollectionChangeRequest], [AssetResourceUploadJobChangeRequest], [CollectionListChangeRequest], [ProjectChangeRequest] and pass it where a ChangeRequest is accepted.
 //
 // The abstract base class of the framework’s photo library change requests.
 type ChangeRequest struct {

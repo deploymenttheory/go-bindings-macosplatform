@@ -9,8 +9,18 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// NSReadAccessURLDocumentOption returns the string constant NSReadAccessURLDocumentOption, for use as a dictionary key or argument.
+func NSReadAccessURLDocumentOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSReadAccessURLDocumentOption")))
+}
+
 // WKErrorDomain returns the string constant WKErrorDomain, for use as a dictionary key or argument.
 func WKErrorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("WKErrorDomain"))) }
+
+// WKWebExtensionMatchPatternErrorDomain returns the string constant WKWebExtensionMatchPatternErrorDomain, for use as a dictionary key or argument.
+func WKWebExtensionMatchPatternErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WKWebExtensionMatchPatternErrorDomain")))
+}
 
 // WKWebExtensionPermissionActiveTab returns the string constant WKWebExtensionPermissionActiveTab, for use as a dictionary key or argument.
 func WKWebExtensionPermissionActiveTab() obj.Object {
@@ -92,6 +102,61 @@ func WKWebExtensionPermissionWebRequest() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("WKWebExtensionPermissionWebRequest")))
 }
 
+// WKWebExtensionErrorDomain returns the string constant WKWebExtensionErrorDomain, for use as a dictionary key or argument.
+func WKWebExtensionErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WKWebExtensionErrorDomain")))
+}
+
+// WKWebExtensionContextErrorDomain returns the string constant WKWebExtensionContextErrorDomain, for use as a dictionary key or argument.
+func WKWebExtensionContextErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WKWebExtensionContextErrorDomain")))
+}
+
+// WKWebExtensionContextErrorsDidUpdateNotification returns the string constant WKWebExtensionContextErrorsDidUpdateNotification, for use as a dictionary key or argument.
+func WKWebExtensionContextErrorsDidUpdateNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WKWebExtensionContextErrorsDidUpdateNotification")))
+}
+
+// WKWebExtensionContextPermissionsWereGrantedNotification returns the string constant WKWebExtensionContextPermissionsWereGrantedNotification, for use as a dictionary key or argument.
+func WKWebExtensionContextPermissionsWereGrantedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WKWebExtensionContextPermissionsWereGrantedNotification")))
+}
+
+// WKWebExtensionContextPermissionsWereDeniedNotification returns the string constant WKWebExtensionContextPermissionsWereDeniedNotification, for use as a dictionary key or argument.
+func WKWebExtensionContextPermissionsWereDeniedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WKWebExtensionContextPermissionsWereDeniedNotification")))
+}
+
+// WKWebExtensionContextGrantedPermissionsWereRemovedNotification returns the string constant WKWebExtensionContextGrantedPermissionsWereRemovedNotification, for use as a dictionary key or argument.
+func WKWebExtensionContextGrantedPermissionsWereRemovedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WKWebExtensionContextGrantedPermissionsWereRemovedNotification")))
+}
+
+// WKWebExtensionContextDeniedPermissionsWereRemovedNotification returns the string constant WKWebExtensionContextDeniedPermissionsWereRemovedNotification, for use as a dictionary key or argument.
+func WKWebExtensionContextDeniedPermissionsWereRemovedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WKWebExtensionContextDeniedPermissionsWereRemovedNotification")))
+}
+
+// WKWebExtensionContextPermissionMatchPatternsWereGrantedNotification returns the string constant WKWebExtensionContextPermissionMatchPatternsWereGrantedNotification, for use as a dictionary key or argument.
+func WKWebExtensionContextPermissionMatchPatternsWereGrantedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WKWebExtensionContextPermissionMatchPatternsWereGrantedNotification")))
+}
+
+// WKWebExtensionContextPermissionMatchPatternsWereDeniedNotification returns the string constant WKWebExtensionContextPermissionMatchPatternsWereDeniedNotification, for use as a dictionary key or argument.
+func WKWebExtensionContextPermissionMatchPatternsWereDeniedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WKWebExtensionContextPermissionMatchPatternsWereDeniedNotification")))
+}
+
+// WKWebExtensionContextGrantedPermissionMatchPatternsWereRemovedNotification returns the string constant WKWebExtensionContextGrantedPermissionMatchPatternsWereRemovedNotification, for use as a dictionary key or argument.
+func WKWebExtensionContextGrantedPermissionMatchPatternsWereRemovedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WKWebExtensionContextGrantedPermissionMatchPatternsWereRemovedNotification")))
+}
+
+// WKWebExtensionContextDeniedPermissionMatchPatternsWereRemovedNotification returns the string constant WKWebExtensionContextDeniedPermissionMatchPatternsWereRemovedNotification, for use as a dictionary key or argument.
+func WKWebExtensionContextDeniedPermissionMatchPatternsWereRemovedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WKWebExtensionContextDeniedPermissionMatchPatternsWereRemovedNotification")))
+}
+
 // WKWebExtensionContextNotificationUserInfoKeyPermissions returns the string constant WKWebExtensionContextNotificationUserInfoKeyPermissions, for use as a dictionary key or argument.
 func WKWebExtensionContextNotificationUserInfoKeyPermissions() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("WKWebExtensionContextNotificationUserInfoKeyPermissions")))
@@ -115,6 +180,16 @@ func WKWebExtensionDataTypeSession() obj.Object {
 // WKWebExtensionDataTypeSynchronized returns the string constant WKWebExtensionDataTypeSynchronized, for use as a dictionary key or argument.
 func WKWebExtensionDataTypeSynchronized() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("WKWebExtensionDataTypeSynchronized")))
+}
+
+// WKWebExtensionDataRecordErrorDomain returns the string constant WKWebExtensionDataRecordErrorDomain, for use as a dictionary key or argument.
+func WKWebExtensionDataRecordErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WKWebExtensionDataRecordErrorDomain")))
+}
+
+// WKWebExtensionMessagePortErrorDomain returns the string constant WKWebExtensionMessagePortErrorDomain, for use as a dictionary key or argument.
+func WKWebExtensionMessagePortErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WKWebExtensionMessagePortErrorDomain")))
 }
 
 // WKWebsiteDataTypeFetchCache returns the string constant WKWebsiteDataTypeFetchCache, for use as a dictionary key or argument.
@@ -410,73 +485,4 @@ func WebViewDidChangeTypingStyleNotification() obj.Object {
 // WebViewDidChangeSelectionNotification returns the string constant WebViewDidChangeSelectionNotification, for use as a dictionary key or argument.
 func WebViewDidChangeSelectionNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("WebViewDidChangeSelectionNotification")))
-}
-
-// NSReadAccessURLDocumentOption returns the address of the symbol NSReadAccessURLDocumentOption.
-func NSReadAccessURLDocumentOption() uintptr { return _symbol("NSReadAccessURLDocumentOption") }
-
-// WKWebExtensionMatchPatternErrorDomain returns the address of the symbol WKWebExtensionMatchPatternErrorDomain.
-func WKWebExtensionMatchPatternErrorDomain() uintptr {
-	return _symbol("WKWebExtensionMatchPatternErrorDomain")
-}
-
-// WKWebExtensionErrorDomain returns the address of the symbol WKWebExtensionErrorDomain.
-func WKWebExtensionErrorDomain() uintptr { return _symbol("WKWebExtensionErrorDomain") }
-
-// WKWebExtensionContextErrorDomain returns the address of the symbol WKWebExtensionContextErrorDomain.
-func WKWebExtensionContextErrorDomain() uintptr { return _symbol("WKWebExtensionContextErrorDomain") }
-
-// WKWebExtensionContextErrorsDidUpdateNotification returns the address of the symbol WKWebExtensionContextErrorsDidUpdateNotification.
-func WKWebExtensionContextErrorsDidUpdateNotification() uintptr {
-	return _symbol("WKWebExtensionContextErrorsDidUpdateNotification")
-}
-
-// WKWebExtensionContextPermissionsWereGrantedNotification returns the address of the symbol WKWebExtensionContextPermissionsWereGrantedNotification.
-func WKWebExtensionContextPermissionsWereGrantedNotification() uintptr {
-	return _symbol("WKWebExtensionContextPermissionsWereGrantedNotification")
-}
-
-// WKWebExtensionContextPermissionsWereDeniedNotification returns the address of the symbol WKWebExtensionContextPermissionsWereDeniedNotification.
-func WKWebExtensionContextPermissionsWereDeniedNotification() uintptr {
-	return _symbol("WKWebExtensionContextPermissionsWereDeniedNotification")
-}
-
-// WKWebExtensionContextGrantedPermissionsWereRemovedNotification returns the address of the symbol WKWebExtensionContextGrantedPermissionsWereRemovedNotification.
-func WKWebExtensionContextGrantedPermissionsWereRemovedNotification() uintptr {
-	return _symbol("WKWebExtensionContextGrantedPermissionsWereRemovedNotification")
-}
-
-// WKWebExtensionContextDeniedPermissionsWereRemovedNotification returns the address of the symbol WKWebExtensionContextDeniedPermissionsWereRemovedNotification.
-func WKWebExtensionContextDeniedPermissionsWereRemovedNotification() uintptr {
-	return _symbol("WKWebExtensionContextDeniedPermissionsWereRemovedNotification")
-}
-
-// WKWebExtensionContextPermissionMatchPatternsWereGrantedNotification returns the address of the symbol WKWebExtensionContextPermissionMatchPatternsWereGrantedNotification.
-func WKWebExtensionContextPermissionMatchPatternsWereGrantedNotification() uintptr {
-	return _symbol("WKWebExtensionContextPermissionMatchPatternsWereGrantedNotification")
-}
-
-// WKWebExtensionContextPermissionMatchPatternsWereDeniedNotification returns the address of the symbol WKWebExtensionContextPermissionMatchPatternsWereDeniedNotification.
-func WKWebExtensionContextPermissionMatchPatternsWereDeniedNotification() uintptr {
-	return _symbol("WKWebExtensionContextPermissionMatchPatternsWereDeniedNotification")
-}
-
-// WKWebExtensionContextGrantedPermissionMatchPatternsWereRemovedNotification returns the address of the symbol WKWebExtensionContextGrantedPermissionMatchPatternsWereRemovedNotification.
-func WKWebExtensionContextGrantedPermissionMatchPatternsWereRemovedNotification() uintptr {
-	return _symbol("WKWebExtensionContextGrantedPermissionMatchPatternsWereRemovedNotification")
-}
-
-// WKWebExtensionContextDeniedPermissionMatchPatternsWereRemovedNotification returns the address of the symbol WKWebExtensionContextDeniedPermissionMatchPatternsWereRemovedNotification.
-func WKWebExtensionContextDeniedPermissionMatchPatternsWereRemovedNotification() uintptr {
-	return _symbol("WKWebExtensionContextDeniedPermissionMatchPatternsWereRemovedNotification")
-}
-
-// WKWebExtensionDataRecordErrorDomain returns the address of the symbol WKWebExtensionDataRecordErrorDomain.
-func WKWebExtensionDataRecordErrorDomain() uintptr {
-	return _symbol("WKWebExtensionDataRecordErrorDomain")
-}
-
-// WKWebExtensionMessagePortErrorDomain returns the address of the symbol WKWebExtensionMessagePortErrorDomain.
-func WKWebExtensionMessagePortErrorDomain() uintptr {
-	return _symbol("WKWebExtensionMessagePortErrorDomain")
 }

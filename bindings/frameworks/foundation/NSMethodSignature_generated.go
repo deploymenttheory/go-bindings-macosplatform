@@ -106,28 +106,28 @@ func (ms *MethodSignature) IsOneway() bool {
 	return _r
 }
 
-// NumberOfArguments returns the number of arguments.
+// NumberOfArguments returns the number of arguments recorded in the receiver.
 func (ms *MethodSignature) NumberOfArguments() int {
 	defer runtime.KeepAlive(ms)
 	_r := objc.Send[int](objref.IDOf(ms), objc.RegisterName("numberOfArguments"))
 	return _r
 }
 
-// FrameLength returns the frame length.
+// FrameLength returns the number of bytes required by the receiver to store its arguments on the stack frame.
 func (ms *MethodSignature) FrameLength() int {
 	defer runtime.KeepAlive(ms)
 	_r := objc.Send[int](objref.IDOf(ms), objc.RegisterName("frameLength"))
 	return _r
 }
 
-// MethodReturnType returns the method return type.
+// MethodReturnType returns a C string encoding the return type of the method.
 func (ms *MethodSignature) MethodReturnType() unsafe.Pointer {
 	defer runtime.KeepAlive(ms)
 	_r := objc.Send[unsafe.Pointer](objref.IDOf(ms), objc.RegisterName("methodReturnType"))
 	return _r
 }
 
-// MethodReturnLength returns the method return length.
+// MethodReturnLength returns the number of bytes required for the return value.
 func (ms *MethodSignature) MethodReturnLength() int {
 	defer runtime.KeepAlive(ms)
 	_r := objc.Send[int](objref.IDOf(ms), objc.RegisterName("methodReturnLength"))

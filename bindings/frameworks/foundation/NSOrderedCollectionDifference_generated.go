@@ -118,7 +118,7 @@ func (ocd *OrderedCollectionDifference) InverseDifference() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// Insertions returns the insertions.
+// Insertions returns a collection of insertion change objects.
 //
 // Insertions returns the collection as a Go slice.
 func (ocd *OrderedCollectionDifference) Insertions() []obj.Object {
@@ -127,7 +127,7 @@ func (ocd *OrderedCollectionDifference) Insertions() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Removals returns the removals.
+// Removals returns a collection of removal change objects.
 //
 // Removals returns the collection as a Go slice.
 func (ocd *OrderedCollectionDifference) Removals() []obj.Object {
@@ -136,7 +136,7 @@ func (ocd *OrderedCollectionDifference) Removals() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// HasChanges reports whether the object has changes.
+// HasChanges reports whether a Boolean value that indicates if the difference has changes.
 func (ocd *OrderedCollectionDifference) HasChanges() bool {
 	defer runtime.KeepAlive(ocd)
 	_r := objc.Send[bool](objref.IDOf(ocd), objc.RegisterName("hasChanges"))

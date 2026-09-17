@@ -17,8 +17,6 @@ import (
 )
 
 // MapSnapshot is an idiomatic wrapper over the Objective-C class MKMapSnapshot.
-//
-// An image that a snapshotter object generates.
 type MapSnapshot struct {
 	objref.Handle
 }

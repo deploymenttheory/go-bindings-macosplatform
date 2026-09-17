@@ -44,6 +44,7 @@ var (
 	_iOUSBHostObjectSelCurrentMicroframeWithTimeError                                          = objc.RegisterName("currentMicroframeWithTime:error:")
 	_iOUSBHostObjectSelReferenceMicroframeWithTimeError                                        = objc.RegisterName("referenceMicroframeWithTime:error:")
 	_iOUSBHostObjectSelIoDataWithCapacityError                                                 = objc.RegisterName("ioDataWithCapacity:error:")
+	_iOUSBHostObjectSelDataWithCapacityOptionsError                                            = objc.RegisterName("dataWithCapacity:options:error:")
 	_iOUSBHostObjectSelIoService                                                               = objc.RegisterName("ioService")
 	_iOUSBHostObjectSelQueue                                                                   = objc.RegisterName("queue")
 	_iOUSBHostObjectSelDeviceDescriptor                                                        = objc.RegisterName("deviceDescriptor")
@@ -304,6 +305,19 @@ func (o *IOUSBHostObject) ReferenceMicroframeWithTimeError(time_ *uint64) (uint6
 func (o *IOUSBHostObject) IoDataWithCapacityError(capacity uint) (*foundation.NSMutableData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOUSBHostObjectSelIoDataWithCapacityError, capacity, unsafe.Pointer(&_nsErr))
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	if _nsErr != 0 {
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+	}
+	return foundation.NSMutableDataFromID(_ret), nil
+}
+
+// @brief       Allocate a buffer to be used for I/O or an isochronous frame list. @discussion  This method will allocate and map an IOBufferMemoryDescriptor optimized for use by the underlying controller hardware. A buffer allocated by this method will not be bounced to perform DMA operations. Because the NSMutableData is backed by kernel memory, the length and capacity are not mutable. Any changes to the length or capacity will cause an exception to be thrown. @param       capacity Size of the buffer to allocate @param       options IOUSBHostObjectDataOptions. Default value is IOUSBHostObjectDataOptionsNone. @return      NSMutableData of memory mapped to user space of an IOBufferMemoryDescriptor if successful, otherwise nil. An IOReturn error code will be reported on failure. The result is to be released by the caller
+func (o *IOUSBHostObject) DataWithCapacityOptionsError(capacity uint, options IOUSBHostObjectDataOptions) (*foundation.NSMutableData, error) {
+	var _nsErr uintptr
+	_ret := objc.Send[objc.ID](o.Ptr(), _iOUSBHostObjectSelDataWithCapacityOptionsError, capacity, options, unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

@@ -9,8 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A unit of measure for electric potential difference.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsunitelectricpotentialdifference
 type NSUnitElectricPotentialDifference struct {
 	NSDimension
@@ -35,6 +33,7 @@ func NSUnitElectricPotentialDifferenceFromID(id objc.ID) *NSUnitElectricPotentia
 	return o
 }
 
+// The megavolts unit of electric potential difference.
 func NSUnitElectricPotentialDifferenceMegavolts() *NSUnitElectricPotentialDifference {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitElectricPotentialDifference), _nSUnitElectricPotentialDifferenceSelMegavolts)
 	if _ret != 0 {
@@ -43,6 +42,7 @@ func NSUnitElectricPotentialDifferenceMegavolts() *NSUnitElectricPotentialDiffer
 	return NSUnitElectricPotentialDifferenceFromID(_ret)
 }
 
+// The kilovolts unit of electric potential difference.
 func NSUnitElectricPotentialDifferenceKilovolts() *NSUnitElectricPotentialDifference {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitElectricPotentialDifference), _nSUnitElectricPotentialDifferenceSelKilovolts)
 	if _ret != 0 {
@@ -51,6 +51,7 @@ func NSUnitElectricPotentialDifferenceKilovolts() *NSUnitElectricPotentialDiffer
 	return NSUnitElectricPotentialDifferenceFromID(_ret)
 }
 
+// The volts unit of electric potential difference.
 func NSUnitElectricPotentialDifferenceVolts() *NSUnitElectricPotentialDifference {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitElectricPotentialDifference), _nSUnitElectricPotentialDifferenceSelVolts)
 	if _ret != 0 {
@@ -59,6 +60,7 @@ func NSUnitElectricPotentialDifferenceVolts() *NSUnitElectricPotentialDifference
 	return NSUnitElectricPotentialDifferenceFromID(_ret)
 }
 
+// The millivolts unit of electric potential difference.
 func NSUnitElectricPotentialDifferenceMillivolts() *NSUnitElectricPotentialDifference {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitElectricPotentialDifference), _nSUnitElectricPotentialDifferenceSelMillivolts)
 	if _ret != 0 {
@@ -67,6 +69,7 @@ func NSUnitElectricPotentialDifferenceMillivolts() *NSUnitElectricPotentialDiffe
 	return NSUnitElectricPotentialDifferenceFromID(_ret)
 }
 
+// The microvolts unit of electric potential difference.
 func NSUnitElectricPotentialDifferenceMicrovolts() *NSUnitElectricPotentialDifference {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitElectricPotentialDifference), _nSUnitElectricPotentialDifferenceSelMicrovolts)
 	if _ret != 0 {

@@ -112,7 +112,7 @@ func (mdlcrlrp *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) WithTimeSinc
 	return mdlcrlrp
 }
 
-// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the server to the client (for the status response and actual invoke request) within the timeout window.
 func (mdlcrlrp *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDiagnosticLogsClusterRetrieveLogsResponseParams {
 	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mdlcrlrp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
@@ -160,7 +160,7 @@ func (mdlcrlrp *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) TimeSinceBoo
 	return foundation.NumberFromID(_r)
 }
 
-// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the server to the client (for the status response and actual invoke request) within the timeout window.
 func (mdlcrlrp *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) TimedInvokeTimeoutMs() *foundation.Number {
 	defer runtime.KeepAlive(mdlcrlrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcrlrp), objc.RegisterName("timedInvokeTimeoutMs"))

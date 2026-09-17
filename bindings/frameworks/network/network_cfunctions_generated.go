@@ -4404,6 +4404,17 @@ func NwTcpOptionsSetRetransmitFinDrop(options obj.Object, retransmitFinDrop bool
 	_fnNwTcpOptionsSetRetransmitFinDrop(objref.IDOf(options), retransmitFinDrop)
 }
 
+var _fnNwTcpSetMaxPacingRate func(objc.ID, uint64) int32
+
+// NwTcpSetMaxPacingRate calls the Network framework function nw_tcp_set_max_pacing_rate.
+func NwTcpSetMaxPacingRate(metadata obj.Object, maxPacingRate uint64) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwTcpSetMaxPacingRate == nil {
+		ebipurego.RegisterLibFunc(&_fnNwTcpSetMaxPacingRate, _lib, "nw_tcp_set_max_pacing_rate")
+	}
+	return int(_fnNwTcpSetMaxPacingRate(objref.IDOf(metadata), maxPacingRate))
+}
+
 var _fnNwTlsCopySecProtocolMetadata func(objc.ID) unsafe.Pointer
 
 // NwTlsCopySecProtocolMetadata calls the Network framework function nw_tls_copy_sec_protocol_metadata.

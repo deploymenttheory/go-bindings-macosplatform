@@ -19,7 +19,7 @@ import (
 //
 // It embeds [NotificationCenter], promoting that type's methods.
 //
-// A notification dispatch mechanism that enables the broadcast of notifications across task boundaries.
+// A notification dispatch mechanism that enables the broadcast of notifications across task boundaries. A “DistributedNotificationCenter“ instance broadcasts “NSNotification“ objects to objects in other tasks that have registered for the notification with their task's default distributed notification center. ### Principal Attributes - Notification dispatch table. See "Class at a Glance" > "Principal Attributes" in “NotificationCenter“ for information about the dispatch table. In addition to the notification name and sender, dispatch table entries for distributed notification centers specify when the notification center delivers notifications to its observers. See the “postNotificationName(_:object:userInfo:deliverImmediately:)“ method, Suspending and Resuming Notification Delivery, and “SuspensionBehavior“ for details. ### Commonly Used Methods - term “default()“: Accesses the default distributed notification center. - term “addObserver(_:selector:name:object:suspensionBehavior:)“: Registers an object to receive a notification with a specified behavior when notification delivery is suspended. - term “postNotificationName(_:object:userInfo:deliverImmediately:)“: Creates and posts a notification. - term “removeObserver(_:name:object:)“: Specifies that an object no longer wants to receive certain notifications. ### Overview Each task has a default distributed notification center that you access with the “default()“ class method. There may be different types of distributed notification centers. Currently there is a single type—`NSLocalNotificationCenterType`. This type of distributed notification center handles notifications that can be sent between tasks on a single computer. For communication between tasks on different computers, use [Distributed Objects Programming Topics](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/DistrObjects/DistrObjects.html#//apple_ref/doc/uid/10000102i). Posting a _distributed notification_ is an expensive operation. The notification gets sent to a system-wide server that distributes it to all the tasks that have objects registered for distributed notifications. The latency between posting the notification and the notification's arrival in another task is unbounded. In fact, when too many notifications are posted and the server's queue fills up, notifications may be dropped. Distributed notifications are delivered via a task's run loop. A task must be running a run loop in one of the "common" modes, such as `NSDefaultRunLoopMode`, to receive a distributed notification. For multithreaded applications running in macOS 10.3 and later, distributed notifications are always delivered to the main thread. For multithreaded applications running in OS X v10.2.8 and earlier, notifications are delivered to the thread that first used the distributed notifications API, which in most cases is the main thread. > Important: > `NSDistributedNotificationCenter` does not implement a secure communications protocol. When using distributed notifications, your app should treat any data passed in the notification as untrusted. See [Security Overview](https://developer.apple.com/library/archive/documentation/Security/Conceptual/Security_Overview/Introduction/Introduction.html#//apple_ref/doc/uid/TP30000976) for general guidance on secure coding practices. > Note: > `NSDistributedNotificationCenter` objects should not be used to send notifications between threads within the same task. Use [Distributed Objects Programming Topics](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/DistrObjects/DistrObjects.html#//apple_ref/doc/uid/10000102i) or the <doc://com.apple.documentation/documentation/objectivec/nsobject-swift.class> method <doc://com.apple.documentation/documentation/objectivec/nsobject-swift.class/performselector(onmainthread:with:waituntildone:)>, instead. You can also setup an “Port“ object to receive and distribute messages from other threads.
 type DistributedNotificationCenter struct {
 	NotificationCenter
 }
@@ -56,7 +56,7 @@ func NewDistributedNotificationCenter() *DistributedNotificationCenter {
 	return distributedNotificationCenterAdopt(_id)
 }
 
-// WithSuspended sets the suspended.
+// WithSuspended sets suspends or resumes notification delivery. Setting this to `true` suspends notification delivery, enabling the variety of suspension behaviors enumerated in “DistributedNotificationCenter/SuspensionBehavior“. Setting this to `false` resumes immediate delivery of notifications. `NSApplication` automatically suspends distributed notification delivery when the application is not active. Applications based on the Application Kit framework should let AppKit manage the suspension of notification delivery. Foundation-only programs may have occasional need to use this property.
 func (dnc *DistributedNotificationCenter) WithSuspended(suspended bool) *DistributedNotificationCenter {
 	objc.Send[objc.ID](objref.IDOf(dnc), objc.RegisterName("setSuspended:"), suspended)
 	return dnc
@@ -74,7 +74,7 @@ func (dnc *DistributedNotificationCenter) WithScriptingProperties(scriptingPrope
 	return dnc
 }
 
-// PostNotificationNameObjectUserInfoDeliverImmediately posts notification name object user info deliver immediately.
+// PostNotificationNameObjectUserInfoDeliverImmediately creates a notification with information and an immediate-delivery specifier, and posts it to the receiver. This is the preferred method for posting notifications. The `userInfo` dictionary is serialized as a property list, so it can be passed to another task. In the receiving task, it is deserialized back into a dictionary. - Parameters: - name: Name of the notification to post. Must not be `nil`. - object: Sender of the notification. May be `nil`. - userInfo: Dictionary containing additional information. May be `nil`. - deliverImmediately: When `NO`, the receiver delivers notifications to their observers according to the suspended-notification behavior specified in the corresponding dispatch table entry. When `YES`, the receiver delivers the notification immediately to its observers.
 func (dnc *DistributedNotificationCenter) PostNotificationNameObjectUserInfoDeliverImmediately(name *String, object string, userInfo obj.Object, deliverImmediately bool) {
 	defer runtime.KeepAlive(dnc)
 	defer runtime.KeepAlive(name)
@@ -82,7 +82,7 @@ func (dnc *DistributedNotificationCenter) PostNotificationNameObjectUserInfoDeli
 	objc.Send[objc.ID](objref.IDOf(dnc), objc.RegisterName("postNotificationName:object:userInfo:deliverImmediately:"), objref.IDOf(name), purego.NSString(object), objref.IDOf(userInfo), deliverImmediately)
 }
 
-// PostNotificationNameObjectUserInfo posts notification name object user info.
+// PostNotificationNameObjectUserInfo creates a notification with information, and posts it to the receiver. The `userInfo` dictionary is serialized as a property list, so it can be passed to another task. In the receiving task, it is deserialized back into a dictionary. - Parameters: - name: Name of the notification to post. Must not be `nil`. - object: Sender of the notification. May be `nil`. - userInfo: Dictionary containing additional information. May be `nil`. - options: Specifies how the notification is posted to the task and when to deliver it to its observers.
 func (dnc *DistributedNotificationCenter) PostNotificationNameObjectUserInfo(name *String, object string, userInfo obj.Object, options DistributedNotificationOptions) {
 	defer runtime.KeepAlive(dnc)
 	defer runtime.KeepAlive(name)
@@ -90,7 +90,7 @@ func (dnc *DistributedNotificationCenter) PostNotificationNameObjectUserInfo(nam
 	objc.Send[objc.ID](objref.IDOf(dnc), objc.RegisterName("postNotificationName:object:userInfo:options:"), objref.IDOf(name), purego.NSString(object), objref.IDOf(userInfo), options)
 }
 
-// Suspended wraps the corresponding Objective-C method.
+// Suspended reports whether suspends or resumes notification delivery. Setting this to `true` suspends notification delivery, enabling the variety of suspension behaviors enumerated in “DistributedNotificationCenter/SuspensionBehavior“. Setting this to `false` resumes immediate delivery of notifications. `NSApplication` automatically suspends distributed notification delivery when the application is not active. Applications based on the Application Kit framework should let AppKit manage the suspension of notification delivery. Foundation-only programs may have occasional need to use this property.
 func (dnc *DistributedNotificationCenter) Suspended() bool {
 	defer runtime.KeepAlive(dnc)
 	_r := objc.Send[bool](objref.IDOf(dnc), objc.RegisterName("suspended"))

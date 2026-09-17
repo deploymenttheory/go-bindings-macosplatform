@@ -48,3 +48,18 @@ type PHProjectTypeDescriptionInvalidator interface {
 	InvalidateTypeDescriptionForProjectType(projectType *foundation.NSString)
 	InvalidateFooterTextForSubtypesOfProjectType(projectType *foundation.NSString)
 }
+
+// PHSharedAlbumCreationViewControllerDelegate wraps the ObjC protocol PHSharedAlbumCreationViewControllerDelegate.
+type PHSharedAlbumCreationViewControllerDelegate interface {
+	SharedAlbumCreationViewControllerDidCompleteWithError(creationViewController *PHSharedAlbumCreationViewController, error_ unsafe.Pointer)
+}
+
+// PHSharedAlbumCustomizationViewControllerDelegate wraps the ObjC protocol PHSharedAlbumCustomizationViewControllerDelegate.
+type PHSharedAlbumCustomizationViewControllerDelegate interface {
+	SharedAlbumCustomizationViewControllerDidCompleteWithError(customizationViewController *PHSharedAlbumCustomizationViewController, error_ unsafe.Pointer)
+}
+
+// PHSharedAlbumPostingViewControllerDelegate wraps the ObjC protocol PHSharedAlbumPostingViewControllerDelegate.
+type PHSharedAlbumPostingViewControllerDelegate interface {
+	SharedAlbumPostingViewControllerDidCompleteWithError(postingViewController *PHSharedAlbumPostingViewController, error_ unsafe.Pointer)
+}

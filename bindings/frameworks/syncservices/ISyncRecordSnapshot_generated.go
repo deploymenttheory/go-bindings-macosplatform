@@ -109,17 +109,18 @@ func (isrs *ISyncRecordSnapshot) RecordsWithMatchingAttributes(attributes obj.Ob
 }
 
 // RecordReferenceForRecordWithIdentifier wraps the corresponding Objective-C method.
-func (isrs *ISyncRecordSnapshot) RecordReferenceForRecordWithIdentifier(identifier string) unsafe.Pointer {
+func (isrs *ISyncRecordSnapshot) RecordReferenceForRecordWithIdentifier(identifier string) *ISyncRecordReference {
 	defer runtime.KeepAlive(isrs)
-	_r := objc.Send[unsafe.Pointer](objref.IDOf(isrs), objc.RegisterName("recordReferenceForRecordWithIdentifier:"), purego.NSString(identifier))
-	return _r
+	_r := objc.Send[objc.ID](objref.IDOf(isrs), objc.RegisterName("recordReferenceForRecordWithIdentifier:"), purego.NSString(identifier))
+	return ISyncRecordReferenceFromID(_r)
 }
 
 // RecordIdentifierForReferenceIsModified wraps the corresponding Objective-C method.
-func (isrs *ISyncRecordSnapshot) RecordIdentifierForReferenceIsModified(reference unsafe.Pointer) (result string, pModified bool) {
+func (isrs *ISyncRecordSnapshot) RecordIdentifierForReferenceIsModified(reference *ISyncRecordReference) (result string, pModified bool) {
 	defer runtime.KeepAlive(isrs)
+	defer runtime.KeepAlive(reference)
 	var _out0 bool
-	_r := objc.Send[objc.ID](objref.IDOf(isrs), objc.RegisterName("recordIdentifierForReference:isModified:"), reference, unsafe.Pointer(&_out0))
+	_r := objc.Send[objc.ID](objref.IDOf(isrs), objc.RegisterName("recordIdentifierForReference:isModified:"), objref.IDOf(reference), unsafe.Pointer(&_out0))
 	_v := ""
 	if _r != 0 {
 		_v = purego.GoString(_r)

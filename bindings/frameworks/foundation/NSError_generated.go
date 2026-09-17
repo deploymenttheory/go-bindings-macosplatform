@@ -74,6 +74,12 @@ func (e *Error) String() string {
 	return rt.Description(objref.IDOf(e))
 }
 
+// NewError creates a new Error.
+func NewError() *Error {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSError")), objc.RegisterName("new"))
+	return errorAdopt(_id)
+}
+
 // NewErrorWithDomainCodeUserInfo returns an NSError object initialized for a given domain and code with a given userInfo dictionary.
 func NewErrorWithDomainCodeUserInfo(domain *String, code int, dict obj.Object) *Error {
 	defer runtime.KeepAlive(domain)
@@ -95,28 +101,28 @@ func (e *Error) WithScriptingProperties(scriptingProperties map[string]obj.Objec
 	return e
 }
 
-// Domain returns the domain.
+// Domain returns a string containing the error domain. Domains are described by names that are arbitrary strings used to differentiate groups of codes; for custom domains, using reverse-DNS naming will help avoid conflicts.
 func (e *Error) Domain() *String {
 	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("domain"))
 	return StringFromID(_r)
 }
 
-// Code returns the code.
+// Code returns the error code. Codes are domain-specific.
 func (e *Error) Code() int {
 	defer runtime.KeepAlive(e)
 	_r := objc.Send[int](objref.IDOf(e), objc.RegisterName("code"))
 	return _r
 }
 
-// UserInfo returns the user info.
+// UserInfo returns the user info dictionary. Contains application-specific data related to the error. Examples of keys that might be included are
 func (e *Error) UserInfo() obj.Object {
 	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)
 }
 
-// LocalizedDescription returns the localized description.
+// LocalizedDescription returns a string containing the localized description of the error. For instance, for `NSFileReadNoPermissionError`: "The file "File Name" couldn't be opened because you don't have permission to view it.". This message should ideally indicate what failed and why it failed. This value either comes from `NSLocalizedDescriptionKey`, or `NSLocalizedFailureErrorKey` + `NSLocalizedFailureReasonErrorKey`, or `NSLocalizedFailureErrorKey`. The steps this takes to construct the description include: 1. Look for NSLocalizedDescriptionKey in userInfo, use value as-is if present. 2. Look for NSLocalizedFailureErrorKey in userInfo. If present, use, combining with value for NSLocalizedFailureReasonErrorKey if available. 3. Fetch NSLocalizedDescriptionKey from userInfoValueProvider, use value as-is if present. 4. Fetch NSLocalizedFailureErrorKey from userInfoValueProvider. If present, use, combining with value for NSLocalizedFailureReasonErrorKey if available. 5. Look for NSLocalizedFailureReasonErrorKey in userInfo or from userInfoValueProvider; combine with generic "Operation failed" message. 6. Last resort localized but barely-presentable string manufactured from domain and code. The result is never nil. This value either comes from
 func (e *Error) LocalizedDescription() string {
 	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("localizedDescription"))
@@ -126,7 +132,7 @@ func (e *Error) LocalizedDescription() string {
 	return purego.GoString(_r)
 }
 
-// LocalizedFailureReason returns the localized failure reason.
+// LocalizedFailureReason returns a string containing the localized explanation of the reason for the error. Return a complete sentence which describes why the operation failed. For instance, for `NSFileReadNoPermissionError`: "You don't have permission.". In many cases this will be just the "because" part of the error message (but as a complete sentence, which makes localization easier).  Default implementation of this picks up the value of `NSLocalizedFailureReasonErrorKey` from the userInfo dictionary. If not present, it consults the `userInfoValueProvider` for the domain, and if that returns `nil`, this also returns `nil`. The object in the user info dictionary for the key
 func (e *Error) LocalizedFailureReason() string {
 	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("localizedFailureReason"))
@@ -136,7 +142,7 @@ func (e *Error) LocalizedFailureReason() string {
 	return purego.GoString(_r)
 }
 
-// LocalizedRecoverySuggestion returns the localized recovery suggestion.
+// LocalizedRecoverySuggestion returns a string containing the localized recovery suggestion for the error. For instance, for `NSFileReadNoPermissionError`: "To view or change permissions, select the item in the Finder and choose File > Get Info.". The default implementation of this picks up the value of `NSLocalizedRecoverySuggestionErrorKey` from the `userInfo` dictionary. If not present, it consults the `userInfoValueProvider` for the domain, and if that returns `nil`, this also returns `nil`. The object in the user info dictionary for the key
 func (e *Error) LocalizedRecoverySuggestion() string {
 	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("localizedRecoverySuggestion"))
@@ -146,7 +152,7 @@ func (e *Error) LocalizedRecoverySuggestion() string {
 	return purego.GoString(_r)
 }
 
-// LocalizedRecoveryOptions returns the localized recovery options.
+// LocalizedRecoveryOptions returns an array containing the localized titles of buttons appropriate for displaying in an alert panel. The object in the user info dictionary for the key
 //
 // LocalizedRecoveryOptions returns the collection as a Go slice.
 func (e *Error) LocalizedRecoveryOptions() []string {
@@ -155,14 +161,14 @@ func (e *Error) LocalizedRecoveryOptions() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// RecoveryAttempter returns the recovery attempter.
+// RecoveryAttempter returns the object in the user info dictionary corresponding to the
 func (e *Error) RecoveryAttempter() obj.Object {
 	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("recoveryAttempter"))
 	return obj.Wrap(_r)
 }
 
-// HelpAnchor returns the help anchor.
+// HelpAnchor returns a string to display in response to an alert panel help anchor button being pressed. The object in the user info dictionary for the key
 func (e *Error) HelpAnchor() string {
 	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("helpAnchor"))

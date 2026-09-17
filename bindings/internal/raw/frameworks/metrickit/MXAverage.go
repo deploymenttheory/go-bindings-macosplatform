@@ -13,6 +13,7 @@ import (
 // A unit of measure for an average.
 //
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxaverage
+// Deprecated: Use AverageStatistics instead.
 type MXAverage[UnitType purego.AnyObject] struct {
 	foundation.NSObject
 }

@@ -21,6 +21,8 @@ var (
 	_clsVTLowLatencySuperResolutionScalerConfiguration                                              = _objcClass("VTLowLatencySuperResolutionScalerConfiguration")
 	_vTLowLatencySuperResolutionScalerConfigurationSelInitWithFrameWidthFrameHeightScaleFactor      = objc.RegisterName("initWithFrameWidth:frameHeight:scaleFactor:")
 	_vTLowLatencySuperResolutionScalerConfigurationSelSupportedScaleFactorsForFrameWidthFrameHeight = objc.RegisterName("supportedScaleFactorsForFrameWidth:frameHeight:")
+	_vTLowLatencySuperResolutionScalerConfigurationSelMaximumDimensionForSpatialScaleFactor         = objc.RegisterName("maximumDimensionForSpatialScaleFactor:")
+	_vTLowLatencySuperResolutionScalerConfigurationSelMaximumPixelCountForSpatialScaleFactor        = objc.RegisterName("maximumPixelCountForSpatialScaleFactor:")
 	_vTLowLatencySuperResolutionScalerConfigurationSelFrameWidth                                    = objc.RegisterName("frameWidth")
 	_vTLowLatencySuperResolutionScalerConfigurationSelFrameHeight                                   = objc.RegisterName("frameHeight")
 	_vTLowLatencySuperResolutionScalerConfigurationSelFrameSupportedPixelFormats                    = objc.RegisterName("frameSupportedPixelFormats")
@@ -30,6 +32,7 @@ var (
 	_vTLowLatencySuperResolutionScalerConfigurationSelMaximumDimensions                             = objc.RegisterName("maximumDimensions")
 	_vTLowLatencySuperResolutionScalerConfigurationSelMinimumDimensions                             = objc.RegisterName("minimumDimensions")
 	_vTLowLatencySuperResolutionScalerConfigurationSelIsSupported                                   = objc.RegisterName("isSupported")
+	_vTLowLatencySuperResolutionScalerConfigurationSelSupportedScaleFactors                         = objc.RegisterName("supportedScaleFactors")
 )
 
 func VTLowLatencySuperResolutionScalerConfigurationFromID(id objc.ID) *VTLowLatencySuperResolutionScalerConfiguration {
@@ -58,6 +61,18 @@ func VTLowLatencySuperResolutionScalerConfigurationSupportedScaleFactorsForFrame
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
+}
+
+// The maximum value for either dimension of the source frame, in pixels, for a given spatial scale factor.
+func VTLowLatencySuperResolutionScalerConfigurationMaximumDimensionForSpatialScaleFactor(spatialScaleFactor float32) int {
+	_ret := objc.Send[int](objc.ID(_clsVTLowLatencySuperResolutionScalerConfiguration), _vTLowLatencySuperResolutionScalerConfigurationSelMaximumDimensionForSpatialScaleFactor, spatialScaleFactor)
+	return _ret
+}
+
+// The maximum total number of pixels in the source frame for a given spatial scale factor.
+func VTLowLatencySuperResolutionScalerConfigurationMaximumPixelCountForSpatialScaleFactor(spatialScaleFactor float32) int {
+	_ret := objc.Send[int](objc.ID(_clsVTLowLatencySuperResolutionScalerConfiguration), _vTLowLatencySuperResolutionScalerConfigurationSelMaximumPixelCountForSpatialScaleFactor, spatialScaleFactor)
+	return _ret
 }
 
 // Width of source frame in pixels.
@@ -121,4 +136,13 @@ func VTLowLatencySuperResolutionScalerConfigurationMinimumDimensions() CMVideoDi
 func VTLowLatencySuperResolutionScalerConfigurationIsSupported() bool {
 	_ret := objc.Send[bool](objc.ID(_clsVTLowLatencySuperResolutionScalerConfiguration), _vTLowLatencySuperResolutionScalerConfigurationSelIsSupported)
 	return _ret
+}
+
+// Reports the set of supported scale factors to use when initializing a low latency super-resolution scaler configuration. Note: not all scale factors are available for all source dimensions.
+func VTLowLatencySuperResolutionScalerConfigurationSupportedScaleFactors() *foundation.NSArray[*foundation.NSNumber] {
+	_ret := objc.Send[objc.ID](objc.ID(_clsVTLowLatencySuperResolutionScalerConfiguration), _vTLowLatencySuperResolutionScalerConfigurationSelSupportedScaleFactors)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }

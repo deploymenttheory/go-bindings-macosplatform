@@ -9,8 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A unit of measure for electric charge.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsunitelectriccharge
 type NSUnitElectricCharge struct {
 	NSDimension
@@ -36,6 +34,7 @@ func NSUnitElectricChargeFromID(id objc.ID) *NSUnitElectricCharge {
 	return o
 }
 
+// The coulombs unit of electric charge.
 func NSUnitElectricChargeCoulombs() *NSUnitElectricCharge {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitElectricCharge), _nSUnitElectricChargeSelCoulombs)
 	if _ret != 0 {
@@ -44,6 +43,7 @@ func NSUnitElectricChargeCoulombs() *NSUnitElectricCharge {
 	return NSUnitElectricChargeFromID(_ret)
 }
 
+// The megaampere hours unit of electric charge.
 func NSUnitElectricChargeMegaampereHours() *NSUnitElectricCharge {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitElectricCharge), _nSUnitElectricChargeSelMegaampereHours)
 	if _ret != 0 {
@@ -52,6 +52,7 @@ func NSUnitElectricChargeMegaampereHours() *NSUnitElectricCharge {
 	return NSUnitElectricChargeFromID(_ret)
 }
 
+// The kiloampere hours unit of electric charge.
 func NSUnitElectricChargeKiloampereHours() *NSUnitElectricCharge {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitElectricCharge), _nSUnitElectricChargeSelKiloampereHours)
 	if _ret != 0 {
@@ -60,6 +61,7 @@ func NSUnitElectricChargeKiloampereHours() *NSUnitElectricCharge {
 	return NSUnitElectricChargeFromID(_ret)
 }
 
+// The ampere hours unit of electric charge.
 func NSUnitElectricChargeAmpereHours() *NSUnitElectricCharge {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitElectricCharge), _nSUnitElectricChargeSelAmpereHours)
 	if _ret != 0 {
@@ -68,6 +70,7 @@ func NSUnitElectricChargeAmpereHours() *NSUnitElectricCharge {
 	return NSUnitElectricChargeFromID(_ret)
 }
 
+// The milliampere hours unit of electric charge.
 func NSUnitElectricChargeMilliampereHours() *NSUnitElectricCharge {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitElectricCharge), _nSUnitElectricChargeSelMilliampereHours)
 	if _ret != 0 {
@@ -76,6 +79,7 @@ func NSUnitElectricChargeMilliampereHours() *NSUnitElectricCharge {
 	return NSUnitElectricChargeFromID(_ret)
 }
 
+// The microampere hours unit of electric charge.
 func NSUnitElectricChargeMicroampereHours() *NSUnitElectricCharge {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitElectricCharge), _nSUnitElectricChargeSelMicroampereHours)
 	if _ret != 0 {

@@ -32,6 +32,29 @@ func (e AccessLevel) String() string {
 	}
 }
 
+type AssetAdjustmentsState int64
+
+const (
+	AssetAdjustmentsStateNone               AssetAdjustmentsState = 0
+	AssetAdjustmentsStateUserAdjusted       AssetAdjustmentsState = 2
+	AssetAdjustmentsStateCameraAutoAdjusted AssetAdjustmentsState = 3
+)
+
+// String returns the AssetAdjustmentsState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AssetAdjustmentsState) String() string {
+	switch e {
+	case AssetAdjustmentsStateNone:
+		return "AssetAdjustmentsStateNone"
+	case AssetAdjustmentsStateUserAdjusted:
+		return "AssetAdjustmentsStateUserAdjusted"
+	case AssetAdjustmentsStateCameraAutoAdjusted:
+		return "AssetAdjustmentsStateCameraAutoAdjusted"
+	default:
+		return fmt.Sprintf("AssetAdjustmentsState(%d)", int64(e))
+	}
+}
+
 // Bit mask values indicating whether and how an asset is marked as a favorite member of a burst photo sequence. Used by the burstSelectionTypes property.
 // Bitmask — values may be combined with |.
 type AssetBurstSelectionType uint64
@@ -128,6 +151,7 @@ const (
 	AssetMediaSubtypePhotoLive AssetMediaSubtype = 8
 	// The asset is a photo captured with the Camera app’s Portrait mode depth effect.
 	AssetMediaSubtypePhotoDepthEffect AssetMediaSubtype = 16
+	AssetMediaSubtypePhotoAnimation   AssetMediaSubtype = 64
 	AssetMediaSubtypeSpatialMedia     AssetMediaSubtype = 1024
 	// The asset is a video with contents that always stream over a network connection.
 	AssetMediaSubtypeVideoStreamed AssetMediaSubtype = 65536
@@ -159,6 +183,9 @@ func (e AssetMediaSubtype) String() string {
 	}
 	if e&AssetMediaSubtypePhotoDepthEffect != 0 {
 		parts = append(parts, "AssetMediaSubtypePhotoDepthEffect")
+	}
+	if e&AssetMediaSubtypePhotoAnimation != 0 {
+		parts = append(parts, "AssetMediaSubtypePhotoAnimation")
 	}
 	if e&AssetMediaSubtypeSpatialMedia != 0 {
 		parts = append(parts, "AssetMediaSubtypeSpatialMedia")
@@ -215,7 +242,6 @@ func (e AssetMediaType) String() string {
 	}
 }
 
-// An enumeration of asset playback styles that dictate how to present an asset to the user.
 type AssetPlaybackStyle int64
 
 const (
@@ -245,6 +271,65 @@ func (e AssetPlaybackStyle) String() string {
 		return "AssetPlaybackStyleVideoLooping"
 	default:
 		return fmt.Sprintf("AssetPlaybackStyle(%d)", int64(e))
+	}
+}
+
+type AssetPlaybackVariation int64
+
+const (
+	AssetPlaybackVariationNone         AssetPlaybackVariation = 0
+	AssetPlaybackVariationAutoloop     AssetPlaybackVariation = 1
+	AssetPlaybackVariationMirror       AssetPlaybackVariation = 2
+	AssetPlaybackVariationLongExposure AssetPlaybackVariation = 3
+)
+
+// String returns the AssetPlaybackVariation constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AssetPlaybackVariation) String() string {
+	switch e {
+	case AssetPlaybackVariationNone:
+		return "AssetPlaybackVariationNone"
+	case AssetPlaybackVariationAutoloop:
+		return "AssetPlaybackVariationAutoloop"
+	case AssetPlaybackVariationMirror:
+		return "AssetPlaybackVariationMirror"
+	case AssetPlaybackVariationLongExposure:
+		return "AssetPlaybackVariationLongExposure"
+	default:
+		return fmt.Sprintf("AssetPlaybackVariation(%d)", int64(e))
+	}
+}
+
+// Describes a rating for an asset.
+type AssetRating int64
+
+const (
+	AssetRatingUnset AssetRating = 0
+	AssetRatingOne   AssetRating = 1
+	AssetRatingTwo   AssetRating = 2
+	AssetRatingThree AssetRating = 3
+	AssetRatingFour  AssetRating = 4
+	AssetRatingFive  AssetRating = 5
+)
+
+// String returns the AssetRating constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AssetRating) String() string {
+	switch e {
+	case AssetRatingUnset:
+		return "AssetRatingUnset"
+	case AssetRatingOne:
+		return "AssetRatingOne"
+	case AssetRatingTwo:
+		return "AssetRatingTwo"
+	case AssetRatingThree:
+		return "AssetRatingThree"
+	case AssetRatingFour:
+		return "AssetRatingFour"
+	case AssetRatingFive:
+		return "AssetRatingFive"
+	default:
+		return fmt.Sprintf("AssetRating(%d)", int64(e))
 	}
 }
 
@@ -311,6 +396,91 @@ func (e AssetResourceType) String() string {
 		return "AssetResourceTypePhotoProxy"
 	default:
 		return fmt.Sprintf("AssetResourceType(%d)", int64(e))
+	}
+}
+
+// An action to perform on an upload job. Determine the available jobs for an action by calling the “PHAssetResourceUploadJob/fetchJobsWithAction:options:“ method.
+type AssetResourceUploadJobAction int64
+
+const (
+	// A job that requires acknowledgement. An acknowledgeable job has a ``PHAssetResourceUploadJob/state`` of `succeeded` or `failed` and hasn't been acknowledged. Call ``PHAssetResourceUploadJobChangeRequest/acknowledge`` to acknowledge a job and free queue capacity for new uploads.
+	AssetResourceUploadJobActionAcknowledge AssetResourceUploadJobAction = 1
+	// A job to retry processing. A retryable job has a ``PHAssetResourceUploadJob/state`` of `failed` and hasn't previously been retried. Call ``PHAssetResourceUploadJobChangeRequest/retryWithDestination:`` to retry the job.
+	AssetResourceUploadJobActionRetry AssetResourceUploadJobAction = 2
+	// A job to process. A processable job has a ``PHAssetResourceUploadJob/state`` of `registered` or `pending`.
+	AssetResourceUploadJobActionProcess AssetResourceUploadJobAction = 3
+)
+
+// String returns the AssetResourceUploadJobAction constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AssetResourceUploadJobAction) String() string {
+	switch e {
+	case AssetResourceUploadJobActionAcknowledge:
+		return "AssetResourceUploadJobActionAcknowledge"
+	case AssetResourceUploadJobActionRetry:
+		return "AssetResourceUploadJobActionRetry"
+	case AssetResourceUploadJobActionProcess:
+		return "AssetResourceUploadJobActionProcess"
+	default:
+		return fmt.Sprintf("AssetResourceUploadJobAction(%d)", int64(e))
+	}
+}
+
+// The states of an upload job.
+type AssetResourceUploadJobState int64
+
+const (
+	// The job has been registered.
+	AssetResourceUploadJobStateRegistered AssetResourceUploadJobState = 1
+	// A request has been made to send the asset resource to the destination, but has not yet been fulfilled.
+	AssetResourceUploadJobStatePending AssetResourceUploadJobState = 2
+	// The job has failed to send over.
+	AssetResourceUploadJobStateFailed AssetResourceUploadJobState = 3
+	// The job has sent over successfully.
+	AssetResourceUploadJobStateSucceeded AssetResourceUploadJobState = 4
+	// The job has been cancelled.
+	AssetResourceUploadJobStateCancelled AssetResourceUploadJobState = 5
+)
+
+// String returns the AssetResourceUploadJobState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AssetResourceUploadJobState) String() string {
+	switch e {
+	case AssetResourceUploadJobStateRegistered:
+		return "AssetResourceUploadJobStateRegistered"
+	case AssetResourceUploadJobStatePending:
+		return "AssetResourceUploadJobStatePending"
+	case AssetResourceUploadJobStateFailed:
+		return "AssetResourceUploadJobStateFailed"
+	case AssetResourceUploadJobStateSucceeded:
+		return "AssetResourceUploadJobStateSucceeded"
+	case AssetResourceUploadJobStateCancelled:
+		return "AssetResourceUploadJobStateCancelled"
+	default:
+		return fmt.Sprintf("AssetResourceUploadJobState(%d)", int64(e))
+	}
+}
+
+// The types of an upload job
+type AssetResourceUploadJobType int16
+
+const (
+	// An upload job type (will download the resource from iCloud if required. then upload)
+	AssetResourceUploadJobTypeUpload AssetResourceUploadJobType = 0
+	// A download job type (will download the resource from iCloud if required)
+	AssetResourceUploadJobTypeDownloadOnly AssetResourceUploadJobType = 1
+)
+
+// String returns the AssetResourceUploadJobType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AssetResourceUploadJobType) String() string {
+	switch e {
+	case AssetResourceUploadJobTypeUpload:
+		return "AssetResourceUploadJobTypeUpload"
+	case AssetResourceUploadJobTypeDownloadOnly:
+		return "AssetResourceUploadJobTypeDownloadOnly"
+	default:
+		return fmt.Sprintf("AssetResourceUploadJobType(%d)", int64(e))
 	}
 }
 
@@ -427,12 +597,16 @@ func (e CollectionEditOperation) String() string {
 }
 
 // Major distinctions between kinds of collection list, used by the collectionListSubtype property and fetchCollectionListsWithType:subtype:options:, fetchMomentListsWithSubtype:containingMoment:options:, and fetchMomentListsWithSubtype:options: methods.
-type CollectionListSubtype uint64
+type CollectionListSubtype int64
 
 const (
-	// The collection list is a smart folder containing one or more Events synced from iPhoto.
+	// The collection list is a folder containing albums or other folders.
+	CollectionListSubtypeRegularFolder CollectionListSubtype = 100
+	// The collection list that contains the top-level user collections.
+	CollectionListSubtypeRootFolder CollectionListSubtype = 101
+	// The collection list is a smart folder containing one or more Events synced from a Mac.
 	CollectionListSubtypeSmartFolderEvents CollectionListSubtype = 200
-	// The collection list is a smart folder containing one or more Faces synced from iPhoto.
+	// The collection list is a smart folder containing one or more Faces groups synced from a Mac.
 	CollectionListSubtypeSmartFolderFaces CollectionListSubtype = 201
 	// Use this value to fetch collection lists of all possible subtypes.
 	CollectionListSubtypeAny CollectionListSubtype = 9223372036854775807
@@ -442,6 +616,10 @@ const (
 // value is not a known constant.
 func (e CollectionListSubtype) String() string {
 	switch e {
+	case CollectionListSubtypeRegularFolder:
+		return "CollectionListSubtypeRegularFolder"
+	case CollectionListSubtypeRootFolder:
+		return "CollectionListSubtypeRootFolder"
 	case CollectionListSubtypeSmartFolderEvents:
 		return "CollectionListSubtypeSmartFolderEvents"
 	case CollectionListSubtypeSmartFolderFaces:
@@ -556,6 +734,28 @@ func (e ObjectType) String() string {
 		return "ObjectTypeCollectionList"
 	default:
 		return fmt.Sprintf("ObjectType(%d)", int64(e))
+	}
+}
+
+type OriginalResourceChoice int64
+
+const (
+	// The compressed original resource, such as a JPEG or HEIC, is used.
+	OriginalResourceChoiceCompressed OriginalResourceChoice = 0
+	// The RAW original resource is used.
+	OriginalResourceChoiceRaw OriginalResourceChoice = 1
+)
+
+// String returns the OriginalResourceChoice constant's name, or its numeric form when the
+// value is not a known constant.
+func (e OriginalResourceChoice) String() string {
+	switch e {
+	case OriginalResourceChoiceCompressed:
+		return "OriginalResourceChoiceCompressed"
+	case OriginalResourceChoiceRaw:
+		return "OriginalResourceChoiceRaw"
+	default:
+		return fmt.Sprintf("OriginalResourceChoice(%d)", int64(e))
 	}
 }
 
@@ -1704,6 +1904,26 @@ func (e QosClass) String() string {
 	}
 }
 
+type TaskSharedRegionStubs uint8
+
+const (
+	TaskSharedRegionStubsDev  TaskSharedRegionStubs = 1
+	TaskSharedRegionStubsProd TaskSharedRegionStubs = 2
+)
+
+// String returns the TaskSharedRegionStubs constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TaskSharedRegionStubs) String() string {
+	switch e {
+	case TaskSharedRegionStubsDev:
+		return "TaskSharedRegionStubsDev"
+	case TaskSharedRegionStubsProd:
+		return "TaskSharedRegionStubsProd"
+	default:
+		return fmt.Sprintf("TaskSharedRegionStubs(%d)", int64(e))
+	}
+}
+
 type UIImageOrientation int64
 
 const ()
@@ -1720,24 +1940,32 @@ func (e UIImageOrientation) String() string {
 type VirtualMemoryGuardExceptionCode uint32
 
 const (
-	KGUARD_EXC_DEALLOC_GAP                   VirtualMemoryGuardExceptionCode = 1
-	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        VirtualMemoryGuardExceptionCode = 2
-	KGUARD_EXC_RECLAIM_INDEX_FAILURE         VirtualMemoryGuardExceptionCode = 4
-	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    VirtualMemoryGuardExceptionCode = 8
-	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    VirtualMemoryGuardExceptionCode = 9
-	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         VirtualMemoryGuardExceptionCode = 10
-	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         VirtualMemoryGuardExceptionCode = 11
-	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  VirtualMemoryGuardExceptionCode = 12
-	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    VirtualMemoryGuardExceptionCode = 13
-	KGUARD_EXC_SEC_ACCESS_FAULT              VirtualMemoryGuardExceptionCode = 98
-	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        VirtualMemoryGuardExceptionCode = 99
-	KGUARD_EXC_SEC_COPY_DENIED               VirtualMemoryGuardExceptionCode = 100
-	KGUARD_EXC_SEC_SHARING_DENIED            VirtualMemoryGuardExceptionCode = 101
-	KGUARD_EXC_MTE_SYNC_FAULT                VirtualMemoryGuardExceptionCode = 200
-	KGUARD_EXC_MTE_ASYNC_USER_FAULT          VirtualMemoryGuardExceptionCode = 201
-	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          VirtualMemoryGuardExceptionCode = 202
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT VirtualMemoryGuardExceptionCode = 203
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT VirtualMemoryGuardExceptionCode = 204
+	KGUARD_EXC_DEALLOC_GAP                  VirtualMemoryGuardExceptionCode = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE       VirtualMemoryGuardExceptionCode = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE        VirtualMemoryGuardExceptionCode = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE   VirtualMemoryGuardExceptionCode = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE   VirtualMemoryGuardExceptionCode = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE        VirtualMemoryGuardExceptionCode = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE        VirtualMemoryGuardExceptionCode = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION VirtualMemoryGuardExceptionCode = 12
+	// Guard exception sent to a thread when a CoW defeatured map attempts to copy memory which is not permitted by system policy.
+	KGUARD_EXC_COW_DEFEATURED_COPY_DENIED VirtualMemoryGuardExceptionCode = 13
+	// Guard exception sent to a thread when it attempts to extract a given type of memory in a way which is not permitted for CoW defeatured maps.
+	KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED VirtualMemoryGuardExceptionCode = 14
+	// Guard exception sent to a thread when it attempts to copy-map a memory entry which was created for sharing by a CoW defeatured map.
+	KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED VirtualMemoryGuardExceptionCode = 15
+	KGUARD_EXC_COW_DEFEATURED_FIRST                    VirtualMemoryGuardExceptionCode = 13
+	KGUARD_EXC_COW_DEFEATURED_LAST                     VirtualMemoryGuardExceptionCode = 15
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY              VirtualMemoryGuardExceptionCode = 16
+	KGUARD_EXC_SEC_ACCESS_FAULT                        VirtualMemoryGuardExceptionCode = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT                  VirtualMemoryGuardExceptionCode = 99
+	KGUARD_EXC_SEC_COPY_DENIED                         VirtualMemoryGuardExceptionCode = 100
+	KGUARD_EXC_SEC_SHARING_DENIED                      VirtualMemoryGuardExceptionCode = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                          VirtualMemoryGuardExceptionCode = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT                    VirtualMemoryGuardExceptionCode = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT                    VirtualMemoryGuardExceptionCode = 202
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT           VirtualMemoryGuardExceptionCode = 203
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT           VirtualMemoryGuardExceptionCode = 204
 )
 
 // String returns the VirtualMemoryGuardExceptionCode constant's name, or its numeric form when the
@@ -1760,6 +1988,12 @@ func (e VirtualMemoryGuardExceptionCode) String() string {
 		return "KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE"
 	case KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION:
 		return "KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION"
+	case KGUARD_EXC_COW_DEFEATURED_COPY_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_COPY_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED"
 	case KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY:
 		return "KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY"
 	case KGUARD_EXC_SEC_ACCESS_FAULT:

@@ -411,6 +411,7 @@ var (
 	_nw_tcp_options_set_persist_timeout                                     func(objc.ID, uint32)
 	_nw_tcp_options_set_retransmit_connection_drop_time                     func(objc.ID, uint32)
 	_nw_tcp_options_set_retransmit_fin_drop                                 func(objc.ID, bool)
+	_nw_tcp_set_max_pacing_rate                                             func(objc.ID, uint64) int
 	_nw_tls_copy_sec_protocol_metadata                                      func(objc.ID) unsafe.Pointer
 	_nw_tls_copy_sec_protocol_options                                       func(objc.ID) unsafe.Pointer
 	_nw_tls_create_options                                                  func() unsafe.Pointer
@@ -2983,6 +2984,11 @@ func NwTcpOptionsSetRetransmitConnectionDropTime(options *foundation.NSObject, r
 // C function: nw_tcp_options_set_retransmit_fin_drop
 func NwTcpOptionsSetRetransmitFinDrop(options *foundation.NSObject, retransmitFinDrop bool) {
 	_nw_tcp_options_set_retransmit_fin_drop(options.Ptr(), retransmitFinDrop)
+}
+
+// C function: nw_tcp_set_max_pacing_rate
+func NwTcpSetMaxPacingRate(metadata *foundation.NSObject, maxPacingRate uint64) int {
+	return _nw_tcp_set_max_pacing_rate(metadata.Ptr(), maxPacingRate)
 }
 
 // C function: nw_tls_copy_sec_protocol_metadata

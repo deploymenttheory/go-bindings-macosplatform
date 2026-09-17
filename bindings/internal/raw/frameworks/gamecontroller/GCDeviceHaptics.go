@@ -43,7 +43,7 @@ func (o *GCDeviceHaptics) CreateEngineWithLocality(locality *foundation.NSString
 	return corehaptics.CHHapticEngineFromID(_ret)
 }
 
-// The set of supported haptic localities for this device - representing the locations of its haptic actuators. @note GCHapticsLocalityDefault and GCHapticsLocalityAll are guaranteed to be supported - and they may be equivalent. @see GCHapticsLocality
+// The set of supported haptic localities for this device - representing the locations of its haptic actuators. @note `GCHapticsLocalityDefault` and `GCHapticsLocalityAll` are guaranteed to be supported - and they may be equivalent. @see GCHapticsLocality
 func (o *GCDeviceHaptics) SupportedLocalities() *foundation.NSSet[*foundation.NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCDeviceHapticsSelSupportedLocalities)
 	if _ret != 0 {

@@ -21,24 +21,32 @@ type PHAssetChangeRequest struct {
 }
 
 var (
-	_clsPHAssetChangeRequest                                          = _objcClass("PHAssetChangeRequest")
-	_pHAssetChangeRequestSelCreationRequestForAssetFromImage          = objc.RegisterName("creationRequestForAssetFromImage:")
-	_pHAssetChangeRequestSelCreationRequestForAssetFromImageAtFileURL = objc.RegisterName("creationRequestForAssetFromImageAtFileURL:")
-	_pHAssetChangeRequestSelCreationRequestForAssetFromVideoAtFileURL = objc.RegisterName("creationRequestForAssetFromVideoAtFileURL:")
-	_pHAssetChangeRequestSelDeleteAssets                              = objc.RegisterName("deleteAssets:")
-	_pHAssetChangeRequestSelChangeRequestForAsset                     = objc.RegisterName("changeRequestForAsset:")
-	_pHAssetChangeRequestSelRevertAssetContentToOriginal              = objc.RegisterName("revertAssetContentToOriginal")
-	_pHAssetChangeRequestSelPlaceholderForCreatedAsset                = objc.RegisterName("placeholderForCreatedAsset")
-	_pHAssetChangeRequestSelCreationDate                              = objc.RegisterName("creationDate")
-	_pHAssetChangeRequestSelSetCreationDate                           = objc.RegisterName("setCreationDate:")
-	_pHAssetChangeRequestSelLocation                                  = objc.RegisterName("location")
-	_pHAssetChangeRequestSelSetLocation                               = objc.RegisterName("setLocation:")
-	_pHAssetChangeRequestSelIsFavorite                                = objc.RegisterName("isFavorite")
-	_pHAssetChangeRequestSelSetFavorite                               = objc.RegisterName("setFavorite:")
-	_pHAssetChangeRequestSelIsHidden                                  = objc.RegisterName("isHidden")
-	_pHAssetChangeRequestSelSetHidden                                 = objc.RegisterName("setHidden:")
-	_pHAssetChangeRequestSelContentEditingOutput                      = objc.RegisterName("contentEditingOutput")
-	_pHAssetChangeRequestSelSetContentEditingOutput                   = objc.RegisterName("setContentEditingOutput:")
+	_clsPHAssetChangeRequest                                           = _objcClass("PHAssetChangeRequest")
+	_pHAssetChangeRequestSelCreationRequestForAssetFromImage           = objc.RegisterName("creationRequestForAssetFromImage:")
+	_pHAssetChangeRequestSelCreationRequestForAssetFromImageAtFileURL  = objc.RegisterName("creationRequestForAssetFromImageAtFileURL:")
+	_pHAssetChangeRequestSelCreationRequestForAssetFromVideoAtFileURL  = objc.RegisterName("creationRequestForAssetFromVideoAtFileURL:")
+	_pHAssetChangeRequestSelDeleteAssets                               = objc.RegisterName("deleteAssets:")
+	_pHAssetChangeRequestSelChangeRequestForAsset                      = objc.RegisterName("changeRequestForAsset:")
+	_pHAssetChangeRequestSelSetLivePhotoVideoPlaybackEnabled           = objc.RegisterName("setLivePhotoVideoPlaybackEnabled:")
+	_pHAssetChangeRequestSelAddKeyword                                 = objc.RegisterName("addKeyword:")
+	_pHAssetChangeRequestSelRemoveKeyword                              = objc.RegisterName("removeKeyword:")
+	_pHAssetChangeRequestSelRevertAssetContentToOriginal               = objc.RegisterName("revertAssetContentToOriginal")
+	_pHAssetChangeRequestSelRevertAssetContentToOriginalResourceChoice = objc.RegisterName("revertAssetContentToOriginalResourceChoice:")
+	_pHAssetChangeRequestSelPlaceholderForCreatedAsset                 = objc.RegisterName("placeholderForCreatedAsset")
+	_pHAssetChangeRequestSelRating                                     = objc.RegisterName("rating")
+	_pHAssetChangeRequestSelSetRating                                  = objc.RegisterName("setRating:")
+	_pHAssetChangeRequestSelCaption                                    = objc.RegisterName("caption")
+	_pHAssetChangeRequestSelSetCaption                                 = objc.RegisterName("setCaption:")
+	_pHAssetChangeRequestSelCreationDate                               = objc.RegisterName("creationDate")
+	_pHAssetChangeRequestSelSetCreationDate                            = objc.RegisterName("setCreationDate:")
+	_pHAssetChangeRequestSelLocation                                   = objc.RegisterName("location")
+	_pHAssetChangeRequestSelSetLocation                                = objc.RegisterName("setLocation:")
+	_pHAssetChangeRequestSelIsFavorite                                 = objc.RegisterName("isFavorite")
+	_pHAssetChangeRequestSelSetFavorite                                = objc.RegisterName("setFavorite:")
+	_pHAssetChangeRequestSelIsHidden                                   = objc.RegisterName("isHidden")
+	_pHAssetChangeRequestSelSetHidden                                  = objc.RegisterName("setHidden:")
+	_pHAssetChangeRequestSelContentEditingOutput                       = objc.RegisterName("contentEditingOutput")
+	_pHAssetChangeRequestSelSetContentEditingOutput                    = objc.RegisterName("setContentEditingOutput:")
 )
 
 func PHAssetChangeRequestFromID(id objc.ID) *PHAssetChangeRequest {
@@ -92,9 +100,28 @@ func PHAssetChangeRequestChangeRequestForAsset(asset *PHAsset) *PHAssetChangeReq
 	return PHAssetChangeRequestFromID(_ret)
 }
 
+// Disable or enable the video part of a Live Photo so it just appears as a still image (disabled) or a Live Photo (enabled)
+func (o *PHAssetChangeRequest) SetLivePhotoVideoPlaybackEnabled(enabled bool) {
+	o.Ptr().Send(_pHAssetChangeRequestSelSetLivePhotoVideoPlaybackEnabled, enabled)
+}
+
+// Add or remove a keyword associated with this asset Adding a keyword that is already associated (or removing a keyword that is not) will be silently ignored
+func (o *PHAssetChangeRequest) AddKeyword(keyword *foundation.NSString) {
+	o.Ptr().Send(_pHAssetChangeRequestSelAddKeyword, keyword.Ptr())
+}
+
+func (o *PHAssetChangeRequest) RemoveKeyword(keyword *foundation.NSString) {
+	o.Ptr().Send(_pHAssetChangeRequestSelRemoveKeyword, keyword.Ptr())
+}
+
 // Request to revert any edits made to the asset’s content.
 func (o *PHAssetChangeRequest) RevertAssetContentToOriginal() {
 	o.Ptr().Send(_pHAssetChangeRequestSelRevertAssetContentToOriginal)
+}
+
+// Reverts the asset’s content to its original, choosing which original resource to use as the unadjusted base for all renders.
+func (o *PHAssetChangeRequest) RevertAssetContentToOriginalResourceChoice(choice PHOriginalResourceChoice) {
+	o.Ptr().Send(_pHAssetChangeRequestSelRevertAssetContentToOriginalResourceChoice, choice)
 }
 
 func (o *PHAssetChangeRequest) PlaceholderForCreatedAsset() *PHObjectPlaceholder {
@@ -103,6 +130,29 @@ func (o *PHAssetChangeRequest) PlaceholderForCreatedAsset() *PHObjectPlaceholder
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return PHObjectPlaceholderFromID(_ret)
+}
+
+// The rating for this asset
+func (o *PHAssetChangeRequest) Rating() PHAssetRating {
+	_ret := objc.Send[PHAssetRating](o.Ptr(), _pHAssetChangeRequestSelRating)
+	return _ret
+}
+
+func (o *PHAssetChangeRequest) SetRating(rating PHAssetRating) {
+	o.Ptr().Send(_pHAssetChangeRequestSelSetRating, rating)
+}
+
+// An asset description to change to. Set to nil or an empty string to clear the caption.
+func (o *PHAssetChangeRequest) Caption() *foundation.NSString {
+	_ret := objc.Send[objc.ID](o.Ptr(), _pHAssetChangeRequestSelCaption)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSStringFromID(_ret)
+}
+
+func (o *PHAssetChangeRequest) SetCaption(caption *foundation.NSString) {
+	o.Ptr().Send(_pHAssetChangeRequestSelSetCaption, caption.Ptr())
 }
 
 func (o *PHAssetChangeRequest) CreationDate() *foundation.NSDate {

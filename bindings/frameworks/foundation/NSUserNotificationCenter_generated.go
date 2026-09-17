@@ -144,7 +144,7 @@ func (unc *UserNotificationCenter) RemoveAllDeliveredNotifications() {
 	objc.Send[objc.ID](objref.IDOf(unc), objc.RegisterName("removeAllDeliveredNotifications"))
 }
 
-// ScheduledNotifications returns the scheduled notifications.
+// ScheduledNotifications specifies an array of scheduled user notifications that have not yet been delivered. Newly scheduled notifications are added to the end of the array. You may also bulk-schedule notifications by setting this array. Bulk setting new scheduled notifications unschedules existing notifications.
 //
 // ScheduledNotifications returns the collection as a Go slice.
 func (unc *UserNotificationCenter) ScheduledNotifications() []*UserNotification {
@@ -153,7 +153,7 @@ func (unc *UserNotificationCenter) ScheduledNotifications() []*UserNotification 
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *UserNotification { return UserNotificationFromID(_id) })
 }
 
-// DeliveredNotifications returns the delivered notifications.
+// DeliveredNotifications returns an array of all user notifications delivered to the notification center. The number of notifications the user actually sees in the user interface may be less than the size of this array. Note that these may or may not have been actually presented to the user. See the `presented` property in the `NSUserNotification` class.
 //
 // DeliveredNotifications returns the collection as a Go slice.
 func (unc *UserNotificationCenter) DeliveredNotifications() []*UserNotification {

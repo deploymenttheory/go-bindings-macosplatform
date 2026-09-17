@@ -804,6 +804,14 @@ func (tv *TableView) WithGestureRecognizers(items ...GestureRecognizerProvider) 
 	return tv
 }
 
+// WithExclusiveGestureBehavior sets declares whether gesture recognizers should be exclusive in this view and its subviews.
+func (tv *TableView) WithExclusiveGestureBehavior(exclusiveGestureBehavior ViewExclusiveGestureBehavior) *TableView {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setExclusiveGestureBehavior:"), exclusiveGestureBehavior)
+	})
+	return tv
+}
+
 // WithAllowedTouchTypes sets the allowed touch types.
 func (tv *TableView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *TableView {
 	purego.Main(func() {
@@ -865,6 +873,15 @@ func (tv *TableView) WithHorizontalContentSizeConstraintActive(horizontalContent
 func (tv *TableView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *TableView {
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
+	return tv
+}
+
+// WithTextSelectionManager sets the text selection manager for this view.
+func (tv *TableView) WithTextSelectionManager(textSelectionManager *TextSelectionManager) *TableView {
+	defer runtime.KeepAlive(textSelectionManager)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setTextSelectionManager:"), objref.IDOf(textSelectionManager))
 	})
 	return tv
 }

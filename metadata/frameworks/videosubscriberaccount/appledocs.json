@@ -27,10 +27,6 @@
       "doc": "An object that contains the response from the account provider.",
       "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsaccountproviderresponse"
     },
-    "VSAppleSubscription": {
-      "doc": "An Apple streaming service customer and their subscriptions.",
-      "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsapplesubscription"
-    },
     "VSAutoSignInToken": {
       "doc": "A value that represents a person’s account and their consent to Automatic Sign-In.",
       "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsautosignintoken"
@@ -46,10 +42,6 @@
     "VSSubscriptionRegistrationCenter": {
       "doc": "An object that stores subscription information that the system provides to the Apple TV app.",
       "url": "https://developer.apple.com/documentation/videosubscriberaccount/vssubscriptionregistrationcenter"
-    },
-    "VSUserAccount": {
-      "doc": "An object that represents a user’s account.",
-      "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsuseraccount"
     },
     "VSUserAccountManager": {
       "doc": "The object that coordinates your app’s user account actions.",
@@ -103,10 +95,6 @@
         }
       }
     },
-    "VSErrorCode": {
-      "doc": "Error codes in the framework error domain.",
-      "url": "https://developer.apple.com/documentation/videosubscriberaccount/vserrorcode"
-    },
     "VSOriginatingDeviceCategory": {
       "doc": "Constants that represent whether the device from which the user originally registered is mobile.",
       "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsoriginatingdevicecategory",
@@ -136,16 +124,6 @@
         "VSSubscriptionAccessLevelUnknown": {
           "doc": "The default access level.",
           "url": "https://developer.apple.com/documentation/videosubscriberaccount/vssubscriptionaccesslevel/unknown"
-        }
-      }
-    },
-    "VSUserAccountQueryOptions": {
-      "doc": "Constants that represent options you use to fetch a list of user accounts.",
-      "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsuseraccountqueryoptions",
-      "members": {
-        "VSUserAccountQueryNone": {
-          "doc": "A constant that indicates fetching user accounts from the user’s current device only.",
-          "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsuseraccountqueryoptions/vsuseraccountquerynone"
         }
       }
     },

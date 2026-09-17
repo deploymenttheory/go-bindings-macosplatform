@@ -10,8 +10,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A type that encapsulates input for PRF extensions during registration.
-//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/asauthorizationpublickeycredentialprfregistrationinput
 type ASAuthorizationPublicKeyCredentialPRFRegistrationInput struct {
 	foundation.NSObject

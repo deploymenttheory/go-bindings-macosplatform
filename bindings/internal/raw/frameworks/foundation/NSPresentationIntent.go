@@ -168,11 +168,13 @@ func (o *NSPresentationIntent) IsEquivalentToPresentationIntent(other *NSPresent
 	return _ret
 }
 
+// The type of the intent.
 func (o *NSPresentationIntent) IntentKind() NSPresentationIntentKind {
 	_ret := objc.Send[NSPresentationIntentKind](o.Ptr(), _nSPresentationIntentSelIntentKind)
 	return _ret
 }
 
+// The parent of the current intent.
 func (o *NSPresentationIntent) ParentIntent() *NSPresentationIntent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPresentationIntentSelParentIntent)
 	if _ret != 0 {
@@ -181,19 +183,19 @@ func (o *NSPresentationIntent) ParentIntent() *NSPresentationIntent {
 	return NSPresentationIntentFromID(_ret)
 }
 
-// An integer value which uniquely identifies this intent in the document. Identity disambiguates attributes which apply to contiguous text -- for example, two headers in a row with the same level. It can also be used to track the location in an attributed string of a particular part of a document, even after mutation.
+// A unique identifier for the intent in the document. Use the value in this property to disambiguate attributes that apply to contiguous text. For example, you might use it to differentiate between two headers in a row with the same level.
 func (o *NSPresentationIntent) Identity() int {
 	_ret := objc.Send[int](o.Ptr(), _nSPresentationIntentSelIdentity)
 	return _ret
 }
 
-// If the intent is not a list, this value is 0.
+// The number for an item in an ordered list. If the intent is not a list, the value of this property is `0`.
 func (o *NSPresentationIntent) Ordinal() int {
 	_ret := objc.Send[int](o.Ptr(), _nSPresentationIntentSelOrdinal)
 	return _ret
 }
 
-// If the intent is not a table, this value is `nil`.
+// The alignments for the columns in a table. If the intent is not a table, the value of this property is `nil`.
 func (o *NSPresentationIntent) ColumnAlignments() *NSArray[*NSNumber] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPresentationIntentSelColumnAlignments)
 	if _ret != 0 {
@@ -202,19 +204,19 @@ func (o *NSPresentationIntent) ColumnAlignments() *NSArray[*NSNumber] {
 	return NSArrayFromID[*NSNumber](_ret)
 }
 
-// If the intent is not a table, this value is 0.
+// The number of columns in a table. If the intent is not a table, the value of this property is `0`.
 func (o *NSPresentationIntent) ColumnCount() int {
 	_ret := objc.Send[int](o.Ptr(), _nSPresentationIntentSelColumnCount)
 	return _ret
 }
 
-// If the intent is not a header, this value is 0.
+// The level of a header section. This value corresponds to the number of hash marks (`#`) associated with the header. If the intent is not a header, the value of this property is `0`.
 func (o *NSPresentationIntent) HeaderLevel() int {
 	_ret := objc.Send[int](o.Ptr(), _nSPresentationIntentSelHeaderLevel)
 	return _ret
 }
 
-// If the intent is not a code block, this value is `nil`.
+// The language associated with the code listing. If the intent is not a code block, the value of this property is `nil`.
 func (o *NSPresentationIntent) LanguageHint() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPresentationIntentSelLanguageHint)
 	if _ret != 0 {
@@ -223,19 +225,19 @@ func (o *NSPresentationIntent) LanguageHint() *NSString {
 	return NSStringFromID(_ret)
 }
 
-// The column to which this cell belongs (0-based). If the intent is not a cell, this value is 0.
+// The column number to which the cell belongs. The value of this property is `0`-based, with the first column at `0`, the second column at `1`, and so on. If the intent is not a cell, this value is `0`.
 func (o *NSPresentationIntent) Column() int {
 	_ret := objc.Send[int](o.Ptr(), _nSPresentationIntentSelColumn)
 	return _ret
 }
 
-// The row to which this cell belongs (0-based). If the intent is not a row, this value is 0. Header rows are always row 0. If the table has more rows, those start at row 1.
+// The row number to which this cell belongs. The value of this property is `0`-based, with the first row at `0`, the second row at `1`, and so on. If the intent is not a cell, this value is `0`.
 func (o *NSPresentationIntent) Row() int {
 	_ret := objc.Send[int](o.Ptr(), _nSPresentationIntentSelRow)
 	return _ret
 }
 
-// The indentation level of this intent. Each nested list increases the indentation level by one; all elements within the same list (and not then nested into a child list intent) have the same indentation level. Text outside list intents has an indentation level of 0.
+// The indentation level of the intent. The initial list has an indentation level of `0`. Each time you nest a new list, the indentation level increases by `1`. All elements within the same list have the same indentation level. Text outside list intents has an indentation level of `0`.
 func (o *NSPresentationIntent) IndentationLevel() int {
 	_ret := objc.Send[int](o.Ptr(), _nSPresentationIntentSelIndentationLevel)
 	return _ret

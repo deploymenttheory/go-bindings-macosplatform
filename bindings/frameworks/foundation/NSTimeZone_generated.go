@@ -139,7 +139,7 @@ func (tz *TimeZone) NextDaylightSavingTimeTransitionAfterDate(aDate time.Time) t
 	return rt.NSDateToTime(_r)
 }
 
-// Name returns the name.
+// Name returns the geopolitical region ID that identifies the receiver.
 func (tz *TimeZone) Name() string {
 	defer runtime.KeepAlive(tz)
 	_r := objc.Send[objc.ID](objref.IDOf(tz), objc.RegisterName("name"))
@@ -149,7 +149,7 @@ func (tz *TimeZone) Name() string {
 	return purego.GoString(_r)
 }
 
-// Data returns the data.
+// Data returns the data that stores the information used by the receiver. Treat this data as an opaque object.
 func (tz *TimeZone) Data() []byte {
 	defer runtime.KeepAlive(tz)
 	_r := objc.Send[objc.ID](objref.IDOf(tz), objc.RegisterName("data"))
@@ -175,14 +175,14 @@ func (tz *TimeZone) LocalizedNameLocale(style TimeZoneNameStyle, locale *Locale)
 	return purego.GoString(_r)
 }
 
-// SecondsFromGMT returns the seconds from gmt.
+// SecondsFromGMT returns the current difference in seconds between the receiver and Greenwich Mean Time.
 func (tz *TimeZone) SecondsFromGMT() int {
 	defer runtime.KeepAlive(tz)
 	_r := objc.Send[int](objref.IDOf(tz), objc.RegisterName("secondsFromGMT"))
 	return _r
 }
 
-// Abbreviation returns the abbreviation.
+// Abbreviation returns the abbreviation for the receiver, such as "EDT" (Eastern Daylight Time). Invokes `abbreviationForDate:` with the current date as the argument.
 func (tz *TimeZone) Abbreviation() string {
 	defer runtime.KeepAlive(tz)
 	_r := objc.Send[objc.ID](objref.IDOf(tz), objc.RegisterName("abbreviation"))
@@ -192,21 +192,21 @@ func (tz *TimeZone) Abbreviation() string {
 	return purego.GoString(_r)
 }
 
-// IsDaylightSavingTime reports whether the object is daylight saving time.
+// IsDaylightSavingTime reports whether the receiver is currently using daylight saving time. Invokes `isDaylightSavingTimeForDate:` with the current date as the argument.
 func (tz *TimeZone) IsDaylightSavingTime() bool {
 	defer runtime.KeepAlive(tz)
 	_r := objc.Send[bool](objref.IDOf(tz), objc.RegisterName("isDaylightSavingTime"))
 	return _r
 }
 
-// DaylightSavingTimeOffset returns the daylight saving time offset.
+// DaylightSavingTimeOffset returns the current daylight saving time offset of the receiver.
 func (tz *TimeZone) DaylightSavingTimeOffset() float64 {
 	defer runtime.KeepAlive(tz)
 	_r := objc.Send[float64](objref.IDOf(tz), objc.RegisterName("daylightSavingTimeOffset"))
 	return _r
 }
 
-// NextDaylightSavingTimeTransition returns the next daylight saving time transition.
+// NextDaylightSavingTimeTransition returns the date of the next daylight saving time transition for the receiver. This property contains the date of the next (after the current instant) daylight saving time transition for the receiver. Depending on the time zone of the receiver, the value of this property may represent a change of the time zone's offset from GMT. Returns `nil` if the time zone of the receiver does not currently observe daylight saving time.
 func (tz *TimeZone) NextDaylightSavingTimeTransition() time.Time {
 	defer runtime.KeepAlive(tz)
 	_r := objc.Send[objc.ID](objref.IDOf(tz), objc.RegisterName("nextDaylightSavingTimeTransition"))

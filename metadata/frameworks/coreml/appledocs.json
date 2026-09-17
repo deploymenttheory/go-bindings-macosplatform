@@ -11,10 +11,6 @@
       "doc": "An object that represents a CPU compute device.",
       "url": "https://developer.apple.com/documentation/coreml/mlcpucomputedevice"
     },
-    "MLComputePlan": {
-      "doc": "A class representing the compute plan of a model.",
-      "url": "https://developer.apple.com/documentation/coreml/mlcomputeplan"
-    },
     "MLComputePlanCost": {
       "doc": "A class that represents the estimated cost of executing a layer or operation.",
       "url": "https://developer.apple.com/documentation/coreml/mlcomputeplancost"
@@ -75,10 +71,6 @@
       "doc": "A set of Core ML models from a model deployment.",
       "url": "https://developer.apple.com/documentation/coreml/mlmodelcollection"
     },
-    "MLModelCollectionEntry": {
-      "doc": "A model and its identifier within a model collection.",
-      "url": "https://developer.apple.com/documentation/coreml/mlmodelcollectionentry"
-    },
     "MLModelConfiguration": {
       "doc": "The settings for creating or updating a machine learning model.",
       "url": "https://developer.apple.com/documentation/coreml/mlmodelconfiguration"
@@ -86,10 +78,6 @@
     "MLModelDescription": {
       "doc": "Information about a model, primarily the input and output format for each feature the model expects, and optional metadata.",
       "url": "https://developer.apple.com/documentation/coreml/mlmodeldescription"
-    },
-    "MLModelStructure": {
-      "doc": "An enum representing the structure of a model.",
-      "url": "https://developer.apple.com/documentation/coreml/mlmodelstructure"
     },
     "MLModelStructureNeuralNetwork": {
       "doc": "A class representing the structure of a NeuralNetwork model.",
@@ -158,9 +146,6 @@
     "MLNumericConstraint": {
       "doc": "The value limitations of a number.",
       "url": "https://developer.apple.com/documentation/coreml/mlnumericconstraint"
-    },
-    "MLOptimizationHints": {
-      "url": "https://developer.apple.com/documentation/coreml/mloptimizationhints"
     },
     "MLParameterDescription": {
       "doc": "A description of a model parameter that includes a default value and a constraint, if applicable.",
@@ -315,10 +300,6 @@
           "url": "https://developer.apple.com/documentation/coreml/mlimagesizeconstrainttype/unspecified"
         }
       }
-    },
-    "MLModelError": {
-      "doc": "Information about a Core ML model error.",
-      "url": "https://developer.apple.com/documentation/coreml/mlmodelerror"
     },
     "MLMultiArrayDataType": {
       "doc": "Constants that define the underlying element types a multiarray can store.",

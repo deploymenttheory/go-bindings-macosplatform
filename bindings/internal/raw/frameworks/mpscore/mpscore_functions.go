@@ -7,8 +7,6 @@ import (
 	"unsafe"
 
 	"github.com/ebitengine/purego/objc"
-
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/metal"
 )
 
 var (
@@ -30,14 +28,14 @@ var (
 	// @abstract Call [MTLBlitEncoder resourceSize] on unique resources and return sum
 	_fnMPSImageBatchResourceSize func(unsafe.Pointer) uint
 	// @abstract Call [MTLBlitEncoder synchronizeResource:] on unique resources
-	_fnMPSImageBatchSynchronize func(unsafe.Pointer, metal.MTLCommandBuffer)
+	_fnMPSImageBatchSynchronize func(unsafe.Pointer, objc.ID)
 	_fnMPSSizeofMPSDataType     func(MPSDataType) uint
 	// @abstract raise or lower the readcount of a batch by a set amount @discussion     In some circumstances, a MPSState may appear in a MPSStateBatch multiple times. This is particularly common when the MPSState serves as an accumulator across the entire batch, such as when accumulating gradients for convolution weight update or batch statistics for batch normalization.  A naive function would then end up incrementing the state multiple times, probably leading to an error. MPSStateBatchIncrementReadCount() will efficiently increment the readCounts of each object in the batch only once, avoiding this problem. @param  batch   The MPSStateBatch to increment @param  amount  The value to add to the read count for each unique state in the batch @return  The number of different objects in the batch
 	_fnMPSStateBatchIncrementReadCount func(unsafe.Pointer, int) uint
 	// @abstract Call [MTLBlitEncoder resourceSize] on unique resources
 	_fnMPSStateBatchResourceSize func(unsafe.Pointer) uint
 	// @abstract Call [MTLBlitEncoder synchronizeResource:] on unique resources
-	_fnMPSStateBatchSynchronize func(unsafe.Pointer, metal.MTLCommandBuffer)
+	_fnMPSStateBatchSynchronize func(unsafe.Pointer, objc.ID)
 	___builtin_clz              func(uint) int
 )
 
@@ -99,7 +97,7 @@ func MPSImageBatchResourceSize(batch unsafe.Pointer) uint {
 }
 
 // @abstract Call [MTLBlitEncoder synchronizeResource:] on unique resources
-func MPSImageBatchSynchronize(batch unsafe.Pointer, cmdBuf metal.MTLCommandBuffer) {
+func MPSImageBatchSynchronize(batch unsafe.Pointer, cmdBuf objc.ID) {
 	_fnMPSImageBatchSynchronize(batch, cmdBuf)
 }
 
@@ -118,7 +116,7 @@ func MPSStateBatchResourceSize(batch unsafe.Pointer) uint {
 }
 
 // @abstract Call [MTLBlitEncoder synchronizeResource:] on unique resources
-func MPSStateBatchSynchronize(batch unsafe.Pointer, cmdBuf metal.MTLCommandBuffer) {
+func MPSStateBatchSynchronize(batch unsafe.Pointer, cmdBuf objc.ID) {
 	_fnMPSStateBatchSynchronize(batch, cmdBuf)
 }
 

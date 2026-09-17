@@ -9,6 +9,104 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// AEAppleMenuItemAboutThisMac returns the string constant AEAppleMenuItemAboutThisMac, for use as a dictionary key or argument.
+func AEAppleMenuItemAboutThisMac() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AEAppleMenuItemAboutThisMac")))
+}
+
+// AEAppleMenuItemAppStore returns the string constant AEAppleMenuItemAppStore, for use as a dictionary key or argument.
+func AEAppleMenuItemAppStore() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AEAppleMenuItemAppStore")))
+}
+
+// AEAppleMenuItemForceQuit returns the string constant AEAppleMenuItemForceQuit, for use as a dictionary key or argument.
+func AEAppleMenuItemForceQuit() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AEAppleMenuItemForceQuit")))
+}
+
+// AEAppleMenuItemLocation returns the string constant AEAppleMenuItemLocation, for use as a dictionary key or argument.
+func AEAppleMenuItemLocation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AEAppleMenuItemLocation")))
+}
+
+// AEAppleMenuItemLockScreen returns the string constant AEAppleMenuItemLockScreen, for use as a dictionary key or argument.
+func AEAppleMenuItemLockScreen() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AEAppleMenuItemLockScreen")))
+}
+
+// AEAppleMenuItemLogout returns the string constant AEAppleMenuItemLogout, for use as a dictionary key or argument.
+func AEAppleMenuItemLogout() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AEAppleMenuItemLogout")))
+}
+
+// AEAppleMenuItemRecent returns the string constant AEAppleMenuItemRecent, for use as a dictionary key or argument.
+func AEAppleMenuItemRecent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AEAppleMenuItemRecent")))
+}
+
+// AEAppleMenuItemRestart returns the string constant AEAppleMenuItemRestart, for use as a dictionary key or argument.
+func AEAppleMenuItemRestart() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AEAppleMenuItemRestart")))
+}
+
+// AEAppleMenuItemShutDown returns the string constant AEAppleMenuItemShutDown, for use as a dictionary key or argument.
+func AEAppleMenuItemShutDown() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AEAppleMenuItemShutDown")))
+}
+
+// AEAppleMenuItemSleep returns the string constant AEAppleMenuItemSleep, for use as a dictionary key or argument.
+func AEAppleMenuItemSleep() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AEAppleMenuItemSleep")))
+}
+
+// AEAppleMenuItemSystemInformation returns the string constant AEAppleMenuItemSystemInformation, for use as a dictionary key or argument.
+func AEAppleMenuItemSystemInformation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AEAppleMenuItemSystemInformation")))
+}
+
+// AEAppleMenuItemSystemSettings returns the string constant AEAppleMenuItemSystemSettings, for use as a dictionary key or argument.
+func AEAppleMenuItemSystemSettings() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AEAppleMenuItemSystemSettings")))
+}
+
+// AEMenuBarItemBattery returns the string constant AEMenuBarItemBattery, for use as a dictionary key or argument.
+func AEMenuBarItemBattery() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AEMenuBarItemBattery")))
+}
+
+// AEMenuBarItemBluetooth returns the string constant AEMenuBarItemBluetooth, for use as a dictionary key or argument.
+func AEMenuBarItemBluetooth() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AEMenuBarItemBluetooth")))
+}
+
+// AEMenuBarItemClock returns the string constant AEMenuBarItemClock, for use as a dictionary key or argument.
+func AEMenuBarItemClock() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AEMenuBarItemClock")))
+}
+
+// AEMenuBarItemDisplays returns the string constant AEMenuBarItemDisplays, for use as a dictionary key or argument.
+func AEMenuBarItemDisplays() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AEMenuBarItemDisplays")))
+}
+
+// AEMenuBarItemKeyboard returns the string constant AEMenuBarItemKeyboard, for use as a dictionary key or argument.
+func AEMenuBarItemKeyboard() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AEMenuBarItemKeyboard")))
+}
+
+// AEMenuBarItemVolume returns the string constant AEMenuBarItemVolume, for use as a dictionary key or argument.
+func AEMenuBarItemVolume() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AEMenuBarItemVolume")))
+}
+
+// AEMenuBarItemWifi returns the string constant AEMenuBarItemWifi, for use as a dictionary key or argument.
+func AEMenuBarItemWifi() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AEMenuBarItemWifi"))) }
+
+// AEAssessmentErrorDomain returns the string constant AEAssessmentErrorDomain, for use as a dictionary key or argument.
+func AEAssessmentErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AEAssessmentErrorDomain")))
+}
+
 // AENotInstalledParticipantsKey returns the string constant AENotInstalledParticipantsKey, for use as a dictionary key or argument.
 func AENotInstalledParticipantsKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AENotInstalledParticipantsKey")))
@@ -18,6 +116,3 @@ func AENotInstalledParticipantsKey() obj.Object {
 func AERestrictedSystemParticipantsKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AERestrictedSystemParticipantsKey")))
 }
-
-// AEAssessmentErrorDomain returns the address of the symbol AEAssessmentErrorDomain.
-func AEAssessmentErrorDomain() uintptr { return _symbol("AEAssessmentErrorDomain") }

@@ -85,7 +85,7 @@ func NewWKContentWorld() *WKContentWorld {
 	return _mainthread0
 }
 
-// Name returns the name of the WKContentWorld The pageWorld and defaultClientWorld instances will have a nil name. All other instances will have the non-nil name they were accessed by.
+// Name returns the name of the WKContentWorld The pageWorld and defaultClientWorld instances will have a nil name. Instances created with `worldWithConfiguration` will also have a nil name. All other instances will have the non-nil name they were accessed by.
 func (wcw *WKContentWorld) Name() string {
 	defer runtime.KeepAlive(wcw)
 	var _mainthread0 string

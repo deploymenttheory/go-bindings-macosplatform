@@ -15,8 +15,6 @@ import (
 )
 
 // OperationConfiguration is an idiomatic wrapper over the Objective-C class CKOperationConfiguration.
-//
-// An object that describes how a CloudKit operation behaves.
 type OperationConfiguration struct {
 	objref.Handle
 }

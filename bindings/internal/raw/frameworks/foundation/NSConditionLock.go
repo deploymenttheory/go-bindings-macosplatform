@@ -83,11 +83,13 @@ func (o *NSConditionLock) LockWhenConditionBeforeDate(condition int, limit *NSDa
 	return _ret
 }
 
+// The condition associated with the receiver.
 func (o *NSConditionLock) Condition() int {
 	_ret := objc.Send[int](o.Ptr(), _nSConditionLockSelCondition)
 	return _ret
 }
 
+// The name associated with the receiver.
 func (o *NSConditionLock) Name() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSConditionLockSelName)
 	if _ret != 0 {

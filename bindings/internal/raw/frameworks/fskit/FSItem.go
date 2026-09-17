@@ -17,7 +17,10 @@ type FSItem struct {
 	foundation.NSObject
 }
 
-var _clsFSItem = _objcClass("FSItem")
+var (
+	_clsFSItem               = _objcClass("FSItem")
+	_fSItemSelTryReclaimWith = objc.RegisterName("tryReclaimWithBlock:")
+)
 
 func FSItemFromID(id objc.ID) *FSItem {
 	if id == 0 {
@@ -27,4 +30,17 @@ func FSItemFromID(id objc.ID) *FSItem {
 	o.InitPtr(id)
 	purego.Track(o)
 	return o
+}
+
+// Reclaims the item by executing the given block, if conditions allow.
+func (o *FSItem) TryReclaimWith(reclaimBlock func()) bool {
+	var __block_reclaimBlock objc.Block
+	if reclaimBlock != nil {
+		__block_reclaimBlock = objc.NewBlock(func(_ objc.Block) {
+			reclaimBlock()
+		})
+		defer __block_reclaimBlock.Release()
+	}
+	_ret := objc.Send[bool](o.Ptr(), _fSItemSelTryReclaimWith, __block_reclaimBlock)
+	return _ret
 }

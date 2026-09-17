@@ -21,16 +21,22 @@ type NSTextBlock struct {
 var (
 	_clsNSTextBlock                                                          = _objcClass("NSTextBlock")
 	_nSTextBlockSelInit                                                      = objc.RegisterName("init")
+	_nSTextBlockSelInitWithCoder                                             = objc.RegisterName("initWithCoder:")
 	_nSTextBlockSelSetValueTypeForDimension                                  = objc.RegisterName("setValue:type:forDimension:")
 	_nSTextBlockSelValueForDimension                                         = objc.RegisterName("valueForDimension:")
 	_nSTextBlockSelValueTypeForDimension                                     = objc.RegisterName("valueTypeForDimension:")
 	_nSTextBlockSelSetContentWidthType                                       = objc.RegisterName("setContentWidth:type:")
-	_nSTextBlockSelSetWidthTypeForLayerEdge                                  = objc.RegisterName("setWidth:type:forLayer:edge:")
 	_nSTextBlockSelSetWidthTypeForLayer                                      = objc.RegisterName("setWidth:type:forLayer:")
+	_nSTextBlockSelSetWidthTypeForLayerRectEdge                              = objc.RegisterName("setWidth:type:forLayer:rectEdge:")
+	_nSTextBlockSelWidthForLayerRectEdge                                     = objc.RegisterName("widthForLayer:rectEdge:")
+	_nSTextBlockSelWidthValueTypeForLayerRectEdge                            = objc.RegisterName("widthValueTypeForLayer:rectEdge:")
 	_nSTextBlockSelWidthForLayerEdge                                         = objc.RegisterName("widthForLayer:edge:")
+	_nSTextBlockSelSetWidthTypeForLayerEdge                                  = objc.RegisterName("setWidth:type:forLayer:edge:")
 	_nSTextBlockSelWidthValueTypeForLayerEdge                                = objc.RegisterName("widthValueTypeForLayer:edge:")
-	_nSTextBlockSelSetBorderColorForEdge                                     = objc.RegisterName("setBorderColor:forEdge:")
 	_nSTextBlockSelSetBorderColor                                            = objc.RegisterName("setBorderColor:")
+	_nSTextBlockSelSetBorderColorRectEdge                                    = objc.RegisterName("setBorderColor:rectEdge:")
+	_nSTextBlockSelBorderColorForRectEdge                                    = objc.RegisterName("borderColorForRectEdge:")
+	_nSTextBlockSelSetBorderColorForEdge                                     = objc.RegisterName("setBorderColor:forEdge:")
 	_nSTextBlockSelBorderColorForEdge                                        = objc.RegisterName("borderColorForEdge:")
 	_nSTextBlockSelRectForLayoutAtPointInRectTextContainerCharacterRange     = objc.RegisterName("rectForLayoutAtPoint:inRect:textContainer:characterRange:")
 	_nSTextBlockSelBoundsRectForContentRectInRectTextContainerCharacterRange = objc.RegisterName("boundsRectForContentRect:inRect:textContainer:characterRange:")
@@ -62,9 +68,17 @@ func (o *NSTextBlock) Init() *NSTextBlock {
 	return NSTextBlockFromID(_ret)
 }
 
+func (o *NSTextBlock) InitWithCoder(coder *foundation.NSCoder) *NSTextBlock {
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextBlockSelInitWithCoder, coder.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSTextBlockFromID(_ret)
+}
+
 // Sets a dimension of the text block.
-func (o *NSTextBlock) SetValueTypeForDimension(val float64, type_ NSTextBlockValueType, dimension NSTextBlockDimension) {
-	o.Ptr().Send(_nSTextBlockSelSetValueTypeForDimension, val, type_, dimension)
+func (o *NSTextBlock) SetValueTypeForDimension(value float64, type_ NSTextBlockValueType, dimension NSTextBlockDimension) {
+	o.Ptr().Send(_nSTextBlockSelSetValueTypeForDimension, value, type_, dimension)
 }
 
 // Returns the value of the specified text block dimension.
@@ -80,35 +94,47 @@ func (o *NSTextBlock) ValueTypeForDimension(dimension NSTextBlockDimension) NSTe
 }
 
 // Sets the width of the text block.
-func (o *NSTextBlock) SetContentWidthType(val float64, type_ NSTextBlockValueType) {
-	o.Ptr().Send(_nSTextBlockSelSetContentWidthType, val, type_)
-}
-
-// Sets the width of a specified edge of a specified layer of the text block.
-func (o *NSTextBlock) SetWidthTypeForLayerEdge(val float64, type_ NSTextBlockValueType, layer NSTextBlockLayer, edge foundation.NSRectEdge) {
-	o.Ptr().Send(_nSTextBlockSelSetWidthTypeForLayerEdge, val, type_, layer, edge)
+func (o *NSTextBlock) SetContentWidthType(contentWidth float64, type_ NSTextBlockValueType) {
+	o.Ptr().Send(_nSTextBlockSelSetContentWidthType, contentWidth, type_)
 }
 
 // Sets the width of all edges of a specified layer of the text block.
-func (o *NSTextBlock) SetWidthTypeForLayer(val float64, type_ NSTextBlockValueType, layer NSTextBlockLayer) {
-	o.Ptr().Send(_nSTextBlockSelSetWidthTypeForLayer, val, type_, layer)
+func (o *NSTextBlock) SetWidthTypeForLayer(width float64, type_ NSTextBlockValueType, layer NSTextBlockLayer) {
+	o.Ptr().Send(_nSTextBlockSelSetWidthTypeForLayer, width, type_, layer)
+}
+
+func (o *NSTextBlock) SetWidthTypeForLayerRectEdge(width float64, type_ NSTextBlockValueType, layer NSTextBlockLayer, rectEdge corefoundation.CGRectEdge) {
+	o.Ptr().Send(_nSTextBlockSelSetWidthTypeForLayerRectEdge, width, type_, layer, rectEdge)
+}
+
+func (o *NSTextBlock) WidthForLayerRectEdge(layer NSTextBlockLayer, rectEdge corefoundation.CGRectEdge) float64 {
+	_ret := objc.Send[float64](o.Ptr(), _nSTextBlockSelWidthForLayerRectEdge, layer, rectEdge)
+	return _ret
+}
+
+func (o *NSTextBlock) WidthValueTypeForLayerRectEdge(layer NSTextBlockLayer, rectEdge corefoundation.CGRectEdge) NSTextBlockValueType {
+	_ret := objc.Send[NSTextBlockValueType](o.Ptr(), _nSTextBlockSelWidthValueTypeForLayerRectEdge, layer, rectEdge)
+	return _ret
 }
 
 // Returns the width of an edge of a specified layer of the text block.
+// Deprecated: since macOS API_TO_BE_DEPRECATED.
 func (o *NSTextBlock) WidthForLayerEdge(layer NSTextBlockLayer, edge foundation.NSRectEdge) float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSTextBlockSelWidthForLayerEdge, layer, edge)
 	return _ret
 }
 
+// Sets the width of a specified edge of a specified layer of the text block.
+// Deprecated: since macOS API_TO_BE_DEPRECATED.
+func (o *NSTextBlock) SetWidthTypeForLayerEdge(val float64, type_ NSTextBlockValueType, layer NSTextBlockLayer, edge foundation.NSRectEdge) {
+	o.Ptr().Send(_nSTextBlockSelSetWidthTypeForLayerEdge, val, type_, layer, edge)
+}
+
 // Returns the value type of an edge of a specified layer of the text block.
+// Deprecated: since macOS API_TO_BE_DEPRECATED.
 func (o *NSTextBlock) WidthValueTypeForLayerEdge(layer NSTextBlockLayer, edge foundation.NSRectEdge) NSTextBlockValueType {
 	_ret := objc.Send[NSTextBlockValueType](o.Ptr(), _nSTextBlockSelWidthValueTypeForLayerEdge, layer, edge)
 	return _ret
-}
-
-// Sets the border color of the specified edge of the text block.
-func (o *NSTextBlock) SetBorderColorForEdge(color *NSColor, edge foundation.NSRectEdge) {
-	o.Ptr().Send(_nSTextBlockSelSetBorderColorForEdge, color.Ptr(), edge)
 }
 
 // Sets the color of all borders of the text block.
@@ -116,6 +142,25 @@ func (o *NSTextBlock) SetBorderColor(color *NSColor) {
 	o.Ptr().Send(_nSTextBlockSelSetBorderColor, color.Ptr())
 }
 
+func (o *NSTextBlock) SetBorderColorRectEdge(borderColor *NSColor, rectEdge corefoundation.CGRectEdge) {
+	o.Ptr().Send(_nSTextBlockSelSetBorderColorRectEdge, borderColor.Ptr(), rectEdge)
+}
+
+func (o *NSTextBlock) BorderColorForRectEdge(rectEdge corefoundation.CGRectEdge) *NSColor {
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextBlockSelBorderColorForRectEdge, rectEdge)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSColorFromID(_ret)
+}
+
+// Sets the border color of the specified edge of the text block.
+// Deprecated: since macOS API_TO_BE_DEPRECATED.
+func (o *NSTextBlock) SetBorderColorForEdge(color *NSColor, edge foundation.NSRectEdge) {
+	o.Ptr().Send(_nSTextBlockSelSetBorderColorForEdge, color.Ptr(), edge)
+}
+
+// Deprecated: since macOS API_TO_BE_DEPRECATED.
 func (o *NSTextBlock) BorderColorForEdge(edge foundation.NSRectEdge) *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextBlockSelBorderColorForEdge, edge)
 	if _ret != 0 {
@@ -125,12 +170,14 @@ func (o *NSTextBlock) BorderColorForEdge(edge foundation.NSRectEdge) *NSColor {
 }
 
 // Returns the rectangle within which glyphs should be laid out for the specified arguments.
+// Deprecated: since macOS API_TO_BE_DEPRECATED.
 func (o *NSTextBlock) RectForLayoutAtPointInRectTextContainerCharacterRange(startingPoint corefoundation.CGPoint, rect corefoundation.CGRect, textContainer *NSTextContainer, charRange foundation.NSRange) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSTextBlockSelRectForLayoutAtPointInRectTextContainerCharacterRange, startingPoint, rect, textContainer.Ptr(), charRange)
 	return _ret
 }
 
 // Returns the rectangle the text in the block actually occupies, including padding, borders, and margins.
+// Deprecated: since macOS API_TO_BE_DEPRECATED.
 func (o *NSTextBlock) BoundsRectForContentRectInRectTextContainerCharacterRange(contentRect corefoundation.CGRect, rect corefoundation.CGRect, textContainer *NSTextContainer, charRange foundation.NSRange) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSTextBlockSelBoundsRectForContentRectInRectTextContainerCharacterRange, contentRect, rect, textContainer.Ptr(), charRange)
 	return _ret
@@ -151,6 +198,7 @@ func (o *NSTextBlock) ContentWidthValueType() NSTextBlockValueType {
 	return _ret
 }
 
+// Deprecated: since macOS API_TO_BE_DEPRECATED.
 func (o *NSTextBlock) VerticalAlignment() NSTextBlockVerticalAlignment {
 	_ret := objc.Send[NSTextBlockVerticalAlignment](o.Ptr(), _nSTextBlockSelVerticalAlignment)
 	return _ret

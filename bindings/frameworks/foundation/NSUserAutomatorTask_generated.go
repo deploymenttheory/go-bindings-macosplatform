@@ -74,7 +74,7 @@ func (uat *UserAutomatorTask) WithScriptingProperties(scriptingProperties map[st
 	return uat
 }
 
-// Variables returns the variables.
+// Variables returns the variables required by the Automator workflow.
 func (uat *UserAutomatorTask) Variables() map[string]obj.Object {
 	defer runtime.KeepAlive(uat)
 	_r := objc.Send[objc.ID](objref.IDOf(uat), objc.RegisterName("variables"))

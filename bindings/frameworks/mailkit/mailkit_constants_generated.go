@@ -4,8 +4,17 @@
 
 package mailkit
 
-// MEComposeSessionErrorDomain returns the address of the symbol MEComposeSessionErrorDomain.
-func MEComposeSessionErrorDomain() uintptr { return _symbol("MEComposeSessionErrorDomain") }
+import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+)
 
-// MEMessageSecurityErrorDomain returns the address of the symbol MEMessageSecurityErrorDomain.
-func MEMessageSecurityErrorDomain() uintptr { return _symbol("MEMessageSecurityErrorDomain") }
+// MEComposeSessionErrorDomain returns the string constant MEComposeSessionErrorDomain, for use as a dictionary key or argument.
+func MEComposeSessionErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MEComposeSessionErrorDomain")))
+}
+
+// MEMessageSecurityErrorDomain returns the string constant MEMessageSecurityErrorDomain, for use as a dictionary key or argument.
+func MEMessageSecurityErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MEMessageSecurityErrorDomain")))
+}

@@ -30,6 +30,7 @@ var (
 	_aVAudioFormatSelInitWithCommonFormatSampleRateInterleavedChannelLayout = objc.RegisterName("initWithCommonFormat:sampleRate:interleaved:channelLayout:")
 	_aVAudioFormatSelInitWithSettings                                       = objc.RegisterName("initWithSettings:")
 	_aVAudioFormatSelInitWithCMAudioFormatDescription                       = objc.RegisterName("initWithCMAudioFormatDescription:")
+	_aVAudioFormatSelInitWithFormatDescription                              = objc.RegisterName("initWithFormatDescription:")
 	_aVAudioFormatSelIsEqual                                                = objc.RegisterName("isEqual:")
 	_aVAudioFormatSelIsStandard                                             = objc.RegisterName("isStandard")
 	_aVAudioFormatSelCommonFormat                                           = objc.RegisterName("commonFormat")
@@ -118,8 +119,18 @@ func (o *AVAudioFormat) InitWithSettings(settings *foundation.NSDictionary[*foun
 }
 
 // Creates an audio format instance from a Core Media audio format description.
+// Deprecated: since macOS 27.0.
 func (o *AVAudioFormat) InitWithCMAudioFormatDescription(formatDescription unsafe.Pointer) *AVAudioFormat {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioFormatSelInitWithCMAudioFormatDescription, formatDescription)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return AVAudioFormatFromID(_ret)
+}
+
+// @method initWithFormatDescription: @abstract initialize from a CMAudioFormatDescriptionRef. @param formatDescription the CMAudioFormatDescriptionRef. @discussion If formatDescription is invalid, this method fails (returns nil).
+func (o *AVAudioFormat) InitWithFormatDescription(formatDescription unsafe.Pointer) *AVAudioFormat {
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioFormatSelInitWithFormatDescription, formatDescription)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

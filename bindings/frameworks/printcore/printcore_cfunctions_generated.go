@@ -24,7 +24,7 @@ func PMCGImageCreateWithEPSDataProvider(epsDataProvider coregraphics.CGDataProvi
 		ebipurego.RegisterLibFunc(&_fnPMCGImageCreateWithEPSDataProvider, _lib, "PMCGImageCreateWithEPSDataProvider")
 	}
 	_ret := _fnPMCGImageCreateWithEPSDataProvider(objref.IDOf(epsDataProvider.Object), objref.IDOf(epsPreview.Object))
-	return coregraphics.CGImageRef{Object: obj.Wrap(_ret)}
+	return coregraphics.CGImageRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnPMGetCollate func(objc.ID, unsafe.Pointer) int32

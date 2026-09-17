@@ -993,6 +993,26 @@ func (e CompileSymbolVisibility) String() string {
 	}
 }
 
+type ContentionRelief int64
+
+const (
+	ContentionReliefAutomatic ContentionRelief = 0
+	ContentionReliefNone      ContentionRelief = 1
+)
+
+// String returns the ContentionRelief constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ContentionRelief) String() string {
+	switch e {
+	case ContentionReliefAutomatic:
+		return "ContentionReliefAutomatic"
+	case ContentionReliefNone:
+		return "ContentionReliefNone"
+	default:
+		return fmt.Sprintf("ContentionRelief(%d)", int64(e))
+	}
+}
+
 type CurveBasis int64
 
 const (
@@ -1497,6 +1517,49 @@ func (e DispatchType) String() string {
 	}
 }
 
+type FloatingPointConversionRoundingMode int64
+
+const (
+	FloatingPointConversionRoundingModeToNearestEven FloatingPointConversionRoundingMode = 0
+	FloatingPointConversionRoundingModeTowardZero    FloatingPointConversionRoundingMode = 1
+)
+
+// String returns the FloatingPointConversionRoundingMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FloatingPointConversionRoundingMode) String() string {
+	switch e {
+	case FloatingPointConversionRoundingModeToNearestEven:
+		return "FloatingPointConversionRoundingModeToNearestEven"
+	case FloatingPointConversionRoundingModeTowardZero:
+		return "FloatingPointConversionRoundingModeTowardZero"
+	default:
+		return fmt.Sprintf("FloatingPointConversionRoundingMode(%d)", int64(e))
+	}
+}
+
+type ForwardProgressUsage int64
+
+const (
+	ForwardProgressUsageAutomatic         ForwardProgressUsage = 0
+	ForwardProgressUsageWeak              ForwardProgressUsage = 1
+	ForwardProgressUsageSIMDGroupParallel ForwardProgressUsage = 2
+)
+
+// String returns the ForwardProgressUsage constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ForwardProgressUsage) String() string {
+	switch e {
+	case ForwardProgressUsageAutomatic:
+		return "ForwardProgressUsageAutomatic"
+	case ForwardProgressUsageWeak:
+		return "ForwardProgressUsageWeak"
+	case ForwardProgressUsageSIMDGroupParallel:
+		return "ForwardProgressUsageSIMDGroupParallel"
+	default:
+		return fmt.Sprintf("ForwardProgressUsage(%d)", int64(e))
+	}
+}
+
 // Options that define how Metal compiles a GPU function.
 // Bitmask — values may be combined with |.
 type FunctionOptions uint64
@@ -1808,6 +1871,7 @@ const (
 	// Version 3.2 of the Metal shading language.
 	LanguageVersion3_2 LanguageVersion = 196610
 	LanguageVersion4_0 LanguageVersion = 262144
+	LanguageVersion4_1 LanguageVersion = 262145
 )
 
 // String returns the LanguageVersion constant's name, or its numeric form when the
@@ -1836,6 +1900,8 @@ func (e LanguageVersion) String() string {
 		return "LanguageVersion3_2"
 	case LanguageVersion4_0:
 		return "LanguageVersion4_0"
+	case LanguageVersion4_1:
+		return "LanguageVersion4_1"
 	default:
 		return fmt.Sprintf("LanguageVersion(%d)", int64(e))
 	}
@@ -2171,6 +2237,14 @@ const (
 	PixelFormatABGR4Unorm PixelFormat = 42
 	// Packed 16-bit format with normalized unsigned integer color components: 5 bits each for BGR and 1 for alpha, packed into 16 bits.
 	PixelFormatBGR5A1Unorm PixelFormat = 43
+	// An ordinary format with three components of 8-bit normalized, unsigned integer values in RGB order.
+	PixelFormatRGB8Unorm PixelFormat = 45
+	// An ordinary format with three components of 8-bit normalized, signed integer values in RGB order.
+	PixelFormatRGB8Snorm PixelFormat = 46
+	// An ordinary format with three components of 8-bit unsigned integer values in RGB order.
+	PixelFormatRGB8Uint PixelFormat = 47
+	// An ordinary format with three components of 8-bit signed integer values in RGB order.
+	PixelFormatRGB8Sint PixelFormat = 48
 	// Ordinary format with one 32-bit unsigned integer component.
 	PixelFormatR32Uint PixelFormat = 53
 	// Ordinary format with one 32-bit signed integer component.
@@ -2215,6 +2289,16 @@ const (
 	PixelFormatBGR10_XR PixelFormat = 554
 	// A 32-bit extended-range pixel format with sRGB conversion and three fixed-point components of 10-bit blue, 10-bit green, and 10-bit red.
 	PixelFormatBGR10_XR_sRGB PixelFormat = 555
+	// An ordinary format with three components of 16-bit normalized, unsigned integer values in RGB order.
+	PixelFormatRGB16Unorm PixelFormat = 95
+	// An ordinary format with three components of 16-bit normalized, signed integer values in RGB order.
+	PixelFormatRGB16Snorm PixelFormat = 96
+	// An ordinary format with three components of 16-bit unsigned integer values in RGB order.
+	PixelFormatRGB16Uint PixelFormat = 97
+	// An ordinary format with three components of 16-bit signed integer values in RGB order.
+	PixelFormatRGB16Sint PixelFormat = 98
+	// An ordinary format with three components of 16-bit floating-point values in RGB order.
+	PixelFormatRGB16Float PixelFormat = 99
 	// Ordinary format with two 32-bit unsigned integer components.
 	PixelFormatRG32Uint PixelFormat = 103
 	// Ordinary format with two 32-bit signed integer components.
@@ -2235,6 +2319,12 @@ const (
 	PixelFormatBGRA10_XR PixelFormat = 552
 	// A 64-bit extended-range pixel format with sRGB conversion and four fixed-point components of 10-bit blue, 10-bit green, 10-bit red, and 10-bit alpha.
 	PixelFormatBGRA10_XR_sRGB PixelFormat = 553
+	// An ordinary format with three components of 32-bit unsigned integer values in RGB order.
+	PixelFormatRGB32Uint PixelFormat = 120
+	// An ordinary format with three components of 32-bit signed integer values in RGB order.
+	PixelFormatRGB32Sint PixelFormat = 121
+	// An ordinary format with three components of 32-bit floating-point values in RGB order.
+	PixelFormatRGB32Float PixelFormat = 122
 	// Ordinary format with four 32-bit unsigned integer components in RGBA order.
 	PixelFormatRGBA32Uint PixelFormat = 123
 	// Ordinary format with four 32-bit signed integer components in RGBA order.
@@ -2416,12 +2506,16 @@ const (
 	// A pixel format with an 8-bit unsigned integer component, used for a stencil render target.
 	PixelFormatStencil8 PixelFormat = 253
 	// A 32-bit combined depth and stencil pixel format with a 24-bit normalized unsigned integer for depth and an 8-bit unsigned integer for stencil.
+	//
+	// Deprecated: Use MTLPixelFormatDepth32Float_Stencil8 instead
 	PixelFormatDepth24Unorm_Stencil8 PixelFormat = 255
 	// A 40-bit combined depth and stencil pixel format with a 32-bit floating-point value for depth and an 8-bit unsigned integer for stencil.
 	PixelFormatDepth32Float_Stencil8 PixelFormat = 260
 	// A stencil pixel format used to read the stencil value from a texture with a combined 32-bit depth and 8-bit stencil value.
 	PixelFormatX32_Stencil8 PixelFormat = 261
 	// A stencil pixel format used to read the stencil value from a texture with a combined 24-bit depth and 8-bit stencil value.
+	//
+	// Deprecated: Use MTLPixelFormatX32_Stencil8 instead
 	PixelFormatX24_Stencil8  PixelFormat = 262
 	PixelFormatUnspecialized PixelFormat = 263
 )
@@ -2472,6 +2566,14 @@ func (e PixelFormat) String() string {
 		return "PixelFormatABGR4Unorm"
 	case PixelFormatBGR5A1Unorm:
 		return "PixelFormatBGR5A1Unorm"
+	case PixelFormatRGB8Unorm:
+		return "PixelFormatRGB8Unorm"
+	case PixelFormatRGB8Snorm:
+		return "PixelFormatRGB8Snorm"
+	case PixelFormatRGB8Uint:
+		return "PixelFormatRGB8Uint"
+	case PixelFormatRGB8Sint:
+		return "PixelFormatRGB8Sint"
 	case PixelFormatR32Uint:
 		return "PixelFormatR32Uint"
 	case PixelFormatR32Sint:
@@ -2516,6 +2618,16 @@ func (e PixelFormat) String() string {
 		return "PixelFormatBGR10_XR"
 	case PixelFormatBGR10_XR_sRGB:
 		return "PixelFormatBGR10_XR_sRGB"
+	case PixelFormatRGB16Unorm:
+		return "PixelFormatRGB16Unorm"
+	case PixelFormatRGB16Snorm:
+		return "PixelFormatRGB16Snorm"
+	case PixelFormatRGB16Uint:
+		return "PixelFormatRGB16Uint"
+	case PixelFormatRGB16Sint:
+		return "PixelFormatRGB16Sint"
+	case PixelFormatRGB16Float:
+		return "PixelFormatRGB16Float"
 	case PixelFormatRG32Uint:
 		return "PixelFormatRG32Uint"
 	case PixelFormatRG32Sint:
@@ -2536,6 +2648,12 @@ func (e PixelFormat) String() string {
 		return "PixelFormatBGRA10_XR"
 	case PixelFormatBGRA10_XR_sRGB:
 		return "PixelFormatBGRA10_XR_sRGB"
+	case PixelFormatRGB32Uint:
+		return "PixelFormatRGB32Uint"
+	case PixelFormatRGB32Sint:
+		return "PixelFormatRGB32Sint"
+	case PixelFormatRGB32Float:
+		return "PixelFormatRGB32Float"
 	case PixelFormatRGBA32Uint:
 		return "PixelFormatRGBA32Uint"
 	case PixelFormatRGBA32Sint:
@@ -2758,6 +2876,8 @@ const (
 	// The CPU and GPU share access to the resource, allocated in system memory.
 	ResourceStorageModeShared ResourceOptions = 0
 	// The CPU and GPU may maintain separate copies of the resource, and any changes need to be explicitly synchronized.
+	//
+	// Deprecated: Managed storage has no effect on Apple Silicon, use Shared storage instead
 	ResourceStorageModeManaged ResourceOptions = 16
 	// The resource is only available to the GPU.
 	ResourceStorageModePrivate ResourceOptions = 32
@@ -3162,8 +3282,12 @@ const (
 	// The CPU and GPU share access to the resource, allocated in system memory.
 	StorageModeShared StorageMode = 0
 	// The CPU and GPU may maintain separate copies of the resource, and any changes need to be explicitly synchronized.
+	//
+	// Deprecated: Managed storage has no effect on Apple Silicon, use Shared storage instead
 	StorageModeManaged StorageMode = 1
 	// The resource is only available to the GPU.
+	//
+	// Deprecated: Managed storage has no effect on Apple Silicon, use Shared storage instead
 	StorageModePrivate StorageMode = 2
 	// The resource’s contents are only available to the GPU, and only exist temporarily during a render pass.
 	StorageModeMemoryless StorageMode = 3
@@ -3226,6 +3350,8 @@ func (e StoreAction) String() string {
 }
 
 // Options that modify a store action.
+//
+// Deprecated: Store action options have no effect on Apple Silicon
 // Bitmask — values may be combined with |.
 type StoreActionOptions uint64
 
@@ -3259,7 +3385,7 @@ const (
 	TensorDataTypeFloat32 TensorDataType = 3
 	// A half-precision floating point data type.
 	TensorDataTypeFloat16 TensorDataType = 16
-	// A 16-bit floating point data type with 8 exponent bits, 7 mantissa bits and 1 sign bit.
+	// A 16-bit floating point data type with 8 exponent bits, 7 mantissa bits, and 1 sign bit.
 	TensorDataTypeBFloat16 TensorDataType = 121
 	// An 8-bit signed integer data type.
 	TensorDataTypeInt8 TensorDataType = 45
@@ -3269,14 +3395,26 @@ const (
 	TensorDataTypeInt16 TensorDataType = 37
 	// A 16-bit unsigned integer data type.
 	TensorDataTypeUInt16 TensorDataType = 41
-	// A 32-bit integer data type.
+	// A 32-bit signed integer data type.
 	TensorDataTypeInt32 TensorDataType = 29
 	// A 32-bit unsigned integer data type.
 	TensorDataTypeUInt32 TensorDataType = 33
-	// A 4-bit signed integer format data type.
+	// A 4-bit signed integer data type.
 	TensorDataTypeInt4 TensorDataType = 143
-	// A 4-bit unsigned integer format data type.
+	// A 4-bit unsigned integer data type.
 	TensorDataTypeUInt4 TensorDataType = 144
+	// An 8-bit floating point data type with 8 exponent bits, 0 mantissa bits, and no sign bit.
+	TensorDataTypeMetalFloat8UE8M0 TensorDataType = 145
+	// A 2-bit unsigned integer data type.
+	TensorDataTypeUInt2 TensorDataType = 149
+	// A 2-bit signed integer data type.
+	TensorDataTypeInt2 TensorDataType = 150
+	// An 8-bit floating point data type with 5 exponent bits, 2 mantissa bits, and 1 sign bit.
+	TensorDataTypeMetalFloat8E5M2 TensorDataType = 141
+	// An 8-bit floating point data type with 4 exponent bits, 3 mantissa bits, and 1 sign bit.
+	TensorDataTypeMetalFloat8E4M3 TensorDataType = 142
+	// A 4-bit floating point data type with 2 exponent bits, 1 mantissa bit, and 1 sign bit.
+	TensorDataTypeMetalFloat4E2M1 TensorDataType = 148
 )
 
 // String returns the TensorDataType constant's name, or its numeric form when the
@@ -3307,12 +3445,47 @@ func (e TensorDataType) String() string {
 		return "TensorDataTypeInt4"
 	case TensorDataTypeUInt4:
 		return "TensorDataTypeUInt4"
+	case TensorDataTypeMetalFloat8UE8M0:
+		return "TensorDataTypeMetalFloat8UE8M0"
+	case TensorDataTypeUInt2:
+		return "TensorDataTypeUInt2"
+	case TensorDataTypeInt2:
+		return "TensorDataTypeInt2"
+	case TensorDataTypeMetalFloat8E5M2:
+		return "TensorDataTypeMetalFloat8E5M2"
+	case TensorDataTypeMetalFloat8E4M3:
+		return "TensorDataTypeMetalFloat8E4M3"
+	case TensorDataTypeMetalFloat4E2M1:
+		return "TensorDataTypeMetalFloat4E2M1"
 	default:
 		return fmt.Sprintf("TensorDataType(%d)", int64(e))
 	}
 }
 
-// The type that represents the different contexts for a tensor.
+// The possible tensor plane types.
+type TensorPlaneType int64
+
+const (
+	// The main data plane, which every tensor has
+	TensorPlaneTypeData TensorPlaneType = 0
+	// The auxiliary plane that stores scale factors for elements in the data plane.
+	TensorPlaneTypeScales TensorPlaneType = 1
+)
+
+// String returns the TensorPlaneType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TensorPlaneType) String() string {
+	switch e {
+	case TensorPlaneTypeData:
+		return "TensorPlaneTypeData"
+	case TensorPlaneTypeScales:
+		return "TensorPlaneTypeScales"
+	default:
+		return fmt.Sprintf("TensorPlaneType(%d)", int64(e))
+	}
+}
+
+// The contexts in which you can use a tensor.
 // Bitmask — values may be combined with |.
 type TensorUsage uint64
 
@@ -3898,7 +4071,7 @@ func (e VertexStepFunction) String() string {
 	}
 }
 
-// This enumeration controls if Metal accumulates visibility results between render encoders or resets them.
+// Actions for visibility results between render passes.
 type VisibilityResultType int64
 
 const (
@@ -4581,8 +4754,12 @@ const (
 	// Indicates the GPU doesn’t have sufficient memory to execute a command buffer.
 	MTL4CommandQueueErrorOutOfMemory MTL4CommandQueueError = 3
 	// Indicates the physical removal of the GPU before the command buffer completed.
+	//
+	// Deprecated: MTL4CommandQueueErrorDeviceRemoved cannot occur on Apple Silicon
 	MTL4CommandQueueErrorDeviceRemoved MTL4CommandQueueError = 4
 	// Indicates that the system revokes GPU access because it’s responsible for too many timeouts or hangs.
+	//
+	// Deprecated: MTL4CommandQueueErrorDeviceRemoved cannot occur on Apple Silicon
 	MTL4CommandQueueErrorAccessRevoked MTL4CommandQueueError = 5
 	// Indicates an internal problem in the Metal framework.
 	MTL4CommandQueueErrorInternal MTL4CommandQueueError = 6
@@ -4804,7 +4981,6 @@ func (e BarrierScope) String() string {
 	return strings.Join(parts, "|")
 }
 
-// An error that occurred when creating a binary shader archive.
 type BinaryArchiveError uint64
 
 const (
@@ -4968,7 +5144,6 @@ func (e CaptureError) String() string {
 	}
 }
 
-// The command buffer error codes that indicate why the GPU doesn’t finish executing a command buffer.
 type CommandBufferError uint64
 
 const (
@@ -4987,8 +5162,9 @@ const (
 	// Deprecated: since macOS 13.0.
 	CommandBufferErrorInvalidResource CommandBufferError = 9
 	CommandBufferErrorMemoryless      CommandBufferError = 10
-	CommandBufferErrorDeviceRemoved   CommandBufferError = 11
-	CommandBufferErrorStackOverflow   CommandBufferError = 12
+	// Deprecated: MTLCommandBufferErrorDeviceRemoved cannot occur on Apple Silicon
+	CommandBufferErrorDeviceRemoved CommandBufferError = 11
+	CommandBufferErrorStackOverflow CommandBufferError = 12
 )
 
 // String returns the CommandBufferError constant's name, or its numeric form when the
@@ -5096,7 +5272,6 @@ func (e CommandEncoderErrorState) String() string {
 	}
 }
 
-// The error codes that indicate why a GPU driver can’t create a counter sample buffer.
 type CounterSampleBufferError int64
 
 const (
@@ -5228,6 +5403,8 @@ func (e DeviceError) String() string {
 }
 
 // Indicates the location of the GPU relative to the system it’s connect to.
+//
+// Deprecated: Not applicable on Apple Silicon
 type DeviceLocation uint64
 
 const (
@@ -5258,7 +5435,6 @@ func (e DeviceLocation) String() string {
 	}
 }
 
-// Errors when compiling dynamic libraries.
 type DynamicLibraryError uint64
 
 const (
@@ -5420,23 +5596,26 @@ const (
 	// Represents the Apple family 9 GPU features that correspond to the Apple A17, M3, and M4 GPUs.
 	GPUFamilyApple9  GPUFamily = 1009
 	GPUFamilyApple10 GPUFamily = 1010
+	GPUFamilyApple11 GPUFamily = 1011
 	// Represents the Mac family 1 GPU features.
 	//
 	// Deprecated: since macOS 13.0.
 	GPUFamilyMac1 GPUFamily = 2001
 	// Represents the Mac family 2 GPU features.
 	//
-	// Deprecated: since macOS 13.0.
+	// Deprecated: since macOS 27.0.
 	GPUFamilyMac2 GPUFamily = 2002
 	// Represents the Common family 1 GPU features.
 	//
-	// Deprecated: since macOS 13.0.
+	// Deprecated: since macOS 27.0.
 	GPUFamilyCommon1 GPUFamily = 3001
 	// Represents the Common family 2 GPU features.
 	//
-	// Deprecated: since macOS 13.0.
+	// Deprecated: since macOS 27.0.
 	GPUFamilyCommon2 GPUFamily = 3002
 	// Represents the Common family 3 GPU features.
+	//
+	// Deprecated: since macOS 27.0.
 	GPUFamilyCommon3 GPUFamily = 3003
 	// Represents a family 1 Mac GPU when running an app you built with Mac Catalyst.
 	//
@@ -5475,6 +5654,8 @@ func (e GPUFamily) String() string {
 		return "GPUFamilyApple9"
 	case GPUFamilyApple10:
 		return "GPUFamilyApple10"
+	case GPUFamilyApple11:
+		return "GPUFamilyApple11"
 	case GPUFamilyMac1:
 		return "GPUFamilyMac1"
 	case GPUFamilyMac2:
@@ -5498,7 +5679,6 @@ func (e GPUFamily) String() string {
 	}
 }
 
-// The categories of errors for creating an input/output file handle.
 type IOError int64
 
 const (
@@ -5619,7 +5799,6 @@ func (e IntersectionFunctionSignature) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Metal errors related to libraries.
 type LibraryError uint64
 
 const (
@@ -6015,8 +6194,11 @@ func (e Stages) String() string {
 type TensorError int64
 
 const (
-	TensorErrorNone              TensorError = 0
-	TensorErrorInternalError     TensorError = 1
+	// No error occurred.
+	TensorErrorNone TensorError = 0
+	// An internal Metal error occurred.
+	TensorErrorInternalError TensorError = 1
+	// The tensor descriptor is invalid.
 	TensorErrorInvalidDescriptor TensorError = 2
 )
 
@@ -6311,27 +6493,55 @@ func (e QosClass) String() string {
 	}
 }
 
+type TaskSharedRegionStubs uint8
+
+const (
+	TaskSharedRegionStubsDev  TaskSharedRegionStubs = 1
+	TaskSharedRegionStubsProd TaskSharedRegionStubs = 2
+)
+
+// String returns the TaskSharedRegionStubs constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TaskSharedRegionStubs) String() string {
+	switch e {
+	case TaskSharedRegionStubsDev:
+		return "TaskSharedRegionStubsDev"
+	case TaskSharedRegionStubsProd:
+		return "TaskSharedRegionStubsProd"
+	default:
+		return fmt.Sprintf("TaskSharedRegionStubs(%d)", int64(e))
+	}
+}
+
 type VirtualMemoryGuardExceptionCode uint32
 
 const (
-	KGUARD_EXC_DEALLOC_GAP                   VirtualMemoryGuardExceptionCode = 1
-	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        VirtualMemoryGuardExceptionCode = 2
-	KGUARD_EXC_RECLAIM_INDEX_FAILURE         VirtualMemoryGuardExceptionCode = 4
-	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    VirtualMemoryGuardExceptionCode = 8
-	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    VirtualMemoryGuardExceptionCode = 9
-	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         VirtualMemoryGuardExceptionCode = 10
-	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         VirtualMemoryGuardExceptionCode = 11
-	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  VirtualMemoryGuardExceptionCode = 12
-	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    VirtualMemoryGuardExceptionCode = 13
-	KGUARD_EXC_SEC_ACCESS_FAULT              VirtualMemoryGuardExceptionCode = 98
-	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        VirtualMemoryGuardExceptionCode = 99
-	KGUARD_EXC_SEC_COPY_DENIED               VirtualMemoryGuardExceptionCode = 100
-	KGUARD_EXC_SEC_SHARING_DENIED            VirtualMemoryGuardExceptionCode = 101
-	KGUARD_EXC_MTE_SYNC_FAULT                VirtualMemoryGuardExceptionCode = 200
-	KGUARD_EXC_MTE_ASYNC_USER_FAULT          VirtualMemoryGuardExceptionCode = 201
-	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          VirtualMemoryGuardExceptionCode = 202
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT VirtualMemoryGuardExceptionCode = 203
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT VirtualMemoryGuardExceptionCode = 204
+	KGUARD_EXC_DEALLOC_GAP                  VirtualMemoryGuardExceptionCode = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE       VirtualMemoryGuardExceptionCode = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE        VirtualMemoryGuardExceptionCode = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE   VirtualMemoryGuardExceptionCode = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE   VirtualMemoryGuardExceptionCode = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE        VirtualMemoryGuardExceptionCode = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE        VirtualMemoryGuardExceptionCode = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION VirtualMemoryGuardExceptionCode = 12
+	// Guard exception sent to a thread when a CoW defeatured map attempts to copy memory which is not permitted by system policy.
+	KGUARD_EXC_COW_DEFEATURED_COPY_DENIED VirtualMemoryGuardExceptionCode = 13
+	// Guard exception sent to a thread when it attempts to extract a given type of memory in a way which is not permitted for CoW defeatured maps.
+	KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED VirtualMemoryGuardExceptionCode = 14
+	// Guard exception sent to a thread when it attempts to copy-map a memory entry which was created for sharing by a CoW defeatured map.
+	KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED VirtualMemoryGuardExceptionCode = 15
+	KGUARD_EXC_COW_DEFEATURED_FIRST                    VirtualMemoryGuardExceptionCode = 13
+	KGUARD_EXC_COW_DEFEATURED_LAST                     VirtualMemoryGuardExceptionCode = 15
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY              VirtualMemoryGuardExceptionCode = 16
+	KGUARD_EXC_SEC_ACCESS_FAULT                        VirtualMemoryGuardExceptionCode = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT                  VirtualMemoryGuardExceptionCode = 99
+	KGUARD_EXC_SEC_COPY_DENIED                         VirtualMemoryGuardExceptionCode = 100
+	KGUARD_EXC_SEC_SHARING_DENIED                      VirtualMemoryGuardExceptionCode = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                          VirtualMemoryGuardExceptionCode = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT                    VirtualMemoryGuardExceptionCode = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT                    VirtualMemoryGuardExceptionCode = 202
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT           VirtualMemoryGuardExceptionCode = 203
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT           VirtualMemoryGuardExceptionCode = 204
 )
 
 // String returns the VirtualMemoryGuardExceptionCode constant's name, or its numeric form when the
@@ -6354,6 +6564,12 @@ func (e VirtualMemoryGuardExceptionCode) String() string {
 		return "KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE"
 	case KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION:
 		return "KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION"
+	case KGUARD_EXC_COW_DEFEATURED_COPY_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_COPY_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED"
 	case KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY:
 		return "KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY"
 	case KGUARD_EXC_SEC_ACCESS_FAULT:

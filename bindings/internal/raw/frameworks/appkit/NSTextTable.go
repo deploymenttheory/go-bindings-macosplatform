@@ -60,12 +60,12 @@ func (o *NSTextTable) DrawBackgroundForBlockWithFrameInViewCharacterRangeLayoutM
 	o.Ptr().Send(_nSTextTableSelDrawBackgroundForBlockWithFrameInViewCharacterRangeLayoutManager, block.Ptr(), frameRect, controlView.Ptr(), charRange, layoutManager.Ptr())
 }
 
-func (o *NSTextTable) NumberOfColumns() uint {
-	_ret := objc.Send[uint](o.Ptr(), _nSTextTableSelNumberOfColumns)
+func (o *NSTextTable) NumberOfColumns() int {
+	_ret := objc.Send[int](o.Ptr(), _nSTextTableSelNumberOfColumns)
 	return _ret
 }
 
-func (o *NSTextTable) SetNumberOfColumns(numberOfColumns uint) {
+func (o *NSTextTable) SetNumberOfColumns(numberOfColumns int) {
 	o.Ptr().Send(_nSTextTableSelSetNumberOfColumns, numberOfColumns)
 }
 

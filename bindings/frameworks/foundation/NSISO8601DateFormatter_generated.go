@@ -19,8 +19,6 @@ import (
 // ISO8601DateFormatter is an idiomatic wrapper over the Objective-C class NSISO8601DateFormatter.
 //
 // It embeds [Formatter], promoting that type's methods.
-//
-// A formatter that converts between dates and their ISO 8601 string representations.
 type ISO8601DateFormatter struct {
 	Formatter
 }
@@ -57,14 +55,14 @@ func NewISO8601DateFormatter() *ISO8601DateFormatter {
 	return iSO8601DateFormatterAdopt(_id)
 }
 
-// WithTimeZone sets the time zone.
+// WithTimeZone sets the time zone used to create and parse date representations. When unspecified, GMT is used. Resetting this property can incur a significant performance cost, as it may cause internal state to be regenerated.
 func (idf *ISO8601DateFormatter) WithTimeZone(timeZone *TimeZone) *ISO8601DateFormatter {
 	defer runtime.KeepAlive(timeZone)
 	objc.Send[objc.ID](objref.IDOf(idf), objc.RegisterName("setTimeZone:"), objref.IDOf(timeZone))
 	return idf
 }
 
-// WithFormatOptions sets the format options.
+// WithFormatOptions sets options for generating and parsing ISO 8601 date representations. The ISO 8601 specification allows for dates to be expressed in a variety of ways. You can configure the format used to parse and generate representations by specifying various combinations of format options. > Important: Resetting this property can incur a significant performance cost, > as it may cause internal state to be regenerated.
 func (idf *ISO8601DateFormatter) WithFormatOptions(formatOptions ISO8601DateFormatOptions) *ISO8601DateFormatter {
 	objc.Send[objc.ID](objref.IDOf(idf), objc.RegisterName("setFormatOptions:"), formatOptions)
 	return idf
@@ -82,7 +80,7 @@ func (idf *ISO8601DateFormatter) WithScriptingProperties(scriptingProperties map
 	return idf
 }
 
-// StringFromDate wraps the corresponding Objective-C method.
+// StringFromDate creates and returns an ISO 8601 formatted string representation of the specified date. - Parameter date: The date to be represented. - Returns: A user-readable string representing the date.
 func (idf *ISO8601DateFormatter) StringFromDate(date time.Time) string {
 	defer runtime.KeepAlive(idf)
 	_r := objc.Send[objc.ID](objref.IDOf(idf), objc.RegisterName("stringFromDate:"), rt.TimeToNSDate(date))
@@ -92,21 +90,21 @@ func (idf *ISO8601DateFormatter) StringFromDate(date time.Time) string {
 	return purego.GoString(_r)
 }
 
-// DateFromString wraps the corresponding Objective-C method.
+// DateFromString creates and returns a date object from the specified ISO 8601 formatted string representation. - Parameter string: The ISO 8601 formatted string representation of a date. - Returns: A date object, or `nil` if no valid date was found.
 func (idf *ISO8601DateFormatter) DateFromString(str string) time.Time {
 	defer runtime.KeepAlive(idf)
 	_r := objc.Send[objc.ID](objref.IDOf(idf), objc.RegisterName("dateFromString:"), purego.NSString(str))
 	return rt.NSDateToTime(_r)
 }
 
-// TimeZone returns the time zone.
+// TimeZone returns the time zone used to create and parse date representations. When unspecified, GMT is used. Resetting this property can incur a significant performance cost, as it may cause internal state to be regenerated.
 func (idf *ISO8601DateFormatter) TimeZone() *TimeZone {
 	defer runtime.KeepAlive(idf)
 	_r := objc.Send[objc.ID](objref.IDOf(idf), objc.RegisterName("timeZone"))
 	return TimeZoneFromID(_r)
 }
 
-// FormatOptions returns the format options.
+// FormatOptions returns options for generating and parsing ISO 8601 date representations. The ISO 8601 specification allows for dates to be expressed in a variety of ways. You can configure the format used to parse and generate representations by specifying various combinations of format options. > Important: Resetting this property can incur a significant performance cost, > as it may cause internal state to be regenerated.
 func (idf *ISO8601DateFormatter) FormatOptions() ISO8601DateFormatOptions {
 	defer runtime.KeepAlive(idf)
 	_r := objc.Send[ISO8601DateFormatOptions](objref.IDOf(idf), objc.RegisterName("formatOptions"))

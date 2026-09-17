@@ -16,7 +16,7 @@ import (
 
 // AssetResourceRequestOptions is an idiomatic wrapper over the Objective-C class PHAssetResourceRequestOptions.
 //
-// A set of options affecting the delivery of underlying asset data that you request from the asset resource manager.
+// A set of options affecting the delivery of underlying asset data that you request from the asset-resource manager.
 type AssetResourceRequestOptions struct {
 	objref.Handle
 }

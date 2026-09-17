@@ -19,7 +19,7 @@ import (
 
 // MetadataObject is an idiomatic wrapper over the Objective-C class AVMetadataObject.
 //
-// MetadataObject is an abstract base — you do not construct it directly. Construct one of [MetadataBodyObject], [MetadataCatHeadObject], [MetadataDogHeadObject], [MetadataFaceObject], [MetadataMachineReadableCodeObject], [MetadataSalientObject] and pass it where a MetadataObject is accepted.
+// MetadataObject is an abstract base — you do not construct it directly. Construct one of [MetadataBodyObject], [MetadataCatHeadObject], [MetadataCinematicVideoMetadataObject], [MetadataDogHeadObject], [MetadataFaceObject], [MetadataFocusTrackedObject], [MetadataMachineReadableCodeObject], [MetadataSalientObject] and pass it where a MetadataObject is accepted.
 //
 // The abstract superclass for objects provided by a metadata capture output.
 type MetadataObject struct {
@@ -113,7 +113,7 @@ func (mo *MetadataObject) GroupID() int {
 	return _r
 }
 
-// ObjectID returns a unique identifier for each detected object type (face, body, hands, heads and salient objects) in a collection. Defaults to a value of -1 when invalid or not available. When used in conjunction with an “AVCaptureMetadataOutput“, each newly detected object that enters the scene is assigned a unique identifier. “objectID“s are never re-used as objects leave the picture and new ones enter. Objects that leave the picture and then re-enter are assigned a new “objectID“.
+// ObjectID returns a unique identifier for each detected object type (face, body, hands, heads, salient objects and focus-tracked objects) in a collection. Defaults to a value of -1 when invalid or not available. When used in conjunction with an “AVCaptureMetadataOutput“, each newly detected object that enters the scene is assigned a unique identifier. “objectID“s are never re-used as objects leave the picture and new ones enter. Objects that leave the picture and then re-enter are assigned a new “objectID“. Focus-tracked objects are an exception. They retain the same “objectID“ when leaving and re-entering the picture.
 func (mo *MetadataObject) ObjectID() int {
 	defer runtime.KeepAlive(mo)
 	_r := objc.Send[int](objref.IDOf(mo), objc.RegisterName("objectID"))

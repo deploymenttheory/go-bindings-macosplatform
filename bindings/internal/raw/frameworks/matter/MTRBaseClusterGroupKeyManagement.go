@@ -100,7 +100,7 @@ func MTRBaseClusterGroupKeyManagementFromID(id objc.ID) *MTRBaseClusterGroupKeyM
 	return o
 }
 
-// Command KeySetWrite Write a new set of keys for the given key set id.
+// Command KeySetWrite This command is used by Administrators to set the state of a given Group Key Set, including atomically updating the state of all epoch keys.
 func (o *MTRBaseClusterGroupKeyManagement) KeySetWriteWithParamsCompletion(params *MTRGroupKeyManagementClusterKeySetWriteParams, completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -112,7 +112,7 @@ func (o *MTRBaseClusterGroupKeyManagement) KeySetWriteWithParamsCompletion(param
 	o.Ptr().Send(_mTRBaseClusterGroupKeyManagementSelKeySetWriteWithParamsCompletion, params.Ptr(), __block_completion)
 }
 
-// Command KeySetRead Read the keys for a given key set id.
+// Command KeySetRead This command is used by Administrators to read the state of a given Group Key Set.
 func (o *MTRBaseClusterGroupKeyManagement) KeySetReadWithParamsCompletion(params *MTRGroupKeyManagementClusterKeySetReadParams, completion func(*MTRGroupKeyManagementClusterKeySetReadResponseParams, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -127,7 +127,7 @@ func (o *MTRBaseClusterGroupKeyManagement) KeySetReadWithParamsCompletion(params
 	o.Ptr().Send(_mTRBaseClusterGroupKeyManagementSelKeySetReadWithParamsCompletion, params.Ptr(), __block_completion)
 }
 
-// Command KeySetRemove Revoke a Root Key from a Group
+// Command KeySetRemove This command is used by Administrators to remove all state of a given Group Key Set.
 func (o *MTRBaseClusterGroupKeyManagement) KeySetRemoveWithParamsCompletion(params *MTRGroupKeyManagementClusterKeySetRemoveParams, completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -139,7 +139,7 @@ func (o *MTRBaseClusterGroupKeyManagement) KeySetRemoveWithParamsCompletion(para
 	o.Ptr().Send(_mTRBaseClusterGroupKeyManagementSelKeySetRemoveWithParamsCompletion, params.Ptr(), __block_completion)
 }
 
-// Command KeySetReadAllIndices Return the list of Group Key Sets associated with the accessing fabric
+// Command KeySetReadAllIndices This command is used by Administrators to query a list of all Group Key Sets associated with the accessing fabric.
 func (o *MTRBaseClusterGroupKeyManagement) KeySetReadAllIndicesWithParamsCompletion(params *MTRGroupKeyManagementClusterKeySetReadAllIndicesParams, completion func(*MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {

@@ -440,6 +440,19 @@ func (c *Context) PrepareRenderFromRectToDestinationAtPoint(image *Image, fromRe
 	return nil
 }
 
+// EstimateRenderFromRectToDestinationAtPoint returns a task with estimated resource statistics for a render, without executing the render.
+func (c *Context) EstimateRenderFromRectToDestinationAtPoint(image *Image, fromRect corefoundation.CGRect, destination *RenderDestination, atPoint corefoundation.CGPoint) (result *RenderTask, err error) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(image)
+	defer runtime.KeepAlive(destination)
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("estimateRender:fromRect:toDestination:atPoint:error:"), objref.IDOf(image), fromRect, objref.IDOf(destination), atPoint, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return RenderTaskFromID(_r), nil
+}
+
 // StartTaskToClear fills the entire destination with black or clear depending on its alphaMode.
 func (c *Context) StartTaskToClear(destination *RenderDestination) (result *RenderTask, err error) {
 	defer runtime.KeepAlive(c)

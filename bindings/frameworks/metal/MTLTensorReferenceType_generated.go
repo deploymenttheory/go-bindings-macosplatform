@@ -67,11 +67,20 @@ func (trt *TensorReferenceType) IndexType() DataType {
 	return _r
 }
 
-// Dimensions returns the array of sizes, in elements, one for each dimension of this tensor. Because shader-bound tensors have dynamic extents, the “MTLTensorExtents/rank“ of `dimensions` corresponds to the rank the shader function specifies, and “MTLTensorExtents/extentsAtDimensionIndex:“ always returns a value of -1.
+// Dimensions returns the array of sizes, in elements, one for each dimension of this tensor. For shader-bound tensors with dynamic extents, the “MTLTensorExtents/rank“ of `dimensions` corresponds to the rank the shader function specifies, and “MTLTensorExtents/extentAtDimensionIndex:“ always returns a value of -1.
 func (trt *TensorReferenceType) Dimensions() *TensorExtents {
 	defer runtime.KeepAlive(trt)
 	_r := objc.Send[objc.ID](objref.IDOf(trt), objc.RegisterName("dimensions"))
 	return TensorExtentsFromID(_r)
+}
+
+// AuxiliaryPlanes returns the auxiliary planes that this tensor reference requires. Returns an array of “MTLTensorAuxiliaryPlaneType“ objects describing each auxiliary plane the shader expects. Empty if the tensor has no auxiliary planes.
+//
+// AuxiliaryPlanes returns the collection as a Go slice.
+func (trt *TensorReferenceType) AuxiliaryPlanes() []*TensorAuxiliaryPlaneType {
+	defer runtime.KeepAlive(trt)
+	_arr := objc.Send[objc.ID](objref.IDOf(trt), objc.RegisterName("auxiliaryPlanes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TensorAuxiliaryPlaneType { return TensorAuxiliaryPlaneTypeFromID(_id) })
 }
 
 // Access returns a value that represents the read/write permissions of the tensor.

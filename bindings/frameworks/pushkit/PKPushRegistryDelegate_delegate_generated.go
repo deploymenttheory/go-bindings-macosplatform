@@ -19,7 +19,7 @@ import (
 // (PushRegistryDelegate…Handler): implement the ones you need on the same value and the
 // framework will call them too.
 type PushRegistryDelegate interface {
-	// PushRegistryDidUpdatePushCredentialsForType tells the delegate that the system updated the credentials for the specified type of push notification. The system calls this method when it receives new credentials (including a push token) for the specified push type. - Parameters: - registry: The “PushKit/PKPushRegistry“ instance responsible for the delegate callback. - credentials: The push credentials that can be used to send pushes to the device for the specified push type. - type: One of the requested notification types. This type is present in the “PushKit/PKPushRegistry/desiredPushTypes“ property of the push registry.
+	// PushRegistryDidUpdatePushCredentialsForType tells the delegate that the system updated the credentials for the specified type of push notification. The system calls this method when it receives new credentials (including a push token) for the specified push type. - Parameters: - registry: The ``PushKit/PKPushRegistry`` instance responsible for the delegate callback. - credentials: The push credentials that can be used to send pushes to the device for the specified push type. - type: One of the requested notification types. This type is present in the ``PushKit/PKPushRegistry/desiredPushTypes`` property of the push registry.
 	PushRegistryDidUpdatePushCredentialsForType(registry *PushRegistry, pushCredentials *PushCredentials, type_ obj.Object)
 }
 

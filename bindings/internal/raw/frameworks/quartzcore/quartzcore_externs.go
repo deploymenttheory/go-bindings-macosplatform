@@ -7,26 +7,57 @@ import (
 	"unsafe"
 
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/foundation"
 )
 
-func CADynamicRangeAutomatic() uintptr {
+func CADynamicRangeAutomatic() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "CADynamicRangeAutomatic")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CADynamicRangeConstrainedHigh() uintptr {
+func CADynamicRangeConstrainedHigh() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "CADynamicRangeConstrainedHigh")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CADynamicRangeHigh() uintptr {
+func CADynamicRangeHigh() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "CADynamicRangeHigh")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CADynamicRangeStandard() uintptr {
+func CADynamicRangeStandard() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "CADynamicRangeStandard")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func CAFrameRateRangeDefault() CAFrameRateRange {
@@ -37,19 +68,40 @@ func CAFrameRateRangeDefault() CAFrameRateRange {
 	return *(*CAFrameRateRange)(unsafe.Pointer(ptr))
 }
 
-func CAToneMapModeAutomatic() uintptr {
+func CAToneMapModeAutomatic() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "CAToneMapModeAutomatic")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CAToneMapModeIfSupported() uintptr {
+func CAToneMapModeIfSupported() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "CAToneMapModeIfSupported")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CAToneMapModeNever() uintptr {
+func CAToneMapModeNever() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "CAToneMapModeNever")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func CATransform3DIdentity() CATransform3D {
@@ -60,522 +112,1250 @@ func CATransform3DIdentity() CATransform3D {
 	return *(*CATransform3D)(unsafe.Pointer(ptr))
 }
 
-func KCAAlignmentCenter() uintptr {
+func KCAAlignmentCenter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAAlignmentCenter")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAAlignmentJustified() uintptr {
+func KCAAlignmentJustified() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAAlignmentJustified")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAAlignmentLeft() uintptr {
+func KCAAlignmentLeft() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAAlignmentLeft")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAAlignmentNatural() uintptr {
+func KCAAlignmentNatural() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAAlignmentNatural")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAAlignmentRight() uintptr {
+func KCAAlignmentRight() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAAlignmentRight")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAAnimationCubic() uintptr {
+func KCAAnimationCubic() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAAnimationCubic")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAAnimationCubicPaced() uintptr {
+func KCAAnimationCubicPaced() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAAnimationCubicPaced")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAAnimationDiscrete() uintptr {
+func KCAAnimationDiscrete() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAAnimationDiscrete")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAAnimationLinear() uintptr {
+func KCAAnimationLinear() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAAnimationLinear")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAAnimationPaced() uintptr {
+func KCAAnimationPaced() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAAnimationPaced")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAAnimationRotateAuto() uintptr {
+func KCAAnimationRotateAuto() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAAnimationRotateAuto")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAAnimationRotateAutoReverse() uintptr {
+func KCAAnimationRotateAutoReverse() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAAnimationRotateAutoReverse")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAContentsFormatAutomatic() uintptr {
+func KCAContentsFormatAutomatic() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAContentsFormatAutomatic")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAContentsFormatGray8Uint() uintptr {
+func KCAContentsFormatGray8Uint() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAContentsFormatGray8Uint")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAContentsFormatRGBA16Float() uintptr {
+func KCAContentsFormatRGBA16Float() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAContentsFormatRGBA16Float")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAContentsFormatRGBA8Uint() uintptr {
+func KCAContentsFormatRGBA8Uint() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAContentsFormatRGBA8Uint")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCACornerCurveCircular() uintptr {
+func KCACornerCurveCircular() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCACornerCurveCircular")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCACornerCurveContinuous() uintptr {
+func KCACornerCurveContinuous() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCACornerCurveContinuous")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAEmitterLayerAdditive() uintptr {
+func KCAEmitterLayerAdditive() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAEmitterLayerAdditive")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAEmitterLayerBackToFront() uintptr {
+func KCAEmitterLayerBackToFront() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAEmitterLayerBackToFront")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAEmitterLayerCircle() uintptr {
+func KCAEmitterLayerCircle() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAEmitterLayerCircle")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAEmitterLayerCuboid() uintptr {
+func KCAEmitterLayerCuboid() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAEmitterLayerCuboid")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAEmitterLayerLine() uintptr {
+func KCAEmitterLayerLine() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAEmitterLayerLine")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAEmitterLayerOldestFirst() uintptr {
+func KCAEmitterLayerOldestFirst() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAEmitterLayerOldestFirst")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAEmitterLayerOldestLast() uintptr {
+func KCAEmitterLayerOldestLast() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAEmitterLayerOldestLast")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAEmitterLayerOutline() uintptr {
+func KCAEmitterLayerOutline() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAEmitterLayerOutline")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAEmitterLayerPoint() uintptr {
+func KCAEmitterLayerPoint() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAEmitterLayerPoint")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAEmitterLayerPoints() uintptr {
+func KCAEmitterLayerPoints() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAEmitterLayerPoints")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAEmitterLayerRectangle() uintptr {
+func KCAEmitterLayerRectangle() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAEmitterLayerRectangle")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAEmitterLayerSphere() uintptr {
+func KCAEmitterLayerSphere() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAEmitterLayerSphere")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAEmitterLayerSurface() uintptr {
+func KCAEmitterLayerSurface() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAEmitterLayerSurface")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAEmitterLayerUnordered() uintptr {
+func KCAEmitterLayerUnordered() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAEmitterLayerUnordered")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAEmitterLayerVolume() uintptr {
+func KCAEmitterLayerVolume() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAEmitterLayerVolume")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAFillModeBackwards() uintptr {
+func KCAFillModeBackwards() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAFillModeBackwards")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAFillModeBoth() uintptr {
+func KCAFillModeBoth() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAFillModeBoth")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAFillModeForwards() uintptr {
+func KCAFillModeForwards() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAFillModeForwards")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAFillModeRemoved() uintptr {
+func KCAFillModeRemoved() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAFillModeRemoved")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAFillRuleEvenOdd() uintptr {
+func KCAFillRuleEvenOdd() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAFillRuleEvenOdd")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAFillRuleNonZero() uintptr {
+func KCAFillRuleNonZero() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAFillRuleNonZero")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAFilterLinear() uintptr {
+func KCAFilterLinear() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAFilterLinear")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAFilterNearest() uintptr {
+func KCAFilterNearest() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAFilterNearest")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAFilterTrilinear() uintptr {
+func KCAFilterTrilinear() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAFilterTrilinear")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAGradientLayerAxial() uintptr {
+func KCAGradientLayerAxial() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAGradientLayerAxial")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAGradientLayerConic() uintptr {
+func KCAGradientLayerConic() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAGradientLayerConic")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAGradientLayerRadial() uintptr {
+func KCAGradientLayerRadial() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAGradientLayerRadial")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAGravityBottom() uintptr {
+func KCAGravityBottom() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAGravityBottom")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAGravityBottomLeft() uintptr {
+func KCAGravityBottomLeft() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAGravityBottomLeft")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAGravityBottomRight() uintptr {
+func KCAGravityBottomRight() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAGravityBottomRight")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAGravityCenter() uintptr {
+func KCAGravityCenter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAGravityCenter")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAGravityLeft() uintptr {
+func KCAGravityLeft() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAGravityLeft")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAGravityResize() uintptr {
+func KCAGravityResize() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAGravityResize")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAGravityResizeAspect() uintptr {
+func KCAGravityResizeAspect() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAGravityResizeAspect")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAGravityResizeAspectFill() uintptr {
+func KCAGravityResizeAspectFill() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAGravityResizeAspectFill")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAGravityRight() uintptr {
+func KCAGravityRight() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAGravityRight")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAGravityTop() uintptr {
+func KCAGravityTop() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAGravityTop")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAGravityTopLeft() uintptr {
+func KCAGravityTopLeft() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAGravityTopLeft")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAGravityTopRight() uintptr {
+func KCAGravityTopRight() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAGravityTopRight")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCALineCapButt() uintptr {
+func KCALineCapButt() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCALineCapButt")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCALineCapRound() uintptr {
+func KCALineCapRound() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCALineCapRound")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCALineCapSquare() uintptr {
+func KCALineCapSquare() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCALineCapSquare")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCALineJoinBevel() uintptr {
+func KCALineJoinBevel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCALineJoinBevel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCALineJoinMiter() uintptr {
+func KCALineJoinMiter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCALineJoinMiter")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCALineJoinRound() uintptr {
+func KCALineJoinRound() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCALineJoinRound")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAMediaTimingFunctionDefault() uintptr {
+func KCAMediaTimingFunctionDefault() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAMediaTimingFunctionDefault")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAMediaTimingFunctionEaseIn() uintptr {
+func KCAMediaTimingFunctionEaseIn() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAMediaTimingFunctionEaseIn")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAMediaTimingFunctionEaseInEaseOut() uintptr {
+func KCAMediaTimingFunctionEaseInEaseOut() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAMediaTimingFunctionEaseInEaseOut")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAMediaTimingFunctionEaseOut() uintptr {
+func KCAMediaTimingFunctionEaseOut() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAMediaTimingFunctionEaseOut")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAMediaTimingFunctionLinear() uintptr {
+func KCAMediaTimingFunctionLinear() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAMediaTimingFunctionLinear")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAOnOrderIn() uintptr {
+func KCAOnOrderIn() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAOnOrderIn")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAOnOrderOut() uintptr {
+func KCAOnOrderOut() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAOnOrderOut")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCARendererColorSpace() uintptr {
+func KCARendererColorSpace() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCARendererColorSpace")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCARendererMetalCommandQueue() uintptr {
+func KCARendererMetalCommandQueue() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCARendererMetalCommandQueue")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAScrollBoth() uintptr {
+func KCAScrollBoth() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAScrollBoth")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAScrollHorizontally() uintptr {
+func KCAScrollHorizontally() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAScrollHorizontally")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAScrollNone() uintptr {
+func KCAScrollNone() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAScrollNone")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAScrollVertically() uintptr {
+func KCAScrollVertically() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAScrollVertically")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCATransactionAnimationDuration() uintptr {
+func KCATransactionAnimationDuration() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCATransactionAnimationDuration")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCATransactionAnimationTimingFunction() uintptr {
+func KCATransactionAnimationTimingFunction() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCATransactionAnimationTimingFunction")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCATransactionCompletionBlock() uintptr {
+func KCATransactionCompletionBlock() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCATransactionCompletionBlock")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCATransactionDisableActions() uintptr {
+func KCATransactionDisableActions() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCATransactionDisableActions")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCATransition() uintptr {
+func KCATransition() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCATransition")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCATransitionFade() uintptr {
+func KCATransitionFade() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCATransitionFade")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCATransitionFromBottom() uintptr {
+func KCATransitionFromBottom() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCATransitionFromBottom")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCATransitionFromLeft() uintptr {
+func KCATransitionFromLeft() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCATransitionFromLeft")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCATransitionFromRight() uintptr {
+func KCATransitionFromRight() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCATransitionFromRight")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCATransitionFromTop() uintptr {
+func KCATransitionFromTop() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCATransitionFromTop")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCATransitionMoveIn() uintptr {
+func KCATransitionMoveIn() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCATransitionMoveIn")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCATransitionPush() uintptr {
+func KCATransitionPush() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCATransitionPush")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCATransitionReveal() uintptr {
+func KCATransitionReveal() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCATransitionReveal")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCATruncationEnd() uintptr {
+func KCATruncationEnd() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCATruncationEnd")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCATruncationMiddle() uintptr {
+func KCATruncationMiddle() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCATruncationMiddle")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCATruncationNone() uintptr {
+func KCATruncationNone() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCATruncationNone")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCATruncationStart() uintptr {
+func KCATruncationStart() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCATruncationStart")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAValueFunctionRotateX() uintptr {
+func KCAValueFunctionRotateX() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAValueFunctionRotateX")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAValueFunctionRotateY() uintptr {
+func KCAValueFunctionRotateY() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAValueFunctionRotateY")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAValueFunctionRotateZ() uintptr {
+func KCAValueFunctionRotateZ() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAValueFunctionRotateZ")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAValueFunctionScale() uintptr {
+func KCAValueFunctionScale() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAValueFunctionScale")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAValueFunctionScaleX() uintptr {
+func KCAValueFunctionScaleX() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAValueFunctionScaleX")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAValueFunctionScaleY() uintptr {
+func KCAValueFunctionScaleY() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAValueFunctionScaleY")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAValueFunctionScaleZ() uintptr {
+func KCAValueFunctionScaleZ() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAValueFunctionScaleZ")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAValueFunctionTranslate() uintptr {
+func KCAValueFunctionTranslate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAValueFunctionTranslate")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAValueFunctionTranslateX() uintptr {
+func KCAValueFunctionTranslateX() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAValueFunctionTranslateX")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAValueFunctionTranslateY() uintptr {
+func KCAValueFunctionTranslateY() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAValueFunctionTranslateY")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCAValueFunctionTranslateZ() uintptr {
+func KCAValueFunctionTranslateZ() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAValueFunctionTranslateZ")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }

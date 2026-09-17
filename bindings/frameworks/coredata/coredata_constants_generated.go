@@ -430,6 +430,11 @@ func NSMigrationEntityPolicyKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSMigrationEntityPolicyKey")))
 }
 
+// NSPersistentCloudKitContainerEventChangedNotification returns the string constant NSPersistentCloudKitContainerEventChangedNotification, for use as a dictionary key or argument.
+func NSPersistentCloudKitContainerEventChangedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPersistentCloudKitContainerEventChangedNotification")))
+}
+
 // NSPersistentCloudKitContainerEventUserInfoKey returns the string constant NSPersistentCloudKitContainerEventUserInfoKey, for use as a dictionary key or argument.
 func NSPersistentCloudKitContainerEventUserInfoKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSPersistentCloudKitContainerEventUserInfoKey")))
@@ -467,8 +472,3 @@ func NSOverwriteMergePolicy() uintptr { return _symbol("NSOverwriteMergePolicy")
 
 // NSRollbackMergePolicy returns the address of the symbol NSRollbackMergePolicy.
 func NSRollbackMergePolicy() uintptr { return _symbol("NSRollbackMergePolicy") }
-
-// NSPersistentCloudKitContainerEventChangedNotification returns the address of the symbol NSPersistentCloudKitContainerEventChangedNotification.
-func NSPersistentCloudKitContainerEventChangedNotification() uintptr {
-	return _symbol("NSPersistentCloudKitContainerEventChangedNotification")
-}

@@ -125,6 +125,18 @@ func (iro *ImageRequestOptions) WithAllowSecondaryDegradedImage(allowSecondaryDe
 	return iro
 }
 
+// WithPreferHDR sets request HDR image data if available (such as PQ/HLG formats).
+func (iro *ImageRequestOptions) WithPreferHDR(preferHDR bool) *ImageRequestOptions {
+	objc.Send[objc.ID](objref.IDOf(iro), objc.RegisterName("setPreferHDR:"), preferHDR)
+	return iro
+}
+
+// WithTargetHDRHeadroom sets target HDR headroom for image rendering.
+func (iro *ImageRequestOptions) WithTargetHDRHeadroom(targetHDRHeadroom float64) *ImageRequestOptions {
+	objc.Send[objc.ID](objref.IDOf(iro), objc.RegisterName("setTargetHDRHeadroom:"), targetHDRHeadroom)
+	return iro
+}
+
 // DeliveryMode returns the delivery mode.
 func (iro *ImageRequestOptions) DeliveryMode() ImageRequestOptionsDeliveryMode {
 	defer runtime.KeepAlive(iro)
@@ -164,5 +176,19 @@ func (iro *ImageRequestOptions) IsSynchronous() bool {
 func (iro *ImageRequestOptions) AllowSecondaryDegradedImage() bool {
 	defer runtime.KeepAlive(iro)
 	_r := objc.Send[bool](objref.IDOf(iro), objc.RegisterName("allowSecondaryDegradedImage"))
+	return _r
+}
+
+// PreferHDR reports whether request HDR image data if available (such as PQ/HLG formats). When set to `YES`, the image manager will attempt to provide HDR image data if the asset contains HDR content. Defaults to `NO`.
+func (iro *ImageRequestOptions) PreferHDR() bool {
+	defer runtime.KeepAlive(iro)
+	_r := objc.Send[bool](objref.IDOf(iro), objc.RegisterName("preferHDR"))
+	return _r
+}
+
+// TargetHDRHeadroom returns target HDR headroom for image rendering. Specifies the target headroom value for HDR image rendering. Headroom represents the ratio between the maximum display brightness and standard dynamic range (SDR) white level. - A headroom value of `0.0` means "headroom unknown". Images with unknown content headroom will be excluded from tone mapping, following CGImage documentation behavior. - Headroom values less than `0.0` or between `0.0` and `1.0` (exclusive) are undefined and will be clamped to `0.0` (unknown) rather than throwing an error. - Headroom is dependent on the current display capabilities. It is the responsibility of the caller to re-request the image if the display's headroom characteristics change. Swift view default behavior applies to views that use images outside of the current display headroom supported range. Defaults to `1.0` (SDR, fully tone mapped).
+func (iro *ImageRequestOptions) TargetHDRHeadroom() float64 {
+	defer runtime.KeepAlive(iro)
+	_r := objc.Send[float64](objref.IDOf(iro), objc.RegisterName("targetHDRHeadroom"))
 	return _r
 }

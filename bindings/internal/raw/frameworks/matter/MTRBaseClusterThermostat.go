@@ -515,7 +515,7 @@ func MTRBaseClusterThermostatFromID(id objc.ID) *MTRBaseClusterThermostat {
 	return o
 }
 
-// Command SetpointRaiseLower Upon receipt, the attributes for the indicated setpoint(s) SHALL have the amount specified in the Amount field added to them.
+// Command SetpointRaiseLower This command will raise or lower the setpoint based on the provided values.
 func (o *MTRBaseClusterThermostat) SetpointRaiseLowerWithParamsCompletion(params *MTRThermostatClusterSetpointRaiseLowerParams, completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {

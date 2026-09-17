@@ -1075,12 +1075,30 @@ func _loadLibrary() {
 	_register("CGPDFContextAddDocumentMetadata", func() {
 		purego.RegisterLibFunc(&_fnCGPDFContextAddDocumentMetadata, _coregraphicsLib, "CGPDFContextAddDocumentMetadata")
 	})
+	_register("CGPDFContextAddStructureTreeRootChild", func() {
+		purego.RegisterLibFunc(&_fnCGPDFContextAddStructureTreeRootChild, _coregraphicsLib, "CGPDFContextAddStructureTreeRootChild")
+	})
+	_register("CGPDFContextBeginMarkedContentSequence", func() {
+		purego.RegisterLibFunc(&_fnCGPDFContextBeginMarkedContentSequence, _coregraphicsLib, "CGPDFContextBeginMarkedContentSequence")
+	})
+	_register("CGPDFContextBeginNonStructuralMarkedContentSequence", func() {
+		purego.RegisterLibFunc(&_fnCGPDFContextBeginNonStructuralMarkedContentSequence, _coregraphicsLib, "CGPDFContextBeginNonStructuralMarkedContentSequence")
+	})
+	_register("CGPDFContextBeginObjectReference", func() {
+		purego.RegisterLibFunc(&_fnCGPDFContextBeginObjectReference, _coregraphicsLib, "CGPDFContextBeginObjectReference")
+	})
 	_register("CGPDFContextBeginPage", func() { purego.RegisterLibFunc(&_fnCGPDFContextBeginPage, _coregraphicsLib, "CGPDFContextBeginPage") })
 	_register("CGPDFContextBeginTag", func() { purego.RegisterLibFunc(&_fnCGPDFContextBeginTag, _coregraphicsLib, "CGPDFContextBeginTag") })
 	_register("CGPDFContextClose", func() { purego.RegisterLibFunc(&_fnCGPDFContextClose, _coregraphicsLib, "CGPDFContextClose") })
 	_register("CGPDFContextCreate", func() { purego.RegisterLibFunc(&_fnCGPDFContextCreate, _coregraphicsLib, "CGPDFContextCreate") })
 	_register("CGPDFContextCreateWithURL", func() {
 		purego.RegisterLibFunc(&_fnCGPDFContextCreateWithURL, _coregraphicsLib, "CGPDFContextCreateWithURL")
+	})
+	_register("CGPDFContextEndMarkedContentSequence", func() {
+		purego.RegisterLibFunc(&_fnCGPDFContextEndMarkedContentSequence, _coregraphicsLib, "CGPDFContextEndMarkedContentSequence")
+	})
+	_register("CGPDFContextEndObjectReference", func() {
+		purego.RegisterLibFunc(&_fnCGPDFContextEndObjectReference, _coregraphicsLib, "CGPDFContextEndObjectReference")
 	})
 	_register("CGPDFContextEndPage", func() { purego.RegisterLibFunc(&_fnCGPDFContextEndPage, _coregraphicsLib, "CGPDFContextEndPage") })
 	_register("CGPDFContextEndTag", func() { purego.RegisterLibFunc(&_fnCGPDFContextEndTag, _coregraphicsLib, "CGPDFContextEndTag") })
@@ -1190,6 +1208,12 @@ func _loadLibrary() {
 	_register("CGPDFDocumentUnlockWithPassword", func() {
 		purego.RegisterLibFunc(&_fnCGPDFDocumentUnlockWithPassword, _coregraphicsLib, "CGPDFDocumentUnlockWithPassword")
 	})
+	_register("CGPDFMarkedContentItemRelease", func() {
+		purego.RegisterLibFunc(&_fnCGPDFMarkedContentItemRelease, _coregraphicsLib, "CGPDFMarkedContentItemRelease")
+	})
+	_register("CGPDFMarkedContentItemRetain", func() {
+		purego.RegisterLibFunc(&_fnCGPDFMarkedContentItemRetain, _coregraphicsLib, "CGPDFMarkedContentItemRetain")
+	})
 	_register("CGPDFObjectGetType", func() { purego.RegisterLibFunc(&_fnCGPDFObjectGetType, _coregraphicsLib, "CGPDFObjectGetType") })
 	_register("CGPDFObjectGetValue", func() { purego.RegisterLibFunc(&_fnCGPDFObjectGetValue, _coregraphicsLib, "CGPDFObjectGetValue") })
 	_register("CGPDFOperatorTableCreate", func() {
@@ -1246,6 +1270,36 @@ func _loadLibrary() {
 	})
 	_register("CGPDFStringGetBytePtr", func() { purego.RegisterLibFunc(&_fnCGPDFStringGetBytePtr, _coregraphicsLib, "CGPDFStringGetBytePtr") })
 	_register("CGPDFStringGetLength", func() { purego.RegisterLibFunc(&_fnCGPDFStringGetLength, _coregraphicsLib, "CGPDFStringGetLength") })
+	_register("CGPDFStructureElementAddMarkedContentItem", func() {
+		purego.RegisterLibFunc(&_fnCGPDFStructureElementAddMarkedContentItem, _coregraphicsLib, "CGPDFStructureElementAddMarkedContentItem")
+	})
+	_register("CGPDFStructureElementAddStructureElement", func() {
+		purego.RegisterLibFunc(&_fnCGPDFStructureElementAddStructureElement, _coregraphicsLib, "CGPDFStructureElementAddStructureElement")
+	})
+	_register("CGPDFStructureElementCreate", func() {
+		purego.RegisterLibFunc(&_fnCGPDFStructureElementCreate, _coregraphicsLib, "CGPDFStructureElementCreate")
+	})
+	_register("CGPDFStructureElementRelease", func() {
+		purego.RegisterLibFunc(&_fnCGPDFStructureElementRelease, _coregraphicsLib, "CGPDFStructureElementRelease")
+	})
+	_register("CGPDFStructureElementRetain", func() {
+		purego.RegisterLibFunc(&_fnCGPDFStructureElementRetain, _coregraphicsLib, "CGPDFStructureElementRetain")
+	})
+	_register("CGPDFStructureElementSetActualText", func() {
+		purego.RegisterLibFunc(&_fnCGPDFStructureElementSetActualText, _coregraphicsLib, "CGPDFStructureElementSetActualText")
+	})
+	_register("CGPDFStructureElementSetAlternativeText", func() {
+		purego.RegisterLibFunc(&_fnCGPDFStructureElementSetAlternativeText, _coregraphicsLib, "CGPDFStructureElementSetAlternativeText")
+	})
+	_register("CGPDFStructureElementSetExpansionText", func() {
+		purego.RegisterLibFunc(&_fnCGPDFStructureElementSetExpansionText, _coregraphicsLib, "CGPDFStructureElementSetExpansionText")
+	})
+	_register("CGPDFStructureElementSetLanguageIdentifier", func() {
+		purego.RegisterLibFunc(&_fnCGPDFStructureElementSetLanguageIdentifier, _coregraphicsLib, "CGPDFStructureElementSetLanguageIdentifier")
+	})
+	_register("CGPDFStructureElementSetTitle", func() {
+		purego.RegisterLibFunc(&_fnCGPDFStructureElementSetTitle, _coregraphicsLib, "CGPDFStructureElementSetTitle")
+	})
 	_register("CGPDFTagTypeGetName", func() { purego.RegisterLibFunc(&_fnCGPDFTagTypeGetName, _coregraphicsLib, "CGPDFTagTypeGetName") })
 	_register("CGPSConverterAbort", func() { purego.RegisterLibFunc(&_fnCGPSConverterAbort, _coregraphicsLib, "CGPSConverterAbort") })
 	_register("CGPSConverterConvert", func() { purego.RegisterLibFunc(&_fnCGPSConverterConvert, _coregraphicsLib, "CGPSConverterConvert") })

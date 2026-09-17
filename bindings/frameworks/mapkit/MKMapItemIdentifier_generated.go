@@ -15,8 +15,6 @@ import (
 )
 
 // MapItemIdentifier is an idiomatic wrapper over the Objective-C class MKMapItemIdentifier.
-//
-// A unique identifier for a place.
 type MapItemIdentifier struct {
 	objref.Handle
 }

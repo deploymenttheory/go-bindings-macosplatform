@@ -17,8 +17,6 @@ import (
 // Condition is an idiomatic wrapper over the Objective-C class CLCondition.
 //
 // Condition is an abstract base — you do not construct it directly. Construct one of [BeaconIdentityCondition], [CircularGeographicCondition] and pass it where a Condition is accepted.
-//
-// The abstract base class for all other monitor conditions.
 type Condition struct {
 	objref.Handle
 }

@@ -8,7 +8,6 @@ import (
 	"fmt"
 )
 
-// The enumeration of reasons the haptic engine stopped running.
 type HapticEngineStoppedReason int64
 
 const (
@@ -44,7 +43,6 @@ func (e HapticEngineStoppedReason) String() string {
 	}
 }
 
-// Possible actions to take after the haptic engine finishes execution.
 type HapticEngineFinishedAction int64
 
 const (
@@ -65,7 +63,6 @@ func (e HapticEngineFinishedAction) String() string {
 	}
 }
 
-// Error codes for framework operations.
 type HapticErrorCode int64
 
 const (

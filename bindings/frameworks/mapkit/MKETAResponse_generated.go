@@ -17,8 +17,6 @@ import (
 )
 
 // ETAResponse is an idiomatic wrapper over the Objective-C class MKETAResponse.
-//
-// The travel-time information that Apple servers return.
 type ETAResponse struct {
 	objref.Handle
 }

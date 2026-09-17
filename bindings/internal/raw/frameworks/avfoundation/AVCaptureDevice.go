@@ -51,6 +51,7 @@ var (
 	_aVCaptureDeviceSelMinSupportedLockedVideoFrameDuration                                              = objc.RegisterName("minSupportedLockedVideoFrameDuration")
 	_aVCaptureDeviceSelIsFollowingExternalSyncDevice                                                     = objc.RegisterName("isFollowingExternalSyncDevice")
 	_aVCaptureDeviceSelMinSupportedExternalSyncFrameDuration                                             = objc.RegisterName("minSupportedExternalSyncFrameDuration")
+	_aVCaptureDeviceSelIsAdjustingSignalCompensationDelayWhileRunningSupported                           = objc.RegisterName("isAdjustingSignalCompensationDelayWhileRunningSupported")
 	_aVCaptureDeviceSelIsAutoVideoFrameRateEnabled                                                       = objc.RegisterName("isAutoVideoFrameRateEnabled")
 	_aVCaptureDeviceSelSetAutoVideoFrameRateEnabled                                                      = objc.RegisterName("setAutoVideoFrameRateEnabled:")
 	_aVCaptureDeviceSelInputSources                                                                      = objc.RegisterName("inputSources")
@@ -62,7 +63,9 @@ var (
 	_aVCaptureDeviceSelUserPreferredCamera                                                               = objc.RegisterName("userPreferredCamera")
 	_aVCaptureDeviceSelSetUserPreferredCamera                                                            = objc.RegisterName("setUserPreferredCamera:")
 	_aVCaptureDeviceSelSystemPreferredCamera                                                             = objc.RegisterName("systemPreferredCamera")
+	_aVCaptureDeviceSelSetPrimaryConstituentDeviceSwitchingBehaviorLockedWithDevice                      = objc.RegisterName("setPrimaryConstituentDeviceSwitchingBehaviorLockedWithDevice:")
 	_aVCaptureDeviceSelSetPrimaryConstituentDeviceSwitchingBehaviorRestrictedSwitchingBehaviorConditions = objc.RegisterName("setPrimaryConstituentDeviceSwitchingBehavior:restrictedSwitchingBehaviorConditions:")
+	_aVCaptureDeviceSelIsPrimaryConstituentDeviceSwitchingBehaviorLockedWithDeviceSupported              = objc.RegisterName("isPrimaryConstituentDeviceSwitchingBehaviorLockedWithDeviceSupported")
 	_aVCaptureDeviceSelPrimaryConstituentDeviceSwitchingBehavior                                         = objc.RegisterName("primaryConstituentDeviceSwitchingBehavior")
 	_aVCaptureDeviceSelPrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions                     = objc.RegisterName("primaryConstituentDeviceRestrictedSwitchingBehaviorConditions")
 	_aVCaptureDeviceSelActivePrimaryConstituentDeviceSwitchingBehavior                                   = objc.RegisterName("activePrimaryConstituentDeviceSwitchingBehavior")
@@ -153,6 +156,11 @@ var (
 	_aVCaptureDeviceSelDynamicAspectRatio                                                                = objc.RegisterName("dynamicAspectRatio")
 	_aVCaptureDeviceSelDynamicDimensions                                                                 = objc.RegisterName("dynamicDimensions")
 	_aVCaptureDeviceSelSmartFramingMonitor                                                               = objc.RegisterName("smartFramingMonitor")
+	_aVCaptureDeviceSelIsContinuousAutoFocusTrackingEnabled                                              = objc.RegisterName("isContinuousAutoFocusTrackingEnabled")
+	_aVCaptureDeviceSelSetContinuousAutoFocusTrackingEnabled                                             = objc.RegisterName("setContinuousAutoFocusTrackingEnabled:")
+	_aVCaptureDeviceSelContinuousAutoFocusTrackingLensPositionBias                                       = objc.RegisterName("continuousAutoFocusTrackingLensPositionBias")
+	_aVCaptureDeviceSelSetContinuousAutoFocusTrackingLensPositionBias                                    = objc.RegisterName("setContinuousAutoFocusTrackingLensPositionBias:")
+	_aVCaptureDeviceSelIsContinuousAutoFocusTrackingSubjectAcquired                                      = objc.RegisterName("isContinuousAutoFocusTrackingSubjectAcquired")
 	_aVCaptureDeviceSelIsStudioLightEnabled                                                              = objc.RegisterName("isStudioLightEnabled")
 	_aVCaptureDeviceSelIsStudioLightActive                                                               = objc.RegisterName("isStudioLightActive")
 	_aVCaptureDeviceSelIsEdgeLightEnabled                                                                = objc.RegisterName("isEdgeLightEnabled")
@@ -373,6 +381,12 @@ func (o *AVCaptureDevice) MinSupportedExternalSyncFrameDuration() coremedia.CMTi
 	return _ret
 }
 
+// Whether adjusting the signal compensation delay property of an external sync device is supported while the session is running. This property returns `true` if the “signalCompensationDelay“ of an “AVExternalSyncDevice“ being followed by this device's “AVCaptureDeviceInput“ can be adjusted while the “AVCaptureSession“ is running.
+func (o *AVCaptureDevice) IsAdjustingSignalCompensationDelayWhileRunningSupported() bool {
+	_ret := objc.Send[bool](o.Ptr(), _aVCaptureDeviceSelIsAdjustingSignalCompensationDelayWhileRunningSupported)
+	return _ret
+}
+
 // Indicates whether the receiver should enable auto video frame rate. When you enable this property, the device automatically adjusts the active frame rate, depending on light level. Under low light conditions, it decreases the frame rate to properly expose the scene. For formats with a maximum frame rate of 30 fps, the device switches the frame rate between 30 - 24. For formats with a maximum frame rate of 60 fps, the device switches the frame rate between 60 - 30 - 24. Setting this property throws an `NSInvalidArgumentException` if the active format's “AVCaptureDeviceFormat/autoVideoFrameRateSupported“ returns `false`. When you change the device's active format, this property resets to its default value of `false`. If you set this property to `true`, frame rate is under device control, and you may not set “activeVideoMinFrameDuration“ or “activeVideoMaxFrameDuration“. Doing so throws an `NSInvalidArgumentException`. - Note: Setting this property to `true` throws an `NSInvalidArgumentException` if “videoFrameDurationLocked“ or “followingExternalSyncDevice“ are `true`.
 func (o *AVCaptureDevice) IsAutoVideoFrameRateEnabled() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVCaptureDeviceSelIsAutoVideoFrameRateEnabled)
@@ -449,9 +463,20 @@ func AVCaptureDeviceSystemPreferredCamera() *AVCaptureDevice {
 	return AVCaptureDeviceFromID(_ret)
 }
 
+// Sets the switching behavior of the primary constituent device to locked with the specified device.
+func (o *AVCaptureDevice) SetPrimaryConstituentDeviceSwitchingBehaviorLockedWithDevice(device *AVCaptureDevice) {
+	o.Ptr().Send(_aVCaptureDeviceSelSetPrimaryConstituentDeviceSwitchingBehaviorLockedWithDevice, device.Ptr())
+}
+
 // Sets the switching behavior of the primary constituent device.
 func (o *AVCaptureDevice) SetPrimaryConstituentDeviceSwitchingBehaviorRestrictedSwitchingBehaviorConditions(switchingBehavior AVCapturePrimaryConstituentDeviceSwitchingBehavior, restrictedSwitchingBehaviorConditions AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions) {
 	o.Ptr().Send(_aVCaptureDeviceSelSetPrimaryConstituentDeviceSwitchingBehaviorRestrictedSwitchingBehaviorConditions, switchingBehavior, restrictedSwitchingBehaviorConditions)
+}
+
+// Whether locking to a particular primary constituent device is supported. This property returns `true` if “setPrimaryConstituentDeviceSwitchingBehaviorLockedWithDevice:“ is supported.
+func (o *AVCaptureDevice) IsPrimaryConstituentDeviceSwitchingBehaviorLockedWithDeviceSupported() bool {
+	_ret := objc.Send[bool](o.Ptr(), _aVCaptureDeviceSelIsPrimaryConstituentDeviceSwitchingBehaviorLockedWithDeviceSupported)
+	return _ret
 }
 
 // @property primaryConstituentDeviceSwitchingBehavior @abstract The primaryConstituentDeviceSwitchingBehavior as set by -[AVCaptureDevice setPrimaryConstituentDeviceSwitchingBehavior:restrictedSwitchingBehaviorConditions:]. @discussion By default, this property is set to AVCapturePrimaryConstituentDeviceSwitchingBehaviorAuto for AVCaptureDevices that support it.  This property is key-value observable.
@@ -987,6 +1012,32 @@ func (o *AVCaptureDevice) DynamicDimensions() CMVideoDimensions {
 
 func (o *AVCaptureDevice) SmartFramingMonitor() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureDeviceSelSmartFramingMonitor)
+	return _ret
+}
+
+// Indicates whether the device should use continuous autofocus tracking. The default value for this property is `false`. On a device with an active format where “isContinuousAutoFocusTrackingSupported“ returns `true` and “continuousAutoFocusTrackingEnabled“ is set to `true`, continuous autofocus tracking will be engaged when the device's focus mode is set to “AVCaptureFocusModeContinuousAutoFocus“. When engaged, the subject at the current “focusPointOfInterest“ will be tracked as it moves within the scene and will be kept in focus automatically. The device's “isContinuousAutoFocusTrackingSubjectAcquired“ property will return `true` while any tracked subject remains in the scene. However, the device's “focusPointOfInterest“ and “focusRectOfInterest“ are not updated while continuous autofocus tracking is active. Continuous autofocus tracking can be made inactive by setting “continuousAutoFocusTrackingEnabled“ to `false` and then setting the device's focus mode to “AVCaptureFocusModeContinuousAutoFocus“ or by setting the focus mode to a value other than “AVCaptureFocusModeContinuousAutoFocus“. When made inactive, “isContinuousAutoFocusTrackingSubjectAcquired“ changes to `false`, as no subject is being tracked. For virtual cameras, continuous autofocus tracking only works on the “activePrimaryConstituentDevice“. To receive continuous autofocus tracking updates, it is required to connect this device to an “AVCaptureMetadataOutput“ that is configured to deliver “AVMetadataObjectTypeFocusTrackedObject“. If “AVMetadataObjectTypeFocusTrackedObject“ is not subscribed, no updates will be provided for continuous autofocus tracking and the device's “isContinuousAutoFocusTrackingSubjectAcquired“ property remains to be `false`. - Throws: `NSInvalidArgumentException` if this property is set to `true` when the active format's “isContinuousAutoFocusTrackingSupported“ returns `false`. - Throws: `NSInvalidArgumentException` if this property is set to `true` when the device is configured for cinematic video capture. - Throws: `NSGenericException` if the device is not locked for configuration using “lockForConfiguration:“.
+func (o *AVCaptureDevice) IsContinuousAutoFocusTrackingEnabled() bool {
+	_ret := objc.Send[bool](o.Ptr(), _aVCaptureDeviceSelIsContinuousAutoFocusTrackingEnabled)
+	return _ret
+}
+
+func (o *AVCaptureDevice) SetContinuousAutoFocusTrackingEnabled(continuousAutoFocusTrackingEnabled bool) {
+	o.Ptr().Send(_aVCaptureDeviceSelSetContinuousAutoFocusTrackingEnabled, continuousAutoFocusTrackingEnabled)
+}
+
+// Bias applied to the lens position during continuous autofocus tracking, normalized between -1 and 1. While the device is actively tracking a subject to keep in focus, this property may be used to specify a bias applied to the lens position so that different portions of the subject are in focus. This property's default value is 0 which aims to keep the median of the subject's depth profile in focus. Values approaching -1 bias the lens position towards the closest portion of the depth profile while values approaching 1 bias the lens position towards the furthest portion of the profile. As the subject moves, the bias continues to apply to the subject's new depth profile. To apply bias updates, set the device's focus mode to “AVCaptureFocusModeContinuousAutoFocus“ after each change. The bias value has no effect otherwise. The value will only be automatically reset to 0 if cinematic video capture is enabled. - Throws: `NSInvalidArgumentException` if this property is set to a value other than 0 when the device's “continuousAutoFocusTrackingEnabled“ is `false`. - Throws: `NSInvalidArgumentException` if this property is set to a value less than -1 or greater than 1. - Throws: `NSInvalidArgumentException` if this property is set to a non-zero value when the device is configured for cinematic video capture. - Throws: `NSGenericException` if the device is not locked for configuration using “lockForConfiguration:“.
+func (o *AVCaptureDevice) ContinuousAutoFocusTrackingLensPositionBias() float32 {
+	_ret := objc.Send[float32](o.Ptr(), _aVCaptureDeviceSelContinuousAutoFocusTrackingLensPositionBias)
+	return _ret
+}
+
+func (o *AVCaptureDevice) SetContinuousAutoFocusTrackingLensPositionBias(continuousAutoFocusTrackingLensPositionBias float32) {
+	o.Ptr().Send(_aVCaptureDeviceSelSetContinuousAutoFocusTrackingLensPositionBias, continuousAutoFocusTrackingLensPositionBias)
+}
+
+// Indicates whether the device is actively tracking a subject in the scene to maintain focus. Returns `true` when the capture device is actively tracking a subject in the scene, and `false` otherwise. The subject is initially identified by “focusPointOfInterest“ when focus mode is set to “AVCaptureFocusModeContinuousAutoFocus“ with “continuousAutoFocusTrackingEnabled“ set to `true`. This property is key-value observable and reflects only whether a subject is actively tracked, not which one. To identify the tracked subject, include “AVMetadataObjectTypeFocusTrackedObject“ in the “metadataObjectTypes“ of “AVCaptureMetadataOutput“. The “AVMetadataFocusTrackedObject“ delivered by the metadata output represents the subject currently tracked for continuous autofocus.
+func (o *AVCaptureDevice) IsContinuousAutoFocusTrackingSubjectAcquired() bool {
+	_ret := objc.Send[bool](o.Ptr(), _aVCaptureDeviceSelIsContinuousAutoFocusTrackingSubjectAcquired)
 	return _ret
 }
 

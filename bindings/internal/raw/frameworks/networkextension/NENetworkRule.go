@@ -4,8 +4,6 @@
 package networkextension
 
 import (
-	"unsafe"
-
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/foundation"
@@ -115,9 +113,12 @@ func (o *NENetworkRule) MatchRemoteHostOrNetworkEndpoint() *foundation.NSObject 
 
 // @property matchRemoteEndpoint @discussion The remote endpoint that the rule matches.
 // Deprecated: since macOS 15.0.
-func (o *NENetworkRule) MatchRemoteEndpoint() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nENetworkRuleSelMatchRemoteEndpoint)
-	return _ret
+func (o *NENetworkRule) MatchRemoteEndpoint() *NWHostEndpoint {
+	_ret := objc.Send[objc.ID](o.Ptr(), _nENetworkRuleSelMatchRemoteEndpoint)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NWHostEndpointFromID(_ret)
 }
 
 // @property matchRemotePrefix @discussion A number that specifies the remote sub-network that the rule matches. This property is set to NSNotFound for rules where matchRemoteEndpoint does not contain an IP address.
@@ -137,9 +138,12 @@ func (o *NENetworkRule) MatchLocalNetworkEndpoint() *foundation.NSObject {
 
 // @property matchLocalNetwork @discussion The local network that the rule matches.
 // Deprecated: since macOS 15.0.
-func (o *NENetworkRule) MatchLocalNetwork() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nENetworkRuleSelMatchLocalNetwork)
-	return _ret
+func (o *NENetworkRule) MatchLocalNetwork() *NWHostEndpoint {
+	_ret := objc.Send[objc.ID](o.Ptr(), _nENetworkRuleSelMatchLocalNetwork)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NWHostEndpointFromID(_ret)
 }
 
 // @property matchLocalPrefix @discussion A number that specifies the local sub-network that the rule matches. This property is set to NSNotFound for rules with a nil matchLocalNetwork property.

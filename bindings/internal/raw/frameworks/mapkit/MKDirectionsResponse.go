@@ -10,8 +10,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// The route information that Apple servers return in response to your request for directions.
-//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkdirectionsresponse
 type MKDirectionsResponse struct {
 	foundation.NSObject

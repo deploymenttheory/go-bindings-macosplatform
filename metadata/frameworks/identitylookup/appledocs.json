@@ -123,10 +123,6 @@
         }
       }
     },
-    "ILMessageFilterError": {
-      "doc": "An error type that indicates problems with network requests and responses related to IdentityLookup APIs.",
-      "url": "https://developer.apple.com/documentation/identitylookup/ilmessagefiltererror"
-    },
     "ILMessageFilterSubAction": {
       "doc": "Responds to a received message with a filter subaction.",
       "url": "https://developer.apple.com/documentation/identitylookup/ilmessagefiltersubaction",

@@ -101,7 +101,7 @@ func (o *Orthography) WithScriptingProperties(scriptingProperties map[string]obj
 	return o
 }
 
-// DominantScript returns the dominant script.
+// DominantScript returns the dominant script for the text. The value of this property is an ISO 15924 script code, such as `"Latn"` or `"Cyrl"`, that identifies the dominant script.
 func (o *Orthography) DominantScript() string {
 	defer runtime.KeepAlive(o)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("dominantScript"))
@@ -111,7 +111,7 @@ func (o *Orthography) DominantScript() string {
 	return purego.GoString(_r)
 }
 
-// LanguageMap returns the language map.
+// LanguageMap returns a dictionary that maps script tags to arrays of language tags. The dictionary's keys are ISO 15924 script codes (such as `"Latn"` or `"Cyrl"`) and its values are arrays of BCP-47 language tags (such as `"en"`, `"fr"`, or `"de"`).
 func (o *Orthography) LanguageMap() map[string]obj.Object {
 	defer runtime.KeepAlive(o)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("languageMap"))
@@ -135,7 +135,7 @@ func (o *Orthography) DominantLanguageForScript(script string) string {
 	return purego.GoString(_r)
 }
 
-// DominantLanguage returns the dominant language.
+// DominantLanguage returns the first language in the list of languages for the dominant script.
 func (o *Orthography) DominantLanguage() string {
 	defer runtime.KeepAlive(o)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("dominantLanguage"))
@@ -145,7 +145,7 @@ func (o *Orthography) DominantLanguage() string {
 	return purego.GoString(_r)
 }
 
-// AllScripts returns the all scripts.
+// AllScripts returns the scripts appearing as keys in the language map.
 //
 // AllScripts returns the collection as a Go slice.
 func (o *Orthography) AllScripts() []string {
@@ -154,7 +154,7 @@ func (o *Orthography) AllScripts() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// AllLanguages returns the all languages.
+// AllLanguages returns the languages appearing in values of the language map.
 //
 // AllLanguages returns the collection as a Go slice.
 func (o *Orthography) AllLanguages() []string {

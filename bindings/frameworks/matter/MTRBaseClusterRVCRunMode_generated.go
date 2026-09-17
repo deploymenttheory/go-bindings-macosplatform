@@ -58,7 +58,7 @@ func NewMTRBaseClusterRVCRunModeWithDeviceEndpointIDQueue(device *MTRBaseDevice,
 	return mTRBaseClusterRVCRunModeAdopt(_id)
 }
 
-// ChangeToModeWithParamsCompletion command ChangeToMode This command is used to change device modes. On receipt of this command the device SHALL respond with a ChangeToModeResponse command.
+// ChangeToModeWithParamsCompletion command ChangeToMode This command is used to change device modes.
 //
 // ChangeToModeWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcrrm *MTRBaseClusterRVCRunMode) ChangeToModeWithParamsCompletion(ctx context.Context, params *MTRRVCRunModeClusterChangeToModeParams) (result *MTRRVCRunModeClusterChangeToModeResponseParams, err error) {

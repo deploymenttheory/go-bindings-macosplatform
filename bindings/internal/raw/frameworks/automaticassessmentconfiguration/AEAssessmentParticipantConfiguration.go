@@ -18,15 +18,18 @@ type AEAssessmentParticipantConfiguration struct {
 }
 
 var (
-	_clsAEAssessmentParticipantConfiguration                       = _objcClass("AEAssessmentParticipantConfiguration")
-	_aEAssessmentParticipantConfigurationSelInit                   = objc.RegisterName("init")
-	_aEAssessmentParticipantConfigurationSelNew                    = objc.RegisterName("new")
-	_aEAssessmentParticipantConfigurationSelAllowsNetworkAccess    = objc.RegisterName("allowsNetworkAccess")
-	_aEAssessmentParticipantConfigurationSelSetAllowsNetworkAccess = objc.RegisterName("setAllowsNetworkAccess:")
-	_aEAssessmentParticipantConfigurationSelIsRequired             = objc.RegisterName("isRequired")
-	_aEAssessmentParticipantConfigurationSelSetRequired            = objc.RegisterName("setRequired:")
-	_aEAssessmentParticipantConfigurationSelConfigurationInfo      = objc.RegisterName("configurationInfo")
-	_aEAssessmentParticipantConfigurationSelSetConfigurationInfo   = objc.RegisterName("setConfigurationInfo:")
+	_clsAEAssessmentParticipantConfiguration                                         = _objcClass("AEAssessmentParticipantConfiguration")
+	_aEAssessmentParticipantConfigurationSelAllowedMenuItemsForLanguageIdentifier    = objc.RegisterName("allowedMenuItemsForLanguageIdentifier:")
+	_aEAssessmentParticipantConfigurationSelSetAllowedMenuItemsForLanguageIdentifier = objc.RegisterName("setAllowedMenuItems:forLanguageIdentifier:")
+	_aEAssessmentParticipantConfigurationSelInit                                     = objc.RegisterName("init")
+	_aEAssessmentParticipantConfigurationSelNew                                      = objc.RegisterName("new")
+	_aEAssessmentParticipantConfigurationSelAllowedMenuItemLanguageIdentifiers       = objc.RegisterName("allowedMenuItemLanguageIdentifiers")
+	_aEAssessmentParticipantConfigurationSelAllowsNetworkAccess                      = objc.RegisterName("allowsNetworkAccess")
+	_aEAssessmentParticipantConfigurationSelSetAllowsNetworkAccess                   = objc.RegisterName("setAllowsNetworkAccess:")
+	_aEAssessmentParticipantConfigurationSelIsRequired                               = objc.RegisterName("isRequired")
+	_aEAssessmentParticipantConfigurationSelSetRequired                              = objc.RegisterName("setRequired:")
+	_aEAssessmentParticipantConfigurationSelConfigurationInfo                        = objc.RegisterName("configurationInfo")
+	_aEAssessmentParticipantConfigurationSelSetConfigurationInfo                     = objc.RegisterName("setConfigurationInfo:")
 )
 
 func AEAssessmentParticipantConfigurationFromID(id objc.ID) *AEAssessmentParticipantConfiguration {
@@ -37,6 +40,20 @@ func AEAssessmentParticipantConfigurationFromID(id objc.ID) *AEAssessmentPartici
 	o.InitPtr(id)
 	purego.Track(o)
 	return o
+}
+
+// Returns the set of allowed menu item titles for the given language identifier, or nil if no items have been configured for that identifier.
+func (o *AEAssessmentParticipantConfiguration) AllowedMenuItemsForLanguageIdentifier(languageIdentifier *foundation.NSString) *foundation.NSSet[*foundation.NSString] {
+	_ret := objc.Send[objc.ID](o.Ptr(), _aEAssessmentParticipantConfigurationSelAllowedMenuItemsForLanguageIdentifier, languageIdentifier.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSSetFromID[*foundation.NSString](_ret)
+}
+
+// Sets the allowed menu item titles for the given language identifier.
+func (o *AEAssessmentParticipantConfiguration) SetAllowedMenuItemsForLanguageIdentifier(menuItems *foundation.NSSet[*foundation.NSString], languageIdentifier *foundation.NSString) {
+	o.Ptr().Send(_aEAssessmentParticipantConfigurationSelSetAllowedMenuItemsForLanguageIdentifier, menuItems.Ptr(), languageIdentifier.Ptr())
 }
 
 // Initializes an assessment participant configuration instance.
@@ -52,6 +69,15 @@ func (o *AEAssessmentParticipantConfiguration) Init() *AEAssessmentParticipantCo
 func AEAssessmentParticipantConfigurationNew() *AEAssessmentParticipantConfiguration {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAEAssessmentParticipantConfiguration), _aEAssessmentParticipantConfigurationSelNew)
 	return AEAssessmentParticipantConfigurationFromID(_ret)
+}
+
+// The set of language identifiers for which allowed menu items have been configured. Contains only identifiers explicitly added via “setAllowedMenuItems(_:forLanguageIdentifier:)“. Does not include identifiers inferred through localization resolution.
+func (o *AEAssessmentParticipantConfiguration) AllowedMenuItemLanguageIdentifiers() *foundation.NSSet[*foundation.NSString] {
+	_ret := objc.Send[objc.ID](o.Ptr(), _aEAssessmentParticipantConfigurationSelAllowedMenuItemLanguageIdentifiers)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSSetFromID[*foundation.NSString](_ret)
 }
 
 func (o *AEAssessmentParticipantConfiguration) AllowsNetworkAccess() bool {

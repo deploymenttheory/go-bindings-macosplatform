@@ -16,8 +16,6 @@ import (
 )
 
 // ThumbnailGenerationRequest is an idiomatic wrapper over the Objective-C class QLThumbnailGenerationRequest.
-//
-// A request to generate a thumbnail for a file.
 type ThumbnailGenerationRequest struct {
 	objref.Handle
 }

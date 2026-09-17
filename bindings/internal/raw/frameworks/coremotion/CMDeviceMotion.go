@@ -24,6 +24,7 @@ var (
 	_cMDeviceMotionSelUserAcceleration = objc.RegisterName("userAcceleration")
 	_cMDeviceMotionSelMagneticField    = objc.RegisterName("magneticField")
 	_cMDeviceMotionSelHeading          = objc.RegisterName("heading")
+	_cMDeviceMotionSelHeadingAccuracy  = objc.RegisterName("headingAccuracy")
 	_cMDeviceMotionSelSensorLocation   = objc.RegisterName("sensorLocation")
 )
 
@@ -67,6 +68,11 @@ func (o *CMDeviceMotion) MagneticField() CMCalibratedMagneticField {
 
 func (o *CMDeviceMotion) Heading() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _cMDeviceMotionSelHeading)
+	return _ret
+}
+
+func (o *CMDeviceMotion) HeadingAccuracy() float64 {
+	_ret := objc.Send[float64](o.Ptr(), _cMDeviceMotionSelHeadingAccuracy)
 	return _ret
 }
 

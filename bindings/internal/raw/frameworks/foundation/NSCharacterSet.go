@@ -130,6 +130,7 @@ func (o *NSCharacterSet) HasMemberInPlane(thePlane uint8) bool {
 	return _ret
 }
 
+// A character set containing the characters in Unicode General Category Cc and Cf. These characters include, for example, the soft hyphen (`U+00AD`), control characters to support bi-directional text, and IETF language tag characters.
 func NSCharacterSetControlCharacterSet() *NSCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCharacterSet), _nSCharacterSetSelControlCharacterSet)
 	if _ret != 0 {
@@ -138,6 +139,7 @@ func NSCharacterSetControlCharacterSet() *NSCharacterSet {
 	return NSCharacterSetFromID(_ret)
 }
 
+// A character set containing the characters in Unicode General Category Zs and `CHARACTER TABULATION` (`U+0009`). This set doesn't contain the newline or carriage return characters.
 func NSCharacterSetWhitespaceCharacterSet() *NSCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCharacterSet), _nSCharacterSetSelWhitespaceCharacterSet)
 	if _ret != 0 {
@@ -146,6 +148,7 @@ func NSCharacterSetWhitespaceCharacterSet() *NSCharacterSet {
 	return NSCharacterSetFromID(_ret)
 }
 
+// A character set containing characters in Unicode General Category Z\*, `U+000A` ~ `U+000D`, and `U+0085`.
 func NSCharacterSetWhitespaceAndNewlineCharacterSet() *NSCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCharacterSet), _nSCharacterSetSelWhitespaceAndNewlineCharacterSet)
 	if _ret != 0 {
@@ -154,6 +157,7 @@ func NSCharacterSetWhitespaceAndNewlineCharacterSet() *NSCharacterSet {
 	return NSCharacterSetFromID(_ret)
 }
 
+// A character set containing the characters in the category of Decimal Numbers. Informally, this set is the set of all characters used to represent the decimal values `0` through `9`. These characters include, for example, the decimal digits of the Indic scripts and Arabic.
 func NSCharacterSetDecimalDigitCharacterSet() *NSCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCharacterSet), _nSCharacterSetSelDecimalDigitCharacterSet)
 	if _ret != 0 {
@@ -162,6 +166,7 @@ func NSCharacterSetDecimalDigitCharacterSet() *NSCharacterSet {
 	return NSCharacterSetFromID(_ret)
 }
 
+// A character set containing the characters in Unicode General Category L\* & M\*. Informally, this set is the set of all characters used as letters of alphabets and ideographs.
 func NSCharacterSetLetterCharacterSet() *NSCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCharacterSet), _nSCharacterSetSelLetterCharacterSet)
 	if _ret != 0 {
@@ -170,6 +175,7 @@ func NSCharacterSetLetterCharacterSet() *NSCharacterSet {
 	return NSCharacterSetFromID(_ret)
 }
 
+// A character set containing the characters in Unicode General Category Ll. Informally, this set is the set of all characters used as lowercase letters in alphabets that make case distinctions.
 func NSCharacterSetLowercaseLetterCharacterSet() *NSCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCharacterSet), _nSCharacterSetSelLowercaseLetterCharacterSet)
 	if _ret != 0 {
@@ -178,6 +184,7 @@ func NSCharacterSetLowercaseLetterCharacterSet() *NSCharacterSet {
 	return NSCharacterSetFromID(_ret)
 }
 
+// A character set containing the characters in Unicode General Category Lu and Lt. Informally, this set is the set of all characters used as uppercase letters in alphabets that make case distinctions.
 func NSCharacterSetUppercaseLetterCharacterSet() *NSCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCharacterSet), _nSCharacterSetSelUppercaseLetterCharacterSet)
 	if _ret != 0 {
@@ -186,6 +193,7 @@ func NSCharacterSetUppercaseLetterCharacterSet() *NSCharacterSet {
 	return NSCharacterSetFromID(_ret)
 }
 
+// A character set containing the characters in Unicode General Category M\*. This set is also defined as all legal Unicode characters with a non-spacing priority greater than `0`. Informally, this set is the set of all characters used as modifiers of base characters.
 func NSCharacterSetNonBaseCharacterSet() *NSCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCharacterSet), _nSCharacterSetSelNonBaseCharacterSet)
 	if _ret != 0 {
@@ -194,6 +202,7 @@ func NSCharacterSetNonBaseCharacterSet() *NSCharacterSet {
 	return NSCharacterSetFromID(_ret)
 }
 
+// A character set containing the characters in Unicode General Categories L\*, M\*, and N\*. Informally, this set is the set of all characters used as basic units of alphabets, syllabaries, ideographs, and digits.
 func NSCharacterSetAlphanumericCharacterSet() *NSCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCharacterSet), _nSCharacterSetSelAlphanumericCharacterSet)
 	if _ret != 0 {
@@ -202,6 +211,7 @@ func NSCharacterSetAlphanumericCharacterSet() *NSCharacterSet {
 	return NSCharacterSetFromID(_ret)
 }
 
+// A character set containing individual Unicode characters that can also be represented as composed character sequences (such as for letters with accents), by the definition of "standard decomposition" in version 3.2 of the Unicode character encoding standard. These characters include compatibility characters as well as pre-composed characters. > Note: This character set doesn't currently include the Hangul characters defined in version 2.0 of the Unicode standard.
 func NSCharacterSetDecomposableCharacterSet() *NSCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCharacterSet), _nSCharacterSetSelDecomposableCharacterSet)
 	if _ret != 0 {
@@ -210,6 +220,7 @@ func NSCharacterSetDecomposableCharacterSet() *NSCharacterSet {
 	return NSCharacterSetFromID(_ret)
 }
 
+// A character set containing values in the category of Non-Characters or that have not yet been defined in version 3.2 of the Unicode standard.
 func NSCharacterSetIllegalCharacterSet() *NSCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCharacterSet), _nSCharacterSetSelIllegalCharacterSet)
 	if _ret != 0 {
@@ -218,6 +229,7 @@ func NSCharacterSetIllegalCharacterSet() *NSCharacterSet {
 	return NSCharacterSetFromID(_ret)
 }
 
+// A character set containing the characters in Unicode General Category P\*. Informally, this set is the set of all non-whitespace characters used to separate linguistic units in scripts, such as periods, dashes, parentheses, and so on.
 func NSCharacterSetPunctuationCharacterSet() *NSCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCharacterSet), _nSCharacterSetSelPunctuationCharacterSet)
 	if _ret != 0 {
@@ -226,6 +238,7 @@ func NSCharacterSetPunctuationCharacterSet() *NSCharacterSet {
 	return NSCharacterSetFromID(_ret)
 }
 
+// A character set containing the characters in Unicode General Category Lt.
 func NSCharacterSetCapitalizedLetterCharacterSet() *NSCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCharacterSet), _nSCharacterSetSelCapitalizedLetterCharacterSet)
 	if _ret != 0 {
@@ -234,6 +247,7 @@ func NSCharacterSetCapitalizedLetterCharacterSet() *NSCharacterSet {
 	return NSCharacterSetFromID(_ret)
 }
 
+// A character set containing the characters in Unicode General Category S\*. These characters include, for example, the dollar sign (`$`) and the plus (`+`) sign.
 func NSCharacterSetSymbolCharacterSet() *NSCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCharacterSet), _nSCharacterSetSelSymbolCharacterSet)
 	if _ret != 0 {
@@ -242,6 +256,7 @@ func NSCharacterSetSymbolCharacterSet() *NSCharacterSet {
 	return NSCharacterSetFromID(_ret)
 }
 
+// A character set containing the newline characters (`U+000A` ~ `U+000D`, `U+0085`, `U+2028`, and `U+2029`).
 func NSCharacterSetNewlineCharacterSet() *NSCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCharacterSet), _nSCharacterSetSelNewlineCharacterSet)
 	if _ret != 0 {
@@ -250,6 +265,7 @@ func NSCharacterSetNewlineCharacterSet() *NSCharacterSet {
 	return NSCharacterSetFromID(_ret)
 }
 
+// An `NSData` object encoding the receiver in binary format. This format is suitable for saving to a file or otherwise transmitting or archiving. A raw bitmap representation of a character set is a byte array with the first 2^16 bits (that is, 8192 bytes) representing the code point range of the Basic Multilingual Plane (BMP), such that the value of the bit at position n represents the presence in the character set of the character with decimal Unicode value n. A bitmap representation may contain zero to sixteen additional 8192 byte segments for each additional Unicode plane containing a character in a character set, with each 8192 byte segment prepended with a single plane index byte. For example, a character set containing only Basic Latin (ASCII) characters, which are contained by the Basic Multilingual Plane (BMP, plane 0), has a bitmap representation with a size of 8192 bytes, whereas a character set containing both Basic Latin (ASCII) characters and emoji characters, which are contained by the Supplementary Multilingual Plane (SMP, plane 1), has a bitmap representation with a size of 16385 bytes (8192 bytes for BMP, followed by the byte `0x01` for the plane index of SMP, followed by 8192 bytes for SMP). To test for the presence of a character in the Basic Multilingual Plane (BMP) with decimal Unicode value n in a raw bitmap representation, you might do the following: ```objc unsigned char bitmapRep[8192]; if (bitmapRep[n >> 3] & (((unsigned int)1) << (n  & 7))) { /* Character is present. */ } ```
 func (o *NSCharacterSet) BitmapRepresentation() *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCharacterSetSelBitmapRepresentation)
 	if _ret != 0 {
@@ -258,6 +274,7 @@ func (o *NSCharacterSet) BitmapRepresentation() *NSData {
 	return NSDataFromID(_ret)
 }
 
+// A character set containing only characters that don't exist in the receiver. Using the inverse of an immutable character set is much more efficient than inverting a mutable character set.
 func (o *NSCharacterSet) InvertedSet() *NSCharacterSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCharacterSetSelInvertedSet)
 	if _ret != 0 {
@@ -266,6 +283,7 @@ func (o *NSCharacterSet) InvertedSet() *NSCharacterSet {
 	return NSCharacterSetFromID(_ret)
 }
 
+// Returns the character set for characters allowed in a user URL subcomponent. The user component of a URL is an optional component that precedes the host component, and ends at either a colon (if a password is specified) or an `@` sign (if no password is specified). For example, in the URL `http://username:password@www.example.com/index.html`, the user component is `username`.
 func NSCharacterSetURLUserAllowedCharacterSet() *NSCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCharacterSet), _nSCharacterSetSelURLUserAllowedCharacterSet)
 	if _ret != 0 {
@@ -274,6 +292,7 @@ func NSCharacterSetURLUserAllowedCharacterSet() *NSCharacterSet {
 	return NSCharacterSetFromID(_ret)
 }
 
+// Returns the character set for characters allowed in a password URL subcomponent. The password component of a URL is the component immediately following the colon after the username component of the URL, and ends at the `@` sign. For example, in the URL `http://username:password@www.example.com/index.html`, the password component is `password`.
 func NSCharacterSetURLPasswordAllowedCharacterSet() *NSCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCharacterSet), _nSCharacterSetSelURLPasswordAllowedCharacterSet)
 	if _ret != 0 {
@@ -282,6 +301,7 @@ func NSCharacterSetURLPasswordAllowedCharacterSet() *NSCharacterSet {
 	return NSCharacterSetFromID(_ret)
 }
 
+// Returns the character set for characters allowed in a host URL subcomponent. The host component of a URL is usually the component immediately after the first two leading slashes. If the URL contains a username and password, the host component is the component after the `@` sign. For example, in the URL `http://username:password@www.example.com/index.html`, the host component is `www.example.com`.
 func NSCharacterSetURLHostAllowedCharacterSet() *NSCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCharacterSet), _nSCharacterSetSelURLHostAllowedCharacterSet)
 	if _ret != 0 {
@@ -290,6 +310,7 @@ func NSCharacterSetURLHostAllowedCharacterSet() *NSCharacterSet {
 	return NSCharacterSetFromID(_ret)
 }
 
+// Returns the character set for characters allowed in a path URL component. The path component of a URL is the component immediately following the host component (if present). It ends wherever the query or fragment component begins. For example, in the URL `http://www.example.com/index.php?key1=value1`, the path component is `/index.php`.
 func NSCharacterSetURLPathAllowedCharacterSet() *NSCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCharacterSet), _nSCharacterSetSelURLPathAllowedCharacterSet)
 	if _ret != 0 {
@@ -298,6 +319,7 @@ func NSCharacterSetURLPathAllowedCharacterSet() *NSCharacterSet {
 	return NSCharacterSetFromID(_ret)
 }
 
+// Returns the character set for characters allowed in a query URL component. The query component of a URL is the component immediately following a question mark (`?`). For example, in the URL `http://www.example.com/index.php?key1=value1#jumpLink`, the query component is `key1=value1`.
 func NSCharacterSetURLQueryAllowedCharacterSet() *NSCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCharacterSet), _nSCharacterSetSelURLQueryAllowedCharacterSet)
 	if _ret != 0 {
@@ -306,6 +328,7 @@ func NSCharacterSetURLQueryAllowedCharacterSet() *NSCharacterSet {
 	return NSCharacterSetFromID(_ret)
 }
 
+// Returns the character set for characters allowed in a fragment URL component. The fragment component of a URL is the component after a `#` symbol. For example, in the URL `http://www.example.com/index.html#jumpLocation`, the fragment is `jumpLocation`.
 func NSCharacterSetURLFragmentAllowedCharacterSet() *NSCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCharacterSet), _nSCharacterSetSelURLFragmentAllowedCharacterSet)
 	if _ret != 0 {

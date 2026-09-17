@@ -319,10 +319,6 @@
       "doc": "A collection of timing information for a sample in a sample buffer.",
       "url": "https://developer.apple.com/documentation/coremedia/cmsampletiminginfo"
     },
-    "CMTag": {
-      "doc": "A tag to set additional metadata on media buffers.",
-      "url": "https://developer.apple.com/documentation/coremedia/cmtag"
-    },
     "CMTime": {
       "doc": "A structure that represents time.",
       "url": "https://developer.apple.com/documentation/coremedia/cmtime"

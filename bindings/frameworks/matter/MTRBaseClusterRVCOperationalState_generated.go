@@ -58,7 +58,7 @@ func NewMTRBaseClusterRVCOperationalStateWithDeviceEndpointIDQueue(device *MTRBa
 	return mTRBaseClusterRVCOperationalStateAdopt(_id)
 }
 
-// PauseWithParamsCompletion command Pause Upon receipt, the device SHALL pause its operation if it is possible based on the current function of the server.
+// PauseWithParamsCompletion command Pause This command SHALL be supported if the device supports remotely pausing the operation.
 //
 // PauseWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcros *MTRBaseClusterRVCOperationalState) PauseWithParamsCompletion(ctx context.Context, params *MTRRVCOperationalStateClusterPauseParams) (result *MTRRVCOperationalStateClusterOperationalCommandResponseParams, err error) {
@@ -111,7 +111,7 @@ func (mbcros *MTRBaseClusterRVCOperationalState) PauseWithCompletion(ctx context
 	}
 }
 
-// ResumeWithParamsCompletion command Resume Upon receipt, the device SHALL resume its operation from the point it was at when it received the Pause command, or from the point when it was paused by means outside of this cluster (for example by manual button press).
+// ResumeWithParamsCompletion command Resume This command SHALL be supported if the device supports remotely resuming the operation.
 //
 // ResumeWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcros *MTRBaseClusterRVCOperationalState) ResumeWithParamsCompletion(ctx context.Context, params *MTRRVCOperationalStateClusterResumeParams) (result *MTRRVCOperationalStateClusterOperationalCommandResponseParams, err error) {

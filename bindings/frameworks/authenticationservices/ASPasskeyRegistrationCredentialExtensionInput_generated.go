@@ -15,8 +15,6 @@ import (
 )
 
 // PasskeyRegistrationCredentialExtensionInput is an idiomatic wrapper over the Objective-C class ASPasskeyRegistrationCredentialExtensionInput.
-//
-// A type that encapsulates input for various WebAuthn extensions during passkey registration.
 type PasskeyRegistrationCredentialExtensionInput struct {
 	objref.Handle
 }

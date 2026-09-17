@@ -148,49 +148,49 @@ func (pf *PointerFunctions) HashFunction() unsafe.Pointer {
 	return _r
 }
 
-// IsEqualFunction returns the is equal function.
+// IsEqualFunction returns the function used to compare pointers.
 func (pf *PointerFunctions) IsEqualFunction() unsafe.Pointer {
 	defer runtime.KeepAlive(pf)
 	_r := objc.Send[unsafe.Pointer](objref.IDOf(pf), objc.RegisterName("isEqualFunction"))
 	return _r
 }
 
-// SizeFunction returns the size function.
+// SizeFunction returns the function used to determine the size of pointers. This function is used for copy-in operations (unless the collection has an object personality).
 func (pf *PointerFunctions) SizeFunction() unsafe.Pointer {
 	defer runtime.KeepAlive(pf)
 	_r := objc.Send[unsafe.Pointer](objref.IDOf(pf), objc.RegisterName("sizeFunction"))
 	return _r
 }
 
-// DescriptionFunction returns the description function.
+// DescriptionFunction returns the function used to describe elements. This function is used by description methods for hash and map tables.
 func (pf *PointerFunctions) DescriptionFunction() unsafe.Pointer {
 	defer runtime.KeepAlive(pf)
 	_r := objc.Send[unsafe.Pointer](objref.IDOf(pf), objc.RegisterName("descriptionFunction"))
 	return _r
 }
 
-// RelinquishFunction returns the relinquish function.
+// RelinquishFunction returns the function used to relinquish memory. This specifies the function to use when an item is removed from a table or pointer array.
 func (pf *PointerFunctions) RelinquishFunction() unsafe.Pointer {
 	defer runtime.KeepAlive(pf)
 	_r := objc.Send[unsafe.Pointer](objref.IDOf(pf), objc.RegisterName("relinquishFunction"))
 	return _r
 }
 
-// AcquireFunction returns the acquire function.
+// AcquireFunction returns the function used to acquire memory. This specifies the function to use for copy-in operations.
 func (pf *PointerFunctions) AcquireFunction() unsafe.Pointer {
 	defer runtime.KeepAlive(pf)
 	_r := objc.Send[unsafe.Pointer](objref.IDOf(pf), objc.RegisterName("acquireFunction"))
 	return _r
 }
 
-// UsesStrongWriteBarrier wraps the corresponding Objective-C method.
+// UsesStrongWriteBarrier reports whether specifies whether, in a garbage collected environment, pointers should be assigned using a strong write barrier. If you use garbage collection, read and write barrier functions must be used when pointers are from memory scanned by the collector.
 func (pf *PointerFunctions) UsesStrongWriteBarrier() bool {
 	defer runtime.KeepAlive(pf)
 	_r := objc.Send[bool](objref.IDOf(pf), objc.RegisterName("usesStrongWriteBarrier"))
 	return _r
 }
 
-// UsesWeakReadAndWriteBarriers wraps the corresponding Objective-C method.
+// UsesWeakReadAndWriteBarriers reports whether specifies whether, in a garbage collected environment, pointers should use weak read and write barriers. If you use garbage collection, read and write barrier functions must be used when pointers are from memory scanned by the collector.
 func (pf *PointerFunctions) UsesWeakReadAndWriteBarriers() bool {
 	defer runtime.KeepAlive(pf)
 	_r := objc.Send[bool](objref.IDOf(pf), objc.RegisterName("usesWeakReadAndWriteBarriers"))

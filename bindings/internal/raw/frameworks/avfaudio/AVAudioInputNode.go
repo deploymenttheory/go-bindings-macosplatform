@@ -18,17 +18,18 @@ type AVAudioInputNode struct {
 }
 
 var (
-	_clsAVAudioInputNode                                                 = _objcClass("AVAudioInputNode")
-	_aVAudioInputNodeSelSetManualRenderingInputPCMFormatInputBlock       = objc.RegisterName("setManualRenderingInputPCMFormat:inputBlock:")
-	_aVAudioInputNodeSelSetMutedSpeechActivityEventListener              = objc.RegisterName("setMutedSpeechActivityEventListener:")
-	_aVAudioInputNodeSelIsVoiceProcessingBypassed                        = objc.RegisterName("isVoiceProcessingBypassed")
-	_aVAudioInputNodeSelSetVoiceProcessingBypassed                       = objc.RegisterName("setVoiceProcessingBypassed:")
-	_aVAudioInputNodeSelIsVoiceProcessingAGCEnabled                      = objc.RegisterName("isVoiceProcessingAGCEnabled")
-	_aVAudioInputNodeSelSetVoiceProcessingAGCEnabled                     = objc.RegisterName("setVoiceProcessingAGCEnabled:")
-	_aVAudioInputNodeSelIsVoiceProcessingInputMuted                      = objc.RegisterName("isVoiceProcessingInputMuted")
-	_aVAudioInputNodeSelSetVoiceProcessingInputMuted                     = objc.RegisterName("setVoiceProcessingInputMuted:")
-	_aVAudioInputNodeSelVoiceProcessingOtherAudioDuckingConfiguration    = objc.RegisterName("voiceProcessingOtherAudioDuckingConfiguration")
-	_aVAudioInputNodeSelSetVoiceProcessingOtherAudioDuckingConfiguration = objc.RegisterName("setVoiceProcessingOtherAudioDuckingConfiguration:")
+	_clsAVAudioInputNode                                                       = _objcClass("AVAudioInputNode")
+	_aVAudioInputNodeSelSetManualRenderingInputPCMFormatInputBlock             = objc.RegisterName("setManualRenderingInputPCMFormat:inputBlock:")
+	_aVAudioInputNodeSelSetRealtimeSafeManualRenderingInputPCMFormatInputBlock = objc.RegisterName("setRealtimeSafeManualRenderingInputPCMFormat:inputBlock:")
+	_aVAudioInputNodeSelSetMutedSpeechActivityEventListener                    = objc.RegisterName("setMutedSpeechActivityEventListener:")
+	_aVAudioInputNodeSelIsVoiceProcessingBypassed                              = objc.RegisterName("isVoiceProcessingBypassed")
+	_aVAudioInputNodeSelSetVoiceProcessingBypassed                             = objc.RegisterName("setVoiceProcessingBypassed:")
+	_aVAudioInputNodeSelIsVoiceProcessingAGCEnabled                            = objc.RegisterName("isVoiceProcessingAGCEnabled")
+	_aVAudioInputNodeSelSetVoiceProcessingAGCEnabled                           = objc.RegisterName("setVoiceProcessingAGCEnabled:")
+	_aVAudioInputNodeSelIsVoiceProcessingInputMuted                            = objc.RegisterName("isVoiceProcessingInputMuted")
+	_aVAudioInputNodeSelSetVoiceProcessingInputMuted                           = objc.RegisterName("setVoiceProcessingInputMuted:")
+	_aVAudioInputNodeSelVoiceProcessingOtherAudioDuckingConfiguration          = objc.RegisterName("voiceProcessingOtherAudioDuckingConfiguration")
+	_aVAudioInputNodeSelSetVoiceProcessingOtherAudioDuckingConfiguration       = objc.RegisterName("setVoiceProcessingOtherAudioDuckingConfiguration:")
 )
 
 func AVAudioInputNodeFromID(id objc.ID) *AVAudioInputNode {
@@ -51,6 +52,19 @@ func (o *AVAudioInputNode) SetManualRenderingInputPCMFormatInputBlock(format *AV
 		defer __block_block.Release()
 	}
 	_ret := objc.Send[bool](o.Ptr(), _aVAudioInputNodeSelSetManualRenderingInputPCMFormatInputBlock, format.Ptr(), __block_block)
+	return _ret
+}
+
+// @method setRealtimeSafeManualRenderingInputPCMFormat:inputBlock: @abstract Identical to setManualRenderingInputPCMFormat:inputBlock:, but requires a realtime-safe input block.
+func (o *AVAudioInputNode) SetRealtimeSafeManualRenderingInputPCMFormatInputBlock(format *AVAudioFormat, block func(uint32) *coreaudiotypes.AudioBufferList) bool {
+	var __block_block objc.Block
+	if block != nil {
+		__block_block = objc.NewBlock(func(_ objc.Block, blockParam0 uint32) *coreaudiotypes.AudioBufferList {
+			return block(blockParam0)
+		})
+		defer __block_block.Release()
+	}
+	_ret := objc.Send[bool](o.Ptr(), _aVAudioInputNodeSelSetRealtimeSafeManualRenderingInputPCMFormatInputBlock, format.Ptr(), __block_block)
 	return _ret
 }
 

@@ -14,33 +14,33 @@ import (
 
 var (
 	_cp_drawable_add_mtl4_render_context                                                    func(unsafe.Pointer) unsafe.Pointer
-	_cp_drawable_add_render_context                                                         func(unsafe.Pointer, metal.MTLCommandBuffer) unsafe.Pointer
+	_cp_drawable_add_render_context                                                         func(unsafe.Pointer, objc.ID) unsafe.Pointer
 	_cp_drawable_add_tracking_area                                                          func(unsafe.Pointer, uint64) unsafe.Pointer
 	_cp_drawable_array_get_count                                                            func(unsafe.Pointer) uint
 	_cp_drawable_array_get_drawable                                                         func(unsafe.Pointer, uint) unsafe.Pointer
 	_cp_drawable_compute_projection                                                         func(unsafe.Pointer, Cp_axis_direction_convention, uint) unsafe.Pointer
-	_cp_drawable_encode_present                                                             func(unsafe.Pointer, metal.MTLCommandBuffer)
-	_cp_drawable_get_color_texture                                                          func(unsafe.Pointer, uint) metal.MTLTexture
+	_cp_drawable_encode_present                                                             func(unsafe.Pointer, objc.ID)
+	_cp_drawable_get_color_texture                                                          func(unsafe.Pointer, uint) objc.ID
 	_cp_drawable_get_depth_range                                                            func(unsafe.Pointer) unsafe.Pointer
-	_cp_drawable_get_depth_texture                                                          func(unsafe.Pointer, uint) metal.MTLTexture
+	_cp_drawable_get_depth_texture                                                          func(unsafe.Pointer, uint) objc.ID
 	_cp_drawable_get_device_anchor                                                          func(unsafe.Pointer) objc.ID
-	_cp_drawable_get_flipped_rasterization_rate_map                                         func(unsafe.Pointer, uint) metal.MTLRasterizationRateMap
+	_cp_drawable_get_flipped_rasterization_rate_map                                         func(unsafe.Pointer, uint) objc.ID
 	_cp_drawable_get_frame_timing                                                           func(unsafe.Pointer) unsafe.Pointer
 	_cp_drawable_get_presentation_frame_index                                               func(unsafe.Pointer) uint64
-	_cp_drawable_get_rasterization_rate_map                                                 func(unsafe.Pointer, uint) metal.MTLRasterizationRateMap
+	_cp_drawable_get_rasterization_rate_map                                                 func(unsafe.Pointer, uint) objc.ID
 	_cp_drawable_get_rasterization_rate_map_count                                           func(unsafe.Pointer) uint
 	_cp_drawable_get_state                                                                  func(unsafe.Pointer) Cp_drawable_state
 	_cp_drawable_get_target                                                                 func(unsafe.Pointer) Cp_drawable_target
 	_cp_drawable_get_texture_count                                                          func(unsafe.Pointer) uint
-	_cp_drawable_get_tracking_areas_texture                                                 func(unsafe.Pointer, uint) metal.MTLTexture
+	_cp_drawable_get_tracking_areas_texture                                                 func(unsafe.Pointer, uint) objc.ID
 	_cp_drawable_get_tracking_areas_texture_count                                           func(unsafe.Pointer) uint
 	_cp_drawable_get_view                                                                   func(unsafe.Pointer, uint) unsafe.Pointer
 	_cp_drawable_get_view_count                                                             func(unsafe.Pointer) uint
 	_cp_drawable_mtl4_encode_present                                                        func(unsafe.Pointer)
-	_cp_drawable_render_context_draw_mask_on_stencil_attachment                             func(unsafe.Pointer, metal.MTLRenderCommandEncoder, uint8)
-	_cp_drawable_render_context_end_encoding                                                func(unsafe.Pointer, metal.MTLRenderCommandEncoder)
-	_cp_drawable_render_context_mtl4_draw_mask_on_stencil_attachment                        func(unsafe.Pointer, metal.MTL4RenderCommandEncoder, uint8)
-	_cp_drawable_render_context_mtl4_end_encoding                                           func(unsafe.Pointer, metal.MTL4RenderCommandEncoder)
+	_cp_drawable_render_context_draw_mask_on_stencil_attachment                             func(unsafe.Pointer, objc.ID, uint8)
+	_cp_drawable_render_context_end_encoding                                                func(unsafe.Pointer, objc.ID)
+	_cp_drawable_render_context_mtl4_draw_mask_on_stencil_attachment                        func(unsafe.Pointer, objc.ID, uint8)
+	_cp_drawable_render_context_mtl4_end_encoding                                           func(unsafe.Pointer, objc.ID)
 	_cp_drawable_set_depth_range                                                            func(unsafe.Pointer, unsafe.Pointer)
 	_cp_drawable_set_device_anchor                                                          func(unsafe.Pointer, objc.ID)
 	_cp_frame_binocular_frustum_matrix                                                      func(unsafe.Pointer, Cp_axis_direction_convention, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
@@ -101,9 +101,9 @@ var (
 	_cp_layer_renderer_configuration_set_tracking_areas_format                              func(objc.ID, metal.MTLPixelFormat)
 	_cp_layer_renderer_configuration_set_tracking_areas_usage                               func(objc.ID, metal.MTLTextureUsage)
 	_cp_layer_renderer_get_configuration                                                    func(objc.ID) objc.ID
-	_cp_layer_renderer_get_device                                                           func(objc.ID) metal.MTLDevice
+	_cp_layer_renderer_get_device                                                           func(objc.ID) objc.ID
 	_cp_layer_renderer_get_minimum_frame_repeat_count                                       func(objc.ID) int
-	_cp_layer_renderer_get_mtl4_command_queue                                               func(objc.ID) metal.MTL4CommandQueue
+	_cp_layer_renderer_get_mtl4_command_queue                                               func(objc.ID) objc.ID
 	_cp_layer_renderer_get_properties                                                       func(objc.ID) objc.ID
 	_cp_layer_renderer_get_render_quality                                                   func(objc.ID) float32
 	_cp_layer_renderer_get_state                                                            func(objc.ID) Cp_layer_renderer_state
@@ -141,7 +141,7 @@ func CpDrawableAddMtl4RenderContext(drawable unsafe.Pointer) unsafe.Pointer {
 }
 
 // C function: cp_drawable_add_render_context
-func CpDrawableAddRenderContext(drawable unsafe.Pointer, cmdBuffer metal.MTLCommandBuffer) unsafe.Pointer {
+func CpDrawableAddRenderContext(drawable unsafe.Pointer, cmdBuffer objc.ID) unsafe.Pointer {
 	return _cp_drawable_add_render_context(drawable, cmdBuffer)
 }
 
@@ -166,12 +166,12 @@ func CpDrawableComputeProjection(drawable unsafe.Pointer, normalizedDeviceCoordi
 }
 
 // C function: cp_drawable_encode_present
-func CpDrawableEncodePresent(drawable unsafe.Pointer, commandBuffer metal.MTLCommandBuffer) {
+func CpDrawableEncodePresent(drawable unsafe.Pointer, commandBuffer objc.ID) {
 	_cp_drawable_encode_present(drawable, commandBuffer)
 }
 
 // C function: cp_drawable_get_color_texture
-func CpDrawableGetColorTexture(drawable unsafe.Pointer, index uint) metal.MTLTexture {
+func CpDrawableGetColorTexture(drawable unsafe.Pointer, index uint) objc.ID {
 	return _cp_drawable_get_color_texture(drawable, index)
 }
 
@@ -181,7 +181,7 @@ func CpDrawableGetDepthRange(drawable unsafe.Pointer) unsafe.Pointer {
 }
 
 // C function: cp_drawable_get_depth_texture
-func CpDrawableGetDepthTexture(drawable unsafe.Pointer, index uint) metal.MTLTexture {
+func CpDrawableGetDepthTexture(drawable unsafe.Pointer, index uint) objc.ID {
 	return _cp_drawable_get_depth_texture(drawable, index)
 }
 
@@ -195,7 +195,7 @@ func CpDrawableGetDeviceAnchor(drawable unsafe.Pointer) *foundation.NSObject {
 }
 
 // C function: cp_drawable_get_flipped_rasterization_rate_map
-func CpDrawableGetFlippedRasterizationRateMap(drawable unsafe.Pointer, index uint) metal.MTLRasterizationRateMap {
+func CpDrawableGetFlippedRasterizationRateMap(drawable unsafe.Pointer, index uint) objc.ID {
 	return _cp_drawable_get_flipped_rasterization_rate_map(drawable, index)
 }
 
@@ -210,7 +210,7 @@ func CpDrawableGetPresentationFrameIndex(drawable unsafe.Pointer) uint64 {
 }
 
 // C function: cp_drawable_get_rasterization_rate_map
-func CpDrawableGetRasterizationRateMap(drawable unsafe.Pointer, index uint) metal.MTLRasterizationRateMap {
+func CpDrawableGetRasterizationRateMap(drawable unsafe.Pointer, index uint) objc.ID {
 	return _cp_drawable_get_rasterization_rate_map(drawable, index)
 }
 
@@ -235,7 +235,7 @@ func CpDrawableGetTextureCount(drawable unsafe.Pointer) uint {
 }
 
 // C function: cp_drawable_get_tracking_areas_texture
-func CpDrawableGetTrackingAreasTexture(drawable unsafe.Pointer, index uint) metal.MTLTexture {
+func CpDrawableGetTrackingAreasTexture(drawable unsafe.Pointer, index uint) objc.ID {
 	return _cp_drawable_get_tracking_areas_texture(drawable, index)
 }
 
@@ -260,22 +260,22 @@ func CpDrawableMtl4EncodePresent(drawable unsafe.Pointer) {
 }
 
 // C function: cp_drawable_render_context_draw_mask_on_stencil_attachment
-func CpDrawableRenderContextDrawMaskOnStencilAttachment(renderContext unsafe.Pointer, commandEncoder metal.MTLRenderCommandEncoder, value uint8) {
+func CpDrawableRenderContextDrawMaskOnStencilAttachment(renderContext unsafe.Pointer, commandEncoder objc.ID, value uint8) {
 	_cp_drawable_render_context_draw_mask_on_stencil_attachment(renderContext, commandEncoder, value)
 }
 
 // C function: cp_drawable_render_context_end_encoding
-func CpDrawableRenderContextEndEncoding(renderContext unsafe.Pointer, commandEncoder metal.MTLRenderCommandEncoder) {
+func CpDrawableRenderContextEndEncoding(renderContext unsafe.Pointer, commandEncoder objc.ID) {
 	_cp_drawable_render_context_end_encoding(renderContext, commandEncoder)
 }
 
 // C function: cp_drawable_render_context_mtl4_draw_mask_on_stencil_attachment
-func CpDrawableRenderContextMtl4DrawMaskOnStencilAttachment(renderContext unsafe.Pointer, commandEncoder metal.MTL4RenderCommandEncoder, value uint8) {
+func CpDrawableRenderContextMtl4DrawMaskOnStencilAttachment(renderContext unsafe.Pointer, commandEncoder objc.ID, value uint8) {
 	_cp_drawable_render_context_mtl4_draw_mask_on_stencil_attachment(renderContext, commandEncoder, value)
 }
 
 // C function: cp_drawable_render_context_mtl4_end_encoding
-func CpDrawableRenderContextMtl4EndEncoding(renderContext unsafe.Pointer, commandEncoder metal.MTL4RenderCommandEncoder) {
+func CpDrawableRenderContextMtl4EndEncoding(renderContext unsafe.Pointer, commandEncoder objc.ID) {
 	_cp_drawable_render_context_mtl4_end_encoding(renderContext, commandEncoder)
 }
 
@@ -584,7 +584,7 @@ func CpLayerRendererGetConfiguration(layerRenderer *CP_OBJECT_cp_layer_renderer)
 }
 
 // C function: cp_layer_renderer_get_device
-func CpLayerRendererGetDevice(layerRenderer *CP_OBJECT_cp_layer_renderer) metal.MTLDevice {
+func CpLayerRendererGetDevice(layerRenderer *CP_OBJECT_cp_layer_renderer) objc.ID {
 	return _cp_layer_renderer_get_device(layerRenderer.Ptr())
 }
 
@@ -594,7 +594,7 @@ func CpLayerRendererGetMinimumFrameRepeatCount(layerRenderer *CP_OBJECT_cp_layer
 }
 
 // C function: cp_layer_renderer_get_mtl4_command_queue
-func CpLayerRendererGetMtl4CommandQueue(layerRenderer *CP_OBJECT_cp_layer_renderer) metal.MTL4CommandQueue {
+func CpLayerRendererGetMtl4CommandQueue(layerRenderer *CP_OBJECT_cp_layer_renderer) objc.ID {
 	return _cp_layer_renderer_get_mtl4_command_queue(layerRenderer.Ptr())
 }
 

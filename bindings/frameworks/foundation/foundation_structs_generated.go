@@ -21,6 +21,7 @@ type NSAffineTransformStruct struct {
 	TY  float64
 }
 
+// Identifies an Apple event whose handling has been suspended. Can be used to resume handling of the Apple event.
 type NSAppleEventManagerSuspension struct{}
 
 // A structure representing a base-10 number.
@@ -51,13 +52,14 @@ type NSHashEnumerator struct {
 type NSMapEnumerator struct {
 }
 
-// A structure that contains version information about the currently executing operating system, including major, minor, and patch version numbers.
+// A structure that contains version information about the currently executing operating system, including major, minor, and patch version numbers. Use the “ProcessInfo“ property “ProcessInfo/operatingSystemVersion“ to fetch an instance of this type. You can also pass this type to “ProcessInfo/isOperatingSystemAtLeast(_:)“ to determine whether the current operating system version is the same or later than the given value.
 type NSOperatingSystemVersion struct {
 	MajorVersion int
 	MinorVersion int
 	PatchVersion int
 }
 
+// A structure used to describe a portion of a series, such as characters in a string or objects in an array.
 type NSRange struct {
 	Location uint
 	Length   uint

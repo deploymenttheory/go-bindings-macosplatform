@@ -282,6 +282,26 @@ func MIDINetworkNotificationSessionDidChange() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("MIDINetworkNotificationSessionDidChange")))
 }
 
+// MIDIUMPEndpointWasAddedNotification returns the string constant MIDIUMPEndpointWasAddedNotification, for use as a dictionary key or argument.
+func MIDIUMPEndpointWasAddedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MIDIUMPEndpointWasAddedNotification")))
+}
+
+// MIDIUMPEndpointWasRemovedNotification returns the string constant MIDIUMPEndpointWasRemovedNotification, for use as a dictionary key or argument.
+func MIDIUMPEndpointWasRemovedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MIDIUMPEndpointWasRemovedNotification")))
+}
+
+// MIDIUMPEndpointWasUpdatedNotification returns the string constant MIDIUMPEndpointWasUpdatedNotification, for use as a dictionary key or argument.
+func MIDIUMPEndpointWasUpdatedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MIDIUMPEndpointWasUpdatedNotification")))
+}
+
+// MIDIUMPFunctionBlockWasUpdatedNotification returns the string constant MIDIUMPFunctionBlockWasUpdatedNotification, for use as a dictionary key or argument.
+func MIDIUMPFunctionBlockWasUpdatedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MIDIUMPFunctionBlockWasUpdatedNotification")))
+}
+
 // MIDIUMPEndpointObjectKey returns the string constant MIDIUMPEndpointObjectKey, for use as a dictionary key or argument.
 func MIDIUMPEndpointObjectKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("MIDIUMPEndpointObjectKey")))
@@ -292,6 +312,26 @@ func MIDIUMPFunctionBlockObjectKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("MIDIUMPFunctionBlockObjectKey")))
 }
 
+// MIDICIDeviceWasAddedNotification returns the string constant MIDICIDeviceWasAddedNotification, for use as a dictionary key or argument.
+func MIDICIDeviceWasAddedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MIDICIDeviceWasAddedNotification")))
+}
+
+// MIDICIDeviceWasRemovedNotification returns the string constant MIDICIDeviceWasRemovedNotification, for use as a dictionary key or argument.
+func MIDICIDeviceWasRemovedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MIDICIDeviceWasRemovedNotification")))
+}
+
+// MIDICIProfileWasUpdatedNotification returns the string constant MIDICIProfileWasUpdatedNotification, for use as a dictionary key or argument.
+func MIDICIProfileWasUpdatedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MIDICIProfileWasUpdatedNotification")))
+}
+
+// MIDICIProfileWasRemovedNotification returns the string constant MIDICIProfileWasRemovedNotification, for use as a dictionary key or argument.
+func MIDICIProfileWasRemovedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MIDICIProfileWasRemovedNotification")))
+}
+
 // MIDICIDeviceObjectKey returns the string constant MIDICIDeviceObjectKey, for use as a dictionary key or argument.
 func MIDICIDeviceObjectKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("MIDICIDeviceObjectKey")))
@@ -300,42 +340,4 @@ func MIDICIDeviceObjectKey() obj.Object {
 // MIDICIProfileObjectKey returns the string constant MIDICIProfileObjectKey, for use as a dictionary key or argument.
 func MIDICIProfileObjectKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("MIDICIProfileObjectKey")))
-}
-
-// MIDIUMPEndpointWasAddedNotification returns the address of the symbol MIDIUMPEndpointWasAddedNotification.
-func MIDIUMPEndpointWasAddedNotification() uintptr {
-	return _symbol("MIDIUMPEndpointWasAddedNotification")
-}
-
-// MIDIUMPEndpointWasRemovedNotification returns the address of the symbol MIDIUMPEndpointWasRemovedNotification.
-func MIDIUMPEndpointWasRemovedNotification() uintptr {
-	return _symbol("MIDIUMPEndpointWasRemovedNotification")
-}
-
-// MIDIUMPEndpointWasUpdatedNotification returns the address of the symbol MIDIUMPEndpointWasUpdatedNotification.
-func MIDIUMPEndpointWasUpdatedNotification() uintptr {
-	return _symbol("MIDIUMPEndpointWasUpdatedNotification")
-}
-
-// MIDIUMPFunctionBlockWasUpdatedNotification returns the address of the symbol MIDIUMPFunctionBlockWasUpdatedNotification.
-func MIDIUMPFunctionBlockWasUpdatedNotification() uintptr {
-	return _symbol("MIDIUMPFunctionBlockWasUpdatedNotification")
-}
-
-// MIDICIDeviceWasAddedNotification returns the address of the symbol MIDICIDeviceWasAddedNotification.
-func MIDICIDeviceWasAddedNotification() uintptr { return _symbol("MIDICIDeviceWasAddedNotification") }
-
-// MIDICIDeviceWasRemovedNotification returns the address of the symbol MIDICIDeviceWasRemovedNotification.
-func MIDICIDeviceWasRemovedNotification() uintptr {
-	return _symbol("MIDICIDeviceWasRemovedNotification")
-}
-
-// MIDICIProfileWasUpdatedNotification returns the address of the symbol MIDICIProfileWasUpdatedNotification.
-func MIDICIProfileWasUpdatedNotification() uintptr {
-	return _symbol("MIDICIProfileWasUpdatedNotification")
-}
-
-// MIDICIProfileWasRemovedNotification returns the address of the symbol MIDICIProfileWasRemovedNotification.
-func MIDICIProfileWasRemovedNotification() uintptr {
-	return _symbol("MIDICIProfileWasRemovedNotification")
 }

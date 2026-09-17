@@ -60,6 +60,18 @@ func MTRCommandPathKey() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
+func MTRCommissioningSessionTransportType() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_matterLib, "MTRCommissioningSessionTransportType")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
 func MTRContextTagKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_matterLib, "MTRContextTagKey")
 	if ptr == 0 {
@@ -447,6 +459,18 @@ func MTRTypeKey() *foundation.NSString {
 
 func MTRUTF8StringValueType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_matterLib, "MTRUTF8StringValueType")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
+func MTRUnpoweredInitialPhase() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_matterLib, "MTRUnpoweredInitialPhase")
 	if ptr == 0 {
 		return nil
 	}

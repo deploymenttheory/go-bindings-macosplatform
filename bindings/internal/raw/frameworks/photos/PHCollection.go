@@ -25,6 +25,7 @@ var (
 	_pHCollectionSelCanContainAssets                        = objc.RegisterName("canContainAssets")
 	_pHCollectionSelCanContainCollections                   = objc.RegisterName("canContainCollections")
 	_pHCollectionSelLocalizedTitle                          = objc.RegisterName("localizedTitle")
+	_pHCollectionSelModificationDate                        = objc.RegisterName("modificationDate")
 )
 
 func PHCollectionFromID(id objc.ID) *PHCollection {
@@ -77,4 +78,13 @@ func (o *PHCollection) LocalizedTitle() *foundation.NSString {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return foundation.NSStringFromID(_ret)
+}
+
+// The last date at which this collection was modified.
+func (o *PHCollection) ModificationDate() *foundation.NSDate {
+	_ret := objc.Send[objc.ID](o.Ptr(), _pHCollectionSelModificationDate)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDateFromID(_ret)
 }

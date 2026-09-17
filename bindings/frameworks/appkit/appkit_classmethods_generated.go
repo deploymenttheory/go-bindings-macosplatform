@@ -1244,21 +1244,23 @@ func HeaderColor() *Color {
 }
 
 // SecondarySelectedControlColor returns the background color of selected content or text that is unemphasized. Older alias for +unemphasizedSelectedContentBackgroundColor and +unemphasizedSelectedTextBackgroundColor
-func SecondarySelectedControlColor() unsafe.Pointer {
-	_r := objc.Send[unsafe.Pointer](objc.ID(_class("NSColor")), objc.RegisterName("secondarySelectedControlColor"))
-	return _r
+func SecondarySelectedControlColor() *Color {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("secondarySelectedControlColor"))
+	return ColorFromID(_r)
 }
 
 // AlternateSelectedControlColor returns the background color of selected and emphasized (focused) content: table views rows, collection views, etc. Older alias for +selectedContentBackgroundColor
-func AlternateSelectedControlColor() unsafe.Pointer {
-	_r := objc.Send[unsafe.Pointer](objc.ID(_class("NSColor")), objc.RegisterName("alternateSelectedControlColor"))
-	return _r
+func AlternateSelectedControlColor() *Color {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("alternateSelectedControlColor"))
+	return ColorFromID(_r)
 }
 
 // ControlAlternatingRowBackgroundColors returns the background colors for alternating content items: such as table view rows, collection view items. Older alias for +alternatingContentBackgroundColors
-func ControlAlternatingRowBackgroundColors() unsafe.Pointer {
-	_r := objc.Send[unsafe.Pointer](objc.ID(_class("NSColor")), objc.RegisterName("controlAlternatingRowBackgroundColors"))
-	return _r
+//
+// ControlAlternatingRowBackgroundColors returns the collection as a Go slice.
+func ControlAlternatingRowBackgroundColors() []*Color {
+	_arr := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("controlAlternatingRowBackgroundColors"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Color { return ColorFromID(_id) })
 }
 
 // ColorWithCIColor wraps the corresponding Objective-C method.
@@ -1283,15 +1285,6 @@ func AvailableColorLists() []*ColorList {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ColorList { return ColorListFromID(_id) })
 }
 
-// DragColorWithEventFromView drags a color into a destination view from the specified source view.
-func DragColorWithEventFromView(color *Color, event *Event, sourceView *View) bool {
-	defer runtime.KeepAlive(color)
-	defer runtime.KeepAlive(event)
-	defer runtime.KeepAlive(sourceView)
-	_r := objc.Send[bool](objc.ID(_class("NSColorPanel")), objc.RegisterName("dragColor:withEvent:fromView:"), objref.IDOf(color), objref.IDOf(event), objref.IDOf(sourceView))
-	return _r
-}
-
 // SetPickerMask determines which color selection modes are available in an application’s NSColorPanel.
 func SetPickerMask(mask ColorPanelOptions) {
 	objc.Send[objc.ID](objc.ID(_class("NSColorPanel")), objc.RegisterName("setPickerMask:"), mask)
@@ -1300,6 +1293,15 @@ func SetPickerMask(mask ColorPanelOptions) {
 // SetPickerMode specifies the color panel’s initial picker.
 func SetPickerMode(mode ColorPanelMode) {
 	objc.Send[objc.ID](objc.ID(_class("NSColorPanel")), objc.RegisterName("setPickerMode:"), mode)
+}
+
+// DragColorWithEventFromView drags a color into a destination view from the specified source view.
+func DragColorWithEventFromView(color *Color, event *Event, sourceView *View) bool {
+	defer runtime.KeepAlive(color)
+	defer runtime.KeepAlive(event)
+	defer runtime.KeepAlive(sourceView)
+	_r := objc.Send[bool](objc.ID(_class("NSColorPanel")), objc.RegisterName("dragColor:withEvent:fromView:"), objref.IDOf(color), objref.IDOf(event), objref.IDOf(sourceView))
+	return _r
 }
 
 // SharedColorPanel returns the shared color panel.
@@ -1768,6 +1770,12 @@ func SetMouseCoalescingEnabled(mouseCoalescingEnabled bool) {
 	objc.Send[objc.ID](objc.ID(_class("NSEvent")), objc.RegisterName("setMouseCoalescingEnabled:"), mouseCoalescingEnabled)
 }
 
+// IsTouchSwipeNavigationEnabled reports whether the object is touch swipe navigation enabled.
+func IsTouchSwipeNavigationEnabled() bool {
+	_r := objc.Send[bool](objc.ID(_class("NSEvent")), objc.RegisterName("isTouchSwipeNavigationEnabled"))
+	return _r
+}
+
 // IsSwipeTrackingFromScrollEventsEnabled reports whether the object is swipe tracking from scroll events enabled.
 func IsSwipeTrackingFromScrollEventsEnabled() bool {
 	_r := objc.Send[bool](objc.ID(_class("NSEvent")), objc.RegisterName("isSwipeTrackingFromScrollEventsEnabled"))
@@ -1955,12 +1963,6 @@ func MonospacedSystemFontOfSizeWeight(fontSize float64, weight float64) *Font {
 	return FontFromID(_r)
 }
 
-// SystemFontSizeForControlSize returns the font size used for the specified control size.
-func SystemFontSizeForControlSize(controlSize ControlSize) float64 {
-	_r := objc.Send[float64](objc.ID(_class("NSFont")), objc.RegisterName("systemFontSizeForControlSize:"), controlSize)
-	return _r
-}
-
 // SystemFontSize returns the system font size.
 func SystemFontSize() float64 {
 	_r := objc.Send[float64](objc.ID(_class("NSFont")), objc.RegisterName("systemFontSize"))
@@ -1985,6 +1987,12 @@ func PreferredFontForTextStyleOptions(style obj.Object, options obj.Object) *Fon
 	defer runtime.KeepAlive(options)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSFont")), objc.RegisterName("preferredFontForTextStyle:options:"), objref.IDOf(style), objref.IDOf(options))
 	return FontFromID(_r)
+}
+
+// SystemFontSizeForControlSize returns the font size used for the specified control size.
+func SystemFontSizeForControlSize(controlSize ControlSize) float64 {
+	_r := objc.Send[float64](objc.ID(_class("NSFont")), objc.RegisterName("systemFontSizeForControlSize:"), controlSize)
+	return _r
 }
 
 // FontCollectionWithDescriptors returns a font collection matching the given descriptors.
@@ -2804,7 +2812,7 @@ func DefaultWritingDirectionForLanguage(languageName string) WritingDirection {
 	return _r
 }
 
-// DefaultParagraphStyle returns the default paragraph style.
+// DefaultParagraphStyle returns the default paragraph style. The default paragraph style has the following default values: | Subattribute | Default | |---|---| | Alignment | `NSNaturalTextAlignment` | | Tab stops | 12 left-aligned tabs, spaced by `28.0` points | | Line break mode | `NSLineBreakByWordWrapping` | | All others | `0.0` | See individual method descriptions for explanations of each subattribute.
 func DefaultParagraphStyle() *ParagraphStyle {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSParagraphStyle")), objc.RegisterName("defaultParagraphStyle"))
 	return ParagraphStyleFromID(_r)
@@ -3496,13 +3504,13 @@ func CurrentInputContext() *TextInputContext {
 	return TextInputContextFromID(_r)
 }
 
-// LinkRenderingAttributes returns the link rendering attributes.
+// LinkRenderingAttributes returns the default set of attributes for rendering `NSLinkAttributeName`. The base “NSTextLayoutManager“ class returns with “NSUnderlineStyle/single“ for <doc://com.apple.documentation/documentation/foundation/nsattributedstring/key/1524865-underlinestyle> in Swift or “NSUnderlineStyleAttributeName“ in Objective-C, and the platform link color for <doc://com.apple.documentation/documentation/foundation/nsattributedstring/key/1533563-foregroundcolor> in Swift or “NSForegroundColorAttributeName“ in Objective-C. The platform color for macOS is `linkColor`. Other platforms use `blueColor`.
 func LinkRenderingAttributes() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSTextLayoutManager")), objc.RegisterName("linkRenderingAttributes"))
 	return obj.Wrap(_r)
 }
 
-// IncludesTextListMarkers wraps the corresponding Objective-C method.
+// IncludesTextListMarkers reports whether textKit includes text list markers in the contents. The default value is `false`.
 func IncludesTextListMarkers() bool {
 	_r := objc.Send[bool](objc.ID(_class("NSTextList")), objc.RegisterName("includesTextListMarkers"))
 	return _r
@@ -3740,6 +3748,123 @@ func RequiresConstraintBasedLayout() bool {
 	return _r
 }
 
+// ConfigurationWithRadius a configuration that applies the given radius independently to all corners.
+func ConfigurationWithRadius(radius *ViewCornerRadius) *ViewCornerConfiguration {
+	defer runtime.KeepAlive(radius)
+	_r := objc.Send[objc.ID](objc.ID(_class("NSViewCornerConfiguration")), objc.RegisterName("configurationWithRadius:"), objref.IDOf(radius))
+	return ViewCornerConfigurationFromID(_r)
+}
+
+// ConfigurationWithTopLeftRadiusTopRightRadiusBottomLeftRadiusBottomRightRadius a configuration with independent radii for each corner.
+func ConfigurationWithTopLeftRadiusTopRightRadiusBottomLeftRadiusBottomRightRadius(topLeftRadius *ViewCornerRadius, topRightRadius *ViewCornerRadius, bottomLeftRadius *ViewCornerRadius, bottomRightRadius *ViewCornerRadius) *ViewCornerConfiguration {
+	defer runtime.KeepAlive(topLeftRadius)
+	defer runtime.KeepAlive(topRightRadius)
+	defer runtime.KeepAlive(bottomLeftRadius)
+	defer runtime.KeepAlive(bottomRightRadius)
+	_r := objc.Send[objc.ID](objc.ID(_class("NSViewCornerConfiguration")), objc.RegisterName("configurationWithTopLeftRadius:topRightRadius:bottomLeftRadius:bottomRightRadius:"), objref.IDOf(topLeftRadius), objref.IDOf(topRightRadius), objref.IDOf(bottomLeftRadius), objref.IDOf(bottomRightRadius))
+	return ViewCornerConfigurationFromID(_r)
+}
+
+// CapsuleCornerConfigurationWithMaximumRadius a configuration where the container is to take on a capsule shape, scaling with the view’s size. and clamped to the maximumRadius.
+func CapsuleCornerConfigurationWithMaximumRadius(maximumRadius float64) *ViewCornerConfiguration {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSViewCornerConfiguration")), objc.RegisterName("capsuleCornerConfigurationWithMaximumRadius:"), maximumRadius)
+	return ViewCornerConfigurationFromID(_r)
+}
+
+// ConfigurationWithUniformRadius a configuration that applies the given radius uniformly to all corners, using the largest of the resolved corner radii when they differ.
+func ConfigurationWithUniformRadius(radius *ViewCornerRadius) *ViewCornerConfiguration {
+	defer runtime.KeepAlive(radius)
+	_r := objc.Send[objc.ID](objc.ID(_class("NSViewCornerConfiguration")), objc.RegisterName("configurationWithUniformRadius:"), objref.IDOf(radius))
+	return ViewCornerConfigurationFromID(_r)
+}
+
+// ConfigurationWithUniformRadiusTopLeftRadiusTopRightRadiusBottomLeftRadiusBottomRightRadius a configuration that applies the given uniform radius uniformly to all corners that are otherwise unspecified. Any specified corner is independent of the others.
+func ConfigurationWithUniformRadiusTopLeftRadiusTopRightRadiusBottomLeftRadiusBottomRightRadius(radius *ViewCornerRadius, topLeftRadius *ViewCornerRadius, topRightRadius *ViewCornerRadius, bottomLeftRadius *ViewCornerRadius, bottomRightRadius *ViewCornerRadius) *ViewCornerConfiguration {
+	defer runtime.KeepAlive(radius)
+	defer runtime.KeepAlive(topLeftRadius)
+	defer runtime.KeepAlive(topRightRadius)
+	defer runtime.KeepAlive(bottomLeftRadius)
+	defer runtime.KeepAlive(bottomRightRadius)
+	_r := objc.Send[objc.ID](objc.ID(_class("NSViewCornerConfiguration")), objc.RegisterName("configurationWithUniformRadius:topLeftRadius:topRightRadius:bottomLeftRadius:bottomRightRadius:"), objref.IDOf(radius), objref.IDOf(topLeftRadius), objref.IDOf(topRightRadius), objref.IDOf(bottomLeftRadius), objref.IDOf(bottomRightRadius))
+	return ViewCornerConfigurationFromID(_r)
+}
+
+// ConfigurationWithUniformTopRadiusBottomRadius a configuration that applies the topRadius uniformly to the top-left and top-right corners, and the bottomRadius uniformly to the bottom-left and bottom-right corners. When the uniform corners differ, it uses the largest of the resolved corner radii.
+func ConfigurationWithUniformTopRadiusBottomRadius(topRadius *ViewCornerRadius, bottomRadius *ViewCornerRadius) *ViewCornerConfiguration {
+	defer runtime.KeepAlive(topRadius)
+	defer runtime.KeepAlive(bottomRadius)
+	_r := objc.Send[objc.ID](objc.ID(_class("NSViewCornerConfiguration")), objc.RegisterName("configurationWithUniformTopRadius:bottomRadius:"), objref.IDOf(topRadius), objref.IDOf(bottomRadius))
+	return ViewCornerConfigurationFromID(_r)
+}
+
+// ConfigurationWithUniformLeftRadiusRightRadius a configuration that applies the leftRadius uniformly to the top-left and bottom-left corners, and the rightRadius uniformly to the top-right and bottom-right corners. When the uniform corners differ, it uses the largest of the resolved corner radii.
+func ConfigurationWithUniformLeftRadiusRightRadius(leftRadius *ViewCornerRadius, rightRadius *ViewCornerRadius) *ViewCornerConfiguration {
+	defer runtime.KeepAlive(leftRadius)
+	defer runtime.KeepAlive(rightRadius)
+	_r := objc.Send[objc.ID](objc.ID(_class("NSViewCornerConfiguration")), objc.RegisterName("configurationWithUniformLeftRadius:rightRadius:"), objref.IDOf(leftRadius), objref.IDOf(rightRadius))
+	return ViewCornerConfigurationFromID(_r)
+}
+
+// ConfigurationWithUniformTopRadiusBottomLeftRadiusBottomRightRadius a configuration that applies the topRadius uniformly to the top-left and top-right corners, with optional independent radii for the bottom-left and bottom-right corners. When the uniform corners differ, it uses the largest of the resolved corner radii.
+func ConfigurationWithUniformTopRadiusBottomLeftRadiusBottomRightRadius(topRadius *ViewCornerRadius, bottomLeftRadius *ViewCornerRadius, bottomRightRadius *ViewCornerRadius) *ViewCornerConfiguration {
+	defer runtime.KeepAlive(topRadius)
+	defer runtime.KeepAlive(bottomLeftRadius)
+	defer runtime.KeepAlive(bottomRightRadius)
+	_r := objc.Send[objc.ID](objc.ID(_class("NSViewCornerConfiguration")), objc.RegisterName("configurationWithUniformTopRadius:bottomLeftRadius:bottomRightRadius:"), objref.IDOf(topRadius), objref.IDOf(bottomLeftRadius), objref.IDOf(bottomRightRadius))
+	return ViewCornerConfigurationFromID(_r)
+}
+
+// ConfigurationWithUniformBottomRadiusTopLeftRadiusTopRightRadius a configuration that applies the bottomRadius uniformly to the bottom-left and bottom-right corners, with optional independent radii for the top-left and top-right corners. When the uniform corners differ, it uses the largest of the resolved corner radii.
+func ConfigurationWithUniformBottomRadiusTopLeftRadiusTopRightRadius(bottomRadius *ViewCornerRadius, topLeftRadius *ViewCornerRadius, topRightRadius *ViewCornerRadius) *ViewCornerConfiguration {
+	defer runtime.KeepAlive(bottomRadius)
+	defer runtime.KeepAlive(topLeftRadius)
+	defer runtime.KeepAlive(topRightRadius)
+	_r := objc.Send[objc.ID](objc.ID(_class("NSViewCornerConfiguration")), objc.RegisterName("configurationWithUniformBottomRadius:topLeftRadius:topRightRadius:"), objref.IDOf(bottomRadius), objref.IDOf(topLeftRadius), objref.IDOf(topRightRadius))
+	return ViewCornerConfigurationFromID(_r)
+}
+
+// ConfigurationWithUniformLeftRadiusTopRightRadiusBottomRightRadius a configuration that applies the leftRadius uniformly to the top-left and bottom-left corners, with optional independent radii for the top-right and bottom-right corners. When the uniform corners differ, it uses the largest of the resolved corner radii.
+func ConfigurationWithUniformLeftRadiusTopRightRadiusBottomRightRadius(leftRadius *ViewCornerRadius, topRightRadius *ViewCornerRadius, bottomRightRadius *ViewCornerRadius) *ViewCornerConfiguration {
+	defer runtime.KeepAlive(leftRadius)
+	defer runtime.KeepAlive(topRightRadius)
+	defer runtime.KeepAlive(bottomRightRadius)
+	_r := objc.Send[objc.ID](objc.ID(_class("NSViewCornerConfiguration")), objc.RegisterName("configurationWithUniformLeftRadius:topRightRadius:bottomRightRadius:"), objref.IDOf(leftRadius), objref.IDOf(topRightRadius), objref.IDOf(bottomRightRadius))
+	return ViewCornerConfigurationFromID(_r)
+}
+
+// ConfigurationWithUniformRightRadiusTopLeftRadiusBottomLeftRadius a configuration that applies the rightRadius uniformly to the top-right and bottom-right corners, with optional independent radii for the top-left and bottom-left corners. When the uniform corners differ, it uses the largest of the resolved corner radii.
+func ConfigurationWithUniformRightRadiusTopLeftRadiusBottomLeftRadius(rightRadius *ViewCornerRadius, topLeftRadius *ViewCornerRadius, bottomLeftRadius *ViewCornerRadius) *ViewCornerConfiguration {
+	defer runtime.KeepAlive(rightRadius)
+	defer runtime.KeepAlive(topLeftRadius)
+	defer runtime.KeepAlive(bottomLeftRadius)
+	_r := objc.Send[objc.ID](objc.ID(_class("NSViewCornerConfiguration")), objc.RegisterName("configurationWithUniformRightRadius:topLeftRadius:bottomLeftRadius:"), objref.IDOf(rightRadius), objref.IDOf(topLeftRadius), objref.IDOf(bottomLeftRadius))
+	return ViewCornerConfigurationFromID(_r)
+}
+
+// CapsuleCornerConfiguration returns a configuration where the container is to take on a capsule shape, scaling with the view’s size.
+func CapsuleCornerConfiguration() *ViewCornerConfiguration {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSViewCornerConfiguration")), objc.RegisterName("capsuleCornerConfiguration"))
+	return ViewCornerConfigurationFromID(_r)
+}
+
+// FixedRadius shorthand initializer for a configuration where all four corners are using a fixed corner radius in points.
+func FixedRadius(radius float64) *ViewCornerRadius {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSViewCornerRadius")), objc.RegisterName("fixedRadius:"), radius)
+	return ViewCornerRadiusFromID(_r)
+}
+
+// ContainerConcentricRadiusWithMinimum a dynamic corner radius calculated based on the view’s container shape and limited to the provided minimum radius.
+func ContainerConcentricRadiusWithMinimum(minimumRadius float64) *ViewCornerRadius {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSViewCornerRadius")), objc.RegisterName("containerConcentricRadiusWithMinimum:"), minimumRadius)
+	return ViewCornerRadiusFromID(_r)
+}
+
+// ContainerConcentricRadius returns a dynamic corner radius calculated based on the view’s container shape.
+func ContainerConcentricRadius() *ViewCornerRadius {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSViewCornerRadius")), objc.RegisterName("containerConcentricRadius"))
+	return ViewCornerRadiusFromID(_r)
+}
+
 // SafeAreaLayoutRegionWithCornerAdaptation wraps the corresponding Objective-C method.
 func SafeAreaLayoutRegionWithCornerAdaptation(adaptivityAxis ViewLayoutRegionAdaptivityAxis) *ViewLayoutRegion {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSViewLayoutRegion")), objc.RegisterName("safeAreaLayoutRegionWithCornerAdaptation:"), adaptivityAxis)
@@ -3836,13 +3961,13 @@ func SharedWorkspace() *Workspace {
 	return WorkspaceFromID(_r)
 }
 
-// Configuration creates and returns a new workspace configuration object containing default values.
+// Configuration returns the configuration.
 func Configuration() *WorkspaceOpenConfiguration {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSWorkspaceOpenConfiguration")), objc.RegisterName("configuration"))
 	return WorkspaceOpenConfigurationFromID(_r)
 }
 
-// IsWritingToolsAvailable reports whether writing Tools features are currently available. The value of this property is `true` when Writing Tools features are available, and `false` when they aren’t. Writing Tools support might be unavailable because of device constraints or because the system isn’t ready to process Writing Tools requests.
+// IsWritingToolsAvailable reports whether writing Tools features are available to enable. The value of this property is `true` when Writing Tools features are supported, even when the user has not enabled the feature. Writing Tools support might be unavailable because of device constraints.
 func IsWritingToolsAvailable() bool {
 	_r := objc.Send[bool](objc.ID(_class("NSWritingToolsCoordinator")), objc.RegisterName("isWritingToolsAvailable"))
 	return _r

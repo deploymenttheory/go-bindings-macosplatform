@@ -4,8 +4,6 @@
 package metalperformanceshaders
 
 import (
-	"unsafe"
-
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/foundation"
@@ -66,15 +64,8 @@ func (o *MPSUnaryImageKernel) InitWithCoderDevice(aDecoder *foundation.NSCoder, 
 }
 
 // This method attempts to apply a kernel in place on a texture.
-func (o *MPSUnaryImageKernel) EncodeToCommandBufferInPlaceTextureFallbackCopyAllocator(commandBuffer metal.MTLCommandBuffer, texture metal.MTLTexture, copyAllocator func() unsafe.Pointer) bool {
-	var __block_copyAllocator objc.Block
-	if copyAllocator != nil {
-		__block_copyAllocator = objc.NewBlock(func(_ objc.Block) unsafe.Pointer {
-			return copyAllocator()
-		})
-		defer __block_copyAllocator.Release()
-	}
-	_ret := objc.Send[bool](o.Ptr(), _mPSUnaryImageKernelSelEncodeToCommandBufferInPlaceTextureFallbackCopyAllocator, commandBuffer, texture, __block_copyAllocator)
+func (o *MPSUnaryImageKernel) EncodeToCommandBufferInPlaceTextureFallbackCopyAllocator(commandBuffer metal.MTLCommandBuffer, texture metal.MTLTexture, copyAllocator objc.Block) bool {
+	_ret := objc.Send[bool](o.Ptr(), _mPSUnaryImageKernelSelEncodeToCommandBufferInPlaceTextureFallbackCopyAllocator, commandBuffer, texture, copyAllocator)
 	return _ret
 }
 

@@ -83,7 +83,7 @@ func (md *MutableData) WithScriptingProperties(scriptingProperties map[string]ob
 	return md
 }
 
-// MutableBytes returns the mutable bytes.
+// MutableBytes returns a pointer to the data contained by the mutable data object. If the length of the receiver's data is not zero, this property is guaranteed to contain a pointer to the object's internal bytes. If the length of receiver's data _is_ zero, this property may or may not contain `NULL` dependent upon many factors related to how the object was created (moreover, in this case the method result might change between different releases). The returned pointer is valid until the data object is deallocated. > Note: > This property is similar to, but different than the “NSData/bytes“ property. The “NSData/bytes“ property contains a pointer to a constant. You can use The “NSData/bytes“ pointer to read the data managed by the data object, but you cannot modify that data. However, if the “NSMutableData/mutableBytes“ property contains a non-`null` pointer, this pointer points to mutable data. You can use the “NSMutableData/mutableBytes“ pointer to modify the data managed by the data object. A sample using this method can be found in [Working With Mutable Binary Data](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/BinaryData/Tasks/WorkingMutableData.html#//apple_ref/doc/uid/20002150).
 func (md *MutableData) MutableBytes() unsafe.Pointer {
 	defer runtime.KeepAlive(md)
 	_r := objc.Send[unsafe.Pointer](objref.IDOf(md), objc.RegisterName("mutableBytes"))

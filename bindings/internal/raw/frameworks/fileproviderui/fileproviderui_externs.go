@@ -4,11 +4,23 @@
 package fileproviderui
 
 import (
+	"unsafe"
+
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/foundation"
 )
 
 // The error domain for errors raised by the File Provider UI extension.
-func FPUIErrorDomain() uintptr {
+func FPUIErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_fileprovideruiLib, "FPUIErrorDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }

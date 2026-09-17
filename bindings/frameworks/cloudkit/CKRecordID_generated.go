@@ -15,8 +15,6 @@ import (
 )
 
 // RecordID is an idiomatic wrapper over the Objective-C class CKRecordID.
-//
-// An object that uniquely identifies a record in a database.
 type RecordID struct {
 	objref.Handle
 }
@@ -80,7 +78,7 @@ func NewRecordIDWithRecordName(recordName string) *RecordID {
 	return recordIDAdopt(_id)
 }
 
-// NewRecordIDWithRecordNameZoneID creates a new record ID with the specified name and zone information.
+// NewRecordIDWithRecordNameZoneID creates a new record ID with the specified name and zone information. - Parameters: - recordName: The name that identifies the record. The string must contain only ASCII characters, must not exceed 255 characters, and must not start with an underscore. If you specify an empty string for this parameter, the method throws an exception. - zoneID: The ID of the zone where you want to store the record. This parameter must not be `nil`. - Returns: An initialized record ID object. Use this method when you create or search for records in a zone other than the default zone. The value in the `zoneID` parameter must represent a zone that already exists in the database. If the record zone doesn't exist, save the corresponding “CKRecordZone“ object to the database before attempting to save any “CKRecord“ objects in that zone.
 func NewRecordIDWithRecordNameZoneID(recordName string, zoneID *RecordZoneID) *RecordID {
 	defer runtime.KeepAlive(zoneID)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKRecordID")), objc.RegisterName("alloc"))

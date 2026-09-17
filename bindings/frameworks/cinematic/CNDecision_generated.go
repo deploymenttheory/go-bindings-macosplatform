@@ -17,7 +17,7 @@ import (
 
 // Decision is an idiomatic wrapper over the Objective-C class CNDecision.
 //
-// An object that represents a decision to focus on a particular detection, or group of detections, at a particular time.
+// Represents a decision to focus on a specific detectionID or detectionGroupID; optionally strong. A strong decision keeps focus for as long as possible.
 type Decision struct {
 	objref.Handle
 }

@@ -16,8 +16,6 @@ import (
 )
 
 // VSUserAccount is an idiomatic wrapper over the Objective-C class VSUserAccount.
-//
-// An object that represents a user’s account.
 type VSUserAccount struct {
 	objref.Handle
 }

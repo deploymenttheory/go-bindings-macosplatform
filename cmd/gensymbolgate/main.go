@@ -79,7 +79,7 @@ func buildEntry(fw *mpm.FrameworkMeta) entry {
 		if fn.Availability.IsUnavailable || fn.IsInline || skip(fn.Name) {
 			continue
 		}
-		e.funcs = append(e.funcs, fn.Name)
+		e.funcs = append(e.funcs, fn.LinkSymbol())
 	}
 	for _, ex := range fw.Externs {
 		if ex.Availability.IsUnavailable || skip(ex.Name) {

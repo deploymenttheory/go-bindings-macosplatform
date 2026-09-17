@@ -30,6 +30,7 @@ var (
 	_pHAssetSelFetchAssetsWithOptions                                 = objc.RegisterName("fetchAssetsWithOptions:")
 	_pHAssetSelFetchAssetsWithMediaTypeOptions                        = objc.RegisterName("fetchAssetsWithMediaType:options:")
 	_pHAssetSelPlaybackStyle                                          = objc.RegisterName("playbackStyle")
+	_pHAssetSelPlaybackVariation                                      = objc.RegisterName("playbackVariation")
 	_pHAssetSelMediaType                                              = objc.RegisterName("mediaType")
 	_pHAssetSelMediaSubtypes                                          = objc.RegisterName("mediaSubtypes")
 	_pHAssetSelContentType                                            = objc.RegisterName("contentType")
@@ -42,6 +43,7 @@ var (
 	_pHAssetSelDuration                                               = objc.RegisterName("duration")
 	_pHAssetSelIsHidden                                               = objc.RegisterName("isHidden")
 	_pHAssetSelIsFavorite                                             = objc.RegisterName("isFavorite")
+	_pHAssetSelRating                                                 = objc.RegisterName("rating")
 	_pHAssetSelIsSyncFailureHidden                                    = objc.RegisterName("isSyncFailureHidden")
 	_pHAssetSelBurstIdentifier                                        = objc.RegisterName("burstIdentifier")
 	_pHAssetSelBurstSelectionTypes                                    = objc.RegisterName("burstSelectionTypes")
@@ -49,6 +51,10 @@ var (
 	_pHAssetSelSourceType                                             = objc.RegisterName("sourceType")
 	_pHAssetSelHasAdjustments                                         = objc.RegisterName("hasAdjustments")
 	_pHAssetSelAdjustmentFormatIdentifier                             = objc.RegisterName("adjustmentFormatIdentifier")
+	_pHAssetSelOriginalResourceChoice                                 = objc.RegisterName("originalResourceChoice")
+	_pHAssetSelExtendedMetadata                                       = objc.RegisterName("extendedMetadata")
+	_pHAssetSelAdjustmentsState                                       = objc.RegisterName("adjustmentsState")
+	_pHAssetSelAdjustmentTimestamp                                    = objc.RegisterName("adjustmentTimestamp")
 	_pHAssetSelRequestContentEditingInputWithOptionsCompletionHandler = objc.RegisterName("requestContentEditingInputWithOptions:completionHandler:")
 	_pHAssetSelCancelContentEditingInputRequest                       = objc.RegisterName("cancelContentEditingInputRequest:")
 )
@@ -128,6 +134,12 @@ func (o *PHAsset) PlaybackStyle() PHAssetPlaybackStyle {
 	return _ret
 }
 
+// The Live Photo playback variation for the asset. Use this value to determine whether a Live Photo plays back as a Long Exposure, Mirror (Bounce), or Autoloop (Loop): - `PHAssetPlaybackVariationNone`: the asset is not a Live Photo, or uses the default Live Photo presentation. - `PHAssetPlaybackVariationAutoloop`: the Live Photo plays back as a Loop. - `PHAssetPlaybackVariationMirror`: the Live Photo plays back as a Bounce. - `PHAssetPlaybackVariationLongExposure`: the Live Photo plays back as a Long Exposure.
+func (o *PHAsset) PlaybackVariation() PHAssetPlaybackVariation {
+	_ret := objc.Send[PHAssetPlaybackVariation](o.Ptr(), _pHAssetSelPlaybackVariation)
+	return _ret
+}
+
 func (o *PHAsset) MediaType() PHAssetMediaType {
 	_ret := objc.Send[PHAssetMediaType](o.Ptr(), _pHAssetSelMediaType)
 	return _ret
@@ -204,6 +216,12 @@ func (o *PHAsset) IsFavorite() bool {
 	return _ret
 }
 
+// The rating of this PHAsset.
+func (o *PHAsset) Rating() PHAssetRating {
+	_ret := objc.Send[PHAssetRating](o.Ptr(), _pHAssetSelRating)
+	return _ret
+}
+
 // Deprecated: No longer supported
 func (o *PHAsset) IsSyncFailureHidden() bool {
 	_ret := objc.Send[bool](o.Ptr(), _pHAssetSelIsSyncFailureHidden)
@@ -244,6 +262,35 @@ func (o *PHAsset) AdjustmentFormatIdentifier() *foundation.NSString {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return foundation.NSStringFromID(_ret)
+}
+
+// The original resource used as the basis for rendering this asset's derivatives. This value is only meaningful for assets that have a RAW alternate, such as RAW+JPEG assets, where it indicates whether the RAW or the compressed resource serves as the unadjusted base. For all other assets the value is “PHOriginalResourceChoice/PHOriginalResourceChoiceCompressed“.
+func (o *PHAsset) OriginalResourceChoice() PHOriginalResourceChoice {
+	_ret := objc.Send[PHOriginalResourceChoice](o.Ptr(), _pHAssetSelOriginalResourceChoice)
+	return _ret
+}
+
+// An accessor to other asset properties. By default these properties are fetched on demand. They can be prefetched by toggling `PHFetchOptions.prefetchAssetExtendedMetadata`.
+func (o *PHAsset) ExtendedMetadata() *PHAssetExtendedMetadata {
+	_ret := objc.Send[objc.ID](o.Ptr(), _pHAssetSelExtendedMetadata)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return PHAssetExtendedMetadataFromID(_ret)
+}
+
+func (o *PHAsset) AdjustmentsState() PHAssetAdjustmentsState {
+	_ret := objc.Send[PHAssetAdjustmentsState](o.Ptr(), _pHAssetSelAdjustmentsState)
+	return _ret
+}
+
+// The date when the asset was last edited. If the asset has never been edited, then this property is nil. If the asset was edited and later reverted, such that hasAdjustments is false, then `adjustmentTimestamp` is the timestamp of the revert operation.
+func (o *PHAsset) AdjustmentTimestamp() *foundation.NSDate {
+	_ret := objc.Send[objc.ID](o.Ptr(), _pHAssetSelAdjustmentTimestamp)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDateFromID(_ret)
 }
 
 // Requests asset information for beginning a content editing session.

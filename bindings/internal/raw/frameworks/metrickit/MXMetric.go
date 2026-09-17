@@ -13,6 +13,7 @@ import (
 // An abstract data class for a metric.
 //
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxmetric
+// Deprecated: Use MetricResult instead.
 type MXMetric struct {
 	foundation.NSObject
 }
@@ -34,6 +35,7 @@ func MXMetricFromID(id objc.ID) *MXMetric {
 }
 
 // Returns the contents of the metric in JSON format.
+// Deprecated: Use MetricResult instead.
 func (o *MXMetric) JSONRepresentation() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXMetricSelJSONRepresentation)
 	if _ret != 0 {
@@ -43,6 +45,7 @@ func (o *MXMetric) JSONRepresentation() *foundation.NSData {
 }
 
 // Returns the contents of a metric as a dictionary.
+// Deprecated: Use MetricResult instead.
 func (o *MXMetric) DictionaryRepresentation() *foundation.NSDictionary[objc.ID, objc.ID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXMetricSelDictionaryRepresentation)
 	if _ret != 0 {

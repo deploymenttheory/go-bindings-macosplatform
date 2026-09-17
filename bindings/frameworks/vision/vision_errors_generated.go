@@ -56,6 +56,12 @@ var ErrOutOfMemory = errkit.New("VNErrorDomain", 10)
 // ErrRequestCancelled matches the Vision error VNErrorRequestCancelled.
 var ErrRequestCancelled = errkit.New("VNErrorDomain", 1)
 
+// ErrResourceCorrupted matches the Vision error VNErrorResourceCorrupted.
+var ErrResourceCorrupted = errkit.New("VNErrorDomain", 24)
+
+// ErrResourceUnavailable matches the Vision error VNErrorResourceUnavailable.
+var ErrResourceUnavailable = errkit.New("VNErrorDomain", 23)
+
 // ErrTimeStampNotFound matches the Vision error VNErrorTimeStampNotFound.
 var ErrTimeStampNotFound = errkit.New("VNErrorDomain", 18)
 

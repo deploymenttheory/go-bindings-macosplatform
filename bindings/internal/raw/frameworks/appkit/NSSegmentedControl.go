@@ -51,6 +51,8 @@ var (
 	_nSSegmentedControlSelSetSelectedSegment                                 = objc.RegisterName("setSelectedSegment:")
 	_nSSegmentedControlSelSegmentStyle                                       = objc.RegisterName("segmentStyle")
 	_nSSegmentedControlSelSetSegmentStyle                                    = objc.RegisterName("setSegmentStyle:")
+	_nSSegmentedControlSelRole                                               = objc.RegisterName("role")
+	_nSSegmentedControlSelSetRole                                            = objc.RegisterName("setRole:")
 	_nSSegmentedControlSelIsSpringLoaded                                     = objc.RegisterName("isSpringLoaded")
 	_nSSegmentedControlSelSetSpringLoaded                                    = objc.RegisterName("setSpringLoaded:")
 	_nSSegmentedControlSelTrackingMode                                       = objc.RegisterName("trackingMode")
@@ -368,6 +370,23 @@ func (o *NSSegmentedControl) SegmentStyle() NSSegmentStyle {
 func (o *NSSegmentedControl) SetSegmentStyle(segmentStyle NSSegmentStyle) {
 	purego.Main(func() {
 		o.Ptr().Send(_nSSegmentedControlSelSetSegmentStyle, segmentStyle)
+	})
+}
+
+func (o *NSSegmentedControl) Role() NSSegmentedControlRole {
+	var _mainthread0 NSSegmentedControlRole
+	purego.Main(func() {
+		_mainthread0 = func() NSSegmentedControlRole {
+			_ret := objc.Send[NSSegmentedControlRole](o.Ptr(), _nSSegmentedControlSelRole)
+			return _ret
+		}()
+	})
+	return _mainthread0
+}
+
+func (o *NSSegmentedControl) SetRole(role NSSegmentedControlRole) {
+	purego.Main(func() {
+		o.Ptr().Send(_nSSegmentedControlSelSetRole, role)
 	})
 }
 

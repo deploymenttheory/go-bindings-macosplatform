@@ -15,8 +15,6 @@ import (
 )
 
 // CaptureDeviceRotationCoordinator is an idiomatic wrapper over the Objective-C class AVCaptureDeviceRotationCoordinator.
-//
-// A class that monitors the physical orientation of a capture device and provides adjustment angles to keep images level, relative to gravity.
 type CaptureDeviceRotationCoordinator struct {
 	objref.Handle
 }

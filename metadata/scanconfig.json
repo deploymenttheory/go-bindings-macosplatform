@@ -1,4 +1,7 @@
 {
+  "ARKit": {
+    "defines": ["USE_ARKIT_PUBLIC_HEADERS=1"]
+  },
   "Foundation": {
     "extra_include_dirs": ["usr/include/objc"]
   },

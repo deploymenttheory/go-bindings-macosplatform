@@ -91,3 +91,31 @@ func (rt_ *RenderTask) WaitUntilCompleted() (result *RenderInfo, err error) {
 	}
 	return RenderInfoFromID(_r), nil
 }
+
+// PlannedPixelsProcessed returns the planned pixels processed.
+func (rt_ *RenderTask) PlannedPixelsProcessed() int {
+	defer runtime.KeepAlive(rt_)
+	_r := objc.Send[int](objref.IDOf(rt_), objc.RegisterName("plannedPixelsProcessed"))
+	return _r
+}
+
+// PlannedPixelsOverdrawn returns the planned pixels overdrawn.
+func (rt_ *RenderTask) PlannedPixelsOverdrawn() int {
+	defer runtime.KeepAlive(rt_)
+	_r := objc.Send[int](objref.IDOf(rt_), objc.RegisterName("plannedPixelsOverdrawn"))
+	return _r
+}
+
+// PlannedPassCount returns the planned pass count.
+func (rt_ *RenderTask) PlannedPassCount() int {
+	defer runtime.KeepAlive(rt_)
+	_r := objc.Send[int](objref.IDOf(rt_), objc.RegisterName("plannedPassCount"))
+	return _r
+}
+
+// PlannedPeakMemory returns the planned peak memory.
+func (rt_ *RenderTask) PlannedPeakMemory() int {
+	defer runtime.KeepAlive(rt_)
+	_r := objc.Send[int](objref.IDOf(rt_), objc.RegisterName("plannedPeakMemory"))
+	return _r
+}

@@ -45,7 +45,6 @@ var (
 	_nSFontSelSystemFontOfSizeWeightWidth           = objc.RegisterName("systemFontOfSize:weight:width:")
 	_nSFontSelMonospacedSystemFontOfSizeWeight      = objc.RegisterName("monospacedSystemFontOfSize:weight:")
 	_nSFontSelFontWithSize                          = objc.RegisterName("fontWithSize:")
-	_nSFontSelSystemFontSizeForControlSize          = objc.RegisterName("systemFontSizeForControlSize:")
 	_nSFontSelBoundingRectForCGGlyph                = objc.RegisterName("boundingRectForCGGlyph:")
 	_nSFontSelAdvancementForCGGlyph                 = objc.RegisterName("advancementForCGGlyph:")
 	_nSFontSelGetBoundingRectsForCGGlyphsCount      = objc.RegisterName("getBoundingRects:forCGGlyphs:count:")
@@ -89,6 +88,7 @@ var (
 	_nSFontSelScreenFont                            = objc.RegisterName("screenFont")
 	_nSFontSelRenderingMode                         = objc.RegisterName("renderingMode")
 	_nSFontSelPreferredFontForTextStyleOptions      = objc.RegisterName("preferredFontForTextStyle:options:")
+	_nSFontSelSystemFontSizeForControlSize          = objc.RegisterName("systemFontSizeForControlSize:")
 )
 
 func NSFontFromID(id objc.ID) *NSFont {
@@ -296,12 +296,6 @@ func (o *NSFont) FontWithSize(fontSize float64) *NSFont {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSFontFromID(_ret)
-}
-
-// Returns the font size used for the specified control size.
-func NSFontSystemFontSizeForControlSize(controlSize NSControlSize) float64 {
-	_ret := objc.Send[float64](objc.ID(_clsNSFont), _nSFontSelSystemFontSizeForControlSize, controlSize)
-	return _ret
 }
 
 // ******* Glyph metrics ******** ******* Glyph metrics ********
@@ -559,4 +553,10 @@ func NSFontPreferredFontForTextStyleOptions(style *foundation.NSString, options 
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSFontFromID(_ret)
+}
+
+// Returns the font size used for the specified control size.
+func NSFontSystemFontSizeForControlSize(controlSize NSControlSize) float64 {
+	_ret := objc.Send[float64](objc.ID(_clsNSFont), _nSFontSelSystemFontSizeForControlSize, controlSize)
+	return _ret
 }

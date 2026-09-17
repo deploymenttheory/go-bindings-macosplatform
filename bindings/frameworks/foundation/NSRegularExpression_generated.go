@@ -100,7 +100,7 @@ func (re *RegularExpression) WithScriptingProperties(scriptingProperties map[str
 	return re
 }
 
-// Pattern returns the pattern.
+// Pattern returns the regular expression pattern.
 func (re *RegularExpression) Pattern() string {
 	defer runtime.KeepAlive(re)
 	_r := objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("pattern"))
@@ -110,14 +110,14 @@ func (re *RegularExpression) Pattern() string {
 	return purego.GoString(_r)
 }
 
-// Options returns the options.
+// Options returns the options used when the regular expression option was created. The options property specifies aspects of the regular expression matching that are always used when matching the regular expression. For example, if the expression is case sensitive, allows comments, ignores metacharacters, etc.
 func (re *RegularExpression) Options() RegularExpressionOptions {
 	defer runtime.KeepAlive(re)
 	_r := objc.Send[RegularExpressionOptions](objref.IDOf(re), objc.RegisterName("options"))
 	return _r
 }
 
-// NumberOfCaptureGroups returns the number of capture groups.
+// NumberOfCaptureGroups returns the number of capture groups in the regular expression. A capture group consists of each possible match within a regular expression. Each capture group can then be used in a replacement template to insert that value into a replacement string. This value puts a limit on the values of `n` for `$n` in templates, and it determines the number of ranges in the returned `NSTextCheckingResult` instances returned in the match methods.
 func (re *RegularExpression) NumberOfCaptureGroups() int {
 	defer runtime.KeepAlive(re)
 	_r := objc.Send[int](objref.IDOf(re), objc.RegisterName("numberOfCaptureGroups"))

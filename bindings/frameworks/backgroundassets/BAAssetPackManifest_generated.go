@@ -97,6 +97,21 @@ func NewAssetPackManifestFromDataApplicationGroupIdentifier(data []byte, applica
 	return assetPackManifestAdopt(_id), nil
 }
 
+// AssetPackWithIdentifier returns the asset pack in this manifest with the given identifier.
+func (apm *AssetPackManifest) AssetPackWithIdentifier(assetPackIdentifier string) *AssetPack {
+	defer runtime.KeepAlive(apm)
+	_r := objc.Send[objc.ID](objref.IDOf(apm), objc.RegisterName("assetPackWithIdentifier:"), purego.NSString(assetPackIdentifier))
+	return AssetPackFromID(_r)
+}
+
+// LocalizedAssetPacksForLanguage returns the subset of asset packs in this manifest that are available to download and that best match the specified language.
+// The order of the returned elements is unspecified.
+func (apm *AssetPackManifest) LocalizedAssetPacksForLanguage(languageIdentifier string) []*AssetPack {
+	defer runtime.KeepAlive(apm)
+	_r := objc.Send[objc.ID](objref.IDOf(apm), objc.RegisterName("localizedAssetPacksForLanguage:"), purego.NSString(languageIdentifier))
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *AssetPack { return AssetPackFromID(_id) })
+}
+
 // AllDownloads creates download objects for every asset pack in this manifest.
 // The order of the returned elements is unspecified.
 func (apm *AssetPackManifest) AllDownloads() []*Download {
@@ -113,10 +128,47 @@ func (apm *AssetPackManifest) AllDownloadsForContentRequest(contentRequest Conte
 	return rt.NSSetToSlice(_r, func(_id objc.ID) *Download { return DownloadFromID(_id) })
 }
 
-// AssetPacks returns the asset packs that are available to download.
+// AssetPacks returns the asset packs in this manifest that are available to download.
 // The order of the returned elements is unspecified.
 func (apm *AssetPackManifest) AssetPacks() []*AssetPack {
 	defer runtime.KeepAlive(apm)
 	_r := objc.Send[objc.ID](objref.IDOf(apm), objc.RegisterName("assetPacks"))
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *AssetPack { return AssetPackFromID(_id) })
+}
+
+// PrimaryLanguage returns the application’s primary language, represented as a BCP-47 identifier, as configured in App Store Connect. If no available localized asset packs match the current preferred languages, the system falls back on the application’s primary language.
+func (apm *AssetPackManifest) PrimaryLanguage() string {
+	defer runtime.KeepAlive(apm)
+	_r := objc.Send[objc.ID](objref.IDOf(apm), objc.RegisterName("primaryLanguage"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// AvailableLanguages returns the languages, represented as their respective BCP-47 identifiers, for which asset packs in this manifest are localized.
+//
+// AvailableLanguages returns the collection as a Go slice.
+func (apm *AssetPackManifest) AvailableLanguages() []string {
+	defer runtime.KeepAlive(apm)
+	_arr := objc.Send[objc.ID](objref.IDOf(apm), objc.RegisterName("availableLanguages"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
+}
+
+// ResolvedLanguage returns the language, represented as a BCP-47 identifier, asset packs in this manifest that are localized for which the system automatically makes available locally. The user’s preferred languages inform the choice of resolved language, respecting any language that your application sets manually by setting “BAAssetPackManager/resolvedLanguage“. This property may be `nil` if no localized asset packs are available. If the user recently changed their preferred language or if this manifest is outdated, this property’s value may be out of sync with the set of asset packs available locally.
+func (apm *AssetPackManifest) ResolvedLanguage() string {
+	defer runtime.KeepAlive(apm)
+	_r := objc.Send[objc.ID](objref.IDOf(apm), objc.RegisterName("resolvedLanguage"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// LocalizedAssetPacks returns the subset of asset packs in this manifest that best match the current preferred languages.
+// The order of the returned elements is unspecified.
+func (apm *AssetPackManifest) LocalizedAssetPacks() []*AssetPack {
+	defer runtime.KeepAlive(apm)
+	_r := objc.Send[objc.ID](objref.IDOf(apm), objc.RegisterName("localizedAssetPacks"))
 	return rt.NSSetToSlice(_r, func(_id objc.ID) *AssetPack { return AssetPackFromID(_id) })
 }

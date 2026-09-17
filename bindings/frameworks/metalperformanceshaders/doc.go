@@ -48,6 +48,7 @@
 //   - CNNPoolingNode: [CNNPoolingAverageNode], [CNNPoolingL2NormNode], [CNNPoolingMaxNode]
 //   - CNNUpsampling: [CNNUpsamplingBilinear], [CNNUpsamplingNearest]
 //   - CNNUpsamplingGradient: [CNNUpsamplingBilinearGradient], [CNNUpsamplingNearestGradient]
+//   - Function: [FColorConversion]
 //   - Image: [TemporaryImage]
 //   - ImageAreaMax: [ImageAreaMin]
 //   - ImageArithmetic: [ImageAdd], [ImageDivide], [ImageMultiply], [ImageSubtract]

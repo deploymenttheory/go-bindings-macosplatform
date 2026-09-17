@@ -116,28 +116,28 @@ func (ur *URLRequest) CachePolicy() URLRequestCachePolicy {
 	return _r
 }
 
-// TimeoutInterval returns the timeout interval of the receiver. The timeout interval specifies the limit on the idle interval allotted to a request in the process of loading. The "idle interval" is defined as the period of time that has passed since the last instance of load activity occurred for a request that is in the process of loading. Hence, when an instance of load activity occurs (e.g. bytes are received from the network for a request), the idle interval for a request is reset to 0. If the idle interval ever becomes greater than or equal to the timeout interval, the request is considered to have timed out. This timeout interval is measured in seconds.
+// TimeoutInterval returns the timeout interval of the receiver, measured in seconds. The timeout interval specifies the limit on the idle interval allotted to a request in the process of loading. The "idle interval" is defined as the period of time that has passed since the last instance of load activity occurred for a request that is in the process of loading. Hence, when an instance of load activity occurs (e.g. bytes are received from the network for a request), the idle interval for a request is reset to 0. If the idle interval ever becomes greater than or equal to the timeout interval, the request is considered to have timed out.
 func (ur *URLRequest) TimeoutInterval() float64 {
 	defer runtime.KeepAlive(ur)
 	_r := objc.Send[float64](objref.IDOf(ur), objc.RegisterName("timeoutInterval"))
 	return _r
 }
 
-// MainDocumentURL returns the main document URL associated with this load. This URL is used for the cookie "same domain as main document" policy, and attributing the request as a sub-resource of a user-specified URL. There may also be other future uses. See setMainDocumentURL:
+// MainDocumentURL returns the main document URL associated with this load. This URL is used for the cookie "same domain as main document" policy, and attributing the request as a sub-resource of a user-specified URL. There may also be other future uses.
 func (ur *URLRequest) MainDocumentURL() string {
 	defer runtime.KeepAlive(ur)
 	_r := objc.Send[objc.ID](objref.IDOf(ur), objc.RegisterName("mainDocumentURL"))
 	return rt.URLString(_r)
 }
 
-// NetworkServiceType returns the NSURLRequestNetworkServiceType associated with this request. This will return NSURLNetworkServiceTypeDefault for requests that have not explicitly set a networkServiceType (using the setNetworkServiceType method).
+// NetworkServiceType returns the `NSURLRequestNetworkServiceType` associated with this request. Returns `NSURLNetworkServiceTypeDefault` for requests that have not explicitly set a network service type.
 func (ur *URLRequest) NetworkServiceType() URLRequestNetworkServiceType {
 	defer runtime.KeepAlive(ur)
 	_r := objc.Send[URLRequestNetworkServiceType](objref.IDOf(ur), objc.RegisterName("networkServiceType"))
 	return _r
 }
 
-// AllowsCellularAccess reports whether a connection created with this request is allowed to use the built in cellular radios (if present).
+// AllowsCellularAccess reports whether a connection created with this request is allowed to use the built-in cellular radios (if present).
 func (ur *URLRequest) AllowsCellularAccess() bool {
 	defer runtime.KeepAlive(ur)
 	_r := objc.Send[bool](objref.IDOf(ur), objc.RegisterName("allowsCellularAccess"))
@@ -165,28 +165,28 @@ func (ur *URLRequest) AllowsUltraConstrainedNetworkAccess() bool {
 	return _r
 }
 
-// AssumesHTTP3Capable reports whether we assume that server supports HTTP/3. Enables QUIC racing without HTTP/3 service discovery.
+// AssumesHTTP3Capable reports whether the server is assumed to support HTTP/3. When `YES`, enables QUIC racing without HTTP/3 service discovery. Defaults to `NO`. The default may be `YES` in a future OS update.
 func (ur *URLRequest) AssumesHTTP3Capable() bool {
 	defer runtime.KeepAlive(ur)
 	_r := objc.Send[bool](objref.IDOf(ur), objc.RegisterName("assumesHTTP3Capable"))
 	return _r
 }
 
-// Attribution returns the NSURLRequestAttribution associated with this request. This will return NSURLRequestAttributionDeveloper for requests that have not explicitly set an attribution.
+// Attribution returns the `NSURLRequestAttribution` associated with this request. Returns `NSURLRequestAttributionDeveloper` for requests that have not explicitly set an attribution.
 func (ur *URLRequest) Attribution() URLRequestAttribution {
 	defer runtime.KeepAlive(ur)
 	_r := objc.Send[URLRequestAttribution](objref.IDOf(ur), objc.RegisterName("attribution"))
 	return _r
 }
 
-// RequiresDNSSECValidation reports whether sets whether a request is required to do DNSSEC validation during DNS lookup. true, if the DNS lookup for this request should require DNSSEC validation, No otherwise. Defaults to false.
+// RequiresDNSSECValidation reports whether a request requires DNSSEC validation during DNS lookup. `YES` if the DNS lookup for this request should require DNSSEC validation. Defaults to `NO`.
 func (ur *URLRequest) RequiresDNSSECValidation() bool {
 	defer runtime.KeepAlive(ur)
 	_r := objc.Send[bool](objref.IDOf(ur), objc.RegisterName("requiresDNSSECValidation"))
 	return _r
 }
 
-// AllowsPersistentDNS reports whether allows storing and usage of DNS answers, potentially beyond TTL expiry, in a persistent per-process cache. This should only be set for hostnames whose resolutions are not expected to change across networks. true, if the DNS lookup for this request is allowed to use a persistent per-process cache, false otherwise. Defaults to false.
+// AllowsPersistentDNS reports whether storing and usage of DNS answers in a persistent per-process cache is allowed. This should only be set for hostnames whose resolutions are not expected to change across networks. Defaults to `NO`.
 func (ur *URLRequest) AllowsPersistentDNS() bool {
 	defer runtime.KeepAlive(ur)
 	_r := objc.Send[bool](objref.IDOf(ur), objc.RegisterName("allowsPersistentDNS"))
@@ -237,21 +237,21 @@ func (ur *URLRequest) HTTPBody() []byte {
 	return rt.NSDataToBytes(_r)
 }
 
-// HTTPBodyStream returns the request body stream of the receiver if any has been set The stream is returned for examination only; it is not safe for the caller to manipulate the stream in any way.  Also note that the HTTPBodyStream and HTTPBody are mutually exclusive - only one can be set on a given request.  Also note that the body stream is preserved across copies, but is LOST when the request is coded via the NSCoding protocol
+// HTTPBodyStream returns the request body stream of the receiver, if any. The stream is returned for examination only; it is not safe for the caller to manipulate the stream in any way. Note that the `HTTPBodyStream` and `HTTPBody` are mutually exclusive - only one can be set on a given request. Also note that the body stream is preserved across copies, but is lost when the request is coded via the `NSCoding` protocol.
 func (ur *URLRequest) HTTPBodyStream() *InputStream {
 	defer runtime.KeepAlive(ur)
 	_r := objc.Send[objc.ID](objref.IDOf(ur), objc.RegisterName("HTTPBodyStream"))
 	return InputStreamFromID(_r)
 }
 
-// HTTPShouldHandleCookies reports whether determine whether default cookie handling will happen for this request. NOTE: This value is not used prior to 10.3
+// HTTPShouldHandleCookies reports whether the default cookie handling will happen for this request.
 func (ur *URLRequest) HTTPShouldHandleCookies() bool {
 	defer runtime.KeepAlive(ur)
 	_r := objc.Send[bool](objref.IDOf(ur), objc.RegisterName("HTTPShouldHandleCookies"))
 	return _r
 }
 
-// HTTPShouldUsePipelining reports whether reports whether the receiver is not expected to wait for the previous response before transmitting.
+// HTTPShouldUsePipelining reports whether the request should not wait for the previous response before transmitting.
 func (ur *URLRequest) HTTPShouldUsePipelining() bool {
 	defer runtime.KeepAlive(ur)
 	_r := objc.Send[bool](objref.IDOf(ur), objc.RegisterName("HTTPShouldUsePipelining"))

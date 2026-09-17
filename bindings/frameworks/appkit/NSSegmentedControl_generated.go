@@ -86,6 +86,14 @@ func (sc *SegmentedControl) WithSegmentStyle(segmentStyle SegmentStyle) *Segment
 	return sc
 }
 
+// WithRole sets the role.
+func (sc *SegmentedControl) WithRole(role SegmentedControlRole) *SegmentedControl {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setRole:"), role)
+	})
+	return sc
+}
+
 // WithSpringLoaded sets a Boolean value that indicates whether spring loading is enabled for the control.
 func (sc *SegmentedControl) WithSpringLoaded(springLoaded bool) *SegmentedControl {
 	purego.Main(func() {
@@ -597,6 +605,14 @@ func (sc *SegmentedControl) WithGestureRecognizers(items ...GestureRecognizerPro
 	return sc
 }
 
+// WithExclusiveGestureBehavior sets declares whether gesture recognizers should be exclusive in this view and its subviews.
+func (sc *SegmentedControl) WithExclusiveGestureBehavior(exclusiveGestureBehavior ViewExclusiveGestureBehavior) *SegmentedControl {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setExclusiveGestureBehavior:"), exclusiveGestureBehavior)
+	})
+	return sc
+}
+
 // WithAllowedTouchTypes sets the allowed touch types.
 func (sc *SegmentedControl) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *SegmentedControl {
 	purego.Main(func() {
@@ -658,6 +674,15 @@ func (sc *SegmentedControl) WithHorizontalContentSizeConstraintActive(horizontal
 func (sc *SegmentedControl) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *SegmentedControl {
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
+	return sc
+}
+
+// WithTextSelectionManager sets the text selection manager for this view.
+func (sc *SegmentedControl) WithTextSelectionManager(textSelectionManager *TextSelectionManager) *SegmentedControl {
+	defer runtime.KeepAlive(textSelectionManager)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setTextSelectionManager:"), objref.IDOf(textSelectionManager))
 	})
 	return sc
 }
@@ -1056,6 +1081,20 @@ func (sc *SegmentedControl) SegmentStyle() SegmentStyle {
 	purego.Main(func() {
 		_mainthread0 = func() SegmentStyle {
 			_r := objc.Send[SegmentStyle](objref.IDOf(sc), objc.RegisterName("segmentStyle"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
+}
+
+// Role returns the role.
+func (sc *SegmentedControl) Role() SegmentedControlRole {
+	defer runtime.KeepAlive(sc)
+	var _mainthread0 SegmentedControlRole
+	purego.Main(func() {
+		_mainthread0 = func() SegmentedControlRole {
+			_r := objc.Send[SegmentedControlRole](objref.IDOf(sc), objc.RegisterName("role"))
 			return _r
 		}()
 	})

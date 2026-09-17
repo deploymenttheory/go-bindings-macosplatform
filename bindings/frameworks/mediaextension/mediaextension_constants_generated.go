@@ -14,17 +14,17 @@ func MediaExtensionErrorDomain() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("MediaExtensionErrorDomain")))
 }
 
-// MEVideoDecoderReadyForMoreMediaDataDidChangeNotification returns the address of the symbol MEVideoDecoderReadyForMoreMediaDataDidChangeNotification.
-func MEVideoDecoderReadyForMoreMediaDataDidChangeNotification() uintptr {
-	return _symbol("MEVideoDecoderReadyForMoreMediaDataDidChangeNotification")
+// MEVideoDecoderReadyForMoreMediaDataDidChangeNotification returns the string constant MEVideoDecoderReadyForMoreMediaDataDidChangeNotification, for use as a dictionary key or argument.
+func MEVideoDecoderReadyForMoreMediaDataDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MEVideoDecoderReadyForMoreMediaDataDidChangeNotification")))
 }
 
-// MERAWProcessorValuesDidChangeNotification returns the address of the symbol MERAWProcessorValuesDidChangeNotification.
-func MERAWProcessorValuesDidChangeNotification() uintptr {
-	return _symbol("MERAWProcessorValuesDidChangeNotification")
+// MERAWProcessorValuesDidChangeNotification returns the string constant MERAWProcessorValuesDidChangeNotification, for use as a dictionary key or argument.
+func MERAWProcessorValuesDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MERAWProcessorValuesDidChangeNotification")))
 }
 
-// MERAWProcessorReadyForMoreMediaDataDidChangeNotification returns the address of the symbol MERAWProcessorReadyForMoreMediaDataDidChangeNotification.
-func MERAWProcessorReadyForMoreMediaDataDidChangeNotification() uintptr {
-	return _symbol("MERAWProcessorReadyForMoreMediaDataDidChangeNotification")
+// MERAWProcessorReadyForMoreMediaDataDidChangeNotification returns the string constant MERAWProcessorReadyForMoreMediaDataDidChangeNotification, for use as a dictionary key or argument.
+func MERAWProcessorReadyForMoreMediaDataDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MERAWProcessorReadyForMoreMediaDataDidChangeNotification")))
 }

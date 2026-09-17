@@ -14,6 +14,9 @@ import (
 
 // ScanConfig holds per-framework scan customisations.
 type ScanConfig struct {
+	// Defines are Clang preprocessor definitions used by both the AST and
+	// record-layout passes (for example USE_ARKIT_PUBLIC_HEADERS=1).
+	Defines []string `json:"defines,omitempty"`
 	// ExtraIncludeDirs lists additional directories (relative to the SDK root,
 	// slash-separated) whose headers count as belonging to this framework.
 	ExtraIncludeDirs []string `json:"extra_include_dirs,omitempty"`

@@ -201,7 +201,7 @@ func NSArrayArrayWithContentsOfURL(url string) []obj.Object {
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// CurrentHandler returns the current handler.
+// CurrentHandler returns the `NSAssertionHandler` object associated with the current thread. If no assertion handler is associated with the current thread, this method creates one and assigns it to the thread.
 func CurrentHandler() *AssertionHandler {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSAssertionHandler")), objc.RegisterName("currentHandler"))
 	return AssertionHandlerFromID(_r)
@@ -243,43 +243,43 @@ func AddObject(anObject obj.Object) {
 	objc.Send[objc.ID](objc.ID(_class("NSAutoreleasePool")), objc.RegisterName("addObject:"), objref.IDOf(anObject))
 }
 
-// BlockOperationWith wraps the corresponding Objective-C method.
+// BlockOperationWith creates and returns an `NSBlockOperation` object and adds the specified block to it. - Parameter block: The block to add to the new block operation object's list. The block should take no parameters and have no return value. - Returns: A new block operation object.
 func BlockOperationWith(block func()) *BlockOperation {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSBlockOperation")), objc.RegisterName("blockOperationWithBlock:"), objc.NewBlock(func(_ objc.Block) { block() }))
 	return BlockOperationFromID(_r)
 }
 
-// BundleWithPath returns an NSBundle object that corresponds to the specified directory.
+// BundleWithPath creates and returns an `NSBundle` object that corresponds to the specified directory.
 func BundleWithPath(path string) *Bundle {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSBundle")), objc.RegisterName("bundleWithPath:"), purego.NSString(path))
 	return BundleFromID(_r)
 }
 
-// BundleWithURL wraps the corresponding Objective-C method.
+// BundleWithURL creates and returns an `NSBundle` object that corresponds to the specified file URL.
 func BundleWithURL(url string) *Bundle {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSBundle")), objc.RegisterName("bundleWithURL:"), rt.FileURL(url))
 	return BundleFromID(_r)
 }
 
-// BundleWithIdentifier wraps the corresponding Objective-C method.
+// BundleWithIdentifier returns the `NSBundle` instance that has the specified bundle identifier. This method is typically used by frameworks and plug-ins to locate their own bundle at runtime. It may be somewhat more efficient than trying to locate the bundle using
 func BundleWithIdentifier(identifier string) *Bundle {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSBundle")), objc.RegisterName("bundleWithIdentifier:"), purego.NSString(identifier))
 	return BundleFromID(_r)
 }
 
-// URLForResourceWithExtensionSubdirectoryInBundleWithURL wraps the corresponding Objective-C method.
+// URLForResourceWithExtensionSubdirectoryInBundleWithURL creates and returns a file URL for the resource with the specified name and extension in the specified bundle.
 func URLForResourceWithExtensionSubdirectoryInBundleWithURL(name string, ext string, subpath string, bundleURL string) string {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSBundle")), objc.RegisterName("URLForResource:withExtension:subdirectory:inBundleWithURL:"), purego.NSString(name), purego.NSString(ext), purego.NSString(subpath), rt.FileURL(bundleURL))
 	return rt.URLString(_r)
 }
 
-// URLsForResourcesWithExtensionSubdirectoryInBundleWithURL wraps the corresponding Objective-C method.
+// URLsForResourcesWithExtensionSubdirectoryInBundleWithURL returns an array containing the file URLs for all bundle resources having the specified filename extension, residing in the specified resource subdirectory, within the specified bundle.
 func URLsForResourcesWithExtensionSubdirectoryInBundleWithURL(ext string, subpath string, bundleURL string) []string {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSBundle")), objc.RegisterName("URLsForResourcesWithExtension:subdirectory:inBundleWithURL:"), purego.NSString(ext), purego.NSString(subpath), rt.FileURL(bundleURL))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return rt.URLString(_id) })
 }
 
-// PathForResourceOfTypeInDirectory wraps the corresponding Objective-C method.
+// PathForResourceOfTypeInDirectory returns the full pathname for the resource file identified by the specified name and extension and residing in a given bundle directory.
 func PathForResourceOfTypeInDirectory(name string, ext string, bundlePath string) string {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSBundle")), objc.RegisterName("pathForResource:ofType:inDirectory:"), purego.NSString(name), purego.NSString(ext), purego.NSString(bundlePath))
 	if _r == 0 {
@@ -288,31 +288,31 @@ func PathForResourceOfTypeInDirectory(name string, ext string, bundlePath string
 	return purego.GoString(_r)
 }
 
-// PathsForResourcesOfTypeInDirectory wraps the corresponding Objective-C method.
+// PathsForResourcesOfTypeInDirectory returns an array containing the pathnames for all bundle resources having the specified extension and residing in the bundle directory at the specified path.
 func PathsForResourcesOfTypeInDirectory(ext string, bundlePath string) []string {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSBundle")), objc.RegisterName("pathsForResourcesOfType:inDirectory:"), purego.NSString(ext), purego.NSString(bundlePath))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// PreferredLocalizationsFromArray wraps the corresponding Objective-C method.
+// PreferredLocalizationsFromArray returns one or more localizations from the specified list that a bundle object would use to locate resources for the current user. This method does not return all localizations in preference order but only those from which
 func PreferredLocalizationsFromArray(localizationsArray []string) []string {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSBundle")), objc.RegisterName("preferredLocalizationsFromArray:"), purego.SliceToNSArray(localizationsArray, func(_v string) objc.ID { return purego.NSString(_v) }))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// PreferredLocalizationsFromArrayForPreferences wraps the corresponding Objective-C method.
+// PreferredLocalizationsFromArrayForPreferences returns locale identifiers for which a bundle would provide localized content, given a specified list of candidates for a user's language preferences.
 func PreferredLocalizationsFromArrayForPreferences(localizationsArray []string, preferencesArray []string) []string {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSBundle")), objc.RegisterName("preferredLocalizationsFromArray:forPreferences:"), purego.SliceToNSArray(localizationsArray, func(_v string) objc.ID { return purego.NSString(_v) }), purego.SliceToNSArray(preferencesArray, func(_v string) objc.ID { return purego.NSString(_v) }))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// MainBundle returns the main bundle.
+// MainBundle returns the bundle object that contains the current executable. The main bundle lets you access the resources in the same directory as the currently running executable. For a running app or code running in a framework, the main bundle offers access to the app's bundle directory. This method may return a valid bundle object even for unbundled apps. It may also return `nil` if the bundle object could not be created, so always check the return value.
 func MainBundle() *Bundle {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSBundle")), objc.RegisterName("mainBundle"))
 	return BundleFromID(_r)
 }
 
-// AllBundles returns the all bundles.
+// AllBundles returns an array of all the application's non-framework bundles. The returned array includes the main bundle and all bundles that have been dynamically created but doesn't contain any bundles that represent frameworks.
 //
 // AllBundles returns the collection as a Go slice.
 func AllBundles() []*Bundle {
@@ -320,7 +320,7 @@ func AllBundles() []*Bundle {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Bundle { return BundleFromID(_id) })
 }
 
-// AllFrameworks returns the all frameworks.
+// AllFrameworks returns an array of all of the application's bundles that represent frameworks. The returned array includes frameworks that are linked into an application when the application is built and bundles for frameworks that have been dynamically created. Only frameworks with one or more Objective-C classes in them are included.
 //
 // AllFrameworks returns the collection as a Go slice.
 func AllFrameworks() []*Bundle {
@@ -328,7 +328,7 @@ func AllFrameworks() []*Bundle {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Bundle { return BundleFromID(_id) })
 }
 
-// StringFromByteCountCountStyle wraps the corresponding Objective-C method.
+// StringFromByteCountCountStyle converts a byte count into the specified string format without creating an `NSNumber` object. If you need to specify options other than `countStyle`, create an instance of `NSByteCountFormatter` first.
 func StringFromByteCountCountStyle(byteCount int64, countStyle ByteCountFormatterCountStyle) string {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSByteCountFormatter")), objc.RegisterName("stringFromByteCount:countStyle:"), byteCount, countStyle)
 	if _r == 0 {
@@ -337,7 +337,7 @@ func StringFromByteCountCountStyle(byteCount int64, countStyle ByteCountFormatte
 	return purego.GoString(_r)
 }
 
-// StringFromMeasurementCountStyle wraps the corresponding Objective-C method.
+// StringFromMeasurementCountStyle formats the value of the given measurement using the given `countStyle`. Throws an exception if the given measurement's unit does not belong to the `NSUnitInformationStorage` dimension.
 func StringFromMeasurementCountStyle(measurement obj.Object, countStyle ByteCountFormatterCountStyle) string {
 	defer runtime.KeepAlive(measurement)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSByteCountFormatter")), objc.RegisterName("stringFromMeasurement:countStyle:"), objref.IDOf(measurement), countStyle)
@@ -354,13 +354,13 @@ func CalendarWithIdentifier(calendarIdentifierConstant *String) *Calendar {
 	return CalendarFromID(_r)
 }
 
-// CurrentCalendar returns the current calendar.
+// CurrentCalendar returns the user's current calendar. The returned calendar is formed from the settings for the current user's chosen system locale overlaid with any custom settings the user has specified in System Preferences. Settings you get from this calendar do not change as System Preferences are changed.
 func CurrentCalendar() *Calendar {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCalendar")), objc.RegisterName("currentCalendar"))
 	return CalendarFromID(_r)
 }
 
-// AutoupdatingCurrentCalendar returns the autoupdating current calendar.
+// AutoupdatingCurrentCalendar returns a calendar that tracks changes to user's preferred calendar. Settings you get from this calendar do change as the user's settings change. Note that if you cache values based on the calendar or related information those caches will of course not be automatically updated by the updating of the calendar object.
 func AutoupdatingCurrentCalendar() *Calendar {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCalendar")), objc.RegisterName("autoupdatingCurrentCalendar"))
 	return CalendarFromID(_r)
@@ -428,127 +428,127 @@ func CharacterSetWithContentsOfFile(fName string) *CharacterSet {
 	return CharacterSetFromID(_r)
 }
 
-// ControlCharacterSet returns the control character set.
+// ControlCharacterSet returns a character set containing the characters in Unicode General Category Cc and Cf. These characters include, for example, the soft hyphen (`U+00AD`), control characters to support bi-directional text, and IETF language tag characters.
 func ControlCharacterSet() *CharacterSet {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("controlCharacterSet"))
 	return CharacterSetFromID(_r)
 }
 
-// WhitespaceCharacterSet returns the whitespace character set.
+// WhitespaceCharacterSet returns a character set containing the characters in Unicode General Category Zs and `CHARACTER TABULATION` (`U+0009`). This set doesn't contain the newline or carriage return characters.
 func WhitespaceCharacterSet() *CharacterSet {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("whitespaceCharacterSet"))
 	return CharacterSetFromID(_r)
 }
 
-// WhitespaceAndNewlineCharacterSet returns the whitespace and newline character set.
+// WhitespaceAndNewlineCharacterSet returns a character set containing characters in Unicode General Category Z\*, `U+000A` ~ `U+000D`, and `U+0085`.
 func WhitespaceAndNewlineCharacterSet() *CharacterSet {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("whitespaceAndNewlineCharacterSet"))
 	return CharacterSetFromID(_r)
 }
 
-// DecimalDigitCharacterSet returns the decimal digit character set.
+// DecimalDigitCharacterSet returns a character set containing the characters in the category of Decimal Numbers. Informally, this set is the set of all characters used to represent the decimal values `0` through `9`. These characters include, for example, the decimal digits of the Indic scripts and Arabic.
 func DecimalDigitCharacterSet() *CharacterSet {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("decimalDigitCharacterSet"))
 	return CharacterSetFromID(_r)
 }
 
-// LetterCharacterSet returns the letter character set.
+// LetterCharacterSet returns a character set containing the characters in Unicode General Category L\* & M\*. Informally, this set is the set of all characters used as letters of alphabets and ideographs.
 func LetterCharacterSet() *CharacterSet {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("letterCharacterSet"))
 	return CharacterSetFromID(_r)
 }
 
-// LowercaseLetterCharacterSet returns the lowercase letter character set.
+// LowercaseLetterCharacterSet returns a character set containing the characters in Unicode General Category Ll. Informally, this set is the set of all characters used as lowercase letters in alphabets that make case distinctions.
 func LowercaseLetterCharacterSet() *CharacterSet {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("lowercaseLetterCharacterSet"))
 	return CharacterSetFromID(_r)
 }
 
-// UppercaseLetterCharacterSet returns the uppercase letter character set.
+// UppercaseLetterCharacterSet returns a character set containing the characters in Unicode General Category Lu and Lt. Informally, this set is the set of all characters used as uppercase letters in alphabets that make case distinctions.
 func UppercaseLetterCharacterSet() *CharacterSet {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("uppercaseLetterCharacterSet"))
 	return CharacterSetFromID(_r)
 }
 
-// NonBaseCharacterSet returns the non base character set.
+// NonBaseCharacterSet returns a character set containing the characters in Unicode General Category M\*. This set is also defined as all legal Unicode characters with a non-spacing priority greater than `0`. Informally, this set is the set of all characters used as modifiers of base characters.
 func NonBaseCharacterSet() *CharacterSet {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("nonBaseCharacterSet"))
 	return CharacterSetFromID(_r)
 }
 
-// AlphanumericCharacterSet returns the alphanumeric character set.
+// AlphanumericCharacterSet returns a character set containing the characters in Unicode General Categories L\*, M\*, and N\*. Informally, this set is the set of all characters used as basic units of alphabets, syllabaries, ideographs, and digits.
 func AlphanumericCharacterSet() *CharacterSet {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("alphanumericCharacterSet"))
 	return CharacterSetFromID(_r)
 }
 
-// DecomposableCharacterSet returns the decomposable character set.
+// DecomposableCharacterSet returns a character set containing individual Unicode characters that can also be represented as composed character sequences (such as for letters with accents), by the definition of "standard decomposition" in version 3.2 of the Unicode character encoding standard. These characters include compatibility characters as well as pre-composed characters. > Note: This character set doesn't currently include the Hangul characters defined in version 2.0 of the Unicode standard.
 func DecomposableCharacterSet() *CharacterSet {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("decomposableCharacterSet"))
 	return CharacterSetFromID(_r)
 }
 
-// IllegalCharacterSet returns the illegal character set.
+// IllegalCharacterSet returns a character set containing values in the category of Non-Characters or that have not yet been defined in version 3.2 of the Unicode standard.
 func IllegalCharacterSet() *CharacterSet {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("illegalCharacterSet"))
 	return CharacterSetFromID(_r)
 }
 
-// PunctuationCharacterSet returns the punctuation character set.
+// PunctuationCharacterSet returns a character set containing the characters in Unicode General Category P\*. Informally, this set is the set of all non-whitespace characters used to separate linguistic units in scripts, such as periods, dashes, parentheses, and so on.
 func PunctuationCharacterSet() *CharacterSet {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("punctuationCharacterSet"))
 	return CharacterSetFromID(_r)
 }
 
-// CapitalizedLetterCharacterSet returns the capitalized letter character set.
+// CapitalizedLetterCharacterSet returns a character set containing the characters in Unicode General Category Lt.
 func CapitalizedLetterCharacterSet() *CharacterSet {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("capitalizedLetterCharacterSet"))
 	return CharacterSetFromID(_r)
 }
 
-// SymbolCharacterSet returns the symbol character set.
+// SymbolCharacterSet returns a character set containing the characters in Unicode General Category S\*. These characters include, for example, the dollar sign (`$`) and the plus (`+`) sign.
 func SymbolCharacterSet() *CharacterSet {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("symbolCharacterSet"))
 	return CharacterSetFromID(_r)
 }
 
-// NewlineCharacterSet returns the newline character set.
+// NewlineCharacterSet returns a character set containing the newline characters (`U+000A` ~ `U+000D`, `U+0085`, `U+2028`, and `U+2029`).
 func NewlineCharacterSet() *CharacterSet {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("newlineCharacterSet"))
 	return CharacterSetFromID(_r)
 }
 
-// URLUserAllowedCharacterSet returns the URL user allowed character set.
+// URLUserAllowedCharacterSet returns the character set for characters allowed in a user URL subcomponent. The user component of a URL is an optional component that precedes the host component, and ends at either a colon (if a password is specified) or an `
 func URLUserAllowedCharacterSet() *CharacterSet {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("URLUserAllowedCharacterSet"))
 	return CharacterSetFromID(_r)
 }
 
-// URLPasswordAllowedCharacterSet returns the URL password allowed character set.
+// URLPasswordAllowedCharacterSet returns the character set for characters allowed in a password URL subcomponent. The password component of a URL is the component immediately following the colon after the username component of the URL, and ends at the `
 func URLPasswordAllowedCharacterSet() *CharacterSet {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("URLPasswordAllowedCharacterSet"))
 	return CharacterSetFromID(_r)
 }
 
-// URLHostAllowedCharacterSet returns the URL host allowed character set.
+// URLHostAllowedCharacterSet returns the character set for characters allowed in a host URL subcomponent. The host component of a URL is usually the component immediately after the first two leading slashes. If the URL contains a username and password, the host component is the component after the `
 func URLHostAllowedCharacterSet() *CharacterSet {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("URLHostAllowedCharacterSet"))
 	return CharacterSetFromID(_r)
 }
 
-// URLPathAllowedCharacterSet returns the URL path allowed character set.
+// URLPathAllowedCharacterSet returns the character set for characters allowed in a path URL component. The path component of a URL is the component immediately following the host component (if present). It ends wherever the query or fragment component begins. For example, in the URL `http://www.example.com/index.php?key1=value1`, the path component is `/index.php`.
 func URLPathAllowedCharacterSet() *CharacterSet {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("URLPathAllowedCharacterSet"))
 	return CharacterSetFromID(_r)
 }
 
-// URLQueryAllowedCharacterSet returns the URL query allowed character set.
+// URLQueryAllowedCharacterSet returns the character set for characters allowed in a query URL component. The query component of a URL is the component immediately following a question mark (`?`). For example, in the URL `http://www.example.com/index.php?key1=value1#jumpLink`, the query component is `key1=value1`.
 func URLQueryAllowedCharacterSet() *CharacterSet {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("URLQueryAllowedCharacterSet"))
 	return CharacterSetFromID(_r)
 }
 
-// URLFragmentAllowedCharacterSet returns the URL fragment allowed character set.
+// URLFragmentAllowedCharacterSet returns the character set for characters allowed in a fragment URL component. The fragment component of a URL is the component after a `#` symbol. For example, in the URL `http://www.example.com/index.html#jumpLocation`, the fragment is `jumpLocation`.
 func URLFragmentAllowedCharacterSet() *CharacterSet {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("URLFragmentAllowedCharacterSet"))
 	return CharacterSetFromID(_r)
@@ -733,7 +733,7 @@ func DataDetectorWithTypes(checkingTypes uint64) (result *DataDetector, err erro
 	return DataDetectorFromID(_r), nil
 }
 
-// TimeIntervalSinceReferenceDate returns the time interval since reference date.
+// TimeIntervalSinceReferenceDate returns the interval between 00:00:00 UTC on 1 January 2001 and the current date and time. This method is the primitive method for `NSDate`. If you subclass `NSDate`, you must override this method with your own implementation for it.
 func TimeIntervalSinceReferenceDate() float64 {
 	_r := objc.Send[float64](objc.ID(_class("NSDate")), objc.RegisterName("timeIntervalSinceReferenceDate"))
 	return _r
@@ -769,19 +769,19 @@ func DateWithTimeIntervalSinceDate(secsToBeAdded float64, date time.Time) *Date 
 	return DateFromID(_r)
 }
 
-// NSDateDistantFuture returns the ns date distant future.
+// NSDateDistantFuture returns a date object representing a date in the distant future. You can pass this value when an `NSDate` object is required to have the date argument essentially ignored. For example, the `NSWindow` method `nextEventMatchingMask:untilDate:inMode:dequeue:` returns `nil` if an event specified in the event mask does not happen before the specified date. You can use the object returned by `distantFuture` as the date argument to wait indefinitely for the event to occur.
 func NSDateDistantFuture() time.Time {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSDate")), objc.RegisterName("distantFuture"))
 	return rt.NSDateToTime(_r)
 }
 
-// NSDateDistantPast returns the ns date distant past.
+// NSDateDistantPast returns a date object representing a date in the distant past. You can use this object as a control date, a guaranteed temporal boundary.
 func NSDateDistantPast() time.Time {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSDate")), objc.RegisterName("distantPast"))
 	return rt.NSDateToTime(_r)
 }
 
-// Now returns the now.
+// Now returns the current date and time, as of the time of access. This is equivalent to initializing a new instance with `NSDate()` (or `[[NSDate alloc] init]` in Objective-C). The `NSDate` instance doesn't automatically update its time after you retrieve it.
 func Now() time.Time {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSDate")), objc.RegisterName("now"))
 	return rt.NSDateToTime(_r)
@@ -806,7 +806,7 @@ func DateWithString(aString string) obj.Object {
 	return obj.Wrap(_r)
 }
 
-// LocalizedStringFromDateComponentsUnitsStyle wraps the corresponding Objective-C method.
+// LocalizedStringFromDateComponentsUnitsStyle returns a localized string based on the specified date components and style option. Use this convenience method to format a string using the default formatter values, with the exception of the `unitsStyle` value.
 func LocalizedStringFromDateComponentsUnitsStyle(components *DateComponents, unitsStyle DateComponentsFormatterUnitsStyle) string {
 	defer runtime.KeepAlive(components)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSDateComponentsFormatter")), objc.RegisterName("localizedStringFromDateComponents:unitsStyle:"), objref.IDOf(components), unitsStyle)
@@ -816,7 +816,7 @@ func LocalizedStringFromDateComponentsUnitsStyle(components *DateComponents, uni
 	return purego.GoString(_r)
 }
 
-// LocalizedStringFromDateDateStyleTimeStyle wraps the corresponding Objective-C method.
+// LocalizedStringFromDateDateStyleTimeStyle returns a string representation of a specified date, that the system formats for the current locale using the specified date and time styles. - Parameters: - date: A date. - dstyle: A format style for the date. For possible values, see `NSDateFormatterStyle`. - tstyle: A format style for the time. For possible values, see `NSDateFormatterStyle`. - Returns: A localized string representation of `date` using the specified date and time styles. This method uses a date formatter configured with the current default settings. The returned string is the same as if you configured and used a date formatter as shown in the following example: NSDateFormatter *formatter = [[NSDateFormatter alloc] init]; formatter.formatterBehavior = NSDateFormatterBehavior10_4; formatter.dateStyle = dateStyle; formatter.timeStyle = timeStyle; NSString *result = [formatter stringForObjectValue:date];
 func LocalizedStringFromDateDateStyleTimeStyle(date time.Time, dstyle DateFormatterStyle, tstyle DateFormatterStyle) string {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSDateFormatter")), objc.RegisterName("localizedStringFromDate:dateStyle:timeStyle:"), rt.TimeToNSDate(date), dstyle, tstyle)
 	if _r == 0 {
@@ -825,7 +825,7 @@ func LocalizedStringFromDateDateStyleTimeStyle(date time.Time, dstyle DateFormat
 	return purego.GoString(_r)
 }
 
-// DateFormatFromTemplateOptionsLocale wraps the corresponding Objective-C method.
+// DateFormatFromTemplateOptionsLocale returns a localized date format string representing the given date format components arranged appropriately for the specified locale. - Parameters: - tmplate: A string containing date format patterns (such as "MM" or "h"). - opts: No options are currently defined — pass `0`. - locale: The locale for which the template is required. - Returns: A localized date format string representing the date format components given in `tmplate`, arranged appropriately for the locale specified by `locale`. The returned string may not contain exactly those components given in `tmplate`, but may — for example — have locale-specific adjustments applied. Different locales have different conventions for the ordering of date components. You use this method to get an appropriate format string for a given set of components for a specified locale (typically you use the current locale).
 func DateFormatFromTemplateOptionsLocale(tmplate string, opts int, locale *Locale) string {
 	defer runtime.KeepAlive(locale)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSDateFormatter")), objc.RegisterName("dateFormatFromTemplate:options:locale:"), purego.NSString(tmplate), opts, objref.IDOf(locale))
@@ -835,7 +835,7 @@ func DateFormatFromTemplateOptionsLocale(tmplate string, opts int, locale *Local
 	return purego.GoString(_r)
 }
 
-// DefaultFormatterBehavior returns the default formatter behavior.
+// DefaultFormatterBehavior returns the default formatting behavior for instances of the class. For iOS and for macOS applications linked against macOS 10.5 and later, the default is `NSDateFormatterBehavior10_4`.
 func DefaultFormatterBehavior() DateFormatterBehavior {
 	_r := objc.Send[DateFormatterBehavior](objc.ID(_class("NSDateFormatter")), objc.RegisterName("defaultFormatterBehavior"))
 	return _r
@@ -871,31 +871,31 @@ func DecimalNumberWithStringLocale(numberValue string, locale obj.Object) *Decim
 	return DecimalNumberFromID(_r)
 }
 
-// Zero returns the zero.
+// Zero returns a decimal number equivalent to the number 0.
 func Zero() *DecimalNumber {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSDecimalNumber")), objc.RegisterName("zero"))
 	return DecimalNumberFromID(_r)
 }
 
-// One returns the one.
+// One returns a decimal number equivalent to the number 1.
 func One() *DecimalNumber {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSDecimalNumber")), objc.RegisterName("one"))
 	return DecimalNumberFromID(_r)
 }
 
-// MinimumDecimalNumber returns the minimum decimal number.
+// MinimumDecimalNumber returns the smallest possible value of a decimal number.
 func MinimumDecimalNumber() *DecimalNumber {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSDecimalNumber")), objc.RegisterName("minimumDecimalNumber"))
 	return DecimalNumberFromID(_r)
 }
 
-// MaximumDecimalNumber returns the maximum decimal number.
+// MaximumDecimalNumber returns the largest possible value of a decimal number.
 func MaximumDecimalNumber() *DecimalNumber {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSDecimalNumber")), objc.RegisterName("maximumDecimalNumber"))
 	return DecimalNumberFromID(_r)
 }
 
-// NotANumber returns the not a number.
+// NotANumber returns a decimal number that specifies no number. Any arithmetic method receiving `notANumber` as an argument returns `notANumber`.
 func NotANumber() *DecimalNumber {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSDecimalNumber")), objc.RegisterName("notANumber"))
 	return DecimalNumberFromID(_r)
@@ -907,7 +907,7 @@ func DecimalNumberHandlerWithRoundingModeScaleRaiseOnExactnessRaiseOnOverflowRai
 	return DecimalNumberHandlerFromID(_r)
 }
 
-// DefaultDecimalNumberHandler returns the default decimal number handler.
+// DefaultDecimalNumberHandler returns the default instance of `NSDecimalNumberHandler`. The default handler rounds to closest possible return value (“NSRoundPlain“), assumes precision up to 38 significant digits, and raises on overflow, underflow, and divide by zero.
 func DefaultDecimalNumberHandler() *DecimalNumberHandler {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSDecimalNumberHandler")), objc.RegisterName("defaultDecimalNumberHandler"))
 	return DecimalNumberHandlerFromID(_r)
@@ -960,7 +960,7 @@ func SharedKeySetForKeys(keys []obj.Object) obj.Object {
 	return obj.Wrap(_r)
 }
 
-// BaseUnit returns the base unit.
+// BaseUnit returns the base unit of the dimension. The default implementation returns `nil` to indicate that the `NSDimension` class should not be used directly. When implementing a subclass, you should return a unit converter that returns the inputted value for both the `baseUnitValueFromValue:` and `valueFromBaseUnitValue:` methods. You can create a unit converter for a base unit using the `NSUnitConverterLinear` `initWithCoefficient:` initializer, passing `1` as the coefficient.
 func BaseUnit() *Dimension {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSDimension")), objc.RegisterName("baseUnit"))
 	return DimensionFromID(_r)
@@ -988,17 +988,23 @@ func LockWithPath(path string) *DistributedLock {
 	return DistributedLockFromID(_r)
 }
 
-// NotificationCenterForType wraps the corresponding Objective-C method.
+// NotificationCenterForType returns the distributed notification center for a particular notification center type. Currently only one type, `NSLocalNotificationCenterType`, is supported. - Parameter notificationCenterType: Notification center type being inquired about. - Returns: Distributed notification center for `notificationCenterType`.
 func NotificationCenterForType(notificationCenterType *String) *DistributedNotificationCenter {
 	defer runtime.KeepAlive(notificationCenterType)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSDistributedNotificationCenter")), objc.RegisterName("notificationCenterForType:"), objref.IDOf(notificationCenterType))
 	return DistributedNotificationCenterFromID(_r)
 }
 
-// DefaultCenter returns the default center.
+// DefaultCenter returns the default distributed notification center, representing the local notification center for the computer. This method calls “DistributedNotificationCenter/forType(_:)“ with an argument of `NSLocalNotificationCenterType`. - Returns: Default distributed notification center for the computer.
 func DefaultCenter() *DistributedNotificationCenter {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSDistributedNotificationCenter")), objc.RegisterName("defaultCenter"))
 	return DistributedNotificationCenterFromID(_r)
+}
+
+// New returns the new.
+func New() *Error {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSError")), objc.RegisterName("new"))
+	return ErrorFromID(_r)
 }
 
 // ErrorWithDomainCodeUserInfo creates and initializes an NSError object for a given domain and code with a given userInfo dictionary.
@@ -1167,31 +1173,31 @@ func WritingIntentWithURLOptions(url string, options FileCoordinatorWritingOptio
 	return FileAccessIntentFromID(_r)
 }
 
-// FilePresenters returns the file presenters.
+// FilePresenters returns an array containing the process's currently registered file presenter objects.
 func FilePresenters() []obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSFileCoordinator")), objc.RegisterName("filePresenters"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// FileHandleForReadingAtPath wraps the corresponding Objective-C method.
+// FileHandleForReadingAtPath returns a file handle initialized for reading the file, device, or named socket at the specified path. - Parameter path: The path to the file, device, or named socket to access. - Returns: The initialized file handle object or `nil` if no file exists at `path`. The file pointer is set to the beginning of the file. You cannot write data to the returned file handle object. The returned object responds only to “FileHandle/readData(ofLength:)“, “FileHandle/readDataToEndOfFile()“, and “FileHandle/availableData“. The file handle owns its file descriptor.
 func FileHandleForReadingAtPath(path string) *FileHandle {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSFileHandle")), objc.RegisterName("fileHandleForReadingAtPath:"), purego.NSString(path))
 	return FileHandleFromID(_r)
 }
 
-// FileHandleForWritingAtPath wraps the corresponding Objective-C method.
+// FileHandleForWritingAtPath returns a file handle initialized for writing to the file, device, or named socket at the specified path. - Parameter path: The path to the file, device, or named socket to access. - Returns: The initialized file handle object or `nil` if no file exists at `path`. The file pointer is set to the beginning of the file. You cannot read data from the returned file handle object. Use “FileHandle/write(_:)“ to write data to the returned file handle object. The file handle owns its file descriptor.
 func FileHandleForWritingAtPath(path string) *FileHandle {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSFileHandle")), objc.RegisterName("fileHandleForWritingAtPath:"), purego.NSString(path))
 	return FileHandleFromID(_r)
 }
 
-// FileHandleForUpdatingAtPath wraps the corresponding Objective-C method.
+// FileHandleForUpdatingAtPath returns a file handle initialized for reading and writing to the file, device, or named socket at the specified path. - Parameter path: The path to the file, device, or named socket to access. - Returns: The initialized file handle object or `nil` if no file exists at `path`. The file pointer is set to the beginning of the file. The returned object responds to both read and write messages.
 func FileHandleForUpdatingAtPath(path string) *FileHandle {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSFileHandle")), objc.RegisterName("fileHandleForUpdatingAtPath:"), purego.NSString(path))
 	return FileHandleFromID(_r)
 }
 
-// FileHandleForReadingFromURL wraps the corresponding Objective-C method.
+// FileHandleForReadingFromURL returns a file handle initialized for reading the file, device, or named socket at the specified URL. - Parameters: - url: The URL of the file, device, or named socket to access. - error: If an error occurs, upon return contains an `NSError` object that describes the problem. Pass `NULL` if you do not want error information. - Returns: The initialized file handle object or `nil` if no file exists at `url`. The file pointer is set to the beginning of the file. You cannot write data to the returned file handle object. Use the “FileHandle/readDataToEndOfFile()“ or “FileHandle/readData(ofLength:)“ methods to read data from it. When using this method to create a file handle object, the file handle owns its associated file descriptor and is responsible for closing it.
 func FileHandleForReadingFromURL(url string) (result *FileHandle, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("NSFileHandle")), objc.RegisterName("fileHandleForReadingFromURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
@@ -1201,7 +1207,7 @@ func FileHandleForReadingFromURL(url string) (result *FileHandle, err error) {
 	return FileHandleFromID(_r), nil
 }
 
-// FileHandleForWritingToURL wraps the corresponding Objective-C method.
+// FileHandleForWritingToURL returns a file handle initialized for writing to the file, device, or named socket at the specified URL. - Parameters: - url: The URL of the file, device, or named socket to access. - error: If an error occurs, upon return contains an `NSError` object that describes the problem. Pass `NULL` if you do not want error information. - Returns: The initialized file handle object or `nil` if no file exists at `url`. The file pointer is set to the beginning of the file. The returned object responds only to “FileHandle/write(_:)“. When using this method to create a file handle object, the file handle owns its associated file descriptor and is responsible for closing it.
 func FileHandleForWritingToURL(url string) (result *FileHandle, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("NSFileHandle")), objc.RegisterName("fileHandleForWritingToURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
@@ -1211,7 +1217,7 @@ func FileHandleForWritingToURL(url string) (result *FileHandle, err error) {
 	return FileHandleFromID(_r), nil
 }
 
-// FileHandleForUpdatingURL wraps the corresponding Objective-C method.
+// FileHandleForUpdatingURL returns a file handle initialized for reading and writing to the file, device, or named socket at the specified URL. - Parameters: - url: The URL of the file, device, or named socket to access. - error: If an error occurs, upon return contains an `NSError` object that describes the problem. Pass `NULL` if you do not want error information. - Returns: The initialized file handle object or `nil` if no file exists at `url`. The file pointer is set to the beginning of the file. The returned object responds to both read and “FileHandle/write(_:)“ messages. When using this method to create a file handle object, the file handle owns its associated file descriptor and is responsible for closing it.
 func FileHandleForUpdatingURL(url string) (result *FileHandle, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("NSFileHandle")), objc.RegisterName("fileHandleForUpdatingURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
@@ -1221,31 +1227,31 @@ func FileHandleForUpdatingURL(url string) (result *FileHandle, err error) {
 	return FileHandleFromID(_r), nil
 }
 
-// FileHandleWithStandardInput returns the file handle with standard input.
+// FileHandleWithStandardInput returns the file handle associated with the standard input file. Conventionally this is a terminal device on which the user enters a stream of data. There is one standard input file handle per process; it is a shared instance.
 func FileHandleWithStandardInput() *FileHandle {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSFileHandle")), objc.RegisterName("fileHandleWithStandardInput"))
 	return FileHandleFromID(_r)
 }
 
-// FileHandleWithStandardOutput returns the file handle with standard output.
+// FileHandleWithStandardOutput returns the file handle associated with the standard output file. Conventionally this is a terminal device that receives a stream of data from a program. There is one standard output file handle per process; it is a shared instance.
 func FileHandleWithStandardOutput() *FileHandle {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSFileHandle")), objc.RegisterName("fileHandleWithStandardOutput"))
 	return FileHandleFromID(_r)
 }
 
-// FileHandleWithStandardError returns the file handle with standard error.
+// FileHandleWithStandardError returns the file handle associated with the standard error file. Conventionally this is a terminal device to which error messages are sent. There is one standard error file handle per process; it is a shared instance.
 func FileHandleWithStandardError() *FileHandle {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSFileHandle")), objc.RegisterName("fileHandleWithStandardError"))
 	return FileHandleFromID(_r)
 }
 
-// FileHandleWithNullDevice returns the file handle with null device.
+// FileHandleWithNullDevice returns the file handle associated with a null device. You can use the returned file handle as a "stand in" for standard file handles. Reads from the null-device file handle return an empty “NSData“ object. Writes to it are discarded. The “FileHandle/fileDescriptor“ property returns an illegal value. The “FileHandle/close()“ method has no effect.
 func FileHandleWithNullDevice() *FileHandle {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSFileHandle")), objc.RegisterName("fileHandleWithNullDevice"))
 	return FileHandleFromID(_r)
 }
 
-// DefaultManager returns the default manager.
+// DefaultManager returns the shared file manager object for the process. This method always represents the same file manager object. If you plan to use a delegate with the file manager to receive notifications about the completion of file-based operations, you should create a new instance of “FileManager“ rather than using the shared object.
 func DefaultManager() *FileManager {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSFileManager")), objc.RegisterName("defaultManager"))
 	return FileManagerFromID(_r)
@@ -1333,38 +1339,38 @@ func DefaultCollector() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// CookieWithProperties creates and initializes an HTTP cookie object using the provided properties.
+// CookieWithProperties allocates and initializes an `NSHTTPCookie` with the given dictionary. - Parameter properties: The dictionary to use to initialize this cookie. - Returns: A newly-created and autoreleased `NSHTTPCookie` instance, or `nil` if the set of dictionary keys is invalid, for example because a required key is missing, or a recognized key maps to an illegal value. See the `NSHTTPCookie` `-initWithProperties:` method for more information on the constraints imposed on the dictionary, and for descriptions of the supported keys and values.
 func CookieWithProperties(properties obj.Object) *HTTPCookie {
 	defer runtime.KeepAlive(properties)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSHTTPCookie")), objc.RegisterName("cookieWithProperties:"), objref.IDOf(properties))
 	return HTTPCookieFromID(_r)
 }
 
-// RequestHeaderFieldsWithCookies return a dictionary of header fields that can be used to add the specified cookies to the request.
+// RequestHeaderFieldsWithCookies converts an array of cookies to a dictionary of header fields. - Parameter cookies: The cookies from which the header fields are created. - Returns: An `NSDictionary` where the keys are header field names, and the values are the corresponding header field values.
 func RequestHeaderFieldsWithCookies(cookies []*HTTPCookie) map[string]string {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSHTTPCookie")), objc.RegisterName("requestHeaderFieldsWithCookies:"), purego.SliceToNSArray(cookies, func(_v *HTTPCookie) objc.ID { return objref.IDOf(_v) }))
 	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// CookiesWithResponseHeaderFieldsForURL return an array of cookies parsed from the specified response header fields and URL. This method will ignore irrelevant header fields so you can pass a dictionary containing data other than cookie data.
+// CookiesWithResponseHeaderFieldsForURL creates an array of HTTP cookies that corresponds to the provided response header fields for the provided URL. - Parameter headerFields: The response header fields to check for cookies. - Parameter URL: The URL that the cookies came from, relevant to how the cookies are interpreted. - Returns: An `NSArray` of `NSHTTPCookie` objects. This method ignores irrelevant header fields in `headerFields`, allowing dictionaries to contain additional data.
 func CookiesWithResponseHeaderFieldsForURL(headerFields map[string]string, url string) []*HTTPCookie {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSHTTPCookie")), objc.RegisterName("cookiesWithResponseHeaderFields:forURL:"), rt.MapToDict(headerFields, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v string) objc.ID { return purego.NSString(_v) }), rt.FileURL(url))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *HTTPCookie { return HTTPCookieFromID(_id) })
 }
 
-// SharedCookieStorageForGroupContainerIdentifier get the cookie storage for the container associated with the specified application group identifier By default, applications and associated app extensions have different data containers, which means that the sharedHTTPCookieStorage singleton will refer to different persistent cookie stores in an application and any app extensions that it contains. This method allows clients to create a persistent cookie storage that can be shared among all applications and extensions with access to the same application group. Subsequent calls to this method with the same identifier will return the same cookie storage instance.
+// SharedCookieStorageForGroupContainerIdentifier returns the cookie storage instance for the container associated with the specified app group identifier. - Parameter identifier: The application group identifier. - Returns: A cookie storage with a persistent store in the application group container. By default, apps and associated app extensions will have different data containers. As a result, the `sharedHTTPCookieStorage` singleton will refer to different persistent cookie stores when called by the app and by its extensions. You can use this method to create a persistent cookie storage available to all apps and extensions with access to the same app group. Subsequent calls to this method with the same identifier will return the same cookie storage instance.
 func SharedCookieStorageForGroupContainerIdentifier(identifier string) *HTTPCookieStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSHTTPCookieStorage")), objc.RegisterName("sharedCookieStorageForGroupContainerIdentifier:"), purego.NSString(identifier))
 	return HTTPCookieStorageFromID(_r)
 }
 
-// SharedHTTPCookieStorage get the shared cookie storage in the default location. Starting in OS X 10.11, each app has its own sharedHTTPCookieStorage singleton, which will not be shared with other applications.
+// SharedHTTPCookieStorage returns the shared cookie storage instance. Starting in OS X 10.11, each app has its own `sharedHTTPCookieStorage` singleton, which will not be shared with other applications.
 func SharedHTTPCookieStorage() *HTTPCookieStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSHTTPCookieStorage")), objc.RegisterName("sharedHTTPCookieStorage"))
 	return HTTPCookieStorageFromID(_r)
 }
 
-// LocalizedStringForStatusCode convenience method which returns a localized string corresponding to the status code for this response.
+// LocalizedStringForStatusCode returns a localized string corresponding to a specified HTTP status code. - Parameter statusCode: The HTTP status code. See [RFC 2616](http://www.ietf.org/rfc/rfc2616.txt) for details. - Returns: A localized string suitable for displaying to users that describes the specified status code.
 func LocalizedStringForStatusCode(statusCode int) string {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSHTTPURLResponse")), objc.RegisterName("localizedStringForStatusCode:"), statusCode)
 	if _r == 0 {
@@ -1391,41 +1397,41 @@ func WeakObjectsHashTable() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// CurrentHost returns the current host.
+// CurrentHost returns an “NSHost“ object representing the host the process is running on. This method executes synchronously. The execution time of this method can be highly variable, depending on the local network configuration, and may block for several seconds if the network is unreachable. To avoid blocking execution on the main thread, you should call this method in an “Operation“ or _Grand Central Dispatch_ block that executes asynchronously in the background. - Returns: `NSHost` object for the process's host.
 func CurrentHost() *Host {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSHost")), objc.RegisterName("currentHost"))
 	return HostFromID(_r)
 }
 
-// HostWithName wraps the corresponding Objective-C method.
+// HostWithName returns a host with a specific name. - Parameters: - name: Name of the host to look up. Can be either a simple hostname, such as `"sales"`, or a fully qualified domain name, such as `"sales.anycorp.com"`. - Returns: The host named `name`.
 func HostWithName(name string) *Host {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSHost")), objc.RegisterName("hostWithName:"), purego.NSString(name))
 	return HostFromID(_r)
 }
 
-// HostWithAddress wraps the corresponding Objective-C method.
+// HostWithAddress returns the `NSHost` with the Internet address `address`. - Parameters: - address: Network address to look up. For example, `"127.0.0.1"` or `"fe80::1"`. - Returns: The host for `address`.
 func HostWithAddress(address string) *Host {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSHost")), objc.RegisterName("hostWithAddress:"), purego.NSString(address))
 	return HostFromID(_r)
 }
 
-// SetHostCacheEnabled specifies whether the receiver is to cache instances as it creates them to avoid creating duplicate instances.
+// SetHostCacheEnabled sets whether the host cache is enabled.
 func SetHostCacheEnabled(flag bool) {
 	objc.Send[objc.ID](objc.ID(_class("NSHost")), objc.RegisterName("setHostCacheEnabled:"), flag)
 }
 
-// IsHostCacheEnabled reports whether caching is turned on or off.
+// IsHostCacheEnabled reports whether the host cache is enabled.
 func IsHostCacheEnabled() bool {
 	_r := objc.Send[bool](objc.ID(_class("NSHost")), objc.RegisterName("isHostCacheEnabled"))
 	return _r
 }
 
-// FlushHostCache releases the cache of existing NSHost objects so subsequent requests for NSHost objects create new ones.
+// FlushHostCache clears the host cache.
 func FlushHostCache() {
 	objc.Send[objc.ID](objc.ID(_class("NSHost")), objc.RegisterName("flushHostCache"))
 }
 
-// StringFromDateTimeZoneFormatOptions wraps the corresponding Objective-C method.
+// StringFromDateTimeZoneFormatOptions creates a representation of the specified date with a given time zone and format options. - Parameters: - date: The date to be represented. - timeZone: The time zone used. - formatOptions: The options used. For possible values, see `NSISO8601DateFormatOptions`. - Returns: A user-readable string representing the date.
 func StringFromDateTimeZoneFormatOptions(date time.Time, timeZone *TimeZone, formatOptions ISO8601DateFormatOptions) string {
 	defer runtime.KeepAlive(timeZone)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSISO8601DateFormatter")), objc.RegisterName("stringFromDate:timeZone:formatOptions:"), rt.TimeToNSDate(date), objref.IDOf(timeZone), formatOptions)
@@ -1479,25 +1485,25 @@ func CanInflectLanguage(language string) bool {
 	return _r
 }
 
-// CanInflectPreferredLocalization wraps the corresponding Objective-C method.
+// CanInflectPreferredLocalization reports whether inflection will work in the language of the main bundle's first preferred localization.
 func CanInflectPreferredLocalization() bool {
 	_r := objc.Send[bool](objc.ID(_class("NSInflectionRule")), objc.RegisterName("canInflectPreferredLocalization"))
 	return _r
 }
 
-// InputStreamWithData creates and returns an initialized NSInputStream object for reading from a given NSData object.
+// InputStreamWithData creates and returns an initialized `NSInputStream` object for reading from a given `NSData` object. The stream must be opened before it can be used. - Parameter data: The data object from which to read. The contents of `data` are copied. - Returns: An initialized `NSInputStream` object for reading from `data`. If `data` is not an `NSData` object, this method returns `nil`.
 func InputStreamWithData(data []byte) *InputStream {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSInputStream")), objc.RegisterName("inputStreamWithData:"), rt.BytesToNSData(data))
 	return InputStreamFromID(_r)
 }
 
-// InputStreamWithFileAtPath creates and returns an initialized NSInputStream object that reads data from the file at a given path.
+// InputStreamWithFileAtPath creates and returns an initialized `NSInputStream` object that reads data from the file at a given path. The stream must be opened before it can be used. - Parameter path: The path to the file. - Returns: An initialized `NSInputStream` object that reads data from the file at `path`.
 func InputStreamWithFileAtPath(path string) *InputStream {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSInputStream")), objc.RegisterName("inputStreamWithFileAtPath:"), purego.NSString(path))
 	return InputStreamFromID(_r)
 }
 
-// InputStreamWithURL creates and returns an initialized NSInputStream object that reads data from the file at a given URL.
+// InputStreamWithURL creates and returns an initialized `NSInputStream` object that reads data from the file at a given URL. The stream must be opened before it can be used. - Parameter url: The URL to the file.
 func InputStreamWithURL(url string) *InputStream {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSInputStream")), objc.RegisterName("inputStreamWithURL:"), rt.FileURL(url))
 	return InputStreamFromID(_r)
@@ -1510,14 +1516,14 @@ func InvocationWithMethodSignature(sig *MethodSignature) *Invocation {
 	return InvocationFromID(_r)
 }
 
-// IsValidJSONObject wraps the corresponding Objective-C method.
+// IsValidJSONObject returns a Boolean value that indicates whether a given object can be converted to JSON data. The object must have the following properties: the top level object is an `NSArray` or `NSDictionary`; all objects are `NSString`, `NSNumber`, `NSArray`, `NSDictionary`, or `NSNull`; all dictionary keys are `NSString` instances; and `NSNumber` values are not NaN or infinity.
 func IsValidJSONObject(object obj.Object) bool {
 	defer runtime.KeepAlive(object)
 	_r := objc.Send[bool](objc.ID(_class("NSJSONSerialization")), objc.RegisterName("isValidJSONObject:"), objref.IDOf(object))
 	return _r
 }
 
-// DataWithJSONObjectOptions wraps the corresponding Objective-C method.
+// DataWithJSONObjectOptions returns JSON data from a Foundation object. If the object will not produce valid JSON then an exception will be thrown. Setting the `NSJSONWritingPrettyPrinted` option will generate JSON with whitespace designed to make the output more readable. If that option is not set, the most compact possible JSON will be generated. The resulting data is encoded in UTF-8.
 func DataWithJSONObjectOptions(object obj.Object, opt JSONWritingOptions) (result []byte, err error) {
 	defer runtime.KeepAlive(object)
 	var _nsErr uintptr
@@ -1528,7 +1534,7 @@ func DataWithJSONObjectOptions(object obj.Object, opt JSONWritingOptions) (resul
 	return rt.NSDataToBytes(_r), nil
 }
 
-// JSONObjectWithDataOptions wraps the corresponding Objective-C method.
+// JSONObjectWithDataOptions returns a Foundation object from JSON data. Set the `NSJSONReadingFragmentsAllowed` option if the parser should allow top-level objects that are not an `NSArray` or `NSDictionary`. Setting the `NSJSONReadingMutableContainers` option will make the parser generate mutable `NSArrays` and `NSDictionaries`. Setting the `NSJSONReadingMutableLeaves` option will make the parser generate mutable `NSString` objects. The data must be in one of the 5 supported encodings listed in the JSON specification: UTF-8, UTF-16LE, UTF-16BE, UTF-32LE, UTF-32BE. The most efficient encoding to use for parsing is UTF-8.
 func JSONObjectWithDataOptions(data []byte, opt JSONReadingOptions) (result obj.Object, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("NSJSONSerialization")), objc.RegisterName("JSONObjectWithData:options:error:"), rt.BytesToNSData(data), opt, unsafe.Pointer(&_nsErr))
@@ -1538,7 +1544,7 @@ func JSONObjectWithDataOptions(data []byte, opt JSONReadingOptions) (result obj.
 	return obj.Wrap(_r), nil
 }
 
-// WriteJSONObjectToStreamOptions writes JSON object to stream options.
+// WriteJSONObjectToStreamOptions writes a Foundation object as JSON into an output stream. The stream should be opened and configured. The return value is the number of bytes written to the stream, or `0` on error. All other behavior of this method is the same as the `dataWithJSONObject:options:error:` method.
 func WriteJSONObjectToStreamOptions(object obj.Object, stream *OutputStream, opt JSONWritingOptions) (result int, err error) {
 	defer runtime.KeepAlive(object)
 	defer runtime.KeepAlive(stream)
@@ -1550,7 +1556,7 @@ func WriteJSONObjectToStreamOptions(object obj.Object, stream *OutputStream, opt
 	return _r, nil
 }
 
-// JSONObjectWithStreamOptions wraps the corresponding Objective-C method.
+// JSONObjectWithStreamOptions returns a Foundation object from a JSON data stream. The stream should be opened and configured. All other behavior of this method is the same as the `JSONObjectWithData:options:error:` method.
 func JSONObjectWithStreamOptions(stream *InputStream, opt JSONReadingOptions) (result obj.Object, err error) {
 	defer runtime.KeepAlive(stream)
 	var _nsErr uintptr
@@ -1675,7 +1681,7 @@ func TagsForStringRangeUnitSchemeOptionsOrthographyTokenRanges(str string, range
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *String { return StringFromID(_id) })
 }
 
-// LocalizedStringByJoiningStrings wraps the corresponding Objective-C method.
+// LocalizedStringByJoiningStrings returns a string constructed from an array of strings using the list format specific to the current locale. It is recommended to join only disjointed strings that are ready to display in a bullet-point list. Sentences, phrases with punctuations, and appositions may not work well when joined together.
 func LocalizedStringByJoiningStrings(strings_ []string) string {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSListFormatter")), objc.RegisterName("localizedStringByJoiningStrings:"), purego.SliceToNSArray(strings_, func(_v string) objc.ID { return purego.NSString(_v) }))
 	if _r == 0 {
@@ -1690,19 +1696,19 @@ func LocaleWithLocaleIdentifier(ident string) *Locale {
 	return LocaleFromID(_r)
 }
 
-// AutoupdatingCurrentLocale returns the autoupdating current locale.
+// AutoupdatingCurrentLocale returns a locale representing the user's region settings at the time the property is read.
 func AutoupdatingCurrentLocale() *Locale {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSLocale")), objc.RegisterName("autoupdatingCurrentLocale"))
 	return LocaleFromID(_r)
 }
 
-// CurrentLocale returns the current locale.
+// CurrentLocale returns an object representing the user's current locale.
 func CurrentLocale() *Locale {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSLocale")), objc.RegisterName("currentLocale"))
 	return LocaleFromID(_r)
 }
 
-// SystemLocale returns the system locale.
+// SystemLocale returns the default generic root locale with little localization.
 func SystemLocale() *Locale {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSLocale")), objc.RegisterName("systemLocale"))
 	return LocaleFromID(_r)
@@ -1768,7 +1774,7 @@ func LineDirectionForLanguage(isoLangCode string) LocaleLanguageDirection {
 	return _r
 }
 
-// AvailableLocaleIdentifiers returns the available locale identifiers.
+// AvailableLocaleIdentifiers returns an array of NSString objects, each of which identifies a locale available on the system.
 //
 // AvailableLocaleIdentifiers returns the collection as a Go slice.
 func AvailableLocaleIdentifiers() []string {
@@ -1776,7 +1782,7 @@ func AvailableLocaleIdentifiers() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// ISOLanguageCodes returns the iso language codes.
+// ISOLanguageCodes returns an array of NSString objects that represents all known legal ISO language codes.
 //
 // ISOLanguageCodes returns the collection as a Go slice.
 func ISOLanguageCodes() []string {
@@ -1784,7 +1790,7 @@ func ISOLanguageCodes() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// ISOCountryCodes returns the iso country codes.
+// ISOCountryCodes returns an array of NSString objects that represents all known legal ISO country codes.
 //
 // ISOCountryCodes returns the collection as a Go slice.
 func ISOCountryCodes() []string {
@@ -1792,7 +1798,7 @@ func ISOCountryCodes() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// ISOCurrencyCodes returns the iso currency codes.
+// ISOCurrencyCodes returns an array of NSString objects that represents all known legal ISO currency codes.
 //
 // ISOCurrencyCodes returns the collection as a Go slice.
 func ISOCurrencyCodes() []string {
@@ -1800,7 +1806,7 @@ func ISOCurrencyCodes() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// CommonISOCurrencyCodes returns the common iso currency codes.
+// CommonISOCurrencyCodes returns an array of common ISO currency codes.
 //
 // CommonISOCurrencyCodes returns the collection as a Go slice.
 func CommonISOCurrencyCodes() []string {
@@ -1808,7 +1814,7 @@ func CommonISOCurrencyCodes() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// PreferredLanguages returns the preferred languages.
+// PreferredLanguages returns an ordered list of the user's preferred languages.
 //
 // PreferredLanguages returns the collection as a Go slice.
 func PreferredLanguages() []string {
@@ -1906,7 +1912,7 @@ func SignatureWithObjCTypes(types string) *MethodSignature {
 	return MethodSignatureFromID(_r)
 }
 
-// UserMorphology returns the user morphology.
+// UserMorphology returns the current user's morphology.
 func UserMorphology() *Morphology {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSMorphology")), objc.RegisterName("userMorphology"))
 	return MorphologyFromID(_r)
@@ -2111,13 +2117,13 @@ func StringWithCapacity(capacity int) *MutableString {
 	return MutableStringFromID(_r)
 }
 
-// DictionaryFromTXTRecordData wraps the corresponding Objective-C method.
+// DictionaryFromTXTRecordData returns a dictionary representing a TXT record given as an `NSData` object. - Parameters: - txtData: A data object encoding a TXT record. - Returns: A dictionary representing `txtData`. The dictionary's keys are UTF8-encoded `NSString` objects. The values associated with all the dictionary's keys are `NSData` objects that encapsulate strings or data. Fails an assertion if `txtData` cannot be represented as an `NSDictionary` object.
 func DictionaryFromTXTRecordData(txtData []byte) map[string][]byte {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSNetService")), objc.RegisterName("dictionaryFromTXTRecordData:"), rt.BytesToNSData(txtData))
 	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) []byte { return rt.NSDataToBytes(_id) })
 }
 
-// DataFromTXTRecordDictionary wraps the corresponding Objective-C method.
+// DataFromTXTRecordDictionary returns an `NSData` object representing a TXT record formed from a given dictionary. - Parameters: - txtDictionary: A dictionary containing a TXT record. - Returns: An `NSData` object representing TXT data formed from `txtDictionary`. Fails an assertion if `txtDictionary` cannot be represented as an `NSData` object.
 func DataFromTXTRecordDictionary(txtDictionary map[string][]byte) []byte {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSNetService")), objc.RegisterName("dataFromTXTRecordDictionary:"), rt.MapToDict(txtDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v []byte) objc.ID { return rt.BytesToNSData(_v) }))
 	return rt.NSDataToBytes(_r)
@@ -2140,13 +2146,13 @@ func NotificationWithNameObjectUserInfo(aName *String, anObject obj.Object, aUse
 	return NotificationFromID(_r)
 }
 
-// NSNotificationCenterDefaultCenter returns the ns notification center default center.
+// NSNotificationCenterDefaultCenter returns the app's default notification center.
 func NSNotificationCenterDefaultCenter() *NotificationCenter {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSNotificationCenter")), objc.RegisterName("defaultCenter"))
 	return NotificationCenterFromID(_r)
 }
 
-// DefaultQueue returns the default queue.
+// DefaultQueue returns the default notification queue for the current thread. This notification queue uses the default notification center.
 func DefaultQueue() *NotificationQueue {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSNotificationQueue")), objc.RegisterName("defaultQueue"))
 	return NotificationQueueFromID(_r)
@@ -2248,7 +2254,7 @@ func NumberWithUnsignedInteger(value int) *Number {
 	return NumberFromID(_r)
 }
 
-// LocalizedStringFromNumberNumberStyle wraps the corresponding Objective-C method.
+// LocalizedStringFromNumberNumberStyle returns a localized number string with the specified style.
 func LocalizedStringFromNumberNumberStyle(num *Number, nstyle NumberFormatterStyle) string {
 	defer runtime.KeepAlive(num)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSNumberFormatter")), objc.RegisterName("localizedStringFromNumber:numberStyle:"), objref.IDOf(num), nstyle)
@@ -2258,19 +2264,19 @@ func LocalizedStringFromNumberNumberStyle(num *Number, nstyle NumberFormatterSty
 	return purego.GoString(_r)
 }
 
-// NSNumberFormatterDefaultFormatterBehavior returns the ns number formatter default formatter behavior.
+// NSNumberFormatterDefaultFormatterBehavior returns an \c NSNumberFormatterBehavior constant that indicates default formatter behavior for new instances of \c NSNumberFormatter.
 func NSNumberFormatterDefaultFormatterBehavior() NumberFormatterBehavior {
 	_r := objc.Send[NumberFormatterBehavior](objc.ID(_class("NSNumberFormatter")), objc.RegisterName("defaultFormatterBehavior"))
 	return _r
 }
 
-// NSNumberFormatterSetDefaultFormatterBehavior wraps the corresponding Objective-C method.
+// NSNumberFormatterSetDefaultFormatterBehavior sets the default formatter behavior for new instances of \c NSNumberFormatter.
 func NSNumberFormatterSetDefaultFormatterBehavior(behavior NumberFormatterBehavior) {
 	objc.Send[objc.ID](objc.ID(_class("NSNumberFormatter")), objc.RegisterName("setDefaultFormatterBehavior:"), behavior)
 }
 
-// New returns the new.
-func New() *Object {
+// NSObjectNew returns the ns object new.
+func NSObjectNew() *Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSObject")), objc.RegisterName("new"))
 	return ObjectFromID(_r)
 }
@@ -2384,13 +2390,13 @@ func ClassFallbacksForKeyedArchiver() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// CurrentQueue returns the current queue.
+// CurrentQueue returns the operation queue that launched the current operation. You can use this method from within a running operation object to get a reference to the operation queue that started it. Calling this method from outside the context of a running operation typically results in `nil` being returned.
 func CurrentQueue() *OperationQueue {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSOperationQueue")), objc.RegisterName("currentQueue"))
 	return OperationQueueFromID(_r)
 }
 
-// MainQueue returns the main queue.
+// MainQueue returns the operation queue associated with the main thread. The returned queue executes one operation at a time on the app's main thread. The execution of operations on the main thread is interleaved with the other tasks that must execute on the main thread, such as the servicing of events and the updating of an app's user interface.
 func MainQueue() *OperationQueue {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSOperationQueue")), objc.RegisterName("mainQueue"))
 	return OperationQueueFromID(_r)
@@ -2479,13 +2485,13 @@ func OrthographyWithDominantScriptLanguageMap(script string, map_ map[string]obj
 	return OrthographyFromID(_r)
 }
 
-// OutputStreamToMemory returns the output stream to memory.
+// OutputStreamToMemory creates and returns an initialized output stream that will write stream data to memory. The stream must be opened before it can be used. You retrieve the contents of the memory stream by sending the message `propertyForKey:` to the receiver with an argument of `NSStreamDataWrittenToMemoryStreamKey`.
 func OutputStreamToMemory() *OutputStream {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSOutputStream")), objc.RegisterName("outputStreamToMemory"))
 	return OutputStreamFromID(_r)
 }
 
-// OutputStreamToBufferCapacity creates and returns an initialized output stream that can write to a provided buffer.
+// OutputStreamToBufferCapacity creates and returns an initialized output stream that can write to a provided buffer. The stream must be opened before it can be used. When the number of bytes written to `buffer` has reached `capacity`, the stream's `streamStatus` will return `NSStreamStatusAtEnd`. - Parameters: - buffer: The buffer the output stream will write to. - capacity: The size of the buffer in bytes. - Returns: An initialized output stream that can write to `buffer`.
 func OutputStreamToBufferCapacity(capacity int) (result *OutputStream, buffer uint8) {
 	var _out0 uint8
 	_r := objc.Send[objc.ID](objc.ID(_class("NSOutputStream")), objc.RegisterName("outputStreamToBuffer:capacity:"), unsafe.Pointer(&_out0), capacity)
@@ -2493,19 +2499,19 @@ func OutputStreamToBufferCapacity(capacity int) (result *OutputStream, buffer ui
 	return _v, _out0
 }
 
-// OutputStreamToFileAtPathAppend creates and returns an initialized output stream for writing to a specified file.
+// OutputStreamToFileAtPathAppend creates and returns an initialized output stream for writing to a specified file. The stream must be opened before it can be used. - Parameters: - path: The path to the file the output stream will write to. - shouldAppend: `YES` if newly written data should be appended to any existing file contents, otherwise `NO`. - Returns: An initialized output stream that can write to `path`.
 func OutputStreamToFileAtPathAppend(path string, shouldAppend bool) *OutputStream {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSOutputStream")), objc.RegisterName("outputStreamToFileAtPath:append:"), purego.NSString(path), shouldAppend)
 	return OutputStreamFromID(_r)
 }
 
-// OutputStreamWithURLAppend creates and returns an initialized output stream for writing to a specified URL.
+// OutputStreamWithURLAppend creates and returns an initialized output stream for writing to a specified URL. The stream must be opened before it can be used. - Parameters: - url: The URL to the file the output stream will write to. - shouldAppend: `YES` if newly written data should be appended to any existing file contents, otherwise `NO`.
 func OutputStreamWithURLAppend(url string, shouldAppend bool) *OutputStream {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSOutputStream")), objc.RegisterName("outputStreamWithURL:append:"), rt.FileURL(url), shouldAppend)
 	return OutputStreamFromID(_r)
 }
 
-// LocalizedStringFromPersonNameComponentsStyleOptions wraps the corresponding Objective-C method.
+// LocalizedStringFromPersonNameComponentsStyleOptions returns a formatted string from the given person name components using the specified style and options. Shortcut for converting an `NSPersonNameComponents` object into a string without explicitly creating an instance. Create an instance for greater customizability.
 func LocalizedStringFromPersonNameComponentsStyleOptions(components *PersonNameComponents, nameFormatStyle PersonNameComponentsFormatterStyle, nameOptions PersonNameComponentsFormatterOptions) string {
 	defer runtime.KeepAlive(components)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPersonNameComponentsFormatter")), objc.RegisterName("localizedStringFromPersonNameComponents:style:options:"), objref.IDOf(components), nameFormatStyle, nameOptions)
@@ -2515,7 +2521,7 @@ func LocalizedStringFromPersonNameComponentsStyleOptions(components *PersonNameC
 	return purego.GoString(_r)
 }
 
-// NSPipePipe returns an NSPipe object.
+// NSPipePipe returns a new `NSPipe` object.
 func NSPipePipe() *Pipe {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPipe")), objc.RegisterName("pipe"))
 	return PipeFromID(_r)
@@ -2564,7 +2570,7 @@ func PointerFunctionsWithOptions(options PointerFunctionsOptions) *PointerFuncti
 	return PointerFunctionsFromID(_r)
 }
 
-// NSPortPort creates and returns a new NSPort object capable of both sending and receiving messages.
+// NSPortPort creates and returns a new “NSPort“ object capable of both sending and receiving messages.
 func NSPortPort() *Port {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPort")), objc.RegisterName("port"))
 	return PortFromID(_r)
@@ -2706,57 +2712,57 @@ func TableCellIntentWithIdentityColumnNestedInsideIntent(identity int, column in
 	return PresentationIntentFromID(_r)
 }
 
-// NSProcessInfoProcessInfo returns the ns process info process info.
+// NSProcessInfoProcessInfo returns the process information agent for the process. An `NSProcessInfo` object is created the first time this property is accessed, and that same object is returned on each subsequent access.
 func NSProcessInfoProcessInfo() *ProcessInfo {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSProcessInfo")), objc.RegisterName("processInfo"))
 	return ProcessInfoFromID(_r)
 }
 
-// CurrentProgress returns the current progress.
+// CurrentProgress returns the progress instance, if any, associated with the current thread. If you invoke `-becomeCurrentWithPendingUnitCount:` on the current thread, this method returns the progress instance. Use this per-thread value to allow code that performs work to report useful progress even when it's widely separated from the code that actually presents progress information to the user, and without requiring layers of intervening code to pass around an `NSProgress` instance. To ensure that you report progress in known units of work, you typically work with a suboperation progress object that you create by calling `+progressWithTotalUnitCount:`.
 func CurrentProgress() *Progress {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSProgress")), objc.RegisterName("currentProgress"))
 	return ProgressFromID(_r)
 }
 
-// ProgressWithTotalUnitCount wraps the corresponding Objective-C method.
+// ProgressWithTotalUnitCount creates and returns a progress instance. - Parameter unitCount: The total number of units of work to assign to the progress instance. If a current progress object exists, the initializer uses it to set the value of the `totalUnitCount` property. In many cases, you can precede code that does a substantial amount of work with an invocation of this method, then repeatedly set the `completedUnitCount` or `isCancelled` property in the loop that does the work. You can invoke this method on one thread and then message the returned `NSProgress` on another thread. For example, you can capture the created progress instance in a block that you pass to `dispatch_async()`. In that block, you can invoke methods like `-becomeCurrentWithPendingUnitCount:` or `-resignCurrent`, and set the `completedUnitCount` or `isCancelled` properties as your app finishes its work.
 func ProgressWithTotalUnitCount(unitCount int64) *Progress {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSProgress")), objc.RegisterName("progressWithTotalUnitCount:"), unitCount)
 	return ProgressFromID(_r)
 }
 
-// DiscreteProgressWithTotalUnitCount wraps the corresponding Objective-C method.
+// DiscreteProgressWithTotalUnitCount creates and returns a progress instance with the specified unit count that isn't part of any existing progress tree. - Parameter unitCount: The total number of units of work to assign to the progress instance. - Returns: A new progress instance with its containing progress object set to `nil`. Use this method to create the top-level progress object that your custom classes return. The receiver of the returned progress object can add it to a progress tree using `-addChild:withPendingUnitCount:`. You're responsible for updating the progress count of the created progress object. You can invoke this method on one thread and then message the returned `NSProgress` on another thread. For example, you can capture the created progress instance in a block that you pass to `dispatch_async()`. In that block, you can invoke methods like `-becomeCurrentWithPendingUnitCount:` or `-resignCurrent`, and set the `completedUnitCount` or `isCancelled` properties as your app finishes its work.
 func DiscreteProgressWithTotalUnitCount(unitCount int64) *Progress {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSProgress")), objc.RegisterName("discreteProgressWithTotalUnitCount:"), unitCount)
 	return ProgressFromID(_r)
 }
 
-// ProgressWithTotalUnitCountParentPendingUnitCount wraps the corresponding Objective-C method.
+// ProgressWithTotalUnitCountParentPendingUnitCount creates a progress instance for the specified progress object with a unit count that's a portion of the containing object's total unit count. - Parameters: - unitCount: The total number of units of work to assign to the progress instance. - parent: The containing progress object for the created progress object. - portionOfParentTotalUnitCount: The unit count for the progress object.
 func ProgressWithTotalUnitCountParentPendingUnitCount(unitCount int64, parent *Progress, portionOfParentTotalUnitCount int64) *Progress {
 	defer runtime.KeepAlive(parent)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSProgress")), objc.RegisterName("progressWithTotalUnitCount:parent:pendingUnitCount:"), unitCount, objref.IDOf(parent), portionOfParentTotalUnitCount)
 	return ProgressFromID(_r)
 }
 
-// AddSubscriberForFileURLWithPublishingHandler adds subscriber for file URL with publishing handler.
+// AddSubscriberForFileURLWithPublishingHandler registers a file URL to hear about the progress of a file operation. - Parameters: - url: The URL of the file to observe. - publishingHandler: A closure that the system invokes when a progress object that represents a file operation matching the specified URL calls `-publish`. - Returns: A proxy of the progress object to observe. The system invokes the passed-in block when a progress object calls `-publish` with an `NSProgressFileURLKey` user info dictionary entry that's a URL that is the same as this method's URL, or that is an item that the URL directly contains. The progress object that passes to your block is a proxy of the published progress object. The passed-in block may return another block. If it does, the system invokes the returned block when the observed progress object invokes `-unpublish`, the publishing process terminates, or you invoke `+removeSubscriber:`. The system invokes the blocks you provide on the main thread.
 func AddSubscriberForFileURLWithPublishingHandler(url string, publishingHandler func(obj.Object) int) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSProgress")), objc.RegisterName("addSubscriberForFileURL:withPublishingHandler:"), rt.FileURL(url), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) int { return publishingHandler(obj.Wrap(_b0)) }))
 	return obj.Wrap(_r)
 }
 
-// RemoveSubscriber removes subscriber.
+// RemoveSubscriber removes a proxy progress object that the add subscriber method returns. - Parameter subscriber: The proxy of the progress object to observe. If the block for `+addSubscriberForFileURL:withPublishingHandler:` returns a closure, the system invokes that closure on the main thread when you invoke `+removeSubscriber:`.
 func RemoveSubscriber(subscriber obj.Object) {
 	defer runtime.KeepAlive(subscriber)
 	objc.Send[objc.ID](objc.ID(_class("NSProgress")), objc.RegisterName("removeSubscriber:"), objref.IDOf(subscriber))
 }
 
-// PropertyListIsValidForFormat wraps the corresponding Objective-C method.
+// PropertyListIsValidForFormat returns a Boolean value that indicates whether a given property list is valid for a given format.
 func PropertyListIsValidForFormat(plist obj.Object, format PropertyListFormat) bool {
 	defer runtime.KeepAlive(plist)
 	_r := objc.Send[bool](objc.ID(_class("NSPropertyListSerialization")), objc.RegisterName("propertyList:isValidForFormat:"), objref.IDOf(plist), format)
 	return _r
 }
 
-// DataWithPropertyListFormatOptions wraps the corresponding Objective-C method.
+// DataWithPropertyListFormatOptions returns an `NSData` object containing the serialized representation of a given property list in a given format. The format can be either `NSPropertyListXMLFormat_v1_0` or `NSPropertyListBinaryFormat_v1_0`. The `opt` parameter is currently unused and should be set to `0`. If an error occurs the return value will be `nil` and the error parameter (if non-NULL) set to an autoreleased `NSError` describing the problem.
 func DataWithPropertyListFormatOptions(plist obj.Object, format PropertyListFormat, opt int) (result []byte, err error) {
 	defer runtime.KeepAlive(plist)
 	var _nsErr uintptr
@@ -2767,7 +2773,7 @@ func DataWithPropertyListFormatOptions(plist obj.Object, format PropertyListForm
 	return rt.NSDataToBytes(_r), nil
 }
 
-// WritePropertyListToStreamFormatOptions writes property list to stream format options.
+// WritePropertyListToStreamFormatOptions writes a property list to an output stream in a given format. The stream should be opened and configured. The format can be either `NSPropertyListXMLFormat_v1_0` or `NSPropertyListBinaryFormat_v1_0`. The `opt` parameter is currently unused and should be set to `0`. If an error occurs the return value will be `0` and the error parameter (if non-NULL) set to an autoreleased `NSError` describing the problem. In a successful case, the return value is the number of bytes written to the stream.
 func WritePropertyListToStreamFormatOptions(plist obj.Object, stream *OutputStream, format PropertyListFormat, opt int) (result int, err error) {
 	defer runtime.KeepAlive(plist)
 	defer runtime.KeepAlive(stream)
@@ -2779,7 +2785,7 @@ func WritePropertyListToStreamFormatOptions(plist obj.Object, stream *OutputStre
 	return _r, nil
 }
 
-// PropertyListWithDataOptionsFormat wraps the corresponding Objective-C method.
+// PropertyListWithDataOptionsFormat creates and returns a property list from the specified data. The options can be any of `NSPropertyListMutabilityOptions`. If the format parameter is non-NULL, it will be filled out with the format that the property list was stored in. If an error occurs the return value will be `nil` and the error parameter (if non-NULL) set to an autoreleased `NSError` describing the problem.
 func PropertyListWithDataOptionsFormat(data []byte, opt PropertyListMutabilityOptions) (result obj.Object, format PropertyListFormat, err error) {
 	var _out0 PropertyListFormat
 	var _nsErr uintptr
@@ -2791,7 +2797,7 @@ func PropertyListWithDataOptionsFormat(data []byte, opt PropertyListMutabilityOp
 	return _v, _out0, nil
 }
 
-// PropertyListWithStreamOptionsFormat wraps the corresponding Objective-C method.
+// PropertyListWithStreamOptionsFormat creates and returns a property list by reading from the specified stream. The options can be any of `NSPropertyListMutabilityOptions`. If the format parameter is non-NULL, it will be filled out with the format that the property list was stored in. If an error occurs the return value will be `nil` and the error parameter (if non-NULL) set to an autoreleased `NSError` describing the problem.
 func PropertyListWithStreamOptionsFormat(stream *InputStream, opt PropertyListMutabilityOptions) (result obj.Object, format PropertyListFormat, err error) {
 	defer runtime.KeepAlive(stream)
 	var _out0 PropertyListFormat
@@ -2804,14 +2810,14 @@ func PropertyListWithStreamOptionsFormat(stream *InputStream, opt PropertyListMu
 	return _v, _out0, nil
 }
 
-// DataFromPropertyListFormatErrorDescription wraps the corresponding Objective-C method.
+// DataFromPropertyListFormatErrorDescription returns a data object containing a given property list in a given format.
 func DataFromPropertyListFormatErrorDescription(plist obj.Object, format PropertyListFormat, errorString string) []byte {
 	defer runtime.KeepAlive(plist)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPropertyListSerialization")), objc.RegisterName("dataFromPropertyList:format:errorDescription:"), objref.IDOf(plist), format, purego.NSString(errorString))
 	return rt.NSDataToBytes(_r)
 }
 
-// PropertyListFromDataMutabilityOptionFormatErrorDescription wraps the corresponding Objective-C method.
+// PropertyListFromDataMutabilityOptionFormatErrorDescription creates and returns a property list from the specified data and using the specified options.
 func PropertyListFromDataMutabilityOptionFormatErrorDescription(data []byte, opt PropertyListMutabilityOptions, errorString string) (result obj.Object, format PropertyListFormat) {
 	var _out0 PropertyListFormat
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPropertyListSerialization")), objc.RegisterName("propertyListFromData:mutabilityOption:format:errorDescription:"), rt.BytesToNSData(data), opt, unsafe.Pointer(&_out0), purego.NSString(errorString))
@@ -2866,25 +2872,25 @@ func EscapedTemplateForString(str string) string {
 	return purego.GoString(_r)
 }
 
-// CurrentRunLoop returns the current run loop.
+// CurrentRunLoop returns the run loop for the current thread. If a run loop does not yet exist for the thread, one is created and returned.
 func CurrentRunLoop() *RunLoop {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSRunLoop")), objc.RegisterName("currentRunLoop"))
 	return RunLoopFromID(_r)
 }
 
-// MainRunLoop returns the main run loop.
+// MainRunLoop returns the run loop of the main thread.
 func MainRunLoop() *RunLoop {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSRunLoop")), objc.RegisterName("mainRunLoop"))
 	return RunLoopFromID(_r)
 }
 
-// ScannerWithString returns an NSScanner object that scans a given string.
+// ScannerWithString returns an `NSScanner` object that scans a given string.
 func ScannerWithString(str string) *Scanner {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSScanner")), objc.RegisterName("scannerWithString:"), purego.NSString(str))
 	return ScannerFromID(_r)
 }
 
-// LocalizedScannerWithString wraps the corresponding Objective-C method.
+// LocalizedScannerWithString returns an `NSScanner` object that scans a given string according to the user's default locale. Sets the string to scan by invoking -initWithString: with `aString`. The locale is set with the user's default locale. - Parameter string: The string to scan. - Returns: An `NSScanner` object that scans `aString` according to the user's default locale.
 func LocalizedScannerWithString(str string) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSScanner")), objc.RegisterName("localizedScannerWithString:"), purego.NSString(str))
 	return obj.Wrap(_r)
@@ -2982,14 +2988,14 @@ func SortDescriptorWithKeyAscendingComparator(key string, ascending bool, cmptr 
 	return SortDescriptorFromID(_r)
 }
 
-// GetStreamsToHostWithNamePortInputStreamOutputStream wraps the corresponding Objective-C method.
+// GetStreamsToHostWithNamePortInputStreamOutputStream creates and returns by reference an `NSInputStream` object and `NSOutputStream` object for a socket connection with a given host on a given port. - Parameters: - hostname: The host to which to connect. - port: The port to connect to on `host`. - inputStream: Upon return, contains the input stream. If `nil` is passed, the stream object is not created. - outputStream: Upon return, contains the output stream. If `nil` is passed, the stream object is not created.
 func GetStreamsToHostWithNamePortInputStreamOutputStream(hostname string, port int, inputStream *InputStream, outputStream *OutputStream) {
 	defer runtime.KeepAlive(inputStream)
 	defer runtime.KeepAlive(outputStream)
 	objc.Send[objc.ID](objc.ID(_class("NSStream")), objc.RegisterName("getStreamsToHostWithName:port:inputStream:outputStream:"), purego.NSString(hostname), port, objref.IDOf(inputStream), objref.IDOf(outputStream))
 }
 
-// GetStreamsToHostPortInputStreamOutputStream wraps the corresponding Objective-C method.
+// GetStreamsToHostPortInputStreamOutputStream creates and returns by reference an `NSInputStream` object and `NSOutputStream` object for a socket connection with a given host on a given port. If neither `port` nor `host` is properly specified, no socket connection is made. - Parameters: - host: The host to which to connect. - port: The port to connect to on `host`. - inputStream: Upon return, contains the input stream. If `nil` is passed, the stream object is not created. - outputStream: Upon return, contains the output stream. If `nil` is passed, the stream object is not created.
 func GetStreamsToHostPortInputStreamOutputStream(host *Host, port int, inputStream *InputStream, outputStream *OutputStream) {
 	defer runtime.KeepAlive(host)
 	defer runtime.KeepAlive(inputStream)
@@ -2997,7 +3003,7 @@ func GetStreamsToHostPortInputStreamOutputStream(host *Host, port int, inputStre
 	objc.Send[objc.ID](objc.ID(_class("NSStream")), objc.RegisterName("getStreamsToHost:port:inputStream:outputStream:"), objref.IDOf(host), port, objref.IDOf(inputStream), objref.IDOf(outputStream))
 }
 
-// GetBoundStreamsWithBufferSizeInputStreamOutputStream wraps the corresponding Objective-C method.
+// GetBoundStreamsWithBufferSizeInputStreamOutputStream creates and returns by reference a bound pair of input and output streams. The created streams are bound to one another, such that any data written to `outputStream` is received by `inputStream`. - Parameters: - bufferSize: The size of the buffer, in bytes, used to transfer data from `inputStream` to `outputStream`. - inputStream: On return, contains an input stream. - outputStream: On return, contains an output stream.
 func GetBoundStreamsWithBufferSizeInputStreamOutputStream(bufferSize int, inputStream *InputStream, outputStream *OutputStream) {
 	defer runtime.KeepAlive(inputStream)
 	defer runtime.KeepAlive(outputStream)
@@ -3121,7 +3127,7 @@ func StringWithContentsOfFileUsedEncoding(path string) (result *String, enc int,
 	return _v, _out0, nil
 }
 
-// DefaultCStringEncoding returns the default c string encoding.
+// DefaultCStringEncoding returns the C-string encoding assumed for any method accepting a C string as an argument. This property returns a user-dependent encoding whose value is derived from user's default language and potentially other factors. You might sometimes need to use this encoding when interpreting user documents with unknown encodings, in the absence of other hints, but in general this encoding should be used rarely, if at all.
 func DefaultCStringEncoding() int {
 	_r := objc.Send[int](objc.ID(_class("NSString")), objc.RegisterName("defaultCStringEncoding"))
 	return _r
@@ -3168,13 +3174,13 @@ func PathWithComponents(components []string) string {
 	return purego.GoString(_r)
 }
 
-// LaunchedTaskWithExecutableURLArgumentsErrorTerminationHandler wraps the corresponding Objective-C method.
+// LaunchedTaskWithExecutableURLArgumentsErrorTerminationHandler creates and runs a task with a specified executable and arguments. - Parameter url: The URL for the executable. - Parameter arguments: An array of `NSString` objects that supplies the arguments to the task. - Parameter error: If an error occurs, upon return contains an `NSError` object that describes the problem. - Parameter terminationHandler: The system invokes this completion block when the task has completed. - Returns: An initialized `NSTask` object with the environment of the current process.
 func LaunchedTaskWithExecutableURLArgumentsErrorTerminationHandler(url string, arguments []string, err unsafe.Pointer, terminationHandler func(obj.Object)) *Task {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSTask")), objc.RegisterName("launchedTaskWithExecutableURL:arguments:error:terminationHandler:"), rt.FileURL(url), purego.SliceToNSArray(arguments, func(_v string) objc.ID { return purego.NSString(_v) }), err, objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { terminationHandler(obj.Wrap(_b0)) }))
 	return TaskFromID(_r)
 }
 
-// LaunchedTaskWithLaunchPathArguments wraps the corresponding Objective-C method.
+// LaunchedTaskWithLaunchPathArguments creates and launches a task with a specified executable and arguments.
 func LaunchedTaskWithLaunchPathArguments(path string, arguments []string) *Task {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSTask")), objc.RegisterName("launchedTaskWithLaunchPath:arguments:"), purego.NSString(path), purego.SliceToNSArray(arguments, func(_v string) objc.ID { return purego.NSString(_v) }))
 	return TaskFromID(_r)
@@ -3322,46 +3328,46 @@ func DetachNewThreadWith(ctx context.Context) error {
 	}
 }
 
-// IsMultiThreaded reports whether the object is multi threaded.
+// IsMultiThreaded reports whether the application is multithreaded. An application is considered multithreaded if a thread was ever detached from the main thread using either `detachNewThreadSelector:toTarget:withObject:` or `start`. If you detached a thread in your application using a non-Cocoa API, such as the POSIX or Multiprocessing Services APIs, this method could still return `NO`. The detached thread does not have to be currently running for the application to be considered multithreaded -- this method only indicates whether a single thread has been spawned. - Returns: `YES` if the application is multithreaded, otherwise `NO`.
 func IsMultiThreaded() bool {
 	_r := objc.Send[bool](objc.ID(_class("NSThread")), objc.RegisterName("isMultiThreaded"))
 	return _r
 }
 
-// SleepUntilDate wraps the corresponding Objective-C method.
+// SleepUntilDate blocks the current thread until the time specified. No run loop processing occurs while the thread is blocked. - Parameter date: The time at which to resume processing.
 func SleepUntilDate(date time.Time) {
 	objc.Send[objc.ID](objc.ID(_class("NSThread")), objc.RegisterName("sleepUntilDate:"), rt.TimeToNSDate(date))
 }
 
-// SleepForTimeInterval wraps the corresponding Objective-C method.
+// SleepForTimeInterval sleeps the thread for a given time interval. No run loop processing occurs while the thread is blocked. - Parameter ti: The duration of the sleep.
 func SleepForTimeInterval(ti float64) {
 	objc.Send[objc.ID](objc.ID(_class("NSThread")), objc.RegisterName("sleepForTimeInterval:"), ti)
 }
 
-// Exit wraps the corresponding Objective-C method.
+// Exit terminates the current thread. This method uses the `currentThread` class method to access the current thread. Before exiting the thread, this method posts the `NSThreadWillExit` notification with the thread being exited to the default notification center. Because notifications are delivered synchronously, all observers of `NSThreadWillExit` are guaranteed to receive the notification before the thread exits. Invoking this method should be avoided as it does not give your thread a chance to clean up any resources it allocated during its execution.
 func Exit() {
 	objc.Send[objc.ID](objc.ID(_class("NSThread")), objc.RegisterName("exit"))
 }
 
-// ThreadPriority returns the thread priority.
+// ThreadPriority returns the current thread's priority. The priorities in this range are mapped to the operating system's priority values. A "typical" thread priority might be 0.5, but because the priority is determined by the kernel, there is no guarantee what this value actually will be. - Returns: The current thread's priority, which is specified by a floating point number from 0.0 to 1.0, where 1.0 is highest priority.
 func ThreadPriority() float64 {
 	_r := objc.Send[float64](objc.ID(_class("NSThread")), objc.RegisterName("threadPriority"))
 	return _r
 }
 
-// SetThreadPriority wraps the corresponding Objective-C method.
+// SetThreadPriority sets the current thread's priority. The priorities in this range are mapped to the operating system's priority values. - Parameter p: The new priority, specified with a floating point number from 0.0 to 1.0, where 1.0 is highest priority. - Returns: `YES` if the priority assignment succeeded, `NO` otherwise.
 func SetThreadPriority(p float64) bool {
 	_r := objc.Send[bool](objc.ID(_class("NSThread")), objc.RegisterName("setThreadPriority:"), p)
 	return _r
 }
 
-// CurrentThread returns the current thread.
+// CurrentThread returns the thread object representing the current thread of execution.
 func CurrentThread() *Thread {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSThread")), objc.RegisterName("currentThread"))
 	return ThreadFromID(_r)
 }
 
-// CallStackReturnAddresses returns the call stack return addresses.
+// CallStackReturnAddresses returns an array containing the call stack return addresses. Each element is an `NSNumber` object containing an `NSUInteger` value.
 //
 // CallStackReturnAddresses returns the collection as a Go slice.
 func CallStackReturnAddresses() []*Number {
@@ -3369,7 +3375,7 @@ func CallStackReturnAddresses() []*Number {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Number { return NumberFromID(_id) })
 }
 
-// CallStackSymbols returns the call stack symbols.
+// CallStackSymbols returns an array containing the call stack symbols. Each element is an `NSString` object with a value in a format determined by the `backtrace_symbols()` function. The return value describes the call stack backtrace of the current thread at the moment this method was called.
 //
 // CallStackSymbols returns the collection as a Go slice.
 func CallStackSymbols() []string {
@@ -3377,13 +3383,13 @@ func CallStackSymbols() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// IsMainThread reports whether the object is main thread.
+// IsMainThread reports whether returns a Boolean value that indicates whether the current thread is the main thread.
 func IsMainThread() bool {
 	_r := objc.Send[bool](objc.ID(_class("NSThread")), objc.RegisterName("isMainThread"))
 	return _r
 }
 
-// MainThread returns the main thread.
+// MainThread returns the `NSThread` object representing the main thread.
 func MainThread() *Thread {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSThread")), objc.RegisterName("mainThread"))
 	return ThreadFromID(_r)
@@ -3400,13 +3406,13 @@ func AbbreviationDictionary() map[string]string {
 	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SystemTimeZone returns the system time zone.
+// SystemTimeZone returns the time zone currently used by the system. If the current system time zone cannot be determined, the GMT time zone is used instead. If you access this class property, its value is cached by the app and doesn't update if the user subsequently changes the system time zone. In order for the property to reflect the new time zone, you must first call “resetSystemTimeZone“ to clear the cached value.
 func SystemTimeZone() *TimeZone {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSTimeZone")), objc.RegisterName("systemTimeZone"))
 	return TimeZoneFromID(_r)
 }
 
-// DefaultTimeZone returns the default time zone.
+// DefaultTimeZone returns the default time zone for the current app. If no default time zone has been set, the current system time zone is used. If the current system time zone cannot be determined, the GMT time zone is used instead. The default time zone is used by the app for date and time operations. You can set it to cause the app to run as if it were in a different time zone. Setting this property clears any value that was previously set.
 func DefaultTimeZone() *TimeZone {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSTimeZone")), objc.RegisterName("defaultTimeZone"))
 	return TimeZoneFromID(_r)
@@ -3418,13 +3424,13 @@ func SetDefaultTimeZone(defaultTimeZone *TimeZone) {
 	objc.Send[objc.ID](objc.ID(_class("NSTimeZone")), objc.RegisterName("setDefaultTimeZone:"), objref.IDOf(defaultTimeZone))
 }
 
-// LocalTimeZone returns the local time zone.
+// LocalTimeZone returns an object that tracks the current system time zone. Use this property when you want an object that always reflects the current system time zone. Contrast this behavior with that of the `systemTimeZone` class property, which has its value cached until you manually clear it by calling “resetSystemTimeZone“.
 func LocalTimeZone() *TimeZone {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSTimeZone")), objc.RegisterName("localTimeZone"))
 	return TimeZoneFromID(_r)
 }
 
-// KnownTimeZoneNames returns the known time zone names.
+// KnownTimeZoneNames returns an array of strings listing the IDs of all the time zones known to the system.
 //
 // KnownTimeZoneNames returns the collection as a Go slice.
 func KnownTimeZoneNames() []string {
@@ -3432,7 +3438,7 @@ func KnownTimeZoneNames() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetAbbreviationDictionary wraps the corresponding Objective-C method.
+// SetAbbreviationDictionary returns a dictionary holding the mappings of time zone abbreviations to time zone names. Note that more than one time zone may have the same abbreviation--for example, US/Pacific and Canada/Pacific both use the abbreviation "PST." In these cases, this dictionary chooses a single name to map the abbreviation to.
 func SetAbbreviationDictionary(abbreviationDictionary map[string]string) {
 	objc.Send[objc.ID](objc.ID(_class("NSTimeZone")), objc.RegisterName("setAbbreviationDictionary:"), rt.MapToDict(abbreviationDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
@@ -3470,14 +3476,14 @@ func TimeZoneWithAbbreviation(abbreviation string) *TimeZone {
 	return TimeZoneFromID(_r)
 }
 
-// TimerWithTimeIntervalInvocationRepeats wraps the corresponding Objective-C method.
+// TimerWithTimeIntervalInvocationRepeats initializes a timer object with the specified invocation object. You must add the new timer to a run loop, using -[NSRunLoop addTimer:forMode:]. Then, after `ti` seconds have elapsed, the timer fires, invoking `invocation`. (If the timer is configured to repeat, there is no need to subsequently re-add the timer to the run loop.) - Parameters: - ti: The number of seconds between firings of the timer. If `ti` is less than or equal to `0.0`, this method chooses the nonnegative value of `0.0001` seconds instead. - invocation: The invocation to use when the timer fires. The timer instructs the invocation object to maintain a strong reference to its arguments. - yesOrNo: If `YES`, the timer will repeatedly reschedule itself until invalidated. If `NO`, the timer will be invalidated after it fires. - Returns: A new `NSTimer` object, configured according to the specified parameters.
 func TimerWithTimeIntervalInvocationRepeats(ti float64, invocation *Invocation, yesOrNo bool) *Timer {
 	defer runtime.KeepAlive(invocation)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSTimer")), objc.RegisterName("timerWithTimeInterval:invocation:repeats:"), ti, objref.IDOf(invocation), yesOrNo)
 	return TimerFromID(_r)
 }
 
-// ScheduledTimerWithTimeIntervalInvocationRepeats wraps the corresponding Objective-C method.
+// ScheduledTimerWithTimeIntervalInvocationRepeats creates a new timer and schedules it on the current run loop in the default mode. After `ti` seconds have elapsed, the timer fires, invoking `invocation`. - Parameters: - ti: The number of seconds between firings of the timer. If `ti` is less than or equal to `0.0`, this method chooses the nonnegative value of `0.0001` seconds instead. - invocation: The invocation to use when the timer fires. The invocation object maintains a strong reference to its arguments until the timer is invalidated. - yesOrNo: If `YES`, the timer will repeatedly reschedule itself until invalidated. If `NO`, the timer will be invalidated after it fires. - Returns: A new `NSTimer` object, configured according to the specified parameters.
 func ScheduledTimerWithTimeIntervalInvocationRepeats(ti float64, invocation *Invocation, yesOrNo bool) *Timer {
 	defer runtime.KeepAlive(invocation)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSTimer")), objc.RegisterName("scheduledTimerWithTimeInterval:invocation:repeats:"), ti, objref.IDOf(invocation), yesOrNo)
@@ -3610,7 +3616,7 @@ func FileURLWithPathComponents(components []string) string {
 	return rt.URLString(_r)
 }
 
-// SharedURLCache returns the shared NSURLCache instance or sets the NSURLCache instance shared by all clients of the current process. This will be the new object returned when calls to the <tt>sharedURLCache</tt> method are made. Unless set explicitly through a call to <tt>+setSharedURLCache:</tt>, this method returns an NSURLCache instance created with the following default values: <ul> <li>Memory capacity: 4 megabytes (4 * 1024 * 1024 bytes) <li>Disk capacity: 20 megabytes (20 * 1024 * 1024 bytes) <li>Disk path: <nobr>(user home directory)/Library/Caches/(application bundle id)</nobr> </ul> <p>Users who do not have special caching requirements or constraints should find the default shared cache instance acceptable. If this default shared cache instance is not acceptable, <tt>+setSharedURLCache:</tt> can be called to set a different NSURLCache instance to be returned from this method. Callers should take care to ensure that the setter is called at a time when no other caller has a reference to the previously-set shared URL cache. This is to prevent storing cache data from becoming unexpectedly unretrievable.
+// SharedURLCache returns the shared URL cache instance. Unless set explicitly, this method returns an `NSURLCache` instance created with the following default values: - Memory capacity: 4 megabytes (4 * 1024 * 1024 bytes) - Disk capacity: 20 megabytes (20 * 1024 * 1024 bytes) - Disk path: `(user home directory)/Library/Caches/(application bundle id)` If your app doesn't have special caching requirements or constraints, the default shared cache instance should be acceptable. Callers should take care to ensure that the setter is called at a time when no other caller has a reference to the previously-set shared URL cache.
 func SharedURLCache() *URLCache {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSURLCache")), objc.RegisterName("sharedURLCache"))
 	return URLCacheFromID(_r)
@@ -3676,13 +3682,13 @@ func SendAsynchronousRequestQueueCompletionHandler(request *URLRequest, queue *O
 	}))
 }
 
-// CredentialWithUserPasswordPersistence creates a URL credential instance for internet password authentication with a given user name and password, using a given persistence setting.
+// CredentialWithUserPasswordPersistence creates a new `NSURLCredential` with a user and password. - Parameter user: The user for the credential. - Parameter password: The password for `user`. - Parameter persistence: A value indicating whether the credential should be stored permanently, for the duration of the current session, or not at all. - Returns: The new autoreleased `NSURLCredential`.
 func CredentialWithUserPasswordPersistence(user string, password string, persistence URLCredentialPersistence) *URLCredential {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSURLCredential")), objc.RegisterName("credentialWithUser:password:persistence:"), purego.NSString(user), purego.NSString(password), persistence)
 	return URLCredentialFromID(_r)
 }
 
-// CredentialWithIdentityCertificatesPersistence creates a URL credential instance for resolving a client certificate authentication challenge.
+// CredentialWithIdentityCertificatesPersistence creates a new `NSURLCredential` with an identity and certificate array. - Parameter identity: A `SecIdentityRef` object. - Parameter certArray: An array containing at least one `SecCertificateRef` objects. - Parameter persistence: A value indicating whether the credential should be stored permanently, for the duration of the current session, or not at all. - Returns: The new autoreleased `NSURLCredential`.
 func CredentialWithIdentityCertificatesPersistence(identity obj.Object, certArray obj.Object, persistence URLCredentialPersistence) *URLCredential {
 	defer runtime.KeepAlive(identity)
 	defer runtime.KeepAlive(certArray)
@@ -3690,14 +3696,14 @@ func CredentialWithIdentityCertificatesPersistence(identity obj.Object, certArra
 	return URLCredentialFromID(_r)
 }
 
-// CredentialForTrust creates a URL credential instance for server trust authentication with a given accepted trust.
+// CredentialForTrust creates a URL credential instance for server trust authentication with a given accepted trust. Before creating a server trust credential, it is the responsibility of the delegate of an “NSURLConnection“ instance or an “NSURLDownload“ instance to evaluate the trust. Do this by calling `SecTrustEvaluate`, passing it the trust obtained from the `serverTrust` method of the server's “NSURLProtectionSpace“ instance. If the trust is invalid, the authentication challenge should be cancelled with the “NSURLAuthenticationChallengeSender“ protocol's `cancelAuthenticationChallenge:` method. - Parameter trust: The accepted trust. - Returns: A new URL credential object, containing the accepted server trust.
 func CredentialForTrust(trust obj.Object) *URLCredential {
 	defer runtime.KeepAlive(trust)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSURLCredential")), objc.RegisterName("credentialForTrust:"), objref.IDOf(trust))
 	return URLCredentialFromID(_r)
 }
 
-// SharedCredentialStorage get the shared singleton authentication storage
+// SharedCredentialStorage returns the shared singleton authentication storage.
 func SharedCredentialStorage() *URLCredentialStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSURLCredentialStorage")), objc.RegisterName("sharedCredentialStorage"))
 	return URLCredentialStorageFromID(_r)
@@ -3721,21 +3727,21 @@ func CachedHandleForURL(anURL string) *URLHandle {
 	return URLHandleFromID(_r)
 }
 
-// CanInitWithRequest this method determines whether this protocol can handle the given request. A concrete subclass should inspect the given request and determine whether or not the implementation can perform a load with that request. This is an abstract method. Subclasses must provide an implementation.
+// CanInitWithRequest determines whether the protocol subclass can handle the specified request. A concrete subclass should inspect the given request and determine whether or not the implementation can perform a load with that request. This is an abstract method. Subclasses must provide an implementation. - Parameter request: A request to inspect. - Returns: `YES` if the protocol can handle the given request, `NO` if not.
 func CanInitWithRequest(request *URLRequest) bool {
 	defer runtime.KeepAlive(request)
 	_r := objc.Send[bool](objc.ID(_class("NSURLProtocol")), objc.RegisterName("canInitWithRequest:"), objref.IDOf(request))
 	return _r
 }
 
-// CanonicalRequestForRequest this method returns a canonical version of the given request. It is up to each concrete protocol implementation to define what "canonical" means. However, a protocol should guarantee that the same input request always yields the same canonical form. Special consideration should be given when implementing this method since the canonical form of a request is used to look up objects in the URL cache, a process which performs equality checks between NSURLRequest objects. <p> This is an abstract method; subclasses must provide an implementation.
+// CanonicalRequestForRequest returns a canonical version of the specified request. It is up to each concrete protocol implementation to define what "canonical" means. However, a protocol should guarantee that the same input request always yields the same canonical form. Special consideration should be given when implementing this method since the canonical form of a request is used to look up objects in the URL cache, a process which performs equality checks between `NSURLRequest` objects. This is an abstract method; subclasses must provide an implementation. - Parameter request: A request to make canonical. - Returns: The canonical form of the given request.
 func CanonicalRequestForRequest(request *URLRequest) *URLRequest {
 	defer runtime.KeepAlive(request)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSURLProtocol")), objc.RegisterName("canonicalRequestForRequest:"), objref.IDOf(request))
 	return URLRequestFromID(_r)
 }
 
-// RequestIsCacheEquivalentToRequest compares two requests for equivalence with regard to caching. Requests are considered equivalent for cache purposes if and only if they would be handled by the same protocol AND that protocol declares them equivalent after performing implementation-specific checks.
+// RequestIsCacheEquivalentToRequest a Boolean value indicating whether two requests are equivalent for cache purposes. Requests are considered equivalent for cache purposes if and only if they would be handled by the same protocol AND that protocol declares them equivalent after performing implementation-specific checks. - Returns: `YES` if the two requests are cache-equivalent, `NO` otherwise.
 func RequestIsCacheEquivalentToRequest(a *URLRequest, b *URLRequest) bool {
 	defer runtime.KeepAlive(a)
 	defer runtime.KeepAlive(b)
@@ -3743,27 +3749,27 @@ func RequestIsCacheEquivalentToRequest(a *URLRequest, b *URLRequest) bool {
 	return _r
 }
 
-// PropertyForKeyInRequest returns the property in the given request previously stored with the given key. The purpose of this method is to provide an interface for protocol implementors to access protocol-specific information associated with NSURLRequest objects.
+// PropertyForKeyInRequest fetches the property associated with the specified key in the specified request. The purpose of this method is to provide an interface for protocol implementors to access protocol-specific information associated with `NSURLRequest` objects. - Parameters: - key: The string to use for the property lookup. - request: The request to use for the property lookup. - Returns: The property stored with the given key, or `nil` if no property had previously been stored with the given key in the given request.
 func PropertyForKeyInRequest(key string, request *URLRequest) obj.Object {
 	defer runtime.KeepAlive(request)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSURLProtocol")), objc.RegisterName("propertyForKey:inRequest:"), purego.NSString(key), objref.IDOf(request))
 	return obj.Wrap(_r)
 }
 
-// SetPropertyForKeyInRequest stores the given property in the given request using the given key. The purpose of this method is to provide an interface for protocol implementors to customize protocol-specific information associated with NSMutableURLRequest objects.
+// SetPropertyForKeyInRequest sets the property associated with the specified key in the specified request. The purpose of this method is to provide an interface for protocol implementors to customize protocol-specific information associated with `NSMutableURLRequest` objects. - Parameters: - value: The property to store. - key: The string to use for the property storage. - request: The request in which to store the property.
 func SetPropertyForKeyInRequest(value obj.Object, key string, request *MutableURLRequest) {
 	defer runtime.KeepAlive(value)
 	defer runtime.KeepAlive(request)
 	objc.Send[objc.ID](objc.ID(_class("NSURLProtocol")), objc.RegisterName("setProperty:forKey:inRequest:"), objref.IDOf(value), purego.NSString(key), objref.IDOf(request))
 }
 
-// RemovePropertyForKeyInRequest remove any property stored under the given key Like setProperty:forKey:inRequest: above, the purpose of this method is to give protocol implementors the ability to store protocol-specific information in an NSURLRequest
+// RemovePropertyForKeyInRequest removes the property associated with the specified key in the specified request. Like `setProperty:forKey:inRequest:`, the purpose of this method is to give protocol implementors the ability to store protocol-specific information in an `NSURLRequest`. - Parameters: - key: The key whose value should be removed. - request: The request to be modified.
 func RemovePropertyForKeyInRequest(key string, request *MutableURLRequest) {
 	defer runtime.KeepAlive(request)
 	objc.Send[objc.ID](objc.ID(_class("NSURLProtocol")), objc.RegisterName("removePropertyForKey:inRequest:"), purego.NSString(key), objref.IDOf(request))
 }
 
-// CanInitWithTask wraps the corresponding Objective-C method.
+// CanInitWithTask determines whether the protocol subclass can handle the specified task.
 func CanInitWithTask(task *URLSessionTask) bool {
 	defer runtime.KeepAlive(task)
 	_r := objc.Send[bool](objc.ID(_class("NSURLProtocol")), objc.RegisterName("canInitWithTask:"), objref.IDOf(task))
@@ -3788,13 +3794,13 @@ func RequestWithURLCachePolicyTimeoutInterval(url string, cachePolicy URLRequest
 	return URLRequestFromID(_r)
 }
 
-// SupportsSecureCoding reports whether indicates that NSURLRequest implements the NSSecureCoding protocol.
+// SupportsSecureCoding reports whether indicates that `NSURLRequest` implements the `NSSecureCoding` protocol.
 func SupportsSecureCoding() bool {
 	_r := objc.Send[bool](objc.ID(_class("NSURLRequest")), objc.RegisterName("supportsSecureCoding"))
 	return _r
 }
 
-// SessionWithConfiguration wraps the corresponding Objective-C method.
+// SessionWithConfiguration creates a session with the specified session configuration. - Parameter configuration: A configuration object that specifies certain behaviors, such as caching policies, timeouts, proxies, pipelining, TLS versions to support, cookie policies, credential storage, and so on. See `NSURLSessionConfiguration` for more information. Calling this method is equivalent to calling `+sessionWithConfiguration:delegate:delegateQueue:` with a `nil` delegate and queue.
 func SessionWithConfiguration(configuration *URLSessionConfiguration) *URLSession {
 	defer runtime.KeepAlive(configuration)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSURLSession")), objc.RegisterName("sessionWithConfiguration:"), objref.IDOf(configuration))
@@ -3807,13 +3813,13 @@ func NSURLSessionNew() *URLSession {
 	return URLSessionFromID(_r)
 }
 
-// SharedSession returns the shared session.
+// SharedSession returns the shared singleton session object. For basic requests, the `NSURLSession` class provides a shared singleton session object that gives you a reasonable default behavior for creating tasks. Use the shared session to fetch the contents of a URL to memory with just a few lines of code. Unlike the other session types, you don't create the shared session; you merely access it by using this property directly. As a result, you don't provide a delegate or a configuration object. Because the shared session has neither a delegate nor a customizable configuration object, the shared session has important limitations: - You can't obtain data incrementally as it arrives from the server. - You can't significantly customize the default connection behavior. - Your ability to perform authentication is limited. - You can't perform background downloads or uploads when your app isn't running. The shared session uses the shared `NSURLCache`, `NSHTTPCookieStorage`, and `NSURLCredentialStorage` objects, uses a shared custom networking protocol list (configured with `+[NSURLProtocol registerClass:]` and `+[NSURLProtocol unregisterClass:]`), and is based on a default configuration.
 func SharedSession() *URLSession {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSURLSession")), objc.RegisterName("sharedSession"))
 	return URLSessionFromID(_r)
 }
 
-// BackgroundSessionConfigurationWithIdentifier wraps the corresponding Objective-C method.
+// BackgroundSessionConfigurationWithIdentifier creates a session configuration object that allows HTTP and HTTPS uploads or downloads to be performed in the background. Use this method to initialize a configuration object suitable for transferring data files while the app runs in the background. A session configured with this object hands control of the transfers over to the system, which handles the transfers in a separate process. In iOS, this configuration makes it possible for transfers to continue even when the app itself is suspended or terminated. If an iOS app is terminated by the system and relaunched, the app can use the same `identifier` to create a new configuration object and session and to retrieve the status of transfers that were in progress at the time of termination. This behavior applies only for normal termination of the app by the system. If the user terminates the app from the multitasking screen, the system cancels all of the session's background transfers. - Parameter identifier: The unique identifier for the configuration object. This parameter must not be `nil` or an empty string. - Returns: A configuration object that causes the system to perform upload and download tasks in a separate process.
 func BackgroundSessionConfigurationWithIdentifier(identifier string) *URLSessionConfiguration {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSURLSessionConfiguration")), objc.RegisterName("backgroundSessionConfigurationWithIdentifier:"), purego.NSString(identifier))
 	return URLSessionConfigurationFromID(_r)
@@ -3825,19 +3831,19 @@ func NSURLSessionConfigurationNew() *URLSessionConfiguration {
 	return URLSessionConfigurationFromID(_r)
 }
 
-// DefaultSessionConfiguration returns the default session configuration.
+// DefaultSessionConfiguration returns a default session configuration object. The default session configuration uses a persistent disk-based cache (except when the result is downloaded to a file) and stores credentials in the user's keychain. It also stores cookies (by default) in the same shared cookie store as `NSURLConnection` and `NSURLDownload`. Modifying the returned session configuration object does not affect any configuration objects returned by future calls to this method, and does not change the default behavior for existing sessions. It is therefore always safe to use the returned object as a starting point for additional customization.
 func DefaultSessionConfiguration() *URLSessionConfiguration {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSURLSessionConfiguration")), objc.RegisterName("defaultSessionConfiguration"))
 	return URLSessionConfigurationFromID(_r)
 }
 
-// EphemeralSessionConfiguration returns the ephemeral session configuration.
+// EphemeralSessionConfiguration returns a session configuration that uses no persistent storage for caches, cookies, or credentials. An ephemeral session configuration object is similar to a default session configuration (see `defaultSessionConfiguration`), except that the corresponding session object doesn't store caches, credential stores, or any session-related data to disk. Instead, session-related data is stored in RAM. The only time an ephemeral session writes data to disk is when you tell it to write the contents of a URL to a file. The main advantage to using ephemeral sessions is privacy. By not writing potentially sensitive data to disk, you make it less likely that the data will be intercepted and used later. For this reason, ephemeral sessions are ideal for private browsing modes in web browsers and other similar situations. When your app invalidates the session, all ephemeral session data is purged automatically. Additionally, in iOS, the in-memory cache isn't purged automatically when your app is suspended but may be purged when your app is terminated or when the system experiences memory pressure.
 func EphemeralSessionConfiguration() *URLSessionConfiguration {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSURLSessionConfiguration")), objc.RegisterName("ephemeralSessionConfiguration"))
 	return URLSessionConfigurationFromID(_r)
 }
 
-// BackgroundSessionConfiguration wraps the corresponding Objective-C method.
+// BackgroundSessionConfiguration returns a session configuration object that allows HTTP and HTTPS uploads or downloads to be performed in the background.
 func BackgroundSessionConfiguration(identifier string) *URLSessionConfiguration {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSURLSessionConfiguration")), objc.RegisterName("backgroundSessionConfiguration:"), purego.NSString(identifier))
 	return URLSessionConfigurationFromID(_r)
@@ -3849,7 +3855,7 @@ func NSURLSessionDataTaskNew() *URLSessionDataTask {
 	return URLSessionDataTaskFromID(_r)
 }
 
-// NSURLSessionDownloadTaskNew returns the nsurl session download task new.
+// NSURLSessionDownloadTaskNew creates and initializes a download task. Don't use this method to manually create download tasks. Instead, use the factory methods on “NSURLSession“ to add tasks to an existing URL session.
 func NSURLSessionDownloadTaskNew() *URLSessionDownloadTask {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSURLSessionDownloadTask")), objc.RegisterName("new"))
 	return URLSessionDownloadTaskFromID(_r)
@@ -3861,19 +3867,19 @@ func NSURLSessionStreamTaskNew() *URLSessionStreamTask {
 	return URLSessionStreamTaskFromID(_r)
 }
 
-// NSURLSessionTaskNew returns the nsurl session task new.
+// NSURLSessionTaskNew creates a new URL session task. Don't call this method directly. Instead, create tasks from a “NSURLSession“.
 func NSURLSessionTaskNew() *URLSessionTask {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSURLSessionTask")), objc.RegisterName("new"))
 	return URLSessionTaskFromID(_r)
 }
 
-// NSURLSessionTaskMetricsNew returns the nsurl session task metrics new.
+// NSURLSessionTaskMetricsNew creates a task metrics instance. You should never need to create your own “NSURLSessionTaskMetrics“ instances.
 func NSURLSessionTaskMetricsNew() *URLSessionTaskMetrics {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSURLSessionTaskMetrics")), objc.RegisterName("new"))
 	return URLSessionTaskMetricsFromID(_r)
 }
 
-// NSURLSessionTaskTransactionMetricsNew returns the nsurl session task transaction metrics new.
+// NSURLSessionTaskTransactionMetricsNew creates a new transaction metrics instance. You should never need to create your own “NSURLSessionTaskTransactionMetrics“ instances. The “NSURLSession“ creates task transaction metrics as part of the “NSURLSessionTaskMetrics“ instance that it delivers to the “NSURLSessionTaskDelegate“ delegate.
 func NSURLSessionTaskTransactionMetricsNew() *URLSessionTaskTransactionMetrics {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSURLSessionTaskTransactionMetrics")), objc.RegisterName("new"))
 	return URLSessionTaskTransactionMetricsFromID(_r)
@@ -3891,7 +3897,7 @@ func NSUUIDUUID() *UUID {
 	return UUIDFromID(_r)
 }
 
-// DefaultStore returns the default store.
+// DefaultStore returns the shared iCloud key-value store object. Use this object to access the shared iCloud key-value store tied to your app and the current person.
 func DefaultStore() *UbiquitousKeyValueStore {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUbiquitousKeyValueStore")), objc.RegisterName("defaultStore"))
 	return UbiquitousKeyValueStoreFromID(_r)
@@ -3923,151 +3929,151 @@ func ClassNameDecodedForArchiveClassName(inArchiveName string) string {
 	return purego.GoString(_r)
 }
 
-// MetersPerSecondSquared returns the meters per second squared.
+// MetersPerSecondSquared returns the meters per second squared unit of acceleration.
 func MetersPerSecondSquared() *UnitAcceleration {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitAcceleration")), objc.RegisterName("metersPerSecondSquared"))
 	return UnitAccelerationFromID(_r)
 }
 
-// Gravity returns the gravity.
+// Gravity returns the gravity unit of acceleration.
 func Gravity() *UnitAcceleration {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitAcceleration")), objc.RegisterName("gravity"))
 	return UnitAccelerationFromID(_r)
 }
 
-// Degrees returns the degrees.
+// Degrees returns the degrees unit of angle.
 func Degrees() *UnitAngle {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitAngle")), objc.RegisterName("degrees"))
 	return UnitAngleFromID(_r)
 }
 
-// ArcMinutes returns the arc minutes.
+// ArcMinutes returns the arc minutes unit of angle.
 func ArcMinutes() *UnitAngle {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitAngle")), objc.RegisterName("arcMinutes"))
 	return UnitAngleFromID(_r)
 }
 
-// ArcSeconds returns the arc seconds.
+// ArcSeconds returns the arc seconds unit of angle.
 func ArcSeconds() *UnitAngle {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitAngle")), objc.RegisterName("arcSeconds"))
 	return UnitAngleFromID(_r)
 }
 
-// Radians returns the radians.
+// Radians returns the radians unit of angle.
 func Radians() *UnitAngle {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitAngle")), objc.RegisterName("radians"))
 	return UnitAngleFromID(_r)
 }
 
-// Gradians returns the gradians.
+// Gradians returns the gradians unit of angle.
 func Gradians() *UnitAngle {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitAngle")), objc.RegisterName("gradians"))
 	return UnitAngleFromID(_r)
 }
 
-// Revolutions returns the revolutions.
+// Revolutions returns the revolutions unit of angle.
 func Revolutions() *UnitAngle {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitAngle")), objc.RegisterName("revolutions"))
 	return UnitAngleFromID(_r)
 }
 
-// SquareMegameters returns the square megameters.
+// SquareMegameters returns the square megameters unit of area.
 func SquareMegameters() *UnitArea {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitArea")), objc.RegisterName("squareMegameters"))
 	return UnitAreaFromID(_r)
 }
 
-// SquareKilometers returns the square kilometers.
+// SquareKilometers returns the square kilometers unit of area.
 func SquareKilometers() *UnitArea {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitArea")), objc.RegisterName("squareKilometers"))
 	return UnitAreaFromID(_r)
 }
 
-// SquareMeters returns the square meters.
+// SquareMeters returns the square meters unit of area.
 func SquareMeters() *UnitArea {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitArea")), objc.RegisterName("squareMeters"))
 	return UnitAreaFromID(_r)
 }
 
-// SquareCentimeters returns the square centimeters.
+// SquareCentimeters returns the square centimeters unit of area.
 func SquareCentimeters() *UnitArea {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitArea")), objc.RegisterName("squareCentimeters"))
 	return UnitAreaFromID(_r)
 }
 
-// SquareMillimeters returns the square millimeters.
+// SquareMillimeters returns the square millimeters unit of area.
 func SquareMillimeters() *UnitArea {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitArea")), objc.RegisterName("squareMillimeters"))
 	return UnitAreaFromID(_r)
 }
 
-// SquareMicrometers returns the square micrometers.
+// SquareMicrometers returns the square micrometers unit of area.
 func SquareMicrometers() *UnitArea {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitArea")), objc.RegisterName("squareMicrometers"))
 	return UnitAreaFromID(_r)
 }
 
-// SquareNanometers returns the square nanometers.
+// SquareNanometers returns the square nanometers unit of area.
 func SquareNanometers() *UnitArea {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitArea")), objc.RegisterName("squareNanometers"))
 	return UnitAreaFromID(_r)
 }
 
-// SquareInches returns the square inches.
+// SquareInches returns the square inches unit of area.
 func SquareInches() *UnitArea {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitArea")), objc.RegisterName("squareInches"))
 	return UnitAreaFromID(_r)
 }
 
-// SquareFeet returns the square feet.
+// SquareFeet returns the square feet unit of area.
 func SquareFeet() *UnitArea {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitArea")), objc.RegisterName("squareFeet"))
 	return UnitAreaFromID(_r)
 }
 
-// SquareYards returns the square yards.
+// SquareYards returns the square yards unit of area.
 func SquareYards() *UnitArea {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitArea")), objc.RegisterName("squareYards"))
 	return UnitAreaFromID(_r)
 }
 
-// SquareMiles returns the square miles.
+// SquareMiles returns the square miles unit of area.
 func SquareMiles() *UnitArea {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitArea")), objc.RegisterName("squareMiles"))
 	return UnitAreaFromID(_r)
 }
 
-// Acres returns the acres.
+// Acres returns the acres unit of area.
 func Acres() *UnitArea {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitArea")), objc.RegisterName("acres"))
 	return UnitAreaFromID(_r)
 }
 
-// Ares returns the ares.
+// Ares returns the ares unit of area.
 func Ares() *UnitArea {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitArea")), objc.RegisterName("ares"))
 	return UnitAreaFromID(_r)
 }
 
-// Hectares returns the hectares.
+// Hectares returns the hectares unit of area.
 func Hectares() *UnitArea {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitArea")), objc.RegisterName("hectares"))
 	return UnitAreaFromID(_r)
 }
 
-// MillimolesPerLiterWithGramsPerMole wraps the corresponding Objective-C method.
+// MillimolesPerLiterWithGramsPerMole returns the millimoles per liter unit with the specified grams per mole.
 func MillimolesPerLiterWithGramsPerMole(gramsPerMole float64) *UnitConcentrationMass {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitConcentrationMass")), objc.RegisterName("millimolesPerLiterWithGramsPerMole:"), gramsPerMole)
 	return UnitConcentrationMassFromID(_r)
 }
 
-// GramsPerLiter returns the grams per liter.
+// GramsPerLiter returns the grams per liter unit of concentration.
 func GramsPerLiter() *UnitConcentrationMass {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitConcentrationMass")), objc.RegisterName("gramsPerLiter"))
 	return UnitConcentrationMassFromID(_r)
 }
 
-// MilligramsPerDeciliter returns the milligrams per deciliter.
+// MilligramsPerDeciliter returns the milligrams per deciliter unit of concentration.
 func MilligramsPerDeciliter() *UnitConcentrationMass {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitConcentrationMass")), objc.RegisterName("milligramsPerDeciliter"))
 	return UnitConcentrationMassFromID(_r)
@@ -4079,247 +4085,247 @@ func PartsPerMillion() *UnitDispersion {
 	return UnitDispersionFromID(_r)
 }
 
-// Hours returns the hours.
+// Hours returns the hours unit of duration.
 func Hours() *UnitDuration {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitDuration")), objc.RegisterName("hours"))
 	return UnitDurationFromID(_r)
 }
 
-// Minutes returns the minutes.
+// Minutes returns the minutes unit of duration.
 func Minutes() *UnitDuration {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitDuration")), objc.RegisterName("minutes"))
 	return UnitDurationFromID(_r)
 }
 
-// Seconds returns the seconds.
+// Seconds returns the seconds unit of duration.
 func Seconds() *UnitDuration {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitDuration")), objc.RegisterName("seconds"))
 	return UnitDurationFromID(_r)
 }
 
-// Milliseconds returns the milliseconds.
+// Milliseconds returns the milliseconds unit of duration.
 func Milliseconds() *UnitDuration {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitDuration")), objc.RegisterName("milliseconds"))
 	return UnitDurationFromID(_r)
 }
 
-// Microseconds returns the microseconds.
+// Microseconds returns the microseconds unit of duration.
 func Microseconds() *UnitDuration {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitDuration")), objc.RegisterName("microseconds"))
 	return UnitDurationFromID(_r)
 }
 
-// Nanoseconds returns the nanoseconds.
+// Nanoseconds returns the nanoseconds unit of duration.
 func Nanoseconds() *UnitDuration {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitDuration")), objc.RegisterName("nanoseconds"))
 	return UnitDurationFromID(_r)
 }
 
-// Picoseconds returns the picoseconds.
+// Picoseconds returns the picoseconds unit of duration.
 func Picoseconds() *UnitDuration {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitDuration")), objc.RegisterName("picoseconds"))
 	return UnitDurationFromID(_r)
 }
 
-// Coulombs returns the coulombs.
+// Coulombs returns the coulombs unit of electric charge.
 func Coulombs() *UnitElectricCharge {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricCharge")), objc.RegisterName("coulombs"))
 	return UnitElectricChargeFromID(_r)
 }
 
-// MegaampereHours returns the megaampere hours.
+// MegaampereHours returns the megaampere hours unit of electric charge.
 func MegaampereHours() *UnitElectricCharge {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricCharge")), objc.RegisterName("megaampereHours"))
 	return UnitElectricChargeFromID(_r)
 }
 
-// KiloampereHours returns the kiloampere hours.
+// KiloampereHours returns the kiloampere hours unit of electric charge.
 func KiloampereHours() *UnitElectricCharge {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricCharge")), objc.RegisterName("kiloampereHours"))
 	return UnitElectricChargeFromID(_r)
 }
 
-// AmpereHours returns the ampere hours.
+// AmpereHours returns the ampere hours unit of electric charge.
 func AmpereHours() *UnitElectricCharge {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricCharge")), objc.RegisterName("ampereHours"))
 	return UnitElectricChargeFromID(_r)
 }
 
-// MilliampereHours returns the milliampere hours.
+// MilliampereHours returns the milliampere hours unit of electric charge.
 func MilliampereHours() *UnitElectricCharge {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricCharge")), objc.RegisterName("milliampereHours"))
 	return UnitElectricChargeFromID(_r)
 }
 
-// MicroampereHours returns the microampere hours.
+// MicroampereHours returns the microampere hours unit of electric charge.
 func MicroampereHours() *UnitElectricCharge {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricCharge")), objc.RegisterName("microampereHours"))
 	return UnitElectricChargeFromID(_r)
 }
 
-// Megaamperes returns the megaamperes.
+// Megaamperes returns the megaamperes unit of electric current.
 func Megaamperes() *UnitElectricCurrent {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricCurrent")), objc.RegisterName("megaamperes"))
 	return UnitElectricCurrentFromID(_r)
 }
 
-// Kiloamperes returns the kiloamperes.
+// Kiloamperes returns the kiloamperes unit of electric current.
 func Kiloamperes() *UnitElectricCurrent {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricCurrent")), objc.RegisterName("kiloamperes"))
 	return UnitElectricCurrentFromID(_r)
 }
 
-// Amperes returns the amperes.
+// Amperes returns the amperes unit of electric current.
 func Amperes() *UnitElectricCurrent {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricCurrent")), objc.RegisterName("amperes"))
 	return UnitElectricCurrentFromID(_r)
 }
 
-// Milliamperes returns the milliamperes.
+// Milliamperes returns the milliamperes unit of electric current.
 func Milliamperes() *UnitElectricCurrent {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricCurrent")), objc.RegisterName("milliamperes"))
 	return UnitElectricCurrentFromID(_r)
 }
 
-// Microamperes returns the microamperes.
+// Microamperes returns the microamperes unit of electric current.
 func Microamperes() *UnitElectricCurrent {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricCurrent")), objc.RegisterName("microamperes"))
 	return UnitElectricCurrentFromID(_r)
 }
 
-// Megavolts returns the megavolts.
+// Megavolts returns the megavolts unit of electric potential difference.
 func Megavolts() *UnitElectricPotentialDifference {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricPotentialDifference")), objc.RegisterName("megavolts"))
 	return UnitElectricPotentialDifferenceFromID(_r)
 }
 
-// Kilovolts returns the kilovolts.
+// Kilovolts returns the kilovolts unit of electric potential difference.
 func Kilovolts() *UnitElectricPotentialDifference {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricPotentialDifference")), objc.RegisterName("kilovolts"))
 	return UnitElectricPotentialDifferenceFromID(_r)
 }
 
-// Volts returns the volts.
+// Volts returns the volts unit of electric potential difference.
 func Volts() *UnitElectricPotentialDifference {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricPotentialDifference")), objc.RegisterName("volts"))
 	return UnitElectricPotentialDifferenceFromID(_r)
 }
 
-// Millivolts returns the millivolts.
+// Millivolts returns the millivolts unit of electric potential difference.
 func Millivolts() *UnitElectricPotentialDifference {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricPotentialDifference")), objc.RegisterName("millivolts"))
 	return UnitElectricPotentialDifferenceFromID(_r)
 }
 
-// Microvolts returns the microvolts.
+// Microvolts returns the microvolts unit of electric potential difference.
 func Microvolts() *UnitElectricPotentialDifference {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricPotentialDifference")), objc.RegisterName("microvolts"))
 	return UnitElectricPotentialDifferenceFromID(_r)
 }
 
-// Megaohms returns the megaohms.
+// Megaohms returns the megaohms unit of electric resistance.
 func Megaohms() *UnitElectricResistance {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricResistance")), objc.RegisterName("megaohms"))
 	return UnitElectricResistanceFromID(_r)
 }
 
-// Kiloohms returns the kiloohms.
+// Kiloohms returns the kiloohms unit of electric resistance.
 func Kiloohms() *UnitElectricResistance {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricResistance")), objc.RegisterName("kiloohms"))
 	return UnitElectricResistanceFromID(_r)
 }
 
-// Ohms returns the ohms.
+// Ohms returns the ohms unit of electric resistance.
 func Ohms() *UnitElectricResistance {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricResistance")), objc.RegisterName("ohms"))
 	return UnitElectricResistanceFromID(_r)
 }
 
-// Milliohms returns the milliohms.
+// Milliohms returns the milliohms unit of electric resistance.
 func Milliohms() *UnitElectricResistance {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricResistance")), objc.RegisterName("milliohms"))
 	return UnitElectricResistanceFromID(_r)
 }
 
-// Microohms returns the microohms.
+// Microohms returns the microohms unit of electric resistance.
 func Microohms() *UnitElectricResistance {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricResistance")), objc.RegisterName("microohms"))
 	return UnitElectricResistanceFromID(_r)
 }
 
-// Kilojoules returns the kilojoules.
+// Kilojoules returns the kilojoules unit of energy.
 func Kilojoules() *UnitEnergy {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitEnergy")), objc.RegisterName("kilojoules"))
 	return UnitEnergyFromID(_r)
 }
 
-// Joules returns the joules.
+// Joules returns the joules unit of energy.
 func Joules() *UnitEnergy {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitEnergy")), objc.RegisterName("joules"))
 	return UnitEnergyFromID(_r)
 }
 
-// Kilocalories returns the kilocalories.
+// Kilocalories returns the kilocalories unit of energy.
 func Kilocalories() *UnitEnergy {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitEnergy")), objc.RegisterName("kilocalories"))
 	return UnitEnergyFromID(_r)
 }
 
-// Calories returns the calories.
+// Calories returns the calories unit of energy.
 func Calories() *UnitEnergy {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitEnergy")), objc.RegisterName("calories"))
 	return UnitEnergyFromID(_r)
 }
 
-// KilowattHours returns the kilowatt hours.
+// KilowattHours returns the kilowatt hours unit of energy.
 func KilowattHours() *UnitEnergy {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitEnergy")), objc.RegisterName("kilowattHours"))
 	return UnitEnergyFromID(_r)
 }
 
-// Terahertz returns the terahertz.
+// Terahertz returns the terahertz unit of frequency.
 func Terahertz() *UnitFrequency {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitFrequency")), objc.RegisterName("terahertz"))
 	return UnitFrequencyFromID(_r)
 }
 
-// Gigahertz returns the gigahertz.
+// Gigahertz returns the gigahertz unit of frequency.
 func Gigahertz() *UnitFrequency {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitFrequency")), objc.RegisterName("gigahertz"))
 	return UnitFrequencyFromID(_r)
 }
 
-// Megahertz returns the megahertz.
+// Megahertz returns the megahertz unit of frequency.
 func Megahertz() *UnitFrequency {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitFrequency")), objc.RegisterName("megahertz"))
 	return UnitFrequencyFromID(_r)
 }
 
-// Kilohertz returns the kilohertz.
+// Kilohertz returns the kilohertz unit of frequency.
 func Kilohertz() *UnitFrequency {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitFrequency")), objc.RegisterName("kilohertz"))
 	return UnitFrequencyFromID(_r)
 }
 
-// Hertz returns the hertz.
+// Hertz returns the hertz unit of frequency.
 func Hertz() *UnitFrequency {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitFrequency")), objc.RegisterName("hertz"))
 	return UnitFrequencyFromID(_r)
 }
 
-// Millihertz returns the millihertz.
+// Millihertz returns the millihertz unit of frequency.
 func Millihertz() *UnitFrequency {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitFrequency")), objc.RegisterName("millihertz"))
 	return UnitFrequencyFromID(_r)
 }
 
-// Microhertz returns the microhertz.
+// Microhertz returns the microhertz unit of frequency.
 func Microhertz() *UnitFrequency {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitFrequency")), objc.RegisterName("microhertz"))
 	return UnitFrequencyFromID(_r)
 }
 
-// Nanohertz returns the nanohertz.
+// Nanohertz returns the nanohertz unit of frequency.
 func Nanohertz() *UnitFrequency {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitFrequency")), objc.RegisterName("nanohertz"))
 	return UnitFrequencyFromID(_r)
@@ -4331,19 +4337,19 @@ func FramesPerSecond() *UnitFrequency {
 	return UnitFrequencyFromID(_r)
 }
 
-// LitersPer100Kilometers returns the liters per100 kilometers.
+// LitersPer100Kilometers returns the liters per 100 kilometers unit of fuel efficiency.
 func LitersPer100Kilometers() *UnitFuelEfficiency {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitFuelEfficiency")), objc.RegisterName("litersPer100Kilometers"))
 	return UnitFuelEfficiencyFromID(_r)
 }
 
-// MilesPerImperialGallon returns the miles per imperial gallon.
+// MilesPerImperialGallon returns the miles per imperial gallon unit of fuel efficiency.
 func MilesPerImperialGallon() *UnitFuelEfficiency {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitFuelEfficiency")), objc.RegisterName("milesPerImperialGallon"))
 	return UnitFuelEfficiencyFromID(_r)
 }
 
-// MilesPerGallon returns the miles per gallon.
+// MilesPerGallon returns the miles per gallon unit of fuel efficiency.
 func MilesPerGallon() *UnitFuelEfficiency {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitFuelEfficiency")), objc.RegisterName("milesPerGallon"))
 	return UnitFuelEfficiencyFromID(_r)
@@ -4367,781 +4373,781 @@ func Bits() *UnitInformationStorage {
 	return UnitInformationStorageFromID(_r)
 }
 
-// Nibbles returns the nibbles.
+// Nibbles returns the nibbles unit of information storage.
 func Nibbles() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("nibbles"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Yottabytes returns the yottabytes.
+// Yottabytes returns the yottabytes unit of information storage.
 func Yottabytes() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("yottabytes"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Zettabytes returns the zettabytes.
+// Zettabytes returns the zettabytes unit of information storage.
 func Zettabytes() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("zettabytes"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Exabytes returns the exabytes.
+// Exabytes returns the exabytes unit of information storage.
 func Exabytes() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("exabytes"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Petabytes returns the petabytes.
+// Petabytes returns the petabytes unit of information storage.
 func Petabytes() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("petabytes"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Terabytes returns the terabytes.
+// Terabytes returns the terabytes unit of information storage.
 func Terabytes() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("terabytes"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Gigabytes returns the gigabytes.
+// Gigabytes returns the gigabytes unit of information storage.
 func Gigabytes() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("gigabytes"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Megabytes returns the megabytes.
+// Megabytes returns the megabytes unit of information storage.
 func Megabytes() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("megabytes"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Kilobytes returns the kilobytes.
+// Kilobytes returns the kilobytes unit of information storage.
 func Kilobytes() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("kilobytes"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Yottabits returns the yottabits.
+// Yottabits returns the yottabits unit of information storage.
 func Yottabits() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("yottabits"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Zettabits returns the zettabits.
+// Zettabits returns the zettabits unit of information storage.
 func Zettabits() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("zettabits"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Exabits returns the exabits.
+// Exabits returns the exabits unit of information storage.
 func Exabits() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("exabits"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Petabits returns the petabits.
+// Petabits returns the petabits unit of information storage.
 func Petabits() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("petabits"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Terabits returns the terabits.
+// Terabits returns the terabits unit of information storage.
 func Terabits() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("terabits"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Gigabits returns the gigabits.
+// Gigabits returns the gigabits unit of information storage.
 func Gigabits() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("gigabits"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Megabits returns the megabits.
+// Megabits returns the megabits unit of information storage.
 func Megabits() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("megabits"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Kilobits returns the kilobits.
+// Kilobits returns the kilobits unit of information storage.
 func Kilobits() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("kilobits"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Yobibytes returns the yobibytes.
+// Yobibytes returns the yobibytes unit of information storage.
 func Yobibytes() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("yobibytes"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Zebibytes returns the zebibytes.
+// Zebibytes returns the zebibytes unit of information storage.
 func Zebibytes() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("zebibytes"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Exbibytes returns the exbibytes.
+// Exbibytes returns the exbibytes unit of information storage.
 func Exbibytes() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("exbibytes"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Pebibytes returns the pebibytes.
+// Pebibytes returns the pebibytes unit of information storage.
 func Pebibytes() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("pebibytes"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Tebibytes returns the tebibytes.
+// Tebibytes returns the tebibytes unit of information storage.
 func Tebibytes() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("tebibytes"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Gibibytes returns the gibibytes.
+// Gibibytes returns the gibibytes unit of information storage.
 func Gibibytes() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("gibibytes"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Mebibytes returns the mebibytes.
+// Mebibytes returns the mebibytes unit of information storage.
 func Mebibytes() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("mebibytes"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Kibibytes returns the kibibytes.
+// Kibibytes returns the kibibytes unit of information storage.
 func Kibibytes() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("kibibytes"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Yobibits returns the yobibits.
+// Yobibits returns the yobibits unit of information storage.
 func Yobibits() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("yobibits"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Zebibits returns the zebibits.
+// Zebibits returns the zebibits unit of information storage.
 func Zebibits() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("zebibits"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Exbibits returns the exbibits.
+// Exbibits returns the exbibits unit of information storage.
 func Exbibits() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("exbibits"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Pebibits returns the pebibits.
+// Pebibits returns the pebibits unit of information storage.
 func Pebibits() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("pebibits"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Tebibits returns the tebibits.
+// Tebibits returns the tebibits unit of information storage.
 func Tebibits() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("tebibits"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Gibibits returns the gibibits.
+// Gibibits returns the gibibits unit of information storage.
 func Gibibits() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("gibibits"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Mebibits returns the mebibits.
+// Mebibits returns the mebibits unit of information storage.
 func Mebibits() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("mebibits"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Kibibits returns the kibibits.
+// Kibibits returns the kibibits unit of information storage.
 func Kibibits() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("kibibits"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Megameters returns the megameters.
+// Megameters returns the megameters unit of length.
 func Megameters() *UnitLength {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("megameters"))
 	return UnitLengthFromID(_r)
 }
 
-// Kilometers returns the kilometers.
+// Kilometers returns the kilometers unit of length.
 func Kilometers() *UnitLength {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("kilometers"))
 	return UnitLengthFromID(_r)
 }
 
-// Hectometers returns the hectometers.
+// Hectometers returns the hectometers unit of length.
 func Hectometers() *UnitLength {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("hectometers"))
 	return UnitLengthFromID(_r)
 }
 
-// Decameters returns the decameters.
+// Decameters returns the decameters unit of length.
 func Decameters() *UnitLength {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("decameters"))
 	return UnitLengthFromID(_r)
 }
 
-// Meters returns the meters.
+// Meters returns the meters unit of length.
 func Meters() *UnitLength {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("meters"))
 	return UnitLengthFromID(_r)
 }
 
-// Decimeters returns the decimeters.
+// Decimeters returns the decimeters unit of length.
 func Decimeters() *UnitLength {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("decimeters"))
 	return UnitLengthFromID(_r)
 }
 
-// Centimeters returns the centimeters.
+// Centimeters returns the centimeters unit of length.
 func Centimeters() *UnitLength {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("centimeters"))
 	return UnitLengthFromID(_r)
 }
 
-// Millimeters returns the millimeters.
+// Millimeters returns the millimeters unit of length.
 func Millimeters() *UnitLength {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("millimeters"))
 	return UnitLengthFromID(_r)
 }
 
-// Micrometers returns the micrometers.
+// Micrometers returns the micrometers unit of length.
 func Micrometers() *UnitLength {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("micrometers"))
 	return UnitLengthFromID(_r)
 }
 
-// Nanometers returns the nanometers.
+// Nanometers returns the nanometers unit of length.
 func Nanometers() *UnitLength {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("nanometers"))
 	return UnitLengthFromID(_r)
 }
 
-// Picometers returns the picometers.
+// Picometers returns the picometers unit of length.
 func Picometers() *UnitLength {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("picometers"))
 	return UnitLengthFromID(_r)
 }
 
-// Inches returns the inches.
+// Inches returns the inches unit of length.
 func Inches() *UnitLength {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("inches"))
 	return UnitLengthFromID(_r)
 }
 
-// Feet returns the feet.
+// Feet returns the feet unit of length.
 func Feet() *UnitLength {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("feet"))
 	return UnitLengthFromID(_r)
 }
 
-// Yards returns the yards.
+// Yards returns the yards unit of length.
 func Yards() *UnitLength {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("yards"))
 	return UnitLengthFromID(_r)
 }
 
-// Miles returns the miles.
+// Miles returns the miles unit of length.
 func Miles() *UnitLength {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("miles"))
 	return UnitLengthFromID(_r)
 }
 
-// ScandinavianMiles returns the scandinavian miles.
+// ScandinavianMiles returns the Scandinavian miles unit of length.
 func ScandinavianMiles() *UnitLength {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("scandinavianMiles"))
 	return UnitLengthFromID(_r)
 }
 
-// Lightyears returns the lightyears.
+// Lightyears returns the lightyears unit of length.
 func Lightyears() *UnitLength {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("lightyears"))
 	return UnitLengthFromID(_r)
 }
 
-// NauticalMiles returns the nautical miles.
+// NauticalMiles returns the nautical miles unit of length.
 func NauticalMiles() *UnitLength {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("nauticalMiles"))
 	return UnitLengthFromID(_r)
 }
 
-// Fathoms returns the fathoms.
+// Fathoms returns the fathoms unit of length.
 func Fathoms() *UnitLength {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("fathoms"))
 	return UnitLengthFromID(_r)
 }
 
-// Furlongs returns the furlongs.
+// Furlongs returns the furlongs unit of length.
 func Furlongs() *UnitLength {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("furlongs"))
 	return UnitLengthFromID(_r)
 }
 
-// AstronomicalUnits returns the astronomical units.
+// AstronomicalUnits returns the astronomical units unit of length.
 func AstronomicalUnits() *UnitLength {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("astronomicalUnits"))
 	return UnitLengthFromID(_r)
 }
 
-// Parsecs returns the parsecs.
+// Parsecs returns the parsecs unit of length.
 func Parsecs() *UnitLength {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("parsecs"))
 	return UnitLengthFromID(_r)
 }
 
-// Kilograms returns the kilograms.
+// Kilograms returns the kilograms unit of mass.
 func Kilograms() *UnitMass {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitMass")), objc.RegisterName("kilograms"))
 	return UnitMassFromID(_r)
 }
 
-// Grams returns the grams.
+// Grams returns the grams unit of mass.
 func Grams() *UnitMass {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitMass")), objc.RegisterName("grams"))
 	return UnitMassFromID(_r)
 }
 
-// Decigrams returns the decigrams.
+// Decigrams returns the decigrams unit of mass.
 func Decigrams() *UnitMass {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitMass")), objc.RegisterName("decigrams"))
 	return UnitMassFromID(_r)
 }
 
-// Centigrams returns the centigrams.
+// Centigrams returns the centigrams unit of mass.
 func Centigrams() *UnitMass {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitMass")), objc.RegisterName("centigrams"))
 	return UnitMassFromID(_r)
 }
 
-// Milligrams returns the milligrams.
+// Milligrams returns the milligrams unit of mass.
 func Milligrams() *UnitMass {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitMass")), objc.RegisterName("milligrams"))
 	return UnitMassFromID(_r)
 }
 
-// Micrograms returns the micrograms.
+// Micrograms returns the micrograms unit of mass.
 func Micrograms() *UnitMass {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitMass")), objc.RegisterName("micrograms"))
 	return UnitMassFromID(_r)
 }
 
-// Nanograms returns the nanograms.
+// Nanograms returns the nanograms unit of mass.
 func Nanograms() *UnitMass {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitMass")), objc.RegisterName("nanograms"))
 	return UnitMassFromID(_r)
 }
 
-// Picograms returns the picograms.
+// Picograms returns the picograms unit of mass.
 func Picograms() *UnitMass {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitMass")), objc.RegisterName("picograms"))
 	return UnitMassFromID(_r)
 }
 
-// Ounces returns the ounces.
+// Ounces returns the ounces unit of mass.
 func Ounces() *UnitMass {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitMass")), objc.RegisterName("ounces"))
 	return UnitMassFromID(_r)
 }
 
-// PoundsMass returns the pounds mass.
+// PoundsMass returns the pounds unit of mass.
 func PoundsMass() *UnitMass {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitMass")), objc.RegisterName("poundsMass"))
 	return UnitMassFromID(_r)
 }
 
-// Stones returns the stones.
+// Stones returns the stones unit of mass.
 func Stones() *UnitMass {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitMass")), objc.RegisterName("stones"))
 	return UnitMassFromID(_r)
 }
 
-// MetricTons returns the metric tons.
+// MetricTons returns the metric tons unit of mass.
 func MetricTons() *UnitMass {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitMass")), objc.RegisterName("metricTons"))
 	return UnitMassFromID(_r)
 }
 
-// ShortTons returns the short tons.
+// ShortTons returns the short tons unit of mass.
 func ShortTons() *UnitMass {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitMass")), objc.RegisterName("shortTons"))
 	return UnitMassFromID(_r)
 }
 
-// Carats returns the carats.
+// Carats returns the carats unit of mass.
 func Carats() *UnitMass {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitMass")), objc.RegisterName("carats"))
 	return UnitMassFromID(_r)
 }
 
-// OuncesTroy returns the ounces troy.
+// OuncesTroy returns the troy ounces unit of mass.
 func OuncesTroy() *UnitMass {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitMass")), objc.RegisterName("ouncesTroy"))
 	return UnitMassFromID(_r)
 }
 
-// Slugs returns the slugs.
+// Slugs returns the slugs unit of mass.
 func Slugs() *UnitMass {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitMass")), objc.RegisterName("slugs"))
 	return UnitMassFromID(_r)
 }
 
-// Terawatts returns the terawatts.
+// Terawatts returns the terawatts unit of power.
 func Terawatts() *UnitPower {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPower")), objc.RegisterName("terawatts"))
 	return UnitPowerFromID(_r)
 }
 
-// Gigawatts returns the gigawatts.
+// Gigawatts returns the gigawatts unit of power.
 func Gigawatts() *UnitPower {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPower")), objc.RegisterName("gigawatts"))
 	return UnitPowerFromID(_r)
 }
 
-// Megawatts returns the megawatts.
+// Megawatts returns the megawatts unit of power.
 func Megawatts() *UnitPower {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPower")), objc.RegisterName("megawatts"))
 	return UnitPowerFromID(_r)
 }
 
-// Kilowatts returns the kilowatts.
+// Kilowatts returns the kilowatts unit of power.
 func Kilowatts() *UnitPower {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPower")), objc.RegisterName("kilowatts"))
 	return UnitPowerFromID(_r)
 }
 
-// Watts returns the watts.
+// Watts returns the watts unit of power.
 func Watts() *UnitPower {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPower")), objc.RegisterName("watts"))
 	return UnitPowerFromID(_r)
 }
 
-// Milliwatts returns the milliwatts.
+// Milliwatts returns the milliwatts unit of power.
 func Milliwatts() *UnitPower {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPower")), objc.RegisterName("milliwatts"))
 	return UnitPowerFromID(_r)
 }
 
-// Microwatts returns the microwatts.
+// Microwatts returns the microwatts unit of power.
 func Microwatts() *UnitPower {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPower")), objc.RegisterName("microwatts"))
 	return UnitPowerFromID(_r)
 }
 
-// Nanowatts returns the nanowatts.
+// Nanowatts returns the nanowatts unit of power.
 func Nanowatts() *UnitPower {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPower")), objc.RegisterName("nanowatts"))
 	return UnitPowerFromID(_r)
 }
 
-// Picowatts returns the picowatts.
+// Picowatts returns the picowatts unit of power.
 func Picowatts() *UnitPower {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPower")), objc.RegisterName("picowatts"))
 	return UnitPowerFromID(_r)
 }
 
-// Femtowatts returns the femtowatts.
+// Femtowatts returns the femtowatts unit of power.
 func Femtowatts() *UnitPower {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPower")), objc.RegisterName("femtowatts"))
 	return UnitPowerFromID(_r)
 }
 
-// Horsepower returns the horsepower.
+// Horsepower returns the horsepower unit of power.
 func Horsepower() *UnitPower {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPower")), objc.RegisterName("horsepower"))
 	return UnitPowerFromID(_r)
 }
 
-// NewtonsPerMetersSquared returns the newtons per meters squared.
+// NewtonsPerMetersSquared returns the newtons per meters squared unit of pressure.
 func NewtonsPerMetersSquared() *UnitPressure {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPressure")), objc.RegisterName("newtonsPerMetersSquared"))
 	return UnitPressureFromID(_r)
 }
 
-// Gigapascals returns the gigapascals.
+// Gigapascals returns the gigapascals unit of pressure.
 func Gigapascals() *UnitPressure {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPressure")), objc.RegisterName("gigapascals"))
 	return UnitPressureFromID(_r)
 }
 
-// Megapascals returns the megapascals.
+// Megapascals returns the megapascals unit of pressure.
 func Megapascals() *UnitPressure {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPressure")), objc.RegisterName("megapascals"))
 	return UnitPressureFromID(_r)
 }
 
-// Kilopascals returns the kilopascals.
+// Kilopascals returns the kilopascals unit of pressure.
 func Kilopascals() *UnitPressure {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPressure")), objc.RegisterName("kilopascals"))
 	return UnitPressureFromID(_r)
 }
 
-// Hectopascals returns the hectopascals.
+// Hectopascals returns the hectopascals unit of pressure.
 func Hectopascals() *UnitPressure {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPressure")), objc.RegisterName("hectopascals"))
 	return UnitPressureFromID(_r)
 }
 
-// InchesOfMercury returns the inches of mercury.
+// InchesOfMercury returns the inches of mercury unit of pressure.
 func InchesOfMercury() *UnitPressure {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPressure")), objc.RegisterName("inchesOfMercury"))
 	return UnitPressureFromID(_r)
 }
 
-// Bars returns the bars.
+// Bars returns the bars unit of pressure.
 func Bars() *UnitPressure {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPressure")), objc.RegisterName("bars"))
 	return UnitPressureFromID(_r)
 }
 
-// Millibars returns the millibars.
+// Millibars returns the millibars unit of pressure.
 func Millibars() *UnitPressure {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPressure")), objc.RegisterName("millibars"))
 	return UnitPressureFromID(_r)
 }
 
-// MillimetersOfMercury returns the millimeters of mercury.
+// MillimetersOfMercury returns the millimeters of mercury unit of pressure.
 func MillimetersOfMercury() *UnitPressure {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPressure")), objc.RegisterName("millimetersOfMercury"))
 	return UnitPressureFromID(_r)
 }
 
-// PoundsForcePerSquareInch returns the pounds force per square inch.
+// PoundsForcePerSquareInch returns the pounds per square inch unit of pressure.
 func PoundsForcePerSquareInch() *UnitPressure {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPressure")), objc.RegisterName("poundsForcePerSquareInch"))
 	return UnitPressureFromID(_r)
 }
 
-// MetersPerSecond returns the meters per second.
+// MetersPerSecond returns the meters per second unit of speed.
 func MetersPerSecond() *UnitSpeed {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitSpeed")), objc.RegisterName("metersPerSecond"))
 	return UnitSpeedFromID(_r)
 }
 
-// KilometersPerHour returns the kilometers per hour.
+// KilometersPerHour returns the kilometers per hour unit of speed.
 func KilometersPerHour() *UnitSpeed {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitSpeed")), objc.RegisterName("kilometersPerHour"))
 	return UnitSpeedFromID(_r)
 }
 
-// MilesPerHour returns the miles per hour.
+// MilesPerHour returns the miles per hour unit of speed.
 func MilesPerHour() *UnitSpeed {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitSpeed")), objc.RegisterName("milesPerHour"))
 	return UnitSpeedFromID(_r)
 }
 
-// Knots returns the knots.
+// Knots returns the knots unit of speed.
 func Knots() *UnitSpeed {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitSpeed")), objc.RegisterName("knots"))
 	return UnitSpeedFromID(_r)
 }
 
-// Kelvin returns the kelvin.
+// Kelvin returns the kelvin unit of temperature.
 func Kelvin() *UnitTemperature {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitTemperature")), objc.RegisterName("kelvin"))
 	return UnitTemperatureFromID(_r)
 }
 
-// Celsius returns the celsius.
+// Celsius returns the degrees Celsius unit of temperature.
 func Celsius() *UnitTemperature {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitTemperature")), objc.RegisterName("celsius"))
 	return UnitTemperatureFromID(_r)
 }
 
-// Fahrenheit returns the fahrenheit.
+// Fahrenheit returns the degrees Fahrenheit unit of temperature.
 func Fahrenheit() *UnitTemperature {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitTemperature")), objc.RegisterName("fahrenheit"))
 	return UnitTemperatureFromID(_r)
 }
 
-// Megaliters returns the megaliters.
+// Megaliters returns the megaliters unit of volume.
 func Megaliters() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("megaliters"))
 	return UnitVolumeFromID(_r)
 }
 
-// Kiloliters returns the kiloliters.
+// Kiloliters returns the kiloliters unit of volume.
 func Kiloliters() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("kiloliters"))
 	return UnitVolumeFromID(_r)
 }
 
-// Liters returns the liters.
+// Liters returns the liters unit of volume.
 func Liters() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("liters"))
 	return UnitVolumeFromID(_r)
 }
 
-// Deciliters returns the deciliters.
+// Deciliters returns the deciliters unit of volume.
 func Deciliters() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("deciliters"))
 	return UnitVolumeFromID(_r)
 }
 
-// Centiliters returns the centiliters.
+// Centiliters returns the centiliters unit of volume.
 func Centiliters() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("centiliters"))
 	return UnitVolumeFromID(_r)
 }
 
-// Milliliters returns the milliliters.
+// Milliliters returns the milliliters unit of volume.
 func Milliliters() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("milliliters"))
 	return UnitVolumeFromID(_r)
 }
 
-// CubicKilometers returns the cubic kilometers.
+// CubicKilometers returns the cubic kilometers unit of volume.
 func CubicKilometers() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("cubicKilometers"))
 	return UnitVolumeFromID(_r)
 }
 
-// CubicMeters returns the cubic meters.
+// CubicMeters returns the cubic meters unit of volume.
 func CubicMeters() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("cubicMeters"))
 	return UnitVolumeFromID(_r)
 }
 
-// CubicDecimeters returns the cubic decimeters.
+// CubicDecimeters returns the cubic decimeters unit of volume.
 func CubicDecimeters() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("cubicDecimeters"))
 	return UnitVolumeFromID(_r)
 }
 
-// CubicCentimeters returns the cubic centimeters.
+// CubicCentimeters returns the cubic centimeters unit of volume.
 func CubicCentimeters() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("cubicCentimeters"))
 	return UnitVolumeFromID(_r)
 }
 
-// CubicMillimeters returns the cubic millimeters.
+// CubicMillimeters returns the cubic millimeters unit of volume.
 func CubicMillimeters() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("cubicMillimeters"))
 	return UnitVolumeFromID(_r)
 }
 
-// CubicInches returns the cubic inches.
+// CubicInches returns the cubic inches unit of volume.
 func CubicInches() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("cubicInches"))
 	return UnitVolumeFromID(_r)
 }
 
-// CubicFeet returns the cubic feet.
+// CubicFeet returns the cubic feet unit of volume.
 func CubicFeet() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("cubicFeet"))
 	return UnitVolumeFromID(_r)
 }
 
-// CubicYards returns the cubic yards.
+// CubicYards returns the cubic yards unit of volume.
 func CubicYards() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("cubicYards"))
 	return UnitVolumeFromID(_r)
 }
 
-// CubicMiles returns the cubic miles.
+// CubicMiles returns the cubic miles unit of volume.
 func CubicMiles() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("cubicMiles"))
 	return UnitVolumeFromID(_r)
 }
 
-// AcreFeet returns the acre feet.
+// AcreFeet returns the acre-feet unit of volume.
 func AcreFeet() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("acreFeet"))
 	return UnitVolumeFromID(_r)
 }
 
-// Bushels returns the bushels.
+// Bushels returns the bushels unit of volume.
 func Bushels() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("bushels"))
 	return UnitVolumeFromID(_r)
 }
 
-// Teaspoons returns the teaspoons.
+// Teaspoons returns the teaspoons unit of volume.
 func Teaspoons() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("teaspoons"))
 	return UnitVolumeFromID(_r)
 }
 
-// Tablespoons returns the tablespoons.
+// Tablespoons returns the tablespoons unit of volume.
 func Tablespoons() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("tablespoons"))
 	return UnitVolumeFromID(_r)
 }
 
-// FluidOunces returns the fluid ounces.
+// FluidOunces returns the fluid ounces unit of volume.
 func FluidOunces() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("fluidOunces"))
 	return UnitVolumeFromID(_r)
 }
 
-// Cups returns the cups.
+// Cups returns the cups unit of volume.
 func Cups() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("cups"))
 	return UnitVolumeFromID(_r)
 }
 
-// Pints returns the pints.
+// Pints returns the pints unit of volume.
 func Pints() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("pints"))
 	return UnitVolumeFromID(_r)
 }
 
-// Quarts returns the quarts.
+// Quarts returns the quarts unit of volume.
 func Quarts() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("quarts"))
 	return UnitVolumeFromID(_r)
 }
 
-// Gallons returns the gallons.
+// Gallons returns the gallons unit of volume.
 func Gallons() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("gallons"))
 	return UnitVolumeFromID(_r)
 }
 
-// ImperialTeaspoons returns the imperial teaspoons.
+// ImperialTeaspoons returns the imperial teaspoons unit of volume.
 func ImperialTeaspoons() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("imperialTeaspoons"))
 	return UnitVolumeFromID(_r)
 }
 
-// ImperialTablespoons returns the imperial tablespoons.
+// ImperialTablespoons returns the imperial tablespoons unit of volume.
 func ImperialTablespoons() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("imperialTablespoons"))
 	return UnitVolumeFromID(_r)
 }
 
-// ImperialFluidOunces returns the imperial fluid ounces.
+// ImperialFluidOunces returns the imperial fluid ounces unit of volume.
 func ImperialFluidOunces() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("imperialFluidOunces"))
 	return UnitVolumeFromID(_r)
 }
 
-// ImperialPints returns the imperial pints.
+// ImperialPints returns the imperial pints unit of volume.
 func ImperialPints() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("imperialPints"))
 	return UnitVolumeFromID(_r)
 }
 
-// ImperialQuarts returns the imperial quarts.
+// ImperialQuarts returns the imperial quarts unit of volume.
 func ImperialQuarts() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("imperialQuarts"))
 	return UnitVolumeFromID(_r)
 }
 
-// ImperialGallons returns the imperial gallons.
+// ImperialGallons returns the imperial gallons unit of volume.
 func ImperialGallons() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("imperialGallons"))
 	return UnitVolumeFromID(_r)
 }
 
-// MetricCups returns the metric cups.
+// MetricCups returns the metric cups unit of volume.
 func MetricCups() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("metricCups"))
 	return UnitVolumeFromID(_r)
@@ -5181,12 +5187,12 @@ func DeleteAllSavedUserActivities(ctx context.Context) error {
 	}
 }
 
-// ResetStandardUserDefaults +resetStandardUserDefaults releases the standardUserDefaults and sets it to nil. A new standardUserDefaults will be created the next time it's accessed. The only visible effect this has is that all KVO observers of the previous standardUserDefaults will no longer be observing it.
+// ResetStandardUserDefaults this method has no effect and shouldn't be used.
 func ResetStandardUserDefaults() {
 	objc.Send[objc.ID](objc.ID(_class("NSUserDefaults")), objc.RegisterName("resetStandardUserDefaults"))
 }
 
-// StandardUserDefaults returns +standardUserDefaults returns a global instance of NSUserDefaults configured to search the current application's search list.
+// StandardUserDefaults returns the shared defaults object for the current app. The shared defaults object searches the current application's search list, which consists of the current domain, followed by any added suite domains, the global domain, and the registration domain.
 func StandardUserDefaults() *UserDefaults {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUserDefaults")), objc.RegisterName("standardUserDefaults"))
 	return UserDefaultsFromID(_r)
@@ -5259,21 +5265,21 @@ func ValueWithEdgeInsets(insets NSEdgeInsets) *Value {
 	return ValueFromID(_r)
 }
 
-// SetValueTransformerForName wraps the corresponding Objective-C method.
+// SetValueTransformerForName registers the provided value transformer with a given identifier.
 func SetValueTransformerForName(transformer *ValueTransformer, name *String) {
 	defer runtime.KeepAlive(transformer)
 	defer runtime.KeepAlive(name)
 	objc.Send[objc.ID](objc.ID(_class("NSValueTransformer")), objc.RegisterName("setValueTransformer:forName:"), objref.IDOf(transformer), objref.IDOf(name))
 }
 
-// ValueTransformerForName wraps the corresponding Objective-C method.
+// ValueTransformerForName returns the value transformer identified by a given identifier.
 func ValueTransformerForName(name *String) *ValueTransformer {
 	defer runtime.KeepAlive(name)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSValueTransformer")), objc.RegisterName("valueTransformerForName:"), objref.IDOf(name))
 	return ValueTransformerFromID(_r)
 }
 
-// ValueTransformerNames returns the value transformer names.
+// ValueTransformerNames returns an array of all the registered value transformer names.
 //
 // ValueTransformerNames returns the collection as a Go slice.
 func ValueTransformerNames() []*String {
@@ -5281,98 +5287,98 @@ func ValueTransformerNames() []*String {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *String { return StringFromID(_id) })
 }
 
-// AllowsReverseTransformation wraps the corresponding Objective-C method.
+// AllowsReverseTransformation reports whether returns a Boolean value that indicates whether the receiver can reverse a transformation.
 func AllowsReverseTransformation() bool {
 	_r := objc.Send[bool](objc.ID(_class("NSValueTransformer")), objc.RegisterName("allowsReverseTransformation"))
 	return _r
 }
 
-// PredefinedEntityDeclarationForName returns the predefined entity declaration matching this name. The five predefined entities are <ul><li>&amp;lt; - &lt;</li><li>&amp;gt; - &gt;</li><li>&amp;amp; - &amp;</li><li>&amp;quot; - &quot;</li><li>&amp;apos; - &amp;</li></ul>
+// PredefinedEntityDeclarationForName returns a DTD node representing the predefined entity declaration with the specified name. - Parameter name: A string identifying a predefined entity declaration. - Returns: An autoreleased “XMLDTDNode“ object, or `nil` if there is no match for `name`. The five predefined entity references (or character references) are `&lt;` (less-than sign), `&gt;` (greater-than sign), `&amp;` (ampersand), `&quot;` (quotation mark), and `&apos;` (apostrophe).
 func PredefinedEntityDeclarationForName(name string) *XMLDTDNode {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSXMLDTD")), objc.RegisterName("predefinedEntityDeclarationForName:"), purego.NSString(name))
 	return XMLDTDNodeFromID(_r)
 }
 
-// Document returns an empty document.
+// Document returns an empty document node. Returns an
 func Document() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSXMLNode")), objc.RegisterName("document"))
 	return obj.Wrap(_r)
 }
 
-// DocumentWithRootElement returns a document
+// DocumentWithRootElement returns an
 func DocumentWithRootElement(element *XMLElement) obj.Object {
 	defer runtime.KeepAlive(element)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSXMLNode")), objc.RegisterName("documentWithRootElement:"), objref.IDOf(element))
 	return obj.Wrap(_r)
 }
 
-// ElementWithName returns an element <tt>&lt;name>&lt;/name></tt>.
+// ElementWithName returns an
 func ElementWithName(name string) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSXMLNode")), objc.RegisterName("elementWithName:"), purego.NSString(name))
 	return obj.Wrap(_r)
 }
 
-// ElementWithNameURI returns an element whose full QName is specified.
+// ElementWithNameURI returns an element whose fully qualified name is specified.
 func ElementWithNameURI(name string, uri string) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSXMLNode")), objc.RegisterName("elementWithName:URI:"), purego.NSString(name), purego.NSString(uri))
 	return obj.Wrap(_r)
 }
 
-// ElementWithNameStringValue returns an element with a single text node child <tt>&lt;name>string&lt;/name></tt>.
+// ElementWithNameStringValue returns an
 func ElementWithNameStringValue(name string, str string) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSXMLNode")), objc.RegisterName("elementWithName:stringValue:"), purego.NSString(name), purego.NSString(str))
 	return obj.Wrap(_r)
 }
 
-// ElementWithNameChildrenAttributes returns an element children and attributes <tt>&lt;name attr1="foo" attr2="bar">&lt;-- child1 -->child2&lt;/name></tt>.
+// ElementWithNameChildrenAttributes returns an
 func ElementWithNameChildrenAttributes(name string, children []*XMLNode, attributes []*XMLNode) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSXMLNode")), objc.RegisterName("elementWithName:children:attributes:"), purego.NSString(name), purego.SliceToNSArray(children, func(_v *XMLNode) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(attributes, func(_v *XMLNode) objc.ID { return objref.IDOf(_v) }))
 	return obj.Wrap(_r)
 }
 
-// AttributeWithNameStringValue returns an attribute <tt>name="stringValue"</tt>.
+// AttributeWithNameStringValue returns an
 func AttributeWithNameStringValue(name string, stringValue string) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSXMLNode")), objc.RegisterName("attributeWithName:stringValue:"), purego.NSString(name), purego.NSString(stringValue))
 	return obj.Wrap(_r)
 }
 
-// AttributeWithNameURIStringValue returns an attribute whose full QName is specified.
+// AttributeWithNameURIStringValue returns an
 func AttributeWithNameURIStringValue(name string, uri string, stringValue string) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSXMLNode")), objc.RegisterName("attributeWithName:URI:stringValue:"), purego.NSString(name), purego.NSString(uri), purego.NSString(stringValue))
 	return obj.Wrap(_r)
 }
 
-// NamespaceWithNameStringValue returns a namespace <tt>xmlns:name="stringValue"</tt>.
+// NamespaceWithNameStringValue returns an
 func NamespaceWithNameStringValue(name string, stringValue string) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSXMLNode")), objc.RegisterName("namespaceWithName:stringValue:"), purego.NSString(name), purego.NSString(stringValue))
 	return obj.Wrap(_r)
 }
 
-// ProcessingInstructionWithNameStringValue returns a processing instruction <tt>&lt;?name stringValue></tt>.
+// ProcessingInstructionWithNameStringValue returns an
 func ProcessingInstructionWithNameStringValue(name string, stringValue string) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSXMLNode")), objc.RegisterName("processingInstructionWithName:stringValue:"), purego.NSString(name), purego.NSString(stringValue))
 	return obj.Wrap(_r)
 }
 
-// CommentWithStringValue returns a comment <tt>&lt;--stringValue--></tt>.
+// CommentWithStringValue returns an
 func CommentWithStringValue(stringValue string) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSXMLNode")), objc.RegisterName("commentWithStringValue:"), purego.NSString(stringValue))
 	return obj.Wrap(_r)
 }
 
-// TextWithStringValue returns a text node.
+// TextWithStringValue returns an
 func TextWithStringValue(stringValue string) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSXMLNode")), objc.RegisterName("textWithStringValue:"), purego.NSString(stringValue))
 	return obj.Wrap(_r)
 }
 
-// DTDNodeWithXMLString returns an element, attribute, entity, or notation DTD node based on the full XML string.
+// DTDNodeWithXMLString returns an
 func DTDNodeWithXMLString(str string) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSXMLNode")), objc.RegisterName("DTDNodeWithXMLString:"), purego.NSString(str))
 	return obj.Wrap(_r)
 }
 
-// LocalNameForName returns the local name bar in foo:bar.
+// LocalNameForName returns the local name from the specified qualified name. For example, if the qualified name is "bst:title", this method returns "title".
 func LocalNameForName(name string) string {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSXMLNode")), objc.RegisterName("localNameForName:"), purego.NSString(name))
 	if _r == 0 {
@@ -5381,7 +5387,7 @@ func LocalNameForName(name string) string {
 	return purego.GoString(_r)
 }
 
-// PrefixForName returns the prefix foo in the name foo:bar.
+// PrefixForName returns the prefix from the specified qualified name. For example, if the qualified name is "bst:title", this method returns "bst".
 func PrefixForName(name string) string {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSXMLNode")), objc.RegisterName("prefixForName:"), purego.NSString(name))
 	if _r == 0 {
@@ -5390,7 +5396,7 @@ func PrefixForName(name string) string {
 	return purego.GoString(_r)
 }
 
-// PredefinedNamespaceForPrefix returns the namespace belonging to one of the predefined namespaces xml, xs, or xsi
+// PredefinedNamespaceForPrefix returns an
 func PredefinedNamespaceForPrefix(name string) *XMLNode {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSXMLNode")), objc.RegisterName("predefinedNamespaceForPrefix:"), purego.NSString(name))
 	return XMLNodeFromID(_r)

@@ -12,7 +12,6 @@ import (
 // A definition of the relationships between calendar units and absolute points in time, providing features for calculation and comparison of dates.
 //
 // Apple documentation: https://developer.apple.com/documentation/foundation/nscalendar
-// Deprecated: since macOS 10.10.
 type NSCalendar struct {
 	NSObject
 }
@@ -375,6 +374,7 @@ func (o *NSCalendar) DateMatchesComponents(date *NSDate, components *NSDateCompo
 	return _ret
 }
 
+// The user's current calendar. The returned calendar is formed from the settings for the current user's chosen system locale overlaid with any custom settings the user has specified in System Preferences. Settings you get from this calendar do not change as System Preferences are changed.
 func NSCalendarCurrentCalendar() *NSCalendar {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCalendar), _nSCalendarSelCurrentCalendar)
 	if _ret != 0 {
@@ -383,6 +383,7 @@ func NSCalendarCurrentCalendar() *NSCalendar {
 	return NSCalendarFromID(_ret)
 }
 
+// A calendar that tracks changes to user's preferred calendar. Settings you get from this calendar do change as the user's settings change. Note that if you cache values based on the calendar or related information those caches will of course not be automatically updated by the updating of the calendar object.
 func NSCalendarAutoupdatingCurrentCalendar() *NSCalendar {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCalendar), _nSCalendarSelAutoupdatingCurrentCalendar)
 	if _ret != 0 {
@@ -391,6 +392,7 @@ func NSCalendarAutoupdatingCurrentCalendar() *NSCalendar {
 	return NSCalendarFromID(_ret)
 }
 
+// An identifier for the calendar.
 func (o *NSCalendar) CalendarIdentifier() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelCalendarIdentifier)
 	if _ret != 0 {
@@ -399,6 +401,7 @@ func (o *NSCalendar) CalendarIdentifier() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The locale for the calendar.
 func (o *NSCalendar) Locale() *NSLocale {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelLocale)
 	if _ret != 0 {
@@ -411,6 +414,7 @@ func (o *NSCalendar) SetLocale(locale *NSLocale) {
 	o.Ptr().Send(_nSCalendarSelSetLocale, locale.Ptr())
 }
 
+// The time zone for the calendar.
 func (o *NSCalendar) TimeZone() *NSTimeZone {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelTimeZone)
 	if _ret != 0 {
@@ -423,6 +427,7 @@ func (o *NSCalendar) SetTimeZone(timeZone *NSTimeZone) {
 	o.Ptr().Send(_nSCalendarSelSetTimeZone, timeZone.Ptr())
 }
 
+// The index of the first weekday for the calendar.
 func (o *NSCalendar) FirstWeekday() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSCalendarSelFirstWeekday)
 	return _ret
@@ -432,6 +437,7 @@ func (o *NSCalendar) SetFirstWeekday(firstWeekday uint) {
 	o.Ptr().Send(_nSCalendarSelSetFirstWeekday, firstWeekday)
 }
 
+// The minimum number of days in the first week of the calendar.
 func (o *NSCalendar) MinimumDaysInFirstWeek() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSCalendarSelMinimumDaysInFirstWeek)
 	return _ret
@@ -441,6 +447,7 @@ func (o *NSCalendar) SetMinimumDaysInFirstWeek(minimumDaysInFirstWeek uint) {
 	o.Ptr().Send(_nSCalendarSelSetMinimumDaysInFirstWeek, minimumDaysInFirstWeek)
 }
 
+// A list of era symbols for this calendar.
 func (o *NSCalendar) EraSymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelEraSymbols)
 	if _ret != 0 {
@@ -449,6 +456,7 @@ func (o *NSCalendar) EraSymbols() *NSArray[*NSString] {
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// The long era symbols for this calendar.
 func (o *NSCalendar) LongEraSymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelLongEraSymbols)
 	if _ret != 0 {
@@ -457,6 +465,7 @@ func (o *NSCalendar) LongEraSymbols() *NSArray[*NSString] {
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// The list of month symbols for this calendar.
 func (o *NSCalendar) MonthSymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelMonthSymbols)
 	if _ret != 0 {
@@ -465,6 +474,7 @@ func (o *NSCalendar) MonthSymbols() *NSArray[*NSString] {
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// The list of short month symbols for this calendar.
 func (o *NSCalendar) ShortMonthSymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelShortMonthSymbols)
 	if _ret != 0 {
@@ -473,6 +483,7 @@ func (o *NSCalendar) ShortMonthSymbols() *NSArray[*NSString] {
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// The list of very short month symbols for this calendar.
 func (o *NSCalendar) VeryShortMonthSymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelVeryShortMonthSymbols)
 	if _ret != 0 {
@@ -481,6 +492,7 @@ func (o *NSCalendar) VeryShortMonthSymbols() *NSArray[*NSString] {
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// The list of standalone month symbols for this calendar.
 func (o *NSCalendar) StandaloneMonthSymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelStandaloneMonthSymbols)
 	if _ret != 0 {
@@ -489,6 +501,7 @@ func (o *NSCalendar) StandaloneMonthSymbols() *NSArray[*NSString] {
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// The list of short standalone month symbols for this calendar.
 func (o *NSCalendar) ShortStandaloneMonthSymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelShortStandaloneMonthSymbols)
 	if _ret != 0 {
@@ -497,6 +510,7 @@ func (o *NSCalendar) ShortStandaloneMonthSymbols() *NSArray[*NSString] {
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// The list of very short standalone month symbols for this calendar.
 func (o *NSCalendar) VeryShortStandaloneMonthSymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelVeryShortStandaloneMonthSymbols)
 	if _ret != 0 {
@@ -505,6 +519,7 @@ func (o *NSCalendar) VeryShortStandaloneMonthSymbols() *NSArray[*NSString] {
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// The list of weekday symbols for this calendar.
 func (o *NSCalendar) WeekdaySymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelWeekdaySymbols)
 	if _ret != 0 {
@@ -513,6 +528,7 @@ func (o *NSCalendar) WeekdaySymbols() *NSArray[*NSString] {
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// The list of short weekday symbols for this calendar.
 func (o *NSCalendar) ShortWeekdaySymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelShortWeekdaySymbols)
 	if _ret != 0 {
@@ -521,6 +537,7 @@ func (o *NSCalendar) ShortWeekdaySymbols() *NSArray[*NSString] {
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// The list of very short weekday symbols for this calendar.
 func (o *NSCalendar) VeryShortWeekdaySymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelVeryShortWeekdaySymbols)
 	if _ret != 0 {
@@ -529,6 +546,7 @@ func (o *NSCalendar) VeryShortWeekdaySymbols() *NSArray[*NSString] {
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// The list of standalone weekday symbols for this calendar.
 func (o *NSCalendar) StandaloneWeekdaySymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelStandaloneWeekdaySymbols)
 	if _ret != 0 {
@@ -537,6 +555,7 @@ func (o *NSCalendar) StandaloneWeekdaySymbols() *NSArray[*NSString] {
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// The list of short standalone weekday symbols for this calendar.
 func (o *NSCalendar) ShortStandaloneWeekdaySymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelShortStandaloneWeekdaySymbols)
 	if _ret != 0 {
@@ -545,6 +564,7 @@ func (o *NSCalendar) ShortStandaloneWeekdaySymbols() *NSArray[*NSString] {
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// The list of very short standalone weekday symbols for this calendar.
 func (o *NSCalendar) VeryShortStandaloneWeekdaySymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelVeryShortStandaloneWeekdaySymbols)
 	if _ret != 0 {
@@ -553,6 +573,7 @@ func (o *NSCalendar) VeryShortStandaloneWeekdaySymbols() *NSArray[*NSString] {
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// The list of quarter symbols for this calendar.
 func (o *NSCalendar) QuarterSymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelQuarterSymbols)
 	if _ret != 0 {
@@ -561,6 +582,7 @@ func (o *NSCalendar) QuarterSymbols() *NSArray[*NSString] {
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// The list of short quarter symbols for this calendar.
 func (o *NSCalendar) ShortQuarterSymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelShortQuarterSymbols)
 	if _ret != 0 {
@@ -569,6 +591,7 @@ func (o *NSCalendar) ShortQuarterSymbols() *NSArray[*NSString] {
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// The list of standalone quarter symbols for this calendar.
 func (o *NSCalendar) StandaloneQuarterSymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelStandaloneQuarterSymbols)
 	if _ret != 0 {
@@ -577,6 +600,7 @@ func (o *NSCalendar) StandaloneQuarterSymbols() *NSArray[*NSString] {
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// The list of short standalone quarter symbols for this calendar.
 func (o *NSCalendar) ShortStandaloneQuarterSymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelShortStandaloneQuarterSymbols)
 	if _ret != 0 {
@@ -585,6 +609,7 @@ func (o *NSCalendar) ShortStandaloneQuarterSymbols() *NSArray[*NSString] {
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// The AM symbol for this calendar.
 func (o *NSCalendar) AMSymbol() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelAMSymbol)
 	if _ret != 0 {
@@ -593,6 +618,7 @@ func (o *NSCalendar) AMSymbol() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The PM symbol for this calendar.
 func (o *NSCalendar) PMSymbol() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelPMSymbol)
 	if _ret != 0 {

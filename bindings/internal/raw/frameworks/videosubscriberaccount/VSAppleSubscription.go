@@ -10,8 +10,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An Apple streaming service customer and their subscriptions.
-//
 // Apple documentation: https://developer.apple.com/documentation/videosubscriberaccount/vsapplesubscription
 type VSAppleSubscription struct {
 	foundation.NSObject

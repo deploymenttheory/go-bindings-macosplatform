@@ -17,8 +17,6 @@ import (
 // UnitInformationStorage is an idiomatic wrapper over the Objective-C class NSUnitInformationStorage.
 //
 // It embeds [Dimension], promoting that type's methods.
-//
-// A unit of measure for quantities of information.
 type UnitInformationStorage struct {
 	Dimension
 }

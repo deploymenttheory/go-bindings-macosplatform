@@ -14,6 +14,26 @@ import (
 // BAErrorDomain returns the string constant BAErrorDomain, for use as a dictionary key or argument.
 func BAErrorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("BAErrorDomain"))) }
 
+// BAManagedErrorDomain returns the string constant BAManagedErrorDomain, for use as a dictionary key or argument.
+func BAManagedErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("BAManagedErrorDomain")))
+}
+
+// BAAssetPackIdentifierErrorKey returns the string constant BAAssetPackIdentifierErrorKey, for use as a dictionary key or argument.
+func BAAssetPackIdentifierErrorKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("BAAssetPackIdentifierErrorKey")))
+}
+
+// BASuccessesErrorKey returns the string constant BASuccessesErrorKey, for use as a dictionary key or argument.
+func BASuccessesErrorKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("BASuccessesErrorKey")))
+}
+
+// BAFailuresErrorKey returns the string constant BAFailuresErrorKey, for use as a dictionary key or argument.
+func BAFailuresErrorKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("BAFailuresErrorKey")))
+}
+
 // BADownloaderPriorityMin returns the value of the constant BADownloaderPriorityMin.
 func BADownloaderPriorityMin() int {
 	addr := _symbol("BADownloaderPriorityMin")
@@ -40,9 +60,3 @@ func BADownloaderPriorityMax() int {
 	}
 	return *(*int)(unsafe.Pointer(addr))
 }
-
-// BAManagedErrorDomain returns the address of the symbol BAManagedErrorDomain.
-func BAManagedErrorDomain() uintptr { return _symbol("BAManagedErrorDomain") }
-
-// BAAssetPackIdentifierErrorKey returns the address of the symbol BAAssetPackIdentifierErrorKey.
-func BAAssetPackIdentifierErrorKey() uintptr { return _symbol("BAAssetPackIdentifierErrorKey") }

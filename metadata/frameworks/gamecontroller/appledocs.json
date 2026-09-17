@@ -55,6 +55,10 @@
       "doc": "The colored light on a device.",
       "url": "https://developer.apple.com/documentation/gamecontroller/gcdevicelight"
     },
+    "GCDeviceType": {
+      "doc": "A class representing a type of spatial accessory.",
+      "url": "https://developer.apple.com/documentation/gamecontroller/gcdevicetype"
+    },
     "GCDirectionalGamepad": {
       "doc": "A profile that supports only the directional pad, without motion or rotation.",
       "url": "https://developer.apple.com/documentation/gamecontroller/gcdirectionalgamepad"
@@ -123,10 +127,6 @@
       "doc": "A controller profile that tracks input from a mouse.",
       "url": "https://developer.apple.com/documentation/gamecontroller/gcmouseinput"
     },
-    "GCPhysicalInputElementCollection": {
-      "doc": "A collection of physical input elements.",
-      "url": "https://developer.apple.com/documentation/gamecontroller/gcphysicalinputelementcollection"
-    },
     "GCPhysicalInputProfile": {
       "doc": "The base class for controller profiles that support physical buttons, thumbsticks, and directional pads.",
       "url": "https://developer.apple.com/documentation/gamecontroller/gcphysicalinputprofile"
@@ -142,6 +142,9 @@
     "GCRacingWheelInputState": {
       "doc": "The input for the wheel of a racing wheel controller.",
       "url": "https://developer.apple.com/documentation/gamecontroller/gcracingwheelinputstate"
+    },
+    "GCSpatialAccessory": {
+      "url": "https://developer.apple.com/documentation/gamecontroller/gcspatialaccessory"
     },
     "GCSteeringWheelElement": {
       "doc": "The element that represents the wheel of a racing wheel controller.",
@@ -165,10 +168,6 @@
       "doc": "The common properties for an element that represents an absolute or relative input value along an axis.",
       "url": "https://developer.apple.com/documentation/gamecontroller/gcaxiselement"
     },
-    "GCAxisElementName": {
-      "doc": "The names for the elements that provide values along an axis.",
-      "url": "https://developer.apple.com/documentation/gamecontroller/gcaxiselementname"
-    },
     "GCAxisInput": {
       "doc": "The common properties of inputs that provide absolute values along an axis with a fixed origin.",
       "url": "https://developer.apple.com/documentation/gamecontroller/gcaxisinput"
@@ -176,10 +175,6 @@
     "GCButtonElement": {
       "doc": "The common properties of an element that represents a momentary switch, such as a push button.",
       "url": "https://developer.apple.com/documentation/gamecontroller/gcbuttonelement"
-    },
-    "GCButtonElementName": {
-      "doc": "The names of the button elements.",
-      "url": "https://developer.apple.com/documentation/gamecontroller/gcbuttonelementname"
     },
     "GCDevice": {
       "doc": "A protocol that defines a common interface for game input devices.",
@@ -201,10 +196,6 @@
       "doc": "The common properties of elements that represent directional pads.",
       "url": "https://developer.apple.com/documentation/gamecontroller/gcdirectionpadelement"
     },
-    "GCDirectionPadElementName": {
-      "doc": "The names for directional pad elements.",
-      "url": "https://developer.apple.com/documentation/gamecontroller/gcdirectionpadelementname"
-    },
     "GCLinearInput": {
       "doc": "The common properties of inputs that provide values in unit coordinates.",
       "url": "https://developer.apple.com/documentation/gamecontroller/gclinearinput"
@@ -212,10 +203,6 @@
     "GCPhysicalInputElement": {
       "doc": "The common properties of physical input elements.",
       "url": "https://developer.apple.com/documentation/gamecontroller/gcphysicalinputelement"
-    },
-    "GCPhysicalInputElementName": {
-      "doc": "The name of a physical input element.",
-      "url": "https://developer.apple.com/documentation/gamecontroller/gcphysicalinputelementname"
     },
     "GCPhysicalInputExtents": {
       "doc": "Physical extents scale the normalized value reported by GCLinearInput into physical units.",
@@ -237,10 +224,6 @@
       "doc": "The common properties for an element that represents a switch.",
       "url": "https://developer.apple.com/documentation/gamecontroller/gcswitchelement"
     },
-    "GCSwitchElementName": {
-      "doc": "The name for an element that represents a switch.",
-      "url": "https://developer.apple.com/documentation/gamecontroller/gcswitchelementname"
-    },
     "GCSwitchPositionInput": {
       "doc": "The common properties of inputs that switch between two or more positions.",
       "url": "https://developer.apple.com/documentation/gamecontroller/gcswitchpositioninput"
@@ -251,6 +234,78 @@
     }
   },
   "enums": {
+    "GCControllerHomeButtonSettingCustomizationStatus": {
+      "doc": "An additional returned flag indicating whether a setting has been modified by the user.",
+      "url": "https://developer.apple.com/documentation/gamecontroller/gccontrollerhomebuttonsettingcustomizationstatus",
+      "members": {
+        "GCControllerHomeButtonSettingCustomizationDefault": {
+          "doc": "The user has not customized this setting.",
+          "url": "https://developer.apple.com/documentation/gamecontroller/gccontrollerhomebuttonsettingcustomizationstatus/systemdefault"
+        },
+        "GCControllerHomeButtonSettingCustomizationUser": {
+          "doc": "The user has customized this setting at least once.",
+          "url": "https://developer.apple.com/documentation/gamecontroller/gccontrollerhomebuttonsettingcustomizationstatus/user"
+        }
+      }
+    },
+    "GCControllerHomeButtonSettingInAppAction": {
+      "doc": "How the system responds to a press of the game controller Home button while your application is front-most.",
+      "url": "https://developer.apple.com/documentation/gamecontroller/gccontrollerhomebuttonsettinginappaction",
+      "members": {
+        "GCControllerHomeButtonSettingInAppActionDefault": {
+          "doc": "The system maintains its default handling regardless of your app’s preference.",
+          "url": "https://developer.apple.com/documentation/gamecontroller/gccontrollerhomebuttonsettinginappaction/systemdefault"
+        },
+        "GCControllerHomeButtonSettingInAppActionDefer": {
+          "doc": "The system defers its handling to your app’s preference.",
+          "url": "https://developer.apple.com/documentation/gamecontroller/gccontrollerhomebuttonsettinginappaction/defer"
+        },
+        "GCControllerHomeButtonSettingInAppActionDisabled": {
+          "doc": "System response to the game controller Home button press is disabled.",
+          "url": "https://developer.apple.com/documentation/gamecontroller/gccontrollerhomebuttonsettinginappaction/disabled"
+        },
+        "GCControllerHomeButtonSettingInAppActionUnavailable": {
+          "doc": "The setting value could not be retrieved.",
+          "url": "https://developer.apple.com/documentation/gamecontroller/gccontrollerhomebuttonsettinginappaction/unavailable"
+        }
+      }
+    },
+    "GCControllerHomeButtonSettingSystemAction": {
+      "doc": "How the system responds to a press of the game controller Home button outside of contexts where an action of the front-most app takes priority.",
+      "url": "https://developer.apple.com/documentation/gamecontroller/gccontrollerhomebuttonsettingsystemaction",
+      "members": {
+        "GCControllerHomeButtonSettingSystemActionDisabled": {
+          "doc": "System response to the game controller Home button press is disabled.",
+          "url": "https://developer.apple.com/documentation/gamecontroller/gccontrollerhomebuttonsettingsystemaction/disabled"
+        },
+        "GCControllerHomeButtonSettingSystemActionOpenCurrentApplication": {
+          "doc": "The controller home button system action opens the current application.",
+          "url": "https://developer.apple.com/documentation/gamecontroller/gccontrollerhomebuttonsettingsystemaction/opencurrentapplication"
+        },
+        "GCControllerHomeButtonSettingSystemActionOther": {
+          "doc": "The controller home button system action performs some other action.",
+          "url": "https://developer.apple.com/documentation/gamecontroller/gccontrollerhomebuttonsettingsystemaction/other"
+        },
+        "GCControllerHomeButtonSettingSystemActionUnavailable": {
+          "doc": "The setting value could not be retrieved.",
+          "url": "https://developer.apple.com/documentation/gamecontroller/gccontrollerhomebuttonsettingsystemaction/unavailable"
+        }
+      }
+    },
+    "GCControllerHomeButtonSettingsCustomizationActivity": {
+      "doc": "A hint passed to -openControllerHomeButtonSettingsForActivity: to indicate the reason the app is requesting to open Settings.",
+      "url": "https://developer.apple.com/documentation/gamecontroller/gccontrollerhomebuttonsettingscustomizationactivity",
+      "members": {
+        "GCControllerHomeButtonSettingsCustomizeInAppActionActivity": {
+          "doc": "Customize the in-app action.",
+          "url": "https://developer.apple.com/documentation/gamecontroller/gccontrollerhomebuttonsettingscustomizationactivity/customizeinappaction"
+        },
+        "GCControllerHomeButtonSettingsCustomizeSystemActionActivity": {
+          "doc": "Customize the system action.",
+          "url": "https://developer.apple.com/documentation/gamecontroller/gccontrollerhomebuttonsettingscustomizationactivity/customizesystemaction"
+        }
+      }
+    },
     "GCControllerPlayerIndex": {
       "doc": "The possible values for controller player indices.",
       "url": "https://developer.apple.com/documentation/gamecontroller/gccontrollerplayerindex",
@@ -277,10 +332,6 @@
         }
       }
     },
-    "GCDeviceBatteryState": {
-      "doc": "A state that indicates whether a device’s battery has power and is charging.",
-      "url": "https://developer.apple.com/documentation/gamecontroller/gcdevicebatterystate"
-    },
     "GCDevicePhysicalInputElementChange": {
       "doc": "Possible values that describe whether the input value of an element changes.",
       "url": "https://developer.apple.com/documentation/gamecontroller/gcdevicephysicalinputelementchange",
@@ -298,14 +349,6 @@
           "url": "https://developer.apple.com/documentation/gamecontroller/gcdevicephysicalinputelementchange/unknownchange"
         }
       }
-    },
-    "GCDualSenseAdaptiveTriggerMode": {
-      "doc": "The possible modes of an adaptive trigger.",
-      "url": "https://developer.apple.com/documentation/gamecontroller/gcdualsenseadaptivetriggermode"
-    },
-    "GCDualSenseAdaptiveTriggerStatus": {
-      "doc": "The possible states of an adaptive trigger.",
-      "url": "https://developer.apple.com/documentation/gamecontroller/gcdualsenseadaptivetriggerstatus"
     },
     "GCExtendedGamepadSnapshotDataVersion": {
       "url": "https://developer.apple.com/documentation/gamecontroller/gcextendedgamepadsnapshotdataversion"
@@ -342,28 +385,12 @@
           "url": "https://developer.apple.com/documentation/gamecontroller/gcphysicalinputsourcedirection/init(rawvalue:)"
         }
       }
-    },
-    "GCSystemGestureState": {
-      "doc": "A state for handling input when an element is part of a system gesture.",
-      "url": "https://developer.apple.com/documentation/gamecontroller/gcsystemgesturestate"
-    },
-    "GCTouchState": {
-      "doc": "The possible states of the user’s touch.",
-      "url": "https://developer.apple.com/documentation/gamecontroller/gctouchstate"
     }
   },
   "structs": {
     "GCAcceleration": {
       "doc": "A three-dimensional acceleration vector.",
       "url": "https://developer.apple.com/documentation/gamecontroller/gcacceleration"
-    },
-    "GCDualSenseAdaptiveTriggerPositionalAmplitudes": {
-      "doc": "The amplitudes for multiple positions on a trigger.",
-      "url": "https://developer.apple.com/documentation/gamecontroller/gcdualsenseadaptivetriggerpositionalamplitudes"
-    },
-    "GCDualSenseAdaptiveTriggerPositionalResistiveStrengths": {
-      "doc": "The resistive strengths for multiple positions on a trigger.",
-      "url": "https://developer.apple.com/documentation/gamecontroller/gcdualsenseadaptivetriggerpositionalresistivestrengths"
     },
     "GCEulerAngles": {
       "doc": "A structure that specifies the controller’s attitude as a series of rotations around the x, y, and z axes.",
@@ -475,6 +502,12 @@
       "-createEngineWithLocality:": {
         "doc": "Creates a haptics engine with the specified locality.",
         "url": "https://developer.apple.com/documentation/gamecontroller/gcdevicehaptics/createengine(withlocality:)"
+      }
+    },
+    "GCDeviceType": {
+      "+deviceTypeWithIdentifier:": {
+        "doc": "Create a device type for an identifier.",
+        "url": "https://developer.apple.com/documentation/gamecontroller/gcdevicetype/init(identifier:)"
       }
     },
     "GCDualSenseAdaptiveTrigger": {
@@ -641,6 +674,12 @@
       "-nextInputState": {
         "doc": "Returns the next input state of the racing wheel from the queue.",
         "url": "https://developer.apple.com/documentation/gamecontroller/gcracingwheelinput/nextinputstate()"
+      }
+    },
+    "GCSpatialAccessory": {
+      "-conformsToDeviceType:": {
+        "doc": "Tests the conformance of the receiver to the provided device type.",
+        "url": "https://developer.apple.com/documentation/gamecontroller/gcspatialaccessory/conforms(to:)"
       }
     }
   },
@@ -909,6 +948,16 @@
       "color": {
         "doc": "The color of a device’s light.",
         "url": "https://developer.apple.com/documentation/gamecontroller/gcdevicelight/color"
+      }
+    },
+    "GCDeviceType": {
+      "localizedDescription": {
+        "doc": "A localized description of the device type.",
+        "url": "https://developer.apple.com/documentation/gamecontroller/gcdevicetype/localizeddescription"
+      },
+      "spatialAccessoryType": {
+        "doc": "A device type that represents any spatial accessory.",
+        "url": "https://developer.apple.com/documentation/gamecontroller/gcdevicetype/spatialaccessory"
       }
     },
     "GCDualSenseAdaptiveTrigger": {
@@ -1399,6 +1448,28 @@
       "wheel": {
         "doc": "The controller’s wheel element.",
         "url": "https://developer.apple.com/documentation/gamecontroller/gcracingwheelinputstate/wheel"
+      }
+    },
+    "GCSpatialAccessory": {
+      "GCSpatialAccessory.DidConnectMessage": {
+        "doc": "A message that posts after a spatial accessory connects to the device.",
+        "url": "https://developer.apple.com/documentation/gamecontroller/gcspatialaccessory/didconnectmessage"
+      },
+      "GCSpatialAccessory.DidDisconnectMessage": {
+        "doc": "A message that posts after a spatial accessory disconnects from the device.",
+        "url": "https://developer.apple.com/documentation/gamecontroller/gcspatialaccessory/diddisconnectmessage"
+      },
+      "haptics": {
+        "doc": "Gets the haptics for the device, if supported.",
+        "url": "https://developer.apple.com/documentation/gamecontroller/gcspatialaccessory/haptics"
+      },
+      "input": {
+        "doc": "Gets the input profile for the device.",
+        "url": "https://developer.apple.com/documentation/gamecontroller/gcspatialaccessory/input"
+      },
+      "spatialAccessories": {
+        "doc": "Get the collection of spatial accessories currently connected to the system.",
+        "url": "https://developer.apple.com/documentation/gamecontroller/gcspatialaccessory/spatialaccessories"
       }
     },
     "GCSteeringWheelElement": {

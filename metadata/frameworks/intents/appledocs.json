@@ -2417,10 +2417,6 @@
         }
       }
     },
-    "INDailyRoutineSituation": {
-      "doc": "Daily situations for a relevance provider.",
-      "url": "https://developer.apple.com/documentation/intents/indailyroutinesituation"
-    },
     "INDateSearchType": {
       "doc": "Constants indicating the type of date-based search to perform.",
       "url": "https://developer.apple.com/documentation/intents/indatesearchtype",
@@ -8872,7 +8868,7 @@
       },
       "callDuration": {
         "doc": "The duration (measured in seconds) of the call.",
-        "url": "https://developer.apple.com/documentation/intents/incallrecord/callduration-47iud"
+        "url": "https://developer.apple.com/documentation/intents/incallrecord/callduration-2d9u1"
       },
       "callRecordType": {
         "doc": "The type of call that resulted from the attempt.",
@@ -9212,7 +9208,7 @@
       },
       "isFocused": {
         "doc": "The user’s preference for receiving communication notifications.",
-        "url": "https://developer.apple.com/documentation/intents/infocusstatus/isfocused-78wbx"
+        "url": "https://developer.apple.com/documentation/intents/infocusstatus/isfocused-8ytve"
       }
     },
     "INFocusStatusCenter": {
@@ -9342,7 +9338,7 @@
       },
       "chargePercentRemaining": {
         "doc": "The percentage of charge that remains for the electric vehicle.",
-        "url": "https://developer.apple.com/documentation/intents/ingetcarpowerlevelstatusintentresponse/chargepercentremaining-51zwv"
+        "url": "https://developer.apple.com/documentation/intents/ingetcarpowerlevelstatusintentresponse/chargepercentremaining-30zol"
       },
       "charging": {
         "doc": "A Boolean value that indicates whether the electric vehicle is currently charging.",
@@ -9381,8 +9377,8 @@
         "url": "https://developer.apple.com/documentation/intents/ingetcarpowerlevelstatusintentresponse/distanceremainingfuel"
       },
       "fuelPercentRemaining": {
-        "doc": "The percentage of fuel remaining for the fuel-powered vehicle.",
-        "url": "https://developer.apple.com/documentation/intents/ingetcarpowerlevelstatusintentresponse/fuelpercentremaining-6mdv4"
+        "doc": "The percentage of fuel that remains for the fuel-powered vehicle.",
+        "url": "https://developer.apple.com/documentation/intents/ingetcarpowerlevelstatusintentresponse/fuelpercentremaining-56xw3"
       },
       "maximumBatteryCapacity": {
         "doc": "A user-facing value that represents the maximum battery capacity of the electric vehicle.",
@@ -9405,8 +9401,8 @@
         "url": "https://developer.apple.com/documentation/intents/ingetcarpowerlevelstatusintentresponse/minimumbatterycapacity"
       },
       "minutesToFull": {
-        "doc": "The number of minutes it will take to fully charge the electric vehicle’s battery.",
-        "url": "https://developer.apple.com/documentation/intents/ingetcarpowerlevelstatusintentresponse/minutestofull-25vcb"
+        "doc": "The number of minutes it takes to fully charge the electric vehicle’s battery.",
+        "url": "https://developer.apple.com/documentation/intents/ingetcarpowerlevelstatusintentresponse/minutestofull-2kbt6"
       }
     },
     "INGetReservationDetailsIntent": {
@@ -10072,7 +10068,7 @@
       },
       "playShuffled": {
         "doc": "A Boolean value that indicates whether the media plays in a shuffled order.",
-        "url": "https://developer.apple.com/documentation/intents/inplaymediaintent/playshuffled-2btex"
+        "url": "https://developer.apple.com/documentation/intents/inplaymediaintent/playshuffled-93hn1"
       },
       "playbackQueueLocation": {
         "doc": "The queue location for a media item during playback.",
@@ -10084,11 +10080,11 @@
       },
       "playbackSpeed": {
         "doc": "The playback speed for a media item.",
-        "url": "https://developer.apple.com/documentation/intents/inplaymediaintent/playbackspeed-6ngbq"
+        "url": "https://developer.apple.com/documentation/intents/inplaymediaintent/playbackspeed-17r2t"
       },
       "resumePlayback": {
         "doc": "The resume playback setting at the time the user plays the media item.",
-        "url": "https://developer.apple.com/documentation/intents/inplaymediaintent/resumeplayback-1xw6r"
+        "url": "https://developer.apple.com/documentation/intents/inplaymediaintent/resumeplayback-9zfyp"
       }
     },
     "INPlayMediaIntentResponse": {
@@ -10228,7 +10224,7 @@
       },
       "partySize": {
         "doc": "The number of passengers that the ride must accommodate.",
-        "url": "https://developer.apple.com/documentation/intents/inrequestrideintent/partysize-64kfc"
+        "url": "https://developer.apple.com/documentation/intents/inrequestrideintent/partysize-39k7z"
       },
       "paymentMethod": {
         "doc": "The user’s requested payment method.",
@@ -10388,7 +10384,7 @@
       },
       "partySize": {
         "doc": "The number of people in the party.",
-        "url": "https://developer.apple.com/documentation/intents/inrestaurantreservation/partysize-9mtpk"
+        "url": "https://developer.apple.com/documentation/intents/inrestaurantreservation/partysize-9ux0p"
       },
       "reservationDuration": {
         "doc": "The date and time range that defines beginning and end of the restaurant reservation.",
@@ -10588,7 +10584,7 @@
       },
       "usesMeteredFare": {
         "doc": "A Boolean value indicating whether the price uses a metered fare instead of a fixed price.",
-        "url": "https://developer.apple.com/documentation/intents/inrideoption/usesmeteredfare-1sig1"
+        "url": "https://developer.apple.com/documentation/intents/inrideoption/usesmeteredfare-25g1c"
       }
     },
     "INRidePartySizeOption": {
@@ -11180,7 +11176,7 @@
       },
       "locked": {
         "doc": "A Boolean value that indicates whether to lock the car.",
-        "url": "https://developer.apple.com/documentation/intents/insetcarlockstatusintent/locked-61uw4"
+        "url": "https://developer.apple.com/documentation/intents/insetcarlockstatusintent/locked-9h0kx"
       }
     },
     "INSetCarLockStatusIntentResponse": {
@@ -11220,11 +11216,11 @@
       },
       "fanSpeedIndex": {
         "doc": "An integer value indicating the desired fan speed position.",
-        "url": "https://developer.apple.com/documentation/intents/insetclimatesettingsincarintent/fanspeedindex-wz49"
+        "url": "https://developer.apple.com/documentation/intents/insetclimatesettingsincarintent/fanspeedindex-4c1rr"
       },
       "fanSpeedPercentage": {
         "doc": "A floating-point value indicating the requested fan speed specified as a percentage of the maximum speed.",
-        "url": "https://developer.apple.com/documentation/intents/insetclimatesettingsincarintent/fanspeedpercentage-ep0u"
+        "url": "https://developer.apple.com/documentation/intents/insetclimatesettingsincarintent/fanspeedpercentage-7i2hq"
       },
       "init(enableFan:enableAirConditioner:enableClimateControl:enableAutoMode:airCirculationMode:fanSpeedIndex:fanSpeedPercentage:relativeFanSpeedSetting:temperature:relativeTemperatureSetting:climateZone:carName:)": {
         "doc": "Creates the intent object with the specified climate settings information.",
@@ -11356,7 +11352,7 @@
       },
       "profileNumber": {
         "doc": "The profile index from which to restore the settings.",
-        "url": "https://developer.apple.com/documentation/intents/insetprofileincarintent/profilenumber-50f30"
+        "url": "https://developer.apple.com/documentation/intents/insetprofileincarintent/profilenumber-37vj8"
       }
     },
     "INSetProfileInCarIntentResponse": {
@@ -11372,7 +11368,7 @@
       },
       "frequency": {
         "doc": "The broadcast frequency of the radio station.",
-        "url": "https://developer.apple.com/documentation/intents/insetradiostationintent/frequency-63rbb"
+        "url": "https://developer.apple.com/documentation/intents/insetradiostationintent/frequency-2ctw6"
       },
       "init(radioType:frequency:stationName:channel:presetNumber:)": {
         "doc": "Initializes the intent object with the specified climate settings information.",
@@ -11404,7 +11400,7 @@
       },
       "enableCooling": {
         "doc": "A Boolean value indicating whether to enable the seat cooling system.",
-        "url": "https://developer.apple.com/documentation/intents/insetseatsettingsincarintent/enablecooling-8qqx3"
+        "url": "https://developer.apple.com/documentation/intents/insetseatsettingsincarintent/enablecooling-6bcu7"
       },
       "enableHeating": {
         "doc": "A Boolean value indicating whether to enable the seat heating system.",
@@ -11420,7 +11416,7 @@
       },
       "level": {
         "doc": "An integer value indicating the desired level for the seat setting.",
-        "url": "https://developer.apple.com/documentation/intents/insetseatsettingsincarintent/level-5i2i"
+        "url": "https://developer.apple.com/documentation/intents/insetseatsettingsincarintent/level-94975"
       },
       "relativeLevelSetting": {
         "doc": "A relative change to the level value.",
@@ -11620,7 +11616,7 @@
       },
       "searchResultsCount": {
         "doc": "The number of photos that match the search parameters.",
-        "url": "https://developer.apple.com/documentation/intents/instartphotoplaybackintentresponse/searchresultscount-6ns8y"
+        "url": "https://developer.apple.com/documentation/intents/instartphotoplaybackintentresponse/searchresultscount-5r7e7"
       }
     },
     "INStartVideoCallIntent": {
@@ -11637,8 +11633,8 @@
     },
     "INStartWorkoutIntent": {
       "goalValue": {
-        "doc": "The user-supplied numerical goal of the workout.",
-        "url": "https://developer.apple.com/documentation/intents/instartworkoutintent/goalvalue-5oazy"
+        "doc": "The numerical goal of the workout.",
+        "url": "https://developer.apple.com/documentation/intents/instartworkoutintent/goalvalue-1dzvb"
       },
       "init(workoutName:goalValue:workoutGoalUnitType:workoutLocationType:isOpenEnded:)": {
         "doc": "Initializes an intent object with the specified workout information.",

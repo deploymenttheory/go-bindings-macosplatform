@@ -219,6 +219,15 @@ func (wwv *WKWebView) WithObscuredContentInsets(obscuredContentInsets foundation
 	return wwv
 }
 
+// WithRefreshController sets the refresh controller.
+func (wwv *WKWebView) WithRefreshController(refreshController obj.Object) *WKWebView {
+	defer runtime.KeepAlive(refreshController)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("setRefreshController:"), objref.IDOf(refreshController))
+	})
+	return wwv
+}
+
 // LoadRequest navigates to a requested URL.
 func (wwv *WKWebView) LoadRequest(request obj.Object) *WKNavigation {
 	defer runtime.KeepAlive(wwv)
@@ -227,6 +236,20 @@ func (wwv *WKWebView) LoadRequest(request obj.Object) *WKNavigation {
 	purego.Main(func() {
 		_mainthread0 = func() *WKNavigation {
 			_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("loadRequest:"), objref.IDOf(request))
+			return WKNavigationFromID(_r)
+		}()
+	})
+	return _mainthread0
+
+}
+
+// LoadURL navigates to a requested URL.
+func (wwv *WKWebView) LoadURL(url string) *WKNavigation {
+	defer runtime.KeepAlive(wwv)
+	var _mainthread0 *WKNavigation
+	purego.Main(func() {
+		_mainthread0 = func() *WKNavigation {
+			_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("loadURL:"), rt.FileURL(url))
 			return WKNavigationFromID(_r)
 		}()
 	})
@@ -1081,6 +1104,20 @@ func (wwv *WKWebView) ObscuredContentInsets() foundation.NSEdgeInsets {
 		_mainthread0 = func() foundation.NSEdgeInsets {
 			_r := objc.Send[foundation.NSEdgeInsets](objref.IDOf(wwv), objc.RegisterName("obscuredContentInsets"))
 			return _r
+		}()
+	})
+	return _mainthread0
+
+}
+
+// RefreshController returns the refresh controller.
+func (wwv *WKWebView) RefreshController() obj.Object {
+	defer runtime.KeepAlive(wwv)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("refreshController"))
+			return obj.Wrap(_r)
 		}()
 	})
 	return _mainthread0

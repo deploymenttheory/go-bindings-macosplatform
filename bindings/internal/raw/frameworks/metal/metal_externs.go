@@ -313,21 +313,45 @@ func MTLDeviceErrorDomain() *foundation.NSString {
 }
 
 // @brief This notification is posted when the user has requested that applications cease using a particular device.  Applications should assume that the device will be removed (terminated) imminently.  Additionally, the device will be removed from the internal device array prior to this notification being posted.  Applications should immediately begin the process of releasing all resources created on the given device, as well as any references to the device itself.
-func MTLDeviceRemovalRequestedNotification() uintptr {
+// Deprecated: Device notifications are not applicable on Apple Silicon
+func MTLDeviceRemovalRequestedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_metalLib, "MTLDeviceRemovalRequestedNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @brief This notification is posted when a new Metal device is added to the system
-func MTLDeviceWasAddedNotification() uintptr {
+// Deprecated: Device notifications are not applicable on Apple Silicon
+func MTLDeviceWasAddedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_metalLib, "MTLDeviceWasAddedNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @brief This notification is posted if the device is removed while there are still outstanding references to it, due to either a surprise or forced disconnect by the user.  Applications must expect that any attempt to use the device after this point will fail.
-func MTLDeviceWasRemovedNotification() uintptr {
+// Deprecated: Device notifications are not applicable on Apple Silicon
+func MTLDeviceWasRemovedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_metalLib, "MTLDeviceWasRemovedNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MTLDynamicLibraryDomain() *foundation.NSString {

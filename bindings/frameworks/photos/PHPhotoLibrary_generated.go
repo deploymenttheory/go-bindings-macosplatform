@@ -18,7 +18,7 @@ import (
 
 // PhotoLibrary is an idiomatic wrapper over the Objective-C class PHPhotoLibrary.
 //
-// An object that manages access and changes to the user’s photo library.
+// An object that manages access and changes to a person’s photo library.
 type PhotoLibrary struct {
 	objref.Handle
 }
@@ -81,6 +81,43 @@ func NewPhotoLibrary() *PhotoLibrary {
 	return photoLibraryAdopt(_id)
 }
 
+// EnableUploadJobExtensionWith enables the background asset resource upload job feature with the given options, atomically.
+func (pl *PhotoLibrary) EnableUploadJobExtensionWith(options *AssetResourceUploadJobOptions) error {
+	defer runtime.KeepAlive(pl)
+	defer runtime.KeepAlive(options)
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(pl), objc.RegisterName("enableUploadJobExtensionWithOptions:error:"), objref.IDOf(options), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// DisableUploadJobExtension disables the background asset resource upload job feature.
+//
+// DisableUploadJobExtension returns an error if the operation did not succeed.
+func (pl *PhotoLibrary) DisableUploadJobExtension() error {
+	defer runtime.KeepAlive(pl)
+	var _nsErr uintptr
+	objc.Send[bool](objref.IDOf(pl), objc.RegisterName("disableUploadJobExtensionWithError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// SetUploadJobExtension sets the options for the calling app’s background asset resource upload job configuration.
+func (pl *PhotoLibrary) SetUploadJobExtension(options *AssetResourceUploadJobOptions) error {
+	defer runtime.KeepAlive(pl)
+	defer runtime.KeepAlive(options)
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(pl), objc.RegisterName("setUploadJobExtensionOptions:error:"), objref.IDOf(options), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
 // PerformChangesCompletionHandler asynchronously runs a block that requests changes to the photo library.
 func (pl *PhotoLibrary) PerformChangesCompletionHandler(changeBlock func(), completionHandler func(bool, unsafe.Pointer)) {
 	defer runtime.KeepAlive(pl)
@@ -110,6 +147,20 @@ func (pl *PhotoLibrary) FetchPersistentChangesSinceToken(token *PersistentChange
 	return PersistentChangeFetchResultFromID(_r), nil
 }
 
+// IsUploadJobExtensionEnabled reports whether background asset resource uploading is enabled. The value is `true` if the extension is enabled and active, and is `false` otherwise. The extension's host app uses this property to determine the background processing status. See “PHAssetResourceUploadJob“ and ````PHAssetResourceUploadJobChangeRequest“ for more information.
+func (pl *PhotoLibrary) IsUploadJobExtensionEnabled() bool {
+	defer runtime.KeepAlive(pl)
+	_r := objc.Send[bool](objref.IDOf(pl), objc.RegisterName("isUploadJobExtensionEnabled"))
+	return _r
+}
+
+// UploadJobExtensionOptions returns the options for the calling app's background asset resource upload job configuration. The value is `nil` if the extension isn't enabled or the caller isn't authorized. Otherwise, the value is an options object with default values if the configuration exists but no options have been set.
+func (pl *PhotoLibrary) UploadJobExtensionOptions() *AssetResourceUploadJobOptions {
+	defer runtime.KeepAlive(pl)
+	_r := objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("uploadJobExtensionOptions"))
+	return AssetResourceUploadJobOptionsFromID(_r)
+}
+
 // UnavailabilityReason returns the unavailability reason.
 func (pl *PhotoLibrary) UnavailabilityReason() unsafe.Pointer {
 	defer runtime.KeepAlive(pl)
@@ -128,6 +179,13 @@ func (pl *PhotoLibrary) CurrentChangeToken() *PersistentChangeToken {
 func (pl *PhotoLibrary) LocalIdentifierMappingsForCloudIdentifiers(cloudIdentifiers []*CloudIdentifier) obj.Object {
 	defer runtime.KeepAlive(pl)
 	_r := objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("localIdentifierMappingsForCloudIdentifiers:"), purego.SliceToNSArray(cloudIdentifiers, func(_v *CloudIdentifier) objc.ID { return objref.IDOf(_v) }))
+	return obj.Wrap(_r)
+}
+
+// LocalIdentifierMappingsForSyncedCloudIdentifiers returns a dictionary that maps each cloud identifier from the provided array to a PHLocalIdentifierMapping result containing the local identifier found for that cloud identifier if that cloud identifier is a known synced identifier.
+func (pl *PhotoLibrary) LocalIdentifierMappingsForSyncedCloudIdentifiers(cloudIdentifiers []*CloudIdentifier) obj.Object {
+	defer runtime.KeepAlive(pl)
+	_r := objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("localIdentifierMappingsForSyncedCloudIdentifiers:"), purego.SliceToNSArray(cloudIdentifiers, func(_v *CloudIdentifier) objc.ID { return objref.IDOf(_v) }))
 	return obj.Wrap(_r)
 }
 

@@ -359,6 +359,14 @@ func (v_ *View) WithGestureRecognizers(items ...GestureRecognizerProvider) *View
 	return v_
 }
 
+// WithExclusiveGestureBehavior sets declares whether gesture recognizers should be exclusive in this view and its subviews.
+func (v_ *View) WithExclusiveGestureBehavior(exclusiveGestureBehavior ViewExclusiveGestureBehavior) *View {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setExclusiveGestureBehavior:"), exclusiveGestureBehavior)
+	})
+	return v_
+}
+
 // WithAllowedTouchTypes sets the allowed touch types.
 func (v_ *View) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *View {
 	purego.Main(func() {
@@ -420,6 +428,15 @@ func (v_ *View) WithHorizontalContentSizeConstraintActive(horizontalContentSizeC
 func (v_ *View) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *View {
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
+	return v_
+}
+
+// WithTextSelectionManager sets the text selection manager for this view.
+func (v_ *View) WithTextSelectionManager(textSelectionManager *TextSelectionManager) *View {
+	defer runtime.KeepAlive(textSelectionManager)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setTextSelectionManager:"), objref.IDOf(textSelectionManager))
 	})
 	return v_
 }
@@ -2787,6 +2804,20 @@ func (v_ *View) GestureRecognizers() []*GestureRecognizer {
 	return _mainthread0
 }
 
+// ExclusiveGestureBehavior returns declares whether gesture recognizers should be exclusive in this view and its subviews. When a view is set to `.exclusive`, and one or more of its gesture recognizers is active, a second input event will not activate any further gesture recognizers, unless that event hit tests to this view or its subviews. Defaults to `.inherit`.
+func (v_ *View) ExclusiveGestureBehavior() ViewExclusiveGestureBehavior {
+	defer runtime.KeepAlive(v_)
+	var _mainthread0 ViewExclusiveGestureBehavior
+	purego.Main(func() {
+		_mainthread0 = func() ViewExclusiveGestureBehavior {
+			_r := objc.Send[ViewExclusiveGestureBehavior](objref.IDOf(v_), objc.RegisterName("exclusiveGestureBehavior"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
+}
+
 // AllowedTouchTypes returns the allowed touch types.
 func (v_ *View) AllowedTouchTypes() TouchTypeMask {
 	defer runtime.KeepAlive(v_)
@@ -2871,7 +2902,53 @@ func (v_ *View) LayoutMarginsGuide() *LayoutGuide {
 
 }
 
-// PrefersCompactControlSizeMetrics reports whether when this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+// ViewDidChangeEffectiveCornerRadii informs the view that its effective corner radii changed. This method should be overridden to apply the corner radii to the view as required.
+func (v_ *View) ViewDidChangeEffectiveCornerRadii() {
+	defer runtime.KeepAlive(v_)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("viewDidChangeEffectiveCornerRadii"))
+	})
+
+}
+
+// InvalidateCornerConfiguration invalidates the corner configuration, causing both the configuration and its dependencies to be recomputed.
+func (v_ *View) InvalidateCornerConfiguration() {
+	defer runtime.KeepAlive(v_)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("invalidateCornerConfiguration"))
+	})
+
+}
+
+// CornerConfiguration defines the corner styles (e.g., square, capsule, concentric, etc) for the view’s corners.
+func (v_ *View) CornerConfiguration() *ViewCornerConfiguration {
+	defer runtime.KeepAlive(v_)
+	var _mainthread0 *ViewCornerConfiguration
+	purego.Main(func() {
+		_mainthread0 = func() *ViewCornerConfiguration {
+			_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("cornerConfiguration"))
+			return ViewCornerConfigurationFromID(_r)
+		}()
+	})
+	return _mainthread0
+
+}
+
+// EffectiveCornerRadii returns the effective radius of each corner in the view, calculated based on the corner configuration (`cornerConfiguration`). This value is `nil` when the corner configuration is `nil`.
+func (v_ *View) EffectiveCornerRadii() *ViewCornerRadii {
+	defer runtime.KeepAlive(v_)
+	var _mainthread0 *ViewCornerRadii
+	purego.Main(func() {
+		_mainthread0 = func() *ViewCornerRadii {
+			_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("effectiveCornerRadii"))
+			return ViewCornerRadiiFromID(_r)
+		}()
+	})
+	return _mainthread0
+
+}
+
+// PrefersCompactControlSizeMetrics reports whether when this property is `YES`, any `NSControl`s in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to `NO`.
 func (v_ *View) PrefersCompactControlSizeMetrics() bool {
 	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
@@ -3818,6 +3895,20 @@ func (v_ *View) RectForLayoutRegion(layoutRegion *ViewLayoutRegion) corefoundati
 		_mainthread0 = func() corefoundation.CGRect {
 			_r := objc.Send[corefoundation.CGRect](objref.IDOf(v_), objc.RegisterName("rectForLayoutRegion:"), objref.IDOf(layoutRegion))
 			return _r
+		}()
+	})
+	return _mainthread0
+
+}
+
+// TextSelectionManager returns the text selection manager for this view. Setting this property installs gesture recognizers and configures the view to handle text selection interactions. Setting it to `nil` removes text selection support. The default value is `nil`.
+func (v_ *View) TextSelectionManager() *TextSelectionManager {
+	defer runtime.KeepAlive(v_)
+	var _mainthread0 *TextSelectionManager
+	purego.Main(func() {
+		_mainthread0 = func() *TextSelectionManager {
+			_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("textSelectionManager"))
+			return TextSelectionManagerFromID(_r)
 		}()
 	})
 	return _mainthread0

@@ -12,8 +12,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An object that provides configuration information for the related player item.
-//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avplayervideooutputconfiguration
 type AVPlayerVideoOutputConfiguration struct {
 	foundation.NSObject

@@ -165,7 +165,7 @@ func (lt *LinguisticTagger) PossibleTagsAtIndexSchemeTokenRangeSentenceRangeScor
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// TagSchemes returns the tag schemes.
+// TagSchemes returns the tag schemes configured for this linguistic tagger.
 //
 // TagSchemes returns the collection as a Go slice.
 func (lt *LinguisticTagger) TagSchemes() []*String {
@@ -174,7 +174,7 @@ func (lt *LinguisticTagger) TagSchemes() []*String {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *String { return StringFromID(_id) })
 }
 
-// String returns the string.
+// String returns the string being analyzed by the linguistic tagger.
 func (lt *LinguisticTagger) String() string {
 	defer runtime.KeepAlive(lt)
 	_r := objc.Send[objc.ID](objref.IDOf(lt), objc.RegisterName("string"))
@@ -184,7 +184,7 @@ func (lt *LinguisticTagger) String() string {
 	return purego.GoString(_r)
 }
 
-// DominantLanguage returns the dominant language.
+// DominantLanguage returns the dominant language of the string set for the linguistic tagger. Returns the BCP-47 tag identifying the dominant language of the string, or the tag "und" if a specific language cannot be determined.
 func (lt *LinguisticTagger) DominantLanguage() string {
 	defer runtime.KeepAlive(lt)
 	_r := objc.Send[objc.ID](objref.IDOf(lt), objc.RegisterName("dominantLanguage"))

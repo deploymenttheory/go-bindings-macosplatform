@@ -102,7 +102,7 @@ func KCTFontBaselineAdjustAttribute() uintptr {
 	return ptr
 }
 
-// @defined    kCTFontCascadeListAttribute @abstract   The font cascade list. @discussion This key is used to specify or obtain the cascade list used for a font reference. The cascade list is a CFArrayRef containing CTFontDescriptorRefs. If unspecified, the global cascade list is used. This list is not consulted for private-use characters on OS X 10.10, iOS 8, or earlier.
+// @defined    kCTFontCascadeListAttribute @abstract   The font cascade list. @discussion This key is used to specify the cascade list for a font reference. The cascade list is a CFArrayRef containing CTFontDescriptorRefs, which are preferred for fallback over those in the default cascade list. This list is not consulted for private-use characters on OS X 10.10, iOS 8, or earlier. @seealso    CTFontCopyDefaultCascadeListForLanguages
 func KCTFontCascadeListAttribute() uintptr {
 	ptr, _ := purego.Dlsym(_coretextLib, "kCTFontCascadeListAttribute")
 	return ptr
@@ -268,7 +268,7 @@ func KCTFontFeatureSelectorSettingKey() uintptr {
 	return ptr
 }
 
-// @defined    kCTFontFeatureSettingsAttribute @abstract   The array of typographic feature settings. @discussion This key is used to specify an array of zero or more feature settings. Each setting dictionary indicates which setting should be applied. In the case of duplicate or conflicting settings the last setting in the list will take precedence. In the case of AAT settings, it is the caller's responsibility to handle exclusive and non-exclusive settings as necessary. An AAT setting dictionary contains a tuple of a kCTFontFeatureTypeIdentifierKey key-value pair and a kCTFontFeatureSelectorIdentifierKey key-value pair. An OpenType setting dictionary contains a tuple of a kCTFontOpenTypeFeatureTag key-value pair and a kCTFontOpenTypeFeatureValue key-value pair. Starting with OS X 10.10 and iOS 8.0, settings are also accepted (but not returned) in the following simplified forms: An OpenType setting can be either an array pair of tag string and value number, or a tag string on its own. For example: @[ @"c2sc", @1 ] or simply @"c2sc". An unspecified value enables the feature and a value of zero disables it. An AAT setting can be specified as an array pair of type and selector numbers. For example: @[ @(kUpperCaseType), @(kUpperCaseSmallCapsSelector) ].
+// @defined    kCTFontFeatureSettingsAttribute @abstract   The array of typographic feature settings. @discussion This key is used to specify an array of zero or more feature settings. Each setting dictionary indicates which setting should be applied. In the case of duplicate or conflicting settings the last setting in the list will take precedence. In the case of AAT settings, it is the caller's responsibility to handle exclusive and non-exclusive settings as necessary. An AAT setting dictionary contains a tuple of a kCTFontFeatureTypeIdentifierKey key-value pair and a kCTFontFeatureSelectorIdentifierKey key-value pair. An OpenType setting dictionary contains a tuple of a kCTFontOpenTypeFeatureTag key-value pair and a kCTFontOpenTypeFeatureValue key-value pair. Starting with OS X 10.10 and iOS 8.0, settings are also accepted (but not returned) in the following simplified forms: An OpenType setting can be either an array pair of tag string and value number, or a tag string on its own. For example: @[ @"c2sc", @1 ] or simply @"c2sc". An unspecified value enables the feature and a value of zero disables it. An AAT setting can be specified as an array pair of type and selector numbers. For example: @[ @(kUpperCaseType), @(kUpperCaseSmallCapsSelector) ]. @seealso    CTFontDescriptorCreateCopyWithAttributes
 func KCTFontFeatureSettingsAttribute() uintptr {
 	ptr, _ := purego.Dlsym(_coretextLib, "kCTFontFeatureSettingsAttribute")
 	return ptr
@@ -388,7 +388,7 @@ func KCTFontMatrixAttribute() uintptr {
 	return ptr
 }
 
-// @defined    kCTFontNameAttribute @abstract   The PostScript name. @discussion This is the key for retrieving the PostScript name from the font descriptor. When matching, this is treated more generically: the system first tries to find fonts with this PostScript name. If none is found, the system tries to find fonts with this family name, and, finally, if still nothing, tries to find fonts with this display name. The value associated with this key is a CFStringRef. If unspecified, defaults to "Helvetica", if unavailable falls back to global font cascade list.
+// @defined    kCTFontNameAttribute @abstract   The PostScript name. @discussion This is the key for retrieving the PostScript name from the font descriptor. When matching, this is treated more generically: the system first tries to find fonts with this PostScript name. If none is found, the system tries to find fonts with this family name, and, finally, if still nothing, tries to find fonts with this display name. The value associated with this key is a CFStringRef. If unspecified, defaults to the standard user font.
 func KCTFontNameAttribute() uintptr {
 	ptr, _ := purego.Dlsym(_coretextLib, "kCTFontNameAttribute")
 	return ptr
@@ -508,7 +508,7 @@ func KCTFontUniqueNameKey() uintptr {
 	return ptr
 }
 
-// @defined    kCTFontVariationAttribute @abstract   The font variation dictionary. @discussion This key is used to obtain the font variation instance as a CFDictionaryRef. If specified in a font descriptor, fonts with the specified axes will be primary match candidates, if no such fonts exist, this attribute will be ignored.
+// @defined    kCTFontVariationAttribute @abstract   The font variation dictionary. @discussion This key is used to obtain the font variation instance as a CFDictionaryRef with each key/value pair corresponding to an axis identifier and value, which is the same structure as the return value of CTFontCopyVariation(). @seealso    CTFontCopyVariation @seealso    CTFontDescriptorCreateCopyWithAttributes @seealso    CTFontDescriptorCreateCopyWithVariation
 func KCTFontVariationAttribute() uintptr {
 	ptr, _ := purego.Dlsym(_coretextLib, "kCTFontVariationAttribute")
 	return ptr

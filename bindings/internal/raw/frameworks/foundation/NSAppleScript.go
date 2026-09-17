@@ -79,6 +79,7 @@ func (o *NSAppleScript) ExecuteAppleEventError(event *NSAppleEventDescriptor, er
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
+// The script source for the receiver. It is possible for an `NSAppleScript` that has been instantiated with `-initWithContentsOfURL:error:` to be a script for which the source code is not available but is nonetheless executable.
 func (o *NSAppleScript) Source() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppleScriptSelSource)
 	if _ret != 0 {
@@ -87,6 +88,7 @@ func (o *NSAppleScript) Source() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// A Boolean value that indicates whether the receiver's script has been compiled.
 func (o *NSAppleScript) IsCompiled() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSAppleScriptSelIsCompiled)
 	return _ret

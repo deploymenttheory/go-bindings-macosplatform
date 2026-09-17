@@ -5,6 +5,7 @@
 package webkit
 
 import (
+	"context"
 	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
@@ -93,6 +94,31 @@ func (wcs *WKHTTPCookieStore) GetAllCookies(completionHandler func(obj.Object)) 
 		objc.Send[objc.ID](objref.IDOf(wcs), objc.RegisterName("getAllCookies:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { completionHandler(obj.Wrap(_b0)) }))
 	})
 
+}
+
+// GetCookiesForURL fetches stored cookies that match the passed in URL.
+//
+// GetCookiesForURL blocks until the operation completes or ctx is cancelled.
+func (wcs *WKHTTPCookieStore) GetCookiesForURL(ctx context.Context, url string) (result obj.Object, err error) {
+	defer runtime.KeepAlive(wcs)
+	type _result struct {
+		val obj.Object
+		err error
+	}
+	_ch := make(chan _result, 1)
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
+		var _o _result
+		_o.val = obj.Wrap(_p0)
+		_ch <- _o
+	})
+	objc.Send[objc.ID](objref.IDOf(wcs), objc.RegisterName("getCookiesForURL:completionHandler:"), rt.FileURL(url), _block)
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero obj.Object
+		return _zero, ctx.Err()
+	}
 }
 
 // SetCookieCompletionHandler adds a cookie to the cookie store.

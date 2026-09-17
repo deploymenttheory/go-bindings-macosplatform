@@ -9,8 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A representation of an individual host on the network.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nshost
 // Deprecated: Use Network framework instead, see deprecation notice in <Foundation/NSHost.h>
 type NSHost struct {
@@ -43,6 +41,7 @@ func NSHostFromID(id objc.ID) *NSHost {
 	return o
 }
 
+// Returns an “NSHost“ object representing the host the process is running on. This method executes synchronously. The execution time of this method can be highly variable, depending on the local network configuration, and may block for several seconds if the network is unreachable. To avoid blocking execution on the main thread, you should call this method in an “Operation“ or _Grand Central Dispatch_ block that executes asynchronously in the background. - Returns: `NSHost` object for the process's host.
 func NSHostCurrentHost() *NSHost {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSHost), _nSHostSelCurrentHost)
 	if _ret != 0 {
@@ -51,6 +50,7 @@ func NSHostCurrentHost() *NSHost {
 	return NSHostFromID(_ret)
 }
 
+// Returns a host with a specific name. - Parameters: - name: Name of the host to look up. Can be either a simple hostname, such as `"sales"`, or a fully qualified domain name, such as `"sales.anycorp.com"`. - Returns: The host named `name`.
 func NSHostHostWithName(name *NSString) *NSHost {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSHost), _nSHostSelHostWithName, name.Ptr())
 	if _ret != 0 {
@@ -59,6 +59,7 @@ func NSHostHostWithName(name *NSString) *NSHost {
 	return NSHostFromID(_ret)
 }
 
+// Returns the `NSHost` with the Internet address `address`. - Parameters: - address: Network address to look up. For example, `"127.0.0.1"` or `"fe80::1"`. - Returns: The host for `address`.
 func NSHostHostWithAddress(address *NSString) *NSHost {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSHost), _nSHostSelHostWithAddress, address.Ptr())
 	if _ret != 0 {
@@ -67,30 +68,32 @@ func NSHostHostWithAddress(address *NSString) *NSHost {
 	return NSHostFromID(_ret)
 }
 
+// Indicates whether the receiver represents the same host as another `NSHost` object. - Parameters: - aHost: Host to compare the receiver to. - Returns: `YES` when the receiver and `aHost` share at least one network address; `NO` otherwise.
 func (o *NSHost) IsEqualToHost(aHost *NSHost) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSHostSelIsEqualToHost, aHost.Ptr())
 	return _ret
 }
 
-// Specifies whether the receiver is to cache instances as it creates them to avoid creating duplicate instances.
+// Sets whether the host cache is enabled.
 // Deprecated: Caching no longer supported
 func NSHostSetHostCacheEnabled(flag bool) {
 	objc.ID(_clsNSHost).Send(_nSHostSelSetHostCacheEnabled, flag)
 }
 
-// Indicates whether caching is turned on or off.
+// Returns whether the host cache is enabled.
 // Deprecated: Caching no longer supported
 func NSHostIsHostCacheEnabled() bool {
 	_ret := objc.Send[bool](objc.ID(_clsNSHost), _nSHostSelIsHostCacheEnabled)
 	return _ret
 }
 
-// Releases the cache of existing NSHost objects so subsequent requests for NSHost objects create new ones.
+// Clears the host cache.
 // Deprecated: Caching no longer supported
 func NSHostFlushHostCache() {
 	objc.ID(_clsNSHost).Send(_nSHostSelFlushHostCache)
 }
 
+// One of the hostnames associated with the receiver. Can be either a simple hostname, such as `"sales"`, or a fully qualified domain name, such as `"sales.anycorp.com"`.
 func (o *NSHost) Name() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSHostSelName)
 	if _ret != 0 {
@@ -99,6 +102,7 @@ func (o *NSHost) Name() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// All of the hostnames associated with the receiver.
 func (o *NSHost) Names() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSHostSelNames)
 	if _ret != 0 {
@@ -107,6 +111,7 @@ func (o *NSHost) Names() *NSArray[*NSString] {
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// One of the addresses associated with the receiver, such as `"192.42.172.1"` or `"fe80::1"`.
 func (o *NSHost) Address() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSHostSelAddress)
 	if _ret != 0 {
@@ -115,6 +120,7 @@ func (o *NSHost) Address() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// All of the addresses associated with the receiver, including IPv6 and IPv4 addresses.
 func (o *NSHost) Addresses() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSHostSelAddresses)
 	if _ret != 0 {
@@ -123,6 +129,7 @@ func (o *NSHost) Addresses() *NSArray[*NSString] {
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// The localized name for the host. This is the name displayed in the Finder sidebar and the Sharing preference panel. This property only returns a value when sent to the “currentHost“ instance; all other instances currently return `nil`. This property is key-value observable.
 func (o *NSHost) LocalizedName() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSHostSelLocalizedName)
 	if _ret != 0 {

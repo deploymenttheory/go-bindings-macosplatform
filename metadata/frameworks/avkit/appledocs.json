@@ -14,10 +14,6 @@
       "doc": "A controller that responds to user-initiated Picture in Picture playback of video in a floating, resizable window.",
       "url": "https://developer.apple.com/documentation/avkit/avpictureinpicturecontroller"
     },
-    "AVPictureInPictureControllerContentSource": {
-      "doc": "An object that represents the source of the content to present in Picture in Picture.",
-      "url": "https://developer.apple.com/documentation/avkit/avpictureinpicturecontrollercontentsource"
-    },
     "AVPlaybackSpeed": {
       "doc": "An object that represents a user-selectable playback speed in a playback user interface.",
       "url": "https://developer.apple.com/documentation/avkit/avplaybackspeed"
@@ -102,9 +98,6 @@
         }
       }
     },
-    "AVLegibleMediaOptionsMenuType": {
-      "url": "https://developer.apple.com/documentation/avkit/avlegiblemediaoptionsmenutype"
-    },
     "AVPlayerViewControlsStyle": {
       "doc": "Constants that indicate which user interface controls the view displays.",
       "url": "https://developer.apple.com/documentation/avkit/avplayerviewcontrolsstyle",
@@ -144,10 +137,6 @@
           "url": "https://developer.apple.com/documentation/avkit/avplayerviewtrimresult/okbutton"
         }
       }
-    },
-    "AVRoutePickerViewButtonState": {
-      "doc": "Constants that describe the available button states.",
-      "url": "https://developer.apple.com/documentation/avkit/avroutepickerviewbuttonstate"
     },
     "AVRoutePickerViewButtonStyle": {
       "doc": "Constants that define the button styles a route picker view supports.",

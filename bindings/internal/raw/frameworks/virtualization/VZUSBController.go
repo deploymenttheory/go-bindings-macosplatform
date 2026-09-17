@@ -24,6 +24,8 @@ var (
 	_vZUSBControllerSelAttachDeviceCompletionHandler = objc.RegisterName("attachDevice:completionHandler:")
 	_vZUSBControllerSelDetachDeviceCompletionHandler = objc.RegisterName("detachDevice:completionHandler:")
 	_vZUSBControllerSelUsbDevices                    = objc.RegisterName("usbDevices")
+	_vZUSBControllerSelDelegate                      = objc.RegisterName("delegate")
+	_vZUSBControllerSelSetDelegate                   = objc.RegisterName("setDelegate:")
 )
 
 func VZUSBControllerFromID(id objc.ID) *VZUSBController {
@@ -60,10 +62,21 @@ func (o *VZUSBController) DetachDeviceCompletionHandler(device VZUSBDevice, comp
 	o.Ptr().Send(_vZUSBControllerSelDetachDeviceCompletionHandler, device, __block_completionHandler)
 }
 
+// @abstract Return a list of USB devices attached to controller. @discussion If corresponding USB controller configuration included in VZVirtualMachineConfiguration contained  any USB devices, those devices will appear here when virtual machine is started. @see VZUSBDevice @see VZUSBDeviceConfiguration @see VZUSBControllerConfiguration @see VZVirtualMachineConfiguration
 func (o *VZUSBController) UsbDevices() *foundation.NSArray[VZUSBDevice] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZUSBControllerSelUsbDevices)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return foundation.NSArrayFromID[VZUSBDevice](_ret)
+}
+
+// @abstract The controller's delegate.
+func (o *VZUSBController) Delegate() VZUSBControllerDelegate {
+	_ret := objc.Send[VZUSBControllerDelegate](o.Ptr(), _vZUSBControllerSelDelegate)
+	return _ret
+}
+
+func (o *VZUSBController) SetDelegate(delegate VZUSBControllerDelegate) {
+	o.Ptr().Send(_vZUSBControllerSelSetDelegate, delegate)
 }

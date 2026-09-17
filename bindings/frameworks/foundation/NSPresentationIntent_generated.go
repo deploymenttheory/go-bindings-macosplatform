@@ -100,35 +100,35 @@ func (pi *PresentationIntent) IsEquivalentToPresentationIntent(other *Presentati
 	return _r
 }
 
-// IntentKind returns the intent kind.
+// IntentKind returns the type of the intent.
 func (pi *PresentationIntent) IntentKind() PresentationIntentKind {
 	defer runtime.KeepAlive(pi)
 	_r := objc.Send[PresentationIntentKind](objref.IDOf(pi), objc.RegisterName("intentKind"))
 	return _r
 }
 
-// ParentIntent returns the parent intent.
+// ParentIntent returns the parent of the current intent.
 func (pi *PresentationIntent) ParentIntent() *PresentationIntent {
 	defer runtime.KeepAlive(pi)
 	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("parentIntent"))
 	return PresentationIntentFromID(_r)
 }
 
-// Identity returns an integer value which uniquely identifies this intent in the document. Identity disambiguates attributes which apply to contiguous text -- for example, two headers in a row with the same level. It can also be used to track the location in an attributed string of a particular part of a document, even after mutation.
+// Identity returns a unique identifier for the intent in the document. Use the value in this property to disambiguate attributes that apply to contiguous text. For example, you might use it to differentiate between two headers in a row with the same level.
 func (pi *PresentationIntent) Identity() int {
 	defer runtime.KeepAlive(pi)
 	_r := objc.Send[int](objref.IDOf(pi), objc.RegisterName("identity"))
 	return _r
 }
 
-// Ordinal returns if the intent is not a list, this value is 0.
+// Ordinal returns the number for an item in an ordered list. If the intent is not a list, the value of this property is `0`.
 func (pi *PresentationIntent) Ordinal() int {
 	defer runtime.KeepAlive(pi)
 	_r := objc.Send[int](objref.IDOf(pi), objc.RegisterName("ordinal"))
 	return _r
 }
 
-// ColumnAlignments returns if the intent is not a table, this value is `nil`.
+// ColumnAlignments returns the alignments for the columns in a table. If the intent is not a table, the value of this property is `nil`.
 //
 // ColumnAlignments returns the collection as a Go slice.
 func (pi *PresentationIntent) ColumnAlignments() []*Number {
@@ -137,21 +137,21 @@ func (pi *PresentationIntent) ColumnAlignments() []*Number {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Number { return NumberFromID(_id) })
 }
 
-// ColumnCount returns if the intent is not a table, this value is 0.
+// ColumnCount returns the number of columns in a table. If the intent is not a table, the value of this property is `0`.
 func (pi *PresentationIntent) ColumnCount() int {
 	defer runtime.KeepAlive(pi)
 	_r := objc.Send[int](objref.IDOf(pi), objc.RegisterName("columnCount"))
 	return _r
 }
 
-// HeaderLevel returns if the intent is not a header, this value is 0.
+// HeaderLevel returns the level of a header section. This value corresponds to the number of hash marks (`#`) associated with the header. If the intent is not a header, the value of this property is `0`.
 func (pi *PresentationIntent) HeaderLevel() int {
 	defer runtime.KeepAlive(pi)
 	_r := objc.Send[int](objref.IDOf(pi), objc.RegisterName("headerLevel"))
 	return _r
 }
 
-// LanguageHint returns if the intent is not a code block, this value is `nil`.
+// LanguageHint returns the language associated with the code listing. If the intent is not a code block, the value of this property is `nil`.
 func (pi *PresentationIntent) LanguageHint() string {
 	defer runtime.KeepAlive(pi)
 	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("languageHint"))
@@ -161,21 +161,21 @@ func (pi *PresentationIntent) LanguageHint() string {
 	return purego.GoString(_r)
 }
 
-// Column returns the column to which this cell belongs (0-based). If the intent is not a cell, this value is 0.
+// Column returns the column number to which the cell belongs. The value of this property is `0`-based, with the first column at `0`, the second column at `1`, and so on. If the intent is not a cell, this value is `0`.
 func (pi *PresentationIntent) Column() int {
 	defer runtime.KeepAlive(pi)
 	_r := objc.Send[int](objref.IDOf(pi), objc.RegisterName("column"))
 	return _r
 }
 
-// Row returns the row to which this cell belongs (0-based). If the intent is not a row, this value is 0. Header rows are always row 0. If the table has more rows, those start at row 1.
+// Row returns the row number to which this cell belongs. The value of this property is `0`-based, with the first row at `0`, the second row at `1`, and so on. If the intent is not a cell, this value is `0`.
 func (pi *PresentationIntent) Row() int {
 	defer runtime.KeepAlive(pi)
 	_r := objc.Send[int](objref.IDOf(pi), objc.RegisterName("row"))
 	return _r
 }
 
-// IndentationLevel returns the indentation level of this intent. Each nested list increases the indentation level by one; all elements within the same list (and not then nested into a child list intent) have the same indentation level. Text outside list intents has an indentation level of 0.
+// IndentationLevel returns the indentation level of the intent. The initial list has an indentation level of `0`. Each time you nest a new list, the indentation level increases by `1`. All elements within the same list have the same indentation level. Text outside list intents has an indentation level of `0`.
 func (pi *PresentationIntent) IndentationLevel() int {
 	defer runtime.KeepAlive(pi)
 	_r := objc.Send[int](objref.IDOf(pi), objc.RegisterName("indentationLevel"))

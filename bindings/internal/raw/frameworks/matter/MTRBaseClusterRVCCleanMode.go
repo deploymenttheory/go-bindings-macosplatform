@@ -54,7 +54,7 @@ func MTRBaseClusterRVCCleanModeFromID(id objc.ID) *MTRBaseClusterRVCCleanMode {
 	return o
 }
 
-// Command ChangeToMode This command is used to change device modes. On receipt of this command the device SHALL respond with a ChangeToModeResponse command.
+// Command ChangeToMode This command is used to change device modes.
 func (o *MTRBaseClusterRVCCleanMode) ChangeToModeWithParamsCompletion(params *MTRRVCCleanModeClusterChangeToModeParams, completion func(*MTRRVCCleanModeClusterChangeToModeResponseParams, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {

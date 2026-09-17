@@ -4,5 +4,10 @@
 
 package safetykit
 
-// SAErrorDomain returns the address of the symbol SAErrorDomain.
-func SAErrorDomain() uintptr { return _symbol("SAErrorDomain") }
+import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+)
+
+// SAErrorDomain returns the string constant SAErrorDomain, for use as a dictionary key or argument.
+func SAErrorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("SAErrorDomain"))) }

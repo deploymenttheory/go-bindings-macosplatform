@@ -73,6 +73,13 @@ func (ci *CloudIdentifier) String() string {
 	return rt.Description(objref.IDOf(ci))
 }
 
+// NewCloudIdentifierWithArchivalStringValue archival string can be used to serialize and deserialize the PHCloudIdentifier (Note the archival format is compatible with strings archived via the deprecated API stringValue)
+func NewCloudIdentifierWithArchivalStringValue(archivalString string) *CloudIdentifier {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PHCloudIdentifier")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithArchivalStringValue:"), purego.NSString(archivalString))
+	return cloudIdentifierAdopt(_id)
+}
+
 // NewCloudIdentifierWithStringValue deserializes a cloud identifier from its string value.
 func NewCloudIdentifierWithStringValue(stringValue string) *CloudIdentifier {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHCloudIdentifier")), objc.RegisterName("alloc"))
@@ -80,7 +87,17 @@ func NewCloudIdentifierWithStringValue(stringValue string) *CloudIdentifier {
 	return cloudIdentifierAdopt(_id)
 }
 
-// StringValue returns for use in serialization
+// ArchivalStringValue returns the archival string value.
+func (ci *CloudIdentifier) ArchivalStringValue() string {
+	defer runtime.KeepAlive(ci)
+	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("archivalStringValue"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// StringValue returns the string value.
 func (ci *CloudIdentifier) StringValue() string {
 	defer runtime.KeepAlive(ci)
 	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("stringValue"))

@@ -19,6 +19,12 @@
       "doc": "An object that scans for, discovers, connects to, and manages peripherals.",
       "url": "https://developer.apple.com/documentation/corebluetooth/cbcentralmanager"
     },
+    "CBChannelSoundingProcedureResults": {
+      "url": "https://developer.apple.com/documentation/corebluetooth/cbchannelsoundingprocedureresults"
+    },
+    "CBChannelSoundingSessionConfiguration": {
+      "url": "https://developer.apple.com/documentation/corebluetooth/cbchannelsoundingsessionconfiguration"
+    },
     "CBCharacteristic": {
       "doc": "A characteristic of a remote peripheral’s service.",
       "url": "https://developer.apple.com/documentation/corebluetooth/cbcharacteristic"
@@ -83,10 +89,6 @@
     }
   },
   "enums": {
-    "CBATTError": {
-      "doc": "An error that Core Bluetooth returns while using Attribute Protocol (ATT).",
-      "url": "https://developer.apple.com/documentation/corebluetooth/cbatterror"
-    },
     "CBAttributePermissions": {
       "doc": "Values that represent the read, write, and encryption permissions for a characteristic’s value.",
       "url": "https://developer.apple.com/documentation/corebluetooth/cbattributepermissions",
@@ -112,10 +114,6 @@
           "url": "https://developer.apple.com/documentation/corebluetooth/cbattributepermissions/init(rawvalue:)"
         }
       }
-    },
-    "CBCentralManagerFeature": {
-      "doc": "An option set of device-specific features.",
-      "url": "https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerfeature"
     },
     "CBCentralManagerState": {
       "doc": "Values that represent the current state of a central manager object.",
@@ -224,10 +222,6 @@
           "url": "https://developer.apple.com/documentation/corebluetooth/cbconnectionevent/peerdisconnected"
         }
       }
-    },
-    "CBError": {
-      "doc": "An error that Core Bluetooth returns during Bluetooth transactions.",
-      "url": "https://developer.apple.com/documentation/corebluetooth/cberror"
     },
     "CBManagerAuthorization": {
       "doc": "The current authorization state of a Core Bluetooth manager.",
@@ -611,6 +605,18 @@
         "url": "https://developer.apple.com/documentation/corebluetooth/cbcentralmanager/isscanning"
       }
     },
+    "CBChannelSoundingProcedureResults": {
+      "distance": {
+        "doc": "The measured distance in meters of a CBPeripheral.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbchannelsoundingprocedureresults/distance"
+      }
+    },
+    "CBChannelSoundingSessionConfiguration": {
+      "role": {
+        "doc": "The channel sounding role a CBPeripheral should assume for a given session.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbchannelsoundingsessionconfiguration/role-swift.property"
+      }
+    },
     "CBCharacteristic": {
       "descriptors": {
         "doc": "A list of the descriptors discovered in this characteristic.",
@@ -668,7 +674,7 @@
     "CBManager": {
       "authorization": {
         "doc": "The current authorization status for using Bluetooth.",
-        "url": "https://developer.apple.com/documentation/corebluetooth/cbmanager/authorization-swift.property"
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbmanager/authorization-swift.type.property"
       },
       "state": {
         "doc": "The current state of the manager.",

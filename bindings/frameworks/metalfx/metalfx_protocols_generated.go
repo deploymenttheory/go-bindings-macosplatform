@@ -55,6 +55,30 @@ type FrameInterpolatorBase interface {
 	OutputWidth() int
 	OutputHeight() int
 	UITextureFormat() obj.Object
+	ContentWidth() int
+	SetContentWidth(contentWidth int)
+	ContentHeight() int
+	SetContentHeight(contentHeight int)
+	DepthContentOffsetX() int
+	SetDepthContentOffsetX(depthContentOffsetX int)
+	DepthContentOffsetY() int
+	SetDepthContentOffsetY(depthContentOffsetY int)
+	MotionContentOffsetX() int
+	SetMotionContentOffsetX(motionContentOffsetX int)
+	MotionContentOffsetY() int
+	SetMotionContentOffsetY(motionContentOffsetY int)
+	OutputOffsetX() int
+	SetOutputOffsetX(outputOffsetX int)
+	OutputOffsetY() int
+	SetOutputOffsetY(outputOffsetY int)
+	DistortionOffsetX() int
+	SetDistortionOffsetX(distortionOffsetX int)
+	DistortionOffsetY() int
+	SetDistortionOffsetY(distortionOffsetY int)
+	DistortionWidth() int
+	SetDistortionWidth(distortionWidth int)
+	DistortionHeight() int
+	SetDistortionHeight(distortionHeight int)
 	ColorTexture() obj.Object
 	SetColorTexture(colorTexture obj.Object)
 	PrevColorTexture() obj.Object
@@ -77,6 +101,10 @@ type FrameInterpolatorBase interface {
 	SetFieldOfView(fieldOfView float32)
 	AspectRatio() float32
 	SetAspectRatio(aspectRatio float32)
+	WorldToViewMatrix() unsafe.Pointer
+	SetWorldToViewMatrix(worldToViewMatrix unsafe.Pointer)
+	ViewToClipMatrix() unsafe.Pointer
+	SetViewToClipMatrix(viewToClipMatrix unsafe.Pointer)
 	UITexture() obj.Object
 	SetUITexture(uiTexture obj.Object)
 	JitterOffsetX() float32
@@ -89,6 +117,8 @@ type FrameInterpolatorBase interface {
 	SetShouldResetHistory(shouldResetHistory bool)
 	OutputTexture() obj.Object
 	SetOutputTexture(outputTexture obj.Object)
+	DistortionTexture() obj.Object
+	SetDistortionTexture(distortionTexture obj.Object)
 	Fence() obj.Object
 	SetFence(fence obj.Object)
 	IsDepthReversed() bool
@@ -132,6 +162,7 @@ type TemporalDenoisedScalerBase interface {
 	ColorTextureUsage() obj.Object
 	DepthTextureUsage() obj.Object
 	MotionTextureUsage() obj.Object
+	ReactiveMaskTextureUsage() obj.Object
 	ReactiveTextureUsage() obj.Object
 	DiffuseAlbedoTextureUsage() obj.Object
 	SpecularAlbedoTextureUsage() obj.Object
@@ -216,12 +247,33 @@ type TemporalScalerBase interface {
 	ColorTextureUsage() obj.Object
 	DepthTextureUsage() obj.Object
 	MotionTextureUsage() obj.Object
+	ReactiveMaskTextureUsage() obj.Object
 	ReactiveTextureUsage() obj.Object
 	OutputTextureUsage() obj.Object
 	InputContentWidth() int
 	SetInputContentWidth(inputContentWidth int)
 	InputContentHeight() int
 	SetInputContentHeight(inputContentHeight int)
+	ColorContentOffsetX() int
+	SetColorContentOffsetX(colorContentOffsetX int)
+	ColorContentOffsetY() int
+	SetColorContentOffsetY(colorContentOffsetY int)
+	DepthContentOffsetX() int
+	SetDepthContentOffsetX(depthContentOffsetX int)
+	DepthContentOffsetY() int
+	SetDepthContentOffsetY(depthContentOffsetY int)
+	MotionContentOffsetX() int
+	SetMotionContentOffsetX(motionContentOffsetX int)
+	MotionContentOffsetY() int
+	SetMotionContentOffsetY(motionContentOffsetY int)
+	ReactiveMaskContentOffsetX() int
+	SetReactiveMaskContentOffsetX(reactiveMaskContentOffsetX int)
+	ReactiveMaskContentOffsetY() int
+	SetReactiveMaskContentOffsetY(reactiveMaskContentOffsetY int)
+	OutputOffsetX() int
+	SetOutputOffsetX(outputOffsetX int)
+	OutputOffsetY() int
+	SetOutputOffsetY(outputOffsetY int)
 	ColorTexture() obj.Object
 	SetColorTexture(colorTexture obj.Object)
 	DepthTexture() obj.Object

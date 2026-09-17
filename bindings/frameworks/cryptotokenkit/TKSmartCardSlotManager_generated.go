@@ -112,7 +112,7 @@ func (scsm *SmartCardSlotManager) SlotNamed(name string) *SmartCardSlot {
 	return SmartCardSlotFromID(_r)
 }
 
-// SlotNames returns array of currently known slots in the system.  Slots are identified by NSString name instances.  Use KVO to be notified about slots arrivals and removals.
+// SlotNames returns array of currently known slots in the system. Slots are identified by NSString name instances. Use KVO to be notified about slot arrivals and removals. Recommended pattern:
 //
 // SlotNames returns the collection as a Go slice.
 func (scsm *SmartCardSlotManager) SlotNames() []string {
